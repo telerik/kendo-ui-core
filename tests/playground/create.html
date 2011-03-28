@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>grid</title>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+        <script src="../../ui5.observable.js"></script>
+        <script src="../../ui5.datasource.js"></script>
+    </head>
+    <body>
+        <fieldset id="edit">
+            <legend>edit form</legend>
+            <label>Name: <input name="Name"/></label>
+            <label>Age: <input name="Age"/></label>
+            <button id="save">Create</button>
+        </fieldset>
+        <script>
+            var dataSource = new $.ui5.DataSource({
+                data:  [{id: "foo", Name: "bar"}],
+                schema: {
+                    id: "id"
+                }
+            });
+
+            dataSource.load();
+            dataSource.bind("create", function(e) {
+                console.log(this.find("foo"));
+                console.log("create", e.record, this.data.length);
+            });
+
+            $("#save").click(function() {
+                dataSource.create(0, {
+                    Name: $("[name=Name]").val(),
+                    Age: $("[name=Age]").val()
+                });
+            });
+
+        </script>
+    </body>
+</html>

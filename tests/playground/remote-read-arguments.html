@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>grid</title>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+        <script src="../../ui5.observable.js"></script>
+        <script src="../../ui5.datasource.js"></script>
+    </head>
+    <body>
+        <script>
+            var dataSource = new $.ui5.DataSource({
+                transport: {
+                    read: {
+                        url: "data.js",
+                        data: {
+                            fromTransport: "foo",
+                        }
+                    }
+                },
+                dialect: {
+                    read: function (data) {
+                        return $.extend(data, { fromDialect: "bar" } );
+                    }
+                }
+            });
+
+            dataSource.bind("load", function(e) {
+                console.log("load", e.data);
+            });
+
+            dataSource.read({ fromRead: "baz" });
+
+        </script>
+    </body>
+</html>

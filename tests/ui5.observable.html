@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+    <script src="../jquery-1.5.1.js"></script>
+    <script type="text/javascript" src="../qunit.js"></script>
+    <script type="text/javascript" src="../qunit-runner.js"></script>
+    <link rel="stylesheet" href="qunit.css" type="text/css" />
+
+    <body>
+        <h1 id="qunit-header">QUnit example</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+
+        <script src="../ui5.observable.js"></script>
+        <script>
+            test("bind returns this", function() {
+                var observable = new $.ui5.Observable();
+
+                ok(observable.bind("foo") === observable)
+            });
+
+            test("bind stores the handler to the handlers list", function() {
+                var observable = new $.ui5.Observable(),
+                    handler = $.nop;
+
+                observable.bind("foo", handler);
+
+                equal(observable._list["foo"][0], handler);
+            });
+
+            test("bind stores multiple handlers", function() {
+                var observable = new $.ui5.Observable(),
+                    handler = $.nop;
+
+                observable.bind("foo", handler);
+                observable.bind("foo", handler);
+
+                equal(observable._list["foo"][0], handler);
+                equal(observable._list["foo"][1], handler);
+            });
+
+            test("trigger calls the handler", function() {
+                var observable = new $.ui5.Observable(),
+                    handlerWasCalled = false;
+
+                observable.bind("foo", function() {
+                    handlerWasCalled = true;
+                });
+                observable.trigger("foo");
+                ok(handlerWasCalled);
+            });
+
+            test("trigger returns this", function() {
+                var observable = new $.ui5.Observable();
+
+                ok(observable.trigger() === observable);
+            });
+
+            test("this in trigger is the observable", function() {
+                var observable = new $.ui5.Observable(), that;
+
+                observable.bind("foo", function() {
+                    that = this;
+                });
+
+                observable.trigger("foo");
+
+                ok(that === observable);
+            });
+
+            test("trigger calls all bound handlers", function() {
+                var observable = new $.ui5.Observable(), calls = 0;
+
+                observable.bind("foo", function() {
+                    calls++;
+                });
+
+                observable.bind("foo", function() {
+                    calls++;
+                });
+
+                observable.trigger("foo");
+                equal(calls, 2);
+            });
+
+            test("trigger passes the arguments to the handler", function() {
+                var observable = new $.ui5.Observable(), argument;
+
+                observable.bind("foo", function(bar) {
+                    argument = bar;
+                });
+
+                observable.trigger("foo", "bar");
+
+                equal(argument, "bar");
+
+            });
+
+            test("unbind without handler removes all handlers", function() {
+                var observable = new $.ui5.Observable();
+
+                observable.bind("foo", $.nop);
+
+                observable.unbind("foo");
+
+                equal(observable._list.foo.length, 0);
+            });
+
+            test("unbind returns this", function() {
+                var observable = new $.ui5.Observable();
+
+                ok(observable.unbind() === observable);
+            });
+
+            test("unbind removes the specified handler", function() {
+                var observable = new $.ui5.Observable(),
+                    first = function() {},
+                    second = function() {};
+
+                observable.bind("foo", first).bind("foo", second);
+
+                observable.unbind("foo", first);
+
+                equal(observable._list.foo.length, 1);
+                equal(observable._list.foo[0], second);
+            });
+        </script>
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+
+</html>
+

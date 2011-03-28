@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Chart Playground</title>
+        <script src="../jquery-1.5.1.js"></script>
+        <script src="../../ui5.chart.js"></script>
+    </head>
+    <body>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $("#container").ui5chart({
+                    title: "Sample Chart",
+                    series: [{
+                        type: "bar",
+                        name: "2003",
+                        data: [175, 100, 300, 275]
+                    }, {
+                        type: "bar",
+                        name: "2004",
+                        data: [200, 125, 350, 250]
+                    }],
+                    axisX: {
+                        title: "Products",
+                        labels: ["Excel", "Power Point", "Word", "Outlook"],
+                    },
+                    axisY: {
+                        title: "Sales in $ mln."
+                    },
+                    legend: {
+                        position: "bottom-right",
+                        layout: "horizontal"
+                    }
+                });
+
+
+            });
+        </script>
+
+        <div id="container" style="width: 800px; height: 600px;">
+        </div>
+
+    </body>
+</html>
+

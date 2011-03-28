@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>grid</title>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+        <script src="../../ui5.grid.js"></script>
+        <style>
+            table {
+                padding: 0;
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+            table td {
+                border: 1px solid black;
+            }
+        </style>
+    </head>
+    <body>
+        <fieldset>
+            <legend>In memory binding</legend>
+            <table id="table1" >
+                <thead><tr>
+                    <th>Foo</th>
+                    <th>Bar</th>
+                </tr></thead>
+                <tbody></tbody>
+            </table>
+        </fieldset>
+        <fieldset>
+            <legend>XML in memory binding</legend>
+            <table id="table2" >
+                <thead><tr>
+                    <th>Foo</th>
+                    <th>Bar</th>
+                </tr></thead>
+                <tbody></tbody>
+            </table>
+        </fieldset>
+        <fieldset>
+            <legend>JSON binding / in memory sorting</legend>
+            <table id="table3" >
+                <thead><tr>
+                    <th>Order ID</th>
+                    <th>Contact Name</th>
+                    <th>Address</th>
+                    <th>Order Date</th>
+                </tr></thead>
+                <tbody></tbody>
+            </table>
+        </fieldset>
+        <fieldset>
+            <legend>JSON binding / remote sorting</legend>
+            <table id="table4" >
+                <thead><tr>
+                    <th>Order ID</th>
+                    <th>Contact Name</th>
+                    <th>Address</th>
+                    <th>Order Date</th>
+                </tr></thead>
+                <tbody></tbody>
+            </table>
+        </fieldset>
+        <fieldset>
+            <legend>OData binding / remote sorting</legend>
+            <table id="table5" >
+                <thead><tr>
+                    <th>Order ID</th>
+                    <th>Contact Name</th>
+                    <th>Address</th>
+                    <th>Order Date</th>
+                </tr></thead>
+                <tbody></tbody>
+            </table>
+        </fieldset>
+        <script>
+            $(document).ready(function() {
+                $("#table1").tGrid({
+                    dataSource: {
+                        data: {
+                            d: {
+                                data:[ {
+                                    foo: 2,
+                                    bar: "Bar1"
+                                },{
+                                    foo: 1,
+                                    bar: "Bar2"
+                                },{
+                                    foo: 3,
+                                    bar: "Bar3"
+                                } ]
+                            }
+                        },
+                        reader: {
+                            data: "d.data"
+                        },
+                        transport: {
+                        }
+                    }
+                }).find("th").click(function(e) {
+                    var grid = $(this).closest("table").data("tGrid");
+                    grid.sort({ field: "foo", direction: "asc" });
+                });
+                $("#table2").tGrid({
+                    dataSource: {
+                        data: '<d><data foo="2" bar="bar2" /><data foo="1" bar="bar1" /></d>',
+                        reader: {
+                            data: "/d/data",
+                            type: "xml",
+                            fields: {
+                                foo: "@foo",
+                                bar: "@bar"
+                            }
+                        },
+                        schema: {
+                            id: {
+                                type: "number",
+                                required: false,
+                                defaultValue: 0
+                            }
+                        },
+                        transport: {
+                        }
+                    }
+                }).find("th").click(function(e) {
+                    var grid = $(this).closest("table").data("tGrid");
+                    grid.sort({ field: "foo", direction: "asc" });
+                });
+
+                $("#table3").tGrid({
+                    dataSource: {
+                        reader: {
+                            data: "data"
+                        },
+                        transport: {
+                            read: "/Telerik.Mvc.Examples/Grid/_FirstLook?orderBy=OrderID-desc&page=1&size=10"
+                        }
+                    }
+                }).find("th").click(function(e) {
+                    var grid = $(this).closest("table").data("tGrid");
+                    grid.sort({ field: "OrderID", direction: "asc" });
+                });
+
+                $("#table4").tGrid({
+                    dataSource: {
+                        type: "remote",
+                        dialect: "mvc",
+                        reader: {
+                            data: "data"
+                        },
+                        transport: {
+                            read: "/Telerik.Mvc.Examples/Grid/_FirstLook?page=1&size=10"
+                        }
+                    }
+                }).find("th").click(function(e) {
+                    var grid = $(this).closest("table").data("tGrid");
+                    grid.sort({ field: "OrderID", direction: "desc" });
+                });
+
+                $("#table5").tGrid({
+                    dataSource: {
+                        type: "remote",
+                        dialect: "odata",
+                        reader: {
+                            data: "d.results"
+                        },
+                        transport: {
+                            read: {
+                                url: "http://tv.telerik.com/services/odata.svc/Videos"
+                            }
+                        }
+                    }
+                }).find("th").click(function(e) {
+                    var grid = $(this).closest("table").data("tGrid");
+                    grid.sort({ field: "Views", direction: "desc" });
+                });
+            });
+        </script>
+    </body>
+</html>

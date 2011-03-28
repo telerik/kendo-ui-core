@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>grid</title>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+        <script src="../../ui5.observable.js"></script>
+        <script src="../../ui5.datasource.js"></script>
+        <style>
+            table {
+                padding: 0;
+                border: 1px solid black;
+                border-collapse: collapse;
+                table-layout: fixed;
+            }
+            table td {
+                border: 1px solid black;
+            }
+        </style>
+    </head>
+    <body>
+        <select multiple>
+        </select>
+        <fieldset id="edit">
+            <legend>edit form</legend>
+            <label>Name: <input name="Name"/></label>
+            <label>Age: <input name="Age"/></label>
+            <button id="save">Save</button>
+        </fieldset>
+        <fieldset id="new">
+            <legend>new form</legend>
+            <label>Name: <input name="Name"/></label>
+            <label>Age: <input name="Age"/></label>
+            <button id="insert">Insert</button>
+        </fieldset>
+        <button id="delete">Delete</button>
+        <script>
+            var dataSource = new $.ui5.DataSource({
+                reader: {
+                    data: function(data) {
+                        return data;
+                    },
+                    id: function(record) {
+                        return record.id;
+                    }
+                },
+                transport: {
+                    read: function(callback) {
+                        callback( [{id: 1, Name: "Foo", Age: 2},{id: 2, Name: "Bar", Age: 3}]);
+                    }
+                }
+            });
+
+            dataSource.bind("load", function(data) {
+                var select = $("select");
+                $.each(data, function(index, record) {
+                    $("<option />").val(record.id).text(record.Name).appendTo(select);
+                });
+            });
+
+            dataSource.bind("update", function(e) {
+                var select = $("select");
+                select.find("option[value=" + e.record.id + "]").text(e.record.Name);
+            });
+
+            dataSource.bind("create", function(e) {
+                var select = $("select");
+                $("<option />").val(e.record.id).insertBefore(select.find("option").eq(e.index));
+            });
+
+            dataSource.bind("destroy", function(e) {
+                var select = $("select");
+                $("#edit input").val("");
+                select.find("option[value=" + e.record.id + "]").remove();
+            });
+
+            $("select").change(function() {
+                var id = $(this).val();
+                var record = dataSource.find(id);
+                $("#edit [name=Name]").val(record.Name);
+                $("#edit [name=Age]").val(record.Age);
+            });
+
+            $("#save").click(function() {
+                var select = $("select");
+                var id = select.val();
+
+                dataSource.update(id, { Name: $("#edit [name=Name]").val(), Age: $("#edit [name=Age]").val() });
+            });
+            $("#insert").click(function() {
+                var item = dataSource.create(0);
+                dataSource.update(item.id, { Name: $("#new [name=Name]").val(), Age: $("#new [name=Age]").val() });
+            });
+
+            $("#delete").click(function() {
+                var id = $("select").val();
+                if (id !== "") {
+                    dataSource.destroy(id);
+                }
+            });
+            dataSource.load();
+        </script>
+    </body>
+</html>

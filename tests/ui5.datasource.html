@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+    <script src="../jquery-1.5.1.js"></script>
+    <script type="text/javascript" src="../qunit.js"></script>
+    <script type="text/javascript" src="../qunit-runner.js"></script>
+    <link rel="stylesheet" href="qunit.css" type="text/css" />
+
+    <body>
+        <h1 id="qunit-header">QUnit example</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+
+        <script src="../ui5.observable.js"></script>
+        <script src="../ui5.datasource.js"></script>
+
+        <script>
+            var reader = {
+                id: function(record) {
+                    return record.id;
+                },
+                data: function(data) {
+                    return data;
+                }
+            },
+            data = [],
+            transport = {
+                read: function(callback) {
+                    callback(data);
+                }
+            };
+
+            function setup(source) {
+                var dataSource = new $.ui5.DataSource( {
+                    reader: reader,
+                    transport: transport
+                });
+                data = source || [{ id:1, bar: "foo" },{ id: 2, bar: "foo" }];
+                dataSource.load();
+                return dataSource;
+            }
+
+            test("load reads data through transport", function() {
+                var readWasCalled = false,
+                dataSource = new $.ui5.DataSource( {
+                    reader: reader,
+                    transport: {
+                        read: function(callback) {
+                            readWasCalled = true;
+                        }
+                    }
+                });
+
+                dataSource.load();
+                ok(readWasCalled);
+            });
+
+            test("load reads data through reader", function() {
+                var readWasCalled = false,
+                dataSource = new $.ui5.DataSource( {
+                    reader: {
+                        data: function(data) {
+                            readWasCalled = true;
+                            return data;
+                        }
+                    },
+                    transport: transport
+                });
+                dataSource.load();
+                ok(readWasCalled);
+            });
+
+            test("load reads data", function() {
+                var dataSource = setup();
+
+                ok(dataSource.data);
+            });
+
+            test("load populates id to index map", function() {
+                var dataSource = setup();
+
+                equal(dataSource.idMap[1], 0);
+                equal(dataSource.idMap[2], 1);
+            });
+
+            test("find returns the record based on its id", function() {
+                var dataSource = setup();
+                equal(dataSource.find(1), data[0]);
+            });
+
+            test("find returns the record based on its index when the reader does not define id", function() {
+                var dataSource = new $.ui5.DataSource( {
+                    reader: {
+                        data: function(data) {
+                            return data;
+                        }
+                    },
+                    transport: transport
+                });
+                data = [ { id: 1}, { id: 2} ];
+
+                dataSource.load();
+                equal(dataSource.find(0), data[0]);
+            });
+
+            test("load triggers load event", function(){
+                var dataSource = setup();
+                var argument;
+
+                dataSource.bind("load", function(data){
+                    argument = data;
+                });
+
+                equal(data.length, 2);
+            });
+
+            test("update updates values of given item by its id", function(){
+                var dataSource = setup();
+
+                dataSource.update(1, {bar:"baz"});
+                equal(dataSource.find(1).bar, "baz");
+            });
+
+            test("update raises update event passing the modified item", function(){
+                var dataSource = setup();
+                var updateArgument;
+
+                dataSource.bind("update", function(e){
+                    updateArgument = e;
+                });
+
+                dataSource.update(1, {bar:"baz"});
+
+                equal(updateArgument.id, 1);
+                equal(updateArgument.record, dataSource.at(0));
+            });
+
+            test("update does not raises update event if empty arguments are passed", function(){
+                var dataSource = setup();
+                var called;
+
+                dataSource.bind("update", function(record){
+                    called = true;
+                });
+
+                dataSource.update(1, {});
+
+                equal(dataSource.find(1).bar, "foo");
+                ok(!called);
+            });
+
+            test("update does not raises update if not such item exists", function(){
+                var dataSource = setup();
+
+                var called;
+                dataSource.bind("update", function(record){
+                    called = true;
+                });
+                dataSource.update(4, { bar: "baz" });
+
+                ok(!called);
+            });
+
+            test("discard set record to its original state", function(){
+                var dataSource = setup();
+
+                dataSource.update(2, { bar: "baz" });
+                dataSource.discard(2);
+                equal(dataSource.find(2).bar, "foo");
+            });
+
+            test("discard removes record from changes", function(){
+                var dataSource = setup();
+
+                dataSource.update(2, { bar: "baz" });
+                dataSource.discard(2);
+                equal(dataSource.changes().length, 0);
+            });
+
+            test("update original state is persisted after multiple updates", function(){
+                var dataSource = setup();
+
+                dataSource.update(2, { bar: "baz" });
+                dataSource.update(2, { bar: "baz2" });
+                dataSource.discard(2);
+                equal(dataSource.find(2).bar, "foo");
+            });
+
+            test("changes returns modified records", function(){
+                var dataSource = setup();
+
+                dataSource.update(2, { bar: "baz" });
+                dataSource.update(1, { bar: "baz" });
+
+                var changeSet = dataSource.changes();
+                equal(changeSet.length, 2);
+            });
+
+            test("changes returns empty array if there are not changes", function(){
+                var dataSource = setup();
+                var changeSet = dataSource.changes();
+                equal(changeSet.length, 0);
+            });
+
+            test("update performs deep cloning", function(){
+                var dataSource = new $.ui5.DataSource( {
+                    reader: reader,
+                    transport: transport
+                });
+                data =  [{ id:1, bar: {},  baz: "foo" }];
+
+                dataSource.load();
+
+                dataSource.update(1, { baz: "moo" });
+                ok(dataSource.at(0).bar !== dataSource.modified[1].original.bar);
+            });
+
+            test("discard without parameters discards all changes", function() {
+                var dataSource = setup();
+
+                dataSource.update(1, { bar: "moo" });
+                dataSource.update(2, { bar: "moo" });
+
+                dataSource.discard();
+
+                ok($.isEmptyObject(dataSource.modified));
+                equal(dataSource.at(0).bar, "foo");
+                equal(dataSource.at(1).bar, "foo");
+            });
+
+            test("changes with id parameter returns the changes for the given record", function() {
+                var dataSource = setup();
+
+                dataSource.update(1, { bar: "moo" });
+
+                var changes = dataSource.changes(1);
+
+                equal(changes.bar, "moo");
+            });
+
+            test("changes returns only what changed", function() {
+                var dataSource = setup();
+
+                dataSource.update(1, { bar: "moo" });
+
+                var changes = dataSource.changes(1);
+
+                ok(changes.baz === undefined);
+            });
+
+            test("hasChanges with id returns true if the record is changed", function() {
+                var dataSource = setup();
+
+                dataSource.update(1, { bar: "moo" });
+
+                ok(dataSource.hasChanges(1) === true);
+            });
+
+            test("hasChanges with id returns false if the record is not changed", function() {
+                var dataSource = setup();
+
+                ok(dataSource.hasChanges(1) === false);
+            });
+
+            test("hasChanges with id returns false if the record does not exist", function() {
+                var dataSource = setup();
+
+                ok(dataSource.hasChanges("bogus") === false);
+            });
+
+            test("hasChanges without arguments returns true if there are changed records", function() {
+                var dataSource = setup();
+
+                dataSource.update(1, { bar: "moo" });
+
+                ok(dataSource.hasChanges() === true);
+            });
+
+            test("hasChanges without arguments returns false if there are no changed records", function() {
+                var dataSource = setup();
+
+                ok(dataSource.hasChanges() === false);
+            });
+
+            test("hasChanges without arguments returns false if there are no records", function() {
+                var dataSource = setup([]);
+
+                ok(dataSource.hasChanges() === false);
+            });
+
+            test("create appends the new item to the data array", function() {
+                var dataSource = setup();
+
+                var result = dataSource.create();
+
+                ok(dataSource.data.pop() === result);
+            });
+
+            test("create populates the idmap", function() {
+                var dataSource = setup();
+
+                var result = dataSource.create();
+
+                equal(dataSource.idMap[result.id], dataSource.data.length - 1);
+            });
+
+            test("create inserts the new item at the specified index", function() {
+                var dataSource = setup();
+
+                var result = dataSource.create(0);
+
+                equal(dataSource.data[0], result);
+            });
+
+            test("create updates the idmap", function() {
+                var dataSource = setup();
+
+                var result = dataSource.create(0);
+                equal(dataSource.idMap[result.id], 0);
+                equal(dataSource.idMap[1], 1);
+                equal(dataSource.idMap[2], 2);
+            });
+
+            test("at returns the record at the specified index", function() {
+                var dataSource = setup();
+
+                equal(dataSource.at(0), dataSource.at(0));
+            });
+
+            test("create adds the record to the modified records", function() {
+                var dataSource = setup();
+
+                var result = dataSource.create(0);
+                ok(dataSource.modified[result.id]);
+            });
+
+            test("update accumulates changes", function() {
+                var dataSource = setup();
+                var result = dataSource.create(0);
+
+                dataSource.update(1, { foo: "baz" });
+                dataSource.update(1, { bar: "baz" });
+
+                var changes = dataSource.changes(1);
+                equal(changes.foo, "baz");
+                equal(changes.bar, "baz");
+            });
+
+            test("destroy removes the record with the specified id", function() {
+                var dataSource = setup();
+
+                dataSource.destroy(1);
+                equal(dataSource.data.length, 1);
+                equal(dataSource.at(0).id, 2);
+            });
+
+            test("destroy removes the record with the specified id from the idMap", function() {
+                var dataSource = setup();
+
+                dataSource.destroy(1);
+                ok(dataSource.idMap[1] === undefined);
+            });
+
+            test("destroy updates the idmap", function() {
+                var dataSource = setup();
+
+                dataSource.destroy(1);
+                equal(dataSource.idMap[2], 0);
+            });
+
+            test("destroy adds the record to the list of modified records", function() {
+                var dataSource = setup();
+
+                dataSource.destroy(1);
+
+                ok(dataSource.modified[1]);
+            });
+
+            test("destroy raises the destroy event", function() {
+                var dataSource = setup();
+                var destroyArgument;
+
+                dataSource.bind("destroy", function(e) {
+                    destroyArgument = e;
+                });
+                var first = dataSource.at(0);
+
+                dataSource.destroy(1);
+                equal(destroyArgument.id, 1);
+                equal(destroyArgument.record, first);
+            });
+
+            </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>UI5.Chart Tests</title>
+        <script src="../jquery-1.5.1.js"></script>
+        <script src="qunit.js" type="text/javascript"></script>
+        <link href="qunit.css" type="text/css" rel="stylesheet"/>
+    </head>
+    <body>
+        <script src="../ui5.chart.js"></script>
+        <script type="text/javascript">
+            var util = $.ui5.Chart.util;
+
+            $(document).ready(function() {
+                module("Utility functions");
+
+                // min, max, expected Major Unit
+                var referenceUnits = [
+                    // [0, max] (max >= 0)
+                    [0, 0, 0.1],
+                    [0, 0.1, 0.02],
+                    [0, 0.2, 0.05],
+                    [0, 0.5, 0.1],
+                    [0, 1, 0.2],
+                    [0, 2, 0.5],
+                    [0, 5, 1],
+                    [0, 10, 2],
+                    [0, 20, 5],
+                    [0, 47, 5],
+                    [0, 48, 10],
+                    [0, 95, 10],
+                    [0, 96, 20],
+                    [0, 190, 20],
+                    [0, 191, 50],
+                    [0, 476, 50],
+                    [0, 477, 100],
+                    [0, 952, 100],
+                    [0, 953, 200],
+                    [0, 1904, 200],
+                    [0, 1905, 500],
+
+                    // [min, max] (min > 0, max >= min)
+                    [1, 1, 0.2],
+                    [1, 1.1, 0.02],
+                    [1, 1.2, 0.05],
+                    [1000, 1000, 200],
+                    [1000, 1050, 10],
+                    [1000, 1100, 20],
+                    [1000, 1200, 50],
+                ];
+
+               test("Major unit calculation for positive values", function() {
+                    for (var i = 0; i < referenceUnits.length; i++) {
+                        var d = referenceUnits[i],
+                            min = d[0];
+                            max = d[1],
+                            mu = d[2];
+
+                        equals(util.getMajorUnit(min, max), mu, "[" + min + ", " + max  + "]");
+                    }
+               });
+
+               test("Major unit calculation for negative values", function() {
+                    for (var i = 0; i < referenceUnits.length; i++) {
+                        var d = referenceUnits[i],
+                            min = -d[1];
+                            max = -d[0],
+                            mu = d[2];
+
+                        equals(util.getMajorUnit(min, max), mu, "[" + min + ", " + max + "]");
+                    }
+               });
+
+                test("Major unit calculation for mixed positive / negative values", function() {
+                    for (var i = 0; i < referenceUnits.length; i++) {
+                        var d = referenceUnits[i];
+
+                        if (d[0] != 0) {
+                            // Skip tests where min is not 0
+                            continue;
+                        }
+
+                        // Take a test triplet [min, max, mu] and transform it to [-max/2, max/2, mu]
+                        var min = -d[1] / 2;
+                            max = d[1] / 2,
+                            mu = d[2];
+
+                        equals(util.getMajorUnit(min, max), mu, "[" + min + ", " + max + "]");
+                    }
+               });
+
+
+                // min, max, expected axis minimum, expected axis maximum
+                var referenceAxisLimits = [
+                    [0, 0, 0, 1],
+                    [0, 0.5, 0, 0.6],
+                    [0, 2, 0, 2.5],
+                    [0, 5, 0, 6],
+                    [0, 18, 0, 20],
+                    [0, 20, 0, 25],
+                    [0, 50, 0, 60],
+                    [0, 200, 0, 250],
+                    [0, 500, 0, 600],
+                    [0, 1800, 0, 2000],
+
+                    // Axis limits for close, positive values
+                    [1, 1, 0, 1.2],
+                    [1, 1.1, 0.94, 1.12],
+                    [1000, 1000, 0, 1200],
+                    [1000, 1050, 970, 1060],
+                    [1000, 1100, 940, 1120],
+                    [1000, 1200, 900, 1250]
+                ];
+
+                test("Axis maximum for positive values", function() {
+                    for (var i = 0; i < referenceAxisLimits.length; i++) {
+                        var d = referenceAxisLimits[i],
+                            min = d[0],
+                            max = d[1],
+                            axisMax = d[3];
+
+                        equal(util.getAxisMax(min, max), axisMax, "[" + min + ", " + max + "]");
+                    }
+                });
+
+                test("Axis maximum for negative values", function() {
+                    for (var i = 0; i < referenceAxisLimits.length; i++) {
+                        var d = referenceAxisLimits[i];
+
+                        if (d[0] == 0 && d[1] == 0) {
+                            // Skip the [0, 0] test
+                            continue;
+                        }
+
+                        var min = -d[1],
+                            max = -d[0],
+                            axisMax = -d[2];
+
+
+                        equal(util.getAxisMax(min, max), axisMax, "[" + min + ", " + max + "]");
+                    }
+                });
+
+                test("Axis maximum for mixed positive / negative values", function() {
+                    for (var i = 0; i < referenceAxisLimits.length; i++) {
+                        var d = referenceAxisLimits[i];
+
+                        if (d[0] != 0 || d[1] == 0) {
+                            // Skip the [0, 0] and [x, y] tests
+                            continue;
+                        }
+
+                        var min = -d[1],
+                            max = d[1],
+                            axisMax = d[3];
+
+                        equal(util.getAxisMax(min, max), axisMax, "[" + min + ", " + max + "]");
+                    }
+                });
+
+                test("Axis minimum for positive values", function() {
+                    for (var i = 0; i < referenceAxisLimits.length; i++) {
+                        var d = referenceAxisLimits[i],
+                            min = d[0],
+                            max = d[1],
+                            axisMin = d[2];
+
+                        equal(util.getAxisMin(min, max), axisMin, "[" + min + ", " + max + "]");
+                    }
+                });
+
+                test("Axis minimum for negative values", function() {
+                    for (var i = 0; i < referenceAxisLimits.length; i++) {
+                        var d = referenceAxisLimits[i];
+
+                        if (d[0] == 0 && d[1] == 0) {
+                            // Skip the [0, 0] test
+                            continue;
+                        }
+
+                        var min = -d[1],
+                            max = -d[0],
+                            axisMin = -d[3];
+
+                        equal(util.getAxisMin(min, max), axisMin, "[" + min + ", " + max + "]");
+                    }
+                });
+
+                test("Axis minimum for mixed positive/negative values", function() {
+                    for (var i = 0; i < referenceAxisLimits.length; i++) {
+                        var d = referenceAxisLimits[i];
+
+                        if (d[0] != 0 || d[1] == 0) {
+                            // Skip the [0, 0] and [x, y] tests
+                            continue;
+                        }
+
+                        var min = -d[1],
+                            max = d[1],
+                            axisMin = -d[3];
+
+                        equal(util.getAxisMin(min, max), axisMin, "[" + min + ", " + max + "]");
+                    }
+                });
+          });
+        </script>
+
+        <h1 id="qunit-header">UI5.Chart Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+    </body>
+</html>
