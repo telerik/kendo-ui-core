@@ -16,15 +16,15 @@
     }
 
     function DataSource(options) {
-        var that = this;
-
-        extend(that, that.defaults, {
-            idMap:  {},
-            modified: {},
-            reader: options.reader,
-            schema: options.schema,
-            dialect: options.dialect
-        });
+        var that = extend(this, this.defaults, {
+                idMap: {},
+                modified: {},
+                reader: options.reader,
+                schema: options.schema,
+                dialect: options.dialect
+            }),
+            id = that.schema.id,
+            transport = options.transport;
 
         if (options.data) {
             that.transport = {
@@ -34,21 +34,22 @@
             };
         } else {
             that.transport = {
-                read: function(params) {
-                    params.data = that.dialect.read($.extend(options.transport.read.data, 
-                        params.data));
+                read: function(ajaxOptions) {
+                    ajaxOptions.data = that.dialect.read(
+                        extend(transport.read.data, ajaxOptions.data)
+                    );
 
-                    $.ajax($.extend({ dataType: "json" }, options.transport.read, params));
+                    $.ajax(extend({ dataType: "json" }, transport.read, ajaxOptions));
                 }
             }
         }
 
-        if (that.schema.id) {
+        if (id) {
             that.find = function(id) {
                 return that.data[that.idMap[id]];
             };
             that.id = function(record) {
-                return record[options.schema.id];
+                return record[id];
             };
         } else {
             that.find = that.at;
@@ -68,16 +69,16 @@
             },
 
             dialect: {
-                read: function(options) {
-                    return options;
+                read: function(data) {
+                    return data;
                 }
             }
         },
-        read: function(params) {
+        read: function(dataToSend) {
             var that = this;
 
             that.transport.read( {
-                data: params,
+                data: dataToSend,
                 success: function(result) {
                     that.data = that.reader.data(result);
 
@@ -103,7 +104,7 @@
                 extend(modified.changes, values);
                 extend(record, values);
 
-                that.trigger("update", { id: id, record: record });
+                that.trigger("update", { record: record });
             }
         },
 
@@ -122,19 +123,6 @@
             }
         },
 
-        discard: function(id) {
-            var that = this;
-
-            if (id === undefined) {
-                for (id in that.modified) {
-                    that.discard(id);
-                }
-            } else if (id in that.idMap && id in that.modified) {
-                that.data[that.idMap[id]] = that.modified[id].original;
-                delete that.modified[id];
-            }
-        },
-
         hasChanges: function(id) {
             if (id === undefined) {
                 return !$.isEmptyObject(this.modified);
@@ -143,7 +131,7 @@
             return id in this.modified;
         },
 
-        newid: function() {
+        guid: function() {
             var id = "", i, random;
 
             for (i = 0; i < 32; i++) {
@@ -162,10 +150,10 @@
             var that = this,
                 data = that.data,
                 record = {
-                    id: that.newid()
+                    id: that.guid()
                 };
 
-            if (typeof index !== "number" && index !== undefined) {
+            if (typeof index !== "number") {
                 values = index;
                 index = undefined;
             }
@@ -195,7 +183,7 @@
                 that.idMap = idMap(that.data, that.reader.id);
                 that.modified[id] = {};
 
-                that.trigger("destroy", { id: id, record: record });
+                that.trigger("destroy", { record: record });
             }
         }
     });
