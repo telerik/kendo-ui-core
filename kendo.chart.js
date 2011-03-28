@@ -1,5 +1,5 @@
 (function($) {
-    $.ui5 = $.ui5 || {};
+    $.kendo = $.kendo || {};
     var defaultPrecision = 6,
         zeroThreshold = 0.2;
 
@@ -16,16 +16,16 @@
         types: { }
     };
 
-    $.ui5.Chart = Chart;
-    $.fn.ui5chart = function(options) {
+    $.kendo.Chart = Chart;
+    $.fn.kendoChart = function(options) {
         $(this).each(function() {
-            $(this).data("ui5chart", new $.ui5.Chart(this, options));
+            $(this).data("kendoChart", new $.kendo.Chart(this, options));
         });
 
         return this;
     };
 
-    $.ui5.Chart.util = {
+    $.kendo.Chart.util = {
         getMajorUnit: function (min, max) {
             var diff = max - min;
             if (diff == 0) {
@@ -122,12 +122,12 @@
 
 })(jQuery);
 
-// ui5.chart.bar.js
+// kendo.chart.bar.js
 (function($) {
     function BarChart() {
     }
 
-    $.ui5.Chart.prototype.types["bar"] = function(chart, configuration) {
+    $.kendo.Chart.prototype.types["bar"] = function(chart, configuration) {
         return new BarChart(chart, configuration);
     };
 })(jQuery);

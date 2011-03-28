@@ -3,8 +3,8 @@
     <head>
         <title>grid</title>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-        <script src="../../ui5.observable.js"></script>
-        <script src="../../ui5.datasource.js"></script>
+        <script src="../../kendo.observable.js"></script>
+        <script src="../../kendo.datasource.js"></script>
     </head>
     <body>
         <fieldset id="edit">
@@ -14,14 +14,14 @@
             <button id="save">Create</button>
         </fieldset>
         <script>
-            var dataSource = new $.ui5.DataSource({
+            var dataSource = new $.kendo.DataSource({
                 data:  [{id: "foo", Name: "bar"}],
                 schema: {
                     id: "id"
                 }
             });
 
-            dataSource.load();
+            dataSource.read();
             dataSource.bind("create", function(e) {
                 console.log(this.find("foo"));
                 console.log("create", e.record, this.data.length);

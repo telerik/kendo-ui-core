@@ -3,22 +3,22 @@
     <head>
         <title>grid</title>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-        <script src="../../ui5.observable.js"></script>
-        <script src="../../ui5.datasource.js"></script>
+        <script src="../../kendo.observable.js"></script>
+        <script src="../../kendo.datasource.js"></script>
     </head>
     <body>
         <fieldset id="edit">
             <button id="save">Delete</button>
         </fieldset>
         <script>
-            var dataSource = new $.ui5.DataSource({
+            var dataSource = new $.kendo.DataSource({
                 data:  [ { id: 1, Name: "Foo", Age: 2 }],
                 schema: {
                     id: "id"
                 }
             });
 
-            dataSource.load();
+            dataSource.read();
             dataSource.bind("destroy", function(e) {
                 console.log("destroy", e.record, this.data.length);
             });

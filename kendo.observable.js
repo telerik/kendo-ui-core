@@ -1,5 +1,5 @@
 (function($) {
-    $.ui5 = $.ui5 || {};
+    $.kendo = $.kendo || {};
 
     function Observable() {
         this._list = {};
@@ -54,5 +54,5 @@
         }
     }
 
-    $.ui5.Observable = Observable;
+    $.kendo.Observable = Observable;
 })(jQuery);

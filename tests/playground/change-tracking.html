@@ -3,8 +3,8 @@
     <head>
         <title>grid</title>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-        <script src="../../ui5.observable.js"></script>
-        <script src="../../ui5.datasource.js"></script>
+        <script src="../../kendo.observable.js"></script>
+        <script src="../../kendo.datasource.js"></script>
         <style>
             table {
                 padding: 0;
@@ -34,7 +34,7 @@
         </fieldset>
         <button id="delete">Delete</button>
         <script>
-            var dataSource = new $.ui5.DataSource({
+            var dataSource = new $.kendo.DataSource({
                 reader: {
                     data: function(data) {
                         return data;
@@ -97,7 +97,7 @@
                     dataSource.destroy(id);
                 }
             });
-            dataSource.load();
+            dataSource.read();
         </script>
     </body>
 </html>

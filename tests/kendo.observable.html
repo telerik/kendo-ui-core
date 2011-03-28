@@ -12,16 +12,16 @@
         <h2 id="qunit-userAgent"></h2>
         <ol id="qunit-tests"></ol>
 
-        <script src="../ui5.observable.js"></script>
+        <script src="../kendo.observable.js"></script>
         <script>
             test("bind returns this", function() {
-                var observable = new $.ui5.Observable();
+                var observable = new $.kendo.Observable();
 
                 ok(observable.bind("foo") === observable)
             });
 
             test("bind stores the handler to the handlers list", function() {
-                var observable = new $.ui5.Observable(),
+                var observable = new $.kendo.Observable(),
                     handler = $.nop;
 
                 observable.bind("foo", handler);
@@ -30,7 +30,7 @@
             });
 
             test("bind stores multiple handlers", function() {
-                var observable = new $.ui5.Observable(),
+                var observable = new $.kendo.Observable(),
                     handler = $.nop;
 
                 observable.bind("foo", handler);
@@ -41,7 +41,7 @@
             });
 
             test("trigger calls the handler", function() {
-                var observable = new $.ui5.Observable(),
+                var observable = new $.kendo.Observable(),
                     handlerWasCalled = false;
 
                 observable.bind("foo", function() {
@@ -52,13 +52,13 @@
             });
 
             test("trigger returns this", function() {
-                var observable = new $.ui5.Observable();
+                var observable = new $.kendo.Observable();
 
                 ok(observable.trigger() === observable);
             });
 
             test("this in trigger is the observable", function() {
-                var observable = new $.ui5.Observable(), that;
+                var observable = new $.kendo.Observable(), that;
 
                 observable.bind("foo", function() {
                     that = this;
@@ -70,7 +70,7 @@
             });
 
             test("trigger calls all bound handlers", function() {
-                var observable = new $.ui5.Observable(), calls = 0;
+                var observable = new $.kendo.Observable(), calls = 0;
 
                 observable.bind("foo", function() {
                     calls++;
@@ -85,7 +85,7 @@
             });
 
             test("trigger passes the arguments to the handler", function() {
-                var observable = new $.ui5.Observable(), argument;
+                var observable = new $.kendo.Observable(), argument;
 
                 observable.bind("foo", function(bar) {
                     argument = bar;
@@ -98,7 +98,7 @@
             });
 
             test("unbind without handler removes all handlers", function() {
-                var observable = new $.ui5.Observable();
+                var observable = new $.kendo.Observable();
 
                 observable.bind("foo", $.nop);
 
@@ -108,13 +108,13 @@
             });
 
             test("unbind returns this", function() {
-                var observable = new $.ui5.Observable();
+                var observable = new $.kendo.Observable();
 
                 ok(observable.unbind() === observable);
             });
 
             test("unbind removes the specified handler", function() {
-                var observable = new $.ui5.Observable(),
+                var observable = new $.kendo.Observable(),
                     first = function() {},
                     second = function() {};
 

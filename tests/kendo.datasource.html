@@ -12,8 +12,8 @@
         <h2 id="qunit-userAgent"></h2>
         <ol id="qunit-tests"></ol>
 
-        <script src="../ui5.observable.js"></script>
-        <script src="../ui5.datasource.js"></script>
+        <script src="../kendo.observable.js"></script>
+        <script src="../kendo.datasource.js"></script>
 
         <script>
             var reader = {
@@ -32,7 +32,7 @@
             };
 
             function setup(source) {
-                var dataSource = new $.ui5.DataSource( {
+                var dataSource = new $.kendo.DataSource( {
                     reader: reader,
                     transport: transport
                 });
@@ -43,7 +43,7 @@
 
             test("load reads data through transport", function() {
                 var readWasCalled = false,
-                dataSource = new $.ui5.DataSource( {
+                dataSource = new $.kendo.DataSource( {
                     reader: reader,
                     transport: {
                         read: function(callback) {
@@ -58,7 +58,7 @@
 
             test("load reads data through reader", function() {
                 var readWasCalled = false,
-                dataSource = new $.ui5.DataSource( {
+                dataSource = new $.kendo.DataSource( {
                     reader: {
                         data: function(data) {
                             readWasCalled = true;
@@ -90,7 +90,7 @@
             });
 
             test("find returns the record based on its index when the reader does not define id", function() {
-                var dataSource = new $.ui5.DataSource( {
+                var dataSource = new $.kendo.DataSource( {
                     reader: {
                         data: function(data) {
                             return data;
@@ -204,7 +204,7 @@
             });
 
             test("update performs deep cloning", function(){
-                var dataSource = new $.ui5.DataSource( {
+                var dataSource = new $.kendo.DataSource( {
                     reader: reader,
                     transport: transport
                 });

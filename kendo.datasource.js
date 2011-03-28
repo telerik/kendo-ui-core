@@ -1,5 +1,5 @@
 (function($, undefined) {
-    $.ui5 = $.ui5 || {};
+    $.kendo = $.kendo || {};
 
     var extend = $.extend;
 
@@ -56,7 +56,7 @@
         }
     }
 
-    extend(DataSource.prototype, new $.ui5.Observable, {
+    extend(DataSource.prototype, new $.kendo.Observable, {
         defaults: {
             reader: {
                 data: function(data) {
@@ -188,7 +188,7 @@
         }
     });
 
-    extend($.ui5, {
+    extend($.kendo, {
         DataSource: DataSource
     });
 })(jQuery);
