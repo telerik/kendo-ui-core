@@ -1,7 +1,7 @@
 ;(function(window, document, undefined) {
     var head = document.getElementsByTagName("head")[0],
         noop = function () {},
-        k = window.kendo = window.kendo || {},
+        k = window.kendo = {},
         toString = Object.prototype.toString,
         loaderSettings = {
             basePath: ""
