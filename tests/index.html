@@ -2,27 +2,28 @@
 <html>
     <head>
         <script src="../src/jquery-1.5.1.js"></script>
-        <link rel="stylesheet" href="qunit.css" type="text/css" media="screen" />
-        <link rel="stylesheet" href="qunit-runner.css" type="text/css" media="screen" />
-        <script type="text/javascript" src="qunit.js"></script>
-        <script type="text/javascript" src="qunit-runner.js"></script>
+        <link rel="stylesheet" href="qunit.css" media="screen" />
+        <link rel="stylesheet" href="qunit-runner.css" media="screen" />
+        <script src="qunit.js"></script>
+        <script src="qunit-runner.js"></script>
         <script>
-            var tests = [ {
-                page: "loader/unit.html",
-                title: "loader unit tests"
-            }, {
-                page: "core/observable.html",
-                title: "observable"
-            }],
-            sequential = true, // false to run tests simultaneously
-            runnerDone = function(failures, total) {
-                $('<p id="qunit-testresult" class="result" />')
-                .html(["Tests completed in ", (+new Date()) - start, " milliseconds.<br />",
-                "<span class='passed'>", total-failures, "</span> tests of <span class='total'>", total,
-                    "</span> passed, <span class='failed'>", failures, "</span> failed."
-                ].join(''))
-                .appendTo("body > div");
-            };
+            var tests = [{
+                    page: "loader/unit.html",
+                    title: "loader unit tests"
+                }, {
+                    page: "core/observable.html",
+                    title: "observable"
+                }],
+                sequential = true,
+                runnerDone = function(failures, total) {
+                    $('<p id="qunit-testresult" class="result" />')
+                        .html([
+                            "Tests completed in ", (+new Date()) - start, " milliseconds.<br />",
+                            "<span class='passed'>", total-failures, "</span> tests of <span class='total'>", total,
+                            "</span> passed, <span class='failed'>", failures, "</span> failed."
+                        ].join(''))
+                        .appendTo("body > div");
+                };
 
             var start = +new Date();
 
@@ -37,3 +38,4 @@
             <div id="runner-test-page-container"></div>
         </div>
     </body>
+</html>
