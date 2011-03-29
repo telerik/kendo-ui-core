@@ -2,7 +2,7 @@
 <html>
     <head>
         <link rel="stylesheet" href="../qunit.css" type="text/css" media="screen" />
-        <script src="../../src/jquery-1.5.1.js"></script>
+        <script src="../../src/jquery.js"></script>
         <script src="../../src/kendo.loader.js"></script>
         <script type="text/javascript" src="../qunit.js"></script>
         <script type="text/javascript" src="../qunit-runner.js"></script>
@@ -28,7 +28,7 @@
                 var loader = new ScriptLoader();
                 loader.define({foo:"foo.js"});
                 loader.foo();
-                ok(loader.scripts["../../src/jquery-1.5.1.js"].resolved);
+                ok(loader.scripts["../../src/jquery.js"].resolved);
                 ok(loader.scripts["../qunit.js"].resolved);
             });
 
