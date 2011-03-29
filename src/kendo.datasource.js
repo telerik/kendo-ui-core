@@ -1,7 +1,6 @@
-(function($, undefined) {
-    $.kendo = $.kendo || {};
-
-    var extend = $.extend;
+(function($, window, undefined) {
+    var extend = $.extend,
+        kendo = window.kendo;
 
     function idMap(data, id) {
         var idx, length, map = {};
@@ -33,7 +32,7 @@
                 }
             };
         } else {
-            that.transport = {
+            that.transport = transport || {
                 read: function(ajaxOptions) {
                     ajaxOptions.data = that.dialect.read(
                         extend(transport.read.data, ajaxOptions.data)
@@ -56,7 +55,7 @@
         }
     }
 
-    extend(DataSource.prototype, new $.kendo.Observable, {
+    extend(DataSource.prototype, new kendo.core.Observable, {
         defaults: {
             reader: {
                 data: function(data) {
@@ -188,7 +187,9 @@
         }
     });
 
-    extend($.kendo, {
+    kendo.data = kendo.data || {};
+
+    extend(kendo.data, {
         DataSource: DataSource
     });
-})(jQuery);
+})(jQuery, window);
