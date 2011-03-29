@@ -1,7 +1,8 @@
-(function($) {
-    $.kendo = $.kendo || {};
-    var defaultPrecision = 6,
-        zeroThreshold = 0.2;
+(function ($) {
+    var kendo = window.kendo,
+        ui = kendo.ui = kendo.ui || {},
+        DEFAULT_PRECISION = 6,
+        ZERO_THRESHOLD = 0.2;
 
     function Chart(element, options) {
         this.options = $.extend(Chart.prototype.defaults, options);
@@ -16,16 +17,22 @@
         types: { }
     };
 
-    $.kendo.Chart = Chart;
+    ui.Chart = Chart;
     $.fn.kendoChart = function(options) {
         $(this).each(function() {
-            $(this).data("kendoChart", new $.kendo.Chart(this, options));
+            $(this).data("kendoChart", new kendo.ui.Chart(this, options));
         });
 
         return this;
     };
 
-    $.kendo.Chart.util = {
+
+    // Numeric Axis
+    function NumericAxis() {
+
+    }
+
+    NumericAxis.prototype = {
         getMajorUnit: function (min, max) {
             var diff = max - min;
             if (diff == 0) {
@@ -37,7 +44,7 @@
             }
 
             var scale = Math.pow(10, Math.floor(Math.log(diff) / Math.log(10))),
-                relativeValue = round((diff / scale), defaultPrecision),
+                relativeValue = round((diff / scale), DEFAULT_PRECISION),
                 scaleMultiplier = 1;
 
             if (relativeValue < 1.904762) {
@@ -50,7 +57,7 @@
                 scaleMultiplier = 2;
             }
 
-            return round(scale * scaleMultiplier, defaultPrecision);
+            return round(scale * scaleMultiplier, DEFAULT_PRECISION);
         },
 
         getAxisMax: function(min, max) {
@@ -63,7 +70,7 @@
                 max = min == max ? 0 : max;
 
                 var diff = Math.abs((max - min) / max);
-                if(diff > zeroThreshold) {
+                if(diff > ZERO_THRESHOLD) {
                     return 0;
                 }
 
@@ -87,7 +94,7 @@
                 min = min == max ? 0 : min;
 
                 var diff = (max - min) / max;
-                if(diff > zeroThreshold) {
+                if(diff > ZERO_THRESHOLD) {
                     return 0;
                 }
 
@@ -102,17 +109,22 @@
         },
     };
 
+    // #ifdef DEBUG
+    Chart.NumericAxis = NumericAxis;
+    // #endif
+
+    // Helper functions
     function supportsSVG() {
         return document.implementation.hasFeature(
             "http://www.w3.org/TR/SVG11/feature#BasicStructure", "1.1");
     }
 
     function ceil(value, step) {
-        return round(Math.ceil(value / step) * step, defaultPrecision);
+        return round(Math.ceil(value / step) * step, DEFAULT_PRECISION);
     }
 
     function floor(value, step) {
-        return round(Math.floor(value / step) * step, defaultPrecision);
+        return round(Math.floor(value / step) * step, DEFAULT_PRECISION);
     }
 
     function round(value, precision) {
@@ -127,7 +139,7 @@
     function BarChart() {
     }
 
-    $.kendo.Chart.prototype.types["bar"] = function(chart, configuration) {
+    kendo.ui.Chart.prototype.types["bar"] = function(chart, configuration) {
         return new BarChart(chart, configuration);
     };
 })(jQuery);

@@ -2,17 +2,22 @@
 <html>
     <head>
         <title>UI5.Chart Tests</title>
-        <script src="../jquery-1.5.1.js"></script>
+        <script src="../src/jquery.js"></script>
         <script src="qunit.js" type="text/javascript"></script>
         <link href="qunit.css" type="text/css" rel="stylesheet"/>
     </head>
     <body>
-        <script src="../kendo.chart.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.chart.js"></script>
         <script type="text/javascript">
-            var util = $.kendo.Chart.util;
+            var numericAxis;
 
             $(document).ready(function() {
-                module("Utility functions");
+                module("Numeric Axis", {
+                    setup: function() {
+                        numericAxis = new kendo.ui.Chart.NumericAxis;
+                    }
+                });
 
                 // min, max, expected Major Unit
                 var referenceUnits = [
@@ -56,7 +61,7 @@
                             max = d[1],
                             mu = d[2];
 
-                        equals(util.getMajorUnit(min, max), mu, "[" + min + ", " + max  + "]");
+                        equals(numericAxis.getMajorUnit(min, max), mu, "[" + min + ", " + max  + "]");
                     }
                });
 
@@ -67,7 +72,7 @@
                             max = -d[0],
                             mu = d[2];
 
-                        equals(util.getMajorUnit(min, max), mu, "[" + min + ", " + max + "]");
+                        equals(numericAxis.getMajorUnit(min, max), mu, "[" + min + ", " + max + "]");
                     }
                });
 
@@ -85,7 +90,7 @@
                             max = d[1] / 2,
                             mu = d[2];
 
-                        equals(util.getMajorUnit(min, max), mu, "[" + min + ", " + max + "]");
+                        equals(numericAxis.getMajorUnit(min, max), mu, "[" + min + ", " + max + "]");
                     }
                });
 
@@ -119,7 +124,7 @@
                             max = d[1],
                             axisMax = d[3];
 
-                        equal(util.getAxisMax(min, max), axisMax, "[" + min + ", " + max + "]");
+                        equal(numericAxis.getAxisMax(min, max), axisMax, "[" + min + ", " + max + "]");
                     }
                 });
 
@@ -137,7 +142,7 @@
                             axisMax = -d[2];
 
 
-                        equal(util.getAxisMax(min, max), axisMax, "[" + min + ", " + max + "]");
+                        equal(numericAxis.getAxisMax(min, max), axisMax, "[" + min + ", " + max + "]");
                     }
                 });
 
@@ -154,7 +159,7 @@
                             max = d[1],
                             axisMax = d[3];
 
-                        equal(util.getAxisMax(min, max), axisMax, "[" + min + ", " + max + "]");
+                        equal(numericAxis.getAxisMax(min, max), axisMax, "[" + min + ", " + max + "]");
                     }
                 });
 
@@ -165,7 +170,7 @@
                             max = d[1],
                             axisMin = d[2];
 
-                        equal(util.getAxisMin(min, max), axisMin, "[" + min + ", " + max + "]");
+                        equal(numericAxis.getAxisMin(min, max), axisMin, "[" + min + ", " + max + "]");
                     }
                 });
 
@@ -182,7 +187,7 @@
                             max = -d[0],
                             axisMin = -d[3];
 
-                        equal(util.getAxisMin(min, max), axisMin, "[" + min + ", " + max + "]");
+                        equal(numericAxis.getAxisMin(min, max), axisMin, "[" + min + ", " + max + "]");
                     }
                 });
 
@@ -199,7 +204,7 @@
                             max = d[1],
                             axisMin = -d[3];
 
-                        equal(util.getAxisMin(min, max), axisMin, "[" + min + ", " + max + "]");
+                        equal(numericAxis.getAxisMin(min, max), axisMin, "[" + min + ", " + max + "]");
                     }
                 });
           });
