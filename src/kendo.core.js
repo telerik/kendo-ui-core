@@ -1,5 +1,7 @@
-(function($) {
-    $.kendo = $.kendo || {};
+(function($, window) {
+    var kendo = window.kendo = window.kendo || {},
+        core = kendo.core = {},
+        extend = $.extend;
 
     function Observable() {
         this._list = {};
@@ -54,5 +56,7 @@
         }
     }
 
-    $.kendo.Observable = Observable;
-})(jQuery);
+    extend(core, {
+        Observable: Observable
+    });
+})(jQuery, window);

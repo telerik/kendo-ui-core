@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
-    <script src="../jquery-1.5.1.js"></script>
+    <script src="../../src/jquery-1.5.1.js"></script>
+    <script src="../../src/kendo.core.js"></script>
     <script type="text/javascript" src="../qunit.js"></script>
     <script type="text/javascript" src="../qunit-runner.js"></script>
-    <link rel="stylesheet" href="qunit.css" type="text/css" />
+    <link rel="stylesheet" href="../qunit.css" type="text/css" />
 
     <body>
         <h1 id="qunit-header">QUnit example</h1>
@@ -12,16 +13,17 @@
         <h2 id="qunit-userAgent"></h2>
         <ol id="qunit-tests"></ol>
 
-        <script src="../kendo.observable.js"></script>
         <script>
+            var Observable = kendo.core.Observable;
+
             test("bind returns this", function() {
-                var observable = new $.kendo.Observable();
+                var observable = new Observable();
 
                 ok(observable.bind("foo") === observable)
             });
 
             test("bind stores the handler to the handlers list", function() {
-                var observable = new $.kendo.Observable(),
+                var observable = new Observable(),
                     handler = $.nop;
 
                 observable.bind("foo", handler);
@@ -30,7 +32,7 @@
             });
 
             test("bind stores multiple handlers", function() {
-                var observable = new $.kendo.Observable(),
+                var observable = new Observable(),
                     handler = $.nop;
 
                 observable.bind("foo", handler);
@@ -41,7 +43,7 @@
             });
 
             test("trigger calls the handler", function() {
-                var observable = new $.kendo.Observable(),
+                var observable = new Observable(),
                     handlerWasCalled = false;
 
                 observable.bind("foo", function() {
@@ -52,13 +54,13 @@
             });
 
             test("trigger returns this", function() {
-                var observable = new $.kendo.Observable();
+                var observable = new Observable();
 
                 ok(observable.trigger() === observable);
             });
 
             test("this in trigger is the observable", function() {
-                var observable = new $.kendo.Observable(), that;
+                var observable = new Observable(), that;
 
                 observable.bind("foo", function() {
                     that = this;
@@ -70,7 +72,7 @@
             });
 
             test("trigger calls all bound handlers", function() {
-                var observable = new $.kendo.Observable(), calls = 0;
+                var observable = new Observable(), calls = 0;
 
                 observable.bind("foo", function() {
                     calls++;
@@ -85,7 +87,7 @@
             });
 
             test("trigger passes the arguments to the handler", function() {
-                var observable = new $.kendo.Observable(), argument;
+                var observable = new Observable(), argument;
 
                 observable.bind("foo", function(bar) {
                     argument = bar;
@@ -98,7 +100,7 @@
             });
 
             test("unbind without handler removes all handlers", function() {
-                var observable = new $.kendo.Observable();
+                var observable = new Observable();
 
                 observable.bind("foo", $.nop);
 
@@ -108,13 +110,13 @@
             });
 
             test("unbind returns this", function() {
-                var observable = new $.kendo.Observable();
+                var observable = new Observable();
 
                 ok(observable.unbind() === observable);
             });
 
             test("unbind removes the specified handler", function() {
-                var observable = new $.kendo.Observable(),
+                var observable = new Observable(),
                     first = function() {},
                     second = function() {};
 
