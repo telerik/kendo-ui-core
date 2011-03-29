@@ -8,22 +8,25 @@
         <script src="qunit-runner.js"></script>
         <script>
             var tests = [{
-                    page: "loader/unit.html",
-                    title: "loader unit tests"
+                page: "loader/unit.html",
+                title: "loader unit tests"
                 }, {
-                    page: "core/observable.html",
-                    title: "observable"
-                }],
-                sequential = true,
-                runnerDone = function(failures, total) {
-                    $('<p id="qunit-testresult" class="result" />')
-                        .html([
-                            "Tests completed in ", (+new Date()) - start, " milliseconds.<br />",
-                            "<span class='passed'>", total-failures, "</span> tests of <span class='total'>", total,
-                            "</span> passed, <span class='failed'>", failures, "</span> failed."
-                        ].join(''))
-                        .appendTo("body > div");
-                };
+                page: "core/observable.html",
+                title: "observable"
+                }, {
+                page: "data/datasource.html",
+                title: "datasource"
+            }],
+            sequential = true,
+            runnerDone = function(failures, total) {
+                $('<p id="qunit-testresult" class="result" />')
+                .html([
+                "Tests completed in ", (+new Date()) - start, " milliseconds.<br />",
+                "<span class='passed'>", total-failures, "</span> tests of <span class='total'>", total,
+                    "</span> passed, <span class='failed'>", failures, "</span> failed."
+                ].join(''))
+                .appendTo("body > div");
+            };
 
             var start = +new Date();
 
