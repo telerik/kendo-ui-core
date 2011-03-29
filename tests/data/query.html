@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+    <script src="../../src/jquery.js"></script>
+    <script type="text/javascript" src="../qunit.js"></script>
+    <script type="text/javascript" src="../qunit-runner.js"></script>
+    <script src="../../src/kendo.core.js"></script>
+    <script src="../../src/kendo.query.js"></script>
+    <link rel="stylesheet" href="../qunit.css" type="text/css" />
+
+    <body>
+        <h1 id="qunit-header">QUnit example</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var Query = kendo.data.Query;
+
+            test("take returns the specified number of records", function() {
+                var q = new Query([1,2]);
+                var result = q.take(1).toArray();
+                equal(result.length, 1);
+                equal(result[0], 1);
+            });
+
+            test("skip returns new array starting after the specified index", function () {
+                var q = new Query([1,2]);
+                var result = q.skip(1).toArray();
+
+                equal(result.length, 1);
+                equal(result[0], 2);
+            });
+
+            test("skip and take returns a page of records", function () {
+                var q = new Query([1, 2, 3]);
+
+                var result = q.skip(1).take(2).toArray();
+
+                equal(result.length, 2);
+                equal(result[0], 2);
+                equal(result[1], 3);
+            });
+
+            test("orderBy sorts numbers in ascending order", function () {
+                var data = [100, 10, 1];
+
+                var result = new Query(data).orderBy(function (item) {
+                    return item;
+                }).toArray();
+
+                equal(result.length, 3);
+                equal(result[0], 1);
+                equal(result[1], 10);
+                equal(result[2], 100);
+            });
+
+            test("orderBy sorts strings in ascending order", function () {
+                var data = ["foo", "bar", "baz"];
+
+                var result = new Query(data).orderBy(function (item) {
+                    return item;
+                }).toArray();
+
+                equal(result.length, 3);
+                equal(result[0], "bar");
+                equal(result[1], "baz");
+                equal(result[2], "foo");
+            });
+
+            test("orderBy sorts dates in ascending order", function () {
+                var data = [new Date(2011, 1, 1), new Date(2008, 1, 1), new Date(2009, 1, 1)];
+
+                var result = new Query(data).orderBy(function (item) {
+                    return item;
+                }).toArray();
+
+                equal(result.length, 3);
+                equal(result[0].getFullYear(), 2008);
+                equal(result[1].getFullYear(), 2009);
+                equal(result[2].getFullYear(), 2011);
+            });
+
+            test("orderBy uses selector when sorting", function () {
+                var data = [{ name: "foo" }, { name: "bar" }, { name: "foo"}];
+
+                var result = new Query(data).orderBy(function (item) {
+                    return item.name;
+                }).toArray();
+
+                equal(result.length, 3);
+                equal(result[0].name, "bar");
+                equal(result[1].name, "foo");
+                equal(result[2].name, "foo");
+            });
+
+            test("orderBy does not modify original", function () {
+                var data = [3, 2, 1];
+
+                new Query(data).orderBy(function (item) {
+                    return item.name;
+                }).toArray();
+
+                equal(data.length, 3);
+                equal(data[0], 3);
+                equal(data[1], 2);
+                equal(data[2], 1);
+            });
+
+            test("orderByDescending sorts numbers in descending order", function () {
+                var data = [1, 100, 10];
+
+                var result = new Query(data).orderByDescending(function (item) {
+                    return item;
+                }).toArray();
+
+                equal(result.length, 3);
+                equal(result[0], 100);
+                equal(result[1], 10);
+                equal(result[2], 1);
+            });
+
+            test("orderByDescending sorts strings in descending order", function () {
+                var data = ["foo", "bar", "baz"];
+
+                var result = new Query(data).orderByDescending(function (item) {
+                    return item;
+                }).toArray();
+
+                equal(result.length, 3);
+                equal(result[0], "foo");
+                equal(result[1], "baz");
+                equal(result[2], "bar");
+            });
+
+            test("orderByDescending sorts dates in descending order", function () {
+                var data = [new Date(2011, 1, 1), new Date(2008, 1, 1), new Date(2009, 1, 1)];
+
+                var result = new Query(data).orderByDescending(function (item) {
+                    return item;
+                }).toArray();
+
+                equal(result.length, 3);
+                equal(result[0].getFullYear(), 2011);
+                equal(result[1].getFullYear(), 2009);
+                equal(result[2].getFullYear(), 2008);
+            });
+
+            test("orderByDescending uses selector when sorting", function () {
+                var data = [{ name: "foo" }, { name: "bar" }, { name: "foo"}];
+
+                var result = new Query(data).orderByDescending(function (item) {
+                    return item.name;
+                })
+                .toArray();
+
+                equal(result.length, 3);
+                equal(result[0].name, "foo");
+                equal(result[1].name, "foo");
+                equal(result[2].name, "bar");
+            });
+
+            test("orderByDescending does not modify original", function () {
+                var data = [1, 2, 3];
+
+                new Query(data).orderByDescending(function (item) {
+                    return item.name;
+                });
+
+                equal(data[0], 1);
+                equal(data[1], 2);
+                equal(data[2], 3);
+            });
+
+        </script>
+    </body>
+</html>
