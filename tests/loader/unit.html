@@ -17,7 +17,7 @@
         <script>
 
             var ScriptLoader = kendo.ScriptLoader,
-                Script = kendo.Script;
+            Script = kendo.Script;
 
             Script.prototype.load = function (callback) {
                 this.resolved = true;
@@ -332,6 +332,7 @@
 
                 equal(resolver.scripts.foo.url, "//foo.js");
             });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
