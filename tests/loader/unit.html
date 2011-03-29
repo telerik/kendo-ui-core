@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="../qunit.css" type="text/css" media="screen" />
+        <script src="../../src/jquery-1.5.1.js"></script>
+        <script src="../../src/kendo.loader.js"></script>
+        <script type="text/javascript" src="../qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+    </head>
+
+    <body>
+        <h1 id="qunit-header">QUnit example</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+
+            var ScriptLoader = kendo.ScriptLoader,
+                Script = kendo.Script;
+
+            Script.prototype.load = function (callback) {
+                this.resolved = true;
+                callback();
+            }
+
+            test("creates resolved definitions for all script tags which have src attribute", function() {
+                var loader = new ScriptLoader();
+                loader.define({foo:"foo.js"});
+                loader.foo();
+                ok(loader.scripts["../../src/jquery-1.5.1.js"].resolved);
+                ok(loader.scripts["../qunit.js"].resolved);
+            });
+
+            test("define creates corresponding method", function() {
+                var loader = new ScriptLoader();
+                loader.define({ foo: "bar.js"});
+                ok($.isFunction(loader.foo));
+            });
+
+            test("define treats string argument as url", function() {
+                var loader = new ScriptLoader();
+                loader.define({ foo: "foo.js"});
+                equal(loader.scripts.foo.url, "foo.js");
+            });
+
+            test("define reads url from configuration options", function() {
+                var loader = new ScriptLoader();
+                loader.define({ foo: { url : "foo.js" } });
+                equal(loader.scripts.foo.url, "foo.js");
+            });
+
+            test("define sets dependencies", function() {
+                var loader = new ScriptLoader();
+                loader.define({ bar: { url : "bar.js"} });
+                loader.define({ foo: { url : "foo.js", depends : ["bar"] } });
+
+                equal(loader.scripts.foo.depends[0].url, "bar.js");
+            });
+
+            test("define treats string dependencies as array of one item", function() {
+                var loader = new ScriptLoader();
+                loader.define({ bar: { url : "bar.js"} });
+                loader.define({ foo: { url : "foo.js", depends : "bar" } });
+
+                equal(loader.scripts.foo.depends[0].url, "bar.js");
+            });
+
+            test("define with absolute url as depencency", function() {
+                var loader = new ScriptLoader();
+                loader.define({ foo: { url : "foo.js", depends : "http://www.example.com" } });
+
+                equal(loader.scripts.foo.depends[0].url, "http://www.example.com");
+            });
+
+            test("define sets script as unresolved", function() {
+                var loader = new ScriptLoader();
+                loader.define({ foo: "foo.js"});
+                equal(loader.scripts.foo.resolved, false);
+            });
+
+            test("define creates features", function() {
+                var loader = new ScriptLoader();
+                loader.define({ foo: { url : "foo.js", features : { bar: "bar.js" } } });
+
+                equal(loader.scripts.foo.features.bar.url, "bar.js"); 
+            });
+
+            test("define creates dependencies of features", function() {
+                var loader = new ScriptLoader();
+                loader.define({ baz: { url: "baz.js"} });
+                loader.define({ foo: { url: "foo.js", features: {
+                            bar: {
+                                url: "bar.js",
+                                depends: ["baz"]
+                            }
+                        }
+                    }
+                });
+
+                equal(loader.scripts.foo.features.bar.depends[0].url, "baz.js"); 
+            });
+
+            test("resolve script by calling its method", function() {
+                var loader = new ScriptLoader(),
+                resolveWasCalled = false;
+
+                loader.define({ bar: "bar.js" });
+                loader.scripts.bar.resolve = function() {
+                    resolveWasCalled = true;
+                };
+
+                loader.bar();
+
+                ok(resolveWasCalled);
+            });
+
+            test("resolve script with callback", function() {
+                var loader = new ScriptLoader(),
+                callbackWasCalled = false;
+
+                loader.define({ bar: "bar.js" });
+
+                loader.scripts.bar.resolve = function(callback) {
+                    callback();
+                };
+
+                loader.bar(function() {
+                    callbackWasCalled = true;
+                });
+
+                ok(callbackWasCalled);
+            });
+
+            test("done handler is called when script is resolved", function () {
+                var script = new Script("foo.js"),
+                doneWasCalled = false;
+
+                script.resolve(function () {
+                    doneWasCalled = true;
+                });
+
+                ok(doneWasCalled);
+            });
+
+            test("when calls done callback when dependencies are resolved", function() {
+                var script = new Script(),
+                doneWasCalled = false,
+                script1 = new Script(),
+                script2 = new Script();
+
+                script.depends = [script1, script2];
+
+                script.wait(script.depends, function() {
+                    doneWasCalled = true;
+                });
+
+                script1.resolve();
+                script2.resolve();
+
+                ok(doneWasCalled);
+            });
+
+            test("resolve resolves dependencies first", function() {
+                var script = new Script(),
+                script1 = new Script();
+
+                script.depends = [script1];
+                script.resolve();
+
+                ok(script.resolved);
+                ok(script1.resolved);
+            });
+
+            test("resolve does not call load if already resolved", function() {
+                var script = new Script(),
+                loadWasCalled = false;
+
+                script.resolved = true;
+                script.load = function () {
+                    loadWasCalled = true;
+                }
+
+                script.resolve();
+
+                equal(loadWasCalled, false);
+            });
+
+            test("resolve is transitive", function() {
+                var script1 = new Script(),
+                script2 = new Script(),
+                script3 = new Script(),
+                scriptQueue = [];
+
+                script1.load = script2.load = script3.load = function (callback) {
+                    scriptQueue.push(this);
+                    this.resolved = true;
+                    callback();
+                }
+
+                script1.depends = [script2];
+                script2.depends = [script3];
+
+                script1.resolve();
+                ok(script1.resolved);
+                ok(script2.resolved);
+                ok(script3.resolved);
+
+                equal(scriptQueue[0], script3);
+                equal(scriptQueue[1], script2);
+                equal(scriptQueue[2], script1);
+            });
+
+            test("resolve with same dependencies", function() {
+                var script1 = new Script(),
+                script2 = new Script(),
+                script3 = new Script(),
+                script4 = new Script(),
+                calls = 0;
+
+                script1.load = script2.load = script3.load = script4.load = function (callback) {
+                    calls ++;
+                    this.resolved = true;
+                    callback();
+                }
+
+                script1.depends = [script2, script4];
+                script2.depends = [script4, script3];
+
+                script1.resolve();
+                ok(script1.resolved);
+                ok(script2.resolved);
+                ok(script3.resolved);
+                ok(script4.resolved);
+                equal(calls, 4);
+            });
+
+            test("resolve with shared dependencies", function() {
+                var script1 = new Script(),
+                script2 = new Script(),
+                script3 = new Script(),
+                script4 = new Script(),
+                calls = 0;
+
+                script1.load = script2.load = script3.load = script4.load = function (callback) {
+                    calls ++;
+                    this.resolved = true;
+                    callback();
+                }
+
+                script1.depends = [script2, script3, script4];
+                script2.depends = [script4];
+
+                script1.resolve();
+                ok(script1.resolved);
+                ok(script2.resolved);
+                ok(script3.resolved);
+                ok(script4.resolved);
+                equal(calls, 4);
+            });
+
+            test("resolve features", function() {
+                var script = new Script(),
+                feature = new Script();
+
+                script.features["foo"] = feature;
+
+                script.load = feature.load = function (callback) {
+                    this.resolved = true;
+                    callback();
+                };
+
+                script.resolve({foo:true});
+
+                ok(script.resolved);
+                ok(feature.resolved);
+            });
+
+            test("features are not resolved if not said so", function() {
+                var script = new Script(),
+                feature = new Script();
+
+                script.features["foo"] = feature;
+
+                script.load = feature.load = function (callback) {
+                    this.resolved = true;
+                    callback();
+                };
+
+                script.resolve();
+
+                ok(script.resolved);
+                ok(!feature.resolved);
+            });
+
+            test("basePath is empty string by default", function() {
+                equal(kendo.loaderSettings.basePath, "");
+            });
+
+            test("basePath is appended to script url", function() {
+                var resolver = new ScriptLoader();
+                kendo.loaderSettings.basePath = "bar";
+
+                resolver.define({ foo: "foo.js" });
+
+                equal(resolver.scripts.foo.url, "bar/foo.js");
+            });
+
+            test("basePath is appended to script url which starts with slash", function() {
+                var resolver = new ScriptLoader();
+                kendo.loaderSettings.basePath = "bar";
+
+                resolver.define({ foo: "/foo.js" });
+
+                equal(resolver.scripts.foo.url, "bar/foo.js");
+            });
+
+            test("basePath ending with slash", function() {
+                var resolver = new ScriptLoader();
+                kendo.loaderSettings.basePath = "bar/";
+
+                resolver.define({ foo: "/foo.js" });
+
+                equal(resolver.scripts.foo.url, "bar/foo.js");
+            });
+
+            test("basePath ending with slash", function() {
+                var resolver = new ScriptLoader();
+                kendo.loaderSettings.basePath = "bar/";
+
+                resolver.define({ foo: "//foo.js" });
+
+                equal(resolver.scripts.foo.url, "//foo.js");
+            });
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>

@@ -1,7 +1,8 @@
 ;(function(window, document, undefined) {
     var head = document.getElementsByTagName("head")[0],
         noop = function () {},
-        k = window.kendo = {},
+        kendo = window.kendo = window.kendo || {},
+        loader = kendo.loader = {},
         toString = Object.prototype.toString,
         loaderSettings = {
             basePath: ""
@@ -14,14 +15,14 @@
             window.jQuery.readyWait += modifier;
         }
     }
-    
+
     function Script(url) {
         this.url = url;
         this.depends = [];
         this.features = {};
         this.resolved = false;
     }
-    
+
     Script.prototype = {
         load: function(callback) {
             var scriptElement = document.createElement(SCRIPT),
@@ -35,7 +36,7 @@
                 // decrementing the readyWait counter to allow jQuery(document).ready to be raised
                 readyWait(-1);
             }
-            
+
             // "onreadystatechange" is used in IE
             scriptElement.onreadystatechange = function() {
                 if (/complete|loaded/.test(scriptElement.readyState)) {
@@ -57,7 +58,7 @@
 
             // delaying jQuery(document).ready() by incrementing the readyWait counter
             readyWait(1);
-                        
+
             scriptElement.src = that.url;
             // loading the script by adding it to the HEAD
             head.appendChild(scriptElement);
@@ -70,12 +71,12 @@
 
             options = options || {};
             callback = callback || noop;
-            
+
             if (toString.call(options) === "[object Function]") {
                 callback = options;
                 options = {};
             }
-            
+
             if (that.resolved) {
                 callback();
             } else {
@@ -86,7 +87,7 @@
                                 enabledFeatures.push(that.features[feature]);
                             }
                         }
-                        
+
                         that.wait(enabledFeatures, callback);
                     });
                 });
@@ -130,7 +131,7 @@
             }
         }
     }
-    
+
     function combine(basePath, path) {
         if (!basePath || path.indexOf("//") > -1) {
             return path;
@@ -148,7 +149,7 @@
         script = new Script(combine(loaderSettings.basePath, typeof definition === STRING ? definition : definition.url));
 
         depends = depends ? typeof depends === STRING ? [depends] : depends : [];
-        
+
         for (idx = 0; idx < depends.length; idx++) {
             url = depends[idx];
 
@@ -158,10 +159,10 @@
 
             script.depends.push(scripts[url]);
         }
-        
+
         return script;
     }
-            
+
     function ScriptLoader() {
         this.scripts = {};
     }
@@ -199,8 +200,8 @@
         }
     }
 
-    k.loader = new ScriptLoader();
-    k.loaderSettings = loaderSettings;
-    k.ScriptLoader = ScriptLoader;
-    k.Script = Script;
+    kendo.loader = new ScriptLoader();
+    kendo.loaderSettings = loaderSettings;
+    kendo.ScriptLoader = ScriptLoader;
+    kendo.Script = Script;
 })(window, document);
