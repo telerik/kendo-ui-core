@@ -4,6 +4,7 @@
     <script type="text/javascript" src="../qunit.js"></script>
     <script type="text/javascript" src="../qunit-runner.js"></script>
     <script src="../../src/kendo.core.js"></script>
+    <script src="../../src/kendo.query.js"></script>
     <script src="../../src/kendo.datasource.js"></script>
     <link rel="stylesheet" href="../qunit.css" type="text/css" />
 
@@ -381,13 +382,24 @@
                 dataSource.query({ pageSize: 1 });
                 equal(dataSource.pageSize(), 1);
             });
+
+             test("query sets page", function() {
+                var dataSource = new DataSource({
+                    data: data
+                });
+
+                dataSource.query({ page: 1 });
+                equal(dataSource.page(), 1);
+            });
+
             test("query sets sort", function() {
                 var dataSource = new DataSource({
                     data: data
                 });
 
-                dataSource.query({ sort: 1 });
-                equal(dataSource.sort(), 1);
+                var sort = { dir: "asc" };
+                dataSource.query({ sort: sort });
+                equal(dataSource.sort(), sort);
             });
 
             test("query passes sort to transport", function() {

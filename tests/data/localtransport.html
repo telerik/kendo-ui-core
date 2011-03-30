@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <script src="../../src/jquery.js"></script>
+    <script type="text/javascript" src="../qunit.js"></script>
+    <script type="text/javascript" src="../qunit-runner.js"></script>
+    <script src="../../src/kendo.core.js"></script>
+    <script src="../../src/kendo.query.js"></script>
+    <script src="../../src/kendo.datasource.js"></script>
+    <link rel="stylesheet" href="../qunit.css" type="text/css" />
+
+    <body>
+        <h1 id="qunit-header">QUnit example</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var LocalTransport =  kendo.data.LocalTransport;
+
+            test("paging", function() {
+                var transport = new LocalTransport({
+                    data: [1,2,3]
+                });
+
+                var view;
+
+                transport.success = function() {
+                    view = arguments[1];
+                };
+                transport.read({ pageSize: 1, page: 2 });
+                equal(view.length, 1);
+                equal(view[0], 2);
+            });
+
+            test("sorting", function() {
+                var transport = new LocalTransport({
+                    data: [{age: 1}, {age: 2}]
+                });
+
+                var view;
+
+                transport.success = function() {
+                    view = arguments[1];
+                };
+                transport.read( { sort: { field: "age", dir: "desc" } } );
+                equal(view.length, 2);
+                equal(view[0].age, 2);
+                equal(view[1].age, 1);
+            });
+
+            test("paging is after sorting", function() {
+                var transport = new LocalTransport({
+                    data: [{age: 1}, {age: 2}]
+                });
+
+                var view;
+
+                transport.success = function() {
+                    view = arguments[1];
+                };
+                transport.read( { page: 2, pageSize: 1, sort: { field: "age", dir: "desc" } } );
+                equal(view[0].age, 1);
+            });
+
+            test("original data is not modified", function() {
+                var data = [{age: 1}, {age: 2}];
+
+                var transport = new LocalTransport({
+                    data: data
+                });
+
+                var view;
+
+                transport.success = function() {
+                    view = arguments[0];
+                };
+
+                transport.read( { page: 2, pageSize: 1, sort: { field: "age", dir: "desc" } } );
+                ok(view === data);
+            });
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>
+

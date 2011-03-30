@@ -26,8 +26,23 @@
 
     LocalTransport.prototype = {
         read: function(options) {
-            var data = this.reader.data(this.data);
-            this.success(data, data);
+            options = options || {};
+            var data = this.reader.data(this.data),
+                query = new kendo.data.Query(data),
+                page = options.page,
+                pageSize = options.pageSize,
+                sort = options.sort;
+
+            if (sort !== undefined) {
+                query = query.sort(sort);
+            }
+
+            if (page !== undefined && pageSize !== undefined) {
+                query = query.skip((page - 1) * pageSize)
+                             .take(pageSize);
+            }
+
+            this.success(data, query.toArray());
         }
     }
 
@@ -193,8 +208,12 @@
         },
         query: function(options) {
             this._pageSize = options.pageSize;
+            this._page = options.page;
             this._sort = options.sort;
             this.read(options);
+        },
+        page: function() {
+            return this._page;
         },
         pageSize: function() {
             return this._pageSize;
@@ -207,6 +226,7 @@
     kendo.data = kendo.data || {};
 
     extend(kendo.data, {
-        DataSource: DataSource
+        DataSource: DataSource,
+        LocalTransport: LocalTransport
     });
 })(jQuery, window);
