@@ -23,24 +23,21 @@
                 }
             },
             data = [],
-            transport = {
-                read: function(options) {
-                    options.success(data);
-                }
-            },
             DataSource = kendo.data.DataSource;
 
             function setup(source) {
+                data = source || [{ id:1, bar: "foo" },{ id: 2, bar: "foo" }];
+
                 var dataSource = new DataSource( {
                     reader: reader,
-                    transport: transport
+                    data: data
                 });
-                data = source || [{ id:1, bar: "foo" },{ id: 2, bar: "foo" }];
+
                 dataSource.read();
                 return dataSource;
             }
 
-            test("load reads data through transport", function() {
+            test("reads data through transport", function() {
                 var readWasCalled = false,
                 dataSource = new DataSource( {
                     reader: reader,
@@ -55,25 +52,10 @@
                 ok(readWasCalled);
             });
 
-            test("load reads data through reader", function() {
-                var readWasCalled = false,
-                dataSource = new DataSource( {
-                    reader: {
-                        data: function(data) {
-                            readWasCalled = true;
-                            return data;
-                        }
-                    },
-                    transport: transport
-                });
-                dataSource.read();
-                ok(readWasCalled);
-            });
-
             test("load reads data", function() {
                 var dataSource = setup();
 
-                ok(dataSource.data);
+                ok(dataSource.data().length);
             });
 
             test("load populates id to index map", function() {
@@ -89,12 +71,12 @@
             });
 
             test("find returns the record based on its index when the reader does not define id", function() {
+                data = [ { id: 1}, { id: 2} ];
                 var dataSource = new DataSource( {
                     schema: {
                     },
-                    transport: transport
+                    data: data
                 });
-                data = [ { id: 1}, { id: 2} ];
                 dataSource.read();
                 equal(dataSource.find(0), data[0]);
             });
@@ -173,11 +155,9 @@
             });
 
             test("update performs deep cloning", function(){
-                var dataSource = new DataSource( {
-                    reader: reader,
-                    transport: transport
-                });
                 data =  [{ id:1, bar: {},  baz: "foo" }];
+
+                var dataSource = setup(data);
 
                 dataSource.read();
 
@@ -250,7 +230,7 @@
 
                 var result = dataSource.create();
 
-                ok(dataSource.data.pop() === result);
+                ok(dataSource.data().pop() === result);
             });
 
             test("create populates the idmap", function() {
@@ -258,7 +238,7 @@
 
                 var result = dataSource.create();
 
-                equal(dataSource.idMap[result.id], dataSource.data.length - 1);
+                equal(dataSource.idMap[result.id], dataSource.data().length - 1);
             });
 
             test("create inserts the new item at the specified index", function() {
@@ -266,7 +246,7 @@
 
                 var result = dataSource.create(0);
 
-                equal(dataSource.data[0], result);
+                equal(dataSource.data()[0], result);
             });
 
             test("create updates the idmap", function() {
@@ -307,7 +287,7 @@
                 var dataSource = setup();
 
                 dataSource.destroy(1);
-                equal(dataSource.data.length, 1);
+                equal(dataSource.data().length, 1);
                 equal(dataSource.at(0).id, 2);
             });
 
@@ -346,9 +326,97 @@
                 equal(destroyArgument.record, first);
             });
 
+            test("read raises the change event", function() {
+                var dataSource = new DataSource({
+                    data: data
+                });
+                var changeWasCalled = false;
+
+                dataSource.bind("kendo:change", function() {
+                    changeWasCalled = true;
+                });
+
+                dataSource.read();
+
+                ok(changeWasCalled);
+            });
+
+            test("query raises the change event", function() {
+                var dataSource = new DataSource({
+                    data: data
+                });
+                var changeWasCalled = false;
+
+                dataSource.read();
+
+                dataSource.bind("kendo:change", function() {
+                    changeWasCalled = true;
+                });
+
+                dataSource.query({});
+
+                ok(changeWasCalled);
+            });
+
+            test("data is initially empty", function() {
+                var dataSource = new DataSource({
+                    data: data
+                });
+
+                equal(dataSource.data().length, 0);
+            });
+
+            test("view is initially empty", function() {
+                var dataSource = new DataSource({
+                    data: data
+                });
+
+                equal(dataSource.view().length, 0);
+            });
+
+            test("query sets the pageSize", function() {
+                var dataSource = new DataSource({
+                    data: data
+                });
+                dataSource.query({ pageSize: 1 });
+                equal(dataSource.pageSize(), 1);
+            });
+            test("query sets sort", function() {
+                var dataSource = new DataSource({
+                    data: data
+                });
+
+                dataSource.query({ sort: 1 });
+                equal(dataSource.sort(), 1);
+            });
+
+            test("query passes sort to transport", function() {
+                var readOptions,
+                    dataSource = new DataSource({
+                        data: data,
+                        transport: {
+                            read: function(options) {
+                                readOptions = options;
+                                this.success(data);
+                            }
+                        }
+                    });
+                var options = { sort : 1};
+                dataSource.query(options);
+                equal(readOptions, options);
+            });
+
+            test("transport returns data and view", function() {
+                var dataSource = new DataSource({
+                    data: data
+                });
+
+                dataSource.read();
+
+                equal(dataSource.data(), dataSource.view());
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
     </body>
-
 </html>

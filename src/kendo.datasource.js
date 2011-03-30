@@ -14,38 +14,52 @@
         return map;
     }
 
+    function LocalTransport(options) {
+        this.reader = options.reader || {
+            data: function(data) {
+                return data;
+            }
+        };
+        this.success = options.success;
+        this.data = options.data;
+    }
+
+    LocalTransport.prototype = {
+        read: function(options) {
+            var data = this.reader.data(this.data);
+            this.success(data, data);
+        }
+    }
+
+    function RemoteTransport() {
+    }
+
+    RemoteTransport.prototype = {
+        read: function(transportOptions) {
+            transportOptions.data = that.dialect.read(
+                extend(transport.read.data, transportOptions.data)
+            );
+
+            $.ajax(extend({ dataType: "json" }, transport.read, transportOptions));
+        }
+    }
+
     function DataSource(options) {
         var that = extend(this, this.defaults, {
                 idMap: {},
                 modified: {},
-                reader: options.reader,
                 schema: options.schema,
-                dialect: options.dialect
+                _data: [],
+                _view: []
             }),
             id = that.schema.id,
             transport = options.transport;
 
-        if (options.data) {
-            that.transport = {
-                read: function(callback) {
-                    callback(options.data);
-                }
-            };
-        } else {
-            that.transport = transport || {
-                read: function(ajaxOptions) {
-                    ajaxOptions.data = that.dialect.read(
-                        extend(transport.read.data, ajaxOptions.data)
-                    );
-
-                    $.ajax(extend({ dataType: "json" }, transport.read, ajaxOptions));
-                }
-            }
-        }
-
+        that.transport = transport || (options.data ? new LocalTransport({ data: options.data }) : new RemoteTransport());
+        that.transport.success = $.proxy(that.success, that);
         if (id) {
             that.find = function(id) {
-                return that.data[that.idMap[id]];
+                return that._data[that.idMap[id]];
             };
             that.id = function(record) {
                 return record[id];
@@ -57,37 +71,23 @@
 
     extend(DataSource.prototype, new kendo.core.Observable, {
         defaults: {
-            reader: {
-                data: function(data) {
-                    return data;
-                }
-            },
-
             schema: {
                 id: "id"
-            },
-
-            dialect: {
-                read: function(data) {
-                    return data;
-                }
             }
         },
-        read: function(dataToSend) {
+        read: function(options) {
+            this.transport.read(options);
+        },
+        success: function(data, view) {
             var that = this;
 
-            that.transport.read( {
-                data: dataToSend,
-                success: function(result) {
-                    that.data = that.reader.data(result);
+            that._data = data;
+            that._view = view;
 
-                    that.idMap = idMap(that.data, that.id);
+            that.idMap = idMap(data, that.id);
 
-                    that.trigger("read", that.data);
-                }
-            });
+            that.trigger("kendo:change");
         },
-
         update: function(id, values) {
             var that = this,
                 modified = that.modified[id],
@@ -147,7 +147,7 @@
 
         create: function(index, values) {
             var that = this,
-                data = that.data,
+                data = that._data,
                 record = {
                     id: that.guid()
                 };
@@ -170,7 +170,7 @@
         },
 
         at: function(index) {
-            return this.data[index];
+            return this._data[index];
         },
 
         destroy: function(id) {
@@ -178,12 +178,29 @@
                 record = that.find(id);
 
             if (record) {
-                that.data.splice(that.idMap[id], 1);
-                that.idMap = idMap(that.data, that.reader.id);
+                that._data.splice(that.idMap[id], 1);
+                that.idMap = idMap(that._data, that.id);
                 that.modified[id] = {};
 
                 that.trigger("destroy", { record: record });
             }
+        },
+        data: function() {
+            return this._data;
+        },
+        view: function() {
+            return this._view;
+        },
+        query: function(options) {
+            this._pageSize = options.pageSize;
+            this._sort = options.sort;
+            this.read(options);
+        },
+        pageSize: function() {
+            return this._pageSize;
+        },
+        sort: function() {
+            return this._sort;
         }
     });
 
