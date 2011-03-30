@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.query.js"></script>
+        <script src="../src/kendo.datasource.js"></script>
+    </head>
+    <body>
+        <table>
+            <thead>
+                <tr>
+                    <th data-field="OrderID">
+                        OrderID
+                    </th>
+                    <th data-field="ContactName">
+                       ContactName 
+                    </th>
+                    <th data-field="ShipAddress">
+                      ShipAddress 
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+
+        <script>
+            var dataSource = new kendo.data.DataSource({ data: [{"OrderID":10258,"ContactName":"Roland Mendel","ShipAddress":"Kirchgasse 6","OrderDate":"\/Date(837576000000)\/"},
+                {"OrderID":10259,"ContactName":"Francisco Chang","ShipAddress":"Sierras de Granada 9993","OrderDate":"\/Date(837662400000)\/"},
+                {"OrderID":10260,"ContactName":"Henriette Pfalzheim","ShipAddress":"Mehrheimerstr. 369","OrderDate":"\/Date(837748800000)\/"},
+                {"OrderID":10261,"ContactName":"Bernardo Batista","ShipAddress":"Rua da Panificadora, 12","OrderDate":"\/Date(837748800000)\/"},
+                {"OrderID":10262,"ContactName":"Paula Wilson","ShipAddress":"2817 Milton Dr.","OrderDate":"\/Date(838008000000)\/"},
+                {"OrderID":10263,"ContactName":"Roland Mendel","ShipAddress":"Kirchgasse 6","OrderDate":"\/Date(838094400000)\/"},
+                {"OrderID":10264,"ContactName":"Maria Larsson","ShipAddress":"Åkergatan 24","OrderDate":"\/Date(838180800000)\/"},
+                {"OrderID":10265,"ContactName":"Frédérique Citeaux","ShipAddress":"24, place Kléber","OrderDate":"\/Date(838267200000)\/"},
+                {"OrderID":10266,"ContactName":"Pirkko Koskitalo","ShipAddress":"Torikatu 38","OrderDate":"\/Date(838353600000)\/"},
+                {"OrderID":10267,"ContactName":"Peter Franken","ShipAddress":"Berliner Platz 43","OrderDate":"\/Date(838612800000)\/"}]});
+
+            var fields = $("table th").click(function(){
+                var sort = { field: $(this).data("field"), dir: "desc"};
+                dataSource.query({ sort: sort });
+            }).map(function(){
+                return $(this).data("field");
+            });
+
+            dataSource.bind("kendo:change", function(){
+                var data = this.view(),
+                    body;
+                    for(var i = 0, len = data.length; i < len; i++){
+                        body += "<tr>";
+                            for(var j = 0, length = fields.length; j < length; j++){
+                                body += "<td>" + data[i][fields[j]] + "</td>";
+                            }
+                        body += "</tr>";
+                    }
+                $("table tbody").empty().append($(body));
+            });
+
+            dataSource.read();
+        </script>
+    </body>
+</html>
