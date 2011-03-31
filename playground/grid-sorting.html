@@ -27,19 +27,34 @@
         </table>
 
         <script>
-            var dataSource = new kendo.data.DataSource({ data: [{"OrderID":10258,"ContactName":"Roland Mendel","ShipAddress":"Kirchgasse 6","OrderDate":"\/Date(837576000000)\/"},
-                {"OrderID":10259,"ContactName":"Francisco Chang","ShipAddress":"Sierras de Granada 9993","OrderDate":"\/Date(837662400000)\/"},
-                {"OrderID":10260,"ContactName":"Henriette Pfalzheim","ShipAddress":"Mehrheimerstr. 369","OrderDate":"\/Date(837748800000)\/"},
-                {"OrderID":10261,"ContactName":"Bernardo Batista","ShipAddress":"Rua da Panificadora, 12","OrderDate":"\/Date(837748800000)\/"},
-                {"OrderID":10262,"ContactName":"Paula Wilson","ShipAddress":"2817 Milton Dr.","OrderDate":"\/Date(838008000000)\/"},
-                {"OrderID":10263,"ContactName":"Roland Mendel","ShipAddress":"Kirchgasse 6","OrderDate":"\/Date(838094400000)\/"},
-                {"OrderID":10264,"ContactName":"Maria Larsson","ShipAddress":"Åkergatan 24","OrderDate":"\/Date(838180800000)\/"},
-                {"OrderID":10265,"ContactName":"Frédérique Citeaux","ShipAddress":"24, place Kléber","OrderDate":"\/Date(838267200000)\/"},
-                {"OrderID":10266,"ContactName":"Pirkko Koskitalo","ShipAddress":"Torikatu 38","OrderDate":"\/Date(838353600000)\/"},
-                {"OrderID":10267,"ContactName":"Peter Franken","ShipAddress":"Berliner Platz 43","OrderDate":"\/Date(838612800000)\/"}]});
-
+            var dataSource = new kendo.data.DataSource({ 
+                serverSorting: false,
+                transport: {
+                    read: {
+                        url: "/Telerik.Mvc.Examples/Grid/_FirstLook",
+                        type: "POST"
+                    },
+                    dialect: {
+                        read: function(data) {
+                            var result = {};
+                            
+                            if (data.sort) {
+                                result.orderBy = data.sort.field + '-' + data.sort.dir;
+                            }
+                            return result;
+                        }
+                    },
+                    reader: {
+                        data: function(result) {
+                            return result.data;
+                        }
+                    }
+                }
+            });
+            var start;
             var fields = $("table th").click(function(){
                 var sort = { field: $(this).data("field"), dir: "desc"};
+                start = new Date();
                 dataSource.query({ sort: sort });
             }).map(function(){
                 return $(this).data("field");
@@ -56,8 +71,9 @@
                         body += "</tr>";
                     }
                 $("table tbody").empty().append($(body));
+                alert(new Date() - start);
             });
-
+            start = new Date();
             dataSource.read();
         </script>
     </body>

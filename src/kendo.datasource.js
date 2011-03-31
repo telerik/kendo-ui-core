@@ -122,7 +122,7 @@
             serverPaging: false
         },
         read: function(options) {
-            this.transport.read(options);
+            this.transport.read({ data: options || {} });
         },
         success: function(data) {
             var that = this;
