@@ -109,9 +109,77 @@
         },
     };
 
-    // #ifdef DEBUG
-    Chart.NumericAxis = NumericAxis;
-    // #endif
+
+    function BlockElement() {
+        kendo.core.Observable.call(this);
+        this.parentNode = null;
+        this.children = [];
+    }
+
+    $.extend(BlockElement.prototype, new kendo.core.Observable, {
+        appendChild: function(child) {
+            this.children.push(child);
+            child.parentNode = this;
+            return this;
+        },
+
+        end: function() {
+            return this.parentNode;
+        }
+    });
+
+
+    function Row() {
+        BlockElement.call(this);
+    }
+
+    $.extend(Row.prototype, new BlockElement, {
+        addCell: function(cellContent) {
+            var cell = new Cell();
+            this.appendChild(cell);
+
+            if (cellContent) {
+                cell.appendChild(cellContent);
+            }
+
+            return cell;
+        }
+    });
+
+
+    function Cell() {
+        BlockElement.call(this);
+    }
+
+    $.extend(Cell.prototype, new BlockElement, {
+        colspan: function(value) {
+            if (value) {
+                this._colspan = value;
+                return this;
+            } else {
+                return this._colspan;
+            }
+        },
+    });
+
+
+    function GridLayout(options) {
+        BlockElement.call(this);
+        this.options = options;
+    }
+
+    $.extend(GridLayout.prototype, new BlockElement, {
+        addRow: function() {
+            var row = new Row();
+            this.appendChild(row);
+
+            return row;
+        },
+
+        apply: function() {
+
+        }
+    });
 
     // Helper functions
     function supportsSVG() {
@@ -131,6 +199,15 @@
         var power = Math.pow(10, precision || 0);
         return Math.round(value * power) / power;
     }
+
+    // #ifdef DEBUG
+    // Make the internal functions public for unit testing
+
+    Chart.NumericAxis = NumericAxis;
+    Chart.BlockElement = BlockElement;
+    Chart.GridLayout = GridLayout;
+
+    // #endif
 
 })(jQuery);
 

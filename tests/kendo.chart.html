@@ -10,7 +10,8 @@
         <script src="../src/kendo.core.js"></script>
         <script src="../src/kendo.chart.js"></script>
         <script type="text/javascript">
-            var numericAxis;
+            var numericAxis,
+                gridLayout;
 
             $(document).ready(function() {
                 module("Numeric Axis", {
@@ -206,6 +207,55 @@
 
                         equal(numericAxis.getAxisMin(min, max), axisMin, "[" + min + ", " + max + "]");
                     }
+                });
+
+                module("Grid Layout", {
+                    setup: function() {
+                        gridLayout = new kendo.ui.Chart.GridLayout();
+                    }
+                });
+
+                test("addRow returns row", function() {
+                    ok(gridLayout.addRow() != null);
+                    /*
+                    grid.addRow()
+                            .addCell(title).colspan(3)
+                        .end()
+                        .addRow()
+                            .addCell(yAxis).end()
+                            .addCell(chartArea).end()
+                            .addCell(legend).end()
+                        .end()
+                        .addRow()
+                            .addCell() // Spacer
+                            .addCell(xAxis)
+                            .addCell(); // Spacer
+                    */
+                });
+
+                test("row.end() returns the grid layout", function() {
+                    var result = gridLayout.addRow().end();
+                    ok(result === gridLayout);
+                });
+
+                test("row.addCell() returns cell", function() {
+                    ok(gridLayout.addRow().addCell() != null);
+                });
+
+                test("cell.end() returns the parent row", function() {
+                    var row = gridLayout.addRow();
+                    ok(row.addCell().end() === row);
+                });
+
+                test("addCell() accepts child element as parameter", function() {
+                    var element = new kendo.ui.Chart.BlockElement;
+                    ok(gridLayout.addRow().addCell(element).children[0] === element);
+                });
+
+                test("cell.colspan() sets colspan", function() {
+                    var cell = gridLayout.addRow().addCell();
+                    cell.colspan(3);
+                    equal(cell.colspan(), 3);
                 });
           });
         </script>
