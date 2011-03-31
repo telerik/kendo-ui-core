@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <script src="../../src/jquery.js"></script>
+    <script type="text/javascript" src="../jquery.mockjax.js"></script>
     <script type="text/javascript" src="../qunit.js"></script>
     <script type="text/javascript" src="../qunit-runner.js"></script>
     <script src="../../src/kendo.core.js"></script>
@@ -15,6 +16,16 @@
         <h2 id="qunit-userAgent"></h2>
         <ol id="qunit-tests"></ol>
         <script>
+            module("DataSource", {
+                setup: function() {
+                    $.mockjaxSettings.contentType = 'text/json';
+                    $.mockjaxSettings.responseTime = 0;
+                },
+                teardown: function() {
+                    $.mockjaxClear()
+                }
+            });
+
             var reader = {
                 id: function(record) {
                     return record.id;
@@ -24,6 +35,7 @@
                 }
             },
             data = [],
+            RemoteTransport = kendo.data.RemoteTransport,
             DataSource = kendo.data.DataSource;
 
             function setup(source) {
@@ -402,32 +414,6 @@
                 equal(dataSource.sort(), sort);
             });
 
-            test("query passes sort to transport", function() {
-                var readOptions,
-                    dataSource = new DataSource({
-                        data: data,
-                        transport: {
-                            read: function(options) {
-                                readOptions = options;
-                                this.success(data);
-                            }
-                        }
-                    });
-                var options = { sort : 1};
-                dataSource.query(options);
-                equal(readOptions, options);
-            });
-
-            test("transport returns data and view", function() {
-                var dataSource = new DataSource({
-                    data: data
-                });
-
-                dataSource.read();
-
-                equal(dataSource.data(), dataSource.view());
-            });
-
             test("remote transport is initialized if data is not set", function() {
                 var dataSource = new DataSource({
                     transport: {
@@ -437,6 +423,105 @@
 
                 equal(dataSource.transport.settings.read.url, "foo");
             });
+
+            test("paging", function() {
+                var dataSource = new DataSource({
+                    data: [1,2,3]
+                });
+                dataSource.read();
+                dataSource.query({ pageSize: 1, page: 2 });
+
+                var view = dataSource.view();
+
+                equal(view.length, 1);
+                equal(view[0], 2);
+            });
+
+            test("sorting", function() {
+                var dataSource = new DataSource({
+                    data: [{age: 1}, {age: 2}]
+                });
+                dataSource.read();
+                dataSource.query( { sort: { field: "age", dir: "desc" } } );
+                var view = dataSource.view();
+
+                equal(view.length, 2);
+                equal(view[0].age, 2);
+                equal(view[1].age, 1);
+            });
+
+            test("paging is after sorting", function() {
+                var dataSource = new DataSource({
+                    data: [{age: 1}, {age: 2}]
+                });
+
+                dataSource.read();
+                dataSource.query( { page: 2, pageSize: 1, sort: { field: "age", dir: "desc" } } );
+                var view = dataSource.view();
+
+                equal(view[0].age, 1);
+            });
+
+            test("original data is not modified", function() {
+                var data = [{age: 1}, {age: 2}];
+
+                var dataSource = new DataSource({
+                    data: data
+                });
+                dataSource.read();
+                dataSource.query( { page: 2, pageSize: 1, sort: { field: "age", dir: "desc" } } );
+                var view = dataSource.data();
+
+                ok(view === data);
+            });
+            test("data is not sorted if serverSorting = true", function() {
+                var transport = new RemoteTransport({
+                        read: "foo"
+                    });
+
+                var dataSource = new DataSource( {
+                    transport: transport,
+                    serverSorting: true
+                });
+
+                transport.success = function(data, view) {
+                    start();
+                    ok(true);
+                };
+
+                $.mockjax({
+                    url: "foo",
+                    responseText: '[{"age": 1}, {"age": 2}]'
+                });
+
+                dataSource.query( { sort: { field: "age", dir: "desc" } } );
+                stop(1000);
+            });
+
+            test("data is not paged if serverPaging = true", function() {
+                var transport = new RemoteTransport({
+                        read: "foo"
+                    });
+
+                var dataSource = new DataSource( {
+                    transport: transport,
+                    serverPaging: true
+                });
+
+                transport.success = function(data, view) {
+                    start();
+                    ok(true);
+                };
+
+                $.mockjax({
+                    url: "foo",
+                    responseText: '[{"age": 1}, {"age": 2}]'
+                });
+
+                dataSource.query( { page: 2, pageSize: 1 } );
+                stop(1000);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

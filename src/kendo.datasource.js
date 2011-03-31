@@ -42,11 +42,8 @@
     }
 
     LocalTransport.prototype = {
-        read: function(options) {
-            options = options || {};
-            var data = this.reader.data(this.data);
-
-            this.success(data, process(data, options));
+        read: function() {
+            this.success(this.reader.data(this.data));
         }
     }
 
@@ -81,16 +78,7 @@
             options.success = function(result) {
                 var data = that.reader.data(result);
 
-                if (that.settings.serverSorting === true) {
-                    delete options.sort;
-                }
-
-                if (that.settings.serverPaging) {
-                    delete options.page;
-                    delete options.pageSize;
-                }
-
-                that.success(data, process(data, options));
+                that.success(data);
             };
             $.ajax(options);
         }
@@ -101,11 +89,15 @@
                 idMap: {},
                 modified: {},
                 schema: options.schema,
+                serverSorting: options.serverSorting,
+                serverPaging: options.serverPaging,
                 _data: [],
                 _view: []
             }),
             id = that.schema.id,
             transport = options.transport;
+
+        kendo.core.Observable.call(that);
 
         that.transport = transport && $.isFunction(transport.read) ? transport : (options.data? new LocalTransport({ data: options.data }):new RemoteTransport(transport));
         that.transport.success = $.proxy(that.success, that);
@@ -125,16 +117,17 @@
         defaults: {
             schema: {
                 id: "id"
-            }
+            },
+            serverSorting: false,
+            serverPaging: false
         },
         read: function(options) {
             this.transport.read(options);
         },
-        success: function(data, view) {
+        success: function(data) {
             var that = this;
 
-            that._data = data;
-            that._view = view;
+            that._data = this._view = data;
 
             that.idMap = idMap(data, that.id);
 
@@ -244,10 +237,17 @@
             return this._view;
         },
         query: function(options) {
+            var remote = this.serverSorting || this.serverPaging;
+
             this._pageSize = options.pageSize;
             this._page = options.page;
             this._sort = options.sort;
-            this.read(options);
+            if (remote) {
+                this.read(options);
+            } else {
+                this._view = process(this._data, options);
+                this.trigger("kendo:change");
+            }
         },
         page: function() {
             return this._page;
