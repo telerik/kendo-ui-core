@@ -14,48 +14,85 @@
         return map;
     }
 
+    function process(data, options) {
+        var query = new kendo.data.Query(data),
+            page = options.page,
+            pageSize = options.pageSize,
+            sort = options.sort;
+
+        if (sort !== undefined) {
+            query = query.sort(sort);
+        }
+
+        if (page !== undefined && pageSize !== undefined) {
+            query = query.skip((page - 1) * pageSize)
+                         .take(pageSize);
+        }
+
+        return query.toArray();
+    }
+
     function LocalTransport(options) {
         this.reader = options.reader || {
             data: function(data) {
                 return data;
             }
         };
-        this.success = options.success;
         this.data = options.data;
     }
 
     LocalTransport.prototype = {
         read: function(options) {
             options = options || {};
-            var data = this.reader.data(this.data),
-                query = new kendo.data.Query(data),
-                page = options.page,
-                pageSize = options.pageSize,
-                sort = options.sort;
+            var data = this.reader.data(this.data);
 
-            if (sort !== undefined) {
-                query = query.sort(sort);
-            }
-
-            if (page !== undefined && pageSize !== undefined) {
-                query = query.skip((page - 1) * pageSize)
-                             .take(pageSize);
-            }
-
-            this.success(data, query.toArray());
+            this.success(data, process(data, options));
         }
     }
 
-    function RemoteTransport() {
+    function RemoteTransport(options) {
+        var that = this;
+        if (options && typeof options.read === "string") {
+            options.read = { url: options.read };
+        }
+        options = extend(that.defaults, options);
+        that.settings = options;
+        that.dialect = options.dialect;
+        that.success = $.noop;
+        that.reader = options.reader || {
+            data: function(data) {
+                return data;
+            }
+        };
     }
 
     RemoteTransport.prototype = {
-        read: function(transportOptions) {
-            transportOptions.data = that.dialect.read(
-                extend(transport.read.data, transportOptions.data)
-            );
+        defaults: {
+            dialect: {
+                read: function(data) {
+                    return data;
+                }
+            }
+        },
+        read: function(options) {
+            var that = this;
+            options = extend(true, that.settings.read, options);
+            options.data = that.dialect.read(options.data);
+            options.success = function(result) {
+                var data = that.reader.data(result);
 
-            $.ajax(extend({ dataType: "json" }, transport.read, transportOptions));
+                if (that.settings.serverSorting === true) {
+                    delete options.sort;
+                }
+
+                if (that.settings.serverPaging) {
+                    delete options.page;
+                    delete options.pageSize;
+                }
+
+                that.success(data, process(data, options));
+            };
+            $.ajax(options);
         }
     }
 
@@ -70,7 +107,7 @@
             id = that.schema.id,
             transport = options.transport;
 
-        that.transport = transport || (options.data ? new LocalTransport({ data: options.data }) : new RemoteTransport());
+        that.transport = transport && $.isFunction(transport.read) ? transport : (options.data? new LocalTransport({ data: options.data }):new RemoteTransport(transport));
         that.transport.success = $.proxy(that.success, that);
         if (id) {
             that.find = function(id) {
@@ -227,6 +264,7 @@
 
     extend(kendo.data, {
         DataSource: DataSource,
-        LocalTransport: LocalTransport
+        LocalTransport: LocalTransport,
+        RemoteTransport: RemoteTransport
     });
 })(jQuery, window);

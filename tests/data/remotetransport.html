@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+    <script src="../../src/jquery.js"></script>
+    <script type="text/javascript" src="../qunit.js"></script>
+    <script type="text/javascript" src="../qunit-runner.js"></script>
+    <script type="text/javascript" src="../jquery.mockjax.js"></script>
+    <script src="../../src/kendo.core.js"></script>
+    <script src="../../src/kendo.query.js"></script>
+    <script src="../../src/kendo.datasource.js"></script>
+    <link rel="stylesheet" href="../qunit.css" type="text/css" />
+
+    <body>
+        <h1 id="qunit-header">QUnit example</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var RemoteTransport =  kendo.data.RemoteTransport;
+
+            module("RemoteTransport", {
+                setup: function() {
+                    $.mockjaxSettings.contentType = 'text/json';
+                    $.mockjaxSettings.responseTime = 0;
+                },
+                teardown: function() {
+                    $.mockjaxClear()
+                }
+            });
+
+            test("read calls $.ajax", function() {
+                var transport = new RemoteTransport({
+                        read: {
+                            url: "foo"
+                        }
+                    });
+
+                $.mockjax({
+                    url: "foo",
+                    response: function() {
+                        ok(true);
+                        start();
+                    }
+                });
+                stop(1000);
+                transport.read();
+            });
+
+            test("read passes its options to $.ajax", function() {
+                var transport = new RemoteTransport({
+                        read: {
+                        }
+                    });
+
+                $.mockjax({
+                    url: "foo",
+                    response: function() {
+                        ok(true);
+                        start();
+                    }
+                });
+                stop(1000);
+                transport.read({ url: "foo" });
+            });
+
+            test("read passes options.data to its dialect", function() {
+                var dialectWasCalled = false,
+                    transport = new RemoteTransport({
+                        read: {
+                            url: "foo"
+                        },
+                        dialect: {
+                            read: function() {
+                                dialectWasCalled = true;
+                            }
+                        }
+                    });
+
+                $.mockjax({
+                    url: "foo",
+                    response: function() {
+                        ok(dialectWasCalled);
+                        start();
+                    }
+                });
+                stop(1000);
+                transport.read({ url: "foo" });
+            });
+
+            test("read passes constructor options.read.data to its dialect", function() {
+                var data,
+                    transport = new RemoteTransport({
+                        read: {
+                            url: "foo",
+                            data: {
+                                foo: "bar"
+                            }
+                        },
+                        dialect: {
+                            read: function() {
+                                data = arguments[0];
+                                return data;
+                            }
+                        }
+                    });
+
+                $.mockjax({
+                    url: "foo",
+                    response: function() {
+                        equal(data.foo, "bar");
+                        equal(data.baz, "moo");
+                        start();
+                    }
+                });
+                stop(1000);
+                transport.read({ url: "foo", data: { baz: "moo" } });
+            });
+
+            test("string options are treated as url", function() {
+                var transport = new RemoteTransport({
+                        read: "foo"
+                    });
+
+                $.mockjax({
+                    url: "foo",
+                    response: function() {
+                        ok(true);
+                        start();
+                    }
+                });
+                stop(1000);
+                transport.read();
+            });
+
+            test("read calls the success handler when the ajax response is returned", function() {
+                var transport = new RemoteTransport({
+                        read: "foo"
+                    });
+
+                transport.success = function() {
+                    ok(true);
+                    start();
+                }
+
+                $.mockjax({
+                    url: "foo"
+                });
+                stop(1000);
+                transport.read();
+            });
+
+            test("sorting", function() {
+                var transport = new RemoteTransport({
+                        read: "foo"
+                    }),
+                    view;
+
+                transport.success = function() {
+                    view = arguments[1];
+                    start();
+                    equal(view.length, 2);
+                    equal(view[0].age, 2);
+                    equal(view[1].age, 1);
+                }
+
+                $.mockjax({
+                    url: "foo",
+                    responseText: '[{"age": 1}, {"age": 2}]'
+                });
+
+                transport.read( { sort: { field: "age", dir: "desc" } } );
+                stop(1000);
+            });
+
+            test("paging", function() {
+                var transport = new RemoteTransport({
+                        read: "foo"
+                    }),
+                    view;
+
+                transport.success = function() {
+                    view = arguments[1];
+                    start();
+                    equal(view.length, 1);
+                    equal(view[0].age, 2);
+                }
+
+                $.mockjax({
+                    url: "foo",
+                    responseText: '[{"age": 1}, {"age": 2}]'
+                });
+
+                transport.read( { page: 2, pageSize: 1 } );
+                stop(1000);
+            });
+
+            test("data is not sorted if serverSorting = true", function() {
+                var transport = new RemoteTransport({
+                        read: "foo",
+                        serverSorting: true
+                    });
+
+                transport.success = function(data, view) {
+                    start();
+                    equal(view, data);
+                };
+
+                $.mockjax({
+                    url: "foo",
+                    responseText: '[{"age": 1}, {"age": 2}]'
+                });
+
+                transport.read( { sort: { field: "age", dir: "desc" } } );
+                stop(1000);
+            });
+
+            test("data is not paged if serverPaging = true", function() {
+                var transport = new RemoteTransport({
+                        read: "foo",
+                        serverPaging: true
+                    });
+
+                transport.success = function(data, view) {
+                    start();
+                    equal(view, data);
+                };
+
+                $.mockjax({
+                    url: "foo",
+                    responseText: '[{"age": 1}, {"age": 2}]'
+                });
+
+                transport.read( { page: 2, pageSize: 1 } );
+                stop(1000);
+            });
+
+/*
+            test("paging is after sorting", function() {
+                var transport = new RemoteTransport();
+
+                var view;
+
+                transport.success = function() {
+                    view = arguments[1];
+                };
+                transport.read( { page: 2, pageSize: 1, sort: { field: "age", dir: "desc" } } );
+                equal(view[0].age, 1);
+            });
+
+            test("original data is not modified", function() {
+                var data = [{age: 1}, {age: 2}];
+
+                var transport = new RemoteTransport();
+
+                var view;
+
+                transport.success = function() {
+                    view = arguments[0];
+                };
+
+                transport.read( { page: 2, pageSize: 1, sort: { field: "age", dir: "desc" } } );
+                ok(view === data);
+            });
+*/        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>
+
+

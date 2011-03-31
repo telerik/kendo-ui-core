@@ -427,6 +427,16 @@
 
                 equal(dataSource.data(), dataSource.view());
             });
+
+            test("remote transport is initialized if data is not set", function() {
+                var dataSource = new DataSource({
+                    transport: {
+                        read: "foo"
+                    }
+                });
+
+                equal(dataSource.transport.settings.read.url, "foo");
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
