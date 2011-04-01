@@ -28,7 +28,7 @@
 
         <script>
             var dataSource = new kendo.data.DataSource({ 
-                serverSorting: false,
+                serverSorting: true,
                 transport: {
                     read: {
                         url: "/Telerik.Mvc.Examples/Grid/_FirstLook",
@@ -37,9 +37,8 @@
                     dialect: {
                         read: function(data) {
                             var result = {};
-                            
                             if (data.sort) {
-                                result.orderBy = data.sort.field + '-' + data.sort.dir;
+                                result.orderBy = data.sort[0].field + '-' + data.sort[0].dir;
                             }
                             return result;
                         }
