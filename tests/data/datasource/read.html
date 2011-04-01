@@ -134,6 +134,19 @@
                 equal(view.length, 3);
                 equal(view[0], 1);
             });
+
+            test("read does not sort if sort is set and serverSorting = true", function() {
+                var dataSource = new DataSource({
+                    data: [{ id:1, bar: "foo" },{ id: 2, bar: "baz" }],
+                    sort: { field: "age", dir: "desc"},
+                    serverSorting: true
+                });
+
+                dataSource.read();
+                var view = dataSource.view();
+                equal(view[0].bar, "foo");
+            });
+
        </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
