@@ -62,6 +62,30 @@
     $(document).ready(function(){
          var mainPhotos = new window.listview({element: $("#mainPhotoStrip"), template: "<img src='http://farm<#=farm#>.static.flickr.com/<#=server#>/<#=id#>_<#=secret#>_t.jpg'>", onItemBound: itemBound});
 
+        var dataSource = new kendo.data.DataSource({ 
+                serverSorting: false,
+                transport: {
+                    read: {
+                        url: service,
+                        type: "GET"
+                    },
+                    dialect: {
+                        read: function(data) {
+                            var result = {};
+                            if (data.sort) {
+                                result.orderBy = data.sort[0].field + '-' + data.sort[0].dir;
+                            }
+                            return result;
+                        }
+                    },
+                    reader: {
+                        data: function(result) {
+                            return result.photos.photo;
+                        }
+                    }
+                }
+            });
+
         function search(text, page) {
             var params = {
                 nojsoncallback : 1,
@@ -85,7 +109,21 @@
 
         $('.i-search').click(function(e){
             e.preventDefault();
+            var params = {
+                nojsoncallback : 1,
+                text: $("#searchBox").val(),
+                extras: "owner_name,tags",
+                per_page: 30,
+                page: 1
+            }
+            //dataSource.transport.read.url = buildAuthMethod(service, "flickr.photos.search", params);
+            //dataSource.read();
             search($("#searchBox").val(), 1);
+        });
+
+        dataSource.bind("kendo:change", function(){
+            debugger;
+            mainPhotos(this.view());
         });
     });
 })(jQuery);
