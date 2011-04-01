@@ -2,12 +2,102 @@
 <html>
     <head>
         <title>Chart Playground</title>
-        <script src="../../jquery-1.5.1.js"></script>
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.chart.js"></script>
     </head>
     <body>
         <script type="text/javascript">
             var svgNS = "http://www.w3.org/2000/svg";
 
+            var SVGElement = function(element) {
+                this.element = element;
+            }
+
+            $.extend(SVGElement.prototype, {
+                text: function(value) {
+                    this.element.textContent = value;
+                }
+            });
+
+            var SVGRenderer = function(container) {
+                var that = this,
+                    options = $.extend(SVGRenderer.prototype.defaults, options),
+                    element = document.createElementNS(svgNS, "svg");
+
+                element.setAttributeNS(null, "width", options.width);
+                element.setAttributeNS(null, "height", options.height);
+                $(container).append(element);
+
+                that.element = element;
+                that.options = options;
+            }
+
+            $.extend(SVGRenderer.prototype, {
+                defaults: {
+                    width: "100%",
+                    height: "100%"
+                },
+
+                group: function() {
+                    var that = this,
+                        group = that._createElement("g");
+
+                    that.element.appendChild(group.element);
+                    return group;
+                },
+
+                desc: function(text, parentElement) {
+                    var that = this,
+                        parentNode = parentElement ? parentElement.element : that.element,
+                        desc = that._createElement("desc");
+
+                    desc.text(text);
+
+                    parentNode.appendChild(desc.element);
+                    return desc;
+                },
+
+                text: function(text, parentElement, fontOptions) {
+                    var that = this,
+                        parentNode = parentElement ? parentElement.element : that.element,
+                        textElement = that._createElement("text", fontOptions);
+
+                    textElement.text(text);
+
+                    parentNode.appendChild(textElement.element);
+                    return textElement;
+                },
+
+                _createElement: function(tagName, attributes) {
+                    var element = document.createElementNS(svgNS, tagName);
+                    for (var attr in attributes) {
+                        element.setAttribute(attr, attributes[attr]);
+                    }
+                    return new SVGElement(element);
+                }
+            });
+
+            function ChartTitle(renderer, options) {
+                var that = this,
+                    element = renderer.group();
+
+                var desc = renderer.desc("Chart Title", element);
+                var text = renderer.text(options.text, element, options.font);
+            }
+
+            $(document).ready(function() {
+                var renderer = new SVGRenderer("#container"),
+                    chartTitle = new ChartTitle(renderer, {
+                        "text": "Title",
+                        "font": {
+                            "font-family": "Verdana",
+                            "font-size": "32px"
+                        }
+                    });
+            });
+
+/*
             var DrawingSurface = function(container, options) {
                 var that = this;
                 that.options = $.extend(DrawingSurface.prototype.defaults, options);
@@ -148,7 +238,8 @@
                 } else {
                     
                 }
-            }
+                }
+*/
 
         </script>
 
