@@ -93,6 +93,7 @@
                 serverPaging: options.serverPaging,
                 _pageSize: options.pageSize,
                 _page: options.page,
+                _sort: options.sort,
                 _data: [],
                 _view: []
             }),
@@ -135,6 +136,10 @@
             if (that.serverPaging !== true) {
                 options.page = that._page;
                 options.pageSize = that._pageSize;
+            }
+
+            if (that.serverSorting !== true) {
+                options.sort = that._sort;
             }
 
             that._view = process(data, options);
