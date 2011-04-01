@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+    <head>
+        <title>ToKenDo</title>
+
+        <script src="../src/kendo.loader.js"></script>
+        <script>
+            var kendo = window.kendo = window.kendo || {},
+                mobile = kendo.mobile = kendo.mobile || {};
+
+            mobile.Application = function(config) {};
+            mobile.ScrollableView = function(config) {};
+            mobile.List = function(element) {
+                this.element = element;
+            };
+            mobile.List.prototype = {
+                bind: function(data) {
+                    for (var i = 0, len = data.length; i < len; i++) {
+                        body += "<tr>";
+                            for (var j = 0, length = fields.length; j < length; j++) {
+                                body += "<td>" + data[i][fields[j]] + "</td>";
+                            }
+                        body += "</tr>";
+                    }
+
+                    $(this.element).html($(body));
+                }
+            };
+
+            var app = new mobile.Application({
+                defaultView: "ListTasks",
+                views: {
+                    "ListTasks": new mobile.ScrollableView({
+                        create: function(context) {
+                            var listTodoItems = new mobile.List();
+
+                            var dataSource = new kendo.data.DataSource({
+                                serverSorting: true,
+                                transport: {
+                                    read: {
+                                        url: "/Telerik.Mvc.Examples/Grid/_FirstLook",
+                                        type: "POST"
+                                    },
+                                    dialect: {
+                                        read: function(data) {
+                                            var result = {};
+
+                                            if (data.sort) {
+                                                result.orderBy = data.sort[0].field + '-' + data.sort[0].dir;
+                                            }
+
+                                            return result;
+                                        }
+                                    },
+                                    reader: {
+                                        data: function(result) {
+                                            return result.data;
+                                        }
+                                    }
+                                }
+                            });
+
+                            dataSource.bind("kendo:change", function(){
+                                listTodoItems.bind(this.view());
+                            });
+
+                            dataSource.read();
+
+                            context.add(listTodoItems);
+                        }
+                    })
+                }
+            });
+        </script>
+    </head>
+    <body>
+
+    </body>
+</html>
