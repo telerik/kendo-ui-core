@@ -1,0 +1,166 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+<svg width="780px" height="570px" version="1.1" xmlns="http://www.w3.org/2000/svg">
+
+<!-- Composition -->
+<svg width="780px" height="570px" version="1.1" xmlns="http://www.w3.org/2000/svg" style="display: none">
+    <g>
+        <title>
+            Sales by region
+        </title>
+        <g>
+            <desc>Chart Title</desc>
+            <text x="0" y="0" font-family="Verdana" font-size="55">
+                Title
+            </text>
+        </g>
+        <g>
+            <desc>X-Axis</desc>
+            <text>350</text>
+            <text>300</text>
+            <text>250</text>
+            <text>200</text>
+            <text>150</text>
+            <text>100</text>
+            <text>50</text>
+            <text>0</text>
+        </g>
+        <g>
+            <desc>Chart Area</desc>
+        </g>
+        <g>
+            <desc>Legend</desc>
+            <rect width="10" height="10" x="0" y="10" fill="blue" />
+            <text x="15" y="20" font-family="Verdana" font-size="14">
+                Value
+            </text>
+        </g>
+        <g>
+            <desc>Y-Axis</desc>
+            <text>A</text>
+            <text>B</text>
+            <text>C</text>
+        </g>
+    </g>
+</svg>
+
+<!-- Layout -->
+<svg width="780px" height="570px" version="1.1" xmlns="http://www.w3.org/2000/svg" style="display: none">
+    <g>
+        <title>
+            Sales by region
+        </title>
+        <g transform="translate(355, 38)">
+            <!-- translate: x += W - titleWidth/2; y += titleHeight -->
+            <desc>Chart Title</desc>
+            <!-- Title is placed in top-center -->
+            <text font-family="Verdana" font-size="32">
+                Title
+            </text>
+        </g>
+        <g transform="translate(0, 38)">
+            <!-- translate: x += left axis margin; y += titleHeight -->
+            <desc>Y-Axis</desc>
+            <text>350</text>
+            <text>300</text>
+            <text>250</text>
+            <text>200</text>
+            <text>150</text>
+            <text>100</text>
+            <text>50</text>
+            <text>0</text>
+        </g>
+        <g transform="translate(25, 38)">
+            <!-- translate: x += total axis axis width; y += titleHeight -->
+            <desc>Chart Area</desc>
+
+            <!-- width = W - (left axis width + legend width); height = H - (title height + bottom axis height) -->
+            <rect width="701" height="513" fill="blue" opacity="0.1" />
+        </g>
+        <g transform="translate(725, 276.5)">
+            <!-- translate: x += W - legendWidth; y += H/2 - legendHeight/2 -->
+            <desc>Legend</desc>
+            <rect width="10" height="10" x="0" y="10" fill="blue" />
+            <text x="15" y="20" font-family="Verdana" font-size="14">
+                Value
+            </text>
+        </g>
+        <g transform="translate(25, 551)">
+            <!-- translate: x += (left axis width); y += (title height) + (chart area height) -->
+            <desc>X-Axis</desc>
+            <text>A</text>
+            <text>B</text>
+            <text>C</text>
+        </g>
+    </g>
+</svg>
+
+<!-- Rendering -->
+<svg width="780px" height="570px" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <g>
+        <title>
+            Sales by region
+        </title>
+        <g transform="translate(355, 38)">
+            <!-- translate: x += W - titleWidth/2; y += titleHeight -->
+            <desc>Chart Title</desc>
+            <!-- Title is placed in top-center -->
+            <text font-family="Verdana" font-size="32">
+                Title
+            </text>
+        </g>
+        <g transform="translate(0, 38)">
+            <!-- translate: x += left axis margin; y += titleHeight -->
+            <desc>Y-Axis</desc>
+            <line x1="25" y1="0" x2="25" y2="513" stroke="black" />
+
+            <!-- Tick marks: x1 = (left axis width) - (tick size); x2 = (left axis width); y1, y2 = [every (left axis height) / (tick count)] -->
+            <line x1="20" y1="0.5" x2="25" y2="0.5" stroke="black" /> <!-- First line tick is moved 1/2 stroke down to compensate it -->
+            <line x1="20" y1="73.29" x2="25" y2="73.29" stroke="black" />
+            <line x1="20" y1="146.58" x2="25" y2="146.58" stroke="black" />
+            <line x1="20" y1="219.87" x2="25" y2="219.87" stroke="black" />
+            <line x1="20" y1="293.16" x2="25" y2="293.16" stroke="black" />
+            <line x1="20" y1="366.45" x2="25" y2="366.45" stroke="black" />
+            <line x1="20" y1="439.74" x2="25" y2="439.74" stroke="black" />
+            <line x1="20" y1="512.5" x2="25" y2="512.5" stroke="black" /> <!-- Last line tick is moved 1/2 stroke up to compensate it -->
+
+            <!-- parseInt(label.styles.lineHeight) * 0.9 - label.getBBox().height / 2-->
+            <text>350</text>
+            <text>300</text>
+            <text>250</text>
+            <text>200</text>
+            <text>150</text>
+            <text>100</text>
+            <text>50</text>
+            <text x="20" y="512.5" text-anchor="end">
+                <tspan>0x</tspan>
+            </text>
+            <text>_</text>
+        </g>
+        <g transform="translate(25, 38)">
+            <!-- translate: x += total axis axis width; y += titleHeight -->
+            <desc>Chart Area</desc>
+
+            <!-- width = W - (left axis width + legend width); height = H - (title height + bottom axis height) -->
+            <rect width="701" height="513" fill="blue" opacity="0.1" />
+        </g>
+        <g transform="translate(725, 276.5)">
+            <!-- translate: x += W - legendWidth; y += H/2 - legendHeight/2 -->
+            <desc>Legend</desc>
+            <rect width="10" height="10" x="0" y="10" fill="blue" />
+            <text x="15" y="20" font-family="Verdana" font-size="14">
+                Value
+            </text>
+        </g>
+        <g transform="translate(25, 551)">
+            <!-- translate: x += (left axis width); y += (title height) + (chart area height) -->
+            <desc>X-Axis</desc>
+            <text>A</text>
+            <text>B</text>
+            <text>C</text>
+        </g>
+    </g>
+</svg>
+
+</svg>
