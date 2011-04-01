@@ -8,21 +8,24 @@
     <script src="qunit-runner.js"></script>
     <script>
         var tests = [{
-            page: "loader/unit.html",
-            title: "loader unit tests"
-        }, {
-            page: "core/observable.html",
-            title: "observable"
-        }, {
-            page: "data/datasource.html",
-            title: "datasource"
-        }, {
-            page: "data/query.html",
-            title: "query"
-        }, {
-            page: "data/remotetransport.html",
-            title: "remote transport"
-        }],
+                page: "loader/unit.html",
+                title: "loader unit tests"
+            }, {
+                page: "core/observable.html",
+                title: "observable"
+            }, {
+                page: "data/datasource.html",
+                title: "datasource"
+            }, {
+                page: "data/query.html",
+                title: "query"
+            }, {
+                page: "data/remotetransport.html",
+                title: "remote transport"
+            }, {
+                page: "mobile/list.html",
+                title: "mobile list"
+            }],
             sequential = true,
             runnerDone = function (failures, total) {
                 $('<p id="qunit-testresult" class="result" />')
