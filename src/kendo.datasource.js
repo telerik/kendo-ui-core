@@ -20,7 +20,7 @@
             pageSize = options.pageSize,
             sort = options.sort;
 
-        if (sort !== undefined) {
+        if (sort) {
             query = query.sort(sort);
         }
 
@@ -93,7 +93,6 @@
                 serverPaging: options.serverPaging,
                 _pageSize: options.pageSize,
                 _page: options.page,
-                _sort: options.sort,
                 _data: [],
                 _view: []
             }),
@@ -252,16 +251,22 @@
             return this._view;
         },
         query: function(options) {
-            var remote = this.serverSorting || this.serverPaging;
+            var that = this,
+                remote = that.serverSorting || that.serverPaging;
 
-            this._pageSize = options.pageSize;
-            this._page = options.page;
-            this._sort = options.sort;
+            that._pageSize = options.pageSize;
+            that._page = options.page;
+            that._sort = options.sort;
+
+            if (options.sort) {
+                that._sort = options.sort = kendo.data.Query.expandSort(options.sort);
+            }
+
             if (remote) {
-                this.read(options);
+                that.read(options);
             } else {
-                this._view = process(this._data, options);
-                this.trigger("kendo:change");
+                that._view = process(that._data, options);
+                that.trigger("kendo:change");
             }
         },
         page: function() {
@@ -274,8 +279,6 @@
             return this._sort;
         }
     });
-
-    kendo.data = kendo.data || {};
 
     extend(kendo.data, {
         DataSource: DataSource,
