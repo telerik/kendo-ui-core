@@ -4,6 +4,7 @@
     <script type="text/javascript" src="../../qunit.js"></script>
     <script type="text/javascript" src="../../qunit-runner.js"></script>
     <script src="../../../src/kendo.core.js"></script>
+    <script src="../../../src/kendo.query.js"></script>
     <script src="../../../src/kendo.datasource.js"></script>
     <link rel="stylesheet" href="../../qunit.css" type="text/css" />
 
@@ -107,7 +108,33 @@
                 equal(dataSource.view().length, 0);
             });
 
-        </script>
+            test("read pages if pageSize is set", function() {
+                var dataSource = new DataSource({
+                    data: [1,2,3],
+                    page: 2,
+                    pageSize: 1
+                });
+
+                dataSource.read();
+                var view = dataSource.view();
+                equal(view.length, 1);
+                equal(view[0], 2);
+            });
+
+            test("read does not page if pageSize is set and serverPaging = true", function() {
+                var dataSource = new DataSource({
+                    data: [1,2,3],
+                    page: 2,
+                    pageSize: 1,
+                    serverPaging: true
+                });
+
+                dataSource.read();
+                var view = dataSource.view();
+                equal(view.length, 3);
+                equal(view[0], 1);
+            });
+       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
     </body>

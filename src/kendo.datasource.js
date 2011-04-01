@@ -91,6 +91,8 @@
                 schema: options.schema,
                 serverSorting: options.serverSorting,
                 serverPaging: options.serverPaging,
+                _pageSize: options.pageSize,
+                _page: options.page,
                 _data: [],
                 _view: []
             }),
@@ -125,9 +127,17 @@
             this.transport.read({ data: options || {} });
         },
         success: function(data) {
-            var that = this;
+            var that = this,
+                options = {};
 
-            that._data = this._view = data;
+            that._data = data;
+
+            if (that.serverPaging !== true) {
+                options.page = that._page;
+                options.pageSize = that._pageSize;
+            }
+
+            that._view = process(data, options);
 
             that.idMap = idMap(data, that.id);
 
