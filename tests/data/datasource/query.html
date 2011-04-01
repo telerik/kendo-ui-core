@@ -88,9 +88,21 @@
                     data: data
                 });
 
-                var sort = { dir: "asc" };
-                dataSource.query({ sort: sort });
-                equal(dataSource.sort(), sort);
+                dataSource.query({ sort: { field: "foo", dir: "asc" }});
+                ok($.isArray(dataSource.sort()));
+                equal(dataSource.sort()[0].field, "foo");
+                equal(dataSource.sort()[0].dir, "asc");
+            });
+
+            test("query sets sort when array is passed", function() {
+                var dataSource = new DataSource({
+                    data: data
+                });
+
+                dataSource.query({ sort: [{ field: "foo", dir: "asc" }, { field: "bar", dir: "desc" } ]});
+                equal(dataSource.sort().length, 2);
+                equal(dataSource.sort()[1].field, "bar");
+                equal(dataSource.sort()[1].dir, "desc");
             });
 
            test("paging", function() {

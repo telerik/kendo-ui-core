@@ -47,6 +47,10 @@
         this.data = data;
     }
 
+    Query.expandSort = function(field, dir) {
+        var descriptor = typeof field === "string" ? { field: field, dir: dir } : field;
+        return $.isArray(descriptor) ? descriptor : (descriptor !== undefined ? [descriptor] : []);
+    }
     Query.prototype = {
         toArray: function () {
             return this.data;
@@ -69,8 +73,7 @@
         sort: function(field, dir) {
             var idx,
                 length,
-                descriptor = typeof field === "string" ? { field: field, dir: dir } : field,
-                descriptors = $.isArray(descriptor) ? descriptor : [descriptor],
+                descriptors = Query.expandSort(field, dir),
                 comparers = [];
 
             for (idx = 0, length = descriptors.length; idx < length; idx++) {
