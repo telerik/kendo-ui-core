@@ -1,28 +1,53 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <script src="../src/jquery.js"></script>
-    <link rel="stylesheet" href="qunit.css" media="screen" />
-    <link rel="stylesheet" href="qunit-runner.css" media="screen" />
-    <script src="qunit.js"></script>
-    <script src="qunit-runner.js"></script>
-    <script>
-        var tests = [{
+    <head>
+        <script src="../src/jquery.js"></script>
+        <link rel="stylesheet" href="qunit.css" media="screen" />
+        <link rel="stylesheet" href="qunit-runner.css" media="screen" />
+        <script src="qunit.js"></script>
+        <script src="qunit-runner.js"></script>
+        <script>
+            var tests = [{
                 page: "loader/unit.html",
                 title: "loader unit tests"
-            }, {
+                }, {
                 page: "core/observable.html",
                 title: "observable"
-            }, {
-                page: "data/datasource.html",
-                title: "datasource"
-            }, {
+                }, {
+                page: "data/datasource/read.html",
+                title: "datasource.read"
+            },
+            {
+                page: "data/datasource/initialization.html",
+                title: "datasource initialization"
+            },
+            {
+                page: "data/datasource/create.html",
+                title: "datasource.create"
+            },
+            {
+                page: "data/datasource/destroy.html",
+                title: "datasource.destroy"
+            },
+            {
+                page: "data/datasource/update.html",
+                title: "datasource.update"
+            },
+            {
+                page: "data/datasource/find.html",
+                title: "datasource.find / datasource.at"
+            },
+            {
+                page: "data/datasource/query.html",
+                title: "datasource.query"
+            },
+            {
                 page: "data/query.html",
                 title: "query"
-            }, {
+                }, {
                 page: "data/remotetransport.html",
                 title: "remote transport"
-            }, {
+                }, {
                 page: "mobile/list.html",
                 title: "mobile list"
             }],
@@ -37,21 +62,21 @@
                 .appendTo("body > div");
             };
 
-        var start = +new Date();
+            var start = +new Date();
 
-        QUnit.run(tests, sequential, runnerDone);
-    </script>
-</head>
-<body>
-    <div>
-        <h1 id="qunit-header">
-            TEST RUNNER</h1>
-        <h2 id="qunit-banner">
-        </h2>
-        <h2 id="qunit-runner-userAgent">
-        </h2>
-        <div id="runner-test-page-container">
+            QUnit.run(tests, sequential, runnerDone);
+        </script>
+    </head>
+    <body>
+        <div>
+            <h1 id="qunit-header">
+                TEST RUNNER</h1>
+            <h2 id="qunit-banner">
+            </h2>
+            <h2 id="qunit-runner-userAgent">
+            </h2>
+            <div id="runner-test-page-container">
+            </div>
         </div>
-    </div>
-</body>
+    </body>
 </html>

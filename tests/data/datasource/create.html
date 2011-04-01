@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <script src="../../../src/jquery.js"></script>
+    <script type="text/javascript" src="../../qunit.js"></script>
+    <script type="text/javascript" src="../../qunit-runner.js"></script>
+    <script src="../../../src/kendo.core.js"></script>
+    <script src="../../../src/kendo.datasource.js"></script>
+    <link rel="stylesheet" href="../../qunit.css" type="text/css" />
+
+    <body>
+        <h1 id="qunit-header">QUnit example</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var reader = {
+                id: function(record) {
+                    return record.id;
+                },
+                data: function(data) {
+                    return data;
+                }
+            },
+            data = [],
+            DataSource = kendo.data.DataSource;
+
+            function setup(source) {
+                data = source || [{ id:1, bar: "foo" },{ id: 2, bar: "foo" }];
+
+                var dataSource = new DataSource( {
+                    reader: reader,
+                    data: data
+                });
+
+                dataSource.read();
+                return dataSource;
+            }
+
+            test("create appends the new item to the data array", function() {
+                var dataSource = setup();
+
+                var result = dataSource.create();
+
+                ok(dataSource.data().pop() === result);
+            });
+
+            test("create populates the idmap", function() {
+                var dataSource = setup();
+
+                var result = dataSource.create();
+
+                equal(dataSource.idMap[result.id], dataSource.data().length - 1);
+            });
+
+            test("create inserts the new item at the specified index", function() {
+                var dataSource = setup();
+
+                var result = dataSource.create(0);
+
+                equal(dataSource.data()[0], result);
+            });
+
+            test("create updates the idmap", function() {
+                var dataSource = setup();
+
+                var result = dataSource.create(0);
+                equal(dataSource.idMap[result.id], 0);
+                equal(dataSource.idMap[1], 1);
+                equal(dataSource.idMap[2], 2);
+            });
+
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<script src="../../../src/jquery.js"></script>
+    <script type="text/javascript" src="../../qunit.js"></script>
+    <script type="text/javascript" src="../../qunit-runner.js"></script>
+    <script src="../../../src/kendo.core.js"></script>
+    <script src="../../../src/kendo.datasource.js"></script>
+    <link rel="stylesheet" href="../../qunit.css" type="text/css" />
+
+    <body>
+        <h1 id="qunit-header">QUnit example</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var reader = {
+                id: function(record) {
+                    return record.id;
+                },
+                data: function(data) {
+                    return data;
+                }
+            },
+            data = [],
+            DataSource = kendo.data.DataSource;
+
+            function setup(source) {
+                data = source || [{ id:1, bar: "foo" },{ id: 2, bar: "foo" }];
+
+                var dataSource = new DataSource( {
+                    reader: reader,
+                    data: data
+                });
+
+                dataSource.read();
+                return dataSource;
+            }
+
+            test("find returns the record based on its id", function() {
+                var dataSource = setup();
+                equal(dataSource.find(1), data[0]);
+            });
+
+            test("find returns the record based on its index when the reader does not define id", function() {
+                data = [ { id: 1}, { id: 2} ];
+                var dataSource = new DataSource( {
+                    schema: {
+                    },
+                    data: data
+                });
+                dataSource.read();
+                equal(dataSource.find(0), data[0]);
+            });
+
+            test("at returns the record at the specified index", function() {
+                var dataSource = setup();
+
+                equal(dataSource.at(0), dataSource.at(0));
+            });
+
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>
