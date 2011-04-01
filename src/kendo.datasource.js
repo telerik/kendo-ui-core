@@ -91,10 +91,12 @@
                 schema: options.schema,
                 serverSorting: options.serverSorting,
                 serverPaging: options.serverPaging,
-                _pageSize: options.pageSize,
-                _page: options.page,
                 _data: [],
-                _view: []
+                _view: [],
+                _state: {
+                    pageSize: options.pageSize,
+                    page: options.page
+                }
             }),
             id = that.schema.id,
             transport = options.transport;
@@ -124,6 +126,7 @@
             serverPaging: false
         },
         read: function(options) {
+            extend(this._state, options || {});
             this.transport.read({ data: options || {} });
         },
         success: function(data) {
@@ -133,12 +136,12 @@
             that._data = data;
 
             if (that.serverPaging !== true) {
-                options.page = that._page;
-                options.pageSize = that._pageSize;
+                options.page = that._state.page;
+                options.pageSize = that._state.pageSize;
             }
 
             if (that.serverSorting !== true) {
-                options.sort = that._sort;
+                options.sort = that._state.sort;
             }
 
             that._view = process(data, options);
@@ -254,12 +257,10 @@
             var that = this,
                 remote = that.serverSorting || that.serverPaging;
 
-            that._pageSize = options.pageSize;
-            that._page = options.page;
-            that._sort = options.sort;
+            extend(that._state, options || {});
 
             if (options.sort) {
-                that._sort = options.sort = kendo.data.Query.expandSort(options.sort);
+                that._state.sort = options.sort = kendo.data.Query.expandSort(options.sort);
             }
 
             if (remote) {
@@ -270,13 +271,13 @@
             }
         },
         page: function() {
-            return this._page;
+            return this._state.page;
         },
         pageSize: function() {
-            return this._pageSize;
+            return this._state.pageSize;
         },
         sort: function() {
-            return this._sort;
+            return this._state.sort;
         }
     });
 
