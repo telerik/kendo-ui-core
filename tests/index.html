@@ -8,56 +8,49 @@
         <script src="qunit-runner.js"></script>
         <script>
             var tests = [{
-                page: "loader/unit.html",
-                title: "loader unit tests"
+                    page: "loader/unit.html",
+                    title: "loader unit tests"
                 }, {
-                page: "core/observable.html",
-                title: "observable"
+                    page: "core/observable.html",
+                    title: "observable"
                 }, {
-                page: "data/datasource/read.html",
-                title: "datasource.read"
-            },
-            {
-                page: "data/datasource/initialization.html",
-                title: "datasource initialization"
-            },
-            {
-                page: "data/datasource/create.html",
-                title: "datasource.create"
-            },
-            {
-                page: "data/datasource/destroy.html",
-                title: "datasource.destroy"
-            },
-            {
-                page: "data/datasource/update.html",
-                title: "datasource.update"
-            },
-            {
-                page: "data/datasource/find.html",
-                title: "datasource.find / datasource.at"
-            },
-            {
-                page: "data/datasource/query.html",
-                title: "datasource.query"
-            },
-            {
-                page: "data/query.html",
-                title: "query"
+                    page: "data/datasource/read.html",
+                    title: "datasource.read"
                 }, {
-                page: "data/remotetransport.html",
-                title: "remote transport"
+                    page: "data/datasource/initialization.html",
+                    title: "datasource initialization"
                 }, {
-                page: "mobile/list.html",
-                title: "mobile list"
-            }],
+                    page: "data/datasource/create.html",
+                    title: "datasource.create"
+                }, {
+                    page: "data/datasource/destroy.html",
+                    title: "datasource.destroy"
+                }, {
+                    page: "data/datasource/update.html",
+                    title: "datasource.update"
+                }, {
+                    page: "data/datasource/find.html",
+                    title: "datasource.find / datasource.at"
+                }, {
+                    page: "data/datasource/query.html",
+                    title: "datasource.query"
+                }, {
+                    page: "data/query.html",
+                    title: "query"
+                }, {
+                    page: "data/remotetransport.html",
+                    title: "remote transport"
+                }, {
+                    page: "mobile/list.html",
+                    title: "mobile list"
+                }],
             sequential = true,
             runnerDone = function (failures, total) {
                 $('<p id="qunit-testresult" class="result" />')
                 .html([
-                "Tests completed in ", (+new Date()) - start, " milliseconds.<br />",
-                "<span class='passed'>", total - failures, "</span> tests of <span class='total'>", total,
-                    "</span> passed, <span class='failed'>", failures, "</span> failed."
+                    "Tests completed in ", (+new Date()) - start, " milliseconds.<br />",
+                    "<span class='passed'>", total - failures, "</span> tests of <span class='total'>", total,
+                        "</span> passed, <span class='failed'>", failures, "</span> failed."
                 ].join(''))
                 .appendTo("body > div");
             };

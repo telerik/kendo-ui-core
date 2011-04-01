@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html>
-    <script src="../../src/jquery.js"></script>
-    <script src="../../src/kendo.core.js"></script>
-    <script type="text/javascript" src="../qunit.js"></script>
-    <script type="text/javascript" src="../qunit-runner.js"></script>
-    <link rel="stylesheet" href="../qunit.css" type="text/css" />
-
+    <head>
+        <title>kendo.core.Observable Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <link href="../qunit.css" rel="stylesheet" />
+    </head>
     <body>
-        <h1 id="qunit-header">QUnit example</h1>
+        <h1 id="qunit-header">kendo.core.Observable Tests</h1>
         <h2 id="qunit-banner"></h2>
         <div id="qunit-testrunner-toolbar"></div>
         <h2 id="qunit-userAgent"></h2>
         <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
 
         <script>
             var Observable = kendo.core.Observable;
@@ -128,10 +131,5 @@
                 equal(observable._list.foo[0], second);
             });
         </script>
-        </script>
-        <div id="qunit-fixture">test markup, will be hidden</div>
-        <ul id="log"></ul>
     </body>
-
 </html>
-
