@@ -42,8 +42,9 @@
     }
 
     LocalTransport.prototype = {
-        read: function() {
-            this.success(this.reader.data(this.data));
+        read: function(options) {
+            var that = this;
+            options.success(that.reader.data(that.data));
         }
     }
 
@@ -55,7 +56,6 @@
         options = extend(that.defaults, options);
         that.settings = options;
         that.dialect = options.dialect;
-        that.success = $.noop;
         that.reader = options.reader || {
             data: function(data) {
                 return data;
@@ -72,16 +72,16 @@
             }
         },
         read: function(options) {
+            options = options || {};
             var that = this,
                 read = that.settings.read,
-                data = $.isFunction(read.data) ? read.data() : read.data;
+                data = $.isFunction(read.data) ? read.data() : read.data,
+                success = options.success || $.noop;
 
             options = extend(true, read, options);
             options.data = that.dialect.read(extend(data, options.data));
             options.success = function(result) {
-                var data = that.reader.data(result);
-
-                that.success(data);
+                success(that.reader.data(result));
             };
             $.ajax(options);
         }
@@ -106,7 +106,6 @@
         kendo.core.Observable.call(that);
 
         that.transport = transport && $.isFunction(transport.read) ? transport : (options.data? new LocalTransport({ data: options.data }):new RemoteTransport(transport));
-        that.transport.success = $.proxy(that.success, that);
         if (id) {
             that.find = function(id) {
                 return that._data[that.idMap[id]];
@@ -135,7 +134,10 @@
                     sort: that._sort
                 };
 
-            this.transport.read({ data: options });
+            that.transport.read({
+                data: options,
+                success: $.proxy(that.success, that)
+            });
         },
         success: function(data) {
             var that = this,
