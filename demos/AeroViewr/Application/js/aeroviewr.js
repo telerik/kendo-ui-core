@@ -62,7 +62,9 @@
     }
 
     $(document).ready(function(){
-         var mainPhotos = new window.listview({element: $("#mainPhotoStrip"), template: "<img src='http://farm<#=farm#>.static.flickr.com/<#=server#>/<#=id#>_<#=secret#>_t.jpg'>", onItemBound: itemBound});
+        var template = "<img src='http://farm<#=farm#>.static.flickr.com/<#=server#>/<#=id#>_<#=secret#>_t.jpg'>";
+        var mainPhotos = new window.listview({element: $("#mainPhotoStrip"), template: template, onItemBound: itemBound});
+        var flatPhotoStrip = new window.listview({element: $("#flatPhotoStrip"), template: template, onItemBound: itemBound});
 
         var dataSource = new kendo.data.DataSource({ 
                 serverSorting: false,
@@ -75,7 +77,7 @@
                         data: function(){
                             var params = {
                                 text: $("#searchBox").val(),
-                                //extras: "owner_name,tags",
+                                extras: "owner_name,tags",
                                 method: "flickr.photos.search",
                                 api_key: app.key,
                                 auth_token: auth.token,
@@ -93,45 +95,13 @@
                 }
             });
 
-        function search(text, page) {
-            var params = {
-                text: text,
-                extras: "owner_name,tags",
-                per_page: 30,
-                page: page
-            }
-            var url = buildAuthMethod(service, "flickr.photos.search", params);
-            $.ajax({
-                url: url,
-                dataType: "json",
-                success: function(data){
-                try {
-                    debugger;
-                    var photos = eval('(' + data + ')').photos.photo;
-                    mainPhotos.bind(photos);
-                } catch (e) {
-                    alert('Error! The requested URL did not return JSON.');
-                    return;
-                }
-                }
-            });
-        }
-
         $('.i-search').click(function(e){
-            e.preventDefault();
-            var params = {
-                nojsoncallback : 1,
-                text: $("#searchBox").val(),
-                extras: "owner_name,tags",
-                per_page: 30,
-                page: 1
-            }
            dataSource.read();
-           //search($("#searchBox").val(), 1);
         });
 
         dataSource.bind("kendo:change", function(){
             mainPhotos.bind(this.view());
+            flatPhotoStrip.bind(this.view());
         });
     });
 })(jQuery);
