@@ -97,7 +97,8 @@
                 _data: [],
                 _view: [],
                 _pageSize: options.pageSize,
-                _page: options.page
+                _page: options.page,
+                _sort: options.sort
             }),
             id = that.schema.id,
             transport = options.transport;
@@ -278,13 +279,33 @@
                 that.trigger("kendo:change");
             }
         },
-        page: function() {
-            return this._page;
+        page: function(val) {
+            var that = this;
+
+            if(val !== undefined) {
+                that.query({ page: val, pageSize: that.pageSize(), sort: that.sort()});
+                return;
+            }
+            return that._page;
         },
-        pageSize: function() {
-            return this._pageSize;
+        pageSize: function(val) {
+            var that = this;
+
+            if(val !== undefined) {
+                that.query({ page: that.page(), pageSize: val, sort: that.sort()});
+                return;
+            }
+
+            return that._pageSize;
         },
-        sort: function() {
+        sort: function(val) {
+            var that = this;
+
+            if(val !== undefined) {
+                that.query({ page: that.page(), pageSize: that.pageSize(), sort: val });
+                return;
+            }
+
             return this._sort;
         }
     });

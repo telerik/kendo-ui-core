@@ -131,6 +131,19 @@
                 equal(view[1].age, 1);
             });
 
+            test("sorting though sort method", function() {
+                var dataSource = new DataSource({
+                    data: [{age: 1}, {age: 2}]
+                });
+                dataSource.read();
+                dataSource.sort( { field: "age", dir: "desc" } );
+                var view = dataSource.view();
+
+                equal(view.length, 2);
+                equal(view[0].age, 2);
+                equal(view[1].age, 1);
+            });
+
             test("paging is after sorting", function() {
                 var dataSource = new DataSource({
                     data: [{age: 1}, {age: 2}]
@@ -201,6 +214,68 @@
 
                 dataSource.query( { page: 2, pageSize: 1 } );
                 stop(1000);
+            });
+
+            test("page should page and persist settings applied through the constructor", function(){
+                var dataSource = new DataSource({
+                    data: [{ age: 1 }, { age: 2 }, { age: 3}],
+                    pageSize: 2,
+                    sort: {
+                        field: "age",
+                        dir: "desc"
+                    }
+                });
+
+                dataSource.read();
+                dataSource.page(2);
+
+                var view = dataSource.view();
+                equal(view.length, 1);
+                equal(view[0].age, 1);
+                equal(dataSource.page(), 2);
+            });
+
+            test("page with no pageSize set should return all data", function(){
+                var dataSource = new DataSource({
+                    data: [{ age: 1 }, { age: 2 }, { age: 3}]
+                });
+
+                dataSource.read();
+                dataSource.page(2);
+
+                var view = dataSource.view();
+                equal(view.length, 3);
+                equal(view[0].age, 1);
+                equal(dataSource.page(), 2);
+            });
+
+            test("pageSize should take given number of items", function(){
+                var dataSource = new DataSource({
+                    data: [{ age: 1 }, { age: 2 }, { age: 3}],
+                    page: 1
+                });
+
+                dataSource.read();
+                dataSource.pageSize(2);
+
+                var view = dataSource.view();
+                equal(view.length, 2);
+                equal(view[0].age, 1);
+                equal(dataSource.pageSize(), 2);
+            });
+
+            test("pageSize without page should return all data", function(){
+                var dataSource = new DataSource({
+                    data: [{ age: 1 }, { age: 2 }, { age: 3}]
+                });
+
+                dataSource.read();
+                dataSource.pageSize(2);
+
+                var view = dataSource.view();
+                equal(view.length, 3);
+                equal(view[0].age, 1);
+                equal(dataSource.pageSize(), 2);
             });
 
         </script>
