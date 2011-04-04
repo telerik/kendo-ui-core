@@ -5,30 +5,30 @@
         Template;
 
     function Observable() {
-        this._list = {};
+        this._handlers = {};
     }
 
     Observable.prototype = {
         bind: function(eventName, handler) {
             var that = this,
-                list = that._list[eventName] || [];
+                handlers = that._handlers[eventName] || [];
 
-            list.push(handler);
+            handlers.push(handler);
 
-            that._list[eventName] = list;
+            that._handlers[eventName] = handlers;
 
             return that;
         },
 
         trigger: function(eventName, parameter) {
             var that = this,
-                list = that._list[eventName],
+                handlers = that._handlers[eventName],
                 idx,
                 length;
 
-            if (list) {
-                for (idx = 0, length = list.length; idx < length; idx++) {
-                    list[idx].call(that, parameter);
+            if (handlers) {
+                for (idx = 0, length = handlers.length; idx < length; idx++) {
+                    handlers[idx].call(that, parameter);
                 }
             }
 
@@ -37,19 +37,19 @@
 
         unbind: function(eventName, handler) {
             var that = this,
-                list = that._list[eventName],
+                handlers = that._handlers[eventName],
                 idx,
                 length;
 
-            if (list) {
+            if (handlers) {
                 if (handler) {
-                    for (idx = 0, length = list.length; idx < length; idx++) {
-                        if (list[idx] === handler) {
-                            list.splice(idx, 1);
+                    for (idx = 0, length = handlers.length; idx < length; idx++) {
+                        if (handlers[idx] === handler) {
+                            handlers.splice(idx, 1);
                         }
                     }
                 } else {
-                    that._list[eventName] = [];
+                    that._handlers[eventName] = [];
                 }
             }
 
@@ -59,20 +59,20 @@
 
     Template = {
         paramName: "data", // name of the parameter of the generated template
-        useWith: true, // whether to put
-        begin: "<%",
-        end: "%>",
+        useWithBlock: true, // whether to wrap the template in a with() block
+        begin: "<%", // the marker which denotes the beginning of executable code
+        end: "%>", // the marker which denotes the end of executable code
         compile: function(template, options) {
             var settings = extend({}, this, options),
                 paramName = settings.paramName,
                 begin = settings.begin,
                 end = settings.end,
-                useWith = settings.useWith,
+                useWithBlock = settings.useWithBlock,
                 functionBody = "var o='';",
                 evalRegExp = new RegExp(begin + "=(.+?)" + end, "g"),
                 quoteRegExp = new RegExp("'(?=.*?" + end + ")", "g");
 
-            functionBody += useWith ? "with(" + paramName + "){" : "";
+            functionBody += useWithBlock ? "with(" + paramName + "){" : "";
 
             functionBody += "o+='";
 
@@ -84,7 +84,7 @@
                 .split(begin).join("';")
                 .split(end).join("o+='");
 
-            functionBody += useWith ? "'}" : "';";
+            functionBody += useWithBlock ? "'}" : "';";
 
             functionBody += "return o;";
 

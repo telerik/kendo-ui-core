@@ -23,7 +23,7 @@
             module("Template", {
                 setup: function() {
                     template.paramName = "data";
-                    template.useWith = true;
+                    template.useWithBlock = true;
                 }
             });
 
@@ -50,15 +50,15 @@
                 equal(t({ bar: "baz" }), "baz");
             });
 
-            test("disabling with", function() {
-                template.useWith = false;
+            test("disabling with block generation", function() {
+                template.useWithBlock = false;
 
                 var t = template.compile("<%= foo %>");
 
                 ok(!/with/.test(t));
             });
 
-            test("with(data)", function() {
+            test("with block generation", function() {
                 var t = template.compile("<%= foo %>");
 
                 ok(/with/.test(t));
@@ -70,7 +70,7 @@
                 equal(t({ bar: "baz" }), "baz");
             });
 
-            test("can specify custom template delimiters", function() {
+            test("can specify custom template markers", function() {
                 var t = template.compile("{{= foo }}", { begin: "{{", end: "}}" });
 
                 equal(t({ foo: "bar" }), "bar");
@@ -83,7 +83,7 @@
                 equal(t({}), "foo");
             });
 
-            test("can execute code with custom template delimiters", function() {
+            test("can execute code with custom template markers", function() {
                 var executed = false,
                     t = template.compile("<# var result = 'foo'; #><#= result #>", { begin: "<#", end: "#>" })
                     console.log(t);
