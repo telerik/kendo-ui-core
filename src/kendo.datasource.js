@@ -78,7 +78,7 @@
                 data = $.isFunction(read.data) ? read.data() : read.data,
                 success = options.success || $.noop;
 
-            options = extend(true, read, options);
+            options = extend(true, {}, read, options);
             options.data = that.dialect.read(extend(data, options.data));
             options.success = function(result) {
                 success(that.reader.data(result));
