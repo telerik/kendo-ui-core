@@ -30,6 +30,8 @@
         var concatString = "",
             keys = [];
 
+        params["callback"] = "jsonFlickrApi";
+
         for (var key in params) {
           if (params.hasOwnProperty(key)) {
             keys.push(key);
@@ -67,16 +69,17 @@
                 transport: {
                     read: {
                         url: service,
+                        cache: true,
                         dataType: "jsonp",
                         jsonpCallback: "jsonFlickrApi",
                         data: function(){
                             var params = {
                                 text: $("#searchBox").val(),
-                                extras: "owner_name,tags",
+                                //extras: "owner_name,tags",
                                 method: "flickr.photos.search",
                                 api_key: app.key,
                                 auth_token: auth.token,
-                                format: "json"
+                                format: "json",
                             }
                             params["api_sig"] = getApiSig(app.secret, params);
                             return params;
@@ -92,24 +95,26 @@
 
         function search(text, page) {
             var params = {
-                nojsoncallback : 1,
                 text: text,
                 extras: "owner_name,tags",
                 per_page: 30,
                 page: page
             }
             var url = buildAuthMethod(service, "flickr.photos.search", params);
-/*
-            $.get(url, function(data){
+            $.ajax({
+                url: url,
+                dataType: "json",
+                success: function(data){
                 try {
+                    debugger;
                     var photos = eval('(' + data + ')').photos.photo;
                     mainPhotos.bind(photos);
                 } catch (e) {
                     alert('Error! The requested URL did not return JSON.');
                     return;
                 }
+                }
             });
-            */
         }
 
         $('.i-search').click(function(e){
@@ -121,13 +126,12 @@
                 per_page: 30,
                 page: 1
             }
-            dataSource.read();
-           // search($("#searchBox").val(), 1);
+           dataSource.read();
+           //search($("#searchBox").val(), 1);
         });
 
         dataSource.bind("kendo:change", function(){
-            alert(1);
-            mainPhotos(this.view());
+            mainPhotos.bind(this.view());
         });
     });
 })(jQuery);
