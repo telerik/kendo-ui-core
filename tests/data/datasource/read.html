@@ -108,6 +108,19 @@
                 equal(dataSource.view().length, 0);
             });
 
+            test("read sorts if sort is set", function() {
+                var dataSource = new DataSource({
+                    data: [{ id:1, bar: "foo" },{ id: 2, bar: "baz" }],
+                    sort: { field: "bar", dir: "asc"},
+                });
+
+                dataSource.read();
+                var view = dataSource.view();
+                equal(view.length, 2);
+                equal(view[0].bar, "baz");
+                equal(view[1].bar, "foo");
+            });
+
             test("read pages if pageSize is set", function() {
                 var dataSource = new DataSource({
                     data: [1,2,3],
