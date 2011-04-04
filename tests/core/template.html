@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.core.Template Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <link rel="stylesheet" href="../qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.core.Observable Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+            var template = kendo.core.Template;
+
+            module("Template", {
+                setup: function() {
+                    template.paramName = "data";
+                    template.useWith = true;
+                }
+            });
+
+            test("template evaluates value expressions", function() {
+                var t = template.compile("<%= foo.bar %>");
+                equal(t({ foo: { bar: "baz" } }), "baz");
+            });
+
+            test("default paramName is 'data'", function() {
+                var t = template.compile("<%= data.foo %>");
+                equal(t({ foo: "bar" }), "bar");
+            });
+
+            test("template evaluates value expressions using with", function() {
+                var t = template.compile("<%= foo %>");
+                equal(t({ foo: "bar" }), "bar");
+            });
+
+            test("template with custom paramName", function() {
+                template.paramName = "foo";
+
+                var t = template.compile("<%= foo.bar %>");
+
+                equal(t({ bar: "baz" }), "baz");
+            });
+
+            test("disabling with", function() {
+                template.useWith = false;
+
+                var t = template.compile("<%= foo %>");
+
+                ok(!/with/.test(t));
+            });
+
+            test("with(data)", function() {
+                var t = template.compile("<%= foo %>");
+
+                ok(/with/.test(t));
+            });
+
+            test("can specify custom settings", function() {
+                var t = template.compile("<%= foo.bar %>", { paramName: "foo" });
+
+                equal(t({ bar: "baz" }), "baz");
+            });
+
+            test("can specify custom template delimiters", function() {
+                var t = template.compile("{{= foo }}", { begin: "{{", end: "}}" });
+
+                equal(t({ foo: "bar" }), "bar");
+            });
+
+            test("can execute code", function() {
+                var executed = false,
+                    t = template.compile("<% var result = 'foo'; %><%= result %>")
+
+                equal(t({}), "foo");
+            });
+
+            test("can execute code with custom template delimiters", function() {
+                var executed = false,
+                    t = template.compile("<# var result = 'foo'; #><#= result #>", { begin: "<#", end: "#>" })
+                    console.log(t);
+
+                equal(t({}), "foo");
+            });
+        </script>
+    </body>
+</html>

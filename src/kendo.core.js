@@ -1,7 +1,8 @@
 (function($, window) {
     var kendo = window.kendo = window.kendo || {},
         core = kendo.core = {},
-        extend = $.extend;
+        extend = $.extend,
+        Template;
 
     function Observable() {
         this._list = {};
@@ -56,7 +57,42 @@
         }
     }
 
+    Template = {
+        paramName: "data", // name of the parameter of the generated template
+        useWith: true, // whether to put
+        begin: "<%",
+        end: "%>",
+        compile: function(template, options) {
+            var settings = extend({}, this, options),
+                paramName = settings.paramName,
+                begin = settings.begin,
+                end = settings.end,
+                useWith = settings.useWith,
+                functionBody = "var o='';",
+                evalRegExp = new RegExp(begin + "=(.+?)" + end, "g"),
+                quoteRegExp = new RegExp("'(?=.*?" + end + ")", "g");
+
+            functionBody += useWith ? "with(" + paramName + "){" : "";
+
+            functionBody += "o+='";
+
+            functionBody += template.replace(/[\r\t\n]/g, " ")
+                .replace(quoteRegExp,"\t")
+                .split("'").join("\\'")
+                .split("\t").join("'")
+                .replace(evalRegExp, "'; o+=$1; o+='")
+                .split(begin).join("';")
+                .split(end).join("o+='");
+
+            functionBody += useWith ? "'}" : "';";
+
+            functionBody += "return o;";
+
+            return new Function(paramName, functionBody);
+        }
+    };
     extend(core, {
-        Observable: Observable
+        Observable: Observable,
+        Template: Template
     });
 })(jQuery, window);
