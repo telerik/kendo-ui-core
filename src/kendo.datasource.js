@@ -72,9 +72,12 @@
             }
         },
         read: function(options) {
-            var that = this;
-            options = extend(true, that.settings.read, options);
-            options.data = that.dialect.read(options.data);
+            var that = this,
+                read = that.settings.read,
+                data = $.isFunction(read.data) ? read.data() : read.data;
+
+            options = extend(true, read, options);
+            options.data = that.dialect.read(extend(data, options.data));
             options.success = function(result) {
                 var data = that.reader.data(result);
 
@@ -93,10 +96,8 @@
                 serverPaging: options.serverPaging,
                 _data: [],
                 _view: [],
-                _state: {
-                    pageSize: options.pageSize,
-                    page: options.page
-                }
+                _pageSize: options.pageSize,
+                _page: options.page
             }),
             id = that.schema.id,
             transport = options.transport;
@@ -125,9 +126,15 @@
             serverSorting: false,
             serverPaging: false
         },
-        read: function(options) {
-            extend(this._state, options || {});
-            this.transport.read({ data: options || {} });
+        read: function() {
+            var that = this,
+                options = {
+                    page: that._page,
+                    pageSize: that._pageSize,
+                    sort: that._sort
+                };
+
+            this.transport.read({ data: options });
         },
         success: function(data) {
             var that = this,
@@ -136,12 +143,12 @@
             that._data = data;
 
             if (that.serverPaging !== true) {
-                options.page = that._state.page;
-                options.pageSize = that._state.pageSize;
+                options.page = that._page;
+                options.pageSize = that._pageSize;
             }
 
             if (that.serverSorting !== true) {
-                options.sort = that._state.sort;
+                options.sort = that._sort;
             }
 
             that._view = process(data, options);
@@ -257,10 +264,11 @@
             var that = this,
                 remote = that.serverSorting || that.serverPaging;
 
-            extend(that._state, options || {});
+            that._pageSize = options.pageSize;
+            that._page = options.page;
 
             if (options.sort) {
-                that._state.sort = options.sort = kendo.data.Query.expandSort(options.sort);
+                that._sort = options.sort = kendo.data.Query.expandSort(options.sort);
             }
 
             if (remote) {
@@ -271,13 +279,13 @@
             }
         },
         page: function() {
-            return this._state.page;
+            return this._page;
         },
         pageSize: function() {
-            return this._state.pageSize;
+            return this._pageSize;
         },
         sort: function() {
-            return this._state.sort;
+            return this._sort;
         }
     });
 
