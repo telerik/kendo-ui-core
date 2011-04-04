@@ -29,7 +29,7 @@
     function getApiSig(secret, params){
         var concatString = "",
             keys = [];
-            
+
         for (var key in params) {
           if (params.hasOwnProperty(key)) {
             keys.push(key);
@@ -67,15 +67,19 @@
                 transport: {
                     read: {
                         url: service,
-                        type: "GET"
-                    },
-                    dialect: {
-                        read: function(data) {
-                            var result = {};
-                            if (data.sort) {
-                                result.orderBy = data.sort[0].field + '-' + data.sort[0].dir;
+                        dataType: "jsonp",
+                        jsonpCallback: "jsonFlickrApi",
+                        data: function(){
+                            var params = {
+                                text: $("#searchBox").val(),
+                                extras: "owner_name,tags",
+                                method: "flickr.photos.search",
+                                api_key: app.key,
+                                auth_token: auth.token,
+                                format: "json"
                             }
-                            return result;
+                            params["api_sig"] = getApiSig(app.secret, params);
+                            return params;
                         }
                     },
                     reader: {
@@ -95,7 +99,7 @@
                 page: page
             }
             var url = buildAuthMethod(service, "flickr.photos.search", params);
-
+/*
             $.get(url, function(data){
                 try {
                     var photos = eval('(' + data + ')').photos.photo;
@@ -105,6 +109,7 @@
                     return;
                 }
             });
+            */
         }
 
         $('.i-search').click(function(e){
@@ -116,14 +121,12 @@
                 per_page: 30,
                 page: 1
             }
-            debugger;
-            dataSource.transport.read.url = buildAuthMethod(service, "flickr.photos.search", params);
             dataSource.read();
-            //search($("#searchBox").val(), 1);
+           // search($("#searchBox").val(), 1);
         });
 
         dataSource.bind("kendo:change", function(){
-            debugger;
+            alert(1);
             mainPhotos(this.view());
         });
     });
