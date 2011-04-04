@@ -56,7 +56,27 @@
         }
     }
 
+    var Template = {
+        paramName: "data",
+        compile: function(template) {
+            var paramName = this.paramName,
+                functionBody = "with(" + paramName + "){var out=''; out+='" +
+
+                template.replace(/[\r\t\n]/g, " ")
+                        .replace(/'(?=[^%]*%>)/g,"\t")
+                        .split("'").join("\\'")
+                        .split("\t").join("'")
+                        .replace(/<%=(.+?)%>/g, "'; out+=$1; out+='")
+                        .split("<%").join("';")
+                        .split("%>").join("out+='") +
+
+                "';} return out;";
+
+            return new Function(paramName, functionBody);
+        }
+    };
     extend(core, {
-        Observable: Observable
+        Observable: Observable,
+        Template: Template
     });
 })(jQuery, window);
