@@ -147,6 +147,41 @@
                 transport.read({ url: "foo", data: { baz: "moo" } });
             });
 
+            test("read constructor data function is persisted on multiple requests", function() {
+                var data,
+                    called = 0,
+                    transport = new RemoteTransport({
+                        read: {
+                            url: "foo",
+                            data: function(){
+                                called++;
+                                return {
+                                    foo: "bar"
+                                }
+                            }
+                        },
+                        dialect: {
+                            read: function() {
+                                data = arguments[0];
+                                return data;
+                            }
+                        }
+                    });
+
+                $.mockjax({
+                    url: "foo",
+                    response: function() {
+                        if(called == 2) {
+                            start();
+                        }
+                    }
+                });
+                stop(1000);
+                transport.read({ url: "foo", data: { baz: "moo" } });
+                transport.read({ url: "foo", data: { baz: "moo" } });
+            });
+
+
             test("string options are treated as url", function() {
                 var transport = new RemoteTransport({
                         read: "foo"
