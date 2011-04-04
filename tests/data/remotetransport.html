@@ -20,7 +20,7 @@
 
             module("RemoteTransport", {
                 setup: function() {
-                    $.mockjaxSettings.contentType = 'text/json';
+                    $.mockjaxSettings.contentType = "text/json";
                     $.mockjaxSettings.responseTime = 0;
                 },
                 teardown: function() {
@@ -168,16 +168,16 @@
                         read: "foo"
                     });
 
-                transport.success = function() {
-                    ok(true);
-                    start();
-                }
-
                 $.mockjax({
                     url: "foo"
                 });
                 stop(1000);
-                transport.read();
+                transport.read({
+                    success: function() {
+                        ok(true);
+                        start();
+                    }
+                });
             });
 
         </script>
