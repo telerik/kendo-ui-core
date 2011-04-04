@@ -32,7 +32,7 @@
 
                 observable.bind("foo", handler);
 
-                equal(observable._list["foo"][0], handler);
+                equal(observable._handlers["foo"][0], handler);
             });
 
             test("bind stores multiple handlers", function() {
@@ -42,8 +42,8 @@
                 observable.bind("foo", handler);
                 observable.bind("foo", handler);
 
-                equal(observable._list["foo"][0], handler);
-                equal(observable._list["foo"][1], handler);
+                equal(observable._handlers["foo"][0], handler);
+                equal(observable._handlers["foo"][1], handler);
             });
 
             test("trigger calls the handler", function() {
@@ -110,7 +110,7 @@
 
                 observable.unbind("foo");
 
-                equal(observable._list.foo.length, 0);
+                equal(observable._handlers.foo.length, 0);
             });
 
             test("unbind returns this", function() {
@@ -128,8 +128,8 @@
 
                 observable.unbind("foo", first);
 
-                equal(observable._list.foo.length, 1);
-                equal(observable._list.foo[0], second);
+                equal(observable._handlers.foo.length, 1);
+                equal(observable._handlers.foo[0], second);
             });
         </script>
     </body>
