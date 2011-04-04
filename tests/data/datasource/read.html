@@ -147,27 +147,6 @@
                 equal(view[0].bar, "foo");
             });
 
-             test("read sorts if sort expression is supplied", function(){
-                var dataSource = new DataSource({
-                    data: [{ id:1, bar: "foo" },{ id: 2, bar: "baz" }]
-                });
-
-                dataSource.read({ sort: { field: "bar", dir: "asc"} });
-                var view = dataSource.view();
-                equal(view[0].bar, "baz");
-            });
-
-            test("read page is page arguments as supplied", function(){
-                var dataSource = new DataSource({
-                    data: [{ id:1, bar: "foo" },{ id: 2, bar: "baz" }]
-                });
-
-                dataSource.read({ page: 2, pageSize: 1 });
-                var view = dataSource.view();
-                equal(view.length, 1);
-                equal(view[0].bar, "baz");
-            });
-
        </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

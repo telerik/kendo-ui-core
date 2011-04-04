@@ -116,6 +116,37 @@
                 transport.read({ url: "foo", data: { baz: "moo" } });
             });
 
+            test("read passes constructor data function result to its dialect", function() {
+                var data,
+                    transport = new RemoteTransport({
+                        read: {
+                            url: "foo",
+                            data: function(){
+                                return {
+                                    foo: "bar"
+                                }
+                            }
+                        },
+                        dialect: {
+                            read: function() {
+                                data = arguments[0];
+                                return data;
+                            }
+                        }
+                    });
+
+                $.mockjax({
+                    url: "foo",
+                    response: function() {
+                        equal(data.foo, "bar");
+                        equal(data.baz, "moo");
+                        start();
+                    }
+                });
+                stop(1000);
+                transport.read({ url: "foo", data: { baz: "moo" } });
+            });
+
             test("string options are treated as url", function() {
                 var transport = new RemoteTransport({
                         read: "foo"
@@ -148,6 +179,7 @@
                 stop(1000);
                 transport.read();
             });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
