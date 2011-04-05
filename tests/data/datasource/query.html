@@ -131,6 +131,21 @@
                 equal(view[1].age, 1);
             });
 
+            test("sorting sort expression are removed from the state if not passed", function() {
+                var dataSource = new DataSource({
+                    data: [{age: 1}, {age: 2}]
+                });
+                dataSource.read();
+                dataSource.query( { sort: { field: "age", dir: "desc" } } );
+                dataSource.query();
+                var view = dataSource.view();
+
+                equal(view.length, 2);
+                equal(view[0].age, 1);
+                equal(view[1].age, 2);
+                equal(dataSource.sort(), undefined);
+            });
+
             test("sorting though sort method", function() {
                 var dataSource = new DataSource({
                     data: [{age: 1}, {age: 2}]
