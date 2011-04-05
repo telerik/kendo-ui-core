@@ -1,5 +1,5 @@
 (function($, window) {
-    var kendo = window.kendo = window.kendo || {};
+    var kendo = window.kendo;
 
     var Comparer = {
         selector: function(field) {
@@ -84,6 +84,5 @@
         }
     }
 
-    kendo.data = kendo.data || {};
     kendo.data.Query = Query;
 })(jQuery, window);
