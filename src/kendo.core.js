@@ -1,6 +1,5 @@
 (function($, window) {
     var kendo = window.kendo = window.kendo || {},
-        core = kendo.core = {},
         extend = $.extend,
         Template;
 
@@ -91,8 +90,17 @@
             return new Function(paramName, functionBody);
         }
     };
-    extend(core, {
+
+    // namespace declaration
+    extend(kendo, {
+        ui: {},
+        data: {},
+        core: {}
+    });
+
+    extend(kendo.core, {
         Observable: Observable,
-        Template: Template
+        Template: Template,
+        template: $.proxy(Template.compile, Template)
     });
 })(jQuery, window);
