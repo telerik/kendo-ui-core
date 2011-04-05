@@ -276,7 +276,7 @@
                 that._sort = options.sort = kendo.data.Query.expandSort(options.sort);
             }
 
-            if (remote) {
+            if (remote || (that._data === undefined || that._data.length == 0)) {
                 that.read(options);
             } else {
                 that._view = process(that._data, options);
