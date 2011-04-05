@@ -291,6 +291,30 @@
                 equal(view.length, 3);
                 equal(view[0].age, 1);
                 equal(dataSource.pageSize(), 2);
+
+            });
+
+            test("data is populated if query is called without call to read", function() {
+                 var dataSource = new DataSource({
+                    data: [{ age: 1 }, { age: 2 }, { age: 3}]
+                });
+
+                dataSource.query({ page: 1, pageSize: 2});
+                equal(dataSource.view().length, 2);
+            });
+
+            test("query triggers change event when called without read", function() {
+                 var dataSource = new DataSource({
+                    data: [{ age: 1 }, { age: 2 }, { age: 3}]
+                });
+
+                var changeWasCalled = false;
+                dataSource.bind("kendo:change", function() {
+                    changeWasCalled = true;
+                });
+
+                dataSource.query({ page: 1, pageSize: 2});
+                ok(changeWasCalled);
             });
 
         </script>
