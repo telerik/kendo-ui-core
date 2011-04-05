@@ -160,6 +160,22 @@
                 equal(view[0].bar, "foo");
             });
 
+            test("read calls reader set through constructor",function() {
+                var dataSource = new DataSource({
+                    data: [{ id:1, bar: "foo" },{ id: 2, bar: "baz" }],
+                    reader: {
+                        data: function(data){
+                            readerWasCalled = true;
+                            return data;
+                        }
+                    }
+                });
+
+                var readerWasCalled = false;
+                dataSource.read();
+                ok(readerWasCalled);
+            });
+
        </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

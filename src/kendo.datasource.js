@@ -32,19 +32,13 @@
         return query.toArray();
     }
 
-    function LocalTransport(options) {
-        this.reader = options.reader || {
-            data: function(data) {
-                return data;
-            }
-        };
+    function LocalTransport(options) {        
         this.data = options.data;
     }
 
     LocalTransport.prototype = {
-        read: function(options) {
-            var that = this;
-            options.success(that.reader.data(that.data));
+        read: function(options) {            
+            options.success(this.data);
         }
     }
 
@@ -55,12 +49,7 @@
         }
         options = extend(that.defaults, options);
         that.settings = options;
-        that.dialect = options.dialect;
-        that.reader = options.reader || {
-            data: function(data) {
-                return data;
-            }
-        };
+        that.dialect = options.dialect;        
     }
 
     RemoteTransport.prototype = {
@@ -81,7 +70,7 @@
             options = extend(true, {}, read, options);
             options.data = that.dialect.read(extend(data, options.data));
             options.success = function(result) {
-                success(that.reader.data(result));
+                success(result);
             };
             $.ajax(options);
         }
@@ -105,6 +94,11 @@
 
         kendo.core.Observable.call(that);
 
+        that._reader = options.reader || {
+            data: function (data) {
+                return data;
+            }
+        };
         that.transport = transport && $.isFunction(transport.read) ? transport : (options.data? new LocalTransport({ data: options.data }):new RemoteTransport(transport));
         if (id) {
             that.find = function(id) {
@@ -143,6 +137,7 @@
             var that = this,
                 options = {};
 
+            data = that._reader.data(data);
             that._data = data;
 
             if (that.serverPaging !== true) {
