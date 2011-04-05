@@ -265,10 +265,12 @@
         },
         query: function(options) {
             var that = this,
+                options = options || {},
                 remote = that.serverSorting || that.serverPaging;
 
             that._pageSize = options.pageSize;
             that._page = options.page;
+            that._sort = options.sort;
 
             if (options.sort) {
                 that._sort = options.sort = kendo.data.Query.expandSort(options.sort);
