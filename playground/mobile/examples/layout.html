@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="http://192.168.2.1:8888/target/target-script-min.js"></script>
+    <meta name="apple-mobile-web-app-capable" content="yes" /> 
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta content="minimum-scale=1, width=device-width, maximum-scale=1, user-scalable=no" name="viewport" />
+    
+    <link rel="apple-touch-icon" href="images/kendo.png" />
+    <link rel="apple-touch-startup-image" href="images/kendo_big.png" />
+    <title>Mobile Test App</title>
+
+    <script type="text/javascript" src="../src/zepto.js"></script>
+    <script type="text/javascript" src="../src/detect.js"></script>
+    <link rel="stylesheet" type="text/css" href="layout.css">
+
+    <script type="text/javascript">
+        $().ready(function () {
+            if ($.browser.IE) {
+                $('button, .buttonStrip, .tabStrip, .toolbar, .msg').each( function () {
+                    var $this = $(this);
+                    var bgImage = $this.css('background-image');
+                    var borderRadius = $this.css('border-top-left-radius') + ' ' + $this.css('border-top-right-radius') + ' ' +
+                                       $this.css('border-bottom-right-radius') + ' ' + $this.css('border-bottom-left-radius');
+                    if (/#/.test(bgImage)) {
+                        var obj = document.createElement('object', true);
+                        obj.type = "image/svg+xml";
+                        obj.style.cssText = 'position: absolute; top: 0; left: 0; width: 100%; height: 100%; margin: -1px 0 0 -1px; padding: 1px; z-index: 0; border-radius:' + borderRadius;
+                        obj.data = bgImage.match(/url\s*\(\s*['"]?(.*)['"]?\s*\)/)[1];
+                        this.insertBefore(obj, this.firstChild);
+                    }
+                });
+            }
+
+            if ($.os && !$.os.ios)
+                $('.ios').removeClass('ios').addClass($.os.name);
+
+            if ($.os && !$.os.ios && !$.os.blackberry)
+                $('.layout').css($.getCssPrefix() + 'box-direction', 'reverse');
+
+//            alert(window.outerHeight + ' ' + window.innerHeight);
+            if ($.os)
+                document.body.style.paddingBottom = (window.outerHeight - window.innerHeight) + 'px';
+        });
+
+        $().bind( 'load', function () {
+            if ($.os)
+                setTimeout(function() { window.scrollTo(0, 1) }, 100);
+        });
+
+    </script>
+</head>
+<body>
+    <div class="layout">
+        <div class="header">
+            <div class="ios toolbar">
+                <button class="ios button"><span class="txt">Button 1</span></button>
+                <button class="ios button"><span class="txt">Button 2</span></button>
+                <button class="ios button"><span class="txt">Button 3</span><span class="msg"><span>12</span></span></button>
+                <button class="ios button"><span class="txt">Button 4</span><span class="msg"><span>3</span></span></button>
+            </div>
+        </div>
+        <div class="content">
+            <div>
+                <button class="ios button"><span class="txt">Button 1</span></button>
+                <button class="ios button"><span class="txt">Button 2</span></button>
+                <button class="ios button"><span class="txt">Button 3</span></button>
+                <br />
+                <div class="ios buttonStrip">
+                    <button><span class="txt">Button 1</span></button><button><span class="txt">Button 2</span></button><button><span class="txt">Button 3</span></button>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="ios tabStrip">
+                <button><span class="img"></span><span class="txt">All Tasks</span>
+                    </button><button><span class="img"></span><span class="txt">Not Done</span>
+                    </button><button><span class="img"></span><span class="txt">Done</span>
+                    </button><button><span class="img"></span><span class="txt">Settings</span></button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+

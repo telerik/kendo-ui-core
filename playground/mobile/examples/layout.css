@@ -1,0 +1,406 @@
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+}
+
+.layout {
+    -moz-box-orient: vertical;
+    -webkit-box-orient: vertical;
+    box-orient: vertical;
+    width: 100%;
+    height: 100%;
+    display: table\9;
+    overflow: hidden;
+}
+        
+.layout, .header, .footer, .content {
+    display: -moz-box;
+    display: -webkit-box;
+    display: box;
+}
+
+.header {
+    display: block;
+    display: table-row\9;
+    padding: 0;
+    height: 1px\9;
+}
+
+.footer {
+    display: block;
+    display: table-row\9;
+    background: #1a1a1a;
+    height: 1px\9;
+}
+
+@media all and (-webkit-min-device-pixel-ratio:10000),
+       not all and (-webkit-min-device-pixel-ratio:0)
+{
+  .layout { display: table; }
+  .header, .footer, .content { display: table-row; }
+  .header, .footer { height: 1px; }
+}
+
+.content {
+    display: table-row\9;
+    -moz-box-flex: 1;
+    -webkit-box-flex: 1;
+    box-flex: 1;
+    -moz-box-align: stretch;
+    -webkit-box-align: stretch;
+    box-align: stretch;
+    background: gray;
+    padding: 1em 1em 0;
+}
+
+.content * {
+    display: block;
+}
+
+.android, .ios, .blackberry, .buttonStrip button {
+    position: relative;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    display: inline-block;
+    padding: .4em .7em;
+    margin: .1em;
+    color: #FFF;
+    overflow: visible;
+    -moz-border-radius: 5pt;
+    -webkit-border-radius: 5pt;
+    border-radius: 5pt;
+    border: 1px solid #576B92;
+    border-top-color: #40495B;
+    background-color: #BBB;
+    background-image: url('images/linear-gradient.svg#rgba(58,58,58,0.5)|0%@rgba(142,158,181,0.5)|3%@rgba(121,141,169,0.5)|50%@rgba(102,123,154,0.5)|50%@rgba(103,124,154,0.8)|100%)');
+
+    background-image: -moz-linear-gradient(top, rgba(58, 58, 58, 0.5), rgba(142, 158, 181, 0.5) 3%, rgba(121, 141, 169, 0.5) 50%, rgba(102, 123, 154, 0.5) 50%, rgba(103, 124, 154, 0.8));
+    background-image: -o-linear-gradient(top, rgba(58, 58, 58, 0.5), rgba(142, 158, 181, 0.5) 3%, rgba(121, 141, 169, 0.5) 50%, rgba(102, 123, 154, 0.5) 50%, rgba(103, 124, 154, 0.8));
+
+    /* iOS doesn't support the CSS3 syntax for linear gradients */
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(0, rgba(58, 58, 58, 0.5)), color-stop(0.06, rgba(142, 158, 181, 0.5)), color-stop(0.5, rgba(121, 141, 169, 0.5)), color-stop(0.5, rgba(102, 123, 154, 0.5)), color-stop(1, rgba(103, 124, 154, 0.8)));
+    text-shadow: 0 -1pt #777;
+}
+
+button {
+    cursor: pointer;
+    outline: 0;
+}
+
+button * {
+    position: relative;
+}
+
+.ios, .ios button {
+    font: bold 1em HelveticaNeue Helvetica, sans-serif;
+}
+
+.ios.button:hover, .ios button:hover {
+    background-color: #98a1ae;
+}
+
+.android, .android button {
+    font: normal 1em DroidSans, Helvetica, sans-serif;
+    color: #000;
+    text-shadow: none;
+    border-color: #676767;
+    background-color: #EEE;
+    
+    background-image: url('images/linear-gradient.svg#rgba(255,255,255,0.2)|0%@rgba(189,189,189,0.6)|90%@rgba(201,201,201,0.6)|100%)');
+    background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0.2), rgba(189, 189, 189, 0.6) 90%, rgba(201, 201, 201, 0.6));
+    background-image: -o-linear-gradient(top, rgba(255, 255, 255, 0.2), rgba(189, 189, 189, 0.6) 90%, rgba(201, 201, 201, 0.6));
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(0, rgba(255, 255, 255, 0.2)), color-stop(0.9, rgba(189, 189, 189, 0.6)), color-stop(1, rgba(201, 201, 201, 0.6)));
+}
+
+.android.button:hover, .android button:hover {
+    background-color: #e99d02;
+    background-image: -moz-linear-gradient(top, rgba(255, 227, 131, 0.8), rgba(255, 203, 46, 0.6) 10%, rgba(255, 203, 46, 0) 50%, rgba(255, 210, 33, 0.8));
+    background-image: -o-linear-gradient(top, rgba(255, 227, 131, 0.8), rgba(255, 203, 46, 0.6) 10%, rgba(255, 203, 46, 0) 50%, rgba(255, 210, 33, 0.8));
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(0, rgba(255, 227, 131, 0.8)), color-stop(0.15, rgba(255, 203, 46, 0.6)), color-stop(0.5, rgba(255, 203, 46, 0)), color-stop(1, rgba(255, 210, 33, 0.8)));
+}
+
+.blackberry, .blackberry button {
+    font: normal .9em Arial, Helvetica, sans-serif;
+    color: #333;
+    text-shadow: none;
+    border-color: #fff;
+    background-color: #d3d7d7;
+    -webkit-box-shadow: none;
+
+    background-image: url('images/linear-gradient.svg#rgba(255,255,255,1)|0%@rgba(210,210,210,0)|100%)');
+    background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 1), rgba(210, 210, 210, 0));
+    background-image: -o-linear-gradient(top, rgba(255, 255, 255, 1), rgba(210, 210, 210, 0));
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(0, rgba(255, 255, 255, 1)), color-stop(1, rgba(210, 210, 210, 0)));
+}
+
+.msg {
+    display: block;
+    color: #FFF;
+    border: .2em solid #FFF;
+    font-size: .8em;
+    line-height: 1.5em;
+    vertical-align: middle;
+    overflow: hidden;
+    text-align: center;
+    right: -7px;
+    top: -10px;
+    height: 1.5em;
+    position: absolute;
+    width: 1.5em;
+    -moz-border-radius: 2em;
+    -webkit-border-radius: 2em;
+    border-radius: 2em;
+    background-color: #BB0000;
+    background-image: url('images/linear-gradient.svg#rgba(241,150,155,1)|0%@rgba(230,70,78,0.5)|50%@rgba(222,11,21,0.5)|50%@rgba(183,0,0,0)|100%)');
+    background-image: -moz-linear-gradient(top, rgba(241, 150, 155, 1), rgba(230, 70, 78, .5) 50%, rgba(222, 11, 21, .5) 50%, rgba(183, 0, 0, 0));
+    background-image: -o-linear-gradient(top, rgba(241, 150, 155, 1), rgba(230, 70, 78, .5) 50%, rgba(222, 11, 21, .5) 50%, rgba(183, 0, 0, 0));
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(0, rgba(241, 150, 155, 1)), color-stop(.5, rgba(230, 70, 78, .5)), color-stop(.5, rgba(222, 11, 21, .5)), color-stop(1, rgba(183, 0, 0, 0)));
+    -webkit-box-shadow: 0 2px 3px #333;
+    box-shadow: 0 2px 3px #333;
+}
+@-moz-document url-prefix() { .msg { right: 7px; top: -15px; } }
+
+.blackberry.button .msg {
+    -webkit-box-shadow: none;
+}
+
+.blackberry.button:hover, .blackberry button:hover {
+    color: #FFF;
+    border-color: #3f9fe5;
+    background-color: #1b6ec0;
+    background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0.3), rgba(210, 210, 210, 0));
+    background-image: -o-linear-gradient(top, rgba(255, 255, 255, 0.3), rgba(210, 210, 210, 0));
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(0, rgba(255, 255, 255, 0.3)), color-stop(1, rgba(210, 210, 210, 0)));
+}
+
+.buttonStrip {
+    padding: 0;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border-radius: 0;
+    border-color: transparent;
+    background: none;
+}
+
+.buttonStrip button {
+    margin: 0;
+    border-width: 1px 0 1px 1px;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+}
+
+.buttonStrip button:first-child {
+    -moz-border-radius: 5pt 0 0 5pt;
+    -webkit-border-radius: 5pt 0 0 5pt;
+    border-radius: 5pt 0 0 5pt;
+}
+
+.buttonStrip button:last-child {
+    border-right-width: 1px;
+    -moz-border-radius: 0 5pt 5pt 0;
+    -webkit-border-radius: 0 5pt 5pt 0;
+    border-radius: 0 5pt 5pt 0;
+}
+
+.buttonStrip.blackberry {
+    font-size: 1em;
+}
+
+.tabStrip, .toolbar {
+    display: block;
+    padding: .8em;
+    margin: 0;
+    width: 100%;
+    border-width: 0;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    -webkit-box-shadow: 0 0 3px #333;
+    box-shadow: 0 0 3px #333;
+}
+
+.tabStrip {
+    text-align: center;
+}
+
+.toolbar {
+    padding: .5em;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    position: relative;
+}
+
+.toolbar.blackberry {
+    background-color: #181E17;
+    background-image: url('images/linear-gradient.svg#rgba(43,49,45,1)|0%@rgba(24,30,23,0)|100%)');
+    background-image: -moz-linear-gradient(top, rgba(43, 49, 45, 1), rgba(24, 30, 23, 0) 100%);
+    background-image: -o-linear-gradient(top, rgba(43, 49, 45, 1), rgba(24, 30, 23, 0) 100%);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(0, rgba(43, 49, 45, 1)), color-stop(1, rgba(24, 30, 23, 0)));
+}
+
+.toolbar.ios button {
+    background-color: #8891be;
+}
+
+.toolbar.ios button:hover {
+    background-color: #a8b1de;
+}
+
+.tabStrip.ios {
+    padding: 0.5em;
+    background-color: #222;
+    background-image: url('images/linear-gradient.svg#rgba(46,46,46,0.8)|0%@rgba(21,21,21,0.5)|50%@rgba(0,0,0,0.8)|50%@rgba(0,0,0,0.8)|100%)');
+    background-image: -moz-linear-gradient(top, rgba(46, 46, 46, 0.8), rgba(21, 21, 21, 0.5) 50%, rgba(0, 0, 0, 0.8) 50%, rgba(0, 0, 0, 0.8));
+    background-image: -o-linear-gradient(top, rgba(46, 46, 46, 0.8), rgba(21, 21, 21, 0.5) 50%, rgba(0, 0, 0, 0.8) 50%, rgba(0, 0, 0, 0.8));
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(0, rgba(46, 46, 46, 0.8)), color-stop(0.5, rgba(21, 21, 21, 0.5)), color-stop(0.5, rgba(0, 0, 0, 0.8)), color-stop(1, rgba(0, 0, 0, 0.8)));
+}
+
+.tabStrip.android {
+    padding: 0;
+    background-color: #222;
+    border-bottom: 2pt solid #7a7a7a;
+    background-image: url('images/linear-gradient.svg#rgba(39,39,39,0.8)|0%@rgba(15,15,15,0.8)|100%)');
+    background-image: -moz-linear-gradient(top, rgba(39, 39, 39, 0.8), rgba(15, 15, 15, 0.8));
+    background-image: -o-linear-gradient(top, rgba(39, 39, 39, 0.8), rgba(15, 15, 15, 0.8));
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(0, rgba(39, 39, 39, 0.8)), color-stop(1, rgba(15, 15, 15, 0.8)));
+}
+
+.tabStrip.blackberry {
+    padding: 0.2em;
+    background-color: #333;
+    background-image: url('images/linear-gradient.svg#rgba(188,188,188,0.8)|0%@rgba(51,51,51,0)|50%)');
+    background-image: -moz-linear-gradient(top, rgba(188, 188, 188, 0.8), rgba(51, 51, 51, 0) 50%);
+    background-image: -o-linear-gradient(top, rgba(188, 188, 188, 0.8), rgba(51, 51, 51, 0) 50%);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(0, rgba(188, 188, 188, 0.8)), color-stop(0.5, rgba(51, 51, 51, 0)));
+}
+
+.tabStrip button {
+    font: bold .8em HelveticaNeue Helvetica, sans-serif;
+    color: #a8a8a8;
+    padding: .6em 1.5em;
+    border-width: 0;
+    border-color: transparent;
+    background: none;
+    margin: 0;
+}
+
+.tabStrip.ios button {
+    -moz-border-radius: 5pt;
+    -webkit-border-radius: 5pt;
+    border-radius: 5pt;
+    padding: .3em 1em;
+    font-size: 1em;
+}
+
+.tabStrip.android button {
+    border-right: 1pt solid #444;
+    border-left: 1pt solid #000;
+}
+
+.tabStrip.blackberry button {
+    -moz-border-radius: 5pt;
+    -webkit-border-radius: 5pt;
+    border-radius: 5pt;
+    padding: .1em;
+}
+
+.tabStrip.ios button:hover {
+    color: #FFF;
+    background: rgba(100, 100, 100, 0.5);
+}
+
+.tabStrip.android button:hover {
+    color: #FFF;
+    background: rgba(100, 100, 100, 1);
+}
+
+.tabStrip.blackberry .txt {
+    display: none;
+}
+
+.tabStrip button:first-child {
+    border-left: 0;
+}
+
+.tabStrip button:last-child {
+    border-right: 0;
+}
+
+.tabStrip button .img {
+    display: block;
+    width: 4em;
+    height: 4em;
+}
+
+.tabStrip.blackberry .img {
+    width: 64px;
+    height: 64px;
+}
+
+.tabStrip button .img {
+    margin: 0 auto;
+}
+
+.tabStrip.android button .img {
+    opacity: 0.5;
+    background: transparent url('images/atabimg.png') no-repeat .1em 50%;
+}
+
+.tabStrip.ios button .img {
+    opacity: 0.5;
+    background: transparent url('images/itabimg.png') no-repeat 3px 50%;
+}
+
+.tabStrip.blackberry button .img {
+    opacity: 0.5;
+    background: transparent url('images/atabimg.png') no-repeat .5em 50%;
+}
+
+.tabStrip button:hover .img {
+    opacity: 1;
+}
+
+.tabStrip.android button:nth-child(2) .img {
+    background-position: -9.3em 50%;
+}
+
+.tabStrip.android button:nth-child(3) .img {
+    background-position: -18.8em 50%;
+}
+
+.tabStrip.android button:nth-child(4) .img {
+    background-position: -28.2em 50%;
+}
+
+.tabStrip.ios button:nth-child(2) .img {
+    background-position: -157px 50%;
+}
+
+.tabStrip.ios button:nth-child(3) .img {
+    background-position: -320px 0;
+}
+
+.tabStrip.ios button:nth-child(4) .img {
+    background-position: -479px -3px;
+}
+
+.tabStrip.blackberry button:nth-child(2) .img {
+    background-position: -9.3em 50%;
+}
+
+.tabStrip.blackberry button:nth-child(3) .img {
+    background-position: -19.1em 50%;
+}
+
+.tabStrip.blackberry button:nth-child(4) .img {
+    background-position: -29em 50%;
+}
+
