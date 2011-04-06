@@ -10,91 +10,270 @@
         <script type="text/javascript">
             var svgNS = "http://www.w3.org/2000/svg";
 
-            var SVGElement = function(element) {
-                this.element = element;
+            var SVGPrimitive = function(element, surface) {
+                this.surface = surface;
+                this.element = $(element);
             }
 
-            $.extend(SVGElement.prototype, {
+            $.extend(SVGPrimitive.prototype, {
                 text: function(value) {
-                    this.element.textContent = value;
+                    this.element.text(value);
+                    return this;
+                },
+
+                css: function() {
+                    var that = this,
+                        element = that.element;
+
+                    element.css.apply(element, arguments);
+                    return that;
+                },
+
+                attr: function(key, value) {
+                    var that = this,
+                        element = that.element;
+
+                    if (typeof key == "string") {
+                        if (typeof value != "undefined") {
+                            element[0].setAttribute(key, value);
+                        } else {
+                            return element[0].getAttribute(key);
+                        }
+                    } else {
+                        var map = key;
+                        for (var attrKey in map) {
+                            element[0].setAttribute(attrKey, map[attrKey]);
+                        }
+                    }
+
+                    return that;
+                },
+
+                height: function(value) {
+                    if (value) {
+                        this.attr({ height: value });
+                    } else {
+                        return this.getBBox().height;
+                    }
+                },
+
+                width: function(value) {
+                    if (value) {
+                        this.attr({ width: value });
+                    } else {
+                        return this.getBBox().width;
+                    }
+                },
+
+                translate: function(dx, dy) {
+                    this.attr({ transform: "translate(" + dx + ", " + dy + ")" });
+                },
+
+                getBBox: function() {
+                    return this.element[0].getBBox();
+                },
+
+                getComputedStyle: function() {
+                    return window.getComputedStyle(this.element[0]);
+                },
+
+                hAlign: function (hAlign, container) {
+                    var width = this.width(),
+                        x = this.attr("x"),
+                        offsetX = 0,
+                        container = container || this.surface.element,
+                        parentWidth = container.width();
+
+                    if (hAlign == "center") {
+                        offsetX = (parentWidth - width) / 2;
+                    }
+
+                    this.attr("x", x + offsetX);
+
+                    return this;
                 }
             });
 
-            var SVGRenderer = function(container) {
+            var SVGSurface = function(container) {
                 var that = this,
-                    options = $.extend(SVGRenderer.prototype.defaults, options),
-                    element = document.createElementNS(svgNS, "svg");
+                    options = that.options = $.extend(SVGSurface.prototype.defaults, options),
+                    container = $(container),
+                    element = that.element = this._createElement("svg", container);
 
-                element.setAttributeNS(null, "width", options.width);
-                element.setAttributeNS(null, "height", options.height);
-                $(container).append(element);
+                container.append(element.element);
 
-                that.element = element;
-                that.options = options;
+                this.rect({
+                    x: 0,
+                    y: 0,
+                    width: container.width(),
+                    height: container.height(),
+                    fill: "transparent"
+                }, element);
             }
 
-            $.extend(SVGRenderer.prototype, {
+            $.extend(SVGSurface.prototype, {
                 defaults: {
                     width: "100%",
                     height: "100%"
                 },
 
-                group: function() {
-                    var that = this,
-                        group = that._createElement("g");
-
-                    that.element.appendChild(group.element);
-                    return group;
+                group: function(parentElement) {
+                    return this._createElement("g", parentElement);
                 },
 
                 desc: function(text, parentElement) {
-                    var that = this,
-                        parentNode = parentElement ? parentElement.element : that.element,
-                        desc = that._createElement("desc");
-
+                    var desc = this._createElement("desc", parentElement);
                     desc.text(text);
 
-                    parentNode.appendChild(desc.element);
                     return desc;
                 },
 
-                text: function(text, parentElement, fontOptions) {
-                    var that = this,
-                        parentNode = parentElement ? parentElement.element : that.element,
-                        textElement = that._createElement("text", fontOptions);
-
+                text: function(text, parentElement) {
+                    var textElement = this._createElement("text", parentElement);
                     textElement.text(text);
 
-                    parentNode.appendChild(textElement.element);
                     return textElement;
                 },
 
-                _createElement: function(tagName, attributes) {
-                    var element = document.createElementNS(svgNS, tagName);
-                    for (var attr in attributes) {
-                        element.setAttribute(attr, attributes[attr]);
-                    }
-                    return new SVGElement(element);
+                rect: function(options, parentElement) {
+                    var rect = this._createElement("rect", parentElement);
+                    rect.attr(options);
+
+                    return rect;
+                },
+
+                _createElement: function(tagName, parentElement) {
+                    var that = this,
+                        parentNode = parentElement ? parentElement.element || parentElement : that.element.element,
+                        element = document.createElementNS(svgNS, tagName);
+
+                    parentNode.append(element);
+                    return new SVGPrimitive(element, this);
                 }
             });
 
-            function ChartTitle(renderer, options) {
-                var that = this,
-                    element = renderer.group();
+            function ChartTitle(surface, options) {
+                var title = this,
+                    element = title.element = surface.group(),
+                    desc = surface.desc("Chart Title", element);
 
-                var desc = renderer.desc("Chart Title", element);
-                var text = renderer.text(options.text, element, options.font);
+                title.options = $.extend(true, options, title.defaults);
+
+                var text = surface
+                    .text(options.text, element)
+                    .css(options.style)
+                    .attr("y", 0)
+                    .hAlign("center");
+
+                vAlignText(text, "top");
             }
 
-            $(document).ready(function() {
-                var renderer = new SVGRenderer("#container"),
-                    chartTitle = new ChartTitle(renderer, {
-                        "text": "Title",
-                        "font": {
-                            "font-family": "Verdana",
-                            "font-size": "32px"
-                        }
+            $.extend(ChartTitle.prototype, {
+                defaults: {
+                    style: {
+                        fontSize: "24px"
+                    }
+                },
+
+                height: function() {
+                    return this.element.height();
+                }
+            });
+
+            // Aligns text vertically
+            // Requires text primitive with set Y position
+            function vAlignText(textPrimitive, vAlign) {
+                    var bbox = textPrimitive.getBBox(),
+                        y = parseInt(textPrimitive.attr("y")),
+                        offsetY = 0,
+                        textHeight = (y - bbox.y),
+                        fontSize = parseInt(textPrimitive.getComputedStyle().fontSize);
+
+                    if (vAlign == "center") {
+                        offsetY = (textHeight / 2) - (bbox.height - fontSize);
+                    } else if (vAlign == "top") {
+                        offsetY = bbox.height;
+                    }
+
+                    textPrimitive.attr("y", y + offsetY);
+            };
+
+            function CategoryAxis(surface, options) {
+                var that = this,
+                    options = that.options = $.extend(true, that.defaults, options),
+                    element = that.element = surface.group();
+
+                for (var i = 0; i < options.categories.length; i++) {
+                    var text = surface.text(options.categories[i], element);
+                    text.attr({ y: text.height() / 2, x: (element.width() / 2) - (text.width() / 2) });
+                    text.centerTextVertical();
+                }
+            }
+
+            $.extend(CategoryAxis.prototype, {
+                defaults: {
+                    categories: []
+                },
+
+                height: function() {
+                    return this.element.height();
+                }
+            });
+
+            function BarChart(surface, options) {
+            }
+
+            function Chart(container, options) {
+                var chart = this,
+                    options = chart.options = $.extend(true, options, chart.defaults),
+                    surface = new SVGSurface("#container");
+
+                // Render title
+                if (options.title) {
+                    var title = new ChartTitle(surface, options.title);
+                }
+
+/*
+                // Render axises
+                if (options.xAxis.categories) {
+                    var xAxis = new CategoryAxis(surface);
+                }
+
+                // Render series
+                $.each(options.series, function() {
+                    $.extend(this, chart.seriesDefaults);
+
+                    var series = new BarChart(surface, {
+                        data: this.data
                     });
+                });
+*/
+            }
+
+            $.extend(Chart.prototype, {
+                defaults: {
+                    title: {
+                        text: "Title"
+                    }
+                },
+
+                seriesDefaults: {
+                    type: "bar"
+                }
+            });
+
+            $(document).ready(function() {
+                var chart = new Chart($("#container"), {
+                    series: [
+                        { data: [ 100, 200, 300 ] }
+                    ],
+                    xAxis: {
+                        categories: ["A", "B", "C"]
+                    },
+                    title: {
+                        text: "Lovely Bars"
+                    }
+                });
             });
 
 /*
@@ -243,7 +422,7 @@
 
         </script>
 
-        <div id="container" style="width: 800px; height: 400px;">
+        <div id="container" style="width: 800px; height: 400px; position: relative;">
         </div>
 
     </body>
