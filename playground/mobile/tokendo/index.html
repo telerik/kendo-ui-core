@@ -1,0 +1,111 @@
+ <!DOCTYPE html>
+ <html>
+ <head>
+     <meta charset="utf-8">
+     <title>ToKenDo</title>
+
+    <link rel="stylesheet" href="layout.css" />
+    
+    <style>
+        body {
+            font: .75em/1.5 Verdana, sans-serif;
+        }
+
+        .item
+        {
+            line-height: 2.4em;
+            border-bottom: 1px solid #ddd;
+        }
+    </style>
+
+    <script src="../src/zepto.js"></script>
+    <script src="../src/detect.js"></script>
+
+    <script type="text/html" id="item_tmpl">
+      <div class="item <%=(i % 2 == 1 ? " even" : "")%>">
+        <input type="checkbox" id="isdone_<%=i%>" <%=(done ? " checked='checked'" : "")%> /><label for="isdone_<%=i%>"><%=title%></label>
+      </div>
+    </script>    
+        
+    <script>
+        // Simple JavaScript Templating
+        // John Resig - http://ejohn.org/ - MIT Licensed
+        (function(){
+          var cache = {};
+         
+          this.tmpl = function tmpl(str, data){
+            // Figure out if we're getting a template, or if we need to
+            // load the template - and be sure to cache the result.
+            var fn = !/\W/.test(str) ?
+              cache[str] = cache[str] ||
+                tmpl(document.getElementById(str).innerHTML) :
+             
+              // Generate a reusable function that will serve as a template
+              // generator (and which will be cached).
+              new Function("obj",
+                "var p=[],print=function(){p.push.apply(p,arguments);};" +
+               
+                // Introduce the data as local variables using with(){}
+                "with(obj){p.push('" +
+               
+                // Convert the template into pure JavaScript
+                str
+                  .replace(/[\r\t\n]/g, " ")
+                  .split("<%").join("\t")
+                  .replace(/((^|%>)[^\t]*)'/g, "$1\r")
+                  .replace(/\t=(.*?)%>/g, "',$1,'")
+                  .split("\t").join("');")
+                  .split("%>").join("p.push('")
+                  .split("\r").join("\\'")
+              + "');}return p.join('');");
+           
+            // Provide some basic currying to the user
+            return data ? fn( data ) : fn;
+          };
+        })();
+
+        function View(options) {
+            $.extend(this, options);
+            this.element = $('<div />').appendTo(document.body);
+        }
+
+        View.prototype = {
+            bind: function(data) {
+                this.element.html(this.onBind(data));
+            }
+        };
+
+        function Application() {
+        }
+
+        Application.prototype = {
+            run: function() {
+                $(document.body).append("<div class='layout'></div>");
+            }
+        };
+
+        window.addEventListener("DOMContentLoaded", function() {
+            var taskList = new View({
+                onBind: function(data) {
+                    return data.map(function(x, i) {
+                        return tmpl("item_tmpl", $.extend({ i: i }, x));
+                    }).join('');
+                }
+            });
+
+            taskList.bind([
+                { title: "Change a lightbulb together with the team", done: true },
+                { title: "Shop groceries", done: false },
+                { title: "Cook something nice with George", done: false }
+            ]);
+
+            var tokendo = new Application({
+            });
+
+            tokendo.run();
+        });
+    </script>
+ </head>
+ <body></body>
+ </html>
+
