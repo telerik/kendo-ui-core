@@ -1,0 +1,89 @@
+<html>
+<head>
+    <title></title>
+    <!--<script src="http://bundev.telerik.com:8081/target/target-script-min.js"></script>-->
+
+    <style type="text/css">
+        .animator,
+        .animator2,
+        .animator3 {
+            left: 200px;
+            top: 200px;
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+            position: absolute;
+        }
+        .animator2 {
+            left: 800px;
+            top: 200px;
+        }
+        .animator3 {
+            left: 500px;
+            top: 200px;
+            display: block;
+            background-color: lightblue;
+        }
+        .info {
+            width: 500px;
+            height: 100px;
+            padding: 5px 10px;
+            border: 1px solid #ff4500;
+            background: #ffffe0;
+            font: normal 12px/23px Arial, Helvetica, sans-serif;
+        }
+    </style>
+
+    <script type="text/javascript" src="../src/zepto.js"></script>
+    <script type="text/javascript" src="../src/detect.js"></script>
+    <script type="text/javascript" src="../src/event.js"></script>
+    <script type="text/javascript" src="../src/fx.js"></script>
+
+    <script type="text/javascript">
+        var stop1 = function () {
+            $('.animator').stop();
+        };
+        var stop2 = function () {
+            $('.animator2').stop();
+        };
+        var stop3 = function () {
+            $('.animator').stop(false, true);
+        };
+        var stop4 = function () {
+            $('.animator2').stop(false, true);
+        };
+        var stop5 = function () {
+            $().stopAll();
+        };
+        var stop6 = function () {
+            $().stopAll(true);
+        };
+        var stop7 = function () {
+            $().stopAll(true, true);
+        };
+
+        var start = function () {
+            $('.animator').animate({ rotate: '720deg', translate: '200px, 200px', color: 'white', 'background-color': 'red', opacity: .5 }, 10, 'ease-out');
+            $('.animator2').animate({ rotate: '-720deg', translate: '-200px, -200px', color: 'white', 'background-color': 'green', opacity: .2 }, 10, 'ease-in');
+            $('.animator3').animate({ rotate: '360deg', 'background-color': 'lightgreen' }, 2, 'linear').delay(1000).animate({ rotate: '0', 'background-color': 'lightblue' }, 2, 'linear');
+        };
+
+        $(document).ready(start); 
+
+    </script>
+</head>
+<body>
+    <div class="info">The transition animations (including transforms) were tested and should work in all modern mobile browsers - Mobile Safari, Android's all kinds of WebKit browsers, Firefox Mobile 4 betas, Opera Mobile 10+ and even IE9 (though it doesn't support transitions so will only show the last state directly, let's hope this will change for the mobile version).</div>
+    <div class="animator">HELLO WORLD</div>
+    <div class="animator2">HELLO WORLD</div>
+    <span class="animator3">HELLO WORLD</span>
+    <button onclick="start();">Start Both</button>
+    <button onclick="stop1();">Stop Animation 1</button>
+    <button onclick="stop2();">Stop Animation 2</button>
+    <button onclick="stop3();">Stop & Complete 1</button>
+    <button onclick="stop4();">Stop & Complete 2</button>
+    <button onclick="stop5();">Stop All</button>
+    <button onclick="stop6();">Stop All & Clear</button>
+    <button onclick="stop7();">Stop All Clear & Complete</button>
+</body>
+</html>
