@@ -198,15 +198,126 @@
                     textPrimitive.attr("y", y + offsetY);
             };
 
+            // Numeric Axis
+            var DEFAULT_PRECISION = 6,
+                ZERO_THRESHOLD = 0.2;
+
+            function NumericAxis(surface, options) {
+                var axis = this,
+                    element = axis.element = surface.group();
+
+                var majorUnit = axis.getMajorUnit(options.min, options.max),
+                    axisMax = axis.getAxisMax(options.min, options.max),
+                    axisMin = axis.getAxisMin(options.min, options.max),
+                    majorTicks = Math.round((axisMax - axisMin) / majorUnit) + 1;
+            }
+
+            NumericAxis.prototype = {
+                getMajorUnit: function (min, max) {
+                    var diff = max - min;
+                    if (diff == 0) {
+                        if (max == 0) {
+                            return 0.1;
+                        }
+
+                        diff = Math.abs(max);
+                    }
+
+                    var scale = Math.pow(10, Math.floor(Math.log(diff) / Math.log(10))),
+                        relativeValue = round((diff / scale), DEFAULT_PRECISION),
+                        scaleMultiplier = 1;
+
+                    if (relativeValue < 1.904762) {
+                        scaleMultiplier = 0.2;
+                    } else if (relativeValue < 4.761904) {
+                        scaleMultiplier = 0.5;
+                    } else if (relativeValue < 9.523809) {
+                        scaleMultiplier = 1;
+                    } else {
+                        scaleMultiplier = 2;
+                    }
+
+                    return round(scale * scaleMultiplier, DEFAULT_PRECISION);
+                },
+
+                getAxisMax: function(min, max) {
+                    if (min == 0 && max == 0) {
+                        return 1;
+                    }
+
+                    var axisMax;
+                    if (min <= 0 && max <= 0) {
+                        max = min == max ? 0 : max;
+
+                        var diff = Math.abs((max - min) / max);
+                        if(diff > ZERO_THRESHOLD) {
+                            return 0;
+                        }
+
+                        axisMax = max - ((min - max) / 2);
+                    } else {
+                        min = min == max ? 0 : min;
+                        axisMax = max + 0.05 * (max - min);
+                    }
+
+                    var mu = this.getMajorUnit(min, max);
+                    return ceil(axisMax, mu);
+                },
+
+                getAxisMin: function(min, max) {
+                    if (min == 0 && max == 0) {
+                        return 0;
+                    }
+
+                    var axisMin;
+                    if (min >= 0 && max >= 0) {
+                        min = min == max ? 0 : min;
+
+                        var diff = (max - min) / max;
+                        if(diff > ZERO_THRESHOLD) {
+                            return 0;
+                        }
+
+                        axisMin = min - ((max - min) / 2);
+                    } else {
+                        max = min == max ? 0 : max;
+                        axisMin = min + 0.05 * (min - max);
+                    }
+
+                    var mu = this.getMajorUnit(min, max);
+                    return floor(axisMin, mu);
+                },
+            };
+
+            // Helper functions
+            function supportsSVG() {
+                return document.implementation.hasFeature(
+                    "http://www.w3.org/TR/SVG11/feature#BasicStructure", "1.1");
+            }
+
+            function ceil(value, step) {
+                return round(Math.ceil(value / step) * step, DEFAULT_PRECISION);
+            }
+
+            function floor(value, step) {
+                return round(Math.floor(value / step) * step, DEFAULT_PRECISION);
+            }
+
+            function round(value, precision) {
+                var power = Math.pow(10, precision || 0);
+                return Math.round(value * power) / power;
+            }
+
+
             function CategoryAxis(surface, options) {
-                var that = this,
-                    options = that.options = $.extend(true, that.defaults, options),
-                    element = that.element = surface.group();
+                var axis = this,
+                    element = axis.element = surface.group();
+
+                axis.options = $.extend(true, options, axis.defaults);
 
                 for (var i = 0; i < options.categories.length; i++) {
                     var text = surface.text(options.categories[i], element);
-                    text.attr({ y: text.height() / 2, x: (element.width() / 2) - (text.width() / 2) });
-                    text.centerTextVertical();
+                    
                 }
             }
 
@@ -233,12 +344,26 @@
                     var title = new ChartTitle(surface, options.title);
                 }
 
-/*
+                // Determine y-axis range
+                var seriesMin = Number.MAX_VALUE,
+                    seriesMax = Number.MIN_VALUE;
+                $.each(options.series, function() {
+                    seriesMin = Math.min(seriesMin, Math.min.apply(Math, this.data));
+                    seriesMax = Math.max(seriesMax, Math.max.apply(Math, this.data));
+                });
+
                 // Render axises
+                yAxisOptions = $.extend(true, {}, chart.defaults.yAxis, options.yAxis, {
+                    min: seriesMin,
+                    max: seriesMax
+                });
+                var yAxis = new NumericAxis(surface, yAxisOptions);
+
                 if (options.xAxis.categories) {
-                    var xAxis = new CategoryAxis(surface);
+                    //var xAxis = new CategoryAxis(surface, options.xAxis);
                 }
 
+/*
                 // Render series
                 $.each(options.series, function() {
                     $.extend(this, chart.seriesDefaults);
@@ -254,6 +379,11 @@
                 defaults: {
                     title: {
                         text: "Title"
+                    },
+
+                    yAxis: {
+                        min: 0,
+                        max: 1.2
                     }
                 },
 
