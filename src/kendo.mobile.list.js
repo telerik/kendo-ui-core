@@ -1,10 +1,12 @@
-var kendo = window.kendo,
-    mobile = kendo.mobile = kendo.mobile || {};
+(function($, undefined) {
+    var kendo = window.kendo,
+        mobile = kendo.mobile = kendo.mobile || {};
 
-function List(element, options) {
-}
+    function List(element, options) {
+    }
 
-List.prototype = {
-};
+    List.prototype = {
+    };
 
-mobile.List = List;
+    mobile.List = List;
+})(jQuery || zepto);
