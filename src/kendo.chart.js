@@ -109,17 +109,6 @@
         },
     };
 
-
-    function GridLayout(options) {
-        this.options = options;
-    }
-
-    $.extend(GridLayout.prototype, {
-        apply: function() {
-
-        }
-    });
-
     // Helper functions
     function supportsSVG() {
         return document.implementation.hasFeature(
@@ -143,7 +132,6 @@
     // Make the internal functions public for unit testing
 
     Chart.NumericAxis = NumericAxis;
-    Chart.GridLayout = GridLayout;
 
     // #endif
 
