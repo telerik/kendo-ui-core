@@ -364,22 +364,21 @@ var Zepto = (function(selector, context) {
     var adjacencyOperators = {append: 'beforeEnd', prepend: 'afterBegin', before: 'beforeBegin', after: 'afterEnd'};
 
     for (key in adjacencyOperators)
-        $.fn[key] = (function(operator) {
-            return function(html) {
-                return this.each(function(index, element) {
-                    dom = html instanceof $ ? html : $(html);
-
-                    if (operator == "afterBegin" || operator == "afterEnd")
-                        for (var i = 0; i < dom.length; i++)
-                            //element['insertAdjacentElement'](operator, dom[dom.length - i - 1]);
-                            element.parentNode.insertBefore(element, dom[dom.length - i - 1]);
-                    else
-                        for (var i = 0; i < dom.length; i++)
-                            //element['insertAdjacentElement'](operator, dom[i]);
-                            element.parentNode.insertBefore(element, dom[i - 1]);
-                });
-            };
-        })(adjacencyOperators[key]);
+    $.fn[key] = (function(operator) {
+      return function(html){
+        return this.each(function(index, element){
+          if (html instanceof Zepto) {
+            dom = html;
+            if (operator == 'afterBegin' || operator == 'afterEnd')
+              for (var i=0; i<dom.length; i++) element['insertAdjacentElement'](operator, dom[dom.length-i-1]);
+            else
+              for (var i=0; i<dom.length; i++) element['insertAdjacentElement'](operator, dom[i]);
+          } else {
+            element['insertAdjacent'+(html instanceof Element ? 'Element' : 'HTML')](operator, html);
+          }
+        });
+      };
+    })(adjacencyOperators[key]);
 
     return $;
 })();
