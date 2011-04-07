@@ -317,6 +317,14 @@
                 ok(changeWasCalled);
             });
 
+            test("total is populated if query is called without call to read", function() {
+                var dataSource = new DataSource({
+                    data: [{ age: 1 }, { age: 2 }, { age: 3}]                    
+                });
+                
+                dataSource.query({ page: 1, pageSize: 2});                
+                equal(dataSource.total(), 3);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
