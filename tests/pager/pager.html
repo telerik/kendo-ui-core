@@ -113,6 +113,27 @@
                 ul.find("a:eq(1)").click();
                 equal(index, 2);
             });
+
+            test("clicking on the current page does not trigger change event", function(){
+                var ul = setup(),
+                    called = false;
+
+                dataSource.read();
+                ul.bind("kendo:change", function(){
+                    called = true;
+                });
+
+                ul.find("a.currentPage").click();
+                ok(!called);
+            });
+
+            test("changing page is paging datasource", function() {
+                var ul = setup();
+
+                dataSource.read();
+                ul.find("a:eq(1)").click();
+                equal(dataSource.page(), 2);
+            });
         </script>
     </body>
 </html>

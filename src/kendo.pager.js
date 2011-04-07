@@ -7,30 +7,32 @@
         that.wrapper = $(element);
         that.dataSource = options.dataSource;
         that.dataSource.bind("kendo:change", $.proxy(that.render, that));
-        that.wrapper.delegate("a", "click",  $.proxy(that.pageClick, that));
+        that.wrapper.delegate("a:not(.currentPage)", "click",  $.proxy(that.pageClick, that));
     }
 
     Pager.prototype = {
-        defaults: {
-        },
         render: function() {
             var that = this,
                 dataSource = that.dataSource,
                 total = dataSource.total(),
-                pageSize = dataSource.pageSize() || 0,
-                page = dataSource.page() || 0,
                 idx,
                 html;
 
-            for(idx = 1, pages = Math.ceil(total/pageSize); idx <= pages; idx++) {
-                html += '<li><a href="#"' + (idx == page ? 'class="currentPage"' : '') + ' data-index="' + idx + '"><span>Page</span>' + idx + '</a></li>';
+            that.pageSize = dataSource.pageSize() || 0,
+            that.page = dataSource.page() || 0;
+            that.totalPages = Math.ceil(total/that.pageSize);
+
+            for(idx = 1, pages = that.totalPages; idx <= pages; idx++) {
+                html += '<li><a href="#"' + (idx == that.page ? 'class="currentPage"' : '') + ' data-index="' + idx + '"><span>Page</span>' + idx + '</a></li>';
             }
 
             that.wrapper.empty().append(html);
         },
-        pageClick: function(ev) {            
+        pageClick: function(ev) {
             var index = $(ev.currentTarget).data("index");
             ev.preventDefault();
+
+            this.dataSource.page(index);
 
             this.wrapper.trigger("kendo:change", [index]);
         }
