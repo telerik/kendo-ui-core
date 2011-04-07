@@ -360,25 +360,35 @@ var Zepto = (function(selector, context) {
         }
     });
 
+    $.insertAdjacentElement = function (element, operator, newElement) {
+        if ('insertAdjacentElement' in element)
+            element['insertAdjacentElement'](operator, newElement);
+        else
+            switch (operator) {
+                case 'afterBegin': element.insertBefore(newElement, element.firstChild); break;
+                case 'afterEnd': element.parentNode.insertBefore(newElement, element.nextSibling); break;
+                case 'beforeBegin': element.parentNode.insertBefore(newElement, element); break;
+                case 'beforeEnd': element.appendChild(newElement); break;
+            }
+    };
 
     var adjacencyOperators = {append: 'beforeEnd', prepend: 'afterBegin', before: 'beforeBegin', after: 'afterEnd'};
 
     for (key in adjacencyOperators)
-    $.fn[key] = (function(operator) {
-      return function(html){
-        return this.each(function(index, element){
-          if (html instanceof Zepto) {
-            dom = html;
-            if (operator == 'afterBegin' || operator == 'afterEnd')
-              for (var i=0; i<dom.length; i++) element['insertAdjacentElement'](operator, dom[dom.length-i-1]);
-            else
-              for (var i=0; i<dom.length; i++) element['insertAdjacentElement'](operator, dom[i]);
-          } else {
-            element['insertAdjacent'+(html instanceof Element ? 'Element' : 'HTML')](operator, html);
-          }
-        });
-      };
-    })(adjacencyOperators[key]);
+        $.fn[key] = (function(operator) {
+            return function(html) {
+                return this.each(function(index, element) {
+                    var dom = html instanceof $ ? html : $(html);
+
+                    if (operator == "afterBegin" || operator == "afterEnd")
+                        for (var i = 0; i < dom.length; i++)
+                            $.insertAdjacentElement(element, operator, dom[dom.length - i - 1]);
+                    else
+                        for (var i = 0; i < dom.length; i++)
+                            $.insertAdjacentElement(element, operator, dom[i]);
+                });
+            };
+        })(adjacencyOperators[key]);
 
     return $;
 })();
