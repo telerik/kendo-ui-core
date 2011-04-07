@@ -28,8 +28,7 @@
 
             that.wrapper.empty().append(html);
         },
-        pageClick: function(ev) {
-            debugger;
+        pageClick: function(ev) {            
             var index = $(ev.currentTarget).data("index");
             ev.preventDefault();
 
