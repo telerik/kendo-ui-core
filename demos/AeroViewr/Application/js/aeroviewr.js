@@ -67,22 +67,31 @@
         var flatPhotoStrip = new window.listview({element: $("#flatPhotoStrip"), template: template, onItemBound: itemBound});
 
         var dataSource = new kendo.data.DataSource({ 
-                serverSorting: false,
+                serverPaging: false,
+                page: 1,
+                pageSize: 20,
                 transport: {
                     read: {
                         url: service,
                         cache: true,
                         dataType: "jsonp",
-                        jsonpCallback: "jsonFlickrApi",
-                        data: function(){
-                            var params = {
+                        jsonpCallback: "jsonFlickrApi"
+                    },
+                    dialect: {
+                        read: function(data) {
+                           var params = {
                                 text: $("#searchBox").val(),
                                 extras: "owner_name,tags",
                                 method: "flickr.photos.search",
                                 api_key: app.key,
                                 auth_token: auth.token,
-                                format: "json",
+                                format: "json"
                             }
+
+                           // if (data.page && data.pageSize) {
+                           //     params.page = data.page;
+                           //     params.per_page = data.pageSize;
+                           // }
                             params["api_sig"] = getApiSig(app.secret, params);
                             return params;
                         }
@@ -97,6 +106,10 @@
 
         $('.i-search').click(function(e){
            dataSource.read();
+        });
+
+        $(".paging > li").bind("click", function(e) {
+            dataSource.page($(this).data("page"));
         });
 
         dataSource.bind("kendo:change", function(){
