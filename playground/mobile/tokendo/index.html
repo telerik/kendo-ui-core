@@ -2,18 +2,20 @@
  <html>
  <head>
      <meta charset="utf-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
      <title>ToKenDo</title>
 
     <link rel="stylesheet" href="layout.css" />
     
     <style>
         body {
-            font: .75em/1.5 Verdana, sans-serif;
+            font-family: Verdana, sans-serif;
         }
 
         .item
         {
             line-height: 2.4em;
+            display: block;
             border-bottom: 1px solid #ddd;
         }
     </style>
@@ -22,9 +24,10 @@
     <script src="../src/detect.js"></script>
 
     <script type="text/html" id="item_tmpl">
-      <div class="item <%=(i % 2 == 1 ? " even" : "")%>">
-        <input type="checkbox" id="isdone_<%=i%>" <%=(done ? " checked='checked'" : "")%> /><label for="isdone_<%=i%>"><%=title%></label>
-      </div>
+        <label class="item" for="isdone_<%=i%>">
+            <input type="checkbox" id="isdone_<%=i%>" <%=(done ? " checked='checked'" : "")%> />
+            <%=title%>
+        </label>
     </script>    
         
     <script>
@@ -64,6 +67,8 @@
           };
         })();
 
+        /// kendo.mobile
+
         function View(options) {
             $.extend(this, options);
             this.element = $('<div />').appendTo(document.body);
@@ -71,39 +76,67 @@
 
         View.prototype = {
             bind: function(data) {
-                this.element.html(this.onBind(data));
+                this.onBind(data, this.element);
             }
         };
 
-        function Application() {
+        function Application(options) {
+            $.extend(this, options);
+            this.running = false;
         }
 
         Application.prototype = {
             run: function() {
-                $(document.body).append("<div class='layout'></div>");
+                if (this.running)
+                    return;
+
+                this.running = true;
+
+                var that = this;
+
+                window.addEventListener("DOMContentLoaded", function() {
+                    that.root = $("<div class='layout' />")
+                        .appendTo(document.body);
+
+                    that.show(0);
+                }, false);
+            },
+            show: function(viewIndex) {
+                this.views[viewIndex].element.appendTo(this.root);
             }
         };
 
-        window.addEventListener("DOMContentLoaded", function() {
-            var taskList = new View({
-                onBind: function(data) {
-                    return data.map(function(x, i) {
-                        return tmpl("item_tmpl", $.extend({ i: i }, x));
-                    }).join('');
-                }
-            });
+        // ToKenDo application code
 
-            taskList.bind([
-                { title: "Change a lightbulb together with the team", done: true },
-                { title: "Shop groceries", done: false },
-                { title: "Cook something nice with George", done: false }
-            ]);
-
-            var tokendo = new Application({
-            });
-
-            tokendo.run();
+        var taskList = new View({
+            onBind: function(data, element) {
+                element.html(data.map(function(x, i) {
+                    return tmpl("item_tmpl", $.extend({ i: i }, x));
+                }).join(''));
+            }
         });
+
+        taskList.bind([
+            { title: "Change a lightbulb together with the team", done: true },
+            { title: "Shop groceries", done: false },
+            { title: "Go through issues on GitHub", done: false },
+            { title: "Run qUnit tests", done: true },
+            { title: "Get cat food", done: false },
+            { title: "Clean the living room", done: false },
+            { title: "Cook something nice with George", done: false },
+            { title: "Perform a miracle", done: false },
+            { title: "Ship a product", done: false },
+            { title: "Buy a nice bottle of wine for anniversary celebration", done: false },
+            { title: "Eat cake", done: false },
+            { title: "Create orange portal", done: false },
+            { title: "Create blue portal", done: false },
+            { title: "Jump fanatically through portals", done: false },
+            { title: "Make another list of tommorow's tasks", done: false }
+        ]);
+
+        (new Application({
+            views: [ taskList ]
+        })).run();
     </script>
  </head>
  <body></body>
