@@ -94,11 +94,14 @@
 
         kendo.core.Observable.call(that);
 
-        that._reader = options.reader || {
-            data: function (data) {
-                return data;
-            }
-        };
+        that._reader = extend({
+                data: function (data) {
+                    return data;
+                },
+                total: function(data) {
+                    return data.length;
+                }
+            }, options.reader);
         that.transport = transport && $.isFunction(transport.read) ? transport : (options.data? new LocalTransport({ data: options.data }):new RemoteTransport(transport));
         if (id) {
             that.find = function(id) {
@@ -137,7 +140,8 @@
             var that = this,
                 options = {};
 
-            data = that._reader.data(data);
+            that._total = that._reader.total(data);
+            data = that._reader.data(data);                        
             that._data = data;
 
             if (that.serverPaging !== true) {
@@ -306,6 +310,9 @@
             }
 
             return this._sort;
+        },
+        total: function() {
+            return this._total;
         }
     });
 
