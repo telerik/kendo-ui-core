@@ -95,11 +95,14 @@
                 var that = this;
 
                 window.addEventListener("DOMContentLoaded", function() {
-                    that.root = $("<div class='layout' />")
+
+                    that.root = $("<div />")
                         .appendTo(document.body);
 
                     that.show(0);
                 }, false);
+
+                        window.scrollTo(0,1);
             },
             show: function(viewIndex) {
                 this.views[viewIndex].element.appendTo(this.root);
