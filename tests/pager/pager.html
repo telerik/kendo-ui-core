@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.ui.Pager Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.pager.js"></script>
+        <script src="../../src/kendo.query.js"></script>
+        <script src="../../src/kendo.dataSource.js"></script>
+        <link rel="stylesheet" href="../qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.ui.Pager Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+            var DataSource = kendo.data.DataSource,
+                dataSource;
+
+            function setup(options){
+                options = $.extend({
+                    data: [1,2,3,4,5],
+                    page: 1,
+                    pageSize: 1
+                }, options);
+
+                dataSource = new DataSource(options);
+
+                return $("<ul />").kendoPager({
+                    dataSource: dataSource
+                });
+            }
+
+            test("kendoPager attach pager to an element", function() {
+                var ul = setup();
+
+                ok(ul.data("kendoPager") instanceof kendo.ui.Pager);
+            });
+
+            test("renders buttons for all pages", function(){
+                var ul = setup();
+
+                dataSource.read();
+
+                var links = ul.find("a");
+                equal(links.length, 5);
+                equal(links[0].innerHTML, "<span>Page</span>1");
+                equal(links[1].innerHTML, "<span>Page</span>2");
+                equal(links[2].innerHTML, "<span>Page</span>3");
+                equal(links[3].innerHTML, "<span>Page</span>4");
+                equal(links[4].innerHTML, "<span>Page</span>5");
+            });
+
+            test("page number buttons have data attribute assign", function(){
+                var ul = setup();
+
+                dataSource.read();
+
+                var links = ul.find("a");
+                equal(links.eq(0).data("index"), "1");
+                equal(links.eq(1).data("index"), "2");
+                equal(links.eq(2).data("index"), "3");
+                equal(links.eq(3).data("index"), "4");
+                equal(links.eq(4).data("index"), "5");
+            });
+
+            test("clear page number buttons on multiple datasource rebinds", function(){
+                var ul = setup();
+
+                dataSource.read();
+                dataSource.read();
+
+                var links = ul.find("a");
+                equal(links.length, 5);
+                equal(links[0].innerHTML, "<span>Page</span>1");
+                equal(links[1].innerHTML, "<span>Page</span>2");
+                equal(links[2].innerHTML, "<span>Page</span>3");
+                equal(links[3].innerHTML, "<span>Page</span>4");
+                equal(links[4].innerHTML, "<span>Page</span>5");
+            });
+
+            test("does not render page numbers if total pages are zero", function(){
+                var ul = setup({pageSize: -1});
+
+                dataSource.read();
+
+                equal(ul.find("a").length, 0);
+            });
+
+            test("currentPage css class is added to current page a", function(){
+                var ul = setup();
+
+                dataSource.read();
+                ok(ul.find("a:eq(0)").hasClass("currentPage"));
+            });
+
+            test("changing page raises change event passing the new index", function(){
+                var ul = setup(),
+                    index;
+
+                dataSource.read();
+                ul.bind("kendo:change", function(){
+                    index = arguments[1];
+                });
+
+                ul.find("a:eq(1)").click();
+                equal(index, 2);
+            });
+        </script>
+    </body>
+</html>
