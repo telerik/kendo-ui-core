@@ -12,11 +12,29 @@
             font-family: Verdana, sans-serif;
         }
 
+        .list {
+            padding: 0;
+            margin: 0;
+        }
+        
         .item
         {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
             line-height: 2.4em;
             display: block;
             border-bottom: 1px solid #ddd;
+            position: relative;
+        }
+
+        .more-details
+        {
+            position: absolute;
+            height: 1.2em;
+            top: .6em;
+            right: .6em;
+            line-height: 1.2em;
         }
     </style>
 
@@ -24,10 +42,18 @@
     <script src="../src/detect.js"></script>
 
     <script type="text/html" id="item_tmpl">
-        <label class="item" for="isdone_<%=i%>">
-            <input type="checkbox" id="isdone_<%=i%>" <%=(done ? " checked='checked'" : "")%> />
-            <%=title%>
-        </label>
+        <ul class="list">
+        <% for (var i = 0; i < data.length; i++) {
+            var item = data[i]; %>
+            <li class="item">
+                <label for="isdone_<%= i %>">
+                    <input type="checkbox" id="isdone_<%= i %>" <%= (item.done ? " checked='checked'" : "") %> />
+                    <%= item.title %>
+                    <a href="#" class="more-details">More...</a>
+                </label>
+            </li>
+        <% } %>
+        </ul>
     </script>    
         
     <script>
@@ -71,7 +97,7 @@
 
         function View(options) {
             $.extend(this, options);
-            this.element = $('<div />').appendTo(document.body);
+            this.element = $('<div />');
         }
 
         View.prototype = {
@@ -95,14 +121,12 @@
                 var that = this;
 
                 window.addEventListener("DOMContentLoaded", function() {
-
-                    that.root = $("<div />")
-                        .appendTo(document.body);
+                    that.root = document.body;
 
                     that.show(0);
                 }, false);
 
-                        window.scrollTo(0,1);
+                window.scrollTo(0,1);
             },
             show: function(viewIndex) {
                 this.views[viewIndex].element.appendTo(this.root);
@@ -113,9 +137,7 @@
 
         var taskList = new View({
             onBind: function(data, element) {
-                element.html(data.map(function(x, i) {
-                    return tmpl("item_tmpl", $.extend({ i: i }, x));
-                }).join(''));
+                element.html(tmpl("item_tmpl", { data: data }));
             }
         });
 
