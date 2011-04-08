@@ -21,12 +21,17 @@
         bind: function(items){
             items = items || [];
             this.element.html("");
+
+            var listItems = [];
             for (var i = 0, length = items.length; i < length; i++){
                 var liItem = $('<li alt="thumbnail">' + this.template(items[i]) + "</li>");
                 if(this.onItemBound){
                     this.onItemBound({item: liItem});
                 }
-                liItem.appendTo(this.element);
+                listItems.push(liItem);
+            }
+            for(var j=0, l = listItems.length; j < l; j++){
+                $(this.element).append(listItems[j]);
             }
         }
     };

@@ -47,28 +47,14 @@
         return hex_md5(concatString);
     }
 
-    function itemBound(e){
-        e.item
-         .find("img")
-         .hide()
-         .bind({
-             load: function(e){
-                $(this).fadeIn(1000);
-             },
-            click: function(e){
-                $("#bigPhoto").attr("src", $(this).attr('src').replace("_t", ""));
-            }
-        });
-    }
-
     $(document).ready(function(){
-        var template = "<img src='http://farm<#=farm#>.static.flickr.com/<#=server#>/<#=id#>_<#=secret#>_t.jpg'>";
+        var template = "<img src='http://farm<#=farm#>.static.flickr.com/<#=server#>/<#=id#>_<#=secret#>_s.jpg'>";
         var mainPhotos = new window.listview({element: $("#mainPhotoStrip"), template: template, onItemBound: itemBound});
         var flatPhotoStrip = new window.listview({element: $("#flatPhotoStrip"), template: template, onItemBound: itemBound});
 
         var dataSource = new kendo.data.DataSource({
                 page: 1,
-                pageSize: 40,
+                pageSize: 20,
                 transport: {
                     read: {
                         url: service,
@@ -86,7 +72,7 @@
                                 auth_token: auth.token,
                                 format: "json"
                             }
-                            params.per_page = 500;
+                            params.per_page = 50;
                            // if (data.page && data.pageSize) {
                            //     params.page = data.page;
                            //     params.per_page = data.pageSize;
@@ -101,7 +87,7 @@
                         return result.photos.photo;
                     },
                     total: function(result) {
-                        return 500;
+                        return 50;
                     }
                 }
             });
@@ -114,7 +100,56 @@
 
         dataSource.bind("kendo:change", function(){
             mainPhotos.bind(this.view());
-            flatPhotoStrip.bind(this.view());
+            if(!mainPhotos.element.is(":visible")){
+                flatPhotoStrip.bind(this.view());
+            }
         });
+
+        function itemBound(e){
+           var li = e.item;
+           li.css("opacity", 0)
+             .find("img")
+             .bind({
+                 load: function(e){
+                    li.css("overflow", "hidden").animate({opacity: 1}, 1000);
+                    var image = $(e.target);
+                    image
+                     .css("display", "block")
+                     .css("marginLeft", ~~(image.width()/2))
+                     .animate({marginLeft: 0}, 500);
+                 },
+                click: function(e){
+                    var image = $(this);
+                    var liItems = $("#mainPhotoStrip").find("li");
+                    var length = liItems.length;
+
+                    //will try to animate one image by one in order to achieve the effect of dropping images.
+
+                    //liItems.eq(length)
+                    //mainStrip
+                    //.find("li")
+                    //.each(function(i, element){
+                    //    element = $(element);
+                    //    element.animate({opacity: 0}, 1000)
+                    //    var image = element.find("img");
+                    //    image
+                    //        .css("display", "block")
+                    //        .css("marginTop", ~~(image.height()/2))
+                    //        .animate({marginTop: 0}, 500);
+                    //})
+                    $("#mainPhotoStrip").hide();
+                    
+                    //incorrectly bind flat strip on every click
+                    flatPhotoStrip.bind(dataSource.view());
+                    $("#bigPhoto").fadeOut("slow")
+                                .attr("src", image.attr('src').replace("_s", ""))
+                                .bind({
+                                    load: function(e){
+                                        $(e.target).hide().fadeIn("slow");
+                                    }
+                                });
+                }
+            });
+        }
     });
 })(jQuery);
