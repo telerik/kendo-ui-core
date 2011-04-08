@@ -305,6 +305,8 @@
                 surface.line(lineStyle, axis.element);
 
                 this.box = new Box(box.x1, box.y1, element.width(), box.y2);
+                this.min = axisMin;
+                this.max = axisMax;
             }
 
             NumericAxis.prototype = {
@@ -474,12 +476,33 @@
                 legend.box = new Box(box.x2 - element.width(), box.y1, box.x2, box.y2);
             }
 
-            function BarChart(surface, options) {
+            function BarChart(surface, box, options) {
+                // Determine scale
+                var scale = box.height() / (options.max - options.min);
+
+                // Determine category spacing
+                var categoryStep = box.width() / options.data.length;
+
+                // DrawingSurface each bar
+                var barWidth = categoryStep / 3;
+
+                // Start half-step forward to center the series
+                var barCenterX = box.x1 + categoryStep / 2;
+                var barBottomY = box.y2;
+                for (var i = 0; i < options.data.length; i++) {
+                    var value = options.data[i];
+                    var barHeight = value * scale;
+                    var barX = barCenterX - barWidth / 2;
+                    var barY = barBottomY - barHeight;
+
+                    var bar = surface.rect({ width: barWidth, height: barHeight, x: barX, y: barY, fill: "#4f81bd"});
+                    barCenterX += categoryStep;
+                }
             }
 
             function Chart(container, options) {
                 var chart = this,
-                    options = chart.options = $.extend(true, options, chart.defaults),
+                    options = chart.options = $.extend(true, chart.defaults, options),
                     surface = new SVGSurface("#container");
 
                 var currentBox = surface.box;
@@ -524,16 +547,18 @@
                     xAxis.repaint();
                 }
 
-/*
+                currentBox = boxDiff(currentBox, yAxis.box);
+
                 // Render series
                 $.each(options.series, function() {
-                    $.extend(this, chart.seriesDefaults);
-
-                    var series = new BarChart(surface, {
+                    var barChartOptions = {
+                        min: yAxis.min,
+                        max: yAxis.max,
                         data: this.data
-                    });
+                    };
+
+                    var barChart = new BarChart(surface, currentBox, barChartOptions);
                 });
-*/
             }
 
             $.extend(Chart.prototype, {
@@ -587,157 +612,13 @@
                         { data: [ 100, 200, 300 ] }
                     ],
                     xAxis: {
-                        categories: ["Alpha-g", "Beta-y", "Charlie"]
+                        categories: ["Alpha", "Beta", "Charlie"]
                     },
                     title: {
                         text: "Lovely Bars"
                     }
                 });
             });
-
-/*
-            var DrawingSurface = function(container, options) {
-                var that = this;
-                that.options = $.extend(DrawingSurface.prototype.defaults, options);
-
-                // Prepare drawing surface
-                var svg = document.createElementNS(svgNS, "svg");
-                svg.setAttributeNS(null, "width", that.options.width);
-                svg.setAttributeNS(null, "height", that.options.height);
-                $(container).append(svg);
-
-                this._svg = svg;
-                return this;
-           };
-
-            DrawingSurface.prototype = {
-                defaults: {
-                    width: "100%",
-                    height: "100%"
-                },
-
-                width: function () {
-                    return this._svg.parentNode.offsetWidth;
-                },
-
-                height: function() {
-                    return this._svg.parentNode.offsetHeight;
-                },
-
-                rect: function(attributes) {
-                    var rect = document.createElementNS(svgNS, "rect");
-                    for (var attr in attributes) {
-                        rect.setAttributeNS(null, attr, attributes[attr]);
-                    }
-
-                    this._svg.appendChild(rect);
-
-                    return this;
-                }
-            };
-
-            $(document).ready(function() {
-                configuration = {
-                    title: "Sample Chart",
-                    series: [{
-                        type: "bar",
-                        name: "2003",
-                        data: [175, 100, 300, 275]
-                    }],
-                    axisX: {
-                        title: "Products",
-                        labels: ["Excel", "Power Point", "Word", "Outlook"],
-                    },
-                    axisY: {
-                        title: "Sales in $ mln."
-                    },
-                    legend: {
-                        position: "bottom-right",
-                        layout: "horizontal"
-                    }
-                };
-
-                // Prepare drawing surface
-                var d = new DrawingSurface("#container");
-                var svg = d._svg;
-
-                // Prepare to draw the bar chart
-                var points = configuration.series[0].data;
-
-                // Determine Y range 
-                var minY = 0;
-                var maxY = Math.max.apply(null, points);
-                maxY = roundUp(maxY * 1.2); // Leave 10% margin and round up
-
-                // Infer physical dimensions
-                var width = d.width();
-                var height = d.height();
-
-                // Assume axises take 30 units, the rest is the plot area
-                var plotOrigin = { x: 30, y: 0 };
-                var plotWidth = width - 30;
-                var plotHeight = height - 30;
-
-                // Determine scale
-                var scale = plotHeight / (maxY - minY);
-
-                // Determine category spacing
-                var categoryStep = plotWidth / points.length;
-
-                // DrawingSurface a box around the chart area for debugging
-                var chartBounds = d.rect({ "width": width, "height": height, "x": 0, "y": 0, "fill": "#fff", "stroke": "#f0a804"});
-
-                // DrawingSurface a box around the plot area for debugging
-                var plotBounds = d.rect({ "width": plotWidth, "height": plotHeight, "x": plotOrigin.x, "y": plotOrigin.y, "fill": "#fff", "stroke": "#f0a804"});
-                
-                // DrawingSurface each bar
-                var barWidth = 60;
-                // Start half-step forward to center the series
-                var barCenterX = plotOrigin.x + categoryStep / 2;
-                var barBottomY = plotOrigin.y + plotHeight;
-                for (var i = 0; i < points.length; i++) {
-                    var value = points[i];
-                    var barHeight = value * scale;
-                    var barX = barCenterX - barWidth / 2;
-                    var barY = barBottomY - barHeight;
-
-                    var bar = d.rect({ "width": barWidth, "height": barHeight, "x": barX, "y": barY, "fill": "#4f81bd"});
-                    
-                    barCenterX += categoryStep;
-                }
-            });
-
-            // rounds to the nearest 10, 100, 1000, etc.
-            function roundUp(number) {
-                var scale = Math.pow(10, Math.max(Math.floor(Math.log(Math.abs(number)) / Math.log(10)) - 1, 1)),
-                    base = number / scale;
-
-                return (number > 0 ? Math.ceil(base) : Math.floor(base)) * scale;
-            }
-
-            function getMajorUnit(maxValue) {
-                var scale = Math.pow(10, Math.max(Math.floor(Math.log(Math.abs(maxValue)) / Math.log(10)), 0));
-                return scale * 0.2;
-            }
-
-            function getAxisMax(min, max) {
-                if (min <= 0 && max <= 0) {
-                    return min + 0.05 * (min - max);
-                } else {
-                    return max + 0.05 * (max - min);
-                }
-            }
-
-            function getAxisMin(min, max) {
-                var threshold = 1/6;
-
-                if (min <= 0 && max <= 0) {
-                    return min + 0.05 * (min - max);
-                } else {
-                    
-                }
-                }
-*/
 
         </script>
 
