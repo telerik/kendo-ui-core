@@ -8,6 +8,70 @@
     </head>
     <body>
         <script type="text/javascript">
+
+            function Box(x1, y1, x2, y2) {
+                this.x1 = x1;
+                this.x2 = x2;
+                this.y1 = y1;
+                this.y2 = y2;
+            }
+
+            Box.prototype = {
+                width: function() {
+                    return this.x2 - this.x1;
+                },
+
+                height: function() {
+                    return this.y2 - this.y1;
+                }
+            }
+
+            function boxDiff( r, s ) {
+                var a = Math.min( r.x1, s.x1 );
+                var b = Math.max( r.x1, s.x1 );
+                var c = Math.min( r.x2, s.x2 );
+                var d = Math.max( r.x2, s.x2 );
+
+                var e = Math.min( r.y1, s.y1 );
+                var f = Math.max( r.y1, s.y1 );
+                var g = Math.min( r.y2, s.y2 );
+                var h = Math.max( r.y2, s.y2 );
+
+                // X = intersection, 0-7 = possible difference areas
+                // h +-+-+-+
+                // . |5|6|7|
+                // g +-+-+-+
+                // . |3|X|4|
+                // f +-+-+-+
+                // . |0|1|2|
+                // e +-+-+-+
+                // . a b c d
+
+                var result = [];
+
+                // we'll always have rectangles 1, 3, 4 and 6
+                result[ 0 ] = new Box( b, e, c, f );
+                result[ 1 ] = new Box( a, f, b, g );
+                result[ 2 ] = new Box( c, f, d, g );
+                result[ 3 ] = new Box( b, g, c, h );
+
+                // decide which corners
+                if( r.x1 == a && r.y1 == e || s.x1 == a && s.y1 == e )
+                { // corners 0 and 7
+                    result[ 4 ] = new Box( a, e, b, f );
+                    result[ 5 ] = new Box( c, g, d, h );
+                }
+                else
+                { // corners 2 and 5
+                    result[ 4 ] = new Box( c, e, d, f );
+                    result[ 5 ] = new Box( a, g, b, h );
+                }
+
+                return $.grep(result, function(box) {
+                    return box.height() > 0 && box.width() > 0
+                })[0];
+            }
+
             var svgNS = "http://www.w3.org/2000/svg";
 
             var SVGPrimitive = function(element, surface) {
@@ -77,38 +141,34 @@
                     return window.getComputedStyle(this.element[0]);
                 },
 
-                hAlign: function (hAlign, container) {
-                    var width = this.width(),
-                        x = this.attr("x"),
+                hAlign: function (hAlign, box) {
+                    var x = this.attr("x"),
                         offsetX = 0,
-                        container = container || this.surface.element,
-                        parentWidth = container.width();
+                        box = box || this.surface.box;
 
                     if (hAlign == "center") {
-                        offsetX = (parentWidth - width) / 2;
+                        offsetX = (box.width() - this.width()) / 2;
                     }
 
                     this.attr("x", x + offsetX);
 
                     return this;
+                },
+
+                empty: function() {
+                    this.element.empty();
                 }
             });
 
             var SVGSurface = function(container) {
-                var that = this,
-                    options = that.options = $.extend(SVGSurface.prototype.defaults, options),
+                var surface = this,
+                    options = surface.options = $.extend(SVGSurface.prototype.defaults, options),
                     container = $(container),
-                    element = that.element = this._createElement("svg", container);
+                    element = surface.element = this._createElement("svg", container);
 
                 container.append(element.element);
 
-                this.rect({
-                    x: 0,
-                    y: 0,
-                    width: container.width(),
-                    height: container.height(),
-                    fill: "transparent"
-                }, element);
+                surface.box = new Box(0, 0, container.width(), container.height());
             }
 
             $.extend(SVGSurface.prototype, {
@@ -142,6 +202,13 @@
                     return rect;
                 },
 
+                line: function(options, parentElement) {
+                    var line = this._createElement("line", parentElement);
+                    line.attr(options);
+
+                    return line;
+                },
+
                 _createElement: function(tagName, parentElement) {
                     var that = this,
                         parentNode = parentElement ? parentElement.element || parentElement : that.element.element,
@@ -152,32 +219,25 @@
                 }
             });
 
-            function ChartTitle(surface, options) {
+            function ChartTitle(surface, box, options) {
                 var title = this,
                     element = title.element = surface.group(),
                     desc = surface.desc("Chart Title", element);
 
-                title.options = $.extend(true, options, title.defaults);
+                title.options = options;
 
                 var text = surface
                     .text(options.text, element)
                     .css(options.style)
-                    .attr("y", 0)
-                    .hAlign("center");
+                    .attr({ x: box.x1, "y": box.y1 })
+                    .hAlign("center", box);
 
                 vAlignText(text, "top");
+
+                title.box = new Box(box.x1, box.y1, box.x2, text.height());
             }
 
             $.extend(ChartTitle.prototype, {
-                defaults: {
-                    style: {
-                        fontSize: "24px"
-                    }
-                },
-
-                height: function() {
-                    return this.element.height();
-                }
             });
 
             // Aligns text vertically
@@ -193,6 +253,9 @@
                         offsetY = (textHeight / 2) - (bbox.height - fontSize);
                     } else if (vAlign == "top") {
                         offsetY = bbox.height;
+                    } else if (vAlign == "bottom") {
+                        var heightAboveBaseline = y - bbox.y;
+                        offsetY -= bbox.height - heightAboveBaseline;
                     }
 
                     textPrimitive.attr("y", y + offsetY);
@@ -202,7 +265,7 @@
             var DEFAULT_PRECISION = 6,
                 ZERO_THRESHOLD = 0.2;
 
-            function NumericAxis(surface, options) {
+            function NumericAxis(surface, box, options) {
                 var axis = this,
                     element = axis.element = surface.group();
 
@@ -210,6 +273,38 @@
                     axisMax = axis.getAxisMax(options.min, options.max),
                     axisMin = axis.getAxisMin(options.min, options.max),
                     majorTicks = Math.round((axisMax - axisMin) / majorUnit) + 1;
+
+                var totalHeight = box.height();
+                var step = totalHeight / (majorTicks - 1);
+                var currentY = box.y1;
+                var currentValue = axisMax;
+                var labels = [];
+                for (var i = 0; i < majorTicks; i++) {
+                    var text = surface.text(currentValue, element);
+
+                    text.css(options.labels.style)
+                        .attr("x", 0)
+                        .attr("y", currentY);
+
+                    labels.push(text);
+
+                    vAlignText(text, "center");
+
+                    currentY += step;
+                    currentValue -= majorUnit;
+                }
+
+                var offsetX = axis.element.width();
+                for (var i = 0; i < labels.length; i++) {
+                    labels[i].attr("x", offsetX).attr("text-anchor", "end");
+                }
+
+                var lineX = axis.element.getBBox().width,
+                    lineStyle = $.extend({}, options, { x1: lineX, y1: box.y1, x2: lineX, y2: box.y2 });
+
+                surface.line(lineStyle, axis.element);
+
+                this.box = new Box(box.x1, box.y1, element.width(), box.y2);
             }
 
             NumericAxis.prototype = {
@@ -309,27 +404,75 @@
             }
 
 
-            function CategoryAxis(surface, options) {
-                var axis = this,
-                    element = axis.element = surface.group();
+            function CategoryAxis(surface, box, options) {
+                this.element = surface.group();
+                this.options = options;
+                this.surface = surface;
 
-                axis.options = $.extend(true, options, axis.defaults);
+                this.box = box;
+                this.repaint();
 
-                for (var i = 0; i < options.categories.length; i++) {
-                    var text = surface.text(options.categories[i], element);
-                    
-                }
+                this.box = new Box(box.x1, box.y2 - this.element.height(), box.x2, box.y2);
             }
 
             $.extend(CategoryAxis.prototype, {
-                defaults: {
-                    categories: []
-                },
+                repaint: function() {
+                    var axis = this,
+                        element = axis.element,
+                        surface = axis.surface,
+                        options = axis.options,
+                        box = axis.box;
 
-                height: function() {
-                    return this.element.height();
+                    element.empty();
+
+                    var totalWidth = box.width(),
+                        step = totalWidth / options.categories.length,
+                        y = box.y2,
+                        currentX = (step / 2) + box.x1;
+                    for(var i = 0; i < options.categories.length; i++) {
+                        var text = surface.text(options.categories[i], element);
+
+                        text.css(options.labels.style)
+                            .attr("x", currentX - (text.width() / 2))
+                            .attr("y", y);
+
+                        vAlignText(text, "bottom");
+
+                        currentX += step;
+                    }
+
+                    var lineY = axis.element.getBBox().y,
+                        lineStyle = $.extend({}, options, { x1: box.x1, y1: lineY, x2: totalWidth, y2: lineY });
+
+                    surface.line(lineStyle, axis.element);
                 }
             });
+
+            function Legend(surface, box, options) {
+                var legend = this,
+                    element = legend.element = surface.group();
+
+                    legend.options = options;
+
+                var y = 0;
+                for(var i = 0; i < options.categories.length; i++) {
+                    var text = surface.text(options.categories[i], element);
+
+                    text.css(options.style)
+                        .attr("x", 0)
+                        .attr("y", y + (text.height() / 2));
+
+                    vAlignText(text, "center");
+
+                    y += text.height();
+                }
+
+                surface.rect({ x: 0, y: 0, width: element.width(), height: element.height(), stroke: "black", fill: "transparent" }, element);
+
+                element.translate((box.width() - element.width()), ((box.height() - element.height()) / 2) + box.y1);
+
+                legend.box = new Box(box.x2 - element.width(), box.y1, box.x2, box.y2);
+            }
 
             function BarChart(surface, options) {
             }
@@ -339,10 +482,26 @@
                     options = chart.options = $.extend(true, options, chart.defaults),
                     surface = new SVGSurface("#container");
 
+                var currentBox = surface.box;
+
                 // Render title
-                if (options.title) {
-                    var title = new ChartTitle(surface, options.title);
+                var titleOptions = $.extend(true, {}, chart.defaults.title, options.title);
+                if (titleOptions.text) {
+                    var title = new ChartTitle(surface, currentBox, options.title);
                 }
+
+                var xAxisOptions = $.extend(true, {}, chart.defaults.xAxis, options.xAxis);
+                if (options.xAxis.categories) {
+                    var legendOptions = $.extend({}, chart.defaults.legend, options.legend, {
+                        categories: xAxisOptions.categories
+                    });
+
+                    currentBox = boxDiff(currentBox, title.box);
+                    var legend = new Legend(surface, currentBox, legendOptions);
+
+                    currentBox = boxDiff(currentBox, legend.box);
+                    var xAxis = new CategoryAxis(surface, currentBox, options.xAxis);
+               }
 
                 // Determine y-axis range
                 var seriesMin = Number.MAX_VALUE,
@@ -353,14 +512,16 @@
                 });
 
                 // Render axises
-                yAxisOptions = $.extend(true, {}, chart.defaults.yAxis, options.yAxis, {
+                var yAxisOptions = $.extend(true, {}, chart.defaults.yAxis, options.yAxis, {
                     min: seriesMin,
                     max: seriesMax
                 });
-                var yAxis = new NumericAxis(surface, yAxisOptions);
+                currentBox = boxDiff(currentBox, xAxis.box);
+                var yAxis = new NumericAxis(surface, currentBox, yAxisOptions);
 
-                if (options.xAxis.categories) {
-                    //var xAxis = new CategoryAxis(surface, options.xAxis);
+                if (xAxis && yAxis) {
+                    xAxis.box.x1 = xAxis.box.x1 + yAxis.box.width();
+                    xAxis.repaint();
                 }
 
 /*
@@ -378,12 +539,40 @@
             $.extend(Chart.prototype, {
                 defaults: {
                     title: {
-                        text: "Title"
+                        text: "Title",
+                        style: {
+                            fontSize: "25px"
+                        }
                     },
 
                     yAxis: {
+                        labels: {
+                            style: {
+                                fontSize: "16px"
+                            }
+                        },
                         min: 0,
-                        max: 1.2
+                        max: 1.2,
+                        stroke: "black",
+                        "stroke-width": ".5px"
+                    },
+
+                    xAxis: {
+                        labels: {
+                            style: {
+                                fontSize: "16px"
+                            }
+                        },
+                        stroke: "black",
+                        "stroke-width": ".5px",
+                        offsetLeft: 0,
+                        offsetRight: 0
+                    },
+
+                    legend: {
+                        style: {
+                            fontSize: "16px"
+                        }
                     }
                 },
 
@@ -398,7 +587,7 @@
                         { data: [ 100, 200, 300 ] }
                     ],
                     xAxis: {
-                        categories: ["A", "B", "C"]
+                        categories: ["Alpha-g", "Beta-y", "Charlie"]
                     },
                     title: {
                         text: "Lovely Bars"
