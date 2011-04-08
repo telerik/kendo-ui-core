@@ -16,7 +16,7 @@
                 dataSource = that.dataSource,
                 total = dataSource.total(),
                 idx,
-                html;
+                html = "";
 
             that.pageSize = dataSource.pageSize() || 0,
             that.page = dataSource.page() || 0;
