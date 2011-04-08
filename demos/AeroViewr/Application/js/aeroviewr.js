@@ -66,10 +66,9 @@
         var mainPhotos = new window.listview({element: $("#mainPhotoStrip"), template: template, onItemBound: itemBound});
         var flatPhotoStrip = new window.listview({element: $("#flatPhotoStrip"), template: template, onItemBound: itemBound});
 
-        var dataSource = new kendo.data.DataSource({ 
-                serverPaging: false,
+        var dataSource = new kendo.data.DataSource({
                 page: 1,
-                pageSize: 20,
+                pageSize: 40,
                 transport: {
                     read: {
                         url: service,
@@ -87,7 +86,7 @@
                                 auth_token: auth.token,
                                 format: "json"
                             }
-
+                            params.per_page = 500;
                            // if (data.page && data.pageSize) {
                            //     params.page = data.page;
                            //     params.per_page = data.pageSize;
@@ -95,11 +94,14 @@
                             params["api_sig"] = getApiSig(app.secret, params);
                             return params;
                         }
+                    }
+                },
+                reader: {
+                    data: function(result) {
+                        return result.photos.photo;
                     },
-                    reader: {
-                        data: function(result) {
-                            return result.photos.photo;
-                        }
+                    total: function(result) {
+                        return 500;
                     }
                 }
             });
@@ -108,9 +110,7 @@
            dataSource.read();
         });
 
-        $(".paging > li").bind("click", function(e) {
-            dataSource.page($(this).data("page"));
-        });
+        $(".paging").kendoPager({ dataSource: dataSource});
 
         dataSource.bind("kendo:change", function(){
             mainPhotos.bind(this.view());
