@@ -416,7 +416,12 @@ var Zepto = (function(selector, context) {
         },
         removeClass: function(name) {
             return this.each(function() {
-                this.className = this.className.replace(classRE(name), ' ').trim()
+                this.className = this.className.replace(classRE(name), ' ').trim();
+            });
+        },
+        replaceClass: function(name, newName) {
+            return this.each(function() {
+                this.className = this.className.replace(name, newName);
             });
         },
         toggleClass: function(name, when) {

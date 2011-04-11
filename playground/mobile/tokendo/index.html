@@ -45,17 +45,32 @@
 
         .touch-scrollbar
         {
-            position:absolute;
-            display:none;
-            z-index:200000;
-            height: .4em;
-            width: .4em;
-            border: 1px solid #8a8a8a;
+            position: absolute;
+            display: none;
+            z-index: 200000;
+            height: .2em;
+            width: .2em;
+            border: 1px solid #7a7a7a;
             background-color: #858585;
-            -moz-border-radius: .2em;
-            -webkit-border-radius: .2em;
-            border-radius: .2em;
+            right: 0;
+            bottom: 0;
+            -moz-transform-origin: 0 0;
+            -webkit-transform-origin: 0 0;
+            -o-transform-origin: 0 0;
+            transform-origin: 0 0;
+        }
+
+        .vertical-scrollbar
+        {
+            height: 100%;
             right: 1px;
+            bottom: 0;
+        }
+
+        .horizontal-scrollbar
+        {
+            width: 100%;
+            right: 0;
             bottom: 1px;
         }
 
@@ -70,6 +85,11 @@
         {
             width: 100%;
             height: 100%;
+        }
+
+        input[type=checkbox]
+        {
+            display: none;
         }
     </style>
 
@@ -138,13 +158,16 @@
             this.element = element;
             this.wrapper = $(element);
 
-            this._horizontalScrollbar = $('<div class="touch-scrollbar" />');
-            this._verticalScrollbar = this._horizontalScrollbar.clone();
+            this._horizontalScrollbar = $('<div class="touch-scrollbar horizontal-scrollbar" />');
+            this._verticalScrollbar = this._horizontalScrollbar.clone().replaceClass('horizontal-scrollbar', 'vertical-scrollbar');
             this._scrollbars = this._horizontalScrollbar.add(this._verticalScrollbar);
 
             this._startProxy = $.proxy(this._start, this);
             this._stopProxy = $.proxy(this._stop, this);
             this._dragProxy = $.proxy(this._drag, this);
+
+            this._transformProperty = $.getCssPrefix() + 'transform';
+            this._transformOrigin = $.getCssPrefix() + 'transform-origin';
 
             this._create();
         }
@@ -189,10 +212,12 @@
                     this.wrapper.append(scrollElement);
 
                 this.scrollElement = this.wrapper.children();
+
+                this._scrollbars.appendTo(this.wrapper);
             },
 
             _getScrollOffsets: function () {
-                var transforms = this.scrollElement.css($.getCssPrefix()+'transform').match(/(translate|matrix)\([,\s\w\d]*?\s*(-?\d+)[\w\s]*,\s*(-?\d+)[\w\s]*\)/i) || [0, 0, 0, 0];
+                var transforms = this.scrollElement.css(this._transformProperty).match(/(translate|matrix)\([,\s\w\d]*?\s*(-?\d+)[\w\s]*,\s*(-?\d+)[\w\s]*\)/i) || [0, 0, 0, 0];
 
                 return {
                     x: transforms[2],
@@ -219,50 +244,36 @@
 
                 var currentLocation = touchLocation(e);
 
-                if (this.start.x - currentLocation.x > 10 || this.start.y - currentLocation.y > 10) {
+                if (Math.abs(this.start.x - currentLocation.x) > 10 || Math.abs(this.start.y - currentLocation.y) > 10) {
 
                     $(document).unbind(this._moveEvent, this._startProxy)
                                .bind(this._moveEvent, this._dragProxy);
 
-                    if (isTouch && $.browser.WebKit)
-                        this.scrollElement
-                            .css( $.getCssPrefix() + 'transition', 'all 0.1s ease-out' );
+                    this._width = this.wrapper.innerWidth();
+                    this._height = this.wrapper.innerHeight();
+                    this._scrollWidth = this.scrollElement.innerWidth();
+                    this._scrollHeight = this.scrollElement.innerHeight();
 
-                    var width = this.wrapper.innerWidth(),
-                        height = this.wrapper.innerHeight(),
-                        offset = this.wrapper.offset(),
-                        scrollWidth = this.scrollElement.attr("offsetWidth"),
-                        scrollHeight = this.scrollElement.attr("offsetHeight"),
-                        scrollOffsets = this._getScrollOffsets();
-
-                    if (scrollWidth > width) {
+                    if (this._scrollWidth > this._width) {
                         this._horizontalScrollbar
-                            .appendTo(document.body)
-                            .css({
-                                width: Math.floor((width / scrollWidth) * width)
-                            }).css(
-                                $.getCssPrefix() + 'transform', 'translate(' +
-                                (scrollOffsets.x + offset.left + parseInt(this.wrapper.css("borderLeftWidth"))) + 'px,' +
-                                (offset.top + this.wrapper.innerHeight() + parseInt(this.wrapper.css("borderTopWidth")) - this._horizontalScrollbar.outerHeight(true)) + 'px)'
-                            );
-                    }
-
-                    if (scrollHeight > height) {
-                        this._verticalScrollbar
-                            .appendTo(document.body)
-                            .css({
-                                height: Math.floor((height / scrollHeight) * height)
-                            })
                             .css(
-                                $.getCssPrefix() + 'transform', 'translate(' +
-                                (scrollOffsets.y + offset.top + parseInt(this.wrapper.css("borderTopWidth"))) + 'px,' +
-                                (offset.left + this.wrapper.innerWidth() + parseInt(this.wrapper.css("borderLeftWidth")) - this._verticalScrollbar.outerWidth(true)) + 'px)'
-                            );
+                                this._transformProperty, 'scaleX(' + (this._width / this._scrollWidth) + ')'
+                            )
+                            .show()
+                            .stop()
+                            .fadeTo(200, .7);
                     }
 
-                    this._scrollbars
-                        .stop()
-                        .fadeTo(200, 0.5);
+                    if (this._scrollHeight > this._height) {
+                        this._verticalScrollbar
+                            .css(
+                                this._transformProperty, 'scaleY(' + (this._height / this._scrollHeight) + ')'
+                            )
+                            .show()
+                            .stop()
+                            .fadeTo(200, .7);
+                    }
+
                 }
             },
 
@@ -270,20 +281,34 @@
                 e.preventDefault();
 
                 var currentLocation = touchLocation(e),
-                    offset = this.wrapper.offset(),
-                    startLeft = offset.left + parseInt(this.wrapper.css("borderLeftWidth")),
-                    startTop = offset.top + parseInt(this.wrapper.css("borderTopWidth")),
-                    horizontalDifference = this.start.x - currentLocation.x,
-                    verticalDifference = this.start.y - currentLocation.y,
-                    left = Math.max(startLeft, startLeft + horizontalDifference),
-                    top = Math.max(startTop, startTop + verticalDifference);
+                    horizontalDifference = currentLocation.x - this.start.x,
+                    verticalDifference = currentLocation.y - this.start.y;
 
-                left = Math.min(startLeft + this.wrapper.innerWidth() - this._horizontalScrollbar.outerWidth(true) - this._horizontalScrollbar.outerHeight(true), left);
-                top = Math.min(startTop + this.wrapper.innerHeight() - this._verticalScrollbar.outerHeight(true) - this._verticalScrollbar.outerWidth(true), top);
+                if (this._scrollWidth > this._width) {
+                    var hsOffset = ~~(-horizontalDifference * 100 / (this._scrollWidth - this._width)),
+                        hsCompensate = Math.min(100, (hsOffset > 100 ? hsOffset - 100 : 0) || (hsOffset < 0 ? Math.abs(hsOffset) : 0));
+                    hsOffset = Math.min(100, Math.max(0, hsOffset));
 
-                this._horizontalScrollbar.css( $.getCssPrefix() + 'transform', 'translate(' + -left + 'px,' + -top + 'px)' );
-                this.scrollElement
-                        .css( $.getCssPrefix() + 'transform', 'translate(' + (-horizontalDifference) + 'px,' + (-verticalDifference) + 'px)' )
+                    this._horizontalScrollbar
+                            .css( this._transformOrigin, hsOffset + '% 0' );
+                    if (hsCompensate)
+                        this._horizontalScrollbar
+                            .css( this._transformProperty, 'scaleX(' + (this._width / this._scrollWidth - hsCompensate) + ')' );
+                }
+
+                if (this._scrollHeight > this._height) {
+                    var vsOffset = ~~(-verticalDifference * 100 / (this._scrollHeight - this._height)),
+                        vsCompensate = Math.min(100, (vsOffset > 100 ? vsOffset - 100 : 0) || (vsOffset < 0 ? Math.abs(vsOffset) : 0));
+                    vsOffset = Math.min(100, Math.max(0, vsOffset));
+
+                    this._verticalScrollbar
+                            .css( this._transformOrigin, '0 ' + vsOffset + '%' );
+                    if (vsCompensate)
+                        this._verticalScrollbar
+                            .css( this._transformProperty, 'scaleY(' + ((this._height - vsCompensate) / this._scrollHeight) + ')' );
+                }
+
+                this.scrollElement.css( this._transformProperty, 'translate(' + horizontalDifference + 'px,' + verticalDifference + 'px)' );
             },
 
             _stop: function (e) {
@@ -357,6 +382,14 @@
             { title: "Cook something nice with George", done: false },
             { title: "Perform a miracle", done: false },
             { title: "Ship a product", done: false },
+            { title: "Buy a nice bottle of wine for anniversary celebration", done: false },
+            { title: "Eat cake", done: false },
+            { title: "Create orange portal", done: false },
+            { title: "Create blue portal", done: false },
+            { title: "Jump fanatically through portals", done: false },
+            { title: "Create orange portal", done: false },
+            { title: "Create blue portal", done: true },
+            { title: "Jump fanatically through portals", done: false },
             { title: "Buy a nice bottle of wine for anniversary celebration", done: false },
             { title: "Eat cake", done: false },
             { title: "Create orange portal", done: false },
