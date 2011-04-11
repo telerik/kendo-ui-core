@@ -30,8 +30,12 @@
     $.fn.extend({
         timeline: {},
 
-        animate: function(properties, duration, ease, callback) {
+        animate: function(properties, duration, ease, callback, exclusive) {
             duration = duration / 1000;
+            if (typeof callback !== 'function') {
+                exclusive = callback;
+                callback = undefined;
+            }
 
             var transforms = [], cssValues = {}, key, animationStep = {},
                     transformProps = ['perspective', 'rotate', 'rotateX', 'rotateY', 'rotateZ', 'rotate3d', 'scale', 'scaleX', 'scaleY', 'scaleZ', 'scale3d', 'skew', 'skewX', 'skewY', 'translate', 'translateX', 'translateY', 'translateZ', 'translate3d', 'matrix', 'matrix3d'];
@@ -44,9 +48,10 @@
             animationStep.type = 'transition';
             animationStep.callback = callback;
             animationStep.setup = {};
-            animationStep.setup[$.getCssPrefix() + 'transition'] = 'all ' + (duration !== undefined ? duration : 0.5) + 's ' + (ease || '');
+            animationStep.setup[$.getCssPrefix() + 'transition'] = (exclusive || 'all') + ' ' + (duration !== undefined ? duration : 0.5) + 's ' + (ease || '');
 
-            cssValues[$.getCssPrefix() + 'transform'] = transforms.join(' ');
+            if (transforms.length)
+                cssValues[$.getCssPrefix() + 'transform'] = transforms.join(' ');
 
             animationStep.keys = this.keys(cssValues);
             animationStep.CSS = cssValues;
@@ -90,6 +95,7 @@
         },
 
         advanceQueue: function() {
+            this.css($.getCssPrefix() + 'transition', 'none');
             this.dequeue();
 
             this.activateTask();
@@ -158,7 +164,7 @@
         },
 
         fadeTo: function(duration, opacity) {
-            this.animate({ 'opacity': opacity }, duration);
+            this.animate({ 'opacity': opacity }, duration, 'linear', 'opacity');
         }
     });
 
