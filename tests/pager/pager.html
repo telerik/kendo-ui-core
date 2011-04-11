@@ -24,18 +24,18 @@
             var DataSource = kendo.data.DataSource,
                 dataSource;
 
-            function setup(options){
-                options = $.extend({
+            function setup(dataOptions, options){
+                dataOptions = $.extend({
                     data: [1,2,3,4,5],
                     page: 1,
                     pageSize: 1
-                }, options);
+                }, dataOptions);
 
-                dataSource = new DataSource(options);
-
-                return $("<ul />").kendoPager({
+                dataSource = new DataSource(dataOptions);
+                options = $.extend({
                     dataSource: dataSource
-                });
+                }, options);
+                return $("<ul />").kendoPager(options);
             }
 
             test("kendoPager attach pager to an element", function() {
@@ -134,6 +134,31 @@
                 ul.find("a:eq(1)").click();
                 equal(dataSource.page(), 2);
             });
+
+            test("show more button should be shown if page buttons are more than the threshold", function(){
+                var ul = setup({},{ buttonsCount: 3});
+
+                dataSource.read();
+                equal(ul.find("a").length, 4);
+                equal(ul.find("a:last").data("index"), "4");
+            });
+
+            test("show less button should be shown if page buttons are more than the threshold", function(){
+                var ul = setup({ page: 4 },{ buttonsCount: 3});
+
+                dataSource.read();
+                equal(ul.find("a").length, 3);
+                equal(ul.find("a:first").data("index"), "3");
+            });
+
+            test("clicking more button pages to next pages group", function() {
+                var ul = setup({},{ buttonsCount: 3});
+
+                dataSource.read();
+                ul.find("a:last").click();
+                equal(dataSource.page(), 4);
+            });
+
         </script>
     </body>
 </html>

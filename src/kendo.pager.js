@@ -6,6 +6,7 @@
         that.element = element;
         that.wrapper = $(element);
         that.dataSource = options.dataSource;
+        that.buttonsCount = options.buttonsCount || 10;
         that.dataSource.bind("kendo:change", $.proxy(that.render, that));
         that.wrapper.delegate("a:not(.currentPage)", "click",  $.proxy(that.pageClick, that));
     }
@@ -16,16 +17,33 @@
                 dataSource = that.dataSource,
                 total = dataSource.total(),
                 idx,
+                numLinkSize = that.buttonsCount,
+                numStart = 1,                
                 html = "";
 
             that.pageSize = dataSource.pageSize() || 0,
-            that.page = dataSource.page() || 0;
-            that.totalPages = Math.ceil(total/that.pageSize);
+            page = that.page = dataSource.page() || 0;
+            totalPages = that.totalPages = Math.ceil(total/that.pageSize);
 
-            for(idx = 1, pages = that.totalPages; idx <= pages; idx++) {
+            if (page > numLinkSize) {
+                var reminder = (page % numLinkSize);
+
+                numStart = (reminder == 0) ? (page - numLinkSize) + 1 : (page - reminder) + 1;
+            }
+
+            var numEnd = Math.min((numStart + numLinkSize) - 1, totalPages);
+
+            if(numStart > 1) {
+                html += '<li><a href="#" + data-index="' + (numStart - 1) + '">...</a></li>';
+            }
+
+            for(idx = numStart; idx <= numEnd; idx++) {
                 html += '<li><a href="#"' + (idx == that.page ? 'class="currentPage"' : '') + ' data-index="' + idx + '"><span>Page</span>' + idx + '</a></li>';
             }
 
+            if(numEnd < totalPages) {
+                html += '<li><a href="#" + data-index="' + idx +'">...</a></li>';
+            }
             that.wrapper.empty().append(html);
         },
         pageClick: function(ev) {
