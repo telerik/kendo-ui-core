@@ -72,7 +72,7 @@
                                 auth_token: auth.token,
                                 format: "json"
                             }
-                            params.per_page = 50;
+                            params.per_page = 500;
                            // if (data.page && data.pageSize) {
                            //     params.page = data.page;
                            //     params.per_page = data.pageSize;
@@ -87,12 +87,12 @@
                         return result.photos.photo;
                     },
                     total: function(result) {
-                        return 50;
+                        return result.photos.total < 500 ? result.photos.total : 500;
                     }
                 }
             });
 
-        $('.i-search').click(function(e){
+        $('.i-search').click(function(e){            
            dataSource.read();
         });
 
