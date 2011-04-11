@@ -10,6 +10,7 @@
     <style>
         body {
             font-family: Verdana, sans-serif;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
         }
 
         .list {
@@ -28,6 +29,11 @@
             position: relative;
         }
 
+        .item label
+        {
+            display: block;
+        }
+
         .more-details
         {
             position: absolute;
@@ -36,10 +42,41 @@
             right: .6em;
             line-height: 1.2em;
         }
+
+        .touch-scrollbar
+        {
+            position:absolute;
+            display:none;
+            z-index:200000;
+            height: .4em;
+            width: .4em;
+            border: 1px solid #8a8a8a;
+            background-color: #858585;
+            -moz-border-radius: .2em;
+            -webkit-border-radius: .2em;
+            border-radius: .2em;
+            right: 1px;
+            bottom: 1px;
+        }
+
+        .scroll-container
+        {
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        .data-container
+        {
+            width: 100%;
+            height: 100%;
+        }
     </style>
 
     <script src="../src/zepto.js"></script>
     <script src="../src/detect.js"></script>
+    <script src="../src/fx.js"></script>
+    <script src="../src/event.js"></script>
 
     <script type="text/html" id="item_tmpl">
         <ul class="list">
@@ -95,14 +132,182 @@
 
         /// kendo.mobile
 
+        var isTouch = (/iphone|ipad|android/gi).test(navigator.appVersion);
+
+        function Scroller (element) {
+            this.element = element;
+            this.wrapper = $(element);
+
+            this._horizontalScrollbar = $('<div class="touch-scrollbar" />');
+            this._verticalScrollbar = this._horizontalScrollbar.clone();
+            this._scrollbars = this._horizontalScrollbar.add(this._verticalScrollbar);
+
+            this._startProxy = $.proxy(this._start, this);
+            this._stopProxy = $.proxy(this._stop, this);
+            this._dragProxy = $.proxy(this._drag, this);
+
+            this._create();
+        }
+
+        function touchLocation(e) {
+            var changedTouches = e.changedTouches ? e.changedTouches : null;
+
+            if (changedTouches && changedTouches.length < 2) {
+                return {
+                    x: changedTouches[0].pageX,
+                    y: changedTouches[0].pageY
+                };
+            }
+
+            return {
+                x: e.pageX,
+                y: e.pageY
+            };
+        }
+
+        Scroller.prototype = {
+            _create: function () {
+                if (isTouch) {
+                    this._moveEvent = "touchmove",
+                    this._startEvent = "touchstart",
+                    this._endEvent = "touchend";
+                } else {
+                    this._moveEvent = "mousemove",
+                    this._startEvent = "mousedown",
+                    this._endEvent = "mouseup";
+                }
+                var scrollElement = '<div class="scroll-container"></div>';
+                var children = this.wrapper.children();
+
+                this.wrapper
+                    .css("overflow", "hidden")
+                    .bind(this._startEvent, $.proxy(this._wait, this));
+
+                if (children.length)
+                    children.wrapAll(scrollElement);
+                else
+                    this.wrapper.append(scrollElement);
+
+                this.scrollElement = this.wrapper.children();
+            },
+
+            _getScrollOffsets: function () {
+                var transforms = this.scrollElement.css($.getCssPrefix()+'transform').match(/(translate|matrix)\([,\s\w\d]*?\s*(-?\d+)[\w\s]*,\s*(-?\d+)[\w\s]*\)/i) || [0, 0, 0, 0];
+
+                return {
+                    x: transforms[2],
+                    y: transforms[3]
+                };
+            },
+
+            _wait: function (e) {
+                var startLocation = touchLocation(e);
+                var scrollOffsets = this._getScrollOffsets();
+
+                this.start = {
+                    x: startLocation.x - scrollOffsets.x,
+                    y: startLocation.y - scrollOffsets.y
+                };
+
+                $(document)
+                    .bind(this._moveEvent, this._startProxy)
+                    .bind(this._endEvent, this._stopProxy);
+            },
+
+            _start: function (e) {
+                e.preventDefault();
+
+                var currentLocation = touchLocation(e);
+
+                if (this.start.x - currentLocation.x > 10 || this.start.y - currentLocation.y > 10) {
+
+                    $(document).unbind(this._moveEvent, this._startProxy)
+                               .bind(this._moveEvent, this._dragProxy);
+
+                    if (isTouch && $.browser.WebKit)
+                        this.scrollElement
+                            .css( $.getCssPrefix() + 'transition', 'all 0.1s ease-out' );
+
+                    var width = this.wrapper.innerWidth(),
+                        height = this.wrapper.innerHeight(),
+                        offset = this.wrapper.offset(),
+                        scrollWidth = this.scrollElement.attr("offsetWidth"),
+                        scrollHeight = this.scrollElement.attr("offsetHeight"),
+                        scrollOffsets = this._getScrollOffsets();
+
+                    if (scrollWidth > width) {
+                        this._horizontalScrollbar
+                            .appendTo(document.body)
+                            .css({
+                                width: Math.floor((width / scrollWidth) * width)
+                            }).css(
+                                $.getCssPrefix() + 'transform', 'translate(' +
+                                (scrollOffsets.x + offset.left + parseInt(this.wrapper.css("borderLeftWidth"))) + 'px,' +
+                                (offset.top + this.wrapper.innerHeight() + parseInt(this.wrapper.css("borderTopWidth")) - this._horizontalScrollbar.outerHeight(true)) + 'px)'
+                            );
+                    }
+
+                    if (scrollHeight > height) {
+                        this._verticalScrollbar
+                            .appendTo(document.body)
+                            .css({
+                                height: Math.floor((height / scrollHeight) * height)
+                            })
+                            .css(
+                                $.getCssPrefix() + 'transform', 'translate(' +
+                                (scrollOffsets.y + offset.top + parseInt(this.wrapper.css("borderTopWidth"))) + 'px,' +
+                                (offset.left + this.wrapper.innerWidth() + parseInt(this.wrapper.css("borderLeftWidth")) - this._verticalScrollbar.outerWidth(true)) + 'px)'
+                            );
+                    }
+
+                    this._scrollbars
+                        .stop()
+                        .fadeTo(200, 0.5);
+                }
+            },
+
+            _drag: function (e) {
+                e.preventDefault();
+
+                var currentLocation = touchLocation(e),
+                    offset = this.wrapper.offset(),
+                    startLeft = offset.left + parseInt(this.wrapper.css("borderLeftWidth")),
+                    startTop = offset.top + parseInt(this.wrapper.css("borderTopWidth")),
+                    horizontalDifference = this.start.x - currentLocation.x,
+                    verticalDifference = this.start.y - currentLocation.y,
+                    left = Math.max(startLeft, startLeft + horizontalDifference),
+                    top = Math.max(startTop, startTop + verticalDifference);
+
+                left = Math.min(startLeft + this.wrapper.innerWidth() - this._horizontalScrollbar.outerWidth(true) - this._horizontalScrollbar.outerHeight(true), left);
+                top = Math.min(startTop + this.wrapper.innerHeight() - this._verticalScrollbar.outerHeight(true) - this._verticalScrollbar.outerWidth(true), top);
+
+                this._horizontalScrollbar.css( $.getCssPrefix() + 'transform', 'translate(' + -left + 'px,' + -top + 'px)' );
+                this.scrollElement
+                        .css( $.getCssPrefix() + 'transform', 'translate(' + (-horizontalDifference) + 'px,' + (-verticalDifference) + 'px)' )
+            },
+
+            _stop: function (e) {
+                $(document).unbind(this._moveEvent, this._startProxy)
+                           .unbind(this._moveEvent, this._dragProxy)
+                           .unbind(this._endEvent, this._stopProxy);
+
+                this._scrollbars
+                    .stop()
+                    .fadeTo(400, 0);
+            }
+        };
+
+
         function View(options) {
             $.extend(this, options);
-            this.element = $('<div />');
+            this.element = $('<div class="data-container"/>');
+            this.scroller = new Scroller(this.element);
+            this.scrollElement = this.scroller.scrollElement;
         }
 
         View.prototype = {
             bind: function(data) {
-                this.onBind(data, this.element);
+                this.onBind(data, this.scrollElement || this.element);
             }
         };
 
@@ -128,6 +333,7 @@
 
                 window.scrollTo(0,1);
             },
+
             show: function(viewIndex) {
                 this.views[viewIndex].element.appendTo(this.root);
             }
@@ -155,6 +361,9 @@
             { title: "Eat cake", done: false },
             { title: "Create orange portal", done: false },
             { title: "Create blue portal", done: false },
+            { title: "Jump fanatically through portals", done: false },
+            { title: "Create orange portal", done: false },
+            { title: "Create blue portal", done: true },
             { title: "Jump fanatically through portals", done: false },
             { title: "Make another list of tommorow's tasks", done: false }
         ]);

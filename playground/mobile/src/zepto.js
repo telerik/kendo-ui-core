@@ -240,6 +240,9 @@ var Zepto = (function(selector, context) {
                 return element[property]
             })
         },
+        getComputed: function (property) {
+            return getComputedStyle(this[0], '').getPropertyValue(property);
+        },
         show: function() {
             return this.css('display', 'block')
         },
@@ -251,6 +254,44 @@ var Zepto = (function(selector, context) {
         },
         next: function() {
             return $(this.pluck('nextElementSibling'))
+        },
+        clone: function(deepClone) {
+            deepClone = deepClone || false;
+            var output = [];
+            
+            this.each(function() {
+                output.push( this.cloneNode(deepClone) );
+            });
+            return $(output);
+        },
+        firstChild: function() {
+            return $(this[0].firstChild);
+        },
+        wrapAll: function (html) {
+            if (typeof html == 'function') {
+                return this.each(function(i) {
+                    $(this).wrapAll(html.call(this, i));
+                });
+            }
+
+            if (this[0]) {
+                var wrapper = $(fragment(html));
+
+                this[0].parentNode && wrapper[0].insertBefore(this[0]);
+
+                $(flatten(wrapper.map(function(elem) {
+                    while ( elem.firstChild && elem.firstChild.nodeType === 1 )
+                        elem = elem.firstChild;
+                    return elem;
+                }))).append(this);
+            }
+
+            return this;
+        },
+        wrap: function (html) {
+            return this.each(function() {
+                $(this).wrapAll(html);
+            });
         },
         html: function(html) {
             return html === undefined ?
@@ -310,13 +351,57 @@ var Zepto = (function(selector, context) {
         },
         css: function(property, value) {
             if (value === undefined && typeof property == 'string')
-                return this[0].style[camelize(property)] || getComputedStyle(this[0], '').getPropertyValue(property);
+                return this[0].style[camelize(property)] || this.getComputed(property);
             css = "";
             for (key in property) css += key + ':' + property[key] + ';';
             if (typeof property == 'string') css = property + ":" + value;
             return this.each(function() {
-                this.style.cssText += ';' + css
+                this.style.cssText += ';' + css;
             });
+        },
+        width: function() {
+            var padding = parseInt(this.getComputed('padding-left'), 10) + parseInt(this.getComputed('padding-right'), 10);
+            return this[0] ? this[0].clientWidth - padding : 0;
+        },
+        height: function() {
+            var padding = parseInt(this.getComputed('padding-top'), 10) + parseInt(this.getComputed('padding-bottom'), 10);
+            return this[0] ? this[0].clientHeight - padding : 0;
+        },
+        innerWidth: function() {
+            return this[0] ? this[0].clientWidth : 0;
+        },
+        innerHeight: function() {
+            return this[0] ? this[0].clientHeight : 0;
+        },
+        outerWidth: function(withMargin) {
+            var margin = withMargin ? parseInt(this.getComputed('margin-left'), 10) + parseInt(this.getComputed('margin-right'), 10) : 0;
+            return this[0] ? this[0].offsetWidth + margin : 0;
+        },
+        outerHeight: function(withMargin) {
+            var margin = withMargin ? parseInt(this.getComputed('margin-top'), 10) + parseInt(this.getComputed('margin-bottom'), 10) : 0;
+            return this[0] ? this[0].offsetHeight + margin : 0;
+        },
+        scrollLeft: function(value) {
+            if (typeof value === 'number') {
+                this.each(function () {
+                    this.scrollLeft = value;
+                });
+                
+                return this;
+            }
+
+            return this[0].scrollLeft;
+        },
+        scrollTop: function(value) {
+            if (typeof value === 'number') {
+                this.each(function () {
+                    this.scrollTop = value;
+                });
+
+                return this;
+            }
+
+            return this[0].scrollTop;
         },
         index: function(element) {
             return this.indexOf($(element)[0]);
@@ -345,6 +430,10 @@ var Zepto = (function(selector, context) {
     $.fn.init.prototype = $.fn;
 
     $.extend = $.fn.extend = function(target, source) {
+        if (!source) {
+            source = target;
+            target = this;
+        }
         for (key in source) target[key] = source[key];
         return target
     };

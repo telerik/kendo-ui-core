@@ -1,154 +1,165 @@
 (function($) {
-  $.fn.animate = function(properties, duration, ease, callback) {
-    var transforms = [], cssValues = {}, key, animationStep = {},
-        transformProps = ['perspective', 'rotate', 'rotateX', 'rotateY', 'rotateZ', 'rotate3d', 'scale', 'scaleX', 'scaleY', 'scaleZ', 'scale3d', 'skew', 'skewX', 'skewY', 'translate', 'translateX', 'translateY', 'translateZ', 'translate3d', 'matrix', 'matrix3d'];
-    for (key in properties)
-      if (transformProps.indexOf(key) != -1)
-        transforms.push(key + '(' + properties[key] + ')');
-      else
-        cssValues[key] = properties[key];
 
-    animationStep.type = 'transition';
-    animationStep.callback = callback;
-    animationStep.setup = {};
-    animationStep.setup[$.getCssPrefix() + 'transition'] = 'all ' + (duration !== undefined ? duration : 0.5) + 's ' + (ease || '');
-    
-    cssValues[$.getCssPrefix() + 'transform'] = transforms.join(' ');
+    var stopTransition = function (selection, gotoEnd) {
+        if (!selection || !('object' in selection)) return;
 
-    animationStep.keys = this.keys( cssValues );
-    animationStep.CSS = cssValues;
-    animationStep.object = this;
+        var aObject = selection.object;
 
-    if (this.queue(animationStep) == 1)
-      this.activateTask();
+        if (!gotoEnd) {
 
-    return this;
-  };
+            var animProperties = selection.keys;
+            if (!animProperties) return;
 
-  $.fn.activateTask = function() {
+            var style = document.defaultView.getComputedStyle(aObject[0], null),
+                    cssValues = {},
+                    prop;
 
-    if (this.selector in this.timeline && this.timeline[this.selector].length) {
-      var currentTransition = this.timeline[this.selector][0];
+            for (prop in animProperties)
+                cssValues[animProperties[prop]] = style.getPropertyValue(animProperties[prop]);
 
-      if (currentTransition.type == 'delay') {
-        var that = this;
-        
-        setTimeout( function () {
-          that.advanceQueue();
-        }, currentTransition.duration );
+            aObject.css($.getCssPrefix() + 'transition', 'none');
 
-        return;
-      }
+            aObject.css(cssValues);
 
-      var eventName = $.getEventPrefix() + 'TransitionEnd';
-      if (!$.getEventPrefix())
-        eventName = eventName.toLowerCase();
+        } else
+            aObject.css($.getCssPrefix() + 'transition', 'none');
 
-      typeof currentTransition.callback == 'function' && currentTransition.object.one( eventName, $.proxy( currentTransition.callback, this ) );
-      currentTransition.object.one( eventName, $.proxy( this.advanceQueue, this ) );
+        aObject.dequeue();
+    };
 
-      currentTransition.object.css( currentTransition.setup );
+    $.fn.extend({
+        timeline: {},
 
-      setTimeout(function () {
-        currentTransition.object.css( currentTransition.CSS );
-      }, 0); // Opera Mobile is one dumb animal
-    }
+        animate: function(properties, duration, ease, callback) {
+            duration = duration / 1000;
 
-  };
+            var transforms = [], cssValues = {}, key, animationStep = {},
+                    transformProps = ['perspective', 'rotate', 'rotateX', 'rotateY', 'rotateZ', 'rotate3d', 'scale', 'scaleX', 'scaleY', 'scaleZ', 'scale3d', 'skew', 'skewX', 'skewY', 'translate', 'translateX', 'translateY', 'translateZ', 'translate3d', 'matrix', 'matrix3d'];
+            for (key in properties)
+                if (transformProps.indexOf(key) != -1)
+                    transforms.push(key + '(' + properties[key] + ')');
+                else
+                    cssValues[key] = properties[key];
 
-  $.fn.advanceQueue = function() {
-    this.dequeue();
+            animationStep.type = 'transition';
+            animationStep.callback = callback;
+            animationStep.setup = {};
+            animationStep.setup[$.getCssPrefix() + 'transition'] = 'all ' + (duration !== undefined ? duration : 0.5) + 's ' + (ease || '');
 
-    this.activateTask();
-  };
+            cssValues[$.getCssPrefix() + 'transform'] = transforms.join(' ');
 
-  $.fn.clearQueue = function() {
-    delete this.timeline[this.selector];
-  };
+            animationStep.keys = this.keys(cssValues);
+            animationStep.CSS = cssValues;
+            animationStep.object = this;
 
-  $.fn.queue = function( step ) {
-    if (!(this.selector in this.timeline))
-      this.timeline[this.selector] = [];
-    
-    this.timeline[this.selector].push(step);
+            if (this.queue(animationStep) == 1)
+                this.activateTask();
 
-    return this.timeline[this.selector].length;
-  };
+            return this;
+        },
 
-  $.fn.dequeue = function() {
-    if (!this.timeline[this.selector]) return;
+        activateTask: function() {
 
-    this.timeline[this.selector].shift();
+            if (this.selector in this.timeline && this.timeline[this.selector].length) {
+                var currentTransition = this.timeline[this.selector][0];
 
-    if (this.timeline[this.selector] == [])
-      delete this.timeline[this.selector];
-  };
+                if (currentTransition.type == 'delay') {
+                    var that = this;
 
-  $.fn.delay = function( timeSpan ) {
-    var animationStep = {};
+                    setTimeout(function () {
+                        that.advanceQueue();
+                    }, currentTransition.duration);
 
-    animationStep.type = 'delay';
-    animationStep.duration = timeSpan;
-    animationStep.object = this;
+                    return;
+                }
 
-    if (this.queue(animationStep) == 1)
-      this.activateTask();
+                var eventName = $.getEventPrefix() + 'TransitionEnd';
+                if (!$.getEventPrefix())
+                    eventName = eventName.toLowerCase();
 
-    return this;
-  };
+                typeof currentTransition.callback == 'function' && currentTransition.object.one(eventName, $.proxy(currentTransition.callback, this));
+                currentTransition.object.one(eventName, $.proxy(this.advanceQueue, this));
 
-  var stopTransition = function ( selection, gotoEnd ) {
-    if (!selection || !('object' in selection)) return;
+                currentTransition.object.css(currentTransition.setup);
 
-    var aObject = selection.object;
+                setTimeout(function () {
+                    currentTransition.object.css(currentTransition.CSS);
+                }, 0); // Opera Mobile is one dumb animal
+            }
 
-    if (!gotoEnd) {
+        },
 
-      var animProperties = selection.keys;
-      if (!animProperties) return;
+        advanceQueue: function() {
+            this.dequeue();
 
-      var style = document.defaultView.getComputedStyle(aObject[0], null),
-          cssValues = {},
-          prop;
+            this.activateTask();
+        },
 
-      for (prop in animProperties)
-        cssValues[animProperties[prop]] = style.getPropertyValue(animProperties[prop]);
+        clearQueue: function() {
+            delete this.timeline[this.selector];
+        },
 
-      aObject.css( $.getCssPrefix() + 'transition', 'none' );
+        queue: function(step) {
+            if (!(this.selector in this.timeline))
+                this.timeline[this.selector] = [];
 
-      aObject.css( cssValues );
+            this.timeline[this.selector].push(step);
 
-    } else
-      aObject.css( $.getCssPrefix() + 'transition', 'none' );
+            return this.timeline[this.selector].length;
+        },
 
-    aObject.dequeue();
-  };
+        dequeue: function() {
+            if (!this.timeline[this.selector]) return;
 
-  $.fn.stop = function( clearQueue, gotoEnd ) {
+            this.timeline[this.selector].shift();
 
-    if (this.selector in this.timeline)
-      stopTransition(this.timeline[this.selector][0], gotoEnd);
+            if (this.timeline[this.selector] == [])
+                delete this.timeline[this.selector];
+        },
 
-    if (clearQueue)
-      this.clearQueue();
+        delay: function(timeSpan) {
+            var animationStep = {};
 
-    return this;
-  };
+            animationStep.type = 'delay';
+            animationStep.duration = timeSpan;
+            animationStep.object = this;
 
-  $.fn.stopAll = function( clearQueue, gotoEnd ) {
+            if (this.queue(animationStep) == 1)
+                this.activateTask();
 
-    for (var idx in this.timeline) {
-      if (idx in this.timeline)
-        stopTransition(this.timeline[idx][0], gotoEnd);
+            return this;
+        },
 
-      if (clearQueue && this.timeline[idx].length)
-        this.timeline[idx][0].object.clearQueue();
+        stop: function(clearQueue, gotoEnd) {
 
-      if (!clearQueue && this.timeline[idx].length)
-        this.timeline[idx][0].object.activateTask();
-    }
+            if (this.selector in this.timeline)
+                stopTransition(this.timeline[this.selector][0], gotoEnd);
 
-    return this;
-  };
+            if (clearQueue)
+                this.clearQueue();
+
+            return this;
+        },
+
+        stopAll: function(clearQueue, gotoEnd) {
+
+            for (var idx in this.timeline) {
+                if (idx in this.timeline)
+                    stopTransition(this.timeline[idx][0], gotoEnd);
+
+                if (clearQueue && this.timeline[idx].length)
+                    this.timeline[idx][0].object.clearQueue();
+
+                if (!clearQueue && this.timeline[idx].length)
+                    this.timeline[idx][0].object.activateTask();
+            }
+
+            return this;
+        },
+
+        fadeTo: function(duration, opacity) {
+            this.animate({ 'opacity': opacity }, duration);
+        }
+    });
 
 })(Zepto);
