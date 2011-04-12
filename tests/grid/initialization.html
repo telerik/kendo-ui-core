@@ -21,13 +21,17 @@
             var Grid = kendo.ui.Grid,
                 DataSource = kendo.data.DataSource;
 
+            function table() {
+                return document.createElement("table");
+            }
+
             test("kendoGrid attaches a grid object to target", function() {
                 var table = $("<table />").kendoGrid({ data: [] });
 
                 ok(table.data("kendoGrid") instanceof Grid);
             });
 
-            test("Grid calls the query method of its datasource", function() {
+            test("Grid constructor calls the query method of its datasource", function() {
                 var dataSource = new DataSource({ data: [] });
                 var queryWasCalled = false;
 
@@ -35,9 +39,33 @@
                     queryWasCalled = true;
                 };
 
-                new Grid(document.createElement("table"), { dataSource: dataSource } );
+                new Grid(table(), { dataSource: dataSource } );
 
                 ok(queryWasCalled);
+            });
+
+            test("column initialization", function() {
+                var grid = new Grid(table(), { data: [], columns: [{ field: "foo" }, { field: "bar" }] });
+
+                equal(grid.columns.length, 2);
+                equal(grid.columns[0].field, "foo");
+                equal(grid.columns[1].field, "bar");
+            });
+            test("column initialization - treating strings as fields", function() {
+                var grid = new Grid(table(), { data: [], columns: ["foo", { field: "bar" }] });
+
+                equal(grid.columns.length, 2);
+                equal(grid.columns[0].field, "foo");
+                equal(grid.columns[1].field, "bar");
+            });
+
+            test("header data attributes are treated as column metadata", function() {
+                debugger;
+                var grid = new Grid($('<table><th data-field="foo"></th><th data-field="bar"></th></table>')[0], { data: [] });
+
+                equal(grid.columns.length, 2);
+                equal(grid.columns[0].field, "foo");
+                equal(grid.columns[1].field, "bar");
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

@@ -12,16 +12,34 @@
         that.table = $(element);
         that.tbody = that.table.find(">tbody");
 
-        dataSource.bind("kendo:change", $.proxy(that._dataSourceChange, that));
+        that._columns();
+
+        dataSource.bind("kendo:change", $.proxy(that.refresh, that));
         dataSource.query();
     }
 
     Grid.prototype = {
         options: {
+            columns: []
         },
 
-        dataBind: function(data) {
-           var count, idx, html = "";
+        _columns: function() {
+            var columns = this.options.columns;
+
+            columns = columns.length ? columns : $.map(this.table.find("th"), function(th) {
+                return $(th).data("field");
+            });
+
+            this.columns = $.map(columns, function(column) {
+                column = typeof column === "string" ? { field: column } : column;
+                return {
+                    field: column.field
+                }
+            });
+        },
+
+        refresh: function() {
+           var count, idx, html = "", data = this.dataSource.view();
 
            for (idx = 0, count = data.length; idx < count; idx++) {
                var dataItem = data[idx];
@@ -36,10 +54,6 @@
                html += "</tr>";
            }
            this.tbody.html(html);
-       },
-
-       _dataSourceChange: function() {
-           this.dataBind(this.dataSource.view());
        }
     }
 
