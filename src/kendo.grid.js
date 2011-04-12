@@ -12,6 +12,10 @@
         that.table = $(element);
         that.tbody = that.table.find(">tbody");
 
+        if (!that.tbody.length) {
+            that.tbody = $("<tbody />").appendTo(element);
+        }
+
         that._columns();
 
         that._templates();
@@ -46,17 +50,19 @@
         },
 
         _templates: function() {
-            var rowTemplate = this.options.rowTemplate,
-                settings = $.extend({}, kendo.core.Template, this.options.templateSettings);
+            var that = this,
+                rowTemplate = that.options.rowTemplate,
+                settings = $.extend({}, kendo.core.Template, that.options.templateSettings);
 
             if (!$.isFunction(rowTemplate)) {
 
                 if (!rowTemplate) {
                     rowTemplate = "<tr>";
 
-                    $.each(this.columns, function() {
-                        var value = this.template ? this.template :
-                                       settings.begin + "=" + (settings.useWithBlock ? "" : settings.paramName + ".") + this.field + settings.end;
+                    $.each(that.columns, function() {
+                        var column = this,
+                            value = column.template ? column.template :
+                                   settings.begin + "=" + (settings.useWithBlock ? "" : settings.paramName + ".") + column.field + settings.end;
 
                         rowTemplate += "<td>" + value + "</td>";
                     });
@@ -67,24 +73,19 @@
                 rowTemplate = kendo.core.template(rowTemplate, settings);
             }
 
-            this.rowTemplate = rowTemplate;
+            that.rowTemplate = rowTemplate;
         },
 
         refresh: function() {
-           var count, idx, html = "", data = this.dataSource.view();
+            var length,
+                idx,
+                html = "",
+                view = this.dataSource.view();
 
-           for (idx = 0, count = data.length; idx < count; idx++) {
-               var dataItem = data[idx];
-               html += "<tr ";
-               html += "data-id='" + this.dataSource.id(dataItem);
-               html += "'>";
-               for (var member in dataItem) {
-                    html += "<td>";
-                    html += dataItem[member];
-                    html += "</td>";
-               }
-               html += "</tr>";
+           for (idx = 0, length = view.length; idx < length; idx++) {
+               html += this.rowTemplate(view[idx]);
            }
+
            this.tbody.html(html);
        }
     }

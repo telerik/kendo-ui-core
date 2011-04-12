@@ -132,6 +132,11 @@
 
                     ok(grid.rowTemplate.toString().indexOf("item.foo") > -1);
                 });
+
+                test("tbody is created if not present", function() {
+                    var grid = new Grid(table(), { data: [], columns: [{ field: "foo", template: "item.foo" }] });
+                    equal(grid.tbody.length, 1);
+                });
            </script>
             <div id="qunit-fixture">test markup, will be hidden</div>
             <ul id="log"></ul>
