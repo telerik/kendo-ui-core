@@ -77,6 +77,7 @@
     }
 
     function DataSource(options) {
+        options = options || {};
         var that = extend(this, this.defaults, {
                 idMap: {},
                 modified: {},
@@ -115,6 +116,22 @@
         }
     }
 
+    DataSource.create = function(options) {
+        options = options || {};
+        var dataSource = options.dataSource,
+            data = options.data;
+
+        if (dataSource) {
+            return dataSource instanceof DataSource ? dataSource : new DataSource(dataSource);
+        }
+
+        if (data) {
+            return new DataSource({ data: data });
+        }
+
+        return new DataSource();
+    }
+
     extend(DataSource.prototype, new kendo.core.Observable, {
         defaults: {
             schema: {
@@ -141,7 +158,7 @@
                 options = {};
 
             that._total = that._reader.total(data);
-            data = that._reader.data(data);                        
+            data = that._reader.data(data);
             that._data = data;
 
             if (that.serverPaging !== true) {

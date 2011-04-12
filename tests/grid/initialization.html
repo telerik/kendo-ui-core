@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Grid Initialization</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.query.js"></script>
+        <script src="../../src/kendo.datasource.js"></script>
+        <script src="../../src/kendo.grid.js"></script>
+        <link rel="stylesheet" href="../qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Grid Initialization</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var Grid = kendo.ui.Grid,
+            DataSource = kendo.data.DataSource;
+
+            function table() {
+                return document.createElement("table");
+            }
+
+            test("kendoGrid attaches a grid object to target", function() {
+                var table = $("<table />").kendoGrid({ data: [] });
+
+                    ok(table.data("kendoGrid") instanceof Grid);
+                });
+
+                test("Grid constructor calls the query method of its datasource", function() {
+                    var dataSource = new DataSource({ data: [] });
+                    var queryWasCalled = false;
+
+                    dataSource.query = function() {
+                        queryWasCalled = true;
+                    };
+
+                    new Grid(table(), { dataSource: dataSource } );
+
+                    ok(queryWasCalled);
+                });
+
+                test("column initialization - field", function() {
+                    var grid = new Grid(table(), { data: [], columns: [{ field: "foo" }, { field: "bar" }] });
+
+                    equal(grid.columns.length, 2);
+                    equal(grid.columns[0].field, "foo");
+                    equal(grid.columns[1].field, "bar");
+                });
+
+                test("column initialization - template", function() {
+                    var grid = new Grid(table(), { data: [], columns: [{ field: "foo", template: "bar" }] });
+
+                    equal(grid.columns[0].field, "foo");
+                    equal(grid.columns[0].template, "bar");
+                });
+
+                test("column initialization - treating strings as fields", function() {
+                    var grid = new Grid(table(), { data: [], columns: ["foo", { field: "bar" }] });
+
+                    equal(grid.columns.length, 2);
+                    equal(grid.columns[0].field, "foo");
+                    equal(grid.columns[1].field, "bar");
+                });
+
+                test("header data attributes - data-field", function() {
+                    var grid = new Grid($('<table><th data-field="foo"></th><th data-field="bar"></th></table>')[0], { data: [] });
+
+                    equal(grid.columns.length, 2);
+                    equal(grid.columns[0].field, "foo");
+                    equal(grid.columns[1].field, "bar");
+                });
+
+                test("header data attributes - data-template", function() {
+                    var grid = new Grid($('<table><th data-field="foo" data-template="bar"></th></table>')[0], { data: [] });
+
+                    equal(grid.columns[0].field, "foo");
+                    equal(grid.columns[0].template, "bar");
+                });
+                test("rowTemplate is initialized", function() {
+                    var grid = new Grid(table(), { data: [], columns: [{ field: "foo" }, { field: "bar" }] });
+
+                    ok(grid.rowTemplate);
+                });
+
+                test("default rowTemplate renders table row element", function() {
+                    var grid = new Grid(table(), { data: [], columns: [{ field: "foo" }, { field: "bar" }] });
+
+                    ok($(grid.rowTemplate({ foo: "foo", bar: "bar" })).is("tr"));
+                });
+
+                test("default rowTemplate renders a table cell for each column", function() {
+                    var grid = new Grid(table(), { data: [], columns: [{ field: "foo" }, { field: "bar" }] });
+
+                    equal($(grid.rowTemplate({ foo: "foo", bar: "bar" })).find(" > td").length, 2);
+                });
+
+                test("default rowTemplate renders data for the columns", function() {
+                    var grid = new Grid(table(), { data: [], columns: [{ field: "foo" }, { field: "bar" }] });
+
+                    var tr = $(grid.rowTemplate({ foo: "foo", bar: "bar" }));
+                    equal(tr.find("td").eq(0).text(), "foo");
+                    equal(tr.find("td").eq(1).text(), "bar");
+                });
+
+                test("default rowTemplate uses specified template settings renders data for the columns", function() {
+                    var grid = new Grid(table(), { templateSettings: {useWithBlock: false, paramName: "item" }, data: [], columns: [{ field: "foo" }] });
+
+                    ok(grid.rowTemplate.toString().indexOf("item.foo") > -1);
+                });
+
+                test("rowTemplate initialization from options.rowTemplate", function() {
+                    var rowTemplate = function() { };
+                    var grid = new Grid(table(), { rowTemplate: rowTemplate, data: [], columns: [{ field: "foo" }] });
+
+                    ok(grid.rowTemplate === rowTemplate);
+                });
+
+                test("rowTemplate as string", function() {
+                    var rowTemplate = function() { };
+                    var grid = new Grid(table(), { rowTemplate: "<tr></tr>", data: [], columns: [{ field: "foo" }] });
+
+                    ok($(grid.rowTemplate({})).is("tr"));
+                });
+
+                test("default rowTemplate is using column templates", function() {
+                    var grid = new Grid(table(), { data: [], columns: [{ field: "foo", template: "item.foo" }] });
+
+                    ok(grid.rowTemplate.toString().indexOf("item.foo") > -1);
+                });
+
+                test("tbody is created if not present", function() {
+                    var grid = new Grid(table(), { data: [], columns: [{ field: "foo", template: "item.foo" }] });
+                    equal(grid.tbody.length, 1);
+                });
+           </script>
+            <div id="qunit-fixture">test markup, will be hidden</div>
+            <ul id="log"></ul>
+        </body>
+    </html>

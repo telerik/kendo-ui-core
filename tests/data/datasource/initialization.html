@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html>
-    <script src="../../../src/jquery.js"></script>
-    <script type="text/javascript" src="../../qunit.js"></script>
-    <script type="text/javascript" src="../../qunit-runner.js"></script>
-    <script src="../../../src/kendo.core.js"></script>
-    <script src="../../../src/kendo.query.js"></script>
-    <script src="../../../src/kendo.datasource.js"></script>
-    <link rel="stylesheet" href="../../qunit.css" type="text/css" />
-
+    <head>
+        <title>DataSource initialization</title>
+        <script src="../../../src/jquery.js"></script>
+        <script type="text/javascript" src="../../qunit.js"></script>
+        <script type="text/javascript" src="../../qunit-runner.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.query.js"></script>
+        <script src="../../../src/kendo.datasource.js"></script>
+        <link rel="stylesheet" href="../../qunit.css" type="text/css" />
+    </head>
     <body>
-        <h1 id="qunit-header">QUnit example</h1>
+        <h1 id="qunit-header">DataSource initialization</h1>
         <h2 id="qunit-banner"></h2>
         <div id="qunit-testrunner-toolbar"></div>
         <h2 id="qunit-userAgent"></h2>
@@ -47,6 +49,42 @@
                 });
 
                 equal(dataSource.transport.settings.read.url, "foo");
+            });
+
+            test("create returns a new DataSource", function() {
+                var dataSource = DataSource.create();
+                ok(dataSource instanceof DataSource);
+            });
+
+            test("dataSource is initialized from the options", function() {
+                var dataSource1 = new DataSource(),
+                    dataSource2 = DataSource.create({
+                        dataSource: dataSource1
+                    });
+
+                ok(dataSource1 === dataSource2);
+            });
+
+            test("dataSource is initialized if array is passed as options.data", function() {
+                var data = [1, 2],
+                    dataSource = DataSource.create({
+                        data: data
+                    });
+
+                dataSource.read();
+                ok(dataSource.data() === data);
+            });
+
+            test("dataSource configuration is used by the create factory method", function() {
+                var schema = {},
+                    dataSource = DataSource.create({
+                        dataSource: {
+                            schema: schema
+                        }
+                    });
+
+                ok(dataSource.schema === schema);
+                ok(dataSource instanceof DataSource);
             });
 
             </script>
