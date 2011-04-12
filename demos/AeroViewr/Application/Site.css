@@ -410,3 +410,7 @@ li.thumb-upload>a
 {
     cursor:default;
 }
+.thumbnail
+{
+    opacity: 0;
+}

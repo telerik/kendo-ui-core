@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.ui.ListView Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.query.js"></script>
+        <script src="../../src/kendo.dataSource.js"></script>
+        <script src="../../src/kendo.list.js"></script>
+        <script src="../../src/kendo.listView.js"></script>
+        <link rel="stylesheet" href="../qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.ui.ListView Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+            var DataSource = kendo.data.DataSource,
+                dataSource;
+
+            function setup(options) {
+                options = $.extend({
+                    dataSource: dataSource = new DataSource({ data: [1,2,3,4,5] })
+                }, options);
+                return $("<ul/>").kendoListView(options);
+            }
+
+            test("kendoListView attaches listView to element", function() {
+                var ul = setup();
+                var listView = ul.data("kendoListView");
+
+                ok(listView instanceof kendo.ui.ListView);
+            });
+
+            test("renders item for dataSource items", function() {
+                ul = setup({
+                    template: "<li></li>"
+                });
+                dataSource.read();
+                equal(ul.find("li").length, 5);
+            });
+            test("clicking item raises event", function() {
+                var ul = setup({
+                        template: "<li></li>"
+                    }),
+                    item;
+
+                ul.bind("kendo:change", function() {
+                    item = arguments[0];
+                });
+                dataSource.read();
+                ul.children().first().click();
+                ok(item);
+            });
+        </script>
+    </body>
+</html>

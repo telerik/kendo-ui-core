@@ -6,7 +6,7 @@
         that.element = element;
         that.wrapper = $(element);
         that.dataSource = options.dataSource;
-        that.options = $.extend({}, that.defaults, options);
+        that.options = $.extend({}, that.options, options);
         that.linkTemplate = kendo.core.template(that.options.linkTemplate);
         that.selectTemplate = kendo.core.template(that.options.selectTemplate);
 
@@ -15,7 +15,7 @@
     }
 
     Pager.prototype = {
-        defaults: {
+        options: {
             selectTemplate: '<li><a href="#" class="currentPage"><span>Page</span><%=text %></a></li>',
             linkTemplate: '<li><a href="#" + data-page="<%=idx %>"><%= isNum ? "<span>Page</span>" : "" %><%=text %></a></li>',
             buttonCount: 10
