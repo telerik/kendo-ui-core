@@ -49,6 +49,42 @@
                 equal(dataSource.transport.settings.read.url, "foo");
             });
 
+            test("create returns a new DataSource", function() {
+                var dataSource = DataSource.create();
+                ok(dataSource instanceof DataSource);
+            });
+
+            test("dataSource is initialized from the options", function() {
+                var dataSource1 = new DataSource(),
+                    dataSource2 = DataSource.create({
+                        dataSource: dataSource1
+                    });
+
+                ok(dataSource1 === dataSource2);
+            });
+
+            test("dataSource is initialized if array is passed as options.data", function() {
+                var data = [1, 2],
+                    dataSource = DataSource.create({
+                        data: data
+                    });
+
+                dataSource.read();
+                ok(dataSource.data() === data);
+            });
+
+            test("dataSource configuration is used by the create factory method", function() {
+                var schema = {},
+                    dataSource = DataSource.create({
+                        dataSource: {
+                            schema: schema
+                        }
+                    });
+
+                ok(dataSource.schema === schema);
+                ok(dataSource instanceof DataSource);
+            });
+
             </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
