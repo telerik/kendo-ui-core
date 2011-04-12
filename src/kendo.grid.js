@@ -6,6 +6,7 @@
         var that = this,
             dataSource;
 
+        options = $.isArray(options) ? { data: options } : options;
         that.options = options = $.extend({}, that.options, options);
         that.dataSource = dataSource = DataSource.create(options);
         that.element = element;
