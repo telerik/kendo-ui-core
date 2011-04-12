@@ -6,26 +6,30 @@
         that.element = element;
         that.wrapper = $(element);
         that.dataSource = options.dataSource;
-        that.buttonCount = options.buttonsCount || 10;
+        that.options = $.extend({}, that.defaults, options);
+        that.linkTemplate = kendo.core.template(that.options.linkTemplate);
+        that.selectTemplate = kendo.core.template(that.options.selectTemplate);
+
         that.dataSource.bind("kendo:change", $.proxy(that.render, that));
         that.wrapper.delegate("a:not(.currentPage)", "click",  $.proxy(that._click, that));
     }
 
     Pager.prototype = {
+        defaults: {
+            selectTemplate: '<li><a href="#" class="currentPage"><span>Page</span><%=text %></a></li>',
+            linkTemplate: '<li><a href="#" + data-page="<%=idx %>"><%= isNum ? "<span>Page</span>" : "" %><%=text %></a></li>',
+            buttonCount: 10
+        },
         render: function() {
             var that = this,
-                dataSource = that.dataSource,
-                total = dataSource.total(),
                 idx,
-                buttonCount = that.buttonCount,
                 end,
                 start = 1,
                 html = "",
-                reminder;
-
-            that.pageSize = dataSource.pageSize() || 0,
-            page = that.page = dataSource.page() || 0;
-            totalPages = that.totalPages = Math.ceil(total/that.pageSize);
+                reminder,
+                page = that.page(),
+                totalPages = that.totalPages(),
+                buttonCount = that.options.buttonCount;
 
             if (page > buttonCount) {
                 reminder = (page % buttonCount);
@@ -36,18 +40,20 @@
             end = Math.min((start + buttonCount) - 1, totalPages);
 
             if(start > 1) {
-                html += '<li><a href="#" + data-page="' + (start - 1) + '">...</a></li>';
+                html += that.linkTemplate({idx: (start - 1), text: "...", isNum: false });
             }
 
             for(idx = start; idx <= end; idx++) {
-                html += '<li><a href="#"' + (idx == that.page ? 'class="currentPage"' : '') + ' data-page="' + idx + '"><span>Page</span>' + idx + '</a></li>';
+                html += (idx == page) ? that.selectTemplate({ text: idx }) : that.linkTemplate( { idx: idx, text: idx, isNum: true});
             }
 
             if(end < totalPages) {
-                html += '<li><a href="#" + data-page="' + idx +'">...</a></li>';
+                html += that.linkTemplate({idx: idx, text: "...", isNum: false });
             }
+
             that.wrapper.empty().append(html);
         },
+
         _click: function(e) {
             var page = $(e.currentTarget).data("page");
             e.preventDefault();
@@ -55,6 +61,18 @@
             this.dataSource.page(page);
 
             this.wrapper.trigger("kendo:change", [page]);
+        },
+
+        totalPages: function() {
+            return Math.ceil((this.dataSource.total() || 0) / this.pageSize());
+        },
+
+        pageSize: function() {
+            return this.dataSource.pageSize() || 0;
+        },
+
+        page: function() {
+            return this.dataSource.page() || 1;
         }
     }
 
