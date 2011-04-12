@@ -14,6 +14,8 @@
 
         that._columns();
 
+        that._templates();
+
         dataSource.bind("kendo:change", $.proxy(that.refresh, that));
         dataSource.query();
     }
@@ -26,16 +28,46 @@
         _columns: function() {
             var columns = this.options.columns;
 
+            // using HTML5 data attributes as a configuration option e.g. <th data-field="foo">Foo</foo>
             columns = columns.length ? columns : $.map(this.table.find("th"), function(th) {
-                return $(th).data("field");
+                return {
+                    field: $(th).data("field"),
+                    template: $(th).data("template")
+                };
             });
 
             this.columns = $.map(columns, function(column) {
                 column = typeof column === "string" ? { field: column } : column;
                 return {
-                    field: column.field
+                    field: column.field,
+                    template: column.template
                 }
             });
+        },
+
+        _templates: function() {
+            var rowTemplate = this.options.rowTemplate,
+                settings = $.extend({}, kendo.core.Template, this.options.templateSettings);
+
+            if (!$.isFunction(rowTemplate)) {
+
+                if (!rowTemplate) {
+                    rowTemplate = "<tr>";
+
+                    $.each(this.columns, function() {
+                        var value = this.template ? this.template :
+                                       settings.begin + "=" + (settings.useWithBlock ? "" : settings.paramName + ".") + this.field + settings.end;
+
+                        rowTemplate += "<td>" + value + "</td>";
+                    });
+
+                    rowTemplate += "</tr>";
+                }
+
+                rowTemplate = kendo.core.template(rowTemplate, settings);
+            }
+
+            this.rowTemplate = rowTemplate;
         },
 
         refresh: function() {
