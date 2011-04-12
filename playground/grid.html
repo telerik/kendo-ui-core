@@ -2,12 +2,12 @@
 <html>
     <head>
         <title>grid</title>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-
+        <script src="../src/jquery.js"></script>
         <script src="../src/kendo.core.js"></script>
         <script src="../src/kendo.query.js"></script>
         <script src="../src/kendo.datasource.js"></script>
         <script src="../src/kendo.grid.js"></script>
+
         <style>
             table {
                 padding: 0;
@@ -18,11 +18,12 @@
                 border: 1px solid black;
             }
         </style>
+
     </head>
     <body>
         <fieldset>
             <legend>In memory binding</legend>
-            <table id="table1">
+            <table id="table1" style="table-layout:fixed">
                 <thead>
                     <tr>
                         <th data-field="foo">Foo</th>
@@ -35,9 +36,19 @@
         </fieldset>
         <script>
             $(document).ready(function() {
+                var data = [];
+                for (var i = 1; i <= 1000; i++ ) {
+                    data.push( { foo: "foo" + i, bar: "bar" + i, baz: { foo: "baz.foo" + i } } );
+                }
+
+                var start = new Date();
                 $("#table1").kendoGrid( {
-                    data: [ { foo: "foo", bar: "bar", baz: { foo: "baz.foo" } }, { foo: "foo2", bar: "bar2", baz: { foo: "baz.foo2" } } ]
+                    data: data
                 });
+
+                var end = new Date();
+                console.log($("#table1 tbody > tr").length);
+                console.log(end - start);
             });
         </script>
 

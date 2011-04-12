@@ -20,7 +20,6 @@
         that._columns();
 
         that._templates();
-
         dataSource.bind("kendo:change", $.proxy(that.refresh, that));
         dataSource.query();
     }
@@ -78,16 +77,17 @@
         },
 
         refresh: function() {
-            var length,
+            var that = this,
+                length,
                 idx,
                 html = "",
-                view = this.dataSource.view();
+                view = that.dataSource.view();
 
-           for (idx = 0, length = view.length; idx < length; idx++) {
-               html += this.rowTemplate(view[idx]);
-           }
+            for (idx = 0, length = view.length; idx < length; idx++) {
+               html += that.rowTemplate(view[idx]);
+            }
 
-           this.tbody.html(html);
+            that.tbody.html(html);
        }
     }
 
