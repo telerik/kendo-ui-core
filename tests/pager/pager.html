@@ -58,17 +58,17 @@
                 equal(links[4].innerHTML, "<span>Page</span>5");
             });
 
-            test("page number buttons have data attribute assign", function(){
+            test("page number buttons have data attribute assign exept for the current page index", function(){
                 var ul = setup();
 
                 dataSource.read();
 
                 var links = ul.find("a");
-                equal(links.eq(0).data("index"), "1");
-                equal(links.eq(1).data("index"), "2");
-                equal(links.eq(2).data("index"), "3");
-                equal(links.eq(3).data("index"), "4");
-                equal(links.eq(4).data("index"), "5");
+                equal(links.eq(0).data("page"), undefined);
+                equal(links.eq(1).data("page"), "2");
+                equal(links.eq(2).data("page"), "3");
+                equal(links.eq(3).data("page"), "4");
+                equal(links.eq(4).data("page"), "5");
             });
 
             test("clear page number buttons on multiple datasource rebinds", function(){
@@ -136,29 +136,61 @@
             });
 
             test("show more button should be shown if page buttons are more than the threshold", function(){
-                var ul = setup({},{ buttonsCount: 3});
+                var ul = setup({},{ buttonCount: 3});
 
                 dataSource.read();
                 equal(ul.find("a").length, 4);
-                equal(ul.find("a:last").data("index"), "4");
+                equal(ul.find("a:last").data("page"), "4");
             });
 
             test("show less button should be shown if page buttons are more than the threshold", function(){
-                var ul = setup({ page: 4 },{ buttonsCount: 3});
+                var ul = setup({ page: 4 },{ buttonCount: 3});
 
                 dataSource.read();
                 equal(ul.find("a").length, 3);
-                equal(ul.find("a:first").data("index"), "3");
+                equal(ul.find("a:first").data("page"), "3");
             });
 
             test("clicking more button pages to next pages group", function() {
-                var ul = setup({},{ buttonsCount: 3});
+                var ul = setup({},{ buttonCount: 3});
 
                 dataSource.read();
                 ul.find("a:last").click();
                 equal(dataSource.page(), 4);
             });
 
+            test("totalPages", function() {
+                var ul = setup();
+
+                dataSource.read();
+                equal(ul.data("kendoPager").totalPages(), 5);
+            });
+
+            test("pageSize returns the dataSource pageSize value", function() {
+                var ul = setup();
+                dataSource.read();
+
+                equal(ul.data("kendoPager").pageSize(), dataSource.pageSize());
+            });
+            test("page returns the current page", function(){
+                var ul = setup();
+                dataSource.read();
+                ul.find("a:eq(1)").click();
+
+                equal(ul.data("kendoPager").page(), 2);
+            });
+
+            test("custom linkTemplate should be used instead of the default", function() {
+                var ul = setup({}, { linkTemplate: "<a>foo</a>" });
+                dataSource.read();
+                equal(ul.find("a:eq(1)").text(), "foo");
+            });
+
+            test("custom selectTemplate should be used", function() {
+                var ul = setup({}, { selectTemplate: "<a>foo</a>" });
+                dataSource.read();
+                equal(ul.find("a:first").text(), "foo");
+            });
         </script>
     </body>
 </html>
