@@ -9,7 +9,8 @@
         token:'72157626154487043-7dfd951a1ede12fa' //write auth
     };
 
-    var service = "http://api.flickr.com/services/rest/";
+    var service = "http://api.flickr.com/services/rest/",
+        template = '<li alt="thumbnail"><img src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>_s.jpg"></li>';
 
     function getThumbnailURL(photo){
         return 'http://farm' + photo.farm + '.' + 'static.flickr.com/' + photo.server + '/' + photo.id + '_' + photo.secret + '_t.jpg';
@@ -47,12 +48,10 @@
         return hex_md5(concatString);
     }
 
-    $(document).ready(function(){
-        var template = "<img src='http://farm<#=farm#>.static.flickr.com/<#=server#>/<#=id#>_<#=secret#>_s.jpg'>";
-        var mainPhotos = new window.listview({element: $("#mainPhotoStrip"), template: template, onItemBound: itemBound});
-        var flatPhotoStrip = new window.listview({element: $("#flatPhotoStrip"), template: template, onItemBound: itemBound});
-
-        var dataSource = new kendo.data.DataSource({
+    $(document).ready(function() {
+        var mainPhotoStrip =  $("#mainPhotoStrip"),
+            flatPhotoStrip =  $("#flatPhotoStrip"),
+            dataSource = new kendo.data.DataSource({
                 page: 1,
                 pageSize: 20,
                 transport: {
@@ -73,10 +72,6 @@
                                 format: "json"
                             }
                             params.per_page = 500;
-                           // if (data.page && data.pageSize) {
-                           //     params.page = data.page;
-                           //     params.per_page = data.pageSize;
-                           // }
                             params["api_sig"] = getApiSig(app.secret, params);
                             return params;
                         }
@@ -92,64 +87,37 @@
                 }
             });
 
-        $('.i-search').click(function(e){            
+        $('.i-search').click(function(e) {
+           mainPhotoStrip.show();
            dataSource.read();
         });
 
-        $(".paging").kendoPager({ dataSource: dataSource});
+        mainPhotoStrip.kendoListView({
+            dataSource: dataSource,
+            template: template
+        }).bind("kendo:change", function(ev, element) {
+            mainPhotoStrip.hide();
+            $("#bigPhoto").fadeOut("slow")
+                .attr("src", $("img:first", element).attr("src").replace("_s",""))
+                .bind("load", function(e) {
+                        $(e.target).hide().fadeIn("medium");
+                });
+            }).bind("kendo:dataBind", function() {
+                mainPhotoStrip.find("img").bind("load", function() {
+                    $(this).css("display", "block")
+                         .css("marginLeft", ~~($(this).width()/2))
+                         .animate({marginLeft: 0}, 500)
+                         .parent()
+                         .css("overflow", "hidden").animate({opacity: 1}, 1000);
+                });
+            });
 
-        dataSource.bind("kendo:change", function(){
-            mainPhotos.bind(this.view());
-            if(!mainPhotos.element.is(":visible")){
-                flatPhotoStrip.bind(this.view());
-            }
+        $("#flatPhotoStrip").kendoListView({
+            dataSource: dataSource,
+            template: template
         });
 
-        function itemBound(e){
-           var li = e.item;
-           li.css("opacity", 0)
-             .find("img")
-             .bind({
-                 load: function(e){
-                    li.css("overflow", "hidden").animate({opacity: 1}, 1000);
-                    var image = $(e.target);
-                    image
-                     .css("display", "block")
-                     .css("marginLeft", ~~(image.width()/2))
-                     .animate({marginLeft: 0}, 500);
-                 },
-                click: function(e){
-                    var image = $(this);
-                    var liItems = $("#mainPhotoStrip").find("li");
-                    var length = liItems.length;
+        $(".paging").kendoPager({ dataSource: dataSource });
 
-                    //will try to animate one image by one in order to achieve the effect of dropping images.
-
-                    //liItems.eq(length)
-                    //mainStrip
-                    //.find("li")
-                    //.each(function(i, element){
-                    //    element = $(element);
-                    //    element.animate({opacity: 0}, 1000)
-                    //    var image = element.find("img");
-                    //    image
-                    //        .css("display", "block")
-                    //        .css("marginTop", ~~(image.height()/2))
-                    //        .animate({marginTop: 0}, 500);
-                    //})
-                    $("#mainPhotoStrip").hide();
-                    
-                    //incorrectly bind flat strip on every click
-                    flatPhotoStrip.bind(dataSource.view());
-                    $("#bigPhoto").fadeOut("slow")
-                                .attr("src", image.attr('src').replace("_s", ""))
-                                .bind({
-                                    load: function(e){
-                                        $(e.target).hide().fadeIn("slow");
-                                    }
-                                });
-                }
-            });
-        }
-    });
+      });
 })(jQuery);
