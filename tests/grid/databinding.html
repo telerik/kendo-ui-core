@@ -21,17 +21,10 @@
             var Grid = kendo.ui.Grid,
                 DataSource = kendo.data.DataSource;
 
-            test("dataBind is called when the datasource is changed", function() {
-                var grid = new Grid(document.createElement("table"), { data: [] });
-                var dataBindWasCalled = false;
+            test("refresh creates table row for each item of the datasource view", function() {
+                var grid = new Grid($("<table><tbody/></table>")[0], { data: [1,2] });
 
-                grid.dataBind = function() {
-                    dataBindWasCalled = true;
-                };
-
-                grid.dataSource.trigger("kendo:change");
-
-                ok(dataBindWasCalled);
+                equal(grid.tbody.find(">tr").length, 2);
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
