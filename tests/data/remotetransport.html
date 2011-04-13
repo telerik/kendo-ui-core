@@ -24,7 +24,7 @@
                     $.mockjaxSettings.responseTime = 0;
                 },
                 teardown: function() {
-                    $.mockjaxClear()
+                    $.mockjaxClear();
                 }
             });
 
@@ -178,6 +178,9 @@
                 });
                 stop(1000);
                 transport.read({ url: "foo", data: { baz: "moo" } });
+                $.mockjaxClear();
+
+                stop(1000);
                 transport.read({ url: "foo", data: { baz: "moo" } });
             });
 
@@ -215,6 +218,86 @@
                 });
             });
 
+            test("read check if result exists in cache passing the data argumets as key", function() {
+                var key = false,
+                    transport = new RemoteTransport({
+                        read: "foo",
+                        cache: {
+                            find: function() {
+                                key = arguments[0];
+                                return undefined;
+                            },
+                            add: $.noop
+                        }
+                    });
+
+                $.mockjax({
+                    url: "foo"
+                });
+
+                stop(1000);
+                transport.read({
+                    data: { foo: "bar" },
+                    success: function() {
+                        start();
+                        equal(key.foo, "bar");
+                    }
+                });
+            });
+            test("read does not send request if data exists in cache", function() {
+                var data = [1,2,3,4],
+                    transport = new RemoteTransport({
+                        read: "foo",
+                        cache: {
+                            find: function() {
+                                return data; 
+                            }
+                        }
+                    });
+
+                $.mockjax({
+                    url: "foo",
+                    response: function() {
+                        ok(false); // we should not be here
+                    }
+                });
+
+                stop(1000);
+                transport.read({
+                    success: function() {
+                        start();
+                        equal(arguments[0], data);
+                    }
+                });
+
+            });
+            test("read adds item to the cache", function() {
+                var transport = new RemoteTransport({
+                        read: "foo",
+                        cache: {
+                            find: function() {
+                                return undefined;
+                            },
+                            add: function(key, item) {
+                                start();
+                                equal(key.foo, "bar");
+                                equal(item[0].age, 1);
+                            }
+                        }
+                    });
+
+                $.mockjax({
+                    url: "foo",
+                    responseText: '[{"age": 1}]'
+                });
+
+                stop(1000);
+                transport.read({
+                    data: { foo: "bar" },
+                    success: $.noop
+                });
+
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
