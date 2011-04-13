@@ -15,27 +15,35 @@
                 border: 1px solid black;
                 border-collapse: collapse;
             }
-            td, th
+            table td,
+            table th
             {
                 border: 1px solid black;
                 padding: 3px;
             }
+            fieldset
+            {
+                height: 200px;
+                overflow: auto;
+            }
         </style>
     </head>
     <body>
-        <h1>Kendo Grid with 1000 records</h1>
         <p>Running benchmark ... </p>
-        <table>
-            <thead>
-                <tr>
-                    <th data-field="CustomerID">Customer ID</th>
-                    <th data-field="CustomerName">Customer Name</th>
-                    <th data-field="Birthday">Birthday</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
+        <fieldset class="kendo">
+            <legend>Kendo Grid with 1000 records</legend>
+            <table class="kendo">
+                <thead>
+                    <tr>
+                        <th data-field="CustomerID">Customer ID</th>
+                        <th data-field="CustomerName">Customer Name</th>
+                        <th data-field="Birthday">Birthday</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </fieldset>
         <script>
             $(document).ready(function() {
                 var records = [];
@@ -45,14 +53,19 @@
                 }
                 var suite = new Benchmark.Suite;
 
-                var grid = $("table").kendoGrid(records).data("kendoGrid");
+                var grid = $("table.kendo").kendoGrid(records).data("kendoGrid");
 
                 suite.add("Kendo Grid", function() {
                     grid.refresh();
                 })
                 .on("complete", function() {
-                    var benchmark = this[0];
-                    $("p").html("Bound to 1000 records in " + benchmark.hz + " ops/sec. User agent: " + navigator.userAgent);
+                    var message = "User agent: " + navigator.userAgent;
+                    message += "<table><tr><th>Grid</th><th>Ops/sec (higher is better)</th></tr>";
+                    $.each(this, function() {
+                        message += "<tr><td>" + this.name + "</td><td>" + this.hz + "</td></tr>";
+                    });
+                    message += "</table>";
+                    $("p:first").html(message);
                 })
                 .run(true);
             });
