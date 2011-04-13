@@ -8,16 +8,18 @@
         <script src="../../src/kendo.datasource.js"></script>
         <script src="../../src/kendo.grid.js"></script>
         <script src="benchmark.js"></script>
-        <script src="http://dev.sencha.com/deploy/ext-4.0-beta2/bootstrap.js"></script>
+        <script src="http://dev.sencha.com/deploy/ext-4.0-beta2/ext-all.js"></script>
         <link rel="stylesheet" type="text/css" href="http://dev.sencha.com/deploy/ext-4.0-beta2/resources/css/ext-all.css" />
-        <script>
-            Ext.require([
-            'Ext.grid.*',
-            'Ext.data.*',
-            'Ext.util.*',
-            'Ext.state.*'
-            ]);
-        </script>
+        <link rel="stylesheet" type="text/css" href="https://github.com/jquery/jquery-ui/raw/grid/themes/base/jquery.ui.all.css" />
+        <link rel="stylesheet" type="text/css" href="http://view.jqueryui.com/grid/grid-datamodel/grid.css" />
+        <script src="https://github.com/jquery/jquery-ui/raw/grid/external/jquery.tmpl.js"></script>
+        <script src="https://github.com/jquery/jquery-ui/raw/grid/ui/jquery.ui.core.js"></script> 
+        <script src="https://github.com/jquery/jquery-ui/raw/grid/ui/jquery.ui.widget.js"></script> 
+        <script src="https://github.com/jquery/jquery-ui/raw/grid/grid-spf/datasource.js"></script> 
+        <script src="https://github.com/jquery/jquery-ui/raw/grid/grid-spf/grid.js"></script>
+        <script src="http://www.trirand.com/blog/jqgrid/js/jquery.jqGrid.min.js"></script>
+        <link rel="stylesheet" type="text/css" media="screen" href="http://www.trirand.com/blog/jqgrid/themes/ui.jqgrid.css" />
+
         <style>
             table.kendo,
             p table
@@ -34,7 +36,7 @@
                 border: 1px solid black;
                 padding: 3px;
             }
-            fieldset
+            div.grid
             {
                 height: 200px;
                 overflow: auto;
@@ -46,8 +48,8 @@
     </head>
     <body>
         <p>Running benchmark ... </p>
-        <fieldset class="kendo">
-            <legend>Kendo Grid bound to 100 records</legend>
+        <div class="grid">
+            <div>Kendo Grid bound to 100 records</div>
             <table class="kendo">
                 <thead>
                     <tr>
@@ -59,12 +61,30 @@
                 <tbody>
                 </tbody>
             </table>
-        </fieldset>
-        <fieldset>
-            <legend>ExtJS 4 Beta 2 Grid bound to 100 records</legend>
+        </div>
+        <div class="grid">
+            <div>ExtJS 4 Beta 2 Grid bound to 100 records</div>
             <div id="extjs">
             </div>
-        </fieldset>
+        </div>
+        <div class="grid">
+            <div>jQuery UI Grid bound to 100 records</div>
+            <table class="jquery">
+                <thead>
+                    <tr>
+                        <th data-field="CustomerID">Customer ID</th>
+                        <th data-field="CustomerName">Customer Name</th>
+                        <th data-field="Birthday">Birthday</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <div class="grid">
+            <div>jqGrid bound to 100 records</div>
+            <table id="jqgrid"></table>
+        </div>
         <script>
             var records = [];
 
@@ -77,6 +97,10 @@
                 {name: 'CustomerName', type: "string"},
                 {name: 'Birthday', stype: "string"}
                 ]
+            });
+
+            var dataSource = $.ui.datasource({
+                source: records
             });
 
             var store = new Ext.data.Store({
@@ -111,16 +135,42 @@
                     renderTo: 'extjs'
                 });
 
+                var jqueryGrid = $("table.jquery").grid({ source: dataSource }).data("grid");
+                jqueryGrid.refresh();
+
+                var jqGrid = $("#jqgrid").jqGrid({
+                    datatype: "local",
+                    scroll: false,
+                    data: records,
+                    rowNum: records.length,
+                    colNames:['Customer ID','Customer Name', 'Birthday'],
+                    colModel:[
+                    {name:'CustomerID',index:'CustomerID'},
+                    {name:'CustomerName',index:'CustomerName'},
+                    {name:'Birthday',index:'Birthday'}
+                    ],
+                    height: 2100
+                });
+
                 suite.add("Kendo Grid", function() {
                     kendoGrid.refresh();
-                }).add("ExtJS Grid", function() {
+                })
+                .add("ExtJS Grid", function() {
                     store.loadData(records, false);
+                })
+                .add("jQuery UI Grid", function() {
+                    jqueryGrid.refresh();
+                })
+                .add("jqGrid", function() {
+                    jqGrid.trigger("reloadGrid");
                 })
                 .on("complete", function() {
                     var message = "User agent: " + navigator.userAgent;
-                    message += "<table><tr><th>Grid</th><th>Ops/sec (higher is better)</th></tr>";
-                        $.each(this, function() {
-                            message += "<tr><td>" + this.name + "</td><td>" + this.hz + "</td></tr>";
+                    message += "<table><tr><th>Position</th><th>Grid</th><th>Ops/sec (higher is better)</th></tr>";
+                        var results = $.makeArray(this);
+                        results.sort(function(a, b) { return b.hz - a.hz });
+                        $.each(results, function(index) {
+                            message += "<tr><td>" + (index + 1) + "</td><td>" + this.name + "</td><td>" + this.hz + "</td></tr>";
                         });
                         message += "</table>";
                     $("p:first").html(message);
@@ -128,5 +178,5 @@
                 .run(true);
             });
         </script>
-    </body>
+    </body> 
 </html>
