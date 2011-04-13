@@ -1,0 +1,39 @@
+.touch-scrollbar
+{
+    position: absolute;
+    display: none;
+    z-index: 200000;
+    height: .2em;
+    width: .2em;
+    border: 1px solid #7a7a7a;
+    background-color: #858585;
+    right: 0;
+    bottom: 0;
+    -moz-transform-origin: 0 0;
+    -webkit-transform-origin: 0 0;
+    -o-transform-origin: 0 0;
+    transform-origin: 0 0;
+}
+
+.vertical-scrollbar
+{
+    height: 100%;
+    right: 1px;
+    bottom: 0;
+}
+
+.horizontal-scrollbar
+{
+    width: 100%;
+    right: 0;
+    bottom: 1px;
+}
+
+.scroll-container
+{
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    background: #FFF;
+}
+
