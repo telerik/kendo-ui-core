@@ -1,22 +1,35 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Grid performance comparison - binding to 1000 records</title>
+        <title>Grid performance comparison - binding to 100 records</title>
         <script src="../../src/jquery.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.query.js"></script>
         <script src="../../src/kendo.datasource.js"></script>
         <script src="../../src/kendo.grid.js"></script>
         <script src="benchmark.js"></script>
+        <script src="http://dev.sencha.com/deploy/ext-4.0-beta2/bootstrap.js"></script>
+        <link rel="stylesheet" type="text/css" href="http://dev.sencha.com/deploy/ext-4.0-beta2/resources/css/ext-all.css" />
+        <script>
+            Ext.require([
+            'Ext.grid.*',
+            'Ext.data.*',
+            'Ext.util.*',
+            'Ext.state.*'
+            ]);
+        </script>
         <style>
-            table
+            table.kendo,
+            p table
             {
                 table-layout: fixed;
                 border: 1px solid black;
                 border-collapse: collapse;
             }
-            table td,
-            table th
+            table.kendo td,
+            p td,
+            table.kendo th,
+            p th
             {
                 border: 1px solid black;
                 padding: 3px;
@@ -25,13 +38,16 @@
             {
                 height: 200px;
                 overflow: auto;
+                border: 1px solid black;
+                margin: 10px;
+                padding: 10px;
             }
         </style>
     </head>
     <body>
         <p>Running benchmark ... </p>
         <fieldset class="kendo">
-            <legend>Kendo Grid with 1000 records</legend>
+            <legend>Kendo Grid bound to 100 records</legend>
             <table class="kendo">
                 <thead>
                     <tr>
@@ -44,27 +60,69 @@
                 </tbody>
             </table>
         </fieldset>
+        <fieldset>
+            <legend>ExtJS 4 Beta 2 Grid bound to 100 records</legend>
+            <div id="extjs">
+            </div>
+        </fieldset>
         <script>
-            $(document).ready(function() {
-                var records = [];
+            var records = [];
 
-                for (var i = 1; i <= 1000; i++) {
-                    records.push({ CustomerID: i, CustomerName: "Customer " + i, Birthday: new Date() });
-                }
+            for (var i = 1; i <= 100; i++) {
+                records.push({ CustomerID: i, CustomerName: "Customer " + i, Birthday: new Date() });
+            }
+            Ext.regModel('Customer', {
+                fields: [
+                {name: 'CustomerID', type: "string"},
+                {name: 'CustomerName', type: "string"},
+                {name: 'Birthday', stype: "string"}
+                ]
+            });
+
+            var store = new Ext.data.Store({
+                model: "Customer", 
+                data: records,
+                autoLoad: true
+            });
+
+            $(document).ready(function() {
                 var suite = new Benchmark.Suite;
 
-                var grid = $("table.kendo").kendoGrid(records).data("kendoGrid");
+                var kendoGrid = $("table.kendo").kendoGrid(records).data("kendoGrid");
+
+                var extJsGrid = new Ext.grid.GridPanel({
+                    store: store,
+                    columns: [
+                    {
+                        text     : 'CustomerID',
+                        dataIndex : "CustomerID"
+                    },
+                    {
+                        text     : 'CustomerName', 
+                        dataIndex: 'CustomerName'
+                    },
+                    {
+                        text     : 'Birthday', 
+                        dataIndex: 'Birthday'
+                    }
+                    ],
+                    autoScroll: false,
+                    height: 2100,
+                    renderTo: 'extjs'
+                });
 
                 suite.add("Kendo Grid", function() {
-                    grid.refresh();
+                    kendoGrid.refresh();
+                }).add("ExtJS Grid", function() {
+                    store.loadData(records, false);
                 })
                 .on("complete", function() {
                     var message = "User agent: " + navigator.userAgent;
                     message += "<table><tr><th>Grid</th><th>Ops/sec (higher is better)</th></tr>";
-                    $.each(this, function() {
-                        message += "<tr><td>" + this.name + "</td><td>" + this.hz + "</td></tr>";
-                    });
-                    message += "</table>";
+                        $.each(this, function() {
+                            message += "<tr><td>" + this.name + "</td><td>" + this.hz + "</td></tr>";
+                        });
+                        message += "</table>";
                     $("p:first").html(message);
                 })
                 .run(true);
