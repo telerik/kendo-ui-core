@@ -106,7 +106,7 @@
 
             var mu = this.getMajorUnit(min, max);
             return floor(axisMin, mu);
-        },
+        }
     };
 
     // Helper functions

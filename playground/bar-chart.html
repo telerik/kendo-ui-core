@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
         <title>Chart Playground</title>
         <script src="../src/jquery.js"></script>
         <script src="../src/kendo.core.js"></script>
@@ -8,6 +9,13 @@
     </head>
     <body>
         <script type="text/javascript">
+
+            var VML_PREFIX = "v",
+                PX = "px";
+            if ($.browser.msie && !document.namespaces[VML_PREFIX]) {
+                document.namespaces.add(VML_PREFIX, "urn:schemas-microsoft-com:vml", "#default#VML");
+            }
+
 
             function Box(x1, y1, x2, y2) {
                 this.x1 = x1;
@@ -141,7 +149,7 @@
                     return window.getComputedStyle(this.element[0]);
                 },
 
-                hAlign: function (hAlign, box) {
+                hAlign: function(hAlign, box) {
                     var x = this.attr("x"),
                         offsetX = 0,
                         box = box || this.surface.box;
@@ -151,6 +159,30 @@
                     }
 
                     this.attr("x", x + offsetX);
+
+                    return this;
+                },
+
+                // Aligns text vertically
+                // Requires text primitive with set Y position
+                vAlignText: function(vAlign) {
+                    var textPrimitive = this,
+                        bbox = textPrimitive.getBBox(),
+                        y = parseInt(textPrimitive.attr("y")),
+                        offsetY = 0,
+                        textHeight = (y - bbox.y),
+                        fontSize = parseInt(textPrimitive.getComputedStyle().fontSize);
+
+                    if (vAlign == "center") {
+                        offsetY = (textHeight / 2) - (bbox.height - fontSize);
+                    } else if (vAlign == "top") {
+                        offsetY = bbox.height;
+                    } else if (vAlign == "bottom") {
+                        var heightAboveBaseline = y - bbox.y;
+                        offsetY -= bbox.height - heightAboveBaseline;
+                    }
+
+                    textPrimitive.attr("y", y + offsetY);
 
                     return this;
                 },
@@ -244,6 +276,24 @@
                     return this;
                 },
 
+                // Aligns text vertically
+                // Requires text primitive with set Y position
+                vAlignText: function(vAlign) {
+                    var textPrimitive = this,
+                        bbox = textPrimitive.getBBox(),
+                        offsetY = 0;
+
+                    if (vAlign == "center") {
+                        offsetY -= bbox.height / 2;
+                    } else if (vAlign == "bottom") {
+                        offsetY -= bbox.height;
+                    }
+
+                    textPrimitive.css("top", bbox.y + offsetY);
+
+                    return this;
+                },
+
                 attr: function(key, value) {
                     var primitive = this,
                         element = primitive.element;
@@ -299,7 +349,9 @@
                         this.css(attrMap.mapsTo, value + attrMap.unit);
                         this.css(attrMap.requires);
                     } else if (key in elementAttributes) {
-                        this.attr(elementAttributes[key].mapsTo, value);
+                        //                        this.attr(elementAttributes[key].mapsTo, value);
+                        this.element[0].setAttribute("filled", "false");
+                        this.element[0].setAttribute("strokecolor", "red");
                     } else {
                         this.element[0].setAttribute(key, value);
                     }
@@ -311,7 +363,7 @@
 
                 getBBox: function() {
                     var width = 0, height = 0;
-                    if (this.element[0].tagName == "group") {
+                    if (this.element[0].tagName.toLowerCase() == "div") {
                         this.element.children().each(function() {
                             width = Math.max(width, parseInt(this.style.left) + this.offsetWidth);
                             height = Math.max(height, parseInt(this.style.top) + this.offsetHeight);
@@ -323,7 +375,9 @@
 
                     return {
                        width: width,
-                       height: height
+                       height: height,
+                       x: this.element[0].offsetLeft,
+                       y: this.element[0].offsetTop
                     };
                },
 
@@ -347,23 +401,34 @@
                     return this.element[0].currentStyle || window.getComputedStyle(this.element[0]);
                 },
 
-                translate: function(dx, dy) {
+                empty: function() {
+                    this.element.empty();
+                },
 
+                translate: function(dx, dy) {
+                    this.css({"left": dx + PX, "top": dy + PX});
                 }
-          });
+            });
+
 
             var VMLSurface = function(container) {
                 var surface = this,
                     container = $(container),
                     element = surface.element = this.group(container);
 
+                element.css("position", "relative");
+                element.css("width", container.width() + PX);
+                element.css("height", container.height() + PX);
+                element.attr("coordsize", container.width() + " " + container.height());
                 container.append(element.element);
                 surface.box = new Box(0, 0, container.width(), container.height());
+
             }
 
             $.extend(VMLSurface.prototype, {
                 group: function(parentElement) {
-                    return this._createElement("group", parentElement);
+                    var group = this._createElement("div", parentElement);
+                    return group;
                 },
 
                 desc: function(text, parentElement) {
@@ -371,27 +436,32 @@
                 },
 
                 text: function(text, parentElement) {
-                    var textElement = this._createElement("textbox", parentElement);
+                    var textElement = this._createElement("textbox", parentElement, VML_PREFIX);
+                    textElement.css("white-space", "nowrap");
                     textElement.text(text);
 
                     return textElement;
                 },
 
                 rect: function(options, parentElement) {
-                    var rect = this._createElement("rect", parentElement);
+                    var rect = this._createElement("rect", parentElement, VML_PREFIX);
                     rect.attr(options);
 
                     return rect;
                 },
 
-                _createElement: function(tagName, parentElement) {
-                    if ($.browser.msie && !document.namespaces.v) {
-                        document.namespaces.add("v", "urn:schemas-microsoft-com:vml", "#default#VML");
-                    }
+                line: function(options, parentElement) {
+                    var line = this._createElement("line", parentElement, VML_PREFIX);
+                    line.attr("from", options.x1 + " " + options.y1);
+                    line.attr("to", options.x2 + " " + options.y2);
+                },
 
+                _createElement: function(tagName, parentElement, tagPrefix) {
                     var surface = this,
                         parentNode = parentElement ? parentElement.element || parentElement : surface.element.element,
-                        element = document.createElement("v:" + tagName);
+                        prefix = tagPrefix ? tagPrefix + ":" : "",
+                        element = document.createElement(prefix + tagName);
+                    element.style.position = "absolute";
                     parentNode.append(element);
                     return new VMLPrimitive(element);
                 }
@@ -406,11 +476,10 @@
 
                 var text = surface
                     .text(options.text, element)
-                     //.css(options.style)
-                     //.attr({ x: box.x1, "y": box.y1 })
-                    .hAlign("center", box);
-
-                //vAlignText(text, "top");
+                     .css(options.style)
+                     .attr({ x: box.x1, "y": box.y1 })
+                    .hAlign("center", box)
+                    .vAlignText("top");
 
                 title.box = new Box(box.x1, box.y1, box.x2, text.height());
             }
@@ -418,26 +487,6 @@
             $.extend(ChartTitle.prototype, {
             });
 
-            // Aligns text vertically
-            // Requires text primitive with set Y position
-            function vAlignText(textPrimitive, vAlign) {
-                    var bbox = textPrimitive.getBBox(),
-                        y = parseInt(textPrimitive.attr("y")),
-                        offsetY = 0,
-                        textHeight = (y - bbox.y),
-                        fontSize = parseInt(textPrimitive.getComputedStyle().fontSize);
-
-                    if (vAlign == "center") {
-                        offsetY = (textHeight / 2) - (bbox.height - fontSize);
-                    } else if (vAlign == "top") {
-                        offsetY = bbox.height;
-                    } else if (vAlign == "bottom") {
-                        var heightAboveBaseline = y - bbox.y;
-                        offsetY -= bbox.height - heightAboveBaseline;
-                    }
-
-                    textPrimitive.attr("y", y + offsetY);
-            };
 
             // Numeric Axis
             var DEFAULT_PRECISION = 6,
@@ -466,7 +515,7 @@
 
                     labels.push(text);
 
-                    vAlignText(text, "center");
+                    text.vAlignText("center");
 
                     currentY += step;
                     currentValue -= majorUnit;
@@ -561,7 +610,7 @@
 
                     var mu = this.getMajorUnit(min, max);
                     return floor(axisMin, mu);
-                },
+                }
             };
 
             // Helper functions
@@ -614,14 +663,13 @@
 
                         text.css(options.labels.style)
                             .attr("x", currentX - (text.width() / 2))
-                            .attr("y", y);
-
-                        vAlignText(text, "bottom");
+                            .attr("y", y)
+                            .vAlignText("bottom");
 
                         currentX += step;
                     }
 
-                    var lineY = axis.element.getBBox().y,
+                    var lineY = box.y1,
                         lineStyle = $.extend({}, options, { x1: box.x1, y1: lineY, x2: box.x1 + totalWidth, y2: lineY });
 
                     surface.line(lineStyle, axis.element);
@@ -640,9 +688,8 @@
 
                     text.css(options.style)
                         .attr("x", 0)
-                        .attr("y", y + (text.height() / 2));
-
-                    vAlignText(text, "center");
+                        .attr("y", y + (text.height() / 2))
+                        .vAlignText("center");
 
                     y += text.height();
                 }
@@ -700,15 +747,14 @@
                     currentBox = boxDiff(currentBox, title.box);
                     var legend = new Legend(surface, currentBox, legendOptions);
 
- 
+                   currentBox = boxDiff(currentBox, legend.box);
+                    var xAxis = new CategoryAxis(surface, currentBox, options.xAxis);
+               }
+
 
                 return;
 
 
-
-                   currentBox = boxDiff(currentBox, legend.box);
-                    var xAxis = new CategoryAxis(surface, currentBox, options.xAxis);
-               }
 
                 // Determine y-axis range
                 var seriesMin = Number.MAX_VALUE,
@@ -806,7 +852,7 @@
 
         </script>
 
-        <div id="container" style="width: 800px; height: 400px; position: relative;">
+        <div id="container" style="width: 800px; height: 400px;">
         </div>
 
     </body>
