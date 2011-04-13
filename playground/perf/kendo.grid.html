@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Kendo Grid</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.query.js"></script>
+        <script src="../../src/kendo.datasource.js"></script>
+        <script src="../../src/kendo.grid.js"></script>
+        <style>
+            table
+            {
+                table-layout: fixed;
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+            td, th
+            {
+                border: 1px solid black;
+                padding: 3px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Kendo Grid with 1000 records</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th data-field="CustomerID">Customer ID</th>
+                    <th data-field="CustomerName">Customer Name</th>
+                    <th data-field="Birthday">Birthday</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <script>
+            $(document).ready(function() {
+                var records = [];
+
+                for (var i = 1; i <= 1000; i++) {
+                    records.push({ CustomerID: i, CustomerName: "Customer " + i, Birthday: new Date() });
+                }
+
+                $("table").kendoGrid(records);
+            });
+        </script>
+    </body>
+</html>
