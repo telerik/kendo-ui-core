@@ -80,7 +80,6 @@
             -webkit-user-select: none;
             user-select: none;
             background: #FFF;
-            box-shadow: 0 0 .5em #000;
         }
 
         .data-container
@@ -93,16 +92,25 @@
         input[type=checkbox]
         {
             visibility: hidden;
+            width: 2em;
+            height: 2em;
+            margin-left: .4em;
         }
 
-        input[type=checkbox]:before
+        label:before
         {
-            content: ".";
-            position: relative;
+            position: absolute;
+            content: " ";
             display: block;
-            width: 16px;
-            height: 16px;
-            border: 1px solid #777;
+            top: 50%;
+            margin-top: -1em;
+            left: .2em;
+            width: 2em;
+            height: 2em;
+            border: 1px solid #999;
+            -moz-border-radius: .3em;
+            -webkit-border-radius: .3em;
+            border-radius: .3em;
         }
     </style>
 
@@ -266,8 +274,8 @@
                 var transforms = this.scrollElement.css(this._transformProperty).match(/(translate|matrix)\([,\s\w\d]*?\s*(-?\d+)[\w\s]*,\s*(-?\d+)[\w\s]*\)/i) || [0, 0, 0, 0];
 
                 return {
-                    x: transforms[2]*1,
-                    y: transforms[3]*1
+                    x: +transforms[2],
+                    y: +transforms[3]
                 };
             },
 
@@ -276,6 +284,7 @@
                 var scrollOffsets = this._getScrollOffsets();
 
                 this.start = {
+                    location: startLocation,
                     x: startLocation.x - scrollOffsets.x,
                     y: startLocation.y - scrollOffsets.y
                 };
@@ -287,15 +296,17 @@
             },
 
             _start: function (e) {
-                e.preventDefault();
-
                 var currentLocation = touchLocation(e);
+                this._dragged = false;
 
-                if (Math.abs(this.start.x - currentLocation.x) > 10 || Math.abs(this.start.y - currentLocation.y) > 10) {
+                if (Math.abs(this.start.location.x - currentLocation.x) > 10 || Math.abs(this.start.location.y - currentLocation.y) > 10) {
+                    
+                    e.preventDefault();
+                    this._dragged = true;
 
                     $(document).unbind(this._moveEvent, this._startProxy)
                                .bind(this._moveEvent, this._dragProxy);
-
+                    
                     this._width = this.wrapper.innerWidth();
                     this._height = this.wrapper.innerHeight();
                     this._scrollWidth = this.scrollElement.innerWidth();
@@ -370,20 +381,24 @@
                            .unbind(this._moveEvent, this._dragProxy)
                            .unbind(this._endEvent, this._stopProxy);
 
-                var currentLocation = touchLocation(e),
-                    scrollOffsets = this._getScrollOffsets(),
-                    horizontal = scrollOffsets.x + this.lastLocation.x - currentLocation.x,
-                    vertical = scrollOffsets.y + this.lastLocation.y - currentLocation.y;
+                if (this._dragged) {
+                    e.preventDefault();
+                    
+                    var currentLocation = touchLocation(e),
+                        scrollOffsets = this._getScrollOffsets(),
+                        horizontal = scrollOffsets.x + this.lastLocation.x - currentLocation.x,
+                        vertical = scrollOffsets.y + this.lastLocation.y - currentLocation.y;
 
-                this.scrollElement
-                    .stop(true)
-                    .animate({
-                            translate: horizontal + 'px,' + vertical + 'px)'
-                        }, 500, 'ease-out');
+                    this.scrollElement
+                        .stop(true)
+                        .animate({
+                                translate: horizontal + 'px,' + vertical + 'px)'
+                            }, 500, 'ease-out');
 
-                this._scrollbars
-                    .stop(true)
-                    .fadeTo(400, 0);
+                    this._scrollbars
+                        .stop(true)
+                        .fadeTo(400, 0);
+                }
             }
         };
 
@@ -469,6 +484,7 @@
         (new Application({
             views: [ taskList ]
         })).run();
+
     </script>
  </head>
  <body></body>
