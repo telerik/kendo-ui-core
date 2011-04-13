@@ -61,6 +61,7 @@
                         dataType: "jsonp",
                         jsonpCallback: "jsonFlickrApi"
                     },
+                    cache: new kendo.data.LocalStorageCache(),
                     dialect: {
                         read: function(data) {
                            var params = {
@@ -86,6 +87,10 @@
                     }
                 }
             });
+
+         $('.i-help').click(function(e) {
+            dataSource.transport.cache.clear(); // temp in order to force items removal from the localStore
+         });
 
         $('.i-search').click(function(e) {
            mainPhotoStrip.show();

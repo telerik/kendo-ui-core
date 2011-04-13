@@ -49,7 +49,8 @@
         }
         options = extend(that.defaults, options);
         that.settings = options;
-        that.dialect = options.dialect;        
+        that.dialect = options.dialect;
+        that.cache = options.cache;
     }
 
     RemoteTransport.prototype = {
@@ -58,6 +59,10 @@
                 read: function(data) {
                     return data;
                 }
+            },
+            cache: {
+                find: $.noop,
+                add: $.noop
             }
         },
         read: function(options) {
@@ -65,14 +70,57 @@
             var that = this,
                 read = that.settings.read,
                 data = $.isFunction(read.data) ? read.data() : read.data,
-                success = options.success || $.noop;
+                success = options.success || $.noop,
+                cached;
 
             options = extend(true, {}, read, options);
             options.data = that.dialect.read(extend(data, options.data));
-            options.success = function(result) {
-                success(result);
-            };
-            $.ajax(options);
+
+            cached = that.cache.find(options.data);
+            if(cached != undefined) {
+                success(cached);
+            } else {
+                options.success = function(result) {
+                    that.cache.add(options.data, result);
+
+                    success(result);
+                };
+                $.ajax(options);
+            }
+        }
+    }
+    function localStorage() {
+        try {
+            return 'localStorage' in window && window['localStorage'] !== null;
+        } catch (e) {
+            return false;
+        }
+    }
+    function LocalStorageCache() {
+        if(localStorage()) {
+            this._store = window.localStorage;
+        } else {
+            throw new Error("LocalStorage is not available");
+        }
+    }
+
+    LocalStorageCache.prototype = {
+        add: function(key, item) {
+            if(key != undefined) {
+                this._store.setItem(JSON.stringify(key), JSON.stringify(item));
+            }
+        },
+        find: function(key) {
+            return JSON.parse(this._store.getItem(JSON.stringify(key)));
+        },
+        clear: function() {
+            this._store.clear();
+        },
+        remove: function(key) {
+            this._store.removeItem(JSON.stringify(key));
+        },
+        length: function() {
+            return this._store.length;
         }
     }
 
@@ -336,6 +384,7 @@
     extend(kendo.data, {
         DataSource: DataSource,
         LocalTransport: LocalTransport,
-        RemoteTransport: RemoteTransport
+        RemoteTransport: RemoteTransport,
+        LocalStorageCache: LocalStorageCache
     });
 })(jQuery, window);
