@@ -14,6 +14,10 @@
     <script src="../src/fx.js"></script>
     <script src="../src/event.js"></script>
 
+    <script src="kendo.mobile.scroller.js"></script>
+    <script src="kendo.mobile.application.js"></script>
+    <script src="kendo.mobile.view.js"></script>
+
     <script type="text/html" id="item_tmpl">
         <ul class="list">
         <% for (var i = 0; i < data.length; i++) {
@@ -65,49 +69,6 @@
             return data ? fn( data ) : fn;
           };
         })();
-
-        /// kendo.mobile
-
-        function View(options) {
-            $.extend(this, options);
-            this.element = $('<div class="data-container"/>');
-            this.scroller = new Scroller(this.element);
-            this.scrollElement = this.scroller.scrollElement;
-        }
-
-        View.prototype = {
-            bind: function(data) {
-                this.onBind(data, this.scrollElement || this.element);
-            }
-        };
-
-        function Application(options) {
-            $.extend(this, options);
-            this.running = false;
-        }
-
-        Application.prototype = {
-            run: function() {
-                if (this.running)
-                    return;
-
-                this.running = true;
-
-                var that = this;
-
-                window.addEventListener("DOMContentLoaded", function() {
-                    that.root = document.body;
-
-                    that.show(0);
-                }, false);
-
-                window.scrollTo(0,1);
-            },
-
-            show: function(viewIndex) {
-                this.views[viewIndex].element.appendTo(this.root);
-            }
-        };
 
         // ToKenDo application code
 
