@@ -7,6 +7,7 @@
         <script src="../../src/kendo.query.js"></script>
         <script src="../../src/kendo.datasource.js"></script>
         <script src="../../src/kendo.grid.js"></script>
+        <script src="benchmark.js"></script>
         <style>
             table
             {
@@ -23,6 +24,7 @@
     </head>
     <body>
         <h1>Kendo Grid with 1000 records</h1>
+        <p>Running benchmark ... </p>
         <table>
             <thead>
                 <tr>
@@ -41,8 +43,18 @@
                 for (var i = 1; i <= 1000; i++) {
                     records.push({ CustomerID: i, CustomerName: "Customer " + i, Birthday: new Date() });
                 }
+                var suite = new Benchmark.Suite;
 
-                $("table").kendoGrid(records);
+                var grid = $("table").kendoGrid(records).data("kendoGrid");
+
+                suite.add("Kendo Grid", function() {
+                    grid.refresh();
+                })
+                .on("complete", function() {
+                    var benchmark = this[0];
+                    $("p").html("Bound to 1000 records in " + benchmark.hz + " ops/sec. User agent: " + navigator.userAgent);
+                })
+                .run(true);
             });
         </script>
     </body>
