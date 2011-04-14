@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta http-equiv="X-Content-Type-Options" content="nosniff" />
         <title>Grid performance comparison - binding to 100 records</title>
         <script src="../../src/jquery.js"></script>
         <script src="../../src/kendo.core.js"></script>
@@ -9,29 +10,34 @@
         <script src="../../src/kendo.grid.js"></script>
         <script src="benchmark.js"></script>
         <script src="http://dev.sencha.com/deploy/ext-4.0-beta2/ext-all.js"></script>
-        <link rel="stylesheet" type="text/css" href="http://dev.sencha.com/deploy/ext-4.0-beta2/resources/css/ext-all.css" />
-        <link rel="stylesheet" type="text/css" href="https://github.com/jquery/jquery-ui/raw/grid/themes/base/jquery.ui.all.css" />
-        <link rel="stylesheet" type="text/css" href="http://view.jqueryui.com/grid/grid-datamodel/grid.css" />
-        <script src="https://github.com/jquery/jquery-ui/raw/grid/external/jquery.tmpl.js"></script>
-        <script src="https://github.com/jquery/jquery-ui/raw/grid/ui/jquery.ui.core.js"></script> 
-        <script src="https://github.com/jquery/jquery-ui/raw/grid/ui/jquery.ui.widget.js"></script> 
+        <script src="http://brado23.github.com/jquery-ui/grid-datamodel2/jquery.tmpl.js"></script>
+        <script src="http://brado23.github.com/jquery-ui/ui/jquery.ui.core.js"></script> 
+        <script src="http://brado23.github.com/jquery-ui/ui/jquery.ui.widget.js"></script> 
+        <script src="http://brado23.github.com/jquery-ui/ui/jquery.ui.mouse.js"></script> 
         <script src="https://github.com/jquery/jquery-ui/raw/grid/grid-spf/datasource.js"></script> 
         <script src="https://github.com/jquery/jquery-ui/raw/grid/grid-spf/grid.js"></script>
         <script src="http://www.trirand.com/blog/jqgrid/js/jquery.jqGrid.min.js"></script>
+        <script src="http://wijmo.com/Wijmo-Complete/external/jquery.glob.min.js"></script>
+        <script src="http://wijmo.com/Wijmo-Complete/wijmo/jquery.wijmo.wijdatasource.js"></script>
+        <script src="http://wijmo.com/Wijmo-Complete/wijmo/jquery.wijmo.wijgrid.js"></script>
+        <script src="http://labs.infragistics.com/aspnet-mvc/Scripts/ig.util.js"></script>
+        <script src="http://labs.infragistics.com/aspnet-mvc/Scripts/ig.dataSource.js"></script>
+        <script src="http://labs.infragistics.com/aspnet-mvc/Scripts/ig.ui.shared.js"></script>
+        <script src="http://labs.infragistics.com/aspnet-mvc/Scripts/ig.ui.grid.framework.js"></script>
+<!--
+        <link rel="stylesheet" type="text/css" href="http://dev.sencha.com/deploy/ext-4.0-beta2/resources/css/ext-all.css" />
+        <link rel="stylesheet" type="text/css" href="https://github.com/jquery/jquery-ui/raw/grid/themes/base/jquery.ui.all.css" />
+        <link rel="stylesheet" type="text/css" href="http://view.jqueryui.com/grid/grid-datamodel/grid.css" />
         <link rel="stylesheet" type="text/css" media="screen" href="http://www.trirand.com/blog/jqgrid/themes/ui.jqgrid.css" />
-
+        -->
         <style>
-            table.kendo,
-            p table
+            table
             {
-                table-layout: fixed;
                 border: 1px solid black;
                 border-collapse: collapse;
             }
-            table.kendo td,
-            p td,
-            table.kendo th,
-            p th
+            table td,
+            table th
             {
                 border: 1px solid black;
                 padding: 3px;
@@ -63,6 +69,34 @@
             </table>
         </div>
         <div class="grid">
+            <div>Wijmo Grid bound to 100 records</div>
+            <table id="wijmo">
+                <thead>
+                    <tr>
+                        <th>Customer ID</th>
+                        <th>Customer Name</th>
+                        <th>Birthday</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <div class="grid">
+            <div>Infragistics Grid bound to 100 records</div>
+            <table id="ig">
+                <thead>
+                    <tr>
+                        <th>Customer ID</th>
+                        <th>Customer Name</th>
+                        <th>Birthday</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+      <div class="grid">
             <div>ExtJS 4 Beta 2 Grid bound to 100 records</div>
             <div id="extjs">
             </div>
@@ -99,10 +133,11 @@
                 ]
             });
 
-            var dataSource = $.ui.datasource({
-                source: records
-            });
-
+            if ($.ui.datasource) {
+                var dataSource = $.ui.datasource({
+                    source: records
+                });
+            }
             var store = new Ext.data.Store({
                 model: "Customer", 
                 data: records,
@@ -134,10 +169,10 @@
                     height: 2100,
                     renderTo: 'extjs'
                 });
-
+                if ($.fn.grid) {
                 var jqueryGrid = $("table.jquery").grid({ source: dataSource }).data("grid");
                 jqueryGrid.refresh();
-
+            }
                 var jqGrid = $("#jqgrid").jqGrid({
                     datatype: "local",
                     scroll: false,
@@ -152,14 +187,31 @@
                     height: 2100
                 });
 
+                var wijmoGrid = $("#wijmo").wijgrid({ data: records }).data("wijgrid");
+
+                var igGrid = $("#ig").igGrid({
+                    dataSource: records,
+                    columns: [
+                        { name: "Customer ID", dataKeyField: "CustomerID" },
+                        { name: "Customer Name", dataKeyField: "CustomerName" },
+                        { name: "Birthday", dataKeyField: "Birthday" },
+                    ]
+                }).data("igGrid");
+
                 suite.add("Kendo Grid", function() {
                     kendoGrid.refresh();
+                })
+                .add("Wijmo Grid", function() {
+                    wijmoGrid.doRefresh();
+                })
+                .add("Infragistics Grid", function() {
+                    igGrid.dataBind();
                 })
                 .add("ExtJS Grid", function() {
                     store.loadData(records, false);
                 })
                 .add("jQuery UI Grid", function() {
-                    jqueryGrid.refresh();
+                    //jqueryGrid.refresh();
                 })
                 .add("jqGrid", function() {
                     jqGrid.trigger("reloadGrid");
