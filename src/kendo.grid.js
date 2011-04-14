@@ -1,6 +1,16 @@
 (function($, window, undefined) {
     var kendo = window.kendo,
-        DataSource = kendo.data.DataSource;
+        DataSource = kendo.data.DataSource,
+        tbodySupportsInnerHtml = true;
+
+    (function() {
+        var table = document.createElement("table");
+        try {
+            table.innerHTML = "<tr><td></td></tr>";
+        } catch (e) {
+            tbodySupportsInnerHtml = false;
+        }
+    })();
 
     function Grid(element, options) {
         var that = this,
@@ -87,7 +97,11 @@
                html += that.rowTemplate(view[idx]);
             }
 
-            that.tbody.html(html);
+            if (tbodySupportsInnerHtml) {
+                that.tbody[0].innerHTML = html;
+            } else {
+                that.tbody.html(html);
+            }
        }
     }
 
