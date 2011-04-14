@@ -109,6 +109,99 @@
         }
     };
 
+    function Box(x1, y1, x2, y2) {
+        var box = this;
+        box.x1 = x1 || 0;
+        box.x2 = x2 || 0;
+        box.y1 = y1 || 0;
+        box.y2 = y2 || 0;
+    }
+
+    Box.prototype = {
+        width: function() {
+            return this.x2 - this.x1;
+        },
+
+        height: function() {
+            return this.y2 - this.y1;
+        }
+    }
+
+    var defaultBox = new Box(0, 0, 0, 0);
+
+    function ChartElement() {
+        var element = this;
+        element.attributes = {};
+        element.children = [];
+    }
+
+    $.extend(ChartElement.prototype, {
+        options: {
+        }
+    });
+
+    function TextElement(text) {
+        var element = this;
+        element.type = "text";
+        element.text = text;
+
+        element.updateLayout(defaultBox);
+    }
+
+    $.extend(TextElement.prototype, new ChartElement(), {
+        options: {
+            fontSize: "12pt",
+            fontFamily: "Verdana"
+        },
+
+        updateLayout: function(targetBox) {
+            var element = this,
+                size = element.measure();
+
+            element.box = new Box(targetBox.x1, targetBox.y1, targetBox.x1 + size.width, targetBox.y1 + size.height);
+        },
+
+        measure: function() {
+            var sample = $("<span />").css(this.options).appendTo(document.body).text(this.text),
+                size = {
+                    width: sample.width(),
+                    height: sample.height()
+                };
+
+            sample.remove();
+            return size;
+        }
+    });
+
+    function ChartTitle(options) {
+        var title = this;
+        title.options = $.extend({}, title.options, options);
+    }
+
+    $.extend(ChartTitle.prototype, new ChartElement(), {
+        options: {
+            text: "Title",
+            position: "top",
+            textAlign: "center"
+        },
+
+        updateLayout: function(targetBox) {
+            var title = this,
+                text = new TextElement(this.options.text),
+                textBox = new Box();
+
+            if (title.options.position == "top") {
+                textBox.y1 = 0;
+//                title.box = new Box(targetBox.x1, targetBox.y1, targetBox.x2, textBox.y2);
+            } else {
+                textBox.y1 = targetBox.y2 - text.box.height();
+            }
+
+            text.updateLayout(textBox);
+            title.children.push(text);
+        }
+    });
+
     // Helper functions
     function supportsSVG() {
         return document.implementation.hasFeature(
@@ -132,6 +225,8 @@
     // Make the internal functions public for unit testing
 
     Chart.NumericAxis = NumericAxis;
+    Chart.ChartTitle = ChartTitle;
+    Chart.Box = Box;
 
     // #endif
 
