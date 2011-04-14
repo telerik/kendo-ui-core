@@ -1,6 +1,7 @@
 (function($, window, undefined) {
     var extend = $.extend,
-        kendo = window.kendo;
+    kendo = window.kendo,
+    stringify = kendo.core.stringify;
 
     function idMap(data, id) {
         var idx, length, map = {};
@@ -32,12 +33,12 @@
         return query.toArray();
     }
 
-    function LocalTransport(options) {        
+    function LocalTransport(options) {
         this.data = options.data;
     }
 
     LocalTransport.prototype = {
-        read: function(options) {            
+        read: function(options) {
             options.success(this.data);
         }
     }
@@ -89,38 +90,46 @@
             }
         }
     }
-    function localStorage() {
-        try {
-            return 'localStorage' in window && window['localStorage'] !== null;
-        } catch (e) {
-            return false;
-        }
-    }
-    function LocalStorageCache() {
-        if(localStorage()) {
-            this._store = window.localStorage;
-        } else {
-            throw new Error("LocalStorage is not available");
-        }
+
+    function Cache() {
+        this._store = {};
     }
 
-    LocalStorageCache.prototype = {
-        add: function(key, item) {
+    Cache.prototype = {
+        add: function(key, data) {
             if(key != undefined) {
-                this._store.setItem(JSON.stringify(key), JSON.stringify(item));
+                this._store[stringify(key)] = data;
             }
         },
         find: function(key) {
-            return JSON.parse(this._store.getItem(JSON.stringify(key)));
+            return this._store[stringify(key)];
+        },
+        clear: function() {
+            this._store = {};
+        },
+        remove: function(key) {
+            delete this._store[stringify(key)];
+        }
+    }
+
+    function LocalStorageCache() {
+        this._store = window.localStorage;
+    }
+
+    LocalStorageCache.prototype = {
+        add: function(key, data) {
+            if(key != undefined) {
+                this._store.setItem(stringify(key), stringify(data));
+            }
+        },
+        find: function(key) {
+            return $.parseJSON(this._store.getItem(stringify(key)));
         },
         clear: function() {
             this._store.clear();
         },
         remove: function(key) {
-            this._store.removeItem(JSON.stringify(key));
-        },
-        length: function() {
-            return this._store.length;
+            this._store.removeItem(stringify(key));
         }
     }
 
@@ -385,6 +394,7 @@
         DataSource: DataSource,
         LocalTransport: LocalTransport,
         RemoteTransport: RemoteTransport,
-        LocalStorageCache: LocalStorageCache
+        LocalStorageCache: LocalStorageCache,
+        Cache: Cache
     });
 })(jQuery, window);
