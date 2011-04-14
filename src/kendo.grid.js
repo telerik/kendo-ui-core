@@ -4,6 +4,7 @@
         tbodySupportsInnerHtml = true;
 
     (function() {
+        // Internet Explorer does not support setting the innerHTML of TBODY and TABLE elements
         var table = document.createElement("table");
         try {
             table.innerHTML = "<tr><td></td></tr>";
@@ -91,7 +92,9 @@
                 length,
                 idx,
                 html = "",
-                view = that.dataSource.view();
+                view = that.dataSource.view(),
+                tbody,
+                placeholder;
 
             for (idx = 0, length = view.length; idx < length; idx++) {
                html += that.rowTemplate(view[idx]);
@@ -100,7 +103,11 @@
             if (tbodySupportsInnerHtml) {
                 that.tbody[0].innerHTML = html;
             } else {
-                that.tbody.html(html);
+                placeholder = document.createElement("div");
+                placeholder.innerHTML = "<table><tbody>" + html + "</tbody></table>";
+                tbody = placeholder.firstChild.firstChild;
+                that.table[0].replaceChild(tbody, that.tbody[0]);
+                that.tbody = $(tbody);
             }
        }
     }
