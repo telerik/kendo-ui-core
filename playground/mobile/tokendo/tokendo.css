@@ -13,7 +13,7 @@ body {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    line-height: 2.4em;
+    line-height: 2.6em;
     display: block;
     border-bottom: 1px solid #ddd;
     position: relative;
@@ -22,6 +22,8 @@ body {
 .item label
 {
     display: block;
+    line-height: 2.6em;
+    padding-left: 2.7em;
 }
 
 .more-details
@@ -42,7 +44,7 @@ body {
 
 input[type=checkbox]
 {
-    visibility: hidden;
+    display: none;
     width: 2em;
     height: 2em;
     margin-left: .4em;
@@ -50,17 +52,49 @@ input[type=checkbox]
 
 label:before
 {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
     position: absolute;
     content: " ";
     display: block;
     top: 50%;
     margin-top: -1em;
-    left: .2em;
+    left: .3em;
     width: 2em;
     height: 2em;
-    border: 1px solid #999;
-    -moz-border-radius: .3em;
-    -webkit-border-radius: .3em;
-    border-radius: .3em;
+    -moz-border-radius: .5em;
+    -webkit-border-radius: .5em;
+    border-radius: .5em;
+    -webkit-box-shadow: 0 0 .1em #aaa;
+    box-shadow: 0 0 .1em #aaa;
+    background-color: #d1d1d1;
+    background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 1), rgba(210, 210, 210, 0));
+    background-image: -o-linear-gradient(top, rgba(255, 255, 255, 1), rgba(210, 210, 210, 0));
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(0, rgba(255, 255, 255, 1)), color-stop(1, rgba(210, 210, 210, 0)));
 }
 
+label.input-checked:before
+{
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border: 2px solid #353535;
+    background-color: #898989;
+    background-image: -moz-linear-gradient(top, rgba(56, 56, 56, 1), rgba(137, 137, 137, 0));
+    background-image: -o-linear-gradient(top, rgba(56, 56, 56, 1), rgba(137, 137, 137, 0));
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(0, rgba(56, 56, 56, 1)), color-stop(1, rgba(137, 137, 137, 0)));
+}
+
+label.input-checked:after
+{
+    position: absolute;
+    content: "\2714";
+    font-size: 30px;
+    color: #FFF;
+    text-shadow: 0 0 3px #000;
+    display: block;
+    text-align: center;
+    top: 0;
+    left: 0;
+    width: 1.3em;
+}
