@@ -31,7 +31,7 @@
         timeline: {},
 
         animate: function(properties, duration, ease, callback, exclusive) {
-            duration = duration / 1000;
+            duration = duration !== undefined ? (duration < 1 ? duration : duration / 1000) : 0.5;
             if (typeof callback !== 'function') {
                 exclusive = callback;
                 callback = undefined;
@@ -48,7 +48,7 @@
             animationStep.type = 'transition';
             animationStep.callback = callback;
             animationStep.setup = {};
-            animationStep.setup[$.getCssPrefix() + 'transition'] = (exclusive || 'all') + ' ' + (duration !== undefined ? duration : 0.5) + 's ' + (ease || '');
+            animationStep.setup[$.getCssPrefix() + 'transition'] = (exclusive || 'all') + ' ' + duration + 's ' + (ease || '');
 
             if (transforms.length)
                 cssValues[$.getCssPrefix() + 'transform'] = transforms.join(' ');

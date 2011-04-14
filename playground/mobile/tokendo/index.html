@@ -87,10 +87,7 @@
             $this.toggleClass('input-checked', document.getElementById($this.attr('for')).checked);
         };
 
-        if (isTouch)
-            $('label').live('touchend', toggleCheckbox);
-        else
-            $('label').live('click', toggleCheckbox);
+        $('label').live('click', toggleCheckbox);
 
     </script>
  </head>
