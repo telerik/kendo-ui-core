@@ -197,7 +197,11 @@
                         { name: "Birthday", dataKeyField: "Birthday" },
                     ]
                 }).data("igGrid");
-
+                if ($.fn.grid) {
+                    suite.add("jQuery UI Grid", function() {
+                        jqueryGrid.refresh();
+                    });
+                }
                 suite.add("Kendo Grid", function() {
                     kendoGrid.refresh();
                 })
@@ -209,9 +213,6 @@
                 })
                 .add("ExtJS Grid", function() {
                     store.loadData(records, false);
-                })
-                .add("jQuery UI Grid", function() {
-                    //jqueryGrid.refresh();
                 })
                 .add("jqGrid", function() {
                     jqGrid.trigger("reloadGrid");
