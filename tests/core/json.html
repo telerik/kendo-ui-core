@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.core.JSON Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <link rel="stylesheet" href="../qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.core.JSON Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script src="../../src/kendo.core.js"></script>
+        <script>
+             test("JSON should be able to serialize object", function() {
+                 var item = { foo: "bar", baz: 1};
+                 var result = kendo.core.stringify(item);
+                 equal(result, '{"foo":"bar","baz":1}');
+            });
+
+            test("stringified object should be deserializable ", function() {
+                var obj = { foo: "bar", baz: 1};
+                var result = $.parseJSON(kendo.core.stringify(obj));
+                console.log(result)
+                equal(result.foo, "bar");
+                equal(result.baz, 1);
+            });
+        </script>
+    </body>
+</html>

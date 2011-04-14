@@ -123,8 +123,7 @@
             test("rowTemplate as string", function() {
                 var rowTemplate = function() { };
                 var grid = new Grid(table(), { rowTemplate: "<tr></tr>", data: [], columns: [{ field: "foo" }] });
-
-                ok($(grid.rowTemplate({})).is("tr"));
+                equal($(grid.rowTemplate({}))[0].tagName, "TR");
             });
 
             test("default rowTemplate is using column templates", function() {
