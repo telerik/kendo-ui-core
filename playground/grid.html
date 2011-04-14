@@ -3,11 +3,10 @@
     <head>
         <title>grid</title>
         <script src="../src/jquery.js"></script>
-        <script src="../src/kendo.core.js"></script>
-        <script src="../src/kendo.query.js"></script>
-        <script src="../src/kendo.datasource.js"></script>
-        <script src="../src/kendo.grid.js"></script>
-
+        <script src="../src/kendo.loader.js"></script>
+        <script>
+            kendo.loader.grid();
+        </script>
         <style>
             table {
                 padding: 0;
@@ -21,34 +20,23 @@
 
     </head>
     <body>
-        <fieldset>
-            <legend>In memory binding</legend>
-            <table id="table1" style="table-layout:fixed">
-                <thead>
-                    <tr>
-                        <th data-field="foo">Foo</th>
-                        <th data-field="bar">Bar</th>
-                        <th data-field="baz.foo">Nested</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
-        </fieldset>
+        <table id="table1" style="table-layout:fixed">
+            <thead>
+                <tr>
+                    <th data-field="foo">Foo</th>
+                    <th data-field="bar">Bar</th>
+                    <th data-field="baz.foo">Nested</th>
+                </tr>
+            </thead>
+        </table>
         <script>
             $(document).ready(function() {
                 var data = [];
-                for (var i = 1; i <= 1000; i++ ) {
+                for (var i = 1; i <= 10; i++ ) {
                     data.push( { foo: "foo" + i, bar: "bar" + i, baz: { foo: "baz.foo" + i } } );
                 }
 
-                var start = new Date();
-                $("#table1").kendoGrid( {
-                    data: data
-                });
-
-                var end = new Date();
-                console.log($("#table1 tbody > tr").length);
-                console.log(end - start);
+                $("#table1").kendoGrid(data);
             });
         </script>
 
