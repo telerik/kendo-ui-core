@@ -19,6 +19,11 @@
 
         for (idx = 0, length = scripts.length; idx < length; idx++) {
             src = scripts[idx].getAttribute("src");
+
+            if (!src) {
+                continue;
+            }
+
             position = src.indexOf("kendo.loader");
             if (position >= 0) {
                 loaderSettings.basePath = src.substring(0, position);
