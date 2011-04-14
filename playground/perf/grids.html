@@ -18,6 +18,9 @@
         <script src="https://github.com/jquery/jquery-ui/raw/grid/grid-spf/datasource.js"></script> 
         <script src="https://github.com/jquery/jquery-ui/raw/grid/grid-spf/grid.js"></script>
         <script src="http://www.trirand.com/blog/jqgrid/js/jquery.jqGrid.min.js"></script>
+        <script src="http://wijmo.com/Wijmo-Complete/external/jquery.glob.min.js"></script>
+        <script src="http://wijmo.com/Wijmo-Complete/wijmo/jquery.wijmo.wijdatasource.js"></script>
+        <script src="http://wijmo.com/Wijmo-Complete/wijmo/jquery.wijmo.wijgrid.js"></script>
         <link rel="stylesheet" type="text/css" media="screen" href="http://www.trirand.com/blog/jqgrid/themes/ui.jqgrid.css" />
 
         <style>
@@ -63,6 +66,20 @@
             </table>
         </div>
         <div class="grid">
+            <div>Wijmo Grid bound to 100 records</div>
+            <table id="wijmo">
+                <thead>
+                    <tr>
+                        <th>Customer ID</th>
+                        <th>Customer Name</th>
+                        <th>Birthday</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+       <div class="grid">
             <div>ExtJS 4 Beta 2 Grid bound to 100 records</div>
             <div id="extjs">
             </div>
@@ -152,8 +169,13 @@
                     height: 2100
                 });
 
+                var wijmoGrid = $("#wijmo").wijgrid({ data: records }).data("wijgrid");
+
                 suite.add("Kendo Grid", function() {
                     kendoGrid.refresh();
+                })
+                .add("Wijmo Grid", function() {
+                    wijmoGrid.doRefresh();
                 })
                 .add("ExtJS Grid", function() {
                     store.loadData(records, false);
