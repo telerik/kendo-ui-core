@@ -28,7 +28,7 @@
         <% for (var i = 0; i < data.length; i++) {
             var item = data[i]; %>
             <li class="item">
-                <label for="isdone_<%= i %>">
+                <label for="isdone_<%= i %>" <%= (item.done ? " class='input-checked'" : "") %>>
                     <input type="checkbox" id="isdone_<%= i %>" <%= (item.done ? " checked='checked'" : "") %> />
                     <%= item.title %>
                     <a href="#" class="more-details">More...</a>
@@ -81,6 +81,16 @@
         (new Application({
             views: [ taskList ]
         })).run();
+
+        var toggleCheckbox = function(e) {
+            var $this = $(this);
+            $this.toggleClass('input-checked', document.getElementById($this.attr('for')).checked);
+        };
+
+        if (isTouch)
+            $('label').live('touchend', toggleCheckbox);
+        else
+            $('label').live('click', toggleCheckbox);
 
     </script>
  </head>

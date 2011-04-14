@@ -116,11 +116,11 @@
     };
 
     $.fn.live = function(event, callback) {
-        $(document.body).delegate(this.selector, event, callback);
+        $(document.documentElement).delegate(this.selector, event, callback);
         return this;
     };
     $.fn.die = function(event, callback) {
-        $(document.body).undelegate(this.selector, event, callback);
+        $(document.documentElement).undelegate(this.selector, event, callback);
         return this;
     };
 

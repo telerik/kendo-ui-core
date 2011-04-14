@@ -127,6 +127,7 @@ Scroller.prototype = {
         if (Math.abs(this.start.location.x - currentLocation.x) > 10 || Math.abs(this.start.location.y - currentLocation.y) > 10) {
             
             e.preventDefault();
+            e.stopPropagation();
             this._dragged = true;
 
             $(document).unbind(this._moveEvent, this._startProxy)
@@ -162,6 +163,7 @@ Scroller.prototype = {
 
     _drag: function (e) {
         e.preventDefault();
+        e.stopPropagation();
 
         var currentLocation = touchLocation(e),
             horizontalDifference = 0,
@@ -208,7 +210,8 @@ Scroller.prototype = {
 
         if (this._dragged) {
             e.preventDefault();
-            
+            e.stopPropagation();
+
             var currentLocation = touchLocation(e),
                 scrollOffsets = this._getScrollOffsets(),
                 horizontal = scrollOffsets.x + this.lastLocation.x - currentLocation.x,
