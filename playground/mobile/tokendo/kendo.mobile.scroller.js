@@ -105,6 +105,7 @@ Scroller.prototype = {
     },
 
     _wait: function (e) {
+        this._originalEvent = e;
         var startLocation = touchLocation(e);
         var scrollOffsets = this._getScrollOffsets();
 
@@ -127,12 +128,12 @@ Scroller.prototype = {
         if (Math.abs(this.start.location.x - currentLocation.x) > 10 || Math.abs(this.start.location.y - currentLocation.y) > 10) {
             
             e.preventDefault();
-            e.stopPropagation();
+
             this._dragged = true;
 
             $(document).unbind(this._moveEvent, this._startProxy)
                        .bind(this._moveEvent, this._dragProxy);
-            
+
             this._width = this.wrapper.innerWidth();
             this._height = this.wrapper.innerHeight();
             this._scrollWidth = this.scrollElement.innerWidth();
@@ -144,8 +145,8 @@ Scroller.prototype = {
                         this._transformProperty, 'scaleX(' + (this._width / this._scrollWidth) + ')'
                     )
                     .show()
-                    .stop()
-                    .fadeTo(200, .7);
+//                    .stop()
+//                    .fadeTo(200, .7);
             }
 
             if (this._scrollHeight > this._height) {
@@ -154,8 +155,8 @@ Scroller.prototype = {
                         this._transformProperty, 'scaleY(' + (this._height / this._scrollHeight) + ')'
                     )
                     .show()
-                    .stop()
-                    .fadeTo(200, .7);
+//                    .stop()
+//                    .fadeTo(200, .7);
             }
 
         }
@@ -163,7 +164,6 @@ Scroller.prototype = {
 
     _drag: function (e) {
         e.preventDefault();
-        e.stopPropagation();
 
         var currentLocation = touchLocation(e),
             horizontalDifference = 0,
@@ -210,22 +210,43 @@ Scroller.prototype = {
 
         if (this._dragged) {
             e.preventDefault();
-            e.stopPropagation();
 
             var currentLocation = touchLocation(e),
                 scrollOffsets = this._getScrollOffsets(),
                 horizontal = scrollOffsets.x + this.lastLocation.x - currentLocation.x,
                 vertical = scrollOffsets.y + this.lastLocation.y - currentLocation.y;
 
+            
             this.scrollElement
                 .stop(true)
                 .animate({
                         translate: horizontal + 'px,' + vertical + 'px)'
                     }, 500, 'ease-out');
 
-            this._scrollbars
-                .stop(true)
-                .fadeTo(400, 0);
+//            this._scrollbars
+//                .stop(true)
+//                .fadeTo(400, 0);
+        } else {
+            if (isTouch && this._originalEvent.touches.length == 1) // Fire a click event when there's no drag...
+            {
+                var oEvent = this._originalEvent;
+                var evt = document.createEvent("MouseEvents");
+                evt.initMouseEvent("click", oEvent.bubbles, oEvent.cancelable, oEvent.view,
+                                   oEvent.detail, oEvent.screenX, oEvent.screenY, oEvent.clientX, oEvent.clientY,
+                                   false, false, false, false, oEvent.button, oEvent.relatedTarget);
+
+                var clickHandler = function (e) {
+                    e.stopPropagation();
+                    this.removeEventListener('click', proxy, true );
+                };
+
+                var proxy = $.proxy( clickHandler, this.scrollElement[0] );
+
+                oEvent.target.dispatchEvent(evt);
+                
+                this.scrollElement[0].addEventListener( 'click', proxy , true );
+            }
         }
+
     }
 };
