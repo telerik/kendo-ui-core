@@ -293,44 +293,8 @@
                 ok(!feature.resolved);
             });
 
-            test("basePath is empty string by default", function() {
-                equal(kendo.loaderSettings.basePath, "");
-            });
-
-            test("basePath is appended to script url", function() {
-                var resolver = new ScriptLoader();
-                kendo.loaderSettings.basePath = "bar";
-
-                resolver.define({ foo: "foo.js" });
-
-                equal(resolver.scripts.foo.url, "bar/foo.js");
-            });
-
-            test("basePath is appended to script url which starts with slash", function() {
-                var resolver = new ScriptLoader();
-                kendo.loaderSettings.basePath = "bar";
-
-                resolver.define({ foo: "/foo.js" });
-
-                equal(resolver.scripts.foo.url, "bar/foo.js");
-            });
-
-            test("basePath ending with slash", function() {
-                var resolver = new ScriptLoader();
-                kendo.loaderSettings.basePath = "bar/";
-
-                resolver.define({ foo: "/foo.js" });
-
-                equal(resolver.scripts.foo.url, "bar/foo.js");
-            });
-
-            test("basePath ending with slash", function() {
-                var resolver = new ScriptLoader();
-                kendo.loaderSettings.basePath = "bar/";
-
-                resolver.define({ foo: "//foo.js" });
-
-                equal(resolver.scripts.foo.url, "//foo.js");
+            test("basePath is the same as the path of telerik.loader.js", function() {
+                equal(kendo.loader.settings.basePath, "../../src/");
             });
 
         </script>
