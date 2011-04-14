@@ -10,6 +10,21 @@
         SCRIPT = "script",
         STRING = "string";
 
+    (function() {
+        var scripts = document.getElementsByTagName(SCRIPT),
+            src,
+            length,
+            idx,
+            position;
+
+        for (idx = 0, length = scripts.length; idx < length; idx++) {
+            src = scripts[idx].getAttribute("src");
+            position = src.indexOf("kendo.loader");
+            if (position >= 0) {
+                loaderSettings.basePath = src.substring(0, position);
+            }
+        }
+    })();
     function readyWait(modifier) {
         if (window.jQuery) {
             window.jQuery.readyWait += modifier;
@@ -59,7 +74,7 @@
             // delaying jQuery(document).ready() by incrementing the readyWait counter
             readyWait(1);
 
-            scriptElement.src = that.url;
+            scriptElement.src = combine(loaderSettings.basePath, that.url);
             // loading the script by adding it to the HEAD
             head.appendChild(scriptElement);
         },
@@ -146,7 +161,7 @@
             idx,
             url;
 
-        script = new Script(combine(loaderSettings.basePath, typeof definition === STRING ? definition : definition.url));
+        script = new Script(typeof definition === STRING ? definition : definition.url);
 
         depends = depends ? typeof depends === STRING ? [depends] : depends : [];
 
@@ -201,7 +216,24 @@
     }
 
     kendo.loader = new ScriptLoader();
-    kendo.loaderSettings = loaderSettings;
+    kendo.loader.settings = loaderSettings;
     kendo.ScriptLoader = ScriptLoader;
     kendo.Script = Script;
+
+    kendo.loader.define( {
+        core: "kendo.core.js",
+        query: {
+            url: "kendo.query.js",
+            depends: "core"
+        },
+        datasource: {
+            url: "kendo.datasource.js",
+            depends: "query"
+        },
+        grid: {
+            url: "kendo.grid.js",
+            depends: "datasource"
+        }
+    });
+
 })(window, document);
