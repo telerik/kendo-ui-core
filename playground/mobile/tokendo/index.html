@@ -22,7 +22,66 @@
     <script src="kendo.mobile.scroller.js"></script>
     <script src="kendo.mobile.application.js"></script>
     <script src="kendo.mobile.view.js"></script>
+    <script src="kendo.mobile.checkbox.js"></script>
+        
+    <script>
+        // ToKenDo application code
 
+        var application = new Application({ });
+
+        application.run(function(application) {
+            var taskList = new View({
+                onBind: function(data, element) {
+                    var template = kendo.core.template(document.getElementById("item_tmpl").innerHTML);
+
+                    element.html(template({ data: data }))
+                        .delegate('.more-details', 'click', function() {
+                            application.goToView('details', { itemId: $(this).index() });
+                        });
+                }
+            });
+
+            application.addView(taskList);
+
+            taskList.bind([
+                { title: "Change a lightbulb together with the team", done: true },
+                { title: "Shop groceries", done: false },
+                { title: "Go through issues on GitHub", done: false },
+                { title: "Run qUnit tests", done: true },
+                { title: "Get cat food", done: false },
+                { title: "Clean the living room", done: false },
+                { title: "Cook something nice with George", done: false },
+                { title: "Perform a miracle", done: false },
+                { title: "Ship a product", done: false },
+                { title: "Buy a nice bottle of wine for anniversary celebration", done: false },
+                { title: "Eat cake", done: false },
+                { title: "Create orange portal", done: false },
+                { title: "Create blue portal", done: false },
+                { title: "Jump fanatically through portals", done: false },
+                { title: "Create orange portal", done: false },
+                { title: "Create blue portal", done: true },
+                { title: "Jump fanatically through portals", done: false },
+                { title: "Buy a nice bottle of wine for anniversary celebration", done: false },
+                { title: "Eat cake", done: false },
+                { title: "Create orange portal", done: false },
+                { title: "Create blue portal", done: false },
+                { title: "Jump fanatically through portals", done: false },
+                { title: "Create orange portal", done: false },
+                { title: "Create blue portal", done: true },
+                { title: "Jump fanatically through portals", done: false },
+                { title: "Make another list of tommorow's tasks", done: false }
+            ]);
+
+            var toggleCheckbox = function(e) {
+                var $this = $(this);
+                $this.toggleClass('input-checked', document.getElementById($this.attr('for')).checked);
+            };
+
+            $('label').live('click', toggleCheckbox);
+        });
+    </script>
+ </head>
+ <body>
     <script type="text/html" id="item_tmpl">
         <ul class="list">
         <% for (var i = 0; i < data.length; i++) {
@@ -37,60 +96,6 @@
         <% } %>
         </ul>
     </script>
-        
-    <script>
-        // ToKenDo application code
-
-        var taskList = new View({
-            onBind: function(data, element) {
-                var template = kendo.core.template($("#item_tmpl")[0].innerHTML);
-
-                element.html(template({ data: data }));
-            }
-        });
-
-        taskList.bind([
-            { title: "Change a lightbulb together with the team", done: true },
-            { title: "Shop groceries", done: false },
-            { title: "Go through issues on GitHub", done: false },
-            { title: "Run qUnit tests", done: true },
-            { title: "Get cat food", done: false },
-            { title: "Clean the living room", done: false },
-            { title: "Cook something nice with George", done: false },
-            { title: "Perform a miracle", done: false },
-            { title: "Ship a product", done: false },
-            { title: "Buy a nice bottle of wine for anniversary celebration", done: false },
-            { title: "Eat cake", done: false },
-            { title: "Create orange portal", done: false },
-            { title: "Create blue portal", done: false },
-            { title: "Jump fanatically through portals", done: false },
-            { title: "Create orange portal", done: false },
-            { title: "Create blue portal", done: true },
-            { title: "Jump fanatically through portals", done: false },
-            { title: "Buy a nice bottle of wine for anniversary celebration", done: false },
-            { title: "Eat cake", done: false },
-            { title: "Create orange portal", done: false },
-            { title: "Create blue portal", done: false },
-            { title: "Jump fanatically through portals", done: false },
-            { title: "Create orange portal", done: false },
-            { title: "Create blue portal", done: true },
-            { title: "Jump fanatically through portals", done: false },
-            { title: "Make another list of tommorow's tasks", done: false }
-        ]);
-
-        (new Application({
-            views: [ taskList ]
-        })).run();
-
-        var toggleCheckbox = function(e) {
-            var $this = $(this);
-            $this.toggleClass('input-checked', document.getElementById($this.attr('for')).checked);
-        };
-
-        $('label').live('click', toggleCheckbox);
-
-    </script>
- </head>
- <body></body>
+ </body>
  </html>
 
