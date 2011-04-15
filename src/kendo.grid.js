@@ -63,6 +63,7 @@
                 }
             });
         },
+
         _tmpl: function(start, rowTemplate) {
             var that = this,
                 settings = extend({}, kendo.core.Template, that.options.templateSettings);
@@ -88,6 +89,7 @@
 
             return rowTemplate;
         },
+
         _templates: function() {
             var that = this,
                 options = that.options;
