@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="X-Content-Type-Options" content="nosniff" />
         <title>Grid performance comparison - binding to 100 records</title>
         <script src="../../src/jquery.js"></script>
         <script src="../../src/kendo.core.js"></script>
@@ -24,12 +23,7 @@
         <script src="http://labs.infragistics.com/aspnet-mvc/Scripts/ig.dataSource.js"></script>
         <script src="http://labs.infragistics.com/aspnet-mvc/Scripts/ig.ui.shared.js"></script>
         <script src="http://labs.infragistics.com/aspnet-mvc/Scripts/ig.ui.grid.framework.js"></script>
-<!--
-        <link rel="stylesheet" type="text/css" href="http://dev.sencha.com/deploy/ext-4.0-beta2/resources/css/ext-all.css" />
-        <link rel="stylesheet" type="text/css" href="https://github.com/jquery/jquery-ui/raw/grid/themes/base/jquery.ui.all.css" />
-        <link rel="stylesheet" type="text/css" href="http://view.jqueryui.com/grid/grid-datamodel/grid.css" />
-        <link rel="stylesheet" type="text/css" media="screen" href="http://www.trirand.com/blog/jqgrid/themes/ui.jqgrid.css" />
-        -->
+
         <style>
             table
             {
@@ -197,6 +191,7 @@
                         { name: "Birthday", dataKeyField: "Birthday" },
                     ]
                 }).data("igGrid");
+
                 if ($.fn.grid) {
                     suite.add("jQuery UI Grid", function() {
                         jqueryGrid.refresh();
