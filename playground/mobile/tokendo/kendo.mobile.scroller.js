@@ -203,6 +203,12 @@ Scroller.prototype = {
         this._storeLastLocation(currentLocation);
     },
 
+    _click: function (e) {
+        e.stopPropagation();
+        e.preventDefault();
+        this.target.unbind( 'click', this.original._click );
+    },
+
     _stop: function (e) {
         $(document).unbind(this._moveEvent, this._startProxy)
                    .unbind(this._moveEvent, this._dragProxy)
@@ -230,21 +236,17 @@ Scroller.prototype = {
             if (isTouch && this._originalEvent.touches.length == 1) // Fire a click event when there's no drag...
             {
                 var oEvent = this._originalEvent;
+                var target = $(oEvent.target);
                 var evt = document.createEvent("MouseEvents");
+                var proxy = $.proxy( this._click, { original: this, target: target } );
+
+                target.unbind( 'click', proxy );
                 evt.initMouseEvent("click", oEvent.bubbles, oEvent.cancelable, oEvent.view,
                                    oEvent.detail, oEvent.screenX, oEvent.screenY, oEvent.clientX, oEvent.clientY,
                                    false, false, false, false, oEvent.button, oEvent.relatedTarget);
 
-                var clickHandler = function (e) {
-                    e.stopPropagation();
-                    this.removeEventListener('click', proxy, true );
-                };
-
-                var proxy = $.proxy( clickHandler, this.scrollElement[0] );
-
                 oEvent.target.dispatchEvent(evt);
-                
-                this.scrollElement[0].addEventListener( 'click', proxy , true );
+                target.bind( 'click', proxy );
             }
         }
 
