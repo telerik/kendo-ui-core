@@ -5,30 +5,30 @@
         JSON = JSON || {};
 
     function Observable() {
-        this._handlers = {};
+        this._events = {};
     }
 
     Observable.prototype = {
         bind: function(eventName, handler) {
             var that = this,
-                handlers = that._handlers[eventName] || [];
+                events = that._events[eventName] || [];
 
-            handlers.push(handler);
+            events.push(handler);
 
-            that._handlers[eventName] = handlers;
+            that._events[eventName] = events;
 
             return that;
         },
 
         trigger: function(eventName, parameter) {
             var that = this,
-                handlers = that._handlers[eventName],
+                events = that._events[eventName],
                 idx,
                 length;
 
-            if (handlers) {
-                for (idx = 0, length = handlers.length; idx < length; idx++) {
-                    handlers[idx].call(that, parameter);
+            if (events) {
+                for (idx = 0, length = events.length; idx < length; idx++) {
+                    events[idx].call(that, parameter);
                 }
             }
 
@@ -37,19 +37,19 @@
 
         unbind: function(eventName, handler) {
             var that = this,
-                handlers = that._handlers[eventName],
+                events = that._events[eventName],
                 idx,
                 length;
 
-            if (handlers) {
+            if (events) {
                 if (handler) {
-                    for (idx = 0, length = handlers.length; idx < length; idx++) {
-                        if (handlers[idx] === handler) {
-                            handlers.splice(idx, 1);
+                    for (idx = 0, length = events.length; idx < length; idx++) {
+                        if (events[idx] === handler) {
+                            events.splice(idx, 1);
                         }
                     }
                 } else {
-                    that._handlers[eventName] = [];
+                    that._events[eventName] = [];
                 }
             }
 
@@ -254,5 +254,33 @@
         Template: Template,
         template: $.proxy(Template.compile, Template),
         stringify: $.proxy(JSON.stringify, JSON)
+    });
+
+    function Component(element, options) {
+        var that = this;
+
+        Observable.call(that);
+
+        that.element = element;
+        that.options = extend(true, {}, that.options, options);
+    }
+
+    Component.prototype = new Observable();
+
+    extend(kendo.ui, {
+        Component: Component,
+        plugin: function(name, component, base) {
+            var proto = component.prototype;
+
+            component.prototype = new base();
+            extend(component.prototype, proto);
+
+            $.fn[name] = function(options) {
+                $(this).each(function() {
+                    $(this).data(name, new component(this, options));
+                });
+                return this;
+            }
+        }
     });
 })(jQuery, window);
