@@ -63,16 +63,14 @@
                 }
             });
         },
-
-        _templates: function() {
+        _tmpl: function(start, rowTemplate) {
             var that = this,
-                rowTemplate = that.options.rowTemplate,
-                settings = $.extend({}, kendo.core.Template, that.options.templateSettings);
+                settings = extend({}, kendo.core.Template, that.options.templateSettings);
 
             if (!$.isFunction(rowTemplate)) {
 
                 if (!rowTemplate) {
-                    rowTemplate = "<tr>";
+                    rowTemplate = start;
 
                     $.each(that.columns, function() {
                         var column = this,
@@ -88,7 +86,12 @@
                 rowTemplate = kendo.core.template(rowTemplate, settings);
             }
 
-            that.rowTemplate = rowTemplate;
+            return rowTemplate;
+        },
+        _templates: function() {
+            var that = this;
+            that.rowTemplate = that._tmpl("<tr>", that.options.rowTemplate);
+            that.altRowTemplate = that._tmpl('<tr class="t-alt">', that.options.altRowTemplate || that.options.rowTemplate);
         },
 
         refresh: function() {
@@ -98,10 +101,16 @@
                 html = "",
                 view = that.dataSource.view(),
                 tbody,
-                placeholder;
+                placeholder,
+                rowTemplate = that.rowTemplate,
+                altRowTemplate = that.altRowTemplate;
 
             for (idx = 0, length = view.length; idx < length; idx++) {
-               html += that.rowTemplate(view[idx]);
+                if (idx % 2) {
+                   html += altRowTemplate(view[idx]);
+                } else {
+                   html += rowTemplate(view[idx]);
+                }
             }
 
             if (tbodySupportsInnerHtml) {
