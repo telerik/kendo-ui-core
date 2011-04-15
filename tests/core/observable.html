@@ -26,24 +26,24 @@
                 ok(observable.bind("foo") === observable)
             });
 
-            test("bind stores the handler to the handlers list", function() {
+            test("bind stores the handler to the events list", function() {
                 var observable = new Observable(),
                     handler = $.nop;
 
                 observable.bind("foo", handler);
 
-                equal(observable._handlers["foo"][0], handler);
+                equal(observable._events["foo"][0], handler);
             });
 
-            test("bind stores multiple handlers", function() {
+            test("bind stores multiple events", function() {
                 var observable = new Observable(),
                     handler = $.nop;
 
                 observable.bind("foo", handler);
                 observable.bind("foo", handler);
 
-                equal(observable._handlers["foo"][0], handler);
-                equal(observable._handlers["foo"][1], handler);
+                equal(observable._events["foo"][0], handler);
+                equal(observable._events["foo"][1], handler);
             });
 
             test("trigger calls the handler", function() {
@@ -75,7 +75,7 @@
                 ok(that === observable);
             });
 
-            test("trigger calls all bound handlers", function() {
+            test("trigger calls all bound events", function() {
                 var observable = new Observable(), calls = 0;
 
                 observable.bind("foo", function() {
@@ -103,14 +103,14 @@
 
             });
 
-            test("unbind without handler removes all handlers", function() {
+            test("unbind without handler removes all events", function() {
                 var observable = new Observable();
 
                 observable.bind("foo", $.nop);
 
                 observable.unbind("foo");
 
-                equal(observable._handlers.foo.length, 0);
+                equal(observable._events.foo.length, 0);
             });
 
             test("unbind returns this", function() {
@@ -128,8 +128,8 @@
 
                 observable.unbind("foo", first);
 
-                equal(observable._handlers.foo.length, 1);
-                equal(observable._handlers.foo[0], second);
+                equal(observable._events.foo.length, 1);
+                equal(observable._events.foo[0], second);
             });
         </script>
     </body>

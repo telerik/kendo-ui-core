@@ -10,7 +10,7 @@
         that.linkTemplate = kendo.core.template(that.options.linkTemplate);
         that.selectTemplate = kendo.core.template(that.options.selectTemplate);
 
-        that.dataSource.bind("kendo:change", $.proxy(that.render, that));
+        that.dataSource.bind("change", $.proxy(that.render, that));
         that.wrapper.delegate("a:not(.currentPage)", "click",  $.proxy(that._click, that));
     }
 
