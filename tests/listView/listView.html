@@ -34,27 +34,44 @@
 
             test("kendoListView attaches listView to element", function() {
                 var ul = setup();
-                var listView = ul.data("kendoListView");
 
-                ok(listView instanceof kendo.ui.ListView);
+                ok(ul.data("kendoListView") instanceof kendo.ui.ListView);
             });
 
             test("renders item for dataSource items", function() {
-                ul = setup({
+                var ul = setup({
                     template: "<li></li>"
                 });
                 dataSource.read();
                 equal(ul.find("li").length, 5);
             });
+
+            test("dataBound event should be raised when bound", function() {
+                var ul = setup({
+                        template: "<li></li>"
+                    }),
+                    listView = ul.data("kendoListView"),
+                    called = false;
+
+                listView.bind("dataBound", function() {
+                    called = true;
+                });
+
+                dataSource.read();
+                ok(called);
+            });
+
             test("clicking item raises event", function() {
                 var ul = setup({
                         template: "<li></li>"
                     }),
-                    item;
+                    item,
+                    listView = ul.data("kendoListView");
 
-                ul.bind("kendo:change", function() {
+                listView.bind("change", function() {
                     item = arguments[0];
                 });
+
                 dataSource.read();
                 ul.children().first().click();
                 ok(item);
