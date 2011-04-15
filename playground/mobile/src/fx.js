@@ -24,6 +24,9 @@
         } else
             aObject.css($.getCssPrefix() + 'transition', 'none');
 
+        if (selection.callback)
+            selection.callback.call(aObject);
+        
         aObject.dequeue();
     };
 
