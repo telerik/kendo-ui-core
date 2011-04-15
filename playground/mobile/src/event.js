@@ -12,7 +12,7 @@
             return handler
                     && (!event.e || handler.e == event.e)
                     && (!event.ns || matcher.test(handler.ns))
-                    && (!fn || handler.fn == fn)
+                    && (!fn || !fn.guid || handler.fn.guid == fn.guid)
                     && (!selector || handler.sel == selector);
         });
     }
@@ -26,12 +26,17 @@
         return new RegExp('(?:^| )' + ns.replace(' ', ' .* ?') + '(?: |$)');
     }
 
+    $._guid = 1;
+
     function add(element, events, fn, selector, delegate) {
-        var id = zid(element), set = (handlers[id] || (handlers[id] = []));
+        var id = zid(element), set = (handlers[id] || (handlers[id] = [])), callback = delegate || fn;
         events.split(/\s/).forEach(function(event) {
+            if ( !callback.guid )
+                callback.guid = $._guid++;
+
             var handler = $.extend(parse(event), {fn: fn, sel: selector, del: delegate, i: set.length});
             set.push(handler);
-            element.addEventListener(handler.e, delegate || fn, false);
+            element.addEventListener(handler.e, callback, false);
         });
     }
 
@@ -60,6 +65,7 @@
             output = function() {
                 return fn.apply(proxy || this, arguments);
             };
+            output.guid = proxy.guid = fn.guid = fn.guid || proxy.guid || $._guid++;
         }
         return output;
     };
