@@ -353,7 +353,7 @@
                 that.read(options);
             } else {
                 that._view = process(that._data, options);
-                that.trigger("kendo:change");
+                that.trigger("change");
             }
         },
         page: function(val) {

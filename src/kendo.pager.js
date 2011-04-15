@@ -1,10 +1,15 @@
 (function($, window) {
-    var kendo = window.kendo;
+    var kendo = window.kendo
+        Component = kendo.ui.Component;
 
     function Pager(element, options) {
         var that = this;
+
+        Component.apply(that, arguments);
+
         that.element = element;
         that.wrapper = $(element);
+
         that.dataSource = options.dataSource;
         that.options = $.extend({}, that.options, options);
         that.linkTemplate = kendo.core.template(that.options.linkTemplate);
@@ -60,7 +65,7 @@
 
             this.dataSource.page(page);
 
-            this.wrapper.trigger("kendo:change", [page]);
+            this.trigger("change", [page]);
         },
 
         totalPages: function() {
@@ -76,13 +81,7 @@
         }
     }
 
-    $.fn.kendoPager = function(options) {
-        $(this).each(function() {
-            $(this).data("kendoPager", new Pager(this, options));
-        });
-
-        return this;
-    }
+    kendo.ui.plugin("kendoPager", Pager, Component);
 
     kendo.ui.Pager = Pager;
 

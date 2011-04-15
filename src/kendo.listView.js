@@ -1,8 +1,13 @@
 (function($, window) {
-    var kendo = window.kendo;
+    var kendo = window.kendo,
+        Component = kendo.ui.Component;
+
 
     function ListView(element, options) {
         var that = this;
+
+        Component.apply(that, arguments);
+
         that.element = element;
         that.wrapper = $(element);
 
@@ -10,9 +15,8 @@
         that.template = that.options.template;
         that.dataSource = options.dataSource;
 
-        that.wrapper.addClass("list-view");
-
-        that.wrapper.delegate(".list-view > *", "click",  $.proxy(that._click, that));
+        that.wrapper.addClass("list-view")
+                    .delegate(".list-view > *", "click",  $.proxy(that._click, that));
         that.dataSource.bind("change", $.proxy(that._render, that));
     }
 
@@ -21,24 +25,18 @@
             template: ""
         },
         _render: function() {
-            var that = this, 
+            var that = this,
                 data = that.dataSource.view()
                 list = new kendo.ui.List(that.element, { data: data, template: that.template });
 
-            this.wrapper.trigger("kendo:dataBind");
+            this.trigger("dataBound");
         },
         _click: function(e) {
-            this.wrapper.trigger("kendo:change", [e.currentTarget]);
+            this.trigger("change", [e.currentTarget]);
         }
     };
 
-    $.fn.kendoListView = function(options) {
-        $(this).each(function() {
-            $(this).data("kendoListView", new ListView(this, options));
-        });
-
-        return this;
-    }
+    kendo.ui.plugin("kendoListView", ListView, Component);
 
     kendo.ui.ListView = ListView;
 

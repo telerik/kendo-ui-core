@@ -100,14 +100,15 @@
         mainPhotoStrip.kendoListView({
             dataSource: dataSource,
             template: template
-        }).bind("kendo:change", function(ev, element) {
+        }).data("kendoListView")
+          .bind("change", function(element) {
             mainPhotoStrip.hide();
             $("#bigPhoto").fadeOut("slow")
                 .attr("src", $("img:first", element).attr("src").replace("_s",""))
                 .bind("load", function(e) {
                         $(e.target).hide().fadeIn("medium");
                 });
-            }).bind("kendo:dataBind", function() {
+            }).bind("dataBound", function() {
                 mainPhotoStrip.find("img").bind("load", function() {
                     $(this).css("display", "block")
                          .css("marginLeft", ~~($(this).width()/2))
