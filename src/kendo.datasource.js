@@ -231,7 +231,7 @@
 
             that.idMap = idMap(data, that.id);
 
-            that.trigger("kendo:change");
+            that.trigger("change");
         },
         update: function(id, values) {
             var that = this,

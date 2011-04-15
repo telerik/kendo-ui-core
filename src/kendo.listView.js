@@ -13,7 +13,7 @@
         that.wrapper.addClass("list-view");
 
         that.wrapper.delegate(".list-view > *", "click",  $.proxy(that._click, that));
-        that.dataSource.bind("kendo:change", $.proxy(that._render, that));
+        that.dataSource.bind("change", $.proxy(that._render, that));
     }
 
     ListView.prototype = {
