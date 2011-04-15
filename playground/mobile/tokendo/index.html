@@ -23,58 +23,64 @@
 
     <script src="../../../src/kendo.loader.js"></script>
     <!-- TODO: use loader to load these -->
-    <script src="../../../src/kendo.core.js"></script>
-    <script src="kendo.mobile.application.js"></script>
-    <script src="kendo.mobile.view.js"></script>
-    <script src="kendo.mobile.scroller.js"></script>
     <script>
-//        kendo.loader.define({
-//            mobile: {
-//                url: [ "kendo.mobile.application.js", "kendo.mobile.view.js" ],
-//                depends: "core"
-//            },
-//            scroller: "kendo.mobile.scroller.js"
-//        });
-//
-//        kendo.loader.mobile();
+        kendo.loader.define({
+            mobile: {
+                url: "kendo.mobile.application.js",
+                depends: "core",
+                features: {
+                    view: {
+                        url: "kendo.mobile.view.js"
+                    },
+                    scrollableView: {
+                        url: "kendo.mobile.scroller.js",
+                        depends: "view"
+                    }
+                }
+            }
+        });
+
+        kendo.loader.mobile({
+            view: {}
+        }, function() {
+            var application = new Application({
+                splashScreen: "images/splash.png"
+            });
+
+            var taskList;
+
+            application.run(function(application) {
+                taskList = new View({
+                    onBind: function(data, element) {
+                        var template = kendo.core.template(document.getElementById("item_tmpl").innerHTML);
+
+                        element.html(template({ data: data }))
+                            .delegate('.more-details', 'click', function() {
+                                application.goToView('details', { itemId: $(this).index() });
+                            });
+                    }
+                });
+
+                application.addView(taskList);
+
+                $('label').live('click', function(e) {
+                    var $this = $(this);
+                    $this.toggleClass('input-checked', document.getElementById($this.attr('for')).checked);
+                });
+
+                // load data
+                var dataLoader = document.createElement('script');
+                dataLoader.src = "tokendo.data.js";
+                document.getElementsByTagName("head")[0].appendChild(dataLoader);
+            });
+
+            window.jsonpCallback = function (data) {
+                taskList.bind(data);
+            }
+    });
     </script>
  </head>
  <body>
-    <script>
-        var application = new Application({ });
-
-        var taskList;
-
-        application.run(function(application) {
-            taskList = new View({
-                onBind: function(data, element) {
-                    var template = kendo.core.template(document.getElementById("item_tmpl").innerHTML);
-
-                    element.html(template({ data: data }))
-                        .delegate('.more-details', 'click', function() {
-                            application.goToView('details', { itemId: $(this).index() });
-                        });
-                }
-            });
-
-            application.addView(taskList);
-
-            $('label').live('click', function(e) {
-                var $this = $(this);
-                $this.toggleClass('input-checked', document.getElementById($this.attr('for')).checked);
-            });
-
-            // load data
-            var dataLoader = document.createElement('script');
-            dataLoader.src = "tokendo.data.js";
-            document.getElementsByTagName("head")[0].appendChild(dataLoader);
-        });
-
-        function jsonpCallback(data) {
-            taskList.bind(data);
-        }
-    </script>
-    
     <script type="text/html" id="item_tmpl">
         <ul class="list">
         <% for (var i = 0; i < data.length; i++) {

@@ -1,12 +1,13 @@
-(function($, undefined) {
-    var kendo = window.kendo,
-        mobile = kendo.mobile = kendo.mobile || {};
+function View(options) {
+    $.extend(this, options);
+    this.element = $('<div class="data-container"/>');
+    this.scroller = new Scroller(this.element);
+    this.scrollElement = this.scroller.scrollElement;
+}
 
-    function View(element, options) {
+View.prototype = {
+    bind: function(data) {
+        this.onBind(data, this.scrollElement || this.element);
     }
+};
 
-    View.prototype = {
-    };
-
-    mobile.View = View;
-})(jQuery || zepto);
