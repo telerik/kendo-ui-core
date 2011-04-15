@@ -64,15 +64,14 @@
             });
         },
 
-        _templates: function() {
+        _tmpl: function(start, rowTemplate) {
             var that = this,
-                rowTemplate = that.options.rowTemplate,
-                settings = $.extend({}, kendo.core.Template, that.options.templateSettings);
+                settings = extend({}, kendo.core.Template, that.options.templateSettings);
 
             if (!$.isFunction(rowTemplate)) {
 
                 if (!rowTemplate) {
-                    rowTemplate = "<tr>";
+                    rowTemplate = start;
 
                     $.each(that.columns, function() {
                         var column = this,
@@ -88,7 +87,15 @@
                 rowTemplate = kendo.core.template(rowTemplate, settings);
             }
 
-            that.rowTemplate = rowTemplate;
+            return rowTemplate;
+        },
+
+        _templates: function() {
+            var that = this,
+                options = that.options;
+
+            that.rowTemplate = that._tmpl("<tr>", options.rowTemplate);
+            that.altRowTemplate = that._tmpl('<tr class="t-alt">', options.altRowTemplate || options.rowTemplate);
         },
 
         refresh: function() {
@@ -96,12 +103,18 @@
                 length,
                 idx,
                 html = "",
-                view = that.dataSource.view(),
+                data = that.dataSource.view(),
                 tbody,
-                placeholder;
+                placeholder,
+                rowTemplate = that.rowTemplate,
+                altRowTemplate = that.altRowTemplate;
 
-            for (idx = 0, length = view.length; idx < length; idx++) {
-               html += that.rowTemplate(view[idx]);
+            for (idx = 0, length = data.length; idx < length; idx++) {
+                if (idx % 2) {
+                   html += altRowTemplate(data[idx]);
+                } else {
+                   html += rowTemplate(data[idx]);
+                }
             }
 
             if (tbodySupportsInnerHtml) {
