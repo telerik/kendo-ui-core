@@ -142,13 +142,17 @@
 
     function TextElement(text) {
         var element = this;
+        ChartElement.call(element);
+
         element.type = "text";
         element.text = text;
 
         element.updateLayout(defaultBox);
     }
 
-    $.extend(TextElement.prototype, new ChartElement(), {
+    TextElement.prototype = new ChartElement();
+
+    $.extend(TextElement.prototype, {
         options: {
             fontSize: "12pt",
             fontFamily: "Verdana"
@@ -175,10 +179,14 @@
 
     function ChartTitle(options) {
         var title = this;
+        ChartElement.call(title);
+
         title.options = $.extend({}, title.options, options);
     }
 
-    $.extend(ChartTitle.prototype, new ChartElement(), {
+    ChartTitle.prototype = new ChartElement();
+
+    $.extend(ChartTitle.prototype, {
         options: {
             text: "Title",
             position: "top",
@@ -187,19 +195,25 @@
 
         updateLayout: function(targetBox) {
             var title = this,
-                text = new TextElement(this.options.text),
+                options = title.options,
+                text = new TextElement(options.text),
                 textBox = new Box();
 
-            if (title.options.position == "top") {
-                textBox.y1 = 0;
-//                title.box = new Box(targetBox.x1, targetBox.y1, targetBox.x2, textBox.y2);
-            } else {
+            if (options.position == "top") {
+                textBox.y1 = targetBox.y1;
+            } else if (options.position == "bottom") {
                 textBox.y1 = targetBox.y2 - text.box.height();
             }
 
+            if (title.options.textAlign == "center") {
+                textBox.x1 = (targetBox.width() - text.box.width()) / 2;
+                textBox.x2 = textBox.x1 + text.box.width();
+            }
             text.updateLayout(textBox);
             title.children.push(text);
-        }
+
+            title.box = new Box(targetBox.x1, targetBox.y1, targetBox.x2, text.box.y2);
+      }
     });
 
     // Helper functions
