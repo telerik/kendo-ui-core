@@ -31,7 +31,7 @@
         that._columns();
 
         that._templates();
-        dataSource.bind("kendo:change", $.proxy(that.refresh, that));
+        dataSource.bind("change", $.proxy(that.refresh, that));
         dataSource.query();
     }
 
