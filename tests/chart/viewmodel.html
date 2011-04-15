@@ -21,22 +21,39 @@
                     }
                 });
 
-                test("text element is created", function() {
+                test("text is created", function() {
                     title.updateLayout(chartBox);
                     equals(title.children[0].type, "text");
                 });
 
-                test("text element is positioned at top", function() {
+                test("text is positioned at top", function() {
                     title.updateLayout(chartBox);
                     equals(title.children[0].box.y1, 0);
+                    equals(title.children[0].box.y2, 21);
                 });
 
-                test("text element is positioned at bottom", function() {
+                test("text is positioned at bottom", function() {
                     title.options.position = "bottom";
                     title.updateLayout(chartBox);
-                    equals(title.children[0].box.y1, 980);
+                    equals(title.children[0].box.y1, 979);
+                    equals(title.children[0].box.y2, 1000);
                 });
-        });
+
+                test("text is aligned at center", function() {
+                    title.updateLayout(chartBox);
+                    equals(title.children[0].box.x1, 483);
+                });
+
+                test("box width is equal to container width", function() {
+                    title.updateLayout(chartBox);
+                    equals(title.box.width(), chartBox.width());
+                });
+
+                test("box height is equal to text height", function() {
+                    title.updateLayout(chartBox);
+                    equals(title.box.height(), 21);
+                });
+       });
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>
