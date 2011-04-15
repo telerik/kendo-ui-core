@@ -33,15 +33,15 @@
                         url: "kendo.mobile.view.js"
                     },
                     scrollableView: {
-                        url: "kendo.mobile.scroller.js",
-                        depends: "view"
+                        url: "kendo.mobile.scroller.js"
                     }
                 }
             }
         });
 
         kendo.loader.mobile({
-            view: {}
+            view: {},
+            scrollableView: {}
         }, function() {
             var application = new Application({
                 splashScreen: "images/splash.png"
