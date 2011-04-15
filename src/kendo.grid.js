@@ -89,9 +89,11 @@
             return rowTemplate;
         },
         _templates: function() {
-            var that = this;
-            that.rowTemplate = that._tmpl("<tr>", that.options.rowTemplate);
-            that.altRowTemplate = that._tmpl('<tr class="t-alt">', that.options.altRowTemplate || that.options.rowTemplate);
+            var that = this,
+                options = that.options;
+
+            that.rowTemplate = that._tmpl("<tr>", options.rowTemplate);
+            that.altRowTemplate = that._tmpl('<tr class="t-alt">', options.altRowTemplate || options.rowTemplate);
         },
 
         refresh: function() {
@@ -99,17 +101,17 @@
                 length,
                 idx,
                 html = "",
-                view = that.dataSource.view(),
+                data = that.dataSource.view(),
                 tbody,
                 placeholder,
                 rowTemplate = that.rowTemplate,
                 altRowTemplate = that.altRowTemplate;
 
-            for (idx = 0, length = view.length; idx < length; idx++) {
+            for (idx = 0, length = data.length; idx < length; idx++) {
                 if (idx % 2) {
-                   html += altRowTemplate(view[idx]);
+                   html += altRowTemplate(data[idx]);
                 } else {
-                   html += rowTemplate(view[idx]);
+                   html += rowTemplate(data[idx]);
                 }
             }
 
