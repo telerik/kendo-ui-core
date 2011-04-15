@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.ui.Component Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <link rel="stylesheet" href="../qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.ui.Component Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+            var Component = kendo.ui.Component;
+
+            test("Component.element is initialized from constructor", function() {
+                var component = new Component(document.body);
+
+                ok(component.element === document.body);
+            });
+
+            test("Component.options is initialized from constructor", function() {
+                var component = new Component(document.body, { foo: "bar" });
+
+                equal(component.options.foo, "bar");
+            });
+
+            test("Component.options is cloned from constructor", function() {
+                var options = { foo: "bar" },
+                    component = new Component(document.body, options);
+
+                options.foo = "baz";
+                equal(component.options.foo, "bar");
+            });
+
+            test("Component.options is merged with default options", function() {
+                Component.prototype.options = { foo: "bar" };
+
+                var  component = new Component(document.body, { baz: "boo" });
+
+                equal(component.options.foo, "bar");
+                equal(component.options.baz, "boo");
+            });
+
+            test("default options remain pristine", function() {
+                Component.prototype.options = { foo: "bar" };
+
+                var  component = new Component(document.body, { foo: "foo1", baz: "boo" });
+
+                equal(Component.prototype.options.foo, "bar");
+                ok(Component.prototype.options.baz === undefined);
+            });
+
+            test("Component is Observable", function() {
+                var component = new Component();
+                ok(component instanceof kendo.core.Observable);
+            });
+
+            test("Components dont share events", function() {
+                var one = new Component(), two = new Component();
+                ok(one._events !== two._events);
+            });
+
+            test("plugin extends jQuery.fn", function() {
+                kendo.ui.plugin("foo", function(){}, Component);
+
+                ok($.fn.foo);
+            });
+
+            test("plugin creates factory method which instantiates a new instance of the component", function() {
+                function CustomComponent() {}
+
+                CustomComponent.prototype = {
+                    method: function() {
+                    }
+                }
+                kendo.ui.plugin("foo", CustomComponent, Component);
+
+                var foo = $("<p/>").foo().data("foo");
+
+                ok(foo);
+                ok(foo instanceof Component);
+                ok(foo instanceof CustomComponent);
+                ok(foo.method);
+            });
+       </script>
+    </body>
+</html>

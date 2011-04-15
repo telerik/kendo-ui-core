@@ -1,7 +1,9 @@
 (function($, window, undefined) {
     var kendo = window.kendo,
         DataSource = kendo.data.DataSource,
-        tbodySupportsInnerHtml = true;
+        tbodySupportsInnerHtml = true,
+        Component = kendo.ui.Component,
+        extend = $.extend;
 
     (function() {
         // Internet Explorer does not support setting the innerHTML of TBODY and TABLE elements
@@ -18,7 +20,9 @@
             dataSource;
 
         options = $.isArray(options) ? { data: options } : options;
-        that.options = options = $.extend({}, that.options, options);
+
+        Component.apply(that, arguments);
+
         that.dataSource = dataSource = DataSource.create(options);
         that.element = element;
         that.table = $(element);
@@ -112,13 +116,7 @@
        }
     }
 
-    $.fn.kendoGrid = function(options) {
-        $(this).each(function() {
-            $(this).data("kendoGrid", new Grid(this, options));
-        });
-
-        return this;
-    }
+    kendo.ui.plugin("kendoGrid", Grid, Component);
 
     kendo.ui.Grid = Grid;
 })(jQuery, window);
