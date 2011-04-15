@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Grid performance comparison - binding to 100 records</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.query.js"></script>
+        <script src="../../src/kendo.datasource.js"></script>
+        <script src="../../src/kendo.grid.js"></script>
+        <script src="benchmark.js"></script>
+        <style>
+            table
+            {
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+            table td,
+            table th
+            {
+                border: 1px solid black;
+                padding: 3px;
+            }
+            div.grid
+            {
+                height: 200px;
+                overflow: auto;
+                border: 1px solid black;
+                margin: 10px;
+                padding: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <p>Running benchmark ... </p>
+        <div class="grid">
+            <div>Kendo Grid bound to 1000 records</div>
+            <table class="kendo">
+                <thead>
+                    <tr>
+                        <th data-field="CustomerID">Customer ID</th>
+                        <th data-field="CustomerName">Customer Name</th>
+                        <th data-field="Birthday">Birthday</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <script>
+            var records = [];
+
+            for (var i = 1; i <= 1000; i++) {
+                records.push({ CustomerID: i, CustomerName: "Customer " + i, Birthday: new Date() });
+            }
+            $(document).ready(function() {
+                var suite = new Benchmark.Suite;
+
+                var kendoGrid = $("table.kendo").kendoGrid(records).data("kendoGrid");
+
+                suite.add("Kendo Grid", function() {
+                    kendoGrid.refresh();
+                })
+                .on("complete", function() {
+                    var message = "User agent: " + navigator.userAgent;
+                    message += "<table><tr><th>Position</th><th>Grid</th><th>Ops/sec (higher is better)</th></tr>";
+                        var results = $.makeArray(this);
+                        results.sort(function(a, b) { return b.hz - a.hz });
+                        $.each(results, function(index) {
+                            message += "<tr><td>" + (index + 1) + "</td><td>" + this.name + "</td><td>" + this.hz + "</td></tr>";
+                        });
+                        message += "</table>";
+                    $("p:first").html(message);
+                })
+                .run(true);
+            });
+        </script>
+    </body> 
+</html>
