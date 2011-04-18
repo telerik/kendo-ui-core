@@ -36,8 +36,5 @@
         }
     };
 
-    kendo.ui.plugin("kendoListView", ListView, Component);
-
-    kendo.ui.ListView = ListView;
-
+    kendo.ui.plugin("ListView", ListView, Component);
 })(jQuery, window);
