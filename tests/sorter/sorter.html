@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.ui.Sorter Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.sorter.js"></script>
+        <script src="../../src/kendo.query.js"></script>
+        <script src="../../src/kendo.dataSource.js"></script>
+        <link rel="stylesheet" href="../qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.ui.Sorter Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+            var DataSource = kendo.data.DataSource,
+                Sorter = kendo.ui.Sorter,
+                dataSource = DataSource.create( { data: [ { foo: 2 }, { foo: 1 } ] } );
+
+            function setup(element, options) {
+                return new Sorter(element || $(document.body).data("field", "foo"), options || { dataSource: dataSource });
+            }
+
+            module("kendo.ui.Sorter", {
+                setup: function() {
+                    $(document.body).unbind("click").removeData();
+                }
+            });
+
+            test("clicking an item sorts by that field in asc dir", function() {
+                var sorter = setup();
+                $(document.body).click();
+
+                equal(dataSource.view()[0].foo, 1);
+            });
+
+            test("sorting the data source assigns the dir data", function() {
+                var sorter = setup();
+                dataSource.sort( { field: "foo", dir: "desc" });
+                equal($(document.body).data("dir"), "desc");
+            });
+
+            test("sorting twice clears the dir data", function() {
+                var sorter = setup();
+                dataSource.sort( { field: "foo", dir: "desc" });
+                dataSource.sort( { field: "bar", dir: "desc" });
+                equal($(document.body).data("dir"), undefined);
+            });
+
+            test("clicking changes the sort direction", function() {
+                var sorter = setup();
+                $(document.body).click();
+                $(document.body).click();
+
+                equal($(document.body).data("dir"), "desc");
+            });
+
+            test("desc changes to empty", function() {
+                var sorter = setup($(document.body).data("field", "foo").data("dir", "desc"));
+
+                $(document.body).click();
+
+                equal($(document.body).data("dir"), undefined);
+            });
+
+            test("clicking unsorted element sets its direrction to ascending", function() {
+                var sorter = setup();
+                $(document.body).click();
+
+                equal($(document.body).data("dir"), "asc");
+            });
+
+        </script>
+    </body>
+</html>
