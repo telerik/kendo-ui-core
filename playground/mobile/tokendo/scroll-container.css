@@ -13,6 +13,9 @@
     -webkit-transform-origin: 0 0;
     -o-transform-origin: 0 0;
     transform-origin: 0 0;
+    -webkit-transition: opacity 0.3s linear;
+    -moz-transition: opacity 0.3s linear;
+    opacity: 0;
 }
 
 .vertical-scrollbar
@@ -20,7 +23,6 @@
     height: 100%;
     right: 1px;
     bottom: 0;
-    -webkit-backface-visibility: hidden;
 }
 
 .horizontal-scrollbar
@@ -28,7 +30,6 @@
     width: 100%;
     right: 0;
     bottom: 1px;
-    -webkit-backface-visibility: hidden;
 }
 
 .scroll-container
@@ -37,9 +38,10 @@
     -webkit-user-select: none;
     user-select: none;
     background: #FFF;
+/*
     -webkit-perspective: 1000;
-    -webkit-backface-visibility: hidden;
     -webkit-box-shadow: 0 0 1em #000;
     box-shadow: 0 0 1em #000;
+*/
 }
 
