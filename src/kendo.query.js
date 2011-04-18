@@ -194,8 +194,10 @@
     }
 
     Query.expandSort = function(field, dir) {
-        var descriptor = typeof field === "string" ? { field: field, dir: dir } : field;
-        return $.isArray(descriptor) ? descriptor : (descriptor !== undefined ? [descriptor] : []);
+        var descriptor = typeof field === "string" ? { field: field, dir: dir } : field,
+            descriptors = $.isArray(descriptor) ? descriptor : (descriptor !== undefined ? [descriptor] : []); 
+
+        return $.grep(descriptors, function(d) { return !!d.dir; });
     }
     Query.prototype = {
         toArray: function () {
@@ -222,11 +224,15 @@
                 descriptors = Query.expandSort(field, dir),
                 comparers = [];
 
-            for (idx = 0, length = descriptors.length; idx < length; idx++) {
-                comparers.push(Comparer.create(descriptors[idx]));
+            if (descriptors.length) {
+                for (idx = 0, length = descriptors.length; idx < length; idx++) {
+                    comparers.push(Comparer.create(descriptors[idx]));
+                }
+
+                return this.orderBy({ compare: Comparer.combine(comparers) });
             }
 
-            return this.orderBy({ compare: Comparer.combine(comparers) });
+            return this;
         },
         filter: function(expressions) {
             expressions = $.isArray(expressions) ? expressions : [expressions];
