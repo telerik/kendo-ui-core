@@ -129,7 +129,5 @@
        }
     }
 
-    kendo.ui.plugin("kendoGrid", Grid, Component);
-
-    kendo.ui.Grid = Grid;
+    kendo.ui.plugin("Grid", Grid, Component);
 })(jQuery, window);
