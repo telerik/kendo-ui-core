@@ -38,7 +38,7 @@
 
         _click: function(e) {
             e.preventDefault();
-debugger;
+
             var currentTarget = $(e.currentTarget),
                 field = currentTarget.data("field"),
                 dir = currentTarget.data("dir");
