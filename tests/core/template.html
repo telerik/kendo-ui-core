@@ -42,6 +42,11 @@
                 equal(t({ foo: "bar" }), "bar");
             });
 
+            test("template evaluates value expressions in single quotes", function() {
+                var t = template.compile("'<%= foo %>'");
+                equal(t({ foo: "bar" }), "'bar'");
+            });
+
             test("template with custom paramName", function() {
                 template.paramName = "foo";
 

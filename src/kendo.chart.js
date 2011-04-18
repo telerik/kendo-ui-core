@@ -1,6 +1,7 @@
 (function ($) {
     var kendo = window.kendo,
         ui = kendo.ui = kendo.ui || {},
+        extend = $.extend,
         DEFAULT_PRECISION = 6,
         ZERO_THRESHOLD = 0.2;
 
@@ -135,7 +136,7 @@
         element.children = [];
     }
 
-    $.extend(ChartElement.prototype, {
+    extend(ChartElement.prototype, {
         options: {
         }
     });
@@ -152,7 +153,7 @@
 
     TextElement.prototype = new ChartElement();
 
-    $.extend(TextElement.prototype, {
+    extend(TextElement.prototype, {
         options: {
             fontSize: "12pt",
             fontFamily: "Verdana"
@@ -182,6 +183,9 @@
         ChartElement.call(title);
 
         title.options = $.extend({}, title.options, options);
+
+        var text = new TextElement(title.options.text);
+        title.children.push(text);
     }
 
     ChartTitle.prototype = new ChartElement();
@@ -196,7 +200,7 @@
         updateLayout: function(targetBox) {
             var title = this,
                 options = title.options,
-                text = new TextElement(options.text),
+                text = title.children[0],
                 textBox = new Box();
 
             if (options.position == "top") {
@@ -210,10 +214,28 @@
                 textBox.x2 = textBox.x1 + text.box.width();
             }
             text.updateLayout(textBox);
-            title.children.push(text);
 
             title.box = new Box(targetBox.x1, targetBox.y1, targetBox.x2, text.box.y2);
       }
+    });
+
+    function SVGRenderer(targetBox) {
+        var r = this;
+        r.targetBox = targetBox;
+    }
+
+    $.extend(SVGRenderer.prototype, {
+        render: function(viewElement) {
+            var result;
+
+            switch(viewElement.type) {
+                case "text":
+                    result = $("<text>");
+                    break;
+            }
+
+            return result[0];
+        }
     });
 
     // Helper functions
@@ -241,6 +263,7 @@
     Chart.NumericAxis = NumericAxis;
     Chart.ChartTitle = ChartTitle;
     Chart.Box = Box;
+    Chart.SVGRenderer = SVGRenderer;
 
     // #endif
 
