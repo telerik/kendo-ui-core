@@ -270,11 +270,20 @@
     extend(kendo.ui, {
         Component: Component,
         plugin: function(name, component, base) {
+            // copy the prototype of the component
             var proto = component.prototype;
 
+            // replace it with the base prototype
             component.prototype = new base();
+
+            // extend it with the original prototoype
             extend(component.prototype, proto);
 
+            // expose it in the kendo.ui namespace
+            kendo.ui[name] = component;
+
+            name = "kendo" + name;
+            // expose a jQuery plugin
             $.fn[name] = function(options) {
                 $(this).each(function() {
                     $(this).data(name, new component(this, options));
