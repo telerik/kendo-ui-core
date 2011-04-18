@@ -70,7 +70,7 @@
                 useWithBlock = settings.useWithBlock,
                 functionBody = "var o='';",
                 evalRegExp = new RegExp(begin + "=(.+?)" + end, "g"),
-                quoteRegExp = new RegExp("'(?=.*?" + end + ")", "g");
+                quoteRegExp = new RegExp("'(?=[^" + end[0] + "]*" + end + ")", "g");
 
             functionBody += useWithBlock ? "with(" + paramName + "){" : "";
 

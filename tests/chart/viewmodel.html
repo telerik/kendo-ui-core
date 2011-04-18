@@ -11,49 +11,55 @@
         <script src="../../src/kendo.chart.js"></script>
         <script type="text/javascript">
             $(document).ready(function() {
-                var Box = kendo.ui.Chart.Box,
+                var TITLE_TEXT_HEIGHT = 21,
+                    TITLE_TEXT_WIDTH = 34,
+                    Box = kendo.ui.Chart.Box,
                     chartBox = new Box(0, 0, 1000, 1000),
-                    title;
+                    title,
+                    titleTextElement;
 
                 module("Chart Title", {
                     setup: function() {
                         title = new kendo.ui.Chart.ChartTitle();
+                        title.updateLayout(chartBox);
+                        titleTextElement = title.children[0];
                     }
                 });
 
                 test("text is created", function() {
-                    title.updateLayout(chartBox);
-                    equals(title.children[0].type, "text");
+                    equals(titleTextElement.type, "text");
+                });
+
+                test("text element has set text", function() {
+                    equals(titleTextElement.text, "Title");
                 });
 
                 test("text is positioned at top", function() {
-                    title.updateLayout(chartBox);
-                    equals(title.children[0].box.y1, 0);
-                    equals(title.children[0].box.y2, 21);
+                    equals(titleTextElement.box.y1, 0);
+                    equals(titleTextElement.box.y2, TITLE_TEXT_HEIGHT);
                 });
 
                 test("text is positioned at bottom", function() {
                     title.options.position = "bottom";
                     title.updateLayout(chartBox);
-                    equals(title.children[0].box.y1, 979);
-                    equals(title.children[0].box.y2, 1000);
+                    equals(titleTextElement.box.y1,
+                           chartBox.height() - TITLE_TEXT_HEIGHT);
+                    equals(titleTextElement.box.y2, chartBox.y2);
                 });
 
                 test("text is aligned at center", function() {
-                    title.updateLayout(chartBox);
-                    equals(title.children[0].box.x1, 483);
+                    equals(titleTextElement.box.x1,
+                           (chartBox.width() - TITLE_TEXT_WIDTH) / 2);
                 });
 
                 test("box width is equal to container width", function() {
-                    title.updateLayout(chartBox);
                     equals(title.box.width(), chartBox.width());
                 });
 
                 test("box height is equal to text height", function() {
-                    title.updateLayout(chartBox);
-                    equals(title.box.height(), 21);
+                    equals(title.box.height(), TITLE_TEXT_HEIGHT);
                 });
-       });
+            });
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>
