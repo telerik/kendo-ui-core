@@ -81,8 +81,5 @@
         }
     }
 
-    kendo.ui.plugin("kendoPager", Pager, Component);
-
-    kendo.ui.Pager = Pager;
-
+    kendo.ui.plugin("Pager", Pager, Component);
 })(jQuery, window);

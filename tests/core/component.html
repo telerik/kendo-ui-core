@@ -69,9 +69,9 @@
             });
 
             test("plugin extends jQuery.fn", function() {
-                kendo.ui.plugin("foo", function(){}, Component);
+                kendo.ui.plugin("Foo", function(){}, Component);
 
-                ok($.fn.foo);
+                ok($.fn.kendoFoo);
             });
 
             test("plugin creates factory method which instantiates a new instance of the component", function() {
@@ -81,9 +81,9 @@
                     method: function() {
                     }
                 }
-                kendo.ui.plugin("foo", CustomComponent, Component);
+                kendo.ui.plugin("Foo", CustomComponent, Component);
 
-                var foo = $("<p/>").foo().data("foo");
+                var foo = $("<p/>").kendoFoo().data("kendoFoo");
 
                 ok(foo);
                 ok(foo instanceof Component);
