@@ -191,12 +191,14 @@
                 var dataSource = new DataSource( {
                     transport: transport,
                     serverSorting: true
-                });
-
-                dataSource.success = function(data, view) {
+                }).bind("change", function() {
                     start();
+
                     ok(true);
-                };
+                    var view = dataSource.view();                            
+                    equal(view[0].age, 1);
+                    equal(view[1].age, 2);
+                });                
 
                 $.mockjax({
                     url: "foo",
@@ -215,12 +217,13 @@
                 var dataSource = new DataSource( {
                     transport: transport,
                     serverPaging: true
-                });
-
-                dataSource.success = function(data, view) {
+                }).bind("change", function() {
                     start();
-                    ok(true);
-                };
+                    
+                    var view = dataSource.view();                            
+                    equal(view[0].age, 1);
+                    equal(view[1].age, 2);
+                });  
 
                 $.mockjax({
                     url: "foo",
@@ -324,6 +327,120 @@
                 
                 dataSource.query({ page: 1, pageSize: 2});                
                 equal(dataSource.total(), 3);
+            });            
+
+            test("query should filter if filter is set", function() {
+                var dataSource = new DataSource({
+                    data: [{ id:1, bar: "foo" },{ id: 2, bar: "baz" }]                    
+                });
+
+                dataSource.query( { filter: { field: "bar", operator: "==", value: "baz" } } );
+                var view = dataSource.view();
+                equal(view.length, 1);            
+                equal(view[0].bar, "baz");
+            });
+
+            test("query does not filter data if serverFiltering = true", function() {
+                var transport = new RemoteTransport({
+                        read: "foo"
+                    });
+
+                var dataSource = new DataSource( {
+                    transport: transport,
+                    serverFiltering: true
+                }).bind("change", function() {
+                    start();
+                    
+                    var view = dataSource.view();
+                    equal(view.length, 2);            
+                    equal(view[0].age, 1);
+                    equal(view[1].age, 2);
+                });
+
+                $.mockjax({
+                    url: "foo",
+                    responseText: '[{"age": 1}, {"age": 2}]'
+                });
+
+                dataSource.query( { filter: { field: "age", operator: "==", value: 2 } } );
+                stop(1000);                
+            });
+         
+            test("filter does not modify the original data", function() {
+                var data = [{age: 1}, {age: 2}];
+
+                var dataSource = new DataSource({
+                    data: data
+                });
+                dataSource.read();
+                dataSource.query( { filter: { field: "age", operator: "==", value: 2 } } );
+                var view = dataSource.data();
+
+                ok(view === data);
+            });
+
+            test("paging is after filtering", function() {
+                var dataSource = new DataSource({
+                    data: [{age: 1}, {age: 2}, {age: 3}]
+                });
+
+                dataSource.read();
+                dataSource.query( { page: 2, pageSize: 1, filter: { field: "age", operator: "!=", value: 2 } } );
+                var view = dataSource.view();
+
+                equal(view[0].age, 3);                
+            });
+
+            test("query sets filter when array is passed", function() {
+                var dataSource = new DataSource({
+                    data: [{age: 1}, {age: 2}, {age: 3}]
+                });
+
+                dataSource.query( { filter: [{ field: "age", operator: ">=", value: 1 },{ field: "age", operator: "<", value: 3 }] });
+                equal(dataSource.filter().length, 2);
+                equal(dataSource.filter()[1].field, "age");
+                equal(dataSource.filter()[1].operator, "<");
+                equal(dataSource.filter()[1].value, 3);
+            });
+
+            test("query sets filter", function() {
+                var dataSource = new DataSource({
+                    data: [{age: 1}, {age: 2}, {age: 3}]
+                });
+
+                dataSource.query({ filter: { field: "age", operator: "==", value: 2 } });
+                ok($.isArray(dataSource.filter()));
+                equal(dataSource.filter()[0].field, "age");
+                equal(dataSource.filter()[0].operator, "==");
+                equal(dataSource.filter()[0].value, 2);
+            });
+
+            test("query removes filter expression from the state if not passed", function() {
+                var dataSource = new DataSource({
+                    data: [{age: 1}, {age: 2}]
+                });
+                dataSource.read();
+                dataSource.query( { filter: { field: "age", operator: "==", value: 2 } } );
+                dataSource.query();
+                var view = dataSource.view();
+
+                equal(view.length, 2);
+                equal(view[0].age, 1);
+                equal(view[1].age, 2);
+                equal(dataSource.filter(), undefined);
+            });
+
+            test("filtering though filter method", function() {
+                var dataSource = new DataSource({
+                    data: [{age: 1}, {age: 2}, {age: 3}]
+                });
+                dataSource.read();
+                dataSource.filter( { field: "age", operator: "!=", value: 2 } );
+                var view = dataSource.view();
+
+                equal(view.length, 2);
+                equal(view[0].age, 1);
+                equal(view[1].age, 3);
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

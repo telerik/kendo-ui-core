@@ -20,6 +20,11 @@
             page = options.page,
             pageSize = options.pageSize,
             sort = options.sort;
+            filter = options.filter;
+
+        if(filter) {
+            query = query.filter(filter);
+        }
 
         if (sort) {
             query = query.sort(sort);
@@ -158,11 +163,13 @@
                 schema: options.schema,
                 serverSorting: options.serverSorting,
                 serverPaging: options.serverPaging,
+                serverFiltering: options.serverFiltering,
                 _data: [],
                 _view: [],
                 _pageSize: options.pageSize,
                 _page: options.page,
-                _sort: options.sort
+                _sort: options.sort,
+                _filter: options.filter
             }),
             id = that.schema.id,
             transport = options.transport;
@@ -212,14 +219,16 @@
                 id: "id"
             },
             serverSorting: false,
-            serverPaging: false
+            serverPaging: false,
+            serverFiltering: false
         },
         read: function() {
             var that = this,
                 options = {
                     page: that._page,
                     pageSize: that._pageSize,
-                    sort: that._sort
+                    sort: that._sort,
+                    filter: that._filter
                 };
 
             that.transport.read({
@@ -242,6 +251,10 @@
 
             if (that.serverSorting !== true) {
                 options.sort = that._sort;
+            }
+
+            if (that.serverFiltering !== true) {
+                options.filter = that._filter;
             }
 
             that._view = process(data, options);
@@ -356,16 +369,21 @@
         query: function(options) {
             var that = this,
                 options = options || {},
-                remote = that.serverSorting || that.serverPaging;
+                remote = that.serverSorting || that.serverPaging || that.serverFiltering;
 
             that._pageSize = options.pageSize;
             that._page = options.page;
             that._sort = options.sort;
+            that._filter = options.filter;
 
             if (options.sort) {
                 that._sort = options.sort = kendo.data.Query.expandSort(options.sort);
             }
 
+            if (options.filter) {
+                that._filter = options.filter = kendo.data.Query.expandFilter(options.filter);
+            }
+            
             if (remote || (that._data === undefined || that._data.length == 0)) {
                 that.read(options);
             } else {
@@ -377,7 +395,7 @@
             var that = this;
 
             if(val !== undefined) {
-                that.query({ page: val, pageSize: that.pageSize(), sort: that.sort()});
+                that.query({ page: val, pageSize: that.pageSize(), sort: that.sort(), filter: that.filter()});
                 return;
             }
             return that._page;
@@ -386,7 +404,7 @@
             var that = this;
 
             if(val !== undefined) {
-                that.query({ page: that.page(), pageSize: val, sort: that.sort()});
+                that.query({ page: that.page(), pageSize: val, sort: that.sort(), filter: that.filter()});
                 return;
             }
 
@@ -396,11 +414,21 @@
             var that = this;
 
             if(val !== undefined) {
-                that.query({ page: that.page(), pageSize: that.pageSize(), sort: val });
+                that.query({ page: that.page(), pageSize: that.pageSize(), sort: val, filter: that.filter() });
                 return;
             }
 
             return this._sort;
+        },
+        filter: function(val) {
+            var that = this;
+
+            if(val !== undefined) {
+                that.query({ page: that.page(), pageSize: that.pageSize(), sort: that.sort(), filter: val });
+                return;
+            }
+
+            return that._filter;
         },
         total: function() {
             return this._total;
