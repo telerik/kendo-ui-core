@@ -298,6 +298,31 @@
                 });
 
             });
+            test("setting cache to true applies in memory cache", function() {
+                var transport = new RemoteTransport({
+                        read: "foo",
+                        cache: true
+                    });
+                ok(transport.cache instanceof kendo.data.Cache);
+            });
+
+            test("setting cache to false disables caching", function() {
+                var transport = new RemoteTransport({
+                        cache: false
+                    });
+                ok(!(transport.cache instanceof kendo.data.Cache));
+            });
+
+            test("setting cache to localstorage returns LocalStorageCache", function() {
+                var cache = kendo.data.Cache.create("localstorage");
+                ok(cache instanceof kendo.data.LocalStorageCache);
+            });
+
+            test("setting cache to inmemory returns Cache", function() {
+                var cache = kendo.data.Cache.create("inmemory");
+                ok(cache instanceof kendo.data.Cache);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

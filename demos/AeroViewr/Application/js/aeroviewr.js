@@ -61,7 +61,7 @@
                         dataType: "jsonp",
                         jsonpCallback: "jsonFlickrApi"
                     },
-                    cache: new kendo.data.LocalStorageCache(),
+                    cache: "localstorage",
                     dialect: {
                         read: function(data) {
                            var params = {

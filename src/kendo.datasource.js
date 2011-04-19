@@ -48,10 +48,10 @@
         if (options && typeof options.read === "string") {
             options.read = { url: options.read };
         }
+        that.cache = options && options.cache && options.cache !== false ? Cache.create(options.cache) : that.defaults.cache;
         options = extend(that.defaults, options);
         that.settings = options;
         that.dialect = options.dialect;
-        that.cache = options.cache;
     }
 
     RemoteTransport.prototype = {
@@ -89,6 +89,23 @@
                 $.ajax(options);
             }
         }
+    }
+
+    Cache.create = function(options) {
+        var store = {
+            "inmemory": function() { return new Cache(); },
+            "localstorage": function() { return new LocalStorageCache(); }
+        };
+
+        if($.isPlainObject(options) && $.isFunction(options.find)) {
+            return options;
+        }
+
+        if(options === true) {
+            return new Cache();
+        }
+
+        return store[options]();
     }
 
     function Cache() {
