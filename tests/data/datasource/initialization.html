@@ -86,6 +86,16 @@
                 ok(dataSource.schema === schema);
                 ok(dataSource instanceof DataSource);
             });
+            test("page is set to 1 if pageSize is defined but no page", function() {
+                var dataSource = new DataSource({ pageSize: 10 });
+                equal(dataSource.page(), 1);
+            });
+
+            test("page", function() {
+                var dataSource = new DataSource({ page: 1, pageSize: 10 });
+                equal(dataSource.page(), 1);
+                equal(dataSource.pageSize(), 10);
+            });
 
             </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

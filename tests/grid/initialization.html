@@ -31,17 +31,17 @@
                 ok(table.data("kendoGrid") instanceof Grid);
             });
 
-            test("Grid constructor calls the query method of its datasource", function() {
+            test("Grid constructor calls the read method of its datasource", function() {
                 var dataSource = new DataSource({ data: [] });
-                var queryWasCalled = false;
+                var readWasCalled = false;
 
-                dataSource.query = function() {
-                    queryWasCalled = true;
+                dataSource.read = function() {
+                    readWasCalled = true;
                 };
 
                 new Grid(table(), { dataSource: dataSource } );
 
-                ok(queryWasCalled);
+                ok(readWasCalled);
             });
 
             test("column initialization - field", function() {
