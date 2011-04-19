@@ -70,7 +70,7 @@
         },
 
         pageSize: function() {
-            return this.dataSource.pageSize() || 0;
+            return this.dataSource.pageSize() || this.dataSource.total();
         },
 
         page: function() {
