@@ -40,6 +40,8 @@
 
         that._columns();
 
+        that._sortable();
+
         that._templates();
 
         that._pager();
@@ -68,6 +70,16 @@
                 that.pager = pageable instanceof kendo.ui.Pager ? pageable : new kendo.ui.Pager(wrapper.children("ul"), extend({}, pageable, { dataSource: that.dataSource }));
             }
         },
+
+        _sortable: function() {
+            var that = this,
+                sortable = that.options.sortable;
+
+            if (sortable) {
+                this.table.find("th").kendoSortable(extend({}, sortable, { dataSource: that.dataSource }));
+            }
+        },
+
         _columns: function() {
             var columns = this.options.columns;
 

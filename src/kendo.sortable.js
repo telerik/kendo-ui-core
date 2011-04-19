@@ -20,7 +20,7 @@
         },
 
         refresh: function() {
-            var sort = this.dataSource.sort(),
+            var sort = this.dataSource.sort() || [],
                 idx,
                 length,
                 descriptor,
