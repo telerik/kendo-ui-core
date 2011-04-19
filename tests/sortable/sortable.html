@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.ui.Sortable Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.sortable.js"></script>
+        <script src="../../src/kendo.query.js"></script>
+        <script src="../../src/kendo.dataSource.js"></script>
+        <link rel="stylesheet" href="../qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.ui.Sortable Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+            var DataSource = kendo.data.DataSource,
+                Sortable = kendo.ui.Sortable,
+                dataSource;
+
+            function setup(element, options) {
+                return new Sortable(element || $(document.body).data("field", "foo"), options || { dataSource: dataSource });
+            }
+
+            module("kendo.ui.Sortable", {
+                setup: function() {
+                    dataSource = DataSource.create( { data: [ { foo: 2, bar: 2 }, { foo: 1, bar: 1 } ] } );
+                    $(document.body).unbind("click").removeData().find(".t-icon").remove();
+                },
+                teardown: function() {
+                }
+            });
+
+            test("clicking an item sorts by that field in asc dir", function() {
+                var sorter = setup();
+                $(document.body).click();
+
+                equal(dataSource.view()[0].foo, 1);
+            });
+
+            test("sorting the data source assigns the dir data", function() {
+                var sorter = setup();
+                dataSource.sort( { field: "foo", dir: "desc" });
+                equal($(document.body).data("dir"), "desc");
+            });
+
+            test("sorting twice clears the dir data", function() {
+                var sorter = setup();
+                dataSource.sort( { field: "foo", dir: "desc" });
+                dataSource.sort( { field: "bar", dir: "desc" });
+                equal($(document.body).data("dir"), undefined);
+            });
+
+            test("clicking changes the sort direction", function() {
+                var sorter = setup();
+                $(document.body).click();
+                $(document.body).click();
+
+                equal($(document.body).data("dir"), "desc");
+            });
+
+            test("desc changes to empty", function() {
+                var sorter = setup($(document.body).data("field", "foo").data("dir", "desc"));
+
+                $(document.body).click();
+
+                equal($(document.body).data("dir"), undefined);
+            });
+
+            test("clicking unsorted element sets its direrction to ascending", function() {
+                var sorter = setup();
+                $(document.body).click();
+
+                equal($(document.body).data("dir"), "asc");
+            });
+
+            test("mode is single by default", function() {
+                var sorter = setup();
+                equal(sorter.mode, "single");
+            });
+
+            test("multi sort mode", function() {
+                var sorter = setup($(document.body).data("field", "foo"), { dataSource: dataSource, mode: "multi" } );
+
+                dataSource.sort( { field: "bar", dir: "asc" } );
+
+                $(document.body).click();
+
+                var sort = dataSource.sort();
+
+                equal(sort.length, 2);
+                equal(sort[0].field, "bar");
+                equal(sort[1].field, "foo");
+            });
+
+            test("mult sort mode and unsorting", function() {
+                var sorter = setup($(document.body).data("field", "foo"), { dataSource: dataSource, mode: "multi" } );
+
+                dataSource.sort( [{ field: "bar", dir: "asc" }, { field: "foo", dir: "desc" } ] );
+
+                $(document.body).click();
+
+                var sort = dataSource.sort();
+
+                equal(sort.length, 1);
+                equal(sort[0].field, "bar");
+            });
+
+            test("allowUnsort is true by default", function() {
+                var sorter = setup();
+                ok(sorter.allowUnsort);
+            });
+
+            test("dir changes to asc when allowUnsort is false", function() {
+                var sorter = setup($(document.body).data("field", "foo").data("dir", "desc"), { dataSource: dataSource, allowUnsort: false } );
+
+                $(document.body).click();
+
+                equal($(document.body).data("dir"), "asc");
+            });
+
+            test("asc arrow is rendered", function() {
+                var sorter = setup();
+                $(document.body).click();
+
+                equal($(document.body).find("span.t-icon.t-arrow-up").length, 1);
+            });
+
+            test("desc arrow is rendered", function() {
+                var sorter = setup();
+                $(document.body).click();
+                $(document.body).click();
+
+                equal($(document.body).find("span.t-icon.t-arrow-down").length, 1);
+            });
+
+            test("sort arrow is removed", function() {
+                var sorter = setup();
+                $(document.body).click();
+                $(document.body).click();
+                $(document.body).click();
+
+                equal($(document.body).find("span.t-icon.t-arrow-down").length, 0);
+                equal($(document.body).find("span.t-icon.t-arrow-up").length, 0);
+            });
+       </script>
+    </body>
+</html>

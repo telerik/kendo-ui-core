@@ -24,8 +24,7 @@
         Component.apply(that, arguments);
 
         that.dataSource = dataSource = DataSource.create(options);
-        that.element = element;
-        that.table = $(element);
+        that.table = that.element;
         that.tbody = that.table.find(">tbody");
 
         if (!that.tbody.length) {
