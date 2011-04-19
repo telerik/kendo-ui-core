@@ -1,19 +1,23 @@
 (function($, window) {
     var kendo = window.kendo,
-        Component = kendo.ui.Component;
+        Component = kendo.ui.Component,
+        DataSource = kendo.data.DataSource;
 
 
     function ListView(element, options) {
         var that = this;
 
+        options = $.isArray(options) ? { data: options } : options;
+
         Component.apply(that, arguments);
+
+        that.dataSource = dataSource = DataSource.create(options);
 
         that.element = element;
         that.wrapper = $(element);
 
         that.options = $.extend({}, that.options, options);
         that.template = that.options.template;
-        that.dataSource = options.dataSource;
 
         that.wrapper.addClass("list-view")
                     .delegate(".list-view > *", "click",  $.proxy(that._click, that));
