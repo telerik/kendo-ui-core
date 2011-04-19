@@ -23,7 +23,7 @@
             test("Component.element is initialized from constructor", function() {
                 var component = new Component(document.body);
 
-                ok(component.element === document.body);
+                ok(component.element[0] === document.body);
             });
 
             test("Component.options is initialized from constructor", function() {
