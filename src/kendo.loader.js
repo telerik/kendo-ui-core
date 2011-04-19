@@ -235,6 +235,10 @@
             url: "kendo.datasource.js",
             depends: "query"
         },
+        pageable: {
+            url: "kendo.pager.js",
+            depends: "datasource"
+        },
         sortable: {
             url: "kendo.sortable.js",
             depends: "datasource"
@@ -242,7 +246,7 @@
         grid: {
             url: "kendo.grid.js",
             depends: "datasource",
-            features: { sortable: "sortable" }
+            features: { sortable: "sortable", pageable: "pageable" }
         }
     });
 

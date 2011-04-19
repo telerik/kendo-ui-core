@@ -143,7 +143,19 @@
 
                 ok(grid.dataSource.data() === data);
             });
-        </script>
+
+            test("div wrapper is created around the table", function() {
+                var grid = new Grid(table(), []);
+
+                ok(grid.element.parent().is("div.t-grid.t-widget"));
+            });
+
+            test("wrapper field is initialized", function() {
+                var grid = new Grid(table(), []);
+
+                ok(grid.wrapper.is("div.t-grid.t-widget"));
+            });
+       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
     </body>
