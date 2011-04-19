@@ -7,15 +7,13 @@
 
         Component.apply(that, arguments);
 
-        that.wrapper = $(element);
-
         that.dataSource = options.dataSource;
         that.options = $.extend({}, that.options, options);
         that.linkTemplate = kendo.core.template(that.options.linkTemplate);
         that.selectTemplate = kendo.core.template(that.options.selectTemplate);
 
         that.dataSource.bind("change", $.proxy(that.render, that));
-        that.wrapper.delegate("a:not(.currentPage)", "click",  $.proxy(that._click, that));
+        that.element.delegate("a:not(.currentPage)", "click",  $.proxy(that._click, that));
     }
 
     Pager.prototype = {
@@ -55,7 +53,7 @@
                 html += that.linkTemplate({idx: idx, text: "...", isNum: false });
             }
 
-            that.wrapper.empty().append(html);
+            that.element.empty().append(html);
         },
 
         _click: function(e) {
