@@ -49,6 +49,12 @@
 
                 equal(grid.pager, pager);
             });
+
+            test("pager wrapper is created", function() {
+                var grid = new Grid(table(), { data:[], pageable: true });
+
+                equal(grid.wrapper.find("div.t-grid-pager").length, 1);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

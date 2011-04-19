@@ -4,7 +4,6 @@
         DataSource = kendo.data.DataSource,
         tbodySupportsInnerHtml = true,
         Component = ui.Component,
-        Pager = ui.Pager,
         extend = $.extend;
 
     (function() {
@@ -33,6 +32,12 @@
             that.tbody = $("<tbody />").appendTo(element);
         }
 
+        that.wrapper = that.table.parent();
+
+        if (!that.wrapper.is("div.t-grid")) {
+           that.wrapper = that.table.wrap($('<div class="t-grid t-widget" />')).parent();
+        }
+
         that._columns();
 
         that._templates();
@@ -50,10 +55,17 @@
 
         _pager: function() {
             var that = this,
+                wrapper,
                 pageable = that.options.pageable;
 
             if (pageable) {
-                that.pager = pageable instanceof Pager ? pageable : new Pager(null, extend({}, pageable, { dataSource: that.dataSource }));
+                wrapper = that.wrapper.children("div.t-grid-pager");
+
+                if (!wrapper.length) {
+                    wrapper = $('<div class="t-grid-pager"><ul /></div>').appendTo(that.wrapper);
+                }
+
+                that.pager = pageable instanceof kendo.ui.Pager ? pageable : new kendo.ui.Pager(wrapper.children("ul"), extend({}, pageable, { dataSource: that.dataSource }));
             }
         },
         _columns: function() {
