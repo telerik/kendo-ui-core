@@ -3,6 +3,7 @@
     <script src="../../../src/jquery.js"></script>
     <script type="text/javascript" src="../../qunit.js"></script>
     <script type="text/javascript" src="../../qunit-runner.js"></script>
+    <script type="text/javascript" src="../../jquery.mockjax.js"></script>
     <script src="../../../src/kendo.core.js"></script>
     <script src="../../../src/kendo.query.js"></script>
     <script src="../../../src/kendo.datasource.js"></script>
@@ -25,6 +26,12 @@
             },
             data = [],
             DataSource = kendo.data.DataSource;
+
+            module("DataSource / read", {
+                teardown: function() {
+                    $.mockjaxClear();
+                }
+            });
 
             function setup(source) {
                 data = source || [{ id:1, bar: "foo" },{ id: 2, bar: "foo" }];
@@ -178,9 +185,9 @@
 
             test("read reads item total count", function() {
                 var dataSource = new DataSource({
-                    data: [{ id:1, bar: "foo" },{ id: 2, bar: "baz" }]                    
+                    data: [{ id:1, bar: "foo" },{ id: 2, bar: "baz" }]
                 });
-                
+
                 dataSource.read();
                 equal(dataSource.total(), 2);
             });
@@ -193,13 +200,36 @@
                             totalWasCalled = true;
                             return arguments[0].length;
                         }
-                    }                    
+                    }
                 });
                 var totalWasCalled = false;
-                
+
                 dataSource.read();
                 ok(totalWasCalled);
                 equal(dataSource.total(), 2);
+            });
+
+            test("error event is raised if transport fails loading data", function() {
+                var dataSource = new DataSource({
+                        transport: {
+                            read: "foo"
+                        },
+                        reader: reader
+                    }),
+                    args;
+
+                $.mockjax({
+                    contentType: "text/json",
+                    url: "foo",
+                    status: 500,
+                    responseText: 'A text response from the server'
+                });
+                dataSource.bind("error", function() {
+                    start();
+                    ok(arguments);
+                });
+                stop(1000);
+                dataSource.read();
             });
 
             test("read filters if filter is set", function() {

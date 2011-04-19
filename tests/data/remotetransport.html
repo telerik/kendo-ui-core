@@ -218,6 +218,27 @@
                 });
             });
 
+            test("read calls the error handler when the ajax request fails", function() {
+                var transport = new RemoteTransport({
+                        read: "foo"
+                    });
+
+                $.mockjax({
+                    url: "foo",
+                    status: 500
+                });
+                stop(1000);
+                transport.read({
+                    success: function() {
+                        ok(false); // we should not be here
+                    },
+                    error: function() {
+                        start();
+                        ok(true);
+                    }
+                });
+            });
+
             test("read check if result exists in cache passing the data argumets as key", function() {
                 var key = false,
                     transport = new RemoteTransport({

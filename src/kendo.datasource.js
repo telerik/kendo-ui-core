@@ -77,6 +77,7 @@
                 read = that.settings.read,
                 data = $.isFunction(read.data) ? read.data() : read.data,
                 success = options.success || $.noop,
+                error = options.error || $.noop,
                 cached;
 
             options = extend(true, {}, read, options);
@@ -91,6 +92,10 @@
 
                     success(result);
                 };
+                options.error = function(result) {
+                    error(result);
+                };
+
                 $.ajax(options);
             }
         }
@@ -233,8 +238,12 @@
 
             that.transport.read({
                 data: options,
-                success: $.proxy(that.success, that)
+                success: $.proxy(that.success, that),
+                error: $.proxy(that.error, that)
             });
+        },
+        error: function() {
+            this.trigger("error", arguments);
         },
         success: function(data) {
             var that = this,
