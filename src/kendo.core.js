@@ -261,7 +261,7 @@
 
         Observable.call(that);
 
-        that.element = element;
+        that.element = $(element);
         that.options = extend(true, {}, that.options, options);
     }
 

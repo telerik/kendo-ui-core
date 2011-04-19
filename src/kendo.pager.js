@@ -7,7 +7,6 @@
 
         Component.apply(that, arguments);
 
-        that.element = element;
         that.wrapper = $(element);
 
         that.dataSource = options.dataSource;
