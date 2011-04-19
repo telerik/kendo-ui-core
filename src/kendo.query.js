@@ -199,6 +199,9 @@
 
         return $.grep(descriptors, function(d) { return !!d.dir; });
     }
+    Query.expandFilter = function(expressions) {
+        return expressions = $.isArray(expressions) ? expressions : [expressions];
+    }
     Query.prototype = {
         toArray: function () {
             return this.data;
@@ -235,7 +238,7 @@
             return this;
         },
         filter: function(expressions) {
-            expressions = $.isArray(expressions) ? expressions : [expressions];
+            expressions =  Query.expandFilter(expressions);
             var predicate = Filter.create(expressions);                        
             return new Query(predicate(this.data));
         }

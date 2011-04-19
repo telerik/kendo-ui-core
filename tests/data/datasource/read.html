@@ -201,6 +201,31 @@
                 ok(totalWasCalled);
                 equal(dataSource.total(), 2);
             });
+
+            test("read filters if filter is set", function() {
+                var dataSource = new DataSource({
+                    data: [{ id:1, bar: "foo" },{ id: 2, bar: "baz" }],
+                    filter: { field: "bar", operator: "==", value: "baz" }
+                });
+
+                dataSource.read();
+                var view = dataSource.view();
+                equal(view.length, 1);            
+                equal(view[0].bar, "baz");
+            });
+
+            test("read does not filter if filter is set and serverFiltering = true", function() {
+                var dataSource = new DataSource({
+                    data: [{ id:1, bar: "foo" },{ id: 2, bar: "baz" }],
+                    filter: { field: "bar", operator: "==", value: "baz" },
+                    serverFiltering: true
+                });
+
+                dataSource.read();
+                var view = dataSource.view();
+                equal(view.length, 2);            
+                equal(view[0].bar, "foo");
+            });
        </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
