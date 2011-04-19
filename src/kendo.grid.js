@@ -47,7 +47,7 @@
         that._pager();
 
         dataSource.bind("change", $.proxy(that.refresh, that));
-        dataSource.query();
+        dataSource.read();
     }
 
     Grid.prototype = {

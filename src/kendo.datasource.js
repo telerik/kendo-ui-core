@@ -172,7 +172,7 @@
                 _data: [],
                 _view: [],
                 _pageSize: options.pageSize,
-                _page: options.page,
+                _page: options.page  || (options.pageSize ? 1 : undefined),
                 _sort: options.sort,
                 _filter: options.filter
             }),
