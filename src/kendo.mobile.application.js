@@ -17,11 +17,16 @@ Application.prototype = {
         this.views.push(view);
     },
 
-    show: function(viewIndex) {
-        this.views[viewIndex].element.appendTo(this.root);
-    },
+    show: function(viewIndex, options) {
+        var view = this.views[viewIndex]; 
+        
+        view.show(this.root);
 
-    goToView: function(viewName) {
+        if (this.currentView) {
+            this.currentView.hide();
+        }
+
+        this.currentView = view;
     }
 };
 

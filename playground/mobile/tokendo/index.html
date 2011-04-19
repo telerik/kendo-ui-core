@@ -47,22 +47,33 @@
                 splashScreen: "images/splash.png"
             });
 
-            var taskList;
+            var taskList, taskDetails;
 
             application.run(function(application) {
+                taskDetails = new View({
+                    onCreate: function() {
+                        this.contentElement.css('background-color', 'red')
+                            .html('foo <a href="#">back</a>')
+                            .delegate('a', 'click', function() {
+                                application.show(0);
+                            });
+                    }
+                });
+
                 taskList = new View({
-                    onBind: function(data, element) {
+                    onBind: function(data) {
                         var template = kendo.core.template(document.getElementById("item_tmpl").innerHTML);
 
-                        element.html(template({ data: data }))
+                        this.contentElement.html(template({ data: data }))
                             .delegate('.more-details', 'click', function() {
-                                application.goToView('details', { itemId: $(this).index() });
+                                var todoItemId = $(this).index();
+                                application.show(1, { itemId: todoItemId });
                             });
-
                     }
                 });
 
                 application.addView(taskList);
+                application.addView(taskDetails);
 
                 $('label').live('click', function(e) {
                     var $this = $(this);
