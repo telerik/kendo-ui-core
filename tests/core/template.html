@@ -83,15 +83,14 @@
 
             test("can execute code", function() {
                 var executed = false,
-                    t = template.compile("<% var result = 'foo'; %><%= result %>")
+                    t = template.compile("<% var result = 'foo'; %><%= result %>");
 
                 equal(t({}), "foo");
             });
 
             test("can execute code with custom template markers", function() {
                 var executed = false,
-                    t = template.compile("<# var result = 'foo'; #><#= result #>", { begin: "<#", end: "#>" })
-                    console.log(t);
+                    t = template.compile("<# var result = 'foo'; #><#= result #>", { begin: "<#", end: "#>" });
 
                 equal(t({}), "foo");
             });
