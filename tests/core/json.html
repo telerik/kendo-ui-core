@@ -27,7 +27,6 @@
             test("stringified object should be deserializable ", function() {
                 var obj = { foo: "bar", baz: 1};
                 var result = $.parseJSON(kendo.core.stringify(obj));
-                console.log(result)
                 equal(result.foo, "bar");
                 equal(result.baz, 1);
             });
