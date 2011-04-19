@@ -195,6 +195,14 @@
                 dataSource.read();
                 equal(ul.find("a:first").text(), "foo");
             });
+
+            test("single page is rendered if no pageSize is set", function() {
+                var data = new DataSource( { data: [1,2,3,4,5], page: 1 }),
+                    ul = $("<ul/>").kendoPager({ dataSource: data });
+
+                data.read();
+                equal(ul.find("a").length, 1);
+            });
         </script>
     </body>
 </html>
