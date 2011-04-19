@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Grid pager</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.query.js"></script>
+        <script src="../../src/kendo.datasource.js"></script>
+        <script src="../../src/kendo.pager.js"></script>
+        <script src="../../src/kendo.grid.js"></script>
+        <link rel="stylesheet" href="../qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Grid pager</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var Grid = kendo.ui.Grid,
+                DataSource = kendo.data.DataSource;
+
+            function table() {
+                return document.createElement("table");
+            }
+
+            test("pageable creates pager", function() {
+                var grid = new Grid(table(), { data:[], pageable: true });
+                ok(grid.pager);
+            });
+
+            test("pager has the same datasource as the grid", function() {
+                var grid = new Grid(table(), { data:[], pageable: true });
+                ok(grid.pager.dataSource === grid.dataSource);
+            });
+
+            test("pageable passes the settings to the pager", function() {
+                var grid = new Grid(table(), { data:[], pageable: { buttonCount: 42 } });
+
+                equal(grid.pager.options.buttonCount, 42);
+            });
+
+            test("pageable uses the passed kendo.ui.Pager", function() {
+                var dataSource = new DataSource({ data: [] }),
+                    pager = new kendo.ui.Pager(null, { dataSource: dataSource } ),
+                    grid = new Grid(table(), { data: dataSource, pageable: pager } );
+
+                equal(grid.pager, pager);
+            });
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>
