@@ -33,17 +33,20 @@
         <script>
             $(document).ready(function() {
                 var data = [];
-                for (var i = 1; i <= 10; i++ ) {
+                for (var i = 1; i <= 20; i++ ) {
                     data.push( { foo: "foo" + i, bar: "bar" + i, baz: { foo: "baz.foo" + i } } );
                 }
 
-                $("#table1").kendoGrid({ 
-                    data: data,
+                $("#table1").kendoGrid({
+                    dataSource: {
+                        data: data,
+                        pageSize: 10
+                    },
                     pageable: true,
                     sortable: true
                 });
 
-                $("button").kendoSortable({ dataSource: $("#table1").data("kendoGrid").dataSource });                
+                $("button").kendoSortable({ dataSource: $("#table1").data("kendoGrid").dataSource });
             });
         </script>
 
