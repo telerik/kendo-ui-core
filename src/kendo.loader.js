@@ -204,7 +204,7 @@
                 script = createScript(definition, scripts);
 
                 for (featureName in features) {
-                    script.features[featureName] = createScript(features[featureName], scripts);
+                    script.features[featureName] = scripts[featureName] || createScript(features[featureName], scripts);
                 }
 
                 scripts[key] = script;
@@ -235,9 +235,14 @@
             url: "kendo.datasource.js",
             depends: "query"
         },
+        sortable: {
+            url: "kendo.sortable.js",
+            depends: "datasource"
+        },
         grid: {
             url: "kendo.grid.js",
-            depends: "datasource"
+            depends: "datasource",
+            features: { sortable: "sortable" }
         }
     });
 
