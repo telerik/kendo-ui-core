@@ -1,8 +1,10 @@
 (function($, window, undefined) {
     var kendo = window.kendo,
+        ui = kendo.ui,
         DataSource = kendo.data.DataSource,
         tbodySupportsInnerHtml = true,
-        Component = kendo.ui.Component,
+        Component = ui.Component,
+        Pager = ui.Pager,
         extend = $.extend;
 
     (function() {
@@ -34,6 +36,9 @@
         that._columns();
 
         that._templates();
+
+        that._pager();
+
         dataSource.bind("change", $.proxy(that.refresh, that));
         dataSource.query();
     }
@@ -43,6 +48,14 @@
             columns: []
         },
 
+        _pager: function() {
+            var that = this,
+                pageable = that.options.pageable;
+
+            if (pageable) {
+                that.pager = pageable instanceof Pager ? pageable : new Pager(null, extend({}, pageable, { dataSource: that.dataSource }));
+            }
+        },
         _columns: function() {
             var columns = this.options.columns;
 
@@ -128,5 +141,5 @@
        }
     }
 
-    kendo.ui.plugin("Grid", Grid, Component);
+    ui.plugin("Grid", Grid, Component);
 })(jQuery, window);
