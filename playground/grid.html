@@ -5,7 +5,7 @@
         <script src="../src/jquery.js"></script>
         <script src="../src/kendo.loader.js"></script>
         <script>
-            kendo.loader.grid({ sortable: true });
+            kendo.loader.grid({ sortable: true, pageable: true });
         </script>
         <style>
             table {
@@ -37,7 +37,11 @@
                     data.push( { foo: "foo" + i, bar: "bar" + i, baz: { foo: "baz.foo" + i } } );
                 }
 
-                $("#table1").kendoGrid(data);
+                $("#table1").kendoGrid({ 
+                    data: data,
+                    pageable: true
+                });
+
                 $("button").kendoSortable({ dataSource: $("#table1").data("kendoGrid").dataSource });
                 $("#table1 th[data-field=bar]").kendoSortable({ dataSource: $("#table1").data("kendoGrid").dataSource });
             });
