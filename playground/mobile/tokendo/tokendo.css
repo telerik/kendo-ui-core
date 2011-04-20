@@ -7,7 +7,6 @@
 body {
     font-family: Verdana, sans-serif;
     font-size: .9em;
-    -webkit-backface-visibility: hidden;
 }
 
 .list {

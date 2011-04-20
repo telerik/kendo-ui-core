@@ -2,16 +2,16 @@ var isTouch = 'ontouchstart' in window;
 
 function Scroller (element) {
     this.element = $(element);
-    this._location = {};
 
     this.options = {
-        acceleration: 15,
-        velocity: 1,
+        acceleration: 10,
+        velocity: .1,
         pagingVelocity: 5,
-        friction: .9,
-        boundAcceleration: .1,
-        boundDeceleration: .05,
-        boundLimit: .5,
+        friction: .95,
+        bounceAcceleration: .1,
+        bounceDeceleration: .1,
+        bounceLimit: 0,
+        bounceStop: 100,
         framerate: 60,
 
         scrollbarOpacity: .7
@@ -20,9 +20,9 @@ function Scroller (element) {
     if (typeof arguments[1] === 'object')
         $.extend( this.options, arguments[1] );
 
-    this._horizontalScrollbar = $('<div class="touch-scrollbar horizontal-scrollbar" />');
-    this._verticalScrollbar = this._horizontalScrollbar.clone().replaceClass('horizontal-scrollbar', 'vertical-scrollbar');
-    this._scrollbars = this._horizontalScrollbar.add(this._verticalScrollbar);
+    this.xScrollbar = $('<div class="touch-scrollbar horizontal-scrollbar" />');
+    this.yScrollbar = this.xScrollbar.clone().replaceClass('horizontal-scrollbar', 'vertical-scrollbar');
+    this._scrollbars = this.xScrollbar.add(this.yScrollbar);
     this.webkit3d = 'WebKitCSSMatrix' in window && 'm11' in new WebKitCSSMatrix();
 
     this._startProxy = $.proxy(this._start, this);
@@ -49,13 +49,6 @@ function touchLocation(e) {
         x: e.pageX,
         y: e.pageY
     };
-}
-
-function constrainOffset (offset) {
-    return {
-        compensation: Math.max(-100, Math.min(100, (offset > 100 ? (offset - 100)*5 : 0) || (offset < 0 ? offset*5 : 0))),
-        offset: Math.min(100, Math.max(0, offset))
-    }
 }
 
 $.throttle = function(delay, callback) {
@@ -114,72 +107,76 @@ Scroller.prototype = {
 
         this._scrollbars.appendTo(this.element);
 
-        this._storeLastLocation = $.throttle(50, function(location) {
-            var loc = this._location;
+        this._storeLastLocation = $.throttle(20, function(location) {
 
-            var dX = loc.last.x - location.x, dY = loc.last.y - location.y,
+            var dX = this.lastLocation.x - location.x, dY = this.lastLocation.y - location.y,
                 newDirection = { x: dX/Math.abs(dX) || 0, y: dY/Math.abs(dY) || 0 },
-                oldDirection = loc.direction;
+                oldDirection = this.direction;
 
             if (oldDirection) {
                 if (newDirection.x && oldDirection.x != newDirection.x) {
-                    this._location.direction.x = newDirection.x;
-                    this._location.directionChange = +new Date();
-                    this._location.last = location;
+                    this.direction.x = newDirection.x;
+                    this.directionChange = +new Date();
+                    this.lastLocation = location;
                 }
                 if (newDirection.y && oldDirection.y != newDirection.y) {
-                    this._location.direction.y = newDirection.y;
-                    this._location.directionChange = +new Date();
-                    this._location.last = location;
+                    this.direction.y = newDirection.y;
+                    this.directionChange = +new Date();
+                    this.lastLocation = location;
                 }
             } else {
-                this._location.directionChange = +new Date();
-                this._location.direction = newDirection;
-                this._location.last = location;
+                this.direction = newDirection;
+                this.directionChange = +new Date();
+                this.lastLocation = location;
             }
             
         });
 
-        this._throttleCSS = function ( location ) {
-            var horizontalDifference = 0,
-                verticalDifference = 0,
+        this._throttleCSS = $.throttle(2, function ( location ) {
+            var position = { x: 0, y: 0 },
                 delta = 0,
                 cssModel = {};
 
-            if (this._boxModel.hasHorizontalScroll) {
-                horizontalDifference = location.x - this.start.x;
-                delta = constrainOffset(~~(-horizontalDifference * this._boxModel.horizontalOffsetRatio));
+            if (this.xScroll) {
+                position.x = -Math.max( this.minBounceStop.x, Math.min( this.maxBounceStop.x, -(location.x - this.start.x )));
+                delta = this._constrainOffset(~~(-position.x * this.xOffsetRatio));
 
                 cssModel[this._transformOrigin] = delta.offset + '% 0';
-                cssModel[this._transformProperty] = 'scaleX(' + (this._boxModel.horizontalRatio - Math.abs(delta.compensation) / this._boxModel.scrollWidth).toFixed(2) + ')';
+                cssModel[this._transformProperty] = 'scaleX(' + (this.xRatio - Math.abs(delta.compensation) / this.scrollWidth).toFixed(2) + ')';
 
-                this._horizontalScrollbar.css( cssModel );
+                this.xScrollbar.css( cssModel );
             }
 
-            if (this._boxModel.hasVerticalScroll) {
-                verticalDifference = location.y - this.start.y;
-                delta = constrainOffset(~~(-verticalDifference * this._boxModel.verticalOffsetRatio));
+            if (this.yScroll) {
+                position.y = -Math.max( this.minBounceStop.y, Math.min( this.maxBounceStop.y, -(location.y - this.start.y)));
+                delta = this._constrainOffset(~~(-position.y * this.yOffsetRatio));
 
                 cssModel[this._transformOrigin] = '0 ' + delta.offset + '%';
-                cssModel[this._transformProperty] = 'scaleY(' + (this._boxModel.verticalRatio - Math.abs(delta.compensation) / this._boxModel.scrollHeight).toFixed(2) + ')';
+                cssModel[this._transformProperty] = 'scaleY(' + (this.yRatio - Math.abs(delta.compensation) / this.scrollHeight).toFixed(2) + ')';
 
-                this._verticalScrollbar.css( cssModel );
+                this.yScrollbar.css( cssModel );
             }
-
+            
             this.scrollElement.stop(true,true).css( this._transformProperty, 'translate' + (this.webkit3d ? '3d' : '') +
-                                                    '(' + horizontalDifference + 'px,' +
-                                                          verticalDifference + 'px' +
-                                                          (this.webkit3d ? ', 0)' : ')') );
-        }
+                                                    '(' + position.x + 'px,' + position.y + 'px' + (this.webkit3d ? ', 0)' : ')') );
+        });
 
+    },
+
+    _constrainOffset: function (offset) {
+        var bounceStop = this.options.bounceStop;
+        return {
+            compensation: Math.max(-bounceStop, Math.min(bounceStop, (offset > bounceStop ? (offset - bounceStop)*5 : 0) || (offset < 0 ? offset*5 : 0))),
+            offset: Math.min(100, Math.max(0, offset))
+        }
     },
 
     _getScrollOffsets: function () {
         var transforms = this.scrollElement.css(this._transformProperty).match(/(translate3?d?|matrix)\([,\s\w\d]*?\s*(-?[\d\.]+)[\w\s]*,\s*(-?[\d\.]+)[\w\s]*(,\s*-?[\d\.]+[\w\s]*)?\)/i) || [0, 0, 0, 0];
 
         return {
-            x: (+transforms[2]).toFixed(2),
-            y: (+transforms[3]).toFixed(2)
+            x: +transforms[2],
+            y: +transforms[3]
         };
     },
 
@@ -193,9 +190,10 @@ Scroller.prototype = {
             x: startLocation.x - scrollOffsets.x,
             y: startLocation.y - scrollOffsets.y
         };
-        this._location.last = startLocation;
-        this._location.direction = { x: 1, y: 1 };
-        this._location.directionChange = +new Date();
+        
+        this.lastLocation = startLocation;
+        this.direction = { x: 1, y: 1 };
+        this.directionChange = +new Date();
 
         $(document)
             .bind(this._moveEvent, this._startProxy)
@@ -206,38 +204,55 @@ Scroller.prototype = {
         var currentLocation = touchLocation(e);
         this._dragged = false;
 
-        if (Math.abs(this._location.last.x - currentLocation.x) > 10 || Math.abs(this._location.last.y - currentLocation.y) > 10) {
+        if (Math.abs(this.lastLocation.x - currentLocation.x) > 10 || Math.abs(this.lastLocation.y - currentLocation.y) > 10) {
             e.preventDefault();
             this._dragged = true;
 
             $(document).unbind(this._moveEvent, this._startProxy)
                        .bind(this._moveEvent, this._dragProxy);
 
-            this._boxModel = {
-                width: this.element.innerWidth(),
-                height: this.element.innerHeight(),
-                scrollWidth: this.scrollElement.innerWidth(),
-                scrollHeight: this.scrollElement.innerHeight()
-            };
-            
-            $.extend(this._boxModel, {
-                hasHorizontalScroll: this._boxModel.scrollWidth > this._boxModel.width,
-                hasVerticalScroll: this._boxModel.scrollHeight > this._boxModel.height,
-                horizontalRatio: this._boxModel.width / this._boxModel.scrollWidth,
-                verticalRatio: this._boxModel.height / this._boxModel.scrollHeight,
-                horizontalOffsetRatio: 100 / (this._boxModel.scrollWidth - this._boxModel.width),
-                verticalOffsetRatio: 100 / (this._boxModel.scrollHeight - this._boxModel.height)
+            this.boxWidth = this.element.innerWidth();
+            this.boxHeight = this.element.innerHeight();
+            this.scrollWidth = this.scrollElement.innerWidth();
+            this.scrollHeight = this.scrollElement.innerHeight();
+
+            var bounceLimit = {
+                    x: -this.boxWidth * this.options.bounceLimit,
+                    y: -this.boxHeight * this.options.bounceLimit
+                },
+                bounceStop = {
+                    x: -this.options.bounceStop,
+                    y: -this.options.bounceStop
+                };
+
+            $.extend(this, {
+                xScroll: this.scrollWidth > this.boxWidth,
+                yScroll: this.scrollHeight > this.boxHeight,
+                xRatio: this.boxWidth / this.scrollWidth,
+                yRatio: this.boxHeight / this.scrollHeight,
+                xOffsetRatio: 100 / (this.scrollWidth - this.boxWidth),
+                yOffsetRatio: 100 / (this.scrollHeight - this.boxHeight),
+                minBounceLimit: bounceLimit,
+                maxBounceLimit: {
+                    x: this.scrollWidth - this.boxWidth - bounceLimit.x,
+                    y: this.scrollHeight - this.boxHeight - bounceLimit.y
+                },
+                minBounceStop: bounceStop,
+                maxBounceStop: {
+                    x: this.scrollWidth - this.boxWidth - bounceStop.x,
+                    y: this.scrollHeight - this.boxHeight - bounceStop.y
+                }
             });
 
-            if (this._boxModel.hasHorizontalScroll) {
-                this._horizontalScrollbar
-                    .css( this._transformProperty, 'scaleX(' + this._boxModel.horizontalRatio + ')' )
+            if (this.xScroll) {
+                this.xScrollbar
+                    .css( this._transformProperty, 'scaleX(' + this.xRatio + ')' )
                     .show().css('opacity', this.options.scrollbarOpacity);
             }
 
-            if (this._boxModel.hasVerticalScroll) {
-                this._verticalScrollbar
-                    .css( this._transformProperty, 'scaleY(' + this._boxModel.verticalRatio + ')' )
+            if (this.yScroll) {
+                this.yScrollbar
+                    .css( this._transformProperty, 'scaleY(' + this.yRatio + ')' )
                     .show().css('opacity', this.options.scrollbarOpacity);
             }
         }
@@ -296,48 +311,51 @@ Scroller.prototype = {
 
     _startKinetikAnimation: function (e) {
 
-        this._kinetikOptions = {
-            location: touchLocation(e),
-            scrollOffsets: this._getScrollOffsets()
-        };
+        this.bounceLocation = touchLocation(e);
 
-        var velocityFactor = ((+new Date() - this._location.directionChange) / this.options.acceleration).toFixed(2),
-            horizontalOffset = this._kinetikOptions.location.x - this._location.last.x,
-            verticalOffset = this._kinetikOptions.location.y - this._location.last.y;
+        var velocityFactor = ((+new Date() - this.directionChange) / this.options.acceleration).toFixed(2),
+            horizontalOffset = this.bounceLocation.x - this.lastLocation.x,
+            verticalOffset = this.bounceLocation.y - this.lastLocation.y;
 
-        $.extend(this._kinetikOptions, {
-            location: {
-                x: this._kinetikOptions.location.x,
-                y: this._kinetikOptions.location.y
-            },
-            decelerationVelocity : {
-                x: horizontalOffset / velocityFactor,
-                y: verticalOffset / velocityFactor
-            },
-            framerate: 1000 / this.options.framerate,
-            winding: false
-        });
+        this.decelerationVelocity = { x: horizontalOffset / velocityFactor, y: verticalOffset / velocityFactor };
+        this.framerat = 1000 / this.options.framerate;
+        this.friction = { x: this.options.friction, y: this.options.friction };
+        this.winding = false;
 
-        if (Math.abs(this._kinetikOptions.decelerationVelocity.x) > this.options.velocity || Math.abs(this._kinetikOptions.decelerationVelocity.y) > this.options.velocity) {
-            this._kinetikOptions.winding = true;
-            this._kinetikOptions.lastCall = +new Date();
-            this.timeoutId = setTimeout( $.proxy( this._stepKinetikAnimation, this ), this._kinetikOptions.framerate );
+        if (Math.abs(this.decelerationVelocity.x) > this.options.velocity || Math.abs(this.decelerationVelocity.y) > this.options.velocity) {
+            this.winding = true;
+            this.lastCall = +new Date();
+            this.timeoutId = setTimeout( $.proxy( this._stepKinetikAnimation, this ), this.framerate );
         }
     },
 
     _singleStep: function () {
-        this._kinetikOptions.location = {
-            x: this._kinetikOptions.location.x + this._kinetikOptions.decelerationVelocity.x,
-            y: this._kinetikOptions.location.y + this._kinetikOptions.decelerationVelocity.y
-        };
+        var constraint = { x: 0, y: 0 },
+            scrollOffsets = this._getScrollOffsets(),
+            minBounce = this.minBounceLimit,
+            maxBounce = this.maxBounceLimit;
 
-        this._kinetikOptions.decelerationVelocity.x *= this.options.friction;
-        this._kinetikOptions.decelerationVelocity.y *= this.options.friction;
+        ['x', 'y'].forEach(function (item) {
+            this.bounceLocation[item] += this.decelerationVelocity[item];
+            this.decelerationVelocity[item] *= this.friction[item];
 
-        this._kinetikOptions.lastCall = +new Date();
+            if (-scrollOffsets[item] < minBounce[item])
+                constraint[item] = minBounce[item] + scrollOffsets[item];
+            else
+                if (-scrollOffsets[item] > maxBounce[item])
+                    constraint[item] = maxBounce[item] + scrollOffsets[item];
 
-        if (Math.abs(this._kinetikOptions.decelerationVelocity.x) <= this.options.velocity && Math.abs(this._kinetikOptions.decelerationVelocity.y) <= this.options.velocity) {
-            this._kinetikOptions.winding = false;
+            var constrainFactor = 0;
+
+            if (constraint[item]) {
+                this.friction[item] -= .03;
+                constrainFactor = constraint[item] * this.options.bounceDeceleration;
+                this.decelerationVelocity[item] -= Math.abs(constrainFactor) > 1 ? constrainFactor : 1;
+            }
+        }, this);
+
+        if (Math.abs(this.decelerationVelocity.x) <= this.options.velocity && Math.abs(this.decelerationVelocity.y) <= this.options.velocity) {
+            this.winding = false;
             this._endKinetikAnimation();
             return true;
         }
@@ -346,32 +364,31 @@ Scroller.prototype = {
     },
 
     _stepKinetikAnimation: function () {
-        if (!this._kinetikOptions.winding) return;
+        if (!this.winding) return;
 
         var now = +new Date();
-        var timeDelta = now - this._kinetikOptions.lastCall;
-        var animationIterator = Math.round( timeDelta / this._kinetikOptions.framerate - 1 );
+        var timeDelta = now - this.lastCall;
+        var animationIterator = Math.round( timeDelta / this.framerate - 1 );
 
         while (animationIterator-- > 0)
             if (this._singleStep()) return;
 
         if (this._singleStep()) return;
 
-        this._throttleCSS( this._kinetikOptions.location );
+        this._throttleCSS( this.bounceLocation );
 
-        this.timeoutId = setTimeout( $.proxy( this._stepKinetikAnimation, this ), this._kinetikOptions.framerate );
-
-        this._kinetikOptions.lastCall = now;
+        this.timeoutId = setTimeout( $.proxy( this._stepKinetikAnimation, this ), this.framerate );
+        this.lastCall = now;
     },
 
     _endKinetikAnimation: function () {
-        this._kinetikOptions.winding = false;
+        this.winding = false;
         clearTimeout(this.timeoutId);
 
-        if (this._boxModel.hasHorizontalScroll)
-            this._horizontalScrollbar.css('opacity', 0);
-        
-        if (this._boxModel.hasVerticalScroll)
-            this._verticalScrollbar.css('opacity', 0);
+        if (this.xScroll)
+            this.xScrollbar.css('opacity', 0);
+
+        if (this.yScroll)
+            this.yScrollbar.css('opacity', 0);
     }
 };
