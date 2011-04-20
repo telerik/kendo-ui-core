@@ -1,14 +1,16 @@
 ﻿(function ($, window) {
-    var kendo = window.kendo, draggables = {};
+    var kendo = window.kendo, 
+        proxy = $.proxy,
+        draggables = {};
 
     function DropTarget(element, options) {
         var that = this;
 
         kendo.ui.Component.apply(that, arguments); 
 
-        that.element.bind("mouseenter", $.proxy(this._over, this))
-                    .bind("mouseup", $.proxy(this._drop, this))
-                    .bind("mouseleave", $.proxy(this._out, this));
+        that.element.bind("mouseenter", proxy(that._over, that))
+                    .bind("mouseup", proxy(that._drop, that))
+                    .bind("mouseleave", proxy(that._out, that));
         that.group = that.options.group;
     }
 
@@ -40,11 +42,15 @@
         that.element.mousedown($.proxy(that._wait, that))
             .bind("dragstart", false); 
 
-        this._startProxy = $.proxy(this._start, this);
-        this._destroyProxy = $.proxy(this._destroy, this);
-        this._stopProxy = $.proxy(this._stop, this);
-        this._dragProxy = $.proxy(this._drag, this);
+        that._startProxy = proxy(that._start, that);
+        that._destroyProxy = proxy(that._destroy, that);
+        that._stopProxy = proxy(that._stop, that);
+        that._dragProxy = proxy(that._drag, that);
+
         that.group = that.options.group;
+        that.bind("dragstart", that.options.dragstart);
+        that.bind("drag", that.options.drag);
+        that.bind("dragend", that.options.dragend);
     }
 
     Draggable.prototype = {
@@ -77,16 +83,20 @@
                                mousemove: this._dragProxy,
                                selectstart: false
                            });
+
+                this.trigger("dragstart");
             }
         },
 
         _drag: function(e) {
             console.log("drag");
+            this.trigger("drag");
         },
 
         _stop: function(e) {
             if (e.type == "mouseup" || e.keyCode == 27) {
                 console.log("dragend");
+                this.trigger("dragend");
                 this._destroy();
             }
         },
