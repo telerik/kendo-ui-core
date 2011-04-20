@@ -141,19 +141,18 @@
         }
     });
 
-    function TextElement(text) {
+    function Text(text) {
         var element = this;
         ChartElement.call(element);
 
-        element.type = "text";
-        element.text = text;
+        element.text = text || "";
 
         element.updateLayout(defaultBox);
     }
 
-    TextElement.prototype = new ChartElement();
+    Text.prototype = new ChartElement();
 
-    extend(TextElement.prototype, {
+    extend(Text.prototype, {
         options: {
             fontSize: "12pt",
             fontFamily: "Verdana"
@@ -184,7 +183,7 @@
 
         title.options = $.extend({}, title.options, options);
 
-        var text = new TextElement(title.options.text);
+        var text = new Text(title.options.text);
         title.children.push(text);
     }
 
@@ -219,22 +218,128 @@
       }
     });
 
-    function SVGRenderer(targetBox) {
-        var r = this;
-        r.targetBox = targetBox;
+    function ViewElement(attributes) {
+        var element = this;
+
+        element.children = [];
+        element.attributes = attributes;
     }
 
-    $.extend(SVGRenderer.prototype, {
-        render: function(viewElement) {
-            var result;
+    ViewElement.prototype = {
+        render: function() {
+            return this.template(this);
+        },
 
-            switch(viewElement.type) {
-                case "text":
-                    result = $("<text>");
-                    break;
+        renderContent: function() {
+            var output = "",
+                element = this,
+                childrenCount = element.children.length;
+
+            for (var i = 0; i < childrenCount; i++) {
+                output += element.children[i].render();
             }
 
-            return result[0];
+            return output;
+        }
+    };
+
+
+    function SVGFactory(options) {
+        var r = this;
+        r.options = $.extend({}, r.options, options);
+    }
+
+    $.extend(SVGFactory.prototype, {
+        root: function(options) {
+            return new SVGRoot(options);
+        },
+
+        group: function() {
+            return new SVGGroup();
+        },
+
+        text: function(content, options) {
+            return new SVGText(content, options);
+        },
+
+        rect: function(x, y, width, height) {
+            return new SVGPath([[x, y], [x + width, y], [x + width, y + width], [x, y + width], [x, y]]);
+        }
+    });
+
+    function SVGRoot(options) {
+        var root = this;
+
+        options = root.options = $.extend({}, root.options, options);
+        ViewElement.call(root, options);
+
+        root.template = kendo.template(
+            "<svg width='<%= attributes.width %>' height='<%= attributes.height %>'><%= renderContent() %></svg>");
+    }
+
+    SVGRoot.prototype = new ViewElement();
+    $.extend(SVGRoot.prototype, {
+        options: {
+            width: "800px",
+            height: "600px"
+        }
+    });
+
+
+    function SVGGroup() {
+        var group = this;
+
+        ViewElement.call(group);
+        group.template = kendo.template("<g><%= renderContent() %></g>");
+    }
+
+    SVGGroup.prototype = new ViewElement();
+
+
+    function SVGText(content, options) {
+        var text = this,
+            options = $.extend({}, text.options, options);
+
+        text.content = content || "";
+
+        ViewElement.call(text, options);
+        text.template = kendo.template(
+            "<text x='<%= attributes.x %>' y='<%= attributes.y %>'><%= content %></text>");
+    }
+
+    SVGText.prototype = new ViewElement();
+    $.extend(SVGText.prototype, {
+        options: {
+            x: 0,
+            y: 0
+        }
+    });
+
+    function SVGPath(points, options) {
+        var path = this,
+            options = $.extend({}, path.options, options);
+
+        ViewElement.call(path);
+        path.template = kendo.template(
+            "<path d='<%= renderPoints() %>'></path>");
+
+        path.points = points || [];
+    }
+
+    SVGPath.prototype = new ViewElement();
+    $.extend(SVGPath.prototype, {
+        renderPoints: function() {
+            var points = this.points,
+                count = points.length,
+                first = points[0],
+                result = "M" + first[0] + " " + first[1];
+
+            for (var i = 1; i < count; i++) {
+                var p = points[i];
+                result += " L" + p[0] + " " + p[1];
+            }
+
+            return result;
         }
     });
 
@@ -260,10 +365,15 @@
     // #ifdef DEBUG
     // Make the internal functions public for unit testing
 
+    Chart.Box = Box;
+    Chart.Text = Text;
     Chart.NumericAxis = NumericAxis;
     Chart.ChartTitle = ChartTitle;
-    Chart.Box = Box;
-    Chart.SVGRenderer = SVGRenderer;
+    Chart.SVGFactory = SVGFactory;
+    Chart.SVGRoot = SVGRoot;
+    Chart.SVGGroup = SVGGroup;
+    Chart.SVGText = SVGText;
+    Chart.SVGPath = SVGPath;
 
     // #endif
 
