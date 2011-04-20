@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.ui.Draggable Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <link rel="stylesheet" href="../qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.ui.Draggable Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+            var Draggable = kendo.ui.Draggable,
+                span;
+
+            module("kendo.ui.Draggable", {
+                setup: function() {
+                    span = $("<span/>").appendTo(document.body);
+                },
+                teardown: function() {
+                    span.remove();
+                }
+            });
+
+            test("stores the current position on mousedown", function() {
+                var draggable = new Draggable(span);
+
+                draggable.element.trigger("mousedown");
+                ok(draggable._startPosition !== undefined);
+            });
+
+            test("moving the mouse beyond the allowed distance triggers the dragstart event", function() {
+                var dragstartWasCalled = false,
+                    draggable = new Draggable(span, { dragstart: function() {
+                            dragstartWasCalled = true;
+                        }
+                    });
+
+                draggable._wait({ pageX:0, pageY: 0 });
+                draggable._start({ pageX:10, pageY: 0 });
+
+                ok(dragstartWasCalled);
+            });
+
+            test("moving the mouse within the allowed distance does not trigger the dragstart event", function() {
+                var dragstartWasCalled = false,
+                    draggable = new Draggable(span, { dragstart: function() {
+                            dragstartWasCalled = true;
+                        }
+                    });
+
+                draggable._wait({ pageX:0, pageY: 0 });
+                draggable._start({ pageX:0, pageY: 0 });
+
+                ok(!dragstartWasCalled);
+            });
+
+            test("drag event is raised during dragging", function() {
+                var dragWasCalled = false,
+                    draggable = new Draggable(span, { drag: function() {
+                            dragWasCalled = true;
+                        }
+                    });
+
+                draggable._drag();
+
+                ok(dragWasCalled);
+            });
+            test("dragend event is raised when the user releases the mouse", function() {
+                var dragEndWasCalled = false,
+                    draggable = new Draggable(span, { dragend: function() {
+                            dragEndWasCalled = true;
+                        }
+                    });
+
+                draggable._stop({type: "mouseup"});
+
+                ok(dragEndWasCalled);
+            });
+
+        </script>
+    </body>
+</html>

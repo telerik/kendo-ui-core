@@ -10,13 +10,24 @@
     }
 
     Observable.prototype = {
-        bind: function(eventName, handler) {
+        bind: function(eventName, handlers) {
             var that = this,
-                events = that._events[eventName] || [];
+                idx,
+                eventNames = $.isArray(eventName) ? eventName : [eventName],
+                length,
+                events;
 
-            events.push(handler);
+            for (idx = 0, length = eventNames.length; idx < length; idx++) {
+                eventName = eventNames[idx];
 
-            that._events[eventName] = events;
+                handler = $.isFunction(handlers) ? handlers : handlers[eventName];
+
+                if (handler) {
+                    events = that._events[eventName] || []
+                    events.push(handler);
+                    that._events[eventName] = events;
+                }
+            }
 
             return that;
         },
