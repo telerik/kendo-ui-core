@@ -245,11 +245,10 @@
     // namespace declaration
     extend(kendo, {
         ui: {},
-        data: {},
-        core: {}
+        data: {}
     });
 
-    extend(kendo.core, {
+    extend(kendo, {
         Observable: Observable,
         Template: Template,
         template: $.proxy(Template.compile, Template),

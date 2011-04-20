@@ -9,8 +9,8 @@
 
         that.dataSource = options.dataSource;
         that.options = $.extend({}, that.options, options);
-        that.linkTemplate = kendo.core.template(that.options.linkTemplate);
-        that.selectTemplate = kendo.core.template(that.options.selectTemplate);
+        that.linkTemplate = kendo.template(that.options.linkTemplate);
+        that.selectTemplate = kendo.template(that.options.selectTemplate);
 
         that.dataSource.bind("change", $.proxy(that.render, that));
         that.element.delegate("a:not(.currentPage)", "click",  $.proxy(that._click, that));

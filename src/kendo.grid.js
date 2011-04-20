@@ -102,7 +102,7 @@
 
         _tmpl: function(start, rowTemplate) {
             var that = this,
-                settings = extend({}, kendo.core.Template, that.options.templateSettings);
+                settings = extend({}, kendo.Template, that.options.templateSettings);
 
             if (!$.isFunction(rowTemplate)) {
 
@@ -120,7 +120,7 @@
                     rowTemplate += "</tr>";
                 }
 
-                rowTemplate = kendo.core.template(rowTemplate, settings);
+                rowTemplate = kendo.template(rowTemplate, settings);
             }
 
             return rowTemplate;

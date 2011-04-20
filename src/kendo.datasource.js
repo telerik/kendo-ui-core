@@ -1,7 +1,7 @@
 (function($, window, undefined) {
     var extend = $.extend,
     kendo = window.kendo,
-    stringify = kendo.core.stringify;
+    stringify = kendo.stringify;
 
     function idMap(data, id) {
         var idx, length, map = {};
@@ -179,7 +179,7 @@
             id = that.schema.id,
             transport = options.transport;
 
-        kendo.core.Observable.call(that);
+        kendo.Observable.call(that);
 
         that._reader = extend({
                 data: function (data) {
@@ -218,7 +218,7 @@
         return new DataSource();
     }
 
-    extend(DataSource.prototype, new kendo.core.Observable, {
+    extend(DataSource.prototype, new kendo.Observable, {
         defaults: {
             schema: {
                 id: "id"
