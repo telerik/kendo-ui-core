@@ -56,6 +56,11 @@
                     equal(text.content, "Text");
                 });
 
+                test("text is aligned to top", function() {
+                    var text = factory.text("Text", { x: 0, y: 0 });
+                    equal(text.attributes.x, 14);
+                });
+
                 test("rect returns SVGPath", function() {
                     var rect = factory.rect(10, 20, 100, 100);
                     ok(rect instanceof Chart.SVGPath);
@@ -126,6 +131,7 @@
                     text.content = "Text";
                     equal(text.render(), "<text x='0' y='0'>Text</text>");
                 });
+
             })();
 
             (function() {
