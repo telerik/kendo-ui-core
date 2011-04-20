@@ -6,16 +6,36 @@
         ZERO_THRESHOLD = 0.2;
 
     function Chart(element, options) {
-        this.options = $.extend(Chart.prototype.defaults, options);
-        this.element = element;
+        var chart = this;
+
+        chart.options = $.extend({}, chart.options, options);
+        chart.element = element;
+        chart._viewFactory = new SVGFactory();
+
+        chart.refresh();
     }
 
     Chart.prototype = {
-        defaults: {
+        options: {
 
         },
 
-        types: { }
+        types: { },
+
+        refresh: function() {
+            var chart = this,
+                model = new RootElement();
+
+            model.children.push(new Title({ text: chart.options.title }));
+            chart._model = model;
+
+            chart.element.innerHTML = model.getView(chart._viewFactory).render();
+        },
+
+        _supportsSVG: function() {
+            return document.implementation.hasFeature(
+                "http://www.w3.org/TR/SVG11/feature#BasicStructure", "1.1");
+        }
     };
 
     ui.Chart = Chart;
@@ -170,13 +190,12 @@
         }
     });
 
-    function Text(text) {
-        var element = this;
-        ChartElement.call(element);
+    function Text(content) {
+        var text = this;
+        ChartElement.call(text);
 
-        element.text = text || "";
-
-        element.updateLayout(defaultBox);
+        text.content = content || "";
+        text.updateLayout(defaultBox);
     }
 
     Text.prototype = new ChartElement();
@@ -188,14 +207,14 @@
         },
 
         updateLayout: function(targetBox) {
-            var element = this,
-                size = element.measure();
+            var text = this,
+                size = text.measure();
 
-            element.box = new Box(targetBox.x1, targetBox.y1, targetBox.x1 + size.width, targetBox.y1 + size.height);
+            text.box = new Box(targetBox.x1, targetBox.y1, targetBox.x1 + size.width, targetBox.y1 + size.height);
         },
 
         measure: function() {
-            var sample = $("<span />").css(this.options).appendTo(document.body).text(this.text),
+            var sample = $("<span />").css(this.options).appendTo(document.body).text(this.content),
                 size = {
                     width: sample.width(),
                     height: sample.height()
@@ -203,6 +222,11 @@
 
             sample.remove();
             return size;
+        },
+
+        getView: function(factory) {
+            var text = this;
+            return factory.text(text.content, { x: text.box.x1, y: text.box.y1 });
         }
     });
 
@@ -244,7 +268,14 @@
             text.updateLayout(textBox);
 
             title.box = new Box(targetBox.x1, targetBox.y1, targetBox.x2, text.box.y2);
-      }
+        },
+
+        getView: function(factory) {
+            var title = this,
+                textElement = title.children[0];
+
+            return textElement.getView(factory);
+        }
     });
 
     function ViewElement(attributes) {

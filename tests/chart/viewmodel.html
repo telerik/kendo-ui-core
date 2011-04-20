@@ -16,8 +16,8 @@
 
             (function() {
                 var rootElement,
-                    factory,
-                    rootViewElement;
+                    rootViewElement,
+                    factory;
 
                 function ChartElementStub(viewElement) {
                     this.getView = function() {
@@ -82,10 +82,11 @@
 
                 test("text is created", function() {
                     ok(titleTextElement != null);
+
                 });
 
-                test("text element has set text", function() {
-                    equals(titleTextElement.text, "Title");
+                test("text element has set content", function() {
+                    equals(titleTextElement.content, "Title");
                 });
 
                 test("text is positioned at top", function() {
@@ -112,6 +113,57 @@
 
                 test("box height is equal to text height", function() {
                     equals(title.box.height(), TITLE_TEXT_HEIGHT);
+                });
+
+                test("getView returns text element view", 1, function() {
+                    title.children[0] = {
+                        getView: function() { return 42; }
+                    };
+
+                    equals(title.getView(), 42);
+                });
+
+            })();
+
+            (function() {
+                var text;
+
+                module("Text", {
+                    setup: function() {
+                        text = new Chart.Text();
+                    }
+                });
+
+                test("creates text view element", function() {
+                    var factory = {
+                        text: function() {
+                            return 42;
+                        }
+                    };
+
+                    equals(text.getView(factory), 42);
+                });
+
+                test("sets content on view element", 1, function() {
+                    var factory = {
+                        text: function(content) {
+                            equal(content, "Content");
+                        }
+                    };
+
+                    text.content = "Content";
+                    text.getView(factory)
+                });
+
+                test("sets position on view element", 1, function() {
+                    var factory = {
+                        text: function(content, options) {
+                            deepEqual(options, { x: 100, y: 100 });
+                        }
+                    };
+
+                    text.updateLayout(new Box(100, 100, 200, 200));
+                    text.getView(factory)
                 });
             })();
         </script>
