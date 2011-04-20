@@ -39,7 +39,7 @@
 
         kendo.ui.Component.apply(that, arguments);
 
-        that.element.mousedown($.proxy(that._wait, that))
+        that.element.mousedown(proxy(that._wait, that))
             .bind("dragstart", false); 
 
         that._startProxy = proxy(that._start, that);
