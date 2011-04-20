@@ -10,24 +10,78 @@
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.chart.js"></script>
         <script type="text/javascript">
-            $(document).ready(function() {
+
+            var Chart = kendo.ui.Chart,
+                Box = Chart.Box;
+
+            (function() {
+                var rootElement,
+                    factory,
+                    rootViewElement;
+
+                function ChartElementStub(viewElement) {
+                    this.getView = function() {
+                        return viewElement;
+                    }
+                }
+
+                function ViewElementStub() {
+                    this.children = [];
+                }
+
+                module("RootElement", {
+                    setup: function() {
+                        rootElement = new Chart.RootElement();
+                        rootViewElement = new ViewElementStub();
+
+                        factory = {
+                            root: function() { return rootViewElement; }
+                        };
+                    }
+                });
+
+                test("creates root view element", function() {
+                    equal(rootElement.getView(factory), rootViewElement);
+                });
+
+                test("sets dimensions on view element", 2, function() {
+                    factory.root = function(options) {
+                        equal(options.width, 800);
+                        equal(options.height, 600);
+                    };
+
+                    rootElement.getView(factory);
+                });
+
+                test("creates view elements for child elements", function() {
+                    var group = new ViewElementStub(),
+                        text = new ViewElementStub();
+
+                    rootElement.children.push(new ChartElementStub(group));
+                    rootElement.children.push(new ChartElementStub(text));
+
+                    var view = rootElement.getView(factory);
+                    deepEqual(view.children, [ group, text ]);
+                });
+            })();
+
+            (function() {
                 var TITLE_TEXT_HEIGHT = 21,
                     TITLE_TEXT_WIDTH = 34,
-                    Box = kendo.ui.Chart.Box,
                     chartBox = new Box(0, 0, 1000, 1000),
                     title,
                     titleTextElement;
 
-                module("Chart Title", {
+                module("Title", {
                     setup: function() {
-                        title = new kendo.ui.Chart.ChartTitle();
+                        title = new kendo.ui.Chart.Title();
                         title.updateLayout(chartBox);
                         titleTextElement = title.children[0];
                     }
                 });
 
                 test("text is created", function() {
-                    equals(titleTextElement.type, "text");
+                    ok(titleTextElement != null);
                 });
 
                 test("text element has set text", function() {
@@ -59,7 +113,7 @@
                 test("box height is equal to text height", function() {
                     equals(title.box.height(), TITLE_TEXT_HEIGHT);
                 });
-            });
+            })();
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>

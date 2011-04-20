@@ -138,6 +138,35 @@
 
     extend(ChartElement.prototype, {
         options: {
+        },
+
+        getView: function(factory) {
+            var element = this,
+                viewElement = factory.root(element.options),
+                children = element.children,
+                childrenCount = children.length;
+
+            for (var i = 0; i < childrenCount; i++) {
+                viewElement.children.push(
+                    children[0].getView(factory));
+            };
+
+            return viewElement;
+        }
+    });
+
+    function RootElement(options) {
+        var root = this;
+
+        options = root.options = $.extend({}, root.options, options);
+        ChartElement.call(this, options);
+    }
+
+    RootElement.prototype = new ChartElement();
+    $.extend(RootElement.prototype, {
+        options: {
+            width: 800,
+            height: 600
         }
     });
 
@@ -177,7 +206,7 @@
         }
     });
 
-    function ChartTitle(options) {
+    function Title(options) {
         var title = this;
         ChartElement.call(title);
 
@@ -187,9 +216,9 @@
         title.children.push(text);
     }
 
-    ChartTitle.prototype = new ChartElement();
+    Title.prototype = new ChartElement();
 
-    $.extend(ChartTitle.prototype, {
+    $.extend(Title.prototype, {
         options: {
             text: "Title",
             position: "top",
@@ -367,8 +396,9 @@
 
     Chart.Box = Box;
     Chart.Text = Text;
+    Chart.RootElement = RootElement;
     Chart.NumericAxis = NumericAxis;
-    Chart.ChartTitle = ChartTitle;
+    Chart.Title = Title;
     Chart.SVGFactory = SVGFactory;
     Chart.SVGRoot = SVGRoot;
     Chart.SVGGroup = SVGGroup;
