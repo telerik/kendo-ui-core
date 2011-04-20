@@ -10,15 +10,29 @@
     }
 
     Observable.prototype = {
-        bind: function(eventName, handler) {
+        bind: function(eventNames, handlers) {
             var that = this,
-                events = that._events[eventName] || [];
+                idx,
+                length,
+                events;
+
+            if ($.isArray(eventNames)) {
+                for (idx = 0, length = eventNames.length; idx < length; idx++) {
+                    that._bind(eventNames[idx], $.isFunction(handlers) ? handlers : handlers[eventNames[idx]]);
+                }
+            } else {
+                that._bind(eventNames, handlers);
+            }
+            return that;
+        },
+
+        _bind: function (eventName, handler) {
+            var that = this,
+                events = that._events[eventName] || []
 
             events.push(handler);
 
             that._events[eventName] = events;
-
-            return that;
         },
 
         trigger: function(eventName, parameter) {

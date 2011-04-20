@@ -137,9 +137,18 @@
 
                 observable.bind(["foo", "bar"], { foo: $.noop, bar: $.noop } );
 
-                equal(observable._events.foo, $.noop);
-                equal(observable._events.bar, $.noop);
+                ok(observable._events.foo[0] === $.noop);
+                ok(observable._events.bar[0] === $.noop);
             });
-        </script>
+
+            test("bind to array of events with same event handler", function() {
+                var observable = new Observable();
+
+                observable.bind(["foo", "bar"], $.noop);
+
+                ok(observable._events.foo[0] === $.noop);
+                ok(observable._events.bar[0] === $.noop);
+            });
+       </script>
     </body>
 </html>
