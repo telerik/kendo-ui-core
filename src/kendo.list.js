@@ -19,7 +19,7 @@
                 idx,
                 length,
                 html = "",
-                template = kendo.core.template(that.options.template);
+                template = kendo.template(that.options.template);
 
             for (idx = 0, length = data.length; idx < length; idx++) {
                 html += template(data[idx]);
