@@ -63,14 +63,24 @@
                     var view = rootElement.getView(factory);
                     deepEqual(view.children, [ group, text ]);
                 });
+
+                test("updateLayout is called recursively", 1, function() {
+                    rootElement.children.push({
+                        updateLayout: function() {
+                            ok(true);
+                        }
+                    });
+
+                    rootElement.updateLayout();
+                });
             })();
 
             (function() {
-                var TITLE_TEXT_HEIGHT = 21,
+                var title,
+                    titleTextElement,
+                    TITLE_TEXT_HEIGHT = 21,
                     TITLE_TEXT_WIDTH = 34,
-                    chartBox = new Box(0, 0, 1000, 1000),
-                    title,
-                    titleTextElement;
+                    chartBox = new Box(0, 0, 1000, 1000);
 
                 module("Title", {
                     setup: function() {

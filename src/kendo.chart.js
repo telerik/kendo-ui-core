@@ -29,6 +29,7 @@
             model.children.push(new Title({ text: chart.options.title }));
             chart._model = model;
 
+            model.updateLayout();
             chart.element.innerHTML = model.getView(chart._viewFactory).render();
         },
 
@@ -187,6 +188,13 @@
         options: {
             width: 800,
             height: 600
+        },
+
+        updateLayout: function() {
+            var root = this,
+                box = new Box(0, 0, root.options.width, root.options.height);
+
+            root.children[0].updateLayout(box);
         }
     });
 
