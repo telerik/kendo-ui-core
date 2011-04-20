@@ -247,6 +247,14 @@
             url: "kendo.grid.js",
             depends: "datasource",
             features: { sortable: "sortable", pageable: "pageable" }
+        },
+        draganddrop: {
+            url: "kendo.draganddrop.js",
+            depends: "query"
+        },
+        slider: {
+            url: "kendo.slider.js",
+            depends: "draganddrop"
         }
     });
 
