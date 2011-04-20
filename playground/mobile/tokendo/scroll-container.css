@@ -1,34 +1,35 @@
 .touch-scrollbar
 {
     position: absolute;
-    display: none;
+    visibility: hidden;
     z-index: 200000;
-    height: .2em;
-    width: .2em;
-    border: 1px solid #7a7a7a;
-    background-color: #858585;
-    right: 0;
-    bottom: 0;
+    height: .3em;
+    width: .3em;
+    background-color: #333;
     -moz-transform-origin: 0 0;
     -webkit-transform-origin: 0 0;
     -o-transform-origin: 0 0;
     transform-origin: 0 0;
     -webkit-transition: opacity 0.3s linear;
     -moz-transition: opacity 0.3s linear;
+    -o-transition: opacity 0.3s linear;
     opacity: 0;
+    -moz-border-radius: .4em;
+    -webkit-border-radius: .4em;
+    border-radius: .4em;
 }
 
 .vertical-scrollbar
 {
     height: 100%;
     right: 1px;
-    bottom: 0;
+    top: 0;
 }
 
 .horizontal-scrollbar
 {
     width: 100%;
-    right: 0;
+    left: 0;
     bottom: 1px;
 }
 
@@ -38,7 +39,7 @@
     -webkit-user-select: none;
     user-select: none;
     background: #FFF;
-    width: 150%;
+    width: 130%;
     -webkit-transform: translate3d(0,0,0);
     -webkit-perspective: 1000;
 /*

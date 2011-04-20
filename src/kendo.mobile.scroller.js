@@ -1,5 +1,3 @@
-var isTouch = 'ontouchstart' in window;
-
 function Scroller (element) {
     this.element = $(element);
 
@@ -12,7 +10,7 @@ function Scroller (element) {
         bounceDeceleration: .1,
         bounceLimit: 0,
         bounceStop: 100,
-        framerate: 60,
+        framerate: 30,
 
         scrollbarOpacity: .7
     };
@@ -22,15 +20,19 @@ function Scroller (element) {
 
     this.xScrollbar = $('<div class="touch-scrollbar horizontal-scrollbar" />');
     this.yScrollbar = this.xScrollbar.clone().replaceClass('horizontal-scrollbar', 'vertical-scrollbar');
-    this._scrollbars = this.xScrollbar.add(this.yScrollbar);
+    this._scrollbars = $().add(this.xScrollbar).add(this.yScrollbar);
     this.webkit3d = 'WebKitCSSMatrix' in window && 'm11' in new WebKitCSSMatrix();
 
     this._startProxy = $.proxy(this._start, this);
     this._stopProxy = $.proxy(this._stop, this);
     this._dragProxy = $.proxy(this._drag, this);
+    this._gestureStartProxy = $.proxy(this._onGestureStart, this);
+    this._gestureEndProxy = $.proxy(this._onGestureEnd, this);
 
     this._transformProperty = $.getCssPrefix() + 'transform';
     this._transformOrigin = $.getCssPrefix() + 'transform-origin';
+    this._translate3DPrefix = 'translate' + (this.webkit3d ? '3d(' : '(');
+    this._translate3DSuffix = (this.webkit3d ? ', 0)' : ')');
     
     this._create();
 }
@@ -82,7 +84,7 @@ $.throttle = function(delay, callback) {
 
 Scroller.prototype = {
     _create: function () {
-        if (isTouch) {
+        if (kendo.support.touch) {
             this._moveEvent = "touchmove",
             this._startEvent = "touchstart",
             this._endEvent = "touchend";
@@ -98,13 +100,17 @@ Scroller.prototype = {
             .css("overflow", "hidden")
             .bind(this._startEvent, $.proxy(this._wait, this));
 
+        if (kendo.support.touch)
+            this.element
+                .bind('gesturestart', this._gestureStartProxy )
+                .bind('gestureend', this._gestureEndProxy );
+
         if (children.length)
             children.wrapAll(scrollElement);
         else
             this.element.append(scrollElement);
 
         this.scrollElement = this.element.children();
-
         this._scrollbars.appendTo(this.element);
 
         this._storeLastLocation = $.throttle(20, function(location) {
@@ -132,43 +138,51 @@ Scroller.prototype = {
             
         });
 
-        this._throttleCSS = $.throttle(2, function ( location ) {
+        this._throttleCSS = function ( location ) {
             var position = { x: 0, y: 0 },
+                offset = 0,
                 delta = 0,
                 cssModel = {};
 
-            if (this.xScroll) {
-                position.x = -Math.max( this.minBounceStop.x, Math.min( this.maxBounceStop.x, -(location.x - this.start.x )));
-                delta = this._constrainOffset(~~(-position.x * this.xOffsetRatio));
+            if (this.xScroller) {
+                position.x = -Math.max( this.minBounceStop.x, Math.min( this.maxBounceStop.x, -(location.x - this.start.x)));
+                delta = Math.max(-this.options.bounceStop, Math.min(this.options.bounceStop,
+                                (-position.x > this.maxBounceLimit.x ? (-position.x - this.maxBounceLimit.x) : 0) || (-position.x < this.minBounceLimit.x ? -position.x : 0)));
+                var width = ~~(this.boxWidth * (this.xRatio - Math.abs(delta) / this.scrollWidth));
+                offset = Math.min(this.boxWidth, Math.max(0, -position.x * this.xRatio - Math.abs(delta) / this.scrollWidth));
 
-                cssModel[this._transformOrigin] = delta.offset + '% 0';
-                cssModel[this._transformProperty] = 'scaleX(' + (this.xRatio - Math.abs(delta.compensation) / this.scrollWidth).toFixed(2) + ')';
+                cssModel[this._transformProperty] = this._translate3DPrefix + offset + 'px, 0' + this._translate3DSuffix;
+                cssModel['width'] = width + 'px';
 
                 this.xScrollbar.css( cssModel );
             }
 
-            if (this.yScroll) {
+            if (this.yScroller) {
                 position.y = -Math.max( this.minBounceStop.y, Math.min( this.maxBounceStop.y, -(location.y - this.start.y)));
-                delta = this._constrainOffset(~~(-position.y * this.yOffsetRatio));
-
-                cssModel[this._transformOrigin] = '0 ' + delta.offset + '%';
-                cssModel[this._transformProperty] = 'scaleY(' + (this.yRatio - Math.abs(delta.compensation) / this.scrollHeight).toFixed(2) + ')';
+                delta = Math.max(-this.options.bounceStop, Math.min(this.options.bounceStop,
+                                (-position.y > this.maxBounceLimit.y ? (-position.y - this.maxBounceLimit.y) : 0) || (-position.y < this.minBounceLimit.y ? -position.y : 0)));
+                var height = ~~(this.boxHeight * (this.yRatio - Math.abs(delta) / this.scrollHeight));
+                offset = Math.min(this.boxHeight, Math.max(0, -position.y * this.yRatio - Math.abs(delta) / this.scrollHeight));
+                
+                cssModel = {};
+                cssModel[this._transformProperty] = this._translate3DPrefix + '0, ' + offset + 'px' + this._translate3DSuffix;
+                cssModel['height'] = height + 'px';
 
                 this.yScrollbar.css( cssModel );
             }
             
-            this.scrollElement.stop(true,true).css( this._transformProperty, 'translate' + (this.webkit3d ? '3d' : '') +
-                                                    '(' + position.x + 'px,' + position.y + 'px' + (this.webkit3d ? ', 0)' : ')') );
-        });
+            this.scrollElement.stop(true,true).css( this._transformProperty, this._translate3DPrefix +
+                                                    position.x + 'px,' + position.y + 'px' + this._translate3DSuffix);
+        };
 
     },
 
-    _constrainOffset: function (offset) {
-        var bounceStop = this.options.bounceStop;
-        return {
-            compensation: Math.max(-bounceStop, Math.min(bounceStop, (offset > bounceStop ? (offset - bounceStop)*5 : 0) || (offset < 0 ? offset*5 : 0))),
-            offset: Math.min(100, Math.max(0, offset))
-        }
+    _onGestureStart: function () {
+        this._dragCanceled = true;
+    },
+
+    _onGestureEnd: function () {
+        this._dragCanceled = false;
     },
 
     _getScrollOffsets: function () {
@@ -201,15 +215,14 @@ Scroller.prototype = {
     },
 
     _start: function (e) {
+        if (this._dragCanceled) return;
+
         var currentLocation = touchLocation(e);
         this._dragged = false;
 
         if (Math.abs(this.lastLocation.x - currentLocation.x) > 10 || Math.abs(this.lastLocation.y - currentLocation.y) > 10) {
             e.preventDefault();
             this._dragged = true;
-
-            $(document).unbind(this._moveEvent, this._startProxy)
-                       .bind(this._moveEvent, this._dragProxy);
 
             this.boxWidth = this.element.innerWidth();
             this.boxHeight = this.element.innerHeight();
@@ -226,12 +239,10 @@ Scroller.prototype = {
                 };
 
             $.extend(this, {
-                xScroll: this.scrollWidth > this.boxWidth,
-                yScroll: this.scrollHeight > this.boxHeight,
+                xScroller: this.scrollWidth > this.boxWidth,
+                yScroller: this.scrollHeight > this.boxHeight,
                 xRatio: this.boxWidth / this.scrollWidth,
                 yRatio: this.boxHeight / this.scrollHeight,
-                xOffsetRatio: 100 / (this.scrollWidth - this.boxWidth),
-                yOffsetRatio: 100 / (this.scrollHeight - this.boxHeight),
                 minBounceLimit: bounceLimit,
                 maxBounceLimit: {
                     x: this.scrollWidth - this.boxWidth - bounceLimit.x,
@@ -244,21 +255,33 @@ Scroller.prototype = {
                 }
             });
 
-            if (this.xScroll) {
+            if (this.xScroller) {
+                this.xScrollbar.css('opacity');
                 this.xScrollbar
-                    .css( this._transformProperty, 'scaleX(' + this.xRatio + ')' )
-                    .show().css('opacity', this.options.scrollbarOpacity);
+                    .css({
+                            width: ~~(this.boxWidth * this.xRatio),
+                            opacity: this.options.scrollbarOpacity,
+                            visibility: 'visible'
+                        });
             }
 
-            if (this.yScroll) {
+            if (this.yScroller) {
                 this.yScrollbar
-                    .css( this._transformProperty, 'scaleY(' + this.yRatio + ')' )
-                    .show().css('opacity', this.options.scrollbarOpacity);
+                    .css({
+                            height: ~~(this.boxHeight * this.yRatio),
+                            opacity: this.options.scrollbarOpacity,
+                            visibility: 'visible'
+                        });
             }
+
+            $(document).unbind(this._moveEvent, this._startProxy)
+                       .bind(this._moveEvent, this._dragProxy);
         }
     },
 
     _drag: function (e) {
+        if (this._dragCanceled) return;
+
         e.preventDefault();
 
         var currentLocation = touchLocation(e);
@@ -274,6 +297,8 @@ Scroller.prototype = {
     },
 
     _stop: function (e) {
+        if (this._dragCanceled) return;
+
         var oEvent = this._originalEvent,
             target = $(oEvent.target),
             proxy = null;
@@ -282,14 +307,14 @@ Scroller.prototype = {
             this._dragged = false;
             e.preventDefault();
 
-            if (!isTouch) {
+            if (!kendo.support.touch) {
                 proxy = $.proxy( this._click, { original: this, target: target } );
                 target.bind( 'click', proxy );
             }
 
             this._startKinetikAnimation(e);
         } else {
-            if (isTouch && this._originalEvent.touches.length == 1) // Fire a click event when there's no drag...
+            if (kendo.support.touch && this._originalEvent.touches.length == 1) // Fire a click event when there's no drag...
             {
                 proxy = $.proxy( this._click, { original: this, target: target } );
                 var evt = document.createEvent("MouseEvents");
@@ -385,10 +410,10 @@ Scroller.prototype = {
         this.winding = false;
         clearTimeout(this.timeoutId);
 
-        if (this.xScroll)
+        if (this.xScroller)
             this.xScrollbar.css('opacity', 0);
 
-        if (this.yScroll)
+        if (this.yScroller)
             this.yScrollbar.css('opacity', 0);
     }
 };
