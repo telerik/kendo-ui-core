@@ -131,6 +131,15 @@
                 equal(observable._events.foo.length, 1);
                 equal(observable._events.foo[0], second);
             });
+
+            test("bind to array of events", function() {
+                var observable = new Observable();
+
+                observable.bind(["foo", "bar"], { foo: $.noop, bar: $.noop } );
+
+                equal(observable._events.foo, $.noop);
+                equal(observable._events.bar, $.noop);
+            });
         </script>
     </body>
 </html>
