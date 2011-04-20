@@ -40,7 +40,7 @@
         kendo.ui.Component.apply(that, arguments);
 
         that.element.mousedown(proxy(that._wait, that))
-            .bind("dragstart", false); 
+            .bind("dragstart", false);
 
         that._startProxy = proxy(that._start, that);
         that._destroyProxy = proxy(that._destroy, that);
@@ -48,9 +48,8 @@
         that._dragProxy = proxy(that._drag, that);
 
         that.group = that.options.group;
-        that.bind("dragstart", that.options.dragstart);
-        that.bind("drag", that.options.drag);
-        that.bind("dragend", that.options.dragend);
+
+        that.bind("dragstart drag dragend".split(" "), that.options);
     }
 
     Draggable.prototype = {

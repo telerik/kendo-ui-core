@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.draganddrop.js"></script>
+        <style>
+            .draggable
+            {
+                border: 1px solid red;
+                background: blue;
+                width: 100px;
+                height: 100px;
+            }
+            .dropTarget
+            {
+                border: 1px solid red;
+                background: red;
+                width: 100px;
+                height: 100px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="draggable first">drag me (group = 1)</div>
+        <div class="dropTarget first">drop here #1 (group = 1)</div>
+        <div class="dropTarget first">drop here #2 (group = 1)</div>
+        <div class="draggable second">drag me (group = 2)</div>
+        <div class="dropTarget second">drop here #1 (group = 2)</div>
+        <div class="dropTarget second">drop here #2 (group = 2)</div>
+        <script>
+            $(document).ready(function() {
+                $(".draggable.first").kendoDraggable( { group: 1 } );
+                $(".dropTarget.first").kendoDropTarget( { group: 1 } );
+                $(".draggable.second").kendoDraggable( { group: 2 } );
+                $(".dropTarget.second").kendoDropTarget( { group: 2 } );
+            });
+        </script>
+    </body>
+</html>

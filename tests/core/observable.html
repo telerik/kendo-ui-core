@@ -23,12 +23,12 @@
             test("bind returns this", function() {
                 var observable = new Observable();
 
-                ok(observable.bind("foo") === observable)
+                ok(observable.bind("foo", $.noop) === observable)
             });
 
             test("bind stores the handler to the events list", function() {
                 var observable = new Observable(),
-                    handler = $.nop;
+                    handler = $.noop;
 
                 observable.bind("foo", handler);
 
@@ -37,7 +37,7 @@
 
             test("bind stores multiple events", function() {
                 var observable = new Observable(),
-                    handler = $.nop;
+                    handler = $.noop;
 
                 observable.bind("foo", handler);
                 observable.bind("foo", handler);
@@ -106,7 +106,7 @@
             test("unbind without handler removes all events", function() {
                 var observable = new Observable();
 
-                observable.bind("foo", $.nop);
+                observable.bind("foo", $.noop);
 
                 observable.unbind("foo");
 
@@ -149,6 +149,14 @@
                 ok(observable._events.foo[0] === $.noop);
                 ok(observable._events.bar[0] === $.noop);
             });
-       </script>
+            test("bind to array of events skips missing handlers", function() {
+                var observable = new Observable();
+
+                observable.bind(["foo", "bar"], { foo: $.noop } );
+
+                ok(observable._events.foo[0] === $.noop);
+                ok(typeof observable._events.bar === "undefined");
+            });
+      </script>
     </body>
 </html>
