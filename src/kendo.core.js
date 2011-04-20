@@ -664,8 +664,14 @@
 
         return "object";
     }
+
+    var formatters = {};
+
+    $.extend(formatters, {
+        date: DateTime.format
+    });
     
-    function FormatString() {
+    function formatString() {
         var s = arguments[0];
 
         for (var i = 0, l = arguments.length - 1; i < l; i++) {
@@ -673,7 +679,7 @@
 
             var argument = arguments[i + 1];
 
-            var formatter = this.formatters[this.getType(argument)];
+            var formatter = formatters[getType(argument)];
             if (formatter) {
                 var match = reg.exec(s);
                 if (match) {
@@ -716,7 +722,7 @@
         Template: Template,
         template: $.proxy(Template.compile, Template),
         stringify: $.proxy(JSON.stringify, JSON),
-        FormatString: FormatString,
+        formatString: formatString,
         CultureInfo: CultureInfo
     });
 
