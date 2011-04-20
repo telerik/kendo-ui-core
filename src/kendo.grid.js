@@ -2,19 +2,9 @@
     var kendo = window.kendo,
         ui = kendo.ui,
         DataSource = kendo.data.DataSource,
-        tbodySupportsInnerHtml = true,
+        tbodySupportsInnerHtml = kendo.support.tbodyInnerHtml,
         Component = ui.Component,
         extend = $.extend;
-
-    (function() {
-        // Internet Explorer does not support setting the innerHTML of TBODY and TABLE elements
-        var table = document.createElement("table");
-        try {
-            table.innerHTML = "<tr><td></td></tr>";
-        } catch (e) {
-            tbodySupportsInnerHtml = false;
-        }
-    })();
 
     function Grid(element, options) {
         var that = this,
