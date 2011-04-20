@@ -2,7 +2,8 @@
     var kendo = window.kendo = window.kendo || {},
         extend = $.extend,
         Template,
-        JSON = JSON || {};
+        JSON = JSON || {},
+        support = {};
 
     function Observable() {
         this._events = {};
@@ -242,10 +243,26 @@
         };
     }
 
+    // feature detection
+    (function() {
+        var table = document.createElement("table");
+
+        // Internet Explorer does not support setting the innerHTML of TBODY and TABLE elements
+        try {
+            table.innerHTML = "<tr><td></td></tr>";
+            support.tbodyInnerHtml = true;
+        } catch (e) {
+            support.tbodyInnerHtml = false;
+        }
+
+        support.touch = "ontouchstart" in window;
+    })();
+
     // namespace declaration
     extend(kendo, {
         ui: {},
-        data: {}
+        data: {},
+        support: support
     });
 
     extend(kendo, {
