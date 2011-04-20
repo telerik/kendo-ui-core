@@ -484,6 +484,43 @@ var Zepto = (function(selector, context) {
             };
         })(adjacencyOperators[key]);
 
+        $.each = function(object, callback, args) {
+            var name, i = 0,
+                length = object.length,
+                isObj = length === undefined || typeof object === "function";
+
+            if (args) {
+                if (isObj) {
+                    for ( name in object ) {
+                        if ( callback.apply( object[ name ], args ) === false ) {
+                            break;
+                        }
+                    }
+                } else {
+                    for ( ; i < length; ) {
+                        if ( callback.apply( object[ i++ ], args ) === false ) {
+                            break;
+                        }
+                    }
+                }
+
+            // A special, fast, case for the most common use of each
+            } else {
+                if ( isObj ) {
+                    for ( name in object ) {
+                        if ( callback.call( object[ name ], name, object[ name ] ) === false ) {
+                            break;
+                        }
+                    }
+                } else {
+                    for ( var value = object[0];
+                        i < length && callback.call( value, i, value ) !== false; value = object[++i] ) {}
+                }
+            }
+
+            return object;
+        };
+
     return $;
 })();
 

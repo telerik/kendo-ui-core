@@ -19,6 +19,7 @@
 
     <script>
         var jQuery = Zepto;
+
     </script>
 
     <script src="../../../src/kendo.loader.js"></script>
@@ -62,7 +63,7 @@
 
                 taskList = new View({
                     onBind: function(data) {
-                        var template = kendo.core.template(document.getElementById("item_tmpl").innerHTML);
+                        var template = kendo.template(document.getElementById("item_tmpl").innerHTML);
 
                         this.contentElement.html(template({ data: data }))
                             .delegate('.more-details', 'click', function() {
