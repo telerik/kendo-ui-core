@@ -1,4 +1,4 @@
-(function($, window) {
+;(function($, window) {
     var kendo = window.kendo = window.kendo || {},
         extend = $.extend,
         Template,
