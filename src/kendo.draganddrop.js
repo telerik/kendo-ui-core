@@ -8,6 +8,11 @@
         MOUSEDOWN = "mousedown",
         MOUSEMOVE = "mousemove",
         DRAGSTART = "dragstart",
+        DRAGEND = "dragend",
+        DRAG = "drag",
+        DRAGENTER = "dragenter",
+        DRAGLEAVE = "dragleave",
+        DROP = "drop",
         KEYDOWN = "keydown",
         MOUSELEAVE = "mouseleave",
         SELECTSTART = "selectstart";
@@ -30,7 +35,7 @@
                     .bind(MOUSELEAVE, proxy(that._out, that));
 
         that.group = that.options.group;
-        that.bind("dragenter dragleave drop".split(" "), that.options);
+        that.bind([DRAGENTER, DRAGLEAVE, DROP], that.options);
     }
 
     DropTarget.prototype = {
@@ -50,15 +55,15 @@
         },
 
         _over: function() {
-            this._trigger("dragenter");
+            this._trigger(DRAGENTER);
         },
 
         _out: function(e) {
-            this._trigger("dragleave");
+            this._trigger(DRAGLEAVE);
         },
 
         _drop: function(e) {
-            this._trigger("drop");
+            this._trigger(DROP);
         }
     }
 
@@ -71,7 +76,7 @@
 
         bind(that.element, that.options.filter, MOUSEDOWN, proxy(that._wait, that));
 
-        that.element.bind("dragstart", false);
+        that.element.bind(DRAGSTART, false);
 
         that._startProxy = proxy(that._start, that);
         that._destroyProxy = proxy(that._destroy, that);
@@ -80,7 +85,7 @@
 
         that.group = that.options.group;
 
-        that.bind("dragstart drag dragend".split(" "), that.options);
+        that.bind([DRAGSTART, DRAG, DRAGEND], that.options);
     }
 
     Draggable.prototype = {
@@ -92,7 +97,7 @@
         _wait: function (e) {
             var that = this;
             that._startPosition = { x: e.pageX, y: e.pageY };
-            that._currentTarget = e.currentTarget;
+            that.currentTarget = e.currentTarget;
             $(document).bind(MOUSEMOVE, that._startProxy)
                        .bind(MOUSEUP, that._destroyProxy);
         },
@@ -113,34 +118,36 @@
                            .bind(MOUSEMOVE, that._dragProxy)
                            .bind(SELECTSTART, false);
 
-               that.trigger("dragstart", {
-                    currentTarget: that._currentTarget
-               });
+                that._trigger(DRAGSTART);
             }
         },
 
         _drag: function(e) {
-            var that = this;
-            that.trigger("drag", {
-                currentTarget: that._currentTarget
-            });
+            this._trigger(DRAG);
         },
 
         _stop: function(e) {
             var that = this;
 
             if (e.type == MOUSEUP || e.keyCode == 27) {
-                that.trigger("dragend", {
-                    currentTarget: that._currentTarget
-                });
+                that._trigger(DRAGEND);
                 that._destroy();
             }
+        },
+
+        _trigger: function(eventName) {
+            var that = this;
+
+            that.trigger(eventName, {
+                currentTarget: that.currentTarget
+            });
         },
 
         _destroy: function(e) {
             var that = this;
 
             delete draggables[that.group];
+
             $(document).unbind(MOUSEUP, that._stopProxy)
                        .unbind(KEYDOWN, that._stopProxy)
                        .unbind(MOUSEMOVE, that._dragProxy)
