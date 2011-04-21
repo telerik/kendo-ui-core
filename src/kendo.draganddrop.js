@@ -1,9 +1,12 @@
 ﻿(function ($, window) {
     var kendo = window.kendo, 
         proxy = $.proxy,
-        draggables = {}
+        draggables = {},
         MOUSEENTER = "mouseneter",
-        MOUSEUP = "mouseup"
+        MOUSEUP = "mouseup",
+        MOUSEDOWN = "mousedown",
+        MOUSEMOVE = "mousemove",
+        DRAGSTART = "dragstart",
         MOUSELEAVE = "mouseleave";
 
     function bind(element, filter, eventName, handler) {
@@ -33,8 +36,7 @@
         _over: function(e) {
             if (draggables[this.group])
             console.log("dragenter");
-        },
-        _out: function(e) {
+        }, _out: function(e) {
             if (draggables[this.group])
             console.log("dragleave");
         },
@@ -51,7 +53,7 @@
 
         kendo.ui.Component.apply(that, arguments);
 
-        bind(that.element, that.options.filter, "mousedown", proxy(that._wait, that));
+        bind(that.element, that.options.filter, MOUSEDOWN, proxy(that._wait, that));
 
         that.element.bind("dragstart", false);
 
@@ -89,8 +91,8 @@
             if (distance >= this.options.distance) {
                 draggables[this.group] = this;
 
-                $(document).unbind("mousemove", this._startProxy)
-                           .unbind("mouseup", this._destroyProxy)
+                $(document).unbind(MOUSEMOVE, this._startProxy)
+                           .unbind(MOUSEUP, this._destroyProxy)
                            .bind({
                                "mouseup keydown": this._stopProxy,
                                mousemove: this._dragProxy,
@@ -110,7 +112,7 @@
         },
 
         _stop: function(e) {
-            if (e.type == "mouseup" || e.keyCode == 27) {
+            if (e.type == MOUSEUP || e.keyCode == 27) {
                 this.trigger("dragend", {
                     currentTarget: this._currentTarget
                 });
@@ -121,8 +123,8 @@
         _destroy: function(e) {
             delete draggables[this.group];
             $(document).unbind("mouseup keydown", this._stopProxy)
-                       .unbind("mousemove", this._dragProxy)
-                       .unbind("mousemove", this._startProxy)
+                       .unbind(MOUSEMOVE, this._dragProxy)
+                       .unbind(MOUSEMOVE, this._startProxy)
                        .unbind("selectstart", false);
         }
     }
