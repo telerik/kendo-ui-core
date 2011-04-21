@@ -57,12 +57,6 @@
                 ok(handlerWasCalled);
             });
 
-            test("trigger returns this", function() {
-                var observable = new Observable();
-
-                ok(observable.trigger() === observable);
-            });
-
             test("this in trigger is the observable", function() {
                 var observable = new Observable(), that;
 
@@ -97,10 +91,29 @@
                     argument = bar;
                 });
 
-                observable.trigger("foo", "bar");
+                observable.trigger("foo", { baz: "bar"});
 
-                equal(argument, "bar");
+                equal(argument.baz, "bar");
 
+            });
+
+            test("trigger returns true if event is prevented", function() {
+                var observable = new Observable();
+                observable.bind("foo", function(e) {
+                    e.preventDefault();
+                });
+
+                var result = observable.trigger("foo");
+                ok(result);
+            });
+
+            test("trigger returns false if event is not prevented", function() {
+                var observable = new Observable();
+                observable.bind("foo", function(e) {
+                });
+
+                var result = observable.trigger("foo");
+                ok(!result);
             });
 
             test("unbind without handler removes all events", function() {
@@ -157,6 +170,6 @@
                 ok(observable._events.foo[0] === $.noop);
                 ok(typeof observable._events.bar === "undefined");
             });
-      </script>
+        </script>
     </body>
 </html>

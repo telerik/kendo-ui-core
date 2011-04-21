@@ -111,7 +111,7 @@
 
                 dataSource.read();
                 pager.bind("change", function(){
-                    index = arguments[0];
+                    index = arguments[0].index;
                 });
 
                 ul.find("a:eq(1)").click();
