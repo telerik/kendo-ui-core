@@ -62,7 +62,7 @@
 
             this.dataSource.page(page);
 
-            this.trigger("change", [page]);
+            this.trigger("change", { index: page });
         },
 
         totalPages: function() {

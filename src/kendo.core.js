@@ -5,6 +5,19 @@
         JSON = JSON || {},
         support = {};
 
+    function Event() {
+        this._isPrevented = false;
+    }
+
+    Event.prototype = {
+        preventDefault: function() {
+            this._isPrevented = true;
+        },
+        isDefaultPrevented: function() {
+            return this._isPrevented;
+        }
+    };
+
     function Observable() {
         this._events = {};
     }
@@ -35,16 +48,17 @@
         trigger: function(eventName, parameter) {
             var that = this,
                 events = that._events[eventName],
+                args = $.extend(new Event(), parameter),
                 idx,
                 length;
 
             if (events) {
                 for (idx = 0, length = events.length; idx < length; idx++) {
-                    events[idx].call(that, parameter);
+                    events[idx].call(that, args);
                 }
             }
 
-            return that;
+            return args.isDefaultPrevented();
         },
 
         unbind: function(eventName, handler) {
