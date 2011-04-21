@@ -22,18 +22,24 @@
         </style>
     </head>
     <body>
-        <div class="draggable first">drag me (group = 1)</div>
+        <div class="draggable first"><span>drag me</span><span>(group = 1)</span></div>
         <div class="dropTarget first">drop here #1 (group = 1)</div>
         <div class="dropTarget first">drop here #2 (group = 1)</div>
-        <div class="draggable second">drag me (group = 2)</div>
-        <div class="dropTarget second">drop here #1 (group = 2)</div>
-        <div class="dropTarget second">drop here #2 (group = 2)</div>
         <script>
             $(document).ready(function() {
-                $(".draggable.first").kendoDraggable( { group: 1 } );
+                $(".draggable.first").kendoDraggable( { group: 1, 
+                    filter: "span:first",
+                    drag: function() {
+                        console.log("drag");
+                    },
+                    dragstart: function() {
+                        console.log("dragstart");
+                    },
+                    dragend: function() {
+                        console.log("dragend");
+                    }
+                } );
                 $(".dropTarget.first").kendoDropTarget( { group: 1 } );
-                $(".draggable.second").kendoDraggable( { group: 2 } );
-                $(".dropTarget.second").kendoDropTarget( { group: 2 } );
             });
         </script>
     </body>
