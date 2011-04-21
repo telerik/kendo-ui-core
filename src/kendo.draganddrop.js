@@ -1,16 +1,28 @@
 ﻿(function ($, window) {
     var kendo = window.kendo, 
         proxy = $.proxy,
-        draggables = {};
+        draggables = {}
+        MOUSEENTER = "mouseneter",
+        MOUSEUP = "mouseup"
+        MOUSELEAVE = "mouseleave";
+
+    function bind(element, filter, eventName, handler) {
+        if (filter) {
+            element.delegate(filter, eventName, handler);
+        } else {
+            element.bind(eventName, handler);
+        }
+    }
 
     function DropTarget(element, options) {
         var that = this;
 
         kendo.ui.Component.apply(that, arguments); 
 
-        that.element.bind("mouseenter", proxy(that._over, that))
-                    .bind("mouseup", proxy(that._drop, that))
-                    .bind("mouseleave", proxy(that._out, that));
+        that.element.bind(MOUSEENTER, proxy(that._over, that))
+                    .bind(MOUSEUP, proxy(that._drop, that))
+                    .bind(MOUSELEAVE, proxy(that._out, that));
+
         that.group = that.options.group;
     }
 
@@ -39,8 +51,9 @@
 
         kendo.ui.Component.apply(that, arguments);
 
-        that.element.mousedown(proxy(that._wait, that))
-            .bind("dragstart", false);
+        bind(that.element, that.options.filter, "mousedown", proxy(that._wait, that));
+
+        that.element.bind("dragstart", false);
 
         that._startProxy = proxy(that._start, that);
         that._destroyProxy = proxy(that._destroy, that);
@@ -60,6 +73,7 @@
 
         _wait: function (e) {
             this._startPosition = { x: e.pageX, y: e.pageY };
+            this._currentTarget = e.currentTarget;
             $(document).bind( {
                 mousemove: this._startProxy,
                 mouseup: this._destroyProxy
@@ -83,19 +97,23 @@
                                selectstart: false
                            });
 
-                this.trigger("dragstart");
+               this.trigger("dragstart", {
+                    currentTarget: this._currentTarget
+               });
             }
         },
 
         _drag: function(e) {
-            console.log("drag");
-            this.trigger("drag");
+            this.trigger("drag", {
+                currentTarget: this._currentTarget
+            });
         },
 
         _stop: function(e) {
             if (e.type == "mouseup" || e.keyCode == 27) {
-                console.log("dragend");
-                this.trigger("dragend");
+                this.trigger("dragend", {
+                    currentTarget: this._currentTarget
+                });
                 this._destroy();
             }
         },

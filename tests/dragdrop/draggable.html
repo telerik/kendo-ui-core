@@ -75,6 +75,7 @@
 
                 ok(dragWasCalled);
             });
+
             test("dragend event is raised when the user releases the mouse", function() {
                 var dragEndWasCalled = false,
                     draggable = new Draggable(span, { dragend: function() {
@@ -85,6 +86,65 @@
                 draggable._stop({type: "mouseup"});
 
                 ok(dragEndWasCalled);
+            });
+
+            test("specifying filter", function() {
+                var dragstartWasCalled = false,
+                    draggable = new Draggable(span.append("<span>foo</span>"), { 
+                        dragstart: function() {
+                            dragstartWasCalled = true;
+                        },
+                        filter: "span"
+                    });
+
+                span.find("span").trigger({ type: "mousedown", pageX: 0, pageY: 0 });
+                $(document).trigger({ type: "mousemove", pageX: 10, pageY: 10 });
+
+                ok(dragstartWasCalled);
+            });
+
+            test("with filter - the dragged element is currentTarget during the dragstart event", function() {
+                var e, draggable = new Draggable(span.append("<span>foo</span>"), { 
+                        dragstart: function() {
+                            e = arguments[0];
+                        },
+                        filter: "span"
+                    });
+
+                span.find("span").trigger({ type: "mousedown", pageX: 0, pageY: 0 });
+                span.find("span").trigger({ type: "mousemove", pageX: 10, pageY: 10 });
+
+                ok(e.currentTarget === span.find("span")[0]);
+            });
+
+            test("with filter - the dragged element is currentTarget during the drag event", function() {
+                var e, draggable = new Draggable(span.append("<span>foo</span>"), { 
+                        drag: function() {
+                            e = arguments[0];
+                        },
+                        filter: "span"
+                    });
+
+                span.find("span").trigger({ type: "mousedown", pageX: 0, pageY: 0 });
+                span.find("span").trigger({ type: "mousemove", pageX: 10, pageY: 10 });
+                span.find("span").trigger({ type: "mousemove", pageX: 10, pageY: 10 });
+
+                ok(e.currentTarget === span.find("span")[0]);
+            });
+
+            test("with filter - the dragged element is currentTarget during the dragend event", function() {
+                var e, draggable = new Draggable(span.append("<span>foo</span>"), { 
+                        dragend: function() {
+                            e = arguments[0];
+                        },
+                        filter: "span"
+                    });
+
+                span.find("span").trigger({ type: "mousedown", pageX: 0, pageY: 0 });
+                span.find("span").trigger({ type: "mousemove", pageX: 10, pageY: 10 });
+                span.find("span").trigger({ type: "mouseup", pageX: 10, pageY: 10 });
+
+                ok(e.currentTarget === span.find("span")[0]);
             });
 
         </script>
