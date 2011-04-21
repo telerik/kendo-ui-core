@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>slider</title>
+        <script type="text/javascript" src="../src/jquery.js"></script>
+        <script type="text/javascript" src="../src/kendo.loader.js"></script>
+        <link type="text/css" href="../../Branches/Current/Source/Telerik.Web.Mvc/Content/telerik.common.css" rel="stylesheet"/>
+        <link type="text/css" href="../../Branches/Current/Source/Telerik.Web.Mvc/Content/telerik.vista.css" rel="stylesheet"/>        
+        <script type="text/javascript">
+            kendo.loader.slider();
+        </script>
+    </head>
+    <body>
+        <input type="range" id="slider" />
+        <br />
+        <div id="rangeSlider" style="margin-top:20px;">
+            <input type="range" />
+            <input type="range" />
+        </div>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $("#slider").kendoSlider();
+                $("#rangeSlider").kendoRangeSlider();
+            });
+        </script>
+    </body>
+</html>
