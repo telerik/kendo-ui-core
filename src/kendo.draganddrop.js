@@ -97,7 +97,7 @@
         _wait: function (e) {
             var that = this;
             that._startPosition = { x: e.pageX, y: e.pageY };
-            that._currentTarget = e.currentTarget;
+            that.currentTarget = e.currentTarget;
             $(document).bind(MOUSEMOVE, that._startProxy)
                        .bind(MOUSEUP, that._destroyProxy);
         },
@@ -139,7 +139,7 @@
             var that = this;
 
             that.trigger(eventName, {
-                currentTarget: that._currentTarget
+                currentTarget: that.currentTarget
             });
         },
 
