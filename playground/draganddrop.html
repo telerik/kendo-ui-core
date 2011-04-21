@@ -27,7 +27,8 @@
         <div class="dropTarget first">drop here #2 (group = 1)</div>
         <script>
             $(document).ready(function() {
-                $(".draggable.first").kendoDraggable( { group: 1, 
+                $(".draggable.first").kendoDraggable( {
+                    group: 1,
                     filter: "span:first",
                     drag: function() {
                         console.log("drag");
@@ -38,8 +39,20 @@
                     dragend: function() {
                         console.log("dragend");
                     }
-                } );
-                $(".dropTarget.first").kendoDropTarget( { group: 1 } );
+                });
+
+                $(".dropTarget.first").kendoDropTarget( {
+                    group: 1,
+                    dragenter: function() {
+                        console.log("dragenter");
+                    },
+                    dragleave: function() {
+                        console.log("dragleave");
+                    },
+                    drop: function() {
+                        console.log("drop");
+                    }
+                });
             });
         </script>
     </body>

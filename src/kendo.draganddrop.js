@@ -30,22 +30,35 @@
                     .bind(MOUSELEAVE, proxy(that._out, that));
 
         that.group = that.options.group;
+        that.bind("dragenter dragleave drop".split(" "), that.options);
     }
 
     DropTarget.prototype = {
         options: {
             group: "default"
         },
-        _over: function(e) {
-            if (draggables[this.group])
-            console.log("dragenter");
-        }, _out: function(e) {
-            if (draggables[this.group])
-            console.log("dragleave");
+
+        _trigger: function(eventName) {
+            var that = this,
+                draggable = draggables[that.group];
+
+            if (draggable) {
+                that.trigger(eventName, {
+                    draggable: draggable
+                });
+            }
         },
+
+        _over: function() {
+            this._trigger("dragenter");
+        },
+
+        _out: function(e) {
+            this._trigger("dragleave");
+        },
+
         _drop: function(e) {
-            if (draggables[this.group])
-            console.log("drop");
+            this._trigger("drop");
         }
     }
 
