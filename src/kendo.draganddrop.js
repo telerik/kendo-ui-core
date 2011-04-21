@@ -1,5 +1,6 @@
 ﻿(function ($, window) {
-    var kendo = window.kendo, 
+    var kendo = window.kendo,
+        Component = kendo.ui.Component,
         proxy = $.proxy,
         draggables = {},
         MOUSEENTER = "mouseneter",
@@ -7,7 +8,9 @@
         MOUSEDOWN = "mousedown",
         MOUSEMOVE = "mousemove",
         DRAGSTART = "dragstart",
-        MOUSELEAVE = "mouseleave";
+        KEYDOWN = "keydown",
+        MOUSELEAVE = "mouseleave",
+        SELECTSTART = "selectstart";
 
     function bind(element, filter, eventName, handler) {
         if (filter) {
@@ -20,38 +23,51 @@
     function DropTarget(element, options) {
         var that = this;
 
-        kendo.ui.Component.apply(that, arguments); 
+        Component.apply(that, arguments); 
 
         that.element.bind(MOUSEENTER, proxy(that._over, that))
                     .bind(MOUSEUP, proxy(that._drop, that))
                     .bind(MOUSELEAVE, proxy(that._out, that));
 
         that.group = that.options.group;
+        that.bind("dragenter dragleave drop".split(" "), that.options);
     }
 
     DropTarget.prototype = {
         options: {
             group: "default"
         },
-        _over: function(e) {
-            if (draggables[this.group])
-            console.log("dragenter");
-        }, _out: function(e) {
-            if (draggables[this.group])
-            console.log("dragleave");
+
+        _trigger: function(eventName) {
+            var that = this,
+                draggable = draggables[that.group];
+
+            if (draggable) {
+                that.trigger(eventName, {
+                    draggable: draggable
+                });
+            }
         },
+
+        _over: function() {
+            this._trigger("dragenter");
+        },
+
+        _out: function(e) {
+            this._trigger("dragleave");
+        },
+
         _drop: function(e) {
-            if (draggables[this.group])
-            console.log("drop");
+            this._trigger("drop");
         }
     }
 
-    kendo.ui.plugin("DropTarget", DropTarget, kendo.ui.Component);
+    kendo.ui.plugin("DropTarget", DropTarget, Component);
 
     function Draggable(element, options) {
         var that = this;
 
-        kendo.ui.Component.apply(that, arguments);
+        Component.apply(that, arguments);
 
         bind(that.element, that.options.filter, MOUSEDOWN, proxy(that._wait, that));
 
@@ -74,61 +90,65 @@
         },
 
         _wait: function (e) {
-            this._startPosition = { x: e.pageX, y: e.pageY };
-            this._currentTarget = e.currentTarget;
-            $(document).bind( {
-                mousemove: this._startProxy,
-                mouseup: this._destroyProxy
-            });
+            var that = this;
+            that._startPosition = { x: e.pageX, y: e.pageY };
+            that._currentTarget = e.currentTarget;
+            $(document).bind(MOUSEMOVE, that._startProxy)
+                       .bind(MOUSEUP, that._destroyProxy);
         },
 
         _start: function(e) {
-            var x = this._startPosition.x - e.pageX, 
-                y = this._startPosition.y - e.pageY;
+            var that = this,
+                x = that._startPosition.x - e.pageX,
+                y = that._startPosition.y - e.pageY,
+                distance = Math.sqrt((x * x) + (y * y));
 
-            var distance = Math.sqrt((x * x) + (y * y));
+            if (distance >= that.options.distance) {
+                draggables[that.group] = that;
 
-            if (distance >= this.options.distance) {
-                draggables[this.group] = this;
+                $(document).unbind(MOUSEMOVE, that._startProxy)
+                           .unbind(MOUSEUP, that._destroyProxy)
+                           .bind(MOUSEUP, that._stopProxy)
+                           .bind(KEYDOWN, that._stopProxy)
+                           .bind(MOUSEMOVE, that._dragProxy)
+                           .bind(SELECTSTART, false);
 
-                $(document).unbind(MOUSEMOVE, this._startProxy)
-                           .unbind(MOUSEUP, this._destroyProxy)
-                           .bind({
-                               "mouseup keydown": this._stopProxy,
-                               mousemove: this._dragProxy,
-                               selectstart: false
-                           });
-
-               this.trigger("dragstart", {
-                    currentTarget: this._currentTarget
+               that.trigger("dragstart", {
+                    currentTarget: that._currentTarget
                });
             }
         },
 
         _drag: function(e) {
-            this.trigger("drag", {
-                currentTarget: this._currentTarget
+            var that = this;
+            that.trigger("drag", {
+                currentTarget: that._currentTarget
             });
         },
 
         _stop: function(e) {
+            var that = this;
+
             if (e.type == MOUSEUP || e.keyCode == 27) {
-                this.trigger("dragend", {
-                    currentTarget: this._currentTarget
+                that.trigger("dragend", {
+                    currentTarget: that._currentTarget
                 });
-                this._destroy();
+                that._destroy();
             }
         },
 
         _destroy: function(e) {
-            delete draggables[this.group];
-            $(document).unbind("mouseup keydown", this._stopProxy)
-                       .unbind(MOUSEMOVE, this._dragProxy)
-                       .unbind(MOUSEMOVE, this._startProxy)
-                       .unbind("selectstart", false);
+            var that = this;
+
+            delete draggables[that.group];
+            $(document).unbind(MOUSEUP, that._stopProxy)
+                       .unbind(KEYDOWN, that._stopProxy)
+                       .unbind(MOUSEMOVE, that._dragProxy)
+                       .unbind(MOUSEMOVE, that._startProxy)
+                       .unbind(SELECTSTART, false);
         }
     }
 
-    kendo.ui.plugin("Draggable", Draggable, kendo.ui.Component);
+    kendo.ui.plugin("Draggable", Draggable, Component);
 
    })(jQuery, window);
