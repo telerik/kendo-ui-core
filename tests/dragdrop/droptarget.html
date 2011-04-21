@@ -20,17 +20,88 @@
 
         <script>
             var DropTarget = kendo.ui.DropTarget,
-                span;
+                Draggable = kendo.ui.Draggable,
+                span,
+                draggable;
 
             module("kendo.ui.DropTarget", {
                 setup: function() {
                     span = $("<span/>").appendTo(document.body);
+                    draggable = new Draggable(span);
                 },
                 teardown: function() {
+                    draggable._destroy();
                     span.remove();
+                    $(document.body).unbind();
                 }
             });
 
+            test("dragenter is raised", function() {
+                var e, dropTarget = new DropTarget(document.body, {
+                        dragenter: function() {
+                            e = arguments[0];
+                        }
+                    });
+
+                draggable._wait({ pageX: 0, pageY: 0 });
+                draggable._start({ pageX: 10, pageY: 0 });
+
+                dropTarget._over();
+
+                ok(e);
+                ok(e.draggable === draggable);
+            });
+
+            test("dragleave is raised", function() {
+                var e, dropTarget = new DropTarget(document.body, {
+                        dragleave: function() {
+                            e = arguments[0];
+                        }
+                    });
+
+                draggable._wait({ pageX: 0, pageY: 0 });
+                draggable._start({ pageX: 10, pageY: 0 });
+
+                dropTarget._over();
+                dropTarget._out();
+
+                ok(e);
+                ok(e.draggable === draggable);
+            });
+
+            test("drop is raised", function() {
+                var e, dropTarget = new DropTarget(document.body, {
+                        drop: function() {
+                            e = arguments[0];
+                        }
+                    });
+
+                draggable._wait({ pageX: 0, pageY: 0 });
+                draggable._start({ pageX: 10, pageY: 0 });
+
+                dropTarget._over();
+                dropTarget._drop();
+
+                ok(e);
+                ok(e.draggable === draggable);
+            });
+
+            test("dragenter is not raised for draggable from a different group", function() {
+                var draggable = new Draggable(span, { group: "foo" }),
+                    e,
+                    dropTarget = new DropTarget(document.body, {
+                        dragenter: function() {
+                            e = arguments[0];
+                        }
+                    });
+
+                draggable._wait({ pageX: 0, pageY: 0 });
+                draggable._start({ pageX: 10, pageY: 0 });
+
+                dropTarget._over();
+
+                ok(!e);
+            });
         </script>
     </body>
 </html>
