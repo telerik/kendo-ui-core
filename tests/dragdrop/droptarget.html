@@ -36,6 +36,10 @@
                 }
             });
 
+            function ev(options) {
+                return $.extend(new $.Event, options);
+            }
+
             test("dragenter is raised", function() {
                 var e, dropTarget = new DropTarget(document.body, {
                         dragenter: function() {
@@ -43,8 +47,8 @@
                         }
                     });
 
-                draggable._wait({ pageX: 0, pageY: 0 });
-                draggable._start({ pageX: 10, pageY: 0 });
+                draggable._wait(ev({ pageX: 0, pageY: 0 }));
+                draggable._start(ev({ pageX: 10, pageY: 0 }));
 
                 dropTarget._over();
 
@@ -59,8 +63,8 @@
                         }
                     });
 
-                draggable._wait({ pageX: 0, pageY: 0 });
-                draggable._start({ pageX: 10, pageY: 0 });
+                draggable._wait(ev({ pageX: 0, pageY: 0 }));
+                draggable._start(ev({ pageX: 10, pageY: 0 }));
 
                 dropTarget._over();
                 dropTarget._out();
@@ -76,8 +80,8 @@
                         }
                     });
 
-                draggable._wait({ pageX: 0, pageY: 0 });
-                draggable._start({ pageX: 10, pageY: 0 });
+                draggable._wait(ev({ pageX: 0, pageY: 0 }));
+                draggable._start(ev({ pageX: 10, pageY: 0 }));
 
                 dropTarget._over();
                 dropTarget._drop();
@@ -95,8 +99,8 @@
                         }
                     });
 
-                draggable._wait({ pageX: 0, pageY: 0 });
-                draggable._start({ pageX: 10, pageY: 0 });
+                draggable._wait(ev({ pageX: 0, pageY: 0 }));
+                draggable._start(ev({ pageX: 10, pageY: 0 }));
 
                 dropTarget._over();
 
