@@ -158,6 +158,51 @@
 
                 ok(!e);
             });
-        </script>
+
+            test("dom event argument is passed to the drop event", function() {
+                var e, dropTarget = setup( {
+                        drop: function() {
+                            e = arguments[0];
+                        }
+                    });
+
+                draggable._wait(ev({ pageX: 0, pageY: 0 }));
+                draggable._start(ev({ pageX: 10, pageY: 0 }));
+
+                dropTarget.element.trigger({ type: "mouseup", pageX: 10 });
+
+                ok(e.pageX);
+            });
+
+            test("dom event argument is passed to the dragenter event", function() {
+                var e, dropTarget = setup( {
+                        dragenter: function() {
+                            e = arguments[0];
+                        }
+                    });
+
+                draggable._wait(ev({ pageX: 0, pageY: 0 }));
+                draggable._start(ev({ pageX: 10, pageY: 0 }));
+
+                dropTarget.element.trigger({ type: "mouseenter", pageX: 10 });
+
+                ok(e.pageX);
+            });
+
+            test("dom event argument is passed to the dragleave event", function() {
+                var e, dropTarget = setup( {
+                        dragleave: function() {
+                            e = arguments[0];
+                        }
+                    });
+
+                draggable._wait(ev({ pageX: 0, pageY: 0 }));
+                draggable._start(ev({ pageX: 10, pageY: 0 }));
+
+                dropTarget.element.trigger({ type: "mouseleave", pageX: 10 });
+
+                ok(e.pageX);
+            });
+       </script>
     </body>
 </html>
