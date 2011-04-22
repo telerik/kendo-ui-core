@@ -1,3 +1,20 @@
+function getCssPrefix() {
+  if (!this._cssPrefix) {
+    this._cssPrefix = '';
+    if ($.browser.mozilla) {
+      this._cssPrefix = '-moz-';
+    } else if ($.browser.webkit) {
+      this._cssPrefix = '-webkit-';
+    } else if ($.browser.opera) {
+      this._cssPrefix = '-o-';
+    } else if ($.browser.msie) {
+      this._cssPrefix = '-ms-';
+    }
+  }
+
+  return this._cssPrefix;
+}
+
 function Scroller (element) {
     this.element = $(element);
 
@@ -19,7 +36,7 @@ function Scroller (element) {
         $.extend( this.options, arguments[1] );
 
     this.xScrollbar = $('<div class="touch-scrollbar horizontal-scrollbar" />');
-    this.yScrollbar = this.xScrollbar.clone().replaceClass('horizontal-scrollbar', 'vertical-scrollbar');
+    this.yScrollbar = this.xScrollbar.clone().removeClass('horizontal-scrollbar').addClass('vertical-scrollbar');
     this._scrollbars = $().add(this.xScrollbar).add(this.yScrollbar);
     this.webkit3d = 'WebKitCSSMatrix' in window && 'm11' in new WebKitCSSMatrix();
 
@@ -29,8 +46,8 @@ function Scroller (element) {
     this._gestureStartProxy = $.proxy(this._onGestureStart, this);
     this._gestureEndProxy = $.proxy(this._onGestureEnd, this);
 
-    this._transformProperty = $.getCssPrefix() + 'transform';
-    this._transformOrigin = $.getCssPrefix() + 'transform-origin';
+    this._transformProperty = getCssPrefix() + 'transform';
+    this._transformOrigin = getCssPrefix() + 'transform-origin';
     this._translate3DPrefix = 'translate' + (this.webkit3d ? '3d(' : '(');
     this._translate3DSuffix = (this.webkit3d ? ', 0)' : ')');
     

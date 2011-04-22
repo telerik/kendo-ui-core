@@ -1,4 +1,4 @@
-jsonpCallback([
+loadTodoItems([
     { title: "Change a lightbulb together with the team", done: true },
     { title: "Shop groceries", done: false },
     { title: "Go through issues on GitHub", done: false },
@@ -25,4 +25,4 @@ jsonpCallback([
     { title: "Create blue portal", done: true },
     { title: "Jump fanatically through portals", done: false },
     { title: "Make another list of tommorow's tasks", done: false }
-]);
+])

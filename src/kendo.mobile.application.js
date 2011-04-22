@@ -18,13 +18,13 @@ Application.prototype = {
     },
 
     show: function(viewIndex, options) {
-        var view = this.views[viewIndex]; 
-        
-        view.show(this.root);
-
         if (this.currentView) {
             this.currentView.hide();
         }
+
+        var view = this.views[viewIndex]; 
+        
+        view.show(this.root);
 
         this.currentView = view;
     }

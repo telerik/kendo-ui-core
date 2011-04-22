@@ -435,11 +435,15 @@ var Zepto = (function(selector, context) {
     $.fn.init.prototype = $.fn;
 
     $.extend = $.fn.extend = function(target, source) {
-        if (!source) {
+        if (!source && arguments.length == 2) {
             source = target;
             target = this;
         }
-        for (key in source) target[key] = source[key];
+
+        for (var i = 1; i < arguments.length; i++) {
+            var source = arguments[i];
+            for (key in source) target[key] = source[key];
+        }
         return target
     };
     $.qsa = $$ = function(element, selector) {
