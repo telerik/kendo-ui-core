@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.format Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <link rel="stylesheet" href="../qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.format Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+            var format = kendo.format;
+
+            test("format replaces the placeholder with the specified value", function() {
+                equal(format("foo {0}", "bar"), "foo bar");
+            });
+
+            test("format replaces all instances of the placeholder", function() {
+                equal(format("foo {0} {0}", "bar"), "foo bar bar");
+            });
+
+            test("format replaces multiple placeholders", function() {
+                equal(format("foo {0} {1}", "bar", "baz"), "foo bar baz");
+            });
+
+            test("format replaces multiple placeholders when there are missing arguments", function() {
+                equal(format("foo {0} {1}", "bar"), "foo bar ");
+            });
+
+            test("format with null arguments", function() {
+                equal(format("{0}", null), "null");
+            });
+
+            test("format with reverse order of placeholders", function() {
+                equal(format("{1} {0}", "foo", "bar"), "bar foo");
+            });
+
+            test("format with reverse order of placeholders", function() {
+                kendo.formatters["number"] = function() {
+                    return "bogus";
+                };
+
+                equal(format("{0}", 1), "1");
+            });
+
+            test("format uses the formatter for the argument type", function() {
+                var fmt, value;
+                kendo.formatters["number"] = function() {
+                    fmt = arguments[0];
+                    value = arguments[1];
+                };
+
+                format("{0:d}", 1);
+
+                equal(fmt, "d");
+                equal(value, 1);
+            });
+       </script>
+    </body>
+</html>
