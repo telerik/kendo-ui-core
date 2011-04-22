@@ -1,21 +1,24 @@
-﻿(function ($, window) {
+﻿(function ($, window, undefined) {
     var kendo = window.kendo,
+        document = window.document,
         Component = kendo.ui.Component,
         proxy = $.proxy,
         draggables = {},
-        MOUSEENTER = "mouseneter",
+        NAMESPACE = ".kendo-dnd",
+        MOUSEENTER = "mouseenter",
         MOUSEUP = "mouseup",
         MOUSEDOWN = "mousedown",
         MOUSEMOVE = "mousemove",
+        KEYDOWN = "keydown",
+        MOUSELEAVE = "mouseleave",
+        SELECTSTART = "selectstart",
+
         DRAGSTART = "dragstart",
         DRAGEND = "dragend",
         DRAG = "drag",
         DRAGENTER = "dragenter",
         DRAGLEAVE = "dragleave",
-        DROP = "drop",
-        KEYDOWN = "keydown",
-        MOUSELEAVE = "mouseleave",
-        SELECTSTART = "selectstart";
+        DROP = "drop";
 
     function bind(element, filter, eventName, handler) {
         if (filter) {
@@ -28,13 +31,12 @@
     function DropTarget(element, options) {
         var that = this;
 
-        Component.apply(that, arguments); 
+        Component.apply(that, arguments);
 
         that.element.bind(MOUSEENTER, proxy(that._over, that))
                     .bind(MOUSEUP, proxy(that._drop, that))
                     .bind(MOUSELEAVE, proxy(that._out, that));
 
-        that.group = that.options.group;
         that.bind([DRAGENTER, DRAGLEAVE, DROP], that.options);
     }
 
@@ -45,7 +47,7 @@
 
         _trigger: function(eventName) {
             var that = this,
-                draggable = draggables[that.group];
+                draggable = draggables[that.options.group];
 
             if (draggable) {
                 that.trigger(eventName, {
@@ -74,16 +76,7 @@
 
         Component.apply(that, arguments);
 
-        bind(that.element, that.options.filter, MOUSEDOWN, proxy(that._wait, that));
-
-        that.element.bind(DRAGSTART, false);
-
-        that._startProxy = proxy(that._start, that);
-        that._destroyProxy = proxy(that._destroy, that);
-        that._stopProxy = proxy(that._stop, that);
-        that._dragProxy = proxy(that._drag, that);
-
-        that.group = that.options.group;
+        bind(that.element, that.options.filter, MOUSEDOWN + NAMESPACE, proxy(that._wait, that));
 
         that.bind([DRAGSTART, DRAG, DRAGEND], that.options);
     }
@@ -91,47 +84,85 @@
     Draggable.prototype = {
         options: {
             distance: 5,
-            group: "default"
+            group: "default",
+            cursorOffset: {
+                left: 10,
+                top: 10
+            }
         },
 
         _wait: function (e) {
             var that = this;
-            that._startPosition = { x: e.pageX, y: e.pageY };
+
+            that._offset = { x: e.pageX, y: e.pageY };
             that.currentTarget = e.currentTarget;
-            $(document).bind(MOUSEMOVE, that._startProxy)
-                       .bind(MOUSEUP, that._destroyProxy);
+            $(document).bind(MOUSEMOVE + NAMESPACE, proxy(that._start, that))
+                       .bind(MOUSEUP + NAMESPACE, proxy(that._destroy, that));
+
+            // Prevent text selection for Gecko and WebKit
+            e.preventDefault();
         },
 
         _start: function(e) {
             var that = this,
-                x = that._startPosition.x - e.pageX,
-                y = that._startPosition.y - e.pageY,
-                distance = Math.sqrt((x * x) + (y * y));
+                pageX = e.pageX,
+                pageY = e.pageY,
+                x = that._offset.x - pageX,
+                y = that._offset.y - pageY,
+                distance = Math.sqrt((x * x) + (y * y)),
+                options = that.options,
+                cursorOffset = options.cursorOffset,
+                hint = options.hint;
 
-            if (distance >= that.options.distance) {
-                draggables[that.group] = that;
+            if (distance >= options.distance) {
+                if (hint) {
+                    that._hint = $.isFunction(hint) ? hint() : hint;
 
-                $(document).unbind(MOUSEMOVE, that._startProxy)
-                           .unbind(MOUSEUP, that._destroyProxy)
-                           .bind(MOUSEUP, that._stopProxy)
-                           .bind(KEYDOWN, that._stopProxy)
-                           .bind(MOUSEMOVE, that._dragProxy)
-                           .bind(SELECTSTART, false);
+                    that._hint.css( {
+                        position: "absolute",
+                        left: pageX + cursorOffset.left,
+                        top: pageY + cursorOffset.top
+                    })
+                    .appendTo(document.body);
+                }
+
+                draggables[options.group] = that;
+
+                $(document).unbind(NAMESPACE)
+                           .bind(MOUSEUP + NAMESPACE + " " + KEYDOWN + NAMESPACE, proxy(that._stop, that))
+                           .bind(MOUSEMOVE + NAMESPACE, proxy(that._drag, that))
+                           .bind(SELECTSTART + NAMESPACE, false);
 
                 that._trigger(DRAGSTART);
             }
         },
 
         _drag: function(e) {
-            this._trigger(DRAG);
+            var that = this,
+                cursorOffset = that.options.cursorOffset;
+
+            that._trigger(DRAG);
+
+            if (that._hint) {
+                that._hint.css( {
+                    left: e.pageX + cursorOffset.left,
+                    top: e.pageY + cursorOffset.top
+                });
+            }
         },
 
         _stop: function(e) {
-            var that = this;
+            var that = this,
+                destroy = proxy(that._destroy, that);
 
             if (e.type == MOUSEUP || e.keyCode == 27) {
                 that._trigger(DRAGEND);
-                that._destroy();
+
+                if (that._hint) {
+                    that._hint.animate(that.element.offset(), "fast", destroy);
+                } else {
+                    destroy();
+                }
             }
         },
 
@@ -146,13 +177,14 @@
         _destroy: function(e) {
             var that = this;
 
-            delete draggables[that.group];
+            if (that._hint) {
+                that._hint.remove();
+                that._hint = undefined;
+            }
 
-            $(document).unbind(MOUSEUP, that._stopProxy)
-                       .unbind(KEYDOWN, that._stopProxy)
-                       .unbind(MOUSEMOVE, that._dragProxy)
-                       .unbind(MOUSEMOVE, that._startProxy)
-                       .unbind(SELECTSTART, false);
+            delete draggables[that.options.group];
+
+            $(document).unbind(NAMESPACE);
         }
     }
 

@@ -30,8 +30,11 @@
                 $(".draggable.first").kendoDraggable( {
                     group: 1,
                     filter: "span:first",
+                    hint: function() {
+                        return $(".draggable span:first").clone().css("background", "red").css("white-space", "nowrap");
+                    },
                     drag: function() {
-                        console.log("drag");
+                       // console.log("drag");
                     },
                     dragstart: function() {
                         console.log("dragstart");
