@@ -203,6 +203,17 @@
 
                 ok(e.pageX);
             });
+
+            test("droptarget marks the draggable as dropped", function() {
+                var e, dropTarget = setup();
+
+                draggable._wait(ev({ pageX: 0, pageY: 0 }));
+                draggable._start(ev({ pageX: 10, pageY: 0 }));
+
+                dropTarget._drop();
+
+                ok(draggable.dropped);
+            });
        </script>
     </body>
 </html>
