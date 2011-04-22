@@ -201,6 +201,46 @@
                 ok(e.currentTarget === span.find("span")[0]);
             });
 
+            test("dom event argument is passed to the dragstart event", function() {
+                var e, draggable = setup({ 
+                        dragstart: function() {
+                            e = arguments[0];
+                        }
+                    });
+
+                draggable.element.trigger(ev({ type: "mousedown", pageX:0, pageY: 0 }));
+                $(document).trigger( { type: "mousemove", pageX: 10, pageY: 0 } );
+
+                ok(e.pageX);
+            });
+
+            test("dom event argument is passed to the dragend event", function() {
+                var e, draggable = setup({ 
+                        dragend: function() {
+                            e = arguments[0];
+                        }
+                    });
+
+                draggable.element.trigger(ev({ type: "mousedown", pageX:0, pageY: 0 }));
+                $(document).trigger( { type: "mousemove", pageX: 10, pageY: 0 } );
+                $(document).trigger( { type: "mouseup", pageX: 10, pageY: 0 } );
+
+                ok(e.pageX);
+            });
+
+            test("dom event argument is passed to the drag event", function() {
+                var e, draggable = setup({ 
+                        drag: function() {
+                            e = arguments[0];
+                        }
+                    });
+
+                draggable.element.trigger(ev({ type: "mousedown", pageX:0, pageY: 0 }));
+                $(document).trigger( { type: "mousemove", pageX: 10, pageY: 0 } );
+                $(document).trigger( { type: "mousemove", pageX: 10, pageY: 0 } );
+
+                ok(e.pageX);
+            });
         </script>
     </body>
 </html>

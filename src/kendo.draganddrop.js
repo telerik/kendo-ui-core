@@ -3,6 +3,7 @@
         document = window.document,
         Component = kendo.ui.Component,
         proxy = $.proxy,
+        extend = $.extend,
         draggables = {},
         NAMESPACE = ".kendo-dnd",
         MOUSEENTER = "mouseenter",
@@ -45,27 +46,27 @@
             group: "default"
         },
 
-        _trigger: function(eventName) {
+        _trigger: function(e, eventName) {
             var that = this,
                 draggable = draggables[that.options.group];
 
             if (draggable) {
-                that.trigger(eventName, {
+                that.trigger(eventName, extend({}, e, {
                     draggable: draggable
-                });
+                }));
             }
         },
 
-        _over: function() {
-            this._trigger(DRAGENTER);
+        _over: function(e) {
+            this._trigger(e, DRAGENTER);
         },
 
         _out: function(e) {
-            this._trigger(DRAGLEAVE);
+            this._trigger(e, DRAGLEAVE);
         },
 
         _drop: function(e) {
-            this._trigger(DROP);
+            this._trigger(e, DROP);
         }
     }
 
@@ -133,7 +134,7 @@
                            .bind(MOUSEMOVE + NAMESPACE, proxy(that._drag, that))
                            .bind(SELECTSTART + NAMESPACE, false);
 
-                that._trigger(DRAGSTART);
+                that._trigger(e, DRAGSTART);
             }
         },
 
@@ -141,7 +142,7 @@
             var that = this,
                 cursorOffset = that.options.cursorOffset;
 
-            that._trigger(DRAG);
+            that._trigger(e, DRAG);
 
             if (that._hint) {
                 that._hint.css( {
@@ -156,7 +157,7 @@
                 destroy = proxy(that._destroy, that);
 
             if (e.type == MOUSEUP || e.keyCode == 27) {
-                that._trigger(DRAGEND);
+                that._trigger(e, DRAGEND);
 
                 if (that._hint) {
                     that._hint.animate(that.element.offset(), "fast", destroy);
@@ -166,12 +167,12 @@
             }
         },
 
-        _trigger: function(eventName) {
+        _trigger: function(e, eventName) {
             var that = this;
 
-            that.trigger(eventName, {
+            that.trigger(eventName, extend({}, e, {
                 currentTarget: that.currentTarget
-            });
+            }));
         },
 
         _destroy: function(e) {
