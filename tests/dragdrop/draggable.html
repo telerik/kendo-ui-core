@@ -35,8 +35,12 @@
                 return $.extend(new $.Event, options);
             }
 
+            function setup(options) {
+                return new Draggable(span, options);
+            }
+
             test("stores the current position on mousedown", function() {
-                var draggable = new Draggable(span);
+                var draggable = setup();
 
                 draggable.element.trigger("mousedown");
                 ok(draggable._offset !== undefined);
@@ -44,13 +48,28 @@
 
             test("moving the mouse beyond the allowed distance triggers the dragstart event", function() {
                 var dragstartWasCalled = false,
-                    draggable = new Draggable(span, { dragstart: function() {
+                    draggable = setup({ 
+                        dragstart: function() {
                             dragstartWasCalled = true;
                         }
                     });
 
                 draggable._wait(ev({ pageX:0, pageY: 0 }));
                 draggable._start(ev({ pageX:10, pageY: 0 }));
+
+                ok(dragstartWasCalled);
+            });
+
+            test("dragstart is triggered after mouse down and mouse move", function() {
+                var dragstartWasCalled = false,
+                    draggable = setup({ 
+                        dragstart: function() {
+                            dragstartWasCalled = true;
+                        }
+                    });
+
+                draggable.element.trigger(ev({ type: "mousedown", pageX:0, pageY: 0 }));
+                $(document).trigger( { type: "mousemove", pageX: 10, pageY: 0 } );
 
                 ok(dragstartWasCalled);
             });
@@ -70,7 +89,23 @@
 
             test("drag event is raised during dragging", function() {
                 var dragWasCalled = false,
-                    draggable = new Draggable(span, { drag: function() {
+                    draggable = setup({
+                        drag: function() {
+                            dragWasCalled = true;
+                        }
+                    });
+
+                draggable.element.trigger(ev({ type: "mousedown", pageX:0, pageY: 0 }));
+                $(document).trigger( { type: "mousemove", pageX: 10, pageY: 0 } );
+                $(document).trigger( { type: "mousemove", pageX: 10, pageY: 0 } );
+
+                ok(dragWasCalled);
+            });
+
+            test("drag event is raised when the user is moving the mouse", function() {
+                var dragWasCalled = false,
+                    draggable = setup({ 
+                        drag: function() {
                             dragWasCalled = true;
                         }
                     });
@@ -80,7 +115,7 @@
                 ok(dragWasCalled);
             });
 
-            test("dragend event is raised when the user releases the mouse", function() {
+            test("dragend event is raised", function() {
                 var dragEndWasCalled = false,
                     draggable = new Draggable(span, { dragend: function() {
                             dragEndWasCalled = true;
@@ -88,6 +123,21 @@
                     });
 
                 draggable._stop({type: "mouseup"});
+
+                ok(dragEndWasCalled);
+            });
+
+            test("dragend event is raised when the user releases the mouse", function() {
+                var dragEndWasCalled = false,
+                    draggable = new Draggable(span, { dragend: function() {
+                            dragEndWasCalled = true;
+                        }
+                    });
+
+                draggable.element.trigger(ev({ type: "mousedown", pageX:0, pageY: 0 }));
+                $(document).trigger( { type: "mousemove", pageX: 10, pageY: 0 } );
+                $(document).trigger( { type: "mousemove", pageX: 10, pageY: 0 } );
+                $(document).trigger( { type: "mouseup" } );
 
                 ok(dragEndWasCalled);
             });
@@ -151,6 +201,46 @@
                 ok(e.currentTarget === span.find("span")[0]);
             });
 
+            test("dom event argument is passed to the dragstart event", function() {
+                var e, draggable = setup({ 
+                        dragstart: function() {
+                            e = arguments[0];
+                        }
+                    });
+
+                draggable.element.trigger(ev({ type: "mousedown", pageX:0, pageY: 0 }));
+                $(document).trigger( { type: "mousemove", pageX: 10, pageY: 0 } );
+
+                ok(e.pageX);
+            });
+
+            test("dom event argument is passed to the dragend event", function() {
+                var e, draggable = setup({ 
+                        dragend: function() {
+                            e = arguments[0];
+                        }
+                    });
+
+                draggable.element.trigger(ev({ type: "mousedown", pageX:0, pageY: 0 }));
+                $(document).trigger( { type: "mousemove", pageX: 10, pageY: 0 } );
+                $(document).trigger( { type: "mouseup", pageX: 10, pageY: 0 } );
+
+                ok(e.pageX);
+            });
+
+            test("dom event argument is passed to the drag event", function() {
+                var e, draggable = setup({ 
+                        drag: function() {
+                            e = arguments[0];
+                        }
+                    });
+
+                draggable.element.trigger(ev({ type: "mousedown", pageX:0, pageY: 0 }));
+                $(document).trigger( { type: "mousemove", pageX: 10, pageY: 0 } );
+                $(document).trigger( { type: "mousemove", pageX: 10, pageY: 0 } );
+
+                ok(e.pageX);
+            });
         </script>
     </body>
 </html>
