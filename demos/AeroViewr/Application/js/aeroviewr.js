@@ -83,7 +83,7 @@
                         return result.photos.photo;
                     },
                     total: function(result) {
-                        return result.photos.total < 500 ? result.photos.total : 500;
+                        return Math.min(result.photos.total, 500);
                     }
                 }
             });
