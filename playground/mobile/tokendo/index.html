@@ -12,22 +12,13 @@
     <link rel="stylesheet" href="scroll-container.css" />
     <link rel="stylesheet" href="tokendo.css" />
 
-    <script src="../src/zepto.js"></script>
-    <script src="../src/detect.js"></script>
-    <script src="../src/fx.js"></script>
-    <script src="../src/event.js"></script>
-
-    <script>
-        var jQuery = Zepto;
-    </script>
-
+    <script src="../../../src/jquery.js"></script>
     <script src="../../../src/kendo.loader.js"></script>
-    <!-- TODO: use loader to load these -->
     <script>
         kendo.loader.define({
             mobile: {
                 url: "kendo.mobile.application.js",
-                depends: "core",
+                depends: [ "core", "datasource" ],
                 features: {
                     view: {
                         url: "kendo.mobile.view.js"
@@ -39,9 +30,11 @@
             }
         });
 
+        kendo.loader.datasource();
         kendo.loader.mobile({
             view: {},
-            scrollableView: {}
+            scrollableView: {},
+            dataBoundView: {}
         }, function() {
             var application = new Application({
                 splashScreen: "images/kendo_big.png"
@@ -80,15 +73,34 @@
                     $this.toggleClass('input-checked', document.getElementById($this.attr('for')).checked);
                 });
 
-                // load data
-                var dataLoader = document.createElement('script');
-                dataLoader.src = "tokendo.data.js";
-                document.getElementsByTagName("head")[0].appendChild(dataLoader);
-            });
+                var dataSource = new kendo.data.DataSource({
+                    page: 1,
+                    pageSize: 20,
+                    transport: {
+                        read: {
+                            url: "tokendo.data.js",
+                            cache: true,
+                            dataType: "jsonp",
+                            jsonpCallback: "loadTodoItems"
+                        },
+                        cache: "localstorage"
+                    },
+                    reader: {
+                        data: function(result) {
+                            return result;
+                        },
+                        total: function(result) {
+                            return result;
+                        }
+                    }
+                });
 
-            window.jsonpCallback = function (data) {
-                taskList.bind(data);
-            }
+                dataSource.bind("change", function() {
+                    taskList.bind(dataSource.view());
+                });
+
+                dataSource.read();
+            });
     });
     </script>
  </head>
