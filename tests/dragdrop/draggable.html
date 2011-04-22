@@ -31,6 +31,10 @@
                 }
             });
 
+            function ev(options) {
+                return $.extend(new $.Event, options);
+            }
+
             test("stores the current position on mousedown", function() {
                 var draggable = new Draggable(span);
 
@@ -45,8 +49,8 @@
                         }
                     });
 
-                draggable._wait({ pageX:0, pageY: 0 });
-                draggable._start({ pageX:10, pageY: 0 });
+                draggable._wait(ev({ pageX:0, pageY: 0 }));
+                draggable._start(ev({ pageX:10, pageY: 0 }));
 
                 ok(dragstartWasCalled);
             });
@@ -58,8 +62,8 @@
                         }
                     });
 
-                draggable._wait({ pageX:0, pageY: 0 });
-                draggable._start({ pageX:0, pageY: 0 });
+                draggable._wait(ev({ pageX:0, pageY: 0 }));
+                draggable._start(ev({ pageX:0, pageY: 0 }));
 
                 ok(!dragstartWasCalled);
             });
