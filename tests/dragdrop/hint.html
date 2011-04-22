@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.ui.Draggable hint tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <link rel="stylesheet" href="../qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.ui.Draggable hint tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+            var Draggable = kendo.ui.Draggable,
+                span,
+                hint;
+
+            module("kendo.ui.Draggable", {
+                setup: function() {
+                    span = $("<span/>").appendTo(document.body);
+                    hint = span.clone();
+                },
+                teardown: function() {
+                    span.remove();
+                    hint.remove();
+                }
+            });
+
+            function setup(options) {
+                return new Draggable(span, $.extend({ hint: hint}, options ));
+            }
+
+            test("the hint is appended to the body", function() {
+                var draggable = setup();
+
+                draggable._wait( { pageX: 0, pageY: 0 });
+                draggable._start( { pageX: 10, pageY: 0 });
+
+                ok(hint.parent().is("body"));
+            });
+
+            test("the hint is made absolute", function() {
+                var draggable = setup();
+
+                draggable._wait( { pageX: 0, pageY: 0 });
+                draggable._start( { pageX: 10, pageY: 0 });
+
+                equal(hint.css("position"), "absolute");
+            });
+
+            test("the hint is removed from DOM after the draggable is destroyed", function() {
+                var draggable = setup();
+
+                draggable._wait( { pageX: 0, pageY: 0 });
+                draggable._start( { pageX: 10, pageY: 0 });
+                draggable._destroy();
+
+                equal(hint.parents().length, 0);
+            });
+
+            test("the hint is positioned using options.cursorAt", function() {
+                var draggable = setup({ cursorOffset: { left: 1, top: 1 } });
+
+                draggable._wait( { pageX: 0, pageY: 0 });
+                draggable._start( { pageX: 10, pageY: 0 });
+
+                equal(hint.css("top"), "1px");
+                equal(hint.css("left"), "11px");
+            });
+
+            test("the hint is repositioned during dragging", function() {
+                var draggable = setup();
+
+                draggable._wait( { pageX: 0, pageY: 0 });
+                draggable._start( { pageX: 10, pageY: 0 });
+                draggable._drag( { pageX: 100, pageY: 100 });
+
+                equal(hint.css("top"), "110px");
+                equal(hint.css("left"), "110px");
+            });
+
+            test("hint as a function", function() {
+                var h = new $("<span/>"),
+                    draggable = setup({ hint : function() { return h; } });
+
+                draggable._wait( { pageX: 0, pageY: 0 });
+                draggable._start( { pageX: 10, pageY: 0 });
+
+                ok(draggable._hint === h);
+            });
+      </script>
+    </body>
+</html>

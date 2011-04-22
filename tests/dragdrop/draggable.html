@@ -35,7 +35,7 @@
                 var draggable = new Draggable(span);
 
                 draggable.element.trigger("mousedown");
-                ok(draggable._startPosition !== undefined);
+                ok(draggable._offset !== undefined);
             });
 
             test("moving the mouse beyond the allowed distance triggers the dragstart event", function() {
