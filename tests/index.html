@@ -7,90 +7,39 @@
         <script src="qunit.js"></script>
         <script src="qunit-runner.js"></script>
         <script>
-            var tests = [{
+            var tests = [];
+        </script>
+        <script src="core/tests.js"></script>
+        <script src="data/tests.js"></script>
+        <script src="dragdrop/tests.js"></script>
+        <script src="grid/tests.js"></script>
+        <script>
+            tests.push(
+                {
                     page: "loader/unit.html",
                     title: "loader unit tests"
-                }, {
-                    page: "core/observable.html",
-                    title: "observable"
-                }, {
-                    page: "core/component.html",
-                    title: "component"
-                }, {
-                    page: "core/json.html",
-                    title: "json"
-                },{
-                    page: "core/template.html",
-                    title: "template"
-                },{
-                    page: "dragdrop/draggable.html",
-                    title: "draggable"
-                },{
-                    page: "dragdrop/hint.html",
-                    title: "draggable hint"
-                },{
-                    page: "dragdrop/droptarget.html",
-                    title: "droptarget"
-                },{
-                    page: "data/datasource/read.html",
-                    title: "datasource.read"
-                }, {
-                    page: "data/datasource/initialization.html",
-                    title: "datasource initialization"
-                }, {
-                    page: "data/datasource/create.html",
-                    title: "datasource.create"
-                }, {
-                    page: "data/datasource/destroy.html",
-                    title: "datasource.destroy"
-                }, {
-                    page: "data/datasource/update.html",
-                    title: "datasource.update"
-                }, {
-                    page: "data/datasource/find.html",
-                    title: "datasource.find / datasource.at"
-                }, {
-                    page: "data/datasource/query.html",
-                    title: "datasource.query"
-                },  {
-                    page: "data/query.html",
-                    title: "query"
-                }, {
-                    page: "data/localstorage.html",
-                    title: "local storage cache"
-                }, {
-                    page: "data/remotetransport.html",
-                    title: "remote transport"
-                }, {
-                    page: "data/inmemorycache.html",
-                    title: "in-memory cache"
-                }, {
+                },
+                {
                     page: "sortable/sortable.html",
                     title: "sortable"
-                },{
+                },
+                {
                     page: "mobile/list.html",
                     title: "mobile list"
-                }, {
+                },
+                {
                     page: "listView/listView.html",
                     title: "listView"
-                },{
+                },
+                {
                     page: "pager/pager.html",
                     title: "pager"
-                }, {
-                    page: "grid/initialization.html",
-                    title: "grid initialization"
-                }, {
-                    page: "grid/paging.html",
-                    title: "grid paging"
-                }, {
-                    page: "grid/sortable.html",
-                    title: "grid sortable"
-                }, {
-                    page: "grid/databinding.html",
-                    title: "grid databinding"
-                }],
-            sequential = true,
-            runnerDone = function (failures, total) {
+                }
+            );
+
+            var sequential = true;
+
+            var runnerDone = function (failures, total) {
                 $('<p id="qunit-testresult" class="result" />')
                 .html([
                     "Tests completed in ", (+new Date()) - start, " milliseconds.<br />",
@@ -107,12 +56,9 @@
     </head>
     <body>
         <div>
-            <h1 id="qunit-header">
-                TEST RUNNER</h1>
-            <h2 id="qunit-banner">
-            </h2>
-            <h2 id="qunit-runner-userAgent">
-            </h2>
+            <h1 id="qunit-header">TEST RUNNER</h1>
+            <h2 id="qunit-banner"></h2>
+            <h2 id="qunit-runner-userAgent"></h2>
             <div id="runner-test-page-container">
             </div>
         </div>
