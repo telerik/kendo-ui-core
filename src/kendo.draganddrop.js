@@ -28,13 +28,12 @@
     function DropTarget(element, options) {
         var that = this;
 
-        Component.apply(that, arguments); 
+        Component.apply(that, arguments);
 
         that.element.bind(MOUSEENTER, proxy(that._over, that))
                     .bind(MOUSEUP, proxy(that._drop, that))
                     .bind(MOUSELEAVE, proxy(that._out, that));
 
-        that.group = that.options.group;
         that.bind([DRAGENTER, DRAGLEAVE, DROP], that.options);
     }
 
@@ -45,7 +44,7 @@
 
         _trigger: function(eventName) {
             var that = this,
-                draggable = draggables[that.group];
+                draggable = draggables[that.options.group];
 
             if (draggable) {
                 that.trigger(eventName, {
@@ -83,8 +82,6 @@
         that._stopProxy = proxy(that._stop, that);
         that._dragProxy = proxy(that._drag, that);
 
-        that.group = that.options.group;
-
         that.bind([DRAGSTART, DRAG, DRAGEND], that.options);
     }
 
@@ -109,7 +106,7 @@
                 distance = Math.sqrt((x * x) + (y * y));
 
             if (distance >= that.options.distance) {
-                draggables[that.group] = that;
+                draggables[that.options.group] = that;
 
                 $(document).unbind(MOUSEMOVE, that._startProxy)
                            .unbind(MOUSEUP, that._destroyProxy)
@@ -146,7 +143,7 @@
         _destroy: function(e) {
             var that = this;
 
-            delete draggables[that.group];
+            delete draggables[that.options.group];
 
             $(document).unbind(MOUSEUP, that._stopProxy)
                        .unbind(KEYDOWN, that._stopProxy)
