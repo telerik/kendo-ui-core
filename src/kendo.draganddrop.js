@@ -46,27 +46,32 @@
             group: "default"
         },
 
-        _trigger: function(e, eventName) {
+        _trigger: function(eventName, e) {
             var that = this,
                 draggable = draggables[that.options.group];
 
             if (draggable) {
-                that.trigger(eventName, extend({}, e, {
-                    draggable: draggable
-                }));
+                return that.trigger(eventName, extend({}, e, {
+                           draggable: draggable
+                       }));
             }
         },
 
         _over: function(e) {
-            this._trigger(e, DRAGENTER);
+            this._trigger(DRAGENTER, e);
         },
 
         _out: function(e) {
-            this._trigger(e, DRAGLEAVE);
+            this._trigger(DRAGLEAVE, e);
         },
 
         _drop: function(e) {
-            this._trigger(e, DROP);
+            var that = this,
+                draggable = draggables[that.options.group];
+
+            if (draggable) {
+                draggable.dropped = !that._trigger(DROP, e);
+            }
         }
     }
 
@@ -89,7 +94,8 @@
             cursorOffset: {
                 left: 10,
                 top: 10
-            }
+            },
+            dropped: false
         },
 
         _wait: function (e) {
@@ -117,9 +123,9 @@
 
             if (distance >= options.distance) {
                 if (hint) {
-                    that._hint = $.isFunction(hint) ? hint() : hint;
+                    that.hint = $.isFunction(hint) ? $(hint()) : hint;
 
-                    that._hint.css( {
+                    that.hint.css( {
                         position: "absolute",
                         left: pageX + cursorOffset.left,
                         top: pageY + cursorOffset.top
@@ -134,7 +140,8 @@
                            .bind(MOUSEMOVE + NAMESPACE, proxy(that._drag, that))
                            .bind(SELECTSTART + NAMESPACE, false);
 
-                that._trigger(e, DRAGSTART);
+                that.dropped = false;
+                that._trigger(DRAGSTART, e);
             }
         },
 
@@ -142,10 +149,10 @@
             var that = this,
                 cursorOffset = that.options.cursorOffset;
 
-            that._trigger(e, DRAG);
+            that._trigger(DRAG, e);
 
-            if (that._hint) {
-                that._hint.css( {
+            if (that.hint) {
+                that.hint.css( {
                     left: e.pageX + cursorOffset.left,
                     top: e.pageY + cursorOffset.top
                 });
@@ -157,17 +164,17 @@
                 destroy = proxy(that._destroy, that);
 
             if (e.type == MOUSEUP || e.keyCode == 27) {
-                that._trigger(e, DRAGEND);
+                that._trigger(DRAGEND, e);
 
-                if (that._hint) {
-                    that._hint.animate(that.element.offset(), "fast", destroy);
+                if (that.hint && !that.dropped) {
+                    that.hint.animate(that.element.offset(), "fast", destroy);
                 } else {
                     destroy();
                 }
             }
         },
 
-        _trigger: function(e, eventName) {
+        _trigger: function(eventName, e) {
             var that = this;
 
             that.trigger(eventName, extend({}, e, {
@@ -178,9 +185,8 @@
         _destroy: function(e) {
             var that = this;
 
-            if (that._hint) {
-                that._hint.remove();
-                that._hint = undefined;
+            if (that.hint) {
+                that.hint.remove();
             }
 
             delete draggables[that.options.group];

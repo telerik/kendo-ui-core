@@ -98,7 +98,17 @@
                 draggable._wait(ev( { pageX: 0, pageY: 0 }) );
                 draggable._start( { pageX: 10, pageY: 0 });
 
-                ok(draggable._hint === h);
+                ok(draggable.hint[0] === h[0]);
+            });
+
+            test("hint as a function which returns a string", function() {
+                var draggable = setup({ hint : function() { return "<span>foo</span>"; } });
+
+                draggable._wait(ev( { pageX: 0, pageY: 0 }) );
+                draggable._start( { pageX: 10, pageY: 0 });
+
+                ok(draggable.hint.is("span"));
+                equal(draggable.hint.text(), "foo");
             });
       </script>
     </body>
