@@ -1,6 +1,7 @@
 ;(function($, window) {
     var kendo = window.kendo = window.kendo || {},
         extend = $.extend,
+        proxy = $.proxy,
         Template,
         JSON = JSON || {},
         support = {};
@@ -765,8 +766,8 @@
     extend(kendo, {
         Observable: Observable,
         Template: Template,
-        template: $.proxy(Template.compile, Template),
-        stringify: $.proxy(JSON.stringify, JSON),
+        template: proxy(Template.compile, Template),
+        stringify: proxy(JSON.stringify, JSON),
         format: format,
         toString: toString,
         formatters: formatters,
