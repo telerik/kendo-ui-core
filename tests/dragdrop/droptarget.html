@@ -40,8 +40,12 @@
                 return $.extend(new $.Event, options);
             }
 
+            function setup(options) {
+                return new DropTarget(document.body, options);
+            }
+
             test("dragenter is raised", function() {
-                var e, dropTarget = new DropTarget(document.body, {
+                var e, dropTarget = setup( {
                         dragenter: function() {
                             e = arguments[0];
                         }
@@ -56,8 +60,24 @@
                 ok(e.draggable === draggable);
             });
 
+            test("dragenter is raised when the mouse enters the drop target", function() {
+                var e, dropTarget = setup( {
+                        dragenter: function() {
+                            e = arguments[0];
+                        }
+                    });
+
+                draggable._wait(ev({ pageX: 0, pageY: 0 }));
+                draggable._start(ev({ pageX: 10, pageY: 0 }));
+
+                dropTarget.element.trigger({ type: "mouseenter" });
+
+                ok(e);
+                ok(e.draggable === draggable);
+            });
+
             test("dragleave is raised", function() {
-                var e, dropTarget = new DropTarget(document.body, {
+                var e, dropTarget = new setup( {
                         dragleave: function() {
                             e = arguments[0];
                         }
@@ -68,6 +88,22 @@
 
                 dropTarget._over();
                 dropTarget._out();
+
+                ok(e);
+                ok(e.draggable === draggable);
+            });
+
+            test("dragleave is raised when the mouse leaves the droptarget", function() {
+                var e, dropTarget = new setup( {
+                        dragleave: function() {
+                            e = arguments[0];
+                        }
+                    });
+
+                draggable._wait(ev({ pageX: 0, pageY: 0 }));
+                draggable._start(ev({ pageX: 10, pageY: 0 }));
+
+                dropTarget.element.trigger({ type: "mouseleave" });
 
                 ok(e);
                 ok(e.draggable === draggable);
@@ -85,6 +121,22 @@
 
                 dropTarget._over();
                 dropTarget._drop();
+
+                ok(e);
+                ok(e.draggable === draggable);
+            });
+
+            test("drop is raised when the user releases the mouse in the droptarget", function() {
+                var e, dropTarget = setup( {
+                        drop: function() {
+                            e = arguments[0];
+                        }
+                    });
+
+                draggable._wait(ev({ pageX: 0, pageY: 0 }));
+                draggable._start(ev({ pageX: 10, pageY: 0 }));
+
+                dropTarget.element.trigger({ type: "mouseup" });
 
                 ok(e);
                 ok(e.draggable === draggable);
