@@ -720,6 +720,26 @@
         return s;
     }
 
+    function format(fmt) {
+        var values = arguments;
+
+        return fmt.replace(/{(\d+)(:[^\}]+)?}/g, function(match, index, placeholderFormat) {
+            var value = values[parseInt(index) + 1];
+
+            return toString(value, placeholderFormat ? placeholderFormat.substring(1) : "");
+        });
+    }
+
+    function toString(value, fmt) {
+        var type = $.type(value);
+
+        if (formatters[type] && fmt) {
+            return formatters[type](fmt, value);
+        }
+
+        return value !== undefined ? value : "";
+    }
+
     // feature detection
     (function() {
         var table = document.createElement("table");
@@ -747,7 +767,9 @@
         Template: Template,
         template: $.proxy(Template.compile, Template),
         stringify: $.proxy(JSON.stringify, JSON),
-        formatString: formatString,
+        format: format,
+        toString: toString,
+        formatters: formatters,
         CultureInfo: CultureInfo
     });
 
