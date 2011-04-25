@@ -68,6 +68,7 @@
             });
 
             test("header data attributes - data-field", function() {
+                debugger
                 var grid = new Grid($('<table><th data-field="foo"></th><th data-field="bar"></th></table>')[0], { data: [] });
 
                 equal(grid.columns.length, 2);
@@ -159,6 +160,24 @@
                 var grid = new Grid($('<table><tr><td /><td/></tr></table>'));
 
                 equal(grid.dataSource.data().length, 1);
+            });
+
+            test("header text is used as a field if data-field attribute is not set", function() {
+                var grid = new Grid($('<table><th>Foo</th></table>'));
+
+                equal(grid.columns[0].field, "Foo");
+            });
+
+            test("data-field takes precedence over the header text", function() {
+                var grid = new Grid($('<table><th data-field="foo">Foo</th></table>'));
+
+                equal(grid.columns[0].field, "foo");
+            });
+
+            test("everything which is not alpha numeric is stripped from header text when used as a field", function() {
+                var grid = new Grid($('<table><th>  $@Foo1   Bar   </th></table>'));
+
+                equal(grid.columns[0].field, "Foo1Bar");
             });
 
        </script>
