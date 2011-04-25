@@ -204,18 +204,43 @@
 
     DataSource.create = function(options) {
         options = options || {};
-        var dataSource = options.dataSource,
-            data = options.data;
+        var dataSource = options.dataSource || {},
+            data = options.data || dataSource.data,
+            columns = dataSource.columns,
+            table = dataSource.table;
 
-        if (dataSource) {
-            return dataSource instanceof DataSource ? dataSource : new DataSource(dataSource);
+        if (!data && table && columns) {
+            data = infer(table, columns);
         }
 
-        if (data) {
-            return new DataSource({ data: data });
+        dataSource.data = data;
+
+        return dataSource instanceof DataSource ? dataSource : new DataSource(dataSource);
+    }
+
+    function infer(table, columns) {
+        var tbody = $(table)[0].tBodies[0],
+            rows = tbody ? tbody.rows : [],
+            rowIndex,
+            rowCount,
+            columnIndex,
+            columnCount = columns.length,
+            data = [],
+            cells,
+            record;
+
+        for (rowIndex = 0, rowCount = rows.length; rowIndex < rowCount; rowIndex++) {
+            record = {};
+            cells = rows[rowIndex].cells;
+
+            for (columnIndex = 0; columnIndex < columnCount; columnIndex++) {
+                record[columns[columnIndex].field] = cells[columnIndex].innerHTML;
+            }
+
+            data.push(record);
         }
 
-        return new DataSource();
+        return data;
     }
 
     extend(DataSource.prototype, new kendo.Observable, {

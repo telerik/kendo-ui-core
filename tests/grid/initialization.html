@@ -138,10 +138,9 @@
             });
 
             test("array passed as options is treated as data", function() {
-                var data = [];
+                var data = ["foo"];
                 var grid = new Grid(table(), data);
-
-                ok(grid.dataSource.data() === data);
+                ok(grid.dataSource.data()[0] === data[0]);
             });
 
             test("div wrapper is created around the table", function() {
@@ -155,6 +154,13 @@
 
                 ok(grid.wrapper.is("div.t-grid.t-widget"));
             });
+
+            test("datasource is populated from table if not specified", function() {
+                var grid = new Grid($('<table><tr><td /><td/></tr></table>'));
+
+                equal(grid.dataSource.data().length, 1);
+            });
+
        </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
