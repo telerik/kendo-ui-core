@@ -8,8 +8,9 @@
 
 .t-measure-box .t-baseline-marker {
     display: inline-block;
-    zoom: 1;
-    *display: inline;
     height: 1px;
     vertical-align: baseline;
+    zoom: 1;
+    *display: inline;
+    overflow: hidden;
 }

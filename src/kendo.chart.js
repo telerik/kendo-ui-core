@@ -456,7 +456,7 @@
 
         measureBox
             .css(style)
-            .text(text)
+            .text(text || "&nbsp;")
             .append(baselineMarker);
 
         var size = {
