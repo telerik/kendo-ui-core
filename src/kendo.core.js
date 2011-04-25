@@ -5,7 +5,7 @@
         Template,
         JSON = JSON || {},
         support = {};
-
+//Event ================================
     function Event() {
         this._isPrevented = false;
     }
@@ -19,6 +19,7 @@
         }
     };
 
+//Observable ================================
     function Observable() {
         this._events = {};
     }
@@ -84,6 +85,7 @@
         }
     }
 
+//Template ================================
     Template = {
         paramName: "data", // name of the parameter of the generated template
         useWithBlock: true, // whether to wrap the template in a with() block
@@ -359,88 +361,6 @@
             date.time(resultDate.time() + tzOffsetDiff * $t.datetime.msPerMinute);
         },
 
-        pad: function (value) {
-            if (value < 10) {
-                return "0" + value;
-            }
-
-            return value;
-        },
-
-        standardFormat: function (format) {
-            var l = CultureInfo;
-
-            var standardFormats = {
-                d: l.shortDate,
-                D: l.longDate,
-                F: l.fullDateTime,
-                g: l.generalDateShortTime,
-                G: l.generalDateTime,
-                m: l.monthDay,
-                M: l.monthDay,
-                s: l.sortableDateTime,
-                t: l.shortTime,
-                T: l.longTime,
-                u: l.universalSortableDateTime,
-                y: l.monthYear,
-                Y: l.monthYear
-            };
-
-            return standardFormats[format];
-        },
-
-        format: function (date, format) {
-            var l = CultureInfo,
-                d = date.getDate(),
-                day = date.getDay(),
-                M = date.getMonth(),
-                y = date.getFullYear(),
-                h = date.getHours(),
-                m = date.getMinutes(),
-                s = date.getSeconds(),
-                f = date.getMilliseconds(),
-                pad = DateTime.pad;
-
-            var dateFormatters = {
-                d: d,
-                dd: pad(d),
-                ddd: l.abbrDays[day],
-                dddd: l.days[day],
-
-                M: M + 1,
-                MM: pad(M + 1),
-                MMM: l.abbrMonths[M],
-                MMMM: l.months[M],
-
-                yy: pad(y % 100),
-                yyyy: y,
-
-                h: h % 12 || 12,
-                hh: pad(h % 12 || 12),
-                H: h,
-                HH: pad(h),
-
-                m: m,
-                mm: pad(m),
-
-                s: s,
-                ss: pad(s),
-
-                f: Math.floor(f / 100),
-                ff: Math.floor(f / 10),
-                fff: f,
-
-                tt: h < 12 ? l.am : l.pm
-            };
-
-            format = format || "G";
-            format = DateTime.standardFormat(format) ? DateTime.standardFormat(format) : format;
-
-            return format.replace(dateFormatTokenRegExp, function (match) {
-                return match in dateFormatters ? dateFormatters[match] : match.slice(1, match.length - 1);
-            });
-        },
-
         parse: function (options) {
             var value = options.value,
                 format = options.format;
@@ -679,47 +599,87 @@
             };
     });
 
-    function getType(obj) {
-        if (obj instanceof Date) {
-            return "date";
-        }
-        
-        if (!isNaN(obj)) {
-            return "number";
-        }
-
-        return "object";
-    }
-
     var formatters = {};
 
-    $.extend(formatters, {
-        date: DateTime.format
-    });
-    
-    function formatString() {
-        var s = arguments[0];
+    (function() {
+        var culture = CultureInfo,
+            standardFormats = {
+                d: culture.shortDate,
+                D: culture.longDate,
+                F: culture.fullDateTime,
+                g: culture.generalDateShortTime,
+                G: culture.generalDateTime,
+                m: culture.monthDay,
+                M: culture.monthDay,
+                s: culture.sortableDateTime,
+                t: culture.shortTime,
+                T: culture.longTime,
+                u: culture.universalSortableDateTime,
+                y: culture.monthYear,
+                Y: culture.monthYear
+            };
 
-        for (var i = 0, l = arguments.length - 1; i < l; i++) {
-            var reg = new RegExp("\\{" + i + "(:([^\\}]+))?\\}", "gm");
-
-            var argument = arguments[i + 1];
-
-            var formatter = formatters[getType(argument)];
-            if (formatter) {
-                var match = reg.exec(s);
-                if (match) {
-                    argument = formatter(argument, match[2]);
-                }
+        function pad(value) {
+            if (value < 10) {
+                return "0" + value;
             }
 
-            s = s.replace(reg, function () {
-                return argument;
+            return value;
+        }
+
+        function formatDate(date, format) {
+            var d = date.getDate(),
+                day = date.getDay(),
+                M = date.getMonth(),
+                y = date.getFullYear(),
+                h = date.getHours(),
+                m = date.getMinutes(),
+                s = date.getSeconds(),
+                f = date.getMilliseconds();
+
+            var dateFormatters = {
+                d: d,
+                dd: pad(d),
+                ddd: culture.abbrDays[day],
+                dddd: culture.days[day],
+
+                M: M + 1,
+                MM: pad(M + 1),
+                MMM: culture.abbrMonths[M],
+                MMMM: culture.months[M],
+
+                yy: pad(y % 100),
+                yyyy: y,
+
+                h: h % 12 || 12,
+                hh: pad(h % 12 || 12),
+                H: h,
+                HH: pad(h),
+
+                m: m,
+                mm: pad(m),
+
+                s: s,
+                ss: pad(s),
+
+                f: Math.floor(f / 100),
+                ff: Math.floor(f / 10),
+                fff: f,
+
+                tt: h < 12 ? culture.am : culture.pm
+            };
+
+            format = format in standardFormats ? standardFormats[format] : format;
+
+            return format.replace(/d{1,4}|M{1,4}|yy(?:yy)?|([Hhmstf])\1*|"[^"]*"|'[^']*'/g, function (match) {
+                return match in dateFormatters ? dateFormatters[match] : match.slice(1, match.length - 1);
             });
         }
 
-        return s;
-    }
+        extend(formatters, {
+            date: formatDate
+        });
+    })();
 
     function format(fmt) {
         var values = arguments;

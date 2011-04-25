@@ -64,6 +64,14 @@
                 equal(value, "d");
                 equal(fmt, 1);
             });
-       </script>
+
+            test("format with nonnumeric placeholders", function() {
+                equal(format("{NaN}foo", 1), "{NaN}foo");
+            });
+
+            test("format ignores invalid numeric placeholders", function() {
+                equal(format("{1}foo", 1), "foo");
+            });
+      </script>
     </body>
 </html>
