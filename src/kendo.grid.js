@@ -10,30 +10,21 @@
     function Grid(element, options) {
         var that = this,
             dataSource,
-            table,
             pageable;
 
         options = $.isArray(options) ? { data: options } : options;
 
         Component.call(that, element, options);
 
-        that.table = table = that.element;
+        that.table = that.element;
 
         that._columns();
 
         that._dataSource();
 
-        that.tbody = table.find(">tbody");
+        that._tbody();
 
-        if (!that.tbody.length) {
-            that.tbody = $("<tbody />").appendTo(table);
-        }
-
-        that.wrapper = table.parent();
-
-        if (!that.wrapper.is("div.t-grid")) {
-           that.wrapper = table.wrap($('<div class="t-grid t-widget" />')).parent();
-        }
+        that._wrapper();
 
         that._sortable();
 
@@ -41,7 +32,6 @@
 
         that._pager();
 
-        that.dataSource.bind("change", $.proxy(that.refresh, that));
         that.dataSource.read();
     }
 
@@ -49,6 +39,34 @@
         options: {
             columns: [],
             dataSource: {}
+        },
+
+        _wrapper: function() {
+            var that = this,
+                table = that.table,
+                wrapper;
+
+            wrapper = table.parent();
+
+            if (!wrapper.is("div.t-grid")) {
+               wrapper = table.wrap($('<div class="t-grid t-widget" />')).parent();
+            }
+
+            that.wrapper = wrapper;
+        },
+
+        _tbody: function() {
+            var that = this,
+                table = that.table,
+                tbody;
+
+            tbody = table.find(">tbody");
+
+            if (!tbody.length) {
+                tbody = $("<tbody />").appendTo(table);
+            }
+
+            that.tbody = tbody;
         },
 
         _dataSource: function() {
@@ -71,6 +89,7 @@
             }
 
             that.dataSource = DataSource.create(dataSource);
+            that.dataSource.bind("change", $.proxy(that.refresh, that));
         },
 
         _pager: function() {
@@ -94,22 +113,30 @@
                 sortable = that.options.sortable;
 
             if (sortable) {
-                this.table.find("th").kendoSortable(extend({}, sortable, { dataSource: that.dataSource }));
+                that.table.find("th").kendoSortable(extend({}, sortable, { dataSource: that.dataSource }));
             }
         },
 
         _columns: function() {
-            var columns = this.options.columns;
+            var that = this,
+                columns = that.options.columns;
 
             // using HTML5 data attributes as a configuration option e.g. <th data-field="foo">Foo</foo>
-            columns = columns.length ? columns : $.map(this.table.find("th"), function(th) {
+            columns = columns.length ? columns : $.map(that.table.find("th"), function(th) {
+                var th = $(th),
+                    field = th.data("field");
+
+                if (!field) {
+                   field = th.text().replace(/\s|[^A-z0-9]/g, "");
+                }
+
                 return {
-                    field: $(th).data("field"),
-                    template: $(th).data("template")
+                    field: field,
+                    template: th.data("template")
                 };
             });
 
-            this.columns = $.map(columns, function(column) {
+            that.columns = $.map(columns, function(column) {
                 column = typeof column === "string" ? { field: column } : column;
                 return {
                     field: column.field,
@@ -163,6 +190,7 @@
                 rowTemplate = that.rowTemplate,
                 altRowTemplate = that.altRowTemplate;
 
+            debugger
             for (idx = 0, length = data.length; idx < length; idx++) {
                 if (idx % 2) {
                    html += altRowTemplate(data[idx]);
