@@ -51,11 +51,6 @@
                 equal(dataSource.transport.settings.read.url, "foo");
             });
 
-            test("create returns a new DataSource", function() {
-                var dataSource = DataSource.create();
-                ok(dataSource instanceof DataSource);
-            });
-
             test("dataSource is initialized from the options", function() {
                 var dataSource1 = new DataSource(),
                     dataSource2 = DataSource.create({
@@ -95,6 +90,23 @@
                 var dataSource = new DataSource({ page: 1, pageSize: 10 });
                 equal(dataSource.page(), 1);
                 equal(dataSource.pageSize(), 10);
+            });
+
+            test("infer from html table", function() {
+                var table = $("<table><tr><td>foo1</td><td>bar1</td></tr><tr><td>foo2</td><td>bar2</td></tr></table>"),
+                    dataSource = DataSource.create({ 
+                        dataSource: {
+                            table: table, 
+                            columns: [ { field: "foo" }, { field: "bar" } ] 
+                        }
+                    });
+
+                dataSource.read();
+                equal(dataSource.data().length, 2);
+                equal(dataSource.data()[0].foo, "foo1");
+                equal(dataSource.data()[0].bar, "bar1");
+                equal(dataSource.data()[1].foo, "foo2");
+                equal(dataSource.data()[1].bar, "bar2");
             });
 
             </script>
