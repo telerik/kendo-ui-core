@@ -68,7 +68,6 @@
             });
 
             test("header data attributes - data-field", function() {
-                debugger
                 var grid = new Grid($('<table><th data-field="foo"></th><th data-field="bar"></th></table>')[0], { data: [] });
 
                 equal(grid.columns.length, 2);
