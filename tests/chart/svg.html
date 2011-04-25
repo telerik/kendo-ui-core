@@ -59,8 +59,12 @@
                 });
 
                 test("text is aligned to top", function() {
-                    var text = factory.text("Text", { x: 0, y: 0 });
-                    equal(text.options._baselineY, 15);
+                    var text = factory.text("Text", { x: 0, y: 0 }),
+                        yDiff = Math.abs(text.options._baselineY - 15);
+
+                    ok(yDiff <= 2,
+                        "_baselineY should be roughly 15, actual value "
+                        + text.options._baselineY);
                 });
 
                 test("rect returns SVGPath", function() {
