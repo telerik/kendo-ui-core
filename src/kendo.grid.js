@@ -8,27 +8,32 @@
 
     function Grid(element, options) {
         var that = this,
-            dataSource;
+            dataSource,
+            table;
 
         options = $.isArray(options) ? { data: options } : options;
 
-        Component.apply(that, arguments);
+        Component.call(that, element, options);
 
-        that.dataSource = dataSource = DataSource.create(options);
-        that.table = that.element;
-        that.tbody = that.table.find(">tbody");
-
-        if (!that.tbody.length) {
-            that.tbody = $("<tbody />").appendTo(element);
-        }
-
-        that.wrapper = that.table.parent();
-
-        if (!that.wrapper.is("div.t-grid")) {
-           that.wrapper = that.table.wrap($('<div class="t-grid t-widget" />')).parent();
-        }
+        that.table = table = that.element;
 
         that._columns();
+
+        extend(that.options.dataSource, { table: table, columns: that.columns } );
+
+        that.dataSource = dataSource = DataSource.create(that.options);
+
+        that.tbody = table.find(">tbody");
+
+        if (!that.tbody.length) {
+            that.tbody = $("<tbody />").appendTo(table);
+        }
+
+        that.wrapper = table.parent();
+
+        if (!that.wrapper.is("div.t-grid")) {
+           that.wrapper = table.wrap($('<div class="t-grid t-widget" />')).parent();
+        }
 
         that._sortable();
 
@@ -42,7 +47,8 @@
 
     Grid.prototype = {
         options: {
-            columns: []
+            columns: [],
+            dataSource: {}
         },
 
         _pager: function() {
