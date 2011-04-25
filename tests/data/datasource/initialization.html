@@ -53,9 +53,7 @@
 
             test("dataSource is initialized from the options", function() {
                 var dataSource1 = new DataSource(),
-                    dataSource2 = DataSource.create({
-                        dataSource: dataSource1
-                    });
+                    dataSource2 = DataSource.create(dataSource1);
 
                 ok(dataSource1 === dataSource2);
             });
@@ -73,9 +71,7 @@
             test("dataSource configuration is used by the create factory method", function() {
                 var schema = {},
                     dataSource = DataSource.create({
-                        dataSource: {
-                            schema: schema
-                        }
+                        schema: schema
                     });
 
                 ok(dataSource.schema === schema);
@@ -94,11 +90,9 @@
 
             test("infer from html table", function() {
                 var table = $("<table><tr><td>foo1</td><td>bar1</td></tr><tr><td>foo2</td><td>bar2</td></tr></table>"),
-                    dataSource = DataSource.create({ 
-                        dataSource: {
-                            table: table, 
-                            fields: [ { field: "foo" }, { field: "bar" } ] 
-                        }
+                    dataSource = DataSource.create({
+                        table: table,
+                        fields: [ { field: "foo" }, { field: "bar" } ]
                     });
 
                 dataSource.read();
