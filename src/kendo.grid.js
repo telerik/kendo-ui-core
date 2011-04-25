@@ -4,12 +4,14 @@
         DataSource = kendo.data.DataSource,
         tbodySupportsInnerHtml = kendo.support.tbodyInnerHtml,
         Component = ui.Component,
-        extend = $.extend;
+        extend = $.extend,
+        isPlainObject = $.isPlainObject;
 
     function Grid(element, options) {
         var that = this,
             dataSource,
-            table;
+            table,
+            pageable;
 
         options = $.isArray(options) ? { data: options } : options;
 
@@ -19,9 +21,7 @@
 
         that._columns();
 
-        extend(that.options.dataSource, { table: table, fields: that.columns } );
-
-        that.dataSource = dataSource = DataSource.create(that.options);
+        that._dataSource();
 
         that.tbody = table.find(">tbody");
 
@@ -41,14 +41,36 @@
 
         that._pager();
 
-        dataSource.bind("change", $.proxy(that.refresh, that));
-        dataSource.read();
+        that.dataSource.bind("change", $.proxy(that.refresh, that));
+        that.dataSource.read();
     }
 
     Grid.prototype = {
         options: {
             columns: [],
             dataSource: {}
+        },
+
+        _dataSource: function() {
+            var that = this,
+                options = that.options,
+                dataSource = options.dataSource;
+
+            if (isPlainObject(dataSource)) {
+                extend(dataSource, { table: that.table, fields: that.columns });
+
+                if (options.data) {
+                    dataSource.data = options.data;
+                }
+
+                pageable = options.pageable;
+
+                if (isPlainObject(pageable) && pageable.pageSize !== undefined) {
+                    dataSource.pageSize = pageable.pageSize;
+                }
+            }
+
+            that.dataSource = DataSource.create(dataSource);
         },
 
         _pager: function() {

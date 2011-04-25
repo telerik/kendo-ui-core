@@ -203,9 +203,8 @@
     }
 
     DataSource.create = function(options) {
-        options = options || {};
-        var dataSource = options.dataSource || {},
-            data = options.data || dataSource.data,
+        var dataSource = options || {},
+            data = dataSource.data,
             fields = dataSource.fields,
             table = dataSource.table;
 
@@ -417,7 +416,7 @@
             if (options.filter) {
                 that._filter = options.filter = kendo.data.Query.expandFilter(options.filter);
             }
-            
+
             if (remote || (that._data === undefined || that._data.length == 0)) {
                 that.read(options);
             } else {
