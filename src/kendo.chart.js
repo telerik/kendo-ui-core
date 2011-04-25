@@ -286,11 +286,10 @@
         }
     });
 
-    function ViewElement(attributes) {
+    function ViewElement() {
         var element = this;
 
         element.children = [];
-        element.attributes = attributes;
     }
 
     ViewElement.prototype = {
@@ -342,7 +341,7 @@
         ViewElement.call(root, options);
 
         root.template = kendo.template(
-            "<svg width='<%= attributes.width %>' height='<%= attributes.height %>'><%= renderContent() %></svg>");
+            "<svg width='<%= options.width %>' height='<%= options.height %>'><%= renderContent() %></svg>");
     }
 
     SVGRoot.prototype = new ViewElement();
@@ -366,20 +365,36 @@
 
     function SVGText(content, options) {
         var text = this,
-            options = $.extend({}, text.options, options);
+            options = text.options = $.extend({}, text.options, options);
 
         text.content = content || "";
 
-        ViewElement.call(text, options);
+        ViewElement.call(text);
         text.template = kendo.template(
-            "<text x='<%= attributes.x %>' y='<%= attributes.y %>'><%= content %></text>");
+            "<text x='<%= options.x %>' y='<%= options._baselineY %>'><%= content %></text>");
+
+        text.align();
     }
 
     SVGText.prototype = new ViewElement();
     $.extend(SVGText.prototype, {
         options: {
             x: 0,
-            y: 0
+            y: 0,
+            _baselineY: 0,
+            fontSize: "16px",
+            fontFamily: "Arial, sans-serif"
+        },
+
+        align: function() {
+            var text = this,
+            size = measureText(text.content, {
+                fontSize: text.options.fontSize,
+                fontFamily: text.options.fontFamily
+            });
+
+            text.options._baselineY = text.options.y + size.baselineOffset;
+            text.options.y += size.baselineOffset;
         }
     });
 
@@ -428,6 +443,29 @@
     function round(value, precision) {
         var power = Math.pow(10, precision || 0);
         return Math.round(value * power) / power;
+    }
+
+    function measureText(text, style) {
+        var measureBox = measureText.measureBox,
+            baselineMarker = $("<div class='t-baseline-marker' />");
+        if (!measureBox) {
+            measureBox = measureText.measureBox =
+                $("<div class='t-measure-box' />")
+                .appendTo(document.body);
+        }
+
+        measureBox
+            .css(style)
+            .text(text)
+            .append(baselineMarker);
+
+        var size = {
+            width: measureBox.width(),
+            height: measureBox.height(),
+            baselineOffset: baselineMarker[0].offsetTop
+        };
+
+        return size;
     }
 
     // #ifdef DEBUG

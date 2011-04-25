@@ -1,0 +1,15 @@
+.t-measure-box {
+    position: absolute;
+    top: -4000px;
+    left: -4000px;
+    line-height: normal;
+    visibility: hidden;
+}
+
+.t-measure-box .t-baseline-marker {
+    display: inline-block;
+    zoom: 1;
+    *display: inline;
+    height: 1px;
+    vertical-align: baseline;
+}
