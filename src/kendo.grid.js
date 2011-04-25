@@ -190,7 +190,6 @@
                 rowTemplate = that.rowTemplate,
                 altRowTemplate = that.altRowTemplate;
 
-            debugger
             for (idx = 0, length = data.length; idx < length; idx++) {
                 if (idx % 2) {
                    html += altRowTemplate(data[idx]);
