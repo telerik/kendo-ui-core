@@ -735,7 +735,7 @@
         var type = $.type(value);
 
         if (formatters[type] && fmt) {
-            return formatters[type](fmt, value);
+            return formatters[type](value, fmt);
         }
 
         return value !== undefined ? value : "";

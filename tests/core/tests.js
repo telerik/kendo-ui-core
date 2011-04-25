@@ -12,6 +12,10 @@ tests.push(
         title: "format"
     },
     {
+        page: "core/tostring.html",
+        title: "tostring"
+    },
+    {
         page: "core/json.html",
         title: "json"
     },
