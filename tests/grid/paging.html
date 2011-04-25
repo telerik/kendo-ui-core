@@ -55,6 +55,11 @@
 
                 equal(grid.wrapper.find("div.t-grid-pager").length, 1);
             });
+
+            test("pageSize of the dataSource is set from the pageable settings", function() {
+                var grid = new Grid(table(), { data:[], pageable: { pageSize: 42 } });
+                equal(grid.dataSource.pageSize(), 42);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
