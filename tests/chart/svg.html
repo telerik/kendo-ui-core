@@ -6,6 +6,7 @@
         <script src="../qunit.js"></script>
         <script src="../qunit-runner.js"></script>
         <link href="../qunit.css" type="text/css" rel="stylesheet"/>
+        <link href="../../styles/kendo.chart.css" type="text/css" rel="stylesheet"/>
     </head>
     <body>
         <script src="../../src/kendo.core.js"></script>
@@ -59,7 +60,7 @@
 
                 test("text is aligned to top", function() {
                     var text = factory.text("Text", { x: 0, y: 0 });
-                    equal(text.attributes.x, 14);
+                    equal(text.options._baselineY, 15);
                 });
 
                 test("rect returns SVGPath", function() {
@@ -125,12 +126,12 @@
                 });
 
                 test("renders text tag with default position", function() {
-                    equal(text.render(), "<text x='0' y='0'></text>");
+                    equal(text.render(), "<text x='0' y='15'></text>");
                 });
 
                 test("renders content", function() {
                     text.content = "Text";
-                    equal(text.render(), "<text x='0' y='0'>Text</text>");
+                    equal(text.render(), "<text x='0' y='15'>Text</text>");
                 });
 
             })();
