@@ -121,31 +121,12 @@
         }
     };
 
-    //JSON stringify
-    function f(n) {
+    function pad(n) {
         return n < 10 ? "0" + n : n;
     }
 
-    if (typeof Date.prototype.toJSON !== "function") {
-
-        Date.prototype.toJSON = function (key) {
-
-            return isFinite(this.valueOf()) ?
-                this.getUTCFullYear()     + "-" +
-                f(this.getUTCMonth() + 1) + "-" +
-                f(this.getUTCDate())      + "T" +
-                f(this.getUTCHours())     + ":" +
-                f(this.getUTCMinutes())   + ":" +
-                f(this.getUTCSeconds())   + "Z" : null;
-        };
-
-        String.prototype.toJSON      =
-            Number.prototype.toJSON  =
-            Boolean.prototype.toJSON = function (key) {
-                return this.valueOf();
-            };
-    }
-
+    //JSON stringify
+(function() {
     var cx = /[\u0000\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g,
         escapable = /[\\\"\x00-\x1f\x7f-\x9f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g,
         gap,
@@ -160,17 +141,43 @@
             "\\": "\\\\"
         },
         rep,
-        formatters;
+        formatters,
+        FUNCTION = "function",
+        STRING = "string",
+        NUMBER = "number",
+        OBJECT = "object",
+        NULL = "null",
+        BOOLEAN = "boolean",
+        toString = {}.toString,
+        hasOwnProperty = {}.hasOwnProperty;
+
+    if (typeof Date.prototype.toJSON !== FUNCTION) {
+
+        Date.prototype.toJSON = function (key) {
+            var that = this;
+
+            return isFinite(that.valueOf()) ?
+                that.getUTCFullYear()     + "-" +
+                pad(that.getUTCMonth() + 1) + "-" +
+                pad(that.getUTCDate())      + "T" +
+                pad(that.getUTCHours())     + ":" +
+                pad(that.getUTCMinutes())   + ":" +
+                pad(that.getUTCSeconds())   + "Z" : null;
+        };
+
+        String.prototype.toJSON = Number.prototype.toJSON = Boolean.prototype.toJSON = function (key) {
+            return this.valueOf();
+        };
+    }
 
     function quote(string) {
         escapable.lastIndex = 0;
         return escapable.test(string) ? "\"" + string.replace(escapable, function (a) {
             var c = meta[a];
-            return typeof c === "string" ? c :
+            return typeof c === STRING ? c :
                 "\\u" + ("0000" + a.charCodeAt(0).toString(16)).slice(-4);
         }) + "\"" : "\"" + string + "\"";
     }
-
 
     function str(key, holder) {
         var i,
@@ -179,35 +186,34 @@
             length,
             mind = gap,
             partial,
-            value = holder[key];
+            value = holder[key],
+            type;
 
-        if (value && typeof value === "object" &&
-                typeof value.toJSON === "function") {
+        if (value && typeof value === OBJECT && typeof value.toJSON === FUNCTION) {
             value = value.toJSON(key);
         }
 
-        if (typeof rep === "function") {
+        if (typeof rep === FUNCTION) {
             value = rep.call(holder, key, value);
         }
 
-        switch (typeof value) {
-        case "string":
+        type = typeof value;
+        if (type === STRING) {
             return quote(value);
-        case "number":
-            return isFinite(value) ? String(value) : "null";
-        case "boolean":
-        case "null":
+        } else if (type === NUMBER) {
+            return isFinite(value) ? String(value) : NULL;
+        } else if (type === BOOLEAN || type === NULL) {
             return String(value);
-        case "object":
+        } else if (type === OBJECT) {
             if (!value) {
-                return "null";
+                return NULL;
             }
             gap += indent;
             partial = [];
-            if (Object.prototype.toString.apply(value) === "[object Array]") {
+            if (toString.apply(value) === "[object Array]") {
                 length = value.length;
-                for (i = 0; i < length; i += 1) {
-                    partial[i] = str(i, value) || "null";
+                for (i = 0; i < length; i++) {
+                    partial[i] = str(i, value) || NULL;
                 }
                 v = partial.length === 0 ? "[]" : gap ?
                     "[\n" + gap + partial.join(",\n" + gap) + "\n" + mind + "]" :
@@ -215,10 +221,10 @@
                 gap = mind;
                 return v;
             }
-            if (rep && typeof rep === "object") {
+            if (rep && typeof rep === OBJECT) {
                 length = rep.length;
-                for (i = 0; i < length; i += 1) {
-                    if (typeof rep[i] === "string") {
+                for (i = 0; i < length; i++) {
+                    if (typeof rep[i] === STRING) {
                         k = rep[i];
                         v = str(k, value);
                         if (v) {
@@ -228,7 +234,7 @@
                 }
             } else {
                 for (k in value) {
-                    if (Object.prototype.hasOwnProperty.call(value, k)) {
+                    if (hasOwnProperty.call(value, k)) {
                         v = str(k, value);
                         if (v) {
                             partial.push(quote(k) + (gap ? ": " : ":") + v);
@@ -245,31 +251,30 @@
         }
     }
 
-    if (typeof JSON.stringify !== "function") {
+    if (typeof JSON.stringify !== FUNCTION) {
         JSON.stringify = function (value, replacer, space) {
             var i;
             gap = "";
             indent = "";
 
-            if (typeof space === "number") {
+            if (typeof space === NUMBER) {
                 for (i = 0; i < space; i += 1) {
                     indent += " ";
                 }
 
-            } else if (typeof space === "string") {
+            } else if (typeof space === STRING) {
                 indent = space;
             }
 
             rep = replacer;
-            if (replacer && typeof replacer !== "function" &&
-                    (typeof replacer !== "object" ||
-                    typeof replacer.length !== "number")) {
+            if (replacer && typeof replacer !== FUNCTION && (typeof replacer !== OBJECT || typeof replacer.length !== NUMBER)) {
                 throw new Error("JSON.stringify");
             }
 
             return str("", {"": value});
         };
     }
+})();
 
     var CultureInfo = {
         days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
@@ -619,14 +624,6 @@
                 Y: culture.monthYear
             };
 
-        function pad(value) {
-            if (value < 10) {
-                return "0" + value;
-            }
-
-            return value;
-        }
-
         function formatDate(date, format) {
             var d = date.getDate(),
                 day = date.getDay(),
@@ -729,10 +726,12 @@
         template: proxy(Template.compile, Template),
         stringify: proxy(JSON.stringify, JSON),
         format: format,
-        toString: toString,
         formatters: formatters,
         CultureInfo: CultureInfo
     });
+
+    // This is required for Internet Explorer as jQuery.extend will not copy toString properly
+    kendo.toString = toString;
 
     function Component(element, options) {
         var that = this;
