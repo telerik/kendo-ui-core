@@ -19,7 +19,7 @@
 
         that._columns();
 
-        extend(that.options.dataSource, { table: table, columns: that.columns } );
+        extend(that.options.dataSource, { table: table, fields: that.columns } );
 
         that.dataSource = dataSource = DataSource.create(that.options);
 
