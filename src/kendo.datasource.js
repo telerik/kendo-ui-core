@@ -206,11 +206,11 @@
         options = options || {};
         var dataSource = options.dataSource || {},
             data = options.data || dataSource.data,
-            columns = dataSource.columns,
+            fields = dataSource.fields,
             table = dataSource.table;
 
-        if (!data && table && columns) {
-            data = infer(table, columns);
+        if (!data && table && fields) {
+            data = infer(table, fields);
         }
 
         dataSource.data = data;
@@ -218,13 +218,13 @@
         return dataSource instanceof DataSource ? dataSource : new DataSource(dataSource);
     }
 
-    function infer(table, columns) {
+    function infer(table, fields) {
         var tbody = $(table)[0].tBodies[0],
             rows = tbody ? tbody.rows : [],
             rowIndex,
             rowCount,
-            columnIndex,
-            columnCount = columns.length,
+            fieldIndex,
+            fieldCount = fields.length,
             data = [],
             cells,
             record;
@@ -233,8 +233,8 @@
             record = {};
             cells = rows[rowIndex].cells;
 
-            for (columnIndex = 0; columnIndex < columnCount; columnIndex++) {
-                record[columns[columnIndex].field] = cells[columnIndex].innerHTML;
+            for (fieldIndex = 0; fieldIndex < fieldCount; fieldIndex++) {
+                record[fields[fieldIndex].field] = cells[fieldIndex].innerHTML;
             }
 
             data.push(record);
