@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Splitter collapse</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.query.js"></script>
+        <script src="../../src/kendo.splitter.js"></script>
+        <script src="helper.js"></script>
+        <link rel="stylesheet" href="../qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Splitter collapse</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+
+            module("Splitter / Collapse", {
+                teardown: function() {
+                    $(".t-splitter").remove();
+                }
+            });
+
+            test("clicking collapse arrow triggers collapse event", function() {
+                var triggered = false,
+                    splitter = $(getSplitterHtml())
+                        .appendTo(document.body)
+                        .kendoSplitter({
+                            panes: [ { collapsible: true }, {} ],
+                            collapse: function(e) {
+                                triggered = e;
+                            }
+                        });
+
+                splitter.find(".t-collapse-prev").trigger("click");
+
+                ok(triggered);
+                equals(triggered.pane, splitter.find(".t-pane:first")[0]);
+            });
+
+            test("collapse event can be prevented", function() {
+                var splitter = $(getSplitterHtml())
+                        .appendTo(document.body)
+                        .kendoSplitter({
+                            panes: [ { collapsible: true }, {} ],
+                            collapse: function(e) {
+                                e.preventDefault();
+                            }
+                        });
+
+                splitter.find(".t-collapse-prev").trigger("click");
+
+                ok(!splitter.find(".t-pane:first").data("pane").collapsed);
+            });
+
+            test("clicking collapse arrow calls splitter.collapse", function() {
+                var called,
+                    splitter = $(getSplitterHtml())
+                        .appendTo(document.body)
+                        .kendoSplitter({
+                            panes: [ { collapsible: true }, {} ]
+                        });
+
+                splitter.data("kendoSplitter").collapse = function(pane) {
+                    called = pane;
+                }
+
+                splitter.find(".t-collapse-prev").trigger("click");
+
+                equals(called, splitter.find(".t-pane:first")[0]);
+            });
+
+            test("double-clicking splitbar next to an expanded collapsible pane should call splitter.collapse", function() {
+                var called,
+                    splitter = $(getSplitterHtml())
+                        .appendTo(document.body)
+                        .kendoSplitter({
+                            panes: [ { collapsible: true }, {} ]
+                        });
+
+                splitter.data("kendoSplitter").collapse = function(pane) {
+                    called = pane;
+                }
+
+                splitter.find(".t-splitbar").trigger("dblclick");
+
+                equals(called, splitter.find(".t-pane:first")[0]);
+            });
+
+            test("double-clicking splitbar prev to an expanded collapsible pane should call splitter.collapse", function() {
+                var called,
+                    splitter = $(getSplitterHtml())
+                        .appendTo(document.body)
+                        .kendoSplitter({
+                            panes: [ {}, { collapsible: true } ]
+                        });
+
+                splitter.data("kendoSplitter").collapse = function(pane) {
+                    called = pane;
+                }
+
+                splitter.find(".t-splitbar").trigger("dblclick");
+
+                equals(called, splitter.find(".t-pane:last")[0]);
+            });
+
+
+            module("Splitter / Expand", {
+                teardown: function() {
+                    $(".t-splitter").remove();
+                }
+            });
+
+            test("clicking expand arrow triggers expand event", function() {
+                var triggered = false,
+                    splitter = $(getSplitterHtml())
+                        .appendTo(document.body)
+                        .kendoSplitter({
+                            panes: [ { collapsible: true, collapsed: true }, {} ],
+                            expand: function(e) {
+                                triggered = e;
+                            }
+                        });
+
+                splitter.find(".t-expand-prev").trigger("click");
+
+                ok(triggered);
+                equals(triggered.pane, splitter.find(".t-pane:first")[0]);
+            });
+
+            test("expand event can be prevented", function() {
+                var splitter = $(getSplitterHtml())
+                    .appendTo(document.body)
+                    .kendoSplitter({
+                        panes: [ { collapsible: true, collapsed: true }, {} ],
+                        expand: function(e) {
+                            e.preventDefault();
+                        }
+                    });
+
+                splitter.find(".t-expand-prev").trigger("click");
+
+                ok(splitter.find(".t-pane:first").data("pane").collapsed);
+            });
+
+            test("clicking expand arrow calls splitter.expand", function() {
+                var called,
+                    splitter = $(getSplitterHtml())
+                        .appendTo(document.body)
+                        .kendoSplitter({
+                            panes: [ { collapsible: true, collapsed: true }, {} ]
+                        });
+
+                splitter.data("kendoSplitter").expand = function(pane) {
+                    called = pane;
+                }
+
+                splitter.find(".t-expand-prev").trigger("click");
+
+                equals(called, splitter.find(".t-pane:first")[0]);
+            });
+
+            test("double-clicking splitbar next to an collapsed collapsible pane should call splitter.collapse", function() {
+                var called,
+                    splitter = $(getSplitterHtml())
+                        .appendTo(document.body)
+                        .kendoSplitter({
+                            panes: [ { collapsible: true, collapsed: true }, {} ]
+                        });
+
+                splitter.data("kendoSplitter").expand = function(pane) {
+                    called = pane;
+                }
+
+                splitter.find(".t-splitbar").trigger("dblclick");
+
+                equals(called, splitter.find(".t-pane:first")[0]);
+            });
+
+            test("double-clicking splitbar prev to an collapsed collapsible pane should call splitter.collapse", function() {
+                var called,
+                    splitter = $(getSplitterHtml())
+                        .appendTo(document.body)
+                        .kendoSplitter({
+                            panes: [ { }, { collapsible: true, collapsed: true } ]
+                        });
+
+                splitter.data("kendoSplitter").expand = function(pane) {
+                    called = pane;
+                }
+
+                splitter.find(".t-splitbar").trigger("dblclick");
+
+                equals(called, splitter.find(".t-pane:last")[0]);
+            });
+
+            test("double-clicking splitbar between two collapsible panes does not trigger collapse", function() {
+                var called,
+                    splitter = $(getSplitterHtml())
+                        .appendTo(document.body)
+                        .kendoSplitter({
+                            panes: [ { collapsible: true }, { collapsible: true } ]
+                        });
+
+                splitter.data("kendoSplitter").collapse = function(pane) {
+                    called = pane;
+                }
+
+                splitter.find(".t-splitbar").trigger("dblclick");
+
+                ok(!called);
+            });
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>

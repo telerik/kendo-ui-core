@@ -757,7 +757,10 @@
             // expose a jQuery plugin
             $.fn[name] = function(options) {
                 $(this).each(function() {
-                    $(this).data(name, new component(this, options));
+                    var comp = new component(this, options);
+                    $(this).data(name, comp);
+
+                    comp.trigger("init");
                 });
                 return this;
             }

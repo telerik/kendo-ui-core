@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Splitter load on demand</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.query.js"></script>
+        <script src="../../src/kendo.splitter.js"></script>
+        <script type="text/javascript" src="../jquery.mockjax.js"></script>
+        <script src="helper.js"></script>
+        <link rel="stylesheet" href="../qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Splitter load on demand</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var url = "foo";
+
+            module("Splitter / LoadOnDemand", {
+                setup: function() {
+                    $.mockjaxSettings.responseTime = 0;
+                    $.mockjaxSettings.contentType = "text/html";
+                    $.mockjax({
+                        url: url,
+                        responseText: "foobar"
+                    });
+
+                },
+                teardown: function() {
+                    $.mockjaxClear();
+                    $(".t-splitter").remove();
+                }
+            });
+
+            asyncTest("ajaxRequest calls ajaxOptions", function() {
+                var called = false,
+                    splitter = $(getSplitterHtml())
+                        .appendTo(document.body)
+                        .kendoSplitter({
+                            ajaxOptions: function() {
+                                start();
+                                ok(true);
+                            },
+                            panes: [ {}, { contentUrl: url } ]
+                        })
+                        .data("kendoSplitter");
+
+                splitter.ajaxRequest(".t-pane:first");
+            });
+
+            test("ajaxRequest loads custom urls", function() {
+                var customUrl = 'customUrl',
+                    requestedUrl,
+                    splitter = $(getSplitterHtml())
+                        .appendTo(document.body)
+                        .bind("ajaxSend", function(e, request, settings) {
+                            e.preventDefault();
+                            requestedUrl = settings.url;
+                        })
+                        .kendoSplitter().data("kendoSplitter");
+
+                $.mockjax({
+                    url: customUrl,
+                    responseText: "foobar"
+                });
+                splitter.ajaxRequest(".t-pane:first", customUrl);
+
+                equals(requestedUrl, customUrl);
+            });
+
+            asyncTest("ajaxRequest places loaded data in target pane", function() {
+                var splitter = $(getSplitterHtml())
+                        .appendTo(document.body)
+                        .kendoSplitter()
+                        .bind("ajaxComplete", function(e, request, settings) {
+                            if (settings.url === url) {
+                                start();
+                                equals(splitter.find(".t-pane:first")[0].innerHTML, "foobar");
+                            }
+                        });
+                splitter.data("kendoSplitter").ajaxRequest(".t-pane:first", url);
+            });
+
+            test("splitter loads content for LoadOnDemand panes when initializing", function() {
+                var counter = 0,
+                    requestedUrl;
+
+                $(getSplitterHtml())
+                    .appendTo(document.body)
+                    .bind("ajaxSend", function(e, request, settings) {
+                        e.preventDefault();
+                        counter++;
+                        requestedUrl = settings.url;
+                    })
+                    .kendoSplitter({
+                        panes: [ {}, { contentUrl: url } ]
+                    });
+
+                equals(counter, 1);
+                equals(requestedUrl, url);
+            });
+
+            asyncTest("ajaxRequest places loading icon in pane", function() {
+                var splitter = $(getSplitterHtml())
+                        .appendTo(document.body)
+                        .kendoSplitter()
+                        .bind("ajaxSend", function(e, request, settings) {
+                            request.abort();
+                        });
+                splitter.data("kendoSplitter").ajaxRequest(".t-pane:first", url);
+
+                setTimeout(function() {
+                    start();
+                    equals(splitter.find(".t-pane-loading.t-loading").length, 1);
+                    ok(splitter.find(".t-pane-loading.t-loading").parent().is(".t-pane:first"));
+                }, 500);
+            });
+
+            asyncTest("ajaxRequest triggers contentLoad event", function() {
+                var triggered = false,
+                    splitter = $(getSplitterHtml())
+                        .appendTo(document.body)
+                        .kendoSplitter({ contentLoad: function(e) {
+                            triggered = e;
+                    }})
+                        .bind("ajaxComplete", function(e, request, settings) {
+                            if (settings.url === url) {
+                                start();
+                                ok(triggered);
+                                equals(triggered.pane, splitter.find(".t-pane:first")[0]);
+                            }
+                        });
+                 splitter.data("kendoSplitter").ajaxRequest(".t-pane:first", url);
+            });
+
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>

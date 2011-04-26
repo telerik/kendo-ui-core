@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Splitter client creation</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.query.js"></script>
+        <script src="../../src/kendo.splitter.js"></script>
+        <script src="helper.js"></script>
+        <link rel="stylesheet" href="../qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Splitter client creation</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            test("constructor adds classes to container", function() {
+                var splitter = $(getSplitterHtml(1)).kendoSplitter();
+
+                ok(splitter.hasClass("t-widget"));
+                ok(splitter.hasClass("t-splitter"));
+
+                splitter = $(getSplitterHtml(1)).kendoSplitter({ orientation: "vertical" });
+
+                ok(splitter.hasClass("t-splitter"));
+            });
+
+            test("constructor interprets erronious orientation as horizontal", function() {
+                var splitter = $(getSplitterHtml(1)).kendoSplitter({ orientation: "diagonal" });
+
+                ok(splitter.hasClass("t-splitter"));
+            });
+
+            test("init adds classes to child elements", function() {
+                var splitter = $(getSplitterHtml(1)).kendoSplitter();
+
+                equals(splitter.find(".t-pane").length, 1);
+            });
+
+            test("init adds splitbars between panes", function() {
+                var splitter = $(getSplitterHtml(3)).kendoSplitter(),
+                splitbars = splitter.find(".t-splitbar");
+
+                equals(splitbars.length, 2);
+                equals(splitbars.eq(0).index(), 1);
+                equals(splitbars.eq(1).index(), 3);
+            });
+
+            test("splitbars have collapse button for collapsible panes", function() {
+                var splitter = $(getSplitterHtml(3)).kendoSplitter({
+                    panes: [
+                    { collapsible: true },
+                    {},
+                    { collapsible: true }
+                    ]
+                }),
+                splitbars = splitter.find(".t-splitbar");
+
+                equals(splitbars.eq(0).find(".t-icon.t-collapse-prev").length, 1);
+                equals(splitbars.eq(1).find(".t-icon.t-collapse-next").length, 1);
+            });
+
+            test("splitbars have resize handle between resizable panes", function() {
+                var splitter = $(getSplitterHtml(3))
+                .kendoSplitter({
+                    panes: [
+                    { resizable: false },
+                    {},
+                    {}
+                    ]
+                }),
+                splitbars = splitter.find(".t-splitbar");
+
+                equals(splitbars.eq(0).find(".t-icon.t-resize-handle").length, 0);
+                equals(splitbars.eq(1).find(".t-icon.t-resize-handle").length, 1);
+            });
+
+            test("collapsed panes render expand arrow beside them", function() {
+                var splitter = $(getSplitterHtml())
+                .kendoSplitter({
+                    panes: [
+                    { collapsible: true, collapsed: true },
+                    {}
+                    ]
+                });
+
+                equals(splitter.find(".t-expand-prev").length, 1);
+            });
+
+            test("splibars next to initially collapsed panes are not draggable", function() {
+                var splitter = $(getSplitterHtml())
+                .kendoSplitter({
+                    panes: [
+                    { collapsible: true, collapsed: true },
+                    {}
+                    ]
+                });
+
+                ok(!splitter.find(".t-splitbar").hasClass("t-splitbar-draggable-horizontal"));
+            });
+
+            test("panes get t-scrollable class if they are scrollable", function() {
+                var splitter = $(getSplitterHtml())
+                .kendoSplitter({
+                    panes: [
+                    { scrollable: false },
+                    {}
+                    ]
+                }),
+                panes = splitter.find(".t-pane");
+
+                ok(!panes.eq(0).hasClass("t-scrollable"));
+                ok(panes.eq(1).hasClass("t-scrollable"));
+            });
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>
