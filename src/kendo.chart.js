@@ -26,7 +26,11 @@
             var chart = this,
                 model = new RootElement();
 
-            model.children.push(new Title({ text: chart.options.title }));
+            model.children.push(
+                new Title({ text: chart.options.title }),
+                new Legend({ series: chart.options.series }),
+                new PlotArea()
+            );
             chart._model = model;
 
             model.updateLayout();
@@ -48,6 +52,10 @@
         return this;
     };
 
+
+    // **************************
+    // View Model
+    // **************************
 
     // Numeric Axis
     function NumericAxis() {
@@ -161,18 +169,18 @@
         options: {
         },
 
-        getView: function(factory) {
+        getViewElements: function(factory) {
             var element = this,
-                viewElement = factory.root(element.options),
+                viewElements = [],
                 children = element.children,
                 childrenCount = children.length;
 
             for (var i = 0; i < childrenCount; i++) {
-                viewElement.children.push(
-                    children[0].getView(factory));
+                viewElements.push.apply(viewElements,
+                    children[i].getViewElements(factory));
             };
 
-            return viewElement;
+            return viewElements;
         }
     });
 
@@ -195,6 +203,16 @@
                 box = new Box(0, 0, root.options.width, root.options.height);
 
             root.children[0].updateLayout(box);
+        },
+
+        getView: function(factory) {
+            var root = this,
+                viewRoot = factory.root(root.options),
+                viewElements = viewRoot.children;
+
+            viewElements.push.apply(viewElements, root.getViewElements(factory));
+
+            return viewRoot;
         }
     });
 
@@ -232,9 +250,11 @@
             return size;
         },
 
-        getView: function(factory) {
+        getViewElements: function(factory) {
             var text = this;
-            return factory.text(text.content, { x: text.box.x1, y: text.box.y1 });
+            return [
+                factory.text(text.content, { x: text.box.x1, y: text.box.y1 })
+            ];
         }
     });
 
@@ -276,15 +296,62 @@
             text.updateLayout(textBox);
 
             title.box = new Box(targetBox.x1, targetBox.y1, targetBox.x2, text.box.y2);
-        },
-
-        getView: function(factory) {
-            var title = this,
-                textElement = title.children[0];
-
-            return textElement.getView(factory);
         }
     });
+
+    function Legend(options) {
+        var legend = this;
+        ChartElement.call(legend);
+
+        legend.options = $.extend({}, legend.options, options);
+    }
+
+    Legend.prototype = new ChartElement();
+    $.extend(Legend.prototype, {
+        options: {
+            position: "right",
+            series: []
+        },
+
+        createLabels: function() {
+            var legend = this,
+                series = legend.options.series;
+
+            for (var i = 0; i < series.length; i++) {
+                var name = series[i].name,
+                    label = new Text(name);
+
+                legend.children.push(label);
+            };
+        },
+
+        updateLayout: function(targetBox) {
+            this.createLabels();
+        }
+    });
+
+    function PlotArea(options) {
+        var plotArea = this;
+        ChartElement.call(plotArea);
+
+        plotArea.options = $.extend({}, plotArea.options, options);
+    }
+
+    PlotArea.prototype = new ChartElement();
+    $.extend(PlotArea.prototype, {
+        options: {
+            axisY: { },
+            axisX: { },
+            series: [ ]
+        },
+
+        updateLayout: function(targetBox) {
+        }
+    });
+
+    // **************************
+    // Visual elements - Generic, SVG, VML
+    // **************************
 
     function ViewElement() {
         var element = this;
@@ -483,6 +550,8 @@
     Chart.RootElement = RootElement;
     Chart.NumericAxis = NumericAxis;
     Chart.Title = Title;
+    Chart.Legend = Legend;
+    Chart.PlotArea = PlotArea;
     Chart.SVGFactory = SVGFactory;
     Chart.SVGRoot = SVGRoot;
     Chart.SVGGroup = SVGGroup;

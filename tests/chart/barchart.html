@@ -21,19 +21,22 @@
                 module("Bar Chart Model", {
                     setup: function() {
                         $("#container").kendoChart({
-                            title: "Title",
+                            title: "Chart Title",
                             series: [{
+                                name: "Value",
                                 type: "bar",
                                 data: [100, 200, 300]
                             }],
                             axisX: {
-                                title: "Value",
                                 labels: ["Alpha", "Beta", "Charlie"]
                             }
                         });
 
                         chart = $("#container").data("kendoChart");
                         model = chart._model;
+                    },
+                    teardown: function() {
+                        $("#container").empty();
                     }
                 });
 
@@ -43,6 +46,22 @@
 
                 test("first child is Title", function() {
                     ok(model.children[0] instanceof Chart.Title);
+                });
+
+                test("title text is set", function() {
+                    equal(model.children[0].children[0].content, "Chart Title");
+                });
+
+                test("second child is Legend", function() {
+                    ok(model.children[1] instanceof Chart.Legend);
+                });
+
+                test("legend series are populated", function() {
+                    equal(model.children[1].options.series[0].name, "Value");
+                });
+
+                test("third child is PlotArea", function() {
+                    ok(model.children[2] instanceof Chart.PlotArea);
                 });
             })();
         </script>
