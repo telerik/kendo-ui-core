@@ -4,7 +4,8 @@
         proxy = $.proxy,
         Template,
         JSON = JSON || {},
-        support = {};
+        support = {},
+        dateCheck = /\d/;
 //Event ================================
     function Event() {
         this._isPrevented = false;
@@ -332,13 +333,6 @@
                 resultDate = new DateTime(date.time() + valueToAdd),
                 tzOffsetDiff = resultDate.timeOffset() - tzOffsetBefore;
             return new DateTime(resultDate.time() + tzOffsetDiff * DateTime.msPerMinute);
-        },
-
-        subtract: function (date, dateToSubtract) {
-            dateToSubtract = new DateTime(dateToSubtract).toDate();
-            var diff = date.time() - dateToSubtract,
-                tzOffsetDiff = date.timeOffset() - dateToSubtract.timeOffset();
-            return diff - (tzOffsetDiff * DateTime.msPerMinute);
         },
 
         firstDayOfMonth: function (date) {
