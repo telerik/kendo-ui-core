@@ -13,22 +13,29 @@
         <script type="text/javascript">
 
             var Chart = kendo.ui.Chart,
-                Box = Chart.Box;
-
-            (function() {
-                var rootElement,
-                    rootViewElement,
-                    factory;
+                Box = Chart.Box,
+                chartBox = new Box(0, 0, 1000, 1000);
 
                 function ChartElementStub(viewElement) {
+                    viewElement = viewElement || new ViewElementStub();
                     this.getView = function() {
                         return viewElement;
+                    },
+
+                    this.getViewElements = function() {
+                        return [viewElement];
                     }
                 }
 
                 function ViewElementStub() {
                     this.children = [];
                 }
+
+
+            (function() {
+                var rootElement,
+                    rootViewElement,
+                    factory;
 
                 module("RootElement", {
                     setup: function() {
@@ -49,6 +56,8 @@
                     factory.root = function(options) {
                         equal(options.width, 800);
                         equal(options.height, 600);
+
+                        return new ViewElementStub();
                     };
 
                     rootElement.getView(factory);
@@ -80,8 +89,7 @@
                 var title,
                     titleTextElement,
                     TITLE_TEXT_HEIGHT = 18,
-                    TITLE_TEXT_WIDTH = 37,
-                    chartBox = new Box(0, 0, 1000, 1000);
+                    TITLE_TEXT_WIDTH = 37;
 
                 module("Title", {
                     setup: function() {
@@ -126,12 +134,12 @@
                     equals(title.box.height(), TITLE_TEXT_HEIGHT);
                 });
 
-                test("getView returns text element view", 1, function() {
+                test("getViewElements returns text element", 1, function() {
                     title.children[0] = {
-                        getView: function() { return 42; }
+                        getViewElements: function() { return [ 42 ]; }
                     };
 
-                    equals(title.getView(), 42);
+                    deepEqual(title.getViewElements(), [ 42 ]);
                 });
 
             })();
@@ -152,7 +160,7 @@
                         }
                     };
 
-                    equals(text.getView(factory), 42);
+                    deepEqual(text.getViewElements(factory), [ 42 ]);
                 });
 
                 test("sets content on view element", 1, function() {
@@ -163,7 +171,7 @@
                     };
 
                     text.content = "Content";
-                    text.getView(factory)
+                    text.getViewElements(factory)
                 });
 
                 test("sets position on view element", 1, function() {
@@ -174,8 +182,51 @@
                     };
 
                     text.updateLayout(new Box(100, 100, 200, 200));
-                    text.getView(factory)
+                    text.getViewElements(factory)
                 });
+            })();
+
+            (function() {
+                var legend;
+
+                module("Legend", {
+                    setup: function() {
+                        legend = new Chart.Legend();
+                    }
+                });
+
+                test("creates labels for series", 1, function() {
+                    var factory = {
+                        text: function(content) {
+                            equal(content, "Series 1");
+                        }
+                    };
+
+                    legend.options.series = [ { name: "Series 1" } ];
+                    legend.updateLayout(chartBox);
+                    legend.getViewElements(factory);
+                });
+
+                test("positions labels below each other", function() {
+                    legend.options.series = [
+                        { name: "Series 1" },
+                        { name: "Series 2" }
+                    ];
+                    legend.updateLayout(chartBox);
+
+                    var label1 = legend.children[0],
+                        label2 = legend.children[1];
+                    equals(label2.box.y1, label1.box.y2);
+                });
+
+                test("positions legend to the right", function() {
+                    legend.options.series = [ { name: "Series 1" } ];
+                    legend.updateLayout(chartBox);
+
+                    var SERIES_LABEL_WIDTH = 30;
+                    equal(legend.children[0].box.x1, chartBox.x2 - SERIES_LABEL_WIDTH);
+                });
+
             })();
         </script>
 
