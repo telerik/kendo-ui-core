@@ -331,6 +331,10 @@
 
         rect: function(x, y, width, height) {
             return new SVGPath([[x, y], [x + width, y], [x + width, y + width], [x, y + width], [x, y]]);
+        },
+
+        line: function(x1, y1, x2, y2) {
+            return new SVGPath([[x1, y1], [x2, y2]]);
         }
     });
 
@@ -393,8 +397,8 @@
                 fontFamily: text.options.fontFamily
             });
 
-            text.options._baselineY = text.options.y + size.baselineOffset;
-            text.options.y += size.baselineOffset;
+            text.options._baselineY = text.options.y + size.baseline;
+            text.options.y += size.baseline;
         }
     });
 
@@ -447,22 +451,25 @@
 
     function measureText(text, style) {
         var measureBox = measureText.measureBox,
-            baselineMarker = $("<div class='t-baseline-marker' />");
+            baselineMarker =
+                $("<div style='display: inline-block; height: 1px; vertical-align: baseline;" +
+                              "zoom: 1; *display: inline; overflow: hidden;' />");
+
         if (!measureBox) {
             measureBox = measureText.measureBox =
-                $("<div class='t-measure-box' />")
+                $("<div style='position: absolute; top: -4000px; left: -4000px;" +
+                              "line-height: normal; visibility: hidden;' />")
                 .appendTo(document.body);
         }
 
-        measureBox
-            .css(style)
+        measureBox.css(style)
             .text(text || "&nbsp;")
             .append(baselineMarker);
 
         var size = {
             width: measureBox.width(),
             height: measureBox.height(),
-            baselineOffset: baselineMarker[0].offsetTop
+            baseline: baselineMarker[0].offsetTop
         };
 
         return size;

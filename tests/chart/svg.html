@@ -6,7 +6,6 @@
         <script src="../qunit.js"></script>
         <script src="../qunit-runner.js"></script>
         <link href="../qunit.css" type="text/css" rel="stylesheet"/>
-        <link href="../../styles/kendo.chart.css" type="text/css" rel="stylesheet"/>
     </head>
     <body>
         <script src="../../src/kendo.core.js"></script>
@@ -58,15 +57,6 @@
                     equal(text.content, "Text");
                 });
 
-                test("text is aligned to top", function() {
-                    var text = factory.text("Text", { x: 0, y: 0 }),
-                        yDiff = Math.abs(text.options._baselineY - 15);
-
-                    ok(yDiff <= 2,
-                        "_baselineY should be roughly 15, actual value "
-                        + text.options._baselineY);
-                });
-
                 test("rect returns SVGPath", function() {
                     var rect = factory.rect(10, 20, 100, 100);
                     ok(rect instanceof Chart.SVGPath);
@@ -79,7 +69,16 @@
                     ]);
                 });
 
-           })();
+                test("line returns SVGPath", function() {
+                    var line = factory.line();
+                    ok(line instanceof Chart.SVGPath);
+                });
+
+                test("line draws a line", function() {
+                    var line = factory.line(10, 20, 100, 200);
+                    deepEqual(line.points, [ [10, 20], [100, 200] ]);
+                });
+            })();
 
             (function() {
                 var root;
@@ -129,13 +128,18 @@
                     }
                 });
 
-                test("renders text tag with default position", function() {
-                    equal(text.render(), "<text x='0' y='15'></text>");
-                });
-
                 test("renders content", function() {
                     text.content = "Text";
-                    equal(text.render(), "<text x='0' y='15'>Text</text>");
+                    equal(text.render().replace(/\<text.*?\>/, "<text>"),
+                            "<text>Text</text>");
+                });
+
+                test("text is aligned to top", function() {
+                    var yDiff = Math.abs(text.options._baselineY - 15);
+
+                    ok(yDiff <= 2,
+                        "_baselineY should be roughly 15, actual value "
+                        + text.options._baselineY);
                 });
 
             })();
