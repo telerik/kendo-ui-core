@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Splitter client events</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.query.js"></script>
+        <script src="../../src/kendo.splitter.js"></script>
+        <script src="helper.js"></script>
+        <link rel="stylesheet" href="../qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Splitter client events</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+
+            module("Splitter / ClientEvents", {
+                teardown: function() {
+                    $('.t-splitter').remove();
+                }
+            });
+
+            test("initialization triggers init", function() {
+                var triggered = false;
+
+                $(getSplitterHtml())
+                    .appendTo(document.body)
+                    .kendoSplitter({
+                        init:  function() {
+                            triggered = true;
+                        }
+                    });
+
+                ok(triggered);
+            });
+
+            test("initialization triggers resize", function() {
+                var triggered = false;
+
+                $(getSplitterHtml())
+                    .appendTo(document.body)
+                    .kendoSplitter({
+                        resize:  function() {
+                            triggered = true;
+                        }
+                    })
+                ok(triggered);
+            });
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>
