@@ -19,15 +19,15 @@
 
     <script>
         window.onload = function() {
-            var measureBox = $("<div style='position: absolute; line-height: normal; visibility: hidden; top: -4000px; left: -4000px;'>Text</div>");
-            var baselineMarker = $("<div style='display: inline-block; height: 1px; vertical-align: baseline;'></div>");
+            var measureBox = $("<div style='position: absolute; line-height: normal;'>Text</div>");
+            var baselineMarker = $("<div style='display: inline-block; height: 1px; width: 100px; vertical-align: baseline; background-color: red;'></div>");
             measureBox.append(baselineMarker).appendTo(document.body);
 
             var textCenter = measureBox.height() / 2;
-            var baseline = baselineMarker[0].offsetTop;
+            var baseline = baselineMarker[0].offsetTop + 1;
             var offsetY = baseline - textCenter;
 
-            //alert(offsetY);
+            alert(offsetY);
             document.getElementById("default-text").setAttribute("transform", "translate(0, " + offsetY + ")");
         }
     </script>
