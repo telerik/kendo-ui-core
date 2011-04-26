@@ -1,0 +1,223 @@
+(function($) {
+    function detectBrowser() {
+        var featureCheck = document.createElement('div'),
+            browser = {};
+
+        featureCheck.style.cssText = '-moz-transform-origin: 0px 0px; -webkit-transform-origin: 0px 0px; -o-transform-origin: 0px 0px; -ms-transform-origin: 0px 0px; position: absolute; top: -10000px; visibility: hidden;';
+        document.documentElement.appendChild(featureCheck);
+        var featStyle = document.defaultView.getComputedStyle(featureCheck);
+        browser.Firefox = featStyle.getPropertyValue('-moz-transform-origin') == '0px 0px';
+        browser.WebKit = featStyle.getPropertyValue('-webkit-transform-origin') == '0px 0px';
+        browser.Opera = featStyle.getPropertyValue('-o-transform-origin') == '0px 0px';
+        browser.IE = featStyle.getPropertyValue('-ms-transform-origin') == '0px 0px';
+        browser.name = browser.Firefox ? 'Firefox' : browser.WebKit ? 'WebKit' : browser.Opera ? 'Opera' : browser.IE ? 'IE' : 'non-supported';
+        document.documentElement.removeChild(featureCheck);
+        featureCheck = null;
+
+        return browser;
+    }
+
+    var browser = detectBrowser();
+
+    var stopTransition = function (selection, gotoEnd) {
+        if (!selection || !('object' in selection)) return;
+
+        var aObject = selection.object;
+
+        if (!gotoEnd) {
+
+            var animProperties = selection.keys;
+            if (!animProperties) return;
+
+            var style = document.defaultView.getComputedStyle(aObject[0], null),
+                    cssValues = {},
+                    prop;
+
+            for (prop in animProperties)
+                cssValues[animProperties[prop]] = style.getPropertyValue(animProperties[prop]);
+
+            aObject.css($.getCssPrefix() + 'transition', 'none');
+
+            aObject.css(cssValues);
+
+        } else
+            aObject.css($.getCssPrefix() + 'transition', 'none');
+
+        if (selection.callback)
+            selection.callback.call(aObject);
+
+        aObject.dequeueTransform();
+    };
+
+    $.extend({
+        getEventPrefix: function () {
+          if (!this._eventPrefix) {
+            this._eventPrefix = '';
+            switch (browser.name) {
+              case 'WebKit': this._eventPrefix = 'webkit'; break;
+              case 'Opera': this._eventPrefix = 'o'; break;
+            }
+          }
+
+          return this._eventPrefix;
+        },
+
+        getCssPrefix: function () {
+          if (!this._cssPrefix) {
+            this._cssPrefix = '';
+            switch (browser.name) {
+              case 'Firefox': this._cssPrefix = '-moz-'; break;
+              case 'WebKit': this._cssPrefix = '-webkit-'; break;
+              case 'Opera': this._cssPrefix = '-o-'; break;
+              case 'IE': this._cssPrefix = '-ms-'; break;
+            }
+          }
+
+          return this._cssPrefix;
+        }
+    });
+
+    $.fn.extend({
+        timeline: {},
+
+        animateTransform: function(properties, duration, ease, callback, exclusive) {
+            duration = duration !== undefined ? (duration < 1 ? duration : duration / 1000) : 0.5;
+            if (typeof callback !== 'function') {
+                exclusive = callback;
+                callback = undefined;
+            }
+
+            var transforms = [], cssValues = {}, key, animationStep = {},
+                transformProps = ['perspective', 'rotate', 'rotateX', 'rotateY', 'rotateZ', 'rotate3d', 'scale', 'scaleX', 'scaleY', 'scaleZ', 'scale3d', 'skew', 'skewX', 'skewY', 'translate', 'translateX', 'translateY', 'translateZ', 'translate3d', 'matrix', 'matrix3d'];
+            for (key in properties)
+                if (transformProps.indexOf(key) != -1)
+                    transforms.push(key + '(' + properties[key] + ')');
+                else
+                    cssValues[key] = properties[key];
+
+            animationStep.type = 'transition';
+            animationStep.callback = callback;
+            animationStep.setup = {};
+            animationStep.setup[$.getCssPrefix() + 'transition'] = (exclusive || 'all') + ' ' + duration + 's ' + (ease || '');
+
+            if (transforms.length)
+            cssValues[$.getCssPrefix() + 'transform'] = transforms.join(' ');
+
+            animationStep.keys = cssValues.keys;
+            animationStep.CSS = cssValues;
+            animationStep.object = this;
+
+            if (this.queueTransform(animationStep) == 1)
+                this.activateTransformTask();
+
+            return this;
+        },
+
+        activateTransformTask: function() {
+
+            if (this.selector in this.timeline && this.timeline[this.selector].length) {
+                var currentTransition = this.timeline[this.selector][0];
+
+                if (currentTransition.type == 'delay') {
+                    var that = this;
+
+                    setTimeout(function () {
+                        that.advanceTransformQueue();
+                    }, currentTransition.duration);
+
+                    return;
+                }
+
+                var eventName = $.getEventPrefix() + 'TransitionEnd';
+                if (!$.getEventPrefix())
+                    eventName = eventName.toLowerCase();
+
+                typeof currentTransition.callback == 'function' && currentTransition.object.one(eventName, $.proxy(currentTransition.callback, this));
+                currentTransition.object.one(eventName, $.proxy(this.advanceTransformQueue, this));
+
+                currentTransition.object.css(currentTransition.setup);
+
+                setTimeout(function () {
+                    currentTransition.object.css(currentTransition.CSS);
+                }, 0); // Opera Mobile is one dumb animal
+            }
+
+        },
+
+        advanceTransformQueue: function() {
+            this.css($.getCssPrefix() + 'transition', 'none');
+            this.dequeueTransform();
+
+            this.activateTransformTask();
+        },
+
+        clearTransformQueue: function() {
+            delete this.timeline[this.selector];
+        },
+
+        queueTransform: function(step) {
+            if (!(this.selector in this.timeline))
+                this.timeline[this.selector] = [];
+
+            this.timeline[this.selector].push(step);
+
+            return this.timeline[this.selector].length;
+        },
+
+        dequeueTransform: function() {
+            if (!this.timeline[this.selector]) return;
+
+            this.timeline[this.selector].shift();
+
+            if (this.timeline[this.selector] == [])
+                delete this.timeline[this.selector];
+        },
+
+        delayTransform: function(timeSpan) {
+            var animationStep = {};
+
+            animationStep.type = 'delay';
+            animationStep.duration = timeSpan;
+            animationStep.object = this;
+
+            if (this.queueTransform(animationStep) == 1)
+                this.activateTransformTask();
+
+            return this;
+        },
+
+        stopTransform: function(clearQueue, gotoEnd) {
+
+            if (this.selector in this.timeline)
+                stopTransition(this.timeline[this.selector][0], gotoEnd);
+
+            if (clearQueue)
+                this.clearTransformQueue();
+
+            return this;
+        },
+
+        stopAllTransforms: function(clearQueue, gotoEnd) {
+
+            for (var idx in this.timeline) {
+                if (idx in this.timeline)
+                    stopTransition(this.timeline[idx][0], gotoEnd);
+
+                if (clearQueue && this.timeline[idx].length)
+                    this.timeline[idx][0].object.clearTransformQueue();
+
+                if (!clearQueue && this.timeline[idx].length)
+                    this.timeline[idx][0].object.activateTransformTask();
+            }
+
+            return this;
+        },
+
+        fadeTransform: function (duration, opacity) {
+            this.animateTransform({ 'opacity': opacity }, duration, 'linear', 'opacity');
+
+            return this;
+        }
+    });
+
+})(jQuery);
