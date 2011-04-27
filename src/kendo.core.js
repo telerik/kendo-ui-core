@@ -307,7 +307,26 @@
         pm: "PM",
         dateSeparator: "/",
         timeSeparator: ":",
-        firstDayOfWeek: 0
+        firstDayOfWeek: 0,
+        currencydecimaldigits: 2,
+        currencydecimalseparator: '.',
+        currencygroupseparator: ',',
+        currencygroupsize: 3,
+        currencynegative: 0,
+        currencypositive: 0,
+        currencysymbol: '$',
+        numericdecimaldigits: 2,
+        numericdecimalseparator: '.',
+        numericgroupseparator: ',',
+        numericgroupsize: 3,
+        numericnegative: 1,
+        percentdecimaldigits: 2,
+        percentdecimalseparator: '.',
+        percentgroupseparator: ',',
+        percentgroupsize: 3,
+        percentnegative: 0,
+        percentpositive: 0,
+        percentsymbol: '%'
     };
     
     function DateTime() {
@@ -357,7 +376,7 @@
             var tzOffsetBefore = date.timeOffset(),
                 resultDate = new DateTime(date.time() + value),
                 tzOffsetDiff = resultDate.timeOffset() - tzOffsetBefore;
-            date.time(resultDate.time() + tzOffsetDiff * $t.datetime.msPerMinute);
+            date.time(resultDate.time() + tzOffsetDiff * DateTime.msPerMinute);
         },
 
         parse: function (options) {
@@ -602,6 +621,7 @@
 
     (function() {
         var culture = CultureInfo,
+            customFormatRegEx = /[0#?]/,
             standardFormats = {
                 d: culture.shortDate,
                 D: culture.longDate,
@@ -616,6 +636,19 @@
                 u: culture.universalSortableDateTime,
                 y: culture.monthYear,
                 Y: culture.monthYear
+            },
+            numericPatterns = {
+                numeric: {
+                    negative: ['(n)', '-n', '- n', 'n-', 'n -']
+                },
+                currency: {
+                    positive: ['*n', 'n*', '* n', 'n *'],
+                    negative: ['(*n)', '-*n', '*-n', '*n-', '(n*)', '-n*', 'n-*', 'n*-', '-n *', '-* n', 'n *-', '* n-', '* -n', 'n- *', '(* n)', '(n *)']
+                },
+                percent: {
+                    positive: ['n *', 'n*', '*n'],
+                    negative: ['-n *', '-n*', '-*n']
+                }
             };
 
         function formatDate(date, format) {
@@ -667,8 +700,213 @@
             });
         }
 
+        //number formatting
+        function round(value, precision) {
+            var power = Math.pow(10, precision || 0);
+            return Math.round(value * power) / power;
+        }
+
+        function reverse(str) {
+            return str.split('').reverse().join('');
+        }
+
+        function injectInFormat(val, format, appendExtras) {
+            var i = 0, j = 0,
+                fLength = format.length,
+                vLength = val.length,
+                builder = [];
+
+            while (i < fLength && j < vLength && format.substring(i).search(customFormatRegEx) >= 0) {
+
+                if (format.charAt(i).match(customFormatRegEx)){
+                    builder.push(val.charAt(j++));
+                } else {
+                    builder.push(format.charAt(i));
+                }
+
+                i++;
+            }
+
+            if (j < vLength && appendExtras) {
+                builder.push(val.substring(j));
+            }
+            if(i < fLength) {
+                builder.push(format.substring(i));
+            }
+
+            var result = reverse(builder.join("")),
+                zeroIndex;
+
+            if (result.indexOf('#') > -1) {
+                zeroIndex = result.indexOf('0');
+            }
+
+            if (zeroIndex > -1) {
+                var first = result.slice(0, zeroIndex),
+                    second = result.slice(zeroIndex, result.length);
+                result = first.replace(/#/g, '') + second.replace(/#/g, '0');
+            } else {
+                result = result.replace(/#/g, '');
+            }
+
+            if (result.indexOf(',') == 0) {
+                result = result.replace(/,/g, '');
+            }
+
+            return appendExtras ? result : reverse(result);
+        }
+
+        function lastIndexOf(value, character) {
+            var characterLength = character.length;
+            for (var i = value.length - 1; i > -1; i--){
+                if (value.substr(i, characterLength) == character) {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        function zeroPad (str, count, left) {
+            for (var l = str.length; l < count; l++) {
+                str = left ? ('0' + str) : (str + '0');
+            }
+            return str;
+        }
+
+        function addGroupSeparator (number, groupSeparator, groupSize) {
+            if (groupSeparator && groupSize != 0) {
+                var regExp = new RegExp('(-?[0-9]+)([0-9]{' + groupSize + '})');
+                while (regExp.test(number)) {
+                    number = number.replace(regExp, '$1' + groupSeparator + '$2');
+                }
+            }
+            return number;
+        }
+        
+        function formatNumber (number, format) {
+            var type,
+                customFormat,
+                isCustomFormat,
+                negativeFormat,
+                zeroFormat,
+                exponent,
+                left,
+                right,
+                undefined,
+                sign = number < 0;
+
+            format = format.split(":");
+            format = format.length > 1 ? format[1].replace("}", "") : format[0];
+            isCustomFormat = format.search(customFormatRegEx) != -1;
+
+            if (isCustomFormat) {
+                format = format.split(";");
+                customFormat = format[0];
+                negativeFormat = format[1];
+                zeroFormat = format[2];
+                format = (sign && negativeFormat ? negativeFormat : customFormat).indexOf('%') != -1 ? "p" : "n";
+            }
+
+            switch (format.toLowerCase()) {
+                case "d":
+                    return Math.round(number).toString();
+                case "c":
+                    type = "currency"; break;
+                case "n":
+                    type = "numeric"; break;
+                case "p":
+                    type = "percent";
+                    number = Math.abs(number) * 100;
+                    break;
+                default:
+                    return number.toString();
+            }
+
+            var digits = culture[type + "decimaldigits"],
+                separator = culture[type + "decimalseparator"],
+                groupSeparator = culture[type + "groupseparator"],
+                groupSize = culture[type + "groupsize"],
+                negative = culture[type + "negative"],
+                positive = culture[type + "positive"],
+                symbol = culture[type + "symbol"];
+
+            if (isCustomFormat) {
+                var splits = (sign && negativeFormat ? negativeFormat : customFormat).split('.'),
+                    leftF = splits[0],
+                    rightF = splits.length > 1 ? splits[1] : '',
+                    lastIndexZero = lastIndexOf(rightF, '0'),
+                    lastIndexSharp = lastIndexOf(rightF, '#');
+                digits = (lastIndexSharp > lastIndexZero ? lastIndexSharp : lastIndexZero) + 1;
+            }
+
+            var rounded = round(number, digits);
+            number = isFinite(rounded) ? rounded : number;
+
+            var split = number.toString().split(/e/i);
+            exponent = split.length > 1 ? parseInt(split[1]) : 0;
+            split = split[0].split('.');
+
+            left = split[0];
+            left = sign ? left.replace('-', '') : left;
+            right = split.length > 1 ? split[1] : '';
+
+            if (exponent) {
+                if (!sign) {
+                    right = zeroPad(right, exponent, false);
+                    left += right.slice(0, exponent);
+                    right = right.substr(exponent);
+                } else {
+                    left = zeroPad(left, exponent + 1, true);
+                    right = left.slice(exponent, left.length) + right;
+                    left = left.slice(0, exponent);
+                }
+            }
+
+            var result,
+                rightLength = right.length;
+
+            if (digits < 1 || (isCustomFormat && lastIndexZero == -1 && rightLength === 0)){
+                right = '';
+            } else {
+                right = rightLength > digits ? right.slice(0, digits) : zeroPad(right, digits, false);
+            }
+
+            if (isCustomFormat) {
+                if (left == 0) {
+                     left = '';
+                }
+
+                left = injectInFormat(reverse(left), reverse(leftF), true);
+                left = leftF.indexOf(',') != -1 ? addGroupSeparator(left, groupSeparator, groupSize) : left;
+
+                right = right && rightF ? injectInFormat(right, rightF) : '';
+
+                if(number === 0 && zeroFormat) {
+                    result = zeroFormat;
+                } else {
+                    result = (sign && !negativeFormat ? '-' : '') + left + (right.length > 0 ? separator + right : '');
+                }
+            } else {
+                var pattern,
+                    numberString,
+                    patterns = numericPatterns[type];
+
+                if(sign) {
+                    pattern = patterns['negative'][negative];
+                } else {
+                    pattern = symbol ? patterns['positive'][positive] : null;
+                }
+
+                left = addGroupSeparator(left, groupSeparator, groupSize);
+                numberString = left + (right.length > 0 ? separator + right : '');
+                result = pattern ? pattern.replace('n', numberString).replace('*', symbol) : numberString;
+            }
+            return result;
+        }
+
         extend(formatters, {
-            date: formatDate
+            date: formatDate,
+            number: formatNumber
         });
     })();
 

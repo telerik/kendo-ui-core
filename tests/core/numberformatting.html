@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Number Formatting</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <link rel="stylesheet" href="../qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Number Formatting</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script type="text/javascript">
+            var toString = kendo.toString;
+            var culture = "en-US";
+
+        test('number formatting supports decimal format', function() { //D
+            var number = 12123.12;
+            equal(toString(number, "D"), '12123', culture);
+        });
+
+        test('number formatting supports decimal format with small d', function() { //d
+            var number = 12123.12;
+            equal(toString(number, "d"), '12123', culture);
+        });
+
+        test('number formatting supports currency format', function() { //C
+            var number = 12123.129;
+            equal(toString(number, "C"), '$12,123.13', culture);
+        });
+
+        test('number formatting supports currency format with small c', function() { //C
+
+            var number = 12123.129;
+            equal(toString(number, "c"), '$12,123.13', culture);
+        });
+
+        test('number formatting supports Number format', function() { //N
+            var number = 12123.129;
+            equal(toString(number, "N"), '12,123.13', culture);
+        });
+
+        test('number formatting supports Number format with small n', function() { //n
+            var number = 12123.129;
+            equal(toString(number, "n"), '12,123.13', culture);
+        });
+
+        test('number formatting supports Percent format', function() { //P
+            var number = 12123.129;
+            equal(toString(number, "P"), '1,212,312.90 %', culture);
+        });
+
+        test('number formatting supports Percent format with small p', function() { //p
+            var number = 12123.129;
+            equal(toString(number, "p"), '1,212,312.90 %', culture);
+        });
+
+        test('number formatting supports decimal format used in String Format', function() { //D
+            var number = 12123.12;
+            equal(toString(number, "{0:D}"), '12123', culture);
+        });
+
+        test('number formatting supports decimal format with small d used in String Format', function() { //d
+            var number = 12123.12;
+            equal(toString(number, "{0:d}"), '12123', culture);
+        });
+
+        test('number formatting supports currency format used in String Format', function() { //C
+            var number = 12123.129;
+            equal(toString(number, "{0:C}"), '$12,123.13', culture);
+        });
+
+        test('number formatting supports currency format with small c used in String Format', function() { //C
+
+            var number = 12123.129;
+            equal(toString(number, "{0:c}"), '$12,123.13', culture);
+        });
+
+        test('number formatting supports Number format used in String Format', function() { //N
+            var number = 12123.129;
+            equal(toString(number, "{0:N}"), '12,123.13', culture);
+        });
+
+        test('number formatting supports Number format with small n used in String Format', function() { //n
+            var number = 12123.129;
+            equal(toString(number, "{0:n}"), '12,123.13', culture);
+        });
+
+        test('number formatting supports Percent format used in String Format', function() { //P
+            var number = 12123.129;
+            equal(toString(number, "{0:P}"), '1,212,312.90 %', culture);
+        });
+
+        test('number formatting supports Percent format with small p used in String Format', function() { //p
+            var number = 12123.129;
+            equal(toString(number, "{0:p}"), '1,212,312.90 %', culture);
+        });
+        test('custom number formatting with normal number format', function() {
+            var number = 12123.12;
+            equal(toString(number, "###.##"), '12123.12', culture);
+        });
+
+        test('custom number formatting with three digits after decimal point', function() {
+            var number = 12123.12;
+            equal(toString(number, "###.##0"), '12123.120', culture);
+        });
+
+        test('custom number formatting with decimal digits and int number', function() {
+            var number = 12123;
+            equal(toString(number, "###.##"), '12123', culture);
+        });
+
+        test('custom number formatting with one decimal digits and double number', function() {
+            var number = 12123.17;
+            equal(toString(number, "###.0"), '12123.2', culture);
+        });
+
+        test('custom number formatting with one decimal digits and obligotory zeros', function() {
+            var number = 23.17;
+            equal(toString(number, "#00##.0"), '0023.2', culture);
+        });
+
+        test('custom number formatting with currency symbol', function() {
+            var number = 23.17;
+            equal(toString(number, "$ #00##.0"), '$ 0023.2', culture);
+        });
+
+        test('custom number formatting with currency symbol and string format', function() {
+            var number = 23.17;
+            equal(toString(number, "{0:$ #00##.0}"), '$ 0023.2', culture);
+        });
+
+
+        test('custom number formatting with other characteres', function() {
+            var number = 23.17;
+            equal(toString(number, "(#) - ##"), '() - 23', culture);
+        });
+
+        test('custom number formatting with other characteres and obligatory zeros', function() {
+            var number = 23.17;
+            equal(toString(number, "(0) - 00"), '(0) - 23', culture);
+        });
+
+        test('custom number formatting with negative pattern', function() {
+            var number = -23.17;
+            equal(toString(number, "000.00; -###.00"), -23.17, culture);
+        });
+
+        test('custom number formatting with negative pattern and string format', function() {
+            var number = -23.17;
+            equal(toString(number, "{0:000.00;- 0###.00}"), '- 0023.17', culture);
+        });
+
+        test('custom number formatting with zero pattern', function() {
+            var number = 0;
+            equal(toString(number, "000.00; -###.00;zero"), 'zero', culture);
+        });
+
+        test('custom number formatting with one zero', function() {
+            var number = 123.12;
+            equal(toString(number, "0$"), '123$', culture);
+        });
+
+        test('custom number toString with less digits than specified in format', function() {
+            var value = toString(666, "#,###.00");
+            equal(value, '666.00', culture);
+        });
+
+        test('custom number toString with less digits than specified in format1', function() {
+            var value = toString(666, "#,##,###.00");
+            equal(value, '666.00', culture);
+        });
+
+        test('custom number toString with less digits than specified in format which has more than two group separators', function() {
+            var value = toString(6666, "#,##,###.00");
+            equal(value, '6,666.00', culture);
+        });
+
+        test('custom number toString exact digits count as format', function() {
+            var value = toString(6666666, "#,###,###.00");
+            equal(value, '6,666,666.00', culture);
+        });
+
+        test('custom number toString with less digits than specified in format less than zero', function() {
+            var value = toString(.5, "#,###.00");
+            equal(value, '.50', culture);
+        });
+
+        </script>
+    </body>
+</html>
