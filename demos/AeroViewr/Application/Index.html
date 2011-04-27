@@ -13,6 +13,7 @@
 <script src="../../../src/kendo.pager.js"></script>
 <script src="../../../src/kendo.list.js"></script>
 <script src="../../../src/kendo.listView.js"></script>
+<script src="../../../src/kendo.grid.js"></script>
 <script src="js/aeroviewr.js"></script>
 <title>Index</title>
 </head>
@@ -34,8 +35,12 @@
 
 <section class="main">
 <h1>Nature Set <span class="by-user">by <a href="#"><em>SomeUser</em></a></span></h1>
+<input type="button" id="toggle" value="toggle"/>
 <ol class="paging"></ol>
 <ul id="mainPhotoStrip" class="floatWrap thumbs"><li></li></ul>
+<table id="mainPhotoGrid">
+    <th data-field="id"></th>
+</table>
 </section>
 
 <section class="footer">
