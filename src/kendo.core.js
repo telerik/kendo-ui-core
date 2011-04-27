@@ -707,14 +707,57 @@
         support.touch = "ontouchstart" in window;
     })();
 
-    // namespace declaration
-    extend(kendo, {
-        ui: {},
-        data: {},
-        support: support
-    });
+    function animate(element, options, reverse, callback) {
+        var effects = {};
+
+        if (typeof options === "string") {
+            if ($.isFunction(reverse)) {
+                callback = reverse;
+                reverse = false;
+            }
+
+            $.each(options.split(" "), function() {
+                effects[this] = {};
+            });
+
+            options = {
+                effects: effects,
+                reverse: reverse,
+                complete: callback
+            };
+        }
+
+        options = extend({ effects: {}, reverse: false, complete: $.noop }, options);
+
+        return element.queue(function () {
+            var promises = [];
+
+            $.each(options.effects, function(effectName, effectOptions) {
+                promises.push( $.Deferred(function(deferred) {
+                        var effect = kendo.fx[effectName];
+
+                        if (effect) {
+                            effect[options.reverse? "reverse" : "play"](effectOptions, deferred.resolve);
+                        } else {
+                            deferred.resolve();
+                        }
+                    }).promise()
+                )
+            });
+
+            $.when.apply(null, promises).then(function() {
+                element.dequeue();
+                options.complete();
+            });
+       });
+    }
 
     extend(kendo, {
+        ui: {},
+        fx: {},
+        data: {},
+        support: support,
+        animate: animate,
         Observable: Observable,
         Template: Template,
         template: proxy(Template.compile, Template),
@@ -737,6 +780,7 @@
     }
 
     Component.prototype = new Observable();
+
 
     extend(kendo.ui, {
         Component: Component,
