@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>kendo.mobile.List Tests</title>
+        <title>kendo.mobile.Application Tests</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit.js"></script>
         <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.mobile.application.js"></script>
         <link rel="stylesheet" href="../qunit.css" />
     </head>
     <body>
-        <h1 id="qunit-header">kendo.mobile.List Tests</h1>
+        <h1 id="qunit-header">kendo.mobile.Application Tests</h1>
         <h2 id="qunit-banner"></h2>
         <div id="qunit-testrunner-toolbar"></div>
         <h2 id="qunit-userAgent"></h2>
@@ -16,16 +18,17 @@
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
 
-        <script src="../../src/kendo.core.js"></script>
-        <script src="../../src/kendo.mobile.list.js"></script>
         <script>
-            var List = kendo.mobile.List;
+            module("kendo.mobile.Application", {
+                setup: function() {
+                },
+                teardown: function() {
+                }
+            });
 
-            module("Binding");
-
-            test("initialization", function() {
-                ok(new List());
+            test("", function() {
             });
         </script>
     </body>
 </html>
+
