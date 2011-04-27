@@ -707,7 +707,7 @@
         support.touch = "ontouchstart" in window;
     })();
 
-    function animate(element, options, reverse, callback) {
+    function animate(element, options, reverse, complete) {
         var effects = {};
 
         if (typeof options === "string") {
@@ -719,14 +719,14 @@
 
             // only callback is provided e.g. animate(element, options, function() {});
             if ($.isFunction(reverse)) {
-                callback = reverse;
+                complete = reverse;
                 reverse = false;
             }
 
             options = {
                 effects: effects,
                 reverse: reverse,
-                complete: callback
+                complete: complete
             };
         }
 
@@ -755,12 +755,16 @@
                 promises.push(promise);
             });
 
-            //wait for all effects to complete and then call the next animation in the queue and invoke the callback
+            //wait for all effects to complete
             $.when.apply(null, promises).then(function() {
-                element.dequeue();
-                options.complete();
+                element.dequeue(); // call next animation from the queue
+                options.complete(); // call the complete callback
             });
        });
+    }
+
+    $.fn.kendoAnimate = function(options, reverse, complete) {
+        return animate(this, options, reverse, complete);
     }
 
     extend(kendo, {
