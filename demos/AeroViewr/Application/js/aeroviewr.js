@@ -51,6 +51,7 @@
     $(document).ready(function() {
         var mainPhotoStrip =  $("#mainPhotoStrip"),
             flatPhotoStrip =  $("#flatPhotoStrip"),
+            mainPhotoGrid = $("#mainPhotoGrid"),
             dataSource = new kendo.data.DataSource({
                 page: 1,
                 pageSize: 20,
@@ -97,6 +98,11 @@
            dataSource.read();
         });
 
+        $('#toggle').click(function(e){
+           mainPhotoStrip.hide();
+           mainPhotoGrid.show();
+        });
+
         mainPhotoStrip.kendoListView({
             dataSource: dataSource,
             template: template
@@ -124,6 +130,12 @@
         });
 
         $(".paging").kendoPager({ dataSource: dataSource });
+
+        mainPhotoGrid.kendoGrid({
+            dataSource: dataSource,
+            pageable: $(".paging").data("kendoPager")
+        });
+
 
       });
 })(jQuery);
