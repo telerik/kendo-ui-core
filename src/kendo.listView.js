@@ -11,26 +11,33 @@
 
         Component.apply(that, arguments);
 
-        that.dataSource = dataSource = DataSource.create(options);
+        that._dataSource();
 
-        that.element = element;
-        that.wrapper = $(element);
-
-        that.options = $.extend({}, that.options, options);
         that.template = that.options.template;
 
-        that.wrapper.addClass("list-view")
+        that.element.addClass("list-view")
                     .delegate(".list-view > *", "click",  $.proxy(that._click, that));
-        that.dataSource.bind("change", $.proxy(that._render, that));
     }
 
     ListView.prototype = {
         options: {
             template: ""
         },
+        _dataSource: function() {
+            var that = this,
+                options = that.options,
+                dataSource = options.dataSource;
+
+            if ($.isPlainObject(dataSource) && options.data) {
+                dataSource.data = options.data;
+            }
+
+            that.dataSource = DataSource.create(dataSource);
+            that.dataSource.bind("change", $.proxy(that._render, that));
+        },
         _render: function() {
             var that = this,
-                data = that.dataSource.view()
+                data = that.dataSource.view(),
                 list = new kendo.ui.List(that.element, { data: data, template: that.template });
 
             this.trigger("dataBound");
