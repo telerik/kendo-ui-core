@@ -92,13 +92,13 @@
 
                 setTimeout(function () {
                     currentTransition.object.css(currentTransition.CSS);
-                }, 0); // Opera Mobile is one dumb animal
+                }, 0);
             }
 
         },
 
         advanceTransformQueue: function() {
-            this.css(support.transitions.css + 'transition', 'none');
+            this.css(support.transitions.css + 'transition', 'none'); // remove any leftover transitions on advance
             this.dequeueTransform();
 
             this.activateTransformTask();

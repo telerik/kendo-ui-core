@@ -946,7 +946,7 @@
 
         support.transitions = false;
 
-        $.each([ 'Moz', 'webkit', 'O', 'ms' ], function (idx, value) {
+        $.each([ 'Moz', 'webkit', 'O', 'ms' ], function () {
             var supportsThis = (typeof table.style[this + 'Transition'] === 'string');
 
             if (supportsThis) {
@@ -1019,7 +1019,7 @@
 
     $.fn.kendoAnimate = function(options, reverse, complete) {
         return animate(this, options, reverse, complete);
-    }
+    };
 
     extend(kendo, {
         ui: {},
