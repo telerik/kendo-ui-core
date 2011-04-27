@@ -8,6 +8,10 @@ tests.push(
         title: "component"
     },
     {
+        page: "core/animation.html",
+        title: "animation"
+    },
+    {
         page: "core/format.html",
         title: "format"
     },
