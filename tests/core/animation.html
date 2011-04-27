@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>animation tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <link rel="stylesheet" href="../qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">animation tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+            var animate = kendo.animate,
+                span;
+
+            module("animate", {
+                setup: function() {
+                    span = $("<span>foo</span>").appendTo(document.body);
+                },
+                teardown: function() {
+                    span.remove();
+                }
+            });
+
+            test("animate with effect which does not exist calls the callback imeadiately", function() {
+                var callbackWasCalled = false;
+
+                animate(span, "foo", function() {
+                    callbackWasCalled = true;
+                });
+
+                ok(callbackWasCalled);
+            });
+
+            test("animate calls the callback when the effect finishes", function() {
+                kendo.fx.foo = {
+                    play: function(options, callback) {
+                        setTimeout(callback, 10);
+                    }
+                }
+
+                animate(span, "foo", function() {
+                    ok(true);
+                    start();
+                });
+
+                stop(1000);
+            });
+
+            test("animate waits all effects to finish", function() {
+                var fooFinished = false, barFinished = false;
+
+                kendo.fx.foo = {
+                    play: function(options, callback) {
+                        setTimeout(function() {
+                           fooFinished = true;
+                           callback();
+                        }, 10);
+                    }
+                };
+
+                kendo.fx.bar = {
+                    play: function(options, callback) {
+                        setTimeout(function() {
+                           barFinished = true;
+                           callback();
+                        }, 20);
+                    }
+                }
+
+                animate(span, "foo bar", function() {
+                    ok(fooFinished);
+                    ok(barFinished);
+                    start();
+                });
+
+                stop(1000);
+            });
+
+            test("animations play in sequence", function() {
+                var firstAnimationFinished = false;
+
+                kendo.fx.foo = {
+                    play: function(options, callback) {
+                        setTimeout(callback, 10);
+                    }
+                }
+
+                animate(span, "foo", function() {
+                    firstAnimationFinished = true;
+                });
+
+                animate(span, "foo", function() {
+                    ok(firstAnimationFinished);
+                    start();
+                });
+                stop(1000);
+            });
+
+            test("reverse method of the effect is called if reverse = false", function() {
+                var reverseWasCalled = false;
+
+                kendo.fx.foo = {
+                    reverse: function(options, callback) {
+                        reverseWasCalled = true;
+                        callback();
+                    }
+                };
+
+                animate(span, "foo", true);
+                ok(reverseWasCalled);
+            });
+
+            test("passing options to animate", function() {
+                var reverseWasCalled = false, callbackWasCalled = false;
+
+                kendo.fx.foo = {
+                    reverse: function(options, callback) {
+                        reverseWasCalled = true;
+                        callback();
+                    }
+                };
+
+                animate(span, {
+                    reverse: true,
+                    complete: function() {
+                        callbackWasCalled = true;
+                    },
+                    effects: {
+                        foo: {}
+                    }
+                });
+                ok(reverseWasCalled);
+                ok(callbackWasCalled);
+            });
+       </script>
+    </body>
+</html>
