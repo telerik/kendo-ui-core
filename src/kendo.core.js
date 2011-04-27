@@ -1000,7 +1000,7 @@
                     var effect = kendo.fx[effectName];
 
                     if (effect) {
-                        effect[options.reverse? "reverse" : "play"](effectOptions, deferred.resolve);
+                        effect[options.reverse? "reverse" : "play"](element, effectOptions, deferred.resolve);
                     } else {
                         deferred.resolve();
                     }

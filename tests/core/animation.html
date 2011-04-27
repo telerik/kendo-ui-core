@@ -42,7 +42,7 @@
 
             test("animate calls the callback when the effect finishes", function() {
                 kendo.fx.foo = {
-                    play: function(options, callback) {
+                    play: function(element, options, callback) {
                         setTimeout(callback, 10);
                     }
                 }
@@ -59,7 +59,7 @@
                 var fooFinished = false, barFinished = false;
 
                 kendo.fx.foo = {
-                    play: function(options, callback) {
+                    play: function(element, options, callback) {
                         setTimeout(function() {
                            fooFinished = true;
                            callback();
@@ -68,7 +68,7 @@
                 };
 
                 kendo.fx.bar = {
-                    play: function(options, callback) {
+                    play: function(element, options, callback) {
                         setTimeout(function() {
                            barFinished = true;
                            callback();
@@ -89,7 +89,7 @@
                 var firstAnimationFinished = false;
 
                 kendo.fx.foo = {
-                    play: function(options, callback) {
+                    play: function(element, options, callback) {
                         setTimeout(callback, 10);
                     }
                 }
@@ -109,7 +109,7 @@
                 var reverseWasCalled = false;
 
                 kendo.fx.foo = {
-                    reverse: function(options, callback) {
+                    reverse: function(element, options, callback) {
                         reverseWasCalled = true;
                         callback();
                     }
@@ -123,7 +123,7 @@
                 var reverseWasCalled = false, callbackWasCalled = false;
 
                 kendo.fx.foo = {
-                    reverse: function(options, callback) {
+                    reverse: function(element, options, callback) {
                         reverseWasCalled = true;
                         callback();
                     }

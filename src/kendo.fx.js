@@ -174,3 +174,40 @@
     });
 
 })(jQuery);
+
+(function($, window, undefined) {
+    var kendo = window.kendo,
+        extend = $.extend;
+
+    function animate(element, properties, options, complete) {
+        element.animate(properties,
+            extend({
+                    queue: false,
+                    duration: "fast",
+                    complete: complete
+                },
+                options
+            )
+        );
+    }
+
+    extend(kendo.fx, {
+        fadeOut: {
+            play: function(element, options, complete) {
+                animate(element, { opacity: 0 }, options, complete);
+            },
+            reverse: function(element, options, complete) {
+                animate(element, { opacity: 1 }, options, complete);
+            }
+        },
+        fadeIn: {
+            play: function(element, options, complete) {
+                animate(element, { opacity: 1 }, options, complete);
+            },
+            reverse: function(element, options, complete) {
+                animate(element, { opacity: 0 }, options, complete);
+            }
+        }
+
+    });
+})(jQuery, window);

@@ -3,7 +3,9 @@
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
         <title>Animations</title>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/jquery.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.fx.js" type="text/javascript" charset="utf-8"></script>
         <style type="text/css" media="screen">
             .animatee
             {
@@ -14,7 +16,9 @@
         </style>
     </head>
     <body>
-        <button>play</button>
+        <button class="play">play</button>
+        <button class="reverse">reverse</button>
+
         <div class="animatee">
             Click the button to animate me
         </div>
@@ -36,49 +40,15 @@
                 });
             }
 
-            var fadeOut = function(element, complete) {
-                element.animate({
-                    opacity: 0
-                }, { 
-                    duration: "slow",
-                    queue: false,
-                    complete: complete
-                });
-            }
-
-            var fadeIn = function(element, complete) {
-                element.animate({
-                    opacity: 1
-                }, { 
-                    duration: "slow",
-                    queue: false,
-                    complete: complete
-                });
-            }
-
-            $.fn.kendoAnimate = function(effects) {
-                var that = this;
-
-                return that.queue( function () {
-                    var promises = $.map(effects, function(effect) {
-                        return $.Deferred(function(deferred) {
-                            window[effect](that, deferred.resolve);
-                        }).promise();
-                    });
-
-                    $.when.apply(null, promises).then(function() {
-                        that.dequeue();
-                    });
-                });
-            }
-
             $(document).ready(function() {
-                $("button").click(function() {
-                    //
-                    //var effects = $.telerik.fx.slide.defaults();
-                    //$.telerik.fx.rewind(effects, $("#animatee"));
-                    // $.telerik.fx.play(effects, $("#animatee"));
-                    $(".animatee").kendoAnimate(["slideIn", "fadeOut"]).kendoAnimate(["fadeIn"]);
+
+                $("button.play").click(function() {
+                    $(".animatee").kendoAnimate("fadeOut", function() {
+                    });
+                });
+
+                $("button.reverse").click(function() {
+                    $(".animatee").kendoAnimate("fadeOut", true);
                 });
             });
         </script>
