@@ -1,6 +1,11 @@
 ﻿(function ($, window) {
     var kendo = window.kendo,
-        Component = kendo.ui.Component;
+        Component = kendo.ui.Component,
+        Draggable = kendo.ui.Draggable,
+        //events
+        LOAD = "load",
+        CHANGE = "change",
+        SLIDE = "slide";
     
     function Slider(element, options) {
         var that = this;
@@ -13,6 +18,7 @@
         that._isHorizontal = options.orientation == "horizontal";
         that._position = that._isHorizontal ? "left" : "bottom";
         that._size = that._isHorizontal ? "width" : "height";
+        
         options.tooltip.format = options.tooltip.enabled ? options.tooltip.format || "{0}" : "{0}";
 
         that._createHtml();
@@ -53,6 +59,8 @@
             33: increaseValue(options.largeStep), // page up
             34: decreaseValue(options.largeStep)  // page down
         };
+        
+        that.bind([LOAD, CHANGE, SLIDE], options);
     }
 
     $.extend(Slider.prototype, {
@@ -106,7 +114,7 @@
             $(items[0]).addClass("t-last")[that._size](pixelWidths[1]);
         }
 
-        if (that._distance % options.smallStep != 0 && isHorizontal) { 
+        if (that._distance % options.smallStep != 0 && !that._isHorizontal) { 
             for (var i = 0; i < pixelWidths.length; i++) {
                 sum += pixelWidths[i];
             }
@@ -123,12 +131,12 @@
 
         if (that._isHorizontal) {
             for (var i = 0; i < items.length; i++) {
-                $(items[i]).attr("title", kendo.formatString(options.tooltip.format, parseFloat(titleNumber.toFixed(3), 10)));
+                $(items[i]).attr("title", kendo.format(options.tooltip.format, parseFloat(titleNumber.toFixed(3), 10)));
                 titleNumber += options.smallStep;
             }
         } else {
             for (var i = items.length - 1; i >= 0; i--) {
-                $(items[i]).attr("title", kendo.formatString(options.tooltip.format, parseFloat(titleNumber.toFixed(3), 10)));
+                $(items[i]).attr("title", kendo.format(options.tooltip.format, parseFloat(titleNumber.toFixed(3), 10)));
                 titleNumber += options.smallStep;
             }
         }
@@ -255,7 +263,7 @@
             position = dragableArea.startPoint - mousePosition;
         }
 
-        if (options._maxSelection - ((parseInt(that._maxSelection % step) - 3) / 2) < position) {
+        if (that._maxSelection - ((parseInt(that._maxSelection % step) - 3) / 2) < position) {
             return options.maxValue;
         }
 
@@ -293,17 +301,16 @@
                 selection = that._maxSelection;
             }   
         } else {
-            
             var itemIndex = parseInt(((that._isHorizontal ? selectionValue : options.maxValue - val) / options.smallStep).toFixed(3)),
                 item = $(itemsUl.find(".t-tick")[itemIndex]),
-                halfItemSize = item[that._size]() / 2,
+                itemSize = (item.hasClass("t-first") || item.hasClass("t-last")) ? item[that._size]() : item[that._size]() / 2,
                 itemOffset = item.offset(),
-                dragableArea = that._getDragableArea(that._trackDiv, that._maxSelection, that._isHorizontal);
+                dragableArea = that._getDragableArea();
                    
             if (that._isHorizontal) {
-                selection = itemOffset.left - dragableArea.startPoint + halfItemSize;
+                selection = itemOffset.left - dragableArea.startPoint + itemSize;
             } else {
-                selection = (dragableArea.startPoint - (itemOffset.top + halfItemSize)) + 1;
+                selection = (dragableArea.startPoint - (itemOffset.top + itemSize)) + 1;
                 if (!$.browser.mozilla) {
                     selection += (selection - Math.floor(selection)) > 0 ? 1 : 0;
                 }
@@ -358,7 +365,7 @@
 
             var clickHandler = function (e) {
                 var mousePosition = that._isHorizontal ? e.pageX : e.pageY,
-                    dragableArea = that._getDragableArea(that._trackDiv, that._maxSelection, that._isHorizontal);
+                    dragableArea = that._getDragableArea();
 
                 that._update(that._getValueFromPosition(mousePosition, dragableArea));
             }
@@ -417,12 +424,14 @@
         disable: function () {
             var that = this;
 
-            thta.wrapper
+            that.wrapper
                 .attr("disabled", "disabled")
                 .removeClass("t-state-default")
                 .addClass("t-state-disabled");
 
-            var preventDefault = $t.preventDefault;
+            var preventDefault = function(event) {
+                                    event.preventDefault();
+                                 };
 
             that.wrapper
                 .find(".t-button")
@@ -455,7 +464,7 @@
             that.value(val);
             
             if (change) {
-                that.trigger("change", { value: that.options.val });
+                that.trigger(CHANGE, { value: that.options.val });
             }
         },
 
@@ -488,14 +497,14 @@
 
         _keydown: function (e) {
             if (e.keyCode in this.keyMap) {
-                this._setValueInRange(this.keyMap[e.keyCode](this.val));
+                this._setValueInRange(this.keyMap[e.keyCode](this.options.val));
                 e.preventDefault();
             }
         },
 
         _setValueInRange: function (val) {
             var that = this;
-
+            
             val = parseFloat(parseFloat(val, 10).toFixed(3), 10);
             if (isNaN(val)) {
                 that._update(that.options.minValue);
@@ -542,7 +551,7 @@
             moveSelection(parseFloat(e.value, 10));
         };
 
-        that.bind(["change", "slide", "moveSelection"], handler);
+        that.bind([CHANGE, SLIDE, "moveSelection"], handler);
     }
 
     Slider.Drag = function (dragHandle, type, owner, options) {
@@ -554,26 +563,11 @@
         that.dragHandleSize = dragHandle[owner._size]();
         that.type = type;
         
-        var selector = "";
-
-        switch (type) {
-            case "leftHandle": selector = ".t-draghandle:first";
-                break;
-            case "rightHandle": selector = ".t-draghandle:last";
-                break;
-            default: selector = ".t-draghandle";
-                break;
-        }
-
-//        new kendo.draggable({
-//            distance: 0,
-//            owner: owner.wrapper[0],
-//            selector: selector,
-//            scope: owner.element[0].id,
-//            start: $.proxy(that.start, that),
-//            drag: $.proxy(that.drag, that),
-//            stop: $.proxy(that.stop, that)
-//        });
+        new Draggable(dragHandle, {
+            dragstart: $.proxy(that.start, that),
+            drag: $.proxy(that.drag, that),
+            dragend: $.proxy(that.stop, that)
+        });
     };
 
     Slider.Drag.prototype = {
@@ -602,8 +596,8 @@
                 that.tooltipDiv = $("<div class='t-widget t-tooltip'><!-- --></div>").appendTo(document.body);
                 
                 if (that.type) {
-                    var formattedSelectionStart = kendo.formatString(options.tooltip.format, that.selectionStart),
-                        formattedSelectionEnd = kendo.formatString(options.tooltip.format, that.selectionEnd);
+                    var formattedSelectionStart = kendo.format(options.tooltip.format, that.selectionStart),
+                        formattedSelectionEnd = kendo.format(options.tooltip.format, that.selectionEnd);
 
                     that.tooltipDiv.html(formattedSelectionStart + " - " + formattedSelectionEnd );
                 } else {                 
@@ -624,7 +618,7 @@
                     }
 
                     that.tooltipInnerDiv = "<div class='t-callout " + tooltipArrow + "'><!-- --></div>";
-                    that.tooltipDiv.html(kendo.formatString(options.tooltip.format, that.val) + that.tooltipInnerDiv);
+                    that.tooltipDiv.html(kendo.format(options.tooltip.format, that.val) + that.tooltipInnerDiv);
                 }
 
                 that.moveTooltip(that.tooltipDiv);
@@ -660,19 +654,19 @@
                         }
                     }
 
-                    owner.trigger("slide", { values: [that.selectionStart, that.selectionEnd] });
+                    owner.trigger(SLIDE, { values: [that.selectionStart, that.selectionEnd] });
 
                     if (options.tooltip.enabled) {
-                        var formattedSelectionStart = kendo.formatString(options.tooltip.format, that.selectionStart),
-                            formattedSelectionEnd = kendo.formatString(options.tooltip.format, that.selectionEnd);
+                        var formattedSelectionStart = kendo.format(options.tooltip.format, that.selectionStart),
+                            formattedSelectionEnd = kendo.format(options.tooltip.format, that.selectionEnd);
 
                         that.tooltipDiv.html(formattedSelectionStart + " - " + formattedSelectionEnd );
                     }
                 } else {
-                    owner.trigger("slide", { value: that.val });
+                    owner.trigger(SLIDE, { value: that.val });
                     
                     if (options.tooltip.enabled) {
-                        that.tooltipDiv.html(kendo.formatString(options.tooltip.format, that.val) + that.tooltipInnerDiv);
+                        that.tooltipDiv.html(kendo.format(options.tooltip.format, that.val) + that.tooltipInnerDiv);
                     }
                 }
 
@@ -913,6 +907,8 @@
             33: increaseValue(options.largeStep), // page up
             34: decreaseValue(options.largeStep)  // page down
         };
+
+        that.bind([LOAD, CHANGE, SLIDE], options);
     }
 
     $.extend(RangeSlider.prototype, {
@@ -1009,7 +1005,7 @@
             that.wrapper
                 .find(".t-draghandle")
                 .unbind("keydown")
-                .bind("keydown", $t.preventDefault)
+                .bind("keydown", function(event) { event.preventDefault(); });
                 
             that.enabled = false;
         },
@@ -1048,25 +1044,26 @@
             that.values(selectionStart, selectionEnd);
             
             if (change) {
-                that.trigger("change", { values: [selectionStart, selectionEnd] });
+                that.trigger(CHANGE, { values: [selectionStart, selectionEnd] });
             }
         },
 
-        values: function (selectionStart, selectionEnd) {
+        values: function () {
             var that = this,
                 options = that.options,
-                values = [options.selectionStart, options.selectionEnd];
+                selectionStart = 0,
+                selectionEnd = 0;
 
-            selectionStart = parseFloat(parseFloat(selectionStart, 10).toFixed(3), 10);
-            if (isNaN(selectionStart)) {
-                return values;
+            if (arguments.length == 0) {
+                return [options.selectionStart, options.selectionEnd];
+            } else if (arguments.length == 1 && arguments[0] instanceof Array) {
+                selectionStart = arguments[0][0];
+                selectionEnd = arguments[0][1];
+            } else {
+                selectionStart = parseFloat(parseFloat(arguments[0], 10).toFixed(3), 10);
+                selectionEnd = parseFloat(parseFloat(arguments[1], 10).toFixed(3), 10);
             }
-
-            selectionEnd = parseFloat(parseFloat(selectionEnd, 10).toFixed(3), 10);
-            if (isNaN(selectionEnd)) {
-                return values;
-            }
-
+            
             if (selectionStart >= options.minValue && selectionStart <= options.maxValue
             && selectionEnd >= options.minValue && selectionEnd <= options.maxValue && selectionStart <= selectionEnd) {
                 if (options.selectionStart != selectionStart || options.selectionEnd != selectionEnd) {
@@ -1087,8 +1084,8 @@
                 options = this.options;
 
             that.trigger("moveSelection", { values: [options.selectionStart, options.selectionEnd] });
-
-            if (that.selectionStart == options.maxValue && options.slectionEnd == options.maxValue) {
+            
+            if (options.selectionStart == options.maxValue && options.selectionEnd == options.maxValue) {
                 that._setZIndex("leftHandle");
             }
         },
@@ -1101,7 +1098,7 @@
 
             selectionEnd = Math.max(selectionEnd, options.minValue);
             selectionEnd = Math.min(selectionEnd, options.maxValue);
-
+            
             if (options.selectionStart == options.maxValue && options.slectionEnd == options.maxValue) {
                 that._setZIndex("leftHandle");
             }
@@ -1118,7 +1115,7 @@
         },
 
         _setZIndex: function (type) {
-            var dragHandles = this.options.wrapper.find(".t-draghandle"),
+            var dragHandles = this.wrapper.find(".t-draghandle"),
                 firstHandle = dragHandles.eq(0),
                 secondHandle = dragHandles.eq(1),
                 zIndex = "z-index";
@@ -1194,7 +1191,7 @@
             moveSelection(e.values);
         };
 
-        that.bind([ "change", "slide", "moveSelection" ], handler);
+        that.bind([ CHANGE, SLIDE, "moveSelection" ], handler);
     }
     
     kendo.ui.plugin("RangeSlider", RangeSlider, Component);

@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.ui.Slider Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.slider.js"></script>
+        <link rel="stylesheet" href="../qunit.css" />
+        <link type="text/css" href="../../../Branches/Current/Source/Telerik.Web.Mvc/Content/telerik.common.css" rel="stylesheet"/>
+        <link type="text/css" href="../../../Branches/Current/Source/Telerik.Web.Mvc/Content/telerik.vista.css" rel="stylesheet"/>  
+    </head>
+    <body>
+
+        <script type="text/javascript">
+            var Slider = kendo.ui.Slider,
+                input;
+            
+            module("Slider/ClientSideAPI", {
+                setup: function () {
+                    input = $("<input />").appendTo(document.body);
+                },
+                teardown: function() {
+                    $(".t-slider").remove();
+                }
+            });
+        
+            function newSlider(options) {
+                return new Slider(input, options);
+            }
+
+            test("value should set slider value", function() {
+                var slider = newSlider();
+                
+                slider.value(9);
+
+                equal(slider.value(), 9);
+            });
+
+            test("value should not be null or empty string and should return old value", function() {
+                var slider = newSlider();
+                
+                slider.value(2)
+
+                slider.value(" ");
+
+                equal(slider.value(), 2);
+
+                slider.value(null);
+
+                equal(slider.value(), 2);
+            });
+
+            test("value should be in range", function() {
+                var slider = newSlider();
+                $.extend(slider.options, { showButtons: false });
+
+                slider.value(11);
+
+                equal(slider.value(), 0);
+
+                slider.value(-1);
+
+                equal(slider.value(), 0);
+            });
+
+            test("value should set slider position selectionDiv", function () {
+                var slider = newSlider();
+
+                var selectionDiv = slider.wrapper.find(".t-slider-selection");
+
+                slider.value(10);
+
+                equal(selectionDiv.width(), 144);
+            });
+
+            test("value should be in range", function() {
+                var slider = newSlider();
+
+                var selectionDiv = slider.wrapper.find(".t-slider-selection");
+
+                slider.value(11);
+
+                equal(selectionDiv.width(), 0);
+
+                slider.value(-1);
+
+                equal(selectionDiv.width(), 0);
+            });
+
+            test("when value is string slider should set slider value", function() {
+                var slider = newSlider();
+
+                slider.value("1");
+
+                equal(1, slider.value());
+            });
+
+            test("value should not trigger change event", function() {
+                var change = function (e) {
+                    ok(false);
+                };
+
+                var slider = newSlider({ "change": change });
+
+                slider.value(5);
+            });
+
+            test("value should set value to the input", function() {
+                var slider = newSlider({ val: 1 });
+
+                var value = 2;
+
+                slider.value(value);
+
+                equal(slider.element.val(), value);
+            });
+
+            test("disable method should disable slider", function () {
+                var slider = newSlider();
+
+                slider.disable();
+
+                ok(slider.wrapper.attr("disabled"));
+                ok(!slider.enabled);
+            });
+
+            test("enable method should enable slider", function () {
+                var slider = newSlider();
+
+                slider.enable();
+
+                ok(!slider.wrapper.attr("disabled"));
+                ok(slider.options.enabled);
+            });
+
+            test("disable method should add state disabled to the slider", function () {
+                var slider = newSlider();
+
+                slider.disable();
+
+                ok(slider.wrapper.hasClass("t-state-disabled"));
+            });
+
+            test("enable method should remove state disabled from the slider", function () {
+                var slider = newSlider();
+
+                slider.enable();
+
+                ok(!slider.wrapper.hasClass("t-state-disabled"));
+            });
+
+            test("refresh method should not select minimum when slider increase his value from -1 to 0", function () {
+                var slider = newSlider({ showButtons: true, minValue: -5, val: -1 });
+
+                slider.value(0)
+
+                ok(slider.value, 0);
+            });
+
+            test('slider should not trigger change if we decrease value with 1 step and value is equal to min value', function () {
+                var downArrow = "40", // down arrow
+                    leftArrow = "37"; // left arrow
+
+                var change = function (e) {
+                    ok(false);
+                };
+
+                var slider = newSlider({ "change": change, val: 0 }),
+                    dragHandle = slider.wrapper.find(".t-draghandle");
+
+                dragHandle.trigger({ type: "keydown", keyCode: downArrow });
+                dragHandle.trigger({ type: "keydown", keyCode: leftArrow });
+            });
+
+            var RangeSlider = kendo.ui.RangeSlider,
+                div;
+            
+            module("RangeSlider/ClientSideAPI", {
+                setup: function () {
+                    div = $("<div><input /><input /></div>").appendTo(document.body);
+                },
+                teardown: function() {
+                    div.closest(".t-slider").remove();
+                }
+            });
+        
+            function newRangeSlider(options) {
+                return new RangeSlider(div, options);
+            }
+
+            test("values should set rangeSlider selectionStart and selectionEnd", function () {
+                var rangeSlider = newRangeSlider(),
+                    values = [ 0, 9 ];
+
+                rangeSlider.values(values);
+                
+                deepEqual(rangeSlider.values(), values);
+            });
+
+            test("values should return array of selectionStart and selectionEnd", function () {
+                var rangeSlider = newRangeSlider(),
+                    values = [ 0, 9 ];
+
+                rangeSlider.values(values);
+                
+                ok(values instanceof Array);
+            });
+
+            test("values should not be null or empty string and should return old values", function () {
+                var selectionStart = 1,
+                    selectionEnd = 3,
+                    rangeSlider = newRangeSlider({ selectionStart: selectionStart, selectionEnd: selectionEnd });
+
+                rangeSlider.values(" ");
+
+                deepEqual(rangeSlider.values(), [selectionStart, selectionEnd]);
+
+                rangeSlider.values(null);
+
+                deepEqual(rangeSlider.values(), [selectionStart, selectionEnd]);
+            });
+
+            test("values should be in range", function () {
+                var selectionStart = 1,
+                    selectionEnd = 3,
+                    rangeSlider = newRangeSlider({ selectionStart: selectionStart, selectionEnd: selectionEnd });
+
+                rangeSlider.values(-1, 11);
+
+                deepEqual(rangeSlider.values(), [selectionStart, selectionEnd]);
+            });
+
+            test("values should set rangeSlider position selectionDiv", function () {
+                var rangeSlider = newRangeSlider();
+
+                var selectionDiv = rangeSlider.wrapper.find(".t-slider-selection");
+
+                rangeSlider.values(0, 10);
+
+                equal(selectionDiv.width(), 198);
+            });
+
+            test("values should not trigger change event", function () {
+                var change = function (e) {
+                    ok(false);
+                };
+
+                var rangeSlider = newRangeSlider({ "change": change });
+
+                rangeSlider.values(1, 3);
+            });
+
+            test("values should set values to the inputs", function () {
+                var rangeSlider = newRangeSlider(),
+                    selectionStart = 2,
+                    selectionEnd = 5;
+
+                rangeSlider.values(selectionStart, selectionEnd);
+
+                var inputs = rangeSlider.element.find("input");
+
+                equal(inputs.eq(0).val(), selectionStart);
+                equal(inputs.eq(1).val(), selectionEnd);
+            });
+
+            test("values should set selectionStart and selectionEnd values from string parameters", function() {
+                var rangeSlider = newRangeSlider();
+
+                rangeSlider.values("1", "2");
+
+                deepEqual(rangeSlider.values(), [ 1, 2 ]);
+            });
+
+            test("values should set z-index to first handle", function() {
+                var rangeSlider = newRangeSlider(),
+                    dragHandles = rangeSlider.wrapper.find(".t-draghandle"),
+                    firstDragHandle = dragHandles.eq(0);
+
+                rangeSlider.values(10, 10);
+
+                equal(firstDragHandle.css("z-index"), 1);
+            });
+
+            test("disable method should disable range slider", function () {
+                var rangeSlider = newRangeSlider();
+
+                rangeSlider.disable();
+
+                ok(rangeSlider.wrapper.attr("disabled"));
+                ok(!rangeSlider.enabled);
+            });
+
+            test("enable method should enable range slider", function () {
+                var rangeSlider = newRangeSlider();
+
+                rangeSlider.enable();
+
+                ok(!rangeSlider.wrapper.attr("disabled"));
+                ok(rangeSlider.enabled);
+            });
+
+            test("disable method should add state disabled to the range slider", function () {
+                var rangeSlider = newRangeSlider();
+
+                rangeSlider.disable();
+
+                ok(rangeSlider.wrapper.hasClass("t-state-disabled"));
+            });
+
+            test("enable method should remove state disabled from the range slider", function () {
+                var rangeSlider = newRangeSlider();
+
+                rangeSlider.enable();
+
+                ok(!rangeSlider.wrapper.hasClass("t-state-disabled"));
+            });
+
+            test('range slider should not trigger change if we decrease selectionStart with 1 step and selectionStart is equal to min value', function () {
+                var downArrow = "40", // down arrow
+                    leftArrow = "37"; // left arrow
+                
+                var change = function (e) {
+                    ok(false);
+                };
+
+                var rangeSlider = newRangeSlider({ change: change, selectionStart: 0, selectionEnd: 0 }),
+                    dragHandles = rangeSlider.wrapper.find(".t-draghandle");
+
+                dragHandles.eq(0).trigger({ type: "keydown", keyCode: downArrow });
+                dragHandles.eq(0).trigger({ type: "keydown", keyCode: leftArrow });
+            });
+
+        </script>
+
+        <h1 id="qunit-header">kendo.ui.Slider Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html> 

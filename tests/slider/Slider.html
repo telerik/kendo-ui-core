@@ -1,0 +1,292 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.ui.Slider Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.slider.js"></script>
+        <link rel="stylesheet" href="../qunit.css" />
+        <link type="text/css" href="../../../Branches/Current/Source/Telerik.Web.Mvc/Content/telerik.common.css" rel="stylesheet"/>
+        <link type="text/css" href="../../../Branches/Current/Source/Telerik.Web.Mvc/Content/telerik.vista.css" rel="stylesheet"/>  
+    </head>
+    <body>
+
+        <script type="text/javascript">
+            var Slider = kendo.ui.Slider,
+                input = {},
+                isDefaultPrevent;
+            
+            module("Slider/Slider", {
+                setup: function () {
+                    input = $("<input />").appendTo(document.body);
+                    isDefaultPrevent = false;
+                },
+                teardown: function() {
+                    $(".t-slider").remove();
+                }
+            });
+        
+            function newSlider(options) {
+                return new Slider(input, options);
+            }
+
+            test('slider should decrease value with a small step when down and left arrow keyboard is clicked', function () {
+                var downArrow = "40", // down arrow
+                    leftArrow = "37", // left arrow
+                    slider = newSlider({ val: 5, smallStep: 2 }),
+                    dragHandle = slider.wrapper.find(".t-draghandle");
+
+                dragHandle.trigger({ type: "keydown",
+                    keyCode: downArrow,
+                    preventDefault: function () {
+                        isDefaultPrevent = true;
+                    }
+                });
+
+                ok(isDefaultPrevent);
+                equal(3, slider.value());
+
+                slider.value(5);
+
+                dragHandle.trigger({ type: "keydown",
+                    keyCode: leftArrow,
+                    preventDefault: function () {
+                        isDefaultPrevent = true;
+                    }
+                });
+
+                ok(isDefaultPrevent);
+                equal(3, slider.value());
+
+                slider.value(5);
+            });
+
+            test('slider should increase value with a small step when down and left arrow keyboard is clicked', function () {
+                var upArrow = "38"; // up arrow
+                    rightArrow = "39", // right arrow
+                    slider = newSlider({ val: 5, smallStep: 2 }),
+                    dragHandle = slider.wrapper.find(".t-draghandle");
+
+                dragHandle.trigger({ type: "keydown",
+                    keyCode: upArrow,
+                    preventDefault: function () {
+                        isDefaultPrevent = true;
+                    }
+                });
+
+                ok(isDefaultPrevent);
+                equal(7, slider.value());
+
+                slider.value(5);
+
+                dragHandle.trigger({ type: "keydown",
+                    keyCode: rightArrow,
+                    preventDefault: function () {
+                        isDefaultPrevent = true;
+                    }
+                });
+
+                ok(isDefaultPrevent);
+                equal(7, slider.value());
+
+                slider.value(5);
+            });
+
+            test('slider should increase value with a large step when page up keyboard is clicked', function () {
+                var end = "33", // page up
+                    slider = newSlider({ val: 5, largeStep: 3 }),
+                    dragHandle = slider.wrapper.find(".t-draghandle");
+
+                dragHandle.trigger({ type: "keydown",
+                    keyCode: end,
+                    preventDefault: function () {
+                        isDefaultPrevent = true;
+                    }
+                });
+
+                ok(isDefaultPrevent);
+                equal(8, slider.value());
+
+                slider.value(5);
+            });
+
+            test('slider should decrease value with a large step when page down keyboard is clicked', function () {
+                var home = "34", // page down
+                    slider = newSlider({ val: 5, largeStep: 3 }),
+                    dragHandle = slider.wrapper.find(".t-draghandle");
+
+                dragHandle.trigger({ type: "keydown",
+                    keyCode: home,
+                    preventDefault: function () {
+                        isDefaultPrevent = true;
+                    }
+                });
+
+                ok(isDefaultPrevent);
+                equal(2, slider.value());
+
+                slider.value(5);
+            });
+    
+            test('slider should increase value to maximum value when end keyboard is clicked', function () {
+                var end = "35", // end
+                    slider = newSlider({ val: 5 }),
+                    dragHandle = slider.wrapper.find(".t-draghandle");
+
+                dragHandle.trigger({ type: "keydown",
+                    keyCode: end,
+                    preventDefault: function () {
+                        isDefaultPrevent = true;
+                    }
+                });
+
+                ok(isDefaultPrevent);
+                equal(10, slider.value());
+
+                slider.value(5);
+            });
+
+            test('slider should increase value to minimum value when home keyboard is clicked', function () {
+                var home = "36", // home
+                    slider = newSlider({ val: 5 }),
+                    dragHandle = slider.wrapper.find(".t-draghandle");
+
+                dragHandle.trigger({ type: "keydown",
+                    keyCode: home,
+                    preventDefault: function () {
+                        isDefaultPrevent = true;
+                    }
+                });
+
+                ok(isDefaultPrevent);
+                equal(0, slider.value());
+
+                slider.value(5);
+            });
+
+            test('getValueFromPosition with small step 3 and mouse position 100 should return max value', function () {
+                var slider = newSlider({ val: 0, smallStep: 3, style: "width: 156px;" }),
+                    mousePosition = 100,
+                    dragableArea = { startPoint: 0, endPoint: slider._maxSelection },
+                    value = slider._getValueFromPosition(mousePosition, dragableArea);
+
+                equal(value, 10);
+            });
+
+            test('getValueFromPosition with small step 2 and mouse position 94 should return 9', function () {
+                var slider = newSlider({ val: 0, smallStep: 2, style: "width: 156px;" }),
+                    mousePosition = 89,
+                    dragableArea = { startPoint: 0, endPoint: slider._maxSelection },
+                    value = slider._getValueFromPosition(mousePosition, dragableArea);
+
+                equal(value, 8);
+            });
+
+            test('getValueFromPosition with small step 3 and mouse position 90 should return 10', function () {
+                var slider = newSlider({ val: 0, smallStep: 3, style: "width: 156px;" }),
+                    mousePosition = 90,
+                    dragableArea = { startPoint: 0, endPoint: slider._maxSelection },
+                    value = slider._getValueFromPosition(mousePosition, dragableArea);
+
+                equal(value, 9);
+            });
+
+            test('getValueFromPosition with small step 2 and mouse position 60 should return 3', function () {
+                var slider = newSlider({ val: 0, smallStep: 2, style: "width: 156px;" }),
+                    mousePosition = 60,
+                    dragableArea = { startPoint: 0, endPoint: slider._maxSelection },
+                    value = slider._getValueFromPosition(mousePosition, dragableArea);
+
+                equal(value, 6);
+            });
+
+            test('getValueFromPosition with small step 2 and mouse position 95 should return 10', function () {
+                var slider = newSlider({ val: 0, smallStep: 2, style: "width: 156px;" }),
+                    mousePosition = 95,
+                    dragableArea = { startPoint: 0, endPoint: slider._maxSelection },
+                    value = slider._getValueFromPosition(mousePosition, dragableArea);
+
+                equal(value, 10);
+            });
+
+            test('getValueFromPosition with small step 2 and mouse position 10 should return 1', function () {
+                var slider = newSlider({ val: 0, smallStep: 2, style: "width: 156px;" }),
+                    mousePosition = 10,
+                    dragableArea = { startPoint: 0, endPoint: slider._maxSelection },
+                    value = slider._getValueFromPosition(mousePosition, dragableArea);
+
+                equal(value, 0);
+            });
+
+            test('getValueFromPosition with small step 0.1 mouse position 40 should return 0.4', function () {
+                var slider = newSlider({ val: 0, smallStep: 0.1, maxValue: 1, style: "width: 156px;" }),
+                    mousePosition = 40,
+                    dragableArea = { startPoint: 0, endPoint: slider._maxSelection },
+                    value = slider._getValueFromPosition(mousePosition, dragableArea);
+
+                equal(value, 0.4);
+            });
+
+            test('getValueFromPosition with small step 0.1 mouse position 30 should return 0.3', function () {
+                var slider = newSlider({ val: 0, smallStep: 0.1, maxValue: 1, style: "width: 156px;" }),
+                    mousePosition = 30,
+                    dragableArea = { startPoint: 0, endPoint: slider._maxSelection },
+                    value = slider._getValueFromPosition(mousePosition, dragableArea);
+
+                equal(value, 0.3);
+            });
+
+            test('getValueFromPosition with small step 0.1 mouse position 50 should return 0.5', function () {
+                var slider = newSlider({ val: 0, smallStep: 0.1, maxValue: 1, style: "width: 156px;" }),
+                    mousePosition = 50,
+                    dragableArea = { startPoint: 0, endPoint: slider._maxSelection },
+                    value = slider._getValueFromPosition(mousePosition, dragableArea);
+
+                equal(value, 0.5);
+            });
+
+            test('roudWidths with 156px width and small step 1 must return 10 steps', function () {
+                var slider = newSlider({ val: 0, smallStep: 1, style: "width: 156px;" });
+        
+                var getPixelSteps = slider._getPixelSteps();
+
+                equal(10, getPixelSteps.length);
+            });
+
+            test('roudWidths with 200px width and small step 1 must return 10 steps', function () {
+                var slider = newSlider({ val: 0, smallStep: 1, style: "width: 200px;" });
+        
+                var getPixelSteps = slider._getPixelSteps();
+
+                equal(10, getPixelSteps.length);
+            });
+
+            test('roudWidths with 200px width and small step 2 must return 5 steps', function () {
+                var slider = newSlider({ val: 0, smallStep: 2, style: "width: 200px;" });
+        
+                var getPixelSteps = slider._getPixelSteps();
+
+                equal(5, getPixelSteps.length);
+            });
+
+            test('roudWidths with 100px width and small step 2 must return 5 steps', function () {
+                var slider = newSlider({ val: 0, smallStep: 2, style: "width: 100px;" });
+        
+                var getPixelSteps = slider._getPixelSteps();
+
+                equal(5, getPixelSteps.length);
+            });
+        </script>
+
+        <h1 id="qunit-header">kendo.ui.Slider Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html> 

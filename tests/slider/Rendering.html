@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.ui.Slider Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.slider.js"></script>
+        <link rel="stylesheet" href="../qunit.css" />
+        <link type="text/css" href="../../../Branches/Current/Source/Telerik.Web.Mvc/Content/telerik.common.css" rel="stylesheet"/>
+        <link type="text/css" href="../../../Branches/Current/Source/Telerik.Web.Mvc/Content/telerik.vista.css" rel="stylesheet"/>  
+    </head>
+    <body>
+
+        <script type="text/javascript">
+            
+            var Slider = kendo.ui.Slider,
+                input;
+            
+            module("Slider/Rendering", {
+                setup: function () {
+                    input = $("<input />").appendTo(document.body);
+                },
+                teardown: function() {
+                    input.closest(".t-slider").remove();
+                }
+
+            });
+        
+            function newSlider(options) {
+                return new Slider(input, options);
+            }
+
+            test("horizontal slider should apply max value", function () {
+                var slider = newSlider({ val: 10 }),
+                    trackDivWidth = slider.wrapper.find(".t-slider-track").width(),
+                    selectionDivWidth = slider.wrapper.find(".t-slider-selection").width();
+
+                equal(trackDivWidth, selectionDivWidth);
+            });
+
+            test("height slider should apply max value", function () {
+                var slider = newSlider({ val: 10, orientation: "vertical" }),
+                    trackDivHeight = slider.wrapper.find(".t-slider-track").height(),
+                    selectionDivHeight = slider.wrapper.find(".t-slider-selection").height();
+
+                equal(trackDivHeight, selectionDivHeight);
+            });
+
+            test("slider should apply style", function () {
+                var style = "width: 200px; height: 30px;",
+                    slider = newSlider({ val: 10, style: style });
+
+                equal("200px", slider.wrapper.css("width"));
+                equal("30px", slider.wrapper.css("height"));
+            });
+
+            test("slider should apply option value to the input", function() {
+                var value = 10,
+                    slider = newSlider({ val: value });
+
+                equal(slider.element.val(), value);
+            });
+
+            test("getValueFromPosition should increase value", function () {
+                var slider = newSlider({ val: 1, smallStep: 2 }),
+                    dragableArea = slider._getDragableArea(),
+                    step = 2 * (144 / 10);
+
+                equal(slider._getValueFromPosition(dragableArea.startPoint + step, dragableArea), 2);
+            });
+
+        </script>
+
+        <h1 id="qunit-header">kendo.ui.Slider Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html> 
