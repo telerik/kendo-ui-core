@@ -1,0 +1,285 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.ui.Slider Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.slider.js"></script>
+        <link rel="stylesheet" href="../qunit.css" />
+        <link type="text/css" href="../../../Branches/Current/Source/Telerik.Web.Mvc/Content/telerik.common.css" rel="stylesheet"/>
+        <link type="text/css" href="../../../Branches/Current/Source/Telerik.Web.Mvc/Content/telerik.vista.css" rel="stylesheet"/>  
+    </head>
+    <body>
+        <script type="text/javascript">
+
+            var RangeSlider = kendo.ui.RangeSlider,
+                div = {},
+                isDefaultPrevent;
+            
+            module("RangeSlider/RangeSlider", {
+                setup: function () {
+                    div = $("<div><input /><input /></div>").appendTo(document.body);
+                    isDefaultPrevent = false;
+                },
+                teardown: function() {
+                    $(".t-slider").remove();
+                }
+            });
+
+            function newRangeSlider (options) {
+                return new RangeSlider(div, options);
+            }
+
+            test('range slider should decrease value with a small step when down and left arrow keyboard is clicked', function () {
+                var downArrow = "40"; // down arrow
+                    leftArrow = "37", // left arrow
+                    rangeSlider = newRangeSlider({ selectionStart: 3, selectionEnd: 6 }),
+                    dragHandles = rangeSlider.wrapper.find(".t-draghandle");
+
+                //left drag handle
+                dragHandles.eq(0).trigger({ type: "keydown",
+                    keyCode: downArrow,
+                    preventDefault: function () {
+                        isDefaultPrevent = true;
+                    }
+                });
+
+                ok(isDefaultPrevent);
+                deepEqual(rangeSlider.values(), [ 2, 6 ]);
+
+                rangeSlider.values(3, 6);
+                isDefaultPrevent = false;
+
+                dragHandles.eq(0).trigger({ type: "keydown",
+                    keyCode: leftArrow,
+                    preventDefault: function () {
+                        isDefaultPrevent = true;
+                    }
+                });
+
+                ok(isDefaultPrevent);
+                deepEqual(rangeSlider.values(), [ 2, 6 ]);
+
+                rangeSlider.values(3, 6);
+
+                //right drag handle
+                isDefaultPrevent = false;
+                dragHandles.eq(1).trigger({ type: "keydown",
+                    keyCode: downArrow,
+                    preventDefault: function () {
+                        isDefaultPrevent = true;
+                    }
+                });
+
+                ok(isDefaultPrevent);
+                deepEqual(rangeSlider.values(), [ 3, 5 ]);
+
+                rangeSlider.values(3, 6);
+                isDefaultPrevent = false;
+
+                dragHandles.eq(1).trigger({ type: "keydown",
+                    keyCode: leftArrow,
+                    preventDefault: function () {
+                        isDefaultPrevent = true;
+                    }
+                });
+
+                ok(isDefaultPrevent);
+                deepEqual(rangeSlider.values(), [ 3, 5 ]);
+            });
+
+            test('range slider should increase value with a small step when down and left arrow keyboard is clicked', function () {
+                var upArrow = "38", // up arrow
+                    rightArrow = "39", // right arrow
+                    rangeSlider = newRangeSlider({ selectionStart: 3, selectionEnd: 6 }),
+                    dragHandles = rangeSlider.wrapper.find(".t-draghandle");
+
+                // left drag handle
+                dragHandles.eq(0).trigger({ type: "keydown",
+                    keyCode: upArrow,
+                    preventDefault: function () {
+                        isDefaultPrevent = true;
+                    }
+                });
+
+                ok(isDefaultPrevent);
+                deepEqual(rangeSlider.values(), [ 4, 6 ]);
+
+                rangeSlider.values(3, 6);
+                isDefaultPrevent = false;
+
+                dragHandles.eq(0).trigger({ type: "keydown",
+                    keyCode: rightArrow,
+                    preventDefault: function () {
+                        isDefaultPrevent = true;
+                    }
+                });
+
+                ok(isDefaultPrevent);
+                deepEqual(rangeSlider.values(), [ 4, 6 ]);
+
+                rangeSlider.values(3, 6);
+
+                // right drag handle
+                isDefaultPrevent = false;
+                dragHandles.eq(1).trigger({ type: "keydown",
+                    keyCode: upArrow,
+                    preventDefault: function () {
+                        isDefaultPrevent = true;
+                    }
+                });
+
+                ok(isDefaultPrevent);
+                deepEqual(rangeSlider.values(), [ 3, 7 ]);
+
+                rangeSlider.values(3, 6);
+                isDefaultPrevent = false;
+
+                dragHandles.eq(1).trigger({ type: "keydown",
+                    keyCode: rightArrow,
+                    preventDefault: function () {
+                        isDefaultPrevent = true;
+                    }
+                });
+
+                ok(isDefaultPrevent);
+                deepEqual(rangeSlider.values(), [ 3, 7 ]);
+            });
+
+            test('range slider should increase value with a large step when page up keyboard is clicked', function () {
+                var pageUp = "33", // page up
+                    rangeSlider = newRangeSlider({ selectionStart: 3, selectionEnd: 6, largeStep: 3 }),
+                    dragHandles = rangeSlider.wrapper.find(".t-draghandle");
+
+                // left drag handle
+                dragHandles.eq(0).trigger({ type: "keydown",
+                    keyCode: pageUp,
+                    preventDefault: function () {
+                        isDefaultPrevent = true;
+                    }
+                });
+
+                ok(isDefaultPrevent);
+                deepEqual(rangeSlider.values(), [ 6, 6 ]);
+
+                rangeSlider.values(3, 6);
+
+                // right drag handle
+                isDefaultPrevent = false;
+                dragHandles.eq(1).trigger({ type: "keydown",
+                    keyCode: pageUp,
+                    preventDefault: function () {
+                        isDefaultPrevent = true;
+                    }
+                });
+
+                ok(isDefaultPrevent);
+                deepEqual(rangeSlider.values(), [ 3, 9 ]);
+            });
+
+            test('range slider should decrease value with a large step when page down keyboard is clicked', function () {
+                var pageDown = "34", // page down
+                    rangeSlider = newRangeSlider({ selectionStart: 3, selectionEnd: 6, largeStep: 3 }),
+                    dragHandles = rangeSlider.wrapper.find(".t-draghandle");
+
+                //left drag handle
+                dragHandles.eq(0).trigger({ type: "keydown",
+                    keyCode: pageDown,
+                    preventDefault: function () {
+                        isDefaultPrevent = true;
+                    }
+                });
+
+                ok(isDefaultPrevent);
+                deepEqual(rangeSlider.values(), [ 0, 6 ]);
+
+                rangeSlider.values(3, 6);
+
+                //right drag handle
+                isDefaultPrevent = false;
+                dragHandles.eq(1).trigger({ type: "keydown",
+                    keyCode: pageDown,
+                    preventDefault: function () {
+                        isDefaultPrevent = true;
+                    }
+                });
+
+                ok(isDefaultPrevent);
+                deepEqual(rangeSlider.values(), [ 3, 3 ]);
+            });
+
+            test('range slider should increase value to maximum value when end keyboard is clicked', function () {
+                var end = "35", // end
+                    rangeSlider = newRangeSlider({ selectionStart: 3, selectionEnd: 6 }),
+                    dragHandles = rangeSlider.wrapper.find(".t-draghandle");
+
+                // left drag hangle
+                dragHandles.eq(0).trigger({ type: "keydown",
+                    keyCode: end,
+                    preventDefault: function () {
+                        isDefaultPrevent = true;
+                    }
+                });
+
+                ok(isDefaultPrevent);
+                deepEqual(rangeSlider.values(), [ 10, 10 ]);
+
+                rangeSlider.values(6, 6);
+
+                //right drag handle
+                isDefaultPrevent = false;
+                dragHandles.eq(1).trigger({ type: "keydown",
+                    keyCode: end,
+                    preventDefault: function () {
+                        isDefaultPrevent = true;
+                    }
+                });
+
+                ok(isDefaultPrevent);
+                deepEqual(rangeSlider.values(), [ 6, 10 ]);
+            });
+
+            test('range slider should decrease value to minimum value when home keyboard is clicked', function () {
+                var home = "36", // home
+                    rangeSlider = newRangeSlider({ selectionStart: 3, selectionEnd: 6 }),
+                    dragHandles = rangeSlider.wrapper.find(".t-draghandle");
+
+                //left drag handle
+                dragHandles.eq(0).trigger({ type: "keydown",
+                    keyCode: home,
+                    preventDefault: function () {
+                        isDefaultPrevent = true;
+                    }
+                });
+
+                ok(isDefaultPrevent);
+                deepEqual(rangeSlider.values(), [ 0, 6 ]);
+
+                rangeSlider.values(3, 6);
+
+                //right drag handle
+                dragHandles.eq(1).trigger({ type: "keydown",
+                    keyCode: home,
+                    preventDefault: function () {
+                        isDefaultPrevent = true;
+                    }
+                });
+
+                ok(isDefaultPrevent);
+                deepEqual(rangeSlider.values(), [ 0, 0 ]);
+            });
+
+        </script>
+
+        <h1 id="qunit-header">kendo.ui.Slider Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html> 
