@@ -711,14 +711,17 @@
         var effects = {};
 
         if (typeof options === "string") {
-            if ($.isFunction(reverse)) {
-                callback = reverse;
-                reverse = false;
-            }
+            // options is the list of effect names separated by space e.g. animate(element, "fadeIn slideDown")
 
             $.each(options.split(" "), function() {
                 effects[this] = {};
             });
+
+            // only callback is provided e.g. animate(element, options, function() {});
+            if ($.isFunction(reverse)) {
+                callback = reverse;
+                reverse = false;
+            }
 
             options = {
                 effects: effects,
@@ -727,13 +730,19 @@
             };
         }
 
-        options = extend({ effects: {}, reverse: false, complete: $.noop }, options);
+        options = extend({
+            //default options
+            effects: {},
+            reverse: false,
+            complete: $.noop
+        }, options);
 
         return element.queue(function () {
             var promises = [];
 
+            // create a promise for each effect
             $.each(options.effects, function(effectName, effectOptions) {
-                promises.push( $.Deferred(function(deferred) {
+                promises.push($.Deferred(function(deferred) {
                         var effect = kendo.fx[effectName];
 
                         if (effect) {
@@ -745,6 +754,7 @@
                 )
             });
 
+            //wait for all effects to complete and then call the next animation in the queue and invoke the callback
             $.when.apply(null, promises).then(function() {
                 element.dequeue();
                 options.complete();
