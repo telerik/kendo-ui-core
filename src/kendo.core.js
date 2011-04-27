@@ -742,16 +742,17 @@
 
             // create a promise for each effect
             $.each(options.effects, function(effectName, effectOptions) {
-                promises.push($.Deferred(function(deferred) {
-                        var effect = kendo.fx[effectName];
+                var promise = $.Deferred(function(deferred) {
+                    var effect = kendo.fx[effectName];
 
-                        if (effect) {
-                            effect[options.reverse? "reverse" : "play"](effectOptions, deferred.resolve);
-                        } else {
-                            deferred.resolve();
-                        }
-                    }).promise()
-                )
+                    if (effect) {
+                        effect[options.reverse? "reverse" : "play"](effectOptions, deferred.resolve);
+                    } else {
+                        deferred.resolve();
+                    }
+                }).promise();
+
+                promises.push(promise);
             });
 
             //wait for all effects to complete and then call the next animation in the queue and invoke the callback
