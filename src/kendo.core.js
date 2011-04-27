@@ -705,6 +705,22 @@
         }
 
         support.touch = "ontouchstart" in window;
+
+        support.transitions = false;
+
+        $.each([ 'Moz', 'webkit', 'O', 'ms' ], function (idx, value) {
+            var supportsThis = (typeof table.style[this + 'Transition'] === 'string');
+
+            if (supportsThis) {
+                var lowerName = this.toLowerCase();
+                support.transitions = {
+                    css: '-' + lowerName + '-',
+                    event: (this == 'O' || this == 'webkit') ? lowerName : ''
+                }
+            }
+            
+            return !supportsThis;
+        });
     })();
 
     function animate(element, options, reverse, complete) {
