@@ -42,8 +42,8 @@
 
             test("animate calls the callback when the effect finishes", function() {
                 kendo.fx.foo = {
-                    play: function(element, options, callback) {
-                        setTimeout(callback, 10);
+                    play: function(element, properties, options) {
+                        setTimeout(options.complete, 10);
                     }
                 }
 
@@ -59,19 +59,19 @@
                 var fooFinished = false, barFinished = false;
 
                 kendo.fx.foo = {
-                    play: function(element, options, callback) {
+                    play: function(element, properties, options) {
                         setTimeout(function() {
                            fooFinished = true;
-                           callback();
+                           options.complete();
                         }, 10);
                     }
                 };
 
                 kendo.fx.bar = {
-                    play: function(element, options, callback) {
+                    play: function(element, properties, options) {
                         setTimeout(function() {
                            barFinished = true;
-                           callback();
+                           options.complete();
                         }, 20);
                     }
                 }
@@ -89,8 +89,8 @@
                 var firstAnimationFinished = false;
 
                 kendo.fx.foo = {
-                    play: function(element, options, callback) {
-                        setTimeout(callback, 10);
+                    play: function(element, properties, options) {
+                        setTimeout(options.complete, 10);
                     }
                 }
 
@@ -109,9 +109,9 @@
                 var reverseWasCalled = false;
 
                 kendo.fx.foo = {
-                    reverse: function(element, options, callback) {
+                    reverse: function(element, properties, options) {
                         reverseWasCalled = true;
-                        callback();
+                        options.complete();
                     }
                 };
 
@@ -123,9 +123,9 @@
                 var reverseWasCalled = false, callbackWasCalled = false;
 
                 kendo.fx.foo = {
-                    reverse: function(element, options, callback) {
+                    reverse: function(element, properties, options) {
                         reverseWasCalled = true;
-                        callback();
+                        options.complete();
                     }
                 };
 
