@@ -97,7 +97,7 @@
                     
                     setTimeout(function () {
                         abortTransitionIfStalled(currentTransition);
-                    }, currentTransition.duration);
+                    }, 50);
                 }, 0);
             }
 
@@ -159,7 +159,6 @@
             },
 
             advanceQueue: function() {
-                this.css(kendo.support.transitions.css + 'transition', 'none'); // remove any leftover transitions in advance
                 kendo.fx.dequeueTransition(this);
 
                 activateTask(this);
