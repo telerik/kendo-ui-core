@@ -179,6 +179,13 @@
                 equal(grid.columns[0].field, "Foo1Bar");
             });
 
+            test("initializing a grid from something which is not a table", function() {
+                var div = $("<div />"), grid = new Grid(div, {data: [] });
+
+                ok(grid.element[0] === div[0]);
+                ok(div.children().first().is("table"));
+                ok(grid.table[0] === div.children().first()[0]);
+            });
        </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
