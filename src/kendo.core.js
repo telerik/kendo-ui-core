@@ -84,7 +84,7 @@
 
             return that;
         }
-    }
+    };
 
 //Template ================================
     Template = {
@@ -955,7 +955,7 @@
                 support.transitions = {
                     css: '-' + prefix + '-',
                     event: (prefix === 'o' || prefix === 'webkit') ? prefix : ''
-                }
+                };
 
                 return false;
             }
@@ -1007,7 +1007,8 @@
                     var effect = kendo.fx[effectName];
 
                     if (effect) {
-                        settings.options = extend(settings.options, { 
+                        settings.options = extend(settings.options, {
+                            duration: options.duration,
                             complete: deferred.resolve
                         });
 
@@ -1028,8 +1029,8 @@
        });
     }
 
-    $.fn.kendoAnimate = function(options, reverse, complete) {
-        return animate(this, options, reverse, complete);
+    $.fn.kendoAnimate = function(options, duration, reverse, complete) {
+        return animate(this, options, duration, reverse, complete);
     };
 
     extend(kendo, {
