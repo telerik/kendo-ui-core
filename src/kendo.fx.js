@@ -1,21 +1,13 @@
 (function($, window, undefined) {
     var kendo = window.kendo,
+        fx = kendo.fx,
         extend = $.extend;
 
-    var animate = function (element, properties, options, complete) {
-        element.animate(properties,
-            extend({
-                    queue: false,
-                    duration: "fast",
-                    complete: complete
-                },
-                options
-            )
-        );
+    var animate = function (element, properties, options) {
+        element.animate(properties, extend({ queue: false }, options));
     };
-    
+
     if (kendo.support.transitions) {
-        
         var stopTransition = function (selection, gotoEnd) {
             if (!selection || !('object' in selection)) return;
 
@@ -201,37 +193,27 @@
             transition(element, { 'opacity': opacity }, { duration: duration, ease: 'linear', exclusive: 'opacity' });
         };
 
-        animate = function (element, properties, options, complete) {
-            transition(element, properties,
-                extend({
-                        queue: false,
-                        duration: "fast",
-                        complete: complete
-                    },
-                    options
-                )
-            );
+        animate = function (element, properties, options) {
+            transition(element, properties, extend({ queue: false }, options));
         };
-
     }
 
-    extend(kendo.fx, {
+    extend(fx, {
         fadeOut: {
-            play: function(element, options, complete) {
-                animate(element, { opacity: 0 }, options, complete);
+            play: function(element, properties, options) {
+                animate(element, extend({ opacity: 0 }, properties), options);
             },
-            reverse: function(element, options, complete) {
-                animate(element, { opacity: 1 }, options, complete);
+            reverse: function(element, properties, options) {
+                animate(element, extend({ opacity: 1 }, properties), options);
             }
         },
         fadeIn: {
-            play: function(element, options, complete) {
-                animate(element, { opacity: 1 }, options, complete);
+            play: function(element, properties, options) {
+                animate(element, extend({ opacity: 1 }, properties), options);
             },
-            reverse: function(element, options, complete) {
-                animate(element, { opacity: 0 }, options, complete);
+            reverse: function(element, properties, options) {
+                animate(element, extend({ opacity: 0 }, properties), options);
             }
         }
-
     });
 })(jQuery, window);

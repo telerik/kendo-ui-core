@@ -947,21 +947,22 @@
         support.transitions = false;
 
         $.each([ 'Moz', 'webkit', 'O', 'ms' ], function () {
-            var supportsThis = (typeof table.style[this + 'Transition'] === 'string');
+            var prefix = this;
 
-            if (supportsThis) {
-                var lowerName = this.toLowerCase();
+            if (typeof table.style[prefix + 'Transition'] === 'string') {
+                prefix = prefix.toLowerCase();
+
                 support.transitions = {
-                    css: '-' + lowerName + '-',
-                    event: (this == 'O' || this == 'webkit') ? lowerName : ''
+                    css: '-' + prefix + '-',
+                    event: (prefix === 'o' || prefix === 'webkit') ? prefix : ''
                 }
+
+                return false;
             }
-            
-            return !supportsThis;
         });
     })();
 
-    function animate(element, options, reverse, complete) {
+    function animate(element, options, duration, reverse, complete) {
         var effects = {};
 
         if (typeof options === "string") {
@@ -972,13 +973,18 @@
             });
 
             // only callback is provided e.g. animate(element, options, function() {});
-            if ($.isFunction(reverse)) {
-                complete = reverse;
+            if ($.isFunction(duration)) {
+                complete = duration;
+                duration = 400;
                 reverse = false;
+            } if (typeof duration === "boolean"){
+                duration = 400;
+                reverse = duration;
             }
 
             options = {
                 effects: effects,
+                duration: duration,
                 reverse: reverse,
                 complete: complete
             };
@@ -987,6 +993,7 @@
         options = extend({
             //default options
             effects: {},
+            duration: 400, //jQuery default duration
             reverse: false,
             complete: $.noop
         }, options);
@@ -995,12 +1002,16 @@
             var promises = [];
 
             // create a promise for each effect
-            $.each(options.effects, function(effectName, effectOptions) {
+            $.each(options.effects, function(effectName, settings) {
                 var promise = $.Deferred(function(deferred) {
                     var effect = kendo.fx[effectName];
 
                     if (effect) {
-                        effect[options.reverse? "reverse" : "play"](element, effectOptions, deferred.resolve);
+                        settings.options = extend(settings.options, { 
+                            complete: deferred.resolve
+                        });
+
+                        effect[options.reverse? "reverse" : "play"](element, settings.properties, settings.options);
                     } else {
                         deferred.resolve();
                     }
