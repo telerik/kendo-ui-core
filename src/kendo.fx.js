@@ -1,13 +1,18 @@
 (function($, window, undefined) {
     var kendo = window.kendo,
         fx = kendo.fx,
-        extend = $.extend;
-
-    var animate = function (element, properties, options) {
-        element.animate(properties, extend({ queue: false }, options));
-    };
+        extend = $.extend,
+        transformProps = ['perspective', 'rotate', 'rotateX', 'rotateY', 'rotateZ', 'rotate3d', 'scale', 'scaleX', 'scaleY', 'scaleZ', 'scale3d', 'skew', 'skewX', 'skewY', 'translate', 'translateX', 'translateY', 'translateZ', 'translate3d', 'matrix', 'matrix3d'];
 
     if (kendo.support.transitions) {
+
+        var keys = function (obj) {
+            var acc = [];
+            for (var propertyName in obj)
+                acc.push(propertyName);
+            return acc;
+    };
+
         var stopTransition = function (selection, gotoEnd) {
             if (!selection || !('object' in selection)) return;
 
@@ -19,8 +24,8 @@
                 if (!animProperties) return;
 
                 var style = document.defaultView.getComputedStyle(aObject[0], null),
-                        cssValues = {},
-                        prop;
+                    cssValues = {},
+                    prop;
 
                 for (prop in animProperties)
                     cssValues[animProperties[prop]] = style.getPropertyValue(animProperties[prop]);
@@ -35,55 +40,24 @@
             if (selection.complete)
                 selection.complete.call(aObject);
 
-            dequeue(aObject);
+            kendo.fx.dequeueTransition(aObject);
         };
 
-        var transition = function(element, properties, options) {
+        var abortTransitionIfStalled = function (transition) {
 
-            options = extend({
-                    queue: true,
-                    duration: 200,
-                    ease: 'linear',
-                    complete: null,
-                    exclusive: 'all'
-                },
-                options
-            );
+            if (transition) {
+                var checkStyle = document.defaultView.getComputedStyle(transition.object[0], null);
 
-            options.duration = $.fx ? $.fx.speeds[options.duration] || options.duration : options.duration;
-            options.duration = options.duration / 1000;
+                if (transition.complete &&
+                    $.map(transition.keys, function(item) {
+                        return checkStyle.getPropertyValue(item) != transition.startStyle[item] ? null : 1;
+                    }).length) {
+                        transition.complete.call(transition.object);
 
-            if (!('timeline' in element))
-                element.timeline = {};
-
-            var transforms = [], cssValues = {}, key, animationStep = {},
-                transformProps = ['perspective', 'rotate', 'rotateX', 'rotateY', 'rotateZ', 'rotate3d', 'scale', 'scaleX', 'scaleY', 'scaleZ', 'scale3d', 'skew', 'skewX', 'skewY', 'translate', 'translateX', 'translateY', 'translateZ', 'translate3d', 'matrix', 'matrix3d'];
-            for (key in properties)
-                if (transformProps.indexOf(key) != -1)
-                    transforms.push(key + '(' + properties[key] + ')');
-                else
-                    cssValues[key] = properties[key];
-
-            animationStep.type = 'transition';
-            animationStep.complete = options.complete;
-            animationStep.setup = {};
-            animationStep.setup[kendo.support.transitions.css + 'transition'] = (options.exclusive || 'all') + ' ' + options.duration + 's ' + (options.ease || '');
-
-            if (transforms.length)
-            cssValues[kendo.support.transitions.css + 'transform'] = transforms.join(' ');
-
-            animationStep.keys = cssValues.keys;
-            animationStep.CSS = cssValues;
-            animationStep.object = element;
-
-            if (!options.queue) {
-                queue(element, animationStep);
-                activateTask(element, !options.queue);
-                return;
+                        transition.object.css(kendo.support.transitions.css + 'transition', 'none'); // remove any leftover transitions in advance
+                        kendo.fx.dequeueTransition(transition.object);
+                }
             }
-
-            if (queue(element, animationStep) == 1)
-                activateTask(element);
         };
 
         var activateTask = function(element, noqueue) {
@@ -95,7 +69,7 @@
 
                 if (currentTransition.type == 'delay') {
                     setTimeout(function () {
-                        advanceQueue.call(element);
+                        kendo.fx.advanceQueue.call(element);
                     }, currentTransition.duration);
 
                     return;
@@ -106,113 +80,181 @@
                     eventName = eventName.toLowerCase();
 
                 typeof currentTransition.complete == 'function' && currentTransition.object.one(eventName, $.proxy(currentTransition.complete, element));
-                currentTransition.object.one(eventName, $.proxy(advanceQueue, element));
+                currentTransition.object.one(eventName, $.proxy(kendo.fx.advanceQueue, element));
 
                 currentTransition.object.css(currentTransition.setup);
 
+                var startStyle = document.defaultView.getComputedStyle(currentTransition.object[0], null),
+                    cssValues = {};
+
+                $.each(currentTransition.keys, function() {
+                    cssValues[this] = startStyle.getPropertyValue(this);
+                });
+                currentTransition.startStyle = cssValues;
+
                 setTimeout(function () {
                     currentTransition.object.css(currentTransition.CSS);
+                    
+                    setTimeout(function () {
+                        abortTransitionIfStalled(currentTransition);
+                    }, currentTransition.duration);
                 }, 0);
             }
 
             if (noqueue)
-                dequeue(element);
+                kendo.fx.dequeueTransition(currentTransition.object);
 
         };
 
-        var advanceQueue = function() {
-            this.css(kendo.support.transitions.css + 'transition', 'none'); // remove any leftover transitions on advance
-            dequeue(this);
+        extend(kendo.fx, {
+            transition: function(element, properties, options) {
 
-            activateTask(this);
-        };
+                options = extend({
+                        queue: true,
+                        duration: 200,
+                        ease: '',
+                        complete: null,
+                        exclusive: 'all'
+                    },
+                    options
+                );
 
-        var clearQueue = function(element) {
-            delete element.timeline[element.selector];
-        };
+                options.duration = $.fx ? $.fx.speeds[options.duration] || options.duration : options.duration;
 
-        var queue = function(element, step) {
-            if (!(element.selector in element.timeline))
-                element.timeline[element.selector] = [];
+                if (!('timeline' in element))
+                    element.timeline = {};
 
-            element.timeline[element.selector].push(step);
+                var transforms = [], cssValues = {}, key, animationStep = {};
+                for (key in properties)
+                    if (transformProps.indexOf(key) != -1)
+                        transforms.push(key + '(' + properties[key] + ')');
+                    else
+                        cssValues[key] = properties[key];
 
-            return element.timeline[element.selector].length;
-        };
+                animationStep.type = 'transition';
+                animationStep.complete = options.complete;
+                animationStep.setup = {};
+                animationStep.setup[kendo.support.transitions.css + 'transition'] = options.exclusive + ' ' + options.duration + 'ms ' + options.ease;
+                animationStep.duration = options.duration;
 
-        var dequeue = function(element) {
-            if (!element.timeline[element.selector]) return;
+                if (transforms.length)
+                    cssValues[kendo.support.transitions.css + 'transform'] = transforms.join(' ');
 
-            element.timeline[element.selector].shift();
+                animationStep.keys = keys(cssValues);
+                animationStep.CSS = cssValues;
+                animationStep.object = element;
 
-            if (element.timeline[element.selector] == [])
+                if (!options.queue) {
+                    kendo.fx.queueTransition(element, animationStep);
+                    activateTask(element, !options.queue);
+                    return;
+                }
+
+                if (kendo.fx.queueTransition(element, animationStep) == 1)
+                    activateTask(element);
+            },
+
+            clearQueue: function(element) {
                 delete element.timeline[element.selector];
-        };
+            },
 
-        var delay = function(element, timeSpan) {
-            var animationStep = {};
+            advanceQueue: function() {
+                this.css(kendo.support.transitions.css + 'transition', 'none'); // remove any leftover transitions in advance
+                kendo.fx.dequeueTransition(this);
 
-            animationStep.type = 'delay';
-            animationStep.duration = timeSpan;
-            animationStep.object = element;
+                activateTask(this);
+            },
 
-            if (queue(element, animationStep) == 1)
-                activateTask(element);
+            queueTransition: function(element, step) {
+                if (!(element.selector in element.timeline))
+                    element.timeline[element.selector] = [];
 
-            return this;
-        };
+                element.timeline[element.selector].push(step);
 
-        var stop = function(element, clear, gotoEnd) {
+                return element.timeline[element.selector].length;
+            },
 
-            if (element.selector in element.timeline)
-                stopTransition(element.timeline[element.selector][0], gotoEnd);
+            dequeueTransition: function(element) {
+                if (!element.timeline[element.selector]) return;
 
-            if (clear)
-                clearQueue(element);
+                element.timeline[element.selector].shift();
 
-            return this;
-        };
+                if (element.timeline[element.selector] == [])
+                    delete element.timeline[element.selector];
+            },
 
-        var stopAll = function(element, clear, gotoEnd) {
+            delay: function(element, timeSpan) {
+                var animationStep = {};
 
-            for (var idx in element.timeline) {
-                if (idx in element.timeline)
-                    stopTransition(this.timeline[idx][0], gotoEnd);
+                animationStep.type = 'delay';
+                animationStep.duration = timeSpan;
+                animationStep.object = element;
 
-                if (clear && element.timeline[idx].length)
-                    clearQueue(element.timeline[idx][0].object);
+                if (kendo.fx.queueTransition(element, animationStep) == 1)
+                    activateTask(element);
 
-                if (!clear && element.timeline[idx].length)
-                    activateTask(element.timeline[idx][0].object);
+                return this;
+            },
+
+            stop: function(element, clear, gotoEnd) {
+
+                if (element.selector in element.timeline)
+                    stopTransition(element.timeline[element.selector][0], gotoEnd);
+
+                if (clear)
+                    kendo.fx.clearQueue(element);
+
+                return this;
+            },
+
+            stopAll: function(element, clear, gotoEnd) {
+
+                for (var idx in element.timeline) {
+                    if (idx in element.timeline)
+                        stopTransition(this.timeline[idx][0], gotoEnd);
+
+                    if (clear && element.timeline[idx].length)
+                        kendo.fx.clearQueue(element.timeline[idx][0].object);
+
+                    if (!clear && element.timeline[idx].length)
+                        activateTask(element.timeline[idx][0].object);
+                }
+
+                return this;
             }
 
-            return this;
-        };
+        });
 
-        var fade = function (element, duration, opacity) {
-            transition(element, { 'opacity': opacity }, { duration: duration, ease: 'linear', exclusive: 'opacity' });
-        };
-
-        animate = function (element, properties, options) {
-            transition(element, properties, extend({ queue: false }, options));
-        };
     }
 
-    extend(fx, {
+    var animate = function (element, properties, options) {
+
+        if (kendo.support.transitions && 'transition' in kendo.fx)
+            kendo.fx.transition(element, properties, extend({ queue: false }, options));
+        else {
+            $.each(transformProps, function() { // remove transforms to avoid IE and older browsers confusion
+                this in properties && delete properties[this];
+            });
+
+            element.animate(properties, extend({ queue: false }, options));
+        }
+    };
+
+    extend(kendo.fx, {
         fadeOut: {
             play: function(element, properties, options) {
-                animate(element, extend({ opacity: 0 }, properties), options);
+                animate(element, extend({ opacity: 0, rotate: '360deg', scale: '.1' }, properties), options);
             },
             reverse: function(element, properties, options) {
-                animate(element, extend({ opacity: 1 }, properties), options);
+                animate(element, extend({ opacity: 1, rotate: '0deg', scale: '1' }, properties), options);
             }
         },
         fadeIn: {
             play: function(element, properties, options) {
-                animate(element, extend({ opacity: 1 }, properties), options);
+                animate(element, extend({ opacity: 1, rotate: '0deg', scale: '1' }, properties), options);
             },
             reverse: function(element, properties, options) {
-                animate(element, extend({ opacity: 0 }, properties), options);
+                animate(element, extend({ opacity: 0, rotate: '360deg', scale: '.1' }, properties), options);
             }
         }
     });

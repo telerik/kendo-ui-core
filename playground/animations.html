@@ -24,7 +24,7 @@
         </div>
         <div class="animatee" style="background: blue">
             Click the button to animate me
-        </div>
+        </div> 
         <script type="text/javascript" charset="utf-8">
             var slideIn = function(element, complete) {
                 if (!element.parent().is(".t-animation-container")) {
@@ -37,18 +37,17 @@
                     duration: "slow",
                     queue: false,
                     complete: complete
-                });
-            }
+                }); 
+            };
 
             $(document).ready(function() {
 
                 $("button.play").click(function() {
-                    $(".animatee").kendoAnimate("fadeOut", function() {
-                    });
+                    $(".animatee").kendoAnimate("fadeOut", 1000);
                 });
 
                 $("button.reverse").click(function() {
-                    $(".animatee").kendoAnimate("fadeOut", true);
+                    $(".animatee").kendoAnimate("fadeOut", 1000, true);
                 });
             });
         </script>
