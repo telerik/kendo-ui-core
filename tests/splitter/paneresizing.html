@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Splitter client creation</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.query.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.splitter.js"></script>
+        <script src="helper.js"></script>
+        <link rel="stylesheet" href="../qunit.css" type="text/css" />
+        <style>
+            .t-splitter
+            {
+                position: relative;
+                height: 300px;
+            }
+
+            .t-splitter .t-pane
+            {
+                overflow: hidden;
+            }
+
+            .t-splitter .t-scrollable
+            {
+                overflow: auto;
+            }
+            .t-splitter .t-pane-loading
+            {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                margin: -8px 0 0 -8px;
+            }
+
+            .t-ghost-splitbar,
+            .t-splitbar
+            {
+                position: absolute;
+                border-style: solid;
+                font-size: 0;
+            }
+
+            .t-splitter .t-ghost-splitbar-horizontal,
+            .t-splitter .t-splitbar-horizontal
+            {
+                top: 0;
+                width: 5px;
+                border-width: 0 1px;
+                background-repeat: repeat-y;
+            }
+            .t-ghost-splitbar-vertical,
+            .t-splitbar-vertical
+            {
+                left: 0;
+                height: 5px;
+                border-width: 1px 0;
+                background-repeat: repeat-x;
+            }
+        </style>
+    </head>
+    <body>
+        <h1 id="qunit-header">Splitter client creation</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+
+            module("Splitter / PaneResizing / Horizontal", {
+                teardown: function() {
+                    $('.t-splitter').remove();
+                }
+            });
+
+            test("resizing is initialized along with splitter", function() {
+                var splitter = $(getSplitterHtml()).appendTo(document.body).kendoSplitter(),
+                    resizingHandler = splitter.data("kendoSplitter").resizing;
+
+                ok(resizingHandler);
+                equals(resizingHandler.owner.element[0], splitter[0]);
+            });
+
+            test("resizing.start creates splitbar ghost", function() {
+                var splitter = $(getSplitterHtml()).appendTo(document.body).kendoSplitter(),
+                    resizingHandler = splitter.data("kendoSplitter").resizing;
+
+                resizingHandler.start({ currentTarget: splitter.find(".t-splitbar") });
+
+                var ghost = splitter.find(".t-ghost-splitbar");
+
+                equals(ghost.length, 1);
+                equals(resizingHandler.ghostSplitBar[0], ghost[0]);
+            });
+
+            test("resizing constraints calculated from previous pane", function() {
+                var splitter = $(getSplitterHtml()).appendTo(document.body).kendoSplitter({
+                        panes: [ { minSize: "35px", maxSize: "150px" }, {} ]
+                    }),
+                    resizingHandler = splitter.data("kendoSplitter").resizing;
+
+                resizingHandler.start({ currentTarget: splitter.find(".t-splitbar") });
+
+                equals(resizingHandler.minSize, 35);
+                equals(resizingHandler.maxSize, 150);
+            });
+
+            test("resizing constraints calculated from next pane", function() {
+                var splitter = $(getSplitterHtml()).appendTo(document.body).kendoSplitter({
+                        panes: [ {}, { minSize: "35px", maxSize: "150px" } ]
+                    }),
+                    resizingHandler = splitter.data("kendoSplitter").resizing;
+
+                resizingHandler.start({ currentTarget: splitter.find(".t-splitbar") });
+
+                // minSize and maxSize will be calculated with the previous pane as the origin, taking splitbar width into account
+                equals(resizingHandler.minSize, 50);
+                equals(resizingHandler.maxSize, 165);
+            });
+
+            test("resizing constraints calculated from pane extremes", function() {
+                var splitter = $(getSplitterHtml()).appendTo(document.body).kendoSplitter({
+                        panes: [ { minSize: "60px", maxSize: "200px" }, { minSize: "35px", maxSize: "150px" } ]
+                    }),
+                    resizingHandler = splitter.data("kendoSplitter").resizing;
+
+                resizingHandler.start({ currentTarget: splitter.find(".t-splitbar") });
+
+                equals(resizingHandler.minSize, 60);
+                equals(resizingHandler.maxSize, 165);
+            });
+
+            test("resizing constraints for middle panes", function() {
+                var splitter = $(getSplitterHtml(4)).width(421).appendTo(document.body).kendoSplitter(),
+                    resizingHandler = splitter.data("kendoSplitter").resizing;
+
+                resizingHandler.start({ currentTarget: splitter.find(".t-splitbar").eq(1) });
+
+                equals(resizingHandler.minSize, 107);
+                equals(resizingHandler.maxSize, 307);
+            });
+
+            test("resizing.drag moves ghost splitbar", function() {
+                var splitter = $(getSplitterHtml()).appendTo(document.body).kendoSplitter(),
+                    resizingHandler = splitter.data("kendoSplitter").resizing,
+                    splitBar = splitter.find(".t-splitbar"),
+                    initialSplitBarPosition = parseInt(splitBar[0].style.left);
+
+                resizingHandler.start({ currentTarget: splitBar, pageX: initialSplitBarPosition });
+
+                resizingHandler.drag({ pageX: initialSplitBarPosition + 10 });
+
+                equals(parseInt(splitter.find(".t-ghost-splitbar")[0].style.left), initialSplitBarPosition + 10);
+            });
+
+            test("resizing.drag honors constraints", function() {
+                var splitter = $(getSplitterHtml()).appendTo(document.body).kendoSplitter({
+                        panes: [ { minSize: "60px", maxSize: "150px" }, {} ]
+                    }),
+                    resizingHandler = splitter.data("kendoSplitter").resizing,
+                    splitBar = splitter.find(".t-splitbar"),
+                    initialSplitBarPosition = parseInt(splitBar[0].style.left);
+
+                resizingHandler.start({ currentTarget: splitBar, pageX: initialSplitBarPosition });
+
+                // override contraints so that we don't test their calculation in .start()
+                resizingHandler.minSize = 60;
+                resizingHandler.maxSize = 150;
+
+                var ghost = splitter.find(".t-ghost-splitbar");
+
+                resizingHandler.drag({ pageX: 0 });
+
+                ok(ghost.hasClass("t-restricted-size-horizontal"));
+                equals(parseInt(ghost[0].style.left), 60);
+
+                resizingHandler.drag({ pageX: 1000 });
+
+                ok(ghost.hasClass("t-restricted-size-horizontal"));
+                equals(parseInt(ghost[0].style.left), 150);
+            });
+
+            test("resizing.stop modifies pane sizes", function() {
+                var splitter = $(getSplitterHtml()).appendTo(document.body).kendoSplitter(),
+                    resizingHandler = splitter.data("kendoSplitter").resizing,
+                    splitBar = splitter.find(".t-splitbar"),
+                    initialSplitBarPosition = splitBar.offset().left,
+                    panes = splitter.find(".t-pane"),
+                    initialPaneSizes = $.map(panes, function(x) { return parseInt(x.offsetWidth); });
+
+                resizingHandler.start({ currentTarget: splitBar, pageX: initialSplitBarPosition });
+                resizingHandler.drag({ pageX: initialSplitBarPosition + 5 });
+                resizingHandler.stop({ currentTarget: splitBar });
+
+                equals(parseInt(panes[0].offsetWidth), initialPaneSizes[0] + 5);
+                equals(parseInt(panes[1].offsetWidth), initialPaneSizes[1] - 5);
+            });
+
+            test("resizing.stop for middle panes", function() {
+                var splitter = $(getSplitterHtml(4)).width(421).appendTo(document.body).kendoSplitter(),
+                    resizingHandler = splitter.data("kendoSplitter").resizing,
+                    splitBar = splitter.find(".t-splitbar").eq(1),
+                    initialSplitBarPosition = splitBar.offset().left,
+                    panes = splitter.find(".t-pane"),
+                    initialPaneSizes = $.map(panes, function(x) { return parseInt(x.offsetWidth); });
+
+                resizingHandler.start({ currentTarget: splitBar, pageX: initialSplitBarPosition });
+                resizingHandler.drag({ pageX: initialSplitBarPosition + 5 });
+                resizingHandler.stop({ currentTarget: splitBar });
+
+                equals(panes[1].offsetWidth, initialPaneSizes[1] + 5);
+                equals(panes[2].offsetWidth, initialPaneSizes[2] - 5);
+            });
+
+            test("resizing.stop fires splitter resize", function() {
+                var triggered = false,
+                    splitter = $(getSplitterHtml()).appendTo(document.body).kendoSplitter(),
+                    splitBar = splitter.find(".t-splitbar"),
+                    resizingHandler = splitter.data("kendoSplitter").resizing;
+
+                splitter.bind("resize", function() { triggered = true; });
+
+                resizingHandler.start({ currentTarget: splitBar, pageX: 0 });
+                resizingHandler.stop({ currentTarget: splitBar });
+
+                ok(triggered);
+            });
+
+            test("resizing.stop for panes with constraints", function() {
+                var splitter = $(getSplitterHtml()).appendTo(document.body).kendoSplitter({
+                        panes: [{ minSize: "50px" }, {}]
+                    }),
+                    resizingHandler = splitter.data("kendoSplitter").resizing,
+                    splitBar = splitter.find(".t-splitbar"),
+                    initialSplitBarPosition = splitBar.offset().left,
+                    panes = splitter.find(".t-pane");
+
+                resizingHandler.start({ currentTarget: splitBar, pageX: initialSplitBarPosition });
+                resizingHandler.drag({ pageX: 0 });
+                resizingHandler.stop({ currentTarget: splitBar });
+
+                equals(panes[0].offsetWidth, 50);
+                equals(panes[1].offsetWidth, 150);
+            });
+
+            function isPercentageSize(size) {
+                return /^\d+(\.\d+)?%$/.test(size);
+            }
+
+            function isPixelSize(size) {
+                return /^\d+px$/.test(size);
+            }
+
+            function isFluid(size) {
+                return !isPercentageSize(size) && !isPixelSize(size);
+            }
+
+            test("resizing.stop assigns percentage sizes when resizing fluid panes", function() {
+                var splitter = $(getSplitterHtml()).appendTo(document.body).kendoSplitter({ panes: [{ size: "100px" }, {}] }),
+                    resizingHandler = splitter.data("kendoSplitter").resizing,
+                    splitBar = splitter.find(".t-splitbar"),
+                    initialSplitBarPosition = splitBar.offset().left,
+                    panes = splitter.find(".t-pane");
+
+                resizingHandler.start({ currentTarget: splitBar, pageX: initialSplitBarPosition });
+                resizingHandler.drag({ pageX: initialSplitBarPosition + 5 });
+                resizingHandler.stop({ currentTarget: splitBar });
+
+                ok(isPixelSize(panes.eq(0).data("pane").size));
+                ok(isFluid(panes.eq(1).data("pane").size));
+            });
+
+            test("resizing.stop assigns percentage sizes when resizing fluid panes", function() {
+                var splitter = $(getSplitterHtml()).appendTo(document.body).kendoSplitter({ panes: [{}, { size: "100px" }] }),
+                    resizingHandler = splitter.data("kendoSplitter").resizing,
+                    splitBar = splitter.find(".t-splitbar"),
+                    initialSplitBarPosition = splitBar.offset().left,
+                    panes = splitter.find(".t-pane");
+
+                resizingHandler.start({ currentTarget: splitBar, pageX: initialSplitBarPosition });
+                resizingHandler.drag({ pageX: initialSplitBarPosition + 5 });
+                resizingHandler.stop({ currentTarget: splitBar });
+
+                ok(isFluid(panes.eq(0).data("pane").size));
+                ok(isPixelSize(panes.eq(1).data("pane").size));
+            });
+
+            module("Splitter / PaneResizing / Vertical", {
+                teardown: function() {
+                    $('.t-splitter').remove();
+                }
+            });
+
+            test("resizing is initialized along with splitter", function() {
+                var splitter = $(getSplitterHtml()).appendTo(document.body).kendoSplitter({ orientation: "vertical" }),
+                    resizingHandler = splitter.data("kendoSplitter").resizing;
+
+                ok(resizingHandler);
+                equals(resizingHandler.owner.element[0], splitter[0]);
+            });
+
+            test("resizing.start creates splitbar ghost", function() {
+                var splitter = $(getSplitterHtml()).appendTo(document.body).kendoSplitter({ orientation: "vertical" }),
+                    resizingHandler = splitter.data("kendoSplitter").resizing;
+
+                resizingHandler.start({ currentTarget: splitter.find(".t-splitbar") });
+
+                var ghost = splitter.find(".t-ghost-splitbar");
+
+                equals(ghost.length, 1);
+                equals(resizingHandler.ghostSplitBar[0], ghost[0]);
+            });
+
+            test("resizing constraints calculated from previous pane", function() {
+                var splitter = $(getSplitterHtml()).appendTo(document.body).height(207).kendoSplitter({
+                        panes: [ { minSize: "35px", maxSize: "150px" }, {} ],
+                        orientation: "vertical"
+                    }),
+                    resizingHandler = splitter.data("kendoSplitter").resizing;
+
+                resizingHandler.start({ currentTarget: splitter.find(".t-splitbar") });
+
+                equals(resizingHandler.minSize, 35);
+                equals(resizingHandler.maxSize, 150);
+            });
+
+            test("resizing constraints calculated from next pane", function() {
+                var splitter = $(getSplitterHtml()).appendTo(document.body).height(207).kendoSplitter({
+                        panes: [ {}, { minSize: "35px", maxSize: "150px" } ],
+                        orientation: "vertical"
+                    }),
+                    resizingHandler = splitter.data("kendoSplitter").resizing;
+
+                resizingHandler.start({ currentTarget: splitter.find(".t-splitbar") });
+
+                // minSize and maxSize will be calculated with the previous pane as the origin, taking splitbar height into account
+                equals(resizingHandler.minSize, 50);
+                equals(resizingHandler.maxSize, 165);
+            });
+
+            test("resizing constraints calculated from pane extremes", function() {
+                var splitter = $(getSplitterHtml()).appendTo(document.body).height(207).kendoSplitter({
+                        panes: [ { minSize: "60px", maxSize: "200px" }, { minSize: "35px", maxSize: "150px" } ],
+                        orientation: "vertical"
+                    }),
+                    resizingHandler = splitter.data("kendoSplitter").resizing;
+
+                resizingHandler.start({ currentTarget: splitter.find(".t-splitbar") });
+
+                equals(resizingHandler.minSize, 60);
+                equals(resizingHandler.maxSize, 165);
+            });
+
+            test("resizing constraints for middle panes", function() {
+                var splitter = $(getSplitterHtml(4)).height(421).appendTo(document.body).kendoSplitter({ orientation: "vertical" }),
+                    resizingHandler = splitter.data("kendoSplitter").resizing;
+
+                resizingHandler.start({ currentTarget: splitter.find(".t-splitbar").eq(1) });
+
+                equals(resizingHandler.minSize, 107);
+                equals(resizingHandler.maxSize, 307);
+            });
+
+            test("resizing.drag moves ghost splitbar", function() {
+                var splitter = $(getSplitterHtml()).appendTo(document.body).kendoSplitter({ orientation: "vertical" }),
+                    resizingHandler = splitter.data("kendoSplitter").resizing,
+                    splitBar = splitter.find(".t-splitbar"),
+                    initialSplitBarPosition = parseInt(splitBar[0].style.top);
+
+                resizingHandler.start({ currentTarget: splitBar, pageY: initialSplitBarPosition });
+
+                resizingHandler.drag({ pageY: initialSplitBarPosition + 10 });
+
+                equals(parseInt(splitter.find(".t-ghost-splitbar")[0].style.top), initialSplitBarPosition + 10);
+            });
+
+            test("resizing.drag honors constraints", function() {
+                var splitter = $(getSplitterHtml()).appendTo(document.body).kendoSplitter({
+                        panes: [ { minSize: "60px", maxSize: "150px" }, {} ],
+                        orientation: "vertical"
+                    }),
+                    resizingHandler = splitter.data("kendoSplitter").resizing,
+                    splitBar = splitter.find(".t-splitbar"),
+                    initialSplitBarPosition = parseInt(splitBar[0].style.top);
+
+                resizingHandler.start({ currentTarget: splitBar, pageY: initialSplitBarPosition });
+
+                // override contraints so that we don't test their calculation in .start()
+                resizingHandler.minSize = 60;
+                resizingHandler.maxSize = 150;
+
+                var ghost = splitter.find(".t-ghost-splitbar");
+
+                resizingHandler.drag({ pageY: 0 });
+
+                ok(ghost.hasClass("t-restricted-size-vertical"));
+                equals(parseInt(ghost[0].style.top), 60);
+
+                resizingHandler.drag({ pageY: 1000 });
+
+                ok(ghost.hasClass("t-restricted-size-vertical"));
+                equals(parseInt(ghost[0].style.top), 150);
+            });
+
+            test("resizing.stop modifies pane sizes", function() {
+                var splitter = $(getSplitterHtml()).appendTo(document.body).kendoSplitter({ orientation: "vertical" }),
+                    resizingHandler = splitter.data("kendoSplitter").resizing,
+                    splitBar = splitter.find(".t-splitbar"),
+                    initialSplitBarPosition = splitBar.offset().top,
+                    panes = splitter.find(".t-pane"),
+                    initialPaneSizes = $.map(panes, function(x) { return parseInt(x.offsetHeight); });
+
+                resizingHandler.start({ currentTarget: splitBar, pageY: initialSplitBarPosition });
+                resizingHandler.drag({ pageY: initialSplitBarPosition + 5 });
+                resizingHandler.stop({ currentTarget: splitBar });
+
+                equals(parseInt(panes[0].offsetHeight), initialPaneSizes[0] + 5);
+                equals(parseInt(panes[1].offsetHeight), initialPaneSizes[1] - 5);
+            });
+
+            test("resizing.stop for middle panes", function() {
+                var splitter = $(getSplitterHtml(4)).height(421).appendTo(document.body).kendoSplitter({ orientation: "vertical" }),
+                    resizingHandler = splitter.data("kendoSplitter").resizing,
+                    splitBar = splitter.find(".t-splitbar").eq(1),
+                    initialSplitBarPosition = splitBar.offset().top,
+                    panes = splitter.find(".t-pane"),
+                    initialPaneSizes = $.map(panes, function(x) { return parseInt(x.offsetHeight); });
+
+                resizingHandler.start({ currentTarget: splitBar, pageY: initialSplitBarPosition });
+                resizingHandler.drag({ pageY: initialSplitBarPosition + 5 });
+                resizingHandler.stop({ currentTarget: splitBar });
+
+                equals(parseInt(panes[1].offsetHeight), initialPaneSizes[1] + 5);
+                equals(parseInt(panes[2].offsetHeight), initialPaneSizes[2] - 5);
+            });
+
+            test("resizing.stop fires splitter resize", function() {
+                var triggered = false,
+                    splitter = $(getSplitterHtml()).appendTo(document.body).kendoSplitter({ orientation: "vertical" }),
+                    splitBar = splitter.find(".t-splitbar"),
+                    resizingHandler = splitter.data("kendoSplitter").resizing;
+
+                splitter.bind("resize", function() { triggered = true; });
+
+                resizingHandler.start({ currentTarget: splitBar, pageY: 0 });
+                resizingHandler.stop({ currentTarget: splitBar });
+
+                ok(triggered);
+            });
+
+            test("resizing.stop does not resize splitter if Esc key was hit", function() {
+                var splitter = $(getSplitterHtml()).appendTo(document.body).kendoSplitter({ orientation: "vertical" }),
+                    resizingHandler = splitter.data("kendoSplitter").resizing,
+                    splitBar = splitter.find(".t-splitbar"),
+                    initialSplitBarPosition = splitBar.offset().top,
+                    panes = splitter.find(".t-pane"),
+                    initialPaneSizes = $.map(panes, function(x) { return parseInt(x.offsetHeight); });
+
+                resizingHandler.start({ currentTarget: splitBar, pageY: initialSplitBarPosition });
+                resizingHandler.drag({ pageY: initialSplitBarPosition + 5 });
+                resizingHandler.stop({ keyCode: 27, currentTarget: splitBar });
+
+                equals(parseInt(panes[0].offsetHeight), initialPaneSizes[0]);
+                equals(parseInt(panes[1].offsetHeight), initialPaneSizes[1]);
+            });
+
+            test("resizing.stop does not fire resize when cancelling drag with Esc", function() {
+                var triggered = false,
+                    splitter = $(getSplitterHtml()).appendTo(document.body).kendoSplitter({ orientation: "vertical" }),
+                    splitBar = splitter.find(".t-splitbar"),
+                    resizingHandler = splitter.data("kendoSplitter").resizing;
+
+                splitter.bind("resize", function() { triggered = true; });
+
+                resizingHandler.start({ currentTarget: splitBar, pageY: 0 });
+                resizingHandler.stop({ keyCode: 27, currentTarget: splitBar });
+
+                ok(!triggered);
+            });
+
+            module("Nested splitters", {
+                teardown: function() {
+                    $('.t-splitter').remove();
+                }
+            });
+
+            test("splitter is bound to parent splitter resize", function() {
+                var outerSplitter = $(getSplitterHtml()).height(207).appendTo(document.body).kendoSplitter(),
+                    innerSplitter =
+                        outerSplitter.find(".t-pane").eq(0)
+                            .html(getSplitterHtml())
+                            .find("> div").css({
+                                height: "100%",
+                                width: "100%",
+                                border: 0,
+                                overflow: "hidden"
+                            })
+                            .kendoSplitter({ orientation: "vertical" }),
+                    triggered = false;
+
+
+                innerSplitter.bind("resize", function(e) {
+                    triggered = true;
+                });
+
+                outerSplitter.trigger("resize");
+
+                ok(triggered);
+            });
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>

@@ -18,5 +18,14 @@ tests.push(
     {
         page: "splitter/loadondemand.html",
         title: "splitter client load on demand"
+    },
+    {
+        page: "splitter/paneresizing.html",
+        title: "splitter resizing"
+    },
+    {
+        page: "splitter/panesizing.html",
+        title: "splitter sizing"
     }
+
 );
