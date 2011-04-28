@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Splitter client creation</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.query.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.splitter.js"></script>
+        <script src="helper.js"></script>
+        <link rel="stylesheet" href="../qunit.css" type="text/css" />
+        <style>
+            .t-splitter
+            {
+                position: relative;
+                height: 300px;
+            }
+
+            .t-splitter .t-pane
+            {
+                overflow: hidden;
+            }
+
+            .t-splitter .t-scrollable
+            {
+                overflow: auto;
+            }
+            .t-splitter .t-pane-loading
+            {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                margin: -8px 0 0 -8px;
+            }
+
+            .t-ghost-splitbar,
+            .t-splitbar
+            {
+                position: absolute;
+                border-style: solid;
+                font-size: 0;
+            }
+
+            .t-splitter .t-ghost-splitbar-horizontal,
+            .t-splitter .t-splitbar-horizontal
+            {
+                top: 0;
+                width: 5px;
+                border-width: 0 1px;
+                background-repeat: repeat-y;
+            }
+            .t-ghost-splitbar-vertical,
+            .t-splitbar-vertical
+            {
+                left: 0;
+                height: 5px;
+                border-width: 1px 0;
+                background-repeat: repeat-x;
+            }
+        </style>
+    </head>
+    <body>
+        <h1 id="qunit-header">Splitter client creation</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+
+            module("Horizontal sizing", {
+                teardown: function() {
+                    $('.t-splitter').remove();
+                }
+            });
+
+            test("fluid resizable panes get equal sizes and a splitbar between them", function() {
+                var splitter = $(getSplitterHtml()).width(307).appendTo(document.body).kendoSplitter(),
+                    panes = splitter.find(".t-pane");
+
+                equals(panes.eq(0).width(), 150);
+                equals(panes.eq(1).width(), 150);
+                equals(panes.eq(1).offset().left - panes.offset().left, 157);
+                equals(splitter.find(".t-splitbar").offset().left - panes.offset().left, 150);
+            });
+
+            test("fluid panes get their size after allocating space for fixed panes", function() {
+                var splitter = $(getSplitterHtml()).width(307).appendTo(document.body).kendoSplitter({
+                        panes: [
+                            { size: "100px" },
+                            {}
+                        ]
+                    }),
+                    panes = splitter.find(".t-pane");
+
+                equals(panes.eq(0).width(), 100);
+                equals(panes.eq(1).width(), 200);
+            });
+
+            test("fluid panes get their size after allocating space for percentage panes", function() {
+                var splitter = $(getSplitterHtml(3)).width(314).appendTo(document.body).kendoSplitter({
+                        panes: [
+                            { size: "10%" },
+                            {},
+                            { size: "30%" }
+                        ]
+                    }),
+                    panes = splitter.find(".t-pane");
+
+                equals(panes.eq(0).width(), 30);
+                equals(panes.eq(1).width(), 180);
+                equals(panes.eq(2).width(), 90);
+            });
+            
+            test("sizes of percentage panes get properly rounded", function() {
+                var splitter = $(getSplitterHtml()).width(208).appendTo(document.body).kendoSplitter({
+                        panes: [
+                            { size: "10%" },
+                            {}
+                        ]
+                    }),
+                    panes = splitter.find(".t-pane");
+
+                equals(panes[0].style.width, "20px");
+            });
+
+            test("sizes of fluid panes get properly rounded", function() {
+                var splitter = $(getSplitterHtml()).width(208).appendTo(document.body).kendoSplitter(),
+                    panes = splitter.find(".t-pane");
+
+                equals(panes.eq(0).width(), 100);
+                equals(panes.eq(1).width(), 101);
+            });
+            
+            module("Vertical sizing", {
+                teardown: function() {
+                    $('.t-splitter').remove();
+                }
+            });
+
+            test("fluid resizable panes get equal sizes and a splitbar between them", function() {
+                var splitter = $(getSplitterHtml()).height(307).appendTo(document.body).kendoSplitter({ orientation: "vertical" }),
+                    panes = splitter.find(".t-pane");
+
+                equals(panes.eq(0).height(), 150);
+                equals(panes.eq(1).height(), 150);
+                equals(panes.eq(1).offset().top - panes.offset().top, 157);
+                equals(splitter.find(".t-splitbar").offset().top - panes.offset().top, 150);
+            });
+
+            test("fluid panes get their size after allocating space for fixed panes", function() {
+                var splitter = $(getSplitterHtml()).height(307).appendTo(document.body).kendoSplitter({
+                        orientation: "vertical",
+                        panes: [
+                            { size: "100px" },
+                            {}
+                        ]
+                    }),
+                    panes = splitter.find(".t-pane");
+
+                equals(panes.eq(0).height(), 100);
+                equals(panes.eq(1).height(), 200);
+            });
+
+            test("fluid panes get their size after allocating space for percentage panes", function() {
+                var splitter = $(getSplitterHtml(3)).height(314).appendTo(document.body).kendoSplitter({
+                        orientation: "vertical",
+                        panes: [
+                            { size: "10%" },
+                            {},
+                            { size: "30%" }
+                        ]
+                    }),
+                    panes = splitter.find(".t-pane");
+
+                equals(panes.eq(0).height(), 30);
+                equals(panes.eq(1).height(), 180);
+                equals(panes.eq(2).height(), 90);
+            });
+            
+            test("sizes of percentage panes get properly rounded", function() {
+                var splitter = $(getSplitterHtml()).height(208).appendTo(document.body).kendoSplitter({
+                        orientation: "vertical",
+                        panes: [
+                            { size: "10%" },
+                            {}
+                        ]
+                    }),
+                    panes = splitter.find(".t-pane");
+
+                equals(panes[0].style.height, "20px");
+            });
+
+            test("sizes of fluid panes get properly rounded", function() {
+                var splitter = $(getSplitterHtml()).height(208).appendTo(document.body).kendoSplitter({ orientation: "vertical" }),
+                    panes = splitter.find(".t-pane");
+
+                equals(panes.eq(0).height(), 100);
+                equals(panes.eq(1).height(), 101);
+            });
+
+            module("Sizing with collapsing", {
+                teardown: function() {
+                    $('.t-splitter').remove();
+                }
+            });
+
+            test("collapsed panes have size 0", function() {
+                var splitter = $(getSplitterHtml()).appendTo(document.body).kendoSplitter({
+                        panes: [{ collapsed: true }, {}]
+                    }),
+                    panes = splitter.find(".t-pane");
+
+                equals(panes.eq(0).width(), 0);
+                equals(panes.eq(1).width(), 200);
+            });
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>

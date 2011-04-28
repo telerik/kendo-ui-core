@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>splitter</title>
+        <script type="text/javascript" src="../src/jquery.js"></script>
+        <script type="text/javascript" src="../src/kendo.loader.js"></script>
+        <link type="text/css" href="/telerik.mvc.examples.fixes/Content/telerik.common.css" rel="stylesheet"/>
+        <link type="text/css" href="/telerik.mvc.examples.fixes/Content/telerik.vista.css" rel="stylesheet"/>
+        <script type="text/javascript">
+            kendo.loader.splitter();
+        </script>
+    </head>
+    <body>
+        <div  style='width: 207px;height:100px'><div>1</div><div>2</div></div>
+          <script type="text/javascript">
+              $(document).ready(function() {
+                  $("div").kendoSplitter({panes: [ { minSize: "35px", maxSize: "150px" }, {} ]});
+              });
+        </script>
+    </body>
+</html>

@@ -99,10 +99,15 @@
         },
 
         _wait: function (e) {
-            var that = this;
+            var that = this,
+                filter = that.options.filter;
 
             that._offset = { x: e.pageX, y: e.pageY };
-            that.currentTarget = e.currentTarget;
+            if(filter) {
+                that.currentTarget = $(e.target).is(filter) ? e.target : $(e.target).closest(filter);
+            }else {
+                that.currentTarget = e.currentTarget;
+            }
             $(document).bind(MOUSEMOVE + NAMESPACE, proxy(that._start, that))
                        .bind(MOUSEUP + NAMESPACE, proxy(that._destroy, that));
 

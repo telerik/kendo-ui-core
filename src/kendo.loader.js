@@ -255,7 +255,12 @@
         slider: {
             url: "kendo.slider.js",
             depends: "draganddrop"
+        },
+        splitter: {
+            url: "kendo.splitter.js",
+            depends: "draganddrop"
         }
+
     });
 
 })(window, document);
