@@ -16,7 +16,7 @@
 
         Component.call(that, element, options);
 
-        that.table = that.element;
+        that._element();
 
         that._columns();
 
@@ -41,6 +41,17 @@
             dataSource: {}
         },
 
+        _element: function() {
+            var that = this,
+                table = that.element;
+
+            if (!table.is("table")) {
+                table = $("<table />").appendTo(that.element);
+            }
+
+            that.table = table;
+        },
+
         _wrapper: function() {
             var that = this,
                 table = that.table,
@@ -48,11 +59,11 @@
 
             wrapper = table.parent();
 
-            if (!wrapper.is("div.t-grid")) {
-               wrapper = table.wrap($('<div class="t-grid t-widget" />')).parent();
+            if (!wrapper.is("div")) {
+               wrapper = table.wrap("<div />").parent();
             }
 
-            that.wrapper = wrapper;
+            that.wrapper = wrapper.addClass("t-grid t-widget");
         },
 
         _tbody: function() {
