@@ -5,7 +5,8 @@
         tbodySupportsInnerHtml = kendo.support.tbodyInnerHtml,
         Component = ui.Component,
         extend = $.extend,
-        isPlainObject = $.isPlainObject;
+        isPlainObject = $.isPlainObject,
+        map = $.map;
 
     function Grid(element, options) {
         var that = this,
@@ -18,15 +19,15 @@
 
         that._element();
 
-        that._columns();
+        that._columns(that.options.columns);
 
         that._dataSource();
 
         that._tbody();
 
-        that._wrapper();
+        that._thead();
 
-        that._sortable();
+        that._wrapper();
 
         that._templates();
 
@@ -128,12 +129,11 @@
             }
         },
 
-        _columns: function() {
-            var that = this,
-                columns = that.options.columns;
+        _columns: function(columns) {
+            var that = this;
 
             // using HTML5 data attributes as a configuration option e.g. <th data-field="foo">Foo</foo>
-            columns = columns.length ? columns : $.map(that.table.find("th"), function(th) {
+            columns = columns.length ? columns : map(that.table.find("th"), function(th) {
                 var th = $(th),
                     field = th.data("field");
 
@@ -147,7 +147,7 @@
                 };
             });
 
-            that.columns = $.map(columns, function(column) {
+            that.columns = map(columns, function(column) {
                 column = typeof column === "string" ? { field: column } : column;
                 return {
                     field: column.field,
@@ -190,6 +190,55 @@
             that.altRowTemplate = that._tmpl('<tr class="t-alt">', options.altRowTemplate || options.rowTemplate);
         },
 
+        _thead: function() {
+            var that = this,
+                columns = that.columns,
+                idx,
+                length,
+                html = "",
+                thead = that.table.find("thead"),
+                tr;
+
+            if (!thead[0]) {
+                thead = $("<thead/>").insertBefore(that.tbody);
+            }
+
+            tr = thead.children().first();
+
+            if (!tr[0]) {
+                tr = $("<tr/>").appendTo(thead);
+            }
+
+            if (!tr.children().length) {
+                for (idx = 0, length = columns.length; idx < length; idx++) {
+                    html += "<th>" + columns[idx].field + "</th>";
+                }
+
+                tr.html(html);
+            }
+
+            that.thead = thead;
+
+            that._sortable();
+        },
+
+        _autoColumns: function(schema) {
+            if (schema) {
+                var that = this,
+                    field;
+
+                for (field in schema) {
+                    that.columns.push({
+                        field: field
+                    });
+                }
+
+                that._thead();
+
+                that._templates();
+            }
+        },
+
         refresh: function() {
             var that = this,
                 length,
@@ -198,8 +247,15 @@
                 data = that.dataSource.view(),
                 tbody,
                 placeholder,
-                rowTemplate = that.rowTemplate,
-                altRowTemplate = that.altRowTemplate;
+                rowTemplate,
+                altRowTemplate;
+
+            if (!that.columns.length) {
+                that._autoColumns(data[0]);
+            }
+
+            rowTemplate = that.rowTemplate,
+            altRowTemplate = that.altRowTemplate;
 
             for (idx = 0, length = data.length; idx < length; idx++) {
                 if (idx % 2) {
