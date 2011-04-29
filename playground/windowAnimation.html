@@ -1,0 +1,76 @@
+﻿<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>Animations</title>
+        <script src="../src/jquery.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.fx.js" type="text/javascript" charset="utf-8"></script>
+        <style type="text/css" media="screen">
+            .animatee
+            {
+                position: absolute;
+                top: 100px;
+                left: 100px;
+                width: 200px;
+                height: 180px;
+                padding-top: 20px;
+                border: 1px solid blue;
+            }
+
+            .animatee .header {
+                top: 0;
+                position: absolute;
+                width: 100%;
+                height: 20px;
+                background: red;
+            }
+
+            .animatee .content {
+                width: 100%;
+                position: relative;
+                top: 0;
+                height: 100%;
+                background: yellow;
+                overflow: auto;
+            }
+        </style>
+    </head>
+    <body>
+        <button class="play">play</button>
+        <button class="reverse">reverse</button>
+
+        
+        <div class="animatee">
+            <div class="header">
+                Title: aaaaaaaaaaaaa
+            </div>
+            <div class="content">
+                Content: bbbbbbbbb<br>
+                2: bbbbbbbbb<br>
+                3: bbbbbbbbb<br>
+                4: bbbbbbbbb<br>
+                5: bbbbbbbbb<br>
+                6: bbbbbbbbb<br>
+                7: bbbbbbbbb<br>
+                5: bbbbbbbbb<br>
+                6: bbbbbbbbb<br>
+                7: bbbbbbbbb<br>
+                5: bbbbbbbbb<br>
+                6: bbbbbbbbb<br>
+                7: bbbbbbbbb<br>
+            </div>
+        </div> 
+        <script type="text/javascript" charset="utf-8">
+            $(document).ready(function() {
+                $("button.play").click(function() {
+                    $(".animatee").kendoAnimate("zoomIn", 250);
+                });
+
+                $("button.reverse").click(function() {
+                    $(".animatee").kendoAnimate("zoomIn", 250, true);
+                });
+            });
+        </script>
+    </body>
+</html>
