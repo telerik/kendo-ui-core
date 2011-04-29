@@ -203,10 +203,13 @@
                 thead = $("<thead/>").insertBefore(that.tbody);
             }
 
-            tr = thead.children().first();
+            tr = that.table.find("tr:has(th)");
 
             if (!tr[0]) {
-                tr = $("<tr/>").appendTo(thead);
+                tr = thead.children().first();
+                if(!tr[0]) {
+                    tr = $("<tr/>");
+                }
             }
 
             if (!tr.children().length) {
@@ -216,6 +219,8 @@
 
                 tr.html(html);
             }
+
+            tr.appendTo(thead);
 
             that.thead = thead;
 

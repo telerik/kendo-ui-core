@@ -226,17 +226,23 @@
             fieldCount = fields.length,
             data = [],
             cells,
-            record;
+            record,
+            empty;
 
         for (rowIndex = 0, rowCount = rows.length; rowIndex < rowCount; rowIndex++) {
             record = {};
+            empty = true;
             cells = rows[rowIndex].cells;
 
             for (fieldIndex = 0; fieldIndex < fieldCount; fieldIndex++) {
-                record[fields[fieldIndex].field] = cells[fieldIndex].innerHTML;
+                if(cells[fieldIndex].nodeName.toLowerCase() !== "th") {
+                    empty = false;
+                    record[fields[fieldIndex].field] = cells[fieldIndex].innerHTML;
+                }
             }
-
-            data.push(record);
+            if(!empty) {
+                data.push(record);
+            }
         }
 
         return data;

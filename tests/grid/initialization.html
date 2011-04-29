@@ -156,7 +156,7 @@
             });
 
             test("datasource is populated from table if not specified", function() {
-                var grid = new Grid($('<table><tr><td /><td/></tr></table>'));
+                var grid = new Grid($('<table><tr><td /><td/></tr></table>'), {columns: [ { field:"foo" }] });
 
                 equal(grid.dataSource.data().length, 1);
             });
@@ -246,6 +246,14 @@
 
                 equal(grid.table.find("thead").length, 1);
                 equal(grid.thead.find("tr").length, 1);
+                equal(grid.thead.find("th").length, 1);
+                equal(grid.thead.find("th").text(), "bar");
+            });
+            test("thead initialization when there is no thead but th exists", function() {
+                var grid = new Grid($("<table><tr><th>bar</th></tr></table>"), { });
+
+                equal(grid.table.find("thead").length, 1);
+                equal(grid.table.find("tr").length, 1);
                 equal(grid.thead.find("th").length, 1);
                 equal(grid.thead.find("th").text(), "bar");
             });
