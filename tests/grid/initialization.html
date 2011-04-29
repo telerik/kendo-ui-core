@@ -186,6 +186,69 @@
                 ok(div.children().first().is("table"));
                 ok(grid.table[0] === div.children().first()[0]);
             });
+
+            test("autogenerating columns", function() {
+                var grid = new Grid(table(), [ { foo: "foo", bar: "bar" } ]);
+
+                equal(grid.columns.length, 2);
+            });
+
+            test("autogenerating columns - inferring the field", function() {
+                var grid = new Grid(table(), [ { foo: "foo", bar: "bar" } ]);
+
+                equal(grid.columns[0].field, "foo");
+                equal(grid.columns[1].field, "bar");
+            });
+
+            test("autogenerating columns - generating the templates", function() {
+                var grid = new Grid(table(), [ { foo: "foo", bar: "bar" } ]);
+
+                equal(grid.tbody.find(">tr>td:first").text(), "foo");
+                equal(grid.tbody.find(">tr>td:last").text(), "bar");
+            });
+
+            test("autogenerating columns - generating the th", function() {
+                var grid = new Grid(table(), [ { foo: "foo", bar: "bar" } ]);
+
+                equal(grid.table.find("tr>th:first").text(), "foo");
+                equal(grid.table.find("tr>th:last").text(), "bar");
+            });
+
+            test("generating the th from column metadata", function() {
+                var grid = new Grid(table(), { columns: [ { field: "foo" } ] });
+
+                equal(grid.table.find("tr>th:first").text(), "foo");
+            });
+
+            test("thead initialization", function() {
+                var grid = new Grid(table(), { columns: [ { field: "foo" } ] });
+
+                equal(grid.thead.length, 1);
+            });
+
+            test("thead initialization when there is existing thead", function() {
+                var grid = new Grid($("<table><thead/></table>"), { columns: [ { field: "foo" } ] });
+
+                equal(grid.table.find("thead").length, 1);
+                equal(grid.thead.find("th").length, 1);
+            });
+
+            test("thead initialization when there is existing thead > tr", function() {
+                var grid = new Grid($("<table><thead><tr/></thead></table>"), { columns: [ { field: "foo" } ] });
+
+                equal(grid.table.find("thead").length, 1);
+                equal(grid.thead.find("tr").length, 1);
+                equal(grid.thead.find("th").length, 1);
+            });
+
+            test("thead initialization when there is existing thead > tr > th", function() {
+                var grid = new Grid($("<table><thead><tr><th>bar</th></tr></thead></table>"), { columns: [ { field: "foo" } ] });
+
+                equal(grid.table.find("thead").length, 1);
+                equal(grid.thead.find("tr").length, 1);
+                equal(grid.thead.find("th").length, 1);
+                equal(grid.thead.find("th").text(), "bar");
+            });
        </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
