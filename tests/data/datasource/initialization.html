@@ -103,6 +103,16 @@
                 equal(dataSource.data()[1].bar, "bar2");
             });
 
+            test("infer from html table skips th", function() {
+                var table = $("<table><tr><th>foo</th></tr></table>"),
+                    dataSource = DataSource.create({
+                        table: table,
+                        fields: [ { field: "foo" }]
+                    });
+
+                dataSource.read();
+                equal(dataSource.data().length, 0);
+            });
             </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

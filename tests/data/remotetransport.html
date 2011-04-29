@@ -179,6 +179,14 @@
                 stop(1000);
                 transport.read({ url: "foo", data: { baz: "moo" } });
                 $.mockjaxClear();
+                $.mockjax({
+                    url: "foo",
+                    response: function() {
+                        if(called == 2) {
+                            start();
+                        }
+                    }
+                });
 
                 stop(1000);
                 transport.read({ url: "foo", data: { baz: "moo" } });
