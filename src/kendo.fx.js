@@ -11,7 +11,7 @@
             for (var propertyName in obj)
                 acc.push(propertyName);
             return acc;
-    };
+        };
 
         var stopTransition = function (selection, gotoEnd) {
             if (!selection || !('object' in selection)) return;
@@ -131,18 +131,19 @@
                     else
                         cssValues[key] = properties[key];
 
-                animationStep.type = 'transition';
-                animationStep.complete = options.complete;
-                animationStep.setup = {};
-                animationStep.setup[kendo.support.transitions.css + 'transition'] = options.exclusive + ' ' + options.duration + 'ms ' + options.ease;
-                animationStep.duration = options.duration;
-
                 if (transforms.length)
                     cssValues[kendo.support.transitions.css + 'transform'] = transforms.join(' ');
 
-                animationStep.keys = keys(cssValues);
-                animationStep.CSS = cssValues;
-                animationStep.object = element;
+                animationStep = {
+                    type: 'transition',
+                    keys: keys(cssValues),
+                    CSS: cssValues,
+                    object: element,
+                    setup: {},
+                    duration: options.duration,
+                    complete: options.complete
+                };
+                animationStep.setup[kendo.support.transitions.css + 'transition'] = options.exclusive + ' ' + options.duration + 'ms ' + options.ease;
 
                 if (!options.queue) {
                     kendo.fx.queueTransition(element, animationStep);
@@ -185,9 +186,11 @@
             delay: function(element, timeSpan) {
                 var animationStep = {};
 
-                animationStep.type = 'delay';
-                animationStep.duration = timeSpan;
-                animationStep.object = element;
+                animationStep = {
+                    type: 'delay',
+                    duration: timeSpan,
+                    object: element
+                };
 
                 if (kendo.fx.queueTransition(element, animationStep) == 1)
                     activateTask(element);
