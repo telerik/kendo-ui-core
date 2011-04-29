@@ -125,7 +125,7 @@
                 sortable = that.options.sortable;
 
             if (sortable) {
-                that.table.find("th").kendoSortable(extend({}, sortable, { dataSource: that.dataSource }));
+                that.thead.find("th").kendoSortable(extend({}, sortable, { dataSource: that.dataSource }));
             }
         },
 
