@@ -52,6 +52,21 @@
                 equal(sortable.mode, "multi");
                 equal(sortable.allowUnsort, false);
             });
+
+            test("sortable is properly attached when there is no table header initially", function() {
+                var element = $("<table />"),
+                    grid = new Grid(element, {
+                    data: [],
+                    columns: [
+                        { field: "foo" },
+                        { field: "bar" }
+                    ],
+                    sortable: true
+                });
+                var ths = $(element).find("th");
+                ok(ths.eq(0).data("kendoSortable") instanceof kendo.ui.Sortable);
+                ok(ths.eq(1).data("kendoSortable") instanceof kendo.ui.Sortable);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

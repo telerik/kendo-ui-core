@@ -29,8 +29,6 @@
 
         that._wrapper();
 
-        that._sortable();
-
         that._templates();
 
         that._pager();
@@ -220,6 +218,8 @@
             }
 
             that.thead = thead;
+
+            that._sortable();
         },
 
         _autoColumns: function(schema) {
