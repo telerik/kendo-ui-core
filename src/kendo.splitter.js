@@ -5,12 +5,17 @@
         Component = ui.Component,
         splitBarSize = 7,
         pxUnitsRegex = /^\d+px$/i,
+        percentageUnitsRegex = /^\d+(\.\d+)?%$/i,
         INIT = "init",
         EXPAND = "expand",
         COLLAPSE = "collapse",
         CONTENTLOAD = "contentLoad",
         RESIZE = "resize",
-        percentageUnitsRegex = /^\d+(\.\d+)?%$/i;
+        HORIZONTAL = "horizontal",
+        VERTICAL = "vertical",
+        MOUSEENTER = "mouseenter",
+        CLICK = "click",
+        MOUSELEAVE = "mouseleave";
 
     function isPercentageSize(size) {
         return percentageUnitsRegex.test(size);
@@ -44,21 +49,16 @@
         var that = this,
             panesConfig,
             splitbarSelector,
-            expandCollapseSelector,
-            orientation;
+            expandCollapseSelector = ".t-splitbar .t-icon:not(.t-resize-handle)";
 
         Component.call(that, element, options);
 
-        orientation = that.options.orientation.toLowerCase() != "vertical" ? "horizontal" : "vertical";
-        panesConfig = that.options.panes;
-
-        splitbarSelector = ".t-splitbar-draggable-" + orientation;
-        expandCollapseSelector = ".t-splitbar .t-icon:not(.t-resize-handle)";
-
-        that.orientation = orientation;
+        that.orientation = that.options.orientation.toLowerCase() != VERTICAL ? HORIZONTAL : VERTICAL;
+        splitbarSelector = ".t-splitbar-draggable-" + that.orientation;
         that.ajaxOptions = that.options.ajaxOptions || that.ajaxOptions;
 
         that.bind([INIT, EXPAND, COLLAPSE, CONTENTLOAD, RESIZE], that.options);
+
         that.element.bind(RESIZE, function (e) {
             e.stopPropagation();
             that._resize.call(that, e);
@@ -66,80 +66,44 @@
             that.trigger(RESIZE, e);
         });
 
-        var arrowClick = function (arrowType) {
-            return function(e) {
-                var $target = $(e.target), $pane;
-
-                if ($target.closest(".t-splitter")[0] != element)
-                    return;
-
-                if ($target.is(".t-" + arrowType + "-prev")) {
-                    $pane = $target.parent().prev();
-                } else {
-                    $pane = $target.parent().next();
-                }
-
-                if (!that.trigger(arrowType, { pane: $pane[0] })) {
-                    that[arrowType]($pane[0]);
-                }
-            };
-        };
+        that._initPanes();
 
         that.element
-            .addClass("t-widget").addClass("t-splitter")
-            .children()
-                .addClass("t-pane")
-                .each($.proxy(function (index, pane) {
-                    var $pane = $(pane);
-                    $pane.data("pane", panesConfig ? panesConfig[index] : {})
-                         .toggleClass("t-scrollable", panesConfig ? panesConfig[index].scrollable !== false : true);
-                    this.ajaxRequest($pane);
-                }, this))
-            .end()
-            .trigger(RESIZE)
-            .delegate(splitbarSelector, "mouseenter", function() { $(this).addClass("t-splitbar-" + orientation + "-hover"); })
-            .delegate(splitbarSelector, "mouseleave", function() { $(this).removeClass("t-splitbar-" + orientation + "-hover"); })
-            .delegate(expandCollapseSelector, "mouseenter", function() { $(this).addClass("t-state-hove")})
-            .delegate(expandCollapseSelector, "mouseleave", function() { $(this).addClass("t-state-hove")})
-            .delegate(".t-splitbar .t-collapse-next, .t-splitbar .t-collapse-prev", "click", arrowClick("collapse"))
-            .delegate(".t-splitbar .t-expand-next, .t-splitbar .t-expand-prev", "click", arrowClick("expand"))
-            .delegate(".t-splitbar", "dblclick", function(e) {
-                var $target = $(e.target),
-                    triggerAction = function(type, $pane) {
-                        if (!that.trigger(type, { pane: $pane[0] })) {
-                            that[type]($pane[0]);
-                        }
-                    };
-
-                if ($target.closest(".t-splitter")[0] != element)
-                    return;
-
-                var arrow = $target.children(".t-icon:not(.t-resize-handle)");
-
-                if (arrow.length !== 1) {
-                    return;
-                }
-                if (arrow.is(".t-collapse-prev")) {
-                    triggerAction("collapse", $target.prev());
-                } else if (arrow.is(".t-collapse-next")) {
-                    triggerAction("collapse", $target.next());
-                } else if (arrow.is(".t-expand-prev")) {
-                    triggerAction("expand", $target.prev());
-                } else if (arrow.is(".t-expand-next")) {
-                    triggerAction("expand", $target.next());
-                }
-            })
+            .delegate(splitbarSelector, MOUSEENTER, function() { $(this).addClass("t-splitbar-" + that.orientation + "-hover"); })
+            .delegate(splitbarSelector, MOUSELEAVE, function() { $(this).removeClass("t-splitbar-" + that.orientation + "-hover"); })
+            .delegate(expandCollapseSelector, MOUSEENTER, function() { $(this).addClass("t-state-hover")})
+            .delegate(expandCollapseSelector, MOUSELEAVE, function() { $(this).removeClass('t-state-hover')})
+            .delegate(".t-splitbar .t-collapse-next, .t-splitbar .t-collapse-prev", CLICK, that._arrowClick(COLLAPSE))
+            .delegate(".t-splitbar .t-expand-next, .t-splitbar .t-expand-prev", CLICK, that._arrowClick(EXPAND))
+            .delegate(".t-splitbar", "dblclick", $.proxy(that._dbclick, that))
             .parent().closest(".t-splitter")
             .bind(RESIZE, function() {
                 that.element.trigger(RESIZE);
             });
 
-        that.resizing = new PaneResizing(this);
+        that.resizing = new PaneResizing(that);
     }
 
     Splitter.prototype = {
         options: {
-            orientation: "horizontal"
+            orientation: HORIZONTAL
+        },
+        _initPanes: function() {
+            var that = this,
+                panesConfig = that.options.panes;
+
+            that.element
+                .addClass("t-widget").addClass("t-splitter")
+                .children()
+                    .addClass("t-pane")
+                    .each(function (index, pane) {
+                        var $pane = $(pane);
+                        $pane.data("pane", panesConfig ? panesConfig[index] : {})
+                            .toggleClass("t-scrollable", panesConfig ? panesConfig[index].scrollable !== false : true);
+                        that.ajaxRequest($pane);
+                    })
+                .end()
+                .trigger(RESIZE);
         },
         ajaxOptions: function($pane, options) {
             var self = this;
@@ -150,7 +114,7 @@
                 success: function (data) {
                     $pane.html(data);
 
-                    self.trigger("contentLoad", { pane: $pane[0] });
+                    self.trigger(CONTENTLOAD, { pane: $pane[0] });
                 }
             }, options);
         },
@@ -166,10 +130,58 @@
                 }));
             }
         },
+        _triggerAction: function(type, pane) {
+            if (!this.trigger(type, { pane: pane[0] })) {
+                this[type](pane[0]);
+            }
+        },
+        _dbclick: function(e) {
+            var that = this,
+                $target = $(e.target),
+                arrow;
+
+            if ($target.closest(".t-splitter")[0] != that.element[0]) {
+                return;
+            }
+
+            arrow = $target.children(".t-icon:not(.t-resize-handle)");
+
+            if (arrow.length !== 1) {
+                return;
+            }
+
+            if (arrow.is(".t-collapse-prev")) {
+                that._triggerAction(COLLAPSE, $target.prev());
+            } else if (arrow.is(".t-collapse-next")) {
+                that._triggerAction(COLLAPSE, $target.next());
+            } else if (arrow.is(".t-expand-prev")) {
+                that._triggerAction(EXPAND, $target.prev());
+            } else if (arrow.is(".t-expand-next")) {
+                that._triggerAction(EXPAND, $target.next());
+            }
+        },
+        _arrowClick: function (arrowType) {
+            var that = this;
+
+            return function(e) {
+                var $target = $(e.target),
+                    pane;
+
+                if ($target.closest(".t-splitter")[0] != that.element[0])
+                    return;
+
+                if ($target.is(".t-" + arrowType + "-prev")) {
+                    pane = $target.parent().prev();
+                } else {
+                    pane = $target.parent().next();
+                }
+                that._triggerAction(arrowType, pane);
+            };
+        },
         _resize: function() {
             var $element = this.element,
                 panes = $element.children(":not(.t-splitbar)"),
-                isHorizontal = this.orientation == "horizontal",
+                isHorizontal = this.orientation == HORIZONTAL,
                 splitBarsCount = $element.children(".t-splitbar").length,
                 sizingProperty = isHorizontal ? "width" : "height",
                 totalSize = $element[sizingProperty]();
@@ -194,7 +206,7 @@
                    };
 
                     $pane.after("<div class='t-splitbar t-state-default t-splitbar-" + this.orientation +
-                            (isSplitBarDraggable && !previousPane.collapsed && !nextPane.collapsed ?  " t-splitbar-draggable-" + this.orientation : "") + 
+                            (isSplitBarDraggable && !previousPane.collapsed && !nextPane.collapsed ?  " t-splitbar-draggable-" + this.orientation : "") +
                         "'>" +
                         catIconIf("t-collapse-prev", previousPane.collapsible && !previousPane.collapsed) +
                         catIconIf("t-expand-prev", previousPane.collapsible && previousPane.collapsed) +
@@ -321,7 +333,7 @@
                 splitBar = draggable,
                 previousPane = splitBar.prev(), nextPane = splitBar.next(),
                 previousPaneConfig = previousPane.data("pane"), nextPaneConfig = nextPane.data("pane"),
-                isHorizontal = that.owner.orientation === "horizontal",
+                isHorizontal = that.owner.orientation === HORIZONTAL,
                 sizingProperty = isHorizontal ? "width" : "height",
                 sizingDomProperty = isHorizontal ? "offsetWidth" : "offsetHeight",
                 alternateSizingProperty = isHorizontal ? "height" : "width";
@@ -368,7 +380,7 @@
             if (e.keyCode !== 27) {
 
                 var ghostPosition = parseInt(this.ghostSplitBar[0].style[this.positioningProperty]),
-                    isHorizontal = this.owner.orientation === "horizontal",
+                    isHorizontal = this.owner.orientation === HORIZONTAL,
                     sizingProperty = isHorizontal ? "width" : "height",
                     sizingDomProperty = isHorizontal ? "offsetWidth" : "offsetHeight",
                     previousPaneConfig = this.previousPane.data("pane"),
