@@ -235,6 +235,23 @@
             kendo.fx.transition(element, properties, extend({ queue: false }, options));
         else {
             $.each(transformProps, function() { // remove transforms to avoid IE and older browsers confusion
+                if (this == 'scale') {
+                    !element.data('scale') && element.data('scale', {
+                                top: element[0].offsetTop,
+                                left: element[0].offsetLeft,
+                                width: element.innerWidth(),
+                                height: element.innerHeight()
+                            });
+                    var originalScale = element.data('scale');
+                    var scaleFactor = properties[this];
+
+                    extend(properties, {
+                                top: originalScale.top + originalScale.top * (1-scaleFactor),
+                                left: originalScale.left + originalScale.left * (1-scaleFactor),
+                                width: originalScale.width * scaleFactor,
+                                height: originalScale.height * scaleFactor
+                            });
+                }
                 this in properties && delete properties[this];
             });
 
@@ -257,6 +274,22 @@
             },
             reverse: function(element, properties, options) {
                 animate(element, extend({ opacity: 0, rotate: '360deg', scale: '.1' }, properties), options);
+            }
+        },
+        zoomIn: {
+            play: function(element, properties, options) {
+                animate(element, extend({ scale: '.8', opacity: "0" }, properties), options);
+            },
+            reverse: function(element, properties, options) {
+                animate(element, extend({ scale: '1', opacity: "1" }, properties), options);
+            }
+        },
+        zoomOut: {
+            play: function(element, properties, options) {
+                animate(element, extend({ scale: '1', opacity: "0" }, properties), options);
+            },
+            reverse: function(element, properties, options) {
+                animate(element, extend({ scale: '.8', opacity: "1" }, properties), options);
             }
         }
     });
