@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.ui.Popup Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <link rel="stylesheet" href="../qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.ui.Popup Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+            var Popup = kendo.ui.Popup, div;
+
+            module("kendo.ui.Popup", {
+                setup: function() {
+                    div = $("<div />");
+                },
+                teardown: function() {
+                    div.remove();
+                }
+            });
+
+            test("popup appends element to body", function() {
+                div.kendoPopup();
+
+                ok(div.parent().is("body"));
+            });
+
+            test("popup hides the element", function() {
+                div.kendoPopup();
+
+                ok(!div.is(":visible"));
+            });
+
+            test("open triggers the open event", function() {
+                div.kendoPopup( {
+                    open: function() {
+                        ok(true);
+                        start();
+                    }
+                });
+
+                div.data("kendoPopup").open();
+                stop(1000);
+            });
+
+            test("open shows the element", function() {
+                div.kendoPopup();
+
+                div.data("kendoPopup").open();
+
+                ok(div.is(":visible"));
+            });
+
+            test("close triggers the close event", function() {
+                div.kendoPopup( {
+                    close: function() {
+                        ok(true);
+                        start();
+                    }
+                });
+
+                div.data("kendoPopup").close();
+                stop(1000);
+            });
+
+            test("close closes the element", function() {
+
+                div.kendoPopup( {
+                    close: function() {
+                        ok(!div.is(":visible"));
+                        start();
+                    }
+                });
+
+                div.show().data("kendoPopup").close();
+            });
+        </script>
+    </body>
+</html>
