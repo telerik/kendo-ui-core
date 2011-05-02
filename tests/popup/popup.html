@@ -20,14 +20,15 @@
         <ul id="log"></ul>
 
         <script>
-            var Popup = kendo.ui.Popup, div;
+            var Popup = kendo.ui.Popup, div, anchor;
 
             module("kendo.ui.Popup", {
                 setup: function() {
-                    div = $("<div />");
+                    div = $("<div style='background:red'>popup</div>");
+                    anchor = $("<div style='background:blue'>anchor</div>").appendTo(document.body);
                 },
                 teardown: function() {
-                    div.remove();
+                    div.add(anchor).remove();
                 }
             });
 
@@ -71,7 +72,7 @@
                     }
                 });
 
-                div.data("kendoPopup").close();
+                div.show().data("kendoPopup").close();
                 stop(1000);
             });
 
@@ -86,6 +87,232 @@
 
                 div.show().data("kendoPopup").close();
             });
+
+            test("popup is made absolute", function() {
+                div.kendoPopup();
+                equal(div.css("position"), "absolute");
+            });
+
+            test("default popup origin is bottom left", function() {
+                var popup = new Popup(div, {
+                    anchor: anchor
+                });
+
+                equal(popup.options.origin, "bottom left");
+            });
+
+            test("default popup position is top left", function() {
+                var popup = new Popup(div, {
+                    anchor: anchor
+                });
+
+                equal(popup.options.position, "top left");
+            });
+
+            test("origin bottom and position top", function() {
+                var popup = new Popup(div, {
+                    anchor: anchor,
+                    origin: "bottom left"
+                });
+
+                popup.open();
+                equal(div.offset().top, anchor.offset().top + anchor.outerHeight());
+            });
+
+            test("origin bottom and position bottom", function() {
+                var popup = new Popup(div, {
+                    anchor: anchor,
+                    origin: "bottom left",
+                    position: "bottom left"
+                });
+
+                popup.open();
+                equal(div.offset().top + div.outerHeight(), anchor.offset().top + anchor.outerHeight());
+            });
+
+            test("origin bottom and position center", function() {
+                var popup = new Popup(div, {
+                    anchor: anchor,
+                    origin: "bottom left",
+                    position: "center left"
+                });
+
+                popup.open();
+                equal(div.offset().top + Math.round(div.outerHeight() / 2), anchor.offset().top + anchor.outerHeight());
+            });
+
+            test("origin top and position top", function() {
+                var popup = new Popup(div, {
+                    anchor: anchor,
+                    origin: "top left"
+                });
+
+                popup.open();
+                equal(div.offset().top, anchor.offset().top);
+            });
+
+            test("origin top and position bottom", function() {
+                var popup = new Popup(div, {
+                    anchor: anchor,
+                    origin: "top left",
+                    position: "bottom left"
+                });
+
+                popup.open();
+                equal(div.offset().top + div.outerHeight(), anchor.offset().top);
+            });
+
+            test("origin top and position center", function() {
+                var popup = new Popup(div, {
+                    anchor: anchor,
+                    origin: "top left",
+                    position: "center left"
+                });
+
+                popup.open();
+                equal(div.offset().top + Math.round(div.outerHeight() / 2), anchor.offset().top);
+            });
+
+            test("origin center and position top", function() {
+                var popup = new Popup(div, {
+                    anchor: anchor,
+                    origin: "center left"
+                });
+
+                popup.open();
+                equal(div.offset().top, anchor.offset().top + Math.round(anchor.outerHeight() / 2 ));
+            });
+
+            test("origin center and position bottom", function() {
+                var popup = new Popup(div, {
+                    anchor: anchor,
+                    origin: "center left",
+                    position: "bottom left"
+                });
+
+                popup.open();
+                equal(div.offset().top + div.outerHeight(), anchor.offset().top + Math.round(anchor.outerHeight() / 2 ));
+            });
+
+            test("origin center and position center", function() {
+                var popup = new Popup(div, {
+                    anchor: anchor,
+                    origin: "center left",
+                    position: "center left"
+                });
+
+                popup.open();
+                equal(div.offset().top + Math.round(div.outerHeight() / 2), anchor.offset().top + Math.round(anchor.outerHeight() / 2 ));
+            });
+
+            test("origin left and position left", function() {
+                var popup = new Popup(div, {
+                    anchor: anchor,
+                    origin: "center left",
+                    position: "center left"
+                });
+
+                popup.open();
+
+                equal(div.offset().left, anchor.offset().left);
+            });
+
+            test("origin left and position right", function() {
+                var popup = new Popup(div, {
+                    anchor: anchor,
+                    origin: "center left",
+                    position: "center right"
+                });
+
+                popup.open();
+
+                equal(div.offset().left + div.outerWidth(), anchor.offset().left);
+            });
+
+            test("origin left and position center", function() {
+                var popup = new Popup(div, {
+                    anchor: anchor,
+                    origin: "center left",
+                    position: "center center"
+                });
+
+                popup.open();
+
+                equal(div.offset().left + Math.round(div.outerWidth() / 2), anchor.offset().left);
+            });
+
+            test("origin right and position left", function() {
+                var popup = new Popup(div, {
+                    anchor: anchor,
+                    origin: "center right",
+                    position: "center left"
+                });
+
+                popup.open();
+
+                equal(div.offset().left, anchor.offset().left + anchor.outerWidth());
+            });
+
+            test("origin right and position right", function() {
+                var popup = new Popup(div, {
+                    anchor: anchor,
+                    origin: "center right",
+                    position: "center right"
+                });
+
+                popup.open();
+
+                equal(div.offset().left + div.outerWidth(), anchor.offset().left + anchor.outerWidth());
+            });
+
+            test("origin right and position center", function() {
+                var popup = new Popup(div, {
+                    anchor: anchor,
+                    origin: "center right",
+                    position: "center center"
+                });
+
+                popup.open();
+
+                equal(div.offset().left + Math.round(div.outerWidth() / 2), anchor.offset().left + anchor.outerWidth());
+            });
+
+            test("origin center and position left", function() {
+                var popup = new Popup(div, {
+                    anchor: anchor,
+                    origin: "center center",
+                    position: "center left"
+                });
+
+                popup.open();
+
+                equal(div.offset().left, anchor.offset().left + Math.round(anchor.outerWidth() / 2));
+            });
+
+            test("origin center and position right", function() {
+                var popup = new Popup(div, {
+                    anchor: anchor,
+                    origin: "center center",
+                    position: "center right"
+                });
+
+                popup.open();
+
+                equal(div.offset().left + div.outerWidth(), anchor.offset().left + Math.round(anchor.outerWidth() / 2));
+            });
+
+            test("origin center and position center", function() {
+                var popup = new Popup(div, {
+                    anchor: anchor,
+                    origin: "center center",
+                    position: "center center"
+                });
+
+                popup.open();
+
+                equal(div.offset().left + Math.round(div.outerWidth() / 2), anchor.offset().left + Math.round(anchor.outerWidth() / 2));
+            });
+
         </script>
     </body>
 </html>
