@@ -997,14 +997,28 @@
             effects: {},
             duration: 400, //jQuery default duration
             reverse: false,
-            complete: $.noop
+            complete: $.noop,
+            hide: false,
+            show: false
         }, options);
 
+        if (options.show) {
+            element.show();
+        }
+
         return element.queue(function () {
-            var promises = [];
+            var promises = [], effects = options.effects;
+
+            if (typeof effects === "string") {
+                effects = {};
+
+               $.each(options.effects.split(" "), function() {
+                    effects[this] = {};
+               });
+            }
 
             // create a promise for each effect
-            $.each(options.effects, function(effectName, settings) {
+            $.each(effects, function(effectName, settings) {
                 var promise = $.Deferred(function(deferred) {
                     var effect = kendo.fx[effectName];
 
@@ -1026,6 +1040,11 @@
             //wait for all effects to complete
             $.when.apply(null, promises).then(function() {
                 element.dequeue(); // call next animation from the queue
+
+                if (options.hide) {
+                    element.hide();
+                }
+
                 options.complete(); // call the complete callback
             });
        });
