@@ -141,6 +141,27 @@
                 ok(reverseWasCalled);
                 ok(callbackWasCalled);
             });
+
+            test("passing options to animate effects as string", function() {
+                var reverseWasCalled = false, callbackWasCalled = false;
+
+                kendo.fx.foo = {
+                    reverse: function(element, properties, options) {
+                        reverseWasCalled = true;
+                        options.complete();
+                    }
+                };
+
+                animate(span, {
+                    reverse: true,
+                    complete: function() {
+                        callbackWasCalled = true;
+                    },
+                    effects: "foo"
+                });
+                ok(reverseWasCalled);
+                ok(callbackWasCalled);
+            });
        </script>
     </body>
 </html>
