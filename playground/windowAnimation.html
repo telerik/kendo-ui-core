@@ -7,7 +7,8 @@
         <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.fx.js" type="text/javascript" charset="utf-8"></script>
         <style type="text/css" media="screen">
-            .animatee
+            .animatee,
+            .animatee2
             {
                 position: absolute;
                 top: 100px;
@@ -17,16 +18,19 @@
                 padding-top: 20px;
                 border: 1px solid blue;
             }
-
-            .animatee .header {
+            .animatee2 {
+                left: 400px;
+            }
+            .animatee .header,
+            .animatee2 .header {
                 top: 0;
                 position: absolute;
                 width: 100%;
                 height: 20px;
                 background: red;
             }
-
-            .animatee .content {
+            .animatee .content,
+            .animatee2 .content {
                 width: 100%;
                 position: relative;
                 top: 0;
@@ -61,14 +65,42 @@
                 7: bbbbbbbbb<br>
             </div>
         </div> 
+        <div class="animatee2">
+            <div class="header">
+                Title: aaaaaaaaaaaaa
+            </div>
+            <div class="content">
+                Content: bbbbbbbbb<br>
+                2: bbbbbbbbb<br>
+                3: bbbbbbbbb<br>
+                4: bbbbbbbbb<br>
+                5: bbbbbbbbb<br>
+                6: bbbbbbbbb<br>
+                7: bbbbbbbbb<br>
+                5: bbbbbbbbb<br>
+                6: bbbbbbbbb<br>
+                7: bbbbbbbbb<br>
+                5: bbbbbbbbb<br>
+                6: bbbbbbbbb<br>
+                7: bbbbbbbbb<br>
+            </div>
+        </div>
         <script type="text/javascript" charset="utf-8">
             $(document).ready(function() {
                 $("button.play").click(function() {
-                    $(".animatee").kendoAnimate("zoomIn", 250);
+                    $(".animatee").kendoAnimate("zoomIn", 500);
                 });
 
                 $("button.reverse").click(function() {
-                    $(".animatee").kendoAnimate("zoomIn", 250, true);
+                    $(".animatee").kendoAnimate("zoomIn", 500, true);
+                });
+
+                $("button.play").click(function() {
+                    $(".animatee2").kendoAnimate("slideRight", 500);
+            });
+
+                $("button.reverse").click(function() {
+                    $(".animatee2").kendoAnimate("slideRight", 500, true);
                 });
             });
         </script>

@@ -945,6 +945,7 @@
         support.touch = "ontouchstart" in window;
 
         support.transitions = false;
+        support.hasHW3D = 'WebKitCSSMatrix' in window && 'm11' in new WebKitCSSMatrix();
 
         $.each([ 'Moz', 'webkit', 'O', 'ms' ], function () {
             var prefix = this;
