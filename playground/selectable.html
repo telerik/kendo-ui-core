@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.selectable.js"></script>
+        <style type="text/css">
+            .selected 
+            {
+                background-color: Green;
+                }
+        </style>
+    </head>
+    <body>		
+	    <table id="table1" style="table-layout:fixed">
+		    <thead>
+			    <tr>
+				    <th >Foo</th>
+				    <th >Bar</th>                  
+			    </tr>
+		    </thead>
+		    <tbody>
+			    <tr><td>1</td><td>4</td></tr>
+			    <tr><td>2</td><td>5</td></tr>
+			    <tr>
+                    <td>3</td>
+                    <td>
+                        <table>
+                            <thead>
+                                <tr><th>Nested Table</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>some text</td></tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+		    </tbody>
+	    </table>
+
+        <ul>
+           <li>1</li>
+           <li>2</li>
+           <li>3</li>
+           <li>1</li>
+           <li>2</li>
+           <li>3</li>
+           <li>1</li>
+           <li>2</li>
+        </ul>
+        <script>
+            $(document).ready(function() {
+                $("#table1 tbody").kendoSelectable({
+                    single: false,
+                    filter: "td"
+                });
+
+                $("ul").kendoSelectable({
+                    single: false                    
+                });
+            });
+        </script>
+</body>
+</html>
