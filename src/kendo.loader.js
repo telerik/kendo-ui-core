@@ -231,6 +231,10 @@
             url: "kendo.query.js",
             depends: "core"
         },
+        fx: {
+            url: "kendo.fx.js",
+            depends: "core"
+        },
         datasource: {
             url: "kendo.datasource.js",
             depends: "query"
@@ -259,8 +263,11 @@
         splitter: {
             url: "kendo.splitter.js",
             depends: "draganddrop"
+        },
+        window: {
+            url: "kendo.window.js",
+            depends: [ "draganddrop", "fx" ]
         }
-
     });
 
 })(window, document);

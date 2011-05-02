@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>window</title>
+        <script type="text/javascript" src="../src/jquery.js"></script>
+        <script type="text/javascript" src="../src/kendo.loader.js"></script>
+        <link type="text/css" href="../styles/telerik.common.css" rel="stylesheet"/>
+        <link type="text/css" href="../styles/telerik.vista.css" rel="stylesheet"/>
+        <script type="text/javascript">
+            kendo.loader.window();
+        </script>
+    </head>
+    <body>
+        <input type="button" id="button" value="Click me!" onclick="createWindow()" />
+
+        <div id="window"></div>
+
+        <script type="text/javascript">
+            function createWindow() {
+                $("#window").data("kendoWindow").open();
+            }
+
+            $(document).ready(function() {
+                $("#window").kendoWindow({ width: 200, height: 200, html: "<div class='myDiv' style='padding: 0.4em'>aaaaaa</div>", title: "aaaaaaa", resizable: true });
+            });
+        </script>
+    </body>
+</html>
