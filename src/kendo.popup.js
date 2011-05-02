@@ -31,6 +31,15 @@
         });
 
         that.bind([OPEN, CLOSE], that.options);
+
+        $(document.documentElement).bind("mousedown", function(e){
+            var container = that.element[0],
+                target = e.target;
+            if(container !== target && !$.contains(container, target)) {
+                that.close();
+            }
+        });
+
     }
 
     function align(element, anchor, origin, position) {
