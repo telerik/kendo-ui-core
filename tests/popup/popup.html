@@ -32,6 +32,18 @@
                 }
             });
 
+            test("mousedown outside the element should close it", function(){
+                 div.kendoPopup( {
+                     close: function() {
+                        ok(!div.is(":visible"));
+                        start();
+                    }
+                }).show();
+
+                $(document.documentElement).mousedown();
+                stop(1000);
+            });
+
             test("popup appends element to body", function() {
                 div.kendoPopup();
 
