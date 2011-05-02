@@ -19,14 +19,30 @@
         <ul id="log"></ul>
 
         <script>
-            module("kendo.mobile.Application", {
-                setup: function() {
-                },
+            module("kendo.mobile globals", {
                 teardown: function() {
+                    $("meta").remove();
                 }
             });
 
-            test("", function() {
+            test("init() sets application icon meta tag", function() {
+                kendo.mobile.init({
+                    icon: "application.png"
+                });
+
+                var iconLinkTag = $("link[rel=apple-touch-icon]");
+
+                equals(iconLinkTag.length, 1);
+                equals(iconLinkTag.attr("href"), "application.png");
+            });
+
+            test("init() sets viewport meta tag", function() {
+                kendo.mobile.init({});
+
+                var viewportTag = $("meta[name=viewport]");
+
+                equals(viewportTag.length, 1);
+                equals(viewportTag.attr("content"), "width=device-width");
             });
         </script>
     </body>
