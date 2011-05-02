@@ -154,6 +154,15 @@
 
         height: function() {
             return this.y2 - this.y1;
+        },
+
+        translate: function(dx, dy) {
+            var box = this;
+
+            box.x1 += dx;
+            box.x2 += dx;
+            box.y1 += dy;
+            box.y2 += dy;
         }
     }
 
@@ -200,9 +209,14 @@
 
         updateLayout: function() {
             var root = this,
-                box = new Box(0, 0, root.options.width, root.options.height);
+                currentBox = new Box(0, 0, root.options.width, root.options.height);
 
-            root.children[0].updateLayout(box);
+            root.box = currentBox;
+
+            for (var i = 0; i < root.children.length; i++) {
+                root.children[i].updateLayout(currentBox);
+                currentBox = boxDiff(currentBox, root.children[i].box);
+            };
         },
 
         getView: function(factory) {
@@ -236,7 +250,8 @@
             var text = this,
                 size = text.measure();
 
-            text.box = new Box(targetBox.x1, targetBox.y1, targetBox.x1 + size.width, targetBox.y1 + size.height);
+            text.box = new Box( targetBox.x1, targetBox.y1,
+                                targetBox.x1 + size.width, targetBox.y1 + size.height);
         },
 
         measure: function() {
@@ -304,6 +319,7 @@
         ChartElement.call(legend);
 
         legend.options = $.extend({}, legend.options, options);
+        legend.createLabels();
     }
 
     Legend.prototype = new ChartElement();
@@ -326,7 +342,29 @@
         },
 
         updateLayout: function(targetBox) {
-            this.createLabels();
+            var legend = this,
+                labelsBox = new Box();
+
+            // Position labels below each other
+            for (var i = 0; i < legend.children.length; i++) {
+                var label = legend.children[i];
+                label.updateLayout(labelsBox);
+
+                labelsBox.x2 = Math.max(labelsBox.x2, label.box.x2);
+                labelsBox.y1 = labelsBox.y2 = label.box.y2;
+            };
+            labelsBox.y1 = 0;
+
+            // Translate all labels to the final position
+            var offsetX = targetBox.x2 - labelsBox.width(),
+                offsetY = targetBox.y1 + ((targetBox.height() - labelsBox.height()) / 2);
+            for (var i = 0; i < legend.children.length; i++) {
+                var label = legend.children[i];
+                label.box.translate(offsetX, offsetY);
+            };
+
+            labelsBox.translate(offsetX, offsetY);
+            legend.box = labelsBox;
         }
     });
 
@@ -346,6 +384,8 @@
         },
 
         updateLayout: function(targetBox) {
+            var plotArea = this;
+            plotArea.box = targetBox;
         }
     });
 
@@ -541,6 +581,53 @@
 
         return size;
     }
+
+    function boxDiff( r, s ) {
+        var a = Math.min( r.x1, s.x1 );
+        var b = Math.max( r.x1, s.x1 );
+        var c = Math.min( r.x2, s.x2 );
+        var d = Math.max( r.x2, s.x2 );
+
+        var e = Math.min( r.y1, s.y1 );
+        var f = Math.max( r.y1, s.y1 );
+        var g = Math.min( r.y2, s.y2 );
+        var h = Math.max( r.y2, s.y2 );
+
+        // X = intersection, 0-7 = possible difference areas
+        // h +-+-+-+
+        // . |5|6|7|
+        // g +-+-+-+
+        // . |3|X|4|
+        // f +-+-+-+
+        // . |0|1|2|
+        // e +-+-+-+
+        // . a b c d
+
+        var result = [];
+
+        // we'll always have rectangles 1, 3, 4 and 6
+        result[ 0 ] = new Box( b, e, c, f );
+        result[ 1 ] = new Box( a, f, b, g );
+        result[ 2 ] = new Box( c, f, d, g );
+        result[ 3 ] = new Box( b, g, c, h );
+
+        // decide which corners
+        if( r.x1 == a && r.y1 == e || s.x1 == a && s.y1 == e )
+        { // corners 0 and 7
+            result[ 4 ] = new Box( a, e, b, f );
+            result[ 5 ] = new Box( c, g, d, h );
+        }
+        else
+        { // corners 2 and 5
+            result[ 4 ] = new Box( c, e, d, f );
+            result[ 5 ] = new Box( a, g, b, h );
+        }
+
+        return $.grep(result, function(box) {
+            return box.height() > 0 && box.width() > 0
+        })[0];
+    }
+
 
     // #ifdef DEBUG
     // Make the internal functions public for unit testing

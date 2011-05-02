@@ -16,7 +16,10 @@
 
             (function() {
                 var chart,
-                    model;
+                    model,
+                    title,
+                    legend,
+                    plotArea;
 
                 module("Bar Chart Model", {
                     setup: function() {
@@ -34,6 +37,9 @@
 
                         chart = $("#container").data("kendoChart");
                         model = chart._model;
+                        title = model.children[0];
+                        legend = model.children[1];
+                        plotArea = model.children[2];
                     },
                     teardown: function() {
                         $("#container").empty();
@@ -44,25 +50,41 @@
                     ok(model instanceof Chart.RootElement);
                 });
 
-                test("first child is Title", function() {
-                    ok(model.children[0] instanceof Chart.Title);
+                test("title is created", function() {
+                    ok(title instanceof Chart.Title);
                 });
 
                 test("title text is set", function() {
-                    equal(model.children[0].children[0].content, "Chart Title");
+                    equal(title.options.text, "Chart Title");
                 });
 
-                test("second child is Legend", function() {
-                    ok(model.children[1] instanceof Chart.Legend);
+                test("title box is positioned at top", function() {
+                    equal(title.box.y1, 0);
+                });
+
+                test("legend is created", function() {
+                    ok(legend instanceof Chart.Legend);
                 });
 
                 test("legend series are populated", function() {
-                    equal(model.children[1].options.series[0].name, "Value");
+                    equal(legend.options.series[0].name, "Value");
                 });
 
-                test("third child is PlotArea", function() {
-                    ok(model.children[2] instanceof Chart.PlotArea);
+                test("legend is positioned at right", function() {
+                    equal(legend.box.x1, model.box.width() - legend.box.width());
                 });
+
+                test("legend is positioned at vertical center", function() {
+                    var titleHeight = title.box.height(),
+                        vCenter = titleHeight +
+                                  ((model.box.height() - titleHeight - legend.box.height()) / 2);
+                    equal(legend.box.y1, vCenter);
+                });
+
+                test("plotArea is created", function() {
+                    ok(plotArea instanceof Chart.PlotArea);
+                });
+
             })();
         </script>
 
