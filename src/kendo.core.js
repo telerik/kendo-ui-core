@@ -955,6 +955,7 @@
 
                 support.transitions = {
                     css: '-' + prefix + '-',
+                    property: prefix,
                     event: (prefix === 'o' || prefix === 'webkit') ? prefix : ''
                 };
 
