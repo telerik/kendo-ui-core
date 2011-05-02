@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.ui.Draggable Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.selectable.js"></script>
+        <link rel="stylesheet" href="../qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.ui.Draggable Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+            var Selectable = kendo.ui.Selectable,
+                ul;
+
+            module("kendo.ui.Selectable", {
+                setup: function() {
+                  ul = $("<ul><li>1</li><li>2</li></ul>");  
+                },
+                teardown: function() {
+                    ul.remove();
+                }
+            });
+
+             test("stores the current position on mousedown", function() {
+                var selectable = new Selectable(ul);
+
+                selectable.element.trigger("mousedown");
+                ok(selectable._originalPosition !== undefined);
+            });
+
+            test("single selection does not attach the lasso", function() {
+                var selectable = new Selectable(ul);
+
+                selectable.element.trigger("mousedown");                
+                equal(selectable.lasso.parent().length, 0);
+            });
+
+            test("multi selection does attach the lasso", function() {
+                var selectable = new Selectable(ul, {single: false});
+
+                selectable.element.trigger("mousedown");                              
+                ok(selectable.lasso.parent()[0] === document.body);
+            });
+            
+            test("intialize slectables", function() {
+                var selectable = new Selectable(ul);      
+                          
+                var selectees = ul.find("li");
+                ok($(selectees[0]).data("kendoSelectableItem") !== undefined);
+                ok($(selectees[1]).data("kendoSelectableItem") !== undefined);
+            });
+           
+        </script>
+    </body>
+</html>
