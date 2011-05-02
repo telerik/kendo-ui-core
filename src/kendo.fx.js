@@ -2,7 +2,10 @@
     var kendo = window.kendo,
         fx = kendo.fx,
         extend = $.extend,
-        transformNon3D = ['rotate', 'rotateX', 'rotateY', 'scale', 'scaleX', 'scaleY', 'skew', 'skewX', 'skewY', 'translate', 'translateX', 'translateY', 'matrix'],
+        scaleProperties = { scale: 0, scaleX: 0, scaleY: 0, scale3d: 0 },
+        translateProperties = { translate: 0, translateX: 0, translateY: 0, translate3d: 0 },
+        matrix3d = [ 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1 ],
+        transformNon3D = { rotate: '0, 0, 0, @@', scale: '@@, 1', translate: '@@, 0' },
         transformProps = ['perspective', 'rotate', 'rotateX', 'rotateY', 'rotateZ', 'rotate3d', 'scale', 'scaleX', 'scaleY', 'scaleZ', 'scale3d', 'skew', 'skewX', 'skewY', 'translate', 'translateX', 'translateY', 'translateZ', 'translate3d', 'matrix', 'matrix3d'];
 
     if (kendo.support.transitions) {
@@ -95,6 +98,7 @@
 
                 setTimeout(function () {
                     currentTransition.object.css(currentTransition.CSS);
+                    
                     setTimeout(function () {
                         abortTransitionIfStalled(currentTransition);
                     }, 50);
@@ -160,6 +164,7 @@
             },
 
             advanceQueue: function() {
+                this[0].style[kendo.support.transitions.property + 'Transition'] = 'none';
                 kendo.fx.dequeueTransition(this);
 
                 activateTask(this);
@@ -237,7 +242,7 @@
             $.each(transformProps, function(idx, value) { // remove transforms to avoid IE and older browsers confusion
                 var params = [];
 
-                if (value in { scale: 0, scaleX: 0, scaleY: 0, scale3d: 0 } && properties[value]) {
+                if (value in scaleProperties && properties[value]) {
                     !element.data('scale') && element.data('scale', {
                                 top: element[0].offsetTop,
                                 left: element[0].offsetLeft,
@@ -263,7 +268,7 @@
                                 });
                     }
                 } else
-                    if (value in { translate: 0, translateX: 0, translateY: 0, translate3d: 0 } && properties[value]) {
+                    if (value in translateProperties && properties[value]) {
                         !element.data('translate') && element.data('translate', {
                                     top: element[0].offsetTop,
                                     left: element[0].offsetLeft
@@ -324,18 +329,18 @@
         },
         slideLeft: {
             play: function(element, properties, options) {
-                animate(element, extend({ translateX: -element.width() + 'px', opacity: 0 }, properties), options);
+                animate(element, extend({ translateX: -element.width() + 'px' }, properties), options);
             },
             reverse: function(element, properties, options) {
-                animate(element, extend({ translateX: '0', opacity: 1 }, properties), options);
+                animate(element, extend({ translateX: '0' }, properties), options);
         }
         },
         slideRight: {
             play: function(element, properties, options) {
-                animate(element, extend({ translateX: element.width() + 'px', opacity: 0 }, properties), options);
+                animate(element, extend({ translateX: element.width() + 'px' }, properties), options);
             },
             reverse: function(element, properties, options) {
-                animate(element, extend({ translateX: '0', opacity: 1 }, properties), options);
+                animate(element, extend({ translateX: '0' }, properties), options);
             }
         }
     });
