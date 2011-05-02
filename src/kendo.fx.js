@@ -95,7 +95,6 @@
 
                 setTimeout(function () {
                     currentTransition.object.css(currentTransition.CSS);
-                    
                     setTimeout(function () {
                         abortTransitionIfStalled(currentTransition);
                     }, 50);
@@ -309,23 +308,23 @@
         },
         zoomIn: {
             play: function(element, properties, options) {
-                animate(element, extend({ scale: '.8', opacity: 0 }, properties), options);
+                animate(element, extend({ scale: '1' }, properties), options);
             },
             reverse: function(element, properties, options) {
-                animate(element, extend({ scale: '1', opacity: 1 }, properties), options);
+                animate(element, extend({ scale: '0' }, properties), options);
             }
         },
         zoomOut: {
             play: function(element, properties, options) {
-                animate(element, extend({ scale: '1', opacity: 0 }, properties), options);
+                animate(element, extend({ scale: '0' }, properties), options);
             },
             reverse: function(element, properties, options) {
-                animate(element, extend({ scale: '.8', opacity: 1 }, properties), options);
+                animate(element, extend({ scale: '1' }, properties), options);
             }
         },
         slideLeft: {
             play: function(element, properties, options) {
-                animate(element, extend({ translateX: -element.width()+'px', opacity: 0 }, properties), options);
+                animate(element, extend({ translateX: -element.width() + 'px', opacity: 0 }, properties), options);
             },
             reverse: function(element, properties, options) {
                 animate(element, extend({ translateX: '0', opacity: 1 }, properties), options);
@@ -333,7 +332,7 @@
         },
         slideRight: {
             play: function(element, properties, options) {
-                animate(element, extend({ translateX: element.width()+'px', opacity: 0 }, properties), options);
+                animate(element, extend({ translateX: element.width() + 'px', opacity: 0 }, properties), options);
             },
             reverse: function(element, properties, options) {
                 animate(element, extend({ translateX: '0', opacity: 1 }, properties), options);
