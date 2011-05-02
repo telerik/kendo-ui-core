@@ -613,7 +613,7 @@
 
                 element.width(options.width)
                        .height(options.height)
-                       .css("padding-top", titleBar.eight());
+                       .css("padding-top", titleBar.outerHeight());
             } else {
                 var window = $(windowHtml).appendTo(document.body).tWindow(options),
                     titleBar = window.find(".t-window-titlebar");
