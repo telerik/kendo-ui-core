@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>Animations</title>
+        <script src="../src/jquery.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.fx.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.popup.js" type="text/javascript" charset="utf-8"></script>
+        <style type="text/css" media="screen">
+            .anchor
+            {
+                width: 200px;
+                height: 200px;
+                background: red;
+                margin: 150px;
+                float: left;
+            }
+            .popup
+            {
+                width: 150px;
+                height: 150px;
+                background: blue;
+                color: white;
+            }
+        </style>
+    </head>
+    <body>
+        <script type="text/javascript" charset="utf-8">
+            $(document).ready(function() {
+                var vertical = [ "top", "bottom", "center" ];
+                var horizontal = [ "left", "right", "center"];
+                var index = 1;
+
+                for (var verticalPosition = 0; verticalPosition < vertical.length; verticalPosition ++) {
+                    for (var horizontalPosition = 0; horizontalPosition < horizontal.length; horizontalPosition ++) {
+                        var position = vertical[verticalPosition] + " " + horizontal[horizontalPosition];
+                        for (var verticalOrigin = 0; verticalOrigin < vertical.length; verticalOrigin ++) {
+                            for (var horizontalOrigin = 0; horizontalOrigin < horizontal.length; horizontalOrigin ++) {
+                                var origin = vertical[verticalOrigin] + " " + horizontal[horizontalOrigin];
+
+                                var anchor = $('<div class="anchor" />').appendTo(document.body);
+
+                                $('<div class="popup" />')
+                                .append("<div># " + (index++) + "</div>")
+                                .append("<div>origin: " + origin + "</div>")
+                                .append("<div>position: " + position + "</div>")
+                                .kendoPopup( {
+                                    anchor: anchor,
+                                    position: position,
+                                    origin: origin
+                                }).data("kendoPopup").open();
+                            }
+                        }
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>
