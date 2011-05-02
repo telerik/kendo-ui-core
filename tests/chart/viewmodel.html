@@ -74,15 +74,17 @@
                     deepEqual(view.children, [ group, text ]);
                 });
 
-                test("updateLayout is called recursively", 1, function() {
-                    rootElement.children.push({
-                        updateLayout: function() {
-                            ok(true);
-                        }
-                    });
+                test("updateLayout is called for all children", 2, function() {
+                    var childStub = {
+                        updateLayout: function() { ok(true); },
+                        box: new Chart.Box()
+                    };
+
+                    rootElement.children.push(childStub, childStub);
 
                     rootElement.updateLayout();
                 });
+
             })();
 
             (function() {
@@ -189,42 +191,59 @@
             (function() {
                 var legend;
 
-                module("Legend", {
-                    setup: function() {
-                        legend = new Chart.Legend();
-                    }
-                });
+                module("Legend");
 
                 test("creates labels for series", 1, function() {
+                    legend = new Chart.Legend({
+                        series: [ { name: "Series 1" } ]
+                    });
+
                     var factory = {
                         text: function(content) {
                             equal(content, "Series 1");
                         }
                     };
 
-                    legend.options.series = [ { name: "Series 1" } ];
-                    legend.updateLayout(chartBox);
                     legend.getViewElements(factory);
                 });
 
-                test("positions labels below each other", function() {
-                    legend.options.series = [
-                        { name: "Series 1" },
-                        { name: "Series 2" }
-                    ];
+                test("second label is below the first", function() {
+                    legend = new Chart.Legend({
+                        series: [
+                            { name: "Series 1" },
+                            { name: "Series 2" }
+                        ]
+                    });
+
                     legend.updateLayout(chartBox);
 
                     var label1 = legend.children[0],
                         label2 = legend.children[1];
+
                     equals(label2.box.y1, label1.box.y2);
                 });
 
                 test("positions legend to the right", function() {
-                    legend.options.series = [ { name: "Series 1" } ];
+                    legend = new Chart.Legend({
+                        series: [ { name: "Series 1" } ]
+                    });
+
                     legend.updateLayout(chartBox);
 
-                    var SERIES_LABEL_WIDTH = 30;
-                    equal(legend.children[0].box.x1, chartBox.x2 - SERIES_LABEL_WIDTH);
+                    var label = legend.children[0];
+                    equal(label.box.x1, chartBox.x2 - label.box.width());
+                });
+
+                test("positions legend to vertical center", function() {
+                    legend = new Chart.Legend({
+                        series: [ { name: "Series 1" } ]
+                    });
+
+                    legend.updateLayout(chartBox);
+
+                    var label = legend.children[0];
+                    equal(  label.box.y1,
+                            (chartBox.height() - label.box.height()) / 2);
                 });
 
             })();
