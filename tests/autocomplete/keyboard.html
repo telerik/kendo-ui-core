@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>AutoComplete Keyboard Navigation</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.query.js"></script>
+        <script src="../../src/kendo.datasource.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.list.js"></script>
+        <script src="../../src/kendo.autocomplete.js"></script>
+        <link rel="stylesheet" href="../qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">AutoComplete Keyboard Navigation</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var AutoComplete = kendo.ui.AutoComplete,
+                input;
+
+            module("kendo.ui.AutoComplete keyboard navigation", {
+                setup: function() {
+                    input = $("<input />").appendTo(document.body);
+                },
+                teardown: function() {
+                    input.remove();
+                    $("ul").remove();
+                }
+            });
+
+            function keydown(keyCode) {
+                input.trigger({ type: "keydown", keyCode: keyCode });
+            }
+
+            test("DOWN opens the popup", function() {
+                var autocomplete = new AutoComplete(input, []);
+
+                keydown(kendo.keys.DOWN);
+                ok(autocomplete.ul.is(":visible"));
+            });
+
+            test("DOWN selects the first item", function() {
+                var autocomplete = new AutoComplete(input, ["foo"]);
+
+                keydown(kendo.keys.DOWN);
+                ok(autocomplete.ul.children().first().is(".t-state-selected"));
+            });
+
+            test("pressing DOWN twice selects the second item", function() {
+                var autocomplete = new AutoComplete(input, ["foo", "bar"]);
+
+                keydown(kendo.keys.DOWN);
+                keydown(kendo.keys.DOWN);
+                ok(autocomplete.ul.children().last().is(".t-state-selected"));
+            });
+
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>
