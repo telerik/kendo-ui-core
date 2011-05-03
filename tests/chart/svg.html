@@ -154,16 +154,16 @@
                 });
 
                 test("renders path tag", function() {
-                    equal(path.render(), "<path d='M10 20'></path>");
+                    equal(path.render(), "<path d='M10.5 20.5' stroke='#000'></path>");
                 });
 
                 test("moves to first point", function() {
-                    equal(path.renderPoints(), "M10 20");
+                    equal(path.renderPoints(), "M10.5 20.5");
                 });
 
                 test("draws line", function() {
                     path.points.push([20, 30], [40, 50]);
-                    equal(path.renderPoints(), "M10 20 L20 30 L40 50");
+                    equal(path.renderPoints(), "M10.5 20.5 L20.5 30.5 L40.5 50.5");
                 });
 
             })();
