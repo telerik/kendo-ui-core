@@ -290,17 +290,14 @@
         }
     });
 
-    function NumericAxis(options, seriesRange) {
+    function NumericAxis(seriesMin, seriesMax, options) {
         var axis = this;
         ChartElement.call(this);
 
-        var autoOptions;
-        if (seriesRange) {
-               autoOptions = {
-                min: axis.autoAxisMin(seriesRange.min, seriesRange.max),
-                max: axis.autoAxisMax(seriesRange.min, seriesRange.max),
-                majorUnit: axis.autoMajorUnit(seriesRange.min, seriesRange.max)
-            }
+        var autoOptions = {
+            min: axis.autoAxisMin(seriesMin, seriesMax),
+            max: axis.autoAxisMax(seriesMin, seriesMax),
+            majorUnit: axis.autoMajorUnit(seriesMin, seriesMax)
         };
 
         axis.options = $.extend({}, axis.options, autoOptions, options);
@@ -492,7 +489,7 @@
         createAxes: function() {
             var plotArea = this,
                 seriesRange = getSeriesRange(plotArea.options.series),
-                axisY = new NumericAxis(plotArea.options.axisY, seriesRange);
+                axisY = new NumericAxis(seriesRange.min, seriesRange.max, plotArea.options.axisY);
 
             plotArea.children.push(axisY);
         },
