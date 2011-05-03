@@ -26,8 +26,15 @@
         </style>
     </head>
     <body>
+        <button>open</button>
+        <div class="popup">popup</div>
         <script type="text/javascript" charset="utf-8">
             $(document).ready(function() {
+                $(".popup").kendoPopup( {
+                    toggleTarget: $("button"),
+                    toggleEvent: "click"
+                });
+return;
                 var vertical = [ "top", "bottom", "center" ];
                 var horizontal = [ "left", "right", "center"];
                 var index = 1;
