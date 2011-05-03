@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Grid Initialization</title>
+        <title>AutoComplete Initialization</title>
         <script src="../../src/jquery.js"></script>
         <script type="text/javascript" src="../qunit.js"></script>
         <script type="text/javascript" src="../qunit-runner.js"></script>
@@ -19,6 +19,13 @@
         <h2 id="qunit-userAgent"></h2>
         <ol id="qunit-tests"></ol>
         <script>
+            var AutoComplete = kendo.ui.AutoComplete;
+
+            test("kendoAutoComplete attaches a autocomplete object to target", function() {
+                var input = $("<input />").kendoAutoComplete({ data: [] });
+
+                ok(input.data("kendoAutoComplete") instanceof AutoComplete);
+            });
        </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
