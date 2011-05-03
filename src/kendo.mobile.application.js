@@ -3,9 +3,7 @@
 
     $.extend(mobile, {
         init: function(options) {
-            var html = [
-                    "<meta name='viewport' content='width=device-width' />"
-                ];
+            var html = [ "<meta name='viewport' content='width=device-width' />" ];
 
             if (options.icon) {
                 html.push("<link rel='apple-touch-icon' href='");
