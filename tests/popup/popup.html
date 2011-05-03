@@ -325,6 +325,45 @@
                 equal(div.offset().left + Math.round(div.outerWidth() / 2), anchor.offset().left + Math.round(anchor.outerWidth() / 2));
             });
 
+            test("toggleEvent is click by default", function() {
+                var popup = new Popup(div);
+
+                equal(popup.options.toggleEvent, "click");
+            });
+
+            test("toggle opens closed popup", function() {
+                var popup = new Popup(div);
+
+                popup.toggle();
+                ok(div.is(":visible"));
+            });
+
+            test("toggle closes opened popup", function() {
+                var popup = new Popup(div, {
+                    close: function() {
+                        ok(true);
+                        start();
+                    }
+                });
+
+                div.show();
+                popup.toggle();
+                stop(1000);
+            });
+
+            test("triggering the toggleEvent on the toggleTarget toggles the popup", function() {
+                var popup = new Popup(div, {
+                    open: function() {
+                        ok(true);
+                        start();
+                    },
+                    toggleTarget: document.body
+                });
+
+                $(document.body).click();
+
+                stop(1000);
+            });
         </script>
     </body>
 </html>
