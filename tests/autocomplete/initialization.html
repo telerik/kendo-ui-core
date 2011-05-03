@@ -9,6 +9,7 @@
         <script src="../../src/kendo.query.js"></script>
         <script src="../../src/kendo.datasource.js"></script>
         <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.list.js"></script>
         <script src="../../src/kendo.autocomplete.js"></script>
         <link rel="stylesheet" href="../qunit.css" type="text/css" />
     </head>
@@ -19,14 +20,80 @@
         <h2 id="qunit-userAgent"></h2>
         <ol id="qunit-tests"></ol>
         <script>
-            var AutoComplete = kendo.ui.AutoComplete;
+            var AutoComplete = kendo.ui.AutoComplete,
+                input;
+
+            module("kendo.ui.AutoComplete initialization", {
+                setup: function() {
+                    input = $("<input />").appendTo(document.body);
+                },
+                teardown: function() {
+                    input.remove();
+                }
+            });
 
             test("kendoAutoComplete attaches a autocomplete object to target", function() {
-                var input = $("<input />").kendoAutoComplete({ data: [] });
+                input.kendoAutoComplete({ data: [] });
 
                 ok(input.data("kendoAutoComplete") instanceof AutoComplete);
             });
-       </script>
+
+            test("data source is initialized from options.data", function() {
+                var data = [1, 2], autocomplete = new AutoComplete(input, {
+                    data: data,
+                });
+
+                ok(autocomplete.dataSource);
+                equal(autocomplete.dataSource.data().length, 2);
+            });
+
+            test("data source is initialized from options.dataSource", function() {
+                var data = [1, 2], autocomplete = new AutoComplete(input, {
+                    dataSource: {
+                        data: data
+                    }
+                });
+
+                ok(autocomplete.dataSource);
+                equal(autocomplete.dataSource.data().length, 2);
+            });
+
+            test("autocomplate initializes a UL for its items", function() {
+                var autocomplete = new AutoComplete(input, []);
+
+                ok(autocomplete.ul);
+                ok(autocomplete.ul.is("ul"));
+            });
+
+            test("autocomplate initializes a popup for its items", function() {
+                var autocomplete = new AutoComplete(input, []);
+
+                ok(autocomplete.popup);
+                ok(autocomplete.popup instanceof kendo.ui.Popup);
+                ok(autocomplete.popup.options.anchor[0], input[0]);
+                ok(autocomplete.popup.element[0], autocomplete.ul[0]);
+            });
+
+            test("autocomplete initializes a list for its items", function() {
+                var autocomplete = new AutoComplete(input, []);
+
+                ok(autocomplete.list);
+                ok(autocomplete.list instanceof kendo.ui.List);
+            });
+
+            test("autocomplete populates its list when the datasource changes", function() {
+                var autocomplete = new AutoComplete(input, ["foo", "bar"]);
+
+                equal(autocomplete.ul.children("li").length, 2);
+                equal(autocomplete.ul.children("li").first().text(), "foo");
+            });
+
+            test("autocomplete sets its template to the list", function() {
+                var autocomplete = new AutoComplete(input, ["foo", "bar"]);
+
+                equal(autocomplete.options.template, autocomplete.list.options.template);
+            });
+      </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
     </body>
