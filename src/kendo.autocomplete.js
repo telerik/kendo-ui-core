@@ -23,7 +23,6 @@
         });
 
         that._dataSource();
-
         that.dataSource.read();
 
         that.element.keydown($.proxy(that._keydown, that));
@@ -31,23 +30,23 @@
 
     function move(direction, ul) {
         var items = ul.find("li"),
-            selectedItem = items.filter(".selected");
+            selectedItem = items.filter(".t-state-selected");
 
         if(direction == "next") {
             if(selectedItem.length){
-                selectedItem.removeClass("selected")
+                selectedItem.removeClass("t-state-selected")
                             .next()
-                            .addClass("selected");
+                            .addClass("t-state-selected");
             } else {
-                items.first().addClass("selected");
+                items.first().addClass("t-state-selected");
             }
         } else if(direction == "prev") {
             if(selectedItem.length){
-                selectedItem.removeClass("selected")
+                selectedItem.removeClass("t-state-selected")
                             .prev()
-                            .addClass("selected");
+                            .addClass("t-state-selected");
             } else {
-                items.last().addClass("selected");
+                items.last().addClass("t-state-selected");
             }
         }
     }
