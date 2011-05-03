@@ -12,6 +12,35 @@
             }
 
             $(html.join("")).appendTo("head");
+        },
+
+        switchView: function(view, initCallback) {
+            var loadedView = $(".kendo-view").filter(function() {
+                return $(this).data("url") == view;
+            });
+
+            if (loadedView.length > 0) {
+                if (initCallback) {
+                    initCallback();
+                }
+
+                return;
+            }
+
+            var viewPage = $("<div class='kendo-view' />").appendTo("body");
+
+            viewPage.data("url", view);
+
+            $.ajax({
+                url: view,
+                cache: false,
+                success: function(data) {
+                    viewPage[0].innerHTML = data;
+                    if (initCallback) {
+                        initCallback();
+                    }
+                }
+            });
         }
     });
 

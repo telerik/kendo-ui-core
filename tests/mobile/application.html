@@ -7,6 +7,7 @@
         <script src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.mobile.application.js"></script>
+        <script src="../jquery.mockjax.js"></script>
         <link rel="stylesheet" href="../qunit.css" />
     </head>
     <body>
@@ -20,8 +21,17 @@
 
         <script>
             module("kendo.mobile globals", {
+                setup: function() {
+                    $.mockjaxSettings.responseTime = 0;
+                    $.mockjaxSettings.contentType = "text/html";
+                    $.mockjax({
+                        url: "foo",
+                        responseText: "mockjax response"
+                    });
+                },
                 teardown: function() {
-                    $("meta").remove();
+                    $.mockjaxClear();
+                    $("meta,.kendo-view").remove();
                 }
             });
 
@@ -44,6 +54,34 @@
                 equals(viewportTag.length, 1);
                 equals(viewportTag.attr("content"), "width=device-width");
             });
+
+            test("switchView() adds view to page", function() {
+                kendo.mobile.switchView("foo");
+                equals($('.kendo-view').length, 1);
+            });
+
+            test("switchView() loads remote content", function() {
+                stop(300);
+
+                kendo.mobile.switchView("foo", function() {
+                    start();
+
+                    equals($('.kendo-view')[0].innerHTML, "mockjax response");
+                });
+            });
+
+            test("switchView() does not add the same view twice", function() {
+                stop(300);
+
+                kendo.mobile.switchView("foo", function() {
+                    kendo.mobile.switchView("foo", function() {
+                        start();
+
+                        equals($('.kendo-view').length, 1);
+                    });
+                });
+            });
+
         </script>
     </body>
 </html>
