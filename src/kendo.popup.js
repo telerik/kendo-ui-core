@@ -9,6 +9,7 @@
         TOP = "top",
         BOTTOM = "bottom",
         extend = $.extend,
+        proxy = $.proxy,
         Component = ui.Component;
 
     function Popup(element, options) {
@@ -18,28 +19,27 @@
 
         that.element.hide().css("position", "absolute").appendTo(document.body);
 
-        that.openAnimation = extend(that.options.openAnimation, {
+        options = that.options;
+
+        that.openAnimation = extend(options.openAnimation, {
             complete: function() {
                 that.trigger(OPEN);
             }
         });
 
-        that.closeAnimation = extend(that.options.closeAnimation, {
+        that.closeAnimation = extend(options.closeAnimation, {
             complete: function() {
                 that.trigger(CLOSE);
             }
         });
 
-        that.bind([OPEN, CLOSE], that.options);
+        that.bind([OPEN, CLOSE], options);
 
-        $(document.documentElement).bind("mousedown", function(e){
-            var container = that.element[0],
-                target = e.target;
-            if(container !== target && !$.contains(container, target)) {
-                that.close();
-            }
-        });
+        $(document.documentElement).mousedown(proxy(that._mousedown, that));
 
+        if (options.toggleTarget) {
+            $(options.toggleTarget).bind(options.toggleEvent, proxy(that.toggle, that));
+        }
     }
 
     function align(element, anchor, origin, position) {
@@ -97,8 +97,13 @@
         });
     }
 
+    function contains(container, target) {
+        return container === target || $.contains(container, target);
+    }
+
     Popup.prototype = {
         options: {
+            toggleEvent: "click",
             origin: "bottom left",
             position: "top left",
             anchor: "body",
@@ -112,16 +117,32 @@
             }
         },
         open: function() {
-            var that = this;
+            var that = this
+                options = that.options;
 
-            align(that.element, $(that.options.anchor), that.options.origin, that.options.position);
+            align(that.element, $(options.anchor), options.origin, options.position);
 
             that.element.kendoAnimate(that.openAnimation);
+        },
+        toggle: function() {
+            var that = this;
+
+            that[that.element.is(":visible") ? CLOSE : OPEN]();
         },
         close: function() {
             var that = this;
 
             that.element.kendoAnimate(that.closeAnimation);
+        },
+        _mousedown: function(e) {
+            var that = this,
+                container = that.element[0],
+                toggleTarget = that.options.toggleTarget,
+                target = e.target;
+
+            if (!contains(container, target) && (!toggleTarget || !contains($(toggleTarget)[0], target))) {
+                that.close();
+            }
         }
     }
 
