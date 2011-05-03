@@ -11,13 +11,14 @@
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.chart.js"></script>
         <script type="text/javascript">
-            var numericAxis,
+            var Chart = kendo.ui.Chart,
+                numericAxis,
                 gridLayout;
 
             $(document).ready(function() {
                 module("Numeric Axis", {
                     setup: function() {
-                        numericAxis = new kendo.ui.Chart.NumericAxis;
+                    numericAxis = new kendo.ui.Chart.NumericAxis({}, { min: 0, max: 1 });
                     }
                 });
 
@@ -63,7 +64,7 @@
                             max = d[1],
                             mu = d[2];
 
-                        equals(numericAxis.getMajorUnit(min, max), mu, "[" + min + ", " + max  + "]");
+                        equals(numericAxis.autoMajorUnit(min, max), mu, "[" + min + ", " + max  + "]");
                     }
                });
 
@@ -74,7 +75,7 @@
                             max = -d[0],
                             mu = d[2];
 
-                        equals(numericAxis.getMajorUnit(min, max), mu, "[" + min + ", " + max + "]");
+                        equals(numericAxis.autoMajorUnit(min, max), mu, "[" + min + ", " + max + "]");
                     }
                });
 
@@ -92,7 +93,7 @@
                             max = d[1] / 2,
                             mu = d[2];
 
-                        equals(numericAxis.getMajorUnit(min, max), mu, "[" + min + ", " + max + "]");
+                        equals(numericAxis.autoMajorUnit(min, max), mu, "[" + min + ", " + max + "]");
                     }
                });
 
@@ -126,7 +127,7 @@
                             max = d[1],
                             axisMax = d[3];
 
-                        equal(numericAxis.getAxisMax(min, max), axisMax, "[" + min + ", " + max + "]");
+                        equal(numericAxis.autoAxisMax(min, max), axisMax, "[" + min + ", " + max + "]");
                     }
                 });
 
@@ -144,7 +145,7 @@
                             axisMax = -d[2];
 
 
-                        equal(numericAxis.getAxisMax(min, max), axisMax, "[" + min + ", " + max + "]");
+                        equal(numericAxis.autoAxisMax(min, max), axisMax, "[" + min + ", " + max + "]");
                     }
                 });
 
@@ -161,7 +162,7 @@
                             max = d[1],
                             axisMax = d[3];
 
-                        equal(numericAxis.getAxisMax(min, max), axisMax, "[" + min + ", " + max + "]");
+                        equal(numericAxis.autoAxisMax(min, max), axisMax, "[" + min + ", " + max + "]");
                     }
                 });
 
@@ -172,7 +173,7 @@
                             max = d[1],
                             axisMin = d[2];
 
-                        equal(numericAxis.getAxisMin(min, max), axisMin, "[" + min + ", " + max + "]");
+                        equal(numericAxis.autoAxisMin(min, max), axisMin, "[" + min + ", " + max + "]");
                     }
                 });
 
@@ -189,7 +190,7 @@
                             max = -d[0],
                             axisMin = -d[3];
 
-                        equal(numericAxis.getAxisMin(min, max), axisMin, "[" + min + ", " + max + "]");
+                        equal(numericAxis.autoAxisMin(min, max), axisMin, "[" + min + ", " + max + "]");
                     }
                 });
 
@@ -206,7 +207,7 @@
                             max = d[1],
                             axisMin = -d[3];
 
-                        equal(numericAxis.getAxisMin(min, max), axisMin, "[" + min + ", " + max + "]");
+                        equal(numericAxis.autoAxisMin(min, max), axisMin, "[" + min + ", " + max + "]");
                     }
                 });
 

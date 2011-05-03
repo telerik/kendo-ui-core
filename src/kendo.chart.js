@@ -3,6 +3,7 @@
         ui = kendo.ui = kendo.ui || {},
         extend = $.extend,
         DEFAULT_PRECISION = 6,
+        COORD_PRECISION = 3,
         ZERO_THRESHOLD = 0.2;
 
     function Chart(element, options) {
@@ -29,7 +30,7 @@
             model.children.push(
                 new Title({ text: chart.options.title }),
                 new Legend({ series: chart.options.series }),
-                new PlotArea()
+                new PlotArea({ series: chart.options.series })
             );
             chart._model = model;
 
@@ -56,89 +57,6 @@
     // **************************
     // View Model
     // **************************
-
-    // Numeric Axis
-    function NumericAxis() {
-
-    }
-
-    NumericAxis.prototype = {
-        getMajorUnit: function (min, max) {
-            var diff = max - min;
-            if (diff == 0) {
-                if (max == 0) {
-                    return 0.1;
-                }
-
-                diff = Math.abs(max);
-            }
-
-            var scale = Math.pow(10, Math.floor(Math.log(diff) / Math.log(10))),
-                relativeValue = round((diff / scale), DEFAULT_PRECISION),
-                scaleMultiplier = 1;
-
-            if (relativeValue < 1.904762) {
-                scaleMultiplier = 0.2;
-            } else if (relativeValue < 4.761904) {
-                scaleMultiplier = 0.5;
-            } else if (relativeValue < 9.523809) {
-                scaleMultiplier = 1;
-            } else {
-                scaleMultiplier = 2;
-            }
-
-            return round(scale * scaleMultiplier, DEFAULT_PRECISION);
-        },
-
-        getAxisMax: function(min, max) {
-            if (min == 0 && max == 0) {
-                return 1;
-            }
-
-            var axisMax;
-            if (min <= 0 && max <= 0) {
-                max = min == max ? 0 : max;
-
-                var diff = Math.abs((max - min) / max);
-                if(diff > ZERO_THRESHOLD) {
-                    return 0;
-                }
-
-                axisMax = max - ((min - max) / 2);
-            } else {
-                min = min == max ? 0 : min;
-                axisMax = max + 0.05 * (max - min);
-            }
-
-            var mu = this.getMajorUnit(min, max);
-            return ceil(axisMax, mu);
-        },
-
-        getAxisMin: function(min, max) {
-            if (min == 0 && max == 0) {
-                return 0;
-            }
-
-            var axisMin;
-            if (min >= 0 && max >= 0) {
-                min = min == max ? 0 : min;
-
-                var diff = (max - min) / max;
-                if(diff > ZERO_THRESHOLD) {
-                    return 0;
-                }
-
-                axisMin = min - ((max - min) / 2);
-            } else {
-                max = min == max ? 0 : max;
-                axisMin = min + 0.05 * (min - max);
-            }
-
-            var mu = this.getMajorUnit(min, max);
-            return floor(axisMin, mu);
-        }
-    };
-
     function Box(x1, y1, x2, y2) {
         var box = this;
         box.x1 = x1 || 0;
@@ -230,10 +148,11 @@
         }
     });
 
-    function Text(content) {
+    function Text(content, options) {
         var text = this;
         ChartElement.call(text);
 
+        text.options = $.extend({}, text.options, options);
         text.content = content || "";
         text.updateLayout(defaultBox);
     }
@@ -243,26 +162,27 @@
     extend(Text.prototype, {
         options: {
             fontSize: "12pt",
-            fontFamily: "Verdana"
+            fontFamily: "Verdana, sans-serif",
+            align: "left"
         },
 
         updateLayout: function(targetBox) {
             var text = this,
-                size = text.measure();
+                options = text.options,
+                size = measureText(text.content, {
+                            fontSize: text.options.fontSize,
+                            fontFamily: text.options.fontFamily
+                        });
 
-            text.box = new Box( targetBox.x1, targetBox.y1,
-                                targetBox.x1 + size.width, targetBox.y1 + size.height);
-        },
-
-        measure: function() {
-            var sample = $("<span />").css(this.options).appendTo(document.body).text(this.content),
-                size = {
-                    width: sample.width(),
-                    height: sample.height()
-                };
-
-            sample.remove();
-            return size;
+            if (options.align == "left") {
+                text.box = new Box(
+                    targetBox.x1, targetBox.y1,
+                    targetBox.x1 + size.width, targetBox.y1 + size.height);
+            } else if (options.align == "right") {
+                text.box = new Box(
+                    targetBox.x2 - size.width, targetBox.y1,
+                    targetBox.x2, targetBox.y1 + size.height);
+            }
         },
 
         getViewElements: function(factory) {
@@ -364,15 +284,201 @@
             };
 
             labelsBox.translate(offsetX, offsetY);
+            labelsBox.y1 = targetBox.y1;
+            labelsBox.y2 = targetBox.y2;
             legend.box = labelsBox;
         }
     });
+
+    function NumericAxis(options, seriesRange) {
+        var axis = this;
+        ChartElement.call(this);
+
+        var autoOptions;
+        if (seriesRange) {
+               autoOptions = {
+                min: axis.autoAxisMin(seriesRange.min, seriesRange.max),
+                max: axis.autoAxisMax(seriesRange.min, seriesRange.max),
+                majorUnit: axis.autoMajorUnit(seriesRange.min, seriesRange.max)
+            }
+        };
+
+        axis.options = $.extend({}, axis.options, autoOptions, options);
+
+        axis.init();
+    }
+
+    NumericAxis.prototype = new ChartElement();
+    $.extend(NumericAxis.prototype, {
+        options: {
+            min: 0,
+            max: 1,
+            majorUnit: 0.1,
+            tickSize: 4
+        },
+
+        init: function() {
+            var axis = this,
+                options = axis.options,
+                majorDivisions = axis.getMajorDivisions(),
+                currentValue = options.max;
+
+            for (var i = 0; i < majorDivisions; i++) {
+                var text = new Text(currentValue.toString(), { align: "right" });
+                axis.children.push(text);
+
+                currentValue = round(currentValue - options.majorUnit, DEFAULT_PRECISION);
+            }
+        },
+
+        updateLayout: function(targetBox) {
+            var axis = this,
+                options = axis.options,
+                children = axis.children,
+                majorDivisions = axis.getMajorDivisions(),
+                halfLabelHeight = children[0].box.height() / 2;
+
+
+            var maxLabelWidth = 0;
+            for (var i = 0; i < children.length; i++) {
+                var label = children[i];
+                maxLabelWidth = Math.max(maxLabelWidth, label.box.width());
+            };
+
+            var innerBox = new Box(
+                    targetBox.x1, targetBox.y1 + halfLabelHeight,
+                    targetBox.x1 + maxLabelWidth + options.tickSize, targetBox.y2 - halfLabelHeight);
+
+            var y = innerBox.y1,
+                step = innerBox.height() / (majorDivisions - 1);
+            for (var i = 0; i < children.length; i++) {
+                var label = children[i],
+                    labelY = round(y - halfLabelHeight, COORD_PRECISION);
+
+                label.updateLayout(new Box(
+                    innerBox.x1, labelY,
+                    innerBox.x1 + maxLabelWidth, labelY + label.box.height())
+                );
+
+                y += step;
+            };
+
+            axis.box = new Box( targetBox.x1, targetBox.y1,
+                                innerBox.x2, targetBox.y2);
+            axis.innerBox = innerBox;
+        },
+
+        getViewElements: function(factory) {
+            var axis = this,
+                children = axis.children,
+                options = axis.options,
+                halfLabelHeight = children[0].box.height() / 2;
+                childElements = ChartElement.prototype.getViewElements.call(axis, factory);
+
+            for (var i = 0; i < children.length; i++) {
+                var label = children[i],
+                    tickY = round(label.box.y1 + label.box.height() / 2);
+                childElements.push(
+                    factory.line(axis.box.x2 - options.tickSize, tickY,
+                                 axis.box.x2, tickY));
+            }
+
+            childElements.push(factory.line(
+                    axis.innerBox.x2, axis.innerBox.y1,
+                    axis.innerBox.x2, axis.innerBox.y2));
+            return childElements;
+        },
+
+        autoMajorUnit: function (min, max) {
+            var diff = max - min;
+
+            if (diff == 0) {
+                if (max == 0) {
+                    return 0.1;
+                }
+
+                diff = Math.abs(max);
+            }
+
+            var scale = Math.pow(10, Math.floor(Math.log(diff) / Math.log(10))),
+                relativeValue = round((diff / scale), DEFAULT_PRECISION),
+                scaleMultiplier = 1;
+
+            if (relativeValue < 1.904762) {
+                scaleMultiplier = 0.2;
+            } else if (relativeValue < 4.761904) {
+                scaleMultiplier = 0.5;
+            } else if (relativeValue < 9.523809) {
+                scaleMultiplier = 1;
+            } else {
+                scaleMultiplier = 2;
+            }
+
+            return round(scale * scaleMultiplier, DEFAULT_PRECISION);
+        },
+
+        autoAxisMax: function(min, max) {
+            if (min == 0 && max == 0) {
+                return 1;
+            }
+
+            var axisMax;
+            if (min <= 0 && max <= 0) {
+                max = min == max ? 0 : max;
+
+                var diff = Math.abs((max - min) / max);
+                if(diff > ZERO_THRESHOLD) {
+                    return 0;
+                }
+
+                axisMax = max - ((min - max) / 2);
+            } else {
+                min = min == max ? 0 : min;
+                axisMax = max + 0.05 * (max - min);
+            }
+
+            var mu = this.autoMajorUnit(min, max);
+            return ceil(axisMax, mu);
+        },
+
+        autoAxisMin: function(min, max) {
+            if (min == 0 && max == 0) {
+                return 0;
+            }
+
+            var axisMin;
+            if (min >= 0 && max >= 0) {
+                min = min == max ? 0 : min;
+
+                var diff = (max - min) / max;
+                if(diff > ZERO_THRESHOLD) {
+                    return 0;
+                }
+
+                axisMin = min - ((max - min) / 2);
+            } else {
+                max = min == max ? 0 : max;
+                axisMin = min + 0.05 * (min - max);
+            }
+
+            var mu = this.autoMajorUnit(min, max);
+            return floor(axisMin, mu);
+        },
+
+        getMajorDivisions: function() {
+            var options = this.options;
+
+            return Math.round((options.max - options.min) / options.majorUnit) + 1;
+        }
+    });
+
 
     function PlotArea(options) {
         var plotArea = this;
         ChartElement.call(plotArea);
 
         plotArea.options = $.extend({}, plotArea.options, options);
+        plotArea.createAxes();
     }
 
     PlotArea.prototype = new ChartElement();
@@ -383,9 +489,19 @@
             series: [ ]
         },
 
+        createAxes: function() {
+            var plotArea = this,
+                seriesRange = getSeriesRange(plotArea.options.series),
+                axisY = new NumericAxis(plotArea.options.axisY, seriesRange);
+
+            plotArea.children.push(axisY);
+        },
+
         updateLayout: function(targetBox) {
             var plotArea = this;
             plotArea.box = targetBox;
+
+            plotArea.children[0].updateLayout(targetBox);
         }
     });
 
@@ -482,7 +598,8 @@
 
         ViewElement.call(text);
         text.template = kendo.template(
-            "<text x='<%= options.x %>' y='<%= options._baselineY %>'><%= content %></text>");
+            "<text x='<%= options.x %>' y='<%= options._baselineY %>' " +
+                  "style='font: <%= fontStyle() %>'><%= content %></text>");
 
         text.align();
     }
@@ -493,8 +610,8 @@
             x: 0,
             y: 0,
             _baselineY: 0,
-            fontSize: "16px",
-            fontFamily: "Arial, sans-serif"
+            fontSize: "12pt",
+            fontFamily: "Verdana, sans-serif"
         },
 
         align: function() {
@@ -506,6 +623,11 @@
 
             text.options._baselineY = text.options.y + size.baseline;
             text.options.y += size.baseline;
+        },
+
+        fontStyle: function() {
+            var options = this.options;
+            return options.fontSize + " " + options.fontFamily;
         }
     });
 
@@ -515,22 +637,26 @@
 
         ViewElement.call(path);
         path.template = kendo.template(
-            "<path d='<%= renderPoints() %>'></path>");
+            "<path d='<%= renderPoints() %>' stroke='<%= options.stroke %>'></path>");
 
         path.points = points || [];
     }
 
     SVGPath.prototype = new ViewElement();
     $.extend(SVGPath.prototype, {
+        options: {
+            stroke: "#000"
+        },
+
         renderPoints: function() {
             var points = this.points,
                 count = points.length,
                 first = points[0],
-                result = "M" + first[0] + " " + first[1];
+                result = "M" + alignToPixel(first[0]) + " " + alignToPixel(first[1]);
 
             for (var i = 1; i < count; i++) {
                 var p = points[i];
-                result += " L" + p[0] + " " + p[1];
+                result += " L" + alignToPixel(p[0]) + " " + alignToPixel(p[1]);
             }
 
             return result;
@@ -568,6 +694,7 @@
                               "line-height: normal; visibility: hidden;' />")
                 .appendTo(document.body);
         }
+
 
         measureBox.css(style)
             .text(text || "&nbsp;")
@@ -628,6 +755,20 @@
         })[0];
     }
 
+    function alignToPixel(coord) {
+        return round(coord) + 0.5;
+    }
+
+    function getSeriesRange(series) {
+        var seriesMin = Number.MAX_VALUE,
+        seriesMax = Number.MIN_VALUE;
+        $.each(series, function() {
+            seriesMin = Math.min(seriesMin, Math.min.apply(Math, this.data));
+            seriesMax = Math.max(seriesMax, Math.max.apply(Math, this.data));
+        });
+
+        return { min: seriesMin, max: seriesMax };
+    }
 
     // #ifdef DEBUG
     // Make the internal functions public for unit testing

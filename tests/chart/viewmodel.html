@@ -246,6 +246,96 @@
                             (chartBox.height() - label.box.height()) / 2);
                 });
 
+                test("legend fills available height", function() {
+                    legend = new Chart.Legend({
+                        series: [ { name: "Series 1" } ]
+                    });
+
+                    legend.updateLayout(chartBox);
+
+                    deepEqual([legend.box.y1, legend.box.y2], [chartBox.y1, chartBox.y2]);
+                });
+
+            })();
+
+            (function() {
+                var numericAxis,
+                    MAX_LABEL_WIDTH = 26;
+
+                module("NumericAxis");
+
+                test("creates axis line", 1, function() {
+                    numericAxis = new Chart.NumericAxis();
+                    var factory = {
+                        line: function(x1, y1, x2, y2) {
+                            if (x1 == MAX_LABEL_WIDTH && y1 == chartBox.y1 &&
+                                x2 == MAX_LABEL_WIDTH && y2 == chartBox.y2) {
+                                ok(true);
+                            }
+                        },
+                        text: function() { }
+                    };
+
+                    numericAxis.updateLayout(chartBox);
+                    numericAxis.getViewElements(factory);
+                });
+
+                test("creates labels", 1, function() {
+                    numericAxis = new Chart.NumericAxis();
+
+                    var labels = [],
+                        factory = {
+                            text: function(content) {
+                                labels.push(content);
+                            },
+                            line: function() { }
+                    };
+
+                    numericAxis.updateLayout(chartBox);
+                    numericAxis.getViewElements(factory);
+
+                    deepEqual(labels, ["0", "0.2", "0.4", "0.6", "0.8", "1", "1.2"]);
+                });
+
+                test("labels are positioned evenly", function() {
+                    numericAxis = new Chart.NumericAxis();
+
+                    var labelsY = [],
+                        factory = {
+                            text: function(content, options) {
+                                labelsY.push(options.y);
+                            },
+                            line: function() { }
+                    };
+
+                    numericAxis.updateLayout(chartBox);
+                    numericAxis.getViewElements(factory);
+
+                    deepEqual(labelsY, [982, 816.833, 651.667, 486.5, 321.333, 156.167, -9]);
+                });
+            })();
+
+            (function() {
+                var plotArea,
+                    barSeries;
+
+                module("PlotArea", {
+                    setup: function() {
+                        barSeries = {
+                            name: "Value",
+                            type: "bar",
+                            data: [100, 200, 300]
+                        };
+                    }
+                });
+
+                test("creates numeric Y-Axis", function() {
+                    var plotArea = new Chart.PlotArea({
+                        series: [ barSeries ]
+                    });
+
+                    ok(plotArea.children[0] instanceof Chart.NumericAxis);
+                });
             })();
         </script>
 
