@@ -1,16 +1,19 @@
 (function($, window) {
-    var kendo = window.kendo;
+    var kendo = window.kendo,
+        ui = kendo.ui,
+        Component = ui.Component;
 
     function List(element, options) {
         var that = this;
-        that.element = element;
-        that.wrapper = $(element);
-        that.options = $.extend({}, that.defaults, options);
+
+        Component.apply(that, arguments);
+
+        that.template = kendo.template(that.options.template);
         that.dataBind(that.options.data);
     }
 
     List.prototype = {
-        defaults: {
+        options: {
             data: [],
             template: ""
         },
@@ -18,26 +21,16 @@
             var that = this,
                 idx,
                 length,
-                html = "",
-                template = kendo.template(that.options.template);
+                html = "";
 
             for (idx = 0, length = data.length; idx < length; idx++) {
-                html += template(data[idx]);
+                html += that.template(data[idx]);
             }
 
-            // using jQuery.fn.html instead of innerHTML because IE can't set innerHTML of TABLE elements
-            that.wrapper.html(html);
+            that.element.html(html);
         }
     }
 
-    $.fn.kendoList = function(options) {
-        $(this).each(function() {
-            $(this).data("kendoList", new List(this, options));
-        });
-
-        return this;
-    }
-
-    kendo.ui.List = List;
+    ui.plugin("List", List, Component);
 
 })(jQuery, window);
