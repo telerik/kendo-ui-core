@@ -328,7 +328,7 @@
         percentpositive: 0,
         percentsymbol: '%'
     };
-    
+
     function DateTime() {
         if (arguments.length == 0)
             this.value = new Date();
@@ -536,7 +536,7 @@
                   : hours;
 
             if (baseDate == undefined) {
-                if (year == -1) { 
+                if (year == -1) {
                     year = date.year();
                 }
 
@@ -659,39 +659,38 @@
                 h = date.getHours(),
                 m = date.getMinutes(),
                 s = date.getSeconds(),
-                f = date.getMilliseconds();
+                f = date.getMilliseconds(),
+                dateFormatters = {
+                    d: d,
+                    dd: pad(d),
+                    ddd: culture.abbrDays[day],
+                    dddd: culture.days[day],
 
-            var dateFormatters = {
-                d: d,
-                dd: pad(d),
-                ddd: culture.abbrDays[day],
-                dddd: culture.days[day],
+                    M: M + 1,
+                    MM: pad(M + 1),
+                    MMM: culture.abbrMonths[M],
+                    MMMM: culture.months[M],
 
-                M: M + 1,
-                MM: pad(M + 1),
-                MMM: culture.abbrMonths[M],
-                MMMM: culture.months[M],
+                    yy: pad(y % 100),
+                    yyyy: y,
 
-                yy: pad(y % 100),
-                yyyy: y,
+                    h: h % 12 || 12,
+                    hh: pad(h % 12 || 12),
+                    H: h,
+                    HH: pad(h),
 
-                h: h % 12 || 12,
-                hh: pad(h % 12 || 12),
-                H: h,
-                HH: pad(h),
+                    m: m,
+                    mm: pad(m),
 
-                m: m,
-                mm: pad(m),
+                    s: s,
+                    ss: pad(s),
 
-                s: s,
-                ss: pad(s),
+                    f: Math.floor(f / 100),
+                    ff: Math.floor(f / 10),
+                    fff: f,
 
-                f: Math.floor(f / 100),
-                ff: Math.floor(f / 10),
-                fff: f,
-
-                tt: h < 12 ? culture.am : culture.pm
-            };
+                    tt: h < 12 ? culture.am : culture.pm
+                };
 
             format = format in standardFormats ? standardFormats[format] : format;
 
@@ -782,7 +781,7 @@
             }
             return number;
         }
-        
+
         function formatNumber (number, format) {
             var type,
                 customFormat,
@@ -1058,6 +1057,18 @@
         ui: {},
         fx: {},
         data: {},
+        keys: {
+            BACKSPACE: 9,
+            TAB: 8,
+            ENTER: 13,
+            ESC: 27,
+            LEFT: 37,
+            UP: 38,
+            RIGHT: 39,
+            DOWN: 40,
+            END: 35,
+            HOME: 36
+        },
         support: support,
         animate: animate,
         Observable: Observable,
