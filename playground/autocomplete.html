@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>Autocomplete</title>
+        <script src="../src/jquery.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.query.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.datasource.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.list.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.popup.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.autocomplete.js" type="text/javascript" charset="utf-8"></script>
+        <style type="text/css" media="screen">
+        </style>
+    </head>
+    <body>
+
+        <input value="can I haz autocompletez" />
+
+        <script type="text/javascript" charset="utf-8">
+            $(document).ready(function() {
+                $("input").kendoAutoComplete(["foo", "bar"]);
+            });
+        </script>
+    </body>
+</html>
