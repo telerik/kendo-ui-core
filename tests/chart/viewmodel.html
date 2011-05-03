@@ -259,63 +259,6 @@
             })();
 
             (function() {
-                var numericAxis,
-                    MAX_LABEL_WIDTH = 26;
-
-                module("NumericAxis");
-
-                test("creates axis line", 1, function() {
-                    numericAxis = new Chart.NumericAxis();
-                    var factory = {
-                        line: function(x1, y1, x2, y2) {
-                            if (x1 == MAX_LABEL_WIDTH && y1 == chartBox.y1 &&
-                                x2 == MAX_LABEL_WIDTH && y2 == chartBox.y2) {
-                                ok(true);
-                            }
-                        },
-                        text: function() { }
-                    };
-
-                    numericAxis.updateLayout(chartBox);
-                    numericAxis.getViewElements(factory);
-                });
-
-                test("creates labels", 1, function() {
-                    numericAxis = new Chart.NumericAxis();
-
-                    var labels = [],
-                        factory = {
-                            text: function(content) {
-                                labels.push(content);
-                            },
-                            line: function() { }
-                    };
-
-                    numericAxis.updateLayout(chartBox);
-                    numericAxis.getViewElements(factory);
-
-                    deepEqual(labels, ["0", "0.2", "0.4", "0.6", "0.8", "1", "1.2"]);
-                });
-
-                test("labels are positioned evenly", function() {
-                    numericAxis = new Chart.NumericAxis();
-
-                    var labelsY = [],
-                        factory = {
-                            text: function(content, options) {
-                                labelsY.push(options.y);
-                            },
-                            line: function() { }
-                    };
-
-                    numericAxis.updateLayout(chartBox);
-                    numericAxis.getViewElements(factory);
-
-                    deepEqual(labelsY, [982, 816.833, 651.667, 486.5, 321.333, 156.167, -9]);
-                });
-            })();
-
-            (function() {
                 var plotArea,
                     barSeries;
 

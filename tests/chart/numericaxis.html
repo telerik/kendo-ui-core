@@ -12,212 +12,276 @@
         <script src="../../src/kendo.chart.js"></script>
         <script type="text/javascript">
             var Chart = kendo.ui.Chart,
+                Box = Chart.Box,
                 numericAxis,
-                gridLayout;
+                gridLayout,
+                chartBox = new Box(0, 0, 1000, 1000);
 
-            $(document).ready(function() {
-                module("Numeric Axis", {
-                    setup: function() {
-                    numericAxis = new kendo.ui.Chart.NumericAxis({}, { min: 0, max: 1 });
+            function moduleSetup() {
+                numericAxis = new kendo.ui.Chart.NumericAxis();
+            }
+
+            module("Automatic Major Unit", {
+                setup: moduleSetup
+            });
+
+            // min, max, expected Major Unit
+            var referenceUnits = [
+                // [0, max] (max >= 0)
+                [0, 0, 0.1],
+                [0, 0.1, 0.02],
+                [0, 0.2, 0.05],
+                [0, 0.5, 0.1],
+                [0, 1, 0.2],
+                [0, 2, 0.5],
+                [0, 5, 1],
+                [0, 10, 2],
+                [0, 20, 5],
+                [0, 47, 5],
+                [0, 48, 10],
+                [0, 95, 10],
+                [0, 96, 20],
+                [0, 190, 20],
+                [0, 191, 50],
+                [0, 476, 50],
+                [0, 477, 100],
+                [0, 952, 100],
+                [0, 953, 200],
+                [0, 1904, 200],
+                [0, 1905, 500],
+
+                // [min, max] (min > 0, max >= min)
+                [1, 1, 0.2],
+                [1, 1.1, 0.02],
+                [1, 1.2, 0.05],
+                [1000, 1000, 200],
+                [1000, 1050, 10],
+                [1000, 1100, 20],
+                [1000, 1200, 50],
+            ];
+
+           test("Major unit calculation for positive values", function() {
+                for (var i = 0; i < referenceUnits.length; i++) {
+                    var d = referenceUnits[i],
+                        min = d[0];
+                        max = d[1],
+                        mu = d[2];
+
+                    equals(numericAxis.autoMajorUnit(min, max), mu, "[" + min + ", " + max  + "]");
+                }
+           });
+
+           test("Major unit calculation for negative values", function() {
+                for (var i = 0; i < referenceUnits.length; i++) {
+                    var d = referenceUnits[i],
+                        min = -d[1];
+                        max = -d[0],
+                        mu = d[2];
+
+                    equals(numericAxis.autoMajorUnit(min, max), mu, "[" + min + ", " + max + "]");
+                }
+           });
+
+            test("Major unit calculation for mixed positive / negative values", function() {
+                for (var i = 0; i < referenceUnits.length; i++) {
+                    var d = referenceUnits[i];
+
+                    if (d[0] != 0) {
+                        // Skip tests where min is not 0
+                        continue;
                     }
+
+                    // Take a test triplet [min, max, mu] and transform it to [-max/2, max/2, mu]
+                    var min = -d[1] / 2;
+                        max = d[1] / 2,
+                        mu = d[2];
+
+                    equals(numericAxis.autoMajorUnit(min, max), mu, "[" + min + ", " + max + "]");
+                }
+           });
+
+            module("Automatic Axis Maximum", {
+                setup: moduleSetup
+            });
+
+            // min, max, expected axis minimum, expected axis maximum
+            var referenceAxisLimits = [
+                [0, 0, 0, 1],
+                [0, 0.5, 0, 0.6],
+                [0, 2, 0, 2.5],
+                [0, 5, 0, 6],
+                [0, 18, 0, 20],
+                [0, 20, 0, 25],
+                [0, 50, 0, 60],
+                [0, 200, 0, 250],
+                [0, 500, 0, 600],
+                [0, 1800, 0, 2000],
+
+                // Axis limits for close, positive values
+                [1, 1, 0, 1.2],
+                [1, 1.1, 0.94, 1.12],
+                [1000, 1000, 0, 1200],
+                [1000, 1050, 970, 1060],
+                [1000, 1100, 940, 1120],
+                [1000, 1200, 900, 1250]
+            ];
+
+            test("Axis maximum for positive values", function() {
+                for (var i = 0; i < referenceAxisLimits.length; i++) {
+                    var d = referenceAxisLimits[i],
+                        min = d[0],
+                        max = d[1],
+                        axisMax = d[3];
+
+                    equal(numericAxis.autoAxisMax(min, max), axisMax, "[" + min + ", " + max + "]");
+                }
+            });
+
+            test("Axis maximum for negative values", function() {
+                for (var i = 0; i < referenceAxisLimits.length; i++) {
+                    var d = referenceAxisLimits[i];
+
+                    if (d[0] == 0 && d[1] == 0) {
+                        // Skip the [0, 0] test
+                        continue;
+                    }
+
+                    var min = -d[1],
+                        max = -d[0],
+                        axisMax = -d[2];
+
+
+                    equal(numericAxis.autoAxisMax(min, max), axisMax, "[" + min + ", " + max + "]");
+                }
+            });
+
+            test("Axis maximum for mixed positive / negative values", function() {
+                for (var i = 0; i < referenceAxisLimits.length; i++) {
+                    var d = referenceAxisLimits[i];
+
+                    if (d[0] != 0 || d[1] == 0) {
+                        // Skip the [0, 0] and [x, y] tests
+                        continue;
+                    }
+
+                    var min = -d[1],
+                        max = d[1],
+                        axisMax = d[3];
+
+                    equal(numericAxis.autoAxisMax(min, max), axisMax, "[" + min + ", " + max + "]");
+                }
+            });
+
+            module("Automatic Axis Minimum", {
+                setup: moduleSetup
+            });
+
+            test("Axis minimum for positive values", function() {
+                for (var i = 0; i < referenceAxisLimits.length; i++) {
+                    var d = referenceAxisLimits[i],
+                        min = d[0],
+                        max = d[1],
+                        axisMin = d[2];
+
+                    equal(numericAxis.autoAxisMin(min, max), axisMin, "[" + min + ", " + max + "]");
+                }
+            });
+
+            test("Axis minimum for negative values", function() {
+                for (var i = 0; i < referenceAxisLimits.length; i++) {
+                    var d = referenceAxisLimits[i];
+
+                    if (d[0] == 0 && d[1] == 0) {
+                        // Skip the [0, 0] test
+                        continue;
+                    }
+
+                    var min = -d[1],
+                        max = -d[0],
+                        axisMin = -d[3];
+
+                    equal(numericAxis.autoAxisMin(min, max), axisMin, "[" + min + ", " + max + "]");
+                }
+            });
+
+            test("Axis minimum for mixed positive/negative values", function() {
+                for (var i = 0; i < referenceAxisLimits.length; i++) {
+                    var d = referenceAxisLimits[i];
+
+                    if (d[0] != 0 || d[1] == 0) {
+                        // Skip the [0, 0] and [x, y] tests
+                        continue;
+                    }
+
+                    var min = -d[1],
+                        max = d[1],
+                        axisMin = -d[3];
+
+                    equal(numericAxis.autoAxisMin(min, max), axisMin, "[" + min + ", " + max + "]");
+                }
+            });
+
+            (function() {
+                var numericAxis,
+                    MAX_LABEL_WIDTH = 30,
+                    LABEL_HEIGHT = 18;
+
+                module("View Rendering");
+
+                test("creates axis line", 1, function() {
+                    numericAxis = new Chart.NumericAxis(0, 1);
+                    var factory = {
+                        line: function(x1, y1, x2, y2) {
+                            console.log(arguments);
+                            if (x1 == MAX_LABEL_WIDTH &&
+                                y1 == chartBox.y1 + LABEL_HEIGHT / 2 &&
+                                x2 == MAX_LABEL_WIDTH &&
+                                y2 == chartBox.y2 - LABEL_HEIGHT / 2 ) {
+                                ok(true);
+                            }
+                        },
+                        text: function() { }
+                    };
+
+                    numericAxis.updateLayout(chartBox);
+                    numericAxis.getViewElements(factory);
                 });
 
-                // min, max, expected Major Unit
-                var referenceUnits = [
-                    // [0, max] (max >= 0)
-                    [0, 0, 0.1],
-                    [0, 0.1, 0.02],
-                    [0, 0.2, 0.05],
-                    [0, 0.5, 0.1],
-                    [0, 1, 0.2],
-                    [0, 2, 0.5],
-                    [0, 5, 1],
-                    [0, 10, 2],
-                    [0, 20, 5],
-                    [0, 47, 5],
-                    [0, 48, 10],
-                    [0, 95, 10],
-                    [0, 96, 20],
-                    [0, 190, 20],
-                    [0, 191, 50],
-                    [0, 476, 50],
-                    [0, 477, 100],
-                    [0, 952, 100],
-                    [0, 953, 200],
-                    [0, 1904, 200],
-                    [0, 1905, 500],
+                test("creates labels", 1, function() {
+                    numericAxis = new Chart.NumericAxis(0, 1);
 
-                    // [min, max] (min > 0, max >= min)
-                    [1, 1, 0.2],
-                    [1, 1.1, 0.02],
-                    [1, 1.2, 0.05],
-                    [1000, 1000, 200],
-                    [1000, 1050, 10],
-                    [1000, 1100, 20],
-                    [1000, 1200, 50],
-                ];
+                    var labels = [],
+                        factory = {
+                            text: function(content) {
+                                labels.push(content);
+                            },
+                            line: function() { }
+                    };
 
-               test("Major unit calculation for positive values", function() {
-                    for (var i = 0; i < referenceUnits.length; i++) {
-                        var d = referenceUnits[i],
-                            min = d[0];
-                            max = d[1],
-                            mu = d[2];
+                    numericAxis.updateLayout(chartBox);
+                    numericAxis.getViewElements(factory);
 
-                        equals(numericAxis.autoMajorUnit(min, max), mu, "[" + min + ", " + max  + "]");
-                    }
-               });
-
-               test("Major unit calculation for negative values", function() {
-                    for (var i = 0; i < referenceUnits.length; i++) {
-                        var d = referenceUnits[i],
-                            min = -d[1];
-                            max = -d[0],
-                            mu = d[2];
-
-                        equals(numericAxis.autoMajorUnit(min, max), mu, "[" + min + ", " + max + "]");
-                    }
-               });
-
-                test("Major unit calculation for mixed positive / negative values", function() {
-                    for (var i = 0; i < referenceUnits.length; i++) {
-                        var d = referenceUnits[i];
-
-                        if (d[0] != 0) {
-                            // Skip tests where min is not 0
-                            continue;
-                        }
-
-                        // Take a test triplet [min, max, mu] and transform it to [-max/2, max/2, mu]
-                        var min = -d[1] / 2;
-                            max = d[1] / 2,
-                            mu = d[2];
-
-                        equals(numericAxis.autoMajorUnit(min, max), mu, "[" + min + ", " + max + "]");
-                    }
-               });
-
-
-                // min, max, expected axis minimum, expected axis maximum
-                var referenceAxisLimits = [
-                    [0, 0, 0, 1],
-                    [0, 0.5, 0, 0.6],
-                    [0, 2, 0, 2.5],
-                    [0, 5, 0, 6],
-                    [0, 18, 0, 20],
-                    [0, 20, 0, 25],
-                    [0, 50, 0, 60],
-                    [0, 200, 0, 250],
-                    [0, 500, 0, 600],
-                    [0, 1800, 0, 2000],
-
-                    // Axis limits for close, positive values
-                    [1, 1, 0, 1.2],
-                    [1, 1.1, 0.94, 1.12],
-                    [1000, 1000, 0, 1200],
-                    [1000, 1050, 970, 1060],
-                    [1000, 1100, 940, 1120],
-                    [1000, 1200, 900, 1250]
-                ];
-
-                test("Axis maximum for positive values", function() {
-                    for (var i = 0; i < referenceAxisLimits.length; i++) {
-                        var d = referenceAxisLimits[i],
-                            min = d[0],
-                            max = d[1],
-                            axisMax = d[3];
-
-                        equal(numericAxis.autoAxisMax(min, max), axisMax, "[" + min + ", " + max + "]");
-                    }
+                    deepEqual(labels, ["1.2", "1", "0.8", "0.6", "0.4", "0.2", "0"]);
                 });
 
-                test("Axis maximum for negative values", function() {
-                    for (var i = 0; i < referenceAxisLimits.length; i++) {
-                        var d = referenceAxisLimits[i];
+                test("labels are positioned evenly", function() {
+                    numericAxis = new Chart.NumericAxis(0, 1);
 
-                        if (d[0] == 0 && d[1] == 0) {
-                            // Skip the [0, 0] test
-                            continue;
-                        }
+                    var labelsY = [],
+                        factory = {
+                            text: function(content, options) {
+                                labelsY.push(options.y);
+                            },
+                            line: function() { }
+                    };
 
-                        var min = -d[1],
-                            max = -d[0],
-                            axisMax = -d[2];
+                    numericAxis.updateLayout(chartBox);
+                    numericAxis.getViewElements(factory);
 
-
-                        equal(numericAxis.autoAxisMax(min, max), axisMax, "[" + min + ", " + max + "]");
-                    }
+                    deepEqual(labelsY, [ 0, 163.667, 327.333, 491, 654.667, 818.333, 982 ]);
                 });
+            })();
 
-                test("Axis maximum for mixed positive / negative values", function() {
-                    for (var i = 0; i < referenceAxisLimits.length; i++) {
-                        var d = referenceAxisLimits[i];
-
-                        if (d[0] != 0 || d[1] == 0) {
-                            // Skip the [0, 0] and [x, y] tests
-                            continue;
-                        }
-
-                        var min = -d[1],
-                            max = d[1],
-                            axisMax = d[3];
-
-                        equal(numericAxis.autoAxisMax(min, max), axisMax, "[" + min + ", " + max + "]");
-                    }
-                });
-
-                test("Axis minimum for positive values", function() {
-                    for (var i = 0; i < referenceAxisLimits.length; i++) {
-                        var d = referenceAxisLimits[i],
-                            min = d[0],
-                            max = d[1],
-                            axisMin = d[2];
-
-                        equal(numericAxis.autoAxisMin(min, max), axisMin, "[" + min + ", " + max + "]");
-                    }
-                });
-
-                test("Axis minimum for negative values", function() {
-                    for (var i = 0; i < referenceAxisLimits.length; i++) {
-                        var d = referenceAxisLimits[i];
-
-                        if (d[0] == 0 && d[1] == 0) {
-                            // Skip the [0, 0] test
-                            continue;
-                        }
-
-                        var min = -d[1],
-                            max = -d[0],
-                            axisMin = -d[3];
-
-                        equal(numericAxis.autoAxisMin(min, max), axisMin, "[" + min + ", " + max + "]");
-                    }
-                });
-
-                test("Axis minimum for mixed positive/negative values", function() {
-                    for (var i = 0; i < referenceAxisLimits.length; i++) {
-                        var d = referenceAxisLimits[i];
-
-                        if (d[0] != 0 || d[1] == 0) {
-                            // Skip the [0, 0] and [x, y] tests
-                            continue;
-                        }
-
-                        var min = -d[1],
-                            max = d[1],
-                            axisMin = -d[3];
-
-                        equal(numericAxis.autoAxisMin(min, max), axisMin, "[" + min + ", " + max + "]");
-                    }
-                });
-
-                module("Grid Layout", {
-                    setup: function() {
-                        gridLayout = new kendo.ui.Chart.GridLayout();
-                    }
-                });
-
-          });
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>
