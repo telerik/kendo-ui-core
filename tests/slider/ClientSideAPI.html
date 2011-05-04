@@ -9,15 +9,15 @@
         <script src="../../src/kendo.draganddrop.js"></script>
         <script src="../../src/kendo.slider.js"></script>
         <link rel="stylesheet" href="../qunit.css" />
-        <link type="text/css" href="../../../Branches/Current/Source/Telerik.Web.Mvc/Content/telerik.common.css" rel="stylesheet"/>
-        <link type="text/css" href="../../../Branches/Current/Source/Telerik.Web.Mvc/Content/telerik.vista.css" rel="stylesheet"/>  
+        <link type="text/css" href="../../styles/telerik.common.css" rel="stylesheet"/>
+        <link type="text/css" href="../../styles/telerik.vista.css" rel="stylesheet"/>
     </head>
     <body>
 
         <script type="text/javascript">
             var Slider = kendo.ui.Slider,
                 input;
-            
+
             module("Slider/ClientSideAPI", {
                 setup: function () {
                     input = $("<input />").appendTo(document.body);
@@ -26,14 +26,14 @@
                     $(".t-slider").remove();
                 }
             });
-        
+
             function newSlider(options) {
                 return new Slider(input, options);
             }
 
             test("value should set slider value", function() {
                 var slider = newSlider();
-                
+
                 slider.value(9);
 
                 equal(slider.value(), 9);
@@ -41,7 +41,7 @@
 
             test("value should not be null or empty string and should return old value", function() {
                 var slider = newSlider();
-                
+
                 slider.value(2)
 
                 slider.value(" ");
@@ -177,7 +177,7 @@
 
             var RangeSlider = kendo.ui.RangeSlider,
                 div;
-            
+
             module("RangeSlider/ClientSideAPI", {
                 setup: function () {
                     div = $("<div><input /><input /></div>").appendTo(document.body);
@@ -186,7 +186,7 @@
                     div.closest(".t-slider").remove();
                 }
             });
-        
+
             function newRangeSlider(options) {
                 return new RangeSlider(div, options);
             }
@@ -196,7 +196,7 @@
                     values = [ 0, 9 ];
 
                 rangeSlider.values(values);
-                
+
                 deepEqual(rangeSlider.values(), values);
             });
 
@@ -205,7 +205,7 @@
                     values = [ 0, 9 ];
 
                 rangeSlider.values(values);
-                
+
                 ok(values instanceof Array);
             });
 
@@ -321,7 +321,7 @@
             test('range slider should not trigger change if we decrease selectionStart with 1 step and selectionStart is equal to min value', function () {
                 var downArrow = "40", // down arrow
                     leftArrow = "37"; // left arrow
-                
+
                 var change = function (e) {
                     ok(false);
                 };

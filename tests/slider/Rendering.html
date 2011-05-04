@@ -9,16 +9,16 @@
         <script src="../../src/kendo.draganddrop.js"></script>
         <script src="../../src/kendo.slider.js"></script>
         <link rel="stylesheet" href="../qunit.css" />
-        <link type="text/css" href="../../../Branches/Current/Source/Telerik.Web.Mvc/Content/telerik.common.css" rel="stylesheet"/>
-        <link type="text/css" href="../../../Branches/Current/Source/Telerik.Web.Mvc/Content/telerik.vista.css" rel="stylesheet"/>  
+        <link type="text/css" href="../../styles/telerik.common.css" rel="stylesheet"/>
+        <link type="text/css" href="../../styles/telerik.vista.css" rel="stylesheet"/>
     </head>
     <body>
 
         <script type="text/javascript">
-            
+
             var Slider = kendo.ui.Slider,
                 input;
-            
+
             module("Slider/Rendering", {
                 setup: function () {
                     input = $("<input />").appendTo(document.body);
@@ -28,7 +28,7 @@
                 }
 
             });
-        
+
             function newSlider(options) {
                 return new Slider(input, options);
             }
