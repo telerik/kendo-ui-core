@@ -30,7 +30,7 @@
             model.children.push(
                 new Title({ text: chart.options.title }),
                 new Legend({ series: chart.options.series }),
-                new PlotArea({ series: chart.options.series })
+                new PlotArea(chart.options)
             );
             chart._model = model;
 
@@ -182,7 +182,12 @@
                 text.box = new Box(
                     targetBox.x2 - size.width, targetBox.y1,
                     targetBox.x2, targetBox.y1 + size.height);
-            }
+            } else if (options.align == "center") {
+                var margin = (targetBox.width() - size.width) / 2;
+                text.box = new Box(
+                    round(targetBox.x1 + margin, COORD_PRECISION), targetBox.y1,
+                    round(targetBox.x2 - margin, COORD_PRECISION), targetBox.y1 + size.height);
+                }
         },
 
         getViewElements: function(factory) {
@@ -495,6 +500,116 @@
         }
     });
 
+    function CategoryAxis(options) {
+        var axis = this;
+        ChartElement.call(axis);
+
+        axis.options = $.extend({}, axis.options, options);
+        axis.init();
+    }
+
+    CategoryAxis.prototype = new ChartElement();
+    $.extend(CategoryAxis.prototype, {
+        options: {
+            labels: [],
+            line: "solid",
+            majorTickLength: 4
+        },
+
+        init: function() {
+            var axis = this,
+                options = axis.options;
+
+            for (var i = 0; i < options.labels.length; i++) {
+                var label = options.labels[i];
+                axis.children.push(new Text(label, { align: "center" }));
+            }
+        },
+
+        updateLayout: function(targetBox) {
+            var axis = this,
+                options = axis.options,
+                children = axis.children,
+                width = targetBox.width(),
+                step = width / children.length,
+                x = (step / 2) + targetBox.x1,
+                maxLabelHeight = 0;
+
+            for (var i = 0; i < children.length; i++) {
+                var label = children[i];
+                maxLabelHeight = Math.max(maxLabelHeight, label.box.height());
+            }
+
+            this.box = new Box(
+                targetBox.x1, targetBox.y2 - maxLabelHeight - options.majorTickLength,
+                targetBox.x2, targetBox.y2
+            );
+
+            var majorDivisions = axis.getMajorTickPositions(),
+                labelY = targetBox.y2 - maxLabelHeight;
+            for (var i = 0; i < children.length; i++) {
+                var label = children[i],
+                    currentDivision = majorDivisions[i],
+                    nextDivision = majorDivisions[i + 1];
+
+                label.updateLayout(new Box(
+                    currentDivision, labelY,
+                    nextDivision, labelY + label.box.height()
+                ));
+            }
+        },
+
+        getViewElements: function(factory) {
+            var axis = this,
+                children = axis.children,
+                options = axis.options,
+                childElements = ChartElement.prototype.getViewElements.call(axis, factory);
+
+            if (options.line.toLowerCase() == "solid") {
+                childElements.push(factory.line(
+                        axis.box.x1, axis.box.y1,
+                        axis.box.x2, axis.box.y1));
+            }
+
+            [].push.apply(childElements, axis.renderTicks(factory));
+
+            return childElements;
+        },
+
+        renderTicks: function(factory) {
+            var axis = this,
+                options = axis.options,
+                box = axis.box;
+
+            var majorTickPositions = axis.getMajorTickPositions();
+            return $.map(majorTickPositions, function(majorTickX) {
+                return factory.line(
+                    majorTickX, box.y1,
+                    majorTickX, box.y1 + options.majorTickLength
+                );
+            });
+        },
+
+        getMajorTickPositions: function() {
+            var axis = this,
+                options = axis.options,
+                children = axis.children,
+                width = axis.box.width(),
+                step = width / children.length,
+                x = axis.box.x1,
+                positions = [];
+
+            for (var i = 0; i < children.length; i++) {
+                positions.push(x);
+                x = round(x + step, COORD_PRECISION);
+            };
+
+            positions.push(axis.box.x2);
+
+            return positions;
+        }
+    });
+
 
     function PlotArea(options) {
         var plotArea = this;
@@ -514,10 +629,13 @@
 
         createAxes: function() {
             var plotArea = this,
+                options = plotArea.options,
                 seriesRange = getSeriesRange(plotArea.options.series),
-                axisY = new NumericAxis(seriesRange.min, seriesRange.max, plotArea.options.axisY);
+                axisY = new NumericAxis(seriesRange.min, seriesRange.max, plotArea.options.axisY),
+                axisX = new CategoryAxis(options.axisX);
 
             plotArea.children.push(axisY);
+            plotArea.children.push(axisX);
         },
 
         updateLayout: function(targetBox) {
@@ -525,6 +643,7 @@
             plotArea.box = targetBox;
 
             plotArea.children[0].updateLayout(targetBox);
+            plotArea.children[1].updateLayout(targetBox);
         }
     });
 
@@ -800,6 +919,7 @@
     Chart.Text = Text;
     Chart.RootElement = RootElement;
     Chart.NumericAxis = NumericAxis;
+    Chart.CategoryAxis = CategoryAxis;
     Chart.Title = Title;
     Chart.Legend = Legend;
     Chart.PlotArea = PlotArea;

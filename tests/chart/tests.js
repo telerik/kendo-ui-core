@@ -14,5 +14,9 @@ tests.push(
     {
         page: "chart/numericaxis.html",
         title: "chart numericaxis"
+    },
+    {
+        page: "chart/categoryaxis.html",
+        title: "chart categoryaxis"
     }
 );
