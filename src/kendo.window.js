@@ -5,7 +5,7 @@
         fx = kendo.fx,
         //events
         OPEN = "open",
-        ACTIVATED = "activated",
+        ACTIVATE = "activate",
         CLOSE = "close",
         REFRESH = "refresh",
         RESIZE = "resize",
@@ -34,6 +34,19 @@
         if (!that.element.is(".t-window")) {
             that.element.addClass("t-widget t-window");
             Window.create(that.element, options);
+
+            var titleBar = that.element.find(".t-window-titlebar");
+            titleBar.css("margin-top", -titleBar.outerHeight());
+
+            that.element.css("padding-top", titleBar.outerHeight());
+
+            if(options.width) {
+                that.element.width(options.width);
+            }
+
+            if (options.htight) {
+                that.element.height(options.height)
+            }
         }
 
         if (!that.element.parent().is("body")) {
@@ -75,7 +88,7 @@
             (function(wnd) {
                 function dragstart(e) {
                     var element = wnd.element;
-
+                    wnd.elementPadding = parseInt(wnd.element.css("padding-top"));
                     wnd.initialCursorPosition = element.offset();
 
                     wnd.resizeDirection = e.currentTarget.attr("className").replace("t-resize-handle t-resize-", "").split("");
@@ -84,11 +97,6 @@
                         width: wnd.element.width(),
                         height: wnd.element.height()
                     };
-
-                    wnd.outlineSize = {
-                        left: wnd.element.outerWidth(),
-                        top: wnd.element.outerHeight()
-                    }
 
                     $("<div class='t-overlay' />").appendTo(wnd.element);
 
@@ -102,7 +110,7 @@
 
                     var resizeHandlers = {
                         "e": function () {
-                            var width = e.pageX - wnd.initialCursorPosition.left - wnd.outlineSize.left;
+                            var width = e.pageX - wnd.initialCursorPosition.left;
                             element.width((width < wnd.options.minWidth
                                                  ? wnd.options.minWidth
                                                  : (wnd.options.maxWidth && width > wnd.options.maxWidth)
@@ -110,7 +118,7 @@
                                                  : width));
                         },
                         "s": function () {
-                            var height = e.pageY - wnd.initialCursorPosition.top - wnd.outlineSize.top;
+                            var height = e.pageY - wnd.initialCursorPosition.top - wnd.elementPadding;
                             wnd.element
                                .height((height < wnd.options.minHeight ? wnd.options.minHeight
                                        : (wnd.options.maxHeight && height > wnd.options.maxHeight) ? wnd.options.maxHeight
@@ -118,15 +126,14 @@
                         },
                         "w": function () {
                             var windowRight = wnd.initialCursorPosition.left + wnd.initialSize.width;
-
                             element.css("left", e.pageX > (windowRight - wnd.options.minWidth) ? windowRight - wnd.options.minWidth
                                               : e.pageX < (windowRight - wnd.options.maxWidth) ? windowRight - wnd.options.maxWidth
                                               : e.pageX);
 
                             var width = windowRight - e.pageX;
                             element.width((width < wnd.options.minWidth ? wnd.options.minWidth
-                                                    : (wnd.options.maxWidth && width > wnd.options.maxWidth) ? wnd.options.maxWidth
-                                                    : width));
+                                                 : (wnd.options.maxWidth && width > wnd.options.maxWidth) ? wnd.options.maxWidth
+                                                 : width));
 
                         },
                         "n": function () {
@@ -232,12 +239,17 @@
             })(that);
         }
 
-        that.bind([OPEN, ACTIVATED, CLOSE, REFRESH, RESIZE, ERROR, LOAD, MOVE], options);
+        that.bind([OPEN, ACTIVATE, CLOSE, REFRESH, RESIZE, ERROR, LOAD, MOVE], options);
 
         $(window).resize($.proxy(this.onDocumentResize, this));
 
         if (isLocalUrl(this.contentUrl)) {
             this.ajaxRequest();
+        }
+
+        if (that.element.is(":visible")) {
+            that.trigger(OPEN);
+            that.trigger(ACTIVATE);
         }
     };
 
@@ -352,15 +364,15 @@
                     }
                 }
 
-                //if (!element.is(":visible")) {
-                element.kendoAnimate({
-                    effects: showOptions.effects,
-                    duration: showOptions.duration,
-                    complete: function() {
-                        that.trigger(ACTIVATED);
-                    }
-                });
-                //}
+                if (!element.is(":visible")) {
+                    element.kendoAnimate({
+                        effects: showOptions.effects,
+                        duration: showOptions.duration,
+                        complete: function() {
+                            that.trigger(ACTIVATE);
+                        }
+                    });
+                }
             }
 
             if (that.options.isMaximized) {
@@ -399,8 +411,6 @@
                         effects: hideOptions.effects,
                         duration: hideOptions.duration,
                         complete: function() {
-                            //element.hide();
-
                             if (shouldHideOverlay) {
                                  overlay.hide();
                             }
@@ -606,21 +616,13 @@
                 windowHtml += "<iframe src='" + options.contentUrl + "' title='" + options.title +
                               "' frameborder='0' style='border:0;width:100%;height:100%;'>This page requires frames in order to show content</iframe>";
             }
+            windowHtml += "</div>";
 
             if (element) {
                 element.html(windowHtml);
-                var titleBar = element.find(".t-window-titlebar");
-
-                element.width(options.width)
-                       .height(options.height)
-                       .css("padding-top", titleBar.outerHeight());
             } else {
-                var window = $(windowHtml).appendTo(document.body).tWindow(options),
-                    titleBar = window.find(".t-window-titlebar");
-
-                return window.width(options.width)
-                             .height(options.height)
-                             .css("padding-top", titleBar.outerHeight());
+                windowHtml += "</div>";
+                return $(windowHtml).appendTo(document.body).kendoWindow(options);
             }
         },
 
@@ -634,28 +636,6 @@
             return html;
         }
     });
-
-//    // jQuery extender
-//    $.fn.tWindow = function (options) {
-//        return $t.create(this, {
-//            name: "tWindow",
-//            init: function (element, options) {
-//                return new $t.window(element, options);
-//            },
-//            success: function(component) {
-//                var element = component.element,
-//                    $element = $(element);
-
-//------------------fix---------------
-
-//                if ($element.is(":visible")) {
-//                    $t.trigger(element, "open")
-//                    $t.trigger(element, "activated");
-//                }
-//            },
-//            options: options
-//        });
-//    };
 
     kendo.ui.plugin("Window", Window, Component);
 

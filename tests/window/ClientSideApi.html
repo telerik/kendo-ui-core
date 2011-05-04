@@ -1,120 +1,104 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage" %>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.ui.window Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.window.js"></script>
+        <script type="text/javascript" src="../jquery.mockjax.js"></script>
+        <link rel="stylesheet" href="../qunit.css" />
+        <link type="text/css" href="../styles/telerik.common.css" rel="stylesheet"/>
+        <link type="text/css" href="../styles/telerik.vista.css" rel="stylesheet"/>
+    </head>
+    <body>
 
-<asp:Content ContentPlaceHolderID="MainContent" runat="server">
-    
-    <%= Html.Telerik().Window()
-            .Name("Window")
-            .Title("Title")
-            .Content("Content")
-            .Effects(fx => fx.Toggle()) 
-    %>
+        <script type="text/javascript">
+            var Window = kendo.ui.Window,
+                div = {};
 
-    <%= Html.Telerik().Window()
-            .Name("ModalWindow")
-            .Title("Modal Window")
-            .Content("No content to display")
-            .Modal(true)
-            .Visible(false)
-            .Effects(fx => fx.Toggle()) 
-    %>
+            module("Window / ClientSideAPI", {
+                setup: function () {
+                    div = $("<div />").appendTo(document.body);
+                },
+                teardown: function() {
+                    $(".t-window").remove();
+                }
+            });
 
-    <div id="test" style="padding:50px;margin:50px"><div id="Window1" class="t-widget t-window"></div></div>
+            function newWindow(options) {
+                return new Window(div, options);
+            }
 
-</asp:Content>
+            test("title gets title", function() {
+                equal(newWindow({ title: "Title" }).title(), "Title");
+            });
 
+            test("title sets title", function() {
+                var window = newWindow({ title: "Title"}),
+                    oldTitle = window.title(),
+                    titleElement = $(".t-window-title", window.element);
 
-<asp:Content ContentPlaceHolderID="TestContent" runat="server">
+                window.title("Title is the new title!");
 
-<script type="text/javascript">    
+                equal(titleElement.text(), "Title is the new title!");
 
-    var oWindow;
+                window.title(oldTitle);
 
-    function getWindow(selector) {
-        return $(selector || '#Window').data('tWindow');
-    }
-    
-    module("Window / ClientSideApi", {
-        setup: function() {
-            oWindow = getWindow();
-        },
-        teardown: function() {
-        }
-    });
-    
-    test('title gets title', function() {
-        equal(oWindow.title(), 'Title');
-    });
-    
-    test('title sets title', function() {
-        var oldTitle = oWindow.title();
-        var titleElement = $('.t-window-title', oWindow.element);
+                equal(titleElement.text(), oldTitle);
+            });
 
-        oWindow.title('Title is the new title!');
+            test("content gets content", function() {
+                equal(newWindow({ html: "Content" }).content(), "Content");
+            });
 
-        equal(titleElement.text(), 'Title is the new title!');
+            test("content sets content", function() {
+                var window = newWindow({ html: "Content"}),
+                    oldContent = window.content(),
+                    contentElement = $(".t-window-content", window.element);
 
-        oWindow.title(oldTitle);
+                window.content("Content is the new content!");
 
-        equal(titleElement.text(), oldTitle);
-    });
-    
-    test('content gets content', function() {
-        equal(oWindow.content(), 'Content');
-    });
-    
-    test('content sets content', function() {
-        var oldContent = oWindow.content();
-        var contentElement = $('.t-window-content', oWindow.element);
+                equal(contentElement.text(), "Content is the new content!");
 
-        oWindow.content('Content is the new content!');
+                window.content(oldContent);
 
-        equal(contentElement.text(), 'Content is the new content!');
+                equal(contentElement.text(), oldContent);
+            });
 
-        oWindow.content(oldContent);
-        
-        equal(contentElement.text(), oldContent);
-    });
+            test("open of modal window adds overlay if it does not exist", function() {
+                newWindow({ modal: true }).open();
 
-    test('open of modal window adds overlay if it does not exist', function() {
-        $('body > .t-overlay').remove();
+                equal($("body > .t-overlay").length, 1);
+            });
 
-        getWindow('#ModalWindow').open();
+            test("dblclick on resizable window title maximizes window", function() {
+                var window = newWindow();
 
-        equal($('body > .t-overlay').length, 1);
-    });
+                window.element.find(".t-window-titlebar").trigger("dblclick");
 
-    test('dblclick on resizable window title maximizes window', function() {
-        var $window = $('<div />').tWindow();
+                ok(window.options.isMaximized);
+            });
 
-        $window.find('.t-window-titlebar').trigger('dblclick');
+            test("dblclick on non resizable window title does not maximize window", function() {
+                var window = newWindow({ resizable: false });
 
-        ok($window.data('tWindow').isMaximized);
-    });
+                window.element.find(".t-window-titlebar").trigger("dblclick");
 
-    test('dblclick on non resizable window title does not maximize window', function() {
-        var $window = $('<div />').tWindow({ resizable: false });
+                ok(!window.options.isMaximized);
+            });
 
-        $window.find('.t-window-titlebar').trigger('dblclick');
+        </script>
 
-        ok(!$window.data('tWindow').isMaximized);
-    });
-
-    test('open method set offset left and top to auto', function() {
-        var $window = $('#Window1');
-        $.telerik.window.create($window[0], {});
-       
-        var initialOffset = $window.show().offset();
-        $window.hide();
-
-        $window.tWindow().data('tWindow').open();
-
-        var afterOpenOffset = $window.offset();
-        
-        equal(afterOpenOffset.left - 20, parseInt(initialOffset.left));
-        equal(afterOpenOffset.top - 20, parseInt(initialOffset.top));
-        $window.tWindow().data('tWindow').close();
-    });
-
-</script>
-
-</asp:Content>
+        <h1 id="qunit-header">kendo.ui.Window Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>

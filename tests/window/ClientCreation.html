@@ -7,10 +7,12 @@
         <script src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
         <script src="../../src/kendo.window.js"></script>
+        <script type="text/javascript" src="../jquery.mockjax.js"></script>
         <link rel="stylesheet" href="../qunit.css" />
-        <link type="text/css" href="../../../Branches/Current/Source/Telerik.Web.Mvc/Content/telerik.common.css" rel="stylesheet"/>
-        <link type="text/css" href="../../../Branches/Current/Source/Telerik.Web.Mvc/Content/telerik.vista.css" rel="stylesheet"/>  
+        <link type="text/css" href="../styles/telerik.common.css" rel="stylesheet"/>
+        <link type="text/css" href="../styles/telerik.vista.css" rel="stylesheet"/>
     </head>
     <body>
 
@@ -20,42 +22,39 @@
 
             module("Window / ClientCreation", {
                 setup: function () {
-                    input = $("<div />").appendTo(document.body);
+                    div = $("<div />").appendTo(document.body);
                 },
                 teardown: function() {
                     $(".t-window").remove();
-               } 
+                }
             });
 
-            $.extend($.fn.tWindow.defaults, {
-                effects: { list: [{ name: 'toggle' }], openDuration: 'fast', closeDuration: 'fast' }
+            function newWindow(options, newDiv) {
+                return new Window(newDiv || div, options);
+            }
+
+            test("creates default html structure", function() {
+                var dialog = newWindow();
+
+                ok(dialog.element.is(".t-widget, .t-window"));
+                ok(dialog.element.children().eq(0).is(".t-window-titlebar, .t-header"));
             });
 
-            test('creates default html structure', function() {
-                var dialog = $('#Window1').tWindow();
+            test("if contentUrl is local call ajaxRequest on refresh method", 1, function() {
+                var dialog = newWindow();
 
-                ok(dialog.is('.t-widget, .t-window'));
-                ok(dialog.children().eq(0).is('.t-window-titlebar, .t-header'));
-            });
+                dialog.options.contentUrl = "~/something";
 
-            test('if contentUrl is local call ajaxRequest on refresh method', function() {
-                var dialog = $('#Window2').tWindow().data('tWindow');
-                var hasRequestedData = false;
-
-                dialog.contentUrl = "~/something";
-
-                dialog.ajaxRequest = function () { hasRequestedData = true };
+                dialog.ajaxRequest = function () { ok(true); };
 
                 dialog.refresh();
-
-                ok(hasRequestedData);
             });
 
-            test('if contentUrl is remote should not call ajaxRequest on refresh method', function() {
-                var dialog = $('#Window3').tWindow().data('tWindow');
+            test("if contentUrl is remote should not call ajaxRequest on refresh method", function() {
+                var dialog = newWindow();
                 var hasRequestedData = false;
 
-                dialog.contentUrl = "http://";
+                dialog.options.contentUrl = "http://";
 
                 dialog.ajaxRequest = function () { hasRequestedData = true };
 
@@ -64,148 +63,139 @@
                 ok(!hasRequestedData);
             });
 
-            test('if contentUrl is local and relative should call ajaxRequest on refresh method', function() {
-                var dialog = $('#Window4').tWindow().data('tWindow');
-                var hasRequestedData = false;
+            test("if contentUrl is local and relative should call ajaxRequest on refresh method", 1, function() {
+                var dialog = newWindow();
 
-                dialog.contentUrl = "httpfoo";
+                dialog.options.contentUrl = "httpfoo";
 
-                dialog.ajaxRequest = function () { hasRequestedData = true };
+                dialog.ajaxRequest = function () { ok(true); };
 
                 dialog.refresh();
-
-                ok(hasRequestedData);
             });
 
-            test('construction triggers open and activate events', function() {
+            test("construction triggers open and activate events", 2, function() {
+                var dialog = newWindow({
+                    "open": function () { ok(true); },
+                    "activate": function () { ok(true); }
+                });
+            });
+
+            test("construction does not trigger open and activate events on hidden windows", function() {
                 var isActivated = false,
                     isOpened = false;
 
-                var dialog = $('#Window6').tWindow({
-                        onOpen: function () { isOpened = true; },
-                        onActivate: function () {isActivated = true; }
-                    }).data('tWindow');
-
-                ok(isActivated);
-                ok(isOpened);
-            });
-
-            test('construction does not trigger open and activate events on hidden windows', function() {
-                var isActivated = false,
-                    isOpened = false;
-
-                var dialog = $('<div />').hide().tWindow({
-                        onOpen: function () { isOpened = true; },
-                        onActivate: function () {isActivated = true; }
-                    }).data('tWindow');
+                var dialog = newWindow({
+                    "open": function () { isOpened = true; },
+                    "activate": function () {isActivated = true; }
+                }, $("<div />").appendTo(document.body).hide());
 
                 ok(!isActivated);
                 ok(!isOpened);
             });
 
-            test('construction of modal window shows overlay', function() {
-                var dialog = $t.window.create({
-                        html: '<div id="content">content</div>',
-                        modal: true
-                    }).data('tWindow');
+            test("construction of modal window shows overlay", function() {
+                var dialog = newWindow({
+                    html: "<div id='content'>content</div>",
+                    modal: true
+                });
 
-                ok($('.t-overlay').is(':visible'));
+                ok($(".t-overlay").is(":visible"));
             });
 
-            test('hiding second modal window does not hide first overlay', function() {
-                var dialog1 = $t.window.create({
-                        html: 'content',
-                        modal: true
-                    }).data('tWindow');
+            test("hiding second modal window does not hide first overlay", function() {
+                var dialog1 = newWindow({
+                    html: "content",
+                    modal: true
+                });
 
-                var dialog2 = $t.window.create({
-                        html: 'content, too',
-                        modal: true
-                    }).data('tWindow');
+                var dialog2 = newWindow({
+                    html: "content, too",
+                    modal: true
+                });
 
                 dialog2.close();
 
-                ok($('.t-overlay').is(':visible'));
+                ok($(".t-overlay").is(":visible"));
 
                 dialog1.close();
 
-                ok(!$('.t-overlay').is(':visible'));
+                ok(!$(".t-overlay").is(":visible"));
 
                 dialog1.open();
 
-                ok($('.t-overlay').is(':visible'));
+                ok($(".t-overlay").is(":visible"));
             });
 
-            test('destroy() does not delete overlay if there are other opened modal windows', function() {
-                var dialog1 = $t.window.create({
-                        html: 'content',
-                        modal: true
-                    }).data('tWindow');
+            test("destroy() does not delete overlay if there are other opened modal windows", function() {
+                var dialog1 = newWindow({
+                    html: "content",
+                    modal: true
+                });
 
-                var dialog2 = $t.window.create({
-                        html: 'content, too',
-                        modal: true
-                    }).data('tWindow');
+                var dialog2 = newWindow({
+                    html: "content, too",
+                    modal: true
+                });
 
                 dialog2.destroy();
 
-                equals($('.t-overlay').length, 1);
-                ok($('.t-overlay').is(':visible'));
+                equals($(".t-overlay").length, 1);
+                ok($(".t-overlay").is(":visible"));
 
                 dialog1.destroy();
 
-                equals($('.t-overlay').length, 0);
+                equals($(".t-overlay").length, 0);
             });
 
-            test('creating a modal window after closing another shows overlay', function() {
-                var dialog1 = $t.window.create({
-                        html: 'content',
-                        modal: true
-                    }).data('tWindow');
+            test("creating a modal window after closing another shows overlay", function() {
+                var dialog1 = newWindow({
+                    html: "content",
+                    modal: true
+                });
 
                 dialog1.close();
 
-                var dialog2 = $t.window.create({
-                        html: 'content, too',
-                        modal: true
-                    }).data('tWindow');
+                var dialog2 = newWindow({
+                    html: "content, too",
+                    modal: true
+                });
 
-                ok($('.t-overlay').is(':visible'));
+                ok($(".t-overlay").is(":visible"));
             });
 
-            test('creating a window with a remote contentUrl creates iframe', function() {
-                var dialog = $t.window.create({
-                        contentUrl: 'http://google.com/',
-                        title: 'title'
+            test("creating a window with a remote contentUrl creates iframe", function() {
+                var dialog = Window.create({
+                        contentUrl: "http://google.com/",
+                        title: "title"
                     }),
-                    iframe = dialog.find('iframe');
+                    iframe = dialog.find("iframe");
 
                 equals(iframe.length, 1);
-                equals(iframe.attr('title'), 'title');
-                equals(iframe.attr('src'), 'http://google.com/');
+                equals(iframe.attr("title"), "title");
+                equals(iframe.attr("src"), "http://google.com/");
             });
 
-            test('creating a window with a contentUrl on the same server does not create iframe', function() {
-                var dialog = $t.window.create({
-                    contentUrl: '<%= Url.Action("Blank", "Window") %>'
+            test("creating a window with a contentUrl on the same server does not create iframe", function() {
+                var dialog = newWindow({
+                    contentUrl: "foo"
                 });
 
-                equals(dialog.find('iframe').length, 0);
+                equals(dialog.element.find("iframe").length, 0);
             });
 
-            test('creating a window without a contentUrl does not create iframe', function() {
-                var dialog = $('<div />').appendTo(document.body).tWindow();
+            test("creating a window without a contentUrl does not create iframe", function() {
+                var dialog = newWindow();
 
-                equals(dialog.find('iframe').length, 0);
+                equals(dialog.element.find("iframe").length, 0);
             });
 
-            test('creating a window with html and contentUrl', function() {
-                var dialog = $t.window.create({
+            test("creating a window with html and contentUrl", function() {
+                var dialog = Window.create({
                     html: "foo",
-                    contentUrl: '<%= Url.Action("Blank", "Window") %>'
+                    contentUrl: "foo"
                 });
 
-                equals(dialog.find('.t-window-content')[0].innerHTML, "foo");
+                equals(dialog.find(".t-window-content")[0].innerHTML, "foo");
             });
 
         </script>
@@ -218,4 +208,4 @@
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
     </body>
-</html> 
+</html>
