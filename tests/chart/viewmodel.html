@@ -279,6 +279,14 @@
 
                     ok(plotArea.children[0] instanceof Chart.NumericAxis);
                 });
+
+                test("creates category X-Axis", function() {
+                    var plotArea = new Chart.PlotArea({
+                        series: [ barSeries ]
+                    });
+
+                    ok(plotArea.children[1] instanceof Chart.CategoryAxis);
+                });
             })();
         </script>
 
