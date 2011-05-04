@@ -14,6 +14,15 @@
             $(html.join("")).appendTo("head");
         },
 
+        history: {
+            pushState: function(data, url) {
+                window.history.pushState(data, "", url);
+            }
+        },
+
+        loadView: function() {
+        },
+
         switchView: function(view, initCallback) {
             var loadedView = $(".kendo-view").filter(function() {
                 return $(this).data("url") == view;
@@ -34,8 +43,20 @@
             $.ajax({
                 url: view,
                 cache: false,
+                dataType: "html",
                 success: function(data) {
+                    data = data.replace(/^<!doctype[^>]*>/i, "");
+
+                    var body = $(data).find('body');
+
+                    if (body.length > 0) {
+                        data = body[0].innerHTML;
+                    }
+
                     viewPage[0].innerHTML = data;
+
+                    mobile.history.pushState(null, "", view);
+
                     if (initCallback) {
                         initCallback();
                     }
