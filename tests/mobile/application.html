@@ -82,6 +82,16 @@
                 });
             });
 
+            module("kendo.mobile.history");
+
+            test("pushState navigates", function() {
+                kendo.mobile.history.pushState(null, "foo");
+
+                ok(/foo$/.test(window.location.href));
+
+                window.history.back();
+            });
+
         </script>
     </body>
 </html>
