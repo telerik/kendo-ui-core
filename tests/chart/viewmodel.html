@@ -260,32 +260,42 @@
 
             (function() {
                 var plotArea,
-                    barSeries;
+                    axisY,
+                    axisX;
 
                 module("PlotArea", {
                     setup: function() {
-                        barSeries = {
+                        var barSeries = {
                             name: "Value",
                             type: "bar",
                             data: [100, 200, 300]
                         };
+
+                        plotArea = new Chart.PlotArea({
+                            series: [ barSeries ]
+                        });
+
+                        axisY = plotArea.children[0];
+                        axisX = plotArea.children[1];
                     }
                 });
 
                 test("creates numeric Y-Axis", function() {
-                    var plotArea = new Chart.PlotArea({
-                        series: [ barSeries ]
-                    });
-
-                    ok(plotArea.children[0] instanceof Chart.NumericAxis);
+                    ok(axisY instanceof Chart.NumericAxis);
                 });
 
                 test("creates category X-Axis", function() {
-                    var plotArea = new Chart.PlotArea({
-                        series: [ barSeries ]
-                    });
+                    ok(axisX instanceof Chart.CategoryAxis);
+                });
 
-                    ok(plotArea.children[1] instanceof Chart.CategoryAxis);
+                test("aligns Y-Axis above X-Axis", function() {
+                    plotArea.updateLayout(chartBox);
+                    equal(axisY.box.y2, axisX.box.y1);
+                });
+
+                test("aligns X-Axis next to Y-Axis", function() {
+                    plotArea.updateLayout(chartBox);
+                    equal(axisX.box.x1, axisY.box.x2);
                 });
             })();
         </script>

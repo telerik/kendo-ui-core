@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.chart</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <link href="../qunit.css" type="text/css" rel="stylesheet"/>
+    </head>
+    <body>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.chart.js"></script>
+        <script type="text/javascript">
+            var Chart = kendo.ui.Chart,
+                Box = Chart.Box,
+                chartBox = new Box(0, 0, 800, 600);
+
+            (function() {
+                var categoryAxis,
+                    MAX_LABEL_HEIGHT = 18,
+                    MAJOR_TICK_HEIGHT = 4,
+                    LINE_Y = chartBox.y2 - MAX_LABEL_HEIGHT - MAJOR_TICK_HEIGHT;
+
+                function ViewFactoryStub() {
+                    this.renderedLines = [];
+                    this.renderedTexts = [];
+                }
+                ViewFactoryStub.prototype = {
+                    line: function(x1, y1, x2, y2) {
+                        this.renderedLines.push([].slice.call(arguments));
+                    },
+                    text: function(content) {
+                        this.renderedTexts.push(content);
+                    }
+                }
+
+                module("View Rendering", {
+                    setup: function() {
+                        factoryStub = new ViewFactoryStub();
+
+                        categoryAxis = new Chart.CategoryAxis({
+                            labels: ["Alpha", "Beta", "Charlie"]
+                        });
+                        categoryAxis.updateLayout(chartBox);
+                    }
+                });
+
+                test("creates axis line", function() {
+                    categoryAxis.getViewElements(factoryStub);
+
+                    same(factoryStub.renderedLines[0], [
+                        chartBox.x1, LINE_Y,
+                        chartBox.x2, LINE_Y
+                    ]);
+                });
+
+                test("creates labels", 1, function() {
+                    categoryAxis.getViewElements(factoryStub);
+
+                    same(factoryStub.renderedTexts,
+                         ["Alpha", "Beta", "Charlie"]);
+                });
+
+                test("labels are distributed horizontally", function() {
+                    var labelsX = [];
+                    factoryStub.text = function(content, options) {
+                        labelsX.push(options.x);
+                    }
+
+                    categoryAxis.getViewElements(factoryStub);
+
+                    same(labelsX, [110.333, 381.001, 638.167]);
+                });
+
+                test("labels are positioned below axis line", 3, function() {
+                    var labelsY = [];
+                    factoryStub.text = function(content, options) {
+                        equal(options.y, LINE_Y + MAJOR_TICK_HEIGHT);
+                    }
+
+                    categoryAxis.getViewElements(factoryStub);
+                });
+
+                test("major ticks are distributed horizontally", function() {
+                    categoryAxis.options.line = "none";
+                    categoryAxis.getViewElements(factoryStub);
+
+                    var ticksX = $.map(factoryStub.renderedLines, function(line) {
+                        return line[0];
+                    });
+                    same(ticksX, [0, 266.667, 533.334, 800]);
+                });
+
+            })();
+
+        </script>
+
+        <h1 id="qunit-header">kendo.chart</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+    </body>
+</html>
