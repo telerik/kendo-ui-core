@@ -310,8 +310,10 @@
         options: {
             min: 0,
             max: 1,
+            line: "solid",
             majorUnit: 0.1,
-            tickSize: 4
+            majorTicks: "outside",
+            majorTickSize: 4
         },
 
         init: function() {
@@ -331,10 +333,7 @@
         updateLayout: function(targetBox) {
             var axis = this,
                 options = axis.options,
-                children = axis.children,
-                majorDivisions = axis.getMajorDivisions(),
-                halfLabelHeight = children[0].box.height() / 2;
-
+                children = axis.children;
 
             var maxLabelWidth = 0;
             for (var i = 0; i < children.length; i++) {
@@ -342,48 +341,51 @@
                 maxLabelWidth = Math.max(maxLabelWidth, label.box.width());
             };
 
-            var innerBox = new Box(
-                    targetBox.x1, targetBox.y1 + halfLabelHeight,
-                    targetBox.x1 + maxLabelWidth + options.tickSize, targetBox.y2 - halfLabelHeight);
+            axis.box = new Box( targetBox.x1, targetBox.y1,
+                                targetBox.x1 + maxLabelWidth + options.majorTickSize, targetBox.y2);
 
-            var y = innerBox.y1,
-                step = innerBox.height() / (majorDivisions - 1);
+            var majorTickPositions = axis.getMajorDivisionsPositions();
             for (var i = 0; i < children.length; i++) {
                 var label = children[i],
-                    labelY = round(y - halfLabelHeight, COORD_PRECISION);
+                    labelY = majorTickPositions[i] - (label.box.height() / 2);
 
                 label.updateLayout(new Box(
-                    innerBox.x1, labelY,
-                    innerBox.x1 + maxLabelWidth, labelY + label.box.height())
+                    targetBox.x1, labelY,
+                    targetBox.x1 + maxLabelWidth, labelY + label.box.height())
                 );
-
-                y += step;
             };
-
-            axis.box = new Box( targetBox.x1, targetBox.y1,
-                                innerBox.x2, targetBox.y2);
-            axis.innerBox = innerBox;
         },
 
         getViewElements: function(factory) {
             var axis = this,
                 children = axis.children,
                 options = axis.options,
-                halfLabelHeight = children[0].box.height() / 2;
                 childElements = ChartElement.prototype.getViewElements.call(axis, factory);
 
-            for (var i = 0; i < children.length; i++) {
-                var label = children[i],
-                    tickY = round(label.box.y1 + label.box.height() / 2);
-                childElements.push(
-                    factory.line(axis.box.x2 - options.tickSize, tickY,
-                                 axis.box.x2, tickY));
+            var majorTickPositions = axis.getMajorDivisionsPositions();
+            if (options.line.toLowerCase() == "solid") {
+                childElements.push(factory.line(
+                        axis.box.x2, majorTickPositions[0],
+                        axis.box.x2, majorTickPositions[majorTickPositions.length - 1]));
             }
 
-            childElements.push(factory.line(
-                    axis.innerBox.x2, axis.innerBox.y1,
-                    axis.innerBox.x2, axis.innerBox.y2));
+            [].push.apply(childElements, axis.renderTicks(factory));
+
             return childElements;
+        },
+
+        renderTicks: function(factory) {
+            var axis = this,
+                options = axis.options,
+                box = axis.box;
+
+            var majorTickPositions = axis.getMajorDivisionsPositions();
+            return $.map(majorTickPositions, function(majorTickY) {
+                return factory.line(
+                    box.x2 - options.majorTickSize, majorTickY,
+                    box.x2, majorTickY
+                );
+            });
         },
 
         autoMajorUnit: function (min, max) {
@@ -466,6 +468,30 @@
             var options = this.options;
 
             return Math.round((options.max - options.min) / options.majorUnit) + 1;
+        },
+
+        getMajorDivisionsPositions: function() {
+            var axis = this,
+                children = axis.children,
+                box = axis.box,
+                majorDivisions = axis.getMajorDivisions(),
+                marginTop = 0,
+                marginBottom = 0;
+
+            if (children.length > 1) {
+                marginTop = marginBottom = children[0].box.height() / 2;
+            }
+
+            var step = (box.height() - marginTop - marginBottom) / (majorDivisions - 1),
+                y = box.y1 + marginTop,
+                positions = [];
+
+            for (var i = 0; i < majorDivisions; i++) {
+                positions.push(y);
+                y = round(y + step, COORD_PRECISION);
+            }
+
+            return positions;
         }
     });
 

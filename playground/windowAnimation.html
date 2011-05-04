@@ -31,6 +31,10 @@
             }
             .animatee .content,
             .animatee2 .content {
+                -moz-box-sizing: border-box;
+                -webkit-box-sizing: border-box;
+                box-sizing: border-box;
+                padding:  .5em;
                 width: 100%;
                 position: relative;
                 top: 0;
@@ -88,19 +92,19 @@
         <script type="text/javascript" charset="utf-8">
             $(document).ready(function() {
                 $("button.play").click(function() {
-                    $(".animatee").kendoAnimate("zoomIn", 500);
+                    $(".animatee").kendoAnimate("zoomOut fadeOut", 500);
                 });
 
                 $("button.reverse").click(function() {
-                    $(".animatee").kendoAnimate("zoomIn", 500, true);
+                    $(".animatee").kendoAnimate("zoomOut fadeOut", 500, true);
                 });
 
                 $("button.play").click(function() {
-                    $(".animatee2").kendoAnimate("slideRight", 500);
+                    $(".animatee2").kendoAnimate("slideRight fadeOut", 500);
             });
 
                 $("button.reverse").click(function() {
-                    $(".animatee2").kendoAnimate("slideRight", 500, true);
+                    $(".animatee2").kendoAnimate("slideRight fadeOut", 500, true);
                 });
             });
         </script>
