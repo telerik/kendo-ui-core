@@ -318,7 +318,9 @@
             line: "solid",
             majorUnit: 0.1,
             majorTicks: "outside",
-            majorTickSize: 4
+            majorTickSize: 4,
+
+            _snapLineToBottom: false
         },
 
         init: function() {
@@ -346,8 +348,10 @@
                 maxLabelWidth = Math.max(maxLabelWidth, label.box.width());
             };
 
-            axis.box = new Box( targetBox.x1, targetBox.y1,
-                                targetBox.x1 + maxLabelWidth + options.majorTickSize, targetBox.y2);
+            axis.box = new Box(
+                targetBox.x1, targetBox.y1,
+                targetBox.x1 + maxLabelWidth + options.majorTickSize, targetBox.y2
+            );
 
             var majorTickPositions = axis.getMajorDivisionsPositions();
             for (var i = 0; i < children.length; i++) {
@@ -484,7 +488,10 @@
                 marginBottom = 0;
 
             if (children.length > 1) {
-                marginTop = marginBottom = children[0].box.height() / 2;
+                marginTop = children[0].box.height() / 2;
+                if (!axis.options._snapLineToBottom) {
+                    marginBottom = marginTop;
+                }
             }
 
             var step = (box.height() - marginTop - marginBottom) / (majorDivisions - 1),
@@ -639,11 +646,23 @@
         },
 
         updateLayout: function(targetBox) {
-            var plotArea = this;
+            var plotArea = this,
+                axisY = plotArea.children[0],
+                axisX = plotArea.children[1];
+
             plotArea.box = targetBox;
 
-            plotArea.children[0].updateLayout(targetBox);
-            plotArea.children[1].updateLayout(targetBox);
+            axisY.updateLayout(targetBox);
+            axisX.updateLayout(new Box(
+                axisY.box.x2, targetBox.y1,
+                targetBox.x2, targetBox.y2
+            ));
+
+            axisY.options._snapLineToBottom = true;
+            axisY.updateLayout(new Box(
+                targetBox.x1, targetBox.y1,
+                targetBox.x2, axisX.box.y1
+            ));
         }
     });
 
