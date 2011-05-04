@@ -5,7 +5,7 @@
         scaleProperties = { scale: 0, scaleX: 0, scaleY: 0, scale3d: 0 },
         translateProperties = { translate: 0, translateX: 0, translateY: 0, translate3d: 0 },
         matrix3d = [ 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1 ],
-        transformNon3D = { rotate: '0, 0, 0, @@', scale: '@@, 1', translate: '@@, 0' },
+        transformNon3D = { rotate: '', scale: '', translate: '' },
         transformProps = ['perspective', 'rotate', 'rotateX', 'rotateY', 'rotateZ', 'rotate3d', 'scale', 'scaleX', 'scaleY', 'scaleZ', 'scale3d', 'skew', 'skewX', 'skewY', 'translate', 'translateX', 'translateY', 'translateZ', 'translate3d', 'matrix', 'matrix3d'];
 
     if (kendo.support.transitions) {
@@ -58,7 +58,7 @@
                     }).length) {
                         transition.complete.call(transition.object);
 
-                        transition.object.css(kendo.support.transitions.css + 'transition', 'none'); // remove any leftover transitions in advance
+                        transition.object[0].style[kendo.support.transitions.prefix + 'Transition'] = '';
                         kendo.fx.dequeueTransition(transition.object);
                 }
             }
@@ -107,7 +107,6 @@
 
             if (noqueue)
                 kendo.fx.dequeueTransition(currentTransition.object);
-
         };
 
         extend(kendo.fx, {
@@ -116,7 +115,7 @@
                 options = extend({
                         queue: true,
                         duration: 200,
-                        ease: '',
+                        ease: 'ease-out',
                         complete: null,
                         exclusive: 'all'
                     },
@@ -164,8 +163,11 @@
             },
 
             advanceQueue: function() {
-                this[0].style[kendo.support.transitions.property + 'Transition'] = 'none';
                 kendo.fx.dequeueTransition(this);
+
+                if (!(this.selector in this.timeline)) {
+                    this[0].style[kendo.support.transitions.prefix + 'Transition'] = '';
+                }
 
                 activateTask(this);
             },
@@ -180,11 +182,11 @@
             },
 
             dequeueTransition: function(element) {
-                if (!element.timeline[element.selector]) return;
+                if (!(element.selector in element.timeline)) return;
 
                 element.timeline[element.selector].shift();
 
-                if (element.timeline[element.selector] == [])
+                if (!element.timeline[element.selector].length)
                     delete element.timeline[element.selector];
             },
 
@@ -240,9 +242,12 @@
             kendo.fx.transition(element, properties, extend({ queue: false }, options));
         } else {
             $.each(transformProps, function(idx, value) { // remove transforms to avoid IE and older browsers confusion
-                var params = [];
+                if (!(value in properties)) return;
 
-                if (value in scaleProperties && properties[value]) {
+                var params = [],
+                    currentValue = properties[value]+ ' '; // We need to match
+
+                if (value in scaleProperties && currentValue) {
                     !element.data('scale') && element.data('scale', {
                                 top: element[0].offsetTop,
                                 left: element[0].offsetLeft,
@@ -252,7 +257,7 @@
 
                     var originalScale = element.data('scale');
 
-                    params = properties[value].match(/^(-?[\d\.]+)?[\w\s]*,?\s*(-?[\d\.]+)?[\w\s]*/i);
+                    params = currentValue.match(/^(-?[\d\.]+)?[\w\s]*,?\s*(-?[\d\.]+)?[\w\s]*/i);
                     if (params) {
                         var scaleX = value == 'scaleY' ? +null : +params[1],
                             scaleY = value == 'scaleY' ? +params[1] : +params[2] || +params[1];
@@ -268,7 +273,7 @@
                                 });
                     }
                 } else
-                    if (value in translateProperties && properties[value]) {
+                    if (value in translateProperties && currentValue) {
                         !element.data('translate') && element.data('translate', {
                                     top: element[0].offsetTop,
                                     left: element[0].offsetLeft
@@ -276,7 +281,7 @@
 
                         var originalPosition = element.data('translate');
 
-                        params = properties[value].match(/^(-?[\d\.]+)?[\w\s]*,?\s*(-?[\d\.]+)?[\w\s]*/i);
+                        params = currentValue.match(/^(-?[\d\.]+)?[\w\s]*,?\s*(-?[\d\.]+)?[\w\s]*/i);
                         if (params) {
 
                             var dX = value == 'translateY' ? +null : +params[1],
@@ -305,7 +310,6 @@
         },
         fadeIn: {
             play: function(element, properties, options) {
-                element.css("opacity", 0);
                 animate(element, extend({ opacity: 1 }, properties), options);
             },
             reverse: function(element, properties, options) {
@@ -314,34 +318,34 @@
         },
         zoomIn: {
             play: function(element, properties, options) {
-                animate(element, extend({ scale: '1' }, properties), options);
+                animate(element, extend({ scale: 1 }, properties), options);
             },
             reverse: function(element, properties, options) {
-                animate(element, extend({ scale: '0' }, properties), options);
+                animate(element, extend({ scale: 0 }, properties), options);
             }
         },
         zoomOut: {
             play: function(element, properties, options) {
-                animate(element, extend({ scale: '0' }, properties), options);
+                animate(element, extend({ scale: 0 }, properties), options);
             },
             reverse: function(element, properties, options) {
-                animate(element, extend({ scale: '1' }, properties), options);
+                animate(element, extend({ scale: 1 }, properties), options);
             }
         },
         slideLeft: {
             play: function(element, properties, options) {
-                animate(element, extend({ translateX: -element.width() + 'px' }, properties), options);
+                animate(element, extend({ translate: -element.width() + 'px' }, properties), options);
             },
             reverse: function(element, properties, options) {
-                animate(element, extend({ translateX: '0' }, properties), options);
+                animate(element, extend({ translate: 0 }, properties), options);
         }
         },
         slideRight: {
             play: function(element, properties, options) {
-                animate(element, extend({ translateX: element.width() + 'px' }, properties), options);
+                animate(element, extend({ translate: element.width() + 'px' }, properties), options);
             },
             reverse: function(element, properties, options) {
-                animate(element, extend({ translateX: '0' }, properties), options);
+                animate(element, extend({ translate: 0 }, properties), options);
             }
         }
     });

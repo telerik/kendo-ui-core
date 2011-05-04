@@ -947,15 +947,15 @@
         support.hasHW3D = 'WebKitCSSMatrix' in window && 'm11' in new WebKitCSSMatrix();
 
         $.each([ 'Moz', 'webkit', 'O', 'ms' ], function () {
-            var prefix = this;
+            var prefix = this.toString();
 
             if (typeof table.style[prefix + 'Transition'] === 'string') {
-                prefix = prefix.toLowerCase();
+                var lowPrefix = prefix.toLowerCase();
 
                 support.transitions = {
-                    css: '-' + prefix + '-',
-                    property: prefix,
-                    event: (prefix === 'o' || prefix === 'webkit') ? prefix : ''
+                    css: '-' + lowPrefix + '-',
+                    prefix: prefix,
+                    event: (lowPrefix === 'o' || lowPrefix === 'webkit') ? lowPrefix : ''
                 };
 
                 return false;
