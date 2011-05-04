@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.ui.Navigatable</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.navigatable.js"></script>
+        <link rel="stylesheet" href="../qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.ui.Navigatable</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var Navigatable = kendo.ui.Navigatable,
+                ul;
+
+            module("kendo.ui.Navigatable", {
+                setup: function() {
+                    ul = $("<ul><li>foo</li><li>bar</li><li>baz</li></ul>").appendTo(document.body);
+                    ul.press = function(key) {
+                        return this.trigger( { type: "keydown", keyCode: key } );
+                    }
+                },
+                teardown: function() {
+                    ul.remove();
+                }
+            });
+
+            test("navigatable class is applied", function() {
+                ul.kendoNavigatable();
+
+                ok(ul.is(".t-navigatable"));
+            });
+
+            test("tabindex is set to 0", function() {
+                ul.kendoNavigatable();
+
+                equal(ul.attr("tabIndex"), 0);
+            });
+
+            test("positive tabindex is retained", function() {
+                ul.attr("tabIndex", 1).kendoNavigatable();
+
+                equal(ul.attr("tabIndex"), 1);
+            });
+
+            test("negative tabindex is set to 0", function() {
+                ul.attr("tabIndex", -1).kendoNavigatable();
+
+                equal(ul.attr("tabIndex"), 0);
+            });
+            test("first child is focused when the navigatable is focused", function() {
+                ul.kendoNavigatable().focus();
+
+                ok(ul.children().first().is(".t-state-focused"));
+            });
+
+            test("pressing down arrow makes the next child focused", function() {
+                ul.kendoNavigatable().focus().press(kendo.keys.DOWN);
+
+                ok(ul.children().eq(1).is(".t-state-focused"));
+                ok(!ul.children().eq(0).is(".t-state-focused"));
+            });
+
+            test("pressing up arrow makes the previous child focused", function() {
+                ul.kendoNavigatable().focus().press(kendo.keys.DOWN).press(kendo.keys.UP);
+
+                ok(ul.children().eq(0).is(".t-state-focused"));
+                ok(!ul.children().eq(1).is(".t-state-focused"));
+            });
+
+            test("first child remains focused when up arrow is pressed", function() {
+                ul.kendoNavigatable().focus().press(kendo.keys.UP);
+                ok(ul.children().eq(0).is(".t-state-focused"));
+            });
+
+            test("last child remains focused when down arrow is pressed", function() {
+                ul.kendoNavigatable().focus();
+
+                ul.press(kendo.keys.DOWN);
+                ul.press(kendo.keys.DOWN);
+                ul.press(kendo.keys.DOWN);
+                ok(ul.children().last().is(".t-state-focused"));
+            });
+
+            test("the current field contains the focused child", function() {
+                var navigatable = new Navigatable(ul);
+
+                ul.focus();
+
+                ok(navigatable.current[0] === ul.children().first()[0]);
+            });
+
+            test("focused state is removed on blur", function() {
+                ul.kendoNavigatable().focus().blur();
+
+                ok(!ul.children().first().is(".t-state-focused"));
+            });
+
+            test("focused state is maintained after refocus", function() {
+                ul.kendoNavigatable().focus().blur().focus();
+
+                ok(ul.children().first().is(".t-state-focused"));
+            });
+
+            test("clicking a child focuses it", function() {
+                ul.kendoNavigatable();
+
+                ul.children().last().mousedown();
+
+                ok(ul.children().last().is(".t-state-focused"));
+            });
+
+            test("pressing up uses options.up", function() {
+                var wasCalled = false;
+
+                ul.kendoNavigatable( {
+                    up: function() {
+                        wasCalled = true;
+                    }
+                });
+
+                ul.focus().press(kendo.keys.UP);
+                ok(wasCalled);
+            });
+
+            test("pressing down uses options.down", function() {
+                var wasCalled = false;
+
+                ul.kendoNavigatable( {
+                    down: function() {
+                        wasCalled = true;
+                    }
+                });
+
+                ul.focus().press(kendo.keys.DOWN);
+                ok(wasCalled);
+            });
+
+            test("pressing left uses options.left", function() {
+                var wasCalled = false;
+
+                ul.kendoNavigatable( {
+                    left: function() {
+                        wasCalled = true;
+                    }
+                });
+
+                ul.focus().press(kendo.keys.LEFT);
+                ok(wasCalled);
+            });
+
+            test("pressing right uses options.right", function() {
+                var wasCalled = false;
+
+                ul.kendoNavigatable( {
+                    right: function() {
+                        wasCalled = true;
+                    }
+                });
+
+                ul.focus().press(kendo.keys.RIGHT);
+                ok(wasCalled);
+            });
+
+            test("initial focus uses options.home", function() {
+                var wasCalled = false;
+
+                ul.kendoNavigatable( {
+                    home: function() {
+                        wasCalled = true;
+                    }
+                });
+
+                ul.focus();
+                ok(wasCalled);
+            });
+     </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>

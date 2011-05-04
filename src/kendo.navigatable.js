@@ -20,25 +20,30 @@
     }
 
     function Navigatable(element, options) {
-        var that = this;
+        var that = this,
+            actions = {};
 
         Component.apply(that, arguments);
 
+        element.tabIndex = Math.max(element.tabIndex, 0);
+
+        options = that.options;
+
         that.element
             .addClass(NAVIGATABLE)
-            .attr("tabIndex", 0)
             .bind( {
                 keydown: proxy(that._keydown, that),
                 focus: proxy(that._focus, that),
                 blur: proxy(that._blur, that)
             })
-            .delegate("." + NAVIGATABLE + that.options.filter, "mousedown", proxy(that._mousedown, that));
+            .delegate("." + NAVIGATABLE + options.filter, "mousedown", proxy(that._mousedown, that));
 
-        that.actions = {};
-        that.actions[keys.UP] = that.options.up;
-        that.actions[keys.DOWN] = that.options.down;
-        that.actions[keys.LEFT] = that.options.left;
-        that.actions[keys.RIGHT] = that.options.right;
+        actions[keys.UP] = options.up;
+        actions[keys.DOWN] = options.down;
+        actions[keys.LEFT] = options.left;
+        actions[keys.RIGHT] = options.right;
+
+        that.actions = actions;
     }
 
     Navigatable.prototype = {
