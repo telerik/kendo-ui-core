@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    <title>Navigatable</title>
+    <script src="../src/jquery.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../src/kendo.navigatable.js" type="text/javascript" charset="utf-8"></script>
+    <style type="text/css" media="screen">
+        ul
+        {
+            margin:0;
+            padding:0;
+            width: 200px;
+        }
+        li
+        {
+            border: 1px solid black;
+            list-style:none
+        }
+        .t-state-focused
+        {
+            background: blue;
+        }
+
+        table
+        {
+            border-collapse: collapse;
+            border: 1px solid black;
+        }
+
+        table th,
+        table td
+        {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li>foo</li>
+        <li>bar</li>
+        <li>baz</li>
+    </ul>
+
+    <table cellspacing="0">
+        <tr><th>Header 1</th><th>Header 2</th></tr>
+        <tbody>
+        <tr><td>foo</td><td>bar</td></tr>
+        <tr><td>foo</td><td>bar</td></tr>
+        <tr><td>foo</td><td>bar</td></tr>
+        <tr><td>foo</td><td>bar</td></tr>
+        <tr><td>foo</td><td>bar</td></tr>
+        <tr><td>foo</td><td>bar</td></tr>
+        <tr><td>foo</td><td>bar</td></tr>
+        <tr><td>foo</td><td>bar</td></tr>
+        <tr><td>foo</td><td>bar</td></tr>
+        <tr><td>foo</td><td>bar</td></tr>
+        <tr><td>foo</td><td>bar</td></tr>
+        <tr><td>foo</td><td>bar</td></tr>
+        <tr><td>foo</td><td>bar</td></tr>
+        <tr><td>foo</td><td>bar</td></tr>
+        <tr><td>foo</td><td>bar</td></tr>
+    </tbody>
+    </table>
+
+    <script type="text/javascript" charset="utf-8">
+        $(document).ready(function() {
+            $("ul").kendoNavigatable();
+            $("table").kendoNavigatable({
+                filter: ">tbody>tr>td",
+                home: function(element) {
+                    return element.find("td:first");
+                },
+                up: function(element, current) {
+                    return current.parent().prev().children().eq(current.index());
+                },
+                down: function(element, current) {
+                    return current.parent().next().children().eq(current.index());
+                },
+                left: function(element, current) {
+                    return current.prev();
+                },
+                right: function(element, current) {
+                    return current.next();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
