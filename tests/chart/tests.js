@@ -1,22 +1,26 @@
 tests.push(
     {
         page: "chart/viewmodel.html",
-        title: "chart viewmodel"
+        title: "View model"
     },
     {
         page: "chart/svg.html",
-        title: "chart svg renderer"
+        title: "SVG Renderer"
     },
     {
         page: "chart/barchart.html",
-        title: "barchart"
+        title: "Bar Chart"
     },
     {
         page: "chart/numericaxis.html",
-        title: "chart numericaxis"
+        title: "NumericAxis"
     },
     {
         page: "chart/categoryaxis.html",
-        title: "chart categoryaxis"
+        title: "CategoryAxis"
+    },
+    {
+        page: "chart/barseries.html",
+        title: "Bar Series"
     }
 );

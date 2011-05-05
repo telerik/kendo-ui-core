@@ -547,7 +547,7 @@
                 maxLabelHeight = Math.max(maxLabelHeight, label.box.height());
             }
 
-            this.box = new Box(
+            axis.box = new Box(
                 targetBox.x1, targetBox.y2 - maxLabelHeight - options.majorTickLength,
                 targetBox.x2, targetBox.y2
             );
@@ -617,6 +617,51 @@
         }
     });
 
+    var BAR_WIDTH_RATIO = 2.6;
+    function BarSeries(axisMin, axisMax, options) {
+        var series = this;
+        ChartElement.call(series);
+
+        series._axisMin = axisMin;
+        series._axisMax = axisMax;
+        series.options = $.extend({}, series.options, options);
+    }
+
+    BarSeries.prototype = new ChartElement();
+    $.extend(BarSeries.prototype, {
+        options: {
+        },
+
+        getViewElements: function(factory) {
+            var series = this,
+                options = series.options,
+                box = series.box,
+                elements = [],
+                dataLength = options.data.length,
+                scale = box.height() / (series._axisMax - series._axisMin),
+                categoryStep = box.width() / dataLength,
+                barWidth = round(categoryStep / BAR_WIDTH_RATIO, COORD_PRECISION),
+                barCenterX = box.x1 + categoryStep / 2,
+                barBottomY = box.y2;
+
+            for (var i = 0; i < dataLength; i++) {
+                var value = options.data[i],
+                    barHeight = round(value * scale, COORD_PRECISION),
+                    barX = round(barCenterX - barWidth / 2, COORD_PRECISION),
+                    barY = round(barBottomY - barHeight, COORD_PRECISION);
+
+                elements.push(factory.rect(barX, barY, barWidth, barHeight));
+                barCenterX += categoryStep;
+            }
+
+            return elements;
+        },
+
+        updateLayout: function(targetBox) {
+            this.box = targetBox;
+        }
+    });
+
 
     function PlotArea(options) {
         var plotArea = this;
@@ -643,12 +688,22 @@
 
             plotArea.children.push(axisY);
             plotArea.children.push(axisX);
+
+            for (var i = 0; i < options.series.length; i++) {
+                var currentSeries = options.series[i];
+                if (currentSeries.type == "bar") {
+                    plotArea.children.push(
+                        new BarSeries(axisY.options.min, axisY.options.max, currentSeries)
+                    );
+                }
+            }
         },
 
         updateLayout: function(targetBox) {
             var plotArea = this,
-                axisY = plotArea.children[0],
-                axisX = plotArea.children[1];
+                children = plotArea.children,
+                axisY = children[0],
+                axisX = children[1];
 
             plotArea.box = targetBox;
 
@@ -663,6 +718,15 @@
                 targetBox.x1, targetBox.y1,
                 targetBox.x2, axisX.box.y1
             ));
+
+            var seriesBox = new Box(
+                axisY.box.x2, targetBox.y1,
+                targetBox.x2, axisX.box.y1
+            );
+
+            for (var i = 2; i < children.length; i++) {
+                children[i].updateLayout(seriesBox);
+            }
         }
     });
 
@@ -714,7 +778,10 @@
         },
 
         rect: function(x, y, width, height) {
-            return new SVGPath([[x, y], [x + width, y], [x + width, y + width], [x, y + width], [x, y]]);
+            return new SVGPath(
+                [[x, y], [x + width, y],
+                [x + width, y + height], [x, y + height], [x, y]]
+            );
         },
 
         line: function(x1, y1, x2, y2) {
@@ -939,6 +1006,7 @@
     Chart.RootElement = RootElement;
     Chart.NumericAxis = NumericAxis;
     Chart.CategoryAxis = CategoryAxis;
+    Chart.BarSeries = BarSeries;
     Chart.Title = Title;
     Chart.Legend = Legend;
     Chart.PlotArea = PlotArea;
