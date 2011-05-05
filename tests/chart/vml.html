@@ -130,12 +130,12 @@
                 });
 
                 test("moves to first point", function() {
-                    equal(path.renderPoints(), "m 10.5,20.5");
+                    equal(path.renderPoints(), "m 10,20");
                 });
 
                 test("draws line", function() {
                     path.points.push([20, 30], [40, 50]);
-                    equal(path.renderPoints(), "m 10.5,20.5 l 20.5,30.5, 40.5,50.5");
+                    equal(path.renderPoints(), "m 10,20 l 20,30, 40,50");
                 });
 
             })();
