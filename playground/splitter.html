@@ -3,18 +3,20 @@
     <head>
         <title>splitter</title>
         <script type="text/javascript" src="../src/jquery.js"></script>
-        <script type="text/javascript" src="../src/kendo.loader.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.query.js"></script>
+        <script src="../src/kendo.draganddrop.js"></script>
+        <script src="../src/kendo.resizable.js"></script>
+        <script src="../src/kendo.splitter.js"></script>
+
         <link type="text/css" href="/telerik.mvc.examples.fixes/Content/telerik.common.css" rel="stylesheet"/>
         <link type="text/css" href="/telerik.mvc.examples.fixes/Content/telerik.vista.css" rel="stylesheet"/>
-        <script type="text/javascript">
-            kendo.loader.splitter();
-        </script>
     </head>
     <body>
-        <div  style='width: 207px;height:100px'><div>1</div><div>2</div></div>
+        <div  style='width: 300px;height:100px'><div>1</div><div>2</div><div>3</div></div>
           <script type="text/javascript">
               $(document).ready(function() {
-                  $("div").kendoSplitter({panes: [ { minSize: "35px", maxSize: "150px" }, {} ]});
+                $("div").kendoSplitter({panes: [ { minSize: "35px", maxSize: "60px" }, {minSize:1}, {minSize: 1} ]});
               });
         </script>
     </body>

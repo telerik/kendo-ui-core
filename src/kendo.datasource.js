@@ -227,6 +227,7 @@
             data = [],
             cells,
             record,
+            cell,
             empty;
 
         for (rowIndex = 0, rowCount = rows.length; rowIndex < rowCount; rowIndex++) {
@@ -235,9 +236,10 @@
             cells = rows[rowIndex].cells;
 
             for (fieldIndex = 0; fieldIndex < fieldCount; fieldIndex++) {
-                if(cells[fieldIndex].nodeName.toLowerCase() !== "th") {
+                cell = cells[fieldIndex];
+                if(cell.nodeName.toLowerCase() !== "th") {
                     empty = false;
-                    record[fields[fieldIndex].field] = cells[fieldIndex].innerHTML;
+                    record[fields[fieldIndex].field] = cell.innerHTML;
                 }
             }
             if(!empty) {
