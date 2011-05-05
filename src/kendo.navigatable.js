@@ -30,12 +30,14 @@
         options = that.options;
 
         that.element
-            .addClass(NAVIGATABLE)
             .bind( {
                 keydown: proxy(that._keydown, that),
                 focus: proxy(that._focus, that),
                 blur: proxy(that._blur, that)
             })
+        that.context = $(options.context || that.element);
+
+        that.context.addClass(NAVIGATABLE)
             .delegate("." + NAVIGATABLE + options.filter, "mousedown", proxy(that._mousedown, that));
 
         actions[keys.UP] = options.up;
@@ -49,10 +51,10 @@
     Navigatable.prototype = {
         options: {
             filter: ">*",
-            up: function(element, current) {
+            up: function(context, current) {
                 return current.prev();
             },
-            down: function(element, current) {
+            down: function(context, current) {
                 return current.next();
             },
             left: function() {
@@ -61,8 +63,8 @@
             right: function() {
                 return null;
             },
-            home: function(element, current) {
-                return element.children().first();
+            home: function(context, current) {
+                return context.children().first();
             }
         },
         _keydown: function(e) {
@@ -71,7 +73,7 @@
                 action = that.actions[e.keyCode];
 
             if (action) {
-                next = action(that.element, that.current);
+                next = action(that.context, that.current);
                 if (next && next[0]) {
                     blur(that.current);
                     that.current = focus(next);
@@ -82,7 +84,7 @@
             var that = this;
 
             if (!that.current) {
-                that.current = that.options.home(that.element);
+                that.current = that.options.home(that.context);
             }
 
             focus(that.current);
