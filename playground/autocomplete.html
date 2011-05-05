@@ -10,12 +10,19 @@
         <script src="../src/kendo.list.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.popup.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.navigatable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.selectable.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.autocomplete.js" type="text/javascript" charset="utf-8"></script>
         <style type="text/css" media="screen">
             .t-state-focused
             {
                 background-color: red;
             }
+
+            .t-state-selected
+            {
+                background-color: blue;
+            }
+
             ul
             {
                 padding: 0;
@@ -39,7 +46,7 @@
 
         <script type="text/javascript" charset="utf-8">
             $(document).ready(function() {
-                $("input").kendoAutoComplete(["foo", "bar"]);
+                $("input").kendoAutoComplete(["foo", "bar", "baz"]);
             });
         </script>
     </body>
