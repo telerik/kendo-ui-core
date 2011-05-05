@@ -166,77 +166,90 @@
                 }
                 
                 if(!options.single && that._shiftPressed === true) {
-                    that.selectRange(that._firstSelectee(), that._downTarget[0]);
+                    that.selectRange(that._firstSelectee(), that._downTarget);
                 }
                 else {
-                    that.element
-                        .find(options.filter + "." + ACTIVE).each(function() {
-                            var selecee = $(this),
-                                isPrevented = that.trigger("select", { element: this });
-
-                            selecee.removeClass(ACTIVE);                            
-                            if(!isPrevented) {                            
-                                selecee.addClass(SELECTED);
-                            }
-                    });   
-
                     that.element
                         .find(options.filter + "." + UNSELECTING)
                         .removeClass(UNSELECTING)
                         .removeClass(SELECTED);
+
+                    that.value(that.element.find(options.filter + "." + ACTIVE));                                            
                 }
                 if(!that._shiftPressed) {
                     that._lastActive = that._downTarget;
                 }
                 that._downTarget = null;
                 that._shiftPressed = false;
-
-                that.trigger("change", {});
             },
-            values: function() {
-                var that = this;
+            value: function(val) {
+                var that = this,
+                    selectElement = proxy(that._selectElement, that);
+                if(val !== undefined) {
+                    val.each(function() {
+                        selectElement(this);
+                    });
+
+                    that.trigger("change", {});
+                    return;
+                }
+
                 return that.element
-                    .find(that.options.filter + "." + SELECTED)
-                    .toArray();
+                    .find(that.options.filter + "." + SELECTED);
             },
             _firstSelectee: function() {
                 var that = this;                    
                 if(that._lastActive !== null)
-                    return that._lastActive[0];
+                    return that._lastActive;
 
-                var selected = that.values();
+                var selected = that.value();
                 return selected.length > 0 ? selected[0] : 
-                    that.element.find(that.options.filter)[0];
+                    that.element.find(that.options.filter);
             },
+            _selectElement: function(el) {
+                var selecee = $(el),
+                isPrevented = this.trigger("select", { element: el });
+
+                selecee.removeClass(ACTIVE);
+                if(!isPrevented) {
+                    selecee.addClass(SELECTED);
+                }
+            },
+            clear: function() {
+                var that = this;
+                that.element
+                    .find(that.options.filter + "." + SELECTED)
+                    .removeClass(SELECTED);
+            },           
             selectRange: function(start, end) {
                 var that = this,
-                    found = false;
-               
-                that.element.find(that.options.filter).each(function () {                    
-                    if(found) {                        
-                        $(this).addClass(SELECTED);
-                        if(this === end) {
-                            $(this).removeClass(ACTIVE);                            
-                            found = false;
-                        }
+                    found = false,
+                    selectElement = proxy(that._selectElement, that),
+                    selectee;
+                start = $(start)[0];
+                end = $(end)[0];              
+                that.element.find(that.options.filter).each(function () {
+                    selectee = $(this);
+                    if(found) {                                                
+                        selectElement(this);
+                        found = !(this === end);
                     }
                     else if(this === start) {
-                        found = start === end ? false : true;
-                        $(this).addClass(SELECTED);
+                        found = !(start === end);
+                        selectElement(this);
                     }
                     else if(this === end) {
                         var tmp = start;
                         start = end;
                         end = tmp;
                         found = true;
-                        $(this)                            
-                            .removeClass(ACTIVE)
-                            .addClass(SELECTED);
+                        selectElement(this);
                     }
                     else {
-                        $(this).removeClass(SELECTED);
+                        selectee.removeClass(SELECTED);
                     }
                 });
+                that.trigger("change", {});
             }
     }
     kendo.ui.plugin("Selectable", Selectable, kendo.ui.Component);
