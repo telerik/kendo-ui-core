@@ -93,15 +93,13 @@
         },
         _change: function(candidate) {
             var that = this;
-            if (candidate && candidate[0]) {
+            if (candidate && candidate[0] && (!that.current || that.current[0] !== candidate[0])) {
                 candidate.addClass(FOCUSED);
-                if (!that.current || that.current[0] !== candidate[0]) {
-                    if (that.current) {
-                        that.current.removeClass(FOCUSED);
-                    }
-                    that.current = candidate;
-                    that.trigger(FOCUS);
+                if (that.current) {
+                    that.current.removeClass(FOCUSED);
                 }
+                that.current = candidate;
+                that.trigger(FOCUS);
             }
         }
     }
