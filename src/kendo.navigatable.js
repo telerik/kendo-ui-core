@@ -3,21 +3,10 @@
         ui = kendo.ui,
         keys = kendo.keys,
         FOCUSED = "t-state-focused",
+        FOCUS = "focus",
         NAVIGATABLE = "t-navigatable",
         proxy = $.proxy,
         Component = ui.Component;
-
-    function focus(element) {
-        if (element && element[0]) {
-            return element.addClass(FOCUSED);
-        }
-    }
-
-    function blur(element) {
-        if (element && element[0]) {
-            return element.removeClass(FOCUSED);
-        }
-    }
 
     function Navigatable(element, options) {
         var that = this,
@@ -30,12 +19,14 @@
         options = that.options;
 
         that.element
-            .addClass(NAVIGATABLE)
-            .bind( {
+            .bind({
                 keydown: proxy(that._keydown, that),
                 focus: proxy(that._focus, that),
                 blur: proxy(that._blur, that)
             })
+        that.context = $(options.context || that.element);
+
+        that.context.addClass(NAVIGATABLE)
             .delegate("." + NAVIGATABLE + options.filter, "mousedown", proxy(that._mousedown, that));
 
         actions[keys.UP] = options.up;
@@ -44,60 +35,72 @@
         actions[keys.RIGHT] = options.right;
 
         that.actions = actions;
+        that.bind([FOCUS], options);
     }
+
+    $.extend(Navigatable, {
+        up: function(context, current) {
+            return current.prev();
+        },
+        down: function(context, current) {
+            return current.next();
+        },
+        left: function() {
+            return null;
+        },
+        right: function() {
+            return null;
+        },
+        home: function(context, current) {
+            return context.children().first();
+        }
+    });
 
     Navigatable.prototype = {
         options: {
             filter: ">*",
-            up: function(element, current) {
-                return current.prev();
-            },
-            down: function(element, current) {
-                return current.next();
-            },
-            left: function() {
-                return null;
-            },
-            right: function() {
-                return null;
-            },
-            home: function(element, current) {
-                return element.children().first();
-            }
+            up: Navigatable.up,
+            down: Navigatable.down,
+            left: Navigatable.left,
+            right: Navigatable.right,
+            home: Navigatable.home
         },
         _keydown: function(e) {
             var that = this,
-                next,
                 action = that.actions[e.keyCode];
 
             if (action) {
-                next = action(that.element, that.current);
-                if (next && next[0]) {
-                    blur(that.current);
-                    that.current = focus(next);
-                }
+                that._change(action(that.context, that.current));
+
+                e.preventDefault();
             }
         },
         _focus: function(e) {
             var that = this;
 
             if (!that.current) {
-                that.current = that.options.home(that.element);
+                that._change(that.options.home(that.context));
+            } else {
+                that.current.addClass(FOCUSED);
+                that.trigger(FOCUS);
             }
-
-            focus(that.current);
         },
         _blur: function() {
-            var that = this;
-
-            blur(that.current);
+            this.current.removeClass(FOCUSED);
         },
         _mousedown: function(e) {
+            this._change($(e.currentTarget));
+        },
+        _change: function(candidate) {
             var that = this;
-
-            blur(that.current);
-
-            that.current = focus($(e.currentTarget));
+            if (candidate && candidate[0] && (!that.current || that.current[0] !== candidate[0])) {
+                candidate.addClass(FOCUSED);
+                if (that.current) {
+                    that.current.removeClass(FOCUSED);
+                }
+                that.current = candidate;
+                that.trigger(FOCUS);
+            }
         }
     }
 
