@@ -29,6 +29,7 @@
                         transition.complete.call(transition.object);
                         transition.object.css(kendo.support.transitions.css + 'transition', 'none');
 
+                        transition.object.removeData('keys');
                         transition.object.stop();
                 }
             }
@@ -44,7 +45,8 @@
                 eventName = eventName.toLowerCase();
 
             typeof currentTransition.complete == 'function' && element.one(eventName, $.proxy(currentTransition.complete, element));
-            currentTransition.object.one(eventName, $.proxy(kendo.fx.stopQueue, element));
+            if (currentTransition.firstRun)
+                currentTransition.object.one(eventName, $.proxy(kendo.fx.stopQueue, element));
 
             element.css(currentTransition.setup);
 
@@ -68,6 +70,8 @@
         extend(kendo.fx, {
             transition: function(element, properties, options) {
 
+                console.log('start transition', element, properties, options);
+
                 options = extend({
                         duration: 200,
                         ease: 'ease-out',
@@ -82,7 +86,7 @@
                 if (!('timeline' in element))
                     element.timeline = {};
 
-                var transforms = [], cssValues = {}, key, animationStep = {};
+                var transforms = [], cssValues = {}, key;
                 for (key in properties)
                     if (transformProps.indexOf(key) != -1)
                         transforms.push(key + '(' + properties[key] + ')');
@@ -97,20 +101,26 @@
                     CSS: cssValues,
                     object: element,
                     setup: {},
+                    firstRun: false,
                     duration: options.duration,
                     complete: options.complete
                 };
                 currentTask.setup[kendo.support.transitions.css + 'transition'] = options.exclusive + ' ' + options.duration + 'ms ' + options.ease;
 
+                var oldKeys = element.data('keys') || [];
+                if (!oldKeys.length)
+                    currentTask.firstRun = true;
+                        
                 activateTask(currentTask);
 
-                var oldKeys = element.data('keys') || [];
                 $.merge(oldKeys, currentTask.keys);
                 element.data('keys', $.unique(oldKeys));
             },
 
             stopQueue: function(element, clearQueue, gotoEnd) {
-                if ('selector' in this)
+                var isEvent = 'selector' in this;
+
+                if (isEvent)
                     element = this;
 
                 var taskKeys = element.data('keys');
@@ -131,8 +141,11 @@
                 } else
                     element.css(kendo.support.transitions.css + 'transition', 'none');
 
-                element.removeData('keys');
-                return element.stop(clearQueue);
+                if (!isEvent)
+                    element.removeData('keys');
+
+                element.stop(clearQueue);
+                return element;
             }
 
         });
