@@ -1,7 +1,7 @@
 (function($, window, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
-        DataSource = kendo.data.DataSource,
+        DataSource = kendo.data.DataSource,        
         tbodySupportsInnerHtml = kendo.support.tbodyInnerHtml,
         Component = ui.Component,
         extend = $.extend,
@@ -34,6 +34,13 @@
         that._pager();
 
         that.dataSource.read();
+
+        that.element.kendoNavigatable({
+            filter: ">tbody>tr>td",
+            home: function(element) {
+                return element.find("td:first");
+            }
+        });
     }
 
     Grid.prototype = {
