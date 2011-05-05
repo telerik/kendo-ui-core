@@ -10,6 +10,7 @@
         <script src="../../src/kendo.datasource.js"></script>
         <script src="../../src/kendo.popup.js"></script>
         <script src="../../src/kendo.list.js"></script>
+        <script src="../../src/kendo.navigatable.js"></script>
         <script src="../../src/kendo.autocomplete.js"></script>
         <link rel="stylesheet" href="../qunit.css" type="text/css" />
     </head>
@@ -42,21 +43,6 @@
 
                 keydown(kendo.keys.DOWN);
                 ok(autocomplete.ul.is(":visible"));
-            });
-
-            test("DOWN selects the first item", function() {
-                var autocomplete = new AutoComplete(input, ["foo"]);
-
-                keydown(kendo.keys.DOWN);
-                ok(autocomplete.ul.children().first().is(".t-state-selected"));
-            });
-
-            test("pressing DOWN twice selects the second item", function() {
-                var autocomplete = new AutoComplete(input, ["foo", "bar"]);
-
-                keydown(kendo.keys.DOWN);
-                keydown(kendo.keys.DOWN);
-                ok(autocomplete.ul.children().last().is(".t-state-selected"));
             });
 
         </script>
