@@ -62,7 +62,7 @@
                         document.body.innerHTML += content;
 
                         viewPage = viewPage.next(".kendo-view");
-                    } else {
+                    } else { // partial content was served
                         viewPage = $("<div class='kendo-view' />").appendTo("body");
 
                         viewPage[0].innerHTML = content;
