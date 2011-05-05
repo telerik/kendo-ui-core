@@ -5,55 +5,93 @@
         <script src="../src/kendo.core.js"></script>
         <script src="../src/kendo.selectable.js"></script>
         <style type="text/css">
-            .selected 
+            .t-state-selected 
             {
                 background-color: Green;
                 }
+            .t-state-selecting 
+            {
+                background-color: red;
+                }
+            .t-marquee
+            {
+                position:absolute;
+                border:1px dotted black;
+                background: rgba(200, 200, 255, 0.7);
+                border: 1px solid rgba(100, 100, 255, 0.8);
+                }
+            ul
+            {
+                margin:0;
+                padding:0;
+                width: 200px;
+            }
+            li
+            {
+                border: 1px solid black;
+                list-style:none
+            }
+            table
+            {
+                border-collapse: collapse;
+                border: 1px solid black;
+            }
+
+            table th,
+            table td
+            {
+                border: 1px solid black;
+            }
         </style>
     </head>
-    <body>		
-	    <table id="table1" style="table-layout:fixed">
-		    <thead>
-			    <tr>
-				    <th >Foo</th>
-				    <th >Bar</th>                  
-			    </tr>
-		    </thead>
-		    <tbody>
-			    <tr><td>1</td><td>4</td></tr>
-			    <tr><td>2</td><td>5</td></tr>
-			    <tr>
-                    <td>3</td>
-                    <td>
-                        <table>
-                            <thead>
-                                <tr><th>Nested Table</th></tr>
-                            </thead>
-                            <tbody>
-                                <tr><td>some text</td></tr>
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
-		    </tbody>
-	    </table>
-
+    <body>
         <ul>
-           <li>1</li>
-           <li>2</li>
-           <li>3</li>
-           <li>1</li>
-           <li>2</li>
-           <li>3</li>
-           <li>1</li>
-           <li>2</li>
+            <li>foo</li>
+            <li>bar</li>
+            <li>baz</li>
+            <li>foo</li>
+            <li>bar</li>
+            <li>baz</li>
+            <li>foo</li>
+            <li>bar</li>
+            <li>baz</li>
         </ul>
+
+        <table cellspacing="0">
+            <thead>
+                <tr><th>Header 1</th><th>Header 2</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>foo</td><td>bar</td></tr>
+                <tr><td>foo</td><td>bar</td></tr>
+
+                <tr><td>foo</td><td>bar</td></tr>
+                <tr><td>foo</td><td>bar</td></tr>
+                <tr><td>foo</td><td>bar</td></tr>
+                <tr><td>foo</td><td>bar</td></tr>
+                <tr><td>foo</td><td>bar</td></tr>
+
+                <tr><td>foo</td><td>bar</td></tr>
+                <tr><td>foo</td><td>bar</td></tr>
+                <tr><td>foo</td><td>bar</td></tr>
+                <tr><td>foo</td><td>bar</td></tr>
+                <tr><td>foo</td><td>bar</td></tr>
+
+                <tr><td>foo</td><td>bar</td></tr>
+                <tr><td>foo</td><td>bar</td></tr>
+                <tr><td>foo</td><td>bar</td></tr>
+            </tbody>
+        </table>
+
         <script>
             $(document).ready(function() {
-                $("#table1 tbody").kendoSelectable({
+                var s = $("table>tbody").kendoSelectable({
                     single: false,
-                    filter: "td"
+                    filter: ">tr>td"
+                }).data("kendoSelectable").bind("select", function(arg) {
+                    //console.log("Selecting: " + arg.element);    
                 });
+                
 
                 $("ul").kendoSelectable({
                     single: false                    
