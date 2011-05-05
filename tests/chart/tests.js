@@ -1,11 +1,19 @@
 tests.push(
     {
+        page: "chart/configuration.html",
+        title: "Chart configuration"
+    },
+    {
         page: "chart/viewmodel.html",
         title: "View model"
     },
     {
         page: "chart/svg.html",
         title: "SVG Renderer"
+    },
+    {
+        page: "chart/vml.html",
+        title: "VML Renderer"
     },
     {
         page: "chart/barchart.html",
