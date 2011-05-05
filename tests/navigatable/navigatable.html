@@ -19,12 +19,13 @@
             var Navigatable = kendo.ui.Navigatable,
                 ul;
 
+            $.fn.press = function(key) {
+                return this.trigger( { type: "keydown", keyCode: key } );
+            }
+
             module("kendo.ui.Navigatable", {
                 setup: function() {
                     ul = $("<ul><li>foo</li><li>bar</li><li>baz</li></ul>").appendTo(document.body);
-                    ul.press = function(key) {
-                        return this.trigger( { type: "keydown", keyCode: key } );
-                    }
                 },
                 teardown: function() {
                     ul.remove();
@@ -179,6 +180,15 @@
 
                 ul.focus();
                 ok(wasCalled);
+            });
+
+            test("can specify context which is different from the element", function() {
+                var input = $("<input />").kendoNavigatable( {
+                    context: ul
+                });
+
+                input.focus().press(kendo.keys.DOWN);
+                ok(ul.children().eq(1).is(".t-state-focused"));
             });
      </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
