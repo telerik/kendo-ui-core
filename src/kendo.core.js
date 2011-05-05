@@ -1049,6 +1049,13 @@
        });
     }
 
+    $.fn.kendoStop = function(clearQueue, gotoEnd) {
+        if (kendo.support.transitions && 'stopQueue' in kendo.fx)
+            return kendo.fx.stopQueue(this, clearQueue || false, gotoEnd || false);
+        else
+            return this.stop(clearQueue, gotoEnd);
+    };
+
     $.fn.kendoAnimate = function(options, duration, reverse, complete) {
         return animate(this, options, duration, reverse, complete);
     };
