@@ -61,9 +61,7 @@
                 });
             });
 
-            test("switchView() loads remote partial content", function() {
-                stop(300);
-
+            asyncTest("switchView() loads remote partial content", function() {
                 kendo.mobile.switchView("foo", function() {
                     start();
 
@@ -71,9 +69,7 @@
                 });
             });
 
-            test("switchView() does not add the same view twice", function() {
-                stop(300);
-
+            asyncTest("switchView() does not add the same view twice", function() {
                 kendo.mobile.switchView("foo", function() {
                     kendo.mobile.switchView("foo", function() {
                         start();
@@ -110,9 +106,7 @@
                 equals(kendo.mobile.decodeScripts(encoded), initialScript);
             });
 
-            test("switchPage() loads multiple views", function() {
-                stop(300);
-
+            asyncTest("switchPage() loads multiple views", function() {
                 $.mockjaxClear();
 
                 $.mockjax({
@@ -129,28 +123,6 @@
                     equals($(".kendo-view").length, 2);
                 });
             });
-
-            /*test("switchPage() executes view scripts", function() {
-                stop(300);
-
-                $.mockjaxClear();
-
-                $.mockjax({
-                    url: "foo",
-                    responseText: "<!doctype html>"
-                                + "<html><body>"
-                                + "<div class='kendo-page'><script>alert(1);foobar = 1;<\/script></div>"
-                                + "</body></html>"
-                });
-
-                kendo.mobile.switchView("foo", function() {
-                    start();
-
-                    equals(window.foobar, 1);
-
-                    delete window.foobar;
-                });
-            });*/
 
             module("kendo.mobile.history");
 
