@@ -20,7 +20,18 @@
             }
         },
 
-        loadView: function() {
+        isFullPage: function(content) {
+            return /^\s*<!doctype[^>]*>/i.test(content);
+        },
+
+        encodeScripts: function(content) {
+            return content.replace(/<script([^>]*)>/gi, "<kendo:script$1>")
+                          .replace(/<\/script>/gi, "</kendo:script>");
+        },
+
+        decodeScripts: function(content) {
+            return content.replace(/<kendo:script([^>]*)>/gi, "<script$1>")
+                          .replace(/<\/kendo:script>/gi, "<\/script>");
         },
 
         switchView: function(view, initCallback) {
@@ -36,26 +47,28 @@
                 return;
             }
 
-            var viewPage = $("<div class='kendo-view' />").appendTo("body");
-
-            viewPage.data("url", view);
-
             $.ajax({
                 url: view,
                 cache: false,
                 dataType: "html",
-                success: function(data) {
-                    data = data.replace(/^<!doctype[^>]*>/i, "");
+                success: function(content) {
+                    var viewPage;
 
-                    var body = $(data).find('body');
+                    if (mobile.isFullPage(content)) {
+                        content = /<body[^>]*>(.*)<\/body>/ig.exec(content)[1];
 
-                    if (body.length > 0) {
-                        data = body[0].innerHTML;
+                        viewPage = $(".kendo-view:last");
+
+                        document.body.innerHTML += content;
+
+                        viewPage = viewPage.next(".kendo-view");
+                    } else {
+                        viewPage = $("<div class='kendo-view' />").appendTo("body");
+
+                        viewPage[0].innerHTML = content;
                     }
 
-                    viewPage[0].innerHTML = data;
-
-                    mobile.history.pushState(null, "", view);
+                    viewPage.data("url", view);
 
                     if (initCallback) {
                         initCallback();

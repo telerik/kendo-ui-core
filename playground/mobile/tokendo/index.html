@@ -15,90 +15,90 @@
     <script src="../../../src/kendo.loader.js"></script>
  </head>
  <body>
-    <script type="text/html" id="item_tmpl">
-        <ul class="list">
-        <% for (var i = 0; i < data.length; i++) {
-            var item = data[i]; %>
-            <li class="item">
-                <label for="isdone_<%= i %>" <%= (item.done ? " class='input-checked'" : "") %>>
-                    <input type="checkbox" id="isdone_<%= i %>" <%= (item.done ? " checked='checked'" : "") %> />
-                    <%= item.title %>
-                    <a href="#" class="more-details">More...</a>
-                </label>
-            </li>
-        <% } %>
-        </ul>
-    </script>
+    <div class="kendo-page">
+        <script type="text/html" id="item_tmpl">
+            <ul class="list">
+            <% for (var i = 0; i < data.length; i++) {
+                var item = data[i]; %>
+                <li class="item">
+                    <label for="isdone_<%= i %>" <%= (item.done ? " class='input-checked'" : "") %>>
+                        <input type="checkbox" id="isdone_<%= i %>" <%= (item.done ? " checked='checked'" : "") %> />
+                        <%= item.title %>
+                        <a href="#" class="more-details">More...</a>
+                    </label>
+                </li>
+            <% } %>
+            </ul>
+        </script>
 
-    <div id="content"></div>
+        <div id="content"></div>
 
-    <script>
-        kendo.loader.define({
-            mobile: {
-                url: "kendo.mobile.application.js",
-                depends: [ "core", "datasource" ],
-                features: {
-                    view: {
-                        url: "kendo.mobile.view.js"
-                    },
-                    scrollableView: {
-                        url: "kendo.mobile.scroller.js"
-                    }
-                }
-            }
-        });
-
-        kendo.loader.datasource();
-        kendo.loader.mobile({
-            view: {},
-            scrollableView: {},
-            dataBoundView: {}
-        }, function() {
-            kendo.mobile.init({});
-
-            $('label').live('click', function(e) {
-                var $this = $(this);
-                $this.toggleClass('input-checked', document.getElementById($this.attr('for')).checked);
-            });
-
-            var dataSource = new kendo.data.DataSource({
-                page: 1,
-                pageSize: 20,
-                transport: {
-                    read: {
-                        url: "tokendo.data.js",
-                        cache: true,
-                        dataType: "jsonp",
-                        jsonpCallback: "loadTodoItems"
-                    },
-                    cache: "localstorage"
-                },
-                reader: {
-                    data: function(result) {
-                        return result;
-                    },
-                    total: function(result) {
-                        return result;
+        <script>
+            kendo.loader.define({
+                mobile: {
+                    url: "kendo.mobile.application.js",
+                    depends: [ "core", "datasource" ],
+                    features: {
+                        view: {
+                            url: "kendo.mobile.view.js"
+                        },
+                        scrollableView: {
+                            url: "kendo.mobile.scroller.js"
+                        }
                     }
                 }
             });
 
-            dataSource.bind("change", function() {
-                var data = dataSource.view();
-                var template = kendo.template(document.getElementById("item_tmpl").innerHTML);
+            kendo.loader.datasource();
+            kendo.loader.mobile({
+                view: {},
+                scrollableView: {},
+                dataBoundView: {}
+            }, function() {
+                kendo.mobile.init({});
 
-                $("#content").html(template({ data: data }))
-                    .delegate('.more-details', 'click', function() {
-                        var todoItemId = $(this).index();
-                        kendo.mobile.switchView("edit.html");
-                    });
+                $('label').live('click', function(e) {
+                    var $this = $(this);
+                    $this.toggleClass('input-checked', document.getElementById($this.attr('for')).checked);
+                });
+
+                var dataSource = new kendo.data.DataSource({
+                    page: 1,
+                    pageSize: 20,
+                    transport: {
+                        read: {
+                            url: "tokendo.data.js",
+                            cache: true,
+                            dataType: "jsonp",
+                            jsonpCallback: "loadTodoItems"
+                        },
+                        cache: "localstorage"
+                    },
+                    reader: {
+                        data: function(result) {
+                            return result;
+                        },
+                        total: function(result) {
+                            return result;
+                        }
+                    }
+                });
+
+                dataSource.bind("change", function() {
+                    var data = dataSource.view();
+                    var template = kendo.template(document.getElementById("item_tmpl").innerHTML);
+
+                    $("#content").html(template({ data: data }))
+                        .delegate('.more-details', 'click', function() {
+                            var todoItemId = $(this).index();
+                            kendo.mobile.switchView("edit.html");
+                        });
+                });
+
+                dataSource.read();
             });
-
-            dataSource.read();
-    });
-    </script>
-    <script>
-    </script>
+        </script>
+    </div>
  </body>
  </html>
 
