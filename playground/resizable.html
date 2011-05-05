@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>splitter</title>
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.draganddrop.js"></script>
+        <script src="../src/kendo.resizable.js"></script>
+        <style>
+            .hint {
+                height: 10px;
+                border: solid 1px black;
+            }
+            .container {
+                background: red;
+                width: 150px;
+                height: 150px;
+                margin: 500px;
+            }
+        </style>
+    </head>
+    <body>
+          <div class="container"><span>drag me</span></div>
+          <script type="text/javascript">
+              $(document).ready(function() {
+                    $("div").kendoResizable({
+                        handle: "span",
+                        hint: function(){
+                            return $("<div class='hint' />")
+                        },
+                        max: 150,
+                        min: 1
+                    });
+              });
+        </script>
+    </body>
+</html>

@@ -8,6 +8,7 @@
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.query.js"></script>
         <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.resizable.js"></script>
         <script src="../../src/kendo.splitter.js"></script>
         <script src="helper.js"></script>
         <link rel="stylesheet" href="../qunit.css" type="text/css" />
@@ -56,10 +57,10 @@
                 splitter = $(getSplitterHtml())
                 .appendTo(document.body)
                 .kendoSplitter({
-                    panes: [ { collapsible: true }, {} ]
-                })
-                .bind("resize", function() {
-                    triggered = true;
+                    panes: [ { collapsible: true }, {} ],
+                    resize: function() {
+                        triggered = true;
+                    }
                 });
 
                 splitter.data("kendoSplitter").toggle(".t-pane:last", false);
@@ -137,10 +138,10 @@
                 splitter = $(getSplitterHtml())
                 .appendTo(document.body)
                 .kendoSplitter({
-                    panes: [ { collapsible: true, collapsed: true }, {} ]
-                })
-                .bind("resize", function() {
-                    triggered = true;
+                    panes: [ { collapsible: true, collapsed: true }, {} ],
+                    resize: function() {
+                        triggered = true;
+                    }
                 });
 
                 splitter.data("kendoSplitter").toggle(".t-pane:first", true);
@@ -268,34 +269,34 @@
                 equals(splitter.size(firstPane), "120px");
             });
 
-            test("minSize() gets/sets pane minSize", function() {
+            test("min() gets/sets pane min", function() {
                 var splitter = $(getSplitterHtml())
                 .appendTo(document.body)
                 .kendoSplitter({
-                    panes: [ { minSize: "110px", size: "200px" }, {} ]
+                    panes: [ { min: "110px", size: "200px" }, {} ]
                 }).data("kendoSplitter"),
                 firstPane = $(".t-pane:first", splitter.element);
 
-                equals(splitter.minSize(firstPane), "110px");
+                equals(splitter.min(firstPane), "110px");
 
-                splitter.minSize(firstPane, "120px");
+                splitter.min(firstPane, "120px");
 
-                equals(splitter.minSize(firstPane), "120px");
+                equals(splitter.min(firstPane), "120px");
             });
 
-            test("maxSize() gets/sets pane maxSize", function() {
+            test("max() gets/sets pane max", function() {
                 var splitter = $(getSplitterHtml())
                 .appendTo(document.body)
                 .kendoSplitter({
-                    panes: [ { maxSize: "200px", size: "110px" }, {} ]
+                    panes: [ { max: "200px", size: "110px" }, {} ]
                 }).data("kendoSplitter"),
                 firstPane = $(".t-pane:first", splitter.element);
 
-                equals(splitter.maxSize(firstPane), "200px");
+                equals(splitter.max(firstPane), "200px");
 
-                splitter.maxSize(firstPane, "120px");
+                splitter.max(firstPane, "120px");
 
-                equals(splitter.maxSize(firstPane), "120px");
+                equals(splitter.max(firstPane), "120px");
             });
 
             test("size(value) triggers resize", function() {
@@ -305,10 +306,10 @@
                 .kendoSplitter({
                     panes: [ { size: "110px" }, {} ]
                 })
+                .data("kendoSplitter")
                 .bind("resize", function() {
                     triggered = true;
-                })
-                .data("kendoSplitter");
+                });
 
                 splitter.size(".t-pane:first", "120px");
 
