@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.chart</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <link href="../qunit.css" type="text/css" rel="stylesheet"/>
+    </head>
+    <body>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.chart.js"></script>
+        <script type="text/javascript">
+            var Chart = kendo.ui.Chart,
+                Box = Chart.Box,
+                chartBox = new Box(0, 0, 800, 600);
+
+            (function() {
+                var barSeries,
+                    BAR_WIDTH = 102.564;
+
+                function ViewFactoryStub() {
+                    this.renderedRects = [];
+                }
+                ViewFactoryStub.prototype = {
+                    rect: function(x, y, width, height) {
+                        this.renderedRects.push([].slice.call(arguments));
+                    }
+                }
+
+                module("View Rendering", {
+                    setup: function() {
+                        factoryStub = new ViewFactoryStub();
+
+                        barSeries = new Chart.BarSeries(
+                            0, 350, {
+                                name: "Value",
+                                type: "bar",
+                                data: [100, 200, 300]
+                            }
+                        );
+                        barSeries.updateLayout(chartBox);
+                    }
+                });
+
+                test("creates bars", function() {
+                    barSeries.getViewElements(factoryStub);
+
+                    equal(factoryStub.renderedRects.length, 3);
+                });
+
+                test("bars are distributed horizontally", function() {
+                    barSeries.getViewElements(factoryStub);
+
+                    var barsX = $.map(factoryStub.renderedRects, function(rect) {
+                        return rect[0];
+                    });
+
+                    same(barsX, [82.051, 348.718, 615.385]);
+                });
+
+                test("bars are aligned to bottom", 3, function() {
+                    barSeries.getViewElements(factoryStub);
+
+                    $.each(factoryStub.renderedRects, function() {
+                        equal(this[1] + this[3], chartBox.y2);
+                    });
+                });
+
+                test("bars have set width", 3, function() {
+                    barSeries.getViewElements(factoryStub);
+
+                    $.each(factoryStub.renderedRects, function() {
+                        equal(this[2], BAR_WIDTH);
+                    });
+                });
+
+            })();
+
+        </script>
+
+        <h1 id="qunit-header">kendo.chart</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+    </body>
+</html>
