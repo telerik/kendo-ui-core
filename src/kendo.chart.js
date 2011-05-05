@@ -923,7 +923,8 @@
         ViewElement.call(root, options);
 
         root.template = kendo.template(
-            "<div style='width:<%= options.width %>; height:<%= options.height %>;'>" +
+            "<div style='width:<%= options.width %>; height:<%= options.height %>;" +
+                        "position: relative;'>" +
             "<%= renderContent() %></div>");
     }
 
@@ -972,7 +973,7 @@
             "<kvml:shape style='position: absolute; width:800px;height:600px;' " +
             "strokecolor='<%= options.stroke %>' " +
             "coordorigin='0 0' coordsize='800 600'>" +
-            "<kvml:path v='<%= renderPoints() %>' /></kvml:shape>");
+            "<kvml:path v='<%= renderPoints() %> e' /></kvml:shape>");
 
         path.points = points || [];
     }
@@ -987,20 +988,22 @@
             var points = this.points,
                 count = points.length,
                 first = points[0],
-                result = "m " + first[0] + "," + first[1];
+                result = "m " + round(first[0]) + "," + round(first[1]);
 
             if (count > 1) {
                 result += " l";
 
                 for (var i = 1; i < count; i++) {
                     var p = points[i];
-                    result += " " + p[0] + "," + p[1];
+                    result += " " + round(p[0]) + "," + round(p[1]);
 
                     if (i < count - 1) {
                         result += ",";
                     }
                 }
             }
+
+            console.log(result);
 
             return result;
         }
