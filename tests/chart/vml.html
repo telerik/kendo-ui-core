@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>UI5.Chart Tests - VML</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <link href="../qunit.css" type="text/css" rel="stylesheet"/>
+    </head>
+    <body>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.chart.js"></script>
+        <script type="text/javascript">
+            var Chart = kendo.ui.Chart,
+                contentElementStub = {
+                    render: function() { return "Content"; }
+                };
+
+            (function() {
+                var factory;
+
+                module("VMLFactory", {
+                    setup: function() {
+                        factory = new Chart.VMLFactory();
+                    }
+                });
+
+                test("root returns VMLRoot", function() {
+                    var root = factory.root();
+                    ok(root instanceof Chart.VMLRoot);
+                });
+
+                test("root has default dimensions", function() {
+                    var root = factory.root();
+                    equal(root.options.width, "800px");
+                    equal(root.options.height, "600px");
+                });
+
+                test("root sets dimensions", function() {
+                    var root = factory.root({ width: "100px", height: "100px" });
+                    equal(root.options.width, "100px");
+                    equal(root.options.height, "100px");
+                });
+
+                test("text returns VMLText", function() {
+                    var text = factory.text();
+                    ok(text instanceof Chart.VMLText);
+                });
+
+                test("text sets content", function() {
+                    var text = factory.text("Text");
+                    equal(text.content, "Text");
+                });
+
+                test("rect returns VMLPath", function() {
+                    var rect = factory.rect(10, 20, 100, 100);
+                    ok(rect instanceof Chart.VMLPath);
+                });
+
+                test("rect draws rectangle", function() {
+                    var rect = factory.rect(10, 20, 100, 200);
+                    deepEqual(rect.points, [
+                        [10, 20], [110, 20], [110, 220], [10, 220], [10, 20]
+                    ]);
+                });
+
+                test("line returns VMLPath", function() {
+                    var line = factory.line();
+                    ok(line instanceof Chart.VMLPath);
+                });
+
+                test("line draws a line", function() {
+                    var line = factory.line(10, 20, 100, 200);
+                    deepEqual(line.points, [ [10, 20], [100, 200] ]);
+                });
+            })();
+
+            (function() {
+                var root;
+
+                module("VMLRoot", {
+                    setup: function() {
+                        root = new Chart.VMLRoot();
+                    }
+                });
+
+                test("renders div tag with default size", function() {
+                    equal(root.render(), "<div style='width:800px; height:600px;'></div>");
+                });
+
+                test("renders children", function() {
+                    root.children.push(contentElementStub);
+                    equal(root.render(),
+                        "<div style='width:800px; height:600px;'>Content</div>");
+                });
+            })();
+
+            (function() {
+                var text;
+
+                module("VMLText", {
+                    setup: function() {
+                        text = new Chart.VMLText();
+                    }
+                });
+
+                test("renders content", function() {
+                    text.content = "Text";
+                    equal(text.render().replace(/\<kvml:textbox.*?\>/, "<kvml:textbox>"),
+                            "<kvml:textbox>Text</kvml:textbox>");
+                });
+
+            })();
+
+            (function() {
+                var path;
+
+                module("VMLPath", {
+                    setup: function() {
+                        path = new Chart.VMLPath([[10, 20]]);
+                    }
+                });
+
+                test("renders path tag", function() {
+                    equal(path.render(),
+                    "<kvml:shape style='position: absolute; left: 0; top: 0;' " +
+                        "strokecolor='#000'>" +
+                        "<kvml:path v='m 10.5,20.5' />" +
+                    "</kvml:shape>");
+                });
+
+                test("moves to first point", function() {
+                    equal(path.renderPoints(), "m 10.5,20.5");
+                });
+
+                test("draws line", function() {
+                    path.points.push([20, 30], [40, 50]);
+                    equal(path.renderPoints(), "m 10.5,20.5 l 20.5,30.5, 40.5,50.5");
+                });
+
+            })();
+       </script>
+
+        <h1 id="qunit-header">kendo.chart</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+    </body>
+</html>

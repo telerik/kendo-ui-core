@@ -11,7 +11,7 @@
 
         chart.options = $.extend({}, chart.options, options);
         chart.element = element;
-        chart._viewFactory = new SVGFactory();
+        chart._viewFactory = chart._supportsSVG() ? new SVGFactory() : new VMLFactory();
 
         chart.refresh();
     }
@@ -759,10 +759,7 @@
     };
 
 
-    function SVGFactory(options) {
-        var r = this;
-        r.options = $.extend({}, r.options, options);
-    }
+    function SVGFactory() {}
 
     $.extend(SVGFactory.prototype, {
         root: function(options) {
@@ -796,7 +793,8 @@
         ViewElement.call(root, options);
 
         root.template = kendo.template(
-            "<svg width='<%= options.width %>' height='<%= options.height %>'><%= renderContent() %></svg>");
+            "<svg width='<%= options.width %>' height='<%= options.height %>'>" +
+            "<%= renderContent() %></svg>");
     }
 
     SVGRoot.prototype = new ViewElement();
@@ -891,12 +889,124 @@
         }
     });
 
-    // Helper functions
-    function supportsSVG() {
-        return document.implementation.hasFeature(
-            "http://www.w3.org/TR/SVG11/feature#BasicStructure", "1.1");
+    function VMLFactory() {
+        if (document.namespaces) {
+            document.namespaces.add("kvml", "urn:schemas-microsoft-com:vml", "#default#VML");
+        }
     }
 
+    $.extend(VMLFactory.prototype, {
+        root: function(options) {
+            return new VMLRoot(options);
+        },
+
+        text: function(content, options) {
+            return new VMLText(content, options);
+        },
+
+        rect: function(x, y, width, height) {
+            return new VMLPath(
+                [[x, y], [x + width, y],
+                [x + width, y + height], [x, y + height], [x, y]]
+            );
+        },
+
+        line: function(x1, y1, x2, y2) {
+            return new VMLPath([[x1, y1], [x2, y2]]);
+        }
+    });
+
+    function VMLRoot(options) {
+        var root = this;
+
+        options = root.options = $.extend({}, root.options, options);
+        ViewElement.call(root, options);
+
+        root.template = kendo.template(
+            "<div style='width:<%= options.width %>; height:<%= options.height %>;'>" +
+            "<%= renderContent() %></div>");
+    }
+
+    VMLRoot.prototype = new ViewElement();
+    $.extend(VMLRoot.prototype, {
+        options: {
+            width: "800px",
+            height: "600px"
+        }
+    });
+
+    function VMLText(content, options) {
+        var text = this,
+            options = text.options = $.extend({}, text.options, options);
+
+        text.content = content || "";
+
+        ViewElement.call(text);
+        text.template = kendo.template(
+            "<kvml:textbox style='position: absolute;" +
+                "left:<%= options.x %>; top:<%= options.y %>;" +
+                "font:<%= fontStyle() %>'><%= content %></kvml:textbox>");
+    }
+
+    VMLText.prototype = new ViewElement();
+    $.extend(VMLText.prototype, {
+        options: {
+            x: 0,
+            y: 0,
+            fontSize: "12pt",
+            fontFamily: "Verdana, sans-serif"
+        },
+
+        fontStyle: function() {
+            var options = this.options;
+            return options.fontSize + " " + options.fontFamily;
+        }
+    });
+
+    function VMLPath(points, options) {
+        var path = this,
+            options = $.extend({}, path.options, options);
+
+        ViewElement.call(path);
+        path.template = kendo.template(
+            "<kvml:shape style='position: absolute; width:800px;height:600px;' " +
+            "strokecolor='<%= options.stroke %>' " +
+            "coordorigin='0 0' coordsize='800 600'>" +
+            "<kvml:path v='<%= renderPoints() %>' /></kvml:shape>");
+
+        path.points = points || [];
+    }
+
+    VMLPath.prototype = new ViewElement();
+    $.extend(VMLPath.prototype, {
+        options: {
+            stroke: "#000"
+        },
+
+        renderPoints: function() {
+            var points = this.points,
+                count = points.length,
+                first = points[0],
+                result = "m " + first[0] + "," + first[1];
+
+            if (count > 1) {
+                result += " l";
+
+                for (var i = 1; i < count; i++) {
+                    var p = points[i];
+                    result += " " + p[0] + "," + p[1];
+
+                    if (i < count - 1) {
+                        result += ",";
+                    }
+                }
+            }
+
+            return result;
+        }
+    });
+
+    // Helper functions
     function ceil(value, step) {
         return round(Math.ceil(value / step) * step, DEFAULT_PRECISION);
     }
@@ -998,7 +1108,6 @@
         return { min: seriesMin, max: seriesMax };
     }
 
-    // #ifdef DEBUG
     // Make the internal functions public for unit testing
 
     Chart.Box = Box;
@@ -1015,8 +1124,10 @@
     Chart.SVGGroup = SVGGroup;
     Chart.SVGText = SVGText;
     Chart.SVGPath = SVGPath;
-
-    // #endif
+    Chart.VMLFactory = VMLFactory;
+    Chart.VMLRoot = VMLRoot;
+    Chart.VMLText = VMLText;
+    Chart.VMLPath = VMLPath;
 
 })(jQuery);
 
