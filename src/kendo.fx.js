@@ -70,8 +70,6 @@
         extend(kendo.fx, {
             transition: function(element, properties, options) {
 
-                console.log('start transition', element, properties, options);
-
                 options = extend({
                         duration: 200,
                         ease: 'ease-out',
