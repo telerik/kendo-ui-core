@@ -3,6 +3,7 @@
         ui = kendo.ui,
         DataSource = kendo.data.DataSource,
         Navigatable = ui.Navigatable,
+        Selectable = ui.Selectable,
         Component = ui.Component,
         proxy = $.proxy,
         extend = $.extend;
@@ -33,9 +34,22 @@
             down: function(context, element) {
                 if (!context.is(":visible")) {
                     that.popup.open();
-                    return Navigatable.home(context, element);
+                    return that.selectable.value();
                 }
                 return Navigatable.down(context, element);
+            }
+        });
+
+        that.selectable = new Selectable(that.ul, {
+            change: function() {
+                that.popup.close();
+            }
+        });
+
+        that.element.keydown(function(e) {
+            if (e.keyCode === kendo.keys.ENTER) {
+                that.selectable.clear();
+                that.selectable.value(that.navigatable.current);
             }
         });
     }
