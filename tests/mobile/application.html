@@ -56,11 +56,12 @@
             });
 
             test("switchView() adds view to page", function() {
-                kendo.mobile.switchView("foo");
-                equals($('.kendo-view').length, 1);
+                kendo.mobile.switchView("foo", function() {
+                    equals($('.kendo-view').length, 1);
+                });
             });
 
-            test("switchView() loads remote content", function() {
+            test("switchView() loads remote partial content", function() {
                 stop(300);
 
                 kendo.mobile.switchView("foo", function() {
@@ -81,6 +82,75 @@
                     });
                 });
             });
+
+            test("isFullPage() returns false for arbitrary content", function() {
+                ok(!kendo.mobile.isFullPage("<a href='#'>foo</a>"));
+            });
+
+            test("isFullPage() returns true for content that starts with doctype", function() {
+                ok(kendo.mobile.isFullPage("<!DOCTYPE html><html><head></head><body></body></html>"));
+            });
+
+            test("encodeScripts() encodes script tag", function() {
+                var encoded = kendo.mobile.encodeScripts("<script>alert(1)<\/script>");
+
+                equals(encoded, "<kendo:script>alert(1)</kendo:script>");
+            });
+
+            test("encodeScripts() encodes multiple script tags", function() {
+                var encoded = kendo.mobile.encodeScripts("<script>alert(1)<\/script><script>alert(1)<\/script>");
+
+                equals(encoded, "<kendo:script>alert(1)</kendo:script><kendo:script>alert(1)</kendo:script>");
+            });
+
+            test("decodeScripts() decodes script tag", function() {
+                var initialScript = "<script>alert(1)<\/script>",
+                    encoded = kendo.mobile.encodeScripts(initialScript);
+
+                equals(kendo.mobile.decodeScripts(encoded), initialScript);
+            });
+
+            test("switchPage() loads multiple views", function() {
+                stop(300);
+
+                $.mockjaxClear();
+
+                $.mockjax({
+                    url: "foo",
+                    responseText: "<!doctype html>"
+                                + "<html><body>"
+                                + "<div class='kendo-view'>1</div><div class='kendo-view'>2</div>"
+                                + "</body></html>"
+                });
+
+                kendo.mobile.switchView("foo", function() {
+                    start();
+
+                    equals($(".kendo-view").length, 2);
+                });
+            });
+
+            /*test("switchPage() executes view scripts", function() {
+                stop(300);
+
+                $.mockjaxClear();
+
+                $.mockjax({
+                    url: "foo",
+                    responseText: "<!doctype html>"
+                                + "<html><body>"
+                                + "<div class='kendo-page'><script>alert(1);foobar = 1;<\/script></div>"
+                                + "</body></html>"
+                });
+
+                kendo.mobile.switchView("foo", function() {
+                    start();
+
+                    equals(window.foobar, 1);
+
+                    delete window.foobar;
+                });
+            });*/
 
             module("kendo.mobile.history");
 
