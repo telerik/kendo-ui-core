@@ -14,5 +14,9 @@ tests.push(
     {
         page: "grid/databinding.html",
         title: "grid databinding"
+    },
+    {
+        page: "grid/selection.html",
+        title: "grid selection"
     }
 );

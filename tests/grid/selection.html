@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Grid selection and navigation</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.query.js"></script>
+        <script src="../../src/kendo.datasource.js"></script>
+        <script src="../../src/kendo.navigatable.js"></script>
+        <script src="../../src/kendo.selectable.js"></script>
+        <script src="../../src/kendo.grid.js"></script>
+        <link rel="stylesheet" href="../qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.ui.Navigatable</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var Grid = kendo.ui.Grid,
+                DataSource = kendo.data.DataSource,
+                table;
+
+            $.fn.press = function(key) {
+                return this.trigger( { type: "keydown", keyCode: key } );
+            }
+
+            module("kendo.ui.Navigatable", {
+                setup: function() {                    
+                    table = $("<table><tbody/></table>").appendTo(document.body);                    
+                },
+                teardown: function() {
+                    table.remove();                    
+                }
+            });
+
+            test("focusing grid element focus first cell", function() {
+                var grid = new Grid(table, { data: [{foo: 1}, {foo: 2}] });
+                grid.element.focus();                
+                ok(grid.element.find(">tbody>tr>td").is(".t-state-focused"));
+            });  
+                       
+     </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>
