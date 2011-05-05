@@ -1,8 +1,10 @@
-(function($, window, undefined) {
+(function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
         DataSource = kendo.data.DataSource,
+        Navigatable = ui.Navigatable,
         Component = ui.Component,
+        proxy = $.proxy,
         extend = $.extend;
 
     function AutoComplete(element, options) {
@@ -23,32 +25,19 @@
         });
 
         that._dataSource();
+
         that.dataSource.read();
 
-        that.element.keydown($.proxy(that._keydown, that));
-    }
-
-    function move(direction, ul) {
-        var items = ul.find("li"),
-            selectedItem = items.filter(".t-state-selected");
-
-        if(direction == "next") {
-            if(selectedItem.length){
-                selectedItem.removeClass("t-state-selected")
-                            .next()
-                            .addClass("t-state-selected");
-            } else {
-                items.first().addClass("t-state-selected");
+        that.navigatable = new Navigatable(that.element, {
+            context: that.ul,
+            down: function(context, element) {
+                if (!context.is(":visible")) {
+                    that.popup.open();
+                    return Navigatable.home(context, element);
+                }
+                return Navigatable.down(context, element);
             }
-        } else if(direction == "prev") {
-            if(selectedItem.length){
-                selectedItem.removeClass("t-state-selected")
-                            .prev()
-                            .addClass("t-state-selected");
-            } else {
-                items.last().addClass("t-state-selected");
-            }
-        }
+        });
     }
 
     function lastIndexOf(value, character) {
@@ -125,7 +114,6 @@
             var that = this,
                 data = that.dataSource.view();
 
-
             that.list.dataBind(data);
         },
 
@@ -139,36 +127,9 @@
             }
 
             that.dataSource = DataSource.create(dataSource);
-            that.dataSource.bind("change", $.proxy(that.refresh, that));
-        },
-
-        _keydown: function(e){
-            var that = this,
-                key = e.keyCode,
-                keys = kendo.keys;
-
-            switch(key) {
-            case keys.DOWN :
-                 if (!that.popup.element.is(":visible")) {
-                    that.popup.open();
-                 }
-                 move("next", that.ul);
-                 var selectedItem = that.ul.find(".selected");
-                 if (selectedItem.length > 0) {
-                    autoFill(that.element, selectedItem.text(), that.options.separator, that.options.multiple);
-                 }
-                 e.preventDefault();
-                 break;
-            case keys.UP :
-                 if (!that.popup.element.is(":visible")) {
-                    that.popup.open();
-                 }
-                 move("prev", that.ul);
-                 e.preventDefault();
-                 break;
-            }
+            that.dataSource.bind("change", proxy(that.refresh, that));
         }
     }
 
     ui.plugin("AutoComplete", AutoComplete, Component);
-})(jQuery, window);
+})(jQuery);
