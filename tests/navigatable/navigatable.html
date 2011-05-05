@@ -19,12 +19,13 @@
             var Navigatable = kendo.ui.Navigatable,
                 ul;
 
+            $.fn.press = function(key) {
+                return this.trigger( { type: "keydown", keyCode: key } );
+            }
+
             module("kendo.ui.Navigatable", {
                 setup: function() {
                     ul = $("<ul><li>foo</li><li>bar</li><li>baz</li></ul>").appendTo(document.body);
-                    ul.press = function(key) {
-                        return this.trigger( { type: "keydown", keyCode: key } );
-                    }
                 },
                 teardown: function() {
                     ul.remove();
@@ -179,6 +180,86 @@
 
                 ul.focus();
                 ok(wasCalled);
+            });
+
+            test("can specify context which is different from the element", function() {
+                var input = $("<input />").kendoNavigatable( {
+                    context: ul
+                });
+
+                input.focus().press(kendo.keys.DOWN);
+                ok(ul.children().eq(1).is(".t-state-focused"));
+            });
+
+            test("focus event is raised when the element gains focus", function() {
+                var focusWasCalled = false;
+
+                ul.kendoNavigatable({
+                    focus: function() {
+                        focusWasCalled = true;
+                    }
+                });
+
+                ul.focus();
+                ok(focusWasCalled);
+            });
+            test("focus event is raised when up is pressed", function() {
+                var focusWasCalled = false, navigatable = new Navigatable(ul);
+
+                ul.focus();
+                navigatable.bind("focus", function() {
+                    focusWasCalled = true;
+                });
+
+                ul.press(kendo.keys.DOWN);
+                ok(focusWasCalled);
+            });
+            test("focus event is not raised when the current does not change", function() {
+                var focusWasCalled = false, navigatable = new Navigatable(ul);
+
+                ul.focus();
+                navigatable.bind("focus", function() {
+                    focusWasCalled = true;
+                });
+
+                ul.press(kendo.keys.UP);
+                ok(!focusWasCalled);
+            });
+            test("focus event is raised when user clicks the child", function() {
+                var focusWasCalled = false;
+
+                ul.kendoNavigatable({
+                    focus: function() {
+                        focusWasCalled = true;
+                    }
+                });
+
+                ul.children().eq(1).mousedown();
+                ok(focusWasCalled);
+            });
+            test("focus event is not raised when user clicks the current child", function() {
+                var focusWasCalled = false, navigatable = new Navigatable(ul);
+
+                ul.focus();
+
+                navigatable.bind("focus", function() {
+                    focusWasCalled = true;
+                });
+
+                ul.children().first().mousedown();
+                ok(!focusWasCalled);
+            });
+            test("focus event is raised after refocus", function() {
+                var calls = 0;
+
+                ul.kendoNavigatable({
+                    focus: function() {
+                        calls ++;
+                    }
+                });
+
+                ul.focus().blur().focus();
+                equal(calls, 2);
             });
      </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
