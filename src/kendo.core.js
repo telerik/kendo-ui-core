@@ -1009,8 +1009,9 @@
             show: false
         }, options);
 
-        if (options.show) {
-            element.show();
+        if (options.show && !element.is(':visible')) {
+            element.css('opacity', 0) // reset the opacity if the element has been hidden
+                   .show();
         }
 
         if (kendo.fx && kendo.support.transitions) {
