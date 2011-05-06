@@ -92,18 +92,12 @@
         <script type="text/javascript" charset="utf-8">
             $(document).ready(function() {
                 $("button.play").click(function() {
-                    $(".animatee").kendoStop().kendoAnimate("zoomOut fadeOut", 500).kendoAnimate("zoomIn fadeIn", 500);
+                    $(".animatee").kendoStop().kendoAnimate("zoomOut fadeOut", 1000).kendoAnimate("zoomIn fadeIn", 1000).kendoAnimate("zoomOut fadeOut", 1000).kendoAnimate("zoomIn fadeIn", 1000);
+                    $(".animatee2").kendoStop().kendoAnimate("slideRight fadeOut", 300).kendoAnimate("slideRight fadeOut", 300, true).kendoAnimate("slideRight fadeOut", 500).kendoAnimate("slideRight fadeOut", 300, true);
                 });
 
                 $("button.reverse").click(function() {
                     $(".animatee").kendoStop().kendoAnimate("zoomOut fadeOut", 500, true);
-                });
-
-                $("button.play").click(function() {
-                    $(".animatee2").kendoStop().kendoAnimate("slideRight fadeOut", 500).kendoAnimate("slideRight fadeOut", 500, true);
-            });
-
-                $("button.reverse").click(function() {
                     $(".animatee2").kendoStop().kendoAnimate("slideRight fadeOut", 500, true);
                 });
             });
