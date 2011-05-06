@@ -27,17 +27,8 @@
 
         that._dataSource();
 
-        that.dataSource.read();
-
         that.navigatable = new Navigatable(that.element, {
-            context: that.ul,
-            down: function(context, element) {
-                if (!context.is(":visible")) {
-                    that.popup.open();
-                    return that.selectable.value();
-                }
-                return Navigatable.down(context, element);
-            }
+            context: that.ul
         });
 
         that.selectable = new Selectable(that.ul, {
@@ -46,12 +37,7 @@
             }
         });
 
-        that.element.keydown(function(e) {
-            if (e.keyCode === kendo.keys.ENTER) {
-                that.selectable.clear();
-                that.selectable.value(that.navigatable.current);
-            }
-        });
+        that.element.keydown(proxy(that._keydown, that));
     }
 
     function lastIndexOf(value, character) {
@@ -129,6 +115,8 @@
                 data = that.dataSource.view();
 
             that.list.dataBind(data);
+
+            that.popup[data.length ? "open" : "close"]();
         },
 
         _dataSource: function() {
@@ -142,6 +130,32 @@
 
             that.dataSource = DataSource.create(dataSource);
             that.dataSource.bind("change", proxy(that.refresh, that));
+        },
+
+        _keydown: function(e) {
+            var that = this,
+                key = e.keyCode,
+                keys = kendo.keys;
+
+            if (key === keys.ENTER) {
+                that.selectable.clear();
+                that.selectable.value(that.navigatable.current);
+            } else if (key !== keys.UP && key !== keys.DOWN) {
+                clearTimeout(that._timeout);
+                that._timeout = setTimeout(function() {
+                    that.search();
+                }, 300);
+            }
+        },
+        search: function() {
+            var that = this,
+                term = that.value();
+
+            clearTimeout(that._timeout);
+            that.dataSource.filter( { operator: "startswith", value: term } );
+        },
+        value: function() {
+            return this.element.val();
         }
     }
 
