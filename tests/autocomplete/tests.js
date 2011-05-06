@@ -4,7 +4,7 @@ tests.push(
         title: "autocomplete initialization"
     },
     {
-        page: "autocomplete/keyboard.html",
-        title: "autocomplete keyboard navigation"
+        page: "autocomplete/filtering.html",
+        title: "autocomplete filtering"
     }
 );

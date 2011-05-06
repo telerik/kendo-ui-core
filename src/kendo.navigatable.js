@@ -86,7 +86,9 @@
             }
         },
         _blur: function() {
-            this.current.removeClass(FOCUSED);
+            if (this.current) {
+                this.current.removeClass(FOCUSED);
+            }
         },
         _mousedown: function(e) {
             this._change($(e.currentTarget));
