@@ -187,6 +187,7 @@
     <Content Include="Scripts\2010.3.1318\telerik.timepicker.min.js" />
     <Content Include="Scripts\2010.3.1318\telerik.treeview.min.js" />
     <Content Include="Scripts\2010.3.1318\telerik.window.min.js" />
+    <Content Include="Scripts\fullBg.js" />
     <Content Include="Views\Home\Index.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
