@@ -6,7 +6,11 @@
         translateProperties = { translate: 0, translateX: 0, translateY: 0, translate3d: 0 },
         matrix3d = [ 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1 ],
         transformNon3D = { rotate: '', scale: '', translate: '' },
-        transformProps = ['perspective', 'rotate', 'rotateX', 'rotateY', 'rotateZ', 'rotate3d', 'scale', 'scaleX', 'scaleY', 'scaleZ', 'scale3d', 'skew', 'skewX', 'skewY', 'translate', 'translateX', 'translateY', 'translateZ', 'translate3d', 'matrix', 'matrix3d'];
+        transformProps = ['perspective', 'rotate', 'rotateX', 'rotateY', 'rotateZ', 'rotate3d', 'scale', 'scaleX', 'scaleY', 'scaleZ', 'scale3d', 'skew', 'skewX', 'skewY', 'translate', 'translateX', 'translateY', 'translateZ', 'translate3d', 'matrix', 'matrix3d'],
+        transitionEvent = kendo.support.transitions.event + 'TransitionEnd';
+
+        if (!kendo.support.transitions.event)
+            transitionEvent = transitionEvent.toLowerCase();
 
     if (kendo.support.transitions) {
 
@@ -17,7 +21,7 @@
             return acc;
         };
 
-        var abortTransitionIfStalled = function (transition) {
+        var checkTransition = function (transition) {
 
             if (transition) {
                 var checkStyle = document.defaultView.getComputedStyle(transition.object[0], null);
@@ -28,9 +32,7 @@
                     }).length) {
                         transition.complete.call(transition.object);
                         transition.object.css(kendo.support.transitions.css + 'transition', 'none');
-
-                        transition.object.removeData('keys');
-                        transition.object.stop();
+                        transition.object.unbind(transitionEvent, kendo.fx.deQueue);
                 }
             }
         };
@@ -40,18 +42,12 @@
 
             if (!currentTransition) return;
 
-            var eventName = kendo.support.transitions.event + 'TransitionEnd';
-            if (!kendo.support.transitions.event)
-                eventName = eventName.toLowerCase();
-
-            typeof currentTransition.complete == 'function' && element.one(eventName, $.proxy(currentTransition.complete, element));
-            if (currentTransition.firstRun)
-                currentTransition.object.one(eventName, $.proxy(kendo.fx.stopQueue, element));
-
-            element.css(currentTransition.setup);
+            typeof currentTransition.complete == 'function' && element.one(transitionEvent, $.proxy(currentTransition.complete, element));
 
             var startStyle = document.defaultView.getComputedStyle(element[0], null),
                 cssValues = {};
+
+            element.css(currentTransition.setup);
 
             $.each(currentTransition.keys, function() {
                 cssValues[this] = startStyle.getPropertyValue(this);
@@ -61,9 +57,9 @@
             setTimeout(function () {
                 element.css(currentTransition.CSS);
 
-                setTimeout(function () {
-                    abortTransitionIfStalled(currentTransition);
-                }, 50);
+                element.data('abortId', setTimeout(function () {
+                    checkTransition(currentTransition);
+                }, 50));
             }, 0);
         };
 
@@ -81,9 +77,6 @@
 
                 options.duration = $.fx ? $.fx.speeds[options.duration] || options.duration : options.duration;
 
-                if (!('timeline' in element))
-                    element.timeline = {};
-
                 var transforms = [], cssValues = {}, key;
                 for (key in properties)
                     if (transformProps.indexOf(key) != -1)
@@ -99,27 +92,29 @@
                     CSS: cssValues,
                     object: element,
                     setup: {},
-                    firstRun: false,
                     duration: options.duration,
                     complete: options.complete
                 };
                 currentTask.setup[kendo.support.transitions.css + 'transition'] = options.exclusive + ' ' + options.duration + 'ms ' + options.ease;
 
                 var oldKeys = element.data('keys') || [];
-                if (!oldKeys.length)
-                    currentTask.firstRun = true;
-                        
-                activateTask(currentTask);
-
                 $.merge(oldKeys, currentTask.keys);
                 element.data('keys', $.unique(oldKeys));
+
+                activateTask(currentTask);
+            },
+
+            deQueue: function() {
+                var element = this.element;
+
+                if (++this.eventNo == this.effectCount) { // ouch :(
+                    element.css(kendo.support.transitions.css + 'transition', 'none');
+                    clearTimeout(element.data('abortId'));
+                    element.dequeue();
+                }
             },
 
             stopQueue: function(element, clearQueue, gotoEnd) {
-                var isEvent = 'selector' in this;
-
-                if (isEvent)
-                    element = this;
 
                 var taskKeys = element.data('keys');
                 if (gotoEnd === false && taskKeys) {
@@ -139,9 +134,7 @@
                 } else
                     element.css(kendo.support.transitions.css + 'transition', 'none');
 
-                if (!isEvent)
-                    element.removeData('keys');
-
+                element.removeData('keys');
                 element.stop(clearQueue);
                 return element;
             }
@@ -152,9 +145,11 @@
 
     var animate = function (elements, properties, options) {
 
-        if (kendo.support.transitions && 'transition' in kendo.fx)
+        if (kendo.support.transitions && 'transition' in kendo.fx) {
+            
+
             kendo.fx.transition(elements, properties, options);
-        else {
+        } else {
             $.each(transformProps, function(idx, value) { // remove transforms to avoid IE and older browsers confusion
                 var params = [],
                     currentValue = properties[value]+ ' '; // We need to match
@@ -163,7 +158,7 @@
                     var element = $(this),
                         single = properties;
 
-                    if (value in scaleProperties && currentValue) {
+                    if (value in scaleProperties && properties[value] !== undefined) {
                         !element.data('scale') && element.data('scale', {
                                     top: element.offset().top,
                                     left: element.offset().left,
@@ -189,7 +184,7 @@
                                     });
                         }
                     } else
-                        if (value in translateProperties && currentValue) {
+                        if (value in translateProperties && properties[value] !== undefined) {
                             !element.data('translate') && element.data('translate', {
                                         top: element.offset().top,
                                         left: element.offset().left

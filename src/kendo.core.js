@@ -963,6 +963,14 @@
         });
     })();
 
+    function size(obj) {
+        var size = 0, key;
+        for (key in obj)
+            obj.hasOwnProperty(key) && size++;
+
+        return size;
+    }
+
     function animate(element, options, duration, reverse, complete) {
         var effects = {};
 
@@ -1005,6 +1013,12 @@
             element.show();
         }
 
+        if (kendo.fx && kendo.support.transitions) {
+            var eventName = kendo.support.transitions.event + 'TransitionEnd';
+            if (!kendo.support.transitions.event)
+                eventName = eventName.toLowerCase();
+        }
+
         return element.queue(function () {
             var promises = [], effects = options.effects;
 
@@ -1014,6 +1028,17 @@
                $.each(options.effects.split(" "), function() {
                     effects[this] = {};
                });
+            }
+
+            if (kendo.fx && kendo.support.transitions) {
+                var pkg = {
+                    element: element,
+                    eventNo: 0,
+                    effectCount: size(effects)
+                };
+
+                var px = proxy( kendo.fx.deQueue, pkg );
+                element.bind(eventName, px);
             }
 
             // create a promise for each effect
@@ -1038,8 +1063,10 @@
 
             //wait for all effects to complete
             $.when.apply(null, promises).then(function() {
-                element.dequeue(); // call next animation from the queue
-
+                if (!kendo.support.transitions) {
+                    element.dequeue(); // call next animation from the queue
+                }
+                
                 if (options.hide) {
                     element.hide();
                 }
