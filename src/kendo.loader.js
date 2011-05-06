@@ -30,9 +30,10 @@
             }
         }
     })();
-    function readyWait(modifier) {
+
+    function holdReady(hold) {
         if (window.jQuery) {
-            window.jQuery.readyWait += modifier;
+            window.jQuery.holdReady(hold);
         }
     }
 
@@ -48,40 +49,29 @@
             var scriptElement = document.createElement(SCRIPT),
                 that = this;
 
-            scriptElement.onload = function() {
-                that.resolved = true;
+            scriptElement.onload = scriptElement.onreadystatechange = function() {
+                var readyState = scriptElement.readyState;
 
-                callback();
+                if (!readyState || /complete|loaded/.test(scriptElement.readyState)) {
+                    that.resolved = true;
 
-                // decrementing the readyWait counter to allow jQuery(document).ready to be raised
-                readyWait(-1);
-            }
+                    callback();
 
-            // "onreadystatechange" is used in IE
-            scriptElement.onreadystatechange = function() {
-                if (/complete|loaded/.test(scriptElement.readyState)) {
-                    scriptElement.onload();
-
-                    // window.load is raised before the SCRIPT is "complete" so we are calling jQuery.ready() 
-                    var jQuery = window.jQuery;
-                    if (jQuery && jQuery.readyWait < 1 && jQuery.isReady) {
-                        jQuery.ready();
-                    }
+                    holdReady(false);
                 }
             }
 
             scriptElement.onerror = function() {
                 // decrementing the readyWait counter to allow jQuery(document).ready to be raised
-                readyWait(-1);
+                holdReady(false);
                 throw new Error(scriptElement.src + " failed to load");
             };
 
-            // delaying jQuery(document).ready() by incrementing the readyWait counter
-            readyWait(1);
-
-            scriptElement.src = combine(loaderSettings.basePath, that.url);
             // loading the script by adding it to the HEAD
             head.appendChild(scriptElement);
+            scriptElement.src = combine(loaderSettings.basePath, that.url);
+
+            holdReady(true);
         },
 
         resolve: function (options, callback) {
@@ -247,9 +237,13 @@
             url: "kendo.sortable.js",
             depends: "datasource"
         },
+        navigatable: {
+            url: "kendo.navigatable.js",
+            depends: "core"
+        },
         grid: {
             url: "kendo.grid.js",
-            depends: "datasource",
+            depends: ["datasource", "navigatable"],
             features: { sortable: "sortable", pageable: "pageable" }
         },
         draganddrop: {
