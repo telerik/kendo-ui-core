@@ -8,6 +8,7 @@
         SELECTED = "t-state-selected",
         ACTIVE = "t-state-selecting",
         SELECTABLE = "t-selectable",
+        SELECTSTART = "selectstart",
         UNSELECTING = "t-state-unselecting";
 
     function Selectable(element, options) {
@@ -22,7 +23,8 @@
         that._upDelegate = proxy(that._up, that);
 
         that.element.addClass(SELECTABLE);
-        that.element.delegate("." + SELECTABLE + " " + that.options.filter, MOUSEDOWN, proxy(that._down, that));
+        that.element.delegate("." + SELECTABLE + " " + that.options.filter, MOUSEDOWN, proxy(that._down, that))
+                           .bind(SELECTSTART, false);
         that.bind(["change"], that.options);
     }
 
@@ -113,7 +115,7 @@
                     that._downTarget.addClass(ACTIVE);
                 }
 
-                event.preventDefault();
+                //event.preventDefault();
             },
             _move: function (event) {
                 var that = this,

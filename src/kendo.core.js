@@ -1102,7 +1102,8 @@
             RIGHT: 39,
             DOWN: 40,
             END: 35,
-            HOME: 36
+            HOME: 36,
+            SPACEBAR: 32
         },
         support: support,
         animate: animate,

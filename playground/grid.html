@@ -5,22 +5,43 @@
         <script src="../src/jquery.js"></script>
         <script src="../src/kendo.loader.js"></script>
         <script>
-            kendo.loader.grid({ sortable: true, pageable: true });
+            kendo.loader.grid({ sortable: true, pageable: true, selectable: true });
         </script>
-        <style>
-            table {
-                padding: 0;
-                border: 1px solid black;
-                border-collapse: collapse;
+        <style type="text/css">
+            .t-state-selected
+            {
+                background-color: Green;
+                }
+            .t-state-selecting
+            {
+                background-color: red;
             }
-            table td {
+            .t-marquee
+            {
+                position:absolute;
+                border:1px dotted black;
+                background: rgba(200, 200, 255, 0.7);
+                border: 1px solid rgba(100, 100, 255, 0.8);
+            }
+            .t-state-focused
+            {
+                background: blue;
+            }
+            table
+            {
+                border-collapse: collapse;
+                border: 1px solid black;
+            }
+
+            table th,
+            table td
+            {
                 border: 1px solid black;
             }
         </style>
-
     </head>
     <body>
-        <table id="table1" style="table-layout:fixed">
+        <table id="table1" style="table-layout:fixed" tabindex="0">
             <thead>
                 <tr>
                 </tr>
@@ -40,7 +61,11 @@
                         pageSize: 10
                     },
                     pageable: true,
-                    sortable: true
+                    sortable: true,
+                    selectable: {
+                        type: "row",
+                        mode: "multi"
+                    }
                 });
 
                 $("button").kendoSortable({ dataSource: $("#table1").data("kendoGrid").dataSource });

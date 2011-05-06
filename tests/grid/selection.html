@@ -24,26 +24,115 @@
                 DataSource = kendo.data.DataSource,
                 table;
 
-            $.fn.press = function(key) {
-                return this.trigger( { type: "keydown", keyCode: key } );
+            $.fn.press = function(key, ctrl, shift) {
+                return this.trigger( { type: "keydown", keyCode: key, ctrlKey: ctrl, shiftKey: shift } );
             }
 
-            module("Grid selection and navigation<", {
-                setup: function() {
-                    table = $("<table><tbody/></table>").appendTo(document.body);
-                },
-                teardown: function() {
-                    table.remove();
-                }
-            });
+            function setup(options) {
+                options = $.extend(options, { data: [{foo: 1, bar: 1}, {foo: 2, bar:2}] });
+                return new Grid(table, options);
+            }
 
-            test("focusing grid element focus first cell", function() {
-                var grid = new Grid(table, { data: [{foo: 1}, {foo: 2}] });
-                grid.element.focus();
-                ok(grid.element.find(">tbody>tr>td").is(".t-state-focused"));
-            });
+            module("Grid selection and navigation", {
+                    setup: function() {
+                        table = $("<table><tbody/></table>").appendTo(document.body);
+                    },
+                    teardown: function() {
+                        table.remove();
+                    }
+                });
 
-     </script>
+                test("focusing grid element focus first cell", function() {
+                    var grid = setup();
+                    grid.element.focus();
+                    ok(grid.element.find(">tbody>tr>td").first().is(".t-state-focused"));
+                });
+
+                test("down arrow moves focus on the next row same cell", function() {
+                    var grid = setup();
+                    grid.element.focus().press(kendo.keys.DOWN);
+                    ok(table.find("tbody tr:eq(1)").find("td").hasClass("t-state-focused"));
+                });
+
+                test("right arrow moves focus on the next cell on the same row", function() {
+                    var grid = setup();
+                    grid.element.focus().press(kendo.keys.RIGHT);
+                    ok(table.find("tbody tr:eq(0)").find("td:eq(1)").hasClass("t-state-focused"));
+                });
+
+                test("left arrow moves focus on the prev cell on the same row", function() {
+                    var grid = setup();
+                    grid.element.focus().press(kendo.keys.RIGHT).press(kendo.keys.LEFT);
+                    ok(table.find("tbody tr:eq(0)").find("td:eq(0)").hasClass("t-state-focused"));
+                });
+
+                test("up arrow moves focus on the prev row same cell", function() {
+                    var grid = setup();
+                    grid.element.focus().press(kendo.keys.DOWN).press(kendo.keys.UP);
+                    ok(table.find("tbody tr:eq(0)").find("td").hasClass("t-state-focused"));
+                });
+
+                test("space key select the focused cell", function() {
+                    var grid = setup({ selectable: true });
+
+                    grid.element.focus().press(kendo.keys.DOWN).press(kendo.keys.SPACEBAR);
+
+                    ok(table.find("tbody tr:eq(1)").find("td").first().hasClass("t-state-selected"));
+                });
+
+                test("space key select the multiple focused cells if multiple selection is enabled", function() {
+                    var grid = setup({ selectable:{ mode: "multi" } });
+
+                    grid.element.focus()
+                                .press(kendo.keys.DOWN)
+                                .press(kendo.keys.SPACEBAR)
+                                .press(kendo.keys.RIGHT)
+                                .press(kendo.keys.SPACEBAR, true);
+                    var row = table.find("tbody tr").eq(1);
+                    ok(row.find("td").first().hasClass("t-state-selected"));
+                    ok(row.find("td").last().hasClass("t-state-selected"));
+                });
+
+                test("space key select single cells if multiple selection is enabled but ctrl is not active", function() {
+                    var grid = setup({ selectable:{ mode: "multi" } });
+
+                    grid.element.focus()
+                                .press(kendo.keys.DOWN)
+                                .press(kendo.keys.SPACEBAR)
+                                .press(kendo.keys.RIGHT)
+                                .press(kendo.keys.SPACEBAR);
+                    var row = table.find("tbody tr").eq(1);
+                    ok(!row.find("td").first().hasClass("t-state-selected"));
+                    ok(row.find("td").last().hasClass("t-state-selected"));
+                });
+
+                test("clicking on cell selects it", function() {
+                    var grid = setup({ selectable: true }),
+                        cell = table.find("tbody tr:eq(1)").find("td").first();
+                    cell.mousedown().mouseup();
+                    ok(cell.hasClass("t-state-selected"));
+                });
+
+                test("clicking on cell selects the row if row selection is enabled", function() {
+                    var grid = setup({ selectable: { type: "row" } }),
+                        cell = table.find("tbody tr:eq(1)").find("td").first();
+                    cell.mousedown().mouseup();
+                    ok(cell.parent().hasClass("t-state-selected"));
+                });
+
+                test("selecting a cell triggers change event passing the selection", function() {
+                    var triggered = false,
+                        grid = setup({
+                            selectable: true,
+                            change: function() {
+                                triggered = true;
+                            }
+                        }),
+                        cell = table.find("tbody tr:eq(1)").find("td").first();
+                    cell.mousedown().mouseup();
+                    ok(triggered);
+                });
+        </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
     </body>

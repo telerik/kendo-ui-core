@@ -241,10 +241,14 @@
             url: "kendo.navigatable.js",
             depends: "core"
         },
+        selectable: {
+            url: "kendo.selectable.js",
+            depends: "core"
+        },
         grid: {
             url: "kendo.grid.js",
             depends: ["datasource", "navigatable"],
-            features: { sortable: "sortable", pageable: "pageable" }
+            features: { sortable: "sortable", pageable: "pageable", selectable: "selectable" }
         },
         draganddrop: {
             url: "kendo.draganddrop.js",
