@@ -46,6 +46,7 @@
                 });
 
                 ok(autocomplete.dataSource);
+                autocomplete.dataSource.read();
                 equal(autocomplete.dataSource.data().length, 2);
             });
 
@@ -57,6 +58,7 @@
                 });
 
                 ok(autocomplete.dataSource);
+                autocomplete.dataSource.read();
                 equal(autocomplete.dataSource.data().length, 2);
             });
 
@@ -85,6 +87,8 @@
 
             test("autocomplete populates its list when the datasource changes", function() {
                 var autocomplete = new AutoComplete(input, ["foo", "bar"]);
+
+                autocomplete.dataSource.read();
 
                 equal(autocomplete.ul.children("li").length, 2);
                 equal(autocomplete.ul.children("li").first().text(), "foo");
