@@ -34,15 +34,22 @@
                           .replace(/<\/kendo:script>/gi, "<\/script>");
         },
 
+        goToView: function(view, callback) {
+            /// TODO: add proper animation
+            view.siblings(".kendo-view").hide("slow").end().show("fast");
+
+            if (callback) {
+                callback();
+            }
+        },
+
         switchView: function(view, initCallback) {
             var loadedView = $(".kendo-view").filter(function() {
                 return $(this).data("url") == view;
             });
 
             if (loadedView.length > 0) {
-                if (initCallback) {
-                    initCallback();
-                }
+                kendo.mobile.goToView(loadedView, initCallback);
 
                 return;
             }
@@ -55,13 +62,13 @@
                     var viewPage;
 
                     if (mobile.isFullPage(content)) {
-                        content = /<body[^>]*>(.*)<\/body>/ig.exec(content)[1];
+                        content = /<body[^>]*>(([\u000a\u000d\u2028\u2029]|.)*)<\/body>/ig.exec(content)[1];
 
-                        viewPage = $(".kendo-view:last");
+                        var viewPageIndex = $(".kendo-view:last").index();
 
                         document.body.innerHTML += content;
 
-                        viewPage = viewPage.next(".kendo-view");
+                        viewPage = $(".kendo-view").eq(viewPageIndex + 1);
                     } else { // partial content was served
                         viewPage = $("<div class='kendo-view' />").appendTo("body");
 
@@ -70,9 +77,7 @@
 
                     viewPage.data("url", view);
 
-                    if (initCallback) {
-                        initCallback();
-                    }
+                    kendo.mobile.goToView(viewPage, initCallback);
                 }
             });
         }

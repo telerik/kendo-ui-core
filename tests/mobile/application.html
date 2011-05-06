@@ -98,12 +98,34 @@
 
                 equals(encoded, "<kendo:script>alert(1)</kendo:script><kendo:script>alert(1)</kendo:script>");
             });
+            
+            test("encodeScripts() encodes script tag with src", function() {
+                var encoded = kendo.mobile.encodeScripts("<script src='foo.js'><\/script>");
 
+                equals(encoded, "<kendo:script src='foo.js'></kendo:script>");
+            });
+ 
             test("decodeScripts() decodes script tag", function() {
                 var initialScript = "<script>alert(1)<\/script>",
                     encoded = kendo.mobile.encodeScripts(initialScript);
 
                 equals(kendo.mobile.decodeScripts(encoded), initialScript);
+            });
+
+            asyncTest("switchView() loads pages with newlines in them", function() {
+                $.mockjaxClear();
+
+                $.mockjax({
+                    url: "foo",
+                    responseText: "<!DOCTYPE html>\n<html>\n<head>\n</head>\n<body>\n"
+                                + "<div class='kendo-view'></div>\n\u000a</body>\n</html>"
+                });
+
+                kendo.mobile.switchView("foo", function() {
+                    start();
+
+                    equals($(".kendo-view").length, 1);
+                });
             });
 
             asyncTest("switchPage() loads multiple views", function() {
