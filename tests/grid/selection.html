@@ -14,7 +14,7 @@
         <link rel="stylesheet" href="../qunit.css" type="text/css" />
     </head>
     <body>
-        <h1 id="qunit-header">kendo.ui.Navigatable</h1>
+        <h1 id="qunit-header">Grid selection and navigation</h1>
         <h2 id="qunit-banner"></h2>
         <div id="qunit-testrunner-toolbar"></div>
         <h2 id="qunit-userAgent"></h2>
@@ -28,21 +28,21 @@
                 return this.trigger( { type: "keydown", keyCode: key } );
             }
 
-            module("kendo.ui.Navigatable", {
-                setup: function() {                    
-                    table = $("<table><tbody/></table>").appendTo(document.body);                    
+            module("Grid selection and navigation<", {
+                setup: function() {
+                    table = $("<table><tbody/></table>").appendTo(document.body);
                 },
                 teardown: function() {
-                    table.remove();                    
+                    table.remove();
                 }
             });
 
             test("focusing grid element focus first cell", function() {
                 var grid = new Grid(table, { data: [{foo: 1}, {foo: 2}] });
-                grid.element.focus();                
+                grid.element.focus();
                 ok(grid.element.find(">tbody>tr>td").is(".t-state-focused"));
-            });  
-                       
+            });
+
      </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
