@@ -1,11 +1,17 @@
-(function($, window) {
+(function($) {
     var kendo = window.kendo;
 
     var Comparer = {
         selector: function(field) {
-            return $.isFunction(field) ? field : function(record) {
-                return record[field];
-            };
+            if (field) {
+                return $.isFunction(field) ? field : function(record) {
+                    return record[field];
+                };
+            }
+
+            return function(record) {
+                return record;
+            }
         },
         asc: function(field) {
             var selector = this.selector(field);
@@ -43,9 +49,9 @@
         }
     };
 
-    var Filter = {	               
-        create: function(expressions) {            
-            var indx, 
+    var Filter = {
+        create: function(expressions) {
+            var idx,
                 length,
                 expr,
                 selector,
@@ -54,16 +60,16 @@
                 descriptors = [],
                 caseSensitive,
                 predicate;
-                
-            expressions = expressions || []; 
-            for(indx = 0, length = expressions.length; indx < length; indx ++) {
-                expr = expressions[indx];
-                if(typeof expr.value === "string" && !expr.caseSensitive) { 
+
+            expressions = expressions || [];
+            for(idx = 0, length = expressions.length; idx < length; idx ++) {
+                expr = expressions[idx];
+                if(typeof expr.value === "string" && !expr.caseSensitive) {
                      caseSensitive = function(value) {
                         return value.toLowerCase();
                      };
                 } else {
-                    caseSensitive = function(value) { 
+                    caseSensitive = function(value) {
                         return value;
                     };
                 }
@@ -74,39 +80,44 @@
             }
             predicate = Filter.combine(descriptors);
 
-            return function(data) {                 
+            return function(data) {
                 return Filter.execute(predicate, data);
-            };	
+            };
         },
         selector: function(field, caseSensitive) {
-            return $.isFunction(field) ? field : function(record) {
-                return caseSensitive(record[field]);
+            if (field) {
+                return $.isFunction(field) ? field : function(record) {
+                    return caseSensitive(record[field]);
+                };
+            }
+            return function(record) {
+                return caseSensitive(record);
             };
-        },        
+        },
         execute: function(predicate, data) {
-            var indx, 
+            var idx,
                 length = data.length,
                 record,
                 result = [];
-                
-		    for(indx = 0; indx < length; indx ++) {               
-                record = data[indx];
-                
+
+            for(idx = 0; idx < length; idx ++) {
+                record = data[idx];
+
                 if(predicate(record)) {
-				    result.push(record);
+                    result.push(record);
                 }
             }
-            		    
-		    return result;
+
+            return result;
         },
         combine: function(descriptors) {
             return function(record) {
                 var result = true,
-                indx = 0, 
+                idx = 0,
                 length = descriptors.length;
 
-                while(result && indx < length) {
-                    result = descriptors[indx ++](record);
+                while(result && idx < length) {
+                    result = descriptors[idx ++](record);
                 }
 
                 return result;
@@ -115,7 +126,7 @@
         operator: function(operator) {
             if(!operator)
                 return Filter.eq;
-            if($.isFunction(operator))                
+            if($.isFunction(operator))
                 return operator;
 
             operator = operator.toLowerCase();
@@ -126,7 +137,7 @@
                     break;
                 }
             }
-            
+
             return Filter[operator];
         },
         operatorStrings: {
@@ -139,54 +150,54 @@
             "startswith": ["startswith"],
             "endswith": ["endswith"],
             "contains": ["contains", "substringof"]
-        },        
-        eq: function(selector, value) {                        
-            return function(record){   
+        },
+        eq: function(selector, value) {
+            return function(record){
                 var item = selector(record);
-                return item > value ? false : (value > item ? false : true);                                    
+                return item > value ? false : (value > item ? false : true);
             };
         },
         neq: function(selector, value) {
-            return function(record){                       
+            return function(record){
                 return selector(record) != value;
             };
         },
-        lt: function(selector, value) {            
-            return function(record){                     
+        lt: function(selector, value) {
+            return function(record){
                 return selector(record) < value;
             };
         },
         lte: function(selector, value) {
-            return function(record){                       
+            return function(record){
                 return selector(record) <= value;
             };
         },
         gt: function(selector, value) {
-            return function(record){                       
+            return function(record){
                 return selector(record) > value;
             };
         },
         gte: function(selector, value) {
-            return function(record){                       
+            return function(record){
                 return selector(record) >= value;
             };
         },
         startswith: function(selector, value) {
-            return function(record){                       
+            return function(record){
                 return selector(record).indexOf(value) == 0;
             };
         },
         endswith: function(selector, value) {
-            return function(record){                       
+            return function(record){
                 var item = selector(record);
                 return item.lastIndexOf(value) == item.length - 1;
             };
         },
         contains: function(selector, value) {
-            return function(record){                       
+            return function(record){
                 return selector(record).indexOf(value) > -1;
             };
-        }               
+        }
     }
 
     function Query(data) {
@@ -195,7 +206,7 @@
 
     Query.expandSort = function(field, dir) {
         var descriptor = typeof field === "string" ? { field: field, dir: dir } : field,
-            descriptors = $.isArray(descriptor) ? descriptor : (descriptor !== undefined ? [descriptor] : []); 
+            descriptors = $.isArray(descriptor) ? descriptor : (descriptor !== undefined ? [descriptor] : []);
 
         return $.grep(descriptors, function(d) { return !!d.dir; });
     }
@@ -214,7 +225,7 @@
         },
         orderBy: function (selector) {
             var result = this.data.slice(0),
-                comparer = $.isFunction(selector) ? Comparer.asc(selector) : selector.compare;
+                comparer = $.isFunction(selector) || !selector ? Comparer.asc(selector) : selector.compare;
 
             return new Query(result.sort(comparer));
         },
@@ -238,11 +249,10 @@
             return this;
         },
         filter: function(expressions) {
-            expressions =  Query.expandFilter(expressions);
-            var predicate = Filter.create(expressions);                        
+            var predicate = Filter.create(Query.expandFilter(expressions));
             return new Query(predicate(this.data));
         }
     }
 
     kendo.data.Query = Query;
-})(jQuery, window);
+})(jQuery);

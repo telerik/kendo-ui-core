@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
-    <script src="../../src/jquery.js"></script>
-    <script type="text/javascript" src="../qunit.js"></script>
-    <script type="text/javascript" src="../qunit-runner.js"></script>
-    <script src="../../src/kendo.core.js"></script>
-    <script src="../../src/kendo.query.js"></script>
-    <link rel="stylesheet" href="../qunit.css" type="text/css" />
-
+    <head>
+        <title>Query Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.query.js"></script>
+        <link rel="stylesheet" href="../qunit.css" type="text/css" />
+    </head>
     <body>
         <h1 id="qunit-header">QUnit example</h1>
         <h2 id="qunit-banner"></h2>
@@ -106,6 +108,15 @@
                 equal(data[2], 1);
             });
 
+            test("orderby without parameters sorts array", function() {
+                var data = new Query([3, 2, 1]).orderBy().toArray();
+
+                equal(data.length, 3);
+                equal(data[0], 1);
+                equal(data[1], 2);
+                equal(data[2], 3);
+
+            });
             test("orderByDescending sorts numbers in descending order", function () {
                 var data = [1, 100, 10];
 
@@ -207,7 +218,7 @@
             test("orderBy using custom comparer", function() {
                 var data = [{ name: "foo" }, { name: "bar" }, { name: "foo"}];
 
-                var result = new Query(data).orderBy({ 
+                var result = new Query(data).orderBy({
                     compare: function(a, b){
                         return a.name > b.name ? 1 : (a.name < b.name ? -1 : 0);
                     }
@@ -245,22 +256,22 @@
             test("filter filters on numbers", function() {
                 var data = [ {field: 100} , {field: 10} , {field: 1} ];
 
-                var result = new Query(data).filter( { 
+                var result = new Query(data).filter( {
                     field: "field",
                     operator: "eq",
                     value: 1
                 }).toArray();
 
-                equal(result.length, 1);                
-                equal(result[0].field, 1);                
+                equal(result.length, 1);
+                equal(result[0].field, 1);
             });
 
             test("filter filters with field as a function", function() {
                 var data = [ 100, 10, 1 ];
                 var fieldFunctionWasCalled = false;
 
-                var result = new Query(data).filter( { 
-                    field: function(item) { 
+                var result = new Query(data).filter( {
+                    field: function(item) {
                         fieldFunctionWasCalled = true;
                         return item;
                     },
@@ -269,15 +280,15 @@
                 }).toArray();
 
                 ok(fieldFunctionWasCalled);
-                equal(result.length, 1);                                
+                equal(result.length, 1);
                 equal(result[0], 1);
-            });     
-                 
+            });
+
             test("filter filters with operator as a function", function() {
                 var data = [ {field: 100} , {field: 10} , {field: 1} ];
                 var operatorFunctionWasCalled = false;
 
-                var result = new Query(data).filter( { 
+                var result = new Query(data).filter( {
                     field: "field",
                     operator: function(selector, value) {
                         operatorFunctionWasCalled = true;
@@ -289,60 +300,60 @@
                 }).toArray();
 
                 ok(operatorFunctionWasCalled);
-                equal(result.length, 1);                                
+                equal(result.length, 1);
                 equal(result[0].field, 1);
             });
 
             test("filter filters on dates", function () {
                 var data = [new Date(2011, 1, 1), new Date(2008, 1, 1), new Date(2009, 1, 1)];
 
-                var result = new Query(data).filter( { 
-                    field: function(item) {                         
+                var result = new Query(data).filter( {
+                    field: function(item) {
                         return item;
                     },
                     operator: "eq",
                     value: new Date(2011, 1, 1)
                 }).toArray();
-                
+
                 equal(result.length, 1);
-                equal(result[0].getFullYear(), 2011);               
+                equal(result[0].getFullYear(), 2011);
             });
 
             test("filter filters without passing operator defaults to eq", function() {
                 var data = [ {field: 100} , {field: 10} , {field: 1} ];
 
-                var result = new Query(data).filter( { 
-                    field: "field",                 
+                var result = new Query(data).filter( {
+                    field: "field",
                     value: 1
                 }).toArray();
 
-                equal(result.length, 1);                
-                equal(result[0].field, 1);                
+                equal(result.length, 1);
+                equal(result[0].field, 1);
             });
 
             test("filter filters if passing operator allias", function() {
                 var data = [ {field: 100} , {field: 10} , {field: 1} ];
 
-                var result = new Query(data).filter( { 
-                    field: "field", 
-                    operator: "==",                
+                var result = new Query(data).filter( {
+                    field: "field",
+                    operator: "==",
                     value: 1
                 }).toArray();
 
-                equal(result.length, 1);                
-                equal(result[0].field, 1);                
+                equal(result.length, 1);
+                equal(result[0].field, 1);
             });
 
             test("filter filters with neq", function() {
                 var data = [ {field: 100} , {field: 10} , {field: 1} ];
 
-                var result = new Query(data).filter( { 
+                var result = new Query(data).filter( {
                     field: "field",
                     operator: "neq",
                     value: 1
                 }).toArray();
 
-                equal(result.length, 2);                
+                equal(result.length, 2);
                 equal(result[0].field, 100);
                 equal(result[1].field, 10);
             });
@@ -350,13 +361,13 @@
             test("filter filters with lt", function() {
                 var data = [ {field: 100} , {field: 10} , {field: 1} ];
 
-                var result = new Query(data).filter( { 
+                var result = new Query(data).filter( {
                     field: "field",
                     operator: "lt",
                     value: 100
                 }).toArray();
 
-                equal(result.length, 2);                
+                equal(result.length, 2);
                 equal(result[0].field, 10);
                 equal(result[1].field, 1);
             });
@@ -364,13 +375,13 @@
             test("filter filters with lte", function() {
                 var data = [ {field: 100} , {field: 10} , {field: 1} ];
 
-                var result = new Query(data).filter( { 
+                var result = new Query(data).filter( {
                     field: "field",
                     operator: "lte",
                     value: 10
                 }).toArray();
 
-                equal(result.length, 2);                
+                equal(result.length, 2);
                 equal(result[0].field, 10);
                 equal(result[1].field, 1);
             });
@@ -378,87 +389,87 @@
             test("filter filters with gt", function() {
                 var data = [ {field: 100} , {field: 10} , {field: 1} ];
 
-                var result = new Query(data).filter( { 
+                var result = new Query(data).filter( {
                     field: "field",
                     operator: "gt",
                     value: 10
                 }).toArray();
 
-                equal(result.length, 1);                
-                equal(result[0].field, 100);                
+                equal(result.length, 1);
+                equal(result[0].field, 100);
             });
 
             test("filter filters with gte", function() {
                 var data = [ {field: 100} , {field: 10} , {field: 1} ];
 
-                var result = new Query(data).filter( { 
+                var result = new Query(data).filter( {
                     field: "field",
                     operator: "gte",
                     value: 10
                 }).toArray();
 
-                equal(result.length, 2);                
-                equal(result[0].field, 100);                
+                equal(result.length, 2);
+                equal(result[0].field, 100);
                 equal(result[1].field, 10);
-            });            
+            });
 
             test("filter filters with eq on string", function() {
                 var data = [ {field: "a"} , {field: "b"} , {field: "c"} ];
 
-                var result = new Query(data).filter( { 
+                var result = new Query(data).filter( {
                     field: "field",
                     operator: "eq",
                     value: "c"
                 }).toArray();
 
                 equal(result.length, 1);
-                equal(result[0].field, "c");                                
+                equal(result[0].field, "c");
             });
 
             test("filter filters with startswith on string", function() {
                 var data = [ {field: "abc"} , {field: "bcd"} , {field: "cde"} ];
 
-                var result = new Query(data).filter( { 
+                var result = new Query(data).filter( {
                     field: "field",
                     operator: "startswith",
                     value: "c"
                 }).toArray();
 
                 equal(result.length, 1);
-                equal(result[0].field, "cde");                                
+                equal(result[0].field, "cde");
             });
 
             test("filter filters with endswith on string", function() {
                 var data = [ {field: "abc"} , {field: "bcd"} , {field: "cde"} ];
 
-                var result = new Query(data).filter( { 
+                var result = new Query(data).filter( {
                     field: "field",
                     operator: "endswith",
                     value: "c"
                 }).toArray();
 
                 equal(result.length, 1);
-                equal(result[0].field, "abc");                                
+                equal(result[0].field, "abc");
             });
 
             test("filter filters with contains on string", function() {
                 var data = [ {field: "abc"} , {field: "bcd"} , {field: "cde"} ];
 
-                var result = new Query(data).filter( { 
+                var result = new Query(data).filter( {
                     field: "field",
                     operator: "contains",
                     value: "b"
                 }).toArray();
 
                 equal(result.length, 2);
-                equal(result[0].field, "abc");                                
-                equal(result[1].field, "bcd");  
+                equal(result[0].field, "abc");
+                equal(result[1].field, "bcd");
             });
 
             test("filter filters with eq on string case sensitive", function() {
                 var data = [ {field: "a"} , {field: "b"} , {field: "c"}, {field: "A"} ];
 
-                var result = new Query(data).filter( { 
+                var result = new Query(data).filter( {
                     field: "field",
                     operator: "eq",
                     value: "A",
@@ -466,13 +477,13 @@
                 }).toArray();
 
                 equal(result.length, 1);
-                equal(result[0].field, "A");                                
+                equal(result[0].field, "A");
             });
 
             test("filter filters with contains on string case sensitive", function() {
                 var data = [ {field: "abc"} , {field: "Bcd"}];
 
-                var result = new Query(data).filter( { 
+                var result = new Query(data).filter( {
                     field: "field",
                     operator: "contains",
                     value: "B",
@@ -480,26 +491,39 @@
                 }).toArray();
 
                 equal(result.length, 1);
-                equal(result[0].field, "Bcd");                                
+                equal(result[0].field, "Bcd");
             });
 
             test("filter with multiple expressions", function() {
                 var data = [ {field: 100} , {field: 10} , {field: 1} ];
 
-                var result = new Query(data).filter( [{ 
-                        field: "field",
-                        operator: "gte",
-                        value: 1 
-                    },
-                    { 
-                        field: "field",
-                        operator: "lt",
-                        value: 100
-                    }]).toArray();
+                var result = new Query(data).filter( [{
+                    field: "field",
+                    operator: "gte",
+                    value: 1
+                },
+                {
+                    field: "field",
+                    operator: "lt",
+                    value: 100
+                }]).toArray();
 
-                equal(result.length, 2);                
-                equal(result[0].field, 10);                
-                equal(result[1].field, 1); 
+                equal(result.length, 2);
+                equal(result[0].field, 10);
+                equal(result[1].field, 1);
+            });
+
+            test("filter without specifying field fields array", function() {
+                var data = [100, 10, 1];
+
+                var result = new Query(data).filter( {
+                    operator: "gte",
+                    value: 10
+                }).toArray();
+
+                equal(result.length, 2);
+                equal(result[0], 100);
+                equal(result[1], 10);
             });
         </script>
     </body>
