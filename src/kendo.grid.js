@@ -2,10 +2,13 @@
     var kendo = window.kendo,
         ui = kendo.ui,
         DataSource = kendo.data.DataSource,
+        Navigatable = kendo.ui.Navigatable,
         tbodySupportsInnerHtml = kendo.support.tbodyInnerHtml,
         Component = ui.Component,
         extend = $.extend,
         isPlainObject = $.isPlainObject,
+        FOCUSSELECTOR =  ">tbody>tr>td",
+        CHANGE = "change",
         map = $.map;
 
     function Grid(element, options) {
@@ -16,6 +19,8 @@
         options = $.isArray(options) ? { data: options } : options;
 
         Component.call(that, element, options);
+
+        that.bind([CHANGE], that.options);
 
         that._element();
 
@@ -35,12 +40,9 @@
 
         that.dataSource.read();
 
-        that.element.kendoNavigatable({
-            filter: ">tbody>tr>td",
-            home: function(element) {
-                return element.find("td:first");
-            }
-        });
+        that._navigation();
+
+        that._selection();
     }
 
     Grid.prototype = {
@@ -59,7 +61,57 @@
 
             that.table = table;
         },
+        _selection: function() {
+            var that = this,
+                single,
+                row,
+                selectable = that.options.selectable;
 
+            if(selectable) {
+                single = !(selectable.mode && selectable.mode === "multi");
+                row = selectable.type && selectable.type === "row";
+
+                that.selectable = new kendo.ui.Selectable(that.element, {
+                    filter: row ? ">tbody>tr" : ">tbody>tr>td",
+                    single: single,
+                    change: function() {
+                        that.trigger("change");
+                    }
+                });
+                that.element.keydown(function(e) {
+                    if (e.keyCode === kendo.keys.SPACEBAR) {
+                        var current = that.navigatable.current;
+
+                        if (single || !e.ctrlKey) {
+                            that.selectable.clear();
+                        }
+                        that.selectable.value(row ? current.parent() : current);
+                    }
+                });
+            }
+        },
+        _navigation: function() {
+            var that = this;
+
+            that.navigatable = new Navigatable(that.element, {
+                filter: FOCUSSELECTOR,
+                home: function(element) {
+                    return element.find("td:first");
+                },
+                down: function(element, current) {
+                    return current.parent().next().children().eq(current.index());
+                },
+                left: function(element, current) {
+                    return current.prev();
+                },
+                right: function(element, current) {
+                    return current.next();
+                },
+                up: function(element, current) {
+                    return current.parent().prev().children().eq(current.index());
+                }
+            });
+        },
         _wrapper: function() {
             var that = this,
                 table = that.table,
