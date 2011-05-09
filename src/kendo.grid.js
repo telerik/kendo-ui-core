@@ -114,10 +114,10 @@
             if(that.options.pageable) {
                 that.element.keydown(function(e) {
                     if (e.keyCode === kendo.keys.PAGEUP) {
-                        that.navigatable.current = null;
+                        that.navigatable.clear();
                         that.dataSource.page(that.dataSource.page() + 1);
                     } else if (e.keyCode === kendo.keys.PAGEDOWN) {
-                        that.navigatable.current = null;
+                        that.navigatable.clear();
                         that.dataSource.page(that.dataSource.page() - 1);
                     }
                 });

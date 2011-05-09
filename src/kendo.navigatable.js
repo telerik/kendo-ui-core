@@ -14,7 +14,7 @@
 
         Component.apply(that, arguments);
 
-        element.tabIndex = Math.max(element.tabIndex, 0);
+        that.element.attr("tabIndex", Math.max(element.tabIndex || 0, 0));
 
         options = that.options;
 
