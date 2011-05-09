@@ -35,7 +35,17 @@
             chart._model = model;
 
             model.updateLayout();
-            chart.element.innerHTML = model.getView(chart._viewFactory).render();
+            var html = model.getView(chart._viewFactory).render();
+            if (typeof DOMParser != "undefined") {
+                var parser = new DOMParser(),
+                    chartDoc = parser.parseFromString(html, "text/xml"),
+                    importedDoc = document.adoptNode(chartDoc.documentElement, true);
+
+                chart.element.appendChild(importedDoc);
+            }
+            else {
+                chart.element.innerHTML = html;
+            }
         },
 
         _supportsSVG: function() {
@@ -793,7 +803,8 @@
         ViewElement.call(root, options);
 
         root.template = kendo.template(
-            "<svg width='<%= options.width %>' height='<%= options.height %>'>" +
+            "<svg xmlns='http://www.w3.org/2000/svg' version='1.1' " +
+            "width='<%= options.width %>' height='<%= options.height %>'>" +
             "<%= renderContent() %></svg>");
     }
 
@@ -1002,8 +1013,6 @@
                     }
                 }
             }
-
-            console.log(result);
 
             return result;
         }
