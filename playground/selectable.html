@@ -86,7 +86,7 @@
         <script>
             $(document).ready(function() {
                 var s = $("table>tbody").kendoSelectable({
-                    single: false,
+                    multi: true,
                     filter: ">tr>td"
                 }).data("kendoSelectable").bind("select", function(arg) {
                     //console.log("Selecting: " + arg.element);    
@@ -94,7 +94,7 @@
                 
 
                 $("ul").kendoSelectable({
-                    single: false                    
+                    multi: true                    
                 });
             });
         </script>

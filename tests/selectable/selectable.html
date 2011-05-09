@@ -61,7 +61,7 @@
             });
 
             test("multi selection attach the marquee to the document", function() {
-                var selectable = new Selectable(ul, {single: false});
+                var selectable = new Selectable(ul, {multi: true});
                 var selectee = $(ul.find(">li")[0]);
 
                 $(selectee).trigger("mousedown");
@@ -101,7 +101,7 @@
             });
 
             test("mousemove on selectable element mark it as selecting", function() {
-                var selectable = new Selectable(ul, {single: false});
+                var selectable = new Selectable(ul, {multi: true});
                 var selectees = ul.find(">li");
                 var position = $(selectees[1]).offset();
                 
@@ -113,7 +113,7 @@
             });
 
             test("mousemove away from  selectable element removes selecting class", function() {
-                var selectable = new Selectable(ul, {single: false});
+                var selectable = new Selectable(ul, {multi: true});
                 var selectees = ul.find(">li");
                 var position = $(selectees[1]).offset();
                 
@@ -138,7 +138,7 @@
             });
 
             test("multi selection click item with ctrl key pressed does not unselect previosly selected", function() {
-                var selectable = new Selectable(ul, {single: false});
+                var selectable = new Selectable(ul, {multi: true});
                 var selectees = ul.find(">li");
                 
                 $(selectees[0]).trigger("mousedown");
@@ -151,7 +151,7 @@
             });
 
             test("single selection click item with ctrl key pressed does unselect previosly selected", function() {
-                var selectable = new Selectable(ul, {single: true});
+                var selectable = new Selectable(ul);
                 var selectees = ul.find(">li");
                 
                 $(selectees[0]).trigger("mousedown");
@@ -164,7 +164,7 @@
             });
 
             test("single selection mousedown on selected item with ctrl key pressed persist selected state", function() {
-                var selectable = new Selectable(ul, {single: true});
+                var selectable = new Selectable(ul);
                 var selectee = $(ul.find(">li")[0]);
                 
                 selectee.addClass(SELECTED);                
@@ -175,7 +175,7 @@
             });
 
             test("multi selection mousedown on selected item with ctrl key pressed persist selected state", function() {
-                var selectable = new Selectable(ul, {single: false});
+                var selectable = new Selectable(ul, {multi: true});
                 var selectee = $(ul.find(">li")[0]);
                 
                 selectee.addClass(SELECTED);
@@ -186,7 +186,7 @@
             });
 
             test("multi selection click on selected item with ctrl key pressed unselect it", function() {
-                var selectable = new Selectable(ul, {single: false});
+                var selectable = new Selectable(ul, {multi: true});
                 var selectee = $(ul.find(">li")[0]);
                 
                 selectee.addClass(SELECTED);               
@@ -198,7 +198,7 @@
             });
 
             test("mousemove on selected item with ctrl key pressed unselect it", function() {
-                var selectable = new Selectable(ul, {single: false}),
+                var selectable = new Selectable(ul, {multi: true}),
                     firstSelectee = $(ul.find(">li")[0]),
                     secondSelectee = $(ul.find(">li")[1]),
                     position = secondSelectee.offset();;
@@ -216,7 +216,7 @@
             });    
             
             test("mousemove out of previosly selected item with ctrl key pressed restores selected state", function() {
-                var selectable = new Selectable(ul, {single: false}),
+                var selectable = new Selectable(ul, {multi: true}),
                     firstSelectee = $(ul.find(">li")[0]),
                     secondSelectee = $(ul.find(">li")[1]),
                     position = secondSelectee.offset();
@@ -235,7 +235,7 @@
             });     
             
             test("mouseup on selected item with ctrl key pressed unselect it on single selection", function() {
-                var selectable = new Selectable(ul, {single: true});
+                var selectable = new Selectable(ul);
                 var selectee = $(ul.find(">li")[0]);
                 
                 selectee.addClass(SELECTED);
@@ -247,7 +247,7 @@
             });
 
             test("select range between two selected elements when shift key is pressed", function() {
-                var selectable = new Selectable(ul, {single: false}),
+                var selectable = new Selectable(ul, {multi: true}),
                     firstSelectee = $(ul.find(">li")[0]),
                     secondSelectee = $(ul.find(">li")[2]);
                 
@@ -260,7 +260,7 @@
             });
 
             test("select range when no item selected with shift key pressed select from first selectable", function() {
-                var selectable = new Selectable(ul, {single: false}),                    
+                var selectable = new Selectable(ul, {multi: true}),                    
                     selectee = $(ul.find(">li")[2]);
                                                
                 selectee.trigger(ev({ type: "mousedown", shiftKey: true }));
@@ -271,7 +271,7 @@
             });
 
             test("selectRange when start element is in oposite order in the DOM", function() {
-                var selectable = new Selectable(ul, {single: false}),
+                var selectable = new Selectable(ul, {multi: true}),
                     start = ul.find(">li")[1],
                     end = ul.find(">li")[0];
                                 
@@ -281,7 +281,7 @@
             });
 
             test("shift and click clears selected items outside the selected range", function() {
-                var selectable = new Selectable(ul, {single: false}),                    
+                var selectable = new Selectable(ul, {multi: true}),                    
                     selectees = ul.find(">li");
 
                 $(selectees[0]).addClass(SELECTED);
@@ -298,7 +298,7 @@
             });
 
             test("selectRange when start and end are same element element selects it", function() {
-                var selectable = new Selectable(ul, {single: false}),                    
+                var selectable = new Selectable(ul, {multi: true}),                    
                     selectee = $(ul.find(">li")[0]);
                 
                 $(ul.find(">li")).addClass(SELECTED);                                               
@@ -366,7 +366,7 @@
             });
 
             test("selectRange accept arguments as jQuery object", function() {
-                var selectable = new Selectable(ul, {single: false}),
+                var selectable = new Selectable(ul, {multi: true}),
                     start = $(ul.find(">li")[1]),
                     end = $(ul.find(">li")[0]);
                                 
@@ -376,7 +376,7 @@
             });
 
             test("selectRange accept arguments as jQuery selectors", function() {
-                var selectable = new Selectable(ul, {single: false});
+                var selectable = new Selectable(ul, {multi: true});
                          
                 selectable.selectRange("ul>li", "ul>li");
                 var selected = selectable.value();                
@@ -384,7 +384,7 @@
             });
 
             test("clear unselect all selected elements", function() {
-                var selectable = new Selectable(ul, {single: false});
+                var selectable = new Selectable(ul, {multi: true});
                 $(ul.find(">li")).addClass(SELECTED);
 
                 selectable.clear();
@@ -394,7 +394,7 @@
             });
 
             test("set values to select through value method selects the elements", function() {
-                var selectable = new Selectable(ul, {single: false}),
+                var selectable = new Selectable(ul, {multi: true}),
                     selectees = $(ul.find(">li"));
 
                 selectable.value(selectees);
@@ -405,7 +405,7 @@
             });
 
             test("set values to select through value method triggers select event", function() {
-                var selectable = new Selectable(ul, {single: false}),
+                var selectable = new Selectable(ul, {multi: true}),
                     selectees = $(ul.find(">li")),
                     selectWasFired = false;
                 
@@ -418,7 +418,7 @@
             });
 
             test("set values to select through value method triggers change event", function() {
-                var selectable = new Selectable(ul, {single: false}),
+                var selectable = new Selectable(ul, {multi: true}),
                     selectees = $(ul.find(">li")),
                     changeWasFired = false;
                 
@@ -431,7 +431,7 @@
             });
 
             test("selectRange with shift key pressed triggers select event", function() {
-                var selectable = new Selectable(ul, {single: false}),
+                var selectable = new Selectable(ul, {multi: true}),
                     start = $(ul.find(">li")[1]),
                     end = $(ul.find(">li")[0]),
                     selectWasFired = false;
@@ -446,7 +446,7 @@
             });
 
             test("selectRange with shift key pressed triggers change event", function() {
-                var selectable = new Selectable(ul, {single: false}),
+                var selectable = new Selectable(ul, {multi: true}),
                     start = $(ul.find(">li")[1]),
                     end = $(ul.find(">li")[0]),
                     changeWasFired = false;

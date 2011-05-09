@@ -31,7 +31,7 @@
     Selectable.prototype = {
         options: {
                 filter: ">*",
-                single: true
+                multi: false
             },
             _collide: function(element, marqueePos) {
                 var pos = element.offset();
@@ -73,7 +73,8 @@
             _down: function (event) {
                 var that = this,
                     ctrlKey = event.ctrlKey,
-                    shiftKey = event.shiftKey;
+                    shiftKey = event.shiftKey,
+                    single = !that.options.multi;
                 that._downTarget = $(event.currentTarget);
                 that._shiftPressed = shiftKey;
                 $(document).bind(MOUSEUP, that._upDelegate);
@@ -82,11 +83,11 @@
                     y: event.pageY
                 };
 
-                if(!that.options.single) {
+                if(!single) {
                     $(document).bind(MOUSEMOVE, that._moveDelegate)
                 }
 
-                if (!that.options.single) {
+                if (!single) {
                     $("body").append(that._marquee);
                     that._marquee.css({
                         "left": event.clientX + 1,
@@ -97,7 +98,7 @@
                 }
 
                 var selected = that._downTarget.hasClass(SELECTED);
-                if(that.options.single || !(ctrlKey || shiftKey)) {
+                if(single || !(ctrlKey || shiftKey)) {
                     that.element
                         .find(that.options.filter + "." + SELECTED)
                         .removeClass(SELECTED);
@@ -164,11 +165,11 @@
                 $(document)
                     .unbind(MOUSEMOVE, that._moveDelegate)
 			        .unbind(MOUSEUP, that._upDelegate);
-                if (!that.options.single) {
+                if (options.multi) {
                     that._marquee.remove();
                 }
 
-                if(!options.single && that._shiftPressed === true) {
+                if(options.multi && that._shiftPressed === true) {
                     that.selectRange(that._firstSelectee(), that._downTarget);
                 }
                 else {
