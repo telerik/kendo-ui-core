@@ -1093,8 +1093,8 @@
         fx: {},
         data: {},
         keys: {
-            BACKSPACE: 9,
-            TAB: 8,
+            BACKSPACE: 8,
+            TAB: 9,
             ENTER: 13,
             ESC: 27,
             LEFT: 37,

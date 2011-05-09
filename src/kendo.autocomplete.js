@@ -37,9 +37,16 @@
             }
         });
 
+        that.navigatable.bind("focus", function(e) {
+            if (that.options.complete && e.type !== "mousedown") {
+                that.complete(that.navigatable.current.text());
+            }
+        });
+
         that.selectable = new Selectable(that.ul, {
             change: function() {
                 that.popup.close();
+                that.element.val(that.selectable.value().text());
             }
         });
 
@@ -51,17 +58,6 @@
         for (var i = value.length - 1; i > -1; i--)
             if (value.substr(i, characterLength) == character) return i;
         return -1;
-    }
-
-    function caretPos (element) {
-        var pos = -1;
-
-        if (document.selection)
-            pos = Math.abs(element.document.selection.createRange().moveStart('character', -element.value.length));
-        else if (element.selectionStart !== undefined)
-            pos = element.selectionStart;
-
-        return pos;
     }
 
     function valueArrayIndex(input, separator) {
@@ -147,7 +143,7 @@
                 key = e.keyCode,
                 keys = kendo.keys;
 
-            if (key === keys.ENTER) {
+            if (key === keys.ENTER || key === keys.TAB) {
                 that.selectable.clear();
                 that.selectable.value(that.navigatable.current);
             } else if (key !== keys.UP && key !== keys.DOWN) {
@@ -169,6 +165,35 @@
                 that.popup.close();
             } else if (length >= that.options.minLength) {
                 that.dataSource.filter( { operator: "startswith", value: value } );
+            }
+        },
+
+        _caret: function() {
+            var caret,
+                input = this.element[0];
+
+            if (input.createTextRange) {
+                caret = Math.abs(input.createTextRange().moveStart('character', -input.value.length))
+            } else {
+                caret = input.selectionStart;
+            }
+
+            return caret;
+        },
+
+        complete: function(value) {
+            var that = this,
+                input = that.element[0],
+                current = input.value,
+                caret = that._caret();
+
+            if (current !== value) {
+                if (caret <= 0) {
+                    caret = value.toLowerCase().indexOf(current.toLowerCase()) + 1;
+                }
+
+                that.element.val(value);
+                that.element[0].selectionStart = caret;
             }
         },
 
