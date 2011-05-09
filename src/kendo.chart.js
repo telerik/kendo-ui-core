@@ -2,6 +2,7 @@
     var kendo = window.kendo,
         ui = kendo.ui = kendo.ui || {},
         extend = $.extend,
+        SVG_NS = "http://www.w3.org/2000/svg",
         DEFAULT_PRECISION = 6,
         COORD_PRECISION = 3,
         ZERO_THRESHOLD = 0.2;
@@ -36,16 +37,7 @@
 
             model.updateLayout();
             var html = model.getView(chart._viewFactory).render();
-            if (typeof DOMParser != "undefined") {
-                var parser = new DOMParser(),
-                    chartDoc = parser.parseFromString(html, "text/xml"),
-                    importedDoc = document.adoptNode(chartDoc.documentElement, true);
-
-                chart.element.appendChild(importedDoc);
-            }
-            else {
-                chart.element.innerHTML = html;
-            }
+            setContent(chart.element, html);
         },
 
         _supportsSVG: function() {
@@ -53,6 +45,28 @@
                 "http://www.w3.org/TR/SVG11/feature#BasicStructure", "1.1");
         }
     };
+
+    function setContent(container, xml) {
+        if (typeof setContent.useParser == "undefined") {
+            var testFragment = "<svg xmlns='" + SVG_NS + "'></svg>",
+                testContainer = document.createElement("div"),
+                hasParser = typeof DOMParser != "undefined";
+
+            testContainer.innerHTML = testFragment;
+            setContent.useParser = hasParser && testContainer.firstChild.namespaceURI != SVG_NS;
+        }
+
+        if (setContent.useParser) {
+            var parser = new DOMParser(),
+                chartDoc = parser.parseFromString(xml, "text/xml"),
+                importedDoc = document.adoptNode(chartDoc.documentElement);
+
+            container.innerHTML = "";
+            container.appendChild(importedDoc);
+        } else {
+            container.innerHTML = xml;
+        }
+    }
 
     ui.Chart = Chart;
     $.fn.kendoChart = function(options) {
