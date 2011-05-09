@@ -53,6 +53,9 @@
         },
         home: function(context, current) {
             return context.children().first();
+        },
+        end: function(context, current) {
+            return context.children().last();
         }
     });
 
