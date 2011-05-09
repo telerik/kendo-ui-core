@@ -90,13 +90,16 @@
                 });
 
                 test("renders svg tag with default size", function() {
-                    equal(root.render(), "<svg width='800px' height='600px'></svg>");
+                    equal(root.render(),
+                        "<svg xmlns='http://www.w3.org/2000/svg' version='1.1' " +
+                        "width='800px' height='600px'></svg>");
                 });
 
                 test("renders children", function() {
                     root.children.push(contentElementStub);
                     equal(root.render(),
-                        "<svg width='800px' height='600px'>Content</svg>");
+                        "<svg xmlns='http://www.w3.org/2000/svg' version='1.1' " +
+                        "width='800px' height='600px'>Content</svg>");
                 });
             })();
 
