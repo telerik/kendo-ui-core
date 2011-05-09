@@ -63,7 +63,7 @@
                 input.press(kendo.keys.DOWN);
                 ok(autocomplete.ul.children().first().is(".t-state-focused"));
             });
-                
+
             test("pressing up focuses the last item in the popup", function() {
                 var autocomplete = new AutoComplete(input, {
                     data: ["baz", "bar"]
@@ -76,18 +76,6 @@
                 ok(autocomplete.ul.children().last().is(".t-state-focused"));
             });
 
-            test("pressing down when last item is focused should clear current item", function() {
-                var autocomplete = new AutoComplete(input, {
-                    data: ["baz", "bar"]
-                });
-
-                input.val("b");
-                autocomplete.search();
-                autocomplete.ul.children().last().addClass("t-state-focused");
-
-                input.press(kendo.keys.DOWN);
-                ok(!autocomplete.navigatable.current);
-            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
