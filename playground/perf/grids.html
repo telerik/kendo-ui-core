@@ -6,20 +6,25 @@
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.query.js"></script>
         <script src="../../src/kendo.datasource.js"></script>
+        <script src="../../src/kendo.navigatable.js"></script>
         <script src="../../src/kendo.grid.js"></script>
         <script src="benchmark.js"></script>
         <script src="http://dev.sencha.com/deploy/ext-4.0.0/ext-all.js"></script>
         <script src="http://brado23.github.com/jquery-ui/grid-datamodel2/jquery.tmpl.js"></script>
-        <script src="http://brado23.github.com/jquery-ui/ui/jquery.ui.core.js"></script> 
-        <script src="http://brado23.github.com/jquery-ui/ui/jquery.ui.widget.js"></script> 
-        <script src="http://brado23.github.com/jquery-ui/ui/jquery.ui.mouse.js"></script> 
-        <script src="https://github.com/jquery/jquery-ui/raw/grid/grid-spf/datasource.js"></script> 
-        <script src="https://github.com/jquery/jquery-ui/raw/grid/grid-spf/grid.js"></script>
+
+        <script src="https://github.com/BorisMoore/jquery-ui/raw/grid/ui/jquery.ui.core.js"></script>
+        <script src="https://github.com/BorisMoore/jquery-ui/raw/grid/ui/jquery.ui.widget.js"></script>
+        <script src="https://github.com/BorisMoore/jquery-ui/raw/grid/ui/jquery.ui.mouse.js"></script>
+        <script src="https://github.com/BorisMoore/jquery-ui/raw/grid/grid-spf/datasource.js"></script>
+        <script src="https://github.com/BorisMoore/jquery-ui/raw/grid/grid-spf/grid.js"></script>
         <script src="http://www.trirand.com/blog/jqgrid/js/jquery.jqGrid.min.js"></script>
         <script src="http://wijmo.com/Wijmo-Complete/external/jquery.glob.min.js"></script>
         <script src="http://wijmo.com/Wijmo-Complete/wijmo/jquery.wijmo.wijdatasource.js"></script>
         <script src="http://wijmo.com/Wijmo-Complete/wijmo/jquery.wijmo.wijgrid.js"></script>
         <script src="http://labs.infragistics.com/aspnet-mvc/Scripts/ig.util.js"></script>
+        <script src="https://github.com/BorisMoore/jquery-ui/raw/grid/grid-spf/observable/jquery.observable.js"></script>
+        <script src="https://github.com/BorisMoore/jquery-ui/raw/grid/grid-spf/observable/jquery.render.js"></script>
+        <script src="https://github.com/BorisMoore/jquery-ui/raw/grid/grid-spf/observable/jquery.views.js"></script>
         <script src="http://labs.infragistics.com/aspnet-mvc/Scripts/ig.dataSource.js"></script>
         <script src="http://labs.infragistics.com/aspnet-mvc/Scripts/ig.ui.shared.js"></script>
         <script src="http://labs.infragistics.com/aspnet-mvc/Scripts/ig.ui.grid.framework.js"></script>
@@ -133,7 +138,7 @@
                 });
             }
             var store = new Ext.data.Store({
-                model: "Customer", 
+                model: "Customer",
                 data: records,
                 autoLoad: true
             });
@@ -151,11 +156,11 @@
                         dataIndex : "CustomerID"
                     },
                     {
-                        text     : 'CustomerName', 
+                        text     : 'CustomerName',
                         dataIndex: 'CustomerName'
                     },
                     {
-                        text     : 'Birthday', 
+                        text     : 'Birthday',
                         dataIndex: 'Birthday'
                     }
                     ],
@@ -194,6 +199,7 @@
 
                 if ($.fn.grid) {
                     suite.add("jQuery UI Grid", function() {
+                        debugger
                         jqueryGrid.refresh();
                     });
                 }
@@ -226,5 +232,5 @@
                 .run(true);
             });
         </script>
-    </body> 
+    </body>
 </html>
