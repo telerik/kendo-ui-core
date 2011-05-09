@@ -8,6 +8,8 @@
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.query.js"></script>
         <script src="../../src/kendo.dataSource.js"></script>
+        <script src="../../src/kendo.selectable.js"></script>
+        <script src="../../src/kendo.navigatable.js"></script>
         <script src="../../src/kendo.list.js"></script>
         <script src="../../src/kendo.listView.js"></script>
         <link rel="stylesheet" href="../qunit.css" />
@@ -25,8 +27,13 @@
             var DataSource = kendo.data.DataSource,
                 dataSource;
 
+            $.fn.press = function(key, ctrl, shift) {
+                return this.trigger( { type: "keydown", keyCode: key, ctrlKey: ctrl, shiftKey: shift } );
+            }
+
             function setup(options) {
                 options = $.extend({
+                    template: "<li></li>",
                     dataSource: dataSource = new DataSource({ data: [1,2,3,4,5] })
                 }, options);
                 return $("<ul/>").kendoListView(options);
@@ -39,43 +46,72 @@
             });
 
             test("renders item for dataSource items", function() {
-                var ul = setup({
-                    template: "<li></li>"
-                });
-                dataSource.read();
+                var ul = setup();
                 equal(ul.find("li").length, 5);
             });
 
             test("dataBound event should be raised when bound", function() {
-                var ul = setup({
-                        template: "<li></li>"
-                    }),
-                    listView = ul.data("kendoListView"),
-                    called = false;
-
-                listView.bind("dataBound", function() {
-                    called = true;
-                });
-
-                dataSource.read();
+                var called = false,
+                    ul = setup({
+                        dataBound: function() {
+                            called = true;
+                        }
+                    });
                 ok(called);
             });
 
             test("clicking item raises event", function() {
                 var ul = setup({
-                        template: "<li></li>"
+                        change: function() {
+                            item = listView.selected();
+                        }
                     }),
                     item,
                     listView = ul.data("kendoListView");
 
-                listView.bind("change", function() {
-                    item = arguments[0];
-                });
-
                 dataSource.read();
-                ul.children().first().click();
+                ul.children().first().mousedown().mouseup();
                 ok(item);
             });
+
+            test("focusing grid element focus first item ", function() {
+                var listView = setup();
+                listView.focus();
+                ok(listView.find("li").first().is(".t-state-focused"));
+            });
+
+            test("down arrow moves focus on the next row same cell", function() {
+                var listView = setup();
+                listView.focus().press(kendo.keys.DOWN);
+                ok(listView.find("li:eq(1)").hasClass("t-state-focused"));
+            });
+
+            test("right arrow moves focus on the next cell on the same row", function() {
+                var listView = setup();
+                listView.focus().press(kendo.keys.RIGHT);
+                ok(listView.find("li:eq(0)").hasClass("t-state-focused"));
+            });
+
+            test("left arrow moves focus on the prev cell on the same row", function() {
+                var listView = setup();
+                listView.focus().press(kendo.keys.RIGHT).press(kendo.keys.LEFT);
+                ok(listView.find("li:eq(0)").hasClass("t-state-focused"));
+            });
+
+            test("up arrow moves focus on the prev row same cell", function() {
+                var listView = setup();
+                listView.focus().press(kendo.keys.DOWN).press(kendo.keys.UP);
+                ok(listView.find("li:eq(0)").hasClass("t-state-focused"));
+            });
+
+            test("space key select the focused item", function() {
+                    var listView = setup();
+
+                    listView.focus().press(kendo.keys.DOWN).press(kendo.keys.SPACEBAR);
+
+                    ok(listView.find("li:eq(1)").hasClass("t-state-selected"));
+                });
+
         </script>
     </body>
 </html>
