@@ -82,18 +82,6 @@
                 stop(1000);
             });
 
-            test("should not call datasource.bind if input.value < minLength", function(){
-                 var autocomplete = new AutoComplete(input, {
-                    data: ["foo", "bar"]
-                },
-                minLength: 2);
-
-                autocomplete.dataSource.bind("change", function() {
-                    ok(autocomplete.ul.is(":visible"));
-                    start();
-                });
-
-            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
