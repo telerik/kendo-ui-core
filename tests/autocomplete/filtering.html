@@ -69,19 +69,30 @@
                 stop(1000);
             });
 
-            test("popup is not open if there are no results", function() {
+            test("popup should close if input is empty", function() {
                 var autocomplete = new AutoComplete(input, {
-
                     data: ["foo", "bar"]
                 });
+                autocomplete.popup.open();
+                autocomplete.popup.bind("close", function(){
+                    ok(true);
+                    start();
+                });
+                input.val("").press(8/*backspace*/);
+                stop(1000);
+            });
+
+            test("should not call datasource.bind if input.value < minLength", function(){
+                 var autocomplete = new AutoComplete(input, {
+                    data: ["foo", "bar"]
+                },
+                minLength: 2);
 
                 autocomplete.dataSource.bind("change", function() {
-                    ok(!autocomplete.ul.is(":visible"));
+                    ok(autocomplete.ul.is(":visible"));
                     start();
                 });
 
-                input.val("z").press("f".charCodeAt(0));
-                stop(1000);
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

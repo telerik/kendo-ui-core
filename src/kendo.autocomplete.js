@@ -156,7 +156,7 @@
 
             clearTimeout(that._timeout);
 
-            if (value.length < that.options.minLength) {
+            if (!value.length) {
                 that.popup.close();
             } else {
                 that.dataSource.filter( { operator: "startswith", value: value } );
