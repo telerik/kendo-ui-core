@@ -221,7 +221,8 @@
                 column = typeof column === "string" ? { field: column } : column;
                 return {
                     field: column.field,
-                    template: column.template
+                    template: column.template,
+                    title: column.title
                 }
             });
         },
@@ -267,7 +268,8 @@
                 length,
                 html = "",
                 thead = that.table.find("thead"),
-                tr;
+                tr,
+                th;
 
             if (!thead[0]) {
                 thead = $("<thead/>").insertBefore(that.tbody);
@@ -284,7 +286,8 @@
 
             if (!tr.children().length) {
                 for (idx = 0, length = columns.length; idx < length; idx++) {
-                    html += "<th>" + columns[idx].field + "</th>";
+                    th = columns[idx];
+                    html += "<th data-field='" + th.field + "'>" + (th.title || th.field) + "</th>";
                 }
 
                 tr.html(html);
