@@ -47,7 +47,9 @@
 
         <script type="text/javascript" charset="utf-8">
             $(document).ready(function() {
-                $("input").kendoAutoComplete(["foo", "bar", "baz"]);
+                $("input").kendoAutoComplete({
+                    data: ["foo", "bar", "baz"]
+                });
             });
         </script>
     </body>
