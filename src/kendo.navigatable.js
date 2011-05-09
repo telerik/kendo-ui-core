@@ -65,6 +65,9 @@
             right: Navigatable.right,
             home: Navigatable.home
         },
+        clear: function() {
+            this.current = null;
+        },
         _keydown: function(e) {
             var that = this,
                 action = that.actions[e.keyCode];
