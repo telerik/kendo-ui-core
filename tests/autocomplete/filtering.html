@@ -40,7 +40,7 @@
 
             test("typing minLenght number of characters filters the datasource", function() {
                 var autocomplete = new AutoComplete(input, {
-                    minLength: 1,
+
                     data: ["foo", "bar"]
                 });
 
@@ -56,7 +56,7 @@
 
             test("popup is opened if there are results returned from the filter", function() {
                 var autocomplete = new AutoComplete(input, {
-                    minLength: 1,
+
                     data: ["foo", "bar"]
                 });
 
@@ -71,7 +71,7 @@
 
             test("popup is not open if there are no results", function() {
                 var autocomplete = new AutoComplete(input, {
-                    minLength: 1,
+
                     data: ["foo", "bar"]
                 });
 
