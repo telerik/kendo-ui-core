@@ -30,7 +30,10 @@
         that.navigatable = new Navigatable(that.element, {
             context: that.ul,
             down: function(context, current) {
-                return Navigatable[current? "down" : "home"](context, current);
+                return Navigatable[current ? "down" : "home"](context, current);
+            },
+            up: function(context, current){
+                return Navigatable[current ? "up" : "end"](context, current);
             }
         });
 
@@ -118,6 +121,8 @@
         refresh: function() {
             var that = this,
                 data = that.dataSource.view();
+
+            that.navigatable.clear();
 
             that.list.dataBind(data);
 
