@@ -1067,7 +1067,7 @@
                 if (!kendo.support.transitions) {
                     element.dequeue(); // call next animation from the queue
                 }
-                
+
                 if (options.hide) {
                     element.hide();
                 }
@@ -1103,7 +1103,9 @@
             DOWN: 40,
             END: 35,
             HOME: 36,
-            SPACEBAR: 32
+            SPACEBAR: 32,
+            PAGEUP: 33,
+            PAGEDOWN: 34
         },
         support: support,
         animate: animate,

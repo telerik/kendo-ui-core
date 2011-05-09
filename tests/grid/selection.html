@@ -8,6 +8,7 @@
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.query.js"></script>
         <script src="../../src/kendo.datasource.js"></script>
+        <script src="../../src/kendo.pager.js"></script>
         <script src="../../src/kendo.navigatable.js"></script>
         <script src="../../src/kendo.selectable.js"></script>
         <script src="../../src/kendo.grid.js"></script>
@@ -29,7 +30,7 @@
             }
 
             function setup(options) {
-                options = $.extend(options, { data: [{foo: 1, bar: 1}, {foo: 2, bar:2}] });
+                options = $.extend({ data: [{foo: 1, bar: 1}, {foo: 2, bar:2}] }, options);
                 return new Grid(table, options);
             }
 
@@ -39,6 +40,7 @@
                     },
                     teardown: function() {
                         table.remove();
+                        $(".t-grid-pager").remove();
                     }
                 });
 
@@ -70,6 +72,48 @@
                     var grid = setup();
                     grid.element.focus().press(kendo.keys.DOWN).press(kendo.keys.UP);
                     ok(table.find("tbody tr:eq(0)").find("td").hasClass("t-state-focused"));
+                });
+
+                test("pageUp should page to the next page", function() {
+                    var grid = setup({
+                        pageable: {
+                            pageSize: 1
+                        }
+                    });
+                    table.focus().press(kendo.keys.PAGEUP);
+                    equal(grid.dataSource.page(), 2);
+                });
+
+                test("pageDown should page to the prev page", function() {
+                    var grid = setup({
+                        pageable: {
+                            pageSize: 1
+                        }
+                    });
+                    $(".t-grid-pager").find("a:not(.currentPage)").click();
+                    table.focus().press(kendo.keys.PAGEDOWN);
+                    equal(grid.dataSource.page(), 1);
+                });
+
+                test("pageDown should not page to the pass first", function() {
+                    var grid = setup({
+                        pageable: {
+                            pageSize: 1
+                        }
+                    });
+                    table.focus().press(kendo.keys.PAGEDOWN);
+                    equal(grid.dataSource.page(), 1);
+                });
+
+                test("down arrow after paging should select first cell", function() {
+                    var grid = setup({
+                        pageable: {
+                            pageSize: 1
+                        }
+                    });
+                    table.focus().press(kendo.keys.PAGEDOWN).press(kendo.keys.DOWN);
+
+                    ok(table.find(">tbody>tr>td").first().is(".t-state-focused"));
                 });
 
                 test("space key select the focused cell", function() {
