@@ -73,7 +73,7 @@
                 });
 
                 test("space key select the focused cell", function() {
-                    var grid = setup({ selectable: true });
+                    var grid = setup({ selectable: "cell" });
 
                     grid.element.focus().press(kendo.keys.DOWN).press(kendo.keys.SPACEBAR);
 
@@ -81,7 +81,7 @@
                 });
 
                 test("space key select the multiple focused cells if multiple selection is enabled", function() {
-                    var grid = setup({ selectable:{ mode: "multi" } });
+                    var grid = setup({ selectable: "multipleCell" });
 
                     grid.element.focus()
                                 .press(kendo.keys.DOWN)
@@ -94,7 +94,7 @@
                 });
 
                 test("space key select single cells if multiple selection is enabled but ctrl is not active", function() {
-                    var grid = setup({ selectable:{ mode: "multi" } });
+                    var grid = setup({ selectable: "multipleCell" });
 
                     grid.element.focus()
                                 .press(kendo.keys.DOWN)
@@ -107,20 +107,20 @@
                 });
 
                 test("clicking on cell selects it", function() {
-                    var grid = setup({ selectable: true }),
+                    var grid = setup({ selectable: "cell" }),
                         cell = table.find("tbody tr:eq(1)").find("td").first();
                     cell.mousedown().mouseup();
                     ok(cell.hasClass("t-state-selected"));
                 });
 
                 test("clicking on cell selects the row if row selection is enabled", function() {
-                    var grid = setup({ selectable: { type: "row" } }),
+                    var grid = setup({ selectable: true }),
                         cell = table.find("tbody tr:eq(1)").find("td").first();
                     cell.mousedown().mouseup();
                     ok(cell.parent().hasClass("t-state-selected"));
                 });
 
-                test("selecting a cell triggers change event passing the selection", function() {
+                test("selecting a cell triggers change event", function() {
                     var triggered = false,
                         grid = setup({
                             selectable: true,

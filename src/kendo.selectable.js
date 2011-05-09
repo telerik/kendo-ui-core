@@ -23,8 +23,7 @@
         that._upDelegate = proxy(that._up, that);
 
         that.element.addClass(SELECTABLE);
-        that.element.delegate("." + SELECTABLE + " " + that.options.filter, MOUSEDOWN, proxy(that._down, that))
-                           .bind(SELECTSTART, false);
+        that.element.delegate("." + SELECTABLE + " " + that.options.filter, MOUSEDOWN, proxy(that._down, that));
         that.bind(["change"], that.options);
     }
 
@@ -115,8 +114,6 @@
                 else {
                     that._downTarget.addClass(ACTIVE);
                 }
-
-                //event.preventDefault();
             },
             _move: function (event) {
                 var that = this,
@@ -129,6 +126,8 @@
                     "width": pos.right - pos.left,
                     "height": pos.bottom - pos.top
                 });
+
+                $(document).bind(SELECTSTART, false);
 
                 that.element.find(that.options.filter).each(function () {
                     var selectee = $(this),
