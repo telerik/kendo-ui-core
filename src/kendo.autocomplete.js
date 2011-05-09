@@ -106,8 +106,10 @@
     AutoComplete.prototype = {
         options: {
             multiple: false,
+            minLength: 1,
             separator: ', ',
-            template: "<li><%= data %></li>"
+            template: "<li><%= data %></li>",
+            delay: 300
         },
 
         refresh: function() {
@@ -142,17 +144,23 @@
                 that.selectable.value(that.navigatable.current);
             } else if (key !== keys.UP && key !== keys.DOWN) {
                 clearTimeout(that._timeout);
+
                 that._timeout = setTimeout(function() {
                     that.search();
-                }, 300);
+                }, that.options.delay);
             }
         },
         search: function() {
             var that = this,
-                term = that.value();
+                value = that.value();
 
             clearTimeout(that._timeout);
-            that.dataSource.filter( { operator: "startswith", value: term } );
+
+            if (value.length < that.options.minLength) {
+                that.popup.close();
+            } else {
+                that.dataSource.filter( { operator: "startswith", value: value } );
+            }
         },
         value: function() {
             return this.element.val();
