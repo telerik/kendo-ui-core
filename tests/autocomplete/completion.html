@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>AutoComplete Completion</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.query.js"></script>
+        <script src="../../src/kendo.datasource.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.list.js"></script>
+        <script src="../../src/kendo.navigatable.js"></script>
+        <script src="../../src/kendo.selectable.js"></script>
+        <script src="../../src/kendo.autocomplete.js"></script>
+        <link rel="stylesheet" href="../qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">AutoComplete Completion</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var AutoComplete = kendo.ui.AutoComplete,
+                input;
+
+            $.fn.press = function(key) {
+                return this.trigger({ type: "keydown", keyCode: key } );
+            }
+
+            $.fn.selectedText = function() {
+                var that = this[0];
+
+                if (that.createTextRange) {
+                    return that.createTextRange().text;
+                } else {
+                    return that.value.substring(that.selectionStart);
+                }
+            },
+
+            module("kendo.ui.AutoComplete navigation", {
+                setup: function() {
+                    input = $("<input />").appendTo(document.body);
+                },
+                teardown: function() {
+                    input.add($("ul")).remove();
+                }
+            });
+
+            test("current popup item completes the value of the input if complete is enabled", function() {
+                var autocomplete = new AutoComplete(input, {
+                    data: ["baz", "bar"],
+                    complete: true
+                });
+
+                input.val("b");
+                autocomplete.search();
+
+                input.press(kendo.keys.DOWN);
+                equal(input.val(), "baz");
+            });
+
+            test("changing the current popup item does not update the input value", function() {
+                var autocomplete = new AutoComplete(input, {
+                    data: ["baz", "bar"]
+                });
+
+                input.val("b");
+                autocomplete.search();
+
+                input.press(kendo.keys.DOWN);
+                equal(input.val(), "b");
+            });
+
+            test("completion selects the remainder of the word", function() {
+                var autocomplete = new AutoComplete(input, {
+                    data: ["baz", "bar"]
+                });
+
+                input.val("b");
+                autocomplete.complete("baz");
+                equal(input.selectedText(), "az");
+            });
+
+            test("completion selects the remainder of the second word", function() {
+                var autocomplete = new AutoComplete(input, {
+                    data: ["baz", "bar"]
+                });
+
+                input.val("b");
+                autocomplete.complete("baz");
+                autocomplete.complete("bar");
+                equal(input.selectedText(), "ar");
+            });
+
+            test("pressing enter closes the dropdown", function() {
+                var autocomplete = new AutoComplete(input, {
+                    data: ["baz", "bar"]
+                });
+
+                input.val("b");
+                autocomplete.search();
+                input.press(kendo.keys.DOWN);
+                input.press(kendo.keys.ENTER);
+
+                ok(!autocomplete.ul.is(":visible"));
+            });
+
+            test("pressing enter closes updates the value of the autocomplete", function() {
+                var autocomplete = new AutoComplete(input, {
+                    data: ["baz", "bar"]
+                });
+
+                input.val("b");
+                autocomplete.search();
+                input.press(kendo.keys.DOWN);
+                input.press(kendo.keys.ENTER);
+
+                equal(input.val(), "baz");
+            });
+
+            test("pressing tab closes updates the value of the autocomplete", function() {
+                var autocomplete = new AutoComplete(input, {
+                    data: ["baz", "bar"]
+                });
+
+                input.val("b");
+                autocomplete.search();
+                input.press(kendo.keys.DOWN);
+                input.press(kendo.keys.TAB);
+
+                equal(input.val(), "baz");
+            });
+
+            test("mousedown does not complete", function() {
+                var autocomplete = new AutoComplete(input, {
+                    data: ["baz", "bar"],
+                    complete: true
+                });
+
+                input.val("b");
+                autocomplete.search();
+                autocomplete.ul.children().first().mousedown();
+
+                equal(input.val(), "b");
+            });
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>
