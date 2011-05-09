@@ -436,6 +436,7 @@
             var that = this;
 
             if(val !== undefined) {
+                val = Math.min(Math.max(val, 1), that._totalPages());
                 that.query({ page: val, pageSize: that.pageSize(), sort: that.sort(), filter: that.filter()});
                 return;
             }
@@ -473,7 +474,13 @@
         },
         total: function() {
             return this._total;
-        }
+        },
+        _totalPages: function() {
+            var that = this,
+                pageSize = that.pageSize() || that.total();
+
+            return Math.ceil((that.total() || 0) / pageSize);
+        },
     });
 
     extend(kendo.data, {

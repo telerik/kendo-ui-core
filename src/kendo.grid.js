@@ -99,7 +99,7 @@
                     return element.find("td:first");
                 },
                 down: function(element, current) {
-                    return current.parent().next().children().eq(current.index());
+                    return current ? current.parent().next().children().eq(current.index()) : element.find("td:first");
                 },
                 left: function(element, current) {
                     return current.prev();
@@ -111,6 +111,17 @@
                     return current.parent().prev().children().eq(current.index());
                 }
             });
+            if(that.options.pageable) {
+                that.element.keydown(function(e) {
+                    if (e.keyCode === kendo.keys.PAGEUP) {
+                        that.navigatable.current = null;
+                        that.dataSource.page(that.dataSource.page() + 1);
+                    } else if (e.keyCode === kendo.keys.PAGEDOWN) {
+                        that.navigatable.current = null;
+                        that.dataSource.page(that.dataSource.page() - 1);
+                    }
+                });
+            }
         },
         _wrapper: function() {
             var that = this,
