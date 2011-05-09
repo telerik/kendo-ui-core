@@ -38,11 +38,11 @@
 
         that._pager();
 
-        that.dataSource.read();
-
         that._navigation();
 
         that._selection();
+
+        that.dataSource.read();
     }
 
     Grid.prototype = {
