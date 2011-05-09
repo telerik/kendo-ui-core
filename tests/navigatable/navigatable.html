@@ -97,6 +97,15 @@
                 ok(navigatable.current[0] === ul.children().first()[0]);
             });
 
+            test("call clear method should clear current item", function() {
+                var navigatable = new Navigatable(ul);
+
+                ul.focus();
+                navigatable.clear();
+
+                ok(!navigatable.current);
+            });
+
             test("focused state is removed on blur", function() {
                 ul.kendoNavigatable().focus().blur();
 

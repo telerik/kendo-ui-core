@@ -28,7 +28,10 @@
         that._dataSource();
 
         that.navigatable = new Navigatable(that.element, {
-            context: that.ul
+            context: that.ul,
+            down: function(context, current) {
+                return Navigatable[current? "down" : "home"](context, current);
+            }
         });
 
         that.selectable = new Selectable(that.ul, {
@@ -152,16 +155,18 @@
         },
         search: function() {
             var that = this,
-                value = that.value();
+                value = that.value(),
+                length = value.length;
 
             clearTimeout(that._timeout);
 
-            if (!value.length) {
+            if (!length) {
                 that.popup.close();
-            } else {
+            } else if (length >= that.options.minLength) {
                 that.dataSource.filter( { operator: "startswith", value: value } );
             }
         },
+
         value: function() {
             return this.element.val();
         }
