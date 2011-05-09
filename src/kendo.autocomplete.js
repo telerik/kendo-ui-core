@@ -107,6 +107,7 @@
 
     AutoComplete.prototype = {
         options: {
+            complete: false,
             multiple: false,
             minLength: 1,
             separator: ', ',
@@ -181,6 +182,23 @@
             return caret;
         },
 
+        _selection: function(start, end) {
+            var input = this.element[0];
+
+            if (input.createTextRange) {
+                var selRange = input.createTextRange(),
+                    character = "character";
+
+                selRange.collapse(true);
+                selRange.moveStart(character, start);
+                selRange.moveEnd(character, end - start);
+                selRange.select();
+            } else if (input.selectionStart) {
+                input.selectionStart = start;
+                input.selectionEnd = end;
+            }
+        },
+
         complete: function(value) {
             var that = this,
                 input = that.element[0],
@@ -192,8 +210,8 @@
                     caret = value.toLowerCase().indexOf(current.toLowerCase()) + 1;
                 }
 
-                that.element.val(value);
-                that.element[0].selectionStart = caret;
+                input.value = value;
+                input.selectionStart = caret;
             }
         },
 
