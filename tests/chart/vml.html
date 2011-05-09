@@ -85,13 +85,14 @@
                 });
 
                 test("renders div tag with default size", function() {
-                    equal(root.render(), "<div style='width:800px; height:600px;'></div>");
+                    equal(root.render(),
+                    "<div style='width:800px; height:600px; position: relative;'></div>");
                 });
 
                 test("renders children", function() {
                     root.children.push(contentElementStub);
                     equal(root.render(),
-                        "<div style='width:800px; height:600px;'>Content</div>");
+                    "<div style='width:800px; height:600px; position: relative;'>Content</div>");
                 });
             })();
 
@@ -123,9 +124,9 @@
 
                 test("renders path tag", function() {
                     equal(path.render(),
-                    "<kvml:shape style='position: absolute; left: 0; top: 0;' " +
-                        "strokecolor='#000'>" +
-                        "<kvml:path v='m 10.5,20.5' />" +
+                    "<kvml:shape style='position:absolute; width:1px; height:1px;' " +
+                        "strokecolor='#000' coordorigin='0 0' coordsize='1 1'>" +
+                        "<kvml:path v='m 10,20 e' />" +
                     "</kvml:shape>");
                 });
 

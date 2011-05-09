@@ -523,8 +523,8 @@
                 positions = [];
 
             for (var i = 0; i < majorDivisions; i++) {
-                positions.push(y);
-                y = round(y + step, COORD_PRECISION);
+                positions.push(round(y, COORD_PRECISION));
+                y = y + step;
             }
 
             return positions;
@@ -948,7 +948,7 @@
         ViewElement.call(root, options);
 
         root.template = kendo.template(
-            "<div style='width:<%= options.width %>; height:<%= options.height %>;" +
+            "<div style='width:<%= options.width %>; height:<%= options.height %>; " +
                         "position: relative;'>" +
             "<%= renderContent() %></div>");
     }
@@ -995,9 +995,9 @@
 
         ViewElement.call(path);
         path.template = kendo.template(
-            "<kvml:shape style='position: absolute; width:800px;height:600px;' " +
+            "<kvml:shape style='position:absolute; width:1px; height:1px;' " +
             "strokecolor='<%= options.stroke %>' " +
-            "coordorigin='0 0' coordsize='800 600'>" +
+            "coordorigin='0 0' coordsize='1 1'>" +
             "<kvml:path v='<%= renderPoints() %> e' /></kvml:shape>");
 
         path.points = points || [];
@@ -1047,9 +1047,11 @@
     }
 
     function measureText(text, style) {
-        var measureBox = measureText.measureBox,
+        var BORDER = 2, // Opera requires the baseline marker to have a border
+            measureBox = measureText.measureBox,
             baselineMarker =
                 $("<div style='display: inline-block; height: 1px; vertical-align: baseline;" +
+                              "border: 1px solid;" +
                               "zoom: 1; *display: inline; overflow: hidden;' />");
 
         if (!measureBox) {
@@ -1065,9 +1067,9 @@
             .append(baselineMarker);
 
         var size = {
-            width: measureBox.width(),
-            height: measureBox.height(),
-            baseline: baselineMarker[0].offsetTop
+            width: measureBox.width() - BORDER,
+            height: measureBox.height() - BORDER,
+            baseline: baselineMarker[0].offsetTop + BORDER
         };
 
         return size;
