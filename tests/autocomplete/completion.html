@@ -39,7 +39,7 @@
                 }
             },
 
-            module("kendo.ui.AutoComplete navigation", {
+            module("kendo.ui.AutoComplete completion", {
                 setup: function() {
                     input = $("<input />").appendTo(document.body);
                 },
@@ -145,6 +145,22 @@
 
                 equal(input.val(), "b");
             });
+
+            test("if multiple allowed word should be completed with separator", function() {
+                var autocomplete = new AutoComplete(input, {
+                    data: ["baz", "bar"],
+                    complete: true,
+                    multiple: true
+                });
+
+                input.val("b");
+                autocomplete.search();
+                input.press(kendo.keys.DOWN);
+                input.press(kendo.keys.ENTER);
+
+                equal(input.val(), "baz, ");
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
