@@ -63,17 +63,17 @@
         },
         _selection: function() {
             var that = this,
-                single,
-                row,
+                multi,
+                cell,
                 selectable = that.options.selectable;
 
             if(selectable) {
-                single = !(selectable.mode && selectable.mode === "multi");
-                row = selectable.type && selectable.type === "row";
+                multi = typeof selectable === "string" && selectable.toLowerCase().indexOf("multiple") > -1;
+                cell = typeof selectable === "string" && selectable.toLowerCase().indexOf("cell") > -1;
 
                 that.selectable = new kendo.ui.Selectable(that.element, {
-                    filter: row ? ">tbody>tr" : ">tbody>tr>td",
-                    single: single,
+                    filter: cell ? ">tbody>tr>td" : ">tbody>tr",
+                    multi: multi,
                     change: function() {
                         that.trigger("change");
                     }
@@ -82,10 +82,10 @@
                     if (e.keyCode === kendo.keys.SPACEBAR) {
                         var current = that.navigatable.current;
 
-                        if (single || !e.ctrlKey) {
+                        if (!multi || !e.ctrlKey) {
                             that.selectable.clear();
                         }
-                        that.selectable.value(row ? current.parent() : current);
+                        that.selectable.value(cell ? current : current.parent());
                     }
                 });
             }
