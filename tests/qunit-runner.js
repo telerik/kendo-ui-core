@@ -45,7 +45,8 @@
         test.header = $('<p class="runner-test-page-header">' + test.title + "</p>").addClass("passed")[0];
         $("#runner-test-page-container").append(test.header);
 
-        test.frame = $('<iframe class="runner-test-page-frame" src="' + test.page + '"></iframe>')[0];
+        var cacheBuster = "?cacheBuster=" + (new Date()).getTime();
+        test.frame = $('<iframe class="runner-test-page-frame" src="' + test.page + cacheBuster + '"></iframe>')[0];
         $("#runner-test-page-container").append(test.frame);
 
         if (!this.sequential) {
