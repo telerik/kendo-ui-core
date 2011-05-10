@@ -9,6 +9,7 @@
         <script type="text/javascript">
             kendo.loader.slider();
         </script>
+
     </head>
     <body>
         <input type="range" id="slider" />
@@ -19,7 +20,7 @@
         </div>
         <script type="text/javascript">
             $(document).ready(function() {
-                $("#slider").kendoSlider();
+                $("#slider").kendoSlider( { smallStep: 0.5 });
                 $("#rangeSlider").kendoRangeSlider();
             });
         </script>
