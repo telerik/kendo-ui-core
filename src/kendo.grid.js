@@ -1,14 +1,16 @@
 (function($, window, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
+        keys = kendo.keys,
         DataSource = kendo.data.DataSource,
-        Navigatable = kendo.ui.Navigatable,
         tbodySupportsInnerHtml = kendo.support.tbodyInnerHtml,
         Component = ui.Component,
         extend = $.extend,
         isPlainObject = $.isPlainObject,
         FOCUSSELECTOR =  ">tbody>tr>td",
         CHANGE = "change",
+        FOCUSED = "t-state-focused",
+        FOCUSABLE = "t-focusable",
         map = $.map;
 
     function Grid(element, options) {
@@ -55,6 +57,8 @@
             var that = this,
                 table = that.element;
 
+            table.attr("tabIndex", Math.max(table.attr("tabIndex") || 0, 0));
+
             if (!table.is("table")) {
                 table = $("<table />").appendTo(that.element);
             }
@@ -80,7 +84,7 @@
                 });
                 that.element.keydown(function(e) {
                     if (e.keyCode === kendo.keys.SPACEBAR) {
-                        var current = that.navigatable.current;
+                        var current = that.focused();
 
                         if (!multi || !e.ctrlKey) {
                             that.selectable.clear();
@@ -90,39 +94,63 @@
                 });
             }
         },
-        _navigation: function() {
-            var that = this;
+        focused: function(element) {
+            var that = this,
+                focused = that._focused;
 
-            that.navigatable = new Navigatable(that.element, {
-                filter: FOCUSSELECTOR,
-                home: function(element) {
-                    return element.find("td:first");
-                },
-                down: function(element, current) {
-                    return current ? current.parent().next().children().eq(current.index()) : element.find("td:first");
-                },
-                left: function(element, current) {
-                    return current.prev();
-                },
-                right: function(element, current) {
-                    return current.next();
-                },
-                up: function(element, current) {
-                    return current.parent().prev().children().eq(current.index());
-                }
-            });
-            if(that.options.pageable) {
-                that.element.keydown(function(e) {
-                    if (e.keyCode === kendo.keys.PAGEUP) {
-                        that.navigatable.clear();
-                        that.dataSource.page(that.dataSource.page() + 1);
-                    } else if (e.keyCode === kendo.keys.PAGEDOWN) {
-                        that.navigatable.clear();
-                        that.dataSource.page(that.dataSource.page() - 1);
+            if(element !== undefined && element[0]) {
+                if (!focused || focused[0] !== element[0]) {
+                    element.addClass(FOCUSED);
+                    if (focused) {
+                        focused.removeClass(FOCUSED);
                     }
-                });
+                    that._focused = element;
+                }
+            } else {
+                return that._focused;
             }
         },
+        _navigation: function() {
+            var that = this,
+                element = that.element;
+
+            element.bind({
+                focus: function() {
+                    that.focused(element.find("td:first"));
+                },
+                blur: function() {
+                    if (that._focused) {
+                        that._focused.removeClass(FOCUSED);
+                        that._focused = null;
+                    }
+                },
+                keydown: function(e) {
+                    var key = e.keyCode,
+                        focused = that.focused();
+
+                    if (keys.UP === key) {
+                        that.focused(focused ? focused.parent().prev().children().eq(focused.index()) : element.find("td:first"));
+                    } else if (keys.DOWN === key) {
+                        that.focused(focused ? focused.parent().next().children().eq(focused.index()) : element.find("td:first"));
+                    } else if (keys.LEFT === key) {
+                        that.focused(focused ? focused.prev() : element.find("td:first"));
+                    } else if (keys.RIGHT === key) {
+                        that.focused(focused ? focused.next() : element.find("td:first"));
+                    } else if (that.options.pageable && keys.PAGEUP == key) {
+                        that._focused = null;
+                        that.dataSource.page(that.dataSource.page() + 1);
+                    } else if (that.options.pageable && keys.PAGEDOWN == key) {
+                        that._focused = null;
+                        that.dataSource.page(that.dataSource.page() - 1);
+                    }
+                }
+            });
+
+            element.addClass(FOCUSABLE)
+                  .delegate("." + FOCUSABLE + FOCUSSELECTOR, "mousedown", function(e) {
+                      that.focused($(e.currentTarget));
+                  });
+       },
         _wrapper: function() {
             var that = this,
                 table = that.table,
