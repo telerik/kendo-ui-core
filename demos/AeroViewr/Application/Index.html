@@ -1,56 +1,53 @@
-
-<!DOCTYPE html>
-
+﻿<!DOCTYPE html>
 <html>
 <head runat="server">
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<link href="Site.css" rel="stylesheet" type="text/css" />
-<script src="js/md5.js"></script>
-<script src="../../../src/jquery.js"></script>
-<script src="../../../src/kendo.core.js"></script>
-<script src="../../../src/kendo.query.js"></script>
-<script src="../../../src/kendo.datasource.js"></script>
-<script src="../../../src/kendo.pager.js"></script>
-<script src="../../../src/kendo.list.js"></script>
-<script src="../../../src/kendo.listView.js"></script>
-<script src="../../../src/kendo.grid.js"></script>
-<script src="js/aeroviewr.js"></script>
-<title>Index</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <link href="Site.css" rel="stylesheet" type="text/css" />
+    <script src="js/md5.js"></script>
+    <script src="../../../src/jquery.js"></script>
+    <script src="../../../src/kendo.core.js"></script>
+    <script src="../../../src/kendo.query.js"></script>
+    <script src="../../../src/kendo.datasource.js"></script>
+    <script src="../../../src/kendo.pager.js"></script>
+    <script src="../../../src/kendo.navigatable.js"></script>
+    <script src="../../../src/kendo.selectable.js"></script>
+    <script src="../../../src/kendo.sortable.js"></script>
+    <script src="../../../src/kendo.list.js"></script>
+    <script src="../../../src/kendo.listView.js"></script>
+    <script src="../../../src/kendo.grid.js"></script>
+    <script src="js/aeroviewr.js"></script>
+    <title>Index</title>
 </head>
 <body>
-
-<div class="wrap">
-<header class="floatWrap">
-<h1>Aero<strong>Viewr</strong></h1>
-<!--<a href="#" class="signin">Sign in</a>-->
-<!--   -- or --   -->
-<span class="signin">Signed in as <a href="#" ><em>MyUser</em></a></span>
-<ul><li><input type="text" value="flower" id="searchBox"/></li><li><a href="#" class="p-icon i-search">Search</a></li><li><a href="#" class="p-icon i-help">Help</a></li></ul>
-</header>
-
-<section class="photo">
-<img id="bigPhoto" src="img/photo_unavailable.gif" alt="big photo" />
-<div class="overlay"><!-- --></div>
-</section>
-
-<section class="main">
-<h1>Nature Set <span class="by-user">by <a href="#"><em>SomeUser</em></a></span></h1>
-<input type="button" id="toggle" value="toggle"/>
-<ol class="paging"></ol>
-<ul id="mainPhotoStrip" class="floatWrap thumbs"><li></li></ul>
-<table id="mainPhotoGrid">
-    <th data-field="id"></th>
-</table>
-</section>
-
-<section class="footer">
-<a href="#" class="slideshow"><span class="p-border-big p-icon i-slideshow"></span><em>Slideshow</em></a>
-<ul id="flatPhotoStrip" class="floatWrap thumbs"><li></li></ul>
-<a href="#" class="uploadphotos"><span class="p-border-big p-icon i-uploadphotos"></span><em>Upload photos</em></a>
-</section>
-</div>
-
+    <div class="wrap">
+        <header class="floatWrap">
+            <h1>Aero<strong>Viewr</strong></h1>
+            <!--<a href="#" class="signin">Sign in</a>-->
+            <!--   -- or --   -->
+            <span class="signin">Signed in as <a href="#" ><em>MyUser</em></a></span>
+            <ul>
+                <li><input type="text" value="flower" id="searchBox"/></li>
+                <li><a href="#" class="p-icon i-search">Search</a></li>
+                <li><a href="#" class="p-icon i-help">Help</a></li>
+            </ul>
+        </header>
+        <section class="photo">
+            <img id="bigPhoto" src="img/photo_unavailable.gif" alt="big photo" />
+            <div class="overlay"><!-- --></div>
+        </section>
+        <section class="main">
+            <h1>Nature Set <span class="by-user">by <a href="#"><em>SomeUser</em></a></span></h1>            
+            <button id="grid">Grid layout</button>
+            <button id="listView">ListView layout</button>
+            <ol class="paging"></ol>
+            <ul id="mainPhotoStrip" class="floatWrap thumbs"></ul>
+            <table id="mainPhotoGrid"></table>
+        </section>
+        <section class="footer">
+            <a href="#" class="slideshow"><span class="p-border-big p-icon i-slideshow"></span><em>Slideshow</em></a>
+            <ul id="flatPhotoStrip" class="floatWrap thumbs"></ul>
+            <a href="#" class="uploadphotos"><span class="p-border-big p-icon i-uploadphotos"></span><em>Upload photos</em></a>
+        </section>
+    </div>
 </body>
 </html>
-
-
