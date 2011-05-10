@@ -14,5 +14,9 @@ tests.push(
     {
         page: "autocomplete/navigation.html",
         title: "autocomplete navigation"
+    },
+    {
+        page: "autocomplete/events.html",
+        title: "autocomplete events"
     }
 );

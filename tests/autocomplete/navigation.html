@@ -9,9 +9,6 @@
         <script src="../../src/kendo.query.js"></script>
         <script src="../../src/kendo.datasource.js"></script>
         <script src="../../src/kendo.popup.js"></script>
-        <script src="../../src/kendo.list.js"></script>
-        <script src="../../src/kendo.navigatable.js"></script>
-        <script src="../../src/kendo.selectable.js"></script>
         <script src="../../src/kendo.autocomplete.js"></script>
         <link rel="stylesheet" href="../qunit.css" type="text/css" />
     </head>
@@ -50,20 +47,6 @@
                 ok(autocomplete.ul.children().first().is(".t-state-focused"));
             });
 
-            test("the current item is cleared during rebinding", function() {
-                var autocomplete = new AutoComplete(input, {
-                    data: ["foo", "bar"]
-                });
-
-                input.val("f");
-                autocomplete.search();
-                input.press(kendo.keys.DOWN);
-                input.val("b");
-                autocomplete.search();
-                input.press(kendo.keys.DOWN);
-                ok(autocomplete.ul.children().first().is(".t-state-focused"));
-            });
-
             test("pressing up focuses the last item in the popup", function() {
                 var autocomplete = new AutoComplete(input, {
                     data: ["baz", "bar"]
@@ -76,6 +59,138 @@
                 ok(autocomplete.ul.children().last().is(".t-state-focused"));
             });
 
+            test("pressing up clears the focused state from the previous item", function() {
+                var autocomplete = new AutoComplete(input, {
+                    data: ["baz", "bar"]
+                });
+
+                input.val("b");
+                autocomplete.search();
+
+                autocomplete.current(autocomplete.ul.children().last());
+                input.press(kendo.keys.UP);
+                ok(!autocomplete.ul.children().last().is(".t-state-focused"));
+            });
+
+            test("pressing down clears the focused state from the previous item", function() {
+                var autocomplete = new AutoComplete(input, {
+                    data: ["baz", "bar"]
+                });
+
+                input.val("b");
+                autocomplete.search();
+
+                autocomplete.current(autocomplete.ul.children().first());
+                input.press(kendo.keys.DOWN);
+                ok(!autocomplete.ul.children().first().is(".t-state-focused"));
+            });
+
+            test("clicking an item focuses the input", function() {
+                var wasFocused = false, autocomplete = new AutoComplete(input, {
+                    data: ["baz", "bar"]
+                });
+
+                input.focus(function() {
+                    wasFocused = true;
+                });
+
+                input.val("ba");
+                autocomplete.search();
+                autocomplete.ul.children().first().click();
+
+                ok(wasFocused);
+            });
+
+            test("pressing enter focuses the input", function() {
+                var wasFocused = false, autocomplete = new AutoComplete(input, {
+                    data: ["baz", "bar"]
+                });
+
+                input.focus(function() {
+                    wasFocused = true;
+                });
+
+                input.val("ba");
+                autocomplete.search();
+
+                input.press(kendo.keys.DOWN);
+                input.press(kendo.keys.ENTER);
+                ok(wasFocused);
+            });
+
+            test("clicking an item applies selected style", function() {
+                var autocomplete = new AutoComplete(input, {
+                    data: ["baz", "bar"]
+                });
+
+                input.val("ba");
+                autocomplete.search();
+                autocomplete.ul.children().first().click();
+
+                ok(autocomplete.ul.children().first().is(".t-state-selected"));
+            });
+
+            test("changing the current popup item does not update the input value", function() {
+                var autocomplete = new AutoComplete(input, {
+                    data: ["baz", "bar"]
+                });
+
+                input.val("b");
+                autocomplete.search();
+
+                input.press(kendo.keys.DOWN);
+                equal(input.val(), "b");
+            });
+
+            test("pressing enter closes the dropdown", function() {
+                var autocomplete = new AutoComplete(input, {
+                    data: ["baz", "bar"]
+                });
+
+                input.val("b");
+                autocomplete.search();
+                input.press(kendo.keys.DOWN);
+                input.press(kendo.keys.ENTER);
+
+                ok(!autocomplete.ul.is(":visible"));
+            });
+
+            test("pressing enter closes updates the value of the autocomplete", function() {
+                var autocomplete = new AutoComplete(input, {
+                    data: ["baz", "bar"]
+                });
+
+                input.val("b");
+                autocomplete.search();
+                input.press(kendo.keys.DOWN);
+                input.press(kendo.keys.ENTER);
+
+                equal(input.val(), "baz");
+            });
+
+            test("pressing tab closes updates the value of the autocomplete", function() {
+                var autocomplete = new AutoComplete(input, {
+                    data: ["baz", "bar"]
+                });
+
+                input.val("b");
+                autocomplete.search();
+                input.press(kendo.keys.DOWN);
+                input.press(kendo.keys.TAB);
+
+                equal(input.val(), "baz");
+            });
+
+            test("select applies selected style", function() {
+                var autocomplete = new AutoComplete(input, {
+                    data: ["baz", "bar"]
+                });
+
+                input.val("b");
+                autocomplete.search();
+                autocomplete.select(autocomplete.ul.children().first());
+                ok(autocomplete.ul.children().first().is(".t-state-selected"));
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
