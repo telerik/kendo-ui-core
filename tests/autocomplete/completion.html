@@ -58,9 +58,25 @@
                     blurWasCalled = true;
                 };
 
+                autocomplete.navigatable.current = autocomplete.ul.children().first();
                 input.press(kendo.keys.ENTER);
                 ok(blurWasCalled);
             });
+
+            test("pressing enter calls _blur when no item is selected", function() {
+                var blurWasCalled, autocomplete = new AutoComplete(input, {
+                    data: ["baz", "bar"],
+                    complete: true
+                });
+
+                autocomplete._blur = function(li) {
+                    blurWasCalled = true;
+                };
+
+                input.press(kendo.keys.ENTER);
+                ok(blurWasCalled);
+            });
+
             test("pressing tab calls _blur", function() {
                 var blurWasCalled, autocomplete = new AutoComplete(input, {
                     data: ["baz", "bar"],
@@ -71,6 +87,7 @@
                     blurWasCalled = true;
                 };
 
+                autocomplete.navigatable.current = autocomplete.ul.children().first();
                 input.press(kendo.keys.TAB);
                 ok(blurWasCalled);
             });

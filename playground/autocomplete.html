@@ -35,19 +35,21 @@
         </style>
     </head>
     <body>
+        <input onchange="console.log('input: change')" />
+
         <select onchange="console.log('select: change')">
             <option>foo</option>
             <option>bar</option>
         </select>
 
-        <input value="" />
+        <input value="" id="autocomplete" />
 
         <script type="text/javascript" charset="utf-8">
             $(document).ready(function() {
-                $("input").kendoAutoComplete({
+                $("#autocomplete").kendoAutoComplete({
                     data: ["foo", "bar", "baz"],
                     change: function() {
-                        console.log("autocomplete: change");
+                        console.log("autocomplete: change from: <" + this.previous + "> to:<" + this.value() + ">");
                     }
                 });
             });
