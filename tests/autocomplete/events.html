@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>AutoComplete Events</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.query.js"></script>
+        <script src="../../src/kendo.datasource.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.navigatable.js"></script>
+        <script src="../../src/kendo.autocomplete.js"></script>
+        <link rel="stylesheet" href="../qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">AutoComplete Events</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var AutoComplete = kendo.ui.AutoComplete,
+                input;
+
+            $.fn.press = function(key) {
+                return this.trigger({ type: "keydown", keyCode: key } );
+            }
+
+            module("kendo.ui.AutoComplete events", {
+                setup: function() {
+                    input = $("<input />").appendTo(document.body);
+                },
+                teardown: function() {
+                    input.add($("ul")).remove();
+                }
+            });
+
+            test("_blur calls _change", function() {
+                var changeWasCalled = false, autocomplete = new AutoComplete(input, {
+                    data: ["foo", "bar"]
+                });
+
+                autocomplete._change = function() {
+                    changeWasCalled = true;
+                }
+
+                autocomplete._blur();
+
+                ok(changeWasCalled);
+            });
+
+            test("_change raises the change event if value has changed", function() {
+                var changeWasCalled = false, autocomplete = new AutoComplete(input, {
+                    change: function() {
+                        changeWasCalled = true;
+                    }
+                });
+
+                autocomplete.previous = "foo";
+                autocomplete.value("bar");
+                autocomplete._change();
+                ok(changeWasCalled);
+            });
+
+            test("_change is not raised initially", function() {
+                var changeWasCalled = false, autocomplete = new AutoComplete(input, {
+                    change: function() {
+                        changeWasCalled = true;
+                    }
+                });
+                input.focus();
+                autocomplete._change();
+                ok(!changeWasCalled);
+            });
+
+            test("_change does not raise change event if value has't change", function() {
+                var changeWasCalled = false, autocomplete = new AutoComplete(input, {
+                    change: function() {
+                        changeWasCalled = true;
+                    }
+                });
+
+                autocomplete.previous = "foo";
+                autocomplete.value("foo");
+                autocomplete._change();
+                ok(!changeWasCalled);
+            });
+
+            test("previous is initialzed on focus", function() {
+                var autocomplete = new AutoComplete(input, {
+                });
+
+                input.val("foo").focus();
+                equal(autocomplete.previous, "foo");
+            });
+       </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>

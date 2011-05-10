@@ -45,12 +45,6 @@
         down: function(context, current) {
             return current.next();
         },
-        left: function() {
-            return null;
-        },
-        right: function() {
-            return null;
-        },
         home: function(context, current) {
             return context.children().first();
         },
@@ -64,8 +58,6 @@
             filter: ">*",
             up: Navigatable.up,
             down: Navigatable.down,
-            left: Navigatable.left,
-            right: Navigatable.right,
             home: Navigatable.home
         },
         clear: function() {
@@ -77,7 +69,6 @@
 
             if (action) {
                 that._change(action(that.context, that.current), e);
-
                 e.preventDefault();
             }
         },

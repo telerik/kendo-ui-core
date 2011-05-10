@@ -2,9 +2,8 @@
     var kendo = window.kendo,
         ui = kendo.ui,
         DataSource = kendo.data.DataSource,
-        Navigatable = ui.Navigatable,
-        Selectable = ui.Selectable,
         Component = ui.Component,
+        CHANGE = "change",
         proxy = $.proxy,
         extend = $.extend;
 
@@ -21,36 +20,30 @@
             anchor: that.element
         });
 
-        that.list = new ui.List(that.ul, {
-            template: that.options.template
-        });
-
         that._dataSource();
 
-        that.navigatable = new Navigatable(that.element, {
-            context: that.ul,
-            down: function(context, current) {
-                return Navigatable[current ? "down" : "home"](context, current);
-            },
-            up: function(context, current){
-                return Navigatable[current ? "up" : "end"](context, current);
-            }
-        });
+        that.bind([CHANGE], that.options);
 
-        that.navigatable.bind("focus", function(e) {
-            if (that.options.complete && e.type !== "mousedown") {
-                that.complete(that.navigatable.current.text());
-            }
-        });
+        that.template = kendo.template(that.options.template);
 
-        that.selectable = new Selectable(that.ul, {
-            change: function() {
-                that.popup.close();
-                that.element.val(that.selectable.value().text());
-            }
-        });
+        that.ul
+            .mousedown(function() {
+                setTimeout(function() {
+                    clearTimeout(that._bluring);
+                }, 0);
+            })
+            .delegate("li", "click", proxy(that._click, that));
 
-        that.element.keydown(proxy(that._keydown, that));
+        that.element
+            .keydown(proxy(that._keydown, that))
+            .focus(function() {
+                that.previous = that.value();
+            })
+            .blur(function() {
+                that._bluring = setTimeout(function() {
+                    that._blur();
+                }, 100);
+            });
     }
 
     function lastIndexOf(value, character) {
@@ -58,35 +51,6 @@
         for (var i = value.length - 1; i > -1; i--)
             if (value.substr(i, characterLength) == character) return i;
         return -1;
-    }
-
-
-    function autoFill(input, text, separator, multiple) {
-        var textBoxValue = input.val(),
-            endIndex = caretPos(input);
-
-        var lastSeparatorIndex = multiple && separator ? $t.lastIndexOf(textBoxValue.substring(0, endIndex), separator) : -1;
-        var startIndex = lastSeparatorIndex != -1 ? lastSeparatorIndex + separator.length : 0;
-
-        var filterString = textBoxValue.substring(startIndex, endIndex);
-        var matchIndex = text.toLowerCase().indexOf(filterString.toLowerCase());
-
-        if (matchIndex != -1) {
-
-            var stringToAppend = text.substring(matchIndex + filterString.length);
-
-            if (multiple) {
-                var split = textBoxValue.split(separator),
-                    wordIndex = valueArrayIndex(input, separator);
-
-                split[wordIndex] = filterString + stringToAppend;
-                input.value = split.join(separator) + (component.multiple && wordIndex != 0 && wordIndex == split.length - 1 ? separator : '');
-            } else {
-                input.val(filterString + stringToAppend);
-            }
-
-            selection(input, endIndex, endIndex + stringToAppend.length);
-        }
     }
 
     AutoComplete.prototype = {
@@ -103,9 +67,9 @@
             var that = this,
                 data = that.dataSource.view();
 
-            that.navigatable.clear();
+            that._current = null;
 
-            that.list.dataBind(data);
+            that.ul[0].innerHTML = kendo.render(that.template, data);
 
             that.popup[data.length ? "open" : "close"]();
         },
@@ -123,28 +87,93 @@
             that.dataSource.bind("change", proxy(that.refresh, that));
         },
 
+        _blur: function() {
+            var that = this;
+
+            that.popup.close();
+            that._change();
+        },
+
+        select: function(li) {
+            var that = this;
+
+            if (li) {
+                that.value(li.text());
+                that.current(li.addClass("t-state-selected"));
+            }
+
+            if (that.element[0] !== document.activeElement) {
+                that.element.focus();
+            }
+
+            that._blur();
+        },
+
+        _change: function() {
+            var that = this,
+                value = that.value();
+
+            that.term = value;
+            if (value !== that.previous) {
+                that.trigger(CHANGE);
+                that.previous = value;
+            }
+        },
+
+        current: function(candidate) {
+            var that = this;
+
+            if (candidate !== undefined) {
+                if (that._current) {
+                    that._current.removeClass("t-state-focused");
+                }
+
+                that._current = candidate.addClass("t-state-focused");
+
+                if (that.options.complete) {
+                    that.complete(that._current.text());
+                }
+            } else {
+                return that._current;
+            }
+        },
+
+        _click: function(e) {
+            this.select($(e.currentTarget));
+        },
+
         _keydown: function(e) {
             var that = this,
                 key = e.keyCode,
                 keys = kendo.keys;
 
-            if (key === keys.ENTER || key === keys.TAB) {
-                that.selectable.clear();
-                that.selectable.value(that.navigatable.current);
-            } else if (key !== keys.UP && key !== keys.DOWN) {
-                clearTimeout(that._timeout);
+            if (key === keys.DOWN) {
+                that.current(that._current ? that._current.next() : that.ul.children().first());
 
-                that._timeout = setTimeout(function() {
-                    that.search();
+                e.preventDefault();
+            } else if (key === keys.UP) {
+                that.current(that._current ? that._current.prev() : that.ul.children().last());
+
+                e.preventDefault();
+            } else if (key === keys.ENTER || key === keys.TAB) {
+                that.select(that._current);
+            } else {
+                clearTimeout(that._typing);
+
+                that._typing = setTimeout(function() {
+                    if (that.term !== that.value()) {
+                        that.search();
+                    }
                 }, that.options.delay);
             }
         },
+
         search: function() {
             var that = this,
                 value = that.value(),
                 length = value.length;
 
-            clearTimeout(that._timeout);
+            clearTimeout(that._typing);
 
             if (!length) {
                 that.popup.close();
@@ -166,7 +195,7 @@
             return caret;
         },
 
-        _selection: function(start, end) {
+        selection: function(start, end) {
             var input = this.element[0];
 
             if (input.createTextRange) {
@@ -185,8 +214,8 @@
 
         complete: function(value) {
             var that = this,
-                input = that.element[0],
-                current = input.value,
+                element = that.element[0],
+                current = element.value,
                 caret = that._caret();
 
             if (current !== value) {
@@ -207,13 +236,20 @@
                //     input.value = split.join(separator) + (component.multiple && wordIndex != 0 && wordIndex == split.length - 1 ? separator : '');
                // }
 
-                input.value = value;
-                input.selectionStart = caret;
+                element.value = value;
+                element.selectionStart = caret;
             }
         },
 
-        value: function() {
-            return this.element.val();
+        value: function(value) {
+            var that = this,
+                element = that.element[0];
+
+            if (value !== undefined) {
+                element.value = value;
+            } else {
+                return element.value;
+            }
         }
     }
 
