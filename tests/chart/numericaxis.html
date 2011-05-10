@@ -15,7 +15,8 @@
                 Box = Chart.Box,
                 numericAxis,
                 gridLayout,
-                chartBox = new Box(0, 0, 800, 600);
+                chartBox = new Box(0, 0, 800, 600),
+                TOLERANCE = 1.5;
 
             function moduleSetup() {
                 numericAxis = new kendo.ui.Chart.NumericAxis();
@@ -57,7 +58,7 @@
                 [1000, 1000, 200],
                 [1000, 1050, 10],
                 [1000, 1100, 20],
-                [1000, 1200, 50],
+                [1000, 1200, 50]
             ];
 
            test("Major unit calculation for positive values", function() {
@@ -255,7 +256,7 @@
                     same(factoryStub.renderedLines[0], [
                         MAX_LABEL_WIDTH, chartBox.y1 + LABEL_HEIGHT / 2,
                         MAX_LABEL_WIDTH, chartBox.y2 - LABEL_HEIGHT / 2
-                    ]);
+                    ], TOLERANCE);
                 });
 
                 test("creates labels", 1, function() {
@@ -273,7 +274,7 @@
 
                     numericAxis.getViewElements(factoryStub);
 
-                    same(labelsY, [0, 97.333, 194.667, 292, 389.333, 486.667, 584]);
+                    same(labelsY, [0, 97.333, 194.667, 292, 389.333, 486.667, 584], TOLERANCE);
                 });
 
                 test("major ticks are distributed vertically", function() {
@@ -283,7 +284,7 @@
                     var ticksY = $.map(factoryStub.renderedLines, function(line) {
                         return line[1];
                     });
-                    same(ticksY, [8, 105.333, 202.667, 300, 397.333, 494.667, 592]);
+                    same(ticksY, [8, 105.333, 202.667, 300, 397.333, 494.667, 592], TOLERANCE);
                 });
 
             })();
