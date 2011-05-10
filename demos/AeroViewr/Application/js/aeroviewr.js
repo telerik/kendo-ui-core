@@ -1,4 +1,4 @@
-(function($){
+(function ($) {
     var app = {
         key: 'ea73824c4e27a137b7597fc3ffb3ba98',
         secret: '2e767957c686dd30',
@@ -6,13 +6,13 @@
     };
 
     var auth = {
-        token:'72157626154487043-7dfd951a1ede12fa' //write auth
+        token: '72157626154487043-7dfd951a1ede12fa' //write auth
     };
 
     var service = "http://api.flickr.com/services/rest/",
         template = '<li alt="thumbnail"><img src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>_s.jpg"></li>';
 
-    function getThumbnailURL(photo){
+    function getThumbnailURL(photo) {
         return 'http://farm' + photo.farm + '.' + 'static.flickr.com/' + photo.server + '/' + photo.id + '_' + photo.secret + '_t.jpg';
     }
 
@@ -27,34 +27,34 @@
         return service + "?" + $.param(params);
     }
 
-    function getApiSig(secret, params){
+    function getApiSig(secret, params) {
         var concatString = "",
             keys = [];
 
         params["callback"] = "jsonFlickrApi";
 
         for (var key in params) {
-          if (params.hasOwnProperty(key)) {
-            keys.push(key);
-          }
+            if (params.hasOwnProperty(key)) {
+                keys.push(key);
+            }
         }
 
-        keys.sort ();
+        keys.sort();
         concatString += secret
         for (var i = 0; i < keys.length; i++) {
-          key = keys[i];
-          concatString += key + params[key];
+            key = keys[i];
+            concatString += key + params[key];
         }
         return hex_md5(concatString);
     }
 
-    $(document).ready(function() {
-        var mainPhotoStrip =  $("#mainPhotoStrip"),
-            flatPhotoStrip =  $("#flatPhotoStrip"),
+    $(document).ready(function () {
+        var mainPhotoStrip = $("#mainPhotoStrip"),
+            flatPhotoStrip = $("#flatPhotoStrip"),
             mainPhotoGrid = $("#mainPhotoGrid"),
             dataSource = new kendo.data.DataSource({
                 page: 1,
-                pageSize: 20,
+                pageSize: 5,
                 transport: {
                     read: {
                         url: service,
@@ -65,7 +65,7 @@
                     cache: "localstorage",
                     dialect: {
                         read: function(data) {
-                           var params = {
+                            var params = {
                                 text: $("#searchBox").val(),
                                 extras: "owner_name,tags",
                                 method: "flickr.photos.search",
@@ -89,40 +89,44 @@
                 }
             });
 
-         $('.i-help').click(function(e) {
+        $('.i-help').click(function (e) {
             dataSource.transport.cache.clear(); // temp in order to force items removal from the localStore
-         });
-
-        $('.i-search').click(function(e) {
-           mainPhotoStrip.show();
-           dataSource.read();
         });
 
-        $('#toggle').click(function(e){
-           mainPhotoStrip.hide();
-           mainPhotoGrid.show();
+        $('.i-search').click(function (e) {
+            mainPhotoStrip.show();
+            dataSource.read();
+        });
+
+        $("#grid").click(function() {
+            mainPhotoStrip.hide();
+            mainPhotoGrid.show();            
+        });
+        $("#listView").click(function() {
+            mainPhotoStrip.show();
+            mainPhotoGrid.hide();            
         });
 
         mainPhotoStrip.kendoListView({
             dataSource: dataSource,
             template: template
-        }).data("kendoListView")
-          .bind("change", function(element) {
-            mainPhotoStrip.hide();
-            $("#bigPhoto").fadeOut("slow")
-                .attr("src", $("img:first", element).attr("src").replace("_s",""))
-                .bind("load", function(e) {
-                        $(e.target).hide().fadeIn("medium");
+        }).hide().data("kendoListView")
+          .bind("change", function () {
+              mainPhotoStrip.hide();
+              $("#bigPhoto").fadeOut("slow")
+                .attr("src", $("img:first", this.selected()).attr("src").replace("_s", ""))
+                .bind("load", function (e) {
+                    $(e.target).hide().fadeIn("medium");
                 });
-            }).bind("dataBound", function() {
-                mainPhotoStrip.find("img").bind("load", function() {
-                    $(this).css("display", "block")
-                         .css("marginLeft", ~~($(this).width()/2))
-                         .animate({marginLeft: 0}, 500)
+          }).bind("dataBound", function () {
+              mainPhotoStrip.find("img").bind("load", function () {
+                  $(this).css("display", "block")
+                         .css("marginLeft", ~~($(this).width() / 2))
+                         .animate({ marginLeft: 0 }, 500)
                          .parent()
-                         .css("overflow", "hidden").animate({opacity: 1}, 1000);
-                });
-            });
+                         .css("overflow", "hidden").animate({ opacity: 1 }, 1000);
+              });
+          });
 
         $("#flatPhotoStrip").kendoListView({
             dataSource: dataSource,
@@ -133,9 +137,20 @@
 
         mainPhotoGrid.kendoGrid({
             dataSource: dataSource,
-            pageable: $(".paging").data("kendoPager")
+            pageable: $(".paging").data("kendoPager"),
+            selectable: true,
+            columns: [
+                { template: '<img src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>_s.jpg">', title: "PHOTO" },
+                { field: "ownername", title: "AUTHOR" },
+                { field: "title", title: "TITLE" },
+                { field: "tags", title: "TAGS"}]
+        }).data("kendoGrid").bind("change", function () {
+            mainPhotoGrid.hide();
+            $("#bigPhoto").fadeOut("slow")
+                .attr("src", $("img:first", this.selectable.value()).attr("src").replace("_s", ""))
+                .bind("load", function (e) {
+                    $(e.target).hide().fadeIn("medium");
+                });
         });
-
-
-      });
+    });
 })(jQuery);
