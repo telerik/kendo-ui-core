@@ -92,6 +92,17 @@
         useWithBlock: true, // whether to wrap the template in a with() block
         begin: "<%", // the marker which denotes the beginning of executable code
         end: "%>", // the marker which denotes the end of executable code
+        render: function(template, data) {
+            var idx,
+                length,
+                html = "";
+
+            for (idx = 0, length = data.length; idx < length; idx++) {
+                html += template(data[idx]);
+            }
+
+            return html;
+        },
         compile: function(template, options) {
             var settings = extend({}, this, options),
                 paramName = settings.paramName,
@@ -1112,6 +1123,7 @@
         Observable: Observable,
         Template: Template,
         template: proxy(Template.compile, Template),
+        render: proxy(Template.render, Template),
         stringify: proxy(JSON.stringify, JSON),
         format: format,
         formatters: formatters,

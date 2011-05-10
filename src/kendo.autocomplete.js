@@ -2,8 +2,6 @@
     var kendo = window.kendo,
         ui = kendo.ui,
         DataSource = kendo.data.DataSource,
-        Navigatable = ui.Navigatable,
-        Selectable = ui.Selectable,
         Component = ui.Component,
         CHANGE = "change",
         proxy = $.proxy,
@@ -28,30 +26,13 @@
 
         that.template = kendo.template(that.options.template);
 
-        that.navigatable = new Navigatable(that.element, {
-            context: that.ul,
-            down: function(context, current) {
-                return Navigatable[current ? "down" : "home"](context, current);
-            },
-            up: function(context, current){
-                return Navigatable[current ? "up" : "end"](context, current);
-            },
-            focus: function(e) {
+        that.ul
+            .mousedown(function() {
                 setTimeout(function() {
                     clearTimeout(that._bluring);
                 }, 0);
-
-                if (that.options.complete && e.type !== "mousedown") {
-                    that.complete(that.navigatable.current.text());
-                }
-            }
-        });
-
-        that.selectable = new Selectable(that.ul, {
-            change: function() {
-                that._select(that.selectable.value());
-            }
-        });
+            })
+            .delegate("li", "click", proxy(that._click, that));
 
         that.element
             .keydown(proxy(that._keydown, that))
@@ -84,19 +65,11 @@
 
         refresh: function() {
             var that = this,
-                data = that.dataSource.view(),
-                template = that.template,
-                idx,
-                length,
-                html = "";
+                data = that.dataSource.view();
 
-            that.navigatable.clear();
+            that._current = null;
 
-            for (idx = 0, length = data.length; idx < length; idx++) {
-                html += template(data[idx]);
-            }
-
-            that.ul[0].innerHTML = html;
+            that.ul[0].innerHTML = kendo.render(that.template, data);
 
             that.popup[data.length ? "open" : "close"]();
         },
@@ -116,15 +89,17 @@
 
         _blur: function() {
             var that = this;
+
             that.popup.close();
             that._change();
         },
 
-        _select: function(li) {
+        select: function(li) {
             var that = this;
 
             if (li) {
                 that.value(li.text());
+                that.current(li.addClass("t-state-selected"));
             }
 
             if (that.element[0] !== document.activeElement) {
@@ -145,19 +120,44 @@
             }
         },
 
+        current: function(candidate) {
+            var that = this;
+
+            if (candidate !== undefined) {
+                if (that._current) {
+                    that._current.removeClass("t-state-focused");
+                }
+
+                that._current = candidate.addClass("t-state-focused");
+
+                if (that.options.complete) {
+                    that.complete(that._current.text());
+                }
+            } else {
+                return that._current;
+            }
+        },
+
+        _click: function(e) {
+            this.select($(e.currentTarget));
+        },
+
         _keydown: function(e) {
             var that = this,
                 key = e.keyCode,
                 keys = kendo.keys;
 
-            if (key === keys.ENTER || key === keys.TAB) {
-                if (that.navigatable.current) {
-                    that.selectable.clear();
-                    that.selectable.value(that.navigatable.current);
-                } else {
-                    that._blur();
-                }
-            } else if (key !== keys.UP && key !== keys.DOWN) {
+            if (key === keys.DOWN) {
+                that.current(that._current ? that._current.next() : that.ul.children().first());
+
+                e.preventDefault();
+            } else if (key === keys.UP) {
+                that.current(that._current ? that._current.prev() : that.ul.children().last());
+
+                e.preventDefault();
+            } else if (key === keys.ENTER || key === keys.TAB) {
+                that.select(that._current);
+            } else {
                 clearTimeout(that._typing);
 
                 that._typing = setTimeout(function() {
@@ -167,6 +167,7 @@
                 }, that.options.delay);
             }
         },
+
         search: function() {
             var that = this,
                 value = that.value(),
@@ -194,7 +195,7 @@
             return caret;
         },
 
-        _selection: function(start, end) {
+        selection: function(start, end) {
             var input = this.element[0];
 
             if (input.createTextRange) {
