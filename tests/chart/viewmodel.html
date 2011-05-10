@@ -15,7 +15,7 @@
             var Chart = kendo.ui.Chart,
                 Box = Chart.Box,
                 chartBox = new Box(0, 0, 1000, 1000),
-                TOLERANCE = 1.5;
+                TOLERANCE = 2;
 
                 function ChartElementStub(viewElement) {
                     viewElement = viewElement || new ViewElementStub();
@@ -91,7 +91,7 @@
             (function() {
                 var title,
                     titleTextElement,
-                    TITLE_TEXT_HEIGHT = 16,
+                    TITLE_TEXT_HEIGHT = 17,
                     TITLE_TEXT_WIDTH = 37;
 
                 module("Title", {
