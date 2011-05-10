@@ -35,7 +35,7 @@
         </style>
     </head>
     <body>
-        <select>
+        <select onchange="console.log('select: change')">
             <option>foo</option>
             <option>bar</option>
         </select>
@@ -45,7 +45,10 @@
         <script type="text/javascript" charset="utf-8">
             $(document).ready(function() {
                 $("input").kendoAutoComplete({
-                    data: ["foo", "bar", "baz"]
+                    data: ["foo", "bar", "baz"],
+                    change: function() {
+                        console.log("autocomplete: change");
+                    }
                 });
             });
         </script>

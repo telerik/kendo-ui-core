@@ -5,6 +5,7 @@
         Navigatable = ui.Navigatable,
         Selectable = ui.Selectable,
         Component = ui.Component,
+        CHANGE = "change",
         proxy = $.proxy,
         extend = $.extend;
 
@@ -18,7 +19,10 @@
         that.ul = $("<ul/>");
 
         that.popup = new ui.Popup(that.ul, {
-            anchor: that.element
+            anchor: that.element,
+            close: function() {
+                that.trigger(CHANGE);
+            }
         });
 
         that.list = new ui.List(that.ul, {
@@ -26,6 +30,8 @@
         });
 
         that._dataSource();
+
+        that.bind([CHANGE], that.options);
 
         that.navigatable = new Navigatable(that.element, {
             context: that.ul,
@@ -126,10 +132,16 @@
             var that = this;
 
             that.popup.close();
-            that.value(li.text());
+
+            if (li) {
+                that.value(li.text());
+            }
+
             if (focus) {
                 that.element.focus();
             }
+
+            that.trigger(CHANGE);
         },
         _keydown: function(e) {
             var that = this,
