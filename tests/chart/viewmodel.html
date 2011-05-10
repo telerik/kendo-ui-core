@@ -14,7 +14,8 @@
 
             var Chart = kendo.ui.Chart,
                 Box = Chart.Box,
-                chartBox = new Box(0, 0, 1000, 1000);
+                chartBox = new Box(0, 0, 1000, 1000),
+                TOLERANCE = 1.5;
 
                 function ChartElementStub(viewElement) {
                     viewElement = viewElement || new ViewElementStub();
@@ -112,20 +113,20 @@
 
                 test("text is positioned at top", function() {
                     equals(titleTextElement.box.y1, 0);
-                    equals(titleTextElement.box.y2, TITLE_TEXT_HEIGHT);
+                    equals(titleTextElement.box.y2, TITLE_TEXT_HEIGHT, TOLERANCE);
                 });
 
                 test("text is positioned at bottom", function() {
                     title.options.position = "bottom";
                     title.updateLayout(chartBox);
                     equals(titleTextElement.box.y1,
-                           chartBox.height() - TITLE_TEXT_HEIGHT);
+                           chartBox.height() - TITLE_TEXT_HEIGHT, TOLERANCE);
                     equals(titleTextElement.box.y2, chartBox.y2);
                 });
 
                 test("text is aligned at center", function() {
                     equals(titleTextElement.box.x1,
-                           (chartBox.width() - TITLE_TEXT_WIDTH) / 2);
+                           (chartBox.width() - TITLE_TEXT_WIDTH) / 2, TOLERANCE);
                 });
 
                 test("box width is equal to container width", function() {
@@ -133,7 +134,7 @@
                 });
 
                 test("box height is equal to text height", function() {
-                    equals(title.box.height(), TITLE_TEXT_HEIGHT);
+                    equals(title.box.height(), TITLE_TEXT_HEIGHT, TOLERANCE);
                 });
 
                 test("getViewElements returns text element", 1, function() {

@@ -13,7 +13,8 @@
         <script type="text/javascript">
             var Chart = kendo.ui.Chart,
                 Box = Chart.Box,
-                chartBox = new Box(0, 0, 800, 600);
+                chartBox = new Box(0, 0, 800, 600),
+                TOLERANCE = 1.5;
 
             (function() {
                 var categoryAxis,
@@ -51,7 +52,7 @@
                     same(factoryStub.renderedLines[0], [
                         chartBox.x1, LINE_Y,
                         chartBox.x2, LINE_Y
-                    ]);
+                    ], TOLERANCE);
                 });
 
                 test("creates labels", 1, function() {
@@ -69,13 +70,13 @@
 
                     categoryAxis.getViewElements(factoryStub);
 
-                    same(labelsX, [110.333, 381.001, 638.167]);
+                    same(labelsX, [110.333, 381.001, 638.167], TOLERANCE);
                 });
 
                 test("labels are positioned below axis line", 3, function() {
                     var labelsY = [];
                     factoryStub.text = function(content, options) {
-                        equal(options.y, LINE_Y + MAJOR_TICK_HEIGHT);
+                        equal(options.y, LINE_Y + MAJOR_TICK_HEIGHT, TOLERANCE);
                     }
 
                     categoryAxis.getViewElements(factoryStub);
@@ -88,7 +89,7 @@
                     var ticksX = $.map(factoryStub.renderedLines, function(line) {
                         return line[0];
                     });
-                    same(ticksX, [0, 266.667, 533.334, 800]);
+                    same(ticksX, [0, 266.667, 533.334, 800], TOLERANCE);
                 });
 
             })();
