@@ -48,6 +48,33 @@
                 }
             });
 
+            test("pressing enter calls _blur", function() {
+                var blurWasCalled, autocomplete = new AutoComplete(input, {
+                    data: ["baz", "bar"],
+                    complete: true
+                });
+
+                autocomplete._blur = function(li) {
+                    blurWasCalled = true;
+                };
+
+                input.press(kendo.keys.ENTER);
+                ok(blurWasCalled);
+            });
+            test("pressing tab calls _blur", function() {
+                var blurWasCalled, autocomplete = new AutoComplete(input, {
+                    data: ["baz", "bar"],
+                    complete: true
+                });
+
+                autocomplete._blur = function(li) {
+                    blurWasCalled = true;
+                };
+
+                input.press(kendo.keys.TAB);
+                ok(blurWasCalled);
+            });
+
             test("current popup item completes the value of the input if complete is enabled", function() {
                 var autocomplete = new AutoComplete(input, {
                     data: ["baz", "bar"],
@@ -193,23 +220,7 @@
                 ok(wasFocused);
             });
 
-            test("input is not focused after pressing tab", function() {
-                var wasFocused = false, autocomplete = new AutoComplete(input, {
-                    data: ["baz", "bar"]
-                });
-
-                input.focus(function() {
-                    wasFocused = true;
-                });
-
-                input.val("ba");
-                autocomplete.search();
-
-                input.press(kendo.keys.DOWN);
-                input.press(kendo.keys.TAB);
-                ok(!wasFocused);
-            });
-       </script>
+        </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
     </body>

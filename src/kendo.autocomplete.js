@@ -19,10 +19,7 @@
         that.ul = $("<ul/>");
 
         that.popup = new ui.Popup(that.ul, {
-            anchor: that.element,
-            close: function() {
-                that.trigger(CHANGE);
-            }
+            anchor: that.element
         });
 
         that.list = new ui.List(that.ul, {
@@ -51,11 +48,17 @@
 
         that.selectable = new Selectable(that.ul, {
             change: function() {
-                that._select(that.selectable.value(), true);
+                that._select(that.selectable.value());
             }
         });
 
-        that.element.keydown(proxy(that._keydown, that));
+        that.element.keydown(proxy(that._keydown, that))
+            .focus(function() {
+                that.previous = that.value();
+            })
+            .blur(function() {
+                that._blur();
+            });
     }
 
     function lastIndexOf(value, character) {
@@ -128,31 +131,42 @@
             that.dataSource.bind("change", proxy(that.refresh, that));
         },
 
-        _select: function(li, focus) {
+        _blur: function() {
             var that = this;
-
             that.popup.close();
+            that._change();
+        },
+
+        _select: function(li) {
+            var that = this;
 
             if (li) {
                 that.value(li.text());
             }
 
-            if (focus) {
+            if (that.element[0] !== document.activeElement) {
                 that.element.focus();
             }
-
-            that.trigger(CHANGE);
         },
+
+        _change: function() {
+            var that = this;
+
+            if (that.value() !== that.previous) {
+                that.trigger(CHANGE);
+                that.previous = that.value();
+            }
+        },
+
         _keydown: function(e) {
             var that = this,
                 key = e.keyCode,
                 keys = kendo.keys;
 
-            if (key === keys.ENTER) {
+            if (key === keys.ENTER || key === keys.TAB) {
                 that.selectable.clear();
                 that.selectable.value(that.navigatable.current);
-            } else if(key === keys.TAB) {
-                that._select(that.navigatable.current, false);
+                that._blur();
             } else if (key !== keys.UP && key !== keys.DOWN) {
                 clearTimeout(that._timeout);
 
