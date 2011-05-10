@@ -258,22 +258,45 @@ var QUnit = {
 	 *
 	 * @param Object actual
 	 * @param Object expected
+	 * @param Number tolerance when comparing numbers (optional)
 	 * @param String message (optional)
 	 */
-	equal: function(actual, expected, message) {
-		QUnit.push(expected == actual, actual, expected, message);
+	equal: function(actual, expected, tolerance, message) {
+		if (QUnit.objectType(tolerance) === "number") {
+			QUnit.push(QUnit.equalWithTolerance(expected, actual, tolerance), actual, expected, message);
+		} else {
+            message = tolerance;
+			QUnit.push(expected == actual, actual, expected, message);
+		}
 	},
 
-	notEqual: function(actual, expected, message) {
-		QUnit.push(expected != actual, actual, expected, message);
-	},
-	
-	deepEqual: function(actual, expected, message) {
-		QUnit.push(QUnit.equiv(actual, expected), actual, expected, message);
+	notEqual: function(actual, expected, tolerance, message) {
+		if (QUnit.objectType(tolerance) === "number") {
+			QUnit.push(!QUnit.equalWithTolerance(expected, actual, tolerance), actual, expected, message);
+		} else {
+            message = tolerance;
+			QUnit.push(expected != actual, actual, expected, message);
+		}
 	},
 
-	notDeepEqual: function(actual, expected, message) {
-		QUnit.push(!QUnit.equiv(actual, expected), actual, expected, message);
+	deepEqual: function(actual, expected, tolerance, message) {
+		if (QUnit.objectType(tolerance) === "number") {
+            QUnit.push(QUnit.equiv(actual, expected, tolerance), actual, expected, message);
+        }
+        else {
+            message = tolerance;
+            QUnit.push(QUnit.equiv(actual, expected), actual, expected, message);
+        }
+	},
+
+	notDeepEqual: function(actual, expected, tolerance, message) {
+		if (QUnit.objectType(tolerance) === "number") {
+            QUnit.push(!QUnit.equiv(actual, expected, tolerance), actual, expected, message);
+        }
+        else {
+            message = tolerance;
+            QUnit.push(!QUnit.equiv(actual, expected), actual, expected, message);
+        }
 	},
 
 	strictEqual: function(actual, expected, message) {
@@ -506,6 +529,10 @@ extend(QUnit, {
 			message: output
 		});
 	},
+
+    equalWithTolerance: function(a, b, tolerance) {
+		return Math.abs(a - b) <= tolerance;
+    },
 	
 	// Logging callbacks
 	begin: function() {},
@@ -827,7 +854,11 @@ QUnit.equiv = function () {
     var callbacks = function () {
 
         // for string, boolean, number and null
-        function useStrictEquality(b, a) {
+        function useStrictEquality(b, a, tolerance) {
+            if (QUnit.objectType(tolerance) === "number") {
+                return QUnit.equalWithTolerance(a, b, tolerance);
+            }
+
             if (b instanceof a.constructor || a instanceof b.constructor) {
                 // to catch short annotaion VS 'new' annotation of a declaration
                 // e.g. var i = 1;
@@ -870,7 +901,7 @@ QUnit.equiv = function () {
                         typeof caller !== "undefined";
             },
 
-            "array": function (b, a) {
+            "array": function (b, a, tolerance) {
                 var i, j, loop;
                 var len;
 
@@ -893,7 +924,7 @@ QUnit.equiv = function () {
                             loop = true;//dont rewalk array
                         }
                     }
-                    if (!loop && ! innerEquiv(a[i], b[i])) {
+                    if (!loop && ! innerEquiv(a[i], b[i], tolerance)) {
                         parents.pop();
                         return false;
                     }
@@ -944,23 +975,14 @@ QUnit.equiv = function () {
         };
     }();
 
-    innerEquiv = function () { // can take multiple arguments
-        var args = Array.prototype.slice.apply(arguments);
-        if (args.length < 2) {
-            return true; // end transition
+    innerEquiv = function (a, b, tolerance) { // can take multiple arguments
+        if (a === b) {
+            return true; // catch the most you can
+        } else if (a === null || b === null || typeof a === "undefined" || typeof b === "undefined" || QUnit.objectType(a) !== QUnit.objectType(b)) {
+            return false; // don't lose time with error prone cases
+        } else {
+            return bindCallbacks(a, callbacks, [b, a, tolerance]);
         }
-
-        return (function (a, b) {
-            if (a === b) {
-                return true; // catch the most you can
-            } else if (a === null || b === null || typeof a === "undefined" || typeof b === "undefined" || QUnit.objectType(a) !== QUnit.objectType(b)) {
-                return false; // don't lose time with error prone cases
-            } else {
-                return bindCallbacks(a, callbacks, [b, a]);
-            }
-
-        // apply transition with (1..n) arguments
-        })(args[0], args[1]) && arguments.callee.apply(this, args.splice(1, args.length -1));
     };
 
     return innerEquiv;
