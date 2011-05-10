@@ -1047,11 +1047,11 @@
     }
 
     function measureText(text, style) {
-        var BORDER = 2, // Opera requires the baseline marker to have a border
+        var SIZE = 1,
             measureBox = measureText.measureBox,
             baselineMarker =
-                $("<div style='display: inline-block; height: 1px; vertical-align: baseline;" +
-                              "border: 1px solid;" +
+                $("<div style='display: inline-block; vertical-align: baseline;" +
+                              "width: " + SIZE + "px; height: " + SIZE + "px;" +
                               "zoom: 1; *display: inline; overflow: hidden;' />");
 
         if (!measureBox) {
@@ -1067,9 +1067,9 @@
             .append(baselineMarker);
 
         var size = {
-            width: measureBox.width() - BORDER,
-            height: measureBox.height() - BORDER,
-            baseline: baselineMarker[0].offsetTop + BORDER
+            width: measureBox.width() - SIZE,
+            height: measureBox.height(),
+            baseline: baselineMarker[0].offsetTop + SIZE
         };
 
         return size;
