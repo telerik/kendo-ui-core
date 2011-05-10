@@ -38,76 +38,52 @@
                 }
             });
 
-            test("change is raised when the user clicks an item with the mouse", function() {
+            test("_blur calls _change", function() {
                 var changeWasCalled = false, autocomplete = new AutoComplete(input, {
-                    data: ["foo", "bar"],
-                    change: function() {
-                        changeWasCalled = true;
-                    }
+                    data: ["foo", "bar"]
                 });
 
-                input.val("fo");
-                autocomplete.search();
-                autocomplete.ul.children().first().mousedown().mouseup();
+                autocomplete._change = function() {
+                    changeWasCalled = true;
+                }
+
+                autocomplete._blur();
+
                 ok(changeWasCalled);
             });
 
-            test("change is raised when the user presses enter", function() {
+            test("_change raises the change event if value has changed", function() {
                 var changeWasCalled = false, autocomplete = new AutoComplete(input, {
-                    data: ["foo", "bar"],
                     change: function() {
                         changeWasCalled = true;
                     }
                 });
 
-                input.val("fo");
-                autocomplete.search();
-                input.press(kendo.keys.DOWN);
-                input.press(kendo.keys.ENTER);
+                autocomplete.previous = "foo";
+                autocomplete.value("bar");
+                autocomplete._change();
                 ok(changeWasCalled);
             });
 
-            test("change is raised when the user presses tab", function() {
+            test("_change does not raise change event if value has't change", function() {
                 var changeWasCalled = false, autocomplete = new AutoComplete(input, {
-                    data: ["foo", "bar"],
                     change: function() {
                         changeWasCalled = true;
                     }
                 });
 
-                input.val("fo");
-                autocomplete.search();
-                input.press(kendo.keys.DOWN);
-                input.press(kendo.keys.TAB);
-                ok(changeWasCalled);
+                autocomplete.previous = "foo";
+                autocomplete.value("foo");
+                autocomplete._change();
+                ok(!changeWasCalled);
             });
 
-            test("change is raised when the user presses tab without picking an item from the popup", function() {
-                var changeWasCalled = false, autocomplete = new AutoComplete(input, {
-                    data: ["foo", "bar"],
-                    change: function() {
-                        changeWasCalled = true;
-                    }
+            test("previous is initialzed on focus", function() {
+                var autocomplete = new AutoComplete(input, {
                 });
 
-                input.val("fo");
-                autocomplete.search();
-                input.press(kendo.keys.TAB);
-                ok(changeWasCalled);
-            });
-
-            test("change is raised when the user clicks outside of the popup", function() {
-                var changeWasCalled = false, autocomplete = new AutoComplete(input, {
-                    data: ["foo", "bar"],
-                    change: function() {
-                        changeWasCalled = true;
-                    }
-                });
-
-                input.val("fo");
-                autocomplete.search();
-                $(document.body).mousedown();
-                ok(changeWasCalled);
+                input.val("foo").focus();
+                equal(autocomplete.previous, "foo");
             });
        </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
