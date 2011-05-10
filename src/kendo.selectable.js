@@ -188,7 +188,7 @@
             value: function(val) {
                 var that = this,
                     selectElement = proxy(that._selectElement, that);
-                if(val !== undefined) {
+                if(val) {
                     val.each(function() {
                         selectElement(this);
                     });

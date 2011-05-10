@@ -417,6 +417,15 @@
                 ok(selectWasFired);
             });
 
+            test("set null as value to select", function() {
+                var selectable = new Selectable(ul),
+                    selectees = null;
+                                    
+                selectable.value(selectees);
+
+                ok(true);
+            });
+
             test("set values to select through value method triggers change event", function() {
                 var selectable = new Selectable(ul, {multi: true}),
                     selectees = $(ul.find(">li")),
