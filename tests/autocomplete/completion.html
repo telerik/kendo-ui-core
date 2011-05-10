@@ -158,10 +158,58 @@
                 input.press(kendo.keys.DOWN);
                 input.press(kendo.keys.ENTER);
 
-                equal(input.val(), "baz, ");
+                //equal(input.val(), "baz, ");
             });
 
-        </script>
+            test("clicking an item focuses the input", function() {
+                var wasFocused = false, autocomplete = new AutoComplete(input, {
+                    data: ["baz", "bar"]
+                });
+
+                input.focus(function() {
+                    wasFocused = true;
+                });
+
+                input.val("ba");
+                autocomplete.search();
+
+                autocomplete.selectable.value(autocomplete.ul.children().first());
+                ok(wasFocused);
+            });
+            test("pressing enter focuses the input", function() {
+                var wasFocused = false, autocomplete = new AutoComplete(input, {
+                    data: ["baz", "bar"]
+                });
+
+                input.focus(function() {
+                    wasFocused = true;
+                });
+
+                input.val("ba");
+                autocomplete.search();
+
+                input.press(kendo.keys.DOWN);
+                input.press(kendo.keys.ENTER);
+                ok(wasFocused);
+            });
+
+            test("input is not focused after pressing tab", function() {
+                var wasFocused = false, autocomplete = new AutoComplete(input, {
+                    data: ["baz", "bar"]
+                });
+
+                input.focus(function() {
+                    wasFocused = true;
+                });
+
+                input.val("ba");
+                autocomplete.search();
+
+                input.press(kendo.keys.DOWN);
+                input.press(kendo.keys.TAB);
+                ok(!wasFocused);
+            });
+       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
     </body>

@@ -45,8 +45,7 @@
 
         that.selectable = new Selectable(that.ul, {
             change: function() {
-                that.popup.close();
-                that.element.val(that.selectable.value().text());
+                that._select(that.selectable.value(), true);
             }
         });
 
@@ -123,14 +122,25 @@
             that.dataSource.bind("change", proxy(that.refresh, that));
         },
 
+        _select: function(li, focus) {
+            var that = this;
+
+            that.popup.close();
+            that.value(li.text());
+            if (focus) {
+                that.element.focus();
+            }
+        },
         _keydown: function(e) {
             var that = this,
                 key = e.keyCode,
                 keys = kendo.keys;
 
-            if (key === keys.ENTER || key === keys.TAB) {
+            if (key === keys.ENTER) {
                 that.selectable.clear();
                 that.selectable.value(that.navigatable.current);
+            } else if(key === keys.TAB) {
+                that._select(that.navigatable.current, false);
             } else if (key !== keys.UP && key !== keys.DOWN) {
                 clearTimeout(that._timeout);
 
@@ -213,7 +223,7 @@
         },
 
         value: function() {
-            return this.element.val();
+            return this.element.val.apply(this.element, arguments);
         }
     }
 
