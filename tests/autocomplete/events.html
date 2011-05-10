@@ -65,6 +65,17 @@
                 ok(changeWasCalled);
             });
 
+            test("_change is not raised initially", function() {
+                var changeWasCalled = false, autocomplete = new AutoComplete(input, {
+                    change: function() {
+                        changeWasCalled = true;
+                    }
+                });
+                input.focus();
+                autocomplete._change();
+                ok(!changeWasCalled);
+            });
+
             test("_change does not raise change event if value has't change", function() {
                 var changeWasCalled = false, autocomplete = new AutoComplete(input, {
                     change: function() {

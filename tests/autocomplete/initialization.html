@@ -9,7 +9,6 @@
         <script src="../../src/kendo.query.js"></script>
         <script src="../../src/kendo.datasource.js"></script>
         <script src="../../src/kendo.popup.js"></script>
-        <script src="../../src/kendo.list.js"></script>
         <script src="../../src/kendo.navigatable.js"></script>
         <script src="../../src/kendo.selectable.js"></script>
         <script src="../../src/kendo.autocomplete.js"></script>
@@ -78,13 +77,6 @@
                 ok(autocomplete.popup.element[0], autocomplete.ul[0]);
             });
 
-            test("autocomplete initializes a list for its items", function() {
-                var autocomplete = new AutoComplete(input, []);
-
-                ok(autocomplete.list);
-                ok(autocomplete.list instanceof kendo.ui.List);
-            });
-
             test("autocomplete populates its list when the datasource changes", function() {
                 var autocomplete = new AutoComplete(input, ["foo", "bar"]);
 
@@ -94,10 +86,12 @@
                 equal(autocomplete.ul.children("li").first().text(), "foo");
             });
 
-            test("autocomplete sets its template to the list", function() {
-                var autocomplete = new AutoComplete(input, ["foo", "bar"]);
+            test("changing the template", function() {
+                var autocomplete = new AutoComplete(input, {
+                    template: "<%= data.toUpperCase() %>"
+                });
 
-                equal(autocomplete.options.template, autocomplete.list.options.template);
+                equal(autocomplete.template("foo"), "FOO");
             });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
