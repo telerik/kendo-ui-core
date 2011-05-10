@@ -9,8 +9,10 @@
         token: '72157626154487043-7dfd951a1ede12fa' //write auth
     };
 
-    var service = "http://api.flickr.com/services/rest/",
-        template = '<li alt="thumbnail"><img src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>_s.jpg"></li>';
+    var IMAGESIZES = ["_s", "_t", "_m"],
+        imageSize = IMAGESIZES[0],
+        service = "http://api.flickr.com/services/rest/",
+        template = function(size) { return '<li alt="thumbnail"><img src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>' + size + '.jpg"></li>'; };
 
     function getThumbnailURL(photo) {
         return 'http://farm' + photo.farm + '.' + 'static.flickr.com/' + photo.server + '/' + photo.id + '_' + photo.secret + '_t.jpg';
@@ -52,7 +54,7 @@
         var mainPhotoStrip = $("#mainPhotoStrip"),
             flatPhotoStrip = $("#flatPhotoStrip"),
             mainPhotoGrid = $("#mainPhotoGrid"),
-            slider = $("#slider"),
+            slider = $("#slider"),            
             dataSource = new kendo.data.DataSource({
                 page: 1,
                 pageSize: 5,
@@ -106,26 +108,27 @@
         });
 
         $("#grid").click(function() {
-            mainPhotoStrip.hide();
-            slider.parent().css("display", "none");
-            mainPhotoGrid.parent().css("display", "");            
+            mainPhotoStrip.hide().data("prevVisible", false);
+            slider.parent().hide();
+            mainPhotoGrid.parent().show();
         });
         $("#listView").click(function() {
             mainPhotoStrip.show().data("prevVisible", true);
-            slider.parent().css("display", "");            
-            mainPhotoGrid.parent().css("display", "none");            
+            slider.parent().show();
+            mainPhotoGrid.parent().hide();
         });
 
         mainPhotoStrip.kendoListView({
             dataSource: dataSource,
-            template: template
+            template: template(imageSize)
         })
         .hide()        
         .data("kendoListView")        
         .bind("change", function () {
             mainPhotoStrip.hide().data("prevVisible", true);
+            slider.parent().hide();
             $("#bigPhoto").fadeOut("slow")
-            .attr("src", $("img:first", this.selected()).attr("src").replace("_s", ""))
+            .attr("src", $("img:first", this.selected()).attr("src").replace(imageSize, ""))
             .bind("load", function (e) {
                 $(e.target).hide().fadeIn("medium");
             });
@@ -142,17 +145,18 @@
 
         slider.kendoSlider({
             orientation: "vertical",
-            style: "display:none"
+            minValue: 0,
+            maxValue: 2,
+            largeStep: 1
         })
-        .data("kendoSlider");
-
-        $("#flatPhotoStrip").kendoListView({
-            dataSource: dataSource,
-            template: template
+        .parent().hide().end()
+        .data("kendoSlider")
+        .bind("change", function() {            
+            imageSize = IMAGESIZES[this.value()];
+            mainPhotoStrip.data("kendoListView").template = template(imageSize);
+            dataSource.read();
         });
-
-        $(".paging").kendoPager({ dataSource: dataSource });
-
+        
         mainPhotoGrid.kendoGrid({
             dataSource: dataSource,
             pageable: $(".paging").data("kendoPager"),
@@ -170,5 +174,12 @@
                     $(e.target).hide().fadeIn("medium");
                 });
         });
+
+        $("#flatPhotoStrip").kendoListView({
+            dataSource: dataSource,
+            template: template("_s")
+        });
+
+        $(".paging").kendoPager({ dataSource: dataSource });
     });
 })(jQuery);
