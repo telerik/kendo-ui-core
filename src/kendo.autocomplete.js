@@ -60,22 +60,6 @@
         return -1;
     }
 
-    function valueArrayIndex(input, separator) {
-        return input.value.substring(0, $t.caretPos(input)).split(separator).length - 1;
-    }
-
-    function selection(input, start, end) {
-        if (input.createTextRange) {
-            var selRange = input.createTextRange();
-            selRange.collapse(true);
-            selRange.moveStart('character', start);
-            selRange.moveEnd('character', end - start);
-            selRange.select();
-        } else if (input.selectionStart) {
-            input.selectionStart = start;
-            input.selectionEnd = end;
-        }
-    }
 
     function autoFill(input, text, separator, multiple) {
         var textBoxValue = input.val(),
@@ -209,6 +193,19 @@
                 if (caret <= 0) {
                     caret = value.toLowerCase().indexOf(current.toLowerCase()) + 1;
                 }
+               // if (that.options.multiple) {
+               //     var separator = that.options.separator;
+               //     var lastSeparatorIndex = lastIndexOf(current.substring(0, endIndex), separator);
+               //     var startIndex = lastSeparatorIndex + separator.length;
+               //     var filterString = current.substring(startIndex, endIndex);
+               //     var matchIndex = value.toLowerCase().indexOf(filterString.toLowerCase());
+
+               //     var split = value.split(separator),
+               //         wordIndex = value.substring(0, caret).split(separator).length - 1;
+
+               //     split[wordIndex] = value;
+               //     input.value = split.join(separator) + (component.multiple && wordIndex != 0 && wordIndex == split.length - 1 ? separator : '');
+               // }
 
                 input.value = value;
                 input.selectionStart = caret;
