@@ -107,8 +107,7 @@
 
                 test("renders content", function() {
                     text.content = "Text";
-                    equal(text.render().replace(/\<kvml:textbox.*?\>/, "<kvml:textbox>"),
-                            "<kvml:textbox>Text</kvml:textbox>");
+                    ok(text.render().indexOf(">Text</kvml:textbox>") != -1);
                 });
 
             })();
