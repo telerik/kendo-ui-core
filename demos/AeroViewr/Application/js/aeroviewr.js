@@ -52,6 +52,7 @@
         var mainPhotoStrip = $("#mainPhotoStrip"),
             flatPhotoStrip = $("#flatPhotoStrip"),
             mainPhotoGrid = $("#mainPhotoGrid"),
+            slider = $("#slider"),
             dataSource = new kendo.data.DataSource({
                 page: 1,
                 pageSize: 5,
@@ -94,39 +95,56 @@
         });
 
         $('.i-search').click(function (e) {
-            mainPhotoStrip.show();
+            if(mainPhotoStrip.data("prevVisible") === true) {
+                mainPhotoStrip.show().data("prevVisible", false);
+                slider.parent().css("display", "");                
+            } 
+            else {
+                mainPhotoGrid.parent().css("display", "");
+            }
             dataSource.read();
         });
 
         $("#grid").click(function() {
             mainPhotoStrip.hide();
-            mainPhotoGrid.show();            
+            slider.parent().css("display", "none");
+            mainPhotoGrid.parent().css("display", "");            
         });
         $("#listView").click(function() {
-            mainPhotoStrip.show();
-            mainPhotoGrid.hide();            
+            mainPhotoStrip.show().data("prevVisible", true);
+            slider.parent().css("display", "");            
+            mainPhotoGrid.parent().css("display", "none");            
         });
 
         mainPhotoStrip.kendoListView({
             dataSource: dataSource,
             template: template
-        }).hide().data("kendoListView")
-          .bind("change", function () {
-              mainPhotoStrip.hide();
-              $("#bigPhoto").fadeOut("slow")
-                .attr("src", $("img:first", this.selected()).attr("src").replace("_s", ""))
-                .bind("load", function (e) {
-                    $(e.target).hide().fadeIn("medium");
-                });
-          }).bind("dataBound", function () {
-              mainPhotoStrip.find("img").bind("load", function () {
-                  $(this).css("display", "block")
-                         .css("marginLeft", ~~($(this).width() / 2))
-                         .animate({ marginLeft: 0 }, 500)
-                         .parent()
-                         .css("overflow", "hidden").animate({ opacity: 1 }, 1000);
-              });
-          });
+        })
+        .hide()        
+        .data("kendoListView")        
+        .bind("change", function () {
+            mainPhotoStrip.hide().data("prevVisible", true);
+            $("#bigPhoto").fadeOut("slow")
+            .attr("src", $("img:first", this.selected()).attr("src").replace("_s", ""))
+            .bind("load", function (e) {
+                $(e.target).hide().fadeIn("medium");
+            });
+        })
+        .bind("dataBound", function () {
+            mainPhotoStrip.find("img").bind("load", function () {
+                $(this).css("display", "block")
+                        .css("marginLeft", ~~($(this).width() / 2))
+                        .animate({ marginLeft: 0 }, 500)
+                        .parent()
+                        .css("overflow", "hidden").animate({ opacity: 1 }, 1000);
+            });
+        });                
+
+        slider.kendoSlider({
+            orientation: "vertical",
+            style: "display:none"
+        })
+        .data("kendoSlider");
 
         $("#flatPhotoStrip").kendoListView({
             dataSource: dataSource,
@@ -145,7 +163,7 @@
                 { field: "title", title: "TITLE" },
                 { field: "tags", title: "TAGS"}]
         }).data("kendoGrid").bind("change", function () {
-            mainPhotoGrid.hide();
+            mainPhotoGrid.parent().css("display", "none");
             $("#bigPhoto").fadeOut("slow")
                 .attr("src", $("img:first", this.selectable.value()).attr("src").replace("_s", ""))
                 .bind("load", function (e) {

@@ -4,18 +4,22 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <link href="Site.css" rel="stylesheet" type="text/css" />
     <script src="js/md5.js"></script>
-    <script src="../../../src/jquery.js"></script>
+    <script src="../../../src/jquery.js"></script>    
     <script src="../../../src/kendo.core.js"></script>
     <script src="../../../src/kendo.query.js"></script>
     <script src="../../../src/kendo.datasource.js"></script>
     <script src="../../../src/kendo.pager.js"></script>
     <script src="../../../src/kendo.navigatable.js"></script>
     <script src="../../../src/kendo.selectable.js"></script>
+    <script src="../../../src/kendo.draganddrop.js"></script>
     <script src="../../../src/kendo.sortable.js"></script>
     <script src="../../../src/kendo.list.js"></script>
     <script src="../../../src/kendo.listView.js"></script>
     <script src="../../../src/kendo.grid.js"></script>
-    <script src="js/aeroviewr.js"></script>
+    <script src="../../../src/kendo.slider.js"></script>    
+    <script src="js/aeroviewr.js"></script> 
+    <link type="text/css" href="../../../styles/kendo.common.css" rel="stylesheet"/>
+    <link type="text/css" href="../../../styles/kendo.vista.css" rel="stylesheet"/>   
     <title>Index</title>
 </head>
 <body>
@@ -41,6 +45,7 @@
             <button id="listView">ListView layout</button>
             <ol class="paging"></ol>
             <ul id="mainPhotoStrip" class="floatWrap thumbs"></ul>
+            <input type="range" id="slider" />
             <table id="mainPhotoGrid"></table>
         </section>
         <section class="footer">
