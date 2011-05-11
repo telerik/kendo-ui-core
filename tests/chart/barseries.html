@@ -77,6 +77,62 @@
 
             })();
 
+            (function() {
+                function BarStub() { }
+                BarStub.prototype = {
+                    updateLayout: function(box) {
+                        this.box = box;
+                    }
+                }
+
+                var cluster,
+                    bars,
+                    clusterBox = new Box(0, 0, 100, 100);
+
+                function createCluster(options) {
+                    cluster = new Chart.DataPointCluster(options);
+                    bars = [ new BarStub(), new BarStub() ];
+                    [].push.apply(cluster.children, bars);
+                    cluster.updateLayout(clusterBox);
+                }
+
+                module("Horizontal Cluster", {
+                    setup: function() {
+                        createCluster();
+                    }
+                });
+
+                test("distributes width evenly", function() {
+                    $.each(bars, function() {
+                        equal(this.box.width(), clusterBox.width() / bars.length)
+                    });
+                });
+
+                test("positions children next to each other", function() {
+                    $.each(bars, function(index) {
+                        equal(this.box.x1, this.box.width() * index)
+                    });
+                });
+
+                module("Vertical Cluster", {
+                    setup: function() {
+                        createCluster({ horizontal: false });
+                    }
+                });
+
+                test("distributes height evenly", function() {
+                    $.each(bars, function() {
+                        equal(this.box.height(), clusterBox.height() / bars.length)
+                    });
+                });
+
+                test("positions children below each other", function() {
+                    $.each(bars, function(index) {
+                        equal(this.box.y1, this.box.height() * index)
+                    });
+                });
+            })();
+
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>

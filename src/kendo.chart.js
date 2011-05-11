@@ -641,6 +641,105 @@
         }
     });
 
+/*
+    var stacks = [[s0, s1], [s2, s3]];
+    var clusters = [];
+    for (var dataIx = 0; dataIx < dataPoints.length; dataIx++) {
+        var cluster = new Cluster();
+        clusters.push(cluster);
+
+        for (var stackIx = 0; stackIx < stacks.length; stackIx++) {
+            var stackSeries = stacks[stackIx],
+                dataPoints = stackSeries.data,
+                stack = new Stack();
+
+            cluster.children.push(stack);
+
+            for (var dataIx = 0; dataIx < dataPoints.length; dataIx++) {
+                var bar = new Bar();
+                bar.options.value = dataPoints[dataIx];
+
+                stack.children.push(bar);
+            }
+        }
+    }
+    */
+
+    function DataPointCluster(options) {
+        var cluster = this;
+        ChartElement.call(cluster);
+
+        cluster.options = $.extend({}, cluster.options, options);
+    }
+
+    DataPointCluster.prototype = new ChartElement();
+    $.extend(DataPointCluster.prototype, {
+        options: {
+            horizontal: true
+        },
+
+        updateLayout: function(clusterBox) {
+            var cluster = this,
+                horizontal = cluster.options.horizontal,
+                children = cluster.children,
+                childrenCount = children.length,
+                size = (horizontal ? clusterBox.width() : clusterBox.height()) / childrenCount,
+                position = horizontal ? clusterBox.x1 : clusterBox.y1;
+
+            for (var i = 0; i < children.length; i++) {
+                var childBox = new Box(clusterBox.x1, clusterBox.y1,
+                                       clusterBox.x2, clusterBox.y2);
+
+                if (horizontal) {
+                    childBox.x1 = position;
+                    childBox.x2 = position + size;
+                } else {
+                    childBox.y1 = position;
+                    childBox.y2 = position + size;
+                }
+
+                children[i].updateLayout(childBox);
+
+                position += size;
+            };
+        },
+    });
+
+    /*
+    function DataPointStack(valueAxis, options) {
+        updateLayout: function(stackBox) {
+            //  for each child (bar or point)
+            //      arrange in stacked boxes
+        }
+    }
+
+    function Bar(valueAxis, options) {
+    }
+
+    $.extend(Bar.prototype, {
+        options: {
+            fill: "#000",
+            borderWidth: 1
+        },
+
+        getViewElements: function(factory) {
+            var bar = this,
+                options = bar.options,
+                box = bar.box;
+
+            return [
+                factory.rect(box.x1, box.y1, box.width(), box.height());
+            ];
+        }
+    });
+
+    var cSeries = new ClusteredSeries(yAxis);
+    var sSeries = new StackedSeries();
+    var columnSeries = new ColumnSeries();
+    cSeries.children.push(sSeries);
+    sSeries.children.push(columnSeries);
+
+    */
     var BAR_WIDTH_RATIO = 2.6;
     function BarSeries(axisMin, axisMax, options) {
         var series = this;
@@ -654,6 +753,7 @@
     BarSeries.prototype = new ChartElement();
     $.extend(BarSeries.prototype, {
         options: {
+            
         },
 
         getViewElements: function(factory) {
@@ -969,8 +1069,8 @@
 
         ViewElement.call(text);
         text.template = kendo.template(
-            "<kvml:textbox style='position: absolute;" +
-                "left:<%= options.x %>; top:<%= options.y %>;" +
+            "<kvml:textbox style='position: absolute; " +
+                "left:<%= options.x %>px; top:<%= options.y %>px; " +
                 "font:<%= fontStyle() %>'><%= content %></kvml:textbox>");
     }
 
@@ -1144,6 +1244,7 @@
     Chart.NumericAxis = NumericAxis;
     Chart.CategoryAxis = CategoryAxis;
     Chart.BarSeries = BarSeries;
+    Chart.DataPointCluster = DataPointCluster;
     Chart.Title = Title;
     Chart.Legend = Legend;
     Chart.PlotArea = PlotArea;
