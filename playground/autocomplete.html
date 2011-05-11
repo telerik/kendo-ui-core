@@ -45,6 +45,7 @@
             $(document).ready(function() {
                 $("#autocomplete").kendoAutoComplete({
                     data: ["foo", "bar", "baz"],
+                    separator: ", ",
                     change: function() {
                         console.log("autocomplete: change from: <" + this.previous + "> to:<" + this.value() + ">");
                     }

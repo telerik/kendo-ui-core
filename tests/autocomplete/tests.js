@@ -16,6 +16,10 @@ tests.push(
         title: "autocomplete navigation"
     },
     {
+        page: "autocomplete/separator.html",
+        title: "autocomplete separator"
+    },
+    {
         page: "autocomplete/events.html",
         title: "autocomplete events"
     }
