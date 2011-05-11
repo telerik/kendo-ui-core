@@ -46,19 +46,10 @@
             });
     }
 
-    function lastIndexOf(value, character) {
-        var characterLength = character.length;
-        for (var i = value.length - 1; i > -1; i--)
-            if (value.substr(i, characterLength) == character) return i;
-        return -1;
-    }
-
     AutoComplete.prototype = {
         options: {
             complete: false,
-            multiple: false,
             minLength: 1,
-            separator: ', ',
             template: "<li><%= data %></li>",
             delay: 300
         },
@@ -84,7 +75,7 @@
             }
 
             that.dataSource = DataSource.create(dataSource);
-            that.dataSource.bind("change", proxy(that.refresh, that));
+            that.dataSource.bind(CHANGE, proxy(that.refresh, that));
         },
 
         _blur: function() {
@@ -95,10 +86,17 @@
         },
 
         select: function(li) {
-            var that = this;
+            var that = this,
+                text;
 
             if (li) {
-                that.value(li.text());
+                text = li.text();
+
+                if (that.options.separator) {
+                    text = that._append(text);
+                }
+
+                that.value(text);
                 that.current(li.addClass("t-state-selected"));
             }
 
@@ -170,15 +168,22 @@
 
         search: function() {
             var that = this,
-                value = that.value(),
-                length = value.length;
+                word = that.value(),
+                separator = that.options.separator,
+                length;
 
             clearTimeout(that._typing);
+
+            if (separator) {
+                word = word.split(separator).pop();
+            }
+
+            length = word.length;
 
             if (!length) {
                 that.popup.close();
             } else if (length >= that.options.minLength) {
-                that.dataSource.filter( { operator: "startswith", value: value } );
+                that.dataSource.filter( { operator: "startswith", value: word } );
             }
         },
 
@@ -195,50 +200,41 @@
             return caret;
         },
 
-        selection: function(start, end) {
-            var input = this.element[0];
+        complete: function(word) {
+            var that = this,
+                length = word.length,
+                element = that.element,
+                separator = that.options.separator,
+                value = that.value(),
+                caret = that._caret();
 
-            if (input.createTextRange) {
-                var selRange = input.createTextRange(),
-                    character = "character";
+            if (separator) {
+                word = that._append(word);
+            }
 
-                selRange.collapse(true);
-                selRange.moveStart(character, start);
-                selRange.moveEnd(character, end - start);
-                selRange.select();
-            } else if (input.selectionStart) {
-                input.selectionStart = start;
-                input.selectionEnd = end;
+            if (word !== value) {
+                if (caret <= 0) {
+                    caret = value.toLowerCase().indexOf(value.toLowerCase()) + 1;
+                }
+
+                that.value(word);
+                element[0].selectionStart = caret;
+
+                if (separator) {
+                    element[0].selectionEnd = caret + word.substring(caret).indexOf(separator);
+                }
             }
         },
 
-        complete: function(value) {
+        _append: function(text) {
             var that = this,
-                element = that.element[0],
-                current = element.value,
-                caret = that._caret();
+                separator = that.options.separator,
+                values = that.value().split(separator);
 
-            if (current !== value) {
-                if (caret <= 0) {
-                    caret = value.toLowerCase().indexOf(current.toLowerCase()) + 1;
-                }
-               // if (that.options.multiple) {
-               //     var separator = that.options.separator;
-               //     var lastSeparatorIndex = lastIndexOf(current.substring(0, endIndex), separator);
-               //     var startIndex = lastSeparatorIndex + separator.length;
-               //     var filterString = current.substring(startIndex, endIndex);
-               //     var matchIndex = value.toLowerCase().indexOf(filterString.toLowerCase());
-
-               //     var split = value.split(separator),
-               //         wordIndex = value.substring(0, caret).split(separator).length - 1;
-
-               //     split[wordIndex] = value;
-               //     input.value = split.join(separator) + (component.multiple && wordIndex != 0 && wordIndex == split.length - 1 ? separator : '');
-               // }
-
-                element.value = value;
-                element.selectionStart = caret;
-            }
+            values.pop();
+            values.push(text);
+            values.push("");
+            return values.join(separator);
         },
 
         value: function(value) {
