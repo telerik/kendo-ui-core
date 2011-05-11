@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>AutoComplete Separator</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.query.js"></script>
+        <script src="../../src/kendo.datasource.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.autocomplete.js"></script>
+        <link rel="stylesheet" href="../qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">AutoComplete Separator</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var AutoComplete = kendo.ui.AutoComplete,
+                input;
+
+            $.fn.press = function(key) {
+                return this.trigger({ type: "keydown", keyCode: key } );
+            }
+
+            $.fn.selectedText = function() {
+                var that = this[0];
+
+                if (that.createTextRange) {
+                    return that.createTextRange().text;
+                } else {
+                    return that.value.substring(that.selectionStart, that.selectionEnd);
+                }
+            },
+
+            module("kendo.ui.AutoComplete completion", {
+                setup: function() {
+                    input = $("<input />").appendTo(document.body);
+                },
+                teardown: function() {
+                    input.add($("ul")).remove();
+                }
+            });
+
+
+            test("separator", function() {
+                var autocomplete = new AutoComplete(input, {
+                    data: ["baz", "bar"],
+                    separator: ", "
+                });
+
+                input.val("b");
+                autocomplete.search();
+                autocomplete.select(autocomplete.ul.children().first());
+
+                equal(input.val(), "baz, ");
+            });
+
+            test("search uses the last word", function() {
+                var autocomplete = new AutoComplete(input, {
+                    data: ["foo", "bar"],
+                    separator: ", "
+                });
+
+                input.val("foo, b");
+                autocomplete.search();
+                equal(autocomplete.ul.children().first().text(), "bar");
+            });
+
+            test("insert word at specified word index", function() {
+                var autocomplete = new AutoComplete(input, {
+                    separator: ", "
+                });
+
+                input.val("foo, bar");
+                equal(autocomplete._insert(0, "bar"), "bar, bar, ");
+            });
+
+            test("search uses the word at the caret position", function() {
+                var autocomplete = new AutoComplete(input, {
+                    data: ["foo", "bar"],
+                    separator: ", "
+                });
+
+                input.val("foo, bar, ");
+                input[0].selectionStart = 0;
+                autocomplete.search();
+                equal(autocomplete.ul.children().first().text(), "foo");
+            });
+
+            test("select replaces the word at the caret position", function() {
+                var autocomplete = new AutoComplete(input, {
+                    data: ["foo", "bar"],
+                    separator: ", "
+                });
+
+                input.val("foo, bar, ");
+                input[0].selectionStart = 0;
+                autocomplete.select($("<li>baz</li>"));
+                equal(input.val(), "baz, bar, ");
+            });
+       </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>
