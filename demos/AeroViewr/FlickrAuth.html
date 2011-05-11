@@ -1,0 +1,20 @@
+﻿<!DOCTYPE html>
+<html>
+<head runat="server">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Authentication</title>
+</head>
+<body>
+    Paste frob here:
+    <input id="frob" value="72157626695667814-265114486970f89b-60630644" type="text" />
+    <button id="button">Click to return to AeroViewr</button>
+    <script type="text/javascript">
+        window.onload = function(e) {
+            var button = document.getElementById("button");
+            button.onclick = function(){
+                document.location.href = "http://localhost/kendo/demos/aeroviewr/index.html?frob=" + document.getElementById("frob").value;
+            }
+        }
+    </script>
+</body>
+</html>
