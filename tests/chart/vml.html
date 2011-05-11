@@ -110,6 +110,12 @@
                     ok(text.render().indexOf(">Text</kvml:textbox>") != -1);
                 });
 
+                test("sets position on text", function() {
+                    equal(text.render(),
+                        "<kvml:textbox style='position: absolute; left:0px; top:0px; " +
+                        "font:12pt Verdana, sans-serif'></kvml:textbox>");
+                });
+
             })();
 
             (function() {
