@@ -69,7 +69,40 @@
                 autocomplete.search();
                 equal(autocomplete.ul.children().first().text(), "bar");
             });
-        </script>
+
+            test("insert word at specified word index", function() {
+                var autocomplete = new AutoComplete(input, {
+                    separator: ", "
+                });
+
+                input.val("foo, bar");
+                equal(autocomplete._insert(0, "bar"), "bar, bar, ");
+            });
+
+            test("search uses the word at the caret position", function() {
+                var autocomplete = new AutoComplete(input, {
+                    data: ["foo", "bar"],
+                    separator: ", "
+                });
+
+                input.val("foo, bar, ");
+                input[0].selectionStart = 0;
+                autocomplete.search();
+                equal(autocomplete.ul.children().first().text(), "foo");
+            });
+
+            test("select replaces the word at the caret position", function() {
+                var autocomplete = new AutoComplete(input, {
+                    data: ["foo", "bar"],
+                    separator: ", "
+                });
+
+                input.val("foo, bar, ");
+                input[0].selectionStart = 0;
+                autocomplete.select($("<li>baz</li>"));
+                equal(input.val(), "baz, bar, ");
+            });
+       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
     </body>
