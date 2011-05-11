@@ -32,7 +32,7 @@
                 if (that.createTextRange) {
                     return that.createTextRange().text;
                 } else {
-                    return that.value.substring(that.selectionStart);
+                    return that.value.substring(that.selectionStart, that.selectionEnd);
                 }
             },
 
@@ -123,24 +123,10 @@
                 equal(input.selectedText(), "ar");
             });
 
-            test("mousedown does not complete", function() {
+            test("separator", function() {
                 var autocomplete = new AutoComplete(input, {
                     data: ["baz", "bar"],
-                    complete: true
-                });
-
-                input.val("b");
-                autocomplete.search();
-                autocomplete.ul.children().first().mousedown();
-
-                equal(input.val(), "b");
-            });
-
-            test("if multiple allowed word should be completed with separator", function() {
-                var autocomplete = new AutoComplete(input, {
-                    data: ["baz", "bar"],
-                    complete: true,
-                    multiple: true
+                    separator: ", "
                 });
 
                 input.val("b");
@@ -148,10 +134,38 @@
                 input.press(kendo.keys.DOWN);
                 input.press(kendo.keys.ENTER);
 
-                //equal(input.val(), "baz, ");
+                equal(input.val(), "baz, ");
             });
 
+            test("separator and completion", function() {
+                var autocomplete = new AutoComplete(input, {
+                    data: ["baz", "bar"],
+                    complete: true,
+                    separator: ", "
+                });
 
+                input.val("b");
+                autocomplete.search();
+                autocomplete.complete("baz");
+
+                equal(input.selectedText(), "az");
+                equal(input.val(), "baz, ");
+            });
+
+            test("separator and completing second word", function() {
+                var autocomplete = new AutoComplete(input, {
+                    data: ["baz", "bar"],
+                    complete: true,
+                    separator: ", "
+                });
+
+                input.val("baz, b");
+                autocomplete.search();
+                autocomplete.complete("bar");
+
+                equal(input.selectedText(), "ar");
+                equal(input.val(), "baz, bar, ");
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
