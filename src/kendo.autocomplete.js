@@ -93,7 +93,7 @@
                 text = li.text();
 
                 if (that.options.separator) {
-                    text = that._append(text);
+                    text = that._insert(that._caret(), text);
                 }
 
                 that.value(text);
@@ -170,12 +170,14 @@
             var that = this,
                 word = that.value(),
                 separator = that.options.separator,
-                length;
+                length,
+                caret,
+                index;
 
             clearTimeout(that._typing);
 
             if (separator) {
-                word = word.split(separator).pop();
+                word = that._wordAtCaret(that._caret(), word);
             }
 
             length = word.length;
@@ -185,6 +187,14 @@
             } else if (length >= that.options.minLength) {
                 that.dataSource.filter( { operator: "startswith", value: word } );
             }
+        },
+
+        _wordAtCaret: function(caret, value) {
+            return value.split(this.options.separator)[ this._caretToWordIndex(caret, value) ];
+        },
+
+        _caretToWordIndex: function(caret, value) {
+            return value.substring(0, caret).split(this.options.separator).length - 1;
         },
 
         _caret: function() {
@@ -208,15 +218,15 @@
                 value = that.value(),
                 caret = that._caret();
 
+            if (caret <= 0) {
+                caret = value.toLowerCase().indexOf(word.toLowerCase()) + 1;
+            }
+
             if (separator) {
-                word = that._append(word);
+                word = that._insert(caret, word);
             }
 
             if (word !== value) {
-                if (caret <= 0) {
-                    caret = value.toLowerCase().indexOf(value.toLowerCase()) + 1;
-                }
-
                 that.value(word);
                 element[0].selectionStart = caret;
 
@@ -226,15 +236,19 @@
             }
         },
 
-        _append: function(text) {
+        _insert: function(caret, word) {
             var that = this,
                 separator = that.options.separator,
-                values = that.value().split(separator);
+                value = that.value(),
+                words = value.split(separator);
 
-            values.pop();
-            values.push(text);
-            values.push("");
-            return values.join(separator);
+            words.splice(that._caretToWordIndex(caret, value), 1, word);
+
+            if (words[words.length - 1] !== "") {
+                words.push("");
+            }
+
+            return words.join(separator);
         },
 
         value: function(value) {
