@@ -3,6 +3,12 @@
         CHANGE = "change",
         DATABOUND = "dataBound"
         Component = kendo.ui.Component,
+        keys = kendo.keys,
+        FOCUSSELECTOR =  "> li",
+        CHANGE = "change",
+        FOCUSED = "t-state-focused",
+        FOCUSABLE = "t-focusable",
+
         DataSource = kendo.data.DataSource;
 
 
@@ -17,7 +23,7 @@
 
         that._dataSource();
 
-        that.template = that.options.template;
+        that.template = kendo.template(that.options.template);
 
         that._selection();
 
@@ -45,9 +51,11 @@
         _render: function() {
             var that = this,
                 data = that.dataSource.view(),
-                list = new kendo.ui.List(that.element, { data: data, template: that.template });
+                html = kendo.render(that.template, data);
 
-            this.trigger(DATABOUND);
+            that.element.html(html);
+
+            that.trigger(DATABOUND);
         },
         _selection: function() {
             var that = this;
@@ -61,21 +69,68 @@
 
                     that.selectable.clear();
 
-                    that.selectable.value(that.navigatable.current);
+                    that.selectable.value(that.focused());
                 }
             });
 
         },
-        _navigation: function() {
-            var that = this;
+        focused: function(element) {
+            var that = this,
+                focused = that._focused;
 
-            that.navigatable = new kendo.ui.Navigatable(that.element, {
-                context: that.element,
+            if(element !== undefined && element[0]) {
+                if (!focused || focused[0] !== element[0]) {
+                    element.addClass(FOCUSED);
+                    if (focused) {
+                        focused.removeClass(FOCUSED);
+                    }
+                    that._focused = element;
+                }
+            } else {
+                return that._focused;
+            }
+        },
+        _navigation: function() {
+            var that = this,
+                element = that.element;
+
+            element.attr("tabIndex", Math.max(element.attr("tabIndex") || 0, 0));
+            element.bind({
+                focus: function() {
+                    that.focused(element.find(FOCUSSELECTOR).first());
+                },
+                blur: function() {
+                    if (that._focused) {
+                        that._focused.removeClass(FOCUSED);
+                        that._focused = null;
+                    }
+                },
+                keydown: function(e) {
+                    var key = e.keyCode,
+                        focused = that.focused();
+
+                    if (keys.UP === key) {
+                        that.focused(focused ? focused.prev() : element.find(FOCUSSELECTOR).first());
+                    } else if (keys.DOWN === key) {
+                        that.focused(focused ? focused.next() : element.find(FOCUSSELECTOR).first());
+                    } else if (keys.PAGEUP == key) {
+                        that._focused = null;
+                        that.dataSource.page(that.dataSource.page() + 1);
+                    } else if (keys.PAGEDOWN == key) {
+                        that._focused = null;
+                        that.dataSource.page(that.dataSource.page() - 1);
+                    }
+                }
             });
+
+            element.addClass(FOCUSABLE)
+                  .delegate("." + FOCUSABLE + FOCUSSELECTOR, "mousedown", function(e) {
+                      that.focused($(e.currentTarget));
+                  });
        },
-        selected: function() {
-            return this.selectable.value();
-        }
+       selected: function() {
+           return this.selectable.value();
+       }
     };
 
     kendo.ui.plugin("ListView", ListView, Component);
