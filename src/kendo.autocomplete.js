@@ -215,12 +215,13 @@
 
         _caret: function() {
             var caret,
-                input = this.element[0];
+                element = this.element[0],
+                selection = element.ownerDocument.selection;
 
-            if (input.createTextRange) {
-                caret = Math.abs(input.createTextRange().moveStart('character', -input.value.length))
+            if (selection) {
+                caret = Math.abs(selection.createRange().moveStart("character", -element.value.length));
             } else {
-                caret = input.selectionStart;
+                caret = element.selectionStart;
             }
 
             return caret;
@@ -229,9 +230,12 @@
         suggest: function(word) {
             var that = this,
                 length = word.length,
-                element = that.element,
+                element = that.element[0],
                 separator = that.options.separator,
                 value = that.value(),
+                selectionStart,
+                selectionEnd,
+                textRange,
                 caret = that._caret();
 
             if (caret <= 0) {
@@ -244,10 +248,22 @@
 
             if (word !== value) {
                 that.value(word);
-                element[0].selectionStart = caret;
+                selectionStart = caret;
+                selectionEnd = word.length;
 
                 if (separator) {
-                    element[0].selectionEnd = caret + word.substring(caret).indexOf(separator);
+                    selectionEnd = caret + word.substring(caret).indexOf(separator);
+                }
+
+                if (element.createTextRange) {
+                    textRange = element.createTextRange();
+                    textRange.collapse(true);
+                    textRange.moveStart("character", selectionStart);
+                    textRange.moveEnd("character", selectionEnd - selectionStart);
+                    textRange.select();
+                } else {
+                    element.selectionStart = selectionStart;
+                    element.selectionEnd = selectionEnd;
                 }
             }
         },

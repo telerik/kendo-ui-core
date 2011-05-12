@@ -34,9 +34,19 @@
                 } else {
                     return that.value.substring(that.selectionStart, that.selectionEnd);
                 }
-            },
+            }
 
-            module("kendo.ui.AutoComplete completion", {
+            $.fn.type = function(value) {
+                return this.val(value).each(function() {
+                    if (this.createTextRange) {
+                        var textRange = this.createTextRange();
+                        textRange.collapse(false);
+                        textRange.select();
+                    }
+                });
+            }
+
+            module("kendo.ui.AutoComplete separator", {
                 setup: function() {
                     input = $("<input />").appendTo(document.body);
                 },
@@ -65,7 +75,7 @@
                     separator: ", "
                 });
 
-                input.val("foo, b");
+                input.type("foo, b");
                 autocomplete.search();
                 equal(autocomplete.ul.children().first().text(), "bar");
             });
