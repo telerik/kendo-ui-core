@@ -7,6 +7,26 @@
         proxy = $.proxy,
         extend = $.extend;
 
+    function indexOfWordAtCaret(caret, text, separator) {
+        return text.substring(0, caret).split(separator).length - 1;
+    }
+
+    function wordAtCaret(caret, text, separator) {
+        return text.split(separator)[ indexOfWordAtCaret(caret, text, separator) ];
+    }
+
+    function replaceWordAtCaret(caret, text, word, separator) {
+        var words = text.split(separator);
+
+        words.splice(indexOfWordAtCaret(caret, text, separator), 1, word);
+
+        if (words[words.length - 1] !== "") {
+            words.push("");
+        }
+
+        return words.join(separator);
+    }
+
     function AutoComplete(element, options) {
         var that = this;
 
@@ -48,7 +68,7 @@
 
     AutoComplete.prototype = {
         options: {
-            complete: false,
+            suggest: false,
             minLength: 1,
             template: "<li><%= data %></li>",
             delay: 300
@@ -57,8 +77,6 @@
         refresh: function() {
             var that = this,
                 data = that.dataSource.view();
-
-            that._current = null;
 
             that.ul[0].innerHTML = kendo.render(that.template, data);
 
@@ -81,19 +99,21 @@
         _blur: function() {
             var that = this;
 
+            that._current = null;
             that.popup.close();
             that._change();
         },
 
         select: function(li) {
             var that = this,
+                separator = that.options.separator,
                 text;
 
             if (li) {
                 text = li.text();
 
-                if (that.options.separator) {
-                    text = that._insert(that._caret(), text);
+                if (separator) {
+                    text = replaceWordAtCaret(that._caret(), that.value(), text, separator);
                 }
 
                 that.value(text);
@@ -127,10 +147,6 @@
                 }
 
                 that._current = candidate.addClass("t-state-focused");
-
-                if (that.options.complete) {
-                    that.complete(that._current.text());
-                }
             } else {
                 return that._current;
             }
@@ -148,9 +164,17 @@
             if (key === keys.DOWN) {
                 that.current(that._current ? that._current.next() : that.ul.children().first());
 
+                if (that.options.suggest) {
+                    that.suggest(that._current.text());
+                }
+
                 e.preventDefault();
             } else if (key === keys.UP) {
                 that.current(that._current ? that._current.prev() : that.ul.children().last());
+
+                if (that.options.suggest) {
+                    that.suggest(that._current.text());
+                }
 
                 e.preventDefault();
             } else if (key === keys.ENTER || key === keys.TAB) {
@@ -177,7 +201,7 @@
             clearTimeout(that._typing);
 
             if (separator) {
-                word = that._wordAtCaret(that._caret(), word);
+                word = wordAtCaret(that._caret(), word, separator);
             }
 
             length = word.length;
@@ -187,14 +211,6 @@
             } else if (length >= that.options.minLength) {
                 that.dataSource.filter( { operator: "startswith", value: word } );
             }
-        },
-
-        _wordAtCaret: function(caret, value) {
-            return value.split(this.options.separator)[ this._caretToWordIndex(caret, value) ];
-        },
-
-        _caretToWordIndex: function(caret, value) {
-            return value.substring(0, caret).split(this.options.separator).length - 1;
         },
 
         _caret: function() {
@@ -210,7 +226,7 @@
             return caret;
         },
 
-        complete: function(word) {
+        suggest: function(word) {
             var that = this,
                 length = word.length,
                 element = that.element,
@@ -223,7 +239,7 @@
             }
 
             if (separator) {
-                word = that._insert(caret, word);
+                word = replaceWordAtCaret(caret, value, word, separator);
             }
 
             if (word !== value) {
@@ -234,21 +250,6 @@
                     element[0].selectionEnd = caret + word.substring(caret).indexOf(separator);
                 }
             }
-        },
-
-        _insert: function(caret, word) {
-            var that = this,
-                separator = that.options.separator,
-                value = that.value(),
-                words = value.split(separator);
-
-            words.splice(that._caretToWordIndex(caret, value), 1, word);
-
-            if (words[words.length - 1] !== "") {
-                words.push("");
-            }
-
-            return words.join(separator);
         },
 
         value: function(value) {
