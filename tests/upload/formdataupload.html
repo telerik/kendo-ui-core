@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Upload rendering</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script type="text/javascript" src="../jquery.mockjax.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.upload.js"></script>
+        <script src="helper.js"></script>
+        <link rel="stylesheet" href="../qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Upload rendering</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var Upload = kendo.ui.Upload,
+                uploadInstance,
+                _getSupportsFormData,
+                validJSON = "{\"status\":\"OK\"}",
+                errorResponse = "ERROR!",
+                lastFormData;
+
+            function createUpload(options) {
+                copyUploadPrototype();
+
+                $('#uploadInstance').kendoUpload($.extend({ async:{"saveUrl":"javascript:;","removeUrl":"/removeAction",autoUpload:true} }, options));
+
+                var uploadInstance = $('#uploadInstance').data("kendoUpload");
+                uploadInstance._module.createFormData = function() {
+                    lastFormData = { };
+
+                    return {
+                        append: function(name, value) {
+                            lastFormData[name] = value;
+                        }
+                    } };
+                uploadInstance._module.postFormData = function(url, data, fileEntry) {
+                    fileEntry.data("request", { abort: function() { } });
+                };
+
+                return uploadInstance;
+            }
+
+            function simulateRequestSuccess(fileIndex, response) {
+                uploadInstance._module.onRequestSuccess(
+                    { target: { responseText: response || "", statusText: "OK", status: "200" } },
+                    $(".t-file", uploadInstance.wrapper).eq(fileIndex)
+                );
+            }
+
+            function simulateRequestError(fileIndex, response) {
+                uploadInstance._module.onRequestError(
+                    { target: { responseText: response || "", statusText: "error", status: "500" } },
+                    $(".t-file", uploadInstance.wrapper).eq(fileIndex)
+                );
+            }
+
+            function simulateUpload() {
+                simulateFileSelect();
+                simulateRequestSuccess(0);
+            }
+
+            function simulateUploadError() {
+                simulateFileSelect();
+                simulateRequestError(0);
+            }
+
+            function simulateRemove() {
+                $.mockjax({
+                    url: "/removeAction",
+                    responseTime: 0,
+                    responseText: ""
+                });
+                simulateRemoveClick();
+            }
+
+            function simulateRemoveWithResponse(response) {
+                $.mockjax({
+                    url: "/removeAction",
+                    responseTime: 0,
+                    responseText: response
+                });
+
+                simulateRemoveClick();
+            }
+
+            function simulateRemoveError() {
+                $.mockjax({
+                    url: "/removeAction",
+                    status: 500,
+                    responseTime: 0,
+                    responseText: errorResponse
+                });
+
+                simulateRemoveClick();
+            }
+
+            function simulateUploadWithResponse(response) {
+                simulateFileSelect();
+                simulateRequestSuccess(0, response);
+            }
+
+            function moduleSetup() {
+                _getSupportsFormData = Upload.prototype._getSupportsFormData;
+                Upload.prototype._getSupportsFormData = function() { return true; };
+                Upload.prototype._alert = function() { };
+            }
+
+            function moduleTeardown() {
+                removeHTML();
+                Upload.prototype._getSupportsFormData = _getSupportsFormData;
+                $.mockjaxClear();
+            }
+
+            // -----------------------------------------------------------------------------------
+            // -----------------------------------------------------------------------------------
+            module("Upload / FormDataUpload", {
+                setup: function() {
+                    moduleSetup();
+                    uploadInstance = createUpload();
+                },
+                teardown: moduleTeardown
+            });
+
+            test("formData module is selected when FormData is supported", function() {
+                equal(uploadInstance._module.name, "formDataUploadModule");
+            });
+
+            test("formData module is not selected when FormData is not supported", function() {
+                Upload.prototype._getSupportsFormData = function() { return false; };
+
+                uploadInstance = createUpload();
+
+                ok(uploadInstance._module.name != "formDataUploadModule");
+            });
+
+            test("current input is hidden after choosing a file", function() {
+                simulateFileSelect();
+                equal($("input:not(:visible)", uploadInstance.wrapper).length, 1);
+            });
+
+            test("list element is created for each selected file", function() {
+                uploadInstance._module.getInputFiles = function () { return getFileListMock() };
+                simulateFileSelect();
+                equal($(".t-upload-files li.t-file", uploadInstance.wrapper).length, 2);
+            });
+
+            test("file names are rendered for multiple files", function() {
+                uploadInstance._module.getInputFiles = function () { return getFileListMock() };
+                simulateFileSelect();
+
+                var fileNames = $(".t-filename", uploadInstance.wrapper).map(function() { return $(this).text(); });
+
+                equal(fileNames[0], "first.txt");
+                equal(fileNames[1], "second.txt");
+            });
+
+            test("clicking cancel should remove file entry", function() {
+                var requestStopped = false;
+                uploadInstance._module.stopUploadRequest = function() { requestStopped = true; };
+
+                simulateFileSelect();
+                $(".t-cancel", uploadInstance.wrapper).trigger("click");
+
+                ok(requestStopped);
+            });
+
+            test("FormData is created when a file is selected", function() {
+                var createFormDataCalled = false;
+                uploadInstance._module.createFormData = function() { createFormDataCalled = true; }
+
+                simulateFileSelect();
+                ok(createFormDataCalled);
+            });
+
+            test("file is passed to createFormData", function() {
+                var file = null;
+                uploadInstance._module.createFormData = function(sourceFile) { file = sourceFile; }
+
+                simulateFileSelect();
+                equal(file.name, "first.txt");
+            });
+
+            test("postFormData is issued when file is selected", function() {
+                var postFormDataCalled = false;
+                uploadInstance._module.postFormData = function() { postFormDataCalled = true; };
+
+                simulateFileSelect();
+                ok(postFormDataCalled);
+            });
+
+            test("postFormData receives form data", function() {
+                var formData = null;
+                uploadInstance._module.createFormData = function() { return "data"; }
+                uploadInstance._module.postFormData = function(url, data) { formData = data; };
+
+                simulateFileSelect();
+                equal(formData, "data");
+            });
+
+            test("original input is removed upon success", function() {
+                uploadInstance.element.addClass("marker");
+                simulateFileSelect();
+                uploadInstance.element.removeClass("marker");
+
+                var fileEntry = $(".t-file:first", uploadInstance.wrapper);
+
+                uploadInstance._module.onRequestSuccess({ target: { responseText: "" } }, fileEntry);
+
+                equal($(".marker", uploadInstance.wrapper).length, 0);
+            });
+
+            test("original input is removed after all uploads succeed", function() {
+                uploadInstance._module.getInputFiles = function () { return getFileListMock() };
+
+                uploadInstance.element.addClass("marker");
+                simulateFileSelect();
+                uploadInstance.element.removeClass("marker");
+
+                var fileEntry = $(".t-file:nth-child(1)", uploadInstance.wrapper);
+                uploadInstance._module.onRequestSuccess({ target: { responseText: "" } }, fileEntry);
+
+                equal($(".marker", uploadInstance.wrapper).length, 1);
+
+                fileEntry = $(".t-file:nth-child(2)", uploadInstance.wrapper);
+                uploadInstance._module.onRequestSuccess({ target: { responseText: "" } }, fileEntry);
+
+                equal($(".marker", uploadInstance.wrapper).length, 0);
+            });
+
+            test("original input is not removed if some uploads fail", function() {
+                uploadInstance._module.getInputFiles = function () { return getFileListMock() };
+
+                uploadInstance.element.addClass("marker");
+                simulateFileSelect();
+                uploadInstance.element.removeClass("marker");
+
+                simulateRequestError(0);
+                equal($(".marker", uploadInstance.wrapper).length, 1);
+
+                simulateRequestSuccess(1);
+                equal($(".marker", uploadInstance.wrapper).length, 1);
+            });
+
+            test("progress bar is rendered on first update", function() {
+                simulateFileSelect();
+                uploadInstance._module.onRequestProgress({ loaded: 1, total: 1}, $(".t-file", uploadInstance.wrapper));
+                equal($(".t-upload-files .t-file .t-filename .t-progress", uploadInstance.wrapper).length, 1);
+            })
+
+            test("progress indicator is updated", function() {
+                simulateFileSelect();
+
+                uploadInstance._module.onRequestProgress({ loaded: 10, total: 100}, $(".t-file", uploadInstance.wrapper));
+                equal($(".t-progress-status", uploadInstance.wrapper)[0].style.width, "10%");
+            });
+
+            test("postFormData is issued when clicking retry", function() {
+                simulateUploadWithResponse(errorResponse);
+
+                var postFormDataCalled = false;
+                uploadInstance._module.postFormData = function() { postFormDataCalled = true; };
+
+                $(".t-retry", uploadInstance.wrapper).trigger("click");
+
+                ok(postFormDataCalled);
+            });
+
+            test("formData is not cleaned-up on failure (invalid response) to allow retry", function() {
+                simulateUploadWithResponse(errorResponse);
+
+                notEqual($(".t-file", uploadInstance.wrapper).data("formData"), null);
+            });
+
+            test("formData is not cleaned-up on failure (request error) to allow retry", function() {
+                simulateUploadError(errorResponse);
+
+                notEqual($(".t-file", uploadInstance.wrapper).data("formData"), null);
+            });
+        </script>
+
+        <script src="async.js"></script>
+        <script src="selection.js"></script>
+
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Upload rendering</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.upload.js"></script>
+        <script src="helper.js"></script>
+        <link rel="stylesheet" href="../qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Upload rendering</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var uploadInstance, _getSupportsMultiple, _getSupportsDrop,
+                Upload = kendo.ui.Upload;
+
+            function createUpload(options) {
+                copyUploadPrototype();
+
+                $('#uploadInstance').kendoUpload(options);
+                return $('#uploadInstance').data("kendoUpload");
+            }
+
+            function moduleSetup() {
+                _getSupportsMultiple = Upload.prototype._getSupportsMultiple;
+                _getSupportsDrop = Upload.prototype._getSupportsDrop;
+            }
+
+            function moduleTeardown() {
+                Upload.prototype._getSupportsMultiple = _getSupportsMultiple;
+                Upload.prototype._getSupportsDrop = _getSupportsDrop;
+                removeHTML();
+            }
+
+            // -----------------------------------------------------------------------------------
+            // -----------------------------------------------------------------------------------
+            module("Upload / Rendering", {
+                setup: function() {
+                    moduleSetup();
+                    uploadInstance = createUpload();
+                },
+                teardown: moduleTeardown
+            });
+
+            test("multiple attribute rendered when multiple is set to true", function() {
+                Upload.prototype._getSupportsMultiple = function() { return true; };
+                createUpload();
+
+                equal($("#uploadInstance").prop("multiple"), $.browser.msie ? "true" : true);
+            });
+
+            test("multiple attribute not rendered when multiple is set to false", function() {
+                createUpload({ multiple: false });
+                equal($("#uploadInstance").prop("multiple"), $.browser.msie ? "false" : false);
+            });
+
+            test("multiple attribute not rendered when multiple is not supported", function() {
+                Upload.prototype._getSupportsMultiple = function() { return false; };
+                createUpload();
+                equal($("#uploadInstance").prop("multiple"), $.browser.msie ? "false" : false);
+            });
+
+            test("disable renders t-state-disabled class", function () {
+                uploadInstance.disable();
+                ok(uploadInstance.wrapper.hasClass("t-state-disabled"));
+            });
+
+            test("enable removes t-state-disabled class", function () {
+                uploadInstance.disable();
+                uploadInstance.enable();
+                ok(!$("#uploadInstance").hasClass("t-state-disabled"));
+            });
+
+            test("initially disabled state is applied", function () {
+                uploadInstance = createUpload({ enabled: false });
+                ok(uploadInstance.wrapper.hasClass("t-state-disabled"));
+            });
+
+            // -----------------------------------------------------------------------------------
+            // -----------------------------------------------------------------------------------
+            module("Upload / Rendering / Drag and drop", {
+                setup: function() {
+                    Upload.prototype._getSupportsDrop = function() { return true; };
+
+                    moduleSetup();
+                    uploadInstance = createUpload({ async: { showFileList: true } });
+                },
+                teardown: moduleTeardown
+            });
+
+            test("drop zone is rendered when supported by the browser", function() {
+                equal($("> .t-dropzone", uploadInstance.wrapper).length, 1);
+            });
+
+            test("drop zone is not rendered when not supported by the browser", function() {
+                Upload.prototype._getSupportsDrop = function() { return false; };
+                uploadInstance = createUpload();
+
+                equal($("> .t-dropzone", uploadInstance.wrapper).length, 0);
+            });
+
+            test("drop zone label is rendered", function() {
+                equal($("> .t-dropzone > em", uploadInstance.wrapper).length, 1);
+            });
+
+            test("drop zone label text is rendered", function() {
+                equal($("> .t-dropzone > em", uploadInstance.wrapper).text(), "drop files here to upload");
+            });
+
+            test("drop zone is not active initially", function() {
+                equal($(".t-dropzone-active", uploadInstance.wrapper).length, 0);
+            });
+
+            test("t-dropzone-active is rendered when dragging over the document", function() {
+                $(document).trigger("dragenter");
+                equal($(".t-dropzone-active", uploadInstance.wrapper).length, 1);
+            });
+
+            asyncTest("t-dropzone-active is removed when dragging out of the document", function() {
+                $(document).trigger("dragenter");
+                setTimeout(function() {
+                    equal($(".t-dropzone-active", uploadInstance.wrapper).length, 0);
+                    start();
+                }, 250);
+            });
+
+            test("t-dropzone-hovered is rendered when dragging over the zone", function() {
+                $(".t-dropzone").trigger("dragenter");
+                equal($(".t-dropzone-hovered", uploadInstance.wrapper).length, 1);
+            });
+
+            asyncTest("t-dropzone-hovered is removed when dragging out of the zone", function() {
+                $(".t-dropzone").trigger("dragenter");
+                setTimeout(function() {
+                    equal($(".t-dropzone-hovered", uploadInstance.wrapper).length, 0);
+                    start();
+                }, 250);
+            });
+
+            // -----------------------------------------------------------------------------------
+            // -----------------------------------------------------------------------------------
+            module("Upload / Rendering / Client Component Mode", {
+                setup: function() {
+                    moduleSetup();
+                    $("<div id='cc'><input type='file' id='fileInput' name='fileInput' /></div>").appendTo(document.body);
+                    $('#fileInput').kendoUpload();
+                    _getSupportsDrop = function() { return false; };
+                },
+                teardown: function() {
+                    moduleTeardown();
+                    $("#cc").remove();
+                }
+            });
+
+            test("should render wrapper div", function() {
+                equals($("#cc > div.t-widget.t-upload").length, 1);
+            });
+
+            test("should render upload button", function() {
+                equals($("#cc > .t-upload > div.t-button.t-upload-button").length, 1);
+            });
+
+            test("should render upload button text", function() {
+                equals($("#cc > .t-upload > .t-button span").text(), "Select...");
+            });
+
+            test("should wrap input", function() {
+                equals($("#cc > .t-upload > .t-button > input").length, 1);
+            });
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>
