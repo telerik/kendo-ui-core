@@ -39,16 +39,24 @@
             <option>bar</option>
         </select>
 
-        <input value="" id="autocomplete" />
-
+        <fieldset>
+            <legend>AutoComplete with separator (", ")</legend>
+            <input value="" id="autocomplete1" />
+        </fieldset>
+        <fieldset>
+            <legend>AutoComplete with separator (", ") and complete enabled</legend>
+            <input value="" id="autocomplete2" />
+        </fieldset>
         <script type="text/javascript" charset="utf-8">
             $(document).ready(function() {
-                $("#autocomplete").kendoAutoComplete({
+                $("#autocomplete1").kendoAutoComplete({
+                    data: ["foo", "bar", "baz"],
+                    separator: ", "
+                });
+                $("#autocomplete2").kendoAutoComplete({
                     data: ["foo", "bar", "baz"],
                     separator: ", ",
-                    change: function() {
-                        console.log("autocomplete: change from: <" + this.previous + "> to:<" + this.value() + ">");
-                    }
+                    complete: true
                 });
             });
         </script>
