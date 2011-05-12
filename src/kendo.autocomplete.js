@@ -4,6 +4,7 @@
         DataSource = kendo.data.DataSource,
         Component = ui.Component,
         CHANGE = "change",
+        CHARACTER = "character",
         proxy = $.proxy,
         extend = $.extend;
 
@@ -146,7 +147,10 @@
                     that._current.removeClass("t-state-focused");
                 }
 
-                that._current = candidate.addClass("t-state-focused");
+                if (candidate) {
+                    candidate.addClass("t-state-focused");
+                }
+                that._current = candidate;
             } else {
                 return that._current;
             }
@@ -155,26 +159,28 @@
         _click: function(e) {
             this.select($(e.currentTarget));
         },
+        _move: function(li) {
+            var that = this;
 
+            li = li[0] ? li : null;
+
+            that.current(li);
+
+            if (that.options.suggest) {
+                that.suggest(li);
+            }
+        },
         _keydown: function(e) {
             var that = this,
                 key = e.keyCode,
                 keys = kendo.keys;
 
             if (key === keys.DOWN) {
-                that.current(that._current ? that._current.next() : that.ul.children().first());
-
-                if (that.options.suggest) {
-                    that.suggest(that._current.text());
-                }
+                that._move(that._current ? that._current.next() : that.ul.children().first());
 
                 e.preventDefault();
             } else if (key === keys.UP) {
-                that.current(that._current ? that._current.prev() : that.ul.children().last());
-
-                if (that.options.suggest) {
-                    that.suggest(that._current.text());
-                }
+                that._move(that._current ? that._current.prev() : that.ul.children().last());
 
                 e.preventDefault();
             } else if (key === keys.ENTER || key === keys.TAB) {
@@ -219,7 +225,7 @@
                 selection = element.ownerDocument.selection;
 
             if (selection) {
-                caret = Math.abs(selection.createRange().moveStart("character", -element.value.length));
+                caret = Math.abs(selection.createRange().moveStart(CHARACTER, -element.value.length));
             } else {
                 caret = element.selectionStart;
             }
@@ -229,7 +235,6 @@
 
         suggest: function(word) {
             var that = this,
-                length = word.length,
                 element = that.element[0],
                 separator = that.options.separator,
                 value = that.value(),
@@ -238,16 +243,30 @@
                 textRange,
                 caret = that._caret();
 
+
+            if (typeof word !== "string") {
+                word = word ? word.text() : "";
+            }
+
             if (caret <= 0) {
                 caret = value.toLowerCase().indexOf(word.toLowerCase()) + 1;
+            }
+
+            if (!word) {
+                if (separator) {
+                    word = value.substring(0, caret).split(separator).pop();
+                } else {
+                    word = value.substring(0, caret);
+                }
             }
 
             if (separator) {
                 word = replaceWordAtCaret(caret, value, word, separator);
             }
 
-            if (word !== value) {
+            if(word !== value) {
                 that.value(word);
+
                 selectionStart = caret;
                 selectionEnd = word.length;
 
@@ -258,8 +277,8 @@
                 if (element.createTextRange) {
                     textRange = element.createTextRange();
                     textRange.collapse(true);
-                    textRange.moveStart("character", selectionStart);
-                    textRange.moveEnd("character", selectionEnd - selectionStart);
+                    textRange.moveStart(CHARACTER, selectionStart);
+                    textRange.moveEnd(CHARACTER, selectionEnd - selectionStart);
                     textRange.select();
                 } else {
                     element.selectionStart = selectionStart;

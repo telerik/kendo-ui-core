@@ -191,7 +191,56 @@
                 autocomplete.select(autocomplete.ul.children().first());
                 ok(autocomplete.ul.children().first().is(".t-state-selected"));
             });
-        </script>
+
+            test("moving up when there the current item is first", function() {
+                var autocomplete = new AutoComplete(input, {
+                    data: ["baz", "bar"]
+                });
+
+                input.val("b");
+                autocomplete.search();
+                autocomplete.current(autocomplete.ul.children().first());
+                input.press(kendo.keys.UP);
+                equal(autocomplete.current(), null);
+            });
+
+            test("moving twice up when there the current item is first makes the last item current", function() {
+                var autocomplete = new AutoComplete(input, {
+                    data: ["baz", "bar"]
+                });
+
+                input.val("b");
+                autocomplete.search();
+                autocomplete.current(autocomplete.ul.children().first());
+                input.press(kendo.keys.UP);
+                input.press(kendo.keys.UP);
+                equal(autocomplete.current()[0], autocomplete.ul.children().last()[0]);
+            });
+
+            test("moving down when there the current item is last", function() {
+                var autocomplete = new AutoComplete(input, {
+                    data: ["baz", "bar"]
+                });
+
+                input.val("b");
+                autocomplete.search();
+                autocomplete.current(autocomplete.ul.children().last());
+                input.press(kendo.keys.DOWN);
+                equal(autocomplete.current(), null);
+            });
+            test("moving twice down when there the current item is first makes the last item current", function() {
+                var autocomplete = new AutoComplete(input, {
+                    data: ["baz", "bar"]
+                });
+
+                input.val("b");
+                autocomplete.search();
+                autocomplete.current(autocomplete.ul.children().last());
+                input.press(kendo.keys.DOWN);
+                input.press(kendo.keys.DOWN);
+                equal(autocomplete.current()[0], autocomplete.ul.children().first()[0]);
+            });
+       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
     </body>
