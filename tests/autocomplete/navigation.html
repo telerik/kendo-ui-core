@@ -191,7 +191,106 @@
                 autocomplete.select(autocomplete.ul.children().first());
                 ok(autocomplete.ul.children().first().is(".t-state-selected"));
             });
-        </script>
+
+            test("moving up when there the current item is first", function() {
+                var autocomplete = new AutoComplete(input, {
+                    data: ["baz", "bar"]
+                });
+
+                input.val("b");
+                autocomplete.search();
+                autocomplete.current(autocomplete.ul.children().first());
+                input.press(kendo.keys.UP);
+                equal(autocomplete.current(), null);
+            });
+
+            test("moving twice up when there the current item is first makes the last item current", function() {
+                var autocomplete = new AutoComplete(input, {
+                    data: ["baz", "bar"]
+                });
+
+                input.val("b");
+                autocomplete.search();
+                autocomplete.current(autocomplete.ul.children().first());
+                input.press(kendo.keys.UP);
+                input.press(kendo.keys.UP);
+                equal(autocomplete.current()[0], autocomplete.ul.children().last()[0]);
+            });
+
+            test("moving down when there the current item is last", function() {
+                var autocomplete = new AutoComplete(input, {
+                    data: ["baz", "bar"]
+                });
+
+                input.val("b");
+                autocomplete.search();
+                autocomplete.current(autocomplete.ul.children().last());
+                input.press(kendo.keys.DOWN);
+                equal(autocomplete.current(), null);
+            });
+            test("moving twice down when there the current item is first makes the last item current", function() {
+                var autocomplete = new AutoComplete(input, {
+                    data: ["baz", "bar"]
+                });
+
+                input.val("b");
+                autocomplete.search();
+                autocomplete.current(autocomplete.ul.children().last());
+                input.press(kendo.keys.DOWN);
+                input.press(kendo.keys.DOWN);
+                equal(autocomplete.current()[0], autocomplete.ul.children().first()[0]);
+            });
+
+            test("esc closes the dropdown", function() {
+                var autocomplete = new AutoComplete(input, {
+                    data: ["baz", "bar"]
+                });
+
+                input.val("b");
+                autocomplete.search();
+                input.press(kendo.keys.ESC);
+                ok(!autocomplete.ul.is(":visible"));
+            });
+
+            test("clicking item more than once", function() {
+                var autocomplete = new AutoComplete(input, {
+                    data: ["baz", "bar"],
+                    separator: ", "
+                });
+
+                input.val("b");
+                autocomplete.search();
+                autocomplete.ul.children().first().click().click();
+                equal(input.val(), "baz, ");
+            });
+
+            test("pressing the down arrows when the popup is not visible does not change value", function() {
+                var autocomplete = new AutoComplete(input, {
+                    data: ["baz", "bar"]
+                });
+
+                input.val("b");
+                autocomplete.search();
+                autocomplete.close();
+                input.press(kendo.keys.DOWN);
+                input.press(kendo.keys.ENTER);
+                equal(input.val(), "b");
+            });
+
+            test("pressing the up arrows when the popup is not visible does not change value", function() {
+                var autocomplete = new AutoComplete(input, {
+                    data: ["baz", "bar"]
+                });
+
+                input.val("b");
+                autocomplete.search();
+                autocomplete.close();
+                input.press(kendo.keys.UP);
+                input.press(kendo.keys.ENTER);
+                equal(input.val(), "b");
+            });
+
+       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
     </body>

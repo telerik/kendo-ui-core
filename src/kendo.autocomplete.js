@@ -4,6 +4,9 @@
         DataSource = kendo.data.DataSource,
         Component = ui.Component,
         CHANGE = "change",
+        CHARACTER = "character",
+        SELECTED = "t-state-selected",
+        FOCUSED = "t-state-focused",
         proxy = $.proxy,
         extend = $.extend;
 
@@ -25,6 +28,25 @@
         }
 
         return words.join(separator);
+    }
+
+    function selectText(element, selectionStart, selectionEnd) {
+        if (element.createTextRange) {
+            textRange = element.createTextRange();
+            textRange.collapse(true);
+            textRange.moveStart(CHARACTER, selectionStart);
+            textRange.moveEnd(CHARACTER, selectionEnd - selectionStart);
+            textRange.select();
+        } else {
+            element.selectionStart = selectionStart;
+            element.selectionEnd = selectionEnd;
+        }
+    }
+
+    function moveCaretAtEnd(element) {
+        var length = element.value.length;
+
+        selectText(element, length, length);
     }
 
     function AutoComplete(element, options) {
@@ -55,14 +77,18 @@
             .delegate("li", "click", proxy(that._click, that));
 
         that.element
-            .keydown(proxy(that._keydown, that))
-            .focus(function() {
-                that.previous = that.value();
-            })
-            .blur(function() {
-                that._bluring = setTimeout(function() {
-                    that._blur();
-                }, 100);
+            .attr("autocomplete", "off")
+            .bind({
+                keydown: proxy(that._keydown, that),
+                paste: proxy(that._search, that),
+                focus: function() {
+                    that.previous = that.value();
+                },
+                blur: function() {
+                    that._bluring = setTimeout(function() {
+                        that._blur();
+                    }, 100);
+                }
             });
     }
 
@@ -99,9 +125,14 @@
         _blur: function() {
             var that = this;
 
+            that.close();
+            that._change();
+        },
+
+        close: function() {
+            var that = this;
             that._current = null;
             that.popup.close();
-            that._change();
         },
 
         select: function(li) {
@@ -109,7 +140,7 @@
                 separator = that.options.separator,
                 text;
 
-            if (li) {
+            if (li && !li.hasClass(SELECTED)) {
                 text = li.text();
 
                 if (separator) {
@@ -117,12 +148,14 @@
                 }
 
                 that.value(text);
-                that.current(li.addClass("t-state-selected"));
+                that.current(li.addClass(SELECTED));
             }
 
             if (that.element[0] !== document.activeElement) {
                 that.element.focus();
             }
+
+            moveCaretAtEnd(that.element[0]);
 
             that._blur();
         },
@@ -131,7 +164,7 @@
             var that = this,
                 value = that.value();
 
-            that.term = value;
+            that._term = value;
             if (value !== that.previous) {
                 that.trigger(CHANGE);
                 that.previous = value;
@@ -143,10 +176,13 @@
 
             if (candidate !== undefined) {
                 if (that._current) {
-                    that._current.removeClass("t-state-focused");
+                    that._current.removeClass(FOCUSED);
                 }
 
-                that._current = candidate.addClass("t-state-focused");
+                if (candidate) {
+                    candidate.addClass(FOCUSED);
+                }
+                that._current = candidate;
             } else {
                 return that._current;
             }
@@ -155,41 +191,52 @@
         _click: function(e) {
             this.select($(e.currentTarget));
         },
+        _move: function(li) {
+            var that = this;
 
+            li = li[0] ? li : null;
+
+            that.current(li);
+
+            if (that.options.suggest) {
+                that.suggest(li);
+            }
+        },
         _keydown: function(e) {
             var that = this,
                 key = e.keyCode,
-                keys = kendo.keys;
+                keys = kendo.keys
+                visible = that.popup.visible();
 
             if (key === keys.DOWN) {
-                that.current(that._current ? that._current.next() : that.ul.children().first());
-
-                if (that.options.suggest) {
-                    that.suggest(that._current.text());
+                if (visible) {
+                    that._move(that._current ? that._current.next() : that.ul.children().first());
                 }
-
                 e.preventDefault();
             } else if (key === keys.UP) {
-                that.current(that._current ? that._current.prev() : that.ul.children().last());
-
-                if (that.options.suggest) {
-                    that.suggest(that._current.text());
+                if (visible) {
+                    that._move(that._current ? that._current.prev() : that.ul.children().last());
                 }
-
                 e.preventDefault();
             } else if (key === keys.ENTER || key === keys.TAB) {
                 that.select(that._current);
+            } else if (key === keys.ESC) {
+                that.close();
             } else {
-                clearTimeout(that._typing);
-
-                that._typing = setTimeout(function() {
-                    if (that.term !== that.value()) {
-                        that.search();
-                    }
-                }, that.options.delay);
+                that._search();
             }
         },
 
+        _search: function() {
+            var that = this;
+            clearTimeout(that._typing);
+
+            that._typing = setTimeout(function() {
+                if (that._term !== that.value()) {
+                    that.search();
+                }
+            }, that.options.delay);
+        },
         search: function() {
             var that = this,
                 word = that.value(),
@@ -197,6 +244,8 @@
                 length,
                 caret,
                 index;
+
+            that._current = null;
 
             clearTimeout(that._typing);
 
@@ -219,7 +268,7 @@
                 selection = element.ownerDocument.selection;
 
             if (selection) {
-                caret = Math.abs(selection.createRange().moveStart("character", -element.value.length));
+                caret = Math.abs(selection.createRange().moveStart(CHARACTER, -element.value.length));
             } else {
                 caret = element.selectionStart;
             }
@@ -229,42 +278,44 @@
 
         suggest: function(word) {
             var that = this,
-                length = word.length,
                 element = that.element[0],
                 separator = that.options.separator,
                 value = that.value(),
-                selectionStart,
                 selectionEnd,
                 textRange,
                 caret = that._caret();
 
+
+            if (typeof word !== "string") {
+                word = word ? word.text() : "";
+            }
+
             if (caret <= 0) {
                 caret = value.toLowerCase().indexOf(word.toLowerCase()) + 1;
+            }
+
+            if (!word) {
+                if (separator) {
+                    word = value.substring(0, caret).split(separator).pop();
+                } else {
+                    word = value.substring(0, caret);
+                }
             }
 
             if (separator) {
                 word = replaceWordAtCaret(caret, value, word, separator);
             }
 
-            if (word !== value) {
+            if(word !== value) {
                 that.value(word);
-                selectionStart = caret;
+
                 selectionEnd = word.length;
 
                 if (separator) {
                     selectionEnd = caret + word.substring(caret).indexOf(separator);
                 }
 
-                if (element.createTextRange) {
-                    textRange = element.createTextRange();
-                    textRange.collapse(true);
-                    textRange.moveStart("character", selectionStart);
-                    textRange.moveEnd("character", selectionEnd - selectionStart);
-                    textRange.select();
-                } else {
-                    element.selectionStart = selectionStart;
-                    element.selectionEnd = selectionEnd;
-                }
+                selectText(element, caret, selectionEnd);
             }
         },
 
