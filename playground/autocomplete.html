@@ -32,31 +32,42 @@
         </style>
     </head>
     <body>
-        <input onchange="console.log('input: change')" />
-
-        <select onchange="console.log('select: change')">
-            <option>foo</option>
-            <option>bar</option>
-        </select>
-
         <fieldset>
-            <legend>AutoComplete with separator (", ")</legend>
-            <input value="" id="autocomplete1" />
+            <legend>AutoComplete</legend>
+            <input  id="autocomplete" />
         </fieldset>
         <fieldset>
-            <legend>AutoComplete with separator (", ") and complete enabled</legend>
-            <input value="" id="autocomplete2" />
+            <legend>AutoComplete with suggest</legend>
+            <input  id="autocomplete-suggest" />
+        </fieldset>
+        <fieldset>
+            <legend>AutoComplete with separator (", ")</legend>
+            <input  id="autocomplete-separator" />
+        </fieldset>
+        <fieldset>
+            <legend>AutoComplete with separator (", ") and suggest</legend>
+            <input  id="autocomplete-separator-suggest" />
         </fieldset>
         <script type="text/javascript" charset="utf-8">
             $(document).ready(function() {
-                $("#autocomplete1").kendoAutoComplete({
+                $("#autocomplete").kendoAutoComplete({
+                    data: ["foo", "bar", "baz"]
+                });
+
+                $("#autocomplete-suggest").kendoAutoComplete({
+                    data: ["foo", "bar", "baz"],
+                    suggest: true
+                });
+
+                $("#autocomplete-separator").kendoAutoComplete({
                     data: ["foo", "bar", "baz"],
                     separator: ", "
                 });
-                $("#autocomplete2").kendoAutoComplete({
+
+                $("#autocomplete-separator-suggest").kendoAutoComplete({
                     data: ["foo", "bar", "baz"],
                     separator: ", ",
-                    complete: true
+                    suggest: true
                 });
             });
         </script>

@@ -8,8 +8,8 @@ tests.push(
         title: "autocomplete filtering"
     },
     {
-        page: "autocomplete/completion.html",
-        title: "autocomplete completion"
+        page: "autocomplete/suggestion.html",
+        title: "autocomplete suggestion"
     },
     {
         page: "autocomplete/navigation.html",
