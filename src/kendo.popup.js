@@ -120,7 +120,7 @@
             var that = this
                 options = that.options;
 
-            if (!that.element.is(":visible")) {
+            if (!that.visible()) {
                 align(that.element, $(options.anchor), options.origin, options.position);
 
                 that.element.kendoStop().kendoAnimate(that.openAnimation);
@@ -129,12 +129,15 @@
         toggle: function() {
             var that = this;
 
-            that[that.element.is(":visible") ? CLOSE : OPEN]();
+            that[that.visible() ? CLOSE : OPEN]();
+        },
+        visible: function() {
+            return this.element.is(":visible");
         },
         close: function() {
             var that = this;
 
-            if (that.element.is(":visible")) {
+            if (that.visible()) {
                 that.element.kendoStop().kendoAnimate(that.closeAnimation);
             }
         },
