@@ -480,7 +480,7 @@
                 pageSize = that.pageSize() || that.total();
 
             return Math.ceil((that.total() || 0) / pageSize);
-        },
+        }
     });
 
     extend(kendo.data, {

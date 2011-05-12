@@ -29,12 +29,22 @@
             $.fn.selectedText = function() {
                 var that = this[0];
 
-                if (that.createTextRange) {
-                    return that.createTextRange().text;
+                if (document.selection) {
+                    return document.selection.createRange().text;
                 } else {
                     return that.value.substring(that.selectionStart, that.selectionEnd);
                 }
             },
+
+            $.fn.type = function(value) {
+                return this.val(value).each(function() {
+                    if (this.createTextRange) {
+                        var textRange = this.createTextRange();
+                        textRange.collapse(false);
+                        textRange.select();
+                    }
+                });
+            }
 
             module("kendo.ui.AutoComplete completion", {
                 setup: function() {
@@ -95,7 +105,7 @@
                     suggest: true
                 });
 
-                input.val("b");
+                input.type("b");
                 autocomplete.search();
 
                 input.press(kendo.keys.DOWN);
@@ -107,7 +117,7 @@
                     data: ["baz", "bar"]
                 });
 
-                input.val("b");
+                input.type("b");
                 autocomplete.suggest("baz");
                 equal(input.selectedText(), "az");
             });
@@ -117,7 +127,7 @@
                     data: ["baz", "bar"]
                 });
 
-                input.val("b");
+                input.type("b");
                 autocomplete.suggest("baz");
                 autocomplete.suggest("bar");
                 equal(input.selectedText(), "ar");
@@ -129,7 +139,7 @@
                     separator: ", "
                 });
 
-                input.val("b");
+                input.type("b");
                 autocomplete.search();
                 input.press(kendo.keys.DOWN);
                 input.press(kendo.keys.ENTER);
@@ -144,7 +154,7 @@
                     separator: ", "
                 });
 
-                input.val("b");
+                input.type("b");
                 autocomplete.search();
                 autocomplete.suggest("baz");
 
@@ -159,7 +169,7 @@
                     separator: ", "
                 });
 
-                input.val("baz, b");
+                input.type("baz, b");
                 autocomplete.search();
                 autocomplete.suggest("bar");
 
