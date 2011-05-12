@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>AutoComplete Completion</title>
+        <title>AutoComplete suggestion</title>
         <script src="../../src/jquery.js"></script>
         <script type="text/javascript" src="../qunit.js"></script>
         <script type="text/javascript" src="../qunit-runner.js"></script>
@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="../qunit.css" type="text/css" />
     </head>
     <body>
-        <h1 id="qunit-header">AutoComplete Completion</h1>
+        <h1 id="qunit-header">AutoComplete suggestion</h1>
         <h2 id="qunit-banner"></h2>
         <div id="qunit-testrunner-toolbar"></div>
         <h2 id="qunit-userAgent"></h2>
@@ -46,7 +46,7 @@
                 });
             }
 
-            module("kendo.ui.AutoComplete completion", {
+            module("kendo.ui.AutoComplete suggestion", {
                 setup: function() {
                     input = $("<input />").appendTo(document.body);
                 },
@@ -112,7 +112,7 @@
                 equal(input.val(), "baz");
             });
 
-            test("completion selects the remainder of the word", function() {
+            test("suggestion selects the remainder of the word", function() {
                 var autocomplete = new AutoComplete(input, {
                     data: ["baz", "bar"]
                 });
@@ -122,7 +122,7 @@
                 equal(input.selectedText(), "az");
             });
 
-            test("completion selects the remainder of the second word", function() {
+            test("suggestion selects the remainder of the second word", function() {
                 var autocomplete = new AutoComplete(input, {
                     data: ["baz", "bar"]
                 });
@@ -147,7 +147,7 @@
                 equal(input.val(), "baz, ");
             });
 
-            test("separator and completion", function() {
+            test("separator and suggestion", function() {
                 var autocomplete = new AutoComplete(input, {
                     data: ["baz", "bar"],
                     suggest: true,
@@ -162,7 +162,7 @@
                 equal(input.val(), "baz, ");
             });
 
-            test("separator and completing second word", function() {
+            test("separator and suggesting second word", function() {
                 var autocomplete = new AutoComplete(input, {
                     data: ["baz", "bar"],
                     suggest: true,
@@ -185,6 +185,31 @@
 
                 autocomplete.select($("<li>foo</li>"));
                 equal(input.val(), "foo, ");
+            });
+
+            test("suggest with empty string clears selection", function() {
+                var autocomplete = new AutoComplete(input, {
+                    suggest: true
+                });
+
+                input.type("b");
+                autocomplete.suggest("bar");
+                equal(input.selectedText(), "ar");
+                autocomplete.suggest("");
+                equal(input.val(), "b");
+            });
+
+            test("suggest with empty string clears selection and adheres to separators", function() {
+                var autocomplete = new AutoComplete(input, {
+                    suggest: true,
+                    separator: ", "
+                });
+
+                input.type("foo, b");
+                autocomplete.suggest("bar");
+                equal(input.selectedText(), "ar");
+                autocomplete.suggest("");
+                equal(input.val(), "foo, b, ");
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
