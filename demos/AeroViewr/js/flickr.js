@@ -8,12 +8,13 @@
         service: "http://api.flickr.com/services/rest/",
         authURL: "http://flickr.com/services/auth/",
         auth: {
-            token: '72157626154487043-7dfd951a1ede12fa' //write auth
+            token: null //'72157626154487043-7dfd951a1ede12fa' //write auth
         },
         methods: {
             getToken : "flickr.auth.getToken",
             search: "flickr.photos.search",
-            getSets: "flickr.photosets.getList"
+            getSets: "flickr.photosets.getList",
+            getMostPopular: "flickr.interestingness.getList"
         },
 
         getThumbnailURL: function(photo) {
@@ -49,14 +50,29 @@
 
             return this.service + "?" + $.param(params);
         },
-        
-        methodParams: function(data) {
+
+        mostPopularParams: function(data) {
+            var params = {
+                method: this.methods.getMostPopular,
+                api_key: app.key,
+                format: "json"
+            }
+            $.extend(params, data);
+            params["api_sig"] = this.getApiSig(params);
+            return params;
+        },
+
+        searchParams: function(data) {
             var params = {
                 method: this.methods.search,
                 api_key: app.key,
-                auth_token: this.auth.token,
                 format: "json"
             }
+
+            if(this.auth.token) {
+                params["auth_token"] = this.auth.token;
+            }
+
             $.extend(params, data);
             params["api_sig"] = this.getApiSig(params);
             return params;
@@ -81,8 +97,8 @@
                 nojsoncallback: 1,
                 method: this.methods.getToken
              }
-            params["api_sig"] = this.getApiSig(params);
 
+            params["api_sig"] = this.getApiSig(params);
             $.get(this.service + "?" + $.param(params), null, callback, "json");
         },
         signIn: function() {

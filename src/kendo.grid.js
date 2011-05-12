@@ -9,6 +9,7 @@
         isPlainObject = $.isPlainObject,
         FOCUSSELECTOR =  ">tbody>tr>td",
         CHANGE = "change",
+        DATABOUND = "dataBound",
         FOCUSED = "t-state-focused",
         FOCUSABLE = "t-focusable",
         map = $.map;
@@ -22,7 +23,7 @@
 
         Component.call(that, element, options);
 
-        that.bind([CHANGE], that.options);
+        that.bind([CHANGE,DATABOUND], that.options);
 
         that._element();
 
@@ -380,6 +381,7 @@
                 that.table[0].replaceChild(tbody, that.tbody[0]);
                 that.tbody = $(tbody);
             }
+            that.trigger(DATABOUND);
        }
     }
 
