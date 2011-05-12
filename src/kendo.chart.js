@@ -5,7 +5,8 @@
         SVG_NS = "http://www.w3.org/2000/svg",
         DEFAULT_PRECISION = 6,
         COORD_PRECISION = 3,
-        ZERO_THRESHOLD = 0.2;
+        ZERO_THRESHOLD = 0.2,
+        BASELINE_MARKER_SIZE = 1;
 
     function Chart(element, options) {
         var chart = this;
@@ -702,7 +703,7 @@
 
                 position += size;
             };
-        },
+        }
     });
 
     /*
@@ -916,10 +917,14 @@
         options = root.options = $.extend({}, root.options, options);
         ViewElement.call(root, options);
 
-        root.template = kendo.template(
-            "<svg xmlns='http://www.w3.org/2000/svg' version='1.1' " +
-            "width='<%= options.width %>' height='<%= options.height %>'>" +
-            "<%= renderContent() %></svg>");
+        root.template = SVGRoot.template;
+        if (!root.template) {
+                root.template = SVGRoot.template = kendo.template(
+                "<svg xmlns='http://www.w3.org/2000/svg' version='1.1' " +
+                "width='<%= options.width %>' height='<%= options.height %>'>" +
+                "<%= renderContent() %></svg>"
+            );
+        }
     }
 
     SVGRoot.prototype = new ViewElement();
@@ -948,9 +953,13 @@
         text.content = content || "";
 
         ViewElement.call(text);
-        text.template = kendo.template(
-            "<text x='<%= options.x %>' y='<%= options._baselineY %>' " +
-                  "style='font: <%= fontStyle() %>'><%= content %></text>");
+        text.template = SVGText.template;
+        if (!text.template) {
+            text.template = SVGText.template = kendo.template(
+                "<text x='<%= options.x %>' y='<%= options._baselineY %>' " +
+                "style='font: <%= fontStyle() %>'><%= content %></text>"
+            );
+        }
 
         text.align();
     }
@@ -987,8 +996,12 @@
             options = $.extend({}, path.options, options);
 
         ViewElement.call(path);
-        path.template = kendo.template(
-            "<path d='<%= renderPoints() %>' stroke='<%= options.stroke %>'></path>");
+        path.template = SVGPath.template;
+        if (!path.template) {
+            path.template = SVGPath.template = kendo.template(
+                "<path d='<%= renderPoints() %>' stroke='<%= options.stroke %>'></path>"
+            );
+        }
 
         path.points = points || [];
     }
@@ -1047,10 +1060,14 @@
         options = root.options = $.extend({}, root.options, options);
         ViewElement.call(root, options);
 
-        root.template = kendo.template(
-            "<div style='width:<%= options.width %>; height:<%= options.height %>; " +
-                        "position: relative;'>" +
-            "<%= renderContent() %></div>");
+        root.template = VMLRoot.template;
+        if (!root.template) {
+            root.template = VMLRoot.template = kendo.template(
+                "<div style='width:<%= options.width %>; height:<%= options.height %>; " +
+                            "position: relative;'>" +
+                            "<%= renderContent() %></div>"
+            );
+        }
     }
 
     VMLRoot.prototype = new ViewElement();
@@ -1068,10 +1085,14 @@
         text.content = content || "";
 
         ViewElement.call(text);
-        text.template = kendo.template(
-            "<kvml:textbox style='position: absolute; " +
-                "left:<%= options.x %>px; top:<%= options.y %>px; " +
-                "font:<%= fontStyle() %>'><%= content %></kvml:textbox>");
+        text.template = VMLText.template;
+        if (!text.template) {
+            text.template = VMLText.template = kendo.template(
+                "<kvml:textbox style='position: absolute; " +
+                    "left:<%= options.x %>px; top:<%= options.y %>px; " +
+                    "font:<%= fontStyle() %>'><%= content %></kvml:textbox>"
+            );
+        }
     }
 
     VMLText.prototype = new ViewElement();
@@ -1094,11 +1115,15 @@
             options = $.extend({}, path.options, options);
 
         ViewElement.call(path);
-        path.template = kendo.template(
-            "<kvml:shape style='position:absolute; width:1px; height:1px;' " +
-            "strokecolor='<%= options.stroke %>' " +
-            "coordorigin='0 0' coordsize='1 1'>" +
-            "<kvml:path v='<%= renderPoints() %> e' /></kvml:shape>");
+        path.template = VMLPath.template;
+        if (!path.template) {
+            path.template = VMLPath.template = kendo.template(
+                "<kvml:shape style='position:absolute; width:1px; height:1px;' " +
+                "strokecolor='<%= options.stroke %>' " +
+                "coordorigin='0 0' coordsize='1 1'>" +
+                "<kvml:path v='<%= renderPoints() %> e' /></kvml:shape>"
+            );
+        }
 
         path.points = points || [];
     }
@@ -1147,33 +1172,56 @@
     }
 
     function measureText(text, style) {
-        var SIZE = 1,
-            measureBox = measureText.measureBox,
-            baselineMarker =
-                $("<div style='display: inline-block; vertical-align: baseline;" +
-                              "width: " + SIZE + "px; height: " + SIZE + "px;" +
-                              "zoom: 1; *display: inline; overflow: hidden;' />");
+        var styleHash = getHash(style),
+            cacheKey = text + styleHash,
+            cachedResult = measureText.cache[cacheKey];
+
+        if(cachedResult) {
+            return cachedResult;
+        }
+
+        var measureBox = measureText.measureBox,
+            baselineMarker = measureText.baselineMarker.cloneNode(false);
 
         if (!measureBox) {
             measureBox = measureText.measureBox =
                 $("<div style='position: absolute; top: -4000px; left: -4000px;" +
                               "line-height: normal; visibility: hidden;' />")
-                .appendTo(document.body);
+                .appendTo(document.body)[0];
         }
 
-
-        measureBox.css(style)
-            .text(text || "&nbsp;")
-            .append(baselineMarker);
+        for (var styleKey in style) {
+            measureBox.style[styleKey] = style[styleKey];
+        }
+        measureBox.innerHTML = text || "&nbsp;";
+        measureBox.appendChild(baselineMarker);
 
         var size = {
-            width: measureBox.width() - SIZE,
-            height: measureBox.height(),
-            baseline: baselineMarker[0].offsetTop + SIZE
+            width: measureBox.offsetWidth - BASELINE_MARKER_SIZE,
+            height: measureBox.offsetHeight,
+            baseline: baselineMarker.offsetTop + BASELINE_MARKER_SIZE
         };
+
+        measureText.cache[cacheKey] = size;
 
         return size;
     }
+
+    measureText.cache = [];
+    measureText.baselineMarker =
+        $("<div style='display: inline-block; vertical-align: baseline;" +
+                  "width: " + BASELINE_MARKER_SIZE + "px; height: " + BASELINE_MARKER_SIZE + "px;" +
+                  "zoom: 1; *display: inline; overflow: hidden;' />")[0];
+
+    function getHash(object) {
+        var hash = [];
+        for (var key in object) {
+            hash.push(key + object[key]);
+        }
+
+        return hash.sort().join(" ");
+    }
+
 
     function boxDiff( r, s ) {
         var a = Math.min( r.x1, s.x1 );
