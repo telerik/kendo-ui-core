@@ -49,3 +49,32 @@ function getFileListMock() {
 function simulateRemoveClick(fileIndex) {
     $(".t-delete", uploadInstance.wrapper).eq(fileIndex || 0).trigger("click");
 }
+
+function assertSelectedFile(files) {
+    equal(files, [ { name: "first.txt", extension: ".txt", size: null } ]);
+}
+
+function assertMultipleSelectedFiles(files) {
+    equal(files, [
+        { name: "first.txt", extension: ".txt", size: 1 },
+        { name: "second.txt", extension: ".txt", size: 2 }
+    ]);
+}
+
+function assertSelectedFile(files) {
+    // Exclude the raw file from comparison
+    delete files[0].rawFile;
+
+    deepEqual(files, [ { name: "first.txt", extension: ".txt", size: null } ]);
+}
+
+function assertMultipleSelectedFiles(files) {
+    // Exclude the raw file from comparison
+    delete files[0].rawFile;
+    delete files[1].rawFile;
+
+    deepEqual(files, [
+        { name: "first.txt", extension: ".txt", size: 1 },
+        { name: "second.txt", extension: ".txt", size: 2 }
+    ]);
+}

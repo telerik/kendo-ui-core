@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Upload sync</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script type="text/javascript" src="../jquery.mockjax.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.upload.js"></script>
+        <script src="helper.js"></script>
+        <link rel="stylesheet" href="../qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Upload sync</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var uploadInstance,
+                Upload = kendo.ui.Upload,
+                _getSupportsMultiple;
+
+            function createUpload(options) {
+                copyUploadPrototype();
+
+                $('#uploadInstance').kendoUpload(options);
+                return $('#uploadInstance').data("kendoUpload");
+            }
+
+            function moduleSetup() {
+                _getSupportsMultiple = Upload.prototype._getSupportsMultiple;
+            }
+
+            function moduleTeardown() {
+                Upload.prototype._getSupportsMultiple = _getSupportsMultiple;
+                removeHTML();
+            }
+
+            // -----------------------------------------------------------------------------------
+            // -----------------------------------------------------------------------------------
+            module("Upload / SyncUpload", {
+                setup: function() {
+                    moduleSetup();
+                    uploadInstance = createUpload();
+                },
+                teardown: moduleTeardown
+            });
+
+            test("current input is hidden after choosing a file", function() {
+                simulateFileSelect();
+                equal($("input:not(:visible)", uploadInstance.wrapper).length, 1);
+            });
+
+            test("list element is created for the selected file", function() {
+                simulateFileSelect();
+                equal($(".t-upload-files li.t-file", uploadInstance.wrapper).length, 1);
+            });
+
+            test("remove icon is rendered", function() {
+                simulateFileSelect();
+                equal($(".t-upload-files li.t-file button.t-upload-action span.t-delete", uploadInstance.wrapper).length, 1);
+            });
+
+            test("clicking remove should remove file entry", function() {
+                simulateFileSelect();
+                simulateFileSelect();
+                $(".t-delete:first", uploadInstance.wrapper).trigger("click");
+                equal($(".t-upload-files li.t-file", uploadInstance.wrapper).length, 1);
+            });
+
+            test("disable prevents clicking remove", function () {
+                simulateFileSelect();
+                uploadInstance.disable();
+                $(".t-delete:first", uploadInstance.wrapper).trigger("click");
+                equal($(".t-file", uploadInstance.wrapper).length, 1);
+            });
+
+            test("clicking remove should remove file input", function() {
+                simulateFileSelect();
+                $(".t-delete", uploadInstance.wrapper).trigger("click");
+                equal($("input", uploadInstance.wrapper).length, 1);
+            });
+
+            test("removing last file should remove list", function() {
+                simulateFileSelect();
+                $(".t-delete", uploadInstance.wrapper).trigger("click");
+                equal($(".t-upload-files", uploadInstance.wrapper).length, 0);
+            });
+
+            test("list element is re-created after removing all files", function() {
+                simulateFileSelect();
+                $(".t-delete", uploadInstance.wrapper).trigger("click");
+                simulateFileSelect();
+                equal($(".t-upload-files li.t-file", uploadInstance.wrapper).length, 1);
+            });
+
+            test("the empty input is removed when the parent form is submitted", function() {
+                $("#parentForm").trigger("submit");
+
+                equal(uploadInstance.element.parent().length, 0);
+            });
+
+            asyncTest("the empty input is restored when the parent submit is completed", function() {
+                $("#parentForm").trigger("submit");
+
+                setTimeout(function() {
+                    equal(uploadInstance.element.parent().length, 1);
+                    start();
+                }, 50);
+            });
+
+            test("enctype is set on parent form", function() {
+                equal($("#parentForm").attr("enctype"), "multipart/form-data");
+            });
+        </script>
+
+        <script src="selection.js"></script>
+
+        <script type="text/javascript">
+
+            // -----------------------------------------------------------------------------------
+            // -----------------------------------------------------------------------------------
+            module("Upload / SyncUpload / Events", {
+                setup: moduleSetup,
+                teardown: moduleTeardown
+            });
+
+            test("remove event fires upon remove", function() {
+                var removeFired = false;
+
+                uploadInstance = createUpload({ "remove" : (function() { removeFired = true; }) });
+
+                simulateFileSelect();
+                simulateRemoveClick();
+
+                ok(removeFired);
+            });
+
+            test("cancelling remove prevents file from being removed", function() {
+                uploadInstance = createUpload({ "remove" : (function(e) { e.preventDefault(); }) });
+
+                simulateFileSelect();
+                simulateRemoveClick();
+
+                equal($(".t-upload-files li.t-file", uploadInstance.wrapper).length, 1);
+            });
+        </script>
+        <script src="select.js"></script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>

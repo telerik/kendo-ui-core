@@ -51,7 +51,7 @@
         trigger: function(eventName, parameter) {
             var that = this,
                 events = that._events[eventName],
-                args = $.extend(new Event(), parameter),
+                args = $.extend(parameter, new Event()),
                 idx,
                 length;
 
