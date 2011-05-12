@@ -28,6 +28,40 @@
         <div id="container" style="width: 800px; height: 600px;">
         </div>
 
+        <input type="button" id="animate" value="Dance, dance!" />
+        <script type="text/javascript">
+            $("#animate").click(function() {
+                var FRAMES = 50,
+                    MAX_DATA = 500;
+
+                var chart = $("#container").data("kendoChart"),
+                    data = chart.options.series[0].data,
+                    frame = 0;
+
+                var start = new Date();
+                function step() {
+                    for (var j = 0; j < data.length; j++) {
+                        data[j] = (data[j] + 50) % MAX_DATA;
+                    }
+                    chart.refresh();
+
+                    if (frame++ < FRAMES) {
+                        setTimeout(step, 0);
+                    } else {
+                        var duration = (new Date()) - start,
+                            fps = (FRAMES / duration) * 1000;
+
+                        if (console) {
+                            console.log(FRAMES + " frames; " +
+                                duration + " ms; " + fps + " FPS");
+                        }
+                    }
+                }
+
+                step();
+            });
+        </script>
+
     </body>
 </html>
 
