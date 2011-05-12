@@ -107,12 +107,12 @@
             });
 
             test("select event fires on drop", 1, function() {
-                uploadInstance = createUpload({ "onSelect" : (function() { ok(true); }) });
+                uploadInstance = createUpload({ "select" : (function() { ok(true); }) });
                 simulateDrop([ { name: "first.txt", size: 1 } ]);
             });
 
             test("select event fired on drop can be cancelled", 1, function() {
-                uploadInstance = createUpload({ "onSelect" : (function(e) { e.preventDefault(); }) });
+                uploadInstance = createUpload({ "select" : (function(e) { e.preventDefault(); }) });
                 simulateDrop([ { name: "first.txt", size: 1 } ]);
 
                 equal($(".t-file", uploadInstance.wrapper).length, 0);
@@ -126,7 +126,7 @@
 
             module("Upload / Drag and drop / Synchronous upload", {
                 setup: function() {
-                    $.telerik.upload.prototype._getSupportsFormData = function() { return true; };
+                    Upload.prototype._getSupportsFormData = function() { return true; };
                     copyUploadPrototype();
 
                     $('#uploadInstance').kendoUpload();
@@ -137,7 +137,7 @@
             });
 
             test("disabled in synchronous mode", function() {
-                $.telerik.upload.prototype._getSupportsFormData = function() { return true; };
+                Upload.prototype._getSupportsFormData = function() { return true; };
                 ok(!uploadInstance._getSupportsDrop());
             });
         </script>
