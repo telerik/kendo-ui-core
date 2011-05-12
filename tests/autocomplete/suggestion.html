@@ -48,7 +48,7 @@
             test("pressing enter calls _blur", function() {
                 var blurWasCalled, autocomplete = new AutoComplete(input, {
                     data: ["baz", "bar"],
-                    complete: true
+                    suggest: true
                 });
 
                 autocomplete._blur = function(li) {
@@ -63,7 +63,7 @@
             test("pressing enter calls _blur when no item is selected", function() {
                 var blurWasCalled, autocomplete = new AutoComplete(input, {
                     data: ["baz", "bar"],
-                    complete: true
+                    suggest: true
                 });
 
                 autocomplete._blur = function(li) {
@@ -77,7 +77,7 @@
             test("pressing tab calls _blur", function() {
                 var blurWasCalled, autocomplete = new AutoComplete(input, {
                     data: ["baz", "bar"],
-                    complete: true
+                    suggest: true
                 });
 
                 autocomplete._blur = function(li) {
@@ -89,10 +89,10 @@
                 ok(blurWasCalled);
             });
 
-            test("current popup item completes the value of the input if complete is enabled", function() {
+            test("current popup item completes the value of the input if suggest is enabled", function() {
                 var autocomplete = new AutoComplete(input, {
                     data: ["baz", "bar"],
-                    complete: true
+                    suggest: true
                 });
 
                 input.val("b");
@@ -108,7 +108,7 @@
                 });
 
                 input.val("b");
-                autocomplete.complete("baz");
+                autocomplete.suggest("baz");
                 equal(input.selectedText(), "az");
             });
 
@@ -118,8 +118,8 @@
                 });
 
                 input.val("b");
-                autocomplete.complete("baz");
-                autocomplete.complete("bar");
+                autocomplete.suggest("baz");
+                autocomplete.suggest("bar");
                 equal(input.selectedText(), "ar");
             });
 
@@ -140,13 +140,13 @@
             test("separator and completion", function() {
                 var autocomplete = new AutoComplete(input, {
                     data: ["baz", "bar"],
-                    complete: true,
+                    suggest: true,
                     separator: ", "
                 });
 
                 input.val("b");
                 autocomplete.search();
-                autocomplete.complete("baz");
+                autocomplete.suggest("baz");
 
                 equal(input.selectedText(), "az");
                 equal(input.val(), "baz, ");
@@ -155,16 +155,26 @@
             test("separator and completing second word", function() {
                 var autocomplete = new AutoComplete(input, {
                     data: ["baz", "bar"],
-                    complete: true,
+                    suggest: true,
                     separator: ", "
                 });
 
                 input.val("baz, b");
                 autocomplete.search();
-                autocomplete.complete("bar");
+                autocomplete.suggest("bar");
 
                 equal(input.selectedText(), "ar");
                 equal(input.val(), "baz, bar, ");
+            });
+
+            test("separator and selecting a word", function() {
+                var autocomplete = new AutoComplete(input, {
+                    suggest: true,
+                    separator: ", "
+                });
+
+                autocomplete.select($("<li>foo</li>"));
+                equal(input.val(), "foo, ");
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
