@@ -4,31 +4,30 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <link href="Site.css" rel="stylesheet" type="text/css" />
     <script src="js/md5.js"></script>
-    <script src="../../../src/jquery.js"></script>    
-    <script src="../../../src/kendo.core.js"></script>
-    <script src="../../../src/kendo.query.js"></script>
-    <script src="../../../src/kendo.datasource.js"></script>
-    <script src="../../../src/kendo.pager.js"></script>
-    <script src="../../../src/kendo.navigatable.js"></script>
-    <script src="../../../src/kendo.selectable.js"></script>
-    <script src="../../../src/kendo.draganddrop.js"></script>
-    <script src="../../../src/kendo.sortable.js"></script>
-    <script src="../../../src/kendo.list.js"></script>
-    <script src="../../../src/kendo.listView.js"></script>
-    <script src="../../../src/kendo.grid.js"></script>
-    <script src="../../../src/kendo.slider.js"></script>    
-    <script src="js/aeroviewr.js"></script> 
+    <script src="../../src/jquery.js"></script>
+    <script src="../../src/kendo.core.js"></script>
+    <script src="../../src/kendo.query.js"></script>
+    <script src="../../src/kendo.datasource.js"></script>
+    <script src="../../src/kendo.pager.js"></script>
+    <script src="../../src/kendo.selectable.js"></script>
+    <script src="../../src/kendo.draganddrop.js"></script>
+    <script src="../../src/kendo.sortable.js"></script>
+    <script src="../../src/kendo.list.js"></script>
+    <script src="../../src/kendo.listView.js"></script>
+    <script src="../../src/kendo.grid.js"></script>
+    <script src="../../src/kendo.slider.js"></script>
+    <script src="js/flickr.js"></script>
+    <script src="js/aeroviewr.js"></script>
     <link type="text/css" href="../../../styles/kendo.common.css" rel="stylesheet"/>
-    <link type="text/css" href="../../../styles/kendo.vista.css" rel="stylesheet"/>   
+    <link type="text/css" href="../../../styles/kendo.vista.css" rel="stylesheet"/>
     <title>Index</title>
 </head>
 <body>
     <div class="wrap">
         <header class="floatWrap">
             <h1>Aero<strong>Viewr</strong></h1>
-            <!--<a href="#" class="signin">Sign in</a>-->
-            <!--   -- or --   -->
-            <span class="signin">Signed in as <a href="#" ><em>MyUser</em></a></span>
+            <a id="signin" href="#" class="signin">Sign in</a>
+            <span id="userInfo" class="signin" style="display:none">Signed in as <a href="#" ><em>MyUser</em></a><a id="signout" href="#"><em> Sign out</em></a></span>
             <ul>
                 <li><input type="text" value="flower" id="searchBox"/></li>
                 <li><a href="#" class="p-icon i-search">Search</a></li>
@@ -40,8 +39,8 @@
             <div class="overlay"><!-- --></div>
         </section>
         <section class="main">
-            <h1>Nature Set <span class="by-user">by <a href="#"><em>SomeUser</em></a></span></h1>            
-            <button id="grid">Grid layout</button>
+        <h1>Nature Set <span class="by-user">by <a href="#"><em>SomeUser</em></a></span></h1>
+        <button id="grid">Grid layout</button>
             <button id="listView">ListView layout</button>
             <ol class="paging"></ol>
             <ul id="mainPhotoStrip" class="floatWrap thumbs"></ul>
