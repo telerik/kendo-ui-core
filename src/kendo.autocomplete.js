@@ -96,7 +96,7 @@
         options: {
             suggest: false,
             minLength: 1,
-            template: "<li><%= data %></li>",
+            template: "<li unselectable='on'><%= data %></li>", //unselectable=on is required for IE to prevent the suggestion box from stealing focus from the input
             delay: 300
         },
 
