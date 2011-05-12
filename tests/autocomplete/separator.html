@@ -70,15 +70,6 @@
                 equal(autocomplete.ul.children().first().text(), "bar");
             });
 
-            test("insert word at specified word index", function() {
-                var autocomplete = new AutoComplete(input, {
-                    separator: ", "
-                });
-
-                input.val("foo, bar");
-                equal(autocomplete._insert(0, "bar"), "bar, bar, ");
-            });
-
             test("search uses the word at the caret position", function() {
                 var autocomplete = new AutoComplete(input, {
                     data: ["foo", "bar"],
