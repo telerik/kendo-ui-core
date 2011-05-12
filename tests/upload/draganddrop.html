@@ -48,7 +48,7 @@
             }
 
             function moduleSetup() {
-                Upload.prototype._getSupportsFormData = function() { return true; };
+                Upload.prototype._supportsFormData = function() { return true; };
                 uploadInstance = createUpload();
             }
 
@@ -65,38 +65,38 @@
             });
 
             test("enabled for Safari on Mac", function() {
-                uploadInstance._getUserAgent = function() {
+                uploadInstance._userAgent = function() {
                     return "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_7; en-us) AppleWebKit/534.16+ (KHTML, like Gecko) Version/5.0.3 Safari/533.19.4";
                 };
 
-                ok(uploadInstance._getSupportsDrop());
+                ok(uploadInstance._supportsDrop());
             });
 
             test("disabled for Safari on Windows", function() {
-                uploadInstance._getUserAgent = function() {
+                uploadInstance._userAgent = function() {
                     return "Mozilla/5.0 (Windows; U; Windows NT 6.1; sv-SE) AppleWebKit/533.19.4 (KHTML, like Gecko) Version/5.0.3 Safari/533.19.4";
                 };
 
-                ok(!uploadInstance._getSupportsDrop());
+                ok(!uploadInstance._supportsDrop());
             });
 
             test("enabled for all other browsers supporting FormData", function() {
-                uploadInstance._getUserAgent = function() {
+                uploadInstance._userAgent = function() {
                     return "xxxx";
                 };
 
-                ok(uploadInstance._getSupportsDrop());
+                ok(uploadInstance._supportsDrop());
             });
 
             test("disabled for all browsers not supporting FormData", function() {
-                Upload.prototype._getSupportsFormData = function() { return false; };
+                Upload.prototype._supportsFormData = function() { return false; };
                 uploadInstance = createUpload();
 
-                ok(!uploadInstance._getSupportsDrop());
+                ok(!uploadInstance._supportsDrop());
             });
 
             test("dropped file is enqueued", function () {
-                if (!uploadInstance._getSupportsDrop()) {
+                if (!uploadInstance._supportsDrop()) {
                     ok(true, "Disabled in this browser");
                     return;
                 }
@@ -126,7 +126,7 @@
 
             module("Upload / Drag and drop / Synchronous upload", {
                 setup: function() {
-                    Upload.prototype._getSupportsFormData = function() { return true; };
+                    Upload.prototype._supportsFormData = function() { return true; };
                     copyUploadPrototype();
 
                     $('#uploadInstance').kendoUpload();
@@ -137,8 +137,8 @@
             });
 
             test("disabled in synchronous mode", function() {
-                Upload.prototype._getSupportsFormData = function() { return true; };
-                ok(!uploadInstance._getSupportsDrop());
+                Upload.prototype._supportsFormData = function() { return true; };
+                ok(!uploadInstance._supportsDrop());
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

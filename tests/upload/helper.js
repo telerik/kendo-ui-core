@@ -34,11 +34,12 @@ function simulateFileSelect() {
 
 function simulateMultipleFileSelect() {
     uploadInstance._onInputChange({ target: {
-        files: [
-            { name: "first.txt", size: 1 },
-            { fileName: "second.txt", fileSize: 2 } // fileName and fileSize are used by Firefox (versions before 3.6)
-        ]}
-    });
+            files: [
+                { name: "first.txt", size: 1 },
+                { fileName: "second.txt", fileSize: 2 } // fileName and fileSize are used by Firefox (versions before 3.6)
+            ]}
+        }
+    );
 }
 function getFileListMock() {
     return [

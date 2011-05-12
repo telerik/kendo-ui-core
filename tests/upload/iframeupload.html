@@ -20,7 +20,7 @@
         <script>
             var uploadInstance,
                 Upload = kendo.ui.Upload,
-                _getSupportsFormData,
+                _supportsFormData,
                 validJSON = "{\"status\":\"OK\"}",
                 errorResponse = "ERROR!";
 
@@ -85,13 +85,13 @@
             }
 
             function moduleSetup() {
-                _getSupportsFormData = Upload.prototype._getSupportsFormData;
-                Upload.prototype._getSupportsFormData = function() { return false; };
+                _supportsFormData = Upload.prototype._supportsFormData;
+                Upload.prototype._supportsFormData = function() { return false; };
                 Upload.prototype._alert = function() { };
             }
 
             function moduleTeardown() {
-                Upload.prototype._getSupportsFormData = _getSupportsFormData;
+                Upload.prototype._supportsFormData = _supportsFormData;
                 $("iframe[name^='uploadInstance'], form[target^='uploadInstance']").remove();
                 $.mockjaxClear();
                 removeHTML();
@@ -112,7 +112,7 @@
             });
 
             test("iframe module is not selected when FormData is supported", function() {
-                Upload.prototype._getSupportsFormData = function() { return true; };
+                Upload.prototype._supportsFormData = function() { return true; };
 
                 uploadInstance = createUpload();
 

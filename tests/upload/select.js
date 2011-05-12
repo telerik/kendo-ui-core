@@ -19,7 +19,9 @@ test("select event contains information for single file", function() {
 
 test("select event contains information for multiple files", function() {
     var files = null;
-    uploadInstance = createUpload({ "select" : (function(e) { files = e.files; }) });
+    uploadInstance = createUpload({ "select" : (function(e) {
+        files = e.files;
+    }) });
 
     simulateMultipleFileSelect();
 
