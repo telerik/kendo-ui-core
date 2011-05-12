@@ -1,66 +1,38 @@
 (function ($) {
-    var app = {
-        key: 'ea73824c4e27a137b7597fc3ffb3ba98',
-        secret: '2e767957c686dd30',
-        frob: "72157626154487045-2db02b0fc7fbf6de-60630644"
-    };
-
-    var auth = {
-        token: '72157626154487043-7dfd951a1ede12fa' //write auth
-    };
-
-    var IMAGESIZES = ["_s", "_t", "_m"],
+    var flickr = window.flickr,
+        IMAGESIZES = ["_s", "_t", "_m"],
         imageSize = IMAGESIZES[0],
-        service = "http://api.flickr.com/services/rest/",
-        template = function(size) { return '<li alt="thumbnail"><img src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>' + size + '.jpg"></li>'; };
-
-    function getThumbnailURL(photo) {
-        return 'http://farm' + photo.farm + '.' + 'static.flickr.com/' + photo.server + '/' + photo.id + '_' + photo.secret + '_t.jpg';
-    }
-
-    function buildAuthMethod(service, method, params) {
-        params = params || {};
-        params["method"] = method;
-        params["api_key"] = app.key;
-        params["auth_token"] = auth.token;
-        params["format"] = "json";
-        params["api_sig"] = getApiSig(app.secret, params);
-
-        return service + "?" + $.param(params);
-    }
-
-    function getApiSig(secret, params) {
-        var concatString = "",
-            keys = [];
-
-        params["callback"] = "jsonFlickrApi";
-
-        for (var key in params) {
-            if (params.hasOwnProperty(key)) {
-                keys.push(key);
-            }
-        }
-
-        keys.sort();
-        concatString += secret
-        for (var i = 0; i < keys.length; i++) {
-            key = keys[i];
-            concatString += key + params[key];
-        }
-        return hex_md5(concatString);
-    }
+        template = function(size) { return '<li alt="thumbnail"><img src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>' + size + '.jpg"></li>'; },
+        template1 = '<li alt="thumbnail"><div class=""></div><img src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>_s.jpg"></li>',
+        liveUrl = "http://localhost/kendo/demos/aeroviewr/index.html",
+        isAuthenticated = true;
 
     $(document).ready(function () {
+        flickr.authenticate(function(authenticated) {
+          if (authenticated) {
+              $("#signin").hide();
+              $("#userInfo").fadeIn().find("em:first").html(flickr.auth.user.username);
+              if(history.replaceState){
+                  history.replaceState(null, "AeroViewr", liveUrl);
+              }
+              //initAuth();
+          } else {
+              //init();
+              $('#userInfo').hide();
+              $('#signin').fadeIn();
+          }
+        });
+
         var mainPhotoStrip = $("#mainPhotoStrip"),
             flatPhotoStrip = $("#flatPhotoStrip"),
             mainPhotoGrid = $("#mainPhotoGrid"),
-            slider = $("#slider"),            
+            slider = $("#slider"),
             dataSource = new kendo.data.DataSource({
                 page: 1,
                 pageSize: 5,
                 transport: {
                     read: {
-                        url: service,
+                        url: flickr.service,
                         cache: true,
                         dataType: "jsonp",
                         jsonpCallback: "jsonFlickrApi"
@@ -69,16 +41,13 @@
                     dialect: {
                         read: function(data) {
                             var params = {
+                                method: flickr.methods.search,
                                 text: $("#searchBox").val(),
                                 extras: "owner_name,tags",
-                                method: "flickr.photos.search",
-                                api_key: app.key,
-                                auth_token: auth.token,
-                                format: "json"
-                            }
-                            params.per_page = 500;
-                            params["api_sig"] = getApiSig(app.secret, params);
-                            return params;
+                                per_page: 500,
+                                callback: "jsonFlickrApi"
+                            };
+                            return flickr.methodParams(params);
                         }
                     }
                 },
@@ -92,20 +61,74 @@
                 }
             });
 
+        function initAuth(){
+            var flatSetsStrip = $("#flatSetsStrip"),
+                setsDataSource = new kendo.data.DataSource({
+                transport: {
+                    read: {
+                        url: flickr.service,
+                        cache: true,
+                        dataType: "jsonp",
+                        jsonpCallback: "jsonFlickrApi"
+                    },
+                    cache: "localstorage",
+                    dialect: {
+                        read: function(data) {
+                            var params = {
+                                method: flickr.methods.getSets,
+                                callback: "jsonFlickrApi",
+                                user_id: flickr.auth.user.nsid
+                            };
+                            return flickr.methodParams(params);
+                        }
+                    }
+                },
+                reader: {
+                    data: function(result) {
+                        debugger;
+                        var sets = result.photosets.photoset;
+                        sets.splice(0,1, {"id":null, 
+                                          "primary":"5540403854", 
+                                          "secret":"86a40c128e", 
+                                          "server":"5175", 
+                                          "farm":6, 
+                                          "title":{"_content":"Pictures not in set"}, 
+                                          "description":{"_content":"Pictures not in set"}
+                                        });
+                        return sets;
+                    }
+                }
+            });
+
+            flatSetsStrip.kendoListView({
+                dataSource: setsDataSource,
+                template: template(IMAGESIZES[0])
+            })
+            .hide()
+            .data("kendoListView")
+            .bind("dataBound", function () {
+                this.element.show();
+                //maybe load pictures from first set
+            });
+        }
+
         $('.i-help').click(function (e) {
             dataSource.transport.cache.clear(); // temp in order to force items removal from the localStore
         });
 
-        $('.i-search').click(function (e) {
+        var search = function(e) {
             if(mainPhotoStrip.data("prevVisible") === true) {
                 mainPhotoStrip.show().data("prevVisible", false);
-                slider.parent().css("display", "");                
+                slider.parent().css("display", "");
             } 
             else {
                 mainPhotoGrid.parent().css("display", "");
             }
             dataSource.read();
-        });
+        };
+
+        $(".i-search").click(search);
+        $("#searchBox").keydown(function(e) { if (e.keyCode == 13) { search(e); } });
 
         $("#grid").click(function() {
             mainPhotoStrip.hide().data("prevVisible", false);
@@ -122,8 +145,8 @@
             dataSource: dataSource,
             template: template(imageSize)
         })
-        .hide()        
-        .data("kendoListView")        
+        .hide()
+        .data("kendoListView")
         .bind("change", function () {
             mainPhotoStrip.hide().data("prevVisible", true);
             slider.parent().hide();
@@ -141,7 +164,7 @@
                         .parent()
                         .css("overflow", "hidden").animate({ opacity: 1 }, 1000);
             });
-        });                
+        });
 
         slider.kendoSlider({
             orientation: "vertical",
@@ -151,12 +174,12 @@
         })
         .parent().hide().end()
         .data("kendoSlider")
-        .bind("change", function() {            
+        .bind("change", function() {
             imageSize = IMAGESIZES[this.value()];
             mainPhotoStrip.data("kendoListView").template = template(imageSize);
             dataSource.read();
         });
-        
+
         mainPhotoGrid.kendoGrid({
             dataSource: dataSource,
             pageable: $(".paging").data("kendoPager"),
@@ -181,5 +204,14 @@
         });
 
         $(".paging").kendoPager({ dataSource: dataSource });
+
+        //log in section
+        $("#signin").bind("click", function(e) {
+            flickr.signIn();
+        });
+
+        $("#signout").bind("click", function(e) {
+            flickr.signOut();
+        });
     });
 })(jQuery);
