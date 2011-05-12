@@ -55,7 +55,8 @@
             var params = {
                 method: this.methods.getMostPopular,
                 api_key: app.key,
-                format: "json"
+                format: "json",
+                nojsoncallback: 1
             }
             $.extend(params, data);
             params["api_sig"] = this.getApiSig(params);
@@ -66,7 +67,8 @@
             var params = {
                 method: this.methods.search,
                 api_key: app.key,
-                format: "json"
+                format: "json",
+                nojsoncallback: 1
             }
 
             if(this.auth.token) {
@@ -84,7 +86,8 @@
                 user_id: flickr.auth.user.nsid,
                 api_key: app.key,
                 auth_token: this.auth.token,
-                format: "json"
+                format: "json",
+                nojsoncallback: 1
             }
             $.extend(params, data);
             params["api_sig"] = this.getApiSig(params);

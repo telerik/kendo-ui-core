@@ -20,8 +20,7 @@
                     read: {
                         url: flickr.service,
                         cache: true,
-                        dataType: "jsonp",
-                        jsonpCallback: "jsonFlickrApi"
+                        dataType: "json"
                     },
                     cache: "localstorage",
                     dialect: {
@@ -29,15 +28,14 @@
                             var params = {
                                 text: $("#searchBox").val(),
                                 extras: "owner_name,tags",
-                                per_page: 500,
-                                callback: "jsonFlickrApi"
+                                per_page: 500
                             };
                             return flickr.searchParams(params);
                         }
                     }
                 },
                 reader: {
-                    data: function(result) {
+                    data: function(result) {                        
                         return result.photos.photo;
                     },
                     total: function(result) {
@@ -50,16 +48,14 @@
                     read: {
                         url: flickr.service,
                         cache: true,
-                        dataType: "jsonp",
-                        jsonpCallback: "jsonFlickrApi"
+                        dataType: "json"
                     },
                     cache: "localstorage",
                     dialect: {
                         read: function(data) {
                             var params = {
                                 extras: "owner_name,tags",
-                                per_page: 100,
-                                callback: "jsonFlickrApi"
+                                per_page: 100
                             };
                             return flickr.mostPopularParams(params);
                         }
@@ -76,8 +72,7 @@
                    read: {
                        url: flickr.service,
                        cache: true,
-                       dataType: "jsonp",
-                       jsonpCallback: "jsonFlickrApi"
+                       dataType: "json"
                    },
                    cache: "localstorage",
                    dialect: {
@@ -85,7 +80,7 @@
                            var params = {
                                callback: "jsonFlickrApi",
                            };
-                           return flickr.getSetsParams(params);
+                           return flickr.getSetsParams({});
                        }
                    }
                 },
@@ -256,3 +251,4 @@
         });
     });
 })(jQuery);
+        
