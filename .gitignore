@@ -1,2 +1,4 @@
 *.swp
 tags
+*.dll
+*.pdb
