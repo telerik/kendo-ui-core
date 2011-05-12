@@ -3,26 +3,13 @@
         IMAGESIZES = ["_s", "_t", "_m"],
         imageSize = IMAGESIZES[0],
         template = function(size) { return '<li alt="thumbnail"><img src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>' + size + '.jpg"></li>'; },
+        setTemplate = '<li alt="thumbnail"><img width="100" height="100" src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>_s.jpg"></li>',
         liveUrl = "http://localhost/kendo/demos/aeroviewr/index.html",
         isAuthenticated = true;
 
     $(document).ready(function () {
-        flickr.authenticate(function(authenticated) {
-          if (authenticated) {
-              $("#signin").hide();
-              $("#userInfo").fadeIn().find("em:first").html(flickr.auth.user.username);
-              if(history.replaceState){
-                  history.replaceState(null, "AeroViewr", liveUrl);
-              }
-              //initAuth();
-          } else {
-              //init();
-              $('#userInfo').hide();
-              $('#signin').fadeIn();
-          }
-        });
-
-        var mainPhotoStrip = $("#mainPhotoStrip"),
+        var flatSetsStrip = $("#flatSetsStrip"),
+            mainPhotoStrip = $("#mainPhotoStrip"),
             flatPhotoStrip = $("#flatPhotoStrip"),
             mainPhotoGrid = $("#mainPhotoGrid"),
             slider = $("#slider"),
@@ -83,7 +70,37 @@
                         return result.photos.photo;
                     }
                 }
+            }),
+            setsDataSource = new kendo.data.DataSource({
+               transport: {
+                   read: {
+                       url: flickr.service,
+                       cache: true,
+                       dataType: "jsonp",
+                       jsonpCallback: "jsonFlickrApi"
+                   },
+                   cache: "localstorage",
+                   dialect: {
+                       read: function(data) {
+                           var params = {
+                               callback: "jsonFlickrApi",
+                           };
+                           return flickr.getSetsParams(params);
+                       }
+                   }
+                },
+                reader: {
+                  data: function(result) {
+                      // this will not databind listview if no sets!!!
+                      var sets = [];
+                      if (result.stat == "ok" && result.photosets.photoset) {
+                          sets = result.photosets.photoset;
+                      }
+                      return sets;
+                  }
+                }
             });
+
 
         $('.i-help').click(function (e) {
             dataSource.transport.cache.clear(); // temp in order to force items removal from the localStore
@@ -187,10 +204,6 @@
             dataSource.read();
         });
 
-        //$("#flatPhotoStrip").kendoListView({
-        //    dataSource: dataSource,
-        //    template: template("_s")
-        //});
 
         //log in section
         $("#signin").bind("click", function(e) {
@@ -202,70 +215,44 @@
         });
 
         //initial loading - not logged user.
-        if(flickr.auth.token === null) { 
-            //1. bind flatMostPopularPhotos listview.
-            $("#flatMostPopularPhotos").kendoListView({
-                dataSource: mostPopularDataSource,
-                template: template("_s"),
-                dataBound: function(){
-                    var listView = this.element,
-                        li = listView.find("li:first");
-                    this.selectable.value(li);
-                },
-                change: function() {
-                    $("#bigPhoto").attr("src", this.selected().find("img").attr('src').replace("_s", ""));
+        $("#flatMostPopularPhotos").kendoListView({
+            dataSource: mostPopularDataSource,
+            template: template("_s"),
+            dataBound: function(){
+                var listView = this.element,
+                    li = listView.find("li:first");
+                this.selectable.value(li);
+            },
+            change: function() {
+                $("#bigPhoto").attr("src", this.selected().find("img").attr('src').replace("_s", ""));
+            }
+        });
+
+        flickr.authenticate(function(authenticated) {
+            if (authenticated) {
+                $("#mainTemplate").hide();
+                $("#signin").hide();
+                $("#userInfo").fadeIn().find("em:first").html(flickr.auth.user.username);
+                if(history.replaceState){
+                    history.replaceState(null, "AeroViewr", liveUrl);
                 }
-            });
-        }
+
+                flatSetsStrip.kendoListView({
+                    dataSource: setsDataSource,
+                    template: setTemplate,
+                    dataBound: function () {
+                        $("#flatMostPopularPhotos").hide();
+                        this.element
+                            .prepend('<li alt="thumbnail"><img width="100" height="100" src="img/NotInSet.png" /><em>Not In Set</em></li>')
+                            .show();
+                        //maybe load pictures from first set
+                    }
+                });
+
+            } else {
+              $('#userInfo').hide();
+              $('#signin').fadeIn();
+            }
+        });
     });
 })(jQuery);
-        //function initAuth(){
-         //   var flatSetsStrip = $("#flatSetsStrip"),
-         //       setsDataSource = new kendo.data.DataSource({
-        //        transport: {
-        //            read: {
-         //               url: flickr.service,
-         //               cache: true,
-          //              dataType: "jsonp",
-         //               jsonpCallback: "jsonFlickrApi"
-        //            },
-        //            cache: "localstorage",
-        //            dialect: {
-         //               read: function(data) {
-         //                   var params = {
-         //                       //method: flickr.methods.getSets,
-         //                       callback: "jsonFlickrApi",
-         //                       user_id: flickr.auth.user.nsid
-         //                   };
-         //                   //return flickr.methodParams(params);
-         //               }
-         //           }
-         //       },
-         //       reader: {
-         //           data: function(result) {
-         //               debugger;
-         //               var sets = result.photosets.photoset;
-         //               sets.splice(0,1, {"id":null, 
-         //                                 "primary":"5540403854", 
-         //                                 "secret":"86a40c128e", 
-         //                                 "server":"5175", 
-        ////                                  "farm":6, 
-        //                                  "title":{"_content":"Pictures not in set"}, 
-        //                                  "description":{"_content":"Pictures not in set"}
-        //                                });
-        //                return sets;
-      //              }
-    //            }
-  //          });
-//
-  //          flatSetsStrip.kendoListView({
-  //              dataSource: setsDataSource,
-  //              template: template(IMAGESIZES[0])
-  //          })
-  //          .hide()
-  //          .data("kendoListView")
-  //          .bind("dataBound", function () {
-  //              this.element.show();
- //               //maybe load pictures from first set
-  //          });
- //       }
