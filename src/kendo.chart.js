@@ -716,8 +716,9 @@
         },
 
         updateLayout: function(stackBox) {
-            var stack = this;
-            var children = stack.children;
+            var stack = this,
+                isVertical = stack.options.isVertical,
+                children = stack.children;
 
             for (var i = 0; i < children.length; i++) {
                 var currentChild = children[i];
@@ -725,8 +726,12 @@
                 currentChild.updateLayout(stackBox);
 
                 if (i > 0) {
-                    var prevChild = children[i - 1];
-                    currentChild.box.translate(0, -prevChild.box.height());
+                    var prevChild = children[i - 1],
+                        prevChildBox = prevChild.box,
+                        translateX = isVertical ? 0 : prevChildBox.width(),
+                        translateY = isVertical ? - prevChild.box.height() : 0;
+
+                    currentChild.box.translate(translateX, translateY);
                 }
             }
         }
