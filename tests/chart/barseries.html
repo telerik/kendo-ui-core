@@ -15,76 +15,53 @@
                 Box = Chart.Box,
                 chartBox = new Box(0, 0, 800, 600);
 
+            function BarStub(box) {
+                this.boxHistory = [];
+                this.box = box;
+            }
+
+            BarStub.prototype = {
+                updateLayout: function(box) {
+                    this.boxHistory.push(box);
+                }
+            };
+
             (function() {
-                var barSeries,
-                    BAR_WIDTH = 102.564;
+                var series,
+                    plotArea,
+                    positiveValues = [1, 2];
 
-                function ViewFactoryStub() {
-                    this.renderedRects = [];
+                function PlotAreaStub() {
+                    this.box = new Box(0, 0, 100, 100);
                 }
-                ViewFactoryStub.prototype = {
-                    rect: function(x, y, width, height) {
-                        this.renderedRects.push([].slice.call(arguments));
+
+                $.extend(PlotAreaStub.prototype, {
+                    getDataPointBox: function(point) {
+                        //return new Box(point.x, point.y, point.x + 1, point.y + 1);
                     }
-                }
+                });
 
-                module("View Rendering", {
+                module("Bar Series", {
                     setup: function() {
-                        factoryStub = new ViewFactoryStub();
+                        plotArea = new PlotAreaStub();
 
-                        barSeries = new Chart.BarSeries(
-                            0, 350, {
-                                name: "Value",
-                                type: "bar",
-                                data: [100, 200, 300]
-                            }
-                        );
-                        barSeries.updateLayout(chartBox);
+                        series = new Chart.BarSeries(plotArea, 0, {
+                            seriesData: [ positiveValues ]
+                        });
                     }
                 });
 
-                test("creates bars", function() {
-                    barSeries.getViewElements(factoryStub);
-
-                    equal(factoryStub.renderedRects.length, 3);
+                test("Creates bars for series data points", function() {
+                    equal(series.children.length, positiveValues.length);
                 });
 
-                test("bars are distributed horizontally", function() {
-                    barSeries.getViewElements(factoryStub);
-
-                    var barsX = $.map(factoryStub.renderedRects, function(rect) {
-                        return rect[0];
-                    });
-
-                    same(barsX, [82.051, 348.718, 615.385]);
-                });
-
-                test("bars are aligned to bottom", 3, function() {
-                    barSeries.getViewElements(factoryStub);
-
-                    $.each(factoryStub.renderedRects, function() {
-                        equal(this[1] + this[3], chartBox.y2);
-                    });
-                });
-
-                test("bars have set width", 3, function() {
-                    barSeries.getViewElements(factoryStub);
-
-                    $.each(factoryStub.renderedRects, function() {
-                        equal(this[2], BAR_WIDTH);
-                    });
+                test("Reports value range", function() {
+                    same(series.getValueRange(), [positiveValues[0], positiveValues[1]]);
                 });
 
             })();
 
             (function() {
-                function BarStub() { }
-                BarStub.prototype = {
-                    updateLayout: function(box) {
-                        this.box = box;
-                    }
-                }
-
                 var cluster,
                     bars,
                     clusterBox = new Box(0, 0, 100, 100);
@@ -104,13 +81,13 @@
 
                 test("distributes width evenly", function() {
                     $.each(bars, function() {
-                        equal(this.box.width(), clusterBox.width() / bars.length)
+                        equal(this.boxHistory[0].width(), clusterBox.width() / bars.length)
                     });
                 });
 
                 test("positions children next to each other", function() {
                     $.each(bars, function(index) {
-                        equal(this.box.x1, this.box.width() * index)
+                        equal(this.boxHistory[0].x1, this.boxHistory[0].width() * index)
                     });
                 });
 
@@ -122,28 +99,18 @@
 
                 test("distributes height evenly", function() {
                     $.each(bars, function() {
-                        equal(this.box.height(), clusterBox.height() / bars.length)
+                        equal(this.boxHistory[0].height(), clusterBox.height() / bars.length)
                     });
                 });
 
                 test("positions children below each other", function() {
                     $.each(bars, function(index) {
-                        equal(this.box.y1, this.box.height() * index)
+                        equal(this.boxHistory[0].y1, this.boxHistory[0].height() * index)
                     });
                 });
             })();
 
             (function() {
-                function BarStub(box) {
-                    this.boxHistory = [];
-                    this.box = box;
-                }
-                BarStub.prototype = {
-                    updateLayout: function(box) {
-                        this.boxHistory.push(box);
-                    }
-                }
-
                 var stack,
                     stackBox = new Box(0, 0, 100, 100);
 

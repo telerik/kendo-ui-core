@@ -642,30 +642,6 @@
         }
     });
 
-/*
-    var stacks = [[s0, s1], [s2, s3]];
-    var clusters = [];
-    for (var dataIx = 0; dataIx < dataPoints.length; dataIx++) {
-        var cluster = new Cluster();
-        clusters.push(cluster);
-
-        for (var stackIx = 0; stackIx < stacks.length; stackIx++) {
-            var stackSeries = stacks[stackIx],
-                dataPoints = stackSeries.data,
-                stack = new Stack();
-
-            cluster.children.push(stack);
-
-            for (var dataIx = 0; dataIx < dataPoints.length; dataIx++) {
-                var bar = new Bar();
-                bar.options.value = dataPoints[dataIx];
-
-                stack.children.push(bar);
-            }
-        }
-    }
-    */
-
     function DataPointCluster(options) {
         var cluster = this;
         ChartElement.call(cluster);
@@ -737,11 +713,14 @@
         }
     });
 
+    function Bar(options) {
+        var bar = this;
+        ChartElement.call(bar);
 
-    /*
-    function Bar(valueAxis, options) {
+        bar.options = $.extend({}, bar.options, options);
     }
 
+    Bar.prototype = new ChartElement(); 
     $.extend(Bar.prototype, {
         options: {
             fill: "#000",
@@ -754,48 +733,57 @@
                 box = bar.box;
 
             return [
-                factory.rect(box.x1, box.y1, box.width(), box.height());
+                factory.rect(box.x1, box.y1, box.width(), box.height())
             ];
         }
     });
-    */
 
-    var BAR_WIDTH_RATIO = 2.6;
-    function BarSeries(axisMin, axisMax, options) {
+    function BarSeries(plotArea, seriesIndex, options) {
         var series = this;
         ChartElement.call(series);
 
-        series._axisMin = axisMin;
-        series._axisMax = axisMax;
+        series.plotArea = plotArea;
+        series.seriesIndex = seriesIndex;
         series.options = $.extend({}, series.options, options);
+        series._dataMin = Number.MAX_VALUE;
+        series._dataMax = Number.MIN_VALUE;
+
+        series.init();
     }
 
     BarSeries.prototype = new ChartElement();
     $.extend(BarSeries.prototype, {
         options: {
+            seriesData: []
+        },
+
+        init: function() {
+            var series = this,
+                options = series.options,
+                seriesData = options.seriesData;
+
+            for (var seriesIx = 0; seriesIx < seriesData.length; seriesIx++) {
+                var data = seriesData[seriesIx];
+
+                for (var pointIx = 0; pointIx < data.length; pointIx++) {
+                    var point = data[pointIx];
+                    series._dataMin = Math.min(series._dataMin, point);
+                    series._dataMax = Math.max(series._dataMax, point);
+                    series.children.push(new Bar());
+                }
+            }
+        },
+
+        getValueRange: function() {
+            var series = this;
+            return [series._dataMin, series._dataMax];
         },
 
         getViewElements: function(factory) {
             var series = this,
                 options = series.options,
                 box = series.box,
-                elements = [],
-                dataLength = options.data.length,
-                scale = box.height() / (series._axisMax - series._axisMin),
-                categoryStep = box.width() / dataLength,
-                barWidth = round(categoryStep / BAR_WIDTH_RATIO, COORD_PRECISION),
-                barCenterX = box.x1 + categoryStep / 2,
-                barBottomY = box.y2;
-
-            for (var i = 0; i < dataLength; i++) {
-                var value = options.data[i],
-                    barHeight = round(value * scale, COORD_PRECISION),
-                    barX = round(barCenterX - barWidth / 2, COORD_PRECISION),
-                    barY = round(barBottomY - barHeight, COORD_PRECISION);
-
-                elements.push(factory.rect(barX, barY, barWidth, barHeight));
-                barCenterX += categoryStep;
-            }
+                elements = [];
 
             return elements;
         },
