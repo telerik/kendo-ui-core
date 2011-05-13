@@ -130,7 +130,7 @@ var visitor = window.visitor,
                 dataSource.query({page: 1, pageSize: 500});
             })
             .bind("dataBound", function () {
-                mainPhotoStrip.find("img").bind("load", function () {
+                this.element.find("img").bind("load", function () {
                     $(this).css("display", "block")
                             .css("marginLeft", ~~($(this).width() / 2))
                             .animate({ marginLeft: 0 }, 500)
@@ -149,30 +149,39 @@ var visitor = window.visitor,
             .data("kendoSlider")
             .bind("change", function() {
                 imageSize = IMAGESIZES[this.value()];
-                mainPhotoStrip.data("kendoListView").template = template(imageSize);
+                $("#mainPhotoStrip").data("kendoListView").template = kendo.template(template(imageSize));                
                 dataSource.read();
             });
 
             $("#grid").click(function() {
-                mainPhotoStrip.hide();
+                $("#mainPhotoStrip").hide();
                 $("#slider").parent().hide();
                 $("#mainPhotoGrid").show();
             });
             $("#listView").click(function(e) {                                
                 $("#mainPhotoGrid").hide();
-                mainPhotoStrip.show();
+                $("#mainPhotoStrip").show();
                 $("#slider").parent().show();
             });
-            /*
+            
             $("#backButton").bind("click", function(){
-                var element = $(this);
-                if (element.text().toLowerCase() == "back to slideshow" && flickr.auth.token === null) {
-                    dataSource.query({page: 1, pageSize: 5});
+                var element = $(this),
+                    view = element.data("currentView");
+                if(view === "flatMostPopularPhotos") {
+                    element.data("currentView", "mainTemplate");
                     $("#flatSearchPhotos").hide();
                     $("#mainTemplate").show();
-                    element.text("");
+                    $("#flatMostPopularPhotos").hide();
+                    element.text("Back to most popular");
                 }
-            });*/
+                else if(view === "mainTemplate"){
+                    element.data("currentView", "flatMostPopularPhotos");
+                    $("#flatSearchPhotos").hide();
+                    $("#mainTemplate").hide();
+                    $("#flatMostPopularPhotos").show();
+                    element.text("Back to search results");
+                }
+            });
         },
         initVisitor: function() {
             $(".i-search").unbind("click").click(this.search);
@@ -180,6 +189,7 @@ var visitor = window.visitor,
 
             this.initSearchResult();
             this.showMostPopular();
+            $("#backButton").text("");
         }
    };
 })(jQuery, window);
