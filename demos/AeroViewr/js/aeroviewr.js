@@ -8,13 +8,15 @@
         isAuthenticated = true;
 
     $(document).ready(function () {
-        var flatSetsStrip = $("#flatSetsStrip"),
+        var mainTemplate = $("#mainTemplate"),
+            backButton = $("#backButton"),
+            mainPhotoStrip = $("#mainPhotoStrip"),
+            mainPhotoGrid = $("#mainPhotoGrid"),
             flatPhotoStrip = $("#flatPhotoStrip"),
-            flatMostPopularPhotos = $("#flatMostPopularPhotos"),
+            flatSetsStrip = $("#flatSetsStrip"),
             flatSearchPhotos = $("#flatSearchPhotos"),
-            mainPhotoStrip = $("#mainPhotoStrip"),            
-            mainPhotoGrid = $("#mainPhotoGrid"),            
-            slider = $("#slider"),
+            flatMostPopularPhotos = $("#flatMostPopularPhotos"),
+            slider = $("#slider").hide(),
             pager = $(".paging"),
             dataSource = new kendo.data.DataSource({
                 page: 1,
@@ -39,7 +41,7 @@
                     }
                 },
                 reader: {
-                    data: function(result) {                        
+                    data: function(result) {
                         return result.photos.photo;
                     },
                     total: function(result) {
@@ -98,14 +100,36 @@
                       return sets;
                   }
                 }
+            }),
+            notInSetDataSource = new kendo.data.DataSource({
+               transport: {
+                   read: {
+                       url: flickr.service,
+                       cache: true,
+                       dataType: "json"
+                   },
+                   cache: "localstorage",
+                   dialect: {
+                       read: function(data) {
+                           return flickr.getNotInSetParams({extras: "owner_name,tags", per_page: 500});
+                       }
+                   }
+                },
+                reader: {
+                    data: function(result) {
+                        return result.photos.photo;
+                    },
+                    total: function(result) {
+                        return Math.min(result.photos.total, 500);
+                    }
+                }
             });
 
 
         $('.i-help').click(function (e) {
             dataSource.transport.cache.clear(); // temp in order to force items removal from the localStore
-        });        
+        });
 
-        
         var showMostPopular = function() {
             //initial loading - not logged user.
             flatMostPopularPhotos.kendoListView({
@@ -213,27 +237,52 @@
                 slider.parent().show();
             });
         }
-
+        
         function initVisitor() {
             $(".i-search").click(search);
             $("#searchBox").keydown(function(e) { if (e.keyCode == 13) { search(); } });
 
             initSearchResult();
             showMostPopular();
-        }        
+        }
+
+        //back button handler
+        backButton.bind("click", function(){
+            var element = $(this);
+            if (element.text().toLowerCase() == "back to slideshow" && flickr.auth.token === null) {
+                dataSource.query({page: 1, pageSize: 5});
+                flatSearchPhotos.hide();
+                mainTemplate.show();
+                element.text("");
+            }
+        });
 
         //log in section
-        $("#signin").bind("click", function(e) {
+        $("#signin").bind("click", function() {
             flickr.signIn();
         });
 
-        $("#signout").bind("click", function(e) {
+        $("#signout").bind("click", function() {
             flickr.signOut();
+        });
+
+        //initial loading - not logged user.
+        flatMostPopularPhotos.kendoListView({
+            dataSource: mostPopularDataSource,
+            template: template("_s"),
+            dataBound: function(){
+                var listView = this.element,
+                    li = listView.find("li:first");
+                this.selectable.value(li);
+            },
+            change: function() {
+                $("#bigPhoto").attr("src", this.selected().find("img").attr('src').replace("_s", ""));
+            }
         });
 
         flickr.authenticate(function(authenticated) {
             if (authenticated) {
-                $("#mainTemplate").hide();
+                mainTemplate.hide();
                 $("#signin").hide();
                 $("#userInfo").fadeIn().find("em:first").html(flickr.auth.user.username);
                 if(history.replaceState){
@@ -244,10 +293,11 @@
                     dataSource: setsDataSource,
                     template: setTemplate,
                     dataBound: function () {
-                        $("#flatMostPopularPhotos").hide();
+                        flatMostPopularPhotos.hide();
                         this.element
                             .prepend('<li alt="thumbnail"><img width="100" height="100" src="img/NotInSet.png" /><em>Not In Set</em></li>')
                             .show();
+                        this.selectable.value(this.element.find("li:first"));
                         //maybe load pictures from first set
                     }
                 });
@@ -255,10 +305,8 @@
             } else {
               $('#userInfo').hide();
               $('#signin').fadeIn();
-
               initVisitor();
             }
         });
     });
 })(jQuery);
-        

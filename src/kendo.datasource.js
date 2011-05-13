@@ -403,8 +403,12 @@
                 that.trigger("destroy", { record: record });
             }
         },
-        data: function() {
-            return this._data;
+        data: function(value) {
+            if (value !== undefined) {
+                this._data = value;
+            } else {
+                return this._data;
+            }
         },
         view: function() {
             return this._view;
