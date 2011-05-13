@@ -29,7 +29,7 @@
             }
 
             function setup(options) {
-                options = $.extend({ data: [{foo: 1, bar: 1}, {foo: 2, bar:2}] }, options);
+                options = $.extend({ dataSource: [{foo: 1, bar: 1}, {foo: 2, bar:2}] }, options);
                 return new Grid(table, options);
             }
 
