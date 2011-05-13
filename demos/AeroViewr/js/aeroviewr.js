@@ -123,8 +123,34 @@
                         return Math.min(result.photos.total, 500);
                     }
                 }
+            }),
+            tagHotListDataSource = new kendo.data.DataSource({
+               transport: {
+                   read: {
+                       url: flickr.service,
+                       cache: true,
+                       dataType: "json"
+                   },
+                   cache: "localstorage",
+                   dialect: {
+                       read: function(data) {
+                           var defaultArguments = {period: "day", count: 20};
+                           return flickr.getTagHotListParams(defaultArguments);
+                       }
+                   }
+                },
+                reader: {
+                    data: function(result) {
+                        var list = [];
+                        if(result.stat == "ok") {
+                            list = $.map(result.hottags.tag, function(tag) {
+                                return tag._content;
+                            });
+                        }
+                        return list;
+                    }
+                }
             });
-
 
         $('.i-help').click(function (e) {
             dataSource.transport.cache.clear(); // temp in order to force items removal from the localStore
@@ -244,6 +270,12 @@
 
             initSearchResult();
             showMostPopular();
+        }
+
+        //
+        //Logged user
+        function initUser() {
+            showSets();
         }
 
         //back button handler
