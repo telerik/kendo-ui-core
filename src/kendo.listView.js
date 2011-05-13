@@ -38,10 +38,10 @@
         _dataSource: function() {
             var that = this;
 
-            that.dataSource = DataSource.create(that.options.dataSource).bind(CHANGE, $.proxy(that._render, that));
+            that.dataSource = DataSource.create(that.options.dataSource).bind(CHANGE, $.proxy(that.refresh, that));
         },
 
-        _render: function() {
+        refresh: function() {
             var that = this,
                 data = that.dataSource.view(),
                 html = kendo.render(that.template, data);
@@ -65,26 +65,26 @@
 
                     that.selectable.clear();
 
-                    that.selectable.value(that.focused());
+                    that.selectable.value(that.current());
                 }
             });
 
         },
 
-        focused: function(element) {
+        current: function(element) {
             var that = this,
-                focused = that._focused;
+                current = that._current;
 
             if(element !== undefined && element[0]) {
-                if (!focused || focused[0] !== element[0]) {
+                if (!current || current[0] !== element[0]) {
                     element.addClass(FOCUSED);
-                    if (focused) {
-                        focused.removeClass(FOCUSED);
+                    if (current) {
+                        current.removeClass(FOCUSED);
                     }
-                    that._focused = element;
+                    that._current = element;
                 }
             } else {
-                return that._focused;
+                return that._current;
             }
         },
 
@@ -95,27 +95,27 @@
             element.attr("tabIndex", Math.max(element.attr("tabIndex") || 0, 0));
             element.bind({
                 focus: function() {
-                    that.focused(element.find(FOCUSSELECTOR).first());
+                    that.current(element.find(FOCUSSELECTOR).first());
                 },
                 blur: function() {
-                    if (that._focused) {
-                        that._focused.removeClass(FOCUSED);
-                        that._focused = null;
+                    if (that._current) {
+                        that._current.removeClass(FOCUSED);
+                        that._current = null;
                     }
                 },
                 keydown: function(e) {
                     var key = e.keyCode,
-                        focused = that.focused();
+                        current = that.current();
 
                     if (keys.UP === key) {
-                        that.focused(focused ? focused.prev() : element.find(FOCUSSELECTOR).first());
+                        that.current(current ? current.prev() : element.find(FOCUSSELECTOR).first());
                     } else if (keys.DOWN === key) {
-                        that.focused(focused ? focused.next() : element.find(FOCUSSELECTOR).first());
+                        that.current(current ? current.next() : element.find(FOCUSSELECTOR).first());
                     } else if (keys.PAGEUP == key) {
-                        that._focused = null;
+                        that._current = null;
                         that.dataSource.page(that.dataSource.page() + 1);
                     } else if (keys.PAGEDOWN == key) {
-                        that._focused = null;
+                        that._current = null;
                         that.dataSource.page(that.dataSource.page() - 1);
                     }
                 }
@@ -123,7 +123,7 @@
 
             element.addClass(FOCUSABLE)
                   .delegate("." + FOCUSABLE + FOCUSSELECTOR, "mousedown", function(e) {
-                      that.focused($(e.currentTarget));
+                      that.current($(e.currentTarget));
                   });
        },
        selected: function() {
