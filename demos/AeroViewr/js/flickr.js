@@ -8,8 +8,7 @@
         service: "http://api.flickr.com/services/rest/",
         authURL: "http://flickr.com/services/auth/",
         auth: {
-            token: '72157626154487043-7dfd951a1ede12fa', //write auth
-            user: {username: "Georgi Krustev"}
+            token: null //'72157626154487043-7dfd951a1ede12fa' //write auth
         },
         methods: {
             getToken : "flickr.auth.getToken",
