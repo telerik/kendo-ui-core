@@ -85,7 +85,7 @@
                 });
                 that.element.keydown(function(e) {
                     if (e.keyCode === kendo.keys.SPACEBAR) {
-                        var current = that.focused();
+                        var current = that.current();
 
                         if (!multi || !e.ctrlKey) {
                             that.selectable.clear();
@@ -95,20 +95,20 @@
                 });
             }
         },
-        focused: function(element) {
+        current: function(element) {
             var that = this,
-                focused = that._focused;
+                current = that._current;
 
             if(element !== undefined && element[0]) {
-                if (!focused || focused[0] !== element[0]) {
+                if (!current || current[0] !== element[0]) {
                     element.addClass(FOCUSED);
-                    if (focused) {
-                        focused.removeClass(FOCUSED);
+                    if (current) {
+                        current.removeClass(FOCUSED);
                     }
-                    that._focused = element;
+                    that._current = element;
                 }
             } else {
-                return that._focused;
+                return that._current;
             }
         },
         _navigation: function() {
@@ -117,31 +117,31 @@
 
             element.bind({
                 focus: function() {
-                    that.focused(element.find("td:first"));
+                    that.current(element.find("td:first"));
                 },
                 blur: function() {
-                    if (that._focused) {
-                        that._focused.removeClass(FOCUSED);
-                        that._focused = null;
+                    if (that._current) {
+                        that._current.removeClass(FOCUSED);
+                        that._current = null;
                     }
                 },
                 keydown: function(e) {
                     var key = e.keyCode,
-                        focused = that.focused();
+                        current = that.current();
 
                     if (keys.UP === key) {
-                        that.focused(focused ? focused.parent().prev().children().eq(focused.index()) : element.find("td:first"));
+                        that.current(current ? current.parent().prev().children().eq(current.index()) : element.find("td:first"));
                     } else if (keys.DOWN === key) {
-                        that.focused(focused ? focused.parent().next().children().eq(focused.index()) : element.find("td:first"));
+                        that.current(current ? current.parent().next().children().eq(current.index()) : element.find("td:first"));
                     } else if (keys.LEFT === key) {
-                        that.focused(focused ? focused.prev() : element.find("td:first"));
+                        that.current(current ? current.prev() : element.find("td:first"));
                     } else if (keys.RIGHT === key) {
-                        that.focused(focused ? focused.next() : element.find("td:first"));
+                        that.current(current ? current.next() : element.find("td:first"));
                     } else if (that.options.pageable && keys.PAGEUP == key) {
-                        that._focused = null;
+                        that._current = null;
                         that.dataSource.page(that.dataSource.page() + 1);
                     } else if (that.options.pageable && keys.PAGEDOWN == key) {
-                        that._focused = null;
+                        that._current = null;
                         that.dataSource.page(that.dataSource.page() - 1);
                     }
                 }
@@ -149,7 +149,7 @@
 
             element.addClass(FOCUSABLE)
                   .delegate("." + FOCUSABLE + FOCUSSELECTOR, "mousedown", function(e) {
-                      that.focused($(e.currentTarget));
+                      that.current($(e.currentTarget));
                   });
        },
         _wrapper: function() {
