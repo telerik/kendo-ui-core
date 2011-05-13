@@ -1,3 +1,4 @@
+
 (function($, window) {
 var IMAGESIZES = ["_s", "_t", "_m"],
     imageSize = IMAGESIZES[0],
@@ -90,7 +91,6 @@ var IMAGESIZES = ["_s", "_t", "_m"],
                    $("#bigPhoto").attr("src", this.selected().find("img").attr('src').replace("_s", ""));
                 }
             });
-            console.log($(".paging"));
             $("#mainPhotoGrid").kendoGrid({
                 dataSource: dataSource,
                 pageable: $(".paging").data("kendoPager"),
@@ -113,7 +113,7 @@ var IMAGESIZES = ["_s", "_t", "_m"],
                 dataSource.query({page: 1, pageSize: 500});
             });
 
-            mainPhotoStrip.kendoListView({
+            $("#mainPhotoStrip").kendoListView({
                 dataSource: dataSource,
                 template: template(imageSize)
             })
