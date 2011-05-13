@@ -15,7 +15,7 @@
             search: "flickr.photos.search",
             getSets: "flickr.photosets.getList",
             getMostPopular: "flickr.interestingness.getList",
-            getTagHotList: "flickr.tags.getHotList"
+            getRelatedTags: "flickr.tags.getRelated"
         },
 
         getThumbnailURL: function(photo) {
@@ -107,14 +107,14 @@
             params["api_sig"] = this.getApiSig(params);
             return params;
         },
-        getTagHotListParams: function(data) {
+        getRelatedTagParams: function(text) {
             var params = {
-                method: this.methods.getTagHotList,
+                method: this.methods.getRelatedTags,
                 api_key: app.key,
                 format: "json",
                 nojsoncallback: 1
             }
-            $.extend(params, data);
+            params["tag"] = text;
             params["api_sig"] = this.getApiSig(params);
             return params;
         },
