@@ -58,7 +58,7 @@
 
             test("separator", function() {
                 var autocomplete = new AutoComplete(input, {
-                    data: ["baz", "bar"],
+                    dataSource: ["baz", "bar"],
                     separator: ", "
                 });
 
@@ -71,7 +71,7 @@
 
             test("search uses the last word", function() {
                 var autocomplete = new AutoComplete(input, {
-                    data: ["foo", "bar"],
+                    dataSource: ["foo", "bar"],
                     separator: ", "
                 });
 
@@ -82,7 +82,7 @@
 
             test("search uses the word at the caret position", function() {
                 var autocomplete = new AutoComplete(input, {
-                    data: ["foo", "bar"],
+                    dataSource: ["foo", "bar"],
                     separator: ", "
                 });
 
@@ -94,7 +94,7 @@
 
             test("select replaces the word at the caret position", function() {
                 var autocomplete = new AutoComplete(input, {
-                    data: ["foo", "bar"],
+                    dataSource: ["foo", "bar"],
                     separator: ", "
                 });
 

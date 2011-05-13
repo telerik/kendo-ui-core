@@ -32,7 +32,7 @@
         </style>
     </head>
     <body>
-        Data source: ["foo", "bar", "baz"];
+        dataSource source: ["foo", "bar", "baz"];
         <fieldset>
             <legend>Vanilla input</legend>
             <input />
@@ -57,21 +57,21 @@
         <script type="text/javascript" charset="utf-8">
             $(document).ready(function() {
                 $("#autocomplete").kendoAutoComplete({
-                    data: ["foo", "bar", "baz"]
+                    dataSource: ["foo", "bar", "baz"]
                 });
 
                 $("#autocomplete-suggest").kendoAutoComplete({
-                    data: ["foo", "bar", "baz"],
+                    dataSource: ["foo", "bar", "baz"],
                     suggest: true
                 });
 
                 $("#autocomplete-separator").kendoAutoComplete({
-                    data: ["foo", "bar", "baz"],
+                    dataSource: ["foo", "bar", "baz"],
                     separator: ", "
                 });
 
                 $("#autocomplete-separator-suggest").kendoAutoComplete({
-                    data: ["foo", "bar", "baz"],
+                    dataSource: ["foo", "bar", "baz"],
                     separator: ", ",
                     suggest: true
                 });

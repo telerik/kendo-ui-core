@@ -52,7 +52,7 @@
     function AutoComplete(element, options) {
         var that = this;
 
-        options = $.isArray(options) ? { data: options } : options;
+        options = $.isArray(options) ? { dataSource: options } : options;
 
         Component.call(that, element, options);
 
@@ -110,16 +110,10 @@
         },
 
         _dataSource: function() {
-            var that = this,
-                options = that.options,
-                dataSource = options.dataSource || {};
+            var that = this;
 
-            if (options.data) {
-                dataSource.data = options.data;
-            }
-
-            that.dataSource = DataSource.create(dataSource);
-            that.dataSource.bind(CHANGE, proxy(that.refresh, that));
+            that.dataSource = DataSource.create(that.options.dataSource || {})
+                                        .bind(CHANGE, proxy(that.refresh, that));
         },
 
         _blur: function() {

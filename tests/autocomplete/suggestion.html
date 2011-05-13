@@ -57,7 +57,7 @@
 
             test("pressing enter calls _blur", function() {
                 var blurWasCalled, autocomplete = new AutoComplete(input, {
-                    data: ["baz", "bar"],
+                    dataSource: ["baz", "bar"],
                     suggest: true
                 });
 
@@ -72,7 +72,7 @@
 
             test("pressing enter calls _blur when no item is selected", function() {
                 var blurWasCalled, autocomplete = new AutoComplete(input, {
-                    data: ["baz", "bar"],
+                    dataSource: ["baz", "bar"],
                     suggest: true
                 });
 
@@ -86,7 +86,7 @@
 
             test("pressing tab calls _blur", function() {
                 var blurWasCalled, autocomplete = new AutoComplete(input, {
-                    data: ["baz", "bar"],
+                    dataSource: ["baz", "bar"],
                     suggest: true
                 });
 
@@ -101,7 +101,7 @@
 
             test("current popup item completes the value of the input if suggest is enabled", function() {
                 var autocomplete = new AutoComplete(input, {
-                    data: ["baz", "bar"],
+                    dataSource: ["baz", "bar"],
                     suggest: true
                 });
 
@@ -114,7 +114,7 @@
 
             test("suggestion selects the remainder of the word", function() {
                 var autocomplete = new AutoComplete(input, {
-                    data: ["baz", "bar"]
+                    dataSource: ["baz", "bar"]
                 });
 
                 input.type("b");
@@ -124,7 +124,7 @@
 
             test("suggestion selects the remainder of the second word", function() {
                 var autocomplete = new AutoComplete(input, {
-                    data: ["baz", "bar"]
+                    dataSource: ["baz", "bar"]
                 });
 
                 input.type("b");
@@ -135,7 +135,7 @@
 
             test("separator", function() {
                 var autocomplete = new AutoComplete(input, {
-                    data: ["baz", "bar"],
+                    dataSource: ["baz", "bar"],
                     separator: ", "
                 });
 
@@ -149,7 +149,7 @@
 
             test("separator and suggestion", function() {
                 var autocomplete = new AutoComplete(input, {
-                    data: ["baz", "bar"],
+                    dataSource: ["baz", "bar"],
                     suggest: true,
                     separator: ", "
                 });
@@ -164,7 +164,7 @@
 
             test("separator and suggesting second word", function() {
                 var autocomplete = new AutoComplete(input, {
-                    data: ["baz", "bar"],
+                    dataSource: ["baz", "bar"],
                     suggest: true,
                     separator: ", "
                 });

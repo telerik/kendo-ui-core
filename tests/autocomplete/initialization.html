@@ -37,9 +37,9 @@
                 ok(input.data("kendoAutoComplete") instanceof AutoComplete);
             });
 
-            test("data source is initialized from options.data", function() {
+            test("data source is initialized from options.dataSource when array is passed", function() {
                 var data = [1, 2], autocomplete = new AutoComplete(input, {
-                    data: data
+                    dataSource: data
                 });
 
                 ok(autocomplete.dataSource);

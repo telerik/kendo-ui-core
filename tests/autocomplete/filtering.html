@@ -37,8 +37,7 @@
 
             test("typing minLenght number of characters filters the datasource", function() {
                 var autocomplete = new AutoComplete(input, {
-
-                    data: ["foo", "bar"]
+                    dataSource: ["foo", "bar"]
                 });
 
                 autocomplete.dataSource.bind("change", function() {
@@ -54,7 +53,7 @@
             test("popup is opened if there are results returned from the filter", function() {
                 var autocomplete = new AutoComplete(input, {
 
-                    data: ["foo", "bar"]
+                    dataSource: ["foo", "bar"]
                 });
 
                 autocomplete.dataSource.bind("change", function() {
@@ -68,7 +67,7 @@
 
             test("popup should close if input is empty", function() {
                 var autocomplete = new AutoComplete(input, {
-                    data: ["foo", "bar"]
+                    dataSource: ["foo", "bar"]
                 });
                 autocomplete.popup.open();
                 autocomplete.popup.bind("close", function(){
