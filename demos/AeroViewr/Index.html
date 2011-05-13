@@ -17,8 +17,10 @@
     <script src="../../src/kendo.slider.js"></script>
     <script src="../../src/kendo.popup.js"></script>
     <script src="../../src/kendo.autocomplete.js"></script>
+    <script src="../../src/kendo.upload.js"></script>
     <script src="js/flickr.js"></script>
     <script src="js/visitor.js"></script>
+    <script src="js/uploadView.js"></script>
     <script src="js/aeroviewr.js"></script>
     <link href="Site.css" rel="stylesheet" type="text/css" />
    <!-- <link type="text/css" href="../../styles/kendo.common.css" rel="stylesheet"/>
@@ -66,6 +68,9 @@
                 <ul id="mainNotInSetPhotoStrip" class="floatWrap thumbs"></ul>
                 <input type="notInSetPhotoRange" id="slider" />
                 <table id="mainNotInSetPhotoGrid"></table>
+            </div>
+            <div id="uploadWrap" style="display:none">
+                <h1 class="uploadTitle">You must <a href="#">Sign In</a> to upload photos.</h1>
             </div>
         </section>
         <section id="footer">
