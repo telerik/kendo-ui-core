@@ -203,6 +203,8 @@
     }
 
     DataSource.create = function(options) {
+        options = $.isArray(options) ? { data: options } : options;
+
         var dataSource = options || {},
             data = dataSource.data,
             fields = dataSource.fields,

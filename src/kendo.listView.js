@@ -8,9 +8,7 @@
         CHANGE = "change",
         FOCUSED = "t-state-focused",
         FOCUSABLE = "t-focusable",
-
         DataSource = kendo.data.DataSource;
-
 
     function ListView(element, options) {
         var that = this;
@@ -36,18 +34,13 @@
         options: {
             template: ""
         },
+
         _dataSource: function() {
-            var that = this,
-                options = that.options,
-                dataSource = options.dataSource;
+            var that = this;
 
-            if ($.isPlainObject(dataSource) && options.data) {
-                dataSource.data = options.data;
-            }
-
-            that.dataSource = DataSource.create(dataSource);
-            that.dataSource.bind(CHANGE, $.proxy(that._render, that));
+            that.dataSource = DataSource.create(that.options.dataSource).bind(CHANGE, $.proxy(that._render, that));
         },
+
         _render: function() {
             var that = this,
                 data = that.dataSource.view(),
@@ -57,13 +50,16 @@
 
             that.trigger(DATABOUND);
         },
+
         _selection: function() {
             var that = this;
+
             that.selectable = new kendo.ui.Selectable(that.element, {
                 change: function() {
                     that.trigger(CHANGE);
                 }
             });
+
             that.element.keydown(function(e) {
                 if (e.keyCode === kendo.keys.SPACEBAR) {
 
@@ -74,6 +70,7 @@
             });
 
         },
+
         focused: function(element) {
             var that = this,
                 focused = that._focused;
@@ -90,6 +87,7 @@
                 return that._focused;
             }
         },
+
         _navigation: function() {
             var that = this,
                 element = that.element;

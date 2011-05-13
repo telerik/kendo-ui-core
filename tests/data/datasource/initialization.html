@@ -113,6 +113,14 @@
                 dataSource.read();
                 equal(dataSource.data().length, 0);
             });
+
+            test("initialize data source from array", function() {
+                var data = [1, 2],
+                    dataSource = DataSource.create(data);
+
+                dataSource.read();
+                ok(dataSource.data() === data);
+            });
             </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

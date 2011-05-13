@@ -37,7 +37,7 @@
 
             test("_blur calls _change", function() {
                 var changeWasCalled = false, autocomplete = new AutoComplete(input, {
-                    data: ["foo", "bar"]
+                    dataSource: ["foo", "bar"]
                 });
 
                 autocomplete._change = function() {
