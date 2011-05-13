@@ -676,28 +676,24 @@
     DataPointCluster.prototype = new ChartElement();
     $.extend(DataPointCluster.prototype, {
         options: {
-            horizontal: true
+            isHorizontal: true
         },
 
         updateLayout: function(clusterBox) {
             var cluster = this,
-                horizontal = cluster.options.horizontal,
+                isHorizontal = cluster.options.isHorizontal,
+                axis = isHorizontal ? "x" : "y",
                 children = cluster.children,
                 childrenCount = children.length,
-                size = (horizontal ? clusterBox.width() : clusterBox.height()) / childrenCount,
-                position = horizontal ? clusterBox.x1 : clusterBox.y1;
+                size = (isHorizontal ? clusterBox.width() : clusterBox.height()) / childrenCount,
+                position = clusterBox[axis + 1];
 
             for (var i = 0; i < children.length; i++) {
                 var childBox = new Box(clusterBox.x1, clusterBox.y1,
                                        clusterBox.x2, clusterBox.y2);
 
-                if (horizontal) {
-                    childBox.x1 = position;
-                    childBox.x2 = position + size;
-                } else {
-                    childBox.y1 = position;
-                    childBox.y2 = position + size;
-                }
+                childBox[axis + 1] = position;
+                childBox[axis + 2] = position + size;
 
                 children[i].updateLayout(childBox);
 
@@ -706,14 +702,38 @@
         }
     });
 
-    /*
-    function DataPointStack(valueAxis, options) {
-        updateLayout: function(stackBox) {
-            //  for each child (bar or point)
-            //      arrange in stacked boxes
-        }
+    function DataPointStack(options) {
+        var stack = this;
+        ChartElement.call(stack);
+
+        stack.options = $.extend({}, stack.options, options);
     }
 
+    DataPointStack.prototype = new ChartElement();
+    $.extend(DataPointStack.prototype, {
+        options: {
+            isVertical: true
+        },
+
+        updateLayout: function(stackBox) {
+            var stack = this;
+            var children = stack.children;
+
+            for (var i = 0; i < children.length; i++) {
+                var currentChild = children[i];
+
+                currentChild.updateLayout(stackBox);
+
+                if (i > 0) {
+                    var prevChild = children[i - 1];
+                    currentChild.box.translate(0, -prevChild.box.height());
+                }
+            }
+        }
+    });
+
+
+    /*
     function Bar(valueAxis, options) {
     }
 
@@ -733,14 +753,8 @@
             ];
         }
     });
-
-    var cSeries = new ClusteredSeries(yAxis);
-    var sSeries = new StackedSeries();
-    var columnSeries = new ColumnSeries();
-    cSeries.children.push(sSeries);
-    sSeries.children.push(columnSeries);
-
     */
+
     var BAR_WIDTH_RATIO = 2.6;
     function BarSeries(axisMin, axisMax, options) {
         var series = this;
@@ -754,7 +768,6 @@
     BarSeries.prototype = new ChartElement();
     $.extend(BarSeries.prototype, {
         options: {
-            
         },
 
         getViewElements: function(factory) {
@@ -1293,6 +1306,7 @@
     Chart.CategoryAxis = CategoryAxis;
     Chart.BarSeries = BarSeries;
     Chart.DataPointCluster = DataPointCluster;
+    Chart.DataPointStack = DataPointStack;
     Chart.Title = Title;
     Chart.Legend = Legend;
     Chart.PlotArea = PlotArea;
