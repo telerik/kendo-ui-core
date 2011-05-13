@@ -14,6 +14,7 @@
             getToken : "flickr.auth.getToken",
             search: "flickr.photos.search",
             getSets: "flickr.photosets.getList",
+            getNotInSet: "flickr.photos.getNotInSet",
             getMostPopular: "flickr.interestingness.getList",
             getRelatedTags: "flickr.tags.getRelated"
         },
@@ -96,8 +97,7 @@
         },
         getNotInSetParams: function(data) {
             var params = {
-                method: this.methods.getSets,
-                user_id: flickr.auth.user.nsid,
+                method: this.methods.getNotInSet,
                 api_key: app.key,
                 auth_token: this.auth.token,
                 format: "json",

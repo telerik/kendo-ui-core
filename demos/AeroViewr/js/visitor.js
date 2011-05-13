@@ -1,6 +1,6 @@
-
 (function($, window) {
-var IMAGESIZES = ["_s", "_t", "_m"],
+var visitor = window.visitor,
+    IMAGESIZES = ["_s", "_t", "_m"],
     imageSize = IMAGESIZES[0],
     template = function(size) { return '<li alt="thumbnail"><img src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>' + size + '.jpg"></li>'; },
     dataSource = new kendo.data.DataSource({
@@ -176,7 +176,7 @@ var IMAGESIZES = ["_s", "_t", "_m"],
         },
         initVisitor: function() {
             $(".i-search").unbind("click").click(this.search);
-            $("#searchBox").unbind("keydown").keydown(function(e) { if (e.keyCode == 13) { this.search(); } }); //change with autocomplete... maybe InitAutoComplete
+            //$("#searchBox").unbind("keydown").keydown(function(e) { if (e.keyCode == 13) { this.search(); } }); //change with autocomplete... maybe InitAutoComplete
 
             this.initSearchResult();
             this.showMostPopular();
