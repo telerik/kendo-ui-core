@@ -19,7 +19,7 @@
             dataSource,
             pageable;
 
-        options = $.isArray(options) ? { data: options } : options;
+        options = $.isArray(options) ? { dataSource: options } : options;
 
         Component.call(that, element, options);
 
@@ -184,6 +184,8 @@
             var that = this,
                 options = that.options,
                 dataSource = options.dataSource;
+
+            dataSource = $.isArray(dataSource) ? { data: dataSource } : dataSource;
 
             if (isPlainObject(dataSource)) {
                 extend(dataSource, { table: that.table, fields: that.columns });

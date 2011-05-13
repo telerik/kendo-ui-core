@@ -22,7 +22,7 @@
                 DataSource = kendo.data.DataSource;
 
             test("refresh creates table row for each item of the datasource view", function() {
-                var grid = new Grid($("<table><tbody/></table>")[0], { data: [1,2] });
+                var grid = new Grid($("<table><tbody/></table>")[0], { dataSource: [1,2] });
 
                 equal(grid.tbody.find(">tr").length, 2);
             });
