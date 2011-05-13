@@ -156,8 +156,6 @@
             }
 
             moveCaretAtEnd(that.element[0]);
-
-            that._blur();
         },
 
         _change: function() {
@@ -165,6 +163,7 @@
                 value = that.value();
 
             that._term = value;
+
             if (value !== that.previous) {
                 that.trigger(CHANGE);
                 that.previous = value;
@@ -189,8 +188,11 @@
         },
 
         _click: function(e) {
-            this.select($(e.currentTarget));
+            var that = this;
+            that.select($(e.currentTarget));
+            that._blur();
         },
+
         _move: function(li) {
             var that = this;
 
@@ -202,6 +204,7 @@
                 that.suggest(li);
             }
         },
+
         _keydown: function(e) {
             var that = this,
                 key = e.keyCode,
@@ -220,6 +223,7 @@
                 e.preventDefault();
             } else if (key === keys.ENTER || key === keys.TAB) {
                 that.select(that._current);
+                that._blur();
             } else if (key === keys.ESC) {
                 that.close();
             } else {
@@ -237,6 +241,7 @@
                 }
             }, that.options.delay);
         },
+
         search: function() {
             var that = this,
                 word = that.value(),
