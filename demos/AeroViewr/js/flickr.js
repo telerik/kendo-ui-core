@@ -93,7 +93,19 @@
             params["api_sig"] = this.getApiSig(params);
             return params;
         },
-
+        getNotInSetParams: function(data) {
+            var params = {
+                method: this.methods.getSets,
+                user_id: flickr.auth.user.nsid,
+                api_key: app.key,
+                auth_token: this.auth.token,
+                format: "json",
+                nojsoncallback: 1
+            }
+            $.extend(params, data);
+            params["api_sig"] = this.getApiSig(params);
+            return params;
+        },
         getFrob: function() {
             var search = document.location.search,
                 key = "frob=",
