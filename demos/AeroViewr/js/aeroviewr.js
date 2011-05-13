@@ -12,6 +12,7 @@
             backButton = $("#backButton"),
             mainPhotoStrip = $("#mainPhotoStrip"),
             mainPhotoGrid = $("#mainPhotoGrid"),
+            mainPhotoStrip = $("#mainNotInSetPhotoStrip"),
             flatPhotoStrip = $("#flatPhotoStrip"),
             flatSetsStrip = $("#flatSetsStrip"),
             flatSearchPhotos = $("#flatSearchPhotos"),
@@ -333,7 +334,33 @@
                         //maybe load pictures from first set
                     }
                 });
-
+                $("#mainPicturesNotInSet").show();
+                mainNotInSetPhotoStrip.kendoListView({
+                    dataSource: notInSetDataSource,
+                    template: template(imageSize)
+                })
+                .hide()
+                .data("kendoListView")
+                .bind("change", function () {
+                    backButton.text("");
+                    flatSearchPhotos.show();
+                    mainPhotoStrip.hide().data("prevVisible", true);
+                    //slider.parent().hide();
+                    $("#bigPhoto").fadeOut("slow")
+                    .attr("src", $("img:first", this.selected()).attr("src").replace(imageSize, ""))
+                    .bind("load", function (e) {
+                        $(e.target).hide().fadeIn("medium");
+                    });
+                })
+                .bind("dataBound", function () {
+                    mainPhotoStrip.find("img").bind("load", function () {
+                        $(this).css("display", "block")
+                                .css("marginLeft", ~~($(this).width() / 2))
+                                .animate({ marginLeft: 0 }, 500)
+                                .parent()
+                                .css("overflow", "hidden").animate({ opacity: 1 }, 1000);
+                    });
+                });
             } else {
               $('#userInfo').hide();
               $('#signin').fadeIn();
