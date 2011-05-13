@@ -14,7 +14,8 @@
             getToken : "flickr.auth.getToken",
             search: "flickr.photos.search",
             getSets: "flickr.photosets.getList",
-            getMostPopular: "flickr.interestingness.getList"
+            getMostPopular: "flickr.interestingness.getList",
+            getTagHotList: "flickr.tags.getHotList"
         },
 
         getThumbnailURL: function(photo) {
@@ -99,6 +100,17 @@
                 user_id: flickr.auth.user.nsid,
                 api_key: app.key,
                 auth_token: this.auth.token,
+                format: "json",
+                nojsoncallback: 1
+            }
+            $.extend(params, data);
+            params["api_sig"] = this.getApiSig(params);
+            return params;
+        },
+        getTagHotListParams: function(data) {
+            var params = {
+                method: this.methods.getTagHotList,
+                api_key: app.key,
                 format: "json",
                 nojsoncallback: 1
             }
