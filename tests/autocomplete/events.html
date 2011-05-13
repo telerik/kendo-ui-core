@@ -93,6 +93,19 @@
                 input.val("foo").focus();
                 equal(autocomplete.previous, "foo");
             });
+
+            test("select does not raise the change event", function() {
+                var changeWasCalled = false, autocomplete = new AutoComplete(input, {
+                    change: function() {
+                        changeWasCalled = true;
+                    }
+                });
+
+                input.focus();
+                autocomplete.select($("<li>foo</li>"));
+                ok(!changeWasCalled);
+            });
+
        </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
