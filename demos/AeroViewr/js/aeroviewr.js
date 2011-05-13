@@ -9,13 +9,17 @@
 
     $(document).ready(function () {
         var flatSetsStrip = $("#flatSetsStrip"),
-            mainPhotoStrip = $("#mainPhotoStrip"),
             flatPhotoStrip = $("#flatPhotoStrip"),
-            mainPhotoGrid = $("#mainPhotoGrid"),
+            flatMostPopularPhotos = $("#flatMostPopularPhotos"),
+            flatSearchPhotos = $("#flatSearchPhotos"),
+            mainPhotoStrip = $("#mainPhotoStrip"),            
+            mainPhotoGrid = $("#mainPhotoGrid"),            
             slider = $("#slider"),
+            pager = $(".paging"),
             dataSource = new kendo.data.DataSource({
                 page: 1,
                 pageSize: 5,
+                serverSorting: true,
                 transport: {
                     read: {
                         url: flickr.service,
@@ -99,10 +103,36 @@
 
         $('.i-help').click(function (e) {
             dataSource.transport.cache.clear(); // temp in order to force items removal from the localStore
-        });
+        });        
 
-        var showSearchResult = function (){
-            $("#flatSearchPhotos").kendoListView({
+        
+        var showMostPopular = function() {
+            //initial loading - not logged user.
+            flatMostPopularPhotos.kendoListView({
+                dataSource: mostPopularDataSource,
+                template: template("_s"),
+                dataBound: function(){
+                    var listView = this.element,
+                        li = listView.find("li:first");
+                    this.selectable.value(li);
+                },
+                change: function() {
+                    $("#bigPhoto").attr("src", this.selected().find("img").attr('src').replace("_s", ""));
+                }
+            });
+        };
+
+        var search = function() {            
+            dataSource.query({page: 1, pageSize: 5});
+            flatMostPopularPhotos.hide();
+            flatSearchPhotos.hide();
+            $("#mainTemplate").show();
+        };
+
+        var initSearchResult = function () {
+            pager.kendoPager({ dataSource: dataSource });            
+
+            flatSearchPhotos.kendoListView({
                 dataSource: dataSource,
                 template: template("_s"),
                 change: function() {
@@ -110,29 +140,26 @@
                 }
             });
 
-            $(".paging").kendoPager({ dataSource: dataSource });
-
             mainPhotoGrid.kendoGrid({
                 dataSource: dataSource,
-                pageable: $(".paging").data("kendoPager"),
+                pageable: pager.data("kendoPager"),
                 selectable: true,
                 columns: [
                     { template: '<img src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>_s.jpg">', title: "PHOTO" },
                     { field: "ownername", title: "AUTHOR" },
                     { field: "title", title: "TITLE" },
                     { field: "tags", title: "TAGS"}]
-            }).data("kendoGrid").bind("change", function () {
-                $("#flatSearchPhotos").show();
-                mainPhotoGrid.parent().css("display", "none");
+            })
+            .data("kendoGrid")
+            .bind("change", function () {
+                flatSearchPhotos.show();                
+                this.element.parent().hide();
                 $("#bigPhoto").fadeOut("slow")
                     .attr("src", $("img:first", this.selectable.value()).attr("src").replace("_s", ""))
                     .bind("load", function (e) {
                         $(e.target).hide().fadeIn("medium");
                     });
                 dataSource.query({page: 1, pageSize: 500});
-            })
-            .bind("dataBound", function(){
-                mainPhotoGrid.show();
             });
 
             mainPhotoStrip.kendoListView({
@@ -142,14 +169,14 @@
             .hide()
             .data("kendoListView")
             .bind("change", function () {
-                $("#flatSearchPhotos").show();
-                mainPhotoStrip.hide().data("prevVisible", true);
-                slider.parent().hide();
+                flatSearchPhotos.show();
+                this.element.parent().hide();
                 $("#bigPhoto").fadeOut("slow")
-                .attr("src", $("img:first", this.selected()).attr("src").replace(imageSize, ""))
-                .bind("load", function (e) {
-                    $(e.target).hide().fadeIn("medium");
-                });
+                    .attr("src", $("img:first", this.selected()).attr("src").replace(imageSize, ""))
+                    .bind("load", function (e) {
+                        $(e.target).hide().fadeIn("medium");
+                    });
+                dataSource.query({page: 1, pageSize: 500});
             })
             .bind("dataBound", function () {
                 mainPhotoStrip.find("img").bind("load", function () {
@@ -160,45 +187,40 @@
                             .css("overflow", "hidden").animate({ opacity: 1 }, 1000);
                 });
             });
+
+            slider.kendoSlider({
+                orientation: "vertical",
+                minValue: 0,
+                maxValue: 2,
+                largeStep: 1
+            })
+            .parent().hide().end()
+            .data("kendoSlider")
+            .bind("change", function() {
+                imageSize = IMAGESIZES[this.value()];
+                mainPhotoStrip.data("kendoListView").template = template(imageSize);
+                dataSource.read();
+            });
+
+            $("#grid").click(function() {
+                mainPhotoStrip.hide();
+                slider.parent().hide();
+                mainPhotoGrid.show();
+            });
+            $("#listView").click(function(e) {                                
+                mainPhotoGrid.hide();
+                mainPhotoStrip.show();
+                slider.parent().show();
+            });
         }
 
-        var search = function() {
-            mainPhotoGrid.hide();
-            dataSource.read();
-            $("#flatMostPopularPhotos").hide();
-            $("#mainTemplate").show();
-        };
+        function initVisitor() {
+            $(".i-search").click(search);
+            $("#searchBox").keydown(function(e) { if (e.keyCode == 13) { search(); } });
 
-        showSearchResult();
-
-        $(".i-search").click(search);
-        $("#searchBox").keydown(function(e) { if (e.keyCode == 13) { search(); } });
-
-        $("#grid").click(function() {
-            mainPhotoStrip.hide().data("prevVisible", false);
-            slider.parent().hide();
-            mainPhotoGrid.parent().show();
-        });
-        $("#listView").click(function() {
-            mainPhotoStrip.show().data("prevVisible", true);
-            slider.parent().show();
-            mainPhotoGrid.parent().hide();
-        });
-
-        slider.kendoSlider({
-            orientation: "vertical",
-            minValue: 0,
-            maxValue: 2,
-            largeStep: 1
-        })
-        .parent().hide().end()
-        .data("kendoSlider")
-        .bind("change", function() {
-            imageSize = IMAGESIZES[this.value()];
-            mainPhotoStrip.data("kendoListView").template = template(imageSize);
-            dataSource.read();
-        });
-
+            initSearchResult();
+            showMostPopular();
+        }        
 
         //log in section
         $("#signin").bind("click", function(e) {
@@ -207,20 +229,6 @@
 
         $("#signout").bind("click", function(e) {
             flickr.signOut();
-        });
-
-        //initial loading - not logged user.
-        $("#flatMostPopularPhotos").kendoListView({
-            dataSource: mostPopularDataSource,
-            template: template("_s"),
-            dataBound: function(){
-                var listView = this.element,
-                    li = listView.find("li:first");
-                this.selectable.value(li);
-            },
-            change: function() {
-                $("#bigPhoto").attr("src", this.selected().find("img").attr('src').replace("_s", ""));
-            }
         });
 
         flickr.authenticate(function(authenticated) {
@@ -247,6 +255,8 @@
             } else {
               $('#userInfo').hide();
               $('#signin').fadeIn();
+
+              initVisitor();
             }
         });
     });
