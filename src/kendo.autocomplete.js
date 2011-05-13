@@ -156,8 +156,6 @@
             var that = this,
                 value = that.value();
 
-            that._term = value;
-
             if (value !== that.previous) {
                 that.trigger(CHANGE);
                 that.previous = value;
@@ -230,7 +228,7 @@
             clearTimeout(that._typing);
 
             that._typing = setTimeout(function() {
-                if (that._term !== that.value()) {
+                if (that.previous !== that.value()) {
                     that.search();
                 }
             }, that.options.delay);
