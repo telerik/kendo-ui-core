@@ -1395,3 +1395,183 @@ div.t-slider
 .t-slider .t-arrow-down { background-position: -30px 0; width: 20px; height:20px; }
 
 /* Slider - end */
+/* Upload */
+
+html .t-upload
+{
+    position: relative;
+    border-width:0;
+    background: none;
+}
+
+.t-dropzone,
+.t-upload-files
+{
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
+
+.t-dropzone em,
+.t-upload-button
+{
+    vertical-align: middle;
+}
+
+*+html .t-dropzone em, *+html .t-upload-button { vertical-align: baseline; }
+* html .t-dropzone em, * html .t-upload-button { vertical-align: baseline; }
+
+.t-dropzone
+{
+    border-style: solid;
+    border-width: 0;
+    padding: 4px;
+    background-color: transparent;
+}
+
+.t-dropzone em
+{
+    margin-left: .6em;
+    visibility: hidden;
+}
+
+.t-dropzone-active
+{
+    border-width:1px;
+    padding: 3px;
+}
+
+.t-dropzone-active em
+{
+    visibility: visible;
+}
+
+.t-upload-button
+{
+    width: 86px;
+    position: relative;
+    direction: ltr;
+    overflow: hidden !important; /* important required by IE7 */
+}
+
+.t-upload-button input
+{
+    font: 500px monospace !important; /* The input font size and family are critical for the operation of the Upload */
+    opacity: 0;
+    filter: alpha(opacity=0);
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    right: 0; top: 0;
+    z-index: 1;
+}
+
+.t-state-disabled .t-upload-button input
+{
+    cursor: default;
+}
+
+.t-upload-files
+{
+    border-style: solid;
+    border-width: 1px;
+    margin: .2em 0 0;
+    padding: .3em .7em .5em;
+    line-height: 1.9em;
+}
+
+.t-upload-files .t-button
+{
+    position:relative;
+    top: 1px;
+    margin-left: 8px;
+    padding-top: 0;
+    padding-bottom: 0;
+    font-size: 84%;
+}
+
+*+html .t-upload-files .t-button{line-height: 1;} /*IE7*/
+* html .t-upload-files .t-button{line-height: 1;} /*IE6*/
+
+.t-upload .t-delete,
+.t-upload .t-cancel,
+.t-upload .t-retry
+{
+    height: 8px;
+    vertical-align: baseline;
+}
+
+.t-upload .t-delete,
+.t-upload .t-cancel
+{
+    width: 7px;
+    background-position: -5px -292px;
+}
+
+.t-retry{ background-position: -66px -228px; width: 11px; }
+.t-success{ background-position: -64px -240px; }
+.t-fail{ background-position: -64px -256px; }
+
+.t-filename
+{
+    position: relative;
+    display: inline-block;
+    min-width: 120px;
+    vertical-align: middle;
+}
+
+.t-progress,
+.t-progress-status
+{
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 118px;
+    height: 2px;
+    border-style: solid;
+    border-width: 1px;
+    background-repeat: repeat-x;
+
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
+}
+
+.t-progress-status
+{
+    left: -1px;
+    bottom: -1px;
+    width: 50%;
+}
+
+.t-upload-selected
+{
+    min-width: 86px;
+    box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    -ms-box-sizing: content-box;
+    margin: 3px 0 0;
+}
+
+.uploadTitle {
+    position: absolute;
+}
+
+*+html .t-upload-selected { min-width: 100px; }
+.t-dropzone-active
+{
+    width: 100%;
+    height: 100%;
+    position:fixed;
+    top: 0;
+    left: 0;
+    z-index: 10000;
+}
+
+.t-dropzone-active .t-button {
+    visibility: hidden;
+}
+.t-upload-selected {
+    display: none;
+}

@@ -1,6 +1,7 @@
 (function ($) {
     var flickr = window.flickr,
         visitor = window.visitor,
+        upload = window.uploadView,
         IMAGESIZES = ["_s", "_t", "_m"],
         imageSize = IMAGESIZES[0],
         template = function(size) { return '<li alt="thumbnail"><img src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>' + size + '.jpg"></li>'; },
@@ -9,6 +10,7 @@
 
     $(document).ready(function () {
         var flatSetsStrip = $("#flatSetsStrip"),
+            uploadView = new UploadView($("#uploadWrap")),
             mainNotInSetPhotoStrip = $("#mainNotInSetPhotoStrip"),
             setsDataSource = new kendo.data.DataSource({
                transport: {
@@ -88,6 +90,10 @@
 
         $("#searchBox").kendoAutoComplete({
             dataSource: tagHotListDataSource
+        });
+
+        $("#uploadphotos").bind("click", function() {
+            uploadView.show();
         });
 
         //log in section

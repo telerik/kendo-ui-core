@@ -3,7 +3,7 @@
         key: 'ea73824c4e27a137b7597fc3ffb3ba98',
         secret: '2e767957c686dd30'
     };
- 
+
    window.flickr = {
         service: "http://api.flickr.com/services/rest/",
         authURL: "http://flickr.com/services/auth/",
@@ -22,7 +22,9 @@
         getThumbnailURL: function(photo) {
             return 'http://farm' + photo.farm + '.' + 'static.flickr.com/' + photo.server + '/' + photo.id + '_' + photo.secret + '_t.jpg';
         },
-
+        isAuthenticated: function() {
+            return !!this.auth.token
+        },
         getApiSig: function(params) {
             var concatString = "",
                 keys = [];
