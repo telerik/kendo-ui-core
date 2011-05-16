@@ -121,6 +121,7 @@ section#footer
     z-index:2;
 }
 
+#footer>.thumbs,
 #footer>.thumb-list
 {
     position: relative;
@@ -457,7 +458,7 @@ header .i-help
     box-shadow:0px 0px 8px 3px #000;
 }
 
-.thumbs>li.currentThumb
+.thumbs>li.t-state-selected
 {
     cursor:default;
     z-index:1;
