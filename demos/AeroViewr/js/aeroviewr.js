@@ -124,6 +124,9 @@
                             .show();
                         this.selectable.value(this.element.find("li:first"));
                         //maybe load pictures from first set
+                    },
+                    change: function(e) {
+                        uploadView.currentSet(this.selectable.value());
                     }
                 });
                 $("#mainPicturesNotInSet").show();

@@ -7,6 +7,7 @@
 
     function UploadView(element) {
         this.element = $(element);
+        this.responses = [];
     }
     UploadView.prototype = {
         show: function() {
@@ -19,19 +20,31 @@
                                 showFileList: true,
                                 multiple: true,
                                 async: {
-                                    "saveUrl": 'Home/Save',
-                                    "autoUpload": true
+                                    saveUrl: 'Home/Save',
+                                    autoUpload: true
                                 },
                                 upload: function (e) {
                                     e.data = {
-                                        "api_key": flickr.app.key,
-                                        "auth_token": flickr.auth.token
+                                        api_key: flickr.app.key,
+                                        auth_token: flickr.auth.token
                                     };
 
                                     e.data["api_sig"] = flickr.getApiSig(flickr.app.secret, e.data);
                                 },
+                                success: function (e) {
+                                   that.responses = that.responses.concat(e.response);
+                                },
                                 complete: function (e) {
-                                    //alert("Upload completed (or is it?)");
+                                   var set = that.currentSet();
+                                   //if (set) {
+                                        var id = '72157626610392529';//set.data("set"),
+                                            responses = that.responses;
+                                        for (var i = 0, length = responses.length; i < length; i++) {
+                                            if(responses[i].stat === "ok"){
+                                                flickr.movePhotoToSet(id, responses[i].photoid);
+                                            }
+                                        }
+                                   //}
                                 }
                         })
                         .end()
@@ -40,6 +53,12 @@
         hide: function() {
             var that = this;
             that.element.hide();
+        },
+        currentSet: function(val){
+            if(val !== undefined) {
+                this._currentSet = val;
+            }
+            return this._currentSet;
         },
         _overlay: function() {
             var that = this,
