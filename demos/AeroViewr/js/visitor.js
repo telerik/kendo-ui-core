@@ -103,7 +103,7 @@ var visitor = window.visitor,
 
    window.visitor = {
         showMostPopular: function() {
-            $("#flatMostPopularPhotos").kendoListView({
+            return $("#flatMostPopularPhotos").kendoListView({
                 dataSource: mostPopularDataSource,
                 template: template("_s"),
                 dataBound: function() {
@@ -209,13 +209,16 @@ var visitor = window.visitor,
                     element.text("Back to search results");
                 }
             });
+
+            return $("#flatSearchPhotos");
         },
         initVisitor: function() {
             $(".i-search").unbind("click").click(this.search);
             //$("#searchBox").unbind("keydown").keydown(function(e) { if (e.keyCode == 13) { this.search(); } }); //change with autocomplete... maybe InitAutoComplete
 
-            this.initSearchResult();
-            this.showMostPopular();
+            this.thumbList = new Scroller($('<div class="thumb-list">').appendTo("#footer")).scrollElement;
+            this.thumbList.append(this.initSearchResult());
+            this.thumbList.append(this.showMostPopular());
             $("#backButton").text("");
         }
    };
