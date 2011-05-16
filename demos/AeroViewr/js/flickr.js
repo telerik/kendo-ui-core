@@ -119,6 +119,10 @@
             params["api_sig"] = this.getApiSig(params);
             return params;
         },
+        movePhotoToSet: function(id, photo) {
+            var url = this.getAuthMethodUrl("flickr.photosets.addPhoto", {photoset_id: id, photo_id: photo});
+            $.post(url);
+        },
         getFrob: function() {
             var search = document.location.search,
                 key = "frob=",
