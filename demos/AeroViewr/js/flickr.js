@@ -113,6 +113,7 @@
                 method: this.methods.getRelatedTags,
                 api_key: this.app.key,
                 format: "json",
+                per_page: 10,
                 nojsoncallback: 1
             }
             params["tag"] = text;
