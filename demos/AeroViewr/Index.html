@@ -36,11 +36,11 @@
     <title>Index</title>
 </head>
 <body>
-    <div class="wrap">
+    <div id="wrap">
         <header class="floatWrap">
             <h1>Aero<strong>Viewr</strong></h1>
             <a id="signin" href="#" class="signin">Sign in</a>
-            <span id="userInfo" class="signin" style="display:none">Signed in as <a href="#" ><em>MyUser</em></a><a id="signout" href="#"><em> Sign out</em></a></span>
+            <span id="userInfo" class="signin" style="display:none">Signed in as <a href="#" ><em>MyUser</em></a>&nbsp;&nbsp;(<a id="signout" href="#"><em>sign out</em></a>)</span>
             <ul>
                 <li><input placeholder="search" id="searchBox"/></li>
                 <li><a href="#" class="p-icon i-search">Search</a></li>
@@ -53,13 +53,13 @@
         </section>
         <section id="main">
             <!-- <h1>Nature Set <span class="by-user">by <a href="#"><em>SomeUser</em></a></span></h1> -->
+            <h1 class="setTitle">Always have a heading</h1>
             <div id="mainTemplate" style="display:none">
-                <button id="grid">Grid layout</button>
-                <button id="listView">ListView layout</button>
+                <ul class="thumbViews"><li><button id="grid" class="p-border p-icon i-gridview">Grid layout</button></li><li><button id="listView" class="p-border p-icon i-tileview">ListView layout</button></li></ul>
                 <ol class="paging"></ol>
                 <ul id="mainPhotoStrip" class="floatWrap thumbs"></ul>
                 <input type="range" id="slider" />
-                <table id="mainPhotoGrid"></table>
+                <table id="mainPhotoGrid" cellspacing="0"></table>
             </div>
             <div id="mainPicturesInSet" style="display:none">
                 <button id="gridSetPhotos">Grid Set Photos</button>
@@ -67,7 +67,7 @@
                 <ol id="setPhotosPager" class="paging"></ol>
                 <ul id="mainSetPhotoStrip" class="floatWrap thumbs"></ul>
                 <input type="setPhotoRange" id="slider" />
-                <table id="mainSetPhotoGrid"></table>
+                <table id="mainSetPhotoGrid" cellspacing="0"></table>
             </div>
             <div id="mainPicturesNotInSet" style="display:none">
                 <button id="gridNotInSetPhotos">Grid Set Photos</button>
@@ -75,13 +75,14 @@
                 <ol id="notInSetPhotoPager" class="paging"></ol>
                 <ul id="mainNotInSetPhotoStrip" class="floatWrap thumbs"></ul>
                 <input type="notInSetPhotoRange" id="slider" />
-                <table id="mainNotInSetPhotoGrid"></table>
+                <table id="mainNotInSetPhotoGrid" cellspacing="0"></table>
             </div>
             <div id="uploadWrap" style="display:none">
                 <h1 class="uploadTitle">You must <a href="#">Sign In</a> to upload photos.</h1>
             </div>
         </section>
         <section id="footer">
+            <h2>Always have a heading or reduce the height of the footer area</h2>
             <a href="#" id="viewslideshow"><span class="p-border-big p-icon i-slideshow"></span><em>Slideshow</em></a>
             <ul id="flatMostPopularPhotos" class="floatWrap thumbs"></ul>
             <ul id="flatSearchPhotos" style="display:none" class="floatWrap thumbs"></ul>
