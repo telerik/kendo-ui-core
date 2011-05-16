@@ -1,13 +1,18 @@
 ﻿<!DOCTYPE html>
 <html>
-<head runat="server">
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<head>
     <meta content="minimum-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
 
-    <link rel="apple-touch-icon" href="images/kendo.png" />
-    <link rel="apple-touch-startup-image" href="images/kendo_big.png" />
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="apple-touch-icon" href="img/kendo.png" />
+    <link rel="apple-touch-startup-image" href="img/splash-big.png" />
+    
+    <meta charset="utf-8" />
+
+    <title>AeroViewr</title>
+    <link rel="stylesheet" href="site.css" />
+
     <script src="js/md5.js"></script>
     <script src="../../src/jquery.js"></script>
     <script src="../../src/kendo.core.js"></script>
@@ -25,15 +30,12 @@
     <script src="../../src/kendo.autocomplete.js"></script>
     <script src="../../src/kendo.upload.js"></script>
     <script src="../../src/kendo.scroller.js"></script>
+
     <script src="js/flickr.js"></script>
     <script src="js/slideshow.js"></script>
     <script src="js/visitor.js"></script>
     <script src="js/uploadView.js"></script>
     <script src="js/aeroviewr.js"></script>
-    <link href="site.css" rel="stylesheet" type="text/css" />
-   <!-- <link type="text/css" href="../../styles/kendo.common.css" rel="stylesheet"/>
-    <link type="text/css" href="../../styles/kendo.vista.css" rel="stylesheet"/>-->
-    <title>Index</title>
 </head>
 <body>
     <div id="wrap">
@@ -47,10 +49,12 @@
                 <li><a href="#" class="p-icon i-help">Help</a></li>
             </ul>
         </header>
+
         <section id="photoWrap">
-        <img id="bigPhoto" alt="big photo" />
-        <div id="overlay"><!-- --></div>
+            <img id="bigPhoto" alt="big photo" />
+            <div id="overlay"><!-- --></div>
         </section>
+        
         <section id="main">
             <!-- <h1>Nature Set <span class="by-user">by <a href="#"><em>SomeUser</em></a></span></h1> -->
             <h1 class="setTitle">Always have a heading</h1>
@@ -81,6 +85,7 @@
                 <h1 class="uploadTitle">You must <a href="#">Sign In</a> to upload photos.</h1>
             </div>
         </section>
+
         <section id="footer">
             <h2>Always have a heading or reduce the height of the footer area</h2>
             <a href="#" id="viewslideshow"><span class="p-border-big p-icon i-slideshow"></span><em>Slideshow</em></a>
