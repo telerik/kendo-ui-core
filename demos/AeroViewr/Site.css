@@ -61,7 +61,7 @@ fieldset
 
 /* large screen layout - start */
 
-@media screen and (min-height:470px) {
+@media screen and (min-height:400px) {
 
 html
 {
@@ -118,7 +118,7 @@ section#footer
     z-index:2;
 }
 
-#footer>.thumbs
+#footer>.thumb-list
 {
     margin-left:108px;
     margin-right:108px;
@@ -329,13 +329,14 @@ header .i-help
     background:0 -120px repeat-x url(img/gradients.png);
 }
 
-#footer>.thumbs
+#footer .thumbs
 {
     height:100px;
     padding:8px 0;
     overflow:hidden;
     white-space:nowrap;
     vertical-align:middle;
+    outline: 0; /* Remove the focus in WebKit */
 }
 
 #footer>a
@@ -1574,4 +1575,57 @@ html .t-upload
 }
 .t-upload-selected {
     display: none;
+}
+
+/* touch & scroll styles */
+
+*, :before, :after {
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-backface-visibility: hidden;
+}
+
+.touch-scrollbar
+{
+    position: absolute;
+    visibility: hidden;
+    z-index: 200000;
+    height: .3em;
+    width: .3em;
+    background-color: #333;
+    -moz-transform-origin: 0 0;
+    -webkit-transform-origin: 0 0;
+    -o-transform-origin: 0 0;
+    transform-origin: 0 0;
+    -webkit-transition: opacity 0.3s linear;
+    -moz-transition: opacity 0.3s linear;
+    -o-transition: opacity 0.3s linear;
+    opacity: 0;
+    -moz-border-radius: .4em;
+    -webkit-border-radius: .4em;
+    border-radius: .4em;
+}
+
+.vertical-scrollbar
+{
+    height: 100%;
+    right: 1px;
+    top: 0;
+}
+
+.horizontal-scrollbar
+{
+    width: 100%;
+    left: 0;
+    bottom: 1px;
+}
+
+.scroll-container
+{
+    display: inline-block;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-transform: translate3d(0,0,0);
+    -webkit-perspective: 1000;
 }
