@@ -16,6 +16,10 @@ tests.push(
         title: "VML Renderer"
     },
     {
+        page: "chart/plotarea.html",
+        title: "Plot Area"
+    },
+    {
         page: "chart/barchart.html",
         title: "Bar Chart"
     },

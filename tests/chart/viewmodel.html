@@ -259,56 +259,6 @@
 
             })();
 
-            (function() {
-                var plotArea,
-                    axisY,
-                    axisX,
-                    series;
-
-                module("PlotArea", {
-                    setup: function() {
-                        plotArea = new Chart.PlotArea({
-                            series: [{
-                                name: "Value",
-                                type: "bar",
-                                data: [100, 200, 300]
-                            }]
-                        });
-
-                        axisY = plotArea.children[0];
-                        axisX = plotArea.children[1];
-                        series = plotArea.children[2];
-                    }
-                });
-
-                test("creates numeric Y-Axis", function() {
-                    ok(axisY instanceof Chart.NumericAxis);
-                });
-
-                test("creates category X-Axis", function() {
-                    ok(axisX instanceof Chart.CategoryAxis);
-                });
-
-                test("aligns Y-Axis above X-Axis", function() {
-                    plotArea.updateLayout(chartBox);
-                    equal(axisY.box.y2, axisX.box.y1);
-                });
-
-                test("aligns X-Axis next to Y-Axis", function() {
-                    plotArea.updateLayout(chartBox);
-                    equal(axisX.box.x1, axisY.box.x2);
-                });
-
-                test("creates bar series", function() {
-                    ok(series instanceof Chart.BarSeries);
-                });
-
-                test("aligns series box to axises", function() {
-                    plotArea.updateLayout(chartBox);
-                    same([series.box.x1, series.box.y1, series.box.x2, series.box.y2],
-                         [axisY.box.x2, chartBox.y1, chartBox.x2, axisX.box.y1]);
-                });
-            })();
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>

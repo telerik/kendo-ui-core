@@ -26,10 +26,20 @@
                 }
             };
 
+            function ViewFactoryStub() {
+                this.renderedRects = [];
+            }
+            ViewFactoryStub.prototype = {
+                rect: function(x, y, width, height) {
+                    this.renderedRects.push([].slice.call(arguments));
+                }
+            };
+
             (function() {
                 var series,
                     plotArea,
-                    positiveValues = [1, 2];
+                    viewFactory,
+                    positiveSeries = { data: [1, 2] };
 
                 function PlotAreaStub() {
                     this.box = new Box(0, 0, 100, 100);
@@ -41,22 +51,53 @@
                     }
                 });
 
-                module("Bar Series", {
+                module("Bar Chart", {
                     setup: function() {
                         plotArea = new PlotAreaStub();
+                        viewFactory = new ViewFactoryStub();
 
-                        series = new Chart.BarSeries(plotArea, 0, {
-                            seriesData: [ positiveValues ]
+                        series = new Chart.BarChart(plotArea, {
+                            series: [ positiveSeries ]
                         });
                     }
                 });
 
                 test("Creates bars for series data points", function() {
-                    equal(series.children.length, positiveValues.length);
+                    equal(series.children.length, positiveSeries.data.length);
                 });
 
-                test("Reports value range", function() {
-                    same(series.getValueRange(), [positiveValues[0], positiveValues[1]]);
+                test("Reports minimum series value", function() {
+                    same(series.getValueRange().min, positiveSeries.data[0]);
+                });
+
+                test("Reports maximum series value", function() {
+                    same(series.getValueRange().max, positiveSeries.data[1]);
+                });
+
+                test("bars are distributed horizontally", function() {
+                    series.getViewElements(viewFactory);
+
+                    var barsX = $.map(viewFactory.renderedRects, function(rect) {
+                        return rect[0];
+                    });
+
+                    same(barsX, [82.051, 348.718, 615.385]);
+                });
+
+                test("bars are aligned to category axis", 3, function() {
+                    series.getViewElements(viewFactory);
+
+                    $.each(viewFactory.renderedRects, function() {
+                        equal(this[1] + this[3], chartBox.y2);
+                    });
+                });
+
+                test("bars have set width", 3, function() {
+                    series.getViewElements(viewFactory);
+
+                    $.each(viewFactory.renderedRects, function() {
+                        equal(this[2], 100);
+                    });
                 });
 
             })();

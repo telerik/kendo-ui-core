@@ -179,6 +179,8 @@
 
         text.options = $.extend({}, text.options, options);
         text.content = content || "";
+
+        // Calculate size
         text.updateLayout(defaultBox);
     }
 
@@ -720,7 +722,7 @@
         bar.options = $.extend({}, bar.options, options);
     }
 
-    Bar.prototype = new ChartElement(); 
+    Bar.prototype = new ChartElement();
     $.extend(Bar.prototype, {
         options: {
             fill: "#000",
@@ -738,51 +740,50 @@
         }
     });
 
-    function BarSeries(plotArea, seriesIndex, options) {
-        var series = this;
-        ChartElement.call(series);
+    function BarChart(plotArea, options) {
+        var chart = this;
+        ChartElement.call(chart);
 
-        series.plotArea = plotArea;
-        series.seriesIndex = seriesIndex;
-        series.options = $.extend({}, series.options, options);
-        series._dataMin = Number.MAX_VALUE;
-        series._dataMax = Number.MIN_VALUE;
+        chart.plotArea = plotArea;
+        chart.options = $.extend({}, chart.options, options);
+        chart._seriesMin = Number.MAX_VALUE;
+        chart._seriesMax = Number.MIN_VALUE;
 
-        series.init();
+        chart.init();
     }
 
-    BarSeries.prototype = new ChartElement();
-    $.extend(BarSeries.prototype, {
+    BarChart.prototype = new ChartElement();
+    $.extend(BarChart.prototype, {
         options: {
-            seriesData: []
+            series: []
         },
 
         init: function() {
-            var series = this,
-                options = series.options,
-                seriesData = options.seriesData;
+            var chart = this,
+                options = chart.options,
+                series = options.series;
 
-            for (var seriesIx = 0; seriesIx < seriesData.length; seriesIx++) {
-                var data = seriesData[seriesIx];
+            for (var seriesIx = 0; seriesIx < series.length; seriesIx++) {
+                var data = series[seriesIx].data;
 
                 for (var pointIx = 0; pointIx < data.length; pointIx++) {
                     var point = data[pointIx];
-                    series._dataMin = Math.min(series._dataMin, point);
-                    series._dataMax = Math.max(series._dataMax, point);
-                    series.children.push(new Bar());
+                    chart._seriesMin = Math.min(chart._seriesMin, point);
+                    chart._seriesMax = Math.max(chart._seriesMax, point);
+                    chart.children.push(new Bar());
                 }
             }
         },
 
         getValueRange: function() {
-            var series = this;
-            return [series._dataMin, series._dataMax];
+            var chart = this;
+            return { min: chart._seriesMin, max: chart._seriesMax };
         },
 
         getViewElements: function(factory) {
-            var series = this,
-                options = series.options,
-                box = series.box,
+            var chart = this,
+                options = chart.options,
+                box = chart.box,
                 elements = [];
 
             return elements;
@@ -799,7 +800,7 @@
         ChartElement.call(plotArea);
 
         plotArea.options = $.extend({}, plotArea.options, options);
-        plotArea.createAxes();
+        plotArea.init();
     }
 
     PlotArea.prototype = new ChartElement();
@@ -810,31 +811,50 @@
             series: [ ]
         },
 
-        createAxes: function() {
+        init: function() {
+            var plotArea = this;
+            plotArea.createSeries();
+            plotArea.createAxes();
+        },
+
+        createSeries: function() {
             var plotArea = this,
                 options = plotArea.options,
-                seriesRange = getSeriesRange(plotArea.options.series),
-                axisY = new NumericAxis(seriesRange.min, seriesRange.max, plotArea.options.axisY),
-                axisX = new CategoryAxis(options.axisX);
+                series = plotArea.series = [];
 
-            plotArea.children.push(axisY);
-            plotArea.children.push(axisX);
+            var barSeries = $.grep(options.series, function(currentSeries) {
+                return currentSeries.type == "bar";
+            });
 
-            for (var i = 0; i < options.series.length; i++) {
-                var currentSeries = options.series[i];
-                if (currentSeries.type == "bar") {
-                    plotArea.children.push(
-                        new BarSeries(axisY.options.min, axisY.options.max, currentSeries)
-                    );
-                }
-            }
+            var barChart = new BarChart(this, { series: barSeries }),
+                range = barChart.getValueRange();
+
+            plotArea._seriesMin = range.min;
+            plotArea._seriesMax = range.max;
+
+            series.push(barChart);
+
+            [].push.apply(plotArea.children, series);
+        },
+
+        createAxes: function() {
+            var plotArea = this,
+                options = plotArea.options;
+
+            plotArea.axisY =
+                new NumericAxis(plotArea._seriesMin, plotArea._seriesMax, plotArea.options.axisY);
+
+            plotArea.axisX = new CategoryAxis(options.axisX);
+
+            plotArea.children.push(plotArea.axisY);
+            plotArea.children.push(plotArea.axisX);
         },
 
         updateLayout: function(targetBox) {
             var plotArea = this,
-                children = plotArea.children,
-                axisY = children[0],
-                axisX = children[1];
+                series = plotArea.series,
+                axisY = plotArea.axisY,
+                axisX = plotArea.axisX;
 
             plotArea.box = targetBox;
 
@@ -855,8 +875,8 @@
                 targetBox.x2, axisX.box.y1
             );
 
-            for (var i = 2; i < children.length; i++) {
-                children[i].updateLayout(seriesBox);
+            for (var i = 0; i < series.length; i++) {
+                series[i].updateLayout(seriesBox);
             }
         }
     });
@@ -1279,17 +1299,6 @@
         return round(coord) + 0.5;
     }
 
-    function getSeriesRange(series) {
-        var seriesMin = Number.MAX_VALUE,
-        seriesMax = Number.MIN_VALUE;
-        $.each(series, function() {
-            seriesMin = Math.min(seriesMin, Math.min.apply(Math, this.data));
-            seriesMax = Math.max(seriesMax, Math.max.apply(Math, this.data));
-        });
-
-        return { min: seriesMin, max: seriesMax };
-    }
-
     // Make the internal functions public for unit testing
 
     Chart.Box = Box;
@@ -1297,7 +1306,7 @@
     Chart.RootElement = RootElement;
     Chart.NumericAxis = NumericAxis;
     Chart.CategoryAxis = CategoryAxis;
-    Chart.BarSeries = BarSeries;
+    Chart.BarChart = BarChart;
     Chart.DataPointCluster = DataPointCluster;
     Chart.DataPointStack = DataPointStack;
     Chart.Title = Title;
@@ -1315,12 +1324,3 @@
 
 })(jQuery);
 
-// kendo.chart.bar.js
-(function($) {
-    function BarChart() {
-    }
-
-    kendo.ui.Chart.prototype.types["bar"] = function(chart, configuration) {
-        return new BarChart(chart, configuration);
-    };
-})(jQuery);
