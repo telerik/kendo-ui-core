@@ -83,13 +83,22 @@ var visitor = window.visitor,
    }
 
    function setBigPhoto(src) {
-       $("#bigPhoto")
-           .fadeOut(function() {
-               $(this).attr("src", src)
+       var loading = $('<div class="loading">Loading ... </div>');
+
+       $("#bigPhoto").after(loading);
+
+       var loader = $("<img />")
+                   .hide()
+                   .appendTo(document.body)
+                   .attr("src", src)
                    .bind("load", function() {
-                       $(this).fadeIn();
+                       $("#bigPhoto")
+                       .fadeOut(function() {
+                           $(this).attr("src", src).fadeIn();
+                           loader.remove();
+                       })
+                       .next().remove();
                    });
-           });
    }
 
    window.visitor = {
