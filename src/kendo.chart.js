@@ -812,15 +812,9 @@
         },
 
         init: function() {
-            var plotArea = this;
-            plotArea.createSeries();
-            plotArea.createAxes();
-        },
-
-        createSeries: function() {
             var plotArea = this,
                 options = plotArea.options,
-                series = plotArea.series = [];
+                charts = plotArea.charts = [];
 
             var barSeries = $.grep(options.series, function(currentSeries) {
                 return currentSeries.type == "bar";
@@ -829,20 +823,19 @@
             var barChart = new BarChart(this, { series: barSeries }),
                 range = barChart.getValueRange();
 
-            plotArea._seriesMin = range.min;
-            plotArea._seriesMax = range.max;
+            charts.push(barChart);
 
-            series.push(barChart);
+            [].push.apply(plotArea.children, charts);
 
-            [].push.apply(plotArea.children, series);
+            plotArea.createAxes(range.min, range.max);
         },
 
-        createAxes: function() {
+        createAxes: function(seriesMin, seriesMax) {
             var plotArea = this,
                 options = plotArea.options;
 
             plotArea.axisY =
-                new NumericAxis(plotArea._seriesMin, plotArea._seriesMax, plotArea.options.axisY);
+                new NumericAxis(seriesMin, seriesMax, plotArea.options.axisY);
 
             plotArea.axisX = new CategoryAxis(options.axisX);
 
@@ -852,7 +845,7 @@
 
         updateLayout: function(targetBox) {
             var plotArea = this,
-                series = plotArea.series,
+                charts = plotArea.charts,
                 axisY = plotArea.axisY,
                 axisX = plotArea.axisX;
 
@@ -875,8 +868,8 @@
                 targetBox.x2, axisX.box.y1
             );
 
-            for (var i = 0; i < series.length; i++) {
-                series[i].updateLayout(seriesBox);
+            for (var i = 0; i < charts.length; i++) {
+                charts[i].updateLayout(seriesBox);
             }
         }
     });

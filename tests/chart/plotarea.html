@@ -16,25 +16,39 @@
                 Box = Chart.Box,
                 chartBox = new Box(0, 0, 1000, 1000);
 
+            function stubMethod(fn, methodName, stub, callback) {
+                var oldMethod = fn.prototype[methodName];
+                fn.prototype[methodName] = stub;
+                callback();
+                fn.prototype[methodName] = oldMethod;
+            }
+
             (function() {
                 var plotArea,
                     axisY,
                     axisX,
-                    series;
+                    barChart;
+
+                function createPlotArea() {
+                    return new Chart.PlotArea({
+                        series: [{
+                            name: "Value A",
+                            type: "bar",
+                            data: [100, 200, 300]
+                        }, {
+                            name: "Value B",
+                            type: "bar",
+                            data: [10, 20, 30]
+                        }]
+                    });
+                }
 
                 module("PlotArea", {
                     setup: function() {
-                        plotArea = new Chart.PlotArea({
-                            series: [{
-                                name: "Value",
-                                type: "bar",
-                                data: [100, 200, 300]
-                            }]
-                        });
-
+                        plotArea = createPlotArea();
                         axisY = plotArea.axisY;
                         axisX = plotArea.axisX;
-                        series = plotArea.series[0];
+                        barChart = plotArea.charts[0];
                     }
                 });
 
@@ -65,17 +79,28 @@
                 });
 
                 test("creates bar chart", function() {
-                    ok(series instanceof Chart.BarChart);
+                    ok(barChart instanceof Chart.BarChart);
                 });
 
-                test("sets Y-Axis minimum to series minimum", function() {
-                    equal(plotArea._seriesMin, 100);
-                    equal(plotArea._seriesMax, 300);
+                test("groups bar series into bar chart", function() {
+                    equal(barChart.options.series.length, 2);
+                });
+
+                test("sets axis min/max to series limits", 2, function() {
+                    stubMethod(Chart.PlotArea, "createAxes",
+                        function(seriesMin, seriesMax) {
+                            equal(seriesMin, 10);
+                            equal(seriesMax, 300);
+                        },
+                        function() {
+                            createPlotArea();
+                        }
+                    );
                 });
 
                 test("aligns series box to axises", function() {
                     plotArea.updateLayout(chartBox);
-                    same([series.box.x1, series.box.y1, series.box.x2, series.box.y2],
+                    same([barChart.box.x1, barChart.box.y1, barChart.box.x2, barChart.box.y2],
                          [axisY.box.x2, chartBox.y1, chartBox.x2, axisX.box.y1]);
                 });
             })();
