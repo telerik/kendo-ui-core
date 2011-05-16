@@ -1,14 +1,13 @@
 (function($, window) {
-   var app = {
-        key: 'ea73824c4e27a137b7597fc3ffb3ba98',
-        secret: '2e767957c686dd30'
-    };
-
-   window.flickr = {
+      window.flickr = {
         service: "http://api.flickr.com/services/rest/",
         authURL: "http://flickr.com/services/auth/",
         auth: {
             token: null //'72157626154487043-7dfd951a1ede12fa' //write auth
+        },
+        app: {
+            key: 'ea73824c4e27a137b7597fc3ffb3ba98',
+            secret: '2e767957c686dd30'
         },
         methods: {
             getToken : "flickr.auth.getToken",
@@ -36,7 +35,7 @@
             }
 
             keys.sort();
-            concatString += app.secret;
+            concatString += this.app.secret;
             for (var i = 0; i < keys.length; i++) {
                 key = keys[i];
                 concatString += key + params[key];
@@ -47,7 +46,7 @@
         getAuthMethodUrl: function(method, params) {
             params = params || {};
             params["method"] = method;
-            params["api_key"] = app.key;
+            params["api_key"] = this.app.key;
             params["auth_token"] = this.auth.token;
             params["format"] = "json";
             params["api_sig"] = this.getApiSig(params);
@@ -58,7 +57,7 @@
         mostPopularParams: function(data) {
             var params = {
                 method: this.methods.getMostPopular,
-                api_key: app.key,
+                api_key: this.app.key,
                 format: "json",
                 nojsoncallback: 1
             }
@@ -70,7 +69,7 @@
         searchParams: function(data) {
             var params = {
                 method: this.methods.search,
-                api_key: app.key,
+                api_key: this.app.key,
                 format: "json",
                 nojsoncallback: 1
             }
@@ -88,7 +87,7 @@
             var params = {
                 method: this.methods.getSets,
                 user_id: flickr.auth.user.nsid,
-                api_key: app.key,
+                api_key: this.app.key,
                 auth_token: this.auth.token,
                 format: "json",
                 nojsoncallback: 1
@@ -100,7 +99,7 @@
         getNotInSetParams: function(data) {
             var params = {
                 method: this.methods.getNotInSet,
-                api_key: app.key,
+                api_key: this.app.key,
                 auth_token: this.auth.token,
                 format: "json",
                 nojsoncallback: 1
@@ -112,7 +111,7 @@
         getRelatedTagParams: function(text) {
             var params = {
                 method: this.methods.getRelatedTags,
-                api_key: app.key,
+                api_key: this.app.key,
                 format: "json",
                 nojsoncallback: 1
             }
@@ -133,7 +132,7 @@
         },
         getToken: function(frob, callback) {
             var params = {
-                api_key: app.key,
+                api_key: this.app.key,
                 frob: frob,
                 format: "json",
                 nojsoncallback: 1,
@@ -145,7 +144,7 @@
         },
         signIn: function() {
              var params = {
-                api_key: app.key,
+                api_key: this.app.key,
                 perms: "write"
             }
             params["api_sig"] = this.getApiSig(params);
