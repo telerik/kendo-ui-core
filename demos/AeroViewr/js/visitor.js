@@ -103,8 +103,8 @@ var visitor = window.visitor,
    }
 
    window.visitor = {
-        showMostPopular: function() {
-            return $("#flatMostPopularPhotos").kendoListView({
+        mostPopular: function() {
+            this.thumbList.append( $("#flatMostPopularPhotos").kendoListView({
                 dataSource: mostPopularDataSource,
                 template: template("_s"),
                 dataBound: function() {
@@ -115,18 +115,26 @@ var visitor = window.visitor,
                 change: function() {
                     setBigPhoto(this.selected().find("img").attr('src').replace("_s", ""));
                 }
-            });
+            }));
         },
-        search: function() {            
-            dataSource.query({page: 1, pageSize: 5});
-            $("#flatMostPopularPhotos").hide();
-            $("#flatSearchPhotos").hide();
-            $("#mainTemplate").show();
+        search: function(el) {
+            if($("#searchBox").val()) {
+                this.searchResult();
+                $("#flatMostPopularPhotos").hide();
+                $("#flatSearchPhotos").hide();
+                $("#mainTemplate").show();
+            }
             $("#backButton").text("Back to most popular").data("currentView", "mainTemplate");
             slideshow.init($("#flatSearchPhotos").data("kendoListView"));
         },
 
-        initSearchResult: function () {
+        searchResult: function () {
+            if(this._searchInitialized){
+                dataSource.query({page: 1, pageSize: 5});
+                return;
+            }
+            this._searchInitialized = true;
+
             $(".paging").kendoPager({ dataSource: dataSource });
 
             $("#flatSearchPhotos").kendoListView({
@@ -193,8 +201,8 @@ var visitor = window.visitor,
                 $("#mainPhotoStrip").show();
                 $("#slider").parent().show();
             });
-            
-            $("#backButton").bind("click", function(){                
+
+            $("#backButton").bind("click", function(){
                 var element = $(this),
                     view = element.data("currentView");
                 if(view === "flatMostPopularPhotos") {
@@ -215,17 +223,18 @@ var visitor = window.visitor,
                 }
             });
 
-            return $("#flatSearchPhotos");
+            this.thumbList.append($("#flatSearchPhotos"));
         },
         initVisitor: function() {
-            $(".i-search").unbind("click").click(this.search);
+            $(".i-search").unbind("click").click($.proxy(this.search, this));
             $("#searchBox").bind("change", function() { $(".i-search").click(); });
 
             this.thumbList = new kendo.ui.Scroller($('<div class="thumb-list">').appendTo("#footer")).scrollElement;
-            this.thumbList.append(this.initSearchResult());
-            this.thumbList.append(this.showMostPopular());
+
+            this.mostPopular();
+
             $("#backButton").text("");
-            
+
             slideshow.init($("#flatMostPopularPhotos").data("kendoListView"));
             $("#viewslideshow").click(function() {
                   slideshow.toggle();
