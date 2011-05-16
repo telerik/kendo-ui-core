@@ -448,8 +448,6 @@ Scroller.prototype = {
         this.source = this.bounceLocation = this.bounceLocation || this._getScrollOffsets();
         this.lastCall = this.source.time = +new Date();
 
-//        console.log('start: ', this.source);
-
         if (duration) {
             clearTimeout(this.timeoutId);
             this.destination = { x: -x, y: -y, duration: duration };
@@ -470,8 +468,6 @@ Scroller.prototype = {
                 y: -(-this.source.y - this.destination.y) / timeFactor
             };
 
-//            console.log('middle: ', this.bounceLocation, timeFactor, timeDelta);
-
             this._throttleCSS( this.bounceLocation );
         }
         
@@ -480,8 +476,6 @@ Scroller.prototype = {
             this.lastCall = now;
             return;
         }
-
-//        console.log('end: ', this.bounceLocation);
     },
 
     _scrollBy: function (x, y, duration) {
@@ -505,8 +499,6 @@ Scroller.prototype = {
             decelerationVelocity = this.decelerationVelocity[axis],
             friction = this.friction[axis];
 
-//        if (axis == 'x')
-//            console.log(bounceLocation, decelerationVelocity);
         bounceLocation += decelerationVelocity;
         decelerationVelocity *= friction;
 
