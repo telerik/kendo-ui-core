@@ -120,6 +120,7 @@ section#footer
 
 #footer>.thumb-list
 {
+    position: relative;
     margin-left:108px;
     margin-right:108px;
 }
