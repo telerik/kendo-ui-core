@@ -59,15 +59,38 @@ var visitor = window.visitor,
         }
     });
 
+   function displayImages(element) {
+       element.find("img")
+           .hide()
+           .bind("load", function() {
+               $(this).slideUp().fadeIn();
+           });
+   }
+
+   function showSelectedPhoto(ui) {
+       $("#flatSearchPhotos").show();
+
+       ui.element.parent().hide();
+
+       $("#bigPhoto")
+           .fadeOut("slow")
+           .attr("src", $("img:first", ui.selectable.value()).attr("src").replace("_s", ""))
+           .bind("load", function (e) {
+               $(e.target).hide().fadeIn("medium");
+           });
+
+       dataSource.query({page: 1, pageSize: 500});
+   }
+
    window.visitor = {
         showMostPopular: function() {
             $("#flatMostPopularPhotos").kendoListView({
                 dataSource: mostPopularDataSource,
                 template: template("_s"),
                 dataBound: function() {
-                    var listView = this.element,
-                        li = listView.find("li:first");
+                    var li = this.element.find("li:first");
                     this.selectable.value(li);
+                    displayImages(this.element);
                 },
                 change: function() {
                     $("#bigPhoto").attr("src", this.selected().find("img").attr('src').replace("_s", ""));
@@ -87,6 +110,9 @@ var visitor = window.visitor,
             $("#flatSearchPhotos").kendoListView({
                 dataSource: dataSource,
                 template: template("_s"),
+                dataBound: function() {
+                    displayImages(this.element);
+                },
                 change: function() {
                    $("#bigPhoto").attr("src", this.selected().find("img").attr('src').replace("_s", ""));
                 }
@@ -99,71 +125,53 @@ var visitor = window.visitor,
                     { template: '<img src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>_s.jpg">', title: "PHOTO" },
                     { field: "ownername", title: "AUTHOR" },
                     { field: "title", title: "TITLE" },
-                    { field: "tags", title: "TAGS"}]
-            })
-            .data("kendoGrid")
-            .bind("change", function () {
-                $("#flatSearchPhotos").show();                
-                this.element.parent().hide();
-                $("#bigPhoto").fadeOut("slow")
-                    .attr("src", $("img:first", this.selectable.value()).attr("src").replace("_s", ""))
-                    .bind("load", function (e) {
-                        $(e.target).hide().fadeIn("medium");
-                    });
-                dataSource.query({page: 1, pageSize: 500});
+                    { field: "tags", title: "TAGS"}
+                ],
+                change: function() {
+                    showSelectedPhoto(this);
+                },
+                dataBound: function() {
+                    displayImages(this.element);
+                }
             });
 
             $("#mainPhotoStrip").kendoListView({
                 dataSource: dataSource,
-                template: template(imageSize)
+                template: template(imageSize),
+                dataBound: function() {
+                    displayImages(this.element);
+                },
+                change: function() {
+                    showSelectedPhoto(this);
+                }
             })
-            .hide()
-            .data("kendoListView")
-            .bind("change", function () {
-                $("#flatSearchPhotos").show();
-                this.element.parent().hide();
-                $("#bigPhoto").fadeOut("slow")
-                    .attr("src", $("img:first", this.selected()).attr("src").replace(imageSize, ""))
-                    .bind("load", function (e) {
-                        $(e.target).hide().fadeIn("medium");
-                    });
-                dataSource.query({page: 1, pageSize: 500});
-            })
-            .bind("dataBound", function () {
-                this.element.find("img").bind("load", function () {
-                    $(this).css("display", "block")
-                            .css("marginLeft", ~~($(this).width() / 2))
-                            .animate({ marginLeft: 0 }, 500)
-                            .parent()
-                            .css("overflow", "hidden").animate({ opacity: 1 }, 1000);
-                });
-            });
+            .hide();
 
             $("#slider").kendoSlider({
                 orientation: "vertical",
                 minValue: 0,
                 maxValue: 2,
-                largeStep: 1
+                largeStep: 1,
+                change: function() {
+                    imageSize = IMAGESIZES[this.value()];
+                    $("#mainPhotoStrip").data("kendoListView").template = kendo.template(template(imageSize));
+                    dataSource.read();
+                }
             })
-            .parent().hide().end()
-            .data("kendoSlider")
-            .bind("change", function() {
-                imageSize = IMAGESIZES[this.value()];
-                $("#mainPhotoStrip").data("kendoListView").template = kendo.template(template(imageSize));                
-                dataSource.read();
-            });
+            .parent().hide();
 
             $("#grid").click(function() {
                 $("#mainPhotoStrip").hide();
                 $("#slider").parent().hide();
                 $("#mainPhotoGrid").show();
             });
-            $("#listView").click(function(e) {                                
+
+            $("#listView").click(function(e) {
                 $("#mainPhotoGrid").hide();
                 $("#mainPhotoStrip").show();
                 $("#slider").parent().show();
             });
-            
+
             $("#backButton").bind("click", function(){
                 var element = $(this),
                     view = element.data("currentView");
