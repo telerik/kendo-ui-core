@@ -221,7 +221,7 @@ var visitor = window.visitor,
             $(".i-search").unbind("click").click(this.search);
             $("#searchBox").bind("change", function() { $(".i-search").click(); });
 
-            this.thumbList = new Scroller($('<div class="thumb-list">').appendTo("#footer")).scrollElement;
+            this.thumbList = new kendo.ui.Scroller($('<div class="thumb-list">').appendTo("#footer")).scrollElement;
             this.thumbList.append(this.initSearchResult());
             this.thumbList.append(this.showMostPopular());
             $("#backButton").text("");
