@@ -5,13 +5,14 @@
         IMAGESIZES = ["_s", "_t", "_m"],
         imageSize = IMAGESIZES[0],
         template = function(size) { return '<li alt="thumbnail"><img src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>' + size + '.jpg"></li>'; },
-        setTemplate = '<li alt="thumbnail"><img width="100" height="100" src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>_s.jpg"></li>',
+        setTemplate = '<li data-set="<%=id%>" alt="thumbnail"><img width="75" height="75" src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>_s.jpg"></li>',
         liveUrl = "http://localhost/kendo/demos/aeroviewr/index.html";
 
     $(document).ready(function () {
         var flatSetsStrip = $("#flatSetsStrip"),
             uploadView = new UploadView($("#uploadWrap")),
             mainNotInSetPhotoStrip = $("#mainNotInSetPhotoStrip"),
+            mainInSetPhotoStrip = $("#mainInSetPhotoStrip"),
             setsDataSource = new kendo.data.DataSource({
                transport: {
                    read: {
@@ -83,8 +84,34 @@
                         });
                     }
                 }
-            });
-
+            }),
+            inSetDataSource = new kendo.data.DataSource({
+               transport: {
+                   read: {
+                       url: flickr.service,
+                       cache: true,                       
+                       dataType: "json"
+                   },    
+                   cache: "inmemory",               
+                   dialect: {
+                       read: function(data) {
+                           return flickr.getInSetParams({extras: "owner_name,tags", per_page: 500, photoset_id: photoSetId()});
+                       }
+                   }
+                },
+                reader: {
+                    data: function(result) {                        
+                        return result.photoset;
+                    },
+                    total: function(result) {                        
+                        return Math.min(result.photoset.total, 500);
+                    }
+                }
+            }),
+            photoSetId = function() {               
+                return flatSetsStrip.data("kendoListView").selected().data("set");
+            };
+        
         $('.i-help').click(function (e) {
             dataSource.transport.cache.clear(); // temp in order to force items removal from the localStore
         });
@@ -109,6 +136,7 @@
         flickr.authenticate(function(authenticated) {
            if (authenticated) {
                 //mainTemplate.hide();
+                $("#flatMostPopularPhotos").hide();
                 $("#signin").hide();
                 $("#userInfo").fadeIn().find("em:first").html(flickr.auth.user.username);
                 if(history.replaceState){
@@ -118,16 +146,48 @@
                 flatSetsStrip.kendoListView({
                     dataSource: setsDataSource,
                     template: setTemplate,
-                    dataBound: function () {
-                        flatMostPopularPhotos.hide();
+                    dataBound: function () {                        
                         this.element
-                            .prepend('<li alt="thumbnail"><img width="100" height="100" src="img/NotInSet.png" /><em>Not In Set</em></li>')
+                            .prepend('<li alt="thumbnail"><img width="75" height="75" src="img/NotInSet.png" /><em>Not In Set</em></li>')
                             .show();
                         this.selectable.value(this.element.find("li:first"));
                         //maybe load pictures from first set
                     },
-                    change: function(e) {
-                        uploadView.currentSet(this.selectable.value());
+                    change: function(e) {                        
+                        var selected = this.selected();
+                        uploadView.currentSet(selected);
+                        if(selected.is(this.element.find("li:first"))) {
+                            mainNotInSetPhotoStrip.show();
+                        }
+                        else {    
+                            
+                            if(!mainInSetPhotoStrip.data("kendoListView")) {
+//                                mainInSetPhotoStrip.kendoListView({                                    
+//                                    template: template(imageSize),
+//                                    dataSource: inSetDataSource
+//                                })
+//                                .hide()
+//                                .data("kendoListView")
+//                                .bind("change", function () {
+//                                    $("#bigPhoto").fadeOut("slow")
+//                                    .attr("src", $("img:first", this.selected()).attr("src").replace(imageSize, ""))
+//                                    .bind("load", function (e) {
+//                                        $(e.target).hide().fadeIn("medium");
+//                                    });
+//                                })
+//                                .bind("dataBound", function () {
+//                                    mainInSetPhotoStrip.show().find("img").bind("load", function () {
+//                                        $(this).css("display", "block")
+//                                                .css("marginLeft", ~~($(this).width() / 2))
+//                                                .animate({ marginLeft: 0 }, 500)
+//                                                .parent()
+//                                                .css("overflow", "hidden").animate({ opacity: 1 }, 1000);
+//                                    });
+//                                });                                
+                            }
+
+                            mainNotInSetPhotoStrip.show();
+                        }
                     }
                 });
                 $("#mainPicturesNotInSet").show();

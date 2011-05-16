@@ -15,7 +15,8 @@
             getSets: "flickr.photosets.getList",
             getNotInSet: "flickr.photos.getNotInSet",
             getMostPopular: "flickr.interestingness.getList",
-            getRelatedTags: "flickr.tags.getRelated"
+            getRelatedTags: "flickr.tags.getRelated",
+            getSetPhotos: "flickr.photosets.getPhotos"
         },
 
         getThumbnailURL: function(photo) {
@@ -99,6 +100,18 @@
         getNotInSetParams: function(data) {
             var params = {
                 method: this.methods.getNotInSet,
+                api_key: this.app.key,
+                auth_token: this.auth.token,
+                format: "json",
+                nojsoncallback: 1
+            }
+            $.extend(params, data);
+            params["api_sig"] = this.getApiSig(params);
+            return params;
+        },
+        getInSetParams: function(data) {
+            var params = {
+                method: this.methods.getSetPhotos,
                 api_key: this.app.key,
                 auth_token: this.auth.token,
                 format: "json",
