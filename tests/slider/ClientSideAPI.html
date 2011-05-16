@@ -123,7 +123,7 @@
 
                 slider.disable();
 
-                ok(slider.wrapper.attr("disabled"));
+                slider.wrapper.is("[disabled]");
                 ok(!slider.enabled);
             });
 
@@ -153,7 +153,7 @@
             });
 
             test("refresh method should not select minimum when slider increase his value from -1 to 0", function () {
-                var slider = newSlider({ showButtons: true, minValue: -5, val: -1 });
+                var slider = newSlider({ showButtons: true, min: -5, val: -1 });
 
                 slider.value(0)
 
@@ -289,7 +289,7 @@
 
                 rangeSlider.disable();
 
-                ok(rangeSlider.wrapper.attr("disabled"));
+                rangeSlider.wrapper.is(":disabled");
                 ok(!rangeSlider.enabled);
             });
 

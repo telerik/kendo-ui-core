@@ -222,7 +222,7 @@
             });
 
             test('getValueFromPosition with small step 0.1 mouse position 40 should return 0.4', function () {
-                var slider = newSlider({ val: 0, smallStep: 0.1, maxValue: 1, style: "width: 156px;" }),
+                var slider = newSlider({ val: 0, smallStep: 0.1, max: 1, style: "width: 156px;" }),
                     mousePosition = 40,
                     dragableArea = { startPoint: 0, endPoint: slider._maxSelection },
                     value = slider._getValueFromPosition(mousePosition, dragableArea);
@@ -231,7 +231,7 @@
             });
 
             test('getValueFromPosition with small step 0.1 mouse position 30 should return 0.3', function () {
-                var slider = newSlider({ val: 0, smallStep: 0.1, maxValue: 1, style: "width: 156px;" }),
+                var slider = newSlider({ val: 0, smallStep: 0.1, max: 1, style: "width: 156px;" }),
                     mousePosition = 30,
                     dragableArea = { startPoint: 0, endPoint: slider._maxSelection },
                     value = slider._getValueFromPosition(mousePosition, dragableArea);
@@ -240,7 +240,7 @@
             });
 
             test('getValueFromPosition with small step 0.1 mouse position 50 should return 0.5', function () {
-                var slider = newSlider({ val: 0, smallStep: 0.1, maxValue: 1, style: "width: 156px;" }),
+                var slider = newSlider({ val: 0, smallStep: 0.1, max: 1, style: "width: 156px;" }),
                     mousePosition = 50,
                     dragableArea = { startPoint: 0, endPoint: slider._maxSelection },
                     value = slider._getValueFromPosition(mousePosition, dragableArea);
