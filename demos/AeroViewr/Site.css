@@ -121,7 +121,7 @@ section#footer
     z-index:2;
 }
 
-#footer>.thumbs
+#footer>.thumb-list
 {
     position: relative;
     margin-left:108px;
@@ -374,7 +374,7 @@ header .i-help
     color:rgba(255,255,255,.7);
 }
 
-#footer>.thumbs
+#footer .thumbs
 {
     height:75px;
     padding:8px;
