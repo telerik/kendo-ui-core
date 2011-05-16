@@ -133,8 +133,7 @@ var visitor = window.visitor,
                     displayImages(this.element);
                 },
                 change: function() {
-                    alert(1);
-                   $("#bigPhoto").fadeOut("slow").attr("src", this.selected().find("img").attr('src').replace("_s", ""));
+                    setBigPhoto(this.selected().find("img").attr('src').replace("_s", ""));
                 }
             });
             $("#mainPhotoGrid").kendoGrid({
