@@ -3,7 +3,7 @@
         authContent = '<h1 class="uploadTitle"><span class="p-icon i-drag"></span> Drag &amp; drop photos to upload</h1>' +
                   '<em>or</em>' +
                   '<div class="t-widget t-upload"><div class="t-button t-button-icontext t-button-bare t-upload-button p-border-big">' +
-                  '<span class="p-icon i-set t-add"></span> browse<input type="file" name="file" id="photosUpload" /></div></div>';
+                  '<span class="p-icon i-set t-add"></span> browse<input type="file" name="photo" id="photosUpload" /></div></div>';
 
     function UploadView(element) {
         this.element = $(element);
@@ -16,13 +16,23 @@
             that._overlay().empty()
                         .html(flickr.isAuthenticated() ? authContent : nonAuthContent)
                         .find("#photosUpload").kendoUpload({
-                            async: {
-                                saveUrl: "k"
-                            },
-                            localization: {
-                                dropFilesHere: ""
-                            },
-                            showFileList: false
+                                showFileList: true,
+                                multiple: true,
+                                async: {
+                                    "saveUrl": 'Home/Save',
+                                    "autoUpload": true
+                                },
+                                upload: function (e) {
+                                    e.data = {
+                                        "api_key": flickr.app.key,
+                                        "auth_token": flickr.auth.token
+                                    };
+
+                                    e.data["api_sig"] = flickr.getApiSig(flickr.app.secret, e.data);
+                                },
+                                complete: function (e) {
+                                    //alert("Upload completed (or is it?)");
+                                }
                         })
                         .end()
                         .show();

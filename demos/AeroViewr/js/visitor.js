@@ -214,7 +214,7 @@ var visitor = window.visitor,
         },
         initVisitor: function() {
             $(".i-search").unbind("click").click(this.search);
-            //$("#searchBox").unbind("keydown").keydown(function(e) { if (e.keyCode == 13) { this.search(); } }); //change with autocomplete... maybe InitAutoComplete
+            $("#searchBox").bind("change", function() { $(".i-search").click(); });
 
             this.thumbList = new Scroller($('<div class="thumb-list">').appendTo("#footer")).scrollElement;
             this.thumbList.append(this.initSearchResult());
