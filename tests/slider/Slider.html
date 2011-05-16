@@ -9,8 +9,8 @@
         <script src="../../src/kendo.draganddrop.js"></script>
         <script src="../../src/kendo.slider.js"></script>
         <link rel="stylesheet" href="../qunit.css" />
-        <link type="text/css" href="../../styles/telerik.common.css" rel="stylesheet"/>
-        <link type="text/css" href="../../styles/telerik.vista.css" rel="stylesheet"/>
+        <link type="text/css" href="../../styles/kendo.common.css" rel="stylesheet"/>
+        <link type="text/css" href="../../styles/kendo.vista.css" rel="stylesheet"/>
     </head>
     <body>
 
@@ -248,37 +248,6 @@
                 equal(value, 0.5);
             });
 
-            test('roudWidths with 156px width and small step 1 must return 10 steps', function () {
-                var slider = newSlider({ val: 0, smallStep: 1, style: "width: 156px;" });
-
-                var getPixelSteps = slider._getPixelSteps();
-
-                equal(10, getPixelSteps.length);
-            });
-
-            test('roudWidths with 200px width and small step 1 must return 10 steps', function () {
-                var slider = newSlider({ val: 0, smallStep: 1, style: "width: 200px;" });
-
-                var getPixelSteps = slider._getPixelSteps();
-
-                equal(10, getPixelSteps.length);
-            });
-
-            test('roudWidths with 200px width and small step 2 must return 5 steps', function () {
-                var slider = newSlider({ val: 0, smallStep: 2, style: "width: 200px;" });
-
-                var getPixelSteps = slider._getPixelSteps();
-
-                equal(5, getPixelSteps.length);
-            });
-
-            test('roudWidths with 100px width and small step 2 must return 5 steps', function () {
-                var slider = newSlider({ val: 0, smallStep: 2, style: "width: 100px;" });
-
-                var getPixelSteps = slider._getPixelSteps();
-
-                equal(5, getPixelSteps.length);
-            });
         </script>
 
         <h1 id="qunit-header">kendo.ui.Slider Tests</h1>
@@ -289,4 +258,4 @@
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
     </body>
-</html> 
+</html>
