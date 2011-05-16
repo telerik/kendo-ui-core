@@ -63,7 +63,7 @@ var visitor = window.visitor,
        element.find("img")
            .hide()
            .bind("load", function() {
-               $(this).slideUp().fadeIn();
+               $(this).fadeIn();
            });
    }
 
@@ -82,6 +82,16 @@ var visitor = window.visitor,
        dataSource.query({page: 1, pageSize: 500});
    }
 
+   function setBigPhoto(src) {
+       $("#bigPhoto")
+           .fadeOut(function() {
+               $(this).attr("src", src)
+                   .bind("load", function() {
+                       $(this).fadeIn();
+                   });
+           });
+   }
+
    window.visitor = {
         showMostPopular: function() {
             $("#flatMostPopularPhotos").kendoListView({
@@ -93,7 +103,7 @@ var visitor = window.visitor,
                     displayImages(this.element);
                 },
                 change: function() {
-                    $("#bigPhoto").attr("src", this.selected().find("img").attr('src').replace("_s", ""));
+                    setBigPhoto(this.selected().find("img").attr('src').replace("_s", ""));
                 }
             });
         },
@@ -114,7 +124,8 @@ var visitor = window.visitor,
                     displayImages(this.element);
                 },
                 change: function() {
-                   $("#bigPhoto").attr("src", this.selected().find("img").attr('src').replace("_s", ""));
+                    alert(1);
+                   $("#bigPhoto").fadeOut("slow").attr("src", this.selected().find("img").attr('src').replace("_s", ""));
                 }
             });
             $("#mainPhotoGrid").kendoGrid({
