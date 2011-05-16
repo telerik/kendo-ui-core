@@ -1,5 +1,6 @@
 (function($, window) {
 var visitor = window.visitor,
+    slideshow = window.slideshow,
     IMAGESIZES = ["_s", "_t", "_m"],
     imageSize = IMAGESIZES[0],
     template = function(size) { return '<li alt="thumbnail"><img src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>' + size + '.jpg"></li>'; },
@@ -116,11 +117,13 @@ var visitor = window.visitor,
                 }
             });
         },
-        search: function() {
+        search: function() {            
             dataSource.query({page: 1, pageSize: 5});
             $("#flatMostPopularPhotos").hide();
             $("#flatSearchPhotos").hide();
             $("#mainTemplate").show();
+            $("#backButton").text("Back to most popular").data("currentView", "mainTemplate");
+            slideshow.init($("#flatSearchPhotos").data("kendoListView"));
         },
 
         initSearchResult: function () {
@@ -190,8 +193,8 @@ var visitor = window.visitor,
                 $("#mainPhotoStrip").show();
                 $("#slider").parent().show();
             });
-
-            $("#backButton").bind("click", function(){
+            
+            $("#backButton").bind("click", function(){                
                 var element = $(this),
                     view = element.data("currentView");
                 if(view === "flatMostPopularPhotos") {
@@ -200,6 +203,7 @@ var visitor = window.visitor,
                     $("#mainTemplate").show();
                     $("#flatMostPopularPhotos").hide();
                     element.text("Back to most popular");
+                    slideshow.init($("#flatSearchPhotos").data("kendoListView"));
                 }
                 else if(view === "mainTemplate"){
                     element.data("currentView", "flatMostPopularPhotos");
@@ -207,6 +211,7 @@ var visitor = window.visitor,
                     $("#mainTemplate").hide();
                     $("#flatMostPopularPhotos").show();
                     element.text("Back to search results");
+                    slideshow.init($("#flatMostPopularPhotos").data("kendoListView"));
                 }
             });
 
@@ -220,6 +225,11 @@ var visitor = window.visitor,
             this.thumbList.append(this.initSearchResult());
             this.thumbList.append(this.showMostPopular());
             $("#backButton").text("");
+            
+            slideshow.init($("#flatMostPopularPhotos").data("kendoListView"));
+            $("#viewslideshow").click(function() {
+                  slideshow.toggle();
+            });
         }
    };
 })(jQuery, window);
