@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>UI5.Chart Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <link href="../qunit.css" type="text/css" rel="stylesheet"/>
+    </head>
+    <body>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.chart.js"></script>
+        <script type="text/javascript">
+
+            var Chart = kendo.ui.Chart,
+                Box = Chart.Box,
+                chartBox = new Box(0, 0, 1000, 1000);
+
+            (function() {
+                var plotArea,
+                    axisY,
+                    axisX,
+                    series;
+
+                module("PlotArea", {
+                    setup: function() {
+                        plotArea = new Chart.PlotArea({
+                            series: [{
+                                name: "Value",
+                                type: "bar",
+                                data: [100, 200, 300]
+                            }]
+                        });
+
+                        axisY = plotArea.axisY;
+                        axisX = plotArea.axisX;
+                        series = plotArea.series[0];
+                    }
+                });
+
+                test("creates numeric Y-Axis", function() {
+                    ok(axisY instanceof Chart.NumericAxis);
+                });
+
+                test("creates category X-Axis", function() {
+                    ok(axisX instanceof Chart.CategoryAxis);
+                });
+
+                test("appends Y-Axis to children collection", function() {
+                    ok($.inArray(axisY, plotArea.children));
+                });
+
+                test("appends X-Axis to children collection", function() {
+                    ok($.inArray(axisX, plotArea.children));
+                });
+
+                test("aligns Y-Axis above X-Axis", function() {
+                    plotArea.updateLayout(chartBox);
+                    equal(axisY.box.y2, axisX.box.y1);
+                });
+
+                test("aligns X-Axis next to Y-Axis", function() {
+                    plotArea.updateLayout(chartBox);
+                    equal(axisX.box.x1, axisY.box.x2);
+                });
+
+                test("creates bar chart", function() {
+                    ok(series instanceof Chart.BarChart);
+                });
+
+                test("sets Y-Axis minimum to series minimum", function() {
+                    equal(plotArea._seriesMin, 100);
+                    equal(plotArea._seriesMax, 300);
+                });
+
+                test("aligns series box to axises", function() {
+                    plotArea.updateLayout(chartBox);
+                    same([series.box.x1, series.box.y1, series.box.x2, series.box.y2],
+                         [axisY.box.x2, chartBox.y1, chartBox.x2, axisX.box.y1]);
+                });
+            })();
+        </script>
+
+        <h1 id="qunit-header">kendo.chart</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+    </body>
+</html>
