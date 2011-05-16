@@ -336,7 +336,7 @@ header .i-help
     overflow:hidden;
     white-space:nowrap;
     vertical-align:middle;
-    outline: 0; /* Remove the focus in WebKit */
+    outline: 0; /* Remove the focus in WebKit */ 
 }
 
 #footer>a
