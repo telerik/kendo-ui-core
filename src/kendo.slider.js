@@ -14,7 +14,7 @@
 
         that.options = options = $.extend({}, that.options, options);
 
-        that._distance = options.maxValue - options.minValue;
+        that._distance = options.max - options.min;
         that._isHorizontal = options.orientation == "horizontal";
         that._position = that._isHorizontal ? "left" : "bottom";
         that._size = that._isHorizontal ? "width" : "height";
@@ -29,7 +29,7 @@
 
         that._maxSelection = that._trackDiv[that._size]();
 
-        var sizeBetweenTicks = that._maxSelection / ((options.maxValue - options.minValue) / options.smallStep);
+        var sizeBetweenTicks = that._maxSelection / ((options.max - options.min) / options.smallStep);
         var pixelWidths = that._calculateItemsWidth(Math.floor(that._distance / options.smallStep));
 
         if (that.options.tickPlacement != "none" && sizeBetweenTicks >= 2) {
@@ -55,8 +55,8 @@
             40: decreaseValue(options.smallStep), // down arrow
             39: increaseValue(options.smallStep), // right arrow
             38: increaseValue(options.smallStep), // up arrow
-            35: setValue(options.maxValue), // end
-            36: setValue(options.minValue), // home
+            35: setValue(options.max), // end
+            36: setValue(options.min), // home
             33: increaseValue(options.largeStep), // page up
             34: decreaseValue(options.largeStep)  // page down
         };
@@ -83,8 +83,8 @@
 
     var defaultOptions = {
         enabled: true,
-        minValue: 0,
-        maxValue: 10,
+        min: 0,
+        max: 10,
         smallStep: 1,
         largeStep: 5,
         orientation: "horizontal",
@@ -131,7 +131,7 @@
         var that = this,
             options = that.options,
             items = that.wrapper.find(".t-tick"),
-            titleNumber = options.minValue,
+            titleNumber = options.min,
             i = that._isHorizontal ? 0 : items.length - 1,
             limit = that._isHorizontal ? items.length : -1,
             increment = that._isHorizontal ? 1 : -1;
@@ -225,7 +225,7 @@
     function _calculateSteps (pixelWidths) {
         var that = this,
             options = that.options,
-            val = options.minValue,
+            val = options.min,
             selection = 0,
             itemsCount = pixelWidths.length;
             i = 1;
@@ -248,10 +248,10 @@
             i++;
         }
 
-        var lastItem = options.maxValue % options.smallStep == 0 ? itemsCount - 1 : itemsCount;
+        var lastItem = options.max % options.smallStep == 0 ? itemsCount - 1 : itemsCount;
 
         that._pixelStepsArray[lastItem] = that._maxSelection;
-        that._valuesArray[lastItem] = options.maxValue;
+        that._valuesArray[lastItem] = options.max;
     }
 
     function _getValueFromPosition (mousePosition, dragableArea) {
@@ -269,7 +269,7 @@
         }
 
         if (that._maxSelection - ((parseInt(that._maxSelection % step) - 3) / 2) < position) {
-            return options.maxValue;
+            return options.max;
         }
 
         position += halfStep;
@@ -281,7 +281,7 @@
             }
         }
 
-        return parseFloat((options.minValue + val).toFixed(3));
+        return parseFloat((options.min + val).toFixed(3));
     }
 
     function _getDragableArea () {
@@ -455,7 +455,7 @@
                 return options.val;
             }
 
-            if (val >= options.minValue && val <= options.maxValue) {
+            if (val >= options.min && val <= options.max) {
                 if (options.val != val) {
                     that.element.val(val);
                     options.val = val;
@@ -485,19 +485,19 @@
 
             val = parseFloat(parseFloat(val, 10).toFixed(3), 10);
             if (isNaN(val)) {
-                that._update(that.options.minValue);
+                that._update(that.options.min);
                 return;
             }
 
-            val = Math.max(val, that.options.minValue);
-            val = Math.min(val, that.options.maxValue);
+            val = Math.max(val, that.options.min);
+            val = Math.min(val, that.options.max);
             that._update(val);
         }
     });
 
     Slider.Selection = function (dragHandle, that, options) {
         function moveSelection (val) {
-            var selectionValue = val - options.minValue,
+            var selectionValue = val - options.min,
                 index = Math.ceil(selectionValue / options.smallStep),
                 selection = that._pixelStepsArray[index],
                 selectionDiv = that._trackDiv.find(".t-slider-selection"),
@@ -715,9 +715,9 @@
             if (that.dragableArea.startPoint < mousePosition.pageX && mousePosition.pageX < that.dragableArea.endPoint) {
                 val = that.owner._getValueFromPosition(mousePosition.pageX, that.dragableArea);
             } else if (mousePosition.pageX >= that.dragableArea.endPoint) {
-                val = that.options.maxValue;
+                val = that.options.max;
             } else {
-                val = that.options.minValue;
+                val = that.options.min;
             }
 
             return val;
@@ -730,9 +730,9 @@
             if (that.dragableArea.startPoint > mousePosition.pageY && mousePosition.pageY > that.dragableArea.endPoint) {
                 val = that.owner._getValueFromPosition(mousePosition.pageY, that.dragableArea);
             } else if (mousePosition.pageY <= that.dragableArea.endPoint) {
-                val = that.options.maxValue;
+                val = that.options.max;
             } else {
-                val = that.options.minValue;
+                val = that.options.min;
             }
 
             return val;
@@ -823,7 +823,7 @@
 
         that.options = options = $.extend({}, that.options, options);
 
-        that._distance = options.maxValue - options.minValue;
+        that._distance = options.max - options.min;
         that._isHorizontal = options.orientation == "horizontal";
         that._position = that._isHorizontal ? "left" : "bottom";
         that._size = that._isHorizontal ? "width" : "height";
@@ -838,7 +838,7 @@
 
         that._maxSelection = that._trackDiv[that._size]();
 
-        var sizeBetweenTicks = that._maxSelection / ((options.maxValue - options.minValue) / options.smallStep);
+        var sizeBetweenTicks = that._maxSelection / ((options.max - options.min) / options.smallStep);
         var pixelWidths = that._calculateItemsWidth(Math.floor(that._distance / options.smallStep));
 
         if (that.options.tickPlacement != "none" && sizeBetweenTicks >= 2) {
@@ -865,8 +865,8 @@
             40: decreaseValue(options.smallStep), // down arrow
             39: increaseValue(options.smallStep), // right arrow
             38: increaseValue(options.smallStep), // up arrow
-            35: setValue(options.maxValue), // end
-            36: setValue(options.minValue), // home
+            35: setValue(options.max), // end
+            36: setValue(options.min), // home
             33: increaseValue(options.largeStep), // page up
             34: decreaseValue(options.largeStep)  // page down
         };
@@ -1004,8 +1004,8 @@
                 selectionEnd = parseFloat(parseFloat(arguments[1], 10).toFixed(3), 10);
             }
 
-            if (selectionStart >= options.minValue && selectionStart <= options.maxValue
-            && selectionEnd >= options.minValue && selectionEnd <= options.maxValue && selectionStart <= selectionEnd) {
+            if (selectionStart >= options.min && selectionStart <= options.max
+            && selectionEnd >= options.min && selectionEnd <= options.max && selectionStart <= selectionEnd) {
                 if (options.selectionStart != selectionStart || options.selectionEnd != selectionEnd) {
                     that.element.find("input")
                                 .eq(0).val(selectionStart)
@@ -1025,7 +1025,7 @@
 
             that.trigger("moveSelection", { values: [options.selectionStart, options.selectionEnd] });
 
-            if (options.selectionStart == options.maxValue && options.selectionEnd == options.maxValue) {
+            if (options.selectionStart == options.max && options.selectionEnd == options.max) {
                 that._setZIndex("leftHandle");
             }
         },
@@ -1033,13 +1033,13 @@
         _setValueInRange: function (selectionStart, selectionEnd) {
             var options = this.options;
 
-            selectionStart = Math.max(selectionStart, options.minValue);
-            selectionStart = Math.min(selectionStart, options.maxValue);
+            selectionStart = Math.max(selectionStart, options.min);
+            selectionStart = Math.min(selectionStart, options.max);
 
-            selectionEnd = Math.max(selectionEnd, options.minValue);
-            selectionEnd = Math.min(selectionEnd, options.maxValue);
+            selectionEnd = Math.max(selectionEnd, options.min);
+            selectionEnd = Math.min(selectionEnd, options.max);
 
-            if (options.selectionStart == options.maxValue && options.slectionEnd == options.maxValue) {
+            if (options.selectionStart == options.max && options.slectionEnd == options.max) {
                 that._setZIndex("leftHandle");
             }
 
@@ -1072,8 +1072,8 @@
 
     RangeSlider.Selection = function (dragHandles, that, options) {
         function moveSelection(values) {
-            var selectionStartValue = values[0] - options.minValue,
-                selectionEndValue = values[1] - options.minValue,
+            var selectionStartValue = values[0] - options.min,
+                selectionEndValue = values[1] - options.min,
                 selectionStartIndex = Math.ceil(selectionStartValue / options.smallStep),
                 selectionEndIndex = Math.ceil(selectionEndValue / options.smallStep),
                 selectionStart = that._pixelStepsArray[selectionStartIndex],
