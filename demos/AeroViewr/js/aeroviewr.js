@@ -62,6 +62,7 @@
             }),
             tagHotListDataSource = new kendo.data.DataSource({
                 serverFiltering: true,
+                pageSize: 10,
                 transport: {
                     read: {
                         url: flickr.service,
