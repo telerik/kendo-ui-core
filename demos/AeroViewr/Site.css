@@ -64,7 +64,7 @@ fieldset
 
 /* large screen layout - start */
 
-@media screen and (min-height:400px) {
+@media screen and (min-height:380px) {
 
 html
 {
@@ -96,21 +96,40 @@ section#footer
 #photoWrap
 {
     position:absolute;
-    top:0;
+    top:45px;
     width:100%;
-    min-height:100%;
+    bottom: 145px;
     z-index:1;
     text-align:center;
+
+    display: -webkit-box;
+    -webkit-box-orient: horizontal;
+    -webkit-box-pack: center;
+    -webkit-box-align: center;
+
+    display: -moz-box;
+    -moz-box-orient: horizontal;
+    -moz-box-pack: center;
+    -moz-box-align: center;
+
+    display: box;
+    box-orient: horizontal;
+    box-pack: center;
+    box-align: center;
+}
+
+#bigPhoto
+{
+    position: relative;
 }
 
 #overlay
 {
     position:absolute;
-    top:-50%;
+    top:0;
     left:0;
     width:100%;
-    height:200%;
-    z-index:1;
+    height:100%;
     background:rgba(0,0,0,.5);
 }
 
@@ -148,15 +167,22 @@ section#footer
 
 } /* end @media screen and (min-height:470px) */
 
-@media screen and (min-height:900px)
+.loading
 {
-
-#photoWrap
-{
-    top:50%;
-    margin-top:-25%;
-}
-
+    z-index: 2;
+    width: 100%;
+    vertical-align: middle;
+    left: 0;
+    height: 50px;
+    position: absolute;
+    top: 50%;
+    margin-top: -35px;
+    background: black;
+    border: 10px solid #333;
+    border-width: 10px 0;
+    font: 30px/50px bold Arial, Helvetica, sans-serif;
+    text-align: center;
+    opacity: .5;
 }
 
 @media screen and (min-height:600px) {
@@ -383,6 +409,7 @@ header .i-help
     height:75px;
     padding:8px;
     overflow:hidden;
+    white-space: nowrap;
     vertical-align:middle;
     outline: 0; /* Remove the focus in WebKit */ 
 }

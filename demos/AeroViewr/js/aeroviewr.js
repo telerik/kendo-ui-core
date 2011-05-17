@@ -57,5 +57,14 @@
               visitor.initVisitor();
             }
         });
+        
+        if (kendo.support.touch) {
+            $(document).bind('touchmove', function (e) { // Disable viewport scrolling
+                    e.preventDefault();
+            });
+
+            window.scrollTo(0, 1);
+        }
+
     });
 })(jQuery);
