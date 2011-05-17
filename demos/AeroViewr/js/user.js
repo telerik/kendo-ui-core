@@ -155,6 +155,8 @@
                     }
                     
                     $("#mainUserWrap").show();
+                    $("#overlay").fadeIn();
+                    $("#exifButton").fadeOut();
                     setPhotosDataSource.page(1);
                 }
             });

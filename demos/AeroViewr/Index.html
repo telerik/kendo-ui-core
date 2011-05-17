@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta content="minimum-scale=1, maximum-scale=1, user-scalable=no, width=device-width" name="viewport" />
@@ -53,13 +53,13 @@
         </header>
 
         <section id="photoWrap">
-            <div id="overlay"><!-- --></div>
             <img id="bigPhoto" alt="big photo" />
+            <div id="overlay" style="display:none;"><!-- --></div>
         </section>
 
         <section id="main">
             <!-- <h1>Nature Set <span class="by-user">by <a href="#"><em>SomeUser</em></a></span></h1> -->
-            <h1 class="setTitle">Always have a heading</h1>
+            <h1 class="setTitle">Always have a heading, except when viewing a photo</h1>
             <div id="mainTemplate" style="display:none">
                 <ul class="thumbViews"><li><button id="grid" class="p-border p-icon i-gridview">Grid layout</button></li><li><button id="listView" class="p-border p-icon i-tileview">ListView layout</button></li></ul>
                 <ol class="paging"></ol>
@@ -84,16 +84,7 @@
             <div id="uploadWrap" style="display:none">
                 <h1 class="uploadTitle">You must <a href="#">Sign In</a> to upload photos.</h1>
             </div>
-            <div class="p-border-big exifInfo"><h2></h2><span class="p-border p-icon i-help"></span>
-                <span class="p-icon i-cancel"></span>
-                <dl class="innerHidden floatWrap">
-                    <dt>Taken on</dt><dd>some date</dd>
-                    <dt>Posted to Flickr</dt><dd>some date</dd>
-                    <dt>Description</dt><dd>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ornare ante quis elit lobortis ut semper est pharetra. Vestibulum a erat nisl, non faucibus dolor. Phasellus nec metus urna. Proin luctus, nunc nec interdum auctor, risus velit volutpat ligula, eu feugiat eros urna at est.</dd>
-                    <dt>Camera</dt><dd>Canon EOS 500D</dd>
-                    <dt>Tags</dt><dd><ul><li><a href="#">tag 1</a></li><li><a href="#">tag 2</a></li><li><a href="#">tag 3</a></li><li><a href="#">tag 4</a></li><li><a href="#">tag 5</a></li><li><a href="#">tag 6</a></li></ul></dd>
-                </dl>
-            </div>
+            <div id="exifButton" class="p-border-big exifInfo" title="view photo details"><h2>&nbsp;</h2><span class="p-border p-icon i-help"></span></div>
         </section>
 
         <section id="footer">
