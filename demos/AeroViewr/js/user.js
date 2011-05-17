@@ -4,10 +4,14 @@
         slideshow = window.slideshow,
         data = window.data,
         photosInSet = false,
-        IMAGESIZES = ["_s", "_t", "_m"],
+        IMAGESIZES = [
+            {suffix: "_s", size: 75},
+            {suffix: "_t", size: 100},
+            {suffix: "_m", size: 240},            
+        ],
         imageSize = IMAGESIZES[0],
         PAGESIZE = 500,
-        template = function(size) { return '<li><img alt="<%= title %>" src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>' + size + '.jpg"></li>'; },
+        template = function(option) { return '<li style="width:' + option.size + 'px;height:' + option.size + 'px"><img alt="<%= title %>" src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>' + option.suffix + '.jpg"></li>'; },
         setTemplate = '<li data-setid="<%=id%>" alt="thumbnail"><img width="75" height="75" src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>_s.jpg"></li>',
         liveUrl = "http://localhost/kendo/demos/aeroviewr/index.html";
 
@@ -83,9 +87,9 @@
        setPhotosDataSource.query({page: 1, pageSize: PAGESIZE});
    }
 
-   function setBigPhoto(img) {
+   function setBigPhoto(img) {       
        var bigPhoto = $("#bigPhoto"),
-           src = img.attr("src").replace("_s", ""),
+           src = img.attr("src").replace("_s", "").replace(imageSize.suffix,""),
            loader = $("img.loader");
 
         $(".exifInfo").find("h2").text(img.attr("alt") || "No Title").end().find(".i-help").attr("data-photoid", img.attr("data-photoid"));
@@ -199,7 +203,8 @@
                 largeStep: 1,
                 change: function() {
                     imageSize = IMAGESIZES[this.value()];
-                    $("#mainSetPhotoStrip").data("kendoListView").template = kendo.template(template(imageSize));
+                    var t = template(imageSize);                    
+                    $("#mainSetPhotoStrip").data("kendoListView").template = kendo.template(t);
                     setPhotosDataSource.read();
                 }
             })
@@ -251,6 +256,13 @@
                 $("#setPhotoSize").parent().show();
                 $("#mainSetPhotoGrid").hide();
                 setPhotosDataSource.query({page: 1, pageSize: 20});
+            });
+
+            $(".bottomLink").click(function() {
+                slideshow.stop();
+                $("#flatPhotoStrip").hide();                
+                $("#flatSetsStrip").show();
+                $("#mainUserWrap").show();
             });
         }
     };
