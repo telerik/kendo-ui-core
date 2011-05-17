@@ -643,21 +643,25 @@ header .i-help
 
 .paging>li>a
 {
+    min-width:35px;
+    height:35px;
     border:0 solid rgba(255,255,255,.3);
     margin:0 2px 0 0;
-    padding:6px 10px;
     color:rgba(255,255,255,.5);
+    text-align:center;
+    line-height:33px;
 
-	-moz-border-radius:12px;
-	-webkit-border-radius:12px;
-	border-radius:12px;
+	-moz-border-radius:18px;
+	-webkit-border-radius:18px;
+	border-radius:18px;
 }
 
 .paging>li>a:hover,
 .paging>li>a.currentPage
 {
+    min-width:33px;
+    height:33px;
     border-width:1px;
-    padding:5px 9px;
     background:rgba(0,0,0,.6);
     color:rgba(255,255,255,1);
 }
