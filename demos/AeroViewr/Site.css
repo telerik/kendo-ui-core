@@ -150,6 +150,9 @@ section#footer
     width:100%;
     padding:45px 108px 171px;
     z-index:2;
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+    box-sizing:border-box;
 }
 
 #main .exifInfo
@@ -597,7 +600,7 @@ header .i-help
 .thumbViews
 {
     position:absolute;
-    right:3.4em;
+    right:120px;
     top:8em;
 }
 
@@ -966,8 +969,9 @@ header .i-help
     font-weight:normal;
     white-space:nowrap;
     max-width:16em;
-    overflow-x:hidden;
+    overflow:hidden;
     text-overflow:ellipsis;
+    vertical-align:middle;
 }
 
 .exifInfo h2 em
@@ -980,7 +984,6 @@ header .i-help
 
 .exifInfo .i-help
 {
-    margin:-8px 0 0;
     padding:5px;
     background-position:-37px -3px;
 }
@@ -1496,7 +1499,7 @@ div.t-slider
 div.t-slider
 {
     position: absolute;
-    right:3.4em;
+    right:120px;
     top:13em;
 }
 
