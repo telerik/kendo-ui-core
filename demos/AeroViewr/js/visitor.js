@@ -3,7 +3,7 @@ var visitor = window.visitor,
     slideshow = window.slideshow,
     IMAGESIZES = ["_s", "_t", "_m"],
     imageSize = IMAGESIZES[0],
-    template = function(size) { return '<li alt="thumbnail"><img src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>' + size + '.jpg"></li>'; },
+    template = function(size) { return '<li><img alt="<%= title %>" src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>' + size + '.jpg"></li>'; },
     dataSource = new kendo.data.DataSource({
         page: 1,
         pageSize: 5,
@@ -73,36 +73,39 @@ var visitor = window.visitor,
 
        ui.element.parent().hide();
 
-       setBigPhoto($("img:first", ui.selectable.value()).attr("src").replace("_s", ""));
+       setBigPhoto($("img:first", ui.selectable.value()));
 
        dataSource.query({page: 1, pageSize: 500});
    }
 
-   function setBigPhoto(src) {
-       var bigPhoto = $("#bigPhoto");
-       var loader = $("img.loader");
+   function setBigPhoto(img) {
+       var bigPhoto = $("#bigPhoto"),
+           src = img.attr("src").replace("_s", ""),
+           loader = $("img.loader");
 
-       if (loader[0]) {
-           loader.remove();
-       } else {
-           bigPhoto.after("<div class='loading'>Loading ...</div>");
-       }
+        $(".exifInfo").find("h2").text(img.attr("alt") || "No Title");
 
-       loader = $("<img class='loader' />")
-           .hide()
-           .appendTo(document.body)
-           .attr("src", src)
-           .bind("load", function() {
-               loader.remove();
-               bigPhoto.next(".loading")
-               .remove()
-               .end()
-               .stop(true, true)
-               .fadeOut(function() {
-                   bigPhoto.attr("src", src);
-               })
-               .fadeIn();
-           });
+        if (loader[0]) {
+            loader.remove();
+        } else {
+            bigPhoto.after("<div class='loading'>Loading ...</div>");
+        }
+
+        loader = $("<img class='loader' />")
+        .hide()
+        .appendTo(document.body)
+        .attr("src", src)
+        .bind("load", function() {
+            loader.remove();
+            bigPhoto.next(".loading")
+            .remove()
+            .end()
+            .stop(true, true)
+            .fadeOut(function() {
+                bigPhoto.attr("src", src);
+            })
+            .fadeIn();
+        });
    }
 
    window.visitor = {
@@ -116,7 +119,7 @@ var visitor = window.visitor,
                     displayImages(this.element);
                 },
                 change: function() {
-                    setBigPhoto(this.selected().find("img").attr('src').replace("_s", ""));
+                    setBigPhoto(this.selected().find("img"));
                 }
             }));
         },
