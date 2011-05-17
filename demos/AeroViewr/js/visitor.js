@@ -56,7 +56,6 @@ var visitor = window.visitor,
 
        ui.element.parent().hide();
        $("#overlay").fadeOut();
-       $("#exifButton").fadeIn();
 
        setBigPhoto(ui.selectable.value().find("img"));
 
@@ -68,20 +67,16 @@ var visitor = window.visitor,
    function setBigPhoto(img) {
        var bigPhoto = $("#bigPhoto"),
            src = img.attr("src").replace("_s", ""),
-           loader = $("img.loader");
+           loader = $("img.loader"),
+           exifInfo = $(".exifInfo");
 
-        $(".exifInfo")
-            .find("h2")
-            .text(img.attr("alt") || "No Title")
-            .end()
-            .find(".i-help")
-            .attr("data-photoid", img.attr("data-photoid"));
 
         if (loader[0]) {
             loader.remove();
         } else {
             loadingTimeout = setTimeout(function() {
                 bigPhoto.after("<div class='loading'>Loading ...</div>");
+                exifInfo.fadeOut();
             }, 100);
         }
 
@@ -97,9 +92,18 @@ var visitor = window.visitor,
                 bigPhoto.next(".loading")
                     .remove()
                     .end()
+                    .add(exifInfo)
                     .stop(true, true)
                     .fadeOut(function() {
-                        bigPhoto.attr("src", src);
+                        if (this == exifInfo[0]) {
+                            exifInfo.find("h2")
+                               .text(img.attr("alt") || "No Title")
+                               .end()
+                               .find(".i-help")
+                               .attr("data-photoid", img.attr("data-photoid"));
+                        } else {
+                            bigPhoto.attr("src", src);
+                        }
                     })
                     .fadeIn();
             });
