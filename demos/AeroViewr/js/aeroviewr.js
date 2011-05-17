@@ -29,7 +29,32 @@
             }
         });         
 
-        $('.i-help').click(function (e) {
+        $('.exifInfo .i-help').click(function (e) {
+            flickr.getPhotoInfo($(this).attr("data-photoid"), function(result) {
+                var photo = result.photo;
+
+                $(kendo.template(
+                '<dl class="floatWrap">\
+                    <dt>Taken on</dt><dd><%= taken %></dd>\
+                    <dt>Posted to Flickr</dt><dd><%= posted %></dd>\
+                    <dt>Description</dt><dd><%= description %></dd>\
+                    <dt>Author</dt><dd><%= author %></dd>\
+                    <dt>Location</dt><dd><%= location %></dd>\
+                    <dt>Tags</dt><dd><ul>\
+                    <% $.each(tags, function(index, tag) { %> \
+                       <li><%= tag %></li> \
+                    <% }); %> \
+                    </ul></dd>\
+                </dl>'
+                )({
+                    posted: kendo.toString(new Date(parseInt(photo.dates.posted) * 1000), "yyyy-MM-dd hh:mm:ss"),
+                    taken: photo.dates.taken,
+                    description: photo.description._content,
+                    author: photo.owner.realname,
+                    tags: $.map(photo.tags.tag, function(tag) { return tag._content; } ),
+                    location: photo.owner.location
+                })).kendoPopup().data("kendoPopup").open();
+            });
             e.preventDefault();
         });
 
