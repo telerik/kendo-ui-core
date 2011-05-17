@@ -144,7 +144,10 @@ section#footer
 
 #main
 {
-    position:relative;
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
     padding:45px 108px 171px;
     z-index:2;
 }
@@ -961,6 +964,10 @@ header .i-help
     margin:0 40px 0 0;
     font-size:1.7em;
     font-weight:normal;
+    white-space:nowrap;
+    max-width:16em;
+    overflow:hidden;
+    text-overflow:ellipsis;
 }
 
 .exifInfo h2 em
