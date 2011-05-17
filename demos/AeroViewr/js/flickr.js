@@ -142,8 +142,11 @@
                 format: "json",
                 nojsoncallback: 1
             }
-            var url = this.service + "?" + $.param(params);
-            $.post(url, null, callback);
+            $.ajax( {
+                url: this.service + "?" + $.param(params),
+                dataType: "json",
+                success: callback
+            });
         },
         movePhotoToSet: function(id, photo, callback) {
             var url = this.getAuthMethodUrl(this.methods.movePhotoToSet, {photoset_id: id, photo_id: photo});
