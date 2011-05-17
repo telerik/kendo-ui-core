@@ -2,25 +2,20 @@
     var flickr = window.flickr,
         upload,
         slideshow = window.slideshow,
+        data = window.data,
         photosInSet = false,
         IMAGESIZES = ["_s", "_t", "_m"],
         imageSize = IMAGESIZES[0],
+        PAGESIZE = 500,
         template = function(size) { return '<li><img alt="<%= title %>" src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>' + size + '.jpg"></li>'; },
         setTemplate = '<li data-setid="<%=id%>" alt="thumbnail"><img width="75" height="75" src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>_s.jpg"></li>',
         liveUrl = "http://localhost/kendo/demos/aeroviewr/index.html";
 
-    var setsDataSource = new kendo.data.DataSource({
-        transport: {
-            read: {
-                url: flickr.service,
-                cache: true,
-                dataType: "json"
-            },
-            cache: "inmemory",
-            dialect: {
-                read: function(data) {
-                    return flickr.getSetsParams({});
-                }
+    var setsDataSource = data.dataSource({
+        cache: "inmemory",
+        dialect: {
+            read: function(data) {
+                return flickr.getSetsParams({});
             }
         },
         reader: {
@@ -34,26 +29,18 @@
             }
         }
     }),
-    setPhotosDataSource = new kendo.data.DataSource({
+    setPhotosDataSource = data.dataSource({
         serverSorting: true,
         pageSize: 10,
-        transport: {
-            read: {
-                url: flickr.service,
-                cache: true,
-                dataType: "json"
-            },
-            cache: "localstorage",
-            dialect: {
-                read: function(data) {
-                    var params = { extras: "owner_name,tags", per_page: 500 };
-                    if(photosInSet) {
-                        params.photoset_id = photoSetId();
-                        return flickr.getInSetParams(params);
-                    }
-                    else {
-                        return flickr.getNotInSetParams(params);
-                    }
+        dialect: {
+            read: function(data) {
+                var params = { extras: "owner_name,tags", per_page: PAGESIZE };
+                if(photosInSet) {
+                    params.photoset_id = photoSetId();
+                    return flickr.getInSetParams(params);
+                }
+                else {
+                    return flickr.getNotInSetParams(params);
                 }
             }
         },
@@ -66,9 +53,9 @@
             },
             total: function(result) {
                 if(photosInSet) {
-                    return Math.min(result.photoset.total, 500);
+                    return Math.min(result.photoset.total, PAGESIZE);
                 }
-                return Math.min(result.photos.total, 500);
+                return Math.min(result.photos.total, PAGESIZE);
             }
         }
     }),
@@ -92,8 +79,8 @@
        ui.element.parent().hide();
 
        setBigPhoto($("img:first", ui.selectable.value()));
-       
-       setPhotosDataSource.query({page: 1, pageSize: 500});
+
+       setPhotosDataSource.query({page: 1, pageSize: PAGESIZE});
    }
 
    function setBigPhoto(img) {
@@ -136,7 +123,7 @@
         },
         initFlatSetsStrip: function() {
             $("#flatSetsStrip").kendoListView({
-                dataSource: setsDataSource,                
+                dataSource: setsDataSource,
                 template: setTemplate,
                 dataBound: function () {
                     this.element
@@ -153,7 +140,7 @@
                     } else {
                         photosInSet = true;
                     }
-                    
+
                     $("#mainUserWrap").show();
                     $("#overlay").fadeIn();
                     $("#exifButton").fadeOut();
@@ -192,14 +179,14 @@
                 dataBound: function() {
                     displayImages(this.element);
                 }
-            });            
+            });
         },
-        initPhotoStrip: function() {            
+        initPhotoStrip: function() {
             $("#flatPhotoStrip").kendoListView({
                 dataSource: setPhotosDataSource,
                 pageable: $(".paging").data("kendoPager"),
                 template: template(imageSize),
-                change: function () {                    
+                change: function () {
                     setBigPhoto($("img:first", this.selectable.value()));
                 }
             }).hide();

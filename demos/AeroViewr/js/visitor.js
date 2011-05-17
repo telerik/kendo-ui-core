@@ -1,63 +1,46 @@
 (function($, window) {
 var visitor = window.visitor,
     slideshow = window.slideshow,
+    data = window.data,
     IMAGESIZES = ["_s", "_t", "_m"],
     imageSize = IMAGESIZES[0],
+    PAGESIZE = 500,
     template = function(size) { return '<li><img data-photoid="<%= id %>" alt="<%= title %>" src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>' + size + '.jpg"></li>'; },
-    dataSource = new kendo.data.DataSource({
-        page: 1,
+    EXTRAS = "owner_name,tags",
+    reader = {
+        data: function(result) {
+            return result.photos.photo;
+        },
+        total: function(result) {
+            return Math.min(result.photos.total, PAGESIZE);
+        }
+    },
+    dataSource = data.dataSource({
         pageSize: 5,
         serverSorting: true,
-        transport: {
-            read: {
-                url: flickr.service,
-                cache: true,
-                dataType: "json"
-            },
-            cache: "localstorage",
-            dialect: {
-                read: function(data) {
-                    var params = {
-                        text: $("#searchBox").val(),
-                        extras: "owner_name,tags",
-                        per_page: 500
-                    };
-                    return flickr.searchParams(params);
-                }
+        dialect: {
+            read: function(data) {
+                var params = {
+                    text: $("#searchBox").val(),
+                    extras: EXTRAS,
+                    per_page: PAGESIZE
+                };
+                return flickr.searchParams(params);
             }
         },
-        reader: {
-            data: function(result) {
-                return result.photos.photo;
-            },
-            total: function(result) {
-                return Math.min(result.photos.total, 500);
-            }
-        }
+        reader: reader
     }),
-    mostPopularDataSource = new kendo.data.DataSource({
-        transport: {
-            read: {
-                url: flickr.service,
-                cache: true,
-                dataType: "json"
-            },
-            cache: "localstorage",
-            dialect: {
-                read: function(data) {
-                    var params = {
-                        extras: "owner_name,tags",
-                        per_page: 100
-                    };
-                    return flickr.mostPopularParams(params);
-                }
+    mostPopularDataSource = data.dataSource({
+        dialect: {
+            read: function(data) {
+                var params = {
+                    extras: EXTRAS,
+                    per_page: 100
+                };
+                return flickr.mostPopularParams(params);
             }
         },
-        reader: {
-            data: function(result) {
-                return result.photos.photo;
-            }
-        }
+        reader: reader
     });
 
    function displayImages(element) {
@@ -77,7 +60,7 @@ var visitor = window.visitor,
 
        setBigPhoto($("img:first", ui.selectable.value()));
 
-       dataSource.query({page: 1, pageSize: 500});
+       dataSource.query({page: 1, pageSize: PAGESIZE});
    }
 
    function setBigPhoto(img) {
