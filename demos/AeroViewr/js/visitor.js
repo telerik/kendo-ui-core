@@ -73,33 +73,36 @@ var visitor = window.visitor,
 
        ui.element.parent().hide();
 
-       $("#bigPhoto")
-           .fadeOut("slow")
-           .attr("src", $("img:first", ui.selectable.value()).attr("src").replace("_s", ""))
-           .bind("load", function (e) {
-               $(e.target).hide().fadeIn("medium");
-           });
+       showSelectedPhoto($("img:first", ui.selectable.value()).attr("src").replace("_s", ""));
 
        dataSource.query({page: 1, pageSize: 500});
    }
 
    function setBigPhoto(src) {
-       var loading = $('<div class="loading">Loading ... </div>');
+       var bigPhoto = $("#bigPhoto");
+       var loader = $("img.loader");
 
-       $("#bigPhoto").after(loading);
+       if (loader[0]) {
+           loader.remove();
+       } else {
+           bigPhoto.after("<div class='loading'>Loading ...</div>");
+       }
 
-       var loader = $("<img />")
-                   .hide()
-                   .appendTo(document.body)
-                   .attr("src", src)
-                   .bind("load", function() {
-                       $("#bigPhoto")
-                       .fadeOut(function() {
-                           $(this).attr("src", src).fadeIn();
-                           loader.remove();
-                       })
-                       .next().remove();
-                   });
+       loader = $("<img class='loader' />")
+           .hide()
+           .appendTo(document.body)
+           .attr("src", src)
+           .bind("load", function() {
+               loader.remove();
+               bigPhoto.next(".loading")
+               .remove()
+               .end()
+               .stop(true, true)
+               .fadeOut(function() {
+                   bigPhoto.attr("src", src);
+               })
+               .fadeIn();
+           });
    }
 
    window.visitor = {
