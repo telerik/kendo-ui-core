@@ -5,7 +5,7 @@
         IMAGESIZES = ["_s", "_t", "_m"],
         imageSize = IMAGESIZES[0],
         template = function(size) { return '<li alt="thumbnail"><img src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>' + size + '.jpg"></li>'; },
-        setTemplate = '<li data-set="<%=id%>" alt="thumbnail"><img width="75" height="75" src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>_s.jpg"></li>',
+        setTemplate = '<li data-setid="<%=id%>" alt="thumbnail"><img width="75" height="75" src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>_s.jpg"></li>',
         liveUrl = "http://localhost/kendo/demos/aeroviewr/index.html";
 
     $(document).ready(function () {
@@ -20,7 +20,7 @@
                        cache: true,
                        dataType: "json"
                    },
-                   cache: "localstorage",
+                   cache: "inmemory",
                    dialect: {
                        read: function(data) {
                            return flickr.getSetsParams({});
@@ -86,30 +86,53 @@
                 }
             }),
             inSetDataSource = new kendo.data.DataSource({
-               transport: {
-                   read: {
-                       url: flickr.service,
-                       cache: true,                       
-                       dataType: "json"
-                   },    
-                   cache: "inmemory",               
-                   dialect: {
-                       read: function(data) {
-                           return flickr.getInSetParams({extras: "owner_name,tags", per_page: 500, photoset_id: photoSetId()});
-                       }
-                   }
+                transport: {
+                    read: {
+                        url: flickr.service,                     
+                        dataType: "json"
+                    },                                
+                    dialect: {
+                        read: function(data) {
+                            var params = flickr.getInSetParams({extras: "owner_name,tags", per_page: 500, photoset_id: photoSetId()});
+                            return params;
+                        }
+                    }
                 },
                 reader: {
-                    data: function(result) {                        
-                        return result.photoset;
+                    data: function(result) {                                                        
+                        return result.photoset.photo;
                     },
                     total: function(result) {                        
                         return Math.min(result.photoset.total, 500);
                     }
                 }
             }),
-            photoSetId = function() {               
-                return flatSetsStrip.data("kendoListView").selected().data("set");
+            photoSetId = function() {                                   
+                return flatSetsStrip.data("kendoListView").selected().attr("data-setid");
+            },
+            buildMainInSetPhotoStrip = function() {
+                mainInSetPhotoStrip.kendoListView({                                    
+                    template: template(imageSize),
+                    dataSource: inSetDataSource
+                })
+                .hide()
+                .data("kendoListView")
+                .bind("change", function () {
+                    $("#bigPhoto").fadeOut("slow")
+                    .attr("src", $("img:first", this.selected()).attr("src").replace(imageSize, ""))
+                    .bind("load", function (e) {
+                        $(e.target).hide().fadeIn("medium");
+                    });
+                })
+                .bind("dataBound", function () {
+                    mainInSetPhotoStrip.show().find("img").bind("load", function () {
+                        $(this).css("display", "block")
+                                .css("marginLeft", ~~($(this).width() / 2))
+                                .animate({ marginLeft: 0 }, 500)
+                                .parent()
+                                .css("overflow", "hidden").animate({ opacity: 1 }, 1000);
+                    });
+                });   
             };
         
         $('.i-help').click(function (e) {
@@ -159,34 +182,11 @@
                         if(selected.is(this.element.find("li:first"))) {
                             mainNotInSetPhotoStrip.show();
                         }
-                        else {    
-                            
-                            if(!mainInSetPhotoStrip.data("kendoListView")) {
-//                                mainInSetPhotoStrip.kendoListView({                                    
-//                                    template: template(imageSize),
-//                                    dataSource: inSetDataSource
-//                                })
-//                                .hide()
-//                                .data("kendoListView")
-//                                .bind("change", function () {
-//                                    $("#bigPhoto").fadeOut("slow")
-//                                    .attr("src", $("img:first", this.selected()).attr("src").replace(imageSize, ""))
-//                                    .bind("load", function (e) {
-//                                        $(e.target).hide().fadeIn("medium");
-//                                    });
-//                                })
-//                                .bind("dataBound", function () {
-//                                    mainInSetPhotoStrip.show().find("img").bind("load", function () {
-//                                        $(this).css("display", "block")
-//                                                .css("marginLeft", ~~($(this).width() / 2))
-//                                                .animate({ marginLeft: 0 }, 500)
-//                                                .parent()
-//                                                .css("overflow", "hidden").animate({ opacity: 1 }, 1000);
-//                                    });
-//                                });                                
+                        else {                                
+                            if(!mainInSetPhotoStrip.data("kendoListView")) {                            
+                                buildMainInSetPhotoStrip();
                             }
-
-                            mainNotInSetPhotoStrip.show();
+                            mainInSetPhotoStrip.show();
                         }
                     }
                 });
