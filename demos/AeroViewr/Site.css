@@ -64,8 +64,6 @@ fieldset
 
 /* large screen layout - start */
 
-@media screen and (min-height:380px) {
-
 html
 {
     overflow:hidden;
@@ -164,19 +162,18 @@ section#footer
 {
     position:absolute;
     top:40px;
+    width: 80px;
 }
 
 #viewslideshow
 {
-    left:26px;
+    left:16px;
 }
 
 #uploadphotos
 {
-    right:26px;
+    right:16px;
 }
-
-} /* end @media screen and (min-height:470px) */
 
 .loading
 {
@@ -402,7 +399,7 @@ header .i-help
 {
     position:relative;
     bottom:0;
-    height:146px;
+    height:144px;
     background:0 -120px repeat-x url(img/gradients.png);
 }
 
