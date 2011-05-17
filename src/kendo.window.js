@@ -17,12 +17,12 @@
         return url && !(/^([a-z]+:)?\/\//i).test(url);
     }
 
-    function fixIE6Sizing(element) {
+    function fixIE6Sizing(wrapper) {
         if ($.browser.msie && $.browser.version < 7) {
-            element
-                .find(".t-resize-e,.t-resize-w").css("height", element.height()).end()
-                .find(".t-resize-n,.t-resize-s").css("width", element.width()).end()
-                .find(".t-overlay").css({ width: element.width(), height: element.height() });
+            wrapper
+                .find(".t-resize-e,.t-resize-w").css("height", wrapper.height()).end()
+                .find(".t-resize-n,.t-resize-s").css("width", wrapper.width()).end()
+                .find(".t-overlay").css({ width: wrapper.width(), height: wrapper.height() });
         }
     }
 
@@ -31,87 +31,88 @@
         Component.apply(that, arguments);
         that.options = options = $.extend({}, that.options, options);
 
-        if (!that.element.is(".t-window")) {
-            that.element.addClass("t-widget t-window");
+        if (!that.element.is(".t-content")) {
+            that.element.addClass("t-window-content t-content");
             Window.create(that.element, options);
+            that.wrapper = that.element.closest(".t-window");
 
-            var titleBar = that.element.find(".t-window-titlebar");
+            var titleBar = that.wrapper.find(".t-window-titlebar");
             titleBar.css("margin-top", -titleBar.outerHeight());
 
-            that.element.css("padding-top", titleBar.outerHeight());
+            that.wrapper.css("padding-top", titleBar.outerHeight());
 
             if(options.width) {
-                that.element.width(options.width);
+                that.wrapper.width(options.width);
             }
 
             if (options.htight) {
-                that.element.height(options.height)
+                that.wrapper.height(options.height)
             }
         }
 
-        if (!that.element.parent().is("body")) {
+        if (!that.wrapper.parent().is("body")) {
             var offset;
 
-            if (that.element.is(":visible")) {
-                offset = that.element.offset();
-                that.element.css({ top: offset.top, left: offset.left });
+            if (that.wrapper.is(":visible")) {
+                offset = that.wrapper.offset();
+                that.wrapper.css({ top: offset.top, left: offset.left });
             } else {
-                that.element.css({ visibility: "hidden", display: "" });
-                offset = that.element.offset();
-                that.element.css({ top: offset.top, left: offset.left })
+                that.wrapper.css({ visibility: "hidden", display: "" });
+                offset = that.wrapper.offset();
+                that.wrapper.css({ top: offset.top, left: offset.left })
                             .css({ visibility: "visible", display: "none" });
             }
 
-            that.element
-                .toggleClass("t-rtl", that.element.closest(".t-rtl").length > 0)
+            that.wrapper
+                .toggleClass("t-rtl", that.wrapper.closest(".t-rtl").length > 0)
                 .appendTo(document.body);
         }
 
         if (that.options.modal) {
-            that.overlay(that.element.is(":visible")).css({ opacity: 0.5 });
+            that.overlay(that.wrapper.is(":visible")).css({ opacity: 0.5 });
         }
 
         var windowActions = ".t-window-titlebar .t-window-action";
 
-        that.element
+        that.wrapper
             .delegate(windowActions, "mouseenter", function () { $(this).addClass('t-state-hover'); })
             .delegate(windowActions, "mouseleave", function () { $(this).removeClass('t-state-hover'); })
             .delegate(windowActions, "click", $.proxy(this.windowActionHandler, that));
 
         if (that.options.resizable) {
-            that.element
+            that.wrapper
                 .delegate(".t-window-titlebar", "dblclick", $.proxy(this.toggleMaximization, that))
                 .append(Window.getResizeHandlesHtml());
 
-            fixIE6Sizing(element);
+            fixIE6Sizing(that.wrapper);
 
             (function(wnd) {
                 function dragstart(e) {
-                    var element = wnd.element;
-                    wnd.elementPadding = parseInt(wnd.element.css("padding-top"));
-                    wnd.initialCursorPosition = element.offset();
+                    var wrapper = wnd.wrapper;
+                    wnd.elementPadding = parseInt(wnd.wrapper.css("padding-top"));
+                    wnd.initialCursorPosition = wrapper.offset();
 
-                    wnd.resizeDirection = e.currentTarget.attr("className").replace("t-resize-handle t-resize-", "").split("");
+                    wnd.resizeDirection = e.currentTarget.prop("className").replace("t-resize-handle t-resize-", "").split("");
 
                     wnd.initialSize = {
-                        width: wnd.element.width(),
-                        height: wnd.element.height()
+                        width: wnd.wrapper.width(),
+                        height: wnd.wrapper.height()
                     };
 
-                    $("<div class='t-overlay' />").appendTo(wnd.element);
+                    $("<div class='t-overlay' />").appendTo(wnd.wrapper);
 
-                    element.find(".t-resize-handle").not(e.currentTarget).hide();
+                    wrapper.find(".t-resize-handle").not(e.currentTarget).hide();
 
                     $(document.body).css("cursor", e.currentTarget.css("cursor"));
                 }
 
                 function drag(e) {
-                    var element = wnd.element;
+                    var wrapper = wnd.wrapper;
 
                     var resizeHandlers = {
                         "e": function () {
                             var width = e.pageX - wnd.initialCursorPosition.left;
-                            element.width((width < wnd.options.minWidth
+                            wrapper.width((width < wnd.options.minWidth
                                                  ? wnd.options.minWidth
                                                  : (wnd.options.maxWidth && width > wnd.options.maxWidth)
                                                  ? wnd.options.maxWidth
@@ -119,19 +120,19 @@
                         },
                         "s": function () {
                             var height = e.pageY - wnd.initialCursorPosition.top - wnd.elementPadding;
-                            wnd.element
+                            wnd.wrapper
                                .height((height < wnd.options.minHeight ? wnd.options.minHeight
                                        : (wnd.options.maxHeight && height > wnd.options.maxHeight) ? wnd.options.maxHeight
                                        : height));
                         },
                         "w": function () {
                             var windowRight = wnd.initialCursorPosition.left + wnd.initialSize.width;
-                            element.css("left", e.pageX > (windowRight - wnd.options.minWidth) ? windowRight - wnd.options.minWidth
+                            wrapper.css("left", e.pageX > (windowRight - wnd.options.minWidth) ? windowRight - wnd.options.minWidth
                                               : e.pageX < (windowRight - wnd.options.maxWidth) ? windowRight - wnd.options.maxWidth
                                               : e.pageX);
 
                             var width = windowRight - e.pageX;
-                            element.width((width < wnd.options.minWidth ? wnd.options.minWidth
+                            wrapper.width((width < wnd.options.minWidth ? wnd.options.minWidth
                                                  : (wnd.options.maxWidth && width > wnd.options.maxWidth) ? wnd.options.maxWidth
                                                  : width));
 
@@ -139,12 +140,12 @@
                         "n": function () {
                             var windowBottom = wnd.initialCursorPosition.top + wnd.initialSize.height;
 
-                            element.css("top", e.pageY > (windowBottom - wnd.options.minHeight) ? windowBottom - wnd.options.minHeight
+                            wrapper.css("top", e.pageY > (windowBottom - wnd.options.minHeight) ? windowBottom - wnd.options.minHeight
                                              : e.pageY < (windowBottom - wnd.options.maxHeight) ? windowBottom - wnd.options.maxHeight
                                              : e.pageY);
 
                             var height = windowBottom - e.pageY;
-                            element
+                            wrapper
                                .height((height < wnd.options.minHeight ? wnd.options.minHeight
                                        : (wnd.options.maxHeight && height > wnd.options.maxHeight) ? wnd.options.maxHeight
                                        : height));
@@ -155,31 +156,31 @@
                         resizeHandlers[this]();
                     });
 
-                    fixIE6Sizing(element);
+                    fixIE6Sizing(wrapper);
 
                     wnd.trigger(RESIZE);
                 }
 
                 function dragend(e) {
-                    var element = wnd.element;
-                    element
+                    var wrapper = wnd.wrapper;
+                    wrapper
                         .find(".t-overlay").remove().end()
                         .find(".t-resize-handle").not(e.currentTarget).show();
 
                     $(document.body).css("cursor", "");
 
                     if (e.keyCode == 27) {
-                        fixIE6Sizing(element);
-                        element.css(wnd.initialCursorPosition)
+                        fixIE6Sizing(wrapper);
+                        wrapper.css(wnd.initialCursorPosition)
                                .css(wnd.initialSize);
                     }
 
                     return false;
                 }
 
-                new Draggable(wnd.element, {
+                new Draggable(wnd.wrapper, {
                     filter: ".t-resize-handle",
-                    group: wnd.element.id + "-resizing",
+                    group: wnd.wrapper.id + "-resizing",
                     dragstart: dragstart,
                     drag: drag,
                     dragend: dragend
@@ -190,16 +191,16 @@
         if (this.options.draggable) {
             (function(wnd){
                 function dragstart(e) {
-                    wnd.initialWindowPosition = wnd.element.position();
+                    wnd.initialWindowPosition = wnd.wrapper.position();
 
                     wnd.startPosition = {
                         left: e.pageX - wnd.initialWindowPosition.left,
                         top: e.pageY - wnd.initialWindowPosition.top
                     };
 
-                    $(".t-resize-handle", wnd.element).hide();
+                    $(".t-resize-handle", wnd.wrapper).hide();
 
-                    $("<div class='t-overlay' />").appendTo(wnd.element);
+                    $("<div class='t-overlay' />").appendTo(wnd.wrapper);
 
                     $(document.body).css("cursor", e.currentTarget.css("cursor"));
                 }
@@ -210,11 +211,11 @@
                         top: Math.max(e.pageY - wnd.startPosition.top, 0)
                     };
 
-                    $(wnd.element).css(coordinates);
+                    $(wnd.wrapper).css(coordinates);
                 }
 
                 function dragend(e) {
-                    wnd.element.find(".t-resize-handle")
+                    wnd.wrapper.find(".t-resize-handle")
                                .show()
                                .end()
                                .find(".t-overlay")
@@ -229,9 +230,9 @@
                     return false;
                 }
 
-                new Draggable(wnd.element, {
+                new Draggable(wnd.wrapper, {
                     filter: ".t-window-titlebar",
-                    group: wnd.element.id + "-moving",
+                    group: wnd.wrapper.id + "-moving",
                     dragstart: dragstart,
                     drag: drag,
                     dragend: dragend
@@ -247,7 +248,7 @@
             this.ajaxRequest();
         }
 
-        if (that.element.is(":visible")) {
+        if (that.wrapper.is(":visible")) {
             that.trigger(OPEN);
             that.trigger(ACTIVATE);
         }
@@ -279,7 +280,7 @@
             if (overlay.length == 0) {
                 overlay = $("<div class='t-overlay' />")
                     .toggle(visible)
-                    .appendTo(this.element[0].ownerDocument.body);
+                    .appendTo(this.wrapper[0].ownerDocument.body);
             } else {
                 overlay.toggle(visible);
             }
@@ -314,19 +315,19 @@
         },
 
         center: function () {
-            var element = this.element,
+            var wrapper = this.wrapper,
                 window = $(window);
 
-            element.css({
-                left: window.scrollLeft() + Math.max(0, (window.width() - element.width()) / 2),
-                top: window.scrollTop() + Math.max(0, (window.height() - element.height()) / 2)
+            wrapper.css({
+                left: window.scrollLeft() + Math.max(0, (window.width() - wrapper.width()) / 2),
+                top: window.scrollTop() + Math.max(0, (window.height() - wrapper.height()) / 2)
             });
 
             return this;
         },
 
         title: function (text) {
-            var title = $(".t-window-titlebar > .t-window-title", this.element);
+            var title = $(".t-window-titlebar > .t-window-title", this.wrapper);
 
             if (!text) {
                 return title.text();
@@ -337,7 +338,7 @@
         },
 
         content: function (html) {
-            var content = $("> .t-window-content", this.element);
+            var content = $("> .t-window-content", this.wrapper);
 
             if (!html) {
                 return content.html();
@@ -349,9 +350,8 @@
 
         open: function (e) {
             var that = this,
-                element = that.element,
+                wrapper = that.wrapper,
                 showOptions = that.options.animation.show;
-
 
             if (!that.trigger(OPEN)) {
                 if (that.options.modal) {
@@ -364,8 +364,8 @@
                     }
                 }
 
-                if (!element.is(":visible")) {
-                    element.kendoAnimate({
+                if (!wrapper.is(":visible")) {
+                    wrapper.show().kendoAnimate({
                         effects: showOptions.effects,
                         duration: showOptions.duration,
                         complete: function() {
@@ -384,11 +384,11 @@
 
         close: function () {
             var that = this,
-                element = that.element,
+                wrapper = that.wrapper,
                 options = that.options,
                 hideOptions = options.animation.hide;
 
-            if (element.is(":visible")) {
+            if (wrapper.is(":visible")) {
                 if (!that.trigger(CLOSE)) {
                     var openedModalWindows = $(".t-window").filter(function() {
                         var window = $(this);
@@ -407,12 +407,14 @@
                         }
                     }
 
-                    element.kendoAnimate({
+                    wrapper.kendoAnimate({
                         effects: hideOptions.effects,
                         duration: hideOptions.duration,
                         complete: function() {
+                            wrapper.hide();
+
                             if (shouldHideOverlay) {
-                                 overlay.hide();
+                                overlay.hide();
                             }
                         }
                     });
@@ -441,7 +443,7 @@
                 return;
             }
 
-            that.element
+            that.wrapper
                 .css({
                     position: "absolute",
                     left: that.restorationSettings.left,
@@ -468,16 +470,16 @@
                 return;
             }
 
-            var element = that.element;
+            var wrapper = that.wrapper;
 
             that.restorationSettings = {
-                left: element.position().left,
-                top: element.position().top,
-                width: element.width(),
-                height: element.height()
+                left: wrapper.position().left,
+                top: wrapper.position().top,
+                width: wrapper.width(),
+                height: wrapper.height()
             };
 
-            element
+            wrapper
                 .css({ left: 0, top: 0, position: "fixed" })
                 .find(".t-resize-handle").hide().end()
                 .find(".t-window-titlebar .t-maximize").addClass("t-restore").removeClass("t-maximize");
@@ -496,15 +498,15 @@
                 return;
             }
 
-            var element = this.element;
+            var wrapper = this.wrapper;
 
-            element
+            wrapper
                 .css({
                     width: $(window).width(),
                     height: $(window).height()
                 });
 
-            fixIE6Sizing(element);
+            fixIE6Sizing(wrapper);
 
             this.trigger(RESIZE);
         },
@@ -519,7 +521,7 @@
 
         ajaxRequest: function (url) {
             var loadingIconTimeout = setTimeout(function () {
-                $(".t-refresh", this.element).addClass("t-loading");
+                $(".t-refresh", this.wrapper).addClass("t-loading");
             }, 100);
 
             var data = {};
@@ -532,15 +534,15 @@
                 cache: false,
                 error: $.proxy(function (xhr, status) {
                     //fix
-                    if ($t.ajaxError(this.element, "error", xhr, status))
+                    if ($t.ajaxError(this.wrapper, "error", xhr, status))
                         return;
                 }, this),
                 complete: function () {
                     clearTimeout(loadingIconTimeout);
-                    $(".t-refresh", this.element).removeClass("t-loading");
+                    $(".t-refresh", this.wrapper).removeClass("t-loading");
                 },
                 success: $.proxy(function (data, textStatus) {
-                    $(".t-window-content", this.element).html(data);
+                    $(".t-window-content", this.wrapper).html(data);
 
                     this.trigger(REFRESH);
                 }, this)
@@ -550,7 +552,7 @@
         destroy: function () {
             var that = this;
 
-            that.element.remove();
+            that.wrapper.remove();
 
             var openedModalWindows = $(".t-window")
                 .filter(function() {
@@ -586,40 +588,39 @@
                 actions: ["Close"]
             }, options);
 
-            var windowHtml = "";
+            var windowHtml = "",
+                titleHtml = ""
+                contentHtml = "";
 
-            if (!element) {
-                windowHtml += "<div class='t-widget t-window'>";
-            }
+            windowHtml += "<div class='t-widget t-window'></div>";
 
-            windowHtml += "<div class='t-window-titlebar t-header'>&nbsp;<span class='t-window-title'>" +
+            titleHtml += "<div class='t-window-titlebar t-header'>&nbsp;<span class='t-window-title'>" +
                           options.title + "</span><div class='t-window-actions t-header'>";
 
             $.map(options.actions, function (command) {
-                windowHtml += "<a href='#' class='t-window-action t-link'><span class='t-icon t-" +
+                titleHtml += "<a href='#' class='t-window-action t-link'><span class='t-icon t-" +
                               command.toLowerCase() + "'>" + command + "</span></a>";
             });
 
-            windowHtml += "</div></div><div class='t-window-content t-content' style='";
+            titleHtml += "</div>";
 
-            if (typeof (options.scrollable) != "undefined" && options.scrollable === false) {
-                windowHtml += "overflow:hidden;";
+            if (!element) {
+                contentHtml = $("<div class='t-window-content t-content'></div>");
+            } else {
+                contentHtml = $(element);
             }
 
-            windowHtml += "'>";
-
-            if (!options.contentUrl || (options.contentUrl && isLocalUrl(options.contentUrl))) {
-                windowHtml += options.html;
+            if (typeof (options.scrollable) != "undefined" && options.scrollable === false) {
+                contentHtml.attr("style", "overflow:hidden;");
             }
 
             if (options.contentUrl && !isLocalUrl(options.contentUrl)) {
-                windowHtml += "<iframe src='" + options.contentUrl + "' title='" + options.title +
-                              "' frameborder='0' style='border:0;width:100%;height:100%;'>This page requires frames in order to show content</iframe>";
+                contentHtml.html("<iframe src='" + options.contentUrl + "' title='" + options.title +
+                              "' frameborder='0' style='border:0;width:100%;height:100%;'>This page requires frames in order to show content</iframe>");
             }
-            windowHtml += "</div>";
 
             if (element) {
-                element.html(windowHtml);
+                $(windowHtml).append(titleHtml).append(contentHtml).appendTo(document.body);
             } else {
                 windowHtml += "</div>";
                 return $(windowHtml).appendTo(document.body).kendoWindow(options);
