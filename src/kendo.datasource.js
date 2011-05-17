@@ -54,7 +54,7 @@
             options.read = { url: options.read };
         }
         that.cache = options && options.cache && options.cache !== false ? Cache.create(options.cache) : that.defaults.cache;
-        options = extend(that.defaults, options);
+        options = extend({}, that.defaults, options);
         that.settings = options;
         that.dialect = options.dialect;
     }
