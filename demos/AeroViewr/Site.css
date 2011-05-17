@@ -426,7 +426,7 @@ header .i-help
 #footer .thumbs
 {
     height:75px;
-    margin:6px 0 0;
+    margin-top:6px;
     padding:8px;
     overflow:hidden;
     white-space: nowrap;
