@@ -45,7 +45,7 @@
 
         that._selection();
 
-        that.dataSource.read();
+        that.dataSource.query();
     }
 
     Grid.prototype = {

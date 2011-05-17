@@ -137,7 +137,7 @@
                 });
                 dataSource.read();
                 dataSource.query( { sort: { field: "age", dir: "desc" } } );
-                dataSource.query();
+                dataSource.query({});
                 var view = dataSource.view();
 
                 equal(view.length, 2);
@@ -443,7 +443,7 @@
                 });
                 dataSource.read();
                 dataSource.query( { filter: { field: "age", operator: "==", value: 2 } } );
-                dataSource.query();
+                dataSource.query({});
                 var view = dataSource.view();
 
                 equal(view.length, 2);

@@ -27,7 +27,7 @@
 
         that._navigation();
 
-        that.dataSource.read();
+        that.dataSource.query();
     }
 
     ListView.prototype = {
