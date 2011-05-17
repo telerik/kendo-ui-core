@@ -16,7 +16,9 @@
             getNotInSet: "flickr.photos.getNotInSet",
             getMostPopular: "flickr.interestingness.getList",
             getRelatedTags: "flickr.tags.getRelated",
-            getSetPhotos: "flickr.photosets.getPhotos"
+            getSetPhotos: "flickr.photosets.getPhotos",
+            getPhotoInfo : "flickr.photos.getInfo",
+            movePhotoToSet: "flickr.photosets.addPhoto"
         },
 
         getThumbnailURL: function(photo) {
@@ -132,9 +134,20 @@
             params["api_sig"] = this.getApiSig(params);
             return params;
         },
-        movePhotoToSet: function(id, photo) {
-            var url = this.getAuthMethodUrl("flickr.photosets.addPhoto", {photoset_id: id, photo_id: photo});
-            $.post(url);
+        getPhotoInfo: function(id, callback) {
+            var params = {
+                photo_id: id,
+                method: this.methods.getPhotoInfo,
+                api_key: this.app.key,
+                format: "json",
+                nojsoncallback: 1
+            }
+            var url = this.service + "?" + $.param(params);
+            $.post(url, null, callback);
+        },
+        movePhotoToSet: function(id, photo, callback) {
+            var url = this.getAuthMethodUrl(this.methods.movePhotoToSet, {photoset_id: id, photo_id: photo});
+            $.post(url, null, callback);
         },
         getFrob: function() {
             var search = document.location.search,
