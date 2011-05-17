@@ -73,7 +73,7 @@ var visitor = window.visitor,
 
        ui.element.parent().hide();
 
-       showSelectedPhoto($("img:first", ui.selectable.value()).attr("src").replace("_s", ""));
+       setBigPhoto($("img:first", ui.selectable.value()).attr("src").replace("_s", ""));
 
        dataSource.query({page: 1, pageSize: 500});
    }
@@ -230,7 +230,11 @@ var visitor = window.visitor,
         },
         initVisitor: function() {
             $(".i-search").unbind("click").click($.proxy(this.search, this));
-            $("#searchBox").bind("change", function() { $(".i-search").click(); });
+            $("#searchBox").bind("keydown", function(e) {
+                if(e.keyCode === kendo.keys.ENTER) {
+                    $(".i-search").click();
+                }
+            });
 
             this.thumbList = new kendo.ui.Scroller($('<div class="thumb-list">').appendTo("#footer")).scrollElement;
 
