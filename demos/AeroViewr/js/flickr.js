@@ -51,12 +51,14 @@
             return hex_md5(concatString);
         },
 
-        getAuthMethodUrl: function(method, params) {
-            params = this.params(method, {
+        getAuthMethodUrl: function(method, param) {
+            param = $.extend({
                 auth_token: this.auth.token
-            });
+            }, param);
 
-            return this.service + "?" + $.param(params);
+            var params = this.params(method, param);
+
+            return this.service + "?" + $.param($.extend(params, param));
         },
 
         mostPopularParams: function(data) {
