@@ -279,7 +279,7 @@ var visitor = window.visitor,
         initVisitor: function() {
             var that = this;
 
-            $(".i-search").unbind("click").click(function(e) { e.preventDefault(); that.search(); });
+            $(".i-search").click(function(e) { e.preventDefault(); that.search(); });
             $("#searchBox").bind("keydown", function(e) {
                 if(e.keyCode === kendo.keys.ENTER) {
                     $(".i-search").click();
