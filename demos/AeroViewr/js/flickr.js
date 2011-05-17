@@ -121,13 +121,15 @@
 
         getPhotoInfo: function(id, callback) {
             var params = this.params(this.methods.getPhotoInfo, {
-                photo_id: id,
+                photo_id: id
             });
 
             $.ajax( {
                 url: this.service + "?" + $.param(params),
                 dataType: $.support.cors ? "json" : "jsonp",
-                success: callback
+                success: callback,
+                jsonp: false,
+                jsonpCallback: "jsonFlickrApi"
             });
         },
 
@@ -149,16 +151,17 @@
         },
 
         getToken: function(frob, callback) {
-            var params = {
-                api_key: this.app.key,
-                frob: frob,
-                format: "json",
-                nojsoncallback: 1,
-                method: this.methods.getToken
-             }
+            var params = this.params(this.methods.getToken, {
+                frob: frob
+            });
 
-            params["api_sig"] = this.getApiSig(params);
-            $.get(this.service + "?" + $.param(params), null, callback, "json");
+            $.ajax({
+                url: this.service + "?" + $.param(params),
+                dataType: $.support.cors ? "json" : "jsonp",
+                success: callback,
+                jsonp: false,
+                jsonpCallback: "jsonFlickrApi"
+            });
         },
 
         signIn: function() {
@@ -176,19 +179,18 @@
             var NULL = null,
                 auth = this.auth;
 
+            window.slideshow.stop();
             auth.token = NULL;
             auth.nsid = NULL;
             auth.username = NULL;
             auth.fullname = NULL;
 
             sessionStorage.clear();
-
-            document.location.href = document.location.href;
+            document.location.reload();
         },
 
         authenticate: function(callback) {
             var session = sessionStorage;
-
             if(session.token) {
                 var auth = this.auth;
                 auth.token = session.token;
