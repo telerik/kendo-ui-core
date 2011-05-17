@@ -258,7 +258,9 @@ var visitor = window.visitor,
 
             slideshow.init($("#flatMostPopularPhotos").data("kendoListView"));
 
-            $("#viewslideshow").click(function() {
+            $("#viewslideshow").click(function(e) {
+                e.preventDefault();
+
                 $(this).find(".p-icon")
                     .toggleClass("i-pause")
                     .toggleClass("i-slideshow");
