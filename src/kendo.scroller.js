@@ -1,5 +1,6 @@
 (function($, window, undefined) {
-    var kendo = window.kendo;
+    var kendo = window.kendo,
+        extend = $.extend;
 
     function Scroller (element) {
         this.element = $(element);
@@ -8,7 +9,7 @@
             acceleration: 10,
             velocity: .5,
             pagingVelocity: 5,
-            friction: .95,
+            friction: .98,
             bounceAcceleration: .1,
             bounceDeceleration: .1,
             bounceLimit: 0,
@@ -24,26 +25,30 @@
         this.xScrollbar = $('<div class="touch-scrollbar horizontal-scrollbar" />');
         this.yScrollbar = this.xScrollbar.clone().removeClass('horizontal-scrollbar').addClass('vertical-scrollbar');
         this._scrollbars = $().add(this.xScrollbar).add(this.yScrollbar);
-        this.webkit3d = 'WebKitCSSMatrix' in window && 'm11' in new WebKitCSSMatrix();
+        
+        extend(this, {
+                        webkit3d: 'WebKitCSSMatrix' in window && 'm11' in new WebKitCSSMatrix(),
 
-        this._startProxy = $.proxy(this._start, this);
-        this._stopProxy = $.proxy(this._stop, this);
-        this._dragProxy = $.proxy(this._drag, this);
-        this._gestureStartProxy = $.proxy(this._onGestureStart, this);
-        this._gestureEndProxy = $.proxy(this._onGestureEnd, this);
-        this._stepScrollProxy = $.proxy( this._stepScrollAnimation, this );
-        this._stepKinetikProxy = $.proxy( this._stepKinetikAnimation, this );
+                        _waitProxy: $.proxy(this._wait, this),
+                        _startProxy: $.proxy(this._start, this),
+                        _stopProxy: $.proxy(this._stop, this),
+                        _dragProxy: $.proxy(this._drag, this),
+                        _gestureStartProxy: $.proxy(this._onGestureStart, this),
+                        _gestureEndProxy: $.proxy(this._onGestureEnd, this),
+                        _stepScrollProxy: $.proxy( this._stepScrollAnimation, this ),
+                        _stepKinetikProxy: $.proxy( this._stepKinetikAnimation, this ),
 
-        this._transformProperty = kendo.support.transitions.css + 'transform';
-        this._transformOrigin = kendo.support.transitions.css + 'transform-origin';
-        this._translate3DPrefix = 'translate' + (this.webkit3d ? '3d(' : '(');
-        this._translate3DSuffix = (this.webkit3d ? ', 0)' : ')');
+                        _transformProperty: kendo.support.transitions.css + 'transform',
+                        _transformOrigin: kendo.support.transitions.css + 'transform-origin',
+                        _translate3DPrefix: 'translate' + (this.webkit3d ? '3d(' : '('),
+                        _translate3DSuffix: (this.webkit3d ? ', 0)' : ')')
+                });
 
         this._create();
     }
 
     function touchLocation(e) {
-        var changedTouches = e.changedTouches ? e.changedTouches : null;
+        var changedTouches = e.changedTouches || e.originalEvent.changedTouches || null;
 
         if (changedTouches) {
             return {
@@ -89,6 +94,14 @@
         };
     };
 
+    function fireFakeEvent(eventName, event) {
+        var evt = document.createEvent("MouseEvents");
+        evt.initMouseEvent(eventName, event.bubbles, event.cancelable, event.view,
+                           event.detail, event.screenX, event.screenY, event.clientX, event.clientY,
+                           false, false, false, false, event.button, event.relatedTarget);
+        event.target.dispatchEvent(evt);
+    }
+
     Scroller.prototype = {
         _create: function () {
             if (kendo.support.touch) {
@@ -104,13 +117,14 @@
             var children = this.element.children();
 
             this.element
-                .css("overflow", "hidden")
-                .bind(this._startEvent, $.proxy(this._wait, this));
-
-            if (kendo.support.touch)
+                .css("overflow", "hidden");
+            
+            if (kendo.support.touch) {
                 this.element
                     .bind('gesturestart', this._gestureStartProxy )
-                    .bind('gestureend', this._gestureEndProxy );
+                    .bind('gestureend', this._gestureEndProxy )
+                    .bind(this._startEvent, this._waitProxy); // Grab all events to prevent any selection-ings
+            }
 
             if (children.length)
                 children.wrapAll(scrollElement);
@@ -210,8 +224,9 @@
         },
 
         _wait: function (e) {
+            this._dragged = false;
             clearTimeout(this.timeoutId);
-            this._originalEvent = e;
+            this._originalEvent = e.originalEvent;
             var startLocation = touchLocation(e);
             var scrollOffsets = this._getScrollOffsets();
 
@@ -226,15 +241,17 @@
             this.directionChange = +new Date();
 
             $(document)
-                .bind(this._moveEvent, this._startProxy)
-                .bind(this._endEvent, this._stopProxy);
+                    .bind(this._moveEvent, this._startProxy)
+                    .bind(this._endEvent, this._stopProxy);
         },
 
         _initializeBoxModel: function () {
-            this.boxWidth = this.element.innerWidth();
-            this.boxHeight = this.element.innerHeight();
-            this.scrollWidth = this.scrollElement.innerWidth();
-            this.scrollHeight = this.scrollElement.innerHeight();
+            extend(this, {
+                        boxWidth: this.element.innerWidth(),
+                        boxHeight: this.element.innerHeight(),
+                        scrollWidth: this.scrollElement.innerWidth(),
+                        scrollHeight: this.scrollElement.innerHeight()
+                    });
 
             var bounceLimit = {
                     x: -this.boxWidth * this.options.bounceLimit,
@@ -245,20 +262,22 @@
                     y: -this.options.bounceStop
                 };
 
-            this.hasHorizontalScroll = this.scrollWidth > this.boxWidth;
-            this.hasVerticalScroll = this.scrollHeight > this.boxHeight;
-            this.xRatio = this.boxWidth / this.scrollWidth;
-            this.yRatio = this.boxHeight / this.scrollHeight;
-            this.minBounceLimit = bounceLimit;
-            this.maxBounceLimit = {
-                x: this.scrollWidth - this.boxWidth - bounceLimit.x,
-                y: this.scrollHeight - this.boxHeight - bounceLimit.y
-            };
-            this.minBounceStop = bounceStop;
-            this.maxBounceStop = {
-                x: this.scrollWidth - this.boxWidth - bounceStop.x,
-                y: this.scrollHeight - this.boxHeight - bounceStop.y
-            };
+            extend(this, {
+                        hasHorizontalScroll: this.scrollWidth > this.boxWidth,
+                        hasVerticalScroll: this.scrollHeight > this.boxHeight,
+                        xRatio: this.boxWidth / this.scrollWidth,
+                        yRatio: this.boxHeight / this.scrollHeight,
+                        minBounceLimit: bounceLimit,
+                        maxBounceLimit: {
+                                            x: this.scrollWidth - this.boxWidth - bounceLimit.x,
+                                            y: this.scrollHeight - this.boxHeight - bounceLimit.y
+                                        },
+                        minBounceStop: bounceStop,
+                        maxBounceStop: {
+                                            x: this.scrollWidth - this.boxWidth - bounceStop.x,
+                                            y: this.scrollHeight - this.boxHeight - bounceStop.y
+                                        }
+                    });
         },
 
         _start: function (e) {
@@ -266,7 +285,6 @@
 
             var currentLocation = touchLocation(e);
             if (currentLocation.idx != this.start.idx) return;
-            this._dragged = false;
 
             if (Math.abs(this.lastLocation.x - currentLocation.x) > 10 || Math.abs(this.lastLocation.y - currentLocation.y) > 10) {
                 e.preventDefault();
@@ -275,7 +293,6 @@
                 this._initializeBoxModel();
 
                 if (this.hasHorizontalScroll) {
-                    this.xScrollbar.css('opacity');
                     this.xScrollbar
                         .css({
                                 width: ~~(this.boxWidth * this.xRatio),
@@ -318,6 +335,9 @@
 
         _stop: function (e) {
             if (this._dragCanceled) return;
+            $(document).unbind(this._endEvent, this._stopProxy)
+                       .unbind(this._moveEvent, this._startProxy)
+                       .unbind(this._moveEvent, this._dragProxy);
 
             var oEvent = this._originalEvent,
                 target = $(oEvent.target),
@@ -327,32 +347,27 @@
                 this._dragged = false;
                 e.preventDefault();
 
-                if (!kendo.support.touch) {
-                    proxy = $.proxy( this._click, { original: this, target: target } );
-                    target.bind( 'click', proxy );
-                }
-
                 this._initKinetikAnimation(e);
             } else {
+                proxy = $.proxy( this._click, { original: this, target: target } );
+                var evt = document.createEvent("MouseEvents");
+
                 if (kendo.support.touch && this._originalEvent.touches.length == 1) // Fire a click event when there's no drag...
                 {
-                    proxy = $.proxy( this._click, { original: this, target: target } );
-                    var evt = document.createEvent("MouseEvents");
-
-                    target.unbind( 'click', proxy );
-                    evt.initMouseEvent("click", oEvent.bubbles, oEvent.cancelable, oEvent.view,
-                                       oEvent.detail, oEvent.screenX, oEvent.screenY, oEvent.clientX, oEvent.clientY,
-                                       false, false, false, false, oEvent.button, oEvent.relatedTarget);
-
-                    oEvent.target.dispatchEvent(evt);
-                    target.bind( 'click', proxy );
+                    target.unbind('click', proxy);
+                    fireFakeEvent('click', e);
+                    target.bind('click', proxy);
                 }
             }
-
-            $(document).unbind(this._moveEvent, this._startProxy)
-                       .unbind(this._moveEvent, this._dragProxy)
-                       .unbind(this._endEvent, this._stopProxy);
        },
+
+        _hideScrollHints: function() {
+            if (this.hasHorizontalScroll)
+                this.xScrollbar.css('opacity', 0);
+
+            if (this.hasVerticalScroll)
+                this.yScrollbar.css('opacity', 0);
+        },
 
         _initKinetikAnimation: function (e) {
 
@@ -499,11 +514,7 @@
             this.winding = false;
             clearTimeout(this.timeoutId);
 
-            if (this.hasHorizontalScroll)
-                this.xScrollbar.css('opacity', 0);
-
-            if (this.hasVerticalScroll)
-                this.yScrollbar.css('opacity', 0);
+            this._hideScrollHints();
         }
     };
 
