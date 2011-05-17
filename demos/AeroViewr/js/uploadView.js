@@ -5,11 +5,11 @@
                   '<div class="t-widget t-upload"><div class="t-button t-button-icontext t-button-bare t-upload-button p-border-big">' +
                   '<span class="p-icon i-set t-add"></span> browse<input type="file" name="photo" id="photosUpload" /></div></div>';
 
-    function UploadView(element) {
+    function Upload(element) {
         this.element = $(element);
         this.responses = [];
     }
-    UploadView.prototype = {
+    Upload.prototype = {
         show: function() {
             var that = this,
                 element = that.element;
@@ -69,6 +69,6 @@
             return overlay.length ? overlay : $('<div class="t-overlay"/>').appendTo(element.parent());
         }
     };
-    window.UploadView = UploadView;
+    window.Upload = Upload;
 })(jQuery, window);
 
