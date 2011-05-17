@@ -3,7 +3,7 @@ var visitor = window.visitor,
     slideshow = window.slideshow,
     IMAGESIZES = ["_s", "_t", "_m"],
     imageSize = IMAGESIZES[0],
-    template = function(size) { return '<li><img alt="<%= title %>" src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>' + size + '.jpg"></li>'; },
+    template = function(size) { return '<li><img data-photoid="<%= id %>" alt="<%= title %>" src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>' + size + '.jpg"></li>'; },
     dataSource = new kendo.data.DataSource({
         page: 1,
         pageSize: 5,
@@ -83,7 +83,7 @@ var visitor = window.visitor,
            src = img.attr("src").replace("_s", ""),
            loader = $("img.loader");
 
-        $(".exifInfo").find("h2").text(img.attr("alt") || "No Title");
+        $(".exifInfo").find("h2").text(img.attr("alt") || "No Title").end().find(".i-help").attr("data-photoid", img.attr("data-photoid"));
 
         if (loader[0]) {
             loader.remove();
