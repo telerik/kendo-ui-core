@@ -19,8 +19,12 @@
             function stubMethod(fn, methodName, stub, callback) {
                 var oldMethod = fn.prototype[methodName];
                 fn.prototype[methodName] = stub;
-                callback();
-                fn.prototype[methodName] = oldMethod;
+                try {
+                    callback();
+                }
+                finally {
+                    fn.prototype[methodName] = oldMethod;
+                }
             }
 
             (function() {

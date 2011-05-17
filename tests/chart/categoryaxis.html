@@ -35,14 +35,39 @@
                     }
                 }
 
-                module("View Rendering", {
+                function createCategoryAxis() {
+                    categoryAxis = new Chart.CategoryAxis({
+                        labels: ["Foo", "Bar"]
+                    });
+                    categoryAxis.updateLayout(chartBox);
+                }
+
+                module("Category Axis / Horizontal", {
+                    setup: function() {
+                        createCategoryAxis();
+                    }
+                });
+
+                test("positions slot for first category", function() {
+                    var slot = categoryAxis.getSlot(0);
+                    same([slot.x1, slot.x2], [0, chartBox.width() / 2]);
+                });
+
+                test("positions slot for second category", function() {
+                    var slot = categoryAxis.getSlot(1);
+                    same([slot.x1, slot.x2], [chartBox.width() / 2, chartBox.width()]);
+                });
+
+                test("slot height is 0", function() {
+                    var slot = categoryAxis.getSlot(0);
+                    same(slot.height(), 0);
+                });
+
+                var factoryStub;
+                module("Category Axis / Horizontal /Rendering", {
                     setup: function() {
                         factoryStub = new ViewFactoryStub();
-
-                        categoryAxis = new Chart.CategoryAxis({
-                            labels: ["Alpha", "Beta", "Charlie"]
-                        });
-                        categoryAxis.updateLayout(chartBox);
+                        createCategoryAxis();
                     }
                 });
 
@@ -59,7 +84,7 @@
                     categoryAxis.getViewElements(factoryStub);
 
                     same(factoryStub.renderedTexts,
-                         ["Alpha", "Beta", "Charlie"]);
+                         ["Foo", "Bar"]);
                 });
 
                 test("labels are distributed horizontally", function() {
@@ -70,10 +95,10 @@
 
                     categoryAxis.getViewElements(factoryStub);
 
-                    same(labelsX, [110.333, 381.001, 638.167], TOLERANCE);
+                    same(labelsX, [185.5, 586.5], TOLERANCE);
                 });
 
-                test("labels are positioned below axis line", 3, function() {
+                test("labels are positioned below axis line", 2, function() {
                     var labelsY = [];
                     factoryStub.text = function(content, options) {
                         equal(options.y, LINE_Y + MAJOR_TICK_HEIGHT, TOLERANCE);
@@ -89,7 +114,7 @@
                     var ticksX = $.map(factoryStub.renderedLines, function(line) {
                         return line[0];
                     });
-                    same(ticksX, [0, 266.667, 533.334, 800], TOLERANCE);
+                    same(ticksX, [0, 400, 800], TOLERANCE);
                 });
 
             })();

@@ -13,9 +13,17 @@
                 $("#container").kendoChart({
                     title: "Title",
                     series: [{
-                        name: "Value",
+                        name: "Value A",
+                        type: "bar",
+                        data: [20, 40, 40]
+                    }, {
+                        name: "Value B",
                         type: "bar",
                         data: [100, 200, 300]
+                    }, {
+                        name: "Value C",
+                        type: "bar",
+                        data: [15, 25, 35]
                     }],
                     axisX: {
                         labels: ["Alpha", "Beta", "Charlie"]
@@ -35,7 +43,7 @@
                     MAX_DATA = 500;
 
                 var chart = $("#container").data("kendoChart"),
-                    data = chart.options.series[0].data,
+                    data = chart.options.series[1].data,
                     frame = 0;
 
                 var start = new Date();
