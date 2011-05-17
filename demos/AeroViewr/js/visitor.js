@@ -182,8 +182,8 @@ var visitor = window.visitor,
 
             $("#slider").kendoSlider({
                 orientation: "vertical",
-                minValue: 0,
-                maxValue: 2,
+                min: 0,
+                max: 2,
                 largeStep: 1,
                 change: function() {
                     imageSize = IMAGESIZES[this.value()];
