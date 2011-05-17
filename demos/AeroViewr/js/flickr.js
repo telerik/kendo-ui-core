@@ -128,7 +128,8 @@
                 method: this.methods.getRelatedTags,
                 api_key: this.app.key,
                 format: "json",
-                nojsoncallback: 1
+                // if (!jQuery.support.cors)
+                timestamp: +new Date(),
             }
             params["tag"] = text;
             params["api_sig"] = this.getApiSig(params);
