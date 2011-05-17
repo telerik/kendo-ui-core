@@ -17,7 +17,7 @@
             that._overlay().empty()
                         .html(flickr.isAuthenticated() ? authContent : nonAuthContent)
                         .find("#photosUpload").kendoUpload({
-                                showFileList: true,
+                                showFileList: false,
                                 multiple: true,
                                 async: {
                                     saveUrl: 'Home/Save',
@@ -35,24 +35,32 @@
                                    that.responses = that.responses.concat(e.response);
                                 },
                                 complete: function (e) {
-                                   var set = that.currentSet();
-                                   //if (set) {
-                                        var id = '72157626610392529';//set.data("set"),
-                                            responses = that.responses;
-                                        for (var i = 0, length = responses.length; i < length; i++) {
-                                            if(responses[i].stat === "ok"){
-                                                flickr.movePhotoToSet(id, responses[i].photoid);
-                                            }
-                                        }
-                                   //}
+                                    that._movePhotosToSet();
                                 }
                         })
                         .end()
-                        .show();
+                        .fadeIn();
+        },
+        _movePhotosToSet: function() {
+            var that = this,
+                id = that.currentSet(),
+                idx,
+                responses = that.responses,
+                len;
+
+            if (id) {
+                for (idx = 0, len = responses.length; idx < len; idx++) {
+                    if(responses[idx].stat === "ok"){
+                        flickr.movePhotoToSet(id, responses[idx].photoid);
+                    }
+                }
+            }
+            that.responses = [];
+            that.hide();
         },
         hide: function() {
-            var that = this;
-            that.element.hide();
+            window.user.refreshSets();
+            this._overlay().fadeOut();
         },
         currentSet: function(val){
             if(val !== undefined) {

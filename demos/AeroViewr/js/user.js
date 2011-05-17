@@ -1,9 +1,9 @@
 (function($, window) {
-    var flickr = window.flickr,           
+    var flickr = window.flickr,
         upload,
         photosInSet = false,
         IMAGESIZES = ["_s", "_t", "_m"],
-        imageSize = IMAGESIZES[0],        
+        imageSize = IMAGESIZES[0],
         template = function(size) { return '<li><img alt="<%= title %>" src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>' + size + '.jpg"></li>'; },
         setTemplate = '<li data-setid="<%=id%>" alt="thumbnail"><img width="75" height="75" src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>_s.jpg"></li>',
         liveUrl = "http://localhost/kendo/demos/aeroviewr/index.html";
@@ -70,7 +70,7 @@
             }
         }
     }),
-    photoSetId = function() {                                   
+    photoSetId = function() {
         return $("#flatSetsStrip").data("kendoListView").selected().attr("data-setid");
     };
 
@@ -95,14 +95,13 @@
                 },
                 change: function(e) {
                     var selected = this.selected();
-                    upload.currentSet(selected);
+                    upload.currentSet(photoSetId());
                     if(selected.is(this.element.find("li:first"))) {
                         photosInSet = false;
+                    } else {
+                        photosInSet = true;
                     }
-                    else {                          
-                        photosInSet = true;                            
-                    }
-                    $("#mainPicturesNotInSet").show(); 
+                    $("#mainPicturesNotInSet").show();
                     notInSetDataSource.read();
                 }
             });
@@ -131,6 +130,10 @@
                             .css("overflow", "hidden").animate({ opacity: 1 }, 1000);
                 });
             });
+        },
+        refreshSets: function() {
+            notInSetDataSource.transport.cache.clear();
+            notInSetDataSource.read();
         },
         initUser: function() {
             var that = this;
