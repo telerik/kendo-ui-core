@@ -82,6 +82,7 @@ body,
 {
     min-height:215px;
     position:relative;
+    width: 100%;
 }
 
 header,
@@ -95,10 +96,13 @@ section#footer
 
 #photoWrap
 {
-    position:absolute;
-    top:45px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding-bottom: 145px;
+    padding-top: 45px;
     width:100%;
-    bottom: 145px;
+    height: 100%;
     z-index:1;
     text-align:center;
 
@@ -111,6 +115,11 @@ section#footer
     -moz-box-orient: horizontal;
     -moz-box-pack: center;
     -moz-box-align: center;
+    
+    display: -ms-box;
+    -ms-box-orient: horizontal;
+    -ms-box-pack: center;
+    -ms-box-align: center;
 
     display: box;
     box-orient: horizontal;
@@ -121,6 +130,7 @@ section#footer
 #bigPhoto
 {
     position: relative;
+    overflow: hidden;
 }
 
 #overlay
@@ -176,7 +186,7 @@ section#footer
     height: 50px;
     position: absolute;
     top: 50%;
-    margin-top: -35px;
+    margin-top: -80px;
     background: black;
     border: 10px solid #333;
     border-width: 10px 0;
@@ -525,13 +535,6 @@ header .i-help
 .bottomLink>a
 {
     color:#8e8e8e;
-}
-
-/* big photo */
-
-#photoWrap
-{
-    text-align:center;
 }
 
 /*main*/
