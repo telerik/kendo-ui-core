@@ -72,6 +72,8 @@ var visitor = window.visitor,
        $("#flatSearchPhotos").show();
 
        ui.element.parent().hide();
+       $("#overlay").fadeOut();
+       $("#exifButton").fadeIn();
 
        setBigPhoto($("img:first", ui.selectable.value()));
 
@@ -129,6 +131,8 @@ var visitor = window.visitor,
                 $("#flatMostPopularPhotos").hide();
                 $("#flatSearchPhotos").hide();
                 $("#mainTemplate").show();
+                $("#overlay").fadeIn();
+                $("#exifButton").fadeOut();
             }
             $("#backButton").text("Back to most popular").data("currentView", "mainTemplate");
             slideshow.init($("#flatSearchPhotos").data("kendoListView"));
@@ -200,6 +204,8 @@ var visitor = window.visitor,
                 $("#mainPhotoStrip").hide();
                 $("#slider").parent().hide();
                 $("#mainPhotoGrid").show();
+                $("#overlay").fadeIn();
+                $("#exifButton").fadeOut();
             });
 
             $("#listView").click(function(e) {
@@ -215,6 +221,8 @@ var visitor = window.visitor,
                     element.data("currentView", "mainTemplate");
                     $("#flatSearchPhotos").hide();
                     $("#mainTemplate").show();
+                    $("#overlay").fadeIn();
+                    $("#exifButton").fadeOut();
                     $("#flatMostPopularPhotos").hide();
                     element.text("Back to most popular");
                     slideshow.init($("#flatSearchPhotos").data("kendoListView"));
@@ -223,6 +231,8 @@ var visitor = window.visitor,
                     element.data("currentView", "flatMostPopularPhotos");
                     $("#flatSearchPhotos").hide();
                     $("#mainTemplate").hide();
+                    $("#overlay").fadeOut();
+                    $("#exifButton").fadeIn();
                     $("#flatMostPopularPhotos").show();
                     element.text("Back to search results");
                     slideshow.init($("#flatMostPopularPhotos").data("kendoListView"));
