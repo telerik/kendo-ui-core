@@ -87,8 +87,15 @@
         });
 
         if (kendo.support.touch) {
+            if (window.innerWidth < 380 || window.innerHeight < 380)
+                $(document.body).css('zoom', .7);
+
             $(document).bind('touchmove', function (e) { // Disable viewport scrolling
-                    e.preventDefault();
+                e.preventDefault();
+            });
+
+            $(document).bind('orientationchange', function (e) {
+                window.scrollTo(0, 1);
             });
 
             window.scrollTo(0, 1);
