@@ -58,22 +58,31 @@ var visitor = window.visitor,
        $("#overlay").fadeOut();
        $("#exifButton").fadeIn();
 
-       setBigPhoto($("img:first", ui.selectable.value()));
+       setBigPhoto(ui.selectable.value().find("img"));
 
        dataSource.query({page: 1, pageSize: PAGESIZE});
    }
+
+   var loadingTimeout = 0;
 
    function setBigPhoto(img) {
        var bigPhoto = $("#bigPhoto"),
            src = img.attr("src").replace("_s", ""),
            loader = $("img.loader");
 
-        $(".exifInfo").find("h2").text(img.attr("alt") || "No Title").end().find(".i-help").attr("data-photoid", img.attr("data-photoid"));
+        $(".exifInfo")
+            .find("h2")
+            .text(img.attr("alt") || "No Title")
+            .end()
+            .find(".i-help")
+            .attr("data-photoid", img.attr("data-photoid"));
 
         if (loader[0]) {
             loader.remove();
         } else {
-            bigPhoto.after("<div class='loading'>Loading ...</div>");
+            loadingTimeout = setTimeout(function() {
+                bigPhoto.after("<div class='loading'>Loading ...</div>");
+            }, 100);
         }
 
         loader = $("<img class='loader' />")
@@ -81,15 +90,18 @@ var visitor = window.visitor,
             .appendTo(document.body)
             .attr("src", src)
             .bind("load", function() {
+                clearTimeout(loadingTimeout);
+
                 loader.remove();
+
                 bigPhoto.next(".loading")
-                .remove()
-                .end()
-                .stop(true, true)
-                .fadeOut(function() {
-                    bigPhoto.attr("src", src);
-                })
-                .fadeIn();
+                    .remove()
+                    .end()
+                    .stop(true, true)
+                    .fadeOut(function() {
+                        bigPhoto.attr("src", src);
+                    })
+                    .fadeIn();
             });
    }
 
@@ -137,7 +149,7 @@ var visitor = window.visitor,
                     displayImages(this.element);
                 },
                 change: function() {
-                    setBigPhoto(this.selected().find("img").attr('src').replace("_s", ""));
+                    setBigPhoto(this.selected().find("img"));
                 }
             });
             $("#mainPhotoGrid").kendoGrid({
