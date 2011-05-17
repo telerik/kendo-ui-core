@@ -350,7 +350,7 @@
                         if (index >= that._valuesArray.length - 1 || index <= 0) {
                             this._setValueInRange(options.val + (sign * options.smallStep));
                         } else {
-                            this.value(this._valuesArray[index + (sign * 1)]);
+                            this._setValueInRange(this._valuesArray[index + (sign * 1)]);
                         }
 
                         this.timeout = setTimeout($.proxy(function () {
@@ -358,7 +358,7 @@
                                 if (index >= that._valuesArray.length - 1 || index <= 0) {
                                     this._setValueInRange(options.val + (sign * options.smallStep));
                                 } else {
-                                    this.value(this._valuesArray[index + (sign * 1)]);
+                                    this._setValueInRange(this._valuesArray[index + (sign * 1)]);
                                 }
                             }, this), 60);
                         }, this), 200);
