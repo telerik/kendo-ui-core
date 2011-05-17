@@ -160,6 +160,7 @@ section#footer
     position:fixed;
     bottom:200px;
     left:-24px;
+    display: none;
 }
 
 #footer>.thumbs,
@@ -206,7 +207,7 @@ section#footer
     font: 3em/1.4 bold arial,helvetica,sans-serif;
     text-align: center;
     opacity: .5;
-    
+
 	-moz-border-radius:34px;
 	-webkit-border-radius:34px;
 	border-radius:34px;
@@ -937,7 +938,7 @@ header .i-help
     border-color:rgba(235,235,235,.2);
     padding:6px 7px 7px 50px;
     cursor:pointer;
-    
+
     /*background:repeat-x 0 -350px url('img/gradients.png');*/
     background: rgb(36,36,36); /* Old browsers */
     background: -moz-linear-gradient(top, rgba(46,46,46,.4) 0%, rgba(0,0,0,.8) 100%); /* FF3.6+ */
