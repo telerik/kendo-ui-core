@@ -254,7 +254,7 @@
         }
     };
 
-    Window.prototype = {
+    $.extend(Window.prototype, {
         options: {
             animation: {
                 show: {
@@ -316,11 +316,11 @@
 
         center: function () {
             var wrapper = this.wrapper,
-                window = $(window);
+                documentWindow = $(window);
 
             wrapper.css({
-                left: window.scrollLeft() + Math.max(0, (window.width() - wrapper.width()) / 2),
-                top: window.scrollTop() + Math.max(0, (window.height() - wrapper.height()) / 2)
+                left: documentWindow.scrollLeft() + Math.max(0, (documentWindow.width() - wrapper.width()) / 2),
+                top: documentWindow.scrollTop() + Math.max(0, (documentWindow.height() - wrapper.height()) / 2)
             });
 
             return this;
@@ -499,7 +499,7 @@
             }
 
             var wrapper = this.wrapper;
-
+console.log(window);
             wrapper
                 .css({
                     width: $(window).width(),
@@ -566,7 +566,7 @@
                 that.overlay(false).remove();
             }
         }
-    };
+    });
 
     // client-side rendering
     $.extend(Window, {
