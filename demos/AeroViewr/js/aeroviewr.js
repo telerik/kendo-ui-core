@@ -11,7 +11,10 @@
                 read: {
                     url: flickr.service,
                     cache: true,
-                    dataType: "json"
+                    // if (!jQuery.support.cors)
+                    jsonpCallback: "jsonFlickrApi",
+                    jsonp: false,
+                    dataType: "jsonp"
                 },
                 cache: "localstorage",
                 dialect: {
