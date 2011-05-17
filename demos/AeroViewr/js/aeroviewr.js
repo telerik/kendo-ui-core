@@ -15,9 +15,12 @@
             },
             reader: {
                 data: function(result) {
-                    return $.map(result.tags.tag, function(tag) {
-                        return tag._content;
-                    });
+                    if(result && result.tags) {
+                        return $.map(result.tags.tag, function(tag) {
+                            return tag._content;
+                        });
+                    }
+                    return [];
                 }
             }
         });
