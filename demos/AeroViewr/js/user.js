@@ -31,7 +31,7 @@
     }),
     setPhotosDataSource = data.dataSource({
         serverSorting: true,
-        pageSize: 10,
+        pageSize: 5,
         dialect: {
             read: function(data) {
                 var params = { extras: "owner_name,tags", per_page: PAGESIZE };
@@ -129,8 +129,7 @@
                     this.element
                         .prepend('<li alt="thumbnail"><img width="75" height="75" src="img/NotInSet.png" /><em>Not In Set</em></li>')
                         .show();
-                    this.selectable.value(this.element.find("li:first"));
-                    //maybe load pictures from first set
+                    this.selectable.value(this.element.find("li:first"));                    
                 },
                 change: function(e) {
                     var selected = this.selected();
@@ -191,9 +190,23 @@
                 }
             }).hide();
         },
-        refreshSets: function() {
-            notInSetDataSource.transport.cache.clear();
-            notInSetDataSource.read();
+        initSlider: function() {
+            $("#setPhotoSize").kendoSlider({
+                orientation: "vertical",
+                min: 0,
+                max: 2,
+                largeStep: 1,
+                change: function() {
+                    imageSize = IMAGESIZES[this.value()];
+                    $("#mainSetPhotoStrip").data("kendoListView").template = kendo.template(template(imageSize));
+                    setPhotosDataSource.read();
+                }
+            })
+            .parent().hide();
+        },
+        refreshSets: function() {        
+            setPhotosDataSource.transport.cache.clear();
+            setPhotosDataSource.read();
         },
         initUser: function() {
             var that = this;
@@ -213,10 +226,29 @@
             that.initFlatSetsStrip();
             that.initMainPictures();
             that.initPhotoStrip();
+            that.initSlider();
 
             slideshow.init($("#flatPhotoStrip").data("kendoListView"));
             $("#viewslideshow").click(function() {
                 slideshow.toggle();
+            });
+
+            $(".i-gridview").click(function() {
+                $(this).addClass("currentView");
+                $(".i-tileview").removeClass("currentView");
+                $("#mainSetPhotoStrip").hide();
+                $("#setPhotoSize").parent().hide();
+                $("#mainSetPhotoGrid").show();
+                setPhotosDataSource.query({page: 1, pageSize: 5});
+            }).addClass("currentView");
+
+            $(".i-tileview").click(function() {
+                $(this).addClass("currentView");
+                $(".i-gridview").removeClass("currentView");
+                $("#mainSetPhotoStrip").show();
+                $("#setPhotoSize").parent().show();
+                $("#mainSetPhotoGrid").hide();
+                setPhotosDataSource.query({page: 1, pageSize: 20});
             });
         }
     };
