@@ -118,6 +118,7 @@
             upload = new window.Upload($("#uploadWrap"));
             $("#uploadphotos").bind("click", function(e) {
                 e.preventDefault();
+                slideshow.stop();
                 upload.show();
             });
         },
@@ -230,6 +231,7 @@
 
             slideshow.init($("#flatPhotoStrip").data("kendoListView"));
             $("#viewslideshow").click(function() {
+                upload.hide();
                 slideshow.toggle();
             });
 

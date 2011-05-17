@@ -68,10 +68,10 @@
                 }
             }
             that.responses = [];
+            window.user.refreshSets();
             that.hide();
         },
         hide: function() {
-            window.user.refreshSets();
             this._overlay().fadeOut();
         },
         currentSet: function(val){
