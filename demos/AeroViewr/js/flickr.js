@@ -27,9 +27,11 @@
         getThumbnailURL: function(photo) {
             return 'http://farm' + photo.farm + '.' + 'static.flickr.com/' + photo.server + '/' + photo.id + '_' + photo.secret + '_t.jpg';
         },
+
         isAuthenticated: function() {
             return !!this.auth.token
         },
+
         getApiSig: function(params) {
             var concatString = "",
                 keys = [];
@@ -50,112 +52,90 @@
         },
 
         getAuthMethodUrl: function(method, params) {
-            params = params || {};
-            params["method"] = method;
-            params["api_key"] = this.app.key;
-            params["auth_token"] = this.auth.token;
-            params["format"] = "json";
-            params["api_sig"] = this.getApiSig(params);
+            params = this.params(method, {
+                auth_token: this.auth.token
+            });
 
             return this.service + "?" + $.param(params);
         },
 
         mostPopularParams: function(data) {
-            var params = {
-                method: this.methods.getMostPopular,
-                api_key: this.app.key,
-                format: "json",
-                nojsoncallback: 1
-            }
-            $.extend(params, data);
-            params["api_sig"] = this.getApiSig(params);
-            return params;
+            return this.params(this.methods.getMostPopular, data);
         },
 
         searchParams: function(data) {
-            var params = {
-                method: this.methods.search,
-                api_key: this.app.key,
-                format: "json",
-                nojsoncallback: 1
-            }
+            var params = $.extend({}, data);
 
-            if(this.auth.token) {
+            if (this.auth.token) {
                 params["auth_token"] = this.auth.token;
             }
 
-            $.extend(params, data);
+            return this.params(this.methods.search, params);
+        },
+
+        getSetsParams: function(data) {
+            var params = $.extend({
+                user_id: this.auth.nsid,
+                auth_token: this.auth.token
+            }, data);
+
+            return this.params(this.methods.getSets, params);
+        },
+
+        getNotInSetParams: function(data) {
+            var params = $.extend({
+                auth_token: this.auth.token,
+            }, data);
+
+            return this.params(this.methods.getNotInSet, params);
+        },
+
+        getInSetParams: function(data) {
+            var params = $.extend({
+                auth_token: this.auth.token,
+            }, data);
+
+            return this.params(this.methods.getSetPhotos, params);
+        },
+
+        params: function(method, params) {
+            params = $.extend({}, params, {
+                method: method,
+                api_key: this.app.key,
+                format: "json"
+            });
+
+            if ($.support.cors) {
+                params.nojsoncallback = 1;
+            } else {
+                params.timestamp = + new Date();
+            }
+
             params["api_sig"] = this.getApiSig(params);
             return params;
         },
 
-        getSetsParams: function(data) {
-            var params = {
-                method: this.methods.getSets,
-                user_id: flickr.auth.nsid,
-                api_key: this.app.key,
-                auth_token: this.auth.token,
-                format: "json",
-                nojsoncallback: 1
-            }
-            $.extend(params, data);
-            params["api_sig"] = this.getApiSig(params);
-            return params;
-        },
-        getNotInSetParams: function(data) {
-            var params = {
-                method: this.methods.getNotInSet,
-                api_key: this.app.key,
-                auth_token: this.auth.token,
-                format: "json",
-                nojsoncallback: 1
-            }
-            $.extend(params, data);
-            params["api_sig"] = this.getApiSig(params);
-            return params;
-        },
-        getInSetParams: function(data) {
-            var params = {
-                method: this.methods.getSetPhotos,
-                api_key: this.app.key,
-                auth_token: this.auth.token,
-                format: "json",
-                nojsoncallback: 1
-            }
-            $.extend(params, data);
-            params["api_sig"] = this.getApiSig(params);
-            return params;
-        },
         getRelatedTagParams: function(text) {
-            var params = {
-                method: this.methods.getRelatedTags,
-                api_key: this.app.key,
-                format: "json",
-                // if (!jQuery.support.cors)
-                timestamp: +new Date(),
-            }
-            params["tag"] = text;
-            params["api_sig"] = this.getApiSig(params);
-            return params;
+            return this.params(this.methods.getRelatedTags, { tag: text });
         },
+
         getPhotoInfo: function(id, callback) {
-            var params = {
+            var params = this.params(this.methods.getPhotoInfo, {
                 photo_id: id,
-                method: this.methods.getPhotoInfo,
-                api_key: this.app.key,
-                format: "json",
-                nojsoncallback: 1
-            }
+            });
+
             $.ajax( {
                 url: this.service + "?" + $.param(params),
-                dataType: "json",
+                dataType: $.support.cors ? "json" : "jsonp",
                 success: callback
             });
         },
+
         movePhotoToSet: function(id, photo, callback) {
             var url = this.getAuthMethodUrl(this.methods.movePhotoToSet, {photoset_id: id, photo_id: photo});
             $.post(url, null, callback);
         },
+
         getFrob: function() {
             var search = document.location.search,
                 key = "frob=",
@@ -167,6 +147,7 @@
             }
             return frob;
         },
+
         getToken: function(frob, callback) {
             var params = {
                 api_key: this.app.key,
@@ -179,15 +160,18 @@
             params["api_sig"] = this.getApiSig(params);
             $.get(this.service + "?" + $.param(params), null, callback, "json");
         },
+
         signIn: function() {
-             var params = {
+            var params = {
                 api_key: this.app.key,
                 perms: "write"
             }
+
             params["api_sig"] = this.getApiSig(params);
 
             window.location.href = this.authURL + "?" + $.param(params);
         },
+
         signOut: function() {
             var NULL = null,
                 auth = this.auth;
@@ -201,6 +185,7 @@
 
             document.location.href = document.location.href;
         },
+
         authenticate: function(callback) {
             var session = sessionStorage;
 

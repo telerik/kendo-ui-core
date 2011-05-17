@@ -1,26 +1,16 @@
 (function ($) {
     var flickr = window.flickr,
         visitor = window.visitor,
+        data = window.data,
         user = window.user;
 
     $(document).ready(function () {
-        var tagHotListDataSource = new kendo.data.DataSource({
+        var tagHotListDataSource = data.dataSource( {
             serverFiltering: true,
             pageSize: 10,
-            transport: {
-                read: {
-                    url: flickr.service,
-                    cache: true,
-                    // if (!jQuery.support.cors)
-                    jsonpCallback: "jsonFlickrApi",
-                    jsonp: false,
-                    dataType: "jsonp"
-                },
-                cache: "localstorage",
-                dialect: {
-                    read: function(data) {
-                        return flickr.getRelatedTagParams(data.filter[0].value);
-                    }
+            dialect: {
+                read: function(data) {
+                    return flickr.getRelatedTagParams(data.filter[0].value);
                 }
             },
             reader: {
