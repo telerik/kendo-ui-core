@@ -223,15 +223,19 @@
                 this.getToken(frob, $.proxy(function(data){
                     if(data.stat == "ok"){
                         var auth = this.auth,
-                            session = sessionStorage;
+                            session = sessionStorage,
+                            remoteAuth = data.auth,
+                            user = remoteAuth.user;
 
-                        auth.token = data.auth.token._content;
-                        auth.user = data.auth.user;
+                        auth.token = remoteAuth.token._content;
+                        auth.nsid = user.nsid;
+                        auth.username = user.username;
+                        auth.fullname = user.fullname;
 
                         session.setItem("token", auth.token);
-                        session.setItem("nsid", auth.user.nsid);
-                        session.setItem("username", auth.user.username);
-                        session.setItem("fullname", auth.user.fullname);
+                        session.setItem("nsid", auth.nsid);
+                        session.setItem("username", auth.username);
+                        session.setItem("fullname", auth.fullname);
 
                         callback(true);
                     } else {
