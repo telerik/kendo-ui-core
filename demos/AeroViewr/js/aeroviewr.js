@@ -3,7 +3,7 @@
         visitor = window.visitor,
         user = window.user;
 
-    $(document).ready(function () {       
+    $(document).ready(function () {
         var tagHotListDataSource = new kendo.data.DataSource({
             serverFiltering: true,
             pageSize: 10,
@@ -27,7 +27,7 @@
                     });
                 }
             }
-        });         
+        });
 
         $('.exifInfo .i-help').click(function (e) {
             flickr.getPhotoInfo($(this).attr("data-photoid"), function(result) {
@@ -61,7 +61,7 @@
         $("#searchBox").kendoAutoComplete({
             dataSource: tagHotListDataSource
         });
-       
+
         //log in section
         $("#signin").bind("click", function(e) {
             e.preventDefault();
@@ -82,7 +82,7 @@
               visitor.initVisitor();
             }
         });
-        
+
         if (kendo.support.touch) {
             $(document).bind('touchmove', function (e) { // Disable viewport scrolling
                     e.preventDefault();
