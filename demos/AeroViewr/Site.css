@@ -175,7 +175,7 @@ section#footer
 #uploadphotos
 {
     position:absolute;
-    top:35px;
+    top:17px;
     width: 80px;
 }
 
@@ -407,8 +407,8 @@ header .i-help
 {
     position:relative;
     bottom:0;
-    height:144px;
-    background:0 -146px repeat-x url(img/gradients.png);
+    height:130px;
+    background:0 -161px repeat-x url(img/gradients.png);
 }
 
 #footer>h2
@@ -424,6 +424,7 @@ header .i-help
 #footer .thumbs
 {
     height:75px;
+    margin:6px 0 0;
     padding:8px;
     overflow:hidden;
     white-space: nowrap;
@@ -603,7 +604,7 @@ header .i-help
 {
     position:absolute;
     right:120px;
-    top:8em;
+    top:70px;
 }
 
 .thumbViews>li
@@ -1449,12 +1450,6 @@ div.t-slider
 	bottom: 27px;
 }
 
-.t-slider-vertical .t-slider-buttons .t-slider-items
-{
-    margin: 0;
-    padding-top: 28px;
-}
-
 .t-draghandle
 {
 	position: absolute;
@@ -1495,11 +1490,81 @@ div.t-slider
 }
 /* float clearing end */
 
+.t-slider-buttons .t-slider-items
+{
+	margin-left: 27px;
+}
+
+.t-slider-vertical .t-slider-items
+{
+    padding-top: 1px;
+}
+
+.t-slider-vertical .t-slider-buttons .t-slider-items
+{
+    padding-top: 0;
+}
+
+.t-slider-vertical .t-slider-buttons .t-slider-items
+{
+	margin: 0;
+	padding-top: 28px;
+}
+
+.t-slider .t-tick
+{
+    position: relative;
+	margin: 0;
+	padding: 0;
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-position: center center;
+	cursor: default;
+}
+
+.t-slider-vertical .t-tick
+{
+	text-align: right;
+}
+
+.t-slider-vertical .t-slider-topleft .t-tick
+{
+	text-align: left;
+}
+
+.t-slider .t-label
+{
+    position: absolute;
+}
+
+.t-slider-vertical .t-label
+{
+    left: 120%;
+    display: block;
+    text-align: left;
+}
+
+.t-slider-vertical .t-last .t-label
+{
+    top: -0.5em;
+}
+
+.t-slider-vertical .t-first .t-label
+{
+    bottom: -0.5em;
+}
+
+.t-slider-vertical .t-slider-topleft .t-label
+{
+    left: auto;
+    right: 120%;
+}
+
 div.t-slider
 {
     position: absolute;
     right:120px;
-    top:13em;
+    top:120px;
 }
 
 .t-slider .t-button
