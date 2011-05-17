@@ -106,6 +106,12 @@
             box.x2 += dx;
             box.y1 += dy;
             box.y2 += dy;
+        },
+
+        clone: function() {
+            var box = this;
+
+            return new Box(box.x1, box.y1, box.x2, box.y2);
         }
     }
 
@@ -346,6 +352,7 @@
             majorUnit: 0.1,
             majorTicks: "outside",
             majorTickSize: 4,
+            axisCrossingAt: 0,
 
             _snapLineToBottom: false
         },
@@ -531,6 +538,37 @@
             }
 
             return positions;
+        },
+
+        getSlot: function(a, b) {
+            var axis = this,
+                children = axis.children,
+                options = axis.options,
+                box = axis.box,
+                marginTop = 0,
+                marginBottom = 0;
+
+            if (arguments.length == 1) {
+                b = options.axisCrossingAt;
+            }
+
+            if (children.length > 1) {
+                marginTop = children[0].box.height() / 2;
+                if (!axis.options._snapLineToBottom) {
+                    marginBottom = marginTop;
+                }
+            }
+
+            var axisHeight = box.height() - marginTop - marginBottom,
+                scale = axisHeight / (options.max - options.min);
+
+            var topOffset = scale * Math.min(a, b),
+                bottomOffset = scale * Math.max(a, b);
+
+            var y1 = box.y2 - marginBottom - topOffset,
+                y2 = box.y2 - marginBottom - bottomOffset;
+
+            return new Box(box.x2, y1, box.x2, y2);
         }
     });
 
@@ -635,12 +673,25 @@
 
             for (var i = 0; i < children.length; i++) {
                 positions.push(x);
-                x = round(x + step, COORD_PRECISION);
+                x = x + step;
             };
 
             positions.push(axis.box.x2);
 
             return positions;
+        },
+
+        getSlot: function(categoryIx) {
+            var axis = this,
+                options = axis.options,
+                children = axis.children,
+                box = axis.box,
+                width = box.width(),
+                step = width / children.length,
+                x1 = box.x1 + (categoryIx * step),
+                x2 = x1 + step;
+
+            return new Box(x1, box.y1, x2, box.y1);
         }
     });
 
@@ -667,8 +718,7 @@
                 position = clusterBox[axis + 1];
 
             for (var i = 0; i < children.length; i++) {
-                var childBox = new Box(clusterBox.x1, clusterBox.y1,
-                                       clusterBox.x2, clusterBox.y2);
+                var childBox = children[i].box.clone();
 
                 childBox[axis + 1] = position;
                 childBox[axis + 2] = position + size;
@@ -729,6 +779,10 @@
             borderWidth: 1
         },
 
+        updateLayout: function(targetBox) {
+            this.box = targetBox;
+        },
+
         getViewElements: function(factory) {
             var bar = this,
                 options = bar.options,
@@ -755,24 +809,21 @@
     BarChart.prototype = new ChartElement();
     $.extend(BarChart.prototype, {
         options: {
-            series: []
+            series: [],
+            isHorizontal: true
         },
 
         init: function() {
-            var chart = this,
-                options = chart.options,
-                series = options.series;
+            var barChart = this,
+                children = barChart.children;
 
-            for (var seriesIx = 0; seriesIx < series.length; seriesIx++) {
-                var data = series[seriesIx].data;
+            barChart.traverseDataPoints(function(value, seriesIx, categoryIx) {
+                barChart._seriesMin = Math.min(barChart._seriesMin, value);
+                barChart._seriesMax = Math.max(barChart._seriesMax, value);
 
-                for (var pointIx = 0; pointIx < data.length; pointIx++) {
-                    var point = data[pointIx];
-                    chart._seriesMin = Math.min(chart._seriesMin, point);
-                    chart._seriesMax = Math.max(chart._seriesMax, point);
-                    chart.children.push(new Bar());
-                }
-            }
+                var bar = new Bar();
+                children.push(bar);
+            });
         },
 
         getValueRange: function() {
@@ -780,18 +831,56 @@
             return { min: chart._seriesMin, max: chart._seriesMax };
         },
 
-        getViewElements: function(factory) {
-            var chart = this,
-                options = chart.options,
-                box = chart.box,
-                elements = [];
-
-            return elements;
-        },
-
         updateLayout: function(targetBox) {
-            this.box = targetBox;
-        }
+            var barChart = this,
+                options = barChart.options,
+                series = options.series,
+                isHorizontal = options.isHorizontal,
+                plotArea = barChart.plotArea,
+                children = barChart.children,
+                childIndex = 0,
+                clusters = [];
+
+            barChart.traverseDataPoints(function(value, seriesIx, categoryIx) {
+                var bar = children[childIndex++];
+
+                var slotX = plotArea.axisX.getSlot(isHorizontal ? categoryIx : value);
+                var slotY = plotArea.axisY.getSlot(isHorizontal ? value : categoryIx);
+
+                var barSlot = new Box(slotX.x1, slotY.y1, slotX.x2, slotY.y2);
+
+                var cluster = clusters[categoryIx];
+                if (!cluster) {
+                    cluster = clusters[categoryIx] = new DataPointCluster();
+                    cluster.box = isHorizontal ? slotX : slotY;
+                }
+                cluster.children.push(bar);
+
+                bar.updateLayout(barSlot);
+            });
+
+            for (var i = 0; i < clusters.length; i++) {
+                var cluster = clusters[i];
+                cluster.updateLayout(cluster.box);
+            };
+
+            barChart.box = targetBox;
+       },
+
+       traverseDataPoints: function(callback) {
+            var barChart = this,
+                options = barChart.options,
+                series = options.series,
+                categoriesCount = series.length > 0 ? series[0].data.length : 0;
+
+            for (var categoryIx = 0; categoryIx < categoriesCount; categoryIx++) {
+                for (var seriesIx = 0; seriesIx < series.length; seriesIx++) {
+                    var value = series[seriesIx].data[categoryIx];
+
+                    callback(value, seriesIx, categoryIx);
+                }
+            }
+       }
     });
 
 
@@ -863,13 +952,13 @@
                 targetBox.x2, axisX.box.y1
             ));
 
-            var seriesBox = new Box(
+            var chartBox = new Box(
                 axisY.box.x2, targetBox.y1,
                 targetBox.x2, axisX.box.y1
             );
 
             for (var i = 0; i < charts.length; i++) {
-                charts[i].updateLayout(seriesBox);
+                charts[i].updateLayout(chartBox);
             }
         }
     });

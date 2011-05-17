@@ -289,6 +289,37 @@
 
             })();
 
+            (function() {
+                var numericAxis;
+
+                module("Slots / Horizontal", {
+                    setup: function() {
+                        numericAxis = new Chart.NumericAxis(0, 1);
+                        numericAxis.updateLayout(chartBox);
+                    }
+                });
+
+                test("positions slot for [0, 0.5]", function() {
+                    var slot = numericAxis.getSlot(0, 0.5);
+                    same([slot.y1, slot.y2], [591, 348.5]);
+                });
+
+                test("positions slot for [0.5, 1]", function() {
+                    var slot = numericAxis.getSlot(0.5, 1);
+                    same([slot.y1, slot.y2], [348.5, 106]);
+                });
+
+                test("slot width is 0", function() {
+                    var slot = numericAxis.getSlot(0, 0.5);
+                    same(slot.width(), 0);
+                });
+
+                test("assumes missing value to be the axis crossing", function() {
+                    var slot = numericAxis.getSlot(0.5);
+                    same([slot.y1, slot.y2], [591, 348.5]);
+                });
+
+            })();
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>

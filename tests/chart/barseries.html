@@ -39,26 +39,48 @@
                 var series,
                     plotArea,
                     viewFactory,
-                    positiveSeries = { data: [1, 2] };
+                    positiveSeries = { data: [1, 2] },
+                    negativeSeries = { data: [-1, -2] },
+                    VALUE_AXIS_MAX = 2,
+                    CATEGORY_AXIS_Y = 2;
 
                 function PlotAreaStub() {
                     this.box = new Box(0, 0, 100, 100);
                 }
 
                 $.extend(PlotAreaStub.prototype, {
-                    getDataPointBox: function(point) {
-                        //return new Box(point.x, point.y, point.x + 1, point.y + 1);
+                    axisX: {
+                        getSlot: function(categoryIndex) {
+                            return new Box(categoryIndex, CATEGORY_AXIS_Y,
+                            categoryIndex + 1, CATEGORY_AXIS_Y);
+                        }
+                    },
+
+                    axisY: {
+                        getSlot: function(value) {
+                            var valueY = VALUE_AXIS_MAX - value,
+                                slotTop = Math.min(CATEGORY_AXIS_Y, valueY),
+                                slotBottom = Math.max(CATEGORY_AXIS_Y, valueY);
+
+                            return new Box(0, slotTop, 0, slotBottom);
+                        }
                     }
                 });
 
-                module("Bar Chart", {
-                    setup: function() {
-                        plotArea = new PlotAreaStub();
-                        viewFactory = new ViewFactoryStub();
+                function setupBarChart(seriesData) {
+                    plotArea = new PlotAreaStub();
+                    viewFactory = new ViewFactoryStub();
 
-                        series = new Chart.BarChart(plotArea, {
-                            series: [ positiveSeries ]
-                        });
+                    series = new Chart.BarChart(plotArea, {
+                        series: seriesData
+                    });
+
+                    series.updateLayout();
+                }
+
+                module("Bar Chart / Positive Values", {
+                    setup: function() {
+                        setupBarChart([ positiveSeries ]);
                     }
                 });
 
@@ -74,30 +96,66 @@
                     same(series.getValueRange().max, positiveSeries.data[1]);
                 });
 
-                test("bars are distributed horizontally", function() {
-                    series.getViewElements(viewFactory);
-
-                    var barsX = $.map(viewFactory.renderedRects, function(rect) {
-                        return rect[0];
+                test("bars are distributed across category axis", function() {
+                    var barsX = $.map(series.children, function(bar) {
+                        return bar.box.x1;
                     });
 
-                    same(barsX, [82.051, 348.718, 615.385]);
+                    same(barsX, [0, 1]);
                 });
 
-                test("bars are aligned to category axis", 3, function() {
-                    series.getViewElements(viewFactory);
+                test("bar bottoms are aligned to category axis", function() {
+                    var barsY = $.map(series.children, function(bar) {
+                        return bar.box.y2;
+                    });
 
-                    $.each(viewFactory.renderedRects, function() {
-                        equal(this[1] + this[3], chartBox.y2);
+                    same(barsY, [CATEGORY_AXIS_Y, CATEGORY_AXIS_Y]);
+                });
+
+                test("bars have set width", function() {
+                    $.each(series.children, function() {
+                        equal(this.box.width(), 1);
                     });
                 });
 
-                test("bars have set width", 3, function() {
-                    series.getViewElements(viewFactory);
-
-                    $.each(viewFactory.renderedRects, function() {
-                        equal(this[2], 100);
+                test("bars have set height according to value", function() {
+                    var barHeights = $.map(series.children, function(bar) {
+                        return bar.box.height();
                     });
+
+                    same(barHeights, [1, 2]);
+                });
+
+                module("Bar Chart / Negative Values", {
+                    setup: function() {
+                        setupBarChart([ negativeSeries ]);
+                    }
+                });
+
+                test("bar tops are aligned to category axis", function() {
+                    var barsY = $.map(series.children, function(bar) {
+                        return bar.box.y1;
+                    });
+
+                    same(barsY, [CATEGORY_AXIS_Y, CATEGORY_AXIS_Y]);
+                });
+
+                test("bars have set height according to value", function() {
+                    var barHeights = $.map(series.children, function(bar) {
+                        return bar.box.height();
+                    });
+
+                    same(barHeights, [1, 2]);
+                });
+
+                module("Bar Chart / Cluster", {
+                    setup: function() {
+                        setupBarChart([ positiveSeries, negativeSeries ]);
+                    }
+                });
+
+                test("bars in first category are clustered", function() {
+                    equal(series.children[0].box.x2, series.children[1].box.x1);
                 });
 
             })();
@@ -105,11 +163,12 @@
             (function() {
                 var cluster,
                     bars,
-                    clusterBox = new Box(0, 0, 100, 100);
+                    clusterBox = new Box(0, 0, 100, 100),
+                    barBox = new Box(1, 1, 1, 1);
 
                 function createCluster(options) {
                     cluster = new Chart.DataPointCluster(options);
-                    bars = [ new BarStub(), new BarStub() ];
+                    bars = [ new BarStub(barBox), new BarStub(barBox) ];
                     [].push.apply(cluster.children, bars);
                     cluster.updateLayout(clusterBox);
                 }
