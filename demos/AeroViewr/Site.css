@@ -355,6 +355,7 @@ header .i-help
 
 #searchBox
 {
+    width:130px;
     height:2.2em;
     border:1px solid rgba(255,255,255,.4);
     margin:0 -36px 0 0;
@@ -390,6 +391,7 @@ header .i-help
 #wrap+ul>li
 {
     border:0 solid #000;
+    width:126px;
     padding:1px 28px 1px 8px;
     cursor:pointer;
 }
