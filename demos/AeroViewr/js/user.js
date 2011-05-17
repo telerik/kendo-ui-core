@@ -1,6 +1,7 @@
 (function($, window) {
     var flickr = window.flickr,
         upload,
+        slideshow = window.slideshow,
         photosInSet = false,
         IMAGESIZES = ["_s", "_t", "_m"],
         imageSize = IMAGESIZES[0],
@@ -33,7 +34,8 @@
             }
         }
     }),
-    notInSetDataSource = new kendo.data.DataSource({
+    setPhotosDataSource = new kendo.data.DataSource({
+        serverSorting: true,
         pageSize: 10,
         transport: {
             read: {
@@ -74,6 +76,56 @@
         return $("#flatSetsStrip").data("kendoListView").selected().attr("data-setid");
     };
 
+    function displayImages(element) {
+       element.find("img")
+           .hide()
+           .bind("load", function() {
+               $(this).fadeIn();
+           });
+    }
+
+    function showSelectedPhoto(ui) {
+       //$("#flatSearchPhotos").show();
+       $("#flatPhotoStrip").show();
+       $("#flatSetsStrip").hide();
+
+       ui.element.parent().hide();
+
+       setBigPhoto($("img:first", ui.selectable.value()));
+       
+       setPhotosDataSource.query({page: 1, pageSize: 500});
+   }
+
+   function setBigPhoto(img) {
+       var bigPhoto = $("#bigPhoto"),
+           src = img.attr("src").replace("_s", ""),
+           loader = $("img.loader");
+
+        $(".exifInfo").find("h2").text(img.attr("alt") || "No Title").end().find(".i-help").attr("data-photoid", img.attr("data-photoid"));
+
+        if (loader[0]) {
+            loader.remove();
+        } else {
+            bigPhoto.after("<div class='loading'>Loading ...</div>");
+        }
+
+        loader = $("<img class='loader' />")
+        .hide()
+        .appendTo(document.body)
+        .attr("src", src)
+        .bind("load", function() {
+            loader.remove();
+            bigPhoto.next(".loading")
+            .remove()
+            .end()
+            .stop(true, true)
+            .fadeOut(function() {
+                bigPhoto.attr("src", src);
+            })
+            .fadeIn();
+        });
+   }
+
     var user = window.user = {
         initUpload: function() {
             upload = new window.Upload($("#uploadWrap"));
@@ -84,7 +136,7 @@
         },
         initFlatSetsStrip: function() {
             $("#flatSetsStrip").kendoListView({
-                dataSource: setsDataSource,
+                dataSource: setsDataSource,                
                 template: setTemplate,
                 dataBound: function () {
                     this.element
@@ -101,35 +153,54 @@
                     } else {
                         photosInSet = true;
                     }
-                    $("#mainPicturesNotInSet").show();
-                    notInSetDataSource.read();
+                    
+                    $("#mainUserWrap").show();
+                    setPhotosDataSource.page(1);
                 }
             });
         },
         initMainPictures: function() {
-            $("#mainPicturesNotInSet").kendoListView({
-                dataSource: notInSetDataSource,
-                template: template(imageSize)
-            })
-            .hide()
-            .data("kendoListView")
-            .bind("change", function () {
-                $("#bigPhoto").fadeOut("slow")
-                    .attr("src", $("img:first", this.selected()).attr("src").replace(imageSize, ""))
-                    .bind("load", function (e) {
-                        $(e.target).hide().fadeIn("medium");
-                    });
-                this.element.hide();
-            })
-            .bind("dataBound", function () {
-                this.element.show().find("img").bind("load", function () {
-                    $(this).css("display", "block")
-                            .css("marginLeft", ~~($(this).width() / 2))
-                            .animate({ marginLeft: 0 }, 500)
-                            .parent()
-                            .css("overflow", "hidden").animate({ opacity: 1 }, 1000);
-                });
-            });
+            $(".paging").kendoPager({ dataSource: setPhotosDataSource });
+
+            $("#mainSetPhotoStrip").kendoListView({
+                dataSource: setPhotosDataSource,
+                pageable: $(".paging").data("kendoPager"),
+                template: template(imageSize),
+                change: function () {
+                    showSelectedPhoto(this);
+                },
+                dataBound: function () {
+                    displayImages(this.element);
+                }
+            }).hide();
+
+            $("#mainSetPhotoGrid").kendoGrid({
+                dataSource: setPhotosDataSource,
+                pageable: $(".paging").data("kendoPager"),
+                selectable: true,
+                columns: [
+                    { template: '<img src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>_s.jpg">', title: "PHOTO" },
+                    { field: "ownername", title: "AUTHOR" },
+                    { field: "title", title: "TITLE" },
+                    { field: "tags", title: "TAGS"}
+                ],
+                change: function() {
+                    showSelectedPhoto(this);
+                },
+                dataBound: function() {
+                    displayImages(this.element);
+                }
+            });            
+        },
+        initPhotoStrip: function() {            
+            $("#flatPhotoStrip").kendoListView({
+                dataSource: setPhotosDataSource,
+                pageable: $(".paging").data("kendoPager"),
+                template: template(imageSize),
+                change: function () {                    
+                    setBigPhoto($("img:first", this.selectable.value()));
+                }
+            }).hide();
         },
         refreshSets: function() {
             notInSetDataSource.transport.cache.clear();
@@ -147,6 +218,12 @@
             that.initUpload();
             that.initFlatSetsStrip();
             that.initMainPictures();
+            that.initPhotoStrip();
+
+            slideshow.init($("#flatPhotoStrip").data("kendoListView"));
+            $("#viewslideshow").click(function() {
+                slideshow.toggle();
+            });
         }
     };
 })(jQuery, window);
