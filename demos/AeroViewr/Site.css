@@ -1133,6 +1133,9 @@ li>img,
 
 div.t-window
 {
+    color: #000;
+    font-size:1.2em;
+    padding-top: 2em;
     display: inline-block;
     *display: inline;
     zoom: 1;
@@ -1141,15 +1144,14 @@ div.t-window
     position: absolute;
 
     border-width: 0;
-    border-width: 5px\9;
 
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5x;
-    border-radius: 5px;
+    -moz-border-radius: 12px;
+    -webkit-border-radius: 12px;
+    border-radius: 12px;
 
-    -moz-box-shadow: 0 0 5px 2px #000;
-    -webkit-box-shadow: 0 0 5px 2px #000;
-    box-shadow: 0 0 5px 2px #000;
+    -moz-box-shadow: 0 0 11px 2px #000;
+    -webkit-box-shadow: 0 0 11px 2px #000;
+    box-shadow: 0 0 11px 2px #000;
 }
 
 :root .t-window
@@ -1157,17 +1159,9 @@ div.t-window
     border-width: 0;
 }
 
-.t-window
+.t-window .t-window-titlebar
 {
-    font-size:1.2em;
-    -moz-box-shadow: 0 0 5px 2px #222;
-    -webkit-box-shadow: 0 0 5px 2px #222;
-    box-shadow: 0 0 5px 2px #222;
-}
-
-.t-window .t-header
-{
-    background:0 -300px repeat-x url('img/gradients.png');
+    background: transparent 0 -300px repeat-x url('img/gradients.png');
 }
 
 .t-window .t-content
@@ -1178,6 +1172,9 @@ div.t-window
 .t-window-titlebar
 {
     padding: .4em 0;
+    margin-top: -2em;
+    width: 100%;
+	height 1.1em;
     font-size: 1.2em;
     line-height: 1.2em;
     white-space: nowrap;
@@ -1210,7 +1207,12 @@ div.t-window
 
 div.t-window-content
 {
-    padding: .4em .5em;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+    z-index: -1;
+    padding: .5em;
+    height: 100%;
     /*padding: 0\9;
     margin: .4em .5em\9;
     border-width: 0\9;*/ /*removed due to ImageBrowser issues, no side effects found*/
