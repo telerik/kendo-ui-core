@@ -3,7 +3,10 @@
         service: "http://api.flickr.com/services/rest/",
         authURL: "http://flickr.com/services/auth/",
         auth: {
-            token: null //'72157626154487043-7dfd951a1ede12fa' //write auth
+            //token:'72157626154487043-7dfd951a1ede12fa', //write auth
+            //username:'George Krustev',
+            //fullname:'Georgi G. Krustev',
+            //nsid:'1312312312'
         },
         app: {
             key: 'ea73824c4e27a137b7597fc3ffb3ba98',
@@ -89,7 +92,7 @@
         getSetsParams: function(data) {
             var params = {
                 method: this.methods.getSets,
-                user_id: flickr.auth.user.nsid,
+                user_id: flickr.auth.nsid,
                 api_key: this.app.key,
                 auth_token: this.auth.token,
                 format: "json",
@@ -186,21 +189,50 @@
             window.location.href = this.authURL + "?" + $.param(params);
         },
         signOut: function() {
-            this.auth.token = null;
-            this.auth.user = null;
-            this.auth.frob = null;
+            var NULL = null,
+                auth = this.auth;
+
+            auth.token = NULL;
+            auth.nsid = NULL;
+            auth.username = NULL;
+            auth.fullname = NULL;
+
+            sessionStorage.clear();
+
             document.location.href = document.location.href;
         },
         authenticate: function(callback) {
+            var session = sessionStorage;
+
+            if(session.token) {
+                var auth = this.auth;
+                auth.token = session.token;
+                auth.nsid = session.nsid;
+                auth.username = session.username;
+                auth.fullname = session.fullname;
+            }
+
+            if(this.isAuthenticated()) {
+                callback(true);
+                return;
+            }
+
             var frob = this.getFrob();
             if(frob !== undefined && frob !== this.auth.frob) {
                 this.auth.frob = frob;
-
                 this.getToken(frob, $.proxy(function(data){
                     if(data.stat == "ok"){
-                        var auth = this.auth;
+                        var auth = this.auth,
+                            session = sessionStorage;
+
                         auth.token = data.auth.token._content;
                         auth.user = data.auth.user;
+
+                        session.setItem("token", auth.token);
+                        session.setItem("nsid", auth.user.nsid);
+                        session.setItem("username", auth.user.username);
+                        session.setItem("fullname", auth.user.fullname);
+
                         callback(true);
                     } else {
                         this.signIn();
