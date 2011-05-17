@@ -966,7 +966,7 @@ header .i-help
     font-weight:normal;
     white-space:nowrap;
     max-width:16em;
-    overflow:hidden;
+    overflow-x:hidden;
     text-overflow:ellipsis;
 }
 
