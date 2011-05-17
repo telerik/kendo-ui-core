@@ -257,8 +257,13 @@ var visitor = window.visitor,
             $("#backButton").text("");
 
             slideshow.init($("#flatMostPopularPhotos").data("kendoListView"));
+
             $("#viewslideshow").click(function() {
-                  slideshow.toggle();
+                $(this).find(".p-icon")
+                    .toggleClass("i-pause")
+                    .toggleClass("i-slideshow");
+
+                slideshow.toggle();
             });
         }
    };
