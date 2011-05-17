@@ -92,20 +92,20 @@ var visitor = window.visitor,
         }
 
         loader = $("<img class='loader' />")
-        .hide()
-        .appendTo(document.body)
-        .attr("src", src)
-        .bind("load", function() {
-            loader.remove();
-            bigPhoto.next(".loading")
-            .remove()
-            .end()
-            .stop(true, true)
-            .fadeOut(function() {
-                bigPhoto.attr("src", src);
-            })
-            .fadeIn();
-        });
+            .hide()
+            .appendTo(document.body)
+            .attr("src", src)
+            .bind("load", function() {
+                loader.remove();
+                bigPhoto.next(".loading")
+                .remove()
+                .end()
+                .stop(true, true)
+                .fadeOut(function() {
+                    bigPhoto.attr("src", src);
+                })
+                .fadeIn();
+            });
    }
 
    window.visitor = {

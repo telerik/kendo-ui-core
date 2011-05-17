@@ -115,7 +115,7 @@ section#footer
     -moz-box-orient: horizontal;
     -moz-box-pack: center;
     -moz-box-align: center;
-    
+
     display: -ms-box;
     -ms-box-orient: horizontal;
     -ms-box-pack: center;
@@ -131,6 +131,7 @@ section#footer
 {
     position: relative;
     overflow: hidden;
+    display: none;
 }
 
 #overlay
@@ -421,7 +422,7 @@ header .i-help
     overflow:hidden;
     white-space: nowrap;
     vertical-align:middle;
-    outline: 0; /* Remove the focus in WebKit */ 
+    outline: 0; /* Remove the focus in WebKit */
 }
 
 #footer>a
