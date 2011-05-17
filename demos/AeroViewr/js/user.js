@@ -210,9 +210,14 @@
             var that = this;
             $("#flatMostPopularPhotos").hide();
             $("#signin").hide();
-            $("#userInfo").fadeIn().find("em:first").html(flickr.auth.user.username);
-            if(history.replaceState){
+            $("#userInfo").fadeIn().find("em:first").html(flickr.auth.username);
+
+            try {
                 history.replaceState(null, "AeroViewr", liveUrl);
+            } catch(e) {
+                if(location.href.indexOf("?") !== -1) {
+                    location.href = location.href.split("?")[0];
+                }
             }
 
             that.initUpload();
