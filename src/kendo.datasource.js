@@ -415,20 +415,22 @@
         },
         query: function(options) {
             var that = this,
-                options = options || {},
+                options = options,
                 remote = that.serverSorting || that.serverPaging || that.serverFiltering;
 
-            that._pageSize = options.pageSize;
-            that._page = options.page;
-            that._sort = options.sort;
-            that._filter = options.filter;
+            if(options !== undefined) {
+                that._pageSize = options.pageSize;
+                that._page = options.page;
+                that._sort = options.sort;
+                that._filter = options.filter;
 
-            if (options.sort) {
-                that._sort = options.sort = kendo.data.Query.expandSort(options.sort);
-            }
+                if (options.sort) {
+                    that._sort = options.sort = kendo.data.Query.expandSort(options.sort);
+                }
 
-            if (options.filter) {
-                that._filter = options.filter = kendo.data.Query.expandFilter(options.filter);
+                if (options.filter) {
+                    that._filter = options.filter = kendo.data.Query.expandFilter(options.filter);
+                }
             }
 
             if (remote || (that._data === undefined || that._data.length == 0)) {
