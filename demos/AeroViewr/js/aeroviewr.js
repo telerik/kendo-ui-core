@@ -37,7 +37,7 @@
                 var photo = result.photo;
 
                 $(kendo.template(
-                '<dl class="floatWrap">\
+                '<div><dl class="floatWrap">\
                     <dt>Taken on</dt><dd><%= taken %></dd>\
                     <dt>Posted to Flickr</dt><dd><%= posted %></dd>\
                     <dt>Description</dt><dd><%= description %></dd>\
@@ -48,7 +48,7 @@
                        <li><%= tag %></li> \
                     <% }); %> \
                     </ul></dd>\
-                </dl>'
+                </dl></div>'
                 )({
                     posted: kendo.toString(new Date(parseInt(photo.dates.posted) * 1000), "yyyy-MM-dd hh:mm:ss"),
                     taken: photo.dates.taken,
@@ -56,7 +56,7 @@
                     author: photo.owner.realname,
                     tags: $.map(photo.tags.tag, function(tag) { return tag._content; } ),
                     location: photo.owner.location
-                })).kendoPopup().data("kendoPopup").open();
+                })).kendoWindow().data("kendoWindow").open().center();
             });
             e.preventDefault();
         });
