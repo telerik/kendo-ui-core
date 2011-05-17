@@ -29,8 +29,10 @@
             flickr.getPhotoInfo($(this).attr("data-photoid"), function(result) {
                 var photo = result.photo;
 
+                visitor.hideExif();
+
                 $(kendo.template(
-                '<div><dl class="floatWrap">\
+                '<div id="exifwindow"><dl class="floatWrap">\
                     <dt>Taken on</dt><dd><%= taken %></dd>\
                     <dt>Posted to Flickr</dt><dd><%= posted %></dd>\
                     <dt>Description</dt><dd><%= description %></dd>\
@@ -93,6 +95,5 @@
 
             window.scrollTo(0, 1);
         }
-
     });
 })(jQuery);

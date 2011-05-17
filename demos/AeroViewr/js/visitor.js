@@ -110,6 +110,13 @@ var visitor = window.visitor,
    }
 
    window.visitor = {
+       hideExif: function() {
+            var wnd = $("#exifwindow").data("kendoWindow");
+            if(wnd) {
+                wnd.close();
+                $("#exifwindow").fadeOut().remove();
+            }
+        },
         mostPopular: function() {
             this.thumbList.append( $("#flatMostPopularPhotos").kendoListView({
                 dataSource: mostPopularDataSource,
