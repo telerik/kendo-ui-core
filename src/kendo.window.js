@@ -41,12 +41,16 @@
 
             that.wrapper.css("padding-top", titleBar.outerHeight());
 
-            if(options.width) {
+            if (options.width) {
                 that.wrapper.width(options.width);
             }
 
-            if (options.htight) {
+            if (options.height) {
                 that.wrapper.height(options.height)
+            }
+
+            if (!options.visible) {
+                that.wrapper.hide();
             }
         }
 
@@ -257,20 +261,23 @@
     $.extend(Window.prototype, {
         options: {
             animation: {
-                show: {
+                openAnimation: {
                     effects: { zoomIn: {}, fadeIn: {} },
-                    duration: 350
+                    duration: 350,
+                    show: true
                 },
-                hide: {
+                closeAnimation: {
                     effects: { zoomOut: { properties: { scale: 0.7 } }, fadeOut: {} },
-                    duration: 350
+                    duration: 350,
+                    hide: true
                 }
             },
             modal: false,
             resizable: true,
             draggable: true,
             minWidth: 50,
-            minHeight: 50
+            minHeight: 50,
+            visible: true
         },
 
         overlay: function (visible) {
@@ -351,23 +358,28 @@
         open: function (e) {
             var that = this,
                 wrapper = that.wrapper,
-                showOptions = that.options.animation.show;
+                showOptions = that.options.animation.openAnimation;
 
             if (!that.trigger(OPEN)) {
                 if (that.options.modal) {
                     var overlay = that.overlay(false);
 
                     if (showOptions.duration) {
-                        overlay.css("opacity", 0).show().kendoAnimate({ fadeIn: { properties: { opacity: 0.5 } } }, showOptions.duration);
+                        overlay.kendoStop().kendoAnimate({
+                            effects: { fadeOut: { properties: { opacity: 0.5 } } },
+                            duration: showOptions.duration,
+                            show: true
+                        });
                     } else {
                         overlay.css("opacity", 0.5).show();
                     }
                 }
 
                 if (!wrapper.is(":visible")) {
-                    wrapper.show().kendoAnimate({
+                    wrapper.kendoStop().kendoAnimate({
                         effects: showOptions.effects,
                         duration: showOptions.duration,
+                        show: showOptions.show,
                         complete: function() {
                             that.trigger(ACTIVATE);
                         }
@@ -386,7 +398,7 @@
             var that = this,
                 wrapper = that.wrapper,
                 options = that.options,
-                hideOptions = options.animation.hide;
+                hideOptions = options.animation.closeAnimation;
 
             if (wrapper.is(":visible")) {
                 if (!that.trigger(CLOSE)) {
@@ -401,18 +413,21 @@
 
                     if (shouldHideOverlay) {
                         if (hideOptions.duration) {
-                            overlay.kendoAnimate({ fadeOut: { properties: { opacity: 0.5 } } }, hideOptions.duration);
+                            overlay.kendoStop().kendoAnimate({
+                                 effects: { fadeOut: { properties: { opacity: 0 } } },
+                                 duration: hideOptions.duration,
+                                 hide: true
+                             });
                         } else {
                             overlay.hide();
                         }
                     }
 
-                    wrapper.kendoAnimate({
+                    wrapper.kendoStop().kendoAnimate({
                         effects: hideOptions.effects,
                         duration: hideOptions.duration,
+                        hide: hideOptions.hide,
                         complete: function() {
-                            wrapper.hide();
-
                             if (shouldHideOverlay) {
                                 overlay.hide();
                             }
@@ -499,7 +514,7 @@
             }
 
             var wrapper = this.wrapper;
-console.log(window);
+
             wrapper
                 .css({
                     width: $(window).width(),
