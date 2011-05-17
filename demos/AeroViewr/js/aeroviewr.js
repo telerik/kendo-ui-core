@@ -1,7 +1,7 @@
 (function ($) {
     var flickr = window.flickr,
         visitor = window.visitor,
-        upload = window.uploadView,
+        Upload = window.Upload,
         IMAGESIZES = ["_s", "_t", "_m"],
         imageSize = IMAGESIZES[0],
         template = function(size) { return '<li alt="thumbnail"><img src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>' + size + '.jpg"></li>'; },
@@ -10,7 +10,7 @@
 
     $(document).ready(function () {
         var flatSetsStrip = $("#flatSetsStrip"),
-            uploadView = new UploadView($("#uploadWrap")),
+            upload = new Upload($("#uploadWrap")),
             mainNotInSetPhotoStrip = $("#mainNotInSetPhotoStrip"),
             mainInSetPhotoStrip = $("#mainInSetPhotoStrip"),
             setsDataSource = new kendo.data.DataSource({
@@ -88,9 +88,9 @@
             inSetDataSource = new kendo.data.DataSource({
                 transport: {
                     read: {
-                        url: flickr.service,                     
+                        url: flickr.service,
                         dataType: "json"
-                    },                                
+                    },
                     dialect: {
                         read: function(data) {
                             var params = flickr.getInSetParams({extras: "owner_name,tags", per_page: 500, photoset_id: photoSetId()});
@@ -99,19 +99,19 @@
                     }
                 },
                 reader: {
-                    data: function(result) {                                                        
+                    data: function(result) {
                         return result.photoset.photo;
                     },
-                    total: function(result) {                        
+                    total: function(result) {
                         return Math.min(result.photoset.total, 500);
                     }
                 }
             }),
-            photoSetId = function() {                                   
+            photoSetId = function() {
                 return flatSetsStrip.data("kendoListView").selected().attr("data-setid");
             },
             buildMainInSetPhotoStrip = function() {
-                mainInSetPhotoStrip.kendoListView({                                    
+                mainInSetPhotoStrip.kendoListView({
                     template: template(imageSize),
                     dataSource: inSetDataSource
                 })
@@ -132,27 +132,30 @@
                                 .parent()
                                 .css("overflow", "hidden").animate({ opacity: 1 }, 1000);
                     });
-                });   
+                });
             };
-        
+
         $('.i-help').click(function (e) {
-            dataSource.transport.cache.clear(); // temp in order to force items removal from the localStore
+            e.preventDefault();
         });
 
         $("#searchBox").kendoAutoComplete({
             dataSource: tagHotListDataSource
         });
 
-        $("#uploadphotos").bind("click", function() {
-            uploadView.show();
+        $("#uploadphotos").bind("click", function(e) {
+            e.preventDefault();
+            upload.show();
         });
 
         //log in section
-        $("#signin").bind("click", function() {
+        $("#signin").bind("click", function(e) {
+            e.preventDefault();
             flickr.signIn();
         });
 
-        $("#signout").bind("click", function() {
+        $("#signout").bind("click", function(e) {
+            e.preventDefault();
             flickr.signOut();
         });
 
@@ -169,21 +172,21 @@
                 flatSetsStrip.kendoListView({
                     dataSource: setsDataSource,
                     template: setTemplate,
-                    dataBound: function () {                        
+                    dataBound: function () {
                         this.element
                             .prepend('<li alt="thumbnail"><img width="75" height="75" src="img/NotInSet.png" /><em>Not In Set</em></li>')
                             .show();
                         this.selectable.value(this.element.find("li:first"));
                         //maybe load pictures from first set
                     },
-                    change: function(e) {                        
+                    change: function(e) {
                         var selected = this.selected();
-                        uploadView.currentSet(selected);
+                        upload.currentSet(selected);
                         if(selected.is(this.element.find("li:first"))) {
                             mainNotInSetPhotoStrip.show();
                         }
-                        else {                                
-                            if(!mainInSetPhotoStrip.data("kendoListView")) {                            
+                        else {
+                            if(!mainInSetPhotoStrip.data("kendoListView")) {
                                 buildMainInSetPhotoStrip();
                             }
                             mainInSetPhotoStrip.show();

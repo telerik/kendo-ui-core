@@ -229,16 +229,18 @@ var visitor = window.visitor,
             this.thumbList.append($("#flatSearchPhotos"));
         },
         initVisitor: function() {
-            $(".i-search").unbind("click").click($.proxy(this.search, this));
+            var that = this;
+
+            $(".i-search").unbind("click").click(function(e) { e.preventDefault(); that.search(); });
             $("#searchBox").bind("keydown", function(e) {
                 if(e.keyCode === kendo.keys.ENTER) {
                     $(".i-search").click();
                 }
             });
 
-            this.thumbList = new kendo.ui.Scroller($('<div class="thumb-list">').appendTo("#footer")).scrollElement;
+            that.thumbList = new kendo.ui.Scroller($('<div class="thumb-list">').appendTo("#footer")).scrollElement;
 
-            this.mostPopular();
+            that.mostPopular();
 
             $("#backButton").text("");
 
