@@ -686,50 +686,52 @@
         }
     });
 
-    function DataPointCluster(options) {
+    function ClusterLayout(options) {
         var cluster = this;
-        ChartElement.call(cluster);
+        cluster.children = [];
 
         cluster.options = $.extend({}, cluster.options, options);
     }
 
-    DataPointCluster.prototype = new ChartElement();
-    $.extend(DataPointCluster.prototype, {
+    $.extend(ClusterLayout.prototype, {
         options: {
-            isHorizontal: true
+            isHorizontal: true,
+            gap: 1.5
         },
 
-        updateLayout: function(clusterBox) {
+        updateLayout: function(box) {
             var cluster = this,
-                isHorizontal = cluster.options.isHorizontal,
+                options = cluster.options,
+                isHorizontal = options.isHorizontal,
                 axis = isHorizontal ? "x" : "y",
                 children = cluster.children,
-                childrenCount = children.length,
-                size = (isHorizontal ? clusterBox.width() : clusterBox.height()) / childrenCount,
-                position = clusterBox[axis + 1];
+                gap = options.gap,
+                slots = children.length + gap,
+                slotSize = (isHorizontal ? box.width() : box.height()) / slots,
+                position = box[axis + 1] + slotSize * (gap / 2);
 
             for (var i = 0; i < children.length; i++) {
                 var childBox = children[i].box.clone();
 
                 childBox[axis + 1] = position;
-                childBox[axis + 2] = position + size;
+                childBox[axis + 2] = position + slotSize;
 
                 children[i].updateLayout(childBox);
 
-                position += size;
+                position += slotSize;
             };
         }
     });
 
-    function DataPointStack(options) {
+    function StackLayout(options) {
         var stack = this;
         ChartElement.call(stack);
 
         stack.options = $.extend({}, stack.options, options);
     }
 
-    DataPointStack.prototype = new ChartElement();
-    $.extend(DataPointStack.prototype, {
+    StackLayout.prototype = new ChartElement();
+    $.extend(StackLayout.prototype, {
         options: {
             isVertical: true
         },
@@ -801,7 +803,8 @@
     $.extend(BarChart.prototype, {
         options: {
             series: [],
-            isHorizontal: true
+            isHorizontal: true,
+            gap: 1.5
         },
 
         init: function() {
@@ -842,7 +845,9 @@
 
                 var cluster = clusters[categoryIx];
                 if (!cluster) {
-                    cluster = clusters[categoryIx] = new DataPointCluster();
+                    cluster = clusters[categoryIx] = new ClusterLayout({
+                        gap: options.gap
+                    });
                     cluster.box = isHorizontal ? slotX : slotY;
                 }
                 cluster.children.push(bar);
@@ -1384,8 +1389,8 @@
     Chart.NumericAxis = NumericAxis;
     Chart.CategoryAxis = CategoryAxis;
     Chart.BarChart = BarChart;
-    Chart.DataPointCluster = DataPointCluster;
-    Chart.DataPointStack = DataPointStack;
+    Chart.ClusterLayout = ClusterLayout;
+    Chart.StackLayout = StackLayout;
     Chart.Title = Title;
     Chart.Legend = Legend;
     Chart.PlotArea = PlotArea;
