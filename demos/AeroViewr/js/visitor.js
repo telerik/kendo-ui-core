@@ -65,7 +65,7 @@ var visitor = window.visitor,
 
        dataSource.query({page: 1, pageSize: PAGESIZE});
 
-       $("#backButton").text("Back to search results").data("currentView", "flatMostPopularPhotos");
+       $(".bottomLink").text("Back to search results").data("currentView", "flatMostPopularPhotos");
    }
 
    var loadingTimeout = 0;
@@ -142,21 +142,20 @@ var visitor = window.visitor,
                 $("#flatSearchPhotos").hide();
                 $("#overlay").fadeIn();
                 $("#exifButton").fadeOut();
+                slideshow.init($("#flatSearchPhotos").data("kendoListView"));
             }
-            $("#backButton").text("Back to most popular").data("currentView", "mainTemplate");
-            slideshow.init($("#flatSearchPhotos").data("kendoListView"));
         },
 
         searchResult: function () {
             var that = this;
+            that._showSearchResults = true;
+            $("#overlay").after("<div id='searchLoading' class='loading'>Loading ...</div>");
+
             if(that._searchInitialized){
                 return;
             }
 
-            $("#overlay").after("<div id='searchLoading' class='loading'>Loading ...</div>");
-
             that._searchInitialized = true;
-            that._showSearchResults = true;
 
             $(".paging").kendoPager({ dataSource: dataSource });
 
@@ -190,6 +189,7 @@ var visitor = window.visitor,
                         $("#mainTemplate").show();
                         that._showSearchResults = false;
                     }
+                    $(".bottomLink").text("Back to most popular").data("currentView", "mainTemplate");
                     displayImages(this.element);
                     $("#searchLoading").remove();
                 }
@@ -233,12 +233,11 @@ var visitor = window.visitor,
                 dataSource.query({page: 1, pageSize: pageSize});
             });
 
-            $("#backButton").bind("click", function(){
+            $(".bottomLink").bind("click", function(){
                 var element = $(this),
                     view = element.data("currentView");
 
                 if(view === "flatMostPopularPhotos") {
-                    //that._showSearchResults = true;
                     element.data("currentView", "mainTemplate");
                     $("#flatSearchPhotos").hide();
                     $("#mainTemplate").show();
@@ -293,7 +292,7 @@ var visitor = window.visitor,
 
             that.mostPopular();
 
-            $("#backButton").text("");
+             $(".bottomLink").text("");
 
             slideshow.init($("#flatMostPopularPhotos").data("kendoListView"));
 
