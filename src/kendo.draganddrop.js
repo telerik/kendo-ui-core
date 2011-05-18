@@ -115,7 +115,9 @@
                        .bind(MOUSEUP + NAMESPACE, proxy(that._destroy, that));
 
             // Prevent text selection for Gecko and WebKit
-            e.preventDefault();
+            if (!touch) {
+                e.preventDefault();
+            }
         },
 
         _start: function(e) {
@@ -185,10 +187,13 @@
         },
 
         _trigger: function(eventName, e) {
-            var that = this;
+            var that = this,
+                location = kendo.touchLocation(e);
 
             that.trigger(eventName, extend({}, e, {
-                currentTarget: that.currentTarget
+                currentTarget: that.currentTarget,
+                pageX: location.x,
+                pageY: location.y
             }));
         },
 
