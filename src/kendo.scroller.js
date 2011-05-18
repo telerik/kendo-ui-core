@@ -36,6 +36,9 @@
                                     });
         this._horizontalArrows = $().add(this._scrollArrows.left).add(this._scrollArrows.right);
         this._verticalArrows = $().add(this._scrollArrows.top).add(this._scrollArrows.bottom);
+        this._allArrows = $().add(this._horizontalArrows).add(this._verticalArrows);
+
+        this._allArrows.click( $.proxy( this._scrollClick, this ) );
 
         extend(this, {
                         webkit3d: 'WebKitCSSMatrix' in window && 'm11' in new WebKitCSSMatrix(),
@@ -226,23 +229,36 @@
             this._dragCanceled = false;
         },
 
+        _scrollClick: function (e) {
+            var scrollTo = 0,
+                scrollOffsets = this._getScrollOffsets();
+
+            if ($(e.target).hasClass('left-scroll-arrow'))
+                scrollTo = Math.min( 0, scrollOffsets.x + this.element.innerWidth() );
+
+            if ($(e.target).hasClass('right-scroll-arrow'))
+                scrollTo = Math.max( -this.scrollElement.innerWidth() + this.element.innerWidth(), scrollOffsets.x - this.element.innerWidth() );
+            
+            this.scrollElement.kendoStop().kendoAnimate({effects: { slideLeft: { properties: { translate: scrollTo + 'px' } } } });
+        },
+
         _showScrollArrows: function () {
             this._initializeBoxModel();
             
             if (this.hasVerticalScroll)
-                this._verticalArrows.kendoStop().kendoAnimate({ effects: { fadeIn : { properties: { opacity: .7 } } }, duration: "fast", show: true });
+                this._verticalArrows.kendoStop(true, true).kendoAnimate({ effects: { fadeIn : { properties: { opacity: .7 } } }, duration: "fast", show: true });
 
             if (this.hasHorizontalScroll) {
-                this._horizontalArrows.kendoStop().kendoAnimate({ effects: { fadeIn : { properties: { opacity: .7 } } }, duration: "fast", show: true });
+                this._horizontalArrows.kendoStop(true, true).kendoAnimate({ effects: { fadeIn : { properties: { opacity: .7 } } }, duration: "fast", show: true });
             }
         },
 
         _hideScrollArrows: function () {
             if (this.hasVerticalScroll)
-                this._verticalArrows.kendoStop().kendoAnimate({ effects: "fadeOut", duration: "fast", hide: true });
+                this._verticalArrows.kendoStop(true, true).kendoAnimate({ effects: "fadeOut", duration: "fast", hide: true });
 
             if (this.hasHorizontalScroll)
-                this._horizontalArrows.kendoStop().kendoAnimate({ effects: "fadeOut", duration: "fast", hide: true });
+                this._horizontalArrows.kendoStop(true, true).kendoAnimate({ effects: "fadeOut", duration: "fast", hide: true });
         },
 
         _getReverseDelta: function (position, minBounceLimit, maxBounceLimit) {

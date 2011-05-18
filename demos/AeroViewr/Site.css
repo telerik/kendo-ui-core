@@ -1838,7 +1838,7 @@ html .t-upload
 .scroll-arrow
 {
     position: absolute;
-    width: 34px;
+    width: 28px;
     height: 100%;
     opacity: .7;
     display: none;
@@ -1848,7 +1848,7 @@ html .t-upload
     box-sizing: border-box;
     border-color: transparent;
     border-style: solid;
-    border-width: 13px 7px 10px;
+    border-width: 13px 0 7px;
     box-shadow: 0 0 5px #000;
     background: #222 url('img/scroll-arrows.png') no-repeat 0 50%;
     background-clip: padding-box;
