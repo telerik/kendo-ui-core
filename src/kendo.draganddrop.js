@@ -4,12 +4,13 @@
         Component = kendo.ui.Component,
         proxy = $.proxy,
         extend = $.extend,
+        touch = kendo.support.touch,
         draggables = {},
         NAMESPACE = ".kendo-dnd",
         MOUSEENTER = "mouseenter",
-        MOUSEUP = "mouseup",
-        MOUSEDOWN = "mousedown",
-        MOUSEMOVE = "mousemove",
+        MOUSEUP = touch? "touchend" : "mouseup",
+        MOUSEDOWN = touch? "touchstart" : "mousedown",
+        MOUSEMOVE = touch? "touchmove" : "mousemove",
         KEYDOWN = "keydown",
         MOUSELEAVE = "mouseleave",
         SELECTSTART = "selectstart",
@@ -102,12 +103,14 @@
             var that = this,
                 filter = that.options.filter;
 
-            that._offset = { x: e.pageX, y: e.pageY };
+            that._offset = kendo.touchLocation(e);
+
             if(filter) {
                 that.currentTarget = $(e.target).is(filter) ? $(e.target) : $(e.target).closest(filter);
             }else {
                 that.currentTarget = $(e.currentTarget);
             }
+
             $(document).bind(MOUSEMOVE + NAMESPACE, proxy(that._start, that))
                        .bind(MOUSEUP + NAMESPACE, proxy(that._destroy, that));
 
@@ -117,8 +120,9 @@
 
         _start: function(e) {
             var that = this,
-                pageX = e.pageX,
-                pageY = e.pageY,
+                location = kendo.touchLocation(e),
+                pageX = location.x,
+                pageY = location.y,
                 x = that._offset.x - pageX,
                 y = that._offset.y - pageY,
                 distance = Math.sqrt((x * x) + (y * y)),
@@ -152,14 +156,15 @@
 
         _drag: function(e) {
             var that = this,
-                cursorOffset = that.options.cursorOffset;
+                cursorOffset = that.options.cursorOffset,
+                location = kendo.touchLocation(e);
 
             that._trigger(DRAG, e);
 
             if (that.hint) {
                 that.hint.css( {
-                    left: e.pageX + cursorOffset.left,
-                    top: e.pageY + cursorOffset.top
+                    left: location.x + cursorOffset.left,
+                    top: location.y + cursorOffset.top
                 });
             }
         },
