@@ -64,13 +64,15 @@ var visitor = window.visitor,
        setBigPhoto(ui.selectable.value().find("img"));
 
        dataSource.query({page: 1, pageSize: PAGESIZE});
+
+       $("#backButton").text("Back to search results").data("currentView", "flatMostPopularPhotos");
    }
 
    var loadingTimeout = 0;
 
    function setBigPhoto(img) {
        var bigPhoto = $("#bigPhoto"),
-           src = img.attr("src").replace("_s", "").replace(imageSize.suffix,""),
+           src = img.attr("src").replace("_s", "_b").replace(imageSize.suffix,"_b"),
            loader = $("img.loader"),
            exifInfo = $(".exifInfo");
 
