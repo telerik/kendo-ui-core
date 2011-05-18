@@ -253,7 +253,7 @@
             },
             reverse: function(element, properties, options) {
                 animate(element, extend({ translate: 0 }, properties), options);
-        }
+            }
         },
         slideRight: {
             play: function(element, properties, options) {
