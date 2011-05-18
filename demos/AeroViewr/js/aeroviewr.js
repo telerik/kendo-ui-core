@@ -102,12 +102,12 @@ if (!isInferiorBrowser) {
                     posted: kendo.toString(new Date(parseInt(photo.dates.posted) * 1000), "MMMM dd, yyyy"),
                     description: description,
                     author: photo.owner.realname,
-                    tags: $.map(photo.tags.tag, function(tag) {
+                    tags: $.map(photo.tags.tag.slice(0, 24), function(tag) {
                         return {
                             text: tag.raw,
                             id: tag._content
                         };
-                    }).slice(0, 24),
+                    }),
                     location: photo.owner.location
                 })
                 ).kendoWindow({
