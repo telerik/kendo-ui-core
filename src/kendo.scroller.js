@@ -271,6 +271,8 @@
         },
 
         _wait: function (e) {
+            e.preventDefault(); // Might stir some problems...
+            
             this._dragged = false;
             clearTimeout(this.timeoutId);
             this._originalEvent = e.originalEvent;
@@ -287,9 +289,8 @@
             this.direction = { x: 1, y: 1 };
             this.directionChange = +new Date();
 
-            $(document)
-                    .bind(this._moveEvent, this._startProxy)
-                    .bind(this._endEvent, this._stopProxy);
+            $(document).bind(this._moveEvent, this._startProxy);
+            document.addEventListener(this._endEvent, this._stopProxy, true); // Needs capture to prevent delegates...
         },
 
         _initializeBoxModel: function () {
@@ -337,6 +338,7 @@
 
             if (Math.abs(this.lastLocation.x - currentLocation.x) > dip10 || Math.abs(this.lastLocation.y - currentLocation.y) > dip10) {
                 e.preventDefault();
+                e.stopPropagation();
                 this._dragged = true;
 
                 this._initializeBoxModel();
@@ -368,6 +370,7 @@
             if (this._dragCanceled) return;
 
             e.preventDefault();
+            e.stopPropagation();
 
             var currentLocation = touchLocation(e);
             if (currentLocation.idx != this.start.idx) return;
@@ -384,9 +387,10 @@
 
         _stop: function (e) {
             if (this._dragCanceled) return;
-            $(document).unbind(this._endEvent, this._stopProxy)
-                       .unbind(this._moveEvent, this._startProxy)
-                       .unbind(this._moveEvent, this._dragProxy);
+            document.removeEventListener(this._endEvent, this._stopProxy, true);
+            $(document)
+                 .unbind(this._moveEvent, this._startProxy)
+                 .unbind(this._moveEvent, this._dragProxy);
 
             var oEvent = this._originalEvent,
                 target = $(oEvent.target),
@@ -395,6 +399,7 @@
             if (this._dragged) {
                 this._dragged = false;
                 e.preventDefault();
+                e.stopPropagation();
 
                 this._initKinetikAnimation(e);
             } else {
@@ -456,6 +461,10 @@
             }
 
             return false
+        },
+
+        _scrollIntoView: function(element) {
+            
         },
 
         _scrollTo: function (x, y, duration) {

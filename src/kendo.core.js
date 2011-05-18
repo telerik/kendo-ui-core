@@ -1130,7 +1130,7 @@
             x: e.pageX,
             y: e.pageY
         };
-    }
+    };
 
     if (support.touch) {
         touchLocation = function(e) {
@@ -1141,7 +1141,13 @@
                 x: changedTouches[0].pageX,
                 y: changedTouches[0].pageY
             };
-        }
+        };
+
+        $.each(['swipe', 'swipeLeft', 'swipeRight', 'swipeUp', 'swipeDown', 'doubleTap', 'tap'], function(method) {
+            $.fn[method] = function(callback) {
+                return this.bind(method, callback)
+            }
+        });
     }
 
     extend(kendo, {

@@ -21,6 +21,7 @@ if (!isInferiorBrowser) {
         data = window.data,
         user = window.user,
         fullscreen = false;
+    animType = false;
 
     $(document).ready(function () {
         var tagHotListDataSource = data.dataSource( {
@@ -177,14 +178,6 @@ if (!isInferiorBrowser) {
             flickr.signOut();
         });
 
-        $("#bigPhoto").bind(kendo.support.touch ? "touchend" : "mousedown", function(e) {
-            e.preventDefault();
-
-            $('header').kendoStop().kendoAnimate('slideUp', 'fast', fullscreen);
-            $('#footer').kendoStop().kendoAnimate('slideDown', 'fast', fullscreen);
-            fullscreen = !fullscreen;
-        });
-
         if (isInferiorBrowser) {
             return;
         }
@@ -202,6 +195,8 @@ if (!isInferiorBrowser) {
         });
 
         if (kendo.support.touch) {
+            $('#uploadphotos').hide();
+
             if (window.innerWidth < 380 || window.innerHeight < 380)
                 $(document.body).css('zoom', .7);
 
@@ -209,20 +204,94 @@ if (!isInferiorBrowser) {
                 e.preventDefault();
             });
 
+            var startLocation = {};
+
+            $.extend(kendo.fx, {
+                slideRotateLeft: {
+                    play: function(element, properties, options) {
+                        kendo.fx.transition(element, $.extend({ translate: (-window.innerWidth) + 'px' }, properties), options);
+                    },
+                    reverse: function(element, properties, options) {
+                        element.css(kendo.support.transitions.css + 'transform', 'translate(' + window.innerWidth + 'px, 0)');
+                        element.css(kendo.support.transitions.css + 'transform');
+                        kendo.fx.transition(element, $.extend({ translate: 0 }, properties), options);
+                    }
+                },
+                slideRotateRight: {
+                    play: function(element, properties, options) {
+                        kendo.fx.transition(element, $.extend({ translate: (window.innerWidth) + 'px' }, properties), options);
+                    },
+                    reverse: function(element, properties, options) {
+                        element.css(kendo.support.transitions.css + 'transform', 'translate(-' + window.innerWidth + 'px, 0)');
+                        element.css(kendo.support.transitions.css + 'transform');
+                        kendo.fx.transition(element, $.extend({ translate: 0 }, properties), options);
+                    }
+                }
+            });
+            
+            $('#photoWrap')
+                .bind('touchstart', function (e) {
+                    startLocation = kendo.touchLocation(e);
+                })
+                .bind('touchend', function (e) {
+                    var location = kendo.touchLocation(e),
+                        dX = location.x - startLocation.x,
+                        dY = location.y - startLocation.y;
+
+                    if (Math.abs(dX) < 10 && Math.abs(dY) < 10) {
+                        e.preventDefault();
+
+                        $('header').kendoStop().kendoAnimate('slideUp', 'fast', fullscreen);
+                        $('#footer').kendoStop().kendoAnimate('slideDown', 'fast', fullscreen);
+                        fullscreen = !fullscreen;
+                        
+                        return;
+                    }
+
+                    if (Math.abs(dX) > Math.abs(dY)) {
+                        (dX > 10) && $(e.target).trigger('swipeRight');
+                        (dX < -10) && $(e.target).trigger('swipeLeft');
+                    } else {
+                        (dY > 10) && $(e.target).trigger('swipeDown');
+                        (dY < -10) && $(e.target).trigger('swipeUp');
+                    }
+                })
+                .bind('swipeLeft', function(e) {
+                    var selectable = $('#footer .thumbs:visible').data('kendoListView').selectable,
+                        next = selectable.value().next();
+
+                    if (next.length) {
+                        selectable.clear();
+                        selectable.value(next);
+                        animType = 'slideRotateLeft';
+                        $(this).kendoStop(false, true).kendoAnimate(animType, 400);
+                    }
+                })
+                .bind('swipeRight', function(e) {
+                    var selectable = $('#footer .thumbs:visible').data('kendoListView').selectable,
+                        prev = selectable.value().prev();
+
+                    if (prev.length) {
+                        selectable.clear();
+                        selectable.value(prev);
+                        animType = 'slideRotateRight';
+                        $(this).kendoStop(false, true).kendoAnimate(animType, 400);
+                    }
+                });
+
             $(document).bind('orientationchange', function (e) {
                 window.scrollTo(0, 1);
             });
 
-//            $('#photoWrap').bind('gestureend', function (e) {
-//                if (e.gesture) {
-//
-//                } else
-//                    if (e.gesture) {
-//                }
-//
-//            });
-
             window.scrollTo(0, 1);
+        } else {
+            $("#photoWrap").bind("mousedown", function(e) {
+                e.preventDefault();
+
+                $('header').kendoStop().kendoAnimate('slideUp', 'fast', fullscreen);
+                $('#footer').kendoStop().kendoAnimate('slideDown', 'fast', fullscreen);
+                fullscreen = !fullscreen;
+            });
         }
 
     });

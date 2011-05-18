@@ -131,7 +131,7 @@
             });
         },
         initFlatSetsStrip: function() {
-            $("#flatSetsStrip").kendoListView({
+            this.thumbList.append( $("#flatSetsStrip").kendoListView({
                 autoBind: true,
                 dataSource: setsDataSource,
                 template: setTemplate,
@@ -155,7 +155,7 @@
                     $("#exifButton").fadeOut();
                     setPhotosDataSource.page(1);
                 }
-            });
+            }));
         },
         initMainPictures: function() {
             var that = this;
@@ -206,14 +206,14 @@
             }).hide();
         },
         initPhotoStrip: function() {
-            $("#flatPhotoStrip").kendoListView({
+            this.thumbList.append( $("#flatPhotoStrip").kendoListView({
                 autoBind: false,
                 dataSource: setPhotosDataSource,                
                 template: template(imageSize),
                 change: function () {
                     setBigPhoto($("img:first", this.selectable.value()));
                 }
-            }).hide();
+            }).hide() );
         },
         initSlider: function() {
             $("#setPhotoSize")
@@ -253,6 +253,8 @@
             $("#signin").hide();
             $("#userInfo").fadeIn().find("em:first").html(flickr.auth.username);
 
+            that.thumbList = new kendo.ui.Scroller($('<div class="thumb-list">').appendTo("#footer")).scrollElement;
+            
             try {
                 history.replaceState(null, "AeroViewr", liveUrl);
             } catch(e) {
