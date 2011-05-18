@@ -1834,3 +1834,37 @@ html .t-upload
     -webkit-transform: translate3d(0,0,0);
     -webkit-perspective: 1000;
 }
+
+.scroll-arrow
+{
+    position: absolute;
+    width: 34px;
+    height: 100%;
+    opacity: .7;
+    display: none;
+    z-index: 10000;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 13px 7px 10px;
+    box-shadow: 0 0 5px #000;
+    background: #222 url('img/scroll-arrows.png') no-repeat 0 50%;
+    background-clip: padding-box;
+}
+
+.left-scroll-arrow
+{
+    top: 0;
+    left: 0;
+    border-right: 1px solid #000;
+}
+
+.right-scroll-arrow
+{
+    top: 0;
+    right: 0;
+    border-left: 1px solid #000;
+    background-position: 100% 50%;
+}

@@ -93,6 +93,15 @@
                 window.scrollTo(0, 1);
             });
 
+//            $('#photoWrap').bind('gestureend', function (e) {
+//                if (e.gesture) {
+//
+//                } else
+//                    if (e.gesture) {
+//                }
+//
+//            });
+
             window.scrollTo(0, 1);
         }
     });
