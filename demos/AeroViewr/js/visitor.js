@@ -168,19 +168,6 @@ var visitor = window.visitor,
                 $("#exifButton").fadeOut();
             });
 
-            $(".i-tileview").click(function() {
-                var value = $("#slider").data("kendoSlider").value(),
-                    pageSize = value === 0 ? 20 : parseInt(20 / value);
-
-                dataSource.query({page: 1, pageSize: pageSize});
-
-                $(this).addClass("currentView");
-                $(".i-gridview").removeClass("currentView");
-                $("#mainPhotoGrid").hide();
-                $("#mainPhotoStrip").show();
-                $("#slider").parent().show();
-            }).addClass("currentView");
-
             $(".bottomLink").bind("click", function(){
                 var element = $(this),
                     view = element.data("currentView");
