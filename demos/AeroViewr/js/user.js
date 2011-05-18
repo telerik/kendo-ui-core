@@ -234,7 +234,10 @@
             });
         },
         initMainPictures: function() {
+            var that = this;
             $(".paging").kendoPager({ dataSource: setPhotosDataSource });
+
+            that._isSliderInit = false;
 
             $("#mainSetPhotoStrip").kendoListView({
                 autoBind: false,
@@ -244,9 +247,13 @@
                 change: function () {
                     changeState("slideshow");
                     showSelectedPhoto(this);
-                    $("#mainUserWrap").show();
                 },
                 dataBound: function () {
+                    $("#mainUserWrap").show();
+                    if(!that._isSliderInit) {
+                        that._isSliderInit = true;
+                        that.initSlider();
+                    }
                     displayImages(this.element);
                 }
             });
@@ -284,7 +291,9 @@
             }).hide();
         },
         initSlider: function() {
-            $("#setPhotoSize").kendoSlider({
+            $("#setPhotoSize")
+            .show()
+            .kendoSlider({
                 orientation: "vertical",
                 min: 0,
                 max: 2,
@@ -328,7 +337,6 @@
             that.initFlatSetsStrip();
             that.initMainPictures();
             that.initPhotoStrip();
-            that.initSlider();
             that.initSearch();
 
             slideshow.init($("#flatPhotoStrip").data("kendoListView"));

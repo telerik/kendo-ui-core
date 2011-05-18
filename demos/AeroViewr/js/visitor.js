@@ -210,6 +210,7 @@ var visitor = window.visitor,
                 dataBound: function() {
                     if(that._showSearchResults){
                         $("#mainTemplate").show();
+                        that.initSlider();
                         that._showSearchResults = false;
                     }
                     $(".bottomLink").text("Back to most popular").data("currentView", "mainTemplate");
@@ -221,7 +222,6 @@ var visitor = window.visitor,
                 }
             });
 
-            that.initSlider();
 
             $(".i-gridview").click(function() {
                 dataSource.query({page: 1, pageSize: 5});
