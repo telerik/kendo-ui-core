@@ -11,11 +11,13 @@
     function Upload(element) {
         this.element = $(element);
         this.responses = [];
+        this.exifVisible = false;
     }
     Upload.prototype = {
         show: function() {
             var that = this,
                 element = that.element,
+                exifButton = $("#exifButton");
                 handler = function(e) {
                     if(!$.contains(that._overlay()[0], e.target)) {
                         $(document).unbind("mousedown touchstart", handler);
@@ -23,6 +25,9 @@
                     }
                 };
             $(document).bind("mousedown touchstart", handler);
+
+            this.exifVisible = exifButton.is(":visible");
+            exifButton.fadeOut();
 
             that._overlay().empty()
                         .html(flickr.isAuthenticated() ? authContent : nonAuthContent)
@@ -80,6 +85,9 @@
         },
         hide: function() {
             this._overlay().fadeOut();
+            if(this.exifVisible) {
+                $("#exifButton").fadeIn();
+            }
         },
         currentSet: function(val){
             if(val !== undefined) {

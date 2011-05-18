@@ -100,31 +100,26 @@
        $("#flatSetsStrip").hide();
 
        ui.element.parent().hide();
-        $("#overlay").fadeOut();
+       $("#overlay").fadeOut();
        $("#exifButton").fadeIn();
 
        setBigPhoto($("img:first", ui.selectable.value()));
 
        setPhotosDataSource.query({page: 1, pageSize: PAGESIZE});
    }
-
+   var loadingTimeout = 0;
    function setBigPhoto(img) {       
        var bigPhoto = $("#bigPhoto"),
            src = img.attr("src").replace("_s", "").replace(imageSize.suffix,""),
-           loader = $("img.loader");
-
-        $(".exifInfo")
-            .find("h2")
-            .text(img.attr("alt") || "No Title")
-            .end()
-            .find(".i-help")
-            .attr("data-photoid", img.attr("data-photoid"));
+           loader = $("img.loader"),
+           exifInfo = $(".exifInfo");
 
         if (loader[0]) {
             loader.remove();
         } else {
             loadingTimeout = setTimeout(function() {
                 bigPhoto.after("<div class='loading'>Loading ...</div>");
+                exifInfo.fadeOut();
             }, 100);
         }
 
@@ -140,9 +135,17 @@
                 bigPhoto.next(".loading")
                     .remove()
                     .end()
+                    .add(exifInfo)
                     .stop(true, true)
                     .fadeOut(function() {
-                        bigPhoto.attr("src", src);
+                        if (this == exifInfo[0]) {
+                            exifInfo.find("h2")
+                               .text(img.attr("alt") || "No Title")
+                               .end()
+                               .attr("data-photoid", img.attr("data-photoid"));
+                        } else {
+                            bigPhoto.attr("src", src);
+                        }
                     })
                     .fadeIn();
             });
@@ -242,7 +245,7 @@
                 pageable: $(".paging").data("kendoPager"),
                 selectable: true,
                 columns: [
-                    { template: '<img src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>_s.jpg">', title: "PHOTO" },
+                    { template: '<img data-photoid="<%= id %>" alt="<%=title%>" src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>_s.jpg">', title: "PHOTO" },
                     { field: "ownername", title: "AUTHOR" },
                     { field: "title", title: "TITLE" },
                     { field: "tags", title: "TAGS"}
