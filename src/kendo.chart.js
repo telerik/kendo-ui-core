@@ -517,7 +517,24 @@
             var axis = this,
                 children = axis.children,
                 box = axis.box,
+                lineBox = axis.getAxisLineBox(),
                 majorDivisions = axis.getMajorDivisions(),
+                step = lineBox.height() / (majorDivisions - 1),
+                y = lineBox.y1,
+                positions = [];
+
+            for (var i = 0; i < majorDivisions; i++) {
+                positions.push(round(y, COORD_PRECISION));
+                y += step;
+            }
+
+            return positions;
+        },
+
+        getAxisLineBox: function() {
+            var axis = this,
+                children = axis.children,
+                box = axis.box,
                 marginTop = 0,
                 marginBottom = 0;
 
@@ -528,47 +545,21 @@
                 }
             }
 
-            var step = (box.height() - marginTop - marginBottom) / (majorDivisions - 1),
-                y = box.y1 + marginTop,
-                positions = [];
-
-            for (var i = 0; i < majorDivisions; i++) {
-                positions.push(round(y, COORD_PRECISION));
-                y = y + step;
-            }
-
-            return positions;
+            return new Box( box.x2, box.y1 + marginTop,
+                            box.x2, box.y2 - marginBottom);
         },
 
         getSlot: function(a, b) {
             var axis = this,
                 children = axis.children,
                 options = axis.options,
-                box = axis.box,
-                marginTop = 0,
-                marginBottom = 0;
+                lineBox = axis.getAxisLineBox(),
+                scale = lineBox.height() / (options.max - options.min),
+                b = arguments.length == 2 ? b : options.axisCrossingAt,
+                y1 = lineBox.y2 - scale * Math.min(a, b),
+                y2 = lineBox.y2 - scale * Math.max(a, b);
 
-            if (arguments.length == 1) {
-                b = options.axisCrossingAt;
-            }
-
-            if (children.length > 1) {
-                marginTop = children[0].box.height() / 2;
-                if (!axis.options._snapLineToBottom) {
-                    marginBottom = marginTop;
-                }
-            }
-
-            var axisHeight = box.height() - marginTop - marginBottom,
-                scale = axisHeight / (options.max - options.min);
-
-            var topOffset = scale * Math.min(a, b),
-                bottomOffset = scale * Math.max(a, b);
-
-            var y1 = box.y2 - marginBottom - topOffset,
-                y2 = box.y2 - marginBottom - bottomOffset;
-
-            return new Box(box.x2, y1, box.x2, y2);
+            return new Box(lineBox.x1, y1, lineBox.x1, y2);
         }
     });
 
