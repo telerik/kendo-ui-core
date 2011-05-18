@@ -2,15 +2,10 @@
       window.flickr = {
         service: "http://api.flickr.com/services/rest/",
         authURL: "http://flickr.com/services/auth/",
-        auth: {
-            //token:'72157626154487043-7dfd951a1ede12fa', //write auth
-            //username:'George Krustev',
-            //fullname:'Georgi G. Krustev',
-            //nsid:'1312312312'
-        },
+        auth: {},
         app: {
-            key: 'ea73824c4e27a137b7597fc3ffb3ba98',
-            secret: '2e767957c686dd30'
+            key: '82cfddc3c01eeac6c1e406df5f79d26c',
+            secret: '7a28f316522d2722'
         },
         methods: {
             getToken : "flickr.auth.getToken",
