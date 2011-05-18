@@ -9,7 +9,7 @@ var visitor = window.visitor,
     ],
     imageSize = IMAGESIZES[0],
     PAGESIZE = 500,
-    template = function(option) { return '<li style="width:' + option.size + 'px;height:' + option.size + 'px"><img alt="<%= title %>" src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>' + option.suffix + '.jpg"></li>'; },
+    template = function(option) { return '<li style="width:' + option.size + 'px;height:' + option.size + 'px"><img data-photoid="<%= id %>" alt="<%= title %>" src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>' + option.suffix + '.jpg"></li>'; },
     EXTRAS = "owner_name,tags",
     reader = {
         data: function(result) {
