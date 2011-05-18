@@ -104,7 +104,6 @@ var visitor = window.visitor,
                             exifInfo.find("h2")
                                .text(img.attr("alt") || "No Title")
                                .end()
-                               .find(".i-help")
                                .attr("data-photoid", img.attr("data-photoid"));
                         } else {
                             bigPhoto.attr("src", src);
@@ -116,11 +115,10 @@ var visitor = window.visitor,
 
    window.visitor = {
        hideExif: function() {
-            var wnd = $("#exifwindow").data("kendoWindow");
-            if(wnd) {
-                wnd.close();
-                $("#exifwindow").fadeOut().remove();
-            }
+           var exifWindow = $("#exifWindow");
+           if (exifWindow[0]) {
+               exifWindow.data("kendoWindow").close();
+           }
         },
         mostPopular: function() {
             this.thumbList.append( $("#flatMostPopularPhotos").kendoListView({
