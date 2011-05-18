@@ -14,7 +14,8 @@
         EXTRAS = "owner_name,tags",
         template = function(option) { return '<li style="width:' + option.size + 'px;height:' + option.size + 'px"><img data-photoid="<%= id %>" alt="<%= title %>" src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>' + option.suffix + '.jpg"></li>'; },
         setTemplate = '<li data-setid="<%=id%>" alt="thumbnail"><img width="75" height="75" src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=primary%>_<%=secret%>_s.jpg"></li>',
-        liveUrl = "http://localhost/kendo/demos/aeroviewr/index.html";
+        liveUrl = "http://localhost/kendo/demos/aeroviewr/index.html",
+        searching = false;
 
     var searchReader = {
         data: function(result) {
@@ -163,6 +164,7 @@
 
     function search() {
         if($("#searchBox").val()) {
+            searching = true;
             $("#flatSetsStrip").hide();
             $("#flatPhotoStrip").hide();
             $("#overlay").fadeIn();
@@ -172,7 +174,7 @@
             setPhotosDataSource._reader = searchReader;
 
             $("#overlay").after("<div id='searchLoading' class='loading'>Loading ...</div>");
-            setPhotosDataSource.read();
+            setPhotosDataSource.query({page: 1, pageSize: 20});
         }
         slideshow.stop();
     }
@@ -249,7 +251,10 @@
                     showSelectedPhoto(this);
                 },
                 dataBound: function () {
-                    $("#mainUserWrap").show();
+                    if(searching){
+                        $("#mainUserWrap").show();
+                        searching = false;
+                    }
                     if(!that._isSliderInit) {
                         that._isSliderInit = true;
                         that.initSlider();
@@ -373,16 +378,21 @@
                 var element = $(this),
                     state = element.data("state");
                 slideshow.stop();
+
                 if (state == "slideshow") {
                     $("#flatPhotoStrip").hide();
                     $("#flatSetsStrip").show();
                     $("#mainUserWrap").show();
+                    $("#overlay").fadeIn();
+                    $("#exifButton").fadeOut();
                     changeState("initial");
                 }
                 else if(state == "searchresult") {
                     $("#flatPhotoStrip").hide();
                     $("#flatSetsStrip").show();
                     $("#mainUserWrap").show();
+                    $("#overlay").fadeIn();
+                    $("#exifButton").fadeOut();
                     changeState("initial");
                 }
             })
