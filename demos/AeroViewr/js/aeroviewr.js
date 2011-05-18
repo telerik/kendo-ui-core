@@ -65,26 +65,33 @@ if (!isInferiorBrowser) {
 
                 var photo = result.photo;
 
-                $(kendo.template('<div id="exifWindow"><dl class="floatWrap">\
-                    <dt>Taken on</dt><dd><%= taken %></dd>\
-                    <dt>Posted to Flickr</dt><dd><%= posted %></dd>\
-                    <dt>Description</dt><dd><%= description %></dd>\
-                    <dt>Author</dt><dd><%= author %></dd>\
-                    <dt>Location</dt><dd><%= location %></dd>\
-                    <dt>Tags</dt><dd><ul>\
-                    <% $.each(tags, function(index, tag) { %> \
-                       <li><%= tag %></li> \
-                    <% }); %> \
-                    </ul></dd>\
-                </dl></div>'
+                $(kendo.template('<div id="exifWindow">\
+                    <div class="exif-author">by <span><%= author %></span></div>\
+                    <dl class="floatWrap">\
+                        <dt>Posted to Flickr</dt><dd><%= posted %></dd>\
+                        <dt>Description</dt><dd><%= description %></dd>\
+                        <dt>Location</dt><dd><%= location %></dd>\
+                        <dt>Tags</dt><dd>\
+                            <% if (tags.length) { %>\
+                            <ul class="taglist">\
+                            <% $.each(tags, function(index, tag) { %> \
+                               <li><%= tag %></li> \
+                            <% }); %> \
+                            </ul>\
+                            <% } else { %>\
+                            (none)\
+                            <% } %>\
+                        </dd>\
+                    </dl>\
+                </div>'
                 )({
                     posted: kendo.toString(new Date(parseInt(photo.dates.posted) * 1000), "MMMM dd, yyyy"),
-                    taken: kendo.toString(new Date(parseInt(photo.dates.taken) * 1000), "MMMM dd, yyyy"),
                     description: photo.description._content,
                     author: photo.owner.realname,
                     tags: $.map(photo.tags.tag, function(tag) { return tag._content; } ),
                     location: photo.owner.location
-                })).kendoWindow({
+                })
+                ).kendoWindow({
                     modal: true,
                     title: photo.title._content,
                     visible: false,
@@ -96,11 +103,13 @@ if (!isInferiorBrowser) {
                             that.destroy();
                         }, 400);
                     }
-                }).data("kendoWindow").center().open();
-
-                $("#exifWindow").closest(".t-window").bind("touchstart mousedown", function(e) {
-                    e.stopPropagation();
-                });
+                })
+                .closest(".t-window")
+                    .attr("id", "exifWindowWrapper")
+                    .bind("touchstart mousedown", function(e) {
+                        e.stopPropagation();
+                    }).end()
+                .data("kendoWindow").center().open();
             });
 
             e.stopPropagation();
