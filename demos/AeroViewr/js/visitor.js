@@ -72,7 +72,7 @@ var visitor = window.visitor,
 
    function setBigPhoto(img) {
        var bigPhoto = $("#bigPhoto"),
-           src = img.attr("src").replace("_s", "_b").replace(imageSize.suffix,"_b"),
+           src = img.attr("src").replace("_s", "").replace(imageSize.suffix,""),
            loader = $("img.loader"),
            exifInfo = $(".exifInfo");
 
