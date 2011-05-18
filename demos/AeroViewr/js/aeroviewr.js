@@ -97,7 +97,7 @@ if (!isInferiorBrowser) {
                     posted: kendo.toString(new Date(parseInt(photo.dates.posted) * 1000), "MMMM dd, yyyy"),
                     description: photo.description._content,
                     author: photo.owner.realname,
-                    tags: $.map(photo.tags.tag, function(tag) { return tag._content; } ),
+                    tags: $.map(photo.tags.tag, function(tag) {return tag.raw; } ),
                     location: photo.owner.location
                 })
                 ).kendoWindow({
@@ -105,7 +105,7 @@ if (!isInferiorBrowser) {
                     title: photo.title._content,
                     visible: false,
                     resizable: false,
-                    width: 350,
+                    width: 375,
                     close: function() {
                         var that = this;
                         setTimeout(function() {
