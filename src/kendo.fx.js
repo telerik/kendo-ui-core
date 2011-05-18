@@ -233,6 +233,9 @@
         },
         zoomIn: {
             play: function(element, properties, options) {
+                if (kendo.support.transitions)
+                    element.css(kendo.support.transitions.css + "transform", "scale(.01)");
+                
                 animate(element, extend({ scale: 1 }, properties), options);
             },
             reverse: function(element, properties, options) {
@@ -244,6 +247,9 @@
                 animate(element, extend({ scale: .01 }, properties), options);
             },
             reverse: function(element, properties, options) {
+                if (kendo.support.transitions)
+                    element.css(kendo.support.transitions.css + "transform", "scale(.01)");
+                
                 animate(element, extend({ scale: 1 }, properties), options);
             }
         },
