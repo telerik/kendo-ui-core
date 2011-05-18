@@ -11,14 +11,19 @@
 
             that._started = true,
 
-            that._timeoutId = setTimeout(function() {
+            that._timeoutId = setTimeout(function selectNext() {
                 var selected = listView.selected().next();
                 if(selected.length == 0) {
                     selected = listView.element.find("li:first");
                 }
                 listView.selectable.clear();
                 listView.selectable.value(selected);
-                that._timeoutId = setTimeout(arguments.callee, TIMEOUT);
+
+                $("#bigPhoto")[0].onload = function() {
+                    if (that._started) {
+                        that._timeoutId = setTimeout(selectNext, TIMEOUT);
+                    }
+                };
             }, TIMEOUT);
         },
         stop: function() {
