@@ -128,7 +128,16 @@ if (!isInferiorBrowser) {
                     .attr("id", "exifWindowWrapper")
                     .bind("touchstart mousedown", function(e) {
                         e.stopPropagation();
-                    }).end()
+                    })
+                    .delegate(".taglist a", "click", function(e) {
+                        // close window
+                        $(this).closest("#exifWindow").data("kendoWindow").close();
+
+                        // search for tag
+                        $("#searchBox").val($(this).data("tagid"));
+                        $(".i-search").click();
+                    })
+                    .end()
                 .data("kendoWindow").center().open();
 
                 infoLoading = false;
