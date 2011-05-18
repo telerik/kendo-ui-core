@@ -230,6 +230,8 @@
         },
 
         _scrollClick: function (e) {
+            e.preventDefault();
+            
             var scrollTo = 0,
                 scrollOffsets = this._getScrollOffsets();
 
@@ -242,23 +244,26 @@
             this.scrollElement.kendoStop().kendoAnimate({effects: { slideLeft: { properties: { translate: scrollTo + 'px' } } } });
         },
 
-        _showScrollArrows: function () {
+        _showScrollArrows: function (e) {
             this._initializeBoxModel();
             
             if (this.hasVerticalScroll)
                 this._verticalArrows.kendoStop(true, true).kendoAnimate({ effects: { fadeIn : { properties: { opacity: .7 } } }, duration: "fast", show: true });
 
-            if (this.hasHorizontalScroll) {
+            if (this.hasHorizontalScroll)
                 this._horizontalArrows.kendoStop(true, true).kendoAnimate({ effects: { fadeIn : { properties: { opacity: .7 } } }, duration: "fast", show: true });
-            }
+
+            e.preventDefault();
         },
 
-        _hideScrollArrows: function () {
+        _hideScrollArrows: function (e) {
             if (this.hasVerticalScroll)
                 this._verticalArrows.kendoStop(true, true).kendoAnimate({ effects: "fadeOut", duration: "fast", hide: true });
 
             if (this.hasHorizontalScroll)
                 this._horizontalArrows.kendoStop(true, true).kendoAnimate({ effects: "fadeOut", duration: "fast", hide: true });
+            
+            e.preventDefault();
         },
 
         _getReverseDelta: function (position, minBounceLimit, maxBounceLimit) {
