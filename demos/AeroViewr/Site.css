@@ -1968,35 +1968,35 @@ html .t-upload
 
 /*inferior browsers*/
 
-.inferiorBrowser #footer,
-.inferiorBrowser #signin,
-.inferiorBrowser #searchBox,
-.inferiorBrowser .i-search,
-.inferiorBrowser .i-help,
-.inferiorBrowser #photoWrap,
-.inferiorBrowser #exifButton,
-.inferiorBrowser #viewslideshow,
-.inferiorBrowser #uploadphotos,
-.inferiorBrowser .bottomLink
+.noHTML5 #footer,
+.noHTML5 #signin,
+.noHTML5 #searchBox,
+.noHTML5 .i-search,
+.noHTML5 .i-help,
+.noHTML5 #photoWrap,
+.noHTML5 #exifButton,
+.noHTML5 #viewslideshow,
+.noHTML5 #uploadphotos,
+.noHTML5 .bottomLink
 {
     display:none !important;
 }
 
-*+html .inferiorBrowser{display:none !important;}
-* html .inferiorBrowser{display:none !important;}
+*+html .noHTML5{display:none !important;}
+* html .noHTML5{display:none !important;}
 
-.inferiorBrowser #main
+.noHTML5 #main
 {
     padding-left:0 !important;
     padding-right:0 !important;
 }
 
-#inferiorBrowserAlert
+#noHTML5Alert
 {
     display:none;
 }
 
-.inferiorBrowser #inferiorBrowserAlert
+.noHTML5 #noHTML5Alert
 {
     display:block;
     width:40%;
@@ -2005,7 +2005,7 @@ html .t-upload
     text-align:center;
 }
 
-#inferiorBrowserAlert p
+#noHTML5Alert p
 {
     margin:1em 0 0;
 }
