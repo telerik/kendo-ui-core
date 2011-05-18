@@ -12,7 +12,7 @@
         imageSize = IMAGESIZES[0],
         PAGESIZE = 500,
         EXTRAS = "owner_name,tags",
-        template = function(option) { return '<li style="width:' + option.size + 'px;height:' + option.size + 'px"><img alt="<%= title %>" src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>' + option.suffix + '.jpg"></li>'; },
+        template = function(option) { return '<li style="width:' + option.size + 'px;height:' + option.size + 'px"><img data-photoid="<%= id %>" alt="<%= title %>" src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>' + option.suffix + '.jpg"></li>'; },
         setTemplate = '<li data-setid="<%=id%>" alt="thumbnail"><img width="75" height="75" src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>_s.jpg"></li>',
         liveUrl = "http://localhost/kendo/demos/aeroviewr/index.html";
 
@@ -20,7 +20,7 @@
         data: function(result) {
             return result.photos.photo;
         },
-        total: function(result) {
+        total: function(result) {            
             return Math.min(result.photos.total, PAGESIZE);
         }
     },
@@ -101,6 +101,8 @@
        $("#flatSetsStrip").hide();
 
        ui.element.parent().hide();
+        $("#overlay").fadeOut();
+       $("#exifButton").fadeIn();
 
        setBigPhoto($("img:first", ui.selectable.value()));
 
@@ -112,29 +114,39 @@
            src = img.attr("src").replace("_s", "").replace(imageSize.suffix,""),
            loader = $("img.loader");
 
-        $(".exifInfo").find("h2").text(img.attr("alt") || "No Title").end().find(".i-help").attr("data-photoid", img.attr("data-photoid"));
+        $(".exifInfo")
+            .find("h2")
+            .text(img.attr("alt") || "No Title")
+            .end()
+            .find(".i-help")
+            .attr("data-photoid", img.attr("data-photoid"));
 
         if (loader[0]) {
             loader.remove();
         } else {
-            bigPhoto.after("<div class='loading'>Loading ...</div>");
+            loadingTimeout = setTimeout(function() {
+                bigPhoto.after("<div class='loading'>Loading ...</div>");
+            }, 100);
         }
 
         loader = $("<img class='loader' />")
-        .hide()
-        .appendTo(document.body)
-        .attr("src", src)
-        .bind("load", function() {
-            loader.remove();
-            bigPhoto.next(".loading")
-            .remove()
-            .end()
-            .stop(true, true)
-            .fadeOut(function() {
-                bigPhoto.attr("src", src);
-            })
-            .fadeIn();
-        });
+            .hide()
+            .appendTo(document.body)
+            .attr("src", src)
+            .bind("load", function() {
+                clearTimeout(loadingTimeout);
+
+                loader.remove();
+
+                bigPhoto.next(".loading")
+                    .remove()
+                    .end()
+                    .stop(true, true)
+                    .fadeOut(function() {
+                        bigPhoto.attr("src", src);
+                    })
+                    .fadeIn();
+            });
    }
 
     function search() {
@@ -164,6 +176,7 @@
         },
         initFlatSetsStrip: function() {
             $("#flatSetsStrip").kendoListView({
+                autoBind: true,
                 dataSource: setsDataSource,
                 template: setTemplate,
                 dataBound: function () {
@@ -192,6 +205,7 @@
             $(".paging").kendoPager({ dataSource: setPhotosDataSource });
 
             $("#mainSetPhotoStrip").kendoListView({
+                autoBind: false,
                 dataSource: setPhotosDataSource,
                 pageable: $(".paging").data("kendoPager"),
                 template: template(imageSize),
@@ -204,6 +218,7 @@
             }).hide();
 
             $("#mainSetPhotoGrid").kendoGrid({
+                autoBind: false,
                 dataSource: setPhotosDataSource,
                 pageable: $(".paging").data("kendoPager"),
                 selectable: true,
@@ -223,6 +238,7 @@
         },
         initPhotoStrip: function() {
             $("#flatPhotoStrip").kendoListView({
+                autoBind: false,
                 dataSource: setPhotosDataSource,
                 pageable: $(".paging").data("kendoPager"),
                 template: template(imageSize),
