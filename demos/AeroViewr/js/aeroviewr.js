@@ -3,7 +3,7 @@ if (jQuery.browser.msie && parseInt(jQuery.browser.version) < 9) {
 }
 
 var isInferiorBrowser = false;
-    
+
 if ((jQuery.browser.msie && parseInt(jQuery.browser.version) < 9) ||
     (jQuery.browser.mozilla && parseFloat(jQuery.browser.version) < 1.9) ||
     (jQuery.browser.opera && parseInt(jQuery.browser.version) < 10)) {
@@ -150,6 +150,8 @@ if (!isInferiorBrowser) {
         if (isInferiorBrowser) {
             return;
         }
+
+        user.initUpload();
 
         flickr.authenticate(function(authenticated) {
            if (authenticated) {

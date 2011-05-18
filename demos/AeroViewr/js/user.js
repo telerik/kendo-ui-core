@@ -151,7 +151,7 @@
                             bigPhoto.attr("src", src);
                         }
                     });
-                    
+
                 bigPhoto.fadeIn({
                     step: function (now) {
                         if (!slideshow._started)
@@ -321,7 +321,7 @@
                 }
             }
 
-            that.initUpload();
+
             that.initFlatSetsStrip();
             that.initMainPictures();
             that.initPhotoStrip();
