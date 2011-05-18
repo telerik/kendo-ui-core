@@ -1302,8 +1302,10 @@ div.t-window-content
 #exifWindowWrapper .t-window-title
 {
     font-size: 1.528em;
-    overflow: visible;
-    left: 6px;
+    overflow: hidden;
+    left: 18px;
+    right: 2em;
+    height: 1.1em;
 }
 
 #exifWindowWrapper .t-close,
@@ -1322,7 +1324,7 @@ div.t-window-content
 {
     background: rgba(0, 0, 0, .84);
     color: #fff;
-    padding-bottom: 20px;
+    padding: .5em 18px 20px;
 }
 
 #exifWindow dt
