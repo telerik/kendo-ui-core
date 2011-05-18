@@ -94,7 +94,7 @@ if (!isInferiorBrowser) {
                             that.destroy();
                         }, 400);
                     }
-                }).data("kendoWindow").open().center();
+                }).data("kendoWindow").center().open();
 
                 $("#exifWindow").closest(".t-window").bind("touchstart mousedown", function(e) {
                     e.stopPropagation();
