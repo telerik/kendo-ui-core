@@ -27,6 +27,11 @@
 
         $('.exifInfo .i-help').click(function (e) {
             flickr.getPhotoInfo($(this).attr("data-photoid"), function(result) {
+                if (result.stat == "fail") {
+                    alert("flickr error: " + result.message);
+                    return;
+                }
+
                 var photo = result.photo;
 
                 $(kendo.template(
