@@ -14,6 +14,7 @@
         <input type="button" id="button" value="Click me!" onclick="createWindow()" />
 
         <div id="window"></div>
+        <div id="window1"></div>
 
         <script type="text/javascript">
             function createWindow() {
@@ -21,7 +22,8 @@
             }
 
             $(document).ready(function() {
-                $("#window").kendoWindow({ width: 200, height: 200, html: "<div class='myDiv' style='padding: 0.4em'>aaaaaa</div>", title: "aaaaaaa", resizable: true });
+                $("<div></div>").kendoWindow({ modal: true }).data("kendoWindow").center().close();
+                $("<div></div>").kendoWindow({ modal: true }).data("kendoWindow").center().close();
             });
         </script>
     </body>
