@@ -1910,6 +1910,7 @@ html .t-upload
     width: 28px;
     height: 100%;
     opacity: .7;
+    outline:  0;
     display: none;
     z-index: 10000;
     -moz-box-sizing: border-box;
