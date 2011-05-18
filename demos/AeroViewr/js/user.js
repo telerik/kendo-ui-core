@@ -12,7 +12,7 @@
         imageSize = IMAGESIZES[0],
         PAGESIZE = 500,
         EXTRAS = "owner_name,tags",
-        template = function(option) { return '<li style="width:' + option.size + 'px;height:' + option.size + 'px"><img data-photoid="<%= id %>" alt="<%= kendo.htmlEncode(title) %>" src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>' + option.suffix + '.jpg"></li>'; },
+        template = function(option) { return '<li style="width:' + option.size + 'px;height:' + option.size + 'px"><img data-photoid="<%= id %>" alt="<%= title %>" src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>' + option.suffix + '.jpg"></li>'; },
         setTemplate = '<li data-setid="<%=id%>" alt="thumbnail"><img width="75" height="75" src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=primary%>_<%=secret%>_s.jpg"></li>',
         liveUrl = "http://localhost/kendo/demos/aeroviewr/index.html";
 
@@ -107,13 +107,8 @@
 
        setPhotosDataSource.query({page: 1, pageSize: PAGESIZE});
    }
-<<<<<<< HEAD
    var loadingTimeout = 0;
-   function setBigPhoto(img) {       
-=======
-
    function setBigPhoto(img) {
->>>>>>> html encoding the description to avoid XSS
        var bigPhoto = $("#bigPhoto"),
            src = img.attr("src").replace("_s", "").replace(imageSize.suffix,""),
            loader = $("img.loader"),
