@@ -1,3 +1,20 @@
+if (jQuery.browser.msie && parseInt(jQuery.browser.version) < 9) {
+    for(var e,l="header nav section time".split(" ");e=l.pop();document.createElement(e));
+}
+
+var isInferiorBrowser = false;
+    
+if ((jQuery.browser.msie && parseInt(jQuery.browser.version) < 9) ||
+    (jQuery.browser.mozilla && parseFloat(jQuery.browser.version) < 1.9) ||
+    (jQuery.browser.opera && parseInt(jQuery.browser.version) < 10)) {
+    isInferiorBrowser = true;
+}
+
+if (!isInferiorBrowser) {
+    document.documentElement.className = "";
+    $("#inferiorBrowserAlert").hide();
+}
+
 (function ($) {
     var flickr = window.flickr,
         visitor = window.visitor,
@@ -100,6 +117,10 @@
             e.preventDefault();
             flickr.signOut();
         });
+
+        if (isInferiorBrowser) {
+            return;
+        }
 
         flickr.authenticate(function(authenticated) {
            if (authenticated) {

@@ -86,7 +86,7 @@
 
         getNotInSetParams: function(data) {
             var params = $.extend({
-                auth_token: this.auth.token,
+                auth_token: this.auth.token
             }, data);
 
             return this.params(this.methods.getNotInSet, params);
@@ -94,7 +94,7 @@
 
         getInSetParams: function(data) {
             var params = $.extend({
-                auth_token: this.auth.token,
+                auth_token: this.auth.token
             }, data);
 
             return this.params(this.methods.getSetPhotos, params);
