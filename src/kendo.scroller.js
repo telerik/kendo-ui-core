@@ -252,18 +252,14 @@
 
             if (this.hasHorizontalScroll)
                 this._horizontalArrows.kendoStop(true, true).kendoAnimate({ effects: { fadeIn : { properties: { opacity: .7 } } }, duration: "fast", show: true });
-
-            e.preventDefault();
         },
 
         _hideScrollArrows: function (e) {
             if (this.hasVerticalScroll)
-                this._verticalArrows.kendoStop(true, true).kendoAnimate({ effects: "fadeOut", duration: "fast", hide: true });
+                this._verticalArrows.kendoStop(true, true).kendoAnimate({ effects: "fadeOut", duration: "fast" });
 
             if (this.hasHorizontalScroll)
-                this._horizontalArrows.kendoStop(true, true).kendoAnimate({ effects: "fadeOut", duration: "fast", hide: true });
-            
-            e.preventDefault();
+                this._horizontalArrows.kendoStop(true, true).kendoAnimate({ effects: "fadeOut", duration: "fast" });
         },
 
         _getReverseDelta: function (position, minBounceLimit, maxBounceLimit) {
@@ -348,7 +344,9 @@
             var currentLocation = touchLocation(e);
             if (currentLocation.idx != this.start.idx) return;
 
-            if (Math.abs(this.lastLocation.x - currentLocation.x) > 10 || Math.abs(this.lastLocation.y - currentLocation.y) > 10) {
+            var dip10 = 20 * kendo.support.devicePixelRatio;
+
+            if (Math.abs(this.lastLocation.x - currentLocation.x) > dip10 || Math.abs(this.lastLocation.y - currentLocation.y) > dip10) {
                 e.preventDefault();
                 this._dragged = true;
 
