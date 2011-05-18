@@ -106,19 +106,19 @@ if (!isInferiorBrowser) {
                 </div>'
                 )({
                     posted: kendo.toString(new Date(parseInt(photo.dates.posted) * 1000), "MMMM dd, yyyy"),
-                    description: description,
-                    author: photo.owner.realname || photo.owner.username || "Unknown",
+                    description: kendo.htmlEncode(description),
+                    author: photo.owner.realname || photo.owner.username  || "Unknown",
                     tags: $.map(photo.tags.tag.slice(0, 24), function(tag) {
                         return {
-                            text: tag.raw,
-                            id: tag._content
+                            text: kendo.htmlEncode(tag.raw),
+                            id: kendo.htmlEncode(tag._content)
                         };
                     }),
                     location: photo.owner.location || "Unknown"
                 })
                 ).kendoWindow({
                     modal: true,
-                    title: photo.title._content,
+                    title: kendo.htmlEncode(photo.title._content),
                     visible: false,
                     resizable: false,
                     width: 375,
@@ -135,8 +135,6 @@ if (!isInferiorBrowser) {
                         e.stopPropagation();
                     })
                     .delegate(".taglist a", "click", function(e) {
-                        e.preventDefault();
-
                         // close window
                         $(this).closest("#exifWindow").data("kendoWindow").close();
 
