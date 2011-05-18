@@ -84,7 +84,7 @@ if (!isInferiorBrowser) {
                             <% if (tags.length) { %>\
                             <ul class="taglist">\
                             <% $.each(tags, function(index, tag) { %> \
-                               <li><%= tag %></li> \
+                               <li><a href="#" data-tagid="<%= tag.id %>"><%= tag.text %></a></li> \
                             <% }); %> \
                             </ul>\
                             <% } else { %>\
@@ -97,7 +97,12 @@ if (!isInferiorBrowser) {
                     posted: kendo.toString(new Date(parseInt(photo.dates.posted) * 1000), "MMMM dd, yyyy"),
                     description: photo.description._content,
                     author: photo.owner.realname,
-                    tags: $.map(photo.tags.tag, function(tag) {return tag.raw; } ),
+                    tags: $.map(photo.tags.tag, function(tag) {
+                        return {
+                            text: tag.raw,
+                            id: tag._content
+                        };
+                    }),
                     location: photo.owner.location
                 })
                 ).kendoWindow({

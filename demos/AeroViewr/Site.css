@@ -1174,7 +1174,7 @@ div.t-window
 
 .t-window .t-content
 {
-    background:#fff;
+    background: #fff;
 }
 
 .t-window-titlebar
@@ -1324,6 +1324,7 @@ div.t-window-content
 {
     background: rgba(0, 0, 0, .84);
     color: #fff;
+    overflow: hidden;
     padding: .5em 18px 20px;
 }
 
