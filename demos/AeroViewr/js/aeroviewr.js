@@ -88,6 +88,8 @@ if (!isInferiorBrowser) {
                     modal: true,
                     title: photo.title._content,
                     visible: false,
+                    resizable: false,
+                    width: 350,
                     close: function() {
                         var that = this;
                         setTimeout(function() {
