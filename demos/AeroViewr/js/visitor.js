@@ -96,9 +96,13 @@ var visitor = window.visitor,
 
                 bigPhoto.next(".loading")
                     .remove()
-                    .end()
-                    .add(exifInfo)
-                    .stop(true, true)
+                    .end();
+
+                if (!slideshow._started){
+                   bigPhoto = bigPhoto.add(exifInfo);
+                }
+
+                bigPhoto.stop(true, true)
                     .fadeOut(function() {
                         if (this == exifInfo[0]) {
                             exifInfo.find("h2")

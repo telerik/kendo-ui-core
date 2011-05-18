@@ -8,6 +8,9 @@
         play: function() {
             var that = this,
                 listView = that._listView;
+
+            that._started = true,
+
             that._timeoutId = setTimeout(function() {
                 var selected = listView.selected().next();
                 if(selected.length == 0) {
@@ -19,6 +22,7 @@
             }, TIMEOUT);
         },
         stop: function() {
+            this._started = false,
             clearTimeout(this._timeoutId);
             this._timeoutId = null;
         },
