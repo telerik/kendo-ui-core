@@ -43,7 +43,7 @@ var visitor = window.visitor,
 
        dataSource.query({page: 1, pageSize: PAGESIZE});
 
-       $(".bottomLink").text("Back to search results").data("currentView", "flatMostPopularPhotos");
+       $("#backButton").text("Back to search results").data("currentView", "flatMostPopularPhotos");
    }
 
    window.visitor = {
@@ -132,7 +132,7 @@ var visitor = window.visitor,
                         that.initSlider();
                         that._showSearchResults = false;
                     }
-                    $(".bottomLink").text("Back to most popular").data("currentView", "mainTemplate");
+                    $("#backButton").text("Back to most popular").data("currentView", "mainTemplate");
                     displayImages(this.element);
                     $("#searchLoading").remove();
                 },
@@ -202,6 +202,7 @@ var visitor = window.visitor,
                 min: 0,
                 max: 2,
                 largeStep: 1,
+                tickPlacement: "none",
                 change: function() {
                     var value = this.value();
                     imageSize = IMAGESIZES[value];
@@ -226,7 +227,7 @@ var visitor = window.visitor,
 
             that.mostPopular();
 
-             $(".bottomLink").text("");
+             $("#backButton").text("");
 
             slideshow.init($("#flatMostPopularPhotos").data("kendoListView"));
 
