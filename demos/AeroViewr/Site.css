@@ -159,7 +159,7 @@ section#footer
 #main .exifInfo
 {
     position:fixed;
-    bottom:200px;
+    bottom:160px;
     left:-24px;
     display: none;
 }
@@ -605,7 +605,7 @@ header .i-help
 .thumbViews
 {
     position:absolute;
-    right:120px;
+    right:60px;
     top:70px;
 }
 
@@ -980,7 +980,7 @@ header .i-help
     font-size:1.7em;
     font-weight:normal;
     white-space:nowrap;
-    max-width:16em;
+    max-width:14em;
     overflow:hidden;
     text-overflow:ellipsis;
     vertical-align:middle;
@@ -1057,7 +1057,7 @@ header .i-help
 
 .t-grid
 {
-    margin:1.4em 0 0;
+    margin:2.2em 0 0;
 }
 
 .t-grid table
@@ -1130,6 +1130,19 @@ li>img,
 }
 
 /* Window - start */
+
+.t-overlay
+{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #000;
+    filter: alpha(opacity=50);
+    opacity: .5;
+    z-index: 10000;
+}
 
 .t-icon
 {
@@ -1420,7 +1433,7 @@ div.t-slider
 
 .t-slider-vertical
 {
-	width: 22px;
+	width: 37px;
 	height: 200px; /* default height */
 }
 
@@ -1430,14 +1443,13 @@ div.t-slider
 	height: 100%;
 }
 
-.t-slider .t-button,
-.t-grid .t-slider .t-button
+.t-slider .t-button
 {
 	position: absolute;
 	top: 0;
 	min-width: 0;
-	width: 20px;
-	height: 20px;
+	width: 35px;
+	height: 35px;
 	margin: 0;
 	padding: 0;
 	outline: none;
@@ -1525,7 +1537,7 @@ div.t-slider
 
 .t-slider-vertical .t-slider-buttons .t-slider-track
 {
-	bottom: 27px;
+	bottom: 42px;
 }
 
 .t-draghandle
@@ -1586,7 +1598,7 @@ div.t-slider
 .t-slider-vertical .t-slider-buttons .t-slider-items
 {
 	margin: 0;
-	padding-top: 28px;
+	padding-top: 43px;
 }
 
 .t-slider .t-tick
@@ -1641,7 +1653,7 @@ div.t-slider
 div.t-slider
 {
     position: absolute;
-    right:120px;
+    right:60px;
     top:120px;
 }
 
@@ -1671,10 +1683,10 @@ div.t-slider
 }
 
 .t-slider .t-draghandle { background-position: -60px 0; width: 20px; height: 20px; }
-.t-slider .t-slider-track { background-position: -90px 0; width: 5px; margin-left: -2px; }
-.t-slider .t-slider-selection { background-position: -120px 0; width: 5px; margin-left: -3px; }
-.t-slider .t-arrow-up { background-position: 0 0; width: 20px; height:20px; }
-.t-slider .t-arrow-down { background-position: -30px 0; width: 20px; height:20px; }
+.t-slider .t-slider-track { background-position: -90px 0; width: 5px; margin-left: -3px; }
+.t-slider .t-slider-selection { background-position: -120px 0; width: 5px; margin-left: -2px; }
+.t-slider .t-arrow-up { background-position: 8px 6px; width: 35px; height: 35px; }
+.t-slider .t-arrow-down { background-position: -22px 6px; width: 35px; height: 35px; }
 
 /* Slider - end */
 /* Upload */
