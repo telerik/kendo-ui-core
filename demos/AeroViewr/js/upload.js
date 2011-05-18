@@ -15,7 +15,14 @@
     Upload.prototype = {
         show: function() {
             var that = this,
-                element = that.element;
+                element = that.element,
+                handler = function(e) {
+                    if(!$.contains(that._overlay()[0], e.target)) {
+                        $(document).unbind("mousedown touchstart", handler);
+                        that.hide();
+                    }
+                };
+            $(document).bind("mousedown touchstart", handler);
 
             that._overlay().empty()
                         .html(flickr.isAuthenticated() ? authContent : nonAuthContent)
