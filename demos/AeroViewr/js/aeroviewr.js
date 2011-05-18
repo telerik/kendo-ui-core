@@ -56,6 +56,11 @@ if (!isInferiorBrowser) {
             infoLoading = true;
 
             $(document).one("mousedown touchstart", function() {
+                if (infoLoading) {
+                    $(document).one("mousedown touchstart", arguments.callee);
+                    return;
+                }
+
                 visitor.hideExif();
             });
 
@@ -102,14 +107,14 @@ if (!isInferiorBrowser) {
                 )({
                     posted: kendo.toString(new Date(parseInt(photo.dates.posted) * 1000), "MMMM dd, yyyy"),
                     description: description,
-                    author: photo.owner.realname,
+                    author: photo.owner.realname || "Unknown",
                     tags: $.map(photo.tags.tag.slice(0, 24), function(tag) {
                         return {
                             text: tag.raw,
                             id: tag._content
                         };
                     }),
-                    location: photo.owner.location
+                    location: photo.owner.location || "Unknown"
                 })
                 ).kendoWindow({
                     modal: true,
