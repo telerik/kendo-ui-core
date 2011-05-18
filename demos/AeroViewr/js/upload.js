@@ -1,5 +1,5 @@
 (function($, window) {
-    var nonAuthContent = '<h1 class="uploadTitle">You must <a href="#" id="uploadSignIn">Sign In</a> to upload photos.</h1>',
+    var nonAuthContent = '<h1 class="uploadTitle">You must <a href="#" id="uploadSignIn">sign in</a> to upload photos.</h1>',
         authContent = '<div id="uploadWrapInner"><h1 class="uploadTitle"><span class="p-icon i-drag"></span> Drag &amp; drop photos to upload</h1>' +
                     '<em>or</em>' +
                     '<div class="t-widget t-upload"><div class="t-button t-button-icontext t-button-bare t-upload-button p-border-big">' +

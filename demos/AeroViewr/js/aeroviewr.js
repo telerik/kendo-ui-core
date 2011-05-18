@@ -135,6 +135,8 @@ if (!isInferiorBrowser) {
                         e.stopPropagation();
                     })
                     .delegate(".taglist a", "click", function(e) {
+                        e.preventDefault();
+
                         // close window
                         $(this).closest("#exifWindow").data("kendoWindow").close();
 
