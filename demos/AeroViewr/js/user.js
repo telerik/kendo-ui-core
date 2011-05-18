@@ -202,6 +202,10 @@
             $("#uploadphotos").bind("click", function(e) {
                 e.preventDefault();
                 slideshow.stop();
+                $("#mainTemplate").hide();
+                $("#mainUserWrap").hide();
+                $("#exifButton").hide();
+                $("#overlay").show();
                 upload.show();
             });
         },

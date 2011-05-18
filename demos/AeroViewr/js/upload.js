@@ -1,7 +1,6 @@
 (function($, window) {
     var nonAuthContent = '<h1 class="uploadTitle">You must <a href="#">Sign In</a> to upload photos.</h1>',
-    authContent = '<div id="uploadContainer">' +
-                    '<h1 class="uploadTitle"><span class="p-icon i-drag"></span> Drag &amp; drop photos to upload</h1>' +
+    authContent = '<div id="uploadWrapInner"><h1 class="uploadTitle"><span class="p-icon i-drag"></span> Drag &amp; drop photos to upload</h1>' +
                     '<em>or</em>' +
                     '<div class="t-widget t-upload"><div class="t-button t-button-icontext t-button-bare t-upload-button p-border-big">' +
                     '<span class="p-icon i-set t-add"></span> browse<input type="file" name="photo" id="photosUpload" /></div></div>' +
@@ -29,7 +28,7 @@
             this.exifVisible = exifButton.is(":visible");
             exifButton.fadeOut();
 
-            that._overlay().empty()
+            that._overlay().empty().fadeIn()
                         .html(flickr.isAuthenticated() ? authContent : nonAuthContent)
                         .find("#photosUpload").kendoUpload({
                                 showFileList: false,
@@ -59,7 +58,7 @@
         },
         _showMsg: function(msg){
             var overlay = this._overlay();
-            overlay.find("#uploadContainer").hide().end()
+            overlay.find("#uploadWrapInner").hide().end()
                     .find("#msgContainer > .uploadTitle")
                     .empty().html(msg)
                     .parent()
@@ -100,8 +99,8 @@
                 overlay,
                 element = that.element;
 
-            overlay = element.parent().find(".t-overlay");
-            return overlay.length ? overlay : $('<div class="t-overlay"/>').appendTo(element.parent());
+            overlay = element.parent().find("#uploadWrap");
+            return overlay.length ? overlay : $('<div id="uploadWrap" />').appendTo(element.parent());
         }
     };
     window.Upload = Upload;
