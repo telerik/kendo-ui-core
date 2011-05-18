@@ -150,13 +150,14 @@
                         } else {
                             bigPhoto.attr("src", src);
                         }
-                    })
-                    .end()
-                    .fadeIn({
-                        step: function (now) {
-                            exifInfo.css('opacity',  now);
-                        }
                     });
+                    
+                bigPhoto.fadeIn({
+                    step: function (now) {
+                        if (!slideshow._started)
+                            exifInfo.css('opacity',  now);
+                    }
+                });
             });
    }
 
