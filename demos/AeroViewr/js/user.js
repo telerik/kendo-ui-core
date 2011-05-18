@@ -7,7 +7,7 @@
         IMAGESIZES = [
             {suffix: "_s", size: 75},
             {suffix: "_t", size: 100},
-            {suffix: "_m", size: 240},            
+            {suffix: "_m", size: 240}
         ],
         imageSize = IMAGESIZES[0],
         PAGESIZE = 500,
@@ -61,8 +61,7 @@
         }
     };
 
-    var setsDataSource = data.dataSource({
-        cache: "inmemory",
+    var setsDataSource = data.dataSource({        
         dialect: {
             read: function(data) {
                 return flickr.getSetsParams({});
@@ -156,13 +155,31 @@
             $("#mainUserWrap").show();
             $("#overlay").fadeIn();
             $("#exifButton").fadeOut();
-
+            changeState("searchresult");
             setPhotosDataSource.transport.dialect = searchDialect;
             setPhotosDataSource.reader = searchReader;
             
             setPhotosDataSource.read();
         }        
         slideshow.stop();
+    }
+
+    function changeState(state) {
+        var el = $(".bottomLink");
+        el.data("state", state);
+
+        if(state == "initial") {
+            el.text("");
+            setPhotosDataSource.transport.dialect = defaultDialect;
+            setPhotosDataSource.reader = defaultReader;
+            $(".i-gridview").click();
+        }
+        else if(state == "slideshow") {
+            el.text("Back to sets");
+        }
+        else if(state == "searchresult") {
+            el.text("Back to sets");                        
+        }
     }
 
     var user = window.user = {
@@ -210,6 +227,7 @@
                 pageable: $(".paging").data("kendoPager"),
                 template: template(imageSize),
                 change: function () {
+                    changeState("slideshow");
                     showSelectedPhoto(this);
                 },
                 dataBound: function () {
@@ -229,6 +247,7 @@
                     { field: "tags", title: "TAGS"}
                 ],
                 change: function() {
+                    changeState("slideshow");
                     showSelectedPhoto(this);
                 },
                 dataBound: function() {
@@ -295,7 +314,13 @@
             that.initSearch();
 
             slideshow.init($("#flatPhotoStrip").data("kendoListView"));
-            $("#viewslideshow").click(function() {
+            $("#viewslideshow").click(function(e) {
+                e.preventDefault();
+
+                $(this).find(".p-icon")
+                    .toggleClass("i-pause")
+                    .toggleClass("i-slideshow");
+
                 upload.hide();
                 slideshow.toggle();
             });
@@ -319,11 +344,23 @@
             });
 
             $(".bottomLink").click(function() {
+                var element = $(this),
+                    state = element.data("state");
                 slideshow.stop();
-                $("#flatPhotoStrip").hide();                
-                $("#flatSetsStrip").show();
-                $("#mainUserWrap").show();
-            });            
+                if (state == "slideshow") {
+                    $("#flatPhotoStrip").hide();
+                    $("#flatSetsStrip").show();
+                    $("#mainUserWrap").show();
+                    changeState("initial");
+                }
+                else if(state == "searchresult") {
+                    $("#flatPhotoStrip").hide();
+                    $("#flatSetsStrip").show();
+                    $("#mainUserWrap").show();
+                    changeState("initial");
+                }
+            })
+            .text("").data("state", "intial");
         }
-    };
+    };    
 })(jQuery, window);
