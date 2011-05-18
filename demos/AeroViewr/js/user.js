@@ -204,7 +204,6 @@
                 slideshow.stop();
                 $("#mainTemplate").hide();
                 $("#mainUserWrap").hide();
-                $("#exifButton").hide();
                 $("#overlay").show();
                 upload.show();
             });
