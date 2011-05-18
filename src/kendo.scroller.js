@@ -25,7 +25,18 @@
         this.xScrollbar = $('<div class="touch-scrollbar horizontal-scrollbar" />');
         this.yScrollbar = this.xScrollbar.clone().removeClass('horizontal-scrollbar').addClass('vertical-scrollbar');
         this._scrollbars = $().add(this.xScrollbar).add(this.yScrollbar);
-        
+
+        this._scrollArrows = {};
+        this._scrollArrows.left = $('<a class="scroll-arrow left-scroll-arrow" href="#" />');
+
+        extend( this._scrollArrows, {
+                                        right: this._scrollArrows.left.clone().removeClass('left-scroll-arrow').addClass('right-scroll-arrow'),
+                                        top: this._scrollArrows.left.clone().removeClass('left-scroll-arrow').addClass('top-scroll-arrow'),
+                                        bottom: this._scrollArrows.left.clone().removeClass('left-scroll-arrow').addClass('bottom-scroll-arrow')
+                                    });
+        this._horizontalArrows = $().add(this._scrollArrows.left).add(this._scrollArrows.right);
+        this._verticalArrows = $().add(this._scrollArrows.top).add(this._scrollArrows.bottom);
+
         extend(this, {
                         webkit3d: 'WebKitCSSMatrix' in window && 'm11' in new WebKitCSSMatrix(),
 
@@ -119,13 +130,6 @@
             this.element
                 .css("overflow", "hidden");
             
-            if (kendo.support.touch) {
-                this.element
-                    .bind('gesturestart', this._gestureStartProxy )
-                    .bind('gestureend', this._gestureEndProxy )
-                    .bind(this._startEvent, this._waitProxy); // Grab all events to prevent any selection-ings
-            }
-
             if (children.length)
                 children.wrapAll(scrollElement);
             else
@@ -133,6 +137,24 @@
 
             this.scrollElement = this.element.children();
             this._scrollbars.appendTo(this.element);
+            this._horizontalArrows.appendTo(this.element);
+
+            if (kendo.support.touch) {
+                this.element
+                    .bind('gesturestart', this._gestureStartProxy )
+                    .bind('gestureend', this._gestureEndProxy )
+                    .bind(this._startEvent, this._waitProxy); // Grab all events to prevent any selection-ings
+            } else {
+                var that = this;
+                
+                this.element.bind( 'mouseenter', function () {
+                    that._showScrollArrows();
+                });
+
+                this.element.bind( 'mouseleave', function () {
+                    that._hideScrollArrows();
+                });
+            }
 
             this._storeLastLocation = $.throttle(20, function(location) {
 
@@ -202,6 +224,25 @@
 
         _onGestureEnd: function () {
             this._dragCanceled = false;
+        },
+
+        _showScrollArrows: function () {
+            this._initializeBoxModel();
+            
+            if (this.hasVerticalScroll)
+                this._verticalArrows.kendoStop().kendoAnimate({ effects: { fadeIn : { properties: { opacity: .7 } } }, duration: "fast", show: true });
+
+            if (this.hasHorizontalScroll) {
+                this._horizontalArrows.kendoStop().kendoAnimate({ effects: { fadeIn : { properties: { opacity: .7 } } }, duration: "fast", show: true });
+            }
+        },
+
+        _hideScrollArrows: function () {
+            if (this.hasVerticalScroll)
+                this._verticalArrows.kendoStop().kendoAnimate({ effects: "fadeOut", duration: "fast", hide: true });
+
+            if (this.hasHorizontalScroll)
+                this._horizontalArrows.kendoStop().kendoAnimate({ effects: "fadeOut", duration: "fast", hide: true });
         },
 
         _getReverseDelta: function (position, minBounceLimit, maxBounceLimit) {
