@@ -1320,6 +1320,7 @@ div.t-window-content
 #exifWindow dd
 {
     float: left;
+    width: 240px;
     padding: 0 0 4px 0;
 }
 
