@@ -28,6 +28,10 @@
         var infoTimeout = 0;
 
         $(".exifInfo").click(function (e) {
+            $(document).one("mousedown touchstart", function() {
+                visitor.hideExif();
+            });
+
             infoTimeout = setTimeout(function() {
                 $("<div class='loading'>Loading ...</div>").insertAfter($("#bigPhoto"));
             }, 100);
@@ -44,7 +48,7 @@
 
                 var photo = result.photo;
 
-                $(kendo.template('<div><dl class="floatWrap">\
+                $(kendo.template('<div id="exifWindow"><dl class="floatWrap">\
                     <dt>Taken on</dt><dd><%= taken %></dd>\
                     <dt>Posted to Flickr</dt><dd><%= posted %></dd>\
                     <dt>Description</dt><dd><%= description %></dd>\
@@ -63,8 +67,22 @@
                     author: photo.owner.realname,
                     tags: $.map(photo.tags.tag, function(tag) { return tag._content; } ),
                     location: photo.owner.location
-                })).kendoWindow().data("kendoWindow").open().center();
+                })).kendoWindow({
+                    modal: true,
+                    close: function() {
+                        var that = this;
+                        setTimeout(function() {
+                            that.destroy();
+                        }, 400);
+                    }
+                }).data("kendoWindow").open().center();
+
+                $("#exifWindow").closest(".t-window").bind("touchstart mousedown", function(e) {
+                    e.stopPropagation();
+                });
             });
+
+            e.stopPropagation();
             e.preventDefault();
         });
 
