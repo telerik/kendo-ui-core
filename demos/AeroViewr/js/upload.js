@@ -1,11 +1,12 @@
 (function($, window) {
     var nonAuthContent = '<h1 class="uploadTitle">You must <a href="#" id="uploadSignIn">Sign In</a> to upload photos.</h1>',
-    authContent = '<div id="uploadWrapInner"><h1 class="uploadTitle"><span class="p-icon i-drag"></span> Drag &amp; drop photos to upload</h1>' +
+        authContent = '<div id="uploadWrapInner"><h1 class="uploadTitle"><span class="p-icon i-drag"></span> Drag &amp; drop photos to upload</h1>' +
                     '<em>or</em>' +
                     '<div class="t-widget t-upload"><div class="t-button t-button-icontext t-button-bare t-upload-button p-border-big">' +
                     '<span class="p-icon i-set t-add"></span> browse<input type="file" name="photo" id="photosUpload" /></div></div>' +
                     '</div>' +
-                    '<div id="msgContainer" style="display:none"><h1 class="uploadTitle"></h1></div>';
+                    '<div id="msgContainer" style="display:none"><h1 class="uploadTitle"></h1></div>',
+        flickr = window.flickr;
 
     function Upload(element) {
         this.element = $(element);
@@ -18,7 +19,7 @@
                 element = that.element,
                 exifButton = $("#exifButton"),
                 handler = function(e) {
-                    if(!$.contains(that._overlay()[0], e.target)) {
+                    if(!$.contains(that.element[0], e.target)) {
                         $(document).unbind("mousedown touchstart", handler);
                         that.hide();
                     }
@@ -45,6 +46,7 @@
 
                                     e.data["api_sig"] = flickr.getApiSig(flickr.app.secret, e.data);
                                     that._showMsg("Uploading photos...");
+                                    $(document).unbind("mousedown touchstart", handler);
                                 },
                                 success: function (e) {
                                    that.responses = that.responses.concat(e.response);
@@ -84,8 +86,8 @@
                 }
             }
             that.responses = [];
-            window.user.refreshSets();
             that.hide();
+            window.user.refreshSets();
         },
         hide: function() {
             var that = this;
