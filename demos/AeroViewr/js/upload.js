@@ -28,7 +28,7 @@
             this.exifVisible = exifButton.is(":visible");
             exifButton.fadeOut();
 
-            element.empty().fadeIn()
+            element.empty()
                         .html(flickr.isAuthenticated() ? authContent : nonAuthContent)
                         .find("#photosUpload").kendoUpload({
                                 showFileList: false,
@@ -59,6 +59,7 @@
                             flickr.signIn();
                         })
                         .fadeIn();
+            that._overlay().fadeIn();
         },
         _showMsg: function(msg){
             var element = this.element;
