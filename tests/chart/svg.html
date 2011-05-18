@@ -157,7 +157,8 @@
                 });
 
                 test("renders path tag", function() {
-                    equal(path.render(), "<path d='M10.5 20.5' stroke='#000'></path>");
+                    equal(path.render(),
+                        "<path d='M10.5 20.5' stroke='#000' fill='#fff'></path>");
                 });
 
                 test("moves to first point", function() {
