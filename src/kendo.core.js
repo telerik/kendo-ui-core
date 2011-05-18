@@ -51,7 +51,7 @@
         trigger: function(eventName, parameter) {
             var that = this,
                 events = that._events[eventName],
-                args = $.extend(parameter, new Event()),
+                args = extend(parameter, new Event()),
                 idx,
                 length;
 
@@ -1120,6 +1120,10 @@
         return animate(this, options, duration, reverse, complete);
     };
 
+    function htmlEncode(value) {
+        return value.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+    }
+
     extend(kendo, {
         ui: {},
         fx: {},
@@ -1148,6 +1152,7 @@
         stringify: proxy(JSON.stringify, JSON),
         format: format,
         formatters: formatters,
+        htmlEncode: htmlEncode,
         CultureInfo: CultureInfo
     });
 
