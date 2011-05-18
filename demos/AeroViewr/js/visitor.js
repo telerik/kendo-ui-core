@@ -1,24 +1,10 @@
 (function($, window) {
+
+window.application.call(this);
+
 var visitor = window.visitor,
     slideshow = window.slideshow,
-    data = window.data,
-    IMAGESIZES = [
-            {suffix: "_s", size: 75},
-            {suffix: "_t", size: 100},
-            {suffix: "_m", size: 240},
-    ],
-    imageSize = IMAGESIZES[0],
-    PAGESIZE = 500,
-    template = function(option) { return '<li style="width:' + option.size + 'px;height:' + option.size + 'px"><img data-photoid="<%= id %>" alt="<%= kendo.htmlEncode(title) %>" src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>' + option.suffix + '.jpg"></li>'; },
-    EXTRAS = "owner_name,tags",
-    reader = {
-        data: function(result) {
-            return result.photos.photo;
-        },
-        total: function(result) {
-            return Math.min(result.photos.total, PAGESIZE);
-        }
-    },
+    data = window.data,    
     dataSource = data.dataSource({
         pageSize: 5,
         serverSorting: true,
@@ -32,7 +18,7 @@ var visitor = window.visitor,
                 return flickr.searchParams(params);
             }
         },
-        reader: reader
+        reader: searchReader
     }),
     mostPopularDataSource = data.dataSource({
         dialect: {
@@ -44,16 +30,8 @@ var visitor = window.visitor,
                 return flickr.mostPopularParams(params);
             }
         },
-        reader: reader
-    });
-
-   function displayImages(element) {
-       element.find("img")
-           .hide()
-           .bind("load", function() {
-               $(this).fadeIn();
-           });
-   }
+        reader: searchReader
+    });   
 
    function showSelectedPhoto(ui) {
        $("#flatSearchPhotos").show();
@@ -66,65 +44,6 @@ var visitor = window.visitor,
        dataSource.query({page: 1, pageSize: PAGESIZE});
 
        $(".bottomLink").text("Back to search results").data("currentView", "flatMostPopularPhotos");
-   }
-
-   var loadingTimeout = 0;
-
-   function setBigPhoto(img) {
-       var bigPhoto = $("#bigPhoto"),
-           src = img.attr("src").replace("_s", "").replace(imageSize.suffix,""),
-           loader = $("img.loader"),
-           exifInfo = $(".exifInfo");
-
-        if (loader[0]) {
-            loader.remove();
-        } else {
-            loadingTimeout = setTimeout(function() {
-                bigPhoto.after("<div class='loading'>Loading ...</div>");
-                exifInfo.fadeOut();
-            }, 100);
-        }
-
-        loader = $("<img class='loader' />")
-            .hide()
-            .appendTo(document.body)
-            .attr("src", src)
-            .bind("load", function() {
-                clearTimeout(loadingTimeout);
-
-                loader.remove();
-
-                bigPhoto.next(".loading")
-                    .remove()
-                    .end();
-
-                if (!slideshow._started){
-                   bigPhoto = bigPhoto.add(exifInfo);
-                }
-
-                bigPhoto.stop(true, true)
-                    .fadeOut(function() {
-                        if (this == exifInfo[0]) {
-                            exifInfo.find("h2")
-                               .text(img.attr("alt") || "No Title")
-                               .end()
-                               .attr("data-photoid", img.attr("data-photoid"));
-                            exifInfo.css({
-                               display: 'block',
-                               opacity: 0
-                            });
-                        } else {
-                            bigPhoto.attr("src", src);
-                        }
-                    });
-
-                bigPhoto.fadeIn({
-                    step: function (now) {
-                        if (!slideshow._started)
-                            exifInfo.css('opacity',  now);
-                    }
-                });
-            });
    }
 
    window.visitor = {
@@ -190,7 +109,7 @@ var visitor = window.visitor,
                 pageable: $(".paging").data("kendoPager"),
                 selectable: true,
                 columns: [
-                    { template: '<img src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>_s.jpg">', title: "PHOTO" },
+                    { template: '<img data-photoid="<%= id %>" alt="<%= kendo.htmlEncode(title) %>" src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>_s.jpg">', title: "PHOTO" },
                     { field: "ownername", title: "AUTHOR" },
                     { field: "title", title: "TITLE" },
                     { field: "tags", title: "TAGS"}
