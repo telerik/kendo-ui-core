@@ -11,8 +11,8 @@
         <script src="../../src/kendo.window.js"></script>
         <script type="text/javascript" src="../jquery.mockjax.js"></script>
         <link rel="stylesheet" href="../qunit.css" />
-        <link type="text/css" href="../../styles/telerik.common.css" rel="stylesheet"/>
-        <link type="text/css" href="../../styles/telerik.vista.css" rel="stylesheet"/>
+        <link type="text/css" href="../../styles/kendo.common.css" rel="stylesheet"/>
+        <link type="text/css" href="../../styles/kendo.vista.css" rel="stylesheet"/>
     </head>
     <body>
 
@@ -36,8 +36,8 @@
             test("creates default html structure", function() {
                 var dialog = newWindow();
 
-                ok(dialog.element.is(".t-widget, .t-window"));
-                ok(dialog.element.children().eq(0).is(".t-window-titlebar, .t-header"));
+                ok(dialog.wrapper.is(".t-widget, .t-window"));
+                ok(dialog.wrapper.children().eq(0).is(".t-window-titlebar, .t-header"));
             });
 
             test("if contentUrl is local call ajaxRequest on refresh method", 1, function() {
@@ -86,7 +86,8 @@
 
                 var dialog = newWindow({
                     "open": function () { isOpened = true; },
-                    "activate": function () {isActivated = true; }
+                    "activate": function () {isActivated = true; },
+                    visible: false
                 }, $("<div />").appendTo(document.body).hide());
 
                 ok(!isActivated);
@@ -95,7 +96,6 @@
 
             test("construction of modal window shows overlay", function() {
                 var dialog = newWindow({
-                    html: "<div id='content'>content</div>",
                     modal: true
                 });
 
@@ -103,15 +103,9 @@
             });
 
             test("hiding second modal window does not hide first overlay", function() {
-                var dialog1 = newWindow({
-                    html: "content",
-                    modal: true
-                });
+                var dialog1 = $("<div></div>").kendoWindow({ modal: true }).data("kendoWindow");
 
-                var dialog2 = newWindow({
-                    html: "content, too",
-                    modal: true
-                });
+                var dialog2 = $("<div></div>").kendoWindow({ modal: true }).data("kendoWindow");
 
                 dialog2.close();
 
@@ -128,14 +122,12 @@
 
             test("destroy() does not delete overlay if there are other opened modal windows", function() {
                 var dialog1 = newWindow({
-                    html: "content",
                     modal: true
-                });
+                },  $("<div></div>"));
 
                 var dialog2 = newWindow({
-                    html: "content, too",
                     modal: true
-                });
+                }, $("<div></div>"));
 
                 dialog2.destroy();
 
@@ -149,16 +141,14 @@
 
             test("creating a modal window after closing another shows overlay", function() {
                 var dialog1 = newWindow({
-                    html: "content",
                     modal: true
-                });
+                }, $("<div></div>"));
 
                 dialog1.close();
 
                 var dialog2 = newWindow({
-                    html: "content, too",
                     modal: true
-                });
+                }, $("<div></div>"));
 
                 ok($(".t-overlay").is(":visible"));
             });
@@ -187,15 +177,6 @@
                 var dialog = newWindow();
 
                 equals(dialog.element.find("iframe").length, 0);
-            });
-
-            test("creating a window with html and contentUrl", function() {
-                var dialog = Window.create({
-                    html: "foo",
-                    contentUrl: "foo"
-                });
-
-                equals(dialog.find(".t-window-content")[0].innerHTML, "foo");
             });
 
         </script>
