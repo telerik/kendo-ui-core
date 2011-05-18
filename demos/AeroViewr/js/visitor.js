@@ -104,7 +104,6 @@ var visitor = window.visitor,
                             exifInfo.find("h2")
                                .text(img.attr("alt") || "No Title")
                                .end()
-                               .find(".i-help")
                                .attr("data-photoid", img.attr("data-photoid"));
                         } else {
                             bigPhoto.attr("src", src);
