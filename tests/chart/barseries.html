@@ -71,7 +71,10 @@
                     plotArea = new PlotAreaStub();
                     viewFactory = new ViewFactoryStub();
 
-                    series = new Chart.BarChart(plotArea, options);
+                    series = new Chart.BarChart(
+                        plotArea,
+                        $.extend({}, { gap: 0 /* disable gap */ }, options)
+                    );
 
                     series.updateLayout();
                 }
@@ -166,19 +169,19 @@
             (function() {
                 var cluster,
                     bars,
-                    clusterBox = new Box(0, 0, 100, 100),
+                    clusterBox = new Box(0, 0, 350, 350),
                     barBox = new Box(1, 1, 1, 1);
 
                 function createCluster(options) {
-                    cluster = new Chart.DataPointCluster(options);
+                    cluster = new Chart.ClusterLayout(options);
                     bars = [ new BarStub(barBox), new BarStub(barBox) ];
                     [].push.apply(cluster.children, bars);
                     cluster.updateLayout(clusterBox);
                 }
 
-                module("Horizontal Cluster", {
+                module("Cluster Layout / Horizontal", {
                     setup: function() {
-                        createCluster();
+                        createCluster({ gap: 0 });
                     }
                 });
 
@@ -194,9 +197,16 @@
                     });
                 });
 
-                module("Vertical Cluster", {
+                test("leaves 75% gap on both sides", function() {
+                    createCluster(/* Default gap size */);
+
+                    equal(bars[0].boxHistory[0].x1, 75);
+                    equal(bars[1].boxHistory[0].x2, 275);
+                });
+
+                module("Cluster Layout / Vertical", {
                     setup: function() {
-                        createCluster({ isHorizontal: false });
+                        createCluster({ isHorizontal: false, gap: 0 });
                     }
                 });
 
@@ -217,9 +227,9 @@
                 var stack,
                     stackBox = new Box(0, 0, 100, 100);
 
-                module("Vertical Stack", {
+                module("Stack Layout / Vertical", {
                     setup: function() {
-                        stack = new Chart.DataPointStack();
+                        stack = new Chart.StackLayout();
                     }
                 });
 
@@ -243,9 +253,9 @@
                 });
 
 
-                module("Horizontal Stack", {
+                module("Stack Layout / Horizontal", {
                     setup: function() {
-                        stack = new Chart.DataPointStack({ isVertical: false });
+                        stack = new Chart.StackLayout({ isVertical: false });
                         stack.children.push();
                     }
                 });

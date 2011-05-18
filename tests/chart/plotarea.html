@@ -102,6 +102,18 @@
                     );
                 });
 
+                test("axis limit is [0, 1] when no series are configured", 2, function() {
+                    stubMethod(Chart.PlotArea, "createAxes",
+                        function(seriesMin, seriesMax) {
+                            equal(seriesMin, 0);
+                            equal(seriesMax, 1);
+                        },
+                        function() {
+                            plotArea = new Chart.PlotArea();
+                        }
+                    );
+                });
+
                 test("aligns series box to axises", function() {
                     plotArea.updateLayout(chartBox);
                     same([barChart.box.x1, barChart.box.y1, barChart.box.x2, barChart.box.y2],
