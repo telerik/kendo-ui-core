@@ -226,9 +226,12 @@
                 max: 2,
                 largeStep: 1,
                 change: function() {
-                    imageSize = IMAGESIZES[this.value()];
-                    $("#mainSetPhotoStrip").data("kendoListView").template = kendo.template(template(imageSize));
-                    setPhotosDataSource.read();
+                    var value = this.value();
+                    imageSize = IMAGESIZES[value];
+                    var t = template(imageSize),
+                        pageSize = value === 0 ? 20 : parseInt(20 / value);
+                    $("#mainSetPhotoStrip").data("kendoListView").template = kendo.template(t);
+                    setPhotosDataSource.query({page: 1, pageSize: pageSize});
                 }
             });
         },
@@ -288,12 +291,16 @@
             });
 
             $(".i-tileview").click(function() {
+                var value = $("#setPhotoSize").data("kendoSlider").value(),
+                    pageSize = value === 0 ? 20 : parseInt(20 / value);
+
+                setPhotosDataSource.query({page: 1, pageSize: pageSize});
+
                 $(this).addClass("currentView");
                 $(".i-gridview").removeClass("currentView");
                 $("#mainSetPhotoStrip").show();
                 $("#setPhotoSize").parent().show();
                 $("#mainSetPhotoGrid").hide();
-                setPhotosDataSource.query({page: 1, pageSize: 20});
             }).addClass("currentView");
 
             $(".bottomLink").click(function() {
