@@ -47,11 +47,11 @@ var visitor = window.visitor,
    }
 
    window.visitor = {
-       hideExif: function() {
-           var exifWindow = $("#exifWindow");
-           if (exifWindow[0]) {
-               exifWindow.data("kendoWindow").close();
-           }
+        hideExif: function() {
+            var exifWindow = $("#exifWindow");
+            if (exifWindow[0]) {
+                exifWindow.data("kendoWindow").close();
+            }
         },
         mostPopular: function() {
             this.thumbList.append( $("#flatMostPopularPhotos").kendoListView({
@@ -233,12 +233,22 @@ var visitor = window.visitor,
 
             $("#viewslideshow").click(function(e) {
                 e.preventDefault();
+                var started = slideshow._started;
 
                 $(this).find(".p-icon")
                     .toggleClass("i-pause")
                     .toggleClass("i-slideshow")
                     .end()
-                    .find("em").html(slideshow._started ? 'Play' : 'Pause');
+                    .find("em").html(started ? 'Play' : 'Pause');
+
+                if(started){
+                    setBigPhoto($(".thumbs:visible").find(".t-state-selected:last img"));
+                } else {
+                    $("#exifButton").fadeOut();
+                    setTimeout(function(){
+                        hideExif();
+                    }, 300);
+                }
 
                 slideshow.toggle();
             });
