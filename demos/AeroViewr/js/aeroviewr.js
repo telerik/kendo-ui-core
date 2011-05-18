@@ -102,6 +102,13 @@ if (!isInferiorBrowser) {
                             (none)\
                             <% } %>\
                         </dd>\
+                        <dt>Link</dt><dd>\
+                            <% if (urls.length) { %>\
+                               <a href="<%= urls[0] %>"><%= urls[0] %></a> \
+                            <% } else { %>\
+                            (none)\
+                            <% } %>\
+                        </dd>\
                     </dl>\
                 </div>'
                 )({
@@ -113,6 +120,9 @@ if (!isInferiorBrowser) {
                             text: kendo.htmlEncode(tag.raw),
                             id: kendo.htmlEncode(tag._content)
                         };
+                    }),
+                    urls: $.map(photo.urls.url, function(url) {
+                        return url._content;
                     }),
                     location: photo.owner.location || "Unknown"
                 })
