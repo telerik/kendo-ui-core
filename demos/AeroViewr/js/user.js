@@ -281,7 +281,6 @@
                if (started) {
                     setBigPhoto($(".thumbs:visible").find(".t-state-selected:last img"));
                 } else {
-                    console.log("hide");
                     $("#exifButton").fadeOut();
                     setTimeout(function(){
                         hideExif();
