@@ -1868,3 +1868,39 @@ html .t-upload
     border-left: 1px solid #000;
     background-position: 100% 50%;
 }
+
+/*inferior browsers*/
+
+.inferiorBrowser #footer,
+.inferiorBrowser #signin,
+.inferiorBrowser header ul,
+.inferiorBrowser #photoWrap,
+.inferiorBrowser #exifButton
+{
+    display:none !important;
+}
+
+.inferiorBrowser #main
+{
+    padding-left:0 !important;
+    padding-right:0 !important;
+}
+
+#inferiorBrowserAlert
+{
+    display:none;
+}
+
+.inferiorBrowser #inferiorBrowserAlert
+{
+    display:block;
+    width:40%;
+    margin:4em auto;
+    font-size:1.2em;
+    text-align:center;
+}
+
+#inferiorBrowserAlert p
+{
+    margin:1em 0 0;
+}
