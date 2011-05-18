@@ -12,7 +12,7 @@
         imageSize = IMAGESIZES[0],
         PAGESIZE = 500,
         EXTRAS = "owner_name,tags",
-        template = function(option) { return '<li style="width:' + option.size + 'px;height:' + option.size + 'px"><img data-photoid="<%= id %>" alt="<%= title %>" src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>' + option.suffix + '.jpg"></li>'; },
+        template = function(option) { return '<li style="width:' + option.size + 'px;height:' + option.size + 'px"><img data-photoid="<%= id %>" alt="<%= kendo.htmlEncode(title) %>" src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>' + option.suffix + '.jpg"></li>'; },
         setTemplate = '<li data-setid="<%=id%>" alt="thumbnail"><img width="75" height="75" src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=primary%>_<%=secret%>_s.jpg"></li>',
         liveUrl = "http://localhost/kendo/demos/aeroviewr/index.html";
 
@@ -61,14 +61,14 @@
         }
     };
 
-    var setsDataSource = data.dataSource({        
+    var setsDataSource = data.dataSource({
         dialect: {
             read: function(data) {
                 return flickr.getSetsParams({});
             }
         },
         reader: {
-            data: function(result) {                
+            data: function(result) {
                 var sets = [];
                 if (result.stat == "ok" && result.photosets.photoset) {
                     sets = result.photosets.photoset;
@@ -81,7 +81,7 @@
         serverSorting: true,
         pageSize: 5,
         dialect: defaultDialect,
-        reader: defaultReader        
+        reader: defaultReader
     }),
     photoSetId = function() {
         return $("#flatSetsStrip").data("kendoListView").selected().attr("data-setid");
@@ -95,7 +95,7 @@
            });
     }
 
-    function showSelectedPhoto(ui) {       
+    function showSelectedPhoto(ui) {
        $("#flatPhotoStrip").show();
        $("#flatSetsStrip").hide();
 
@@ -107,8 +107,13 @@
 
        setPhotosDataSource.query({page: 1, pageSize: PAGESIZE});
    }
+<<<<<<< HEAD
    var loadingTimeout = 0;
    function setBigPhoto(img) {       
+=======
+
+   function setBigPhoto(img) {
+>>>>>>> html encoding the description to avoid XSS
        var bigPhoto = $("#bigPhoto"),
            src = img.attr("src").replace("_s", "").replace(imageSize.suffix,""),
            loader = $("img.loader"),
@@ -161,7 +166,7 @@
    }
 
     function search() {
-        if($("#searchBox").val()) {            
+        if($("#searchBox").val()) {
             $("#flatSetsStrip").hide();
             $("#flatPhotoStrip").hide();
             $("#mainUserWrap").show();
@@ -173,7 +178,7 @@
 
             $("#overlay").after("<div id='searchLoading' class='loading'>Loading ...</div>");
             setPhotosDataSource.read();
-        }        
+        }
         slideshow.stop();
     }
 
@@ -191,7 +196,7 @@
             el.text("Back to sets");
         }
         else if(state == "searchresult") {
-            el.text("Back to sets");                        
+            el.text("Back to sets");
         }
     }
 
@@ -213,7 +218,7 @@
                     this.element
                         .prepend('<li alt="thumbnail"><img width="75" height="75" src="img/NotInSet.png" /><em>Not In Set</em></li>')
                         .show();
-                    this.selectable.value(this.element.find("li:first"));                    
+                    this.selectable.value(this.element.find("li:first"));
                 },
                 change: function(e) {
                     var selected = this.selected();
@@ -287,7 +292,7 @@
                 max: 2,
                 largeStep: 1,
                 change: function() {
-                    imageSize = IMAGESIZES[this.value()];                             
+                    imageSize = IMAGESIZES[this.value()];
                     $("#mainSetPhotoStrip").data("kendoListView").template = kendo.template(template(imageSize));
                     setPhotosDataSource.read();
                 }
@@ -302,7 +307,7 @@
                 }
             });
         },
-        refreshSets: function() {        
+        refreshSets: function() {
             setPhotosDataSource.transport.cache.clear();
             setPhotosDataSource.read();
         },
@@ -377,5 +382,5 @@
             .data("state", "intial")
             .find(">#backButton").text("");
         }
-    };    
+    };
 })(jQuery, window);
