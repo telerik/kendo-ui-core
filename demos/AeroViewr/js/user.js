@@ -1,100 +1,75 @@
 (function($, window) {
+
+    window.application.call(this);
+
     var flickr = window.flickr,
         upload,
         slideshow = window.slideshow,
         data = window.data,
-        photosInSet = false,
-        IMAGESIZES = [
-            {suffix: "_s", size: 75},
-            {suffix: "_t", size: 100},
-            {suffix: "_m", size: 240}
-        ],
-        imageSize = IMAGESIZES[0],
-        PAGESIZE = 500,
-        EXTRAS = "owner_name,tags",
-        template = function(option) { return '<li style="width:' + option.size + 'px;height:' + option.size + 'px"><img data-photoid="<%= id %>" alt="<%= title %>" src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>' + option.suffix + '.jpg"></li>'; },
-        setTemplate = '<li data-setid="<%=id%>" alt="thumbnail"><img width="75" height="75" src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=primary%>_<%=secret%>_s.jpg"></li>',
+        photosInSet = false,        
+        searching = false,
         liveUrl = "http://localhost/kendo/demos/aeroviewr/index.html",
-        searching = false;
-
-    var searchReader = {
-        data: function(result) {
-            return result.photos.photo;
-        },
-        total: function(result) {
-            return Math.min(result.photos.total, PAGESIZE);
-        }
-    },
-    defaultReader = {
-        data: function(result) {
-            if(photosInSet) {
-                return result.photoset.photo;
-            }
-            return result.photos.photo;
-        },
-        total: function(result) {
-            if(photosInSet) {
-                return Math.min(result.photoset.total, PAGESIZE);
-            }
-            return Math.min(result.photos.total, PAGESIZE);
-        }
-    },
-    searchDialect = {
-        read: function(data) {
-            var params = {
-                text: $("#searchBox").val(),
-                extras: EXTRAS,
-                per_page: PAGESIZE
-            };
-            return flickr.searchParams(params);
-        }
-    },
-    defaultDialect = {
-        read: function(data) {
-            var params = { extras: "owner_name,tags", per_page: PAGESIZE };
-            if(photosInSet) {
-                params.photoset_id = photoSetId();
-                return flickr.getInSetParams(params);
-            }
-            else {
-                return flickr.getNotInSetParams(params);
-            }
-        }
-    };
-
-    var setsDataSource = data.dataSource({
-        dialect: {
-            read: function(data) {
-                return flickr.getSetsParams({});
-            }
-        },
-        reader: {
+        defaultReader = {
             data: function(result) {
-                var sets = [];
-                if (result.stat == "ok" && result.photosets.photoset) {
-                    sets = result.photosets.photoset;
+                if(photosInSet) {
+                    return result.photoset.photo;
                 }
-                return sets;
+                return result.photos.photo;
+            },
+            total: function(result) {
+                if(photosInSet) {
+                    return Math.min(result.photoset.total, PAGESIZE);
+                }
+                return Math.min(result.photos.total, PAGESIZE);
             }
-        }
-    }),
-    setPhotosDataSource = data.dataSource({
-        serverSorting: true,
-        pageSize: 20,
-        dialect: defaultDialect,
-        reader: defaultReader
-    }),
-    photoSetId = function() {
-        return $("#flatSetsStrip").data("kendoListView").selected().attr("data-setid");
-    };
-
-    function displayImages(element) {
-       element.find("img")
-           .hide()
-           .bind("load", function() {
-               $(this).fadeIn();
-           });
-    }
+        },
+        searchDialect = {
+            read: function(data) {
+                var params = {
+                    text: $("#searchBox").val(),
+                    extras: EXTRAS,
+                    per_page: PAGESIZE
+                };
+                return flickr.searchParams(params);
+            }
+        },
+        defaultDialect = {
+            read: function(data) {
+                var params = { extras: "owner_name,tags", per_page: PAGESIZE };
+                if(photosInSet) {
+                    params.photoset_id = photoSetId();
+                    return flickr.getInSetParams(params);
+                }
+                else {
+                    return flickr.getNotInSetParams(params);
+                }
+            }
+        },
+        setsDataSource = data.dataSource({
+            dialect: {
+                read: function(data) {
+                    return flickr.getSetsParams({});
+                }
+            },
+            reader: {
+                data: function(result) {
+                    var sets = [];
+                    if (result.stat == "ok" && result.photosets.photoset) {
+                        sets = result.photosets.photoset;
+                    }
+                    return sets;
+                }
+            }
+        }),
+        setPhotosDataSource = data.dataSource({
+            serverSorting: true,
+            pageSize: 20,
+            dialect: defaultDialect,
+            reader: defaultReader
+        }),
+        photoSetId = function() {
+            return $("#flatSetsStrip").data("kendoListView").selected().attr("data-setid");
+        };
 
     function showSelectedPhoto(ui) {
        $("#flatPhotoStrip").show();
@@ -107,60 +82,7 @@
        setBigPhoto($("img:first", ui.selectable.value()));
 
        setPhotosDataSource.query({page: 1, pageSize: PAGESIZE});
-   }
-   var loadingTimeout = 0;
-   function setBigPhoto(img) {
-       var bigPhoto = $("#bigPhoto"),
-           src = img.attr("src").replace("_s", "").replace(imageSize.suffix,""),
-           loader = $("img.loader"),
-           exifInfo = $(".exifInfo");
-
-        if (loader[0]) {
-            loader.remove();
-        } else {
-            loadingTimeout = setTimeout(function() {
-                bigPhoto.after("<div class='loading'>Loading ...</div>");
-                exifInfo.fadeOut();
-            }, 100);
-        }
-
-        loader = $("<img class='loader' />")
-            .hide()
-            .appendTo(document.body)
-            .attr("src", src)
-            .bind("load", function() {
-                clearTimeout(loadingTimeout);
-
-                loader.remove();
-
-                bigPhoto.next(".loading")
-                    .remove()
-                    .end()
-                    .add(exifInfo)
-                    .stop(true, true)
-                    .fadeOut(function() {
-                        if (this == exifInfo[0]) {
-                            exifInfo.find("h2")
-                               .text(img.attr("alt") || "No Title")
-                               .end()
-                               .attr("data-photoid", img.attr("data-photoid"));
-                            exifInfo.css({
-                               display: 'block',
-                               opacity: 0
-                            });
-                        } else {
-                            bigPhoto.attr("src", src);
-                        }
-                    });
-
-                bigPhoto.fadeIn({
-                    step: function (now) {
-                        if (!slideshow._started)
-                            exifInfo.css('opacity',  now);
-                    }
-                });
-            });
-   }
+   }   
 
     function search() {
         if($("#searchBox").val()) {
@@ -269,7 +191,7 @@
                 pageable: $(".paging").data("kendoPager"),
                 selectable: true,
                 columns: [
-                    { template: '<img data-photoid="<%= id %>" alt="<%=title%>" src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>_s.jpg">', title: "PHOTO" },
+                    { template: '<img data-photoid="<%= id %>" alt="<%= kendo.htmlEncode(title) %>" src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>_s.jpg">', title: "PHOTO" },
                     { field: "ownername", title: "AUTHOR" },
                     { field: "title", title: "TITLE" },
                     { field: "tags", title: "TAGS"}
