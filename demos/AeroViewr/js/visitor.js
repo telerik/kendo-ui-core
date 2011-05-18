@@ -304,8 +304,7 @@ var visitor = window.visitor,
                     $("#mainPhotoStrip").data("kendoListView").template = kendo.template(t);
                     dataSource.query({page: 1, pageSize: pageSize});
                 }
-            })
-            .parent().hide();
+            });
         },
         initVisitor: function() {
             var that = this;
