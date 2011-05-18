@@ -95,7 +95,7 @@
             setPhotosDataSource.transport.dialect = searchDialect;
             setPhotosDataSource._reader = searchReader;
 
-            $("#overlay").after("<div id='searchLoading' class='loading'>Loading ...</div>");
+            $("#overlay").after("<div id='searchLoading' class='loading'>Loading ...</div>");            
             setPhotosDataSource.query({page: 1, pageSize: 20});
         }
         slideshow.stop();
@@ -165,8 +165,7 @@
 
             $("#mainSetPhotoStrip").kendoListView({
                 autoBind: false,
-                dataSource: setPhotosDataSource,
-                pageable: $(".paging").data("kendoPager"),
+                dataSource: setPhotosDataSource,                
                 template: template(imageSize),
                 change: function () {
                     changeState("slideshow");
@@ -209,8 +208,7 @@
         initPhotoStrip: function() {
             $("#flatPhotoStrip").kendoListView({
                 autoBind: false,
-                dataSource: setPhotosDataSource,
-                pageable: $(".paging").data("kendoPager"),
+                dataSource: setPhotosDataSource,                
                 template: template(imageSize),
                 change: function () {
                     setBigPhoto($("img:first", this.selectable.value()));

@@ -37,8 +37,8 @@
                     data: function(result) {
                         return result.photos.photo;
                     },
-                    total: function(result) {
-                        return Math.min(result.photos.total, this.PAGESIZE);
+                    total: function(result) {                      
+                        return Math.min(result.photos.total, PAGESIZE);
                     }
                 },
                 this.displayImages = function(element) {
