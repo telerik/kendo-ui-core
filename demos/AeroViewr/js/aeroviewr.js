@@ -42,9 +42,18 @@ if (!isInferiorBrowser) {
             }
         });
 
-        var infoTimeout = 0;
+        var infoTimeout = 0,
+            infoLoading = false;
 
         $(".exifInfo").click(function (e) {
+            e.preventDefault();
+
+            if (infoLoading) {
+                return;
+            }
+
+            infoLoading = true;
+
             $(document).one("mousedown touchstart", function() {
                 visitor.hideExif();
             });
@@ -110,6 +119,8 @@ if (!isInferiorBrowser) {
                         e.stopPropagation();
                     }).end()
                 .data("kendoWindow").center().open();
+
+                infoLoading = false;
             });
 
             e.stopPropagation();
