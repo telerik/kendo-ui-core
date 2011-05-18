@@ -12,7 +12,7 @@ if ((jQuery.browser.msie && parseInt(jQuery.browser.version) < 9) ||
 
 if (!isInferiorBrowser) {
     document.documentElement.className = "";
-    $("#inferiorBrowserAlert").hide();
+    $("#noHTML5Alert").hide();
 }
 
 (function ($) {
