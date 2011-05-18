@@ -79,7 +79,7 @@
     }),
     setPhotosDataSource = data.dataSource({
         serverSorting: true,
-        pageSize: 5,
+        pageSize: 20,
         dialect: defaultDialect,
         reader: defaultReader
     }),
@@ -165,7 +165,6 @@
         if($("#searchBox").val()) {
             $("#flatSetsStrip").hide();
             $("#flatPhotoStrip").hide();
-            $("#mainUserWrap").show();
             $("#overlay").fadeIn();
             $("#exifButton").fadeOut();
             changeState("searchresult");
@@ -186,7 +185,7 @@
             el.text("");
             setPhotosDataSource.transport.dialect = defaultDialect;
             setPhotosDataSource._reader = defaultReader;
-            $(".i-gridview").click();
+            $(".i-tileview").click();
         }
         else if(state == "slideshow") {
             el.text("Back to sets");
@@ -246,11 +245,12 @@
                 change: function () {
                     changeState("slideshow");
                     showSelectedPhoto(this);
+                    $("#mainUserWrap").show();
                 },
                 dataBound: function () {
                     displayImages(this.element);
                 }
-            }).hide();
+            });
 
             $("#mainSetPhotoGrid").kendoGrid({
                 autoBind: false,
@@ -271,7 +271,7 @@
                     $("#searchLoading").remove();
                     displayImages(this.element);
                 }
-            });
+            }).hide();
         },
         initPhotoStrip: function() {
             $("#flatPhotoStrip").kendoListView({
@@ -295,8 +295,7 @@
                     $("#mainSetPhotoStrip").data("kendoListView").template = kendo.template(template(imageSize));
                     setPhotosDataSource.read();
                 }
-            })
-            .parent().hide();
+            });
         },
         initSearch: function() {
             $(".i-search").click(function(e) { e.preventDefault(); search(); });
@@ -350,7 +349,7 @@
                 $("#setPhotoSize").parent().hide();
                 $("#mainSetPhotoGrid").show();
                 setPhotosDataSource.query({page: 1, pageSize: 5});
-            }).addClass("currentView");
+            });
 
             $(".i-tileview").click(function() {
                 $(this).addClass("currentView");
@@ -359,7 +358,7 @@
                 $("#setPhotoSize").parent().show();
                 $("#mainSetPhotoGrid").hide();
                 setPhotosDataSource.query({page: 1, pageSize: 20});
-            });
+            }).addClass("currentView");
 
             $(".bottomLink").click(function() {
                 var element = $(this),
