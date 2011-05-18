@@ -170,7 +170,7 @@
             $("#exifButton").fadeOut();
             changeState("searchresult");
             setPhotosDataSource.transport.dialect = searchDialect;
-            setPhotosDataSource.reader = searchReader;
+            setPhotosDataSource._reader = searchReader;
 
             $("#overlay").after("<div id='searchLoading' class='loading'>Loading ...</div>");
             setPhotosDataSource.read();
@@ -185,7 +185,7 @@
         if(state == "initial") {
             el.text("");
             setPhotosDataSource.transport.dialect = defaultDialect;
-            setPhotosDataSource.reader = defaultReader;
+            setPhotosDataSource._reader = defaultReader;
             $(".i-gridview").click();
         }
         else if(state == "slideshow") {
