@@ -1299,6 +1299,13 @@ div.t-window-content
 .t-resize-ne { top: -3px; right: -3px; width: 6px; height: 6px; cursor: ne-resize; }
 .t-resize-nw { top: -3px; left: -3px; width: 6px; height: 6px; cursor: nw-resize; }
 
+#exifWindowWrapper .t-window-title
+{
+    font-size: 1.528em;
+    overflow: visible;
+    left: 6px;
+}
+
 #exifWindow
 {
     background: rgba(0, 0, 0, .84);
@@ -1327,6 +1334,22 @@ div.t-window-content
 #exifWindow a
 {
     color: #ff0060;
+}
+
+#exifWindow .exif-author
+{
+    color: #666;
+    padding-bottom: 15px;
+}
+
+.taglist li
+{
+    float: left;
+}
+
+#exifWindow .exif-author span
+{
+    font-style: italic;
 }
 
 .t-overlay
