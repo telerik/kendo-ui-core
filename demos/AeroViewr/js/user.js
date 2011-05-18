@@ -270,10 +270,23 @@
             slideshow.init($("#flatPhotoStrip").data("kendoListView"));
             $("#viewslideshow").click(function(e) {
                 e.preventDefault();
+                var started = slideshow._started;
 
-                $(this).find(".p-icon")
+               $(this).find(".p-icon")
                     .toggleClass("i-pause")
-                    .toggleClass("i-slideshow");
+                    .toggleClass("i-slideshow")
+                    .end()
+                    .find("em").html(started ? 'Play' : 'Pause'); 
+
+               if (started) {
+                    setBigPhoto($(".thumbs:visible").find(".t-state-selected:last img"));
+                } else {
+                    console.log("hide");
+                    $("#exifButton").fadeOut();
+                    setTimeout(function(){
+                        hideExif();
+                    }, 300);
+                }
 
                 upload.hide();
                 slideshow.toggle();
