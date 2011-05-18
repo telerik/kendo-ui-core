@@ -352,7 +352,7 @@
             majorUnit: 0.1,
             majorTicks: "outside",
             majorTickSize: 4,
-            axisCrossingAt: 0,
+            axisCrossingValue: 0,
 
             _snapLineToBottom: false
         },
@@ -555,7 +555,7 @@
                 options = axis.options,
                 lineBox = axis.getAxisLineBox(),
                 scale = lineBox.height() / (options.max - options.min),
-                b = arguments.length == 2 ? b : options.axisCrossingAt,
+                b = arguments.length == 2 ? b : options.axisCrossingValue,
                 y1 = lineBox.y2 - scale * Math.min(a, b),
                 y2 = lineBox.y2 - scale * Math.max(a, b);
 
@@ -894,18 +894,20 @@
         init: function() {
             var plotArea = this,
                 options = plotArea.options,
-                charts = plotArea.charts = [];
+                charts = plotArea.charts = [],
+                range = { min: 0, max: 1 };
 
             var barSeries = $.grep(options.series, function(currentSeries) {
                 return currentSeries.type == "bar";
             });
 
-            var barChart = new BarChart(this, { series: barSeries }),
+            if (barSeries.length > 0) {
+                var barChart = new BarChart(this, { series: barSeries });
+
                 range = barChart.getValueRange();
-
-            charts.push(barChart);
-
-            [].push.apply(plotArea.children, charts);
+                charts.push(barChart);
+                [].push.apply(plotArea.children, charts);
+            }
 
             plotArea.createAxes(range.min, range.max);
         },
@@ -1098,7 +1100,8 @@
         path.template = SVGPath.template;
         if (!path.template) {
             path.template = SVGPath.template = kendo.template(
-                "<path d='<%= renderPoints() %>' stroke='<%= options.stroke %>'></path>"
+                "<path d='<%= renderPoints() %>' " +
+                "stroke='<%= options.stroke %>' fill='<%= options.fill %>'></path>"
             );
         }
 
@@ -1108,7 +1111,8 @@
     SVGPath.prototype = new ViewElement();
     $.extend(SVGPath.prototype, {
         options: {
-            stroke: "#000"
+            stroke: "#000",
+            fill: "#fff"
         },
 
         renderPoints: function() {

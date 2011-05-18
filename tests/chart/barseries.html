@@ -67,20 +67,18 @@
                     }
                 });
 
-                function setupBarChart(seriesData) {
+                function setupBarChart(options) {
                     plotArea = new PlotAreaStub();
                     viewFactory = new ViewFactoryStub();
 
-                    series = new Chart.BarChart(plotArea, {
-                        series: seriesData
-                    });
+                    series = new Chart.BarChart(plotArea, options);
 
                     series.updateLayout();
                 }
 
                 module("Bar Chart / Positive Values", {
                     setup: function() {
-                        setupBarChart([ positiveSeries ]);
+                        setupBarChart({ series: [ positiveSeries ] });
                     }
                 });
 
@@ -128,7 +126,7 @@
 
                 module("Bar Chart / Negative Values", {
                     setup: function() {
-                        setupBarChart([ negativeSeries ]);
+                        setupBarChart({ series: [ negativeSeries ] });
                     }
                 });
 
@@ -150,13 +148,18 @@
 
                 module("Bar Chart / Cluster", {
                     setup: function() {
-                        setupBarChart([ positiveSeries, negativeSeries ]);
+                        setupBarChart({ series: [ positiveSeries, negativeSeries ] });
                     }
                 });
 
                 test("bars in first category are clustered", function() {
                     equal(series.children[0].box.x2, series.children[1].box.x1);
                 });
+
+                module("Bar Chart / Stack", {
+                        
+                });
+
 
             })();
 
