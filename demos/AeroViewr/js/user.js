@@ -11,9 +11,55 @@
         ],
         imageSize = IMAGESIZES[0],
         PAGESIZE = 500,
+        EXTRAS = "owner_name,tags",
         template = function(option) { return '<li style="width:' + option.size + 'px;height:' + option.size + 'px"><img alt="<%= title %>" src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>' + option.suffix + '.jpg"></li>'; },
         setTemplate = '<li data-setid="<%=id%>" alt="thumbnail"><img width="75" height="75" src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>_s.jpg"></li>',
         liveUrl = "http://localhost/kendo/demos/aeroviewr/index.html";
+
+    var searchReader = {
+        data: function(result) {
+            return result.photos.photo;
+        },
+        total: function(result) {
+            return Math.min(result.photos.total, PAGESIZE);
+        }
+    },
+    defaultReader = {
+        data: function(result) {
+            if(photosInSet) {
+                return result.photoset.photo;
+            }
+            return result.photos.photo;
+        },
+        total: function(result) {
+            if(photosInSet) {
+                return Math.min(result.photoset.total, PAGESIZE);
+            }
+            return Math.min(result.photos.total, PAGESIZE);
+        }
+    },
+    searchDialect = {
+        read: function(data) {
+            var params = {
+                text: $("#searchBox").val(),
+                extras: EXTRAS,
+                per_page: PAGESIZE
+            };
+            return flickr.searchParams(params);
+        }
+    },
+    defaultDialect = {
+        read: function(data) {
+            var params = { extras: "owner_name,tags", per_page: PAGESIZE };
+            if(photosInSet) {
+                params.photoset_id = photoSetId();
+                return flickr.getInSetParams(params);
+            }
+            else {
+                return flickr.getNotInSetParams(params);
+            }
+        }
+    };
 
     var setsDataSource = data.dataSource({
         cache: "inmemory",
@@ -23,8 +69,7 @@
             }
         },
         reader: {
-            data: function(result) {
-                // this will not databind listview if no sets!!!
+            data: function(result) {                
                 var sets = [];
                 if (result.stat == "ok" && result.photosets.photoset) {
                     sets = result.photosets.photoset;
@@ -36,32 +81,8 @@
     setPhotosDataSource = data.dataSource({
         serverSorting: true,
         pageSize: 5,
-        dialect: {
-            read: function(data) {
-                var params = { extras: "owner_name,tags", per_page: PAGESIZE };
-                if(photosInSet) {
-                    params.photoset_id = photoSetId();
-                    return flickr.getInSetParams(params);
-                }
-                else {
-                    return flickr.getNotInSetParams(params);
-                }
-            }
-        },
-        reader: {
-            data: function(result) {
-                if(photosInSet) {
-                    return result.photoset.photo;
-                }
-                return result.photos.photo;
-            },
-            total: function(result) {
-                if(photosInSet) {
-                    return Math.min(result.photoset.total, PAGESIZE);
-                }
-                return Math.min(result.photos.total, PAGESIZE);
-            }
-        }
+        dialect: defaultDialect,
+        reader: defaultReader        
     }),
     photoSetId = function() {
         return $("#flatSetsStrip").data("kendoListView").selected().attr("data-setid");
@@ -75,8 +96,7 @@
            });
     }
 
-    function showSelectedPhoto(ui) {
-       //$("#flatSearchPhotos").show();
+    function showSelectedPhoto(ui) {       
        $("#flatPhotoStrip").show();
        $("#flatSetsStrip").hide();
 
@@ -116,6 +136,22 @@
             .fadeIn();
         });
    }
+
+    function search() {
+        if($("#searchBox").val()) {            
+            $("#flatSetsStrip").hide();
+            $("#flatPhotoStrip").hide();
+            $("#mainUserWrap").show();
+            $("#overlay").fadeIn();
+            $("#exifButton").fadeOut();
+
+            setPhotosDataSource.transport.dialect = searchDialect;
+            setPhotosDataSource.reader = searchReader;
+            
+            setPhotosDataSource.read();
+        }        
+        slideshow.stop();
+    }
 
     var user = window.user = {
         initUpload: function() {
@@ -202,13 +238,20 @@
                 max: 2,
                 largeStep: 1,
                 change: function() {
-                    imageSize = IMAGESIZES[this.value()];
-                    var t = template(imageSize);                    
-                    $("#mainSetPhotoStrip").data("kendoListView").template = kendo.template(t);
+                    imageSize = IMAGESIZES[this.value()];                             
+                    $("#mainSetPhotoStrip").data("kendoListView").template = kendo.template(template(imageSize));
                     setPhotosDataSource.read();
                 }
             })
             .parent().hide();
+        },
+        initSearch: function() {
+            $(".i-search").click(function(e) { e.preventDefault(); search(); });
+            $("#searchBox").bind("keydown", function(e) {
+                if(e.keyCode === kendo.keys.ENTER) {
+                    $(".i-search").click();
+                }
+            });
         },
         refreshSets: function() {        
             setPhotosDataSource.transport.cache.clear();
@@ -233,6 +276,7 @@
             that.initMainPictures();
             that.initPhotoStrip();
             that.initSlider();
+            that.initSearch();
 
             slideshow.init($("#flatPhotoStrip").data("kendoListView"));
             $("#viewslideshow").click(function() {
@@ -263,7 +307,7 @@
                 $("#flatPhotoStrip").hide();                
                 $("#flatSetsStrip").show();
                 $("#mainUserWrap").show();
-            });
+            });            
         }
     };
 })(jQuery, window);
