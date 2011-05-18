@@ -109,11 +109,20 @@ var visitor = window.visitor,
                                .text(img.attr("alt") || "No Title")
                                .end()
                                .attr("data-photoid", img.attr("data-photoid"));
+                            exifInfo.css({
+                               display: 'block',
+                               opacity: 0
+                            });
                         } else {
                             bigPhoto.attr("src", src);
                         }
                     })
-                    .fadeIn();
+                    .end()
+                    .fadeIn({
+                        step: function (now) {
+                            exifInfo.css('opacity',  now);
+                        }
+                    });
             });
    }
 
