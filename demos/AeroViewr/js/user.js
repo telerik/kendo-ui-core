@@ -158,15 +158,16 @@
             changeState("searchresult");
             setPhotosDataSource.transport.dialect = searchDialect;
             setPhotosDataSource.reader = searchReader;
-            
+
+            $("#overlay").after("<div id='searchLoading' class='loading'>Loading ...</div>");
             setPhotosDataSource.read();
         }        
         slideshow.stop();
     }
 
     function changeState(state) {
-        var el = $(".bottomLink");
-        el.data("state", state);
+        var el = $(".bottomLink>#backButton");
+        $(".bottomLink").data("state", state);
 
         if(state == "initial") {
             el.text("");
@@ -251,6 +252,7 @@
                     showSelectedPhoto(this);
                 },
                 dataBound: function() {
+                    $("#searchLoading").remove();
                     displayImages(this.element);
                 }
             });
@@ -360,7 +362,8 @@
                     changeState("initial");
                 }
             })
-            .text("").data("state", "intial");
+            .data("state", "intial")
+            .find(">#backButton").text("");
         }
     };    
 })(jQuery, window);
