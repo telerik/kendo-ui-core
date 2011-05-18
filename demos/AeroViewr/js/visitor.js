@@ -330,7 +330,9 @@ var visitor = window.visitor,
 
                 $(this).find(".p-icon")
                     .toggleClass("i-pause")
-                    .toggleClass("i-slideshow");
+                    .toggleClass("i-slideshow")
+                    .end()
+                    .find("em").html(slideshow._started ? 'Play' : 'Pause');
 
                 slideshow.toggle();
             });
