@@ -137,6 +137,7 @@ var visitor = window.visitor,
         search: function(el) {
             if($("#searchBox").val()) {
                 this.searchResult();
+                dataSource.query({page: 1, pageSize: 5});
                 $("#flatMostPopularPhotos").hide();
                 $("#flatSearchPhotos").hide();
                 $("#overlay").fadeIn();
@@ -149,7 +150,6 @@ var visitor = window.visitor,
         searchResult: function () {
             var that = this;
             if(that._searchInitialized){
-                dataSource.query({page: 1, pageSize: 5});
                 return;
             }
 
@@ -161,6 +161,7 @@ var visitor = window.visitor,
             $(".paging").kendoPager({ dataSource: dataSource });
 
             $("#flatSearchPhotos").kendoListView({
+                autoBind: false,
                 dataSource: dataSource,
                 template: template(IMAGESIZES[0]),
                 dataBound: function() {
@@ -171,6 +172,7 @@ var visitor = window.visitor,
                 }
             });
             $("#mainPhotoGrid").kendoGrid({
+                autoBind: false,
                 dataSource: dataSource,
                 pageable: $(".paging").data("kendoPager"),
                 selectable: true,
@@ -194,6 +196,7 @@ var visitor = window.visitor,
             });
 
             $("#mainPhotoStrip").kendoListView({
+                autoBind: false,
                 dataSource: dataSource,
                 template: template(imageSize),
                 dataBound: function() {
@@ -226,7 +229,7 @@ var visitor = window.visitor,
                 $("#slider").parent().show();
                 var value = $("#slider").data("kendoSlider").value(),
                     pageSize = value === 0 ? 20 : parseInt(20 / value);
-                
+
                 dataSource.query({page: 1, pageSize: pageSize});
             });
 
