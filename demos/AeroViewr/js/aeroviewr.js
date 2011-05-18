@@ -72,7 +72,12 @@ if (!isInferiorBrowser) {
                     return;
                 }
 
-                var photo = result.photo;
+                var photo = result.photo,
+                    description = photo.description._content;
+
+                if (description.length > 1027) {
+                    description = description.substring(0, 1024) + "...";
+                }
 
                 $(kendo.template('<div id="exifWindow">\
                     <div class="exif-author">by <span><%= author %></span></div>\
@@ -84,7 +89,7 @@ if (!isInferiorBrowser) {
                             <% if (tags.length) { %>\
                             <ul class="taglist">\
                             <% $.each(tags, function(index, tag) { %> \
-                               <li><a href="#" data-tagid="<%= tag.id %>"><%= tag.text %></a></li> \
+                               <li<%= (index == tags.length - 1 ? \' class="last"\' : "") %>><a href="#" data-tagid="<%= tag.id %>"><%= tag.text %></a></li> \
                             <% }); %> \
                             </ul>\
                             <% } else { %>\
@@ -95,14 +100,14 @@ if (!isInferiorBrowser) {
                 </div>'
                 )({
                     posted: kendo.toString(new Date(parseInt(photo.dates.posted) * 1000), "MMMM dd, yyyy"),
-                    description: photo.description._content,
+                    description: description,
                     author: photo.owner.realname,
                     tags: $.map(photo.tags.tag, function(tag) {
                         return {
                             text: tag.raw,
                             id: tag._content
                         };
-                    }),
+                    }).slice(0, 24),
                     location: photo.owner.location
                 })
                 ).kendoWindow({
