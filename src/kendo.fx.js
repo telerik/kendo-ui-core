@@ -218,11 +218,13 @@
                 animate(element, extend({ opacity: 0 }, properties), options);
             },
             reverse: function(element, properties, options) {
+                element.css('opacity', 0);
                 animate(element, extend({ opacity: 1 }, properties), options);
             }
         },
         fadeIn: {
             play: function(element, properties, options) {
+                element.css('opacity', 0); // reset the opacity if the element has been hidden
                 animate(element, extend({ opacity: 1 }, properties), options);
             },
             reverse: function(element, properties, options) {
