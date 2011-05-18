@@ -517,6 +517,7 @@ header>ul
     margin-bottom:-1px;
     margin-left:-1px;
     margin-right:0;
+    background:#222;
 }
 
 .t-grid tr td>img
@@ -623,7 +624,6 @@ header>ul
 {
     display:inline-block;
     margin-left:4px;
-    background:#333;
 }
 
 .thumbViews .p-icon
