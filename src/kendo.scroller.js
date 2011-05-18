@@ -231,7 +231,7 @@
 
         _scrollClick: function (e) {
             e.preventDefault();
-            
+
             var scrollTo = 0,
                 scrollOffsets = this._getScrollOffsets();
 
@@ -275,10 +275,16 @@
         _getScrollOffsets: function () {
             var transforms = (this.scrollElement.css(this._transformProperty).match(/(translate[3d]*\(|matrix\(([\s\w\d]*,){4,4})\s*(-?[\d\.]+)?[\w\s]*,?\s*(-?[\d\.]+)[\w\s]*.*?\)/i) || [0, 0, 0, 0, 0]);
 
-            return {
-                x: +transforms[3],
-                y: +transforms[4]
-            };
+            if (kendo.support.transitions)
+                return {
+                    x: +transforms[3],
+                    y: +transforms[4]
+                };
+            else
+                return {
+                    x: parseInt(this.scrollElement.css('marginLeft'), 10) || 0,
+                    y: parseInt(this.scrollElement.css('marginTop'), 10) || 0
+                };
         },
 
         _wait: function (e) {

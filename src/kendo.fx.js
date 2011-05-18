@@ -185,10 +185,21 @@
                         }
                     } else
                         if (value in translateProperties && properties[value] !== undefined) {
-                            !element.data('translate') && element.data('translate', {
+                            var position = element.css('position'),
+                                isFixed = (position == 'absolute' || position == 'fixed');
+
+                            if (!element.data('translate')) {
+                                if (isFixed)
+                                    element.data('translate', {
                                         top: element.offset().top,
                                         left: element.offset().left
                                     });
+                                else
+                                    element.data('translate', {
+                                        top: parseInt(element.css('marginTop'), 10) || 0,
+                                        left: parseInt(element.css('marginLeft'), 10) || 0
+                                    });
+                            }
 
                             var originalPosition = element.data('translate');
 
@@ -198,8 +209,13 @@
                                 var dX = value == 'translateY' ? +null : +params[1],
                                     dY = value == 'translateY' ? +params[1] : +params[2];
 
-                                !isNaN(dX) && extend(single, { left: originalPosition.left + dX });
-                                !isNaN(dY) && extend(single, { top: originalPosition.top + dY });
+                                if (isFixed) {
+                                    !isNaN(dX) && extend(single, { left: originalPosition.left + dX });
+                                    !isNaN(dY) && extend(single, { top: originalPosition.top + dY });
+                                } else {
+                                    !isNaN(dX) && extend(single, { marginLeft: originalPosition.left + dX });
+                                    !isNaN(dY) && extend(single, { marginTop: originalPosition.top + dY });
+                                }
                             }
                         }
 
