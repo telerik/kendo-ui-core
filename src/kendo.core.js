@@ -972,6 +972,8 @@
                 return false;
             }
         });
+
+        support.devicePixelRatio = window.devicePixelRatio === undefined ? 1 : window.devicePixelRatio;
     })();
 
     var effectInit = {
