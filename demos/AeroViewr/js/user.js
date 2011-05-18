@@ -203,7 +203,6 @@
                 slideshow.stop();
                 $("#mainTemplate").hide();
                 $("#mainUserWrap").hide();
-                $("#overlay").show();
                 upload.show();
             });
         },
@@ -308,6 +307,8 @@
         refreshSets: function() {
             setPhotosDataSource.transport.cache.clear();
             setPhotosDataSource.read();
+            $("#mainUserWrap").show();
+            $("#overlay").fadeIn();
         },
         initUser: function() {
             var that = this;
