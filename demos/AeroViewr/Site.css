@@ -1,7 +1,7 @@
 ﻿/* global */
 
 html,body,h1,h2,p,ul,ol,li,dl,dt,dd,form,fieldset,button,input,textarea{margin:0;padding:0;font-size:100%;list-style:none;outline:none}
-.t-selectable,.t-focusable{outline:none}
+.t-selectable,.t-focusable,#backButton{outline:none}
 table{border-spacing:0}
 
 .floatWrap:after{content:"";display:block;height:0;clear:both;}
@@ -337,7 +337,12 @@ header .p-icon
     height:35px;
 }
 
-header .i-help
+/*header .i-help
+{
+    margin-right:22px;
+}*/
+
+header>ul
 {
     margin-right:22px;
 }
@@ -617,6 +622,8 @@ header .i-help
 .thumbViews>li
 {
     display:inline-block;
+    margin-left:4px;
+    background:#333;
 }
 
 .thumbViews .p-icon
@@ -951,7 +958,7 @@ header .i-help
     left:0;
     bottom:0;
     display:inline-block;
-    border-color:rgba(235,235,235,.2);
+    border-color:rgba(235,235,235,.3);
     padding:6px 7px 7px 50px;
     cursor:pointer;
 

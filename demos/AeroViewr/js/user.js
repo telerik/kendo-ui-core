@@ -102,8 +102,8 @@
     }
 
     function changeState(state) {
-        var el = $(".bottomLink>#backButton");
-        $(".bottomLink").data("state", state);
+        var el = $("#backButton");
+        el.data("state", state);
 
         if(state == "initial") {
             el.text("");
@@ -301,7 +301,7 @@
                 $("#mainSetPhotoGrid").hide();
             }).addClass("currentView");
 
-            $(".bottomLink").click(function() {
+            $("#backButton").click(function() {
                 var element = $(this),
                     state = element.data("state");
                 slideshow.stop();
@@ -324,7 +324,7 @@
                 }
             })
             .data("state", "intial")
-            .find(">#backButton").text("");
+            .text("");
         }
     };
 })(jQuery, window);
