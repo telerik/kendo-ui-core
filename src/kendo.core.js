@@ -989,7 +989,7 @@
                 fadeOutReverse: effectInit.fadeIn,
                 zoomOutReverse: effectInit.zoomIn
             });
-    
+
     function size(obj) {
         var size = 0, key;
         for (key in obj)
@@ -1124,6 +1124,26 @@
         return value.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
     }
 
+    var touchLocation = function(e) {
+        return {
+            idx: 0,
+            x: e.pageX,
+            y: e.pageY
+        };
+    }
+
+    if (support.touch) {
+        touchLocation = function(e) {
+            var changedTouches = e.changedTouches || e.originalEvent.changedTouches;
+
+            return {
+                idx: changedTouches[0].identifier,
+                x: changedTouches[0].pageX,
+                y: changedTouches[0].pageY
+            };
+        }
+    }
+
     extend(kendo, {
         ui: {},
         fx: {},
@@ -1150,6 +1170,7 @@
         template: proxy(Template.compile, Template),
         render: proxy(Template.render, Template),
         stringify: proxy(JSON.stringify, JSON),
+        touchLocation: touchLocation,
         format: format,
         formatters: formatters,
         htmlEncode: htmlEncode,
