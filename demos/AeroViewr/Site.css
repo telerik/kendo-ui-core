@@ -1306,6 +1306,18 @@ div.t-window-content
     left: 6px;
 }
 
+#exifWindowWrapper .t-close,
+#exifWindowWrapper .t-window-action
+{
+    width: 30px;
+    height: 30px;
+}
+
+#exifWindowWrapper .t-close
+{
+    background: transparent url('img/icons.png') no-repeat -12px -190px;
+}
+
 #exifWindow
 {
     background: rgba(0, 0, 0, .84);
