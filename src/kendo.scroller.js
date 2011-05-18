@@ -1,6 +1,7 @@
 (function($, window, undefined) {
     var kendo = window.kendo,
-        extend = $.extend;
+        extend = $.extend,
+        touchLocation = kendo.touchLocation;
 
     function Scroller (element) {
         this.element = $(element);
@@ -61,24 +62,6 @@
         this._create();
     }
 
-    function touchLocation(e) {
-        var changedTouches = e.changedTouches || e.originalEvent.changedTouches || null;
-
-        if (changedTouches) {
-            return {
-                idx: changedTouches[0].identifier,
-                x: changedTouches[0].pageX,
-                y: changedTouches[0].pageY
-            };
-        }
-
-        return {
-            idx: 0,
-            x: e.pageX,
-            y: e.pageY
-        };
-    }
-
     $.throttle = function(delay, callback) {
         var timeout_id,
             last_call = 0,
@@ -132,7 +115,7 @@
 
             this.element
                 .css("overflow", "hidden");
-            
+
             if (children.length)
                 children.wrapAll(scrollElement);
             else
@@ -149,7 +132,7 @@
                     .bind(this._startEvent, this._waitProxy); // Grab all events to prevent any selection-ings
             } else {
                 var that = this;
-                
+
                 this.element.bind( 'mouseenter', function () {
                     that._showScrollArrows();
                 });
@@ -240,13 +223,13 @@
 
             if ($(e.target).hasClass('right-scroll-arrow'))
                 scrollTo = Math.max( -this.scrollElement.innerWidth() + this.element.innerWidth(), scrollOffsets.x - this.element.innerWidth() );
-            
+
             this.scrollElement.kendoStop().kendoAnimate({effects: { slideLeft: { properties: { translate: scrollTo + 'px' } } } });
         },
 
         _showScrollArrows: function (e) {
             this._initializeBoxModel();
-            
+
             if (this.hasVerticalScroll)
                 this._verticalArrows.kendoStop(true, true).kendoAnimate({ effects: { fadeIn : { properties: { opacity: .7 } } }, duration: "fast", show: true });
 
