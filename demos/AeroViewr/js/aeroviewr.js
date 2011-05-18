@@ -25,8 +25,18 @@
             }
         });
 
-        $('.exifInfo .i-help').click(function (e) {
+        var infoTimeout = 0;
+
+        $(".exifInfo").click(function (e) {
+            infoTimeout = setTimeout(function() {
+                $("<div class='loading'>Loading ...</div>").insertAfter($("#bigPhoto"));
+            }, 100);
+
             flickr.getPhotoInfo($(this).attr("data-photoid"), function(result) {
+                clearTimeout(infoTimeout);
+
+                $(".loading").remove();
+
                 if (result.stat == "fail") {
                     alert("flickr error: " + result.message);
                     return;
@@ -34,8 +44,7 @@
 
                 var photo = result.photo;
 
-                $(kendo.template(
-                '<div><dl class="floatWrap">\
+                $(kendo.template('<div><dl class="floatWrap">\
                     <dt>Taken on</dt><dd><%= taken %></dd>\
                     <dt>Posted to Flickr</dt><dd><%= posted %></dd>\
                     <dt>Description</dt><dd><%= description %></dd>\
