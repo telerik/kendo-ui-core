@@ -16,7 +16,7 @@
         show: function() {
             var that = this,
                 element = that.element,
-                exifButton = $("#exifButton");
+                exifButton = $("#exifButton"),
                 handler = function(e) {
                     if(!$.contains(that._overlay()[0], e.target)) {
                         $(document).unbind("mousedown touchstart", handler);
@@ -28,7 +28,7 @@
             this.exifVisible = exifButton.is(":visible");
             exifButton.fadeOut();
 
-            that._overlay().empty().fadeIn()
+            element.empty().fadeIn()
                         .html(flickr.isAuthenticated() ? authContent : nonAuthContent)
                         .find("#photosUpload").kendoUpload({
                                 showFileList: false,
@@ -61,8 +61,8 @@
                         .fadeIn();
         },
         _showMsg: function(msg){
-            var overlay = this._overlay();
-            overlay.find("#uploadWrapInner").hide().end()
+            var element = this.element;
+            element.find("#uploadWrapInner").hide().end()
                     .find("#msgContainer > .uploadTitle")
                     .empty().html(msg)
                     .parent()
@@ -87,8 +87,10 @@
             that.hide();
         },
         hide: function() {
-            this._overlay().fadeOut();
-            if(this.exifVisible) {
+            var that = this;
+            that._overlay().fadeOut();
+            that.element.fadeOut();
+            if(that.exifVisible) {
                 $("#exifButton").fadeIn();
             }
         },
@@ -99,12 +101,7 @@
             return this._currentSet;
         },
         _overlay: function() {
-            var that = this,
-                overlay,
-                element = that.element;
-
-            overlay = element.parent().find("#uploadWrap");
-            return overlay.length ? overlay : $('<div id="uploadWrap" />').appendTo(element.parent());
+            return $("#overlay");
         }
     };
     window.Upload = Upload;
