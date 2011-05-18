@@ -257,6 +257,11 @@
                 equal(grid.thead.find("th").length, 1);
                 equal(grid.thead.find("th").text(), "bar");
             });
+            test("autoBind false does not populate grid", function() {
+                var grid = new Grid(table(), { autoBind: false, data: [ { foo: "foo", bar: "bar" } ]});
+
+                ok(grid.element.find("tbody > tr").length == 0);
+            });
        </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

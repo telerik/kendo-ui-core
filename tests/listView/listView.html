@@ -108,7 +108,11 @@
                     listView.focus().press(kendo.keys.DOWN).press(kendo.keys.SPACEBAR);
 
                     ok(listView.find("li:eq(1)").hasClass("t-state-selected"));
-                });
+            });
+            test("autoBind false does not populate listView", function() {
+                var ul = setup({autoBind: false});
+                equal(ul.find("li").length, 0);
+            });
 
         </script>
     </body>

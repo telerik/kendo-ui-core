@@ -45,12 +45,15 @@
 
         that._selection();
 
-        that.dataSource.query();
+        if(that.options.autoBind){
+            that.dataSource.query();
+        }
     }
 
     Grid.prototype = {
         options: {
             columns: [],
+            autoBind: true,
             dataSource: {}
         },
 

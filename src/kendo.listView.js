@@ -27,11 +27,14 @@
 
         that._navigation();
 
-        that.dataSource.query();
+        if(that.options.autoBind){
+            that.dataSource.query();
+        }
     }
 
     ListView.prototype = {
         options: {
+            autoBind: true,
             template: ""
         },
 
