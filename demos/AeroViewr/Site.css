@@ -301,7 +301,7 @@ header>h1
     float:left;
     margin:0 0 0 18px;
     text-transform:lowercase;
-    font:2em/38px "segoe ui light";
+    font:2em/38px "segoe ui light",helvetica,sans-serif;
 }
 
 .signin
@@ -361,7 +361,7 @@ header .i-help
     margin:0 -36px 0 0;
     padding:1px 28px 1px 8px;
     background:rgba(0,0,0,.4);
-    font:1em "segoe ui",sans-serif;
+    font:1em "segoe ui",helvetica,sans-serif;
     vertical-align:middle;
 
 	-moz-border-radius:16px;
@@ -1873,12 +1873,20 @@ html .t-upload
 
 .inferiorBrowser #footer,
 .inferiorBrowser #signin,
-.inferiorBrowser header ul,
+.inferiorBrowser #searchBox,
+.inferiorBrowser .i-search,
+.inferiorBrowser .i-help,
 .inferiorBrowser #photoWrap,
-.inferiorBrowser #exifButton
+.inferiorBrowser #exifButton,
+.inferiorBrowser #viewslideshow,
+.inferiorBrowser #uploadphotos,
+.inferiorBrowser .bottomLink
 {
     display:none !important;
 }
+
+*+html .inferiorBrowser{display:none !important;}
+* html .inferiorBrowser{display:none !important;}
 
 .inferiorBrowser #main
 {
