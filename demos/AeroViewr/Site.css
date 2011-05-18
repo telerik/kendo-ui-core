@@ -97,6 +97,7 @@ section#footer
 
 #photoWrap
 {
+    -webkit-transform-style: flat;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;

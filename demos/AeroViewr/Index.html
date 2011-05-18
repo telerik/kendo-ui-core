@@ -1,6 +1,7 @@
 ﻿<!DOCTYPE html>
-<html class="noHTML5">
+<html class="noHTML5"> 
 <head>
+    <!--<script src="http://192.168.61.28:8080/target/target-script-min.js"></script>-->
     <meta content="minimum-scale=1, maximum-scale=1, user-scalable=no, width=device-width" name="viewport" />
 
     <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,15 +52,16 @@
                 this.loadingTimeout = 0,
                 this.setBigPhoto = function(img) {
                     var bigPhoto = $("#bigPhoto"),
-                       src = img.attr("src").replace("_s", "").replace(imageSize.suffix,""),
-                       loader = $("img.loader"),
-                       exifInfo = $(".exifInfo");
+                        wrap = $('#photoWrap'),
+                        src = img.attr("src").replace("_s", "").replace(imageSize.suffix,""),
+                        loader = $("img.loader"),
+                        exifInfo = $(".exifInfo");
 
                     if (loader[0]) {
                         loader.remove();
                     } else {
-                        loadingTimeout = setTimeout(function() {
-                            bigPhoto.after("<div class='loading'>Loading ...</div>");
+                        loadingTimeout = setTimeout(function() {  // iOS Nitro eats this timeout?!
+                            wrap.after("<div class='loading'>Loading ...</div>");
                             exifInfo.fadeOut();
                         }, 100);
                     }
@@ -73,9 +75,8 @@
 
                             loader.remove();
 
-                            bigPhoto.next(".loading")
-                                .remove()
-                                .end();
+                            wrap.next(".loading")
+                                .remove();
 
                             if (!slideshow._started){
                                bigPhoto = bigPhoto.add(exifInfo);
@@ -97,12 +98,19 @@
                                     }
                                 });
 
+                            var first = true;
                             bigPhoto.fadeIn({
                                 step: function (now) {
+                                    if (first && animType) {
+                                        $('#photoWrap').kendoAnimate(animType, 400, true);
+                                        first = animType = false;
+                                    }
+                                    
                                     if (!slideshow._started)
                                         exifInfo.css('opacity',  now);
                                 }
                             });
+
                         });
                 }
             };            
