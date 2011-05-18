@@ -1358,6 +1358,11 @@ div.t-window-content
     color: #ff0060;
 }
 
+#exifWindow a:hover
+{
+    text-decoration: underline;
+}
+
 #exifWindow .exif-author
 {
     color: #666;
@@ -1367,6 +1372,14 @@ div.t-window-content
 .taglist li
 {
     float: left;
+    padding-right: 11px;
+    background: url('img/icons.png') no-repeat 100% -564px;
+}
+
+.taglist li.last
+{
+    padding-right: 0;
+    background: none;
 }
 
 #exifWindow .exif-author span
