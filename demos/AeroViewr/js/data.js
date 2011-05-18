@@ -16,7 +16,7 @@
         );
         return {
             read: read,
-            cache: cache !== undefined ? cache : "localstorage",
+            cache: cache !== undefined ? cache : "inmemory",
             dialect: dialect
         };
     }
