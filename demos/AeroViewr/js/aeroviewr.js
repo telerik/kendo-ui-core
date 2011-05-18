@@ -19,7 +19,8 @@ if (!isInferiorBrowser) {
     var flickr = window.flickr,
         visitor = window.visitor,
         data = window.data,
-        user = window.user;
+        user = window.user,
+        fullscreen = false;
 
     $(document).ready(function () {
         var tagHotListDataSource = data.dataSource( {
@@ -150,6 +151,14 @@ if (!isInferiorBrowser) {
         $("#signout").bind("click", function(e) {
             e.preventDefault();
             flickr.signOut();
+        });
+
+        $("#bigPhoto").bind(kendo.support.touch ? "touchend" : "mousedown", function(e) {
+            e.preventDefault();
+
+            $('header').kendoStop().kendoAnimate('slideUp', 'fast', fullscreen);
+            $('#footer').kendoStop().kendoAnimate('slideDown', 'fast', fullscreen);
+            fullscreen = !fullscreen;
         });
 
         if (isInferiorBrowser) {

@@ -276,6 +276,22 @@
             reverse: function(element, properties, options) {
                 animate(element, extend({ translate: 0 }, properties), options);
             }
+        },
+        slideUp: {
+            play: function(element, properties, options) {
+                animate(element, extend({ translateY: -element.height() + 'px' }, properties), options);
+            },
+            reverse: function(element, properties, options) {
+                animate(element, extend({ translateY: 0 }, properties), options);
+            }
+        },
+        slideDown: {
+            play: function(element, properties, options) {
+                animate(element, extend({ translateY: element.height() + 'px' }, properties), options);
+            },
+            reverse: function(element, properties, options) {
+                animate(element, extend({ translateY: 0 }, properties), options);
+            }
         }
     });
 })(jQuery, window);
