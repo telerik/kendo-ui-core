@@ -974,6 +974,20 @@
         });
     })();
 
+    var effectInit = {
+            fadeIn: function(element) {
+                element.css('opacity', 0);
+            },
+            zoomIn: function(element) {
+                if (kendo.support.transitions)
+                    element.css(kendo.support.transitions.css + "transform", "scale(.01)");
+            }
+        };
+    extend(effectInit, {
+                fadeOutReverse: effectInit.fadeIn,
+                zoomOutReverse: effectInit.zoomIn
+            });
+    
     function size(obj) {
         var size = 0, key;
         for (key in obj)
@@ -1021,6 +1035,12 @@
         }, options);
 
         if (options.show && !element.is(':visible')) {
+            $.each( options.effects, function (effectName) {
+                var effect = options.reverse ? effectName + 'Reverse' : effectName;
+
+                if (effect in effectInit)
+                    effectInit[effect](element);
+            });
             element.show();
         }
 
