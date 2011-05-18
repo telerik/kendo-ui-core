@@ -4,7 +4,7 @@ window.application.call(this);
 
 var visitor = window.visitor,
     slideshow = window.slideshow,
-    data = window.data,    
+    data = window.data,
     dataSource = data.dataSource({
         pageSize: 5,
         serverSorting: true,
@@ -31,7 +31,7 @@ var visitor = window.visitor,
             }
         },
         reader: searchReader
-    });   
+    });
 
    function showSelectedPhoto(ui) {
        $("#flatSearchPhotos").show();
