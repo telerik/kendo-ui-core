@@ -131,6 +131,7 @@
                 dataType: $.support.cors ? "json" : "jsonp",
                 success: callback,
                 jsonp: false,
+                cache: true,
                 jsonpCallback: "jsonFlickrApi"
             });
         },
@@ -162,6 +163,7 @@
                 dataType: $.support.cors ? "json" : "jsonp",
                 success: callback,
                 jsonp: false,
+                cache: true,
                 jsonpCallback: "jsonFlickrApi"
             });
         },
