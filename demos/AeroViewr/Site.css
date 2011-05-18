@@ -1205,6 +1205,7 @@ div.t-window
     overflow: hidden;
     left: .5em;
     right: .5em;
+    color: #fff;
 }
 
 .t-window-title .t-image
@@ -1297,6 +1298,35 @@ div.t-window-content
 .t-resize-sw { bottom: -3px; left: -3px; width: 6px; height: 6px; cursor: sw-resize; }
 .t-resize-ne { top: -3px; right: -3px; width: 6px; height: 6px; cursor: ne-resize; }
 .t-resize-nw { top: -3px; left: -3px; width: 6px; height: 6px; cursor: nw-resize; }
+
+#exifWindow
+{
+    background: rgba(0, 0, 0, .84);
+    color: #fff;
+    padding-bottom: 20px;
+}
+
+#exifWindow dt
+{
+    float: left;
+    width: 90px;
+    padding: 0 8px 4px 0;
+    font-weight: bold;
+    clear: left;
+    text-align: right;
+    padding-bottom: 
+}
+
+#exifWindow dd
+{
+    float: left;
+    padding: 0 0 4px 0;
+}
+
+#exifWindow a
+{
+    color: #ff0060;
+}
 
 .t-overlay
 {

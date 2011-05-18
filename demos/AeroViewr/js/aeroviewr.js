@@ -78,14 +78,16 @@ if (!isInferiorBrowser) {
                     </ul></dd>\
                 </dl></div>'
                 )({
-                    posted: kendo.toString(new Date(parseInt(photo.dates.posted) * 1000), "yyyy-MM-dd hh:mm:ss"),
-                    taken: photo.dates.taken,
+                    posted: kendo.toString(new Date(parseInt(photo.dates.posted) * 1000), "MMMM dd, yyyy"),
+                    taken: kendo.toString(new Date(parseInt(photo.dates.taken) * 1000), "MMMM dd, yyyy"),
                     description: photo.description._content,
                     author: photo.owner.realname,
                     tags: $.map(photo.tags.tag, function(tag) { return tag._content; } ),
                     location: photo.owner.location
                 })).kendoWindow({
                     modal: true,
+                    title: photo.title._content,
+                    visible: false,
                     close: function() {
                         var that = this;
                         setTimeout(function() {
