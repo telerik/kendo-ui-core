@@ -9,7 +9,7 @@ var visitor = window.visitor,
     ],
     imageSize = IMAGESIZES[0],
     PAGESIZE = 500,
-    template = function(option) { return '<li style="width:' + option.size + 'px;height:' + option.size + 'px"><img data-photoid="<%= id %>" alt="<%= kendo.htmlEncode(title) %>" src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>' + option.suffix + '.jpg"></li>'; },
+    template = function(option) { return '<li style="width:' + option.size + 'px;height:' + option.size + 'px"><img data-photoid="<%= id %>" alt="<%= title %>" src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>' + option.suffix + '.jpg"></li>'; },
     EXTRAS = "owner_name,tags",
     reader = {
         data: function(result) {
@@ -151,7 +151,7 @@ var visitor = window.visitor,
         search: function(el) {
             if($("#searchBox").val()) {
                 this.searchResult();
-                dataSource.query({page: 1, pageSize: 5});
+                dataSource.query({page: 1, pageSize: 20});
                 $("#flatMostPopularPhotos").hide();
                 $("#flatSearchPhotos").hide();
                 $("#overlay").fadeIn();
@@ -190,7 +190,7 @@ var visitor = window.visitor,
                 pageable: $(".paging").data("kendoPager"),
                 selectable: true,
                 columns: [
-                    { template: '<img data-photoid="<%= id %>" alt="<%=title%>" src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>_s.jpg">', title: "PHOTO" },
+                    { template: '<img src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>_s.jpg">', title: "PHOTO" },
                     { field: "ownername", title: "AUTHOR" },
                     { field: "title", title: "TITLE" },
                     { field: "tags", title: "TAGS"}
@@ -199,6 +199,15 @@ var visitor = window.visitor,
                     showSelectedPhoto(this);
                 },
                 dataBound: function() {
+                    displayImages(this.element);
+                }
+            }).hide();
+
+            $("#mainPhotoStrip").kendoListView({
+                autoBind: false,
+                dataSource: dataSource,
+                template: template(imageSize),
+                dataBound: function() {
                     if(that._showSearchResults){
                         $("#mainTemplate").show();
                         that._showSearchResults = false;
@@ -206,25 +215,16 @@ var visitor = window.visitor,
                     $(".bottomLink").text("Back to most popular").data("currentView", "mainTemplate");
                     displayImages(this.element);
                     $("#searchLoading").remove();
-                }
-            });
-
-            $("#mainPhotoStrip").kendoListView({
-                autoBind: false,
-                dataSource: dataSource,
-                template: template(imageSize),
-                dataBound: function() {
-                    displayImages(this.element);
                 },
                 change: function() {
                     showSelectedPhoto(this);
                 }
-            })
-            .hide();
+            });
 
             that.initSlider();
 
             $(".i-gridview").click(function() {
+                dataSource.query({page: 1, pageSize: 5});
                 $(this).addClass("currentView");
                 $(".i-tileview").removeClass("currentView");
                 $("#mainPhotoStrip").hide();
@@ -232,20 +232,35 @@ var visitor = window.visitor,
                 $("#mainPhotoGrid").show();
                 $("#overlay").fadeIn();
                 $("#exifButton").fadeOut();
-                dataSource.query({page: 1, pageSize: 5});
-            }).addClass("currentView");
+            });
 
             $(".i-tileview").click(function() {
+                var value = $("#slider").data("kendoSlider").value(),
+                    pageSize = value === 0 ? 20 : parseInt(20 / value);
+
+                dataSource.query({page: 1, pageSize: pageSize});
+
                 $(this).addClass("currentView");
                 $(".i-gridview").removeClass("currentView");
                 $("#mainPhotoGrid").hide();
                 $("#mainPhotoStrip").show();
                 $("#slider").parent().show();
+                $("#overlay").fadeIn();
+                $("#exifButton").fadeOut();
+            });
+
+            $(".i-tileview").click(function() {
                 var value = $("#slider").data("kendoSlider").value(),
                     pageSize = value === 0 ? 20 : parseInt(20 / value);
 
                 dataSource.query({page: 1, pageSize: pageSize});
-            });
+
+                $(this).addClass("currentView");
+                $(".i-gridview").removeClass("currentView");
+                $("#mainPhotoGrid").hide();
+                $("#mainPhotoStrip").show();
+                $("#slider").parent().show();
+            }).addClass("currentView");
 
             $(".bottomLink").bind("click", function(){
                 var element = $(this),
@@ -256,7 +271,7 @@ var visitor = window.visitor,
                     $("#flatSearchPhotos").hide();
                     $("#mainTemplate").show();
                     $("#flatMostPopularPhotos").hide();
-                    $(".i-gridview").click();
+                    $(".i-tileview").click();
                     element.text("Back to most popular");
                     slideshow.init($("#flatSearchPhotos").data("kendoListView"));
 
