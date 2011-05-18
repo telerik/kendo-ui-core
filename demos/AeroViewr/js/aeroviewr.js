@@ -107,7 +107,7 @@ if (!isInferiorBrowser) {
                 )({
                     posted: kendo.toString(new Date(parseInt(photo.dates.posted) * 1000), "MMMM dd, yyyy"),
                     description: description,
-                    author: photo.owner.realname || "Unknown",
+                    author: photo.owner.realname || photo.owner.username || "Unknown",
                     tags: $.map(photo.tags.tag.slice(0, 24), function(tag) {
                         return {
                             text: tag.raw,
