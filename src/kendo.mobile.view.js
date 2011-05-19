@@ -1,7 +1,7 @@
 function View(options) {
     $.extend(this, options);
     this.element = $('<div class="data-container"/>');
-    this.scroller = new Scroller(this.element);
+    this.scroller = new kendo.ui.Scroller(this.element);
     this.contentElement = this.scroller.scrollElement || this.element;
     
     if (this.onCreate) {

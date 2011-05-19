@@ -2,7 +2,7 @@
 <html class="noHTML5"> 
 <head>
     <!--<script src="http://192.168.61.28:8080/target/target-script-min.js"></script>-->
-    <meta content="minimum-scale=1, maximum-scale=1, user-scalable=no, width=device-width" name="viewport" />
+    <meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width" name="viewport" />
 
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
@@ -57,10 +57,10 @@
                         loader = $("img.loader"),
                         exifInfo = $(".exifInfo");
 
-                    if (loader[0]) {
+                    if (loader.length) {
                         loader.remove();
                     } else {
-                        loadingTimeout = setTimeout(function() {  // iOS Nitro eats this timeout?!
+                        loadingTimeout = setTimeout(function() {
                             wrap.after("<div class='loading'>Loading ...</div>");
                             exifInfo.fadeOut();
                         }, 100);
