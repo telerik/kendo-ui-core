@@ -248,6 +248,7 @@
             $(".i-search").click(function(e) { e.preventDefault(); search(); });
             $("#searchBox").bind("keydown", function(e) {
                 if(e.keyCode === kendo.keys.ENTER) {
+                    this.blur();
                     $(".i-search").click();
                 }
             });

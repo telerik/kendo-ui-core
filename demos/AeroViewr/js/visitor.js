@@ -232,6 +232,7 @@ var visitor = window.visitor,
             $(".i-search").click(function(e) { e.preventDefault(); that.search(); });
             $("#searchBox").bind("keydown", function(e) {
                 if(e.keyCode === kendo.keys.ENTER) {
+                    this.blur();
                     $(".i-search").click();
                 }
             });
