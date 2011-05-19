@@ -6,7 +6,7 @@
         upload,
         slideshow = window.slideshow,
         data = window.data,
-        photosInSet = false,        
+        photosInSet = false,
         searching = false,
         liveUrl = "http://localhost/kendo/demos/aeroviewr/index.html",
         defaultReader = {
@@ -83,7 +83,7 @@
        setBigPhoto($("img:first", ui.selectable.value()));
 
        setPhotosDataSource.query({page: 1, pageSize: PAGESIZE});
-   }   
+   }
 
     function search() {
         if ($("#searchBox").val()) {
@@ -102,7 +102,7 @@
             setPhotosDataSource.transport.dialect = searchDialect;
             setPhotosDataSource._reader = searchReader;
 
-            $("#overlay").after("<div id='searchLoading' class='loading'>Loading ...</div>");            
+            $("#overlay").after("<div id='searchLoading' class='loading'>Loading ...</div>");
             setPhotosDataSource.query({page: 1, pageSize: 20});
         }
         slideshow.stop();
@@ -128,11 +128,13 @@
         initUpload: function() {
             upload = new window.Upload($("#uploadWrap"));
             $("#uploadphotos").bind("click", function(e) {
-                e.preventDefault();
-                slideshow.stop();
-                $("#mainTemplate").hide();
-                $("#mainUserWrap").hide();
-                upload.show();
+                if(!$(this).hasClass("i-state-disabled")) {
+                    e.preventDefault();
+                    slideshow.stop();
+                    $("#mainTemplate").hide();
+                    $("#mainUserWrap").hide();
+                    upload.show();
+                }
             });
         },
         initFlatSetsStrip: function() {
@@ -170,7 +172,7 @@
 
             $("#mainSetPhotoStrip").kendoListView({
                 autoBind: false,
-                dataSource: setPhotosDataSource,                
+                dataSource: setPhotosDataSource,
                 template: template(imageSize),
                 change: function () {
                     changeState("slideshow");
@@ -213,13 +215,13 @@
         initPhotoStrip: function() {
             this.thumbList.append( $("#flatPhotoStrip").kendoListView({
                 autoBind: false,
-                dataSource: setPhotosDataSource,                
+                dataSource: setPhotosDataSource,
                 template: template(imageSize),
                 change: function () {
                     setBigPhoto($("img:first", this.selectable.value()));
                 },
                 dataBound: function() {
-                    var id = $("#bigPhoto").attr("data-photoid");                   
+                    var id = $("#bigPhoto").attr("data-photoid");
                     this.element.find("img[data-photoid=" + id + "]").parent().addClass("t-state-selected");
                 }
             }).hide() );
@@ -251,11 +253,13 @@
                 }
             });
         },
-        refreshSets: function() {
+        refreshSets: function(showGrid) {
             setPhotosDataSource.transport.cache.clear();
             setPhotosDataSource.read();
-            $("#mainUserWrap").show();
-            $("#overlay").fadeIn();
+            if(showGrid){
+                $("#mainUserWrap").show();
+                $("#overlay").fadeIn();
+            }
         },
         initUser: function() {
             var that = this;
@@ -264,7 +268,7 @@
             $("#userInfo").fadeIn().find("em:first").html(flickr.auth.username);
 
             that.thumbList = new kendo.ui.Scroller($('<div class="thumb-list">').appendTo("#footer")).scrollElement;
-            
+
             try {
                 history.replaceState(null, "AeroViewr", liveUrl);
             } catch(e) {
@@ -282,8 +286,11 @@
             slideshow.init($("#flatPhotoStrip").data("kendoListView"));
             $("#viewslideshow").click(function(e) {
                 e.preventDefault();
-                var started = slideshow._started; 
-                if (!started && !$("#flatPhotoStrip:visible")[0]) {              
+                if($(this).hasClass("i-state-disabled")) {
+                    return;
+                }
+                var started = slideshow._started;
+                if (!started && !$("#flatPhotoStrip:visible")[0]) {
                     return;
                 }
 
@@ -297,12 +304,15 @@
                 }
 
                 upload.hide();
+
+                $("#uploadphotos").toggleClass("i-state-disabled");
+
                 $(this).find(".p-icon")
                     .toggleClass("i-pause")
                     .toggleClass("i-slideshow")
                     .end()
-                    .find("em").html(started ? 'Play' : 'Pause'); 
-                slideshow.toggle();                
+                    .find("em").html(started ? 'Play' : 'Pause');
+                slideshow.toggle();
             });
 
             $(".i-gridview").click(function() {
@@ -331,6 +341,9 @@
                 var element = $(this),
                     state = element.data("state");
                 e.preventDefault();
+
+                $("#uploadphotos").removeClass("i-state-disabled");
+
                 slideshow.stop();
 
                 $("#viewslideshow").find(".p-icon")
