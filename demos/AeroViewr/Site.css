@@ -85,6 +85,12 @@ body,
     display: table\9;
 }
 
+.isOpera #wrap
+{
+    display: table;
+}
+
+
 header,
 section#footer
 {
@@ -123,6 +129,12 @@ section#footer
 
     display: table-cell\9;
     vertical-align: middle\9;
+}
+
+.isOpera #photoWrap
+{
+    display: table-cell;
+    vertical-align:middle;
 }
 
 #bigPhoto

@@ -13,6 +13,9 @@ if ((jQuery.browser.msie && parseInt(jQuery.browser.version) < 9) ||
 if (!isInferiorBrowser) {
     document.documentElement.className = "";
     $("#noHTML5Alert").hide();
+    if (jQuery.browser.opera) {
+        document.documentElement.className += " isOpera";
+    }
 }
 
 (function ($) {
