@@ -3,40 +3,11 @@ var parser = require("./uglify-js").parser;
 var fs = require("fs");
 var path = require("path");
 var sys = require("sys");
+var wrench = require("./wrench");
 
 var html = fs.readFileSync("demos/aeroviewr/index.html", "utf8");
 
-function copytree(src, dst) {
-    if(!path.existsSync(src)) {
-        throw new Error(src + ' does not exists. Nothing to be copied');
-    }
-
-    if(!fs.statSync(src).isDirectory()) {
-        throw new Error(src + ' must be a directory');
-    }
-
-    var filenames = fs.readdirSync(src);
-    var basedir = src;
-
-    if(!path.existsSync(dst)) {
-        fs.mkdirSync(dst, 0755);
-    }
-
-    for(name in filenames) {
-        var file = basedir + '/' + filenames[name];
-        var newdst = dst + '/' + filenames[name];
-
-        if(fs.statSync(file).isDirectory()) {
-            copytree(file, newdst);
-        } else {
-            var reader = fs.createReadStream(file);
-            var writer = fs.createWriteStream(newdst);
-            sys.pump(reader, writer);
-        }
-    }
-}
-
-function fileGroup(group, path, matcher) {
+function processFileGroup(group, path, matcher) {
     var script = "";
     var scriptTags = html.split("<!-- " + group + " -->")[1].split("\n");
 
@@ -55,8 +26,6 @@ function fileGroup(group, path, matcher) {
         }
     }
 
-    fs.writeFileSync("live/js/" + group + ".all.js", script);
-
     var ast = parser.parse(script);
 
     ast = uglify.ast_mangle(ast);
@@ -66,21 +35,28 @@ function fileGroup(group, path, matcher) {
     fs.writeFileSync("live/js/" + group + ".all.min.js", script);
 }
 
-copytree("demos/aeroviewr", "live");
+function replaceBlock(block, replace) {
+    var sections = html.split("<!-- " + block + " -->");
+    return sections[0] + replace + sections[2];
+}
 
-fileGroup("kendo","", /src="..\/..\/([^"]*)/);
-fileGroup("aeroviewr", "live/", /src="([^"]*)/);
+wrench.rmdirSyncRecursive("live");
+wrench.copyDirSyncRecursive("demos/aeroviewr", "live");
+wrench.rmdirSyncRecursive("live/research");
+fs.unlinkSync("live/js/aeroviewr.js");
+fs.unlinkSync("live/js/visitor.js");
+fs.unlinkSync("live/js/upload.js");
+fs.unlinkSync("live/js/user.js");
+fs.unlinkSync("live/js/data.js");
+fs.unlinkSync("live/js/flickr.js");
+fs.unlinkSync("live/js/slideshow.js");
 
-var sections = html.split("<!-- kendo -->");
-html = sections[0] + '<script src="js/kendo.all.min.js" ></script>' + sections[2];
+processFileGroup("kendo","", /src="..\/..\/([^"]*)/);
+processFileGroup("aeroviewr", "demos/aeroviewr/", /src="([^"]*)/);
 
-sections = html.split("<!-- aeroviewr -->");
-
-html = sections[0] + '<script src="js/aeroviewr.all.min.js" ></script>' + sections[2];
-
-sections = html.split("<!-- jquery -->");
-
-html = sections[0] + '<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js" ></script>' + sections[2];
+html = replaceBlock("jquery",  '<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>');
+html = replaceBlock("kendo",  '<script src="js/kendo.all.min.js"></script>');
+html = replaceBlock("aeroviewr",  '<script src="js/aeroviewr.all.min.js"></script>');
 
 fs.unlinkSync("live/index.html");
 fs.writeFileSync("live/index.html", html);
