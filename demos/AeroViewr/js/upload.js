@@ -49,6 +49,7 @@
 
                                     that._showMsg("Uploading photos...");
                                     $(document).unbind("mousedown touchstart", handler);
+                                    $("#viewslideshow").addClass("i-state-disabled");
                                 },
                                 success: function (e) {
                                    that.responses = that.responses.concat(e.response);
@@ -89,7 +90,7 @@
             }
             that.responses = [];
             that.hide();
-            window.user.refreshSets();
+            window.user.refreshSets(!that.exifVisible);
         },
         hide: function() {
             var that = this;
@@ -98,6 +99,7 @@
             if(that.exifVisible) {
                 $("#exifButton").fadeIn();
             }
+            $("#viewslideshow").removeClass("i-state-disabled");
         },
         currentSet: function(val){
             if(val !== undefined) {
