@@ -86,7 +86,7 @@
    }   
 
     function search() {
-        if($("#searchBox").val()) {
+        if ($("#searchBox").val()) {
             $("#viewslideshow").find(".p-icon")
                .removeClass("i-pause")
                 .addClass("i-slideshow")
@@ -112,16 +112,14 @@
         var el = $("#backButton");
         el.data("state", state);
 
-        if(state == "initial") {
+        if (state == "initial") {
             el.text("");
             setPhotosDataSource.transport.dialect = defaultDialect;
             setPhotosDataSource._reader = defaultReader;
             $(".i-tileview").click();
-        }
-        else if(state == "slideshow") {
+        } else if (state == "slideshow") {
             el.text("Back to sets");
-        }
-        else if(state == "searchresult") {
+        } else if (state == "searchresult") {
             el.text("Back to sets");
         }
     }
@@ -151,7 +149,7 @@
                 change: function(e) {
                     var selected = this.selected();
                     upload.currentSet(photoSetId());
-                    if(selected.is(this.element.find("li:first"))) {
+                    if (selected.is(this.element.find("li:first"))) {
                         photosInSet = false;
                     } else {
                         photosInSet = true;
@@ -179,11 +177,11 @@
                     showSelectedPhoto(this);
                 },
                 dataBound: function () {
-                    if(searching){
+                    if (searching){
                         $("#mainUserWrap").show();
                         searching = false;
                     }
-                    if(!that._isSliderInit) {
+                    if (!that._isSliderInit) {
                         that._isSliderInit = true;
                         that.initSlider();
                     }
@@ -247,7 +245,7 @@
         initSearch: function() {
             $(".i-search").click(function(e) { e.preventDefault(); search(); });
             $("#searchBox").bind("keydown", function(e) {
-                if(e.keyCode === kendo.keys.ENTER) {
+                if (e.keyCode === kendo.keys.ENTER) {
                     this.blur();
                     $(".i-search").click();
                 }
@@ -285,9 +283,10 @@
             $("#viewslideshow").click(function(e) {
                 e.preventDefault();
                 var started = slideshow._started; 
-                if(!started && !$("#flatPhotoStrip:visible")[0]) {              
+                if (!started && !$("#flatPhotoStrip:visible")[0]) {              
                     return;
                 }
+
                 if (started) {
                     setBigPhoto($(".thumbs:visible").find(".t-state-selected:last img"));
                 } else {
@@ -333,21 +332,14 @@
                     state = element.data("state");
                 e.preventDefault();
                 slideshow.stop();
+
                 $("#viewslideshow").find(".p-icon")
                     .toggleClass("i-pause")
                     .toggleClass("i-slideshow")
                     .end()
                     .find("em").html('Play');
 
-                if (state == "slideshow") {
-                    $("#flatPhotoStrip").hide();
-                    $("#flatSetsStrip").show();
-                    $("#mainUserWrap").show();
-                    $("#overlay").fadeIn();
-                    $("#exifButton").fadeOut();
-                    changeState("initial");
-                }
-                else if(state == "searchresult") {
+                if (state == "slideshow" || state == "searchresult") {
                     $("#flatPhotoStrip").hide();
                     $("#flatSetsStrip").show();
                     $("#mainUserWrap").show();
