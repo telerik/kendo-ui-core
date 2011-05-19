@@ -191,6 +191,7 @@ if (!isInferiorBrowser) {
         if (kendo.support.touch) {
             $('#uploadphotos').hide();
             $('#footer > .thumb-list').css('marginRight', '15px');
+            $('#photoWrap').css('overflow', 'hidden');
 
             if (window.innerWidth < 380 || window.innerHeight < 380)
                 $(document.body).css('zoom', .7);
@@ -255,7 +256,6 @@ if (!isInferiorBrowser) {
                 })
                 .bind('swipeLeft', function(e) {
                     var listView = $('#footer .thumbs:visible'),
-                        scroller = $('#footer .thumb-list:visible').data('kendoScroller'),
                         selectable, next = [];
 
                     if (listView.length) {
@@ -266,14 +266,12 @@ if (!isInferiorBrowser) {
                     if (next.length) {
                         selectable.clear();
                         selectable.value(next);
-//                        scroller._scrollIntoView(next);
                         animType = 'slideRotateLeft';
                         $('#photoWrap').kendoStop(false, true).kendoAnimate(animType, 400);
                     }
                 })
                 .bind('swipeRight', function(e) {
                     var listView = $('#footer .thumbs:visible'),
-                        scroller = $('#footer .thumb-list').data('kendoScroller'),
                         selectable, prev = [];
 
                     if (listView.length) {
@@ -284,17 +282,10 @@ if (!isInferiorBrowser) {
                     if (prev.length) {
                         selectable.clear();
                         selectable.value(prev);
-//                        scroller._scrollIntoView(prev);
                         animType = 'slideRotateRight';
                         $('#photoWrap').kendoStop(false, true).kendoAnimate(animType, 400);
                     }
                 });
-
-            $(document).bind('orientationchange', function (e) {
-                if (Math.abs(window.orientation/90) != 1)
-                    window.scrollTo(0, -10);
-            });
-
         } else {
             $("#photoWrap").bind("mousedown", function(e) {
                 e.preventDefault();

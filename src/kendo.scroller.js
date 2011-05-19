@@ -1,6 +1,7 @@
 (function($, window, undefined) {
     var kendo = window.kendo,
         extend = $.extend,
+        Component = kendo.ui.Component,
         touchLocation = kendo.touchLocation;
 
     function Scroller (element) {
@@ -466,7 +467,6 @@
         },
 
         _scrollIntoView: function(element) {
-//            alert('test');
         },
 
         _scrollTo: function (x, y, duration) {
