@@ -102,7 +102,7 @@
             var that = this,
                 current = that._current;
 
-            if(element !== undefined && element[0]) {
+            if(element !== undefined && element.length) {
                 if (!current || current[0] !== element[0]) {
                     element.addClass(FOCUSED);
                     if (current) {
@@ -305,15 +305,15 @@
                 tr,
                 th;
 
-            if (!thead[0]) {
+            if (!thead.length) {
                 thead = $("<thead/>").insertBefore(that.tbody);
             }
 
             tr = that.table.find("tr:has(th)");
 
-            if (!tr[0]) {
+            if (!tr.length) {
                 tr = thead.children().first();
-                if(!tr[0]) {
+                if(!tr.length) {
                     tr = $("<tr/>");
                 }
             }
