@@ -213,6 +213,10 @@
                 template: template(imageSize),
                 change: function () {
                     setBigPhoto($("img:first", this.selectable.value()));
+                },
+                dataBound: function() {
+                    var id = $("#bigPhoto").attr("data-photoid");                   
+                    this.element.find("img[data-photoid=" + id + "]").parent().addClass("t-state-selected");
                 }
             }).hide() );
         },

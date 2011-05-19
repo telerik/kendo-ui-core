@@ -98,6 +98,8 @@ var visitor = window.visitor,
                 template: template(IMAGESIZES[0]),
                 dataBound: function() {
                     displayImages(this.element);
+                    var id = $("#bigPhoto").attr("data-photoid");                   
+                    this.element.find("img[data-photoid=" + id + "]").parent().addClass("t-state-selected");
                 },
                 change: function() {
                     setBigPhoto(this.selected().find("img"));
