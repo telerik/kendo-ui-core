@@ -159,11 +159,39 @@
                     equal(series.children[0].box.x2, series.children[1].box.x1);
                 });
 
-                module("Bar Chart / Stack", {
-                        
+                module("Bar Chart / Stack / Positive Values", {
+                    setup: function() {
+                        setupBarChart({
+                            series: [ positiveSeries, positiveSeries ],
+                            isStacked: true }
+                        );
+                    }
                 });
 
+                test("reports stacked minumum value", function() {
+                    equal(series.getValueRange().min, positiveSeries.data[0]);
+                });
 
+                test("reports stacked maximum value", function() {
+                    equal(series.getValueRange().max, positiveSeries.data[1] * 2);
+                });
+
+                module("Bar Chart / Stack / Negative Values", {
+                    setup: function() {
+                        setupBarChart({
+                            series: [ negativeSeries, negativeSeries ],
+                            isStacked: true }
+                        );
+                    }
+                });
+
+                test("reports stacked minumum value", function() {
+                    equal(series.getValueRange().min, negativeSeries.data[1] * 2);
+                });
+
+                test("reports stacked maximum value", function() {
+                    equal(series.getValueRange().max, negativeSeries.data[0]);
+                });
             })();
 
             (function() {

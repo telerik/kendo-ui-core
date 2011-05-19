@@ -804,20 +804,42 @@
         options: {
             series: [],
             isHorizontal: true,
+            isStacked: false,
             gap: 1.5
         },
 
         init: function() {
             var barChart = this,
-                children = barChart.children;
+                children = barChart.children,
+                isStacked = barChart.options.isStacked,
+                categoryMax = [],
+                categoryMin = [];
 
             barChart.traverseDataPoints(function(value, seriesIx, categoryIx) {
-                barChart._seriesMin = Math.min(barChart._seriesMin, value);
-                barChart._seriesMax = Math.max(barChart._seriesMax, value);
+                if (isStacked) {
+                    if (categoryMax.length <= categoryIx) {
+                        categoryMax.push(value);
+                        categoryMin.push(value);
+                    } else {
+                        if (value > 0) {
+                            categoryMax[categoryIx] += value;
+                        } else {
+                            categoryMin[categoryIx] += value;
+                        }
+                    }
+                } else {
+                    barChart._seriesMin = Math.min(barChart._seriesMin, value);
+                    barChart._seriesMax = Math.max(barChart._seriesMax, value);
+                }
 
                 var bar = new Bar();
                 children.push(bar);
             });
+
+            if (isStacked) {
+                barChart._seriesMin = Math.min.apply(Math, categoryMin);
+                barChart._seriesMax = Math.max.apply(Math, categoryMax);
+            }
         },
 
         getValueRange: function() {
@@ -1378,7 +1400,7 @@
     }
 
     function alignToPixel(coord) {
-        return round(coord) + 0.5;
+        return Math.round(coord) + 0.5;
     }
 
     // Make the internal functions public for unit testing
