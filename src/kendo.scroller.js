@@ -23,6 +23,8 @@
         if (typeof arguments[1] === 'object')
             $.extend( this.options, arguments[1] );
 
+        Component.apply(this, arguments);
+
         this.xScrollbar = $('<div class="touch-scrollbar horizontal-scrollbar" />');
         this.yScrollbar = this.xScrollbar.clone().removeClass('horizontal-scrollbar').addClass('vertical-scrollbar');
         this._scrollbars = $().add(this.xScrollbar).add(this.yScrollbar);
@@ -464,7 +466,7 @@
         },
 
         _scrollIntoView: function(element) {
-            
+//            alert('test');
         },
 
         _scrollTo: function (x, y, duration) {

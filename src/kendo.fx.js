@@ -192,7 +192,9 @@
                                 if (isFixed)
                                     element.data('translate', {
                                         top: element.offset().top,
-                                        left: element.offset().left
+                                        left: element.offset().left,
+                                        bottom: parseInt(element.css('bottom'), 10),
+                                        right: parseInt(element.css('right'), 10)
                                     });
                                 else
                                     element.data('translate', {
@@ -210,8 +212,15 @@
                                     dY = value == 'translateY' ? +params[1] : +params[2];
 
                                 if (isFixed) {
-                                    !isNaN(dX) && extend(single, { left: originalPosition.left + dX });
-                                    !isNaN(dY) && extend(single, { top: originalPosition.top + dY });
+                                    if (!isNaN(originalPosition.right))
+                                        !isNaN(dX) && extend(single, { right: originalPosition.right - dX });
+                                    else
+                                        !isNaN(dX) && extend(single, { left: originalPosition.left + dX });
+
+                                    if (!isNaN(originalPosition.bottom))
+                                        !isNaN(dY) && extend(single, { bottom: originalPosition.bottom - dY });
+                                    else
+                                        !isNaN(dY) && extend(single, { top: originalPosition.top + dY });
                                 } else {
                                     !isNaN(dX) && extend(single, { marginLeft: originalPosition.left + dX });
                                     !isNaN(dY) && extend(single, { marginTop: originalPosition.top + dY });
