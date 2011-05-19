@@ -68,7 +68,7 @@ var visitor = window.visitor,
             }));
         },
         search: function(el) {
-            if($("#searchBox").val()) {
+            if ($("#searchBox").val()) {
                 this.searchResult();
                 dataSource.query({page: 1, pageSize: 20});
                 $("#flatMostPopularPhotos").hide();
@@ -76,11 +76,13 @@ var visitor = window.visitor,
                 $("#overlay").fadeIn();
                 $("#exifButton").fadeOut();
                 slideshow.init($("#flatSearchPhotos").data("kendoListView"));
-                $("#viewslideshow").find(".p-icon")
-                    .removeClass("i-pause")
-                    .addClass("i-slideshow")
+                $("#viewslideshow")
+                    .find(".p-icon")
+                        .removeClass("i-pause")
+                        .addClass("i-slideshow")
                     .end()
-                    .find("em").html('Play');
+                    .find("em").html('Play').end()
+                    .add("#uploadphotos").fadeOut()
             }
         },
 
@@ -89,7 +91,7 @@ var visitor = window.visitor,
             that._showSearchResults = true;
             $("#overlay").after("<div id='searchLoading' class='loading'>Loading ...</div>");
 
-            if(that._searchInitialized){
+            if (that._searchInitialized){
                 return;
             }
 
@@ -134,7 +136,7 @@ var visitor = window.visitor,
                 dataSource: dataSource,
                 template: template(imageSize),
                 dataBound: function() {
-                    if(that._showSearchResults){
+                    if (that._showSearchResults){
                         $("#mainTemplate").show();
                         that.initSlider();
                         that._showSearchResults = false;
@@ -176,16 +178,19 @@ var visitor = window.visitor,
             });
 
             $(".bottomLink").bind("click", function(e){
-                $("#viewslideshow").find(".p-icon")
-                    .removeClass("i-pause")
-                    .addClass("i-slideshow")
+                $("#viewslideshow")
+                    .find(".p-icon")
+                        .removeClass("i-pause")
+                        .addClass("i-slideshow")
                     .end()
-                    .find("em").html('Play');
+                    .find("em").html('Play').end()
+                    .add("#uploadphotos").fadeIn();
+
                 e.preventDefault();
                 var element = $(this),
                     view = element.data("currentView");
 
-                if(view === "flatMostPopularPhotos") {
+                if (view === "flatMostPopularPhotos") {
                     element.data("currentView", "mainTemplate");
                     $("#flatSearchPhotos").hide();
                     $("#mainTemplate").show();
@@ -193,9 +198,7 @@ var visitor = window.visitor,
                     $(".i-tileview").click();
                     element.text("Back to most popular");
                     slideshow.init($("#flatSearchPhotos").data("kendoListView"));
-
-                }
-                else if(view === "mainTemplate"){
+                } else if (view === "mainTemplate"){
                     element.data("currentView", "flatMostPopularPhotos");
                     $("#flatSearchPhotos").hide();
                     $("#mainTemplate").hide();
@@ -231,7 +234,7 @@ var visitor = window.visitor,
 
             $(".i-search").click(function(e) { e.preventDefault(); that.search(); });
             $("#searchBox").bind("keydown", function(e) {
-                if(e.keyCode === kendo.keys.ENTER) {
+                if (e.keyCode === kendo.keys.ENTER) {
                     this.blur();
                     $(".i-search").click();
                 }
@@ -241,17 +244,18 @@ var visitor = window.visitor,
 
             that.mostPopular();
 
-             $("#backButton").text("");
+            $("#backButton").text("");
 
             slideshow.init($("#flatMostPopularPhotos").data("kendoListView"));
 
             $("#viewslideshow").click(function(e) {
                 e.preventDefault();
                 var started = slideshow._started;
-                if(!started && !$("#footer .thumbs:visible")[0]) {
+                if (!started && !$("#footer .thumbs:visible")[0]) {
                     return;
                 }
-                if(started){
+
+                if (started){
                     setBigPhoto($(".thumbs:visible").find(".t-state-selected:last img"));
                 } else {
                     $("#exifButton").fadeOut();
@@ -259,6 +263,7 @@ var visitor = window.visitor,
                         hideExif();
                     }, 300);
                 }                
+
                 $(this).find(".p-icon")
                     .toggleClass("i-pause")
                     .toggleClass("i-slideshow")
