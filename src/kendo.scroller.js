@@ -179,7 +179,7 @@
                 if (this.hasHorizontalScroll) {
                     position.x = -this._limitValue( this.start.x - location.x, this.minBounceStop.x, this.maxBounceStop.x );
                     delta = this._getReverseDelta(-position.x, this.minBounceLimit.x, this.maxBounceLimit.x);
-                    var width = ~~(this.boxWidth * this.xRatio - Math.abs(delta));
+                    var width = Math.min( ~~(this.boxWidth * this.xRatio - Math.abs(delta)), 20);
                     offset = this._limitValue( -position.x * this.xRatio + delta, 0, this.boxWidth - width );
 
                     cssModel[this._transformProperty] = this._translate3DPrefix + offset + 'px, 0' + this._translate3DSuffix;
@@ -191,7 +191,7 @@
                 if (this.hasVerticalScroll) {
                     position.y = -this._limitValue( this.start.y - location.y, this.minBounceStop.y, this.maxBounceStop.y );
                     delta = this._getReverseDelta(-position.y, this.minBounceLimit.y, this.maxBounceLimit.y);
-                    var height = ~~(this.boxHeight * this.yRatio - Math.abs(delta));
+                    var height = Math.min( ~~(this.boxHeight * this.yRatio - Math.abs(delta)), 20);
                     offset = this._limitValue( -position.y * this.yRatio + delta, 0, this.boxHeight - height );
 
                     cssModel = {};

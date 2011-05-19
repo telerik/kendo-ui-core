@@ -196,9 +196,12 @@ if (!isInferiorBrowser) {
             $('#uploadphotos').hide();
             $('#footer > .thumb-list').css('marginRight', '15px');
             $('#photoWrap').css('overflow', 'hidden');
+            var zoomFactor = 1;
 
-            if (window.innerWidth < 380 || window.innerHeight < 380)
+            if (window.innerWidth < 380 || window.innerHeight < 380) {
                 $(document.body).css('zoom', .7);
+                zoomFactor = 2;
+            }
 
             $(document).bind('touchmove', function (e) { // Disable viewport scrolling
                 e.preventDefault();
@@ -209,20 +212,20 @@ if (!isInferiorBrowser) {
             $.extend(kendo.fx, {
                 slideRotateLeft: {
                     play: function(element, properties, options) {
-                        kendo.fx.transition(element, $.extend({ translate: (-window.innerWidth) + 'px' }, properties), options);
+                        kendo.fx.transition(element, $.extend({ translate: (-window.innerWidth * zoomFactor) + 'px' }, properties), options);
                     },
                     reverse: function(element, properties, options) {
-                        element.css(kendo.support.transitions.css + 'transform', 'translate(' + window.innerWidth + 'px, 0)');
+                        element.css(kendo.support.transitions.css + 'transform', 'translate(' + (window.innerWidth * zoomFactor) + 'px, 0)');
                         element.css(kendo.support.transitions.css + 'transform');
                         kendo.fx.transition(element, $.extend({ translate: 0 }, properties), options);
                     }
                 },
                 slideRotateRight: {
                     play: function(element, properties, options) {
-                        kendo.fx.transition(element, $.extend({ translate: (window.innerWidth) + 'px' }, properties), options);
+                        kendo.fx.transition(element, $.extend({ translate: (window.innerWidth * zoomFactor) + 'px' }, properties), options);
                     },
                     reverse: function(element, properties, options) {
-                        element.css(kendo.support.transitions.css + 'transform', 'translate(-' + window.innerWidth + 'px, 0)');
+                        element.css(kendo.support.transitions.css + 'transform', 'translate(-' + (window.innerWidth * zoomFactor) + 'px, 0)');
                         element.css(kendo.support.transitions.css + 'transform');
                         kendo.fx.transition(element, $.extend({ translate: 0 }, properties), options);
                     }
