@@ -497,6 +497,20 @@ header>ul
     cursor:pointer;
 }
 
+.thumbs>li,
+.t-grid td>img
+{
+    -moz-transition-property:-moz-box-shadow,box-shadow;
+    -moz-transition-duration:.3s;
+    -webkit-transition-property:-webkit-box-shadow,box-shadow;
+    -webkit-transition-duration:.3s;
+    -o-transition-property:box-shadow;
+    -o-transition-duration:.3s;
+    
+    transition-property:box-shadow;
+    transition-duration:.3s;
+}
+
 .thumbs>li:hover,
 .thumbs>li.t-state-selected,
 .t-grid tr:hover td>img
@@ -508,16 +522,6 @@ header>ul
     -webkit-box-shadow:0px 0px 8px 3px #000;
     -moz-box-shadow:0px 0px 8px 3px #000;
     box-shadow:0px 0px 8px 3px #000;
-    
-    -moz-transition-property:-moz-box-shadow,box-shadow;
-    -moz-transition-duration:.3s;
-    -webkit-transition-property:-webkit-box-shadow,box-shadow;
-    -webkit-transition-duration:.3s;
-    -o-transition-property:box-shadow;
-    -o-transition-duration:.3s;
-    
-    transition-property:box-shadow;
-    transition-duration:.3s;
 }
 
 .thumbs>li:hover,
