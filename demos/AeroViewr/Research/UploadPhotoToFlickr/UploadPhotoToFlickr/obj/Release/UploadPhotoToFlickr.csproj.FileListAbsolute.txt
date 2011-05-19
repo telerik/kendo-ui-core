@@ -1,0 +1,7 @@
+c:\users\krustev\documents\visual studio 2010\Projects\UploadPhotoToFlickr\UploadPhotoToFlickr\bin\UploadPhotoToFlickr.dll
+c:\users\krustev\documents\visual studio 2010\Projects\UploadPhotoToFlickr\UploadPhotoToFlickr\bin\UploadPhotoToFlickr.pdb
+c:\users\krustev\documents\visual studio 2010\Projects\UploadPhotoToFlickr\UploadPhotoToFlickr\bin\Telerik.Web.Mvc.dll
+c:\users\krustev\documents\visual studio 2010\Projects\UploadPhotoToFlickr\UploadPhotoToFlickr\bin\Telerik.Web.Mvc.xml
+c:\users\krustev\documents\visual studio 2010\Projects\UploadPhotoToFlickr\UploadPhotoToFlickr\obj\Release\ResolveAssemblyReference.cache
+c:\users\krustev\documents\visual studio 2010\Projects\UploadPhotoToFlickr\UploadPhotoToFlickr\obj\Release\UploadPhotoToFlickr.dll
+c:\users\krustev\documents\visual studio 2010\Projects\UploadPhotoToFlickr\UploadPhotoToFlickr\obj\Release\UploadPhotoToFlickr.pdb
