@@ -16,13 +16,12 @@
                 chartBox = new Box(0, 0, 800, 600);
 
             function BarStub(box) {
-                this.boxHistory = [];
                 this.box = box;
             }
 
             BarStub.prototype = {
                 updateLayout: function(box) {
-                    this.boxHistory.push(box);
+                    this.box = box;
                 }
             };
 
@@ -169,11 +168,15 @@
                 });
 
                 test("reports stacked minumum value", function() {
-                    equal(series.getValueRange().min, positiveSeries.data[0]);
+                    equal(series.getValueRange().min, 2);
                 });
 
                 test("reports stacked maximum value", function() {
-                    equal(series.getValueRange().max, positiveSeries.data[1] * 2);
+                    equal(series.getValueRange().max, 4);
+                });
+
+                test("bars in first category are stacked", function() {
+                    equal(series.children[1].box.y2, series.children[0].box.y1);
                 });
 
                 module("Bar Chart / Stack / Negative Values", {
@@ -186,12 +189,30 @@
                 });
 
                 test("reports stacked minumum value", function() {
-                    equal(series.getValueRange().min, negativeSeries.data[1] * 2);
+                    equal(series.getValueRange().min, -4);
                 });
 
                 test("reports stacked maximum value", function() {
-                    equal(series.getValueRange().max, negativeSeries.data[0]);
+                    equal(series.getValueRange().max, -2);
                 });
+
+                module("Bar Chart / Stack / Mixed Values", {
+                    setup: function() {
+                        setupBarChart({
+                            series: [ positiveSeries, negativeSeries ],
+                            isStacked: true }
+                        );
+                    }
+                });
+
+                test("reports stacked minumum value", function() {
+                    equal(series.getValueRange().min, -2);
+                });
+
+                test("reports stacked maximum value", function() {
+                    equal(series.getValueRange().max, 2);
+                });
+
             })();
 
             (function() {
@@ -215,21 +236,21 @@
 
                 test("distributes width evenly", function() {
                     $.each(bars, function() {
-                        equal(this.boxHistory[0].width(), clusterBox.width() / bars.length)
+                        equal(this.box.width(), clusterBox.width() / bars.length)
                     });
                 });
 
                 test("positions children next to each other", function() {
                     $.each(bars, function(index) {
-                        equal(this.boxHistory[0].x1, this.boxHistory[0].width() * index)
+                        equal(this.box.x1, this.box.width() * index)
                     });
                 });
 
                 test("leaves 75% gap on both sides", function() {
                     createCluster(/* Default gap size */);
 
-                    equal(bars[0].boxHistory[0].x1, 75);
-                    equal(bars[1].boxHistory[0].x2, 275);
+                    equal(bars[0].box.x1, 75);
+                    equal(bars[1].box.x2, 275);
                 });
 
                 module("Cluster Layout / Vertical", {
@@ -240,20 +261,19 @@
 
                 test("distributes height evenly", function() {
                     $.each(bars, function() {
-                        equal(this.boxHistory[0].height(), clusterBox.height() / bars.length)
+                        equal(this.box.height(), clusterBox.height() / bars.length)
                     });
                 });
 
                 test("positions children below each other", function() {
                     $.each(bars, function(index) {
-                        equal(this.boxHistory[0].y1, this.boxHistory[0].height() * index)
+                        equal(this.box.y1, this.box.height() * index)
                     });
                 });
             })();
 
             (function() {
-                var stack,
-                    stackBox = new Box(0, 0, 100, 100);
+                var stack;
 
                 module("Stack Layout / Vertical", {
                     setup: function() {
@@ -261,20 +281,13 @@
                     }
                 });
 
-                test("On first pass: calls updateLayout with original box", function() {
-                    stack.children.push(new BarStub());
-                    stack.updateLayout(stackBox);
-
-                    same(stack.children[0].boxHistory[0], stackBox);
-                });
-
-                test("Second bar is placed on top of the first", function() {
+                test("second bar is placed on top of the first", function() {
                     stack.children.push(
                         new BarStub(new Box(0, 80, 100, 100)),
                         new BarStub(new Box(0, 50, 100, 100))
                     );
 
-                    stack.updateLayout(stackBox);
+                    stack.updateLayout();
 
                     same(stack.children[1].box.y1, 30);
                     same(stack.children[1].box.y2, 80);
@@ -288,13 +301,13 @@
                     }
                 });
 
-                test("Second bar is placed to the right of the first", function() {
+                test("second bar is placed to the right of the first", function() {
                     stack.children.push(
                         new BarStub(new Box(0, 0, 20, 10)),
                         new BarStub(new Box(0, 0, 50, 10))
                     );
 
-                    stack.updateLayout(stackBox);
+                    stack.updateLayout();
 
                     same(stack.children[1].box.x1, 20);
                     same(stack.children[1].box.x2, 70);

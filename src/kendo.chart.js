@@ -556,8 +556,8 @@
                 lineBox = axis.getAxisLineBox(),
                 scale = lineBox.height() / (options.max - options.min),
                 b = arguments.length == 2 ? b : options.axisCrossingValue,
-                y1 = lineBox.y2 - scale * Math.min(a, b),
-                y2 = lineBox.y2 - scale * Math.max(a, b);
+                y1 = lineBox.y2 - scale * Math.max(a, b),
+                y2 = lineBox.y2 - scale * Math.min(a, b);
 
             return new Box(lineBox.x1, y1, lineBox.x1, y2);
         }
@@ -736,23 +736,27 @@
             isVertical: true
         },
 
-        updateLayout: function(stackBox) {
+        updateLayout: function() {
             var stack = this,
                 isVertical = stack.options.isVertical,
                 children = stack.children;
 
             for (var i = 0; i < children.length; i++) {
-                var currentChild = children[i];
-
-                currentChild.updateLayout(stackBox);
+                var currentChild = children[i],
+                    childBox = currentChild.box;
 
                 if (i > 0) {
                     var prevChild = children[i - 1],
                         prevChildBox = prevChild.box,
                         translateX = isVertical ? 0 : prevChildBox.width(),
-                        translateY = isVertical ? - prevChild.box.height() : 0;
+                        translateY = isVertical ? - prevChild.box.height() : 0,
+                        childBox = new Box(
+                            childBox.x1 + translateX,
+                            childBox.y1 + translateY,
+                            childBox.x2 + translateX,
+                            childBox.y2 + translateY);
 
-                    currentChild.box.translate(translateX, translateY);
+                    currentChild.updateLayout(childBox);
                 }
             }
         }
@@ -812,20 +816,16 @@
             var barChart = this,
                 children = barChart.children,
                 isStacked = barChart.options.isStacked,
-                categoryMax = [],
-                categoryMin = [];
+                positiveSums = [],
+                negativeSums = [];
 
             barChart.traverseDataPoints(function(value, seriesIx, categoryIx) {
                 if (isStacked) {
-                    if (categoryMax.length <= categoryIx) {
-                        categoryMax.push(value);
-                        categoryMin.push(value);
+                    var sums = value > 0 ? positiveSums : negativeSums;
+                    if (sums.length === categoryIx) {
+                        sums[categoryIx] = value;
                     } else {
-                        if (value > 0) {
-                            categoryMax[categoryIx] += value;
-                        } else {
-                            categoryMin[categoryIx] += value;
-                        }
+                        sums[categoryIx] += value;
                     }
                 } else {
                     barChart._seriesMin = Math.min(barChart._seriesMin, value);
@@ -836,15 +836,23 @@
                 children.push(bar);
             });
 
+            if (negativeSums.length === 0) {
+                negativeSums = positiveSums;
+            }
+
+            if (positiveSums.length === 0) {
+                positiveSums = negativeSums;
+            }
+
             if (isStacked) {
-                barChart._seriesMin = Math.min.apply(Math, categoryMin);
-                barChart._seriesMax = Math.max.apply(Math, categoryMax);
+                barChart._seriesMin = Math.min.apply(Math, negativeSums);
+                barChart._seriesMax = Math.max.apply(Math, positiveSums);
             }
         },
 
         getValueRange: function() {
-            var chart = this;
-            return { min: chart._seriesMin, max: chart._seriesMax };
+            var barChart = this;
+            return { min: barChart._seriesMin, max: barChart._seriesMax };
         },
 
         updateLayout: function(targetBox) {
@@ -852,10 +860,12 @@
                 options = barChart.options,
                 series = options.series,
                 isHorizontal = options.isHorizontal,
+                isStacked = options.isStacked,
                 plotArea = barChart.plotArea,
                 children = barChart.children,
                 childIndex = 0,
-                clusters = [];
+                clusters = [],
+                stacks = [];
 
             barChart.traverseDataPoints(function(value, seriesIx, categoryIx) {
                 var bar = children[childIndex++];
@@ -865,14 +875,22 @@
 
                 var barSlot = new Box(slotX.x1, slotY.y1, slotX.x2, slotY.y2);
 
-                var cluster = clusters[categoryIx];
-                if (!cluster) {
-                    cluster = clusters[categoryIx] = new ClusterLayout({
-                        gap: options.gap
-                    });
-                    cluster.box = isHorizontal ? slotX : slotY;
+                if (isStacked) {
+                    var stack = stacks[categoryIx];
+                    if (!stack) {
+                        stack = stacks[categoryIx] = new StackLayout();
+                    }
+                    stack.children.push(bar);
+                } else {
+                    var cluster = clusters[categoryIx];
+                    if (!cluster) {
+                        cluster = clusters[categoryIx] = new ClusterLayout({
+                            gap: options.gap
+                        });
+                        cluster.box = isHorizontal ? slotX : slotY;
+                    }
+                    cluster.children.push(bar);
                 }
-                cluster.children.push(bar);
 
                 bar.updateLayout(barSlot);
             });
@@ -880,6 +898,11 @@
             for (var i = 0; i < clusters.length; i++) {
                 var cluster = clusters[i];
                 cluster.updateLayout(cluster.box);
+            };
+
+            for (var i = 0; i < stacks.length; i++) {
+                var stack = stacks[i];
+                stack.updateLayout();
             };
 
             barChart.box = targetBox;

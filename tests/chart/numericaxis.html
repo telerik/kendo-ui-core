@@ -301,12 +301,12 @@
 
                 test("positions slot for [0, 0.5]", function() {
                     var slot = numericAxis.getSlot(0, 0.5);
-                    same([slot.y1, slot.y2], [591, 348.5]);
+                    same([slot.y1, slot.y2], [ 348.5, 591]);
                 });
 
                 test("positions slot for [0.5, 1]", function() {
                     var slot = numericAxis.getSlot(0.5, 1);
-                    same([slot.y1, slot.y2], [348.5, 106]);
+                    same([slot.y1, slot.y2], [106, 348.5]);
                 });
 
                 test("slot width is 0", function() {
@@ -316,7 +316,7 @@
 
                 test("assumes missing value to be the axis crossing", function() {
                     var slot = numericAxis.getSlot(0.5);
-                    same([slot.y1, slot.y2], [591, 348.5]);
+                    same([slot.y1, slot.y2], [348.5, 591]);
                 });
 
             })();
