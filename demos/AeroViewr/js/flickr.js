@@ -4,8 +4,8 @@
         authURL: "http://flickr.com/services/auth/",
         auth: {},
         app: {
-            key: '82cfddc3c01eeac6c1e406df5f79d26c',
-            secret: '7a28f316522d2722'
+            key: '9575b30d2333267e281264ee51341bf1',
+            secret: 'bb4d79c26170345b'
         },
         methods: {
             getToken : "flickr.auth.getToken",
