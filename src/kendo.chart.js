@@ -736,26 +736,47 @@
             isVertical: true
         },
 
-        updateLayout: function() {
+        updateLayout: function(targetBox) {
             var stack = this,
                 isVertical = stack.options.isVertical,
                 children = stack.children,
-                box = stack.box = children[0].box.clone();
+                box;
 
             for (var i = 0; i < children.length; i++) {
                 var currentChild = children[i],
-                    childBox = currentChild.box;
+                    childBox = currentChild.box.clone();
+
+                if (isVertical) {
+                    childBox.x1 = targetBox.x1;
+                    childBox.x2 = targetBox.x2;
+                } else {
+                    childBox.y1 = targetBox.y1;
+                    childBox.y2 = targetBox.y2;
+                }
 
                 if (i > 0) {
                     var prevChild = children[i - 1],
                         prevChildBox = prevChild.box,
+                        childHeight = childBox.height(),
+                        childWidth = childBox.width(),
                         translateX = isVertical ? 0 : prevChildBox.width(),
-                        translateY = isVertical ? - prevChild.box.height() : 0,
-                        childBox = childBox.clone();
+                        translateY = isVertical ? - prevChild.box.height() : 0;
 
-                    childBox.translate(translateX, translateY);
-                    currentChild.updateLayout(childBox);
+                        //childBox.translate(translateX, translateY);
+
+                        if (isVertical) {
+                            childBox.y2 = prevChildBox.y1;
+                            childBox.y1 = childBox.y2 - childHeight;
+                        } else {
+                            childBox.x1 = prevChildBox.x2;
+                            childBox.x2 = childBox.x1 + childWidth;
+                        }
+
+                } else {
+                     box = stack.box = childBox.clone();
                 }
+
+                currentChild.updateLayout(childBox);
 
                 box.x1 = Math.min(box.x1, childBox.x1);
                 box.y1 = Math.min(box.y1, childBox.y1);
@@ -878,20 +899,23 @@
 
                 var barSlot = new Box(slotX.x1, slotY.y1, slotX.x2, slotY.y2);
 
+                var cluster = clusters[categoryIx];
+                if (!cluster) {
+                    cluster = clusters[categoryIx] = new ClusterLayout({
+                        gap: options.gap
+                    });
+                    cluster.box = isHorizontal ? slotX : slotY;
+                }
+
                 if (isStacked) {
-                    var stack = stacks[categoryIx];
+                    var stack = cluster.children[0];
                     if (!stack) {
-                        stack = stacks[categoryIx] = new StackLayout();
+                        stack = new StackLayout();
+                        cluster.children.push(stack);
+                        stack.box = isHorizontal ? slotX : slotY;
                     }
                     stack.children.push(bar);
                 } else {
-                    var cluster = clusters[categoryIx];
-                    if (!cluster) {
-                        cluster = clusters[categoryIx] = new ClusterLayout({
-                            gap: options.gap
-                        });
-                        cluster.box = isHorizontal ? slotX : slotY;
-                    }
                     cluster.children.push(bar);
                 }
 
@@ -901,11 +925,6 @@
             for (var i = 0; i < clusters.length; i++) {
                 var cluster = clusters[i];
                 cluster.updateLayout(cluster.box);
-            };
-
-            for (var i = 0; i < stacks.length; i++) {
-                var stack = stacks[i];
-                stack.updateLayout();
             };
 
             barChart.box = targetBox;
