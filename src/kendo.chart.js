@@ -739,7 +739,8 @@
         updateLayout: function() {
             var stack = this,
                 isVertical = stack.options.isVertical,
-                children = stack.children;
+                children = stack.children,
+                box = stack.box = children[0].box.clone();
 
             for (var i = 0; i < children.length; i++) {
                 var currentChild = children[i],
@@ -750,14 +751,16 @@
                         prevChildBox = prevChild.box,
                         translateX = isVertical ? 0 : prevChildBox.width(),
                         translateY = isVertical ? - prevChild.box.height() : 0,
-                        childBox = new Box(
-                            childBox.x1 + translateX,
-                            childBox.y1 + translateY,
-                            childBox.x2 + translateX,
-                            childBox.y2 + translateY);
+                        childBox = childBox.clone();
 
+                    childBox.translate(translateX, translateY);
                     currentChild.updateLayout(childBox);
                 }
+
+                box.x1 = Math.min(box.x1, childBox.x1);
+                box.y1 = Math.min(box.y1, childBox.y1);
+                box.x2 = Math.max(box.x2, childBox.x2);
+                box.y2 = Math.max(box.y2, childBox.y2);
             }
         }
     });

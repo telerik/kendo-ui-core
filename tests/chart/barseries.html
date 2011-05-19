@@ -179,6 +179,10 @@
                     equal(series.children[1].box.y2, series.children[0].box.y1);
                 });
 
+                test("series have 75% margin", function() {
+                    equal(series.children[0].box.x1, 5);
+                });
+
                 module("Bar Chart / Stack / Negative Values", {
                     setup: function() {
                         setupBarChart({
@@ -278,39 +282,46 @@
                 module("Stack Layout / Vertical", {
                     setup: function() {
                         stack = new Chart.StackLayout();
+
+                        stack.children.push(
+                            new BarStub(new Box(0, 80, 100, 100)),
+                            new BarStub(new Box(0, 50, 100, 100))
+                        );
+
+                        stack.updateLayout();
                     }
                 });
 
                 test("second bar is placed on top of the first", function() {
-                    stack.children.push(
-                        new BarStub(new Box(0, 80, 100, 100)),
-                        new BarStub(new Box(0, 50, 100, 100))
-                    );
-
-                    stack.updateLayout();
-
-                    same(stack.children[1].box.y1, 30);
-                    same(stack.children[1].box.y2, 80);
+                    equal(stack.children[1].box.y1, 30);
+                    equal(stack.children[1].box.y2, 80);
                 });
 
+                test("reports final box after layout", function() {
+                    same([stack.box.x1, stack.box.y1, stack.box.x2, stack.box.y2],
+                         [0, 30, 100, 100]);
+                });
 
                 module("Stack Layout / Horizontal", {
                     setup: function() {
                         stack = new Chart.StackLayout({ isVertical: false });
-                        stack.children.push();
+                        stack.children.push(
+                            new BarStub(new Box(0, 0, 20, 10)),
+                            new BarStub(new Box(0, 0, 50, 10))
+                        );
+
+                        stack.updateLayout();
                     }
                 });
 
                 test("second bar is placed to the right of the first", function() {
-                    stack.children.push(
-                        new BarStub(new Box(0, 0, 20, 10)),
-                        new BarStub(new Box(0, 0, 50, 10))
-                    );
+                    equal(stack.children[1].box.x1, 20);
+                    equal(stack.children[1].box.x2, 70);
+                });
 
-                    stack.updateLayout();
-
-                    same(stack.children[1].box.x1, 20);
-                    same(stack.children[1].box.x2, 70);
+                test("reports final box after layout", function() {
+                    same([stack.box.x1, stack.box.y1, stack.box.x2, stack.box.y2],
+                         [0, 0, 70, 10]);
                 });
 
             })();
