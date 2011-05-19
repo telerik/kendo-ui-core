@@ -8,7 +8,9 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 
     <link rel="shortcut icon" href="favicon.ico">
-    <link rel="apple-touch-icon" href="img/kendo.png" />
+    <link rel="apple-touch-icon-precomposed" href="img/touch-icon-57-precomposed.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/touch-icon-72-precomposed.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/touch-icon-114-precomposed.png" />
     <link rel="apple-touch-startup-image" href="img/splash.png" />
 
     <meta charset="utf-8" />
@@ -30,7 +32,7 @@
                 this.EXTRAS = "owner_name,tags",
                 this.hideExif = function() {
                     var exifWindow = $("#exifWindow");
-                    if (exifWindow.length) {
+                    if (exifWindow[0]) {
                         exifWindow.data("kendoWindow").close();
                     }
                 },
@@ -84,7 +86,7 @@
 
                             bigPhoto.stop(true, true)
                                 .fadeOut(function() {
-                                    if (exifInfo.length && this == exifInfo[0]) {
+                                    if (this == exifInfo[0]) {
                                         exifInfo.find("h2")
                                            .text(img.attr("alt") || "No Title")
                                            .end()
