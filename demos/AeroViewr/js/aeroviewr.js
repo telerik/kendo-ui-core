@@ -254,9 +254,14 @@ if (!isInferiorBrowser) {
                     }
                 })
                 .bind('swipeLeft', function(e) {
-                    var selectable = $('#footer .thumbs:visible').data('kendoListView').selectable,
-//                        scroller = $('#footer .thumb-list:visible').data('kendoScroller'),
+                    var listView = $('#footer .thumbs:visible'),
+                        scroller = $('#footer .thumb-list:visible').data('kendoScroller'),
+                        selectable, next = [];
+
+                    if (listView.length) {
+                        selectable = listView.data('kendoListView').selectable;
                         next = selectable.value().next();
+                    }
 
                     if (next.length) {
                         selectable.clear();
@@ -267,9 +272,14 @@ if (!isInferiorBrowser) {
                     }
                 })
                 .bind('swipeRight', function(e) {
-                    var selectable = $('#footer .thumbs:visible').data('kendoListView').selectable,
-//                        scroller = $('#footer .thumb-list').data('kendoScroller'),
+                    var listView = $('#footer .thumbs:visible'),
+                        scroller = $('#footer .thumb-list').data('kendoScroller'),
+                        selectable, prev = [];
+
+                    if (listView.length) {
+                        selectable = listView.data('kendoListView').selectable,
                         prev = selectable.value().prev();
+                    }
 
                     if (prev.length) {
                         selectable.clear();

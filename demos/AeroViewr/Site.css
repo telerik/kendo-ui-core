@@ -82,6 +82,7 @@ body,
     min-height:215px;
     position:relative;
     width: 100%;
+    display: table\9;
 }
 
 header,
@@ -115,15 +116,13 @@ section#footer
     -moz-box-pack: center;
     -moz-box-align: center;
 
-    display: -ms-box;
-    -ms-box-orient: horizontal;
-    -ms-box-pack: center;
-    -ms-box-align: center;
-
     display: box;
     box-orient: horizontal;
     box-pack: center;
     box-align: center;
+
+    display: table-cell\9;
+    vertical-align: middle\9;
 }
 
 #bigPhoto
