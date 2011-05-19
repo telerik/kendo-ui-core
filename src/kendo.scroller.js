@@ -337,7 +337,7 @@
             var currentLocation = touchLocation(e);
             if (currentLocation.idx != this.start.idx) return;
 
-            var dip10 = 20 * kendo.support.devicePixelRatio;
+            var dip10 = 10 * kendo.support.devicePixelRatio;
 
             if (Math.abs(this.lastLocation.x - currentLocation.x) > dip10 || Math.abs(this.lastLocation.y - currentLocation.y) > dip10) {
                 e.preventDefault();
@@ -543,7 +543,7 @@
                 var constrainFactor = 0;
                 friction -= this._limitValue( (bounceStop - Math.abs(constraint)) / bounceStop, .04, .9 );
                 constrainFactor = constraint * this.options.bounceDeceleration;
-                decelerationVelocity -= Math.abs(constrainFactor) > 1 ? constrainFactor : 1;
+                decelerationVelocity -= constrainFactor;
             }
 
             this.bounceLocation[axis] = bounceLocation;
