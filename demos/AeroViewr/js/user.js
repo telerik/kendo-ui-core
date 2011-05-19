@@ -88,8 +88,8 @@
     function search() {
         if($("#searchBox").val()) {
             $("#viewslideshow").find(".p-icon")
-                .toggleClass("i-pause")
-                .toggleClass("i-slideshow")
+               .removeClass("i-pause")
+                .addClass("i-slideshow")
                 .end()
                 .find("em").html('Play');
 
