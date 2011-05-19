@@ -27,12 +27,6 @@ body
     font-size:1.2em;
 }
 
-/*#main
-{
-    max-width:1280px;
-    margin:0 auto;
-}*/
-
 input,
 button,
 textarea
@@ -63,7 +57,7 @@ fieldset
     border:0;
 }
 
-/* large screen layout - start */
+/* layout - start */
 
 html
 {
@@ -82,9 +76,9 @@ body,
     min-height:215px;
     position:relative;
     width: 100%;
-    display: table\9;
 }
 
+.isIE #wrap,
 .isOpera #wrap
 {
     display: table;
@@ -133,6 +127,7 @@ section#footer
     position: relative;
 }
 
+.isIE #photoWrap,
 .isOpera #photoWrap
 {
     display: table-cell;
@@ -177,33 +172,7 @@ section#footer
     display: none;
 }
 
-#footer>.thumbs,
-#footer>.thumb-list
-{
-    position: relative;
-    margin-left:108px;
-    margin-right:108px;
-}
-
-#viewslideshow,
-#uploadphotos
-{
-    position:absolute;
-    top:17px;
-    width: 80px;
-}
-
-#viewslideshow
-{
-    left:16px;
-}
-
-#uploadphotos
-{
-    right:16px;
-}
-
-/* large screen layout - end */
+/* screen layout - end */
 
 .loading
 {
@@ -302,7 +271,6 @@ header
     height:44px;
     line-height:44px;
     border-bottom:1px solid rgba(255,255,255,.3);
-    /*background:0 0 repeat-x url(img/gradients.png);*/
 
     background:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,.9)), to(rgba(0,0,0,.7)));
     background:-moz-linear-gradient(top, rgba(0,0,0,.9), rgba(0,0,0,.7));
@@ -422,92 +390,17 @@ header>ul
     background:#000;
 }
 
-/* footer */
-
-#footer
-{
-    bottom:0;
-    height:130px;
-    background:0 -161px repeat-x url(img/gradients.png);
-}
-
-#footer>h2
-{
-    margin-left:116px;
-    padding-top:.3em;
-    font-size:1.3em;
-    line-height:1.2;
-    font-weight:normal;
-    color:rgba(255,255,255,.7);
-}
-
-#footer .thumbs
-{
-    height:75px;
-    margin-top:6px;
-    padding:8px;
-    overflow:hidden;
-    white-space: nowrap;
-    vertical-align:middle;
-    outline: 0; /* Remove the focus in WebKit */
-}
-
-#footer>a
-{
-    text-align:center;
-}
-
-#footer>a>.p-icon
-{
-    border-width:1px;
-}
-
-#footer>a>em
-{
-    display:block;
-    margin:1em 0 0;
-    text-transform:uppercase;
-    font-style:normal;
-    font-size:0.6em;
-}
-
-#footer li
-{
-    margin-bottom:20px;
-}
-
-#footer li>em
-{
-    position:absolute;
-    top:0;
-    left:0;
-    width:61px;
-    height:67px;
-    overflow:hidden;
-    padding:4px 7px;
-    /*background:0 -350px repeat-x url('img/gradients.png');*/
-    background:rgba(0,0,0,.4);
-    font-style:normal;
-    white-space:normal;
-    text-align:left;
-}
-
-#footer li:hover>em,
-#footer li.currentThumb>em
-{
-    display:none;
-}
-
-#viewslideshow,
-#uploadphotos
-{
-    display:inline-block;
-    vertical-align:middle;
-}
+/* thumbnails */
 
 .thumbs>li
 {
     position:relative;
+    display:inline-block;
+    vertical-align:top;
+    text-align:center;
+    width:75px;
+    height:75px;
+    margin:0 1px 1px 0;
     cursor:pointer;
 }
 
@@ -516,13 +409,25 @@ header>ul
 {
     -moz-transition-property:-moz-box-shadow,box-shadow;
     -moz-transition-duration:.3s;
-    -webkit-transition-property:-webkit-box-shadow,box-shadow;
+    -webkit-transition-property:-webkit-box-shadow;
     -webkit-transition-duration:.3s;
     -o-transition-property:box-shadow;
     -o-transition-duration:.3s;
     
     transition-property:box-shadow;
     transition-duration:.3s;
+}
+
+.thumbs>li.t-state-selected
+{
+    cursor:default;
+    z-index:4;
+}
+
+.thumbs img
+{
+    display:block;
+    margin:0 auto;
 }
 
 .thumbs>li:hover,
@@ -558,28 +463,115 @@ header>ul
     margin:0;
 }
 
-#footer .thumbs>li:hover,
-#footer .thumbs>li.t-state-selected
+/* footer */
+
+#footer
 {
-    margin-bottom:0;
-    margin-top:-1px;
+    bottom:0;
+    height:130px;
+    background:0 -161px repeat-x url(img/gradients.png);
 }
 
-.thumbs>li.t-state-selected
+#footer>h2
 {
-    cursor:default;
-    z-index:4;
+    margin-left:116px;
+    padding-top:.3em;
+    font-size:1.3em;
+    line-height:1.2;
+    font-weight:normal;
+    color:rgba(255,255,255,.7);
 }
 
-.thumbs img
+#footer>a
+{
+    text-align:center;
+}
+
+#footer>a>.p-icon
+{
+    border-width:1px;
+}
+
+#footer>a>em
 {
     display:block;
-    margin:0 auto;
+    margin:1em 0 0;
+    text-transform:uppercase;
+    font-style:normal;
+    font-size:0.6em;
+}
+
+#viewslideshow,
+#uploadphotos
+{
+    position:absolute;
+    top:17px;
+    width: 80px;
+    display:inline-block;
+    vertical-align:middle;
+}
+
+#viewslideshow
+{
+    left:16px;
+}
+
+#uploadphotos
+{
+    right:16px;
 }
 
 #uploadphotos>.i-uploadphotos
 {
     background-position:-1px -255px;
+}
+
+#footer>.thumbs,
+#footer>.thumb-list
+{
+    position: relative;
+    margin-left:108px;
+    margin-right:108px;
+}
+
+#footer .thumbs
+{
+    height:75px;
+    margin-top:6px;
+    padding:8px;
+    overflow:hidden;
+    white-space: nowrap;
+    vertical-align:middle;
+    outline: 0; /* Remove the focus in WebKit */
+}
+
+#footer li>em
+{
+    position:absolute;
+    top:0;
+    left:0;
+    width:61px;
+    height:67px;
+    overflow:hidden;
+    padding:4px 7px;
+    /*background:0 -350px repeat-x url('img/gradients.png');*/
+    background:rgba(0,0,0,.4);
+    font-style:normal;
+    white-space:normal;
+    text-align:left;
+}
+
+#footer li:hover>em,
+#footer li.currentThumb>em
+{
+    display:none;
+}
+
+#footer .thumbs>li:hover,
+#footer .thumbs>li.t-state-selected
+{
+    margin-bottom:0;
+    margin-top:-1px;
 }
 
 #footer .bottomLink
@@ -682,16 +674,6 @@ header>ul
 {
     display:inline-block;
     margin:1.2em 0 0;
-}
-
-.thumbs>li
-{
-    display:inline-block;
-    vertical-align:top;
-    text-align:center;
-    width:75px;
-    height:75px;
-    margin:0 1px 1px 0;
 }
 
 #main>.thumbs>li
@@ -1735,7 +1717,8 @@ div.t-slider
 .t-slider .t-arrow-down { background-position: -22px 6px; width: 35px; height: 35px; }
 
 /* Slider - end */
-/* Upload */
+
+/* Upload - start */
 
 html .t-upload
 {
@@ -1911,6 +1894,8 @@ html .t-upload
 .t-upload-selected {
     display: none;
 }
+
+/* Upload - end */
 
 /* touch & scroll styles */
 
