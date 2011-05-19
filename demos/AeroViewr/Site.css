@@ -1374,7 +1374,7 @@ div.t-window-content
 #exifWindow dt
 {
     float: left;
-    width: 90px;
+    width: 95px;
     padding: 0 8px 4px 0;
     font-weight: bold;
     clear: left;
@@ -1385,7 +1385,7 @@ div.t-window-content
 #exifWindow dd
 {
     float: left;
-    width: 240px;
+    width: 235px;
     padding: 0 0 4px 0;
 }
 
