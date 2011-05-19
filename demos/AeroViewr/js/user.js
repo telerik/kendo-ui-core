@@ -68,7 +68,8 @@
             reader: defaultReader
         }),
         photoSetId = function() {
-            return $("#flatSetsStrip").data("kendoListView").selected().attr("data-setid");
+            var setId = $("#flatSetsStrip").data("kendoListView").selected().attr("data-setid");
+            return setId || null;
         };
 
     function showSelectedPhoto(ui) {
