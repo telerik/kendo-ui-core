@@ -146,41 +146,6 @@ section#footer
     display: none;
 }
 
-.photo-navigation
-{
-    display: none;
-
-    position: absolute;
-    top: 50%;
-    width: 55px;
-    height: 55px;
-    margin-top: -27px;
-    
-    background: #222 url('img/scroll-arrows.png') no-repeat 0 50%;
-    opacity: .7;
-	-moz-border-radius: 34px;
-	-webkit-border-radius: 34px;
-	border-radius: 34px;
-
-    text-indent: -9999px;
-}
-
-.photo-navigation:hover
-{
-    opacity: 1;
-}
-
-#previousPhoto
-{
-    left: 27px;
-}
-
-#nextPhoto
-{
-    right: 27px;
-    background-position: -55px 50%;
-}
-
 #overlay
 {
     position:absolute;
