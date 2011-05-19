@@ -45,6 +45,8 @@
                                     };
 
                                     e.data["api_sig"] = flickr.getApiSig(flickr.app.secret, e.data);
+                                    e.data["secret"] = flickr.app.secret;
+
                                     that._showMsg("Uploading photos...");
                                     $(document).unbind("mousedown touchstart", handler);
                                 },
