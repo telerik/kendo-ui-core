@@ -733,12 +733,15 @@
     StackLayout.prototype = new ChartElement();
     $.extend(StackLayout.prototype, {
         options: {
-            isVertical: true
+            isVertical: true,
+            inverted: true
         },
 
         updateLayout: function(targetBox) {
             var stack = this,
                 isVertical = stack.options.isVertical,
+                stackAxis = isVertical ? "y" : "x",
+                positionAxis = isVertical ? "x" : "y",
                 children = stack.children,
                 box;
 
@@ -746,28 +749,22 @@
                 var currentChild = children[i],
                     childBox = currentChild.box.clone();
 
-                if (isVertical) {
-                    childBox.x1 = targetBox.x1;
-                    childBox.x2 = targetBox.x2;
-                } else {
-                    childBox.y1 = targetBox.y1;
-                    childBox.y2 = targetBox.y2;
-                }
+                // TODO: Box.snapTo(targetBox, positionAxis)
+                childBox[positionAxis + 1] = targetBox[positionAxis + 1];
+                childBox[positionAxis + 2] = targetBox[positionAxis + 2];
 
                 if (i > 0) {
                     var prevChild = children[i - 1],
                         prevChildBox = prevChild.box,
                         childHeight = childBox.height(),
-                        childWidth = childBox.width(),
-                        translateX = isVertical ? 0 : prevChildBox.width(),
-                        translateY = isVertical ? - prevChild.box.height() : 0;
-
-                        //childBox.translate(translateX, translateY);
+                        childWidth = childBox.width();
 
                         if (isVertical) {
+                            // TODO: childBox.alignBottom(prevChildBox);
                             childBox.y2 = prevChildBox.y1;
                             childBox.y1 = childBox.y2 - childHeight;
                         } else {
+                            // TODO: childBox.alignRight(prevChildBox);
                             childBox.x1 = prevChildBox.x2;
                             childBox.x2 = childBox.x1 + childWidth;
                         }
@@ -778,6 +775,7 @@
 
                 currentChild.updateLayout(childBox);
 
+                // TODO: Box.wrap(childBox)
                 box.x1 = Math.min(box.x1, childBox.x1);
                 box.y1 = Math.min(box.y1, childBox.y1);
                 box.x2 = Math.max(box.x2, childBox.x2);
