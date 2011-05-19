@@ -1,7 +1,0 @@
-C:\Work\Kendo\demos\UploadPhotoToFlickr\UploadPhotoToFlickr\obj\Debug\ResolveAssemblyReference.cache
-C:\Work\Kendo\demos\UploadPhotoToFlickr\UploadPhotoToFlickr\bin\UploadPhotoToFlickr.dll
-C:\Work\Kendo\demos\UploadPhotoToFlickr\UploadPhotoToFlickr\bin\UploadPhotoToFlickr.pdb
-C:\Work\Kendo\demos\UploadPhotoToFlickr\UploadPhotoToFlickr\bin\Telerik.Web.Mvc.dll
-C:\Work\Kendo\demos\UploadPhotoToFlickr\UploadPhotoToFlickr\bin\Telerik.Web.Mvc.xml
-C:\Work\Kendo\demos\UploadPhotoToFlickr\UploadPhotoToFlickr\obj\Debug\UploadPhotoToFlickr.dll
-C:\Work\Kendo\demos\UploadPhotoToFlickr\UploadPhotoToFlickr\obj\Debug\UploadPhotoToFlickr.pdb
