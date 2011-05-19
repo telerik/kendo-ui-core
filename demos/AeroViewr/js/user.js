@@ -234,6 +234,7 @@
                 min: 0,
                 max: 2,
                 largeStep: 1,
+                tickPlacement: "none",
                 change: function() {
                     var value = this.value();
                     imageSize = IMAGESIZES[value];
