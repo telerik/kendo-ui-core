@@ -24,6 +24,7 @@ if (!isInferiorBrowser) {
         data = window.data,
         user = window.user,
         fullscreen = false;
+
     animType = false;
 
     $(document).ready(function () {
@@ -227,7 +228,7 @@ if (!isInferiorBrowser) {
                     }
                 }
             });
-            
+
             $('#photoWrap, #main')
                 .bind('touchstart', function (e) {
                     startLocation = kendo.touchLocation(e);
@@ -257,47 +258,50 @@ if (!isInferiorBrowser) {
                         (dY < -10) && $(e.target).trigger('swipeUp');
                     }
                 })
-                .bind('swipeLeft', function(e) {
-                    var listView = $('#footer .thumbs:visible'),
-                        selectable, next = [];
-
-                    if (listView.length) {
-                        selectable = listView.data('kendoListView').selectable;
-                        next = selectable.value().next();
-                    }
-
-                    if (next.length) {
-                        selectable.clear();
-                        selectable.value(next);
-                        animType = 'slideRotateLeft';
-                        $('#photoWrap').kendoStop(false, true).kendoAnimate(animType, 400);
-                    }
-                })
-                .bind('swipeRight', function(e) {
-                    var listView = $('#footer .thumbs:visible'),
-                        selectable, prev = [];
-
-                    if (listView.length) {
-                        selectable = listView.data('kendoListView').selectable,
-                        prev = selectable.value().prev();
-                    }
-
-                    if (prev.length) {
-                        selectable.clear();
-                        selectable.value(prev);
-                        animType = 'slideRotateRight';
-                        $('#photoWrap').kendoStop(false, true).kendoAnimate(animType, 400);
-                    }
-                });
         } else {
-            $("#photoWrap").bind("mousedown", function(e) {
-                e.preventDefault();
+            $("#photoWrap")
+                .bind("mousedown", function(e) {
+                    e.preventDefault();
 
-                $('header').kendoStop().kendoAnimate('slideUp', 'fast', fullscreen);
-                $('#footer').kendoStop().kendoAnimate('slideDown', 'fast', fullscreen);
-                fullscreen = !fullscreen;
-            });
+                    $('header').kendoStop().kendoAnimate('slideUp', 'fast', fullscreen);
+                    $('#footer').kendoStop().kendoAnimate('slideDown', 'fast', fullscreen);
+                    fullscreen = !fullscreen;
+                })
+                .find(".photo-navigation").show()
+                    .mousedown(function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        
+                        var direction = {
+                            "next": "Left",
+                            "previous": "Right"
+                        }[$(e.target).attr("rel")];
+
+                        $("#photoWrap").trigger("swipe" + direction);
+                    });
         }
 
+        function getSlideHandler(direction, animationType) {
+            return function(e) {
+                var listView = $("#footer .thumbs:visible"),
+                    selectable, upcomingImage = [];
+
+                if (listView.length) {
+                    selectable = listView.data("kendoListView").selectable;
+                    upcomingImage = selectable.value()[direction]();
+                }
+
+                if (upcomingImage.length) {
+                    selectable.clear();
+                    selectable.value(upcomingImage);
+                    animType = animationType;
+                    $("#photoWrap").kendoStop(false, true).kendoAnimate(animationType, 400);
+                }
+            }
+        }
+            
+        $('#photoWrap, #main')
+            .bind('swipeLeft', getSlideHandler("next", "slideRotateLeft"))
+            .bind('swipeRight', getSlideHandler("prev", "slideRotateRight"));
     });
 })(jQuery);

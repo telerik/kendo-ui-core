@@ -178,6 +178,7 @@ section#footer
 #nextPhoto
 {
     right: 27px;
+    background-position: -55px 50%;
 }
 
 #overlay
@@ -2024,6 +2025,7 @@ html .t-upload
     top: 0;
     left: 0;
     border-right: 1px solid #000;
+    background-position: -15px 50%;
 }
 
 .right-scroll-arrow
@@ -2031,7 +2033,7 @@ html .t-upload
     top: 0;
     right: 0;
     border-left: 1px solid #000;
-    background-position: 100% 50%;
+    background-position: -70px 50%;
 }
 
 /*inferior browsers*/
