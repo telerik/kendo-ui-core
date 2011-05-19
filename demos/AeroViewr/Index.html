@@ -58,7 +58,7 @@
                         src = img.attr("src").replace("_s", "").replace(imageSize.suffix,""),
                         loader = $("img.loader"),
                         exifInfo = $(".exifInfo");
-
+                    bigPhoto.attr("data-photoid", img.attr("data-photoid"));
                     if (loader.length) {
                         loader.remove();
                     } else {
