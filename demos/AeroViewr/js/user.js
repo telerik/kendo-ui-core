@@ -87,6 +87,12 @@
 
     function search() {
         if($("#searchBox").val()) {
+            $("#viewslideshow").find(".p-icon")
+                .toggleClass("i-pause")
+                .toggleClass("i-slideshow")
+                .end()
+                .find("em").html('Play');
+
             searching = true;
             $("#flatSetsStrip").hide();
             $("#flatPhotoStrip").hide();
@@ -277,15 +283,11 @@
             slideshow.init($("#flatPhotoStrip").data("kendoListView"));
             $("#viewslideshow").click(function(e) {
                 e.preventDefault();
-                var started = slideshow._started;
-
-               $(this).find(".p-icon")
-                    .toggleClass("i-pause")
-                    .toggleClass("i-slideshow")
-                    .end()
-                    .find("em").html(started ? 'Play' : 'Pause'); 
-
-               if (started) {
+                var started = slideshow._started; 
+                if(!started && !$("#flatPhotoStrip:visible")[0]) {              
+                    return;
+                }
+                if (started) {
                     setBigPhoto($(".thumbs:visible").find(".t-state-selected:last img"));
                 } else {
                     $("#exifButton").fadeOut();
@@ -295,7 +297,12 @@
                 }
 
                 upload.hide();
-                slideshow.toggle();
+                $(this).find(".p-icon")
+                    .toggleClass("i-pause")
+                    .toggleClass("i-slideshow")
+                    .end()
+                    .find("em").html(started ? 'Play' : 'Pause'); 
+                slideshow.toggle();                
             });
 
             $(".i-gridview").click(function() {
@@ -320,10 +327,16 @@
                 $("#mainSetPhotoGrid").hide();
             }).addClass("currentView");
 
-            $("#backButton").click(function() {
+            $("#backButton").click(function(e) {
                 var element = $(this),
                     state = element.data("state");
+                e.preventDefault();
                 slideshow.stop();
+                $("#viewslideshow").find(".p-icon")
+                    .toggleClass("i-pause")
+                    .toggleClass("i-slideshow")
+                    .end()
+                    .find("em").html('Play');
 
                 if (state == "slideshow") {
                     $("#flatPhotoStrip").hide();
