@@ -42,6 +42,7 @@ var visitor = window.visitor,
        setBigPhoto(ui.selectable.value().find("img"));
 
        dataSource.query({page: 1, pageSize: PAGESIZE});
+        $("#viewslideshow, #uploadphotos").fadeIn();
 
        $("#backButton").text("Back to search results").data("currentView", "flatMostPopularPhotos");
    }
@@ -196,6 +197,7 @@ var visitor = window.visitor,
                     $("#mainTemplate").show();
                     $("#flatMostPopularPhotos").hide();
                     $(".i-tileview").click();
+                    $("#viewslideshow, #uploadphotos").fadeOut();
                     element.text("Back to most popular");
                     slideshow.init($("#flatSearchPhotos").data("kendoListView"));
                 } else if (view === "mainTemplate"){
@@ -205,6 +207,7 @@ var visitor = window.visitor,
                     $("#overlay").fadeOut();
                     $("#exifButton").fadeIn();
                     $("#flatMostPopularPhotos").show();
+                    $("#viewslideshow, #uploadphotos").fadeIn();
                     element.text("Back to search results");
                     slideshow.init($("#flatMostPopularPhotos").data("kendoListView"));
                 }
@@ -265,8 +268,8 @@ var visitor = window.visitor,
                 }                
 
                 $(this).find(".p-icon")
-                    .toggleClass("i-pause")
-                    .toggleClass("i-slideshow")
+                        .toggleClass("i-pause")
+                        .toggleClass("i-slideshow")
                     .end()
                     .find("em").html(started ? 'Play' : 'Pause');
 
