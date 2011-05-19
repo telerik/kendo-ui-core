@@ -180,7 +180,7 @@
                     position.x = -this._limitValue( this.start.x - location.x, this.minBounceStop.x, this.maxBounceStop.x );
                     delta = this._getReverseDelta(-position.x, this.minBounceLimit.x, this.maxBounceLimit.x);
                     var width = ~~(this.boxWidth * this.xRatio - Math.abs(delta));
-                    offset = this._limitValue( -position.x * this.xRatio - Math.abs(delta), 0, this.boxWidth);
+                    offset = this._limitValue( -position.x * this.xRatio + delta, 0, this.boxWidth - width );
 
                     cssModel[this._transformProperty] = this._translate3DPrefix + offset + 'px, 0' + this._translate3DSuffix;
                     cssModel['width'] = width + 'px';
@@ -192,7 +192,7 @@
                     position.y = -this._limitValue( this.start.y - location.y, this.minBounceStop.y, this.maxBounceStop.y );
                     delta = this._getReverseDelta(-position.y, this.minBounceLimit.y, this.maxBounceLimit.y);
                     var height = ~~(this.boxHeight * this.yRatio - Math.abs(delta));
-                    offset = this._limitValue( -position.y * this.yRatio - Math.abs(delta), 0, this.boxHeight );
+                    offset = this._limitValue( -position.y * this.yRatio + delta, 0, this.boxHeight - height );
 
                     cssModel = {};
                     cssModel[this._transformProperty] = this._translate3DPrefix + '0, ' + offset + 'px' + this._translate3DSuffix;
@@ -205,6 +205,31 @@
                                                         position.x + 'px,' + position.y + 'px' + this._translate3DSuffix);
             };
 
+        },
+
+        _getReverseDelta: function (position, minBounceLimit, maxBounceLimit) {
+            var bounceStop = this.options.bounceStop;
+            return this._limitValue( (position > maxBounceLimit ? (position - maxBounceLimit) : 0) || (position < minBounceLimit ? position : 0),
+                                      -bounceStop, bounceStop );
+        },
+
+        _limitValue: function (value, minLimit, maxLimit) {
+            return Math.max( minLimit, Math.min( maxLimit, value));
+        },
+
+        _getScrollOffsets: function () {
+            var transforms = (this.scrollElement.css(this._transformProperty).match(/(translate[3d]*\(|matrix\(([\s\w\d]*,){4,4})\s*(-?[\d\.]+)?[\w\s]*,?\s*(-?[\d\.]+)[\w\s]*.*?\)/i) || [0, 0, 0, 0, 0]);
+
+            if (kendo.support.transitions)
+                return {
+                    x: +transforms[3],
+                    y: +transforms[4]
+                };
+            else
+                return {
+                    x: parseInt(this.scrollElement.css('marginLeft'), 10) || 0,
+                    y: parseInt(this.scrollElement.css('marginTop'), 10) || 0
+                };
         },
 
         _onGestureStart: function () {
@@ -246,31 +271,6 @@
 
             if (this.hasHorizontalScroll)
                 this._horizontalArrows.kendoStop(true, true).kendoAnimate({ effects: "fadeOut", duration: "fast" });
-        },
-
-        _getReverseDelta: function (position, minBounceLimit, maxBounceLimit) {
-            var bounceStop = this.options.bounceStop;
-            return this._limitValue( (position > maxBounceLimit ? (position - maxBounceLimit) : 0) || (position < minBounceLimit ? position : 0),
-                                      -bounceStop, bounceStop );
-        },
-
-        _limitValue: function (value, minLimit, maxLimit) {
-            return Math.max( minLimit, Math.min( maxLimit, value));
-        },
-
-        _getScrollOffsets: function () {
-            var transforms = (this.scrollElement.css(this._transformProperty).match(/(translate[3d]*\(|matrix\(([\s\w\d]*,){4,4})\s*(-?[\d\.]+)?[\w\s]*,?\s*(-?[\d\.]+)[\w\s]*.*?\)/i) || [0, 0, 0, 0, 0]);
-
-            if (kendo.support.transitions)
-                return {
-                    x: +transforms[3],
-                    y: +transforms[4]
-                };
-            else
-                return {
-                    x: parseInt(this.scrollElement.css('marginLeft'), 10) || 0,
-                    y: parseInt(this.scrollElement.css('marginTop'), 10) || 0
-                };
         },
 
         _wait: function (e) {
@@ -506,7 +506,6 @@
             if (timeDelta < this.destination.duration) {
                 this.timeoutId = setTimeout( this._stepScrollProxy, this.framerate );
                 this.lastCall = now;
-                return;
             }
         },
 
