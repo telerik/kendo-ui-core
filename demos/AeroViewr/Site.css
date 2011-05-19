@@ -1379,6 +1379,11 @@ div.t-window-content
     padding: 0 0 4px 0;
 }
 
+.exif-actions
+{
+    padding: 5px 0 0 98px;
+}
+
 #exifWindow a
 {
     color: #ff0060;

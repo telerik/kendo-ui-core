@@ -89,9 +89,7 @@ if (!isInferiorBrowser) {
                 $(kendo.template('<div id="exifWindow">\
                     <div class="exif-author">by <span><%= author %></span></div>\
                     <dl class="floatWrap">\
-                        <dt>Posted to Flickr</dt><dd><%= posted %></dd>\
                         <dt>Description</dt><dd><%= description %></dd>\
-                        <dt>Location</dt><dd><%= location %></dd>\
                         <dt>Tags</dt><dd>\
                             <% if (tags.length) { %>\
                             <ul class="taglist">\
@@ -103,14 +101,12 @@ if (!isInferiorBrowser) {
                             (none)\
                             <% } %>\
                         </dd>\
-                        <dt>Link</dt><dd>\
-                            <% if (urls.length) { %>\
-                               <a href="<%= urls[0] %>"><%= urls[0] %></a> \
-                            <% } else { %>\
-                            (none)\
-                            <% } %>\
-                        </dd>\
+                        <dt>Location</dt><dd><%= location %></dd>\
+                        <dt>Posted to Flickr</dt><dd><%= posted %></dd>\
                     </dl>\
+                    <% if (url) { %>\
+                    <div class="exif-actions"><a href="<%= url %>">See in flickr</a></div>\
+                    <% } %>\
                 </div>'
                 )({
                     posted: kendo.toString(new Date(parseInt(photo.dates.posted) * 1000), "MMMM dd, yyyy"),
@@ -122,9 +118,7 @@ if (!isInferiorBrowser) {
                             id: kendo.htmlEncode(tag._content)
                         };
                     }),
-                    urls: $.map(photo.urls.url, function(url) {
-                        return url._content;
-                    }),
+                    url: photo.urls.url[0]._content,
                     location: photo.owner.location || "Unknown"
                 })
                 ).kendoWindow({
