@@ -1143,9 +1143,9 @@
             };
         };
 
-        $.each(['swipe', 'swipeLeft', 'swipeRight', 'swipeUp', 'swipeDown', 'doubleTap', 'tap'], function(method) {
-            $.fn[method] = function(callback) {
-                return this.bind(method, callback)
+        $.each(['swipe', 'swipeLeft', 'swipeRight', 'swipeUp', 'swipeDown', 'doubleTap', 'tap'], function(m, value) {
+            $.fn[value] = function(callback) {
+                return this.bind(value, callback)
             }
         });
     }
