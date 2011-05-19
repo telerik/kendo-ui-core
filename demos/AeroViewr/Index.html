@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html class="noHTML5"> 
+<html class="noHTML5">
 <head>
     <meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width" name="viewport" />
 
@@ -17,7 +17,7 @@
     <title>AeroViewr</title>
     <link rel="stylesheet" href="site.css" />
     <script type="text/javascript">
-        (function(window){            
+        (function(window){
             window.application = function() {
                 this.IMAGESIZES = [
                     {suffix: "_s", size: 75},
@@ -39,7 +39,7 @@
                     data: function(result) {
                         return result.photos.photo;
                     },
-                    total: function(result) {                      
+                    total: function(result) {
                         return Math.min(result.photos.total, PAGESIZE);
                     }
                 },
@@ -106,7 +106,7 @@
                                         $('#photoWrap').kendoAnimate(animType, 400, true);
                                         first = animType = false;
                                     }
-                                    
+
                                     if (!slideshow._started)
                                         exifInfo.css('opacity',  now);
                                 }
@@ -114,11 +114,11 @@
 
                         });
                 }
-            };            
+            };
         })(window);
     </script>
-    <script src="js/md5.js"></script>
     <script src="../../src/jquery.js"></script>
+    <!-- kendo -->
     <script src="../../src/kendo.core.js"></script>
     <script src="../../src/kendo.fx.js"></script>
     <script src="../../src/kendo.query.js"></script>
@@ -135,7 +135,9 @@
     <script src="../../src/kendo.upload.js"></script>
     <script src="../../src/kendo.scroller.js"></script>
     <script src="../../src/kendo.window.js"></script>
+    <!-- kendo -->
 
+    <script src="js/md5.js"></script>
     <script src="js/data.js"></script>
     <script src="js/flickr.js"></script>
     <script src="js/slideshow.js"></script>
