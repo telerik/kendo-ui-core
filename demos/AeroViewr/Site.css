@@ -546,6 +546,7 @@ header>ul
 .thumbs img
 {
     display:block;
+    margin:0 auto;
 }
 
 #uploadphotos>.i-uploadphotos
