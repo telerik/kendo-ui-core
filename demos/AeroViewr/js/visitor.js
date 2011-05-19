@@ -76,6 +76,11 @@ var visitor = window.visitor,
                 $("#overlay").fadeIn();
                 $("#exifButton").fadeOut();
                 slideshow.init($("#flatSearchPhotos").data("kendoListView"));
+                $("#viewslideshow").find(".p-icon")
+                    .removeClass("i-pause")
+                    .addClass("i-slideshow")
+                    .end()
+                    .find("em").html('Play');
             }
         },
 
@@ -170,7 +175,13 @@ var visitor = window.visitor,
                 $("#exifButton").fadeOut();
             });
 
-            $(".bottomLink").bind("click", function(){
+            $(".bottomLink").bind("click", function(e){
+                $("#viewslideshow").find(".p-icon")
+                    .removeClass("i-pause")
+                    .addClass("i-slideshow")
+                    .end()
+                    .find("em").html('Play');
+                e.preventDefault();
                 var element = $(this),
                     view = element.data("currentView");
 
@@ -236,13 +247,9 @@ var visitor = window.visitor,
             $("#viewslideshow").click(function(e) {
                 e.preventDefault();
                 var started = slideshow._started;
-
-                $(this).find(".p-icon")
-                    .toggleClass("i-pause")
-                    .toggleClass("i-slideshow")
-                    .end()
-                    .find("em").html(started ? 'Play' : 'Pause');
-
+                if(!started && !$("#footer .thumbs:visible")[0]) {
+                    return;
+                }
                 if(started){
                     setBigPhoto($(".thumbs:visible").find(".t-state-selected:last img"));
                 } else {
@@ -250,9 +257,14 @@ var visitor = window.visitor,
                     setTimeout(function(){
                         hideExif();
                     }, 300);
-                }
+                }                
+                $(this).find(".p-icon")
+                    .toggleClass("i-pause")
+                    .toggleClass("i-slideshow")
+                    .end()
+                    .find("em").html(started ? 'Play' : 'Pause');
 
-                slideshow.toggle();
+                slideshow.toggle();                
             });
         }
    };
