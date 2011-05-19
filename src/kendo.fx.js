@@ -146,8 +146,6 @@
     var animate = function (elements, properties, options) {
 
         if (kendo.support.transitions && 'transition' in kendo.fx) {
-            
-
             kendo.fx.transition(elements, properties, options);
         } else {
             $.each(transformProps, function(idx, value) { // remove transforms to avoid IE and older browsers confusion
