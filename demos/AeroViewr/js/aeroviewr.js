@@ -15,6 +15,8 @@ if (!isInferiorBrowser) {
     $("#noHTML5Alert").hide();
     if (jQuery.browser.opera) {
         document.documentElement.className += " isOpera";
+    } else if (jQuery.browser.msie) {
+        document.documentElement.className += " isIE";
     }
 }
 
