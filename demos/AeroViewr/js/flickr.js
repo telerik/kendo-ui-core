@@ -131,9 +131,14 @@
             });
         },
 
-        movePhotoToSet: function(id, photo, callback) {
-            var url = this.getAuthMethodUrl(this.methods.movePhotoToSet, {photoset_id: id, photo_id: photo});
-            $.post(url, null, callback);
+        movePhotoToSet: function(id, photo) {
+            $.ajax({
+                url: this.getAuthMethodUrl(this.methods.movePhotoToSet, {photoset_id: id, photo_id: photo}),
+                dataType: $.support.cors ? "json" : "jsonp",
+                jsonp: false,
+                cache: true,
+                jsonpCallback: "jsonFlickrApi"
+            });
         },
 
         getFrob: function() {
