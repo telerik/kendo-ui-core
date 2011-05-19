@@ -49,7 +49,7 @@ var visitor = window.visitor,
    window.visitor = {
         hideExif: function() {
             var exifWindow = $("#exifWindow");
-            if (exifWindow[0]) {
+            if (exifWindow.length) {
                 exifWindow.data("kendoWindow").close();
             }
         },
