@@ -30,7 +30,7 @@
                 this.EXTRAS = "owner_name,tags",
                 this.hideExif = function() {
                     var exifWindow = $("#exifWindow");
-                    if (exifWindow[0]) {
+                    if (exifWindow.length) {
                         exifWindow.data("kendoWindow").close();
                     }
                 },
@@ -84,7 +84,7 @@
 
                             bigPhoto.stop(true, true)
                                 .fadeOut(function() {
-                                    if (this == exifInfo[0]) {
+                                    if (exifInfo.length && this == exifInfo[0]) {
                                         exifInfo.find("h2")
                                            .text(img.attr("alt") || "No Title")
                                            .end()
