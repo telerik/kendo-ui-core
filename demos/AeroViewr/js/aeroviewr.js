@@ -267,18 +267,8 @@ if (!isInferiorBrowser) {
                     $('#footer').kendoStop().kendoAnimate('slideDown', 'fast', fullscreen);
                     fullscreen = !fullscreen;
                 })
-                .find(".photo-navigation").show()
-                    .mousedown(function(e) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        
-                        var direction = {
-                            "next": "Left",
-                            "previous": "Right"
-                        }[$(e.target).attr("rel")];
-
-                        $("#photoWrap").trigger("swipe" + direction);
-                    });
+                .bind('swipeLeft', getSlideHandler("next", "slideRotateLeft"))
+                .bind('swipeRight', getSlideHandler("prev", "slideRotateRight"));
         }
 
         function getSlideHandler(direction, animationType) {
@@ -299,9 +289,5 @@ if (!isInferiorBrowser) {
                 }
             }
         }
-            
-        $('#photoWrap, #main')
-            .bind('swipeLeft', getSlideHandler("next", "slideRotateLeft"))
-            .bind('swipeRight', getSlideHandler("prev", "slideRotateRight"));
     });
 })(jQuery);
