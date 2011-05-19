@@ -111,7 +111,7 @@ if (!isInferiorBrowser) {
                         <dt>Posted to Flickr</dt><dd><%= posted %></dd>\
                     </dl>\
                     <% if (url) { %>\
-                    <div class="exif-actions"><a href="<%= url %>">See in flickr</a></div>\
+                    <div class="exif-actions"><a href="<%= url %>">See on flickr</a></div>\
                     <% } %>\
                 </div>'
                 )({
