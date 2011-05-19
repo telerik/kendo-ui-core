@@ -129,6 +129,8 @@ section#footer
 
     display: table-cell\9;
     vertical-align: middle\9;
+
+    position: relative;
 }
 
 .isOpera #photoWrap
@@ -142,6 +144,40 @@ section#footer
     position: relative;
     overflow: hidden;
     display: none;
+}
+
+.photo-navigation
+{
+    display: none;
+
+    position: absolute;
+    top: 50%;
+    width: 55px;
+    height: 55px;
+    margin-top: -27px;
+    
+    background: #222 url('img/scroll-arrows.png') no-repeat 0 50%;
+    opacity: .7;
+	-moz-border-radius: 34px;
+	-webkit-border-radius: 34px;
+	border-radius: 34px;
+
+    text-indent: -9999px;
+}
+
+.photo-navigation:hover
+{
+    opacity: 1;
+}
+
+#previousPhoto
+{
+    left: 27px;
+}
+
+#nextPhoto
+{
+    right: 27px;
 }
 
 #overlay
