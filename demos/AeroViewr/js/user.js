@@ -8,7 +8,6 @@
         data = window.data,
         photosInSet = false,
         searching = false,
-        liveUrl = "http://localhost/kendo/demos/aeroviewr/index.html",
         defaultReader = {
             data: function(result) {
                 if(photosInSet) {
@@ -269,12 +268,13 @@
             $("#userInfo").fadeIn().find("em:first").html(flickr.auth.username);
 
             that.thumbList = new kendo.ui.Scroller($('<div class="thumb-list">').appendTo("#footer")).scrollElement;
-
+            var href = location.href.split("?");
             try {
-                history.replaceState(null, "AeroViewr", liveUrl);
+                history.replaceState(null, "AeroViewr", href[0]);
             } catch(e) {
-                if(location.href.indexOf("?") !== -1) {
-                    location.href = location.href.split("?")[0];
+                debugger;
+                if(href[1]) {
+                    location.href = href[0];
                 }
             }
 
