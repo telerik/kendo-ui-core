@@ -4,6 +4,10 @@ tests.push(
         title: "Chart configuration"
     },
     {
+        page: "chart/helpers.html",
+        title: "Helpers"
+    },
+    {
         page: "chart/viewmodel.html",
         title: "View model"
     },

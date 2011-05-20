@@ -106,6 +106,35 @@
             box.x2 += dx;
             box.y1 += dy;
             box.y2 += dy;
+
+            return box;
+        },
+
+        wrap: function(targetBox) {
+            var box = this;
+
+            box.x1 = Math.min(box.x1, targetBox.x1);
+            box.y1 = Math.min(box.y1, targetBox.y1);
+            box.x2 = Math.max(box.x2, targetBox.x2);
+            box.y2 = Math.max(box.y2, targetBox.y2);
+
+            return this;
+        },
+
+        snapTo: function(targetBox, axis) {
+            var box = this;
+
+            if (axis == "x" || !axis) {
+                box.x1 = targetBox.x1;
+                box.x2 = targetBox.x2;
+            }
+
+            if (axis == "y" || !axis) {
+                box.y1 = targetBox.y1;
+                box.y2 = targetBox.y2;
+            }
+
+            return this;
         },
 
         clone: function() {
@@ -775,11 +804,7 @@
 
                 currentChild.updateLayout(childBox);
 
-                // TODO: Box.wrap(childBox)
-                box.x1 = Math.min(box.x1, childBox.x1);
-                box.y1 = Math.min(box.y1, childBox.y1);
-                box.x2 = Math.max(box.x2, childBox.x2);
-                box.y2 = Math.max(box.y2, childBox.y2);
+                box.wrap(childBox);
             }
         }
     });
