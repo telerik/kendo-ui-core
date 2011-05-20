@@ -244,7 +244,7 @@ if (!isInferiorBrowser) {
                         dX = location.x - startLocation.x,
                         dY = location.y - startLocation.y;
 
-                    if (Math.abs(dX) < 10 && Math.abs(dY) < 10) {
+                    if ((Math.abs(dX) < 10 && Math.abs(dY) < 10) || $(e.target).is('#main')) {
                         if ($(e.target).is('#photoWrap, #photoWrap *, #main')) {
                             e.preventDefault();
 

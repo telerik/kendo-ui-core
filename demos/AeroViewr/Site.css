@@ -161,7 +161,8 @@ section#footer
     top:0;
     left:0;
     width:100%;
-    padding:45px 108px 171px;
+    margin:45px 0 171px;
+    padding: 0 108px;
     z-index:2;
     -moz-box-sizing:border-box;
     -webkit-box-sizing:border-box;
