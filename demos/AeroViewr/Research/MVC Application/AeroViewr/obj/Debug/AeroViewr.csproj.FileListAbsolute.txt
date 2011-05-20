@@ -1,7 +1,0 @@
-C:\Work\Kendo\demos\AeroViewr\Research\MVC Application\AeroViewr\bin\AeroViewr.dll
-C:\Work\Kendo\demos\AeroViewr\Research\MVC Application\AeroViewr\bin\AeroViewr.pdb
-C:\Work\Kendo\demos\AeroViewr\Research\MVC Application\AeroViewr\bin\Telerik.Web.Mvc.dll
-C:\Work\Kendo\demos\AeroViewr\Research\MVC Application\AeroViewr\bin\Telerik.Web.Mvc.xml
-C:\Work\Kendo\demos\AeroViewr\Research\MVC Application\AeroViewr\obj\Debug\ResolveAssemblyReference.cache
-C:\Work\Kendo\demos\AeroViewr\Research\MVC Application\AeroViewr\obj\Debug\AeroViewr.dll
-C:\Work\Kendo\demos\AeroViewr\Research\MVC Application\AeroViewr\obj\Debug\AeroViewr.pdb
