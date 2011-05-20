@@ -256,8 +256,6 @@ if (!isInferiorBrowser) {
                         }
                     }
 
-                    var pincer = $('#bigPhoto').data('kendoPincer');
-                    if (pincer._gesture) return;
                     if (Math.abs(dX) > Math.abs(dY)) {
                         (dX > 40) && $(e.target).trigger('swipeRight');
                         (dX < -40) && $(e.target).trigger('swipeLeft');
