@@ -90,6 +90,51 @@
             test("snapTo returns box instance", function() {
                 equal(box.snapTo(targetBox), box);
             });
+
+            test("alignTo 'top' aligns box to target top", function() {
+                box.alignTo(targetBox, "top");
+                equal(box.y2, targetBox.y1);
+            });
+
+            test("alignTo 'top' keeps height", function() {
+                var clone = box.alignTo(targetBox, "top");
+                equal(clone.height(), box.height());
+            });
+
+            test("alignTo 'bottom' aligns box to target bottom", function() {
+                box.alignTo(targetBox, "bottom");
+                equal(box.y1, targetBox.y2);
+            });
+
+            test("alignTo 'bottom' keeps height", function() {
+                var clone = box.alignTo(targetBox, "bottom");
+                equal(clone.height(), box.height());
+            });
+
+            test("alignTo 'right' aligns box to target right edge", function() {
+                box.alignTo(targetBox, "right");
+                equal(box.x1, targetBox.x2);
+            });
+
+            test("alignTo 'right' keeps width", function() {
+                var clone = box.alignTo(targetBox, "right");
+                equal(clone.height(), box.height());
+            });
+
+            test("alignTo 'left' aligns box to target left edge", function() {
+                box.alignTo(targetBox, "left");
+                equal(box.x2, targetBox.x1);
+            });
+
+            test("alignTo 'left' keeps width", function() {
+                var clone = box.alignTo(targetBox, "left");
+                equal(clone.height(), box.height());
+            });
+
+            test("alignTo returns box instance", function() {
+                equal(box.alignTo(targetBox, "bottom"), box);
+            });
+
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>
