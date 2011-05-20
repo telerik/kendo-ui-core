@@ -59,4 +59,7 @@ html = replaceBlock("kendo",  '<script src="js/kendo.all.min.js"></script>');
 html = replaceBlock("aeroviewr",  '<script src="js/aeroviewr.all.min.js"></script>');
 
 fs.unlinkSync("live/index.html");
+fs.unlinkSync("live/FlickrAuth.html");
+fs.unlinkSync("live/img/icons.psd");
+fs.unlinkSync("live/img/scroll-arrows.psd");
 fs.writeFileSync("live/index.html", html);
