@@ -1133,14 +1133,27 @@
     };
 
     if (support.touch) {
-        touchLocation = function(e) {
+        touchLocation = function(e, id) {
             var changedTouches = e.changedTouches || e.originalEvent.changedTouches;
 
-            return {
-                idx: changedTouches[0].identifier,
-                x: changedTouches[0].pageX,
-                y: changedTouches[0].pageY
-            };
+            if (id) {
+                var output = null;
+                $.each(changedTouches, function(idx, value) {
+                    if (id == value.identifier)
+                        output = {
+                            idx: value.identifier,
+                            x: value.pageX,
+                            y: value.pageY
+                        };
+                });
+                return output;
+            } else {
+                return {
+                    idx: changedTouches[0].identifier,
+                    x: changedTouches[0].pageX,
+                    y: changedTouches[0].pageY
+                };
+            }
         };
 
         $.each(['swipe', 'swipeLeft', 'swipeRight', 'swipeUp', 'swipeDown', 'doubleTap', 'tap'], function(m, value) {
