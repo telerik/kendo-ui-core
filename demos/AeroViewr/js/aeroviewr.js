@@ -198,6 +198,7 @@ if (!isInferiorBrowser) {
             $('#uploadphotos').hide();
             $('#footer > .thumb-list').css('marginRight', '15px');
             $('#photoWrap').css('overflow', 'hidden');
+            $('#bigPhoto').kendoPincer();
             var zoomFactor = 1;
 
             if (window.innerWidth < 380 || window.innerHeight < 380) {
@@ -255,25 +256,29 @@ if (!isInferiorBrowser) {
                         }
                     }
 
+                    var pincer = $('#bigPhoto').data('kendoPincer');
+                    if (pincer._gesture) return;
                     if (Math.abs(dX) > Math.abs(dY)) {
-                        (dX > 10) && $(e.target).trigger('swipeRight');
-                        (dX < -10) && $(e.target).trigger('swipeLeft');
+                        (dX > 40) && $(e.target).trigger('swipeRight');
+                        (dX < -40) && $(e.target).trigger('swipeLeft');
                     } else {
-                        (dY > 10) && $(e.target).trigger('swipeDown');
-                        (dY < -10) && $(e.target).trigger('swipeUp');
+                        (dY > 40) && $(e.target).trigger('swipeDown');
+                        (dY < -40) && $(e.target).trigger('swipeUp');
                     }
                 })
                 .bind('swipeLeft', getSlideHandler("next", "slideRotateLeft"))
                 .bind('swipeRight', getSlideHandler("prev", "slideRotateRight"));
         } else {
-            $("#photoWrap")
+            $('#photoWrap, #main')
                 .bind("mousedown", function(e) {
-                    e.preventDefault();
+                    if ($(e.target).is('#photoWrap, #photoWrap *, #main')) {
+                        e.preventDefault();
 
-                    $('header').kendoStop().kendoAnimate('slideUp', 'fast', fullscreen);
-                    $('#footer').kendoStop().kendoAnimate('slideDown', 'fast', fullscreen);
-                    fullscreen = !fullscreen;
-                })
+                        $('header').kendoStop().kendoAnimate('slideUp', 'fast', fullscreen);
+                        $('#footer').kendoStop().kendoAnimate('slideDown', 'fast', fullscreen);
+                        fullscreen = !fullscreen;
+                   }
+                });
         }
 
         function getSlideHandler(direction, animationType) {
