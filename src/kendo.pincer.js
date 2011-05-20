@@ -16,7 +16,7 @@
         this._gestureEndProxy = $.proxy(this._onGestureEnd, this),
         this._touchStartProxy = $.proxy(this._onTouchStart, this),
         this._touchMoveProxy = $.proxy(this._onTouchMove, this),
-        this._touchEndProxy = $.proxy(this._onTouchEnd, this),
+        this._touchEndProxy = $.proxy(this._onTouchEnd, this);
 
         this._transformProperty = kendo.support.transitions.css + 'transform';
 
