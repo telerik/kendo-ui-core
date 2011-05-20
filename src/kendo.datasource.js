@@ -444,7 +444,7 @@
             var that = this;
 
             if(val !== undefined) {
-                val = Math.min(Math.max(val, 1), that._totalPages());
+                val = Math.max(Math.min(Math.max(val, 1), that._totalPages()), 1);
                 that.query({ page: val, pageSize: that.pageSize(), sort: that.sort(), filter: that.filter()});
                 return;
             }
