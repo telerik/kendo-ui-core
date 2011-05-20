@@ -11,14 +11,85 @@
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.chart.js"></script>
         <script type="text/javascript">
-            var Chart = kendo.ui.Chart;
+            var Chart = kendo.ui.Chart,
+                Box = Chart.Box,
+                box,
+                targetBox;
 
-            module("Box");
-
-            test("", function() {
-
+            module("Box", {
+                setup: function() {
+                    box = new Box(0, 0, 20, 20);
+                    targetBox = new Box(10, 10, 40, 40);
+                }
             });
 
+            test("clone returns new instance", function() {
+                notEqual(box.clone(), box);
+            });
+
+            test("clone copies coordinates", function() {
+                var clone = box.clone();
+
+                same([clone.x1, clone.y1, clone.x2, clone.y2],
+                     [box.x1, box.y1, box.x2, box.y2]);
+            });
+
+            test("translate on x-axis", function() {
+                var clone = box.clone().translate(10, 0);
+
+                same([clone.x1, clone.y1, clone.x2, clone.y2],
+                     [box.x1 + 10, box.y1, box.x2 + 10, box.y2]);
+            });
+
+            test("translate y-axis", function() {
+                var clone = box.clone().translate(0, 10);
+
+                same([clone.x1, clone.y1, clone.x2, clone.y2],
+                     [box.x1, box.y1 + 10, box.x2, box.y2 + 10]);
+            });
+
+            test("translate returns box instance", function() {
+                equal(box.translate(0, 0), box);
+            });
+
+            test("wrap increases box size to fit target box", function() {
+                box.wrap(targetBox);
+                same([box.x1, box.y1, box.x2, box.y2], [0, 0, 40, 40]);
+            });
+
+            test("wrap returns box instance", function() {
+                equal(box.wrap(targetBox), box);
+            });
+
+            test("snapTo moves box to target location", function() {
+                box.snapTo(targetBox);
+
+                same([box.x1, box.y1], [targetBox.x1, targetBox.y1]);
+            });
+
+            test("snapTo updates dimensions to match target", function() {
+                box.snapTo(targetBox);
+
+                same([box.width(), box.height()], [targetBox.width(), targetBox.height()]);
+            });
+
+            test("snapTo on x-axis updates only x coordinates", function() {
+                var clone = box.clone().snapTo(targetBox, "x");
+
+                same([clone.x1, clone.y1, clone.x2, clone.y2],
+                     [targetBox.x1, box.y1, targetBox.x2, box.y2]);
+            });
+
+            test("snapTo on y-axis updates only y coordinates", function() {
+                var clone = box.clone().snapTo(targetBox, "y");
+
+                same([clone.x1, clone.y1, clone.x2, clone.y2],
+                     [box.x1, targetBox.y1, box.x2, targetBox.y2]);
+            });
+
+            test("snapTo returns box instance", function() {
+                equal(box.snapTo(targetBox), box);
+            });
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>
@@ -30,4 +101,4 @@
         <ul id="log"></ul>
 
     </body>
-</html>
+</html> 
