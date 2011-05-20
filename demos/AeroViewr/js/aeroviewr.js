@@ -129,7 +129,7 @@ if (!isInferiorBrowser) {
                 })
                 ).kendoWindow({
                     modal: true,
-                    title: kendo.htmlEncode(photo.title._content),
+                    title: kendo.htmlEncode(photo.title._content) || "Untitled",
                     visible: false,
                     resizable: false,
                     width: 375,
