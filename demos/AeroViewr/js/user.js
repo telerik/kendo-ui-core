@@ -272,7 +272,6 @@
             try {
                 history.replaceState(null, "AeroViewr", href[0]);
             } catch(e) {
-                debugger;
                 if(href[1]) {
                     location.href = href[0];
                 }
