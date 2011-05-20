@@ -139,6 +139,10 @@ section#footer
     position: relative;
     overflow: hidden;
     display: none;
+    border:  5px solid #EEE;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
 }
 
 #overlay

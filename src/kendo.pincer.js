@@ -29,11 +29,11 @@
                 this.element
                     .bind('gesturestart', this._gestureStartProxy )
                     .bind('gesturechange', this._gestureChangeProxy )
-                    .bind('gestureend', this._gestureEndProxy );
+                    .bind('gestureend', this._gestureEndProxy )
+                    .bind('touchstart', this._touchStartProxy )
+                    .bind('touchmove', this._touchMoveProxy )
+                    .bind('touchend', this._touchEndProxy );
 
-                this.element[0].addEventListener('touchstart', this._touchStartProxy, true );
-                this.element[0].addEventListener('touchmove', this._touchMoveProxy, true );
-                this.element[0].addEventListener('touchend', this._touchEndProxy, true );
             }
         },
 
@@ -48,8 +48,8 @@
         },
 
         _onGestureStart: function (e) {
-            e.preventDefault();
             this._gesture = true;
+            e.preventDefault();
 
             var scaling = this._getScaleRotation();
             this._gestureStartProps = {
@@ -59,7 +59,11 @@
         },
 
         _onGestureEnd: function (e) {
-            this._gesture = false;
+            var that = this;
+
+            setTimeout( function () {
+                that._gesture = false;
+            }, 100 );
         },
         
         _onGestureChange: function (e) {
@@ -97,6 +101,7 @@
         _onTouchEnd: function (e) {
             if (this._gesture) {
                 e.preventDefault();
+                e.stopPropagation();
             }
         }
     };
