@@ -6,7 +6,13 @@
         DEFAULT_PRECISION = 6,
         COORD_PRECISION = 3,
         ZERO_THRESHOLD = 0.2,
-        BASELINE_MARKER_SIZE = 1;
+        BASELINE_MARKER_SIZE = 1,
+        X = "x",
+        Y = "y",
+        TOP = "top"
+        BOTTOM = "bottom",
+        LEFT = "left",
+        RIGHT = "right";
 
     function Chart(element, options) {
         var chart = this;
@@ -124,15 +130,34 @@
         snapTo: function(targetBox, axis) {
             var box = this;
 
-            if (axis == "x" || !axis) {
+            if (axis == X || !axis) {
                 box.x1 = targetBox.x1;
                 box.x2 = targetBox.x2;
             }
 
-            if (axis == "y" || !axis) {
+            if (axis == Y || !axis) {
                 box.y1 = targetBox.y1;
                 box.y2 = targetBox.y2;
             }
+
+            return this;
+        },
+
+        alignTo: function(targetBox, edge) {
+            var box = this,
+                height = box.height(),
+                width = box.width(),
+                axis = edge == TOP || edge == BOTTOM ? Y : X,
+                offset = axis == Y ? height : width;
+
+            if (edge == TOP || edge == LEFT) {
+                box[axis + 1] = targetBox[axis + 1] - offset;
+            } else {
+                box[axis + 1] = targetBox[axis + 2];
+            }
+
+            box.x2 = box.x1 + width;
+            box.y2 = box.y1 + height;
 
             return this;
         },
@@ -732,7 +757,7 @@
             var cluster = this,
                 options = cluster.options,
                 isHorizontal = options.isHorizontal,
-                axis = isHorizontal ? "x" : "y",
+                axis = isHorizontal ? X : Y,
                 children = cluster.children,
                 gap = options.gap,
                 slots = children.length + gap,
@@ -769,8 +794,8 @@
         updateLayout: function(targetBox) {
             var stack = this,
                 isVertical = stack.options.isVertical,
-                stackAxis = isVertical ? "y" : "x",
-                positionAxis = isVertical ? "x" : "y",
+                stackAxis = isVertical ? Y : X,
+                positionAxis = isVertical ? X : Y,
                 children = stack.children,
                 box;
 
@@ -778,28 +803,12 @@
                 var currentChild = children[i],
                     childBox = currentChild.box.clone();
 
-                // TODO: Box.snapTo(targetBox, positionAxis)
-                childBox[positionAxis + 1] = targetBox[positionAxis + 1];
-                childBox[positionAxis + 2] = targetBox[positionAxis + 2];
+                childBox.snapTo(targetBox, positionAxis)
 
                 if (i > 0) {
-                    var prevChild = children[i - 1],
-                        prevChildBox = prevChild.box,
-                        childHeight = childBox.height(),
-                        childWidth = childBox.width();
-
-                        if (isVertical) {
-                            // TODO: childBox.alignBottom(prevChildBox);
-                            childBox.y2 = prevChildBox.y1;
-                            childBox.y1 = childBox.y2 - childHeight;
-                        } else {
-                            // TODO: childBox.alignRight(prevChildBox);
-                            childBox.x1 = prevChildBox.x2;
-                            childBox.x2 = childBox.x1 + childWidth;
-                        }
-
+                    childBox.alignTo(children[i - 1].box, isVertical ? TOP : RIGHT);
                 } else {
-                     box = stack.box = childBox.clone();
+                    box = stack.box = childBox.clone();
                 }
 
                 currentChild.updateLayout(childBox);
