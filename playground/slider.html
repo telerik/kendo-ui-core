@@ -12,7 +12,7 @@
 
     </head>
     <body>
-        <input type="range" id="slider" style="margin: 20px;" />
+        <input id="slider" style="margin: 40px;"></input>
         <br />
         <div id="rangeSlider" style="margin:20px;">
             <input type="range" />
@@ -20,8 +20,8 @@
         </div>
         <script type="text/javascript">
             $(document).ready(function() {
-                $("#slider").kendoSlider({ smallStep: 1, max: 4, largeStep: 1, orientation: "vertical", tickPlacement: "bottomRight" });
-                $("#rangeSlider").kendoRangeSlider({ smallStep: 3, max: 10, largeStep: 5, orientation: "horizontal", tickPlacement: "bottomRight" });
+                $("#slider").kendoSlider({ smallStep: 3, max: 10, largeStep: 6, orientation: "vertical", tickPlacement: "bottomRight", showButtons: true });
+                $("#rangeSlider").kendoRangeSlider({ smallStep: 1, selectionStart: 0, selectionEnd: 10, max: 10, largeStep: 5, orientation: "horizontal", tickPlacement: "bottomRight" });
             });
         </script>
     </body>

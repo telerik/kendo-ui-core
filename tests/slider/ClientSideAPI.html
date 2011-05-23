@@ -161,8 +161,8 @@
             });
 
             test('slider should not trigger change if we decrease value with 1 step and value is equal to min value', function () {
-                var downArrow = "40", // down arrow
-                    leftArrow = "37"; // left arrow
+                var downArrow = kendo.keys.DOWN,
+                    leftArrow = kendo.keys.LEFT;
 
                 var change = function (e) {
                     ok(false);
@@ -319,14 +319,14 @@
             });
 
             test('range slider should not trigger change if we decrease selectionStart with 1 step and selectionStart is equal to min value', function () {
-                var downArrow = "40", // down arrow
-                    leftArrow = "37"; // left arrow
+                var downArrow = kendo.keys.down,
+                    leftArrow = kendo.keys.left;
 
                 var change = function (e) {
                     ok(false);
                 };
 
-                var rangeSlider = newRangeSlider({ change: change, selectionStart: 0, selectionEnd: 0 }),
+                var rangeSlider = newRangeSlider({ change: change, selectionStart: 10, selectionEnd: 10 }),
                     dragHandles = rangeSlider.wrapper.find(".t-draghandle");
 
                 dragHandles.eq(0).trigger({ type: "keydown", keyCode: downArrow });
