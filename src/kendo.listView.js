@@ -10,29 +10,28 @@
         FOCUSABLE = "t-focusable",
         DataSource = kendo.data.DataSource;
 
-    function ListView(element, options) {
-        var that = this;
+    var ListView = Component.extend( {
+        init: function(element, options) {
+            var that = this;
 
-        options = $.isArray(options) ? { data: options } : options;
+            options = $.isArray(options) ? { data: options } : options;
 
-        Component.apply(that, arguments);
+            Component.fn.init.call(that, element, options);
 
-        that.bind([CHANGE,DATABOUND], options);
+            that.bind([CHANGE,DATABOUND], options);
 
-        that._dataSource();
+            that._dataSource();
 
-        that.template = kendo.template(that.options.template);
+            that.template = kendo.template(that.options.template);
 
-        that._selection();
+            that._selection();
 
-        that._navigation();
+            that._navigation();
 
-        if(that.options.autoBind){
-            that.dataSource.query();
-        }
-    }
-
-    ListView.prototype = {
+            if(that.options.autoBind){
+                that.dataSource.query();
+            }
+        },
         options: {
             autoBind: true,
             template: ""
@@ -132,7 +131,7 @@
        selected: function() {
            return this.selectable.value();
        }
-    };
+    });
 
-    kendo.ui.plugin("ListView", ListView, Component);
+    kendo.ui.plugin("ListView", ListView);
 })(jQuery, window);

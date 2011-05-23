@@ -30,19 +30,19 @@
         }
     }
 
-    function DropTarget(element, options) {
-        var that = this;
+    var DropTarget = Component.extend( {
+        init: function(element, options) {
+            var that = this;
 
-        Component.apply(that, arguments);
+            Component.fn.init.call(that, element, options);
 
-        that.element.bind(MOUSEENTER, proxy(that._over, that))
-                    .bind(MOUSEUP, proxy(that._drop, that))
-                    .bind(MOUSELEAVE, proxy(that._out, that));
+            that.element.bind(MOUSEENTER, proxy(that._over, that))
+                .bind(MOUSEUP, proxy(that._drop, that))
+                .bind(MOUSELEAVE, proxy(that._out, that));
 
-        that.bind([DRAGENTER, DRAGLEAVE, DROP], that.options);
-    }
+            that.bind([DRAGENTER, DRAGLEAVE, DROP], that.options);
+        },
 
-    DropTarget.prototype = {
         options: {
             group: "default"
         },
@@ -74,21 +74,21 @@
                 draggable.dropped = !that._trigger(DROP, e);
             }
         }
-    }
+    });
 
-    kendo.ui.plugin("DropTarget", DropTarget, Component);
+    kendo.ui.plugin("DropTarget", DropTarget);
 
-    function Draggable(element, options) {
-        var that = this;
+    var Draggable = Component.extend( {
+        init: function (element, options) {
+            var that = this;
 
-        Component.apply(that, arguments);
+            Component.fn.init.call(that, element, options);
 
-        bind(that.element, that.options.filter, MOUSEDOWN + NAMESPACE, proxy(that._wait, that));
+            bind(that.element, that.options.filter, MOUSEDOWN + NAMESPACE, proxy(that._wait, that));
 
-        that.bind([DRAGSTART, DRAG, DRAGEND], that.options);
-    }
+            that.bind([DRAGSTART, DRAG, DRAGEND], that.options);
+        },
 
-    Draggable.prototype = {
         options: {
             distance: 5,
             group: "default",
@@ -208,8 +208,8 @@
 
             $(document).unbind(NAMESPACE);
         }
-    }
+    });
 
-    kendo.ui.plugin("Draggable", Draggable, Component);
+    kendo.ui.plugin("Draggable", Draggable);
 
-   })(jQuery, window);
+ })(jQuery, window);

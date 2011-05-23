@@ -1,5 +1,9 @@
 tests.push(
     {
+        page: "core/class.html",
+        title: "class"
+    },
+    {
         page: "core/observable.html",
         title: "observable"
     },

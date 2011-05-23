@@ -4,26 +4,26 @@
         Component = kendo.ui.Component,
         touchLocation = kendo.touchLocation;
 
-    function Pincer (element, options) {
-        this.element = $(element);
+    var Pincer = Component.extend({
+        init: function(element, options) {
+            this.element = $(element);
 
-        this._gesture = false;
-        
-        Component.apply(this, arguments);
+            this._gesture = false;
 
-        this._gestureStartProxy = $.proxy(this._onGestureStart, this),
-        this._gestureChangeProxy = $.proxy(this._onGestureChange, this),
-        this._gestureEndProxy = $.proxy(this._onGestureEnd, this),
-        this._touchStartProxy = $.proxy(this._onTouchStart, this),
-        this._touchMoveProxy = $.proxy(this._onTouchMove, this),
-        this._touchEndProxy = $.proxy(this._onTouchEnd, this);
+            Component.fn.init.call(this, element, options);
 
-        this._transformProperty = kendo.support.transitions.css + 'transform';
+            this._gestureStartProxy = $.proxy(this._onGestureStart, this),
+            this._gestureChangeProxy = $.proxy(this._onGestureChange, this),
+            this._gestureEndProxy = $.proxy(this._onGestureEnd, this),
+            this._touchStartProxy = $.proxy(this._onTouchStart, this),
+            this._touchMoveProxy = $.proxy(this._onTouchMove, this),
+            this._touchEndProxy = $.proxy(this._onTouchEnd, this);
 
-        this._create();
-    }
+            this._transformProperty = kendo.support.transitions.css + 'transform';
 
-    Pincer.prototype = {
+            this._create();
+        },
+
         _create: function () {
             if (kendo.support.touch) {
                 this.element
@@ -65,7 +65,7 @@
                 that._gesture = false;
             }, 100 );
         },
-        
+
         _onGestureChange: function (e) {
             this.element.css( kendo.support.transitions.css + 'transform', 'scale(' + Math.min( 5, Math.max( .4, this._gestureStartProps.scale + e.originalEvent.scale - 1 )) +
                                                                            ') rotate(' + ( this._gestureStartProps.angle + e.originalEvent.rotation ) + 'deg)');
@@ -104,8 +104,8 @@
                 e.stopPropagation();
             }
         }
-    };
+    });
 
-    kendo.ui.plugin("Pincer", Pincer, Component);
+    kendo.ui.plugin("Pincer", Pincer);
 
 })(jQuery, window);
