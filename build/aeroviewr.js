@@ -7,6 +7,8 @@ var wrench = require("./wrench");
 
 var html = fs.readFileSync("demos/aeroviewr/index.html", "utf8");
 
+var VERSION = "1.0.0";
+
 function processFileGroup(group, path, matcher) {
     var script = "";
     var scriptTags = html.split("<!-- " + group + " -->")[1].split("\n");
@@ -53,8 +55,8 @@ processFileGroup("kendo","", /src="..\/..\/([^"]*)/);
 processFileGroup("aeroviewr", "demos/aeroviewr/", /src="([^"]*)/);
 
 html = replaceBlock("jquery",  '<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>');
-html = replaceBlock("kendo",  '<script src="js/kendo.all.min.js"></script>');
-html = replaceBlock("aeroviewr",  '<script src="js/aeroviewr.all.min.js"></script>');
+html = replaceBlock("kendo",  '<script src="js/kendo.all.min.js?v=' + VERSION + '"></script>');
+html = replaceBlock("aeroviewr",  '<script src="js/aeroviewr.all.min.js?v=' + VERSION + '"></script>');
 
 fs.unlinkSync("live/index.html");
 fs.unlinkSync("live/FlickrAuth.html");
