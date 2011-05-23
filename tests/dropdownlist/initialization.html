@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DropDownList Initialization</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.query.js"></script>
+        <script src="../../src/kendo.datasource.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.selectable.js"></script>
+        <script src="../../src/kendo.dropdownlist.js"></script>
+        <link rel="stylesheet" href="../qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">DropDownList Initialization</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var DropDownList = kendo.ui.DropDownList,
+                input;
+
+            module("kendo.ui.DropDownList initialization", {
+                setup: function() {
+                    input = $("<input />").appendTo(document.body);
+                },
+                teardown: function() {
+                    var ul = $(document.body).children(":last");
+                    if(!ul[0].id) {
+                        ul.remove();
+                    }
+
+                    var parent = input.parent();
+                    if (parent.is("div")) {
+                        parent.remove();
+                    } else {
+                        input.remove();
+                    }
+                }
+            });
+
+           test("kendoDropDownList attaches a dropdownlist object to target", function() {
+                 input.kendoDropDownList({ data: [] });
+
+                 ok(input.data("kendoDropDownList") instanceof DropDownList);
+           });
+
+           test("kendoDropDownList extends passed options", function(){
+                input.kendoDropDownList({test: 1});
+
+                var options = input.data("kendoDropDownList").options;
+                notEqual(options.test, undefined)
+                equal(options.test, 1);
+           });
+
+           test("wraps element if no wrapper div and hide element", function() {
+               input.kendoDropDownList();
+
+               var wrapper = input.data("kendoDropDownList").wrapper;
+
+               ok(wrapper.is("div"));
+               ok(wrapper.hasClass("t-widget t-dropdown t-header"));
+               ok(!input.is(":visible"));
+           });
+
+           test("_text should create text div for item.Text", function() {
+               input.kendoDropDownList();
+
+               var text = input.data("kendoDropDownList").text;
+
+               ok(text.is("span"));
+               ok(text.hasClass("t-input"));
+           });
+
+           test("_text should wrap span with div", function(){
+               input.kendoDropDownList();
+
+               var dropDownWrapper = input.data("kendoDropDownList").text.parent();
+
+               ok(dropDownWrapper.is("div"));
+               ok(dropDownWrapper.hasClass("t-dropdown-wrap t-state-default"));
+           });
+
+           test("_text should include arrow after span.t-input", function(){
+               input.kendoDropDownList();
+
+               var spanArrow = input.data("kendoDropDownList").text.next(),
+                   arrow = spanArrow.children().eq(0);
+
+               ok(spanArrow.is("span"));
+               ok(spanArrow.hasClass("t-select"));
+               ok(arrow.is("span"));
+               ok(arrow.hasClass("t-icon t-arrow-down"));
+               equal(arrow.html(), "select");
+           });
+
+           test("data source is initialized from options when it is an array", function() {
+               var data = [{Text: 1, Value: 1}, {Text:2, Value:2}],
+                dropdownlist = new DropDownList(input, data);
+
+                ok(dropdownlist.dataSource);
+                dropdownlist.dataSource.read();
+                equal(dropdownlist.dataSource.data().length, 2);
+           });
+
+           test("data source is initialized from options.dataSource when array is passed", function() {
+               var data = [{Text: 1, Value: 1}, {Text:2, Value:2}],
+                   dropdownlist = new DropDownList(input, {
+                        dataSource: data
+                   });
+
+                ok(dropdownlist.dataSource);
+                dropdownlist.dataSource.read();
+                equal(dropdownlist.dataSource.data().length, 2);
+           });
+
+           test("data source is initialized from options.dataSource", function() {
+               var data = [{Text: 1, Value: 1}, {Text:2, Value:2}], 
+                   dropdownlist = new DropDownList(input, {
+                       dataSource: {
+                              data: data
+                     }
+                   });
+
+               ok(dropdownlist.dataSource);
+               dropdownlist.dataSource.read();
+               equal(dropdownlist.dataSource.data().length, 2);
+           });
+
+           test("data source is initialized from OPTION items", function() {
+               var select = $("<select><option value=1>Chai</option><option value=1 selected='selected'>Chai</option></select>"),
+                   dropdownlist = new DropDownList(select),
+                   data;
+
+               ok(dropdownlist.dataSource);
+
+               dropdownlist.dataSource.read();
+               data = dropdownlist.dataSource.data();
+
+               equal(data.length, 2);
+               equal(data[0].Text, "Chai");
+               equal(data[0].Value, "1");
+
+           });
+
+           test("retrived data from OPTIONS does not override options.dataSource", function() {
+               var select = $("<select><option value=1>Chai</option><option value=1 selected='selected'>Chai</option></select>"),
+                   data = [{Text: "Foo", Value: "Foo"}], 
+                   dropdownlist = new DropDownList(select, {
+                       dataSource: {
+                              data: data
+                     }
+                   });
+
+               ok(dropdownlist.dataSource);
+
+               dropdownlist.dataSource.read();
+               data = dropdownlist.dataSource.data();
+
+               equal(data.length, 1);
+               equal(data[0].Text, "Foo");
+               equal(data[0].Value, "Foo");
+           });
+
+           test("dropdownlist initializes a UL for its items", function() {
+                 var dropdownlist = new DropDownList(input, []);
+
+                 ok(dropdownlist.ul);
+                 ok(dropdownlist.ul.is("ul"));
+           });
+
+           test("dropdownlist initializes a popup for its items", function() {
+                 var dropdownlist = new DropDownList(input, []);
+
+                 ok(dropdownlist.popup);
+                 ok(dropdownlist.popup instanceof kendo.ui.Popup);
+                 ok(dropdownlist.popup.options.anchor[0], input[0]);
+                 ok(dropdownlist.popup.element[0], dropdownlist.ul[0]);
+           });
+
+           test("dropdownlist populates its list when the datasource changes", function() {
+                  var dropdownlist = new DropDownList(input, [{Text: "foo", Value: 1}, {Text:2, Value:2}]);
+
+                  dropdownlist.dataSource.read();
+
+                  equal(dropdownlist.ul.children("li").length, 2);
+                  equal(dropdownlist.ul.children("li").first().text(), "foo");
+           });
+
+           test("changing the template", function() {
+               var dropdownlist = new DropDownList(input, {
+                   template: "<%= data.toUpperCase() %>"
+               });
+
+               equal(dropdownlist.template("foo"), "FOO");
+           });
+
+           test("first click on wrapper should bind popup", function() {
+                 var dropdownlist = new DropDownList(input, [{Text: "foo", Value: 1}, {Text:2, Value:2}]);
+
+                 dropdownlist.dataSource.bind("change", function(){
+                    ok(true);
+                    start();
+                 });
+
+                dropdownlist.wrapper.click();
+                stop(300);
+           });
+
+          // test("clicks wrapper should toggle popup", function() {
+          //     var dropdownlist = new DropDownList(input, [{Text: "foo", Value: 1}, {Text:2, Value:2}]);
+          //     dropdownlist.ul.append("<li></li>");
+          //     dropdownlist.popup.open();
+          //     dropdownlist.popup.bind("close", function(){
+          //          ok(true);
+          //          start();
+          //     });
+
+          //     dropdownlist.wrapper.click();
+          //     stop(800);
+          // });
+
+      </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>

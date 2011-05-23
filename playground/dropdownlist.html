@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>DropDownList</title>
+        <script src="../src/jquery.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.fx.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.query.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.datasource.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.popup.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.selectable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.dropdownlist.js" type="text/javascript" charset="utf-8"></script>
+        <link rel="stylesheet" href="../styles/kendo.common.css" type="text/css" media="screen" charset="utf-8">
+        <link rel="stylesheet" href="../styles/kendo.vista.css" type="text/css" media="screen" charset="utf-8">
+        <style type="text/css" media="screen">
+            .t-state-focused
+            {
+                background-color: red;
+            }
+
+            ul
+            {
+                padding: 0;
+                margin: 0;
+                border: 1px solid black;
+                width: 200px;
+            }
+            ul li
+            {
+                list-style:none;
+            }
+        </style>
+    </head>
+    <body>
+        dataSource source: ["foo", "bar", "baz"];
+        <fieldset>
+            <legend>Vanilla input</legend>
+            <input />
+        </fieldset>
+
+        <fieldset>
+            <legend>DropDownList - INPUT</legend>
+            <input  id="dropdownlist" />
+        </fieldset>
+        <fieldset>
+            <legend>DropDownList - SELECT</legend>
+            <select  id="select">
+            </select>
+        </fieldset>
+        <script type="text/javascript" charset="utf-8">
+            $(document).ready(function() {
+                $("#dropdownlist").kendoDropDownList({
+                    dataSource: [{Text: "foo", Value: 1}, {Text:2, Value:2}]
+                });
+                $("#select").kendoDropDownList({
+                    dataSource: [{Text: "foo", Value: 1}, {Text:2, Value:2}]
+                });
+            });
+        </script>
+    </body>
+</html>
