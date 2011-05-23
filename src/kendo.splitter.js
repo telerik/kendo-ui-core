@@ -46,47 +46,41 @@
         };
     }
 
-    function Splitter(element, options) {
-        var that = this,
-            panesConfig,
-            splitbarSelector,
-            expandCollapseSelector = ".t-splitbar .t-icon:not(.t-resize-handle)";
+    var Splitter = Component.extend({
+        init: function(element, options) {
+            var that = this,
+                panesConfig,
+                splitbarSelector,
+                expandCollapseSelector = ".t-splitbar .t-icon:not(.t-resize-handle)";
 
-        Component.call(that, element, options);
+            Component.fn.init.call(that, element, options);
 
-        that.orientation = that.options.orientation.toLowerCase() != VERTICAL ? HORIZONTAL : VERTICAL;
-        splitbarSelector = ".t-splitbar-draggable-" + that.orientation;
-        that.ajaxOptions = that.options.ajaxOptions || that.ajaxOptions;
+            that.orientation = that.options.orientation.toLowerCase() != VERTICAL ? HORIZONTAL : VERTICAL;
+            splitbarSelector = ".t-splitbar-draggable-" + that.orientation;
+            that.ajaxOptions = that.options.ajaxOptions || that.ajaxOptions;
 
-        that.bind([INIT, EXPAND, COLLAPSE, CONTENTLOAD, RESIZE], that.options);
-        that.bind(RESIZE, $.proxy(that._resize, that));
-        /*that.bind(RESIZE, function(e){
-            that._resize.call(that, e);
-            if($.isFunction(that.options[RESIZE])) {
-                that.options[RESIZE].call(that, e);
-            }
-        });*/
+            that.bind([INIT, EXPAND, COLLAPSE, CONTENTLOAD, RESIZE], that.options);
+            that.bind(RESIZE, $.proxy(that._resize, that));
 
-        that._initPanes();
+            that._initPanes();
 
-        that.element
-            .delegate(splitbarSelector, MOUSEENTER, function() { $(this).addClass("t-splitbar-" + that.orientation + "-hover"); })
-            .delegate(splitbarSelector, MOUSELEAVE, function() { $(this).removeClass("t-splitbar-" + that.orientation + "-hover"); })
-            .delegate(expandCollapseSelector, MOUSEENTER, function() { $(this).addClass("t-state-hover")})
-            .delegate(expandCollapseSelector, MOUSELEAVE, function() { $(this).removeClass('t-state-hover')})
-            .delegate(".t-splitbar .t-collapse-next, .t-splitbar .t-collapse-prev", CLICK, that._arrowClick(COLLAPSE))
-            .delegate(".t-splitbar .t-expand-next, .t-splitbar .t-expand-prev", CLICK, that._arrowClick(EXPAND))
-            .delegate(".t-splitbar", "dblclick", $.proxy(that._dbclick, that))
-            .parent().closest(".t-splitter").each(function() {
-                $(this).data("kendoSplitter").bind(RESIZE, function() {
-                    that.trigger(RESIZE);
-                })
-            });
+            that.element
+                .delegate(splitbarSelector, MOUSEENTER, function() { $(this).addClass("t-splitbar-" + that.orientation + "-hover"); })
+                .delegate(splitbarSelector, MOUSELEAVE, function() { $(this).removeClass("t-splitbar-" + that.orientation + "-hover"); })
+                .delegate(expandCollapseSelector, MOUSEENTER, function() { $(this).addClass("t-state-hover")})
+                .delegate(expandCollapseSelector, MOUSELEAVE, function() { $(this).removeClass('t-state-hover')})
+                .delegate(".t-splitbar .t-collapse-next, .t-splitbar .t-collapse-prev", CLICK, that._arrowClick(COLLAPSE))
+                .delegate(".t-splitbar .t-expand-next, .t-splitbar .t-expand-prev", CLICK, that._arrowClick(EXPAND))
+                .delegate(".t-splitbar", "dblclick", $.proxy(that._dbclick, that))
+                .parent().closest(".t-splitter").each(function() {
+                    $(this).data("kendoSplitter").bind(RESIZE, function() {
+                        that.trigger(RESIZE);
+                    })
+                });
 
-        that.resizing = new PaneResizing(that);
-    }
+            that.resizing = new PaneResizing(that);
+        },
 
-    Splitter.prototype = {
         options: {
             orientation: HORIZONTAL
         },
@@ -315,9 +309,9 @@
         size: panePropertyAccessor("size", true),
         min: panePropertyAccessor("min"),
         max: panePropertyAccessor("max")
-    };
+    });
 
-    ui.plugin("Splitter", Splitter, Component);
+    ui.plugin("Splitter", Splitter);
 
     var verticalDefaults = {
             sizingProperty: "height",

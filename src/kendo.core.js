@@ -2,6 +2,7 @@
     var kendo = window.kendo = window.kendo || {},
         extend = $.extend,
         proxy = $.proxy,
+        noop = $.noop,
         Template,
         JSON = JSON || {},
         support = {},
@@ -19,13 +20,39 @@
             return this._isPrevented;
         }
     };
-
-//Observable ================================
-    function Observable() {
-        this._events = {};
+//Class =====================================
+    function Class() {
     }
 
-    Observable.prototype = {
+    Class.prototype = {
+        init: noop
+    }
+
+    Class.extend = function(prototype) {
+        var extended = false,
+            base = this;
+
+        function Subclass() {
+            if (extended) {
+                this.init.apply(this, arguments);
+            }
+        }
+
+        Subclass.fn = Subclass.prototype = extend(new base, prototype);
+        extended = true;
+        Subclass.extend = arguments.callee;
+        Subclass.constructor = Subclass;
+
+        return Subclass;
+    }
+
+//Observable ================================
+    var Observable = Class.extend({
+
+        init: function() {
+            this._events = {};
+        },
+
         bind: function(eventName, handlers) {
             var that = this,
                 idx,
@@ -84,7 +111,7 @@
 
             return that;
         }
-    };
+    });
 
 //Template ================================
     Template = {
@@ -1185,6 +1212,7 @@
         support: support,
         animate: animate,
         Observable: Observable,
+        Class: Class,
         Template: Template,
         template: proxy(Template.compile, Template),
         render: proxy(Template.render, Template),
@@ -1199,30 +1227,19 @@
     // This is required for Internet Explorer as jQuery.extend will not copy toString properly
     kendo.toString = toString;
 
-    function Component(element, options) {
-        var that = this;
+    var Component = Observable.extend( {
+        init: function(element, options) {
+            var that = this;
 
-        Observable.call(that);
-
-        that.element = $(element);
-        that.options = extend(true, {}, that.options, options);
-    }
-
-    Component.prototype = new Observable();
-
+            Observable.fn.init.call(that);
+            that.element = $(element);
+            that.options = extend(true, {}, that.options, options);
+        }
+    });
 
     extend(kendo.ui, {
         Component: Component,
-        plugin: function(name, component, base) {
-            // copy the prototype of the component
-            var proto = component.prototype;
-
-            // replace it with the base prototype
-            component.prototype = new base();
-
-            // extend it with the original prototoype
-            extend(component.prototype, proto);
-
+        plugin: function(name, component) {
             // expose it in the kendo.ui namespace
             kendo.ui[name] = component;
 

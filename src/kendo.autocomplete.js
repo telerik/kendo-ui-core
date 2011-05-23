@@ -49,50 +49,49 @@
         selectText(element, length, length);
     }
 
-    function AutoComplete(element, options) {
-        var that = this;
+    var AutoComplete = Component.extend({
+        init: function(element, options) {
+            var that = this;
 
-        options = $.isArray(options) ? { dataSource: options } : options;
+            options = $.isArray(options) ? { dataSource: options } : options;
 
-        Component.call(that, element, options);
+            Component.fn.init.call(that, element, options);
 
-        that.ul = $("<ul/>");
+            that.ul = $("<ul/>");
 
-        that.popup = new ui.Popup(that.ul, {
-            anchor: that.element
-        });
-
-        that._dataSource();
-
-        that.bind([CHANGE], that.options);
-
-        that.template = kendo.template(that.options.template);
-
-        that.ul
-            .mousedown(function() {
-                setTimeout(function() {
-                    clearTimeout(that._bluring);
-                }, 0);
-            })
-            .delegate("li", "click", proxy(that._click, that));
-
-        that.element
-            .attr("autocomplete", "off")
-            .bind({
-                keydown: proxy(that._keydown, that),
-                paste: proxy(that._search, that),
-                focus: function() {
-                    that.previous = that.value();
-                },
-                blur: function() {
-                    that._bluring = setTimeout(function() {
-                        that._blur();
-                    }, 100);
-                }
+            that.popup = new ui.Popup(that.ul, {
+                anchor: that.element
             });
-    }
 
-    AutoComplete.prototype = {
+            that._dataSource();
+
+            that.bind([CHANGE], that.options);
+
+            that.template = kendo.template(that.options.template);
+
+            that.ul
+                .mousedown(function() {
+                    setTimeout(function() {
+                        clearTimeout(that._bluring);
+                    }, 0);
+                })
+                .delegate("li", "click", proxy(that._click, that));
+
+            that.element
+                .attr("autocomplete", "off")
+                .bind({
+                    keydown: proxy(that._keydown, that),
+                    paste: proxy(that._search, that),
+                    focus: function() {
+                        that.previous = that.value();
+                    },
+                    blur: function() {
+                        that._bluring = setTimeout(function() {
+                            that._blur();
+                        }, 100);
+                    }
+                });
+        },
         options: {
             suggest: false,
             minLength: 1,
@@ -102,7 +101,7 @@
 
         refresh: function() {
             var that = this,
-                data = that.dataSource.view();
+            data = that.dataSource.view();
 
             that.ul[0].innerHTML = kendo.render(that.template, data);
 
@@ -113,7 +112,7 @@
             var that = this;
 
             that.dataSource = DataSource.create(that.options.dataSource || {})
-                                        .bind(CHANGE, proxy(that.refresh, that));
+            .bind(CHANGE, proxy(that.refresh, that));
         },
 
         _blur: function() {
@@ -131,8 +130,8 @@
 
         select: function(li) {
             var that = this,
-                separator = that.options.separator,
-                text;
+            separator = that.options.separator,
+            text;
 
             if (li && !li.hasClass(SELECTED)) {
                 text = li.text();
@@ -154,7 +153,7 @@
 
         _change: function() {
             var that = this,
-                value = that.value();
+            value = that.value();
 
             if (value !== that.previous) {
                 that.trigger(CHANGE);
@@ -199,9 +198,9 @@
 
         _keydown: function(e) {
             var that = this,
-                key = e.keyCode,
-                keys = kendo.keys
-                visible = that.popup.visible();
+            key = e.keyCode,
+            keys = kendo.keys
+            visible = that.popup.visible();
 
             if (key === keys.DOWN) {
                 if (visible) {
@@ -236,11 +235,11 @@
 
         search: function() {
             var that = this,
-                word = that.value(),
-                separator = that.options.separator,
-                length,
-                caret,
-                index;
+            word = that.value(),
+            separator = that.options.separator,
+            length,
+            caret,
+            index;
 
             that._current = null;
 
@@ -326,7 +325,7 @@
                 return element.value;
             }
         }
-    }
+    });
 
-    ui.plugin("AutoComplete", AutoComplete, Component);
+    ui.plugin("AutoComplete", AutoComplete);
 })(jQuery);

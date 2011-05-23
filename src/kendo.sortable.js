@@ -2,18 +2,18 @@
     var kendo = window.kendo
         Component = kendo.ui.Component;
 
-    function Sortable(elements, options) {
-        var that = this;
+    var Sortable = Component.extend({
+        init: function(elements, options) {
+            var that = this;
 
-        Component.apply(that, arguments);
-        that.mode = that.options.mode;
-        that.allowUnsort = that.options.allowUnsort;
-        that.dataSource = that.options.dataSource;
-        that.dataSource.bind("change", $.proxy(that.refresh, that));
-        that.element.click($.proxy(that._click, that));
-    }
+            Component.fn.init.apply(that, arguments);
+            that.mode = that.options.mode;
+            that.allowUnsort = that.options.allowUnsort;
+            that.dataSource = that.options.dataSource;
+            that.dataSource.bind("change", $.proxy(that.refresh, that));
+            that.element.click($.proxy(that._click, that));
+        },
 
-    Sortable.prototype = {
         options: {
             mode: "single",
             allowUnsort: true
@@ -50,8 +50,6 @@
         },
 
         _click: function(e) {
-            e.preventDefault();
-
             var currentTarget = $(e.currentTarget),
                 field = currentTarget.data("field"),
                 dir = currentTarget.data("dir"),
@@ -82,9 +80,11 @@
                 }
             }
 
+            e.preventDefault();
+
             this.dataSource.sort(sort);
         }
-    }
+    });
 
-    kendo.ui.plugin("Sortable", Sortable, Component);
+    kendo.ui.plugin("Sortable", Sortable);
 })(jQuery, window);
