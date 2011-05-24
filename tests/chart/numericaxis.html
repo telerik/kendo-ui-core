@@ -292,7 +292,7 @@
             (function() {
                 var numericAxis;
 
-                module("Slots / Horizontal", {
+                module("Slots / Vertical", {
                     setup: function() {
                         numericAxis = new Chart.NumericAxis(0, 1);
                         numericAxis.updateLayout(chartBox);
@@ -306,7 +306,7 @@
 
                 test("positions slot for [0.5, 1]", function() {
                     var slot = numericAxis.getSlot(0.5, 1);
-                    same([slot.y1, slot.y2], [106, 348.5]);
+                    same([slot.y1, slot.y2], [106, 348.5], TOLERANCE);
                 });
 
                 test("slot width is 0", function() {
@@ -314,9 +314,51 @@
                     same(slot.width(), 0);
                 });
 
-                test("assumes missing value to be the axis crossing", function() {
+                test("assumes missing value to be 0", function() {
                     var slot = numericAxis.getSlot(0.5);
                     same([slot.y1, slot.y2], [348.5, 591]);
+                });
+
+                test("a value capped to minimum value", function() {
+                    var slot = numericAxis.getSlot(-1000, 1);
+                    same([slot.y1, slot.y2], [106, 591], TOLERANCE);
+                });
+
+                test("b value capped to maximum value", function() {
+                    var slot = numericAxis.getSlot(0, 1000);
+                    same([slot.y1, slot.y2], [9, 591]);
+                });
+
+                module("Slots / Vertical / Negative Values", {
+                    setup: function() {
+                        numericAxis = new Chart.NumericAxis(-1, 0);
+                        numericAxis.updateLayout(chartBox);
+                    }
+                });
+
+                test("positions slot for [-0.5, 0]", function() {
+                    var slot = numericAxis.getSlot(-0.5, 0);
+                    same([slot.y1, slot.y2], [9, 251.5]);
+                });
+
+                test("positions slot for [-1, -0.5]", function() {
+                    var slot = numericAxis.getSlot(-1, -0.5);
+                    same([slot.y1, slot.y2], [251.5, 494]);
+                });
+
+                test("assumes missing value to be 0", function() {
+                    var slot = numericAxis.getSlot(-0.5);
+                    same([slot.y1, slot.y2], [9, 251.5]);
+                });
+
+                test("a value capped to maximum value", function() {
+                    var slot = numericAxis.getSlot(1000, -1);
+                    same([slot.y1, slot.y2], [9, 494]);
+                });
+
+                test("b value capped to minimum value", function() {
+                    var slot = numericAxis.getSlot(0, -1000);
+                    same([slot.y1, slot.y2], [9, 591]);
                 });
 
             })();

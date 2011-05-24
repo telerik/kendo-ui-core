@@ -406,9 +406,7 @@
             majorUnit: 0.1,
             majorTicks: "outside",
             majorTickSize: 4,
-            axisCrossingValue: 0,
-
-            _snapLineToBottom: false
+            axisCrossingValue: 0
         },
 
         init: function() {
@@ -594,9 +592,7 @@
 
             if (children.length > 1) {
                 marginTop = children[0].box.height() / 2;
-                if (!axis.options._snapLineToBottom) {
-                    marginBottom = marginTop;
-                }
+                marginBottom = children[children.length - 1].box.height() / 2;
             }
 
             return new Box( box.x2, box.y1 + marginTop,
@@ -609,9 +605,10 @@
                 options = axis.options,
                 lineBox = axis.getAxisLineBox(),
                 scale = lineBox.height() / (options.max - options.min),
-                b = arguments.length == 2 ? b : options.axisCrossingValue,
-                y1 = lineBox.y2 - scale * Math.max(a, b),
-                y2 = lineBox.y2 - scale * Math.min(a, b);
+                a = Math.max(Math.min(a, options.max), options.min),
+                b = Math.max(Math.min(b || 0, options.max), options.min),
+                y1 = lineBox.y1 + scale * (options.max - Math.max(a, b)),
+                y2 = lineBox.y1 + scale * (options.max - Math.min(a, b));
 
             return new Box(lineBox.x1, y1, lineBox.x1, y2);
         }
@@ -658,12 +655,12 @@
             }
 
             axis.box = new Box(
-                targetBox.x1, targetBox.y2 - maxLabelHeight - options.majorTickLength,
-                targetBox.x2, targetBox.y2
+                targetBox.x1, targetBox.y1,
+                targetBox.x2, targetBox.y1 + options.majorTickLength + maxLabelHeight
             );
 
             var majorDivisions = axis.getMajorTickPositions(),
-                labelY = targetBox.y2 - maxLabelHeight;
+                labelY = targetBox.y1 + options.majorTickLength;
             for (var i = 0; i < children.length; i++) {
                 var label = children[i],
                     currentDivision = majorDivisions[i],
@@ -1038,24 +1035,32 @@
             plotArea.box = targetBox;
 
             axisY.updateLayout(targetBox);
+            axisX.updateLayout(targetBox);
+
+            var crossingValue = axisY.options.axisCrossingValue,
+                axisCrossing = axisY.getSlot(crossingValue, crossingValue);
+
             axisX.updateLayout(new Box(
-                axisY.box.x2, targetBox.y1,
-                targetBox.x2, targetBox.y2
+                axisCrossing.x1, axisCrossing.y1,
+                axisX.box.x2, axisCrossing.y2
             ));
 
-            axisY.options._snapLineToBottom = true;
+            var axisBox = targetBox.clone().wrap(axisY.box).wrap(axisX.box);
+            var overflowY = axisBox.height() - targetBox.height();
+
             axisY.updateLayout(new Box(
-                targetBox.x1, targetBox.y1,
-                targetBox.x2, axisX.box.y1
+                axisY.box.x1, axisY.box.y1,
+                axisY.box.x2, axisY.box.y2 - overflowY
             ));
 
-            var chartBox = new Box(
-                axisY.box.x2, targetBox.y1,
-                targetBox.x2, axisX.box.y1
-            );
+            var overflowX = axisBox.width() - targetBox.width();
+            axisX.updateLayout(new Box(
+                axisX.box.x1, axisX.box.y1 - overflowY,
+                axisX.box.x2, axisX.box.y2 - overflowY
+            ));
 
             for (var i = 0; i < charts.length; i++) {
-                charts[i].updateLayout(chartBox);
+                charts[i].updateLayout(targetBox);
             }
         }
     });

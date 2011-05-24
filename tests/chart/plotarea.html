@@ -72,14 +72,22 @@
                     ok($.inArray(axisX, plotArea.children));
                 });
 
-                test("aligns Y-Axis above X-Axis", function() {
-                    plotArea.updateLayout(chartBox);
-                    equal(axisY.box.y2, axisX.box.y1);
-                });
-
                 test("aligns X-Axis next to Y-Axis", function() {
                     plotArea.updateLayout(chartBox);
                     equal(axisX.box.x1, axisY.box.x2);
+                });
+
+                test("aligns X-Axis at the Y-Axis crossing value", function() {
+                    plotArea.updateLayout(chartBox);
+                    var crossingY = axisY.getSlot(axisY.options.axisCrossingValue).y1;
+                    equal(axisX.box.y1, crossingY);
+                });
+
+                test("aligns X-Axis at the Y-Axis crossing value (non-default)", function() {
+                    axisY.options.axisCrossingValue = 100;
+                    plotArea.updateLayout(chartBox);
+                    var crossingY = axisY.getSlot(axisY.options.axisCrossingValue).y1;
+                    equal(axisX.box.y1, crossingY);
                 });
 
                 test("creates bar chart", function() {
@@ -114,11 +122,6 @@
                     );
                 });
 
-                test("aligns series box to axises", function() {
-                    plotArea.updateLayout(chartBox);
-                    same([barChart.box.x1, barChart.box.y1, barChart.box.x2, barChart.box.y2],
-                         [axisY.box.x2, chartBox.y1, chartBox.x2, axisX.box.y1]);
-                });
             })();
         </script>
 
