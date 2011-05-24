@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Model Initialization</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.model.js"></script>
+        <link rel="stylesheet" href="../qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Model Initialization</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var Model = kendo.data.Model;
+
+            module("kendo.data.Model initialization", {
+                setup: function() {
+                },
+                teardown: function() {
+                }
+            });
+
+            test("define returns a new model which is subclass of Model", function() {
+                var MyModel = Model.define();
+                ok(new MyModel instanceof Model);
+            });
+
+            test("define assigns data", function() {
+                var MyModel = Model.define(),
+                    model = new MyModel({ foo: "bar"});
+
+                equal(model.data.foo, "bar");
+            });
+
+            test("data is not shared", function() {
+                var MyModel = Model.define(),
+                    data = {},
+                    model = new MyModel(data);
+
+                ok(model.data !== data);
+            });
+
+            test("data is deep copied", function() {
+                var MyModel = Model.define(),
+                    data = { foo: [] },
+                    model = new MyModel(data);
+
+                ok(model.data.foo !== data.foo);
+            });
+      </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>
