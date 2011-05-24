@@ -13,7 +13,9 @@
     <body>
         <input type="button" id="button" value="Click me!" onclick="createWindow()" />
 
-        <div id="window"></div>
+        <div id="window">
+            foo
+        </div>
         <div id="window1"></div>
 
         <script type="text/javascript">
@@ -22,8 +24,7 @@
             }
 
             $(document).ready(function() {
-                $("<div></div>").kendoWindow({ modal: true }).data("kendoWindow").center().close();
-                $("<div></div>").kendoWindow({ modal: true }).data("kendoWindow").center().close();
+                $("#window").kendoWindow({ modal: true }).data("kendoWindow").center().close();
             });
         </script>
     </body>
