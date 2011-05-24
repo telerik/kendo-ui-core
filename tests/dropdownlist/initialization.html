@@ -66,28 +66,36 @@
                ok(!input.is(":visible"));
            });
 
-           test("_text should create text div for item.Text", function() {
+           test("set tabIndex to the wrapper", function() {
                input.kendoDropDownList();
 
-               var text = input.data("kendoDropDownList").text;
+               var wrapper = input.data("kendoDropDownList").wrapper;
 
-               ok(text.is("span"));
-               ok(text.hasClass("t-input"));
+               equal(wrapper.attr("tabIndex"), 0);
            });
 
-           test("_text should wrap span with div", function(){
+           test("create text span", function() {
                input.kendoDropDownList();
 
-               var dropDownWrapper = input.data("kendoDropDownList").text.parent();
+               var span = input.data("kendoDropDownList").span;
+
+               ok(span.is("span"));
+               ok(span.hasClass("t-input"));
+           });
+
+           test("text span should wrapped with div", function(){
+               input.kendoDropDownList();
+
+               var dropDownWrapper = input.data("kendoDropDownList").span.parent();
 
                ok(dropDownWrapper.is("div"));
                ok(dropDownWrapper.hasClass("t-dropdown-wrap t-state-default"));
            });
 
-           test("_text should include arrow after span.t-input", function(){
+           test("include arrow after span.t-input", function(){
                input.kendoDropDownList();
 
-               var spanArrow = input.data("kendoDropDownList").text.next(),
+               var spanArrow = input.data("kendoDropDownList").span.next(),
                    arrow = spanArrow.children().eq(0);
 
                ok(spanArrow.is("span"));
@@ -209,20 +217,6 @@
                 dropdownlist.wrapper.click();
                 stop(300);
            });
-
-          // test("clicks wrapper should toggle popup", function() {
-          //     var dropdownlist = new DropDownList(input, [{Text: "foo", Value: 1}, {Text:2, Value:2}]);
-          //     dropdownlist.ul.append("<li></li>");
-          //     dropdownlist.popup.open();
-          //     dropdownlist.popup.bind("close", function(){
-          //          ok(true);
-          //          start();
-          //     });
-
-          //     dropdownlist.wrapper.click();
-          //     stop(800);
-          // });
-
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

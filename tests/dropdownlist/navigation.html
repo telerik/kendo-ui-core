@@ -20,9 +20,16 @@
         <ol id="qunit-tests"></ol>
         <script>
             var DropDownList = kendo.ui.DropDownList,
+                data = [{Text: "Foo", Value: 1}, {Text:"Bar", Value:2}],
+                SELECTED = "t-state-selected",
+                keys = kendo.keys,
                 input;
 
-            module("kendo.ui.DropDownList initialization", {
+            $.fn.press = function(key) {
+                return this.trigger({ type: "keydown", keyCode: key } );
+            }
+
+            module("kendo.ui.DropDownList selection", {
                 setup: function() {
                     input = $("<input />").appendTo(document.body);
                 },
@@ -41,6 +48,191 @@
                 }
             });
 
+            test("always select first item on dataSource change", function() {
+                var dropdownlist = new DropDownList(input, [{Text: "foo", Value: 1}, {Text:2, Value:2}]);
+
+                dropdownlist.dataSource.read();
+
+                ok(dropdownlist.ul.children().eq(0).hasClass(SELECTED));
+           });
+
+            test("click first li should update text and value", function() {
+                var dropdownlist = input.kendoDropDownList(data).data("kendoDropDownList");
+                dropdownlist.dataSource.read();
+                dropdownlist.ul.children().eq(1).click();
+
+                equal(dropdownlist.text(), data[1].Text);
+                equal(dropdownlist.value(), data[1].Value);
+            });
+
+            test("value should be set to item.Text if no item.Value", function() {
+                var localData = [{Text: "Foo", Value: 1}, {Text:"Bar"}],
+                    dropdownlist = input.kendoDropDownList(localData).data("kendoDropDownList");
+
+                dropdownlist.dataSource.read();
+                dropdownlist.ul.children().eq(1).click();
+
+                equal(dropdownlist.text(), data[1].Text);
+                equal(dropdownlist.value(), data[1].Text);
+            });
+
+            test("select li should update text and value", function() {
+                var dropdownlist = input.kendoDropDownList(data).data("kendoDropDownList");
+
+                dropdownlist.dataSource.read();
+                dropdownlist.select(dropdownlist.ul.children().eq(1));
+
+                equal(dropdownlist.text(), data[1].Text);
+                equal(dropdownlist.value(), data[1].Value);
+            });
+
+            test("click li should close popup", function() {
+                var dropdownlist = input.kendoDropDownList(data).data("kendoDropDownList");
+
+                dropdownlist.popup.bind("close", function(){
+                    ok(true);
+                    start();
+                });
+
+                dropdownlist.dataSource.read();
+                dropdownlist.ul.children().eq(1).click();
+
+                stop(400);
+            });
+
+            test("set text to white spaces should convert it to &nbsp;", function() {
+                var dropdownlist = input.kendoDropDownList(data).data("kendoDropDownList");
+
+                dropdownlist.text("   ");
+
+                equal(dropdownlist.text(), "&nbsp;&nbsp;");
+            });
+
+            test("select should select li by index", function() {
+                var dropdownlist = input.kendoDropDownList(data).data("kendoDropDownList");
+
+                dropdownlist.dataSource.read();
+                dropdownlist.select(1);
+
+                equal(dropdownlist.text(), data[1].Text);
+                equal(dropdownlist.value(), data[1].Value);
+            });
+
+            test("selected should be persisted", function(){
+                var dropdownlist = input.kendoDropDownList(data).data("kendoDropDownList");
+
+                dropdownlist.dataSource.read();
+                dropdownlist.select(1);
+
+                dropdownlist.wrapper.click();
+
+                ok(dropdownlist.ul.children().eq(1).hasClass(SELECTED));
+            });
+
+            test("only one li should be selected at a time", function(){
+                var dropdownlist = input.kendoDropDownList(data).data("kendoDropDownList");
+
+                dropdownlist.dataSource.read();
+                dropdownlist.select(1);
+                dropdownlist.select(0);
+
+                dropdownlist.wrapper.click();
+
+                equal(dropdownlist.ul.children("." + SELECTED).length, 1);
+            });
+
+            test("press down arrow should focus next item and update text and value", function() {
+                var dropdownlist = input.kendoDropDownList(data).data("kendoDropDownList");
+
+                dropdownlist.dataSource.read();
+
+                dropdownlist.wrapper.focus().press(keys.DOWN);
+
+                ok(dropdownlist.ul.children().eq(1).hasClass(SELECTED));
+                equal(dropdownlist.text(), data[1].Text);
+                equal(dropdownlist.value(), data[1].Value);
+
+            });
+
+            test("press down arrow when last item is selected should not do anything", function() {
+                var dropdownlist = input.kendoDropDownList(data).data("kendoDropDownList");
+
+                dropdownlist.dataSource.read();
+                dropdownlist.select(dropdownlist.ul.children(":last"));
+                dropdownlist.wrapper.focus().press(keys.DOWN);
+
+                ok(dropdownlist.ul.children().eq(1).hasClass(SELECTED));
+                equal(dropdownlist.text(), data[1].Text);
+                equal(dropdownlist.value(), data[1].Value);
+
+            });
+
+            test("press up arrow should focus prev item and update text and value", function() {
+                var dropdownlist = input.kendoDropDownList(data).data("kendoDropDownList");
+
+                dropdownlist.dataSource.read();
+
+                dropdownlist.select(1);
+                dropdownlist.wrapper.focus().press(keys.UP);
+
+                ok(dropdownlist.ul.children().eq(0).hasClass(SELECTED));
+                equal(dropdownlist.text(), data[0].Text);
+                equal(dropdownlist.value(), data[0].Value);
+
+            });
+
+            test("press up arrow when first item is selected should not do anything", function() {
+                var dropdownlist = input.kendoDropDownList(data).data("kendoDropDownList");
+
+                dropdownlist.dataSource.read();
+                dropdownlist.wrapper.focus().press(keys.UP);
+
+                ok(dropdownlist.ul.children().eq(0).hasClass(SELECTED));
+                equal(dropdownlist.text(), data[0].Text);
+                equal(dropdownlist.value(), data[0].Value);
+            });
+
+            test("press home should focus first item and update text and value", function() {
+                var dropdownlist = input.kendoDropDownList(data).data("kendoDropDownList");
+
+                dropdownlist.dataSource.read();
+
+                dropdownlist.select(1);
+                dropdownlist.wrapper.focus().press(keys.HOME);
+
+                ok(dropdownlist.ul.children().eq(0).hasClass(SELECTED));
+                equal(dropdownlist.text(), data[0].Text);
+                equal(dropdownlist.value(), data[0].Value);
+
+            });
+
+            test("press end should focus last item and update text and value", function() {
+                var dropdownlist = input.kendoDropDownList(data).data("kendoDropDownList");
+
+                dropdownlist.dataSource.read();
+
+                dropdownlist.select(0);
+                dropdownlist.wrapper.focus().press(keys.END);
+
+                ok(dropdownlist.ul.children().eq(1).hasClass(SELECTED));
+                equal(dropdownlist.text(), data[1].Text);
+                equal(dropdownlist.value(), data[1].Value);
+
+            });
+
+            test("press enter should close popup when no change in selection", function() {
+                var dropdownlist = input.kendoDropDownList(data).data("kendoDropDownList");
+
+                dropdownlist.dataSource.read();
+
+                dropdownlist.select(0);
+                dropdownlist.wrapper.focus().press(keys.END);
+
+                ok(dropdownlist.ul.children().eq(1).hasClass(SELECTED));
+                equal(dropdownlist.text(), data[1].Text);
+                equal(dropdownlist.value(), data[1].Value);
+
+            });;
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
