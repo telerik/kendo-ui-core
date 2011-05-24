@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Model modified</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.model.js"></script>
+        <link rel="stylesheet" href="../qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Model.modified</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var Model = kendo.data.Model;
+
+            module("kendo.data.Model.modified", {
+                setup: function() {
+                },
+                teardown: function() {
+                }
+            });
+
+            test("modified returns null if there are no changes", function() {
+                var m = new Model();
+
+                ok(m.modified() === null);
+            });
+
+            test("modified returns the changed values", function() {
+                var m = new Model();
+
+                m.set("foo", "bar");
+                equal(m.modified().foo, "bar");
+            });
+
+            test("modified returns the only the changed values", function() {
+                var m = new Model({
+                    bar: "bar"
+                });
+
+                m.set("foo", "foo");
+                equal(m.modified().bar, undefined);
+            });
+
+      </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>
