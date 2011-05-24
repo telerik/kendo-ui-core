@@ -24,26 +24,20 @@
     function Class() {
     }
 
-    Class.prototype = {
-        init: noop
-    }
+    Class.extend = function(proto) {
+        var base = function() {},
+            subclass = function() {};
 
-    Class.extend = function(prototype) {
-        var extended = false,
-            base = this;
-
-        function Subclass() {
-            if (extended) {
-                this.init.apply(this, arguments);
-            }
+        if (proto && proto.init) {
+            subclass = proto.init;
         }
 
-        Subclass.fn = Subclass.prototype = extend(new base, prototype);
-        extended = true;
-        Subclass.extend = arguments.callee;
-        Subclass.constructor = Subclass;
+        base.prototype = this.prototype;
+        subclass.fn = subclass.prototype = extend(new base, proto);
+        subclass.fn.constructor = subclass;
+        subclass.extend = arguments.callee;
 
-        return Subclass;
+        return subclass;
     }
 
 //Observable ================================
