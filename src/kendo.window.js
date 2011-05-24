@@ -32,7 +32,9 @@
 
     var Window = Component.extend({
         init: function(element, options) {
-            var that = this;
+            var that = this,
+                windowActions = ".t-window-titlebar .t-window-action",
+                titleBar, offset;
 
             Component.fn.init.call(that, element, options);
             options = that.options;
@@ -42,7 +44,7 @@
                 Window.create(that.element, options);
                 that.wrapper = that.element.closest(TWINDOW);
 
-                var titleBar = that.wrapper.find(TWINDOWTITLEBAR);
+                titleBar = that.wrapper.find(TWINDOWTITLEBAR);
                 titleBar.css("margin-top", -titleBar.outerHeight());
 
                 that.wrapper.css("padding-top", titleBar.outerHeight());
@@ -61,8 +63,6 @@
             }
 
             if (!that.wrapper.parent().is("body")) {
-                var offset;
-
                 if (that.wrapper.is(":visible")) {
                     offset = that.wrapper.offset();
                     that.wrapper.css({ top: offset.top, left: offset.left });
@@ -70,8 +70,12 @@
                     that.wrapper.css({ visibility: "hidden", display: "" });
                     offset = that.wrapper.offset();
                     that.wrapper
-                        .css({ top: offset.top, left: offset.left })
-                        .css({ visibility: "visible", display: "none" });
+                        .css({
+                            top: offset.top,
+                            left: offset.left,
+                            visibility: "visible",
+                            display: "none"
+                        });
                 }
 
                 that.wrapper
@@ -79,20 +83,18 @@
                     .appendTo(document.body);
             }
 
-            if (that.options.modal) {
+            if (options.modal) {
                 that.overlay(that.wrapper.is(":visible")).css({ opacity: 0.5 });
             }
-
-            var windowActions = ".t-window-titlebar .t-window-action";
 
             that.wrapper
                 .delegate(windowActions, "mouseenter", function () { $(this).addClass('t-state-hover'); })
                 .delegate(windowActions, "mouseleave", function () { $(this).removeClass('t-state-hover'); })
                 .delegate(windowActions, "click", $.proxy(this.windowActionHandler, that));
 
-            if (that.options.resizable) {
+            if (options.resizable) {
                 that.wrapper
-                    .delegate(TWINDOWTITLEBAR, "dblclick", $.proxy(this.toggleMaximization, that))
+                    .delegate(TWINDOWTITLEBAR, "dblclick", $.proxy(that.toggleMaximization, that))
                     .append(Window.getResizeHandlesHtml());
 
                 fixIE6Sizing(that.wrapper);
@@ -100,71 +102,24 @@
                 that.resizing = new WindowResizing(that);
             }
 
-            if (this.options.draggable) {
-                (function(wnd){
-                    function dragstart(e) {
-                        wnd.initialWindowPosition = wnd.wrapper.position();
+            if (options.draggable) {
+                that.dragging = new WindowDragging(that);
+            }
 
-                        wnd.startPosition = {
-                            left: e.pageX - wnd.initialWindowPosition.left,
-                            top: e.pageY - wnd.initialWindowPosition.top
-                        };
+            that.bind([OPEN, ACTIVATE, CLOSE, REFRESH, RESIZE, ERROR, LOAD, MOVE], options);
 
-                        $(".t-resize-handle", wnd.wrapper).hide();
+            $(window).resize($.proxy(that.onDocumentResize, that));
 
-                        $("<div class='t-overlay' />").appendTo(wnd.wrapper);
+            if (isLocalUrl(that.contentUrl)) {
+                that.ajaxRequest();
+            }
 
-                        $(document.body).css("cursor", e.currentTarget.css("cursor"));
-                    }
-
-                    function drag(e) {
-                        var coordinates = {
-                            left: e.pageX - wnd.startPosition.left,
-                            top: Math.max(e.pageY - wnd.startPosition.top, 0)
-                        };
-
-                        $(wnd.wrapper).css(coordinates);
-                    }
-
-                    function dragend(e) {
-                        wnd.wrapper.find(".t-resize-handle")
-                        .show()
-                        .end()
-                        .find(TOVERLAY)
-                        .remove();
-
-                        $(document.body).css("cursor", "");
-
-                        if (e.keyCode == 27) {
-                            e.currentTarget.closest(TWINDOW).css(wnd.initialWindowPosition);
-                        }
-
-                        return false;
-                    }
-
-                    new Draggable(wnd.wrapper, {
-                        filter: TWINDOWTITLEBAR,
-                        group: wnd.wrapper.id + "-moving",
-                        dragstart: dragstart,
-                        drag: drag,
-                        dragend: dragend
-                    })
-                    })(that);
-                }
-
-                that.bind([OPEN, ACTIVATE, CLOSE, REFRESH, RESIZE, ERROR, LOAD, MOVE], options);
-
-                $(window).resize($.proxy(this.onDocumentResize, this));
-
-                if (isLocalUrl(this.contentUrl)) {
-                    this.ajaxRequest();
-                }
-
-                if (that.wrapper.is(":visible")) {
-                    that.trigger(OPEN);
-                    that.trigger(ACTIVATE);
-                }
+            if (that.wrapper.is(":visible")) {
+                that.trigger(OPEN);
+                that.trigger(ACTIVATE);
+            }
         },
+
         options: {
             animation: {
                 open: {
@@ -659,6 +614,62 @@
                 fixIE6Sizing(wrapper);
                 wrapper.css(wnd.initialCursorPosition)
                     .css(wnd.initialSize);
+            }
+
+            return false;
+        }
+    };
+
+    function WindowDragging(wnd) {
+        var that = this;
+
+        that.owner = wnd;
+        that._draggable = new Draggable(wnd.wrapper, {
+            filter: TWINDOWTITLEBAR,
+            group: wnd.wrapper.id + "-moving",
+            dragstart: $.proxy(that.dragstart, that),
+            drag: $.proxy(that.drag, that),
+            dragend: $.proxy(that.dragend, that)
+        });
+    }
+
+    WindowDragging.prototype = {
+        dragstart: function (e) {
+            var wnd = this.owner;
+
+            wnd.initialWindowPosition = wnd.wrapper.position();
+
+            wnd.startPosition = {
+                left: e.pageX - wnd.initialWindowPosition.left,
+                top: e.pageY - wnd.initialWindowPosition.top
+            };
+
+            $(".t-resize-handle", wnd.wrapper).hide();
+
+            $("<div class='t-overlay' />").appendTo(wnd.wrapper);
+
+            $(document.body).css("cursor", e.currentTarget.css("cursor"));
+        },
+        drag: function (e) {
+            var wnd = this.owner, 
+                coordinates = {
+                    left: e.pageX - wnd.startPosition.left,
+                    top: Math.max(e.pageY - wnd.startPosition.top, 0)
+                };
+
+            $(wnd.wrapper).css(coordinates);
+        },
+        dragend: function (e) {
+            var wnd = this.owner;
+
+            wnd.wrapper
+                .find(".t-resize-handle").show().end()
+                .find(TOVERLAY).remove();
+
+            $(document.body).css("cursor", "");
+
+            if (e.keyCode == 27) {
+                e.currentTarget.closest(TWINDOW).css(wnd.initialWindowPosition);
             }
 
             return false;
