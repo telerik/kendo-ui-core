@@ -20,7 +20,7 @@
                 var categoryAxis,
                     MAX_LABEL_HEIGHT = 17,
                     MAJOR_TICK_HEIGHT = 4,
-                    LINE_Y = chartBox.y2 - MAX_LABEL_HEIGHT - MAJOR_TICK_HEIGHT;
+                    LINE_Y = chartBox.y1;
 
                 function ViewFactoryStub() {
                     this.renderedLines = [];
@@ -64,7 +64,7 @@
                 });
 
                 var factoryStub;
-                module("Category Axis / Horizontal /Rendering", {
+                module("Category Axis / Horizontal / Rendering", {
                     setup: function() {
                         factoryStub = new ViewFactoryStub();
                         createCategoryAxis();
