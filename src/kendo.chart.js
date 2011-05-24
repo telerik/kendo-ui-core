@@ -851,7 +851,7 @@
         chart.plotArea = plotArea;
         chart.options = $.extend({}, chart.options, options);
         chart._seriesMin = Number.MAX_VALUE;
-        chart._seriesMax = Number.MIN_VALUE;
+        chart._seriesMax = - Number.MAX_VALUE;
 
         chart.init();
     }

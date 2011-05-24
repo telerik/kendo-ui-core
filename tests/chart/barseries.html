@@ -130,6 +130,14 @@
                     }
                 });
 
+                test("Reports minimum series value", function() {
+                    same(series.getValueRange().min, negativeSeries.data[1]);
+                });
+
+                test("Reports maximum series value", function() {
+                    same(series.getValueRange().max, negativeSeries.data[0]);
+                });
+
                 test("bar tops are aligned to category axis", function() {
                     var barsY = $.map(series.children, function(bar) {
                         return bar.box.y1;
