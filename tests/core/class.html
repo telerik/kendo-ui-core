@@ -37,7 +37,7 @@
 
             test("the constructor of the subclass is the subclass itself", function() {
                 var Subclass = Class.extend();
-                ok(Subclass.constructor === Subclass);
+                ok((new Subclass).constructor === Subclass);
             });
 
             test("subclass is instance of the grand parent class", function() {
@@ -84,17 +84,6 @@
                 new Subclass("foo", "bar");
                 equal(initArguments[0], "foo");
                 equal(initArguments[1], "bar");
-            });
-
-            test("base init is called when a subclass is instantiated", function() {
-                var initWasCalled = false, Subclass = Class.extend({
-                    init: function() {
-                        initWasCalled = true;
-                    }
-                }).extend();
-
-                new Subclass();
-                ok(initWasCalled);
             });
 
       </script>
