@@ -1,6 +1,6 @@
 (function($, window, undefined) {
     var kendo = window.kendo,
-        ui = kendo.ui;
+        ui = kendo.ui,
         extend = $.extend,
         Component = ui.Component,
         splitBarSize = 7,

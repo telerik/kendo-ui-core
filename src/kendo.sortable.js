@@ -1,5 +1,5 @@
 (function($, window) {
-    var kendo = window.kendo
+    var kendo = window.kendo,
         Component = kendo.ui.Component;
 
     var Sortable = Component.extend({
