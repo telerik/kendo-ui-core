@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Model get</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.model.js"></script>
+        <link rel="stylesheet" href="../qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Model.get</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var Model = kendo.data.Model;
+
+            module("kendo.data.Model.get", {
+                setup: function() {
+                },
+                teardown: function() {
+                }
+            });
+
+            test("get returns the value of the specified field", function() {
+                var m = new Model({
+                    foo: "bar"
+                });
+
+                equal(m.get("foo"), "bar");
+            });
+
+            test("get evaluates nested expression", function() {
+                var m = new Model({
+                    foo: {
+                        bar: "bar"
+                    }
+                });
+
+                equal(m.get("foo.bar"), "bar");
+            });
+
+      </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>

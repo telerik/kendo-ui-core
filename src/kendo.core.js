@@ -1212,6 +1212,18 @@
         format: format,
         formatters: formatters,
         htmlEncode: htmlEncode,
+        getter: function(expression) {
+            return new Function("d", "return d." + expression);
+        },
+        setter: function(expression) {
+            return new Function("d,value", "d." + expression + "=value");
+        },
+        accessor: function(expression) {
+            return {
+                get: kendo.getter(expression),
+                set: kendo.setter(expression)
+            };
+        },
         CultureInfo: CultureInfo
     });
 
