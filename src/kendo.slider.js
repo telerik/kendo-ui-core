@@ -64,36 +64,76 @@
         that.bind([LOAD, CHANGE, SLIDE], options);
     }
 
-    function Slider(element, options) {
-        var that = this;
-        Component.apply(that, arguments);
-        options = that.options;
-        initSlider.call(that);
+    function createWrapper (options, element, isHorizontal) {
+        var orientationCssClass = isHorizontal ? " t-slider-horizontal" : " t-slider-vertical",
+            style = options.style ? options.style : element.attr("style"),
+            cssClasses = element.attr("class") ? (" " + element.attr("class")) : "",
+            tickPlacementCssClass = "";
 
-        that._setValueInRange(that.options.val);
+        if (options.tickPlacement == "bottomRight") {
+            tickPlacementCssClass = " t-slider-bottomright";
+        } else if (options.tickPlacement == "topLeft") {
+            tickPlacementCssClass = " t-slider-topleft";
+        }
 
-        var dragHandle = that.wrapper.find(DRAGHANDLE_SELECTOR);
+        style = style ? " style='" + style + "'" : "";
 
-        new Slider.Selection(dragHandle, that, that.options);
-        new Slider.Drag(dragHandle, "", that, that.options);
+        return "<div class='t-widget t-slider" + orientationCssClass + cssClasses + "'" + style + ">" +
+               "<div class='t-slider-wrap" + (options.showButtons ? " t-slider-buttons" : "") + tickPlacementCssClass +
+               "'></div></div>";
     }
 
-    var methods = {
-        _setTrackDivWidth: _setTrackDivWidth,
-        _setItemsWidth: _setItemsWidth,
-        _setItemsTitle: _setItemsTitle,
-        _setItemsLargeTick: _setItemsLargeTick,
-        _calculateItemsWidth: _calculateItemsWidth,
-        _roudWidths: _roudWidths,
-        _addAdditionalSize: _addAdditionalSize,
-        _calculateSteps: _calculateSteps,
-        _getValueFromPosition: _getValueFromPosition,
-        _getDragableArea: _getDragableArea,
-        _createHtml: _createHtml
-    };
+    function createButton (options, type, isHorizontal) {
+        var buttonCssClass = "";
 
-    extend(Slider.prototype, methods);
-    extend(RangeSlider.prototype, methods);
+        if (type == "increase") {
+            buttonCssClass = isHorizontal ? "t-arrow-next" : "t-arrow-up";
+        } else {
+            buttonCssClass = isHorizontal ? "t-arrow-prev" : "t-arrow-down";
+        }
+
+        return "<a class='t-button t-button-" + type + "'><span class='t-icon " + buttonCssClass +
+               "' title='" + options[type + "ButtonTitle"] + "'>" + options[type + "ButtonTitle"] + "</span></a>";
+    }
+
+    function createSliderItems (options, distance) {
+        var result = "<ul class='t-reset t-slider-items'>",
+            count = math.floor((distance / options.smallStep).toFixed(3), 10) + 1;
+
+        for(i = 0; i < count; i++) {
+            result += "<li class='t-tick'>&nbsp;</li>";
+        }
+
+        result += "</ul>";
+
+        return result;
+    }
+
+    function createTrack (element) {
+        var dragHandleCount = element.is("input") ? 1 : 2;
+
+        return "<div class='t-slider-track'><div class='t-slider-selection'><!-- --></div>" +
+               "<a href='javascript:void(0)' class='t-draghandle' title='Drag'>Drag</a>" +
+               (dragHandleCount > 1 ? "<a href='javascript:void(0)' class='t-draghandle' title='Drag'>Drag</a>" : "") +
+               "</div>";
+    }
+
+    function _createHtml () {
+        var that = this,
+            element = that.element,
+            options = that.options;
+
+        element.val(options.val);
+
+        element.wrap(createWrapper(options, element, that._isHorizontal)).hide();
+
+        if (options.showButtons) {
+            element.before(createButton(options, "increase", that._isHorizontal))
+                   .before(createButton(options, "decrease", that._isHorizontal));
+        }
+
+        element.before(createTrack(element));
+    }
 
     var defaultOptions = {
         enabled: true,
@@ -105,6 +145,197 @@
         tickPlacement: "both",
         tooltip: { enabled: true, format: "{0}" }
     };
+
+    var Slider = Component.extend({
+        init: function(element, options) {
+            var that = this;
+            Component.fn.init.call(that, element, options);
+            options = that.options;
+            initSlider.call(that);
+
+            that._setValueInRange(that.options.val);
+
+            var dragHandle = that.wrapper.find(DRAGHANDLE_SELECTOR);
+
+            new Slider.Selection(dragHandle, that, that.options);
+            new Slider.Drag(dragHandle, "", that, that.options);
+        },
+
+        options: extend({
+            val: 0,
+            showButtons: true,
+            increaseButtonTitle: "Increase",
+            decreaseButtonTitle: "Decrease"
+        }, defaultOptions),
+
+        enable: function () {
+            var that = this,
+                options = that.options;
+
+            that.wrapper
+                .removeAttr("disabled")
+                .removeClass("t-state-disabled")
+                .addClass("t-state-default");
+
+            var clickHandler = function (e) {
+                var mousePosition = that._isHorizontal ? e.pageX : e.pageY,
+                    dragableArea = that._getDragableArea();
+
+                that._update(that._getValueFromPosition(mousePosition, dragableArea));
+            }
+
+            that.wrapper
+                .find(TICK_SELECTOR).bind(CLICK, clickHandler)
+                .end()
+                .find(TRACK_SELECTOR).bind(CLICK, clickHandler);
+
+            var move = proxy(function (e, sign) {
+                var index = math.ceil(options.val / options.smallStep);
+
+                if (index >= that._valuesArray.length - 1 || index <= 0) {
+                    this._setValueInRange(options.val + (sign * options.smallStep));
+                } else {
+                    this._setValueInRange(this._valuesArray[index + (sign * 1)]);
+                }
+            }, that);
+
+            if (options.showButtons) {
+                var mouseDownHandler = proxy(function(e, sign) {
+                    if (e.which == 1) {
+                        move(e, sign)
+
+                        this.timeout = setTimeout(proxy(function () {
+                            this.timer = setInterval(function () {
+                                move(e, sign)
+                            }, 60);
+                        }, this), 200);
+                    }
+                }, that);
+
+                that.wrapper.find(".t-button")
+                    .bind("mouseup", proxy(function (e) {
+                        this._clearTimer();
+                    }, that))
+                    .bind("mouseover", function (e) {
+                        $(e.currentTarget).addClass("t-state-hover");
+                    })
+                    .bind("mouseout", proxy(function (e) {
+                        $(e.currentTarget).removeClass("t-state-hover");
+                        this._clearTimer();
+                    }, that))
+                    .eq(0)
+                    .bind("mousedown", proxy(function (e) {
+                        mouseDownHandler(e, 1);
+                    }, that))
+                    .end()
+                    .eq(1)
+                    .bind("mousedown", proxy(function (e) {
+                        mouseDownHandler(e, -1);
+                    }, that));
+            }
+
+            that.wrapper
+                .find(DRAGHANDLE_SELECTOR).bind({
+                    keydown: proxy(this._keydown, that)
+                });
+
+            options.enabled = true;
+        },
+
+        disable: function () {
+            var that = this;
+
+            that.wrapper
+                .attr("disabled", "disabled")
+                .removeClass("t-state-default")
+                .addClass("t-state-disabled");
+
+            that.wrapper
+                .find(".t-button")
+                .unbind("mousedown")
+                .bind("mousedown", false)
+                .unbind("mouseup")
+                .bind("mouseup", false)
+                .unbind("mouseleave")
+                .bind("mouseleave", false)
+                .unbind("mouseover")
+                .bind("mouseover", false);
+
+            that.wrapper
+                .find(TICK_SELECTOR).unbind(CLICK)
+                .end()
+                .find(TRACK_SELECTOR).unbind(CLICK);
+
+            that.wrapper
+                .find(DRAGHANDLE_SELECTOR)
+                .unbind("keydown")
+                .bind("keydown", false)
+
+            that.options.enabled = false;
+        },
+
+        _update: function (val) {
+            var that = this,
+                change = that.value() != val;
+
+            that.value(val);
+
+            if (change) {
+                that.trigger(CHANGE, { value: that.options.val });
+            }
+        },
+
+        value: function (val) {
+            var that = this,
+                options = that.options;
+
+            val = parseFloat(parseFloat(val, 10).toFixed(3), 10);
+            if (isNaN(val)) {
+                return options.val;
+            }
+
+            if (val >= options.min && val <= options.max) {
+                if (options.val != val) {
+                    that.element.val(val);
+                    options.val = val;
+                    that.refresh();
+                }
+            }
+        },
+
+        refresh: function () {
+            this.trigger(MOVE_SELECTION, { value: this.options.val });
+        },
+
+        _clearTimer: function (e) {
+            clearTimeout(this.timeout);
+            clearInterval(this.timer);
+        },
+
+        _keydown: function (e) {
+            var that = this;
+
+            if (e.keyCode in that._keyMap) {
+                that._setValueInRange(that._keyMap[e.keyCode](that.options.val));
+                e.preventDefault();
+            }
+        },
+
+        _setValueInRange: function (val) {
+            var that = this,
+                options = that.options;
+
+            val = parseFloat(parseFloat(val, 10).toFixed(3), 10);
+            if (isNaN(val)) {
+                that._update(options.min);
+                return;
+            }
+
+            val = math.max(val, options.min);
+            val = math.min(val, options.max);
+            that._update(val);
+        }
+    });
 
     function _setTrackDivWidth () {
         var that = this,
@@ -323,183 +554,6 @@
         }
     }
 
-    extend(Slider.prototype, {
-        options: extend({
-            val: 0,
-            showButtons: true,
-            increaseButtonTitle: "Increase",
-            decreaseButtonTitle: "Decrease"
-        }, defaultOptions),
-
-        enable: function () {
-            var that = this,
-                options = that.options;
-
-            that.wrapper
-                .removeAttr("disabled")
-                .removeClass("t-state-disabled")
-                .addClass("t-state-default");
-
-            var clickHandler = function (e) {
-                var mousePosition = that._isHorizontal ? e.pageX : e.pageY,
-                    dragableArea = that._getDragableArea();
-
-                that._update(that._getValueFromPosition(mousePosition, dragableArea));
-            }
-
-            that.wrapper
-                .find(TICK_SELECTOR).bind(CLICK, clickHandler)
-                .end()
-                .find(TRACK_SELECTOR).bind(CLICK, clickHandler);
-
-            var move = proxy(function (e, sign) {
-                var index = math.ceil(options.val / options.smallStep);
-
-                if (index >= that._valuesArray.length - 1 || index <= 0) {
-                    this._setValueInRange(options.val + (sign * options.smallStep));
-                } else {
-                    this._setValueInRange(this._valuesArray[index + (sign * 1)]);
-                }
-            }, that);
-
-            if (options.showButtons) {
-                var mouseDownHandler = proxy(function(e, sign) {
-                    if (e.which == 1) {
-                        move(e, sign)
-
-                        this.timeout = setTimeout(proxy(function () {
-                            this.timer = setInterval(function () {
-                                move(e, sign)
-                            }, 60);
-                        }, this), 200);
-                    }
-                }, that);
-
-                that.wrapper.find(".t-button")
-                    .bind("mouseup", proxy(function (e) {
-                        this._clearTimer();
-                    }, that))
-                    .bind("mouseover", function (e) {
-                        $(e.currentTarget).addClass("t-state-hover");
-                    })
-                    .bind("mouseout", proxy(function (e) {
-                        $(e.currentTarget).removeClass("t-state-hover");
-                        this._clearTimer();
-                    }, that))
-                    .eq(0)
-                    .bind("mousedown", proxy(function (e) {
-                        mouseDownHandler(e, 1);
-                    }, that))
-                    .end()
-                    .eq(1)
-                    .bind("mousedown", proxy(function (e) {
-                        mouseDownHandler(e, -1);
-                    }, that));
-            }
-
-            that.wrapper
-                .find(DRAGHANDLE_SELECTOR).bind({
-                    keydown: proxy(this._keydown, that)
-                });
-
-            options.enabled = true;
-        },
-
-        disable: function () {
-            var that = this;
-
-            that.wrapper
-                .attr("disabled", "disabled")
-                .removeClass("t-state-default")
-                .addClass("t-state-disabled");
-
-            that.wrapper
-                .find(".t-button")
-                .unbind("mousedown")
-                .bind("mousedown", false)
-                .unbind("mouseup")
-                .bind("mouseup", false)
-                .unbind("mouseleave")
-                .bind("mouseleave", false)
-                .unbind("mouseover")
-                .bind("mouseover", false);
-
-            that.wrapper
-                .find(TICK_SELECTOR).unbind(CLICK)
-                .end()
-                .find(TRACK_SELECTOR).unbind(CLICK);
-
-            that.wrapper
-                .find(DRAGHANDLE_SELECTOR)
-                .unbind("keydown")
-                .bind("keydown", false)
-
-            that.options.enabled = false;
-        },
-
-        _update: function (val) {
-            var that = this,
-                change = that.value() != val;
-
-            that.value(val);
-
-            if (change) {
-                that.trigger(CHANGE, { value: that.options.val });
-            }
-        },
-
-        value: function (val) {
-            var that = this,
-                options = that.options;
-
-            val = parseFloat(parseFloat(val, 10).toFixed(3), 10);
-            if (isNaN(val)) {
-                return options.val;
-            }
-
-            if (val >= options.min && val <= options.max) {
-                if (options.val != val) {
-                    that.element.val(val);
-                    options.val = val;
-                    that.refresh();
-                }
-            }
-        },
-
-        refresh: function () {
-            this.trigger(MOVE_SELECTION, { value: this.options.val });
-        },
-
-        _clearTimer: function (e) {
-            clearTimeout(this.timeout);
-            clearInterval(this.timer);
-        },
-
-        _keydown: function (e) {
-            var that = this;
-
-            if (e.keyCode in that._keyMap) {
-                that._setValueInRange(that._keyMap[e.keyCode](that.options.val));
-                e.preventDefault();
-            }
-        },
-
-        _setValueInRange: function (val) {
-            var that = this,
-                options = that.options;
-
-            val = parseFloat(parseFloat(val, 10).toFixed(3), 10);
-            if (isNaN(val)) {
-                that._update(options.min);
-                return;
-            }
-
-            val = math.max(val, options.min);
-            val = math.min(val, options.max);
-            that._update(val);
-        }
-    });
-
     Slider.Selection = function (dragHandle, that, options) {
         function moveSelection (val) {
             var selectionValue = val - options.min,
@@ -682,29 +736,31 @@
                 positionLeft = dragHandleOffset.left;
             }
 
-            var halfTooltipDiv = that.tooltipDiv[owner._size]() / 2;
+            var halfTooltipDiv = that.tooltipDiv[owner._size]() / 2 + 1,
+                margin = 10,
+                dragHandleOffset = that.dragHandle.offset();
 
             if (owner._isHorizontal) {
                 positionLeft -= halfTooltipDiv;
 
                 if (owner.options.tickPlacement != "topLeft") {
-                    positionTop -= 43;
+                    positionTop = dragHandleOffset.top - that.dragHandle.height() - that.tooltipDiv.height();
                 } else {
-                    positionTop += 33;
+                    positionTop = dragHandleOffset.top + that.dragHandle.height() + margin;
                 }
             } else {
                 positionTop -= halfTooltipDiv;
 
                 if (owner.options.tickPlacement != "topLeft") {
-                    positionLeft -= that.tooltipDiv.width() + 23;
+                    positionLeft = dragHandleOffset.left - that.dragHandle.width() - that.tooltipDiv.width() - 2;
                 } else {
-                    positionLeft += 31;
+                    positionLeft = dragHandleOffset.left + that.dragHandle.width() + margin;
                 }
             }
 
             that.tooltipDiv.css({ top: positionTop, left: positionLeft });
         },
-
+//fix this
         horizontalDrag: function (mousePosition) {
             var that = this,
                 val = 0;
@@ -736,99 +792,28 @@
         }
     }
 
-    function createWrapper (options, element, isHorizontal) {
-        var orientationCssClass = isHorizontal ? " t-slider-horizontal" : " t-slider-vertical",
-            style = options.style ? options.style : element.attr("style"),
-            cssClasses = element.attr("class") ? (" " + element.attr("class")) : "",
-            tickPlacementCssClass = "";
-
-        if (options.tickPlacement == "bottomRight") {
-            tickPlacementCssClass = " t-slider-bottomright";
-        } else if (options.tickPlacement == "topLeft") {
-            tickPlacementCssClass = " t-slider-topleft";
-        }
-
-        style = style ? " style='" + style + "'" : "";
-
-        return "<div class='t-widget t-slider" + orientationCssClass + cssClasses + "'" + style + ">" +
-               "<div class='t-slider-wrap" + (options.showButtons ? " t-slider-buttons" : "") + tickPlacementCssClass +
-               "'></div></div>";
-    }
-
-    function createButton (options, type, isHorizontal) {
-        var buttonCssClass = "";
-
-        if (type == "increase") {
-            buttonCssClass = isHorizontal ? "t-arrow-next" : "t-arrow-up";
-        } else {
-            buttonCssClass = isHorizontal ? "t-arrow-prev" : "t-arrow-down";
-        }
-
-        return "<a class='t-button t-button-" + type + "'><span class='t-icon " + buttonCssClass +
-               "' title='" + options[type + "ButtonTitle"] + "'>" + options[type + "ButtonTitle"] + "</span></a>";
-    }
-
-    function createSliderItems (options, distance) {
-        var result = "<ul class='t-reset t-slider-items'>",
-            count = math.floor((distance / options.smallStep).toFixed(3), 10) + 1;
-
-        for(i = 0; i < count; i++) {
-            result += "<li class='t-tick'>&nbsp;</li>";
-        }
-
-        result += "</ul>";
-
-        return result;
-    }
-
-    function createTrack (element) {
-        var dragHandleCount = element.is("input") ? 1 : 2;
-
-        return "<div class='t-slider-track'><div class='t-slider-selection'><!-- --></div>" +
-               "<a href='javascript:void(0)' class='t-draghandle' title='Drag'>Drag</a>" +
-               (dragHandleCount > 1 ? "<a href='javascript:void(0)' class='t-draghandle' title='Drag'>Drag</a>" : "") +
-               "</div>";
-    }
-
-    function _createHtml () {
-        var that = this,
-            element = that.element,
-            options = that.options;
-
-        element.val(options.val);
-
-        element.wrap(createWrapper(options, element, that._isHorizontal)).hide();
-
-        if (options.showButtons) {
-            element.before(createButton(options, "increase", that._isHorizontal))
-                   .before(createButton(options, "decrease", that._isHorizontal));
-        }
-
-        element.before(createTrack(element));
-    }
-
-    kendo.ui.plugin("Slider", Slider, Component);
+    kendo.ui.plugin("Slider", Slider);
 
     //
     // RangeSlider
     //
 
-    function RangeSlider(element, options) {
-        var that = this;
-        Component.apply(that, arguments);
-        options = that.options;
-        initSlider.call(that);
+    var RangeSlider = Component.extend({
+        init: function(element, options) {
+            var that = this;
+            Component.fn.init.call(that, element, options);
+            options = that.options;
+            initSlider.call(that);
 
-        that._setValueInRange(options.selectionStart, options.selectionEnd);
+            that._setValueInRange(options.selectionStart, options.selectionEnd);
 
-        var dragHandles = that.wrapper.find(DRAGHANDLE_SELECTOR);
+            var dragHandles = that.wrapper.find(DRAGHANDLE_SELECTOR);
 
-        new RangeSlider.Selection(dragHandles, that, options);
-        new Slider.Drag(dragHandles.eq(0), "leftHandle", that, options);
-        new Slider.Drag(dragHandles.eq(1), "rightHandle" , that, options);
-    }
+            new RangeSlider.Selection(dragHandles, that, options);
+            new Slider.Drag(dragHandles.eq(0), "leftHandle", that, options);
+            new Slider.Drag(dragHandles.eq(1), "rightHandle" , that, options);
+        },
 
-    extend(RangeSlider.prototype, {
         options: extend({
             selectionStart: 0,
             selectionEnd: 10
@@ -903,7 +888,7 @@
 
             that.enabled = false;
         },
-//fix this
+
         _keydown: function (e, handle) {
             var that = this,
                 selectionStartValue = that.options.selectionStart,
@@ -1049,6 +1034,23 @@
         that.bind([ CHANGE, SLIDE, MOVE_SELECTION ], handler);
     }
 
-    kendo.ui.plugin("RangeSlider", RangeSlider, Component);
+    var methods = {
+        _setTrackDivWidth: _setTrackDivWidth,
+        _setItemsWidth: _setItemsWidth,
+        _setItemsTitle: _setItemsTitle,
+        _setItemsLargeTick: _setItemsLargeTick,
+        _calculateItemsWidth: _calculateItemsWidth,
+        _roudWidths: _roudWidths,
+        _addAdditionalSize: _addAdditionalSize,
+        _calculateSteps: _calculateSteps,
+        _getValueFromPosition: _getValueFromPosition,
+        _getDragableArea: _getDragableArea,
+        _createHtml: _createHtml
+    };
+
+    extend(Slider.prototype, methods);
+    extend(RangeSlider.prototype, methods);
+
+    kendo.ui.plugin("RangeSlider", RangeSlider);
 
 })(jQuery, window);
