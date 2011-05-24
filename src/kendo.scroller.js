@@ -4,105 +4,67 @@
         Component = kendo.ui.Component,
         touchLocation = kendo.touchLocation;
 
-    function Scroller (element) {
-        this.element = $(element);
+    var Scroller = Component.extend({
+        init: function (element) {
+            this.element = $(element);
 
-        this.options = {
-            acceleration: 10,
-            velocity: .5,
-            pagingVelocity: 5,
-            friction: .98,
-            bounceAcceleration: .1,
-            bounceDeceleration: .1,
-            bounceLimit: 0,
-            bounceStop: 100,
-            framerate: 30,
+            this.options = {
+                acceleration: 10,
+                velocity: .5,
+                pagingVelocity: 5,
+                friction: .98,
+                bounceAcceleration: .1,
+                bounceDeceleration: .1,
+                bounceLimit: 0,
+                bounceStop: 100,
+                framerate: 30,
 
-            scrollbarOpacity: .7
-        };
+                scrollbarOpacity: .7
+            };
 
-        if (typeof arguments[1] === 'object')
-            $.extend( this.options, arguments[1] );
+            if (typeof arguments[1] === 'object')
+                $.extend( this.options, arguments[1] );
 
-        Component.apply(this, arguments);
+            Component.fn.init.apply(this, arguments);
 
-        this.xScrollbar = $('<div class="touch-scrollbar horizontal-scrollbar" />');
-        this.yScrollbar = this.xScrollbar.clone().removeClass('horizontal-scrollbar').addClass('vertical-scrollbar');
-        this._scrollbars = $().add(this.xScrollbar).add(this.yScrollbar);
+            this.xScrollbar = $('<div class="touch-scrollbar horizontal-scrollbar" />');
+            this.yScrollbar = this.xScrollbar.clone().removeClass('horizontal-scrollbar').addClass('vertical-scrollbar');
+            this._scrollbars = $().add(this.xScrollbar).add(this.yScrollbar);
 
-        this._scrollArrows = {};
-        this._scrollArrows.left = $('<a class="scroll-arrow left-scroll-arrow" href="#" />');
+            this._scrollArrows = {};
+            this._scrollArrows.left = $('<a class="scroll-arrow left-scroll-arrow" href="#" />');
 
-        extend( this._scrollArrows, {
-                                        right: this._scrollArrows.left.clone().removeClass('left-scroll-arrow').addClass('right-scroll-arrow'),
-                                        top: this._scrollArrows.left.clone().removeClass('left-scroll-arrow').addClass('top-scroll-arrow'),
-                                        bottom: this._scrollArrows.left.clone().removeClass('left-scroll-arrow').addClass('bottom-scroll-arrow')
-                                    });
-        this._horizontalArrows = $().add(this._scrollArrows.left).add(this._scrollArrows.right);
-        this._verticalArrows = $().add(this._scrollArrows.top).add(this._scrollArrows.bottom);
-        this._allArrows = $().add(this._horizontalArrows).add(this._verticalArrows);
+            extend( this._scrollArrows, {
+                right: this._scrollArrows.left.clone().removeClass('left-scroll-arrow').addClass('right-scroll-arrow'),
+                top: this._scrollArrows.left.clone().removeClass('left-scroll-arrow').addClass('top-scroll-arrow'),
+                bottom: this._scrollArrows.left.clone().removeClass('left-scroll-arrow').addClass('bottom-scroll-arrow')
+            });
+            this._horizontalArrows = $().add(this._scrollArrows.left).add(this._scrollArrows.right);
+            this._verticalArrows = $().add(this._scrollArrows.top).add(this._scrollArrows.bottom);
+            this._allArrows = $().add(this._horizontalArrows).add(this._verticalArrows);
 
-        this._allArrows.click( $.proxy( this._scrollClick, this ) );
+            this._allArrows.click( $.proxy( this._scrollClick, this ) );
 
-        extend(this, {
-                        webkit3d: 'WebKitCSSMatrix' in window && 'm11' in new WebKitCSSMatrix(),
+            extend(this, {
+                webkit3d: 'WebKitCSSMatrix' in window && 'm11' in new WebKitCSSMatrix(),
 
-                        _waitProxy: $.proxy(this._wait, this),
-                        _startProxy: $.proxy(this._start, this),
-                        _stopProxy: $.proxy(this._stop, this),
-                        _dragProxy: $.proxy(this._drag, this),
-                        _gestureStartProxy: $.proxy(this._onGestureStart, this),
-                        _gestureEndProxy: $.proxy(this._onGestureEnd, this),
-                        _stepScrollProxy: $.proxy( this._stepScrollAnimation, this ),
-                        _stepKinetikProxy: $.proxy( this._stepKinetikAnimation, this ),
+                _waitProxy: $.proxy(this._wait, this),
+                _startProxy: $.proxy(this._start, this),
+                _stopProxy: $.proxy(this._stop, this),
+                _dragProxy: $.proxy(this._drag, this),
+                _gestureStartProxy: $.proxy(this._onGestureStart, this),
+                _gestureEndProxy: $.proxy(this._onGestureEnd, this),
+                _stepScrollProxy: $.proxy( this._stepScrollAnimation, this ),
+                _stepKinetikProxy: $.proxy( this._stepKinetikAnimation, this ),
 
-                        _transformProperty: kendo.support.transitions.css + 'transform',
-                        _transformOrigin: kendo.support.transitions.css + 'transform-origin',
-                        _translate3DPrefix: 'translate' + (this.webkit3d ? '3d(' : '('),
-                        _translate3DSuffix: (this.webkit3d ? ', 0)' : ')')
-                });
+                _transformProperty: kendo.support.transitions.css + 'transform',
+                _transformOrigin: kendo.support.transitions.css + 'transform-origin',
+                _translate3DPrefix: 'translate' + (this.webkit3d ? '3d(' : '('),
+                _translate3DSuffix: (this.webkit3d ? ', 0)' : ')')
+            });
 
-        this._create();
-    }
-
-    $.throttle = function(delay, callback) {
-        var timeout_id,
-            last_call = 0,
-            omit_ending = arguments[2] || false;
-
-        return function () {
-            var that = this,
-                time_span = +new Date() - last_call,
-                args = arguments;
-
-            function execute() {
-                last_call = +new Date();
-                callback.apply(that, args);
-            }
-
-            function clear() {
-                timeout_id = undefined;
-            }
-
-            timeout_id && clearTimeout(timeout_id);
-
-            if (time_span > delay)
-                execute();
-            else
-                if (!omit_ending)
-                    timeout_id = setTimeout( execute, delay - time_span);
-        };
-    };
-
-    function fireFakeEvent(eventName, event) {
-        var evt = document.createEvent("MouseEvents");
-        evt.initMouseEvent(eventName, event.bubbles, event.cancelable, event.view,
-                           event.detail, event.screenX, event.screenY, event.clientX, event.clientY,
-                           false, false, false, false, event.button, event.relatedTarget);
-        event.target.dispatchEvent(evt);
-    }
-
-    Scroller.prototype = {
+            this._create();
+        },
         _create: function () {
             if (kendo.support.touch) {
                 this._moveEvent = "touchmove",
@@ -275,7 +237,7 @@
 
         _wait: function (e) {
             e.preventDefault(); // Might stir some problems...
-            
+
             this._dragged = false;
             clearTimeout(this.timeoutId);
             this._originalEvent = e.originalEvent;
@@ -575,7 +537,44 @@
 
             this._hideScrollHints();
         }
+    });
+
+    $.throttle = function(delay, callback) {
+        var timeout_id,
+            last_call = 0,
+            omit_ending = arguments[2] || false;
+
+        return function () {
+            var that = this,
+                time_span = +new Date() - last_call,
+                args = arguments;
+
+            function execute() {
+                last_call = +new Date();
+                callback.apply(that, args);
+            }
+
+            function clear() {
+                timeout_id = undefined;
+            }
+
+            timeout_id && clearTimeout(timeout_id);
+
+            if (time_span > delay)
+                execute();
+            else
+                if (!omit_ending)
+                    timeout_id = setTimeout( execute, delay - time_span);
+        };
     };
 
-    kendo.ui.plugin("Scroller", Scroller, Component);
+    function fireFakeEvent(eventName, event) {
+        var evt = document.createEvent("MouseEvents");
+        evt.initMouseEvent(eventName, event.bubbles, event.cancelable, event.view,
+                           event.detail, event.screenX, event.screenY, event.clientX, event.clientY,
+                           false, false, false, false, event.button, event.relatedTarget);
+        event.target.dispatchEvent(evt);
+    }
+
+    kendo.ui.plugin("Scroller", Scroller);
 })(jQuery, window);

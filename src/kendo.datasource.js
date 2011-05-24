@@ -1,7 +1,8 @@
 (function($, window, undefined) {
     var extend = $.extend,
-    kendo = window.kendo,
-    stringify = kendo.stringify;
+        kendo = window.kendo,
+        Observable = kendo.Observable,
+        stringify = kendo.stringify;
 
     function idMap(data, id) {
         var idx, length, map = {};
@@ -160,9 +161,11 @@
         }
     }
 
-    function DataSource(options) {
-        options = options || {};
-        var that = extend(this, this.defaults, {
+    var DataSource = Observable.extend({
+        init: function(options) {
+            options = options || {};
+
+            var that = extend(this, this.defaults, {
                 idMap: {},
                 modified: {},
                 schema: options.schema,
@@ -179,9 +182,9 @@
             id = that.schema.id,
             transport = options.transport;
 
-        kendo.Observable.call(that);
+            Observable.fn.init.call(that);
 
-        that._reader = extend({
+            that._reader = extend({
                 data: function (data) {
                     return data;
                 },
@@ -189,70 +192,18 @@
                     return data.length;
                 }
             }, options.reader);
-        that.transport = transport && $.isFunction(transport.read) ? transport : (options.data? new LocalTransport({ data: options.data }):new RemoteTransport(transport));
-        if (id) {
-            that.find = function(id) {
-                return that._data[that.idMap[id]];
-            };
-            that.id = function(record) {
-                return record[id];
-            };
-        } else {
-            that.find = that.at;
-        }
-    }
-
-    DataSource.create = function(options) {
-        options = $.isArray(options) ? { data: options } : options;
-
-        var dataSource = options || {},
-            data = dataSource.data,
-            fields = dataSource.fields,
-            table = dataSource.table;
-
-        if (!data && table && fields) {
-            data = infer(table, fields);
-        }
-
-        dataSource.data = data;
-
-        return dataSource instanceof DataSource ? dataSource : new DataSource(dataSource);
-    }
-
-    function infer(table, fields) {
-        var tbody = $(table)[0].tBodies[0],
-            rows = tbody ? tbody.rows : [],
-            rowIndex,
-            rowCount,
-            fieldIndex,
-            fieldCount = fields.length,
-            data = [],
-            cells,
-            record,
-            cell,
-            empty;
-
-        for (rowIndex = 0, rowCount = rows.length; rowIndex < rowCount; rowIndex++) {
-            record = {};
-            empty = true;
-            cells = rows[rowIndex].cells;
-
-            for (fieldIndex = 0; fieldIndex < fieldCount; fieldIndex++) {
-                cell = cells[fieldIndex];
-                if(cell.nodeName.toLowerCase() !== "th") {
-                    empty = false;
-                    record[fields[fieldIndex].field] = cell.innerHTML;
-                }
+            that.transport = transport && $.isFunction(transport.read) ? transport : (options.data? new LocalTransport({ data: options.data }):new RemoteTransport(transport));
+            if (id) {
+                that.find = function(id) {
+                    return that._data[that.idMap[id]];
+                };
+                that.id = function(record) {
+                    return record[id];
+                };
+            } else {
+                that.find = that.at;
             }
-            if(!empty) {
-                data.push(record);
-            }
-        }
-
-        return data;
-    }
-
-    extend(DataSource.prototype, new kendo.Observable, {
+        },
         defaults: {
             schema: {
                 id: "id"
@@ -490,6 +441,56 @@
             return Math.ceil((that.total() || 0) / pageSize);
         }
     });
+
+    DataSource.create = function(options) {
+        options = $.isArray(options) ? { data: options } : options;
+
+        var dataSource = options || {},
+            data = dataSource.data,
+            fields = dataSource.fields,
+            table = dataSource.table;
+
+        if (!data && table && fields) {
+            data = infer(table, fields);
+        }
+
+        dataSource.data = data;
+
+        return dataSource instanceof DataSource ? dataSource : new DataSource(dataSource);
+    }
+
+    function infer(table, fields) {
+        var tbody = $(table)[0].tBodies[0],
+            rows = tbody ? tbody.rows : [],
+            rowIndex,
+            rowCount,
+            fieldIndex,
+            fieldCount = fields.length,
+            data = [],
+            cells,
+            record,
+            cell,
+            empty;
+
+        for (rowIndex = 0, rowCount = rows.length; rowIndex < rowCount; rowIndex++) {
+            record = {};
+            empty = true;
+            cells = rows[rowIndex].cells;
+
+            for (fieldIndex = 0; fieldIndex < fieldCount; fieldIndex++) {
+                cell = cells[fieldIndex];
+                if(cell.nodeName.toLowerCase() !== "th") {
+                    empty = false;
+                    record[fields[fieldIndex].field] = cell.innerHTML;
+                }
+            }
+            if(!empty) {
+                data.push(record);
+            }
+        }
+
+        return data;
+    }
 
     extend(kendo.data, {
         DataSource: DataSource,

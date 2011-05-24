@@ -1,28 +1,30 @@
 (function($, window) {
     var kendo = window.kendo
-        Component = kendo.ui.Component;
+        Component = kendo.ui.Component,
+        proxy = $.proxy;
 
-    function Pager(element, options) {
-        var that = this;
+    var Pager = Component.extend( {
+        init: function(element, options) {
+            var that = this;
 
-        Component.apply(that, arguments);
+            Component.fn.init.call(that, element, options);
 
-        that.dataSource = options.dataSource;
-        that.options = $.extend({}, that.options, options);
-        that.linkTemplate = kendo.template(that.options.linkTemplate);
-        that.selectTemplate = kendo.template(that.options.selectTemplate);
+            that.dataSource = options.dataSource;
+            that.options = $.extend({}, that.options, options);
+            that.linkTemplate = kendo.template(that.options.linkTemplate);
+            that.selectTemplate = kendo.template(that.options.selectTemplate);
 
-        that.dataSource.bind("change", $.proxy(that.render, that));
-        that.element.delegate("a:not(.currentPage)", "click",  $.proxy(that._click, that));
-    }
+            that.dataSource.bind("change", proxy(that.refresh, that));
+            that.element.delegate("a:not(.currentPage)", "click",  proxy(that._click, that));
+        },
 
-    Pager.prototype = {
         options: {
             selectTemplate: '<li><a href="#" class="currentPage"><span>Page </span><%=text %></a></li>',
             linkTemplate: '<li><a href="#" data-page="<%=idx %>"><%= isNum ? "<span>Page </span>" : "" %><%=text %></a></li>',
             buttonCount: 10
         },
-        render: function() {
+
+        refresh: function() {
             var that = this,
                 idx,
                 end,
@@ -76,7 +78,7 @@
         page: function() {
             return this.dataSource.page() || 1;
         }
-    }
+    });
 
-    kendo.ui.plugin("Pager", Pager, Component);
+    kendo.ui.plugin("Pager", Pager);
 })(jQuery, window);

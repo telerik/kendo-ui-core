@@ -1,33 +1,34 @@
 ;(function($, window, undefined) {
     var kendo = window.kendo,
-        Component = kendo.ui.Component,
+        ui = kendo.ui,
+        Component = ui.Component,
         HORIZONTAL = "horizontal",
         VERTICAL = "vertical",
         START = "start",
         RESIZE = "resize",
         RESIZEEND = "resizeend";
 
-    function Resizable(element, options) {
-        var that = this;
+    var Resizable = Component.extend({
+        init: function(element, options) {
+            var that = this;
 
-        Component.apply(that, arguments);
+            Component.fn.init.call(that, element, options);
 
-        that.orientation = that.options.orientation.toLowerCase() != VERTICAL ? HORIZONTAL : VERTICAL;
-        that._positionMouseProperty = that.orientation == HORIZONTAL ? "pageX" : "pageY";
-        that._positionProperty = that.orientation == HORIZONTAL ? "left" : "top";
-        that._sizingDomProperty = that.orientation == HORIZONTAL ? "outerWidth" : "outerHeight";
-        that.bind([RESIZE,RESIZEEND,START], that.options);
+            that.orientation = that.options.orientation.toLowerCase() != VERTICAL ? HORIZONTAL : VERTICAL;
+            that._positionMouseProperty = that.orientation == HORIZONTAL ? "pageX" : "pageY";
+            that._positionProperty = that.orientation == HORIZONTAL ? "left" : "top";
+            that._sizingDomProperty = that.orientation == HORIZONTAL ? "outerWidth" : "outerHeight";
+            that.bind([RESIZE,RESIZEEND,START], that.options);
 
-        new kendo.ui.Draggable(element, {
-            distance: 0,
-            filter: options.handle,
-            drag: $.proxy(that._resize, that),
-            dragstart: $.proxy(that._start, that),
-            dragend: $.proxy(that._stop, that)
-        });
-    }
+            new ui.Draggable(element, {
+                distance: 0,
+                filter: options.handle,
+                drag: $.proxy(that._resize, that),
+                dragstart: $.proxy(that._start, that),
+                dragend: $.proxy(that._stop, that)
+            });
+        },
 
-    Resizable.prototype = {
         options: {
             orientation: HORIZONTAL
         },
@@ -97,8 +98,8 @@
             that.trigger(RESIZEEND, $.extend(e, { position: that.position }));
             $(document.body).css("cursor", "");
         }
-    };
+    });
 
-    kendo.ui.plugin("Resizable", Resizable, Component);
+    kendo.ui.plugin("Resizable", Resizable);
 
 })(jQuery, window)

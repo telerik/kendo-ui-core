@@ -73,23 +73,6 @@
 
                 ok($.fn.kendoFoo);
             });
-
-            test("plugin creates factory method which instantiates a new instance of the component", function() {
-                function CustomComponent() {}
-
-                CustomComponent.prototype = {
-                    method: function() {
-                    }
-                }
-                kendo.ui.plugin("Foo", CustomComponent, Component);
-
-                var foo = $("<p/>").kendoFoo().data("kendoFoo");
-
-                ok(foo);
-                ok(foo instanceof Component);
-                ok(foo instanceof CustomComponent);
-                ok(foo.method);
-            });
        </script>
     </body>
 </html>
