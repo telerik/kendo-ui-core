@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>treeview</title>
+        <script type="text/javascript" src="../src/jquery.js"></script>
+        <script type="text/javascript" src="../src/kendo.loader.js"></script>
+        <link type="text/css" href="../styles/kendo.common.css" rel="stylesheet"/>
+        <link type="text/css" href="../styles/kendo.vista.css" rel="stylesheet"/>
+        <script type="text/javascript">
+            kendo.loader.treeview();
+        </script>
+    </head>
+    <body>
+        <ul id="treeview">
+            <li>foo</li>
+            <li>bar</li>
+            <li>baz</li>
+        </ul>
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $("#treeview").kendoTreeView();
+            });
+        </script>
+    </body>
+</html>
