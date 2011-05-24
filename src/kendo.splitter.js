@@ -102,7 +102,7 @@
             that.trigger(RESIZE);
         },
         ajaxOptions: function($pane, options) {
-            var self = this;
+            var that = this;
 
             return $.extend({
                 type: "POST",
@@ -110,7 +110,7 @@
                 success: function (data) {
                     $pane.html(data);
 
-                    self.trigger(CONTENTLOAD, { pane: $pane[0] });
+                    that.trigger(CONTENTLOAD, { pane: $pane[0] });
                 }
             }, options);
         },

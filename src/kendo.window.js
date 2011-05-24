@@ -90,7 +90,7 @@
             that.wrapper
                 .delegate(windowActions, "mouseenter", function () { $(this).addClass('t-state-hover'); })
                 .delegate(windowActions, "mouseleave", function () { $(this).removeClass('t-state-hover'); })
-                .delegate(windowActions, "click", $.proxy(this.windowActionHandler, that));
+                .delegate(windowActions, "click", $.proxy(that.windowActionHandler, that));
 
             if (options.resizable) {
                 that.wrapper

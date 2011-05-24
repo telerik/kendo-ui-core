@@ -16,9 +16,7 @@
 
     var Grid = Component.extend({
         init: function(element, options) {
-            var that = this,
-                dataSource,
-                pageable;
+            var that = this;
 
             options = $.isArray(options) ? { dataSource: options } : options;
 
@@ -46,7 +44,7 @@
 
             that._selection();
 
-            if(that.options.autoBind){
+            if (that.options.autoBind){
                 that.dataSource.query();
             }
         },
@@ -69,13 +67,14 @@
 
             that.table = table;
         },
+
         _selection: function() {
             var that = this,
                 multi,
                 cell,
                 selectable = that.options.selectable;
 
-            if(selectable) {
+            if (selectable) {
                 multi = typeof selectable === "string" && selectable.toLowerCase().indexOf("multiple") > -1;
                 cell = typeof selectable === "string" && selectable.toLowerCase().indexOf("cell") > -1;
 
@@ -98,6 +97,7 @@
                 });
             }
         },
+
         current: function(element) {
             var that = this,
                 current = that._current;
@@ -114,6 +114,7 @@
                 return that._current;
             }
         },
+
         _navigation: function() {
             var that = this,
                 element = that.element;
@@ -154,7 +155,8 @@
                   .delegate("." + FOCUSABLE + FOCUSSELECTOR, "mousedown", function(e) {
                       that.current($(e.currentTarget));
                   });
-       },
+        },
+
         _wrapper: function() {
             var that = this,
                 table = that.table,

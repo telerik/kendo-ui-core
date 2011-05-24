@@ -262,6 +262,10 @@
             url: "kendo.splitter.js",
             depends: "draganddrop"
         },
+        treeview: {
+            url: "kendo.treeview.js",
+            depends: "draganddrop"
+        },
         window: {
             url: "kendo.window.js",
             depends: [ "draganddrop", "fx" ]
