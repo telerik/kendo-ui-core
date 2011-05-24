@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Model set</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.model.js"></script>
+        <link rel="stylesheet" href="../qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Model.set</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var Model = kendo.data.Model;
+
+            module("kendo.data.Model.set", {
+                setup: function() {
+                },
+                teardown: function() {
+                }
+            });
+
+            test("set updates the value of the specified field", function() {
+                var m = new Model({
+                    foo: "bar"
+                });
+
+                m.set("foo", "baz");
+                equal(m.get("foo"), "baz");
+            });
+
+            test("set updates the value of the specified expression", function() {
+                var m = new Model({
+                    foo: {
+                        bar: "bar"
+                    }
+                });
+
+                m.set("foo.bar", "baz");
+                equal(m.get("foo.bar"), "baz");
+            });
+
+            test("set accepts hash", function() {
+                var m = new Model();
+
+                m.set({ foo: "foo", bar: "bar" });
+
+                equal(m.get("foo"), "foo");
+                equal(m.get("bar"), "bar");
+            });
+
+            test("model is modified after set", function() {
+                var m = new Model();
+
+                m.set({ foo: "foo"});
+                ok(m.modified);
+            });
+
+            test("model is not modified if the same string value is set", function() {
+                var m = new Model({
+                    foo: "foo"
+                });
+
+                m.set({ foo: "foo"});
+                ok(!m.modified);
+            });
+
+            test("model is not modified if the same numeric value is set", function() {
+                var m = new Model({
+                    foo: 1
+                });
+
+                m.set({ foo: 1 });
+                ok(!m.modified);
+            });
+
+            test("model is not modified if the same date value is set", function() {
+                var m = new Model({
+                    foo: new Date(2011, 1, 1)
+                });
+
+                m.set({ foo: new Date(2011, 1, 1) });
+                ok(!m.modified);
+            });
+
+            test("model is not modified if the same object value is set", function() {
+                var m = new Model({
+                    foo: {
+                        bar: "bar"
+                    }
+                });
+
+                m.set({
+                    foo: {
+                        bar: "bar"
+                    }
+                });
+
+                ok(!m.modified);
+            });
+
+            test("model is not modified if the same array value is set", function() {
+                var m = new Model({
+                    foo: {
+                        bar: ["bar"]
+                    }
+                });
+
+                m.set({
+                    foo: {
+                        bar: ["bar"]
+                    }
+                });
+
+                ok(!m.modified);
+            });
+
+            test("model is not modified if the last set sets the same value", function() {
+                var m = new Model();
+
+                m.set("foo", "bar");
+                m.set("foo", "bar");
+                ok(!m.modified);
+            });
+
+            test("change is raised if the model is modifed after set", function() {
+                var changeWasCalled = false, m = new Model().bind("change", function() {
+                    changeWasCalled = true;
+                });
+
+                m.set("foo", "bar");
+                ok(changeWasCalled);
+            });
+
+            test("change is not raised if the model is not modifed after set", function() {
+                var changeWasCalled = false, m = new Model({
+                    foo: "bar"
+                }).bind("change", function() {
+                    changeWasCalled = true;
+                });
+
+                m.set("foo", "bar");
+                ok(!changeWasCalled);
+            });
+      </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>

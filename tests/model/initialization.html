@@ -52,6 +52,18 @@
 
                 ok(model.data.foo !== data.foo);
             });
+
+            test("define assigns the fields", function() {
+                var MyModel = Model.define({
+                    fields: {
+                        foo: {}
+                    }
+                });
+
+                var model = new MyModel();
+
+                ok(model.fields.foo);
+            });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
