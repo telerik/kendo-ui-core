@@ -29,19 +29,19 @@
                 }
             });
 
-            function newWindow(options, newDiv) {
+            function createWindow(options, newDiv) {
                 return new Window(newDiv || div, options);
             }
 
             test("creates default html structure", function() {
-                var dialog = newWindow();
+                var dialog = createWindow();
 
                 ok(dialog.wrapper.is(".t-widget, .t-window"));
                 ok(dialog.wrapper.children().eq(0).is(".t-window-titlebar, .t-header"));
             });
 
             test("if contentUrl is local call ajaxRequest on refresh method", 1, function() {
-                var dialog = newWindow();
+                var dialog = createWindow();
 
                 dialog.options.contentUrl = "~/something";
 
@@ -51,7 +51,7 @@
             });
 
             test("if contentUrl is remote should not call ajaxRequest on refresh method", function() {
-                var dialog = newWindow();
+                var dialog = createWindow();
                 var hasRequestedData = false;
 
                 dialog.options.contentUrl = "http://";
@@ -64,7 +64,7 @@
             });
 
             test("if contentUrl is local and relative should call ajaxRequest on refresh method", 1, function() {
-                var dialog = newWindow();
+                var dialog = createWindow();
 
                 dialog.options.contentUrl = "httpfoo";
 
@@ -74,7 +74,7 @@
             });
 
             test("construction triggers open and activate events", 2, function() {
-                var dialog = newWindow({
+                var dialog = createWindow({
                     "open": function () { ok(true); },
                     "activate": function () { ok(true); }
                 });
@@ -84,9 +84,9 @@
                 var isActivated = false,
                     isOpened = false;
 
-                var dialog = newWindow({
+                var dialog = createWindow({
                     "open": function () { isOpened = true; },
-                    "activate": function () {isActivated = true; },
+                    "activate": function () { isActivated = true; },
                     visible: false
                 }, $("<div />").appendTo(document.body).hide());
 
@@ -95,7 +95,7 @@
             });
 
             test("construction of modal window shows overlay", function() {
-                var dialog = newWindow({
+                var dialog = createWindow({
                     modal: true
                 });
 
@@ -103,9 +103,20 @@
             });
 
             test("hiding second modal window does not hide first overlay", function() {
-                var dialog1 = $("<div></div>").kendoWindow({ modal: true }).data("kendoWindow");
-
-                var dialog2 = $("<div></div>").kendoWindow({ modal: true }).data("kendoWindow");
+                var dialog1 = createWindow({
+                        modal: true,
+                        animation: {
+                            open: false,
+                            close: false
+                        }
+                    },  $("<div />")),
+                    dialog2 = createWindow({
+                        modal: true,
+                        animation: {
+                            open: false,
+                            close: false
+                        }
+                    },  $("<div />"));
 
                 dialog2.close();
 
@@ -121,13 +132,12 @@
             });
 
             test("destroy() does not delete overlay if there are other opened modal windows", function() {
-                var dialog1 = newWindow({
-                    modal: true
-                },  $("<div></div>"));
-
-                var dialog2 = newWindow({
-                    modal: true
-                }, $("<div></div>"));
+                var dialog1 = createWindow({
+                        modal: true
+                    },  $("<div />")),
+                    dialog2 = createWindow({
+                        modal: true
+                    }, $("<div />"));
 
                 dialog2.destroy();
 
@@ -140,15 +150,15 @@
             });
 
             test("creating a modal window after closing another shows overlay", function() {
-                var dialog1 = newWindow({
+                var dialog1 = createWindow({
                     modal: true
-                }, $("<div></div>"));
+                }, $("<div />"));
 
                 dialog1.close();
 
-                var dialog2 = newWindow({
+                var dialog2 = createWindow({
                     modal: true
-                }, $("<div></div>"));
+                }, $("<div />"));
 
                 ok($(".t-overlay").is(":visible"));
             });
@@ -166,7 +176,7 @@
             });
 
             test("creating a window with a contentUrl on the same server does not create iframe", function() {
-                var dialog = newWindow({
+                var dialog = createWindow({
                     contentUrl: "foo"
                 });
 
@@ -174,7 +184,7 @@
             });
 
             test("creating a window without a contentUrl does not create iframe", function() {
-                var dialog = newWindow();
+                var dialog = createWindow();
 
                 equals(dialog.element.find("iframe").length, 0);
             });

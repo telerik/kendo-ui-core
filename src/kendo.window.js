@@ -3,6 +3,10 @@
         Component = kendo.ui.Component,
         Draggable = kendo.ui.Draggable,
         fx = kendo.fx,
+        //classNames
+        TWINDOW = ".t-window",
+        TWINDOWTITLEBAR = ".t-window-titlebar",
+        TOVERLAY = ".t-overlay",
         //events
         OPEN = "open",
         ACTIVATE = "activate",
@@ -22,7 +26,7 @@
             wrapper
                 .find(".t-resize-e,.t-resize-w").css("height", wrapper.height()).end()
                 .find(".t-resize-n,.t-resize-s").css("width", wrapper.width()).end()
-                .find(".t-overlay").css({ width: wrapper.width(), height: wrapper.height() });
+                .find(TOVERLAY).css({ width: wrapper.width(), height: wrapper.height() });
         }
     }
 
@@ -36,9 +40,9 @@
             if (!that.element.is(".t-content")) {
                 that.element.addClass("t-window-content t-content");
                 Window.create(that.element, options);
-                that.wrapper = that.element.closest(".t-window");
+                that.wrapper = that.element.closest(TWINDOW);
 
-                var titleBar = that.wrapper.find(".t-window-titlebar");
+                var titleBar = that.wrapper.find(TWINDOWTITLEBAR);
                 titleBar.css("margin-top", -titleBar.outerHeight());
 
                 that.wrapper.css("padding-top", titleBar.outerHeight());
@@ -48,7 +52,7 @@
                 }
 
                 if (options.height) {
-                    that.wrapper.height(options.height)
+                    that.wrapper.height(options.height);
                 }
 
                 if (!options.visible) {
@@ -65,13 +69,14 @@
                 } else {
                     that.wrapper.css({ visibility: "hidden", display: "" });
                     offset = that.wrapper.offset();
-                    that.wrapper.css({ top: offset.top, left: offset.left })
-                    .css({ visibility: "visible", display: "none" });
+                    that.wrapper
+                        .css({ top: offset.top, left: offset.left })
+                        .css({ visibility: "visible", display: "none" });
                 }
 
                 that.wrapper
-                .toggleClass("t-rtl", that.wrapper.closest(".t-rtl").length > 0)
-                .appendTo(document.body);
+                    .toggleClass("t-rtl", that.wrapper.closest(".t-rtl").length > 0)
+                    .appendTo(document.body);
             }
 
             if (that.options.modal) {
@@ -81,117 +86,18 @@
             var windowActions = ".t-window-titlebar .t-window-action";
 
             that.wrapper
-            .delegate(windowActions, "mouseenter", function () { $(this).addClass('t-state-hover'); })
-            .delegate(windowActions, "mouseleave", function () { $(this).removeClass('t-state-hover'); })
-            .delegate(windowActions, "click", $.proxy(this.windowActionHandler, that));
+                .delegate(windowActions, "mouseenter", function () { $(this).addClass('t-state-hover'); })
+                .delegate(windowActions, "mouseleave", function () { $(this).removeClass('t-state-hover'); })
+                .delegate(windowActions, "click", $.proxy(this.windowActionHandler, that));
 
             if (that.options.resizable) {
                 that.wrapper
-                .delegate(".t-window-titlebar", "dblclick", $.proxy(this.toggleMaximization, that))
-                .append(Window.getResizeHandlesHtml());
+                    .delegate(TWINDOWTITLEBAR, "dblclick", $.proxy(this.toggleMaximization, that))
+                    .append(Window.getResizeHandlesHtml());
 
                 fixIE6Sizing(that.wrapper);
 
-                (function(wnd) {
-                    function dragstart(e) {
-                        var wrapper = wnd.wrapper;
-                        wnd.elementPadding = parseInt(wnd.wrapper.css("padding-top"));
-                        wnd.initialCursorPosition = wrapper.offset();
-
-                        wnd.resizeDirection = e.currentTarget.prop("className").replace("t-resize-handle t-resize-", "").split("");
-
-                        wnd.initialSize = {
-                            width: wnd.wrapper.width(),
-                            height: wnd.wrapper.height()
-                        };
-
-                        $("<div class='t-overlay' />").appendTo(wnd.wrapper);
-
-                        wrapper.find(".t-resize-handle").not(e.currentTarget).hide();
-
-                        $(document.body).css("cursor", e.currentTarget.css("cursor"));
-                    }
-
-                    function drag(e) {
-                        var wrapper = wnd.wrapper;
-
-                        var resizeHandlers = {
-                            "e": function () {
-                                var width = e.pageX - wnd.initialCursorPosition.left;
-                                wrapper.width((width < wnd.options.minWidth
-                                    ? wnd.options.minWidth
-                                    : (wnd.options.maxWidth && width > wnd.options.maxWidth)
-                                    ? wnd.options.maxWidth
-                                    : width));
-                            },
-                            "s": function () {
-                                var height = e.pageY - wnd.initialCursorPosition.top - wnd.elementPadding;
-                                wnd.wrapper
-                                .height((height < wnd.options.minHeight ? wnd.options.minHeight
-                                    : (wnd.options.maxHeight && height > wnd.options.maxHeight) ? wnd.options.maxHeight
-                                    : height));
-                            },
-                            "w": function () {
-                                var windowRight = wnd.initialCursorPosition.left + wnd.initialSize.width;
-                                wrapper.css("left", e.pageX > (windowRight - wnd.options.minWidth) ? windowRight - wnd.options.minWidth
-                                : e.pageX < (windowRight - wnd.options.maxWidth) ? windowRight - wnd.options.maxWidth
-                            : e.pageX);
-
-                            var width = windowRight - e.pageX;
-                            wrapper.width((width < wnd.options.minWidth ? wnd.options.minWidth
-                                : (wnd.options.maxWidth && width > wnd.options.maxWidth) ? wnd.options.maxWidth
-                                : width));
-
-                            },
-                            "n": function () {
-                                var windowBottom = wnd.initialCursorPosition.top + wnd.initialSize.height;
-
-                                wrapper.css("top", e.pageY > (windowBottom - wnd.options.minHeight) ? windowBottom - wnd.options.minHeight
-                                : e.pageY < (windowBottom - wnd.options.maxHeight) ? windowBottom - wnd.options.maxHeight
-                            : e.pageY);
-
-                            var height = windowBottom - e.pageY;
-                            wrapper
-                            .height((height < wnd.options.minHeight ? wnd.options.minHeight
-                                : (wnd.options.maxHeight && height > wnd.options.maxHeight) ? wnd.options.maxHeight
-                                : height));
-                            }
-                        };
-
-                        $.each(wnd.resizeDirection, function () {
-                            resizeHandlers[this]();
-                        });
-
-                        fixIE6Sizing(wrapper);
-
-                        wnd.trigger(RESIZE);
-                    }
-
-                    function dragend(e) {
-                        var wrapper = wnd.wrapper;
-                        wrapper
-                        .find(".t-overlay").remove().end()
-                        .find(".t-resize-handle").not(e.currentTarget).show();
-
-                        $(document.body).css("cursor", "");
-
-                        if (e.keyCode == 27) {
-                            fixIE6Sizing(wrapper);
-                            wrapper.css(wnd.initialCursorPosition)
-                            .css(wnd.initialSize);
-                        }
-
-                        return false;
-                    }
-
-                    new Draggable(wnd.wrapper, {
-                        filter: ".t-resize-handle",
-                        group: wnd.wrapper.id + "-resizing",
-                        dragstart: dragstart,
-                        drag: drag,
-                        dragend: dragend
-                    });
-                })(that);
+                that.resizing = new WindowResizing(that);
             }
 
             if (this.options.draggable) {
@@ -224,20 +130,20 @@
                         wnd.wrapper.find(".t-resize-handle")
                         .show()
                         .end()
-                        .find(".t-overlay")
+                        .find(TOVERLAY)
                         .remove();
 
                         $(document.body).css("cursor", "");
 
                         if (e.keyCode == 27) {
-                            e.currentTarget.closest(".t-window").css(wnd.initialWindowPosition);
+                            e.currentTarget.closest(TWINDOW).css(wnd.initialWindowPosition);
                         }
 
                         return false;
                     }
 
                     new Draggable(wnd.wrapper, {
-                        filter: ".t-window-titlebar",
+                        filter: TWINDOWTITLEBAR,
                         group: wnd.wrapper.id + "-moving",
                         dragstart: dragstart,
                         drag: drag,
@@ -261,12 +167,12 @@
         },
         options: {
             animation: {
-                openAnimation: {
+                open: {
                     effects: { zoomIn: {}, fadeIn: {} },
                     duration: 350,
                     show: true
                 },
-                closeAnimation: {
+                close: {
                     effects: { zoomOut: { properties: { scale: 0.7 } }, fadeOut: {} },
                     duration: 350,
                     hide: true
@@ -358,7 +264,7 @@
         open: function (e) {
             var that = this,
                 wrapper = that.wrapper,
-                showOptions = that.options.animation.openAnimation;
+                showOptions = that.options.animation.open;
 
             if (!that.trigger(OPEN)) {
                 if (that.options.modal) {
@@ -376,10 +282,9 @@
                 }
 
                 if (!wrapper.is(":visible")) {
-                    wrapper.kendoStop().kendoAnimate({
+                    wrapper.show().kendoStop().kendoAnimate({
                         effects: showOptions.effects,
                         duration: showOptions.duration,
-                        show: showOptions.show,
                         complete: function() {
                             that.trigger(ACTIVATE);
                         }
@@ -398,13 +303,12 @@
             var that = this,
                 wrapper = that.wrapper,
                 options = that.options,
-                hideOptions = options.animation.closeAnimation;
+                hideOptions = options.animation.close;
 
             if (wrapper.is(":visible")) {
                 if (!that.trigger(CLOSE)) {
-                    var openedModalWindows = $(".t-window").filter(function() {
-                        var window = $(this);
-                        return window.is(":visible") && options.modal;
+                    var openedModalWindows = $(TWINDOW).filter(function() {
+                        return $(this).is(":visible") && options.modal;
                     });
 
                     var shouldHideOverlay = options.modal && openedModalWindows.length == 1;
@@ -426,11 +330,8 @@
                     wrapper.kendoStop().kendoAnimate({
                         effects: hideOptions.effects,
                         duration: hideOptions.duration,
-                        hide: hideOptions.hide,
                         complete: function() {
-                            if (shouldHideOverlay) {
-                                overlay.hide();
-                            }
+                            wrapper.hide();
                         }
                     });
                 }
@@ -569,7 +470,7 @@
 
             that.wrapper.remove();
 
-            var openedModalWindows = $(".t-window")
+            var openedModalWindows = $(TWINDOW)
                 .filter(function() {
                     var window = $(this);
                     return window.is(":visible") && that.options.modal;
@@ -652,6 +553,117 @@
             return html;
         }
     });
+
+    function WindowResizing(wnd) {
+        var that = this;
+
+        that.owner = wnd;
+        that._draggable = new Draggable(wnd.wrapper, {
+            filter: ".t-resize-handle",
+            group: wnd.wrapper.id + "-resizing",
+            dragstart: $.proxy(that.dragstart, that),
+            drag: $.proxy(that.drag, that),
+            dragend: $.proxy(that.dragend, that)
+        });
+    }
+
+    WindowResizing.prototype = {
+        dragstart: function (e) {
+            var wnd = this.owner,
+                wrapper = wnd.wrapper;
+
+            wnd.elementPadding = parseInt(wnd.wrapper.css("padding-top"));
+            wnd.initialCursorPosition = wrapper.offset();
+
+            wnd.resizeDirection = e.currentTarget.prop("className").replace("t-resize-handle t-resize-", "").split("");
+
+            wnd.initialSize = {
+                width: wnd.wrapper.width(),
+                height: wnd.wrapper.height()
+            };
+
+            $("<div class='t-overlay' />").appendTo(wnd.wrapper);
+
+            wrapper.find(".t-resize-handle").not(e.currentTarget).hide();
+
+            $(document.body).css("cursor", e.currentTarget.css("cursor"));
+        },
+        drag: function (e) {
+            var wnd = this.owner,
+                wrapper = wnd.wrapper,
+                resizeHandlers = {
+                    "e": function () {
+                        var width = e.pageX - wnd.initialCursorPosition.left;
+
+                        wrapper.width((width < wnd.options.minWidth ? wnd.options.minWidth
+                                    : (wnd.options.maxWidth && width > wnd.options.maxWidth) ? wnd.options.maxWidth
+                                    : width));
+                    },
+                    "s": function () {
+                        var height = e.pageY - wnd.initialCursorPosition.top - wnd.elementPadding;
+
+                        wrapper
+                            .height((height < wnd.options.minHeight ? wnd.options.minHeight
+                                : (wnd.options.maxHeight && height > wnd.options.maxHeight) ? wnd.options.maxHeight
+                                : height));
+                    },
+                    "w": function () {
+                        var windowRight = wnd.initialCursorPosition.left + wnd.initialSize.width,
+                            width = windowRight - e.pageX;
+
+                        /// TODO: use Math.min / Math.max to sort these out
+                        wrapper.css({
+                            left: e.pageX > (windowRight - wnd.options.minWidth) ? windowRight - wnd.options.minWidth
+                                : e.pageX < (windowRight - wnd.options.maxWidth) ? windowRight - wnd.options.maxWidth
+                                : e.pageX,
+                            width: (width < wnd.options.minWidth ? wnd.options.minWidth
+                                   : (wnd.options.maxWidth && width > wnd.options.maxWidth) ? wnd.options.maxWidth
+                                   : width)
+                        })
+                    },
+                    "n": function () {
+                        var windowBottom = wnd.initialCursorPosition.top + wnd.initialSize.height,
+                            height = windowBottom - e.pageY;
+
+                        /// TODO: use Math.min / Math.max to sort these out
+                        wrapper.css({
+                            top: e.pageY > (windowBottom - wnd.options.minHeight) ? windowBottom - wnd.options.minHeight
+                               : e.pageY < (windowBottom - wnd.options.maxHeight) ? windowBottom - wnd.options.maxHeight
+                               : e.pageY,
+                            height: (height < wnd.options.minHeight ? wnd.options.minHeight
+                                  : (wnd.options.maxHeight && height > wnd.options.maxHeight) ? wnd.options.maxHeight
+                                  : height)
+                        });
+                    }
+                };
+
+            $.each(wnd.resizeDirection, function () {
+                resizeHandlers[this]();
+            });
+
+            fixIE6Sizing(wrapper);
+
+            wnd.trigger(RESIZE);
+        },
+        dragend: function (e) {
+            var wnd = this.owner,
+                wrapper = wnd.wrapper;
+
+            wrapper
+                .find(TOVERLAY).remove().end()
+                .find(".t-resize-handle").not(e.currentTarget).show();
+
+            $(document.body).css("cursor", "");
+
+            if (e.keyCode == 27) {
+                fixIE6Sizing(wrapper);
+                wrapper.css(wnd.initialCursorPosition)
+                    .css(wnd.initialSize);
+            }
+
+            return false;
+        }
+    };
 
     kendo.ui.plugin("Window", Window);
 
