@@ -26,16 +26,15 @@
 
     Class.extend = function(proto) {
         var base = function() {},
-            subclass = function() {};
+            that = this,
+            subclass = proto && proto.init? proto.init : function () {
+                that.apply(this, arguments);
+            };
 
-        if (proto && proto.init) {
-            subclass = proto.init;
-        }
-
-        base.prototype = this.prototype;
+        base.prototype = that.prototype;
         subclass.fn = subclass.prototype = extend(new base, proto);
         subclass.fn.constructor = subclass;
-        subclass.extend = arguments.callee;
+        subclass.extend = that.extend;
 
         return subclass;
     }
