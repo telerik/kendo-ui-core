@@ -54,41 +54,41 @@
                 equal(m.get("bar"), "bar");
             });
 
-            test("model is modified after set", function() {
+            test("model is _modified after set", function() {
                 var m = new Model();
 
                 m.set({ foo: "foo"});
-                ok(m.modified);
+                ok(m._modified);
             });
 
-            test("model is not modified if the same string value is set", function() {
+            test("model is not _modified if the same string value is set", function() {
                 var m = new Model({
                     foo: "foo"
                 });
 
                 m.set({ foo: "foo"});
-                ok(!m.modified);
+                ok(!m._modified);
             });
 
-            test("model is not modified if the same numeric value is set", function() {
+            test("model is not _modified if the same numeric value is set", function() {
                 var m = new Model({
                     foo: 1
                 });
 
                 m.set({ foo: 1 });
-                ok(!m.modified);
+                ok(!m._modified);
             });
 
-            test("model is not modified if the same date value is set", function() {
+            test("model is not _modified if the same date value is set", function() {
                 var m = new Model({
                     foo: new Date(2011, 1, 1)
                 });
 
                 m.set({ foo: new Date(2011, 1, 1) });
-                ok(!m.modified);
+                ok(!m._modified);
             });
 
-            test("model is not modified if the same object value is set", function() {
+            test("model is not _modified if the same object value is set", function() {
                 var m = new Model({
                     foo: {
                         bar: "bar"
@@ -101,10 +101,10 @@
                     }
                 });
 
-                ok(!m.modified);
+                ok(!m._modified);
             });
 
-            test("model is not modified if the same array value is set", function() {
+            test("model is not _modified if the same array value is set", function() {
                 var m = new Model({
                     foo: {
                         bar: ["bar"]
@@ -117,15 +117,15 @@
                     }
                 });
 
-                ok(!m.modified);
+                ok(!m._modified);
             });
 
-            test("model is not modified if the last set sets the same value", function() {
+            test("model is not _modified if the last set sets the same value", function() {
                 var m = new Model();
 
                 m.set("foo", "bar");
                 m.set("foo", "bar");
-                ok(!m.modified);
+                ok(!m._modified);
             });
 
             test("change is raised if the model is modifed after set", function() {
