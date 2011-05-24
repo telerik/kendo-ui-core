@@ -11,52 +11,52 @@
         LOAD = "load",
         REMOVE = "remove";
 
-    function Upload(element, options) {
-        var that = this;
+    var Upload = Component.extend({
+        init: function(element, options) {
+            var that = this;
 
-        Component.apply(that, arguments);
+            Component.fn.init.call(that, element, options);
 
-        that.name = element.name;
-        that.multiple = that.options.multiple;
-        that.localization = that.options.localization;
+            that.name = element.name;
+            that.multiple = that.options.multiple;
+            that.localization = that.options.localization;
 
-        var activeInput = that.element;
-        that.wrapper = activeInput.closest(".t-upload");
-        if (that.wrapper.length == 0) {
-            that.wrapper = that._wrapInput(activeInput);
-        }
+            var activeInput = that.element;
+            that.wrapper = activeInput.closest(".t-upload");
+            if (that.wrapper.length == 0) {
+                that.wrapper = that._wrapInput(activeInput);
+            }
 
-        that._activeInput(activeInput);
-        that.toggle(that.options.enabled);
+            that._activeInput(activeInput);
+            that.toggle(that.options.enabled);
 
-        activeInput.closest("form").bind({
-            "submit": $.proxy(that._onParentFormSubmit, that),
-            "reset": $.proxy(that._onParentFormReset, that)
-        });
+            activeInput.closest("form").bind({
+                "submit": $.proxy(that._onParentFormSubmit, that),
+                "reset": $.proxy(that._onParentFormReset, that)
+            });
 
-        if (that.options.async.saveUrl != undefined) {
-            that._module = that._supportsFormData() ?
+            if (that.options.async.saveUrl != undefined) {
+                that._module = that._supportsFormData() ?
                 new formDataUploadModule(that) :
                 new iframeUploadModule(that);
-        } else {
-            that._module = new syncUploadModule(that);
-        }
+            } else {
+                that._module = new syncUploadModule(that);
+            }
 
-        if (that._supportsDrop()) {
-            that._setupDropZone();
-        }
+            if (that._supportsDrop()) {
+                that._setupDropZone();
+            }
 
-        that.wrapper
+            that.wrapper
             .delegate(".t-upload-action", "click", $.proxy(that._onFileAction, that))
             .delegate(".t-upload-selected", "click", $.proxy(that._onUploadSelected, that))
             .delegate(".t-file", "t:progress", $.proxy(that._onFileProgress, that))
             .delegate(".t-file", "t:upload-success", $.proxy(that._onUploadSuccess, that))
             .delegate(".t-file", "t:upload-error", $.proxy(that._onUploadError, that));
 
-        that.bind([SELECT, UPLOAD, SUCCESS, ERROR, COMPLETE, CANCEL, REMOVE], that.options);
-    }
+            that.bind([SELECT, UPLOAD, SUCCESS, ERROR, COMPLETE, CANCEL, REMOVE], that.options);
+        },
 
-    Upload.prototype = {
         options: {
             enabled: true,
             multiple: true,
@@ -435,7 +435,7 @@
                 this.trigger(COMPLETE);
             }
         }
-    };
+    });
 
     // Synchronous upload module
     var syncUploadModule = function(upload) {
@@ -1042,5 +1042,5 @@
 
         return tokens;
     }
-    kendo.ui.plugin("Upload", Upload, Component);
+    kendo.ui.plugin("Upload", Upload);
 })(jQuery, window);

@@ -14,43 +14,43 @@
         FOCUSABLE = "t-focusable",
         map = $.map;
 
-    function Grid(element, options) {
-        var that = this,
-            dataSource,
-            pageable;
+    var Grid = Component.extend({
+        init: function(element, options) {
+            var that = this,
+                dataSource,
+                pageable;
 
-        options = $.isArray(options) ? { dataSource: options } : options;
+            options = $.isArray(options) ? { dataSource: options } : options;
 
-        Component.call(that, element, options);
+            Component.prototype.init.call(that, element, options);
 
-        that.bind([CHANGE,DATABOUND], that.options);
+            that.bind([CHANGE,DATABOUND], that.options);
 
-        that._element();
+            that._element();
 
-        that._columns(that.options.columns);
+            that._columns(that.options.columns);
 
-        that._dataSource();
+            that._dataSource();
 
-        that._tbody();
+            that._tbody();
 
-        that._thead();
+            that._thead();
 
-        that._wrapper();
+            that._wrapper();
 
-        that._templates();
+            that._templates();
 
-        that._pager();
+            that._pager();
 
-        that._navigation();
+            that._navigation();
 
-        that._selection();
+            that._selection();
 
-        if(that.options.autoBind){
-            that.dataSource.query();
-        }
-    }
+            if(that.options.autoBind){
+                that.dataSource.query();
+            }
+        },
 
-    Grid.prototype = {
         options: {
             columns: [],
             autoBind: true,
@@ -388,7 +388,7 @@
             }
             that.trigger(DATABOUND);
        }
-    }
+    });
 
-    ui.plugin("Grid", Grid, Component);
+    ui.plugin("Grid", Grid);
 })(jQuery, window);

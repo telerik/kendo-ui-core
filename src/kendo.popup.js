@@ -12,36 +12,6 @@
         proxy = $.proxy,
         Component = ui.Component;
 
-    function Popup(element, options) {
-        var that = this;
-
-        Component.apply(that, arguments);
-
-        that.element.hide().css("position", "absolute").appendTo(document.body);
-
-        options = that.options;
-
-        that.openAnimation = extend(options.openAnimation, {
-            complete: function() {
-                that.trigger(OPEN);
-            }
-        });
-
-        that.closeAnimation = extend(options.closeAnimation, {
-            complete: function() {
-                that.trigger(CLOSE);
-            }
-        });
-
-        that.bind([OPEN, CLOSE], options);
-
-        $(document.documentElement).mousedown(proxy(that._mousedown, that));
-
-        if (options.toggleTarget) {
-            $(options.toggleTarget).bind(options.toggleEvent, proxy(that.toggle, that));
-        }
-    }
-
     function align(element, anchor, origin, position) {
         origin = origin.split(" ");
         position = position.split(" ");
@@ -100,8 +70,36 @@
     function contains(container, target) {
         return container === target || $.contains(container, target);
     }
+    var Popup = Component.extend({
+        init: function(element, options) {
+            var that = this;
 
-    Popup.prototype = {
+            Component.fn.init.call(that, element, options);
+
+            that.element.hide().css("position", "absolute").appendTo(document.body);
+
+            options = that.options;
+
+            that.openAnimation = extend(options.openAnimation, {
+                complete: function() {
+                    that.trigger(OPEN);
+                }
+            });
+
+            that.closeAnimation = extend(options.closeAnimation, {
+                complete: function() {
+                    that.trigger(CLOSE);
+                }
+            });
+
+            that.bind([OPEN, CLOSE], options);
+
+            $(document.documentElement).mousedown(proxy(that._mousedown, that));
+
+            if (options.toggleTarget) {
+                $(options.toggleTarget).bind(options.toggleEvent, proxy(that.toggle, that));
+            }
+        },
         options: {
             toggleEvent: "click",
             origin: "bottom left",
@@ -151,7 +149,7 @@
                 that.close();
             }
         }
-    }
+    });
 
-    ui.plugin("Popup", Popup, Component);
+    ui.plugin("Popup", Popup);
 })(jQuery);

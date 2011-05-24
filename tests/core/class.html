@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.Class tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <link rel="stylesheet" href="../qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.Class Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+            var Class = kendo.Class;
+
+            test("extend copies the supplied prototype", function() {
+                var Subclass = Class.extend({
+                    method: function() {
+                    }
+                });
+
+                ok(Subclass.prototype.method);
+            });
+
+            test("extend aliases the prototype as fn", function() {
+                var Subclass = Class.extend();
+
+                ok(Subclass.prototype === Subclass.fn);
+            });
+
+            test("the constructor of the subclass is the subclass itself", function() {
+                var Subclass = Class.extend();
+                ok(Subclass.constructor === Subclass);
+            });
+
+            test("subclass is instance of the grand parent class", function() {
+                var Person = Class.extend({}),
+                    Customer = Person.extend({});
+
+                ok (new Customer instanceof Person);
+                ok (new Customer instanceof Class);
+            });
+
+            test("subclass can be extended", function() {
+                var Person = Class.extend({
+                    name: function() {
+                    }
+                });
+
+                var Customer = Person.extend({
+                    age: function() {
+                    }
+                });
+
+                ok(Customer.prototype.name);
+                ok(Customer.prototype.age);
+            });
+
+            test("init is called during subclass instantiation", function() {
+                var initWasCalled = false, Subclass = Class.extend({
+                    init: function() {
+                        initWasCalled = true;
+                    }
+                });
+
+                new Subclass();
+                ok(initWasCalled);
+            });
+
+            test("init is called with the constructor arguments during instantiation", function() {
+                var initArguments, Subclass = Class.extend({
+                    init: function() {
+                        initArguments = arguments;
+                    }
+                });
+
+                new Subclass("foo", "bar");
+                equal(initArguments[0], "foo");
+                equal(initArguments[1], "bar");
+            });
+
+            test("base init is called when a subclass is instantiated", function() {
+                var initWasCalled = false, Subclass = Class.extend({
+                    init: function() {
+                        initWasCalled = true;
+                    }
+                }).extend();
+
+                new Subclass();
+                ok(initWasCalled);
+            });
+
+      </script>
+    </body>
+</html>
