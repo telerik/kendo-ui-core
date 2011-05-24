@@ -37,7 +37,7 @@
         subclass.extend = that.extend;
 
         return subclass;
-    }
+    };
 
 //Observable ================================
     var Observable = Class.extend({
@@ -1116,9 +1116,7 @@
 
             //wait for all effects to complete
             $.when.apply(null, promises).then(function() {
-                if (!kendo.support.transitions) {
-                    element.dequeue(); // call next animation from the queue
-                }
+                element.dequeue(); // call next animation from the queue
 
                 if (options.hide) {
                     element.hide();

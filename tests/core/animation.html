@@ -45,7 +45,7 @@
                     play: function(element, properties, options) {
                         setTimeout(options.complete, 10);
                     }
-                }
+                };
 
                 animate(span, "foo", function() {
                     ok(true);
@@ -74,7 +74,7 @@
                            options.complete();
                         }, 20);
                     }
-                }
+                };
 
                 animate(span, "foo bar", function() {
                     ok(fooFinished);
@@ -92,7 +92,7 @@
                     play: function(element, properties, options) {
                         setTimeout(options.complete, 10);
                     }
-                }
+                };
 
                 animate(span, "foo", function() {
                     firstAnimationFinished = true;
