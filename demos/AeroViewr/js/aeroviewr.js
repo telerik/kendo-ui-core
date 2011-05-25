@@ -53,6 +53,8 @@ if (!isInferiorBrowser) {
         var infoTimeout = 0,
             infoLoading = false;
 
+        $(document).bind('mousewheel', false); // Cancel any mousewheel events (due to Opera weirdness).
+
         $(".exifInfo").click(function (e) {
             e.preventDefault();
 
