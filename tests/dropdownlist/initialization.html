@@ -198,12 +198,28 @@
                   equal(dropdownlist.ul.children("li").first().text(), "foo");
            });
 
+           test("template should render item directly if dataTextField is empty string", function(){
+                var dropdownlist = new DropDownList(input, { dataTextField : ""});
+
+                equal(dropdownlist.template("foo"), "<li unselectable='on'>foo</li>");
+           });
+
+           test("template should use defined dataTextField", function(){
+                var dropdownlist = new DropDownList(input, { 
+                    dataTextField : "ProductName"
+                });
+
+                equal(dropdownlist.template({ProductName: "foo"}), "<li unselectable='on'>foo</li>");
+           });
+
            test("changing the template", function() {
                var dropdownlist = new DropDownList(input, {
+                   dataTextField: "",
                    template: "<%= data.toUpperCase() %>"
                });
 
-               equal(dropdownlist.template("foo"), "FOO");
+               equal(dropdownlist.template("foo"), "<li unselectable='on'>FOO</li>");
+               equal(dropdownlist.options.template, "<%= data.toUpperCase() %>");
            });
 
            test("first click on wrapper should bind popup", function() {

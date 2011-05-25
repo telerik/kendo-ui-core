@@ -31,11 +31,9 @@
 
             Component.fn.init.call(that, element, options);
 
-            that._initDataSourceFromSelect();
-
             that._wrapper();
 
-            that._textSpan();
+            that._span();
 
             that.ul = $("<ul/>");
 
@@ -43,9 +41,12 @@
                 anchor: that.wrapper
             });
 
-            that.template = kendo.template(that.options.template);
+            that._template(options && options.template);
 
             that._dataSource();
+
+            that._getText = kendo.getter(that.options.dataTextField);
+            that._getValue = kendo.getter(that.options.dataValueField);
 
             that.ul.delegate("li", "click", proxy(that._click, that));
 
@@ -60,12 +61,12 @@
                         }
                     }
                 });
-
         },
 
         options: {
-            template: "<li unselectable='on'><%= data.Text %></li>", //unselectable=on is required for IE to prevent the suggestion box from stealing focus from the input
-            index: 0
+            index: 0,
+            dataTextField: "Text",
+            dataValueField: "Value"
         },
 
         _click: function(e) {
@@ -74,28 +75,35 @@
             that.popup.close();
         },
 
-        _dataSource: function() {
-            var that = this;
+        _template: function(isCustomTemplate) {
+            var that = this,
+                options = that.options,
+                dataTextField = options.dataTextField;
 
-            that.dataSource = DataSource.create(that.options.dataSource || {})
-                                        .bind(CHANGE, proxy(that.refresh, that));
+            if(!isCustomTemplate){
+                options.template = "<%= kendo.getter('" + options.dataTextField + "')(data) %>";
+            }
+
+            that.template = kendo.template("<li unselectable='on'>" + options.template + "</li>"); //unselectable=on is required for IE to prevent the suggestion box from stealing focus from the input
         },
 
-        _initDataSourceFromSelect: function() {
-            var that = this,
+        _dataSource: function() {
+            var that = this;
                 element = that.element;
 
             if(element.is("select") && !that.options.dataSource) {
                 that.options.dataSource = getDropDownItems(element);
             }
+
+            that.dataSource = DataSource.create(that.options.dataSource || {})
+                                        .bind(CHANGE, proxy(that.refresh, that));
         },
 
         _keydown: function(e) {
             var li,
                 that = this,
                 key = e.keyCode,
-                keys = kendo.keys,
-                preventDefault = e.preventDefault;
+                keys = kendo.keys;
 
             if (key === keys.DOWN) {
                 li = that._current.next();
@@ -103,46 +111,46 @@
                     that.select(li);
                 }
 
-                preventDefault();
+                e.preventDefault();
             } else if (key === keys.UP) {
                 li = that._current.prev();
                 if(li[0]) {
                     that.select(li);
                 }
-                preventDefault();
+                e.preventDefault();
             } else if (key === keys.HOME) {
                 li = that.ul.children().first();
                 if(li[0]) {
                     that.select(li);
                 }
-                preventDefault();
+                e.preventDefault();
             } else if (key === keys.END) {
                 li = that.ul.children().last();
                 if(li[0]) {
                     that.select(li);
                 }
-                preventDefault();
+                e.preventDefault();
+            } else if (key === keys.ENTER) {
+                that.popup.close();
+            } else if (key === keys.ESC) {
+                that.popup.close();
             }
         },
 
-        _textSpan: function() {
+        _span: function() {
             var that = this,
                 wrapper = that.wrapper,
-                spanWrapper,
+                SELECTOR = ".t-input",
                 span;
 
-            span = wrapper.find(".t-input");
+            span = wrapper.find(SELECTOR);
 
             if (!span[0]) {
-                span = $('<span class="t-input">&nbsp;</span>');
-                spanWrapper = $('<div class="t-dropdown-wrap t-state-default" />')
-                                .append(span)
-                                .append('<span class="t-select"><span class="t-icon t-arrow-down">select</span></span>');
-
-                wrapper.append(spanWrapper)
+                wrapper.append('<div class="t-dropdown-wrap t-state-default"><span class="t-input">&nbsp;</span><span class="t-select"><span class="t-icon t-arrow-down">select</span></span></div>')
                        .append(that.element);
-            }
 
+                span = wrapper.find(SELECTOR);
+            }
             that.span = span;
         },
 
@@ -207,6 +215,7 @@
             var text,
                 dataItem,
                 that = this,
+                options = that.options,
                 liItems = that.ul.children().removeClass(SELECTED);
 
             if (!isNaN(li - 0) && li > -1) {
@@ -215,10 +224,10 @@
 
             if (li[0] && !li.hasClass(SELECTED)) {
                 dataItem = that.dataSource.view()[li.index()];
-                text = dataItem.Text;
+                text = that._getText(dataItem);
 
                 that.text(text);
-                that._value(dataItem.Value || text);
+                that._value(that._getValue(dataItem) || text);
                 that.current(li.addClass(SELECTED));
             }
         },
