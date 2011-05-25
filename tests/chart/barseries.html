@@ -44,9 +44,7 @@
                     CATEGORY_AXIS_Y = 2,
                     TOLERANCE = 0.1;
 
-                function PlotAreaStub() {
-                    this.box = new Box(0, 0, 100, 100);
-                }
+                function PlotAreaStub() { }
 
                 $.extend(PlotAreaStub.prototype, {
                     axisX: {
@@ -235,6 +233,83 @@
             })();
 
             (function() {
+                var series,
+                    plotArea,
+                    viewFactory,
+                    positiveSeries = { data: [1, 2] },
+                    negativeSeries = { data: [-1, -2] },
+                    CATEGORY_AXIS_X = 2,
+                    TOLERANCE = 0.1;
+
+                function PlotAreaStub() { }
+
+                $.extend(PlotAreaStub.prototype, {
+                    axisX: {
+                        getSlot: function(value) {
+                            var valueX = CATEGORY_AXIS_X + value,
+                                slotLeft = Math.min(CATEGORY_AXIS_X, valueX),
+                                slotRight = Math.max(CATEGORY_AXIS_X, valueX);
+
+                            return new Box(slotLeft, 0, slotRight, 0);
+                        }
+                    },
+
+                    axisY: {
+                        getSlot: function(categoryIndex) {
+                            return new Box(CATEGORY_AXIS_X, categoryIndex,
+                                           CATEGORY_AXIS_X, categoryIndex + 1);
+                        }
+                    }
+                });
+
+                function setupBarChart(options) {
+                    plotArea = new PlotAreaStub();
+                    viewFactory = new ViewFactoryStub();
+
+                    series = new Chart.BarChart(plotArea, options);
+
+                    series.updateLayout();
+                }
+
+                module("Bar Chart / Horizontal / Positive Values", {
+                    setup: function() {
+                        setupBarChart({ isVertical: false, series: [ positiveSeries ] });
+                    }
+                });
+
+                test("bars are distributed across category axis", function() {
+                    var barsY = $.map(series._bars, function(bar) {
+                        return bar.box.y1;
+                    });
+
+                    same(barsY, [0.3, 1.3], TOLERANCE);
+                });
+
+                test("bar sides are aligned to category axis", function() {
+                    var barsX = $.map(series._bars, function(bar) {
+                        return bar.box.x1;
+                    });
+
+                    same(barsX, [CATEGORY_AXIS_X, CATEGORY_AXIS_X]);
+                });
+
+                test("bars have set height", function() {
+                    $.each(series._bars, function() {
+                        equal(this.box.height(), 0.4, TOLERANCE);
+                    });
+                });
+
+                test("bars have set width according to value", function() {
+                    var barWidths = $.map(series._bars, function(bar) {
+                        return bar.box.width();
+                    });
+
+                    same(barWidths, [1, 2]);
+                });
+
+            })();
+
+            (function() {
                 var cluster,
                     bars,
                     clusterBox = new Box(0, 0, 350, 350),
@@ -274,7 +349,7 @@
 
                 module("Cluster Layout / Vertical", {
                     setup: function() {
-                        createCluster({ isHorizontal: false, gap: 0 });
+                        createCluster({ isVertical: true, gap: 0 });
                     }
                 });
 
