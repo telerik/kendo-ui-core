@@ -181,6 +181,19 @@
         options: {
         },
 
+        updateLayout: function(targetBox) {
+            var element = this,
+                children = element.children,
+                box = this.box = new Box();
+
+            for (var i = 0; i < children.length; i++) {
+                var currentChild = children[i];
+
+                currentChild.updateLayout(targetBox);
+                box.wrap(currentChild.box);
+            }
+        },
+
         getViewElements: function(factory) {
             var element = this,
                 viewElements = [],
@@ -739,11 +752,12 @@
 
     function ClusterLayout(options) {
         var cluster = this;
-        cluster.children = [];
+        ChartElement.call(cluster);
 
         cluster.options = $.extend({}, cluster.options, options);
     }
 
+    ClusterLayout.prototype = new ChartElement();
     $.extend(ClusterLayout.prototype, {
         options: {
             isHorizontal: true,
@@ -762,7 +776,7 @@
                 position = box[axis + 1] + slotSize * (gap / 2);
 
             for (var i = 0; i < children.length; i++) {
-                var childBox = children[i].box.clone();
+                var childBox = (children[i].box || box).clone();
 
                 childBox[axis + 1] = position;
                 childBox[axis + 2] = position + slotSize;
@@ -785,16 +799,24 @@
     $.extend(StackLayout.prototype, {
         options: {
             isVertical: true,
-            inverted: true
+            isReversed: false
         },
 
         updateLayout: function(targetBox) {
             var stack = this,
-                isVertical = stack.options.isVertical,
+                options = stack.options,
+                isVertical = options.isVertical,
                 stackAxis = isVertical ? Y : X,
                 positionAxis = isVertical ? X : Y,
                 children = stack.children,
-                box;
+                box = stack.box = new Box(),
+                stackDirection;
+
+            if (options.isReversed) {
+                stackDirection = isVertical ? BOTTOM : LEFT;
+            } else {
+                stackDirection = isVertical ? TOP : RIGHT;
+            }
 
             for (var i = 0; i < children.length; i++) {
                 var currentChild = children[i],
@@ -803,7 +825,7 @@
                 childBox.snapTo(targetBox, positionAxis)
 
                 if (i > 0) {
-                    childBox.alignTo(children[i - 1].box, isVertical ? TOP : RIGHT);
+                    childBox.alignTo(children[i - 1].box, stackDirection);
                 } else {
                     box = stack.box = childBox.clone();
                 }
@@ -852,6 +874,7 @@
         chart.options = $.extend({}, chart.options, options);
         chart._seriesMin = Number.MAX_VALUE;
         chart._seriesMax = - Number.MAX_VALUE;
+        chart._bars = [];
 
         chart.init();
     }
@@ -867,12 +890,12 @@
 
         init: function() {
             var barChart = this,
-                children = barChart.children,
+                options = barChart.options,
                 isStacked = barChart.options.isStacked,
                 positiveSums = [],
                 negativeSums = [];
 
-            barChart.traverseDataPoints(function(value, seriesIx, categoryIx) {
+            barChart.traverseDataPoints(function(value, categoryIx) {
                 if (isStacked) {
                     var sums = value > 0 ? positiveSums : negativeSums;
                     if (sums.length === categoryIx) {
@@ -885,8 +908,7 @@
                     barChart._seriesMax = Math.max(barChart._seriesMax, value);
                 }
 
-                var bar = new Bar();
-                children.push(bar);
+                barChart.addValue(value, categoryIx);
             });
 
             if (negativeSums.length === 0) {
@@ -903,6 +925,49 @@
             }
         },
 
+        addValue: function(value, categoryIx) {
+            var barChart = this,
+                options = barChart.options,
+                children = barChart.children,
+                isStacked = barChart.options.isStacked;
+
+            var bar = new Bar();
+            barChart._bars.push(bar);
+
+            var cluster = children[categoryIx];
+            if (!cluster) {
+                cluster = children[categoryIx] = new ClusterLayout({
+                    gap: options.gap
+                });
+            }
+
+            if (isStacked) {
+                var stackWrap = cluster.children[0],
+                positiveStack,
+                negativeStack;
+
+                if (!stackWrap) {
+                    stackWrap = new ChartElement();
+                    cluster.children.push(stackWrap);
+
+                    positiveStack = new StackLayout();
+                    negativeStack = new StackLayout({ isReversed: true });
+                    stackWrap.children.push(positiveStack, negativeStack);
+                } else {
+                    positiveStack = stackWrap.children[0];
+                    negativeStack = stackWrap.children[1];
+                }
+
+                if (value > 0) {
+                    positiveStack.children.push(bar);
+                } else {
+                    negativeStack.children.push(bar);
+                }
+            } else {
+                cluster.children.push(bar);
+            }
+        },
+
         getValueRange: function() {
             var barChart = this;
             return { min: barChart._seriesMin, max: barChart._seriesMax };
@@ -911,49 +976,29 @@
         updateLayout: function(targetBox) {
             var barChart = this,
                 options = barChart.options,
-                series = options.series,
                 isHorizontal = options.isHorizontal,
-                isStacked = options.isStacked,
                 plotArea = barChart.plotArea,
                 children = barChart.children,
-                childIndex = 0,
-                clusters = [],
-                stacks = [];
+                barIndex = 0,
+                categorySlots = [],
+                bars = barChart._bars;
 
-            barChart.traverseDataPoints(function(value, seriesIx, categoryIx) {
-                var bar = children[childIndex++];
+            barChart.traverseDataPoints(function(value, categoryIx) {
+                var bar = bars[barIndex++];
 
                 var slotX = plotArea.axisX.getSlot(isHorizontal ? categoryIx : value);
                 var slotY = plotArea.axisY.getSlot(isHorizontal ? value : categoryIx);
 
                 var barSlot = new Box(slotX.x1, slotY.y1, slotX.x2, slotY.y2);
-
-                var cluster = clusters[categoryIx];
-                if (!cluster) {
-                    cluster = clusters[categoryIx] = new ClusterLayout({
-                        gap: options.gap
-                    });
-                    cluster.box = isHorizontal ? slotX : slotY;
-                }
-
-                if (isStacked) {
-                    var stack = cluster.children[0];
-                    if (!stack) {
-                        stack = new StackLayout();
-                        cluster.children.push(stack);
-                        stack.box = isHorizontal ? slotX : slotY;
-                    }
-                    stack.children.push(bar);
-                } else {
-                    cluster.children.push(bar);
-                }
-
                 bar.updateLayout(barSlot);
+
+                if(!categorySlots[categoryIx]) {
+                    categorySlots[categoryIx] = isHorizontal ? slotX : slotY;
+                }
             });
 
-            for (var i = 0; i < clusters.length; i++) {
-                var cluster = clusters[i];
-                cluster.updateLayout(cluster.box);
+            for (var i = 0; i < children.length; i++) {
+                children[i].updateLayout(categorySlots[i]);
             };
 
             barChart.box = targetBox;
@@ -969,7 +1014,7 @@
                 for (var seriesIx = 0; seriesIx < series.length; seriesIx++) {
                     var value = series[seriesIx].data[categoryIx];
 
-                    callback(value, seriesIx, categoryIx);
+                    callback(value, categoryIx);
                 }
             }
        }

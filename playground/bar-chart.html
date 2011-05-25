@@ -10,14 +10,14 @@
         <script type="text/javascript">
 
             $(document).ready(function() {
-                kendo.ui.Chart.BarChart.prototype.options.isStacked = false;
+                kendo.ui.Chart.BarChart.prototype.options.isStacked = true;
 
                 $("#container").kendoChart({
                     title: "Title",
                     series: [{
                         name: "Value A",
                         type: "bar",
-                        data: [-10, -40, -40],
+                        data: [-20, -40, -40],
                         stack: "A"
                     }, {
                         name: "Value B",
@@ -27,7 +27,7 @@
                     }, {
                         name: "Value C",
                         type: "bar",
-                        data: [-15, -25, -35],
+                        data: [15, 25, 35],
                         stack: "B"
                     }],
                     seriesDefaults: {
