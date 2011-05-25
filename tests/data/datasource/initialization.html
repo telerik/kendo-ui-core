@@ -7,6 +7,7 @@
         <script type="text/javascript" src="../../qunit-runner.js"></script>
         <script src="../../../src/kendo.core.js"></script>
         <script src="../../../src/kendo.query.js"></script>
+        <script src="../../../src/kendo.model.js"></script>
         <script src="../../../src/kendo.datasource.js"></script>
         <link rel="stylesheet" href="../../qunit.css" type="text/css" />
     </head>
@@ -27,6 +28,7 @@
             },
             data = [],
             RemoteTransport = kendo.data.RemoteTransport,
+            Model = kendo.data.Model,
             DataSource = kendo.data.DataSource;
 
             function setup(source) {
@@ -121,6 +123,39 @@
                 dataSource.read();
                 ok(dataSource.data() === data);
             });
+
+            test("model returns a model instance", function() {
+                var dataSource = new DataSource({
+                    model: Model.define(),
+                    data: [ { id: 1, foo: "bar"}, { id: 2, foo: "baz"}]
+                });
+                dataSource.read();
+                var model = dataSource.model(1);
+                equal(model.get("id"), 1);
+                equal(model.get("foo"), "bar");
+            });
+
+            test("model use model metadata", function() {
+                var dataSource = new DataSource({
+                    model: Model.define( { idField: "foo" }),
+                    data: [ { foo: "1", bar: "bar1"}, { foo: "2", bar: "bar2"}]
+                });
+                dataSource.read();
+                var model = dataSource.model("2");
+                equal(model.get("foo"), "2");
+                equal(model.get("bar"), "bar2");
+            });
+            test("model use model literal", function() {
+                var dataSource = new DataSource({
+                    model: { idField: "foo" },
+                    data: [ { foo: "1", bar: "bar1"}, { foo: "2", bar: "bar2"}]
+                });
+                dataSource.read();
+                var model = dataSource.model("2");
+                equal(model.get("foo"), "2");
+                equal(model.get("bar"), "bar2");
+            });
+
             </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

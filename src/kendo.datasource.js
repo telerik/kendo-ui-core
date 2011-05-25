@@ -2,6 +2,7 @@
     var extend = $.extend,
         kendo = window.kendo,
         Observable = kendo.Observable,
+        Model = kendo.data.Model,
         stringify = kendo.stringify;
 
     function idMap(data, id) {
@@ -177,11 +178,16 @@
                 _pageSize: options.pageSize,
                 _page: options.page  || (options.pageSize ? 1 : undefined),
                 _sort: options.sort,
-                _filter: options.filter
+                _filter: options.filter,
+                modelType: options.model
             }),
-            id = that.schema.id,
+            identifier,
+            modelType = that.modelType,
             transport = options.transport;
-
+            if(!$.isEmptyObject(modelType) && !modelType.identifier) {
+                that.modelType = modelType = Model.define(modelType);
+            }
+            identifier = modelType.identifier;
             Observable.fn.init.call(that);
 
             that._reader = extend({
@@ -193,24 +199,29 @@
                 }
             }, options.reader);
             that.transport = transport && $.isFunction(transport.read) ? transport : (options.data? new LocalTransport({ data: options.data }):new RemoteTransport(transport));
-            if (id) {
+            if (identifier) {
                 that.find = function(id) {
                     return that._data[that.idMap[id]];
                 };
                 that.id = function(record) {
-                    return record[id];
+                    return identifier(record);
                 };
             } else {
                 that.find = that.at;
             }
         },
         defaults: {
-            schema: {
-                id: "id"
+            modelType: {
+                identifier: function(data) {
+                    return data["id"];
+                }
             },
             serverSorting: false,
             serverPaging: false,
             serverFiltering: false
+        },
+        model: function(id) {
+            return new this.modelType(this.find(id));
         },
         read: function() {
             var that = this,

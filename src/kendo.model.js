@@ -146,7 +146,14 @@
     });
 
     Model.define = function(proto) {
-       return Model.extend(proto);
+        var model = Model.extend(proto),
+            id = proto && proto.idField || "id",
+            accessor = $.isFunction(id) ? id : kendo.accessor(id).get;
+
+        model.identifier = function(data) {
+            return accessor(data);
+        }
+        return model;
     }
 
     kendo.data.Model = Model;
