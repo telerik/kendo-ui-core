@@ -124,7 +124,7 @@
             var that = this,
                 id = that.idField;
 
-            return that.set(id, guid());
+            return that.accessor(id).set(that.data, guid());
         },
 
         modified: function() {
@@ -135,7 +135,7 @@
                 pristine = that.pristine;
 
             for (field in data) {
-                if (!equal(pristine[field], data[field])) {
+                if (field !== that.idField && !equal(pristine[field], data[field])) {
                     modified = modified || {};
                     modified[field] = data[field];
                 }
