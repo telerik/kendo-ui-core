@@ -83,7 +83,7 @@
                 });
 
                 test("Creates bars for series data points", function() {
-                    equal(series.children.length, positiveSeries.data.length);
+                    equal(series._bars.length, positiveSeries.data.length);
                 });
 
                 test("Reports minimum series value", function() {
@@ -95,7 +95,7 @@
                 });
 
                 test("bars are distributed across category axis", function() {
-                    var barsX = $.map(series.children, function(bar) {
+                    var barsX = $.map(series._bars, function(bar) {
                         return bar.box.x1;
                     });
 
@@ -103,7 +103,7 @@
                 });
 
                 test("bar bottoms are aligned to category axis", function() {
-                    var barsY = $.map(series.children, function(bar) {
+                    var barsY = $.map(series._bars, function(bar) {
                         return bar.box.y2;
                     });
 
@@ -111,13 +111,13 @@
                 });
 
                 test("bars have set width", function() {
-                    $.each(series.children, function() {
+                    $.each(series._bars, function() {
                         equal(this.box.width(), 0.4, TOLERANCE);
                     });
                 });
 
                 test("bars have set height according to value", function() {
-                    var barHeights = $.map(series.children, function(bar) {
+                    var barHeights = $.map(series._bars, function(bar) {
                         return bar.box.height();
                     });
 
@@ -139,7 +139,7 @@
                 });
 
                 test("bar tops are aligned to category axis", function() {
-                    var barsY = $.map(series.children, function(bar) {
+                    var barsY = $.map(series._bars, function(bar) {
                         return bar.box.y1;
                     });
 
@@ -147,7 +147,7 @@
                 });
 
                 test("bars have set height according to value", function() {
-                    var barHeights = $.map(series.children, function(bar) {
+                    var barHeights = $.map(series._bars, function(bar) {
                         return bar.box.height();
                     });
 
@@ -161,7 +161,7 @@
                 });
 
                 test("bars in first category are clustered", function() {
-                    equal(series.children[0].box.x2, series.children[1].box.x1);
+                    equal(series._bars[0].box.x2, series._bars[1].box.x1);
                 });
 
                 module("Bar Chart / Stack / Positive Values", {
@@ -182,11 +182,11 @@
                 });
 
                 test("bars in first category are stacked", function() {
-                    equal(series.children[1].box.y2, series.children[0].box.y1);
+                    equal(series._bars[1].box.y2, series._bars[0].box.y1);
                 });
 
                 test("series have 75% margin", function() {
-                    equal(series.children[0].box.x1, 0.3, TOLERANCE);
+                    equal(series._bars[0].box.x1, 0.3, TOLERANCE);
                 });
 
                 module("Bar Chart / Stack / Negative Values", {
@@ -204,6 +204,15 @@
 
                 test("reports stacked maximum value", function() {
                     equal(series.getValueRange().max, -2);
+                });
+
+                test("bars in first category are stacked", function() {
+                    equal(series._bars[1].box.y1, series._bars[0].box.y2);
+                });
+
+                test("stack tops are aligned to category axis", function() {
+                    same([series._bars[0].box.y1, series._bars[2].box.y1],
+                         [CATEGORY_AXIS_Y, CATEGORY_AXIS_Y]);
                 });
 
                 module("Bar Chart / Stack / Mixed Values", {
@@ -339,6 +348,59 @@
                     equal(stack.children[1].box.x1, stackBox.x1);
                 });
 
+                module("Stack Layout / Vertical / Reversed", {
+                    setup: function() {
+                        stack = new Chart.StackLayout({ isReversed: true });
+
+                        stack.children.push(
+                            new BarStub(new Box(0, 90, 100, 100)),
+                            new BarStub(new Box(0, 80, 100, 100)),
+                            new BarStub(new Box(0, 70, 100, 100))
+                        );
+
+                        stack.updateLayout(stackBox);
+                    }
+                });
+
+                test("first bar remains at its position", function() {
+                    equal(stack.children[0].box.y1, 90);
+                });
+
+                test("first bar height is not changed", function() {
+                    equal(stack.children[0].box.height(), 10);
+                });
+
+                test("second bar is placed below the first", function() {
+                    equal(stack.children[1].box.y1, stack.children[0].box.y2);
+                });
+
+                test("second bar height is not changed", function() {
+                    equal(stack.children[1].box.height(), 20);
+                });
+
+                test("third bar is placed below the second", function() {
+                    equal(stack.children[2].box.y1, stack.children[1].box.y2);
+                });
+
+                test("third bar height is not changed", function() {
+                    equal(stack.children[2].box.height(), 30);
+                });
+
+                test("reports final box after layout", function() {
+                    same([stack.box.x1, stack.box.y1, stack.box.x2, stack.box.y2],
+                         [50, 90, 100, 150]);
+                });
+
+                test("updates children width to fit box", function() {
+                    equal(stack.children[0].box.width(), stackBox.width());
+                    equal(stack.children[1].box.width(), stackBox.width());
+                });
+
+                test("updates children X position to match targetBox", function() {
+                    equal(stack.children[0].box.x1, stackBox.x1);
+                    equal(stack.children[1].box.x1, stackBox.x1);
+                });
+
                 module("Stack Layout / Horizontal", {
                     setup: function() {
                         stack = new Chart.StackLayout({ isVertical: false });
@@ -390,6 +452,59 @@
                     equal(stack.children[0].box.y1, stackBox.y1);
                     equal(stack.children[1].box.y1, stackBox.y1);
                 });
+
+                module("Stack Layout / Horizontal / Reversed", {
+                    setup: function() {
+                        stack = new Chart.StackLayout({ isVertical: false, isReversed: true });
+                        stack.children.push(
+                            new BarStub(new Box(100, 0, 120, 10)),
+                            new BarStub(new Box(100, 0, 130, 10)),
+                            new BarStub(new Box(100, 0, 140, 10))
+                        );
+
+                        stack.updateLayout(stackBox);
+                    }
+                });
+
+                test("first bar remains at its position", function() {
+                    equal(stack.children[0].box.x1, 100);
+                });
+
+                test("first bar width is not changed", function() {
+                    equal(stack.children[0].box.width(), 20);
+                });
+
+                test("second bar is placed to the left of the first", function() {
+                    equal(stack.children[1].box.x2, stack.children[0].box.x1);
+                });
+
+                test("second bar width is not changed", function() {
+                    equal(stack.children[1].box.width(), 30);
+                });
+
+                test("third bar is placed to the left of the second", function() {
+                    equal(stack.children[2].box.x2, stack.children[1].box.x1);
+                });
+
+                test("third bar width is not changed", function() {
+                    equal(stack.children[2].box.width(), 40);
+                });
+
+                test("reports final box after layout", function() {
+                    same([stack.box.x1, stack.box.y1, stack.box.x2, stack.box.y2],
+                         [30, 50, 120, 100]);
+                });
+
+                test("updates children height to fit box", function() {
+                    equal(stack.children[0].box.height(), stackBox.height());
+                    equal(stack.children[1].box.height(), stackBox.height());
+                });
+
+                test("updates children Y position to match targetBox", function() {
+                    equal(stack.children[0].box.y1, stackBox.y1);
+                    equal(stack.children[1].box.y1, stackBox.y1);
+                });
+
             })();
 
         </script>
