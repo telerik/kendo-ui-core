@@ -279,6 +279,8 @@ header
 
     background:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,.9)), to(rgba(0,0,0,.7)));
     background:-moz-linear-gradient(top, rgba(0,0,0,.9), rgba(0,0,0,.7));
+    background:-o-linear-gradient(top, rgba(0,0,0,.9), rgba(0,0,0,.7));
+    background:-ms-linear-gradient(top, rgba(0,0,0,.9), rgba(0,0,0,.7));
     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#e5000000, endColorstr=#b2000000);
 }
 
