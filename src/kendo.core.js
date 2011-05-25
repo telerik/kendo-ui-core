@@ -1215,7 +1215,7 @@
         formatters: formatters,
         htmlEncode: htmlEncode,
         getter: function(expression) {
-            return new Function("d", "return d." + expression);
+            return new Function("d", "return d" + (expression ? "." + expression : ""));
         },
         setter: function(expression) {
             return new Function("d,value", "d." + expression + "=value");
