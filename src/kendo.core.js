@@ -129,7 +129,8 @@
                 begin = settings.begin,
                 end = settings.end,
                 useWithBlock = settings.useWithBlock,
-                functionBody = "var o='';",
+                functionBody = "var o='',e = kendo.htmlEncode;",
+                encodeRegExp = /\${([^}]*)}/g,
                 evalRegExp = new RegExp(begin + "=(.+?)" + end, "g"),
                 quoteRegExp = new RegExp("'(?=[^" + end[0] + "]*" + end + ")", "g");
 
@@ -141,7 +142,8 @@
                 .replace(quoteRegExp,"\t")
                 .split("'").join("\\'")
                 .split("\t").join("'")
-                .replace(evalRegExp, "'; o+=$1; o+='")
+                .replace(encodeRegExp, "';o+=e($1);o+='")
+                .replace(evalRegExp, "';o+=$1;o+='")
                 .split(begin).join("';")
                 .split(end).join("o+='");
 
@@ -1139,7 +1141,7 @@
     };
 
     function htmlEncode(value) {
-        return value.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+        return ("" + value).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
     }
 
     var touchLocation = function(e) {
