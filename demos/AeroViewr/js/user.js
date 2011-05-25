@@ -86,11 +86,8 @@
 
     function search() {
         if ($("#searchBox").val()) {
-            $("#viewslideshow").find(".p-icon")
-               .removeClass("i-pause")
-                .addClass("i-slideshow")
-                .end()
-                .find("em").html('Play');
+            slideshow.stop();
+            updatePlayIcon(slideshow._started);
 
             searching = true;
             $("#flatSetsStrip").hide();
@@ -104,7 +101,6 @@
             $("#overlay").after("<div id='searchLoading' class='loading'>Loading ...</div>");
             setPhotosDataSource.query({page: 1, pageSize: 20});
         }
-        slideshow.stop();
     }
 
     function changeState(state) {
@@ -123,6 +119,15 @@
         }
     }
 
+    function updatePlayIcon(playing) {
+        return $("#viewslideshow").find(".p-icon")
+                .toggleClass("i-pause", playing)
+                .toggleClass("i-slideshow", !playing)
+                .end()
+                .find("em")
+                .html(playing ? 'Pause' : 'Play').end();
+    }
+
     var user = window.user = {
         initUpload: function() {
             upload = new window.Upload($("#uploadWrap"));
@@ -130,6 +135,8 @@
                 if(!$(this).hasClass("i-state-disabled")) {
                     e.preventDefault();
                     slideshow.stop();
+                    updatePlayIcon(slideshow._started);
+                    
                     $("#mainTemplate").hide();
                     $("#mainUserWrap").hide();
                     upload.show();
@@ -277,7 +284,6 @@
                 }
             }
 
-
             that.initFlatSetsStrip();
             that.initMainPictures();
             that.initPhotoStrip();
@@ -305,14 +311,10 @@
 
                 upload.hide();
 
-                $("#uploadphotos").toggleClass("i-state-disabled");
+                $("#uploadphotos").toggleClass("i-state-disabled", !started);
 
-                $(this).find(".p-icon")
-                    .toggleClass("i-pause")
-                    .toggleClass("i-slideshow")
-                    .end()
-                    .find("em").html(started ? 'Play' : 'Pause');
                 slideshow.toggle();
+                updatePlayIcon(slideshow._started);
             });
 
             $(".i-gridview").click(function() {
@@ -346,11 +348,7 @@
 
                 slideshow.stop();
 
-                $("#viewslideshow").find(".p-icon")
-                    .removeClass("i-pause")
-                    .addClass("i-slideshow")
-                    .end()
-                    .find("em").html('Play');
+                updatePlayIcon(slideshow._started);
 
                 if (state == "slideshow" || state == "searchresult") {
                     $("#flatPhotoStrip").hide();

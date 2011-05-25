@@ -42,10 +42,19 @@ var visitor = window.visitor,
        setBigPhoto(ui.selectable.value().find("img"));
 
        dataSource.query({page: 1, pageSize: PAGESIZE});
-        $("#viewslideshow, #uploadphotos").fadeIn();
+       $("#viewslideshow, #uploadphotos").fadeIn();
 
        $("#backButton").text("Back to search results").data("currentView", "flatMostPopularPhotos");
    }
+
+    function updatePlayIcon(playing) {
+        return $("#viewslideshow").find(".p-icon")
+                .toggleClass("i-pause", playing)
+                .toggleClass("i-slideshow", !playing)
+                .end()
+                .find("em")
+                .html(playing ? 'Pause' : 'Play').end();
+    }
 
    window.visitor = {
         hideExif: function() {
@@ -77,12 +86,7 @@ var visitor = window.visitor,
                 $("#overlay").fadeIn();
                 $("#exifButton").fadeOut();
                 slideshow.init($("#flatSearchPhotos").data("kendoListView"));
-                $("#viewslideshow")
-                    .find(".p-icon")
-                        .removeClass("i-pause")
-                        .addClass("i-slideshow")
-                    .end()
-                    .find("em").html('Play').end()
+                updatePlayIcon(slideshow._started)
                     .add("#uploadphotos").fadeOut()
             }
         },
@@ -179,14 +183,6 @@ var visitor = window.visitor,
             });
 
             $(".bottomLink").bind("click", function(e){
-                $("#viewslideshow")
-                    .find(".p-icon")
-                        .removeClass("i-pause")
-                        .addClass("i-slideshow")
-                    .end()
-                    .find("em").html('Play').end()
-                    .add("#uploadphotos").fadeIn();
-
                 e.preventDefault();
                 var element = $(this),
                     view = element.data("currentView");
@@ -211,6 +207,9 @@ var visitor = window.visitor,
                     element.text("Back to search results");
                     slideshow.init($("#flatMostPopularPhotos").data("kendoListView"));
                 }
+
+                updatePlayIcon(slideshow._started)
+                    .add("#uploadphotos").fadeIn();
             });
 
             that.thumbList.append($("#flatSearchPhotos"));
@@ -253,6 +252,9 @@ var visitor = window.visitor,
 
             $("#viewslideshow").click(function(e) {
                 e.preventDefault();
+                if($(this).hasClass("i-state-disabled")) {
+                    return;
+                }
                 var started = slideshow._started;
                 if (!started && !$("#footer .thumbs:visible")[0]) {
                     return;
@@ -267,13 +269,8 @@ var visitor = window.visitor,
                     }, 300);
                 }                
 
-                $(this).find(".p-icon")
-                        .toggleClass("i-pause")
-                        .toggleClass("i-slideshow")
-                    .end()
-                    .find("em").html(started ? 'Play' : 'Pause');
-
-                slideshow.toggle();                
+                slideshow.toggle();
+                updatePlayIcon(slideshow._started);
             });
         }
    };
