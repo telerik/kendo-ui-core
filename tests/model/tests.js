@@ -10,5 +10,9 @@ tests.push(
     {
         page: "model/set.html",
         title: "set"
+    },
+    {
+        page: "model/modified.html",
+        title: "modified"
     }
 );
