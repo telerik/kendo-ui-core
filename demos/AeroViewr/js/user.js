@@ -79,7 +79,7 @@
        $("#overlay").fadeOut();
        $("#exifButton").fadeIn();
 
-       setBigPhoto($("img:first", ui.selectable.value()));
+       setBigPhoto($("img", ui.selectable.value()).filter(":first"));
 
        setPhotosDataSource.query({page: 1, pageSize: PAGESIZE});
    }
@@ -152,16 +152,12 @@
                     this.element
                         .prepend('<li alt="thumbnail"><img width="75" height="75" src="img/NotInSet.png" /><em>Not In Set</em></li>')
                         .show();
-                    this.selectable.value(this.element.find("li:first"));
+                    this.selectable.value(this.element.find("li").filter(":first"));
                 },
                 change: function(e) {
                     var selected = this.selected();
                     upload.currentSet(photoSetId());
-                    if (selected.is(this.element.find("li:first"))) {
-                        photosInSet = false;
-                    } else {
-                        photosInSet = true;
-                    }
+                    photosInSet = !selected.is(this.element.find("li").filter(":first"));
 
                     $("#mainUserWrap").show();
                     $("#overlay").fadeIn();
@@ -224,11 +220,13 @@
                 dataSource: setPhotosDataSource,
                 template: template(imageSize),
                 change: function () {
-                    setBigPhoto($("img:first", this.selectable.value()));
+                    setBigPhoto($("img", this.selectable.value()).filter(":first"));
                 },
                 dataBound: function() {
                     var id = $("#bigPhoto").attr("data-photoid");
-                    this.element.find("img[data-photoid=" + id + "]").parent().addClass("t-state-selected");
+                    var images = this.element.find("img[data-photoid*='" + id + "']");
+                    if (images.length)
+                        images.parent().addClass("t-state-selected");
                 }
             }).hide() );
         },
@@ -272,7 +270,7 @@
             var that = this;
             $("#flatMostPopularPhotos").hide();
             $("#signin").hide();
-            $("#userInfo").fadeIn().find("em:first").html(flickr.auth.username);
+            $("#userInfo").fadeIn().find("em").filter(":first").html(flickr.auth.username);
 
             that.thumbList = new kendo.ui.Scroller($('<div class="thumb-list">').appendTo("#footer")).scrollElement;
             var href = location.href.split("?");
