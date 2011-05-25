@@ -46,7 +46,7 @@
             test("find returns the record based on its index when the reader does not define id", function() {
                 data = [ { id: 1}, { id: 2} ];
                 var dataSource = new DataSource( {
-                    schema: {
+                    model: {
                     },
                     data: data
                 });

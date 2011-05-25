@@ -117,10 +117,19 @@
                 var model = new MyModel();
                 ok(model.id());
             });
+
             test("id is generated if no value is provided and no metadata", function(){
                 var MyModel = Model.define();
                 var model = new MyModel();
                 ok(model.id());
+            });
+
+            test("identifier returns id value for a record", function() {
+                var MyModel = Model.define({idField: "foo"}),
+                    data = {foo: 1},
+                    id;
+                id = MyModel.identifier(data);
+                equal(id, 1);
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
