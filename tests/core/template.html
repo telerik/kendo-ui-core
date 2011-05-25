@@ -104,6 +104,31 @@
                 var t = template.compile("${foo}");
                 equal(t({ foo: 1 }), "1");
             });
+
+            test("template defined in a script block", function() {
+                var t = template.compile($("#encoded").text());
+                equal($.trim(t({ foo: 1 })), "<strong>1</strong>");
+            });
+
+            test("template with raw expression defined in a script block", function() {
+                var t = template.compile($("#raw").text());
+                equal($.trim(t({ foo: 1 })), "<strong>1</strong>");
+            });
+
+            test("can execute code in template defined inside a script block", function() {
+                var t = template.compile($("#code").text());
+
+                equal($.trim(t({})), "foo");
+            });
+        </script>
+        <script id="encoded" type="text/x-jquery-template">
+            <strong>${foo}</strong>
+        </script>
+        <script id="raw" type="text/x-jquery-template">
+            <strong><%= foo %></strong>
+        </script>
+        <script id="code" type="text/x-jquery-template">
+            <% var foo = "foo"; %><%= foo %>
         </script>
     </body>
 </html>
