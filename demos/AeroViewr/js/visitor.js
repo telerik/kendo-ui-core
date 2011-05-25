@@ -69,7 +69,7 @@ var visitor = window.visitor,
                 dataSource: mostPopularDataSource,
                 template: template(IMAGESIZES[0]),
                 dataBound: function() {
-                    var li = this.element.find("li:first");
+                    var li = this.element.find("li").filter(":first");
                     this.selectable.value(li);
                     displayImages(this.element);
                 },
@@ -106,8 +106,10 @@ var visitor = window.visitor,
                 template: template(IMAGESIZES[0]),
                 dataBound: function() {
                     displayImages(this.element);
-                    var id = $("#bigPhoto").attr("data-photoid"); 
-                    this.element.find("img[data-photoid=" + id + "]").parent().addClass("t-state-selected");
+                    var id = $("#bigPhoto").attr("data-photoid");
+                    var images = this.element.find("img[data-photoid*='" + id + "']");
+                    if (images.length)
+                        images.parent().addClass("t-state-selected");
                 },
                 change: function() {
                     setBigPhoto(this.selected().find("img"));
