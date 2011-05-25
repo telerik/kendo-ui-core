@@ -99,7 +99,7 @@
             setPhotosDataSource._reader = searchReader;
 
             $("#overlay").after("<div id='searchLoading' class='loading'>Loading ...</div>");
-            setPhotosDataSource.query({page: 1, pageSize: 20});
+            setPhotosDataSource.query({page: 1, pageSize: $("#mainUserWrap").find("#gridNotInSetPhotos").hasClass("currentView") ? 5 : 20});
         }
     }
 
