@@ -82,7 +82,7 @@ var visitor = window.visitor,
             if ($("#searchBox").val()) {
                 $("#overlay").after("<div id='searchLoading' class='loading'>Loading ...</div>");
                 searching = true;
-                dataSource.query({page: 1, pageSize: 20});
+                dataSource.query({page: 1, pageSize: $("#mainTemplate").find("#grid").hasClass("currentView") ? 5 : 20});
                 $("#flatMostPopularPhotos").hide();
                 $("#flatSearchPhotos").hide();
                 $("#overlay").fadeIn();
