@@ -128,7 +128,7 @@
                 var MyModel = Model.define({idField: "foo"}),
                     data = {foo: 1},
                     id;
-                id = MyModel.identifier(data);
+                id = MyModel.id(data);
                 equal(id, 1);
             });
         </script>
