@@ -40,9 +40,10 @@
 
             that._accessors = {};
 
-            that.modified = false;
+            that._modified = false;
 
             that.data = extend(true, {}, data);
+            that.pristine = extend(true, {}, data);
         },
 
         accessor: function(field) {
@@ -70,7 +71,7 @@
                 values = fields;
             }
 
-            that.modified = false;
+            that._modified = false;
 
             for (field in values) {
                 accessor = that.accessor(field);
@@ -79,13 +80,30 @@
 
                 if (!equal(value, accessor.get(that.data))) {
                     accessor.set(that.data, value);
-                    that.modified = true;
+                    that._modified = true;
                 }
             }
 
-            if (that.modified) {
+            if (that._modified) {
                 that.trigger("change");
             }
+        },
+
+        modified: function() {
+            var modified = null,
+                field,
+                that = this,
+                data = that.data,
+                pristine = that.pristine;
+
+            for (field in data) {
+                if (!equal(pristine[field], data[field])) {
+                    modified = modified || {};
+                    modified[field] = data[field];
+                }
+            }
+
+            return modified;
         }
     });
 
