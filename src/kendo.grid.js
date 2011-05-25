@@ -318,7 +318,7 @@
                 thead = $("<thead/>").insertBefore(that.tbody);
             }
 
-            tr = that.table.find("tr:has(th)");
+            tr = that.table.find("tr").filter(":has(th)");
 
             if (!tr.length) {
                 tr = thead.children().first();
