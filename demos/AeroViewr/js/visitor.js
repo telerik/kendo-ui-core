@@ -4,6 +4,7 @@ window.application.call(this);
 
 var visitor = window.visitor,
     slideshow = window.slideshow,
+    searching = false,
     data = window.data,
     dataSource = data.dataSource({
         pageSize: 5,
@@ -79,7 +80,8 @@ var visitor = window.visitor,
         },
         search: function(el) {
             if ($("#searchBox").val()) {
-                this.searchResult();
+                $("#overlay").after("<div id='searchLoading' class='loading'>Loading ...</div>");
+                searching = true;
                 dataSource.query({page: 1, pageSize: 20});
                 $("#flatMostPopularPhotos").hide();
                 $("#flatSearchPhotos").hide();
@@ -91,16 +93,10 @@ var visitor = window.visitor,
             }
         },
 
-        searchResult: function () {
+        initMainPictures: function () {
             var that = this;
-            that._showSearchResults = true;
-            $("#overlay").after("<div id='searchLoading' class='loading'>Loading ...</div>");
 
-            if (that._searchInitialized){
-                return;
-            }
-
-            that._searchInitialized = true;
+            that._isSliderInit = false;
 
             $(".paging").kendoPager({ dataSource: dataSource });
 
@@ -110,7 +106,7 @@ var visitor = window.visitor,
                 template: template(IMAGESIZES[0]),
                 dataBound: function() {
                     displayImages(this.element);
-                    var id = $("#bigPhoto").attr("data-photoid");                   
+                    var id = $("#bigPhoto").attr("data-photoid"); 
                     this.element.find("img[data-photoid=" + id + "]").parent().addClass("t-state-selected");
                 },
                 change: function() {
@@ -141,11 +137,15 @@ var visitor = window.visitor,
                 dataSource: dataSource,
                 template: template(imageSize),
                 dataBound: function() {
-                    if (that._showSearchResults){
+                    if (searching){
                         $("#mainTemplate").show();
-                        that.initSlider();
-                        that._showSearchResults = false;
+                        searching = false;
                     }
+                    if (!that._isSliderInit) {
+                        that._isSliderInit = true;
+                        that.initSlider();
+                    }
+
                     $("#backButton").text("Back to most popular").data("currentView", "mainTemplate");
                     displayImages(this.element);
                     $("#searchLoading").remove();
@@ -245,6 +245,7 @@ var visitor = window.visitor,
             that.thumbList = new kendo.ui.Scroller($('<div class="thumb-list">').appendTo("#footer")).scrollElement;
 
             that.mostPopular();
+            that.initMainPictures();
 
             $("#backButton").text("");
 
