@@ -1,26 +1,30 @@
-(function($, window, undefined) {
+(function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
-        keys = kendo.keys,
         DataSource = kendo.data.DataSource,
         tbodySupportsInnerHtml = kendo.support.tbodyInnerHtml,
         Component = ui.Component,
-        extend = $.extend,
+        keys = kendo.keys,
         isPlainObject = $.isPlainObject,
-        FOCUSSELECTOR =  ">tbody>tr>td",
+        extend = $.extend,
+        map = $.map,
+        isArray = $.isArray,
+        proxy = $.proxy,
+        CELLSELECTOR =  ">tbody>tr>td",
+        FIRST_CELL_SELECTOR = "td:first",
         CHANGE = "change",
         DATABOUND = "dataBound",
         FOCUSED = "t-state-focused",
         FOCUSABLE = "t-focusable",
-        map = $.map;
+        STRING = "string";
 
     var Grid = Component.extend({
         init: function(element, options) {
             var that = this;
 
-            options = $.isArray(options) ? { dataSource: options } : options;
+            options = isArray(options) ? { dataSource: options } : options;
 
-            Component.prototype.init.call(that, element, options);
+            Component.fn.init.call(that, element, options);
 
             that.bind([CHANGE,DATABOUND], that.options);
 
@@ -75,18 +79,18 @@
                 selectable = that.options.selectable;
 
             if (selectable) {
-                multi = typeof selectable === "string" && selectable.toLowerCase().indexOf("multiple") > -1;
-                cell = typeof selectable === "string" && selectable.toLowerCase().indexOf("cell") > -1;
+                multi = typeof selectable === STRING && selectable.toLowerCase().indexOf("multiple") > -1;
+                cell = typeof selectable === STRING && selectable.toLowerCase().indexOf("cell") > -1;
 
                 that.selectable = new kendo.ui.Selectable(that.element, {
-                    filter: cell ? ">tbody>tr>td" : ">tbody>tr",
+                    filter: cell ? CELLSELECTOR : ">tbody>tr",
                     multi: multi,
                     change: function() {
-                        that.trigger("change");
+                        that.trigger(CHANGE);
                     }
                 });
                 that.element.keydown(function(e) {
-                    if (e.keyCode === kendo.keys.SPACEBAR) {
+                    if (e.keyCode === keys.SPACEBAR) {
                         var current = that.current();
 
                         if (!multi || !e.ctrlKey) {
@@ -121,7 +125,7 @@
 
             element.bind({
                 focus: function() {
-                    that.current(element.find("td:first"));
+                    that.current(element.find(FIRST_CELL_SELECTOR));
                 },
                 blur: function() {
                     if (that._current) {
@@ -131,28 +135,30 @@
                 },
                 keydown: function(e) {
                     var key = e.keyCode,
-                        current = that.current();
+                        current = that.current(),
+                        dataSource = that.dataSource,
+                        pageable = that.options.pageable;
 
                     if (keys.UP === key) {
-                        that.current(current ? current.parent().prev().children().eq(current.index()) : element.find("td:first"));
+                        that.current(current ? current.parent().prev().children().eq(current.index()) : element.find(FIRST_CELL_SELECTOR));
                     } else if (keys.DOWN === key) {
-                        that.current(current ? current.parent().next().children().eq(current.index()) : element.find("td:first"));
+                        that.current(current ? current.parent().next().children().eq(current.index()) : element.find(FIRST_CELL_SELECTOR));
                     } else if (keys.LEFT === key) {
-                        that.current(current ? current.prev() : element.find("td:first"));
+                        that.current(current ? current.prev() : element.find(FIRST_CELL_SELECTOR));
                     } else if (keys.RIGHT === key) {
-                        that.current(current ? current.next() : element.find("td:first"));
-                    } else if (that.options.pageable && keys.PAGEUP == key) {
+                        that.current(current ? current.next() : element.find(FIRST_CELL_SELECTOR));
+                    } else if (pageable && keys.PAGEUP == key) {
                         that._current = null;
-                        that.dataSource.page(that.dataSource.page() + 1);
-                    } else if (that.options.pageable && keys.PAGEDOWN == key) {
+                        dataSource.page(dataSource.page() + 1);
+                    } else if (pageable && keys.PAGEDOWN == key) {
                         that._current = null;
-                        that.dataSource.page(that.dataSource.page() - 1);
+                        dataSource.page(dataSource.page() - 1);
                     }
                 }
             });
 
             element.addClass(FOCUSABLE)
-                  .delegate("." + FOCUSABLE + FOCUSSELECTOR, "mousedown", function(e) {
+                  .delegate("." + FOCUSABLE + CELLSELECTOR, "mousedown", function(e) {
                       that.current($(e.currentTarget));
                   });
         },
@@ -190,7 +196,7 @@
                 options = that.options,
                 dataSource = options.dataSource;
 
-            dataSource = $.isArray(dataSource) ? { data: dataSource } : dataSource;
+            dataSource = isArray(dataSource) ? { data: dataSource } : dataSource;
 
             if (isPlainObject(dataSource)) {
                 extend(dataSource, { table: that.table, fields: that.columns });
@@ -206,8 +212,7 @@
                 }
             }
 
-            that.dataSource = DataSource.create(dataSource);
-            that.dataSource.bind("change", $.proxy(that.refresh, that));
+            that.dataSource = DataSource.create(dataSource).bind(CHANGE, proxy(that.refresh, that));
         },
 
         _pager: function() {
@@ -254,7 +259,7 @@
             });
 
             that.columns = map(columns, function(column) {
-                column = typeof column === "string" ? { field: column } : column;
+                column = typeof column === STRING ? { field: column } : column;
                 return extend({ encoded: true }, column);
             });
         },
@@ -395,4 +400,4 @@
     });
 
     ui.plugin("Grid", Grid);
-})(jQuery, window);
+})(jQuery);
