@@ -20,7 +20,8 @@
                 var categoryAxis,
                     MAX_LABEL_HEIGHT = 17,
                     MAJOR_TICK_HEIGHT = 4,
-                    LINE_Y = chartBox.y1;
+                    LINE_Y = chartBox.y1,
+                    LINE_X = 33;
 
                 function ViewFactoryStub() {
                     this.renderedLines = [];
@@ -35,33 +36,14 @@
                     }
                 }
 
-                function createCategoryAxis() {
-                    categoryAxis = new Chart.CategoryAxis({
-                        labels: ["Foo", "Bar"]
-                    });
+                function createCategoryAxis(options) {
+                    categoryAxis = new Chart.CategoryAxis(
+                        $.extend({
+                            labels: ["Foo", "Bar"]
+                        }, options)
+                    );
                     categoryAxis.updateLayout(chartBox);
                 }
-
-                module("Category Axis / Horizontal", {
-                    setup: function() {
-                        createCategoryAxis();
-                    }
-                });
-
-                test("positions slot for first category", function() {
-                    var slot = categoryAxis.getSlot(0);
-                    same([slot.x1, slot.x2], [0, chartBox.width() / 2]);
-                });
-
-                test("positions slot for second category", function() {
-                    var slot = categoryAxis.getSlot(1);
-                    same([slot.x1, slot.x2], [chartBox.width() / 2, chartBox.width()]);
-                });
-
-                test("slot height is 0", function() {
-                    var slot = categoryAxis.getSlot(0);
-                    same(slot.height(), 0);
-                });
 
                 var factoryStub;
                 module("Category Axis / Horizontal / Rendering", {
@@ -115,6 +97,103 @@
                         return line[0];
                     });
                     same(ticksX, [0, 400, 800], TOLERANCE);
+                });
+
+                module("Category Axis / Vertical / Rendering", {
+                    setup: function() {
+                        factoryStub = new ViewFactoryStub();
+                        createCategoryAxis({ isVertical: true });
+                    }
+                });
+
+                test("creates axis line", function() {
+                    categoryAxis.getViewElements(factoryStub);
+
+                    same(factoryStub.renderedLines[0], [
+                        LINE_X, chartBox.y1,
+                        LINE_X, chartBox.y2,
+                    ], TOLERANCE);
+                });
+
+                test("creates labels", 1, function() {
+                    categoryAxis.getViewElements(factoryStub);
+
+                    same(factoryStub.renderedTexts,
+                         ["Foo", "Bar"]);
+                });
+
+                test("labels are distributed vertically", function() {
+                    var labelsY = [];
+                    factoryStub.text = function(content, options) {
+                        labelsY.push(options.y);
+                    }
+
+                    categoryAxis.getViewElements(factoryStub);
+
+                    same(labelsY, [141, 441], TOLERANCE);
+                });
+
+                test("labels are positioned to the left of the axis line", function() {
+                    var labelsX = [];
+                    factoryStub.text = function(content, options) {
+                        labelsX.push(options.x);
+                    }
+
+                    categoryAxis.getViewElements(factoryStub);
+
+                    same(labelsX, [0, 2], TOLERANCE);
+                });
+
+                test("major ticks are distributed vertically", function() {
+                    categoryAxis.options.line = "none";
+                    categoryAxis.getViewElements(factoryStub);
+
+                    var ticksY = $.map(factoryStub.renderedLines, function(line) {
+                        return line[1];
+                    });
+                    same(ticksY, [0, 300, 600], TOLERANCE);
+                });
+
+                module("Category Axis / Horizontal / Slots", {
+                    setup: function() {
+                        createCategoryAxis();
+                    }
+                });
+
+                test("positions slot for first category", function() {
+                    var slot = categoryAxis.getSlot(0);
+                    same([slot.x1, slot.x2], [0, chartBox.width() / 2]);
+                });
+
+                test("positions slot for second category", function() {
+                    var slot = categoryAxis.getSlot(1);
+                    same([slot.x1, slot.x2], [chartBox.width() / 2, chartBox.width()]);
+                });
+
+                test("slot height is 0", function() {
+                    var slot = categoryAxis.getSlot(0);
+                    same(slot.height(), 0);
+                });
+
+                module("Category Axis / Vertical / Slots", {
+                    setup: function() {
+                        createCategoryAxis({ isVertical: true });
+                    }
+                });
+
+                test("positions slot for first category", function() {
+                    var slot = categoryAxis.getSlot(0);
+                    same([slot.y1, slot.y2], [0, chartBox.height() / 2]);
+                });
+
+                test("positions slot for second category", function() {
+                    var slot = categoryAxis.getSlot(1);
+                    same([slot.y1, slot.y2], [chartBox.height() / 2, chartBox.height()]);
+                });
+
+                test("slot width is 0", function() {
+                    var slot = categoryAxis.getSlot(0);
+                    same(slot.width(), 0);
                 });
 
             })();
