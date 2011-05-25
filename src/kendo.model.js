@@ -63,7 +63,7 @@
             that.idField =  that.idField || "id";
             if(that.id() === undefined) {
                 that._isNew = true;
-                that._generateId();
+                that.accessor(that.idField).set(that.data, guid());
             }
         },
 
@@ -120,13 +120,6 @@
             return $.isFunction(id) ? id(that.data) : that.get(id);
         },
 
-        _generateId: function() {
-            var that = this,
-                id = that.idField;
-
-            return that.accessor(id).set(that.data, guid());
-        },
-
         modified: function() {
             var modified = null,
                 field,
@@ -150,7 +143,7 @@
             id = proto && proto.idField || "id",
             accessor = $.isFunction(id) ? id : kendo.accessor(id).get;
 
-        model.identifier = function(data) {
+        model.id = function(data) {
             return accessor(data);
         }
         return model;

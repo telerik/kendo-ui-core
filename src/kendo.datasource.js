@@ -181,13 +181,13 @@
                 _filter: options.filter,
                 modelType: options.model
             }),
-            identifier,
+            id,
             modelType = that.modelType,
             transport = options.transport;
-            if(!$.isEmptyObject(modelType) && !modelType.identifier) {
+            if(!$.isEmptyObject(modelType) && !modelType.id) {
                 that.modelType = modelType = Model.define(modelType);
             }
-            identifier = modelType.identifier;
+            id = modelType.id;
             Observable.fn.init.call(that);
 
             that._reader = extend({
@@ -199,12 +199,12 @@
                 }
             }, options.reader);
             that.transport = transport && $.isFunction(transport.read) ? transport : (options.data? new LocalTransport({ data: options.data }):new RemoteTransport(transport));
-            if (identifier) {
+            if (id) {
                 that.find = function(id) {
                     return that._data[that.idMap[id]];
                 };
                 that.id = function(record) {
-                    return identifier(record);
+                    return id(record);
                 };
             } else {
                 that.find = that.at;
