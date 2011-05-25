@@ -255,11 +255,7 @@
 
             that.columns = map(columns, function(column) {
                 column = typeof column === "string" ? { field: column } : column;
-                return {
-                    field: column.field,
-                    template: column.template,
-                    title: column.title
-                }
+                return extend({ encoded: true }, column);
             });
         },
 
@@ -273,11 +269,17 @@
                     rowTemplate = start;
 
                     $.each(that.columns, function() {
-                        var column = this,
-                            value = column.template ? column.template :
-                                   settings.begin + "=" + (settings.useWithBlock ? "" : settings.paramName + ".") + column.field + settings.end;
+                        var column = this, template = column.template, field = column.field;
 
-                        rowTemplate += "<td>" + value + "</td>";
+                        if (!template) {
+                            if (column.encoded === true) {
+                                template = "${" + (settings.useWithBlock ? "" : settings.paramName + ".") + field + "}";
+                            } else {
+                                template = settings.begin + "=" + (settings.useWithBlock ? "" : settings.paramName + ".") + field + settings.end;
+                            }
+                        }
+
+                        rowTemplate += "<td>" + template + "</td>";
                     });
 
                     rowTemplate += "</tr>";

@@ -47,7 +47,7 @@
 
             test("moving the mouse beyond the allowed distance triggers the dragstart event", function() {
                 var dragstartWasCalled = false,
-                    draggable = setup({ 
+                    draggable = setup({
                         dragstart: function() {
                             dragstartWasCalled = true;
                         }
@@ -61,7 +61,7 @@
 
             test("dragstart is triggered after mouse down and mouse move", function() {
                 var dragstartWasCalled = false,
-                    draggable = setup({ 
+                    draggable = setup({
                         dragstart: function() {
                             dragstartWasCalled = true;
                         }
@@ -103,13 +103,13 @@
 
             test("drag event is raised when the user is moving the mouse", function() {
                 var dragWasCalled = false,
-                    draggable = setup({ 
+                    draggable = setup({
                         drag: function() {
                             dragWasCalled = true;
                         }
                     });
 
-                draggable._drag();
+                draggable._drag({pageX:0, pageY:0});
 
                 ok(dragWasCalled);
             });
@@ -143,7 +143,7 @@
 
             test("specifying filter", function() {
                 var dragstartWasCalled = false,
-                    draggable = new Draggable(span.append("<span>foo</span>"), { 
+                    draggable = new Draggable(span.append("<span>foo</span>"), {
                         dragstart: function() {
                             dragstartWasCalled = true;
                         },
@@ -157,7 +157,7 @@
             });
 
             test("with filter - the dragged element is currentTarget during the dragstart event", function() {
-                var e, draggable = new Draggable(span.append("<span>foo</span>"), { 
+                var e, draggable = new Draggable(span.append("<span>foo</span>"), {
                         dragstart: function() {
                             e = arguments[0];
                         },
@@ -171,7 +171,7 @@
             });
 
             test("with filter - the dragged element is currentTarget during the drag event", function() {
-                var e, draggable = new Draggable(span.append("<span>foo</span>"), { 
+                var e, draggable = new Draggable(span.append("<span>foo</span>"), {
                         drag: function() {
                             e = arguments[0];
                         },
@@ -186,7 +186,7 @@
             });
 
             test("with filter - the dragged element is currentTarget during the dragend event", function() {
-                var e, draggable = new Draggable(span.append("<span>foo</span>"), { 
+                var e, draggable = new Draggable(span.append("<span>foo</span>"), {
                         dragend: function() {
                             e = arguments[0];
                         },
@@ -201,7 +201,7 @@
             });
 
             test("dom event argument is passed to the dragstart event", function() {
-                var e, draggable = setup({ 
+                var e, draggable = setup({
                         dragstart: function() {
                             e = arguments[0];
                         }
@@ -214,7 +214,7 @@
             });
 
             test("dom event argument is passed to the dragend event", function() {
-                var e, draggable = setup({ 
+                var e, draggable = setup({
                         dragend: function() {
                             e = arguments[0];
                         }
@@ -228,7 +228,7 @@
             });
 
             test("dom event argument is passed to the drag event", function() {
-                var e, draggable = setup({ 
+                var e, draggable = setup({
                         drag: function() {
                             e = arguments[0];
                         }
