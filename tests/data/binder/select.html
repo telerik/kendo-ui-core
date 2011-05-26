@@ -40,7 +40,7 @@
                 select.append("<option selected>foo</option>");
                 select.trigger("change");
 
-                equal(binder.model.modified().foo, "foo");
+                equal(binder.model.changes().foo, "foo");
             });
 
             test("binding child elements", function() {
@@ -51,7 +51,7 @@
                 select.append("<option selected>foo</option>");
                 select.trigger("change");
 
-                equal(binder.model.modified().foo, "foo");
+                equal(binder.model.changes().foo, "foo");
             });
 
             test("binding by data attribute", function() {
@@ -61,7 +61,7 @@
                 select.append("<option selected>foo</option>");
                 select.trigger("change");
 
-                equal(binder.model.modified().foo, "foo");
+                equal(binder.model.changes().foo, "foo");
             });
 
             test("binding select to inline data source", function() {

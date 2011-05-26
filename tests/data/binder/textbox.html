@@ -41,7 +41,7 @@
                 textbox.val("foo");
                 textbox.trigger("change");
 
-                equal(binder.model.modified().foo, "foo");
+                equal(binder.model.changes().foo, "foo");
             });
 
             test("binding child elements", function() {
@@ -52,7 +52,7 @@
                 textbox.val("foo");
                 textbox.trigger("change");
 
-                equal(binder.model.modified().foo, "foo");
+                equal(binder.model.changes().foo, "foo");
             });
 
             test("binding by data attribute", function() {
@@ -62,7 +62,7 @@
                 textbox.val("foo");
                 textbox.trigger("change");
 
-                equal(binder.model.modified().foo, "foo");
+                equal(binder.model.changes().foo, "foo");
             });
 
         </script>
