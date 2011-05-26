@@ -73,7 +73,7 @@
                 ok(!changeWasCalled);
             });
 
-            test("_change does not raise change event if value has't change", function() {
+            test("_change does not raise change event if value has't changed", function() {
                 var changeWasCalled = false, autocomplete = new AutoComplete(input, {
                     change: function() {
                         changeWasCalled = true;
@@ -106,6 +106,35 @@
                 ok(!changeWasCalled);
             });
 
+            test("clicking an item raises the change event", function() {
+                var changeWasCalled = false, autocomplete = new AutoComplete(input, {
+                    dataSource: ["foo"],
+                    change: function() {
+                        changeWasCalled = true;
+                    }
+                });
+
+                input.focus().val("f");
+                autocomplete.search();
+                input.blur();
+                autocomplete.ul.children().first().click();
+                ok(changeWasCalled);
+            });
+
+            test("clicking an item raises the change event of the dom element", function() {
+                var changeWasCalled = false, autocomplete = new AutoComplete(input, {
+                    dataSource: ["foo"],
+                });
+
+                input.focus().val("f");
+                autocomplete.search();
+                input.blur();
+                input.change(function() {
+                    changeWasCalled = true;
+                });
+                autocomplete.ul.children().first().click();
+                ok(changeWasCalled);
+            });
        </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
