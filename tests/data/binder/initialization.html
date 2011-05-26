@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Binder initialization</title>
+        <script src="../../../src/jquery.js"></script>
+        <script type="text/javascript" src="../../qunit.js"></script>
+        <script type="text/javascript" src="../../qunit-runner.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.model.js"></script>
+        <script src="../../../src/kendo.binder.js"></script>
+        <link rel="stylesheet" href="../../qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Binder initialization</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var Binder = kendo.data.ModelViewBinder, Model = kendo.data.Model;
+
+            module("kendo.data.ModelViewBinder", {
+                setup: function() {
+                },
+                teardown: function() {
+                }
+            });
+
+            test("model is instance of Model", function() {
+                var binder = new Binder(null, {});
+
+                ok(binder.model instanceof Model);
+            });
+
+            test("original model is used if instance of Model", function() {
+                var model = new Model(), binder = new Binder(null, model);
+
+                ok(binder.model === model);
+            });
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>
+
