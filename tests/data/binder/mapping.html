@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Mapping</title>
+        <script src="../../../src/jquery.js"></script>
+        <script type="text/javascript" src="../../qunit.js"></script>
+        <script type="text/javascript" src="../../qunit-runner.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.model.js"></script>
+        <script src="../../../src/kendo.binder.js"></script>
+        <link rel="stylesheet" href="../../qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Mapping</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var Binder = kendo.data.ModelViewBinder, textbox;
+
+            module("kendo.data.ModelViewBinder", {
+                setup: function() {
+                    textbox = $("<input/>").appendTo(document.body);
+                },
+                teardown: function() {
+                    textbox.remove();
+                }
+            });
+
+            test("mapping is returned by name", function() {
+                var binder = new Binder(textbox.attr("name", "foo"), {});
+
+                var mapping = binder._map(textbox[0]);
+
+                ok(mapping);
+            });
+
+            test("mapping is undefined if the field is not bound", function() {
+                var binder = new Binder(textbox, {});
+
+                var mapping = binder._map(textbox[0]);
+
+                ok(mapping === undefined);
+            });
+
+            test("bindModel updates the model from the view", function() {
+                var binder = new Binder(textbox.attr("name", "foo"), {});
+
+                var mapping = binder._map(textbox[0]);
+
+                textbox.val("foo");
+                mapping.bindModel();
+
+                equal(binder.model.modified().foo, "foo");
+            });
+
+            test("bindView updates the view from the model", function() {
+                var binder = new Binder(textbox.attr("name", "foo"), { foo: "foo"});
+
+                var mapping = binder._map(textbox[0]);
+
+                mapping.bindView();
+
+                equal(textbox.val(), "foo");
+            });
+
+            test("bindModel uses converter to convert model values", function() {
+                var binder = new Binder(textbox.attr("name", "foo"), { foo: 1 }, {
+                    foo: {
+                        parse: function(value) {
+                            return parseInt(value);
+                        }
+                    }
+                });
+
+                var mapping = binder._map(textbox[0]);
+
+                textbox.val("2");
+                mapping.bindModel();
+
+                ok(binder.model.modified().foo === 2);
+            });
+
+            test("bindView uses converter to convert model values", function() {
+                var binder = new Binder(textbox.attr("name", "foo"), { foo: 15 }, {
+                    foo: {
+                        format: function(value) {
+                            return value.toString(16);
+                        }
+                    }
+                });
+
+                var mapping = binder._map(textbox[0]);
+
+                mapping.bindView();
+
+                equal(textbox.val(), "f");
+            });
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>
+

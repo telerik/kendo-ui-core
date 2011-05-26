@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Binding to textarea</title>
+        <script src="../../../src/jquery.js"></script>
+        <script type="text/javascript" src="../../qunit.js"></script>
+        <script type="text/javascript" src="../../qunit-runner.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.model.js"></script>
+        <script src="../../../src/kendo.binder.js"></script>
+        <link rel="stylesheet" href="../../qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Binding to textarea</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var Binder = kendo.data.ModelViewBinder, textarea;
+
+            module("kendo.data.ModelViewBinder", {
+                setup: function() {
+                    textarea = $("<textarea></textarea>").appendTo(document.body);
+                },
+                teardown: function() {
+                    textarea.remove();
+                }
+            });
+
+            test("setting the value from the model", function() {
+                var model = { foo: "bar" }, binder = new Binder(textarea.attr("name", "foo"), model);
+                equal(textarea.val(), "bar");
+            });
+
+            test("binding by name attribute", function() {
+                var model = { foo: "bar" }, binder = new Binder(textarea, model);
+
+                textarea.attr("name", "foo");
+
+                textarea.val("foo");
+                textarea.trigger("change");
+
+                equal(binder.model.modified().foo, "foo");
+            });
+
+            test("binding child elements", function() {
+                var model = { foo: "bar" }, binder = new Binder(textarea.wrap("<div />").parent(), model);
+
+                textarea.attr("name", "foo");
+
+                textarea.val("foo");
+                textarea.trigger("change");
+
+                equal(binder.model.modified().foo, "foo");
+            });
+
+            test("binding by data attribute", function() {
+                var model = { foo: "bar" }, binder = new Binder(textarea, model);
+
+                textarea.attr("data-field", "foo");
+                textarea.val("foo");
+                textarea.trigger("change");
+
+                equal(binder.model.modified().foo, "foo");
+            });
+
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>
+
