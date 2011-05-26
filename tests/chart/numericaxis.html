@@ -355,6 +355,32 @@
                     same(ticksX, [5, 135, 265, 396, 526, 656, 787], TOLERANCE);
                 });
 
+                test("major ticks are vertical", 7, function() {
+                    factoryStub.line = function(x1, y1, x2, y2) {
+                        equal(x2, x1);
+                    }
+
+                    numericAxis.options.line = "none";
+                    numericAxis.getViewElements(factoryStub);
+                });
+
+                test("major ticks are aligned to axis", 7, function() {
+                    factoryStub.line = function(x1, y1, x2, y2) {
+                        equal(y1, 0);
+                    }
+
+                    numericAxis.options.line = "none";
+                    numericAxis.getViewElements(factoryStub);
+                });
+
+                test("major ticks are of predefined height", 7, function() {
+                    factoryStub.line = function(x1, y1, x2, y2) {
+                        equal(y2 - y1, MAJOR_TICK_HEIGHT);
+                    }
+
+                    numericAxis.options.line = "none";
+                    numericAxis.getViewElements(factoryStub);
+                });
             })();
 
             (function() {
@@ -438,12 +464,12 @@
 
                 test("positions slot for [0, 0.5]", function() {
                     var slot = numericAxis.getSlot(0, 0.5);
-                    same([slot.x1, slot.x2], [461, 787], TOLERANCE);
+                    same([slot.x1, slot.x2], [5, 330.833], TOLERANCE);
                 });
 
                 test("positions slot for [0.5, 1]", function() {
                     var slot = numericAxis.getSlot(0.5, 1);
-                    same([slot.x1, slot.x2], [135, 461], TOLERANCE);
+                    same([slot.x1, slot.x2], [330.833, 656.667], TOLERANCE);
                 });
 
                 test("slot height is 0", function() {
@@ -453,12 +479,12 @@
 
                 test("assumes missing value to be 0", function() {
                     var slot = numericAxis.getSlot(0.5);
-                    same([slot.x1, slot.x2], [461, 787], TOLERANCE);
+                    same([slot.x1, slot.x2], [5, 330.833], TOLERANCE);
                 });
 
                 test("a value capped to minimum value", function() {
                     var slot = numericAxis.getSlot(-1000, 1);
-                    same([slot.x1, slot.x2], [135, 787], TOLERANCE);
+                    same([slot.x1, slot.x2], [5, 656.667], TOLERANCE);
                 });
 
                 test("b value capped to maximum value", function() {
@@ -475,22 +501,22 @@
 
                 test("positions slot for [-0.5, 0]", function() {
                     var slot = numericAxis.getSlot(-0.5, 0);
-                    same([slot.x1, slot.x2], [16.5, 340.875]);
+                    same([slot.x1, slot.x2], [470.625, 795], TOLERANCE);
                 });
 
                 test("positions slot for [-1, -0.5]", function() {
                     var slot = numericAxis.getSlot(-1, -0.5);
-                    same([slot.x1, slot.x2], [340.875, 665.25]);
+                    same([slot.x1, slot.x2], [146.249, 470.625], TOLERANCE);
                 });
 
                 test("assumes missing value to be 0", function() {
                     var slot = numericAxis.getSlot(-0.5);
-                    same([slot.x1, slot.x2], [16.5, 340.875]);
+                    same([slot.x1, slot.x2], [470.625, 795], TOLERANCE);
                 });
 
                 test("a value capped to maximum value", function() {
                     var slot = numericAxis.getSlot(1000, -1);
-                    same([slot.x1, slot.x2], [16.5, 665.25]);
+                    same([slot.x1, slot.x2], [146.249, 795], TOLERANCE);
                 });
 
                 test("b value capped to minimum value", function() {

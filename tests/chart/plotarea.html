@@ -43,7 +43,10 @@
                             name: "Value B",
                             type: "bar",
                             data: [10, 20, 30]
-                        }]
+                        }],
+                        axisX: {
+                            labels: ["A", "B", "C"]
+                        }
                     });
                 }
 
@@ -72,22 +75,29 @@
                     ok($.inArray(axisX, plotArea.children));
                 });
 
-                test("aligns X-Axis next to Y-Axis", function() {
+                test("aligns axises at default crossing values", function() {
                     plotArea.updateLayout(chartBox);
-                    equal(axisX.box.x1, axisY.box.x2);
+
+                    var crossingSlotY = axisY.getSlot(axisY.options.axisCrossingValue),
+                        crossingSlotX = axisX.getSlot(axisX.options.axisCrossingValue);
+                    same([crossingSlotY.x1, crossingSlotY.y1], [crossingSlotX.x1, crossingSlotX.y1]);
                 });
 
-                test("aligns X-Axis at the Y-Axis crossing value", function() {
+                test("aligns axises at non-default crossing values", function() {
+                    axisY.options.axisCrossingValue = 10;
+                    axisX.options.axisCrossingValue = 1;
                     plotArea.updateLayout(chartBox);
-                    var crossingY = axisY.getSlot(axisY.options.axisCrossingValue).y1;
-                    equal(axisX.box.y1, crossingY);
+
+                    var crossingSlotY = axisY.getSlot(axisY.options.axisCrossingValue),
+                        crossingSlotX = axisX.getSlot(axisX.options.axisCrossingValue);
+                    same([crossingSlotY.x1, crossingSlotY.y1], [crossingSlotX.x1, crossingSlotX.y1]);
                 });
 
-                test("aligns X-Axis at the Y-Axis crossing value (non-default)", function() {
-                    axisY.options.axisCrossingValue = 100;
+                test("axes are contained in plot area", function() {
                     plotArea.updateLayout(chartBox);
-                    var crossingY = axisY.getSlot(axisY.options.axisCrossingValue).y1;
-                    equal(axisX.box.y1, crossingY);
+                    var axisBox = new Box().wrap(axisY.box).wrap(axisX.box);
+                    same([plotArea.box.x1, plotArea.box.y1, plotArea.box.x2, plotArea.box.y2],
+                         [axisBox.x1, axisBox.y1, axisBox.x2, axisBox.y2]);
                 });
 
                 test("creates bar chart", function() {
