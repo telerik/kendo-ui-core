@@ -52,7 +52,7 @@
                 textbox.val("foo");
                 mapping.bindModel();
 
-                equal(binder.model.modified().foo, "foo");
+                equal(binder.model.changes().foo, "foo");
             });
 
             test("bindView updates the view from the model", function() {
@@ -79,7 +79,7 @@
                 textbox.val("2");
                 mapping.bindModel();
 
-                ok(binder.model.modified().foo === 2);
+                ok(binder.model.changes().foo === 2);
             });
 
             test("bindView uses converter to convert model values", function() {

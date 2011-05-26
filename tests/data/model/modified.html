@@ -25,26 +25,26 @@
                 }
             });
 
-            test("modified returns null if there are no changes", function() {
+            test("changes returns null if there are no changes", function() {
                 var m = new Model();
 
-                ok(m.modified() === null);
+                ok(m.changes() === null);
             });
 
-            test("modified returns the changed values", function() {
+            test("changes returns the changed values", function() {
                 var m = new Model();
 
                 m.set("foo", "bar");
-                equal(m.modified().foo, "bar");
+                equal(m.changes().foo, "bar");
             });
 
-            test("modified returns the only the changed values", function() {
+            test("changes returns the only the changed values", function() {
                 var m = new Model({
                     bar: "bar"
                 });
 
                 m.set("foo", "foo");
-                equal(m.modified().bar, undefined);
+                equal(m.changes().bar, undefined);
             });
 
       </script>

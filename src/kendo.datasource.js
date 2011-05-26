@@ -302,7 +302,7 @@
 
                 return result;
             } else if (id in that.modified) {
-                return that.modified[id].modified();
+                return that.modified[id].changes();
             }
         },
 

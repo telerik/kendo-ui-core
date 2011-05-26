@@ -120,7 +120,7 @@
             return $.isFunction(id) ? id(that.data) : that.get(id);
         },
 
-        modified: function() {
+        changes: function() {
             var modified = null,
                 field,
                 that = this,
