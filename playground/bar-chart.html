@@ -10,21 +10,19 @@
         <script type="text/javascript">
 
             $(document).ready(function() {
-                /*
-                kendo.ui.Chart.BarChart.prototype.options.isStacked = true;
-                kendo.ui.Chart.BarChart.prototype.options.isVertical = false;
-                kendo.ui.Chart.NumericAxis.prototype.options.isVertical = false;
-                kendo.ui.Chart.CategoryAxis.prototype.options.isVertical = true;
-                */
+                kendo.ui.Chart.BarChart.prototype.options.isStacked = false;
+                kendo.ui.Chart.BarChart.prototype.options.isVertical = true;
+                kendo.ui.Chart.NumericAxis.prototype.options.isVertical = true;
+                kendo.ui.Chart.CategoryAxis.prototype.options.isVertical = false;
 
                 $("#container").kendoChart({
                     title: "Title",
                     series: [{
                         name: "Value A",
                         type: "bar",
-                        data: [-20, -40, -40],
+                        data: [20, 40, 40],
                         stack: "A"
-                    }, {
+                    }/*, {
                         name: "Value B",
                         type: "bar",
                         data: [-100, -200, -300],
@@ -34,7 +32,7 @@
                         type: "bar",
                         data: [15, 25, 35],
                         stack: "B"
-                    }],
+                    }*/],
                     seriesDefaults: {
                         stack: true
                     },
@@ -44,6 +42,32 @@
                 });
             });
 
+            var fullOptions = {
+                // Highcharts
+                axisX: {
+                    categories: []
+                },
+
+                axisY: {
+                    min: 0,
+                    max: 1
+                },
+
+                // Sencha
+                axes: [{
+                    type: "Category",
+                    position: "bottom",
+                    fields: ['name']
+                }, {
+                    type: 'Numeric',
+                    position: 'bottom',
+                    fields: ['data1'],
+                    minimum: 0
+                }]
+
+                // ???
+
+            }
         </script>
 
         <div id="container" style="width: 800px; height: 600px;">
