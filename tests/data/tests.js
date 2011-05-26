@@ -45,18 +45,38 @@ tests.push(
     },
     {
         page: "data/model/initialization.html",
-        title: "initialization"
+        title: "model initialization"
     },
     {
         page: "data/model/get.html",
-        title: "get"
+        title: "model get"
     },
     {
         page: "data/model/set.html",
-        title: "set"
+        title: "model set"
     },
     {
         page: "data/model/modified.html",
-        title: "modified"
+        title: "model modified"
+    },
+    {
+        page: "data/binder/mapping.html",
+        title: "binder mapping"
+    },
+    {
+        page: "data/binder/initialization.html",
+        title: "binder initialization"
+    },
+    {
+        page: "data/binder/textbox.html",
+        title: "binder textbox binding"
+    },
+    {
+        page: "data/binder/textarea.html",
+        title: "binder textarea binding"
+    },
+    {
+        page: "data/binder/select.html",
+        title: "binder select binding"
     }
 );
