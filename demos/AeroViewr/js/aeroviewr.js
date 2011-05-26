@@ -199,7 +199,8 @@ if (!isInferiorBrowser) {
         if (kendo.support.touch) {
             $('#uploadphotos').hide();
             $('#footer > .thumb-list').css('marginRight', '15px');
-            $('#photoWrap').css('overflow', 'hidden');
+            if (!$.browser.mozilla)
+                $('#photoWrap').css('overflow', 'hidden');
             $('#bigPhoto').kendoPincer();
             var zoomFactor = 1;
 
