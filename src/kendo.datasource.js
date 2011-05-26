@@ -168,20 +168,22 @@
 
             var that = extend(this, {
                 idMap: {},
-                modified: {},                
+                modified: {},
+                _models: {},
                 _data: [],
                 _view: [],
                 _pageSize: options.pageSize,
                 _page: options.page  || (options.pageSize ? 1 : undefined),
                 _sort: options.sort,
-                _filter: options.filter               
+                _filter: options.filter
             });
 
             that.options = extend({}, that.options, {
                 serverSorting: options.serverSorting,
                 serverPaging: options.serverPaging,
                 serverFiltering: options.serverFiltering,
-                model: options.model
+                model: options.model,
+                autoSync: options.autoSync
             });
 
             var id,
@@ -221,10 +223,22 @@
             },
             serverSorting: false,
             serverPaging: false,
-            serverFiltering: false
+            serverFiltering: false,
+            autoSync: false
         },
         model: function(id) {
-            return new this.options.model(this.find(id));
+            var that = this,
+                model = that._models[id];
+            if(!model) {
+                that._models[id] = model = new that.options.model(that.find(id));
+                if(that.options.autoSync) {
+                    model.bind("change", $.proxy(that.modelChange, that, model));
+                }
+            }
+            return model;
+        },
+        modelChange: function(model) {
+            
         },
         read: function() {
             var that = this,
