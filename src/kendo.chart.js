@@ -686,7 +686,7 @@
                 lineSize = isVertical ? lineBox.height() : lineBox.width(),
                 scale = lineSize / (options.max - options.min),
                 a = Math.max(Math.min(a, options.max), options.min),
-                b = Math.max(Math.min(b || 0, options.max), options.min),
+                b = Math.max(Math.min(b || options.axisCrossingValue, options.max), options.min),
                 p1,
                 p2,
                 slotBox = new Box(lineBox.x1, lineBox.y1, lineBox.x1, lineBox.y1);
