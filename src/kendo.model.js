@@ -2,6 +2,9 @@
     var kendo = window.kendo,
         extend = $.extend,
         type = $.type,
+        MODIFIED = "MODIFIED",
+        NOTMODIFIED = "NOTMODIFIED",
+        INSERTED = "INSERTED",
         Observable = kendo.Observable;
 
     function equal(x, y) {
@@ -53,6 +56,8 @@
 
             Observable.fn.init.call(that);
 
+            that.state = NOTMODIFIED;
+
             that._accessors = {};
 
             that._modified = false;
@@ -62,7 +67,7 @@
 
             that.idField =  that.idField || "id";
             if(that.id() === undefined) {
-                that._isNew = true;
+                that.state = INSERTED;
                 that.accessor(that.idField).set(that.data, guid());
             }
         },
@@ -106,12 +111,13 @@
             }
 
             if (that._modified) {
+                that.state = that.isNew() ? INSERTED : MODIFIED;
                 that.trigger("change");
             }
         },
 
         isNew: function() {
-            return this._isNew;
+            return this.state === INSERTED;
         },
 
         id: function() {
@@ -150,4 +156,7 @@
     }
 
     kendo.data.Model = Model;
+    kendo.data.Model.MODIFIED = MODIFIED;
+    kendo.data.Model.NOTMODIFIED = NOTMODIFIED;
+    kendo.data.Model.INSERTED = INSERTED;
 })(jQuery);
