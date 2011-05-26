@@ -169,7 +169,6 @@
             var that = extend(this, this.defaults, {
                 idMap: {},
                 modified: {},
-                schema: options.schema,
                 serverSorting: options.serverSorting,
                 serverPaging: options.serverPaging,
                 serverFiltering: options.serverFiltering,

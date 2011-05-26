@@ -73,10 +73,10 @@
             test("dataSource configuration is used by the create factory method", function() {
                 var schema = {},
                     dataSource = DataSource.create({
-                        schema: schema
+                        model: schema
                     });
 
-                ok(dataSource.schema === schema);
+                ok(dataSource.modelType === schema);
                 ok(dataSource instanceof DataSource);
             });
             test("page is set to 1 if pageSize is defined but no page", function() {
