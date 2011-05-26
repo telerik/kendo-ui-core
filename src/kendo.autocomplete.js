@@ -63,7 +63,7 @@
                 anchor: that.element
             });
 
-            that._dataSource();
+            that.dataSource = DataSource.create(that.options.dataSource || {}).bind(CHANGE, proxy(that.refresh, that));
 
             that.bind([CHANGE], that.options);
 
@@ -108,20 +108,6 @@
             that.popup[data.length ? "open" : "close"]();
         },
 
-        _dataSource: function() {
-            var that = this;
-
-            that.dataSource = DataSource.create(that.options.dataSource || {})
-            .bind(CHANGE, proxy(that.refresh, that));
-        },
-
-        _blur: function() {
-            var that = this;
-
-            that.close();
-            that._change();
-        },
-
         close: function() {
             var that = this;
             that._current = null;
@@ -143,22 +129,6 @@
                 that.value(text);
                 that.current(li.addClass(SELECTED));
             }
-
-            if (that.element[0] !== document.activeElement) {
-                that.element.focus();
-            }
-
-            moveCaretAtEnd(that.element[0]);
-        },
-
-        _change: function() {
-            var that = this,
-            value = that.value();
-
-            if (value !== that.previous) {
-                that.trigger(CHANGE);
-                that.previous = value;
-            }
         },
 
         current: function(candidate) {
@@ -176,61 +146,6 @@
             } else {
                 return that._current;
             }
-        },
-
-        _click: function(e) {
-            var that = this;
-            that.select($(e.currentTarget));
-            that._blur();
-        },
-
-        _move: function(li) {
-            var that = this;
-
-            li = li[0] ? li : null;
-
-            that.current(li);
-
-            if (that.options.suggest) {
-                that.suggest(li);
-            }
-        },
-
-        _keydown: function(e) {
-            var that = this,
-            key = e.keyCode,
-            keys = kendo.keys
-            visible = that.popup.visible();
-
-            if (key === keys.DOWN) {
-                if (visible) {
-                    that._move(that._current ? that._current.next() : that.ul.children().first());
-                }
-                e.preventDefault();
-            } else if (key === keys.UP) {
-                if (visible) {
-                    that._move(that._current ? that._current.prev() : that.ul.children().last());
-                }
-                e.preventDefault();
-            } else if (key === keys.ENTER || key === keys.TAB) {
-                that.select(that._current);
-                that._blur();
-            } else if (key === keys.ESC) {
-                that.close();
-            } else {
-                that._search();
-            }
-        },
-
-        _search: function() {
-            var that = this;
-            clearTimeout(that._typing);
-
-            that._typing = setTimeout(function() {
-                if (that.previous !== that.value()) {
-                    that.search();
-                }
-            }, that.options.delay);
         },
 
         search: function() {
@@ -256,20 +171,6 @@
             } else if (length >= that.options.minLength) {
                 that.dataSource.filter( { operator: "startswith", value: word } );
             }
-        },
-
-        _caret: function() {
-            var caret,
-                element = this.element[0],
-                selection = element.ownerDocument.selection;
-
-            if (selection) {
-                caret = Math.abs(selection.createRange().moveStart(CHARACTER, -element.value.length));
-            } else {
-                caret = element.selectionStart;
-            }
-
-            return caret;
         },
 
         suggest: function(word) {
@@ -324,6 +225,106 @@
             } else {
                 return element.value;
             }
+        },
+
+        _blur: function() {
+            var that = this;
+
+            that.close();
+            that._change();
+        },
+
+        _change: function() {
+            var that = this,
+                value = that.value();
+
+            if (value !== that.previous) {
+                that.trigger(CHANGE);
+
+                // trigger the DOM change event so any subscriber gets notified
+                that.element.trigger(CHANGE);
+
+                that.previous = value;
+            }
+        },
+
+        _accept: function(li) {
+            var that = this;
+
+            that.select(li);
+            that._blur();
+
+            if (that.element[0] !== document.activeElement) {
+                that.element.focus();
+            }
+
+            moveCaretAtEnd(that.element[0]);
+        },
+
+        _click: function(e) {
+            this._accept($(e.currentTarget));
+        },
+
+        _move: function(li) {
+            var that = this;
+
+            li = li[0] ? li : null;
+
+            that.current(li);
+
+            if (that.options.suggest) {
+                that.suggest(li);
+            }
+        },
+
+        _keydown: function(e) {
+            var that = this,
+                key = e.keyCode,
+                keys = kendo.keys
+                visible = that.popup.visible();
+
+            if (key === keys.DOWN) {
+                if (visible) {
+                    that._move(that._current ? that._current.next() : that.ul.children().first());
+                }
+                e.preventDefault();
+            } else if (key === keys.UP) {
+                if (visible) {
+                    that._move(that._current ? that._current.prev() : that.ul.children().last());
+                }
+                e.preventDefault();
+            } else if (key === keys.ENTER || key === keys.TAB) {
+                that._accept(that._current);
+            } else if (key === keys.ESC) {
+                that.close();
+            } else {
+                that._search();
+            }
+        },
+
+        _search: function() {
+            var that = this;
+            clearTimeout(that._typing);
+
+            that._typing = setTimeout(function() {
+                if (that.previous !== that.value()) {
+                    that.search();
+                }
+            }, that.options.delay);
+        },
+
+        _caret: function() {
+            var caret,
+                element = this.element[0],
+                selection = element.ownerDocument.selection;
+
+            if (selection) {
+                caret = Math.abs(selection.createRange().moveStart(CHARACTER, -element.value.length));
+            } else {
+                caret = element.selectionStart;
+            }
+
+            return caret;
         }
     });
 
