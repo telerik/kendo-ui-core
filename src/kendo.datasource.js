@@ -166,27 +166,31 @@
         init: function(options) {
             options = options || {};
 
-            var that = extend(this, this.defaults, {
+            var that = extend(this, {
                 idMap: {},
-                modified: {},
-                serverSorting: options.serverSorting,
-                serverPaging: options.serverPaging,
-                serverFiltering: options.serverFiltering,
+                modified: {},                
                 _data: [],
                 _view: [],
                 _pageSize: options.pageSize,
                 _page: options.page  || (options.pageSize ? 1 : undefined),
                 _sort: options.sort,
-                _filter: options.filter,
-                modelType: options.model
-            }),
-            id,
-            modelType = that.modelType,
+                _filter: options.filter               
+            });
+
+            that.options = extend({}, that.options, {
+                serverSorting: options.serverSorting,
+                serverPaging: options.serverPaging,
+                serverFiltering: options.serverFiltering,
+                model: options.model
+            });
+
+            var id,
+            model = that.options.model,
             transport = options.transport;
-            if(!$.isEmptyObject(modelType) && !modelType.id) {
-                that.modelType = modelType = Model.define(modelType);
+            if(!$.isEmptyObject(model) && !model.id) {
+                that.options.model = model = Model.define(model);
             }
-            id = modelType.id;
+            id = model.id;
             Observable.fn.init.call(that);
 
             that._reader = extend({
@@ -209,8 +213,8 @@
                 that.find = that.at;
             }
         },
-        defaults: {
-            modelType: {
+        options: {
+            model: {
                 id: function(data) {
                     return data["id"];
                 }
@@ -220,7 +224,7 @@
             serverFiltering: false
         },
         model: function(id) {
-            return new this.modelType(this.find(id));
+            return new this.options.model(this.find(id));
         },
         read: function() {
             var that = this,
@@ -248,16 +252,16 @@
             data = that._reader.data(data);
             that._data = data;
 
-            if (that.serverPaging !== true) {
+            if (that.options.serverPaging !== true) {
                 options.page = that._page;
                 options.pageSize = that._pageSize;
             }
 
-            if (that.serverSorting !== true) {
+            if (that.options.serverSorting !== true) {
                 options.sort = that._sort;
             }
 
-            if (that.serverFiltering !== true) {
+            if (that.options.serverFiltering !== true) {
                 options.filter = that._filter;
             }
 
@@ -377,7 +381,7 @@
         query: function(options) {
             var that = this,
                 options = options,
-                remote = that.serverSorting || that.serverPaging || that.serverFiltering;
+                remote = that.options.serverSorting || that.options.serverPaging || that.options.serverFiltering;
 
             if(options !== undefined) {
                 that._pageSize = options.pageSize;
