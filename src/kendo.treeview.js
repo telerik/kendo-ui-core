@@ -523,7 +523,7 @@
                 treeview = that.owner,
                 dropPosition = 'over', destinationItem;
 
-            if (e.keyCode == 27){
+            if (e.keyCode == kendo.keys.ESC){
                 $t.trigger(treeview.element, 'nodeDragCancelled', { item: e.$draggable.closest('.t-item')[0] });
             } else {
                 if (that.$dropCue.css('visibility') == 'visible') {
@@ -625,6 +625,25 @@
         }
     };
 
+
+    var itemTemplate = kendo.template(
+"<li class='t-item\
+<%= (isFirstLevel && itemIndex == 0) ? ' t-first' : '' %>\
+<%= (itemIndex == itemsCount - 1) ? ' t-last' : '' %>\
+'><div class='\
+<%= (isFirstLevel && itemIndex == 0) ? 't-top ' : '' %>\
+<%= (itemIndex != itemsCount - 1 && itemIndex == 0) ? 't-top' : '' %>\
+<%= (itemIndex != itemsCount - 1 && itemIndex != 0) ? 't-mid' : '' %>\
+<%= (itemIndex == itemsCount - 1) ? 't-bot' : '' %>\
+'><\
+<% var navigateUrl = item.NavigateUrl || item.Url; %>\
+<%= navigateUrl ? 'a href=\"' + navigateUrl + '\"' : 'span' %>\
+ class='t-in'><%= item.Text %></\
+<%= navigateUrl ? 'a' : 'span'%>\
+></div></li>"
+);
+
+// <%= (Encoded === false) ? Text : kendo.htmlEncode(Text) %>\
     // client-side rendering
     $.extend(TreeView, {
         getNodeInputsHtml: function (itemValue, itemText, arrayName, value) {
@@ -639,15 +658,18 @@
         },
 
         getItemHtml: function (options) {
+            var $t = { stringBuilder : function() {} };
+
+            return kendo.render(itemTemplate, [options]);
+
             var item = options.item,
                 html = options.html,
                 isFirstLevel = options.isFirstLevel,
                 groupLevel = options.groupLevel,
                 itemIndex = options.itemIndex,
                 itemsCount = options.itemsCount,
-                absoluteIndex = new $t.stringBuilder()
-                                    .cat(groupLevel).catIf(':', groupLevel).cat(itemIndex)
-                                .string();
+                absoluteIndex = "1:1";
+                //absoluteIndex = new $t.stringBuilder().cat(groupLevel).catIf(':', groupLevel).cat(itemIndex).string();
 
             html.cat('<li class="t-item')
                     .catIf(' t-first', isFirstLevel && itemIndex == 0)
@@ -730,36 +752,33 @@
 
         getGroupHtml: function (options) {
             var data = options.data;
-            var html = options.html;
             var isFirstLevel = options.isFirstLevel;
             var renderGroup = options.renderGroup;
+            var html = "";
 
-            if (renderGroup !== false)
-                html.cat('<ul class="t-group')
-                    .catIf(' t-treeview-lines', isFirstLevel)
-                    .cat('"')
-                    .catIf(' style="display:none"', options.isExpanded !== true)
-                    .cat('>');
+            if (renderGroup !== false) {
+                html += '<ul class="t-group';
+                
+                if (isFirstLevel) {
+                    html += ' t-treeview-lines';
+                }
 
-            if (data && data.length > 0) {
-                var getItemHtml = $t.treeview.getItemHtml;
+                html += '"';
 
-                for (var i = 0, len = data.length; i < len; i++)
-                    getItemHtml({
-                        item: data[i],
-                        html: html,
-                        isAjax: options.isAjax,
-                        isFirstLevel: isFirstLevel,
-                        showCheckBoxes: options.showCheckBoxes,
-                        groupLevel: options.groupLevel,
-                        itemIndex: i,
-                        itemsCount: len,
-                        elementId: options.elementId
-                    });
+                if (options.isExpanded !== true) {
+                    html += ' style="display:none"';
+                }
+
+                html += '>';
             }
 
-            if (renderGroup !== false)
-                html.cat('</ul>');
+            html += kendo.render(itemTemplate, data);
+
+            if (renderGroup !== false) {
+                html += '</ul>';
+            }
+            
+            return html;
         }
     });
 
