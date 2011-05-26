@@ -159,7 +159,16 @@
             box.x2 = box.x1 + width;
             box.y2 = box.y1 + height;
 
-            return this;
+            return box;
+        },
+
+        shrink: function(dw, dh) {
+            var box = this;
+
+            box.x2 -= dw;
+            box.y2 -= dh;
+
+            return box;
         },
 
         clone: function() {
@@ -1206,64 +1215,46 @@
             axisY.updateLayout(targetBox);
             axisX.updateLayout(targetBox);
 
-            var crossingValueY = axisY.options.axisCrossingValue,
-                axisCrossingY = axisY.getSlot(crossingValueY, crossingValueY),
-                crossingValueX = axisX.options.axisCrossingValue,
-                axisCrossingX = axisX.getSlot(crossingValueX, crossingValueX);
+            plotArea.alignAxes();
 
-            axisY.updateLayout(
-                axisY.box.translate(
-                    axisCrossingX.x1 - axisCrossingY.x1,
-                    0
-                )
-            );
-
-            axisX.updateLayout(
-                axisX.box.translate(
-                    0,
-                    axisCrossingY.y1 - axisCrossingX.y1
-                )
-            );
-
-            var axisBox = targetBox.clone().wrap(axisY.box).wrap(axisX.box);
+            var axisBox = new Box().wrap(axisY.box).wrap(axisX.box);
             var overflowY = axisBox.height() - targetBox.height();
             var overflowX = axisBox.width() - targetBox.width();
 
             var offsetX = targetBox.x1 - axisBox.x1;
             var offsetY = targetBox.y1 - axisBox.y1;
 
-            axisY.updateLayout(new Box(
-                axisY.box.x1 + offsetX, axisY.box.y1 + offsetY,
-                axisY.box.x2 + offsetX, axisY.box.y2 + offsetY - overflowY
-            ));
+            axisY.updateLayout(
+                axisY.box.translate(offsetX, offsetY).shrink(0, overflowY)
+            );
 
-            axisX.updateLayout(new Box(
-                axisX.box.x1 + offsetX, axisX.box.y1 + offsetY,
-                axisX.box.x2 + offsetX - overflowX, axisX.box.y2 + offsetY
-            ));
+            axisX.updateLayout(
+                axisX.box.translate(offsetX, offsetY).shrink(overflowX, 0)
+            );
 
-            var crossingValueY = axisY.options.axisCrossingValue,
+            plotArea.alignAxes();
+
+            for (var i = 0; i < charts.length; i++) {
+                charts[i].updateLayout(targetBox);
+            }
+        },
+
+        alignAxes: function() {
+            var plotArea = this,
+                axisY = plotArea.axisY,
+                axisX = plotArea.axisX,
+                crossingValueY = axisY.options.axisCrossingValue,
                 axisCrossingY = axisY.getSlot(crossingValueY, crossingValueY),
                 crossingValueX = axisX.options.axisCrossingValue,
                 axisCrossingX = axisX.getSlot(crossingValueX, crossingValueX);
 
             axisY.updateLayout(
-                axisY.box.translate(
-                    axisCrossingX.x1 - axisCrossingY.x1,
-                    0
-                )
+                axisY.box.translate(axisCrossingX.x1 - axisCrossingY.x1, 0)
             );
 
             axisX.updateLayout(
-                axisX.box.translate(
-                    0,
-                    axisCrossingY.y1 - axisCrossingX.y1
-                )
+                axisX.box.translate(0, axisCrossingY.y1 - axisCrossingX.y1)
             );
-
-            for (var i = 0; i < charts.length; i++) {
-                charts[i].updateLayout(targetBox);
-            }
         }
     });
 

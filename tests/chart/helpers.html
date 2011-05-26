@@ -97,7 +97,7 @@
             });
 
             test("alignTo 'top' keeps height", function() {
-                var clone = box.alignTo(targetBox, "top");
+                var clone = box.clone().alignTo(targetBox, "top");
                 equal(clone.height(), box.height());
             });
 
@@ -107,7 +107,7 @@
             });
 
             test("alignTo 'bottom' keeps height", function() {
-                var clone = box.alignTo(targetBox, "bottom");
+                var clone = box.clone().alignTo(targetBox, "bottom");
                 equal(clone.height(), box.height());
             });
 
@@ -117,7 +117,7 @@
             });
 
             test("alignTo 'right' keeps width", function() {
-                var clone = box.alignTo(targetBox, "right");
+                var clone = box.clone().alignTo(targetBox, "right");
                 equal(clone.height(), box.height());
             });
 
@@ -127,12 +127,26 @@
             });
 
             test("alignTo 'left' keeps width", function() {
-                var clone = box.alignTo(targetBox, "left");
+                var clone = box.clone().alignTo(targetBox, "left");
                 equal(clone.height(), box.height());
             });
 
             test("alignTo returns box instance", function() {
                 equal(box.alignTo(targetBox, "bottom"), box);
+            });
+
+            test("shrink reduces width", function() {
+                var clone = box.clone().shrink(10, 0);
+                equal(clone.width(), box.width() - 10);
+            });
+
+            test("shrink reduces height", function() {
+                var clone = box.clone().shrink(0, 10);
+                equal(clone.height(), box.height() - 10);
+            });
+
+            test("shrink returns box instance", function() {
+                equal(box.shrink(0, 0), box);
             });
 
         </script>
