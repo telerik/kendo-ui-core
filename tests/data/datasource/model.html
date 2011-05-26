@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>DataSource initialization</title>
+        <title>DataSource model</title>
         <script src="../../../src/jquery.js"></script>
         <script type="text/javascript" src="../../qunit.js"></script>
         <script type="text/javascript" src="../../qunit-runner.js"></script>
@@ -12,7 +12,7 @@
         <link rel="stylesheet" href="../../qunit.css" type="text/css" />
     </head>
     <body>
-        <h1 id="qunit-header">DataSource initialization</h1>
+        <h1 id="qunit-header">DataSource model</h1>
         <h2 id="qunit-banner"></h2>
         <div id="qunit-testrunner-toolbar"></div>
         <h2 id="qunit-userAgent"></h2>
@@ -26,14 +26,14 @@
                     return data;
                 }
             },
-            data = [],            
+            data = [],
             Model = kendo.data.Model,
             DataSource = kendo.data.DataSource;
 
             function setup(source) {
                 data = source || [{ id:1, bar: "foo" },{ id: 2, bar: "foo" }];
 
-                var dataSource = new DataSource( {
+                var dataSource = new DataSource({
                     reader: reader,
                     data: data
                 });
@@ -54,15 +54,14 @@
                 ok(firstModel === secondModel);
             });
 
-            test("datasource is notified when model change if autoSync=true", function() {
+            test("datasource is notified when model change ", function() {
                 var modelChangeWasCalled = false,
                     dataSource = new DataSource({
                         model: { idField: "foo" },
-                        data: [ { foo: "1", bar: "bar1"}, { foo: "2", bar: "bar2"}],
-                        autoSync: true
+                        data: [ { foo: "1", bar: "bar1"}, { foo: "2", bar: "bar2"}]
                     });
-                dataSource.read();                    
-                dataSource.modelChange = function() {                
+                dataSource.read();
+                dataSource.modelChange = function() {
                     modelChangeWasCalled = true;
                 };
 
@@ -71,22 +70,22 @@
                 ok(modelChangeWasCalled);
             });
 
-            test("datasource not is notified when model change if autoSync=false", function() {
-                var modelChangeWasCalled = false,
+            test("datasource raises update event if model is changed", function() {
+                var model,
                     dataSource = new DataSource({
                         model: { idField: "foo" },
                         data: [ { foo: "1", bar: "bar1"}, { foo: "2", bar: "bar2"}],
-                        autoSync: false
+                        update: function() {
+                            model = arguments[0];
+                        }
                     });
-                dataSource.read();                    
-                dataSource.modelChange = function() {                
-                    modelChangeWasCalled = true;
-                };
+                dataSource.read();
 
                 var model = dataSource.model("2");
                 model.set( {bar: "baz"} );
-                ok(!modelChangeWasCalled);
+                ok(model);
             });
+
             </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

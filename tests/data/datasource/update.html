@@ -5,6 +5,7 @@
     <script type="text/javascript" src="../../qunit-runner.js"></script>
     <script src="../../../src/kendo.core.js"></script>
     <script src="../../../src/kendo.query.js"></script>
+    <script src="../../../src/kendo.model.js"></script>
     <script src="../../../src/kendo.datasource.js"></script>
     <link rel="stylesheet" href="../../qunit.css" type="text/css" />
 
@@ -31,64 +32,19 @@
 
                 var dataSource = new DataSource( {
                     reader: reader,
-                    data: data
+                    data: data,
+                    model: kendo.data.Model.define()
                 });
 
                 dataSource.read();
                 return dataSource;
             }
 
-            test("update updates values of given item by its id", function(){
-                var dataSource = setup();
-
-                dataSource.update(1, {bar:"baz"});
-                equal(dataSource.find(1).bar, "baz");
-            });
-
-            test("update raises update event passing the modified item", function(){
-                var dataSource = setup();
-                var updateArgument;
-
-                dataSource.bind("update", function(e){
-                    updateArgument = e;
-                });
-
-                dataSource.update(1, {bar:"baz"});
-
-                equal(updateArgument.record, dataSource.at(0));
-            });
-
-            test("update does not raises update event if empty arguments are passed", function(){
-                var dataSource = setup();
-                var called;
-
-                dataSource.bind("update", function(record){
-                    called = true;
-                });
-
-                dataSource.update(1, {});
-
-                equal(dataSource.find(1).bar, "foo");
-                ok(!called);
-            });
-
-            test("update does not raises update if not such item exists", function(){
-                var dataSource = setup();
-
-                var called;
-                dataSource.bind("update", function(record){
-                    called = true;
-                });
-                dataSource.update(4, { bar: "baz" });
-
-                ok(!called);
-            });
-
             test("changes returns modified records", function(){
                 var dataSource = setup();
 
-                dataSource.update(2, { bar: "baz" });
-                dataSource.update(1, { bar: "baz" });
+                dataSource.model(2).set({ bar: "baz" });
+                dataSource.model(1).set({ bar: "baz" });
 
                 var changeSet = dataSource.changes();
                 equal(changeSet.length, 2);
@@ -100,21 +56,10 @@
                 equal(changeSet.length, 0);
             });
 
-            test("update performs deep cloning", function(){
-                data =  [{ id:1, bar: {},  baz: "foo" }];
-
-                var dataSource = setup(data);
-
-                dataSource.read();
-
-                dataSource.update(1, { baz: "moo" });
-                ok(dataSource.at(0).bar !== dataSource.modified[1].original.bar);
-            });
-
             test("changes with id parameter returns the changes for the given record", function() {
-                var dataSource = setup();
-
-                dataSource.update(1, { bar: "moo" });
+                var dataSource = setup(),
+                    model = dataSource.model(1);
+                model.set({ bar: "moo" });
 
                 var changes = dataSource.changes(1);
 
@@ -122,9 +67,9 @@
             });
 
             test("changes returns only what changed", function() {
-                var dataSource = setup();
-
-                dataSource.update(1, { bar: "moo" });
+                var dataSource = setup(),
+                    model = dataSource.model(1);
+                model.set({ bar: "moo" });
 
                 var changes = dataSource.changes(1);
 
@@ -132,9 +77,9 @@
             });
 
             test("hasChanges with id returns true if the record is changed", function() {
-                var dataSource = setup();
-
-                dataSource.update(1, { bar: "moo" });
+                var dataSource = setup(),
+                    model = dataSource.model(1);
+                model.set({ bar: "moo" });
 
                 ok(dataSource.hasChanges(1) === true);
             });
@@ -152,9 +97,10 @@
             });
 
             test("hasChanges without arguments returns true if there are changed records", function() {
-                var dataSource = setup();
+                var dataSource = setup(),
+                    model = dataSource.model(1);
 
-                dataSource.update(1, { bar: "moo" });
+                model.set({ bar: "moo" });
 
                 ok(dataSource.hasChanges() === true);
             });
@@ -169,18 +115,6 @@
                 var dataSource = setup([]);
 
                 ok(dataSource.hasChanges() === false);
-            });
-
-            test("update accumulates changes", function() {
-                var dataSource = setup();
-                var result = dataSource.create(0);
-
-                dataSource.update(1, { foo: "baz" });
-                dataSource.update(1, { bar: "baz" });
-
-                var changes = dataSource.changes(1);
-                equal(changes.foo, "baz");
-                equal(changes.bar, "baz");
             });
 
         </script>

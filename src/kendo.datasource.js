@@ -3,6 +3,8 @@
         kendo = window.kendo,
         Observable = kendo.Observable,
         Model = kendo.data.Model,
+        CHANGE = "change",
+        UPDATE = "update",
         stringify = kendo.stringify;
 
     function idMap(data, id) {
@@ -187,13 +189,16 @@
             });
 
             var id,
-            model = that.options.model,
-            transport = options.transport;
+                model = that.options.model,
+                transport = options.transport;
+
             if(!$.isEmptyObject(model) && !model.id) {
                 that.options.model = model = Model.define(model);
             }
             id = model.id;
             Observable.fn.init.call(that);
+
+            that.bind([CHANGE,UPDATE], options);
 
             that._reader = extend({
                 data: function (data) {
@@ -231,14 +236,14 @@
                 model = that._models[id];
             if(!model) {
                 that._models[id] = model = new that.options.model(that.find(id));
-                if(that.options.autoSync) {
-                    model.bind("change", $.proxy(that.modelChange, that, model));
-                }
+                model.bind(CHANGE, $.proxy(that._modelChange, that, model));
             }
             return model;
         },
-        modelChange: function(model) {
-            
+        _modelChange: function(model) {
+           var that = this;
+           that.modified[model.id()] = model;
+           that.trigger(UPDATE, {model: model});
         },
         read: function() {
             var that = this,
@@ -283,25 +288,7 @@
 
             that.idMap = idMap(data, that.id);
 
-            that.trigger("change");
-        },
-        update: function(id, values) {
-            var that = this,
-                modified = that.modified[id],
-                record = that.find(id);
-
-            if (record && !$.isEmptyObject(values)) {
-                if(!modified) {
-                    that.modified[id] = modified = {
-                        original: extend(true, {}, record),
-                        changes: {}
-                    };
-                }
-                extend(modified.changes, values);
-                extend(record, values);
-
-                that.trigger("update", { record: record });
-            }
+            that.trigger(CHANGE);
         },
 
         changes: function(id) {
@@ -315,7 +302,7 @@
 
                 return result;
             } else if (id in that.modified) {
-                return that.modified[id].changes;
+                return that.modified[id].modified();
             }
         },
 
@@ -416,7 +403,7 @@
                 that.read(options);
             } else {
                 that._view = process(that._data, options);
-                that.trigger("change");
+                that.trigger(CHANGE);
             }
         },
         page: function(val) {
