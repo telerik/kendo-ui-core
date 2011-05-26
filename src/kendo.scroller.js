@@ -94,7 +94,9 @@
                 this.element
                     .bind('gesturestart', this._gestureStartProxy )
                     .bind('gestureend', this._gestureEndProxy )
-                    .bind(this._startEvent, this._waitProxy); // Grab all events to prevent any selection-ings
+                    .bind(this._startEvent, this._waitProxy);
+
+                $.browser.mozilla && this.element.bind('mousedown', false );
             } else {
                 var that = this;
 
@@ -254,8 +256,17 @@
             this.direction = { x: 1, y: 1 };
             this.directionChange = +new Date();
 
-            $(document).bind(this._moveEvent, this._startProxy);
-            document.addEventListener(this._endEvent, this._stopProxy, true); // Needs capture to prevent delegates...
+            $(document)
+                .unbind(this._moveEvent, this._startProxy)
+                .bind(this._moveEvent, this._startProxy);
+            if ($.browser.mozilla) {
+                this.element
+                    .unbind(this._endEvent, this._stopProxy) // Make sure previous event is removed
+                    .bind(this._endEvent, this._stopProxy);
+            } else {
+                document.removeEventListener(this._endEvent, this._stopProxy, true);
+                document.addEventListener(this._endEvent, this._stopProxy, true); // Needs capture to prevent delegates...
+            }
         },
 
         _initializeBoxModel: function () {
@@ -327,6 +338,7 @@
                 }
 
                 $(document).unbind(this._moveEvent, this._startProxy)
+                           .unbind(this._moveEvent, this._dragProxy)
                            .bind(this._moveEvent, this._dragProxy);
             }
         },
@@ -352,7 +364,13 @@
 
         _stop: function (e) {
             if (this._dragCanceled) return;
-            document.removeEventListener(this._endEvent, this._stopProxy, true);
+            e.preventDefault();
+            e.stopPropagation();
+
+            if ($.browser.mozilla)
+                this.element.unbind(this._endEvent, this._stopProxy);
+            else
+                document.removeEventListener(this._endEvent, this._stopProxy, true);
             $(document)
                  .unbind(this._moveEvent, this._startProxy)
                  .unbind(this._moveEvent, this._dragProxy);
@@ -363,18 +381,16 @@
 
             if (this._dragged) {
                 this._dragged = false;
-                e.preventDefault();
-                e.stopPropagation();
 
                 this._initKinetikAnimation(e);
             } else {
                 proxy = $.proxy( this._click, { original: this, target: target } );
-                var evt = document.createEvent("MouseEvents");
-
-                if (kendo.support.touch && this._originalEvent.touches.length == 1) // Fire a click event when there's no drag...
+                
+                if (kendo.support.touch && oEvent.touches.length == 1) // Fire a click event when there's no drag...
                 {
                     target.unbind('click', proxy);
-                    fireFakeEvent('click', e);
+                    target.trigger('touchend');
+                    fireFakeMouseEvent('click', oEvent);
                     target.bind('click', proxy);
                 }
             }
@@ -555,10 +571,11 @@
             }
 
             function clear() {
+                clearTimeout(timeout_id);
                 timeout_id = undefined;
             }
 
-            timeout_id && clearTimeout(timeout_id);
+            timeout_id && clear();
 
             if (time_span > delay)
                 execute();
@@ -568,11 +585,21 @@
         };
     };
 
-    function fireFakeEvent(eventName, event) {
+    function fireFakeMouseEvent(eventName, event) {
         var evt = document.createEvent("MouseEvents");
-        evt.initMouseEvent(eventName, event.bubbles, event.cancelable, event.view,
-                           event.detail, event.screenX, event.screenY, event.clientX, event.clientY,
-                           false, false, false, false, event.button, event.relatedTarget);
+        evt.initMouseEvent(eventName, event.bubbles || false, event.cancelable || true, event.view || document.defaultView.window,
+                           event.detail || 1, event.screenX || event.changedTouches[0].screenX, event.screenY || event.changedTouches[0].screenY,
+                           event.clientX || event.changedTouches[0].clientX, event.clientY || event.changedTouches[0].clientY,
+                           false, false, false, false, event.button || 0, event.relatedTarget || event.target);
+        event.target.dispatchEvent(evt);
+    }
+
+    function fireFakeTouchEvent(eventName, event) {
+        var evt = document.createEvent("TouchEvent");
+        evt.initTouchEvent(eventName, event.bubbles || false, event.cancelable || true, event.view || document.defaultView.window,
+                           event.detail || 1, event.changedTouches[0].screenX, event.changedTouches[0].screenY,
+                           event.changedTouches[0].clientX, event.changedTouches[0].clientY,
+                           false, false, false, false, event.touches, event.targetTouches, event.changedTouches, event.scale, event.rotation);
         event.target.dispatchEvent(evt);
     }
 
