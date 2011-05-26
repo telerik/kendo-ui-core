@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>MVVM</title>
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.model.js"></script>
+        <script src="../src/kendo.binder.js"></script>
+        <script src="../src/kendo.query.js"></script>
+        <script src="../src/kendo.datasource.js"></script>
+        <script src="../src/kendo.popup.js"></script>
+        <script src="../src/kendo.autocomplete.js"></script>
+    </head>
+    <body>
+        <form>
+            <input name="name" />
+            <select data-text-field="name" data-field="category" data-value-field="id" data-source="categories"></select>
+        </form>
+
+        <script>
+            var Product = kendo.data.Model.define({
+                categories: function() {
+                    return [ { id: 1, name: "Food" }, { id: 2, name: "Beverages" } ];
+                }
+            });
+
+            var product = new Product( {
+                category: 2,
+                name: "Chai"
+            }).bind("change", function() {
+                console.log("changed: ", this.modified());
+            });
+
+            new kendo.data.ModelViewBinder($("form"), product);
+            $("[name=name]").kendoAutoComplete(["foo", "bar"]);
+        </script>
+    </body>
+</html>
+
