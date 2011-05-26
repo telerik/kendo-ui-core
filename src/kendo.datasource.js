@@ -212,7 +212,7 @@
         },
         defaults: {
             modelType: {
-                identifier: function(data) {
+                id: function(data) {
                     return data["id"];
                 }
             },
