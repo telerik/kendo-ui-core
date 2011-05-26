@@ -79,14 +79,18 @@
             single = !that.options.multi;
             that._downTarget = $(event.currentTarget);
             that._shiftPressed = shiftKey;
-            $(document).bind(MOUSEUP, that._upDelegate);
+            $(document)
+                .unbind(MOUSEUP, that._upDelegate) // more cancel friendly
+                .bind(MOUSEUP, that._upDelegate);
             that._originalPosition = {
                 x: event.pageX,
                 y: event.pageY
             };
 
             if(!single) {
-                $(document).bind(MOUSEMOVE, that._moveDelegate)
+                $(document)
+                    .unbind(MOUSEMOVE, that._moveDelegate)
+                    .bind(MOUSEMOVE, that._moveDelegate);
             }
 
             if (!single) {
@@ -113,10 +117,11 @@
                 that._downTarget.addClass(SELECTED);
                 if(!shiftKey)
                     that._downTarget.addClass(UNSELECTING);
-                }
-                else {
+            }
+            else {
+                if (!(kendo.support.touch && single))
                     that._downTarget.addClass(ACTIVE);
-                }
+            }
         },
         _move: function (event) {
             var that = this,
@@ -130,7 +135,8 @@
                 "height": pos.bottom - pos.top
             });
 
-            $(document).bind(SELECTSTART, false);
+            $(document).unbind(SELECTSTART, false)
+                       .bind(SELECTSTART, false);
 
             that.element.find(that.options.filter).each(function () {
                 var selectee = $(this),
@@ -163,13 +169,17 @@
         },
         _up: function (event) {
             var that = this,
-            options = that.options;
+                single = !that.options.multi,
+                options = that.options;
             $(document)
-            .unbind(MOUSEMOVE, that._moveDelegate)
-            .unbind(MOUSEUP, that._upDelegate);
+                .unbind(MOUSEMOVE, that._moveDelegate)
+                .unbind(MOUSEUP, that._upDelegate);
             if (options.multi) {
                 that._marquee.remove();
             }
+
+            if (kendo.support.touch && single)
+                that._downTarget.addClass(ACTIVE);
 
             if(options.multi && that._shiftPressed === true) {
                 that.selectRange(that._firstSelectee(), that._downTarget);
