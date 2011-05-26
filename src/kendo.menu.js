@@ -195,60 +195,6 @@
     // client-side rendering
     extend(Menu, {
         create: function () {
-            var element, options;
-
-            if ($.isPlainObject(arguments[0])) {
-                options = arguments[0];
-            } else {
-                element = arguments[0];
-                options = $.extend({
-                    html: element.innerHTML
-                }, arguments[1]);
-            }
-
-            options = $.extend({
-                title: "",
-                html: "",
-                actions: ["Close"]
-            }, options);
-
-            var windowHtml = "",
-                titleHtml = ""
-                contentHtml = "";
-
-            windowHtml += "<div class='t-widget t-window'></div>";
-
-            titleHtml += "<div class='t-window-titlebar t-header'>&nbsp;<span class='t-window-title'>" +
-                          options.title + "</span><div class='t-window-actions t-header'>";
-
-            $.map(options.actions, function (command) {
-                titleHtml += "<a href='#' class='t-window-action t-link'><span class='t-icon t-" +
-                              command.toLowerCase() + "'>" + command + "</span></a>";
-            });
-
-            titleHtml += "</div>";
-
-            if (!element) {
-                contentHtml = $("<div class='t-window-content t-content'></div>");
-            } else {
-                contentHtml = $(element);
-            }
-
-            if (typeof (options.scrollable) != "undefined" && options.scrollable === false) {
-                contentHtml.attr("style", "overflow:hidden;");
-            }
-
-            if (options.contentUrl && !isLocalUrl(options.contentUrl)) {
-                contentHtml.html("<iframe src='" + options.contentUrl + "' title='" + options.title +
-                              "' frameborder='0' style='border:0;width:100%;height:100%;'>This page requires frames in order to show content</iframe>");
-            }
-
-            if (element) {
-                $(windowHtml).append(titleHtml).append(contentHtml).appendTo(document.body);
-            } else {
-                windowHtml += "</div>";
-                return $(windowHtml).appendTo(document.body).kendoWindow(options);
-            }
         }
     });
 
