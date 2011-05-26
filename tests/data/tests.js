@@ -42,5 +42,21 @@ tests.push(
     {
         page: "data/inmemorycache.html",
         title: "in-memory cache"
+    },
+    {
+        page: "data/model/initialization.html",
+        title: "initialization"
+    },
+    {
+        page: "data/model/get.html",
+        title: "get"
+    },
+    {
+        page: "data/model/set.html",
+        title: "set"
+    },
+    {
+        page: "data/model/modified.html",
+        title: "modified"
     }
 );
