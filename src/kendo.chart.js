@@ -1079,8 +1079,13 @@
                     stackWrap = new ChartElement();
                     cluster.children.push(stackWrap);
 
-                    positiveStack = new StackLayout();
-                    negativeStack = new StackLayout({ isReversed: true });
+                    positiveStack = new StackLayout({
+                        isVertical: options.isVertical
+                    });
+                    negativeStack = new StackLayout({
+                        isVertical: options.isVertical,
+                        isReversed: true
+                    });
                     stackWrap.children.push(positiveStack, negativeStack);
                 } else {
                     positiveStack = stackWrap.children[0];
