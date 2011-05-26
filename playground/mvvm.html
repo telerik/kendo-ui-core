@@ -28,11 +28,13 @@
                 category: 2,
                 name: "Chai"
             }).bind("change", function() {
-                console.log("changed: ", this.modified());
+                console.log("changed: ", this.changes());
             });
 
             new kendo.data.ModelViewBinder($("form"), product);
-            $("[name=name]").kendoAutoComplete(["foo", "bar"]);
+            $("[name=name]").kendoAutoComplete({change: function() {
+                    console.log("changed from ", this.previous, " to ", this.value());
+            },dataSource: ["foo", "bar"] });
         </script>
     </body>
 </html>
