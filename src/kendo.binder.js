@@ -33,7 +33,7 @@
             that.options = options || {};
             that.model = model instanceof Model ? model : new Model(model);
 
-            that.element.find("input")
+            that.element.find("input,select")
                 .add(that.element)
                 .bind("change", $.proxy(that._change, that))
                 .each(function() {
@@ -57,7 +57,7 @@
             var that = this,
                 model = that.model,
                 options = that.options,
-                field = $(target).attr("data-field") || target.name,
+                field = $(target).attr("data-field") || $(target).attr("name"),
                 setting = options[field] || {};
 
             if (field) {
