@@ -408,9 +408,10 @@
                     same(slot.width(), 0);
                 });
 
-                test("assumes missing value to be 0", function() {
+                test("assumes missing value to be axis crossing", function() {
+                    numericAxis.options.axisCrossingValue = 1;
                     var slot = numericAxis.getSlot(0.5);
-                    same([slot.y1, slot.y2], [348.5, 591]);
+                    same([slot.y1, slot.y2], [106, 348.5], TOLERANCE);
                 });
 
                 test("a value capped to minimum value", function() {
@@ -440,9 +441,10 @@
                     same([slot.y1, slot.y2], [251.5, 494]);
                 });
 
-                test("assumes missing value to be 0", function() {
+                test("assumes missing value to be axis crossing", function() {
+                    numericAxis.options.axisCrossingValue = -1;
                     var slot = numericAxis.getSlot(-0.5);
-                    same([slot.y1, slot.y2], [9, 251.5]);
+                    same([slot.y1, slot.y2], [251.5, 494]);
                 });
 
                 test("a value capped to maximum value", function() {
@@ -477,9 +479,10 @@
                     same(slot.height(), 0);
                 });
 
-                test("assumes missing value to be 0", function() {
+                test("assumes missing value to be axis crossing", function() {
+                    numericAxis.options.axisCrossingValue = 1;
                     var slot = numericAxis.getSlot(0.5);
-                    same([slot.x1, slot.x2], [5, 330.833], TOLERANCE);
+                    same([slot.x1, slot.x2], [330.833, 656.667], TOLERANCE);
                 });
 
                 test("a value capped to minimum value", function() {
@@ -509,9 +512,10 @@
                     same([slot.x1, slot.x2], [146.249, 470.625], TOLERANCE);
                 });
 
-                test("assumes missing value to be 0", function() {
+                test("assumes missing value to be axis crossing", function() {
+                    numericAxis.options.axisCrossingValue = -1;
                     var slot = numericAxis.getSlot(-0.5);
-                    same([slot.x1, slot.x2], [470.625, 795], TOLERANCE);
+                    same([slot.x1, slot.x2], [146.250, 470.625], TOLERANCE);
                 });
 
                 test("a value capped to maximum value", function() {
