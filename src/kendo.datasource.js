@@ -359,14 +359,15 @@
 
         destroy: function(id) {
             var that = this,
-                record = that.find(id);
+                model = that.model(id);
 
-            if (record) {
+            if (model) {
                 that._data.splice(that.idMap[id], 1);
                 that.idMap = idMap(that._data, that.id);
+                model.state = Model.DELETED;
                 that.modified[id] = {};
 
-                that.trigger("destroy", { record: record });
+                that.trigger("destroy", { model: model });
             }
         },
         data: function(value) {
