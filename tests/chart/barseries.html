@@ -187,6 +187,14 @@
                     equal(series._bars[0].box.x1, 0.3, TOLERANCE);
                 });
 
+                test("bars have set height according to value", function() {
+                    var barHeights = $.map(series._bars, function(bar) {
+                        return bar.box.height();
+                    });
+
+                    same(barHeights, [1, 1, 2, 2]);
+                });
+
                 module("Bar Chart / Stack / Negative Values", {
                     setup: function() {
                         setupBarChart({
@@ -213,6 +221,14 @@
                          [CATEGORY_AXIS_Y, CATEGORY_AXIS_Y]);
                 });
 
+                test("bars have set height according to value", function() {
+                    var barHeights = $.map(series._bars, function(bar) {
+                        return bar.box.height();
+                    });
+
+                    same(barHeights, [1, 1, 2, 2]);
+                });
+
                 module("Bar Chart / Stack / Mixed Values", {
                     setup: function() {
                         setupBarChart({
@@ -228,6 +244,14 @@
 
                 test("reports stacked maximum value", function() {
                     equal(series.getValueRange().max, 2);
+                });
+
+                test("bars have set height according to value", function() {
+                    var barHeights = $.map(series._bars, function(bar) {
+                        return bar.box.height();
+                    });
+
+                    same(barHeights, [1, 1, 2, 2]);
                 });
 
             })();
@@ -305,6 +329,141 @@
                     });
 
                     same(barWidths, [1, 2]);
+                });
+
+                module("Bar Chart / Horizontal / Negative Values", {
+                    setup: function() {
+                        setupBarChart({ isVertical: false, series: [ negativeSeries ] });
+                    }
+                });
+
+                test("Reports minimum series value", function() {
+                    same(series.getValueRange().min, negativeSeries.data[1]);
+                });
+
+                test("Reports maximum series value", function() {
+                    same(series.getValueRange().max, negativeSeries.data[0]);
+                });
+
+                test("bar sides are aligned to category axis", function() {
+                    var barsX = $.map(series._bars, function(bar) {
+                        return bar.box.x2;
+                    });
+
+                    same(barsX, [CATEGORY_AXIS_X, CATEGORY_AXIS_X]);
+                });
+
+                test("bars have set width according to value", function() {
+                    var barWidths = $.map(series._bars, function(bar) {
+                        return bar.box.width();
+                    });
+
+                    same(barWidths, [1, 2]);
+                });
+
+                module("Bar Chart / Horizontal / Cluster", {
+                    setup: function() {
+                        setupBarChart({ isVertical: false, series: [ positiveSeries, negativeSeries ] });
+                    }
+                });
+
+                test("bars in first category are clustered", function() {
+                    equal(series._bars[0].box.y2, series._bars[1].box.y1);
+                });
+
+                module("Bar Chart / Horizontal / Stack / Positive Values", {
+                    setup: function() {
+                        setupBarChart({
+                            isVertical: false,
+                            series: [ positiveSeries, positiveSeries ],
+                            isStacked: true }
+                        );
+                    }
+                });
+
+                test("reports stacked minumum value", function() {
+                    equal(series.getValueRange().min, 2);
+                });
+
+                test("reports stacked maximum value", function() {
+                    equal(series.getValueRange().max, 4);
+                });
+
+                test("bars in first category are stacked", function() {
+                    equal(series._bars[1].box.x1, series._bars[0].box.x2);
+                });
+
+                test("bars have set width according to value", function() {
+                    var barWidths = $.map(series._bars, function(bar) {
+                        return bar.box.width();
+                    });
+
+                    same(barWidths, [1, 1, 2, 2]);
+                });
+
+                test("series have 75% margin", function() {
+                    equal(series._bars[0].box.y1, 0.3, TOLERANCE);
+                });
+
+                module("Bar Chart / Horizontal / Stack / Negative Values", {
+                    setup: function() {
+                        setupBarChart({
+                            isVertical: false,
+                            series: [ negativeSeries, negativeSeries ],
+                            isStacked: true }
+                        );
+                    }
+                });
+
+                test("reports stacked minumum value", function() {
+                    equal(series.getValueRange().min, -4);
+                });
+
+                test("reports stacked maximum value", function() {
+                    equal(series.getValueRange().max, -2);
+                });
+
+                test("bars in first category are stacked", function() {
+                    equal(series._bars[1].box.x2, series._bars[0].box.x1);
+                });
+
+                test("stack sides are aligned to category axis", function() {
+                    same([series._bars[0].box.x2, series._bars[2].box.x2],
+                         [CATEGORY_AXIS_X, CATEGORY_AXIS_X]);
+                });
+
+                test("bars have set width according to value", function() {
+                    var barWidths = $.map(series._bars, function(bar) {
+                        return bar.box.width();
+                    });
+
+                    same(barWidths, [1, 1, 2, 2]);
+                });
+
+                module("Bar Chart / Horizontal / Stack / Mixed Values", {
+                    setup: function() {
+                        setupBarChart({
+                            isVertical: false,
+                            series: [ positiveSeries, negativeSeries ],
+                            isStacked: true }
+                        );
+                    }
+                });
+
+                test("reports stacked minumum value", function() {
+                    equal(series.getValueRange().min, -2);
+                });
+
+                test("reports stacked maximum value", function() {
+                    equal(series.getValueRange().max, 2);
+                });
+
+                test("bars have set width according to value", function() {
+                    var barWidths = $.map(series._bars, function(bar) {
+                        return bar.box.width();
+                    });
+
+                    same(barWidths, [1, 1, 2, 2]);
                 });
 
             })();
