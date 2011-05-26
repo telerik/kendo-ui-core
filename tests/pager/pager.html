@@ -55,11 +55,11 @@
 
                 var links = ul.find("a");
                 equal(links.length, 5);
-                equal(links[0].innerHTML, "<span>Page </span>1");
-                equal(links[1].innerHTML, "<span>Page </span>2");
-                equal(links[2].innerHTML, "<span>Page </span>3");
-                equal(links[3].innerHTML, "<span>Page </span>4");
-                equal(links[4].innerHTML, "<span>Page </span>5");
+                equal(links[0].innerHTML, "1");
+                equal(links[1].innerHTML, "2");
+                equal(links[2].innerHTML, "3");
+                equal(links[3].innerHTML, "4");
+                equal(links[4].innerHTML, "5");
             });
 
             test("page number buttons have data attribute assign exept for the current page index", function(){
@@ -83,11 +83,11 @@
 
                 var links = ul.find("a");
                 equal(links.length, 5);
-                equal(links[0].innerHTML, "<span>Page </span>1");
-                equal(links[1].innerHTML, "<span>Page </span>2");
-                equal(links[2].innerHTML, "<span>Page </span>3");
-                equal(links[3].innerHTML, "<span>Page </span>4");
-                equal(links[4].innerHTML, "<span>Page </span>5");
+                equal(links[0].innerHTML, "1");
+                equal(links[1].innerHTML, "2");
+                equal(links[2].innerHTML, "3");
+                equal(links[3].innerHTML, "4");
+                equal(links[4].innerHTML, "5");
             });
 
             test("does not render page numbers if total pages are zero", function(){

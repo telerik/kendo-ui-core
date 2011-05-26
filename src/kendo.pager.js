@@ -19,8 +19,8 @@
         },
 
         options: {
-            selectTemplate: '<li><a href="#" class="currentPage"><span>Page </span><%=text %></a></li>',
-            linkTemplate: '<li><a href="#" data-page="<%=idx %>"><%= isNum ? "<span>Page </span>" : "" %><%=text %></a></li>',
+            selectTemplate: '<li><a href="#" class="currentPage"><%=text %></a></li>',
+            linkTemplate: '<li><a href="#" data-page="<%=idx %>"><%=text %></a></li>',
             buttonCount: 10
         },
 
