@@ -46,8 +46,22 @@
                 m.set("foo", "foo");
                 equal(m.changes().bar, undefined);
             });
+            test("state is NOTMODIFIED when value is not changed", function() {
+                var model = new Model({id: "bar"});
+                equal(model.state, Model.NOTMODIFIED);
+            });
 
-      </script>
+            test("state is MODIFIED when value is changed", function() {
+                var model = new Model({id: "bar"});
+                model.set("bar", "moo");
+                equal(model.state, Model.MODIFIED);
+            });
+
+            test("state is INSERTED when model is new", function() {
+                var model = new Model();
+                equal(model.state, Model.INSERTED);
+            });
+        </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
     </body>
