@@ -5,6 +5,7 @@
     <script type="text/javascript" src="../../qunit-runner.js"></script>
     <script src="../../../src/kendo.core.js"></script>
     <script src="../../../src/kendo.query.js"></script>
+    <script src="../../../src/kendo.model.js"></script>
     <script src="../../../src/kendo.datasource.js"></script>
     <link rel="stylesheet" href="../../qunit.css" type="text/css" />
 
@@ -31,7 +32,8 @@
 
                 var dataSource = new DataSource( {
                     reader: reader,
-                    data: data
+                    data: data,
+                    model: kendo.data.Model.define()
                 });
 
                 dataSource.read();
@@ -75,10 +77,19 @@
                 dataSource.bind("destroy", function(e) {
                     destroyArgument = e;
                 });
-                var first = dataSource.at(0);
+                var first = dataSource.model(1);
 
                 dataSource.destroy(1);
-                equal(destroyArgument.record, first);
+                equal(destroyArgument.model, first);
+            });
+            test("destroy sets model state to DELETED", function() {
+                var dataSource = setup();
+                var destroyArgument;
+
+                var model = dataSource.model(1);
+
+                dataSource.destroy(1);
+                equal(model.state, kendo.data.Model.DELETED);
             });
 
         </script>

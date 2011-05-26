@@ -5,6 +5,7 @@
         MODIFIED = "MODIFIED",
         NOTMODIFIED = "NOTMODIFIED",
         INSERTED = "INSERTED",
+        DELETED = "DELETED",
         Observable = kendo.Observable;
 
     function equal(x, y) {
@@ -159,4 +160,5 @@
     kendo.data.Model.MODIFIED = MODIFIED;
     kendo.data.Model.NOTMODIFIED = NOTMODIFIED;
     kendo.data.Model.INSERTED = INSERTED;
+    kendo.data.Model.DELETED = DELETED;
 })(jQuery);
