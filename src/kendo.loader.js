@@ -269,6 +269,10 @@
         window: {
             url: "kendo.window.js",
             depends: [ "draganddrop", "fx" ]
+        },
+        menu: {
+            url: "kendo.menu.js",
+            depends: [ "fx" ]
         }
     });
 
