@@ -46,6 +46,8 @@
     LocalTransport.prototype = {
         read: function(options) {
             options.success(this.data);
+        },
+        update: function() {
         }
     }
 
@@ -57,6 +59,12 @@
         if (typeof options.read === "string") {
             options.read = {
                 url: options.read
+            };
+        }
+
+        if (typeof options.update === "string") {
+            options.update = {
+                url: options.update
             };
         }
 
@@ -73,9 +81,12 @@
             dialect: {
                 read: function(data) {
                     return data;
+                },
+                update: function(data) {
+                    return data;
                 }
             }
-        },
+        },     
         read: function(options) {
             options = options || {};
             var that = this,
@@ -86,9 +97,8 @@
                 cached;
 
             options = extend(true, {}, read, options);
-            options.data = that.dialect.read(extend(data, options.data));
-
-            cached = that.cache.find(options.data);
+            options.data = that.dialect.read(extend(data, options.data));                      
+            var cached = that.cache.find(options.data);
             if(cached != undefined) {
                 success(cached);
             } else {
@@ -103,6 +113,25 @@
 
                 $.ajax(options);
             }
+        },
+        update: function(options) {
+            options = options || {};
+            var that = this,
+                update = that.options.update,
+                data = isFunction(update.data) ? update.data() : update.data,
+                success = options.success || noop,
+                error = options.error || noop;
+
+            options = extend(true, {}, update, options);            
+            options.data = that.dialect.update(extend(data, options.data));
+            options.success = function(result) {
+                success(result);
+            };
+            options.error = function(result) {
+                error(result);
+            };
+
+            $.ajax(options);
         }
     }
 
@@ -267,6 +296,24 @@
            that.trigger(UPDATE, { model: model });
         },
 
+        _modelsByState: function(state) {
+            var models = this._models,
+                modified = [],
+                idx;              
+            for (idx in models) {
+                if(models[idx].state ===  state) {
+                    modified.push(models[idx]);
+                }
+            }
+
+            return modified;
+        },
+        sync: function() {
+            var that = this,
+                updatedModels = that._modelsByState(Model.UPDATED);
+
+            that.transport.update(updatedModels);
+        },
         read: function() {
             var that = this,
                 options = {
