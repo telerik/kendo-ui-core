@@ -45,10 +45,10 @@
             $(document).click($.proxy( that._documentClick, that ));
 
             element.bind({
-                select: that.onSelect,
-                open: that.onOpen,
-                close: that.onClose,
-                load: that.onLoad
+                select: that.options.onSelect,
+                open: that.options.onOpen,
+                close: that.options.onClose,
+                load: that.options.onLoad
             });
         },
         options: {
@@ -163,27 +163,29 @@
         },
         
         _mouseenter: function (e) {
+            var that = this;
+
             var element = $(e.currentTarget);
-            if (!this.openOnClick || this.clicked) {
+            if (!that.options.openOnClick || that.clicked) {
                 if (!contains(e.currentTarget, e.relatedTarget)) {
-                    this.triggerEvent('open', element);
-                    this.open(element);
+                    that.triggerEvent('open', element);
+                    that.open(element);
                 }
             }
 
-            if (this.openOnClick && this.clicked) {
-                this.triggerEvent('close', element);
+            if (that.options.openOnClick && that.clicked) {
+                that.triggerEvent('close', element);
 
                 element.siblings().each($.proxy(function (_, sibling) {
-                    this.close($(sibling));
-                }, this));
+                    that.close($(sibling));
+                }, that));
             }
         },
 
         _mouseleave: function (e) {
             var that = this;
             
-            if (!that.openOnClick && !contains(e.currentTarget, e.relatedTarget)) {
+            if (!that.options.openOnClick && !contains(e.currentTarget, e.relatedTarget)) {
                 var element = $(e.currentTarget);
                 that.triggerEvent('close', element);
 
@@ -202,9 +204,9 @@
                 return; 
             }
 
-            this.element.trigger('select', { item: element[0] });
+            element.trigger('select', { item: element[0] });
 
-            if (!element.parent().hasClass('t-menu') || !that.openOnClick)
+            if (!element.parent().hasClass('t-menu') || !that.options.openOnClick)
                 return;
 
             e.preventDefault();
@@ -217,7 +219,7 @@
         _documentClick: function (e) {
             var that = this;
             
-            if ($.contains(that.element, e.currentTarget))
+            if (contains(that.element, e.currentTarget))
                 return;
 
             if (that.clicked) {
