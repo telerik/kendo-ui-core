@@ -80,13 +80,13 @@
 
             options = that.options;
 
-            that.openAnimation = extend(options.openAnimation, {
+            extend(options.animation.open, {
                 complete: function() {
                     that.trigger(OPEN);
                 }
             });
 
-            that.closeAnimation = extend(options.closeAnimation, {
+            extend(options.animation.close, {
                 complete: function() {
                     that.trigger(CLOSE);
                 }
@@ -102,16 +102,18 @@
         },
         options: {
             toggleEvent: "click",
-            origin: "bottom left",
-            position: "top left",
+            origin: BOTTOM + " " + LEFT,
+            position: TOP + " " + LEFT,
             anchor: "body",
-            openAnimation: {
-                effects: "fadeIn",
-                show: true
-            },
-            closeAnimation: {
-                effects: "fadeOut",
-                hide: true
+            animation: {
+                open: {
+                    effects: "fadeIn",
+                    show: true
+                },
+                close: {
+                    effects: "fadeOut",
+                    hide: true
+                }
             }
         },
         open: function() {
@@ -121,7 +123,7 @@
             if (!that.visible()) {
                 align(that.element, $(options.anchor), options.origin, options.position);
 
-                that.element.kendoStop().kendoAnimate(that.openAnimation);
+                that.element.kendoStop().kendoAnimate(options.animation.open);
             }
         },
         toggle: function() {
@@ -136,7 +138,7 @@
             var that = this;
 
             if (that.visible()) {
-                that.element.kendoStop().kendoAnimate(that.closeAnimation);
+                that.element.kendoStop().kendoAnimate(that.options.animation.close);
             }
         },
         _mousedown: function(e) {
