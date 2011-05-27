@@ -43,10 +43,9 @@
 
             that._template(options && options.template);
 
-            that._dataSource();
+            that._dataAccessors();
 
-            that._getText = kendo.getter(that.options.dataTextField);
-            that._getValue = kendo.getter(that.options.dataValueField);
+            that._dataSource();
 
             that.ul.delegate("li", "click", proxy(that._click, that));
 
@@ -61,10 +60,16 @@
                         }
                     }
                 });
+
+            if (that.options.autoBind) {
+                that.dataSource.query();
+            }
         },
 
         options: {
             index: 0,
+            autoBind: true,
+            dataSource: {},
             dataTextField: "Text",
             dataValueField: "Value"
         },
@@ -87,16 +92,27 @@
             that.template = kendo.template("<li unselectable='on'>" + options.template + "</li>"); //unselectable=on is required for IE to prevent the suggestion box from stealing focus from the input
         },
 
+        _dataAccessors: function() {
+            var that = this,
+                options = that.options,
+                getter = kendo.getter;
+
+            that._getText = getter(options.dataTextField);
+            that._getValue = getter(options.dataValueField);
+        },
+
         _dataSource: function() {
             var that = this;
-                element = that.element;
+                element = that.element,
+                options = that.options,
+                dataSource = options.dataSource;
 
-            if(element.is("select") && !that.options.dataSource) {
-                that.options.dataSource = getDropDownItems(element);
+            if($.isPlainObject(dataSource) && element.is("select")) {
+                options.index = element.children(":selected").index();
+                $.extend(dataSource, {select: element, fields: [{ field: options.dataTextField }, { field: options.dataValueField }] });
             }
 
-            that.dataSource = DataSource.create(that.options.dataSource || {})
-                                        .bind(CHANGE, proxy(that.refresh, that));
+            that.dataSource = DataSource.create(dataSource || {}).bind(CHANGE, proxy(that.refresh, that));
         },
 
         _keydown: function(e) {
@@ -208,7 +224,9 @@
 
             that.select(that.options.index);
 
-            that.popup[data.length ? "open" : "close"]();
+            if(!that.options.autoBind) {
+                that.popup[data.length ? "open" : "close"]();
+            }
         },
 
         select: function(li) {

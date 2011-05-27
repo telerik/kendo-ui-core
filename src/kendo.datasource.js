@@ -477,10 +477,15 @@
         var dataSource = options || {},
             data = dataSource.data,
             fields = dataSource.fields,
-            table = dataSource.table;
+            table = dataSource.table,
+            select = dataSource.select;
 
-        if (!data && table && fields) {
-            data = infer(table, fields);
+        if (!data && fields) {
+            if (table) {
+                data = inferTable(table, fields);
+            } else if (select) {
+                data = inferSelect(select, fields);
+            }
         }
 
         dataSource.data = data;
@@ -488,7 +493,28 @@
         return dataSource instanceof DataSource ? dataSource : new DataSource(dataSource);
     }
 
-    function infer(table, fields) {
+    function inferSelect(select, fields) {
+        var options = $(select)[0].children,
+            optionIndex,
+            optionCount,
+            data = [],
+            record,
+            option;
+
+        for (optionIndex = 0, optionCount = options.length; optionIndex < optionCount; optionIndex++) {
+            record = {};
+            option = options[optionIndex];
+
+            record[fields[0].field] = option.text;
+            record[fields[1].field] = option.value;
+
+            data.push(record);
+        }
+
+        return data;
+    }
+
+    function inferTable(table, fields) {
         var tbody = $(table)[0].tBodies[0],
             rows = tbody ? tbody.rows : [],
             rowIndex,
