@@ -48,7 +48,7 @@
                  ok(input.data("kendoDropDownList") instanceof DropDownList);
            });
 
-           test("kendoDropDownList extends passed options", function(){
+           test("kendoDropDownList extends passed options", function() {
                 input.kendoDropDownList({test: 1});
 
                 var options = input.data("kendoDropDownList").options;
@@ -154,6 +154,14 @@
 
            });
 
+           test("selected index is get from select element", function() {
+               var select = $("<select><option value=1>Chai</option><option value=1 selected='selected'>Chai</option></select>"),
+                   dropdownlist = new DropDownList(select);
+
+               equal(dropdownlist.options.index, 1);
+
+           });
+
            test("retrived data from OPTIONS does not override options.dataSource", function() {
                var select = $("<select><option value=1>Chai</option><option value=1 selected='selected'>Chai</option></select>"),
                    data = [{Text: "Foo", Value: "Foo"}], 
@@ -222,16 +230,10 @@
                equal(dropdownlist.options.template, "<%= data.toUpperCase() %>");
            });
 
-           test("first click on wrapper should bind popup", function() {
+           test("should populate text and value if items", function() {
                  var dropdownlist = new DropDownList(input, [{Text: "foo", Value: 1}, {Text:2, Value:2}]);
-
-                 dropdownlist.dataSource.bind("change", function(){
-                    ok(true);
-                    start();
-                 });
-
-                dropdownlist.wrapper.click();
-                stop(300);
+                 equal(dropdownlist.text(), "foo");
+                 equal(dropdownlist.value(), "1");
            });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

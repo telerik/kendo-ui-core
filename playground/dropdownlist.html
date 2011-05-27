@@ -58,7 +58,8 @@
         <script type="text/javascript" charset="utf-8">
             $(document).ready(function() {
                 $("#dropdownlist").kendoDropDownList({
-                    dataSource: [{Text: "foo", Value: 1}, {Text:2, Value:2}]
+                    dataSource: [{Text: "foo", Value: 1}, {Text:2, Value:2}],
+                    autoBind: false
                 });
                 $("#select").kendoDropDownList({
                     dataSource: [{Text: "foo", Value: 1}, {Text:2, Value:2}]

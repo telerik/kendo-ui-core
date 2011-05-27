@@ -116,6 +116,21 @@
                 equal(dataSource.data().length, 0);
             });
 
+            test("infer from html select", function() {
+                var select = $("<select><option value=1>foo1</option><option value=2>foo2</option></select>"),
+                    dataSource = DataSource.create({
+                        select: select,
+                        fields: [ { field: "text" }, { field: "value" } ]
+                    });
+
+                dataSource.read();
+                equal(dataSource.data().length, 2);
+                equal(dataSource.data()[0].text, "foo1");
+                equal(dataSource.data()[0].value, "1");
+                equal(dataSource.data()[1].text, "foo2");
+                equal(dataSource.data()[1].value, "2");
+            });
+
             test("initialize data source from array", function() {
                 var data = [1, 2],
                     dataSource = DataSource.create(data);
