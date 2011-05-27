@@ -210,7 +210,11 @@
                 }
             }, options.reader);
 
-            that.transport = transport && isFunction(transport.read) ? transport : (options.data? new LocalTransport({ data: options.data }):new RemoteTransport(transport));
+            if (transport) {
+                that.transport = isFunction(transport.read) ? transport: new RemoteTransport(transport);
+            } else {
+                that.transport = new LocalTransport({ data: options.data });
+            }
 
             if (id) {
                 that.find = function(id) {
@@ -231,6 +235,7 @@
                     return data["id"];
                 }
             },
+            data: [],
             serverSorting: false,
             serverPaging: false,
             serverFiltering: false,
