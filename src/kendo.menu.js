@@ -2,12 +2,17 @@
     var kendo = window.kendo,
         ui = kendo.ui,
         extend = $.extend,
-        Component = ui.Component;
+        Component = ui.Component,
+        MOUSEENTER = 'mouseenter',
+        MOUSELEAVE = 'mouseleave',
+        CLICK = 'click',
+        itemSelector = '.t-item:not(.t-state-disabled)',
+        linkSelector = '.t-item:not(.t-state-disabled) > .t-link';
 
     function getEffectOptions(item) {
         var parent = item.parent();
         return {
-            direction: parent.hasClass('t-menu') ? parent.hasClass('t-menu-vertical') ? 'right' : 'bottom' : 'right'
+            effects: parent.hasClass('t-menu') ? parent.hasClass('t-menu-vertical') ? 'slideRightIn' : 'slideDownIn' : 'slideRightIn'
         };
     }
 
@@ -21,174 +26,215 @@
 
     var Menu = Component.extend({
         init: function(element, options) {
+            element = $(element);
             var that = this;
 
             Component.fn.init.call(that, element, options);
 
             options = that.options;
 
-            this.nextItemZIndex = 100;
+            that.nextItemZIndex = 100;
 
-            $('.t-item:not(.t-state-disabled)', element)
-                .live('mouseenter', kendo.delegate(this, this.mouseenter), true)
-                .live('mouseleave', kendo.delegate(this, this.mouseleave), true)
-                .live('click', kendo.delegate(this, this.click));
+            element.delegate( itemSelector, MOUSEENTER, $.proxy( that._mouseenter , that ) )
+                   .delegate( itemSelector, MOUSELEAVE, $.proxy( that._mouseleave , that ) )
+                   .delegate( itemSelector, CLICK, $.proxy( that._click , that ) );
 
-            $('.t-item:not(.t-state-disabled) > .t-link', element)
-                .live('mouseenter', kendo.hover)
-                .live('mouseleave', kendo.leave);
+            element.delegate( linkSelector, MOUSEENTER, $.proxy( that._toggleHover , that ) )
+                   .delegate( linkSelector, MOUSELEAVE, $.proxy( that._toggleHover , that ) );
 
-            $(document).click(kendo.delegate(this, this.documentClick));
+            $(document).click($.proxy( that._documentClick, that ));
 
-            kendo.bind(this, {
-                select: this.onSelect,
-                open: this.onOpen,
-                close: this.onClose,
-                load: this.onLoad
+            element.bind({
+                select: that.onSelect,
+                open: that.onOpen,
+                close: that.onClose,
+                load: that.onLoad
             });
         },
         options: {
+            animation: {
+                open: {
+                    duration: 200,
+                    show: true
+                },
+                close: { // if close animation effects are defined, they will be used instead of open.reverse
+                    duration: 100,
+                    show: false, 
+                    hide: true
+                }
+            },
             orientation: 'horizontal',
-            effects: kendo.fx.slide.defaults(),
-            openOnClick: false
+            openOnClick: false,
+            hoverDelay: 100
+        },
+
+        _toggleHover: function(e) {
+            $(e.currentTarget).toggleClass('t-state-hover', e.type == MOUSEENTER);
         },
     
-        toggle: function (li, enable) {
-            $(li).each(function () {
+        toggle: function (element, enable) {
+            $(element).each(function () {
                 $(this)
                     .toggleClass('t-state-default', enable)
                     .toggleClass('t-state-disabled', !enable);
             });
         },
 
-        enable: function (li) {
-            this.toggle(li, true);
+        enable: function (element) {
+            this.toggle(element, true);
         },
 
-        disable: function (li) {
-            this.toggle(li, false);
+        disable: function (element) {
+            this.toggle(element, false);
         },
 
-        open: function ($li) {
-            var menu = this;
+        open: function (element) {
+            var that = this;
 
-            $($li).each(function () {
-                var $item = $(this);
+            $(element).each(function () {
+                var item = $(this);
 
-                clearTimeout($item.data('timer'));
+                clearTimeout(item.data('timer'));
 
-                $item.data('timer', setTimeout(function () {
-                    var $ul = $item.find('.t-group:first');
-                    if ($ul.length) {
-                        kendo.fx.play(menu.effects, $ul, getEffectOptions($item));
-                        $item.css('z-index', menu.nextItemZIndex++);
+                item.data('timer', setTimeout(function () {
+                    var ul = item.find('.t-group').filter(':first');
+                    if (ul.length) {
+                        var effectOptions = extend(getEffectOptions(item), that.options.animation.open);
+                        item.data('effectOptions', effectOptions);
+                        var wrap = that._wrap(ul).css({ overflow: 'hidden', display: 'block' });
+                        ul.kendoStop(true).kendoAnimate(extend( effectOptions, {
+                            complete: function () {
+                                wrap.css({ overflow: '' });
+                            }
+                        }));
+                        item.css('z-index', that.nextItemZIndex++);
                     }
-                }, 100));
+                }, that.options.hoverDelay)); // TODO: make an option
             });
         },
 
-        close: function ($li) {
-            var menu = this;
+        close: function (element) {
+            var that = this;
 
-            $($li).each(function (index, item) {
-                var $item = $(item);
+            $(element).each(function (index, item) {
+                item = $(item);
 
-                clearTimeout($item.data('timer'));
+                clearTimeout(item.data('timer'));
 
-                $item.data('timer', setTimeout(function () {
-                    var $ul = $item.find('.t-group:first');
-                    if ($ul.length) {
-                        kendo.fx.rewind(menu.effects, $ul, getEffectOptions($item), function () {
-                            $item.css('zIndex', '');
-                            if ($(menu.element).find('.t-group:visible').length == 0)
-                                menu.nextItemZIndex = 100;
-                        });
-                        $ul.find('.t-group').stop(false, true);
+                item.data('timer', setTimeout(function () {
+                    var ul = item.find('.t-group').filter(':first');
+                    if (ul.length) {
+                        var hasCloseAnimation = 'effects' in that.options.animation.close;
+                        var wrap = that._wrap(ul).css({ overflow: 'hidden' });
+                        ul.kendoStop(true).kendoAnimate(extend( hasCloseAnimation ? {} : item.data('effectOptions'), that.options.animation.close, {
+                                    reverse: !hasCloseAnimation,
+                                    complete: function () {
+                                        wrap.css({ display: 'none' });
+                                        item.css('zIndex', '');
+
+                                        if (that.element.find('.t-group:visible').length == 0)
+                                            that.nextItemZIndex = 100;
+                                    }
+                                }));
                     }
-                }, 100));
+                }, that.options.hoverDelay));
             });
         },
 
-        mouseenter: function (e, element) {
-            var $li = $(element);
+        _wrap: function (element) {
+            if (!element.parent().hasClass('t-animation-container')) {
+                var radius = element.css('box-shadow').match(/(\d+?)px\s*(\d+?)px\s*(\d+?)px\s*(\d+?)px\s*$/i) || [ 0, 0, 0, 0, 0 ],
+                    blur = Math.max((+radius[3]), (+radius[4])),
+                    right = (+radius[1]) + blur,
+                    bottom = (+radius[2]) + blur;
+
+                element.wrap(
+                             $('<div/>')
+                             .addClass('t-animation-container')
+                             .css({
+                                 width: element.outerWidth(),
+                                 height: element.outerHeight(),
+                                 paddingRight: right,
+                                 paddingBottom: bottom
+                             }));
+            }
+
+            return element.parent();
+        },
+        
+        _mouseenter: function (e) {
+            var element = $(e.currentTarget);
             if (!this.openOnClick || this.clicked) {
-                if (!contains(element, e.relatedTarget)) {
-                    this.triggerEvent('open', $li);
-                    this.open($li);
-
-                    var parentItem = $li.parent().closest('.t-item')[0];
-
-                    if (parentItem && !contains(parentItem, e.relatedTarget))
-                        this.mouseenter(e, parentItem);
+                if (!contains(e.currentTarget, e.relatedTarget)) {
+                    this.triggerEvent('open', element);
+                    this.open(element);
                 }
             }
 
             if (this.openOnClick && this.clicked) {
-                this.triggerEvent('close', $li);
+                this.triggerEvent('close', element);
 
-                $li.siblings().each($.proxy(function (_, sibling) {
+                element.siblings().each($.proxy(function (_, sibling) {
                     this.close($(sibling));
                 }, this));
             }
         },
 
-        mouseleave: function (e, element) {
-            if (!this.openOnClick && !contains(element, e.relatedTarget)) {
-                var $li = $(element);
-                this.triggerEvent('close', $li);
+        _mouseleave: function (e) {
+            var that = this;
+            
+            if (!that.openOnClick && !contains(e.currentTarget, e.relatedTarget)) {
+                var element = $(e.currentTarget);
+                that.triggerEvent('close', element);
 
-                this.close($li);
-
-                var parentItem = $li.parent().closest('.t-item')[0];
-
-                if (parentItem && !contains(parentItem, e.relatedTarget))
-                    this.mouseleave(e, parentItem);
+                that.close(element);
             }
         },
 
-        click: function (e, element) {
+        _click: function (e) {
+            var that = this;
             e.stopPropagation();
 
-            var $li = $(element);
+            var element = $(e.currentTarget);
 
-            if ($li.hasClass('t-state-disabled')) {
+            if (element.hasClass('t-state-disabled')) {
                 e.preventDefault();
                 return; 
             }
 
-            kendo.trigger(this.element, 'select', { item: $li[0] });
+            this.element.trigger('select', { item: element[0] });
 
-            if (!$li.parent().hasClass('t-menu') || !this.openOnClick)
+            if (!element.parent().hasClass('t-menu') || !that.openOnClick)
                 return;
 
             e.preventDefault();
 
-            this.clicked = true;
-
-            this.triggerEvent('open', $li);
-
-            this.open($li);
+            that.clicked = true;
+            that.triggerEvent('open', element);
+            that.open(element);
         },
 
-        documentClick: function (e, element) {
-            if ($.contains(this.element, e.target))
+        _documentClick: function (e) {
+            var that = this;
+            
+            if ($.contains(that.element, e.currentTarget))
                 return;
 
-            if (this.clicked) {
-                this.clicked = false;
-                $(this.element).children('.t-item').each($.proxy(function (i, item) {
-                    this.close($(item));
-                }, this));
+            if (that.clicked) {
+                that.clicked = false;
+                that.element.children('.t-item').each(function (i, item) {
+                    that.close($(item));
+                });
             }
         },
 
-        hasChildren: function ($li) {
-            return $li.find('.t-group:first').length;
+        hasChildren: function (element) {
+            return element.find('.t-group').filter(':first').length;
         },
 
-        triggerEvent: function (eventName, $li) {
-            if (this.hasChildren($li))
-                kendo.trigger(this.element, eventName, { item: $li[0] });
+        triggerEvent: function (eventName, element) {
+            if (this.hasChildren(element))
+                this.element.trigger(eventName, { item: element[0] });
         }
     });
 

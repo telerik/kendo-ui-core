@@ -299,6 +299,34 @@
             reverse: function(element, properties, options) {
                 animate(element, extend({ translateY: 0 }, properties), options);
             }
+        },
+        slideRightIn: {
+            play: function(element, properties, options) {
+                if (kendo.support.transitions)
+                    element.css( kendo.support.transitions.css + 'transform', 'translate(' + (-element.outerWidth()) + 'px)' );
+                else
+                    element.css( 'left', (-element.outerWidth()) + 'px' );
+                element.css('left'); // Read a style to force the browser to apply the change.
+
+                animate(element, extend({ translate: 0 }, properties), options);
+            },
+            reverse: function(element, properties, options) {
+                animate(element, extend({ translate: (-element.outerWidth()) + 'px' }, properties), options);
+            }
+        },
+        slideDownIn: {
+            play: function(element, properties, options) {
+                if (kendo.support.transitions)
+                    element.css( kendo.support.transitions.css + 'transform', 'translateY(' + (-element.outerHeight()) + 'px)' );
+                else
+                    element.css( 'top', (-element.outerHeight()) + 'px' );
+                element.css('top');
+
+                animate(element, extend({ translateY: 0 }, properties), options);
+            },
+            reverse: function(element, properties, options) {
+                animate(element, extend({ translateY: (-element.outerHeight()) + 'px' }, properties), options);
+            }
         }
     });
 })(jQuery, window);
