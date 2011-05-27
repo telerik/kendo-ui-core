@@ -47,7 +47,15 @@
 
             that._dataSource();
 
-            that.ul.delegate("li", "click", proxy(that._click, that));
+            that.bind([CHANGE], that.options);
+
+            that.ul
+                .mousedown(function() {
+                    setTimeout(function() {
+                        clearTimeout(that._bluring);
+                    }, 0);
+                })
+                .delegate("li", "click", proxy(that._click, that));
 
             that.wrapper
                 .bind({
@@ -58,6 +66,15 @@
                         } else {
                             that.popup.toggle();
                         }
+                    },
+                    focus: function() {
+                        console.log(that.value());
+                        that.previous = that.value();
+                    },
+                    blur: function() {
+                        that._bluring = setTimeout(function() {
+                            that._blur();
+                        }, 100);
                     }
                 });
 
@@ -77,7 +94,11 @@
         _click: function(e) {
             var that = this;
             that.select($(e.currentTarget));
-            that.popup.close();
+            that._blur();
+
+            if (that.wrapper[0] !== document.activeElement) {
+                that.wrapper.focus();
+            }
         },
 
         _template: function(isCustomTemplate) {
@@ -147,9 +168,19 @@
                 }
                 e.preventDefault();
             } else if (key === keys.ENTER) {
-                that.popup.close();
+                that.select($(e.currentTarget).closest("li"));
+                that._blur();
+
+                if (that.wrapper[0] !== document.activeElement) {
+                    that.wrapper.focus();
+                }
             } else if (key === keys.ESC) {
-                that.popup.close();
+                that.value(that.previous);
+                that._blur();
+
+                if (that.wrapper[0] !== document.activeElement) {
+                    that.wrapper.focus();
+                }
             }
         },
 
@@ -199,6 +230,28 @@
             that.wrapper = wrapper.addClass("t-widget t-dropdown t-header");
         },
 
+        _blur: function() {
+            var that = this;
+
+            that._change();
+            that.popup.close();
+        },
+
+        _change: function() {
+            var that = this,
+                value = that.value();
+
+            if (value !== that.previous) {
+                that.trigger(CHANGE);
+
+                // trigger the DOM change event so any subscriber gets notified
+                that.element.trigger(CHANGE);
+
+                that.previous = value;
+            }
+
+        },
+
         current: function(candidate) {
             var that = this;
 
@@ -224,13 +277,14 @@
 
             that.select(that.options.index);
 
-            if(!that.options.autoBind) {
+            if (!that.options.autoBind) {
                 that.popup[data.length ? "open" : "close"]();
             }
         },
 
         select: function(li) {
             var text,
+                idx,
                 dataItem,
                 that = this,
                 options = that.options,
@@ -241,7 +295,13 @@
             }
 
             if (li[0] && !li.hasClass(SELECTED)) {
-                dataItem = that.dataSource.view()[li.index()];
+                idx = li.index();
+
+                if (idx === -1) {
+                    return;
+                }
+
+                dataItem = that.dataSource.view()[idx];
                 text = that._getText(dataItem);
 
                 that.text(text);
@@ -261,7 +321,23 @@
         },
 
         value: function(value) {
-            return this._value(value);
+            var that = this;
+            if (value !== undefined) {
+                var data = that.dataSource.view(),
+                    index;
+
+                if (data[0]) {
+                    index = $.map(data, function(dataItem, index) {
+                        if ((that._getValue(dataItem) || that._getText(dataItem)) == value) { 
+                            return index;
+                        }
+                    });
+                    that.select(index);
+                    that.previous = that.element.val();
+                }
+            } else {
+                return this._value();
+            }
         }
     });
 

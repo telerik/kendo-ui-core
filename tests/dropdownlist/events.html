@@ -9,7 +9,7 @@
         <script src="../../src/kendo.query.js"></script>
         <script src="../../src/kendo.datasource.js"></script>
         <script src="../../src/kendo.popup.js"></script>
-        <script src="../../src/kendo.autocomplete.js"></script>
+        <script src="../../src/kendo.dropdownlist.js"></script>
         <link rel="stylesheet" href="../qunit.css" type="text/css" />
     </head>
     <body>
@@ -31,8 +31,145 @@
                     input = $("<input />").appendTo(document.body);
                 },
                 teardown: function() {
-                    input.add($("ul")).remove();
+                    input.add($("ul")).parent(".t-widget").remove();
                 }
+            });
+
+            test("_blur calls _change", function() {
+                var changeWasCalled = false, dropdownlist = new DropDownList(input, {
+                    dataSource: [{Text: "foo"}, {Text: "bar"}]
+                });
+
+                dropdownlist._change = function() {
+                    changeWasCalled = true;
+                }
+
+                dropdownlist._blur();
+
+                ok(changeWasCalled);
+            });
+
+            test("_blur calls popup close", function() {
+                var changeWasCalled = false, dropdownlist = new DropDownList(input, {
+                    dataSource: [{Text: "foo"}, {Text: "bar"}]
+                });
+
+                dropdownlist.dataSource.read();
+                dropdownlist.popup.open();
+
+                dropdownlist.popup.bind("close", function() {
+                    ok(true);
+                    start();
+                });
+
+                dropdownlist._blur();
+
+                stop(300);
+            });
+
+            test("_change raises the change event if value has changed", function() {
+               var changeWasCalled = false, dropdownlist = new DropDownList(input, {
+                    dataSource: [{Text: "foo"}, {Text: "bar"}],
+                    change: function() {
+                        changeWasCalled = true;
+                    }
+                });
+                dropdownlist.value("bar");
+                dropdownlist.previous = "foo";
+                dropdownlist._change();
+                ok(changeWasCalled);
+            });
+
+            test("_change raises the input change event", function() {
+               var changeWasCalled = false, dropdownlist = new DropDownList(input, {
+                    dataSource: [{Text: "foo"}, {Text: "bar"}]
+                });
+
+                input.bind("change", function() {
+                    changeWasCalled = true;
+                });
+
+                dropdownlist.value("bar");
+                dropdownlist.previous = "foo";
+                dropdownlist._change();
+                ok(changeWasCalled);
+            });
+
+            test("_change is not raised initially", function() {
+                var changeWasCalled = false, dropdownlist = new DropDownList(input, {
+                    dataSource: [{Text: "foo"}, {Text: "bar"}],
+                    change: function() {
+                        changeWasCalled = true;
+                    }
+                });
+
+                dropdownlist.wrapper.focus();
+                dropdownlist._change();
+                ok(!changeWasCalled);
+            });
+
+            test("_change does not raise change event if value has't changed", function() {
+                var changeWasCalled = false, dropdownlist = new DropDownList(input, {
+                    dataSource: [{Text: "foo"}, {Text: "bar"}],
+                    change: function() {
+                        changeWasCalled = true;
+                    }
+                });
+
+
+                dropdownlist.previous = "foo";
+                dropdownlist.value("foo");
+                dropdownlist._change();
+                ok(!changeWasCalled);
+            });
+
+            test("previous is initialzed on focus", function() {
+                var dropdownlist = new DropDownList(input, {
+                });
+
+                input.val("foo").focus();
+                equal(dropdownlist.previous, "foo");
+            });
+
+            test("select does not raise the change event", function() {
+                var changeWasCalled = false, dropdownlist = new DropDownList(input, {
+                    dataSource: [{Text: "foo"}, {Text: "bar"}],
+                    change: function() {
+                        changeWasCalled = true;
+                    }
+                });
+
+                dropdownlist.wrapper.focus();
+                dropdownlist.select($("<li>foo</li>"));
+                ok(!changeWasCalled);
+            });
+
+            test("clicking an item raises the change event", function() {
+                var changeWasCalled = false, dropdownlist = new DropDownList(input, {
+                    dataSource: [{Text: "foo"}, {Text: "bar"}],
+                    change: function() {
+                        changeWasCalled = true;
+                    }
+                });
+
+                dropdownlist.wrapper.focus();
+
+                dropdownlist.ul.children().eq(1).click();
+                ok(changeWasCalled);
+            });
+
+            test("change should be raised on :", function() {
+                var changeWasCalled = false, dropdownlist = new DropDownList(input, {
+                    dataSource: [{Text: "foo"}, {Text: "bar"}],
+                    change: function() {
+                        changeWasCalled = true;
+                    }
+                });
+
+                dropdownlist.wrapper.focus();
+
+                dropdownlist.ul.children().eq(1).click();
+                ok(changeWasCalled);
             });
 
         </script>

@@ -10,6 +10,10 @@
         <script src="../src/kendo.datasource.js"></script>
         <script src="../src/kendo.popup.js"></script>
         <script src="../src/kendo.autocomplete.js"></script>
+        <script src="../src/kendo.dropdownlist.js"></script>
+
+        <link rel="stylesheet" href="../styles/kendo.common.css" type="text/css" media="screen" charset="utf-8">
+        <link rel="stylesheet" href="../styles/kendo.vista.css" type="text/css" media="screen" charset="utf-8">
     </head>
     <body>
         <form>
@@ -18,9 +22,11 @@
         </form>
 
         <script>
+            var data = [ { id: 1, name: "Food" }, { id: 2, name: "Beverages" } ];
+
             var Product = kendo.data.Model.define({
                 categories: function() {
-                    return [ { id: 1, name: "Food" }, { id: 2, name: "Beverages" } ];
+                    return data;
                 }
             });
 
@@ -35,6 +41,8 @@
             $("[name=name]").kendoAutoComplete({change: function() {
                     console.log("changed from ", this.previous, " to ", this.value());
             },dataSource: ["foo", "bar"] });
+
+            $("select").kendoDropDownList();
         </script>
     </body>
 </html>

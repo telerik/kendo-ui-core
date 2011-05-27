@@ -252,6 +252,33 @@
                 stop(300);
             });
 
+            test("pressing enter calls _blur", function() {
+                var blurWasCalled, dropdownlist = new DropDownList(input, {
+                    dataSource: data
+                });
+
+                dropdownlist._blur = function(li) {
+                    blurWasCalled = true;
+                };
+
+                dropdownlist.current = dropdownlist.ul.children().first();
+                input.press(kendo.keys.ENTER);
+                ok(blurWasCalled);
+            });
+
+            test("pressing esc sets previous selected item", function() {
+                var blurWasCalled, dropdownlist = new DropDownList(input, {
+                    dataSource: data
+                });
+
+                dropdownlist.popup.open();
+                dropdownlist.wrapper.press(kendo.keys.DOWN);
+                dropdownlist.wrapper.press(kendo.keys.ESC);
+
+                equal(dropdownlist.value(), data[0].Value);
+                equal(dropdownlist.text(), data[0].Text);
+            });
+
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

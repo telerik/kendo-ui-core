@@ -163,7 +163,7 @@
            });
 
            test("retrived data from OPTIONS does not override options.dataSource", function() {
-               var select = $("<select><option value=1>Chai</option><option value=1 selected='selected'>Chai</option></select>"),
+               var select = $("<select><option value=1>Chai</option><option value=2 selected='selected'>Beverages</option></select>"),
                    data = [{Text: "Foo", Value: "Foo"}], 
                    dropdownlist = new DropDownList(select, {
                        dataSource: {
