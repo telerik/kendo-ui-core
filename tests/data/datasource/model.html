@@ -61,7 +61,7 @@
                         data: [ { foo: "1", bar: "bar1"}, { foo: "2", bar: "bar2"}]
                     });
                 dataSource.read();
-                dataSource.modelChange = function() {
+                dataSource._modelChange = function() {                
                     modelChangeWasCalled = true;
                 };
 
