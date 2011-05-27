@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DropDownList Client API</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.query.js"></script>
+        <script src="../../src/kendo.datasource.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.dropdownlist.js"></script>
+        <link rel="stylesheet" href="../qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">DropDownList Client API</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var DropDownList = kendo.ui.DropDownList,
+                data = [{Text: "Foo", Value: 1}, {Text:"Bar", Value:2}],
+                SELECTED = "t-state-selected",
+                keys = kendo.keys,
+                input;
+
+            module("kendo.ui.DropDownList selection", {
+                setup: function() {
+                    input = $("<input />").appendTo(document.body);
+                },
+                teardown: function() {
+                    input.append($("ul")).parent(".t-widget").remove();
+                }
+            });
+
+            test("value method should select item if exists", function() {
+                var dropdownlist = new DropDownList(input, [{Text: "foo", Value: 1}, {Text:2, Value:2}]);
+
+                dropdownlist.value("2");
+
+                ok(dropdownlist.ul.children().eq(1).hasClass(SELECTED));
+                equal(dropdownlist.value(), 2);
+                equal(dropdownlist.text(), 2);
+                equal(dropdownlist.previous, 2);
+           });
+
+      </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>
