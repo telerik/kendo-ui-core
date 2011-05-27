@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{904D3CAD-6363-481F-A563-F7A0E07CC50B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TestProject2</RootNamespace>
+    <AssemblyName>TestProject2</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ArtOfTest.Common, Version=2010.3.1607.0, Culture=neutral, PublicKeyToken=14a0200bfcbb7b62, processorArchitecture=MSIL" />
+    <Reference Include="ArtOfTest.WebAii, Version=2010.3.1607.0, Culture=neutral, PublicKeyToken=4fd5f65be123776c, processorArchitecture=MSIL" />
+    <Reference Include="ArtOfTest.WebAii.Design, Version=2010.3.1607.0, Culture=neutral, PublicKeyToken=4fc62bbc3827ab1d, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="Telerik.WebAii.Controls.Html, Version=2010.3.1607.0, Culture=neutral, PublicKeyToken=528163f3e645de45" />
+    <Reference Include="Telerik.WebAii.Controls.Xaml, Version=2010.3.1607.0, Culture=neutral, PublicKeyToken=528163f3e645de45" />
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDependentAssemblyPaths Condition=" '$(VS100COMNTOOLS)' != '' " Include="$(VS100COMNTOOLS)..\IDE\PrivateAssemblies">
+      <Visible>False</Visible>
+    </CodeAnalysisDependentAssemblyPaths>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AeroViewr\AssertBigPic.aii.cs">
+      <DependentUpon>AssertBigPic.aii</DependentUpon>
+    </Compile>
+    <Compile Include="AeroViewr\ClickInfoWindow.aii.cs">
+      <DependentUpon>ClickInfoWindow.aii</DependentUpon>
+    </Compile>
+    <Compile Include="AeroViewr\PlayPause.aii.cs">
+      <DependentUpon>PlayPause.aii</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitTest1.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="AeroViewr\AssertBigPic.aii" />
+    <None Include="AeroViewr\ClickInfoWindow.aii" />
+    <None Include="AeroViewr\ListViewSlider.aii" />
+    <None Include="AeroViewr\LogIn.aii" />
+    <None Include="AeroViewr\NotLoggedSearch.aii" />
+    <None Include="AeroViewr\PlayPause.aii" />
+    <None Include="AeroViewr\SearchOpenImage.aii" />
+    <None Include="AeroViewr\LogInlLogOut.aii" />
+    <None Include="Settings.aiis" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="AeroViewr\AssertBigPic.resx">
+      <DependentUpon>AssertBigPic.aii</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="AeroViewr\ClickInfoWindow.resx">
+      <DependentUpon>ClickInfoWindow.aii</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="AeroViewr\NotLoggedSearch.resx">
+      <DependentUpon>NotLoggedSearch.aii</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="AeroViewr\SearchOpenImage.resx">
+      <DependentUpon>SearchOpenImage.aii</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="AeroViewr\ListViewSlider.resx">
+      <DependentUpon>ListViewSlider.aii</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="AeroViewr\PlayPause.resx">
+      <DependentUpon>PlayPause.aii</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="AeroViewr\LogInlLogOut.resx">
+      <DependentUpon>LogInlLogOut.aii</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="AeroViewr\LogIn.resx">
+      <DependentUpon>LogIn.aii</DependentUpon>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties Name="FunctionalTests" />
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <Import Project="$(MSBuildExtensionsPath)\Telerik\WebUITestStudio\Telerik.WebUITestStudio.targets" />
+</Project>

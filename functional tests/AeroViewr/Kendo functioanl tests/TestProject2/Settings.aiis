@@ -1,0 +1,63 @@
+<ProjectSettings Type="ArtOfTest.WebAii.Design.UserSettings" Version="2010.3.1607.0">
+  <BaseClassName Type="System.String">BaseWebAiiTest</BaseClassName>
+  <UrlRecordMode Type="ArtOfTest.WebAii.Design.PageUriCompareMode">FullPathAndQuery</UrlRecordMode>
+  <GeneratedElementIdentificationType Type="ArtOfTest.WebAii.Design.ProjectModel.GeneratedElementIdentificationType">PageElements</GeneratedElementIdentificationType>
+  <AbsoluteDragDrop Type="System.Boolean">True</AbsoluteDragDrop>
+  <ImageScalePercentage Type="System.Int32">75</ImageScalePercentage>
+  <SelectedIdentificationScheme Type="System.String">Html</SelectedIdentificationScheme>
+  <IdentificationOptionSchemes>
+    <Item Key="Html" Type="ArtOfTest.Common.Design.Translation.IdentificationOptionsScheme" Version="2010.3.1607.0" CheckFindParamUniqueness="True" AutoDetectTestRegions="True" TryAttributeCombinations="True" AlwaysAssertTagName="True" TechnologyType="Html">
+      <IdentificationsPerTag>
+        <Item Key="All Elements" Type="ArtOfTest.Common.Design.Translation.IdentificationDescriptorList" Version="2010.3.1607.0">
+          <List>
+            <Item Type="ArtOfTest.WebAii.Design.Translation.HtmlIdentificationDescriptor" Version="2010.3.1607.0" IsLocked="False" AttributeName="id" SearchType="Attribute" />
+            <Item Type="ArtOfTest.WebAii.Design.Translation.HtmlIdentificationDescriptor" Version="2010.3.1607.0" IsLocked="False" AttributeName="name" SearchType="Attribute" />
+            <Item Type="ArtOfTest.WebAii.Design.Translation.HtmlIdentificationDescriptor" Version="2010.3.1607.0" IsLocked="False" AttributeName="src" SearchType="Attribute" />
+            <Item Type="ArtOfTest.WebAii.Design.Translation.HtmlIdentificationDescriptor" Version="2010.3.1607.0" IsLocked="False" AttributeName="href" SearchType="Attribute" />
+            <Item Type="ArtOfTest.WebAii.Design.Translation.HtmlIdentificationDescriptor" Version="2010.3.1607.0" IsLocked="False" AttributeName="value" SearchType="Attribute" />
+            <Item Type="ArtOfTest.WebAii.Design.Translation.HtmlIdentificationDescriptor" Version="2010.3.1607.0" IsLocked="False" AttributeName="alt" SearchType="Attribute" />
+            <Item Type="ArtOfTest.WebAii.Design.Translation.HtmlIdentificationDescriptor" Version="2010.3.1607.0" IsLocked="True" SearchType="TextContent" />
+            <Item Type="ArtOfTest.WebAii.Design.Translation.HtmlIdentificationDescriptor" Version="2010.3.1607.0" IsLocked="True" SearchType="TagIndex" />
+          </List>
+        </Item>
+      </IdentificationsPerTag>
+    </Item>
+    <Item Key="Silverlight" Type="ArtOfTest.Common.Design.Translation.IdentificationOptionsScheme" Version="2010.3.1607.0" CheckFindParamUniqueness="True" AutoDetectTestRegions="True" TryAttributeCombinations="True" AlwaysAssertTagName="True" TechnologyType="Silverlight">
+      <IdentificationsPerTag>
+        <Item Key="All Elements" Type="ArtOfTest.Common.Design.Translation.IdentificationDescriptorList" Version="2010.3.1607.0">
+          <List>
+            <Item Type="ArtOfTest.WebAii.Design.Translation.Silverlight.SilverlightIdentificationDescriptor" Version="2010.3.1607.0" IsLocked="False" SearchType="AutomationId" />
+            <Item Type="ArtOfTest.WebAii.Design.Translation.Silverlight.SilverlightIdentificationDescriptor" Version="2010.3.1607.0" IsLocked="False" SearchType="Name" />
+            <Item Type="ArtOfTest.WebAii.Design.Translation.Silverlight.SilverlightIdentificationDescriptor" Version="2010.3.1607.0" IsLocked="False" SearchType="TextContent" />
+            <Item Type="ArtOfTest.WebAii.Design.Translation.Silverlight.SilverlightIdentificationDescriptor" Version="2010.3.1607.0" IsLocked="True" SearchType="TagIndex" />
+          </List>
+        </Item>
+      </IdentificationsPerTag>
+    </Item>
+  </IdentificationOptionSchemes>
+  <UnitTestType Type="ArtOfTest.Common.Design.ProjectModel.UnitTestType">VS</UnitTestType>
+  <RecorderBaseUrl Type="System.String">
+  </RecorderBaseUrl>
+  <IsStoryboardCapturingEnabled Type="System.Boolean">True</IsStoryboardCapturingEnabled>
+  <SimulateRealClickByDefault Type="System.Boolean">False</SimulateRealClickByDefault>
+  <SimulateRealTypingByDefault Type="System.Boolean">False</SimulateRealTypingByDefault>
+  <SimulateRealSilverlightUserByDefault Type="System.Boolean">True</SimulateRealSilverlightUserByDefault>
+  <DefaultDropDownSelection Type="ArtOfTest.WebAii.Design.SelectDropDownType">ByValue</DefaultDropDownSelection>
+  <IsOnline Type="System.Boolean">False</IsOnline>
+  <ProjectLanguage Type="ArtOfTest.Common.Design.CodeGeneration.CodeGenerationLanguage">CSharp</ProjectLanguage>
+  <ProjectVersion Type="System.String">2010.3.1125.0</ProjectVersion>
+  <Namespace Type="System.String">TestProject2</Namespace>
+  <AssemblyName Type="System.String">TestProject2</AssemblyName>
+  <ProjectGuid Type="System.String">d71f791b-92c7-41e7-8e0c-66f0a9d070a0</ProjectGuid>
+  <ProjectReferences>
+    <Item Type="System.String">System</Item>
+    <Item Type="System.String">System.Core</Item>
+    <Item Type="System.String">ArtOfTest.Common, Version=2010.3.1607.0, Culture=neutral, PublicKeyToken=14a0200bfcbb7b62</Item>
+    <Item Type="System.String">ArtOfTest.WebAii, Version=2010.3.1607.0, Culture=neutral, PublicKeyToken=4fd5f65be123776c</Item>
+    <Item Type="System.String">ArtOfTest.WebAii.Design, Version=2010.3.1607.0, Culture=neutral, PublicKeyToken=4fc62bbc3827ab1d</Item>
+    <Item Type="System.String">Telerik.WebAii.Controls.Html, Version=2010.3.1607.0, Culture=neutral, PublicKeyToken=528163f3e645de45</Item>
+    <Item Type="System.String">Telerik.WebAii.Controls.Xaml, Version=2010.3.1607.0, Culture=neutral, PublicKeyToken=528163f3e645de45</Item>
+  </ProjectReferences>
+  <ExcludedFiles />
+  <DisabledTranslators />
+</ProjectSettings>
