@@ -1,5 +1,9 @@
-(function($, window, undefined) {
+(function($, undefined) {
     var extend = $.extend,
+        isFunction = $.isFunction,
+        isPlainObject = $.isPlainObject,
+        isEmptyObject = $.isEmptyObject,
+        noop = $.noop,
         kendo = window.kendo,
         Observable = kendo.Observable,
         Model = kendo.data.Model,
@@ -54,34 +58,38 @@
 
     function RemoteTransport(options) {
         var that = this;
-        if (options && typeof options.read === "string") {
-            options.read = { url: options.read };
+
+        options = that.options = extend({}, that.options, options);
+
+        if (typeof options.read === "string") {
+            options.read = {
+                url: options.read
+            };
         }
-        that.cache = options && options.cache && options.cache !== false ? Cache.create(options.cache) : that.defaults.cache;
-        options = extend({}, that.defaults, options);
-        that.settings = options;
+
+        that.cache = options.cache? Cache.create(options.cache) : {
+            find: noop,
+            add: noop
+        }
+
         that.dialect = options.dialect;
     }
 
     RemoteTransport.prototype = {
-        defaults: {
+        options: {
             dialect: {
                 read: function(data) {
                     return data;
                 }
-            },
-            cache: {
-                find: $.noop,
-                add: $.noop
             }
         },
         read: function(options) {
             options = options || {};
             var that = this,
-                read = that.settings.read,
-                data = $.isFunction(read.data) ? read.data() : read.data,
-                success = options.success || $.noop,
-                error = options.error || $.noop,
+                read = that.options.read,
+                data = isFunction(read.data) ? read.data() : read.data,
+                success = options.success || noop,
+                error = options.error || noop,
                 cached;
 
             options = extend(true, {}, read, options);
@@ -111,11 +119,11 @@
             "localstorage": function() { return new LocalStorageCache(); }
         };
 
-        if($.isPlainObject(options) && $.isFunction(options.find)) {
+        if (isPlainObject(options) && isFunction(options.find)) {
             return options;
         }
 
-        if(options === true) {
+        if (options === true) {
             return new Cache();
         }
 
@@ -149,7 +157,7 @@
 
     LocalStorageCache.prototype = {
         add: function(key, data) {
-            if(key != undefined) {
+            if (key != undefined) {
                 this._store.setItem(stringify(key), stringify(data));
             }
         },
@@ -166,9 +174,11 @@
 
     var DataSource = Observable.extend({
         init: function(options) {
-            options = options || {};
+            var that = this, id, model, transoprt;
 
-            var that = extend(this, {
+            options = that.options = extend({}, that.options, options);
+
+            extend(that, {
                 idMap: {},
                 modified: {},
                 _models: {},
@@ -180,25 +190,16 @@
                 _filter: options.filter
             });
 
-            that.options = extend({}, that.options, {
-                serverSorting: options.serverSorting,
-                serverPaging: options.serverPaging,
-                serverFiltering: options.serverFiltering,
-                model: options.model,
-                autoSync: options.autoSync
-            });
-
-            var id,
-                model = that.options.model,
-                transport = options.transport;
-
-            if(!$.isEmptyObject(model) && !model.id) {
-                that.options.model = model = Model.define(model);
-            }
-            id = model.id;
             Observable.fn.init.call(that);
 
-            that.bind([CHANGE,UPDATE], options);
+            model = options.model;
+            transport = options.transport;
+
+            if(!isEmptyObject(model) && !model.id) {
+                options.model = model = Model.define(model);
+            }
+
+            id = model.id;
 
             that._reader = extend({
                 data: function (data) {
@@ -208,7 +209,9 @@
                     return data.length;
                 }
             }, options.reader);
-            that.transport = transport && $.isFunction(transport.read) ? transport : (options.data? new LocalTransport({ data: options.data }):new RemoteTransport(transport));
+
+            that.transport = transport && isFunction(transport.read) ? transport : (options.data? new LocalTransport({ data: options.data }):new RemoteTransport(transport));
+
             if (id) {
                 that.find = function(id) {
                     return that._data[that.idMap[id]];
@@ -219,6 +222,8 @@
             } else {
                 that.find = that.at;
             }
+
+            that.bind([CHANGE,UPDATE], options);
         },
         options: {
             model: {
@@ -308,7 +313,7 @@
 
         hasChanges: function(id) {
             if (id === undefined) {
-                return !$.isEmptyObject(this.modified);
+                return !isEmptyObject(this.modified);
             }
 
             return id in this.modified;
@@ -515,4 +520,4 @@
         LocalStorageCache: LocalStorageCache,
         Cache: Cache
     });
-})(jQuery, window);
+})(jQuery);
