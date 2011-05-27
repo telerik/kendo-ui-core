@@ -5,6 +5,7 @@
     <script type="text/javascript" src="../../qunit-runner.js"></script>
     <script src="../../../src/kendo.core.js"></script>
     <script src="../../../src/kendo.query.js"></script>
+    <script src="../../../src/kendo.model.js"></script>
     <script src="../../../src/kendo.datasource.js"></script>
     <link rel="stylesheet" href="../../qunit.css" type="text/css" />
 
@@ -15,23 +16,13 @@
         <h2 id="qunit-userAgent"></h2>
         <ol id="qunit-tests"></ol>
         <script>
-            var reader = {
-                id: function(record) {
-                    return record.id;
-                },
-                data: function(data) {
-                    return data;
-                }
-            },
-            data = [],
-            DataSource = kendo.data.DataSource;
+            var  data = [], DataSource = kendo.data.DataSource;
 
             function setup(source) {
                 data = source || [{ id:1, bar: "foo" },{ id: 2, bar: "foo" }];
 
                 var dataSource = new DataSource( {
-                    reader: reader,
-                    data: data
+                    model: kendo.data.Model
                 });
 
                 dataSource.read();
@@ -41,34 +32,32 @@
             test("create appends the new item to the data array", function() {
                 var dataSource = setup();
 
-                var result = dataSource.create();
+                var model = dataSource.create();
 
-                ok(dataSource.data().pop() === result);
+                ok(dataSource.data().pop() === model.data);
             });
 
             test("create populates the idmap", function() {
                 var dataSource = setup();
 
-                var result = dataSource.create();
+                var model = dataSource.create();
 
-                equal(dataSource.idMap[result.id], dataSource.data().length - 1);
+                equal(dataSource._map[model.id()], dataSource.data().length - 1);
             });
 
             test("create inserts the new item at the specified index", function() {
-                var dataSource = setup();
+                var dataSource = setup([{id:1}]);
 
-                var result = dataSource.create(0);
+                var model = dataSource.create(0);
 
-                equal(dataSource.data()[0], result);
+                equal(dataSource.data()[0].id, model.id());
             });
 
             test("create updates the idmap", function() {
                 var dataSource = setup();
 
-                var result = dataSource.create(0);
-                equal(dataSource.idMap[result.id], 0);
-                equal(dataSource.idMap[1], 1);
-                equal(dataSource.idMap[2], 2);
+                var model = dataSource.create(0);
+                equal(dataSource._map[model.id()], 0);
             });
 
         </script>
