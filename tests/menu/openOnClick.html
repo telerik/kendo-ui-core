@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.ui.menu Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.menu.js"></script>
+        <script type="text/javascript" src="../jquery.mockjax.js"></script>
+        <link rel="stylesheet" href="../qunit.css" />
+        <link type="text/css" href="../../styles/kendo.common.css" rel="stylesheet"/>
+        <link type="text/css" href="../../styles/kendo.vista.css" rel="stylesheet"/>
+        <script type="text/javascript">
+
+            var isRaised;
+
+             function getRootItem(index) {
+                 return $('#Menu3').find('> .t-item').eq(index)
+             }
+
+             function getMenu() {
+                 return $("#Menu3").data("kendoMenu");
+             }
+
+        </script>
+    </head>
+    <body>
+
+    <ul id="Menu3" class="t-widget t-reset t-header t-menu" style="position: absolute; visibility: hidden">
+        <li class="t-item t-state-default" style=""><span class="t-link"><img
+                src="Icons/Suites/mvc.png" class="t-image" alt="image">ASP.NET MVC<span
+                class="t-icon t-arrow-down"></span></span>
+
+            <ul class="t-group">
+                <li class="t-item t-state-default"><span class="t-link"><img
+                        src="Icons/Mvc/Grid.png" class="t-image" alt="image">Grid</span>
+                </li>
+                <li class="t-item t-state-default"><span class="t-link"><img
+                        src="Icons/Mvc/Menu.png" class="t-image" alt="image">Menu<span
+                class="t-icon t-arrow-next"></span></span>
+                    <ul class="t-group">
+                        <li class="t-item t-state-default"><span class="t-link"><img
+                                src="Icons/Mvc/Grid.png" class="t-image" alt="image">Grid</span>
+                        </li>
+                        <li class="t-item t-state-default"><span class="t-link"><img
+                                src="Icons/Mvc/Menu.png" class="t-image" alt="image">Menu</span>
+                        </li>
+                        <li class="t-item t-state-default"><span class="t-link"><img
+                                src="Icons/Mvc/PanelBar.png" class="t-image"
+                                alt="image">PanelBar</span></li>
+                        <li class="t-item t-state-default"><span class="t-link"><img
+                                src="Icons/Mvc/TabStrip.png" class="t-image"
+                                alt="image">TabStrip</span></li>
+                    </ul>
+                </li>
+                <li class="t-item t-state-default"><span class="t-link"><img
+                        src="Icons/Mvc/PanelBar.png" class="t-image"
+                        alt="image">PanelBar</span></li>
+                <li class="t-item t-state-default"><span class="t-link"><img
+                        src="Icons/Mvc/TabStrip.png" class="t-image"
+                        alt="image">TabStrip</span></li>
+            </ul>
+        </li><li class="t-item t-state-default"><span class="t-link"><img src="Icons/Suites/sl.png"
+                                                                     class="t-image" alt="image">Silverlight<span
+                class="t-icon t-arrow-down"></span></span>
+            <ul class="t-group">
+                <li class="t-item t-state-default"><span class="t-link"><img
+                        src="Icons/Sl/GridView.gif" class="t-image" alt="image">GridView</span>
+                </li>
+                <li class="t-item t-state-default"><span class="t-link"><img
+                        src="Icons/Sl/Scheduler.gif" class="t-image"
+                        alt="image">Scheduler</span></li>
+                <li class="t-item t-state-default"><span class="t-link"><img
+                        src="Icons/Sl/Docking.gif" class="t-image" alt="image">Docking</span>
+                </li>
+                <li class="t-item t-state-default"><span class="t-link"><img
+                        src="Icons/Sl/Chart.gif" class="t-image" alt="image">Chart</span></li>
+                <li class="t-item t-state-default"><a href="http://www.telerik.com/products/silverlight.aspx"
+                                                      class="t-link">... and 28 more!</a></li>
+            </ul>
+        </li><li class="t-item t-state-default"><span class="t-link"><img src="Icons/Suites/ajax.png"
+                                                                     class="t-image" alt="image">ASP.NET AJAX<span
+                class="t-icon t-arrow-down"></span></span>
+            <ul class="t-group">
+                <li class="t-item t-state-default"><span class="t-link"><img
+                        src="Icons/Ajax/Grid.png" class="t-image" alt="image">Grid</span></li>
+                <li class="t-item t-state-default"><span class="t-link"><img
+                        src="Icons/Ajax/Editor.png" class="t-image" alt="image">Editor</span>
+                </li>
+                <li class="t-item t-state-default"><span class="t-link"><img
+                        src="Icons/Ajax/Scheduler.png" class="t-image"
+                        alt="image">Scheduler</span></li>
+                <li class="t-item t-state-default"><a href="http://www.telerik.com/products/aspnet-ajax.aspx"
+                                                      class="t-link">... and 28 more!</a></li>
+            </ul>
+        </li><li class="t-item t-state-default"><a href="#Menu-4" class="t-link"><img
+                src="Icons/Suites/orm.png" class="t-image" alt="image">OpenAccess ORM<span
+                class="t-icon t-arrow-down"></span></a>
+            <ul class="t-group">
+                <li class="t-item">
+                    <div id="Menu-4" class="t-content">
+                        <img alt="Telerik OpenAccess" src="Icons/orm-comparison.png">
+                        <a href="http://www.telerik.com/purchase/individual/orm.aspx" id="buy">
+                            Telerik OpenAccess ORM
+                        </a>
+                        <a href="http://www.telerik.com/community/license-agreement.aspx?pId=639" id="express">
+                            Telerik OpenAccess ORM Express
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </li><li class="t-item t-state-default"><span class="t-link"><img src="Icons/Suites/rep.png"
+                class="t-image" alt="image">Reporting</span></li><li class="t-item t-state-default"><span class="t-link"><img
+                src="Icons/Suites/sitefinity.png" class="t-image" alt="image">Sitefinity ASP.NET CMS</span>
+        </li><li style="border-right: 0;" class="t-item t-state-default"><span class="t-link">Other products<span
+                class="t-icon t-arrow-down"></span></span>
+            <ul class="t-group">
+                <li class="t-item t-state-default"><span class="t-link"><img
+                        src="Icons/Suites/test.png" class="t-image" alt="image">Web Testing Tools</span>
+                </li>
+                <li class="t-item t-state-default"><span class="t-link"><img
+                        src="Icons/Suites/win.png" class="t-image" alt="image">WinForms UI Controls</span>
+                </li>
+                <li class="t-item t-state-default"><span class="t-link"><img
+                        src="Icons/Suites/wpf.png" class="t-image"
+                        alt="image">WPF UI Controls</span></li>
+            </ul>
+        </li>
+    </ul>
+
+<script type="text/javascript">
+
+        $("#Menu3").kendoMenu({ openOnClick: true });
+        
+        var open;
+        var close;
+        var menu;
+        
+        module("Menu / OpenOnClick", {
+            setup: function() {
+                menu = getMenu();
+                open = menu.open;
+                close = menu.close;
+            },
+            teardown: function() {
+                menu.clicked = false;
+                menu.open = open;
+                menu.close = close;
+            }
+        });
+
+        test('open on click is serialized', function() {
+            ok(menu.options.openOnClick);
+        });
+
+        test('hovering root item does not open it', function() {
+            var opend = false;
+
+            menu.open = function() { opend = true };
+            menu._mouseenter({}, $("li:first", menu.element)[0]);
+
+            ok(!opend);
+        });
+
+        test('clicking root item should open it', function() {
+            var opend = false;
+            menu.open = function() { opend = true };
+            var element = $("li:first", menu.element)[0];
+            menu._click({ currentTarget: element, preventDefault: function () { }, stopPropagation: function () { } }, element);
+            ok(opend);
+            ok(menu.clicked);
+        });
+
+        test('leaving opened item does not close it', function() {
+            var opend = false;
+            menu.clicked = true;
+            menu.open = function() { opend = true };
+
+            menu._mouseleave({}, $("li:first", menu.element)[0]);
+
+            ok(!opend);
+        });
+
+        test('leaving opened and hovering a sibling closes it and opens the sibling', function() {
+            menu.clicked = true;
+            menu.open = function() { opend = true };
+
+            var element = $("li:first", menu.element)[0];
+            menu._mouseenter({ currentTarget: element, indexOf: function() { }, type:'mouseenter' }, element.nextSibling);
+
+            ok(opend);
+        });
+
+        test('clicking the document closes the open item', function() {
+            var closed = false;
+            menu.clicked = true;
+            menu.close = function() { closed = true };
+            menu._documentClick({ target: document.body}, document);
+            ok(closed);
+        });
+
+</script>
+
+    <h1 id="qunit-header">kendo.ui.Menu Tests</h1>
+    <h2 id="qunit-banner"></h2>
+    <div id="qunit-testrunner-toolbar"></div>
+    <h2 id="qunit-userAgent"></h2>
+    <ol id="qunit-tests"></ol>
+    <div id="qunit-fixture">test markup, will be hidden</div>
+    <ul id="log"></ul>
+</body>
+</html>
