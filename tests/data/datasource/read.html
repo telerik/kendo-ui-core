@@ -69,8 +69,8 @@
             test("read populates id to index map", function() {
                 var dataSource = setup();
 
-                equal(dataSource.idMap[1], 0);
-                equal(dataSource.idMap[2], 1);
+                equal(dataSource._map[1], 0);
+                equal(dataSource._map[2], 1);
             });
 
             test("read triggers load event", function(){

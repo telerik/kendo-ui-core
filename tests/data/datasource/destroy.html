@@ -48,18 +48,18 @@
                 equal(dataSource.at(0).id, 2);
             });
 
-            test("destroy removes the record with the specified id from the idMap", function() {
+            test("destroy removes the record with the specified id from the _map", function() {
                 var dataSource = setup();
 
                 dataSource.destroy(1);
-                ok(dataSource.idMap[1] === undefined);
+                ok(dataSource._map[1] === undefined);
             });
 
             test("destroy updates the idmap", function() {
                 var dataSource = setup();
 
                 dataSource.destroy(1);
-                equal(dataSource.idMap[2], 0);
+                equal(dataSource._map[2], 0);
             });
 
             test("destroy adds the record to the list of modified records", function() {
@@ -82,14 +82,14 @@
                 dataSource.destroy(1);
                 equal(destroyArgument.model, first);
             });
-            test("destroy sets model state to DELETED", function() {
+            test("destroy sets model state to DESTROYED", function() {
                 var dataSource = setup();
                 var destroyArgument;
 
                 var model = dataSource.model(1);
 
                 dataSource.destroy(1);
-                equal(model.state, kendo.data.Model.DELETED);
+                equal(model.state, kendo.data.Model.DESTROYED);
             });
 
         </script>
