@@ -626,11 +626,85 @@
     };
 
 
-    var itemTemplate = kendo.template(
-"<li class='t-item\
-<%= (isFirstLevel && itemIndex == 0) ? ' t-first' : '' %>\
-<%= (itemIndex == itemsCount - 1) ? ' t-last' : '' %>\
-'><div class='\
+    var NodeRenderer = function(options) {
+        $.extend(this, options);
+
+        this.itemTemplate = kendo.template(
+            "<li class='<%= itemWrapperClass() %>'>"
+            + "<div class=''>"
+              + "<%= textOpening() %>"
+              + "<%= textClosing() %>"
+            + "</div>"
+          + "</li>"
+        );
+    };
+
+    NodeRenderer.prototype = {
+        render: function(items) {
+            var result = "", i, len;
+
+            if (typeof items.length != "undefined") {
+                for (i = 0, len = items.length; i < len; i++) {
+                    this.itemIndex = i;
+                    $.extend(this, items[i]);
+                    result += this.itemTemplate(this);
+                }
+            }
+
+            return result;
+        },
+
+        textClass: function() {
+            var result = "t-in";
+
+            if (this.Enabled === false) {
+                result += " t-state-disabled";
+            }
+                
+            if (this.Selected === true) {
+                result += " t-state-selected";
+            }
+
+            return result;
+        },
+
+        textOpening: function() {
+            var navigateUrl = this.NavigateUrl || this.Url,
+                result = "";
+
+            if (navigateUrl) {
+                result += "<a href='" + navigateUrl + "'";
+            } else {
+                result += "<span";
+            }
+
+            result += " class='" + this.textClass() + "'>";
+
+            return result;
+        },
+        
+        textClosing: function() {
+            var navigateUrl = this.NavigateUrl || this.Url;        
+
+            return navigateUrl ? "</a>" : "</span>";
+        },
+        
+        itemWrapperClass: function() {
+            var cssClass = "t-item";
+
+            if (this.isFirstLevel && this.itemIndex == 0) {
+                cssClass += " t-first";
+            }
+
+            if (this.itemIndex == this.itemsCount - 1) {
+                cssClass += " t-last";
+            }
+
+            return cssClass;
+        }
+    };
+
+/*
 <%= (isFirstLevel && itemIndex == 0) ? 't-top ' : '' %>\
 <%= (itemIndex != itemsCount - 1 && itemIndex == 0) ? 't-top' : '' %>\
 <%= (itemIndex != itemsCount - 1 && itemIndex != 0) ? 't-mid' : '' %>\
@@ -640,9 +714,7 @@
 <%= navigateUrl ? 'a href=\"' + navigateUrl + '\"' : 'span' %>\
  class='t-in'><%= item.Text %></\
 <%= navigateUrl ? 'a' : 'span'%>\
-></div></li>"
-);
-
+*/
 // <%= (Encoded === false) ? Text : kendo.htmlEncode(Text) %>\
     // client-side rendering
     $.extend(TreeView, {
@@ -658,9 +730,10 @@
         },
 
         getItemHtml: function (options) {
-            var $t = { stringBuilder : function() {} };
+            var $t = { stringBuilder : function() {} },
+                renderer = new NodeRenderer(options);
 
-            return kendo.render(itemTemplate, [options]);
+            return renderer.renderItem(options.item);
 
             var item = options.item,
                 html = options.html,
@@ -757,25 +830,27 @@
             var html = "";
 
             if (renderGroup !== false) {
-                html += '<ul class="t-group';
+                html += "<ul class='t-group";
                 
                 if (isFirstLevel) {
-                    html += ' t-treeview-lines';
+                    html += " t-treeview-lines";
                 }
 
-                html += '"';
+                html += "'";
 
                 if (options.isExpanded !== true) {
-                    html += ' style="display:none"';
+                    html += " style='display:none'";
                 }
 
-                html += '>';
+                html += ">";
             }
 
-            html += kendo.render(itemTemplate, data);
+            var renderer = new NodeRenderer(options);
+
+            html += renderer.render(data);
 
             if (renderGroup !== false) {
-                html += '</ul>';
+                html += "</ul>";
             }
             
             return html;

@@ -43,7 +43,7 @@
                     isExpanded: true
                 });
 
-                equal(html, '<ul class="t-group"></ul>');
+                equal(html, "<ul class='t-group'></ul>");
             });
 
             test('getGroupHtml for first level renders lines class', function() {
@@ -56,7 +56,7 @@
                     isExpanded: true
                 });
 
-                equal(html, '<ul class="t-group t-treeview-lines"></ul>');
+                equal(html, "<ul class='t-group t-treeview-lines'></ul>");
             });
 
             test('getGroupHtml should render hidden group if it is not expanded', function() {
@@ -69,9 +69,9 @@
                     isExpanded: false
                 });
 
-                equal(html, '<ul class="t-group" style="display:none"></ul>');
+                equal(html, "<ul class='t-group' style='display:none'></ul>");
             });
-
+            
 //        kendo.ui.var $item = $(TreeView.getItemHtml({
 //            item: data[i],
 //            isAjax: options.isAjax,
@@ -83,44 +83,28 @@
 //            elementId: options.elementId
 //        });
 
-            test('getItemHtml renders simple items', function() {
+            test('rendering of links for items with NavigateUrl', function() {
 
-                var html = TreeView.getItemHtml({
-                    item: { Text: "text" },
-                    isAjax: false,
-                    isFirstLevel: false,
-                    showCheckBoxes: false,
-                    itemIndex: 0,
-                    itemsCount: 1
-                });
-
-                equal(html, "<li class='t-item t-last'><div class='t-bot'><span class='t-in'>text</span></div></li>");
-            });
-
-            test('getItemHtml renders links for items with NavigateUrl', function() {
-
-                var $item = $(TreeView.getItemHtml({
-                    item: {
+                var $item = $(TreeView.getGroupHtml({
+                    data: [{
                         Text: "text",
                         NavigateUrl: "http://google.com/"
-                    },
+                    }],
                     isAjax: false,
                     isFirstLevel: false,
-                    showCheckBoxes: false,
-                    itemIndex: 0,
-                    itemsCount: 1
+                    showCheckBoxes: false
                 }));
 
                 equal($item.find("a[href='http://google.com/']").length, 1);
             });
 
-            /*test('getItemHtml renders disabled state on disabled items', function() {
+            test('rendering disabled state on disabled items', function() {
 
-                var $item = $(TreeView.getItemHtml({
-                    item: {
+                var $item = $(TreeView.getGroupHtml({
+                    data: [{
                         Text: "text",
                         Enabled: false
-                    },
+                    }],
                     isAjax: false,
                     isFirstLevel: false,
                     showCheckBoxes: false,
@@ -128,16 +112,16 @@
                     itemsCount: 1
                 }));
 
-                equal(html.string(), '<li class="t-item t-last"><div class="t-bot"><span class="t-in t-state-disabled">text</span></div></li>');
+                equal($item.find(".t-in.t-state-disabled").length, 1);
             });
 
-            test('getItemHtml renders selected state on selected items', function() {
+            test('rendering selected state on selected items', function() {
 
-                var $item = $(TreeView.getItemHtml({
-                    item: {
+                var $item = $(TreeView.getGroupHtml({
+                    data: [{
                         Text: "text",
                         Selected: true
-                    },
+                    }],
                     isAjax: false,
                     isFirstLevel: false,
                     showCheckBoxes: false,
@@ -145,10 +129,10 @@
                     itemsCount: 1
                 }));
 
-                equal(html.string(), '<li class="t-item t-last"><div class="t-bot"><span class="t-in t-state-selected">text</span></div></li>');
+                equal($item.find(".t-in.t-state-selected").length, 1);
             });
 
-            test('getItemHtml renders collapsed items by default', function() {
+            /*test('getItemHtml renders collapsed items by default', function() {
 
                 var $item = $(TreeView.getItemHtml({
                     item: {

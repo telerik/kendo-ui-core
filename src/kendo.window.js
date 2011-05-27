@@ -459,11 +459,9 @@
                 actions: ["Close"]
             }, options);
 
-            var windowHtml = "",
+            var windowHtml = "<div class='t-widget t-window'></div>",
                 titleHtml = ""
                 contentHtml = "";
-
-            windowHtml += "<div class='t-widget t-window'></div>";
 
             titleHtml += "<div class='t-window-titlebar t-header'>&nbsp;<span class='t-window-title'>" +
                           options.title + "</span><div class='t-window-actions t-header'>";
@@ -493,7 +491,6 @@
             if (element) {
                 $(windowHtml).append(titleHtml).append(contentHtml).appendTo(document.body);
             } else {
-                windowHtml += "</div>";
                 return $(windowHtml).appendTo(document.body).kendoWindow(options);
             }
         },
