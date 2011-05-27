@@ -192,7 +192,6 @@
                 transport.read({ url: "foo", data: { baz: "moo" } });
             });
 
-
             test("string options are treated as url", function() {
                 var transport = new RemoteTransport({
                         read: "foo"
@@ -352,6 +351,170 @@
                 ok(cache instanceof kendo.data.Cache);
             });
 
+            test("update as string options are treated as url", function() {
+                var transport = new RemoteTransport({
+                        update: "foo"
+                    });
+                    
+                equal(transport.options.update.url, "foo");
+            });
+
+            test("update calls $.ajax", function() {
+                var transport = new RemoteTransport({
+                    update: {
+                        url: "foo"
+                    }
+                });
+
+                $.mockjax({
+                    url: "foo",
+                    response: function() {
+                        ok(true);                        
+                        start();
+                    }
+                });
+                stop(1000);
+                transport.update();
+            });
+
+            test("update passes its options to $.ajax", function() {
+                var transport = new RemoteTransport({
+                        update: {
+                        }
+                    });
+
+                $.mockjax({
+                    url: "foo",
+                    response: function() {
+                        ok(true);
+                        start();
+                    }
+                });
+                stop(1000);
+                transport.update({ url: "foo" });
+            });
+
+            test("update calls the success handler when the ajax response is returned", function() {
+                var transport = new RemoteTransport({
+                        update: "foo"
+                    });
+
+                $.mockjax({
+                    url: "foo"
+                });
+                stop(1000);
+                transport.update({
+                    success: function() {
+                        ok(true);
+                        start();
+                    }
+                });
+            });
+
+            test("update calls the error handler when the ajax request fails", function() {
+                var transport = new RemoteTransport({
+                        update: "foo"
+                    });
+
+                $.mockjax({
+                    url: "foo",
+                    status: 500
+                });
+                stop(1000);
+                transport.update({
+                    success: function() {
+                        ok(false); // we should not be here
+                    },
+                    error: function() {
+                        start();
+                        ok(true);
+                    }
+                });
+            });
+
+            test("update calls its dialect", function() {
+                var dialectWasCalled = false,
+                    transport = new RemoteTransport({
+                        update: {
+                            url: "foo"
+                        },
+                        dialect: {
+                            update: function() {
+                                dialectWasCalled = true;
+                            }
+                        }
+                    });
+
+                $.mockjax({
+                    url: "foo",
+                    response: function() {
+                        ok(dialectWasCalled);
+                        start();
+                    }
+                });
+                stop(1000);
+                transport.update({ url: "foo" });
+            });
+            
+            test("update passes constructor options.update.data to its dialect", function() {
+                var data,
+                    transport = new RemoteTransport({
+                        update: {
+                            url: "foo",
+                            data: {
+                                foo: "bar"
+                            }
+                        },
+                        dialect: {
+                            update: function() {
+                                data = arguments[0];                          
+                                return data;
+                            }
+                        }
+                    });
+
+                $.mockjax({
+                    url: "foo",
+                    response: function() {
+                        equal(data.foo, "bar");
+                        equal(data.baz, "moo");
+                        start();
+                    }
+                });
+                stop(1000);
+                transport.update({ url: "foo", data: { baz: "moo" } });
+            });
+
+            test("update passes constructor data function result to its dialect", function() {
+                var data,
+                    transport = new RemoteTransport({
+                        update: {
+                            url: "foo",
+                            data: function(){
+                                return {
+                                    foo: "bar"
+                                }
+                        }
+                    },
+                    dialect: {
+                        update: function() {
+                            data = arguments[0];
+                            return data;
+                        }
+                    }
+                    });
+
+                $.mockjax({
+                    url: "foo",
+                    response: function() {
+                        equal(data.foo, "bar");
+                        equal(data.baz, "moo");
+                        start();
+                    }
+                });
+                stop(1000);
+                transport.update({ url: "foo", data: { baz: "moo" } });
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
