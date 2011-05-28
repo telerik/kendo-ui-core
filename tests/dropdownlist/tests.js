@@ -14,5 +14,9 @@ tests.push(
     {
         page: "dropdownlist/clientapi.html",
         title: "dropdownlist client api"
+    },
+    {
+        page: "dropdownlist/searching.html",
+        title: "dropdownlist searching"
     }
 );

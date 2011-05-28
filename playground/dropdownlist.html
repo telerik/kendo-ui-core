@@ -58,11 +58,12 @@
         <script type="text/javascript" charset="utf-8">
             $(document).ready(function() {
                 $("#dropdownlist").kendoDropDownList({
-                    dataSource: [{Text: "foo", Value: 1}, {Text:2, Value:2}],
-                    autoBind: false
+                    dataSource: [{text: "foo", value: 1}, {text:2, value:2}],
+                    autoBind: false,
+                    delay: 2000
                 });
                 $("#select").kendoDropDownList({
-                    dataSource: [{Text: "foo", Value: 1}, {Text:2, Value:2}]
+                    dataSource: [{text: "foo", value: 1}, {text:2, value:2}]
                 });
             });
         </script>

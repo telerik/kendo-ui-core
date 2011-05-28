@@ -13,6 +13,8 @@
         init: function(element, options) {
             var that = this;
 
+            that._word = "";
+
             options = $.isArray(options) ? { dataSource: options } : options;
 
             Component.fn.init.call(that, element, options);
@@ -27,11 +29,11 @@
                 anchor: that.wrapper
             });
 
-            that._template();
-
             that._dataAccessors();
 
             that._dataSource();
+
+            that._template();
 
             that.bind([CHANGE], that.options);
 
@@ -46,6 +48,12 @@
             that.wrapper
                 .bind({
                     keydown: proxy(that._keydown, that),
+                    keypress: function(e) {
+                        setTimeout(function() {
+                            that._word += String.fromCharCode(e.keyCode);
+                            that._search();
+                        });
+                    },
                     click: function() {
                         if(!that.ul.children()[0]) {
                             that.dataSource.read();
@@ -68,161 +76,10 @@
         options: {
             index: 0,
             autoBind: true,
+            delay: 500,
             dataSource: {},
             dataTextField: "text",
             dataValueField: "value"
-        },
-
-        _accept: function(li) {
-            var that = this;
-
-            that.select(li);
-            that._blur();
-
-            if (that.wrapper[0] !== document.activeElement) {
-                that.wrapper.focus();
-            }
-        },
-
-        _click: function(e) {
-            this._accept($(e.currentTarget));
-        },
-
-        _template: function(isCustomTemplate) {
-            var that = this,
-                options = that.options,
-                dataTextField = options.dataTextField;
-
-            if(!options.template){
-                options.template = "<%= this._getText(data) %>";
-            }
-
-            that.template = kendo.template("<li unselectable='on'>" + options.template + "</li>"); //unselectable=on is required for IE to prevent the suggestion box from stealing focus from the input
-        },
-
-        _dataAccessors: function() {
-            var that = this,
-                options = that.options,
-                getter = kendo.getter;
-
-            that._getText = getter(options.dataTextField);
-            that._getValue = getter(options.dataValueField);
-        },
-
-        _dataSource: function() {
-            var that = this;
-                element = that.element,
-                options = that.options,
-                dataSource = options.dataSource;
-
-            if($.isPlainObject(dataSource) && element.is("select")) {
-                options.index = element.children(":selected").index();
-                $.extend(dataSource, {select: element, fields: [{ field: options.dataTextField }, { field: options.dataValueField }] });
-            }
-
-            that.dataSource = DataSource.create(dataSource || {}).bind(CHANGE, proxy(that.refresh, that));
-        },
-
-        _keydown: function(e) {
-            var prevent,
-                that = this,
-                TRUE = true,
-                key = e.keyCode,
-                keys = kendo.keys,
-                select = function(li) {
-                    if (li[0]) {
-                        that.select(li);
-                    }
-                };
-
-            if (e.altKey) {
-                if (key === keys.DOWN) {
-                    that.open();
-                } else if (key === keys.UP) {
-                    that.close();
-                }
-            } else if (key === keys.DOWN) {
-                select(that._current.next());
-
-                prevent = TRUE;
-            } else if (key === keys.UP) {
-                select(that._current.prev());
-
-                prevent = TRUE;
-            } else if (key === keys.HOME) {
-                select(that.ul.children().first());
-
-                prevent = TRUE;
-            } else if (key === keys.END) {
-                select(that.ul.children().last());
-
-                prevent = TRUE;
-            } else if (key === keys.ENTER || key === keys.TAB) {
-                that._accept(that._current);
-            } else if (key === keys.ESC) {
-                that.close();
-            }
-
-            if (prevent) {
-                e.preventDefault();
-            }
-        },
-
-        _span: function() {
-            var that = this,
-                wrapper = that.wrapper,
-                SELECTOR = ".t-input",
-                span;
-
-            span = wrapper.find(SELECTOR);
-
-            if (!span[0]) {
-                wrapper.append('<div class="t-dropdown-wrap t-state-default"><span class="t-input">&nbsp;</span><span class="t-select"><span class="t-icon t-arrow-down">select</span></span></div>')
-                       .append(that.element);
-
-                span = wrapper.find(SELECTOR);
-            }
-            that.span = span;
-        },
-
-        _wrapper: function() {
-            var that = this,
-                element = that.element,
-                TABINDEX = "tabIndex",
-                wrapper;
-
-            wrapper = element.parent();
-
-            if (!wrapper.is("div")) {
-                wrapper = element.hide().wrap("<div />").parent();
-            }
-
-            if (!wrapper.attr(TABINDEX)) {
-                wrapper.attr(TABINDEX, 0);
-            }
-
-            that.wrapper = wrapper.addClass("t-widget t-dropdown t-header");
-        },
-
-        _blur: function() {
-            var that = this;
-
-            that._change();
-            that.close();
-        },
-
-        _change: function() {
-            var that = this,
-                value = that.value();
-
-            if (value !== that.previous) {
-                that.trigger(CHANGE);
-
-                // trigger the DOM change event so any subscriber gets notified
-                that.element.trigger(CHANGE);
-
-                that.previous = value;
-            }
         },
 
         current: function(candidate) {
@@ -242,6 +99,10 @@
             }
         },
 
+        close: function() {
+            this.popup.close();
+        },
+
         open: function() {
             var that = this;
             if (!that.ul.children()[0]) {
@@ -250,10 +111,6 @@
             } else {
                 that.popup.open();
             }
-        },
-
-        close: function() {
-            this.popup.close();
         },
 
         refresh: function() {
@@ -269,6 +126,18 @@
 
             if (!that.options.autoBind) {
                 that.popup[data.length ? "open" : "close"]();
+            }
+        },
+
+        search: function(word) {
+            if(word){
+                var that = this;
+                that.select(function(dataItem) {
+                    var text = that._getText(dataItem);
+                    text = text ? text.toString() : "";
+                    text = text.toLowerCase().slice(0, word.length);
+                    return text == word.toLowerCase();
+                });
             }
         },
 
@@ -343,6 +212,170 @@
             } else {
                 return element.val();
             }
+        },
+
+        //private methods
+        _accept: function(li) {
+            var that = this;
+
+            that.select(li);
+            that._blur();
+
+            if (that.wrapper[0] !== document.activeElement) {
+                that.wrapper.focus();
+            }
+        },
+
+        _blur: function() {
+            var that = this;
+
+            that._change();
+            that.close();
+        },
+
+        _click: function(e) {
+            this._accept($(e.currentTarget));
+        },
+
+        _change: function() {
+            var that = this,
+                value = that.value();
+
+            if (value !== that.previous) {
+                that.trigger(CHANGE);
+
+                // trigger the DOM change event so any subscriber gets notified
+                that.element.trigger(CHANGE);
+
+                that.previous = value;
+            }
+        },
+
+        _dataAccessors: function() {
+            var that = this,
+                options = that.options,
+                getter = kendo.getter;
+
+            that._getText = getter(options.dataTextField);
+            that._getValue = getter(options.dataValueField);
+        },
+
+        _dataSource: function() {
+            var that = this;
+                element = that.element,
+                options = that.options,
+                dataSource = options.dataSource;
+
+            if($.isPlainObject(dataSource) && element.is("select")) {
+                options.index = element.children(":selected").index();
+                $.extend(dataSource, {select: element, fields: [{ field: options.dataTextField }, { field: options.dataValueField }] });
+            }
+
+            that.dataSource = DataSource.create(dataSource || {}).bind(CHANGE, proxy(that.refresh, that));
+        },
+
+        _keydown: function(e) {
+            var prevent,
+                that = this,
+                TRUE = true,
+                key = e.keyCode,
+                keys = kendo.keys,
+                select = function(li) {
+                    if (li[0]) {
+                        that.select(li);
+                    }
+                };
+
+            if (e.altKey) {
+                if (key === keys.DOWN) {
+                    that.open();
+                } else if (key === keys.UP) {
+                    that.close();
+                }
+            } else if (key === keys.DOWN) {
+                select(that._current.next());
+
+                prevent = TRUE;
+            } else if (key === keys.UP) {
+                select(that._current.prev());
+
+                prevent = TRUE;
+            } else if (key === keys.HOME) {
+                select(that.ul.children().first());
+
+                prevent = TRUE;
+            } else if (key === keys.END) {
+                select(that.ul.children().last());
+
+                prevent = TRUE;
+            } else if (key === keys.ENTER || key === keys.TAB) {
+                that._accept(that._current);
+            } else if (key === keys.ESC) {
+                that.close();
+            }
+
+            if (prevent) {
+                e.preventDefault();
+            }
+        },
+
+        _search: function() {
+            var that = this;
+            clearTimeout(that._typing);
+
+            that._typing = setTimeout(function() {
+                that._word = "";
+            }, that.options.delay);
+
+            that.search(that._word);
+        },
+
+        _template: function() {
+            var that = this,
+                options = that.options,
+                dataTextField = options.dataTextField;
+
+            if(!options.template){
+                options.template = "<%= this._getText(data) %>";
+            }
+
+            that.template = kendo.template("<li unselectable='on'>" + options.template + "</li>"); //unselectable=on is required for IE to prevent the suggestion box from stealing focus from the input
+        },
+
+        _span: function() {
+            var that = this,
+                wrapper = that.wrapper,
+                SELECTOR = ".t-input",
+                span;
+
+            span = wrapper.find(SELECTOR);
+
+            if (!span[0]) {
+                wrapper.append('<div class="t-dropdown-wrap t-state-default"><span class="t-input">&nbsp;</span><span class="t-select"><span class="t-icon t-arrow-down">select</span></span></div>')
+                       .append(that.element);
+
+                span = wrapper.find(SELECTOR);
+            }
+            that.span = span;
+        },
+
+        _wrapper: function() {
+            var that = this,
+                element = that.element,
+                TABINDEX = "tabIndex",
+                wrapper;
+
+            wrapper = element.parent();
+
+            if (!wrapper.is("div")) {
+                wrapper = element.hide().wrap("<div />").parent();
+            }
+
+            if (!wrapper.attr(TABINDEX)) {
+                wrapper.attr(TABINDEX, 0);
+            }
+
+            that.wrapper = wrapper.addClass("t-widget t-dropdown t-header");
         }
     });
 
