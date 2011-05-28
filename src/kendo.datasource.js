@@ -4,15 +4,20 @@
         isFunction = $.isFunction,
         isPlainObject = $.isPlainObject,
         isEmptyObject = $.isEmptyObject,
+        each = $.each,
         noop = $.noop,
         kendo = window.kendo,
         Observable = kendo.Observable,
+        Class = kendo.Class,
         Model = kendo.data.Model,
-        CHANGE = "change",
-        UPDATE = "update",
         CREATE = "create",
+        READ = "read",
+        UPDATE = "update",
         DESTROY = "destroy",
+        CHANGE = "change",
         ERROR = "error",
+        crud = [CREATE, READ, UPDATE, DESTROY],
+        UPDATED = Model.UPDATED,
         stringify = kendo.stringify;
 
 
@@ -38,44 +43,40 @@
         return query.toArray();
     }
 
-    function LocalTransport(options) {
-        this.data = options.data;
-    }
+    var LocalTransport = Class.extend({
+        init: function(options) {
+            this.data = options.data;
+        },
 
-    LocalTransport.prototype = {
         read: function(options) {
             options.success(this.data);
         },
         update: function() {
         }
-    }
+    });
 
-    function RemoteTransport(options) {
-        var that = this;
+    var RemoteTransport = Class.extend( {
+        init: function(options) {
+            var that = this;
 
-        options = that.options = extend({}, that.options, options);
+            options = that.options = extend({}, that.options, options);
 
-        if (typeof options.read === "string") {
-            options.read = {
-                url: options.read
-            };
-        }
+            each(crud, function(index, type) {
+                if (typeof options[type] === "string") {
+                    options[type] = {
+                        url: options[type]
+                    };
+                }
+            });
 
-        if (typeof options.update === "string") {
-            options.update = {
-                url: options.update
-            };
-        }
+            that.cache = options.cache? Cache.create(options.cache) : {
+                find: noop,
+                add: noop
+            }
 
-        that.cache = options.cache? Cache.create(options.cache) : {
-            find: noop,
-            add: noop
-        }
+            that.dialect = options.dialect;
+        },
 
-        that.dialect = options.dialect;
-    }
-
-    RemoteTransport.prototype = {
         options: {
             dialect: {
                 read: function(data) {
@@ -83,9 +84,20 @@
                 },
                 update: function(data) {
                     return data;
+                },
+                destroy: function(data) {
+                    return data;
+                },
+                create: function(data) {
+                    return data;
                 }
             }
         },
+
+        create: function(options) {
+            $.ajax(this.setup(options, CREATE));
+        },
+
         read: function(options) {
             var that = this,
                 success,
@@ -93,7 +105,7 @@
                 result,
                 cache = that.cache;
 
-            options = that._setup(options, "read");
+            options = that.setup(options, READ);
 
             success = options.success || noop;
             error = options.error || noop;
@@ -113,10 +125,14 @@
         },
 
         update: function(options) {
-            $.ajax(this._setup(options, "update"));
+            $.ajax(this.setup(options, UPDATE));
         },
 
-        _setup: function(options, type) {
+        destroy: function(options) {
+            $.ajax(this.setup(options, DESTROY));
+        },
+
+        setup: function(options, type) {
             options = options || {};
 
             var that = this,
@@ -128,7 +144,7 @@
 
             return options;
         }
-    }
+    });
 
     Cache.create = function(options) {
         var store = {
@@ -153,7 +169,7 @@
 
     Cache.prototype = {
         add: function(key, data) {
-            if(key != undefined) {
+            if(key !== undefined) {
                 this._store[stringify(key)] = data;
             }
         },
@@ -301,7 +317,7 @@
 
         sync: function() {
             var that = this,
-            updatedModels = that._byState(Model.UPDATED);
+            updatedModels = that._byState(UPDATED);
 
             that.transport.update(updatedModels);
         },
@@ -411,7 +427,7 @@
             result = [];
 
             if (id === undefined) {
-                models = that._byState(Model.UPDATED);
+                models = that._byState(UPDATED);
                 for (idx = 0, length = models.length; idx < length; idx++) {
                     result.push(models[idx].changes());
                 }
@@ -420,7 +436,7 @@
             } else {
                 model = that._models[id];
 
-                if (model && model.state === Model.UPDATED) {
+                if (model && model.state === UPDATED) {
                     return model.changes();
                 }
             }
@@ -434,7 +450,7 @@
 
             if (id === undefined) {
                 for (id in models) {
-                    if (models[id].state === Model.UPDATED) {
+                    if (models[id].state === UPDATED) {
                         return true;
                     }
                 }
@@ -444,7 +460,7 @@
 
             model = models[id];
 
-            return !!model && model.state === Model.UPDATED;
+            return !!model && model.state === UPDATED;
         },
 
         at: function(index) {
@@ -545,10 +561,10 @@
         options = $.isArray(options) ? { data: options } : options;
 
         var dataSource = options || {},
-        data = dataSource.data,
-        fields = dataSource.fields,
-        table = dataSource.table,
-        select = dataSource.select;
+            data = dataSource.data,
+            fields = dataSource.fields,
+            table = dataSource.table,
+            select = dataSource.select;
 
         if (!data && fields) {
             if (table) {
@@ -565,11 +581,11 @@
 
     function inferSelect(select, fields) {
         var options = $(select)[0].children,
-        optionIndex,
-        optionCount,
-        data = [],
-        record,
-        option;
+            optionIndex,
+            optionCount,
+            data = [],
+            record,
+            option;
 
         for (optionIndex = 0, optionCount = options.length; optionIndex < optionCount; optionIndex++) {
             record = {};
