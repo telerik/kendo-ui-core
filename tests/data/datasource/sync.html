@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+    <script src="../../../src/jquery.js"></script>
+    <script type="text/javascript" src="../../qunit.js"></script>
+    <script type="text/javascript" src="../../qunit-runner.js"></script>
+    <script src="../../../src/kendo.core.js"></script>
+    <script src="../../../src/kendo.query.js"></script>
+    <script src="../../../src/kendo.model.js"></script>
+    <script src="../../../src/kendo.datasource.js"></script>
+    <link rel="stylesheet" href="../../qunit.css" type="text/css" />
+
+    <body>
+        <h1 id="qunit-header">QUnit example</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var DataSource = kendo.data.DataSource;
+
+            function setup(transport) {
+                var dataSource = new DataSource({
+                    model: kendo.data.Model.define(),
+                    transport: $.extend({
+                        read: function(options) {
+                           options.success([{ id: 1, foo: "foo" }]);
+                        },
+                    }, transport)
+                });
+
+                dataSource.read();
+
+                return dataSource;
+            }
+
+            test("sync calls the update method of the transport for the updated records", function() {
+                var updated;
+                var dataSource = setup({
+                    update: function(options) {
+                        updated = options.data;
+                    }
+                });
+
+                dataSource.update(1, { foo: "bar" });
+                dataSource.sync();
+
+                equal(updated.length, 1);
+                equal(updated[0].foo, "bar");
+            });
+
+            test("sync does not call update method if there are no updated records", function() {
+                var updated;
+                var dataSource = setup({
+                    update: function(options) {
+                        updated = options.data;
+                    }
+                });
+
+                dataSource.sync();
+
+                ok(updated === undefined);
+            });
+
+            test("sync calls the create method of the transport for the created records", function() {
+                var created;
+                var dataSource = setup({
+                    create: function(options) {
+                        created = options.data;
+                    }
+                });
+
+                dataSource.create({ foo: "bar" });
+                dataSource.sync();
+
+                equal(created.length, 1);
+                equal(created[0].foo, "bar");
+            });
+
+            test("sync does not call create method if there are no created records", function() {
+                var created;
+                var dataSource = setup({
+                    create: function(options) {
+                        created = options.data;
+                    }
+                });
+
+                dataSource.sync();
+
+                ok(created === undefined);
+            });
+
+            test("sync calls the destroy method of the transport for the destroyed records", function() {
+                var destroyed;
+                var dataSource = setup({
+                    destroy: function(options) {
+                        destroyed = options.data;
+                    }
+                });
+
+                dataSource.destroy(1);
+                dataSource.sync();
+
+                equal(destroyed.length, 1);
+                equal(destroyed[0].foo, "foo");
+            });
+
+            test("sync does not call destroy method if there are no destroyed records", function() {
+                var destroyed;
+                var dataSource = setup({
+                    destroy: function(options) {
+                       destroyed = options.data;
+                    }
+                });
+
+                dataSource.sync();
+
+                ok(destroyed === undefined);
+            });
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>

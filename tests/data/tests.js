@@ -28,6 +28,10 @@ tests.push(
         title: "datasource.query"
     },
     {
+        page: "data/datasource/sync.html",
+        title: "datasource.sync"
+    },
+    {
         page: "data/query.html",
         title: "query"
     },

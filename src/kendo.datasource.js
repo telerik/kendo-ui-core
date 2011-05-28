@@ -297,17 +297,18 @@
             that._map = map;
         },
 
-        _byState: function(state) {
+        _byState: function(state, selector) {
             var models = this._models,
-            result = [],
-            model,
-            id;
+                result = [],
+                model,
+                selector = selector || function(m) { return m; },
+                id;
 
             for (id in models) {
                 model = models[id];
 
                 if(model.state === state) {
-                    result.push(model);
+                    result.push(selector(model));
                 }
             }
 
@@ -316,9 +317,39 @@
 
         sync: function() {
             var that = this,
-            updatedModels = that._byState(Model.UPDATED);
+                updated,
+                created,
+                destroyed;
 
-            that.transport.update(updatedModels);
+            updated = that._byState(Model.UPDATED, function(model) {
+                return model.changes();
+            });
+
+            created = that._byState(Model.CREATED, function(model) {
+                return model.data;
+            });
+
+            destroyed = that._byState(Model.DESTROYED, function(model) {
+                return model.data;
+            });
+
+            if (created.length) {
+                that.transport.create({
+                    data: created
+                });
+            }
+
+            if (updated.length) {
+                that.transport.update({
+                    data: updated
+                });
+            }
+
+            if (destroyed.length) {
+                that.transport.destroy({
+                    data: destroyed
+                });
+            }
         },
 
         create: function(index, values) {
@@ -419,37 +450,23 @@
 
         changes: function(id) {
             var that = this,
-            idx,
-            length,
-            models,
-            model,
-            result = [];
-
-            if (id === undefined) {
-                models = that._byState(Model.UPDATED);
-                for (idx = 0, length = models.length; idx < length; idx++) {
-                    result.push(models[idx].changes());
-                }
-
-                return result;
-            } else {
                 model = that._models[id];
 
-                if (model && model.state === Model.UPDATED) {
-                    return model.changes();
-                }
+            if (model && model.state === Model.UPDATED) {
+                return model.changes();
             }
         },
 
         hasChanges: function(id) {
             var that = this,
-            model,
-            models = that._models,
-            id;
+                state,
+                model,
+                models = that._models,
+                id;
 
             if (id === undefined) {
                 for (id in models) {
-                    if (models[id].state === Model.UPDATED) {
+                    if (models[id].state !== Model.PRISTINE) {
                         return true;
                     }
                 }
