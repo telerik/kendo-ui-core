@@ -36,8 +36,7 @@
     </Item>
   </IdentificationOptionSchemes>
   <UnitTestType Type="ArtOfTest.Common.Design.ProjectModel.UnitTestType">VS</UnitTestType>
-  <RecorderBaseUrl Type="System.String">
-  </RecorderBaseUrl>
+  <RecorderBaseUrl Type="System.String">http://aggeorgiev/kendo/demos</RecorderBaseUrl>
   <IsStoryboardCapturingEnabled Type="System.Boolean">True</IsStoryboardCapturingEnabled>
   <SimulateRealClickByDefault Type="System.Boolean">False</SimulateRealClickByDefault>
   <SimulateRealTypingByDefault Type="System.Boolean">False</SimulateRealTypingByDefault>
