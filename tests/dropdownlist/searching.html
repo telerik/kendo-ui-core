@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DropDownList Searching</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.query.js"></script>
+        <script src="../../src/kendo.datasource.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.dropdownlist.js"></script>
+        <link rel="stylesheet" href="../qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">DropDownList Searching</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var DropDownList = kendo.ui.DropDownList,
+                data = [{text: "Foo", value: 1}, {text:"Bar", value:2}, {text:"Baz", value:3}],
+                input;
+
+            $.fn.press = function(key) {
+                return this.trigger({ type: "keypress", keyCode: key } );
+            }
+
+            module("kendo.ui.DropDownList searching", {
+                setup: function() {
+                    input = $("<input />").appendTo(document.body);
+                },
+                teardown: function() {
+                    input.add($("ul")).parent(".t-widget").remove();
+                }
+            });
+
+            test("search select first match", function() {
+                var dropdownlist = new DropDownList(input, {
+                    dataSource: data
+                });
+
+                dropdownlist.search("b");
+
+                ok(dropdownlist.ul.children().eq(1).hasClass("t-state-selected"));
+            });
+
+            test("search should raise error if word is null", function() {
+                var dropdownlist = new DropDownList(input, {
+                    dataSource: data
+                });
+
+                dropdownlist.search();
+
+                ok(true);
+            });
+
+            test("typing should trigger search", function() {
+                var dropdownlist = new DropDownList(input, {
+                    dataSource: data
+                });
+
+                dropdownlist._search = function() {
+                    ok(true);
+                    start();
+                }
+                input.val("f").press("f".charCodeAt(0));
+                stop(300);
+            });
+
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>
