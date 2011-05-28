@@ -86,7 +86,7 @@
                     return data;
                 }
             }
-        },     
+        },
         read: function(options) {
             options = options || {};
             var that = this,
@@ -97,7 +97,7 @@
                 cached;
 
             options = extend(true, {}, read, options);
-            options.data = that.dialect.read(extend(data, options.data));                      
+            options.data = that.dialect.read(extend(data, options.data));
             var cached = that.cache.find(options.data);
             if(cached != undefined) {
                 success(cached);
@@ -114,24 +114,31 @@
                 $.ajax(options);
             }
         },
-        update: function(options) {
-            options = options || {};
-            var that = this,
-                update = that.options.update,
-                data = isFunction(update.data) ? update.data() : update.data,
-                success = options.success || noop,
-                error = options.error || noop;
 
-            options = extend(true, {}, update, options);            
-            options.data = that.dialect.update(extend(data, options.data));
-            options.success = function(result) {
-                success(result);
-            };
-            options.error = function(result) {
-                error(result);
-            };
+        update: function(options) {
+            var that = this;
+
+            that._ajax(that._prepare(options, "update"));
+        },
+
+        _ajax: function(options) {
+            options.success = options.success || noop;
+            options.error = options.error || noop;
 
             $.ajax(options);
+        },
+
+        _prepare: function(options, type) {
+            options = options || {};
+
+            var that = this,
+                operation = that.options[type],
+                data = isFunction(operation.data) ? operation.data() : operation.data;
+
+            options = extend(true, {}, operation, options);
+            options.data = that.dialect[type](extend(data, options.data));
+
+            return options;
         }
     }
 
@@ -201,7 +208,6 @@
             options = that.options = extend({}, that.options, options);
 
             extend(that, {
-                modified: {},
                 _map: {},
                 _models: {},
                 _data: [],
@@ -271,7 +277,6 @@
 
             if(!model) {
                 that._models[id] = model = new that.options.model(that.find(id));
-                model.bind(CHANGE, proxy(that._change, that, model));
             }
 
             return model;
@@ -289,31 +294,53 @@
             that._map = map;
         },
 
-        _change: function(model) {
-           var that = this;
-
-           that.modified[model.id()] = model;
-           that.trigger(UPDATE, { model: model });
-        },
-
-        _modelsByState: function(state) {
+        _byState: function(state) {
             var models = this._models,
-                modified = [],
-                idx;              
-            for (idx in models) {
-                if(models[idx].state ===  state) {
-                    modified.push(models[idx]);
+                result = [],
+                model,
+                id;
+
+            for (id in models) {
+                model = models[id];
+
+                if(model.state === state) {
+                    result.push(model);
                 }
             }
 
-            return modified;
+            return result;
         },
+
         sync: function() {
             var that = this,
-                updatedModels = that._modelsByState(Model.UPDATED);
+                updatedModels = that._byState(Model.UPDATED);
 
             that.transport.update(updatedModels);
         },
+
+        create: function(index, values) {
+            var that = this,
+                data = that._data,
+                model = that.model();
+
+            if (typeof index !== "number") {
+                values = index;
+                index = undefined;
+            }
+
+            model.set(values);
+
+            index = index !== undefined ? index : data.length;
+
+            data.splice(index, 0, model.data);
+
+            that._idMap(data);
+
+            that.trigger(CREATE, { model: model });
+
+            return model;
+        },
+
         read: function() {
             var that = this,
                 options = {
@@ -328,6 +355,31 @@
                 success: proxy(that.success, that),
                 error: proxy(that.error, that)
             });
+        },
+
+        update: function(id, values) {
+            var that = this,
+                model = that.model(id);
+
+            if (model) {
+                model.set(values);
+                that.trigger(UPDATE, { model: model });
+            }
+        },
+
+        destroy: function(id) {
+            var that = this,
+                model = that.model(id);
+
+            if (model) {
+                that._data.splice(that._map[id], 1);
+
+                that._idMap(that._data);
+
+                model.destroy();
+
+                that.trigger(DESTROY, { model: model });
+            }
         },
 
         error: function() {
@@ -364,68 +416,51 @@
 
         changes: function(id) {
             var that = this,
-            result = [];
+                idx,
+                length,
+                models,
+                model,
+                result = [];
 
             if (id === undefined) {
-                for (id in that.modified) {
-                    result.push(that.changes(id));
+                models = that._byState(Model.UPDATED);
+                for (idx = 0, length = models.length; idx < length; idx++) {
+                    result.push(models[idx].changes());
                 }
 
                 return result;
-            } else if (id in that.modified) {
-                return that.modified[id].changes();
+            } else {
+                model = that._models[id];
+
+                if (model && model.state === Model.UPDATED) {
+                    return model.changes();
+                }
             }
         },
 
         hasChanges: function(id) {
-            if (id === undefined) {
-                return !isEmptyObject(this.modified);
-            }
-
-            return id in this.modified;
-        },
-
-        create: function(index, values) {
             var that = this,
-                data = that._data,
-                model = that.model();
+                model,
+                models = that._models,
+                id;
 
-            if (typeof index !== "number") {
-                values = index;
-                index = undefined;
+            if (id === undefined) {
+                for (id in models) {
+                    if (models[id].state === Model.UPDATED) {
+                        return true;
+                    }
+                }
+
+                return false;
             }
 
-            model.set(values);
+            model = models[id];
 
-            index = index !== undefined ? index : data.length;
-
-            data.splice(index, 0, model.data);
-
-            that._idMap(data);
-
-            that.trigger(CREATE, { model: model });
-
-            return model;
+            return !!model && model.state === Model.UPDATED;
         },
 
         at: function(index) {
             return this._data[index];
-        },
-
-        destroy: function(id) {
-            var that = this,
-                model = that.model(id);
-
-            if (model) {
-                that._data.splice(that._map[id], 1);
-                that._idMap(that._data);
-
-                model.state = Model.DESTROYED;
-
-                that.modified[id] = {};
-
-                that.trigger(DESTROY, { model: model });
-            }
         },
 
         data: function(value) {
