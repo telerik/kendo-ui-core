@@ -60,6 +60,19 @@
                 equal(dataSource._map[model.id()], 0);
             });
 
+            test("create raises the create event", function() {
+                var dataSource = setup();
+                var model;
+
+                dataSource.bind("create", function(e) {
+                    model = e.model;
+                });
+
+                dataSource.create();
+
+                ok(model);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

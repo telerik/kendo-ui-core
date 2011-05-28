@@ -127,6 +127,10 @@
             return $.isFunction(id) ? id(that.data) : that.get(id);
         },
 
+        destroy: function() {
+            this.state = DESTROYED;
+        },
+
         changes: function() {
             var modified = null,
                 field,
