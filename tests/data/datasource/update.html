@@ -40,22 +40,6 @@
                 return dataSource;
             }
 
-            test("changes returns modified records", function(){
-                var dataSource = setup();
-
-                dataSource.model(2).set({ bar: "baz" });
-                dataSource.model(1).set({ bar: "baz" });
-
-                var changeSet = dataSource.changes();
-                equal(changeSet.length, 2);
-            });
-
-            test("changes returns empty array if there are not changes", function(){
-                var dataSource = setup();
-                var changeSet = dataSource.changes();
-                equal(changeSet.length, 0);
-            });
-
             test("changes with id parameter returns the changes for the given record", function() {
                 var dataSource = setup(),
                     model = dataSource.model(1);
