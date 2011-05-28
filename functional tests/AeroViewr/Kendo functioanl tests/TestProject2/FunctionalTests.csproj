@@ -148,9 +148,9 @@
     <None Include="AeroViewr\GlassManyTimes.resx">
       <DependentUpon>GlassManyTimes.aii</DependentUpon>
     </None>
-    <EmbeddedResource Include="AeroViewr\Upload.resx">
+    <None Include="AeroViewr\Upload.resx">
       <DependentUpon>Upload.aii</DependentUpon>
-    </EmbeddedResource>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
