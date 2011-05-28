@@ -32,8 +32,7 @@
         }
 
         if (page !== undefined && pageSize !== undefined) {
-            query = query.skip((page - 1) * pageSize)
-                         .take(pageSize);
+            query = query.skip((page - 1) * pageSize).take(pageSize);
         }
 
         return query.toArray();
@@ -88,47 +87,36 @@
             }
         },
         read: function(options) {
-            options = options || {};
             var that = this,
-                read = that.options.read,
-                data = isFunction(read.data) ? read.data() : read.data,
-                success = options.success || noop,
-                error = options.error || noop,
-                cached;
+                success,
+                error,
+                result,
+                cache = that.cache;
 
-            options = extend(true, {}, read, options);
-            options.data = that.dialect.read(extend(data, options.data));
-            var cached = that.cache.find(options.data);
-            if(cached != undefined) {
-                success(cached);
+            options = that._setup(options, "read");
+
+            success = options.success || noop;
+            error = options.error || noop;
+
+            result = cache.find(options.data);
+
+            if(result !== undefined) {
+                success(result);
             } else {
                 options.success = function(result) {
-                    that.cache.add(options.data, result);
+                    cache.add(options.data, result);
 
                     success(result);
                 };
-                options.error = function(result) {
-                    error(result);
-                };
-
                 $.ajax(options);
             }
         },
 
         update: function(options) {
-            var that = this;
-
-            that._ajax(that._prepare(options, "update"));
+            $.ajax(this._setup(options, "update"));
         },
 
-        _ajax: function(options) {
-            options.success = options.success || noop;
-            options.error = options.error || noop;
-
-            $.ajax(options);
-        },
-
-        _prepare: function(options, type) {
+        _setup: function(options, type) {
             options = options || {};
 
             var that = this,
@@ -273,7 +261,7 @@
 
         model: function(id) {
             var that = this,
-                model = that._models[id];
+            model = that._models[id];
 
             if(!model) {
                 that._models[id] = model = new that.options.model(that.find(id));
@@ -296,9 +284,9 @@
 
         _byState: function(state) {
             var models = this._models,
-                result = [],
-                model,
-                id;
+            result = [],
+            model,
+            id;
 
             for (id in models) {
                 model = models[id];
@@ -313,15 +301,15 @@
 
         sync: function() {
             var that = this,
-                updatedModels = that._byState(Model.UPDATED);
+            updatedModels = that._byState(Model.UPDATED);
 
             that.transport.update(updatedModels);
         },
 
         create: function(index, values) {
             var that = this,
-                data = that._data,
-                model = that.model();
+            data = that._data,
+            model = that.model();
 
             if (typeof index !== "number") {
                 values = index;
@@ -343,12 +331,12 @@
 
         read: function() {
             var that = this,
-                options = {
-                    page: that._page,
-                    pageSize: that._pageSize,
-                    sort: that._sort,
-                    filter: that._filter
-                };
+            options = {
+                page: that._page,
+                pageSize: that._pageSize,
+                sort: that._sort,
+                filter: that._filter
+            };
 
             that.transport.read({
                 data: options,
@@ -359,7 +347,7 @@
 
         update: function(id, values) {
             var that = this,
-                model = that.model(id);
+            model = that.model(id);
 
             if (model) {
                 model.set(values);
@@ -369,7 +357,7 @@
 
         destroy: function(id) {
             var that = this,
-                model = that.model(id);
+            model = that.model(id);
 
             if (model) {
                 that._data.splice(that._map[id], 1);
@@ -388,7 +376,7 @@
 
         success: function(data) {
             var that = this,
-                options = {};
+            options = {};
 
             that._total = that._reader.total(data);
             data = that._reader.data(data);
@@ -416,11 +404,11 @@
 
         changes: function(id) {
             var that = this,
-                idx,
-                length,
-                models,
-                model,
-                result = [];
+            idx,
+            length,
+            models,
+            model,
+            result = [];
 
             if (id === undefined) {
                 models = that._byState(Model.UPDATED);
@@ -440,9 +428,9 @@
 
         hasChanges: function(id) {
             var that = this,
-                model,
-                models = that._models,
-                id;
+            model,
+            models = that._models,
+            id;
 
             if (id === undefined) {
                 for (id in models) {
@@ -477,8 +465,8 @@
 
         query: function(options) {
             var that = this,
-                options = options,
-                remote = that.options.serverSorting || that.options.serverPaging || that.options.serverFiltering;
+            options = options,
+            remote = that.options.serverSorting || that.options.serverPaging || that.options.serverFiltering;
 
             if(options !== undefined) {
                 that._pageSize = options.pageSize;
@@ -547,7 +535,7 @@
         },
         _totalPages: function() {
             var that = this,
-                pageSize = that.pageSize() || that.total();
+            pageSize = that.pageSize() || that.total();
 
             return Math.ceil((that.total() || 0) / pageSize);
         }
@@ -557,10 +545,10 @@
         options = $.isArray(options) ? { data: options } : options;
 
         var dataSource = options || {},
-            data = dataSource.data,
-            fields = dataSource.fields,
-            table = dataSource.table,
-            select = dataSource.select;
+        data = dataSource.data,
+        fields = dataSource.fields,
+        table = dataSource.table,
+        select = dataSource.select;
 
         if (!data && fields) {
             if (table) {
@@ -577,11 +565,11 @@
 
     function inferSelect(select, fields) {
         var options = $(select)[0].children,
-            optionIndex,
-            optionCount,
-            data = [],
-            record,
-            option;
+        optionIndex,
+        optionCount,
+        data = [],
+        record,
+        option;
 
         for (optionIndex = 0, optionCount = options.length; optionIndex < optionCount; optionIndex++) {
             record = {};
@@ -598,16 +586,16 @@
 
     function inferTable(table, fields) {
         var tbody = $(table)[0].tBodies[0],
-            rows = tbody ? tbody.rows : [],
-            rowIndex,
-            rowCount,
-            fieldIndex,
-            fieldCount = fields.length,
-            data = [],
-            cells,
-            record,
-            cell,
-            empty;
+        rows = tbody ? tbody.rows : [],
+        rowIndex,
+        rowCount,
+        fieldIndex,
+        fieldCount = fields.length,
+        data = [],
+        cells,
+        record,
+        cell,
+        empty;
 
         for (rowIndex = 0, rowCount = rows.length; rowIndex < rowCount; rowIndex++) {
             record = {};
