@@ -17,7 +17,6 @@
         CHANGE = "change",
         ERROR = "error",
         crud = [CREATE, READ, UPDATE, DESTROY],
-        UPDATED = Model.UPDATED,
         stringify = kendo.stringify;
 
 
@@ -317,7 +316,7 @@
 
         sync: function() {
             var that = this,
-            updatedModels = that._byState(UPDATED);
+            updatedModels = that._byState(Model.UPDATED);
 
             that.transport.update(updatedModels);
         },
@@ -427,7 +426,7 @@
             result = [];
 
             if (id === undefined) {
-                models = that._byState(UPDATED);
+                models = that._byState(Model.UPDATED);
                 for (idx = 0, length = models.length; idx < length; idx++) {
                     result.push(models[idx].changes());
                 }
@@ -436,7 +435,7 @@
             } else {
                 model = that._models[id];
 
-                if (model && model.state === UPDATED) {
+                if (model && model.state === Model.UPDATED) {
                     return model.changes();
                 }
             }
@@ -450,7 +449,7 @@
 
             if (id === undefined) {
                 for (id in models) {
-                    if (models[id].state === UPDATED) {
+                    if (models[id].state === Model.UPDATED) {
                         return true;
                     }
                 }
@@ -460,7 +459,7 @@
 
             model = models[id];
 
-            return !!model && model.state === UPDATED;
+            return !!model && model.state === Model.UPDATED;
         },
 
         at: function(index) {
