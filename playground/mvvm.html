@@ -43,6 +43,25 @@
             },dataSource: ["foo", "bar"] });
 
             $("select").kendoDropDownList();
+
+            var Transport = kendo.data.RemoteTransport.extend({
+                read: function(options) {
+                    options.success(data);
+                }
+            });
+
+            var dataSource = new kendo.data.DataSource({
+                model: kendo.data.Model.define(),
+                transport: new Transport({
+                    update: {
+                        type: "POST",
+                        url: "update.php"
+                    }
+                })
+            });
+
+            dataSource.read();
+
         </script>
     </body>
 </html>
