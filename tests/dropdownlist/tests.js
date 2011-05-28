@@ -10,5 +10,9 @@ tests.push(
     {
         page: "dropdownlist/events.html",
         title: "dropdownlist events"
+    },
+    {
+        page: "dropdownlist/clientapi.html",
+        title: "dropdownlist client api"
     }
 );

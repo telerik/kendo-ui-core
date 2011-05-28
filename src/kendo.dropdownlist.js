@@ -4,24 +4,10 @@
         Component = ui.Component,
         DataSource = kendo.data.DataSource,
         CHANGE = "change",
-        SELECTED = "t-state-selected",
         FOCUSED = "t-state-focused",
+        SELECTED = "t-state-selected",
         proxy = $.proxy,
         whiteSpaceRegExp = /\s+/;
-
-    function getDropDownItems(select) {
-        var items = [];
-        var options = select.find('option');
-
-        for (var i = 0, length = options.length; i < length; i++) {
-            var option = options.eq(i);
-            items[i] = {
-                Text: option.text(),
-                Value: option.val()
-            }
-        }
-        return items;
-    }
 
     var DropDownList = Component.extend({
         init: function(element, options) {
@@ -41,7 +27,7 @@
                 anchor: that.wrapper
             });
 
-            that._template(options && options.template);
+            that._template();
 
             that._dataAccessors();
 
@@ -67,10 +53,6 @@
                             that.popup.toggle();
                         }
                     },
-                    focus: function() {
-                        console.log(that.value());
-                        that.previous = that.value();
-                    },
                     blur: function() {
                         that._bluring = setTimeout(function() {
                             that._blur();
@@ -87,13 +69,14 @@
             index: 0,
             autoBind: true,
             dataSource: {},
-            dataTextField: "Text",
-            dataValueField: "Value"
+            dataTextField: "text",
+            dataValueField: "value"
         },
 
-        _click: function(e) {
+        _accept: function(li) {
             var that = this;
-            that.select($(e.currentTarget));
+
+            that.select(li);
             that._blur();
 
             if (that.wrapper[0] !== document.activeElement) {
@@ -101,13 +84,17 @@
             }
         },
 
+        _click: function(e) {
+            this._accept($(e.currentTarget));
+        },
+
         _template: function(isCustomTemplate) {
             var that = this,
                 options = that.options,
                 dataTextField = options.dataTextField;
 
-            if(!isCustomTemplate){
-                options.template = "<%= kendo.getter('" + options.dataTextField + "')(data) %>";
+            if(!options.template){
+                options.template = "<%= this._getText(data) %>";
             }
 
             that.template = kendo.template("<li unselectable='on'>" + options.template + "</li>"); //unselectable=on is required for IE to prevent the suggestion box from stealing focus from the input
@@ -137,50 +124,47 @@
         },
 
         _keydown: function(e) {
-            var li,
+            var prevent,
                 that = this,
+                TRUE = true,
                 key = e.keyCode,
-                keys = kendo.keys;
+                keys = kendo.keys,
+                select = function(li) {
+                    if (li[0]) {
+                        that.select(li);
+                    }
+                };
 
-            if (key === keys.DOWN) {
-                li = that._current.next();
-                if(li[0]) {
-                    that.select(li);
+            if (e.altKey) {
+                if (key === keys.DOWN) {
+                    that.open();
+                } else if (key === keys.UP) {
+                    that.close();
                 }
+            } else if (key === keys.DOWN) {
+                select(that._current.next());
 
-                e.preventDefault();
+                prevent = TRUE;
             } else if (key === keys.UP) {
-                li = that._current.prev();
-                if(li[0]) {
-                    that.select(li);
-                }
-                e.preventDefault();
+                select(that._current.prev());
+
+                prevent = TRUE;
             } else if (key === keys.HOME) {
-                li = that.ul.children().first();
-                if(li[0]) {
-                    that.select(li);
-                }
-                e.preventDefault();
+                select(that.ul.children().first());
+
+                prevent = TRUE;
             } else if (key === keys.END) {
-                li = that.ul.children().last();
-                if(li[0]) {
-                    that.select(li);
-                }
-                e.preventDefault();
-            } else if (key === keys.ENTER) {
-                that.select($(e.currentTarget).closest("li"));
-                that._blur();
+                select(that.ul.children().last());
 
-                if (that.wrapper[0] !== document.activeElement) {
-                    that.wrapper.focus();
-                }
+                prevent = TRUE;
+            } else if (key === keys.ENTER || key === keys.TAB) {
+                that._accept(that._current);
             } else if (key === keys.ESC) {
-                that.value(that.previous);
-                that._blur();
+                that.close();
+            }
 
-                if (that.wrapper[0] !== document.activeElement) {
-                    that.wrapper.focus();
-                }
+            if (prevent) {
+                e.preventDefault();
             }
         },
 
@@ -199,16 +183,6 @@
                 span = wrapper.find(SELECTOR);
             }
             that.span = span;
-        },
-
-        _value: function(value) {
-            var element = this.element[0];
-
-            if (value !== undefined) {
-                element.value = value;
-            } else {
-                return element.value;
-            }
         },
 
         _wrapper: function() {
@@ -234,7 +208,7 @@
             var that = this;
 
             that._change();
-            that.popup.close();
+            that.close();
         },
 
         _change: function() {
@@ -249,7 +223,6 @@
 
                 that.previous = value;
             }
-
         },
 
         current: function(candidate) {
@@ -269,33 +242,63 @@
             }
         },
 
+        open: function() {
+            var that = this;
+            if (!that.ul.children()[0]) {
+                that.options.autoBind = false;
+                that.dataSource.query();
+            } else {
+                that.popup.open();
+            }
+        },
+
+        close: function() {
+            this.popup.close();
+        },
+
         refresh: function() {
             var that = this,
+                options = that.options,
                 data = that.dataSource.view();
 
-            that.ul[0].innerHTML = kendo.render(that.template, data);
+            that.ul[0].innerHTML = kendo.render(proxy(that.template, that), data);
 
             that.select(that.options.index);
+
+            that.previous = that.value();
 
             if (!that.options.autoBind) {
                 that.popup[data.length ? "open" : "close"]();
             }
         },
 
-        select: function(li) {
-            var text,
-                idx,
+        select: function(argument) {
+            var idx,
+                text,
                 dataItem,
                 that = this,
                 options = that.options,
+                data = that.dataSource.view(),
                 liItems = that.ul.children().removeClass(SELECTED);
 
-            if (!isNaN(li - 0) && li > -1) {
-                li = liItems.eq(li);
+            if (!isNaN(argument - 0) && argument > -1) {
+
+                argument = liItems.eq(argument);
+
+            } else if ($.isFunction(argument)) {
+
+                for (var i = 0, len = data.length; i < len; i++) {
+                    if (argument(data[i])) {
+                        idx = i;
+                        break;
+                    }
+                }
+
+                argument = liItems.eq(idx);
             }
 
-            if (li[0] && !li.hasClass(SELECTED)) {
-                idx = li.index();
+            if (argument[0] && !argument.hasClass(SELECTED)) {
+                idx = argument.index();
 
                 if (idx === -1) {
                     return;
@@ -305,8 +308,8 @@
                 text = that._getText(dataItem);
 
                 that.text(text);
-                that._value(that._getValue(dataItem) || text);
-                that.current(li.addClass(SELECTED));
+                that.element.val(that._getValue(dataItem) || text);
+                that.current(argument.addClass(SELECTED));
             }
         },
 
@@ -321,26 +324,27 @@
         },
 
         value: function(value) {
-            var that = this;
+            var that = this,
+                element = that.element;
+
             if (value !== undefined) {
                 var data = that.dataSource.view(),
                     index;
 
                 if (data[0]) {
-                    index = $.map(data, function(dataItem, index) {
-                        if ((that._getValue(dataItem) || that._getText(dataItem)) == value) { 
-                            return index;
+                    index = $.map(data, function(dataItem, idx) {
+                        if ((that._getValue(dataItem) || that._getText(dataItem)) == value) {
+                            return idx;
                         }
                     });
-                    that.select(index);
-                    that.previous = that.element.val();
+                    that.select(index[0] || 0);
+                    that.previous = element.val();
                 }
             } else {
-                return this._value();
+                return element.val();
             }
         }
     });
 
     ui.plugin("DropDownList", DropDownList);
 })(jQuery);
-

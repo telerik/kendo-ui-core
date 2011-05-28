@@ -20,7 +20,7 @@
         <ol id="qunit-tests"></ol>
         <script>
             var DropDownList = kendo.ui.DropDownList,
-                data = [{Text: "Foo", Value: 1}, {Text:"Bar", Value:2}],
+                data = [{text: "Foo", value: 1}, {text:"Bar", value:2}],
                 SELECTED = "t-state-selected",
                 keys = kendo.keys,
                 input;
@@ -35,7 +35,7 @@
             });
 
             test("value method should select item if exists", function() {
-                var dropdownlist = new DropDownList(input, [{Text: "foo", Value: 1}, {Text:2, Value:2}]);
+                var dropdownlist = new DropDownList(input, [{text: "foo", value: 1}, {text:2, value:2}]);
 
                 dropdownlist.value("2");
 
@@ -44,6 +44,74 @@
                 equal(dropdownlist.text(), 2);
                 equal(dropdownlist.previous, 2);
            });
+
+           test("value method should select first if no such value", function() {
+                var dropdownlist = new DropDownList(input, [{text: "foo", value: 1}, {text:2, value:2}]);
+
+                dropdownlist.select(1);
+                dropdownlist.value("");
+
+                ok(dropdownlist.ul.children().eq(0).hasClass(SELECTED));
+                equal(dropdownlist.value(), "1");
+                equal(dropdownlist.text(), "foo");
+                equal(dropdownlist.previous, 1);
+           });
+
+           test("select should select item by predicate", function() {
+                var dropdownlist = new DropDownList(input, [{text: "foo", value: 1}, {text:2, value:2}]);
+
+                dropdownlist.select(function(item) {
+                    return item.text == 2;
+                });
+
+                ok(dropdownlist.ul.children().eq(1).hasClass(SELECTED));
+                equal(dropdownlist.value(), "2");
+                equal(dropdownlist.text(), "2");
+                equal(dropdownlist.previous, 1);
+            });
+
+            test("open should open popup", function () {
+                var dropdownlist = input.kendoDropDownList(data).data("kendoDropDownList");
+
+                dropdownlist.popup.bind("open", function(){
+                    ok(true);
+                    start();
+                });
+
+                dropdownlist.open();
+
+                stop(400);
+
+            });
+
+            test("open should bind and open after this if no items", function () {
+                var dropdownlist = input.kendoDropDownList({autoBind: false, dataSource: data}).data("kendoDropDownList");
+
+                dropdownlist.popup.bind("open", function(){
+                    ok(true);
+                    start();
+                });
+
+                dropdownlist.open();
+
+                stop(400);
+
+            });
+
+            test("close should close popup", function () {
+                var dropdownlist = input.kendoDropDownList(data).data("kendoDropDownList");
+
+                dropdownlist.popup.bind("close", function(){
+                    ok(true);
+                    start();
+                });
+
+                dropdownlist.open();
+                dropdownlist.close();
+
+                stop(400);
+
+            });
 
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
