@@ -118,7 +118,7 @@
                 options = that.options,
                 data = that.dataSource.view();
 
-            that.ul[0].innerHTML = kendo.render(proxy(that.template, that), data);
+            that.ul[0].innerHTML = kendo.render(that.template, data);
 
             that.select(that.options.index);
 
@@ -133,7 +133,7 @@
             if(word){
                 var that = this;
                 that.select(function(dataItem) {
-                    var text = that._getText(dataItem);
+                    var text = that._text(dataItem);
                     text = text ? text.toString() : "";
                     text = text.toLowerCase().slice(0, word.length);
                     return text == word.toLowerCase();
@@ -141,44 +141,40 @@
             }
         },
 
-        select: function(argument) {
-            var idx,
+        select: function(li) {
+            var that = this,
+                idx,
+                length,
                 text,
-                dataItem,
-                that = this,
-                options = that.options,
                 data = that.dataSource.view(),
-                liItems = that.ul.children().removeClass(SELECTED);
+                children = that.ul.children().removeClass(SELECTED);
 
-            if (!isNaN(argument - 0) && argument > -1) {
-
-                argument = liItems.eq(argument);
-
-            } else if ($.isFunction(argument)) {
-
-                for (var i = 0, len = data.length; i < len; i++) {
-                    if (argument(data[i])) {
-                        idx = i;
+            if (typeof li === "function") {
+                for (idx = 0, length = data.length; idx < length; idx++) {
+                    if (li(data[idx])) {
+                        li = idx;
                         break;
                     }
                 }
-
-                argument = liItems.eq(idx);
             }
 
-            if (argument[0] && !argument.hasClass(SELECTED)) {
-                idx = argument.index();
+            if (typeof li === "number") {
+                li = children.eq(li);
+            }
+
+            if (li[0] && !li.hasClass(SELECTED)) {
+                idx = li.index();
 
                 if (idx === -1) {
                     return;
                 }
 
-                dataItem = that.dataSource.view()[idx];
-                text = that._getText(dataItem);
+                data = data[idx];
+                text = that._text(data);
 
                 that.text(text);
-                that.element.val(that._getValue(dataItem) || text);
-                that.current(argument.addClass(SELECTED));
+                that.element.val(that._value(data) || text);
+                that.current(li.addClass(SELECTED));
             }
         },
 
@@ -202,7 +198,7 @@
 
                 if (data[0]) {
                     index = $.map(data, function(dataItem, idx) {
-                        if ((that._getValue(dataItem) || that._getText(dataItem)) == value) {
+                        if ((that._value(dataItem) || that._text(dataItem)) == value) {
                             return idx;
                         }
                     });
@@ -214,7 +210,6 @@
             }
         },
 
-        //private methods
         _accept: function(li) {
             var that = this;
 
@@ -256,8 +251,8 @@
                 options = that.options,
                 getter = kendo.getter;
 
-            that._getText = getter(options.dataTextField);
-            that._getValue = getter(options.dataValueField);
+            that._text = getter(options.dataTextField);
+            that._value = getter(options.dataValueField);
         },
 
         _dataSource: function() {
@@ -277,7 +272,6 @@
         _keydown: function(e) {
             var prevent,
                 that = this,
-                TRUE = true,
                 key = e.keyCode,
                 keys = kendo.keys,
                 select = function(li) {
@@ -295,19 +289,19 @@
             } else if (key === keys.DOWN) {
                 select(that._current.next());
 
-                prevent = TRUE;
+                prevent = true;
             } else if (key === keys.UP) {
                 select(that._current.prev());
 
-                prevent = TRUE;
+                prevent = true;
             } else if (key === keys.HOME) {
                 select(that.ul.children().first());
 
-                prevent = TRUE;
+                prevent = true;
             } else if (key === keys.END) {
                 select(that.ul.children().last());
 
-                prevent = TRUE;
+                prevent = true;
             } else if (key === keys.ENTER || key === keys.TAB) {
                 that._accept(that._current);
             } else if (key === keys.ESC) {
@@ -332,14 +326,12 @@
 
         _template: function() {
             var that = this,
-                options = that.options,
-                dataTextField = options.dataTextField;
+                options = that.options;
 
-            if(!options.template){
-                options.template = "<%= this._getText(data) %>";
-            }
+            options.template = options.template || "${" + (options.dataTextField || "data") + "}";
 
-            that.template = kendo.template("<li unselectable='on'>" + options.template + "</li>"); //unselectable=on is required for IE to prevent the suggestion box from stealing focus from the input
+            //unselectable=on is required for IE to prevent the suggestion box from stealing focus from the input
+            that.template = kendo.template("<li class='t-item' unselectable='on'>" + options.template + "</li>");
         },
 
         _span: function() {
