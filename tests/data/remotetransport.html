@@ -6,6 +6,7 @@
     <script type="text/javascript" src="../jquery.mockjax.js"></script>
     <script src="../../src/kendo.core.js"></script>
     <script src="../../src/kendo.query.js"></script>
+    <script src="../../src/kendo.model.js"></script>
     <script src="../../src/kendo.datasource.js"></script>
     <link rel="stylesheet" href="../qunit.css" type="text/css" />
 
@@ -278,7 +279,7 @@
                         read: "foo",
                         cache: {
                             find: function() {
-                                return data; 
+                                return data;
                             }
                         }
                     });
@@ -355,8 +356,24 @@
                 var transport = new RemoteTransport({
                         update: "foo"
                     });
-                    
+
                 equal(transport.options.update.url, "foo");
+            });
+
+            test("destroy as string option is treated as url", function() {
+                var transport = new RemoteTransport({
+                        destroy: "foo"
+                    });
+
+                equal(transport.options.destroy.url, "foo");
+            });
+
+            test("create as string option is treated as url", function() {
+                var transport = new RemoteTransport({
+                        create: "foo"
+                    });
+
+                equal(transport.options.create.url, "foo");
             });
 
             test("update calls $.ajax", function() {
@@ -369,7 +386,7 @@
                 $.mockjax({
                     url: "foo",
                     response: function() {
-                        ok(true);                        
+                        ok(true);
                         start();
                     }
                 });
@@ -377,6 +394,41 @@
                 transport.update();
             });
 
+            test("destroy calls $.ajax", function() {
+                var transport = new RemoteTransport({
+                    destroy: {
+                        url: "foo"
+                    }
+                });
+
+                $.mockjax({
+                    url: "foo",
+                    response: function() {
+                        ok(true);
+                        start();
+                    }
+                });
+                stop(1000);
+                transport.destroy();
+            });
+
+            test("create calls $.ajax", function() {
+                var transport = new RemoteTransport({
+                    create: {
+                        url: "foo"
+                    }
+                });
+
+                $.mockjax({
+                    url: "foo",
+                    response: function() {
+                        ok(true);
+                        start();
+                    }
+                });
+                stop(1000);
+                transport.create();
+            });
             test("update passes its options to $.ajax", function() {
                 var transport = new RemoteTransport({
                         update: {
@@ -392,6 +444,23 @@
                 });
                 stop(1000);
                 transport.update({ url: "foo" });
+            });
+
+            test("destroy passes its options to $.ajax", function() {
+                var transport = new RemoteTransport({
+                        destroy: {
+                        }
+                    });
+
+                $.mockjax({
+                    url: "foo",
+                    response: function() {
+                        ok(true);
+                        start();
+                    }
+                });
+                stop(1000);
+                transport.destroy({ url: "foo" });
             });
 
             test("update calls the success handler when the ajax response is returned", function() {
@@ -455,7 +524,7 @@
                 stop(1000);
                 transport.update({ url: "foo" });
             });
-            
+
             test("update passes constructor options.update.data to its dialect", function() {
                 var data,
                     transport = new RemoteTransport({
@@ -467,7 +536,7 @@
                         },
                         dialect: {
                             update: function() {
-                                data = arguments[0];                          
+                                data = arguments[0];
                                 return data;
                             }
                         }

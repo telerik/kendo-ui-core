@@ -62,14 +62,6 @@
                 equal(dataSource._map[2], 0);
             });
 
-            test("destroy adds the record to the list of modified records", function() {
-                var dataSource = setup();
-
-                dataSource.destroy(1);
-
-                ok(dataSource.modified[1]);
-            });
-
             test("destroy raises the destroy event", function() {
                 var dataSource = setup();
                 var destroyArgument;
@@ -82,6 +74,7 @@
                 dataSource.destroy(1);
                 equal(destroyArgument.model, first);
             });
+
             test("destroy sets model state to DESTROYED", function() {
                 var dataSource = setup();
                 var destroyArgument;
@@ -90,6 +83,17 @@
 
                 dataSource.destroy(1);
                 equal(model.state, kendo.data.Model.DESTROYED);
+            });
+
+            test("destroy raises the destroy event", function() {
+                var dataSource = setup();
+                var model;
+                dataSource.bind("destroy", function(e) {
+                    model = e.model;
+                });
+
+                dataSource.destroy(1);
+                ok(model);
             });
 
         </script>

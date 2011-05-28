@@ -4,15 +4,20 @@
         isFunction = $.isFunction,
         isPlainObject = $.isPlainObject,
         isEmptyObject = $.isEmptyObject,
+        each = $.each,
         noop = $.noop,
         kendo = window.kendo,
         Observable = kendo.Observable,
+        Class = kendo.Class,
         Model = kendo.data.Model,
-        CHANGE = "change",
-        UPDATE = "update",
         CREATE = "create",
+        READ = "read",
+        UPDATE = "update",
         DESTROY = "destroy",
+        CHANGE = "change",
         ERROR = "error",
+        crud = [CREATE, READ, UPDATE, DESTROY],
+        UPDATED = Model.UPDATED,
         stringify = kendo.stringify;
 
 
@@ -32,51 +37,46 @@
         }
 
         if (page !== undefined && pageSize !== undefined) {
-            query = query.skip((page - 1) * pageSize)
-                         .take(pageSize);
+            query = query.skip((page - 1) * pageSize).take(pageSize);
         }
 
         return query.toArray();
     }
 
-    function LocalTransport(options) {
-        this.data = options.data;
-    }
+    var LocalTransport = Class.extend({
+        init: function(options) {
+            this.data = options.data;
+        },
 
-    LocalTransport.prototype = {
         read: function(options) {
             options.success(this.data);
         },
         update: function() {
         }
-    }
+    });
 
-    function RemoteTransport(options) {
-        var that = this;
+    var RemoteTransport = Class.extend( {
+        init: function(options) {
+            var that = this;
 
-        options = that.options = extend({}, that.options, options);
+            options = that.options = extend({}, that.options, options);
 
-        if (typeof options.read === "string") {
-            options.read = {
-                url: options.read
-            };
-        }
+            each(crud, function(index, type) {
+                if (typeof options[type] === "string") {
+                    options[type] = {
+                        url: options[type]
+                    };
+                }
+            });
 
-        if (typeof options.update === "string") {
-            options.update = {
-                url: options.update
-            };
-        }
+            that.cache = options.cache? Cache.create(options.cache) : {
+                find: noop,
+                add: noop
+            }
 
-        that.cache = options.cache? Cache.create(options.cache) : {
-            find: noop,
-            add: noop
-        }
+            that.dialect = options.dialect;
+        },
 
-        that.dialect = options.dialect;
-    }
-
-    RemoteTransport.prototype = {
         options: {
             dialect: {
                 read: function(data) {
@@ -84,56 +84,67 @@
                 },
                 update: function(data) {
                     return data;
+                },
+                destroy: function(data) {
+                    return data;
+                },
+                create: function(data) {
+                    return data;
                 }
             }
-        },     
-        read: function(options) {
-            options = options || {};
-            var that = this,
-                read = that.options.read,
-                data = isFunction(read.data) ? read.data() : read.data,
-                success = options.success || noop,
-                error = options.error || noop,
-                cached;
+        },
 
-            options = extend(true, {}, read, options);
-            options.data = that.dialect.read(extend(data, options.data));                      
-            var cached = that.cache.find(options.data);
-            if(cached != undefined) {
-                success(cached);
+        create: function(options) {
+            $.ajax(this.setup(options, CREATE));
+        },
+
+        read: function(options) {
+            var that = this,
+                success,
+                error,
+                result,
+                cache = that.cache;
+
+            options = that.setup(options, READ);
+
+            success = options.success || noop;
+            error = options.error || noop;
+
+            result = cache.find(options.data);
+
+            if(result !== undefined) {
+                success(result);
             } else {
                 options.success = function(result) {
-                    that.cache.add(options.data, result);
+                    cache.add(options.data, result);
 
                     success(result);
                 };
-                options.error = function(result) {
-                    error(result);
-                };
-
                 $.ajax(options);
             }
         },
+
         update: function(options) {
+            $.ajax(this.setup(options, UPDATE));
+        },
+
+        destroy: function(options) {
+            $.ajax(this.setup(options, DESTROY));
+        },
+
+        setup: function(options, type) {
             options = options || {};
+
             var that = this,
-                update = that.options.update,
-                data = isFunction(update.data) ? update.data() : update.data,
-                success = options.success || noop,
-                error = options.error || noop;
+                operation = that.options[type],
+                data = isFunction(operation.data) ? operation.data() : operation.data;
 
-            options = extend(true, {}, update, options);            
-            options.data = that.dialect.update(extend(data, options.data));
-            options.success = function(result) {
-                success(result);
-            };
-            options.error = function(result) {
-                error(result);
-            };
+            options = extend(true, {}, operation, options);
+            options.data = that.dialect[type](extend(data, options.data));
 
-            $.ajax(options);
+            return options;
         }
-    }
+    });
 
     Cache.create = function(options) {
         var store = {
@@ -158,7 +169,7 @@
 
     Cache.prototype = {
         add: function(key, data) {
-            if(key != undefined) {
+            if(key !== undefined) {
                 this._store[stringify(key)] = data;
             }
         },
@@ -201,7 +212,6 @@
             options = that.options = extend({}, that.options, options);
 
             extend(that, {
-                modified: {},
                 _map: {},
                 _models: {},
                 _data: [],
@@ -267,11 +277,10 @@
 
         model: function(id) {
             var that = this,
-                model = that._models[id];
+            model = that._models[id];
 
             if(!model) {
                 that._models[id] = model = new that.options.model(that.find(id));
-                model.bind(CHANGE, proxy(that._change, that, model));
             }
 
             return model;
@@ -289,39 +298,61 @@
             that._map = map;
         },
 
-        _change: function(model) {
-           var that = this;
-
-           that.modified[model.id()] = model;
-           that.trigger(UPDATE, { model: model });
-        },
-
-        _modelsByState: function(state) {
+        _byState: function(state) {
             var models = this._models,
-                modified = [],
-                idx;              
-            for (idx in models) {
-                if(models[idx].state ===  state) {
-                    modified.push(models[idx]);
+            result = [],
+            model,
+            id;
+
+            for (id in models) {
+                model = models[id];
+
+                if(model.state === state) {
+                    result.push(model);
                 }
             }
 
-            return modified;
+            return result;
         },
+
         sync: function() {
             var that = this,
-                updatedModels = that._modelsByState(Model.UPDATED);
+            updatedModels = that._byState(UPDATED);
 
             that.transport.update(updatedModels);
         },
+
+        create: function(index, values) {
+            var that = this,
+            data = that._data,
+            model = that.model();
+
+            if (typeof index !== "number") {
+                values = index;
+                index = undefined;
+            }
+
+            model.set(values);
+
+            index = index !== undefined ? index : data.length;
+
+            data.splice(index, 0, model.data);
+
+            that._idMap(data);
+
+            that.trigger(CREATE, { model: model });
+
+            return model;
+        },
+
         read: function() {
             var that = this,
-                options = {
-                    page: that._page,
-                    pageSize: that._pageSize,
-                    sort: that._sort,
-                    filter: that._filter
-                };
+            options = {
+                page: that._page,
+                pageSize: that._pageSize,
+                sort: that._sort,
+                filter: that._filter
+            };
 
             that.transport.read({
                 data: options,
@@ -330,13 +361,38 @@
             });
         },
 
+        update: function(id, values) {
+            var that = this,
+            model = that.model(id);
+
+            if (model) {
+                model.set(values);
+                that.trigger(UPDATE, { model: model });
+            }
+        },
+
+        destroy: function(id) {
+            var that = this,
+            model = that.model(id);
+
+            if (model) {
+                that._data.splice(that._map[id], 1);
+
+                that._idMap(that._data);
+
+                model.destroy();
+
+                that.trigger(DESTROY, { model: model });
+            }
+        },
+
         error: function() {
             this.trigger(ERROR, arguments);
         },
 
         success: function(data) {
             var that = this,
-                options = {};
+            options = {};
 
             that._total = that._reader.total(data);
             data = that._reader.data(data);
@@ -364,68 +420,51 @@
 
         changes: function(id) {
             var that = this,
+            idx,
+            length,
+            models,
+            model,
             result = [];
 
             if (id === undefined) {
-                for (id in that.modified) {
-                    result.push(that.changes(id));
+                models = that._byState(UPDATED);
+                for (idx = 0, length = models.length; idx < length; idx++) {
+                    result.push(models[idx].changes());
                 }
 
                 return result;
-            } else if (id in that.modified) {
-                return that.modified[id].changes();
+            } else {
+                model = that._models[id];
+
+                if (model && model.state === UPDATED) {
+                    return model.changes();
+                }
             }
         },
 
         hasChanges: function(id) {
-            if (id === undefined) {
-                return !isEmptyObject(this.modified);
-            }
-
-            return id in this.modified;
-        },
-
-        create: function(index, values) {
             var that = this,
-                data = that._data,
-                model = that.model();
+            model,
+            models = that._models,
+            id;
 
-            if (typeof index !== "number") {
-                values = index;
-                index = undefined;
+            if (id === undefined) {
+                for (id in models) {
+                    if (models[id].state === UPDATED) {
+                        return true;
+                    }
+                }
+
+                return false;
             }
 
-            model.set(values);
+            model = models[id];
 
-            index = index !== undefined ? index : data.length;
-
-            data.splice(index, 0, model.data);
-
-            that._idMap(data);
-
-            that.trigger(CREATE, { model: model });
-
-            return model;
+            return !!model && model.state === UPDATED;
         },
 
         at: function(index) {
             return this._data[index];
-        },
-
-        destroy: function(id) {
-            var that = this,
-                model = that.model(id);
-
-            if (model) {
-                that._data.splice(that._map[id], 1);
-                that._idMap(that._data);
-
-                model.state = Model.DESTROYED;
-
-                that.modified[id] = {};
-
-                that.trigger(DESTROY, { model: model });
-            }
         },
 
         data: function(value) {
@@ -442,8 +481,8 @@
 
         query: function(options) {
             var that = this,
-                options = options,
-                remote = that.options.serverSorting || that.options.serverPaging || that.options.serverFiltering;
+            options = options,
+            remote = that.options.serverSorting || that.options.serverPaging || that.options.serverFiltering;
 
             if(options !== undefined) {
                 that._pageSize = options.pageSize;
@@ -512,7 +551,7 @@
         },
         _totalPages: function() {
             var that = this,
-                pageSize = that.pageSize() || that.total();
+            pageSize = that.pageSize() || that.total();
 
             return Math.ceil((that.total() || 0) / pageSize);
         }
@@ -563,16 +602,16 @@
 
     function inferTable(table, fields) {
         var tbody = $(table)[0].tBodies[0],
-            rows = tbody ? tbody.rows : [],
-            rowIndex,
-            rowCount,
-            fieldIndex,
-            fieldCount = fields.length,
-            data = [],
-            cells,
-            record,
-            cell,
-            empty;
+        rows = tbody ? tbody.rows : [],
+        rowIndex,
+        rowCount,
+        fieldIndex,
+        fieldCount = fields.length,
+        data = [],
+        cells,
+        record,
+        cell,
+        empty;
 
         for (rowIndex = 0, rowCount = rows.length; rowIndex < rowCount; rowIndex++) {
             record = {};
