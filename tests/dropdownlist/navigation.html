@@ -20,7 +20,7 @@
         <ol id="qunit-tests"></ol>
         <script>
             var DropDownList = kendo.ui.DropDownList,
-                data = [{Text: "Foo", Value: 1}, {Text:"Bar", Value:2}],
+                data = [{text: "Foo", value: 1}, {text:"Bar", value:2}],
                 SELECTED = "t-state-selected",
                 keys = kendo.keys,
                 input;
@@ -49,7 +49,7 @@
             });
 
             test("always select first item on dataSource change", function() {
-                var dropdownlist = new DropDownList(input, [{Text: "foo", Value: 1}, {Text:2, Value:2}]);
+                var dropdownlist = new DropDownList(input, [{text: "foo", value: 1}, {text:2, value:2}]);
 
                 dropdownlist.dataSource.read();
 
@@ -61,19 +61,19 @@
                 dropdownlist.dataSource.read();
                 dropdownlist.ul.children().eq(1).click();
 
-                equal(dropdownlist.text(), data[1].Text);
-                equal(dropdownlist.value(), data[1].Value);
+                equal(dropdownlist.text(), data[1].text);
+                equal(dropdownlist.value(), data[1].value);
             });
 
-            test("value should be set to item.Text if no item.Value", function() {
-                var localData = [{Text: "Foo", Value: 1}, {Text:"Bar"}],
+            test("value should be set to item.text if no item.value", function() {
+                var localData = [{text: "Foo", value: 1}, {text:"Bar"}],
                     dropdownlist = input.kendoDropDownList(localData).data("kendoDropDownList");
 
                 dropdownlist.dataSource.read();
                 dropdownlist.ul.children().eq(1).click();
 
-                equal(dropdownlist.text(), data[1].Text);
-                equal(dropdownlist.value(), data[1].Text);
+                equal(dropdownlist.text(), data[1].text);
+                equal(dropdownlist.value(), data[1].text);
             });
 
             test("select li should update text and value", function() {
@@ -82,8 +82,8 @@
                 dropdownlist.dataSource.read();
                 dropdownlist.select(dropdownlist.ul.children().eq(1));
 
-                equal(dropdownlist.text(), data[1].Text);
-                equal(dropdownlist.value(), data[1].Value);
+                equal(dropdownlist.text(), data[1].text);
+                equal(dropdownlist.value(), data[1].value);
             });
 
             test("click li should close popup", function() {
@@ -114,8 +114,8 @@
                 dropdownlist.dataSource.read();
                 dropdownlist.select(1);
 
-                equal(dropdownlist.text(), data[1].Text);
-                equal(dropdownlist.value(), data[1].Value);
+                equal(dropdownlist.text(), data[1].text);
+                equal(dropdownlist.value(), data[1].value);
             });
 
             test("selected should be persisted", function(){
@@ -149,8 +149,8 @@
                 dropdownlist.wrapper.focus().press(keys.DOWN);
 
                 ok(dropdownlist.ul.children().eq(1).hasClass(SELECTED));
-                equal(dropdownlist.text(), data[1].Text);
-                equal(dropdownlist.value(), data[1].Value);
+                equal(dropdownlist.text(), data[1].text);
+                equal(dropdownlist.value(), data[1].value);
 
             });
 
@@ -162,8 +162,8 @@
                 dropdownlist.wrapper.focus().press(keys.DOWN);
 
                 ok(dropdownlist.ul.children().eq(1).hasClass(SELECTED));
-                equal(dropdownlist.text(), data[1].Text);
-                equal(dropdownlist.value(), data[1].Value);
+                equal(dropdownlist.text(), data[1].text);
+                equal(dropdownlist.value(), data[1].value);
 
             });
 
@@ -176,8 +176,8 @@
                 dropdownlist.wrapper.focus().press(keys.UP);
 
                 ok(dropdownlist.ul.children().eq(0).hasClass(SELECTED));
-                equal(dropdownlist.text(), data[0].Text);
-                equal(dropdownlist.value(), data[0].Value);
+                equal(dropdownlist.text(), data[0].text);
+                equal(dropdownlist.value(), data[0].value);
 
             });
 
@@ -188,8 +188,8 @@
                 dropdownlist.wrapper.focus().press(keys.UP);
 
                 ok(dropdownlist.ul.children().eq(0).hasClass(SELECTED));
-                equal(dropdownlist.text(), data[0].Text);
-                equal(dropdownlist.value(), data[0].Value);
+                equal(dropdownlist.text(), data[0].text);
+                equal(dropdownlist.value(), data[0].value);
             });
 
             test("press home should focus first item and update text and value", function() {
@@ -201,8 +201,8 @@
                 dropdownlist.wrapper.focus().press(keys.HOME);
 
                 ok(dropdownlist.ul.children().eq(0).hasClass(SELECTED));
-                equal(dropdownlist.text(), data[0].Text);
-                equal(dropdownlist.value(), data[0].Value);
+                equal(dropdownlist.text(), data[0].text);
+                equal(dropdownlist.value(), data[0].value);
 
             });
 
@@ -215,8 +215,8 @@
                 dropdownlist.wrapper.focus().press(keys.END);
 
                 ok(dropdownlist.ul.children().eq(1).hasClass(SELECTED));
-                equal(dropdownlist.text(), data[1].Text);
-                equal(dropdownlist.value(), data[1].Value);
+                equal(dropdownlist.text(), data[1].text);
+                equal(dropdownlist.value(), data[1].value);
 
             });
 
@@ -261,24 +261,39 @@
                     blurWasCalled = true;
                 };
 
-                dropdownlist.current = dropdownlist.ul.children().first();
+                dropdownlist._current = dropdownlist.ul.children().first();
                 input.press(kendo.keys.ENTER);
                 ok(blurWasCalled);
             });
 
-            test("pressing esc sets previous selected item", function() {
+            test("pressing alt + down should open popup", function() {
                 var blurWasCalled, dropdownlist = new DropDownList(input, {
                     dataSource: data
                 });
+                dropdownlist.popup.bind("open", function(){
+                    ok(true);
+                    start();
+                });
 
-                dropdownlist.popup.open();
-                dropdownlist.wrapper.press(kendo.keys.DOWN);
-                dropdownlist.wrapper.press(kendo.keys.ESC);
+                dropdownlist.wrapper.trigger({type: "keydown", altKey: true, keyCode: kendo.keys.DOWN});
 
-                equal(dropdownlist.value(), data[0].Value);
-                equal(dropdownlist.text(), data[0].Text);
+                stop(400);
             });
 
+            test("pressing alt + up should close popup", function() {
+                var blurWasCalled, dropdownlist = new DropDownList(input, {
+                    dataSource: data
+                });
+                dropdownlist.popup.bind("close", function(){
+                    ok(true);
+                    start();
+                });
+                dropdownlist.open();
+
+                dropdownlist.wrapper.trigger({type: "keydown", altKey: true, keyCode: kendo.keys.UP});
+
+                stop(400);
+            });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

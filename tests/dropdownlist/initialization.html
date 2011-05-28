@@ -106,7 +106,7 @@
            });
 
            test("data source is initialized from options when it is an array", function() {
-               var data = [{Text: 1, Value: 1}, {Text:2, Value:2}],
+               var data = [{text: 1, value: 1}, {text:2, value:2}],
                 dropdownlist = new DropDownList(input, data);
 
                 ok(dropdownlist.dataSource);
@@ -115,7 +115,7 @@
            });
 
            test("data source is initialized from options.dataSource when array is passed", function() {
-               var data = [{Text: 1, Value: 1}, {Text:2, Value:2}],
+               var data = [{text: 1, value: 1}, {text:2, value:2}],
                    dropdownlist = new DropDownList(input, {
                         dataSource: data
                    });
@@ -126,7 +126,7 @@
            });
 
            test("data source is initialized from options.dataSource", function() {
-               var data = [{Text: 1, Value: 1}, {Text:2, Value:2}], 
+               var data = [{text: 1, value: 1}, {text:2, value:2}],
                    dropdownlist = new DropDownList(input, {
                        dataSource: {
                               data: data
@@ -149,8 +149,8 @@
                data = dropdownlist.dataSource.data();
 
                equal(data.length, 2);
-               equal(data[0].Text, "Chai");
-               equal(data[0].Value, "1");
+               equal(data[0].text, "Chai");
+               equal(data[0].value, "1");
 
            });
 
@@ -164,7 +164,7 @@
 
            test("retrived data from OPTIONS does not override options.dataSource", function() {
                var select = $("<select><option value=1>Chai</option><option value=2 selected='selected'>Beverages</option></select>"),
-                   data = [{Text: "Foo", Value: "Foo"}], 
+                   data = [{text: "Foo", value: "Foo"}],
                    dropdownlist = new DropDownList(select, {
                        dataSource: {
                               data: data
@@ -177,8 +177,8 @@
                data = dropdownlist.dataSource.data();
 
                equal(data.length, 1);
-               equal(data[0].Text, "Foo");
-               equal(data[0].Value, "Foo");
+               equal(data[0].text, "Foo");
+               equal(data[0].value, "Foo");
            });
 
            test("dropdownlist initializes a UL for its items", function() {
@@ -198,7 +198,7 @@
            });
 
            test("dropdownlist populates its list when the datasource changes", function() {
-                  var dropdownlist = new DropDownList(input, [{Text: "foo", Value: 1}, {Text:2, Value:2}]);
+                  var dropdownlist = new DropDownList(input, [{text: "foo", value: 1}, {text:2, value:2}]);
 
                   dropdownlist.dataSource.read();
 
@@ -206,14 +206,14 @@
                   equal(dropdownlist.ul.children("li").first().text(), "foo");
            });
 
-           test("template should render item directly if dataTextField is empty string", function(){
+           test("template should render item directly if datatextField is empty string", function(){
                 var dropdownlist = new DropDownList(input, { dataTextField : ""});
 
                 equal(dropdownlist.template("foo"), "<li unselectable='on'>foo</li>");
            });
 
-           test("template should use defined dataTextField", function(){
-                var dropdownlist = new DropDownList(input, { 
+           test("template should use defined datatextField", function(){
+                var dropdownlist = new DropDownList(input, {
                     dataTextField : "ProductName"
                 });
 
@@ -222,7 +222,7 @@
 
            test("changing the template", function() {
                var dropdownlist = new DropDownList(input, {
-                   dataTextField: "",
+                   datatextField: "",
                    template: "<%= data.toUpperCase() %>"
                });
 
@@ -231,7 +231,7 @@
            });
 
            test("should populate text and value if items", function() {
-                 var dropdownlist = new DropDownList(input, [{Text: "foo", Value: 1}, {Text:2, Value:2}]);
+                 var dropdownlist = new DropDownList(input, [{text: "foo", value: 1}, {text:2, value:2}]);
                  equal(dropdownlist.text(), "foo");
                  equal(dropdownlist.value(), "1");
            });
