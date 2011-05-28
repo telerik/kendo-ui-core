@@ -518,7 +518,7 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Wait for '1000' msec.</d2p1:Description>
+      <d2p1:Description>Wait for '3000' msec.</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>8</d2p1:Order>
@@ -535,7 +535,7 @@
         <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
         <d2p1:WaitOnElementsTimeout>5000</d2p1:WaitOnElementsTimeout>
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
-        <WaitTime>1000</WaitTime>
+        <WaitTime>3000</WaitTime>
       </d2p1:Step>
       <d2p1:StepImageKey>AssertBigPichrs3f4ou.dzz</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
