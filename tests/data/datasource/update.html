@@ -117,6 +117,26 @@
                 ok(dataSource.hasChanges() === false);
             });
 
+            test("update updates the specified model", function() {
+                var dataSource = setup();
+
+                dataSource.update(1, { bar: "foo" } );
+
+                var model = dataSource.model(1);
+                equal(model.get("bar"), "foo");
+            });
+
+            test("update triggers the update event", function() {
+                var dataSource = setup();
+
+                var model;
+                dataSource.bind("update", function(e) {
+                    model = e.model;
+                });
+                dataSource.update(1, { bar: "foo" } );
+
+                ok(model);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
