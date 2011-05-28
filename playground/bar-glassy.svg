@@ -25,13 +25,13 @@
    id="Layer_1"
    x="0px"
    y="0px"
-   width="595.28px"
-   height="841.89px"
-   viewBox="0 0 595.28 841.89"
+   width="600"
+   height="800"
+   viewBox="0 0 599.99997 799.99999"
    enable-background="new 0 0 595.28 841.89"
    xml:space="preserve"
    inkscape:version="0.48.1 "
-   sodipodi:docname="basic.svg"><defs
+   sodipodi:docname="bar-glassy.svg"><defs
    id="defs5728" /><sodipodi:namedview
    pagecolor="#ffffff"
    bordercolor="#666666"
@@ -41,20 +41,27 @@
    guidetolerance="10"
    inkscape:pageopacity="0"
    inkscape:pageshadow="2"
-   inkscape:window-width="1680"
-   inkscape:window-height="988"
+   inkscape:window-width="1280"
+   inkscape:window-height="1002"
    id="namedview5726"
    showgrid="false"
-   inkscape:zoom="0.34565085"
-   inkscape:cx="655.60152"
-   inkscape:cy="420.94501"
-   inkscape:window-x="-8"
+   inkscape:zoom="0.97764824"
+   inkscape:cx="144.76535"
+   inkscape:cy="559.57682"
+   inkscape:window-x="1672"
    inkscape:window-y="-8"
    inkscape:window-maximized="1"
-   inkscape:current-layer="Layer_1" />
+   inkscape:current-layer="Layer_1"
+   showguides="true"
+   inkscape:guide-bbox="true" />
 <font
    horiz-adv-x="2048"
-   id="font3">
+   id="font3"
+   horiz-origin-x="0"
+   horiz-origin-y="0"
+   vert-origin-x="45"
+   vert-origin-y="90"
+   vert-adv-y="90">
 <!-- Arial is a trademark of The Monotype Corporation in the United States and/or other countries. -->
 <!-- Copyright: Copyright 2011 Adobe System Incorporated. All rights reserved. -->
 <font-face
@@ -14810,9 +14817,10 @@ UxV3o6j/AMsUn/BQ/wDVTFXejqP/ACxSf8FD/wBVMVUru01OW1miWyk5SRsq1eGlWBH+/MVf/9k=</xm
    id="SVGID_1_"
    gradientUnits="userSpaceOnUse"
    x1="1698"
-   y1="636.4453"
+   y1="636.44531"
    x2="1698"
-   y2="156.4453">
+   y2="156.4453"
+   gradientTransform="translate(0,-41.890014)">
 	<stop
    offset="0"
    style="stop-color:#E6E7E8"
@@ -14824,15 +14832,14 @@ UxV3o6j/AMsUn/BQ/wDVTFXejqP/ACxSf8FD/wBVMVUru01OW1miWyk5SRsq1eGlWBH+/MVf/9k=</xm
 </linearGradient>
 <rect
    x="698"
-   y="156.445"
-   fill="url(#SVGID_1_)"
-   stroke="#000000"
-   stroke-width="0.25"
+   y="114.55499"
    width="2000"
    height="480"
-   id="rect5440" />
+   id="rect5440"
+   style="fill:url(#SVGID_1_);stroke:#000000;stroke-width:0.25" />
 <g
-   id="g5442">
+   id="g5442"
+   transform="translate(0,-41.890014)">
 	<line
    x1="758"
    y1="570"
@@ -14876,7 +14883,8 @@ UxV3o6j/AMsUn/BQ/wDVTFXejqP/ACxSf8FD/wBVMVUru01OW1miWyk5SRsq1eGlWBH+/MVf/9k=</xm
    x1="809"
    y1="477.5"
    x2="846"
-   y2="477.5">
+   y2="477.5"
+   gradientTransform="translate(0,-41.890014)">
 	<stop
    offset="0"
    style="stop-color:#ADC32B"
@@ -14888,18 +14896,19 @@ UxV3o6j/AMsUn/BQ/wDVTFXejqP/ACxSf8FD/wBVMVUru01OW1miWyk5SRsq1eGlWBH+/MVf/9k=</xm
 </linearGradient>
 <rect
    x="809"
-   y="385"
-   fill="url(#SVGID_2_)"
+   y="343.10999"
    width="37"
    height="185"
-   id="rect5461" />
+   id="rect5461"
+   style="fill:url(#SVGID_2_)" />
 <linearGradient
    id="SVGID_3_"
    gradientUnits="userSpaceOnUse"
    x1="810"
    y1="477.5"
    x2="845"
-   y2="477.5">
+   y2="477.5"
+   gradientTransform="translate(0,-41.890014)">
 	<stop
    offset="0"
    style="stop-color:#FFFFFF;stop-opacity:0.3"
@@ -14910,16 +14919,18 @@ UxV3o6j/AMsUn/BQ/wDVTFXejqP/ACxSf8FD/wBVMVUru01OW1miWyk5SRsq1eGlWBH+/MVf/9k=</xm
    id="stop5466" />
 </linearGradient>
 <path
-   fill="url(#SVGID_3_)"
-   d="M810,569V386h35C845,386,826.225,400.651,810,569z"
-   id="path5468" />
+   d="m 810,527.10999 v -183 h 35 c 0,0 -18.775,14.651 -35,183 z"
+   id="path5468"
+   inkscape:connector-curvature="0"
+   style="fill:url(#SVGID_3_)" />
 <linearGradient
    id="SVGID_4_"
    gradientUnits="userSpaceOnUse"
    x1="772"
    y1="514"
    x2="809"
-   y2="514">
+   y2="514"
+   gradientTransform="translate(0,-41.890014)">
 	<stop
    offset="0"
    style="stop-color:#D7DF23"
@@ -14931,18 +14942,19 @@ UxV3o6j/AMsUn/BQ/wDVTFXejqP/ACxSf8FD/wBVMVUru01OW1miWyk5SRsq1eGlWBH+/MVf/9k=</xm
 </linearGradient>
 <rect
    x="772"
-   y="458"
-   fill="url(#SVGID_4_)"
+   y="416.10999"
    width="37"
    height="112"
-   id="rect5475" />
+   id="rect5475"
+   style="fill:url(#SVGID_4_)" />
 <linearGradient
    id="SVGID_5_"
    gradientUnits="userSpaceOnUse"
    x1="773"
    y1="514.5"
    x2="808"
-   y2="514.5">
+   y2="514.5"
+   gradientTransform="translate(0,-41.890014)">
 	<stop
    offset="0"
    style="stop-color:#FFFFFF;stop-opacity:0.3"
@@ -14953,16 +14965,18 @@ UxV3o6j/AMsUn/BQ/wDVTFXejqP/ACxSf8FD/wBVMVUru01OW1miWyk5SRsq1eGlWBH+/MVf/9k=</xm
    id="stop5480" />
 </linearGradient>
 <path
-   fill="url(#SVGID_5_)"
-   d="M773,570V459h35C808,459,790.5,469.667,773,570z"
-   id="path5482" />
+   d="m 773,528.10999 v -111 h 35 c 0,0 -17.5,10.667 -35,111 z"
+   id="path5482"
+   inkscape:connector-curvature="0"
+   style="fill:url(#SVGID_5_)" />
 <linearGradient
    id="SVGID_6_"
    gradientUnits="userSpaceOnUse"
    x1="846"
    y1="430"
    x2="883"
-   y2="430">
+   y2="430"
+   gradientTransform="translate(0,-41.890014)">
 	<stop
    offset="0"
    style="stop-color:#799B28"
@@ -14974,18 +14988,19 @@ UxV3o6j/AMsUn/BQ/wDVTFXejqP/ACxSf8FD/wBVMVUru01OW1miWyk5SRsq1eGlWBH+/MVf/9k=</xm
 </linearGradient>
 <rect
    x="846"
-   y="290"
-   fill="url(#SVGID_6_)"
+   y="248.10999"
    width="37"
    height="280"
-   id="rect5489" />
+   id="rect5489"
+   style="fill:url(#SVGID_6_)" />
 <linearGradient
    id="SVGID_7_"
    gradientUnits="userSpaceOnUse"
    x1="847"
-   y1="430.8896"
+   y1="430.88959"
    x2="882"
-   y2="430.8896">
+   y2="430.88959"
+   gradientTransform="translate(0,-41.890014)">
 	<stop
    offset="0"
    style="stop-color:#FFFFFF;stop-opacity:0.3"
@@ -14996,16 +15011,18 @@ UxV3o6j/AMsUn/BQ/wDVTFXejqP/ACxSf8FD/wBVMVUru01OW1miWyk5SRsq1eGlWBH+/MVf/9k=</xm
    id="stop5494" />
 </linearGradient>
 <path
-   fill="url(#SVGID_7_)"
-   d="M847,570.39v-279h35C882,291.39,863.225,402.041,847,570.39z"
-   id="path5496" />
+   d="m 847,528.49999 v -279 h 35 c 0,0 -18.775,110.651 -35,279 z"
+   id="path5496"
+   inkscape:connector-curvature="0"
+   style="fill:url(#SVGID_7_)" />
 <linearGradient
    id="SVGID_8_"
    gradientUnits="userSpaceOnUse"
    x1="883"
    y1="477.5"
    x2="920"
-   y2="477.5">
+   y2="477.5"
+   gradientTransform="matrix(2.7027027,0,0,0.54054053,-2386.4864,-208.10811)">
 	<stop
    offset="0"
    style="stop-color:#4C7520"
@@ -15020,19 +15037,20 @@ UxV3o6j/AMsUn/BQ/wDVTFXejqP/ACxSf8FD/wBVMVUru01OW1miWyk5SRsq1eGlWBH+/MVf/9k=</xm
    id="stop5503" />
 </linearGradient>
 <rect
-   x="883"
-   y="385"
-   fill="url(#SVGID_8_)"
-   width="37"
-   height="185"
-   id="rect5505" />
+   x="-1.125e-005"
+   y="-1.2499999e-006"
+   width="100"
+   height="100"
+   id="bar_glassy_base"
+   style="fill:url(#SVGID_8_)" />
 <linearGradient
    id="SVGID_9_"
    gradientUnits="userSpaceOnUse"
    x1="884"
    y1="477.5"
    x2="919"
-   y2="477.5">
+   y2="477.5"
+   gradientTransform="matrix(2.7027027,0,0,0.54054053,-2386.4864,-208.10811)">
 	<stop
    offset="0"
    style="stop-color:#FFFFFF;stop-opacity:0.3"
@@ -15043,16 +15061,19 @@ UxV3o6j/AMsUn/BQ/wDVTFXejqP/ACxSf8FD/wBVMVUru01OW1miWyk5SRsq1eGlWBH+/MVf/9k=</xm
    id="stop5510" />
 </linearGradient>
 <path
-   fill="url(#SVGID_9_)"
-   d="M884,569V386h35C919,386,900.225,400.651,884,569z"
-   id="path5512" />
+   d="M 2.7026888,99.459444 V 0.54052454 H 97.297289 c 0,0 -50.74325,7.91946006 -94.5946002,98.91891946 z"
+   id="bar_glassy_overlay"
+   style="fill:url(#SVGID_9_)"
+   inkscape:connector-curvature="0"
+   inkscape:label="#bar_glassy" />
 <linearGradient
    id="SVGID_10_"
    gradientUnits="userSpaceOnUse"
    x1="1145.5"
    y1="385"
    x2="1145.5"
-   y2="570.0005">
+   y2="570.00049"
+   gradientTransform="translate(0,-41.890014)">
 	<stop
    offset="0"
    style="stop-color:#ADC32B"
@@ -15064,18 +15085,19 @@ UxV3o6j/AMsUn/BQ/wDVTFXejqP/ACxSf8FD/wBVMVUru01OW1miWyk5SRsq1eGlWBH+/MVf/9k=</xm
 </linearGradient>
 <rect
    x="1127"
-   y="385"
-   fill="url(#SVGID_10_)"
+   y="343.10999"
    width="37"
    height="185"
-   id="rect5519" />
+   id="rect5519"
+   style="fill:url(#SVGID_10_)" />
 <linearGradient
    id="SVGID_11_"
    gradientUnits="userSpaceOnUse"
    x1="1145.5"
    y1="366"
    x2="1145.5"
-   y2="385">
+   y2="385"
+   gradientTransform="translate(0,-41.890014)">
 	<stop
    offset="0"
    style="stop-color:#BFD730"
@@ -15087,18 +15109,19 @@ UxV3o6j/AMsUn/BQ/wDVTFXejqP/ACxSf8FD/wBVMVUru01OW1miWyk5SRsq1eGlWBH+/MVf/9k=</xm
 </linearGradient>
 <rect
    x="1127"
-   y="366"
-   fill="url(#SVGID_11_)"
+   y="324.10999"
    width="37"
    height="19"
-   id="rect5526" />
+   id="rect5526"
+   style="fill:url(#SVGID_11_)" />
 <linearGradient
    id="SVGID_12_"
    gradientUnits="userSpaceOnUse"
    x1="1182.5"
    y1="271"
    x2="1182.5"
-   y2="290">
+   y2="290"
+   gradientTransform="translate(0,-41.890014)">
 	<stop
    offset="0"
    style="stop-color:#96BC33"
@@ -15110,18 +15133,19 @@ UxV3o6j/AMsUn/BQ/wDVTFXejqP/ACxSf8FD/wBVMVUru01OW1miWyk5SRsq1eGlWBH+/MVf/9k=</xm
 </linearGradient>
 <rect
    x="1164"
-   y="271"
-   fill="url(#SVGID_12_)"
+   y="229.10999"
    width="37"
    height="19"
-   id="rect5533" />
+   id="rect5533"
+   style="fill:url(#SVGID_12_)" />
 <linearGradient
    id="SVGID_13_"
    gradientUnits="userSpaceOnUse"
    x1="1219.5"
    y1="366"
    x2="1219.5"
-   y2="385">
+   y2="385"
+   gradientTransform="translate(0,-41.890014)">
 	<stop
    offset="0"
    style="stop-color:#66952E"
@@ -15133,18 +15157,19 @@ UxV3o6j/AMsUn/BQ/wDVTFXejqP/ACxSf8FD/wBVMVUru01OW1miWyk5SRsq1eGlWBH+/MVf/9k=</xm
 </linearGradient>
 <rect
    x="1201"
-   y="366"
-   fill="url(#SVGID_13_)"
+   y="324.10999"
    width="37"
    height="19"
-   id="rect5540" />
+   id="rect5540"
+   style="fill:url(#SVGID_13_)" />
 <linearGradient
    id="SVGID_14_"
    gradientUnits="userSpaceOnUse"
    x1="1108.5"
    y1="439"
    x2="1108.5"
-   y2="458">
+   y2="458"
+   gradientTransform="translate(0,-41.890014)">
 	<stop
    offset="0"
    style="stop-color:#EEE809"
@@ -15156,18 +15181,19 @@ UxV3o6j/AMsUn/BQ/wDVTFXejqP/ACxSf8FD/wBVMVUru01OW1miWyk5SRsq1eGlWBH+/MVf/9k=</xm
 </linearGradient>
 <rect
    x="1090"
-   y="439"
-   fill="url(#SVGID_14_)"
+   y="397.10999"
    width="37"
    height="19"
-   id="rect5547" />
+   id="rect5547"
+   style="fill:url(#SVGID_14_)" />
 <linearGradient
    id="SVGID_15_"
    gradientUnits="userSpaceOnUse"
    x1="1108.5"
    y1="458"
    x2="1108.5"
-   y2="570">
+   y2="570"
+   gradientTransform="translate(0,-41.890014)">
 	<stop
    offset="0"
    style="stop-color:#D7DF23"
@@ -15179,18 +15205,19 @@ UxV3o6j/AMsUn/BQ/wDVTFXejqP/ACxSf8FD/wBVMVUru01OW1miWyk5SRsq1eGlWBH+/MVf/9k=</xm
 </linearGradient>
 <rect
    x="1090"
-   y="458"
-   fill="url(#SVGID_15_)"
+   y="416.10999"
    width="37"
    height="112"
-   id="rect5554" />
+   id="rect5554"
+   style="fill:url(#SVGID_15_)" />
 <linearGradient
    id="SVGID_16_"
    gradientUnits="userSpaceOnUse"
    x1="1182.5"
    y1="290"
    x2="1182.5"
-   y2="570.0005">
+   y2="570.00049"
+   gradientTransform="translate(0,-41.890014)">
 	<stop
    offset="0"
    style="stop-color:#799B28"
@@ -15202,18 +15229,19 @@ UxV3o6j/AMsUn/BQ/wDVTFXejqP/ACxSf8FD/wBVMVUru01OW1miWyk5SRsq1eGlWBH+/MVf/9k=</xm
 </linearGradient>
 <rect
    x="1164"
-   y="290"
-   fill="url(#SVGID_16_)"
+   y="248.10999"
    width="37"
    height="280"
-   id="rect5561" />
+   id="rect5561"
+   style="fill:url(#SVGID_16_)" />
 <linearGradient
    id="SVGID_17_"
    gradientUnits="userSpaceOnUse"
    x1="1219.5"
    y1="385"
    x2="1219.5"
-   y2="570.0005">
+   y2="570.00049"
+   gradientTransform="translate(0,-41.890014)">
 	<stop
    offset="0"
    style="stop-color:#4C7520"
@@ -15229,34 +15257,38 @@ UxV3o6j/AMsUn/BQ/wDVTFXejqP/ACxSf8FD/wBVMVUru01OW1miWyk5SRsq1eGlWBH+/MVf/9k=</xm
 </linearGradient>
 <rect
    x="1201"
-   y="385"
-   fill="url(#SVGID_17_)"
+   y="343.10999"
    width="37"
    height="185"
-   id="rect5570" />
+   id="rect5570"
+   style="fill:url(#SVGID_17_)" />
 <text
-   transform="matrix(1 0 0 1 1130.6621 380.4663)"
-   font-family="'Arial-BoldMT'"
    font-size="14"
-   id="text5572">29</text>
+   id="text5572"
+   style="font-size:14px;font-family:Arial-BoldMT"
+   x="1130.6621"
+   y="338.57629">29</text>
 
 <text
-   transform="matrix(1 0 0 1 1167.3281 285.4663)"
-   font-family="'Arial-BoldMT'"
    font-size="14"
-   id="text5574">29</text>
+   id="text5574"
+   style="font-size:14px;font-family:Arial-BoldMT"
+   x="1167.3281"
+   y="243.57629">29</text>
 
 <text
-   transform="matrix(1 0 0 1 1204.6611 380.7998)"
-   font-family="'Arial-BoldMT'"
    font-size="14"
-   id="text5576">29</text>
+   id="text5576"
+   style="font-size:14px;font-family:Arial-BoldMT"
+   x="1204.6611"
+   y="338.90979">29</text>
 
 <text
-   transform="matrix(1 0 0 1 1093.3291 453.7998)"
-   font-family="'Arial-BoldMT'"
    font-size="14"
-   id="text5578">29</text>
+   id="text5578"
+   style="font-size:14px;font-family:Arial-BoldMT"
+   x="1093.3291"
+   y="411.90979">29</text>
 
 <linearGradient
    id="SVGID_18_"
@@ -15264,7 +15296,8 @@ UxV3o6j/AMsUn/BQ/wDVTFXejqP/ACxSf8FD/wBVMVUru01OW1miWyk5SRsq1eGlWBH+/MVf/9k=</xm
    x1="2104.5"
    y1="385"
    x2="2104.5"
-   y2="570.0005">
+   y2="570.00049"
+   gradientTransform="translate(0,-41.890014)">
 	<stop
    offset="0"
    style="stop-color:#ADC32B"
@@ -15276,18 +15309,19 @@ UxV3o6j/AMsUn/BQ/wDVTFXejqP/ACxSf8FD/wBVMVUru01OW1miWyk5SRsq1eGlWBH+/MVf/9k=</xm
 </linearGradient>
 <rect
    x="2086"
-   y="385"
-   fill="url(#SVGID_18_)"
+   y="343.10999"
    width="37"
    height="185"
-   id="rect5585" />
+   id="rect5585"
+   style="fill:url(#SVGID_18_)" />
 <linearGradient
    id="SVGID_19_"
    gradientUnits="userSpaceOnUse"
    x1="2067.5"
    y1="458"
    x2="2067.5"
-   y2="570">
+   y2="570"
+   gradientTransform="translate(0,-41.890014)">
 	<stop
    offset="0"
    style="stop-color:#D7DF23"
@@ -15299,18 +15333,19 @@ UxV3o6j/AMsUn/BQ/wDVTFXejqP/ACxSf8FD/wBVMVUru01OW1miWyk5SRsq1eGlWBH+/MVf/9k=</xm
 </linearGradient>
 <rect
    x="2049"
-   y="458"
-   fill="url(#SVGID_19_)"
+   y="416.10999"
    width="37"
    height="112"
-   id="rect5592" />
+   id="rect5592"
+   style="fill:url(#SVGID_19_)" />
 <linearGradient
    id="SVGID_20_"
    gradientUnits="userSpaceOnUse"
    x1="2141.5"
    y1="290"
    x2="2141.5"
-   y2="570.0005">
+   y2="570.00049"
+   gradientTransform="translate(0,-41.890014)">
 	<stop
    offset="0"
    style="stop-color:#799B28"
@@ -15322,18 +15357,19 @@ UxV3o6j/AMsUn/BQ/wDVTFXejqP/ACxSf8FD/wBVMVUru01OW1miWyk5SRsq1eGlWBH+/MVf/9k=</xm
 </linearGradient>
 <rect
    x="2123"
-   y="290"
-   fill="url(#SVGID_20_)"
+   y="248.10999"
    width="37"
    height="280"
-   id="rect5599" />
+   id="rect5599"
+   style="fill:url(#SVGID_20_)" />
 <linearGradient
    id="SVGID_21_"
    gradientUnits="userSpaceOnUse"
    x1="2178.5"
    y1="385"
    x2="2178.5"
-   y2="570.0005">
+   y2="570.00049"
+   gradientTransform="translate(0,-41.890014)">
 	<stop
    offset="0"
    style="stop-color:#4C7520"
@@ -15349,114 +15385,122 @@ UxV3o6j/AMsUn/BQ/wDVTFXejqP/ACxSf8FD/wBVMVUru01OW1miWyk5SRsq1eGlWBH+/MVf/9k=</xm
 </linearGradient>
 <rect
    x="2160"
-   y="385"
-   fill="url(#SVGID_21_)"
+   y="343.10999"
    width="37"
    height="185"
-   id="rect5608" />
+   id="rect5608"
+   style="fill:url(#SVGID_21_)" />
 <rect
    x="1446"
-   y="385"
-   fill="#ADC32B"
+   y="343.10999"
    width="37"
    height="185"
-   id="rect5610" />
+   id="rect5610"
+   style="fill:#adc32b" />
 <rect
    x="1409"
-   y="458"
-   fill="#D7DF23"
+   y="416.10999"
    width="37"
    height="112"
-   id="rect5612" />
+   id="rect5612"
+   style="fill:#d7df23" />
 <rect
    x="1483"
-   y="290"
-   fill="#799B28"
+   y="248.10999"
    width="37"
    height="280"
-   id="rect5614" />
+   id="rect5614"
+   style="fill:#799b28" />
 <rect
    x="1520"
-   y="385"
-   fill="#4C7520"
+   y="343.10999"
    width="37"
    height="185"
-   id="rect5616" />
+   id="rect5616"
+   style="fill:#4c7520" />
 <text
-   transform="matrix(1 0 0 1 1457 377)"
-   font-family="'Arial-BoldMT'"
    font-size="14"
-   id="text5618">29</text>
+   id="text5618"
+   style="font-size:14px;font-family:Arial-BoldMT"
+   x="1457"
+   y="335.10999">29</text>
 
 <text
-   transform="matrix(1 0 0 1 1494 282)"
-   font-family="'Arial-BoldMT'"
    font-size="14"
-   id="text5620">29</text>
+   id="text5620"
+   style="font-size:14px;font-family:Arial-BoldMT"
+   x="1494"
+   y="240.10999">29</text>
 
 <text
-   transform="matrix(1 0 0 1 1531 377)"
-   font-family="'Arial-BoldMT'"
    font-size="14"
-   id="text5622">29</text>
+   id="text5622"
+   style="font-size:14px;font-family:Arial-BoldMT"
+   x="1531"
+   y="335.10999">29</text>
 
 <text
-   transform="matrix(1 0 0 1 1420 450)"
-   font-family="'Arial-BoldMT'"
    font-size="14"
-   id="text5624">29</text>
+   id="text5624"
+   style="font-size:14px;font-family:Arial-BoldMT"
+   x="1420"
+   y="408.10999">29</text>
 
 <rect
    x="1771"
-   y="385"
-   fill="#ADC32B"
+   y="343.10999"
    width="37"
    height="185"
-   id="rect5626" />
+   id="rect5626"
+   style="fill:#adc32b" />
 <rect
    x="1734"
-   y="458"
-   fill="#D7DF23"
+   y="416.10999"
    width="37"
    height="112"
-   id="rect5628" />
+   id="rect5628"
+   style="fill:#d7df23" />
 <rect
    x="1808"
-   y="290"
-   fill="#799B28"
+   y="248.10999"
    width="37"
    height="280"
-   id="rect5630" />
+   id="rect5630"
+   style="fill:#799b28" />
 <rect
    x="1845"
-   y="385"
-   fill="#4C7520"
+   y="343.10999"
    width="37"
    height="185"
-   id="rect5632" />
+   id="rect5632"
+   style="fill:#4c7520" />
 <text
-   transform="matrix(1 0 0 1 1782 377)"
-   font-family="'Arial-BoldMT'"
    font-size="14"
-   id="text5634">29</text>
+   id="text5634"
+   style="font-size:14px;font-family:Arial-BoldMT"
+   x="1782"
+   y="335.10999">29</text>
 
 <text
-   transform="matrix(1 0 0 1 1819 282)"
-   font-family="'Arial-BoldMT'"
    font-size="14"
-   id="text5636">29</text>
+   id="text5636"
+   style="font-size:14px;font-family:Arial-BoldMT"
+   x="1819"
+   y="240.10999">29</text>
 
 <text
-   transform="matrix(1 0 0 1 1856 377)"
-   font-family="'Arial-BoldMT'"
    font-size="14"
-   id="text5638">29</text>
+   id="text5638"
+   style="font-size:14px;font-family:Arial-BoldMT"
+   x="1856"
+   y="335.10999">29</text>
 
 <text
-   transform="matrix(1 0 0 1 1745 450)"
-   font-family="'Arial-BoldMT'"
    font-size="14"
-   id="text5640">29</text>
+   id="text5640"
+   style="font-size:14px;font-family:Arial-BoldMT"
+   x="1745"
+   y="408.10999">29</text>
 
 <linearGradient
    id="SVGID_22_"
@@ -15464,7 +15508,8 @@ UxV3o6j/AMsUn/BQ/wDVTFXejqP/ACxSf8FD/wBVMVUru01OW1miWyk5SRsq1eGlWBH+/MVf/9k=</xm
    x1="1789.5"
    y1="385"
    x2="1789.5"
-   y2="404">
+   y2="404"
+   gradientTransform="translate(0,-41.890014)">
 	<stop
    offset="0"
    style="stop-color:#FFFFFF;stop-opacity:0.6"
@@ -15476,18 +15521,19 @@ UxV3o6j/AMsUn/BQ/wDVTFXejqP/ACxSf8FD/wBVMVUru01OW1miWyk5SRsq1eGlWBH+/MVf/9k=</xm
 </linearGradient>
 <rect
    x="1771"
-   y="385"
-   fill="url(#SVGID_22_)"
+   y="343.10999"
    width="37"
    height="19"
-   id="rect5647" />
+   id="rect5647"
+   style="fill:url(#SVGID_22_)" />
 <linearGradient
    id="SVGID_23_"
    gradientUnits="userSpaceOnUse"
    x1="1752.5"
    y1="458"
    x2="1752.5"
-   y2="477">
+   y2="477"
+   gradientTransform="translate(0,-41.890014)">
 	<stop
    offset="0"
    style="stop-color:#FFFFFF;stop-opacity:0.6"
@@ -15499,18 +15545,19 @@ UxV3o6j/AMsUn/BQ/wDVTFXejqP/ACxSf8FD/wBVMVUru01OW1miWyk5SRsq1eGlWBH+/MVf/9k=</xm
 </linearGradient>
 <rect
    x="1734"
-   y="458"
-   fill="url(#SVGID_23_)"
+   y="416.10999"
    width="37"
    height="19"
-   id="rect5654" />
+   id="rect5654"
+   style="fill:url(#SVGID_23_)" />
 <linearGradient
    id="SVGID_24_"
    gradientUnits="userSpaceOnUse"
    x1="1863.7861"
    y1="385"
    x2="1863.7861"
-   y2="404">
+   y2="404"
+   gradientTransform="translate(0,-41.890014)">
 	<stop
    offset="0"
    style="stop-color:#FFFFFF;stop-opacity:0.6"
@@ -15522,18 +15569,19 @@ UxV3o6j/AMsUn/BQ/wDVTFXejqP/ACxSf8FD/wBVMVUru01OW1miWyk5SRsq1eGlWBH+/MVf/9k=</xm
 </linearGradient>
 <rect
    x="1845.286"
-   y="385"
-   fill="url(#SVGID_24_)"
+   y="343.10999"
    width="37"
    height="19"
-   id="rect5661" />
+   id="rect5661"
+   style="fill:url(#SVGID_24_)" />
 <linearGradient
    id="SVGID_25_"
    gradientUnits="userSpaceOnUse"
    x1="1826.5"
    y1="290"
    x2="1826.5"
-   y2="309">
+   y2="309"
+   gradientTransform="translate(0,-41.890014)">
 	<stop
    offset="0"
    style="stop-color:#FFFFFF;stop-opacity:0.6"
@@ -15545,18 +15593,19 @@ UxV3o6j/AMsUn/BQ/wDVTFXejqP/ACxSf8FD/wBVMVUru01OW1miWyk5SRsq1eGlWBH+/MVf/9k=</xm
 </linearGradient>
 <rect
    x="1808"
-   y="290"
-   fill="url(#SVGID_25_)"
+   y="248.10999"
    width="37"
    height="19"
-   id="rect5668" />
+   id="rect5668"
+   style="fill:url(#SVGID_25_)" />
 <linearGradient
    id="SVGID_26_"
    gradientUnits="userSpaceOnUse"
    x1="2086"
    y1="477.5"
    x2="2123"
-   y2="477.5">
+   y2="477.5"
+   gradientTransform="translate(0,-41.890014)">
 	<stop
    offset="0"
    style="stop-color:#FFFFFF;stop-opacity:0.35"
@@ -15568,18 +15617,19 @@ UxV3o6j/AMsUn/BQ/wDVTFXejqP/ACxSf8FD/wBVMVUru01OW1miWyk5SRsq1eGlWBH+/MVf/9k=</xm
 </linearGradient>
 <rect
    x="2086"
-   y="385"
-   fill="url(#SVGID_26_)"
+   y="343.10999"
    width="37"
    height="185"
-   id="rect5675" />
+   id="rect5675"
+   style="fill:url(#SVGID_26_)" />
 <linearGradient
    id="SVGID_27_"
    gradientUnits="userSpaceOnUse"
    x1="2123"
    y1="430"
    x2="2160"
-   y2="430">
+   y2="430"
+   gradientTransform="translate(0,-41.890014)">
 	<stop
    offset="0"
    style="stop-color:#FFFFFF;stop-opacity:0.35"
@@ -15591,18 +15641,19 @@ UxV3o6j/AMsUn/BQ/wDVTFXejqP/ACxSf8FD/wBVMVUru01OW1miWyk5SRsq1eGlWBH+/MVf/9k=</xm
 </linearGradient>
 <rect
    x="2123"
-   y="290"
-   fill="url(#SVGID_27_)"
+   y="248.10999"
    width="37"
    height="280"
-   id="rect5682" />
+   id="rect5682"
+   style="fill:url(#SVGID_27_)" />
 <linearGradient
    id="SVGID_28_"
    gradientUnits="userSpaceOnUse"
    x1="2049"
    y1="514"
    x2="2086"
-   y2="514">
+   y2="514"
+   gradientTransform="translate(0,-41.890014)">
 	<stop
    offset="0"
    style="stop-color:#FFFFFF;stop-opacity:0.35"
@@ -15614,18 +15665,19 @@ UxV3o6j/AMsUn/BQ/wDVTFXejqP/ACxSf8FD/wBVMVUru01OW1miWyk5SRsq1eGlWBH+/MVf/9k=</xm
 </linearGradient>
 <rect
    x="2049"
-   y="458"
-   fill="url(#SVGID_28_)"
+   y="416.10999"
    width="37"
    height="112"
-   id="rect5689" />
+   id="rect5689"
+   style="fill:url(#SVGID_28_)" />
 <linearGradient
    id="SVGID_29_"
    gradientUnits="userSpaceOnUse"
    x1="2160"
    y1="477.5"
    x2="2197"
-   y2="477.5">
+   y2="477.5"
+   gradientTransform="translate(0,-41.890014)">
 	<stop
    offset="0"
    style="stop-color:#FFFFFF;stop-opacity:0.35"
@@ -15637,11 +15689,11 @@ UxV3o6j/AMsUn/BQ/wDVTFXejqP/ACxSf8FD/wBVMVUru01OW1miWyk5SRsq1eGlWBH+/MVf/9k=</xm
 </linearGradient>
 <rect
    x="2160"
-   y="385"
-   fill="url(#SVGID_29_)"
+   y="343.10999"
    width="37"
    height="185"
-   id="rect5696" />
+   id="rect5696"
+   style="fill:url(#SVGID_29_)" />
 <linearGradient
    id="SVGID_30_"
    gradientUnits="userSpaceOnUse"
@@ -15659,9 +15711,10 @@ UxV3o6j/AMsUn/BQ/wDVTFXejqP/ACxSf8FD/wBVMVUru01OW1miWyk5SRsq1eGlWBH+/MVf/9k=</xm
    id="stop5701" />
 </linearGradient>
 <polygon
-   fill="url(#SVGID_30_)"
-   points="2153,302 2130,302 2123,290 2160,290 "
-   id="polygon5703" />
+   points="2123,290 2160,290 2153,302 2130,302 "
+   id="polygon5703"
+   style="fill:url(#SVGID_30_)"
+   transform="translate(0,-41.890014)" />
 <linearGradient
    id="SVGID_31_"
    gradientUnits="userSpaceOnUse"
@@ -15679,9 +15732,10 @@ UxV3o6j/AMsUn/BQ/wDVTFXejqP/ACxSf8FD/wBVMVUru01OW1miWyk5SRsq1eGlWBH+/MVf/9k=</xm
    id="stop5708" />
 </linearGradient>
 <polygon
-   fill="url(#SVGID_31_)"
-   points="2116,397 2093,397 2086,385 2123,385 "
-   id="polygon5710" />
+   points="2086,385 2123,385 2116,397 2093,397 "
+   id="polygon5710"
+   style="fill:url(#SVGID_31_)"
+   transform="translate(0,-41.890014)" />
 <linearGradient
    id="SVGID_32_"
    gradientUnits="userSpaceOnUse"
@@ -15699,9 +15753,10 @@ UxV3o6j/AMsUn/BQ/wDVTFXejqP/ACxSf8FD/wBVMVUru01OW1miWyk5SRsq1eGlWBH+/MVf/9k=</xm
    id="stop5715" />
 </linearGradient>
 <polygon
-   fill="url(#SVGID_32_)"
-   points="2079,470 2056,470 2049,458 2086,458 "
-   id="polygon5717" />
+   points="2049,458 2086,458 2079,470 2056,470 "
+   id="polygon5717"
+   style="fill:url(#SVGID_32_)"
+   transform="translate(0,-41.890014)" />
 <linearGradient
    id="SVGID_33_"
    gradientUnits="userSpaceOnUse"
@@ -15719,7 +15774,8 @@ UxV3o6j/AMsUn/BQ/wDVTFXejqP/ACxSf8FD/wBVMVUru01OW1miWyk5SRsq1eGlWBH+/MVf/9k=</xm
    id="stop5722" />
 </linearGradient>
 <polygon
-   fill="url(#SVGID_33_)"
-   points="2190,397 2167,397 2160,385 2197,385 "
-   id="polygon5724" />
+   points="2160,385 2197,385 2190,397 2167,397 "
+   id="polygon5724"
+   style="fill:url(#SVGID_33_)"
+   transform="translate(0,-41.890014)" />
 </svg>
