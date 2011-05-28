@@ -12,6 +12,7 @@
         <script src="../../src/kendo.chart.js"></script>
         <script type="text/javascript">
             var Chart = kendo.ui.Chart,
+                Box = Chart.Box,
                 contentElementStub = {
                     render: function() { return "Content"; }
                 };
@@ -58,15 +59,20 @@
                 });
 
                 test("rect returns SVGPath", function() {
-                    var rect = factory.rect(10, 20, 100, 100);
+                    var rect = factory.rect(new Box(10, 20, 110, 120));
                     ok(rect instanceof Chart.SVGPath);
                 });
 
                 test("rect draws rectangle", function() {
-                    var rect = factory.rect(10, 20, 100, 200);
+                    var rect = factory.rect(new Box(10, 20, 110, 220));
                     deepEqual(rect.points, [
                         [10, 20], [110, 20], [110, 220], [10, 220], [10, 20]
                     ]);
+                });
+
+                test("rect sets fill color", function() {
+                    var rect = factory.rect(new Box(10, 20, 110, 220), { fill: "#f00" });
+                    equal(rect.options.fill, "#f00");
                 });
 
                 test("line returns SVGPath", function() {
@@ -168,6 +174,11 @@
                 test("draws line", function() {
                     path.points.push([20, 30], [40, 50]);
                     equal(path.renderPoints(), "M10.5 20.5 L20.5 30.5 L40.5 50.5");
+                });
+
+                test("renders fill color", function() {
+                    path.options.fill = "#f00";
+                    ok(path.render().indexOf("fill='#f00'") > -1);
                 });
 
             })();

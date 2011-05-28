@@ -10,6 +10,7 @@
     <body>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.chart.js"></script>
+        <script src="util.js"></script>
         <script type="text/javascript">
             var Chart = kendo.ui.Chart,
                 Box = Chart.Box,
@@ -22,15 +23,6 @@
             BarStub.prototype = {
                 updateLayout: function(box) {
                     this.box = box;
-                }
-            };
-
-            function ViewFactoryStub() {
-                this.renderedRects = [];
-            }
-            ViewFactoryStub.prototype = {
-                rect: function(x, y, width, height) {
-                    this.renderedRects.push([].slice.call(arguments));
                 }
             };
 
@@ -466,6 +458,44 @@
                     same(barWidths, [1, 1, 2, 2]);
                 });
 
+            })();
+
+            (function() {
+                var barChart;
+
+                function PlotAreaStub() { }
+
+                $.extend(PlotAreaStub.prototype, {
+                    axisX: {
+                        getSlot: function(value) {
+                            return new Box();
+                        }
+                    },
+
+                    axisY: {
+                        getSlot: function(categoryIndex) {
+                            return new Box();
+                        }
+                    }
+                });
+
+                module("Bar Chart / Configuration", {
+                    setup: function() {
+                        plotArea = new PlotAreaStub();
+                        barChart = new Chart.BarChart(plotArea, {
+                            series: [{
+                                data: [0, 1],
+                                style: {
+                                    fill: "#f00"
+                                }
+                            }]
+                        });
+                    }
+                });
+
+                test("applies series fill color to bars", function() {
+                    equal(barChart._bars[0].options.style.fill, "#f00");
+                });
             })();
 
             (function() {

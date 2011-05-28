@@ -10,6 +10,7 @@
     <body>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.chart.js"></script>
+        <script src="util.js"></script>
         <script type="text/javascript">
 
             var Chart = kendo.ui.Chart,
@@ -257,6 +258,41 @@
                     deepEqual([legend.box.y1, legend.box.y2], [chartBox.y1, chartBox.y2]);
                 });
 
+            })();
+
+            (function() {
+                var Bar = Chart.Bar,
+                    bar,
+                    box,
+                    factory;
+
+                module("Bar", {
+                    setup: function() {
+                        box = new Box(0, 0, 100, 100);
+                        bar = new Bar();
+                        factory = new ViewFactoryStub();
+
+                        bar.updateLayout(box);
+                    }
+                });
+
+                test("fills target box", function() {
+                    sameBox(bar.box, box);
+                });
+
+                test("renders rectangle", function() {
+                    bar.getViewElements(factory);
+
+                    var rect = factory.log.rect[0];
+                    sameBox(rect, box);
+                });
+
+                test("sets fill color", function() {
+                    bar.getViewElements(factory);
+                    var rect = factory.log.rect[0];
+
+                    same(rect.style.fill, bar.options.style.fill);
+                });
             })();
 
         </script>

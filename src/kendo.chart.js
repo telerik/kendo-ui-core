@@ -975,8 +975,10 @@
     Bar.prototype = new ChartElement();
     $.extend(Bar.prototype, {
         options: {
-            fill: "#000",
-            borderWidth: 1
+            style: {
+                fill: "#000",
+                borderWidth: 1
+            }
         },
 
         updateLayout: function(targetBox) {
@@ -986,11 +988,14 @@
         getViewElements: function(factory) {
             var bar = this,
                 options = bar.options,
-                box = bar.box;
+                box = bar.box,
+                elements = [];
 
-            return [
-                factory.rect(box.x1, box.y1, box.width(), box.height())
-            ];
+            elements.push(
+                factory.rect(box, options.style)
+            );
+
+            return elements;
         }
     });
 
@@ -1023,7 +1028,7 @@
                 positiveSums = [],
                 negativeSums = [];
 
-            barChart.traverseDataPoints(function(value, categoryIx) {
+            barChart.traverseDataPoints(function(value, categoryIx, series) {
                 if (isStacked) {
                     var sums = value > 0 ? positiveSums : negativeSums;
                     if (sums.length === categoryIx) {
@@ -1036,7 +1041,7 @@
                     barChart._seriesMax = Math.max(barChart._seriesMax, value);
                 }
 
-                barChart.addValue(value, categoryIx);
+                barChart.addValue(value, categoryIx, series);
             });
 
             if (negativeSums.length === 0) {
@@ -1053,13 +1058,13 @@
             }
         },
 
-        addValue: function(value, categoryIx) {
+        addValue: function(value, categoryIx, series) {
             var barChart = this,
                 options = barChart.options,
                 children = barChart.children,
                 isStacked = barChart.options.isStacked;
 
-            var bar = new Bar();
+            var bar = new Bar({ style: series.style });
             barChart._bars.push(bar);
 
             var cluster = children[categoryIx];
@@ -1146,9 +1151,10 @@
 
             for (var categoryIx = 0; categoryIx < categoriesCount; categoryIx++) {
                 for (var seriesIx = 0; seriesIx < series.length; seriesIx++) {
-                    var value = series[seriesIx].data[categoryIx];
+                    var currentSeries = series[seriesIx],
+                        value = currentSeries.data[categoryIx];
 
-                    callback(value, categoryIx);
+                    callback(value, categoryIx, currentSeries);
                 }
             }
        }
@@ -1307,10 +1313,11 @@
             return new SVGText(content, options);
         },
 
-        rect: function(x, y, width, height) {
+        rect: function(box, style) {
             return new SVGPath(
-                [[x, y], [x + width, y],
-                [x + width, y + height], [x, y + height], [x, y]]
+                [[box.x1, box.y1], [box.x2, box.y1],
+                [box.x2, box.y2], [box.x1, box.y2], [box.x1, box.y1]],
+                style
             );
         },
 
@@ -1400,8 +1407,7 @@
     });
 
     function SVGPath(points, options) {
-        var path = this,
-            options = $.extend({}, path.options, options);
+        var path = this;
 
         ViewElement.call(path);
         path.template = SVGPath.template;
@@ -1413,6 +1419,7 @@
         }
 
         path.points = points || [];
+        path.options = $.extend({}, path.options, options);
     }
 
     SVGPath.prototype = new ViewElement();
@@ -1452,10 +1459,11 @@
             return new VMLText(content, options);
         },
 
-        rect: function(x, y, width, height) {
+        rect: function(box, style) {
             return new VMLPath(
-                [[x, y], [x + width, y],
-                [x + width, y + height], [x, y + height], [x, y]]
+                [[box.x1, box.y1], [box.x2, box.y1],
+                [box.x2, box.y2], [box.x1, box.y2], [box.x1, box.y1]],
+                style
             );
         },
 
@@ -1521,27 +1529,28 @@
     });
 
     function VMLPath(points, options) {
-        var path = this,
-            options = $.extend({}, path.options, options);
-
+        var path = this;
         ViewElement.call(path);
+
         path.template = VMLPath.template;
         if (!path.template) {
             path.template = VMLPath.template = kendo.template(
                 "<kvml:shape style='position:absolute; width:1px; height:1px;' " +
-                "strokecolor='<%= options.stroke %>' " +
+                "strokecolor='<%= options.stroke %>' fillcolor='<%= options.fill %>' " +
                 "coordorigin='0 0' coordsize='1 1'>" +
                 "<kvml:path v='<%= renderPoints() %> e' /></kvml:shape>"
             );
         }
 
         path.points = points || [];
+        path.options = $.extend({}, path.options, options);
     }
 
     VMLPath.prototype = new ViewElement();
     $.extend(VMLPath.prototype, {
         options: {
-            stroke: "#000"
+            stroke: "#000",
+            fill: "#fff"
         },
 
         renderPoints: function() {
@@ -1690,6 +1699,7 @@
     Chart.RootElement = RootElement;
     Chart.NumericAxis = NumericAxis;
     Chart.CategoryAxis = CategoryAxis;
+    Chart.Bar = Bar;
     Chart.BarChart = BarChart;
     Chart.ClusterLayout = ClusterLayout;
     Chart.StackLayout = StackLayout;

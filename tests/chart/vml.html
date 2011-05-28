@@ -12,6 +12,7 @@
         <script src="../../src/kendo.chart.js"></script>
         <script type="text/javascript">
             var Chart = kendo.ui.Chart,
+                Box = Chart.Box,
                 contentElementStub = {
                     render: function() { return "Content"; }
                 };
@@ -58,10 +59,15 @@
                 });
 
                 test("rect draws rectangle", function() {
-                    var rect = factory.rect(10, 20, 100, 200);
+                    var rect = factory.rect(new Box(10, 20, 110, 220));
                     deepEqual(rect.points, [
                         [10, 20], [110, 20], [110, 220], [10, 220], [10, 20]
                     ]);
+                });
+
+                test("rect sets fill color", function() {
+                    var rect = factory.rect(new Box(10, 20, 110, 220), { fill: "#f00" });
+                    equal(rect.options.fill, "#f00");
                 });
 
                 test("line returns VMLPath", function() {
@@ -130,7 +136,7 @@
                 test("renders path tag", function() {
                     equal(path.render(),
                     "<kvml:shape style='position:absolute; width:1px; height:1px;' " +
-                        "strokecolor='#000' coordorigin='0 0' coordsize='1 1'>" +
+                        "strokecolor='#000' fillcolor='#fff' coordorigin='0 0' coordsize='1 1'>" +
                         "<kvml:path v='m 10,20 e' />" +
                     "</kvml:shape>");
                 });
@@ -142,6 +148,11 @@
                 test("draws line", function() {
                     path.points.push([20, 30], [40, 50]);
                     equal(path.renderPoints(), "m 10,20 l 20,30, 40,50");
+                });
+
+                test("renders fill color", function() {
+                    path.options.fill = "#f00";
+                    ok(path.render().indexOf("fillcolor='#f00'") > -1);
                 });
 
             })();
