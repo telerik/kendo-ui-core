@@ -17,6 +17,7 @@
         CHANGE = "change",
         ERROR = "error",
         crud = [CREATE, READ, UPDATE, DESTROY],
+        identity = function(o) { return o; },
         stringify = kendo.stringify;
 
 
@@ -50,8 +51,7 @@
         read: function(options) {
             options.success(this.data);
         },
-        update: function() {
-        }
+        update: noop
     });
 
     var RemoteTransport = Class.extend( {
@@ -78,18 +78,10 @@
 
         options: {
             dialect: {
-                read: function(data) {
-                    return data;
-                },
-                update: function(data) {
-                    return data;
-                },
-                destroy: function(data) {
-                    return data;
-                },
-                create: function(data) {
-                    return data;
-                }
+                read: identity,
+                update: identity,
+                destroy: identity,
+                create: identity
             }
         },
 
@@ -233,9 +225,7 @@
             id = model.id;
 
             that._reader = extend({
-                data: function (data) {
-                    return data;
-                },
+                data: identity,
                 total: function(data) {
                     return data.length;
                 }
@@ -276,7 +266,7 @@
 
         model: function(id) {
             var that = this,
-            model = that._models[id];
+                model = that._models[id];
 
             if(!model) {
                 that._models[id] = model = new that.options.model(that.find(id));
@@ -301,7 +291,7 @@
             var models = this._models,
                 result = [],
                 model,
-                selector = selector || function(m) { return m; },
+                selector = selector || identity,
                 id;
 
             for (id in models) {
@@ -497,10 +487,10 @@
 
         query: function(options) {
             var that = this,
-            options = options,
-            remote = that.options.serverSorting || that.options.serverPaging || that.options.serverFiltering;
+                options = options,
+                remote = that.options.serverSorting || that.options.serverPaging || that.options.serverFiltering;
 
-            if(options !== undefined) {
+            if (options !== undefined) {
                 that._pageSize = options.pageSize;
                 that._page = options.page;
                 that._sort = options.sort;
@@ -522,6 +512,7 @@
                 that.trigger(CHANGE);
             }
         },
+
         page: function(val) {
             var that = this;
 
@@ -532,6 +523,7 @@
             }
             return that._page;
         },
+
         pageSize: function(val) {
             var that = this;
 
@@ -542,6 +534,7 @@
 
             return that._pageSize;
         },
+
         sort: function(val) {
             var that = this;
 
@@ -552,6 +545,7 @@
 
             return this._sort;
         },
+
         filter: function(val) {
             var that = this;
 
@@ -562,12 +556,14 @@
 
             return that._filter;
         },
+
         total: function() {
             return this._total;
         },
+
         _totalPages: function() {
             var that = this,
-            pageSize = that.pageSize() || that.total();
+                pageSize = that.pageSize() || that.total();
 
             return Math.ceil((that.total() || 0) / pageSize);
         }
