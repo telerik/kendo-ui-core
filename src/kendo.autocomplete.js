@@ -6,7 +6,6 @@
         CHANGE = "change",
         CHARACTER = "character",
         SELECTED = "t-state-selected",
-        FOCUSED = "t-state-focused",
         proxy = $.proxy,
         extend = $.extend;
 
@@ -194,9 +193,23 @@
 
             if (value !== undefined) {
                 element.value = value;
+                //that.previous = element.val();
             } else {
                 return element.value;
             }
+        },
+
+        _accept: function(li) {
+            var that = this;
+
+            that.select(li);
+            that._blur();
+
+            if (that.element[0] !== document.activeElement) {
+                that.element.focus();
+            }
+
+            moveCaretAtEnd(that.element[0]);
         },
 
         _move: function(li) {

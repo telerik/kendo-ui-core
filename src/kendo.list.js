@@ -41,17 +41,6 @@
             }
         },
 
-        _accept: function(li) {
-            var that = this;
-
-            that.select(li);
-            that._blur();
-
-            if (that.wrapper[0] !== document.activeElement) {
-                that.wrapper.focus();
-            }
-        },
-
         _blur: function() {
             var that = this;
 
