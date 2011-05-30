@@ -101,6 +101,10 @@
             that._modified = false;
 
             for (field in values) {
+                if(field === that.idField) {
+                    continue;
+                }
+
                 accessor = that.accessor(field);
 
                 value = values[field];
@@ -143,6 +147,10 @@
                     modified = modified || {};
                     modified[field] = data[field];
                 }
+            }
+
+            if(modified !== null) {
+                modified[that.idField] = that.id();
             }
 
             return modified;
