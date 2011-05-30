@@ -8,7 +8,7 @@
         data = window.data,
         photosInSet = false,
         searching = false,
-        defaultReader = {
+        defaultDeserializer = {
             data: function(result) {
                 if(photosInSet) {
                     return result.photoset.photo;
@@ -52,7 +52,7 @@
                     return flickr.getSetsParams({jsoncallback: "getSets"});
                 }
             },
-            reader: {
+            deserializer: {
                 data: function(result) {
                     var sets = [];
                     if (result.stat == "ok" && result.photosets.photoset) {
@@ -67,7 +67,7 @@
             serverSorting: true,
             pageSize: 20,
             dialect: defaultDialect,
-            reader: defaultReader,
+            deserializer: defaultDeserializer,
             jsoncallback: "defaultCallback"
         }),
         photoSetId = function() {
@@ -100,7 +100,7 @@
             $("#exifButton").fadeOut();
             changeState("searchresult");
             setPhotosDataSource.transport.dialect = searchDialect;
-            setPhotosDataSource._reader = searchReader;
+            setPhotosDataSource._deserializer = searchDeserializer;
 
             if (!$.support.cors) {
                 setPhotosDataSource.transport.options.read.jsonpCallback = "searchPhotos";
@@ -118,7 +118,7 @@
         if (state == "initial") {
             el.text("");
             setPhotosDataSource.transport.dialect = defaultDialect;
-            setPhotosDataSource._reader = defaultReader;
+            setPhotosDataSource._deserialize = defaultDeserialize;
 
             if (!$.support.cors) {
                 setPhotosDataSource.transport.options.read.jsonpCallback = "defaultCallback";

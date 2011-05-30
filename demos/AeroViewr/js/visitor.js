@@ -20,7 +20,7 @@ var visitor = window.visitor,
                 return flickr.searchParams(params);
             }
         },
-        reader: searchReader,
+        deserializer: searchDeserializer,
         jsoncallback: "searchPhotos"
     }),
     mostPopularDataSource = data.dataSource({
@@ -34,7 +34,7 @@ var visitor = window.visitor,
                 return flickr.mostPopularParams(params);
             }
         },
-        reader: searchReader,
+        deserializer: searchDeserializer,
         jsoncallback: "mostPopularPhotos"
     });
 

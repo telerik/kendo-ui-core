@@ -41,7 +41,7 @@ if (!isInferiorBrowser) {
                     });
                 }
             },
-            reader: {
+            deserializer: {
                 data: function(result) {
                     if(result && result.tags) {
                         return $.map(result.tags.tag, function(tag) {
