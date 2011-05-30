@@ -16,42 +16,82 @@
                 kendo.ui.Chart.CategoryAxis.prototype.options.isVertical = false;
 
                 $("#container").kendoChart({
-                    theme: "Black",
-                    title: "Title",
+                    title: { text:
+                        "Title"
+                    },
+                    seriesDefaults: {
+                        type: "bar",
+                        stacked: true
+                    },
                     series: [{
                         name: "Value A",
-                        type: "bar",
-                        data: [15, 40, 40],
-                        stack: "A",
-                        style: {
-                            fill: "#ffa500"
-                        }
+                        dataSource: [15, 40, 40],
                     }, {
                         name: "Value B",
-                        type: "bar",
                         data: [-100, -200, -300],
-                        stack: "A",
-                        style: {
-                            fill: "#ccff00"
-                        }
                     }, {
                         name: "Value C",
-                        type: "bar",
                         data: [15, 25, 35],
-                        stack: "B",
-                        style: {
-                            fill: "#00ff00"
-                        }
                     }],
-                    seriesDefaults: {
-                        stack: true
-                    },
-                    axisX: {
+                    categoryAxis: {
                         labels: ["Alpha", "Beta", "Charlie"]
                     }
                 });
             });
 
+            var options = {
+                theme: "", // Built-in theme name or custom theme object
+                title: {
+                    text: "",
+                    font: "18px Verdana, sans-serif",
+                    position: "top", // "top", "bottom"
+                    textAlign: "center" // "left", "center", "right"
+                },
+                legend: {
+                    font: "12px Verdana, sans-serif",
+                    position: "top", // "top", "bottom", "left", "right"
+                    visible: true
+                },
+                plotArea: {
+                    background: "#fff"
+                },
+                chartArea: {
+                    background: "#fff"
+                },
+                axisDefaults: {
+                    tickSize: 3,
+                    majorTickType: "outside", // "outside", "inside", "none", "cross"
+                    minorTickType: "none" // "outside", "inside", "none", "cross"
+                },
+                series: [ ],
+                seriesColors: ["#d7df23", "#adc32b", "#799b28", "#4c7520"],
+                seriesDefaults: {
+                    type: "column",
+                    bar: {
+                        gap: 1.5,
+                        borderWidth: 0,
+                        borderColor: "",
+                        glassEffect: false,
+                        labels: {
+                            visible: false,
+                            position: "outsideEnd",
+                            // "outsideEnd", "insideEnd", "insideBase", "center"
+                            color: "" // Derived from theme
+                        }
+                    }
+                }
+            };
+
+            themes = {
+                helloKitty: {
+                    seriesColors: ["#d7df23", "#adc32b", "#799b28", "#4c7520"],
+                    seriesDefaults: {
+                        bar: {
+                            glassEffect: true
+                        }
+                    }
+                }
+            }
         </script>
 
         <div id="container" style="width: 800px; height: 600px;">
