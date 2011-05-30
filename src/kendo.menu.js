@@ -109,7 +109,7 @@
                         }));
                         item.css('z-index', that.nextItemZIndex++);
                     }
-                }, that.options.hoverDelay)); // TODO: make an option
+                }, that.options.hoverDelay));
             });
         },
 
@@ -218,15 +218,13 @@
 
         _documentClick: function (e) {
             var that = this;
-            
-            if (contains(that.element, e.currentTarget))
+
+            if (!contains(that.element, e.target))
                 return;
 
             if (that.clicked) {
                 that.clicked = false;
-                that.element.children('.t-item').each(function (i, item) {
-                    that.close($(item));
-                });
+                that.close(that.element.children('.t-item'));
             }
         },
 
