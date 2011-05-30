@@ -198,6 +198,19 @@
             }
         },
 
+        _accept: function(li) {
+            var that = this;
+
+            that.select(li);
+            that._blur();
+
+            if (that.element[0] !== document.activeElement) {
+                that.element.focus();
+            }
+
+            moveCaretAtEnd(that.element[0]);
+        },
+
         _move: function(li) {
             var that = this;
 
