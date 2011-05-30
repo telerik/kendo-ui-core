@@ -112,8 +112,8 @@
             return params;
         },
 
-        getRelatedTagParams: function(text) {
-            return this.params(this.methods.getRelatedTags, { tag: text });
+        getRelatedTagParams: function(data) {
+            return this.params(this.methods.getRelatedTags, data);
         },
 
         getPhotoInfo: function(id, callback) {

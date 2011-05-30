@@ -14,24 +14,28 @@ var visitor = window.visitor,
                 var params = {
                     text: $("#searchBox").val(),
                     extras: EXTRAS,
-                    per_page: PAGESIZE
+                    per_page: PAGESIZE,
+                    jsoncallback: "searchPhotos"
                 };
                 return flickr.searchParams(params);
             }
         },
-        reader: searchReader
+        reader: searchReader,
+        jsoncallback: "searchPhotos"
     }),
     mostPopularDataSource = data.dataSource({
         dialect: {
             read: function(data) {
                 var params = {
                     extras: EXTRAS,
-                    per_page: 100
+                    per_page: 100,
+                    jsoncallback: "mostPopularPhotos"
                 };
                 return flickr.mostPopularParams(params);
             }
         },
-        reader: searchReader
+        reader: searchReader,
+        jsoncallback: "mostPopularPhotos"
     });
 
    function showSelectedPhoto(ui) {
@@ -79,7 +83,7 @@ var visitor = window.visitor,
             }));
         },
         search: function(el) {
-            if ($("#searchBox").val() && !searching) {
+            if ($("#searchBox").val()) {
                 $("#overlay").after("<div id='searchLoading' class='loading'>Loading ...</div>");
                 searching = true;
                 dataSource.query({page: 1, pageSize: $("#mainTemplate").find("#grid").hasClass("currentView") ? 5 : 20});
@@ -157,6 +161,7 @@ var visitor = window.visitor,
                 }
             });
 
+
             $(".i-gridview").click(function() {
                 dataSource.query({page: 1, pageSize: 5});
                 $(this).addClass("currentView");
@@ -179,8 +184,8 @@ var visitor = window.visitor,
                 $("#mainPhotoGrid").hide();
                 $("#mainPhotoStrip").show();
                 $("#slider").parent().show();
-                $("#overlay").stop(true, true).fadeIn();
-                $("#exifButton").stop(true, true).fadeOut();
+                $("#overlay").fadeIn();
+                $("#exifButton").fadeOut();
             });
 
             $(".bottomLink").bind("click", function(e){
@@ -194,23 +199,23 @@ var visitor = window.visitor,
                     $("#mainTemplate").show();
                     $("#flatMostPopularPhotos").hide();
                     $(".i-tileview").click();
-                    $("#viewslideshow, #uploadphotos").stop(true, true).fadeOut();
+                    $("#viewslideshow, #uploadphotos").fadeOut();
                     element.text("Back to most popular");
                     slideshow.init($("#flatSearchPhotos").data("kendoListView"));
                 } else if (view === "mainTemplate"){
                     element.data("currentView", "flatMostPopularPhotos");
                     $("#flatSearchPhotos").hide();
                     $("#mainTemplate").hide();
-                    $("#overlay").stop(true, true).fadeOut();
-                    $("#exifButton").stop(true, true).fadeIn();
+                    $("#overlay").fadeOut();
+                    $("#exifButton").fadeIn();
                     $("#flatMostPopularPhotos").show();
-                    $("#viewslideshow, #uploadphotos").stop(true, true).fadeIn();
+                    $("#viewslideshow, #uploadphotos").fadeIn();
                     element.text("Back to search results");
                     slideshow.init($("#flatMostPopularPhotos").data("kendoListView"));
                 }
 
                 updatePlayIcon(slideshow._started)
-                    .add("#uploadphotos").stop(true, true).fadeIn();
+                    .add("#uploadphotos").fadeIn();
             });
 
             that.thumbList.append($("#flatSearchPhotos"));
@@ -269,7 +274,7 @@ var visitor = window.visitor,
                     setTimeout(function(){
                         hideExif();
                     }, 300);
-                }                
+                }
 
                 slideshow.toggle();
                 updatePlayIcon(slideshow._started);

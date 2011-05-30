@@ -27,14 +27,16 @@
                 var params = {
                     text: $("#searchBox").val(),
                     extras: EXTRAS,
-                    per_page: PAGESIZE
+                    per_page: PAGESIZE,
+                    jsoncallback: "searchPhotos"
                 };
                 return flickr.searchParams(params);
             }
         },
         defaultDialect = {
             read: function(data) {
-                var params = { extras: "owner_name,tags", per_page: PAGESIZE };
+                var params = { extras: "owner_name,tags", per_page: PAGESIZE, jsoncallback: "defaultCallback"};
+
                 if(photosInSet) {
                     params.photoset_id = photoSetId();
                     return flickr.getInSetParams(params);
@@ -47,7 +49,7 @@
         setsDataSource = data.dataSource({
             dialect: {
                 read: function(data) {
-                    return flickr.getSetsParams({});
+                    return flickr.getSetsParams({jsoncallback: "getSets"});
                 }
             },
             reader: {
@@ -58,13 +60,15 @@
                     }
                     return sets;
                 }
-            }
+            },
+            jsoncallback: "getSets"
         }),
         setPhotosDataSource = data.dataSource({
             serverSorting: true,
             pageSize: 20,
             dialect: defaultDialect,
-            reader: defaultReader
+            reader: defaultReader,
+            jsoncallback: "defaultCallback"
         }),
         photoSetId = function() {
             var setId = $("#flatSetsStrip").data("kendoListView").selected().attr("data-setid");
@@ -98,6 +102,10 @@
             setPhotosDataSource.transport.dialect = searchDialect;
             setPhotosDataSource._reader = searchReader;
 
+            if (!$.support.cors) {
+                setPhotosDataSource.transport.options.read.jsonpCallback = "searchPhotos";
+            }
+
             $("#overlay").after("<div id='searchLoading' class='loading'>Loading ...</div>");
             setPhotosDataSource.query({page: 1, pageSize: $("#mainUserWrap").find("#gridNotInSetPhotos").hasClass("currentView") ? 5 : 20});
         }
@@ -111,6 +119,11 @@
             el.text("");
             setPhotosDataSource.transport.dialect = defaultDialect;
             setPhotosDataSource._reader = defaultReader;
+
+            if (!$.support.cors) {
+                setPhotosDataSource.transport.options.read.jsonpCallback = "defaultCallback";
+            }
+
             $(".i-tileview").click();
         } else if (state == "slideshow") {
             el.text("Back to sets");
@@ -136,7 +149,7 @@
                     e.preventDefault();
                     slideshow.stop();
                     updatePlayIcon(slideshow._started);
-                    
+
                     $("#mainTemplate").hide();
                     $("#mainUserWrap").hide();
                     upload.show();

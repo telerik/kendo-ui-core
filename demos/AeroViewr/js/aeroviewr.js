@@ -35,7 +35,10 @@ if (!isInferiorBrowser) {
             pageSize: 10,
             dialect: {
                 read: function(data) {
-                    return flickr.getRelatedTagParams(data.filter[0].value);
+                    return flickr.getRelatedTagParams({
+                        tag: data.filter[0].value,
+                        jsoncallback: "relatedTags"
+                    });
                 }
             },
             reader: {
@@ -47,7 +50,8 @@ if (!isInferiorBrowser) {
                     }
                     return [];
                 }
-            }
+            },
+            jsoncallback: "relatedTags"
         });
 
         var infoTimeout = 0,
