@@ -147,6 +147,21 @@
                 m.set("foo", "bar");
                 ok(!changeWasCalled);
             });
+
+            test("set prevents id field from being set as expression", function() {
+                var model = new Model({id: 1, foo: "bar"});
+                model.set("id", 2);
+
+                equal(model.get("id"), 1);
+            });
+
+            test("set prevents id field from being set as hash", function() {
+                var model = new Model({id: 1, foo: "bar"});
+                model.set({"id": 2, foo: "baz"});
+
+                equal(model.get("id"), 1);
+                equal(model.get("foo"), "baz");
+            });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

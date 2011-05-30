@@ -61,6 +61,15 @@
                 var model = new Model();
                 equal(model.state, Model.CREATED);
             });
+
+            test("changes returns idField in modified fields if any change", function() {
+                var model = new Model({id: 1, foo: "bar"}),
+                    changes;
+                model.set("foo", "baz");
+
+                changes = model.changes();
+                equal(changes.id, 1);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
