@@ -85,7 +85,7 @@
    }
 
     function search() {
-        if ($("#searchBox").val()) {
+        if ($("#searchBox").val() && !searching) {
             slideshow.stop();
             updatePlayIcon(slideshow._started);
 
