@@ -158,8 +158,8 @@
 
                     if (value in scaleProperties && properties[value] !== undefined) {
                         !element.data('scale') && element.data('scale', {
-                                    top: element.offset().top,
-                                    left: element.offset().left,
+                                    top: parseInt(element.css('top'), 10) || 0,
+                                    left: parseInt(element.css('left'), 10) || 0,
                                     width: element.width(),
                                     height: element.height()
                                 });
@@ -187,14 +187,14 @@
                                 isFixed = (position == 'absolute' || position == 'fixed');
 
                             if (!element.data('translate')) {
-                                if (isFixed)
+                                if (isFixed) {
                                     element.data('translate', {
-                                        top: element.offset().top,
-                                        left: element.offset().left,
-                                        bottom: parseInt(element.css('bottom'), 10),
-                                        right: parseInt(element.css('right'), 10)
+                                        top: parseInt(element.css('top'), 10) || 0,
+                                        left: parseInt(element.css('left'), 10) || 0,
+                                        bottom: parseInt(element.css('bottom'), 10) || 0,
+                                        right: parseInt(element.css('right'), 10) || 0
                                     });
-                                else
+                                } else
                                     element.data('translate', {
                                         top: parseInt(element.css('marginTop'), 10) || 0,
                                         left: parseInt(element.css('marginLeft'), 10) || 0
@@ -302,30 +302,38 @@
         },
         slideRightIn: {
             play: function(element, properties, options) {
-                if (kendo.support.transitions)
-                    element.css( kendo.support.transitions.css + 'transform', 'translate(' + (-element.outerWidth()) + 'px)' );
-                else
-                    element.css( 'left', (-element.outerWidth()) + 'px' );
-                element.css('left'); // Read a style to force the browser to apply the change.
-
-                animate(element, extend({ translate: 0 }, properties), options);
+                if (kendo.support.transitions) {
+                    element.css(kendo.support.transitions.css + 'transform', 'translate(' + (-element.outerWidth()) + 'px)');
+                    element.css('left'); // Read a style to force the browser to apply the change.
+                    animate(element, extend({ translate: 0 }, properties), options);
+                } else {
+                    element.css('left', -element.outerWidth() + 'px');
+                    animate(element, extend({ left: 0 }, properties), options);
+                }
             },
             reverse: function(element, properties, options) {
-                animate(element, extend({ translate: (-element.outerWidth()) + 'px' }, properties), options);
+                if (kendo.support.transitions)
+                    animate(element, extend({ translate: (-element.outerWidth()) + 'px' }, properties), options);
+                else
+                    animate(element, extend({ left: -element.outerWidth() + 'px' }, properties), options);
             }
         },
         slideDownIn: {
             play: function(element, properties, options) {
-                if (kendo.support.transitions)
-                    element.css( kendo.support.transitions.css + 'transform', 'translateY(' + (-element.outerHeight()) + 'px)' );
-                else
-                    element.css( 'top', (-element.outerHeight()) + 'px' );
-                element.css('top');
-
-                animate(element, extend({ translateY: 0 }, properties), options);
+                if (kendo.support.transitions) {
+                    element.css(kendo.support.transitions.css + 'transform', 'translateY(' + (-element.outerHeight()) + 'px)');
+                    element.css('top');
+                    animate(element, extend({ translateY: 0 }, properties), options);
+                } else {
+                    element.css('top', -element.outerHeight() + 'px');
+                    animate(element, extend({ top: 0 }, properties), options);
+                }
             },
             reverse: function(element, properties, options) {
-                animate(element, extend({ translateY: (-element.outerHeight()) + 'px' }, properties), options);
+                if (kendo.support.transitions)
+                    animate(element, extend({ translateY: (-element.outerHeight()) + 'px' }, properties), options);
+                else
+                    animate(element, extend({ top: -element.outerHeight() + 'px' }, properties), options);
             }
         }
     });
