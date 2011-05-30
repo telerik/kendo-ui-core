@@ -83,7 +83,7 @@ var visitor = window.visitor,
             }));
         },
         search: function(el) {
-            if ($("#searchBox").val()) {
+            if ($("#searchBox").val() && !searching) {
                 $("#overlay").after("<div id='searchLoading' class='loading'>Loading ...</div>");
                 searching = true;
                 dataSource.query({page: 1, pageSize: $("#mainTemplate").find("#grid").hasClass("currentView") ? 5 : 20});
@@ -184,8 +184,8 @@ var visitor = window.visitor,
                 $("#mainPhotoGrid").hide();
                 $("#mainPhotoStrip").show();
                 $("#slider").parent().show();
-                $("#overlay").fadeIn();
-                $("#exifButton").fadeOut();
+                $("#overlay").stop(true, true).fadeIn();
+                $("#exifButton").stop(true, true).fadeOut();
             });
 
             $(".bottomLink").bind("click", function(e){
@@ -199,23 +199,23 @@ var visitor = window.visitor,
                     $("#mainTemplate").show();
                     $("#flatMostPopularPhotos").hide();
                     $(".i-tileview").click();
-                    $("#viewslideshow, #uploadphotos").fadeOut();
+                    $("#viewslideshow, #uploadphotos").stop(true, true).fadeOut();
                     element.text("Back to most popular");
                     slideshow.init($("#flatSearchPhotos").data("kendoListView"));
                 } else if (view === "mainTemplate"){
                     element.data("currentView", "flatMostPopularPhotos");
                     $("#flatSearchPhotos").hide();
                     $("#mainTemplate").hide();
-                    $("#overlay").fadeOut();
-                    $("#exifButton").fadeIn();
+                    $("#overlay").stop(true, true).fadeOut();
+                    $("#exifButton").stop(true, true).fadeIn();
                     $("#flatMostPopularPhotos").show();
-                    $("#viewslideshow, #uploadphotos").fadeIn();
+                    $("#viewslideshow, #uploadphotos").stop(true, true).fadeIn();
                     element.text("Back to search results");
                     slideshow.init($("#flatMostPopularPhotos").data("kendoListView"));
                 }
 
                 updatePlayIcon(slideshow._started)
-                    .add("#uploadphotos").fadeIn();
+                    .add("#uploadphotos").stop(true, true).fadeIn();
             });
 
             that.thumbList.append($("#flatSearchPhotos"));

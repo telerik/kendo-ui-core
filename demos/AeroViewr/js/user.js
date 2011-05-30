@@ -365,8 +365,8 @@
                     $("#flatPhotoStrip").hide();
                     $("#flatSetsStrip").show();
                     $("#mainUserWrap").show();
-                    $("#overlay").fadeIn();
-                    $("#exifButton").fadeOut();
+                    $("#overlay").stop(true, true).fadeIn();
+                    $("#exifButton").stop(true, true).fadeOut();
                     changeState("initial");
                 }
             })
