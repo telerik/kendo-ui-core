@@ -61,11 +61,11 @@
             that.bind([EXPAND, COLLAPSE, CHECKED, ERROR, LOAD, DATABINDING, DATABOUND], options);
 
             // <???>
-            that.bind(SELECT, $.proxy(function (e) {
-                    if (e.target == this.element && this.onSelect) {
-                        this.onSelect(e);
+            that.bind(SELECT, function (e) {
+                    if (e.target == that.element && that.onSelect) {
+                        that.onSelect(e);
                     }
-                }, that));
+                });
             // </???>
 
             if (that.options.autoBind){
@@ -181,8 +181,9 @@
 
         nodeSelect: function (e, element) {
 
-            if (!this.shouldNavigate(element))
+            if (!this.shouldNavigate(element)) {
                 e.preventDefault();
+            }
 
             var $element = $(element);
 
@@ -199,39 +200,38 @@
                 return;
             }
 
-            if (e != null)
+            if (e != null) {
                 e.preventDefault();
+            }
 
-            if ($item.data('animating')
-             || $item.find('> div > .t-in').hasClass('t-state-disabled'))
+            if ($item.data('animating') || $item.find('> div > .t-in').hasClass('t-state-disabled')) {
                 return;
+            }
 
             $item.data('animating', !suppressAnimation);
 
             var contents = $item.find('>.t-group, >.t-content, >.t-animation-container>.t-group, >.t-animation-container>.t-content'),
                 isExpanding = !contents.is(':visible');
 
+            /// TODO: trigger client event
             if (contents.children().length > 0
-             && $item.data('loaded') !== false
-             && !$t.trigger(this.element, isExpanding ? 'expand' : 'collapse', { item: $item[0] })) {
+             && $item.data('loaded') !== false /*
+             && !$item.trigger(this.element, isExpanding ? 'expand' : 'collapse', { item: $item[0] })*/ ) {
                 $item.find('> div > .t-icon')
                         .toggleClass('t-minus', isExpanding)
                         .toggleClass('t-plus', !isExpanding);
 
-                if (!suppressAnimation)
-                    $t.fx[isExpanding ? 'play' : 'rewind'](this.effects, contents, { direction: 'bottom' }, function () {
-                        $item.data('animating', false);
-                    });
-                else
-                    contents[isExpanding ? 'show' : 'hide']();
+                $item.data('animating', false);
+                /// TODO: animate
+                contents[isExpanding ? 'show' : 'hide']();
             } else if (isExpanding && this.isAjax() && (contents.length == 0 || $item.data('loaded') === false)) {
                 if (!$t.trigger(this.element, isExpanding ? 'expand' : 'collapse', { item: $item[0] }))
                     this.ajaxRequest($item);
             }
         },
 
-        nodeClick: function (e, element) {
-            var $element = $(element),
+        nodeClick: function (e) {
+            var $element = $(e.target),
                 $item = $element.closest('.t-item');
 
             if ($element.hasClass('t-plus-disabled') || $element.hasClass('t-minus-disabled'))
@@ -625,97 +625,8 @@
         }
     };
 
+    /*
 
-    var NodeRenderer = function(options) {
-        $.extend(this, options);
-
-        this.itemTemplate = kendo.template(
-            "<li class='<%= itemWrapperClass() %>'>"
-            + "<div class=''>"
-              + "<%= textOpening() %>"
-              + "<%= textClosing() %>"
-            + "</div>"
-          + "</li>"
-        );
-    };
-
-    NodeRenderer.prototype = {
-        render: function(items) {
-            var result = "", i, len;
-
-            if (typeof items.length != "undefined") {
-                for (i = 0, len = items.length; i < len; i++) {
-                    this.itemIndex = i;
-                    $.extend(this, items[i]);
-                    result += this.itemTemplate(this);
-                }
-            }
-
-            return result;
-        },
-
-        textClass: function() {
-            var result = "t-in";
-
-            if (this.Enabled === false) {
-                result += " t-state-disabled";
-            }
-                
-            if (this.Selected === true) {
-                result += " t-state-selected";
-            }
-
-            return result;
-        },
-
-        textOpening: function() {
-            var navigateUrl = this.NavigateUrl || this.Url,
-                result = "";
-
-            if (navigateUrl) {
-                result += "<a href='" + navigateUrl + "'";
-            } else {
-                result += "<span";
-            }
-
-            result += " class='" + this.textClass() + "'>";
-
-            return result;
-        },
-        
-        textClosing: function() {
-            var navigateUrl = this.NavigateUrl || this.Url;        
-
-            return navigateUrl ? "</a>" : "</span>";
-        },
-        
-        itemWrapperClass: function() {
-            var cssClass = "t-item";
-
-            if (this.isFirstLevel && this.itemIndex == 0) {
-                cssClass += " t-first";
-            }
-
-            if (this.itemIndex == this.itemsCount - 1) {
-                cssClass += " t-last";
-            }
-
-            return cssClass;
-        }
-    };
-
-/*
-<%= (isFirstLevel && itemIndex == 0) ? 't-top ' : '' %>\
-<%= (itemIndex != itemsCount - 1 && itemIndex == 0) ? 't-top' : '' %>\
-<%= (itemIndex != itemsCount - 1 && itemIndex != 0) ? 't-mid' : '' %>\
-<%= (itemIndex == itemsCount - 1) ? 't-bot' : '' %>\
-'><\
-<% var navigateUrl = item.NavigateUrl || item.Url; %>\
-<%= navigateUrl ? 'a href=\"' + navigateUrl + '\"' : 'span' %>\
- class='t-in'><%= item.Text %></\
-<%= navigateUrl ? 'a' : 'span'%>\
-*/
-// <%= (Encoded === false) ? Text : kendo.htmlEncode(Text) %>\
     // client-side rendering
     $.extend(TreeView, {
         getNodeInputsHtml: function (itemValue, itemText, arrayName, value) {
@@ -730,13 +641,8 @@
         },
 
         getItemHtml: function (options) {
-            var $t = { stringBuilder : function() {} },
-                renderer = new NodeRenderer(options);
-
-            return renderer.renderItem(options.item);
-
             var item = options.item,
-                html = options.html,
+                html = "",
                 isFirstLevel = options.isFirstLevel,
                 groupLevel = options.groupLevel,
                 itemIndex = options.itemIndex,
@@ -823,16 +729,16 @@
             html.cat('</li>');
         },
 
-        getGroupHtml: function (options) {
-            var data = options.data;
-            var isFirstLevel = options.isFirstLevel;
-            var renderGroup = options.renderGroup;
-            var html = "";
+        getGroupHtml: function (data, options) {
+            var html = "",
+                renderGroup = ,
+                getItemHtml = TreeView.getItemHtml,
+                i, len;
 
-            if (renderGroup !== false) {
+            if (options.renderGroup !== false) {
                 html += "<ul class='t-group";
-                
-                if (isFirstLevel) {
+
+                if (options.isFirstLevel) {
                     html += " t-treeview-lines";
                 }
 
@@ -845,17 +751,25 @@
                 html += ">";
             }
 
-            var renderer = new NodeRenderer(options);
+            if (data && data.length > 0) {
+                for (i = 0, len = data.length; i < len; i++)
+                    html += getItemHtml({
+                        item: $.extend({}, data[i], {
+                            index: i,
+                            groupLength: len;
+                        }),
+                        treeview: options
+                    });
+            }
 
-            html += renderer.render(data);
-
-            if (renderGroup !== false) {
+            if (options.renderGroup !== false) {
                 html += "</ul>";
             }
-            
+
             return html;
         }
     });
+    */
 
     kendo.ui.plugin("TreeView", TreeView);
 
