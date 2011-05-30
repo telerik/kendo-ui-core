@@ -270,6 +270,9 @@
 
             if(!model) {
                 that._models[id] = model = new that.options.model(that.find(id));
+                model.bind(CHANGE, function() {
+                    that.trigger(UPDATE, { model: model });
+                });
             }
 
             return model;
@@ -387,7 +390,6 @@
 
             if (model) {
                 model.set(values);
-                that.trigger(UPDATE, { model: model });
             }
         },
 
