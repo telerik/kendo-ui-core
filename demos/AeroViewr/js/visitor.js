@@ -14,9 +14,13 @@ var visitor = window.visitor,
                 var params = {
                     text: $("#searchBox").val(),
                     extras: EXTRAS,
-                    per_page: PAGESIZE,
-                    jsoncallback: "searchPhotos"
+                    per_page: PAGESIZE
                 };
+
+                if (!$.support.cors) {
+                    params.jsoncallback = "searchPhotos";
+                }
+
                 return flickr.searchParams(params);
             }
         },
@@ -29,8 +33,12 @@ var visitor = window.visitor,
                 var params = {
                     extras: EXTRAS,
                     per_page: 100,
-                    jsoncallback: "mostPopularPhotos"
                 };
+
+                if (!$.support.cors) {
+                    params.jsoncallback = "mostPopularPhotos";
+                }
+
                 return flickr.mostPopularParams(params);
             }
         },

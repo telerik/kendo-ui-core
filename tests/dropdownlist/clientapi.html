@@ -57,6 +57,17 @@
                 equal(dropdownlist.previous, 1);
            });
 
+            test("value method should select item with 0 value", function() {
+                var dropdownlist = new DropDownList(input, [{text: "foo", value: 1}, {text:2, value:0}]);
+
+                dropdownlist.value(0);
+
+                ok(dropdownlist.ul.children().eq(0).hasClass(SELECTED));
+                equal(dropdownlist.value(), "0");
+                equal(dropdownlist.text(), 2);
+                equal(dropdownlist.previous, 1);
+           });
+
            test("select should select item by predicate", function() {
                 var dropdownlist = new DropDownList(input, [{text: "foo", value: 1}, {text:2, value:2}]);
 

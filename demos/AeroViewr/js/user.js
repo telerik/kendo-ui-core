@@ -27,15 +27,23 @@
                 var params = {
                     text: $("#searchBox").val(),
                     extras: EXTRAS,
-                    per_page: PAGESIZE,
-                    jsoncallback: "searchPhotos"
+                    per_page: PAGESIZE
                 };
+
+                if (!$.support.cors) {
+                        params.jsoncallback = "searchPhotos";
+                }
+
                 return flickr.searchParams(params);
             }
         },
         defaultDialect = {
             read: function(data) {
-                var params = { extras: "owner_name,tags", per_page: PAGESIZE, jsoncallback: "defaultCallback"};
+                var params = { extras: "owner_name,tags", per_page: PAGESIZE };
+
+                if (!$.support.cors) {
+                    params.jsoncallback = "defaultCallback";
+                }
 
                 if(photosInSet) {
                     params.photoset_id = photoSetId();
@@ -49,7 +57,13 @@
         setsDataSource = data.dataSource({
             dialect: {
                 read: function(data) {
-                    return flickr.getSetsParams({jsoncallback: "getSets"});
+                    var params = {};
+
+                    if (!$.support.cors) {
+                        params.jsoncallback = "getSets";
+                    }
+
+                    return flickr.getSetsParams(params);
                 }
             },
             deserializer: {
@@ -86,7 +100,7 @@
        setBigPhoto($("img", ui.selectable.value()).filter(":first"));
 
        setPhotosDataSource.query({page: 1, pageSize: PAGESIZE});
-   }
+    }
 
     function search() {
         if ($("#searchBox").val() && !searching) {
@@ -118,7 +132,7 @@
         if (state == "initial") {
             el.text("");
             setPhotosDataSource.transport.dialect = defaultDialect;
-            setPhotosDataSource._deserialize = defaultDeserialize;
+            setPhotosDataSource._deserialize = defaultDeserializer;
 
             if (!$.support.cors) {
                 setPhotosDataSource.transport.options.read.jsonpCallback = "defaultCallback";
