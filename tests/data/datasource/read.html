@@ -170,7 +170,7 @@
             test("read calls reader set through constructor", function() {
                 var dataSource = new DataSource({
                     data: [{ id:1, bar: "foo" },{ id: 2, bar: "baz" }],
-                    reader: {
+                    deserializer: {
                         data: function(data) {
                             readerWasCalled = true;
                             return data;
@@ -195,7 +195,7 @@
             test("read reads total through function passed in constructor", function() {
                 var dataSource = new DataSource({
                     data: [{ id:1, bar: "foo" },{ id: 2, bar: "baz" }],
-                    reader: {
+                    deserializer: {
                         total: function() {
                             totalWasCalled = true;
                             return arguments[0].length;

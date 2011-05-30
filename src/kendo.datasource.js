@@ -224,12 +224,12 @@
 
             id = model.id;
 
-            that._reader = extend({
+            that._deserializer = extend({
                 data: identity,
                 total: function(data) {
                     return data.length;
                 }
-            }, options.reader);
+            }, options.deserializer);
 
             if (transport) {
                 that.transport = isFunction(transport.read) ? transport: new RemoteTransport(transport);
@@ -416,8 +416,8 @@
             var that = this,
             options = {};
 
-            that._total = that._reader.total(data);
-            data = that._reader.data(data);
+            that._total = that._deserializer.total(data);
+            data = that._deserializer.data(data);
             that._data = data;
 
             if (that.options.serverPaging !== true) {
