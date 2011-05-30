@@ -28,7 +28,7 @@
     </head>
     <body>
 
-    <ul id="Menu3" class="t-widget t-reset t-header t-menu" style="position: absolute; visibility: hidden">
+    <ul id="Menu3" class="t-widget t-reset t-header t-menu" style="position: absolute; visibility: hidden;">
         <li class="t-item t-state-default" style=""><span class="t-link"><img
                 src="Icons/Suites/mvc.png" class="t-image" alt="image">ASP.NET MVC<span
                 class="t-icon t-arrow-down"></span></span>
@@ -197,7 +197,7 @@
             var closed = false;
             menu.clicked = true;
             menu.close = function() { closed = true };
-            menu._documentClick({ target: document.body}, document);
+            menu._documentClick({ target: document.body }, document );
             ok(closed);
         });
 
