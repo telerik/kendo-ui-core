@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!-- HTML documents that use VML must declare a namespace for it -->
+<html xmlns:v="urn:schemas-microsoft-com:vml">
+<head>
+<!-- This is how we associate VML behavior with the VML namespace -->
+<style>v\:* { behavior: url(#default#VML); }</style>
+<script>
+/*
+ * Create and return a VML <v:group> element in which VML drawing can be done.
+ * Note that the returned element has not yet been added to the document.
+ */
+function makeVMLCanvas(id, pixelWidth, pixelHeight) {
+    var vml = document.createElement("v:group");
+    vml.setAttribute("id", id);
+    vml.style.width = pixelWidth + "px";
+    vml.style.height = pixelHeight + "px";
+    vml.setAttribute("coordsize", pixelWidth + " " + pixelHeight);
+
+    // Start with a white rectangle with a thin black outline.
+    var rect = document.createElement("v:rect");
+    rect.style.width = pixelWidth + "px";
+    rect.style.height = pixelHeight + "px";
+    vml.appendChild(rect);
+
+    return vml;
+}
+
+/* Draw a pie chart in a VML canvas */
+function pieChart(canvas, data, cx, cy, r, colors, labels, lx, ly) {
+    // Get the canvas element if specified by id
+    if (typeof canvas == "string") canvas = document.getElementById(canvas);
+
+    // Add up the data values
+    var total = 0;
+    for(var i = 0; i < data.length; i++) total += data[i];
+
+    // Figure out the size (in degrees) of each wedge
+    var angles = [];
+    for(var i = 0; i < data.length; i++) angles[i] = data[i]/total*360;
+
+    // Now loop through all the wedges
+    // VML measures angles in degrees/65535 and goes
+    // counter-clockwise from 3 o'clock
+    startangle = 90;  // Start at 12 o'clock.
+    for(var i = 0; i < data.length; i++) {
+        // Tweak the angles so that our pie goes clockwise from 12 o'clock.
+        var sa = Math.round(startangle * 65535);
+        var a = -Math.round(angles[i] * 65536);
+
+        // Create a VML shape element
+        var wedge = document.createElement("v:shape");
+        // VML describes the shape of a path in a similar way to SVG
+        var path = "M " + cx + " " + cy +    // Move to (cx,cy)
+            " AE " + cx + " " + cy + " " +   // Arc with center at (cx,cy)
+            r + " " + r + " " +              // Horiz and vertical radii
+            sa + " " + a +                   // Start angle and total angle
+            " X E";                          // Close path to center and end
+        wedge.setAttribute("path", path);            // Set wedge shape
+        wedge.setAttribute("fillcolor", colors[i]);  // Set wedge color
+        wedge.setAttribute("strokeweight", "2px");   // Outline width
+        // Position the wedge using CSS styles.  The coordinates of the
+        // path are interpreted relative to this size, so we give each
+        // shape the same size as the canvas itself.
+        wedge.style.position = "absolute";
+        wedge.style.width = canvas.style.width;
+        wedge.style.height = canvas.style.height;
+
+        // Add the wedge to the canvas
+        canvas.appendChild(wedge);
+
+        // Next wedge begins where this one ends
+        startangle -= angles[i];
+
+        // Create a VML <rect> element for the legend
+        var icon = document.createElement("v:rect");
+        icon.style.left = lx + "px";               // CSS positioning
+        icon.style.top = (ly+i*30) + "px";
+        icon.style.width = "20px";                 // CSS size
+        icon.style.height = "20px";
+        icon.setAttribute("fillcolor", colors[i]); // Same color as wedge
+        icon.setAttribute("stroke", "black");      // Outline color
+        icon.setAttribute("strokeweight", "2");    // Outline width
+        canvas.appendChild(icon);                  // Add to canvas
+
+        // VML has advanced text capabilities, but most text is simple
+        // HTML, and is added directly to the VML canvas, using
+        // canvas coordinates
+        var label = document.createElement("div");  // <div> to hold the text
+        label.appendChild(document.createTextNode(labels[i]));  // the text
+        label.style.position = "absolute";          // Position with CSS
+        label.style.left = (lx + 30) + "px";
+        label.style.top = (ly + 30*i + 5) + "px";
+        label.style.fontFamily = "sans-serif";      // Text styles
+        label.style.fontSize = "16px";
+        canvas.appendChild(label);                  // Add text to canvas
+    }
+}
+
+function init() {
+    var canvas = makeVMLCanvas("canvas", 600, 400);
+    document.body.appendChild(canvas);
+    pieChart(canvas, [12, 23, 34, 45], 200, 200, 150,
+             ["red", "blue", "yellow", "green"],
+             ["North", "South", "East", "West"],
+             400, 100);
+}
+</script>
+</head>
+<body onload="init()">
+</body>
+</html>

@@ -331,8 +331,7 @@
                 return;
             }
 
-            val = math.max(val, options.min);
-            val = math.min(val, options.max);
+            val = math.max(math.min(val, options.max), options.min);
             that._update(val);
         }
     });
@@ -970,21 +969,17 @@
         },
 
         _setValueInRange: function (selectionStart, selectionEnd) {
-            var options = this.options,
-                selectionStartValue = selectionStart,
-                selectionEndValue = selectionEnd;
+            var options = this.options;
 
-            selectionStart = math.max(math.min.apply(math, [selectionStartValue, selectionEndValue]), options.min);
-            selectionStart = math.min(selectionStart, options.max);
+            selectionStart = math.max(math.min(selectionStart, options.max), options.min);
 
-            selectionEnd = math.max(math.max.apply(math, [selectionStartValue, selectionEndValue]), options.min);
-            selectionEnd = math.min(selectionEnd, options.max);
+            selectionEnd = math.max(math.min(selectionEnd, options.max), options.min);
 
             if (selectionStart == options.max && selectionEnd == options.max) {
                 this._setZIndex("leftHandle");
             }
 
-            this._update(selectionStart, selectionEnd);
+            this._update(math.min(selectionStart, selectionEnd), math.max(selectionStart, selectionEnd));
         },
 
         _setZIndex: function (type) {
