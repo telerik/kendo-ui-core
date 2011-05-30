@@ -134,9 +134,9 @@
                 var that = this;
                 that.select(function(dataItem) {
                     var text = that._text(dataItem);
-                    text = text ? text.toString() : "";
-                    text = text.toLowerCase().slice(0, word.length);
-                    return text == word.toLowerCase();
+                    if(text || text === 0) {
+                        return (text + "").toLowerCase().slice(0, word.length) == word.toLowerCase();
+                    }
                 });
             }
         },
