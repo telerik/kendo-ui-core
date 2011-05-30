@@ -50,12 +50,12 @@ var visitor = window.visitor,
        $("#flatSearchPhotos").show();
 
        ui.element.parent().hide();
-       $("#overlay").fadeOut();
+       $("#overlay").stop(true, true).fadeOut();
 
        setBigPhoto(ui.selectable.value().find("img"));
 
        dataSource.query({page: 1, pageSize: PAGESIZE});
-       $("#viewslideshow, #uploadphotos").fadeIn();
+       $("#viewslideshow, #uploadphotos").stop(true, true).fadeIn();
 
        $("#backButton").text("Back to search results").data("currentView", "flatMostPopularPhotos");
    }
@@ -97,11 +97,11 @@ var visitor = window.visitor,
                 dataSource.query({page: 1, pageSize: $("#mainTemplate").find("#grid").hasClass("currentView") ? 5 : 20});
                 $("#flatMostPopularPhotos").hide();
                 $("#flatSearchPhotos").hide();
-                $("#overlay").fadeIn();
-                $("#exifButton").fadeOut();
+                $("#overlay").stop(true, true).fadeIn();
+                $("#exifButton").stop(true, true).fadeOut();
                 slideshow.init($("#flatSearchPhotos").data("kendoListView"));
                 updatePlayIcon(slideshow._started)
-                    .add("#uploadphotos").fadeOut()
+                    .add("#uploadphotos").stop(true, true).fadeOut()
             }
         },
 
@@ -160,7 +160,9 @@ var visitor = window.visitor,
                         that.initSlider();
                     }
 
-                    $("#backButton").text("Back to most popular").data("currentView", "mainTemplate");
+                    var backButton = $(".bottomLink");
+                    if (backButton.data("currentView") != 'flatMostPopularPhotos')
+                        backButton.text("Back to most popular").data("currentView", "mainTemplate");
                     displayImages(this.element);
                     $("#searchLoading").remove();
                 },
@@ -177,8 +179,8 @@ var visitor = window.visitor,
                 $("#mainPhotoStrip").hide();
                 $("#slider").parent().hide();
                 $("#mainPhotoGrid").show();
-                $("#overlay").fadeIn();
-                $("#exifButton").fadeOut();
+                $("#overlay").stop(true, true).fadeIn();
+                $("#exifButton").stop(true, true).fadeOut();
             });
 
             $(".i-tileview").click(function() {
