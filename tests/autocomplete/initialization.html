@@ -90,7 +90,7 @@
                     template: "<%= data.toUpperCase() %>"
                 });
 
-                equal(autocomplete.template("foo"), "FOO");
+                equal(autocomplete.template("foo"), "<li class='t-item' unselectable='on'>FOO</li>");
             });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
