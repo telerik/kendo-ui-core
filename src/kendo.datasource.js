@@ -261,7 +261,8 @@
             serverSorting: false,
             serverPaging: false,
             serverFiltering: false,
-            autoSync: false
+            autoSync: false,
+            sendAllFields: true
         },
 
         model: function(id) {
@@ -312,9 +313,14 @@
             var that = this,
                 updated,
                 created,
-                destroyed;
+                destroyed,
+                sendAllFields = that.options.sendAllFields;
 
             updated = that._byState(Model.UPDATED, function(model) {
+                if(sendAllFields) {
+                    return model.data;
+                }
+
                 return model.changes();
             });
 
@@ -323,7 +329,12 @@
             });
 
             destroyed = that._byState(Model.DESTROYED, function(model) {
-                return model.data;
+                if(sendAllFields) {
+                    return model.data;
+                }
+                var data = {};
+                data[model.idField] = model.id();
+                return data;
             });
 
             if (created.length) {

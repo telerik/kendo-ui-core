@@ -18,15 +18,16 @@
         <script>
             var DataSource = kendo.data.DataSource;
 
-            function setup(transport) {
-                var dataSource = new DataSource({
+            function setup(transport, data, options) {
+                options = $.extend({
                     model: kendo.data.Model.define(),
                     transport: $.extend({
                         read: function(options) {
-                           options.success([{ id: 1, foo: "foo" }]);
+                           options.success(data || [{ id: 1, foo: "foo" }]);
                         },
                     }, transport)
-                });
+                }, options);
+                var dataSource = new DataSource(options);
 
                 dataSource.read();
 
@@ -115,6 +116,75 @@
                 dataSource.sync();
 
                 ok(destroyed === undefined);
+            });
+
+            test("sync with sendAllFields=true passes entire record to update", function() {
+                var updated,
+                    dataSource = setup({
+                        update: function(options) {
+                            updated = options.data;
+                        }
+                    }, 
+                    [{ id: 1, foo: "foo", bar: "bar" }],
+                    { sendAllFields: true });
+
+                dataSource.update(1, { foo: "bar" });
+                dataSource.sync();
+               
+                equal(updated[0].foo, "bar");
+                equal(updated[0].bar, "bar");
+            });
+
+            test("sync with sendAllFields=false passes only changes to update", function() {
+                var updated,
+                    dataSource = setup({
+                        update: function(options) {
+                            updated = options.data;
+                        }
+                    }, 
+                    [{ id: 1, foo: "foo", bar: "bar" }],
+                    { sendAllFields: false });
+
+                dataSource.update(1, { foo: "bar" });
+                dataSource.sync();
+               
+                equal(updated[0].foo, "bar");
+                equal(updated[0].bar, undefined);
+            });
+
+             test("sync with sendAllFields=true passes entire record to destroy", function() {
+                var destroyed,
+                    dataSource = setup({
+                        destroy: function(options) {
+                            destroyed = options.data;
+                        }
+                    },
+                    [{ id: 1, foo: "foo", bar: "bar" }],
+                    { sendAllFields: true });
+
+                dataSource.destroy(1);
+                dataSource.sync();
+               
+                equal(destroyed[0].foo, "foo");
+                equal(destroyed[0].bar, "bar");
+            });
+
+            test("sync with sendAllFields=false passes only the id of the record to destroy", function() {
+                var destroyed,
+                    dataSource = setup({
+                        destroy: function(options) {
+                            destroyed = options.data;
+                        }
+                    },
+                    [{ id: 1, foo: "foo", bar: "bar" }],
+                    { sendAllFields: false });
+
+                dataSource.destroy(1);
+                dataSource.sync();
+               
+                equal(destroyed[0].id, 1);
+                equal(destroyed[0].foo, undefined);
+                equal(destroyed[0].bar, undefined);
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
