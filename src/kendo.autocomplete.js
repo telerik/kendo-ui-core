@@ -2,7 +2,7 @@
     var kendo = window.kendo,
         ui = kendo.ui,
         DataSource = kendo.data.DataSource,
-        Component = ui.Component,
+        List = ui.List,
         CHANGE = "change",
         CHARACTER = "character",
         SELECTED = "t-state-selected",
@@ -49,15 +49,13 @@
         selectText(element, length, length);
     }
 
-    var AutoComplete = Component.extend({
+    var AutoComplete = List.extend({
         init: function(element, options) {
             var that = this;
 
             options = $.isArray(options) ? { dataSource: options } : options;
 
-            Component.fn.init.call(that, element, options);
-
-            that.ul = $("<ul/>");
+            List.fn.init.call(that, element, options);
 
             that.popup = new ui.Popup(that.ul, {
                 anchor: that.element
@@ -67,15 +65,7 @@
 
             that.bind([CHANGE], that.options);
 
-            that.template = kendo.template(that.options.template);
-
-            that.ul
-                .mousedown(function() {
-                    setTimeout(function() {
-                        clearTimeout(that._bluring);
-                    }, 0);
-                })
-                .delegate("li", "click", proxy(that._click, that));
+            that._template();
 
             that.element
                 .attr("autocomplete", "off")
@@ -95,7 +85,6 @@
         options: {
             suggest: false,
             minLength: 1,
-            template: "<li unselectable='on'><%= data %></li>", //unselectable=on is required for IE to prevent the suggestion box from stealing focus from the input
             delay: 300
         },
 
@@ -128,23 +117,6 @@
 
                 that.value(text);
                 that.current(li.addClass(SELECTED));
-            }
-        },
-
-        current: function(candidate) {
-            var that = this;
-
-            if (candidate !== undefined) {
-                if (that._current) {
-                    that._current.removeClass(FOCUSED);
-                }
-
-                if (candidate) {
-                    candidate.addClass(FOCUSED);
-                }
-                that._current = candidate;
-            } else {
-                return that._current;
             }
         },
 
@@ -225,44 +197,6 @@
             } else {
                 return element.value;
             }
-        },
-
-        _blur: function() {
-            var that = this;
-
-            that.close();
-            that._change();
-        },
-
-        _change: function() {
-            var that = this,
-                value = that.value();
-
-            if (value !== that.previous) {
-                that.trigger(CHANGE);
-
-                // trigger the DOM change event so any subscriber gets notified
-                that.element.trigger(CHANGE);
-
-                that.previous = value;
-            }
-        },
-
-        _accept: function(li) {
-            var that = this;
-
-            that.select(li);
-            that._blur();
-
-            if (that.element[0] !== document.activeElement) {
-                that.element.focus();
-            }
-
-            moveCaretAtEnd(that.element[0]);
-        },
-
-        _click: function(e) {
-            this._accept($(e.currentTarget));
         },
 
         _move: function(li) {
