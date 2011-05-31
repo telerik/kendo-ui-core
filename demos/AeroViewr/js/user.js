@@ -132,7 +132,7 @@
         if (state == "initial") {
             el.text("");
             setPhotosDataSource.transport.dialect = defaultDialect;
-            setPhotosDataSource._deserialize = defaultDeserializer;
+            setPhotosDataSource._deserializer = defaultDeserializer;
 
             if (!$.support.cors) {
                 setPhotosDataSource.transport.options.read.jsonpCallback = "defaultCallback";
