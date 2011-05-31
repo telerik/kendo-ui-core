@@ -4,6 +4,8 @@
         <title>Bar Chart</title>
         <script src="../src/jquery.js"></script>
         <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.query.js"></script>
+        <script src="../src/kendo.datasource.js"></script>
         <script src="../src/kendo.chart.js"></script>
     </head>
     <body>
@@ -23,21 +25,68 @@
                         type: "bar",
                         stacked: true
                     },
+                    dataSource: [
+                        {
+                            name: "Alpha",
+                            a: 15,
+                            b: -100,
+                            c: 15
+                        }, {
+                            name: "Beta",
+                            a: 40,
+                            b: -200,
+                            c: 25
+                        }, {
+                            name: "Charlie",
+                            a: 40,
+                            b: -300,
+                            c: 35
+                        }
+                    ],
+                    series: [
+                        {
+                            type: "bar",
+                            name: "Value A",
+                            field: "a"
+                        }, {
+                            type: "bar",
+                            name: "Value B",
+                            field: "b"
+                        }, {
+                            type: "bar",
+                            name: "Value C",
+                            field: "c"
+                        }
+                    ],
+                    /*
                     series: [{
                         name: "Value A",
-                        dataSource: [15, 40, 40],
+                        data: [15, 40, 40],
                     }, {
                         name: "Value B",
-                        dataSource: [-100, -200, -300],
+                        data: [-100, -200, -300],
                     }, {
                         name: "Value C",
-                        dataSource: [15, 25, 35]
+                        data: [15, 25, 35]
                     }],
+                    */
                     categoryAxis: {
                         categories: ["Alpha", "Beta", "Charlie"]
                     }
                 });
             });
+
+            var objByCategory = [{
+                name: "Alpha",
+                a: 15,
+                b: -100,
+                c: 15
+            }, {
+                name: "Beta",
+                a: 40,
+                b: -200,
+                c: 25
+            }];
 
             var options = {
                 theme: "", // Built-in theme name or custom theme object
@@ -66,7 +115,8 @@
                 },
                 categoryAxis: {
                     // Shorthand for the default category axis
-                    categories: []
+                    categories: [],
+                    field: "",
                 },
                 valueAxis: {
                     type: "Numeric"
@@ -74,10 +124,13 @@
                 axes: {
                     // For advanced axis configuration
                 },
+                dataSource: null,
                 series: [ ],
                 seriesColors: ["#d7df23", "#adc32b", "#799b28", "#4c7520"],
                 seriesDefaults: {
                     type: "column",
+                    field: "",
+                    data: [],
                     bar: {
                         gap: 1.5,
                         borderWidth: 0,
