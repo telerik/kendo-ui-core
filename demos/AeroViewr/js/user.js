@@ -8,6 +8,7 @@
         data = window.data,
         photosInSet = false,
         searching = false,
+        sliderValue = 0,
         defaultDeserializer = {
             data: function(result) {
                 if(photosInSet) {
@@ -121,7 +122,9 @@
             }
 
             $("#overlay").after("<div id='searchLoading' class='loading'>Loading ...</div>");
-            setPhotosDataSource.query({page: 1, pageSize: $("#mainUserWrap").find("#gridNotInSetPhotos").hasClass("currentView") ? 5 : 20});
+
+            var pageSize = sliderValue === 0 ? 20 : parseInt(20 / sliderValue);
+            setPhotosDataSource.query({page: 1, pageSize: $("#mainUserWrap").find("#gridNotInSetPhotos").hasClass("currentView") ? 5 : pageSize});
         }
     }
 
@@ -267,10 +270,10 @@
                 largeStep: 1,
                 tickPlacement: "none",
                 change: function() {
-                    var value = this.value();
-                    imageSize = IMAGESIZES[value];
+                    sliderValue = this.value();
+                    imageSize = IMAGESIZES[sliderValue];
                     var t = template(imageSize),
-                        pageSize = value === 0 ? 20 : parseInt(20 / value);
+                        pageSize = sliderValue === 0 ? 20 : parseInt(20 / sliderValue);
                     $("#mainSetPhotoStrip").data("kendoListView").template = kendo.template(t);
                     setPhotosDataSource.query({page: 1, pageSize: pageSize});
                 }
@@ -352,8 +355,7 @@
             });
 
             $(".i-tileview").click(function() {
-                var value = $("#setPhotoSize").data("kendoSlider").value(),
-                    pageSize = value === 0 ? 20 : parseInt(20 / value);
+                var pageSize = sliderValue === 0 ? 20 : parseInt(20 / sliderValue);
 
                 setPhotosDataSource.query({page: 1, pageSize: pageSize});
 
