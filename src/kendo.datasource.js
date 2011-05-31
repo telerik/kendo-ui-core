@@ -321,7 +321,7 @@
                 batch = that.options.batch,
                 mode,
                 transport = that.transport;
-                
+
             updated = that._byState(Model.UPDATED, function(model) {
                 if(sendAllFields) {
                     return model.data;
@@ -349,7 +349,7 @@
             else if ((batch.mode || "multiple") === "multiple") {
                 mode = "single";
             }
-            
+
             if(mode) {
                 that._send(created, proxy(transport.create, transport), mode);
                 that._send(updated, proxy(transport.update, transport), mode);
@@ -359,17 +359,17 @@
                         created: created,
                         updated: updated,
                         destroyed: destroyed
-                    }, 
-                    proxy(transport.update, transport), 
+                    },
+                    proxy(transport.update, transport),
                     "single"
                 );
-            }            
+            }
         },
 
         _send: function(data, method, mode) {
             var that = this,
                 idx;
-            
+
             if(data.length == 0) {
                 return;
             }
@@ -379,7 +379,7 @@
                     method({
                         data: data[idx]
                     });
-                }  
+                }
             } else {
                 method({
                     data: data
@@ -622,11 +622,15 @@
             table = dataSource.table,
             select = dataSource.select;
 
-        if (!data && fields) {
-            if (table) {
-                data = inferTable(table, fields);
+        if(fields){
+            if (!data) {
+                if (table) {
+                    data = inferTable(table, fields);
+                } else if (select) {
+                    data = inferSelect(select, fields);
+                }
             } else if (select) {
-                data = inferSelect(select, fields);
+                rebuildSelect(data, select, fields);
             }
         }
 
@@ -654,6 +658,36 @@
         }
 
         return data;
+    }
+
+    function rebuildSelect(data, select, fields) {
+        var getText = kendo.getter(fields[0].field),
+            getValue = kendo.getter(fields[1].field),
+            length = data.length,
+            options = [],
+            i = 0;
+
+        for (; i < length; i++) {
+           var option = "<option",
+               dataItem = data[i],
+               text = getText(dataItem),
+               value = getValue(dataItem);
+
+           if (value || value === 0) {
+               option += " value=" + value;
+           }
+
+           option += ">";
+
+           if (text || text === 0) {
+               option += text;
+           }
+
+           option += "</option>";
+           options.push(option);
+        }
+
+        select.html(options.join(""));
     }
 
     function inferTable(table, fields) {
