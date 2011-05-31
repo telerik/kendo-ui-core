@@ -97,7 +97,7 @@
 
                 module("Title", {
                     setup: function() {
-                        title = new kendo.ui.Chart.Title();
+                        title = new kendo.ui.Chart.Title({ text: "Title" });
                         title.updateLayout(chartBox);
                         titleTextElement = title.children[0];
                     }

@@ -24,11 +24,12 @@
                     chart = $("#container").data("kendoChart");
                     chart.refresh();
 
-                    plotArea = chart._model.children[2];
+                    plotArea = chart._model.children[1];
                 }
 
                 function destroyChart() {
                     $("#container").empty();
+                    chart = null;
                 }
 
                 // ------------------------------------------------------------
@@ -178,6 +179,54 @@
                     equal(chart.options.series[0].color, "#f00");
                     equal(chart.options.series[1].color, "#f00");
                 });
+
+                // ------------------------------------------------------------
+                module("Title", {
+                    teardown: destroyChart
+                });
+
+                test("text is set", function() {
+                    createChart({
+                        title: {
+                            text: "My Title"
+                        }
+                    });
+
+                    equal(chart._model.children[0].options.text, "My Title");
+                });
+
+                test("default font", function() {
+                    createChart({
+                        title: {
+                            text: "My Title"
+                        }
+                    });
+
+                    equal(chart._model.children[0].options.font,
+                          "18px Verdana, sans-serif");
+                });
+
+                test("font is set", function() {
+                    createChart({
+                        title: {
+                            text: "My Title",
+                            font: "10pt Comic Sans"
+                        }
+                    });
+
+                    equal(chart._model.children[0].options.font,
+                          "10pt Comic Sans");
+                });
+
+                test("not created if no text is set", function() {
+                    createChart({
+                        title: {
+                            text: ""
+                        }
+                    });
+                    ok(!(chart._model.children[0] instanceof Chart.Title));
+                });
+
             })();
         </script>
 

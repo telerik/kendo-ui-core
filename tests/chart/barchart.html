@@ -24,7 +24,9 @@
                 module("Bar Chart Model", {
                     setup: function() {
                         $("#container").kendoChart({
-                            title: "Chart Title",
+                            title: {
+                                text: "Chart Title"
+                            },
                             series: [{
                                 name: "Value",
                                 type: "bar",
