@@ -485,16 +485,14 @@
                         barChart = new Chart.BarChart(plotArea, {
                             series: [{
                                 data: [0, 1],
-                                style: {
-                                    fill: "#f00"
-                                }
+                                color: "#f00"
                             }]
                         });
                     }
                 });
 
                 test("applies series fill color to bars", function() {
-                    equal(barChart._bars[0].options.style.fill, "#f00");
+                    equal(barChart._bars[0].options.color, "#f00");
                 });
             })();
 

@@ -48,6 +48,7 @@
                 type: "bar",
                 data: []
             },
+            seriesColors: ["#d7df23", "#adc32b", "#799b28", "#4c7520"],
             series: []
         },
 
@@ -79,10 +80,14 @@
         _applyDefaults: function() {
             var chart = this,
                 options = chart.options,
-                series = options.series;
+                series = options.series,
+                colors = options.seriesColors;
 
             for (var i = 0, length = series.length; i < length; i++) {
-                series[i] = extend({}, options.seriesDefaults, series[i]);
+                series[i] = extend(
+                    { color: colors[i % colors.length] },
+                    options.seriesDefaults,
+                    series[i]);
             }
         },
 
@@ -1048,7 +1053,7 @@
     $.extend(Bar.prototype, {
         options: {
             style: {
-                fill: "#000",
+                color: "#000",
                 borderWidth: 1
             }
         },
@@ -1064,7 +1069,7 @@
                 elements = [];
 
             elements.push(
-                factory.rect(box, options.style)
+                factory.rect(box, { fill: options.color, borderWidth: options.borderWidth })
             );
 
             return elements;
@@ -1136,7 +1141,7 @@
                 children = barChart.children,
                 isStacked = barChart.options.isStacked;
 
-            var bar = new Bar({ style: series.style });
+            var bar = new Bar({ color: series.color });
             barChart._bars.push(bar);
 
             var cluster = children[categoryIx];

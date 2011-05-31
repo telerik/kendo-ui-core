@@ -147,6 +147,26 @@
 
                     equal(chart.options.series[0].type, "line");
                 });
+
+                test("series colors are set", function() {
+                    createChart({
+                        seriesColors: ["#fff", "#f00"],
+                        series: [{}, {}]
+                    });
+
+                    equal(chart.options.series[0].color, "#fff");
+                    equal(chart.options.series[1].color, "#f00");
+                });
+
+                test("series colors are preserved", function() {
+                    createChart({
+                        seriesColors: ["#fff"],
+                        series: [{ color: "#000" }]
+                    });
+
+                    equal(chart.options.series[0].color, "#000");
+                });
+
             })();
         </script>
 
