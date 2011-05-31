@@ -2,6 +2,8 @@
     var kendo = window.kendo,
         ui = kendo.ui,
         Component = kendo.ui.Component,
+        DataSource = kendo.data.DataSource,
+        proxy = $.proxy,
         SELECT = "select",
         EXPAND = "expand",
         COLLAPSE = "collapse",
@@ -14,7 +16,8 @@
         NODEDRAGCANCELLED = "nodeDragCancelled",
         NODEDROP = "nodeDrop",
         NODEDROPPED = "nodeDropped",
-        CLICK = "click";
+        CLICK = "click",
+        CHANGE = "change";
 
     function markAjaxLoadableNodes($element) {
         $element.find('.t-plus')
@@ -35,15 +38,19 @@
             Component.prototype.init.call(that, element, options);
 
             options = that.options;
+            
+            that._wrapper();
+
+            that._dataSource();
 
             $element
                 .delegate(".t-in.t-state-selected", "mouseenter", function(e) { e.preventDefault(); })
                 .delegate(clickableItems, "mouseenter", function () { $(this).addClass('t-state-hover'); })
                 .delegate(clickableItems, "mouseleave", function () { $(this).removeClass('t-state-hover'); })
-                .delegate(clickableItems, CLICK, $.proxy(that.nodeSelect, that))
-                .delegate("div:not(.t-state-disabled) .t-in", "dblclick", $.proxy(that.nodeClick, that))
-                .delegate(":checkbox", CLICK, $.proxy(that.checkboxClick, that))
-                .delegate(".t-plus, .t-minus", CLICK, $.proxy(that.nodeClick, that));
+                .delegate(clickableItems, CLICK, proxy(that.nodeSelect, that))
+                .delegate("div:not(.t-state-disabled) .t-in", "dblclick", proxy(that.nodeClick, that))
+                .delegate(":checkbox", CLICK, proxy(that.checkboxClick, that))
+                .delegate(".t-plus, .t-minus", CLICK, proxy(that.nodeClick, that));
 
             if (that.isAjax()) {
                 markAjaxLoadableNodes($element);
@@ -69,7 +76,7 @@
             // </???>
 
             if (that.options.autoBind){
-                // that.dataSource.query();
+                that.dataSource.query();
             }
         },
 
@@ -77,35 +84,43 @@
             autoBind: true,
             dataSource: {},
             queryString: {
-                text: 'Text',
-                value: 'Value',
-                checked: 'Checked'
-            }
+                text: "text",
+                value: "value",
+                checked: "checked"
+            },
+            dataTextField: "text",
+            dataValueField: "value"
         },
 
         _dataSource: function() {
-            var that = this,
+            var that = this;
+                element = that.element,
                 options = that.options,
                 dataSource = options.dataSource;
 
-            dataSource = $.isArray(dataSource) ? { data: dataSource } : dataSource;
-
-            if (isPlainObject(dataSource)) {
-                extend(dataSource, { table: that.table, fields: that.columns });
-
-                if (options.data) {
-                    dataSource.data = options.data;
-                }
-
-                pageable = options.pageable;
-
-                if (isPlainObject(pageable) && pageable.pageSize !== undefined) {
-                    dataSource.pageSize = pageable.pageSize;
-                }
+            if ($.isPlainObject(dataSource) && element.is("ul")) {
+                $.extend(dataSource, {
+                    select: element,
+                    fields: [{ field: options.dataTextField }, { field: options.dataValueField }]
+                });
             }
 
-            that.dataSource = DataSource.create(dataSource);
-            that.dataSource.bind("change", $.proxy(that.refresh, that));
+            that.dataSource = DataSource.create(dataSource || {})
+                                        // .bind(CHANGE, proxy(that.reload, that));
+        },
+
+        _wrapper: function() {
+            var that = this,
+                element = that.element,
+                wrapper;
+
+            wrapper = element.parent();
+
+            if (!wrapper.is("div")) {
+                wrapper = element.wrap("<div />").parent();
+            }
+
+            that.wrapper = wrapper.addClass("t-widget t-treeview t-reset");
         },
 
         expand: function (li) {
@@ -319,13 +334,11 @@
                 return;
             }
 
-            var groupHtml = new $t.stringBuilder(),
-                group = $item.find('> .t-group'),
+            var group = $item.find('> .t-group'),
                 isGroup = group.length == 0;
 
-            $t.treeview.getGroupHtml({
+            var html = TreeView.getGroupHtml({
                 data: data,
-                html: groupHtml,
                 isAjax: this.isAjax(),
                 isFirstLevel: $item.hasClass("t-treeview"),
                 showCheckBoxes: this.showCheckBox,
@@ -338,11 +351,11 @@
             $item.data('animating', true);
 
             if (group.length > 0 && $item.data('loaded') === false)
-                $(groupHtml.string()).prependTo(group);
+                $(html).prependTo(group);
             else if (group.length > 0 && $item.data('loaded') !== false)
-                group.html(groupHtml.string());
+                group.html(html);
             else if (group.length == 0)
-                group = $(groupHtml.string()).appendTo($item);
+                group = $(html).appendTo($item);
 
             $t.fx.play(this.effects, group, { direction: 'bottom' }, function () {
                 $item.data('animating', false);
