@@ -35,13 +35,13 @@
                 .delegate(disabledItems, CLICK, false);
 
             element.bind({
-                expand: that.options.onExpand,
-                collapse: that.options.onCollapse,
+                expand: options.onExpand,
+                collapse: options.onCollapse,
                 select: function (e) {
-                    if (e.target == that.element && that.options.onSelect) that.options.onSelect(e);
+                    if (e.currentTarget == that.element[0] && options.onSelect) options.onSelect(e);
                 },
-                error: that.options.onError,
-                load: that.options.onLoad
+                error: options.onError,
+                load: options.onLoad
             });
 
             if (this.contentUrls)
@@ -131,7 +131,7 @@
 
             link.addClass(selectedClass.substr(1));
 
-            if (that.trigger(element, 'select', { item: item[0] })) {
+            if (element.trigger('select', { item: item[0] })) {
                 e.preventDefault();
             }
 
@@ -139,7 +139,7 @@
                 href = link.attr('href'),
                 isAnchor = link.data('ContentUrl') || (href && (href.charAt(href.length - 1) == '#' || href.indexOf('#' + element.id + '-') != -1));
 
-            if (isAnchor || contents.length > 0)
+            if (isAnchor || contents.length)
                 e.preventDefault();
             else
                 return;
@@ -148,10 +148,10 @@
                 if (that._collapseAllExpanded(item))
                     return;
 
-            if (contents.length != 0) {
+            if (contents.length) {
                 var visibility = contents.is(VISIBLE);
 
-                if (!that.trigger(element, !visibility ? 'expand' : 'collapse', { item: item[0] }))
+                if (!element.trigger(!visibility ? 'expand' : 'collapse', { item: item[0] }))
                     that._toggleItem(item, visibility, e);
             }
         },
@@ -164,7 +164,7 @@
 
                 this._toggleGroup(childGroup, isVisible);
 
-                if (e != null)
+                if (e)
                     e.preventDefault();
             } else {
 
@@ -172,7 +172,7 @@
                     content = element.find('> .t-content');
 
                 if (content.length) {
-                    if (e != null)
+                    if (e)
                         e.preventDefault();
 
                     if (!content.is(EMPTY))
