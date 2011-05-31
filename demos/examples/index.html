@@ -22,9 +22,18 @@
     <div id="example">
     </div>
     <script type="text/javascript" charset="utf-8">
-        function load(href) {
-            location.hash = href.replace(".html","");
+        var popstate = "pushState" in history;
 
+        function example(href) {
+            load(href);
+            if (popstate) {
+                history.pushState({ href: href }, null, href);
+            } else {
+                location.hash = href;
+            }
+        }
+
+        function load(href) {
             $.get(href, function(html) {
                 html = /<body[^>]*>(([\u000a\u000d\u2028\u2029]|.)*)<\/body>/ig.exec(html)[1];
                 $("#example").empty().html(html);
@@ -32,16 +41,28 @@
         }
 
         $(function() {
-            var example = location.hash.replace("#", "").toLowerCase() + ".html";
+            if (popstate) {
+                $(window).bind("popstate", function(e) {
+                    var state = e.originalEvent.state;
+                    if (state) {
+                        load(state.href);
+                    }
+                });
+            }
+
+            var exampleUrl = location.hash.replace("#", "").toLowerCase();
 
             $("li a").click(function(e) {
                 e.preventDefault();
 
-                load($(this).attr("href"));
+                example($(this).attr("href"));
             }).each(function() {
-                var href = $(this).attr("href").toLowerCase();
-                if (href === example) {
-                    load(href);
+                if (popstate) {
+                    $(this).attr("href", this.href);
+                } else {
+                    if ($(this).attr("href").toLowerCase() === exampleUrl) {
+                        example(exampleUrl);
+                    }
                 }
             });
         });
