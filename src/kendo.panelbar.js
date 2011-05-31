@@ -37,9 +37,9 @@
             element.bind({
                 expand: that.options.onExpand,
                 collapse: that.options.onCollapse,
-                select: $.proxy(function (e) {
+                select: function (e) {
                     if (e.target == that.element && that.options.onSelect) that.options.onSelect(e);
-                }, that),
+                },
                 error: that.options.onError,
                 load: that.options.onLoad
             });
@@ -191,7 +191,7 @@
             if (element.is(VISIBLE) != visibility)
                 return;
 
-            visibility && element.css('height', element.css('height')); // Set initial height on visible items (due to a Chrome bug/feature).
+            visibility && element.css('height', element.height()); // Set initial height on visible items (due to a Chrome bug/feature).
             element.css('height');
 
             element
@@ -217,7 +217,7 @@
 
         _collapseAllExpanded: function (item) {
             var that = this;
-            
+
             if (item.find('> .t-link').hasClass('t-header')) {
                 if (item.find('> .t-content, > .t-group').is(VISIBLE) || item.find('> .t-content, > .t-group').length == 0) {
                     return true;
