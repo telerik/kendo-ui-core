@@ -63,10 +63,14 @@
 
         refresh: function() {
             var chart = this,
+                options = chart.options,
                 model = new RootElement();
 
+            if (options.title && options.title.text) {
+                model.children.push(new Title(chart.options.title));
+            }
+
             model.children.push(
-                new Title({ text: chart.options.title }),
                 new Legend({ series: chart.options.series }),
                 new PlotArea(chart.options)
             );
@@ -396,7 +400,8 @@
 
     $.extend(Title.prototype, {
         options: {
-            text: "Title",
+            text: "",
+            font: "18px Verdana, sans-serif",
             position: "top",
             textAlign: "center"
         },

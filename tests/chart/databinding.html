@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>UI5.Chart Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <link href="../qunit.css" type="text/css" rel="stylesheet"/>
+    </head>
+    <body>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.query.js"></script>
+        <script src="../../src/kendo.datasource.js"></script>
+        <script src="../../src/kendo.chart.js"></script>
+        <script type="text/javascript">
+
+            var Chart = kendo.ui.Chart;
+
+            (function() {
+                var chart;
+
+                function createChart(options) {
+                    $("#container").kendoChart(options);
+
+                    chart = $("#container").data("kendoChart");
+                }
+
+                function destroyChart() {
+                    $("#container").empty();
+                }
+
+                // ------------------------------------------------------------
+                module("Binding to DataSource", {
+                    teardown: destroyChart
+                });
+
+                asyncTest("series points are populated on dataBound", 1, function() {
+                    createChart({
+                        dataSource: [{
+                            period: "Jan",
+                            sales: 100
+                        }, {
+                            period: "Feb",
+                            sales: 110
+                        }],
+                        series: [{
+                            field: "sales"
+                        }],
+                        dataBound: function() {
+                            equal(this.options.series[0].data.length, 2);
+                            start();
+                        }
+                    });
+                });
+
+            })();
+        </script>
+
+        <h1 id="qunit-header">kendo.chart</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <div id="container">
+        </div>
+    </body>
+</html>
