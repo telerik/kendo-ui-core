@@ -39,7 +39,7 @@
                 function createCategoryAxis(options) {
                     categoryAxis = new Chart.CategoryAxis(
                         $.extend({
-                            labels: ["Foo", "Bar"]
+                            categories: ["Foo", "Bar"]
                         }, options)
                     );
                     categoryAxis.updateLayout(chartBox);

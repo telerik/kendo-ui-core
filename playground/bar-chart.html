@@ -28,13 +28,13 @@
                         dataSource: [15, 40, 40],
                     }, {
                         name: "Value B",
-                        data: [-100, -200, -300],
+                        dataSource: [-100, -200, -300],
                     }, {
                         name: "Value C",
-                        data: [15, 25, 35],
+                        dataSource: [15, 25, 35]
                     }],
                     categoryAxis: {
-                        labels: ["Alpha", "Beta", "Charlie"]
+                        categories: ["Alpha", "Beta", "Charlie"]
                     }
                 });
             });
@@ -63,6 +63,16 @@
                     majorTickType: "outside", // "outside", "inside", "none", "cross"
                     minorTickType: "none" // "outside", "inside", "none", "cross"
                 },
+                categoryAxis: {
+                    // Shorthand for the default category axis
+                    categories: []
+                },
+                valueAxis: {
+                    type: "Numeric"
+                },
+                axes: {
+                    // For advanced axis configuration
+                },
                 series: [ ],
                 seriesColors: ["#d7df23", "#adc32b", "#799b28", "#4c7520"],
                 seriesDefaults: {
@@ -75,7 +85,7 @@
                         labels: {
                             visible: false,
                             position: "outsideEnd",
-                            // "outsideEnd", "insideEnd", "insideBase", "center"
+                                   // "outsideEnd", "insideEnd", "insideBase", "center"
                             color: "" // Derived from theme
                         }
                     }

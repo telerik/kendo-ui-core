@@ -26,7 +26,9 @@
 
     Chart.prototype = {
         options: {
-
+            categoryAxis: {
+                categories: []
+            }
         },
 
         types: { },
@@ -717,7 +719,7 @@
     CategoryAxis.prototype = new ChartElement();
     $.extend(CategoryAxis.prototype, {
         options: {
-            labels: [],
+            categories: [],
             line: "solid",
             majorTickLength: 4,
             isVertical: false,
@@ -728,8 +730,8 @@
             var axis = this,
                 options = axis.options;
 
-            for (var i = 0; i < options.labels.length; i++) {
-                var label = options.labels[i];
+            for (var i = 0; i < options.categories.length; i++) {
+                var label = options.categories[i];
                 axis.children.push(new Text(label, { align: "center" }));
             }
         },
@@ -1173,7 +1175,7 @@
     $.extend(PlotArea.prototype, {
         options: {
             axisY: { },
-            axisX: { },
+            categoryAxis: { },
             series: [ ]
         },
 
@@ -1205,7 +1207,7 @@
             plotArea.axisY =
                 new NumericAxis(seriesMin, seriesMax, plotArea.options.axisY);
 
-            plotArea.axisX = new CategoryAxis(options.axisX);
+            plotArea.axisX = new CategoryAxis(options.categoryAxis);
             /*
             plotArea.axisX = new NumericAxis(seriesMin, seriesMax, plotArea.options.axisY);
             plotArea.axisY = new CategoryAxis(options.axisX);
