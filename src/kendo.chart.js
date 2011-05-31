@@ -12,7 +12,11 @@
         TOP = "top"
         BOTTOM = "bottom",
         LEFT = "left",
-        RIGHT = "right";
+        RIGHT = "right",
+        HORIZONTAL = "horizontal",
+        VERTICAL = "vertical",
+        OUTSIDE = "outside",
+        NONE = "none";
 
     function Chart(element, options) {
         var chart = this;
@@ -26,8 +30,8 @@
 
     Chart.prototype = {
         options: {
-            categoryAxis: {
-                categories: []
+            valueAxis: {
+                type: "Numeric"
             }
         },
 
@@ -428,10 +432,10 @@
             max: 1,
             line: "solid",
             majorUnit: 0.1,
-            majorTicks: "outside",
-            majorTickSize: 4,
+            majorTickType: OUTSIDE,
+            tickSize: 4,
             axisCrossingValue: 0,
-            isVertical: true
+            orientation: VERTICAL
         },
 
         init: function() {
@@ -451,7 +455,7 @@
         updateLayout: function(targetBox) {
             var axis = this,
                 options = axis.options,
-                isVertical = options.isVertical,
+                isVertical = options.orientation === VERTICAL,
                 children = axis.children;
 
             var maxLabelWidth = 0,
@@ -465,12 +469,12 @@
             if (isVertical) {
                 axis.box = new Box(
                     targetBox.x1, targetBox.y1,
-                    targetBox.x1 + maxLabelWidth + options.majorTickSize, targetBox.y2
+                    targetBox.x1 + maxLabelWidth + options.tickSize, targetBox.y2
                 );
             } else {
                 axis.box = new Box(
                     targetBox.x1, targetBox.y1,
-                    targetBox.x2, targetBox.y1 + options.majorTickSize + maxLabelHeight
+                    targetBox.x2, targetBox.y1 + options.tickSize + maxLabelHeight
                 );
             }
 
@@ -480,7 +484,7 @@
         arrangeLabels: function(maxLabelWidth, maxLabelHeight) {
             var axis = this,
                 options = axis.options,
-                isVertical = axis.options.isVertical,
+                isVertical = axis.options.orientation === VERTICAL,
                 children = axis.children,
                 box = axis.box,
                 tickPositions = axis.getMajorDivisionsPositions();
@@ -494,9 +498,9 @@
                         new Box(box.x1, labelPos,
                                 box.x1 + maxLabelWidth, labelPos + labelSize) :
                         new Box(labelPos,
-                                box.y1 + options.majorTickSize,
+                                box.y1 + options.tickSize,
                                 labelPos + labelSize,
-                                box.y1 + options.majorTickSize + maxLabelHeight);
+                                box.y1 + options.tickSize + maxLabelHeight);
 
 
                 label.updateLayout(labelBox);
@@ -507,7 +511,7 @@
             var axis = this,
                 children = axis.children,
                 options = axis.options,
-                isVertical = options.isVertical,
+                isVertical = options.orientation === VERTICAL,
                 childElements = ChartElement.prototype.getViewElements.call(axis, factory);
 
             var majorTickPositions = axis.getMajorDivisionsPositions();
@@ -531,23 +535,27 @@
         renderTicks: function(factory) {
             var axis = this,
                 options = axis.options,
-                isVertical = options.isVertical,
+                isVertical = options.orientation === VERTICAL,
                 box = axis.box;
 
-            var majorTickPositions = axis.getMajorDivisionsPositions();
-            return $.map(majorTickPositions, function(tickPos) {
-                if (isVertical) {
-                    return factory.line(
-                        box.x2 - options.majorTickSize, tickPos,
-                        box.x2, tickPos
-                    );
-                } else {
-                    return factory.line(
-                        tickPos, box.y1,
-                        tickPos, box.y1 + options.majorTickSize
-                    );
-                }
-            });
+            if (options.majorTickType === OUTSIDE) {
+                var majorTickPositions = axis.getMajorDivisionsPositions();
+                return $.map(majorTickPositions, function(tickPos) {
+                    if (isVertical) {
+                        return factory.line(
+                            box.x2 - options.tickSize, tickPos,
+                            box.x2, tickPos
+                        );
+                    } else {
+                        return factory.line(
+                            tickPos, box.y1,
+                            tickPos, box.y1 + options.tickSize
+                        );
+                    }
+                });
+            } else {
+                return [];
+            }
         },
 
         autoMajorUnit: function (min, max) {
@@ -635,7 +643,7 @@
         getMajorDivisionsPositions: function() {
             var axis = this,
                 options = axis.options,
-                isVertical = options.isVertical,
+                isVertical = options.orientation === VERTICAL,
                 children = axis.children,
                 box = axis.box,
                 lineBox = axis.getAxisLineBox(),
@@ -656,7 +664,7 @@
         getAxisLineBox: function() {
             var axis = this,
                 options = axis.options,
-                isVertical = options.isVertical,
+                isVertical = options.orientation === VERTICAL,
                 labelSize = isVertical ? "height" : "width",
                 children = axis.children,
                 box = axis.box,
@@ -681,7 +689,7 @@
             var axis = this,
                 children = axis.children,
                 options = axis.options,
-                isVertical = options.isVertical,
+                isVertical = options.orientation === VERTICAL,
                 valueAxis = isVertical ? Y : X,
                 lineBox = axis.getAxisLineBox(),
                 lineStart = lineBox[valueAxis + 1],
@@ -721,9 +729,10 @@
         options: {
             categories: [],
             line: "solid",
-            majorTickLength: 4,
-            isVertical: false,
-            axisCrossingValue: 0
+            tickSize: 4,
+            majorTickType: OUTSIDE,
+            axisCrossingValue: 0,
+            orientation: "horizontal"
         },
 
         init: function() {
@@ -739,7 +748,7 @@
         updateLayout: function(targetBox) {
             var axis = this,
                 options = axis.options,
-                isVertical = options.isVertical,
+                isVertical = options.orientation === VERTICAL,
                 children = axis.children,
                 width = targetBox.width(),
                 step = width / children.length,
@@ -756,19 +765,19 @@
             if (isVertical) {
                 axis.box = new Box(
                     targetBox.x1, targetBox.y1,
-                    targetBox.x1 + options.majorTickLength + maxLabelWidth, targetBox.y2
+                    targetBox.x1 + options.tickSize + maxLabelWidth, targetBox.y2
                 );
             } else {
                 axis.box = new Box(
                     targetBox.x1, targetBox.y1,
-                    targetBox.x2, targetBox.y1 + options.majorTickLength + maxLabelHeight
+                    targetBox.x2, targetBox.y1 + options.tickSize + maxLabelHeight
                 );
             }
 
             var majorDivisions = axis.getMajorTickPositions();
 
             if (isVertical) {
-                labelX = axis.box.x2 - options.majorTickLength;
+                labelX = axis.box.x2 - options.tickSize;
                 for (var i = 0; i < children.length; i++) {
                     var label = children[i],
                         currentDivision = majorDivisions[i],
@@ -782,7 +791,7 @@
                     ));
                 }
             } else {
-                labelY = axis.box.y1 + options.majorTickLength;
+                labelY = axis.box.y1 + options.tickSize;
                 for (var i = 0; i < children.length; i++) {
                     var label = children[i],
                         currentDivision = majorDivisions[i],
@@ -800,7 +809,7 @@
             var axis = this,
                 children = axis.children,
                 options = axis.options,
-                isVertical = options.isVertical,
+                isVertical = options.orientation === VERTICAL,
                 childElements = ChartElement.prototype.getViewElements.call(axis, factory);
 
             if (options.line.toLowerCase() == "solid") {
@@ -823,29 +832,33 @@
         renderTicks: function(factory) {
             var axis = this,
                 options = axis.options,
-                isVertical = options.isVertical,
+                isVertical = options.orientation === VERTICAL,
                 box = axis.box;
 
-            var majorTickPositions = axis.getMajorTickPositions();
-            return $.map(majorTickPositions, function(tickPos) {
-                if (isVertical) {
-                    return factory.line(
-                        box.x2 - options.majorTickLength, tickPos,
-                        box.x2, tickPos
-                    );
-                } else {
-                    return factory.line(
-                        tickPos, box.y1,
-                        tickPos, box.y1 + options.majorTickLength
-                    );
-                }
-            });
+            if (options.majorTickType === OUTSIDE) {
+                var majorTickPositions = axis.getMajorTickPositions();
+                return $.map(majorTickPositions, function(tickPos) {
+                    if (isVertical) {
+                        return factory.line(
+                            box.x2 - options.tickSize, tickPos,
+                            box.x2, tickPos
+                        );
+                    } else {
+                        return factory.line(
+                            tickPos, box.y1,
+                            tickPos, box.y1 + options.tickSize
+                        );
+                    }
+                });
+            } else {
+                return [];
+            }
         },
 
         getMajorTickPositions: function() {
             var axis = this,
                 options = axis.options,
-                isVertical = options.isVertical,
+                isVertical = options.orientation === VERTICAL,
                 children = axis.children,
                 size = isVertical ? axis.box.height() : axis.box.width(),
                 step = size / children.length,
@@ -865,7 +878,7 @@
         getSlot: function(categoryIx) {
             var axis = this,
                 options = axis.options,
-                isVertical = options.isVertical,
+                isVertical = options.orientation === VERTICAL,
                 children = axis.children,
                 box = axis.box,
                 size = isVertical ? box.height() : box.width(),
@@ -1174,8 +1187,8 @@
     PlotArea.prototype = new ChartElement();
     $.extend(PlotArea.prototype, {
         options: {
-            axisY: { },
             categoryAxis: { },
+            valueAxis: { },
             series: [ ]
         },
 
@@ -1202,16 +1215,18 @@
 
         createAxes: function(seriesMin, seriesMax) {
             var plotArea = this,
-                options = plotArea.options;
+                options = plotArea.options,
+                valueAxisOptions = extend({}, options.axesDefaults, options.valueAxis),
+                categoryAxisOptions = extend({}, options.axesDefaults, options.categoryAxis);
 
-            plotArea.axisY =
-                new NumericAxis(seriesMin, seriesMax, plotArea.options.axisY);
-
-            plotArea.axisX = new CategoryAxis(options.categoryAxis);
-            /*
-            plotArea.axisX = new NumericAxis(seriesMin, seriesMax, plotArea.options.axisY);
-            plotArea.axisY = new CategoryAxis(options.axisX);
-            */
+            if (options.valueAxis.orientation === HORIZONTAL &&
+                options.categoryAxis.orientation === VERTICAL) {
+                plotArea.axisX = new NumericAxis(seriesMin, seriesMax, valueAxisOptions);
+                plotArea.axisY = new CategoryAxis(categoryAxisOptions);
+            } else {
+                plotArea.axisY = new NumericAxis(seriesMin, seriesMax, valueAxisOptions);
+                plotArea.axisX = new CategoryAxis(categoryAxisOptions);
+            }
 
             plotArea.children.push(plotArea.axisY);
             plotArea.children.push(plotArea.axisX);

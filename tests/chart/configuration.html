@@ -31,6 +31,7 @@
                     $("#container").empty();
                 }
 
+                // ------------------------------------------------------------
                 module("SVG / VML output selection", {
                     setup: createChart,
                     teardown: destroyChart
@@ -48,6 +49,7 @@
                     ok(chart._viewFactory instanceof Chart.VMLFactory);
                 });
 
+                // ------------------------------------------------------------
                 module("Category Axis Configuration", {
                     teardown: destroyChart
                 });
@@ -61,6 +63,66 @@
 
                     same(plotArea.axisX.options.categories,
                          chart.options.categoryAxis.categories);
+                });
+
+                test("category axis is rendered horizontally by default", function() {
+                    createChart();
+                    ok(plotArea.axisX instanceof Chart.CategoryAxis);
+                });
+
+                test("category axis is rendered vertically", function() {
+                    createChart({
+                        categoryAxis: {
+                            orientation: "vertical"
+                        },
+                        valueAxis: {
+                            orientation: "horizontal"
+                        }
+                    });
+                    ok(plotArea.axisY instanceof Chart.CategoryAxis);
+                });
+
+                // ------------------------------------------------------------
+                module("Value Axis Configuration", {
+                    teardown: destroyChart
+                });
+
+                test("default value axis type is Numeric", function() {
+                    createChart();
+                    equal(plotArea.axisY.options.type, "Numeric");
+                });
+
+                test("value axis is rendered vertically by default", function() {
+                    createChart();
+                    ok(plotArea.axisY instanceof Chart.NumericAxis);
+                });
+
+                test("value axis is rendered horizontally", function() {
+                    createChart({
+                        valueAxis: {
+                            orientation: "horizontal"
+                        },
+                        categoryAxis: {
+                            orientation: "vertical"
+                        }
+                    });
+                    ok(plotArea.axisX instanceof Chart.NumericAxis);
+                });
+
+                // ------------------------------------------------------------
+                module("Axis defaults", {
+                    teardown: destroyChart
+                });
+
+                test("tickSize is propagated to both axes", function() {
+                    createChart({
+                        axesDefaults: {
+                            tickSize: 5
+                        }
+                    });
+
+                    equal(plotArea.axisX.options.tickSize, 5);
+                    equal(plotArea.axisY.options.tickSize, 5);
                 });
             })();
         </script>

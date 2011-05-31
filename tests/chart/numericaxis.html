@@ -301,11 +301,19 @@
                     same(ticksY, [9, 106, 203, 300, 397, 494, 591], TOLERANCE);
                 });
 
+                test("major ticks can be disabled", function() {
+                    numericAxis.options.line = "none";
+                    numericAxis.options.majorTickType = "none";
+                    numericAxis.getViewElements(factoryStub);
+
+                    equal(factoryStub.renderedLines, 0);
+                });
+
                 module("View Rendering / Horizontal", {
                     setup: function() {
                         factoryStub = new ViewFactoryStub();
 
-                        numericAxis = new Chart.NumericAxis(0, 1, { isVertical: false });
+                        numericAxis = new Chart.NumericAxis(0, 1, { orientation: "horizontal" });
                         numericAxis.updateLayout(chartBox);
                     }
                 });
@@ -459,7 +467,7 @@
 
                 module("Slots / Horizontal", {
                     setup: function() {
-                        numericAxis = new Chart.NumericAxis(0, 1, { isVertical: false });
+                        numericAxis = new Chart.NumericAxis(0, 1, { orientation: "horizontal" });
                         numericAxis.updateLayout(chartBox);
                     }
                 });
@@ -497,7 +505,7 @@
 
                 module("Slots / Horizontal / Negative Values", {
                     setup: function() {
-                        numericAxis = new Chart.NumericAxis(-1, 0, { isVertical: false });
+                        numericAxis = new Chart.NumericAxis(-1, 0, { orientation: "horizontal" });
                         numericAxis.updateLayout(chartBox);
                     }
                 });
