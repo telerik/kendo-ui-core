@@ -7,7 +7,7 @@ var wrench = require("./wrench");
 
 var html = fs.readFileSync("demos/aeroviewr/index.html", "utf8");
 
-var VERSION = "1.0.0";
+var VERSION = "1.0.1";
 
 function processFileGroup(group, path, matcher) {
     var script = "";
