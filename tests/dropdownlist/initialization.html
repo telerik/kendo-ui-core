@@ -186,6 +186,7 @@
 
                  ok(dropdownlist.ul);
                  ok(dropdownlist.ul.is("ul"));
+                 equal(dropdownlist.ul.css("overflow"), "auto");
            });
 
            test("dropdownlist initializes a popup for its items", function() {
@@ -195,6 +196,25 @@
                  ok(dropdownlist.popup instanceof kendo.ui.Popup);
                  ok(dropdownlist.popup.options.anchor[0], input[0]);
                  ok(dropdownlist.popup.element[0], dropdownlist.ul[0]);
+           });
+
+           test("dropdownlist shrink ul if the height of the items is more then options.height", function() {
+               var data = [{text: "foo", value: 1},
+                           {text:2, value:2},
+                           {text:2, value:2},
+                           {text:2, value:2},
+                           {text:2, value:2},
+                           {text:2, value:2},
+                           {text:2, value:2},
+                           {text:2, value:2},
+                           {text:2, value:2}];
+
+                  var dropdownlist = new DropDownList(input, data);
+                  dropdownlist.options.height = 100;
+
+                  dropdownlist.dataSource.read();
+
+                  equal(dropdownlist.ul.css("height"), "100px");
            });
 
            test("dropdownlist populates its list when the datasource changes", function() {

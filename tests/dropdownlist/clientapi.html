@@ -125,6 +125,37 @@
 
             });
 
+            test("text should set span html", function() {
+                var dropdownlist = new DropDownList(input);
+
+                dropdownlist.text("foo");
+
+                equal(dropdownlist.span.html(), "foo");
+            });
+
+            test("text with spaces should set span html", function() {
+                var dropdownlist = new DropDownList(input);
+
+                dropdownlist.text("foo foo");
+
+                equal(dropdownlist.span.html(), "foo foo");
+            });
+
+            test("empty text should set nbsp", function() {
+                var dropdownlist = new DropDownList(input);
+
+                dropdownlist.text("");
+
+                equal(dropdownlist.span.html(), "&nbsp;&nbsp;");
+            });
+
+            test("text only with spaces should set nbsp", function() {
+                var dropdownlist = new DropDownList(input);
+
+                dropdownlist.text("  ");
+
+                equal(dropdownlist.span.html(), "&nbsp;&nbsp;");
+            });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

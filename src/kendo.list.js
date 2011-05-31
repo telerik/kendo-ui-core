@@ -13,15 +13,14 @@
 
             that._template();
 
-            that.ul = $("<ul/>");
-
-            that.ul
-                .mousedown(function() {
-                    setTimeout(function() {
-                        clearTimeout(that._bluring);
-                    }, 0);
-                })
-                .delegate("li", "click", $.proxy(that._click, that));
+            that.ul = $("<ul/>")
+                        .css("overflow", "auto")
+                        .mousedown(function() {
+                            setTimeout(function() {
+                                clearTimeout(that._bluring);
+                            }, 0);
+                        })
+                        .delegate("li", "click", $.proxy(that._click, that));
         },
 
         current: function(candidate) {
@@ -36,6 +35,7 @@
                     candidate.addClass(FOCUSED);
                 }
                 that._current = candidate;
+                that._scroll(candidate[0]);
             } else {
                 return that._current;
             }
@@ -64,6 +64,24 @@
 
                 that.previous = value;
             }
+        },
+
+        _scroll: function (item) {
+
+            if (!item) return;
+
+            var ul = this.ul[0],
+                itemOffsetTop = item.offsetTop,
+                itemOffsetHeight = item.offsetHeight,
+                ulScrollTop = ul.scrollTop,
+                ulOffsetHeight = ul.clientHeight,
+                bottomDistance = itemOffsetTop + itemOffsetHeight;
+
+            ul.scrollTop = ulScrollTop > itemOffsetTop
+                        ? itemOffsetTop
+                        : bottomDistance > (ulScrollTop + ulOffsetHeight)
+                        ? bottomDistance - ulOffsetHeight
+                        : ulScrollTop;
         },
 
         _template: function() {
