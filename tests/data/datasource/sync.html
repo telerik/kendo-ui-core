@@ -186,6 +186,83 @@
                 equal(destroyed[0].foo, undefined);
                 equal(destroyed[0].bar, undefined);
             });
+
+            test("sync with batch=false calls transport update for every record", function() {                
+                var updated = [],
+                    dataSource = setup({
+                        update: function(options) {
+                            updated.push(options.data);
+                        }
+                    }, 
+                    [{ id: 1, foo: "foo"}, { id: 2, foo: "bar"}],
+                    { batch: false });
+
+                dataSource.update(1, { foo: "bar" });
+                dataSource.update(2, { foo: "baz" });                
+                dataSource.sync();
+               
+                equal(updated.length, 2);
+                equal(updated[0].foo, "bar");
+                equal(updated[1].foo, "baz");
+            });
+
+            test("sync with batch=false calls transport create for every new record", function() {                
+               var created = [],
+                    dataSource = setup({
+                        create: function(options) {
+                            created.push(options.data);
+                        }
+                    },
+                    undefined,
+                    { batch: false });
+
+                dataSource.create({ foo: "bar" });               
+                dataSource.sync();
+               
+                equal(created.length, 1);
+                equal(created[0].foo, "bar");                
+            });
+
+            test("sync with batch=false calls transport destroy for destroyed record", function() {                
+               var destroyed = [],
+                    dataSource = setup({
+                        destroy: function(options) {
+                            destroyed.push(options.data);
+                        }
+                    },
+                    [{ id: 1, foo: "foo", bar: "bar" }],
+                    { batch: false });
+
+                dataSource.destroy(1);               
+                dataSource.sync();
+               
+                equal(destroyed.length, 1);
+                equal(destroyed[0].foo, "foo");                
+            });
+
+            test("sync with batch.mode=single calls transport update with created/updated/destroyed records", function() {
+               var data,
+                    dataSource = setup({
+                        update: function(options) {
+                            data = options.data;
+                        }
+                    },
+                    [{ id: 1, foo: "foo" }, { id: 2, foo: "baz" }],
+                    { 
+                        batch: { mode: "single" }
+                    });
+
+                dataSource.destroy(1);
+                dataSource.create({ foo: "bar" });
+                dataSource.update(2, { foo: "foo" });
+                dataSource.sync();
+                
+                equal(data.updated[0].id, 2);
+                equal(data.updated[0].foo, "foo");
+                equal(data.destroyed[0].id, 1);
+                equal(data.created[0].foo, "bar");
+            });
+           
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

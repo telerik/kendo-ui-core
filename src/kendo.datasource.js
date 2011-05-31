@@ -262,7 +262,10 @@
             serverPaging: false,
             serverFiltering: false,
             autoSync: false,
-            sendAllFields: true
+            sendAllFields: true,
+            batch: {
+                mode: "multiple"
+            }
         },
 
         model: function(id) {
@@ -314,8 +317,11 @@
                 updated,
                 created,
                 destroyed,
-                sendAllFields = that.options.sendAllFields;
-
+                sendAllFields = that.options.sendAllFields,
+                batch = that.options.batch,
+                mode,
+                transport = that.transport;
+                
             updated = that._byState(Model.UPDATED, function(model) {
                 if(sendAllFields) {
                     return model.data;
@@ -337,21 +343,46 @@
                 return data;
             });
 
-            if (created.length) {
-                that.transport.create({
-                    data: created
-                });
+            if(batch === false) {
+                mode = "multiple";
+            }
+            else if ((batch.mode || "multiple") === "multiple") {
+                mode = "single";
+            }
+            
+            if(mode) {
+                that._send(created, proxy(transport.create, transport), mode);
+                that._send(updated, proxy(transport.update, transport), mode);
+                that._send(destroyed, proxy(transport.destroy, transport), mode);
+            } else {
+                that._send({
+                        created: created,
+                        updated: updated,
+                        destroyed: destroyed
+                    }, 
+                    proxy(transport.update, transport), 
+                    "single"
+                );
+            }            
+        },
+
+        _send: function(data, method, mode) {
+            var that = this,
+                idx;
+            
+            if(data.length == 0) {
+                return;
             }
 
-            if (updated.length) {
-                that.transport.update({
-                    data: updated
-                });
-            }
-
-            if (destroyed.length) {
-                that.transport.destroy({
-                    data: destroyed
+            if(mode === "multiple") {
+                for(idx = 0, length = data.length; idx < length; idx++) {
+                    method({
+                        data: data[idx]
+                    });
+                }  
+            } else {
+                method({
+                    data: data
                 });
             }
         },
