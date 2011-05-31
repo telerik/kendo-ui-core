@@ -26,6 +26,13 @@
     var Chart = Component.extend({
         init: function(element, options) {
             var chart = this;
+
+            // Clean up series colors as $.extend does not overwrite arrays,
+            // but tries to merge them as if they were objects.
+            if (options && options.seriesColors) {
+                chart.options.seriesColors = [];
+            }
+
             Component.fn.init.call(chart, element, options);
 
             chart.bind([DATABOUND], chart.options);

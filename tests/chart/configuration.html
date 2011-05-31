@@ -167,6 +167,17 @@
                     equal(chart.options.series[0].color, "#000");
                 });
 
+                test("series colors are reused", function() {
+                    createChart({
+                        seriesColors: ["#f00"],
+                        series: [{}, {}]
+                    });
+
+                    console.log(chart.options.seriesColors);
+
+                    equal(chart.options.series[0].color, "#f00");
+                    equal(chart.options.series[1].color, "#f00");
+                });
             })();
         </script>
 
