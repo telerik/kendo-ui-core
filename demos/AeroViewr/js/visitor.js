@@ -5,6 +5,7 @@ window.application.call(this);
 var visitor = window.visitor,
     slideshow = window.slideshow,
     searching = false,
+    sliderValue = 0,
     data = window.data,
     dataSource = data.dataSource({
         pageSize: 5,
@@ -92,9 +93,13 @@ var visitor = window.visitor,
         },
         search: function(el) {
             if ($("#searchBox").val() && !searching) {
+
                 $("#overlay").after("<div id='searchLoading' class='loading'>Loading ...</div>");
                 searching = true;
-                dataSource.query({page: 1, pageSize: $("#mainTemplate").find("#grid").hasClass("currentView") ? 5 : 20});
+
+                var pageSize = sliderValue === 0 ? 20 : parseInt(20 / sliderValue);
+
+                dataSource.query({page: 1, pageSize: $("#mainTemplate").find("#grid").hasClass("currentView") ? 5 : pageSize});
                 $("#flatMostPopularPhotos").hide();
                 $("#flatSearchPhotos").hide();
                 $("#overlay").stop(true, true).fadeIn();
@@ -184,8 +189,7 @@ var visitor = window.visitor,
             });
 
             $(".i-tileview").click(function() {
-                var value = $("#slider").data("kendoSlider").value(),
-                    pageSize = value === 0 ? 20 : parseInt(20 / value);
+                var pageSize = sliderValue === 0 ? 20 : parseInt(20 / sliderValue);
 
                 dataSource.query({page: 1, pageSize: pageSize});
 
@@ -238,10 +242,10 @@ var visitor = window.visitor,
                 largeStep: 1,
                 tickPlacement: "none",
                 change: function() {
-                    var value = this.value();
-                    imageSize = IMAGESIZES[value];
+                    sliderValue = this.value();
+                    imageSize = IMAGESIZES[sliderValue];
                     var t = template(imageSize),
-                        pageSize = value === 0 ? 20 : parseInt(20 / value);
+                        pageSize = sliderValue === 0 ? 20 : parseInt(20 / sliderValue);
                     $("#mainPhotoStrip").data("kendoListView").template = kendo.template(t);
                     dataSource.query({page: 1, pageSize: pageSize});
                 }
