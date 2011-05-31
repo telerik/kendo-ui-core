@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <script src="../../src/jquery.js" type="text/javascript" charset="utf-8"></script>
+        <title></title>
+        <style type="text/css">
+            #example
+            {
+                border: 1px solid black;
+            }
+        </style>
+    </head>
+<body>
+    <ul>
+        <li><a href="autocomplete/index.html">Autocomplete - feature 1</a></li>
+        <li><a href="autocomplete/events.html">Autocomplete - feature 2</a></li>
+    </ul>
+    <ul>
+        <li><a href="autocomplete/index.html">Autocomplete</a></li>
+    </ul>
+    <div id="example">
+    </div>
+    <script type="text/javascript" charset="utf-8">
+        function load(href) {
+            location.hash = href.replace(".html","");
+
+            $.get(href, function(html) {
+                html = /<body[^>]*>(([\u000a\u000d\u2028\u2029]|.)*)<\/body>/ig.exec(html)[1];
+                $("#example").empty().html(html);
+            });
+        }
+
+        $(function() {
+            var example = location.hash.replace("#", "").toLowerCase() + ".html";
+
+            $("li a").click(function(e) {
+                e.preventDefault();
+
+                load($(this).attr("href"));
+            }).each(function() {
+                var href = $(this).attr("href").toLowerCase();
+                if (href === example) {
+                    load(href);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
