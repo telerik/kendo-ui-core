@@ -39,8 +39,7 @@
                    .delegate( itemSelector, MOUSELEAVE, $.proxy( that._mouseleave , that ) )
                    .delegate( itemSelector, CLICK, $.proxy( that._click , that ) );
 
-            element.delegate( linkSelector, MOUSEENTER, $.proxy( that._toggleHover , that ) )
-                   .delegate( linkSelector, MOUSELEAVE, $.proxy( that._toggleHover , that ) );
+            element.delegate( linkSelector, MOUSEENTER + ' ' + MOUSELEAVE, that._toggleHover );
 
             $(document).click($.proxy( that._documentClick, that ));
 
