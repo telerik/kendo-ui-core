@@ -33,14 +33,18 @@
         },
 
         fetch: function(href) {
-            $.get(href, function(html) {
-                var example = $("#example");
+            $("li a").each(function() {
+                if ($(this).attr("href").toLowerCase() === href) {
+                    $.get(href, function(html) {
+                        var example = $("#example");
 
-                if (!example[0]) {
-                    example = $('<div id="example" />').appendTo(document.body);
+                        if (!example[0]) {
+                            example = $('<div id="example" />').appendTo(document.body);
+                        }
+
+                        example.empty().html(Application.body(html));
+                    });
                 }
-
-                example.empty().html(Application.body(html));
             });
         },
 
@@ -71,6 +75,10 @@
 
     if (base) {
         $.get("../index.html", function(html) {
+            if (pushState) {
+                history.replaceState({ href: location.href });
+            }
+
             html = Application.body(html);
 
             $(document.body).prepend(html);
@@ -80,14 +88,17 @@
     }
 
     $(function() {
-        if (pushState) {
             $(window).bind("popstate", function(e) {
                 var state = e.originalEvent.state;
                 if (state) {
-                    Application.fetch(state.href);
+                    Application.fetch(state.href.toLowerCase());
+                }
+            }).bind("hashchange", function() {
+                var url = location.hash.replace("#", "").toLowerCase();
+                if (url) {
+                    Application.fetch(url);
                 }
             });
-        }
 
         Application.init();
     });
