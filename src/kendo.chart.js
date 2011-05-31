@@ -31,6 +31,8 @@
             chart.bind([DATABOUND], chart.options);
             chart._viewFactory = chart._supportsSVG() ? new SVGFactory() : new VMLFactory();
 
+            chart._applyDefaults();
+
             if (chart.options.dataSource) {
                 chart._initDataSource();
             } else {
@@ -41,7 +43,12 @@
         options: {
             valueAxis: {
                 type: "Numeric"
-            }
+            },
+            seriesDefaults: {
+                type: "bar",
+                data: []
+            },
+            series: []
         },
 
         types: { },
@@ -67,6 +74,16 @@
         _supportsSVG: function() {
             return document.implementation.hasFeature(
                 "http://www.w3.org/TR/SVG11/feature#BasicStructure", "1.1");
+        },
+
+        _applyDefaults: function() {
+            var chart = this,
+                options = chart.options,
+                series = options.series;
+
+            for (var i = 0, length = series.length; i < length; i++) {
+                series[i] = extend({}, options.seriesDefaults, series[i]);
+            }
         },
 
         _initDataSource: function() {

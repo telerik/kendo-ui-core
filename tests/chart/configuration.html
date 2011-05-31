@@ -123,6 +123,30 @@
                     equal(plotArea.axisX.options.tickSize, 5);
                     equal(plotArea.axisY.options.tickSize, 5);
                 });
+
+                // ------------------------------------------------------------
+                module("Series defaults", {
+                    teardown: destroyChart
+                });
+
+                test("default type is set to bar", function() {
+                    createChart({
+                        series: [{ }]
+                    });
+
+                    equal(chart.options.series[0].type, "bar");
+                });
+
+                test("type is set", function() {
+                    createChart({
+                        seriesDefaults: {
+                            type: "line"
+                        },
+                        series: [{ }]
+                    });
+
+                    equal(chart.options.series[0].type, "line");
+                });
             })();
         </script>
 
