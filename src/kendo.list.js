@@ -33,9 +33,9 @@
 
                 if (candidate) {
                     candidate.addClass(FOCUSED);
+                    that._scroll(candidate[0]);
                 }
                 that._current = candidate;
-                that._scroll(candidate[0]);
             } else {
                 return that._current;
             }
