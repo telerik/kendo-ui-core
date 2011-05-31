@@ -4,9 +4,10 @@
         List = ui.List,
         DataSource = kendo.data.DataSource,
         CHANGE = "change",
+        LOADING = "t-loading",
         SELECTED = "t-state-selected",
         proxy = $.proxy,
-        whiteSpaceRegExp = /\s+/;
+        whiteSpaceRegExp = /^\s*$/;
 
     var DropDownList = List.extend({
         init: function(element, options) {
@@ -43,6 +44,7 @@
                     },
                     click: function() {
                         if(!that.ul.children()[0]) {
+                            that.showBusy();
                             that.dataSource.read();
                         } else {
                             that.popup.toggle();
@@ -56,6 +58,7 @@
                 });
 
             if (that.options.autoBind) {
+                that.showBusy();
                 that.dataSource.query();
             }
         },
@@ -66,7 +69,8 @@
             delay: 500,
             dataSource: {},
             dataTextField: "text",
-            dataValueField: "value"
+            dataValueField: "value",
+            height: 200
         },
 
         close: function() {
@@ -76,6 +80,7 @@
         open: function() {
             var that = this;
             if (!that.ul.children()[0]) {
+                that.showBusy();
                 that.options.autoBind = false;
                 that.dataSource.query();
             } else {
@@ -86,9 +91,12 @@
         refresh: function() {
             var that = this,
                 options = that.options,
+                height = options.height,
                 data = that.dataSource.view();
 
             that.ul[0].innerHTML = kendo.render(that.template, data);
+
+            that.ul.height(data.length * 20 > height ? height : "auto");
 
             that.select(that.options.index);
 
@@ -97,6 +105,21 @@
             if (!that.options.autoBind) {
                 that.popup[data.length ? "open" : "close"]();
             }
+
+            that.hideBusy();
+        },
+
+        showBusy: function () {
+            var that = this;
+            that._busy = setTimeout(proxy(function () {
+                that.arrow.addClass(LOADING);
+            }, this), 100);
+        },
+
+        hideBusy: function () {
+            var that = this;
+            clearTimeout(that._busy);
+            that.arrow.removeClass(LOADING);
         },
 
         search: function(word) {
@@ -289,6 +312,7 @@
                 span = wrapper.find(SELECTOR);
             }
             that.span = span;
+            that.arrow = span.next().children();
         },
 
         _wrapper: function() {
