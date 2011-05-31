@@ -99,10 +99,18 @@
                     same(ticksX, [0, 400, 800], TOLERANCE);
                 });
 
+                test("major ticks can be disabled", function() {
+                    categoryAxis.options.line = "none";
+                    categoryAxis.options.majorTickType = "none";
+                    categoryAxis.getViewElements(factoryStub);
+
+                    equal(factoryStub.renderedLines, 0);
+                });
+
                 module("Category Axis / Vertical / Rendering", {
                     setup: function() {
                         factoryStub = new ViewFactoryStub();
-                        createCategoryAxis({ isVertical: true });
+                        createCategoryAxis({ orientation: "vertical" });
                     }
                 });
 
@@ -177,7 +185,7 @@
 
                 module("Category Axis / Vertical / Slots", {
                     setup: function() {
-                        createCategoryAxis({ isVertical: true });
+                        createCategoryAxis({ orientation: "vertical" });
                     }
                 });
 
