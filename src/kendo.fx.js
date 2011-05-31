@@ -304,7 +304,7 @@
             play: function(element, properties, options) {
                 if (kendo.support.transitions) {
                     element.css(kendo.support.transitions.css + 'transform', 'translate(' + (-element.outerWidth()) + 'px)');
-                    element.css('left'); // Read a style to force the browser to apply the change.
+                    element.css('left'); // Read a style to force Chrome to apply the change.
                     animate(element, extend({ translate: 0 }, properties), options);
                 } else {
                     element.css('left', -element.outerWidth() + 'px');
@@ -334,6 +334,104 @@
                     animate(element, extend({ translateY: (-element.outerHeight()) + 'px' }, properties), options);
                 else
                     animate(element, extend({ top: -element.outerHeight() + 'px' }, properties), options);
+            }
+        },
+        shrinkVertical: {
+            play: function(element, properties, options) {
+                if (!element.data('height'))
+                    element.data({
+                        height: element.outerHeight(),
+                        overflow: element.css('overflow')
+                    });
+                animate(element, extend({ height: 0 }, properties), options);
+            },
+            reverse: function(element, properties, options) {
+                animate(element, extend({ height: element.data('height') + 'px' }, properties), extend({ complete: function () { element.css('overflow', element.data('overflow')) } }, options) );
+            }
+        },
+        shrinkHorizontal: {
+            play: function(element, properties, options) {
+                if (!element.data('width'))
+                    element.data({
+                        width: element.outerWidth(),
+                        overflow: element.css('overflow')
+                    });
+                animate(element, extend({ width: 0 }, properties), options);
+            },
+            reverse: function(element, properties, options) {
+                animate(element, extend({ width: element.data('width') + 'px' }, properties), extend({ complete: function () { element.css('overflow', element.data('overflow')) } }, options) );
+            }
+        },
+        expandVertical: {
+            play: function(element, properties, options) {
+                if (!element.data('height')) {
+                    var clone = element.clone();
+                    element.css({
+                        height: 0,
+                        overflow: 'hidden'
+                    });
+
+                    clone
+                        .css({ position: 'absolute', height: 'auto', overflow: 'hidden', visibility: 'hidden', top: '-10000px' })
+                        .appendTo(element.parent());
+
+                    element.data({
+                        height: clone.height(),
+                        overflow: clone.css('overflow')
+                    });
+                    
+                    clone.remove();
+                }
+
+                animate(element, extend({ height: element.data('height') + 'px' }, properties), extend({ complete: function () { element.css('overflow', element.data('overflow')) } }, options));
+            },
+            reverse: function(element, properties, options) {
+                if (!element.data('height')) {
+                    element.data({
+                        height: element.height(),
+                        overflow: element.css('overflow')
+                    });
+
+                    element.css({ overflow: 'hidden' });
+                }
+
+                animate(element, extend({ height: 0 }, properties), extend({ complete: function () { element.css('overflow', element.data('overflow')) } }, options));
+            }
+        },
+        expandHorizontal: {
+            play: function(element, properties, options) {
+                if (!element.data('width')) {
+                    var clone = element.clone();
+                    clone
+                        .css({ position: 'absolute', width: '100%', overflow: 'hidden', visibility: 'hidden', top: '-10000px' })
+                        .appendTo(element.parent());
+
+                    element.data({
+                        width: clone.outerWidth(),
+                        overflow: clone.css('overflow')
+                    });
+
+                    clone.remove();
+                }
+
+                element.css({
+                    width: 0,
+                    overflow: 'hidden'
+                });
+
+                animate(element, extend({ width: element.data('width') + 'px' }, properties), extend({ complete: function () { element.css('overflow', element.data('overflow')) } }, options));
+            },
+            reverse: function(element, properties, options) {
+                if (!element.data('width')) {
+                    element.data({
+                        width: element.width(),
+                        overflow: element.css('overflow')
+                    });
+
+                    element.css({ overflow: 'hidden' });
+                }
+
+                animate(element, extend({ width: 0 }, properties), extend({ complete: function () { element.css('overflow', element.data('overflow')) } }, options));
             }
         }
     });
