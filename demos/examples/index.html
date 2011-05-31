@@ -3,69 +3,18 @@
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
         <script src="../../src/jquery.js" type="text/javascript" charset="utf-8"></script>
-        <title></title>
-        <style type="text/css">
-            #example
-            {
-                border: 1px solid black;
-            }
-        </style>
+        <script src="kendo.examples.js" type="text/javascript" charset="utf-8"></script>
+        <title>Home</title>
     </head>
-<body>
-    <ul>
-        <li><a href="autocomplete/index.html">Autocomplete - feature 1</a></li>
-        <li><a href="autocomplete/events.html">Autocomplete - feature 2</a></li>
-    </ul>
-    <ul>
-        <li><a href="autocomplete/index.html">Autocomplete</a></li>
-    </ul>
-    <div id="example">
-    </div>
-    <script type="text/javascript" charset="utf-8">
-        var popstate = "pushState" in history;
-
-        function example(href) {
-            load(href);
-            if (popstate) {
-                history.pushState({ href: href }, null, href);
-            } else {
-                location.hash = href;
-            }
-        }
-
-        function load(href) {
-            $.get(href, function(html) {
-                html = /<body[^>]*>(([\u000a\u000d\u2028\u2029]|.)*)<\/body>/ig.exec(html)[1];
-                $("#example").empty().html(html);
-            });
-        }
-
-        $(function() {
-            if (popstate) {
-                $(window).bind("popstate", function(e) {
-                    var state = e.originalEvent.state;
-                    if (state) {
-                        load(state.href);
-                    }
-                });
-            }
-
-            var exampleUrl = location.hash.replace("#", "").toLowerCase();
-
-            $("li a").click(function(e) {
-                e.preventDefault();
-
-                example($(this).attr("href"));
-            }).each(function() {
-                if (popstate) {
-                    $(this).attr("href", this.href);
-                } else {
-                    if ($(this).attr("href").toLowerCase() === exampleUrl) {
-                        example(exampleUrl);
-                    }
-                }
-            });
-        });
-    </script>
-</body>
+    <body>
+        <div id="nav">
+            <ul>
+                <li><a href="autocomplete/index.html">Autocomplete - feature 1</a></li>
+                <li><a href="autocomplete/events.html">Autocomplete - feature 2</a></li>
+            </ul>
+            <ul>
+                <li><a href="autocomplete/index.html">Autocomplete</a></li>
+            </ul>
+        </div>
+    </body>
 </html>
