@@ -56,8 +56,34 @@
             <select  id="select">
             </select>
         </fieldset>
+        <fieldset>
+            <legend>DropDownList - Remote jsonp</legend>
+            <input  id="remotedropdownlist" />
+            <input id="searchCriteria" value="var" />
+        </fieldset>
         <script type="text/javascript" charset="utf-8">
             $(document).ready(function() {
+                 var remoteDataSource = new kendo.data.DataSource({
+                    transport: {
+                        read: {
+                            url: "http://ws.geonames.org/searchJSON",
+                            dataType: "jsonp",
+                            cache: true
+                        },
+                        cache: "inmemory",
+                        dialect: {
+                            read: function() {
+                                return {name_startsWith: $("#searchCriteria").val() };
+                            }
+                        }
+                    },
+                    deserializer: {
+                        data: function(result) {
+                            return result.geonames;
+                        }
+                    }
+                });
+
                 $("#dropdownlist").kendoDropDownList({
                     dataSource: [{text: "foo", value: 1}, {text:2, value:2}],
                     autoBind: false,
@@ -65,6 +91,17 @@
                 });
                 $("#select").kendoDropDownList({
                     dataSource: [{text: "foo", value: 1}, {text:2, value:2}]
+                });
+                $("#remotedropdownlist").kendoDropDownList({
+                    dataTextField: "name",
+                    dataValueField: "countryName",
+                    dataSource: remoteDataSource,
+                    autoBind: false,
+                    delay: 2000
+                });
+
+                $("#searchCriteria").bind("change", function() {
+                    remoteDataSource.read();
                 });
             });
         </script>
