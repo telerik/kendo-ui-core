@@ -23,6 +23,8 @@
 
             that._span();
 
+            that.arrow = that.span.next().children();
+
             that.popup = new ui.Popup(that.ul, {
                 anchor: that.wrapper
             });
@@ -312,7 +314,6 @@
                 span = wrapper.find(SELECTOR);
             }
             that.span = span;
-            that.arrow = span.next().children();
         },
 
         _wrapper: function() {
