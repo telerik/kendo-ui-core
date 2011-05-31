@@ -1,7 +1,10 @@
 (function ($) {
     var kendo = window.kendo,
-        ui = kendo.ui = kendo.ui || {},
+        ui = kendo.ui,
+        Component = ui.Component,
+        DataSource = kendo.data.DataSource,
         extend = $.extend,
+        proxy = $.proxy,
         SVG_NS = "http://www.w3.org/2000/svg",
         DEFAULT_PRECISION = 6,
         COORD_PRECISION = 3,
@@ -16,19 +19,25 @@
         HORIZONTAL = "horizontal",
         VERTICAL = "vertical",
         OUTSIDE = "outside",
-        NONE = "none";
+        NONE = "none",
+        DATABOUND = "dataBound",
+        CHANGE = "change";
 
-    function Chart(element, options) {
-        var chart = this;
+    var Chart = Component.extend({
+        init: function(element, options) {
+            var chart = this;
+            Component.fn.init.call(chart, element, options);
 
-        chart.options = $.extend({}, chart.options, options);
-        chart.element = element;
-        chart._viewFactory = chart._supportsSVG() ? new SVGFactory() : new VMLFactory();
+            chart.bind([DATABOUND], chart.options);
+            chart._viewFactory = chart._supportsSVG() ? new SVGFactory() : new VMLFactory();
 
-        chart.refresh();
-    }
+            if (chart.options.dataSource) {
+                chart._initDataSource();
+            } else {
+                chart.refresh();
+            }
+        },
 
-    Chart.prototype = {
         options: {
             valueAxis: {
                 type: "Numeric"
@@ -50,14 +59,52 @@
 
             model.updateLayout();
             var html = model.getView(chart._viewFactory).render();
-            setContent(chart.element, html);
+            setContent(chart.element[0], html);
+
+            chart.trigger(DATABOUND);
         },
 
         _supportsSVG: function() {
             return document.implementation.hasFeature(
                 "http://www.w3.org/TR/SVG11/feature#BasicStructure", "1.1");
+        },
+
+        _initDataSource: function() {
+            var chart = this;
+
+            chart.dataSource = DataSource
+                .create(chart.options.dataSource)
+                .bind(CHANGE, proxy(chart._onDataChanged, chart));
+
+            chart.dataSource.query();
+        },
+
+        _onDataChanged: function() {
+            var chart = this,
+                options = chart.options,
+                series = options.series,
+                data = chart.dataSource.view();
+
+            for (var dataIdx = 0, dataLength = data.length; dataIdx < dataLength; dataIdx++) {
+                var row = data[dataIdx];
+
+                for (var seriesIdx = 0, seriesLength = series.length; seriesIdx < seriesLength; seriesIdx++) {
+                    var currentSeries = series[seriesIdx],
+                        value = row[currentSeries.field];
+
+                    if (currentSeries.field) {
+                        if (dataIdx === 0) {
+                            currentSeries.data = [value];
+                        } else {
+                            currentSeries.data.push(value);
+                        }
+                    }
+                };
+            };
+
+            chart.refresh();
         }
-    };
+    });
 
     function setContent(container, xml) {
         if (typeof setContent.useParser == "undefined") {
@@ -81,14 +128,7 @@
         }
     }
 
-    ui.Chart = Chart;
-    $.fn.kendoChart = function(options) {
-        $(this).each(function() {
-            $(this).data("kendoChart", new kendo.ui.Chart(this, options));
-        });
-
-        return this;
-    };
+    ui.plugin("Chart", Chart);
 
 
     // **************************

@@ -4,6 +4,10 @@ tests.push(
         title: "Chart configuration"
     },
     {
+        page: "chart/databinding.html",
+        title: "Data binding"
+    },
+    {
         page: "chart/helpers.html",
         title: "Helpers"
     },
