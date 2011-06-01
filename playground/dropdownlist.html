@@ -62,6 +62,10 @@
             <input  id="remotedropdownlist" />
             <input id="searchCriteria" value="var" />
         </fieldset>
+        <fieldset>
+            <legend>Select with 10000 options</legend>
+            <select  id="bigSelect" />
+        </fieldset>
         <script type="text/javascript" charset="utf-8">
             $(document).ready(function() {
                  var remoteDataSource = new kendo.data.DataSource({
@@ -103,6 +107,26 @@
 
                 $("#searchCriteria").bind("change", function() {
                     remoteDataSource.read();
+                });
+
+                var options = "";
+                for (var i = 0; i < 10000; i++) {
+                   var option = "<option"
+                       option += " value=" + i;
+
+                   option += ">";
+
+                   option += "text" + i;
+
+                   option += "</option>";
+                   options += option;
+                }
+
+                var bigSelect = $("#bigSelect");
+                bigSelect.html(options);
+
+                bigSelect.kendoDropDownList({
+                    autoBind: false
                 });
             });
         </script>
