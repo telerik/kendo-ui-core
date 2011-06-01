@@ -224,6 +224,14 @@
                   equal(dropdownlist.ul.children("li").first().text(), "foo");
            });
 
+           test("dataAccessors are get from data attributes", function() {
+               var select = $('<select data-text-field="name" data-value-field="id"></select>');
+               dropdownlist = new DropDownList(select);
+
+               equal(dropdownlist.options.dataTextField, "name");
+               equal(dropdownlist.options.dataValueField, "id");
+           });
+
            test("template should render item directly if datatextField is empty string", function(){
                 var dropdownlist = new DropDownList(input, { dataTextField : ""});
 

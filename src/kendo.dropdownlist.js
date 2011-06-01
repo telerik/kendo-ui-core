@@ -222,8 +222,19 @@
 
         _dataAccessors: function() {
             var that = this,
+                element = that.element,
                 options = that.options,
-                getter = kendo.getter;
+                getter = kendo.getter,
+                textField = element.attr("data-text-field"),
+                valueField = element.attr("data-value-field");
+
+            if (textField) {
+                options.dataTextField = textField;
+            }
+
+            if (valueField) {
+                options.dataValueField = valueField;
+            }
 
             that._text = getter(options.dataTextField);
             that._value = getter(options.dataValueField);
