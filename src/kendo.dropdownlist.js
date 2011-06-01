@@ -245,23 +245,20 @@
                 index,
                 element = that.element,
                 options = that.options,
-                dataSource = options.dataSource,
-                dataSourceOptions = {};
+                dataSource = options.dataSource || {};
+
+            dataSource = $.isArray(dataSource) ? {data: dataSource} : dataSource;
 
             if(element.is("select")) {
                 index = element.children(":selected").index();
                 options.index = index != -1 ? index : 0;
 
-               dataSourceOptions.select = element;
-               dataSourceOptions.fields = [{ field: options.dataTextField },
-                                           { field: options.dataValueField }];
+               dataSource.select = element;
+               dataSource.fields = [{ field: options.dataTextField },
+                                    { field: options.dataValueField }];
             }
 
-            if (dataSource) {
-                dataSourceOptions.data = dataSource.data || dataSource;
-            }
-
-            that.dataSource = DataSource.create(dataSourceOptions).bind(CHANGE, proxy(that.refresh, that));
+            that.dataSource = DataSource.create(dataSource).bind(CHANGE, proxy(that.refresh, that));
         },
 
         _keydown: function(e) {
