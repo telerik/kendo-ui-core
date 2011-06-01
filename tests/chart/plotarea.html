@@ -132,7 +132,7 @@
                     );
                 });
 
-                test("matches category count to actual data", function() {
+                test("adds categories to match actual data", function() {
                     var plotArea = new Chart.PlotArea({
                         series: [{
                             type: "bar",
@@ -144,6 +144,20 @@
                     });
 
                     equals(plotArea.axisX.options.categories.length, 3);
+                });
+
+                test("accepts extra categories", function() {
+                    var plotArea = new Chart.PlotArea({
+                        series: [{
+                            type: "bar",
+                            data: [100]
+                        }],
+                        categoryAxis: {
+                            categories: ["A", "B"]
+                        }
+                    });
+
+                    equals(plotArea.axisX.options.categories.length, 2);
                 });
 
             })();
