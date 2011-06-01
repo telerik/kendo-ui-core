@@ -4,6 +4,7 @@
         ui = kendo.ui,
         extend = $.extend,
         Component = ui.Component,
+        events = [ 'expand', 'collapse', 'select', 'error', 'load' ],
         MOUSEENTER = 'mouseenter',
         MOUSELEAVE = 'mouseleave',
         CLICK = 'click',
@@ -34,15 +35,7 @@
 				.delegate(clickableItems, MOUSEENTER + ' ' + MOUSELEAVE, that._toggleHover)
                 .delegate(disabledItems, CLICK, false);
 
-            element.bind({
-                expand: options.onExpand,
-                collapse: options.onCollapse,
-                select: function (e) {
-                    if (e.currentTarget == that.element[0] && options.onSelect) options.onSelect(e);
-                },
-                error: options.onError,
-                load: options.onLoad
-            });
+            that.bind(events, that.options);
 
             if (this.contentUrls)
                 element.find('> .t-item')
@@ -131,7 +124,7 @@
 
             link.addClass(selectedClass.substr(1));
 
-            if (element.trigger('select', { item: item[0] })) {
+            if (that._triggerEvent('select', item)) {
                 e.preventDefault();
             }
 
@@ -151,7 +144,7 @@
             if (contents.length) {
                 var visibility = contents.is(VISIBLE);
 
-                if (!element.trigger(!visibility ? 'expand' : 'collapse', { item: item[0] }))
+                if (!that._triggerEvent(!visibility ? 'expand' : 'collapse', item))
                     that._toggleItem(item, visibility, e);
             }
         },
@@ -263,6 +256,13 @@
                     that._toggleGroup(contentElement, isVisible);
                 }
             });
+        },
+
+        _triggerEvent: function (eventName, element) {
+            var that = this;
+
+            that.trigger(eventName, { item: element[0] });
+            that.element.trigger(eventName, { item: element[0] });
         }
     });
 

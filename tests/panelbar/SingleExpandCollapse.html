@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.ui.panelbar Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.panelbar.js"></script>
+        <script type="text/javascript" src="../jquery.mockjax.js"></script>
+        <link rel="stylesheet" href="../qunit.css" />
+        <style type="text/css">
+            html
+            {
+                font-size: 12px;
+            }
+            .example .t-panelbar .t-image
+            {
+                margin-top: 3px;
+            }
+
+            .example .t-panelbar .t-group .t-image
+            {
+                margin-left: 7px;
+            }
+        </style>
+        <link type="text/css" href="../../styles/kendo.common.css" rel="stylesheet"/>
+        <link type="text/css" href="../../styles/kendo.vista.css" rel="stylesheet"/>
+
+   <script type="text/javascript">
+
+        function getRootItem(index) {
+			return $('#PanelBar1').find('.t-header').parent().eq(index)
+        }
+
+        function getPanelBar() {
+            return $("#PanelBar1").data("kendoPanelBar");
+        }
+
+        $(document).ready(function() {
+            $("#PanelBar1").kendoPanelBar();
+        });
+
+   </script>
+
+</head>
+<body>
+
+<ul class="t-widget t-panelbar t-reset" id="PanelBar1" style="width: 300px; float: left; margin-bottom: 30px; z-index: 100; visibility: hidden; position: absolute;">
+    <li class="t-item t-state-default"><span class="t-link t-header"><img alt="Mail Icon" class="t-image"
+                                                                          src="../../playground/Icons/mail.gif">Mail<span
+            class="t-icon t-arrow-down t-panelbar-expand"></span></span>
+        <ul style="display: none;" class="t-group">
+            <li class="t-item t-state-default"><span class="t-link"><img alt="Personal Folders Icon" class="t-image"
+                                                                         src="../../playground/Icons/mailPersonalFolders.gif">Personal Folders</span>
+            </li>
+            <li class="t-item t-state-default"><span class="t-link"><img alt="Deleted Items Icon" class="t-image"
+                                                                         src="../../playground/Icons/mailDeletedItems.gif">Deleted Items</span>
+            </li>
+            <li class="t-item t-state-disabled"><span class="t-link"><img alt="Inbox Icon" class="t-image"
+                                                                          src="../../playground/Icons/mailInbox.gif">Inbox</span>
+            </li>
+            <li class="t-item t-state-default"><span class="t-link"><img alt="My Mail Icon" class="t-image"
+                                                                         src="../../playground/Icons/mailfolder.gif">My Mail</span>
+            </li>
+            <li class="t-item t-state-default"><span class="t-link"><img alt="Sent Items Icon" class="t-image"
+                                                                         src="../../playground/Icons/mailSent.gif">Sent Items</span>
+            </li>
+            <li class="t-item t-state-default"><span class="t-link"><img alt="Outbox Icon" class="t-image"
+                                                                         src="../../playground/Icons/mailOutbox.gif">Outbox</span>
+            </li>
+            <li class="t-item t-state-default"><span class="t-link"><img alt="Search Folders Icon" class="t-image"
+                                                                         src="../../playground/Icons/mailSearch.gif">Search Folders</span>
+            </li>
+        </ul>
+    </li>
+    <li class="t-item t-state-disabled"><span class="t-link t-header"><img alt="Contacts Icon" class="t-image"
+                                                                           src="../../playground/Icons/contacts.gif">Contacts<span
+            class="t-icon t-arrow-down t-panelbar-expand"></span></span>
+        <ul class="t-group" style="display: none;">
+            <li class="t-item t-state-default"><span class="t-link"><img alt="Contact Icon" class="t-image"
+                                                                         src="../../playground/Icons/contactsItems.gif">My Contacts</span>
+            </li>
+            <li class="t-item t-state-default"><span class="t-link"><img alt="Contact Icon" class="t-image"
+                                                                         src="../../playground/Icons/contactsItems.gif">Address Cards</span>
+            </li>
+            <li class="t-item t-state-default"><span class="t-link"><img alt="Contact Icon" class="t-image"
+                                                                         src="../../playground/Icons/contactsItems.gif">Phone List</span>
+            </li>
+            <li class="t-item t-state-default"><span class="t-link"><img alt="Contact Icon" class="t-image"
+                                                                         src="../../playground/Icons/contactsItems.gif">Shared Contacts</span>
+            </li>
+        </ul>
+    </li>
+    <li class="t-item t-state-default"><span class="t-link t-header"><img alt="Tasks Icon" class="t-image"
+                                                                          src="../../playground/Icons/tasks.gif">Tasks<span
+            class="t-icon t-arrow-down t-panelbar-expand"></span></span>
+        <ul class="t-group" style="display: none;">
+            <li class="t-item t-state-default"><span class="t-link"><img alt="Task Icon" class="t-image"
+                                                                         src="../../playground/Icons/tasksItems.gif">My Tasks</span>
+            </li>
+            <li class="t-item t-state-default"><span class="t-link"><img alt="Task Icon" class="t-image"
+                                                                         src="../../playground/Icons/tasksItems.gif">Shared Tasks</span>
+            </li>
+            <li class="t-item t-state-default"><span class="t-link"><img alt="Task Icon" class="t-image"
+                                                                         src="../../playground/Icons/tasksItems.gif">Active Tasks</span>
+            </li>
+            <li class="t-item t-state-default"><span class="t-link"><img alt="Task Icon" class="t-image"
+                                                                         src="../../playground/Icons/tasksItems.gif">Completed Tasks</span>
+            </li>
+        </ul>
+    </li>
+    <li class="t-item t-state-active"><span class="t-link t-header t-state-selected"><img alt="Notes Icon"
+                                                                                          class="t-image"
+                                                                                          src="../../playground/Icons/notes.gif">Notes<span
+            class="t-icon t-arrow-up t-panelbar-collapse"></span></span>
+        <ul class="t-group" style="display: block;">
+            <li class="t-item t-state-default"><span class="t-link"><img alt="Note Icon" class="t-image"
+                                                                         src="../../playground/Icons/notesItems.gif">My Notes</span>
+            </li>
+            <li class="t-item t-state-default"><span class="t-link"><img alt="Note Icon" class="t-image"
+                                                                         src="../../playground/Icons/notesItems.gif">Notes List</span>
+            </li>
+            <li class="t-item t-state-default"><span class="t-link"><img alt="Note Icon" class="t-image"
+                                                                         src="../../playground/Icons/notesItems.gif">Shared Notes</span>
+            </li>
+            <li class="t-item t-state-default"><span class="t-link"><img alt="Note Icon" class="t-image"
+                                                                         src="../../playground/Icons/notesItems.gif">Archive</span>
+            </li>
+        </ul>
+    </li>
+    <li class="t-item t-state-default"><span class="t-link t-header"><img alt="Folders List Icon" class="t-image"
+                                                                          src="../../playground/Icons/foldersList.gif">Folders List<span
+            class="t-icon t-arrow-down t-panelbar-expand"></span></span>
+        <ul class="t-group" style="display: none;">
+            <li class="t-item t-state-default"><span class="t-link"><img alt="Folder List Icon" class="t-image"
+                                                                         src="../../playground/Icons/mailfolder.gif">My Client.Net</span>
+            </li>
+            <li class="t-item t-state-default"><span class="t-link"><img alt="Folder List Icon" class="t-image"
+                                                                         src="../../playground/Icons/mailfolder.gif">My Profile</span>
+            </li>
+            <li class="t-item t-state-default"><span class="t-link"><img alt="Folder List Icon" class="t-image"
+                                                                         src="../../playground/Icons/mailfolder.gif">My Support Tickets</span>
+            </li>
+            <li class="t-item t-state-default"><span class="t-link"><img alt="Folder List Icon" class="t-image"
+                                                                         src="../../playground/Icons/mailfolder.gif">My Licenses</span>
+            </li>
+        </ul>
+    </li>
+</ul>
+
+    <script type="text/javascript">
+
+        test('clicking second item should collapse other', function() {
+
+            var item = getRootItem(0);
+            var item2 = getRootItem(2);
+
+            item2.find('> .t-link').trigger('click');
+
+            equal(item.find('.t-group').css("display"), "none");
+        });
+
+        test('clicking item twice should not collapse it', function() {
+
+            var item = getRootItem(0);
+
+            item.find('> .t-link').trigger('click');
+            item.find('> .t-link').trigger('click');
+
+            equal(item.find('.t-group').css("display"), "block");
+        });
+
+        test('clicking subItem should not collapse headerItem', function() {
+
+            var item = getRootItem(3);
+            var subItem = item.find('> .t-group').children()[0];
+
+            $(subItem).find('> .t-link').trigger('click');
+
+            equal(item.find('.t-group').css("display"), "block");
+        });
+
+        test('clicking not expandable item should not collapse expanded item', function() {
+
+            var item = getRootItem(3);
+            var item2 = getRootItem(1);
+
+            item2.find('> .t-link').trigger('click');
+
+            equal(item.find('.t-group').css("display"), "block");
+        });
+
+</script>
+
+<h1 id="qunit-header">kendo.ui.PanelBar Tests</h1>
+<h2 id="qunit-banner"></h2>
+<div id="qunit-testrunner-toolbar"></div>
+<h2 id="qunit-userAgent"></h2>
+<ol id="qunit-tests"></ol>
+<div id="qunit-fixture">test markup, will be hidden</div>
+<ul id="log"></ul>
+</body>
+</html>
