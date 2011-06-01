@@ -1125,10 +1125,9 @@
     Bar.prototype = new ChartElement();
     extend(Bar.prototype, {
         options: {
-            style: {
-                color: "#000",
-                borderWidth: 1
-            }
+            color: "#fff",
+            borderColor: "#000",
+            borderWidth: 1
         },
 
         updateLayout: function(targetBox) {
@@ -1142,7 +1141,11 @@
                 elements = [];
 
             elements.push(
-                factory.rect(box, { fill: options.color, borderWidth: options.borderWidth })
+                factory.rect(box, {
+                    fill: options.color,
+                    stroke: options.borderColor,
+                    borderWidth: options.borderWidth
+                })
             );
 
             return elements;
@@ -1216,7 +1219,7 @@
                 children = barChart.children,
                 isStacked = barChart.options.isStacked;
 
-            var bar = new Bar({ color: series.color });
+            var bar = new Bar({ color: series.color, borderColor: series.color });
             barChart._bars.push(bar);
 
             var cluster = children[categoryIx];

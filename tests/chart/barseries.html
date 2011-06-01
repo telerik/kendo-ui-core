@@ -562,6 +562,10 @@
                 test("applies series fill color to bars", function() {
                     equal(barChart._bars[0].options.color, "#f00");
                 });
+
+                test("applies border color same as fill color", function() {
+                    equal(barChart._bars[0].options.borderColor, "#f00");
+                });
             })();
 
             (function() {

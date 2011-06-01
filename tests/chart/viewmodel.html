@@ -338,7 +338,8 @@
                 var Bar = Chart.Bar,
                     bar,
                     box,
-                    factory;
+                    factory,
+                    rect;
 
                 module("Bar", {
                     setup: function() {
@@ -347,6 +348,8 @@
                         factory = new ViewFactoryStub();
 
                         bar.updateLayout(box);
+                        bar.getViewElements(factory);
+                        rect = factory.log.rect[0];
                     }
                 });
 
@@ -355,17 +358,19 @@
                 });
 
                 test("renders rectangle", function() {
-                    bar.getViewElements(factory);
-
-                    var rect = factory.log.rect[0];
                     sameBox(rect, box);
                 });
 
                 test("sets fill color", function() {
-                    bar.getViewElements(factory);
-                    var rect = factory.log.rect[0];
+                    same(rect.style.fill, bar.options.color);
+                });
 
-                    same(rect.style.fill, bar.options.style.fill);
+                test("sets stroke color", function() {
+                    same(rect.style.stroke, bar.options.borderColor);
+                });
+
+                test("sets border width", function() {
+                    same(rect.style.borderWidth, bar.options.borderWidth);
                 });
             })();
 
