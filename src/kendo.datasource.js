@@ -247,7 +247,7 @@
             } else {
                 that.find = that.at;
             }
-
+            
             that.bind([ERROR, CHANGE, CREATE, DESTROY, UPDATE], options);
         },
 
@@ -313,37 +313,53 @@
             return result;
         },
 
-        sync: function() {
+        _createdModels: function() {
+            return this._byState(Model.CREATED, function(model) {
+                return model.data;
+            });
+        },
+
+        _updatedModels: function() {
+            var that = this,              
+                sendAllFields = that.options.sendAllFields;
+            return  that._byState(Model.UPDATED, function(model) {
+                        if(sendAllFields) {
+                            return model.data;
+                        }
+
+                        return model.changes();
+                    });
+        },
+        
+        _destroyedModels: function() {
+            var that = this,
+                data,
+                sendAllFields = that.options.sendAllFields;
+            return that._byState(Model.DESTROYED, function(model) {
+                        data = {};
+                        if(sendAllFields) {
+                            return model.data;
+                        }                        
+                        data[model.idField] = model.id();
+                        return data;
+                    });
+        },
+
+        sync: function() {            
             var that = this,
                 updated,
                 created,
-                destroyed,
-                sendAllFields = that.options.sendAllFields,
+                destroyed,                
                 batch = that.options.batch,
                 mode,
                 transport = that.transport
-                promises = [];
+                promises = that._promises = [];
                 
-            updated = that._byState(Model.UPDATED, function(model) {
-                if(sendAllFields) {
-                    return model.data;
-                }
+            updated = that._updatedModels();
 
-                return model.changes();
-            });
+            created = that._createdModels();
 
-            created = that._byState(Model.CREATED, function(model) {
-                return model.data;
-            });
-
-            destroyed = that._byState(Model.DESTROYED, function(model) {
-                if(sendAllFields) {
-                    return model.data;
-                }
-                var data = {};
-                data[model.idField] = model.id();
-                return data;
-            });
+            destroyed = that._destroyedModels();
 
             if(batch === false) {
                 mode = "multiple";
@@ -352,47 +368,82 @@
                 mode = "single";
             }
 
-            if(mode) {
-                promises.concat(that._send(created, proxy(transport.create, transport), mode));
-                promises.concat(that._send(updated, proxy(transport.update, transport), mode));
-                promises.concat(that._send(destroyed, proxy(transport.destroy, transport), mode));
-            } else {
-                promises.concat(
-                    that._send({
-                            created: created,
-                            updated: updated,
-                            destroyed: destroyed
-                        }, 
-                        proxy(transport.update, transport), 
-                        "single"
-                    )
-                );
+            if(mode) {                              
+                that._send(created, proxy(transport.create, transport), mode);                              
+                that._send(updated, proxy(transport.update, transport), mode);                
+                that._send(destroyed, proxy(transport.destroy, transport), mode);
+            } else {                
+                that._send({
+                        created: created,
+                        updated: updated,
+                        destroyed: destroyed
+                    }, 
+                    proxy(transport.update, transport), 
+                    "single"
+                );                
             }  
             
-            $.when.apply(null, promises);          
+            $.when.apply(null, promises).then(function() {
+                that.trigger(CHANGE);
+            });
+        },
+
+        _syncSuccess: function(origData, data) {
+            var that = this,
+                origValue,
+                origId,
+                models = that._models
+                map = that._map,
+                resolved = [];
+               
+            data = that._deserializer.data(data);
+            $.each(data, function(index, value) {
+                origValue = origData[index];                
+                if(origValue) {                
+                    origId = that.id(origValue);
+                    index = map[origId];
+
+                    if(index >= 0) {
+                        that._data[index] = value;
+                        resolved.push(value);
+                    }
+                    delete models[origId];
+                }
+            });
+            that._idMap(resolved);            
+        },
+
+        _syncError: function(origData, data) {
+            
         },
 
         _send: function(data, method, mode) {
             var that = this,
                 idx,
-                promises = [];              
+                promises = that._promises,
+                success = proxy(that._syncSuccess, that, data),
+                error = proxy(that._syncError, that, data);
 
             if(data.length == 0) {
                 return;
             }
 
             if(mode === "multiple") {
-                for(idx = 0, length = data.length; idx < length; idx++) {                    
+                for(idx = 0, length = data.length; idx < length; idx++) {
                     promises.push(
                         method({
-                            data: data[idx]
+                            data: data[idx],
+                            success: success,
+                            error: error
                         })
                     );
-                }  
-            } else {               
+                }
+            } else {
                 promises.push(
                     method({
-                        data: data
+                        data: data,
+                        success: success,
+                        error: error
                     })
                 );
             }

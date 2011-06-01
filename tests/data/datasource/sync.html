@@ -17,7 +17,8 @@
         <h2 id="qunit-userAgent"></h2>
         <ol id="qunit-tests"></ol>
         <script>
-            var DataSource = kendo.data.DataSource;
+            var DataSource = kendo.data.DataSource,
+                Model = kendo.data.Model;
 
             function setup(transport, data, options) {
                 options = $.extend({
@@ -265,8 +266,74 @@
                 equal(data.destroyed[0].id, 1);
                 equal(data.created[0].foo, "bar");
             });
-           
             
+            test("sync change the state of created model when successful", function() {            
+                var dataSource = new DataSource({
+                    transport: {
+                        create: { 
+                            url: "foo", 
+                            dataType: "json",
+                            type: "POST",
+                            contentType: "text/json"
+                        }
+                    }, 
+                    model: Model.define(),
+                    batch: false
+                });
+
+                $.mockjax({
+                    contentType: "text/json",
+                    url: "foo",                   
+                    responseText: '[{"id": 1, "foo": "bar"}]',
+                    response: function() {                        
+                        ok(true);
+                        start();
+                    }
+                });                
+                stop(1000);
+                
+                dataSource.create({ foo: "bar" });
+                dataSource.bind("change", function() {
+                    var createdModels = dataSource._createdModels();
+                    equal(createdModels.length, 0);
+                });
+                dataSource.sync();                                
+            });
+
+            test("sync updates datasource internal state for the record when successful", function() {            
+                var dataSource = new DataSource({
+                    transport: {
+                        create: { 
+                            url: "foo", 
+                            dataType: "json",
+                            type: "POST",
+                            contentType: "text/json"
+                        }
+                    }, 
+                    model: Model.define(),
+                    batch: false
+                });
+
+                $.mockjax({
+                    contentType: "text/json",
+                    url: "foo",                   
+                    responseText: '[{"id": 1, "foo": "bar"}]',
+                    response: function() {                        
+                        ok(true);
+                        start();
+                    }
+                });                
+                stop(1000);
+                
+                dataSource.create({ foo: "bar" });
+                dataSource.bind("change", function() {
+                    var model = this.model(1);
+                    equal(model.id(), 1);
+                    equal(model.get("foo"), "bar");
+                    equal(model.state, Model.PRISTINE);
+                });
+                dataSource.sync();                                
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
