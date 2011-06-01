@@ -24,7 +24,6 @@
                     seriesDefaults: {
                         type: "bar"
                     },
-                    /*
                     dataSource: [
                         {
                             name: "Alpha",
@@ -34,7 +33,7 @@
                         }, {
                             name: "Beta",
                             a: 40,
-                            b: -200,
+                            b: 200,
                             c: 25
                         }, {
                             name: "Charlie",
@@ -43,7 +42,6 @@
                             c: 35
                         }
                     ],
-
                     series: [
                         {
                             name: "Value A",
@@ -56,20 +54,24 @@
                             field: "c"
                         }
                     ],
-                    */
+                    categoryAxis: {
+                        field: "name"
+                    }
+                    /*
                     series: [{
                         name: "Value A",
-                        data: [15, 40],
+                        data: [15, 40, 40],
                     }, {
                         name: "Value B",
-                        data: [-100, -300]
+                        data: [-100, -200, -300],
                     }, {
                         name: "Value C",
-                        data: [15, 35]
+                        data: [15, 25, 35]
                     }],
                     categoryAxis: {
                         categories: ["Alpha", "Beta", "Charlie"]
                     }
+                    */
                 });
             });
 

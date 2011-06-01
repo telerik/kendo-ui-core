@@ -101,6 +101,8 @@
                     options.seriesDefaults,
                     series[i]);
             }
+
+            options.categoryAxis = extend({}, options.axisDefaults, options.categoryAxis);
         },
 
         _initDataSource: function() {
@@ -117,10 +119,20 @@
             var chart = this,
                 options = chart.options,
                 series = options.series,
+                categoryAxis = options.categoryAxis,
                 data = chart.dataSource.view();
 
             for (var dataIdx = 0, dataLength = data.length; dataIdx < dataLength; dataIdx++) {
                 var row = data[dataIdx];
+
+                if (categoryAxis.field) {
+                    var category = row[categoryAxis.field];
+                    if (dataIdx === 0) {
+                        categoryAxis.categories = [category];
+                    } else {
+                        categoryAxis.categories.push(category);
+                    }
+                }
 
                 for (var seriesIdx = 0, seriesLength = series.length; seriesIdx < seriesLength; seriesIdx++) {
                     var currentSeries = series[seriesIdx],
