@@ -245,6 +245,14 @@
                     equals(label2.box.y1, label1.box.y2);
                 });
 
+                test("labels have set font", function() {
+                    legend = new Chart.Legend({
+                        series: [ { name: "Series 1" } ],
+                        font: "10px sans-serif"
+                    });
+                    equal(legend.children[0].options.font, legend.options.font);
+                });
+
                 test("positions legend to the right", function() {
                     legend = new Chart.Legend({
                         series: [ { name: "Series 1" } ]

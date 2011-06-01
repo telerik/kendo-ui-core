@@ -362,7 +362,7 @@
 
     extend(Text.prototype, {
         options: {
-            font: "12pt Verdana, sans-serif",
+            font: "16px Verdana, sans-serif",
             align: LEFT
         },
 
@@ -453,7 +453,8 @@
     extend(Legend.prototype, {
         options: {
             position: RIGHT,
-            series: []
+            series: [],
+            font: "12px Verdana, sans-serif"
         },
 
         createLabels: function() {
@@ -462,7 +463,7 @@
 
             for (var i = 0; i < series.length; i++) {
                 var name = series[i].name,
-                    label = new Text(name);
+                    label = new Text(name, { font: legend.options.font });
 
                 legend.children.push(label);
             };
@@ -1513,7 +1514,7 @@
             x: 0,
             y: 0,
             _baselineY: 0,
-            font: "12pt Verdana, sans-serif"
+            font: "16px Verdana, sans-serif"
         },
 
         align: function() {
@@ -1625,8 +1626,8 @@
         if (!text.template) {
             text.template = VMLText.template = kendo.template(
                 "<kvml:textbox style='position: absolute; " +
-                    "left:<%= options.x %>px; top:<%= options.y %>px; " +
-                    "font:<%= fontStyle() %>'><%= content %></kvml:textbox>"
+                    "left: <%= options.x %>px; top: <%= options.y %>px; " +
+                    "font: <%= options.font %>'><%= content %></kvml:textbox>"
             );
         }
     }
@@ -1636,13 +1637,7 @@
         options: {
             x: 0,
             y: 0,
-            fontSize: "12pt",
-            fontFamily: "Verdana, sans-serif"
-        },
-
-        fontStyle: function() {
-            var options = this.options;
-            return options.fontSize + " " + options.fontFamily;
+            font: "16px Verdana, sans-serif"
         }
     });
 

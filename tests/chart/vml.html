@@ -118,10 +118,14 @@
 
                 test("sets position on text", function() {
                     equal(text.render(),
-                        "<kvml:textbox style='position: absolute; left:0px; top:0px; " +
-                        "font:12pt Verdana, sans-serif'></kvml:textbox>");
+                        "<kvml:textbox style='position: absolute; left: 0px; top: 0px; " +
+                        "font: 16px Verdana, sans-serif'></kvml:textbox>");
                 });
 
+                test("sets font", function() {
+                    text.options.font = "12px sans-serif";
+                    ok(text.render().indexOf("font: " + text.options.font) > -1);
+                });
             })();
 
             (function() {
