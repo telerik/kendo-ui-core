@@ -86,7 +86,7 @@
         },
 
         create: function(options) {
-            $.ajax(this.setup(options, CREATE));
+            return $.ajax(this.setup(options, CREATE));
         },
 
         read: function(options) {
@@ -116,11 +116,11 @@
         },
 
         update: function(options) {
-            $.ajax(this.setup(options, UPDATE));
+            return $.ajax(this.setup(options, UPDATE));
         },
 
         destroy: function(options) {
-            $.ajax(this.setup(options, DESTROY));
+            return $.ajax(this.setup(options, DESTROY));
         },
 
         setup: function(options, type) {
@@ -270,10 +270,11 @@
 
         model: function(id) {
             var that = this,
-                model = that._models[id];
+                model = id && that._models[id];
 
             if(!model) {
-                that._models[id] = model = new that.options.model(that.find(id));
+                model = new that.options.model(that.find(id));
+                that._models[model.id()] = model;
                 model.bind(CHANGE, function() {
                     that.trigger(UPDATE, { model: model });
                 });
@@ -320,8 +321,9 @@
                 sendAllFields = that.options.sendAllFields,
                 batch = that.options.batch,
                 mode,
-                transport = that.transport;
-
+                transport = that.transport
+                promises = [];
+                
             updated = that._byState(Model.UPDATED, function(model) {
                 if(sendAllFields) {
                     return model.data;
@@ -351,40 +353,51 @@
             }
 
             if(mode) {
-                that._send(created, proxy(transport.create, transport), mode);
-                that._send(updated, proxy(transport.update, transport), mode);
-                that._send(destroyed, proxy(transport.destroy, transport), mode);
+                promises.concat(that._send(created, proxy(transport.create, transport), mode));
+                promises.concat(that._send(updated, proxy(transport.update, transport), mode));
+                promises.concat(that._send(destroyed, proxy(transport.destroy, transport), mode));
             } else {
-                that._send({
-                        created: created,
-                        updated: updated,
-                        destroyed: destroyed
-                    },
-                    proxy(transport.update, transport),
-                    "single"
+                promises.concat(
+                    that._send({
+                            created: created,
+                            updated: updated,
+                            destroyed: destroyed
+                        }, 
+                        proxy(transport.update, transport), 
+                        "single"
+                    )
                 );
-            }
+            }  
+            
+            $.when.apply(null, promises);          
         },
 
         _send: function(data, method, mode) {
             var that = this,
-                idx;
+                idx,
+                promises = [];              
 
             if(data.length == 0) {
                 return;
             }
 
             if(mode === "multiple") {
-                for(idx = 0, length = data.length; idx < length; idx++) {
+                for(idx = 0, length = data.length; idx < length; idx++) {                    
+                    promises.push(
+                        method({
+                            data: data[idx]
+                        })
+                    );
+                }  
+            } else {               
+                promises.push(
                     method({
-                        data: data[idx]
-                    });
-                }
-            } else {
-                method({
-                    data: data
-                });
+                        data: data
+                    })
+                );
             }
+            
+            return promises;            
         },
 
         create: function(index, values) {

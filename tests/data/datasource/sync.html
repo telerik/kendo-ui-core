@@ -3,6 +3,7 @@
     <script src="../../../src/jquery.js"></script>
     <script type="text/javascript" src="../../qunit.js"></script>
     <script type="text/javascript" src="../../qunit-runner.js"></script>
+    <script type="text/javascript" src="../../jquery.mockjax.js"></script>
     <script src="../../../src/kendo.core.js"></script>
     <script src="../../../src/kendo.query.js"></script>
     <script src="../../../src/kendo.model.js"></script>
@@ -70,11 +71,13 @@
                     }
                 });
 
-                dataSource.create({ foo: "bar" });
+                dataSource.create({ foo: "bar" });                
+                dataSource.create({ foo: "baz" });
                 dataSource.sync();
 
-                equal(created.length, 1);
+                equal(created.length, 2);
                 equal(created[0].foo, "bar");
+                equal(created[1].foo, "baz");
             });
 
             test("sync does not call create method if there are no created records", function() {
@@ -263,6 +266,7 @@
                 equal(data.created[0].foo, "bar");
             });
            
+            
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
