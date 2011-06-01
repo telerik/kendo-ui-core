@@ -5,29 +5,30 @@
         DataSource = kendo.data.DataSource,
         extend = $.extend,
         proxy = $.proxy,
-        SVG_NS = "http://www.w3.org/2000/svg",
-        DEFAULT_PRECISION = 6,
-        COORD_PRECISION = 3,
-        ZERO_THRESHOLD = 0.2,
         BASELINE_MARKER_SIZE = 1,
+        BOTTOM = "bottom",
+        CENTER = "center",
+        CHANGE = "change",
+        COORD_PRECISION = 3,
+        DATABOUND = "dataBound",
+        DEFAULT_PRECISION = 6,
+        HORIZONTAL = "horizontal",
+        LEFT = "left",
+        NONE = "none",
+        OUTSIDE = "outside",
+        RIGHT = "right",
+        SVG_NS = "http://www.w3.org/2000/svg",
+        TOP = "top",
+        VERTICAL = "vertical",
         X = "x",
         Y = "y",
-        TOP = "top"
-        BOTTOM = "bottom",
-        LEFT = "left",
-        RIGHT = "right",
-        HORIZONTAL = "horizontal",
-        VERTICAL = "vertical",
-        OUTSIDE = "outside",
-        NONE = "none",
-        DATABOUND = "dataBound",
-        CHANGE = "change";
+        ZERO_THRESHOLD = 0.2;
 
     var Chart = Component.extend({
         init: function(element, options) {
             var chart = this;
 
-            // Clean up series colors as $.extend does not overwrite arrays,
+            // Clean up series colors as extend does not overwrite arrays,
             // but tries to merge them as if they were objects.
             if (options && options.seriesColors) {
                 chart.options.seriesColors = [];
@@ -300,12 +301,12 @@
     function RootElement(options) {
         var root = this;
 
-        options = root.options = $.extend({}, root.options, options);
+        options = root.options = extend({}, root.options, options);
         ChartElement.call(this, options);
     }
 
     RootElement.prototype = new ChartElement();
-    $.extend(RootElement.prototype, {
+    extend(RootElement.prototype, {
         options: {
             width: 800,
             height: 600
@@ -338,7 +339,7 @@
         var text = this;
         ChartElement.call(text);
 
-        text.options = $.extend({}, text.options, options);
+        text.options = extend({}, text.options, options);
         text.content = content || "";
 
         // Calculate size
@@ -366,11 +367,11 @@
                 text.box = new Box(
                     targetBox.x1, targetBox.y1,
                     targetBox.x1 + size.width, targetBox.y1 + size.height);
-            } else if (options.align == "right") {
+            } else if (options.align == RIGHT) {
                 text.box = new Box(
                     targetBox.x2 - size.width, targetBox.y1,
                     targetBox.x2, targetBox.y1 + size.height);
-            } else if (options.align == "center") {
+            } else if (options.align == CENTER) {
                 var margin = (targetBox.width() - size.width) / 2;
                 text.box = new Box(
                     round(targetBox.x1 + margin, COORD_PRECISION), targetBox.y1,
@@ -390,7 +391,7 @@
         var title = this;
         ChartElement.call(title);
 
-        title.options = $.extend({}, title.options, options);
+        title.options = extend({}, title.options, options);
 
         var text = new Text(title.options.text);
         title.children.push(text);
@@ -398,12 +399,12 @@
 
     Title.prototype = new ChartElement();
 
-    $.extend(Title.prototype, {
+    extend(Title.prototype, {
         options: {
             text: "",
             font: "18px Verdana, sans-serif",
-            position: "top",
-            textAlign: "center"
+            position: TOP,
+            textAlign: CENTER
         },
 
         updateLayout: function(targetBox) {
@@ -412,13 +413,13 @@
                 text = title.children[0],
                 textBox = new Box();
 
-            if (options.position == "top") {
+            if (options.position == TOP) {
                 textBox.y1 = targetBox.y1;
-            } else if (options.position == "bottom") {
+            } else if (options.position == BOTTOM) {
                 textBox.y1 = targetBox.y2 - text.box.height();
             }
 
-            if (title.options.textAlign == "center") {
+            if (title.options.textAlign == CENTER) {
                 textBox.x1 = (targetBox.width() - text.box.width()) / 2;
                 textBox.x2 = textBox.x1 + text.box.width();
             }
@@ -432,14 +433,14 @@
         var legend = this;
         ChartElement.call(legend);
 
-        legend.options = $.extend({}, legend.options, options);
+        legend.options = extend({}, legend.options, options);
         legend.createLabels();
     }
 
     Legend.prototype = new ChartElement();
-    $.extend(Legend.prototype, {
+    extend(Legend.prototype, {
         options: {
-            position: "right",
+            position: RIGHT,
             series: []
         },
 
@@ -494,13 +495,13 @@
             majorUnit: axis.autoMajorUnit(seriesMin, seriesMax)
         };
 
-        axis.options = $.extend({}, axis.options, autoOptions, options);
+        axis.options = extend({}, axis.options, autoOptions, options);
 
         axis.init();
     }
 
     NumericAxis.prototype = new ChartElement();
-    $.extend(NumericAxis.prototype, {
+    extend(NumericAxis.prototype, {
         options: {
             min: 0,
             max: 1,
@@ -519,7 +520,7 @@
                 currentValue = options.min;
 
             for (var i = 0; i < majorDivisions; i++) {
-                var text = new Text(currentValue.toString(), { align: "right" });
+                var text = new Text(currentValue.toString(), { align: RIGHT });
                 axis.children.push(text);
 
                 currentValue = round(currentValue + options.majorUnit, DEFAULT_PRECISION);
@@ -796,19 +797,19 @@
         var axis = this;
         ChartElement.call(axis);
 
-        axis.options = $.extend({}, axis.options, options);
+        axis.options = extend({}, axis.options, options);
         axis.init();
     }
 
     CategoryAxis.prototype = new ChartElement();
-    $.extend(CategoryAxis.prototype, {
+    extend(CategoryAxis.prototype, {
         options: {
             categories: [],
             line: "solid",
             tickSize: 4,
             majorTickType: OUTSIDE,
             axisCrossingValue: 0,
-            orientation: "horizontal"
+            orientation: HORIZONTAL
         },
 
         init: function() {
@@ -817,7 +818,7 @@
 
             for (var i = 0; i < options.categories.length; i++) {
                 var label = options.categories[i];
-                axis.children.push(new Text(label, { align: "center" }));
+                axis.children.push(new Text(label, { align: CENTER }));
             }
         },
 
@@ -973,11 +974,11 @@
         var cluster = this;
         ChartElement.call(cluster);
 
-        cluster.options = $.extend({}, cluster.options, options);
+        cluster.options = extend({}, cluster.options, options);
     }
 
     ClusterLayout.prototype = new ChartElement();
-    $.extend(ClusterLayout.prototype, {
+    extend(ClusterLayout.prototype, {
         options: {
             isVertical: false,
             gap: 1.5
@@ -1011,11 +1012,11 @@
         var stack = this;
         ChartElement.call(stack);
 
-        stack.options = $.extend({}, stack.options, options);
+        stack.options = extend({}, stack.options, options);
     }
 
     StackLayout.prototype = new ChartElement();
-    $.extend(StackLayout.prototype, {
+    extend(StackLayout.prototype, {
         options: {
             isVertical: true,
             isReversed: false
@@ -1060,11 +1061,11 @@
         var bar = this;
         ChartElement.call(bar);
 
-        bar.options = $.extend({}, bar.options, options);
+        bar.options = extend({}, bar.options, options);
     }
 
     Bar.prototype = new ChartElement();
-    $.extend(Bar.prototype, {
+    extend(Bar.prototype, {
         options: {
             style: {
                 color: "#000",
@@ -1095,7 +1096,7 @@
         ChartElement.call(chart);
 
         chart.plotArea = plotArea;
-        chart.options = $.extend({}, chart.options, options);
+        chart.options = extend({}, chart.options, options);
         chart._seriesMin = Number.MAX_VALUE;
         chart._seriesMax = - Number.MAX_VALUE;
         chart._bars = [];
@@ -1104,7 +1105,7 @@
     }
 
     BarChart.prototype = new ChartElement();
-    $.extend(BarChart.prototype, {
+    extend(BarChart.prototype, {
         options: {
             series: [],
             isVertical: true,
@@ -1200,7 +1201,7 @@
             }
         },
 
-        getValueRange: function() {
+        valueRange: function() {
             var barChart = this;
             return { min: barChart._seriesMin, max: barChart._seriesMax };
         },
@@ -1270,12 +1271,12 @@
         var plotArea = this;
         ChartElement.call(plotArea);
 
-        plotArea.options = $.extend({}, plotArea.options, options);
+        plotArea.options = extend({}, plotArea.options, options);
         plotArea.init();
     }
 
     PlotArea.prototype = new ChartElement();
-    $.extend(PlotArea.prototype, {
+    extend(PlotArea.prototype, {
         options: {
             categoryAxis: { },
             valueAxis: { },
@@ -1302,7 +1303,7 @@
                 var categoriesToAdd = barChart.categoriesCount() - categories.length;
                 [].push.apply(options.categoryAxis.categories, new Array(categoriesToAdd));
 
-                range = barChart.getValueRange();
+                range = barChart.valueRange();
                 charts.push(barChart);
                 [].push.apply(plotArea.children, charts);
             }
@@ -1414,7 +1415,7 @@
 
     function SVGFactory() {}
 
-    $.extend(SVGFactory.prototype, {
+    extend(SVGFactory.prototype, {
         root: function(options) {
             return new SVGRoot(options);
         },
@@ -1443,7 +1444,7 @@
     function SVGRoot(options) {
         var root = this;
 
-        options = root.options = $.extend({}, root.options, options);
+        options = root.options = extend({}, root.options, options);
         ViewElement.call(root, options);
 
         root.template = SVGRoot.template;
@@ -1457,7 +1458,7 @@
     }
 
     SVGRoot.prototype = new ViewElement();
-    $.extend(SVGRoot.prototype, {
+    extend(SVGRoot.prototype, {
         options: {
             width: "800px",
             height: "600px"
@@ -1477,7 +1478,7 @@
 
     function SVGText(content, options) {
         var text = this,
-            options = text.options = $.extend({}, text.options, options);
+            options = text.options = extend({}, text.options, options);
 
         text.content = content || "";
 
@@ -1494,7 +1495,7 @@
     }
 
     SVGText.prototype = new ViewElement();
-    $.extend(SVGText.prototype, {
+    extend(SVGText.prototype, {
         options: {
             x: 0,
             y: 0,
@@ -1533,11 +1534,11 @@
         }
 
         path.points = points || [];
-        path.options = $.extend({}, path.options, options);
+        path.options = extend({}, path.options, options);
     }
 
     SVGPath.prototype = new ViewElement();
-    $.extend(SVGPath.prototype, {
+    extend(SVGPath.prototype, {
         options: {
             stroke: "#000",
             fill: "#fff"
@@ -1564,7 +1565,7 @@
         }
     }
 
-    $.extend(VMLFactory.prototype, {
+    extend(VMLFactory.prototype, {
         root: function(options) {
             return new VMLRoot(options);
         },
@@ -1589,7 +1590,7 @@
     function VMLRoot(options) {
         var root = this;
 
-        options = root.options = $.extend({}, root.options, options);
+        options = root.options = extend({}, root.options, options);
         ViewElement.call(root, options);
 
         root.template = VMLRoot.template;
@@ -1603,7 +1604,7 @@
     }
 
     VMLRoot.prototype = new ViewElement();
-    $.extend(VMLRoot.prototype, {
+    extend(VMLRoot.prototype, {
         options: {
             width: "800px",
             height: "600px"
@@ -1612,7 +1613,7 @@
 
     function VMLText(content, options) {
         var text = this,
-            options = text.options = $.extend({}, text.options, options);
+            options = text.options = extend({}, text.options, options);
 
         text.content = content || "";
 
@@ -1628,7 +1629,7 @@
     }
 
     VMLText.prototype = new ViewElement();
-    $.extend(VMLText.prototype, {
+    extend(VMLText.prototype, {
         options: {
             x: 0,
             y: 0,
@@ -1657,11 +1658,11 @@
         }
 
         path.points = points || [];
-        path.options = $.extend({}, path.options, options);
+        path.options = extend({}, path.options, options);
     }
 
     VMLPath.prototype = new ViewElement();
-    $.extend(VMLPath.prototype, {
+    extend(VMLPath.prototype, {
         options: {
             stroke: "#000",
             fill: "#fff"

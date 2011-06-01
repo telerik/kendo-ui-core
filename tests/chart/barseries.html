@@ -79,11 +79,11 @@
                 });
 
                 test("Reports minimum series value", function() {
-                    same(series.getValueRange().min, positiveSeries.data[0]);
+                    same(series.valueRange().min, positiveSeries.data[0]);
                 });
 
                 test("Reports maximum series value", function() {
-                    same(series.getValueRange().max, positiveSeries.data[1]);
+                    same(series.valueRange().max, positiveSeries.data[1]);
                 });
 
                 test("Reports number of categories", function() {
@@ -129,11 +129,11 @@
                 });
 
                 test("Reports minimum series value", function() {
-                    same(series.getValueRange().min, negativeSeries.data[1]);
+                    same(series.valueRange().min, negativeSeries.data[1]);
                 });
 
                 test("Reports maximum series value", function() {
-                    same(series.getValueRange().max, negativeSeries.data[0]);
+                    same(series.valueRange().max, negativeSeries.data[0]);
                 });
 
                 test("bar tops are aligned to category axis", function() {
@@ -176,11 +176,11 @@
                 });
 
                 test("Reports minimum series value", function() {
-                    same(series.getValueRange().min, 1);
+                    same(series.valueRange().min, 1);
                 });
 
                 test("Reports maximum series value", function() {
-                    same(series.getValueRange().max, 3);
+                    same(series.valueRange().max, 3);
                 });
 
                 test("Reports number of categories", function() {
@@ -223,11 +223,11 @@
                 });
 
                 test("reports stacked minumum value", function() {
-                    equal(series.getValueRange().min, 2);
+                    equal(series.valueRange().min, 2);
                 });
 
                 test("reports stacked maximum value", function() {
-                    equal(series.getValueRange().max, 4);
+                    equal(series.valueRange().max, 4);
                 });
 
                 test("bars in first category are stacked", function() {
@@ -257,11 +257,11 @@
                 });
 
                 test("reports stacked minumum value", function() {
-                    equal(series.getValueRange().min, -4);
+                    equal(series.valueRange().min, -4);
                 });
 
                 test("reports stacked maximum value", function() {
-                    equal(series.getValueRange().max, -2);
+                    equal(series.valueRange().max, -2);
                 });
 
                 test("bars in first category are stacked", function() {
@@ -292,11 +292,11 @@
                 });
 
                 test("reports stacked minumum value", function() {
-                    equal(series.getValueRange().min, -2);
+                    equal(series.valueRange().min, -2);
                 });
 
                 test("reports stacked maximum value", function() {
-                    equal(series.getValueRange().max, 2);
+                    equal(series.valueRange().max, 2);
                 });
 
                 test("bars have set height according to value", function() {
@@ -393,11 +393,11 @@
                 });
 
                 test("Reports minimum series value", function() {
-                    same(series.getValueRange().min, negativeSeries.data[1]);
+                    same(series.valueRange().min, negativeSeries.data[1]);
                 });
 
                 test("Reports maximum series value", function() {
-                    same(series.getValueRange().max, negativeSeries.data[0]);
+                    same(series.valueRange().max, negativeSeries.data[0]);
                 });
 
                 test("bar sides are aligned to category axis", function() {
@@ -439,11 +439,11 @@
                 });
 
                 test("reports stacked minumum value", function() {
-                    equal(series.getValueRange().min, 2);
+                    equal(series.valueRange().min, 2);
                 });
 
                 test("reports stacked maximum value", function() {
-                    equal(series.getValueRange().max, 4);
+                    equal(series.valueRange().max, 4);
                 });
 
                 test("bars in first category are stacked", function() {
@@ -474,11 +474,11 @@
                 });
 
                 test("reports stacked minumum value", function() {
-                    equal(series.getValueRange().min, -4);
+                    equal(series.valueRange().min, -4);
                 });
 
                 test("reports stacked maximum value", function() {
-                    equal(series.getValueRange().max, -2);
+                    equal(series.valueRange().max, -2);
                 });
 
                 test("bars in first category are stacked", function() {
@@ -510,11 +510,11 @@
                 });
 
                 test("reports stacked minumum value", function() {
-                    equal(series.getValueRange().min, -2);
+                    equal(series.valueRange().min, -2);
                 });
 
                 test("reports stacked maximum value", function() {
-                    equal(series.getValueRange().max, 2);
+                    equal(series.valueRange().max, 2);
                 });
 
                 test("bars have set width according to value", function() {
