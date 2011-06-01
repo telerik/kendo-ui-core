@@ -143,14 +143,27 @@
         module("Menu / Client Events", {
             setup: function () {
                 menu = $("#Menu2").data('kendoMenu');
-            },
+            }
         });
 
         test("select is triggered when menu element is clicked", function() {
             var item = getRootItem(0),
                 triggerCount = 0;
 
-            $(menu.element).bind("select", function() {
+            menu.bind("select", function() {
+                triggerCount++;
+            });
+
+            item.trigger("click");
+
+            equals(triggerCount, 1);
+        });
+
+        test("element select is triggered when menu element is clicked", function() {
+            var item = getRootItem(0),
+                triggerCount = 0;
+
+            menu.element.bind("select", function() {
                 triggerCount++;
             });
 

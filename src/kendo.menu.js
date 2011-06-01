@@ -3,6 +3,7 @@
         ui = kendo.ui,
         extend = $.extend,
         Component = ui.Component,
+        events = [ 'open', 'close', 'select', 'load' ],
         MOUSEENTER = 'mouseenter',
         MOUSELEAVE = 'mouseleave',
         CLICK = 'click',
@@ -43,12 +44,7 @@
 
             $(document).click($.proxy( that._documentClick, that ));
 
-            element.bind({
-                select: that.options.onSelect,
-                open: that.options.onOpen,
-                close: that.options.onClose,
-                load: that.options.onLoad
-            });
+            that.bind(events, that.options);
         },
         options: {
             animation: {
@@ -167,16 +163,16 @@
             var element = $(e.currentTarget);
             if (!that.options.openOnClick || that.clicked) {
                 if (!contains(e.currentTarget, e.relatedTarget)) {
-                    that.triggerEvent('open', element);
+                    that._triggerEvent('open', element);
                     that.open(element);
                 }
             }
 
             if (that.options.openOnClick && that.clicked) {
-                that.triggerEvent('close', element);
+                that._triggerEvent('close', element);
 
                 element.siblings().each($.proxy(function (_, sibling) {
-                    that.close($(sibling));
+                    that.close(sibling);
                 }, that));
             }
         },
@@ -186,7 +182,7 @@
             
             if (!that.options.openOnClick && !contains(e.currentTarget, e.relatedTarget)) {
                 var element = $(e.currentTarget);
-                that.triggerEvent('close', element);
+                that.trigger('close', element);
 
                 that.close(element);
             }
@@ -203,7 +199,7 @@
                 return; 
             }
 
-            element.trigger('select', { item: element[0] });
+            that._triggerEvent('select', element);
 
             if (!element.parent().hasClass('t-menu') || !that.options.openOnClick)
                 return;
@@ -211,14 +207,14 @@
             e.preventDefault();
 
             that.clicked = true;
-            that.triggerEvent('open', element);
+            that._triggerEvent('open', element);
             that.open(element);
         },
 
         _documentClick: function (e) {
             var that = this;
 
-            if (!contains(that.element, e.target))
+            if (contains(that.element, e.target))
                 return;
 
             if (that.clicked) {
@@ -227,13 +223,17 @@
             }
         },
 
-        hasChildren: function (element) {
+        _hasChildren: function (element) {
             return element.find('.t-group').filter(':first').length;
         },
 
-        triggerEvent: function (eventName, element) {
-            if (this.hasChildren(element))
-                this.element.trigger(eventName, { item: element[0] });
+        _triggerEvent: function (eventName, element) {
+            var that = this;
+            
+            if (that._hasChildren(element)) {
+                that.trigger(eventName, { item: element[0] });
+                that.element.trigger(eventName, { item: element[0] });
+            }
         }
     });
 
