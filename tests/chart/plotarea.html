@@ -14,7 +14,8 @@
 
             var Chart = kendo.ui.Chart,
                 Box = Chart.Box,
-                chartBox = new Box(0, 0, 1000, 1000);
+                chartBox = new Box(100, 100, 1000, 1000),
+                TOLERANCE = 1;
 
             function stubMethod(fn, methodName, stub, callback) {
                 var oldMethod = fn.prototype[methodName];
@@ -95,9 +96,10 @@
 
                 test("axes are contained in plot area", function() {
                     plotArea.updateLayout(chartBox);
-                    var axisBox = new Box().wrap(axisY.box).wrap(axisX.box);
-                    same([plotArea.box.x1, plotArea.box.y1, plotArea.box.x2, plotArea.box.y2],
-                         [axisBox.x1, axisBox.y1, axisBox.x2, axisBox.y2]);
+                    var axisBox = axisY.box.clone().wrap(axisX.box);
+                    same([axisBox.x1, axisBox.y1, axisBox.x2, axisBox.y2],
+                         [plotArea.box.x1, plotArea.box.y1, plotArea.box.x2, plotArea.box.y2],
+                         TOLERANCE);
                 });
 
                 test("creates bar chart", function() {

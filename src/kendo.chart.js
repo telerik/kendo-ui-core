@@ -1355,7 +1355,8 @@
 
             plotArea.alignAxes();
 
-            var axisBox = new Box().wrap(axisY.box).wrap(axisX.box);
+            var axisBox = axisY.box.clone().wrap(axisX.box);
+
             var overflowY = axisBox.height() - targetBox.height();
             var overflowX = axisBox.width() - targetBox.width();
 
