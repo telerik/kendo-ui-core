@@ -34,7 +34,7 @@
                     teardown: destroyChart
                 });
 
-                asyncTest("series points are populated on dataBound", 1, function() {
+                asyncTest("series points are populated", 1, function() {
                     createChart({
                         dataSource: [{
                             period: "Jan",
@@ -48,6 +48,25 @@
                         }],
                         dataBound: function() {
                             equal(this.options.series[0].data.length, 2);
+                            start();
+                        }
+                    });
+                });
+
+                test("categories are populated", function() {
+                    createChart({
+                        dataSource: [{
+                            period: "Jan",
+                            sales: 100
+                        }, {
+                            period: "Feb",
+                            sales: 110
+                        }],
+                        categoryAxis: {
+                            field: "period"
+                        },
+                        dataBound: function() {
+                            same(this.options.categoryAxis.categories, ["Jan", "Feb"]);
                             start();
                         }
                     });
