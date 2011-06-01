@@ -151,6 +151,11 @@
                         + text.options._baselineY);
                 });
 
+                test("sets font", function() {
+                    text.options.font = "12px sans-serif";
+                    ok(text.render().indexOf("font: " + text.options.font) > -1);
+                });
+
             })();
 
             (function() {

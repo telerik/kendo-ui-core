@@ -112,6 +112,14 @@
                     equals(titleTextElement.content, "Title");
                 });
 
+                test("text element has set font", function() {
+                    title = new kendo.ui.Chart.Title({
+                        text: "Title",
+                        font: "10px sans-serif"
+                    });
+                    equal(title.children[0].options.font, title.options.font);
+                });
+
                 test("text is positioned at top", function() {
                     equals(titleTextElement.box.y1, 0);
                     equals(titleTextElement.box.y2, TITLE_TEXT_HEIGHT, TOLERANCE);
@@ -178,14 +186,26 @@
                     text.getViewElements(factory)
                 });
 
-                test("sets position on view element", 1, function() {
+                test("sets position on view element", 2, function() {
                     var factory = {
                         text: function(content, options) {
-                            deepEqual(options, { x: 100, y: 100 });
+                            equal(options.x, 100);
+                            equal(options.y, 110);
                         }
                     };
 
-                    text.updateLayout(new Box(100, 100, 200, 200));
+                    text.updateLayout(new Box(100, 110, 200, 200));
+                    text.getViewElements(factory)
+                });
+
+                test("sets font", 1, function() {
+                    var factory = {
+                        text: function(content, options) {
+                            equal(options.font, text.options.font);
+                        }
+                    };
+
+                    text.updateLayout(new Box());
                     text.getViewElements(factory)
                 });
             })();

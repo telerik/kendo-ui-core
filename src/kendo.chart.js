@@ -362,20 +362,16 @@
 
     extend(Text.prototype, {
         options: {
-            fontSize: "12pt",
-            fontFamily: "Verdana, sans-serif",
-            align: "left"
+            font: "12pt Verdana, sans-serif",
+            align: LEFT
         },
 
         updateLayout: function(targetBox) {
             var text = this,
                 options = text.options,
-                size = measureText(text.content, {
-                            fontSize: text.options.fontSize,
-                            fontFamily: text.options.fontFamily
-                        });
+                size = measureText(text.content, { font: text.options.font });
 
-            if (options.align == "left") {
+            if (options.align == LEFT) {
                 text.box = new Box(
                     targetBox.x1, targetBox.y1,
                     targetBox.x1 + size.width, targetBox.y1 + size.height);
@@ -394,7 +390,9 @@
         getViewElements: function(factory) {
             var text = this;
             return [
-                factory.text(text.content, { x: text.box.x1, y: text.box.y1 })
+                factory.text(text.content, {
+                    x: text.box.x1, y: text.box.y1,
+                    font: text.options.font })
             ];
         }
     });
@@ -403,9 +401,11 @@
         var title = this;
         ChartElement.call(title);
 
-        title.options = extend({}, title.options, options);
+        options = title.options = extend({}, title.options, options);
 
-        var text = new Text(title.options.text);
+        var text = new Text(options.text, {
+            font: options.font
+        });
         title.children.push(text);
     }
 
@@ -414,7 +414,7 @@
     extend(Title.prototype, {
         options: {
             text: "",
-            font: "18px Verdana, sans-serif",
+            font: "16px Verdana, sans-serif",
             position: TOP,
             textAlign: CENTER
         },
@@ -1499,7 +1499,7 @@
         if (!text.template) {
             text.template = SVGText.template = kendo.template(
                 "<text x='<%= options.x %>' y='<%= options._baselineY %>' " +
-                "style='font: <%= fontStyle() %>'><%= content %></text>"
+                "style='font: <%= options.font %>'><%= content %></text>"
             );
         }
 
@@ -1512,24 +1512,14 @@
             x: 0,
             y: 0,
             _baselineY: 0,
-            fontSize: "12pt",
-            fontFamily: "Verdana, sans-serif"
+            font: "12pt Verdana, sans-serif"
         },
 
         align: function() {
             var text = this,
-            size = measureText(text.content, {
-                fontSize: text.options.fontSize,
-                fontFamily: text.options.fontFamily
-            });
-
+            size = measureText(text.content, { font: text.options.font });
             text.options._baselineY = text.options.y + size.baseline;
             text.options.y += size.baseline;
-        },
-
-        fontStyle: function() {
-            var options = this.options;
-            return options.fontSize + " " + options.fontFamily;
         }
     });
 

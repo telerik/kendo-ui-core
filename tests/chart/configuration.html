@@ -82,6 +82,12 @@
                     ok(plotArea.axisY instanceof Chart.CategoryAxis);
                 });
 
+                test("categories are empty by default", function() {
+                    createChart();
+
+                    equal(plotArea.axisX.options.categories.length, 0);
+                });
+
                 // ------------------------------------------------------------
                 module("Value Axis Configuration", {
                     teardown: destroyChart
@@ -203,7 +209,7 @@
                     });
 
                     equal(chart._model.children[0].options.font,
-                          "18px Verdana, sans-serif");
+                          "16px Verdana, sans-serif");
                 });
 
                 test("font is set", function() {
