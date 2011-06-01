@@ -36,13 +36,8 @@
             $("li a").each(function() {
                 if ($(this).attr("href").toLowerCase() === href) {
                     $.get(href, function(html) {
-                        var example = $("#example");
-
-                        if (!example[0]) {
-                            example = $('<div id="example" />').appendTo(document.body);
-                        }
-
-                        example.empty().html(Application.body(html));
+                        $("#example").empty().replaceWith($(Application.body(html)));
+                        $("#code").empty();
                     });
                 }
             });
@@ -70,6 +65,21 @@
                     }
                 }
             });
+
+            $("#viewcode").click(function(e) {
+                e.preventDefault();
+
+                $.get(location.href, function(html) {
+                    var code = $("#code");
+
+                    if (!code[0]) {
+                        code = $('<pre id="code" class="prettyprint" />').appendTo(document.body);
+                    }
+
+                    code.empty().text(html);
+                    prettyPrint();
+                })
+            });
         }
     }
 
@@ -79,26 +89,27 @@
                 history.replaceState({ href: location.href });
             }
 
-            html = Application.body(html);
+            html = Application.body(html).replace('<div id="example"></div>', "");
 
             $(document.body).prepend(html);
-
+            $("#example").insertAfter($("#nav"));
             Application.init();
         });
     }
 
     $(function() {
-            $(window).bind("popstate", function(e) {
-                var state = e.originalEvent.state;
-                if (state) {
-                    Application.fetch(state.href.toLowerCase());
-                }
-            }).bind("hashchange", function() {
-                var url = location.hash.replace("#", "").toLowerCase();
-                if (url) {
-                    Application.fetch(url);
-                }
-            });
+
+        $(window).bind("popstate", function(e) {
+            var state = e.originalEvent.state;
+            if (state) {
+                Application.fetch(state.href.toLowerCase());
+            }
+        }).bind("hashchange", function() {
+            var url = location.hash.replace("#", "").toLowerCase();
+            if (url) {
+                Application.fetch(url);
+            }
+        });
 
         Application.init();
     });
