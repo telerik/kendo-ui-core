@@ -69,7 +69,6 @@
             index: 0,
             autoBind: true,
             delay: 500,
-            dataSource: {},
             dataTextField: "text",
             dataValueField: "value",
             height: 200
@@ -231,17 +230,27 @@
         },
 
         _dataSource: function() {
-            var that = this;
+            var that = this,
+                index,
                 element = that.element,
                 options = that.options,
-                dataSource = options.dataSource;
+                dataSource = options.dataSource,
+                dataSourceOptions = {};
 
-            if($.isPlainObject(dataSource) && element.is("select")) {
-                options.index = element.children(":selected").index();
-                $.extend(dataSource, {select: element, fields: [{ field: options.dataTextField }, { field: options.dataValueField }] });
+            if(element.is("select")) {
+                index = element.children(":selected").index();
+                options.index = index != -1 ? index : 0;
+
+               dataSourceOptions.select = element;
+               dataSourceOptions.fields = [{ field: options.dataTextField },
+                                           { field: options.dataValueField }];
             }
 
-            that.dataSource = DataSource.create(dataSource || {}).bind(CHANGE, proxy(that.refresh, that));
+            if (dataSource) {
+                dataSourceOptions.data = dataSource.data || dataSource;
+            }
+
+            that.dataSource = DataSource.create(dataSourceOptions).bind(CHANGE, proxy(that.refresh, that));
         },
 
         _keydown: function(e) {
