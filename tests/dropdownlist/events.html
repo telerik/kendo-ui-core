@@ -191,6 +191,23 @@
                 ok(changeWasCalled);
             });
 
+            test("clicking an item raises the change event of HTML select", function() {
+                var origCalled = false,
+                    select = $("<select><option value=1>foo1</option><option value=3>foo3</option></select>")
+                                .bind("change", function() {
+                                    origCalled = true;
+                                });
+                debugger;
+                var changeWasCalled = false, dropdownlist = new DropDownList(select, {
+                    dataSource: [{text: "foo"}, {text: "bar"}]
+                });
+
+                dropdownlist.wrapper.focus();
+
+                dropdownlist.ul.children().eq(1).click();
+                ok(origCalled);
+            });
+
        </script>
        <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

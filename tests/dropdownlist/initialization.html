@@ -144,11 +144,9 @@
                    dropdownlist = new DropDownList(select),
                    data;
 
+               data = dropdownlist.dataSource.view();
+
                ok(dropdownlist.dataSource);
-
-               dropdownlist.dataSource.read();
-               data = dropdownlist.dataSource.data();
-
                equal(data.length, 2);
                equal(data[0].text, "Chai");
                equal(data[0].value, "1");
