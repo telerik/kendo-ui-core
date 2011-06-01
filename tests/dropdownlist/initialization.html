@@ -106,6 +106,15 @@
                equal(arrow.html(), "select");
            });
 
+           test("data source is when pass DataSource", function() {
+               var dataSource = kendo.data.DataSource.create([{text: 1, value: 1}, {text:2, value:2}]),
+               dropdownlist = new DropDownList(input, {dataSource: dataSource});
+
+                ok(dropdownlist.dataSource);
+                equal(dropdownlist.dataSource, dataSource);
+                equal(dropdownlist.options.dataSource, dataSource);
+           });
+
            test("data source is initialized from options when it is an array", function() {
                var data = [{text: 1, value: 1}, {text:2, value:2}],
                 dropdownlist = new DropDownList(input, data);
