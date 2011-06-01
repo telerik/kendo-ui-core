@@ -1300,7 +1300,7 @@
                 if (!categories) {
                     categories = options.categoryAxis.categories = [];
                 }
-                var categoriesToAdd = barChart.categoriesCount() - categories.length;
+                var categoriesToAdd = Math.max(0, barChart.categoriesCount() - categories.length);
                 [].push.apply(options.categoryAxis.categories, new Array(categoriesToAdd));
 
                 range = barChart.valueRange();
