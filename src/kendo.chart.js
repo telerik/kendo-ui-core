@@ -459,7 +459,8 @@
 
         createLabels: function() {
             var legend = this,
-                series = legend.options.series;
+                series = legend.options.series,
+                labels = legend._labels = [];
 
             for (var i = 0; i < series.length; i++) {
                 var name = series[i].name,
@@ -471,30 +472,74 @@
 
         updateLayout: function(targetBox) {
             var legend = this,
-                labelsBox = new Box();
+                options = legend.options,
+                children = legend.children,
+                childrenCount = children.length,
+                labelBox,
+                markerSize = legend.markerSize();
+
+            if (childrenCount === 0) {
+                legend.box = new Box();
+                return;
+            }
+
+            labelBox = children[0].box.clone();
 
             // Position labels below each other
-            for (var i = 0; i < legend.children.length; i++) {
+            for (var i = 1; i < childrenCount; i++) {
                 var label = legend.children[i];
-                label.updateLayout(labelsBox);
-
-                labelsBox.x2 = Math.max(labelsBox.x2, label.box.x2);
-                labelsBox.y1 = labelsBox.y2 = label.box.y2;
+                label.box.alignTo(legend.children[i - 1].box, BOTTOM);
+                labelBox.wrap(label.box);
             };
-            labelsBox.y1 = 0;
 
             // Translate all labels to the final position
-            var offsetX = targetBox.x2 - labelsBox.width(),
-                offsetY = targetBox.y1 + ((targetBox.height() - labelsBox.height()) / 2);
-            for (var i = 0; i < legend.children.length; i++) {
+            var offsetX = targetBox.x2 - labelBox.width(),
+                offsetY = targetBox.y1 + ((targetBox.height() - labelBox.height()) / 2);
+            for (var i = 0; i < childrenCount; i++) {
                 var label = legend.children[i];
                 label.box.translate(offsetX, offsetY);
             };
 
-            labelsBox.translate(offsetX, offsetY);
-            labelsBox.y1 = targetBox.y1;
-            labelsBox.y2 = targetBox.y2;
-            legend.box = labelsBox;
+            labelBox.translate(offsetX, offsetY);
+            labelBox.y1 = targetBox.y1;
+            labelBox.y2 = targetBox.y2;
+            labelBox.x1 -= markerSize * 3;
+            legend.box = labelBox;
+        },
+
+        getViewElements: function(factory) {
+            var legend = this,
+                children = legend.children,
+                options = legend.options,
+                series = options.series,
+                markerSize = legend.markerSize(),
+                childElements = ChartElement.prototype.getViewElements.call(legend, factory);
+
+            for (var i = 0, length = series.length; i < length; i++) {
+                var color = series[i].color,
+                    label = children[i],
+                    markerBox = new Box();
+
+                markerBox.x1 = legend.box.x1 + markerSize;
+                markerBox.y1 = label.box.y1 + (label.box.height() - markerSize) / 2;
+                markerBox.x2 = markerBox.x1 + markerSize;
+                markerBox.y2 = markerBox.y1 + markerSize;
+
+                childElements.push(factory.rect(markerBox, { fill: color, stroke: color }));
+            };
+
+            return childElements;
+        },
+
+        markerSize: function() {
+            var legend = this,
+                children = legend.children;
+
+            if (children.length > 0) {
+                return children[0].box.height() / 2;
+            } else {
+                return 0;
+            }
         }
     });
 
