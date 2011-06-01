@@ -16,7 +16,7 @@
         <h2 id="qunit-userAgent"></h2>
         <ol id="qunit-tests"></ol>
         <script>
-            var reader = {
+            var deserializer = {
                 id: function(record) {
                     return record.id;
                 },
@@ -37,7 +37,7 @@
                 data = source || [{ id:1, bar: "foo" },{ id: 2, bar: "foo" }];
 
                 var dataSource = new DataSource( {
-                    reader: reader,
+                    deserializer: deserializer,
                     data: data
                 });
 
@@ -48,7 +48,7 @@
             test("reads data through transport", function() {
                 var readWasCalled = false,
                 dataSource = new DataSource( {
-                    reader: reader,
+                    deserializer: deserializer,
                     transport: {
                         read: function(callback) {
                             readWasCalled = true;
@@ -167,7 +167,7 @@
                 equal(view[0].bar, "foo");
             });
 
-            test("read calls reader set through constructor", function() {
+            test("read calls deserializer set through constructor", function() {
                 var dataSource = new DataSource({
                     data: [{ id:1, bar: "foo" },{ id: 2, bar: "baz" }],
                     deserializer: {
@@ -214,7 +214,7 @@
                         transport: {
                             read: "foo"
                         },
-                        reader: reader
+                        deserializer: deserializer
                     }),
                     args;
 

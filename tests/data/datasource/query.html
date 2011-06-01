@@ -25,7 +25,7 @@
                 }
             });
 
-            var reader = {
+            var deserializer = {
                 id: function(record) {
                     return record.id;
                 },
@@ -41,7 +41,7 @@
                 data = source || [{ id:1, bar: "foo" },{ id: 2, bar: "foo" }];
 
                 var dataSource = new DataSource( {
-                    reader: reader,
+                    deserializer: deserializer,
                     data: data
                 });
 
