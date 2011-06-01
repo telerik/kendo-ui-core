@@ -422,6 +422,12 @@
                     same([slot.y1, slot.y2], [106, 348.5], TOLERANCE);
                 });
 
+                test("undefined is placed on axis crossing", function() {
+                    numericAxis.options.axisCrossingValue = 1;
+                    var slot = numericAxis.getSlot();
+                    same([slot.y1, slot.y2], [106, 106], TOLERANCE);
+                });
+
                 test("a value capped to minimum value", function() {
                     var slot = numericAxis.getSlot(-1000, 1);
                     same([slot.y1, slot.y2], [106, 591], TOLERANCE);
@@ -453,6 +459,12 @@
                     numericAxis.options.axisCrossingValue = -1;
                     var slot = numericAxis.getSlot(-0.5);
                     same([slot.y1, slot.y2], [251.5, 494]);
+                });
+
+                test("undefined is placed on axis crossing", function() {
+                    numericAxis.options.axisCrossingValue = -1;
+                    var slot = numericAxis.getSlot();
+                    same([slot.y1, slot.y2], [494, 494], TOLERANCE);
                 });
 
                 test("a value capped to maximum value", function() {
