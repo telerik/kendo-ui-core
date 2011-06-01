@@ -48,7 +48,8 @@
 
                     axisY: {
                         getSlot: function(value) {
-                            var valueY = VALUE_AXIS_MAX - value,
+                            var value = typeof value === "undefined" ? 0 : value,
+                                valueY = VALUE_AXIS_MAX - value,
                                 slotTop = Math.min(CATEGORY_AXIS_Y, valueY),
                                 slotBottom = Math.max(CATEGORY_AXIS_Y, valueY);
 
@@ -66,6 +67,7 @@
                     series.updateLayout();
                 }
 
+                // ------------------------------------------------------------
                 module("Bar Chart / Positive Values", {
                     setup: function() {
                         setupBarChart({ series: [ positiveSeries ] });
@@ -82,6 +84,11 @@
 
                 test("Reports maximum series value", function() {
                     same(series.getValueRange().max, positiveSeries.data[1]);
+                });
+
+                test("Reports number of categories", function() {
+                    setupBarChart({series: [ positiveSeries ]});
+                    equal(series.categoriesCount(), positiveSeries.data.length);
                 });
 
                 test("bars are distributed across category axis", function() {
@@ -114,6 +121,7 @@
                     same(barHeights, [1, 2]);
                 });
 
+                // ------------------------------------------------------------
                 module("Bar Chart / Negative Values", {
                     setup: function() {
                         setupBarChart({ series: [ negativeSeries ] });
@@ -144,6 +152,56 @@
                     same(barHeights, [1, 2]);
                 });
 
+                // ------------------------------------------------------------
+                module("Bar Chart / Mixed Values", {
+                    setup: function() {
+                        setupBarChart({ series: [ negativeSeries, positiveSeries ] });
+                    }
+                });
+
+                test("Reports number of categories for two series", function() {
+                    setupBarChart({series: [ positiveSeries, negativeSeries ]});
+                    equal(series.categoriesCount(), positiveSeries.data.length);
+                });
+
+                // ------------------------------------------------------------
+                module("Bar Chart / Mismatching series", {
+                    setup: function() {
+                        setupBarChart({
+                        series: [ { data: [1, 2, 3] },
+                                  positiveSeries
+                            ]
+                        });
+                    }
+                });
+
+                test("Reports minimum series value", function() {
+                    same(series.getValueRange().min, 1);
+                });
+
+                test("Reports maximum series value", function() {
+                    same(series.getValueRange().max, 3);
+                });
+
+                test("Reports number of categories", function() {
+                    equal(series.categoriesCount(), 3);
+                });
+
+                test("Missing values are represented as bars with zero height", function() {
+                    var barHeights = $.map(series._bars, function(bar) {
+                        return bar.box.height();
+                    });
+
+                    same(barHeights, [1, 1, 2, 2, 3, 0]);
+                });
+
+                test("bar bottoms are aligned to category axis", 6, function() {
+                    $.each(series._bars, function() {
+                        equal(this.box.y2, CATEGORY_AXIS_Y);
+                    });
+                });
+
+                // ------------------------------------------------------------
                 module("Bar Chart / Cluster", {
                     setup: function() {
                         setupBarChart({ series: [ positiveSeries, negativeSeries ] });
@@ -154,6 +212,7 @@
                     equal(series._bars[0].box.x2, series._bars[1].box.x1);
                 });
 
+                // ------------------------------------------------------------
                 module("Bar Chart / Stack / Positive Values", {
                     setup: function() {
                         setupBarChart({
@@ -187,6 +246,7 @@
                     same(barHeights, [1, 1, 2, 2]);
                 });
 
+                // ------------------------------------------------------------
                 module("Bar Chart / Stack / Negative Values", {
                     setup: function() {
                         setupBarChart({
@@ -221,6 +281,7 @@
                     same(barHeights, [1, 1, 2, 2]);
                 });
 
+                // ------------------------------------------------------------
                 module("Bar Chart / Stack / Mixed Values", {
                     setup: function() {
                         setupBarChart({
@@ -287,6 +348,7 @@
                     series.updateLayout();
                 }
 
+                // ------------------------------------------------------------
                 module("Bar Chart / Horizontal / Positive Values", {
                     setup: function() {
                         setupBarChart({ isVertical: false, series: [ positiveSeries ] });
@@ -323,6 +385,7 @@
                     same(barWidths, [1, 2]);
                 });
 
+                // ------------------------------------------------------------
                 module("Bar Chart / Horizontal / Negative Values", {
                     setup: function() {
                         setupBarChart({ isVertical: false, series: [ negativeSeries ] });
@@ -353,6 +416,7 @@
                     same(barWidths, [1, 2]);
                 });
 
+                // ------------------------------------------------------------
                 module("Bar Chart / Horizontal / Cluster", {
                     setup: function() {
                         setupBarChart({ isVertical: false, series: [ positiveSeries, negativeSeries ] });
@@ -363,6 +427,7 @@
                     equal(series._bars[0].box.y2, series._bars[1].box.y1);
                 });
 
+                // ------------------------------------------------------------
                 module("Bar Chart / Horizontal / Stack / Positive Values", {
                     setup: function() {
                         setupBarChart({
@@ -397,6 +462,7 @@
                     equal(series._bars[0].box.y1, 0.3, TOLERANCE);
                 });
 
+                // ------------------------------------------------------------
                 module("Bar Chart / Horizontal / Stack / Negative Values", {
                     setup: function() {
                         setupBarChart({
@@ -432,6 +498,7 @@
                     same(barWidths, [1, 1, 2, 2]);
                 });
 
+                // ------------------------------------------------------------
                 module("Bar Chart / Horizontal / Stack / Mixed Values", {
                     setup: function() {
                         setupBarChart({
@@ -479,6 +546,7 @@
                     }
                 });
 
+                // ------------------------------------------------------------
                 module("Bar Chart / Configuration", {
                     setup: function() {
                         plotArea = new PlotAreaStub();
@@ -509,6 +577,7 @@
                     cluster.updateLayout(clusterBox);
                 }
 
+                // ------------------------------------------------------------
                 module("Cluster Layout / Horizontal", {
                     setup: function() {
                         createCluster({ gap: 0 });
@@ -534,6 +603,7 @@
                     equal(bars[1].box.x2, 275);
                 });
 
+                // ------------------------------------------------------------
                 module("Cluster Layout / Vertical", {
                     setup: function() {
                         createCluster({ isVertical: true, gap: 0 });
@@ -557,6 +627,7 @@
                 var stack,
                     stackBox = new Box(50, 50, 100, 100);
 
+                // ------------------------------------------------------------
                 module("Stack Layout / Vertical", {
                     setup: function() {
                         stack = new Chart.StackLayout();
@@ -610,6 +681,7 @@
                     equal(stack.children[1].box.x1, stackBox.x1);
                 });
 
+                // ------------------------------------------------------------
                 module("Stack Layout / Vertical / Reversed", {
                     setup: function() {
                         stack = new Chart.StackLayout({ isReversed: true });
@@ -663,6 +735,7 @@
                     equal(stack.children[1].box.x1, stackBox.x1);
                 });
 
+                // ------------------------------------------------------------
                 module("Stack Layout / Horizontal", {
                     setup: function() {
                         stack = new Chart.StackLayout({ isVertical: false });
@@ -715,6 +788,7 @@
                     equal(stack.children[1].box.y1, stackBox.y1);
                 });
 
+                // ------------------------------------------------------------
                 module("Stack Layout / Horizontal / Reversed", {
                     setup: function() {
                         stack = new Chart.StackLayout({ isVertical: false, isReversed: true });

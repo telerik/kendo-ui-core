@@ -769,8 +769,10 @@
                 lineStart = lineBox[valueAxis + 1],
                 lineSize = isVertical ? lineBox.height() : lineBox.width(),
                 scale = lineSize / (options.max - options.min),
+                a = typeof a === "undefined" ? options.axisCrossingValue : a,
+                b = typeof b === "undefined" ? options.axisCrossingValue : b,
                 a = Math.max(Math.min(a, options.max), options.min),
-                b = Math.max(Math.min(b || options.axisCrossingValue, options.max), options.min),
+                b = Math.max(Math.min(b, options.max), options.min),
                 p1,
                 p2,
                 slotBox = new Box(lineBox.x1, lineBox.y1, lineBox.x1, lineBox.y1);
@@ -1118,16 +1120,18 @@
                 negativeSums = [];
 
             barChart.traverseDataPoints(function(value, categoryIx, series) {
-                if (isStacked) {
-                    var sums = value > 0 ? positiveSums : negativeSums;
-                    if (sums.length === categoryIx) {
-                        sums[categoryIx] = value;
+                if(typeof value !== "undefined") {
+                    if (isStacked) {
+                        var sums = value > 0 ? positiveSums : negativeSums;
+                        if (sums.length === categoryIx) {
+                            sums[categoryIx] = value;
+                        } else {
+                            sums[categoryIx] += value;
+                        }
                     } else {
-                        sums[categoryIx] += value;
+                        barChart._seriesMin = Math.min(barChart._seriesMin, value);
+                        barChart._seriesMax = Math.max(barChart._seriesMax, value);
                     }
-                } else {
-                    barChart._seriesMin = Math.min(barChart._seriesMin, value);
-                    barChart._seriesMax = Math.max(barChart._seriesMax, value);
                 }
 
                 barChart.addValue(value, categoryIx, series);
@@ -1201,6 +1205,18 @@
             return { min: barChart._seriesMin, max: barChart._seriesMax };
         },
 
+        categoriesCount: function() {
+            var barChart = this,
+                series = barChart.options.series,
+                categories = 0;
+
+            for (var i = 0, length = series.length; i < length; i++) {
+                categories = Math.max(categories, series[i].data.length);
+            }
+
+            return categories;
+        },
+
         updateLayout: function(targetBox) {
             var barChart = this,
                 options = barChart.options,
@@ -1236,7 +1252,7 @@
             var barChart = this,
                 options = barChart.options,
                 series = options.series,
-                categoriesCount = series.length > 0 ? series[0].data.length : 0;
+                categoriesCount = barChart.categoriesCount();
 
             for (var categoryIx = 0; categoryIx < categoriesCount; categoryIx++) {
                 for (var seriesIx = 0; seriesIx < series.length; seriesIx++) {
@@ -1270,7 +1286,8 @@
             var plotArea = this,
                 options = plotArea.options,
                 charts = plotArea.charts = [],
-                range = { min: 0, max: 1 };
+                range = { min: 0, max: 1 },
+                categories = options.categoryAxis.categories;
 
             var barSeries = $.grep(options.series, function(currentSeries) {
                 return currentSeries.type == "bar";
@@ -1278,6 +1295,12 @@
 
             if (barSeries.length > 0) {
                 var barChart = new BarChart(this, { series: barSeries });
+
+                if (!categories) {
+                    categories = options.categoryAxis.categories = [];
+                }
+                var categoriesToAdd = barChart.categoriesCount() - categories.length;
+                [].push.apply(options.categoryAxis.categories, new Array(categoriesToAdd));
 
                 range = barChart.getValueRange();
                 charts.push(barChart);

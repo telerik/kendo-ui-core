@@ -132,6 +132,20 @@
                     );
                 });
 
+                test("matches category count to actual data", function() {
+                    var plotArea = new Chart.PlotArea({
+                        series: [{
+                            type: "bar",
+                            data: [100, 200, 300]
+                        }],
+                        categoryAxis: {
+                            categories: ["A", "B"]
+                        }
+                    });
+
+                    equals(plotArea.axisX.options.categories.length, 3);
+                });
+
             })();
         </script>
 
