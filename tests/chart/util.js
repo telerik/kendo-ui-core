@@ -3,6 +3,7 @@ function ViewFactoryStub() {
         log = factory.log = { };
 
     log.rect = [];
+    log.text = [];
 }
 
 ViewFactoryStub.prototype = {
@@ -12,6 +13,13 @@ ViewFactoryStub.prototype = {
             y1: box.y1,
             x2: box.x2,
             y2: box.y2,
+            style: style
+        });
+    },
+
+    text: function(content, style) {
+        this.log.text.push({
+            content: content,
             style: style
         });
     }

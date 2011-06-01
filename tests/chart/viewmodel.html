@@ -211,23 +211,26 @@
             })();
 
             (function() {
-                var legend;
+                var legend,
+                    viewFactory,
+                    MARKER_MARGIN = MARKER_SIZE = 7;
 
-                module("Legend");
+                module("Legend", {
+                    setup: function() {
+                        viewFactory = new ViewFactoryStub();
+                    }
+                });
 
                 test("creates labels for series", 1, function() {
                     legend = new Chart.Legend({
                         series: [ { name: "Series 1" } ]
                     });
 
-                    var factory = {
-                        text: function(content) {
-                            equal(content, "Series 1");
-                        }
-                    };
-
-                    legend.getViewElements(factory);
+                    legend.updateLayout(chartBox);
+                    legend.getViewElements(viewFactory);
+                    equal(viewFactory.log.text[0].content, "Series 1");
                 });
+
 
                 test("second label is below the first", function() {
                     legend = new Chart.Legend({
@@ -286,6 +289,49 @@
                     deepEqual([legend.box.y1, legend.box.y2], [chartBox.y1, chartBox.y2]);
                 });
 
+                //--------------------------------------------------------------
+                var marker, label;
+                module("markers", {
+                    setup: function() {
+                        legend = new Chart.Legend({
+                            series: [ { name: "Series 1", color: "#f00" } ]
+                        });
+
+                        legend.updateLayout(chartBox);
+                        legend.getViewElements(viewFactory);
+
+                        marker = viewFactory.log.rect[0];
+                        label = viewFactory.log.text[0];
+                    }
+                });
+
+                test("creates markers for series", function() {
+                    equal(viewFactory.log.rect.length, 1);
+                });
+
+                test("sets marker color", function() {
+                    equal(marker.style.fill, "#f00");
+                });
+
+                test("markers have margin on the left", function() {
+                    equal(marker.x1, legend.box.x1 + MARKER_MARGIN);
+                });
+
+                test("markers have set width", function() {
+                    equal(marker.x2 - marker.x1, MARKER_SIZE);
+                });
+
+                test("markers have margin on the right", function() {
+                    equal(marker.x2, label.style.x - MARKER_MARGIN);
+                });
+
+                test("markers are aligned to text center", function() {
+                    equal(marker.y1, label.style.y + MARKER_SIZE / 2);
+                });
+
+                test("markers are 1/2 of label size", function() {
+                    equal(marker.y2 - marker.y1, legend.children[0].box.height() / 2);
+                });
             })();
 
             (function() {
