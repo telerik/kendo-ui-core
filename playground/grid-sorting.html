@@ -6,74 +6,119 @@
         <script src="../src/kendo.core.js"></script>
         <script src="../src/kendo.query.js"></script>
         <script src="../src/kendo.datasource.js"></script>
+        <script src="../src/kendo.grid.js"></script>
+        <style>
+            table {
+                border: 1px solid black;
+                border-collapse: collapse;
+                width: 100%;
+                table-layout: fixed;
+            }
+
+            td, th {
+                border: 1px solid black;
+                height: 22px;
+            }
+
+            th {
+                background: magenta;
+            }
+
+            .grid {
+                width: 500px;
+            }
+
+            .grid-header {
+                padding-right: 17px;
+                background: magenta;
+            }
+
+            .grid-content {
+                position: relative;
+                padding-right: 17px;
+                overflow: hidden;
+            }
+
+            .grid-scroller {
+                overflow-y: scroll;
+                overflow-x: hidden;
+                position: absolute;
+                right:0;
+                top:0;
+                height: 100%;
+            }
+        </style>
     </head>
     <body>
-        <table>
-            <thead>
-                <tr>
-                    <th data-field="OrderID">
-                        OrderID
-                    </th>
-                    <th data-field="ContactName">
-                       ContactName 
-                    </th>
-                    <th data-field="ShipAddress">
-                      ShipAddress 
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
-
+        <div class="grid">
+            <div class="grid-header">
+                <table>
+                    <thead>
+                        <tr>
+                            <th data-field="OrderID">
+                                OrderID
+                            </th>
+                            <th data-field="ContactName">
+                                ContactName
+                            </th>
+                            <th data-field="ShipAddress">
+                                ShipAddress
+                            </th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="grid-content">
+                <div class="grid-data">
+                    <table id="grid">
+                        <thead>
+                            <tr>
+                                <th data-field="OrderID">
+                                    OrderID
+                                </th>
+                                <th data-field="ContactName">
+                                    ContactName
+                                </th>
+                                <th data-field="ShipAddress">
+                                    ShipAddress
+                                </th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="grid-scroller">
+                </div>
+            </div>
+        </div>
         <script>
-            var dataSource = new kendo.data.DataSource({ 
-                serverSorting: true,
-                transport: {
-                    read: {
-                        url: "/Telerik.Mvc.Examples/Grid/_FirstLook",
-                        type: "POST"
-                    },
-                    dialect: {
-                        read: function(data) {
-                            var result = {};
-                            if (data.sort) {
-                                result.orderBy = data.sort[0].field + '-' + data.sort[0].dir;
-                            }
-                            return result;
-                        }
-                    },
-                    reader: {
-                        data: function(result) {
-                            return result.data;
-                        }
-                    }
-                }
-            });
-            var start;
-            var fields = $("table th").click(function(){
-                var sort = { field: $(this).data("field"), dir: "desc"};
-                start = new Date();
-                dataSource.query({ sort: sort });
-            }).map(function(){
-                return $(this).data("field");
+            var data = [];
+
+            for (var i = 1; i <= 50000; i++) {
+                data.push({ OrderID: i, ContactName: "Contact " + i, ShipAddress: "Ship Address " + i });
+            }
+
+            var dataSource = new kendo.data.DataSource({
+                data: data,
+                pageSize: 25
             });
 
-            dataSource.bind("kendo:change", function(){
-                var data = this.view(),
-                    body;
-                    for(var i = 0, len = data.length; i < len; i++){
-                        body += "<tr>";
-                            for(var j = 0, length = fields.length; j < length; j++){
-                                body += "<td>" + data[i][fields[j]] + "</td>";
-                            }
-                        body += "</tr>";
-                    }
-                $("table tbody").empty().append($(body));
-                alert(new Date() - start);
+            $("table#grid").kendoGrid({
+                dataSource: dataSource
+            }).find("thead").remove();
+
+            var rowHeight = $("table#grid td:first")[0].offsetHeight;
+
+            var height = dataSource.pageSize()  * rowHeight;
+            $(".grid-data, .grid-scroller").height(height);
+
+            var totalHeight = data.length * rowHeight;
+
+            $("<div />").height(totalHeight).width(10).appendTo($(".grid-scroller"));
+
+            $(".grid-scroller").bind("scroll", function(e) {
+                var page = 1 + Math.ceil(Math.ceil(this.scrollTop / rowHeight) / dataSource.pageSize());
+                dataSource.page(page);
             });
-            start = new Date();
-            dataSource.read();
-        </script>
-    </body>
-</html>
+            </script>
+        </body>
+    </html>
