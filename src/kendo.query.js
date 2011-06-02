@@ -251,6 +251,38 @@
         filter: function(expressions) {
             var predicate = Filter.create(Query.expandFilter(expressions));
             return new Query(predicate(this.data));
+        },
+        groupBy: function(fields) {
+            var field = fields[0].field,
+                sorted = this.sort(field, fields[0].dir || "asc").toArray(),
+                accessor = kendo.accessor(field),
+                item,
+                groupValue = accessor.get(sorted[0], field),
+                group = {
+                    field: field,
+                    value: groupValue,
+                    items: []
+                },
+                currentValue,
+                idx,
+                len,
+                result = [group];
+
+                for(idx = 0, len = sorted.length; idx < len; idx++) {
+                    item = sorted[idx];
+                    current = accessor.get(item, field);
+                    if(groupValue !== current) {
+                        groupValue = current;
+                        group = {
+                            field: field,
+                            value: groupValue,
+                            items: []
+                        };
+                        result.push(group);
+                    }
+                    group.items.push(item);
+                }
+            return new Query(result);
         }
     }
 
