@@ -487,10 +487,12 @@
                 labelBox.wrap(label.box);
             };
 
-            // Translate all labels to the final position
+            // Vertical center is calculated relative to the container, not the parent!
             var offsetX = targetBox.x2 - labelBox.width(),
-                offsetY = targetBox.y1 + ((targetBox.height() - labelBox.height()) / 2);
+                offsetY = (targetBox.y2 - labelBox.height()) / 2;
+
             for (var i = 0; i < childrenCount; i++) {
+                // Translate all labels to the final position
                 var label = legend.children[i];
                 label.box.translate(offsetX, offsetY);
             };
