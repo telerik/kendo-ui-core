@@ -53,7 +53,7 @@ exports.rmdirSyncRecursive = function(path) {
  *  Note: Directories should be passed to this function without a trailing slash.
  */
 exports.copyDirSyncRecursive = function(sourceDir, newDirLocation) {
-	/*  Copying over something is... tricky. The user should know what they're doing at this point, so...
+    /*  Copying over something is... tricky. The user should know what they're doing at this point, so...
      *  blow any existing directory away!
      */
     try {
@@ -61,13 +61,13 @@ exports.copyDirSyncRecursive = function(sourceDir, newDirLocation) {
     } catch(e) { }
 
     /*  Create the directory where all our junk is moving to; read the mode of the source directory and mirror it */
-	var checkDir = fs.statSync(sourceDir);
+    var checkDir = fs.statSync(sourceDir);
     fs.mkdirSync(newDirLocation, checkDir.mode);
 
     var files = fs.readdirSync(sourceDir);
 
-	for(var i = 0; i < files.length; i++) {
-		var currFile = fs.statSync(sourceDir + "/" + files[i]);
+    for(var i = 0; i < files.length; i++) {
+        var currFile = fs.statSync(sourceDir + "/" + files[i]);
 
         if(currFile.isDirectory()) {
             /*  Create a new directory in our copied version... */
@@ -81,8 +81,8 @@ exports.copyDirSyncRecursive = function(sourceDir, newDirLocation) {
         } else {
             /*  At this point, we've hit a file actually worth copying... so copy it on over. */
             var contents = fs.readFileSync(sourceDir + "/" + files[i]);
-			fs.writeFileSync(newDirLocation + "/" + files[i], contents);
-	    }
+            fs.writeFileSync(newDirLocation + "/" + files[i], contents);
+        }
     }
 };
 
@@ -96,8 +96,8 @@ exports.copyDirSyncRecursive = function(sourceDir, newDirLocation) {
 exports.chmodSyncRecursive = function(sourceDir, filemode) {
     var files = fs.readdirSync(sourceDir);
 
-	for(var i = 0; i < files.length; i++) {
-		var currFile = fs.statSync(sourceDir + "/" + files[i]);
+    for(var i = 0; i < files.length; i++) {
+        var currFile = fs.statSync(sourceDir + "/" + files[i]);
 
         if(currFile.isDirectory()) {
             /*  ...and recursion this thing right on back. */
@@ -105,7 +105,7 @@ exports.chmodSyncRecursive = function(sourceDir, filemode) {
         } else {
             /*  At this point, we've hit a file actually worth copying... so copy it on over. */
             fs.chmod(sourceDir + "/" + files[i], filemode);
-	    }
+        }
     }
 
     /*  Finally, chmod the parent directory */
@@ -139,6 +139,12 @@ exports.rmdirRecursive = function rmdirRecursive(dir, clbk){
         })();
     });
 };
+
+exports.copyFile = function(file, newFile) {
+    fs.readFile(file, function(err, data) {
+        fs.writeFile(newFile, data);
+    });
+}
 
 /*  wrench.copyDirRecursive("directory_to_copy", "new_location", callback);
  *
