@@ -32,9 +32,15 @@ function processfile(file) {
 
             var base = file === "live/index.html" ? "" : "../";
 
-            data = regions.script.exec(data, regions.script.html.replace(/src=\"([^"]*)\"/g, 'src="' + base + '$1"'));
+            var scripts = regions.script.html;
 
-            data = regions.css.exec(data, regions.css.html.replace(/href=\"([^"]*)\"/g, 'href="' + base + '$1"'));;
+            scripts = scripts.replace(/"(.*?)src/g, '"' + base + "js");
+
+            scripts = scripts.replace(/src="([^"]*)"/g, 'src="' + base + '$1"');
+
+            data = regions.script.exec(data, scripts);
+
+            data = regions.css.exec(data, regions.css.html.replace(/href="([^"]*)"/g, 'href="' + base + '$1"'));;
 
             data = regions.nav.exec(data);
             data = regions.code.exec(data);
@@ -63,6 +69,13 @@ var regions = {};
 });
 
 wrench.copyDirSyncRecursive("demos/examples", "live");
+wrench.copyDirSyncRecursive("src", "live/js");
+
+fs.readdir("demos/examples/js", function(err, files) {
+    files.forEach(function(file) {
+        wrench.copyFile("demos/examples/js/" + file, "live/js/" + file);
+    });
+});
 
 fs.unlink("live/template.html");
 
