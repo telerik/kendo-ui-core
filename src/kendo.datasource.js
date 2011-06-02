@@ -228,6 +228,9 @@
                 data: identity,
                 total: function(data) {
                     return data.length;
+                },
+                status: function(data) {
+                    return data.status;
                 }
             }, options.deserializer);
 
@@ -394,9 +397,17 @@
                 origId,
                 models = that._models
                 map = that._map,
-                resolved = [];
-               
-            data = that._deserializer.data(data);
+                deserializer= that._deserializer;
+                        
+            if(!deserializer.status(data)) {
+                return that.error({data: origData});                
+            }
+            
+            $.each(origData, function(index, value) {
+                delete models[that.id(value)];
+            });
+                           
+            data = deserializer.data(data);
             $.each(data, function(index, value) {
                 origValue = origData[index];                
                 if(origValue) {                
@@ -404,17 +415,15 @@
                     index = map[origId];
 
                     if(index >= 0) {
-                        that._data[index] = value;
-                        resolved.push(value);
-                    }
-                    delete models[origId];
+                        that._data[index] = value;                        
+                    }                    
                 }
             });
-            that._idMap(resolved);            
+            that._idMap(that._data);
         },
 
         _syncError: function(origData, data) {
-            
+            this.error({data: origData});
         },
 
         _send: function(data, method, mode) {
