@@ -267,16 +267,17 @@
                     equal(label.box.x1, chartBox.x2 - label.box.width());
                 });
 
-                test("positions legend to vertical center", function() {
+                test("positions legend to absolute vertical center (relative to y=0)", function() {
                     legend = new Chart.Legend({
                         series: [ { name: "Series 1" } ]
                     });
 
-                    legend.updateLayout(chartBox);
+                    var legendBox = chartBox.clone().translate(100, 100);
+                    legend.updateLayout(legendBox);
 
                     var label = legend.children[0];
                     equal(  label.box.y1,
-                            (chartBox.height() - label.box.height()) / 2);
+                            (legendBox.y2 - label.box.height()) / 2);
                 });
 
                 test("legend fills available height", function() {
