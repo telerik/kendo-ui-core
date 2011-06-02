@@ -403,7 +403,7 @@
 
                 test("positions slot for [0, 0.5]", function() {
                     var slot = numericAxis.getSlot(0, 0.5);
-                    same([slot.y1, slot.y2], [ 348.5, 591]);
+                    same([slot.y1, slot.y2], [ 348.5, 591], TOLERANCE);
                 });
 
                 test("positions slot for [0.5, 1]", function() {
@@ -435,7 +435,7 @@
 
                 test("b value capped to maximum value", function() {
                     var slot = numericAxis.getSlot(0, 1000);
-                    same([slot.y1, slot.y2], [9, 591]);
+                    same([slot.y1, slot.y2], [9, 591], TOLERANCE);
                 });
 
                 module("Slots / Vertical / Negative Values", {
@@ -447,18 +447,18 @@
 
                 test("positions slot for [-0.5, 0]", function() {
                     var slot = numericAxis.getSlot(-0.5, 0);
-                    same([slot.y1, slot.y2], [9, 251.5]);
+                    same([slot.y1, slot.y2], [9, 251.5], TOLERANCE);
                 });
 
                 test("positions slot for [-1, -0.5]", function() {
                     var slot = numericAxis.getSlot(-1, -0.5);
-                    same([slot.y1, slot.y2], [251.5, 494]);
+                    same([slot.y1, slot.y2], [251.5, 494], TOLERANCE);
                 });
 
                 test("assumes missing value to be axis crossing", function() {
                     numericAxis.options.axisCrossingValue = -1;
                     var slot = numericAxis.getSlot(-0.5);
-                    same([slot.y1, slot.y2], [251.5, 494]);
+                    same([slot.y1, slot.y2], [251.5, 494], TOLERANCE);
                 });
 
                 test("undefined is placed on axis crossing", function() {
@@ -469,12 +469,12 @@
 
                 test("a value capped to maximum value", function() {
                     var slot = numericAxis.getSlot(1000, -1);
-                    same([slot.y1, slot.y2], [9, 494]);
+                    same([slot.y1, slot.y2], [9, 494], TOLERANCE);
                 });
 
                 test("b value capped to minimum value", function() {
                     var slot = numericAxis.getSlot(0, -1000);
-                    same([slot.y1, slot.y2], [9, 591]);
+                    same([slot.y1, slot.y2], [9, 591], TOLERANCE);
                 });
 
                 module("Slots / Horizontal", {
