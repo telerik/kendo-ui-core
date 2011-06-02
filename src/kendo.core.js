@@ -1050,6 +1050,14 @@
             };
         }
 
+        if ('effects' in options && typeof options.effects === "string") {
+            effects = {};
+            $.each(options.effects.split(" "), function() {
+                effects[this] = {};
+            });
+            options.effects = effects;
+        }
+
         options = extend({
             //default options
             effects: {},
@@ -1139,6 +1147,7 @@
     function toggleClass(element, classes, options, add) {
         if (classes) {
             classes = classes.split(' ');
+
             if (support.transitions) {
                 options = extend({
                     exclusive: 'all',
