@@ -3,11 +3,6 @@ var path = require("path");
 var sys = require("sys");
 var wrench = require("./wrench");
 
-var navRe = /<!--\s*nav\s*-->(([\u000a\u000d\u2028\u2029]|.)*)<!--\s*nav\s*-->/g;
-var codeRe = /<!--\s*code\s*-->(([\u000a\u000d\u2028\u2029]|.)*)<!--\s*code\s*-->/g;
-var scriptRe = /<!--\s*script\s*-->(([\u000a\u000d\u2028\u2029]|.)*)<!--\s*script\s*-->/g;
-var cssRe = /<!--\s*css\s*-->(([\u000a\u000d\u2028\u2029]|.)*)<!--\s*css\s*-->/g;
-
 function processdir(dir) {
     fs.readdir(dir, function(err, children) {
         if (err) throw err;
@@ -34,7 +29,7 @@ function processfile(file) {
 
             var scripts = regions.script.html;
 
-            scripts = scripts.replace(/"(.*?)src/g, '"' + base + "js");
+            scripts = scripts.replace(/"(.*?)src/g, '"js');
 
             scripts = scripts.replace(/src="([^"]*)"/g, 'src="' + base + '$1"');
 
@@ -42,7 +37,7 @@ function processfile(file) {
 
             data = regions.css.exec(data, regions.css.html.replace(/href="([^"]*)"/g, 'href="' + base + '$1"'));;
 
-            data = regions.nav.exec(data);
+            data = regions.nav.exec(data, regions.nav.html.replace(/href="([^"]*)"/g, 'href="' + base + '$1"'));
             data = regions.code.exec(data);
 
             fs.writeFile(file, data);
@@ -70,13 +65,12 @@ var regions = {};
 
 wrench.copyDirSyncRecursive("demos/examples", "live");
 wrench.copyDirSyncRecursive("src", "live/js");
+fs.unlinkSync("live/template.html");
 
 fs.readdir("demos/examples/js", function(err, files) {
     files.forEach(function(file) {
         wrench.copyFile("demos/examples/js/" + file, "live/js/" + file);
     });
 });
-
-fs.unlink("live/template.html");
 
 processdir("live");
