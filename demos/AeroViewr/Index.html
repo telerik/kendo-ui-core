@@ -25,10 +25,20 @@
                     {suffix: "_m", size: 240}
                 ],
                 this.imageSize = this.IMAGESIZES[0],
-                this.PAGESIZE = 100,
+                this.PAGESIZE = 300,
                 this.template = function(option) { return '<li style="width:' + option.size + 'px;height:' + option.size + 'px"><img data-photoid="<%= id %>" alt="<%= kendo.htmlEncode(title) %>" src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>' + option.suffix + '.jpg"></li>'; },
                 this.setTemplate = '<li data-setid="<%=id%>" alt="<%= kendo.htmlEncode(title._content) %>"><img width="75" height="75" src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=primary%>_<%=secret%>_s.jpg"><em><%= kendo.htmlEncode(title._content) %></em></li>',
                 this.EXTRAS = "owner_name,tags",
+                this.computePageSize = function(size, onlyHeight) {
+                    var pagerHeight = 56,
+                        staticHeight = $("header").height() + $("#footer").height() + pagerHeight,
+                        widthMargin = $("#main").outerHeight(true) - $("#main").outerHeight(),
+                        width = window.innerWidth - widthMargin,
+                        height = window.innerHeight - staticHeight,
+                        imagesOnHeight = parseInt(height/size);
+
+                    return onlyHeight ? imagesOnHeight : imagesOnHeight * parseInt(width/size);
+                },
                 this.hideExif = function() {
                     var exifWindow = $("#exifWindow");
                     if (exifWindow.length) {
