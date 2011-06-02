@@ -525,6 +525,36 @@
                 equal(result[0], 100);
                 equal(result[1], 10);
             });
+            test("groupby groups data by field", function() {
+                var data = [ {field: 100} , {field: 100} , {field: 1} ];
+
+                var result = new Query(data).groupBy( [{
+                    field: "field"
+                }]).toArray();
+                equal(result.length, 2);
+                equal(result[0].value, 1);
+                equal(result[0].field, "field");
+                equal(result[0].items.length, 1);
+                equal(result[1].value, 100);
+                equal(result[1].field, "field");
+                equal(result[1].items.length, 2);
+            });
+            test("groupby groups data by field and direction", function() {
+                var data = [ {field: 100} , {field: 100} , {field: 1} ];
+
+                var result = new Query(data).groupBy( [{
+                    field: "field",
+                    dir: "desc"
+                }]).toArray();
+                equal(result.length, 2);
+                equal(result[1].value, 1);
+                equal(result[1].field, "field");
+                equal(result[1].items.length, 1);
+                equal(result[0].value, 100);
+                equal(result[0].field, "field");
+                equal(result[0].items.length, 2);
+            });
+
         </script>
     </body>
 </html>
