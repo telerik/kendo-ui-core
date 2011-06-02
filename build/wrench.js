@@ -52,13 +52,12 @@ exports.rmdirSyncRecursive = function(path) {
  *
  *  Note: Directories should be passed to this function without a trailing slash.
  */
-exports.copyDirSyncRecursive = function(sourceDir, newDirLocation, removeExisting) {
+exports.copyDirSyncRecursive = function(sourceDir, newDirLocation) {
     /*  Copying over something is... tricky. The user should know what they're doing at this point, so...
      *  blow any existing directory away!
      */
-    removeExisting = typeof removeExisting === "undefined" ? true : removeExisting;
     try {
-        if(removeExisting && fs.statSync(newDirLocation).isDirectory()) exports.rmdirSyncRecursive(newDirLocation);
+        if(fs.statSync(newDirLocation).isDirectory()) exports.rmdirSyncRecursive(newDirLocation);
     } catch(e) { }
 
     /*  Create the directory where all our junk is moving to; read the mode of the source directory and mirror it */
