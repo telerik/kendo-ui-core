@@ -386,11 +386,17 @@ div.t-window-content
     border-top-right-radius: 5px;
 }
 
+.t-tabstrip-items .t-tab-on-top,
 .t-tabstrip-items .t-state-active,
 .t-panelbar .t-tabstrip-items .t-state-active
 {
     padding-bottom: 1px;
     margin-bottom: -1px;
+}
+
+.t-tabstrip-items .t-tab-on-top
+{
+    z-index: 1;
 }
 
 .t-tabstrip-items .t-link,
