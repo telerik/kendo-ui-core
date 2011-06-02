@@ -2,13 +2,13 @@
 
 window.application.call(this);
 
-var visitor = window.visitor,
+var visitor,
     slideshow = window.slideshow,
     searching = false,
     sliderValue = 0,
     data = window.data,
     dataSource = data.dataSource({
-        pageSize: 5,
+        pageSize: computePageSize(120, true),
         serverSorting: true,
         dialect: {
             read: function(data) {
@@ -61,14 +61,22 @@ var visitor = window.visitor,
        $("#backButton").text("Back to search results").data("currentView", "flatMostPopularPhotos");
    }
 
-    function updatePlayIcon(playing) {
+   function updatePlayIcon(playing) {
         return $("#viewslideshow").find(".p-icon")
                 .toggleClass("i-pause", playing)
                 .toggleClass("i-slideshow", !playing)
                 .end()
                 .find("em")
                 .html(playing ? 'Pause' : 'Play').end();
-    }
+   }
+
+   function updatePageSize() {
+        var isGrid = $("#mainTemplate").find("#grid").hasClass("currentView");
+            listPageSize = computePageSize(imageSize.size),
+            gridPageSize = computePageSize(120, true),
+
+        dataSource.query({page: 1, pageSize: isGrid ? gridPageSize : listPageSize});
+   }
 
    window.visitor = {
         hideExif: function() {
@@ -94,19 +102,19 @@ var visitor = window.visitor,
         search: function(el) {
             if ($("#searchBox").val() && !searching) {
 
-                $("#overlay").after("<div id='searchLoading' class='loading'>Loading ...</div>");
                 searching = true;
 
-                var pageSize = sliderValue === 0 ? 20 : parseInt(20 / sliderValue);
-
-                dataSource.query({page: 1, pageSize: $("#mainTemplate").find("#grid").hasClass("currentView") ? 5 : pageSize});
+                $("#overlay").after("<div id='searchLoading' class='loading'>Loading ...</div>");
                 $("#flatMostPopularPhotos").hide();
                 $("#flatSearchPhotos").hide();
                 $("#overlay").stop(true, true).fadeIn();
                 $("#exifButton").stop(true, true).fadeOut();
+
                 slideshow.init($("#flatSearchPhotos").data("kendoListView"));
                 updatePlayIcon(slideshow._started)
                     .add("#uploadphotos").stop(true, true).fadeOut()
+
+                updatePageSize();
             }
         },
 
@@ -178,7 +186,8 @@ var visitor = window.visitor,
 
 
             $(".i-gridview").click(function() {
-                dataSource.query({page: 1, pageSize: 5});
+                dataSource.query({page: 1, pageSize: computePageSize(120, true)});
+
                 $(this).addClass("currentView");
                 $(".i-tileview").removeClass("currentView");
                 $("#mainPhotoStrip").hide();
@@ -189,9 +198,7 @@ var visitor = window.visitor,
             });
 
             $(".i-tileview").click(function() {
-                var pageSize = sliderValue === 0 ? 20 : parseInt(20 / sliderValue);
-
-                dataSource.query({page: 1, pageSize: pageSize});
+                dataSource.query({page: 1, pageSize: computePageSize(imageSize.size)});
 
                 $(this).addClass("currentView");
                 $(".i-gridview").removeClass("currentView");
@@ -242,12 +249,10 @@ var visitor = window.visitor,
                 largeStep: 1,
                 tickPlacement: "none",
                 change: function() {
-                    sliderValue = this.value();
-                    imageSize = IMAGESIZES[sliderValue];
-                    var t = template(imageSize),
-                        pageSize = sliderValue === 0 ? 20 : parseInt(20 / sliderValue);
-                    $("#mainPhotoStrip").data("kendoListView").template = kendo.template(t);
-                    dataSource.query({page: 1, pageSize: pageSize});
+                    imageSize = IMAGESIZES[this.value()];
+
+                    $("#mainPhotoStrip").data("kendoListView").template = kendo.template(template(imageSize));
+                    dataSource.query({page: 1, pageSize: computePageSize(imageSize.size)});
                 }
             });
         },
@@ -259,6 +264,11 @@ var visitor = window.visitor,
                 if (e.keyCode === kendo.keys.ENTER) {
                     this.blur();
                     $(".i-search").click();
+                }
+            });
+            $(document.body).bind('orientationchange', function() {
+                if ($(".bottomLink").data("currentView") == "mainTemplate") {
+                    updatePageSize();
                 }
             });
 

@@ -80,7 +80,7 @@
         }),
         setPhotosDataSource = data.dataSource({
             serverSorting: true,
-            pageSize: 20,
+            pageSize: computePageSize(imageSize.size),
             dialect: defaultDialect,
             deserializer: defaultDeserializer,
             jsoncallback: "defaultCallback"
@@ -123,9 +123,16 @@
 
             $("#overlay").after("<div id='searchLoading' class='loading'>Loading ...</div>");
 
-            var pageSize = sliderValue === 0 ? 20 : parseInt(20 / sliderValue);
-            setPhotosDataSource.query({page: 1, pageSize: $("#mainUserWrap").find("#gridNotInSetPhotos").hasClass("currentView") ? 5 : pageSize});
+            updatePageSize();
         }
+    }
+
+    function updatePageSize() {
+        var isGrid = $("#mainUserWrap").find("#gridNotInSetPhotos").hasClass("currentView");
+            listPageSize = computePageSize(imageSize.size),
+            gridPageSize = computePageSize(120, true),
+
+        setPhotosDataSource.query({page: 1, pageSize: isGrid ? gridPageSize : listPageSize});
     }
 
     function changeState(state) {
@@ -270,12 +277,9 @@
                 largeStep: 1,
                 tickPlacement: "none",
                 change: function() {
-                    sliderValue = this.value();
-                    imageSize = IMAGESIZES[sliderValue];
-                    var t = template(imageSize),
-                        pageSize = sliderValue === 0 ? 20 : parseInt(20 / sliderValue);
-                    $("#mainSetPhotoStrip").data("kendoListView").template = kendo.template(t);
-                    setPhotosDataSource.query({page: 1, pageSize: pageSize});
+                    imageSize = IMAGESIZES[this.value()];
+                    $("#mainSetPhotoStrip").data("kendoListView").template = kendo.template(template(imageSize));
+                    setPhotosDataSource.query({page: 1, pageSize: computePageSize(imageSize.size)});
                 }
             });
         },
@@ -301,7 +305,11 @@
             $("#flatMostPopularPhotos").hide();
             $("#signin").hide();
             $("#userInfo").fadeIn().find("em").filter(":first").html(flickr.auth.username);
-
+            $(document.body).bind('orientationchange', function() {
+                if ($(".thumbViews:visible")[0]) {
+                    updatePageSize();
+                }
+            });
             that.thumbList = new kendo.ui.Scroller($('<div class="thumb-list">').appendTo("#footer")).scrollElement;
             var href = location.href.split("?");
             try {
@@ -351,19 +359,16 @@
                 $("#mainSetPhotoStrip").hide();
                 $("#setPhotoSize").parent().hide();
                 $("#mainSetPhotoGrid").show();
-                setPhotosDataSource.query({page: 1, pageSize: 5});
+                setPhotosDataSource.query({page: 1, pageSize: computePageSize(120, true)});
             });
 
             $(".i-tileview").click(function() {
-                var pageSize = sliderValue === 0 ? 20 : parseInt(20 / sliderValue);
-
-                setPhotosDataSource.query({page: 1, pageSize: pageSize});
-
                 $(this).addClass("currentView");
                 $(".i-gridview").removeClass("currentView");
                 $("#mainSetPhotoStrip").show();
                 $("#setPhotoSize").parent().show();
                 $("#mainSetPhotoGrid").hide();
+                setPhotosDataSource.query({page: 1, pageSize: computePageSize(imageSize.size)});
             }).addClass("currentView");
 
             $("#backButton").click(function(e) {
