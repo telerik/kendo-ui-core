@@ -187,6 +187,14 @@
                     same(slot.height(), 0);
                 });
 
+                test("assumes 1 category when no categories are defined", function() {
+                    categoryAxis = new Chart.CategoryAxis();
+                    categoryAxis.updateLayout(chartBox);
+
+                    var slot = categoryAxis.getSlot(0);
+                    same([slot.x1, slot.x2], [0, chartBox.width()]);
+                });
+
                 // ------------------------------------------------------------
                 module("Category Axis / Vertical / Slots", {
                     setup: function() {
