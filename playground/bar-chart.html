@@ -97,7 +97,9 @@
                 },
                 legend: {
                     font: "12px Verdana, sans-serif",
-                    position: "top", // "top", "bottom", "left", "right"
+                    position: "right", // "top", "bottom", "left", "right"
+                    offsetX: 0,
+                    offsetY: 0,
                     visible: true
                 },
                 plotArea: {
@@ -131,6 +133,7 @@
                     field: "",
                     data: [],
                     bar: {
+                        stack: true, // true, false or group name
                         gap: 1.5,
                         borderWidth: 0,
                         borderColor: "",
