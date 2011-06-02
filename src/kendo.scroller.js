@@ -20,7 +20,8 @@
                 bounceStop: 100,
                 framerate: 30,
 
-                scrollbarOpacity: .7
+                scrollbarOpacity: .7,
+                scrollArrowsOpacity: .84
             };
 
             if (typeof arguments[1] === 'object')
@@ -226,10 +227,10 @@
             that._initializeBoxModel();
 
             if (that.hasVerticalScroll)
-                that._verticalArrows.kendoStop(true, true).kendoAnimate({ effects: { fadeIn : { properties: { opacity: .7 } } }, duration: "fast", show: true });
+                that._verticalArrows.kendoStop(true, true).kendoAnimate({ effects: { fadeIn : { properties: { opacity: that.options.scrollArrowsOpacity } } }, duration: "fast", show: true });
 
             if (that.hasHorizontalScroll)
-                that._horizontalArrows.kendoStop(true, true).kendoAnimate({ effects: { fadeIn : { properties: { opacity: .7 } } }, duration: "fast", show: true });
+                that._horizontalArrows.kendoStop(true, true).kendoAnimate({ effects: { fadeIn : { properties: { opacity: that.options.scrollArrowsOpacity } } }, duration: "fast", show: true });
         },
 
         _hideScrollArrows: function (e) {

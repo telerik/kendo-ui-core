@@ -1962,7 +1962,7 @@ html .t-upload
     position: absolute;
     width: 28px;
     height: 100%;
-    opacity: .7;
+    opacity: .99;
     outline:  0;
     display: none;
     z-index: 20000;
@@ -1973,7 +1973,7 @@ html .t-upload
     border-style: solid;
     border-width: 13px 0 7px;
     box-shadow: 0 0 5px #000;
-    background: #222 url('img/scroll-arrows.png') no-repeat 0 50%;
+    background: #111 url('img/icons.png') no-repeat 0 50%;
     background-clip: padding-box;
 }
 
@@ -1982,7 +1982,7 @@ html .t-upload
     top: 0;
     left: 0;
     border-right: 1px solid #000;
-    background-position: -15px 50%;
+    background-position: 0 -593px;
 }
 
 .right-scroll-arrow
@@ -1990,7 +1990,7 @@ html .t-upload
     top: 0;
     right: 0;
     border-left: 1px solid #000;
-    background-position: -70px 50%;
+    background-position: 0 -693px;
 }
 
 /*inferior browsers*/
