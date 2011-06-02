@@ -363,7 +363,7 @@
                 var height;
 
                 if (!element.data('height')) {
-                    var clone = element.clone();
+                    var clone = element.clone(true);
                     element.css({
                         height: 0,
                         overflow: 'hidden'
@@ -404,7 +404,7 @@
                 var width;
                 
                 if (!element.data('width')) {
-                    var clone = element.clone();
+                    var clone = element.clone(true);
                     element.css({
                         width: 0,
                         overflow: 'hidden'
