@@ -6,6 +6,7 @@ var wrench = require("./wrench");
 var navRe = /<!--\s*nav\s*-->(([\u000a\u000d\u2028\u2029]|.)*)<!--\s*nav\s*-->/g;
 var codeRe = /<!--\s*code\s*-->(([\u000a\u000d\u2028\u2029]|.)*)<!--\s*code\s*-->/g;
 var scriptRe = /<!--\s*script\s*-->(([\u000a\u000d\u2028\u2029]|.)*)<!--\s*script\s*-->/g;
+var cssRe = /<!--\s*css\s*-->(([\u000a\u000d\u2028\u2029]|.)*)<!--\s*css\s*-->/g;
 
 function processdir(dir) {
     fs.readdir(dir, function(err, children) {
@@ -29,12 +30,14 @@ function processfile(file) {
         fs.readFile(file, "utf8", function(err, data) {
             if (err) throw err;
 
-            data = data.replace(navRe, navHtml)
-                       .replace(codeRe, codeHtml);
-
             var base = file === "live/index.html" ? "" : "../";
 
-            data = data.replace(scriptRe, scriptHtml.replace(/src=\"([^"]*)\"/g, 'src="' + base + '$1"'));
+            data = regions.script.exec(data, regions.script.html.replace(/src=\"([^"]*)\"/g, 'src="' + base + '$1"'));
+
+            data = regions.css.exec(data, regions.css.html.replace(/href=\"([^"]*)\"/g, 'href="' + base + '$1"'));;
+
+            data = regions.nav.exec(data);
+            data = regions.code.exec(data);
 
             fs.writeFile(file, data);
         });
@@ -42,10 +45,25 @@ function processfile(file) {
 }
 
 var indexHtml = fs.readFileSync("demos/examples/index.html", "utf8");
-var navHtml = navRe.exec(indexHtml)[1].trim();
-var codeHtml = codeRe.exec(indexHtml)[1].trim();
-var scriptHtml = scriptRe.exec(indexHtml)[1].trim();
+
+var regions = {};
+
+"nav,script,code,css".split(",").forEach(function(region) {
+    var re = new RegExp("<!--\\s*" + region + "\\s*-->(([\\u000a\\u000d\\u2028\\u2029]|.)*)<!--\\s*" + region + "\\s*-->", "g");
+    var html = re.exec(indexHtml)[1].trim();
+
+    regions[region] = {
+        html: html,
+        exec: function(data, value) {
+            value = value || html;
+
+            return data.replace(re, value);
+        }
+    };
+});
 
 wrench.copyDirSyncRecursive("demos/examples", "live");
+
+fs.unlink("live/template.html");
 
 processdir("live");
