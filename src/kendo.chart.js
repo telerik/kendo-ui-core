@@ -7,9 +7,11 @@
         extend = $.extend,
         proxy = $.proxy,
         BASELINE_MARKER_SIZE = 1,
+        BAR = "bar",
         BOTTOM = "bottom",
         CENTER = "center",
         CHANGE = "change",
+        COLUMN = "column",
         COORD_PRECISION = 3,
         DATABOUND = "dataBound",
         DEFAULT_PRECISION = 6,
@@ -54,11 +56,11 @@
                 type: "Numeric"
             },
             seriesDefaults: {
-                type: "bar",
+                type: COLUMN,
                 data: []
             },
             seriesColors: ["#d7df23", "#adc32b", "#799b28", "#4c7520"],
-            series: []
+            series: [{}]
         },
 
         types: { },
@@ -1326,18 +1328,24 @@
                 options = plotArea.options,
                 charts = plotArea.charts = [],
                 range = { min: 0, max: 1 },
-                categories = options.categoryAxis.categories;
+                categories = options.categoryAxis.categories,
+                seriesType;
 
             var barSeries = $.grep(options.series, function(currentSeries) {
-                return currentSeries.type == "bar";
+                return currentSeries.type === BAR || currentSeries.type === COLUMN;
             });
 
-            if (barSeries.length > 0) {
-                var barChart = new BarChart(this, { series: barSeries });
+            if (!categories) {
+                categories = options.categoryAxis.categories = [];
+            }
 
-                if (!categories) {
-                    categories = options.categoryAxis.categories = [];
-                }
+            if (barSeries.length > 0) {
+                seriesType = barSeries[0].type;
+
+                var barChart = new BarChart(this, {
+                        series: barSeries, isVertical: seriesType === COLUMN
+                    });
+
                 var categoriesToAdd = Math.max(0, barChart.categoriesCount() - categories.length);
                 [].push.apply(options.categoryAxis.categories, new Array(categoriesToAdd));
 
@@ -1346,23 +1354,25 @@
                 [].push.apply(plotArea.children, charts);
             }
 
-            plotArea.createAxes(range.min, range.max);
+            plotArea.createAxes(range.min, range.max, seriesType);
         },
 
-        createAxes: function(seriesMin, seriesMax) {
+        createAxes: function(seriesMin, seriesMax, seriesType) {
             var plotArea = this,
                 options = plotArea.options,
-                valueAxisOptions = extend({}, options.axesDefaults, options.valueAxis),
-                categoryAxisOptions = extend({}, options.axesDefaults, options.categoryAxis);
+                isColumn = seriesType === COLUMN,
+                categoryAxis = new CategoryAxis(extend({
+                        orientation: isColumn ? HORIZONTAL : VERTICAL,
+                        axisCrossingValue: isColumn ? 0 : options.categoryAxis.categories.length
+                    }, options.axesDefaults, options.categoryAxis)
+                ),
+                valueAxis = new NumericAxis(seriesMin, seriesMax, extend({
+                        orientation: isColumn ? VERTICAL : HORIZONTAL
+                    }, options.axesDefaults, options.valueAxis)
+                );
 
-            if (options.valueAxis.orientation === HORIZONTAL &&
-                options.categoryAxis.orientation === VERTICAL) {
-                plotArea.axisX = new NumericAxis(seriesMin, seriesMax, valueAxisOptions);
-                plotArea.axisY = new CategoryAxis(categoryAxisOptions);
-            } else {
-                plotArea.axisY = new NumericAxis(seriesMin, seriesMax, valueAxisOptions);
-                plotArea.axisX = new CategoryAxis(categoryAxisOptions);
-            }
+            plotArea.axisX = isColumn ? categoryAxis : valueAxis;
+            plotArea.axisY = isColumn ? valueAxis : categoryAxis;
 
             plotArea.children.push(plotArea.axisY);
             plotArea.children.push(plotArea.axisX);

@@ -10,6 +10,7 @@
     <body>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.chart.js"></script>
+        <script src="util.js"></script>
         <script type="text/javascript">
 
             var Chart = kendo.ui.Chart,
@@ -17,55 +18,46 @@
                 chartBox = new Box(100, 100, 1000, 1000),
                 TOLERANCE = 1;
 
-            function stubMethod(fn, methodName, stub, callback) {
-                var oldMethod = fn.prototype[methodName];
-                fn.prototype[methodName] = stub;
-                try {
-                    callback();
-                }
-                finally {
-                    fn.prototype[methodName] = oldMethod;
-                }
-            }
-
             (function() {
                 var plotArea,
                     axisY,
                     axisX,
-                    barChart;
+                    barSeriesData = [{
+                        name: "Value A",
+                        type: "bar",
+                        data: [100, 200, 300]
+                    }, {
+                        name: "Value B",
+                        type: "bar",
+                        data: [10, 20, 30]
+                    }],
+                    columnSeriesData = [{
+                        name: "Value A",
+                        type: "column",
+                        data: [100, 200, 300]
+                    }, {
+                        name: "Value B",
+                        type: "column",
+                        data: [10, 20, 30]
+                    }];
 
-                function createPlotArea() {
-                    return new Chart.PlotArea({
-                        series: [{
-                            name: "Value A",
-                            type: "bar",
-                            data: [100, 200, 300]
-                        }, {
-                            name: "Value B",
-                            type: "bar",
-                            data: [10, 20, 30]
-                        }],
+                function createPlotArea(series) {
+                    plotArea = new Chart.PlotArea({
+                        series: series,
                         categoryAxis: {
                             categories: ["A", "B", "C"]
                         }
                     });
+
+                    axisY = plotArea.axisY;
+                    axisX = plotArea.axisX;
                 }
 
+                // ------------------------------------------------------------
                 module("PlotArea", {
                     setup: function() {
-                        plotArea = createPlotArea();
-                        axisY = plotArea.axisY;
-                        axisX = plotArea.axisX;
-                        barChart = plotArea.charts[0];
+                        createPlotArea(columnSeriesData);
                     }
-                });
-
-                test("creates numeric Y-Axis", function() {
-                    ok(axisY instanceof Chart.NumericAxis);
-                });
-
-                test("creates category X-Axis", function() {
-                    ok(axisX instanceof Chart.CategoryAxis);
                 });
 
                 test("appends Y-Axis to children collection", function() {
@@ -102,6 +94,83 @@
                          TOLERANCE);
                 });
 
+                test("axis limit is [0, 1] when no series are configured", 2, function() {
+                    stubMethod(Chart.PlotArea, "createAxes",
+                        function(seriesMin, seriesMax) {
+                            equal(seriesMin, 0);
+                            equal(seriesMax, 1);
+                        },
+                        function() {
+                            plotArea = new Chart.PlotArea();
+                        }
+                    );
+                });
+
+                test("adds categories to match actual data", function() {
+                    var plotArea = new Chart.PlotArea({
+                        series: columnSeriesData,
+                        categoryAxis: {
+                            categories: ["A", "B"]
+                        }
+                    });
+
+                    equals(plotArea.axisX.options.categories.length, 3);
+                });
+
+                test("accepts extra categories", function() {
+                    var plotArea = new Chart.PlotArea({
+                        series: [{
+                            type: "column",
+                            data: [100]
+                        }],
+                        categoryAxis: {
+                            categories: ["A", "B"]
+                        }
+                    });
+
+                    equals(plotArea.axisX.options.categories.length, 2);
+                });
+
+                // ------------------------------------------------------------
+                var barChart;
+                module("PlotArea / Column series", {
+                    setup: function() {
+                        createPlotArea(columnSeriesData);
+                        barChart = plotArea.charts[0];
+                    }
+                });
+
+                test("creates numeric Y-Axis", function() {
+                    ok(axisY instanceof Chart.NumericAxis);
+                });
+
+                test("creates category X-Axis", function() {
+                    ok(axisX instanceof Chart.CategoryAxis);
+                });
+
+                test("Y-Axis orientation is vertical", function() {
+                    equal(axisY.options.orientation, "vertical");
+                });
+
+                test("X-Axis orientation is horizontal", function() {
+                    equal(axisX.options.orientation, "horizontal");
+                });
+
+                test("value axis crosses at first category", function() {
+                    equal(axisY.options.axisCrossingValue, 0);
+                });
+
+                test("value axis crossing can be changed", function() {
+                    plotArea = new Chart.PlotArea({
+                        series: columnSeriesData,
+                        categoryAxis: {
+                            categories: ["A", "B", "C"],
+                            axisCrossingValue: 2
+                        }
+                    });
+                    equal(plotArea.axisX.options.axisCrossingValue, 2);
+                });
+
                 test("creates bar chart", function() {
                     ok(barChart instanceof Chart.BarChart);
                 });
@@ -117,49 +186,47 @@
                             equal(seriesMax, 300);
                         },
                         function() {
-                            createPlotArea();
+                            createPlotArea(columnSeriesData);
                         }
                     );
                 });
 
-                test("axis limit is [0, 1] when no series are configured", 2, function() {
-                    stubMethod(Chart.PlotArea, "createAxes",
-                        function(seriesMin, seriesMax) {
-                            equal(seriesMin, 0);
-                            equal(seriesMax, 1);
-                        },
-                        function() {
-                            plotArea = new Chart.PlotArea();
-                        }
-                    );
+                // ------------------------------------------------------------
+                module("PlotArea / Bar series", {
+                    setup: function() {
+                        createPlotArea(barSeriesData);
+                    }
                 });
 
-                test("adds categories to match actual data", function() {
-                    var plotArea = new Chart.PlotArea({
-                        series: [{
-                            type: "bar",
-                            data: [100, 200, 300]
-                        }],
-                        categoryAxis: {
-                            categories: ["A", "B"]
-                        }
-                    });
-
-                    equals(plotArea.axisX.options.categories.length, 3);
+                test("creates category Y-Axis", function() {
+                    ok(axisY instanceof Chart.CategoryAxis);
                 });
 
-                test("accepts extra categories", function() {
-                    var plotArea = new Chart.PlotArea({
-                        series: [{
-                            type: "bar",
-                            data: [100]
-                        }],
+                test("creates numeric X-Axis", function() {
+                    ok(axisX instanceof Chart.NumericAxis);
+                });
+
+                test("Y-Axis orientation is vertical", function() {
+                    equal(axisY.options.orientation, "vertical");
+                });
+
+                test("X-Axis orientation is horizontal", function() {
+                    equal(axisX.options.orientation, "horizontal");
+                });
+
+                test("value axis crosses at last category", function() {
+                    equal(axisY.options.axisCrossingValue, 3);
+                });
+
+                test("value axis crossing can be changed", function() {
+                    plotArea = new Chart.PlotArea({
+                        series: barSeriesData,
                         categoryAxis: {
-                            categories: ["A", "B"]
+                            categories: ["A", "B", "C"],
+                            axisCrossingValue: 2
                         }
                     });
-
-                    equals(plotArea.axisX.options.categories.length, 2);
+                    equal(plotArea.axisY.options.axisCrossingValue, 2);
                 });
 
             })();

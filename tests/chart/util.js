@@ -28,3 +28,15 @@ ViewFactoryStub.prototype = {
 function sameBox(a, b) {
     same([a.x1, a.y1, a.x2, a.y2], [b.x1, b.y1, b.x2, b.y2]);
 }
+
+function stubMethod(fn, methodName, stub, callback) {
+    var oldMethod = fn.prototype[methodName];
+    fn.prototype[methodName] = stub;
+    try {
+        callback();
+    }
+    finally {
+        fn.prototype[methodName] = oldMethod;
+    }
+}
+

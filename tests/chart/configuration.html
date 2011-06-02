@@ -70,18 +70,6 @@
                     ok(plotArea.axisX instanceof Chart.CategoryAxis);
                 });
 
-                test("category axis is rendered vertically", function() {
-                    createChart({
-                        categoryAxis: {
-                            orientation: "vertical"
-                        },
-                        valueAxis: {
-                            orientation: "horizontal"
-                        }
-                    });
-                    ok(plotArea.axisY instanceof Chart.CategoryAxis);
-                });
-
                 test("categories are empty by default", function() {
                     createChart();
 
@@ -101,18 +89,6 @@
                 test("value axis is rendered vertically by default", function() {
                     createChart();
                     ok(plotArea.axisY instanceof Chart.NumericAxis);
-                });
-
-                test("value axis is rendered horizontally", function() {
-                    createChart({
-                        valueAxis: {
-                            orientation: "horizontal"
-                        },
-                        categoryAxis: {
-                            orientation: "vertical"
-                        }
-                    });
-                    ok(plotArea.axisX instanceof Chart.NumericAxis);
                 });
 
                 // ------------------------------------------------------------
@@ -136,12 +112,12 @@
                     teardown: destroyChart
                 });
 
-                test("default type is set to bar", function() {
+                test("default type is set to column", function() {
                     createChart({
                         series: [{ }]
                     });
 
-                    equal(chart.options.series[0].type, "bar");
+                    equal(chart.options.series[0].type, "column");
                 });
 
                 test("type is set", function() {
