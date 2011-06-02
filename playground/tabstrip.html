@@ -1,0 +1,209 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>TabStrip Sandbox</title>
+    <script type="text/javascript" src="../src/jquery.js"></script>
+    <script type="text/javascript" src="../src/kendo.core.js"></script>
+    <script type="text/javascript" src="../src/kendo.fx.js"></script>
+    <script type="text/javascript" src="../src/kendo.tabstrip.js"></script>
+    <style type="text/css">
+        html
+        {
+            font-size: 12px;
+        }
+    </style>
+    <link type="text/css" href="../styles/kendo.common.css" rel="stylesheet"/>
+    <link type="text/css" href="../styles/kendo.vista.css" rel="stylesheet"/>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#TabStrip1").kendoTabStrip();
+            $("#TabStrip2").kendoTabStrip({ animation: { open: { effects: { fadeIn: {} } } } });
+        });
+    </script>
+</head>
+<body>
+<div class="t-widget t-tabstrip t-header" id="TabStrip1">
+    <ul class="t-reset t-tabstrip-items">
+        <li class="t-item t-state-default t-state-active"><a class="t-link" href="#TabStrip1-1"><img alt="image"
+                                                                                                    class="t-image"
+                                                                                                    src="Icons/Suites/mvc.png">ASP.NET
+            MVC</a></li>
+        <li class="t-item t-state-default"><a class="t-link" href="#TabStrip1-2"><img alt="image" class="t-image"
+                                                                                     src="Icons/Suites/sl.png">Silverlight</a>
+        </li>
+        <li class="t-item t-state-default"><a class="t-link" href="#TabStrip1-3"><img alt="image" class="t-image"
+                                                                                     src="Icons/Suites/ajax.png">ASP.NET
+            AJAX</a></li>
+        <li class="t-item t-state-default"><a class="t-link" href="#TabStrip1-4"><img alt="image" class="t-image"
+                                                                                     src="Icons/Suites/orm.png">OpenAccess
+            ORM</a></li>
+        <li class="t-item t-state-default"><a class="t-link" href="#TabStrip1-5"><img alt="image" class="t-image"
+                                                                                     src="Icons/Suites/rep.png">Reporting</a>
+        </li>
+        <li class="t-item t-state-default"><a class="t-link" href="#TabStrip1-6"><img alt="image" class="t-image"
+                                                                                     src="Icons/Suites/sitefinity.png">Sitefinity
+            ASP.NET CMS</a></li>
+    </ul>
+    <div class="t-content t-state-active" id="TabStrip1-1" style="display: block;">
+        <ul>
+            <li>Pure ASP.NET MVC components</li>
+            <li>Completely Open Source</li>
+            <li>Exceptional Performance</li>
+
+            <li>Based on jQuery</li>
+            <li>Search Engine Optimized</li>
+            <li>Cross-browser support</li>
+        </ul>
+    </div>
+    <div class="t-content" id="TabStrip1-2">
+        <ul>
+            <li>Built on Silverlight 3</li>
+
+            <li>RIA services support</li>
+            <li>Validation support</li>
+            <li>Out of browser support</li>
+            <li>The first commercial 3D chart</li>
+            <li>Free testing framework</li>
+        </ul>
+
+    </div>
+    <div class="t-content" id="TabStrip1-3">
+        <ul>
+            <li>Built on top of Microsoft ASP.NET AJAX framework</li>
+            <li>Rich client-side capabilities; nearly identical client-side and server-side APIs</li>
+            <li>.NET 3.5 built-in support for LINQ, EntityDataSource, ADO.NET DataServices, WCF, etc</li>
+            <li>Performance optimization helper controls and HTTP compression</li>
+            <li>SharePoint and DotNetNuke Integration; ASP.NET MVC-ready</li>
+
+            <li>Wide cross-browser compatible and XHTML compliant</li>
+        </ul>
+    </div>
+    <div class="t-content" id="TabStrip1-4">
+        <ul>
+            <li>Model First and Schema First approaches</li>
+            <li>Stored Procedures for Multiple Databases</li>
+            <li>Views for Multiple Databases</li>
+
+            <li>Generic Metadata Access and artificial fields API in the runtime</li>
+            <li>Support for Ado.Net Data Services and WCF</li>
+            <li>Support for LINQ, OQL, and SQL Languages</li>
+        </ul>
+    </div>
+    <div class="t-content" id="TabStrip1-5">
+        <ul>
+            <li>Excellent data presentation and analysis: Crosstabs, Charts, Tables, Lists</li>
+
+            <li>SubReports, Barcodes, Images, Shapes, and more</li>
+            <li>Revolutionary WYSIWYG design surface in Visual Studio</li>
+            <li>Easy conditional formatting, sorting, filtering, grouping</li>
+            <li>Powerful styling, data binging and data processing models</li>
+            <li>Significantly reduced development time through wizards and builders</li>
+        </ul>
+
+    </div>
+    <div class="t-content" id="TabStrip1-6">
+        <ul>
+            <li>Multi-lingual Content Integration</li>
+            <li>Workflow Engine</li>
+            <li>Document versioning</li>
+            <li>Permissions</li>
+            <li>Interface Localization</li>
+
+            <li>Wide cross-browser compatible and XHTML compliant</li>
+        </ul>
+    </div>
+</div>
+<div class="t-widget t-tabstrip t-header" id="TabStrip2">
+    <ul class="t-reset t-tabstrip-items">
+        <li class="t-item t-state-default t-state-active"><a class="t-link" href="#TabStrip2-1"><img alt="image"
+                                                                                                    class="t-image"
+                                                                                                    src="Icons/Suites/mvc.png">ASP.NET
+            MVC</a></li>
+        <li class="t-item t-state-default"><a class="t-link" href="#TabStrip2-2"><img alt="image" class="t-image"
+                                                                                     src="Icons/Suites/sl.png">Silverlight</a>
+        </li>
+        <li class="t-item t-state-default"><a class="t-link" href="#TabStrip2-3"><img alt="image" class="t-image"
+                                                                                     src="Icons/Suites/ajax.png">ASP.NET
+            AJAX</a></li>
+        <li class="t-item t-state-default"><a class="t-link" href="#TabStrip2-4"><img alt="image" class="t-image"
+                                                                                     src="Icons/Suites/orm.png">OpenAccess
+            ORM</a></li>
+        <li class="t-item t-state-default"><a class="t-link" href="#TabStrip2-5"><img alt="image" class="t-image"
+                                                                                     src="Icons/Suites/rep.png">Reporting</a>
+        </li>
+        <li class="t-item t-state-default"><a class="t-link" href="#TabStrip2-6"><img alt="image" class="t-image"
+                                                                                     src="Icons/Suites/sitefinity.png">Sitefinity
+            ASP.NET CMS</a></li>
+    </ul>
+    <div class="t-content t-state-active" id="TabStrip2-1" style="display: block;">
+        <ul>
+            <li>Pure ASP.NET MVC components</li>
+            <li>Completely Open Source</li>
+            <li>Exceptional Performance</li>
+
+            <li>Based on jQuery</li>
+            <li>Search Engine Optimized</li>
+            <li>Cross-browser support</li>
+        </ul>
+    </div>
+    <div class="t-content" id="TabStrip2-2">
+        <ul>
+            <li>Built on Silverlight 3</li>
+
+            <li>RIA services support</li>
+            <li>Validation support</li>
+            <li>Out of browser support</li>
+            <li>The first commercial 3D chart</li>
+            <li>Free testing framework</li>
+        </ul>
+
+    </div>
+    <div class="t-content" id="TabStrip2-3">
+        <ul>
+            <li>Built on top of Microsoft ASP.NET AJAX framework</li>
+            <li>Rich client-side capabilities; nearly identical client-side and server-side APIs</li>
+            <li>.NET 3.5 built-in support for LINQ, EntityDataSource, ADO.NET DataServices, WCF, etc</li>
+            <li>Performance optimization helper controls and HTTP compression</li>
+            <li>SharePoint and DotNetNuke Integration; ASP.NET MVC-ready</li>
+
+            <li>Wide cross-browser compatible and XHTML compliant</li>
+        </ul>
+    </div>
+    <div class="t-content" id="TabStrip2-4">
+        <ul>
+            <li>Model First and Schema First approaches</li>
+            <li>Stored Procedures for Multiple Databases</li>
+            <li>Views for Multiple Databases</li>
+
+            <li>Generic Metadata Access and artificial fields API in the runtime</li>
+            <li>Support for Ado.Net Data Services and WCF</li>
+            <li>Support for LINQ, OQL, and SQL Languages</li>
+        </ul>
+    </div>
+    <div class="t-content" id="TabStrip2-5">
+        <ul>
+            <li>Excellent data presentation and analysis: Crosstabs, Charts, Tables, Lists</li>
+
+            <li>SubReports, Barcodes, Images, Shapes, and more</li>
+            <li>Revolutionary WYSIWYG design surface in Visual Studio</li>
+            <li>Easy conditional formatting, sorting, filtering, grouping</li>
+            <li>Powerful styling, data binging and data processing models</li>
+            <li>Significantly reduced development time through wizards and builders</li>
+        </ul>
+
+    </div>
+    <div class="t-content" id="TabStrip2-6">
+        <ul>
+            <li>Multi-lingual Content Integration</li>
+            <li>Workflow Engine</li>
+            <li>Document versioning</li>
+            <li>Permissions</li>
+            <li>Interface Localization</li>
+
+            <li>Wide cross-browser compatible and XHTML compliant</li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

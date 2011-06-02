@@ -6,11 +6,7 @@
         translateProperties = { translate: 0, translateX: 0, translateY: 0, translate3d: 0 },
         matrix3d = [ 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1 ],
         transformNon3D = { rotate: '', scale: '', translate: '' },
-        transformProps = ['perspective', 'rotate', 'rotateX', 'rotateY', 'rotateZ', 'rotate3d', 'scale', 'scaleX', 'scaleY', 'scaleZ', 'scale3d', 'skew', 'skewX', 'skewY', 'translate', 'translateX', 'translateY', 'translateZ', 'translate3d', 'matrix', 'matrix3d'],
-        transitionEvent = kendo.support.transitions.event + 'TransitionEnd';
-
-        if (!kendo.support.transitions.event)
-            transitionEvent = transitionEvent.toLowerCase();
+        transformProps = ['perspective', 'rotate', 'rotateX', 'rotateY', 'rotateZ', 'rotate3d', 'scale', 'scaleX', 'scaleY', 'scaleZ', 'scale3d', 'skew', 'skewX', 'skewY', 'translate', 'translateX', 'translateY', 'translateZ', 'translate3d', 'matrix', 'matrix3d'];
 
     if (kendo.support.transitions) {
 
@@ -32,7 +28,7 @@
                     }).length) {
                         transition.complete.call(transition.object);
                         transition.object.css(kendo.support.transitions.css + 'transition', 'none');
-                        transition.object.unbind(transitionEvent, kendo.fx.deQueue);
+                        transition.object.unbind(kendo.support.transitions.event, kendo.fx.deQueue);
                 }
             }
         };
@@ -42,7 +38,7 @@
 
             if (!currentTransition) return;
 
-            typeof currentTransition.complete == 'function' && element.one(transitionEvent, $.proxy(currentTransition.complete, element));
+            typeof currentTransition.complete == 'function' && element.one(kendo.support.transitions.event, $.proxy(currentTransition.complete, element));
 
             var startStyle = document.defaultView.getComputedStyle(element[0], null),
                 cssValues = {};
@@ -364,26 +360,31 @@
         },
         expandVertical: {
             play: function(element, properties, options) {
+                var height;
+
                 if (!element.data('height')) {
                     var clone = element.clone();
                     element.css({
                         height: 0,
                         overflow: 'hidden'
                     });
+                    element.css('height');
 
                     clone
                         .css({ position: 'absolute', height: 'auto', overflow: 'hidden', visibility: 'hidden', top: '-10000px' })
                         .appendTo(element.parent());
 
+                    height = clone.height();
+                    clone.remove();
+
                     element.data({
-                        height: clone.height(),
+                        height: height,
                         overflow: clone.css('overflow')
                     });
-                    
-                    clone.remove();
-                }
+                } else
+                    height = element.data('height');
 
-                animate(element, extend({ height: element.data('height') + 'px' }, properties), extend({ complete: function () { element.css('overflow', element.data('overflow')) } }, options));
+                animate(element, extend({ height: height + 'px' }, properties), extend({ complete: function () { element.css('overflow', element.data('overflow')) } }, options));
             },
             reverse: function(element, properties, options) {
                 if (!element.data('height')) {
@@ -400,26 +401,30 @@
         },
         expandHorizontal: {
             play: function(element, properties, options) {
+                var width;
+                
                 if (!element.data('width')) {
                     var clone = element.clone();
+                    element.css({
+                        width: 0,
+                        overflow: 'hidden'
+                    });
+
                     clone
                         .css({ position: 'absolute', width: '100%', overflow: 'hidden', visibility: 'hidden', top: '-10000px' })
                         .appendTo(element.parent());
 
+                    width = clone.width();
+                    clone.remove();
+
                     element.data({
-                        width: clone.outerWidth(),
+                        width: width,
                         overflow: clone.css('overflow')
                     });
+                } else
+                    width = element.data('width');
 
-                    clone.remove();
-                }
-
-                element.css({
-                    width: 0,
-                    overflow: 'hidden'
-                });
-
-                animate(element, extend({ width: element.data('width') + 'px' }, properties), extend({ complete: function () { element.css('overflow', element.data('overflow')) } }, options));
+                animate(element, extend({ width: width + 'px' }, properties), extend({ complete: function () { element.css('overflow', element.data('overflow')) } }, options));
             },
             reverse: function(element, properties, options) {
                 if (!element.data('width')) {

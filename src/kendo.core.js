@@ -991,6 +991,8 @@
                     event: (lowPrefix === 'o' || lowPrefix === 'webkit') ? lowPrefix : ''
                 };
 
+                support.transitions.event = support.transitions.event ? support.transitions.event + 'TransitionEnd' : support.transitions.event + 'transitionend';
+
                 return false;
             }
         });
@@ -1068,12 +1070,6 @@
             element.show();
         }
 
-        if (kendo.fx && kendo.support.transitions) {
-            var eventName = kendo.support.transitions.event + 'TransitionEnd';
-            if (!kendo.support.transitions.event)
-                eventName = eventName.toLowerCase();
-        }
-
         return element.queue(function () {
             var promises = [], effects = options.effects;
 
@@ -1085,7 +1081,7 @@
                });
             }
 
-            if (kendo.fx && kendo.support.transitions) {
+            if (kendo.fx && support.transitions) {
                 var pkg = {
                     element: element,
                     eventNo: 0,
@@ -1093,7 +1089,7 @@
                 };
 
                 var px = proxy( kendo.fx.deQueue, pkg );
-                element.bind(eventName, px);
+                element.bind(support.transitions.event, px);
             }
 
             // create a promise for each effect
@@ -1139,6 +1135,42 @@
     $.fn.kendoAnimate = function(options, duration, reverse, complete) {
         return animate(this, options, duration, reverse, complete);
     };
+
+    function toggleClass(element, classes, options, add) {
+        if (classes) {
+            classes = classes.split(' ');
+            if (support.transitions) {
+                options = extend({
+                    exclusive: 'all',
+                    duration: 400,
+                    ease: 'ease-out'
+                }, options);
+
+                element.css(support.transitions.css + 'transition', options.exclusive + ' ' + options.duration + 'ms ' + options.ease);
+                setTimeout(function() {
+                    element.css(support.transitions.css + 'transition', 'none');
+                }, options.duration + 20); // TODO: this should fire a kendoAnimate session instead.
+            }
+
+            $.each(classes, function(idx, value) {
+                element.toggleClass(value, add);
+            });
+        }
+        
+        return element;
+    }
+
+    extend($.fn, {
+        kendoAddClass: function(classes, options){
+            return toggleClass(this, classes, options, true);
+        },
+        kendoRemoveClass: function(classes, options){
+            return toggleClass(this, classes, options, false);
+        },
+        kendoToggleClass: function(classes, options, toggle){
+            return toggleClass(this, classes, options, toggle);
+        }
+    });
 
     function htmlEncode(value) {
         return ("" + value).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
