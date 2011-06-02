@@ -162,6 +162,71 @@
                     equal(chart.options.series[1].color, "#f00");
                 });
 
+                test("bar series defaults are applied", function() {
+                    createChart({
+                        seriesDefaults: {
+                            bar: {
+                                gap: 1
+                            }
+                        },
+                        series: [{ type: "bar" }]
+                    });
+
+                    equal(chart.options.series[0].gap, 1);
+                });
+
+                test("bar series defaults are not applied to other series", function() {
+                    createChart({
+                        seriesDefaults: {
+                            bar: {
+                                gap: 1
+                            }
+                        },
+                        series: [{ type: "line" }]
+                    });
+
+                    notEqual(chart.options.series[0].gap, 1);
+                });
+
+                test("column series defaults are applied", function() {
+                    createChart({
+                        seriesDefaults: {
+                            column: {
+                                gap: 1
+                            }
+                        },
+                        series: [{ type: "column" }]
+                    });
+
+                    equal(chart.options.series[0].gap, 1);
+                });
+
+                test("column series defaults are applied to series with default type", function() {
+                    createChart({
+                        seriesDefaults: {
+                            column: {
+                                gap: 1
+                            }
+                        },
+                        series: [{}]
+                    });
+
+                    equal(chart.options.series[0].gap, 1);
+                });
+
+                test("column series defaults are not applied to other series", function() {
+                    createChart({
+                        seriesDefaults: {
+                            bar: {
+                                gap: 1
+                            }
+                        },
+                        series: [{ type: "line" }]
+                    });
+
+                    notEqual(chart.options.series[0].gap, 1);
+                });
+
                 // ------------------------------------------------------------
                 module("Title", {
                     teardown: destroyChart

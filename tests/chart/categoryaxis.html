@@ -46,6 +46,8 @@
                 }
 
                 var factoryStub;
+
+                // ------------------------------------------------------------
                 module("Category Axis / Horizontal / Rendering", {
                     setup: function() {
                         factoryStub = new ViewFactoryStub();
@@ -107,6 +109,7 @@
                     equal(factoryStub.renderedLines, 0);
                 });
 
+                // ------------------------------------------------------------
                 module("Category Axis / Vertical / Rendering", {
                     setup: function() {
                         factoryStub = new ViewFactoryStub();
@@ -162,6 +165,7 @@
                     same(ticksY, [0, 300, 600], TOLERANCE);
                 });
 
+                // ------------------------------------------------------------
                 module("Category Axis / Horizontal / Slots", {
                     setup: function() {
                         createCategoryAxis();
@@ -183,6 +187,7 @@
                     same(slot.height(), 0);
                 });
 
+                // ------------------------------------------------------------
                 module("Category Axis / Vertical / Slots", {
                     setup: function() {
                         createCategoryAxis({ orientation: "vertical" });

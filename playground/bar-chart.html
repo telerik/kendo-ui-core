@@ -12,33 +12,31 @@
         <script type="text/javascript">
 
             $(document).ready(function() {
-                kendo.ui.Chart.BarChart.prototype.options.isStacked = false;
-                kendo.ui.Chart.BarChart.prototype.options.isVertical = true;
-                kendo.ui.Chart.NumericAxis.prototype.options.isVertical = true;
-                kendo.ui.Chart.CategoryAxis.prototype.options.isVertical = false;
-
                 $("#container").kendoChart({
                     title: {
                         text: "Teh chart"
                     },
                     seriesDefaults: {
-                        type: "bar"
+                        type: "bar",
+                        bar: {
+                            stack: false
+                        }
                     },
                     dataSource: [
                         {
                             name: "Alpha",
                             a: 15,
-                            b: 100,
+                            b: 10,
                             c: 15
                         }, {
                             name: "Beta",
-                            a: 40,
-                            b: 200,
-                            c: 25
+                            a: -40,
+                            b: -50,
+                            c: -25
                         }, {
                             name: "Charlie",
                             a: 40,
-                            b: 300,
+                            b: 30,
                             c: 35
                         }
                     ],
@@ -52,6 +50,9 @@
                         }, {
                             name: "Value C",
                             field: "c"
+                        }, {
+                            name: "Value D",
+                            field: "a"
                         }
                     ],
                     categoryAxis: {
@@ -133,7 +134,7 @@
                     field: "",
                     data: [],
                     bar: {
-                        stack: true, // true, false or group name
+                        stack: false, // true, false or group name
                         gap: 1.5,
                         borderWidth: 0,
                         borderColor: "",
