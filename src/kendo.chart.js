@@ -96,12 +96,18 @@
             var chart = this,
                 options = chart.options,
                 series = options.series,
+                seriesType,
                 colors = options.seriesColors;
 
             for (var i = 0, length = series.length; i < length; i++) {
+                // Determine series type in advance so we can apply the
+                // default settings for this type
+                seriesType = series[i].type || options.seriesDefaults.type;
+
                 series[i] = extend(
                     { color: colors[i % colors.length] },
                     options.seriesDefaults,
+                    options.seriesDefaults[seriesType],
                     series[i]);
             }
 
@@ -1343,7 +1349,9 @@
                 seriesType = barSeries[0].type;
 
                 var barChart = new BarChart(this, {
-                        series: barSeries, isVertical: seriesType === COLUMN
+                        series: barSeries,
+                        isVertical: seriesType === COLUMN,
+                        isStacked: barSeries[0].stack
                     });
 
                 var categoriesToAdd = Math.max(0, barChart.categoriesCount() - categories.length);

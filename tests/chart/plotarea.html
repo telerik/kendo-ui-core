@@ -175,6 +175,21 @@
                     ok(barChart instanceof Chart.BarChart);
                 });
 
+                test("stacks series", function() {
+                    plotArea = new Chart.PlotArea({
+                        series: [{
+                            type: "column",
+                            data: [],
+                            stack: true
+                        }],
+                        categoryAxis: {
+                            categories: ["A"]
+                        }
+                    });
+
+                    ok(plotArea.charts[0].options.isStacked);
+                });
+
                 test("groups bar series into bar chart", function() {
                     equal(barChart.options.series.length, 2);
                 });
@@ -227,6 +242,21 @@
                         }
                     });
                     equal(plotArea.axisY.options.axisCrossingValue, 2);
+                });
+
+                test("stacks series", function() {
+                    plotArea = new Chart.PlotArea({
+                        series: [{
+                            type: "bar",
+                            data: [],
+                            stack: true
+                        }],
+                        categoryAxis: {
+                            categories: ["A"]
+                        }
+                    });
+
+                    ok(plotArea.charts[0].options.isStacked);
                 });
 
             })();
