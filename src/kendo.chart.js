@@ -55,12 +55,15 @@
             valueAxis: {
                 type: "Numeric"
             },
+            categoryAxis: {
+                categories: []
+            },
             seriesDefaults: {
                 type: COLUMN,
                 data: []
             },
             seriesColors: ["#d7df23", "#adc32b", "#799b28", "#4c7520"],
-            series: [{}]
+            series: []
         },
 
         types: { },
@@ -1009,7 +1012,7 @@
                 box = axis.box,
                 size = isVertical ? box.height() : box.width(),
                 startPos = isVertical ? box.y1 : box.x1,
-                step = size / children.length,
+                step = size / Math.max(1, children.length),
                 p1 = startPos + (categoryIx * step),
                 p2 = p1 + step;
 
@@ -1341,10 +1344,6 @@
                 return currentSeries.type === BAR || currentSeries.type === COLUMN;
             });
 
-            if (!categories) {
-                categories = options.categoryAxis.categories = [];
-            }
-
             if (barSeries.length > 0) {
                 seriesType = barSeries[0].type;
 
@@ -1368,7 +1367,7 @@
         createAxes: function(seriesMin, seriesMax, seriesType) {
             var plotArea = this,
                 options = plotArea.options,
-                isColumn = seriesType === COLUMN,
+                isColumn = (seriesType || COLUMN) === COLUMN,
                 categoryAxis = new CategoryAxis(extend({
                         orientation: isColumn ? HORIZONTAL : VERTICAL,
                         axisCrossingValue: isColumn ? 0 : options.categoryAxis.categories.length
