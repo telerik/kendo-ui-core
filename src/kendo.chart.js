@@ -1,6 +1,7 @@
 (function ($) {
     var kendo = window.kendo,
         ui = kendo.ui,
+        Class = kendo.Class,
         Component = ui.Component,
         DataSource = kendo.data.DataSource,
         extend = $.extend,
@@ -180,15 +181,15 @@
     // **************************
     // View Model
     // **************************
-    function Box(x1, y1, x2, y2) {
-        var box = this;
-        box.x1 = x1 || 0;
-        box.x2 = x2 || 0;
-        box.y1 = y1 || 0;
-        box.y2 = y2 || 0;
-    }
+    var Box = Class.extend({
+        init: function(x1, y1, x2, y2) {
+            var box = this;
+            box.x1 = x1 || 0;
+            box.x2 = x2 || 0;
+            box.y1 = y1 || 0;
+            box.y2 = y2 || 0;
+        },
 
-    Box.prototype = {
         width: function() {
             return this.x2 - this.x1;
         },
@@ -268,17 +269,17 @@
 
             return new Box(box.x1, box.y1, box.x2, box.y2);
         }
-    }
+    });
 
     var defaultBox = new Box(0, 0, 0, 0);
 
-    function ChartElement() {
-        var element = this;
-        element.attributes = {};
-        element.children = [];
-    }
+    var ChartElement = Class.extend({
+        init: function() {
+            var element = this;
+            element.attributes = {};
+            element.children = [];
+        },
 
-    extend(ChartElement.prototype, {
         options: {
         },
 
@@ -310,15 +311,14 @@
         }
     });
 
-    function RootElement(options) {
-        var root = this;
+    var RootElement = ChartElement.extend({
+        init: function(options) {
+            var root = this;
 
-        options = root.options = extend({}, root.options, options);
-        ChartElement.call(this, options);
-    }
+            options = root.options = extend({}, root.options, options);
+            ChartElement.fn.init.call(root);
+        },
 
-    RootElement.prototype = new ChartElement();
-    extend(RootElement.prototype, {
         options: {
             width: 800,
             height: 600
@@ -347,20 +347,18 @@
         }
     });
 
-    function Text(content, options) {
-        var text = this;
-        ChartElement.call(text);
+    var Text = ChartElement.extend({
+        init: function(content, options) {
+            var text = this;
+            ChartElement.fn.init.call(text);
 
-        text.options = extend({}, text.options, options);
-        text.content = content || "";
+            text.options = extend({}, text.options, options);
+            text.content = content || "";
 
-        // Calculate size
-        text.updateLayout(defaultBox);
-    }
+            // Calculate size
+            text.updateLayout(defaultBox);
+        },
 
-    Text.prototype = new ChartElement();
-
-    extend(Text.prototype, {
         options: {
             font: "16px Verdana, sans-serif",
             align: LEFT
@@ -397,21 +395,19 @@
         }
     });
 
-    function Title(options) {
-        var title = this;
-        ChartElement.call(title);
+    var Title = ChartElement.extend({
+        init: function(options) {
+            var title = this;
+            ChartElement.fn.init.call(title);
 
-        options = title.options = extend({}, title.options, options);
+            options = title.options = extend({}, title.options, options);
 
-        var text = new Text(options.text, {
-            font: options.font
-        });
-        title.children.push(text);
-    }
+            var text = new Text(options.text, {
+                font: options.font
+            });
+            title.children.push(text);
+        },
 
-    Title.prototype = new ChartElement();
-
-    extend(Title.prototype, {
         options: {
             text: "",
             font: "16px Verdana, sans-serif",
@@ -441,16 +437,15 @@
         }
     });
 
-    function Legend(options) {
-        var legend = this;
-        ChartElement.call(legend);
+    var Legend = ChartElement.extend({
+        init: function(options) {
+            var legend = this;
+            ChartElement.fn.init.call(legend);
 
-        legend.options = extend({}, legend.options, options);
-        legend.createLabels();
-    }
+            legend.options = extend({}, legend.options, options);
+            legend.createLabels();
+        },
 
-    Legend.prototype = new ChartElement();
-    extend(Legend.prototype, {
         options: {
             position: RIGHT,
             series: [],
@@ -513,7 +508,7 @@
                 options = legend.options,
                 series = options.series,
                 markerSize = legend.markerSize(),
-                childElements = ChartElement.prototype.getViewElements.call(legend, factory);
+                childElements = ChartElement.fn.getViewElements.call(legend, factory);
 
             for (var i = 0, length = series.length; i < length; i++) {
                 var color = series[i].color,
@@ -543,23 +538,30 @@
         }
     });
 
-    function NumericAxis(seriesMin, seriesMax, options) {
-        var axis = this;
-        ChartElement.call(this);
+    var NumericAxis = ChartElement.extend({
+        init: function(seriesMin, seriesMax, options) {
+            var axis = this;
+            ChartElement.fn.init.call(axis);
 
-        var autoOptions = {
-            min: axis.autoAxisMin(seriesMin, seriesMax),
-            max: axis.autoAxisMax(seriesMin, seriesMax),
-            majorUnit: axis.autoMajorUnit(seriesMin, seriesMax)
-        };
+            var autoOptions = {
+                min: axis.autoAxisMin(seriesMin, seriesMax),
+                max: axis.autoAxisMax(seriesMin, seriesMax),
+                majorUnit: axis.autoMajorUnit(seriesMin, seriesMax)
+            };
 
-        axis.options = extend({}, axis.options, autoOptions, options);
+            options = axis.options = extend({}, axis.options, autoOptions, options);
 
-        axis.init();
-    }
+            var majorDivisions = axis.getMajorDivisions(),
+                currentValue = options.min;
 
-    NumericAxis.prototype = new ChartElement();
-    extend(NumericAxis.prototype, {
+            for (var i = 0; i < majorDivisions; i++) {
+                var text = new Text(currentValue.toString(), { align: RIGHT });
+                axis.children.push(text);
+
+                currentValue = round(currentValue + options.majorUnit, DEFAULT_PRECISION);
+            }
+        },
+
         options: {
             min: 0,
             max: 1,
@@ -569,20 +571,6 @@
             tickSize: 4,
             axisCrossingValue: 0,
             orientation: VERTICAL
-        },
-
-        init: function() {
-            var axis = this,
-                options = axis.options,
-                majorDivisions = axis.getMajorDivisions(),
-                currentValue = options.min;
-
-            for (var i = 0; i < majorDivisions; i++) {
-                var text = new Text(currentValue.toString(), { align: RIGHT });
-                axis.children.push(text);
-
-                currentValue = round(currentValue + options.majorUnit, DEFAULT_PRECISION);
-            }
         },
 
         updateLayout: function(targetBox) {
@@ -645,7 +633,7 @@
                 children = axis.children,
                 options = axis.options,
                 isVertical = options.orientation === VERTICAL,
-                childElements = ChartElement.prototype.getViewElements.call(axis, factory);
+                childElements = ChartElement.fn.getViewElements.call(axis, factory);
 
             var majorTickPositions = axis.getMajorDivisionsPositions();
             if (options.line.toLowerCase() == "solid") {
@@ -851,16 +839,19 @@
         }
     });
 
-    function CategoryAxis(options) {
-        var axis = this;
-        ChartElement.call(axis);
+    var CategoryAxis = ChartElement.extend({
+        init: function(options) {
+            var axis = this;
+            ChartElement.fn.init.call(axis);
 
-        axis.options = extend({}, axis.options, options);
-        axis.init();
-    }
+            options = axis.options = extend({}, axis.options, options);
 
-    CategoryAxis.prototype = new ChartElement();
-    extend(CategoryAxis.prototype, {
+            for (var i = 0; i < options.categories.length; i++) {
+                var label = options.categories[i];
+                axis.children.push(new Text(label, { align: CENTER }));
+            }
+        },
+
         options: {
             categories: [],
             line: "solid",
@@ -868,16 +859,6 @@
             majorTickType: OUTSIDE,
             axisCrossingValue: 0,
             orientation: HORIZONTAL
-        },
-
-        init: function() {
-            var axis = this,
-                options = axis.options;
-
-            for (var i = 0; i < options.categories.length; i++) {
-                var label = options.categories[i];
-                axis.children.push(new Text(label, { align: CENTER }));
-            }
         },
 
         updateLayout: function(targetBox) {
@@ -945,7 +926,7 @@
                 children = axis.children,
                 options = axis.options,
                 isVertical = options.orientation === VERTICAL,
-                childElements = ChartElement.prototype.getViewElements.call(axis, factory);
+                childElements = ChartElement.fn.getViewElements.call(axis, factory);
 
             if (options.line.toLowerCase() == "solid") {
                 if (isVertical) {
@@ -1028,15 +1009,14 @@
         }
     });
 
-    function ClusterLayout(options) {
-        var cluster = this;
-        ChartElement.call(cluster);
+    var ClusterLayout = ChartElement.extend({
+        init: function(options) {
+            var cluster = this;
+            ChartElement.fn.init.call(cluster);
 
-        cluster.options = extend({}, cluster.options, options);
-    }
+            cluster.options = extend({}, cluster.options, options);
+        },
 
-    ClusterLayout.prototype = new ChartElement();
-    extend(ClusterLayout.prototype, {
         options: {
             isVertical: false,
             gap: 1.5
@@ -1066,15 +1046,14 @@
         }
     });
 
-    function StackLayout(options) {
-        var stack = this;
-        ChartElement.call(stack);
+    var StackLayout = ChartElement.extend({
+        init: function(options) {
+            var stack = this;
+            ChartElement.fn.init.call(stack);
 
-        stack.options = extend({}, stack.options, options);
-    }
+            stack.options = extend({}, stack.options, options);
+        },
 
-    StackLayout.prototype = new ChartElement();
-    extend(StackLayout.prototype, {
         options: {
             isVertical: true,
             isReversed: false
@@ -1115,15 +1094,14 @@
         }
     });
 
-    function Bar(options) {
-        var bar = this;
-        ChartElement.call(bar);
+    var Bar = ChartElement.extend({
+        init: function(options) {
+            var bar = this;
+            ChartElement.fn.init.call(bar);
 
-        bar.options = extend({}, bar.options, options);
-    }
+            bar.options = extend({}, bar.options, options);
+        },
 
-    Bar.prototype = new ChartElement();
-    extend(Bar.prototype, {
         options: {
             color: "#fff",
             borderColor: "#000",
@@ -1152,21 +1130,20 @@
         }
     });
 
-    function BarChart(plotArea, options) {
-        var chart = this;
-        ChartElement.call(chart);
+    var BarChart = ChartElement.extend({
+        init: function(plotArea, options) {
+            var chart = this;
+            ChartElement.fn.init.call(chart);
 
-        chart.plotArea = plotArea;
-        chart.options = extend({}, chart.options, options);
-        chart._seriesMin = Number.MAX_VALUE;
-        chart._seriesMax = - Number.MAX_VALUE;
-        chart._bars = [];
+            chart.plotArea = plotArea;
+            chart.options = extend({}, chart.options, options);
+            chart._seriesMin = Number.MAX_VALUE;
+            chart._seriesMax = - Number.MAX_VALUE;
+            chart._bars = [];
 
-        chart.init();
-    }
+            chart.render();
+        },
 
-    BarChart.prototype = new ChartElement();
-    extend(BarChart.prototype, {
         options: {
             series: [],
             isVertical: true,
@@ -1174,7 +1151,7 @@
             gap: 1.5
         },
 
-        init: function() {
+        render: function() {
             var barChart = this,
                 options = barChart.options,
                 isStacked = barChart.options.isStacked,
@@ -1327,24 +1304,22 @@
        }
     });
 
+    var PlotArea = ChartElement.extend({
+        init: function(options) {
+            var plotArea = this;
+            ChartElement.fn.init.call(plotArea);
 
-    function PlotArea(options) {
-        var plotArea = this;
-        ChartElement.call(plotArea);
+            plotArea.options = extend({}, plotArea.options, options);
+            plotArea.render();
+        },
 
-        plotArea.options = extend({}, plotArea.options, options);
-        plotArea.init();
-    }
-
-    PlotArea.prototype = new ChartElement();
-    extend(PlotArea.prototype, {
         options: {
             categoryAxis: { },
             valueAxis: { },
             series: [ ]
         },
 
-        init: function() {
+        render: function() {
             var plotArea = this,
                 options = plotArea.options,
                 charts = plotArea.charts = [],
@@ -1450,13 +1425,11 @@
     // Visual elements - Generic, SVG, VML
     // **************************
 
-    function ViewElement() {
-        var element = this;
+    var ViewElement = Class.extend({
+        init: function() {
+            this.children = [];
+        },
 
-        element.children = [];
-    }
-
-    ViewElement.prototype = {
         render: function() {
             return this.template(this);
         },
@@ -1472,12 +1445,11 @@
 
             return output;
         }
-    };
-
+    });
 
     function SVGFactory() {}
 
-    extend(SVGFactory.prototype, {
+    SVGFactory.prototype = {
         root: function(options) {
             return new SVGRoot(options);
         },
@@ -1501,26 +1473,25 @@
         line: function(x1, y1, x2, y2) {
             return new SVGPath([[x1, y1], [x2, y2]]);
         }
-    });
+    };
 
-    function SVGRoot(options) {
-        var root = this;
+    var SVGRoot = ViewElement.extend({
+        init: function(options) {
+            var root = this;
 
-        options = root.options = extend({}, root.options, options);
-        ViewElement.call(root, options);
+            options = root.options = extend({}, root.options, options);
+            ViewElement.fn.init.call(root, options);
 
-        root.template = SVGRoot.template;
-        if (!root.template) {
+            root.template = SVGRoot.template;
+            if (!root.template) {
                 root.template = SVGRoot.template = kendo.template(
-                "<svg xmlns='http://www.w3.org/2000/svg' version='1.1' " +
-                "width='<%= options.width %>' height='<%= options.height %>'>" +
-                "<%= renderContent() %></svg>"
-            );
-        }
-    }
+                    "<svg xmlns='http://www.w3.org/2000/svg' version='1.1' " +
+                    "width='<%= options.width %>' height='<%= options.height %>'>" +
+                    "<%= renderContent() %></svg>"
+                );
+            }
+        },
 
-    SVGRoot.prototype = new ViewElement();
-    extend(SVGRoot.prototype, {
         options: {
             width: "800px",
             height: "600px"
@@ -1528,36 +1499,35 @@
     });
 
 
-    function SVGGroup() {
-        var group = this;
+    var SVGGroup = ViewElement.extend({
+        init: function() {
+            var group = this;
 
-        ViewElement.call(group);
-        group.template = kendo.template("<g><%= renderContent() %></g>");
-    }
-
-    SVGGroup.prototype = new ViewElement();
-
-
-    function SVGText(content, options) {
-        var text = this,
-            options = text.options = extend({}, text.options, options);
-
-        text.content = content || "";
-
-        ViewElement.call(text);
-        text.template = SVGText.template;
-        if (!text.template) {
-            text.template = SVGText.template = kendo.template(
-                "<text x='<%= options.x %>' y='<%= options._baselineY %>' " +
-                "style='font: <%= options.font %>'><%= content %></text>"
-            );
+            ViewElement.fn.init.call(group);
+            group.template = kendo.template("<g><%= renderContent() %></g>");
         }
+    });
 
-        text.align();
-    }
 
-    SVGText.prototype = new ViewElement();
-    extend(SVGText.prototype, {
+    var SVGText = ViewElement.extend({
+        init: function(content, options) {
+            var text = this,
+                options = text.options = extend({}, text.options, options);
+
+            text.content = content || "";
+
+            ViewElement.fn.init.call(text);
+            text.template = SVGText.template;
+            if (!text.template) {
+                text.template = SVGText.template = kendo.template(
+                    "<text x='<%= options.x %>' y='<%= options._baselineY %>' " +
+                    "style='font: <%= options.font %>'><%= content %></text>"
+                );
+            }
+
+            text.align();
+        },
+
         options: {
             x: 0,
             y: 0,
@@ -1573,24 +1543,23 @@
         }
     });
 
-    function SVGPath(points, options) {
-        var path = this;
+    var SVGPath = ViewElement.extend({
+        init: function(points, options) {
+            var path = this;
 
-        ViewElement.call(path);
-        path.template = SVGPath.template;
-        if (!path.template) {
-            path.template = SVGPath.template = kendo.template(
-                "<path d='<%= renderPoints() %>' " +
-                "stroke='<%= options.stroke %>' fill='<%= options.fill %>'></path>"
-            );
-        }
+            ViewElement.fn.init.call(path);
+            path.template = SVGPath.template;
+            if (!path.template) {
+                path.template = SVGPath.template = kendo.template(
+                    "<path d='<%= renderPoints() %>' " +
+                    "stroke='<%= options.stroke %>' fill='<%= options.fill %>'></path>"
+                );
+            }
 
-        path.points = points || [];
-        path.options = extend({}, path.options, options);
-    }
+            path.points = points || [];
+            path.options = extend({}, path.options, options);
+        },
 
-    SVGPath.prototype = new ViewElement();
-    extend(SVGPath.prototype, {
         options: {
             stroke: "#000",
             fill: "#fff"
@@ -1617,7 +1586,7 @@
         }
     }
 
-    extend(VMLFactory.prototype, {
+    VMLFactory.prototype = {
         root: function(options) {
             return new VMLRoot(options);
         },
@@ -1637,51 +1606,49 @@
         line: function(x1, y1, x2, y2) {
             return new VMLPath([[x1, y1], [x2, y2]]);
         }
-    });
+    };
 
-    function VMLRoot(options) {
-        var root = this;
+    var VMLRoot = ViewElement.extend({
+        init: function(options) {
+            var root = this;
 
-        options = root.options = extend({}, root.options, options);
-        ViewElement.call(root, options);
+            options = root.options = extend({}, root.options, options);
+            ViewElement.fn.init.call(root, options);
 
-        root.template = VMLRoot.template;
-        if (!root.template) {
-            root.template = VMLRoot.template = kendo.template(
-                "<div style='width:<%= options.width %>; height:<%= options.height %>; " +
-                            "position: relative;'>" +
-                            "<%= renderContent() %></div>"
-            );
-        }
-    }
+            root.template = VMLRoot.template;
+            if (!root.template) {
+                root.template = VMLRoot.template = kendo.template(
+                    "<div style='width:<%= options.width %>; height:<%= options.height %>; " +
+                    "position: relative;'>" +
+                    "<%= renderContent() %></div>"
+                );
+            }
+        },
 
-    VMLRoot.prototype = new ViewElement();
-    extend(VMLRoot.prototype, {
         options: {
             width: "800px",
             height: "600px"
         }
     });
 
-    function VMLText(content, options) {
-        var text = this,
+    var VMLText = ViewElement.extend({
+        init: function(content, options) {
+            var text = this,
             options = text.options = extend({}, text.options, options);
 
-        text.content = content || "";
+            text.content = content || "";
 
-        ViewElement.call(text);
-        text.template = VMLText.template;
-        if (!text.template) {
-            text.template = VMLText.template = kendo.template(
-                "<kvml:textbox style='position: absolute; " +
+            ViewElement.fn.init.call(text);
+            text.template = VMLText.template;
+            if (!text.template) {
+                text.template = VMLText.template = kendo.template(
+                    "<kvml:textbox style='position: absolute; " +
                     "left: <%= options.x %>px; top: <%= options.y %>px; " +
                     "font: <%= options.font %>'><%= content %></kvml:textbox>"
-            );
-        }
-    }
+                );
+            }
+        },
 
-    VMLText.prototype = new ViewElement();
-    extend(VMLText.prototype, {
         options: {
             x: 0,
             y: 0,
@@ -1689,26 +1656,25 @@
         }
     });
 
-    function VMLPath(points, options) {
-        var path = this;
-        ViewElement.call(path);
+    var VMLPath = ViewElement.extend({
+        init: function(points, options) {
+            var path = this;
+            ViewElement.fn.init.call(path);
 
-        path.template = VMLPath.template;
-        if (!path.template) {
-            path.template = VMLPath.template = kendo.template(
-                "<kvml:shape style='position:absolute; width:1px; height:1px;' " +
-                "strokecolor='<%= options.stroke %>' fillcolor='<%= options.fill %>' " +
-                "coordorigin='0 0' coordsize='1 1'>" +
-                "<kvml:path v='<%= renderPoints() %> e' /></kvml:shape>"
-            );
-        }
+            path.template = VMLPath.template;
+            if (!path.template) {
+                path.template = VMLPath.template = kendo.template(
+                    "<kvml:shape style='position:absolute; width:1px; height:1px;' " +
+                    "strokecolor='<%= options.stroke %>' fillcolor='<%= options.fill %>' " +
+                    "coordorigin='0 0' coordsize='1 1'>" +
+                    "<kvml:path v='<%= renderPoints() %> e' /></kvml:shape>"
+                );
+            }
 
-        path.points = points || [];
-        path.options = extend({}, path.options, options);
-    }
+            path.points = points || [];
+            path.options = extend({}, path.options, options);
+        },
 
-    VMLPath.prototype = new ViewElement();
-    extend(VMLPath.prototype, {
         options: {
             stroke: "#000",
             fill: "#fff"
@@ -1801,7 +1767,6 @@
 
         return hash.sort().join(" ");
     }
-
 
     function boxDiff( r, s ) {
         var a = Math.min( r.x1, s.x1 );
