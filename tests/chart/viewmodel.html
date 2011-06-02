@@ -314,19 +314,19 @@
                 });
 
                 test("markers have margin on the left", function() {
-                    equal(marker.x1, legend.box.x1 + MARKER_MARGIN);
+                    equal(marker.x1, legend.box.x1 + MARKER_MARGIN, TOLERANCE);
                 });
 
                 test("markers have set width", function() {
-                    equal(marker.x2 - marker.x1, MARKER_SIZE);
+                    equal(marker.x2 - marker.x1, MARKER_SIZE, TOLERANCE);
                 });
 
                 test("markers have margin on the right", function() {
-                    equal(marker.x2, label.style.x - MARKER_MARGIN);
+                    equal(marker.x2, label.style.x - MARKER_MARGIN, TOLERANCE);
                 });
 
                 test("markers are aligned to text center", function() {
-                    equal(marker.y1, label.style.y + MARKER_SIZE / 2);
+                    equal(marker.y1, label.style.y + MARKER_SIZE / 2, TOLERANCE);
                 });
 
                 test("markers are 1/2 of label size", function() {
