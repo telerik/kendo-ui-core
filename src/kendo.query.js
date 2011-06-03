@@ -200,6 +200,22 @@
         }
     }
 
+    if (Array.prototype.map !== undefined) {
+        map = function (array, callback) {
+            return array.map(callback);
+        }
+    } else {
+        map = function (array, callback) {
+            var length = array.length, result = new Array(length);
+
+            for (var i = 0; i < length; i++) {
+                result[i] = callback(array[i], i, array);
+            }
+
+            return result;
+        }
+    }
+
     function Query(data) {
         this.data = data;
     }
@@ -222,6 +238,9 @@
         },
         take: function (count) {
             return new Query(this.data.slice(0, count));
+        },
+        select: function (selector) {
+            return new Query(map(this.data, selector));
         },
         orderBy: function (selector) {
             var result = this.data.slice(0),
@@ -252,9 +271,29 @@
             var predicate = Filter.create(Query.expandFilter(expressions));
             return new Query(predicate(this.data));
         },
-        groupBy: function(fields) {
-            var field = fields[0].field,
-                sorted = this.sort(field, fields[0].dir || "asc").toArray(),
+        group: function(descriptors) {
+            var idx, len,
+                result = new Query(this.data), descriptor;
+
+            for(idx = 0, len = descriptors.length; idx < len; idx++) {
+                descriptor = descriptors[idx];
+                if(idx > 0) {
+                    result = result.select(function(group) {
+                        return {
+                            field: group.field,
+                            value: group.value,
+                            items: new Query(group.items).group([descriptor]).toArray()
+                        }
+                    });
+                } else {
+                    result = result.groupBy(descriptor);
+                }
+            }
+            return result;
+        },
+        groupBy: function(descriptor) {
+            var field = descriptor.field,
+                sorted = this.sort(field, descriptor.dir || "asc").toArray(),
                 accessor = kendo.accessor(field),
                 item,
                 groupValue = accessor.get(sorted[0], field),
@@ -268,20 +307,20 @@
                 len,
                 result = [group];
 
-                for(idx = 0, len = sorted.length; idx < len; idx++) {
-                    item = sorted[idx];
-                    current = accessor.get(item, field);
-                    if(groupValue !== current) {
-                        groupValue = current;
-                        group = {
-                            field: field,
-                            value: groupValue,
-                            items: []
-                        };
-                        result.push(group);
-                    }
-                    group.items.push(item);
+            for(idx = 0, len = sorted.length; idx < len; idx++) {
+                item = sorted[idx];
+                currentValue = accessor.get(item, field);
+                if(groupValue !== currentValue) {
+                    groupValue = currentValue;
+                    group = {
+                        field: field,
+                        value: groupValue,
+                        items: []
+                    };
+                    result.push(group);
                 }
+                group.items.push(item);
+            }
             return new Query(result);
         }
     }
