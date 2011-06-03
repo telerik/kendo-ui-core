@@ -177,6 +177,14 @@ section#footer
     display: none;
 }
 
+#main .callout
+{
+    position:fixed;
+    top: 60px;
+    width: 100px;
+    display: none;
+}
+
 /* screen layout - end */
 
 .loading
@@ -420,7 +428,7 @@ header>ul
     -webkit-transition-duration:.3s;
     -o-transition-property:box-shadow;
     -o-transition-duration:.3s;
-    
+
     transition-property:box-shadow;
     transition-duration:.3s;
 }
@@ -1386,7 +1394,7 @@ div.t-window-content
     font-weight: bold;
     clear: left;
     text-align: right;
-    padding-bottom: 
+    padding-bottom:
 }
 
 #exifWindow dd
