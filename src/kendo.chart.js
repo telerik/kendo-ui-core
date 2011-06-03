@@ -42,13 +42,11 @@
             chart.bind([DATABOUND], chart.options);
             chart._viewFactory = chart._supportsSVG() ? new SVGFactory() : new VMLFactory();
 
-            chart._applyDefaults();
-
             if (chart.options.dataSource) {
                 chart._initDataSource();
-            } else {
-                chart.refresh();
             }
+
+            chart.refresh();
         },
 
         options: {
@@ -69,6 +67,18 @@
         types: { },
 
         refresh: function() {
+            var chart = this;
+
+            chart._applyDefaults();
+
+            if (chart.options.dataSource) {
+                chart.dataSource.query({});
+            } else {
+                chart._redraw();
+            }
+        },
+
+        _redraw: function() {
             var chart = this,
                 options = chart.options,
                 model = new RootElement();
@@ -86,8 +96,6 @@
             model.updateLayout();
             var html = model.getView(chart._viewFactory).render();
             setContent(chart.element[0], html);
-
-            chart.trigger(DATABOUND);
         },
 
         _supportsSVG: function() {
@@ -123,8 +131,6 @@
             chart.dataSource = DataSource
                 .create(chart.options.dataSource)
                 .bind(CHANGE, proxy(chart._onDataChanged, chart));
-
-            chart.dataSource.query();
         },
 
         _onDataChanged: function() {
@@ -160,7 +166,8 @@
                 };
             };
 
-            chart.refresh();
+            chart.trigger(DATABOUND);
+            chart._redraw();
         }
     });
 
