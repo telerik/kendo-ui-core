@@ -2,6 +2,7 @@
     var kendo = window.kendo,
         extend = $.extend,
         Component = kendo.ui.Component,
+        events = [ 'showArrow' ],
         touchLocation = kendo.touchLocation;
 
     var Scroller = Component.extend({
@@ -28,6 +29,8 @@
                 $.extend( that.options, arguments[1] );
 
             Component.fn.init.apply(that, arguments);
+
+            that.bind(events, that.options);
 
             that.xScrollbar = $('<div class="touch-scrollbar horizontal-scrollbar" />');
             that.yScrollbar = that.xScrollbar.clone().removeClass('horizontal-scrollbar').addClass('vertical-scrollbar');
@@ -222,15 +225,32 @@
             that.scrollElement.kendoStop().kendoAnimate({effects: { slideLeft: { properties: { translate: scrollTo + 'px' } } }, duration: 500 });
         },
 
+        _animateArrows: function (arrows) {
+            var that = this;
+            
+            arrows.each( function () {
+                var element = $(this);
+
+                element.kendoStop(true, true).kendoAnimate({
+                    effects: { fadeIn : { properties: { opacity: that.options.scrollArrowsOpacity } } },
+                    duration: "fast",
+                    show: true,
+                    complete: function() {
+                        that.trigger("showArrow", element);
+                    }
+                });
+            });
+        },
+
         _showScrollArrows: function (e) {
             var that = this;
             that._initializeBoxModel();
 
             if (that.hasVerticalScroll)
-                that._verticalArrows.kendoStop(true, true).kendoAnimate({ effects: { fadeIn : { properties: { opacity: that.options.scrollArrowsOpacity } } }, duration: "fast", show: true });
+                that._animateArrows(that._verticalArrows);
 
             if (that.hasHorizontalScroll)
-                that._horizontalArrows.kendoStop(true, true).kendoAnimate({ effects: { fadeIn : { properties: { opacity: that.options.scrollArrowsOpacity } } }, duration: "fast", show: true });
+                that._animateArrows(that._horizontalArrows);
         },
 
         _hideScrollArrows: function (e) {
