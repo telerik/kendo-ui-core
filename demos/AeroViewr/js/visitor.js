@@ -63,7 +63,12 @@
             });
         });
 
-        $(document.documentElement).click(function() { hints.fadeOut(); } );
+        var removeHints = function(e) {
+            hints.fadeOut();
+            $(document).unbind('mousedown touchstart', removeHints);
+        };
+
+        $(document).bind('mousedown touchstart', removeHints);
     }
 
     function showSelectedPhoto(ui) {
