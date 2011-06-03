@@ -285,6 +285,34 @@
                 module("Bar Chart / Stack / Mixed Values", {
                     setup: function() {
                         setupBarChart({
+                            series: [{
+                                data: [1, -1]
+                            }],
+                            isStacked: true }
+                        );
+                    }
+                });
+
+                test("reports stacked minumum value", function() {
+                    equal(series.valueRange().min, -1);
+                });
+
+                test("reports stacked maximum value", function() {
+                    equal(series.valueRange().max, 1);
+                });
+
+                test("bars have set height according to value", function() {
+                    var barHeights = $.map(series._bars, function(bar) {
+                        return bar.box.height();
+                    });
+
+                    same(barHeights, [1, 1]);
+                });
+
+                // ------------------------------------------------------------
+                module("Bar Chart / Stack / Mixed Series", {
+                    setup: function() {
+                        setupBarChart({
                             series: [ positiveSeries, negativeSeries ],
                             isStacked: true }
                         );
@@ -306,7 +334,6 @@
 
                     same(barHeights, [1, 1, 2, 2]);
                 });
-
             })();
 
             (function() {

@@ -1168,18 +1168,14 @@
             var barChart = this,
                 options = barChart.options,
                 isStacked = barChart.options.isStacked,
-                positiveSums = [],
-                negativeSums = [];
+                catMax = [],
+                catMin = [];
 
             barChart.traverseDataPoints(function(value, categoryIx, series) {
                 if(typeof value !== "undefined") {
                     if (isStacked) {
-                        var sums = value > 0 ? positiveSums : negativeSums;
-                        if (sums.length === categoryIx) {
-                            sums[categoryIx] = value;
-                        } else {
-                            sums[categoryIx] += value;
-                        }
+                        var sums = value > 0 ? catMax : catMin;
+                        sums[categoryIx] = sums[categoryIx] ? sums[categoryIx] + value : value;
                     } else {
                         barChart._seriesMin = Math.min(barChart._seriesMin, value);
                         barChart._seriesMax = Math.max(barChart._seriesMax, value);
@@ -1189,17 +1185,9 @@
                 barChart.addValue(value, categoryIx, series);
             });
 
-            if (negativeSums.length === 0) {
-                negativeSums = positiveSums;
-            }
-
-            if (positiveSums.length === 0) {
-                positiveSums = negativeSums;
-            }
-
             if (isStacked) {
-                barChart._seriesMin = Math.min.apply(Math, negativeSums);
-                barChart._seriesMax = Math.max.apply(Math, positiveSums);
+                barChart._seriesMin = sparseArrayMin(catMin.length ? catMin : catMax);
+                barChart._seriesMax = sparseArrayMax(catMax.length ? catMax : catMin);
             }
         },
 
@@ -1835,6 +1823,28 @@
 
     function alignToPixel(coord) {
         return Math.round(coord) + 0.5;
+    }
+
+    function sparseArrayMin(arr) {
+        return sparseArrayLimits(arr).min;
+    }
+
+    function sparseArrayMax(arr) {
+        return sparseArrayLimits(arr).max;
+    }
+
+    function sparseArrayLimits(arr) {
+        var min = Number.MAX_VALUE,
+            max = - Number.MAX_VALUE;
+        for (var i = 0, length = arr.length; i < length; i++) {
+            var n = arr[i];
+            if (typeof n !== "undefined") {
+                min = Math.min(min, n);
+                max = Math.max(max, n);
+            }
+        }
+
+        return { min: min, max: max };
     }
 
     // Make the internal functions public for unit testing
