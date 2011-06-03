@@ -13,6 +13,7 @@
         <script type="text/javascript">
             var Chart = kendo.ui.Chart,
                 Box = Chart.Box,
+                NumericAxis = Chart.NumericAxis,
                 numericAxis,
                 gridLayout,
                 chartBox = new Box(0, 0, 800, 600),
@@ -101,9 +102,10 @@
                 }
            });
 
-            module("Automatic Axis Maximum", {
-                setup: moduleSetup
-            });
+           // -----------------------------------------------------------------
+           module("Automatic Axis Maximum", {
+               setup: moduleSetup
+           });
 
             // min, max, expected axis minimum, expected axis maximum
             var referenceAxisLimits = [
@@ -221,6 +223,20 @@
                     equal(numericAxis.autoAxisMin(min, max), axisMin, "[" + min + ", " + max + "]");
                 }
             });
+
+            (function() {
+                module("Configuration");
+
+                test("Major unit is determined from options min/max", function() {
+                    numericAxis = new NumericAxis(1000, 10000, {
+                        min: 10,
+                        max: 100
+                    });
+
+                    equal(numericAxis.options.majorUnit, 10);
+                });
+
+            })();
 
             (function() {
                 var numericAxis,

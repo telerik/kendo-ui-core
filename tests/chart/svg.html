@@ -168,8 +168,8 @@
                 });
 
                 test("renders path tag", function() {
-                    equal(path.render(),
-                        "<path d='M10.5 20.5' stroke='#000' fill='#fff'></path>");
+                    equal(path.render().replace(/\<path.*?\>/, "<path>"),
+                        "<path></path>");
                 });
 
                 test("moves to first point", function() {
@@ -184,6 +184,16 @@
                 test("renders fill color", function() {
                     path.options.fill = "#f00";
                     ok(path.render().indexOf("fill='#f00'") > -1);
+                });
+
+                test("renders stroke color", function() {
+                    path.options.stroke = "#f00";
+                    ok(path.render().indexOf("stroke='#f00'") > -1);
+                });
+
+                test("renders stroke width", function() {
+                    path.options.strokeWidth = "2";
+                    ok(path.render().indexOf("stroke-width='2'") > -1);
                 });
 
             })();

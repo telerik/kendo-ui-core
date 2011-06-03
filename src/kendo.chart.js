@@ -565,11 +565,15 @@
 
             var autoOptions = {
                 min: axis.autoAxisMin(seriesMin, seriesMax),
-                max: axis.autoAxisMax(seriesMin, seriesMax),
-                majorUnit: axis.autoMajorUnit(seriesMin, seriesMax)
+                max: axis.autoAxisMax(seriesMin, seriesMax)
             };
 
             options = axis.options = extend({}, axis.options, autoOptions, options);
+
+            if(!options.majorUnit) {
+                // Determine an auto major unit after min/max have been set
+                options.majorUnit = axis.autoMajorUnit(options.min, options.max)
+            }
 
             var majorDivisions = axis.getMajorDivisions(),
                 currentValue = options.min;
@@ -586,7 +590,6 @@
             min: 0,
             max: 1,
             line: "solid",
-            majorUnit: 0.1,
             majorTickType: OUTSIDE,
             tickSize: 4,
             axisCrossingValue: 0,
@@ -1142,7 +1145,7 @@
                 factory.rect(box, {
                     fill: options.color,
                     stroke: options.borderColor,
-                    borderWidth: options.borderWidth
+                    strokeWidth: options.borderWidth
                 })
             );
 
@@ -1566,7 +1569,8 @@
             if (!path.template) {
                 path.template = SVGPath.template = kendo.template(
                     "<path d='<%= renderPoints() %>' " +
-                    "stroke='<%= options.stroke %>' fill='<%= options.fill %>'></path>"
+                    "stroke='<%= options.stroke %>' stroke-width='<%= options.strokeWidth %>' " +
+                    "fill='<%= options.fill %>'></path>"
                 );
             }
 
@@ -1576,6 +1580,7 @@
 
         options: {
             stroke: "#000",
+            strokeWidth: 1,
             fill: "#fff"
         },
 
@@ -1679,7 +1684,9 @@
             if (!path.template) {
                 path.template = VMLPath.template = kendo.template(
                     "<kvml:shape style='position:absolute; width:1px; height:1px;' " +
-                    "strokecolor='<%= options.stroke %>' fillcolor='<%= options.fill %>' " +
+                    "strokecolor='<%= options.stroke %>' " +
+                    "strokeweight='<%= options.strokeWidth %>' " +
+                    "fillcolor='<%= options.fill %>' " +
                     "coordorigin='0 0' coordsize='1 1'>" +
                     "<kvml:path v='<%= renderPoints() %> e' /></kvml:shape>"
                 );
@@ -1691,6 +1698,7 @@
 
         options: {
             stroke: "#000",
+            strokeWidth: 1,
             fill: "#fff"
         },
 
