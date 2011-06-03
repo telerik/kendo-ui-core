@@ -138,11 +138,22 @@
                 });
 
                 test("renders path tag", function() {
-                    equal(path.render(),
-                    "<kvml:shape style='position:absolute; width:1px; height:1px;' " +
-                        "strokecolor='#000' fillcolor='#fff' coordorigin='0 0' coordsize='1 1'>" +
+                    equal(path.render().replace(/\<kvml:shape.*?\>/, "<kvml:shape>"),
+                    "<kvml:shape>" +
                         "<kvml:path v='m 10,20 e' />" +
                     "</kvml:shape>");
+                });
+
+                test("positions shape", function() {
+                    ok(path.render().indexOf("position:absolute; width:1px; height:1px;") > -1);
+                });
+
+                test("sets coordorigin", function() {
+                    ok(path.render().indexOf("coordorigin='0 0'") > -1);
+                });
+
+                test("sets coordsize", function() {
+                    ok(path.render().indexOf("coordsize='1 1'") > -1);
                 });
 
                 test("moves to first point", function() {
@@ -157,6 +168,16 @@
                 test("renders fill color", function() {
                     path.options.fill = "#f00";
                     ok(path.render().indexOf("fillcolor='#f00'") > -1);
+                });
+
+                test("renders stroke color", function() {
+                    path.options.stroke = "#f00";
+                    ok(path.render().indexOf("strokecolor='#f00'") > -1);
+                });
+
+                test("renders stroke width", function() {
+                    path.options.strokeWidth = "2";
+                    ok(path.render().indexOf("strokeweight='2'") > -1);
                 });
 
             })();
