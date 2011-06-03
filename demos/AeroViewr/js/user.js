@@ -4,6 +4,8 @@
 
     var flickr = window.flickr,
         upload,
+        uploadInfo,
+        uploadedPhotos = [],
         slideshow = window.slideshow,
         data = window.data,
         photosInSet = false,
@@ -166,6 +168,18 @@
     }
 
     var user = window.user = {
+        initUploadInfo: function() {
+            uploadInfo = $('<div id="uploadInfo"></div>')
+                                    .appendTo(document.body)
+                                    .kendoWindow({
+                                        modal: true,
+                                        title: "Status",
+                                        visible: false,
+                                        resizable: false,
+                                        width: 375
+                                    })
+                                    .data("kendoWindow");
+        },
         initUpload: function() {
             upload = new window.Upload($("#uploadWrap"));
             $("#uploadphotos").bind("click", function(e) {
@@ -293,8 +307,10 @@
             });
         },
         refreshSets: function(showGrid) {
+            uploadedPhotos = upload.responses;
             setPhotosDataSource.transport.cache.clear();
             setPhotosDataSource.read();
+
             if(showGrid){
                 $("#mainUserWrap").show();
                 $("#overlay").fadeIn();
@@ -320,10 +336,53 @@
                 }
             }
 
+            setPhotosDataSource.bind("change", function() {
+                if (uploadedPhotos[0]) {
+                    var lastPage = setPhotosDataSource._totalPages(),
+                        data = setPhotosDataSource.data(),
+                        lastPage = setPhotosDataSource._totalPages();
+                        dataLength = data.length,
+                        photosLength = uploadedPhotos.length,
+                        i = 0, j = 0, inStream = 0;
+
+                    if (setPhotosDataSource.page() != lastPage) {
+                        setPhotosDataSource.page(lastPage);
+                    }
+
+                    for (; i < dataLength; i++) {
+                        var dataItem = data[i];
+                        for(; j < photosLength; j++) {
+                            var photo = uploadedPhotos[j];
+                            if (photo.stat.toLowerCase() == "fail") {
+                                uploadInfo.content("<h1>Some of the files were not uploaded</h1>")
+                                          .center()
+                                          .open();
+                                break;
+                            }
+
+                            if (dataItem.id == photo.photoid) {
+                                inStream++;
+                            }
+                        }
+                    }
+
+                    if (inStream != photosLength) {
+                        uploadInfo.content("<h1>Some of the uploaded photos\
+                                            were not found in the photo stream.\
+                                            It seams that Flickr does not returned\
+                                            them yet. Try again later.</h1>")
+                                  .center()
+                                  .open();
+                    }
+
+                    uploadedPhotos = [];
+                }
+            });
             that.initFlatSetsStrip();
             that.initMainPictures();
             that.initPhotoStrip();
             that.initSearch();
+            that.initUploadInfo();
 
             slideshow.init($("#flatPhotoStrip").data("kendoListView"));
             $("#viewslideshow").click(function(e) {

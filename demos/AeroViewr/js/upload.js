@@ -96,9 +96,9 @@
                     }
                 }
             }
-            that.responses = [];
             that.hide();
             window.user.refreshSets(!that.exifVisible);
+            that.responses = [];
         },
         hide: function() {
             var that = this;
