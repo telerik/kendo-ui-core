@@ -23,6 +23,7 @@
 
     function process(data, options) {
         var query = new kendo.data.Query(data),
+            options = options || {},
             page = options.page,
             pageSize = options.pageSize,
             sort = options.sort;
@@ -250,7 +251,7 @@
             } else {
                 that.find = that.at;
             }
-            
+
             that.bind([ERROR, CHANGE, CREATE, DESTROY, UPDATE], options);
         },
 
@@ -323,7 +324,7 @@
         },
 
         _updatedModels: function() {
-            var that = this,              
+            var that = this,
                 sendAllFields = that.options.sendAllFields;
             return  that._byState(Model.UPDATED, function(model) {
                         if(sendAllFields) {
@@ -333,7 +334,7 @@
                         return model.changes();
                     });
         },
-        
+
         _destroyedModels: function() {
             var that = this,
                 data,
@@ -342,22 +343,22 @@
                         data = {};
                         if(sendAllFields) {
                             return model.data;
-                        }                        
+                        }
                         data[model.idField] = model.id();
                         return data;
                     });
         },
 
-        sync: function() {            
+        sync: function() {
             var that = this,
                 updated,
                 created,
-                destroyed,                
+                destroyed,
                 batch = that.options.batch,
                 mode,
                 transport = that.transport
                 promises = that._promises = [];
-                
+
             updated = that._updatedModels();
 
             created = that._createdModels();
@@ -371,21 +372,21 @@
                 mode = "single";
             }
 
-            if(mode) {                              
-                that._send(created, proxy(transport.create, transport), mode);                              
-                that._send(updated, proxy(transport.update, transport), mode);                
+            if(mode) {
+                that._send(created, proxy(transport.create, transport), mode);
+                that._send(updated, proxy(transport.update, transport), mode);
                 that._send(destroyed, proxy(transport.destroy, transport), mode);
-            } else {                
+            } else {
                 that._send({
                         created: created,
                         updated: updated,
                         destroyed: destroyed
-                    }, 
-                    proxy(transport.update, transport), 
+                    },
+                    proxy(transport.update, transport),
                     "single"
-                );                
-            }  
-            
+                );
+            }
+
             $.when.apply(null, promises).then(function() {
                 that.trigger(CHANGE);
             });
@@ -398,25 +399,25 @@
                 models = that._models
                 map = that._map,
                 deserializer= that._deserializer;
-                        
+
             if(!deserializer.status(data)) {
-                return that.error({data: origData});                
+                return that.error({data: origData});
             }
-            
+
             $.each(origData, function(index, value) {
                 delete models[that.id(value)];
             });
-                           
+
             data = deserializer.data(data);
             $.each(data, function(index, value) {
-                origValue = origData[index];                
-                if(origValue) {                
+                origValue = origData[index];
+                if(origValue) {
                     origId = that.id(origValue);
                     index = map[origId];
 
                     if(index >= 0) {
-                        that._data[index] = value;                        
-                    }                    
+                        that._data[index] = value;
+                    }
                 }
             });
             that._idMap(that._data);
@@ -456,8 +457,8 @@
                     })
                 );
             }
-            
-            return promises;            
+
+            return promises;
         },
 
         create: function(index, values) {
