@@ -530,11 +530,22 @@
 
         success: function(data) {
             var that = this,
-            options = {};
+            options = {},
+            updated = Model ? that._updatedModels() : [],
+            models = that._models;
 
             that._total = that._deserializer.total(data);
             data = that._deserializer.data(data);
             that._data = data;
+
+            $.each(updated, function() {
+                var updatedId = that.id(this);
+                $.each(data, function() {
+                    if(updatedId === that.id(this)) {
+                        delete models[updatedId];
+                    }
+                });
+            });
 
             if (that.options.serverPaging !== true) {
                 options.page = that._page;

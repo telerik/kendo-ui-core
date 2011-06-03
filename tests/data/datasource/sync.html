@@ -433,7 +433,40 @@
                 dataSource.sync();
             });
             
-          
+            test("sync merge the results if read before sync complete", function() {                
+                var dataSource = new DataSource({ 
+                    transport: {
+                        read: function(options) {
+                            options.success([{id: 1, foo: "foo"}, {id: 2, foo: "bar"}]);
+                        }
+                    },
+                    model: Model.define()
+                });
+                dataSource.read();
+
+                dataSource.create({foo: "baz"});
+                dataSource.update(1, {foo: "bar"});
+                dataSource.destroy(2);                
+                dataSource.read();
+                
+                var created = dataSource._createdModels();
+                var updated = dataSource._updatedModels();
+                var destroyed = dataSource._destroyedModels();
+                var view = dataSource.view();
+
+                equal(created.length, 1);
+                equal(created[0].foo, "baz");
+                equal(destroyed.length, 1);
+                equal(destroyed[0].foo, "bar");
+                equal(destroyed[0].id, 2);
+                equal(updated.length, 0);
+
+                equal(view.length, 2);
+                equal(view[0].id, 1);
+                equal(view[0].foo, "foo");
+                equal(view[1].id, 2);
+                equal(view[1].foo, "bar");
+            });  
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
