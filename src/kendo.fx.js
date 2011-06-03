@@ -28,6 +28,7 @@
                     }).length) {
                         transition.complete.call(transition.object);
                         transition.object.css(kendo.support.transitions.css + 'transition', 'none');
+                        transition.object.css(kendo.support.transitions.css + 'transition');
                         transition.object.unbind(kendo.support.transitions.event, kendo.fx.deQueue);
                 }
             }
@@ -44,6 +45,7 @@
                 cssValues = {};
 
             element.css(currentTransition.setup);
+            element.css(kendo.support.transitions.css + 'transition');
 
             $.each(currentTransition.keys, function() {
                 cssValues[this] = startStyle.getPropertyValue(this);
@@ -105,6 +107,7 @@
 
                 if (++this.eventNo == this.effectCount) { // ouch :(
                     element.css(kendo.support.transitions.css + 'transition', 'none');
+                    element.css(kendo.support.transitions.css + 'transition');
                     clearTimeout(element.data('abortId'));
                     element.dequeue();
                 }
@@ -130,6 +133,7 @@
                 } else
                     element.css(kendo.support.transitions.css + 'transition', 'none');
 
+                element.css(kendo.support.transitions.css + 'transition');
                 element.removeData('keys');
                 element.stop(clearQueue);
                 return element;
@@ -187,8 +191,8 @@
                                     element.data('translate', {
                                         top: parseInt(element.css('top'), 10) || 0,
                                         left: parseInt(element.css('left'), 10) || 0,
-                                        bottom: parseInt(element.css('bottom'), 10) || 0,
-                                        right: parseInt(element.css('right'), 10) || 0
+                                        bottom: parseInt(element.css('bottom'), 10),
+                                        right: parseInt(element.css('right'), 10)
                                     });
                                 } else
                                     element.data('translate', {
@@ -437,6 +441,14 @@
                 }
 
                 animate(element, extend({ width: 0 }, properties), extend({ complete: function () { element.css('overflow', element.data('overflow')) } }, options));
+            }
+        },
+        simple: {
+            play: function(element, properties, options) {
+                animate(element, properties, options);
+            },
+            reverse: function(element, properties, options) {
+                animate(element, properties, options);
             }
         }
     });

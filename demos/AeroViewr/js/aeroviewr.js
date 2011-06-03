@@ -27,8 +27,6 @@ if (!isInferiorBrowser) {
         user = window.user,
         fullscreen = false;
 
-    animType = false;
-
     $(document).ready(function () {
         var tagHotListDataSource = data.dataSource( {
             serverFiltering: true,
