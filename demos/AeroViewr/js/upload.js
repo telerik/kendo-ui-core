@@ -30,40 +30,48 @@
             exifButton.fadeOut();
 
             element.empty()
-                        .html(flickr.isAuthenticated() ? authContent : nonAuthContent)
-                        .find("#photosUpload").kendoUpload({
-                                showFileList: false,
-                                multiple: true,
-                                async: {
-                                    saveUrl: 'Home/Save',
-                                    autoUpload: true
-                                },
-                                upload: function (e) {
-                                    e.data = {
-                                        api_key: flickr.app.key,
-                                        auth_token: flickr.auth.token
-                                    };
+                    .html(flickr.isAuthenticated() ? authContent : nonAuthContent)
+                    .find("#photosUpload").kendoUpload({
+                            showFileList: false,
+                            multiple: true,
+                            async: {
+                                saveUrl: 'Home/Save',
+                                autoUpload: true
+                            },
+                            upload: function (e) {
+                                e.data = {
+                                    api_key: flickr.app.key,
+                                    auth_token: flickr.auth.token
+                                };
 
-                                    e.data["api_sig"] = flickr.getApiSig(flickr.app.secret, e.data);
-                                    e.data["secret"] = flickr.app.secret;
+                                e.data["api_sig"] = flickr.getApiSig(flickr.app.secret, e.data);
+                                e.data["secret"] = flickr.app.secret;
 
-                                    that._showMsg("Uploading photos...");
-                                    $(document).unbind("mousedown touchstart", handler);
-                                    $("#viewslideshow").addClass("i-state-disabled");
-                                },
-                                success: function (e) {
-                                   that.responses = that.responses.concat(e.response);
-                                },
-                                complete: function (e) {
-                                    that._movePhotosToSet();
-                                }
-                        })
-                        .end()
-                        .delegate("#uploadSignIn","click", function(e) {
-                            e.preventDefault();
-                            flickr.signIn();
-                        })
-                        .fadeIn();
+                                that._showMsg("Uploading photos...");
+                                $(document).unbind("mousedown touchstart", handler);
+                                $("#viewslideshow").addClass("i-state-disabled");
+                            },
+                            success: function (e) {
+                               that.responses = that.responses.concat(e.response);
+                            },
+                            complete: function (e) {
+                                that._movePhotosToSet();
+                            }
+                    })
+                    .end()
+                    .delegate("#uploadSignIn","click", function(e) {
+                        e.preventDefault();
+                        flickr.signIn();
+                    })
+                    .fadeIn();
+
+            if (!$("#photosUpload").data("kendoUpload")._supportsDrop()) {
+                element.find(".uploadTitle")
+                       .html("Drag &amp; Drop is supported only in Chrome, Firefox 4.0 +, Safari (Mac OS only)")
+                       .next()
+                       .html('click the "Browse" button to upload photos');
+            }
+
             that._overlay().fadeIn();
         },
         _showMsg: function(msg){
