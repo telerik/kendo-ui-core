@@ -72,7 +72,7 @@
             chart._applyDefaults();
 
             if (chart.options.dataSource) {
-                chart.dataSource.query({});
+                chart.dataSource.query();
             } else {
                 chart._redraw();
             }
