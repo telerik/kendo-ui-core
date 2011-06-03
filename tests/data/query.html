@@ -528,9 +528,9 @@
             test("groupby groups data by field", function() {
                 var data = [ {field: 100} , {field: 100} , {field: 1} ];
 
-                var result = new Query(data).groupBy( [{
+                var result = new Query(data).groupBy( {
                     field: "field"
-                }]).toArray();
+                }).toArray();
                 equal(result.length, 2);
                 equal(result[0].value, 1);
                 equal(result[0].field, "field");
@@ -542,7 +542,7 @@
             test("groupby groups data by field and direction", function() {
                 var data = [ {field: 100} , {field: 100} , {field: 1} ];
 
-                var result = new Query(data).groupBy( [{
+                var result = new Query(data).group( [{
                     field: "field",
                     dir: "desc"
                 }]).toArray();
@@ -555,6 +555,33 @@
                 equal(result[0].items.length, 2);
             });
 
+            test("groupby groups data by multiple fields", function() {
+                var data = [ {foo: 100, bar: "baz"} , {foo: 100, bar: "bar"} , {foo: 1, bar: "baz"} ],
+                    firstGroup,
+                    secondGroup;
+
+                var result = new Query(data).group( [{ field: "foo" }, { field: "bar" }]).toArray();
+
+                equal(result.length, 2);
+                firstGroup = result[0];
+                secondGroup = result[1];
+
+                equal(firstGroup.value, 1);
+                equal(firstGroup.field, "foo");
+                equal(firstGroup.items.length, 1);
+                equal(firstGroup.items[0].value, "baz");
+                equal(firstGroup.items[0].field, "bar");
+                equal(firstGroup.items[0].items.length, 1);
+                equal(secondGroup.value, 100);
+                equal(secondGroup.field, "foo");
+                equal(secondGroup.items.length, 2);
+                equal(secondGroup.items[0].value, "bar");
+                equal(secondGroup.items[0].field, "bar");
+                equal(secondGroup.items[0].items.length, 1);
+                equal(secondGroup.items[1].value, "baz");
+                equal(secondGroup.items[1].field, "bar");
+                equal(secondGroup.items[1].items.length, 1);
+            });
         </script>
     </body>
 </html>
