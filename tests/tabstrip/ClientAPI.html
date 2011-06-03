@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.ui.panelbar Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.tabstrip.js"></script>
+        <script type="text/javascript" src="../jquery.mockjax.js"></script>
+        <link rel="stylesheet" href="../qunit.css" />
+        <link type="text/css" href="../../styles/kendo.common.css" rel="stylesheet"/>
+        <link type="text/css" href="../../styles/kendo.vista.css" rel="stylesheet"/>
+
+        <script type="text/javascript">
+
+            var isRaised;
+
+            var argsCheck = false;
+
+            //handlers
+            function Select(e) {
+                if (argsCheck) {
+                    isRaised = !!e.contentElement;
+                    argsCheck = false;
+                } else
+                    isRaised = true;
+            }
+
+            var onLoadTabStrip;
+            function Load(e) {
+                isRaised = true;
+                onLoadTabStrip = $('#TabStrip1').data('kendoTabStrip');
+            }
+            
+            $(document).ready(function() {
+                $("#TabStrip1").kendoTabStrip({ select: Select });
+            });
+
+        </script>
+
+
+</head>
+<body onload="Load()">
+
+<div class="t-widget t-tabstrip t-header" id="TabStrip1" style="visibility: hidden; position: absolute;">
+    <ul class="t-reset t-tabstrip-items">
+        <li class="t-item t-state-default t-state-active"><a class="t-link" href="#TabStrip1-1"><img alt="image"
+                                                                                                    class="t-image"
+                                                                                                    src="../../playground/Icons/Suites/mvc.png">ASP.NET
+            MVC</a></li>
+        <li class="t-item t-state-default"><a class="t-link" href="#TabStrip1-2"><img alt="image" class="t-image"
+                                                                                     src="../../playground/Icons/Suites/sl.png">Silverlight</a>
+        </li>
+        <li class="t-item t-state-default"><a class="t-link" href="#TabStrip1-3"><img alt="image" class="t-image"
+                                                                                     src="../../playground/Icons/Suites/ajax.png">ASP.NET
+            AJAX</a></li>
+        <li class="t-item t-state-default"><a class="t-link" href="#TabStrip1-4"><img alt="image" class="t-image"
+                                                                                     src="../../playground/Icons/Suites/orm.png">OpenAccess
+            ORM</a></li>
+        <li class="t-item t-state-default"><a class="t-link" href="#TabStrip1-5"><img alt="image" class="t-image"
+                                                                                     src="../../playground/Icons/Suites/rep.png">Reporting</a>
+        </li>
+        <li class="t-item t-state-default"><a class="t-link" href="#TabStrip1-6"><img alt="image" class="t-image"
+                                                                                     src="../../playground/Icons/Suites/sitefinity.png">Sitefinity
+            ASP.NET CMS</a></li>
+    </ul>
+    <div class="t-content t-state-active" id="TabStrip1-1" style="display: block;">
+        <ul>
+            <li>Pure ASP.NET MVC components</li>
+            <li>Completely Open Source</li>
+            <li>Exceptional Performance</li>
+
+            <li>Based on jQuery</li>
+            <li>Search Engine Optimized</li>
+            <li>Cross-browser support</li>
+        </ul>
+    </div>
+    <div class="t-content" id="TabStrip1-2">
+        <ul>
+            <li>Built on Silverlight 3</li>
+
+            <!--<li>RIA services support</li>-->
+            <li>Validation support</li>
+            <li>Out of browser support</li>
+            <li>The first commercial 3D chart</li>
+            <li>Free testing framework</li>
+        </ul>
+
+    </div>
+    <div class="t-content" id="TabStrip1-3">
+        <ul>
+            <li>Built on top of Microsoft ASP.NET AJAX framework</li>
+            <li>Rich client-side capabilities; nearly identical client-side and server-side APIs</li>
+            <li>.NET 3.5 built-in support for LINQ, EntityDataSource, ADO.NET DataServices, WCF, etc</li>
+            <li>Performance optimization helper controls and HTTP compression</li>
+            <li>SharePoint and DotNetNuke Integration; ASP.NET MVC-ready</li>
+
+            <li>Wide cross-browser compatible and XHTML compliant</li>
+        </ul>
+    </div>
+    <div class="t-content" id="TabStrip1-4">
+        <ul>
+            <li>Model First and Schema First approaches</li>
+            <li>Stored Procedures for Multiple Databases</li>
+            <li>Views for Multiple Databases</li>
+
+            <li>Generic Metadata Access and artificial fields API in the runtime</li>
+            <li>Support for Ado.Net Data Services and WCF</li>
+            <li>Support for LINQ, OQL, and SQL Languages</li>
+        </ul>
+    </div>
+    <div class="t-content" id="TabStrip1-5">
+        <ul>
+            <li>Excellent data presentation and analysis: Crosstabs, Charts, Tables, Lists</li>
+
+            <li>SubReports, Barcodes, Images, Shapes, and more</li>
+            <li>Revolutionary WYSIWYG design surface in Visual Studio</li>
+            <li>Easy conditional formatting, sorting, filtering, grouping</li>
+            <li>Powerful styling, data binging and data processing models</li>
+            <li>Significantly reduced development time through wizards and builders</li>
+        </ul>
+
+    </div>
+    <div class="t-content" id="TabStrip1-6">
+        <ul>
+            <li>Multi-lingual Content Integration</li>
+            <li>Workflow Engine</li>
+            <li>Document versioning</li>
+            <li>Permissions</li>
+            <li>Interface Localization</li>
+
+            <li>Wide cross-browser compatible and XHTML compliant</li>
+        </ul>
+    </div>
+</div>
+
+    <script type="text/javascript">
+        
+        function getRootItem(index) {
+            return $('#TabStrip1').find('.t-item').eq(index)
+        }
+        
+        function getTabStrip() {
+            return $("#TabStrip1").data("kendoTabStrip");
+        }
+
+        test('clicking item with url should navigate', function() {
+            
+            var tabstrip = getTabStrip();
+            var $item = $(getRootItem(1));
+
+            var e = new $.Event('click');
+                        
+            $item.find('.t-link').trigger(e);
+
+            setTimeout( function () {
+                ok(!e.isDefaultPrevented());
+            }, 200);
+
+            //stop navigation after assert
+            e.preventDefault();
+        });
+
+        test('trigger input select should not bubble', function() {
+
+            isRaised = false;
+
+            var tabstrip = getTabStrip();
+            var content = tabstrip.getContentElement(1);
+
+            $(content).find('input').first().trigger('select');
+
+            ok(!isRaised);
+        });
+
+        test('reload method should call ajaxRequest', function() { 
+            var tabstrip = getTabStrip();
+            var isCalled = false;
+            var $item = $(getRootItem(4));
+
+            $item.find('.t-link').data('ContentUrl', 'fake');
+            tabstrip.ajaxRequest = function () { isCalled = true; };
+            
+            tabstrip.reload($item);
+
+            ok(isCalled);
+        });
+    
+        test('clicking should raise onSelect event', function() {
+
+            var item = getRootItem(2);
+
+            isRaised = false;
+
+            item.find('> .t-link').trigger('click');
+
+            ok(isRaised);
+        });
+
+        test('clicking first item should select it', function() {
+            var item = getRootItem(0);
+
+            item.find('.t-link').trigger('click');
+
+            setTimeout( function () {
+                ok(item.hasClass('t-state-active'));
+            }, 200);
+        });
+
+        test('select method should select second item', function() {
+            var tabstrip = getTabStrip();
+            var item = getRootItem(1);
+
+            tabstrip.select(item);
+
+            setTimeout( function () {
+                ok(item.hasClass('t-state-active'));
+            }, 200);
+        
+        });
+
+        test('disable method should disable item', function() {
+            var tabstrip = getTabStrip();
+
+            var item = getRootItem(4);
+
+            tabstrip.disable(item);
+
+            ok(item.hasClass('t-state-disabled'));
+        });
+
+        test('enable method should enable disabled item', function() {
+            var tabstrip = getTabStrip();
+
+            var item = getRootItem(3);
+
+            tabstrip.enable(item);
+
+            ok(item.hasClass('t-state-default'));
+        });
+
+        test('select method should show content', function() {
+            var tabstrip = getTabStrip();
+
+            var item = getRootItem(5);
+            tabstrip.select(item);
+
+            var content = $(tabstrip.getContentElement(5));
+            setTimeout( function () {
+                ok(item.hasClass('t-state-active'));
+            }, 200);
+        });
+
+        test('getContentElement should return content of seventh tab', function() {
+            var tabstrip = getTabStrip();
+            
+            var expectedContent = $(tabstrip.element).find('> .t-content').eq(1); //second content under Tab-7
+            
+            setTimeout( function () {
+                equal($(tabstrip.getContentElement(6)).index(), expectedContent.index());
+            }, 200);
+        });
+
+        test('getContentElement should not return tab content if passed argument is not number', function() {
+            var tabstrip = getTabStrip();
+
+            equal(tabstrip.getContentElement("a"), undefined);
+        });
+
+        test('getContentElement should not return tab content if passed argument is not in range', function() {
+            var tabstrip = getTabStrip();
+
+            equal(tabstrip.getContentElement(100), undefined);
+        });
+
+        test('getSelectedTab should return current selected tab', function() {
+            var tabstrip = getTabStrip();
+
+            var item = getRootItem(0);
+            tabstrip.select(item);
+
+            setTimeout( function () {
+                equal(tabstrip.getSelectedTabIndex(), $(item).index());
+            }, 200);
+        });
+
+        test('getSelectedTab should return negative if no selected tabs', function() {
+            var tabstrip = getTabStrip();
+            
+            equal(tabstrip.getSelectedTabIndex(), -1);
+        });
+
+        test('click should raise select event and pass corresponding content', function() {
+            argsCheck = true;
+
+            var item = getRootItem(4);
+
+            isRaised = false;
+
+            item.find('> .t-link').trigger('click');
+
+            setTimeout( function () {
+                ok(isRaised);
+            }, 200);
+        });
+
+        test('client object is available in on load', function() {
+            ok(null !== onLoadTabStrip);
+            ok(undefined !== onLoadTabStrip);
+        });
+
+        test('animated text-only content is opened on load', function() {
+            
+            equals($('#TabStrip1 .t-content').css('opacity'), '1');
+        });
+
+    </script>
+
+    <h1 id="qunit-header">kendo.ui.TabStrip Tests</h1>
+    <h2 id="qunit-banner"></h2>
+    <div id="qunit-testrunner-toolbar"></div>
+    <h2 id="qunit-userAgent"></h2>
+    <ol id="qunit-tests"></ol>
+    <div id="qunit-fixture">test markup, will be hidden</div>
+    <ul id="log"></ul>
+</body>
+</html>
