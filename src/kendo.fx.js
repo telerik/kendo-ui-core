@@ -375,7 +375,7 @@
                     element.css('height');
 
                     clone
-                        .css({ position: 'absolute', height: 'auto', overflow: 'hidden', visibility: 'hidden', top: '-10000px' })
+                        .css({ position: 'absolute', height: 'auto', overflow: 'hidden', visibility: 'hidden', top: '-10000px', width: element.parent().innerWidth() })
                         .appendTo(element.parent());
 
                     height = clone.height();

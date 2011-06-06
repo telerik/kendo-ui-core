@@ -29,6 +29,7 @@
             $("#PanelBar1").kendoPanelBar();
             $("#PanelBar2").kendoPanelBar({ animation: { open: { effects: { fadeIn: {}, expandVertical: {} } } } });
             $("#PanelBar3").kendoPanelBar({ animation: { open: { effects: { fadeIn: {}, expandVertical: {} } } }, expandMode: 0 });
+            $("#PanelBar4").kendoPanelBar({ contentUrls: [ 'AjaxView1.html', 'AjaxView2.html', 'AjaxView1.html', 'AjaxView2.html', 'AjaxView1.html' ] });
         });
     </script>
 </head>
@@ -337,6 +338,23 @@
                                                                              src="Icons/mailfolder.gif">My Licenses</span>
                 </li>
             </ul>
+        </li>
+    </ul>
+    <ul class="t-widget t-panelbar t-reset" id="PanelBar4" style="width: 300px; float: left; margin-bottom: 30px;">
+        <li class="t-item t-state-active"><a href="#PanelBar4-1" class="t-link t-header">Pure ASP.NET MVC components<span class="t-icon t-arrow-up t-panelbar-collapse"></span></a>
+            <div style="display:none" id="PanelBar4-1" class="t-content"></div>
+        </li>
+        <li class="t-item t-state-disabled"><a href="#PanelBar4-2" class="t-link t-header">Completely Open Source<span class="t-icon t-arrow-down t-panelbar-expand"></span></a>
+            <div style="display:none" id="PanelBar4-2" class="t-content"></div>
+        </li>
+        <li class="t-item t-state-default"><a href="#PanelBar4-3" class="t-link t-header">Exceptional Performance<span class="t-icon t-arrow-down t-panelbar-expand"></span></a>
+            <div style="display:none" id="PanelBar4-3" class="t-content"></div>
+        </li>
+        <li class="t-item t-state-default"><a href="#PanelBar4-4" class="t-link t-header">Based on jQuery<span class="t-icon t-arrow-down t-panelbar-expand"></span></a>
+            <div style="display:none" id="PanelBar4-4" class="t-content"></div>
+        </li>
+        <li class="t-item t-state-default"><a href="#PanelBar4-5" class="t-link t-header">Wide Cross-browser support<span class="t-icon t-arrow-down t-panelbar-expand"></span></a>
+            <div style="display:none" id="PanelBar4-5" class="t-content"></div>
         </li>
     </ul>
 </body>
