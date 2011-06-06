@@ -269,6 +269,14 @@
                  var dropdownlist = new DropDownList(input, [{text: "foo", value: 1}, {text:2, value:2}]);
                  equal(dropdownlist.text(), "foo");
                  equal(dropdownlist.value(), "1");
+                 });
+
+           test("disabled input rendered with wrapper.t-state-disabled", function() {
+               input.attr("disabled", "disabled").kendoDropDownList();
+
+               var wrapper = input.data("kendoDropDownList").wrapper;
+
+               ok(wrapper.hasClass("t-state-disabled"));
            });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

@@ -6,6 +6,7 @@
         CHANGE = "change",
         LOADING = "t-loading",
         SELECTED = "t-state-selected",
+        DISABLED = "t-state-disabled",
         proxy = $.proxy,
         whiteSpaceRegExp = /^\s*$/;
 
@@ -29,35 +30,23 @@
                 anchor: that.wrapper
             });
 
+            that.popup.bind("open", function() {
+                if (that._current) {
+                    that._scroll(that._current[0]);
+                }
+            });
+
             that._dataAccessors();
 
             that._dataSource();
 
             that.bind([CHANGE], that.options);
 
-            that.wrapper
-                .bind({
-                    keydown: proxy(that._keydown, that),
-                    keypress: function(e) {
-                        setTimeout(function() {
-                            that._word += String.fromCharCode(e.keyCode || e.charCode);
-                            that._search();
-                        });
-                    },
-                    click: function() {
-                        if(!that.ul.children()[0]) {
-                            that.showBusy();
-                            that.dataSource.read();
-                        } else {
-                            that.popup.toggle();
-                        }
-                    },
-                    blur: function() {
-                        that._bluring = setTimeout(function() {
-                            that._blur();
-                        }, 100);
-                    }
-                });
+            if (that.element.prop("disabled")) {
+                that.options.enable = false;
+            }
+
+            that.enable(that.options.enable);
 
             if (that.options.autoBind) {
                 that.showBusy();
@@ -66,12 +55,47 @@
         },
 
         options: {
+            enable: true,
             index: 0,
             autoBind: true,
             delay: 500,
             dataTextField: "text",
             dataValueField: "value",
             height: 200
+        },
+
+        enable: function(enable) {
+            var that = this;
+            if (enable === false) {
+                that.wrapper
+                    .addClass(DISABLED)
+                    .unbind();
+            } else {
+                that.wrapper
+                    .removeClass(DISABLED)
+                    .bind({
+                        keydown: proxy(that._keydown, that),
+                        keypress: function(e) {
+                            setTimeout(function() {
+                                that._word += String.fromCharCode(e.keyCode || e.charCode);
+                                that._search();
+                            });
+                        },
+                        click: function() {
+                            if(!that.ul.children()[0]) {
+                                that.showBusy();
+                                that.dataSource.read();
+                            } else {
+                                that.popup.toggle();
+                            }
+                        },
+                        blur: function() {
+                            that._bluring = setTimeout(function() {
+                                that._blur();
+                            }, 100);
+                        }
+                    });
+            }
         },
 
         close: function() {
