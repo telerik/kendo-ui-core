@@ -85,7 +85,9 @@
                         src = img.attr("src").replace("_s", "").replace(imageSize.suffix,""),
                         loader = $("img.loader"),
                         exifInfo = $(".exifInfo");
+
                     bigPhoto.attr("data-photoid", img.attr("data-photoid"));
+
                     if (loader.length) {
                         loader.remove();
                     } else {
@@ -114,13 +116,14 @@
                             bigPhoto.stop(true, true)
                                 .fadeOut(function() {
                                     if (exifInfo.length && this == exifInfo[0]) {
+                                        var photoid = exifInfo.attr("data-photoid");
                                         exifInfo.find("h2")
                                            .text(img.attr("alt") || "No Title")
                                            .end()
                                            .attr("data-photoid", img.attr("data-photoid"));
                                         exifInfo.css({
                                            display: 'block',
-                                           opacity: 0
+                                           opacity: photoid === img.attr("data-photoid") ? 1 : 0
                                         });
                                     } else {
                                         bigPhoto.attr("src", src);
