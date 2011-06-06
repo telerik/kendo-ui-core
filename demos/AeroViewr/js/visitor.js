@@ -133,6 +133,7 @@
                 $("#flatSearchPhotos").hide();
                 $("#overlay").stop(true, true).fadeIn();
                 $("#exifButton").stop(true, true).fadeOut();
+                $(".bottomLink").text("").data("currentView", "");
 
                 slideshow.init($("#flatSearchPhotos").data("kendoListView"));
                 updatePlayIcon(slideshow._started)
