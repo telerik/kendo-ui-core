@@ -109,7 +109,7 @@
             ok(item.parent().find('.t-icon').hasClass('t-arrow-up'));
         });
 
-        test('clicking should make item active', function() {
+        asyncTest('clicking should make item active', function() {
 
             var item = getRootItem(2);
             
@@ -117,7 +117,8 @@
 
             setTimeout( function () {
                 ok(item.parent().hasClass('t-state-active'));
-            }, 0);
+                start();
+            }, 100);
         });
 
 </script>

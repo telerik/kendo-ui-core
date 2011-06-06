@@ -65,6 +65,9 @@
         <li class="t-item t-state-default"><a class="t-link" href="#TabStrip1-6"><img alt="image" class="t-image"
                                                                                      src="../../playground/Icons/Suites/sitefinity.png">Sitefinity
             ASP.NET CMS</a></li>
+        <li class="t-item t-state-default"><a class="t-link" href="http://www.google.com"><img alt="image" class="t-image"
+                                                                                     src="../../playground/Icons/Suites/sitefinity.png">Sitefinity
+            ASP.NET CMS</a></li>
     </ul>
     <div class="t-content t-state-active" id="TabStrip1-1" style="display: block;">
         <ul>
@@ -149,15 +152,13 @@
         test('clicking item with url should navigate', function() {
             
             var tabstrip = getTabStrip();
-            var $item = $(getRootItem(1));
+            var $item = $(getRootItem(6));
 
             var e = new $.Event('click');
                         
             $item.find('> .t-link').trigger(e);
 
-            setTimeout( function () {
-                ok(!e.isDefaultPrevented());
-            }, 0);
+            ok(!e.isDefaultPrevented());
 
             //stop navigation after assert
             e.preventDefault();
@@ -285,15 +286,13 @@
         test('click should raise select event and pass corresponding content', function() {
             argsCheck = true;
 
-            var item = getRootItem(4);
+            var item = getRootItem(3);
 
             isRaised = false;
 
             item.find('> .t-link').trigger('click');
 
-            setTimeout( function () {
-                ok(isRaised);
-            }, 0);
+            ok(isRaised);
         });
 
         test('client object is available in on load', function() {
