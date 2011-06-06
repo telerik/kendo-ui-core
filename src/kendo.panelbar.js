@@ -40,10 +40,10 @@
 
             that.bind(events, that.options);
 
-            if (this.contentUrls)
+            if (that.options.contentUrls)
                 element.find('> .t-item')
                     .each(function(index, item) {
-                        $(item).find('.t-link').data('ContentUrl', that.contentUrls[index]);
+                        $(item).find('.t-link').data('ContentUrl', that.options.contentUrls[index]);
                     });
 
             if (content.length > 0 && content.is(EMPTY))

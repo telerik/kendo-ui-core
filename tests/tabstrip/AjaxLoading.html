@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.ui.panelbar Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.tabstrip.js"></script>
+        <script type="text/javascript" src="../jquery.mockjax.js"></script>
+        <link rel="stylesheet" href="../qunit.css" />
+        <link type="text/css" href="../../styles/kendo.common.css" rel="stylesheet"/>
+        <link type="text/css" href="../../styles/kendo.vista.css" rel="stylesheet"/>
+
+        <script type="text/javascript">
+
+            var isRaised;
+
+            var argsCheck = false;
+
+            //handlers
+            function Select(e) {
+                if (argsCheck) {
+                    isRaised = !!e.contentElement;
+                    argsCheck = false;
+                } else
+                    isRaised = true;
+            }
+
+            $(document).ready(function() {
+                $("#TabStrip1").kendoTabStrip({ animation: false, select: Select, contentUrls: [ 'AjaxView1.html', 'AjaxView2.html', 'AjaxView1.html', 'AjaxView2.html', 'AjaxView1.html', 'AjaxView2.html' ] });
+            });
+
+        </script>
+
+
+</head>
+<body>
+
+<div class="t-widget t-tabstrip t-header" id="TabStrip1" style="visibility: hidden; position: absolute;">
+    <ul class="t-reset t-tabstrip-items">
+        <li class="t-item t-state-default t-state-active"><a class="t-link" href="#TabStrip1-1"><img alt="image"
+                                                                                                    class="t-image"
+                                                                                                    src="../../playground/Icons/Suites/mvc.png">ASP.NET
+            MVC</a></li>
+        <li class="t-item t-state-disabled"><a class="t-link" href="#TabStrip1-2"><img alt="image" class="t-image"
+                                                                                     src="../../playground/Icons/Suites/sl.png">Silverlight</a>
+        </li>
+        <li class="t-item t-state-default"><a class="t-link" href="#TabStrip1-3"><img alt="image" class="t-image"
+                                                                                     src="../../playground/Icons/Suites/ajax.png">ASP.NET
+            AJAX</a></li>
+        <li class="t-item t-state-default"><a class="t-link" href="#TabStrip1-4"><img alt="image" class="t-image"
+                                                                                     src="../../playground/Icons/Suites/orm.png">OpenAccess
+            ORM</a></li>
+        <li class="t-item t-state-default"><a class="t-link" href="#TabStrip1-5"><img alt="image" class="t-image"
+                                                                                     src="../../playground/Icons/Suites/rep.png">Reporting</a>
+        </li>
+        <li class="t-item t-state-default"><a class="t-link" href="#TabStrip1-6"><img alt="image" class="t-image"
+                                                                                     src="../../playground/Icons/Suites/sitefinity.png">Sitefinity
+            ASP.NET CMS</a></li>
+    </ul>
+    <div class="t-content t-state-active" id="TabStrip1-1" style="display: block;">
+        <ul>
+            <li>Pure ASP.NET MVC components</li>
+            <li>Completely Open Source</li>
+            <li>Exceptional Performance</li>
+
+            <li>Based on jQuery</li>
+            <li>Search Engine Optimized</li>
+            <li>Cross-browser support</li>
+        </ul>
+    </div>
+    <div class="t-content" id="TabStrip1-2"></div>
+    <div class="t-content" id="TabStrip1-3"></div>
+    <div class="t-content" id="TabStrip1-4"></div>
+    <div class="t-content" id="TabStrip1-5"></div>
+    <div class="t-content" id="TabStrip1-6"></div>
+</div>
+
+    <script type="text/javascript">
+
+        function getRootItem(index) {
+            return $('#TabStrip1').find('.t-item').eq(index)
+        }
+
+        function getTabStrip() {
+            return $("#TabStrip1").data("kendoTabStrip");
+        }
+
+        asyncTest('clicking should make clicked item active', function() {
+            var item = getRootItem(2);
+
+            item.find('> .t-link').trigger('click');
+
+            setTimeout(function() {
+                ok(item.hasClass('t-state-active'));
+                start();
+            }, 100);
+        });
+
+        asyncTest('clicking should make all items except clicked unactive', function() {
+            var item = getRootItem(0);
+
+            item.find('> .t-link').trigger('click');
+
+            setTimeout(function() {
+                equal(item.parent().find('.t-state-active').length, 1);
+                start();
+            }, 10);
+        });
+
+//        asyncTest('clicking disabled tab should not navigate', function() {
+//            var tabStrip = getTabStrip().element,
+//                item = getRootItem(1);
+//
+//            var isDefaultPrevented = false,
+//                testHandler = function (e) {
+//                    isDefaultPrevented = e.isDefaultPrevented();
+//                    e.preventDefault();
+//                };
+//
+//            tabStrip.delegate('.t-link', 'click', testHandler);
+//            item.find('> .t-link').trigger('click');
+//            tabStrip.undelegate('.t-link', 'click', testHandler);
+//
+//            setTimeout(function() {
+//                ok(isDefaultPrevented);
+//                start();
+//            }, 100);
+//        });
+//
+        test('ajax content url should be attached to item', function() {
+            var tabStrip = $(getTabStrip().element),
+                item = getRootItem(5);
+
+            equals(item.find('> .t-link').data('ContentUrl'), 'AjaxView2.html');
+        });
+
+    </script>
+
+    <h1 id="qunit-header">kendo.ui.TabStrip Tests</h1>
+    <h2 id="qunit-banner"></h2>
+    <div id="qunit-testrunner-toolbar"></div>
+    <h2 id="qunit-userAgent"></h2>
+    <ol id="qunit-tests"></ol>
+    <div id="qunit-fixture">test markup, will be hidden</div>
+    <ul id="log"></ul>
+</body>
+</html>
