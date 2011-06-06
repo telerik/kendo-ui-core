@@ -5,7 +5,7 @@
         Class = kendo.Class,
         Component = kendo.ui.Component,
         DataSource = kendo.data.DataSource,
-        Template = kendo.template,
+        template = kendo.template,
         extend = $.extend,
         proxy = $.proxy;
 
@@ -1505,7 +1505,7 @@
 
             root.template = SVGRoot.template;
             if (!root.template) {
-                root.template = SVGRoot.template = Template(
+                root.template = SVGRoot.template = template(
                     "<svg xmlns='http://www.w3.org/2000/svg' version='1.1' " +
                     "width='<%= options.width %>' height='<%= options.height %>'>" +
                     "<%= renderContent() %></svg>"
@@ -1525,7 +1525,7 @@
             var group = this;
 
             ViewElement.fn.init.call(group);
-            group.template = Template("<g><%= renderContent() %></g>");
+            group.template = template("<g><%= renderContent() %></g>");
         }
     });
 
@@ -1540,7 +1540,7 @@
             ViewElement.fn.init.call(text);
             text.template = SVGText.template;
             if (!text.template) {
-                text.template = SVGText.template = Template(
+                text.template = SVGText.template = template(
                     "<text x='<%= options.x %>' y='<%= options._baselineY %>' " +
                     "style='font: <%= options.font %>'><%= content %></text>"
                 );
@@ -1571,7 +1571,7 @@
             ViewElement.fn.init.call(path);
             path.template = SVGPath.template;
             if (!path.template) {
-                path.template = SVGPath.template = Template(
+                path.template = SVGPath.template = template(
                     "<path d='<%= renderPoints() %>' " +
                     "stroke='<%= options.stroke %>' stroke-width='<%= options.strokeWidth %>' " +
                     "fill='<%= options.fill %>'></path>"
@@ -1640,7 +1640,7 @@
 
             root.template = VMLRoot.template;
             if (!root.template) {
-                root.template = VMLRoot.template = Template(
+                root.template = VMLRoot.template = template(
                     "<div style='width:<%= options.width %>; height:<%= options.height %>; " +
                     "position: relative;'>" +
                     "<%= renderContent() %></div>"
@@ -1664,7 +1664,7 @@
             ViewElement.fn.init.call(text);
             text.template = VMLText.template;
             if (!text.template) {
-                text.template = VMLText.template = Template(
+                text.template = VMLText.template = template(
                     "<kvml:textbox style='position: absolute; " +
                     "left: <%= options.x %>px; top: <%= options.y %>px; " +
                     "font: <%= options.font %>'><%= content %></kvml:textbox>"
@@ -1686,7 +1686,7 @@
 
             path.template = VMLPath.template;
             if (!path.template) {
-                path.template = VMLPath.template = Template(
+                path.template = VMLPath.template = template(
                     "<kvml:shape style='position:absolute; width:1px; height:1px;' " +
                     "strokecolor='<%= options.stroke %>' " +
                     "strokeweight='<%= options.strokeWidth %>' " +
