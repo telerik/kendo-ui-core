@@ -85,6 +85,15 @@
             test("open should open popup", function () {
                 var dropdownlist = input.kendoDropDownList(data).data("kendoDropDownList");
 
+                dropdownlist._scroll = function() { ok(true); start(); };
+                dropdownlist.open();
+
+                stop(400);
+            });
+
+            test("open should call _scroll method", function () {
+                var dropdownlist = input.kendoDropDownList(data).data("kendoDropDownList");
+
                 dropdownlist.popup.bind("open", function(){
                     ok(true);
                     start();
@@ -156,6 +165,40 @@
 
                 equal(dropdownlist.span.html(), "&nbsp;&nbsp;");
             });
+
+            test('enable(false) should disable dropDownList', function() {
+                var dropdownlist = new DropDownList(input);
+
+                dropdownlist.enable(false);
+
+                ok(dropdownlist.wrapper.hasClass('t-state-disabled'));
+            });
+
+            test('after enable(false) should not open popup', function() {
+                var dropdownlist = input.kendoDropDownList({dataSource: data}).data("kendoDropDownList");
+                    oldOpen = dropdownlist.popup.toggle,
+                    called = false;
+
+                dropdownlist.popup.toggle = function() {called = true};
+
+                dropdownlist.enable(false);
+
+                dropdownlist.wrapper.click();
+
+                ok(!called);
+
+                dropdownlist.popup.toggle = oldOpen;
+            });
+
+            test("enable(true) removes t-state-disabled class", function() {
+                var dropdownlist = new DropDownList(input);
+                dropdownlist.wrapper.addClass('t-state-disabled');
+
+                dropdownlist.enable();
+
+                ok(!dropdownlist.wrapper.hasClass('t-state-disabled'));
+            });
+
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

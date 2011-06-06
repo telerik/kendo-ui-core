@@ -34,7 +34,7 @@
         </style>
     </head>
     <body>
-        dataSource source: ["foo", "bar", "baz"];
+        dataSource source: [{text: "foo", value: 1}, {text:2, value:2}];
         <fieldset>
             <legend>Vanilla input</legend>
             <input />
@@ -63,8 +63,12 @@
             <input id="searchCriteria" value="var" />
         </fieldset>
         <fieldset>
-            <legend>Select with 10000 options</legend>
-            <select  id="bigSelect" />
+            <legend>DropDownList - INPUT - DISABLED </legend>
+            <input  id="disabledDDL" disabled="disabled" />
+        </fieldset>
+        <fieldset>
+            <legend> DropDownList - 10000 items </legend>
+            <select id="bigSelect"></select>
         </fieldset>
         <script type="text/javascript" charset="utf-8">
             $(document).ready(function() {
@@ -107,6 +111,11 @@
 
                 $("#searchCriteria").bind("change", function() {
                     remoteDataSource.read();
+                });
+
+                $("#disabledDDL").kendoDropDownList({
+                    dataSource: [{text: "foo", value: 1}, {text:2, value:2}],
+                    enable: false
                 });
 
                 var options = "";
