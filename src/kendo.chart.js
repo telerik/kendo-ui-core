@@ -1,12 +1,16 @@
 (function ($) {
+
+    // Imports ================================================================
     var kendo = window.kendo,
-        ui = kendo.ui,
         Class = kendo.Class,
-        Component = ui.Component,
+        Component = kendo.ui.Component,
         DataSource = kendo.data.DataSource,
+        Template = kendo.template,
         extend = $.extend,
-        proxy = $.proxy,
-        BASELINE_MARKER_SIZE = 1,
+        proxy = $.proxy;
+
+    // Constants ==============================================================
+    var BASELINE_MARKER_SIZE = 1,
         BAR = "bar",
         BOTTOM = "bottom",
         CENTER = "center",
@@ -27,6 +31,7 @@
         Y = "y",
         ZERO_THRESHOLD = 0.2;
 
+    // Chart ==================================================================
     var Chart = Component.extend({
         init: function(element, options) {
             var chart = this;
@@ -193,7 +198,6 @@
         }
     }
 
-    ui.plugin("Chart", Chart);
 
 
     // **************************
@@ -1501,7 +1505,7 @@
 
             root.template = SVGRoot.template;
             if (!root.template) {
-                root.template = SVGRoot.template = kendo.template(
+                root.template = SVGRoot.template = Template(
                     "<svg xmlns='http://www.w3.org/2000/svg' version='1.1' " +
                     "width='<%= options.width %>' height='<%= options.height %>'>" +
                     "<%= renderContent() %></svg>"
@@ -1521,7 +1525,7 @@
             var group = this;
 
             ViewElement.fn.init.call(group);
-            group.template = kendo.template("<g><%= renderContent() %></g>");
+            group.template = Template("<g><%= renderContent() %></g>");
         }
     });
 
@@ -1536,7 +1540,7 @@
             ViewElement.fn.init.call(text);
             text.template = SVGText.template;
             if (!text.template) {
-                text.template = SVGText.template = kendo.template(
+                text.template = SVGText.template = Template(
                     "<text x='<%= options.x %>' y='<%= options._baselineY %>' " +
                     "style='font: <%= options.font %>'><%= content %></text>"
                 );
@@ -1567,7 +1571,7 @@
             ViewElement.fn.init.call(path);
             path.template = SVGPath.template;
             if (!path.template) {
-                path.template = SVGPath.template = kendo.template(
+                path.template = SVGPath.template = Template(
                     "<path d='<%= renderPoints() %>' " +
                     "stroke='<%= options.stroke %>' stroke-width='<%= options.strokeWidth %>' " +
                     "fill='<%= options.fill %>'></path>"
@@ -1636,7 +1640,7 @@
 
             root.template = VMLRoot.template;
             if (!root.template) {
-                root.template = VMLRoot.template = kendo.template(
+                root.template = VMLRoot.template = Template(
                     "<div style='width:<%= options.width %>; height:<%= options.height %>; " +
                     "position: relative;'>" +
                     "<%= renderContent() %></div>"
@@ -1660,7 +1664,7 @@
             ViewElement.fn.init.call(text);
             text.template = VMLText.template;
             if (!text.template) {
-                text.template = VMLText.template = kendo.template(
+                text.template = VMLText.template = Template(
                     "<kvml:textbox style='position: absolute; " +
                     "left: <%= options.x %>px; top: <%= options.y %>px; " +
                     "font: <%= options.font %>'><%= content %></kvml:textbox>"
@@ -1682,7 +1686,7 @@
 
             path.template = VMLPath.template;
             if (!path.template) {
-                path.template = VMLPath.template = kendo.template(
+                path.template = VMLPath.template = Template(
                     "<kvml:shape style='position:absolute; width:1px; height:1px;' " +
                     "strokecolor='<%= options.stroke %>' " +
                     "strokeweight='<%= options.strokeWidth %>' " +
@@ -1862,7 +1866,9 @@
         return { min: min, max: max };
     }
 
-    // Make the internal functions public for unit testing
+    // Exports ================================================================
+
+    kendo.ui.plugin("Chart", Chart);
 
     Chart.Box = Box;
     Chart.Text = Text;
