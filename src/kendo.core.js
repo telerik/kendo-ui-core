@@ -962,6 +962,36 @@
         return value !== undefined ? value : "";
     }
 
+    function throttle(delay, callback) {
+        var timeout_id,
+            last_call = 0,
+            omit_ending = arguments[2] || false;
+
+        return function () {
+            var that = this,
+                time_span = +new Date() - last_call,
+                args = arguments;
+
+            function execute() {
+                last_call = +new Date();
+                callback.apply(that, args);
+            }
+
+            function clear() {
+                clearTimeout(timeout_id);
+                timeout_id = undefined;
+            }
+
+            timeout_id && clear();
+
+            if (time_span > delay)
+                execute();
+            else
+                if (!omit_ending)
+                    timeout_id = setTimeout( execute, delay - time_span);
+        };
+    }
+
     // feature detection
     (function() {
         var table = document.createElement("table");
@@ -1245,6 +1275,7 @@
         },
         support: support,
         animate: animate,
+        throttle: throttle,
         Observable: Observable,
         Class: Class,
         Template: Template,
