@@ -364,6 +364,22 @@
 
                 stop(1000);
             });
+
+            test("update possition of the popup on window.onresize", function() {
+                var popup = new Popup(div, {
+                    toggleTarget: document.body
+                }),
+                updatePosition = popup._updatePosition,
+                called = false;
+
+                popup._updatePosition = function() { called = true; };
+
+                $(window).trigger("resize");
+
+                ok(called);
+
+                popup._updatePosition = updatePosition;
+            });
         </script>
     </body>
 </html>

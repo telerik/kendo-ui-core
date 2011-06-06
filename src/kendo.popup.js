@@ -96,6 +96,10 @@
 
             $(document.documentElement).mousedown(proxy(that._mousedown, that));
 
+            $(window).bind("resize", function() {
+                that._updatePosition();
+            });
+
             if (options.toggleTarget) {
                 $(options.toggleTarget).bind(options.toggleEvent, proxy(that.toggle, that));
             }
@@ -121,8 +125,7 @@
                 options = that.options;
 
             if (!that.visible()) {
-                align(that.element, $(options.anchor), options.origin, options.position);
-
+                that._updatePosition();
                 that.element.kendoStop().kendoAnimate(options.animation.open);
             }
         },
@@ -150,6 +153,12 @@
             if (!contains(container, target) && (!toggleTarget || !contains($(toggleTarget)[0], target))) {
                 that.close();
             }
+        },
+        _updatePosition: function() {
+            var that = this,
+                options = that.options;
+
+            align(that.element, $(options.anchor), options.origin, options.position);
         }
     });
 
