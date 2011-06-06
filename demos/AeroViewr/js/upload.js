@@ -6,7 +6,8 @@
                     '<span class="p-icon i-set t-add"></span> browse<input type="file" name="photo" id="photosUpload" /></div></div>' +
                     '</div>' +
                     '<div id="msgContainer" style="display:none"><h1 class="uploadTitle"></h1></div>',
-        flickr = window.flickr;
+        flickr = window.flickr,
+        contains = $.contains;
 
     function Upload(element) {
         this.element = $(element);
@@ -18,19 +19,20 @@
             var that = this,
                 element = that.element,
                 exifButton = $("#exifButton"),
-                handler = function(e) {
-                    if(!$.contains(that.element[0], e.target)) {
-                        $(document).unbind("mousedown touchstart", handler);
-                        that.hide();
-                    }
-                };
-            $(document).bind("mousedown touchstart", handler);
+                isAuth = flickr.isAuthenticated();
+
+            $(document).one("mousedown touchstart", function(e) {
+                var target = e.target;
+                if(!contains($("#uploadphotos")[0], target) && !contains(element[0], target)) {
+                    that.hide();
+                }
+            });
 
             this.exifVisible = exifButton.is(":visible");
             exifButton.fadeOut();
 
             element.empty()
-                    .html(flickr.isAuthenticated() ? authContent : nonAuthContent)
+                    .html(isAuth ? authContent : nonAuthContent)
                     .find("#photosUpload").kendoUpload({
                             showFileList: false,
                             multiple: true,
@@ -65,7 +67,7 @@
                     })
                     .fadeIn();
 
-            if (!$("#photosUpload").data("kendoUpload")._supportsDrop()) {
+            if (isAuth && !$("#photosUpload").data("kendoUpload")._supportsDrop()) {
                 element.find(".uploadTitle")
                        .html("Drag &amp; Drop is supported only in Chrome, Firefox 4.0 +, Safari (Mac OS only)")
                        .next()
