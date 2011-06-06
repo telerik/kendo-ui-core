@@ -39,7 +39,7 @@
         }
 
         $(document).ready(function() {
-            $("#PanelBar1").kendoPanelBar();
+            $("#PanelBar1").kendoPanelBar({ animation: false, expandMode: 0 });
         });
 
    </script>
@@ -47,7 +47,7 @@
 </head>
 <body>
 
-<ul class="t-widget t-panelbar t-reset" id="PanelBar1" style="width: 300px; float: left; margin-bottom: 30px; z-index: 100; visibility: hidden; position: absolute;">
+<ul class="t-widget t-panelbar t-reset" id="PanelBar1" style="width: 300px; float: left; margin-bottom: 30px; z-index: 100; position: absolute; visibility: hidden;">
     <li class="t-item t-state-default"><span class="t-link t-header"><img alt="Mail Icon" class="t-image"
                                                                           src="../../playground/Icons/mail.gif">Mail<span
             class="t-icon t-arrow-down t-panelbar-expand"></span></span>
@@ -154,7 +154,7 @@
 
         test('clicking second item should collapse other', function() {
 
-            var item = getRootItem(0);
+            var item = getRootItem(3);
             var item2 = getRootItem(2);
 
             item2.find('> .t-link').trigger('click');
@@ -174,7 +174,7 @@
 
         test('clicking subItem should not collapse headerItem', function() {
 
-            var item = getRootItem(3);
+            var item = getRootItem(0);
             var subItem = item.find('> .t-group').children()[0];
 
             $(subItem).find('> .t-link').trigger('click');
@@ -184,7 +184,7 @@
 
         test('clicking not expandable item should not collapse expanded item', function() {
 
-            var item = getRootItem(3);
+            var item = getRootItem(0);
             var item2 = getRootItem(1);
 
             item2.find('> .t-link').trigger('click');

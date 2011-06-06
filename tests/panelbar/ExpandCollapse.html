@@ -45,7 +45,7 @@
         }
 
         $(document).ready(function() {
-            $("#PanelBar1").kendoPanelBar();
+            $("#PanelBar1").kendoPanelBar({ animation: false });
         });
 
     </script>
@@ -176,7 +176,7 @@
 
     test("clicking collapsed item not expand if it is disabled", function() {
 
-        var item = getRootItem(0);
+        var item = getRootItem(1);
 
         item
                 .toggleClass("t-state-default", false)
@@ -188,7 +188,7 @@
     });
 
     test("clicking expanded items should toggle arrow", function() {
-        var item = getRootItem(0);
+        var item = getRootItem(3);
 
         item.find("> .t-link").trigger("click");
 
@@ -196,7 +196,7 @@
     });
 
     test("clicking collapsed items should expand them", function() {
-        var item = getRootItem(3);
+        var item = getRootItem(2);
 
         item.find("> .t-link").trigger("click");
 
@@ -204,7 +204,7 @@
     });
 
     test("clicking collapsed items should toggle arrow", function() {
-        var item = getRootItem(2);
+        var item = getRootItem(0);
 
         item.find("> .t-link").trigger("click");
 
@@ -228,7 +228,7 @@
     });
 
     test("clicking arrows toggles child groups", function() {
-        var item = getRootItem(4);
+        var item = getRootItem(3);
 
         item.find("> .t-link > .t-icon").trigger("click");
 

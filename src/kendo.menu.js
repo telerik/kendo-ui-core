@@ -30,6 +30,9 @@
             element = $(element);
             var that = this;
 
+            if (options && ('animation' in options) && !options.animation)
+                options.animation = { open: { effects: {} }, close: { effects: {} } }; // No animation
+            
             Component.fn.init.call(that, element, options);
 
             options = that.options;

@@ -18,5 +18,9 @@ tests.push(
     {
         page: "panelbar/SingleExpandCollapse.html",
         title: "panelbar single expand/collapse"
+    },
+    {
+        page: "panelbar/AjaxLoading.html",
+        title: "panelbar ajax loading"
     }
 );

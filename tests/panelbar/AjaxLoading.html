@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.ui.panelbar Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.panelbar.js"></script>
+        <script type="text/javascript" src="../jquery.mockjax.js"></script>
+        <link rel="stylesheet" href="../qunit.css" />
+        <link type="text/css" href="../../styles/kendo.common.css" rel="stylesheet"/>
+        <link type="text/css" href="../../styles/kendo.vista.css" rel="stylesheet"/>
+        <style type="text/css">
+            html
+            {
+                font-size: 12px;
+            }
+        </style>
+
+   <script type="text/javascript">
+
+       var isRaised, isExpandRaised, isCollapseRaised, isSelectRaised;
+
+        function getRootItem(index) {
+			return $('#PanelBar1').find('.t-header').parent().eq(index).children('.t-link');
+        }
+
+        function getPanelBar() {
+            return $("#PanelBar1").data("kendoPanelBar");
+        }
+
+        //handlers
+        function Expand(sender, args) {
+            isExpandRaised = true;
+        }
+
+        function Collapse(sender, args) {
+            isCollapseRaised = true;
+        }
+
+        function Select(sender, args) {
+            isSelectRaised = true;
+        }
+
+       $(document).ready(function() {
+           $("#PanelBar1").kendoPanelBar({ animation: false });
+       });
+
+   </script>
+
+</head>
+<body>
+
+<ul class="t-widget t-panelbar t-reset" id="PanelBar1" style="width: 300px; float: left; margin-bottom: 30px; visibility: hidden; position: absolute;">
+    <!--visibility: hidden; position: absolute;-->
+    <li class="t-item t-state-default"><a href="#PanelBar-1" class="t-link t-header">Pure ASP.NET MVC components<span class="t-icon t-arrow-up t-panelbar-collapse"></span></a>
+        <div id="PanelBar-1" class="t-content">
+        <p> Telerik Extensions for ASP.NET MVC is built from the ground up to fully embrace the values of the ASP.NET MVC framework - lightweight rendering, clean HTML, clear separation of concerns, easy testability - while helping make you more productive building MVC views. </p>        </div>
+    </li>
+    <li class="t-item t-state-disabled"><a href="AjaxView1.html" class="t-link t-header">Completely Open Source<span class="t-icon t-arrow-down t-panelbar-expand"></span></a>
+        <div style="display:none" id="PanelBar-2" class="t-content"></div>
+    </li>
+    <li class="t-item t-state-default"><a href="AjaxView2.html" class="t-link t-header">Exceptional Performance<span class="t-icon t-arrow-down t-panelbar-expand"></span></a>
+        <div style="display:none" id="PanelBar-3" class="t-content"></div>
+    </li>
+    <li class="t-item t-state-default"><a href="AjaxView1.html" class="t-link t-header">Based on jQuery<span class="t-icon t-arrow-down t-panelbar-expand"></span></a>
+        <div style="display:none" id="PanelBar-4" class="t-content"></div>
+    </li>
+    <li class="t-item t-state-default"><a href="AjaxView2.html" class="t-link t-header">Wide Cross-browser support<span class="t-icon t-arrow-down t-panelbar-expand"></span></a>
+        <div style="display:none" id="PanelBar-5" class="t-content"></div>
+    </li>
+</ul>
+
+<script type="text/javascript">
+
+
+        test('clicking expanded content items should collapse them', function() {
+        
+            var item = getRootItem(0);
+
+            item.trigger('click');
+
+            equal(item.parent().find('.t-content').css("display"), 'none');
+        });
+
+        test('clicking collapsed content items should expand them', function() {
+            var item = getRootItem(0);
+
+            item.trigger('click');
+
+            equal(item.parent().find('.t-content').css("display"), "block");
+        });
+
+        test('clicking expanded content items should toggle arrow', function() {
+            var item = getRootItem(0);
+
+            item.trigger('click');
+
+            ok(item.find('.t-icon').hasClass('t-arrow-down'));
+        });
+
+        test('clicking collapsed content items should toggle arrow', function() {
+            var item = getRootItem(0);
+
+            item.trigger('click');
+
+            ok(item.parent().find('.t-icon').hasClass('t-arrow-up'));
+        });
+
+        test('clicking should make item active', function() {
+
+            var item = getRootItem(2);
+            
+            item.trigger('click');
+
+            setTimeout( function () {
+                ok(item.parent().hasClass('t-state-active'));
+            }, 0);
+        });
+
+</script>
+
+<h1 id="qunit-header">kendo.ui.PanelBar Tests</h1>
+<h2 id="qunit-banner"></h2>
+<div id="qunit-testrunner-toolbar"></div>
+<h2 id="qunit-userAgent"></h2>
+<ol id="qunit-tests"></ol>
+<div id="qunit-fixture">test markup, will be hidden</div>
+<ul id="log"></ul>
+</body>
+</html>
