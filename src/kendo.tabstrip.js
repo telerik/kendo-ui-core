@@ -35,10 +35,10 @@
 
             that.bind(events, that.options);
 
-            if (that.contentUrls)
+            if (that.options.contentUrls)
                 element.find('.t-tabstrip-items > .t-item')
                     .each(function(index, item) {
-                        $(item).find('.t-link').data('ContentUrl', that.contentUrls[index]);
+                        $(item).find('>.t-link').data('ContentUrl', that.options.contentUrls[index]);
                     });
 
             var selectedItems = element.find('li.t-state-active'),
