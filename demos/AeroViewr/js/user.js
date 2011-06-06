@@ -11,6 +11,8 @@
         photosInSet = false,
         searching = false,
         sliderValue = 0,
+        loading = $("<div id='searchLoading' class='loading'>Loading ...</div>"),
+        noimages = $("<div id='noimages' class='loading'>No images</div>"),
         defaultDeserializer = {
             data: function(result) {
                 if(photosInSet) {
@@ -108,9 +110,11 @@
     function search() {
         if ($("#searchBox").val() && !searching) {
             slideshow.stop();
-            updatePlayIcon(slideshow._started);
+            updatePlayIcon(slideshow._started)
+                .add("#uploadphotos").hide();
 
             searching = true;
+            noimages.remove();
             $("#flatSetsStrip").hide();
             $("#flatPhotoStrip").hide();
             $("#overlay").fadeIn();
@@ -123,7 +127,7 @@
                 setPhotosDataSource.transport.options.read.jsonpCallback = "searchPhotos";
             }
 
-            $("#overlay").after("<div id='searchLoading' class='loading'>Loading ...</div>");
+            $("#overlay").after(loading);
 
             updatePageSize();
         }
@@ -232,9 +236,16 @@
                     showSelectedPhoto(this);
                 },
                 dataBound: function () {
+                    loading.remove();
                     if (searching){
-                        $("#mainUserWrap").show();
                         searching = false;
+                        if (!setPhotosDataSource.view()[0]) {
+                            $("#overlay").after(noimages);
+                            $("#mainUserWrap").hide();
+                        } else {
+                            noimages.remove();
+                            $("#mainUserWrap").show();
+                        }
                     }
                     if (!that._isSliderInit) {
                         that._isSliderInit = true;
@@ -260,7 +271,7 @@
                     showSelectedPhoto(this);
                 },
                 dataBound: function() {
-                    $("#searchLoading").remove();
+                    loading.remove();
                     displayImages(this.element);
                 }
             }).hide();
@@ -439,7 +450,8 @@
 
                 slideshow.stop();
 
-                updatePlayIcon(slideshow._started);
+                updatePlayIcon(slideshow._started)
+                    .add("#uploadphotos").show();
 
                 if (state == "slideshow" || state == "searchresult") {
                     $("#flatPhotoStrip").hide();
@@ -448,6 +460,7 @@
                     $("#overlay").stop(true, true).fadeIn();
                     $("#exifButton").stop(true, true).fadeOut();
                     changeState("initial");
+                    noimages.remove();
                 }
             })
             .data("state", "intial")

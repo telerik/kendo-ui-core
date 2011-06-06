@@ -7,6 +7,8 @@
         searching = false,
         sliderValue = 0,
         data = window.data,
+        loading = $("<div id='searchLoading' class='loading'>Loading ...</div>"),
+        noimages = $("<div id='noimages' class='loading'>No images</div>"),
         dataSource = data.dataSource({
             pageSize: computePageSize(120, true),
             serverSorting: true,
@@ -128,7 +130,8 @@
 
                 searching = true;
 
-                $("#overlay").after("<div id='searchLoading' class='loading'>Loading ...</div>");
+                noimages.remove();
+                $("#overlay").after(loading);
                 $("#flatMostPopularPhotos").hide();
                 $("#flatSearchPhotos").hide();
                 $("#overlay").stop(true, true).fadeIn();
@@ -189,20 +192,29 @@
                 dataSource: dataSource,
                 template: template(imageSize),
                 dataBound: function() {
+                    loading.remove();
                     if (searching){
-                        $("#mainTemplate").show();
                         searching = false;
+                        if (!dataSource.view()[0]) {
+                            $("#overlay").after(noimages);
+                            $("#mainTemplate").hide();
+                        } else {
+                            noimages.remove();
+                            $("#mainTemplate").show();
+                        }
                     }
+
                     if (!that._isSliderInit) {
                         that._isSliderInit = true;
                         that.initSlider();
                     }
 
                     var backButton = $(".bottomLink");
-                    if (backButton.data("currentView") != 'flatMostPopularPhotos')
+                    if (backButton.data("currentView") != 'flatMostPopularPhotos') {
                         backButton.text("Back to most popular").data("currentView", "mainTemplate");
+                    }
+
                     displayImages(this.element);
-                    $("#searchLoading").remove();
                 },
                 change: function() {
                     showSelectedPhoto(this);
@@ -240,15 +252,21 @@
                     view = element.data("currentView");
 
                 if (view === "flatMostPopularPhotos") {
+                    if (!dataSource.view()[0]) {
+                        $("#overlay").after(noimages);
+                    } else {
+                        $("#mainTemplate").show();
+                    }
+
                     element.data("currentView", "mainTemplate");
                     $("#flatSearchPhotos").hide();
-                    $("#mainTemplate").show();
                     $("#flatMostPopularPhotos").hide();
                     $(".i-tileview").click();
                     $("#viewslideshow, #uploadphotos").stop(true, true).fadeOut();
                     element.text("Back to most popular");
                     slideshow.init($("#flatSearchPhotos").data("kendoListView"));
                 } else if (view === "mainTemplate"){
+                    noimages.remove();
                     element.data("currentView", "flatMostPopularPhotos");
                     $("#flatSearchPhotos").hide();
                     $("#mainTemplate").hide();
@@ -260,8 +278,7 @@
                     slideshow.init($("#flatMostPopularPhotos").data("kendoListView"));
                 }
 
-                updatePlayIcon(slideshow._started)
-                    .add("#uploadphotos").stop(true, true).fadeIn();
+               updatePlayIcon(slideshow._started);
             });
 
             that.thumbList.append($("#flatSearchPhotos"));
