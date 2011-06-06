@@ -112,7 +112,7 @@
                 });
             }
 
-            that._storeLastLocation = $.throttle(20, function(location) {
+            that._storeLastLocation = kendo.throttle(20, function(location) {
 
                 var dX = that.lastLocation.x - location.x, dY = that.lastLocation.y - location.y,
                     newDirection = { x: dX/Math.abs(dX) || 0, y: dY/Math.abs(dY) || 0 },
@@ -137,7 +137,7 @@
 
             });
 
-            that._throttleCSS = function ( location ) {
+            that._applyCSS = function ( location ) {
                 var position = { x: 0, y: 0 },
                     offset = 0,
                     delta = 0,
@@ -381,7 +381,7 @@
             var currentLocation = touchLocation(e);
             if (currentLocation.idx != that.start.idx) return;
 
-            that._throttleCSS( currentLocation );
+            that._applyCSS( currentLocation );
             that._storeLastLocation( currentLocation );
         },
 
@@ -501,7 +501,7 @@
                 that.destination = { x: -x, y: -y, duration: duration };
                 that.timeoutId = setTimeout(that._stepScrollProxy, that.framerate);
             } else
-                that._throttleCSS({ x: -x, y: -y });
+                that._applyCSS({ x: -x, y: -y });
         },
 
         _stepScrollAnimation: function () {
@@ -517,7 +517,7 @@
                     y: -(-that.source.y - that.destination.y) / timeFactor
                 };
 
-                that._throttleCSS( that.bounceLocation );
+                that._applyCSS( that.bounceLocation );
             }
 
             if (timeDelta < that.destination.duration) {
@@ -538,7 +538,7 @@
             if (duration) {
                 that._startKinetikAnimation(that.bounceLocation.x - x, that.bounceLocation.y - y, duration / that.options.acceleration);
             } else
-                that._throttleCSS({ x: that.bounceLocation.x - x, y: that.bounceLocation.y - y });
+                that._applyCSS({ x: that.bounceLocation.x - x, y: that.bounceLocation.y - y });
         },
 
         _decelerate: function ( axis, scrollOffset, minBounce, maxBounce ) {
@@ -583,7 +583,7 @@
 
             if (that._singleStep()) return;
 
-            that._throttleCSS( that.bounceLocation );
+            that._applyCSS( that.bounceLocation );
 
             that.timeoutId = setTimeout( that._stepKinetikProxy, that.framerate );
             that.lastCall = now;
@@ -598,36 +598,6 @@
             that._hideScrollHints();
         }
     });
-
-    $.throttle = function(delay, callback) {
-        var timeout_id,
-            last_call = 0,
-            omit_ending = arguments[2] || false;
-
-        return function () {
-            var that = this,
-                time_span = +new Date() - last_call,
-                args = arguments;
-
-            function execute() {
-                last_call = +new Date();
-                callback.apply(that, args);
-            }
-
-            function clear() {
-                clearTimeout(timeout_id);
-                timeout_id = undefined;
-            }
-
-            timeout_id && clear();
-
-            if (time_span > delay)
-                execute();
-            else
-                if (!omit_ending)
-                    timeout_id = setTimeout( execute, delay - time_span);
-        };
-    };
 
     function fireFakeMouseEvent(eventName, event) {
         var evt = document.createEvent("MouseEvents");
