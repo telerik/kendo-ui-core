@@ -707,6 +707,21 @@
 
                 ok(result);
             });
+
+            test("aggregate max returns max value for a given field", function() {
+                var data = [ {foo: 100, bar: "baz"} , {foo: 100, bar: "bar"} , {foo: 1, bar: "baz"} ];
+
+                var result = new Query(data).aggregate( [{ field: "foo", aggregate: "max" }] );
+
+                equal(result.foo.max, 100);
+            });
+            test("aggregate min returns min value for a given field", function() {
+                var data = [ {foo: 100, bar: "baz"} , {foo: 100, bar: "bar"} , {foo: 1, bar: "baz"} ];
+
+                var result = new Query(data).aggregate( [{ field: "foo", aggregate: "min" }] );
+
+                equal(result.foo.min, 1);
+            });
         </script>
     </body>
 </html>
