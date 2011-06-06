@@ -190,16 +190,15 @@ if (!isInferiorBrowser) {
         }
 
         user.initUpload();
+        flickr.auth = {
+            frob: "72157626774687777-cddfbcde2664feee-60630644",
+            fullname: "",
+            nsid: "60635984@N05",
+            token: "72157626632150263-7e442ac9f7d6f68a",
+            username: "Georgi Krustev"
+        }
 
-        flickr.authenticate(function(authenticated) {
-           if (authenticated) {
-                user.initUser();
-            } else {
-              $('#userInfo').hide();
-              $('#signin').fadeIn();
-              visitor.initVisitor();
-            }
-        });
+        user.initUser();
 
         if (kendo.support.touch) {
             $('#uploadphotos').hide();
