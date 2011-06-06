@@ -271,36 +271,47 @@
             var predicate = Filter.create(Query.expandFilter(expressions));
             return new Query(predicate(this.data));
         },
-        group: function(descriptors) {
-            var idx, len,
-                result = new Query(this.data), descriptor;
+        group: function(descriptors, allData) {
+            descriptors = descriptors || [];
+            allData = allData || this.data;
 
-            for(idx = 0, len = descriptors.length; idx < len; idx++) {
-                descriptor = descriptors[idx];
-                if(idx > 0) {
+            var that = this,
+                result = new Query(that.data),
+                descriptor;
+
+            if (descriptors.length > 0) {
+                descriptor = descriptors[0];
+                result = result.groupBy(descriptors[0]);
+
+                if(descriptors.length > 0) {
                     result = result.select(function(group) {
                         return {
                             field: group.field,
                             value: group.value,
-                            items: new Query(group.items).group([descriptor]).toArray()
+                            items: new Query(group.items).group(descriptors.slice(1)).toArray(),
+                            aggregates: new Query(allData).filter([ { field: group.field, operator: "eq", value: group.value } ]).aggregate(descriptor.aggregates)
                         }
                     });
-                } else {
-                    result = result.groupBy(descriptor);
                 }
             }
             return result;
         },
         groupBy: function(descriptor) {
+            if ($.isEmptyObject(descriptor)) {
+                return new Query(result);
+            }
+
             var field = descriptor.field,
                 sorted = this.sort(field, descriptor.dir || "asc").toArray(),
                 accessor = kendo.accessor(field),
                 item,
                 groupValue = accessor.get(sorted[0], field),
+                aggregate = {},
                 group = {
                     field: field,
                     value: groupValue,
-                    items: []
+                    items: [],
+                    aggregates: aggregate
                 },
                 currentValue,
                 idx,
@@ -312,18 +323,53 @@
                 currentValue = accessor.get(item, field);
                 if(groupValue !== currentValue) {
                     groupValue = currentValue;
+                    aggregate = {};
                     group = {
                         field: field,
                         value: groupValue,
-                        items: []
+                        items: [],
+                        aggregates: aggregate
                     };
                     result.push(group);
                 }
+                calculateAggregate(aggregate, descriptor.aggregates, item);
                 group.items.push(item);
             }
             return new Query(result);
+        },
+        aggregate: function (aggregates) {
+            var idx,
+                len,
+                result = {};
+
+            for(idx = 0, len = this.data.length; idx < len; idx++) {
+               calculateAggregate(result, aggregates, this.data[idx]);
+            }
+            return result;
         }
     }
+    function calculateAggregate(accumulator, aggregates, item) {
+            aggregates = aggregates || [];
+            var idx,
+                aggr,
+                fieldAccumulator,
+                len = aggregates.length;
 
+            for (idx = 0; idx < len; idx++) {
+                aggr = aggregates[idx];
+                var field = aggr.field;
+                accumulator[field] = accumulator[field] || {};
+                accumulator[field][aggr.aggregate] = functions[aggr.aggregate](accumulator[field][aggr.aggregate] || 0, item, kendo.accessor(field) );
+            }
+        }
+
+    var functions = {
+        sum: function(accumulator, item, accessor) {
+            return accumulator += accessor.get(item);
+        },
+        count: function(accumulator, item, accessor) {
+            return ++accumulator;
+        }
+    };
     kendo.data.Query = Query;
 })(jQuery);

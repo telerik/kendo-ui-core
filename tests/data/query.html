@@ -539,6 +539,14 @@
                 equal(result[1].field, "field");
                 equal(result[1].items.length, 2);
             });
+
+            test("groupby returns ungroup collection if no descriptors are provided", function() {
+                var data = [ {field: 100} , {field: 100} , {field: 1} ];
+
+                var result = new Query(data).group( ).toArray();
+                equal(result, data);
+            });
+
             test("groupby groups data by field and direction", function() {
                 var data = [ {field: 100} , {field: 100} , {field: 1} ];
 
@@ -581,6 +589,123 @@
                 equal(secondGroup.items[1].value, "baz");
                 equal(secondGroup.items[1].field, "bar");
                 equal(secondGroup.items[1].items.length, 1);
+            });
+
+            test("groupby groups data by multiple fields with 3 levels", function() {
+                var data = [ {foo: 100, bar: "baz", baz: "baz"} , {foo: 100, bar: "bar", baz: "baz"} , {foo: 1, bar: "baz", baz: "baz"} ],
+                    firstGroup,
+                    secondGroup;
+
+                var result = new Query(data).group( [{ field: "foo" }, { field: "bar" },{ field: "baz" }]).toArray();
+                equal(result.length, 2);
+                firstGroup = result[0];
+                secondGroup = result[1];
+
+                equal(firstGroup.value, 1);
+                equal(firstGroup.field, "foo");
+                equal(firstGroup.items.length, 1);
+                equal(firstGroup.items[0].value, "baz");
+                equal(firstGroup.items[0].field, "bar");
+                equal(firstGroup.items[0].items.length, 1);
+
+                equal(firstGroup.value, 1);
+                equal(firstGroup.field, "foo");
+                equal(firstGroup.items.length, 1);
+                equal(firstGroup.items[0].items[0].value, "baz");
+                equal(firstGroup.items[0].items[0].field, "baz");
+                equal(firstGroup.items[0].items[0].items.length, 1);
+
+                equal(secondGroup.value, 100);
+                equal(secondGroup.field, "foo");
+                equal(secondGroup.items.length, 2);
+
+                equal(secondGroup.items[0].value, "bar");
+                equal(secondGroup.items[0].field, "bar");
+                equal(secondGroup.items[0].items.length, 1);
+                equal(secondGroup.items[1].value, "baz");
+                equal(secondGroup.items[1].field, "bar");
+                equal(secondGroup.items[1].items.length, 1);
+
+            });
+
+            test("group aggregates are calculated if provided", function() {
+                var data = [ {foo: 100, bar: "baz"} , {foo: 100, bar: "bar"} , {foo: 1, bar: "baz"} ];
+
+                var result = new Query(data).group( [{ field: "foo", aggregates: [{ field: "foo", aggregate: "sum" }] }]).toArray();
+
+                equal(result.length, 2);
+
+                equal(result[0].aggregates["foo"].sum, 1);
+                equal(result[1].aggregates["foo"].sum, 200);
+            });
+
+            test("group aggregates are calculated  for multiple fields if provided", function() {
+                var data = [ {foo: 100, bar: "baz"} , {foo: 100, bar: "bar"} , {foo: 1, bar: "baz"} ];
+
+                var result = new Query(data).group( [{ field: "foo", aggregates: [{ field: "foo", aggregate: "sum" }, { field: "bar", aggregate: "count" }] }]).toArray();
+
+                equal(result.length, 2);
+
+                equal(result[0].aggregates["foo"].sum, 1);
+                equal(result[1].aggregates["foo"].sum, 200);
+                equal(result[0].aggregates["bar"].count, 1);
+                equal(result[1].aggregates["bar"].count, 2);
+            });
+
+            test("group aggregates are calculated for multiple group levels", function() {
+                var data = [ {foo: 100, bar: "baz"} , {foo: 100, bar: "bar"} , {foo: 1, bar: "baz"} ];
+
+                var result = new Query(data).group( [
+                    { field: "foo", aggregates: [{ field: "foo", aggregate: "sum" }] },
+                    { field: "bar", aggregates: [{ field: "foo", aggregate: "sum" }]}
+                ]).toArray();
+
+                equal(result.length, 2);
+
+                equal(result[0].aggregates["foo"].sum, 1);
+                equal(result[0].items[0].aggregates["foo"].sum, 1);
+                equal(result[1].aggregates["foo"].sum, 200);
+                equal(result[1].items[0].aggregates["foo"].sum, 100);
+                equal(result[1].items[1].aggregates["foo"].sum, 100);
+            });
+
+            test("group aggregates with multiple group levels and paging original data is required", function() {
+                var data = [ {foo: 100, bar: "baz"} , {foo: 100, bar: "bar"} , {foo: 1, bar: "baz"} ];
+
+                var result = new Query(data).skip(1).take(1).group( [
+                    { field: "foo", aggregates: [{ field: "foo", aggregate: "sum" }] },
+                    { field: "bar", aggregates: [{ field: "foo", aggregate: "sum" }]}
+                ], data).toArray();
+
+                equal(result.length, 1);
+
+                equal(result[0].aggregates["foo"].sum, 200);
+                equal(result[0].items[0].aggregates["foo"].sum, 100);
+            });
+
+            test("aggregate calculates aggregates for a collection", function() {
+                var data = [ {foo: 100, bar: "baz"} , {foo: 100, bar: "bar"} , {foo: 1, bar: "baz"} ];
+
+                var result = new Query(data).aggregate( [{ field: "foo", aggregate: "sum" }, { field: "bar", aggregate: "count" }] );
+
+                equal(result.foo.sum, 201);
+                equal(result.bar.count, 3);
+            });
+
+            test("aggregate returns empty object if no descriptor are provided", function() {
+                var data = [ {foo: 100, bar: "baz"} , {foo: 100, bar: "bar"} , {foo: 1, bar: "baz"} ];
+
+                var result = new Query(data).aggregate();
+
+                ok(result);
+            });
+
+            test("aggregate returns empty object if collection is empty", function() {
+                var data = [ ];
+
+                var result = new Query(data).aggregate([{ field: "foo", aggregate: "sum" }, { field: "bar", aggregate: "count" }]);
+
+                ok(result);
             });
         </script>
     </body>
