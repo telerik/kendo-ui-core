@@ -359,16 +359,32 @@
                 aggr = aggregates[idx];
                 var field = aggr.field;
                 accumulator[field] = accumulator[field] || {};
-                accumulator[field][aggr.aggregate] = functions[aggr.aggregate](accumulator[field][aggr.aggregate] || 0, item, kendo.accessor(field) );
+                accumulator[field][aggr.aggregate] = functions[aggr.aggregate](accumulator[field][aggr.aggregate], item, kendo.accessor(field) );
             }
         }
 
     var functions = {
         sum: function(accumulator, item, accessor) {
-            return accumulator += accessor.get(item);
+            return accumulator = (accumulator || 0) + accessor.get(item);
         },
         count: function(accumulator, item, accessor) {
-            return ++accumulator;
+            return (accumulator || 0) + 1;
+        },
+        max: function(accumulator, item, accessor) {
+            var accumulator =  (accumulator || 0),
+                value = accessor.get(item);
+            if(accumulator < value) {
+                accumulator = value;
+            }
+            return accumulator;
+        },
+        min: function(accumulator, item, accessor) {
+            var value = accessor.get(item),
+                accumulator = (accumulator || value)
+            if(accumulator > value) {
+                accumulator = value;
+            }
+            return accumulator;
         }
     };
     kendo.data.Query = Query;
