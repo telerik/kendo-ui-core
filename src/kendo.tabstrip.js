@@ -21,6 +21,9 @@
             var that = this;
             that.contentElements = element.find('> .t-content');
 
+            if (options && ('animation' in options) && !options.animation)
+                options.animation = { open: { effects: {} }, close: { effects: {} } }; // No animation
+            
             Component.fn.init.call(that, element, options);
 
             options = that.options;
@@ -128,7 +131,7 @@
 
         activateTab: function (item) {
             var that = this,
-                hasCloseAnimation = 'effects' in that.options.animation.close,
+                hasCloseAnimation = that.options.animation.close && 'effects' in that.options.animation.close,
                 closeAnimation = hasCloseAnimation ?
                                        that.options.animation.close :
                                        extend( extend({ reverse: true }, that.options.animation.open), { show: false, hide: true }),

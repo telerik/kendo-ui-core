@@ -35,7 +35,7 @@
             }
             
             $(document).ready(function() {
-                $("#TabStrip1").kendoTabStrip({ select: Select });
+                $("#TabStrip1").kendoTabStrip({ animation: false, select: Select });
             });
 
         </script>
@@ -153,11 +153,11 @@
 
             var e = new $.Event('click');
                         
-            $item.find('.t-link').trigger(e);
+            $item.find('> .t-link').trigger(e);
 
             setTimeout( function () {
                 ok(!e.isDefaultPrevented());
-            }, 200);
+            }, 0);
 
             //stop navigation after assert
             e.preventDefault();
@@ -180,7 +180,7 @@
             var isCalled = false;
             var $item = $(getRootItem(4));
 
-            $item.find('.t-link').data('ContentUrl', 'fake');
+            $item.find('> .t-link').data('ContentUrl', 'fake');
             tabstrip.ajaxRequest = function () { isCalled = true; };
             
             tabstrip.reload($item);
@@ -204,9 +204,7 @@
 
             item.find('.t-link').trigger('click');
 
-            setTimeout( function () {
-                ok(item.hasClass('t-state-active'));
-            }, 200);
+            ok(item.hasClass('t-state-active'));
         });
 
         test('select method should select second item', function() {
@@ -215,10 +213,7 @@
 
             tabstrip.select(item);
 
-            setTimeout( function () {
-                ok(item.hasClass('t-state-active'));
-            }, 200);
-        
+            ok(item.hasClass('t-state-active'));
         });
 
         test('disable method should disable item', function() {
@@ -248,19 +243,15 @@
             tabstrip.select(item);
 
             var content = $(tabstrip.getContentElement(5));
-            setTimeout( function () {
-                ok(item.hasClass('t-state-active'));
-            }, 200);
+            ok(item.hasClass('t-state-active'));
         });
 
         test('getContentElement should return content of seventh tab', function() {
             var tabstrip = getTabStrip();
             
-            var expectedContent = $(tabstrip.element).find('> .t-content').eq(1); //second content under Tab-7
+            var expectedContent = $(tabstrip.element).find('> .t-content').eq(6); //second content under Tab-7
             
-            setTimeout( function () {
-                equal($(tabstrip.getContentElement(6)).index(), expectedContent.index());
-            }, 200);
+            equal($(tabstrip.getContentElement(6)).index(), expectedContent.index());
         });
 
         test('getContentElement should not return tab content if passed argument is not number', function() {
@@ -281,14 +272,13 @@
             var item = getRootItem(0);
             tabstrip.select(item);
 
-            setTimeout( function () {
-                equal(tabstrip.getSelectedTabIndex(), $(item).index());
-            }, 200);
+            equal(tabstrip.getSelectedTabIndex(), $(item).index());
         });
 
         test('getSelectedTab should return negative if no selected tabs', function() {
             var tabstrip = getTabStrip();
-            
+            tabstrip.element.find('.t-state-active').removeClass('t-state-active').addClass('t-state-default');
+
             equal(tabstrip.getSelectedTabIndex(), -1);
         });
 
@@ -303,7 +293,7 @@
 
             setTimeout( function () {
                 ok(isRaised);
-            }, 200);
+            }, 0);
         });
 
         test('client object is available in on load', function() {

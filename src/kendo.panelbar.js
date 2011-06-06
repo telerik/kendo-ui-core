@@ -26,6 +26,9 @@
             var that = this,
                 content = element.find('li.t-state-active > .t-content');
 
+            if (options && ('animation' in options) && !options.animation)
+                options.animation = { open: { effects: {} }, close: { effects: {} } }; // No animation
+
             Component.fn.init.call(that, element, options);
 
             options = that.options;
