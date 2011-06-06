@@ -19,6 +19,7 @@
         $(document).ready(function() {
             $("#TabStrip1").kendoTabStrip();
             $("#TabStrip2").kendoTabStrip({ animation: { open: { effects: { fadeIn: {} } } } });
+            $("#TabStrip3").kendoTabStrip({ contentUrls: [ 'AjaxView1.html', 'AjaxView2.html', 'AjaxView1.html', 'AjaxView2.html', 'AjaxView1.html', 'AjaxView2.html' ] });
         });
     </script>
 </head>
@@ -204,6 +205,45 @@
             <li>Wide cross-browser compatible and XHTML compliant</li>
         </ul>
     </div>
+</div>
+<div class="t-widget t-tabstrip t-header" id="TabStrip3">
+    <ul class="t-reset t-tabstrip-items">
+        <li class="t-item t-state-default t-state-active"><a class="t-link" href="#TabStrip3-1"><img alt="image"
+                                                                                                    class="t-image"
+                                                                                                    src="Icons/Suites/mvc.png">ASP.NET
+            MVC</a></li>
+        <li class="t-item t-state-disabled"><a class="t-link" href="#TabStrip3-2"><img alt="image" class="t-image"
+                                                                                     src="Icons/Suites/sl.png">Silverlight</a>
+        </li>
+        <li class="t-item t-state-default"><a class="t-link" href="#TabStrip3-3"><img alt="image" class="t-image"
+                                                                                     src="Icons/Suites/ajax.png">ASP.NET
+            AJAX</a></li>
+        <li class="t-item t-state-default"><a class="t-link" href="#TabStrip3-4"><img alt="image" class="t-image"
+                                                                                     src="Icons/Suites/orm.png">OpenAccess
+            ORM</a></li>
+        <li class="t-item t-state-default"><a class="t-link" href="#TabStrip3-5"><img alt="image" class="t-image"
+                                                                                     src="Icons/Suites/rep.png">Reporting</a>
+        </li>
+        <li class="t-item t-state-default"><a class="t-link" href="#TabStrip3-6"><img alt="image" class="t-image"
+                                                                                     src="Icons/Suites/sitefinity.png">Sitefinity
+            ASP.NET CMS</a></li>
+    </ul>
+    <div class="t-content t-state-active" id="TabStrip3-1" style="display: block;">
+        <ul>
+            <li>Pure ASP.NET MVC components</li>
+            <li>Completely Open Source</li>
+            <li>Exceptional Performance</li>
+
+            <li>Based on jQuery</li>
+            <li>Search Engine Optimized</li>
+            <li>Cross-browser support</li>
+        </ul>
+    </div>
+    <div class="t-content" id="TabStrip3-2"></div>
+    <div class="t-content" id="TabStrip3-3"></div>
+    <div class="t-content" id="TabStrip3-4"></div>
+    <div class="t-content" id="TabStrip3-5"></div>
+    <div class="t-content" id="TabStrip3-6"></div>
 </div>
 </body>
 </html>
