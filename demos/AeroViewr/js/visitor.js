@@ -62,6 +62,12 @@
             $(document).unbind('mousedown touchstart', removeHints);
         };
 
+        $(".i-hints").click(function(e) {
+            e.preventDefault();
+            hints.fadeIn("slow");
+            $(document).bind('mousedown touchstart', removeHints);
+        });
+
         setTimeout( removeHints, 5000 );
         $(document).bind('mousedown touchstart', removeHints);
     }
