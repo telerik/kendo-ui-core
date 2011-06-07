@@ -275,6 +275,7 @@ section#footer
 .i-cancel { background-position:-16px -194px; }
 .i-drag { background-position:-20px -379px; }
 .i-tagstitles { background-position:-19px -445px; }
+.i-hints { background-position:-3px -785px; }
 
 /*header*/
 
@@ -355,20 +356,33 @@ header>ul
     left:10px;
 }
 
+#searchBox,
+header .i-hints
+{
+    border:1px solid rgba(255,255,255,.4);
+
+	-moz-border-radius:16px;
+	-webkit-border-radius:16px;
+	border-radius:16px;
+}
+
 #searchBox
 {
     width:130px;
     height:2.2em;
-    border:1px solid rgba(255,255,255,.4);
     margin:0 -36px 0 0;
     padding:1px 28px 1px 8px;
     background:rgba(0,0,0,.4);
     font:1em "segoe ui",helvetica,sans-serif;
     vertical-align:middle;
+}
 
-	-moz-border-radius:16px;
-	-webkit-border-radius:16px;
-	border-radius:16px;
+header .i-hints
+{
+    width:30px;
+    height:30px;
+    border:1px solid rgba(255,255,255,.4);
+    margin-left:8px;
 }
 
 /*autocomplete dropdown*/
