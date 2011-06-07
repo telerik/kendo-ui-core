@@ -55,7 +55,7 @@
                         widthMargin = $("#main").outerHeight(true) - $("#main").outerHeight(),
                         width = window.innerWidth - widthMargin,
                         height = window.innerHeight - staticHeight,
-                        imagesOnHeight = parseInt(height/size);
+                        imagesOnHeight = parseInt(height/size) || 1;
 
                     return onlyHeight ? imagesOnHeight : imagesOnHeight * parseInt(width/size);
                 },
