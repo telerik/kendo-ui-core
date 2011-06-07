@@ -3,6 +3,8 @@
         ui = kendo.ui,
         List = ui.List,
         DataSource = kendo.data.DataSource,
+        OPEN = "open",
+        CLOSE = "close",
         CHANGE = "change",
         LOADING = "t-loading",
         SELECTED = "t-state-selected",
@@ -28,12 +30,6 @@
 
             that.popup = new ui.Popup(that.ul, {
                 anchor: that.wrapper
-            });
-
-            that.popup.bind("open", function() {
-                if (that._current) {
-                    that._scroll(that._current[0]);
-                }
             });
 
             that._dataAccessors();
@@ -82,11 +78,11 @@
                             });
                         },
                         click: function() {
-                            if(!that.ul.children()[0]) {
+                            if(!that.ul[0].firstChild) {
                                 that.showBusy();
                                 that.dataSource.read();
                             } else {
-                                that.popup.toggle();
+                                that.toggle();
                             }
                         },
                         blur: function() {
@@ -103,14 +99,24 @@
         },
 
         open: function() {
-            var that = this;
-            if (!that.ul.children()[0]) {
+            var that = this
+                current = that._current;
+
+            if (!that.ul[0].firstChild) {
                 that.showBusy();
                 that.options.autoBind = false;
                 that.dataSource.query();
             } else {
-                that.popup.open();
+                that.popup.open()
+                if (current) {
+                    that._scroll(current[0]);
+                }
             }
+        },
+
+        toggle: function() {
+            var that = this;
+            that[that.popup.visible() ? CLOSE : OPEN]();
         },
 
         refresh: function() {
@@ -128,7 +134,7 @@
             that.previous = that.value();
 
             if (!that.options.autoBind) {
-                that.popup[data.length ? "open" : "close"]();
+                that[data.length ? OPEN : CLOSE]();
             }
 
             that.hideBusy();
@@ -164,10 +170,10 @@
                 idx,
                 length,
                 text,
-                val,
+                value,
                 current = that._current,
                 data = that.dataSource.view(),
-                children = that.ul.children();
+                children = that.ul[0].childNodes;
 
             if (current) {
                 current.removeClass(SELECTED);
@@ -183,11 +189,11 @@
             }
 
             if (typeof li === "number") {
-                li = children.eq(li);
+                li = $(children[li]);
             }
 
             if (li[0] && !li.hasClass(SELECTED)) {
-                idx = li.prevAll().length;
+                idx = $.inArray(li[0], children);
 
                 if (idx === -1) {
                     return;
@@ -195,10 +201,10 @@
 
                 data = data[idx];
                 text = that._text(data);
-                val = that._value(data);
+                value = that._value(data);
 
                 that.text(text);
-                that.element.val(val || val === 0 ? val : text);
+                that.element[0].value = value != undefined ? value : text;
                 that.current(li.addClass(SELECTED));
             }
         },
@@ -242,11 +248,12 @@
             var that = this;
 
             that.select(li);
-            that._blur();
+            that.close();
+            //that._blur();
 
-            if (that.wrapper[0] !== document.activeElement) {
-                that.wrapper.focus();
-            }
+            //if (that.wrapper[0] !== document.activeElement) {
+            //    that.wrapper.focus();
+            //}
         },
 
         _dataAccessors: function() {
