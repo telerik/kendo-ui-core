@@ -248,12 +248,11 @@
             var that = this;
 
             that.select(li);
-            that.close();
-            //that._blur();
+            that._blur();
 
-            //if (that.wrapper[0] !== document.activeElement) {
-            //    that.wrapper.focus();
-            //}
+            if (that.wrapper[0] !== document.activeElement) {
+                that.wrapper.focus();
+            }
         },
 
         _dataAccessors: function() {
