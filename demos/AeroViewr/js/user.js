@@ -107,6 +107,23 @@
        setPhotosDataSource.query({page: 1, pageSize: PAGESIZE});
     }
 
+    function initCallouts() {
+        var hints = $(".callout");
+
+        hints.eq(1).css({ right: window.innerWidth - ($("#searchBox").position().left + $("#searchBox").width() / 2) * zoomFactor, left: 'auto' });
+
+        var removeHints = function(e) {
+            hints.fadeOut();
+            $(document).unbind('mousedown touchstart', removeHints);
+        };
+
+        $(".i-hints").click(function(e) {
+            e.preventDefault();
+            hints.fadeIn("slow");
+            $(document).bind('mousedown touchstart', removeHints);
+        });
+    }
+
     function search() {
         if ($("#searchBox").val() && !searching) {
             slideshow.stop();
@@ -405,6 +422,7 @@
             that.initPhotoStrip();
             that.initSearch();
             that.initUploadInfo();
+            initCallouts();
 
             slideshow.init($("#flatPhotoStrip").data("kendoListView"));
             $("#viewslideshow").click(function(e) {

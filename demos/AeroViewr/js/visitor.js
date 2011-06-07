@@ -52,7 +52,6 @@
     function showCallouts() {
         var hints = $(".callout");
 
-        hints.eq(0).css({ left: $("#signin").offset().left });
         hints.eq(1).css({ right: window.innerWidth - ($("#searchBox").position().left + $("#searchBox").width() / 2) * zoomFactor, left: 'auto' });
 
         hints.fadeIn("slow");
@@ -349,7 +348,7 @@
                 updatePlayIcon(slideshow._started);
             });
 
-            setTimeout(showCallouts, 1000);
+            $('#bigPhoto').load(showCallouts);
         }
     };
 })(jQuery, window);
