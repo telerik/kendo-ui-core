@@ -127,8 +127,7 @@
     function search() {
         if ($("#searchBox").val() && !searching) {
             slideshow.stop();
-            updatePlayIcon(slideshow._started)
-                .add("#uploadphotos").hide();
+            toggleButtons(false);
 
             searching = true;
             noimages.remove();
@@ -186,6 +185,13 @@
                 .end()
                 .find("em")
                 .html(playing ? 'Pause' : 'Play').end();
+    }
+
+    function toggleButtons(value) {
+        updatePlayIcon(slideshow._started).toggle(value);
+        if (!kendo.support.touch) {
+            $("#uploadphotos").toggle(value);
+        }
     }
 
     var user = window.user = {
@@ -251,6 +257,7 @@
                 change: function () {
                     changeState("slideshow");
                     showSelectedPhoto(this);
+                    toggleButtons(true);
                 },
                 dataBound: function () {
                     loading.remove();
@@ -286,6 +293,7 @@
                 change: function() {
                     changeState("slideshow");
                     showSelectedPhoto(this);
+                    toggleButtons(true);
                 },
                 dataBound: function() {
                     loading.remove();
@@ -479,9 +487,7 @@
 
                 slideshow.stop();
 
-                updatePlayIcon(slideshow._started).show();
-                if (!kendo.support.touch)
-                    $("#uploadphotos").show();
+                toggleButtons(true);
 
                 if (state == "slideshow" || state == "searchresult") {
                     $("#flatPhotoStrip").hide();
