@@ -106,9 +106,12 @@
                 var element = this.element;
 
                 if (++this.eventNo == this.effectCount) { // ouch :(
+                    if (element.data('abortId')) {
+                        clearTimeout(element.data('abortId'));
+                        element.removeData('abortId');
+                    }
                     element.css(kendo.support.transitions.css + 'transition', 'none');
                     element.css(kendo.support.transitions.css + 'transition');
-                    clearTimeout(element.data('abortId'));
                     element.dequeue();
                 }
             },
@@ -135,6 +138,10 @@
 
                 element.css(kendo.support.transitions.css + 'transition');
                 element.removeData('keys');
+                if (element.data('abortId')) {
+                    clearTimeout(element.data('abortId'));
+                    element.removeData('abortId');
+                }
                 element.stop(clearQueue);
                 return element;
             }
