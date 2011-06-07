@@ -61,7 +61,7 @@
             $(document).unbind('mousedown touchstart', removeHints);
         };
 
-        $(".i-hints").click(function(e) {
+        $(".i-hints").bind(kendo.support.touch ? 'touchend' : 'mousedown', function(e) {
             e.preventDefault();
             hints.fadeIn("slow");
             $(document).bind('mousedown touchstart', removeHints);
@@ -80,7 +80,9 @@
        setBigPhoto(ui.selectable.value().find("img"));
 
        dataSource.query({page: 1, pageSize: PAGESIZE});
-       $("#viewslideshow, #uploadphotos").stop(true, true).fadeIn();
+       $("#viewslideshow").stop(true, true).fadeIn();
+       if (!kendo.support.touch)
+           $("#uploadphotos").stop(true, true).fadeIn();
 
        $("#backButton").text("Back to search results").data("currentView", "flatMostPopularPhotos");
     }
@@ -137,8 +139,9 @@
                 $(".bottomLink").text("").data("currentView", "");
 
                 slideshow.init($("#flatSearchPhotos").data("kendoListView"));
-                updatePlayIcon(slideshow._started)
-                    .add("#uploadphotos").stop(true, true).fadeOut()
+                updatePlayIcon(slideshow._started).stop(true, true).fadeOut();
+                if (!kendo.support.touch)
+                    $("#uploadphotos").stop(true, true).fadeOut();
 
                 updatePageSize();
             }
@@ -260,7 +263,11 @@
                     $("#flatSearchPhotos").hide();
                     $("#flatMostPopularPhotos").hide();
                     $(".i-tileview").click();
-                    $("#viewslideshow, #uploadphotos").stop(true, true).fadeOut();
+
+                    $("#viewslideshow").stop(true, true).fadeOut();
+                    if (!kendo.support.touch)
+                        $("#uploadphotos").stop(true, true).fadeOut();
+
                     element.text("Back to most popular");
                     slideshow.init($("#flatSearchPhotos").data("kendoListView"));
                 } else if (view === "mainTemplate"){
@@ -271,7 +278,11 @@
                     $("#overlay").stop(true, true).fadeOut();
                     $("#exifButton").stop(true, true).fadeIn();
                     $("#flatMostPopularPhotos").show();
-                    $("#viewslideshow, #uploadphotos").stop(true, true).fadeIn();
+
+                    $("#viewslideshow").stop(true, true).fadeIn();
+                    if (!kendo.support.touch)
+                        $("#uploadphotos").stop(true, true).fadeIn();
+                    
                     element.text("Back to search results");
                     slideshow.init($("#flatMostPopularPhotos").data("kendoListView"));
                 }

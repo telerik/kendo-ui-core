@@ -227,41 +227,47 @@
             that.scrollElement.kendoStop().kendoAnimate({effects: { slideLeft: { properties: { translate: scrollTo + 'px' } } }, duration: 500 });
         },
 
-        _animateArrows: function (arrows) {
+        _animateArrows: function (arrows, action) {
             var that = this;
             
-            arrows.each( function () {
-                var element = $(this);
+            arrows.each( function (idx) {
+                var element = $(this),
+                    options = {
+                        effects: { fadeIn : { properties: { opacity: that.options.scrollArrowsOpacity } } },
+                        duration: "fast",
+                        show: true,
+                        complete: function() {
+                            that.trigger(action + "Arrow", element);
+                        }
+                    },
+                    hideOptions = {};
 
-                element.kendoStop(true, true).kendoAnimate({
-                    effects: { fadeIn : { properties: { opacity: that.options.scrollArrowsOpacity } } },
-                    duration: "fast",
-                    show: true,
-                    complete: function() {
-                        that.trigger("showArrow", element);
-                    }
-                });
+                if (action == 'hide')
+                    hideOptions = { effects: "fadeOut" };
+
+                element.kendoStop(true).kendoAnimate(extend( options, hideOptions ));
             });
         },
 
         _showScrollArrows: function (e) {
             var that = this;
             that._initializeBoxModel();
+            that._allArrows.hide();
 
             if (that.hasVerticalScroll)
-                that._animateArrows(that._verticalArrows);
+                that._animateArrows(that._verticalArrows, 'show');
 
             if (that.hasHorizontalScroll)
-                that._animateArrows(that._horizontalArrows);
+                that._animateArrows(that._horizontalArrows, 'show');
         },
 
         _hideScrollArrows: function (e) {
             var that = this;
             if (that.hasVerticalScroll)
-                that._verticalArrows.kendoStop(true, true).kendoAnimate({ effects: "fadeOut", duration: "fast" });
+                that._animateArrows(that._verticalArrows, 'hide');
 
             if (that.hasHorizontalScroll)
-                that._horizontalArrows.kendoStop(true, true).kendoAnimate({ effects: "fadeOut", duration: "fast" });
+                that._animateArrows(that._horizontalArrows, 'hide');
         },
 
         _wait: function (e) {

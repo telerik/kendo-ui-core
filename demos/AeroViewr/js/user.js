@@ -117,7 +117,7 @@
             $(document).unbind('mousedown touchstart', removeHints);
         };
 
-        $(".i-hints").click(function(e) {
+        $(".i-hints").bind(kendo.support.touch ? 'touchend' : 'mousedown', function(e) {
             e.preventDefault();
             hints.fadeIn("slow");
             $(document).bind('mousedown touchstart', removeHints);
@@ -479,8 +479,9 @@
 
                 slideshow.stop();
 
-                updatePlayIcon(slideshow._started)
-                    .add("#uploadphotos").show();
+                updatePlayIcon(slideshow._started).show();
+                if (!kendo.support.touch)
+                    $("#uploadphotos").show();
 
                 if (state == "slideshow" || state == "searchresult") {
                     $("#flatPhotoStrip").hide();
