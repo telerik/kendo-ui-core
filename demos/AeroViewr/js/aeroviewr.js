@@ -207,37 +207,39 @@ if (!isInferiorBrowser) {
             if (!$.browser.mozilla)
                 $('#photoWrap').css('overflow', 'hidden');
             $('#bigPhoto').kendoPincer();
-            var zoomFactor = 1;
+            zoomFactor = 1;
 
             if (window.innerWidth < 380 || window.innerHeight < 380) {
-                $(document.body).css('zoom', .7);
-                zoomFactor = 2;
+                zoomFactor = .6;
+                $(document.body).css('zoom', zoomFactor);
+                $('.thumb-list').data('kendoScroller').options.zoomFactor = zoomFactor;
             }
 
             $(document).bind('touchmove', function (e) { // Disable viewport scrolling
                 e.preventDefault();
             });
 
-            var startLocation = {};
+            var startLocation = {},
+                transitions = kendo.support.transitions;
 
             $.extend(kendo.fx, {
                 slideRotateLeft: {
                     play: function(element, properties, options) {
-                        kendo.fx.transition(element, $.extend({ translate: (-window.innerWidth * zoomFactor) + 'px' }, properties), options);
+                        kendo.fx.transition(element, $.extend({ translate: (-window.innerWidth / zoomFactor) + 'px' }, properties), options);
                     },
                     reverse: function(element, properties, options) {
-                        element.css(kendo.support.transitions.css + 'transform', 'translate(' + (window.innerWidth * zoomFactor) + 'px, 0)');
-                        element.css(kendo.support.transitions.css + 'transform');
+                        element.css(transitions.css + 'transform', 'translate(' + (window.innerWidth / zoomFactor) + 'px, 0)');
+                        element.css(transitions.css + 'transform');
                         kendo.fx.transition(element, $.extend({ translate: 0 }, properties), options);
                     }
                 },
                 slideRotateRight: {
                     play: function(element, properties, options) {
-                        kendo.fx.transition(element, $.extend({ translate: (window.innerWidth * zoomFactor) + 'px' }, properties), options);
+                        kendo.fx.transition(element, $.extend({ translate: (window.innerWidth / zoomFactor) + 'px' }, properties), options);
                     },
                     reverse: function(element, properties, options) {
-                        element.css(kendo.support.transitions.css + 'transform', 'translate(-' + (window.innerWidth * zoomFactor) + 'px, 0)');
-                        element.css(kendo.support.transitions.css + 'transform');
+                        element.css(transitions.css + 'transform', 'translate(-' + (window.innerWidth / zoomFactor) + 'px, 0)');
+                        element.css(transitions.css + 'transform');
                         kendo.fx.transition(element, $.extend({ translate: 0 }, properties), options);
                     }
                 }

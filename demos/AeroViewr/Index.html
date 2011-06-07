@@ -30,8 +30,10 @@
                 this.setTemplate = '<li data-setid="<%=id%>" alt="<%= kendo.htmlEncode(title._content) %>"><img width="75" height="75" src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=primary%>_<%=secret%>_s.jpg"><em><%= kendo.htmlEncode(title._content) %></em></li>',
                 this.EXTRAS = "owner_name,tags",
                 this.flashArrows = 0,
+                this.zoomFactor = 1,
                 this.animType = false,
                 this.scrollerOptions = {
+                    zoomFactor: this.zoomFactor,
                     showArrow: function(arrow) {
                         if (flashArrows++ < 2) {
                             var direction = arrow.hasClass('left-scroll-arrow') ? 'left' : 'right',
@@ -222,11 +224,13 @@
                 and works only on modern browsers.</p>
                 <p>Please use Internet Explorer 9+, Mozilla Firefox 3.6+, Opera 10+, Chrome 10+, Safari 4+ or another compatible browser.</p><p>Javascript must be enabled.</p>
             </div>
-            <div id="signInInfo" class="callout" style="display: none;">
-                <p>Sign in with your Flickr or Yahoo account, to see the entire app functionality</p>
+            <div id="signInInfo" class="callout t-window" style="display: none;">
+                <div></div>
+                <p><span>Sign in</span> with your <span>Flickr</span> or <span>Yahoo</span> account, to see the entire app functionality</p>
             </div>
-            <div id="searchInfo" class="callout" style="display: none;">
-                <p>Type something and click search button. You can use also related tags from the suggestion list.</p>
+            <div id="searchInfo" class="callout t-window" style="display: none;">
+                <div></div>
+                <p><span>Type</span> something and <span>click search</span> button. You can also use related tags from the suggestion list.</p>
             </div>
         </section>
 

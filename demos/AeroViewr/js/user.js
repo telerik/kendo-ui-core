@@ -337,7 +337,13 @@
                     updatePageSize();
                 }
             });
-            that.thumbList = new kendo.ui.Scroller($('<div class="thumb-list">').appendTo("#footer"), scrollerOptions).scrollElement;
+
+            var scroller = $('<div class="thumb-list">')
+                                .appendTo("#footer")
+                                .kendoScroller(scrollerOptions);
+
+            that.thumbList = scroller.data('kendoScroller').scrollElement;
+
             var href = location.href.split("?");
             try {
                 history.replaceState(null, "AeroViewr", href[0]);
