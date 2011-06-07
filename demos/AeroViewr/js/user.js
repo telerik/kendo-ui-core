@@ -113,15 +113,15 @@
         hints.eq(1).css({ right: window.innerWidth - ($("#searchBox").position().left + $("#searchBox").width() / 2) * zoomFactor, left: 'auto' });
 
         var removeHints = function(e) {
-            hints.stop(true).fadeOut();
+            hints.stop(true, true).fadeOut();
             $(document).unbind('mousedown touchstart', removeHints);
         };
 
         $(".i-hints").bind(kendo.support.touch ? 'touchend' : 'mousedown', function(e) {
             e.preventDefault();
-            hints.stop(true).fadeIn("slow");
+            hints.stop(true, true).fadeIn("slow");
             $(document).bind('mousedown touchstart', removeHints);
-        });
+        }).click(false);
     }
 
     function search() {
