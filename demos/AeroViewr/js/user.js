@@ -117,7 +117,7 @@
             $(document).unbind('mousedown touchstart', removeHints);
         };
 
-        $(".i-hints").bind(kendo.support.touch ? 'touchend' : 'mousedown', function(e) {
+        $(".i-hints").bind(kendo.support.touch ? 'touchend' : 'mouseup', function(e) {
             e.preventDefault();
             hints.stop(true, true).fadeIn("slow");
             $(document).bind('mousedown touchstart', removeHints);
