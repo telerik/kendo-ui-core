@@ -348,7 +348,7 @@
                 updatePlayIcon(slideshow._started);
             });
 
-            $('#bigPhoto').load(showCallouts);
+            setTimeout(showCallouts, 1000);
         }
     };
 })(jQuery, window);
