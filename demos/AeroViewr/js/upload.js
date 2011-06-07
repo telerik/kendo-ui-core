@@ -19,14 +19,16 @@
             var that = this,
                 element = that.element,
                 exifButton = $("#exifButton"),
-                isAuth = flickr.isAuthenticated();
+                isAuth = flickr.isAuthenticated(),
+                handler = function(e) {
+                    var target = e.target;
+                    if(!contains($("#uploadphotos")[0], target) && !contains(element[0], target)) {
+                        that.hide();
+                        $(document).unbind("mousedown touchstart", handler);
+                    }
+                };
 
-            $(document).one("mousedown touchstart", function(e) {
-                var target = e.target;
-                if(!contains($("#uploadphotos")[0], target) && !contains(element[0], target)) {
-                    that.hide();
-                }
-            });
+            $(document).bind("mousedown touchstart", handler);
 
             this.exifVisible = exifButton.is(":visible");
             exifButton.fadeOut();
