@@ -8,7 +8,7 @@
         sliderValue = 0,
         data = window.data,
         loading = $("<div id='searchLoading' class='loading'>Loading ...</div>"),
-        noimages = $("<div id='noimages' class='loading'>No images</div>"),
+        noimages = $("<div id='noimages' class='loading'>No images found</div>"),
         dataSource = data.dataSource({
             pageSize: computePageSize(120, true),
             serverSorting: true,

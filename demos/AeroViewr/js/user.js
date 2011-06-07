@@ -12,7 +12,7 @@
         searching = false,
         sliderValue = 0,
         loading = $("<div id='searchLoading' class='loading'>Loading ...</div>"),
-        noimages = $("<div id='noimages' class='loading'>No images</div>"),
+        noimages = $("<div id='noimages' class='loading'>No images found</div>"),
         defaultDeserializer = {
             data: function(result) {
                 if(photosInSet) {
