@@ -351,17 +351,18 @@
                 if (uploadedPhotos[0]) {
                     var lastPage = setPhotosDataSource._totalPages(),
                         data = setPhotosDataSource.data(),
-                        lastPage = setPhotosDataSource._totalPages();
-                        dataLength = data.length,
                         photosLength = uploadedPhotos.length,
-                        i = 0, j = 0, inStream = 0;
+                        i = data.length - 1,
+                        j = 0, inStream = 0,
+                        dataItem;
 
                     if (setPhotosDataSource.page() != lastPage) {
                         setPhotosDataSource.page(lastPage);
                     }
 
-                    for (; i < dataLength; i++) {
-                        var dataItem = data[i];
+                    for (; i > -1; i--) {
+                        j = 0;
+                        dataItem = data[i];
                         for(; j < photosLength; j++) {
                             var photo = uploadedPhotos[j];
                             if (photo.stat.toLowerCase() == "fail") {
@@ -374,6 +375,10 @@
                             if (dataItem.id == photo.photoid) {
                                 inStream++;
                             }
+                        }
+
+                        if (inStream === photosLength) {
+                            break; //all files are uploaded
                         }
                     }
 
