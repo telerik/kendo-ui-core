@@ -207,6 +207,11 @@ section#footer
     
 }
 
+#main #signInInfo
+{
+    left: 140px;
+}
+
 #main #searchInfo div
 {
     left: auto;
