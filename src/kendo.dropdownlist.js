@@ -165,8 +165,13 @@
                 length,
                 text,
                 val,
+                current = that._current,
                 data = that.dataSource.view(),
-                children = that.ul.children().removeClass(SELECTED);
+                children = that.ul.children();
+
+            if (current) {
+                current.removeClass(SELECTED);
+            }
 
             if (typeof li === "function") {
                 for (idx = 0, length = data.length; idx < length; idx++) {
@@ -182,7 +187,7 @@
             }
 
             if (li[0] && !li.hasClass(SELECTED)) {
-                idx = li.index();
+                idx = li.prevAll().length;
 
                 if (idx === -1) {
                     return;
