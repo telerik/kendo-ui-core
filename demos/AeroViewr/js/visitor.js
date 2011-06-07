@@ -52,24 +52,17 @@
     function showCallouts() {
         var hints = $(".callout");
 
-        hints.eq(0).css({ left: $("#signin").position().left });
-        hints.eq(1).css({ left: $("#searchBox").position().left });
+        hints.eq(0).css({ left: $("#signin").offset().left });
+        hints.eq(1).css({ right: window.innerWidth - ($("#searchBox").position().left + $("#searchBox").width() / 2) * zoomFactor, left: 'auto' });
 
-        hints.fadeIn("slow", function() {
-            hints.each(function () {
-                var element = $(this),
-                    position = element.position();
-
-                element.animate({top: position.top + 10}, 150)
-                       .animate({top: position.top}, 150);
-            });
-        });
+        hints.fadeIn("slow");
 
         var removeHints = function(e) {
             hints.fadeOut();
             $(document).unbind('mousedown touchstart', removeHints);
         };
 
+        setTimeout( removeHints, 5000 );
         $(document).bind('mousedown touchstart', removeHints);
     }
 
@@ -314,7 +307,11 @@
                 }
             });
 
-            that.thumbList = new kendo.ui.Scroller($('<div class="thumb-list">').appendTo("#footer"), scrollerOptions).scrollElement;
+            var scroller = $('<div class="thumb-list">')
+                                .appendTo("#footer")
+                                .kendoScroller(scrollerOptions);
+
+            that.thumbList = scroller.data('kendoScroller').scrollElement;
 
             that.mostPopular();
             that.initMainPictures();

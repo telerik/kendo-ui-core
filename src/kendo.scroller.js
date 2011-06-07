@@ -1,34 +1,19 @@
 (function($, window, undefined) {
     var kendo = window.kendo,
+        ui = kendo.ui,
         extend = $.extend,
-        Component = kendo.ui.Component,
+        Component = ui.Component,
         events = [ 'showArrow' ],
         touchLocation = kendo.touchLocation;
 
     var Scroller = Component.extend({
-        init: function (element) {
+        init: function (element, options) {
             var that = this;
-            that.element = $(element);
+            element = $(element);
 
-            that.options = {
-                acceleration: 10,
-                velocity: .5,
-                pagingVelocity: 5,
-                friction: .98,
-                bounceAcceleration: .1,
-                bounceDeceleration: .1,
-                bounceLimit: 0,
-                bounceStop: 100,
-                framerate: 30,
+            Component.fn.init.call(that, element, options);
 
-                scrollbarOpacity: .7,
-                scrollArrowsOpacity: .84
-            };
-
-            if (typeof arguments[1] === 'object')
-                $.extend( that.options, arguments[1] );
-
-            Component.fn.init.apply(that, arguments);
+            options = that.options;
 
             that.bind(events, that.options);
 
@@ -70,6 +55,23 @@
 
             that._create();
         },
+
+        options: {
+                acceleration: 10,
+                velocity: .5,
+                pagingVelocity: 5,
+                friction: .98,
+                bounceAcceleration: .1,
+                bounceDeceleration: .1,
+                bounceLimit: 0,
+                bounceStop: 100,
+                framerate: 30,
+                zoomFactor: 1,
+
+                scrollbarOpacity: .7,
+                scrollArrowsOpacity: .84
+            },
+
         _create: function () {
             var that = this,
                 scrollElement = '<div class="scroll-container"></div>',
@@ -169,7 +171,7 @@
                 }
 
                 that.scrollElement.stop(true,true).css( that._transformProperty, that._translate3DPrefix +
-                                                        position.x + 'px,' + position.y + 'px' + that._translate3DSuffix);
+                                                        position.x / that.options.zoomFactor + 'px,' + position.y / that.options.zoomFactor + 'px' + that._translate3DSuffix);
             };
 
         },
@@ -617,5 +619,5 @@
         event.target.dispatchEvent(evt);
     }
 
-    kendo.ui.plugin("Scroller", Scroller);
+    kendo.ui.plugin("Scroller", Scroller, Component);
 })(jQuery, window);

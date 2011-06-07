@@ -179,12 +179,39 @@ section#footer
 
 #main .callout
 {
-    position:fixed;
-    top: 60px;
-    width: 100px;
+    position: absolute;
+    top: 20px;
     display: none;
+    background: rgba(0, 0, 0, .84);
+    font-size: 13px;
+    width: 260px;
+    color: #FFF;
+    padding: 1em;
 }
 
+#main .callout span
+{
+    color: #00B3FC;
+}
+
+#main .callout div
+{
+    position: absolute;
+    top: -20px;
+    font-size: 0;
+    line-height: 0%;
+    width: 0;
+    border-bottom: 20px solid rgba(0, 0, 0, .84);
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    
+}
+
+#main #searchInfo div
+{
+    left: auto;
+    right: 15px;
+}
 /* screen layout - end */
 
 .loading
