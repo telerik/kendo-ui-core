@@ -113,13 +113,13 @@
         hints.eq(1).css({ right: window.innerWidth - ($("#searchBox").position().left + $("#searchBox").width() / 2) * zoomFactor, left: 'auto' });
 
         var removeHints = function(e) {
-            hints.fadeOut();
+            hints.stop(true).fadeOut();
             $(document).unbind('mousedown touchstart', removeHints);
         };
 
         $(".i-hints").bind(kendo.support.touch ? 'touchend' : 'mousedown', function(e) {
             e.preventDefault();
-            hints.fadeIn("slow");
+            hints.stop(true).fadeIn("slow");
             $(document).bind('mousedown touchstart', removeHints);
         });
     }
