@@ -1,0 +1,143 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>ComboBox</title>
+        <script src="../src/jquery.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.fx.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.query.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.datasource.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.popup.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.selectable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.list.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.combobox.js" type="text/javascript" charset="utf-8"></script>
+        <link rel="stylesheet" href="../styles/kendo.common.css" type="text/css" media="screen" charset="utf-8">
+        <link rel="stylesheet" href="../styles/kendo.vista.css" type="text/css" media="screen" charset="utf-8">
+        <style type="text/css" media="screen">
+            .t-state-focused
+            {
+                background-color: red;
+            }
+
+            ul
+            {
+                padding: 0;
+                margin: 0;
+                border: 1px solid black;
+                width: 200px;
+            }
+            ul li
+            {
+                list-style:none;
+            }
+        </style>
+    </head>
+    <body>
+        dataSource source: [{text: "foo", value: 1}, {text:"bar", value:2}, {text: "baz", value: 1}, {text:2, value:2}];
+        <fieldset>
+            <legend>Vanilla input</legend>
+            <input />
+        </fieldset>
+        <fieldset>
+            <legend>Vanilla SELECT</legend>
+            <select onchange="console.log('change')">
+                <option value="1">Foo</option>
+                <option></option>
+                <option value="2">Bar</option>
+                <option value="3">Baz</option>
+            </select>
+        </fieldset>
+        <fieldset>
+            <legend>ComboBox - INPUT</legend>
+            <input  id="combobox" onchange="console.log('input + select change')"/>
+        </fieldset>
+        <fieldset>
+            <legend>ComboBox - SELECT</legend>
+            <select  id="select" onchange="console.log('ddl + select change')">
+            </select>
+        </fieldset>
+        <fieldset>
+            <legend>ComboBox - Remote jsonp</legend>
+            <input  id="remote" />
+            <input id="searchCriteria" value="var" />
+        </fieldset>
+        <fieldset>
+            <legend>ComboBox - INPUT - DISABLED </legend>
+            <input  id="disabled" disabled="disabled" />
+        </fieldset>
+        <fieldset>
+            <legend> ComboBox - 10000 items </legend>
+            <select id="big"></select>
+        </fieldset>
+        <script type="text/javascript" charset="utf-8">
+            $(document).ready(function() {
+                 var remoteDataSource = new kendo.data.DataSource({
+                    transport: {
+                        read: {
+                            url: "http://ws.geonames.org/searchJSON",
+                            dataType: "jsonp",
+                            cache: true
+                        },
+                        cache: "inmemory",
+                        dialect: {
+                            read: function() {
+                                return {name_startsWith: $("#searchCriteria").val() };
+                            }
+                        }
+                    },
+                    deserializer: {
+                        data: function(result) {
+                            return result.geonames;
+                        }
+                    }
+                });
+
+                $("#combobox").kendoComboBox({
+                    dataSource: [{text: "foo", value: 1}, {text:"bar", value:2}, {text: "baz", value: 1}, {text:2, value:2}],
+                    autoBind: false,
+                    delay: 2000
+                });
+                $("#select").kendoComboBox({
+                    dataSource: [{text: "foo", value: 1}, {text:"bar", value:2}, {text: "baz", value: 1}, {text:2, value:2}]
+                });
+                $("#remote").kendoComboBox({
+                    dataTextField: "name",
+                    dataValueField: "countryName",
+                    dataSource: remoteDataSource,
+                    autoBind: false,
+                    delay: 2000
+                });
+
+                $("#searchCriteria").bind("change", function() {
+                    remoteDataSource.read();
+                });
+
+                $("#disabled").kendoComboBox({
+                    dataSource: [{text: "foo", value: 1}, {text:"bar", value:2}, {text: "baz", value: 1}, {text:2, value:2}],
+                    enable: false
+                });
+
+                var options = "";
+                for (var i = 0; i < 10000; i++) {
+                   var option = "<option"
+                       option += " value=" + i;
+
+                   option += ">";
+
+                   option += "text" + i;
+
+                   option += "</option>";
+                   options += option;
+                }
+
+                var big = $("#big");
+                big.html(options);
+
+                big.kendoComboBox({
+                    autoBind: false
+                });
+            });
+        </script>
+    </body>
+</html>

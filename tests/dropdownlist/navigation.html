@@ -263,7 +263,7 @@
                 };
 
                 dropdownlist._current = dropdownlist.ul.children().first();
-                input.press(kendo.keys.ENTER);
+                dropdownlist.wrapper.focus().press(kendo.keys.ENTER);
                 ok(blurWasCalled);
             });
 
