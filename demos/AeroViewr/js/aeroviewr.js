@@ -191,25 +191,15 @@ if (!isInferiorBrowser) {
 
         user.initUpload();
 
-        flickr.auth = {
-            frob: "72157626788569665-6193bf9b278bde12-62708755",
-            fullname: "Atanas Georgiev",
-            nsid: "62801568@N08",
-            token: "72157626632259849-d74d3e3fd9f5dffa",
-            username: "NaskoG"
-        };
-
-        user.initUser();
-
-//        flickr.authenticate(function(authenticated) {
-//           if (authenticated) {
-//                user.initUser();
-//            } else {
-//              $('#userInfo').hide();
-//              $('#signin').fadeIn();
-//              visitor.initVisitor();
-//            }
-//        });
+        flickr.authenticate(function(authenticated) {
+           if (authenticated) {
+                user.initUser();
+            } else {
+              $('#userInfo').hide();
+              $('#signin').fadeIn();
+              visitor.initVisitor();
+            }
+        });
 
         if (kendo.support.touch) {
             $('#uploadphotos').hide();
