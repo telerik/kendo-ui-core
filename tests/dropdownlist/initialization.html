@@ -201,8 +201,8 @@
 
                  ok(dropdownlist.popup);
                  ok(dropdownlist.popup instanceof kendo.ui.Popup);
-                 ok(dropdownlist.popup.options.anchor[0], input[0]);
-                 ok(dropdownlist.popup.element[0], dropdownlist.ul[0]);
+                 equal(dropdownlist.popup.options.anchor[0], dropdownlist.wrapper[0]);
+                 equal(dropdownlist.popup.element[0], dropdownlist.ul[0]);
            });
 
            test("dropdownlist shrink ul if the height of the items is more then options.height", function() {
