@@ -43,9 +43,21 @@
         }
 
         if (group) {
-            query = query.group(group);
+            query = query.group(group, data);
         }
         return query.toArray();
+    }
+
+    function calculateAggregates(data, options) {
+        var query = new kendo.data.Query(data),
+            options = options || {},
+            aggregates = options.aggregates,
+            filter = options.filter;
+
+        if(filter) {
+            query = query.filter(filter);
+        }
+        return query.aggregate(aggregates);
     }
 
     var LocalTransport = Class.extend({
@@ -240,6 +252,9 @@
                 },
                 group: function(data) {
                     return data;
+                },
+                aggregates: function(data) {
+                    return {};
                 }
             }, options.deserializer);
 
@@ -274,6 +289,7 @@
             serverPaging: false,
             serverFiltering: false,
             serverGrouping: false,
+            serverAggregates: false,
             autoSync: false,
             sendAllFields: true,
             batch: {
@@ -578,7 +594,15 @@
                 options.group = that._group;
             }
 
+            if (that.options.serverAggregates !== true) {
+                options.aggregates = that._aggregates;
+                that._aggregateResult = calculateAggregates(data, options);
+            } else if (that._aggregates) {
+                that._aggregateResult = that._deserializer.aggregates(data);
+            }
             that._view = process(data, options);
+
+
 
             that._idMap(data);
 
@@ -635,7 +659,7 @@
         query: function(options) {
             var that = this,
                 options = options,
-                remote = that.options.serverSorting || that.options.serverPaging || that.options.serverFiltering;
+                remote = that.options.serverSorting || that.options.serverPaging || that.options.serverFiltering || that.options.serverGrouping || that.options.serverAggregates;
 
             if (options !== undefined) {
                 that._pageSize = options.pageSize;
@@ -643,6 +667,7 @@
                 that._sort = options.sort;
                 that._filter = options.filter;
                 that._group = options.group;
+                that._aggregates = options.aggregates;
 
                 if (options.sort) {
                     that._sort = options.sort = kendo.data.Query.expandSort(options.sort);
@@ -655,12 +680,16 @@
                 if (options.group) {
                     that._group = options.group = kendo.data.Query.expandGroup(options.group);
                 }
+                if (options.aggregates) {
+                    that._aggregates = options.aggregates = kendo.data.Query.expandAggregates(options.aggregates);
+                }
             }
 
             if (remote || (that._data === undefined || that._data.length == 0)) {
                 that.read(options);
             } else {
                 that._view = process(that._data, options);
+                that._aggregateResult = calculateAggregates(that._data, options);
                 that.trigger(CHANGE);
             }
         },
@@ -670,7 +699,7 @@
 
             if(val !== undefined) {
                 val = Math.max(Math.min(Math.max(val, 1), that._totalPages()), 1);
-                that.query({ page: val, pageSize: that.pageSize(), sort: that.sort(), filter: that.filter(), group: that.group()});
+                that.query({ page: val, pageSize: that.pageSize(), sort: that.sort(), filter: that.filter(), group: that.group(), aggregates: that.aggregate()});
                 return;
             }
             return that._page;
@@ -680,7 +709,7 @@
             var that = this;
 
             if(val !== undefined) {
-                that.query({ page: that.page(), pageSize: val, sort: that.sort(), filter: that.filter(), group: that.group()});
+                that.query({ page: that.page(), pageSize: val, sort: that.sort(), filter: that.filter(), group: that.group(), aggregates: that.aggregate()});
                 return;
             }
 
@@ -691,7 +720,7 @@
             var that = this;
 
             if(val !== undefined) {
-                that.query({ page: that.page(), pageSize: that.pageSize(), sort: val, filter: that.filter(), group: that.group()});
+                that.query({ page: that.page(), pageSize: that.pageSize(), sort: val, filter: that.filter(), group: that.group(), aggregates: that.aggregate()});
                 return;
             }
 
@@ -702,7 +731,7 @@
             var that = this;
 
             if(val !== undefined) {
-                that.query({ page: that.page(), pageSize: that.pageSize(), sort: that.sort(), filter: val, group: that.group() });
+                that.query({ page: that.page(), pageSize: that.pageSize(), sort: that.sort(), filter: val, group: that.group(), aggregates: that.aggregate() });
                 return;
             }
 
@@ -713,7 +742,7 @@
             var that = this;
 
             if(val !== undefined) {
-                that.query({ page: that.page(), pageSize: that.pageSize(), sort: that.sort(), filter: that.filter(), group: val });
+                that.query({ page: that.page(), pageSize: that.pageSize(), sort: that.sort(), filter: that.filter(), group: val, aggregates: that.aggregate()  });
                 return;
             }
 
@@ -724,6 +753,19 @@
             return this._total;
         },
 
+        aggregate: function(val) {
+            var that = this;
+
+            if(val !== undefined) {
+                that.query({ page: that.page(), pageSize: that.pageSize(), sort: that.sort(), filter: val, group: that.group(), aggregates: val });
+                return;
+            }
+
+            return that._aggregates;
+        },
+        aggregates: function() {
+            return this._aggregateResult;
+        },
         _totalPages: function() {
             var that = this,
                 pageSize = that.pageSize() || that.total();
