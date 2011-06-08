@@ -72,6 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="AeroViewr\AssertBigPic.aii" />
+    <None Include="AeroViewr\AssertMessages.aii" />
     <None Include="AeroViewr\ClickInfoWindow.aii" />
     <None Include="AeroViewr\GlassManyTimes.aii" />
     <None Include="AeroViewr\ListViewSlider.aii" />
@@ -80,6 +81,7 @@
     <None Include="AeroViewr\NotLoggedSearch.aii" />
     <None Include="AeroViewr\OpenSetSearchBack.aii" />
     <None Include="AeroViewr\PlayPause.aii" />
+    <None Include="AeroViewr\SearchNoresults.aii" />
     <None Include="AeroViewr\SearchOpenImage.aii" />
     <None Include="AeroViewr\LogInlLogOut.aii" />
     <None Include="AeroViewr\Upload.aii" />
@@ -150,6 +152,14 @@
     </None>
     <None Include="AeroViewr\Upload.resx">
       <DependentUpon>Upload.aii</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="AeroViewr\AssertMessages.resx">
+      <DependentUpon>AssertMessages.aii</DependentUpon>
+    </None>
+    <None Include="AeroViewr\SearchNoresults.resx">
+      <DependentUpon>SearchNoresults.aii</DependentUpon>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
