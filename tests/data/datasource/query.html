@@ -556,6 +556,77 @@
                 equal(view[1].items.length, 1);
             });
 
+            test("group aggregates should be calcualted if paging is enabled", function() {
+                var dataSource = new DataSource({
+                    data: [{age: 1}, {age: 1}, {age: 3}],
+                    page: 2,
+                    pageSize: 1
+                });
+                dataSource.read();
+                dataSource.group({field: "age", aggregates: [ {field: "age", aggregate: "count"}] });
+                var view = dataSource.view();
+                equal(view.length, 1);
+                equal(view[0].aggregates.age.count, 2);
+            });
+
+            test("aggregate should be calculated if defined", function() {
+                var dataSource = new DataSource({
+                    data: [ {foo: 100, bar: "baz"} , {foo: 100, bar: "bar"} , {foo: 1, bar: "baz"} ]
+                });
+                dataSource.read();
+
+                dataSource.aggregate( [{ field: "foo", aggregate: "sum" }, { field: "bar", aggregate: "count" }] );
+                var result = dataSource.aggregates();
+                equal(result.foo.sum, 201);
+                equal(result.bar.count, 3);
+            });
+
+            test("query aggregate should be calculated if defined", function() {
+                var dataSource = new DataSource({
+                    data: [ {foo: 100, bar: "baz"} , {foo: 100, bar: "bar"} , {foo: 1, bar: "baz"} ]
+                });
+
+                dataSource.query( {aggregates:[{ field: "foo", aggregate: "sum" }, { field: "bar", aggregate: "count" }]} );
+                var result = dataSource.aggregates();
+                equal(result.foo.sum, 201);
+                equal(result.bar.count, 3);
+            });
+
+            test("query removes aggregates from the state if not passed", function() {
+                var dataSource = new DataSource({
+                    data: [{age: 1}, {age: 2}]
+                });
+                dataSource.read();
+                dataSource.query( {aggregates:[{ field: "foo", aggregate: "sum" }]} );
+                dataSource.query({});
+
+                equal(dataSource.aggregate(), undefined);
+                ok($.isEmptyObject(dataSource.aggregates()));
+            });
+
+            test("query does not aggregate data if serverAggregate is true", function() {
+                var transport = new RemoteTransport({
+                        read: "foo"
+                    });
+
+                var dataSource = new DataSource( {
+                    transport: transport,
+                    serverAggregates: true
+                }).bind("change", function() {
+                    start();
+
+                    ok($.isEmptyObject(dataSource.aggregates()));
+                });
+
+                $.mockjax({
+                    url: "foo",
+                    responseText: '[{"age": 1}, {"age": 2}]'
+                });
+
+                dataSource.query( {aggregates:[{ field: "foo", aggregate: "sum" }]} );
+                stop(1000);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

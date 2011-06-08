@@ -229,6 +229,9 @@
     Query.expandFilter = function(expressions) {
         return expressions = $.isArray(expressions) ? expressions : [expressions];
     }
+    Query.expandAggregates = function(expressions) {
+        return expressions = $.isArray(expressions) ? expressions : [expressions];
+    }
     Query.expandGroup = function(field, dir) {
         var descriptor = typeof field === "string" ? { field: field, dir: dir } : field;
         return $.isArray(descriptor) ? descriptor : (descriptor !== undefined ? [descriptor] : []);
@@ -285,18 +288,15 @@
 
             if (descriptors.length > 0) {
                 descriptor = descriptors[0];
-                result = result.groupBy(descriptors[0]);
-
-                if(descriptors.length > 1) {
-                    result = result.select(function(group) {
-                        return {
-                            field: group.field,
-                            value: group.value,
-                            items: new Query(group.items).group(descriptors.slice(1)).toArray(),
-                            aggregates: new Query(allData).filter([ { field: group.field, operator: "eq", value: group.value } ]).aggregate(descriptor.aggregates)
-                        }
-                    });
-                }
+                result = result.groupBy(descriptor).select(function(group) {
+                    var data = new Query(allData).filter([ { field: group.field, operator: "eq", value: group.value } ]);
+                    return {
+                        field: group.field,
+                        value: group.value,
+                        items: descriptors.length > 1 ? new Query(group.items).group(descriptors.slice(1), data.toArray()).toArray() : group.items,
+                        aggregates: data.aggregate(descriptor.aggregates)
+                    }
+                });
             }
             return result;
         },
@@ -314,8 +314,7 @@
                 group = {
                     field: field,
                     value: groupValue,
-                    items: [],
-                    aggregates: aggregate
+                    items: []
                 },
                 currentValue,
                 idx,
@@ -331,12 +330,10 @@
                     group = {
                         field: field,
                         value: groupValue,
-                        items: [],
-                        aggregates: aggregate
+                        items: []
                     };
                     result.push(group);
                 }
-                calculateAggregate(aggregate, descriptor.aggregates, item);
                 group.items.push(item);
             }
             return new Query(result);
