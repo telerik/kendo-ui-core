@@ -210,16 +210,16 @@
         initUpload: function() {
             upload = new window.Upload($("#uploadWrap"));
             $("#uploadphotos").bind("click", function(e) {
+                e.preventDefault();
+
                 if(!$(this).hasClass("i-state-disabled")) {
-                    e.preventDefault();
+                    slideshow.stop();
+                    updatePlayIcon(slideshow._started);
 
                     var button = $("#backButton");
                     if (button.data("state") !== "initial") {
                         button.click();
                     }
-
-                    slideshow.stop();
-                    updatePlayIcon(slideshow._started);
 
                     $("#mainTemplate").hide();
                     $("#mainUserWrap").hide();
