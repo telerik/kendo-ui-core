@@ -229,6 +229,10 @@
     Query.expandFilter = function(expressions) {
         return expressions = $.isArray(expressions) ? expressions : [expressions];
     }
+    Query.expandGroup = function(field, dir) {
+        var descriptor = typeof field === "string" ? { field: field, dir: dir } : field;
+        return $.isArray(descriptor) ? descriptor : (descriptor !== undefined ? [descriptor] : []);
+    }
     Query.prototype = {
         toArray: function () {
             return this.data;
@@ -283,7 +287,7 @@
                 descriptor = descriptors[0];
                 result = result.groupBy(descriptors[0]);
 
-                if(descriptors.length > 0) {
+                if(descriptors.length > 1) {
                     result = result.select(function(group) {
                         return {
                             field: group.field,

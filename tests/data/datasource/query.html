@@ -31,6 +31,9 @@
                 },
                 data: function(data) {
                     return data;
+                },
+                group: function(data) {
+                    return data;
                 }
             },
             data = [],
@@ -464,6 +467,95 @@
                 equal(view[0].age, 1);
                 equal(view[1].age, 3);
             });
+
+            test("query grouping should group data if set", function() {
+                var dataSource = new DataSource({
+                    data: [{age: 1}, {age: 1}, {age: 3}]
+                });
+                dataSource.read();
+                dataSource.query( { group: [{ field: "age" }] });
+                var view = dataSource.view();
+                equal(view.length, 2);
+                equal(view[0].items.length, 2);
+                equal(view[1].items.length, 1);
+            });
+
+            test("query does not group data if serverGrouping is true", function() {
+                var transport = new RemoteTransport({
+                        read: "foo"
+                    });
+
+                var dataSource = new DataSource( {
+                    transport: transport,
+                    serverGrouping: true
+                }).bind("change", function() {
+                    start();
+
+                    var view = dataSource.view();
+                    equal(view.length, 2);
+                    equal(view[0].age, 1);
+                    equal(view[1].age, 2);
+                });
+
+                $.mockjax({
+                    url: "foo",
+                    responseText: '[{"age": 1}, {"age": 2}]'
+                });
+
+                dataSource.query( { group: [{ field: "age" }] });
+                stop(1000);
+            });
+
+            test("group does not modify the original data", function() {
+                var data = [{age: 1}, {age: 1}, {age: 3}];
+
+                var dataSource = new DataSource({
+                    data: data
+                });
+                dataSource.read();
+                dataSource.query( { group: [{ field: "age" }] });
+                var view = dataSource.data();
+
+                ok(view === data);
+            });
+
+            test("query sets group when single group is passed", function() {
+                var dataSource = new DataSource({
+                    data: [{age: 1}, {age: 2}, {age: 3}]
+                });
+
+                dataSource.query( { group: { field: "age" } });
+                equal(dataSource.group().length, 1);
+                equal(dataSource.group()[0].field, "age");
+            });
+
+            test("query removes group expression from the state if not passed", function() {
+                var dataSource = new DataSource({
+                    data: [{age: 1}, {age: 2}]
+                });
+                dataSource.read();
+                dataSource.query( { group: { field: "age" } });
+                dataSource.query({});
+                var view = dataSource.view();
+
+                equal(view.length, 2);
+                equal(view[0].age, 1);
+                equal(view[1].age, 2);
+                equal(dataSource.group(), undefined);
+            });
+
+            test("group should group data if set", function() {
+                var dataSource = new DataSource({
+                    data: [{age: 1}, {age: 1}, {age: 3}]
+                });
+                dataSource.read();
+                dataSource.group("age");
+                var view = dataSource.view();
+                equal(view.length, 2);
+                equal(view[0].items.length, 2);
+                equal(view[1].items.length, 1);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

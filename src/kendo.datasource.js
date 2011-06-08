@@ -26,7 +26,8 @@
             options = options || {},
             page = options.page,
             pageSize = options.pageSize,
-            sort = options.sort;
+            sort = options.sort,
+            group = options.group,
             filter = options.filter;
 
         if(filter) {
@@ -41,6 +42,9 @@
             query = query.skip((page - 1) * pageSize).take(pageSize);
         }
 
+        if (group) {
+            query = query.group(group);
+        }
         return query.toArray();
     }
 
@@ -211,7 +215,8 @@
                 _pageSize: options.pageSize,
                 _page: options.page  || (options.pageSize ? 1 : undefined),
                 _sort: options.sort,
-                _filter: options.filter
+                _filter: options.filter,
+                _group: options.group
             });
 
             Observable.fn.init.call(that);
@@ -232,6 +237,9 @@
                 },
                 status: function(data) {
                     return data.status;
+                },
+                group: function(data) {
+                    return data;
                 }
             }, options.deserializer);
 
@@ -265,6 +273,7 @@
             serverSorting: false,
             serverPaging: false,
             serverFiltering: false,
+            serverGrouping: false,
             autoSync: false,
             sendAllFields: true,
             batch: {
@@ -532,10 +541,15 @@
             var that = this,
             options = {},
             updated = Model ? that._updatedModels() : [],
+            hasGroups = that.options.serverGrouping === true && that._group,
             models = that._models;
 
             that._total = that._deserializer.total(data);
-            data = that._deserializer.data(data);
+            if(hasGroups) {
+                data = that._deserializer.group(data);
+            } else {
+                data = that._deserializer.data(data);
+            }
             that._data = data;
 
             $.each(updated, function() {
@@ -558,6 +572,10 @@
 
             if (that.options.serverFiltering !== true) {
                 options.filter = that._filter;
+            }
+
+            if (that.options.serverGrouping !== true) {
+                options.group = that._group;
             }
 
             that._view = process(data, options);
@@ -624,6 +642,7 @@
                 that._page = options.page;
                 that._sort = options.sort;
                 that._filter = options.filter;
+                that._group = options.group;
 
                 if (options.sort) {
                     that._sort = options.sort = kendo.data.Query.expandSort(options.sort);
@@ -631,6 +650,10 @@
 
                 if (options.filter) {
                     that._filter = options.filter = kendo.data.Query.expandFilter(options.filter);
+                }
+
+                if (options.group) {
+                    that._group = options.group = kendo.data.Query.expandGroup(options.group);
                 }
             }
 
@@ -647,7 +670,7 @@
 
             if(val !== undefined) {
                 val = Math.max(Math.min(Math.max(val, 1), that._totalPages()), 1);
-                that.query({ page: val, pageSize: that.pageSize(), sort: that.sort(), filter: that.filter()});
+                that.query({ page: val, pageSize: that.pageSize(), sort: that.sort(), filter: that.filter(), group: that.group()});
                 return;
             }
             return that._page;
@@ -657,7 +680,7 @@
             var that = this;
 
             if(val !== undefined) {
-                that.query({ page: that.page(), pageSize: val, sort: that.sort(), filter: that.filter()});
+                that.query({ page: that.page(), pageSize: val, sort: that.sort(), filter: that.filter(), group: that.group()});
                 return;
             }
 
@@ -668,7 +691,7 @@
             var that = this;
 
             if(val !== undefined) {
-                that.query({ page: that.page(), pageSize: that.pageSize(), sort: val, filter: that.filter() });
+                that.query({ page: that.page(), pageSize: that.pageSize(), sort: val, filter: that.filter(), group: that.group()});
                 return;
             }
 
@@ -679,11 +702,22 @@
             var that = this;
 
             if(val !== undefined) {
-                that.query({ page: that.page(), pageSize: that.pageSize(), sort: that.sort(), filter: val });
+                that.query({ page: that.page(), pageSize: that.pageSize(), sort: that.sort(), filter: val, group: that.group() });
                 return;
             }
 
             return that._filter;
+        },
+
+        group: function(val) {
+            var that = this;
+
+            if(val !== undefined) {
+                that.query({ page: that.page(), pageSize: that.pageSize(), sort: that.sort(), filter: that.filter(), group: val });
+                return;
+            }
+
+            return that._group;
         },
 
         total: function() {
