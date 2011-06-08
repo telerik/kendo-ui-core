@@ -256,7 +256,40 @@
                 equal(view.length, 2);
                 equal(view[0].bar, "foo");
             });
-       </script>
+            test("reads data through group if grouping is applied", function() {
+                var isCalled = false,
+                    dataSource = new DataSource({
+                    data: [{ id:1, bar: "foo" }, { id: 2, bar: "baz" }, { id: 3, bar: "baz"} ],
+                    group: { field: "bar" },
+                    deserializer: {
+                        group: function() {
+                            isCalled = true;
+                            return [];
+                        }
+                    },
+                    serverGrouping: true
+                });
+                dataSource.read();
+                ok(isCalled);
+            });
+
+            test("read does not read data through group if grouping is applied", function() {
+                var isCalled = false,
+                    dataSource = new DataSource({
+                    data: [{ id:1, bar: "foo" }, { id: 2, bar: "baz" }, { id: 3, bar: "baz"} ],
+                    group: { field: "bar" },
+                    deserializer: {
+                        group: function() {
+                            isCalled = true;
+                            return [];
+                        }
+                    },
+                    serverGrouping: false
+                });
+                dataSource.read();
+                ok(!isCalled);
+            });
+        </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
     </body>
