@@ -286,7 +286,7 @@
 
             if(element.is("select")) {
                 index = element.children(":selected").index();
-                options.index = index != -1 ? index : 0;
+                options.index = index > -1 ? index : 0;
 
                dataSource.select = element;
                dataSource.fields = [{ field: options.dataTextField },
