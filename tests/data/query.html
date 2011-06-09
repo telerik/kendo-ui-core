@@ -193,6 +193,14 @@
                 equal(result[2].name, "foo");
             });
 
+            test("sorting nested objects", function() {
+                var  data = [{ foo: { age: 1 } }, { foo : { age: 2 } }]
+
+                var result = new Query(data).sort({ field: "foo.age", dir: "desc" }).toArray();
+
+                equal(result[0].foo.age, 2);
+            });
+
             test("sort ignores direction case", function () {
                 var data = [{ name: "foo" }, { name: "bar" }, { name: "foo"}];
 
