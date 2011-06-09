@@ -33,6 +33,8 @@
 
             options = that.options;
 
+            that._updateClasses();
+
             element
                 .delegate(clickableItems, CLICK, $.proxy(that._click, that))
 				.delegate(clickableItems, MOUSEENTER + ' ' + MOUSELEAVE, that._toggleHover)
@@ -110,6 +112,67 @@
 
         _toggleHover: function(e) {
             $(e.currentTarget).toggleClass('t-state-hover', e.type == MOUSEENTER);
+        },
+
+        _updateClasses: function() {
+            var that = this;
+
+            that.element.addClass('t-widget t-reset t-header t-panelbar');
+
+            var items = that.element
+                            .find('ul')
+                            .addClass('t-group')
+                            .end()
+                            .find('li:not(.t-state-active) > ul')
+                            .css({ display: 'none' })
+                            .end()
+                            .find('li')
+                            .addClass('t-item');
+
+            items
+                .children('img')
+                .addClass('t-image');
+            items
+                .children('a')
+                .addClass('t-link')
+                .children('img')
+                .addClass('t-image');
+            items
+                .filter(':not([disabled]):not([class*=t-state])')
+                .addClass('t-state-default');
+            items
+                .filter('li[disabled]')
+                .addClass('t-state-disabled');
+            items
+                .filter(':not([class*=t-state])')
+                .children('a:focus')
+                .parent()
+                .addClass('t-state-active');
+
+            items.each(function() {
+                var item = $(this);
+
+                if (!item.children('.t-link').length)
+                    item
+                        .contents()      // exclude groups, real links, templates and empty text nodes
+                        .filter(function() { return (this.nodeName != 'UL' && this.nodeName != 'A' && this.nodeName != 'DIV' && !(this.nodeType == 3 && !$.trim(this.nodeValue))); })
+                        .wrapAll('<span class="t-link"/>');
+            });
+
+            that.element
+                .find('>li>.t-link')
+                .addClass('t-header');
+
+            items
+                .filter(':has(.t-group)')
+                .children('.t-link:not(:has([class*=t-arrow]))')
+                .each(function () {
+                    var item = $(this),
+                        parent = item.parent();
+
+                    item.append('<span class="t-icon ' + (parent.hasClass('t-state-active') ? 't-arrow-up t-panelbar-collapse' : 't-arrow-down t-panelbar-expand') + '"></span>');
+                });
+
         },
 
         _click: function (e) {

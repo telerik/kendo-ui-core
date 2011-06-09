@@ -68,63 +68,6 @@
             hoverDelay: 100
         },
 
-        _updateClasses: function() {
-            var that = this;
-
-            that.element.addClass('t-widget t-reset t-header t-menu').addClass('t-menu-' + that.options.orientation);
-
-            var items = that.element
-                            .find('ul')
-                            .addClass('t-group')
-                            .end()
-                            .find('li')
-                            .addClass('t-item');
-
-            items
-                .children('img')
-                .addClass('t-image');
-            items
-                .children('a')
-                .addClass('t-link')
-                .children('img')
-                .addClass('t-image');
-            items
-                .filter(':not([disabled])')
-                .addClass('t-state-default');
-            items
-                .filter('li[disabled]')
-                .addClass('t-state-disabled');
-            items
-                .children('a:focus')
-                .parent()
-                .addClass('t-state-active');
-
-            items.each(function() {
-                var item = $(this);
-
-                if (!item.children('.t-link').length)
-                    item
-                        .contents()      // exclude groups, real links, templates and empty text nodes
-                        .filter(function() { return (this.nodeName != 'UL' && this.nodeName != 'A' && this.nodeName != 'DIV' && !(this.nodeType == 3 && !$.trim(this.nodeValue))); })
-                        .wrapAll('<span class="t-link"/>');
-            });
-
-            items
-                .filter(':has(.t-group)')
-                .children('.t-link:not(:has([class*=t-arrow]))')
-                .each(function () {
-                    var item = $(this),
-                        parent = item.parent().parent();
-
-                    item.append('<span class="t-icon ' + (parent.hasClass('t-menu-horizontal') ? 't-arrow-down' : 't-arrow-next') + '"></span>');
-                });
-
-        },
-
-        _toggleHover: function(e) {
-            $(e.currentTarget).toggleClass('t-state-hover', e.type == MOUSEENTER);
-        },
-    
         toggle: function (element, enable) {
             $(element).each(function () {
                 $(this)
@@ -192,6 +135,63 @@
                     }
                 }, that.options.hoverDelay));
             });
+        },
+
+        _toggleHover: function(e) {
+            $(e.currentTarget).toggleClass('t-state-hover', e.type == MOUSEENTER);
+        },
+
+        _updateClasses: function() {
+            var that = this;
+
+            that.element.addClass('t-widget t-reset t-header t-menu').addClass('t-menu-' + that.options.orientation);
+
+            var items = that.element
+                            .find('ul')
+                            .addClass('t-group')
+                            .end()
+                            .find('li')
+                            .addClass('t-item');
+
+            items
+                .children('img')
+                .addClass('t-image');
+            items
+                .children('a')
+                .addClass('t-link')
+                .children('img')
+                .addClass('t-image');
+            items
+                .filter(':not([disabled])')
+                .addClass('t-state-default');
+            items
+                .filter('li[disabled]')
+                .addClass('t-state-disabled');
+            items
+                .children('a:focus')
+                .parent()
+                .addClass('t-state-active');
+
+            items.each(function() {
+                var item = $(this);
+
+                if (!item.children('.t-link').length)
+                    item
+                        .contents()      // exclude groups, real links, templates and empty text nodes
+                        .filter(function() { return (this.nodeName != 'UL' && this.nodeName != 'A' && this.nodeName != 'DIV' && !(this.nodeType == 3 && !$.trim(this.nodeValue))); })
+                        .wrapAll('<span class="t-link"/>');
+            });
+
+            items
+                .filter(':has(.t-group)')
+                .children('.t-link:not(:has([class*=t-arrow]))')
+                .each(function () {
+                    var item = $(this),
+                        parent = item.parent().parent();
+
+                    item.append('<span class="t-icon ' + (parent.hasClass('t-menu-horizontal') ? 't-arrow-down' : 't-arrow-next') + '"></span>');
+                });
+
         },
 
         _wrap: function (element) {
