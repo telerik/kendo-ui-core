@@ -84,7 +84,6 @@
     <None Include="AeroViewr\SearchNoresults.aii" />
     <None Include="AeroViewr\SearchOpenImage.aii" />
     <None Include="AeroViewr\LogInlLogOut.aii" />
-    <None Include="AeroViewr\Upload.aii" />
     <None Include="AeroViewr\UploadNotLogged.aii" />
     <None Include="Settings.aiis" />
   </ItemGroup>
@@ -149,9 +148,6 @@
   <ItemGroup>
     <None Include="AeroViewr\GlassManyTimes.resx">
       <DependentUpon>GlassManyTimes.aii</DependentUpon>
-    </None>
-    <None Include="AeroViewr\Upload.resx">
-      <DependentUpon>Upload.aii</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
