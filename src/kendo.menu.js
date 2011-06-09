@@ -37,6 +37,8 @@
 
             options = that.options;
 
+            that._updateClasses();
+
             that.nextItemZIndex = 100;
 
             element.delegate( itemSelector, MOUSEENTER, $.proxy( that._mouseenter , that ) )
@@ -64,6 +66,59 @@
             orientation: 'horizontal',
             openOnClick: false,
             hoverDelay: 100
+        },
+
+        _updateClasses: function() {
+            var that = this;
+
+            that.element.addClass('t-widget t-reset t-header t-menu').addClass('t-menu-' + that.options.orientation);
+
+            var items = that.element
+                            .find('ul')
+                            .addClass('t-group')
+                            .end()
+                            .find('li')
+                            .addClass('t-item');
+
+            items
+                .children('img')
+                .addClass('t-image');
+            items
+                .children('a')
+                .addClass('t-link')
+                .children('img')
+                .addClass('t-image');
+            items
+                .filter(':not([disabled])')
+                .addClass('t-state-default');
+            items
+                .filter('li[disabled]')
+                .addClass('t-state-disabled');
+            items
+                .children('a:focus')
+                .parent()
+                .addClass('t-state-active');
+
+            items.each(function() {
+                var item = $(this);
+
+                if (!item.children('.t-link').length)
+                    item
+                        .contents()      // exclude groups, real links, templates and empty text nodes
+                        .filter(function() { return (this.nodeName != 'UL' && this.nodeName != 'A' && this.nodeName != 'DIV' && !(this.nodeType == 3 && !$.trim(this.nodeValue))); })
+                        .wrapAll('<span class="t-link"/>');
+            });
+
+            items
+                .filter(':has(.t-group)')
+                .children('.t-link:not(:has([class*=t-arrow]))')
+                .each(function () {
+                    var item = $(this),
+                        parent = item.parent().parent();
+
+                    item.append('<span class="t-icon ' + (parent.hasClass('t-menu-horizontal') ? 't-arrow-down' : 't-arrow-next') + '"></span>');
+                });
+
         },
 
         _toggleHover: function(e) {
@@ -95,7 +150,7 @@
                 clearTimeout(item.data('timer'));
 
                 item.data('timer', setTimeout(function () {
-                    var ul = item.find('.t-group').filter(':first');
+                    var ul = item.find('.t-group').filter(':first:hidden');
                     if (ul.length) {
                         var effectOptions = extend(getEffectOptions(item), that.options.animation.open);
                         item.data('effectOptions', effectOptions);
@@ -114,13 +169,13 @@
         close: function (element) {
             var that = this;
 
-            $(element).each(function (index, item) {
-                item = $(item);
+            $(element).each(function () {
+                var item = $(this);
 
                 clearTimeout(item.data('timer'));
 
                 item.data('timer', setTimeout(function () {
-                    var ul = item.find('.t-group').filter(':first');
+                    var ul = item.find('.t-group').filter(':first:visible');
                     if (ul.length) {
                         var hasCloseAnimation = 'effects' in that.options.animation.close;
                         var wrap = that._wrap(ul).css({ overflow: 'hidden' });
@@ -130,7 +185,7 @@
                                         wrap.css({ display: 'none' });
                                         item.css('zIndex', '');
 
-                                        if (that.element.find('.t-group:visible').length == 0)
+                                        if (!that.element.find('.t-group:visible').length)
                                             that.nextItemZIndex = 100;
                                     }
                                 }));
@@ -157,6 +212,12 @@
                                  paddingBottom: bottom
                              }));
             }
+
+            if ($.browser.msie && parseInt($.browser.version, 10) <= 7)
+                element.css({
+                    width: '100%',
+                    zoom: 1
+                });
 
             return element.parent();
         },

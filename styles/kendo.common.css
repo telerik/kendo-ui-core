@@ -574,16 +574,25 @@ div.t-window-content
 .t-menu .t-item
 {
     position: relative;
-    display: inline-block;
-    *display: inline;
+    float: left;
     zoom: 1;
     border-width: 0 1px 0 0;
     border-style: solid;
     vertical-align: top;
 }
 
+.t-menu:after /* add a clear fix to expand content */
+{
+    content: '\A0';
+    clear: both;
+    display: block;
+    height: 0;
+}
+
+.t-menu .t-item .t-item,
 .t-menu-vertical .t-item
 {
+    float: none;
     display: block;
     border-width: 0;
 }
