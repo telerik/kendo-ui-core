@@ -3,16 +3,9 @@
 
     var Comparer = {
         selector: function(field) {
-            if (field) {
-                return $.isFunction(field) ? field : function(record) {
-                    return record[field];
-                };
-            }
-
-            return function(record) {
-                return record;
-            }
+            return $.isFunction(field) ? field : kendo.getter(field);
         },
+
         asc: function(field) {
             var selector = this.selector(field);
             return function (a, b) {
@@ -22,6 +15,7 @@
                 return a > b ? 1 : (a < b ? -1 : 0);
             };
         },
+
         desc: function(field) {
             var selector = this.selector(field);
             return function (a, b) {
@@ -31,9 +25,11 @@
                 return a < b ? 1 : (a > b ? -1 : 0);
             };
         },
+
         create: function(descriptor) {
             return Comparer[descriptor.dir.toLowerCase()](descriptor.field);
         },
+
         combine: function(comparers) {
              return function(a, b) {
                  var result = comparers[0](a, b),
