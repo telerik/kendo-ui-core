@@ -141,7 +141,8 @@
 
         _wrap: function (element) {
             if (!element.parent().hasClass('t-animation-container')) {
-                var radius = element.css('box-shadow').match(/(\d+?)px\s*(\d+?)px\s*(\d+?)px\s*(\d+?)?/i) || [ 0, 0, 0, 0, 0 ],
+                var shadow = element.css('box-shadow'),
+                    radius = shadow ? shadow.match(/(\d+?)px\s*(\d+?)px\s*(\d+?)px\s*(\d+?)?/i) || [ 0, 0, 0, 0, 0 ] : [ 0, 0, 0, 0, 0 ],
                     blur = Math.max((+radius[3]), +(radius[4] || 0)),
                     right = (+radius[1]) + blur,
                     bottom = (+radius[2]) + blur;

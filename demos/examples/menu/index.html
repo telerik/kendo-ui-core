@@ -1,0 +1,148 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Title</title>
+        <!-- script -->
+        <script src="../../../src/jquery.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.fx.js"></script>
+        <script src="../../../src/kendo.menu.js"></script>
+        <!-- script -->
+        <!-- css -->
+        <link type="text/css" href="../styles/examples.css" rel="stylesheet"/>
+        <link type="text/css" href="../../../styles/kendo.common.css" rel="stylesheet"/>
+        <link type="text/css" href="../../../styles/kendo.vista.css" rel="stylesheet"/>
+        <!-- css -->
+    </head>
+    <body>
+        <!-- nav -->
+        <!-- nav -->
+        <div id="example">
+            <style type="text/css" id="exampleCSS" scoped="scoped">
+                #Menu-4
+                {
+                    overflow:  hidden;
+                }
+                #buy, #express {
+                    height: 100%;
+                    outline: 0 none;
+                    position: absolute;
+                    text-indent: -9999px;
+                    width: 50%;
+                }
+                #buy {
+                    left: 0;
+                }
+                #express {
+                    right: 0;
+                }
+            </style>
+            <ul id="Menu" class="t-widget t-reset t-header t-menu">
+                <li class="t-item t-state-default" style=""><span class="t-link"><img
+                        src="../icons/Suites/mvc.png" class="t-image" alt="image">ASP.NET MVC<span
+                        class="t-icon t-arrow-down"></span></span>
+
+                    <ul class="t-group">
+                        <li class="t-item t-state-default"><span class="t-link"><img
+                                src="../icons/Mvc/Grid.png" class="t-image" alt="image">Grid</span>
+                        </li>
+                        <li class="t-item t-state-default"><span class="t-link"><img
+                                src="../icons/Mvc/Menu.png" class="t-image" alt="image">Menu<span
+                        class="t-icon t-arrow-next"></span></span>
+                            <ul class="t-group">
+                                <li class="t-item t-state-default"><span class="t-link"><img
+                                        src="../icons/Mvc/Grid.png" class="t-image" alt="image">Grid</span>
+                                </li>
+                                <li class="t-item t-state-default"><span class="t-link"><img
+                                        src="../icons/Mvc/Menu.png" class="t-image" alt="image">Menu</span>
+                                </li>
+                                <li class="t-item t-state-default"><span class="t-link"><img
+                                        src="../icons/Mvc/PanelBar.png" class="t-image"
+                                        alt="image">PanelBar</span></li>
+                                <li class="t-item t-state-default"><span class="t-link"><img
+                                        src="../icons/Mvc/TabStrip.png" class="t-image"
+                                        alt="image">TabStrip</span></li>
+                            </ul>
+                        </li>
+                        <li class="t-item t-state-default"><span class="t-link"><img
+                                src="../icons/Mvc/PanelBar.png" class="t-image"
+                                alt="image">PanelBar</span></li>
+                        <li class="t-item t-state-default"><span class="t-link"><img
+                                src="../icons/Mvc/TabStrip.png" class="t-image"
+                                alt="image">TabStrip</span></li>
+                    </ul>
+                </li><li class="t-item t-state-default"><span class="t-link"><img src="../icons/Suites/sl.png"
+                                                                             class="t-image" alt="image">Silverlight<span
+                        class="t-icon t-arrow-down"></span></span>
+                    <ul class="t-group">
+                        <li class="t-item t-state-default"><span class="t-link"><img
+                                src="../icons/Sl/GridView.gif" class="t-image" alt="image">GridView</span>
+                        </li>
+                        <li class="t-item t-state-default"><span class="t-link"><img
+                                src="../icons/Sl/Scheduler.gif" class="t-image"
+                                alt="image">Scheduler</span></li>
+                        <li class="t-item t-state-default"><span class="t-link"><img
+                                src="../icons/Sl/Docking.gif" class="t-image" alt="image">Docking</span>
+                        </li>
+                        <li class="t-item t-state-default"><span class="t-link"><img
+                                src="../icons/Sl/Chart.gif" class="t-image" alt="image">Chart</span></li>
+                        <li class="t-item t-state-default"><a href="http://www.telerik.com/products/silverlight.aspx"
+                                                              class="t-link">... and 28 more!</a></li>
+                    </ul>
+                </li><li class="t-item t-state-default"><span class="t-link"><img src="../icons/Suites/ajax.png"
+                                                                             class="t-image" alt="image">ASP.NET AJAX<span
+                        class="t-icon t-arrow-down"></span></span>
+                    <ul class="t-group">
+                        <li class="t-item t-state-default"><span class="t-link"><img
+                                src="../icons/Ajax/Grid.png" class="t-image" alt="image">Grid</span></li>
+                        <li class="t-item t-state-default"><span class="t-link"><img
+                                src="../icons/Ajax/Editor.png" class="t-image" alt="image">Editor</span>
+                        </li>
+                        <li class="t-item t-state-default"><span class="t-link"><img
+                                src="../icons/Ajax/Scheduler.png" class="t-image"
+                                alt="image">Scheduler</span></li>
+                        <li class="t-item t-state-default"><a href="http://www.telerik.com/products/aspnet-ajax.aspx"
+                                                              class="t-link">... and 28 more!</a></li>
+                    </ul>
+                </li><li class="t-item t-state-default"><a href="#Menu-4" class="t-link"><img
+                        src="../icons/Suites/orm.png" class="t-image" alt="image">OpenAccess ORM<span
+                        class="t-icon t-arrow-down"></span></a>
+                    <ul class="t-group">
+                        <li class="t-item">
+                            <div id="Menu-4" class="t-content">
+                                <img alt="Telerik OpenAccess" src="../icons/orm-comparison.png">
+                                <a href="http://www.telerik.com/purchase/individual/orm.aspx" id="buy">
+                                    Telerik OpenAccess ORM
+                                </a>
+                                <a href="http://www.telerik.com/community/license-agreement.aspx?pId=639" id="express">
+                                    Telerik OpenAccess ORM Express
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </li><li class="t-item t-state-default"><span class="t-link"><img src="../icons/Suites/rep.png"
+                        class="t-image" alt="image">Reporting</span></li><li class="t-item t-state-default"><span class="t-link"><img
+                        src="../icons/Suites/sitefinity.png" class="t-image" alt="image">Sitefinity ASP.NET CMS</span>
+                </li><li style="border-right: 0;" class="t-item t-state-default"><span class="t-link">Other products<span
+                        class="t-icon t-arrow-down"></span></span>
+                    <ul class="t-group">
+                        <li class="t-item t-state-default"><span class="t-link"><img
+                                src="../icons/Suites/test.png" class="t-image" alt="image">Web Testing Tools</span>
+                        </li>
+                        <li class="t-item t-state-default"><span class="t-link"><img
+                                src="../icons/Suites/win.png" class="t-image" alt="image">WinForms UI Controls</span>
+                        </li>
+                        <li class="t-item t-state-default"><span class="t-link"><img
+                                src="../icons/Suites/wpf.png" class="t-image"
+                                alt="image">WPF UI Controls</span></li>
+                    </ul>
+                </li>
+            </ul>
+            <script type="text/javascript">
+                $("#Menu").kendoMenu();
+            </script>
+        </div>
+        <!-- code -->
+        <!-- code -->
+    </body>
+</html>

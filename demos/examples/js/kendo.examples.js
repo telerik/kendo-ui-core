@@ -13,7 +13,7 @@
             $("li a").each(function() {
                 if ($(this).attr("href").toLowerCase() === href) {
                     $.get(href, function(html) {
-                        $("#example").empty().replaceWith(Application.body(html).filter("#example"));
+                        $("#example").empty().html(Application.body(html));
 
                         $("#code").empty();
                     });
@@ -22,7 +22,7 @@
         },
 
         body: function(html) {
-            return $(/<body[^>]*>(([\u000a\u000d\u2028\u2029]|.)*)<\/body>/ig.exec(html)[1]);
+            return /<div id="example">(([\u000a\u000d\u2028\u2029]|.)*)<\/div>/ig.exec(html)[1];
         },
 
         init: function() {
