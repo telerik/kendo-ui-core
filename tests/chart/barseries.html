@@ -30,8 +30,8 @@
                 var series,
                     plotArea,
                     viewFactory,
-                    positiveSeries = { data: [1, 2] },
-                    negativeSeries = { data: [-1, -2] },
+                    positiveSeries = { data: [1, 2], label: {} },
+                    negativeSeries = { data: [-1, -2], label: {} },
                     VALUE_AXIS_MAX = 2,
                     CATEGORY_AXIS_Y = 2,
                     TOLERANCE = 0.1;
@@ -43,9 +43,8 @@
                         getSlot: function(categoryIndex) {
                             return new Box(categoryIndex, CATEGORY_AXIS_Y,
                             categoryIndex + 1, CATEGORY_AXIS_Y);
-                        }
+                        },
                     },
-
                     axisY: {
                         getSlot: function(value) {
                             var value = typeof value === "undefined" ? 0 : value,
@@ -54,7 +53,8 @@
                                 slotBottom = Math.max(CATEGORY_AXIS_Y, valueY);
 
                             return new Box(0, slotTop, 0, slotBottom);
-                        }
+                        },
+                        options: {}
                     }
                 });
 
@@ -340,8 +340,162 @@
                 var series,
                     plotArea,
                     viewFactory,
-                    positiveSeries = { data: [1, 2] },
-                    negativeSeries = { data: [-1, -2] },
+                    positiveData = [100, 150],
+                    negativeData = [-100, -150],
+                    VALUE_AXIS_MAX = 200,
+                    CATEGORY_AXIS_Y = 200,
+                    TOLERANCE = 0.1;
+
+                function PlotAreaStub() { }
+
+                $.extend(PlotAreaStub.prototype, {
+                    axisX: {
+                        getSlot: function(categoryIndex) {
+                            return new Box(categoryIndex, CATEGORY_AXIS_Y,
+                            categoryIndex + 1, CATEGORY_AXIS_Y);
+                        },
+                        options: {
+                            axisCrossingValue: 0
+                        }
+                    },
+                    axisY: {
+                        getSlot: function(value) {
+                            var value = typeof value === "undefined" ? 0 : value,
+                                valueY = VALUE_AXIS_MAX - value,
+                                slotTop = Math.min(CATEGORY_AXIS_Y, valueY),
+                                slotBottom = Math.max(CATEGORY_AXIS_Y, valueY);
+
+                            return new Box(0, slotTop, 0, slotBottom);
+                        },
+                        options: {
+                            axisCrossingValue: 0
+                        }
+                    }
+                });
+
+                function setupBarChart(options) {
+                    plotArea = new PlotAreaStub();
+                    viewFactory = new ViewFactoryStub();
+
+                    series = new Chart.BarChart(plotArea, options);
+
+                    series.updateLayout();
+                }
+
+                // ------------------------------------------------------------
+                module("Bar Chart / Labels / Positive Values", {
+                    setup: function() {
+                        setupBarChart({ series: [{ data: positiveData, label: {} }] });
+                    }
+                });
+
+                test("bars labels have insideEnd position", function() {
+                    $.each(series._bars, function() {
+                        var text = this.children[0].children[0];
+                        equal(this.box.y1, text.box.y1);
+                        ok(this.box.x1 > text.box.x1 && this.box.x2 < text.box.x2);
+                    });
+                });
+
+                test("bars labels have insideBase position", function() {
+                    setupBarChart({ series: [{ data: positiveData, label: { position: "insideBase"} }] });
+                    $.each(series._bars, function() {
+                        var text = this.children[0].children[0];
+                        equal(this.box.y2, text.box.y2);
+                        ok(this.box.x1 > text.box.x1 && this.box.x2 < text.box.x2);
+                    });
+                });
+
+                test("bars labels have outsideEnd position", function() {
+                    setupBarChart({ series: [{ data: positiveData, label: { position: "outsideEnd"} }] });
+                    $.each(series._bars, function() {
+                        var text = this.children[0].children[0];
+                        equal(this.box.y1 - text.box.height(), text.box.y1);
+                        ok(this.box.x1 > text.box.x1 && this.box.x2 < text.box.x2);
+                    });
+                });
+
+                test("bars labels have center position", function() {
+                    setupBarChart({ series: [{ data: positiveData, label: { position: "center" } }] });
+                    $.each(series._bars, function() {
+                        var text = this.children[0].children[0],
+                            margin = (this.box.height() - text.box.height()) / 2;
+                        equal(this.box.y1 + margin, text.box.y1);
+                        ok(this.box.x1 > text.box.x1 && this.box.x2 < text.box.x2);
+                    });
+                });
+
+                test("bars labels should be above the axis", function() {
+                    setupBarChart({ series: [ { data: [0, 1, 2, 3], label: {} } ] });
+
+                    $.each(series._bars, function() {
+                        var text = this.children[0].children[0];
+                        equal(this.box.y1 - text.box.height(), text.box.y1);
+                        ok(this.box.x1 > text.box.x1 && this.box.x2 < text.box.x2);
+                    });
+                });
+
+                // ------------------------------------------------------------
+                module("Bar Chart / Labels / Negative Values", {
+                    setup: function() {
+                        setupBarChart({ series: [{ data: negativeData, label: {} }] });
+                    }
+                });
+
+                test("bars labels have insideEnd position", function() {
+                    $.each(series._bars, function() {
+                        var text = this.children[0].children[0];
+                        equal(this.box.y2, text.box.y2);
+                        ok(this.box.x1 > text.box.x1 && this.box.x2 < text.box.x2);
+                    });
+                });
+
+                test("bars labels have insideBase position", function() {
+                    setupBarChart({ series: [{ data: negativeData, label: { position: "insideBase"} }] });
+                    $.each(series._bars, function() {
+                        var text = this.children[0].children[0];
+                        equal(this.box.y1, text.box.y1);
+                        ok(this.box.x1 > text.box.x1 && this.box.x2 < text.box.x2);
+                    });
+                });
+
+                test("bars labels have outsideEnd position", function() {
+                    setupBarChart({ series: [{ data: negativeData, label: { position: "outsideEnd"} }] });
+                    $.each(series._bars, function() {
+                        var text = this.children[0].children[0];
+                        equal(this.box.y2, text.box.y1);
+                        ok(this.box.x1 > text.box.x1 && this.box.x2 < text.box.x2);
+                    });
+                });
+
+                test("bars labels have center position", function() {
+                    setupBarChart({ series: [{ data: negativeData, label: { position: "center" } }] });
+                    $.each(series._bars, function() {
+                        var text = this.children[0].children[0],
+                            margin = (this.box.height() - text.box.height()) / 2;
+                        equal(this.box.y1 + margin, text.box.y1);
+                        ok(this.box.x1 > text.box.x1 && this.box.x2 < text.box.x2);
+                    });
+                });
+
+                test("bars labels should not be above the axis", function() {
+                    setupBarChart({ series: [ { data: [-1, -2, -3], label: {} } ] });
+
+                    $.each(series._bars, function() {
+                        var text = this.children[0].children[0];
+                        equal(this.box.y2, text.box.y1);
+                        ok(this.box.x1 > text.box.x1 && this.box.x2 < text.box.x2);
+                    });
+                });
+
+            })();
+
+            (function() {
+                var series,
+                    plotArea,
+                    viewFactory,
+                    positiveSeries = { data: [1, 2], label: {} },
+                    negativeSeries = { data: [-1, -2], label: {} },
                     CATEGORY_AXIS_X = 2,
                     TOLERANCE = 0.1;
 
@@ -355,14 +509,15 @@
                                 slotRight = Math.max(CATEGORY_AXIS_X, valueX);
 
                             return new Box(slotLeft, 0, slotRight, 0);
-                        }
+                        },
+                        options: {}
                     },
-
                     axisY: {
                         getSlot: function(categoryIndex) {
                             return new Box(CATEGORY_AXIS_X, categoryIndex,
                                            CATEGORY_AXIS_X, categoryIndex + 1);
-                        }
+                        },
+                        options: {}
                     }
                 });
 
@@ -565,7 +720,6 @@
                             return new Box();
                         }
                     },
-
                     axisY: {
                         getSlot: function(categoryIndex) {
                             return new Box();
