@@ -30,6 +30,7 @@
             $("#PanelBar2").kendoPanelBar({ animation: { open: { effects: { fadeIn: {}, expandVertical: {} } } } });
             $("#PanelBar3").kendoPanelBar({ animation: { open: { effects: { fadeIn: {}, expandVertical: {} } } }, expandMode: 0 });
             $("#PanelBar4").kendoPanelBar({ contentUrls: [ 'AjaxView1.html', 'AjaxView2.html', 'AjaxView1.html', 'AjaxView2.html', 'AjaxView1.html' ] });
+            $("#Panel1").kendoPanelBar().css({ width: '300px', 'float': 'left', clear: 'both' });
         });
     </script>
 </head>
@@ -341,7 +342,7 @@
         </li>
     </ul>
     <ul class="t-widget t-panelbar t-reset" id="PanelBar4" style="width: 300px; float: left; margin-bottom: 30px;">
-        <li class="t-item t-state-active"><a href="#PanelBar4-1" class="t-link t-header">Pure ASP.NET MVC components<span class="t-icon t-arrow-up t-panelbar-collapse"></span></a>
+        <li class="t-item t-state-default"><a href="#PanelBar4-1" class="t-link t-header">Pure ASP.NET MVC components<span class="t-icon t-arrow-down t-panelbar-expand"></span></a>
             <div style="display:none" id="PanelBar4-1" class="t-content"></div>
         </li>
         <li class="t-item t-state-disabled"><a href="#PanelBar4-2" class="t-link t-header">Completely Open Source<span class="t-icon t-arrow-down t-panelbar-expand"></span></a>
@@ -357,5 +358,95 @@
             <div style="display:none" id="PanelBar4-5" class="t-content"></div>
         </li>
     </ul>
+<br />
+    <ul id="Panel1">
+        <li class="t-state-active">
+            <img src="Icons/Suites/mvc.png" alt="image">ASP.NET MVC
+            <ul>
+                <li>
+                    <img src="Icons/Mvc/Grid.png" alt="image">Grid
+                </li>
+                <li>
+                    <img src="Icons/Mvc/Menu.png" alt="image">Menu
+                </li>
+                <li>
+                    <img src="Icons/Mvc/PanelBar.png" alt="image">PanelBar
+                </li>
+                <li>
+                    <img src="Icons/Mvc/TabStrip.png" alt="image">TabStrip
+                </li>
+            </ul>
+        </li>
+        <li>
+            <img src="Icons/Suites/sl.png" alt="image">Silverlight
+            <ul>
+                <li>
+                    <img src="Icons/Sl/GridView.gif" alt="image">GridView
+                </li>
+                <li>
+                    <img src="Icons/Sl/Scheduler.gif" alt="image">Scheduler
+                </li>
+                <li>
+                    <img src="Icons/Sl/Docking.gif" alt="image">Docking
+                </li>
+                <li>
+                    <img src="Icons/Sl/Chart.gif" alt="image">Chart
+                </li>
+                <li>
+                    <a href="http://www.telerik.com/products/silverlight.aspx">... and 28 more!</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <img src="Icons/Suites/ajax.png" alt="image">ASP.NET AJAX
+            <ul>
+                <li>
+                    <img src="Icons/Ajax/Grid.png" class="t-image" alt="image">Grid
+                </li>
+                <li>
+                    <img src="Icons/Ajax/Editor.png" class="t-image" alt="image">Editor
+                </li>
+                <li>
+                    <img src="Icons/Ajax/Scheduler.png" alt="image">Scheduler
+                </li>
+                <li>
+                    <a href="http://www.telerik.com/products/aspnet-ajax.aspx">... and 28 more!</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#Panel1-4"><img src="Icons/Suites/orm.png" alt="image">OpenAccess ORM</a>
+            <ul>
+                <li>
+                    <div id="Panel1-4">
+                        <img alt="Telerik OpenAccess" src="Icons/orm-comparison.png">
+                        <a href="http://www.telerik.com/purchase/individual/orm.aspx" id="buy">Telerik OpenAccess ORM</a>
+                        <a href="http://www.telerik.com/community/license-agreement.aspx?pId=639" id="express">Telerik OpenAccess ORM Express</a>
+                    </div>
+                </li>
+            </ul>
+        </li>
+        <li disabled="disabled">
+            <img src="Icons/Suites/rep.png" alt="image">Reporting
+        </li>
+        <li>
+            <img src="Icons/Suites/sitefinity.png" alt="image">Sitefinity ASP.NET CMS
+        </li>
+        <li>
+            Other products
+            <ul>
+                <li>
+                    <img src="Icons/Suites/test.png" alt="image">Web Testing Tools
+                </li>
+                <li>
+                    <img src="Icons/Suites/win.png" alt="image">WinForms UI Controls
+                </li>
+                <li>
+                    <img src="Icons/Suites/wpf.png" alt="image">WPF UI Controls
+                </li>
+            </ul>
+        </li>
+    </ul>
+
 </body>
 </html>
