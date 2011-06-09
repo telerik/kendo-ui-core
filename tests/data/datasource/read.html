@@ -262,7 +262,7 @@
                     data: [{ id:1, bar: "foo" }, { id: 2, bar: "baz" }, { id: 3, bar: "baz"} ],
                     group: { field: "bar" },
                     deserializer: {
-                        group: function() {
+                        groups: function() {
                             isCalled = true;
                             return [];
                         }
@@ -279,7 +279,7 @@
                     data: [{ id:1, bar: "foo" }, { id: 2, bar: "baz" }, { id: 3, bar: "baz"} ],
                     group: { field: "bar" },
                     deserializer: {
-                        group: function() {
+                        groups: function() {
                             isCalled = true;
                             return [];
                         }

@@ -250,7 +250,7 @@
                 status: function(data) {
                     return data.status;
                 },
-                group: function(data) {
+                groups: function(data) {
                     return data;
                 },
                 aggregates: function(data) {
@@ -562,7 +562,7 @@
 
             that._total = that._deserializer.total(data);
             if(hasGroups) {
-                data = that._deserializer.group(data);
+                data = that._deserializer.groups(data);
             } else {
                 data = that._deserializer.data(data);
             }
