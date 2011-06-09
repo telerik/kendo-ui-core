@@ -2,11 +2,16 @@
 <html>
     <head>
         <title>grid</title>
-        <script src="../src/jquery.js"></script>
+        <!--<script src="../src/jquery.js"></script>
         <script src="../src/kendo.loader.js"></script>
         <script>
             kendo.loader.grid({ sortable: true, pageable: true, selectable: true });
-        </script>
+        </script>-->
+         <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.query.js"></script>
+        <!--<script src="../src/kendo.datasource.js"></script>
+        <script src="../src/kendo.grid.js"></script>-->
         <link href="../styles/kendo.common.css" type="text/css"/>
         <link href="../styles/kendo.vista.css" type="text/css" rel="stylesheet"/>
         <style type="text/css">
@@ -53,10 +58,7 @@
                     dataSource: {
                         data: data,
                         pageSize: 10
-                    },
-                    pageable: true,
-                    sortable: true,
-                    selectable: "multipleRow"
+                    }
                 });
 
                 $("button").kendoSortable({ dataSource: $("#table1").data("kendoGrid").dataSource });
