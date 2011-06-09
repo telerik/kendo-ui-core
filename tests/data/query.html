@@ -722,6 +722,29 @@
 
                 equal(result.foo.min, 1);
             });
+
+            test("group parent group should have hasSubgroups set to true", function() {
+                var data = [ {foo: 100, bar: "baz"} , {foo: 100, bar: "bar"} , {foo: 1, bar: "baz"} ];
+
+                var result = new Query(data).group( [
+                    { field: "foo" },
+                    { field: "bar" }
+                ], data).toArray();
+
+                equal(result.length, 2);
+
+                ok(result[0].hasSubgroups);
+                ok(!result[0].items[0].hasSubgroups);
+            });
+            test("group group should have hasSubgroups set to false", function() {
+                var data = [ {foo: 100, bar: "baz"} , {foo: 100, bar: "bar"} , {foo: 1, bar: "baz"} ];
+
+                var result = new Query(data).group( [ { field: "foo" } ], data).toArray();
+
+                equal(result.length, 2);
+
+                ok(!result[0].hasSubgroups);
+            });
         </script>
     </body>
 </html>

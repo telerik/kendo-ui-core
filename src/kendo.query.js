@@ -294,6 +294,7 @@
                         field: group.field,
                         value: group.value,
                         items: descriptors.length > 1 ? new Query(group.items).group(descriptors.slice(1), data.toArray()).toArray() : group.items,
+                        hasSubgroups: descriptors.length > 1,
                         aggregates: data.aggregate(descriptor.aggregates)
                     }
                 });
