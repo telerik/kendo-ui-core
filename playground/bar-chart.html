@@ -25,7 +25,7 @@
                         }, {
                             name: "Beta",
                             a: -10,
-                            b: -10,
+                            b: -15,
                             c: 15
                         }, {
                             name: "Charlie",
@@ -37,13 +37,31 @@
                     series: [
                         {
                             name: "Value A",
-                            field: "a"
+                            field: "a",
+                            label: {
+                                font: "12px Verdana, sans-serif",
+                                visible: true,
+                                position: "insideEnd"
+                                // "outsideEnd", "insideEnd", "insideBase", "center"
+                            }
                         }, {
                             name: "Value B",
-                            field: "b"
+                            field: "b",
+                            label: {
+                                font: "12px Verdana, sans-serif",
+                                visible: true,
+                                position: "insideEnd"
+                                // "outsideEnd", "insideEnd", "insideBase", "center"
+                            }
                         }, {
                             name: "Value C",
-                            field: "c"
+                            field: "c",
+                            label: {
+                                font: "12px Verdana, sans-serif",
+                                visible: true,
+                                position: "insideEnd"
+                                // "outsideEnd", "insideEnd", "insideBase", "center"
+                            }
                         }
                     ],
                     categoryAxis: {
@@ -52,6 +70,16 @@
                     valueAxis: {
                         min: -40,
                         max: 40
+                    },
+                    seriesDefaults: {
+                        bar: {
+                            label: {
+                                font: "12px Verdana, sans-serif",
+                                visible: true,
+                                position: "center"
+                                // "outsideEnd", "insideEnd", "insideBase", "center"
+                            }
+                        }
                     }
                 });
             });
@@ -107,7 +135,8 @@
                         borderWidth: 0,
                         borderColor: "",
                         glassEffect: false,
-                        labels: {
+                        label: {
+                            font: "12px Verdana, sans-serif",
                             visible: false,
                             position: "outsideEnd",
                                    // "outsideEnd", "insideEnd", "insideBase", "center"
@@ -145,6 +174,29 @@
                     <input id="stack" type="checkbox" autocomplete="off" />
                     <label for="stack">Stacked</label>
                 </div>
+                <fieldset style="width: 100px;">
+                    <legend>Labels</legend>
+                    <p>
+                        <input id="insideEnd" name="labelType"
+                           type="radio" checked="checked" value="insideEnd" autocomplete="off" />
+                        <label for="insideEnd">insideEnd</label>
+                    </p>
+                    <p>
+                        <input id="insideBase" name="labelType"
+                           type="radio" value="insideBase" autocomplete="off" />
+                        <label for="insideBase">insideBase</label>
+                    </p>
+                    <p>
+                        <input id="outsideEnd" name="labelType"
+                           type="radio" value="outsideEnd" autocomplete="off" />
+                        <label for="outsideEnd">outsideEnd</label>
+                    </p>
+                    <p>
+                        <input id="center" name="labelType"
+                           type="radio" value="center" autocomplete="off" />
+                        <label for="center">center</label>
+                    </p>
+                </fieldset>
             </div>
 
         <input type="button" id="animate" value="Dance, dance!" />
@@ -153,11 +205,13 @@
                 var chart = $("#container").data("kendoChart"),
                     series = chart.options.series,
                     type = $("#typeColumn").attr("checked") === "checked" ? "column" : "bar",
-                    stack = $("#stack").attr("checked") === "checked";
+                    stack = $("#stack").attr("checked") === "checked",
+                    labelPosition = $("input[name=labelType]:checked").val();
 
                 for (var i = 0, length = chart.options.series.length; i < length; i++) {
                     series[i].type = type;
                     series[i].stack = stack;
+                    series[i].label.position = labelPosition;
                 };
 
                 chart.refresh();

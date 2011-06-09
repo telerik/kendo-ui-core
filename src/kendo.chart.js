@@ -375,7 +375,7 @@
             ChartElement.fn.init.call(text);
 
             text.options = extend({}, text.options, options);
-            text.content = content || "";
+            text.content = content;
 
             // Calculate size
             text.updateLayout(defaultBox);
@@ -383,7 +383,8 @@
 
         options: {
             font: "16px Verdana, sans-serif",
-            align: LEFT
+            align: LEFT,
+            vAlign: ""
         },
 
         updateLayout: function(targetBox) {
@@ -403,8 +404,23 @@
                 var margin = (targetBox.width() - size.width) / 2;
                 text.box = new Box(
                     round(targetBox.x1 + margin, COORD_PRECISION), targetBox.y1,
-                    round(targetBox.x2 - margin, COORD_PRECISION), targetBox.y1 + size.height);
-                }
+                    round(targetBox.x2 - margin, COORD_PRECISION), targetBox.y1 - size.height);
+            }
+
+            if (options.vAlign == CENTER) {
+                var margin = (targetBox.height() - size.height) /2;
+                text.box = new Box(
+                    text.box.x1, targetBox.y1 + margin,
+                    text.box.x2, targetBox.y2 - margin);
+            } else if (options.vAlign == "bottom") {
+                text.box = new Box(
+                    text.box.x1, targetBox.y2 - size.height,
+                    text.box.x2, targetBox.y2);
+            } else if (options.vAlign == "top") {
+                text.box = new Box(
+                    text.box.x1, targetBox.y1,
+                    text.box.x2, targetBox.y1 + size.height);
+            }
         },
 
         getViewElements: function(factory) {
@@ -414,6 +430,75 @@
                     x: text.box.x1, y: text.box.y1,
                     font: text.options.font })
             ];
+        }
+    });
+
+    var BarLabel = ChartElement.extend({
+        init: function(content, options) {
+            var barLabel = this;
+            ChartElement.fn.init.call(barLabel);
+
+            barLabel.options = extend({}, barLabel.options, options);
+
+            barLabel.children.push(new Text(content, barLabel.options));
+
+            // Calculate size
+            barLabel.updateLayout(defaultBox);
+        },
+
+        options: {
+            font: "16px Verdana, sans-serif",
+            aboveAxis: true,
+            position: "insideEnd",
+            visible: true,
+            align: CENTER,
+            vAlign: "top"
+        },
+
+        updateLayout: function(targetBox) {
+            var barLabel = this,
+                options = barLabel.options,
+                text = barLabel.children[0],
+                box = text.box;
+
+            if (box.height() > targetBox.height()) {
+                if (options.aboveAxis) {
+                    targetBox = new Box(
+                        targetBox.x1, targetBox.y1 - box.height(),
+                        targetBox.x2, targetBox.y1 - box.height()
+                    );
+                } else {
+                    targetBox = new Box(
+                        targetBox.x1, targetBox.y2 + box.height(),
+                        targetBox.x2, targetBox.y2 + box.height()
+                    );
+                    text.options.vAlign = "bottom";
+                }
+            } else {
+                if (options.position == "insideEnd") {
+                    if (!options.aboveAxis && box.height() < targetBox.height()) {
+                        text.options.vAlign = "bottom";
+                    }
+                } else if (options.position == CENTER) {
+                    text.options.vAlign = CENTER;
+                } else if (options.position == "insideBase") {
+                    text.options.vAlign = options.aboveAxis ? "bottom" : "top";
+                } else if (options.position == "outsideEnd") {
+                    if (options.aboveAxis) {
+                        targetBox = new Box(
+                            targetBox.x1, targetBox.y1 - box.height(),
+                            targetBox.x2, targetBox.y1
+                        );
+                    } else {
+                        targetBox = new Box(
+                            targetBox.x1, targetBox.y2,
+                            targetBox.x2, targetBox.y2 + box.height()
+                        );
+                    }
+                }
+            }
+
+            text.updateLayout(targetBox);
         }
     });
 
@@ -1137,6 +1222,12 @@
 
         updateLayout: function(targetBox) {
             this.box = targetBox;
+            var bar = this,
+                children = bar.children;
+
+            for(var i = 0, length = children.length; i < length; i++) {
+                children[i].updateLayout(targetBox);
+            }
         },
 
         getViewElements: function(factory) {
@@ -1152,7 +1243,9 @@
                     strokeWidth: options.borderWidth
                 })
             );
-
+            [].push.apply(elements,
+                ChartElement.fn.getViewElements.call(bar, factory)
+            );
             return elements;
         }
     });
@@ -1209,9 +1302,11 @@
             var barChart = this,
                 options = barChart.options,
                 children = barChart.children,
-                isStacked = barChart.options.isStacked;
+                isStacked = barChart.options.isStacked,
+                label = new BarLabel(value, series.label);
 
             var bar = new Bar({ color: series.color, borderColor: series.color });
+            bar.children.push(label);
             barChart._bars.push(bar);
 
             var cluster = children[categoryIx];
@@ -1288,6 +1383,12 @@
                 var slotY = plotArea.axisY.getSlot(isVertical ? value : categoryIx);
 
                 var barSlot = new Box(slotX.x1, slotY.y1, slotX.x2, slotY.y2);
+                var label = bar.children[0];
+                var axis = options.isVertical ? plotArea.axisY : plotArea.axisX;
+                var axisCrossingValue = axis.options.axisCrossingValue;
+                label.options.aboveAxis = value >= axisCrossingValue;
+                label.content = label.content || axisCrossingValue;
+
                 bar.updateLayout(barSlot);
 
                 if(!categorySlots[categoryIx]) {
@@ -1535,7 +1636,7 @@
             var text = this,
                 options = text.options = extend({}, text.options, options);
 
-            text.content = content || "";
+            text.content = content;
 
             ViewElement.fn.init.call(text);
             text.template = SVGText.template;
@@ -1765,7 +1866,7 @@
         for (var styleKey in style) {
             measureBox.style[styleKey] = style[styleKey];
         }
-        measureBox.innerHTML = text || "&nbsp;";
+        measureBox.innerHTML = text;
         measureBox.appendChild(baselineMarker);
 
         var size = {
@@ -1872,6 +1973,7 @@
 
     Chart.Box = Box;
     Chart.Text = Text;
+    Chart.BarLabel = BarLabel;
     Chart.RootElement = RootElement;
     Chart.NumericAxis = NumericAxis;
     Chart.CategoryAxis = CategoryAxis;
