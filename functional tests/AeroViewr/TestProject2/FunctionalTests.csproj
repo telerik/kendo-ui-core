@@ -37,17 +37,24 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ArtOfTest.Common, Version=2010.3.1607.0, Culture=neutral, PublicKeyToken=14a0200bfcbb7b62, processorArchitecture=MSIL" />
-    <Reference Include="ArtOfTest.WebAii, Version=2010.3.1607.0, Culture=neutral, PublicKeyToken=4fd5f65be123776c, processorArchitecture=MSIL" />
-    <Reference Include="ArtOfTest.WebAii.Design, Version=2010.3.1607.0, Culture=neutral, PublicKeyToken=4fc62bbc3827ab1d, processorArchitecture=MSIL" />
+    <Reference Include="ArtOfTest.WebAii, Version=2010.3.1607.0, Culture=neutral, PublicKeyToken=4fd5f65be123776c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="ArtOfTest.WebAii.Design, Version=2010.3.1607.0, Culture=neutral, PublicKeyToken=4fc62bbc3827ab1d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="Telerik.WebAii.Controls.Html, Version=2010.3.1607.0, Culture=neutral, PublicKeyToken=528163f3e645de45" />
-    <Reference Include="Telerik.WebAii.Controls.Xaml, Version=2010.3.1607.0, Culture=neutral, PublicKeyToken=528163f3e645de45" />
+    <Reference Include="Telerik.WebAii.Controls.Html, Version=2010.3.1607.0, Culture=neutral, PublicKeyToken=528163f3e645de45">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="Telerik.WebAii.Controls.Xaml, Version=2010.3.1607.0, Culture=neutral, PublicKeyToken=528163f3e645de45">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDependentAssemblyPaths Condition=" '$(VS100COMNTOOLS)' != '' " Include="$(VS100COMNTOOLS)..\IDE\PrivateAssemblies">
