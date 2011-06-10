@@ -35,7 +35,6 @@
             that.bind(events, that.options);
 
             that._updateClasses();
-            that.contentElements = element.find('> .t-content');
 
             if (that.options.contentUrls)
                 element.find('.t-tabstrip-items > .t-item')
@@ -110,10 +109,12 @@
                 items = tabGroup
                             .find('li')
                             .addClass('t-item'),
-                activeTab = tabGroup.index(items.filter('t-state-active')[0]);
+                activeTab = tabGroup.index(items.filter('t-state-active')[0]),
+                tabStripID = that.element.attr('id');
 
-            this.element
-                .children('div')
+            that.contentElements = this.element.children('div');
+
+            that.contentElements
                 .addClass('t-content')
                 .eq(activeTab)
                 .addClass('t-state-active')
@@ -138,6 +139,25 @@
                 .children('a:focus')
                 .parent()
                 .addClass('t-state-active');
+
+            items.each(function() {
+                var item = $(this);
+
+                if (!item.children('.t-link').length)
+                    item
+                        .contents()      // exclude groups, real links, templates and empty text nodes
+                        .filter(function() { return (this.nodeName != 'A' && this.nodeName != 'DIV' && !(this.nodeType == 3 && !$.trim(this.nodeValue))); })
+                        .wrapAll('<a class="t-link"/>');
+            });
+
+            items.each(function(idx) {
+                var currentContent = that.contentElements.eq(idx);
+
+                if (!currentContent.attr('id')) {
+                    id = tabStripID + '-' + (idx+1);
+                    currentContent.attr('id', id);
+                }
+            });
         },
 
         _toggleHover: function(e) {
