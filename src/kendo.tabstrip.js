@@ -19,7 +19,6 @@
         init: function(element, options) {
             element = $(element);
             var that = this;
-            that.contentElements = element.find('> .t-content');
 
             if (options && ('animation' in options) && !options.animation)
                 options.animation = { open: { effects: {} }, close: { effects: {} } }; // No animation
@@ -34,6 +33,9 @@
                 .delegate(disabledLinks, CLICK, false);
 
             that.bind(events, that.options);
+
+            that._updateClasses();
+            that.contentElements = element.find('> .t-content');
 
             if (that.options.contentUrls)
                 element.find('.t-tabstrip-items > .t-item')
@@ -97,6 +99,45 @@
                     that.ajaxRequest(item, $(that.getContentElement(item.index())), null, contentUrl);
                 }
             });
+        },
+
+        _updateClasses: function() {
+            var that = this;
+
+            that.element.addClass('t-widget t-header t-tabstrip');
+
+            var tabGroup = that.element.children('ul').addClass('t-tabstrip-items t-reset'),
+                items = tabGroup
+                            .find('li')
+                            .addClass('t-item'),
+                activeTab = tabGroup.index(items.filter('t-state-active')[0]);
+
+            this.element
+                .children('div')
+                .addClass('t-content')
+                .eq(activeTab)
+                .addClass('t-state-active')
+                .css({ display: 'block' });
+
+            items
+                .children('img')
+                .addClass('t-image');
+            items
+                .children('a')
+                .addClass('t-link')
+                .children('img')
+                .addClass('t-image');
+            items
+                .filter(':not([disabled]):not([class*=t-state-disabled])')
+                .addClass('t-state-default');
+            items
+                .filter('li[disabled]')
+                .addClass('t-state-disabled');
+            items
+                .filter(':not([class*=t-state])')
+                .children('a:focus')
+                .parent()
+                .addClass('t-state-active');
         },
 
         _toggleHover: function(e) {
