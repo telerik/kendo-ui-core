@@ -1052,15 +1052,23 @@
         return size;
     }
 
+    function splitEffects(input) {
+        var effects = {};
+
+        $.each(input.split(" "), function() {
+            effects[this] = {};
+        });
+
+        return effects;
+    }
+
     function animate(element, options, duration, reverse, complete) {
         var effects = {};
 
         if (typeof options === "string") {
             // options is the list of effect names separated by space e.g. animate(element, "fadeIn slideDown")
 
-            $.each(options.split(" "), function() {
-                effects[this] = {};
-            });
+            effects = splitEffects(options);
 
             // only callback is provided e.g. animate(element, options, function() {});
             if ($.isFunction(duration)) {
@@ -1080,13 +1088,8 @@
             };
         }
 
-        if ('effects' in options && typeof options.effects === "string") {
-            effects = {};
-            $.each(options.effects.split(" "), function() {
-                effects[this] = {};
-            });
-            options.effects = effects;
-        }
+        if ('effects' in options && typeof options.effects === "string")
+            options.effects = splitEffects(options.effects);
 
         options = extend({
             //default options
