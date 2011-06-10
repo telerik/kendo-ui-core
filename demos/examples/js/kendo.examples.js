@@ -11,7 +11,8 @@
 
         fetch: function(href) {
             $("li a").each(function() {
-                if ($(this).attr("href").toLowerCase() === href) {
+                var currentHref = $(this).attr("href");
+                if (currentHref && currentHref.toLowerCase() === href) {
                     $.get(href, function(html) {
                         $("#example").empty().html(Application.body(html));
 
@@ -42,7 +43,7 @@
                     }
                 });
 
-                history.replaceState({ href: location.href });
+                history.replaceState({ href: location.href }, null, location.href );
             }
 
             $("#viewcode").click(function(e) {
@@ -55,7 +56,7 @@
                 })
             });
         }
-    }
+    };
 
     $(Application.init);
 })(jQuery);
