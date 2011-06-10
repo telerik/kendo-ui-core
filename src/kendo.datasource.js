@@ -562,6 +562,7 @@
 
         success: function(data) {
             var that = this,
+            options = {},
             result,
             updated = Model ? that._updatedModels() : [],
             hasGroups = that.options.serverGrouping === true && that._group && that._group.length > 0,
