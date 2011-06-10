@@ -450,7 +450,7 @@
             font: "16px Verdana, sans-serif",
             aboveAxis: true,
             position: "insideEnd",
-            visible: true
+            visible: false
         },
 
         updateLayout: function(targetBox, isVertical) {
@@ -458,6 +458,10 @@
                 options = barLabel.options,
                 text = barLabel.children[0],
                 box = text.box;
+
+            if (!options.visible) {
+                return;
+            }
 
             text.options.align = isVertical ? CENTER : "";
             text.options.vAlign = isVertical ? "" : CENTER;
