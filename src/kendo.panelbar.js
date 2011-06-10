@@ -142,7 +142,8 @@
                 .addClass('t-state-default');
             items
                 .filter('li[disabled]')
-                .addClass('t-state-disabled');
+                .addClass('t-state-disabled')
+                .removeAttr('disabled');
             items
                 .filter(':not([class*=t-state])')
                 .children('a:focus')
