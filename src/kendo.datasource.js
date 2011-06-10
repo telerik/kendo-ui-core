@@ -235,7 +235,8 @@
                 _page: options.page  || (options.pageSize ? 1 : undefined),
                 _sort: options.sort,
                 _filter: options.filter,
-                _group: options.group
+                _group: options.group,
+                _aggregates: options.aggregates
             });
 
             Observable.fn.init.call(that);
@@ -522,7 +523,9 @@
                 page: that._page,
                 pageSize: that._pageSize,
                 sort: that._sort,
-                filter: that._filter
+                filter: that._filter,
+                group: that._group,
+                aggregates: that._aggregates
             };
 
             that.transport.read({

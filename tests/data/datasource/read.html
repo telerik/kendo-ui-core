@@ -273,6 +273,34 @@
                 dataSource.read();
                 ok(!isCalled);
             });
+            test("read group expression are passed to the transport", function() {
+                 var group, dataSource = new DataSource({
+                    data: [{ id:1, bar: "foo" }, { id: 2, bar: "baz" }, { id: 3, bar: "baz"} ],
+                    group: { field: "bar" },
+                    transport: {
+                        read: function(options) {
+                            group = options.data.group;
+                        }
+                    },
+                    serverGrouping: true
+                });
+                dataSource.read();
+                ok(group);
+            });
+            test("read aggregates expression are passed to the transport", function() {
+                 var aggregates, dataSource = new DataSource({
+                    data: [{ id:1, bar: "foo" }, { id: 2, bar: "baz" }, { id: 3, bar: "baz"} ],
+                    aggregates: { field: "bar", aggregates: ["count"] },
+                    transport: {
+                        read: function(options) {
+                            aggregates = options.data.aggregates;
+                        }
+                    },
+                    serverGrouping: true
+                });
+                dataSource.read();
+                ok(aggregates);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
