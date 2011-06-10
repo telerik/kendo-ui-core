@@ -384,7 +384,8 @@
         options: {
             font: "16px Verdana, sans-serif",
             align: LEFT,
-            vAlign: ""
+            vAlign: "",
+            visible: true
         },
 
         updateLayout: function(targetBox) {
@@ -425,6 +426,11 @@
 
         getViewElements: function(factory) {
             var text = this;
+
+            if (!text.options.visible) {
+                return;
+            }
+
             return [
                 factory.text(text.content, {
                     x: text.box.x1, y: text.box.y1,
