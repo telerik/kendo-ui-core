@@ -7,9 +7,23 @@
         CLOSE = "close",
         CHANGE = "change",
         LOADING = "t-loading",
+        FOCUSED = "t-state-focused",
         SELECTED = "t-state-selected",
         DISABLED = "t-state-disabled",
         proxy = $.proxy;
+
+    function selectText(element, selectionStart, selectionEnd) {
+        if (element.createTextRange) {
+            textRange = element.createTextRange();
+            textRange.collapse(true);
+            textRange.moveStart(CHARACTER, selectionStart);
+            textRange.moveEnd(CHARACTER, selectionEnd - selectionStart);
+            textRange.select();
+        } else {
+            element.selectionStart = selectionStart;
+            element.selectionEnd = selectionEnd;
+        }
+    }
 
     var ComboBox = List.extend({
         init: function(element, options) {
@@ -38,6 +52,9 @@
             that.input.bind({
                 keydown: proxy(that._keydown, that),
                 blur: function() {
+                    if (!that._current) {
+                        that.element.val(that.input.val());
+                    }
                     that._bluring = setTimeout(function() {
                         that._blur();
                     }, 100);
@@ -50,9 +67,12 @@
 
             that.enable(that.options.enable);
 
+            that._openOnBind = !that.options.autoBind;
+            that._initial = true;
+
             if (that.options.autoBind) {
-               that.showBusy();
-               that.dataSource.query();
+                that.showBusy();
+                that.dataSource.query();
             }
         },
 
@@ -60,11 +80,13 @@
             enable: true,
             index: -1,
             autoBind: true,
-            delay: 500,
+            delay: 200,
             dataTextField: "text",
             dataValueField: "value",
             minLength: 1,
-            height: 200
+            height: 200,
+            filter: "none",
+            suggestion: false
         },
 
         enable: function(enable) {
@@ -92,9 +114,13 @@
             var that = this
                 current = that._current;
 
-            if (!that.ul[0].firstChild) {
+            if (!that.ul[0].firstChild || that._rebind) {
+                if (that._rebind) {
+                    that._initial = true;
+                }
+                that._rebind = false;
                 that.showBusy();
-                that.options.autoBind = false;
+                that._openOnBind = true;
                 that.dataSource.query();
             } else {
                 that.popup.open()
@@ -117,14 +143,28 @@
                 data = that.dataSource.view();
 
             that.ul[0].innerHTML = kendo.render(that.template, data);
-
             that.ul.height(data.length * 20 > height ? height : "auto");
 
-            that.select(that.options.index);
+            if (that._initial && !that._filtered) {
+                that._initial = false;
+                var value = that.value();
+                if (value) {
+                    that.value(value);
+                } else {
+                    that.select(that.options.index);
+                }
+                that.previous = that.value();
+            }
 
-            that.previous = that.value();
+            if (that._filtered && that.options.filter === "none") {
+                that.search();
+            }
 
-            if (!that.options.autoBind) {
+            if (that.options.suggest && that._current) {
+                that.suggest(that._current);
+            }
+
+            if (that._openOnBind) {
                 that[data.length ? OPEN : CLOSE]();
             }
 
@@ -144,9 +184,9 @@
             that.arrow.removeClass(LOADING);
         },
 
-        select: function(li) {
+        highlight: function(li) {
             var that = this,
-                idx,
+                idx = -1,
                 length,
                 text = "",
                 value,
@@ -155,7 +195,7 @@
                 children = that.ul[0].childNodes;
 
             if (current) {
-                current.removeClass(SELECTED);
+                current.removeClass(FOCUSED);
             }
 
             if (typeof li === "function") {
@@ -175,28 +215,41 @@
                 idx = $.inArray(li[0], children);
 
                 if (idx === -1) {
-                    return;
+                    return idx;
                 }
 
+                that.current(li);
+            }
+
+            return idx;
+        },
+
+        select: function(li) {
+            if(this._current) {
+                this._current.removeClass(SELECTED);
+            }
+            var that = this,
+                idx = that.highlight(li),
+                data = that.dataSource.view();
+
+            if (idx !== -1) {
+                that._current.addClass(SELECTED);
                 data = data[idx];
                 text = that._text(data);
                 value = that._value(data);
 
-                that.current(li.addClass(SELECTED));
+                that.text(text);
+                that.element[0].value = value != undefined ? value : text;
             }
-
-            that.text(text);
-            that.element[0].value = value != undefined ? value : text;
         },
 
         search: function() {
             var that = this,
+                options = that.options,
                 word = that.text(),
                 length,
                 caret,
                 index;
-
-            //that._current = null;
 
             clearTimeout(that._typing);
 
@@ -205,9 +258,53 @@
             if (!length) {
                 that.popup.close();
             } else if (length >= that.options.minLength) {
-                that.dataSource.filter( { operator: "startswith", value: word } );
+                that._filtered = true;
+                if (options.filter === "none") {
+                    var predicate = function(dataItem) {
+                        var text = that._text(dataItem);
+                        if(text !== undefined) {
+                            return (text + "").toLowerCase().indexOf(word.toLowerCase()) === 0;
+                        }
+                    };
+
+                    if (that.highlight(predicate) !== -1) {
+                        if (that.options.suggest && that._current) {
+                            that.suggest(that._current);
+                        }
+                        that.open();
+                    }
+                } else {
+                    that._current = null;
+                    that._openOnBind = true;
+                    that.dataSource.filter( {field: options.dataTextField, operator: options.filter, value: word } );
+                }
             }
 
+        },
+
+        suggest: function(word) {
+            var that = this,
+                element = that.input[0],
+                value = that.text(),
+                caret = that._caret();
+
+
+            if (typeof word !== "string") {
+                word = word ? word.text() : "";
+            }
+
+            if (caret <= 0) {
+                caret = value.toLowerCase().indexOf(word.toLowerCase()) + 1;
+            }
+
+            if (!word) {
+                word = value.substring(0, caret);
+            }
+
+            if(word !== value) {
+                that.text(word);
+                selectText(element, caret, word.length);
+            }
         },
 
         text: function (text) {
@@ -223,23 +320,55 @@
 
         value: function(value) {
             var that = this,
-                element = that.element[0];
+                element = that.element;
 
             if (value !== undefined) {
-                element.value = value;
+                var data = that.dataSource.view(),
+                    index;
+
+                if (data[0]) {
+                    index = $.map(data, function(dataItem, idx) {
+                        var val = that._value(dataItem),
+                            val = val !== undefined ? val : that._text(dataItem);
+
+                        if (val == value) {
+                            return idx;
+                        }
+                    })[0];
+                }
+
+                if (index != undefined) {
+                    that.select(index);
+                }
+                else {
+                    if (that._current) {
+                        that._current.removeClass(SELECTED);
+                        that.current(null);
+                    }
+                    element.val(value);
+                    that.input.val(value);
+                }
+                that.previous = element.val();
             } else {
-                return element.value;
+                return element.val();
             }
         },
 
         _accept: function(li) {
             var that = this;
 
-            that.select(li);
-            that._blur();
+            if (li) {
+                that.select(li);
+                that._blur();
 
-            if (that.input[0] !== document.activeElement) {
-                that.input.focus();
+                if (that.input[0] !== document.activeElement) {
+                    that.input.focus();
+                }
+
+                if (that._filtered) {
+                    that._filtered = false;
+                    that._rebind = that._current && that._current.hasClass(SELECTED);
+                }
             }
 
             //moveCaretAtEnd(that.element[0]);
@@ -334,6 +463,8 @@
                     }
                 };
 
+
+
             if (e.altKey) {
                 if (key === keys.DOWN) {
                     that.open();
@@ -366,9 +497,9 @@
             clearTimeout(that._typing);
 
             that._typing = setTimeout(function() {
-                if (that.previous !== that.value()) {
+                //if (that.previous !== that.text()) {
                     that.search();
-                }
+                //}
             }, that.options.delay);
         },
 

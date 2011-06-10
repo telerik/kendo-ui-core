@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>ComboBox Searching</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.query.js"></script>
+        <script src="../../src/kendo.datasource.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.list.js"></script>
+        <script src="../../src/kendo.combobox.js"></script>
+        <link rel="stylesheet" href="../qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">ComboBox Searching</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var ComboBox = kendo.ui.ComboBox,
+                data = [{text: "Foo", value: 1}, {text:"Bar", value:2}, {text:"Baz", value:3}],
+                input;
+
+            $.fn.press = function(key) {
+                return this.trigger({ type: "keypress", keyCode: key } );
+            }
+
+            $.fn.pressKeyDown = function(key) {
+                return this.trigger({ type: "keydown", keyCode: key } );
+            }
+
+
+            module("kendo.ui.ComboBox searching", {
+                setup: function() {
+                    input = $("<input />").appendTo(document.body);
+                },
+                teardown: function() {
+                    input.add($("ul")).parent(".t-widget").remove();
+                }
+            });
+
+            test("search focus first match", function() {
+                var combobox = new ComboBox(input, {
+                    dataSource: data,
+                    autoBind: true,
+                    index: 0
+                });
+
+                combobox.text("b");
+                combobox.search();
+
+                ok(combobox.ul.children().eq(1).hasClass("t-state-focused"));
+            });
+
+            test("search focus item if text number", function() {
+                var combobox = new ComboBox(input, {
+                    dataSource: [{text: "Foo", value: 1}, {text:10, value:2}]
+                });
+
+                combobox.text("1");
+                combobox.search();
+
+                ok(combobox.ul.children().eq(1).hasClass("t-state-focused"));
+            });
+
+            test("search focus item if text is 0", function() {
+                var combobox = new ComboBox(input, {
+                    dataSource: [{text: "Foo", value: 1}, {text:0, value:2}]
+                });
+
+                combobox.text("0");
+                combobox.search();
+
+                ok(combobox.ul.children().eq(1).hasClass("t-state-focused"));
+            });
+
+            test("focused item does not update text input value", function() {
+                var combobox = new ComboBox(input, {
+                    dataSource: [{text: "Foo", value: 1}, {text:0, value:2}]
+                });
+
+                combobox.text("f");
+                combobox.search();
+
+                equal(combobox.text(), "f");
+            });
+
+            test("current item is not cleared on search with filter none", function() {
+                var combobox = new ComboBox(input, {
+                    dataSource: [{text: "Foo", value: 1}, {text:0, value:2}]
+                });
+
+                combobox.select(1);
+                combobox.search();
+
+                ok(combobox._current);
+            });
+
+            test("search should raise error if word is null", function() {
+                var combobox = new ComboBox(input, {
+                    dataSource: data
+                });
+
+                combobox.text("");
+                combobox.search();
+
+                ok(true);
+            });
+
+            test("search with no filter should open popup if any match", function() {
+                var combobox = new ComboBox(input, {
+                    dataSource: data,
+                    autoBind: false
+                });
+
+                combobox.popup.bind("open", function() {
+                    ok(true);
+                    ok(combobox.ul.children().eq(0).hasClass("t-state-focused"));
+                    start();
+                });
+
+                combobox.text("f");
+                combobox.search();
+
+                stop(300);
+            });
+
+            test("search with startswith rebind items", function() {
+                var combobox = new ComboBox(input, {
+                    dataSource: data
+                });
+
+                combobox.options.filter = "startswith";
+                combobox.text("f");
+                combobox.search();
+
+                equal(combobox.ul.children().length, 1);
+            });
+
+            test("search with filter opens drop down if any items", function() {
+                var combobox = new ComboBox(input, {
+                    dataSource: data
+                });
+
+                combobox.popup.bind("open", function() {
+                    ok(true);
+                    start();
+                });
+
+                combobox.options.filter = "startswith";
+                combobox.text("f");
+                combobox.search();
+
+                stop(1000);
+            });
+
+            test("rebound list should use correct dataItem to update text and value", function() {
+                var combobox = new ComboBox(input, {
+                    dataSource: data
+                });
+
+                combobox.options.filter = "startswith";
+                combobox.text("b");
+                combobox.search();
+                combobox.ul.children().eq(1).click();
+
+                equal(combobox.ul.children().length, 2);
+                equal(combobox.value(), data[2].value);
+                equal(combobox.text(), data[2].text);
+            });
+
+            test("reopen ul after filter should show all data", function() {
+                var combobox = new ComboBox(input, {
+                    dataSource: data
+                });
+
+                combobox.options.filter = "startswith";
+                combobox.text("b");
+                combobox.search();
+                combobox.ul.children().eq(1).click();
+
+                combobox.open();
+
+                equal(combobox.ul.children().length, data.length);
+                ok(combobox._current.hasClass("t-state-selected"));
+            });
+
+            test("rebound ul should has item selected", function() {
+                var combobox = new ComboBox(input, {
+                    dataSource: data
+                });
+
+                combobox.options.filter = "startswith";
+                combobox.text("b");
+                combobox.search();
+                combobox.ul.children().eq(1).click();
+
+                combobox.open();
+
+                equal(combobox.ul.children().length, data.length);
+            });
+
+            test("typing should trigger search", function() {
+                var combobox = new ComboBox(input, {
+                    dataSource: data
+                });
+
+                combobox._search = function() {
+                    ok(true);
+                    start();
+                }
+                combobox.input.val("f").trigger({type: "keydown", keyCode: "f".charCodeAt(0)});
+                stop(300);
+            });
+
+            test("dataSource.read triggered by typing does not update input value with dataItem.text", function() {
+                var combobox = new ComboBox(input, {
+                    filter: "startswith",
+                    dataSource: data,
+                    autoBind: false
+                });
+
+                combobox.value("1");
+                combobox.input.val("f");
+                combobox.search();
+
+                equal(combobox.input.val(), "f");
+            });
+
+            test("should not trigger search on TAB", function() {
+                var called = false, combobox = new ComboBox(input, {
+                    dataSource: data
+                });
+
+                combobox.search = function() {
+                    called = true;
+                };
+
+                combobox.input.val("f").pressKeyDown(kendo.keys.TAB);
+
+                ok(!called);
+            });
+
+            test("should not trigger search on ESC", function() {
+                var called = false, combobox = new ComboBox(input, {
+                    dataSource: data
+                });
+
+                combobox.search = function() {
+                    called = true;
+                };
+
+                combobox.input.val("f").pressKeyDown(kendo.keys.ESC);
+
+                ok(!called);
+            });
+
+            test("allow custom value", function() {
+                var combobox = new ComboBox(input, {
+                    dataSource: data
+                });
+                combobox._current = null;
+
+                combobox.input.val("ffff").blur();
+
+                equal(combobox.value(), "ffff");
+            });
+
+            test("do not set custom value if _current", function() {
+                var combobox = new ComboBox(input, {
+                    dataSource: data
+                });
+
+                combobox._current = $('<li class="t-state-selected">Test</li>');
+
+                combobox.input.val("ffff").blur();
+
+                notEqual(combobox.value(), "ffff");
+            });
+
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>
