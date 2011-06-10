@@ -557,7 +557,7 @@
             var that = this,
             options = {},
             updated = Model ? that._updatedModels() : [],
-            hasGroups = that.options.serverGrouping === true && that._group,
+            hasGroups = that.options.serverGrouping === true && that._group && that._group.length > 0,
             models = that._models;
 
             that._total = that._deserializer.total(data);
