@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>ComboBox suggestion</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.query.js"></script>
+        <script src="../../src/kendo.datasource.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.list.js"></script>
+        <script src="../../src/kendo.combobox.js"></script>
+        <link rel="stylesheet" href="../qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">ComboBox suggestion</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var ComboBox = kendo.ui.ComboBox,
+                data = [{text: "Foo", value: 1}, {text:"Bar", value:2}, {text:"Baz", value:3}],
+                input;
+
+            $.fn.press = function(key) {
+                return this.trigger({ type: "keydown", keyCode: key } );
+            }
+
+            $.fn.selectedText = function() {
+                var that = this[0];
+
+                if (document.selection) {
+                    return document.selection.createRange().text;
+                } else {
+                    return that.value.substring(that.selectionStart, that.selectionEnd);
+                }
+            },
+
+            $.fn.type = function(value) {
+                return this.val(value).each(function() {
+                    if (this.createTextRange) {
+                        var textRange = this.createTextRange();
+                        textRange.collapse(false);
+                        textRange.select();
+                    }
+                });
+            }
+
+            module("kendo.ui.ComboBox suggestion", {
+                setup: function() {
+                    input = $("<input />").appendTo(document.body);
+                },
+                teardown: function() {
+                    input.add($("ul")).remove();
+                }
+            });
+
+            test("current popup item completes the value of the input if suggest is enabled", function() {
+                var combobox = new ComboBox(input, {
+                    dataSource: data,
+                    suggest: true
+                });
+
+                combobox.input.type("b");
+                combobox.search();
+
+                equal(combobox.input.val(), "Bar");
+            });
+
+            test("suggestion selects the remainder of the word", function() {
+                var combobox = new ComboBox(input, {
+                    dataSource: data,
+                    suggest: true
+                });
+
+                combobox.input.type("b");
+                combobox.suggest("Bar");
+                equal(combobox.input.selectedText(), "ar");
+            });
+
+            test("suggest with empty string clears selection", function() {
+                var combobox = new ComboBox(input, {
+                    dataSource: data,
+                    suggest: true
+                });
+
+                combobox.input.type("b");
+                combobox.suggest("bar");
+                equal(combobox.input.selectedText(), "ar");
+                combobox.suggest("");
+                equal(combobox.input.val(), "b");
+            });
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>

@@ -34,7 +34,7 @@
         </style>
     </head>
     <body>
-        dataSource source: [{text: "foo", value: 1}, {text:"bar", value:2}, {text: "baz", value: 1}, {text:2, value:2}];
+        dataSource: [{text: "foo", value: 1}, {text:"bar", value:2}, {text: "baz", value: 3}, {text:"2", value:4}],
         <fieldset>
             <legend>Vanilla input</legend>
             <input />
@@ -47,6 +47,19 @@
                 <option value="2">Bar</option>
                 <option value="3">Baz</option>
             </select>
+        </fieldset>
+        <fieldset>
+            <legend>Change filter type:</legend>
+            <select id="filter" onchange="filterTypeChanged()">
+                <option value="none">None</option>
+                <option value="startswith">Starts with</option>
+                <option value="contains">Contains</option>
+                <option value="eq">Equal</option>
+            </select>
+        </fieldset>
+        <fieldset>
+            <legend>Suggest:</legend>
+            <input id="suggest" type="checkbox" onchange="suggestChanged()"/>
         </fieldset>
         <fieldset>
             <legend>ComboBox - INPUT</legend>
@@ -94,12 +107,13 @@
                 });
 
                 $("#combobox").kendoComboBox({
-                    dataSource: [{text: "foo", value: 1}, {text:"bar", value:2}, {text: "baz", value: 1}, {text:2, value:2}],
+                    dataSource: [{text: "foo", value: 1}, {text:"bar", value:2}, {text: "baz", value: 3}, {text:"2", value:4}],
                     autoBind: false,
                     delay: 2000
                 });
                 $("#select").kendoComboBox({
-                    dataSource: [{text: "foo", value: 1}, {text:"bar", value:2}, {text: "baz", value: 1}, {text:2, value:2}]
+                    dataSource: [{text: "foo", value: 1}, {text:"bar", value:2}, {text: "baz", value: 3}, {text:"2", value:4}],
+                    filter: "startswith"
                 });
                 $("#remote").kendoComboBox({
                     dataTextField: "name",
@@ -114,7 +128,7 @@
                 });
 
                 $("#disabled").kendoComboBox({
-                    dataSource: [{text: "foo", value: 1}, {text:"bar", value:2}, {text: "baz", value: 1}, {text:2, value:2}],
+                    dataSource: [{text: "foo", value: 1}, {text:"bar", value:2}, {text: "baz", value: 3}, {text:"2", value:4}],
                     enable: false
                 });
 
@@ -135,9 +149,34 @@
                 big.html(options);
 
                 big.kendoComboBox({
-                    autoBind: false
+                    autoBind: false,
+                    filter: "contains"
                 });
+
             });
+
+            function filterTypeChanged() {
+                var filter = $("#filter").val();
+
+                $(".t-widget").each(function (i, el) {
+                    var element = $(el).find("input:hidden, select:hidden").data("kendoComboBox");
+                    if (element) {
+                       element.options.filter = filter;
+                    }
+                });
+            }
+
+            function suggestChanged() {
+                var suggest = $("#suggest").prop("checked");
+
+                $(".t-widget").each(function (i, el) {
+                    var element = $(el).find("input:hidden, select:hidden").data("kendoComboBox");
+                    if (element) {
+                       element.options.suggest = suggest;
+                    }
+                });
+            }
+
         </script>
     </body>
 </html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>ComboBox Client API</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.query.js"></script>
+        <script src="../../src/kendo.datasource.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.list.js"></script>
+        <script src="../../src/kendo.combobox.js"></script>
+        <link rel="stylesheet" href="../qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">ComboBox Client API</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var ComboBox = kendo.ui.ComboBox,
+                data = [{text: "Foo", value: 1}, {text:"Bar", value:2}],
+                SELECTED = "t-state-selected",
+                keys = kendo.keys,
+                input;
+
+            module("kendo.ui.ComboBox selection", {
+                setup: function() {
+                    input = $("<input />").appendTo(document.body);
+                },
+                teardown: function() {
+                    input.append($("ul")).parent(".t-widget").remove();
+                }
+            });
+
+            test("value method should select item if exists", function() {
+                var combobox = new ComboBox(input, [{text: "foo", value: 1}, {text:2, value:2}]);
+                combobox.value("2");
+
+                ok(combobox.ul.children().eq(1).hasClass(SELECTED));
+                equal(combobox.value(), "2");
+                equal(combobox.text(), "2");
+                equal(combobox.previous, "2");
+           });
+
+           test("value method should select first if no such value", function() {
+                var combobox = new ComboBox(input, [{text: "foo", value: 1}, {text:2, value:2}]);
+
+                combobox.select(1);
+                combobox.value("");
+
+                ok(!combobox.ul.children().hasClass(SELECTED));
+                ok(!combobox._current);
+                equal(combobox.value(), "");
+                equal(combobox.text(), "");
+                equal(combobox.previous, "");
+           });
+
+            test("value method should select item with 0 value", function() {
+                var combobox = new ComboBox(input, [{text: "foo", value: 1}, {text:2, value:0}]);
+                combobox.value(0);
+
+                ok(combobox.ul.children().eq(1).hasClass(SELECTED));
+                equal(combobox.value(), "0");
+                equal(combobox.text(), 2);
+                equal(combobox.previous, 0);
+           });
+
+           test("select should select item by predicate", function() {
+                var combobox = new ComboBox(input, [{text: "foo", value: 1}, {text:2, value:2}]);
+
+                combobox.select(0);
+                combobox.select(function(item) {
+                    return item.text == 2;
+                });
+
+                ok(combobox.ul.children().eq(1).hasClass(SELECTED));
+                equal(combobox.value(), "2");
+                equal(combobox.text(), "2");
+                //equal(combobox.previous, 1);
+            });
+
+            test("open should call _scroll method", function () {
+                var combobox = input.kendoComboBox(data).data("kendoComboBox");
+
+                combobox.select(0);
+                combobox._scroll = function() { ok(true); start(); };
+                combobox.open();
+
+                stop(400);
+            });
+
+            test("open should open popup", function () {
+                var combobox = input.kendoComboBox(data).data("kendoComboBox");
+
+                combobox.popup.bind("open", function(){
+                    ok(true);
+                    start();
+                });
+
+                combobox.open();
+
+                stop(400);
+
+            });
+
+            test("open should bind and open after this if no items", function () {
+                var combobox = input.kendoComboBox({autoBind: false, dataSource: data}).data("kendoComboBox");
+
+                combobox.popup.bind("open", function(){
+                    ok(true);
+                    start();
+                });
+
+                combobox.open();
+
+                stop(400);
+
+            });
+
+            test("close should close popup", function () {
+                var combobox = input.kendoComboBox(data).data("kendoComboBox");
+
+                combobox.popup.bind("close", function(){
+                    ok(true);
+                    start();
+                });
+
+                combobox.open();
+                combobox.close();
+
+                stop(400);
+
+            });
+
+      </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>

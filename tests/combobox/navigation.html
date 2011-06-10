@@ -55,8 +55,6 @@
                     index: 1
                 });
 
-                combobox.dataSource.read();
-
                 ok(combobox.ul.children().eq(1).hasClass(SELECTED));
            });
 
@@ -135,18 +133,6 @@
                 combobox.arrow.click();
 
                 equal(combobox.ul.children("." + SELECTED).length, 1);
-            });
-
-            test("select item by -1 should unselect all items and should remove text and value", function(){
-                var combobox = input.kendoComboBox(data).data("kendoComboBox");
-
-                combobox.dataSource.read();
-                combobox.select(1);
-                combobox.select(-1);
-
-                equal(combobox.ul.children("." + SELECTED).length, 0);
-                equal(combobox.text(), "");
-                equal(combobox.value(), "");
             });
 
             test("press down arrow should focus next item and update text and value", function() {
