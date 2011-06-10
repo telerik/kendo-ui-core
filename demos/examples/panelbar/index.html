@@ -6,7 +6,7 @@
         <script src="../../../src/jquery.js"></script>
         <script src="../../../src/kendo.core.js"></script>
         <script src="../../../src/kendo.fx.js"></script>
-        <script src="../../../src/kendo.menu.js"></script>
+        <script src="../../../src/kendo.panelbar.js"></script>
         <!-- script -->
         <!-- css -->
         <link type="text/css" href="../styles/examples.css" rel="stylesheet"/>
@@ -18,27 +18,8 @@
         <!-- nav -->
         <!-- nav -->
         <div id="example">
-            <style type="text/css" id="exampleCSS" scoped="scoped">
-                #Menu-4
-                {
-                    overflow:  hidden;
-                }
-                #buy, #express {
-                    height: 100%;
-                    outline: 0 none;
-                    position: absolute;
-                    text-indent: -9999px;
-                    width: 50%;
-                }
-                #buy {
-                    left: 0;
-                }
-                #express {
-                    right: 0;
-                }
-            </style>
-            <ul id="Menu">
-                <li>
+            <ul id="Panel1">
+                <li class="t-state-active">
                     <img src="../icons/Suites/mvc.png" alt="../image">ASP.NET MVC
                     <ul>
                         <li>
@@ -46,20 +27,6 @@
                         </li>
                         <li>
                             <img src="../icons/Mvc/Menu.png" alt="../image">Menu
-                            <ul>
-                                <li>
-                                    <img src="../icons/Mvc/Grid.png" alt="../image">Grid
-                                </li>
-                                <li>
-                                    <img src="../icons/Mvc/Menu.png" alt="../image">Menu
-                                </li>
-                                <li>
-                                    <img src="../icons/Mvc/PanelBar.png" alt="../image">PanelBar
-                                </li>
-                                <li>
-                                    <img src="../icons/Mvc/TabStrip.png" alt="../image">TabStrip
-                                </li>
-                            </ul>
                         </li>
                         <li>
                             <img src="../icons/Mvc/PanelBar.png" alt="../image">PanelBar
@@ -107,10 +74,10 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#Menu-4"><img src="../icons/Suites/orm.png" alt="../image">OpenAccess ORM</a>
+                    <a href="#Panel1-4"><img src="../icons/Suites/orm.png" alt="../image">OpenAccess ORM</a>
                     <ul>
                         <li>
-                            <div id="Menu2-4">
+                            <div id="Panel1-4">
                                 <img alt="Telerik OpenAccess" src="../icons/orm-comparison.png">
                                 <a href="http://www.telerik.com/purchase/individual/orm.aspx" id="buy">Telerik OpenAccess ORM</a>
                                 <a href="http://www.telerik.com/community/license-agreement.aspx?pId=639" id="express">Telerik OpenAccess ORM Express</a>
@@ -122,7 +89,7 @@
                     <img src="../icons/Suites/rep.png" alt="../image">Reporting
                 </li>
                 <li>
-                    <img src="../icons/Suites/sitefinity.png" alt="../image">Sitefinity ASP.NET CMS
+                    <a href="http://www.sitefinity.com"><img src="../icons/Suites/sitefinity.png" alt="../image">Sitefinity ASP.NET CMS (Navigate)</a>
                 </li>
                 <li>
                     Other products
@@ -140,7 +107,7 @@
                 </li>
             </ul>
             <script type="text/javascript">
-                $("#Menu").kendoMenu();
+                $("#Panel1").kendoPanelBar().css({ width: 300 });
             </script>
         </div>
         <!-- code -->
