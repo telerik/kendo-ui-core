@@ -112,7 +112,7 @@
                 activeTab = tabGroup.index(items.filter('t-state-active')[0]),
                 tabStripID = that.element.attr('id');
 
-            that.contentElements = this.element.children('div');
+            that.contentElements = that.element.children('div');
 
             that.contentElements
                 .addClass('t-content')
@@ -152,13 +152,18 @@
             });
 
             items.each(function(idx) {
-                var currentContent = that.contentElements.eq(idx);
-
-                if (!currentContent.attr('id')) {
+                var currentContent = that.contentElements.eq(idx),
                     id = tabStripID + '-' + (idx+1);
-                    currentContent.attr('id', id);
-                }
+
+                if (!currentContent.length)
+                    $('<div id="'+ id +'" class="t-content"></div>').appendTo(that.element);
+                else
+                    if (!currentContent.attr('id')) {
+                        currentContent.attr('id', id);
+                    }
             });
+
+            that.contentElements = that.element.children('div'); // refresh the contents
         },
 
         _toggleHover: function(e) {
