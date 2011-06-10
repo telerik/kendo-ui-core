@@ -386,7 +386,7 @@
                 // ------------------------------------------------------------
                 module("Bar Chart / Labels / Positive Values", {
                     setup: function() {
-                        setupBarChart({ series: [{ data: positiveData, label: {} }] });
+                        setupBarChart({ series: [{ data: positiveData, label: {visible: true} }] });
                     }
                 });
 
@@ -399,7 +399,13 @@
                 });
 
                 test("bars labels have insideBase position", function() {
-                    setupBarChart({ series: [{ data: positiveData, label: { position: "insideBase"} }] });
+                    setupBarChart({ series: [{
+                        data: positiveData,
+                        label: {
+                            position: "insideBase",
+                            visible: true
+                        }
+                    }] });
                     $.each(series._bars, function() {
                         var text = this.children[0].children[0];
                         equal(this.box.y2, text.box.y2);
@@ -408,7 +414,13 @@
                 });
 
                 test("bars labels have outsideEnd position", function() {
-                    setupBarChart({ series: [{ data: positiveData, label: { position: "outsideEnd"} }] });
+                    setupBarChart({ series: [{
+                        data: positiveData,
+                        label: {
+                            position: "outsideEnd",
+                            visible: true
+                        }
+                    }] });
                     $.each(series._bars, function() {
                         var text = this.children[0].children[0];
                         equal(this.box.y1 - text.box.height(), text.box.y1);
@@ -417,7 +429,13 @@
                 });
 
                 test("bars labels have center position", function() {
-                    setupBarChart({ series: [{ data: positiveData, label: { position: "center" } }] });
+                    setupBarChart({ series: [{
+                        data: positiveData,
+                        label: {
+                            position: "center",
+                            visible: true
+                        }
+                    }] });
                     $.each(series._bars, function() {
                         var text = this.children[0].children[0],
                             margin = (this.box.height() - text.box.height()) / 2;
@@ -429,7 +447,7 @@
                 // ------------------------------------------------------------
                 module("Bar Chart / Labels / Negative Values", {
                     setup: function() {
-                        setupBarChart({ series: [{ data: negativeData, label: {} }] });
+                        setupBarChart({ series: [{ data: negativeData, label: {visible: true} }] });
                     }
                 });
 
@@ -442,7 +460,13 @@
                 });
 
                 test("bars labels have insideBase position", function() {
-                    setupBarChart({ series: [{ data: negativeData, label: { position: "insideBase"} }] });
+                    setupBarChart({ series: [{
+                        data: negativeData,
+                            label: {
+                            position: "insideBase",
+                            visible: true
+                        }
+                    }] });
                     $.each(series._bars, function() {
                         var text = this.children[0].children[0];
                         equal(this.box.y1, text.box.y1);
@@ -451,7 +475,13 @@
                 });
 
                 test("bars labels have outsideEnd position", function() {
-                    setupBarChart({ series: [{ data: negativeData, label: { position: "outsideEnd"} }] });
+                    setupBarChart({ series: [{
+                        data: negativeData,
+                        label: {
+                            position: "outsideEnd",
+                            visible: true
+                        }
+                    }] });
                     $.each(series._bars, function() {
                         var text = this.children[0].children[0];
                         equal(this.box.y2, text.box.y1);
@@ -460,7 +490,13 @@
                 });
 
                 test("bars labels have center position", function() {
-                    setupBarChart({ series: [{ data: negativeData, label: { position: "center" } }] });
+                    setupBarChart({ series: [{
+                        data: negativeData,
+                        label: {
+                            position: "center",
+                            visible: true
+                        }
+                    }] });
                     $.each(series._bars, function() {
                         var text = this.children[0].children[0],
                             margin = (this.box.height() - text.box.height()) / 2;
@@ -520,7 +556,9 @@
                     setup: function() {
                         setupBarChart({ series: [{
                             data: positiveData,
-                            label: {}
+                            label: {
+                                visible: true
+                            }
                         }], isVertical: false });
                     }
                 });
@@ -528,7 +566,9 @@
                 test("bars labels have insideEnd position", function() {
                     setupBarChart({ series: [{
                         data: positiveData,
-                        label: {}
+                        label: {
+                            visible: true
+                        }
                     }], isVertical: false });
                     $.each(series._bars, function() {
                         var text = this.children[0].children[0];
@@ -541,7 +581,8 @@
                     setupBarChart({ series: [{
                         data: positiveData,
                         label: {
-                            position: "insideBase"
+                            position: "insideBase",
+                            visible: true
                         }
                     }], isVertical: false });
                     $.each(series._bars, function() {
@@ -555,7 +596,8 @@
                     setupBarChart({ series: [{
                         data: positiveData,
                         label: {
-                            position: "outsideEnd"
+                            position: "outsideEnd",
+                            visible: true
                         }
                     }], isVertical: false });
                     $.each(series._bars, function() {
@@ -569,7 +611,8 @@
                     setupBarChart({ series: [{
                         data: positiveData,
                         label: {
-                            position: "center"
+                            position: "center",
+                            visible: true
                         }
                     }], isVertical: false });
                     $.each(series._bars, function() {
@@ -585,7 +628,9 @@
                     setup: function() {
                     setupBarChart({ series: [{
                         data: negativeData,
-                        label: {}
+                        label: {
+                            visible: true
+                        }
                     }], isVertical: false });
                     }
                 });
@@ -602,7 +647,8 @@
                     setupBarChart({ series: [{
                         data: negativeData,
                         label: {
-                            position: "insideBase"
+                            position: "insideBase",
+                            visible: true
                         }
                     }], isVertical: false });
                     $.each(series._bars, function() {
@@ -616,7 +662,8 @@
                     setupBarChart({ series: [{
                         data: negativeData,
                         label: {
-                            position: "outsideEnd"
+                            position: "outsideEnd",
+                            visible: true
                         }
                     }], isVertical: false });
                     $.each(series._bars, function() {
@@ -630,7 +677,8 @@
                     setupBarChart({ series: [{
                         data: negativeData,
                         label: {
-                            position: "center"
+                            position: "center",
+                            visible: true
                         }
                     }], isVertical: false });
                     $.each(series._bars, function() {
