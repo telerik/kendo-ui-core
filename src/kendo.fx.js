@@ -57,7 +57,7 @@
 
                 element.data('abortId', setTimeout(function () {
                     checkTransition(currentTransition);
-                }, 50));
+                }, currentTransition.duration + 20));
             }, 0);
         };
 
