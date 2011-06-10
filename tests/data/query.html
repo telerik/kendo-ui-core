@@ -723,6 +723,15 @@
 
                 equal(result.foo.max, 100);
             });
+
+            test("aggregate function should be caseinsensitive", function() {
+                var data = [ {foo: 100, bar: "baz"} , {foo: 100, bar: "bar"} , {foo: 1, bar: "baz"} ];
+
+                var result = new Query(data).aggregate( [{ field: "foo", aggregate: "Min" }] );
+
+                equal(result.foo.Min, 1);
+            });
+
             test("aggregate min returns min value for a given field", function() {
                 var data = [ {foo: 100, bar: "baz"} , {foo: 100, bar: "bar"} , {foo: 1, bar: "baz"} ];
 
