@@ -10,6 +10,7 @@
         Observable = kendo.Observable,
         Class = kendo.Class,
         Model = kendo.data.Model,
+        Query = kendo.data.Query,
         CREATE = "create",
         READ = "read",
         UPDATE = "update",
@@ -22,16 +23,18 @@
 
 
     function process(data, options) {
-        var query = new kendo.data.Query(data),
+        var query = new Query(data),
             options = options || {},
             page = options.page,
             pageSize = options.pageSize,
             sort = options.sort,
             group = options.group,
+            total,
             filter = options.filter;
 
-        if(filter) {
+        if (filter) {
             query = query.filter(filter);
+            total = query.toArray().length;
         }
 
         if (sort) {
@@ -45,11 +48,15 @@
         if (group) {
             query = query.group(group, data);
         }
-        return query.toArray();
+
+        return {
+            total: total,
+            data: query.toArray()
+        };
     }
 
     function calculateAggregates(data, options) {
-        var query = new kendo.data.Query(data),
+        var query = new Query(data),
             options = options || {},
             aggregates = options.aggregates,
             filter = options.filter;
@@ -555,17 +562,19 @@
 
         success: function(data) {
             var that = this,
-            options = {},
+            result,
             updated = Model ? that._updatedModels() : [],
             hasGroups = that.options.serverGrouping === true && that._group && that._group.length > 0,
             models = that._models;
 
             that._total = that._deserializer.total(data);
+
             if(hasGroups) {
                 data = that._deserializer.groups(data);
             } else {
                 data = that._deserializer.data(data);
             }
+
             that._data = data;
 
             $.each(updated, function() {
@@ -600,9 +609,14 @@
             } else if (that._aggregates) {
                 that._aggregateResult = that._deserializer.aggregates(data);
             }
-            that._view = process(data, options);
 
+            result = process(data, options);
 
+            that._view = result.data;
+
+            if (result.total !== undefined && !that.options.serverFiltering) {
+                that._total = result.total;
+            }
 
             that._idMap(data);
 
@@ -659,6 +673,7 @@
         query: function(options) {
             var that = this,
                 options = options,
+                result,
                 remote = that.options.serverSorting || that.options.serverPaging || that.options.serverFiltering || that.options.serverGrouping || that.options.serverAggregates;
 
             if (options !== undefined) {
@@ -670,25 +685,31 @@
                 that._aggregates = options.aggregates;
 
                 if (options.sort) {
-                    that._sort = options.sort = kendo.data.Query.expandSort(options.sort);
+                    that._sort = options.sort = Query.expandSort(options.sort);
                 }
 
                 if (options.filter) {
-                    that._filter = options.filter = kendo.data.Query.expandFilter(options.filter);
+                    that._filter = options.filter = Query.expandFilter(options.filter);
                 }
 
                 if (options.group) {
-                    that._group = options.group = kendo.data.Query.expandGroup(options.group);
+                    that._group = options.group = Query.expandGroup(options.group);
                 }
                 if (options.aggregates) {
-                    that._aggregates = options.aggregates = kendo.data.Query.expandAggregates(options.aggregates);
+                    that._aggregates = options.aggregates = Query.expandAggregates(options.aggregates);
                 }
             }
 
             if (remote || (that._data === undefined || that._data.length == 0)) {
                 that.read(options);
             } else {
-                that._view = process(that._data, options);
+                result = process(that._data, options);
+
+                if (result.total !== undefined && !that.options.serverFiltering) {
+                    that._total = result.total;
+                }
+
+                that._view = result.data;
                 that._aggregateResult = calculateAggregates(that._data, options);
                 that.trigger(CHANGE);
             }

@@ -365,6 +365,15 @@
                 equal(view[0].bar, "baz");
             });
 
+            test("query should update the total if filtering is enabled", function() {
+                var dataSource = new DataSource({
+                    data: [{ id:1, bar: "foo" },{ id: 2, bar: "baz" }]
+                });
+
+                dataSource.query( { filter: { field: "bar", operator: "==", value: "baz" } } );
+                equal(dataSource.total(), 1);
+            });
+
             test("query does not filter data if serverFiltering = true", function() {
                 var transport = new RemoteTransport({
                         read: "foo"
