@@ -403,8 +403,8 @@
             } else if (options.align == CENTER) {
                 var margin = (targetBox.width() - size.width) / 2;
                 text.box = new Box(
-                    round(targetBox.x1 + margin, COORD_PRECISION), targetBox.y1,
-                    round(targetBox.x2 - margin, COORD_PRECISION), targetBox.y1 - size.height);
+                    round(targetBox.x1 + margin, COORD_PRECISION), targetBox.y2 - size.height,
+                    round(targetBox.x2 - margin, COORD_PRECISION), targetBox.y2);
             }
 
             if (options.vAlign == CENTER) {
@@ -450,40 +450,39 @@
             font: "16px Verdana, sans-serif",
             aboveAxis: true,
             position: "insideEnd",
-            visible: true,
-            align: CENTER,
-            vAlign: "top"
+            visible: true
         },
 
-        updateLayout: function(targetBox) {
+        updateLayout: function(targetBox, isVertical) {
             var barLabel = this,
                 options = barLabel.options,
                 text = barLabel.children[0],
                 box = text.box;
 
-            if (box.height() > targetBox.height()) {
-                if (options.aboveAxis) {
-                    targetBox = new Box(
-                        targetBox.x1, targetBox.y1 - box.height(),
-                        targetBox.x2, targetBox.y1 - box.height()
-                    );
-                } else {
-                    targetBox = new Box(
-                        targetBox.x1, targetBox.y2 + box.height(),
-                        targetBox.x2, targetBox.y2 + box.height()
-                    );
-                    text.options.vAlign = "bottom";
-                }
-            } else {
-                if (options.position == "insideEnd") {
+            text.options.align = isVertical ? CENTER : "";
+            text.options.vAlign = isVertical ? "" : CENTER;
+
+            if (options.position == "insideEnd") {
+                if (isVertical) {
+                    text.options.vAlign = "top";
+
                     if (!options.aboveAxis && box.height() < targetBox.height()) {
                         text.options.vAlign = "bottom";
                     }
-                } else if (options.position == CENTER) {
-                    text.options.vAlign = CENTER;
-                } else if (options.position == "insideBase") {
+                } else {
+                    text.options.align = options.aboveAxis ? RIGHT : LEFT;
+                }
+            } else if (options.position == CENTER) {
+                text.options.vAlign = CENTER;
+                text.options.align = CENTER;
+            } else if (options.position == "insideBase") {
+                if (isVertical) {
                     text.options.vAlign = options.aboveAxis ? "bottom" : "top";
-                } else if (options.position == "outsideEnd") {
+                } else {
+                    text.options.align = options.aboveAxis ? LEFT : RIGHT;
+                }
+            } else if (options.position == "outsideEnd") {
+                if (isVertical) {
                     if (options.aboveAxis) {
                         targetBox = new Box(
                             targetBox.x1, targetBox.y1 - box.height(),
@@ -493,6 +492,19 @@
                         targetBox = new Box(
                             targetBox.x1, targetBox.y2,
                             targetBox.x2, targetBox.y2 + box.height()
+                        );
+                    }
+                } else {
+                    text.options.align = CENTER;
+                    if (options.aboveAxis) {
+                        targetBox = new Box(
+                            targetBox.x2 + box.width(), targetBox.y1,
+                            targetBox.x2, targetBox.y2
+                        );
+                    } else {
+                        targetBox = new Box(
+                            targetBox.x1 - box.width(), targetBox.y1,
+                            targetBox.x1, targetBox.y2
                         );
                     }
                 }
@@ -1217,16 +1229,18 @@
         options: {
             color: "#fff",
             borderColor: "#000",
-            borderWidth: 1
+            borderWidth: 1,
+            isVertical: true
         },
 
         updateLayout: function(targetBox) {
             this.box = targetBox;
             var bar = this,
-                children = bar.children;
+                children = bar.children,
+                options = bar.options;
 
             for(var i = 0, length = children.length; i < length; i++) {
-                children[i].updateLayout(targetBox);
+                children[i].updateLayout(targetBox, options.isVertical);
             }
         },
 
@@ -1303,9 +1317,17 @@
                 options = barChart.options,
                 children = barChart.children,
                 isStacked = barChart.options.isStacked,
-                label = new BarLabel(value, series.label);
+                labelOptions = series.label;
 
-            var bar = new Bar({ color: series.color, borderColor: series.color });
+            if (isStacked) {
+                if (labelOptions.position == "outsideEnd") {
+                    labelOptions.position = "insideEnd";
+                }
+            }
+
+            var bar = new Bar({ color: series.color, borderColor: series.color, isVertical: options.isVertical }),
+                label = new BarLabel(value, labelOptions);
+
             bar.children.push(label);
             barChart._bars.push(bar);
 
