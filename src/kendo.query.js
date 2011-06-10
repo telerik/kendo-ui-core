@@ -350,14 +350,16 @@
             aggregates = aggregates || [];
             var idx,
                 aggr,
+                functionName,
                 fieldAccumulator,
                 len = aggregates.length;
 
             for (idx = 0; idx < len; idx++) {
                 aggr = aggregates[idx];
+                functionName = aggr.aggregate;
                 var field = aggr.field;
                 accumulator[field] = accumulator[field] || {};
-                accumulator[field][aggr.aggregate] = functions[aggr.aggregate](accumulator[field][aggr.aggregate], item, kendo.accessor(field) );
+                accumulator[field][aggr.aggregate] = functions[functionName.toLowerCase()](accumulator[field][functionName], item, kendo.accessor(field) );
             }
         }
 
