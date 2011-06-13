@@ -475,10 +475,10 @@
 
             if (options.position == "insideEnd") {
                 if (isVertical) {
-                    text.options.vAlign = "top";
+                    text.options.vAlign = TOP;
 
                     if (!options.aboveAxis && box.height() < targetBox.height()) {
-                        text.options.vAlign = "bottom";
+                        text.options.vAlign = BOTTOM;
                     }
                 } else {
                     text.options.align = options.aboveAxis ? RIGHT : LEFT;
@@ -605,10 +605,10 @@
                 return;
             }
 
-            if (options.position == LEFT || options.position == RIGHT) {
-                legend.verticalLayout(targetBox);
-            } else {
+            if (options.position == TOP || options.position == BOTTOM) {
                 legend.horizontalLayout(targetBox);
+            } else {
+                legend.verticalLayout(targetBox);
             }
         },
 
@@ -625,15 +625,15 @@
                     label = children[i],
                     markerBox = new Box();
 
-                if (options.position == LEFT || options.position == RIGHT) {
-                    markerBox.x1 = legend.box.x1 + markerSize;
-                    markerBox.y1 = label.box.y1 + (label.box.height() - markerSize) / 2;
-                    markerBox.x2 = markerBox.x1 + markerSize;
-                    markerBox.y2 = markerBox.y1 + markerSize;
-                } else {
+                if (options.position == TOP || options.position == BOTTOM) {
                     markerBox.x1 = label.box.x1 - markerSize * 2;
                     markerBox.x2 = markerBox.x1 + markerSize;
                     markerBox.y1 = label.box.y1 + markerSize / 2;
+                    markerBox.y2 = markerBox.y1 + markerSize;
+                } else {
+                    markerBox.x1 = legend.box.x1 + markerSize;
+                    markerBox.y1 = label.box.y1 + (label.box.height() - markerSize) / 2;
+                    markerBox.x2 = markerBox.x1 + markerSize;
                     markerBox.y2 = markerBox.y1 + markerSize;
                 }
 
@@ -661,15 +661,15 @@
             };
 
             // Vertical center is calculated relative to the container, not the parent!
-            if (options.position == RIGHT) {
+            if (options.position == LEFT) {
+                offsetX = targetBox.x1 + labelBox.width() / 2;
+                offsetY = (targetBox.y2 - labelBox.height()) / 2;
+                labelBox.x2 += markerHeight;
+            } else {
                 offsetX = targetBox.x2 - labelBox.width();
                 offsetY = (targetBox.y2 - labelBox.height()) / 2;
                 labelBox.translate(offsetX, offsetY);
                 labelBox.x1 -= markerHeight;
-            } else {
-                offsetX = targetBox.x1 + labelBox.width() / 2;
-                offsetY = (targetBox.y2 - labelBox.height()) / 2;
-                labelBox.x2 += markerHeight;
             }
 
             legend.translateChildren(offsetX, offsetY);
@@ -1400,7 +1400,7 @@
                 options = barChart.options,
                 children = barChart.children,
                 isStacked = barChart.options.isStacked,
-                labelOptions = series.label;
+                labelOptions = extend({}, series.label);
 
             if (isStacked) {
                 if (labelOptions.position == "outsideEnd") {
