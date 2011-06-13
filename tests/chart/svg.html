@@ -33,8 +33,8 @@
 
                 test("root has default dimensions", function() {
                     var root = factory.root();
-                    equal(root.options.width, "800px");
-                    equal(root.options.height, "600px");
+                    equal(root.options.width, 600);
+                    equal(root.options.height, 400);
                 });
 
                 test("root sets dimensions", function() {
@@ -98,14 +98,14 @@
                 test("renders svg tag with default size", function() {
                     equal(root.render(),
                         "<svg xmlns='http://www.w3.org/2000/svg' version='1.1' " +
-                        "width='800px' height='600px'></svg>");
+                        "width='600px' height='400px'></svg>");
                 });
 
                 test("renders children", function() {
                     root.children.push(contentElementStub);
                     equal(root.render(),
                         "<svg xmlns='http://www.w3.org/2000/svg' version='1.1' " +
-                        "width='800px' height='600px'>Content</svg>");
+                        "width='600px' height='400px'>Content</svg>");
                 });
             })();
 

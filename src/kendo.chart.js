@@ -17,8 +17,8 @@
         CHANGE = "change",
         COLUMN = "column",
         COORD_PRECISION = 3,
-        DEFAULT_HEIGHT = 600,
-        DEFAULT_WIDTH = 800,
+        DEFAULT_HEIGHT = 400,
+        DEFAULT_WIDTH = 600,
         DATABOUND = "dataBound",
         DEFAULT_PRECISION = 6,
         HORIZONTAL = "horizontal",
@@ -353,8 +353,8 @@
         },
 
         options: {
-            width: 800,
-            height: 600
+            width: DEFAULT_WIDTH,
+            height: DEFAULT_HEIGHT
         },
 
         updateLayout: function() {
@@ -1651,15 +1651,15 @@
             if (!root.template) {
                 root.template = SVGRoot.template = template(
                     "<svg xmlns='http://www.w3.org/2000/svg' version='1.1' " +
-                    "width='<%= options.width %>' height='<%= options.height %>'>" +
+                    "width='<%= options.width %>px' height='<%= options.height %>px'>" +
                     "<%= renderContent() %></svg>"
                 );
             }
         },
 
         options: {
-            width: "800px",
-            height: "600px"
+            width: DEFAULT_WIDTH,
+            height: DEFAULT_HEIGHT
         }
     });
 
@@ -1785,7 +1785,7 @@
             root.template = VMLRoot.template;
             if (!root.template) {
                 root.template = VMLRoot.template = template(
-                    "<div style='width:<%= options.width %>; height:<%= options.height %>; " +
+                    "<div style='width:<%= options.width %>px; height:<%= options.height %>px; " +
                     "position: relative;'>" +
                     "<%= renderContent() %></div>"
                 );
@@ -1793,8 +1793,8 @@
         },
 
         options: {
-            width: "800px",
-            height: "600px"
+            width: DEFAULT_WIDTH,
+            height: DEFAULT_HEIGHT
         }
     });
 
