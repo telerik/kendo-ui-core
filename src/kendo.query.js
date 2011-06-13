@@ -220,7 +220,7 @@
         var descriptor = typeof field === "string" ? { field: field, dir: dir } : field,
             descriptors = $.isArray(descriptor) ? descriptor : (descriptor !== undefined ? [descriptor] : []);
 
-        return $.grep(descriptors, function(d) { return !!d.dir; });
+        return $.map(descriptors, function(d) { return { field: d.field, dir: d.dir || "asc" }; });
     }
     Query.expandFilter = function(expressions) {
         return expressions = $.isArray(expressions) ? expressions : [expressions];
