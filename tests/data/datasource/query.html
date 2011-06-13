@@ -650,6 +650,19 @@
                 dataSource.query( {aggregates:[{ field: "foo", aggregate: "sum" }]} );
                 stop(1000);
             });
+
+            test("query does pass additional options to the transport", function() {
+                var options, dataSource = new DataSource( {
+                    transport: {
+                        read: function() {
+                            options = arguments[0].data;
+                        }
+                    },
+                });
+
+                dataSource.query({foo: "bar"});
+                equal(options.foo, "bar");
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
