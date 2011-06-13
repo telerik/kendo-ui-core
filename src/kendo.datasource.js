@@ -517,16 +517,16 @@
             return model;
         },
 
-        read: function() {
+        read: function(additionalData) {
             var that = this,
-            options = {
-                page: that._page,
-                pageSize: that._pageSize,
-                sort: that._sort,
-                filter: that._filter,
-                group: that._group,
-                aggregates: that._aggregates
-            };
+                options = extend(additionalData, {
+                    page: that._page,
+                    pageSize: that._pageSize,
+                    sort: that._sort,
+                    filter: that._filter,
+                    group: that._group,
+                    aggregates: that._aggregates
+                });
 
             that.transport.read({
                 data: options,
