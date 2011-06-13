@@ -13,13 +13,38 @@
             $("li a").each(function() {
                 var currentHref = $(this).attr("href");
                 if (currentHref && currentHref.toLowerCase() === href) {
-                    $.get(href, function(html) {
-                        $("#example").empty().html(Application.body(html));
+                    if ($('.codeContainer:visible').length) {
+                        $('.codeContainer').css('height', 'auto');
+                        $('#code').kendoAnimate('fadeOut', 200, function () {
+                            Application.fetchExample(href);
+                        });
+                    } else
+                        Application.fetchExample(href);
+                }
+            });
+        },
 
-                        $("#code").empty();
+        fetchExample: function (href) {
+            $.get(href, function(html) {
+                $("#example").empty().html(Application.body(html));
+
+                if ($(".codeContainer:visible").length) {
+                    Application.fetchCode(function () {
+                        $('#code').kendoAnimate('fadeIn', 200);
                     });
                 }
             });
+        },
+
+        fetchCode: function(callback) {
+            $.get(location.href, function(html) {
+                $("#code").empty().text(html);
+
+                prettyPrint();
+
+                if (callback)
+                    callback();
+            })
         },
 
         body: function(html) {
@@ -49,11 +74,7 @@
             $("#viewCode").click(function(e) {
                 e.preventDefault();
 
-                $.get(location.href, function(html) {
-                    $("#code").empty().text(html);
-
-                    prettyPrint();
-                })
+                Application.fetchCode();
             });
         }
     };
