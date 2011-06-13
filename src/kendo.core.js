@@ -1075,7 +1075,14 @@
                 complete = duration;
                 duration = 400;
                 reverse = false;
-            } if (typeof duration === "boolean"){
+            }
+
+            if ($.isFunction(reverse)) {
+                complete = reverse;
+                reverse = false;
+            }
+
+            if (typeof duration === "boolean"){
                 duration = 400;
                 reverse = duration;
             }
