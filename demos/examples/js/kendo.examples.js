@@ -29,13 +29,11 @@
 
         fetchCode: function(callback) {
             $.get(location.href, function(html) {
-                var code = Application.body(html),
-                    match = code.match(/^[\u000a\u000d\u2028\u2029\n]*(\s+)</);
+                var code = html;
+                code = code.replace(new RegExp('\\s*<!-- tools -->(([\\u000a\\u000d\\u2028\\u2029]|.)*?)<!-- tools -->', 'ig'), ''); // Remove tools first to strip description
+                code = code.replace(new RegExp('\\s*<!-- \\w+ -->(([\\u000a\\u000d\\u2028\\u2029]|.)*?)<!-- \\w+ -->', 'ig'), '');
 
-                if (match && match[1].length)
-                    $("#code").empty().text(code.replace(new RegExp("(\\n)\\s{"+match[1].length+"}", "gm"), '\n'));
-                else if (code)
-                    $("#code").empty().text(code);
+                $("#code").empty().text(code);
 
                 prettyPrint();
 

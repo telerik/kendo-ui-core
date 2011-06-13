@@ -26,16 +26,37 @@ function processfile(file) {
             if (err) throw err;
 
             var descRE = /\s*<!--\s*description\s*-->([\u000a\u000d\u2028\u2029]|.)*?<!--\s*description\s*-->/g,
+                scriptRE = /\s*<!--\s*script\s*-->(([\u000a\u000d\u2028\u2029]|.)*?)<!--\s*script\s*-->/g,
+                cssRE = /\s*<!--\s*css\s*-->(([\u000a\u000d\u2028\u2029]|.)*?)<!--\s*css\s*-->/g,
                 base = file === "live/index.html" ? "" : "../",
-                scripts = regions.script.html;
+                scripts = regions.script.html,
+                selfScripts = scriptRE.exec(data)[1].trimLeft(),
+                css = regions.css.html,
+                selfCSS = cssRE.exec(data)[1].trimLeft(),
+                rowSeparator = /[\r\n]+\s+/,
+                scriptStripper1 = /"(.*?)src/g,
+                scriptStripper2 = /src="([^"]*)"/g,
+                cssStripper = /href="[.\/]*([^"]*)"/g;
 
-            scripts = scripts.replace(/"(.*?)src/g, '"js');
+            selfScripts.trim().split(rowSeparator).forEach(function(item) {
+                scripts = scripts.replace(new RegExp('[\\r\\n]+\\s+'+item.replace(/(\.\.\/)+/, '[\\.\/]*').replace(/\//g, '\\/').replace(/\./g, '\\.'), 'i'), '');
+            });
 
-            scripts = scripts.replace(/src="([^"]*)"/g, 'src="' + base + '$1"');
+            selfScripts = selfScripts.replace(scriptStripper1, '"js');
+            selfScripts = selfScripts.replace(scriptStripper2, 'src="' + base + '$1"');
+            scripts = scripts.replace(scriptStripper1, '"js');
+            scripts = scripts.replace(scriptStripper2, 'src="' + base + '$1"');
 
-            data = regions.script.exec(data, scripts);
+            selfCSS.trim().split(rowSeparator).forEach(function(item) {
+                css = css.replace(new RegExp('[\\r\\n]+\\s+'+item.replace(/(\.\.\/)+/g, '[\\.\/]*').replace(/\//g, '\\/').replace(/\./g, '\\.'), 'i'), '');
+            });
 
-            data = regions.css.exec(data, regions.css.html.replace(/href="[.\/]*([^"]*)"/g, 'href="' + base + '$1"'));
+            selfCSS = selfCSS.replace(cssStripper, 'href="' + base + '$1"');
+            css = css.replace(cssStripper, 'href="' + base + '$1"');
+
+            data = regions.script.exec(data, selfScripts + scripts);
+
+            data = regions.css.exec(data, selfCSS + css);
 
             data = regions.nav.exec(data, regions.nav.html.replace(/href="([^"]*)"/g, 'href="' + base + '$1"'));
 

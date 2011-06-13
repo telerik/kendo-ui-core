@@ -1,4 +1,42 @@
-html
+html, body
 {
+    margin: 0;
+    width: 100%;
     font-size: 12px;
+    text-align: center;
+}
+#header
+{
+    display: block;
+    width: 1100px;
+    height: 100px;
+    border: 1px solid #adff2f;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+#nav
+{
+    display: block;
+    float: left;
+    width: 200px;
+}
+#content
+{
+    width: 900px;
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+}
+#example
+{
+    margin: 10px 0;
+}
+#box
+{
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+    text-align: left;
+    margin: auto;
 }
