@@ -371,9 +371,10 @@
         },
         expandVertical: {
             play: function(element, properties, options) {
-                var height;
+                var height = element.data('height'),
+                    scrollHeight = element[0].scrollHeight + element.height() - element.innerHeight();
 
-                if (!element.data('height')) {
+                if (!height || scrollHeight != Math.round(height)) {
                     var clone = element.clone(true);
                     element.css({
                         height: 0,
@@ -392,8 +393,7 @@
                         height: height,
                         overflow: clone.css('overflow')
                     });
-                } else
-                    height = element.data('height');
+                }
 
                 animate(element, extend({ height: height + 'px' }, properties), extend({ complete: function () { element.css('overflow', element.data('overflow')) } }, options));
             },
@@ -412,9 +412,10 @@
         },
         expandHorizontal: {
             play: function(element, properties, options) {
-                var width;
+                var width = element.data('width'),
+                    scrollWidth = element[0].scrollWidth + element.width() - element.innerWidth();
                 
-                if (!element.data('width')) {
+                if (!width || scrollWidth != Math.round(width)) {
                     var clone = element.clone(true);
                     element.css({
                         width: 0,
@@ -432,8 +433,7 @@
                         width: width,
                         overflow: clone.css('overflow')
                     });
-                } else
-                    width = element.data('width');
+                }
 
                 animate(element, extend({ width: width + 'px' }, properties), extend({ complete: function () { element.css('overflow', element.data('overflow')) } }, options));
             },
