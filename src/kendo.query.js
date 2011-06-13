@@ -307,7 +307,6 @@
                 accessor = kendo.accessor(field),
                 item,
                 groupValue = accessor.get(sorted[0], field),
-                aggregate = {},
                 group = {
                     field: field,
                     value: groupValue,
@@ -323,7 +322,6 @@
                 currentValue = accessor.get(item, field);
                 if(groupValue !== currentValue) {
                     groupValue = currentValue;
-                    aggregate = {};
                     group = {
                         field: field,
                         value: groupValue,
@@ -341,12 +339,12 @@
                 result = {};
 
             for(idx = 0, len = this.data.length; idx < len; idx++) {
-               calculateAggregate(result, aggregates, this.data[idx]);
+               calculateAggregate(result, aggregates, this.data[idx], idx, len);
             }
             return result;
         }
     }
-    function calculateAggregate(accumulator, aggregates, item) {
+    function calculateAggregate(accumulator, aggregates, item, index, length) {
             aggregates = aggregates || [];
             var idx,
                 aggr,
@@ -359,7 +357,7 @@
                 functionName = aggr.aggregate;
                 var field = aggr.field;
                 accumulator[field] = accumulator[field] || {};
-                accumulator[field][aggr.aggregate] = functions[functionName.toLowerCase()](accumulator[field][functionName], item, kendo.accessor(field) );
+                accumulator[field][functionName] = functions[functionName.toLowerCase()](accumulator[field][functionName], item, kendo.accessor(field), index, length);
             }
         }
 
@@ -369,6 +367,13 @@
         },
         count: function(accumulator, item, accessor) {
             return (accumulator || 0) + 1;
+        },
+        average: function(accumulator, item, accessor, index, length) {
+            accumulator = (accumulator || 0) + accessor.get(item);
+            if(index == length - 1) {
+                accumulator = accumulator / length;
+            }
+            return accumulator;
         },
         max: function(accumulator, item, accessor) {
             var accumulator =  (accumulator || 0),

@@ -735,6 +735,14 @@
                 equal(result.foo.max, 100);
             });
 
+            test("aggregate average for a given field", function() {
+                var data = [ {foo: 100, bar: "baz"} , {foo: 100, bar: "bar"} , {foo: 1, bar: "baz"} ];
+
+                var result = new Query(data).aggregate( [{ field: "foo", aggregate: "average" }] );
+
+                equal(result.foo.average, 67);
+            });
+
             test("aggregate function should be caseinsensitive", function() {
                 var data = [ {foo: 100, bar: "baz"} , {foo: 100, bar: "bar"} , {foo: 1, bar: "baz"} ];
 
