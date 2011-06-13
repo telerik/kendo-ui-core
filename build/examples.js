@@ -25,9 +25,9 @@ function processfile(file) {
         fs.readFile(file, "utf8", function(err, data) {
             if (err) throw err;
 
-            var base = file === "live/index.html" ? "" : "../";
-
-            var scripts = regions.script.html;
+            var descRE = /\s*<!--\s*description\s*-->([\u000a\u000d\u2028\u2029]|.)*?<!--\s*description\s*-->/g,
+                base = file === "live/index.html" ? "" : "../",
+                scripts = regions.script.html;
 
             scripts = scripts.replace(/"(.*?)src/g, '"js');
 
@@ -35,10 +35,17 @@ function processfile(file) {
 
             data = regions.script.exec(data, scripts);
 
-            data = regions.css.exec(data, regions.css.html.replace(/href="([^"]*)"/g, 'href="' + base + '$1"'));;
+            data = regions.css.exec(data, regions.css.html.replace(/href="[.\/]*([^"]*)"/g, 'href="' + base + '$1"'));
 
             data = regions.nav.exec(data, regions.nav.html.replace(/href="([^"]*)"/g, 'href="' + base + '$1"'));
-            data = regions.code.exec(data);
+
+            var description = descRE.exec(data);
+            data = data.replace(descRE, '');
+
+            if (description)
+                data = regions.tools.exec(data, regions.tools.html.replace(descRE, description[0]));
+            else
+                data = regions.tools.exec(data);
 
             fs.writeFile(file, data);
         });
@@ -49,9 +56,9 @@ var indexHtml = fs.readFileSync("demos/examples/index.html", "utf8");
 
 var regions = {};
 
-"nav,script,code,css".split(",").forEach(function(region) {
-    var re = new RegExp("<!--\\s*" + region + "\\s*-->(([\\u000a\\u000d\\u2028\\u2029]|.)*)<!--\\s*" + region + "\\s*-->", "g");
-    var html = re.exec(indexHtml)[1].trim();
+"nav,script,tools,css".split(",").forEach(function(region) {
+    var re = new RegExp("<!--\\s*" + region + "\\s*-->([\\u000a\\u000d\\u2028\\u2029]|.)*<!--\\s*" + region + "\\s*-->", "g");
+    var html = re.exec(indexHtml)[0].trim();
 
     regions[region] = {
         html: html,
@@ -65,7 +72,14 @@ var regions = {};
 
 wrench.copyDirSyncRecursive("demos/examples", "live");
 wrench.copyDirSyncRecursive("src", "live/js");
+wrench.copyDirSyncRecursive("styles", "live/styles");
 fs.unlinkSync("live/template.html");
+
+fs.readdir("demos/examples/styles", function(err, files) {
+    files.forEach(function(file) {
+        wrench.copyFile("demos/examples/styles/" + file, "live/styles/" + file);
+    });
+});
 
 fs.readdir("demos/examples/js", function(err, files) {
     files.forEach(function(file) {

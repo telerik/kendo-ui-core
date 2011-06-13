@@ -13,13 +13,10 @@
             $("li a").each(function() {
                 var currentHref = $(this).attr("href");
                 if (currentHref && currentHref.toLowerCase() === href) {
-                    if ($('.codeContainer:visible').length) {
-                        $('.codeContainer').css('height', 'auto');
-                        $('#code').kendoAnimate('fadeOut', 200, function () {
-                            Application.fetchExample(href);
-                        });
-                    } else
-                        Application.fetchExample(href);
+                    Application.fetchExample(href);
+                    $('#viewDescription').trigger('click');
+
+                    Application.fetchDescription(href);
                 }
             });
         },
@@ -27,18 +24,15 @@
         fetchExample: function (href) {
             $.get(href, function(html) {
                 $("#example").empty().html(Application.body(html));
-
-                if ($(".codeContainer:visible").length) {
-                    Application.fetchCode(function () {
-                        $('#code').kendoAnimate('fadeIn', 200);
-                    });
-                }
             });
         },
 
         fetchCode: function(callback) {
             $.get(location.href, function(html) {
-                $("#code").empty().text(html);
+                var code = Application.body(html),
+                    whiteSpaces = code.match(/^[\u000a\u000d\u2028\u2029\n]*(\s+)</)[1].length; // ?!
+
+                $("#code").empty().text(code.replace(new RegExp("(\\n)\\s{"+whiteSpaces+"}", "gm"), '\n'));
 
                 prettyPrint();
 
@@ -47,8 +41,18 @@
             })
         },
 
+        fetchDescription: function(href) {
+            $.get(href, function(html) {
+                $(".description").empty().text(Application.description(html).trim());
+            })
+        },
+
+        description: function(html) {
+            return /<div class="description">(([\u000a\u000d\u2028\u2029]|.)*?)<\/div>\s*<!-- description -->/ig.exec(html)[1];
+        },
+
         body: function(html) {
-            return /<div id="example">(([\u000a\u000d\u2028\u2029]|.)*)<\/div>/ig.exec(html)[1];
+            return /<div id="example">(([\u000a\u000d\u2028\u2029]|.)*?)<\/div>\s*<!-- tools -->/ig.exec(html)[1];
         },
 
         init: function() {
@@ -69,6 +73,8 @@
                 });
 
                 history.replaceState({ href: location.href }, null, location.href );
+
+                Application.fetchDescription(location.href);
             }
 
             $("#viewCode").click(function(e) {
