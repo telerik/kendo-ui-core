@@ -295,14 +295,14 @@
                     $("#container").width(0);
                     createChart();
 
-                    equal(chart.options.width, 800);
+                    equal(chart.options.width, 600);
                 });
 
                 test("uses default height when none is available", function() {
                     $("#container").height(0);
                     createChart();
 
-                    equal(chart.options.height, 600);
+                    equal(chart.options.height, 400);
                 });
 
                 test("sets width on rootElement", function() {

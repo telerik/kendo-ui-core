@@ -56,8 +56,8 @@
 
                 test("sets dimensions on view element", 2, function() {
                     factory.root = function(options) {
-                        equal(options.width, 800);
-                        equal(options.height, 600);
+                        equal(options.width, 600);
+                        equal(options.height, 400);
 
                         return new ViewElementStub();
                     };
