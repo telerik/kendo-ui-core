@@ -9,6 +9,7 @@
         <script src="../../src/kendo.menu.js"></script>
         <script src="../../src/kendo.panelbar.js"></script>
         <script src="../../src/kendo.tabstrip.js"></script>
+        <script src="../../src/kendo.treeview.js"></script>
         <script src="js/prettify.js"></script>
         <script src="js/kendo.examples.js"></script>
         <!-- script -->
@@ -17,12 +18,18 @@
         <link type="text/css" href="styles/examples.css" rel="stylesheet"/>
         <link type="text/css" href="../../styles/kendo.common.css" rel="stylesheet"/>
         <link type="text/css" href="../../styles/kendo.vista.css" rel="stylesheet"/>
+        <style type="text/css">
+            #nav
+            {
+            }
+        </style>
         <!-- css -->
-        <title>Home</title>
+        <title>Kendo Examples</title>
     </head>
     <body>
+        <header></header>
         <!-- nav -->
-        <div id="nav">
+        <section id="nav">
             <ul>
                 <li><a href="autocomplete/index.html">Autocomplete - feature 1</a></li>
                 <li><a href="autocomplete/events.html">Autocomplete - feature 2</a></li>
@@ -33,12 +40,23 @@
                 <li><a href="panelbar/index.html">PanelBar</a></li>
                 <li><a href="tabstrip/index.html">TabStrip</a></li>
             </ul>
-        </div>
+        </section>
         <!-- nav -->
-        <div id="example"></div>
-        <!-- code -->
-        <a href="#" id="viewcode">View Code</a>
-        <pre id="code" class="prettyprint"></pre>
-        <!-- code -->
+        <section id="box">
+            <div id="example"></div>
+            <!-- code -->
+            <div id="codeStrip">
+                <ul>
+                    <li class="t-state-active"><a id="viewDescription">Description</a></li>
+                    <li><a id="viewCode">View Code</a></li>
+                </ul>
+                <div>Sample Description</div>
+                <div><pre id="code" class="prettyprint"></pre></div>
+            </div>
+            <script type="text/javascript">
+                $('#codeStrip').kendoTabStrip();
+            </script>
+            <!-- code -->
+        </section>
     </body>
 </html>

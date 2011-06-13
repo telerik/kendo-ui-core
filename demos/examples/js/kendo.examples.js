@@ -46,7 +46,7 @@
                 history.replaceState({ href: location.href }, null, location.href );
             }
 
-            $("#viewcode").click(function(e) {
+            $("#viewCode").click(function(e) {
                 e.preventDefault();
 
                 $.get(location.href, function(html) {
