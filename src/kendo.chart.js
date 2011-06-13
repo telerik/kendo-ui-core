@@ -58,6 +58,9 @@
         },
 
         options: {
+            legend: {
+                visible: true
+            },
             valueAxis: {
                 type: "Numeric"
             },
@@ -95,10 +98,14 @@
                 model.children.push(new Title(chart.options.title));
             }
 
-            model.children.push(
-                new Legend(extend({}, chart.options.legend, { series: chart.options.series })),
-                new PlotArea(chart.options)
-            );
+            if (options.legend.visible) {
+                var legendOptions = extend({}, chart.options.legend,
+                                    { series: chart.options.series });
+
+                model.children.push(new Legend(legendOptions));
+            }
+
+            model.children.push(new PlotArea(chart.options));
             chart._model = model;
 
             model.updateLayout();
@@ -580,7 +587,9 @@
         options: {
             position: RIGHT,
             series: [],
-            font: "12px Verdana, sans-serif"
+            font: "12px Verdana, sans-serif",
+            offsetX: 0,
+            offsetY: 0
         },
 
         createLabels: function() {
@@ -632,7 +641,7 @@
                     markerBox.y1 = label.box.y1 + markerSize / 2;
                     markerBox.y2 = markerBox.y1 + markerSize;
                 } else {
-                    markerBox.x1 = legend.box.x1 + markerSize;
+                    markerBox.x1 = label.box.x1 - markerSize * 2;
                     markerBox.y1 = label.box.y1 + (label.box.height() - markerSize) / 2;
                     markerBox.x2 = markerBox.x1 + markerSize;
                     markerBox.y2 = markerBox.y1 + markerSize;
@@ -673,7 +682,8 @@
                 labelBox.x1 -= markerHeight;
             }
 
-            legend.translateChildren(offsetX, offsetY);
+            legend.translateChildren(offsetX + options.offsetX,
+                    offsetY + options.offsetY);
 
             labelBox.y1 = targetBox.y1;
             labelBox.y2 = targetBox.y2;
@@ -710,7 +720,8 @@
                 labelBox.y1 = targetBox.y2 - labelBox.height();
             }
 
-            legend.translateChildren(offsetX, offsetY);
+            legend.translateChildren(offsetX + options.offsetX,
+                    offsetY + options.offsetY);
 
             labelBox.x1 = targetBox.x1;
             labelBox.x2 = targetBox.x2;
