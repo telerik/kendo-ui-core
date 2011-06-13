@@ -308,7 +308,7 @@
                 });
 
                 test("major ticks are distributed vertically", function() {
-                    numericAxis.options.line = "none";
+                    numericAxis.options.lineWidth = 0;
                     numericAxis.getViewElements(factoryStub);
 
                     var ticksY = $.map(factoryStub.renderedLines, function(line) {
@@ -318,7 +318,7 @@
                 });
 
                 test("major ticks can be disabled", function() {
-                    numericAxis.options.line = "none";
+                    numericAxis.options.lineWidth = 0;
                     numericAxis.options.majorTickType = "none";
                     numericAxis.getViewElements(factoryStub);
 
@@ -370,7 +370,7 @@
                 });
 
                 test("major ticks are distributed horizontally", function() {
-                    numericAxis.options.line = "none";
+                    numericAxis.options.lineWidth = 0;
                     numericAxis.getViewElements(factoryStub);
 
                     var ticksX = $.map(factoryStub.renderedLines, function(line) {
@@ -384,7 +384,7 @@
                         equal(x2, x1);
                     }
 
-                    numericAxis.options.line = "none";
+                    numericAxis.options.lineWidth = 0;
                     numericAxis.getViewElements(factoryStub);
                 });
 
@@ -393,7 +393,7 @@
                         equal(y1, 0);
                     }
 
-                    numericAxis.options.line = "none";
+                    numericAxis.options.lineWidth = 0;
                     numericAxis.getViewElements(factoryStub);
                 });
 
@@ -402,7 +402,7 @@
                         equal(y2 - y1, MAJOR_TICK_HEIGHT);
                     }
 
-                    numericAxis.options.line = "none";
+                    numericAxis.options.lineWidth = 0;
                     numericAxis.getViewElements(factoryStub);
                 });
             })();
