@@ -30,9 +30,12 @@
         fetchCode: function(callback) {
             $.get(location.href, function(html) {
                 var code = Application.body(html),
-                    whiteSpaces = code.match(/^[\u000a\u000d\u2028\u2029\n]*(\s+)</)[1].length; // ?!
+                    match = code.match(/^[\u000a\u000d\u2028\u2029\n]*(\s+)</);
 
-                $("#code").empty().text(code.replace(new RegExp("(\\n)\\s{"+whiteSpaces+"}", "gm"), '\n'));
+                if (match && match[1].length)
+                    $("#code").empty().text(code.replace(new RegExp("(\\n)\\s{"+match[1].length+"}", "gm"), '\n'));
+                else if (code)
+                    $("#code").empty().text(code);
 
                 prettyPrint();
 
