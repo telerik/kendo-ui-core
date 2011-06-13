@@ -634,17 +634,16 @@
                     label = children[i],
                     markerBox = new Box();
 
+                markerBox.x1 = label.box.x1 - markerSize * 2;
+                markerBox.x2 = markerBox.x1 + markerSize;
+
                 if (options.position == TOP || options.position == BOTTOM) {
-                    markerBox.x1 = label.box.x1 - markerSize * 2;
-                    markerBox.x2 = markerBox.x1 + markerSize;
                     markerBox.y1 = label.box.y1 + markerSize / 2;
-                    markerBox.y2 = markerBox.y1 + markerSize;
                 } else {
-                    markerBox.x1 = label.box.x1 - markerSize * 2;
                     markerBox.y1 = label.box.y1 + (label.box.height() - markerSize) / 2;
-                    markerBox.x2 = markerBox.x1 + markerSize;
-                    markerBox.y2 = markerBox.y1 + markerSize;
                 }
+
+                markerBox.y2 = markerBox.y1 + markerSize;
 
                 childElements.push(factory.rect(markerBox, { fill: color, stroke: color }));
             };
