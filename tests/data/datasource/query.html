@@ -528,6 +528,21 @@
                 ok(view === data);
             });
 
+            test("group with paging", function() {
+                var data = [{age: 1}, {age: 3}, {age: 1}];
+
+                var dataSource = new DataSource({
+                    data: data,
+                    page: 1,
+                    pageSize: 2
+                });
+                dataSource.read();
+                dataSource.group({ field: "age" });
+                var view = dataSource.view();
+                equal(view.length, 1);
+                equal(view[0].items.length, 2);
+            });
+
             test("query sets group when single group is passed", function() {
                 var dataSource = new DataSource({
                     data: [{age: 1}, {age: 2}, {age: 3}]
