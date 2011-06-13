@@ -27,7 +27,6 @@
         OUTSIDE = "outside",
         RIGHT = "right",
         SVG_NS = "http://www.w3.org/2000/svg",
-        SOLID = "solid",
         TOP = "top",
         VERTICAL = "vertical",
         X = "x",
@@ -783,7 +782,7 @@
         options: {
             min: 0,
             max: 1,
-            line: SOLID,
+            lineWidth: 1,
             majorTickType: OUTSIDE,
             tickSize: 4,
             axisCrossingValue: 0,
@@ -853,7 +852,7 @@
                 childElements = ChartElement.fn.getViewElements.call(axis, factory);
 
             var majorTickPositions = axis.getMajorDivisionsPositions();
-            if (options.line.toLowerCase() == SOLID) {
+            if (options.lineWidth > 0) {
                 if (isVertical) {
                     childElements.push(factory.line(
                         axis.box.x2, majorTickPositions[0],
@@ -1071,7 +1070,7 @@
 
         options: {
             categories: [],
-            line: SOLID,
+            lineWidth: 1,
             tickSize: 4,
             majorTickType: OUTSIDE,
             axisCrossingValue: 0,
@@ -1145,7 +1144,7 @@
                 isVertical = options.orientation === VERTICAL,
                 childElements = ChartElement.fn.getViewElements.call(axis, factory);
 
-            if (options.line.toLowerCase() == SOLID) {
+            if (options.lineWidth > 0) {
                 if (isVertical) {
                     childElements.push(factory.line(
                         axis.box.x2, axis.box.y1,

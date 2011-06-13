@@ -92,7 +92,7 @@
                 });
 
                 test("major ticks are distributed horizontally", function() {
-                    categoryAxis.options.line = "none";
+                    categoryAxis.options.lineWidth = 0;
                     categoryAxis.getViewElements(factoryStub);
 
                     var ticksX = $.map(factoryStub.renderedLines, function(line) {
@@ -102,7 +102,7 @@
                 });
 
                 test("major ticks can be disabled", function() {
-                    categoryAxis.options.line = "none";
+                    categoryAxis.options.lineWidth = 0;
                     categoryAxis.options.majorTickType = "none";
                     categoryAxis.getViewElements(factoryStub);
 
@@ -156,7 +156,7 @@
                 });
 
                 test("major ticks are distributed vertically", function() {
-                    categoryAxis.options.line = "none";
+                    categoryAxis.options.lineWidth = 0;
                     categoryAxis.getViewElements(factoryStub);
 
                     var ticksY = $.map(factoryStub.renderedLines, function(line) {
