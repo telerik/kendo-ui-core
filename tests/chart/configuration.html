@@ -272,6 +272,51 @@
                     ok(!(chart._model.children[0] instanceof Chart.Title));
                 });
 
+                // ------------------------------------------------------------
+                module("Size", {
+                    setup: function() {
+                        $("#container").width("100px").height("100px").show();
+                    }
+                });
+
+                test("picks width from container", function() {
+                    createChart();
+
+                    equal(chart.options.width, 100);
+                });
+
+                test("picks height from container", function() {
+                    createChart();
+
+                    equal(chart.options.height, 100);
+                });
+
+                test("uses default width when none is available", function() {
+                    $("#container").width(0);
+                    createChart();
+
+                    equal(chart.options.width, 800);
+                });
+
+                test("uses default height when none is available", function() {
+                    $("#container").height(0);
+                    createChart();
+
+                    equal(chart.options.height, 600);
+                });
+
+                test("sets width on rootElement", function() {
+                    createChart({ width: 200});
+
+                    equal(chart._model.options.width, 200);
+                });
+
+                test("sets height on rootElement", function() {
+                    createChart({ height: 200});
+
+                    equal(chart._model.options.height, 200);
+                });
+
             })();
         </script>
 

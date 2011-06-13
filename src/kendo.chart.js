@@ -17,6 +17,8 @@
         CHANGE = "change",
         COLUMN = "column",
         COORD_PRECISION = 3,
+        DEFAULT_HEIGHT = 600,
+        DEFAULT_WIDTH = 800,
         DATABOUND = "dataBound",
         DEFAULT_PRECISION = 6,
         HORIZONTAL = "horizontal",
@@ -86,7 +88,7 @@
         _redraw: function() {
             var chart = this,
                 options = chart.options,
-                model = new RootElement();
+                model = new RootElement({ width: options.width, height: options.height });
 
             if (options.title && options.title.text) {
                 model.children.push(new Title(chart.options.title));
@@ -110,6 +112,7 @@
 
         _applyDefaults: function() {
             var chart = this,
+                element = chart.element,
                 options = chart.options,
                 series = options.series,
                 seriesType,
@@ -128,6 +131,14 @@
             }
 
             options.categoryAxis = extend({}, options.axisDefaults, options.categoryAxis);
+
+            if (!options.width) {
+                options.width = element.width() || DEFAULT_WIDTH;
+            }
+
+            if (!options.height) {
+                options.height = element.height() || DEFAULT_HEIGHT;
+            }
         },
 
         _initDataSource: function() {
