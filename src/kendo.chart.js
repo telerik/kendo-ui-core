@@ -95,7 +95,7 @@
             }
 
             model.children.push(
-                new Legend({ series: chart.options.series }),
+                new Legend(extend({}, chart.options.legend, { series: chart.options.series })),
                 new PlotArea(chart.options)
             );
             chart._model = model;
@@ -395,8 +395,7 @@
         options: {
             font: "16px Verdana, sans-serif",
             align: LEFT,
-            vAlign: "",
-            visible: true
+            vAlign: ""
         },
 
         updateLayout: function(targetBox) {
@@ -424,11 +423,11 @@
                 text.box = new Box(
                     text.box.x1, targetBox.y1 + margin,
                     text.box.x2, targetBox.y2 - margin);
-            } else if (options.vAlign == "bottom") {
+            } else if (options.vAlign == BOTTOM) {
                 text.box = new Box(
                     text.box.x1, targetBox.y2 - size.height,
                     text.box.x2, targetBox.y2);
-            } else if (options.vAlign == "top") {
+            } else if (options.vAlign == TOP) {
                 text.box = new Box(
                     text.box.x1, targetBox.y1,
                     text.box.x2, targetBox.y1 + size.height);
@@ -437,10 +436,6 @@
 
         getViewElements: function(factory) {
             var text = this;
-
-            if (!text.options.visible) {
-                return;
-            }
 
             return [
                 factory.text(text.content, {
@@ -466,8 +461,7 @@
         options: {
             font: "16px Verdana, sans-serif",
             aboveAxis: true,
-            position: "insideEnd",
-            visible: false
+            position: "insideEnd"
         },
 
         updateLayout: function(targetBox, isVertical) {
@@ -475,10 +469,6 @@
                 options = barLabel.options,
                 text = barLabel.children[0],
                 box = text.box;
-
-            if (!options.visible) {
-                return;
-            }
 
             text.options.align = isVertical ? CENTER : "";
             text.options.vAlign = isVertical ? "" : CENTER;
@@ -498,7 +488,7 @@
                 text.options.align = CENTER;
             } else if (options.position == "insideBase") {
                 if (isVertical) {
-                    text.options.vAlign = options.aboveAxis ? "bottom" : "top";
+                    text.options.vAlign = options.aboveAxis ? BOTTOM : TOP;
                 } else {
                     text.options.align = options.aboveAxis ? LEFT : RIGHT;
                 }
@@ -608,40 +598,18 @@
         updateLayout: function(targetBox) {
             var legend = this,
                 options = legend.options,
-                children = legend.children,
-                childrenCount = children.length,
-                labelBox,
-                markerSize = legend.markerSize();
+                childrenCount = legend.children.length;
 
             if (childrenCount === 0) {
                 legend.box = new Box();
                 return;
             }
 
-            labelBox = children[0].box.clone();
-
-            // Position labels below each other
-            for (var i = 1; i < childrenCount; i++) {
-                var label = legend.children[i];
-                label.box.alignTo(legend.children[i - 1].box, BOTTOM);
-                labelBox.wrap(label.box);
-            };
-
-            // Vertical center is calculated relative to the container, not the parent!
-            var offsetX = targetBox.x2 - labelBox.width(),
-                offsetY = (targetBox.y2 - labelBox.height()) / 2;
-
-            for (var i = 0; i < childrenCount; i++) {
-                // Translate all labels to the final position
-                var label = legend.children[i];
-                label.box.translate(offsetX, offsetY);
-            };
-
-            labelBox.translate(offsetX, offsetY);
-            labelBox.y1 = targetBox.y1;
-            labelBox.y2 = targetBox.y2;
-            labelBox.x1 -= markerSize * 3;
-            legend.box = labelBox;
+            if (options.position == LEFT || options.position == RIGHT) {
+                legend.verticalLayout(targetBox);
+            } else {
+                legend.horizontalLayout(targetBox);
+            }
         },
 
         getViewElements: function(factory) {
@@ -657,15 +625,107 @@
                     label = children[i],
                     markerBox = new Box();
 
-                markerBox.x1 = legend.box.x1 + markerSize;
-                markerBox.y1 = label.box.y1 + (label.box.height() - markerSize) / 2;
-                markerBox.x2 = markerBox.x1 + markerSize;
-                markerBox.y2 = markerBox.y1 + markerSize;
+                if (options.position == LEFT || options.position == RIGHT) {
+                    markerBox.x1 = legend.box.x1 + markerSize;
+                    markerBox.y1 = label.box.y1 + (label.box.height() - markerSize) / 2;
+                    markerBox.x2 = markerBox.x1 + markerSize;
+                    markerBox.y2 = markerBox.y1 + markerSize;
+                } else {
+                    markerBox.x1 = label.box.x1 - markerSize * 2;
+                    markerBox.x2 = markerBox.x1 + markerSize;
+                    markerBox.y1 = label.box.y1 + markerSize / 2;
+                    markerBox.y2 = markerBox.y1 + markerSize;
+                }
 
                 childElements.push(factory.rect(markerBox, { fill: color, stroke: color }));
             };
 
             return childElements;
+        },
+
+        verticalLayout: function(targetBox) {
+            var legend = this,
+                options = legend.options,
+                children = legend.children,
+                childrenCount = children.length,
+                labelBox = children[0].box.clone(),
+                markerHeight = legend.markerSize() * 3,
+                offsetX,
+                offsetY;
+
+            // Position labels below each other
+            for (var i = 1; i < childrenCount; i++) {
+                var label = legend.children[i];
+                label.box.alignTo(legend.children[i - 1].box, BOTTOM);
+                labelBox.wrap(label.box);
+            };
+
+            // Vertical center is calculated relative to the container, not the parent!
+            if (options.position == RIGHT) {
+                offsetX = targetBox.x2 - labelBox.width();
+                offsetY = (targetBox.y2 - labelBox.height()) / 2;
+                labelBox.translate(offsetX, offsetY);
+                labelBox.x1 -= markerHeight;
+            } else {
+                offsetX = targetBox.x1 + labelBox.width() / 2;
+                offsetY = (targetBox.y2 - labelBox.height()) / 2;
+                labelBox.x2 += markerHeight;
+            }
+
+            legend.translateChildren(offsetX, offsetY);
+
+            labelBox.y1 = targetBox.y1;
+            labelBox.y2 = targetBox.y2;
+
+            legend.box = labelBox;
+        },
+
+        horizontalLayout: function(targetBox) {
+            var legend = this,
+                options = legend.options,
+                children = legend.children,
+                childrenCount = children.length,
+                labelBox = children[0].box.clone(),
+                markerWidth = legend.markerSize() * 3,
+                offsetX,
+                offsetY;
+
+            // Position labels next to each other
+            for (var i = 1; i < childrenCount; i++) {
+                var label = legend.children[i]
+                label.box.alignTo(legend.children[i - 1].box, RIGHT);
+                labelBox.wrap(label.box);
+                label.box.x1 = label.box.x1 + i * markerWidth;
+            };
+
+            if (options.position == TOP) {
+                offsetX = (targetBox.x2 - labelBox.width() - markerWidth) / 2;
+                offsetY = targetBox.y1 + labelBox.height();
+                labelBox.translate(offsetX, offsetY);
+                labelBox.y1 = targetBox.y1;
+            } else {
+                offsetX = (targetBox.x2 - labelBox.width() - markerWidth) / 2;
+                offsetY = targetBox.y2 - labelBox.height();
+                labelBox.y1 = targetBox.y2 - labelBox.height();
+            }
+
+            legend.translateChildren(offsetX, offsetY);
+
+            labelBox.x1 = targetBox.x1;
+            labelBox.x2 = targetBox.x2;
+
+            legend.box = labelBox;
+        },
+
+        translateChildren: function(dx, dy) {
+            var legend = this,
+                children = legend.children,
+                childrenCount = children.length,
+                i;
+
+            for (i = 0; i < childrenCount; i++) {
+                children[i].box.translate(dx, dy);
+            }
         },
 
         markerSize: function() {
@@ -1261,7 +1321,9 @@
                 options = bar.options;
 
             for(var i = 0, length = children.length; i < length; i++) {
-                children[i].updateLayout(targetBox, options.isVertical);
+                if (children[i].options.visible) {
+                    children[i].updateLayout(targetBox, options.isVertical);
+                }
             }
         },
 

@@ -16,15 +16,22 @@
                     title: {
                         text: "Teh chart"
                     },
+                    legend: {
+                        font: "12px Verdana, sans-serif",
+                        position: "right", // "top", "bottom", "left", "right"
+                        offsetX: 0,
+                        offsetY: 0,
+                        visible: true
+                    },
                     dataSource: [
                         {
                             name: "Alpha",
                             a: 15,
-                            b: 10,
+                            b: 20,
                             c: 15
                         }, {
                             name: "Beta",
-                            a: -10,
+                            a: 5,
                             b: -15,
                             c: 15
                         }, {
@@ -75,7 +82,6 @@
                         bar: {
                             label: {
                                 font: "12px Verdana, sans-serif",
-                                visible: true,
                                 position: "center"
                                 // "outsideEnd", "insideEnd", "insideBase", "center"
                             }

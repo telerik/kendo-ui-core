@@ -256,17 +256,6 @@
                     equal(legend.children[0].options.font, legend.options.font);
                 });
 
-                test("positions legend to the right", function() {
-                    legend = new Chart.Legend({
-                        series: [ { name: "Series 1" } ]
-                    });
-
-                    legend.updateLayout(chartBox);
-
-                    var label = legend.children[0];
-                    equal(label.box.x1, chartBox.x2 - label.box.width());
-                });
-
                 test("positions legend to absolute vertical center (relative to y=0)", function() {
                     legend = new Chart.Legend({
                         series: [ { name: "Series 1" } ]
@@ -276,8 +265,8 @@
                     legend.updateLayout(legendBox);
 
                     var label = legend.children[0];
-                    equal(  label.box.y1,
-                            (legendBox.y2 - label.box.height()) / 2);
+                    equal(label.box.y1,
+                         (legendBox.y2 - label.box.height()) / 2);
                 });
 
                 test("legend fills available height", function() {
@@ -288,6 +277,58 @@
                     legend.updateLayout(chartBox);
 
                     deepEqual([legend.box.y1, legend.box.y2], [chartBox.y1, chartBox.y2]);
+                });
+
+                module("Legend position", {
+                    setup: function() {
+                        viewFactory = new ViewFactoryStub();
+                    }
+                });
+
+                test("positions legend to the right", function() {
+                    legend = new Chart.Legend({
+                        series: [ { name: "Series 1" } ]
+                    });
+
+                    legend.updateLayout(chartBox);
+                    var label = legend.children[0];
+
+                    equal(label.box.x1, chartBox.x2 - label.box.width());
+                });
+
+                test("positions legend to the left", function() {
+                    legend = new Chart.Legend({
+                        series: [ { name: "Series 1" } ],
+                        position: "left"
+                    });
+
+                    legend.updateLayout(chartBox);
+
+                    var label = legend.children[0];
+                    equal(label.box.x1, chartBox.x1 + label.box.width() / 2);
+                });
+
+                test("positions legend to the top", function() {
+                    legend = new Chart.Legend({
+                    series: [ { name: "Series 1" } ],
+                        position: "top"
+                    });
+
+                    legend.updateLayout(chartBox);
+
+                    equal(legend.box.y1, chartBox.y1);
+                });
+
+                test("positions legend to the bottom", function() {
+                    legend = new Chart.Legend({
+                        series: [ { name: "Series 1" } ],
+                        position: "bottom"
+                    });
+
+                    legend.updateLayout(chartBox);
+
+                    var label = legend.children[0];
+                    equal(legend.box.y1, chartBox.y2 - label.box.height());
                 });
 
                 //--------------------------------------------------------------
