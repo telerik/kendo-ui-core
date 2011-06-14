@@ -4,6 +4,7 @@
         type = $.type,
         getter = kendo.getter,
         setter = kendo.setter,
+        accessor = kendo.accessor,
         UPDATED = "UPDATED",
         PRISTINE = "PRISTINE",
         CREATED = "CREATED",
@@ -77,7 +78,7 @@
         accessor: function(field) {
             var accessors = this._accessors;
 
-            return accessors[field] = accessors[field] || kendo.accessor(field);
+            return accessors[field] = accessors[field] || accessor(field);
         },
 
         get: function(field) {
