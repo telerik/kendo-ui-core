@@ -16,7 +16,8 @@
             var Chart = kendo.ui.Chart,
                 Box = Chart.Box,
                 chartBox = new Box(100, 100, 1000, 1000),
-                TOLERANCE = 1;
+                TOLERANCE = 1,
+                MARGIN = 10;
 
             (function() {
                 var plotArea,
@@ -129,6 +130,27 @@
                     });
 
                     equals(plotArea.axisX.options.categories.length, 2);
+                });
+
+                test("set margin 10", function() {
+                    var plotArea = new Chart.PlotArea({
+                        series: [{
+                            data: [100]
+                        }],
+                        categoryAxis: {
+                            categories: ["A", "B"]
+                        },
+                        plotArea: {
+                            margin: MARGIN
+                        }
+                    });
+
+                    plotArea.updateLayout(chartBox);
+
+                    equals(plotArea.box.x1, chartBox.x1 + MARGIN);
+                    equals(plotArea.box.x2, chartBox.x2 - MARGIN);
+                    equals(plotArea.box.y1, chartBox.y1 + MARGIN);
+                    equals(plotArea.box.y2, chartBox.y2 - MARGIN);
                 });
 
                 // ------------------------------------------------------------
