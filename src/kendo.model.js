@@ -2,6 +2,8 @@
     var kendo = window.kendo,
         extend = $.extend,
         type = $.type,
+        getter = kendo.getter,
+        setter = kendo.setter,
         UPDATED = "UPDATED",
         PRISTINE = "PRISTINE",
         CREATED = "CREATED",
@@ -146,22 +148,22 @@
         var model,
             proto = options || {},
             id = proto.id || "id",
-            setter,
-            getter;
+            set,
+            get;
 
         if ($.isFunction(id)) {
-            getter = id;
-            setter = id;
+            get = id;
+            set = id;
         } else {
-            getter = kendo.getter(id);
-            setter = kendo.setter(id);
+            get = getter(id);
+            set = setter(id);
         }
 
         id = function(data, value) {
             if (value === undefined) {
-                return data["__id"] || getter(data);
+                return data["__id"] || get(data);
             } else {
-                setter(data, value);
+                set(data, value);
             }
         }
 
