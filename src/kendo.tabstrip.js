@@ -156,7 +156,7 @@
                     id = tabStripID + '-' + (idx+1);
 
                 if (!currentContent.length)
-                    $('<div id="'+ id +'" class="t-content"></div>').appendTo(that.element);
+                    $('<div id="'+ id +'" class="t-content">&nbsp;</div>').appendTo(that.element);
                 else
                     if (!currentContent.attr('id')) {
                         currentContent.attr('id', id);
