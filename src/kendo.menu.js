@@ -197,11 +197,14 @@
 
         _wrap: function (element) {
             if (!element.parent().hasClass('t-animation-container')) {
-                var shadow = element.css('box-shadow'),
+                var shadow = element.css(kendo.support.transitions.css + 'box-shadow'),
                     radius = shadow ? shadow.match(/(\d+?)px\s*(\d+?)px\s*(\d+?)px\s*(\d+?)?/i) || [ 0, 0, 0, 0, 0 ] : [ 0, 0, 0, 0, 0 ],
                     blur = Math.max((+radius[3]), +(radius[4] || 0)),
                     right = (+radius[1]) + blur,
                     bottom = (+radius[2]) + blur;
+
+                if ($.browser.opera) // Box shadow can't be retrieved in Opera
+                    right = bottom = 5;
 
                 element.wrap(
                              $('<div/>')
