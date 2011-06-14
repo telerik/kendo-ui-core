@@ -57,6 +57,9 @@
         },
 
         options: {
+            title: {
+                visible: true
+            },
             legend: {
                 visible: true
             },
@@ -93,7 +96,7 @@
                 options = chart.options,
                 model = new RootElement({ width: options.width, height: options.height });
 
-            if (options.title && options.title.text) {
+            if (options.title && options.title.visible && options.title.text) {
                 model.children.push(new Title(chart.options.title));
             }
 
@@ -549,7 +552,7 @@
             text: "",
             font: "16px Verdana, sans-serif",
             position: TOP,
-            textAlign: CENTER
+            align: CENTER
         },
 
         updateLayout: function(targetBox) {
@@ -560,7 +563,7 @@
                 margin = getMargin(options.margin),
                 offsetY;
 
-            if (title.options.textAlign == CENTER) {
+            if (title.options.align == CENTER) {
                 textBox.x1 = (targetBox.width() - text.box.width()) / 2;
                 textBox.x2 = textBox.x1 + text.box.width();
             }
