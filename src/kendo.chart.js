@@ -580,6 +580,7 @@
             ChartElement.fn.init.call(legend);
 
             legend.options = extend({}, legend.options, options);
+            legend.options.margin = applyMargin(legend.options.margin);
             legend.createLabels();
         },
 
@@ -670,14 +671,15 @@
 
             // Vertical center is calculated relative to the container, not the parent!
             if (options.position == LEFT) {
-                offsetX = targetBox.x1 + labelBox.width() / 2;
+                offsetX = targetBox.x1 + labelBox.width() / 2 + options.margin.left;
                 offsetY = (targetBox.y2 - labelBox.height()) / 2;
-                labelBox.x2 += markerHeight;
+                labelBox.x2 += markerHeight + options.margin.left + options.margin.right;
+                labelBox.x1 += options.margin.left;
             } else {
-                offsetX = targetBox.x2 - labelBox.width();
+                offsetX = targetBox.x2 - labelBox.width() - options.margin.right;
                 offsetY = (targetBox.y2 - labelBox.height()) / 2;
                 labelBox.translate(offsetX, offsetY);
-                labelBox.x1 -= markerHeight;
+                labelBox.x1 -= markerHeight + options.margin.left;
             }
 
             legend.translateChildren(offsetX + options.offsetX,
@@ -709,13 +711,15 @@
 
             if (options.position == TOP) {
                 offsetX = (targetBox.x2 - labelBox.width() - markerWidth) / 2;
-                offsetY = targetBox.y1 + labelBox.height();
+                offsetY = targetBox.y1 + labelBox.height() + options.margin.top;
                 labelBox.translate(offsetX, offsetY);
                 labelBox.y1 = targetBox.y1;
+                labelBox.y2 += options.margin.bottom;
             } else {
                 offsetX = (targetBox.x2 - labelBox.width() - markerWidth) / 2;
-                offsetY = targetBox.y2 - labelBox.height();
-                labelBox.y1 = targetBox.y2 - labelBox.height();
+                offsetY = targetBox.y2 - labelBox.height() - options.margin.bottom;
+                labelBox.y1 = targetBox.y2 - labelBox.height() - options.margin.top - options.margin.bottom;
+                labelBox.y2 = targetBox.y2;
             }
 
             legend.translateChildren(offsetX + options.offsetX,
@@ -2080,6 +2084,23 @@
         }
 
         return { min: min, max: max };
+    }
+
+    function applyMargin(margin) {
+        var newMargin = {};
+        newMargin.left = margin || 0;
+        newMargin.right = margin || 0;
+        newMargin.top = margin || 0;
+        newMargin.bottom = margin || 0;
+
+        if ($.isPlainObject(margin)) {
+            newMargin.left = margin.left || 0;
+            newMargin.right = margin.right || 0;
+            newMargin.top = margin.top || 0;
+            newMargin.bottom = margin.bottom || 0;
+        }
+
+        return newMargin;
     }
 
     // Exports ================================================================
