@@ -244,7 +244,9 @@
             model = options.model;
             transport = options.transport;
 
-            if(!isEmptyObject(model) && !model.id) {
+            if (model === undefined) {
+                model = {};
+            } else if (isPlainObject(model)) {
                 options.model = model = Model.define(model);
             }
 
@@ -287,11 +289,6 @@
         },
 
         options: {
-            model: {
-                id: function(data) {
-                    return data.id;
-                }
-            },
             data: [],
             serverSorting: false,
             serverPaging: false,
@@ -370,16 +367,19 @@
 
         _destroyedModels: function() {
             var that = this,
-                data,
-                sendAllFields = that.options.sendAllFields;
+                options = that.options;
+
             return that._byState(Model.DESTROYED, function(model) {
-                        data = {};
-                        if(sendAllFields) {
-                            return model.data;
-                        }
-                        data[model.idField] = model.id();
-                        return data;
-                    });
+                var data = {};
+
+                if (options.sendAllFields) {
+                    return model.data;
+                }
+
+                options.model.id(data, model.id());
+
+                return data;
+            });
         },
 
         sync: function() {
@@ -496,8 +496,8 @@
 
         create: function(index, values) {
             var that = this,
-            data = that._data,
-            model = that.model();
+                data = that._data,
+                model = that.model();
 
             if (typeof index !== "number") {
                 values = index;
