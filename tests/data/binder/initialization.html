@@ -33,7 +33,7 @@
             });
 
             test("original model is used if instance of Model", function() {
-                var model = new Model(), binder = new Binder(null, model);
+                var model = new (Model.define())(), binder = new Binder(null, model);
 
                 ok(binder.model === model);
             });

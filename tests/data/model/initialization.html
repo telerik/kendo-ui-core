@@ -67,7 +67,7 @@
 
             test("define if key is assign model is not new", function() {
                 var MyModel = Model.define({
-                    idField: "id"
+                    id: "id"
                 });
                 var model = new MyModel( { id: 1 } );
                 ok(!model.isNew());
@@ -75,7 +75,7 @@
 
             test("define if no key is assign model is new", function() {
                 var MyModel = Model.define({
-                    idField: "id"
+                    id: "id"
                 });
                 var model = new MyModel();
                 ok(model.isNew());
@@ -90,7 +90,7 @@
 
             test("id returns the value of the key", function() {
                 var MyModel = Model.define({
-                    idField: "foo"
+                    id: "foo"
                 });
                 var model = new MyModel({ foo: 1 });
                 equal(model.id(), 1);
@@ -104,7 +104,7 @@
             });
 
             test("id can be a function", function() {
-                var MyModel = Model.define({ idField: function(data) { return data["foo"]; } });
+                var MyModel = Model.define({ id: function(data) { return data["foo"]; } });
                 var model = new MyModel({ foo: 1 });
 
                 equal(model.id(), 1);
@@ -112,7 +112,7 @@
 
             test("id is generated if no value is provided", function(){
                 var MyModel = Model.define({
-                    idField: "foo"
+                    id: "foo"
                 });
                 var model = new MyModel();
                 ok(model.id());
@@ -125,7 +125,7 @@
             });
 
             test("identifier returns id value for a record", function() {
-                var MyModel = Model.define({idField: "foo"}),
+                var MyModel = Model.define({id: "foo"}),
                     data = {foo: 1},
                     id;
                 id = MyModel.id(data);

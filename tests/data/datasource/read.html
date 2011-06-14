@@ -6,6 +6,7 @@
     <script type="text/javascript" src="../../jquery.mockjax.js"></script>
     <script src="../../../src/kendo.core.js"></script>
     <script src="../../../src/kendo.query.js"></script>
+    <script src="../../../src/kendo.model.js"></script>
     <script src="../../../src/kendo.datasource.js"></script>
     <link rel="stylesheet" href="../../qunit.css" type="text/css" />
 
@@ -38,7 +39,10 @@
 
                 var dataSource = new DataSource( {
                     deserializer: deserializer,
-                    data: data
+                    data: data,
+                    model: {
+                        id: "id"
+                    }
                 });
 
                 dataSource.read();

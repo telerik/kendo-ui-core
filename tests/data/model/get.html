@@ -16,10 +16,11 @@
         <h2 id="qunit-userAgent"></h2>
         <ol id="qunit-tests"></ol>
         <script>
-            var Model = kendo.data.Model;
+            var Model;
 
             module("kendo.data.Model.get", {
                 setup: function() {
+                    Model = kendo.data.Model.define();
                 },
                 teardown: function() {
                 }

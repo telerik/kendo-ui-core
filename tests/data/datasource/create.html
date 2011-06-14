@@ -22,7 +22,7 @@
                 data = source || [{ id:1, bar: "foo" },{ id: 2, bar: "foo" }];
 
                 var dataSource = new DataSource( {
-                    model: kendo.data.Model
+                    model: kendo.data.Model.define()
                 });
 
                 dataSource.read();
@@ -50,7 +50,7 @@
 
                 var model = dataSource.create(0);
 
-                equal(dataSource.data()[0].id, model.id());
+                equal(dataSource.data()[0], model.data);
             });
 
             test("create updates the idmap", function() {

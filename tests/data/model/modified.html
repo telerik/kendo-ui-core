@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Model modified</title>
+        <title>MyModel modified</title>
         <script src="../../../src/jquery.js"></script>
         <script type="text/javascript" src="../../qunit.js"></script>
         <script type="text/javascript" src="../../qunit-runner.js"></script>
@@ -10,65 +10,58 @@
         <link rel="stylesheet" href="../../qunit.css" type="text/css" />
     </head>
     <body>
-        <h1 id="qunit-header">Model.modified</h1>
+        <h1 id="qunit-header">MyModel.modified</h1>
         <h2 id="qunit-banner"></h2>
         <div id="qunit-testrunner-toolbar"></div>
         <h2 id="qunit-userAgent"></h2>
         <ol id="qunit-tests"></ol>
         <script>
-            var Model = kendo.data.Model;
+            var MyModel, Model = kendo.data.Model;
 
-            module("kendo.data.Model.modified", {
+            module("kendo.data.MyModel.modified", {
                 setup: function() {
+                    MyModel = Model.define();
                 },
                 teardown: function() {
                 }
             });
 
             test("changes returns null if there are no changes", function() {
-                var m = new Model();
+                var m = new MyModel();
 
                 ok(m.changes() === null);
             });
 
             test("changes returns the changed values", function() {
-                var m = new Model();
+                var m = new MyModel();
 
                 m.set("foo", "bar");
                 equal(m.changes().foo, "bar");
             });
 
             test("changes returns the only the changed values", function() {
-                var m = new Model({
+                var m = new MyModel({
                     bar: "bar"
                 });
 
                 m.set("foo", "foo");
                 equal(m.changes().bar, undefined);
             });
+
             test("state is PRISTINE when value is not changed", function() {
-                var model = new Model({id: "bar"});
+                var model = new MyModel({id: "bar"});
                 equal(model.state, Model.PRISTINE);
             });
 
             test("state is UPDATED when value is changed", function() {
-                var model = new Model({id: "bar"});
+                var model = new MyModel({id: "bar"});
                 model.set("bar", "moo");
                 equal(model.state, Model.UPDATED);
             });
 
             test("state is CREATED when model is new", function() {
-                var model = new Model();
+                var model = new MyModel();
                 equal(model.state, Model.CREATED);
-            });
-
-            test("changes returns idField in modified fields if any change", function() {
-                var model = new Model({id: 1, foo: "bar"}),
-                    changes;
-                model.set("foo", "baz");
-
-                changes = model.changes();
-                equal(changes.id, 1);
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
