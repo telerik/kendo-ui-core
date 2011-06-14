@@ -10,7 +10,7 @@
         },
 
         fetch: function(href) {
-            $("li a").each(function() {
+            $("#nav li a").each(function() {
                 var currentHref = $(this).attr("href");
                 if (currentHref && currentHref.toLowerCase() === href) {
                     Application.fetchExample(href);
@@ -58,7 +58,7 @@
 
         init: function() {
             if (pushState) {
-                $("li a").click(function(e) {
+                $("#nav li a").click(function(e) {
                     e.preventDefault();
 
                     Application.load($(this).attr("href"));
