@@ -1562,7 +1562,8 @@
         options: {
             categoryAxis: { },
             valueAxis: { },
-            series: [ ]
+            series: [ ],
+            plotArea: { }
         },
 
         render: function() {
@@ -1622,22 +1623,28 @@
             var plotArea = this,
                 charts = plotArea.charts,
                 axisY = plotArea.axisY,
-                axisX = plotArea.axisX;
+                axisX = plotArea.axisX,
+                options = plotArea.options.plotArea,
+                margin = getMargin(options.margin);
 
-            plotArea.box = targetBox;
+            plotArea.box = targetBox.clone();
+            plotArea.box.x1 += margin.left;
+            plotArea.box.x2 -= margin.right;
+            plotArea.box.y1 += margin.top;
+            plotArea.box.y2 -= margin.bottom;
 
-            axisY.updateLayout(targetBox);
-            axisX.updateLayout(targetBox);
+            axisY.updateLayout(plotArea.box);
+            axisX.updateLayout(plotArea.box);
 
             plotArea.alignAxes();
 
             var axisBox = axisY.box.clone().wrap(axisX.box);
 
-            var overflowY = axisBox.height() - targetBox.height();
-            var overflowX = axisBox.width() - targetBox.width();
+            var overflowY = axisBox.height() - plotArea.box.height();
+            var overflowX = axisBox.width() - plotArea.box.width();
 
-            var offsetX = targetBox.x1 - axisBox.x1;
-            var offsetY = targetBox.y1 - axisBox.y1;
+            var offsetX = plotArea.box.x1 - axisBox.x1;
+            var offsetY = plotArea.box.y1 - axisBox.y1;
 
             axisY.updateLayout(
                 axisY.box.translate(offsetX, offsetY).shrink(0, overflowY)
@@ -1650,7 +1657,7 @@
             plotArea.alignAxes();
 
             for (var i = 0; i < charts.length; i++) {
-                charts[i].updateLayout(targetBox);
+                charts[i].updateLayout(plotArea.box);
             }
         },
 

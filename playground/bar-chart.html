@@ -26,7 +26,11 @@
                         position: "right", // "top", "bottom", "left", "right"
                         offsetX: 0,
                         offsetY: 0,
-                        visible: true
+                        visible: true,
+                        margin : {
+                            left: 10,
+                            right: 10
+                        }
                     },
                     dataSource: [
                         {
@@ -91,6 +95,9 @@
                                 // "outsideEnd", "insideEnd", "insideBase", "center"
                             }
                         }
+                    },
+                    plotArea: {
+                        margin: 40
                     }
                 });
             });
@@ -111,7 +118,8 @@
                     visible: true
                 },
                 plotArea: {
-                    background: "#fff"
+                    background: "#fff",
+                    margin: 20
                 },
                 chartArea: {
                     background: "#fff"
