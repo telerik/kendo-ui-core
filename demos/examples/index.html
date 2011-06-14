@@ -27,20 +27,6 @@
         <link type="text/css" href="../../styles/kendo.vista.css" rel="stylesheet"/>
         <!-- css -->
         <style type="text/css">
-            #nav ul
-            {
-                list-style: none outside;
-                padding: 0;
-            }
-            #nav li
-            {
-                margin: 1px 0 0;
-            }
-            #nav li a
-            {
-                font: 12px Arial, Helvetica, sans-serif;
-                text-decoration: none;
-            }
         </style>
         <title>Kendo Examples</title>
     </head>
@@ -48,18 +34,31 @@
         <!-- nav -->
         <div id="box">
             <div id="header"></div>
-            <div id="nav">
-                <ul>
-                    <li><a href="autocomplete/index.html">Autocomplete - feature 1</a></li>
-                    <li><a href="autocomplete/events.html">Autocomplete - feature 2</a></li>
-                </ul>
-                <ul>
-                    <li><a href="autocomplete/index.html">Autocomplete</a></li>
-                    <li><a href="menu/index.html">Menu</a></li>
-                    <li><a href="panelbar/index.html">PanelBar</a></li>
-                    <li><a href="tabstrip/index.html">TabStrip</a></li>
-                </ul>
-            </div>
+            <ul id="nav">
+                <li>
+                    Autocomplete
+                    <ul>
+                        <li><a href="autocomplete/index.html">Autocomplete - feature 1</a></li>
+                        <li><a href="autocomplete/events.html">Autocomplete - feature 2</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="menu/index.html">Menu</a>
+                </li>
+                <li>
+                    <a href="panelbar/index.html">PanelBar</a>
+                </li>
+                <li>
+                    TabStrip
+                    <ul>
+                        <li><a href="tabstrip/events.html">Default Init</a></li>
+                        <li><a href="tabstrip/events.html">Events</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <script type="text/javascript">
+                $('#nav').kendoPanelBar({ animation: { open: { effects: 'fadeIn expandVertical' } }, expandMode: 0 });
+            </script>
             <div id="content">
             <!-- nav -->
                 <div id="example"></div>
@@ -78,6 +77,7 @@
                     $('#codeStrip').kendoTabStrip();
                 </script>
             </div>
+            <div id="footer"></div>
         </div>
         <!-- tools -->
     </body>

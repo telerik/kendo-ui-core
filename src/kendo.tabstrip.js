@@ -109,7 +109,8 @@
                 items = tabGroup
                             .find('li')
                             .addClass('t-item'),
-                activeTab = tabGroup.index(items.filter('t-state-active')[0]),
+                activeItem = items.filter('.t-state-active').index(),
+                activeTab = activeItem >= 0 ? activeItem : undefined,
                 tabStripID = that.element.attr('id');
 
             that.contentElements = that.element.children('div');
@@ -241,6 +242,14 @@
                         .addClass(activeState)
                         .kendoStop(true, true)
                         .kendoAnimate( openAnimation );
+                },
+                showContent = function() {
+                    if (!isAjaxContent)
+                        showContentElement();
+                    else
+                        that.ajaxRequest(item, content, function () {
+                            showContentElement();
+                        });
                 };
 
             visibleContentElements
@@ -248,18 +257,14 @@
                     .css('height', visibleContentElements.height())
                     .css('height');
 
-            visibleContentElements
-                .kendoStop(true, true)
-                .kendoAnimate(extend( {
-                    complete: function () {
-                        if (!isAjaxContent)
-                            showContentElement();
-                        else
-                            that.ajaxRequest(item, content, function () {
-                                showContentElement();
-                            });
-                    }
-               }, closeAnimation ));
+            if (visibleContentElements.length)
+                visibleContentElements
+                    .kendoStop(true, true)
+                    .kendoAnimate(extend( {
+                        complete: showContent
+                   }, closeAnimation ));
+            else
+                showContent();
 
             return true;
         },
