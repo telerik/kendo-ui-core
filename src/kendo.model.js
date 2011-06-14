@@ -51,10 +51,9 @@
             that.data = extend(true, {}, data);
             that.pristine = extend(true, {}, data);
 
-            that.idField =  that.idField || "id";
             if(that.id() === undefined) {
                 that.state = CREATED;
-                that.accessor(that.idField).set(that.data, that.guid());
+                that.data["__id"] = that.guid();
             }
         },
 
@@ -74,9 +73,9 @@
         },
 
         accessor: function(field) {
-            var that = this;
+            var accessors = this._accessors;
 
-            return that._accessors[field] = that._accessors[field] || kendo.accessor(field);
+            return accessors[field] = accessors[field] || kendo.accessor(field);
         },
 
         get: function(field) {
@@ -101,10 +100,6 @@
             that._modified = false;
 
             for (field in values) {
-                if(field === that.idField) {
-                    continue;
-                }
-
                 accessor = that.accessor(field);
 
                 value = values[field];
@@ -125,12 +120,6 @@
             return this.state === CREATED;
         },
 
-        id: function() {
-            var that = this,
-                id = that.idField;
-            return $.isFunction(id) ? id(that.data) : that.get(id);
-        },
-
         destroy: function() {
             this.state = DESTROYED;
         },
@@ -143,28 +132,46 @@
                 pristine = that.pristine;
 
             for (field in data) {
-                if (field !== that.idField && !equal(pristine[field], data[field])) {
+                if (field !== "__id" && !equal(pristine[field], data[field])) {
                     modified = modified || {};
                     modified[field] = data[field];
                 }
-            }
-
-            if(modified !== null) {
-                modified[that.idField] = that.id();
             }
 
             return modified;
         }
     });
 
-    Model.define = function(proto) {
-        var model = Model.extend(proto),
-            id = proto && proto.idField || "id",
-            accessor = $.isFunction(id) ? id : kendo.accessor(id).get;
+    Model.define = function(options) {
+        var model,
+            proto = options || {},
+            id = proto.id || "id",
+            setter,
+            getter;
 
-        model.id = function(data) {
-            return accessor(data);
+        if ($.isFunction(id)) {
+            getter = id;
+            setter = id;
+        } else {
+            getter = kendo.getter(id);
+            setter = kendo.setter(id);
         }
+
+        id = function(data, value) {
+            if (value === undefined) {
+                return data["__id"] || getter(data);
+            } else {
+                setter(data, value);
+            }
+        }
+
+        proto.id = function(value) {
+            return id(this.data, value);
+        }
+
+        model = Model.extend(proto);
+        model.id = id;
+
         return model;
     }
 
