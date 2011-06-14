@@ -64,7 +64,7 @@
                     hide: true
                 }
             },
-            expandMode: 'multi'
+            expandMode: 1
         },
 
         expand: function (element) {

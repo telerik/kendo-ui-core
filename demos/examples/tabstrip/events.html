@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
     <head>
-        <title>Default TabStrip</title>
+        <title>Client Events</title>
         <!-- script -->
         <script src="../../../src/jquery.js"></script>
         <script src="../../../src/kendo.core.js"></script>
@@ -18,7 +18,7 @@
         <!-- nav -->
         <!-- nav -->
         <!-- description -->
-        <div class="description">This example shows the default behaviour of a newly initialized kendoTabStrip.</div>
+        <div class="description">This example shows how to attach events to a kendoTabStrip and how they are fired and triggered.</div>
         <!-- description -->
         <div id="example">
             <div id="TabStrip1">
@@ -54,7 +54,11 @@
                 </div>
             </div>
             <script type="text/javascript">
-                $("#TabStrip1").kendoTabStrip();
+                var onSelect = function (e) {
+                        console.log('select', $(e.item).index());
+                    };
+
+                $("#TabStrip1").kendoTabStrip({ select: onSelect });
             </script>
         </div>
         <!-- tools -->
