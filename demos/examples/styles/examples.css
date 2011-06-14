@@ -5,6 +5,7 @@ html, body
     font-size: 12px;
     text-align: center;
 }
+
 #header
 {
     display: block;
@@ -14,13 +15,17 @@ html, body
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
+    text-align: left;
 }
+
 #nav
 {
     display: block;
     float: left;
     width: 200px;
+    text-align: left;
 }
+
 #content
 {
     width: 900px;
@@ -28,17 +33,20 @@ html, body
     *display: inline;
     zoom: 1;
 }
+
 #example
 {
     margin: 10px 0;
+    text-align: left;
 }
+
 #box
 {
     display: inline-block;
     *display: inline;
     zoom: 1;
-    text-align: left;
     margin: auto;
+    text-align: left;
 }
 
 .t-widget, #nav ul
