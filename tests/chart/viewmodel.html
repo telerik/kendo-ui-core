@@ -93,7 +93,8 @@
                 var title,
                     titleTextElement,
                     TITLE_TEXT_HEIGHT = 17,
-                    TITLE_TEXT_WIDTH = 37;
+                    TITLE_TEXT_WIDTH = 37,
+                    MARGIN = 10;
 
                 module("Title", {
                     setup: function() {
@@ -152,6 +153,41 @@
                     };
 
                     deepEqual(title.getViewElements(), [ 42 ]);
+                });
+
+                test("positions title to the top with margin 10", function() {
+                    title = new kendo.ui.Chart.Title({
+                        text: "Title",
+                        margin: MARGIN
+                    });
+
+                    title.updateLayout(chartBox);
+
+                    title1 = new kendo.ui.Chart.Title({
+                        text: "Title"
+                    });
+
+                    title1.updateLayout(chartBox);
+
+                    equal(title.box.height(), title1.box.height() + MARGIN * 2);
+                });
+
+                test("positions title to the bottom with margin 10", function() {
+                    title = new kendo.ui.Chart.Title({
+                        text: "Title",
+                        position: "bottom",
+                        margin: MARGIN
+                    });
+
+                    title.updateLayout(chartBox);
+
+                    title1 = new kendo.ui.Chart.Title({
+                        text: "Title",
+                        position: "bottom"                    });
+
+                    title1.updateLayout(chartBox);
+
+                    equal(title.box.height(), title1.box.height() + MARGIN * 2);
                 });
 
             })();

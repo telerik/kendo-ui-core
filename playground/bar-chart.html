@@ -14,15 +14,19 @@
             $(document).ready(function() {
                 $("#container").kendoChart({
                     title: {
-                        text: "Teh chart"
+                        text: "Teh chart",
+                        position: "top",
+                        margin: {
+                            bottom: 10,
+                            top: 10
+                        }
                     },
                     legend: {
                         font: "12px Verdana, sans-serif",
                         position: "right", // "top", "bottom", "left", "right"
                         offsetX: 0,
                         offsetY: 0,
-                        visible: true,
-                        margin: 20
+                        visible: true
                     },
                     dataSource: [
                         {
