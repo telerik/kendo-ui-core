@@ -28,7 +28,10 @@
                     }).length) {
                         transition.complete.call(transition.object);
                         transition.object.css(kendo.support.transitions.css + 'transition', 'none');
-                        transition.object.css(kendo.support.transitions.css + 'transition');
+
+                        if (!kendo.support.touch)
+                            transition.object.css(kendo.support.transitions.css + 'transition');
+
                         transition.object.unbind(kendo.support.transitions.event, kendo.fx.deQueue);
                 }
             }
@@ -111,7 +114,9 @@
                         element.removeData('abortId');
                     }
                     element.css(kendo.support.transitions.css + 'transition', 'none');
-                    element.css(kendo.support.transitions.css + 'transition');
+                    if (!kendo.support.touch)
+                        element.css(kendo.support.transitions.css + 'transition');
+
                     element.dequeue();
                 }
             },
@@ -136,7 +141,9 @@
                 } else
                     element.css(kendo.support.transitions.css + 'transition', 'none');
 
-                element.css(kendo.support.transitions.css + 'transition');
+                if (!kendo.support.touch)
+                    element.css(kendo.support.transitions.css + 'transition');
+
                 element.removeData('keys');
                 if (element.data('abortId')) {
                     clearTimeout(element.data('abortId'));
