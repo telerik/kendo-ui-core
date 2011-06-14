@@ -70,15 +70,6 @@
                 ok(dataSource.data() === data);
             });
 
-            test("dataSource configuration is used by the create factory method", function() {
-                var schema = {},
-                    dataSource = DataSource.create({
-                        model: schema
-                    });
-
-                ok(dataSource.options.model === schema);
-                ok(dataSource instanceof DataSource);
-            });
             test("page is set to 1 if pageSize is defined but no page", function() {
                 var dataSource = new DataSource({ pageSize: 10 });
                 equal(dataSource.page(), 1);
@@ -188,7 +179,7 @@
 
             test("model use model metadata", function() {
                 var dataSource = new DataSource({
-                    model: Model.define( { idField: "foo" }),
+                    model: Model.define( { id: "foo" }),
                     data: [ { foo: "1", bar: "bar1"}, { foo: "2", bar: "bar2"}]
                 });
                 dataSource.read();
@@ -198,7 +189,7 @@
             });
             test("model use model literal", function() {
                 var dataSource = new DataSource({
-                    model: { idField: "foo" },
+                    model: { id: "foo" },
                     data: [ { foo: "1", bar: "bar1"}, { foo: "2", bar: "bar2"}]
                 });
                 dataSource.read();

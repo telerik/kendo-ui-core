@@ -31,7 +31,7 @@
 
             that.element = $(element);
             that.options = options || {};
-            that.model = model instanceof Model ? model : new Model(model);
+            that.model = model instanceof Model ? model : new (Model.define())(model);
 
             that.element.find("input,select")
                 .add(that.element)

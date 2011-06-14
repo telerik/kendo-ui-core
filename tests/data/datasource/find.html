@@ -5,6 +5,7 @@
     <script type="text/javascript" src="../../qunit-runner.js"></script>
     <script src="../../../src/kendo.core.js"></script>
     <script src="../../../src/kendo.query.js"></script>
+    <script src="../../../src/kendo.model.js"></script>
     <script src="../../../src/kendo.datasource.js"></script>
     <link rel="stylesheet" href="../../qunit.css" type="text/css" />
 
@@ -31,7 +32,10 @@
 
                 var dataSource = new DataSource( {
                     deserializer: deserializer,
-                    data: data
+                    data: data,
+                    model: {
+                        id: "id"
+                    }
                 });
 
                 dataSource.read();
@@ -46,8 +50,6 @@
             test("find returns the record based on its index when the reader does not define id", function() {
                 data = [ { id: 1}, { id: 2} ];
                 var dataSource = new DataSource( {
-                    model: {
-                    },
                     data: data
                 });
                 dataSource.read();
