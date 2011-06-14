@@ -556,21 +556,28 @@
             var title = this,
                 options = title.options,
                 text = title.children[0],
-                textBox = new Box();
-
-            if (options.position == TOP) {
-                textBox.y1 = targetBox.y1;
-            } else if (options.position == BOTTOM) {
-                textBox.y1 = targetBox.y2 - text.box.height();
-            }
+                textBox = new Box(),
+                margin = getMargin(options.margin),
+                offsetY;
 
             if (title.options.textAlign == CENTER) {
                 textBox.x1 = (targetBox.width() - text.box.width()) / 2;
                 textBox.x2 = textBox.x1 + text.box.width();
             }
+
             text.updateLayout(textBox);
 
-            title.box = new Box(targetBox.x1, targetBox.y1, targetBox.x2, text.box.y2);
+            if (options.position == BOTTOM) {
+                textBox.y1 = targetBox.y2 - text.box.height() - margin.top - margin.bottom;
+                textBox.y2 = targetBox.y2;
+                text.box.translate(0, textBox.y1 + margin.top);
+            } else {
+                text.box.translate(0, targetBox.y1 + margin.top);
+                textBox.y1 = targetBox.y1;
+                textBox.y2 = targetBox.y1 + text.box.height() + margin.bottom + margin.top;
+            }
+
+            title.box = new Box(targetBox.x1, textBox.y1, targetBox.x2, textBox.y2);
         }
     });
 
@@ -580,7 +587,6 @@
             ChartElement.fn.init.call(legend);
 
             legend.options = extend({}, legend.options, options);
-            legend.options.margin = applyMargin(legend.options.margin);
             legend.createLabels();
         },
 
@@ -660,7 +666,8 @@
                 labelBox = children[0].box.clone(),
                 markerHeight = legend.markerSize() * 3,
                 offsetX,
-                offsetY;
+                offsetY,
+                margin = getMargin(options.margin);
 
             // Position labels below each other
             for (var i = 1; i < childrenCount; i++) {
@@ -671,15 +678,15 @@
 
             // Vertical center is calculated relative to the container, not the parent!
             if (options.position == LEFT) {
-                offsetX = targetBox.x1 + labelBox.width() / 2 + options.margin.left;
+                offsetX = targetBox.x1 + labelBox.width() / 2 + margin.left;
                 offsetY = (targetBox.y2 - labelBox.height()) / 2;
-                labelBox.x2 += markerHeight + options.margin.left + options.margin.right;
-                labelBox.x1 += options.margin.left;
+                labelBox.x2 += markerHeight + margin.left + margin.right;
+                labelBox.x1 += margin.left;
             } else {
-                offsetX = targetBox.x2 - labelBox.width() - options.margin.right;
+                offsetX = targetBox.x2 - labelBox.width() - margin.right;
                 offsetY = (targetBox.y2 - labelBox.height()) / 2;
                 labelBox.translate(offsetX, offsetY);
-                labelBox.x1 -= markerHeight + options.margin.left;
+                labelBox.x1 -= markerHeight + margin.left;
             }
 
             legend.translateChildren(offsetX + options.offsetX,
@@ -699,7 +706,8 @@
                 labelBox = children[0].box.clone(),
                 markerWidth = legend.markerSize() * 3,
                 offsetX,
-                offsetY;
+                offsetY,
+                margin = getMargin(options.margin);
 
             // Position labels next to each other
             for (var i = 1; i < childrenCount; i++) {
@@ -711,14 +719,14 @@
 
             if (options.position == TOP) {
                 offsetX = (targetBox.x2 - labelBox.width() - markerWidth) / 2;
-                offsetY = targetBox.y1 + labelBox.height() + options.margin.top;
+                offsetY = targetBox.y1 + labelBox.height() + margin.top;
                 labelBox.translate(offsetX, offsetY);
                 labelBox.y1 = targetBox.y1;
-                labelBox.y2 += options.margin.bottom;
+                labelBox.y2 += margin.bottom;
             } else {
                 offsetX = (targetBox.x2 - labelBox.width() - markerWidth) / 2;
-                offsetY = targetBox.y2 - labelBox.height() - options.margin.bottom;
-                labelBox.y1 = targetBox.y2 - labelBox.height() - options.margin.top - options.margin.bottom;
+                offsetY = targetBox.y2 - labelBox.height() - margin.bottom;
+                labelBox.y1 = targetBox.y2 - labelBox.height() - margin.top - margin.bottom;
                 labelBox.y2 = targetBox.y2;
             }
 
@@ -2086,7 +2094,7 @@
         return { min: min, max: max };
     }
 
-    function applyMargin(margin) {
+    function getMargin(margin) {
         var newMargin = {};
         newMargin.left = margin || 0;
         newMargin.right = margin || 0;
