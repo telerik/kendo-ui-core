@@ -222,7 +222,7 @@
 
     var DataSource = Observable.extend({
         init: function(options) {
-            var that = this, id, model, transoprt;
+            var that = this, id, model, transport;
 
             options = that.options = extend({}, that.options, options);
 
