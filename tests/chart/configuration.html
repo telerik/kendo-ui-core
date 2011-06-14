@@ -272,6 +272,16 @@
                     ok(!(chart._model.children[0] instanceof Chart.Title));
                 });
 
+                test("not created if no visible is false", function() {
+                    createChart({
+                        title: {
+                            text: "Title",
+                            visible: false
+                        }
+                    });
+                    ok(!(chart._model.children[0] instanceof Chart.Title));
+                });
+
                 // ------------------------------------------------------------
                 module("Size", {
                     setup: function() {
