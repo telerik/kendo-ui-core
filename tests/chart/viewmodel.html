@@ -341,8 +341,8 @@
 
                     legend.updateLayout(chartBox);
 
-                    equal(legend.box.x1, chartBox.x1 + MARGIN);
-                    equal(legend.box.x2, chartBox.x1 + legend.box.width() + MARGIN);
+                    equal(legend.box.x1, chartBox.x1);
+                    equal(legend.box.x2, chartBox.x1 + legend.box.width());
                 });
 
                 test("positions legend to the top", function() {
@@ -383,17 +383,21 @@
 
                 test("positions legend to the left with margin 10", function() {
                     legend = new Chart.Legend({
-                        series: [ { name: "Series 1" } ],
-                        position: "left",
-                        margin: MARGIN
+                    series: [ { name: "Series 1" } ],
+                        position: "top",
+                        margin: MARGIN * 2
                     });
 
                     legend.updateLayout(chartBox);
 
-                    var label = legend.children[0];
+                    legend1 = new Chart.Legend({
+                    series: [ { name: "Series 1" } ],
+                        position: "top"
+                    });
 
-                    equal(legend.box.x1, chartBox.x1 + MARGIN);
-                    equal(legend.box.x2, chartBox.x1 + legend.box.width() + MARGIN);
+                    legend1.updateLayout(chartBox);
+
+                    equal(legend.box.width(), legend1.box.width());
                 });
 
                 test("positions legend to the top with margin 10", function() {
@@ -459,7 +463,7 @@
                 });
 
                 test("markers have margin on the left", function() {
-                    equal(marker.x1, legend.box.x1 + MARKER_MARGIN + MARGIN, TOLERANCE);
+                    equal(marker.x1, legend.box.x1 + MARGIN, TOLERANCE);
                 });
 
                 test("markers have set width", function() {
