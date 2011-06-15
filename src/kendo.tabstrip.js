@@ -154,14 +154,14 @@
 
             items.each(function(idx) {
                 var currentContent = that.contentElements.eq(idx),
-                    id = tabStripID + '-' + (idx+1);
+                    id = tabStripID + '-' + (idx+1),
+                    href = $(this).children('.t-link').attr('href');
 
                 if (!currentContent.length)
                     $('<div id="'+ id +'" class="t-content"></div>').appendTo(that.element);
                 else
-                    if (!currentContent.attr('id')) {
+                    if (!currentContent.attr('id'))
                         currentContent.attr('id', id);
-                    }
             });
 
             that.contentElements = that.element.children('div'); // refresh the contents
@@ -189,7 +189,7 @@
 
             var isAnchor = link.data('ContentUrl') || (href && (href.charAt(href.length - 1) == '#' || href.indexOf('#' + that.element[0].id + '-') != -1));
 
-            if (!href || isAnchor || (content.length > 0 && content[0].childNodes.length == 0))
+            if (!href || isAnchor)
                 e.preventDefault();
             else return;
 
@@ -230,7 +230,7 @@
                 return false;
             }
 
-            var isAjaxContent = item.find('>.t-link').data('ContentUrl') && content.is(EMPTY),
+            var isAjaxContent = (item.children('.t-link').data('ContentUrl') || false) && content.is(EMPTY),
                 showContentElement = function () {
                     oldTab.removeClass('t-tab-on-top');
                     item.addClass('t-tab-on-top'); // change these directly to bring the tab on top.
