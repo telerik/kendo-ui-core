@@ -122,16 +122,16 @@
                 });
 
                 test("text is positioned at top", function() {
-                    equals(titleTextElement.box.y1, 0);
-                    equals(titleTextElement.box.y2, TITLE_TEXT_HEIGHT, TOLERANCE);
+                    equals(titleTextElement.box.y1 - MARGIN, 0);
+                    equals(titleTextElement.box.y2 - MARGIN, TITLE_TEXT_HEIGHT, TOLERANCE);
                 });
 
                 test("text is positioned at bottom", function() {
                     title.options.position = "bottom";
                     title.updateLayout(chartBox);
-                    equals(titleTextElement.box.y1,
+                    equals(titleTextElement.box.y1 + MARGIN,
                            chartBox.height() - TITLE_TEXT_HEIGHT, TOLERANCE);
-                    equals(titleTextElement.box.y2, chartBox.y2);
+                    equals(titleTextElement.box.y2 + MARGIN, chartBox.y2);
                 });
 
                 test("text is aligned at center", function() {
@@ -144,7 +144,7 @@
                 });
 
                 test("box height is equal to text height", function() {
-                    equals(title.box.height(), TITLE_TEXT_HEIGHT, TOLERANCE);
+                    equals(title.box.height() - MARGIN * 2, TITLE_TEXT_HEIGHT, TOLERANCE);
                 });
 
                 test("getViewElements returns text element", 1, function() {
@@ -155,12 +155,11 @@
                     deepEqual(title.getViewElements(), [ 42 ]);
                 });
 
-                test("positions title to the top with margin 10", function() {
+                test("positions title to the top with margin 20", function() {
                     title = new kendo.ui.Chart.Title({
                         text: "Title",
-                        margin: MARGIN
+                        margin: MARGIN * 2
                     });
-
                     title.updateLayout(chartBox);
 
                     title1 = new kendo.ui.Chart.Title({
@@ -172,18 +171,19 @@
                     equal(title.box.height(), title1.box.height() + MARGIN * 2);
                 });
 
-                test("positions title to the bottom with margin 10", function() {
+                test("positions title to the bottom with margin 20", function() {
                     title = new kendo.ui.Chart.Title({
                         text: "Title",
                         position: "bottom",
-                        margin: MARGIN
+                        margin: MARGIN * 2
                     });
 
                     title.updateLayout(chartBox);
 
                     title1 = new kendo.ui.Chart.Title({
                         text: "Title",
-                        position: "bottom"                    });
+                        position: "bottom"
+                    });
 
                     title1.updateLayout(chartBox);
 
@@ -330,7 +330,7 @@
                     legend.updateLayout(chartBox);
                     var label = legend.children[0];
 
-                    equal(label.box.x1, chartBox.x2 - label.box.width());
+                    equal(label.box.x1, chartBox.x2 - label.box.width() - MARGIN);
                 });
 
                 test("positions legend to the left", function() {
@@ -341,8 +341,8 @@
 
                     legend.updateLayout(chartBox);
 
-                    equal(legend.box.x1, chartBox.x1);
-                    equal(legend.box.x2, chartBox.x1 + legend.box.width());
+                    equal(legend.box.x1, chartBox.x1 + MARGIN);
+                    equal(legend.box.x2, chartBox.x1 + legend.box.width() + MARGIN);
                 });
 
                 test("positions legend to the top", function() {
@@ -365,7 +365,7 @@
                     legend.updateLayout(chartBox);
 
                     var label = legend.children[0];
-                    equal(legend.box.y1, chartBox.y2 - label.box.height());
+                    equal(legend.box.y1, chartBox.y2 - label.box.height() - MARGIN * 2);
                 });
 
                 test("positions legend to the right with margin 10", function() {
@@ -400,7 +400,7 @@
                     legend = new Chart.Legend({
                     series: [ { name: "Series 1" } ],
                         position: "top",
-                        margin: MARGIN
+                        margin: MARGIN * 2
                     });
 
                     legend.updateLayout(chartBox);
@@ -419,7 +419,7 @@
                     legend = new Chart.Legend({
                         series: [ { name: "Series 1" } ],
                         position: "bottom",
-                        margin: MARGIN
+                        margin: MARGIN * 2
                     });
 
                     legend.updateLayout(chartBox);
@@ -459,7 +459,7 @@
                 });
 
                 test("markers have margin on the left", function() {
-                    equal(marker.x1, legend.box.x1 + MARKER_MARGIN, TOLERANCE);
+                    equal(marker.x1, legend.box.x1 + MARKER_MARGIN + MARGIN, TOLERANCE);
                 });
 
                 test("markers have set width", function() {

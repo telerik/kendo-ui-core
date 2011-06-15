@@ -19,7 +19,8 @@
                     model,
                     title,
                     legend,
-                    plotArea;
+                    plotArea
+                    MARGIN = 10;
 
                 module("Bar Chart Model", {
                     setup: function() {
@@ -73,7 +74,8 @@
                 });
 
                 test("legend is positioned at right", function() {
-                    equal(legend.box.x1, model.box.width() - legend.box.width());
+                    equal(legend.box.x1,
+                        model.box.width() - legend.box.width() -MARGIN);
                 });
 
                 test("legend is positioned at vertical center", function() {
