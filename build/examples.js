@@ -30,9 +30,11 @@ function processfile(file) {
                 cssRE = /\s*<!--\s*css\s*-->(([\u000a\u000d\u2028\u2029]|.)*?)<!--\s*css\s*-->/g,
                 base = file === "live/index.html" ? "" : "../",
                 scripts = regions.script.html,
-                selfScripts = scriptRE.exec(data)[1].trimLeft(),
+                scriptMatches = scriptRE.exec(data),
+                selfScripts = scriptMatches ? scriptMatches[1].trimLeft() : '',
                 css = regions.css.html,
-                selfCSS = cssRE.exec(data)[1].trimLeft(),
+                cssMatches = cssRE.exec(data),
+                selfCSS = cssMatches ? cssMatches[1].trimLeft() : '',
                 rowSeparator = /[\r\n]+\s+/,
                 scriptStripper1 = /"(.*?)src/g,
                 scriptStripper2 = /src="([^"]*)"/g,
@@ -53,6 +55,8 @@ function processfile(file) {
 
             selfCSS = selfCSS.replace(cssStripper, 'href="' + base + '$1"');
             css = css.replace(cssStripper, 'href="' + base + '$1"');
+
+            data = regions.meta.exec(data, regions.meta.html.replace(cssStripper, 'href="' + base + '$1"'));
 
             data = regions.script.exec(data, selfScripts + scripts);
 
@@ -77,7 +81,7 @@ var indexHtml = fs.readFileSync("demos/examples/index.html", "utf8");
 
 var regions = {};
 
-"nav,script,tools,css".split(",").forEach(function(region) {
+"nav,script,tools,css,meta".split(",").forEach(function(region) {
     var re = new RegExp("<!--\\s*" + region + "\\s*-->([\\u000a\\u000d\\u2028\\u2029]|.)*<!--\\s*" + region + "\\s*-->", "g");
     var html = re.exec(indexHtml)[0].trim();
 

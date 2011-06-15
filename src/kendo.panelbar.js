@@ -4,7 +4,7 @@
         ui = kendo.ui,
         extend = $.extend,
         Component = ui.Component,
-        events = [ 'expand', 'collapse', 'select', 'error', 'load' ],
+        events = [ 'expand', 'collapse', 'select', 'error', 'init' ],
         MOUSEENTER = 'mouseenter',
         MOUSELEAVE = 'mouseleave',
         CLICK = 'click',
