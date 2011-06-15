@@ -4,7 +4,7 @@
         ui = kendo.ui,
         extend = $.extend,
         Component = ui.Component,
-        events = [ 'select', 'contentLoad', 'error', 'load' ],
+        events = [ 'select', 'contentLoad', 'error', 'init' ],
         MOUSEENTER = 'mouseenter',
         MOUSELEAVE = 'mouseleave',
         CLICK = 'click',
@@ -157,7 +157,7 @@
                     id = tabStripID + '-' + (idx+1);
 
                 if (!currentContent.length)
-                    $('<div id="'+ id +'" class="t-content">&nbsp;</div>').appendTo(that.element);
+                    $('<div id="'+ id +'" class="t-content"></div>').appendTo(that.element);
                 else
                     if (!currentContent.attr('id')) {
                         currentContent.attr('id', id);
@@ -230,7 +230,7 @@
                 return false;
             }
 
-            var isAjaxContent = content.is(EMPTY),
+            var isAjaxContent = item.find('>.t-link').data('ContentUrl') && content.is(EMPTY),
                 showContentElement = function () {
                     oldTab.removeClass('t-tab-on-top');
                     item.addClass('t-tab-on-top'); // change these directly to bring the tab on top.
@@ -306,8 +306,8 @@
                 data: data,
 
                 error: function (xhr, status) {
-                    if (that.ajaxError(that.element, 'error', xhr, status))
-                        return;
+                    if (that.trigger('error', { xhr: xhr, status: status }))
+                        this.complete();
                 },
 
                 complete: function () {

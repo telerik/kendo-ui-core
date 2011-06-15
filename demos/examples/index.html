@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <html>
     <head>
+        <!-- meta -->
         <meta content="initial-scale=1.0, maximum-scale=2.0, width=device-width" name="viewport" />
 
         <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -9,6 +10,7 @@
         <link rel="shortcut icon" href="favicon.ico">
 
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <!-- meta -->
         <!-- script -->
         <script src="../../src/jquery.js"></script>
         <script src="../../src/kendo.core.js"></script>
@@ -26,8 +28,6 @@
         <link type="text/css" href="../../styles/kendo.common.css" rel="stylesheet"/>
         <link type="text/css" href="../../styles/kendo.vista.css" rel="stylesheet"/>
         <!-- css -->
-        <style type="text/css">
-        </style>
         <title>Kendo Examples</title>
     </head>
     <body>
@@ -51,7 +51,8 @@
                 <li>
                     TabStrip
                     <ul>
-                        <li><a href="tabstrip/events.html">Default Init</a></li>
+                        <li><a href="tabstrip/index.html">Default Init</a></li>
+                        <li><a href="tabstrip/ajax.html">Loading Ajax Content</a></li>
                         <li><a href="tabstrip/events.html">Events</a></li>
                     </ul>
                 </li>
@@ -60,9 +61,11 @@
                 $('#nav').kendoPanelBar({ animation: { open: { effects: 'fadeIn expandVertical' } }, expandMode: 0 });
             </script>
             <div id="content">
-            <!-- nav -->
-                <div id="example"></div>
+                <div id="exampleBody">
+                <!-- nav -->
+                    <div id="example"></div>
                 <!-- tools -->
+                </div>
                 <div id="codeStrip">
                     <ul>
                         <li class="t-state-active"><a id="viewDescription">Description</a></li>
