@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>ComboBox Events</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.query.js"></script>
+        <script src="../../src/kendo.datasource.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.list.js"></script>
+        <script src="../../src/kendo.combobox.js"></script>
+        <link rel="stylesheet" href="../qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">ComboBox Events</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var ComboBox = kendo.ui.ComboBox,
+                input;
+
+            $.fn.press = function(key) {
+                return this.trigger({ type: "keydown", keyCode: key } );
+            }
+
+            module("kendo.ui.ComboBox events", {
+                setup: function() {
+                    input = $("<input />").appendTo(document.body);
+                },
+                teardown: function() {
+                    input.add($("ul")).parent(".t-widget").remove();
+                }
+            });
+
+            test("_blur calls _change", function() {
+                var changeWasCalled = false, combobox = new ComboBox(input, {
+                    dataSource: [{text: "foo"}, {text: "bar"}]
+                });
+
+                combobox._change = function() {
+                    changeWasCalled = true;
+                }
+
+                combobox._blur();
+
+                ok(changeWasCalled);
+            });
+
+            test("_blur calls popup close", function() {
+                var changeWasCalled = false, combobox = new ComboBox(input, {
+                    dataSource: [{text: "foo"}, {text: "bar"}]
+                });
+
+                combobox.dataSource.read();
+                combobox.popup.open();
+
+                combobox.popup.bind("close", function() {
+                    ok(true);
+                    start();
+                });
+
+                combobox._blur();
+
+                stop(300);
+            });
+
+            test("_change raises the change event if value has changed", function() {
+               var changeWasCalled = false, combobox = new ComboBox(input, {
+                    dataSource: [{text: "foo"}, {text: "bar"}],
+                    change: function() {
+                        changeWasCalled = true;
+                    }
+                });
+                combobox.value("bar");
+                combobox.previous = "foo";
+                combobox._change();
+                ok(changeWasCalled);
+            });
+
+            test("_change raises the input change event", function() {
+               var changeWasCalled = false, combobox = new ComboBox(input, {
+                    dataSource: [{text: "foo"}, {text: "bar"}]
+                });
+
+                input.bind("change", function() {
+                    changeWasCalled = true;
+                });
+
+                combobox.value("bar");
+                combobox.previous = "foo";
+                combobox._change();
+                ok(changeWasCalled);
+            });
+
+            test("_change is not raised initially", function() {
+                var changeWasCalled = false, combobox = new ComboBox(input, {
+                    dataSource: [{text: "foo"}, {text: "bar"}],
+                    autoBind: false,
+                    change: function() {
+                        changeWasCalled = true;
+                    }
+                });
+
+                combobox.input.focus();
+                combobox._change();
+                ok(!changeWasCalled);
+            });
+
+            test("_change does not raise change event if value has't changed", function() {
+                var changeWasCalled = false, combobox = new ComboBox(input, {
+                    dataSource: [{text: "foo"}, {text: "bar"}],
+                    change: function() {
+                        changeWasCalled = true;
+                    }
+                });
+
+
+                combobox.previous = "foo";
+                combobox.value("foo");
+                combobox._change();
+                ok(!changeWasCalled);
+            });
+
+            test("previous is initialzed on refresh", function() {
+                var combobox = new ComboBox(input, {autoBind: false} );
+
+                input.val("foo");
+                combobox.refresh();
+                equal(combobox.previous, "foo");
+            });
+
+            test("select does not raise the change event", function() {
+                var changeWasCalled = false, combobox = new ComboBox(input, {
+                    dataSource: [{text: "foo"}, {text: "bar"}],
+                    change: function() {
+                        changeWasCalled = true;
+                    }
+                });
+
+                combobox.input.focus();
+                combobox.select($("<li>foo</li>"));
+                ok(!changeWasCalled);
+            });
+
+            test("clicking an item raises the change event", function() {
+                var changeWasCalled = false, combobox = new ComboBox(input, {
+                    dataSource: [{text: "foo"}, {text: "bar"}],
+                    change: function() {
+                        changeWasCalled = true;
+                    }
+                });
+
+                combobox.input.focus();
+
+                combobox.ul.children().eq(1).click();
+                ok(changeWasCalled);
+            });
+
+            test("change should be raised on enter", function() {
+                var changeWasCalled = false, combobox = new ComboBox(input, {
+                    dataSource: [{text: "foo"}, {text: "bar"}],
+                    change: function() {
+                        changeWasCalled = true;
+                    }
+                });
+
+                combobox.input.focus();
+                combobox.input.press(kendo.keys.DOWN);
+                combobox.input.press(kendo.keys.ENTER);
+
+                ok(changeWasCalled);
+            });
+
+            test("change should be raised on tab", function() {
+                var changeWasCalled = false, combobox = new ComboBox(input, {
+                    dataSource: [{text: "foo"}, {text: "bar"}],
+                    change: function() {
+                        changeWasCalled = true;
+                    }
+                });
+
+                combobox.input.focus();
+                combobox.input.press(kendo.keys.DOWN);
+                combobox.input.press(kendo.keys.TAB);
+
+                ok(changeWasCalled);
+            });
+
+            test("clicking an item raises the change event of HTML select", function() {
+                var origCalled = false,
+                    select = $("<select><option value=1>foo1</option><option value=3>foo3</option></select>")
+                                .bind("change", function() {
+                                    origCalled = true;
+                                });
+                var combobox = new ComboBox(select, {
+                    dataSource: [{text: "foo"}, {text: "bar"}]
+                });
+
+                combobox.input.focus();
+
+                combobox.ul.children().eq(1).click();
+                ok(origCalled);
+            });
+
+            test("raise change on custom value", function() {
+                var changeWasCalled = false, combobox = new ComboBox(input, {
+                    dataSource: [{text: "foo"}, {text: "bar"}],
+                    change: function() {
+                        changeWasCalled = true;
+                    }
+                });
+
+                combobox.input
+                        .focus()
+                        .val("foo")
+                        .blur();
+
+                setTimeout(function() {
+                    ok(changeWasCalled);
+                    equal(combobox.previous, "foo");
+                    equal(combobox.value(), "foo");
+                    start();
+                }, 200);
+
+                stop(500);
+            });
+
+            test("raise change on custom value if element is select", function() {
+                var origCalled = false,
+                    select = $("<select><option value=1>foo1</option><option value=3>foo3</option></select>")
+                                .bind("change", function() {
+                                    origCalled = true;
+                                });
+                var combobox = new ComboBox(select, {
+                    dataSource: [{text: "foo"}, {text: "bar"}]
+                });
+
+                combobox._current = null;
+
+                combobox.input
+                        .focus()
+                        .val("custom value")
+                        .blur();
+
+                setTimeout(function() {
+                    ok(origCalled);
+                    equal(combobox.value(), "custom value");
+                    equal(combobox.previous, "custom value");
+                    start();
+                }, 200);
+
+                stop(500);
+            });
+
+       </script>
+       <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>

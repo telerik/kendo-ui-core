@@ -140,7 +140,7 @@
                equal(combobox.dataSource.data().length, 2);
            });
 
-           test("data source is initialized from OPTION items", function() {
+           test("data source is initialized from OPTION items + one custom OPTION", function() {
                var select = $("<select><option value=1>Chai</option><option value=1 selected='selected'>Chai</option></select>"),
                    combobox = new ComboBox(select),
                    data;
@@ -148,7 +148,7 @@
                data = combobox.dataSource.view();
 
                ok(combobox.dataSource);
-               equal(data.length, 2);
+               equal(data.length, 3);
                equal(data[0].text, "Chai");
                equal(data[0].value, "1");
 
@@ -227,7 +227,7 @@
 
            test("dataAccessors are get from data attributes", function() {
                var select = $('<select data-text-field="name" data-value-field="id"></select>');
-               combobox = new ComboBox(select);
+               combobox = new ComboBox(select, {autoBind: false});
 
                equal(combobox.options.dataTextField, "name");
                equal(combobox.options.dataValueField, "id");

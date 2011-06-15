@@ -10,6 +10,7 @@
         FOCUSED = "t-state-focused",
         SELECTED = "t-state-selected",
         DISABLED = "t-state-disabled",
+        SELECT = "select",
         proxy = $.proxy;
 
     function selectText(element, selectionStart, selectionEnd) {
@@ -33,11 +34,11 @@
 
             List.fn.init.call(that, element, options);
 
+            that._customOption();
+
             that._wrapper();
 
             that._input();
-
-            that.arrow = that.input.next().children();
 
             that.popup = new ui.Popup(that.ul, {
                 anchor: that.input
@@ -53,9 +54,10 @@
                 keydown: proxy(that._keydown, that),
                 blur: function() {
                     if (!that._current) {
-                        that.element.val(that.input.val());
+                        that.value(that.text()); //select by text, not by value... just use that.select(predicate); also with value will not raise change event.
                     }
                     that._bluring = setTimeout(function() {
+                        clearTimeout(that._typing);
                         that._blur();
                     }, 100);
                 }
@@ -67,11 +69,11 @@
 
             that.enable(that.options.enable);
 
-            that._openOnBind = !that.options.autoBind;
-            that._initial = true;
+            that.previous = that.value();
 
             if (that.options.autoBind) {
                 that.showBusy();
+                that.dataSource.bind(CHANGE, proxy(that._select, that));
                 that.dataSource.query();
             }
         },
@@ -86,23 +88,25 @@
             minLength: 1,
             height: 200,
             filter: "none",
-            suggestion: false
+            suggest: false
         },
 
         enable: function(enable) {
             var that = this,
                 wrapper = that.wrapper,
                 input = that.input,
-                arrow = that.arrow;
+                arrow = that.arrow,
+                CLICK = "click",
+                ATTRIBUTE = "disabled";
 
             if (enable === false) {
-                wrapper.addClass('t-state-disabled')
-                input.attr('disabled', 'disabled');
-                arrow.unbind('click');
+                wrapper.addClass(DISABLED)
+                input.attr(ATTRIBUTE, ATTRIBUTE);
+                arrow.unbind(CLICK);
             } else {
-                wrapper.removeClass('t-state-disabled');
-                input.removeAttr("disabled");
-                arrow.bind('click', proxy(that.toggle, that));
+                wrapper.removeClass(DISABLED);
+                input.removeAttr(ATTRIBUTE);
+                arrow.bind(CLICK, proxy(that.toggle, that));
             }
         },
 
@@ -111,62 +115,54 @@
         },
 
         open: function() {
-            var that = this
-                current = that._current;
+            var that = this,
+                selected = that._selected;
 
-            if (!that.ul[0].firstChild || that._rebind) {
-                if (that._rebind) {
-                    that._initial = true;
-                }
-                that._rebind = false;
+            if (!that.ul[0].firstChild) {
                 that.showBusy();
-                that._openOnBind = true;
+                that.dataSource.bind(CHANGE, proxy(that._select, that));
+                that.dataSource.query();
+            } else if (selected && that._filtered) {
+                that._filtered = false;
+                that.showBusy();
+                that.dataSource.bind(CHANGE, proxy(that._select, that));
                 that.dataSource.query();
             } else {
                 that.popup.open()
-                if (current) {
-                    that._scroll(current[0]);
+                if (selected) {
+                    that._scroll(selected[0]);
                 }
             }
         },
 
         toggle: function() {
             var that = this;
-            that.input.focus();
+            that.input[0].focus();
+            clearTimeout(that._bluring);
             that[that.popup.visible() ? CLOSE : OPEN]();
         },
 
         refresh: function() {
             var that = this,
+                ul = that.ul,
                 options = that.options,
                 height = options.height,
-                data = that.dataSource.view();
+                data = that.dataSource.view(),
+                length = data.length;
 
-            that.ul[0].innerHTML = kendo.render(that.template, data);
-            that.ul.height(data.length * 20 > height ? height : "auto");
+            ul[0].innerHTML = kendo.render(that.template, data);
+            ul.height(length * 20 > height ? height : "auto");
 
-            if (that._initial && !that._filtered) {
-                that._initial = false;
-                var value = that.value();
-                if (value) {
-                    that.value(value);
-                } else {
-                    that.select(that.options.index);
-                }
-                that.previous = that.value();
-            }
-
-            if (that._filtered && that.options.filter === "none") {
-                that.search();
-            }
-
-            if (that.options.suggest && that._current) {
+            if (options.suggest && length) {
+                that.current($(that.ul[0].firstChild));
                 that.suggest(that._current);
             }
 
-            if (that._openOnBind) {
-                that[data.length ? OPEN : CLOSE]();
+            if (!options.autoBind) {
+                that.popup[length ? OPEN : CLOSE]();
             }
+
+            options.autoBind = false;
 
             that.hideBusy();
         },
@@ -190,13 +186,10 @@
                 length,
                 text = "",
                 value,
-                current = that._current,
                 data = that.dataSource.view(),
                 children = that.ul[0].childNodes;
 
-            if (current) {
-                current.removeClass(FOCUSED);
-            }
+            that.current(null);
 
             if (typeof li === "function") {
                 for (idx = 0, length = data.length; idx < length; idx++) {
@@ -211,35 +204,39 @@
                 li = $(children[li]);
             }
 
-            if (li[0] && !li.hasClass(SELECTED)) {
+            if (li[0] && !li.hasClass(FOCUSED)) {
                 idx = $.inArray(li[0], children);
 
-                if (idx === -1) {
-                    return idx;
+                if (idx !== -1) {
+                    that.current(li);
                 }
-
-                that.current(li);
             }
 
             return idx;
         },
 
         select: function(li) {
-            if(this._current) {
-                this._current.removeClass(SELECTED);
-            }
+
             var that = this,
+                text,
+                value,
+                current = that._selected,
                 idx = that.highlight(li),
                 data = that.dataSource.view();
 
+            if (current) {
+                current.removeClass(SELECTED);
+            }
+
             if (idx !== -1) {
-                that._current.addClass(SELECTED);
+                that._selected = that._current.addClass(SELECTED);
+
                 data = data[idx];
                 text = that._text(data);
                 value = that._value(data);
 
                 that.text(text);
-                that.element[0].value = value != undefined ? value : text;
+                that.element[0].value = value !== undefined ? value : text;
             }
         },
 
@@ -247,25 +244,32 @@
             var that = this,
                 options = that.options,
                 word = that.text(),
-                length,
-                caret,
-                index;
+                length = word.length;
 
             clearTimeout(that._typing);
 
-            length = word.length;
-
             if (!length) {
-                that.popup.close();
-            } else if (length >= that.options.minLength) {
-                that._filtered = true;
+                that.close();
+            } else if (length >= options.minLength) {
+
                 if (options.filter === "none") {
-                    var predicate = function(dataItem) {
-                        var text = that._text(dataItem);
-                        if(text !== undefined) {
-                            return (text + "").toLowerCase().indexOf(word.toLowerCase()) === 0;
+                    var that = this,
+                        predicate = function(dataItem) {
+                            var text = that._text(dataItem);
+                            if(text !== undefined) {
+                                return (text + "").toLowerCase().indexOf(word.toLowerCase()) === 0;
+                            }
+                        },
+                        handler = function () {
+                            that.search();
+                            that.dataSource.unbind(CHANGE, handler);
                         }
-                    };
+
+                    if (!that.ul[0].firstChild) {
+                        that.dataSource.bind(CHANGE, handler);
+                        that.dataSource.read();
+                        return;
+                    }
 
                     if (that.highlight(predicate) !== -1) {
                         if (that.options.suggest && that._current) {
@@ -273,13 +277,13 @@
                         }
                         that.open();
                     }
+
                 } else {
-                    that._current = null;
-                    that._openOnBind = true;
+                    that._filtered = true;
+                    that.current(null);
                     that.dataSource.filter( {field: options.dataTextField, operator: options.filter, value: word } );
                 }
             }
-
         },
 
         suggest: function(word) {
@@ -301,7 +305,7 @@
                 word = value.substring(0, caret);
             }
 
-            if(word !== value) {
+            if (word !== value) {
                 that.text(word);
                 selectText(element, caret, word.length);
             }
@@ -328,8 +332,9 @@
 
                 if (data[0]) {
                     index = $.map(data, function(dataItem, idx) {
-                        var val = that._value(dataItem),
-                            val = val !== undefined ? val : that._text(dataItem);
+                        var val = that._value(dataItem);
+
+                        val = val !== undefined ? val : that._text(dataItem);
 
                         if (val == value) {
                             return idx;
@@ -337,16 +342,20 @@
                     })[0];
                 }
 
-                if (index != undefined) {
+                if (index !== undefined) {
                     that.select(index);
-                }
-                else {
+                } else {
                     if (that._current) {
-                        that._current.removeClass(SELECTED);
+                        that._selected.removeClass(SELECTED);
                         that.current(null);
                     }
+
+                    if (that.element.is(SELECT)) {
+                        that._custom.text(value);
+                    }
+
                     element.val(value);
-                    that.input.val(value);
+                    that.text(value);
                 }
                 that.previous = element.val();
             } else {
@@ -364,14 +373,7 @@
                 if (that.input[0] !== document.activeElement) {
                     that.input.focus();
                 }
-
-                if (that._filtered) {
-                    that._filtered = false;
-                    that._rebind = that._current && that._current.hasClass(SELECTED);
-                }
             }
-
-            //moveCaretAtEnd(that.element[0]);
         },
 
         _caret: function() {
@@ -386,6 +388,16 @@
             }
 
             return caret;
+        },
+
+        _customOption: function() {
+            var that = this,
+                element = that.element;
+
+            if (element.is(SELECT)) {
+                that._custom = $("<option></option>");
+                element.append(that._custom);
+            }
         },
 
         _dataAccessors: function() {
@@ -416,15 +428,33 @@
 
             dataSource = $.isArray(dataSource) ? {data: dataSource} : dataSource;
 
-            if(element.is("select")) {
+            if(that.element.is(SELECT)) {
                 options.index = element.children(":selected").index();
 
-               dataSource.select = element;
-               dataSource.fields = [{ field: options.dataTextField },
-                                    { field: options.dataValueField }];
+                dataSource.select = element;
+                dataSource.fields = [{ field: options.dataTextField },
+                                     { field: options.dataValueField }];
             }
 
-            that.dataSource = DataSource.create(dataSource).bind(CHANGE, proxy(that.refresh, that));
+            that.dataSource = DataSource.create(dataSource)
+                                        .bind(CHANGE, proxy(that.refresh, that));
+        },
+
+        _select: function() {
+            var that = this,
+                value = that.value();
+
+            if (value) {
+                that.value(value);
+            } else {
+                that.select(that.options.index);
+            }
+
+            that.previous = that.value();
+
+            that.dataSource
+                .unbind(CHANGE)
+                .bind(CHANGE, proxy(that.refresh, that));
         },
 
         _input: function() {
@@ -442,13 +472,13 @@
                 input = wrapper.find(SELECTOR);
             }
             that.input = input;
+
+            that.arrow = wrapper.find(".t-icon");
         },
 
         _move: function(li) {
-            var that = this;
-
             if (li[0]) {
-                that.select(li);
+                this.select(li);
             }
         },
 
@@ -456,14 +486,7 @@
             var prevent,
                 that = this,
                 key = e.keyCode,
-                keys = kendo.keys,
-                select = function(li) {
-                    if (li[0]) {
-                        that.select(li);
-                    }
-                };
-
-
+                keys = kendo.keys;
 
             if (e.altKey) {
                 if (key === keys.DOWN) {
@@ -490,6 +513,14 @@
             if (prevent) {
                 e.preventDefault();
             }
+
+            setTimeout(function() {
+                var current = that._current;
+                if (current && !that.input.val()) {
+                    that.ul.children().removeClass(SELECTED); //should use that._selected
+                    that.current(null);
+                }
+            });
         },
 
         _search: function() {
@@ -497,16 +528,17 @@
             clearTimeout(that._typing);
 
             that._typing = setTimeout(function() {
-                //if (that.previous !== that.text()) {
+                var value = that.input.val();
+                if (value && that._previousText !== value) {
+                    that._previousText = value;
                     that.search();
-                //}
+                }
             }, that.options.delay);
         },
 
         _wrapper: function() {
             var that = this,
                 element = that.element,
-                TABINDEX = "tabIndex",
                 wrapper;
 
             wrapper = element.parent();

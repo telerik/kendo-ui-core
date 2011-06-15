@@ -275,6 +275,24 @@
 
                 stop(400);
             });
+
+            test("empty input should clear focused item", function() {
+                var combobox = input.kendoComboBox(data).data("kendoComboBox");
+
+                combobox.dataSource.read();
+                combobox.select(combobox.ul.children(":last"));
+                combobox.current(combobox.ul.children(":first"));
+                combobox.input.val("").focus().press(keys.BACKSPACE);
+
+                setTimeout(function() {
+                    ok(!combobox._current);
+                    ok(!combobox.ul.find(".t-state-selected")[0]);
+                    ok(!combobox.ul.find(".t-state-focused")[0]);
+                    start();
+                });
+
+                stop(300);
+            });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
