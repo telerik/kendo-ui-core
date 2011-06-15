@@ -260,11 +260,16 @@
                 var combobox = new ComboBox(input, {
                     dataSource: data
                 });
-                combobox._current = null;
+                combobox._selected = combobox._current = null;
 
                 combobox.input.val("ffff").blur();
 
-                equal(combobox.value(), "ffff");
+                setTimeout(function() {
+                    equal(combobox.value(), "ffff");
+                    start();
+                }, 150);
+
+                stop(200);
             });
 
             test("do not set custom value if _current", function() {

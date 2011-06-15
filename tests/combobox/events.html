@@ -129,7 +129,7 @@
                 var combobox = new ComboBox(input, {autoBind: false} );
 
                 input.val("foo");
-                combobox.refresh();
+                combobox._select();
                 equal(combobox.previous, "foo");
             });
 
