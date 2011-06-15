@@ -424,8 +424,8 @@
             } else if (options.align == CENTER) {
                 var margin = (targetBox.width() - size.width) / 2;
                 text.box = new Box(
-                    round(targetBox.x1 + margin, COORD_PRECISION), targetBox.y2 - size.height,
-                    round(targetBox.x2 - margin, COORD_PRECISION), targetBox.y2);
+                    round(targetBox.x1 + margin, COORD_PRECISION), targetBox.y1,
+                    round(targetBox.x2 - margin, COORD_PRECISION), targetBox.y1 + size.height);
             }
 
             if (options.vAlign == CENTER) {
@@ -543,7 +543,9 @@
             options = title.options = extend(true, {}, title.options, options);
 
             var text = new Text(options.text, {
-                font: options.font
+                font: options.font,
+                align: options.align,
+                vAlign: "center"
             });
 
             title.children.push(text);
@@ -568,13 +570,6 @@
                 margin = getMargin(options.margin),
                 offsetY;
 
-            if (title.options.align == CENTER) {
-                textBox.x1 = (targetBox.width() - text.box.width()) / 2;
-                textBox.x2 = textBox.x1 + text.box.width();
-            }
-
-            text.updateLayout(textBox);
-
             if (options.position == BOTTOM) {
                 textBox.y1 = targetBox.y2 - text.box.height() - margin.top - margin.bottom;
                 textBox.y2 = targetBox.y2;
@@ -584,6 +579,10 @@
                 textBox.y1 = targetBox.y1;
                 textBox.y2 = targetBox.y1 + text.box.height() + margin.bottom + margin.top;
             }
+            textBox.x1 = targetBox.x1;
+            textBox.x2 = targetBox.x2;
+
+            text.updateLayout(textBox);
 
             title.box = new Box(targetBox.x1, textBox.y1, targetBox.x2, textBox.y2);
         }
