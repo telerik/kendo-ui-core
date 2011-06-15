@@ -135,6 +135,19 @@
 
             });
 
+            test("value should select custom option if element is select", function() {
+                var select = $("<select><option value=1>foo1</option><option value=3>foo3</option></select>"),
+                    combobox = new ComboBox(select, {
+                        dataSource: [{text: "foo"}, {text: "bar"}]
+                    });
+
+                combobox.value("custom value");
+
+                equal(select.val(), "custom value");
+                equal(combobox.previous, "custom value");
+            });
+
+
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

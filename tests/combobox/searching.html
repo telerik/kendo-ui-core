@@ -118,14 +118,13 @@
 
                 combobox.popup.bind("open", function() {
                     ok(true);
-                    ok(combobox.ul.children().eq(0).hasClass("t-state-focused"));
                     start();
                 });
 
                 combobox.text("f");
                 combobox.search();
 
-                stop(300);
+                stop(1000);
             });
 
             test("search with startswith rebind items", function() {
@@ -181,7 +180,6 @@
                 combobox.text("b");
                 combobox.search();
                 combobox.ul.children().eq(1).click();
-
                 combobox.open();
 
                 equal(combobox.ul.children().length, data.length);
@@ -279,6 +277,25 @@
                 combobox.input.val("ffff").blur();
 
                 notEqual(combobox.value(), "ffff");
+            });
+
+            test("do not search if text does not changed", function() {
+                var called = false, combobox = new ComboBox(input, {
+                    dataSource: data
+                });
+
+                combobox.search = function() { called = true; };
+
+                combobox._previousText = "test";
+                combobox.input.val("test");
+                combobox.input.pressKeyDown(kendo.keys.HOME);
+
+                setTimeout(function() {
+                    ok(!called);
+                    start();
+                }, 500);
+
+                stop(600);
             });
 
         </script>
