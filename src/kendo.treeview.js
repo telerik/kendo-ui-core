@@ -638,8 +638,6 @@
         }
     };
 
-    /*
-
     // client-side rendering
     $.extend(TreeView, {
         getNodeInputsHtml: function (itemValue, itemText, arrayName, value) {
@@ -674,12 +672,13 @@
                     .catIf('t-bot', itemIndex == itemsCount - 1)
                 .cat('">');
 
-            if ((options.isAjax && item.LoadOnDemand) || (item.Items && item.Items.length > 0))
+            if ((options.isAjax && item.LoadOnDemand) || (item.Items && item.Items.length > 0)) {
                 html.cat('<span class="t-icon')
                         .catIf(' t-plus', item.Expanded !== true)
                         .catIf(' t-minus', item.Expanded === true)
                         .catIf('-disabled', item.Enabled === false) // t-(plus|minus)-disabled
                     .cat('"></span>');
+            }
 
             if (options.showCheckBoxes && item.Checkable !== false) {
                 var arrayName = options.elementId + '_checkedNodes';
@@ -696,12 +695,26 @@
                         .catIf(' checked="checked"', item.Checked)
                     .cat('/>');
 
-                if (item.Checked)
+                if (item.Checked) {
                     html.cat($t.treeview.getNodeInputsHtml(item.Value, item.Text, arrayName, absoluteIndex));
+                }
 
                 html.cat('</span>');
             }
 
+/*
+<li class='t-item<%= itemWrapperClass %>'>\
+<div class='<%= itemClass %>'>\
+<<%= itemTag %> class='<%= activatorClass %>'>\
+<%= imageUrl ? "<img class='t-image' alt='' src='" + imageUrl + "' />" : "" %>\
+<%= spriteCssClass ? "<span class='t-sprite " + spriteCssClass + "'></span>" : "" %>\
+<%= processedText %>\
+<%= value ? "<input type='hidden' class='t-input' name='itemValue' value='" + value + "' />" : "" %>\
+</<%= itemTag %>>\
+</div>\
+<%= subGroup %>\
+</li>
+*/
             var navigateUrl = item.NavigateUrl || item.Url;
 
             html.cat(navigateUrl ? '<a href="' + navigateUrl + '" class="t-link ' : '<span class="')
@@ -710,20 +723,23 @@
                     .catIf(' t-state-selected', item.Selected === true)
                 .cat('">');
 
-            if (item.ImageUrl != null)
+            if (item.ImageUrl != null) {
                 html.cat('<img class="t-image" alt="" src="').cat(item.ImageUrl).cat('" />');
+            }
 
-            if (item.SpriteCssClasses != null)
+            if (item.SpriteCssClasses != null) {
                 html.cat('<span class="t-sprite ').cat(item.SpriteCssClasses).cat('"></span>');
+            }
 
             html.catIf(item.Text, item.Encoded === false)
                 .catIf(item.Text.replace(/</g, '&lt;').replace(/>/g, '&gt;'), item.Encoded !== false)
                 .cat(navigateUrl ? '</a>' : '</span>');
 
-            if (item.Value)
+            if (item.Value) {
                 html.cat('<input type="hidden" class="t-input" name="itemValue" value="')
                     .cat(item.Value)
                     .cat('" />');
+            }
 
             html.cat('</div>');
 
@@ -744,11 +760,11 @@
 
         getGroupHtml: function (data, options) {
             var html = "",
-                renderGroup = ,
+                renderGroup = options.renderGroup !== false,
                 getItemHtml = TreeView.getItemHtml,
                 i, len;
 
-            if (options.renderGroup !== false) {
+            if (renderGroup) {
                 html += "<ul class='t-group";
 
                 if (options.isFirstLevel) {
@@ -769,20 +785,19 @@
                     html += getItemHtml({
                         item: $.extend({}, data[i], {
                             index: i,
-                            groupLength: len;
+                            groupLength: len
                         }),
                         treeview: options
                     });
             }
 
-            if (options.renderGroup !== false) {
+            if (renderGroup) {
                 html += "</ul>";
             }
 
             return html;
         }
     });
-    */
 
     kendo.ui.plugin("TreeView", TreeView);
 
