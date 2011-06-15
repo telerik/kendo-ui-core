@@ -540,11 +540,12 @@
             var title = this;
             ChartElement.fn.init.call(title);
 
-            options = title.options = extend({}, title.options, options);
+            options = title.options = extend(true, {}, title.options, options);
 
             var text = new Text(options.text, {
                 font: options.font
             });
+
             title.children.push(text);
         },
 
@@ -552,7 +553,11 @@
             text: "",
             font: "16px Verdana, sans-serif",
             position: TOP,
-            align: CENTER
+            align: CENTER,
+            margin: {
+                top: 10,
+                bottom: 10
+            }
         },
 
         updateLayout: function(targetBox) {
@@ -589,7 +594,7 @@
             var legend = this;
             ChartElement.fn.init.call(legend);
 
-            legend.options = extend({}, legend.options, options);
+            legend.options = extend(true, {}, legend.options, options);
             legend.createLabels();
         },
 
@@ -598,7 +603,13 @@
             series: [],
             font: "12px Verdana, sans-serif",
             offsetX: 0,
-            offsetY: 0
+            offsetY: 0,
+            margin: {
+                top: 10,
+                right: 10,
+                bottom: 10,
+                left: 10
+            }
         },
 
         createLabels: function() {
@@ -1555,7 +1566,7 @@
             var plotArea = this;
             ChartElement.fn.init.call(plotArea);
 
-            plotArea.options = extend({}, plotArea.options, options);
+            plotArea.options = extend(true, {}, plotArea.options, options);
             plotArea.render();
         },
 
@@ -1563,7 +1574,14 @@
             categoryAxis: { },
             valueAxis: { },
             series: [ ],
-            plotArea: { }
+            plotArea: {
+                margin: {
+                    top: 10,
+                    right: 10,
+                    bottom: 10,
+                    left: 10
+                }
+            }
         },
 
         render: function() {

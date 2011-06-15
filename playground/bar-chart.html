@@ -15,22 +15,14 @@
                 $("#container").kendoChart({
                     title: {
                         text: "Teh chart",
-                        position: "top",
-                        margin: {
-                            bottom: 10,
-                            top: 10
-                        }
+                        position: "top"
                     },
                     legend: {
                         font: "12px Verdana, sans-serif",
                         position: "right", // "top", "bottom", "left", "right"
                         offsetX: 0,
                         offsetY: 0,
-                        visible: true,
-                        margin : {
-                            left: 10,
-                            right: 10
-                        }
+                        visible: true
                     },
                     dataSource: [
                         {
@@ -95,9 +87,6 @@
                                 // "outsideEnd", "insideEnd", "insideBase", "center"
                             }
                         }
-                    },
-                    plotArea: {
-                        margin: 40
                     }
                 });
             });
