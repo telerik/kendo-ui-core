@@ -15,14 +15,11 @@
                 $("#container").kendoChart({
                     title: {
                         text: "Teh chart",
-                        position: "top",
-                        align: "center"
+                        position: "top"
                     },
                     legend: {
                         font: "12px Verdana, sans-serif",
                         position: "right", // "top", "bottom", "left", "right"
-                        offsetX: 0,
-                        offsetY: 0,
                         visible: true
                     },
                     dataSource: [
@@ -79,15 +76,6 @@
                     valueAxis: {
                         min: -40,
                         max: 40
-                    },
-                    seriesDefaults: {
-                        bar: {
-                            label: {
-                                font: "12px Verdana, sans-serif",
-                                position: "center"
-                                // "outsideEnd", "insideEnd", "insideBase", "center"
-                            }
-                        }
                     }
                 });
             });
@@ -168,7 +156,7 @@
             }
         </script>
 
-        <div id="container" style="width: 800px; height: 600px;">
+        <div id="container" style="width: 800px; height: 600px; border-style:dotted solid;">
         </div>
 
             <div class="configurator">

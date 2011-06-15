@@ -545,7 +545,7 @@
             var text = new Text(options.text, {
                 font: options.font,
                 align: options.align,
-                vAlign: "center"
+                vAlign: CENTER
             });
 
             title.children.push(text);
@@ -579,6 +579,7 @@
                 textBox.y1 = targetBox.y1;
                 textBox.y2 = targetBox.y1 + text.box.height() + margin.bottom + margin.top;
             }
+
             textBox.x1 = targetBox.x1;
             textBox.x2 = targetBox.x2;
 
@@ -608,7 +609,8 @@
                 right: 10,
                 bottom: 10,
                 left: 10
-            }
+            },
+            zIndex: 1
         },
 
         createLabels: function() {
@@ -631,6 +633,11 @@
 
             if (childrenCount === 0) {
                 legend.box = new Box();
+                return;
+            }
+
+            if (options.position == "custom") {
+                legend.customLayout(targetBox);
                 return;
             }
 
@@ -677,7 +684,6 @@
                 children = legend.children,
                 childrenCount = children.length,
                 labelBox = children[0].box.clone(),
-                markerHeight = legend.markerSize() * 3,
                 offsetX,
                 offsetY,
                 margin = getMargin(options.margin);
@@ -691,15 +697,14 @@
 
             // Vertical center is calculated relative to the container, not the parent!
             if (options.position == LEFT) {
-                offsetX = targetBox.x1 + labelBox.width() / 2 + margin.left;
+                offsetX = targetBox.x1 + legend.markerSize() * 2 + margin.left;
                 offsetY = (targetBox.y2 - labelBox.height()) / 2;
-                labelBox.x2 += markerHeight + margin.left + margin.right;
-                labelBox.x1 += margin.left;
+                labelBox.x2 += margin.left + margin.right;
             } else {
                 offsetX = targetBox.x2 - labelBox.width() - margin.right;
                 offsetY = (targetBox.y2 - labelBox.height()) / 2;
                 labelBox.translate(offsetX, offsetY);
-                labelBox.x1 -= markerHeight + margin.left;
+                labelBox.x1 -= legend.markerSize() * 2 + margin.left;
             }
 
             legend.translateChildren(offsetX + options.offsetX,
@@ -732,10 +737,9 @@
 
             if (options.position == TOP) {
                 offsetX = (targetBox.x2 - labelBox.width() - markerWidth) / 2;
-                offsetY = targetBox.y1 + labelBox.height() + margin.top;
-                labelBox.translate(offsetX, offsetY);
+                offsetY = targetBox.y1 + margin.top;
+                labelBox.y2 = targetBox.y1 + labelBox.height() + margin.top + margin.bottom;
                 labelBox.y1 = targetBox.y1;
-                labelBox.y2 += margin.bottom;
             } else {
                 offsetX = (targetBox.x2 - labelBox.width() - markerWidth) / 2;
                 offsetY = targetBox.y2 - labelBox.height() - margin.bottom;
@@ -750,6 +754,29 @@
             labelBox.x2 = targetBox.x2;
 
             legend.box = labelBox;
+        },
+
+        customLayout: function (targetBox) {
+            var legend = this,
+                options = legend.options,
+                children = legend.children,
+                childrenCount = children.length,
+                labelBox = children[0].box.clone(),
+                markerWidth = legend.markerSize() * 2,
+                offsetX,
+                offsetY,
+                margin = getMargin(options.margin);
+
+            // Position labels next to each other
+            for (var i = 1; i < childrenCount; i++) {
+                var label = legend.children[i]
+                label.box.alignTo(legend.children[i - 1].box, BOTTOM);
+                labelBox.wrap(label.box);
+            };
+
+            legend.translateChildren(options.offsetX + markerWidth, options.offsetY);
+
+            legend.box = targetBox;
         },
 
         translateChildren: function(dx, dy) {
@@ -1574,12 +1601,7 @@
             valueAxis: { },
             series: [ ],
             plotArea: {
-                margin: {
-                    top: 10,
-                    right: 10,
-                    bottom: 10,
-                    left: 10
-                }
+                margin: 0
             }
         },
 
@@ -2050,6 +2072,10 @@
     }
 
     function boxDiff( r, s ) {
+        if (r.x1 == s.x1 && r.y1 == s.y1 && r.x2 == s.x2 && r.y2 == s.y2) {
+            return s;
+        }
+
         var a = Math.min( r.x1, s.x1 );
         var b = Math.max( r.x1, s.x1 );
         var c = Math.min( r.x2, s.x2 );
