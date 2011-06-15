@@ -79,7 +79,6 @@
                 ok(combobox.ul.children().eq(1).hasClass(SELECTED));
                 equal(combobox.value(), "2");
                 equal(combobox.text(), "2");
-                //equal(combobox.previous, 1);
             });
 
             test("open should call _scroll method", function () {
@@ -147,6 +146,29 @@
                 equal(combobox.previous, "custom value");
             });
 
+            test("text method should select item if exists", function() {
+                var combobox = new ComboBox(input, [{text: "foo", value: 1}, {text:2, value:2}]);
+                combobox.text("foo");
+
+                ok(combobox.ul.children().eq(0).hasClass(SELECTED));
+                equal(combobox.value(), "1");
+                equal(combobox.text(), "foo");
+                equal(combobox.previous, "");
+           });
+
+           test("text should set custom value", function() {
+                var combobox = new ComboBox(input, [{text: "foo", value: 1}, {text:2, value:2}]);
+
+                combobox.select(1);
+                combobox.text("custom");
+
+                ok(!combobox.ul.children().hasClass(SELECTED));
+                ok(!combobox._current);
+                ok(!combobox._selected);
+                equal(combobox.value(), "custom");
+                equal(combobox.text(), "custom");
+                equal(combobox.previous, "");
+           });
 
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

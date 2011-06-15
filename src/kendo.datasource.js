@@ -808,15 +808,11 @@
             table = dataSource.table,
             select = dataSource.select;
 
-        if(fields){
-            if (!data) {
-                if (table) {
-                    data = inferTable(table, fields);
-                } else if (select) {
-                    data = inferSelect(select, fields);
-                }
+        if(!data && fields){
+            if (table) {
+                data = inferTable(table, fields);
             } else if (select) {
-                rebuildSelect(data, select, fields);
+                data = inferSelect(select, fields);
             }
         }
 
@@ -844,36 +840,6 @@
         }
 
         return data;
-    }
-
-    function rebuildSelect(data, select, fields) {
-        var getText = kendo.getter(fields[0].field),
-            getValue = kendo.getter(fields[1].field),
-            length = data.length,
-            options = [],
-            i = 0;
-
-        for (; i < length; i++) {
-           var option = "<option",
-               dataItem = data[i],
-               text = getText(dataItem),
-               value = getValue(dataItem);
-
-           if (value || value === 0) {
-               option += " value=" + value;
-           }
-
-           option += ">";
-
-           if (text || text === 0) {
-               option += text;
-           }
-
-           option += "</option>";
-           options.push(option);
-        }
-
-        select.html(options.join(""));
     }
 
     function inferTable(table, fields) {

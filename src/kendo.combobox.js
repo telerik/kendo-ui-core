@@ -53,10 +53,11 @@
             that.input.bind({
                 keydown: proxy(that._keydown, that),
                 blur: function() {
-                    if (!that._current) {
-                        that.value(that.text()); //select by text, not by value... just use that.select(predicate); also with value will not raise change event.
-                    }
                     that._bluring = setTimeout(function() {
+                        if (!that._current) {
+                            that.text(that.text());
+                        }
+
                         clearTimeout(that._typing);
                         that._blur();
                     }, 100);
@@ -93,6 +94,7 @@
 
         enable: function(enable) {
             var that = this,
+                element = that.element,
                 wrapper = that.wrapper,
                 input = that.input,
                 arrow = that.arrow,
@@ -102,10 +104,12 @@
             if (enable === false) {
                 wrapper.addClass(DISABLED)
                 input.attr(ATTRIBUTE, ATTRIBUTE);
+                element.attr(ATTRIBUTE, ATTRIBUTE);
                 arrow.unbind(CLICK);
             } else {
                 wrapper.removeClass(DISABLED);
                 input.removeAttr(ATTRIBUTE);
+                element.removeAttr(ATTRIBUTE);
                 arrow.bind(CLICK, proxy(that.toggle, that));
             }
         },
@@ -118,11 +122,7 @@
             var that = this,
                 selected = that._selected;
 
-            if (!that.ul[0].firstChild) {
-                that.showBusy();
-                that.dataSource.bind(CHANGE, proxy(that._select, that));
-                that.dataSource.query();
-            } else if (selected && that._filtered) {
+            if (!that.ul[0].firstChild || (that._filtered && selected)) {
                 that._filtered = false;
                 that.showBusy();
                 that.dataSource.bind(CHANGE, proxy(that._select, that));
@@ -153,6 +153,8 @@
             ul[0].innerHTML = kendo.render(that.template, data);
             ul.height(length * 20 > height ? height : "auto");
 
+            that._rebuildSelect(data);
+
             if (options.suggest && length) {
                 that.current($(that.ul[0].firstChild));
                 that.suggest(that._current);
@@ -182,6 +184,7 @@
 
         highlight: function(li) {
             var that = this,
+                i = 0,
                 idx = -1,
                 length,
                 text = "",
@@ -192,9 +195,9 @@
             that.current(null);
 
             if (typeof li === "function") {
-                for (idx = 0, length = data.length; idx < length; idx++) {
-                    if (li(data[idx])) {
-                        li = idx;
+                for (i = 0, length = data.length; i < length; i++) {
+                    if (li(data[i])) {
+                        li = i;
                         break;
                     }
                 }
@@ -226,6 +229,7 @@
 
             if (current) {
                 current.removeClass(SELECTED);
+                that._selected = null;
             }
 
             if (idx !== -1) {
@@ -235,7 +239,7 @@
                 text = that._text(data);
                 value = that._value(data);
 
-                that.text(text);
+                that.input[0].value = text;
                 that.element[0].value = value !== undefined ? value : text;
             }
         },
@@ -313,9 +317,22 @@
 
         text: function (text) {
             var that = this,
+                element = that.element,
                 input = that.input[0];
 
             if (text !== undefined) {
+                that.select(function(dataItem) {
+                    return that._text(dataItem) === text;
+                });
+
+                if (!that._selected) {
+                    if (element.is(SELECT)) {
+                        that._custom.text(text);
+                    }
+
+                    element[0].value = text;
+                }
+
                 input.value = text;
             } else {
                 return input.value;
@@ -515,9 +532,9 @@
             }
 
             setTimeout(function() {
-                var current = that._current;
+                var current = that._selected;
                 if (current && !that.input.val()) {
-                    that.ul.children().removeClass(SELECTED); //should use that._selected
+                    current.removeClass(SELECTED);
                     that.current(null);
                 }
             });
@@ -529,6 +546,11 @@
 
             that._typing = setTimeout(function() {
                 var value = that.input.val();
+                if (!value && that._selected) {
+                    that._selected.removeClass(SELECTED);
+                    that._selected = null;
+                    that.current(null);
+                }
                 if (value && that._previousText !== value) {
                     that._previousText = value;
                     that.search();
@@ -548,7 +570,43 @@
             }
 
             that.wrapper = wrapper.addClass("t-widget t-combobox t-header");
+        },
+
+        _rebuildSelect: function(data) {
+            var that = this,
+                value = that.value(),
+                length = data.length,
+                options = [],
+                i = 0;
+
+            if (that.element.is(SELECT)) {
+                for (; i < length; i++) {
+                    var option = "<option",
+                    dataItem = data[i],
+                    dataText = that._text(dataItem),
+                    dataValue = that._value(dataItem);
+
+                    if (dataValue !== undefined) {
+                        option += " value=" + dataValue;
+                    }
+
+                    option += ">";
+
+                    if (dataText !== undefined) {
+                        option += dataText;
+                    }
+
+                    option += "</option>";
+                    options.push(option);
+                }
+
+                that.element.html(options.join(""));
+                that._customOption();
+
+                that.element.val(value);
+            }
         }
+
     });
 
     ui.plugin("ComboBox", ComboBox);
