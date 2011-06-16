@@ -572,6 +572,9 @@
             models = that._models;
 
             that._total = that._deserializer.total(data);
+            if(that._aggregates && that.options.serverAggregates) {
+                that._aggregateResult = that._deserializer.aggregates(data);
+            }
 
             if(hasGroups) {
                 data = that._deserializer.groups(data);
@@ -610,8 +613,6 @@
             if (that.options.serverAggregates !== true) {
                 options.aggregates = that._aggregates;
                 that._aggregateResult = calculateAggregates(data, options);
-            } else if (that._aggregates) {
-                that._aggregateResult = that._deserializer.aggregates(data);
             }
 
             result = process(data, options);
