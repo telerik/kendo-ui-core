@@ -471,7 +471,7 @@
         options: {
             font: "16px Verdana, sans-serif",
             aboveAxis: true,
-            position: "insideEnd"
+            position: "outsideEnd"
         },
 
         updateLayout: function(targetBox, isVertical) {
@@ -1383,9 +1383,7 @@
                 options = bar.options;
 
             for(var i = 0, length = children.length; i < length; i++) {
-                if (children[i].options.visible) {
-                    children[i].updateLayout(targetBox, options.isVertical);
-                }
+                children[i].updateLayout(targetBox, options.isVertical);
             }
         },
 
@@ -1470,10 +1468,13 @@
                 }
             }
 
-            var bar = new Bar({ color: series.color, borderColor: series.color, isVertical: options.isVertical }),
-                label = new BarLabel(value, labelOptions);
+            var bar = new Bar({ color: series.color, borderColor: series.color, isVertical: options.isVertical });
 
-            bar.children.push(label);
+            if (labelOptions.visible) {
+                var label = new BarLabel(value, labelOptions);
+                bar.children.push(label);
+            }
+
             barChart._bars.push(bar);
 
             var cluster = children[categoryIx];
@@ -1551,10 +1552,13 @@
 
                 var barSlot = new Box(slotX.x1, slotY.y1, slotX.x2, slotY.y2);
                 var label = bar.children[0];
-                var axis = options.isVertical ? plotArea.axisY : plotArea.axisX;
-                var axisCrossingValue = axis.options.axisCrossingValue;
-                label.options.aboveAxis = value >= axisCrossingValue;
-                label.content = label.content || axisCrossingValue;
+
+                if (label) {
+                    var axis = options.isVertical ? plotArea.axisY : plotArea.axisX,
+                        axisCrossingValue = axis.options.axisCrossingValue;
+                    label.options.aboveAxis = value >= axisCrossingValue;
+                    label.content = label.content || axisCrossingValue;
+                }
 
                 bar.updateLayout(barSlot);
 
