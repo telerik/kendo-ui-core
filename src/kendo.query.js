@@ -213,7 +213,7 @@
     }
 
     function Query(data) {
-        this.data = data;
+        this.data = data || [];
     }
 
     Query.expandSort = function(field, dir) {
