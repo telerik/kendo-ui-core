@@ -1819,7 +1819,11 @@
                 options = group.options = extend({}, group.options, options);
 
             ViewElement.fn.init.call(group);
-            group.template = template("<g><%= renderContent() %></g>");
+            group.template = SVGGroup.template;
+            if (!group.template) {
+                group.template = SVGGroup.template =
+                    template("<g><%= renderContent() %></g>");
+            }
         }
     });
 
