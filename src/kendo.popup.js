@@ -8,10 +8,12 @@
         RIGHT = "right",
         TOP = "top",
         BOTTOM = "bottom",
+        ABSOLUTE = "absolute",
+        HIDDEN = "hidden",
         extend = $.extend,
         proxy = $.proxy,
         Component = ui.Component,
-        mobileSafari41 = (navigator.userAgent.search(/4_1\slike\sMac\sOS\sX;.*Mobile\/\S+/) != -1);
+        mobileSafari41 = /4_1\slike\sMac\sOS\sX;.*Mobile\/\S+/.test(navigator.userAgent);
 
     function align(element, anchor, origin, position) {
         origin = origin.split(" ");
@@ -43,7 +45,7 @@
         }
 
         if (verticalPosition === CENTER) {
-            top -= round(height / 2 );
+            top -= round(height / 2);
         }
 
         if (horizontalOrigin === RIGHT) {
@@ -59,14 +61,18 @@
         }
 
         if (horizontalPosition === CENTER) {
-            left -= round(width / 2 );
+            left -= round(width / 2);
         }
 
         if (kendo.support.touch) {
-            if (!document.body.scrollLeft && !mobileSafari41)
+
+            if (!document.body.scrollLeft && !mobileSafari41) {
                 left -= window.pageXOffset;
-            if (!document.body.scrollTop && !mobileSafari41)
+            }
+
+            if (!document.body.scrollTop && !mobileSafari41) {
                 top -= window.pageYOffset;
+            }
         }
 
         element.css({
@@ -78,25 +84,47 @@
     function contains(container, target) {
         return container === target || $.contains(container, target);
     }
+
     var Popup = Component.extend({
         init: function(element, options) {
             var that = this;
 
-            if (options && ('animation' in options) && !options.animation)
-                options.animation = { open: { effects: {} }, close: { effects: {} } };
-
             Component.fn.init.call(that, element, options);
 
-            that.element.hide().addClass("t-popup t-group t-reset").css("position", "absolute").appendTo(document.body);
+            that.element.hide().addClass("t-popup t-group t-reset").css({ position : ABSOLUTE }).appendTo(document.body);
 
             options = that.options;
+
+            that.wrapper = $();
+
+            if (options.animation === false) {
+                options.animation = { open: { effects: {} }, close: { effects: {} } };
+            }
+
+            if (!("effects" in options.animation.close)) {
+                options.animation.close = extend({}, options.animation.open, { reverse: true });
+            }
+
+            extend(options.animation.open, {
+                complete: function() {
+                    that.wrapper.css({ overflow: "" });
+                    that.trigger(OPEN);
+                }
+            });
+
+            extend(options.animation.close, {
+                complete: function() {
+                    that.wrapper.css({ display: "none" });
+                    that.trigger(CLOSE);
+                }
+            });
 
             that.bind([OPEN, CLOSE], options);
 
             $(document.documentElement).mousedown(proxy(that._mousedown, that));
 
             $(window).bind("resize", function() {
-                that._updatePosition();
+                that._update();
             });
 
             if (options.toggleTarget) {
@@ -110,7 +138,7 @@
             anchor: "body",
             animation: {
                 open: {
-                    effects: 'slideDownIn',
+                    effects: "slideDownIn",
                     duration: 200,
                     show: true
                 },
@@ -121,44 +149,40 @@
                 }
             }
         },
+
         open: function() {
             var that = this,
                 options = that.options;
 
             if (!that.visible()) {
-                that.element.data('effectOptions', extend( {}, options.animation.open) );
-                that._wrapper = kendo.wrap(that.element).css({ overflow: 'hidden', display: 'block', position: 'absolute', top: '-10000px' });
-                that._updatePosition();
-                that.element.kendoStop(true).kendoAnimate(options.animation.open, function () {
-                    that._wrapper.css({ overflow: '' });
-                    that.trigger(OPEN);
-                });
+                that.wrapper = kendo.wrap(that.element).css({ overflow: HIDDEN, display: "block", position: ABSOLUTE, top: "-10000px" });
+
+                that._update();
+
+                that.element.kendoStop(true).kendoAnimate(options.animation.open)
             }
         },
+
         toggle: function() {
             var that = this;
 
             that[that.visible() ? CLOSE : OPEN]();
         },
+
         visible: function() {
             return this.element.is(":visible");
         },
+
         close: function() {
             var that = this,
                 options = that.options;
 
             if (that.visible()) {
-                var hasCloseAnimation = 'effects' in options.animation.close;
-                that._wrapper = kendo.wrap(that.element).css({ overflow: 'hidden' });
-                that.element.kendoStop(true).kendoAnimate(extend( hasCloseAnimation ? {} : that.element.data('effectOptions'), options.animation.close, {
-                                    reverse: !hasCloseAnimation,
-                                    complete: function () {
-                                        that._wrapper.css({ display: 'none' });
-                                        that.trigger(CLOSE);
-                                    }
-                                }));
+                that.wrapper = kendo.wrap(that.element).css({ overflow: HIDDEN });
+                that.element.kendoStop(true).kendoAnimate(options.animation.close);
             }
         },
+
         _mousedown: function(e) {
             var that = this,
                 container = that.element[0],
@@ -166,17 +190,17 @@
                 target = e.target;
 
             if (contains(container, target)) return;
-            if (toggleTarget && (contains($(toggleTarget)[0], target) || $(toggleTarget)[0] === target)) return;
+            if (toggleTarget && contains($(toggleTarget)[0], target)) return;
 
             that.close();
         },
-        _updatePosition: function() {
+
+        _update: function() {
             var that = this,
                 options = that.options;
 
-            align(that._wrapper, $(options.anchor), options.origin, options.position);
-        },
-        _wrapper: $()
+            align(that.wrapper, $(options.anchor), options.origin, options.position);
+        }
     });
 
     ui.plugin("Popup", Popup);
