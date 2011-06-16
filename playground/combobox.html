@@ -108,8 +108,7 @@
 
                 $("#combobox").kendoComboBox({
                     dataSource: [{text: "foo", value: 1}, {text:"bar", value:2}, {text: "baz", value: 3}, {text:"2", value:4}],
-                    autoBind: false,
-                    delay: 2000
+                    autoBind: false
                 });
                 $("#select").kendoComboBox({
                     dataSource: [{text: "foo", value: 1}, {text:"bar", value:2}, {text: "baz", value: 3}, {text:"2", value:4}],
@@ -119,8 +118,7 @@
                     dataTextField: "name",
                     dataValueField: "countryName",
                     dataSource: remoteDataSource,
-                    autoBind: false,
-                    delay: 2000
+                    autoBind: false
                 });
 
                 $("#searchCriteria").bind("change", function() {

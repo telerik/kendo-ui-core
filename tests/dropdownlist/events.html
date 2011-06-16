@@ -196,13 +196,14 @@
                     select = $("<select><option value=1>foo1</option><option value=3>foo3</option></select>")
                                 .bind("change", function() {
                                     origCalled = true;
-                                });
-                var changeWasCalled = false, dropdownlist = new DropDownList(select, {
-                    dataSource: [{text: "foo"}, {text: "bar"}]
-                });
+                                }),
+                    dropdownlist = new DropDownList(select, {
+                        dataSource: [{text: "foo"}, {text: "bar"}]
+                    });
 
                 dropdownlist.wrapper.focus();
 
+                debugger;
                 dropdownlist.ul.children().eq(1).click();
                 ok(origCalled);
             });
