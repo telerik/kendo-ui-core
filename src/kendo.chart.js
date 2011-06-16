@@ -1738,13 +1738,23 @@
         renderContent: function() {
             var output = "",
                 element = this,
-                childrenCount = element.children.length;
+                sortedChildren = element.sortChildren(),
+                childrenCount = sortedChildren.length;
 
             for (var i = 0; i < childrenCount; i++) {
-                output += element.children[i].render();
+                output += sortedChildren[i].render();
             }
 
             return output;
+        },
+
+        sortChildren: function() {
+            var element = this;
+            return mergeSort(element.children, element.compareChildren);
+        },
+
+        compareChildren: function(a, b) {
+            return a.options.zIndex || 0 - b.options.zIndex || 0;
         }
     });
 
@@ -2191,6 +2201,54 @@
         return newMargin;
     }
 
+    // Merge sort is guaranteed to be stable; array.sort() is not
+    // If stable sort is not required use array.sort() for better performance
+    function mergeSort(arr, comparison)
+    {
+        if (arr.length < 2)
+            return arr;
+
+        var middle = parseInt(arr.length / 2),
+            left = arr.slice(0, middle),
+            right = arr.slice(middle, arr.length);
+
+        comparison = comparison || defaultComparison;
+        return merge(mergeSort(left, comparison), mergeSort(right, comparison), comparison);
+    }
+
+    function merge(left, right, comparison)
+    {
+        var result = [];
+
+        while (left.length && right.length) {
+            if (comparison(left[0], right[0]) <= 0) {
+                result.push(left.shift());
+            } else {
+                result.push(right.shift());
+            }
+        }
+
+        while (left.length) {
+            result.push(left.shift());
+        }
+
+        while (right.length) {
+            result.push(right.shift());
+        }
+
+        return result;
+    }
+
+    function defaultComparison(left, right) {
+        if(left == right) {
+            return 0;
+        } else if(left < right) {
+            return -1;
+        } else {
+            return 1;
+        }
+    }
+
     // Exports ================================================================
 
     kendo.ui.plugin("Chart", Chart);
@@ -2208,6 +2266,7 @@
     Chart.Title = Title;
     Chart.Legend = Legend;
     Chart.PlotArea = PlotArea;
+    Chart.ViewElement = ViewElement;
     Chart.SVGFactory = SVGFactory;
     Chart.SVGRoot = SVGRoot;
     Chart.SVGGroup = SVGGroup;
