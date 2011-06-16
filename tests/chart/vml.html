@@ -185,18 +185,23 @@
             (function() {
                 var group;
 
-                module("VMLText", {
+                module("VMLGroup", {
                     setup: function() {
                         group = new Chart.VMLGroup();
                     }
                 });
 
-                test("add group", function() {
-                    group.options["z-index"] = 1;
+                test("renders group", function() {
                     equal(group.render(),
-                        "<kvml:group style='position: absolute;'" +
-                        "coordorigin='0 0' coordsize='1 1'></kvml:group>");
+                        "<div style='position: absolute; white-space: nowrap;'></div>");
                 });
+
+                test("renders children", function() {
+                    group.children.push(contentElementStub);
+                    equal(group.render(),
+                        "<div style='position: absolute; white-space: nowrap;'>Content</div>");
+                });
+
             })();
        </script>
 

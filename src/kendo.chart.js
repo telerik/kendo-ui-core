@@ -609,7 +609,8 @@
                 right: 10,
                 bottom: 10,
                 left: 10
-            }
+            },
+            zIndex: 1
         },
 
         createLabels: function() {
@@ -653,7 +654,9 @@
                 options = legend.options,
                 series = options.series,
                 markerSize = legend.markerSize(),
-                childElements = ChartElement.fn.getViewElements.call(legend, factory);
+                group = factory.group({ zIndex: options.zIndex });
+
+            [].push.apply(group.children, ChartElement.fn.getViewElements.call(legend, factory));
 
             for (var i = 0, length = series.length; i < length; i++) {
                 var color = series[i].color,
@@ -671,10 +674,10 @@
 
                 markerBox.y2 = markerBox.y1 + markerSize;
 
-                childElements.push(factory.rect(markerBox, { fill: color, stroke: color }));
+                group.children.push(factory.rect(markerBox, { fill: color, stroke: color }));
             };
 
-            return childElements;
+            return [ group ];
         },
 
         verticalLayout: function(targetBox) {
@@ -2028,16 +2031,14 @@
         init: function(options) {
             var group = this,
                 options = group.options = extend({}, group.options, options);
-                zIndex = options["z-index"];
 
             ViewElement.fn.init.call(group);
             group.template = VMLGroup.template;
 
             if (!group.template) {
                 group.template = VMLGroup.template = template(
-                    "<kvml:group style='position: absolute;'" +
-                    "coordorigin='0 0' coordsize='1 1'>" +
-                    "</kvml:group>"
+                    "<div style='position: absolute; white-space: nowrap;'>" +
+                    "<%= renderContent() %></div>"
                 );
             }
         }
