@@ -21,54 +21,38 @@
             var TreeView = kendo.ui.TreeView,
                 DataSource = kendo.data.DataSource;
 
-            test('passes', function() { ok(true); });
-/*
-//        kendo.ui.TreeView.getGroupHtml({
-//            data: data,
-//            html: groupHtml,
-//            isAjax: this.isAjax(),
-//            isFirstLevel: $item.hasClass('t-treeview'),
-//            showCheckBoxes: this.showCheckBox,
-//            groupLevel: $index.val(),
-//            isExpanded: isExpanded,
-//            renderGroup: isGroup,
-//            elementId: this.element.id
-//        });
+            module("getGroupHtml");
 
-            test('getGroupHtml with no data renders empty group', function() {
-
+            test("renders empty group when there are no items", function() {
                 var html = TreeView.getGroupHtml({
-                    data: [],
-                    isAjax: null,
-                    isFirstLevel: false,
-                    showCheckBoxes: false,
-                    isExpanded: true
+                    items: [],
+                    treeview: {},
+                    group: {
+                        isExpanded: true
+                    }
                 });
 
                 equal(html, "<ul class='t-group'></ul>");
             });
 
-            test('getGroupHtml for first level renders lines class', function() {
-
+            test("renders lines class for first level", function() {
                 var html = TreeView.getGroupHtml({ 
-                    data: [],
-                    isAjax: null,
-                    isFirstLevel: true,
-                    showCheckBoxes: false,
-                    isExpanded: true
+                    items: [],
+                    group: {
+                        isFirstLevel: true,
+                        isExpanded: true
+                    }
                 });
 
                 equal(html, "<ul class='t-group t-treeview-lines'></ul>");
             });
 
-            test('getGroupHtml should render hidden group if it is not expanded', function() {
-
+            test("renders hidden group if it is not expanded", function() {
                 var html = TreeView.getGroupHtml({
-                    data: [],
-                    isAjax: null,
-                    isFirstLevel: false,
-                    showCheckBoxes: false,
-                    isExpanded: false
+                    items: [],
+                    group: {
+                        isExpanded: false
+                    }
                 });
 
                 equal(html, "<ul class='t-group' style='display:none'></ul>");
@@ -85,185 +69,220 @@
 //            elementId: options.elementId
 //        });
 
-            test('rendering of links for items with NavigateUrl', function() {
+            module("getItemHtml");
 
-                var $item = $(TreeView.getGroupHtml({
-                    data: [{
-                        Text: "text",
-                        NavigateUrl: "http://google.com/"
-                    }],
-                    isAjax: false,
-                    isFirstLevel: false,
-                    showCheckBoxes: false
+            test("renders of links for items with NavigateUrl", function() {
+                var $item = $(TreeView.getItemHtml({
+                    item: {
+                        text: "text",
+                        url: "http://kendoui.com/"
+                    }
                 }));
 
-                equal($item.find("a[href='http://google.com/']").length, 1);
+                equal($item.find("a[href='http://kendoui.com/']").length, 1);
             });
 
-            test('rendering disabled state on disabled items', function() {
-
-                var $item = $(TreeView.getGroupHtml({
-                    data: [{
-                        Text: "text",
-                        Enabled: false
-                    }],
-                    isAjax: false,
-                    isFirstLevel: false,
-                    showCheckBoxes: false,
-                    itemIndex: 0,
-                    itemsCount: 1
+            test("renders disabled state on disabled items", function() {
+                var $item = $(TreeView.getItemHtml({
+                    item: {
+                        text: "text",
+                        enabled: false
+                    }
                 }));
 
                 equal($item.find(".t-in.t-state-disabled").length, 1);
             });
 
-            test('rendering selected state on selected items', function() {
-
-                var $item = $(TreeView.getGroupHtml({
-                    data: [{
-                        Text: "text",
-                        Selected: true
-                    }],
-                    isAjax: false,
-                    isFirstLevel: false,
-                    showCheckBoxes: false,
-                    itemIndex: 0,
-                    itemsCount: 1
+            test("renders selected state on selected items", function() {
+                var $item = $(TreeView.getItemHtml({
+                    item: {
+                        text: "text",
+                        selected: true
+                    }
                 }));
 
                 equal($item.find(".t-in.t-state-selected").length, 1);
             });
 
-            test('getItemHtml renders collapsed items by default', function() {
-
+            test("renders collapsed subgroups by default", function() {
                 var $item = $(TreeView.getItemHtml({
                     item: {
-                        Text: "Collapsed",
-                        Items: [
-                            { Text: "Should not be visible" }
+                        text: "Collapsed",
+                        items: [
+                            { text: "Should not be visible" }
                         ]
-                    },
-                    isAjax: false,
-                    isFirstLevel: false,
-                    showCheckBoxes: false,
-                    itemIndex: 0,
-                    itemsCount: 1
+                    }
                 }));
                 
-                equal(
-'<li class="t-item t-last">\
-<div class="t-bot">\
-<span class="t-icon t-plus"></span><span class="t-in">Collapsed</span>\
-</div>\
-<ul class="t-group" style="display:none">\
-<li class="t-item t-last"><div class="t-bot"><span class="t-in">Should not be visible</span></div></li>\
-</ul>\
-</li>', html.string());
+                equal($item.find(".t-group").css("display"), "none");
             });
 
-            test('getItemHtml should render span wrapper for the checkNodes', function() {
+
+            test("renders spriteCssClass", function() {
+                var $item = $(TreeView.getItemHtml({
+                    item: {
+                        text: "text",
+                        spriteCssClass: "cssClass1"
+                    }
+                }));
+
+                equal($item.find('.t-sprite').length, 1);
+                ok($item.find('.t-sprite').hasClass('cssClass1'));
+            });
+
+            test("renders images", function() {
+                var $item = $(TreeView.getItemHtml({
+                    item: {
+                        text: "text",
+                        imageUrl: "foo"
+                    }
+                }));
+
+                var image = $item.find(".t-image");
+
+                equal(image.length, 1);
+                equal(image.attr("src"), "foo");
+            });
+
+            test("renders item value", function() {
+                var $item = $(TreeView.getItemHtml({
+                    item: {
+                        text: "text",
+                        value: "foo"
+                    }
+                }));
+
+                var input = $item.find(".t-input");
+
+                equal(input.length, 1);
+                equal(input.val(), "foo");
+                equal(input.attr("type"), "hidden");
+            });
+
+            test("renders text", function() {
+                var $item = $(TreeView.getItemHtml({
+                    item: {
+                        text: "foo"
+                    }
+                }));
+
+                equal($item.text(), "foo");
+            });
+
+            test("renders text encoded", function() {
+                var $item = $(TreeView.getItemHtml({
+                    item: {
+                        text: "foo>>"
+                    }
+                }));
+
+                equal($item.text(), "foo>>");
+            });
+
+            test("renders encoded text as html", function() {
+                var $item = $(TreeView.getItemHtml({
+                    item: {
+                        text: "<span class='foo'></span>",
+                        encoded: false
+                    }
+                }));
+
+                equal($item.find(".foo").length, 1);
+            });
+/*
+            module("Rendering / Checkboxes");
+
+            test("getItemHtml should render span wrapper for the checkNodes", function() {
                 
                 var $item = $(TreeView.getItemHtml({
                     item: {
-                        Text: "text",
+                        text: "text",
                         Checkable: true
-                    },
-                    isAjax: false,
-                    isFirstLevel: false,
-                    showCheckBoxes: true,
-                    itemIndex: 0,
-                    itemsCount: 1
+                    }
                 }));
 
                 equal($item.find('> div > .t-checkbox').length, 1, 'Does not render checkbox group wrapper');
             });
 
-            test('getItemHtml should render checkbox and hidden input', function() {
+            test("getItemHtml should render checkbox and hidden input", function() {
 
                 var $item = $(TreeView.getItemHtml({
                     item: {
-                        Text: "text",
+                        text: "text",
                         Checkable: true
                     },
-                    isAjax: false,
-                    isFirstLevel: false,
-                    showCheckBoxes: true,
-                    itemIndex: 0,
-                    itemsCount: 1
+                    showCheckBoxes: true
                 }));
 
                 equal($item.find('.t-input[type="hidden"]').length, 1);
                 equal($item.find('.t-input[type="checkbox"]').length, 1);
             });
 
-            test('getItemHtml should render hidden input with name attr in checkbox wrapper', function() {
+            test("getItemHtml should render hidden input with name attr in checkbox wrapper", function() {
 
                 var $item = $(TreeView.getItemHtml({
                     item: {
-                        Text: "text",
+                        text: "text",
                         Checkable: true
                     },
-                    isAjax: false,
-                    isFirstLevel: false,
-                    showCheckBoxes: true,
-                    itemIndex: 0,
-                    itemsCount: 1,
-                    elementId: "TreeView1"
+                    treeview: {
+                        showCheckBoxes: true,
+                        id: "TreeView1"
+                    }
                 }));
 
                 equal($item.find('.t-input[type="hidden"]').attr('name'), "TreeView1_checkedNodes.Index");
             });
 
-            test('getItemHtml should render hidden input in checkbox wrapper with value 0 if it is first level', function() {
+            test("getItemHtml should render hidden input in checkbox wrapper with value 0 if it is first level", function() {
                 
                 var $item = $(TreeView.getItemHtml({
                     item: {
-                        Text: "text",
-                        Checkable: true
+                        text: "text",
+                        Checkable: true,
+                        index: 0
                     },
-                    isAjax: false,
-                    isFirstLevel: false,
-                    showCheckBoxes: true,
-                    itemIndex: 0,
-                    itemsCount: 1,
-                    elementId: "TreeView1",
-                    groupLevel: ""
+                    treeview: {
+                        showCheckBoxes: true,
+                        id: "TreeView1"
+                    },
+                    group: {
+                        level: ""
+                    }
                 }));
 
                 equal($item.find('.t-input[type="hidden"]').attr('value'), "0");
             });
 
-            test('getItemHtml should render hidden input in checkbox wrapper with value created by group level', function() {
+            test("getItemHtml should render hidden input in checkbox wrapper with value created by group level", function() {
 
                 var $item = $(TreeView.getItemHtml({
                     item: {
-                        Text: "text",
-                        Checkable: true
+                        text: "text",
+                        Checkable: true,
+                        index: 2
                     },
-                    isAjax: false,
-                    isFirstLevel: false,
-                    showCheckBoxes: true,
-                    itemIndex: 2,
-                    itemsCount: 3,
-                    elementId: "TreeView1",
-                    groupLevel: "1:0"
+                    treeview: {
+                        showCheckBoxes: true,
+                        id: "TreeView1"
+                    },
+                    group: {
+                        level: "1:0"
+                    }
                 }));
 
                 equal($item.find('.t-input[type="hidden"]').attr('value'), "1:0:2");
             });
 
-            test('getItemHtml should render checkbox input with name attr', function() {
+            test("getItemHtml should render checkbox input with name attr", function() {
 
                 var $item = $(TreeView.getItemHtml({
                     item: {
-                        Text: "text",
-                        Checkable: true
+                        text: "text",
+                        Checkable: true,
+                        index: 0
                     },
-                    isAjax: false,
-                    isFirstLevel: false,
                     showCheckBoxes: true,
-                    itemIndex: 0,
-                    itemsCount: 1,
                     elementId: "TreeView1",
                     groupLevel: "0"
                 }));
@@ -271,11 +290,11 @@
                 equal($item.find('.t-input[type="checkbox"]').attr('name'), "TreeView1_checkedNodes[0:0].Checked");
             });
 
-            test('getItemHtml should render checkbox input with value true if item is checked', function() {
+            test("getItemHtml should render checkbox input with value true if item is checked", function() {
 
                 var $item = $(TreeView.getItemHtml({
                     item: {
-                        Text: "text",
+                        text: "text",
                         Checkable: true,
                         Checked: true
                     },
@@ -291,11 +310,11 @@
                 equal($item.find('.t-input[type="checkbox"]').attr('value'), "True");
             });
 
-            test('getItemHtml should render disabled checkbox with disabled state class', function() {
+            test("getItemHtml should render disabled checkbox with disabled state class", function() {
 
                 var $item = $(TreeView.getItemHtml({
                     item: {
-                        Text: "text",
+                        text: "text",
                         Checkable: true,
                         Checked: true,
                         Enabled: false
@@ -312,11 +331,11 @@
                 equal($item.find('.t-input[type="checkbox"]').attr('disabled'), true);
             });
 
-            test('getItemHtml should render checked checkbox Checked property is true', function() {
+            test("getItemHtml should render checked checkbox Checked property is true", function() {
 
                 var $item = $(TreeView.getItemHtml({
                     item: {
-                        Text: "text",
+                        text: "text",
                         Checkable: true,
                         Checked: true
                     },
@@ -332,11 +351,11 @@
                 equal($item.find('[type=checkbox]').attr('checked'), true);
             });
 
-            test('getItemHtml should render hidden inputs containing dataItem values if item is checked', function() {
+            test("getItemHtml should render hidden inputs containing dataItem values if item is checked", function() {
 
                 var $item = $(TreeView.getItemHtml({
                     item: {
-                        Text: "text",
+                        text: "text",
                         Value: "1",
                         Checkable: true,
                         Checked: true
@@ -352,26 +371,6 @@
 
                 equal($item.find('[type=hidden]').eq(1).val(), "1");
                 equal($item.find('[type=hidden]').eq(2).val(), "text");
-            });
-
-            test('getItemHtml should render SpriteCssClasses', function() {
-
-                var $item = $(TreeView.getItemHtml({
-                    item: {
-                        Text: "text",
-                        SpriteCssClasses: "cssClass1"
-                    },
-                    isAjax: false,
-                    isFirstLevel: false,
-                    showCheckBoxes: true,
-                    itemIndex: 0,
-                    itemsCount: 1,
-                    elementId: "TreeView1",
-                    groupLevel: "0"
-                }));
-
-                equal($item.find('.t-sprite').length, 1);
-                ok($item.find('.t-sprite').hasClass('cssClass1'));
             });
 */
         </script>
