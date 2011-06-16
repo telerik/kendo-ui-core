@@ -30,8 +30,8 @@
                 var series,
                     plotArea,
                     viewFactory,
-                    positiveSeries = { data: [1, 2], label: {} },
-                    negativeSeries = { data: [-1, -2], label: {} },
+                    positiveSeries = { data: [1, 2], labels: {} },
+                    negativeSeries = { data: [-1, -2], labels: {} },
                     VALUE_AXIS_MAX = 2,
                     CATEGORY_AXIS_Y = 2,
                     TOLERANCE = 0.1;
@@ -287,7 +287,7 @@
                         setupBarChart({
                             series: [{
                                 data: [1, -1],
-                                label: {}
+                                labels: {}
                             }],
                             isStacked: true }
                         );
@@ -386,7 +386,7 @@
                 // ------------------------------------------------------------
                 module("Bar Chart / Labels / Positive Values", {
                     setup: function() {
-                        setupBarChart({ series: [{ data: positiveData, label: {visible: true} }] });
+                        setupBarChart({ series: [{ data: positiveData, labels: {visible: true} }] });
                     }
                 });
 
@@ -401,7 +401,7 @@
                 test("bars labels have insideBase position", function() {
                     setupBarChart({ series: [{
                         data: positiveData,
-                        label: {
+                        labels: {
                             position: "insideBase",
                             visible: true
                         }
@@ -416,7 +416,7 @@
                 test("bars labels have outsideEnd position", function() {
                     setupBarChart({ series: [{
                         data: positiveData,
-                        label: {
+                        labels: {
                             position: "outsideEnd",
                             visible: true
                         }
@@ -431,7 +431,7 @@
                 test("bars labels have center position", function() {
                     setupBarChart({ series: [{
                         data: positiveData,
-                        label: {
+                        labels: {
                             position: "center",
                             visible: true
                         }
@@ -447,7 +447,7 @@
                 // ------------------------------------------------------------
                 module("Bar Chart / Labels / Negative Values", {
                     setup: function() {
-                        setupBarChart({ series: [{ data: negativeData, label: {visible: true} }] });
+                        setupBarChart({ series: [{ data: negativeData, labels: {visible: true} }] });
                     }
                 });
 
@@ -462,7 +462,7 @@
                 test("bars labels have insideBase position", function() {
                     setupBarChart({ series: [{
                         data: negativeData,
-                            label: {
+                            labels: {
                             position: "insideBase",
                             visible: true
                         }
@@ -477,7 +477,7 @@
                 test("bars labels have outsideEnd position", function() {
                     setupBarChart({ series: [{
                         data: negativeData,
-                        label: {
+                        labels: {
                             position: "outsideEnd",
                             visible: true
                         }
@@ -492,7 +492,7 @@
                 test("bars labels have center position", function() {
                     setupBarChart({ series: [{
                         data: negativeData,
-                        label: {
+                        labels: {
                             position: "center",
                             visible: true
                         }
@@ -556,7 +556,7 @@
                     setup: function() {
                         setupBarChart({ series: [{
                             data: positiveData,
-                            label: {
+                            labels: {
                                 visible: true
                             }
                         }], isVertical: false });
@@ -566,7 +566,7 @@
                 test("bars labels have insideEnd position", function() {
                     setupBarChart({ series: [{
                         data: positiveData,
-                        label: {
+                        labels: {
                             visible: true
                         }
                     }], isVertical: false });
@@ -580,7 +580,7 @@
                 test("bars labels have insideBase position", function() {
                     setupBarChart({ series: [{
                         data: positiveData,
-                        label: {
+                        labels: {
                             position: "insideBase",
                             visible: true
                         }
@@ -595,7 +595,7 @@
                 test("bars labels have outsideEnd position", function() {
                     setupBarChart({ series: [{
                         data: positiveData,
-                        label: {
+                        labels: {
                             position: "outsideEnd",
                             visible: true
                         }
@@ -610,7 +610,7 @@
                 test("bars labels have center position", function() {
                     setupBarChart({ series: [{
                         data: positiveData,
-                        label: {
+                        labels: {
                             position: "center",
                             visible: true
                         }
@@ -628,7 +628,7 @@
                     setup: function() {
                     setupBarChart({ series: [{
                         data: negativeData,
-                        label: {
+                        labels: {
                             visible: true
                         }
                     }], isVertical: false });
@@ -646,7 +646,7 @@
                 test("bars labels have insideBase position", function() {
                     setupBarChart({ series: [{
                         data: negativeData,
-                        label: {
+                        labels: {
                             position: "insideBase",
                             visible: true
                         }
@@ -661,7 +661,7 @@
                 test("bars labels have outsideEnd position", function() {
                     setupBarChart({ series: [{
                         data: negativeData,
-                        label: {
+                        labels: {
                             position: "outsideEnd",
                             visible: true
                         }
@@ -676,7 +676,7 @@
                 test("bars labels have center position", function() {
                     setupBarChart({ series: [{
                         data: negativeData,
-                        label: {
+                        labels: {
                             position: "center",
                             visible: true
                         }
@@ -694,8 +694,8 @@
                 var series,
                     plotArea,
                     viewFactory,
-                    positiveSeries = { data: [1, 2], label: {} },
-                    negativeSeries = { data: [-1, -2], label: {} },
+                    positiveSeries = { data: [1, 2], labels: {} },
+                    negativeSeries = { data: [-1, -2], labels: {} },
                     CATEGORY_AXIS_X = 2,
                     TOLERANCE = 0.1;
 
