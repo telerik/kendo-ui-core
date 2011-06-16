@@ -781,6 +781,11 @@
 
                 ok(!result[0].hasSubgroups);
             });
+            test("aggregate return empty object if data is undefined", function() {
+                var result = new Query(undefined).aggregate([{ field: "foo", aggregate: "sum" }, { field: "bar", aggregate: "count" }]);
+
+                ok(result);
+            });
         </script>
     </body>
 </html>
