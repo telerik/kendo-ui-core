@@ -46,8 +46,7 @@
                             field: "a",
                             label: {
                                 font: "12px Verdana, sans-serif",
-                                visible: true,
-                                position: "insideEnd"
+                                visible: true
                                 // "outsideEnd", "insideEnd", "insideBase", "center"
                             }
                         }, {
@@ -55,17 +54,14 @@
                             field: "b",
                             label: {
                                 font: "12px Verdana, sans-serif",
-                                visible: true,
-                                position: "insideEnd"
+                                visible: true
                                 // "outsideEnd", "insideEnd", "insideBase", "center"
                             }
                         }, {
                             name: "Value C",
                             field: "c",
                             label: {
-                                font: "12px Verdana, sans-serif",
-                                visible: true,
-                                position: "insideEnd"
+                                font: "12px Verdana, sans-serif"
                                 // "outsideEnd", "insideEnd", "insideBase", "center"
                             }
                         }
@@ -175,8 +171,13 @@
                 <fieldset style="width: 100px;">
                     <legend>Labels</legend>
                     <p>
+                        <input id="center" name="labelType"
+                           type="radio" value="center" autocomplete="off" />
+                        <label for="center">center</label>
+                    </p>
+                    <p>
                         <input id="insideEnd" name="labelType"
-                           type="radio" checked="checked" value="insideEnd" autocomplete="off" />
+                           type="radio" value="insideEnd" autocomplete="off" />
                         <label for="insideEnd">insideEnd</label>
                     </p>
                     <p>
@@ -186,13 +187,8 @@
                     </p>
                     <p>
                         <input id="outsideEnd" name="labelType"
-                           type="radio" value="outsideEnd" autocomplete="off" />
+                           type="radio" checked="checked" value="outsideEnd" autocomplete="off" />
                         <label for="outsideEnd">outsideEnd</label>
-                    </p>
-                    <p>
-                        <input id="center" name="labelType"
-                           type="radio" value="center" autocomplete="off" />
-                        <label for="center">center</label>
                     </p>
                 </fieldset>
             </div>
