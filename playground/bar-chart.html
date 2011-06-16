@@ -19,10 +19,8 @@
                     },
                     legend: {
                         font: "12px Verdana, sans-serif",
-                        position: "custom", // "top", "bottom", "left", "right"
-                        visible: true,
-                        offsetY: 200,
-                        offsetX: 100
+                        position: "right", // "top", "bottom", "left", "right"
+                        visible: true
                     },
                     dataSource: [
                         {
@@ -46,7 +44,7 @@
                         {
                             name: "Value A",
                             field: "a",
-                            label: {
+                            labels: {
                                 font: "12px Verdana, sans-serif",
                                 visible: true
                                 // "outsideEnd", "insideEnd", "insideBase", "center"
@@ -54,7 +52,7 @@
                         }, {
                             name: "Value B",
                             field: "b",
-                            label: {
+                            labels: {
                                 font: "12px Verdana, sans-serif",
                                 visible: true
                                 // "outsideEnd", "insideEnd", "insideBase", "center"
@@ -62,8 +60,9 @@
                         }, {
                             name: "Value C",
                             field: "c",
-                            label: {
-                                font: "12px Verdana, sans-serif"
+                            labels: {
+                                font: "12px Verdana, sans-serif",
+                                visible: true
                                 // "outsideEnd", "insideEnd", "insideBase", "center"
                             }
                         }
@@ -131,7 +130,7 @@
                         borderWidth: 0,
                         borderColor: "",
                         glassEffect: false,
-                        label: {
+                        labels: {
                             font: "12px Verdana, sans-serif",
                             visible: false,
                             position: "outsideEnd",
@@ -207,7 +206,7 @@
                 for (var i = 0, length = chart.options.series.length; i < length; i++) {
                     series[i].type = type;
                     series[i].stack = stack;
-                    series[i].label.position = labelPosition;
+                    series[i].labels.position = labelPosition;
                 };
 
                 chart.refresh();
