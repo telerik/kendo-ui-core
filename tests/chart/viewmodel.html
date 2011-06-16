@@ -258,6 +258,33 @@
                     }
                 });
 
+                test("renders legend in a group", function() {
+                    legend = new Chart.Legend({
+                        series: [ { name: "Series 1" } ]
+                    });
+
+                    legend.updateLayout(chartBox);
+                    legend.getViewElements(viewFactory);
+                    equal(viewFactory.log.group.length, 1);
+                });
+
+                test("sets zIndex on group", function() {
+                    legend = new Chart.Legend({
+                        series: [ { name: "Series 1" } ],
+                        zIndex: 10
+                    });
+
+                    legend.updateLayout(chartBox);
+                    legend.getViewElements(viewFactory);
+                    equal(viewFactory.log.group[0].options.zIndex, 10);
+                });
+
+                test("default zIndex is 1", function() {
+                    legend = new Chart.Legend();
+
+                    equal(legend.options.zIndex, 1);
+                });
+
                 test("creates labels for series", 1, function() {
                     legend = new Chart.Legend({
                         series: [ { name: "Series 1" } ]

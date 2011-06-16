@@ -4,6 +4,7 @@ function ViewFactoryStub() {
 
     log.rect = [];
     log.text = [];
+    log.group = [];
 }
 
 ViewFactoryStub.prototype = {
@@ -22,6 +23,11 @@ ViewFactoryStub.prototype = {
             content: content,
             style: style
         });
+    },
+
+    group: function(options) {
+        this.log.group.push({options: options});
+        return new kendo.ui.Chart.ViewElement();
     }
 };
 
