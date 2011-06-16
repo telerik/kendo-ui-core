@@ -11,6 +11,7 @@
         SELECTED = "t-state-selected",
         DISABLED = "t-state-disabled",
         SELECT = "select",
+        CHARACTER = "character",
         proxy = $.proxy;
 
     function selectText(element, selectionStart, selectionEnd) {
@@ -102,7 +103,7 @@
                 ATTRIBUTE = "disabled";
 
             if (enable === false) {
-                wrapper.addClass(DISABLED)
+                wrapper.addClass(DISABLED);
                 input.attr(ATTRIBUTE, ATTRIBUTE);
                 element.attr(ATTRIBUTE, ATTRIBUTE);
                 arrow.unbind(CLICK);
@@ -128,7 +129,7 @@
                 that.dataSource.bind(CHANGE, proxy(that._select, that));
                 that.dataSource.query();
             } else {
-                that.popup.open()
+                that.popup.open();
                 if (selected) {
                     that._scroll(selected[0]);
                 }
@@ -257,8 +258,7 @@
             } else if (length >= options.minLength) {
 
                 if (options.filter === "none") {
-                    var that = this,
-                        predicate = function(dataItem) {
+                    var predicate = function(dataItem) {
                             var text = that._text(dataItem);
                             if(text !== undefined) {
                                 return (text + "").toLowerCase().indexOf(word.toLowerCase()) === 0;
@@ -267,7 +267,7 @@
                         handler = function () {
                             that.search();
                             that.dataSource.unbind(CHANGE, handler);
-                        }
+                        };
 
                     if (!that.ul[0].firstChild) {
                         that.dataSource.bind(CHANGE, handler);
@@ -565,7 +565,7 @@
 
             wrapper = element.parent();
 
-            if (!wrapper.is("div")) {
+            if (!wrapper.is("div.t-widget")) {
                 wrapper = element.hide().wrap("<div />").parent();
             }
 
