@@ -35,8 +35,6 @@
 
             List.fn.init.call(that, element, options);
 
-            that._customOption();
-
             that._wrapper();
 
             that._input();
@@ -74,9 +72,9 @@
             that.previous = that.value();
 
             if (that.options.autoBind) {
-                that.showBusy();
-                that.dataSource.bind(CHANGE, proxy(that._select, that));
-                that.dataSource.query();
+                that._select();
+            } else if (that.element.is(SELECT)) {
+                that.input.val(that.element.children(":selected").text());
             }
         },
 
@@ -125,9 +123,7 @@
 
             if (!that.ul[0].firstChild || (that._filtered && selected)) {
                 that._filtered = false;
-                that.showBusy();
-                that.dataSource.bind(CHANGE, proxy(that._select, that));
-                that.dataSource.query();
+                that._select();
             } else {
                 that.popup.open();
                 if (selected) {
@@ -141,33 +137,6 @@
             that.input[0].focus();
             clearTimeout(that._bluring);
             that[that.popup.visible() ? CLOSE : OPEN]();
-        },
-
-        refresh: function() {
-            var that = this,
-                ul = that.ul,
-                options = that.options,
-                height = options.height,
-                data = that.dataSource.view(),
-                length = data.length;
-
-            ul[0].innerHTML = kendo.render(that.template, data);
-            ul.height(length * 20 > height ? height : "auto");
-
-            that._rebuildSelect(data);
-
-            if (options.suggest && length) {
-                that.current($(that.ul[0].firstChild));
-                that.suggest(that._current);
-            }
-
-            if (!options.autoBind) {
-                that.popup[length ? OPEN : CLOSE]();
-            }
-
-            options.autoBind = false;
-
-            that.hideBusy();
         },
 
         showBusy: function () {
@@ -219,19 +188,39 @@
             return idx;
         },
 
-        select: function(li) {
+        refresh: function() {
+            var that = this,
+                ul = that.ul,
+                options = that.options,
+                height = options.height,
+                data = that.dataSource.view(),
+                length = data.length;
 
+            ul[0].innerHTML = kendo.render(that.template, data);
+            ul.height(length * 20 > height ? height : "auto");
+
+            that._rebuildSelect(data);
+
+            if (options.suggest && length) {
+                that.current($(that.ul[0].firstChild));
+                that.suggest(that._current);
+            }
+
+            if (!options.autoBind) {
+                that.popup[length ? OPEN : CLOSE]();
+            }
+
+            options.autoBind = false;
+
+            that.hideBusy();
+        },
+
+        select: function(li) {
             var that = this,
                 text,
                 value,
-                current = that._selected,
                 idx = that.highlight(li),
                 data = that.dataSource.view();
-
-            if (current) {
-                current.removeClass(SELECTED);
-                that._selected = null;
-            }
 
             if (idx !== -1) {
                 that._selected = that._current.addClass(SELECTED);
@@ -247,9 +236,10 @@
 
         search: function() {
             var that = this,
-                options = that.options,
                 word = that.text(),
-                length = word.length;
+                length = word.length,
+                options = that.options,
+                dataSource = that.dataSource;
 
             clearTimeout(that._typing);
 
@@ -260,32 +250,32 @@
                 if (options.filter === "none") {
                     var predicate = function(dataItem) {
                             var text = that._text(dataItem);
-                            if(text !== undefined) {
+                            if (text !== undefined) {
                                 return (text + "").toLowerCase().indexOf(word.toLowerCase()) === 0;
                             }
                         },
                         handler = function () {
                             that.search();
-                            that.dataSource.unbind(CHANGE, handler);
+                            dataSource.unbind(CHANGE, handler);
                         };
 
                     if (!that.ul[0].firstChild) {
-                        that.dataSource.bind(CHANGE, handler);
-                        that.dataSource.read();
+                        dataSource.bind(CHANGE, handler);
+                        dataSource.read();
                         return;
                     }
 
                     if (that.highlight(predicate) !== -1) {
-                        if (that.options.suggest && that._current) {
+                        if (options.suggest && that._current) {
                             that.suggest(that._current);
                         }
                         that.open();
                     }
 
                 } else {
-                    that._filtered = true;
                     that.current(null);
-                    that.dataSource.filter( {field: options.dataTextField, operator: options.filter, value: word } );
+                    that._filtered = true;
+                    dataSource.filter( {field: options.dataTextField, operator: options.filter, value: word } );
                 }
             }
         },
@@ -317,7 +307,6 @@
 
         text: function (text) {
             var that = this,
-                element = that.element,
                 input = that.input[0];
 
             if (text !== undefined) {
@@ -326,11 +315,8 @@
                 });
 
                 if (!that._selected) {
-                    if (element.is(SELECT)) {
-                        that._custom.text(text);
-                    }
-
-                    element[0].value = text;
+                    that._customOption(text);
+                    that.element[0].value = text;
                 }
 
                 input.value = text;
@@ -349,11 +335,12 @@
 
                 if (data[0]) {
                     index = $.map(data, function(dataItem, idx) {
-                        var val = that._value(dataItem);
+                        var dataValue = that._value(dataItem);
+                        if (dataValue === undefined) {
+                            dataValue = that._text(dataItem);
+                        }
 
-                        val = val !== undefined ? val : that._text(dataItem);
-
-                        if (val == value) {
+                        if (dataValue == value) {
                             return idx;
                         }
                     })[0];
@@ -362,18 +349,13 @@
                 if (index !== undefined) {
                     that.select(index);
                 } else {
-                    if (that._current) {
-                        that._selected.removeClass(SELECTED);
-                        that.current(null);
-                    }
-
-                    if (that.element.is(SELECT)) {
-                        that._custom.text(value);
-                    }
+                    that.current(null);
+                    that._customOption(value);
 
                     element.val(value);
                     that.text(value);
                 }
+
                 that.previous = element.val();
             } else {
                 return element.val();
@@ -407,13 +389,17 @@
             return caret;
         },
 
-        _customOption: function() {
+        _customOption: function(value) {
             var that = this,
-                element = that.element;
+                element = that.element,
+                custom = that._custom;
 
             if (element.is(SELECT)) {
-                that._custom = $("<option></option>");
-                element.append(that._custom);
+                if (!custom) {
+                    custom = that._custom = $("<option/>");
+                    element.append(custom);
+                }
+                custom.text(value);
             }
         },
 
@@ -455,23 +441,6 @@
 
             that.dataSource = DataSource.create(dataSource)
                                         .bind(CHANGE, proxy(that.refresh, that));
-        },
-
-        _select: function() {
-            var that = this,
-                value = that.value();
-
-            if (value) {
-                that.value(value);
-            } else {
-                that.select(that.options.index);
-            }
-
-            that.previous = that.value();
-
-            that.dataSource
-                .unbind(CHANGE)
-                .bind(CHANGE, proxy(that.refresh, that));
         },
 
         _input: function() {
@@ -532,9 +501,7 @@
             }
 
             setTimeout(function() {
-                var current = that._selected;
-                if (current && !that.input.val()) {
-                    current.removeClass(SELECTED);
+                if (!that.input.val()) {
                     that.current(null);
                 }
             });
@@ -546,17 +513,34 @@
 
             that._typing = setTimeout(function() {
                 var value = that.input.val();
-                if (!value && that._selected) {
-                    that._selected.removeClass(SELECTED);
-                    that._selected = null;
-                    that.current(null);
-                }
                 if (value && that._previousText !== value) {
                     that._previousText = value;
                     that.search();
                 }
             }, that.options.delay);
         },
+
+        _select: function() {
+            var that = this,
+                dataSource = that.dataSource,
+                handler = function () {
+                    var value = that.value();
+                    if (value) {
+                        that.value(value);
+                    } else {
+                        that.select(that.options.index);
+                    }
+
+                    that.previous = that.value();
+                    dataSource.unbind(CHANGE, handler);
+                };
+
+            dataSource.bind(CHANGE, handler);
+
+            that.showBusy();
+            that.dataSource.query();
+        },
+
 
         _wrapper: function() {
             var that = this,
@@ -601,7 +585,6 @@
                 }
 
                 that.element.html(options.join(""));
-                that._customOption();
 
                 that.element.val(value);
             }

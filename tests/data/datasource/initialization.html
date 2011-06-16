@@ -122,42 +122,6 @@
                 equal(dataSource.data()[1].value, "2");
             });
 
-            test("rebuild select options if data", function() {
-                var select = $("<select><option value=1>foo1</option><option value=2>foo2</option><option value=3>foo3</option></select>"),
-                    dataSource = DataSource.create({
-                        select: select,
-                        fields: [ { field: "text" }, { field: "value" } ],
-                        data: [{text: "Foo", value: 0}, {text: 0, value:5}]
-                    });
-
-                dataSource.read();
-                var children = select.children();
-
-                equal(children.length, 2);
-                equal(children.eq(0).text(), "Foo");
-                equal(children.eq(0).val(), "0");
-                equal(children.eq(1).text(), "0");
-                equal(children.eq(1).val(), "5");
-            });
-
-            test("select options are not builded if ", function() {
-                var select = $("<select><option value=1>foo1</option><option value=2>foo2</option><option value=3>foo3</option></select>"),
-                    dataSource = DataSource.create({
-                        select: select,
-                        fields: [ { field: "text" }, { field: "value" } ],
-                        data: [{text: "Foo", value: 4}, {text:"Bar", value:5}]
-                    });
-
-                dataSource.read();
-                var children = select.children();
-
-                equal(children.length, 2);
-                equal(children.eq(0).text(), "Foo");
-                equal(children.eq(0).val(), "4");
-                equal(children.eq(1).text(), "Bar");
-                equal(children.eq(1).val(), "5");
-            });
-
             test("initialize data source from array", function() {
                 var data = [1, 2],
                     dataSource = DataSource.create(data);

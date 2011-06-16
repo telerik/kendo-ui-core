@@ -28,13 +28,16 @@
 
             if (candidate !== undefined) {
                 if (that._current) {
-                    that._current.removeClass(FOCUSED);
+                    that._current.removeClass(FOCUSED).removeClass("t-state-selected");
                 }
 
                 if (candidate) {
                     candidate.addClass(FOCUSED);
                     that._scroll(candidate[0]);
+                } else {
+                    that._selected = candidate;
                 }
+
                 that._current = candidate;
             } else {
                 return that._current;

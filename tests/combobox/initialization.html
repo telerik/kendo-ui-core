@@ -57,14 +57,19 @@
                 equal(options.test, 1);
            });
 
-           test("wraps element if no wrapper div and hide element", function() {
+           test("wraps element if no wrapper div.t-widget and hide element", function() {
+               input.wrap("<div class='test'/>");
+
                input.kendoComboBox();
 
                var wrapper = input.data("kendoComboBox").wrapper;
 
                ok(wrapper.is("div"));
+               ok(wrapper.parent().is("div.test"));
                ok(wrapper.hasClass("t-widget t-combobox t-header"));
                ok(!input.is(":visible"));
+
+               input.parent().remove();
            });
 
            test("create text input", function() {
@@ -148,7 +153,7 @@
                data = combobox.dataSource.view();
 
                ok(combobox.dataSource);
-               equal(data.length, 3);
+               equal(data.length, 2);
                equal(data[0].text, "Chai");
                equal(data[0].value, "1");
 
@@ -159,6 +164,13 @@
                    combobox = new ComboBox(select);
 
                equal(combobox.options.index, 1);
+           });
+
+           test("set text if select and not autoBind", function() {
+               var select = $("<select><option value=1>Chai</option><option value=1 selected='selected'>Chai</option></select>"),
+               combobox = new ComboBox(select, {autoBind: false});
+
+               equal(combobox.input.val(), "Chai");
            });
 
            test("retrived data from OPTIONS does not override options.dataSource", function() {
@@ -275,6 +287,27 @@
                ok(combobox.wrapper.hasClass("t-state-disabled"));
                ok(combobox.input.prop("disabled"));
            });
+
+           test("rebuild select options if data", function() {
+               var select = $("<select><option value=1>foo1</option><option value=2>foo2</option><option value=3>foo3</option></select>"),
+               combobox = new ComboBox(select, {
+                   dataSource: [{text: "Foo", value: 0}, {text: 0, value:5}]
+               });
+
+               setTimeout(function() {
+                   var children = select.children();
+
+                   equal(children.length, 2);
+                   equal(children.eq(0).text(), "Foo");
+                   equal(children.eq(0).val(), "0");
+                   equal(children.eq(1).text(), "0");
+                   equal(children.eq(1).val(), "5");
+                   start();
+               }, 500);
+
+               stop(600);
+           });
+
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

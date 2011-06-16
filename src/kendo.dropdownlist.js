@@ -115,13 +115,15 @@
 
         refresh: function() {
             var that = this,
+                ul = that.ul,
                 options = that.options,
                 height = options.height,
                 data = that.dataSource.view();
 
-            that.ul[0].innerHTML = kendo.render(that.template, data);
+            ul[0].innerHTML = kendo.render(that.template, data);
+            ul.height(data.length * 20 > height ? height : "auto");
 
-            that.ul.height(data.length * 20 > height ? height : "auto");
+            that._rebuildSelect(data);
 
             that.select(that.options.index);
 
@@ -385,6 +387,40 @@
             that.wrapper = wrapper
                               .addClass("t-widget t-dropdown t-header")
                               .addClass(DOMelement.className);
+        },
+
+        _rebuildSelect: function(data) {
+            var that = this,
+                value = that.value(),
+                length = data.length,
+                options = [],
+                i = 0;
+
+            if (that.element.is("select")) {
+                for (; i < length; i++) {
+                    var option = "<option",
+                    dataItem = data[i],
+                    dataText = that._text(dataItem),
+                    dataValue = that._value(dataItem);
+
+                    if (dataValue !== undefined) {
+                        option += " value=" + dataValue;
+                    }
+
+                    option += ">";
+
+                    if (dataText !== undefined) {
+                        option += dataText;
+                    }
+
+                    option += "</option>";
+                    options.push(option);
+                }
+
+                that.element.html(options.join(""));
+
+                that.element.val(value);
+            }
         }
     });
 
