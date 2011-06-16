@@ -17,6 +17,11 @@
         <script src="../../src/kendo.fx.js"></script>
         <script src="../../src/kendo.menu.js"></script>
         <script src="../../src/kendo.panelbar.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.query.js"></script>
+        <script src="../../src/kendo.datasource.js"></script>
+        <script src="../../src/kendo.list.js"></script>
+        <script src="../../src/kendo.dropdownlist.js"></script>
         <script src="../../src/kendo.tabstrip.js"></script>
         <script src="../../src/kendo.treeview.js"></script>
         <script src="js/prettify.js"></script>
@@ -33,7 +38,15 @@
     <body>
         <!-- nav -->
         <div id="box">
-            <div id="header"></div>
+            <div id="header">
+                <br><br>
+                <select id="skinSelector" style="float: right" readonly="readonly">
+                    <option value="Hay">Hay</option>
+                    <option value="Black">Black</option>
+                    <option value="Vista">Vista</option>
+                    <option value="Web20">Web20</option>
+                </select>
+            </div>
             <ul id="nav">
                 <li>
                     Autocomplete
@@ -59,6 +72,7 @@
             </ul>
             <script type="text/javascript">
                 $('#nav').kendoPanelBar({ animation: { open: { effects: 'fadeIn expandVertical' } }, expandMode: 0 });
+                $('#skinSelector').kendoDropDownList();
             </script>
             <div id="content">
                 <div id="exampleBody">

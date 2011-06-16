@@ -91,6 +91,26 @@
 
                 Application.fetchCode();
             });
+
+            $("#skinSelector").bind('change', function(e) {
+                var kendoLinks = $('link[href*="kendo."]', document.head),
+                    skinLink = kendoLinks.filter(':not([href*="kendo.common"])'),
+                    url = skinLink.attr('href').replace(/kendo\.\w+\.css/, 'kendo.' + $("#skinSelector")[0].value.toLowerCase() + '.css'),
+                    newLink;
+
+                if ($.browser.msie)
+                    newLink = document.createStyleSheet(url);
+                else
+                    newLink = skinLink
+                                .eq(0)
+                                .clone()
+                                .attr('href', url);
+
+                $.get(url, function() {
+                            skinLink.eq(0).before(newLink);
+                            skinLink.remove();
+                        });
+            });
         }
 
     };

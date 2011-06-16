@@ -10,7 +10,8 @@
         BOTTOM = "bottom",
         extend = $.extend,
         proxy = $.proxy,
-        Component = ui.Component;
+        Component = ui.Component,
+        mobileSafari41 = (navigator.userAgent.search(/4_1\slike\sMac\sOS\sX;.*Mobile\/\S+/) != -1);
 
     function align(element, anchor, origin, position) {
         origin = origin.split(" ");
@@ -61,7 +62,14 @@
             left -= round(width / 2 );
         }
 
-        element.css( {
+        if (kendo.support.touch) {
+            if (!document.body.scrollLeft && !mobileSafari41)
+                left -= window.pageXOffset;
+            if (!document.body.scrollTop && !mobileSafari41)
+                top -= window.pageYOffset;
+        }
+
+        element.css({
             top: top,
             left: left
         });
@@ -74,23 +82,14 @@
         init: function(element, options) {
             var that = this;
 
+            if (options && ('animation' in options) && !options.animation)
+                options.animation = { open: { effects: {} }, close: { effects: {} } };
+
             Component.fn.init.call(that, element, options);
 
-            that.element.hide().css("position", "absolute").appendTo(document.body);
+            that.element.hide().addClass("t-popup t-group t-reset").css("position", "absolute").appendTo(document.body);
 
             options = that.options;
-
-            extend(options.animation.open, {
-                complete: function() {
-                    that.trigger(OPEN);
-                }
-            });
-
-            extend(options.animation.close, {
-                complete: function() {
-                    that.trigger(CLOSE);
-                }
-            });
 
             that.bind([OPEN, CLOSE], options);
 
@@ -111,22 +110,29 @@
             anchor: "body",
             animation: {
                 open: {
-                    effects: "fadeIn",
+                    effects: 'slideDownIn',
+                    duration: 200,
                     show: true
                 },
-                close: {
-                    effects: "fadeOut",
+                close: { // if close animation effects are defined, they will be used instead of open.reverse
+                    duration: 100,
+                    show: false,
                     hide: true
                 }
             }
         },
         open: function() {
-            var that = this
+            var that = this,
                 options = that.options;
 
             if (!that.visible()) {
+                that.element.data('effectOptions', extend( {}, options.animation.open) );
+                that._wrapper = kendo.wrap(that.element).css({ overflow: 'hidden', display: 'block', position: 'absolute', top: '-10000px' });
                 that._updatePosition();
-                that.element.kendoStop().kendoAnimate(options.animation.open);
+                that.element.kendoStop(true).kendoAnimate(options.animation.open, function () {
+                    that._wrapper.css({ overflow: '' });
+                    that.trigger(OPEN);
+                });
             }
         },
         toggle: function() {
@@ -138,10 +144,19 @@
             return this.element.is(":visible");
         },
         close: function() {
-            var that = this;
+            var that = this,
+                options = that.options;
 
             if (that.visible()) {
-                that.element.kendoStop().kendoAnimate(that.options.animation.close);
+                var hasCloseAnimation = 'effects' in options.animation.close;
+                that._wrapper = kendo.wrap(that.element).css({ overflow: 'hidden' });
+                that.element.kendoStop(true).kendoAnimate(extend( hasCloseAnimation ? {} : that.element.data('effectOptions'), options.animation.close, {
+                                    reverse: !hasCloseAnimation,
+                                    complete: function () {
+                                        that._wrapper.css({ display: 'none' });
+                                        that.trigger(CLOSE);
+                                    }
+                                }));
             }
         },
         _mousedown: function(e) {
@@ -150,16 +165,18 @@
                 toggleTarget = that.options.toggleTarget,
                 target = e.target;
 
-            if (!contains(container, target) && (!toggleTarget || !contains($(toggleTarget)[0], target))) {
-                that.close();
-            }
+            if (contains(container, target)) return;
+            if (toggleTarget && (contains($(toggleTarget)[0], target) || $(toggleTarget)[0] === target)) return;
+
+            that.close();
         },
         _updatePosition: function() {
             var that = this,
                 options = that.options;
 
-            align(that.element, $(options.anchor), options.origin, options.position);
-        }
+            align(that._wrapper, $(options.anchor), options.origin, options.position);
+        },
+        _wrapper: $()
     });
 
     ui.plugin("Popup", Popup);

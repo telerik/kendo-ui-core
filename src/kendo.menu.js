@@ -59,7 +59,7 @@
                 },
                 close: { // if close animation effects are defined, they will be used instead of open.reverse
                     duration: 100,
-                    show: false, 
+                    show: false,
                     hide: true
                 }
             },
@@ -97,7 +97,7 @@
                     if (ul.length) {
                         var effectOptions = extend(getEffectOptions(item), that.options.animation.open);
                         item.data('effectOptions', effectOptions);
-                        var wrap = that._wrap(ul).css({ overflow: 'hidden', display: 'block' });
+                        var wrap = kendo.wrap(ul).css({ overflow: 'hidden', display: 'block' });
                         ul.kendoStop(true).kendoAnimate(extend( effectOptions, {
                             complete: function () {
                                 wrap.css({ overflow: '' });
@@ -121,7 +121,7 @@
                     var ul = item.find('.t-group').filter(':first:visible');
                     if (ul.length) {
                         var hasCloseAnimation = 'effects' in that.options.animation.close;
-                        var wrap = that._wrap(ul).css({ overflow: 'hidden' });
+                        var wrap = kendo.wrap(ul).css({ overflow: 'hidden' });
                         ul.kendoStop(true).kendoAnimate(extend( hasCloseAnimation ? {} : item.data('effectOptions'), that.options.animation.close, {
                                     reverse: !hasCloseAnimation,
                                     complete: function () {
@@ -195,37 +195,6 @@
 
         },
 
-        _wrap: function (element) {
-            if (!element.parent().hasClass('t-animation-container')) {
-                var shadow = element.css(kendo.support.transitions.css + 'box-shadow') || element.css('box-shadow'),
-                    radius = shadow ? shadow.match(/(\d+?)px\s*(\d+?)px\s*(\d+?)px\s*(\d+?)?/i) || [ 0, 0, 0, 0, 0 ] : [ 0, 0, 0, 0, 0 ],
-                    blur = Math.max((+radius[3]), +(radius[4] || 0)),
-                    right = (+radius[1]) + blur,
-                    bottom = (+radius[2]) + blur;
-
-                if ($.browser.opera) // Box shadow can't be retrieved in Opera
-                    right = bottom = 5;
-
-                element.wrap(
-                             $('<div/>')
-                             .addClass('t-animation-container')
-                             .css({
-                                 width: element.outerWidth(),
-                                 height: element.outerHeight(),
-                                 paddingRight: right,
-                                 paddingBottom: bottom
-                             }));
-            }
-
-            if ($.browser.msie && parseInt($.browser.version, 10) <= 7)
-                element.css({
-                    width: '100%',
-                    zoom: 1
-                });
-
-            return element.parent();
-        },
-        
         _mouseenter: function (e) {
             var that = this;
 

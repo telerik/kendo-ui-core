@@ -29,7 +29,8 @@
             that.arrow = that.span.next().children();
 
             that.popup = new ui.Popup(that.ul, {
-                anchor: that.wrapper
+                anchor: that.wrapper,
+                toggleTarget: that.wrapper
             });
 
             that._dataAccessors();
@@ -81,8 +82,6 @@
                             if(!that.ul[0].firstChild) {
                                 that.showBusy();
                                 that.dataSource.read();
-                            } else {
-                                that.toggle();
                             }
                         },
                         blur: function() {
@@ -112,11 +111,6 @@
                     that._scroll(current[0]);
                 }
             }
-        },
-
-        toggle: function() {
-            var that = this;
-            that[that.popup.visible() ? CLOSE : OPEN]();
         },
 
         refresh: function() {
@@ -371,20 +365,26 @@
         _wrapper: function() {
             var that = this,
                 element = that.element,
+                DOMelement = element[0],
                 TABINDEX = "tabIndex",
                 wrapper;
 
             wrapper = element.parent();
 
             if (!wrapper.is("div.t-widget")) {
-                wrapper = element.hide().wrap("<div />").parent();
+                wrapper = element.wrap("<div />").parent();
             }
 
             if (!wrapper.attr(TABINDEX)) {
                 wrapper.attr(TABINDEX, 0);
             }
 
-            that.wrapper = wrapper.addClass("t-widget t-dropdown t-header");
+            wrapper[0].style.cssText = DOMelement.style.cssText;
+            element.hide();
+
+            that.wrapper = wrapper
+                              .addClass("t-widget t-dropdown t-header")
+                              .addClass(DOMelement.className);
         }
     });
 
