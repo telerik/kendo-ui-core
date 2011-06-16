@@ -99,7 +99,7 @@
         },
 
         open: function() {
-            var that = this
+            var that = this,
                 current = that._current;
 
             if (!that.ul[0].firstChild) {
@@ -107,7 +107,7 @@
                 that.options.autoBind = false;
                 that.dataSource.query();
             } else {
-                that.popup.open()
+                that.popup.open();
                 if (current) {
                     that._scroll(current[0]);
                 }
@@ -229,7 +229,7 @@
 
                 if (data[0]) {
                     index = $.map(data, function(dataItem, idx) {
-                        var val = that._value(dataItem),
+                        var val = that._value(dataItem);
                             val = val || val === 0 ? val : that._text(dataItem);
 
                         if (val == value) {
@@ -376,7 +376,7 @@
 
             wrapper = element.parent();
 
-            if (!wrapper.is("div")) {
+            if (!wrapper.is("div.t-widget")) {
                 wrapper = element.hide().wrap("<div />").parent();
             }
 
