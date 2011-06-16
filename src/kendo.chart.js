@@ -403,7 +403,7 @@
         },
 
         options: {
-            font: "16px Verdana, sans-serif",
+            font: "10pt Verdana, sans-serif",
             align: LEFT,
             vAlign: ""
         },

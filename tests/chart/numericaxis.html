@@ -19,6 +19,9 @@
                 chartBox = new Box(0, 0, 800, 600),
                 TOLERANCE = 1.5;
 
+            // Tests expect particular font size
+            Chart.Text.fn.options.font = "16px Verdana, sans-serif";
+
             function moduleSetup() {
                 numericAxis = new kendo.ui.Chart.NumericAxis();
             }
