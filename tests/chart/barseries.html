@@ -251,8 +251,8 @@
                     setup: function() {
                         setupBarChart({
                             series: [ negativeSeries, negativeSeries ],
-                            isStacked: true }
-                        );
+                            isStacked: true
+                        });
                     }
                 });
 
@@ -289,8 +289,8 @@
                                 data: [1, -1],
                                 labels: {}
                             }],
-                            isStacked: true }
-                        );
+                            isStacked: true
+                        });
                     }
                 });
 
@@ -386,8 +386,7 @@
                 // ------------------------------------------------------------
                 module("Bar Chart / Labels / Positive Values", {
                     setup: function() {
-                        setupBarChart({ series: [{ data: positiveData, labels: {visible: true} }] });
-                    }
+                        setupBarChart({ series: [{                            data: positiveData,                            labels: {                                position: "insideEnd",                                visible: true                            }                        }] });                    }
                 });
 
                 test("bars labels have insideEnd position", function() {
@@ -447,8 +446,7 @@
                 // ------------------------------------------------------------
                 module("Bar Chart / Labels / Negative Values", {
                     setup: function() {
-                        setupBarChart({ series: [{ data: negativeData, labels: {visible: true} }] });
-                    }
+                        setupBarChart({ series: [{                            data: negativeData,                            labels: {                            position: "insideEnd",                            visible: true                        }                    }] });                    }
                 });
 
                 test("bars labels have insideEnd position", function() {
@@ -567,7 +565,8 @@
                     setupBarChart({ series: [{
                         data: positiveData,
                         labels: {
-                            visible: true
+                            visible: true,
+                            position: "insideEnd"
                         }
                     }], isVertical: false });
                     $.each(series._bars, function() {
@@ -629,7 +628,8 @@
                     setupBarChart({ series: [{
                         data: negativeData,
                         labels: {
-                            visible: true
+                            visible: true,
+                            position: "insideEnd"
                         }
                     }], isVertical: false });
                     }
