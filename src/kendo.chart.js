@@ -1460,7 +1460,7 @@
                 options = barChart.options,
                 children = barChart.children,
                 isStacked = barChart.options.isStacked,
-                labelOptions = extend({}, series.label);
+                labelOptions = extend({}, series.labels);
 
             if (isStacked) {
                 if (labelOptions.position == "outsideEnd") {
