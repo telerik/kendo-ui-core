@@ -120,3 +120,8 @@ pre.prettyprint
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     -webkit-backface-visibility: hidden;
 }
+
+.t-animation-container
+{
+    text-align: left;
+}

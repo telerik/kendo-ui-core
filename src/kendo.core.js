@@ -992,6 +992,37 @@
         };
     }
 
+    function wrap(element) {
+        if (!element.parent().hasClass('t-animation-container')) {
+            var shadow = element.css(kendo.support.transitions.css + 'box-shadow') || element.css('box-shadow'),
+                radius = shadow ? shadow.match(/(\d+?)px\s*(\d+?)px\s*(\d+?)px\s*(\d+?)?/i) || [ 0, 0, 0, 0, 0 ] : [ 0, 0, 0, 0, 0 ],
+                blur = Math.max((+radius[3]), +(radius[4] || 0)),
+                right = (+radius[1]) + blur,
+                bottom = (+radius[2]) + blur;
+
+            if ($.browser.opera) // Box shadow can't be retrieved in Opera
+                right = bottom = 5;
+
+            element.wrap(
+                         $('<div/>')
+                         .addClass('t-animation-container')
+                         .css({
+                             width: element.outerWidth(),
+                             height: element.outerHeight(),
+                             paddingRight: right,
+                             paddingBottom: bottom
+                         }));
+        }
+
+        if ($.browser.msie && parseInt($.browser.version, 10) <= 7)
+            element.css({
+                width: '100%',
+                zoom: 1
+            });
+
+        return element.parent();
+    }
+
     // feature detection
     (function() {
         var table = document.createElement("table");
@@ -1286,6 +1317,7 @@
         support: support,
         animate: animate,
         throttle: throttle,
+        wrap: wrap,
         Observable: Observable,
         Class: Class,
         Template: Template,
