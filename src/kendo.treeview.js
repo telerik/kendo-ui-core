@@ -661,6 +661,45 @@
                 absoluteIndex = "1:1";
                 //absoluteIndex = new $t.stringBuilder().cat(groupLevel).catIf(':', groupLevel).cat(itemIndex).string();
 
+            var itemTemplate = kendo.template(
+"<li class='t-item<%= wrapperCssClass %>'>" +
+    "<div class='<%= cssClass %>'>" +
+        "<<%= tag %> class='<%= activatorClass %>'<%= activatorAttributes %>>" +
+            "<%= image %><%= sprite %><%= text %><%= value %>" +
+        "</<%= tag %>>" +
+    "</div>" +
+    "<%= getSubGroup({ items: item.items, treeview: treeview, group: group }) %>" +
+"</li>"
+            );
+
+            var activatorClass = "t-in";
+
+            if (item.enabled === false) {
+                activatorClass += " t-state-disabled";
+            }
+            
+            if (item.selected === true) {
+                activatorClass += " t-state-selected";
+            }
+
+            var url = item.url;
+
+            return itemTemplate($.extend({
+                treeview: {},
+                group: {}
+            }, options, {
+                wrapperCssClass: "t-item",
+                tag: url ? "a" : "span",
+                activatorClass: activatorClass,
+                activatorAttributes: url ? " href='" + url + "'" : "",
+                cssClass: "",
+                image: item.imageUrl ? "<img class='t-image' alt='' src='" + item.imageUrl + "' />" : "",
+                sprite: item.spriteCssClass ? "<span class='t-sprite " + item.spriteCssClass + "'></span>" : "",
+                text: item.encoded === false ? item.text : kendo.htmlEncode(item.text),
+                value: item.value ? "<input type='hidden' class='t-input' name='itemValue' value='" + item.value + "' />" : "",
+                getSubGroup: TreeView.getGroupHtml
+            }));
+
             html.cat('<li class="t-item')
                     .catIf(' t-first', isFirstLevel && itemIndex == 0)
                     .catIf(' t-last', itemIndex == itemsCount - 1)
@@ -702,19 +741,6 @@
                 html.cat('</span>');
             }
 
-/*
-<li class='t-item<%= itemWrapperClass %>'>\
-<div class='<%= itemClass %>'>\
-<<%= itemTag %> class='<%= activatorClass %>'>\
-<%= imageUrl ? "<img class='t-image' alt='' src='" + imageUrl + "' />" : "" %>\
-<%= spriteCssClass ? "<span class='t-sprite " + spriteCssClass + "'></span>" : "" %>\
-<%= processedText %>\
-<%= value ? "<input type='hidden' class='t-input' name='itemValue' value='" + value + "' />" : "" %>\
-</<%= itemTag %>>\
-</div>\
-<%= subGroup %>\
-</li>
-*/
             var navigateUrl = item.NavigateUrl || item.Url;
 
             html.cat(navigateUrl ? '<a href="' + navigateUrl + '" class="t-link ' : '<span class="')
@@ -758,44 +784,42 @@
             html.cat('</li>');
         },
 
-        getGroupHtml: function (data, options) {
+        getItemsList: function (options) {
             var html = "",
-                renderGroup = options.renderGroup !== false,
+                items = options.items,
                 getItemHtml = TreeView.getItemHtml,
                 i, len;
 
-            if (renderGroup) {
-                html += "<ul class='t-group";
-
-                if (options.isFirstLevel) {
-                    html += " t-treeview-lines";
-                }
-
-                html += "'";
-
-                if (options.isExpanded !== true) {
-                    html += " style='display:none'";
-                }
-
-                html += ">";
-            }
-
-            if (data && data.length > 0) {
-                for (i = 0, len = data.length; i < len; i++)
+            if (items && items.length > 0) {
+                for (i = 0, len = items.length; i < len; i++)
                     html += getItemHtml({
-                        item: $.extend({}, data[i], {
-                            index: i,
-                            groupLength: len
+                        item: $.extend({}, items[i], {
+                            index: i
                         }),
-                        treeview: options
+                        treeview: options.treeview,
+                        group: $.extend({
+                            length: len
+                        }, options.group)
                     });
             }
 
-            if (renderGroup) {
-                html += "</ul>";
-            }
-
             return html;
+        },
+
+        getGroupHtml: function (options) {
+            var group = options.group || {},
+                template = kendo.template(
+                    "<ul class='t-group<%= groupCssClass %>'<%= groupAttributes %>>" +
+                        "<%= renderItems(options) %>" +
+                    "</ul>"
+                );
+
+            return template({
+                options: options,
+                renderItems: TreeView.getItemsList,
+                groupAttributes: group.isExpanded !== true ? " style='display:none'" : "",
+                groupCssClass: group.isFirstLevel ? " t-treeview-lines" : ""
+            });
         }
     });
 
