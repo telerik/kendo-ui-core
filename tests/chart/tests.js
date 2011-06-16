@@ -16,6 +16,10 @@ tests.push(
         title: "View model"
     },
     {
+        page: "chart/rendering.html",
+        title: "Rendering"
+    },
+    {
         page: "chart/svg.html",
         title: "SVG Renderer"
     },
