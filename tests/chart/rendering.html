@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>UI5.Chart Tests - SVG</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <link href="../qunit.css" type="text/css" rel="stylesheet"/>
+    </head>
+    <body>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.chart.js"></script>
+        <script type="text/javascript">
+            var Chart = kendo.ui.Chart,
+                Box = Chart.Box;
+
+            function ContentElementStub(content, options) {
+                this.content = content;
+                this.options = $.extend({}, this.options, options);
+            }
+
+            ContentElementStub.prototype = {
+                options: {
+                },
+
+                render: function() {
+                    return this.content;
+                }
+            };
+
+            (function() {
+                var viewElement;
+
+                module("ViewElement", {
+                    setup: function() {
+                        viewElement = new Chart.ViewElement();
+                    }
+                });
+
+                test("render order matches z-index", function() {
+                    viewElement.children.push(
+                        new ContentElementStub("2", { zIndex: 2 }),
+                        new ContentElementStub("1", { zIndex: 1 })
+                    );
+                    equal(viewElement.renderContent(), "12");
+                });
+
+                test("render order is stable for elements with the same z-index", function() {
+                    var expected = "";
+                    for (var i = 0; i < 100; i++) {
+                        expected += i;
+
+                        viewElement.children.push(
+                            new ContentElementStub(i)
+                        );
+                    }
+
+                    ok(viewElement.renderContent() === expected);
+                });
+            })();
+
+       </script>
+
+        <h1 id="qunit-header">kendo.chart</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+    </body>
+</html>
