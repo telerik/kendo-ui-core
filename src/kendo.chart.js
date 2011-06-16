@@ -609,8 +609,7 @@
                 right: 10,
                 bottom: 10,
                 left: 10
-            },
-            zIndex: 1
+            }
         },
 
         createLabels: function() {
@@ -1756,8 +1755,8 @@
             return new SVGRoot(options);
         },
 
-        group: function() {
-            return new SVGGroup();
+        group: function(options) {
+            return new SVGGroup(options);
         },
 
         text: function(content, options) {
@@ -1802,8 +1801,9 @@
 
 
     var SVGGroup = ViewElement.extend({
-        init: function() {
-            var group = this;
+        init: function(options) {
+            var group = this,
+                options = group.options = extend({}, group.options, options);
 
             ViewElement.fn.init.call(group);
             group.template = template("<g><%= renderContent() %></g>");
@@ -1909,6 +1909,10 @@
 
         line: function(x1, y1, x2, y2) {
             return new VMLPath([[x1, y1], [x2, y2]]);
+        },
+
+        group: function(options) {
+            return new VMLGroup(options);
         }
     };
 
@@ -1938,7 +1942,7 @@
     var VMLText = ViewElement.extend({
         init: function(content, options) {
             var text = this,
-            options = text.options = extend({}, text.options, options);
+                options = text.options = extend({}, text.options, options);
 
             text.content = content || "";
 
@@ -2007,6 +2011,25 @@
             }
 
             return result;
+        }
+    });
+
+    var VMLGroup = ViewElement.extend({
+        init: function(options) {
+            var group = this,
+                options = group.options = extend({}, group.options, options);
+                zIndex = options["z-index"];
+
+            ViewElement.fn.init.call(group);
+            group.template = VMLGroup.template;
+
+            if (!group.template) {
+                group.template = VMLGroup.template = template(
+                    "<kvml:group style='position: absolute;'" +
+                    "coordorigin='0 0' coordsize='1 1'>" +
+                    "</kvml:group>"
+                );
+            }
         }
     });
 
@@ -2194,6 +2217,7 @@
     Chart.VMLRoot = VMLRoot;
     Chart.VMLText = VMLText;
     Chart.VMLPath = VMLPath;
+    Chart.VMLGroup = VMLGroup;
 
 })(jQuery);
 

@@ -181,6 +181,23 @@
                 });
 
             })();
+
+            (function() {
+                var group;
+
+                module("VMLText", {
+                    setup: function() {
+                        group = new Chart.VMLGroup();
+                    }
+                });
+
+                test("add group", function() {
+                    group.options["z-index"] = 1;
+                    equal(group.render(),
+                        "<kvml:group style='position: absolute;'" +
+                        "coordorigin='0 0' coordsize='1 1'></kvml:group>");
+                });
+            })();
        </script>
 
         <h1 id="qunit-header">kendo.chart</h1>
