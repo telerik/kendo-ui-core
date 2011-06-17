@@ -44,6 +44,21 @@
                 stop(1000);
             });
 
+            test("mousedown inside toggleTarget should not close the popup", function() {
+                var closed = false;
+                var MyPopup = Popup.extend( {
+                    close: function() {
+                        closed = true;
+                    }
+                });
+                var popup = new MyPopup(div, {
+                    toggleTarget: anchor
+                });
+
+                anchor.mousedown();
+                ok(!closed);
+            });
+
             test("popup appends element to body", function() {
                 div.kendoPopup();
 
