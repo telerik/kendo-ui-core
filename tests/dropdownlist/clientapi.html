@@ -150,20 +150,12 @@
                 equal(dropdownlist.span.html(), "foo foo");
             });
 
-            test("empty text should set nbsp", function() {
-                var dropdownlist = new DropDownList(input);
+            test("set text to html should encode it", function() {
+                var dropdownlist = input.kendoDropDownList(data).data("kendoDropDownList");
 
-                dropdownlist.text("");
+                dropdownlist.text("<script>alert('test');<\/script>");
 
-                equal(dropdownlist.span.html(), "&nbsp;&nbsp;");
-            });
-
-            test("text only with spaces should set nbsp", function() {
-                var dropdownlist = new DropDownList(input);
-
-                dropdownlist.text("  ");
-
-                equal(dropdownlist.span.html(), "&nbsp;&nbsp;");
+                equal(dropdownlist.text(), "<script>alert('test');<\/script>");
             });
 
             test('enable(false) should disable dropDownList', function() {
@@ -172,6 +164,7 @@
                 dropdownlist.enable(false);
 
                 ok(dropdownlist.wrapper.hasClass('t-state-disabled'));
+                ok(dropdownlist.element.attr("disabled"));
             });
 
             test('after enable(false) should not open popup', function() {
@@ -193,10 +186,12 @@
             test("enable(true) removes t-state-disabled class", function() {
                 var dropdownlist = new DropDownList(input);
                 dropdownlist.wrapper.addClass('t-state-disabled');
+                dropdownlist.element.attr("disabled", true);
 
                 dropdownlist.enable();
 
                 ok(!dropdownlist.wrapper.hasClass('t-state-disabled'));
+                ok(!dropdownlist.element.attr("disabled"));
             });
 
       </script>
