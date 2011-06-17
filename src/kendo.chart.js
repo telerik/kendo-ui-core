@@ -1752,12 +1752,25 @@
         },
 
         sortChildren: function() {
-            var element = this;
-            return mergeSort(element.children, element.compareChildren);
+            var element = this,
+                children = element.children;
+
+            for (var i = 0, length = children.length; i < length; i++) {
+                children[i]._childIndex = i;
+            }
+
+            return children.slice(0).sort(element.compareChildren);
         },
 
         compareChildren: function(a, b) {
-            return a.options.zIndex || 0 - b.options.zIndex || 0;
+            var aValue = a.options.zIndex || 0,
+                bValue = b.options.zIndex || 0;
+
+            if (aValue !== bValue) {
+                return aValue - bValue;
+            }
+
+            return a._childIndex - b._childIndex;
         }
     });
 
@@ -2189,69 +2202,13 @@
         return { min: min, max: max };
     }
 
-    function getMargin(margin) {
-        var newMargin = {};
-        newMargin.left = margin || 0;
-        newMargin.right = margin || 0;
-        newMargin.top = margin || 0;
-        newMargin.bottom = margin || 0;
+    function getMargin(value) {
+        var margin = {};
+        $.each(["top", "right", "bottom", "left"], function() {
+            margin[this] = typeof(value) === "number" ? value : value[this] || 0;
+        });
 
-        if ($.isPlainObject(margin)) {
-            newMargin.left = margin.left || 0;
-            newMargin.right = margin.right || 0;
-            newMargin.top = margin.top || 0;
-            newMargin.bottom = margin.bottom || 0;
-        }
-
-        return newMargin;
-    }
-
-    // Merge sort is guaranteed to be stable; array.sort() is not
-    // If stable sort is not required use array.sort() for better performance
-    function mergeSort(arr, comparison)
-    {
-        if (arr.length < 2)
-            return arr;
-
-        var middle = parseInt(arr.length / 2),
-            left = arr.slice(0, middle),
-            right = arr.slice(middle, arr.length);
-
-        comparison = comparison || defaultComparison;
-        return merge(mergeSort(left, comparison), mergeSort(right, comparison), comparison);
-    }
-
-    function merge(left, right, comparison)
-    {
-        var result = [];
-
-        while (left.length && right.length) {
-            if (comparison(left[0], right[0]) <= 0) {
-                result.push(left.shift());
-            } else {
-                result.push(right.shift());
-            }
-        }
-
-        while (left.length) {
-            result.push(left.shift());
-        }
-
-        while (right.length) {
-            result.push(right.shift());
-        }
-
-        return result;
-    }
-
-    function defaultComparison(left, right) {
-        if(left == right) {
-            return 0;
-        } else if(left < right) {
-            return -1;
-        } else {
-            return 1;
-        }
+        return margin;
     }
 
     // Exports ================================================================
