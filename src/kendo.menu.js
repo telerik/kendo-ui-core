@@ -4,17 +4,24 @@
         extend = $.extend,
         proxy = $.proxy,
         Component = ui.Component,
-        events = [ 'open', 'close', 'select', 'init' ],
-        MOUSEENTER = 'mouseenter',
-        MOUSELEAVE = 'mouseleave',
-        CLICK = 'click',
-        itemSelector = '.t-item:not(.t-state-disabled)',
-        linkSelector = '.t-item:not(.t-state-disabled) > .t-link';
+        OPEN = "open",
+        CLOSE = "close",
+        events = [ OPEN, CLOSE, "select", "init" ],
+        MOUSEENTER = "mouseenter",
+        MOUSELEAVE = "mouseleave",
+        CLICK = "click",
+        TIMER = "timer",
+        IMG = "img",
+        KENDOPOPUP = "kendoPopup",
+        DEFAULTSTATE = "t-state-default",
+        DISABLEDSTATE = "t-state-disabled",
+        itemSelector = ".t-item:not(.t-state-disabled)",
+        linkSelector = ".t-item:not(.t-state-disabled) > .t-link";
 
     function getEffectOptions(item) {
         var parent = item.parent();
         return {
-            effects: parent.hasClass('t-menu') ? parent.hasClass('t-menu-vertical') ? 'slideRightIn' : 'slideDownIn' : 'slideRightIn'
+            effects: parent.hasClass("t-menu") ? parent.hasClass("t-menu-vertical") ? "slideRightIn" : "slideDownIn" : "slideRightIn"
         };
     }
 
@@ -43,7 +50,7 @@
                    .delegate(itemSelector, MOUSELEAVE, proxy(that._mouseleave, that))
                    .delegate(itemSelector, CLICK, proxy(that._click , that));
 
-            element.delegate(linkSelector, MOUSEENTER + ' ' + MOUSELEAVE, that._toggleHover);
+            element.delegate(linkSelector, MOUSEENTER + " " + MOUSELEAVE, that._toggleHover);
 
             $(document).click($.proxy( that._documentClick, that ));
 
@@ -61,7 +68,7 @@
                     hide: true
                 }
             },
-            orientation: 'horizontal',
+            orientation: "horizontal",
             openOnClick: false,
             hoverDelay: 100
         },
@@ -69,8 +76,8 @@
         toggle: function (element, enable) {
             $(element).each(function () {
                 $(this)
-                    .toggleClass('t-state-default', enable)
-                    .toggleClass('t-state-disabled', !enable);
+                    .toggleClass(DEFAULTSTATE, enable)
+                    .toggleClass(DISABLEDSTATE, !enable);
             });
         },
 
@@ -88,21 +95,25 @@
             $(element).each(function () {
                 var li = $(this);
 
-                clearTimeout(li.data("timer"));
+                clearTimeout(li.data(TIMER));
 
-                li.data("timer", setTimeout(function () {
+                li.data(TIMER, setTimeout(function () {
                     var ul = li.find(".t-group:first:hidden"), popup;
 
                     if (ul[0]) {
                         li.css("z-index", that.nextItemZIndex ++);
 
-                        popup = ul.data("kendoPopup");
+                        popup = ul.data(KENDOPOPUP);
 
                         if (!popup) {
                             popup = ul.kendoPopup({
                                 anchor: li,
-                                appendTo: li
-                            }).data("kendoPopup");
+                                appendTo: li,
+                                animation: {
+                                    open: extend( getEffectOptions(li), that.options.animation.open),
+                                    close: that.options.animation.close
+                                }
+                            }).data(KENDOPOPUP);
                         }
 
                         popup.open();
@@ -118,12 +129,12 @@
             $(element).each(function () {
                 var li = $(this);
 
-                clearTimeout(li.data("timer"));
+                clearTimeout(li.data(TIMER));
 
-                li.data("timer", setTimeout(function () {
+                li.data(TIMER, setTimeout(function () {
                     var ul = li.find(".t-group:first:visible"), popup;
                     if (ul[0]) {
-                        popup = ul.data("kendoPopup");
+                        popup = ul.data(KENDOPOPUP);
                         popup.close();
                     }
                 }, that.options.hoverDelay));
@@ -131,59 +142,59 @@
         },
 
         _toggleHover: function(e) {
-            $(e.currentTarget).toggleClass('t-state-hover', e.type == MOUSEENTER);
+            $(e.currentTarget).toggleClass("t-state-hover", e.type == MOUSEENTER);
         },
 
         _updateClasses: function() {
             var that = this;
 
-            that.element.addClass('t-widget t-reset t-header t-menu').addClass('t-menu-' + that.options.orientation);
+            that.element.addClass("t-widget t-reset t-header t-menu").addClass("t-menu-" + that.options.orientation);
 
             var items = that.element
-                            .find('ul')
-                            .addClass('t-group')
+                            .find("ul")
+                            .addClass("t-group")
                             .end()
-                            .find('li')
-                            .addClass('t-item');
+                            .find("li")
+                            .addClass("t-item");
 
             items
-                .children('img')
-                .addClass('t-image');
+                .children(IMG)
+                .addClass("t-image");
             items
-                .children('a')
-                .addClass('t-link')
-                .children('img')
-                .addClass('t-image');
+                .children("a")
+                .addClass("t-link")
+                .children(IMG)
+                .addClass("t-image");
             items
-                .filter(':not([disabled])')
-                .addClass('t-state-default');
+                .filter(":not([disabled])")
+                .addClass(DEFAULTSTATE);
             items
-                .filter('li[disabled]')
-                .addClass('t-state-disabled')
-                .removeAttr('disabled');
+                .filter("li[disabled]")
+                .addClass(DISABLEDSTATE)
+                .removeAttr("disabled");
             items
-                .children('a:focus')
+                .children("a:focus")
                 .parent()
-                .addClass('t-state-active');
+                .addClass("t-state-active");
 
             items.each(function() {
                 var item = $(this);
 
-                if (!item.children('.t-link').length)
+                if (!item.children(".t-link").length)
                     item
                         .contents()      // exclude groups, real links, templates and empty text nodes
-                        .filter(function() { return (this.nodeName != 'UL' && this.nodeName != 'A' && this.nodeName != 'DIV' && !(this.nodeType == 3 && !$.trim(this.nodeValue))); })
+                        .filter(function() { return (!(this.nodeName.toLowerCase() in { ul: {}, a: {}, div: {} }) && !(this.nodeType == 3 && !$.trim(this.nodeValue))); })
                         .wrapAll('<span class="t-link"/>');
             });
 
             items
-                .filter(':has(.t-group)')
-                .children('.t-link:not(:has([class*=t-arrow]))')
+                .filter(":has(.t-group)")
+                .children(".t-link:not(:has([class*=t-arrow]))")
                 .each(function () {
                     var item = $(this),
                         parent = item.parent().parent();
 
-                    item.append('<span class="t-icon ' + (parent.hasClass('t-menu-horizontal') ? 't-arrow-down' : 't-arrow-next') + '"></span>');
+                    item.append('<span class="t-icon ' + (parent.hasClass("t-menu-horizontal") ? "t-arrow-down" : "t-arrow-next") + '"></span>');
                 });
 
         },
@@ -194,13 +205,13 @@
             var element = $(e.currentTarget);
             if (!that.options.openOnClick || that.clicked) {
                 if (!contains(e.currentTarget, e.relatedTarget)) {
-                    that._triggerEvent('open', element);
+                    that._triggerEvent(OPEN, element);
                     that.open(element);
                 }
             }
 
             if (that.options.openOnClick && that.clicked) {
-                that._triggerEvent('close', element);
+                that._triggerEvent(CLOSE, element);
 
                 element.siblings().each($.proxy(function (_, sibling) {
                     that.close(sibling);
@@ -213,7 +224,7 @@
 
             if (!that.options.openOnClick && !contains(e.currentTarget, e.relatedTarget)) {
                 var element = $(e.currentTarget);
-                that.trigger('close', element);
+                that.trigger(CLOSE, element);
 
                 that.close(element);
             }
@@ -225,20 +236,20 @@
 
             var element = $(e.currentTarget);
 
-            if (element.hasClass('t-state-disabled')) {
+            if (element.hasClass(DISABLEDSTATE)) {
                 e.preventDefault();
                 return;
             }
 
-            that._triggerEvent('select', element);
+            that._triggerEvent("select", element);
 
-            if (!element.parent().hasClass('t-menu') || !that.options.openOnClick)
+            if (!element.parent().hasClass("t-menu") || !that.options.openOnClick)
                 return;
 
             e.preventDefault();
 
             that.clicked = true;
-            that._triggerEvent('open', element);
+            that._triggerEvent(OPEN, element);
             that.open(element);
         },
 
@@ -250,12 +261,12 @@
 
             if (that.clicked) {
                 that.clicked = false;
-                that.close(that.element.find('.t-item>.t-animation-container:visible').parent());
+                that.close(that.element.find(".t-item>.t-animation-container:visible").parent());
             }
         },
 
         _hasChildren: function (element) {
-            return element.find('.t-group').filter(':first').length;
+            return element.find(".t-group").filter(":first").length;
         },
 
         _triggerEvent: function (eventName, element) {
