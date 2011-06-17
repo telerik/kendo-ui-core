@@ -15,7 +15,10 @@
             that._template();
 
             that.ul = $("<ul/>")
-                        .css("overflow", "auto")
+                        .css({
+                            overflow: "auto",
+                            width: that.element.width()
+                        })
                         .addClass("t-list")
                         .mousedown(function() {
                             setTimeout(function() {
