@@ -10,6 +10,7 @@
         BOTTOM = "bottom",
         ABSOLUTE = "absolute",
         HIDDEN = "hidden",
+        BODY = "body",
         extend = $.extend,
         proxy = $.proxy,
         Component = ui.Component,
@@ -138,8 +139,8 @@
             toggleEvent: "click",
             origin: BOTTOM + " " + LEFT,
             position: TOP + " " + LEFT,
-            anchor: "body",
-            appendTo: "body",
+            anchor: BODY,
+            appendTo: BODY,
             animation: {
                 open: {
                     effects: "slideDownIn",
@@ -160,6 +161,9 @@
 
             if (!that.visible()) {
                 that.wrapper = kendo.wrap(that.element).css({ overflow: HIDDEN, display: "block", position: ABSOLUTE});
+
+                if (options.appendTo == BODY)
+                    that.wrapper.css("top", "-10000px");
 
                 that._update();
 
