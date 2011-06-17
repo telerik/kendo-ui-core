@@ -13,54 +13,35 @@
                 width: 200px;
                 height: 200px;
                 background: red;
-                margin: 150px;
                 float: left;
+                position: absolute;
+                top:100px;
+                left: 1000px;
             }
             .popup
             {
-                width: 150px;
+                width: 1050px;
                 height: 150px;
                 background: blue;
                 color: white;
+                border: 10px solid black;
             }
         </style>
     </head>
     <body>
         <button>open</button>
+        <div class="anchor"></div>
         <div class="popup">popup</div>
         <script type="text/javascript" charset="utf-8">
             $(document).ready(function() {
                 $(".popup").kendoPopup( {
                     toggleTarget: $("button"),
-                    toggleEvent: "click"
+                    toggleEvent: "click",
+                    origin: "top left",
+                    position: "top right",
+                    anchor: ".anchor",
+                    collision: "fit"
                 });
-return;
-                var vertical = [ "top", "bottom", "center" ];
-                var horizontal = [ "left", "right", "center"];
-                var index = 1;
-
-                for (var verticalPosition = 0; verticalPosition < vertical.length; verticalPosition ++) {
-                    for (var horizontalPosition = 0; horizontalPosition < horizontal.length; horizontalPosition ++) {
-                        var position = vertical[verticalPosition] + " " + horizontal[horizontalPosition];
-                        for (var verticalOrigin = 0; verticalOrigin < vertical.length; verticalOrigin ++) {
-                            for (var horizontalOrigin = 0; horizontalOrigin < horizontal.length; horizontalOrigin ++) {
-                                var origin = vertical[verticalOrigin] + " " + horizontal[horizontalOrigin];
-
-                                var anchor = $('<div class="anchor" />').appendTo(document.body);
-
-                                $('<div class="popup" />')
-                                .append("<div># " + (index++) + "</div>")
-                                .append("<div>origin: " + origin + "</div>")
-                                .append("<div>position: " + position + "</div>")
-                                .kendoPopup( {
-                                    anchor: anchor,
-                                    position: position,
-                                    origin: origin
-                                }).data("kendoPopup").open();
-                            }
-                        }
-                    }
-                }
             });
         </script>
     </body>
