@@ -26,12 +26,7 @@
 
             that._span();
 
-            that.arrow = that.span.next().children();
-
-            that.popup = new ui.Popup(that.ul, {
-                anchor: that.wrapper,
-                toggleTarget: that.wrapper
-            });
+            that._popup();
 
             that._dataAccessors();
 
@@ -347,6 +342,19 @@
             that.search(that._word);
         },
 
+        _popup: function() {
+            var that = this,
+                ul = that.ul,
+                wrapper = that.wrapper;
+
+            that.popup = new ui.Popup(ul, {
+                anchor: wrapper,
+                toggleTarget: wrapper
+            });
+
+            ul.width(wrapper.width() - (ul.outerWidth() - ul.innerWidth()));
+        },
+
         _span: function() {
             var that = this,
                 wrapper = that.wrapper,
@@ -362,6 +370,8 @@
                 span = wrapper.find(SELECTOR);
             }
             that.span = span;
+
+            that.arrow = wrapper.find(".t-icon");
         },
 
         _wrapper: function() {
