@@ -2,6 +2,7 @@
     var kendo = window.kendo,
         ui = kendo.ui,
         extend = $.extend,
+        proxy = $.proxy,
         Component = ui.Component,
         events = [ 'open', 'close', 'select', 'init' ],
         MOUSEENTER = 'mouseenter',
@@ -30,9 +31,6 @@
             element = $(element);
             var that = this;
 
-            if (options && ('animation' in options) && !options.animation)
-                options.animation = { open: { effects: {} }, close: { effects: {} } }; // No animation
-            
             Component.fn.init.call(that, element, options);
 
             options = that.options;
@@ -41,11 +39,11 @@
 
             that.nextItemZIndex = 100;
 
-            element.delegate( itemSelector, MOUSEENTER, $.proxy( that._mouseenter , that ) )
-                   .delegate( itemSelector, MOUSELEAVE, $.proxy( that._mouseleave , that ) )
-                   .delegate( itemSelector, CLICK, $.proxy( that._click , that ) );
+            element.delegate(itemSelector, MOUSEENTER, proxy(that._mouseenter, that))
+                   .delegate(itemSelector, MOUSELEAVE, proxy(that._mouseleave, that))
+                   .delegate(itemSelector, CLICK, proxy(that._click , that));
 
-            element.delegate( linkSelector, MOUSEENTER + ' ' + MOUSELEAVE, that._toggleHover );
+            element.delegate(linkSelector, MOUSEENTER + ' ' + MOUSELEAVE, that._toggleHover);
 
             $(document).click($.proxy( that._documentClick, that ));
 
@@ -88,23 +86,28 @@
             var that = this;
 
             $(element).each(function () {
-                var item = $(this);
+                var li = $(this);
 
-                clearTimeout(item.data('timer'));
+                clearTimeout(li.data("timer"));
 
-                item.data('timer', setTimeout(function () {
-                    var ul = item.find('.t-group').filter(':first:hidden');
-                    if (ul.length) {
-                        var effectOptions = extend(getEffectOptions(item), that.options.animation.open);
-                        item.data('effectOptions', effectOptions);
-                        var wrap = kendo.wrap(ul).css({ overflow: 'hidden', display: 'block' });
-                        ul.kendoStop(true).kendoAnimate(extend( effectOptions, {
-                            complete: function () {
-                                wrap.css({ overflow: '' });
-                            }
-                        }));
-                        item.css('z-index', that.nextItemZIndex++);
+                li.data("timer", setTimeout(function () {
+                    var ul = li.find(".t-group:first:hidden"), popup;
+
+                    if (ul[0]) {
+                        li.css("z-index", that.nextItemZIndex ++);
+
+                        popup = ul.data("kendoPopup");
+
+                        if (!popup) {
+                            popup = ul.kendoPopup({
+                                anchor: li,
+                                appendTo: li
+                            }).data("kendoPopup");
+                        }
+
+                        popup.open();
                     }
+
                 }, that.options.hoverDelay));
             });
         },
@@ -113,25 +116,15 @@
             var that = this;
 
             $(element).each(function () {
-                var item = $(this);
+                var li = $(this);
 
-                clearTimeout(item.data('timer'));
+                clearTimeout(li.data("timer"));
 
-                item.data('timer', setTimeout(function () {
-                    var ul = item.find('.t-group').filter(':first:visible');
-                    if (ul.length) {
-                        var hasCloseAnimation = 'effects' in that.options.animation.close;
-                        var wrap = kendo.wrap(ul).css({ overflow: 'hidden' });
-                        ul.kendoStop(true).kendoAnimate(extend( hasCloseAnimation ? {} : item.data('effectOptions'), that.options.animation.close, {
-                                    reverse: !hasCloseAnimation,
-                                    complete: function () {
-                                        wrap.css({ display: 'none' });
-                                        item.css('zIndex', '');
-
-                                        if (!that.element.find('.t-group:visible').length)
-                                            that.nextItemZIndex = 100;
-                                    }
-                                }));
+                li.data("timer", setTimeout(function () {
+                    var ul = li.find(".t-group:first:visible"), popup;
+                    if (ul[0]) {
+                        popup = ul.data("kendoPopup");
+                        popup.close();
                     }
                 }, that.options.hoverDelay));
             });
@@ -217,7 +210,7 @@
 
         _mouseleave: function (e) {
             var that = this;
-            
+
             if (!that.options.openOnClick && !contains(e.currentTarget, e.relatedTarget)) {
                 var element = $(e.currentTarget);
                 that.trigger('close', element);
@@ -234,7 +227,7 @@
 
             if (element.hasClass('t-state-disabled')) {
                 e.preventDefault();
-                return; 
+                return;
             }
 
             that._triggerEvent('select', element);
@@ -267,7 +260,7 @@
 
         _triggerEvent: function (eventName, element) {
             var that = this;
-            
+
             if (that._hasChildren(element)) {
                 that.trigger(eventName, { item: element[0] });
                 that.element.trigger(eventName, { item: element[0] });
