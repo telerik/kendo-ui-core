@@ -463,9 +463,6 @@
             barLabel.options = extend({}, barLabel.options, options);
 
             barLabel.children.push(new Text(content, barLabel.options));
-
-            // Calculate size
-            barLabel.updateLayout(defaultBox);
         },
 
         options: {
@@ -1379,11 +1376,11 @@
         },
 
         updateLayout: function(targetBox) {
-            this.box = targetBox;
             var bar = this,
                 children = bar.children,
                 options = bar.options;
 
+            bar.box = targetBox;
             for(var i = 0, length = children.length; i < length; i++) {
                 children[i].updateLayout(targetBox, options.isVertical);
             }
@@ -1472,7 +1469,7 @@
 
             var bar = new Bar({ color: series.color, borderColor: series.color, isVertical: options.isVertical });
 
-            if (labelOptions.visible) {
+            if (labelOptions.visible && value) {
                 var label = new BarLabel(value, labelOptions);
                 bar.children.push(label);
             }
@@ -1562,7 +1559,7 @@
                     label.content = label.content || axisCrossingValue;
                 }
 
-                bar.updateLayout(barSlot);
+                bar.box = barSlot;
 
                 if(!categorySlots[categoryIx]) {
                     categorySlots[categoryIx] = isVertical ? slotX : slotY;

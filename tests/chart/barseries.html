@@ -386,7 +386,11 @@
                 // ------------------------------------------------------------
                 module("Bar Chart / Labels / Positive Values", {
                     setup: function() {
-                        setupBarChart({ series: [{                            data: positiveData,                            labels: {                                position: "insideEnd",                                visible: true                            }                        }] });                    }
+                        setupBarChart({ series: [{
+                            data: positiveData,
+                            labels: { position: "insideEnd", visible: true }
+                        }] });
+                    }
                 });
 
                 test("bars labels have insideEnd position", function() {
@@ -446,7 +450,11 @@
                 // ------------------------------------------------------------
                 module("Bar Chart / Labels / Negative Values", {
                     setup: function() {
-                        setupBarChart({ series: [{                            data: negativeData,                            labels: {                            position: "insideEnd",                            visible: true                        }                    }] });                    }
+                        setupBarChart({ series: [{
+                            data: negativeData,
+                            labels: { position: "insideEnd", visible: true }
+                            }] });
+                        }
                 });
 
                 test("bars labels have insideEnd position", function() {
