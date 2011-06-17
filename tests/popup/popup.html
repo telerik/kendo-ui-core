@@ -391,10 +391,26 @@
                 var popup = new MyPopup(div, {
                     toggleTarget: document.body
                 });
-
+                popup.open();
                 $(window).trigger("resize");
 
                 ok(called);
+            });
+
+            test("fit returns zero if position is negative", function() {
+                var popup = new Popup(div);
+                equal(popup._fit(-42, 42, 42), 0);
+
+            });
+
+            test("fit returns position if element does not fit in original position", function() {
+                var popup = new Popup(div);
+                equal(popup._fit(42, 42, 42), 0);
+            });
+
+            test("fit if element does not fit in the original and new position", function() {
+                var popup = new Popup(div);
+                equal(popup._fit(42, 24, 42), 18);
             });
         </script>
     </body>
