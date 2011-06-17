@@ -91,9 +91,12 @@
 
             Component.fn.init.call(that, element, options);
 
-            that.element.hide().addClass("t-popup t-group t-reset").css({ position : ABSOLUTE }).appendTo(document.body);
-
             options = that.options;
+
+            that.element.hide()
+                .addClass("t-popup t-group t-reset")
+                .css({ position : ABSOLUTE })
+                .appendTo($(options.appendTo));
 
             that.wrapper = $();
 
@@ -136,6 +139,7 @@
             origin: BOTTOM + " " + LEFT,
             position: TOP + " " + LEFT,
             anchor: "body",
+            appendTo: "body",
             animation: {
                 open: {
                     effects: "slideDownIn",
@@ -155,7 +159,7 @@
                 options = that.options;
 
             if (!that.visible()) {
-                that.wrapper = kendo.wrap(that.element).css({ overflow: HIDDEN, display: "block", position: ABSOLUTE, top: "-10000px" });
+                that.wrapper = kendo.wrap(that.element).css({ overflow: HIDDEN, display: "block", position: ABSOLUTE});
 
                 that._update();
 
@@ -189,17 +193,19 @@
                 toggleTarget = that.options.toggleTarget,
                 target = e.target;
 
-            if (contains(container, target)) return;
-            if (toggleTarget && contains($(toggleTarget)[0], target)) return;
-
-            that.close();
+            if (!contains(container, target) && !(toggleTarget && contains($(toggleTarget)[0], target))) {
+                that.close();
+            }
         },
 
         _update: function() {
             var that = this,
                 options = that.options;
 
-            align(that.wrapper, $(options.anchor), options.origin, options.position);
+
+            if (options.appendTo === Popup.fn.options.appendTo) {
+                align(that.wrapper, $(options.anchor), options.origin, options.position);
+            }
         }
     });
 
