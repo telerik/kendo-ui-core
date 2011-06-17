@@ -8,11 +8,14 @@
         MOUSEENTER = 'mouseenter',
         MOUSELEAVE = 'mouseleave',
         CLICK = 'click',
-        clickableItems = '.t-tabstrip-items > .t-item:not(.t-state-disabled)',
-        disabledLinks = '.t-tabstrip-items > .t-state-disabled .t-link',
-        disabledClass = 't-state-disabled',
-        defaultState = 't-state-default',
-        activeState = 't-state-active',
+        CLICKABLEITEMS = '.t-tabstrip-items > .t-item:not(.t-state-disabled)',
+        HOVERABLEITEMS = '.t-tabstrip-items > .t-item:not(.t-state-disabled):not(.t-state-active)',
+        DISABLEDLINKS = '.t-tabstrip-items > .t-state-disabled .t-link',
+        DISABLEDSTATE = 't-state-disabled',
+        DEFAULTSTATE = 't-state-default',
+        ACTIVESTATE = 't-state-active',
+        HOVERSTATE = 't-state-hover',
+        TABONTOP = 't-tab-on-top',
         EMPTY = ':empty';
 
     var TabStrip = Component.extend({
@@ -28,9 +31,9 @@
             options = that.options;
 
             element
-                .delegate(clickableItems, CLICK, $.proxy(that._click, that))
-                .delegate(clickableItems, MOUSEENTER + ' ' + MOUSELEAVE, that._toggleHover)
-                .delegate(disabledLinks, CLICK, false);
+                .delegate(CLICKABLEITEMS, CLICK, $.proxy(that._click, that))
+                .delegate(HOVERABLEITEMS, MOUSEENTER + ' ' + MOUSELEAVE, that._toggleHover)
+                .delegate(DISABLEDLINKS, CLICK, false);
 
             that.bind(events, that.options);
 
@@ -42,7 +45,7 @@
                         $(item).find('>.t-link').data('ContentUrl', that.options.contentUrls[index]);
                     });
 
-            var selectedItems = element.find('li.t-state-active'),
+            var selectedItems = element.find('li.' + ACTIVESTATE),
                 content = $(that.getContentElement(selectedItems.parent().children().index(selectedItems)));
 
             if (content.length > 0 && content[0].childNodes.length == 0)
@@ -69,7 +72,7 @@
             
             $(element).each(function (index, item) {
                 item = $(item);
-                if (item.is('.t-state-disabled,.t-state-active'))
+                if (item.is('.' + DISABLEDSTATE + ',.' + ACTIVESTATE))
                     return;
 
                 that.activateTab(item);
@@ -77,14 +80,14 @@
         },
 
         enable: function (element) {
-            $(element).addClass(defaultState)
-                 .removeClass(disabledClass);
+            $(element).addClass(DEFAULTSTATE)
+                 .removeClass(DISABLEDSTATE);
         },
 
         disable: function (element) {
-            $(element).removeClass(defaultState)
-                 .removeClass(activeState)
-				 .addClass(disabledClass);
+            $(element).removeClass(DEFAULTSTATE)
+                 .removeClass(ACTIVESTATE)
+				 .addClass(DISABLEDSTATE);
         },
 
         reload: function (element) {
@@ -109,7 +112,7 @@
                 items = tabGroup
                             .find('li')
                             .addClass('t-item'),
-                activeItem = items.filter('.t-state-active').index(),
+                activeItem = items.filter('.' + ACTIVESTATE).index(),
                 activeTab = activeItem >= 0 ? activeItem : undefined,
                 tabStripID = that.element.attr('id');
 
@@ -118,7 +121,7 @@
             that.contentElements
                 .addClass('t-content')
                 .eq(activeTab)
-                .addClass('t-state-active')
+                .addClass(ACTIVESTATE)
                 .css({ display: 'block' });
 
             items
@@ -131,16 +134,16 @@
                 .addClass('t-image');
             items
                 .filter(':not([disabled]):not([class*=t-state-disabled])')
-                .addClass('t-state-default');
+                .addClass(DEFAULTSTATE);
             items
                 .filter('li[disabled]')
-                .addClass('t-state-disabled')
+                .addClass(DISABLEDSTATE)
                 .removeAttr('disabled');
             items
                 .filter(':not([class*=t-state])')
                 .children('a:focus')
                 .parent()
-                .addClass('t-state-active');
+                .addClass(ACTIVESTATE);
 
             items.each(function() {
                 var item = $(this);
@@ -168,7 +171,7 @@
         },
 
         _toggleHover: function(e) {
-            $(e.currentTarget).toggleClass('t-state-hover', e.type == MOUSEENTER);
+            $(e.currentTarget).toggleClass(HOVERSTATE, e.type == MOUSEENTER);
         },
 
         _click: function (e) {
@@ -178,7 +181,7 @@
                 href = link.attr('href'),
                 content = $(that.getContentElement(item.index()));
 
-            if (item.is('.t-state-disabled,.t-state-active')) {
+            if (item.is('.' + DISABLEDSTATE + ',.' + ACTIVESTATE)) {
                 e.preventDefault();
                 return;
             }
@@ -205,11 +208,12 @@
                                        extend( extend({ reverse: true }, that.options.animation.open), { show: false, hide: true }),
                 openAnimation = that.options.animation.open,
                 neighbours = item.parent().children(),
-                oldTab = neighbours.filter('.t-state-active'),
+                oldTab = neighbours.filter('.' + ACTIVESTATE),
                 itemIndex = neighbours.index(item);
 
             // deactivate previously active tab
-            oldTab.kendoRemoveClass(activeState, { duration: closeAnimation.duration });
+            oldTab.kendoRemoveClass(ACTIVESTATE, { duration: closeAnimation.duration });
+            item.kendoRemoveClass(HOVERSTATE, { duration: closeAnimation.duration });
 
             // handle content elements
             var contentElements = that.contentElements;
@@ -217,14 +221,14 @@
             if (contentElements.length == 0)
                 return false;
 
-            var visibleContentElements = contentElements.filter('.t-state-active');
+            var visibleContentElements = contentElements.filter('.' + ACTIVESTATE);
 
             // find associated content element
             var content = $(that.getContentElement(itemIndex));
 
             if (content.length == 0) {
                 visibleContentElements
-                    .removeClass( activeState )
+                    .removeClass( ACTIVESTATE )
                     .kendoStop(true, true)
                     .kendoAnimate( closeAnimation );
                 return false;
@@ -232,14 +236,15 @@
 
             var isAjaxContent = (item.children('.t-link').data('ContentUrl') || false) && content.is(EMPTY),
                 showContentElement = function () {
-                    oldTab.removeClass('t-tab-on-top');
-                    item.addClass('t-tab-on-top'); // change these directly to bring the tab on top.
-                    item.css('z-index'); // nudgy nudgy...
+                    oldTab.removeClass(TABONTOP);
+                    item
+                        .addClass(TABONTOP) // change these directly to bring the tab on top.
+                        .css('z-index'); // nudgy nudgy...
 
-                    oldTab.kendoAddClass(defaultState, { duration: openAnimation.duration });
-                    item.kendoAddClass(activeState, { duration: openAnimation.duration });
+                    oldTab.kendoAddClass(DEFAULTSTATE, { duration: openAnimation.duration });
+                    item.kendoAddClass(ACTIVESTATE, { duration: openAnimation.duration });
                     content
-                        .addClass(activeState)
+                        .addClass(ACTIVESTATE)
                         .kendoStop(true, true)
                         .kendoAnimate( openAnimation );
                 },
@@ -253,7 +258,7 @@
                 };
 
             visibleContentElements
-                    .removeClass(activeState)
+                    .removeClass(ACTIVESTATE)
                     .css('height', visibleContentElements.height())
                     .css('height');
 
@@ -270,7 +275,7 @@
         },
 
         getSelectedTabIndex: function () {
-            return this.element.find('li.t-state-active').index();
+            return this.element.find('li.' + ACTIVESTATE).index();
         },
 
         getContentElement: function (itemIndex) {

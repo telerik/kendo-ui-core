@@ -1,10 +1,10 @@
 (function() {
     var Application,
-            pushState = "pushState" in history;
+        pushState = "pushState" in history,
+        currentHtml = "",
+        initialFolder = 0;
 
     Application = {
-        html: '',
-
         load: function(href) {
             Application.fetch(href);
 
@@ -17,26 +17,24 @@
                 if (currentHref && currentHref.toLowerCase() === href) {
                     Application.fetchExample(href);
                     $('#viewDescription').trigger('click');
-
-                    Application.fetchDescription();
                 }
             });
         },
 
         fetchExample: function (href) {
             $.get(href, function(html) {
-                Application.html = html;
+                currentHtml = html;
+                Application.fetchDescription();
 
                 $("#exampleBody").empty().html(Application.body(html));
             });
         },
 
-        fetchCode: function(callback) {
-            var code = Application.html;
-            code = code.replace(new RegExp('\\s*<!-- tools -->(([\\u000a\\u000d\\u2028\\u2029]|.)*?)<!-- tools -->', 'ig'), ''); // Remove tools first to strip description
-            code = code.replace(new RegExp('\\s*<!-- \\w+ -->(([\\u000a\\u000d\\u2028\\u2029]|.)*?)<!-- \\w+ -->', 'ig'), '');
+        fetchCode: function(html, callback) {
+            html = html.replace(new RegExp('\\s*<!-- tools -->(([\\u000a\\u000d\\u2028\\u2029]|.)*?)<!-- tools -->', 'ig'), ''); // Remove tools first to strip description
+            html = html.replace(new RegExp('\\s*<!-- \\w+ -->(([\\u000a\\u000d\\u2028\\u2029]|.)*?)<!-- \\w+ -->', 'ig'), '');
 
-            $("#code").empty().text(code);
+            $("#code").empty().text(html);
 
             prettyPrint();
 
@@ -47,12 +45,12 @@
         fetchDescription: function(href) {
             if (href)
                 $.get(href, function(html) {
-                    Application.html = html;
+                    currentHtml = html;
 
                     $(".description").empty().html(Application.description(html).trim());
                 });
             else
-                $(".description").empty().html(Application.description(Application.html).trim());
+                $(".description").empty().html(Application.description(currentHtml).trim());
         },
 
         description: function(html) {
@@ -84,20 +82,28 @@
                 });
 
                 history.replaceState({ href: location.href }, null, location.href);
-
-                Application.fetchDescription(location.href);
             }
+
+            initialFolder = location.href.match(/\//g).length;
+
+            Application.fetchDescription(location.href);
 
             $("#viewCode").click(function(e) {
                 e.preventDefault();
 
-                Application.fetchCode();
+                if (pushState)
+                    Application.fetchCode(currentHtml);
+                else
+                    $.get(location.href, function(html) {
+                        Application.fetchCode(html);
+                    });
             });
 
             $("#skinSelector").bind('change', function(e) {
                 var kendoLinks = $('link[href*="kendo."]', document.head),
                     skinLink = kendoLinks.filter(':not([href*="kendo.common"])'),
-                    url = skinLink.attr('href').replace(/kendo\.\w+\.css/, 'kendo.' + $("#skinSelector")[0].value.toLowerCase() + '.css'),
+                    currentFolder = new Array(location.href.match(/\//g).length - initialFolder + 1).join("../"),
+                    url = currentFolder + skinLink.attr('href').replace(/kendo\.\w+\.css/i, 'kendo.' + $("#skinSelector")[0].value.toLowerCase() + '.css'),
                     newLink;
 
                 if ($.browser.msie)
