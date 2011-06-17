@@ -252,6 +252,19 @@
             return box;
         },
 
+        move: function(x, y) {
+            var box = this,
+                height = box.height(),
+                width = box.width();
+
+            box.x1 = x;
+            box.y1 = y;
+            box.x2 = box.x1 + width;
+            box.y2 = box.y1 + height;
+
+            return box;
+        },
+
         wrap: function(targetBox) {
             var box = this;
 
@@ -307,6 +320,11 @@
             return box;
         },
 
+        expand: function(dw, dh) {
+            this.shrink(-dw, -dh);
+            return this;
+        },
+
         clone: function() {
             var box = this;
 
@@ -351,6 +369,17 @@
             };
 
             return viewElements;
+        },
+
+        translateChildren: function(dx, dy) {
+            var element = this,
+                children = element.children,
+                childrenCount = children.length,
+                i;
+
+            for (i = 0; i < childrenCount; i++) {
+                children[i].box.translate(dx, dy);
+            }
         }
     });
 
@@ -387,6 +416,48 @@
             viewElements.push.apply(viewElements, root.getViewElements(factory));
 
             return viewRoot;
+        }
+    });
+
+    var BoxElement = ChartElement.extend({
+        init: function(options) {
+            var element = this;
+            ChartElement.fn.init.call(element);
+
+            element.options = extend(true, {}, element.options, options);
+        },
+
+        updateLayout: function(targetBox) {
+            var element = this,
+                box,
+                options = element.options,
+                children = element.children,
+                margin = getMargin(options.margin);
+
+            ChartElement.fn.updateLayout.call(element, targetBox);
+
+            if (children.length === 0) {
+                box = element.box = new Box2D(0, 0, options.width, options.height);
+            } else {
+                box = element.box;
+            }
+
+            element.translateChildren(
+                targetBox.x1 - box.x1 + margin.left,
+                targetBox.y1 - box.y1 + margin.top);
+
+            box.move(targetBox.x1, targetBox.y1);
+            box.expand(margin.left + margin.right, margin.top + margin.bottom);
+        },
+
+        options: {
+            align: LEFT,
+            vAlign: TOP,
+            margin: { },
+            padding: { },
+            border: { },
+            width: 0,
+            height: 0
         }
     });
 
@@ -776,17 +847,6 @@
             legend.translateChildren(options.offsetX + markerWidth, options.offsetY);
 
             legend.box = targetBox;
-        },
-
-        translateChildren: function(dx, dy) {
-            var legend = this,
-                children = legend.children,
-                childrenCount = children.length,
-                i;
-
-            for (i = 0; i < childrenCount; i++) {
-                children[i].box.translate(dx, dy);
-            }
         },
 
         markerSize: function() {
@@ -2216,6 +2276,7 @@
     Chart.Text = Text;
     Chart.BarLabel = BarLabel;
     Chart.RootElement = RootElement;
+    Chart.BoxElement = BoxElement;
     Chart.NumericAxis = NumericAxis;
     Chart.CategoryAxis = CategoryAxis;
     Chart.Bar = Bar;

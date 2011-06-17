@@ -26,7 +26,9 @@
 
                     this.getViewElements = function() {
                         return [viewElement];
-                    }
+                    },
+
+                    this.updateLayout = function() { }
                 }
 
                 function ViewElementStub() {
@@ -87,6 +89,159 @@
                     rootElement.updateLayout();
                 });
 
+            })();
+
+            (function() {
+                var MARGIN = 3,
+                    PADDING = 2,
+                    BORDER = 1,
+                    WIDTH = 10,
+                    HEIGHT = 20,
+                    targetBox = new Box2D(100, 100, 200, 200),
+                    childBoxes,
+                    childrenBox = new Box2D(0, 0, 20, 20),
+                    boxElement,
+                    childElements;
+
+                // ------------------------------------------------------------
+                module("BoxElement", {
+                    setup: function() {
+                        boxElement = new Chart.BoxElement({
+                            width: WIDTH,
+                            height: HEIGHT
+                        });
+                    }
+                });
+
+                test("sets width", function() {
+                    boxElement.updateLayout(targetBox);
+
+                    equal(boxElement.box.width(), WIDTH);
+                });
+
+                test("sets height", function() {
+                    boxElement.updateLayout(targetBox);
+
+                    equal(boxElement.box.height(), HEIGHT);
+                });
+
+                test("applies top margin", function() {
+                    boxElement.options.margin.top = MARGIN;
+                    boxElement.updateLayout(targetBox);
+
+                    same([boxElement.box.y1, boxElement.box.y2],
+                         [targetBox.y1, targetBox.y1 + HEIGHT + MARGIN]);
+                });
+
+                test("applies right margin", function() {
+                    boxElement.options.margin.right = MARGIN;
+                    boxElement.updateLayout(targetBox);
+
+                    same([boxElement.box.x1, boxElement.box.x2],
+                         [targetBox.x1, targetBox.x1 + WIDTH + MARGIN]);
+                });
+
+                test("applies bottom margin", function() {
+                    boxElement.options.margin.bottom = MARGIN;
+                    boxElement.updateLayout(targetBox);
+
+                    same([boxElement.box.y1, boxElement.box.y2],
+                         [targetBox.y1, targetBox.y1 + HEIGHT + MARGIN]);
+                });
+
+                test("applies left margin", function() {
+                    boxElement.options.margin.left = MARGIN;
+                    boxElement.updateLayout(targetBox);
+
+                    same([boxElement.box.x1, boxElement.box.x2],
+                         [targetBox.x1, targetBox.x1 + WIDTH + MARGIN]);
+                });
+
+                test("applies margins", function() {
+                    boxElement.options.margin = MARGIN;
+                    boxElement.updateLayout(targetBox);
+
+                    same([boxElement.box.x1, boxElement.box.y1,
+                          boxElement.box.x2, boxElement.box.y2],
+                         [targetBox.x1, targetBox.y1,
+                          targetBox.x1 + WIDTH + 2 * MARGIN,
+                          targetBox.y1 + HEIGHT + 2 * MARGIN]);
+                });
+
+                // ------------------------------------------------------------
+                module("BoxElement / Alignment", {
+                    setup: function() {
+                        boxElement = new Chart.BoxElement({
+                            width: WIDTH,
+                            height: HEIGHT,
+                            margin: MARGIN,
+                            padding: PADDING,
+                            border: BORDER
+                        });
+                    }
+                });
+
+                test("top left alignment", function() {
+                    boxElement.updateLayout(targetBox);
+
+                    same([boxElement.box.x1, boxElement.box.y1],
+                         [targetBox.x1, targetBox.y1]);
+                });
+
+                // ------------------------------------------------------------
+                module("BoxElement / With children", {
+                    setup: function() {
+                        boxElement = new Chart.BoxElement();
+                        childElements = [
+                            new ChartElementStub(),
+                            new ChartElementStub()
+                        ];
+
+                        childBoxes = [
+                            new Box2D(0, 0, 10, 10),
+                            new Box2D(0, 0, 20, 20)
+                        ];
+
+                        childElements[0].box = childBoxes[0];
+                        childElements[1].box = childBoxes[1];
+                        [].push.apply(boxElement.children, childElements);
+                    }
+                });
+
+                test("children set width", function() {
+                    boxElement.updateLayout(targetBox);
+
+                    equal(boxElement.box.width(), childrenBox.width());
+                });
+
+                test("children set height", function() {
+                    boxElement.updateLayout(targetBox);
+
+                    equal(boxElement.box.height(), childrenBox.height());
+                });
+
+                test("children are translated to targetBox", function() {
+                    boxElement.updateLayout(targetBox);
+
+                    $.each(childElements, function() {
+                        same([this.box.x1, this.box.y1],
+                             [targetBox.x1, targetBox.y1]);
+                    });
+                });
+
+                test("applies margins", function() {
+                    boxElement.options.margin = MARGIN;
+                    boxElement.updateLayout(targetBox);
+
+                    $.each(childElements, function() {
+                        same([this.box.x1, this.box.y1,
+                              this.box.x2, this.box.y2],
+                             [targetBox.x1 + MARGIN,
+                              targetBox.y1 + MARGIN,
+                              targetBox.x1 + this.box.width() + MARGIN,
+                              targetBox.y1 + this.box.height() + MARGIN]);
+                    });
+                });
             })();
 
             (function() {

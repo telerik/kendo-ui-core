@@ -149,6 +149,44 @@
                 equal(box.shrink(0, 0), box);
             });
 
+            test("expand increases width", function() {
+                var clone = box.clone().expand(10, 0);
+                equal(clone.width(), box.width() + 10);
+            });
+
+            test("expand increases height", function() {
+                var clone = box.clone().expand(0, 10);
+                equal(clone.height(), box.height() + 10);
+            });
+
+            test("expand returns box instance", function() {
+                equal(box.expand(0, 0), box);
+            });
+
+            test("move changes x", function() {
+                var clone = box.clone().move(10, 0);
+                equal(clone.x1, box.x1 + 10);
+            });
+
+            test("move changes y", function() {
+                var clone = box.clone().move(0, 10);
+                equal(clone.y1, box.y1 + 10);
+            });
+
+            test("move maintains width", function() {
+                var clone = box.clone().move(10, 0);
+                equal(clone.width(), box.width());
+            });
+
+            test("move maintains height", function() {
+                var clone = box.clone().move(0, 10);
+                equal(clone.height(), box.height());
+            });
+
+            test("move returns box instance", function() {
+                equal(box.move(0, 0), box);
+            });
+
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>
