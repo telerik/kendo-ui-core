@@ -1435,8 +1435,12 @@ html body .t-grid tbody .t-button-icon
 
 .t-popup .t-item
 {
-    padding: 1px 5px 1px 3px;
     cursor: default;
+}
+
+.t-list .t-item
+{
+    padding: 1px 5px 1px 3px;
 }
 
 /* Calendar */
