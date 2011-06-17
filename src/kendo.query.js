@@ -220,7 +220,7 @@
         var descriptor = typeof field === "string" ? { field: field, dir: dir } : field,
             descriptors = $.isArray(descriptor) ? descriptor : (descriptor !== undefined ? [descriptor] : []);
 
-        return $.map(descriptors, function(d) { return { field: d.field, dir: d.dir || "asc" }; });
+        return $.grep(descriptors, function(d) { return !!d.dir; });
     }
     Query.expandFilter = function(expressions) {
         return expressions = $.isArray(expressions) ? expressions : [expressions];
@@ -229,8 +229,10 @@
         return expressions = $.isArray(expressions) ? expressions : [expressions];
     }
     Query.expandGroup = function(field, dir) {
-        var descriptor = typeof field === "string" ? { field: field, dir: dir } : field;
-        return $.isArray(descriptor) ? descriptor : (descriptor !== undefined ? [descriptor] : []);
+       var descriptor = typeof field === "string" ? { field: field, dir: dir } : field,
+           descriptors = $.isArray(descriptor) ? descriptor : (descriptor !== undefined ? [descriptor] : []);
+
+        return $.map(descriptors, function(d) { return { field: d.field, dir: d.dir || "asc", aggregates: d.aggregates }; });
     }
     Query.prototype = {
         toArray: function () {
@@ -275,7 +277,7 @@
             return new Query(predicate(this.data));
         },
         group: function(descriptors, allData) {
-            descriptors = descriptors || [];
+            descriptors =  Query.expandGroup(descriptors || []);
             allData = allData || this.data;
 
             var that = this,
