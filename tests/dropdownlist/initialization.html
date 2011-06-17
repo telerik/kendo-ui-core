@@ -58,11 +58,13 @@
            });
 
            test("wraps element if no wrapper div and hide element", function() {
+               input.wrap("<div class='test'/>");
                input.kendoDropDownList();
 
                var wrapper = input.data("kendoDropDownList").wrapper;
 
-               ok(wrapper.is("div"));
+               ok(wrapper.parent().is("div.test"));
+               ok(wrapper.is("div.t-widget"));
                ok(wrapper.hasClass("t-widget t-dropdown t-header"));
                ok(!input.is(":visible"));
            });

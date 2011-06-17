@@ -57,13 +57,17 @@
         },
 
         enable: function(enable) {
-            var that = this;
+            var that = this,
+                wrapper = that.wrapper,
+                element = that.element,
+                ATTRIBUTE = "disabled";
+
             if (enable === false) {
-                that.wrapper
-                    .addClass(DISABLED)
-                    .unbind();
+                wrapper.addClass(DISABLED).unbind();
+                element.attr(ATTRIBUTE, ATTRIBUTE);
             } else {
-                that.wrapper
+                element.removeAttr(ATTRIBUTE, ATTRIBUTE);
+                wrapper
                     .removeClass(DISABLED)
                     .bind({
                         keydown: proxy(that._keydown, that),
@@ -149,8 +153,8 @@
                 var that = this;
                 that.select(function(dataItem) {
                     var text = that._text(dataItem);
-                    if(text || text === 0) {
-                        return (text + "").toLowerCase().slice(0, word.length) == word.toLowerCase();
+                    if (text !== undefined) {
+                        return (text + "").toLowerCase().indexOf(word.toLowerCase()) === 0;
                     }
                 });
             }
@@ -204,9 +208,9 @@
             var span = this.span;
 
             if (text !== undefined) {
-                span.html(text && !whiteSpaceRegExp.test(text) ? text : '&nbsp&nbsp');
+                span.text(text);
             } else {
-                return span.html();
+                return span.text();
             }
         },
 
