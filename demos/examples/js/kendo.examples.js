@@ -60,7 +60,9 @@
         },
 
         body: function(html) {
-            return /<div id="exampleBody">(([\u000a\u000d\u2028\u2029]|.)*?)<!-- tools -->/ig.exec(html)[1];
+            var match = /<div id="example(\w*)">(([\u000a\u000d\u2028\u2029]|.)*?)<!-- tools -->/ig.exec(html);
+
+            return (match[1] != "") ? match[2] : "<div id=\"exampleBody\">" + match[0].replace("<!-- tools -->", "") + "</div>";
         },
 
         init: function() {
