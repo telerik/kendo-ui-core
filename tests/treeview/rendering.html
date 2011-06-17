@@ -290,6 +290,78 @@
 
                 equal($item.find(".foo").length, 1);
             });
+
+            test("renders plus icon if item contains items", function() {
+                var $item = $(TreeView.getItemHtml({
+                    item: {
+                        text: "foo",
+                        items: [
+                            { text: "bar" }
+                        ]
+                    }
+                }));
+
+                equal($item.find(".t-icon.t-plus").length, 1);
+            });
+
+            test("renders minus icon if item is expanded", function() {
+                var $item = $(TreeView.getItemHtml({
+                    item: {
+                        text: "foo",
+                        expanded: true,
+                        items: [
+                            { text: "bar" }
+                        ]
+                    }
+                }));
+
+                equal($item.find(".t-icon.t-minus").length, 1);
+            });
+
+            test("renders disabled plus icon if item is disabled", function() {
+                var $item = $(TreeView.getItemHtml({
+                    item: {
+                        text: "foo",
+                        enabled: false,
+                        items: [
+                            { text: "bar" }
+                        ]
+                    }
+                }));
+
+                equal($item.find(".t-icon.t-plus-disabled").length, 1);
+                equal($item.find(".t-icon.t-plus").length, 0);
+            });
+
+            test("renders disabled minus icon if item is disabled and expanded", function() {
+                var $item = $(TreeView.getItemHtml({
+                    item: {
+                        text: "foo",
+                        enabled: false,
+                        expanded: true,
+                        items: [
+                            { text: "bar" }
+                        ]
+                    }
+                }));
+
+                equal($item.find(".t-icon.t-minus-disabled").length, 1);
+                equal($item.find(".t-icon.t-minus").length, 0);
+            });
+
+            test("renders plus icon on loadOnDemand items if treeview is AJAX-bound", function() {
+                var $item = $(TreeView.getItemHtml({
+                    item: {
+                        text: "foo",
+                        loadOnDemand: true
+                    },
+                    treeview: {
+                        isAjax: true
+                    }
+                }));
+
+                equal($item.find(".t-icon.t-plus").length, 1);
+            });
 /*
             module("Rendering / Checkboxes");
 

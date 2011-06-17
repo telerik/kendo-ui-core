@@ -652,64 +652,108 @@
         },
 
         getItemHtml: function (options) {
-            var item = options.item,
-                itemsCount = options.itemsCount,
-                absoluteIndex = "1:1";
-                //absoluteIndex = new $t.stringBuilder().cat(groupLevel).catIf(':', groupLevel).cat(itemIndex).string();
+            var wrapperCssClass = function(group, item) {
+                    var result = "t-item",
+                        index = item.index;
 
-            var itemTemplate = kendo.template(
-"<li class='<%= wrapperCssClass %>'>" +
-    "<div class='<%= cssClass %>'>" +
-        "<<%= tag %> class='<%= activatorClass %>'<%= activatorAttributes %>>" +
-            "<%= image %><%= sprite %><%= text %><%= value %>" +
+                    if (group.isFirstLevel && index == 0) {
+                        result += " t-first"
+                    }
+
+                    if (index == group.length-1) {
+                        result += " t-last";
+                    }
+
+                    return result;
+                },
+                cssClass = function(group, item) {
+                    var result = "",
+                        index = item.index,
+                        groupLength = group.length - 1;
+                    
+                    if (group.isFirstLevel && index == 0) {
+                        result += "t-top ";
+                    }
+
+                    if (index == 0 && index != groupLength) {
+                        result += "t-top";
+                    } else if (index == groupLength) {
+                        result += "t-bot";
+                    } else {
+                        result += "t-mid";
+                    }
+                    
+                    return result;
+                },
+                activatorClass = function(item) {
+                    var result = "t-in";
+
+                    if (item.enabled === false) {
+                        result += " t-state-disabled";
+                    }
+
+                    if (item.selected === true) {
+                        result += " t-state-selected";
+                    }
+
+                    return result;
+                },
+                subGroupActivatorClass = function(item) {
+                    var result = "t-icon";
+
+                    if (item.expanded !== true) {
+                        result += " t-plus";
+                    } else {
+                        result += " t-minus";
+                    }
+
+                    if (item.enabled === false) {
+                        result += "-disabled";
+                    }
+
+                    return result;
+                },
+                template = kendo.template,
+                itemTemplate = template(
+"<li class='<%= wrapperCssClass(group, item) %>'>" +
+    "<div class='<%= cssClass(group, item) %>'>" +
+        "<<%= tag %> class='<%= activatorClass(item) %>'<%= activatorAttributes %>>" +
+            "<%= subGroupActivator({ item: item, activatorClass: subGroupActivatorClass }) %><%= image(item) %><%= sprite(item) %><%= text %><%= value(item) %>" +
         "</<%= tag %>>" +
     "</div>" +
-    "<%= getSubGroup({ items: item.items, treeview: treeview, group: group }) %>" +
+    "<%= subGroup({ items: item.items, treeview: treeview, group: group }) %>" +
 "</li>"
-            );
+                ),
+                imageTemplate = template("<img class='t-image' alt='' src='<%= imageUrl %>' />"),
+                valueTemplate = template("<input type='hidden' class='t-input' name='itemValue' value='<%= value %>' />"),
+                subGroupActivatorTemplate = template("<span class='<%= data.activatorClass(data.item) %>'></span>", { useWithBlock: false }),
+                spriteTemplate = template("<span class='t-sprite <%= spriteCssClass %>'></span>"),
+                emptyTemplate = template("");
 
             options = $.extend({
                     treeview: {},
                     group: {}
                 }, options);
 
-            var activatorClass = "t-in";
+            var item = options.item,
+                url = item.url;
 
-            if (item.enabled === false) {
-                activatorClass += " t-state-disabled";
-            }
-            
-            if (item.selected === true) {
-                activatorClass += " t-state-selected";
-            }
-
-            var url = item.url;
+            //absoluteIndex = new $t.stringBuilder().cat(groupLevel).catIf(':', groupLevel).cat(itemIndex).string();
 
             return itemTemplate($.extend(options, {
-                wrapperCssClass: "t-item" +
-                                 (options.group.isFirstLevel && item.index == 0 ? " t-first" : "") +
-                                 (item.index == options.group.length-1 ? " t-last" : ""),
-                cssClass: (options.group.isFirstLevel && item.index == 0 ? "t-top " : "") + 
-                          (item.index == 0 && item.index != options.group.length-1 ? "t-top" : 
-                           item.index == options.group.length-1 ? "t-bot" :
-                           "t-mid"),
+                wrapperCssClass: wrapperCssClass,
+                subGroupActivatorClass: subGroupActivatorClass,
+                cssClass: cssClass,
                 tag: url ? "a" : "span",
                 activatorClass: activatorClass,
                 activatorAttributes: url ? " href='" + url + "'" : "",
-                image: item.imageUrl ? "<img class='t-image' alt='' src='" + item.imageUrl + "' />" : "",
-                sprite: item.spriteCssClass ? "<span class='t-sprite " + item.spriteCssClass + "'></span>" : "",
                 text: item.encoded === false ? item.text : kendo.htmlEncode(item.text),
-                value: item.value ? "<input type='hidden' class='t-input' name='itemValue' value='" + item.value + "' />" : "",
-                getSubGroup: TreeView.getGroupHtml
+                image: item.imageUrl ? imageTemplate : emptyTemplate,
+                sprite: item.spriteCssClass ? spriteTemplate : emptyTemplate,
+                value: item.value ? valueTemplate : emptyTemplate,
+                subGroup: TreeView.getGroupHtml,
+                subGroupActivator: ((item.loadOnDemand && options.treeview.isAjax) || item.items) ? subGroupActivatorTemplate : emptyTemplate
             }));
-
-            if ((options.isAjax && item.LoadOnDemand) || (item.Items && item.Items.length > 0)) {
-                html.cat('<span class="t-icon')
-                        .catIf(' t-plus', item.Expanded !== true)
-                        .catIf(' t-minus', item.Expanded === true)
-                        .catIf('-disabled', item.Enabled === false) // t-(plus|minus)-disabled
-                    .cat('"></span>');
-            }
 
             if (options.showCheckBoxes && item.Checkable !== false) {
                 var arrayName = options.elementId + '_checkedNodes';
