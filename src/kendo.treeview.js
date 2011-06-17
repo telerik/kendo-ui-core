@@ -717,8 +717,10 @@
                 itemTemplate = template(
 "<li class='<%= wrapperCssClass(group, item) %>'>" +
     "<div class='<%= cssClass(group, item) %>'>" +
+        "<%= checkboxTemplate({ id: treeview.id, group: group, item: item }) %>" +
         "<<%= tag %> class='<%= activatorClass(item) %>'<%= activatorAttributes %>>" +
-            "<%= subGroupActivator({ item: item, activatorClass: subGroupActivatorClass }) %><%= image(item) %><%= sprite(item) %><%= text %><%= value(item) %>" +
+            "<%= subGroupActivator({ item: item, activatorClass: subGroupActivatorClass }) %>" +
+            "<%= image(item) %><%= sprite(item) %><%= text %><%= value(item) %>" +
         "</<%= tag %>>" +
     "</div>" +
     "<%= subGroup({ items: item.items, treeview: treeview, group: group }) %>" +
@@ -727,6 +729,14 @@
                 imageTemplate = template("<img class='t-image' alt='' src='<%= imageUrl %>' />"),
                 valueTemplate = template("<input type='hidden' class='t-input' name='itemValue' value='<%= value %>' />"),
                 subGroupActivatorTemplate = template("<span class='<%= data.activatorClass(data.item) %>'></span>", { useWithBlock: false }),
+                checkboxTemplate = template(
+"<% var arrayName = id + '_checkedNodes'," +
+       "absoluteIndex = (group.level ? group.level + ':' : '') + item.index; %>" + 
+"<span class='t-checkbox'>" + 
+    "<input type='hidden' value='<%= absoluteIndex %>' name='<%= arrayName %>.Index' class='t-input' />" +
+    "<input type='checkbox' value='<%= item.checked ? 'True' : 'False' %>' name='<%= arrayName %>[<%= absoluteIndex %>].Checked' class='t-input' <%= item.enabled === false ? ' disabled' : '' %><%= item.checked === true ? ' checked' : '' %>/>" +
+"</span>"
+                ),
                 spriteTemplate = template("<span class='t-sprite <%= spriteCssClass %>'></span>"),
                 emptyTemplate = template("");
 
@@ -736,9 +746,8 @@
                 }, options);
 
             var item = options.item,
+                treeview = options.treeview,
                 url = item.url;
-
-            //absoluteIndex = new $t.stringBuilder().cat(groupLevel).catIf(':', groupLevel).cat(itemIndex).string();
 
             return itemTemplate($.extend(options, {
                 wrapperCssClass: wrapperCssClass,
@@ -752,29 +761,14 @@
                 sprite: item.spriteCssClass ? spriteTemplate : emptyTemplate,
                 value: item.value ? valueTemplate : emptyTemplate,
                 subGroup: TreeView.getGroupHtml,
-                subGroupActivator: ((item.loadOnDemand && options.treeview.isAjax) || item.items) ? subGroupActivatorTemplate : emptyTemplate
+                subGroupActivator: ((item.loadOnDemand && treeview.isAjax) || item.items) ? subGroupActivatorTemplate : emptyTemplate,
+                checkboxTemplate: (treeview.showCheckboxes && item.checkable !== false) ? checkboxTemplate : emptyTemplate
             }));
 
             if (options.showCheckBoxes && item.Checkable !== false) {
-                var arrayName = options.elementId + '_checkedNodes';
-
-                html.cat('<span class="t-checkbox">')
-                        .cat('<input type="hidden" value="').cat(absoluteIndex)
-                        .cat('" name="').cat(arrayName).cat('.Index')
-                        .cat('" class="t-input"/>')
-
-                        .cat('<input type="checkbox" value="').cat(item.Checked === true ? 'True' : 'False')
-                        .cat('" class="t-input')
-                        .cat('" name="').cat(arrayName).cat('[').cat(absoluteIndex).cat('].Checked"')
-                        .catIf(' disabled="disabled"', item.Enabled === false)
-                        .catIf(' checked="checked"', item.Checked)
-                    .cat('/>');
-
                 if (item.Checked) {
                     html.cat($t.treeview.getNodeInputsHtml(item.Value, item.Text, arrayName, absoluteIndex));
                 }
-
-                html.cat('</span>');
             }
         },
 

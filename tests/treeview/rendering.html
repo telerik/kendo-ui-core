@@ -362,82 +362,86 @@
 
                 equal($item.find(".t-icon.t-plus").length, 1);
             });
-/*
-            module("Rendering / Checkboxes");
 
-            test("getItemHtml should render span wrapper for the checkNodes", function() {
-                
+            module("checkboxes");
+
+            test("should be rendered when showCheckboxes is true", function() {
                 var $item = $(TreeView.getItemHtml({
                     item: {
-                        text: "text",
-                        Checkable: true
-                    }
-                }));
-
-                equal($item.find('> div > .t-checkbox').length, 1, 'Does not render checkbox group wrapper');
-            });
-
-            test("getItemHtml should render checkbox and hidden input", function() {
-
-                var $item = $(TreeView.getItemHtml({
-                    item: {
-                        text: "text",
-                        Checkable: true
-                    },
-                    showCheckBoxes: true
-                }));
-
-                equal($item.find('.t-input[type="hidden"]').length, 1);
-                equal($item.find('.t-input[type="checkbox"]').length, 1);
-            });
-
-            test("getItemHtml should render hidden input with name attr in checkbox wrapper", function() {
-
-                var $item = $(TreeView.getItemHtml({
-                    item: {
-                        text: "text",
-                        Checkable: true
+                        text: "text"
                     },
                     treeview: {
-                        showCheckBoxes: true,
-                        id: "TreeView1"
+                        showCheckboxes: true
                     }
                 }));
 
-                equal($item.find('.t-input[type="hidden"]').attr('name'), "TreeView1_checkedNodes.Index");
+                equal($item.find('> div > .t-checkbox').length, 1);
             });
 
-            test("getItemHtml should render hidden input in checkbox wrapper with value 0 if it is first level", function() {
-                
+            test("should not be rendered if checkable is false", function() {
                 var $item = $(TreeView.getItemHtml({
                     item: {
                         text: "text",
-                        Checkable: true,
+                        checkable: false
+                    },
+                    treeview: {
+                        showCheckboxes: true
+                    }
+                }));
+
+                equal($item.find('> div > .t-checkbox').length, 0);
+            });
+
+            test("should render checkbox and hidden input", function() {
+                var $item = $(TreeView.getItemHtml({
+                    item: {
+                        text: "text"
+                    },
+                    treeview: {
+                        showCheckboxes: true
+                    }
+                }));
+
+                equal($item.find('.t-checkbox .t-input[type="hidden"]').length, 1);
+                equal($item.find('.t-checkbox .t-input[type="checkbox"]').length, 1);
+            });
+
+            test("should render hidden input with correct name", function() {
+                var $item = $(TreeView.getItemHtml({
+                    item: {
+                        text: "text"
+                    },
+                    treeview: {
+                        showCheckboxes: true,
+                        id: "foo"
+                    }
+                }));
+
+                equal($item.find(".t-input[type='hidden']").attr("name"), "foo_checkedNodes.Index");
+            });
+
+            test("should render correct index value for first level", function() {
+                
+                var $item = $(TreeView.getItemHtml({
+                    item: {
                         index: 0
                     },
                     treeview: {
-                        showCheckBoxes: true,
-                        id: "TreeView1"
-                    },
-                    group: {
-                        level: ""
+                        showCheckboxes: true
                     }
                 }));
 
-                equal($item.find('.t-input[type="hidden"]').attr('value'), "0");
+                equal($item.find(".t-input[type='hidden']").attr("value"), "0");
             });
 
-            test("getItemHtml should render hidden input in checkbox wrapper with value created by group level", function() {
+            test("should render index based on group level", function() {
 
                 var $item = $(TreeView.getItemHtml({
                     item: {
-                        text: "text",
-                        Checkable: true,
                         index: 2
                     },
                     treeview: {
-                        showCheckBoxes: true,
-                        id: "TreeView1"
+                        showCheckboxes: true
                     },
                     group: {
                         level: "1:0"
@@ -447,105 +451,83 @@
                 equal($item.find('.t-input[type="hidden"]').attr('value'), "1:0:2");
             });
 
-            test("getItemHtml should render checkbox input with name attr", function() {
-
+            test("should render checkbox input with correct name", function() {
                 var $item = $(TreeView.getItemHtml({
                     item: {
-                        text: "text",
-                        Checkable: true,
                         index: 0
                     },
-                    showCheckBoxes: true,
-                    elementId: "TreeView1",
-                    groupLevel: "0"
+                    treeview: {
+                        showCheckboxes: true,
+                        id: "foo"
+                    },
+                    group: {
+                        level: "0"
+                    }
                 }));
 
-                equal($item.find('.t-input[type="checkbox"]').attr('name'), "TreeView1_checkedNodes[0:0].Checked");
+                equal($item.find('.t-input[type="checkbox"]').attr('name'), "foo_checkedNodes[0:0].Checked");
             });
 
-            test("getItemHtml should render checkbox input with value true if item is checked", function() {
-
+            test("should render checkbox input with value true if item is checked", function() {
                 var $item = $(TreeView.getItemHtml({
                     item: {
-                        text: "text",
-                        Checkable: true,
-                        Checked: true
+                        checked: true
                     },
-                    isAjax: false,
-                    isFirstLevel: false,
-                    showCheckBoxes: true,
-                    itemIndex: 0,
-                    itemsCount: 1,
-                    elementId: "TreeView1",
-                    groupLevel: "0"
+                    treeview: {
+                        showCheckboxes: true
+                    }
                 }));
 
                 equal($item.find('.t-input[type="checkbox"]').attr('value'), "True");
             });
 
-            test("getItemHtml should render disabled checkbox with disabled state class", function() {
-
+            test("disabled items should render disabled checkbox attribute", function() {
                 var $item = $(TreeView.getItemHtml({
                     item: {
-                        text: "text",
-                        Checkable: true,
-                        Checked: true,
-                        Enabled: false
+                        checked: true,
+                        enabled: false
                     },
-                    isAjax: false,
-                    isFirstLevel: false,
-                    showCheckBoxes: true,
-                    itemIndex: 0,
-                    itemsCount: 1,
-                    elementId: "TreeView1",
-                    groupLevel: "0"
+                    treeview: {
+                        showCheckboxes: true
+                    },
+                    group: {
+                        level: "0"
+                    }
                 }));
 
-                equal($item.find('.t-input[type="checkbox"]').attr('disabled'), true);
+                equal($item.find(".t-input[type='checkbox']").attr("disabled"), "disabled");
             });
 
-            test("getItemHtml should render checked checkbox Checked property is true", function() {
-
+            test("checked nodes should render checked checkboxes", function() {
                 var $item = $(TreeView.getItemHtml({
                     item: {
-                        text: "text",
-                        Checkable: true,
-                        Checked: true
+                        checked: true
                     },
-                    isAjax: false,
-                    isFirstLevel: false,
-                    showCheckBoxes: true,
-                    itemIndex: 0,
-                    itemsCount: 1,
-                    elementId: "TreeView1",
-                    groupLevel: "0"
+                    treeview: {
+                        showCheckboxes: true
+                    }
                 }));
 
-                equal($item.find('[type=checkbox]').attr('checked'), true);
+                equal($item.find("[type=checkbox]").attr("checked"), "checked");
             });
 
-            test("getItemHtml should render hidden inputs containing dataItem values if item is checked", function() {
-
+            /*
+            test("renders hidden inputs containing dataItem values in checked items", function() {
                 var $item = $(TreeView.getItemHtml({
                     item: {
                         text: "text",
-                        Value: "1",
-                        Checkable: true,
-                        Checked: true
+                        value: "1",
+                        checked: true
                     },
-                    isAjax: false,
-                    isFirstLevel: false,
-                    showCheckBoxes: true,
-                    itemIndex: 0,
-                    itemsCount: 1,
-                    elementId: "TreeView1",
-                    groupLevel: "0"
+                    treeview: {
+                        showCheckboxes: true
+                    }
                 }));
 
                 equal($item.find('[type=hidden]').eq(1).val(), "1");
                 equal($item.find('[type=hidden]').eq(2).val(), "text");
             });
-*/
+            */
         </script>
 
         <div id="qunit-fixture">test markup, will be hidden</div>
