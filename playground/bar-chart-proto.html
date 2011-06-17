@@ -17,14 +17,14 @@
             }
 
 
-            function Box(x1, y1, x2, y2) {
+            function Box2D(x1, y1, x2, y2) {
                 this.x1 = x1;
                 this.x2 = x2;
                 this.y1 = y1;
                 this.y2 = y2;
             }
 
-            Box.prototype = {
+            Box2D.prototype = {
                 width: function() {
                     return this.x2 - this.x1;
                 },
@@ -58,21 +58,21 @@
                 var result = [];
 
                 // we'll always have rectangles 1, 3, 4 and 6
-                result[ 0 ] = new Box( b, e, c, f );
-                result[ 1 ] = new Box( a, f, b, g );
-                result[ 2 ] = new Box( c, f, d, g );
-                result[ 3 ] = new Box( b, g, c, h );
+                result[ 0 ] = new Box2D( b, e, c, f );
+                result[ 1 ] = new Box2D( a, f, b, g );
+                result[ 2 ] = new Box2D( c, f, d, g );
+                result[ 3 ] = new Box2D( b, g, c, h );
 
                 // decide which corners
                 if( r.x1 == a && r.y1 == e || s.x1 == a && s.y1 == e )
                 { // corners 0 and 7
-                    result[ 4 ] = new Box( a, e, b, f );
-                    result[ 5 ] = new Box( c, g, d, h );
+                    result[ 4 ] = new Box2D( a, e, b, f );
+                    result[ 5 ] = new Box2D( c, g, d, h );
                 }
                 else
                 { // corners 2 and 5
-                    result[ 4 ] = new Box( c, e, d, f );
-                    result[ 5 ] = new Box( a, g, b, h );
+                    result[ 4 ] = new Box2D( c, e, d, f );
+                    result[ 5 ] = new Box2D( a, g, b, h );
                 }
 
                 return $.grep(result, function(box) {
@@ -200,7 +200,7 @@
 
                 container.append(element.element);
 
-                surface.box = new Box(0, 0, container.width(), container.height());
+                surface.box = new Box2D(0, 0, container.width(), container.height());
             }
 
             $.extend(SVGSurface.prototype, {
@@ -421,7 +421,7 @@
                 element.css("height", container.height() + PX);
                 element.attr("coordsize", container.width() + " " + container.height());
                 container.append(element.element);
-                surface.box = new Box(0, 0, container.width(), container.height());
+                surface.box = new Box2D(0, 0, container.width(), container.height());
 
             }
 
@@ -481,7 +481,7 @@
                     .hAlign("center", box)
                     .vAlignText("top");
 
-                title.box = new Box(box.x1, box.y1, box.x2, text.height());
+                title.box = new Box2D(box.x1, box.y1, box.x2, text.height());
             }
 
             $.extend(ChartTitle.prototype, {
@@ -531,7 +531,7 @@
 
                 surface.line(lineStyle, axis.element);
 
-                this.box = new Box(box.x1, box.y1, element.width(), box.y2);
+                this.box = new Box2D(box.x1, box.y1, element.width(), box.y2);
                 this.min = axisMin;
                 this.max = axisMax;
             }
@@ -641,7 +641,7 @@
                 this.box = box;
                 this.repaint();
 
-                this.box = new Box(box.x1, box.y2 - this.element.height(), box.x2, box.y2);
+                this.box = new Box2D(box.x1, box.y2 - this.element.height(), box.x2, box.y2);
             }
 
             $.extend(CategoryAxis.prototype, {
@@ -698,7 +698,7 @@
 
                 element.translate((box.width() - element.width()), ((box.height() - element.height()) / 2) + box.y1);
 
-                legend.box = new Box(box.x2 - element.width(), box.y1, box.x2, box.y2);
+                legend.box = new Box2D(box.x2 - element.width(), box.y1, box.x2, box.y2);
             }
 
             function BarChart(surface, box, options) {

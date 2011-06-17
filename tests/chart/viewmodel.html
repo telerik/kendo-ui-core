@@ -14,8 +14,8 @@
         <script type="text/javascript">
 
             var Chart = kendo.ui.Chart,
-                Box = Chart.Box,
-                chartBox = new Box(0, 0, 1000, 1000),
+                Box2D = Chart.Box2D,
+                chartBox = new Box2D(0, 0, 1000, 1000),
                 TOLERANCE = 2;
 
                 function ChartElementStub(viewElement) {
@@ -79,7 +79,7 @@
                 test("updateLayout is called for all children", 2, function() {
                     var childStub = {
                         updateLayout: function() { ok(true); },
-                        box: new Chart.Box()
+                        box: new Chart.Box2D()
                     };
 
                     rootElement.children.push(childStub, childStub);
@@ -230,7 +230,7 @@
                         }
                     };
 
-                    text.updateLayout(new Box(100, 110, 200, 200));
+                    text.updateLayout(new Box2D(100, 110, 200, 200));
                     text.getViewElements(factory)
                 });
 
@@ -241,7 +241,7 @@
                         }
                     };
 
-                    text.updateLayout(new Box());
+                    text.updateLayout(new Box2D());
                     text.getViewElements(factory)
                 });
             })();
@@ -519,7 +519,7 @@
 
                 module("Bar", {
                     setup: function() {
-                        box = new Box(0, 0, 100, 100);
+                        box = new Box2D(0, 0, 100, 100);
                         bar = new Bar();
                         factory = new ViewFactoryStub();
 
