@@ -278,6 +278,32 @@
 
                ok(wrapper.hasClass("t-state-disabled"));
            });
+
+           test("pointer over li should add hover state", function() {
+               var data = [{text: 1, value: 1}, {text:2, value:2}],
+                   dropdownlist = new DropDownList(input, {
+                        dataSource: data
+                   });
+
+                   var li = dropdownlist.ul.show().children().eq(0);
+                   li.mouseenter();
+
+               ok(li.hasClass("t-state-hover"));
+           });
+
+           test("leave li should remove hover state", function() {
+               var data = [{text: 1, value: 1}, {text:2, value:2}],
+               dropdownlist = new DropDownList(input, {
+                   dataSource: data
+               });
+
+               var li = dropdownlist.ul.show().children().eq(0);
+               li.mouseenter();
+               li.mouseleave();
+
+               ok(!li.hasClass("t-state-hover"));
+           });
+
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

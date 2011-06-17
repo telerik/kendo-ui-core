@@ -3,6 +3,7 @@
         ui = kendo.ui,
         Component = ui.Component,
         CHANGE = "change",
+        HOVER = "t-state-hover",
         FOCUSED = "t-state-focused";
 
     var List = Component.extend({
@@ -20,7 +21,9 @@
                                 clearTimeout(that._bluring);
                             }, 0);
                         })
-                        .delegate("li", "click", $.proxy(that._click, that));
+                        .delegate("li", "click", $.proxy(that._click, that))
+                        .delegate("li", "mouseenter", function() { $(this).addClass(HOVER); })
+                        .delegate("li", "mouseleave", function() { $(this).removeClass(HOVER); });
         },
 
         current: function(candidate) {
