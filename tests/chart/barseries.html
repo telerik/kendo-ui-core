@@ -13,8 +13,8 @@
         <script src="util.js"></script>
         <script type="text/javascript">
             var Chart = kendo.ui.Chart,
-                Box = Chart.Box,
-                chartBox = new Box(0, 0, 800, 600);
+                Box2D = Chart.Box2D,
+                chartBox = new Box2D(0, 0, 800, 600);
 
             function BarStub(box) {
                 this.box = box;
@@ -41,7 +41,7 @@
                 $.extend(PlotAreaStub.prototype, {
                     axisX: {
                         getSlot: function(categoryIndex) {
-                            return new Box(categoryIndex, CATEGORY_AXIS_Y,
+                            return new Box2D(categoryIndex, CATEGORY_AXIS_Y,
                             categoryIndex + 1, CATEGORY_AXIS_Y);
                         },
                     },
@@ -52,7 +52,7 @@
                                 slotTop = Math.min(CATEGORY_AXIS_Y, valueY),
                                 slotBottom = Math.max(CATEGORY_AXIS_Y, valueY);
 
-                            return new Box(0, slotTop, 0, slotBottom);
+                            return new Box2D(0, slotTop, 0, slotBottom);
                         },
                         options: {}
                     }
@@ -352,7 +352,7 @@
                 $.extend(PlotAreaStub.prototype, {
                     axisX: {
                         getSlot: function(categoryIndex) {
-                            return new Box(categoryIndex, CATEGORY_AXIS_Y,
+                            return new Box2D(categoryIndex, CATEGORY_AXIS_Y,
                             categoryIndex + 1, CATEGORY_AXIS_Y);
                         },
                         options: {
@@ -366,7 +366,7 @@
                                 slotTop = Math.min(CATEGORY_AXIS_Y, valueY),
                                 slotBottom = Math.max(CATEGORY_AXIS_Y, valueY);
 
-                            return new Box(0, slotTop, 0, slotBottom);
+                            return new Box2D(0, slotTop, 0, slotBottom);
                         },
                         options: {
                             axisCrossingValue: 0
@@ -531,7 +531,7 @@
                                 slotLeft = Math.min(CATEGORY_AXIS_X, valueX),
                                 slotRight = Math.max(CATEGORY_AXIS_X, valueX);
 
-                            return new Box(slotLeft, 0, slotRight, 0);
+                            return new Box2D(slotLeft, 0, slotRight, 0);
                         },
                         options: {
                             axisCrossingValue: 0
@@ -539,7 +539,7 @@
                     },
                     axisY: {
                         getSlot: function(categoryIndex) {
-                            return new Box(CATEGORY_AXIS_X, categoryIndex,
+                            return new Box2D(CATEGORY_AXIS_X, categoryIndex,
                             CATEGORY_AXIS_X, categoryIndex + 1);
                         },
                         options: {
@@ -716,13 +716,13 @@
                                 slotLeft = Math.min(CATEGORY_AXIS_X, valueX),
                                 slotRight = Math.max(CATEGORY_AXIS_X, valueX);
 
-                            return new Box(slotLeft, 0, slotRight, 0);
+                            return new Box2D(slotLeft, 0, slotRight, 0);
                         },
                         options: {}
                     },
                     axisY: {
                         getSlot: function(categoryIndex) {
-                            return new Box(CATEGORY_AXIS_X, categoryIndex,
+                            return new Box2D(CATEGORY_AXIS_X, categoryIndex,
                                            CATEGORY_AXIS_X, categoryIndex + 1);
                         },
                         options: {}
@@ -925,12 +925,12 @@
                 $.extend(PlotAreaStub.prototype, {
                     axisX: {
                         getSlot: function(value) {
-                            return new Box();
+                            return new Box2D();
                         }
                     },
                     axisY: {
                         getSlot: function(categoryIndex) {
-                            return new Box();
+                            return new Box2D();
                         }
                     }
                 });
@@ -961,8 +961,8 @@
             (function() {
                 var cluster,
                     bars,
-                    clusterBox = new Box(0, 0, 350, 350),
-                    barBox = new Box(1, 1, 1, 1);
+                    clusterBox = new Box2D(0, 0, 350, 350),
+                    barBox = new Box2D(1, 1, 1, 1);
 
                 function createCluster(options) {
                     cluster = new Chart.ClusterLayout(options);
@@ -1019,7 +1019,7 @@
 
             (function() {
                 var stack,
-                    stackBox = new Box(50, 50, 100, 100);
+                    stackBox = new Box2D(50, 50, 100, 100);
 
                 // ------------------------------------------------------------
                 module("Stack Layout / Vertical", {
@@ -1027,9 +1027,9 @@
                         stack = new Chart.StackLayout();
 
                         stack.children.push(
-                            new BarStub(new Box(0, 90, 100, 100)),
-                            new BarStub(new Box(0, 80, 100, 100)),
-                            new BarStub(new Box(0, 70, 100, 100))
+                            new BarStub(new Box2D(0, 90, 100, 100)),
+                            new BarStub(new Box2D(0, 80, 100, 100)),
+                            new BarStub(new Box2D(0, 70, 100, 100))
                         );
 
                         stack.updateLayout(stackBox);
@@ -1081,9 +1081,9 @@
                         stack = new Chart.StackLayout({ isReversed: true });
 
                         stack.children.push(
-                            new BarStub(new Box(0, 90, 100, 100)),
-                            new BarStub(new Box(0, 80, 100, 100)),
-                            new BarStub(new Box(0, 70, 100, 100))
+                            new BarStub(new Box2D(0, 90, 100, 100)),
+                            new BarStub(new Box2D(0, 80, 100, 100)),
+                            new BarStub(new Box2D(0, 70, 100, 100))
                         );
 
                         stack.updateLayout(stackBox);
@@ -1134,9 +1134,9 @@
                     setup: function() {
                         stack = new Chart.StackLayout({ isVertical: false });
                         stack.children.push(
-                            new BarStub(new Box(0, 0, 20, 10)),
-                            new BarStub(new Box(0, 0, 30, 10)),
-                            new BarStub(new Box(0, 0, 40, 10))
+                            new BarStub(new Box2D(0, 0, 20, 10)),
+                            new BarStub(new Box2D(0, 0, 30, 10)),
+                            new BarStub(new Box2D(0, 0, 40, 10))
                         );
 
                         stack.updateLayout(stackBox);
@@ -1187,9 +1187,9 @@
                     setup: function() {
                         stack = new Chart.StackLayout({ isVertical: false, isReversed: true });
                         stack.children.push(
-                            new BarStub(new Box(100, 0, 120, 10)),
-                            new BarStub(new Box(100, 0, 130, 10)),
-                            new BarStub(new Box(100, 0, 140, 10))
+                            new BarStub(new Box2D(100, 0, 120, 10)),
+                            new BarStub(new Box2D(100, 0, 130, 10)),
+                            new BarStub(new Box2D(100, 0, 140, 10))
                         );
 
                         stack.updateLayout(stackBox);

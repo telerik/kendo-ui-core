@@ -224,7 +224,7 @@
     // **************************
     // View Model
     // **************************
-    var Box = Class.extend({
+    var Box2D = Class.extend({
         init: function(x1, y1, x2, y2) {
             var box = this;
             box.x1 = x1 || 0;
@@ -310,11 +310,11 @@
         clone: function() {
             var box = this;
 
-            return new Box(box.x1, box.y1, box.x2, box.y2);
+            return new Box2D(box.x1, box.y1, box.x2, box.y2);
         }
     });
 
-    var defaultBox = new Box(0, 0, 0, 0);
+    var defaultBox = new Box2D(0, 0, 0, 0);
 
     var ChartElement = Class.extend({
         init: function() {
@@ -329,7 +329,7 @@
         updateLayout: function(targetBox) {
             var element = this,
                 children = element.children,
-                box = this.box = new Box();
+                box = this.box = new Box2D();
 
             for (var i = 0; i < children.length; i++) {
                 var currentChild = children[i];
@@ -369,7 +369,7 @@
 
         updateLayout: function() {
             var root = this,
-                currentBox = new Box(0, 0, root.options.width, root.options.height);
+                currentBox = new Box2D(0, 0, root.options.width, root.options.height);
 
             root.box = currentBox;
 
@@ -414,31 +414,31 @@
                 size = measureText(text.content, { font: text.options.font });
 
             if (options.align == LEFT) {
-                text.box = new Box(
+                text.box = new Box2D(
                     targetBox.x1, targetBox.y1,
                     targetBox.x1 + size.width, targetBox.y1 + size.height);
             } else if (options.align == RIGHT) {
-                text.box = new Box(
+                text.box = new Box2D(
                     targetBox.x2 - size.width, targetBox.y1,
                     targetBox.x2, targetBox.y1 + size.height);
             } else if (options.align == CENTER) {
                 var margin = (targetBox.width() - size.width) / 2;
-                text.box = new Box(
+                text.box = new Box2D(
                     round(targetBox.x1 + margin, COORD_PRECISION), targetBox.y1,
                     round(targetBox.x2 - margin, COORD_PRECISION), targetBox.y1 + size.height);
             }
 
             if (options.vAlign == CENTER) {
                 var margin = (targetBox.height() - size.height) /2;
-                text.box = new Box(
+                text.box = new Box2D(
                     text.box.x1, targetBox.y1 + margin,
                     text.box.x2, targetBox.y2 - margin);
             } else if (options.vAlign == BOTTOM) {
-                text.box = new Box(
+                text.box = new Box2D(
                     text.box.x1, targetBox.y2 - size.height,
                     text.box.x2, targetBox.y2);
             } else if (options.vAlign == TOP) {
-                text.box = new Box(
+                text.box = new Box2D(
                     text.box.x1, targetBox.y1,
                     text.box.x2, targetBox.y1 + size.height);
             }
@@ -502,12 +502,12 @@
             } else if (options.position == "outsideEnd") {
                 if (isVertical) {
                     if (options.aboveAxis) {
-                        targetBox = new Box(
+                        targetBox = new Box2D(
                             targetBox.x1, targetBox.y1 - box.height(),
                             targetBox.x2, targetBox.y1
                         );
                     } else {
-                        targetBox = new Box(
+                        targetBox = new Box2D(
                             targetBox.x1, targetBox.y2,
                             targetBox.x2, targetBox.y2 + box.height()
                         );
@@ -515,12 +515,12 @@
                 } else {
                     text.options.align = CENTER;
                     if (options.aboveAxis) {
-                        targetBox = new Box(
+                        targetBox = new Box2D(
                             targetBox.x2 + box.width(), targetBox.y1,
                             targetBox.x2, targetBox.y2
                         );
                     } else {
-                        targetBox = new Box(
+                        targetBox = new Box2D(
                             targetBox.x1 - box.width(), targetBox.y1,
                             targetBox.x1, targetBox.y2
                         );
@@ -563,7 +563,7 @@
             var title = this,
                 options = title.options,
                 text = title.children[0],
-                textBox = new Box(),
+                textBox = new Box2D(),
                 margin = getMargin(options.margin),
                 offsetY;
 
@@ -582,7 +582,7 @@
 
             text.updateLayout(textBox);
 
-            title.box = new Box(targetBox.x1, textBox.y1, targetBox.x2, textBox.y2);
+            title.box = new Box2D(targetBox.x1, textBox.y1, targetBox.x2, textBox.y2);
         }
     });
 
@@ -629,7 +629,7 @@
                 childrenCount = legend.children.length;
 
             if (childrenCount === 0) {
-                legend.box = new Box();
+                legend.box = new Box2D();
                 return;
             }
 
@@ -658,7 +658,7 @@
             for (var i = 0, length = series.length; i < length; i++) {
                 var color = series[i].color,
                     label = children[i],
-                    markerBox = new Box();
+                    markerBox = new Box2D();
 
                 markerBox.x1 = label.box.x1 - markerSize * 2;
                 markerBox.x2 = markerBox.x1 + markerSize;
@@ -854,12 +854,12 @@
             };
 
             if (isVertical) {
-                axis.box = new Box(
+                axis.box = new Box2D(
                     targetBox.x1, targetBox.y1,
                     targetBox.x1 + maxLabelWidth + options.tickSize, targetBox.y2
                 );
             } else {
-                axis.box = new Box(
+                axis.box = new Box2D(
                     targetBox.x1, targetBox.y1,
                     targetBox.x2, targetBox.y1 + options.tickSize + maxLabelHeight
                 );
@@ -882,9 +882,9 @@
                     labelSize = isVertical ? label.box.height() : label.box.width(),
                     labelPos = tickPositions[tickIx] - (labelSize / 2),
                     labelBox = isVertical ?
-                        new Box(box.x1, labelPos,
+                        new Box2D(box.x1, labelPos,
                                 box.x1 + maxLabelWidth, labelPos + labelSize) :
-                        new Box(labelPos,
+                        new Box2D(labelPos,
                                 box.y1 + options.tickSize,
                                 labelPos + labelSize,
                                 box.y1 + options.tickSize + maxLabelHeight);
@@ -1064,10 +1064,10 @@
             }
 
             if (isVertical) {
-               return new Box(box.x2, box.y1 + startMargin,
+               return new Box2D(box.x2, box.y1 + startMargin,
                  box.x2, box.y2 - endMargin);
             } else {
-               return new Box(box.x1 + startMargin, box.y1,
+               return new Box2D(box.x1 + startMargin, box.y1,
                  box.x2 - endMargin, box.y1);
             }
         },
@@ -1088,7 +1088,7 @@
                 b = Math.max(Math.min(b, options.max), options.min),
                 p1,
                 p2,
-                slotBox = new Box(lineBox.x1, lineBox.y1, lineBox.x1, lineBox.y1);
+                slotBox = new Box2D(lineBox.x1, lineBox.y1, lineBox.x1, lineBox.y1);
 
             if (isVertical) {
                 p1 = lineStart + scale * (options.max - Math.max(a, b));
@@ -1145,12 +1145,12 @@
             }
 
             if (isVertical) {
-                axis.box = new Box(
+                axis.box = new Box2D(
                     targetBox.x1, targetBox.y1,
                     targetBox.x1 + options.tickSize + maxLabelWidth, targetBox.y2
                 );
             } else {
-                axis.box = new Box(
+                axis.box = new Box2D(
                     targetBox.x1, targetBox.y1,
                     targetBox.x2, targetBox.y1 + options.tickSize + maxLabelHeight
                 );
@@ -1167,7 +1167,7 @@
                         middle = currentDivision + (nextDivision - currentDivision) / 2,
                         labelY = middle - label.box.height() / 2;
 
-                    label.updateLayout(new Box(
+                    label.updateLayout(new Box2D(
                         labelX - label.box.width(), labelY,
                         labelX, labelY + label.box.height()
                     ));
@@ -1179,7 +1179,7 @@
                         currentDivision = majorDivisions[i],
                         nextDivision = majorDivisions[i + 1];
 
-                    label.updateLayout(new Box(
+                    label.updateLayout(new Box2D(
                         currentDivision, labelY,
                         nextDivision, labelY + label.box.height()
                     ));
@@ -1270,8 +1270,8 @@
                 p2 = p1 + step;
 
             return isVertical ?
-                   new Box(box.x2, p1, box.x2, p2) :
-                   new Box(p1, box.y1, p2, box.y1);
+                   new Box2D(box.x2, p1, box.x2, p2) :
+                   new Box2D(p1, box.y1, p2, box.y1);
         }
     });
 
@@ -1332,7 +1332,7 @@
                 stackAxis = isVertical ? Y : X,
                 positionAxis = isVertical ? X : Y,
                 children = stack.children,
-                box = stack.box = new Box(),
+                box = stack.box = new Box2D(),
                 stackDirection;
 
             if (options.isReversed) {
@@ -1549,7 +1549,7 @@
                 var slotX = plotArea.axisX.getSlot(isVertical ? categoryIx : value);
                 var slotY = plotArea.axisY.getSlot(isVertical ? value : categoryIx);
 
-                var barSlot = new Box(slotX.x1, slotY.y1, slotX.x2, slotY.y2);
+                var barSlot = new Box2D(slotX.x1, slotY.y1, slotX.x2, slotY.y2);
                 var label = bar.children[0];
 
                 if (label) {
@@ -2151,21 +2151,21 @@
         var result = [];
 
         // we'll always have rectangles 1, 3, 4 and 6
-        result[ 0 ] = new Box( b, e, c, f );
-        result[ 1 ] = new Box( a, f, b, g );
-        result[ 2 ] = new Box( c, f, d, g );
-        result[ 3 ] = new Box( b, g, c, h );
+        result[ 0 ] = new Box2D( b, e, c, f );
+        result[ 1 ] = new Box2D( a, f, b, g );
+        result[ 2 ] = new Box2D( c, f, d, g );
+        result[ 3 ] = new Box2D( b, g, c, h );
 
         // decide which corners
         if( r.x1 == a && r.y1 == e || s.x1 == a && s.y1 == e )
         { // corners 0 and 7
-            result[ 4 ] = new Box( a, e, b, f );
-            result[ 5 ] = new Box( c, g, d, h );
+            result[ 4 ] = new Box2D( a, e, b, f );
+            result[ 5 ] = new Box2D( c, g, d, h );
         }
         else
         { // corners 2 and 5
-            result[ 4 ] = new Box( c, e, d, f );
-            result[ 5 ] = new Box( a, g, b, h );
+            result[ 4 ] = new Box2D( c, e, d, f );
+            result[ 5 ] = new Box2D( a, g, b, h );
         }
 
         return $.grep(result, function(box) {
@@ -2212,7 +2212,7 @@
 
     kendo.ui.plugin("Chart", Chart);
 
-    Chart.Box = Box;
+    Chart.Box2D = Box2D;
     Chart.Text = Text;
     Chart.BarLabel = BarLabel;
     Chart.RootElement = RootElement;
