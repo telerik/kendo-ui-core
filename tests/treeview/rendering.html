@@ -21,7 +21,7 @@
             var TreeView = kendo.ui.TreeView,
                 DataSource = kendo.data.DataSource;
 
-            module("getGroupHtml");
+            module("group");
 
             test("renders empty group when there are no items", function() {
                 var html = TreeView.getGroupHtml({
@@ -57,19 +57,8 @@
 
                 equal(html, "<ul class='t-group' style='display:none'></ul>");
             });
-            
-//        kendo.ui.var $item = $(TreeView.getItemHtml({
-//            item: data[i],
-//            isAjax: options.isAjax,
-//            isFirstLevel: isFirstLevel,
-//            showCheckBoxes: options.showCheckBoxes,
-//            groupLevel: options.groupLevel,
-//            itemIndex: options.i,
-//            itemsCount: options.len,
-//            elementId: options.elementId
-//        });
 
-            module("getItemHtml");
+            module("item");
 
             test("renders list items with t-item class", function() {
                 var $item = $(TreeView.getItemHtml({
@@ -511,7 +500,6 @@
                 equal($item.find("[type=checkbox]").attr("checked"), "checked");
             });
 
-            /*
             test("renders hidden inputs containing dataItem values in checked items", function() {
                 var $item = $(TreeView.getItemHtml({
                     item: {
@@ -524,10 +512,9 @@
                     }
                 }));
 
-                equal($item.find('[type=hidden]').eq(1).val(), "1");
-                equal($item.find('[type=hidden]').eq(2).val(), "text");
+                equal($item.find('.t-checkbox [type=hidden]').eq(1).val(), "1");
+                equal($item.find('.t-checkbox [type=hidden]').eq(2).val(), "text");
             });
-            */
         </script>
 
         <div id="qunit-fixture">test markup, will be hidden</div>

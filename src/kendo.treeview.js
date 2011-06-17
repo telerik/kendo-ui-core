@@ -1,6 +1,7 @@
 (function ($) {
     var kendo = window.kendo,
         ui = kendo.ui,
+        template = kendo.template,
         Component = kendo.ui.Component,
         DataSource = kendo.data.DataSource,
         proxy = $.proxy,
@@ -640,18 +641,49 @@
 
     // client-side rendering
     $.extend(TreeView, {
-        getNodeInputsHtml: function (itemValue, itemText, arrayName, value) {
-            return new $t.stringBuilder()
-                .cat('<input type="hidden" value="')
-                .cat(itemValue)
-                .cat('" name="' + arrayName + '[').cat(value).cat('].Value" class="t-input">')
-                .cat('<input type="hidden" value="')
-                .cat(itemText)
-                .cat('" name="' + arrayName + '[').cat(value).cat('].Text" class="t-input">')
-                .string();
+        templates: {
+            item: template(
+"<li class='<%= wrapperCssClass(group, item) %>'>" +
+    "<div class='<%= cssClass(group, item) %>'>" +
+        "<%= checkboxTemplate({ treeview: treeview, group: group, item: item, hiddenInputsGenerator: hiddenInputsGenerator }) %>" +
+        "<<%= tag %> class='<%= activatorClass(item) %>'<%= activatorAttributes %>>" +
+            "<%= subGroupActivator({ item: item, activatorClass: subGroupActivatorClass }) %>" +
+            "<%= image(item) %><%= sprite(item) %><%= text %><%= value(item) %>" +
+        "</<%= tag %>>" +
+    "</div>" +
+    "<%= subGroup({ items: item.items, treeview: treeview, group: group }) %>" +
+"</li>"
+            ),
+            image: template("<img class='t-image' alt='' src='<%= imageUrl %>' />"),
+            value: template("<input type='hidden' class='t-input' name='itemValue' value='<%= value %>' />"),
+            subGroupActivator: template("<span class='<%= data.activatorClass(data.item) %>'></span>", { useWithBlock: false }),
+            checkbox: template(
+"<% var arrayName = treeview.id + '_checkedNodes', absoluteIndex = (group.level ? group.level + ':' : '') + item.index; %>" + 
+"<span class='t-checkbox'>" + 
+"<input type='hidden' value='<%= absoluteIndex %>' name='<%= arrayName %>.Index' class='t-input' />" +
+    "<input type='checkbox' value='<%= item.checked ? 'True' : 'False' %>' name='<%= arrayName %>[<%= absoluteIndex %>].Checked' class='t-input' <%= item.enabled === false ? ' disabled' : '' %><%= item.checked === true ? ' checked' : '' %>/>" +
+    "<%= item.checked === true ? hiddenInputsGenerator({ treeview: treeview, item: item, group: group }) : '' %>" +
+"</span>"
+            ),
+            checkboxValues: template(
+                "<input type='hidden' value='<%= value %>' name='<%= arrayItem %>.Value' class='t-input' />" +
+                "<input type='hidden' value='<%= text %>' name='<%= arrayItem %>.Text' class='t-input' />"
+            ),
+            sprite: template("<span class='t-sprite <%= spriteCssClass %>'></span>"),
+            empty: template("")
+        },
+
+        getNodeInputsHtml: function (options) {
+            return TreeView.templates.checkboxValues({
+                value: options.item.value,
+                text: options.item.text,
+                arrayItem: options.treeview.id + "[" + options.group.level + "]"
+            });
         },
 
         getItemHtml: function (options) {
+            options = $.extend({ treeview: {}, group: {} }, options);
+
             var wrapperCssClass = function(group, item) {
                     var result = "t-item",
                         index = item.index;
@@ -713,43 +745,13 @@
 
                     return result;
                 },
-                template = kendo.template,
-                itemTemplate = template(
-"<li class='<%= wrapperCssClass(group, item) %>'>" +
-    "<div class='<%= cssClass(group, item) %>'>" +
-        "<%= checkboxTemplate({ id: treeview.id, group: group, item: item }) %>" +
-        "<<%= tag %> class='<%= activatorClass(item) %>'<%= activatorAttributes %>>" +
-            "<%= subGroupActivator({ item: item, activatorClass: subGroupActivatorClass }) %>" +
-            "<%= image(item) %><%= sprite(item) %><%= text %><%= value(item) %>" +
-        "</<%= tag %>>" +
-    "</div>" +
-    "<%= subGroup({ items: item.items, treeview: treeview, group: group }) %>" +
-"</li>"
-                ),
-                imageTemplate = template("<img class='t-image' alt='' src='<%= imageUrl %>' />"),
-                valueTemplate = template("<input type='hidden' class='t-input' name='itemValue' value='<%= value %>' />"),
-                subGroupActivatorTemplate = template("<span class='<%= data.activatorClass(data.item) %>'></span>", { useWithBlock: false }),
-                checkboxTemplate = template(
-"<% var arrayName = id + '_checkedNodes'," +
-       "absoluteIndex = (group.level ? group.level + ':' : '') + item.index; %>" + 
-"<span class='t-checkbox'>" + 
-    "<input type='hidden' value='<%= absoluteIndex %>' name='<%= arrayName %>.Index' class='t-input' />" +
-    "<input type='checkbox' value='<%= item.checked ? 'True' : 'False' %>' name='<%= arrayName %>[<%= absoluteIndex %>].Checked' class='t-input' <%= item.enabled === false ? ' disabled' : '' %><%= item.checked === true ? ' checked' : '' %>/>" +
-"</span>"
-                ),
-                spriteTemplate = template("<span class='t-sprite <%= spriteCssClass %>'></span>"),
-                emptyTemplate = template("");
-
-            options = $.extend({
-                    treeview: {},
-                    group: {}
-                }, options);
-
-            var item = options.item,
+                templates = TreeView.templates,
+                empty = templates.empty,
+                item = options.item,
                 treeview = options.treeview,
                 url = item.url;
 
-            return itemTemplate($.extend(options, {
+            return templates.item($.extend(options, {
                 wrapperCssClass: wrapperCssClass,
                 subGroupActivatorClass: subGroupActivatorClass,
                 cssClass: cssClass,
@@ -757,30 +759,25 @@
                 activatorClass: activatorClass,
                 activatorAttributes: url ? " href='" + url + "'" : "",
                 text: item.encoded === false ? item.text : kendo.htmlEncode(item.text),
-                image: item.imageUrl ? imageTemplate : emptyTemplate,
-                sprite: item.spriteCssClass ? spriteTemplate : emptyTemplate,
-                value: item.value ? valueTemplate : emptyTemplate,
+                image: item.imageUrl ? templates.image : empty,
+                sprite: item.spriteCssClass ? templates.sprite : empty,
+                value: item.value ? templates.value : empty,
                 subGroup: TreeView.getGroupHtml,
-                subGroupActivator: ((item.loadOnDemand && treeview.isAjax) || item.items) ? subGroupActivatorTemplate : emptyTemplate,
-                checkboxTemplate: (treeview.showCheckboxes && item.checkable !== false) ? checkboxTemplate : emptyTemplate
+                subGroupActivator: ((item.loadOnDemand && treeview.isAjax) || item.items) ? templates.subGroupActivator : empty,
+                checkboxTemplate: (treeview.showCheckboxes && item.checkable !== false) ? templates.checkbox : empty,
+                hiddenInputsGenerator: TreeView.getNodeInputsHtml
             }));
-
-            if (options.showCheckBoxes && item.Checkable !== false) {
-                if (item.Checked) {
-                    html.cat($t.treeview.getNodeInputsHtml(item.Value, item.Text, arrayName, absoluteIndex));
-                }
-            }
         },
 
         getItemsList: function (options) {
             var html = "",
                 items = options.items,
-                getItemHtml = TreeView.getItemHtml,
+                getItemHtml = getItemHtml,
                 i, len;
 
             if (items && items.length > 0) {
                 for (i = 0, len = items.length; i < len; i++)
-                    html += getItemHtml({
+                    html += TreeView.getItemHtml({
                         item: $.extend({}, items[i], {
                             index: i
                         }),
