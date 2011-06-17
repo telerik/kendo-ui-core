@@ -182,17 +182,6 @@
                 equal(data[2], 3);
             });
 
-            test("sort with no direction sorts ascending", function () {
-                var data = [{ name: "foo" }, { name: "bar" }, { name: "foo"}];
-
-                var result = new Query(data).sort( { field: "name"}).toArray();
-
-                equal(result.length, 3);
-                equal(result[0].name, "bar");
-                equal(result[1].name, "foo");
-                equal(result[2].name, "foo");
-            });
-
             test("sort using ascending descriptor", function () {
                 var data = [{ name: "foo" }, { name: "bar" }, { name: "foo"}];
 

@@ -28,7 +28,7 @@
             page = options.page,
             pageSize = options.pageSize,
             group = options.group,
-            sort = Query.expandSort(options.sort).concat(group || []),
+            sort = Query.expandSort(options.sort).concat(Query.expandGroup(group || [])),
             total,
             filter = options.filter;
 
