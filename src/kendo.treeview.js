@@ -642,6 +642,11 @@
     // client-side rendering
     $.extend(TreeView, {
         templates: {
+            group: template(
+                "<ul class='t-group<%= groupCssClass %>'<%= groupAttributes %>>" +
+                    "<%= renderItems(options) %>" +
+                "</ul>"
+            ),
             item: template(
 "<li class='<%= wrapperCssClass(group, item) %>'>" +
     "<div class='<%= cssClass(group, item) %>'>" +
@@ -792,14 +797,9 @@
         },
 
         getGroupHtml: function (options) {
-            var group = options.group || {},
-                template = kendo.template(
-                    "<ul class='t-group<%= groupCssClass %>'<%= groupAttributes %>>" +
-                        "<%= renderItems(options) %>" +
-                    "</ul>"
-                );
+            var group = options.group || {};
 
-            return template({
+            return TreeView.templates.group({
                 options: options,
                 renderItems: TreeView.getItemsList,
                 groupAttributes: group.isExpanded !== true ? " style='display:none'" : "",
