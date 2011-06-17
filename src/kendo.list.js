@@ -14,7 +14,7 @@
 
             that._template();
 
-            that.ul = $("<ul/>")
+            that.ul = $("<ul class=\"t-list\"/>")
                         .css({
                             overflow: "auto",
                             width: that.element.width()
