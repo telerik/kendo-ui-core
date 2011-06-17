@@ -653,16 +653,12 @@
 
         getItemHtml: function (options) {
             var item = options.item,
-                html = "",
-                isFirstLevel = options.isFirstLevel,
-                groupLevel = options.groupLevel,
-                itemIndex = options.itemIndex,
                 itemsCount = options.itemsCount,
                 absoluteIndex = "1:1";
                 //absoluteIndex = new $t.stringBuilder().cat(groupLevel).catIf(':', groupLevel).cat(itemIndex).string();
 
             var itemTemplate = kendo.template(
-"<li class='t-item<%= wrapperCssClass %>'>" +
+"<li class='<%= wrapperCssClass %>'>" +
     "<div class='<%= cssClass %>'>" +
         "<<%= tag %> class='<%= activatorClass %>'<%= activatorAttributes %>>" +
             "<%= image %><%= sprite %><%= text %><%= value %>" +
@@ -671,6 +667,11 @@
     "<%= getSubGroup({ items: item.items, treeview: treeview, group: group }) %>" +
 "</li>"
             );
+
+            options = $.extend({
+                    treeview: {},
+                    group: {}
+                }, options);
 
             var activatorClass = "t-in";
 
@@ -684,32 +685,23 @@
 
             var url = item.url;
 
-            return itemTemplate($.extend({
-                treeview: {},
-                group: {}
-            }, options, {
-                wrapperCssClass: "t-item",
+            return itemTemplate($.extend(options, {
+                wrapperCssClass: "t-item" +
+                                 (options.group.isFirstLevel && item.index == 0 ? " t-first" : "") +
+                                 (item.index == options.group.length-1 ? " t-last" : ""),
+                cssClass: (options.group.isFirstLevel && item.index == 0 ? "t-top " : "") + 
+                          (item.index == 0 && item.index != options.group.length-1 ? "t-top" : 
+                           item.index == options.group.length-1 ? "t-bot" :
+                           "t-mid"),
                 tag: url ? "a" : "span",
                 activatorClass: activatorClass,
                 activatorAttributes: url ? " href='" + url + "'" : "",
-                cssClass: "",
                 image: item.imageUrl ? "<img class='t-image' alt='' src='" + item.imageUrl + "' />" : "",
                 sprite: item.spriteCssClass ? "<span class='t-sprite " + item.spriteCssClass + "'></span>" : "",
                 text: item.encoded === false ? item.text : kendo.htmlEncode(item.text),
                 value: item.value ? "<input type='hidden' class='t-input' name='itemValue' value='" + item.value + "' />" : "",
                 getSubGroup: TreeView.getGroupHtml
             }));
-
-            html.cat('<li class="t-item')
-                    .catIf(' t-first', isFirstLevel && itemIndex == 0)
-                    .catIf(' t-last', itemIndex == itemsCount - 1)
-                .cat('">')
-                .cat('<div class="')
-                    .catIf('t-top ', isFirstLevel && itemIndex == 0)
-                    .catIf('t-top', itemIndex != itemsCount - 1 && itemIndex == 0)
-                    .catIf('t-mid', itemIndex != itemsCount - 1 && itemIndex != 0)
-                    .catIf('t-bot', itemIndex == itemsCount - 1)
-                .cat('">');
 
             if ((options.isAjax && item.LoadOnDemand) || (item.Items && item.Items.length > 0)) {
                 html.cat('<span class="t-icon')
@@ -740,48 +732,6 @@
 
                 html.cat('</span>');
             }
-
-            var navigateUrl = item.NavigateUrl || item.Url;
-
-            html.cat(navigateUrl ? '<a href="' + navigateUrl + '" class="t-link ' : '<span class="')
-                    .cat('t-in')
-                    .catIf(' t-state-disabled', item.Enabled === false)
-                    .catIf(' t-state-selected', item.Selected === true)
-                .cat('">');
-
-            if (item.ImageUrl != null) {
-                html.cat('<img class="t-image" alt="" src="').cat(item.ImageUrl).cat('" />');
-            }
-
-            if (item.SpriteCssClasses != null) {
-                html.cat('<span class="t-sprite ').cat(item.SpriteCssClasses).cat('"></span>');
-            }
-
-            html.catIf(item.Text, item.Encoded === false)
-                .catIf(item.Text.replace(/</g, '&lt;').replace(/>/g, '&gt;'), item.Encoded !== false)
-                .cat(navigateUrl ? '</a>' : '</span>');
-
-            if (item.Value) {
-                html.cat('<input type="hidden" class="t-input" name="itemValue" value="')
-                    .cat(item.Value)
-                    .cat('" />');
-            }
-
-            html.cat('</div>');
-
-            if (item.Items && item.Items.length > 0)
-                $t.treeview.getGroupHtml({
-                    data: item.Items,
-                    html: html,
-                    isAjax: options.isAjax,
-                    isFirstLevel: false,
-                    showCheckBoxes: options.showCheckBoxes,
-                    groupLevel: absoluteIndex,
-                    isExpanded: item.Expanded,
-                    elementId: options.elementId
-                });
-
-            html.cat('</li>');
         },
 
         getItemsList: function (options) {
