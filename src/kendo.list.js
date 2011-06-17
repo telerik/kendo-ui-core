@@ -16,6 +16,7 @@
 
             that.ul = $("<ul/>")
                         .css("overflow", "auto")
+                        .addClass("t-list")
                         .mousedown(function() {
                             setTimeout(function() {
                                 clearTimeout(that._bluring);

@@ -304,6 +304,16 @@
                ok(!li.hasClass("t-state-hover"));
            });
 
+           test("add t-list class to the UL", function() {
+               var data = [{text: 1, value: 1}, {text:2, value:2}],
+               dropdownlist = new DropDownList(input, {
+                   dataSource: data
+               });
+
+               ok(dropdownlist.ul.hasClass("t-list"));
+           });
+
+
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
