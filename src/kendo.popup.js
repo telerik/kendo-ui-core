@@ -94,6 +94,12 @@
 
             options = that.options;
 
+            that.collisions = that.options.collision.split(" ");
+
+            if (that.collisions.length === 1) {
+                that.collisions.push(that.collisions[0]);
+            }
+
             that.element.hide()
                 .addClass("t-popup t-group t-reset")
                 .css({ position : ABSOLUTE })
@@ -102,7 +108,7 @@
             that.wrapper = $();
 
             if (options.animation === false) {
-                options.animation = { open: { effects: {} }, close: { effects: {} } };
+                options.animation = { open: { show: true, effects: {} }, close: { hide:true, effects: {} } };
             }
 
             if (!("effects" in options.animation.close)) {
@@ -128,7 +134,9 @@
             $(document.documentElement).mousedown(proxy(that._mousedown, that));
 
             $(window).bind("resize", function() {
-                that._update();
+                if (that.wrapper[0]) {
+                    that._update();
+                }
             });
 
             if (options.toggleTarget) {
@@ -141,6 +149,7 @@
             position: TOP + " " + LEFT,
             anchor: BODY,
             appendTo: BODY,
+            collision: "flip",
             animation: {
                 open: {
                     effects: "slideDownIn",
@@ -203,13 +212,46 @@
         },
 
         _update: function() {
-            var that = this,
-                options = that.options;
+            this._position($(window));
+        },
 
+        _fit: function(position, size, viewPortSize) {
+            if (position + size > viewPortSize) {
+                position = viewPortSize - size;
+            }
+
+            if (position < 0) {
+                position = 0;
+            }
+
+            return position;
+        },
+
+        _position: function(viewport) {
+            var that = this,
+                wrapper = that.wrapper,
+                offset,
+                options = that.options,
+                anchor = $(options.anchor),
+                origin = options.origin,
+                collisions = that.collisions,
+                position = options.position;
 
             if (options.appendTo === Popup.fn.options.appendTo) {
-                align(that.wrapper, $(options.anchor), options.origin, options.position);
+                align(wrapper, anchor, origin, position);
             }
+
+            offset = wrapper.offset();
+
+            if (collisions[0] === "fit") {
+                offset.top = that._fit(offset.top, wrapper.outerHeight(), viewport.height());
+            }
+
+            if (collisions[1] === "fit") {
+                offset.left = that._fit(offset.left, wrapper.outerWidth(), viewport.width());
+            }
+
+            wrapper.css(offset);
         }
     });
 
