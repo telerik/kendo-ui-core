@@ -71,6 +71,107 @@
 
             module("getItemHtml");
 
+            test("renders list items with t-item class", function() {
+                var $item = $(TreeView.getItemHtml({
+                    item: {}
+                }));
+
+                ok($item.is("li.t-item"));
+            });
+
+            test("renders list items with t-first class for first item in first-level groups", function() {
+                var $item = $(TreeView.getItemHtml({
+                    item: {
+                        index: 0
+                    },
+                    group: {
+                        isFirstLevel: true
+                    }
+                }));
+
+                ok($item.is(".t-first"));
+            });
+
+            test("renders list items with t-last class for last item", function() {
+                var $item = $(TreeView.getItemHtml({
+                    item: {
+                        index: 0
+                    },
+                    group: {
+                        length: 1,
+                        isFirstLevel: true
+                    }
+                }));
+
+                ok($item.is(".t-last"));
+            });
+
+            test("renders div elements with t-top class for first item in group", function() {
+                var $item = $(TreeView.getItemHtml({
+                    item: {
+                        index: 0
+                    },
+                    group: {
+                        length: 2
+                    }
+                }));
+
+                equals($item.find("div.t-top").length, 1);
+            });
+
+            test("renders div elements with t-bot class for last item in group", function() {
+                var $item = $(TreeView.getItemHtml({
+                    item: {
+                        index: 1
+                    },
+                    group: {
+                        length: 3
+                    }
+                }));
+
+                equals($item.find("div.t-mid").length, 1);
+            });
+
+            test("renders div elements with t-mid class for items in middle of group", function() {
+                var $item = $(TreeView.getItemHtml({
+                    item: {
+                        index: 1
+                    },
+                    group: {
+                        length: 2
+                    }
+                }));
+
+                equals($item.find("div.t-bot").length, 1);
+            });
+
+            test("does not render t-top class for last items in group", function() {
+                var $item = $(TreeView.getItemHtml({
+                    item: {
+                        index: 0
+                    },
+                    group: {
+                        length: 1
+                    }
+                }));
+
+                equals($item.find("div.t-top").length, 0);
+            });
+
+            test("does not render t-top class for single items in root group", function() {
+                var $item = $(TreeView.getItemHtml({
+                    item: {
+                        index: 0
+                    },
+                    group: {
+                        isFirstLevel: true,
+                        length: 1
+                    }
+                }));
+
+                equals($item.find("div.t-top").length, 1);
+            });
+
             test("renders of links for items with NavigateUrl", function() {
                 var $item = $(TreeView.getItemHtml({
                     item: {
