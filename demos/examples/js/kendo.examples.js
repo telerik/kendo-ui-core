@@ -101,9 +101,10 @@
 
             $("#skinSelector").bind('change', function(e) {
                 var kendoLinks = $('link[href*="kendo."]', document.head),
+                    commonLink = kendoLinks.filter('[href*="kendo.common"]'),
                     skinLink = kendoLinks.filter(':not([href*="kendo.common"])'),
                     currentFolder = new Array(location.href.match(/\//g).length - initialFolder + 1).join("../"),
-                    url = currentFolder + skinLink.attr('href').replace(/kendo\.\w+\.css/i, 'kendo.' + $("#skinSelector")[0].value.toLowerCase() + '.css'),
+                    url = currentFolder + commonLink.attr('href').replace(/kendo\.\w+\.css/i, 'kendo.' + $("#skinSelector")[0].value.toLowerCase() + '.css'),
                     newLink;
 
                 if ($.browser.msie)
