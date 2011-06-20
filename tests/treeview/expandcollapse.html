@@ -20,68 +20,79 @@
         <h2 id="qunit-userAgent"></h2>
         <ol id="qunit-tests"></ol>
 
-            <!-- replace this with client-side rendering -->
-<div class="t-widget t-treeview t-reset" id="myTreeView"><ul class="t-group t-treeview-lines"><li class="t-item t-first"><div class="t-top"><span class="t-icon t-plus"></span><span class="t-in">Item 1</span><input class="t-input" name="itemValue" type="hidden" value="Item 1" /></div><ul class="t-group" style="display:none"><li class="t-item"><div class="t-top"><span class="t-in">Child Item 1.1</span></div></li><li class="t-item"><div class="t-mid"><span class="t-in">Child Item 1.2</span></div></li><li class="t-item"><div class="t-mid"><span class="t-in">Child Item 1.3</span></div></li><li class="t-item t-last"><div class="t-bot"><span class="t-in">Child Item 1.4</span></div></li></ul></li><li class="t-item"><div class="t-mid"><span class="t-icon t-plus"></span><span class="t-in">Item 2</span><input class="t-input" name="itemValue" type="hidden" value="Item 2" /></div><ul class="t-group" style="display:none"><li class="t-item"><div class="t-top"><span class="t-in">Child Item 3.1</span></div></li><li class="t-item"><div class="t-mid"><span class="t-in">Child Item 3.2</span></div></li><li class="t-item"><div class="t-mid"><span class="t-in">Child Item 3.3</span></div></li><li class="t-item t-last"><div class="t-bot"><span class="t-in">Child Item 3.4</span></div></li></ul></li><li class="t-item"><div class="t-mid"><span class="t-icon t-plus"></span><span class="t-in">Item 3</span><input class="t-input" name="itemValue" type="hidden" value="Item 3" /></div><ul class="t-group" style="display:none"><li class="t-item"><div class="t-top"><span class="t-in">Child Item 3.1</span></div></li><li class="t-item t-last"><div class="t-bot"><span class="t-in">Child Item 3.2</span></div></li></ul></li><li class="t-item"><div class="t-mid"><span class="t-icon t-minus"></span><span class="t-in">Item 4</span><input class="t-input" name="itemValue" type="hidden" value="Item 4" /></div><ul class="t-group"><li class="t-item"><div class="t-top"><span class="t-in">Child Item 4.1</span></div></li><li class="t-item t-last"><div class="t-bot"><span class="t-in">Child Item 4.2</span></div></li></ul></li><li class="t-item"><div class="t-mid"><span class="t-icon t-minus"></span><span class="t-in">Item 5</span><input class="t-input" name="itemValue" type="hidden" value="Item 5" /></div><ul class="t-group"><li class="t-item"><div class="t-top"><span class="t-in">Child Item 5.1</span></div></li><li class="t-item t-last"><div class="t-bot"><span class="t-in">Child Item 5.2</span></div></li></ul></li><li class="t-item t-last"><div class="t-bot"><span class="t-icon t-plus-disabled"></span><span class="t-in t-state-disabled">Item 6</span><input class="t-input" name="itemValue" type="hidden" value="Item 6" /></div><ul class="t-group" style="display:none"><li class="t-item"><div class="t-top"><span class="t-in">Child Item 6.1</span></div></li><li class="t-item t-last"><div class="t-bot"><span class="t-in">Child Item 6.2</span></div></li></ul></li></ul></div>
-
         <script>
             var TreeView = kendo.ui.TreeView,
-                DataSource = kendo.data.DataSource,
                 treeview = $("#myTreeView").kendoTreeView();
 
-            test('clicking collapsed item not expand if it is disabled', function() {
+            function createTreeView(data) {
+                return $(TreeView.getGroupHtml({
+                    group: {
+                        isFirstLevel: true,
+                        isExpanded: true
+                    },
+                    items: data
+                })).appendTo(document.body).kendoTreeView();
+            }
 
-                var item = $("ul li:nth-child(1)", treeview);
-
-                item.find('.t-plus')
-                    .toggleClass('t-plus-disabled', true)
-                    .trigger('click');
-
-                equal(item.find('.t-group').css("display"), "none");
+            module("expand / collapse", {
+                teardown: function() {
+                    treeview.remove();
+                }
             });
 
-            test('clicking plus icon should toggle minus', function() {
-                var item = $("ul li:nth-child(2)", treeview);
+            test("trying to expand disabled items does not expand them", function() {
+                treeview = createTreeView([
+                    { text: "foo", enabled: false, items: [ { text: "bar" } ] }
+                ]);
 
-                item.find('.t-plus')
-                    .trigger('click');
+                var item = $(".t-item:first", treeview);
 
-                ok(item.find('.t-icon').hasClass('t-minus'));
+                item.find(".t-plus")
+                    .toggleClass("t-plus-disabled", true)
+                    .trigger("click");
+
+                equal(item.find(".t-group").css("display"), "none");
             });
 
-            test('clicking plus items should expand them', function() {
-                var item = $("ul li:nth-child(3)", treeview);
+            test("clicking plus icon should toggle minus icon and show subgroup", function() {
+                treeview = createTreeView([
+                    { text: "foo", items: [ { text: "bar" } ] }
+                ]);
 
-                item.find('.t-plus')
-                    .trigger('click');
+                var item = $(".t-item:first", treeview);
 
-                equal(item.find('.t-group').css("display"), "block");
+                item.find(".t-plus")
+                    .trigger("click");
+
+                ok(item.find(".t-icon").hasClass("t-minus"));
+                equal(item.find(".t-group").css("display"), "block");
             });
 
-            test('clicking minus icon should toggle plus', function() {
-                var item = $("ul li:nth-child(4)", treeview);
+            test("clicking minus icon should toggle plus icon and collaspe subgroup", function() {
+                treeview = createTreeView([
+                    { text: "foo", expanded: true, items: [ { text: "bar" } ] }
+                ]);
 
-                item.find('.t-minus')
-                    .trigger('click');
+                var item = $(".t-item:first", treeview);
 
-                ok(item.find('.t-icon').hasClass('t-plus'));
+                item.find(".t-minus")
+                    .trigger("click");
+
+                ok(item.find(".t-icon").hasClass("t-plus"));
+                equal(item.find(".t-group").css("display"), "none");
             });
 
-            test('clicking minus on expanded items should collaspe them', function() {
-                var item = $("ul li:nth-child(5)", treeview);
+            test("double clicking disabled items does not expand them", function() {
+                treeview = createTreeView([
+                    { text: "foo", disabled: true, items: [ { text: "bar" } ] }
+                ]);
 
-                item.find('.t-minus')
-                    .trigger('click');
+                var item = $(".t-item:first", treeview);
 
-                equal(item.find('.t-group').css("display"), "none");
-            });
-
-            test('double clicking disabled items does not expand them', function() {
-                var item = $("ul li:nth-child(6)", treeview);
-
-                item.find('.t-in.t-state-disabled')
-                    .trigger('dblclick');
+                item.find(".t-in.t-state-disabled")
+                    .trigger("dblclick");
                 
-                equal(item.find('.t-group').css("display"), "none");
+                equal(item.find(".t-group").css("display"), "none");
             });
         </script>
 
