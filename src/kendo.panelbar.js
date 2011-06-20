@@ -4,7 +4,7 @@
         ui = kendo.ui,
         extend = $.extend,
         Component = ui.Component,
-        events = [ 'expand', 'collapse', 'select', 'error', 'init' ],
+        events = [ 'expand', 'collapse', 'select', 'error', 'init', 'contentLoad' ],
         MOUSEENTER = 'mouseenter',
         MOUSELEAVE = 'mouseleave',
         CLICK = 'click',
@@ -26,14 +26,15 @@
             var that = this,
                 content = element.find('li.t-state-active > .t-content');
 
-            if (options && ('animation' in options) && !options.animation)
-                options.animation = { open: { effects: {} }, close: { effects: {} } }; // No animation
-
             Component.fn.init.call(that, element, options);
 
             options = that.options;
 
             that._updateClasses();
+
+            if (options.animation === false) {
+                options.animation = { open: { show: true, effects: {} }, close: { hide:true, effects: {} } };
+            }
 
             element
                 .delegate(clickableItems, CLICK, $.proxy(that._click, that))
@@ -149,6 +150,10 @@
                 .children('a:focus')
                 .parent()
                 .addClass('t-state-active');
+            items
+                .find('>div')
+                .addClass('t-content')
+                .css({ display: 'none' });
 
             items.each(function() {
                 var item = $(this);
@@ -165,7 +170,7 @@
                 .addClass('t-header');
 
             items
-                .filter(':has(.t-group)')
+                .filter(':has(.t-group),:has(.t-content)')
                 .children('.t-link:not(:has([class*=t-arrow]))')
                 .each(function () {
                     var item = $(this),
@@ -197,7 +202,7 @@
 
             var contents = item.find('> .t-content, > .t-group'),
                 href = link.attr('href'),
-                isAnchor = link.data('ContentUrl') || (href && (href.charAt(href.length - 1) == '#' || href.indexOf('#' + element.id + '-') != -1));
+                isAnchor = link.data('ContentUrl') || (href && (href.charAt(href.length - 1) == '#' || href.indexOf('#' + that.element[0].id + '-') != -1));
 
             if (isAnchor || contents.length)
                 e.preventDefault();
@@ -309,8 +314,8 @@
                 data: data,
 
                 error: function (xhr, status) {
-                    if (that.options.ajaxError(that.element, 'error', xhr, status))
-                        return;
+                    if (that.trigger('error', { xhr: xhr, status: status }))
+                        this.complete();
                 },
 
                 complete: function () {
@@ -321,6 +326,8 @@
                 success: function (data, textStatus) {
                     contentElement.html(data);
                     that._toggleGroup(contentElement, isVisible);
+
+                    that.trigger('contentLoad', { item: element[0], contentElement: contentElement[0] });
                 }
             });
         },
@@ -329,7 +336,6 @@
             var that = this;
 
             that.trigger(eventName, { item: element[0] });
-            that.element.trigger(eventName, { item: element[0] });
         }
     });
 

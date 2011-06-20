@@ -1,0 +1,109 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <!-- meta -->
+        <!-- meta -->
+        <title>Events Demo</title>
+        <!-- script -->
+        <script src="../../../src/jquery.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.fx.js"></script>
+        <script src="../../../src/kendo.panelbar.js"></script>
+        <!-- script -->
+        <!-- css -->
+        <link type="text/css" href="../styles/examples.css" rel="stylesheet"/>
+        <link type="text/css" href="../../../styles/kendo.common.css" rel="stylesheet"/>
+        <link type="text/css" href="../../../styles/kendo.vista.css" rel="stylesheet"/>
+        <!-- css -->
+    </head>
+    <body>
+        <!-- nav -->
+        <!-- nav -->
+        <!-- description -->
+        <div class="description">This example shows how to attach events to a kendoTabStrip and how they are fired and triggered.</div>
+        <!-- description -->
+        <div id="example">
+            <ul id="PanelBar1">
+                <li class="t-state-active">
+                    First Item
+                    <ul>
+                        <li>Sub Item 1</li>
+                        <li>Sub Item 2</li>
+                        <li>Sub Item 3</li>
+                        <li>Sub Item 4</li>
+                    </ul>
+                </li>
+                <li>
+                    Second Item
+                    <ul>
+                        <li>Sub Item 1</li>
+                        <li>Sub Item 2</li>
+                        <li>Sub Item 3</li>
+                        <li>Sub Item 4</li>
+                    </ul>
+                </li>
+                <li>
+                    Third Item
+                    <ul>
+                        <li>Sub Item 1</li>
+                        <li>Sub Item 2</li>
+                        <li>Sub Item 3</li>
+                        <li>Sub Item 4</li>
+                    </ul>
+                </li>
+                <li>
+                    Fourth Item
+                    <ul>
+                        <li>Sub Item 1</li>
+                        <li>Sub Item 2</li>
+                        <li>Sub Item 3</li>
+                        <li>Sub Item 4</li>
+                    </ul>
+                </li>
+                <li>
+                    Fifth Item
+                    <ul>
+                        <li>Sub Item 1</li>
+                        <li>Sub Item 2</li>
+                        <li>Sub Item 3</li>
+                        <li>Sub Item 4</li>
+                    </ul>
+                </li>
+                <li>
+                    Ajax Item
+                    <div></div>
+                </li>
+                <li>
+                    Error Item
+                    <div></div>
+                </li>
+            </ul>
+        </div>
+        <script type="text/javascript">
+            var onSelect = function (e) {
+                if ('kendoConsole' in window)
+                    kendoConsole.log('Selected: ' + $(e.item).find('> .t-link').text());
+            };
+
+            var onInit = function (e) {
+                if ('kendoConsole' in window)
+                    kendoConsole.log('TabStrip loaded');
+            };
+
+            var onContentLoad = function (e) {
+                if ('kendoConsole' in window)
+                    kendoConsole.log('Content loaded in <b>'+ $(e.item).find('> .t-link').text() + '</b> and starts with <b>' + $(e.contentElement).text().substr(0, 20) + '...</b>');
+            };
+
+            var onError = function (e) {
+                if ('kendoConsole' in window)
+                    kendoConsole.error('Loading failed with ' + e.xhr.statusText + ' ' + e.xhr.status);
+            };
+
+            $("#PanelBar1").kendoPanelBar({ expandMode: 0, select: onSelect, init: onInit, contentLoad: onContentLoad, error: onError, contentUrls: [ , , , , , 'ajax/ajaxContent1.html', 'error.html' ] });
+        </script>
+        <div class="console"></div>
+        <!-- tools -->
+        <!-- tools -->
+    </body>
+</html>
