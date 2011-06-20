@@ -266,8 +266,8 @@ if (!isInferiorBrowser) {
                         if ($(e.target).is('#photoWrap, #photoWrap *, #main')) {
                             e.preventDefault();
 
-                            $('header').kendoStop().kendoAnimate('slideUp', 'fast', fullscreen);
-                            $('#footer').kendoStop().kendoAnimate('slideDown', 'fast', fullscreen);
+                            $('header').kendoStop().kendoAnimate('slide:up', 'fast', fullscreen);
+                            $('#footer').kendoStop().kendoAnimate('slide:down', 'fast', fullscreen);
                             fullscreen = !fullscreen;
 
                             return;
@@ -275,11 +275,11 @@ if (!isInferiorBrowser) {
                     }
 
                     if (Math.abs(dX) > Math.abs(dY)) {
-                        (dX > 40) && $(e.target).trigger('swipeRight');
-                        (dX < -40) && $(e.target).trigger('swipeLeft');
+                        dX > 40 && ($(e.target).trigger('swipeRight'));
+                        dX < -40 && ($(e.target).trigger('swipeLeft'));
                     } else {
-                        (dY > 40) && $(e.target).trigger('swipeDown');
-                        (dY < -40) && $(e.target).trigger('swipeUp');
+                        dY > 40 && ($(e.target).trigger('swipeDown'));
+                        dY < -40 && ($(e.target).trigger('swipeUp'));
                     }
                 })
                 .bind('swipeLeft', getSlideHandler("next", "slideRotateLeft"))
@@ -290,8 +290,8 @@ if (!isInferiorBrowser) {
                     if ($(e.target).is('#photoWrap, #photoWrap *, #main')) {
                         e.preventDefault();
 
-                        $('header').kendoStop().kendoAnimate('slideUp', 'fast', fullscreen);
-                        $('#footer').kendoStop().kendoAnimate('slideDown', 'fast', fullscreen);
+                        $('header').kendoStop().kendoAnimate('slide:up', 250, fullscreen);
+                        $('#footer').kendoStop().kendoAnimate('slide:down', 250, fullscreen);
                         fullscreen = !fullscreen;
                    }
                 });

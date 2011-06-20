@@ -21,6 +21,9 @@
     <body>
         <button class="play">play</button>
         <button class="reverse">reverse</button>
+        <br><br>
+        <button class="pplay">play</button>
+        <button class="rreverse">reverse</button>
 
         
         <div class="animatee">
@@ -30,16 +33,29 @@
             <div style="width: 100%; position: absolute; top: 20px; bottom: 0; background: yellow;">
                 Content: bbbbbbbbb
             </div>
-        </div> 
+        </div>
         <script type="text/javascript" charset="utf-8">
             $(document).ready(function() {
                 $("button.play").click(function() {
-                    $(".animatee").kendoAnimate("zoomIn", 250);
+                    $(".animatee").kendoStop(true).kendoAnimate("slide:up", 250);
                 });
 
                 $("button.reverse").click(function() {
-                    $(".animatee").kendoAnimate("zoomIn", 250, true);
+                    $(".animatee").kendoStop(true).kendoAnimate("slide:up", 250, true);
                 });
+
+                $("button.pplay").click(function() {
+                    $(".animatee").kendoStop(true).kendoAnimate("slideRight", 250);
+                });
+
+                $("button.rreverse").click(function() {
+                    $(".animatee").kendoStop(true).kendoAnimate("slideRight", 250, true);
+                });
+
+                var scrollTo = 10;
+                console.log(kendo.resolveEffects("slide:up"), kendo.resolveEffects("slide:up", true));
+                console.log(kendo.resolveEffects({ slide: { properties: { translateX: scrollTo + 'px' }, direction: "left" } }),
+                            kendo.resolveEffects({ slide: { properties: { translateX: scrollTo + 'px' }, direction: "left" } }, true));
             });
         </script>
     </body>

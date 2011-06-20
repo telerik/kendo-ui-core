@@ -224,7 +224,7 @@
             if ($(e.target).hasClass('right-scroll-arrow'))
                 scrollTo = Math.max( -that.scrollElement.innerWidth() + that.element.innerWidth(), scrollOffsets.x - that.element.innerWidth() );
 
-            that.scrollElement.kendoStop().kendoAnimate({effects: { slideLeft: { properties: { translate: scrollTo + 'px' } } }, duration: 500 });
+            that.scrollElement.kendoStop().kendoAnimate({effects: { slide: { properties: { translateX: scrollTo + 'px' }, direction: "left" } }, duration: 500 });
         },
 
         _animateArrows: function (arrows, action) {

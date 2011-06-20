@@ -152,7 +152,7 @@
             collision: "flip",
             animation: {
                 open: {
-                    effects: "slideDownIn",
+                    effects: "slideIn:down",
                     duration: 200,
                     show: true
                 },
