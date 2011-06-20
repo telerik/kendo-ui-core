@@ -127,7 +127,29 @@
                 stop(1000);
             });
 
-            test("search with startswith rebind items", function() {
+            test("search with no filter should not open if no match", function() {
+                var opened = false, combobox = new ComboBox(input, {
+                    dataSource: data,
+                    autoBind: false
+                });
+
+                combobox.popup.bind("open", function() {
+                    opened = true;
+                });
+
+                combobox.text("fooooo");
+                debugger;
+                combobox.search();
+
+                stop(1000);
+
+                setTimeout(function() {
+                    ok(!opened);
+                    start();
+                }, 800);
+            });
+
+           test("search with startswith rebind items", function() {
                 var combobox = new ComboBox(input, {
                     dataSource: data
                 });
@@ -303,6 +325,23 @@
                 stop(600);
             });
 
+            test("highlight first item on refresh", function() {
+                var combobox = new ComboBox(input, {
+                    dataSource: data,
+                    suggest: false,
+                    filter: "startswith"
+                });
+
+                combobox.input.val("f");
+                combobox.search();
+
+                setTimeout(function() {
+                    ok(combobox.ul.children().eq(0).hasClass("t-state-focused"));
+                    start();
+                }, 500);
+
+                stop(600);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
