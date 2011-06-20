@@ -23,16 +23,20 @@
 
         <script>
             var TreeView = kendo.ui.TreeView,
-                treeview = $("#myTreeView").kendoTreeView();
+                treeview, onDataBindingCalled;
 
-            var treeview, onDataBindingCalled;
-
-            // temporary until tests get ported
-            test("dummy", function() { ok(true); });
-
-            /*
             function findItemByText(text) {
                 return $('.t-in:contains(' + text + ')').closest('.t-item');
+            }
+
+            function createTreeView(data) {
+                return $(TreeView.getGroupHtml({
+                    group: {
+                        isFirstLevel: true,
+                        isExpanded: true
+                    },
+                    items: data
+                })).appendTo(document.body).kendoTreeView();
             }
 
             function moveTreeViewNode(sourceNode, destinationNode) {
@@ -54,25 +58,23 @@
 
             module("TreeView / DragAndDrop", {
                 setup: function () {
-                    treeview = $('#myTreeView').data('kendoTreeView');
-
-                    treeview.bindTo([
-                        { Text: "Product 1", Expanded: true,
-                            Items: [
-                              { Text: "Subproduct 1.1", Expanded: true,
-                                  Items: [
-                                    { Text: "Subsubproduct 1.1.1" },
-                                    { Text: "Subsubproduct 1.1.2" }
+                    treeview = createTreeView([
+                        { text: "Product 1", expanded: true,
+                            items: [
+                              { text: "Subproduct 1.1", expanded: true,
+                                  items: [
+                                    { text: "Subsubproduct 1.1.1" },
+                                    { text: "Subsubproduct 1.1.2" }
                                   ]
                               }
                             ]
                         },
-                        { Text: "Product 2", Enabled: false },
-                        { Text: "Product 3" },
-                        { Text: "Product 4", Expanded: true,
-                            Items: [
-                              { Text: "Subproduct 4.1", Expanded: true },
-                              { Text: "Subproduct 4.2", Expanded: true }
+                        { text: "Product 2", enabled: false },
+                        { text: "Product 3" },
+                        { text: "Product 4", expanded: true,
+                            items: [
+                              { text: "Subproduct 4.1", expanded: true },
+                              { text: "Subproduct 4.2", expanded: true }
                             ]
                         }
                     ]);
@@ -82,23 +84,16 @@
                     treeview.onDataBinding = function (e) {
                         onDataBindingCalled = true;
                         if (e.item != treeview.element) {
-                            treeview.dataBind(e.item, [{ Text: "Abyss Node", LoadOnDemand: true, Value: "abyss"}]);
+                            treeview.dataBind(e.item, [{ text: "Abyss Node", loadOnDemand: true, value: "abyss"}]);
                         }
                     };
                 },
                 teardown: function() {
-                    treeview.onDataBinding = undefined;
-                    $(treeview.element)
-                        .unbind('dataBinding')
-                        .unbind('nodeDragging')
-                        .unbind('nodeDrop')
-                        .unbind('nodeDropped')
-                        .unbind('nodeDragStart');
+                    treeview.remove();
                 }
             });
 
             test('moving parent to child item does not move it', function () {
-
                 moveTreeViewNode('Product 1', 'Subproduct 1.1');
 
                 ok(findItemByText('Product 1').parent().hasClass('t-treeview-lines'));
@@ -112,18 +107,19 @@
                 equal(findItemByText('Subproduct 1.1').parent().closest('.t-item')[0], findItemByText('Product 1')[0]);
             });
 
+/*
             test('dragging nodes triggers nodeDragging event', function() {
                 var triggered;
                 
-                $(treeview.element)
-                    .bind('nodeDragging', function (e) {
-                        triggered = true;
-                    });
+                treeview.bind('nodeDragging', function (e) {
+                    triggered = true;
+                });
 
                 moveTreeViewNode('Subproduct 1.1', 'Product 3');
 
                 ok(triggered);
             });
+*/
 
             test('setting hint to denied in nodeDragging prevents nodeDropped event', function() {
                 var triggered;
@@ -157,18 +153,19 @@
 
             });
 
+            /*
             test('move item to collapsed lod sibling triggers onDataBinding handler', function () {
-                treeview.bindTo([
-                    { Text: "Product 1", Expanded: false, LoadOnDemand: true, Value: "abyss" },
-                    { Text: "Product 2", Expanded: false,
-                        Items: [
-                            { Text: "Subproduct 2.1" },
-                            { Text: "Subproduct 2.2" }
+                treeview.data("kendoTreeView").bindTo([
+                    { text: "Product 1", expanded: false, loadOnDemand: true, value: "abyss" },
+                    { text: "Product 2", expanded: false,
+                        items: [
+                            { text: "Subproduct 2.1" },
+                            { text: "Subproduct 2.2" }
                         ]
                     }
                 ]);
 
-                ok(!!treeview.isAjax());
+                ok(!!treeview.data("kendoTreeView").isAjax());
 
                 $(treeview.element).bind('dataBinding', treeview.onDataBinding);
 
@@ -179,17 +176,17 @@
             });
 
             test('move item to collapsed lod node rendered on client triggers onDataBinding handler', function () {
-                treeview.bindTo([
-                    { Text: "Product 1", Expanded: false, LoadOnDemand: true, Value: "abyss" },
-                    { Text: "Product 2", Expanded: false,
-                        Items: [
-                            { Text: "Subproduct 2.1" },
-                            { Text: "Subproduct 2.2" }
+                treeview.data("kendoTreeView").bindTo([
+                    { text: "Product 1", expanded: false, loadOnDemand: true, value: "abyss" },
+                    { text: "Product 2", expanded: false,
+                        items: [
+                            { text: "Subproduct 2.1" },
+                            { text: "Subproduct 2.2" }
                         ]
                     }
                 ]);
 
-                ok(!!treeview.isAjax());
+                ok(!!treeview.data("kendoTreeView").isAjax());
 
                 $(treeview.element).bind('dataBinding', treeview.onDataBinding);
 
