@@ -39,9 +39,7 @@
 
             that._input();
 
-            that.popup = new ui.Popup(that.ul, {
-                anchor: that.input
-            });
+            that._popup();
 
             that._dataAccessors();
 
@@ -87,6 +85,7 @@
             dataValueField: "value",
             minLength: 1,
             height: 200,
+            highlightFirst: true,
             filter: "none",
             suggest: false
         },
@@ -192,6 +191,7 @@
             var that = this,
                 ul = that.ul,
                 options = that.options,
+                suggest = options.suggest,
                 height = options.height,
                 data = that.dataSource.view(),
                 length = data.length;
@@ -201,9 +201,14 @@
 
             that._rebuildSelect(data);
 
-            if (options.suggest && length) {
-                that.current($(that.ul[0].firstChild));
-                that.suggest(that._current);
+            if (length) {
+                if (suggest || options.highlightFirst) {
+                    that.current($(that.ul[0].firstChild));
+                }
+
+                if (suggest) {
+                    that.suggest(that._current);
+                }
             }
 
             if (!options.autoBind) {
@@ -238,44 +243,19 @@
             var that = this,
                 word = that.text(),
                 length = word.length,
-                options = that.options,
-                dataSource = that.dataSource;
+                options = that.options;
 
             clearTimeout(that._typing);
 
             if (!length) {
                 that.close();
             } else if (length >= options.minLength) {
-
+                that.showBusy();
                 if (options.filter === "none") {
-                    var predicate = function(dataItem) {
-                            var text = that._text(dataItem);
-                            if (text !== undefined) {
-                                return (text + "").toLowerCase().indexOf(word.toLowerCase()) === 0;
-                            }
-                        },
-                        handler = function () {
-                            that.search();
-                            dataSource.unbind(CHANGE, handler);
-                        };
-
-                    if (!that.ul[0].firstChild) {
-                        dataSource.bind(CHANGE, handler);
-                        dataSource.read();
-                        return;
-                    }
-
-                    if (that.highlight(predicate) !== -1) {
-                        if (options.suggest && that._current) {
-                            that.suggest(that._current);
-                        }
-                        that.open();
-                    }
-
+                    that._filter(word);
                 } else {
-                    that.current(null);
                     that._filtered = true;
-                    dataSource.filter( {field: options.dataTextField, operator: options.filter, value: word } );
+                    that.dataSource.filter( {field: options.dataTextField, operator: options.filter, value: word } );
                 }
             }
         },
@@ -316,7 +296,7 @@
 
                 if (!that._selected) {
                     that._customOption(text);
-                    that.element[0].value = text;
+                    that.element.val(text);
                 }
 
                 input.value = text;
@@ -372,6 +352,11 @@
                 if (that.input[0] !== document.activeElement) {
                     that.input.focus();
                 }
+            } else {
+                var prev = that.previous;
+                that.value(that.text());
+                that.previous = prev;
+                that._change();
             }
         },
 
@@ -443,8 +428,39 @@
                                         .bind(CHANGE, proxy(that.refresh, that));
         },
 
+        _filter: function(word) {
+            var that = this,
+                options = that.options,
+                dataSource = that.dataSource,
+                predicate = function(dataItem) {
+                    var text = that._text(dataItem);
+                    if (text !== undefined) {
+                        return (text + "").toLowerCase().indexOf(word.toLowerCase()) === 0;
+                    }
+                };
+
+            if (!that.ul[0].firstChild) {
+                options.autoBind = true;
+                dataSource.bind(CHANGE, function search() {
+                    that.search();
+                    dataSource.unbind(CHANGE, handler);
+                }).query();
+                return;
+            }
+
+            if (that.highlight(predicate) !== -1) {
+                if (options.suggest && that._current) {
+                    that.suggest(that._current);
+                }
+                that.open();
+            }
+
+            that.hideBusy();
+        },
+
         _input: function() {
             var that = this,
+                element = that.element[0],
                 wrapper = that.wrapper,
                 SELECTOR = ".t-input",
                 input;
@@ -457,9 +473,19 @@
 
                 input = wrapper.find(SELECTOR);
             }
+            input[0].style.cssText = element.style.cssText;
+            input.addClass(element.className).show();
+
             that.input = input;
 
             that.arrow = wrapper.find(".t-icon");
+        },
+
+        _clear: function() {
+            var that = this;
+            if (!that.text()) {
+                that.current(null);
+            }
         },
 
         _move: function(li) {
@@ -500,11 +526,7 @@
                 e.preventDefault();
             }
 
-            setTimeout(function() {
-                if (!that.input.val()) {
-                    that.current(null);
-                }
-            });
+            setTimeout(proxy(that._clear, that));
         },
 
         _search: function() {
@@ -588,8 +610,19 @@
 
                 that.element.val(value);
             }
-        }
+        },
 
+        _popup: function() {
+            var that = this,
+                ul = that.ul,
+                wrapper = that.wrapper;
+
+            that.popup = new ui.Popup(ul, {
+                anchor: wrapper
+            });
+
+            ul.width(wrapper.width() - (ul.outerWidth() - ul.innerWidth()));
+        }
     });
 
     ui.plugin("ComboBox", ComboBox);

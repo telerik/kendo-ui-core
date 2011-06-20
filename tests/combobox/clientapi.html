@@ -170,6 +170,46 @@
                 equal(combobox.previous, "");
            });
 
+           test('enable(false) should disable combobox', function() {
+                var combobox = new ComboBox(input);
+
+                combobox.enable(false);
+
+                ok(combobox.wrapper.hasClass('t-state-disabled'));
+                ok(combobox.input.attr("disabled"));
+                ok(combobox.element.attr("disabled"));
+            });
+
+            test('after enable(false) should not open popup', function() {
+                var combobox = input.kendoComboBox({dataSource: data}).data("kendoComboBox");
+                    oldOpen = combobox.popup.toggle,
+                    called = false;
+
+                combobox.popup.toggle = function() {called = true};
+
+                combobox.enable(false);
+
+                combobox.arrow.click();
+
+                ok(!called);
+
+                combobox.popup.toggle = oldOpen;
+            });
+
+            test("enable(true) removes t-state-disabled class", function() {
+                var combobox = new ComboBox(input);
+                combobox.wrapper.addClass('t-state-disabled');
+                combobox.element.attr("disabled", true);
+                combobox.input.attr("disabled");
+
+                combobox.enable();
+
+                ok(!combobox.wrapper.hasClass('t-state-disabled'));
+                ok(!combobox.element.attr("disabled"));
+                ok(!combobox.input.attr("disabled"));
+            });
+
+
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

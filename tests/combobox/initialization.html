@@ -308,6 +308,26 @@
                stop(600);
            });
 
+           test("copy input styles to the visible input", function() {
+               input.css("color", "red").kendoComboBox();
+
+               var color = input.css("color");
+
+               var combobox = input.data("kendoComboBox");
+
+               equal(combobox.input.css("color"), color);
+               ok(combobox.input.is(":visible"));
+
+           });
+
+           test("copy input className to the visible input", function() {
+               input.addClass("test").kendoComboBox();
+
+               var combobox = input.data("kendoComboBox");
+
+               ok(combobox.input.hasClass("test"));
+           });
+
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
