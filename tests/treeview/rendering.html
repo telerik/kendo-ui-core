@@ -54,6 +54,20 @@
                 equal(html, "<ul class='t-group' style='display:none'></ul>");
             });
 
+            test("renders items, if any", function() {
+                var html = TreeView.getGroupHtml({ 
+                    items: [
+                        { text: "foo" }
+                    ],
+                    group: {
+                        isFirstLevel: true,
+                        isExpanded: true
+                    }
+                });
+
+                equal($(html).find(".t-item").length, 1);
+            });
+
             module("item");
 
             test("renders list items with t-item class", function() {
