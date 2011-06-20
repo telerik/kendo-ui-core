@@ -6,8 +6,6 @@
         <script src="../qunit.js"></script>
         <script src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
-        <script src="../../src/kendo.query.js"></script>
-        <script src="../../src/kendo.datasource.js"></script>
         <script src="../../src/kendo.treeview.js"></script>
         <link rel="stylesheet" href="../qunit.css" />
     </head>
@@ -32,7 +30,7 @@
             });
 
             test("kendoTreeView attaches a treeview object to target", function() {
-                list.kendoTreeView({ data: [] });
+                list.kendoTreeView();
 
                 ok(list.data("kendoTreeView") instanceof TreeView);
             });
@@ -53,113 +51,6 @@
                 ok(wrapper.is("div"));
                 ok(wrapper.hasClass("t-widget t-treeview"));
             });
-
-            test("data source is initialized from options when it is an array", function() {
-                var data = [{ text: 1, value: 1 }, { text: 2, value: 2 }],
-                    treeview = new TreeView(list, data);
-
-                ok(treeview.dataSource);
-                treeview.dataSource.read();
-                equal(treeview.dataSource.data().length, 2);
-            });
-
-            test("data source is initialized from options.dataSource when array is passed", function() {
-                var data = [{ text: 1, value: 1 }, { text: 2, value: 2 }],
-                    treeview = new TreeView(list, {
-                        dataSource: data
-                    });
-
-                ok(treeview.dataSource);
-                treeview.dataSource.read();
-                equal(treeview.dataSource.data().length, 2);
-            });
-
-            test("data source is initialized from options.dataSource", function() {
-                var data = [{ text: 1, value: 1 }, { text: 2, value: 2 }],
-                    treeview = new TreeView(list, {
-                        dataSource: {
-                            data: data
-                    }
-                });
-
-                ok(treeview.dataSource);
-                treeview.dataSource.read();
-                equal(treeview.dataSource.data().length, 2);
-            });
-
-            /*test("data source is initialized from list", function() {
-                var ul = $("<ul><li data-value=1>Chai</li><li data-value=1 data-selected='true'>Tee</li></ul>"),
-                    treeview = new TreeView(ul),
-                    data;
-
-                ok(treeview.dataSource);
-
-                treeview.dataSource.read();
-                data = treeview.dataSource.data();
-
-                equal(data.length, 2);
-                equal(data[0].text, "Chai");
-                equal(data[0].value, "1");
-            });*/
-
-            test("retrived data from html structure does not override options.dataSource", function() {
-                var ul = $("<ul><li data-value=1>Chai</li><li data-value=1 data-selected='true'>Tee</li></ul>"),
-                    data = [{ text: "Foo", value: "Foo" }],
-                    treeview = new TreeView(ul, {
-                        dataSource: {
-                            data: data
-                        }
-                    });
-
-                ok(treeview.dataSource);
-
-                treeview.dataSource.read();
-                data = treeview.dataSource.data();
-                
-                equal(data.length, 1);
-                equal(data[0].text, "Foo");
-                equal(data[0].value, "Foo");
-            });
-
-            /*
-            test("treeview populates its list when the datasource changes", function() {
-                var treeview = new TreeView(list, [{text: "foo", value: 1}, {text:2, value:2}]);
-
-                treeview.dataSource.read();
-
-                equal(treeview.ul.children("li").length, 2);
-                equal(treeview.ul.children("li").first().text(), "foo");
-            });
-
-            test("template should render item directly if datatextField is empty string", function(){
-                var treeview = new TreeView(list, { dataTextField : ""});
-
-                equal(treeview.template("foo"), "<li class='t-item' unselectable='on'>foo</li>");
-            });
-
-            test("template should use defined datatextfield", function(){
-                var treeview = new TreeView(list, {
-                    datatextfield : "productname"
-                });
-
-                equal(treeview.template({productname: "foo"}), "<li class='t-item' unselectable='on'>foo</li>");
-            });
-
-            test("changing the template", function() {
-                var treeview = new TreeView(list, {
-                    datatextfield: "",
-                    template: "<%= data.touppercase() %>"
-                });
-
-                equal(treeview.template("foo"), "<li class='t-item' unselectable='on'>foo</li>");
-                equal(treeview.options.template, "<%= data.touppercase() %>");
-            });
-
-            test("should populate text and value if items", function() {
-                var treeview = new TreeView(list, [{text: "foo", value: 1}, {text:2, value:2}]);
-                equal(treeview.text(), "foo");
-                equal(treeview.value(), "1");
-            }); */
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

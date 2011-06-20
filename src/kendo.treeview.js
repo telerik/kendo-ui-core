@@ -3,7 +3,6 @@
         ui = kendo.ui,
         template = kendo.template,
         Component = kendo.ui.Component,
-        DataSource = kendo.data.DataSource,
         proxy = $.proxy,
         SELECT = "select",
         EXPAND = "expand",
@@ -34,15 +33,11 @@
                 $element = $(element),
                 clickableItems = '.t-in:not(.t-state-selected,.t-state-disabled)';
 
-            options = $.isArray(options) ? { dataSource: options } : options;
-
             Component.prototype.init.call(that, element, options);
 
             options = that.options;
             
             that._wrapper();
-
-            that._dataSource();
 
             $element
                 .delegate(".t-in.t-state-selected", "mouseenter", function(e) { e.preventDefault(); })
@@ -75,15 +70,9 @@
                     }
                 });
             // </???>
-
-            if (that.options.autoBind){
-                that.dataSource.query();
-            }
         },
 
         options: {
-            autoBind: true,
-            dataSource: {},
             queryString: {
                 text: "text",
                 value: "value",
@@ -91,23 +80,6 @@
             },
             dataTextField: "text",
             dataValueField: "value"
-        },
-
-        _dataSource: function() {
-            var that = this;
-                element = that.element,
-                options = that.options,
-                dataSource = options.dataSource;
-
-            if ($.isPlainObject(dataSource) && element.is("ul")) {
-                $.extend(dataSource, {
-                    select: element,
-                    fields: [{ field: options.dataTextField }, { field: options.dataValueField }]
-                });
-            }
-
-            that.dataSource = DataSource.create(dataSource || {})
-                                        // .bind(CHANGE, proxy(that.reload, that));
         },
 
         _wrapper: function() {
@@ -771,7 +743,7 @@
                 getItemHtml = getItemHtml,
                 i, len;
 
-            if (items && items.length > 0) {
+            if (items) {
                 for (i = 0, len = items.length; i < len; i++)
                     html += TreeView.getItemHtml({
                         item: $.extend({}, items[i], {
