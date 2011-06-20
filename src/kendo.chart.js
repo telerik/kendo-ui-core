@@ -22,6 +22,7 @@
         DATABOUND = "dataBound",
         DEFAULT_PRECISION = 6,
         HORIZONTAL = "horizontal",
+        HEIGHT = "height",
         LEFT = "left",
         NONE = "none",
         OUTSIDE = "outside",
@@ -29,6 +30,7 @@
         SVG_NS = "http://www.w3.org/2000/svg",
         TOP = "top",
         VERTICAL = "vertical",
+        WIDTH = "width",
         X = "x",
         Y = "y",
         ZERO_THRESHOLD = 0.2;
@@ -427,9 +429,20 @@
             element.options = extend(true, {}, element.options, options);
         },
 
+        options: {
+            align: LEFT,
+            vAlign: TOP,
+            margin: { },
+            padding: { },
+            border: { },
+            width: 0,
+            height: 0
+        },
+
         updateLayout: function(targetBox) {
             var element = this,
                 box,
+                childBox,
                 options = element.options,
                 children = element.children,
                 margin = getMargin(options.margin);
@@ -442,22 +455,36 @@
                 box = element.box;
             }
 
-            element.translateChildren(
-                targetBox.x1 - box.x1 + margin.left,
-                targetBox.y1 - box.y1 + margin.top);
+            childBox = box.clone();
 
-            box.move(targetBox.x1, targetBox.y1);
             box.expand(margin.left + margin.right, margin.top + margin.bottom);
+
+            element.align(targetBox, X, options.align);
+            element.align(targetBox, Y, options.vAlign);
+
+            element.translateChildren(
+                box.x1 - childBox.x1 + margin.left,
+                box.y1 - childBox.y1 + margin.top);
         },
 
-        options: {
-            align: LEFT,
-            vAlign: TOP,
-            margin: { },
-            padding: { },
-            border: { },
-            width: 0,
-            height: 0
+        align: function(targetBox, axis, alignment) {
+            var element = this,
+                box = element.box,
+                c1 = axis + 1,
+                c2 = axis + 2,
+                sizeFunc = axis === X ? WIDTH : HEIGHT,
+                size = box[sizeFunc]();
+
+            if (inArray(alignment, [LEFT, TOP])) {
+                box[c1] = targetBox[c1];
+                box[c2] = box[c1] + size;
+            } else if (inArray(alignment, [RIGHT, BOTTOM])) {
+                box[c2] = targetBox[c2];
+                box[c1] = box[c2] - size;
+            } else if (alignment == CENTER) {
+                box[c1] = targetBox[c1] + (targetBox[sizeFunc]() - size) / 2;
+                box[c2] = box[c1] + size;
+            }
         }
     });
 
@@ -2266,6 +2293,10 @@
         });
 
         return margin;
+    }
+
+    function inArray(value, array) {
+        return array.indexOf(value) != -1;
     }
 
     // Exports ================================================================
