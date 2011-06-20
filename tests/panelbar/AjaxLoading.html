@@ -21,8 +21,6 @@
 
    <script type="text/javascript">
 
-       var isRaised, isExpandRaised, isCollapseRaised, isSelectRaised;
-
         function getRootItem(index) {
 			return $('#PanelBar1').find('.t-header').parent().eq(index).children('.t-link');
         }
@@ -31,21 +29,8 @@
             return $("#PanelBar1").data("kendoPanelBar");
         }
 
-        //handlers
-        function Expand(sender, args) {
-            isExpandRaised = true;
-        }
-
-        function Collapse(sender, args) {
-            isCollapseRaised = true;
-        }
-
-        function Select(sender, args) {
-            isSelectRaised = true;
-        }
-
        $(document).ready(function() {
-           $("#PanelBar1").kendoPanelBar({ animation: false });
+           $("#PanelBar1").kendoPanelBar({ animation: false, contentUrls: [ 'AjaxView1.html', 'AjaxView2.html', 'AjaxView1.html', 'AjaxView2.html', 'AjaxView1.html' ] });
        });
 
    </script>
@@ -53,72 +38,78 @@
 </head>
 <body>
 
-<ul class="t-widget t-panelbar t-reset" id="PanelBar1" style="width: 300px; float: left; margin-bottom: 30px; visibility: hidden; position: absolute;">
-    <!--visibility: hidden; position: absolute;-->
-    <li class="t-item t-state-default"><a href="#PanelBar-1" class="t-link t-header">Pure ASP.NET MVC components<span class="t-icon t-arrow-up t-panelbar-collapse"></span></a>
-        <div id="PanelBar-1" class="t-content">
-        <p> Telerik Extensions for ASP.NET MVC is built from the ground up to fully embrace the values of the ASP.NET MVC framework - lightweight rendering, clean HTML, clear separation of concerns, easy testability - while helping make you more productive building MVC views. </p>        </div>
+<ul class="t-widget t-panelbar t-reset" id="PanelBar1" style="width: 300px; float: left; visibility: hidden; position: absolute;">
+    <li><a>Pure ASP.NET MVC components</a>
+        <div></div>
     </li>
-    <li class="t-item t-state-disabled"><a href="AjaxView1.html" class="t-link t-header">Completely Open Source<span class="t-icon t-arrow-down t-panelbar-expand"></span></a>
-        <div style="display:none" id="PanelBar-2" class="t-content"></div>
+    <li><a>Completely Open Source</a>
+        <div></div>
     </li>
-    <li class="t-item t-state-default"><a href="AjaxView2.html" class="t-link t-header">Exceptional Performance<span class="t-icon t-arrow-down t-panelbar-expand"></span></a>
-        <div style="display:none" id="PanelBar-3" class="t-content"></div>
+    <li><a>Exceptional Performance</a>
+        <div></div>
     </li>
-    <li class="t-item t-state-default"><a href="AjaxView1.html" class="t-link t-header">Based on jQuery<span class="t-icon t-arrow-down t-panelbar-expand"></span></a>
-        <div style="display:none" id="PanelBar-4" class="t-content"></div>
+    <li><a>Based on jQuery</a>
+        <div></div>
     </li>
-    <li class="t-item t-state-default"><a href="AjaxView2.html" class="t-link t-header">Wide Cross-browser support<span class="t-icon t-arrow-down t-panelbar-expand"></span></a>
-        <div style="display:none" id="PanelBar-5" class="t-content"></div>
+    <li><a>Wide Cross-browser support</a>
+        <div></div>
     </li>
 </ul>
 
 <script type="text/javascript">
 
 
-        test('clicking expanded content items should collapse them', function() {
-        
+        asyncTest('clicking collapsed content items should expand them', function() {
             var item = getRootItem(0);
 
-            item.trigger('click');
+            getPanelBar().bind('contentLoad', function() {
+                equal(item.parent().find('.t-content').css("display"), "block");
+                getPanelBar().unbind('contentLoad');
+                start();
+            });
 
-            equal(item.parent().find('.t-content').css("display"), 'none');
+            item.trigger('click');
         });
 
-        test('clicking collapsed content items should expand them', function() {
+        test('clicking expanded content items should collapse them', function() {
             var item = getRootItem(0);
 
             item.trigger('click');
 
-            equal(item.parent().find('.t-content').css("display"), "block");
+            equal(item.parent().find('.t-content').css("display"), "none");
+        });
+
+        asyncTest('clicking collapsed content items should toggle arrow', function() {
+            var item = getRootItem(1);
+
+            getPanelBar().bind('contentLoad', function() {
+                ok(item.find('.t-icon').hasClass('t-arrow-up'));
+                getPanelBar().unbind('contentLoad');
+                start();
+            });
+
+            item.trigger('click');
         });
 
         test('clicking expanded content items should toggle arrow', function() {
-            var item = getRootItem(0);
+            var item = getRootItem(1);
 
             item.trigger('click');
 
             ok(item.find('.t-icon').hasClass('t-arrow-down'));
         });
 
-        test('clicking collapsed content items should toggle arrow', function() {
-            var item = getRootItem(0);
-
-            item.trigger('click');
-
-            ok(item.parent().find('.t-icon').hasClass('t-arrow-up'));
-        });
-
-        asyncTest('clicking should make item active', function() {
+        test('clicking should make item active', function() {
 
             var item = getRootItem(2);
-            
-            item.trigger('click');
 
-            setTimeout( function () {
+            getPanelBar().bind('contentLoad', function() {
                 ok(item.parent().hasClass('t-state-active'));
+                getPanelBar().unbind('contentLoad');
                 start();
-            }, 100);
+            });
+
+            item.trigger('click');
         });
 
 </script>

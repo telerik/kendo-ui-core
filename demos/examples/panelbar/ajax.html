@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <!-- meta -->
+        <!-- meta -->
+        <title>Content Loaded with Ajax Demo</title>
+        <!-- script -->
+        <script src="../../../src/jquery.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.fx.js"></script>
+        <script src="../../../src/kendo.panelbar.js"></script>
+        <!-- script -->
+        <!-- css -->
+        <link type="text/css" href="../styles/examples.css" rel="stylesheet"/>
+        <link type="text/css" href="../../../styles/kendo.common.css" rel="stylesheet"/>
+        <link type="text/css" href="../../../styles/kendo.vista.css" rel="stylesheet"/>
+        <!-- css -->
+    </head>
+    <body>
+        <!-- nav -->
+        <!-- nav -->
+        <!-- description -->
+        <div class="description">This example shows how to load <b>Ajax content</b> in a kendoTabStrip.</div>
+        <!-- description -->
+        <div id="example">
+            <ul id="PanelBar1">
+                <li class="t-state-active">
+                    First Ajax Item
+                    <div></div>
+                </li>
+                <li>
+                    Second Ajax Item
+                    <div></div>
+                </li>
+                <li>
+                    Third Ajax Item
+                    <div></div>
+                </li>
+                <li>
+                    Fourth Ajax Item
+                    <div></div>
+                </li>
+                <li>
+                    Fifth Ajax Item
+                    <div></div>
+                </li>
+            </ul>
+        </div>
+        <script type="text/javascript">
+            $("#PanelBar1").kendoPanelBar({ expandMode: 0, contentUrls: [ 'ajax/ajaxContent1.html', 'ajax/ajaxContent2.html', 'ajax/ajaxContent3.html', 'ajax/ajaxContent4.html', 'ajax/ajaxContent5.html' ] });
+        </script>
+        <!-- tools -->
+        <!-- tools -->
+    </body>
+</html>
