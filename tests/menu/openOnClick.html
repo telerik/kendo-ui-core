@@ -132,7 +132,7 @@
 
 <script type="text/javascript">
 
-        $("#Menu3").kendoMenu({ animation: false, openOnClick: true });
+        $("#Menu3").kendoMenu({ animation: false, openOnClick: true, hoverDelay: 0 });
         
         var open;
         var close;
@@ -184,6 +184,7 @@
         });
 
         test('leaving opened and hovering a sibling closes it and opens the sibling', function() {
+            var opend = false;
             menu.clicked = true;
             menu.open = function() { opend = true };
 
@@ -194,11 +195,11 @@
         });
 
         test('clicking the document closes the open item', function() {
-            var closed = false;
+            var closd = false;
             menu.clicked = true;
-            menu.close = function() { closed = true };
+            menu.close = function() { closd = true };
             menu._documentClick({ target: document.body }, document );
-            ok(closed);
+            ok(closd);
         });
 
 </script>
