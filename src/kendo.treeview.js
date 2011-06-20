@@ -770,17 +770,11 @@
                 getItemHtml = getItemHtml,
                 i, len;
 
-            if (items) {
-                for (i = 0, len = items.length; i < len; i++)
-                    html += TreeView.getItemHtml({
-                        treeview: options.treeview,
-                        group: $.extend({
-                            length: len
-                        }, options.group),
-                        item: $.extend({
-                            index: i
-                        }, items[i])
-                    });
+            for (i = 0, len = items ? items.length : 0; i < len; i++) {
+                html += TreeView.getItemHtml($.extend(options, {
+                    group: { length: len },
+                    item: $.extend({ index: i }, items[i])
+                }));
             }
 
             return html;
