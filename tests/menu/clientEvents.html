@@ -7,6 +7,7 @@
         <script src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
         <script src="../../src/kendo.menu.js"></script>
         <script type="text/javascript" src="../jquery.mockjax.js"></script>
         <link rel="stylesheet" href="../qunit.css" />
@@ -164,8 +165,8 @@
 
             menu.open = function() { opened = true };
 
-            menu.bind("open", function() {
-                return false;
+            menu.bind("open", function(e) {
+                e.preventDefault();
             });
 
             menu._mouseenter({}, $("li:first", menu.element)[0]);
@@ -178,11 +179,10 @@
 
             menu.close = function() { closed = true };
 
-            menu.bind("close", function() {
-                return false;
+            menu.bind("close", function(e) {
+                e.preventDefault();
             });
 
-            menu._mouseenter({}, $("li:first", menu.element)[0]);
             menu._mouseleave({}, $("li:first", menu.element)[0]);
 
             equals(closed, false);
