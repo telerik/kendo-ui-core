@@ -53,9 +53,9 @@
                 });
 
                 var scrollTo = 10;
-                console.log(kendo.resolveEffects("slide:up"), kendo.resolveEffects("slide:up", true));
-                console.log(kendo.resolveEffects({ slide: { properties: { translateX: scrollTo + 'px' }, direction: "left" } }),
-                            kendo.resolveEffects({ slide: { properties: { translateX: scrollTo + 'px' }, direction: "left" } }, true));
+                console.log(kendo.parseEffects("slide:up"), kendo.parseEffects("slide:up", true));
+                console.log(kendo.parseEffects({ slide: { properties: { translateX: scrollTo + 'px' }, direction: "left" } }),
+                            kendo.parseEffects({ slide: { properties: { translateX: scrollTo + 'px' }, direction: "left" } }, true));
             });
         </script>
     </body>

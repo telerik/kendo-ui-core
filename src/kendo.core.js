@@ -1083,7 +1083,7 @@
         return size;
     }
 
-    function resolveEffects(input, mirror) {
+    function parseEffects(input, mirror) {
         var effects = {};
 
         if (typeof input === "string")
@@ -1152,7 +1152,7 @@
         if (typeof options === "string") {
             // options is the list of effect names separated by space e.g. animate(element, "fadeIn slideDown")
 
-            effects = resolveEffects(options);
+            effects = parseEffects(options);
 
             // only callback is provided e.g. animate(element, options, function() {});
             if ($.isFunction(duration)) {
@@ -1180,7 +1180,7 @@
         }
 
         if ('effects' in options && typeof options.effects === "string")
-            options.effects = resolveEffects(options.effects);
+            options.effects = parseEffects(options.effects);
 
         options = extend({
             //default options
@@ -1206,7 +1206,7 @@
             var promises = [], effects = options.effects;
 
             if (typeof effects === "string") {
-                effects = resolveEffects(options.effects);
+                effects = parseEffects(options.effects);
             }
 
             if (kendo.fx && support.transitions) {
@@ -1368,7 +1368,7 @@
         animate: animate,
         throttle: throttle,
         wrap: wrap,
-        resolveEffects: resolveEffects,
+        parseEffects: parseEffects,
         directions: directions,
         Observable: Observable,
         Class: Class,
