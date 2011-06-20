@@ -204,7 +204,7 @@
             var $element = $(element);
 
             if (!$element.hasClass('.t-state-selected') &&
-                !$t.trigger(this.element, 'select', { item: $element.closest('.t-item')[0] })) {
+                !this.trigger(this.element, 'select', { item: $element.closest('.t-item')[0] })) {
                 $('.t-in', this.element).removeClass('t-state-hover t-state-selected');
 
                 $element.addClass('t-state-selected');
@@ -241,19 +241,17 @@
                 /// TODO: animate
                 contents[isExpanding ? 'show' : 'hide']();
             } else if (isExpanding && this.isAjax() && (contents.length == 0 || $item.data('loaded') === false)) {
-                if (!$t.trigger(this.element, isExpanding ? 'expand' : 'collapse', { item: $item[0] }))
+                if (!this.trigger(this.element, isExpanding ? 'expand' : 'collapse', { item: $item[0] }))
                     this.ajaxRequest($item);
             }
         },
 
         nodeClick: function (e) {
-            var $element = $(e.target),
-                $item = $element.closest('.t-item');
+            var icon = $(e.target);
 
-            if ($element.hasClass('t-plus-disabled') || $element.hasClass('t-minus-disabled'))
-                return;
-
-            this.nodeToggle(e, $item);
+            if (!icon.is('.t-plus-disabled,.t-minus-disabled')) {
+                this.nodeToggle(e, icon.closest('.t-item'));
+            }
         },
 
         isAjax: function () {
@@ -310,7 +308,7 @@
 
             var e = { item: $item[0] };
 
-            if ($t.trigger(this.element, 'dataBinding', e) || (!this.ajax && !this.ws))
+            if (this.trigger(this.element, 'dataBinding', e) || (!this.ajax && !this.ws))
                 return;
 
             $item.data('loadingIconTimeout', setTimeout(function () {
@@ -344,7 +342,7 @@
                 isFirstLevel: $item.hasClass("t-treeview"),
                 showCheckBoxes: this.showCheckBox,
                 groupLevel: $item.find('> div > .t-checkbox :input[name="' + this.element.id + '_checkedNodes.Index"]').val(),
-                isExpanded: (isGroup ? $item.eq(0).is('.t-treeview') ? true : data[0].Expanded : false),
+                isExpanded: (isGroup ? $item.eq(0).is('.t-treeview') ? true : data[0].expanded : false),
                 renderGroup: isGroup,
                 elementId: this.element.id
             });
@@ -381,7 +379,7 @@
             var isChecked = $(element).is(":checked");
 
             var isEventPrevented =
-                $t.trigger(this.element, "checked", {
+                this.trigger(this.element, "checked", {
                     item: $(element).closest('.t-item')[0],
                     checked: isChecked
                 });
@@ -453,7 +451,7 @@
             var that = this,
                 treeview = that.owner;
 
-            if ($t.trigger(treeview.element, "nodeDragStart", { item: e.$draggable.closest(".t-item")[0] }))
+            if (treeview.trigger(treeview.element, "nodeDragStart", { item: e.$draggable.closest(".t-item")[0] }))
                 return false;
 
             that.$dropCue.appendTo(treeview.element);
@@ -516,7 +514,7 @@
                 }
             }
 
-            $t.trigger(treeview.element, "nodeDragging", {
+            treeview.trigger(treeview.element, "nodeDragging", {
                 pageY: e.pageY,
                 pageX: e.pageX,
                 dropTarget: e.target,
@@ -538,7 +536,7 @@
                 dropPosition = 'over', destinationItem;
 
             if (e.keyCode == kendo.keys.ESC){
-                $t.trigger(treeview.element, 'nodeDragCancelled', { item: e.$draggable.closest('.t-item')[0] });
+                treeview.trigger(treeview.element, 'nodeDragCancelled', { item: e.$draggable.closest('.t-item')[0] });
             } else {
                 if (that.$dropCue.css('visibility') == 'visible') {
                     dropPosition = that.$dropCue.prevAll('.t-in').length > 0 ? 'after' : 'before';
@@ -548,7 +546,7 @@
                 }
 
                 var isValid = !e.$cue.find('.t-drag-status').hasClass('t-denied'),
-                    isDropPrevented = $t.trigger(treeview.element, 'nodeDrop', {
+                    isDropPrevented = treeview.trigger(treeview.element, 'nodeDrop', {
                         isValid: isValid,
                         dropTarget: e.target,
                         destinationItem: destinationItem.parent()[0],
@@ -628,7 +626,7 @@
                     sourceGroup.remove();
                 }
 
-                $t.trigger(treeview.element, 'nodeDropped', {
+                treeview.trigger(treeview.element, 'nodeDropped', {
                     destinationItem: destinationItem.closest('.t-item')[0],
                     dropPosition: dropPosition,
                     item: sourceItem.parent('.t-item')[0]
@@ -639,7 +637,72 @@
         }
     };
 
+    (function(){
     // client-side rendering
+    var classes = {
+        wrapperCssClass: function (group, item) {
+            var result = "t-item",
+                index = item.index;
+
+            if (group.isFirstLevel && index == 0) {
+                result += " t-first"
+            }
+
+            if (index == group.length-1) {
+                result += " t-last";
+            }
+
+            return result;
+        },
+        cssClass: function(group, item) {
+            var result = "",
+                index = item.index,
+                groupLength = group.length - 1;
+            
+            if (group.isFirstLevel && index == 0) {
+                result += "t-top ";
+            }
+
+            if (index == 0 && index != groupLength) {
+                result += "t-top";
+            } else if (index == groupLength) {
+                result += "t-bot";
+            } else {
+                result += "t-mid";
+            }
+            
+            return result;
+        },
+        activatorClass: function(item) {
+            var result = "t-in";
+
+            if (item.enabled === false) {
+                result += " t-state-disabled";
+            }
+
+            if (item.selected === true) {
+                result += " t-state-selected";
+            }
+
+            return result;
+        },
+        subGroupActivatorClass: function(item) {
+            var result = "t-icon";
+
+            if (item.expanded !== true) {
+                result += " t-plus";
+            } else {
+                result += " t-minus";
+            }
+
+            if (item.enabled === false) {
+                result += "-disabled";
+            }
+
+            return result;
+        }
+    };
+                
     $.extend(TreeView, {
         templates: {
             group: template(
@@ -650,128 +713,56 @@
             item: template(
 "<li class='<%= wrapperCssClass(group, item) %>'>" +
     "<div class='<%= cssClass(group, item) %>'>" +
-        "<%= checkboxTemplate({ treeview: treeview, group: group, item: item, hiddenInputsGenerator: hiddenInputsGenerator }) %>" +
+        "<%= subGroupActivator(data) %>" +
+        "<%= checkbox(data) %>" +
         "<<%= tag %> class='<%= activatorClass(item) %>'<%= activatorAttributes %>>" +
-            "<%= subGroupActivator({ item: item, activatorClass: subGroupActivatorClass }) %>" +
             "<%= image(item) %><%= sprite(item) %><%= text %><%= value(item) %>" +
         "</<%= tag %>>" +
     "</div>" +
-    "<%= subGroup({ items: item.items, treeview: treeview, group: group }) %>" +
+    "<%= subGroup({ items: item.items, treeview: treeview, group: { isExpanded: item.expanded } }) %>" +
 "</li>"
             ),
             image: template("<img class='t-image' alt='' src='<%= imageUrl %>' />"),
             value: template("<input type='hidden' class='t-input' name='itemValue' value='<%= value %>' />"),
-            subGroupActivator: template("<span class='<%= data.activatorClass(data.item) %>'></span>", { useWithBlock: false }),
+            subGroupActivator: template("<span class='<%= subGroupActivatorClass(item) %>'></span>"),
             checkbox: template(
 "<% var arrayName = treeview.id + '_checkedNodes', absoluteIndex = (group.level ? group.level + ':' : '') + item.index; %>" + 
 "<span class='t-checkbox'>" + 
 "<input type='hidden' value='<%= absoluteIndex %>' name='<%= arrayName %>.Index' class='t-input' />" +
     "<input type='checkbox' value='<%= item.checked ? 'True' : 'False' %>' name='<%= arrayName %>[<%= absoluteIndex %>].Checked' class='t-input' <%= item.enabled === false ? ' disabled' : '' %><%= item.checked === true ? ' checked' : '' %>/>" +
-    "<%= item.checked === true ? hiddenInputsGenerator({ treeview: treeview, item: item, group: group }) : '' %>" +
+    "<%= item.checked === true ? checkboxValues(data) : '' %>" +
 "</span>"
             ),
             checkboxValues: template(
-                "<input type='hidden' value='<%= value %>' name='<%= arrayItem %>.Value' class='t-input' />" +
-                "<input type='hidden' value='<%= text %>' name='<%= arrayItem %>.Text' class='t-input' />"
+                "<% var arrayItem = treeview.id + '[' + group.level + ']'; %>" + 
+                "<input type='hidden' value='<%= item.value %>' name='<%= arrayItem %>.Value' class='t-input' />" +
+                "<input type='hidden' value='<%= item.text %>' name='<%= arrayItem %>.Text' class='t-input' />"
             ),
             sprite: template("<span class='t-sprite <%= spriteCssClass %>'></span>"),
             empty: template("")
         },
 
-        getNodeInputsHtml: function (options) {
-            return TreeView.templates.checkboxValues({
-                value: options.item.value,
-                text: options.item.text,
-                arrayItem: options.treeview.id + "[" + options.group.level + "]"
-            });
-        },
-
         getItemHtml: function (options) {
             options = $.extend({ treeview: {}, group: {} }, options);
 
-            var wrapperCssClass = function(group, item) {
-                    var result = "t-item",
-                        index = item.index;
-
-                    if (group.isFirstLevel && index == 0) {
-                        result += " t-first"
-                    }
-
-                    if (index == group.length-1) {
-                        result += " t-last";
-                    }
-
-                    return result;
-                },
-                cssClass = function(group, item) {
-                    var result = "",
-                        index = item.index,
-                        groupLength = group.length - 1;
-                    
-                    if (group.isFirstLevel && index == 0) {
-                        result += "t-top ";
-                    }
-
-                    if (index == 0 && index != groupLength) {
-                        result += "t-top";
-                    } else if (index == groupLength) {
-                        result += "t-bot";
-                    } else {
-                        result += "t-mid";
-                    }
-                    
-                    return result;
-                },
-                activatorClass = function(item) {
-                    var result = "t-in";
-
-                    if (item.enabled === false) {
-                        result += " t-state-disabled";
-                    }
-
-                    if (item.selected === true) {
-                        result += " t-state-selected";
-                    }
-
-                    return result;
-                },
-                subGroupActivatorClass = function(item) {
-                    var result = "t-icon";
-
-                    if (item.expanded !== true) {
-                        result += " t-plus";
-                    } else {
-                        result += " t-minus";
-                    }
-
-                    if (item.enabled === false) {
-                        result += "-disabled";
-                    }
-
-                    return result;
-                },
-                templates = TreeView.templates,
+            var templates = TreeView.templates,
                 empty = templates.empty,
                 item = options.item,
                 treeview = options.treeview,
                 url = item.url;
 
             return templates.item($.extend(options, {
-                wrapperCssClass: wrapperCssClass,
-                subGroupActivatorClass: subGroupActivatorClass,
-                cssClass: cssClass,
                 tag: url ? "a" : "span",
-                activatorClass: activatorClass,
                 activatorAttributes: url ? " href='" + url + "'" : "",
                 text: item.encoded === false ? item.text : kendo.htmlEncode(item.text),
                 image: item.imageUrl ? templates.image : empty,
                 sprite: item.spriteCssClass ? templates.sprite : empty,
                 value: item.value ? templates.value : empty,
-                subGroup: TreeView.getGroupHtml,
                 subGroupActivator: ((item.loadOnDemand && treeview.isAjax) || item.items) ? templates.subGroupActivator : empty,
-                checkboxTemplate: (treeview.showCheckboxes && item.checkable !== false) ? templates.checkbox : empty,
-                hiddenInputsGenerator: TreeView.getNodeInputsHtml
-            }));
+                checkbox: (treeview.showCheckboxes && item.checkable !== false) ? templates.checkbox : empty,
+                subGroup: TreeView.getGroupHtml,
+                checkboxValues: templates.checkboxValues
+            }, classes));
         },
 
         getItemsList: function (options) {
@@ -807,6 +798,7 @@
             });
         }
     });
+    })();
 
     kendo.ui.plugin("TreeView", TreeView);
 
