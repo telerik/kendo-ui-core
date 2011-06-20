@@ -170,14 +170,14 @@
                 origins = options.origin.toLowerCase().split(" "),
                 positions = options.position.toLowerCase().split(" ");
 
-            if(positions[0] !== origins[0] && positions[0] !== CENTER && origins[0] !== CENTER) {
-                if(offset.top + size > viewPortSize) {
+            if (positions[0] !== origins[0] && positions[0] !== CENTER && origins[0] !== CENTER) {
+                if (offset.top + size > viewPortSize) {
                     position = BOTTOM + " " + positions[1];
                     origin = TOP + " " + origins[1];
                     offset = that._align(origin, position);
                 }
 
-                if(offset.top < 0) {
+                if (offset.top < 0) {
                     position = TOP + " " + positions[1];
                     origin = BOTTOM + " " + origins[1];
                     offset = that._align(origin, position);
@@ -194,15 +194,15 @@
                 origins = options.origin.toLowerCase().split(" "),
                 positions = options.position.toLowerCase().split(" ");
 
-            if(positions[1] !== origins[1] && positions[1] !== CENTER && origins[1] !== CENTER) {
+            if (positions[1] !== origins[1] && positions[1] !== CENTER && origins[1] !== CENTER) {
 
-                if(offset.left + size > viewPortSize) {
+                if (offset.left + size > viewPortSize) {
                     position = positions[0] + " " + RIGHT;
                     origin = origins[0] + " " + LEFT;
                     offset = that._align(origin, position);
                 }
 
-                if(offset.left < 0) {
+                if (offset.left < 0) {
                     position = positions[0] + " " + LEFT;
                     origin = origins[0] + " " + RIGHT;
                     offset = that._align(origin, position);
