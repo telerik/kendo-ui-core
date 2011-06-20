@@ -33,6 +33,10 @@
                 background: magenta;
             }
 
+            .grid-data {
+                overflow: hidden;
+            }
+
             .grid-content {
                 position: relative;
                 padding-right: 17px;
@@ -47,9 +51,42 @@
                 top:0;
                 height: 100%;
             }
+
+            fieldset {
+                float:right;
+                width: 300px;
+            }
+
+            dt {
+                display: inline-block;
+                margin-right: 10px;
+            }
         </style>
     </head>
     <body>
+        <fieldset>
+            <legend>stats</legend>
+            <dl>
+                <dt>pageSize</dt>
+                <dd id="pageSize"></dd>
+            </dl>
+            <dl>
+                <dt>scrollTop</dt>
+                <dd id="scrollTop"></dd>
+            </dl>
+            <dl>
+                <dt>totalHeight</dt>
+                <dd id="totalHeight"></dd>
+            </dl>
+            <dl>
+                <dt>rowHeight</dt>
+                <dd id="rowHeight"></dd>
+            </dl>
+            <dl>
+                <dt>currentPage</dt>
+                <dd id="currentPage"></dd>
+            </dl>
+        </fieldset>
         <div class="grid">
             <div class="grid-header">
                 <table>
@@ -99,7 +136,7 @@
 
             var dataSource = new kendo.data.DataSource({
                 data: data,
-                pageSize: 25
+                pageSize: 50
             });
 
             $("table#grid").kendoGrid({
@@ -108,17 +145,49 @@
 
             var rowHeight = $("table#grid td:first")[0].offsetHeight;
 
-            var height = dataSource.pageSize()  * rowHeight;
-            $(".grid-data, .grid-scroller").height(height);
+            $(".grid-data, .grid-scroller").height(300);
 
             var totalHeight = data.length * rowHeight;
+            var rowsPerPage = $(".grid-data").outerHeight() / rowHeight;
 
             $("<div />").height(totalHeight).width(10).appendTo($(".grid-scroller"));
 
+            var currentPage = 1;
+
+            var multiplier =  300 / totalHeight;
+
             $(".grid-scroller").bind("scroll", function(e) {
-                var page = 1 + Math.ceil(Math.ceil(this.scrollTop / rowHeight) / dataSource.pageSize());
-                dataSource.page(page);
+                var page = Math.ceil(Math.ceil(this.scrollTop / rowHeight) / dataSource.pageSize());
+
+                if (currentPage !== page) {
+                    console.log(kendo.stringify({
+                        scrollTop: this.scrollTop,
+                        scrollHeight: this.scrollHeight,
+                        rowsPerPage: rowsPerPage,
+                        height: this.offsetHeight,
+                        page: page
+                    }));
+
+                    currentPage = page;
+                    dataSource.page(page);
+                } else {
+                }
+
+                $(".grid-data").scrollTop(this.scrollTop % (dataSource.pageSize() * rowHeight));
+
+                log();
             });
+
+            function log() {
+                $("#pageSize").text(dataSource.pageSize());
+                $("#scrollTop").text($(".grid-scroller")[0].scrollTop);
+                $("#rowHeight").text(rowHeight);
+                $("#totalHeight").text(totalHeight);
+                $("#currentPage").text(currentPage);
+            }
+
+            log();
+
             </script>
         </body>
     </html>
