@@ -21,7 +21,7 @@
     function getEffectOptions(item) {
         var parent = item.parent();
         return {
-            effects: parent.hasClass("t-menu") ? parent.hasClass("t-menu-vertical") ? "slideRightIn" : "slideDownIn" : "slideRightIn"
+            effects: parent.hasClass("t-menu") ? parent.hasClass("t-menu-vertical") ? "slideIn:right" : "slideIn:down" : "slideIn:right"
         };
     }
 

@@ -1014,7 +1014,7 @@
                          }));
         }
 
-        if ($.browser.msie && parseInt($.browser.version, 10) <= 7)
+        if ($.browser.msie && Math.floor($.browser.version) <= 7)
             element.css({
                 width: '100%',
                 zoom: 1
@@ -1052,7 +1052,7 @@
                     event: (lowPrefix === 'o' || lowPrefix === 'webkit') ? lowPrefix : ''
                 };
 
-                support.transitions.event = support.transitions.event ? support.transitions.event + 'TransitionEnd' : support.transitions.event + 'transitionend';
+                support.transitions.event = support.transitions.event ? support.transitions.event + 'TransitionEnd' : 'transitionend';
 
                 return false;
             }
@@ -1083,15 +1083,68 @@
         return size;
     }
 
-    function splitEffects(input) {
+    function resolveEffects(input, mirror) {
         var effects = {};
 
-        $.each(input.split(" "), function() {
-            effects[this] = {};
-        });
+        if (typeof input === "string")
+            $.each(input.split(" "), function() {
+                var effect = this.split(":"),
+                    direction = effect[1],
+                    effectBody = {};
+
+                effect.length > 1 && (effectBody["direction"] = mirror ? kendo.directions[direction].reverse : direction);
+
+                effects[effect[0]] = effectBody;
+            });
+        else
+            $.each(input, function(idx) {
+                if (this.direction && mirror)
+                    this.direction = kendo.directions[this.direction].reverse;
+
+                effects[idx] = this;
+            });
 
         return effects;
     }
+
+    var directions = {
+        left: {
+            reverse: "right",
+            property: "left",
+            transition: "translateX",
+            vertical: false,
+            modifier: -1
+        },
+        right: {
+            reverse: "left",
+            property: "left",
+            transition: "translateX",
+            vertical: false,
+            modifier: 1
+        },
+        down: {
+            reverse: "up",
+            property: "top",
+            transition: "translateY",
+            vertical: true,
+            modifier: 1
+        },
+        up: {
+            reverse: "down",
+            property: "top",
+            transition: "translateY",
+            vertical: true,
+            modifier: -1
+        },
+        "in": {
+            reverse: "out",
+            modifier: -1
+        },
+        out: {
+            reverse: "in",
+            modifier: 1
+        }
+    };
 
     function animate(element, options, duration, reverse, complete) {
         var effects = {};
@@ -1099,7 +1152,7 @@
         if (typeof options === "string") {
             // options is the list of effect names separated by space e.g. animate(element, "fadeIn slideDown")
 
-            effects = splitEffects(options);
+            effects = resolveEffects(options);
 
             // only callback is provided e.g. animate(element, options, function() {});
             if ($.isFunction(duration)) {
@@ -1127,7 +1180,7 @@
         }
 
         if ('effects' in options && typeof options.effects === "string")
-            options.effects = splitEffects(options.effects);
+            options.effects = resolveEffects(options.effects);
 
         options = extend({
             //default options
@@ -1153,11 +1206,7 @@
             var promises = [], effects = options.effects;
 
             if (typeof effects === "string") {
-                effects = {};
-
-               $.each(options.effects.split(" "), function() {
-                    effects[this] = {};
-               });
+                effects = resolveEffects(options.effects);
             }
 
             if (kendo.fx && support.transitions) {
@@ -1179,6 +1228,7 @@
                     if (effect) {
                         settings.options = extend(settings.options, {
                             duration: options.duration,
+                            direction: settings.direction,
                             complete: deferred.resolve
                         });
 
@@ -1318,6 +1368,8 @@
         animate: animate,
         throttle: throttle,
         wrap: wrap,
+        resolveEffects: resolveEffects,
+        directions: directions,
         Observable: Observable,
         Class: Class,
         Template: Template,

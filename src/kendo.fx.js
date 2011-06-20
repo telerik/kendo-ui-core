@@ -249,6 +249,32 @@
         }
     };
 
+    var getAnimationProperty = function(element, property) {
+        if (kendo.support.transitions) {
+            var transform = element.css(kendo.support.transitions.css + 'transform'),
+                match = transform.match(new RegExp(property + '\\s*\\(([\\d\\w\\.]+)')),
+                computed = 0;
+
+            if (match)
+                computed = parseInt(match[1], 10);
+            else {
+                match = transform.match(/matrix3?d?\s*\(.*,\s*([\d\w\.]+),\s*([\d\w\.]+)/) || [0, 0, 0];
+                switch (property.toLowerCase()) {
+                    case 'translate':
+                    case 'translatex':
+                        computed = parseInt(match[1], 10);
+                        break;
+                    case 'translatey':
+                        computed = parseInt(match[2], 10);
+                        break;
+                }
+            }
+
+            return computed;
+        } else
+            return element.css(property);
+    };
+
     extend(kendo.fx, {
         fadeOut: {
             play: function(element, properties, options) {
@@ -282,72 +308,56 @@
                 animate(element, extend({ scale: 1 }, properties), options);
             }
         },
-        slideLeft: {
+        slide: {
             play: function(element, properties, options) {
-                animate(element, extend({ translate: -element.width() + 'px' }, properties), options);
+                var direction = kendo.directions[options.direction],
+                    offset = direction.modifier * (direction.vertical ? element.outerHeight() : element.outerWidth()),
+                    extender = {};
+
+                !element.data('origin') && element.data('origin', getAnimationProperty(element, direction.transition));
+
+                extender[direction.transition] = offset + 'px';
+                animate(element, extend(extender, properties), options);
             },
             reverse: function(element, properties, options) {
-                animate(element, extend({ translate: 0 }, properties), options);
+                var direction = kendo.directions[options.direction],
+                    extender = {};
+
+                extender[direction.transition] = (element.data('origin') || 0) + 'px';
+                animate(element, extend(extender, properties), options);
             }
         },
-        slideRight: {
+        slideIn: {
             play: function(element, properties, options) {
-                animate(element, extend({ translate: element.width() + 'px' }, properties), options);
-            },
-            reverse: function(element, properties, options) {
-                animate(element, extend({ translate: 0 }, properties), options);
-            }
-        },
-        slideUp: {
-            play: function(element, properties, options) {
-                animate(element, extend({ translateY: -element.height() + 'px' }, properties), options);
-            },
-            reverse: function(element, properties, options) {
-                animate(element, extend({ translateY: 0 }, properties), options);
-            }
-        },
-        slideDown: {
-            play: function(element, properties, options) {
-                animate(element, extend({ translateY: element.height() + 'px' }, properties), options);
-            },
-            reverse: function(element, properties, options) {
-                animate(element, extend({ translateY: 0 }, properties), options);
-            }
-        },
-        slideRightIn: {
-            play: function(element, properties, options) {
+                var direction = kendo.directions[options.direction],
+                    offset = -direction.modifier * (direction.vertical ? element.outerHeight() : element.outerWidth()),
+                    extender = {};
+
+                console.log( direction, offset );
+
                 if (kendo.support.transitions) {
-                    element.css(kendo.support.transitions.css + 'transform', 'translate(' + (-element.outerWidth()) + 'px)');
-                    element.css('left'); // Read a style to force Chrome to apply the change.
-                    animate(element, extend({ translate: 0 }, properties), options);
+                    element.css(kendo.support.transitions.css + 'transform', direction.transition + '(' + offset + 'px)');
+                    element.css(direction.property); // Read a style to force Chrome to apply the change.
+                    extender[direction.transition] = 0;
+                    animate(element, extend(extender, properties), options);
                 } else {
-                    element.css('left', -element.outerWidth() + 'px');
-                    animate(element, extend({ left: 0 }, properties), options);
+                    element.css(direction.property, offset + 'px');
+                    extender[direction.property] = 0;
+                    animate(element, extend(extender, properties), options);
                 }
             },
             reverse: function(element, properties, options) {
-                if (kendo.support.transitions)
-                    animate(element, extend({ translate: (-element.outerWidth()) + 'px' }, properties), options);
-                else
-                    animate(element, extend({ left: -element.outerWidth() + 'px' }, properties), options);
-            }
-        },
-        slideDownIn: {
-            play: function(element, properties, options) {
+                var direction = kendo.directions[options.direction],
+                    offset = -direction.modifier * (direction.vertical ? element.outerHeight() : element.outerWidth()),
+                    extender = {};
+
                 if (kendo.support.transitions) {
-                    element.css(kendo.support.transitions.css + 'transform', 'translateY(' + (-element.outerHeight()) + 'px)');
-                    element.css('top');
-                    animate(element, extend({ translateY: 0 }, properties), options);
+                    extender[direction.transition] = offset + 'px';
+                    animate(element, extend(extender, properties), options);
                 } else {
-                    element.css('top', -element.outerHeight() + 'px');
-                    animate(element, extend({ top: 0 }, properties), options);
+                    extender[direction.property] = offset + 'px';
+                    animate(element, extend(extender, properties), options);
                 }
-            },
-            reverse: function(element, properties, options) {
-                if (kendo.support.transitions)
-                    animate(element, extend({ translateY: (-element.outerHeight()) + 'px' }, properties), options);
-                else
-                    animate(element, extend({ top: -element.outerHeight() + 'px' }, properties), options);
             }
         },
         shrinkVertical: {
