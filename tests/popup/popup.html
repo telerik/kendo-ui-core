@@ -139,7 +139,8 @@
             test("origin bottom and position top", function() {
                 var popup = new Popup(div, {
                     anchor: anchor,
-                    origin: "bottom left"
+                    origin: "bottom left",
+                    collision: "none"
                 });
 
                 popup.open();
@@ -248,7 +249,8 @@
                 var popup = new Popup(div, {
                     anchor: anchor,
                     origin: "center left",
-                    position: "center right"
+                    position: "center right",
+                    collision: "none"
                 });
 
                 popup.open();
@@ -411,6 +413,230 @@
             test("fit if element does not fit in the original and new position", function() {
                 var popup = new Popup(div);
                 equal(popup._fit(42, 24, 42), 18);
+            });
+
+            test("collision fit calls fit strategy when opened", function() {
+                var argsCount,
+                    MyPopup = Popup.extend({
+                        _fit: function() {
+                            argsCount = arguments.length;
+                        }
+                    });
+
+                var popup = new MyPopup(div, {
+                    collision: "fit",
+                    toggleTarget: document.body
+                });
+                popup.open();
+
+                equal(argsCount, 3);
+            });
+
+            test("collision fit calls fit strategy for each settings", function() {
+                var calledCount = 0,
+                    MyPopup = Popup.extend({
+                        _fit: function() {
+                            calledCount++
+                        }
+                    });
+
+                var popup = new MyPopup(div, {
+                    collision: "fit fit",
+                    toggleTarget: document.body
+                });
+                popup.open();
+
+                equal(calledCount, 2);
+            });
+
+            test("collision flip calls flip strategy when opened", function() {
+                var argsCount,
+                    MyPopup = Popup.extend({
+                        _flipVertical: function() {
+                            argsCount = arguments.length;
+                            return {top:0, left:0};
+                        }
+                    });
+
+                var popup = new MyPopup(div, {
+                    collision: "flip",
+                    toggleTarget: document.body
+                });
+                popup.open();
+
+                equal(argsCount, 3);
+            });
+
+            test("collision flip calls flip strategy when opened horizontal", function() {
+                var argsCount,
+                    MyPopup = Popup.extend({
+                        _flipHorizontal: function() {
+                            argsCount = arguments.length;
+                            return {top:0, left:0};
+                        }
+                    });
+
+                var popup = new MyPopup(div, {
+                    collision: "flip flip",
+                    toggleTarget: document.body,
+                    origin: "top left",
+                    position: "top right"
+
+                });
+                popup.open();
+
+                equal(argsCount, 3);
+            });
+
+            test("flip when element does not fit right should be position left", function() {
+                var positions,
+                    origins,
+                    MyPopup = Popup.extend({
+                        _align: function(origin, position) {
+                            positions = position;
+                            origins = origin;
+                            return {top: 0, left:0};
+                        }
+                    });
+
+                var popup = new MyPopup(div, {
+                    collision: "flip",
+                    toggleTarget: document.body,
+                    origin: "top right",
+                    position: "top left"
+                });
+                popup._flipHorizontal({top:0, left:40}, 35, 70);
+                origins = origins.split(" ");
+                positions = positions.split(" ");
+
+                equal(positions[0], "top");
+                equal(positions[1], "right");
+                equal(origins[0], "top");
+                equal(origins[1], "left");
+            });
+
+            test("flip when element does not fit right and does not fit left should be position right", function() {
+                var positions,
+                    origins,
+                    MyPopup = Popup.extend({
+                        _align: function(origin, position) {
+                            positions = position;
+                            origins = origin;
+                            return {top: 0, left:-1};
+                        }
+                    });
+
+                var popup = new MyPopup(div, {
+                    collision: "flip",
+                    toggleTarget: document.body,
+                    origin: "top right",
+                    position: "top left"
+                });
+
+                popup._flipHorizontal({top:0, left:30}, 35, 60);
+                origins = origins.split(" ");
+                positions = positions.split(" ");
+
+                equal(positions[0], "top");
+                equal(positions[1], "left");
+                equal(origins[0], "top");
+                equal(origins[1], "right");
+            });
+
+            test("flip offset is not modified if position is center", function() {
+                var popup = new Popup(div, {
+                    collision: "flip",
+                    toggleTarget: document.body,
+                    origin: "top center",
+                    position: "top left"
+                });
+
+                result = popup._flipHorizontal({top:0, left:30}, 35, 60);
+
+                equal(result.top, 0);
+                equal(result.left, 30);
+            });
+
+            test("flip offset is not modified if origin is center", function() {
+                var popup = new Popup(div, {
+                        collision: "flip",
+                        toggleTarget: document.body,
+                        origin: "top left",
+                        position: "top center"
+                    });
+
+                var result = popup._flipHorizontal({top:0, left:30}, 35, 60);
+
+                equal(result.top, 0);
+                equal(result.left, 30);
+            });
+
+            test("flip offset is not modified if origin and position have same value", function() {
+                var popup = new Popup(div, {
+                    collision: "flip",
+                    toggleTarget: document.body,
+                    origin: "top left",
+                    position: "top left"
+                });
+
+                var result = popup._flipHorizontal({top:0, left:30}, 35, 60);
+
+                equal(result.top, 0);
+                equal(result.left, 30);
+            });
+
+            test("flip when element does not fit bellow should be position at the top", function() {
+                var positions,
+                    origins,
+                    MyPopup = Popup.extend({
+                        _align: function(origin, position) {
+                            positions = position;
+                            origins = origin;
+                            return {top: 0, left:0};
+                        }
+                    });
+
+                var popup = new MyPopup(div, {
+                    collision: "flip",
+                    toggleTarget: document.body,
+                    origin: "bottom left",
+                    position: "top left"
+                });
+                popup._flipVertical({top:40, left:0}, 35, 70);
+                origins = origins.split(" ");
+                positions = positions.split(" ");
+
+                equal(positions[0], "bottom");
+                equal(positions[1], "left");
+                equal(origins[0], "top");
+                equal(origins[1], "left");
+            });
+
+            test("flip when element does not fit bellow and above should be position bellow", function() {
+                var positions,
+                    origins,
+                    MyPopup = Popup.extend({
+                        _align: function(origin, position) {
+                            positions = position;
+                            origins = origin;
+                            return {top: -23, left:0};
+                        }
+                    });
+
+                var popup = new MyPopup(div, {
+                    collision: "flip",
+                    toggleTarget: document.body,
+                    origin: "bottom left",
+                    position: "top left"
+                });
+                popup._flipVertical({top:40, left:0}, 45, 70);
+                origins = origins.split(" ");
+                positions = positions.split(" ");
+
+                equal(positions[0], "top");
+                equal(positions[1], "left");
+                equal(origins[0], "bottom");
+                equal(origins[1], "left");
             });
         </script>
     </body>

@@ -16,71 +16,6 @@
         Component = ui.Component,
         mobileSafari41 = /4_1\slike\sMac\sOS\sX;.*Mobile\/\S+/.test(navigator.userAgent);
 
-    function align(element, anchor, origin, position) {
-        origin = origin.split(" ");
-        position = position.split(" ");
-
-        var verticalOrigin = origin[0],
-            horizontalOrigin = origin[1],
-            verticalPosition = position[0],
-            horizontalPosition = position[1],
-            anchorOffset = anchor.offset(),
-            width = element.outerWidth(),
-            height = element.outerHeight(),
-            anchorWidth = anchor.outerWidth(),
-            anchorHeight = anchor.outerHeight(),
-            top = anchorOffset.top,
-            left = anchorOffset.left,
-            round = Math.round;
-
-        if (verticalOrigin === BOTTOM) {
-            top += anchorHeight;
-        }
-
-        if (verticalOrigin === CENTER) {
-            top += round(anchorHeight / 2);
-        }
-
-        if (verticalPosition === BOTTOM) {
-            top -= height;
-        }
-
-        if (verticalPosition === CENTER) {
-            top -= round(height / 2);
-        }
-
-        if (horizontalOrigin === RIGHT) {
-            left += anchorWidth;
-        }
-
-        if (horizontalOrigin === CENTER) {
-            left += round(anchorWidth / 2);
-        }
-
-        if (horizontalPosition === RIGHT) {
-            left -= width;
-        }
-
-        if (horizontalPosition === CENTER) {
-            left -= round(width / 2);
-        }
-
-        if (kendo.support.touch) {
-
-            if (!document.body.scrollLeft && !mobileSafari41) {
-                left -= window.pageXOffset;
-            }
-
-            if (!document.body.scrollTop && !mobileSafari41) {
-                top -= window.pageYOffset;
-            }
-        }
-
-        element.css({
-            top: top,
-            left: left
-        });
-    }
 
     function contains(container, target) {
         return container === target || $.contains(container, target);
@@ -227,6 +162,55 @@
             return position;
         },
 
+        _flipVertical: function(offset, size, viewPortSize) {
+            var that = this,
+                options = that.options,
+                origin,
+                position,
+                origins = options.origin.toLowerCase().split(" "),
+                positions = options.position.toLowerCase().split(" ");
+
+            if(positions[0] !== origins[0] && positions[0] !== CENTER && origins[0] !== CENTER) {
+                if(offset.top + size > viewPortSize) {
+                    position = BOTTOM + " " + positions[1];
+                    origin = TOP + " " + origins[1];
+                    offset = that._align(origin, position);
+                }
+
+                if(offset.top < 0) {
+                    position = TOP + " " + positions[1];
+                    origin = BOTTOM + " " + origins[1];
+                    offset = that._align(origin, position);
+                }
+            }
+            return offset;
+        },
+
+        _flipHorizontal: function(offset, size, viewPortSize) {
+            var that = this,
+                options = that.options,
+                origin,
+                position,
+                origins = options.origin.toLowerCase().split(" "),
+                positions = options.position.toLowerCase().split(" ");
+
+            if(positions[1] !== origins[1] && positions[1] !== CENTER && origins[1] !== CENTER) {
+
+                if(offset.left + size > viewPortSize) {
+                    position = positions[0] + " " + RIGHT;
+                    origin = origins[0] + " " + LEFT;
+                    offset = that._align(origin, position);
+                }
+
+                if(offset.left < 0) {
+                    position = positions[0] + " " + LEFT;
+                    origin = origins[0] + " " + RIGHT;
+                    offset = that._align(origin, position);
+                }
+            }
+            return offset;
+        },
+
         _position: function(viewport) {
             var that = this,
                 wrapper = that.wrapper,
@@ -238,20 +222,95 @@
                 position = options.position;
 
             if (options.appendTo === Popup.fn.options.appendTo) {
-                align(wrapper, anchor, origin, position);
+                wrapper.css(that._align(origin, position));
             }
-
             offset = wrapper.offset();
 
             if (collisions[0] === "fit") {
                 offset.top = that._fit(offset.top, wrapper.outerHeight(), viewport.height());
             }
 
+            if (collisions[0] === "flip") {
+                offset = that._flipVertical(offset, wrapper.outerHeight(), viewport.height());
+            }
+
             if (collisions[1] === "fit") {
                 offset.left = that._fit(offset.left, wrapper.outerWidth(), viewport.width());
             }
 
+            if (collisions[1] === "flip") {
+                offset = that._flipHorizontal(offset, wrapper.outerWidth(), viewport.width());
+            }
             wrapper.css(offset);
+
+        },
+        _align: function(origin, position) {
+            origin = origin.split(" ");
+            position = position.split(" ");
+
+            var that = this,
+                element = that.wrapper,
+                anchor = $(that.options.anchor),
+                verticalOrigin = origin[0],
+                horizontalOrigin = origin[1],
+                verticalPosition = position[0],
+                horizontalPosition = position[1],
+                anchorOffset = anchor.offset(),
+                width = element.outerWidth(),
+                height = element.outerHeight(),
+                anchorWidth = anchor.outerWidth(),
+                anchorHeight = anchor.outerHeight(),
+                top = anchorOffset.top,
+                left = anchorOffset.left,
+                round = Math.round;
+
+            if (verticalOrigin === BOTTOM) {
+                top += anchorHeight;
+            }
+
+            if (verticalOrigin === CENTER) {
+                top += round(anchorHeight / 2);
+            }
+
+            if (verticalPosition === BOTTOM) {
+                top -= height;
+            }
+
+            if (verticalPosition === CENTER) {
+                top -= round(height / 2);
+            }
+
+            if (horizontalOrigin === RIGHT) {
+                left += anchorWidth;
+            }
+
+            if (horizontalOrigin === CENTER) {
+                left += round(anchorWidth / 2);
+            }
+
+            if (horizontalPosition === RIGHT) {
+                left -= width;
+            }
+
+            if (horizontalPosition === CENTER) {
+                left -= round(width / 2);
+            }
+
+            if (kendo.support.touch) {
+
+                if (!document.body.scrollLeft && !mobileSafari41) {
+                    left -= window.pageXOffset;
+                }
+
+                if (!document.body.scrollTop && !mobileSafari41) {
+                    top -= window.pageYOffset;
+                }
+            }
+
+            return {
+                top: top,
+                left: left
+            };
         }
     });
 
