@@ -44,6 +44,10 @@
 
             that._updateClasses();
 
+            if (options.animation === false) {
+                options.animation = { open: { show: true, effects: {} }, close: { hide:true, effects: {} } };
+            }
+
             that.nextItemZIndex = 100;
 
             element.delegate(itemSelector, MOUSEENTER, proxy(that._mouseenter, that))
@@ -205,7 +209,7 @@
             var element = $(e.currentTarget);
             if (!that.options.openOnClick || that.clicked) {
                 if (!contains(e.currentTarget, e.relatedTarget)) {
-                    if (that.trigger(OPEN, { item: element[0] }))
+                    if (that.trigger(OPEN, { item: element[0] }) === false)
                         that.open(element);
                 }
             }
@@ -224,7 +228,7 @@
 
             if (!that.options.openOnClick && !contains(e.currentTarget, e.relatedTarget)) {
                 var element = $(e.currentTarget);
-                if (that.trigger(CLOSE, { item: element[0] }))
+                if (that.trigger(CLOSE, { item: element[0] }) === false)
                     that.close(element);
             }
         },
