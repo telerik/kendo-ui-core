@@ -146,7 +146,7 @@
             }
         });
 
-        test("select is triggered when menu element is clicked", function() {
+        test("element select is triggered when menu element is clicked", function() {
             var item = getRootItem(0),
                 triggerCount = 0;
 
@@ -159,17 +159,33 @@
             equals(triggerCount, 1);
         });
 
-        test("element select is triggered when menu element is clicked", function() {
-            var item = getRootItem(0),
-                triggerCount = 0;
+        test("open event can be canceled", function() {
+            var opened = false;
 
-            menu.element.bind("select", function() {
-                triggerCount++;
+            menu.open = function() { opened = true };
+
+            menu.bind("open", function() {
+                return false;
             });
 
-            item.trigger("click");
+            menu._mouseenter({}, $("li:first", menu.element)[0]);
 
-            equals(triggerCount, 1);
+            equals(opened, false);
+        });
+
+        test("close event can be canceled", function() {
+            var closed = false;
+
+            menu.close = function() { closed = true };
+
+            menu.bind("close", function() {
+                return false;
+            });
+
+            menu._mouseenter({}, $("li:first", menu.element)[0]);
+            menu._mouseleave({}, $("li:first", menu.element)[0]);
+
+            equals(closed, false);
         });
 
     </script>

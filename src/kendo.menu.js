@@ -205,13 +205,13 @@
             var element = $(e.currentTarget);
             if (!that.options.openOnClick || that.clicked) {
                 if (!contains(e.currentTarget, e.relatedTarget)) {
-                    that._triggerEvent(OPEN, element);
-                    that.open(element);
+                    if (that.trigger(OPEN, { item: element[0] }))
+                        that.open(element);
                 }
             }
 
             if (that.options.openOnClick && that.clicked) {
-                that._triggerEvent(CLOSE, element);
+                that.trigger(CLOSE, { item: element[0] });
 
                 element.siblings().each($.proxy(function (_, sibling) {
                     that.close(sibling);
@@ -224,9 +224,8 @@
 
             if (!that.options.openOnClick && !contains(e.currentTarget, e.relatedTarget)) {
                 var element = $(e.currentTarget);
-                that.trigger(CLOSE, element);
-
-                that.close(element);
+                if (that.trigger(CLOSE, { item: element[0] }))
+                    that.close(element);
             }
         },
 
@@ -241,7 +240,7 @@
                 return;
             }
 
-            that._triggerEvent("select", element);
+            that.trigger("select", { item: element[0] });
 
             if (!element.parent().hasClass("t-menu") || !that.options.openOnClick)
                 return;
@@ -249,32 +248,19 @@
             e.preventDefault();
 
             that.clicked = true;
-            that._triggerEvent(OPEN, element);
+            that.trigger(OPEN, { item: element[0] });
             that.open(element);
         },
 
         _documentClick: function (e) {
             var that = this;
 
-            if (contains(that.element, e.target))
+            if (contains(that.element[0], e.target))
                 return;
 
             if (that.clicked) {
                 that.clicked = false;
                 that.close(that.element.find(".t-item>.t-animation-container:visible").parent());
-            }
-        },
-
-        _hasChildren: function (element) {
-            return element.find(".t-group").filter(":first").length;
-        },
-
-        _triggerEvent: function (eventName, element) {
-            var that = this;
-
-            if (that._hasChildren(element)) {
-                that.trigger(eventName, { item: element[0] });
-                that.element.trigger(eventName, { item: element[0] });
             }
         }
     });
