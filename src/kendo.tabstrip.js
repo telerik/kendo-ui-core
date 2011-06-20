@@ -188,16 +188,19 @@
 
             if (that.trigger('select', { item: item[0], contentElement: content[0] })) {
                 e.preventDefault();
+            } else {
+                var isAnchor = link.data('ContentUrl') || (href && (href.charAt(href.length - 1) == '#' || href.indexOf('#' + that.element[0].id + '-') != -1));
+
+                if (!href || isAnchor) {
+                    e.preventDefault();
+                } else {
+                    return;
+                }
+
+                if (that.activateTab(item)) {
+                    e.preventDefault();
+                }
             }
-
-            var isAnchor = link.data('ContentUrl') || (href && (href.charAt(href.length - 1) == '#' || href.indexOf('#' + that.element[0].id + '-') != -1));
-
-            if (!href || isAnchor)
-                e.preventDefault();
-            else return;
-
-            if (that.activateTab(item))
-                e.preventDefault();
         },
 
         activateTab: function (item) {
