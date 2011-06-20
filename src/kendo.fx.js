@@ -333,8 +333,6 @@
                     offset = -direction.modifier * (direction.vertical ? element.outerHeight() : element.outerWidth()),
                     extender = {};
 
-                console.log( direction, offset );
-
                 if (kendo.support.transitions) {
                     element.css(kendo.support.transitions.css + 'transform', direction.transition + '(' + offset + 'px)');
                     element.css(direction.property); // Read a style to force Chrome to apply the change.
