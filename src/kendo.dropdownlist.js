@@ -2,15 +2,9 @@
     var kendo = window.kendo,
         ui = kendo.ui,
         List = ui.List,
-        DataSource = kendo.data.DataSource,
-        OPEN = "open",
-        CLOSE = "close",
         CHANGE = "change",
-        LOADING = "t-loading",
         SELECTED = "t-state-selected",
-        DISABLED = "t-state-disabled",
-        proxy = $.proxy,
-        whiteSpaceRegExp = /^\s*$/;
+        DISABLED = "t-state-disabled";
 
     var DropDownList = List.extend({
         init: function(element, options) {
@@ -26,7 +20,7 @@
 
             that._span();
 
-            that._popup();
+            that._popup(that.wrapper);
 
             that._dataAccessors();
 
@@ -70,7 +64,7 @@
                 wrapper
                     .removeClass(DISABLED)
                     .bind({
-                        keydown: proxy(that._keydown, that),
+                        keydown: $.proxy(that._keydown, that),
                         keypress: function(e) {
                             setTimeout(function() {
                                 that._word += String.fromCharCode(e.keyCode || e.charCode);
@@ -129,23 +123,10 @@
             that.previous = that.value();
 
             if (!that.options.autoBind) {
-                that[data.length ? OPEN : CLOSE]();
+                that[data.length ? "open" : "close"]();
             }
 
             that.hideBusy();
-        },
-
-        showBusy: function () {
-            var that = this;
-            that._busy = setTimeout(proxy(function () {
-                that.arrow.addClass(LOADING);
-            }, this), 100);
-        },
-
-        hideBusy: function () {
-            var that = this;
-            clearTimeout(that._busy);
-            that.arrow.removeClass(LOADING);
         },
 
         search: function(word) {
@@ -250,57 +231,12 @@
             }
         },
 
-        _dataAccessors: function() {
-            var that = this,
-                element = that.element,
-                options = that.options,
-                getter = kendo.getter,
-                textField = element.attr("data-text-field"),
-                valueField = element.attr("data-value-field");
-
-            if (textField) {
-                options.dataTextField = textField;
-            }
-
-            if (valueField) {
-                options.dataValueField = valueField;
-            }
-
-            that._text = getter(options.dataTextField);
-            that._value = getter(options.dataValueField);
-        },
-
-        _dataSource: function() {
-            var that = this,
-                index,
-                element = that.element,
-                options = that.options,
-                dataSource = options.dataSource || {};
-
-            dataSource = $.isArray(dataSource) ? {data: dataSource} : dataSource;
-
-            if(element.is("select")) {
-                index = element.children(":selected").index();
-                options.index = index > -1 ? index : 0;
-
-               dataSource.select = element;
-               dataSource.fields = [{ field: options.dataTextField },
-                                    { field: options.dataValueField }];
-            }
-
-            that.dataSource = DataSource.create(dataSource).bind(CHANGE, proxy(that.refresh, that));
-        },
-
         _keydown: function(e) {
             var prevent,
                 that = this,
                 key = e.keyCode,
-                keys = kendo.keys,
-                select = function(li) {
-                    if (li[0]) {
-                        that.select(li);
-                    }
-                };
+                current = that._current,
+                keys = kendo.keys;
 
             if (e.altKey) {
                 if (key === keys.DOWN) {
@@ -309,23 +245,23 @@
                     that.close();
                 }
             } else if (key === keys.DOWN) {
-                select(that._current.next());
+                that._move(current.next());
 
                 prevent = true;
             } else if (key === keys.UP) {
-                select(that._current.prev());
+                that._move(current.prev());
 
                 prevent = true;
             } else if (key === keys.HOME) {
-                select(that.ul.children().first());
+                that._move(that.ul.children().first());
 
                 prevent = true;
             } else if (key === keys.END) {
-                select(that.ul.children().last());
+                that._move(that.ul.children().last());
 
                 prevent = true;
             } else if (key === keys.ENTER || key === keys.TAB) {
-                that._accept(that._current);
+                that._accept(current);
             } else if (key === keys.ESC) {
                 that.close();
             }
@@ -344,19 +280,6 @@
             }, that.options.delay);
 
             that.search(that._word);
-        },
-
-        _popup: function() {
-            var that = this,
-                ul = that.ul,
-                wrapper = that.wrapper;
-
-            that.popup = new ui.Popup(ul, {
-                anchor: wrapper,
-                toggleTarget: wrapper
-            });
-
-            ul.width(wrapper.width() - (ul.outerWidth() - ul.innerWidth()));
         },
 
         _span: function() {
@@ -401,42 +324,10 @@
             that.wrapper = wrapper
                               .addClass("t-widget t-dropdown t-header")
                               .addClass(DOMelement.className);
-        },
-
-        _rebuildSelect: function(data) {
-            var that = this,
-                value = that.value(),
-                length = data.length,
-                options = [],
-                i = 0;
-
-            if (that.element.is("select")) {
-                for (; i < length; i++) {
-                    var option = "<option",
-                    dataItem = data[i],
-                    dataText = that._text(dataItem),
-                    dataValue = that._value(dataItem);
-
-                    if (dataValue !== undefined) {
-                        option += " value=" + dataValue;
-                    }
-
-                    option += ">";
-
-                    if (dataText !== undefined) {
-                        option += dataText;
-                    }
-
-                    option += "</option>";
-                    options.push(option);
-                }
-
-                that.element.html(options.join(""));
-
-                that.element.val(value);
-            }
         }
     });
+
+    $.extend(DropDownList.fn, ui.Select);
 
     ui.plugin("DropDownList", DropDownList);
 })(jQuery);

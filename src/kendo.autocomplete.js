@@ -4,10 +4,10 @@
         DataSource = kendo.data.DataSource,
         List = ui.List,
         CHANGE = "change",
-        CHARACTER = "character",
         SELECTED = "t-state-selected",
-        proxy = $.proxy,
-        extend = $.extend;
+        caretPosition = List.caret,
+        selectText = List.selectText,
+        proxy = $.proxy;
 
     function indexOfWordAtCaret(caret, text, separator) {
         return text.substring(0, caret).split(separator).length - 1;
@@ -27,19 +27,6 @@
         }
 
         return words.join(separator);
-    }
-
-    function selectText(element, selectionStart, selectionEnd) {
-        if (element.createTextRange) {
-            textRange = element.createTextRange();
-            textRange.collapse(true);
-            textRange.moveStart(CHARACTER, selectionStart);
-            textRange.moveEnd(CHARACTER, selectionEnd - selectionStart);
-            textRange.select();
-        } else {
-            element.selectionStart = selectionStart;
-            element.selectionEnd = selectionEnd;
-        }
     }
 
     function moveCaretAtEnd(element) {
@@ -111,7 +98,7 @@
                 text = li.text();
 
                 if (separator) {
-                    text = replaceWordAtCaret(that._caret(), that.value(), text, separator);
+                    text = replaceWordAtCaret(caretPosition(that.element[0]), that.value(), text, separator);
                 }
 
                 that.value(text);
@@ -132,7 +119,7 @@
             clearTimeout(that._typing);
 
             if (separator) {
-                word = wordAtCaret(that._caret(), word, separator);
+                word = wordAtCaret(caretPosition(that.element[0]), word, separator);
             }
 
             length = word.length;
@@ -151,7 +138,7 @@
                 value = that.value(),
                 selectionEnd,
                 textRange,
-                caret = that._caret();
+                caret = caretPosition(element);
 
 
             if (typeof word !== "string") {
@@ -257,20 +244,6 @@
                     that.search();
                 }
             }, that.options.delay);
-        },
-
-        _caret: function() {
-            var caret,
-                element = this.element[0],
-                selection = element.ownerDocument.selection;
-
-            if (selection) {
-                caret = Math.abs(selection.createRange().moveStart(CHARACTER, -element.value.length));
-            } else {
-                caret = element.selectionStart;
-            }
-
-            return caret;
         }
     });
 

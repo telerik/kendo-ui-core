@@ -2,30 +2,12 @@
     var kendo = window.kendo,
         ui = kendo.ui,
         List = ui.List,
-        DataSource = kendo.data.DataSource,
         OPEN = "open",
         CLOSE = "close",
         CHANGE = "change",
-        LOADING = "t-loading",
-        FOCUSED = "t-state-focused",
-        SELECTED = "t-state-selected",
         DISABLED = "t-state-disabled",
         SELECT = "select",
-        CHARACTER = "character",
         proxy = $.proxy;
-
-    function selectText(element, selectionStart, selectionEnd) {
-        if (element.createTextRange) {
-            textRange = element.createTextRange();
-            textRange.collapse(true);
-            textRange.moveStart(CHARACTER, selectionStart);
-            textRange.moveEnd(CHARACTER, selectionEnd - selectionStart);
-            textRange.select();
-        } else {
-            element.selectionStart = selectionStart;
-            element.selectionEnd = selectionEnd;
-        }
-    }
 
     var ComboBox = List.extend({
         init: function(element, options) {
@@ -138,19 +120,6 @@
             that[that.popup.visible() ? CLOSE : OPEN]();
         },
 
-        showBusy: function () {
-            var that = this;
-            that._busy = setTimeout(proxy(function () {
-                that.arrow.addClass(LOADING);
-            }, this), 100);
-        },
-
-        hideBusy: function () {
-            var that = this;
-            clearTimeout(that._busy);
-            that.arrow.removeClass(LOADING);
-        },
-
         highlight: function(li) {
             var that = this,
                 i = 0,
@@ -176,7 +145,7 @@
                 li = $(children[li]);
             }
 
-            if (li[0] && !li.hasClass(FOCUSED)) {
+            if (li[0] && !li.hasClass("t-state-focused")) {
                 idx = $.inArray(li[0], children);
 
                 if (idx !== -1) {
@@ -228,7 +197,7 @@
                 data = that.dataSource.view();
 
             if (idx !== -1) {
-                that._selected = that._current.addClass(SELECTED);
+                that._selected = that._current.addClass("t-state-selected");
 
                 data = data[idx];
                 text = that._text(data);
@@ -264,7 +233,7 @@
             var that = this,
                 element = that.input[0],
                 value = that.text(),
-                caret = that._caret();
+                caret = List.caret(element);
 
 
             if (typeof word !== "string") {
@@ -281,7 +250,7 @@
 
             if (word !== value) {
                 that.text(word);
-                selectText(element, caret, word.length);
+                List.selectText(element, caret, word.length);
             }
         },
 
@@ -360,20 +329,6 @@
             }
         },
 
-        _caret: function() {
-            var caret,
-                input = this.input[0],
-                selection = input.ownerDocument.selection;
-
-            if (selection) {
-                caret = Math.abs(selection.createRange().moveStart(CHARACTER, -input.value.length));
-            } else {
-                caret = input.selectionStart;
-            }
-
-            return caret;
-        },
-
         _customOption: function(value) {
             var that = this,
                 element = that.element,
@@ -386,46 +341,6 @@
                 }
                 custom.text(value);
             }
-        },
-
-        _dataAccessors: function() {
-            var that = this,
-                element = that.element,
-                options = that.options,
-                getter = kendo.getter,
-                textField = element.attr("data-text-field"),
-                valueField = element.attr("data-value-field");
-
-            if (textField) {
-                options.dataTextField = textField;
-            }
-
-            if (valueField) {
-                options.dataValueField = valueField;
-            }
-
-            that._text = getter(options.dataTextField);
-            that._value = getter(options.dataValueField);
-        },
-
-        _dataSource: function() {
-            var that = this,
-                element = that.element,
-                options = that.options,
-                dataSource = options.dataSource || {};
-
-            dataSource = $.isArray(dataSource) ? {data: dataSource} : dataSource;
-
-            if(that.element.is(SELECT)) {
-                options.index = element.children(":selected").index();
-
-                dataSource.select = element;
-                dataSource.fields = [{ field: options.dataTextField },
-                                     { field: options.dataValueField }];
-            }
-
-            that.dataSource = DataSource.create(dataSource)
-                                        .bind(CHANGE, proxy(that.refresh, that));
         },
 
         _filter: function(word) {
@@ -485,12 +400,6 @@
             var that = this;
             if (!that.text()) {
                 that.current(null);
-            }
-        },
-
-        _move: function(li) {
-            if (li[0]) {
-                this.select(li);
             }
         },
 
@@ -576,54 +485,10 @@
             }
 
             that.wrapper = wrapper.addClass("t-widget t-combobox t-header");
-        },
-
-        _rebuildSelect: function(data) {
-            var that = this,
-                value = that.value(),
-                length = data.length,
-                options = [],
-                i = 0;
-
-            if (that.element.is(SELECT)) {
-                for (; i < length; i++) {
-                    var option = "<option",
-                    dataItem = data[i],
-                    dataText = that._text(dataItem),
-                    dataValue = that._value(dataItem);
-
-                    if (dataValue !== undefined) {
-                        option += " value=" + dataValue;
-                    }
-
-                    option += ">";
-
-                    if (dataText !== undefined) {
-                        option += dataText;
-                    }
-
-                    option += "</option>";
-                    options.push(option);
-                }
-
-                that.element.html(options.join(""));
-
-                that.element.val(value);
-            }
-        },
-
-        _popup: function() {
-            var that = this,
-                ul = that.ul,
-                wrapper = that.wrapper;
-
-            that.popup = new ui.Popup(ul, {
-                anchor: wrapper
-            });
-
-            ul.width(wrapper.width() - (ul.outerWidth() - ul.innerWidth()));
         }
     });
+
+    $.extend(ComboBox.fn, ui.Select);
 
     ui.plugin("ComboBox", ComboBox);
 })(jQuery);

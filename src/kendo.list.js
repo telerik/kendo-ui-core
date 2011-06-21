@@ -4,8 +4,12 @@
         Component = ui.Component,
         LI = "li",
         CHANGE = "change",
+        CHARACTER = "character",
+        FOCUSED = "t-state-focused",
         HOVER = "t-state-hover",
-        FOCUSED = "t-state-focused";
+        LOADING = "t-loading",
+        SELECT = "select",
+        proxy = $.proxy;
 
     var List = Component.extend({
         init: function(element, options) {
@@ -22,7 +26,7 @@
                                 clearTimeout(that._bluring);
                             }, 0);
                         })
-                        .delegate(LI, "click", $.proxy(that._click, that))
+                        .delegate(LI, "click", proxy(that._click, that))
                         .delegate(LI, "mouseenter", function() { $(this).addClass(HOVER); })
                         .delegate(LI, "mouseleave", function() { $(this).removeClass(HOVER); });
         },
@@ -102,5 +106,144 @@
         }
     });
 
+    $.extend(List, {
+        caret: function(element) {
+            var caret,
+                selection = element.ownerDocument.selection;
+
+            if (selection) {
+                caret = Math.abs(selection.createRange().moveStart(CHARACTER, -element.value.length));
+            } else {
+                caret = element.selectionStart;
+            }
+
+            return caret;
+        },
+
+        selectText: function (element, selectionStart, selectionEnd) {
+            if (element.createTextRange) {
+                textRange = element.createTextRange();
+                textRange.collapse(true);
+                textRange.moveStart(CHARACTER, selectionStart);
+                textRange.moveEnd(CHARACTER, selectionEnd - selectionStart);
+                textRange.select();
+            } else {
+                element.selectionStart = selectionStart;
+                element.selectionEnd = selectionEnd;
+            }
+        }
+    });
+
     kendo.ui.List = List;
+
+    kendo.ui.Select = {
+        hideBusy: function () {
+            var that = this;
+            clearTimeout(that._busy);
+            that.arrow.removeClass(LOADING);
+        },
+
+        showBusy: function () {
+            var that = this;
+            that._busy = setTimeout(proxy(function () {
+                that.arrow.addClass(LOADING);
+            }, this), 100);
+        },
+
+        _dataAccessors: function() {
+            var that = this,
+                element = that.element,
+                options = that.options,
+                getter = kendo.getter,
+                textField = element.attr("data-text-field"),
+                valueField = element.attr("data-value-field");
+
+            if (textField) {
+                options.dataTextField = textField;
+            }
+
+            if (valueField) {
+                options.dataValueField = valueField;
+            }
+
+            that._text = getter(options.dataTextField);
+            that._value = getter(options.dataValueField);
+        },
+
+        _dataSource: function() {
+            var that = this,
+                element = that.element,
+                options = that.options,
+                dataSource = options.dataSource || {};
+
+            dataSource = $.isArray(dataSource) ? {data: dataSource} : dataSource;
+
+            if(that.element.is(SELECT)) {
+                options.index = element.children(":selected").index();
+
+                dataSource.select = element;
+                dataSource.fields = [{ field: options.dataTextField },
+                                     { field: options.dataValueField }];
+            }
+
+            that.dataSource = kendo.data.DataSource.create(dataSource)
+                                        .bind(CHANGE, proxy(that.refresh, that));
+        },
+
+        _move: function(li) {
+            if (li[0]) {
+                this.select(li);
+            }
+        },
+
+        _popup: function(toggleTarget) {
+            var that = this,
+                ul = that.ul,
+                wrapper = that.wrapper,
+                options = {
+                    anchor: wrapper
+                };
+
+            if (toggleTarget) {
+                options.toggleTarget = toggleTarget;
+            }
+
+            that.popup = new ui.Popup(ul, options);
+
+            ul.width(wrapper.width() - (ul.outerWidth() - ul.innerWidth()));
+        },
+
+        _rebuildSelect: function(data) {
+            var that = this,
+            value = that.value(),
+            length = data.length,
+            options = [],
+            i = 0;
+
+            if (that.element.is(SELECT)) {
+                for (; i < length; i++) {
+                    var option = "<option",
+                    dataItem = data[i],
+                    dataText = that._text(dataItem),
+                    dataValue = that._value(dataItem);
+
+                    if (dataValue !== undefined) {
+                        option += " value=" + dataValue;
+                    }
+
+                    option += ">";
+
+                    if (dataText !== undefined) {
+                        option += dataText;
+                    }
+
+                    option += "</option>";
+                    options.push(option);
+                }
+                that.element.html(options.join(""));
+                that.element.val(value);
+            }
+        }
+    };
+
 })(jQuery);
