@@ -12,10 +12,12 @@
         SLIDE = "slide",
         CLICK = "click",
         MOVE_SELECTION = "moveSelection",
-        //cssSelectors
+        //css selectors
         DRAGHANDLE_SELECTOR = ".t-draghandle",
         TRACK_SELECTOR = ".t-slider-track",
-        TICK_SELECTOR = ".t-tick";
+        TICK_SELECTOR = ".t-tick",
+        //constants
+        PRECISION = 3;
 
     function initSlider () {
         var that = this,
@@ -98,7 +100,7 @@
 
     function createSliderItems (options, distance) {
         var result = "<ul class='t-reset t-slider-items'>",
-            count = math.floor((distance / options.smallStep).toFixed(3), 10) + 1;
+            count = math.floor(round(distance / options.smallStep, PRECISION)) + 1;
 
         for(i = 0; i < count; i++) {
             result += "<li class='t-tick'>&nbsp;</li>";
@@ -289,7 +291,7 @@
             var that = this,
                 options = that.options;
 
-            val = parseFloat(parseFloat(val, 10).toFixed(3), 10);
+            val = round(val, PRECISION);
             if (isNaN(val)) {
                 return options.val;
             }
@@ -325,7 +327,7 @@
             var that = this,
                 options = that.options;
 
-            val = parseFloat(parseFloat(val, 10).toFixed(3), 10);
+            val = round(val, PRECISION);
             if (isNaN(val)) {
                 that._update(options.min);
                 return;
@@ -387,7 +389,7 @@
             increment = that._isHorizontal ? 1 : -1;
 
         for (; i - limit != 0 ; i += increment) {
-            $(items[i]).attr("title", kendo.format(options.tooltip.format, parseFloat(titleNumber.toFixed(3), 10)));
+            $(items[i]).attr("title", kendo.format(options.tooltip.format, round(titleNumber, PRECISION)));
             titleNumber += options.smallStep;
         }
     }
@@ -400,17 +402,17 @@
         if ((1000 * options.largeStep) % (1000 * options.smallStep) == 0) {
             var items = that.wrapper.find(TICK_SELECTOR),
                 item = {},
-                step = parseFloat((options.largeStep / options.smallStep).toFixed(3), 10);
+                step = round(options.largeStep / options.smallStep, PRECISION);
 
             if (that._isHorizontal) {
-                for (i = 0; i < items.length; i = parseFloat((i + step).toFixed(3), 10)) {
+                for (i = 0; i < items.length; i = round(i + step, PRECISION)) {
                     item = $(items[i]);
 
                     item.addClass("t-tick-large")
                         .html("<span class='t-label'>" + item.attr("title") + "</span>");
                 }
             } else {
-                for (i = items.length - 1; i >= 0; i = parseFloat((i - step).toFixed(3), 10)) {
+                for (i = items.length - 1; i >= 0; i = round(i - step, PRECISION)) {
                     item = $(items[i]);
 
                     item.addClass("t-tick-large")
@@ -525,7 +527,7 @@
 
         for (var i = 0; i < that._pixelStepsArray.length; i++) {
             if (math.abs(that._pixelStepsArray[i] - position) - 1 <= halfStep) {
-                return parseFloat(that._valuesArray[i].toFixed(3), 10);
+                return round(that._valuesArray[i], PRECISION);
             }
         }
     }
@@ -551,6 +553,10 @@
         return function () {
             return value;
         }
+    }
+
+    function round(value, precision) {
+        return parseFloat(parseFloat(value, 10).toFixed(precision));
     }
 
     Slider.Selection = function (dragHandle, that, options) {
@@ -759,7 +765,7 @@
 
             that.tooltipDiv.css({ top: positionTop, left: positionLeft });
         },
-//fix this
+
         horizontalDrag: function (mousePosition) {
             var that = this,
                 val = 0;
@@ -938,8 +944,8 @@
                 selectionStart = arguments[0][0];
                 selectionEnd = arguments[0][1];
             } else {
-                selectionStart = parseFloat(parseFloat(arguments[0], 10).toFixed(3), 10);
-                selectionEnd = parseFloat(parseFloat(arguments[1], 10).toFixed(3), 10);
+                selectionStart = round(arguments[0], PRECISION);
+                selectionEnd = round(arguments[1], PRECISION);
             }
 
             if (selectionStart >= options.min && selectionStart <= options.max

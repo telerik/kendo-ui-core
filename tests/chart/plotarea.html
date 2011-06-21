@@ -21,6 +21,7 @@
 
             (function() {
                 var plotArea,
+                    viewFactory,
                     axisY,
                     axisX,
                     barSeriesData = [{
@@ -281,6 +282,37 @@
                     ok(plotArea.charts[0].options.isStacked);
                 });
 
+                // ------------------------------------------------------------
+                module("PlotArea / Gridlines", {
+                    setup: function() {
+                        viewFactory = new ViewFactoryStub();
+                    }
+                });
+
+
+                test("renders gridlines", function() {
+                    plotArea = new Chart.PlotArea({
+                        series: [{
+                            name: "Value A",
+                            type: "bar",
+                            data: [100]
+                        }],
+                        categoryAxis: {
+                            categories: ["A"]
+                        }
+                    });
+
+                    stubMethod(Chart.NumericAxis, "getViewElements", function() {},
+                        function() {
+                            stubMethod(Chart.CategoryAxis, "getViewElements", function() {},
+                                function() {
+                                    plotArea.updateLayout(chartBox);
+                                    plotArea.getViewElements(viewFactory);
+                                }
+                    )});
+
+                    equal(viewFactory.log.line.length, 7);
+                });
             })();
         </script>
 
