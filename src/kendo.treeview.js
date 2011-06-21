@@ -36,8 +36,16 @@
             Component.prototype.init.call(that, element, options);
 
             options = that.options;
+
+            that.rendering = new TreeViewRendering(that);
             
-            that._wrapper();
+            if ($element.is(":not(.t-treeview)")) {
+                var data = that._htmlToData();
+                that.wrapper = 
+                    $element.wrap("<div class='t-widget t-treeview t-reset' />").parent();
+
+                that._dataBind(that.wrapper, data);
+            }
 
             $element
                 .delegate(".t-in.t-state-selected", "mouseenter", function(e) { e.preventDefault(); })
@@ -56,8 +64,6 @@
                 that.bind([NODEDRAGGING, NODEDRAGCANCELLED, NODEDROP, NODEDROPPED], options);
                 that.dragging = new TreeViewDragAndDrop(that);
             }
-
-            that.rendering = new TreeViewRendering(that);
 
             that.bind([EXPAND, COLLAPSE, CHECKED, ERROR, LOAD, DATABINDING, DATABOUND], options);
 
@@ -80,18 +86,17 @@
             dataValueField: "value"
         },
 
-        _wrapper: function() {
-            var that = this,
-                element = that.element,
-                wrapper;
+        _htmlToData: function(element) {
+            var that = this;
 
-            wrapper = element.parent();
+            element = element || that.element;
 
-            if (!wrapper.is("div")) {
-                wrapper = element.wrap("<div />").parent();
-            }
-
-            that.wrapper = wrapper.addClass("t-widget t-treeview t-reset");
+            return $(element).find("li").map(function() {
+                return {
+                    text: this.firstChild,
+                    items: that._htmlToData(this)
+                };
+            });
         },
 
         expand: function (li) {
@@ -157,7 +162,7 @@
             });
         },
 
-        shouldNavigate: function (element) {
+        _shouldNavigate: function (element) {
             var contents = $(element).closest('.t-item').find('> .t-content, > .t-group');
             var href = $(element).attr('href');
 
@@ -167,7 +172,7 @@
 
         nodeSelect: function (e, element) {
 
-            if (!this.shouldNavigate(element)) {
+            if (!this._shouldNavigate(element)) {
                 e.preventDefault();
             }
 
@@ -291,12 +296,11 @@
             }));
         },
 
-        // privatize
-        bindTo: function (data) {
+        _bindTo: function (data) {
             this.dataBind(this.element, data);
         },
 
-        dataBind: function ($item, data) {
+        _dataBind: function ($item, data) {
             var that = this;
 
             $item = $($item); // can be called from user code with dom objects
@@ -309,7 +313,7 @@
             var group = $item.find('> .t-group'),
                 isGroup = group.length == 0;
 
-            var html = that.rendering.group({
+            var html = that.rendering[isGroup ? "renderGroup" : "renderItems"]({
                 group: {
                     isExpanded: (isGroup ? $item.eq(0).is('.t-treeview') ? true : data[0].expanded : false),
                     isFirstLevel: $item.hasClass("t-treeview"),
@@ -723,25 +727,27 @@
             }, this.helpers));
         },
 
+        renderItems: function(options) {
+            var html = "",
+                i = 0,
+                items = options.items,
+                len = items ? items.length : 0;
+
+            for (; i < len; i++) {
+                html += this.renderItem($.extend(options, {
+                    group: { length: len },
+                    item: $.extend({ index: i }, items[i])
+                }));
+            }
+
+            return html;
+        },
+
         renderGroup: function (options) {
             var that = this;
 
             return TreeView.templates.group($.extend({
-                renderItems: function (options) {
-                    var html = "",
-                        i = 0,
-                        items = options.items,
-                        len = items ? items.length : 0;
-
-                    for (; i < len; i++) {
-                        html += that.renderItem($.extend(options, {
-                            group: { length: len },
-                            item: $.extend({ index: i }, items[i])
-                        }));
-                    }
-
-                    return html;
-                }
+                renderItems: $.proxy(that.renderItems, that)
             }, options, that.helpers));
         }
     };
