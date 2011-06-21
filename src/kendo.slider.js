@@ -556,7 +556,9 @@
     }
 
     function round(value, precision) {
-        return parseFloat(parseFloat(value, 10).toFixed(precision));
+        value = parseFloat(value, 10);
+        var power = Math.pow(10, precision || 0);
+        return Math.round(value * power) / power;
     }
 
     Slider.Selection = function (dragHandle, that, options) {
