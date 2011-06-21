@@ -16,12 +16,12 @@
         <h2 id="qunit-userAgent"></h2>
         <ol id="qunit-tests"></ol>
         <script>
-            var TreeView = kendo.ui.TreeView;
+            var rendering = new kendo.ui.TreeView.TreeViewRendering();
 
             module("group");
 
             test("renders empty group when there are no items", function() {
-                var html = TreeView.getGroupHtml({
+                var html = rendering.renderGroup({
                     items: [],
                     group: {
                         isExpanded: true
@@ -32,7 +32,7 @@
             });
 
             test("renders lines class for first level", function() {
-                var html = TreeView.getGroupHtml({ 
+                var html = rendering.renderGroup({ 
                     items: [],
                     group: {
                         isFirstLevel: true,
@@ -44,7 +44,7 @@
             });
 
             test("renders hidden group if it is not expanded", function() {
-                var html = TreeView.getGroupHtml({
+                var html = rendering.renderGroup({
                     items: [],
                     group: {
                         isExpanded: false
@@ -55,7 +55,7 @@
             });
 
             test("renders items, if any", function() {
-                var html = TreeView.getGroupHtml({ 
+                var html = rendering.renderGroup({ 
                     items: [
                         { text: "foo" }
                     ],
@@ -71,7 +71,7 @@
             module("item");
 
             test("renders list items with t-item class", function() {
-                var $item = $(TreeView.getItemHtml({
+                var $item = $(rendering.renderItem({
                     item: {}
                 }));
 
@@ -79,7 +79,7 @@
             });
 
             test("renders list items with t-first class for first item in first-level groups", function() {
-                var $item = $(TreeView.getItemHtml({
+                var $item = $(rendering.renderItem({
                     item: {
                         index: 0
                     },
@@ -92,7 +92,7 @@
             });
 
             test("renders list items with t-last class for last item", function() {
-                var $item = $(TreeView.getItemHtml({
+                var $item = $(rendering.renderItem({
                     item: {
                         index: 0
                     },
@@ -106,7 +106,7 @@
             });
 
             test("renders div elements with t-top class for first item in group", function() {
-                var $item = $(TreeView.getItemHtml({
+                var $item = $(rendering.renderItem({
                     item: {
                         index: 0
                     },
@@ -119,7 +119,7 @@
             });
 
             test("renders div elements with t-bot class for last item in group", function() {
-                var $item = $(TreeView.getItemHtml({
+                var $item = $(rendering.renderItem({
                     item: {
                         index: 1
                     },
@@ -132,7 +132,7 @@
             });
 
             test("renders div elements with t-mid class for items in middle of group", function() {
-                var $item = $(TreeView.getItemHtml({
+                var $item = $(rendering.renderItem({
                     item: {
                         index: 1
                     },
@@ -145,7 +145,7 @@
             });
 
             test("does not render t-top class for last items in group", function() {
-                var $item = $(TreeView.getItemHtml({
+                var $item = $(rendering.renderItem({
                     item: {
                         index: 0
                     },
@@ -158,7 +158,7 @@
             });
 
             test("does not render t-top class for single items in root group", function() {
-                var $item = $(TreeView.getItemHtml({
+                var $item = $(rendering.renderItem({
                     item: {
                         index: 0
                     },
@@ -172,7 +172,7 @@
             });
 
             test("renders of links for items with NavigateUrl", function() {
-                var $item = $(TreeView.getItemHtml({
+                var $item = $(rendering.renderItem({
                     item: {
                         text: "text",
                         url: "http://kendoui.com/"
@@ -183,7 +183,7 @@
             });
 
             test("renders disabled state on disabled items", function() {
-                var $item = $(TreeView.getItemHtml({
+                var $item = $(rendering.renderItem({
                     item: {
                         text: "text",
                         enabled: false
@@ -194,7 +194,7 @@
             });
 
             test("renders selected state on selected items", function() {
-                var $item = $(TreeView.getItemHtml({
+                var $item = $(rendering.renderItem({
                     item: {
                         text: "text",
                         selected: true
@@ -205,7 +205,7 @@
             });
 
             test("renders collapsed subgroups by default", function() {
-                var $item = $(TreeView.getItemHtml({
+                var $item = $(rendering.renderItem({
                     item: {
                         text: "Collapsed",
                         items: [
@@ -219,7 +219,7 @@
 
 
             test("renders spriteCssClass", function() {
-                var $item = $(TreeView.getItemHtml({
+                var $item = $(rendering.renderItem({
                     item: {
                         text: "text",
                         spriteCssClass: "cssClass1"
@@ -231,7 +231,7 @@
             });
 
             test("renders images", function() {
-                var $item = $(TreeView.getItemHtml({
+                var $item = $(rendering.renderItem({
                     item: {
                         text: "text",
                         imageUrl: "foo"
@@ -245,7 +245,7 @@
             });
 
             test("renders item value", function() {
-                var $item = $(TreeView.getItemHtml({
+                var $item = $(rendering.renderItem({
                     item: {
                         text: "text",
                         value: "foo"
@@ -260,7 +260,7 @@
             });
 
             test("renders text", function() {
-                var $item = $(TreeView.getItemHtml({
+                var $item = $(rendering.renderItem({
                     item: {
                         text: "foo"
                     }
@@ -270,7 +270,7 @@
             });
 
             test("renders text encoded", function() {
-                var $item = $(TreeView.getItemHtml({
+                var $item = $(rendering.renderItem({
                     item: {
                         text: "foo>>"
                     }
@@ -280,7 +280,7 @@
             });
 
             test("renders encoded text as html", function() {
-                var $item = $(TreeView.getItemHtml({
+                var $item = $(rendering.renderItem({
                     item: {
                         text: "<span class='foo'></span>",
                         encoded: false
@@ -291,7 +291,7 @@
             });
 
             test("renders plus icon if item contains items", function() {
-                var $item = $(TreeView.getItemHtml({
+                var $item = $(rendering.renderItem({
                     item: {
                         text: "foo",
                         items: [
@@ -304,7 +304,7 @@
             });
 
             test("renders minus icon if item is expanded", function() {
-                var $item = $(TreeView.getItemHtml({
+                var $item = $(rendering.renderItem({
                     item: {
                         text: "foo",
                         expanded: true,
@@ -318,7 +318,7 @@
             });
 
             test("renders disabled plus icon if item is disabled", function() {
-                var $item = $(TreeView.getItemHtml({
+                var $item = $(rendering.renderItem({
                     item: {
                         text: "foo",
                         enabled: false,
@@ -333,7 +333,7 @@
             });
 
             test("renders disabled minus icon if item is disabled and expanded", function() {
-                var $item = $(TreeView.getItemHtml({
+                var $item = $(rendering.renderItem({
                     item: {
                         text: "foo",
                         enabled: false,
@@ -349,7 +349,7 @@
             });
 
             test("renders plus icon on loadOnDemand items if treeview is AJAX-bound", function() {
-                var $item = $(TreeView.getItemHtml({
+                var $item = $(rendering.renderItem({
                     item: {
                         text: "foo",
                         loadOnDemand: true
@@ -365,7 +365,7 @@
             module("checkboxes");
 
             test("should be rendered when showCheckboxes is true", function() {
-                var $item = $(TreeView.getItemHtml({
+                var $item = $(rendering.renderItem({
                     item: {
                         text: "text"
                     },
@@ -378,7 +378,7 @@
             });
 
             test("should not be rendered if checkable is false", function() {
-                var $item = $(TreeView.getItemHtml({
+                var $item = $(rendering.renderItem({
                     item: {
                         text: "text",
                         checkable: false
@@ -392,7 +392,7 @@
             });
 
             test("should render checkbox and hidden input", function() {
-                var $item = $(TreeView.getItemHtml({
+                var $item = $(rendering.renderItem({
                     item: {
                         text: "text"
                     },
@@ -406,7 +406,7 @@
             });
 
             test("should render hidden input with correct name", function() {
-                var $item = $(TreeView.getItemHtml({
+                var $item = $(rendering.renderItem({
                     item: {
                         text: "text"
                     },
@@ -421,7 +421,7 @@
 
             test("should render correct index value for first level", function() {
                 
-                var $item = $(TreeView.getItemHtml({
+                var $item = $(rendering.renderItem({
                     item: {
                         index: 0
                     },
@@ -435,7 +435,7 @@
 
             test("should render index based on group level", function() {
 
-                var $item = $(TreeView.getItemHtml({
+                var $item = $(rendering.renderItem({
                     item: {
                         index: 2
                     },
@@ -451,7 +451,7 @@
             });
 
             test("should render checkbox input with correct name", function() {
-                var $item = $(TreeView.getItemHtml({
+                var $item = $(rendering.renderItem({
                     item: {
                         index: 0
                     },
@@ -468,7 +468,7 @@
             });
 
             test("should render checkbox input with value true if item is checked", function() {
-                var $item = $(TreeView.getItemHtml({
+                var $item = $(rendering.renderItem({
                     item: {
                         checked: true
                     },
@@ -481,7 +481,7 @@
             });
 
             test("disabled items should render disabled checkbox attribute", function() {
-                var $item = $(TreeView.getItemHtml({
+                var $item = $(rendering.renderItem({
                     item: {
                         checked: true,
                         enabled: false
@@ -498,7 +498,7 @@
             });
 
             test("checked nodes should render checked checkboxes", function() {
-                var $item = $(TreeView.getItemHtml({
+                var $item = $(rendering.renderItem({
                     item: {
                         checked: true
                     },
@@ -511,7 +511,7 @@
             });
 
             test("renders hidden inputs containing dataItem values in checked items", function() {
-                var $item = $(TreeView.getItemHtml({
+                var $item = $(rendering.renderItem({
                     item: {
                         text: "text",
                         value: "1",
