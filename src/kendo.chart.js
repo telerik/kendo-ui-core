@@ -902,7 +902,7 @@
 
             if(!options.majorUnit) {
                 // Determine an auto major unit after min/max have been set
-                options.majorUnit = axis.autoMajorUnit(options.min, options.max)
+                options.majorUnit = axis.autoMajorUnit(options.min, options.max);
             }
 
             var majorDivisions = axis.getMajorDivisions(),
@@ -961,7 +961,7 @@
                 isVertical = axis.options.orientation === VERTICAL,
                 children = axis.children,
                 box = axis.box,
-                tickPositions = axis.getMajorDivisionsPositions();
+                tickPositions = axis.getMajorTickPositions();
 
             for (var i = 0; i < children.length; i++) {
                 var label = children[i],
@@ -988,7 +988,7 @@
                 isVertical = options.orientation === VERTICAL,
                 childElements = ChartElement.fn.getViewElements.call(axis, factory);
 
-            var majorTickPositions = axis.getMajorDivisionsPositions();
+            var majorTickPositions = axis.getMajorTickPositions();
             if (options.lineWidth > 0) {
                 if (isVertical) {
                     childElements.push(factory.line(
@@ -1013,7 +1013,7 @@
                 box = axis.box;
 
             if (options.majorTickType === OUTSIDE) {
-                var majorTickPositions = axis.getMajorDivisionsPositions();
+                var majorTickPositions = axis.getMajorTickPositions();
                 return $.map(majorTickPositions, function(tickPos) {
                     if (isVertical) {
                         return factory.line(
@@ -1114,7 +1114,7 @@
             return Math.round((options.max - options.min) / options.majorUnit) + 1;
         },
 
-        getMajorDivisionsPositions: function() {
+        getMajorTickPositions: function() {
             var axis = this,
                 options = axis.options,
                 isVertical = options.orientation === VERTICAL,
@@ -1798,6 +1798,56 @@
             axisX.updateLayout(
                 axisX.box.translate(0, axisCrossingY.y1 - axisCrossingX.y1)
             );
+        },
+
+        renderGridlines: function(factory, axis, secondaryAxis) {
+            var options = axis.options,
+                isVertical = options.orientation === VERTICAL,
+                boundaries = secondaryAxis.getMajorTickPositions(),
+                crossingSlot = axis.getSlot(options.axisCrossingValue),
+                secAxisPos = crossingSlot[isVertical ? "y1" : "x1"],
+                lineStart = boundaries[0],
+                lineEnd = boundaries.pop(),
+                linePos,
+                gridLines = [];
+
+                //if (options.majorGridLines.visible) {
+                    gridLines = gridLines.concat(
+                        $.map(axis.getMajorTickPositions(), function(pos) {
+                            return {
+                                pos: pos,
+                                options: options.majorGridLines
+                            };
+                        }
+                    ));
+                //}
+
+                return $.map(gridLines, function(line) {
+                    linePos = line.pos;
+
+                    if (secAxisPos === linePos) {
+                        return null;
+                    }
+
+                    if (isVertical) {
+                        return factory.line(
+                            lineStart, linePos, lineEnd, linePos, line.options);
+                    } else {
+                        return factory.line(
+                            linePos, lineStart, linePos, lineEnd, line.options);
+                    }
+                });
+        },
+
+        getViewElements: function(factory) {
+            var plotArea = this,
+                axisY = plotArea.axisY,
+                axisX = plotArea.axisX,
+                gridLinesY = plotArea.renderGridlines(factory, axisY, axisX),
+                gridLinesX = plotArea.renderGridlines(factory, axisX, axisY),
+                childElements = ChartElement.fn.getViewElements.call(plotArea, factory);
+
+            return [].concat(gridLinesY, gridLinesX, childElements);
         }
     });
 
