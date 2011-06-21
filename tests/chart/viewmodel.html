@@ -37,6 +37,30 @@
 
 
             (function() {
+                var chartElement;
+
+                // ------------------------------------------------------------
+                module("ChartElement", {
+                    setup: function() {
+                        chartElement = new Chart.ChartElement();
+                    }
+                });
+
+                test("box wraps children", function() {
+                    var childStub = {
+                        updateLayout: function() { },
+                        box: new Chart.Box2D(10, 10, 100, 100)
+                    };
+
+                    chartElement.children.push(childStub);
+                    chartElement.updateLayout();
+
+                    sameBox(chartElement.box, childStub.box);
+                });
+
+            })();
+
+            (function() {
                 var rootElement,
                     rootViewElement,
                     factory;
@@ -275,6 +299,8 @@
                     $.each(childElements, function() {
                         equal(this.box.y1, targetBox.y1);
                     });
+
+                    console.log(boxElement.box, targetBox);
                 });
 
                 test("bottom alignment", function() {
@@ -321,51 +347,59 @@
 
             (function() {
                 var title,
-                    titleTextElement,
+                    titleTextBox,
+                    titleText,
                     TITLE_TEXT_HEIGHT = 17,
                     TITLE_TEXT_WIDTH = 37,
                     MARGIN = 10;
 
+                function createTitle(options) {
+                    title = new kendo.ui.Chart.Title($.extend({ text: "Title" }, options));
+                    title.updateLayout(chartBox);
+                    titleTextBox = title.children[0],
+                    titleText = titleTextBox.children[0];
+                }
+
                 module("Title", {
                     setup: function() {
-                        title = new kendo.ui.Chart.Title({ text: "Title" });
-                        title.updateLayout(chartBox);
-                        titleTextElement = title.children[0];
+                        createTitle();
                     }
                 });
 
                 test("text is created", function() {
-                    ok(titleTextElement != null);
+                    ok(titleText != null);
 
                 });
 
                 test("text element has set content", function() {
-                    equals(titleTextElement.content, "Title");
+                    equals(titleText.content, "Title");
                 });
 
                 test("text element has set font", function() {
-                    title = new kendo.ui.Chart.Title({
-                        text: "Title",
+                    createTitle({
                         font: "10px sans-serif"
                     });
-                    equal(title.children[0].options.font, title.options.font);
+                    equal(titleText.options.font, title.options.font);
                 });
 
                 test("text is positioned at top", function() {
-                    equals(titleTextElement.box.y1 - MARGIN, 0);
-                    equals(titleTextElement.box.y2 - MARGIN, TITLE_TEXT_HEIGHT, TOLERANCE);
+                    equals(titleText.box.y1 - MARGIN, 0);
+                    equals(titleText.box.y2 - MARGIN, TITLE_TEXT_HEIGHT, TOLERANCE);
                 });
 
                 test("text is positioned at bottom", function() {
-                    title.options.position = "bottom";
+                    createTitle({
+                        position: "bottom"
+                    });
+
                     title.updateLayout(chartBox);
-                    equals(titleTextElement.box.y1 + MARGIN,
+                    equals(titleText.box.y1 + MARGIN,
                            chartBox.height() - TITLE_TEXT_HEIGHT, TOLERANCE);
-                    equals(titleTextElement.box.y2 + MARGIN, chartBox.y2);
+                    equals(titleText.box.y2 + MARGIN, chartBox.y2);
                 });
 
                 test("text is aligned at center", function() {
-                    equals(titleTextElement.box.x1,
+                    equals(titleText.box.x1,
                            (chartBox.width() - TITLE_TEXT_WIDTH) / 2, TOLERANCE);
                 });
 

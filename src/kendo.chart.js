@@ -349,14 +349,16 @@
         updateLayout: function(targetBox) {
             var element = this,
                 children = element.children,
-                box = this.box = new Box2D();
+                box;
 
             for (var i = 0; i < children.length; i++) {
                 var currentChild = children[i];
 
                 currentChild.updateLayout(targetBox);
-                box.wrap(currentChild.box);
+                box = box ? box.wrap(currentChild.box) : currentChild.box.clone();
             }
+
+            element.box = box;
         },
 
         getViewElements: function(factory) {
@@ -553,6 +555,28 @@
         }
     });
 
+    var TextBox = BoxElement.extend({
+        init: function(content, options) {
+            var textBox = this;
+
+            BoxElement.fn.init.call(textBox);
+            textBox.options = extend({}, textBox.options, options);
+
+            textBox.children.push(
+                new Text(content, $.extend({ }, textBox.options, {align: LEFT, vAlign: TOP}))
+            );
+
+            // Calculate size
+            textBox.updateLayout(defaultBox);
+        },
+
+        options: {
+            align: LEFT,
+            vAlign: TOP,
+            margin: { }
+        }
+    });
+
     var BarLabel = ChartElement.extend({
         init: function(content, options) {
             var barLabel = this;
@@ -560,7 +584,7 @@
 
             barLabel.options = extend({}, barLabel.options, options);
 
-            barLabel.children.push(new Text(content, barLabel.options));
+            barLabel.children.push(new TextBox(content, barLabel.options));
         },
 
         options: {
@@ -575,8 +599,8 @@
                 text = barLabel.children[0],
                 box = text.box;
 
-            text.options.align = isVertical ? CENTER : "";
-            text.options.vAlign = isVertical ? "" : CENTER;
+            text.options.align = isVertical ? CENTER : LEFT;
+            text.options.vAlign = isVertical ? TOP : CENTER;
 
             if (options.position == "insideEnd") {
                 if (isVertical) {
@@ -632,18 +656,21 @@
 
     var Title = ChartElement.extend({
         init: function(options) {
-            var title = this;
+            var title = this,
+                textBox;
+
             ChartElement.fn.init.call(title);
 
             options = title.options = extend(true, {}, title.options, options);
 
-            var text = new Text(options.text, {
-                font: options.font,
+            textBox = new TextBox(options.text, {
                 align: options.align,
-                vAlign: CENTER
+                vAlign: options.position,
+                margin: options.margin,
+                font: options.font
             });
 
-            title.children.push(text);
+            title.children.push(textBox);
         },
 
         options: {
@@ -660,27 +687,10 @@
         updateLayout: function(targetBox) {
             var title = this,
                 options = title.options,
-                text = title.children[0],
-                textBox = new Box2D(),
-                margin = getMargin(options.margin),
-                offsetY;
+                textBox = title.children[0];
 
-            if (options.position == BOTTOM) {
-                textBox.y1 = targetBox.y2 - text.box.height() - margin.top - margin.bottom;
-                textBox.y2 = targetBox.y2;
-                text.box.translate(0, textBox.y1 + margin.top);
-            } else {
-                text.box.translate(0, targetBox.y1 + margin.top);
-                textBox.y1 = targetBox.y1;
-                textBox.y2 = targetBox.y1 + text.box.height() + margin.bottom + margin.top;
-            }
-
-            textBox.x1 = targetBox.x1;
-            textBox.x2 = targetBox.x2;
-
-            text.updateLayout(textBox);
-
-            title.box = new Box2D(targetBox.x1, textBox.y1, targetBox.x2, textBox.y2);
+            textBox.updateLayout(targetBox);
+            title.box = textBox.box.clone().snapTo(targetBox, X);
         }
     });
 
@@ -2306,6 +2316,7 @@
     Chart.Box2D = Box2D;
     Chart.Text = Text;
     Chart.BarLabel = BarLabel;
+    Chart.ChartElement = ChartElement;
     Chart.RootElement = RootElement;
     Chart.BoxElement = BoxElement;
     Chart.NumericAxis = NumericAxis;
