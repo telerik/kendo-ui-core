@@ -337,13 +337,12 @@
     var defaultBox = new Box2D(0, 0, 0, 0);
 
     var ChartElement = Class.extend({
-        init: function() {
+        init: function(options) {
             var element = this;
             element.attributes = {};
             element.children = [];
-        },
 
-        options: {
+            element.options = extend(true, {}, element.options, options);
         },
 
         updateLayout: function(targetBox) {
@@ -391,8 +390,7 @@
         init: function(options) {
             var root = this;
 
-            options = root.options = extend({}, root.options, options);
-            ChartElement.fn.init.call(root);
+            ChartElement.fn.init.call(root, options);
         },
 
         options: {
@@ -426,9 +424,8 @@
     var BoxElement = ChartElement.extend({
         init: function(options) {
             var element = this;
-            ChartElement.fn.init.call(element);
 
-            element.options = extend(true, {}, element.options, options);
+            ChartElement.fn.init.call(element, options);
         },
 
         options: {
@@ -493,12 +490,11 @@
     var Text = ChartElement.extend({
         init: function(content, options) {
             var text = this;
-            ChartElement.fn.init.call(text);
 
-            text.options = extend({}, text.options, options);
-            text.content = content;
+            ChartElement.fn.init.call(text, options);
 
             // Calculate size
+            text.content = content;
             text.updateLayout(defaultBox);
         },
 
@@ -559,8 +555,7 @@
         init: function(content, options) {
             var textBox = this;
 
-            BoxElement.fn.init.call(textBox);
-            textBox.options = extend({}, textBox.options, options);
+            BoxElement.fn.init.call(textBox, options);
 
             textBox.children.push(
                 new Text(content, $.extend({ }, textBox.options, {align: LEFT, vAlign: TOP}))
@@ -580,9 +575,7 @@
     var BarLabel = ChartElement.extend({
         init: function(content, options) {
             var barLabel = this;
-            ChartElement.fn.init.call(barLabel);
-
-            barLabel.options = extend({}, barLabel.options, options);
+            ChartElement.fn.init.call(barLabel, options);
 
             barLabel.children.push(new TextBox(content, barLabel.options));
         },
@@ -656,21 +649,10 @@
 
     var Title = ChartElement.extend({
         init: function(options) {
-            var title = this,
-                textBox;
+            var title = this;
+            ChartElement.fn.init.call(title, options);
 
-            ChartElement.fn.init.call(title);
-
-            options = title.options = extend(true, {}, title.options, options);
-
-            textBox = new TextBox(options.text, {
-                align: options.align,
-                vAlign: options.position,
-                margin: options.margin,
-                font: options.font
-            });
-
-            title.children.push(textBox);
+            title.create();
         },
 
         options: {
@@ -682,6 +664,20 @@
                 top: 10,
                 bottom: 10
             }
+        },
+
+        create: function() {
+            var title = this,
+                options = title.options;
+
+            title.children.push(
+                new TextBox(options.text, {
+                    align: options.align,
+                    vAlign: options.position,
+                    margin: options.margin,
+                    font: options.font
+                })
+            );
         },
 
         updateLayout: function(targetBox) {
@@ -697,9 +693,8 @@
     var Legend = ChartElement.extend({
         init: function(options) {
             var legend = this;
-            ChartElement.fn.init.call(legend);
+            ChartElement.fn.init.call(legend, options);
 
-            legend.options = extend(true, {}, legend.options, options);
             legend.createLabels();
         },
 
@@ -900,15 +895,15 @@
 
     var NumericAxis = ChartElement.extend({
         init: function(seriesMin, seriesMax, options) {
-            var axis = this;
-            ChartElement.fn.init.call(axis);
+            var axis = this,
+                autoOptions = {
+                    min: axis.autoAxisMin(seriesMin, seriesMax),
+                    max: axis.autoAxisMax(seriesMin, seriesMax)
+                };
 
-            var autoOptions = {
-                min: axis.autoAxisMin(seriesMin, seriesMax),
-                max: axis.autoAxisMax(seriesMin, seriesMax)
-            };
+            ChartElement.fn.init.call(axis, extend(true, autoOptions, options));
 
-            options = axis.options = extend({}, axis.options, autoOptions, options);
+            options = axis.options;
 
             if(!options.majorUnit) {
                 // Determine an auto major unit after min/max have been set
@@ -1207,7 +1202,7 @@
             var axis = this;
             ChartElement.fn.init.call(axis);
 
-            options = axis.options = extend({}, axis.options, options);
+            var options = axis.options = extend({}, axis.options, options);
 
             for (var i = 0; i < options.categories.length; i++) {
                 var label = options.categories[i];
@@ -1375,9 +1370,7 @@
     var ClusterLayout = ChartElement.extend({
         init: function(options) {
             var cluster = this;
-            ChartElement.fn.init.call(cluster);
-
-            cluster.options = extend({}, cluster.options, options);
+            ChartElement.fn.init.call(cluster, options);
         },
 
         options: {
@@ -1412,9 +1405,7 @@
     var StackLayout = ChartElement.extend({
         init: function(options) {
             var stack = this;
-            ChartElement.fn.init.call(stack);
-
-            stack.options = extend({}, stack.options, options);
+            ChartElement.fn.init.call(stack, options);
         },
 
         options: {
@@ -1460,9 +1451,7 @@
     var Bar = ChartElement.extend({
         init: function(options) {
             var bar = this;
-            ChartElement.fn.init.call(bar);
-
-            bar.options = extend({}, bar.options, options);
+            ChartElement.fn.init.call(bar, options);
         },
 
         options: {
@@ -1506,10 +1495,9 @@
     var BarChart = ChartElement.extend({
         init: function(plotArea, options) {
             var chart = this;
-            ChartElement.fn.init.call(chart);
+            ChartElement.fn.init.call(chart, options);
 
             chart.plotArea = plotArea;
-            chart.options = extend({}, chart.options, options);
             chart._seriesMin = Number.MAX_VALUE;
             chart._seriesMax = - Number.MAX_VALUE;
             chart._bars = [];
@@ -1690,9 +1678,8 @@
     var PlotArea = ChartElement.extend({
         init: function(options) {
             var plotArea = this;
-            ChartElement.fn.init.call(plotArea);
+            ChartElement.fn.init.call(plotArea, options);
 
-            plotArea.options = extend(true, {}, plotArea.options, options);
             plotArea.render();
         },
 
