@@ -3235,6 +3235,27 @@ width:628px;
     text-align:center;
 }
 
+// virtual scrollbar
+.t-scrollbar
+{
+    overflow: scroll;
+    position: absolute;
+}
+
+.t-scrollbar div
+{
+    width: 1px;
+    height: 1px;
+}
+
+.t-scrollbar-vertical
+{
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 17px; /* scrollbar width */
+}
+
 .t-touch-scrollbar
 {
     position:absolute;
