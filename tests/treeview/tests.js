@@ -10,9 +10,9 @@ tests.push(
     {
         page: "treeview/expandcollapse.html",
         title: "treeview expand/collapse"
-    },
+    } /*,
     {
         page: "treeview/draganddrop.html",
         title: "treeview drag&drop"
-    }
+    }*/
 );
