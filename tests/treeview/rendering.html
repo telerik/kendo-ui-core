@@ -16,9 +16,30 @@
         <h2 id="qunit-userAgent"></h2>
         <ol id="qunit-tests"></ol>
         <script>
-            var rendering = new kendo.ui.TreeView.TreeViewRendering();
+            var TreeView = kendo.ui.TreeView;
+
+            module("rendering", {
+                teardown: function() {
+                    $(".t-treeview").remove();
+                }
+            });
+
+            function treeviewFromHtml(html) {
+                return $(html).appendTo(document.body).kendoTreeView().parent();
+            }
+
+            test("basic classes", function() {
+                var element = treeviewFromHtml("<ul><li>item</li></ul>");
+
+                ok(element.is("div"));
+                ok(element.is(".t-widget.t-treeview"));
+                ok(element.find("ul").is(".t-group"));
+                ok(element.find("li").is(".t-item"));
+            });
 
             module("group");
+
+            var rendering = new kendo.ui.TreeView.TreeViewRendering();
 
             test("renders empty group when there are no items", function() {
                 var html = rendering.renderGroup({

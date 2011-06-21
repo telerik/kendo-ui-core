@@ -42,24 +42,6 @@
                notEqual(options.foo, undefined)
                equal(options.foo, "bar");
             });
-
-            test("wraps element if there is no wrapper div", function() {
-                list.kendoTreeView();
-
-                var wrapper = list.data("kendoTreeView").wrapper;
-
-                ok(wrapper.is("div"));
-                ok(wrapper.hasClass("t-widget t-treeview"));
-            });
-
-            test("creates proper item structure", function() {
-                list.kendoTreeView();
-
-                var wrapper = list.data("kendoTreeView").wrapper;
-
-                ok(wrapper.find("ul").is(".t-group"));
-                ok(wrapper.find("li").is(".t-item"));
-            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

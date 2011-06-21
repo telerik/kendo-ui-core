@@ -39,13 +39,11 @@
 
             that.rendering = new TreeViewRendering(that);
             
-            if (element.is(":not(.t-treeview)")) {
-                var data = that._htmlToData();
-                that.wrapper = 
-                    element.wrap('<div class="t-widget t-treeview t-reset" />').parent();
+            that._wrapper();
 
-                that._dataBind(that.wrapper, data);
-            }
+            that._groups();
+
+            that._items();
 
             element
                 .delegate(".t-in.t-state-selected", "mouseenter", function(e) { e.preventDefault(); })
@@ -78,17 +76,25 @@
             dataValueField: "value"
         },
 
-        _htmlToData: function(element) {
+        _wrapper: function() {
+            var that = this,
+                wrapper = that.wrapper;
+
+            if (!wrapper || wrapper.is(":not(.t-treeview)")) {
+                wrapper = that.element.wrap('<div class="t-widget t-treeview t-reset" />').parent();
+            }
+
+            that.wrapper = wrapper;
+        },
+
+        _groups: function() {
+            this.element.find("ul").andSelf().addClass("t-group");
+        },
+
+        _items: function() {
             var that = this;
 
-            element = element || that.element;
-
-            return $(element).find("li").map(function() {
-                return {
-                    text: this.firstChild,
-                    items: that._htmlToData(this)
-                };
-            });
+            that.element.find("li").addClass("t-item");
         },
 
         expand: function (li) {
