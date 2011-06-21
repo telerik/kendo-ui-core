@@ -57,9 +57,7 @@
                 that.dragging = new TreeViewDragAndDrop(that);
             }
 
-            var $content = $element.find('.t-item > .t-content');
-            if ($content.length > 0 && $($content[0]).children().length == 0)
-                $element.find('.t-icon').hide();
+            that.rendering = new TreeViewRendering(that);
 
             that.bind([EXPAND, COLLAPSE, CHECKED, ERROR, LOAD, DATABINDING, DATABOUND], options);
 
@@ -293,6 +291,7 @@
             }));
         },
 
+        // privatize
         bindTo: function (data) {
             this.dataBind(this.element, data);
         },
@@ -310,7 +309,7 @@
             var group = $item.find('> .t-group'),
                 isGroup = group.length == 0;
 
-            var html = TreeView[isGroup ? "getGroupHtml" : "getItemsList"]({
+            var html = that.rendering.group({
                 group: {
                     isExpanded: (isGroup ? $item.eq(0).is('.t-treeview') ? true : data[0].expanded : false),
                     isFirstLevel: $item.hasClass("t-treeview"),
@@ -617,135 +616,95 @@
     };
 
     // client-side rendering
-    var renderingContext = {
-        wrapperCssClass: function (group, item) {
-            var result = "t-item",
-                index = item.index;
+    TreeViewRendering = function () {};
 
-            if (group.isFirstLevel && index == 0) {
-                result += " t-first"
-            }
+    TreeViewRendering.prototype = {
+        helpers: {
+            wrapperCssClass: function (group, item) {
+                var result = "t-item",
+                    index = item.index;
 
-            if (index == group.length-1) {
-                result += " t-last";
-            }
+                if (group.isFirstLevel && index == 0) {
+                    result += " t-first"
+                }
 
-            return result;
-        },
-        cssClass: function(group, item) {
-            var result = "",
-                index = item.index,
-                groupLength = group.length - 1;
-            
-            if (group.isFirstLevel && index == 0) {
-                result += "t-top ";
-            }
+                if (index == group.length-1) {
+                    result += " t-last";
+                }
 
-            if (index == 0 && index != groupLength) {
-                result += "t-top";
-            } else if (index == groupLength) {
-                result += "t-bot";
-            } else {
-                result += "t-mid";
-            }
-            
-            return result;
-        },
-        textClass: function(item) {
-            var result = "t-in";
-
-            if (item.enabled === false) {
-                result += " t-state-disabled";
-            }
-
-            if (item.selected === true) {
-                result += " t-state-selected";
-            }
-
-            return result;
-        },
-        textAttributes: function(item) {
-            return item.url ? " href='" + item.url + "'" : "";
-        },
-        toggleButtonClass: function(item) {
-            var result = "t-icon";
-
-            if (item.expanded !== true) {
-                result += " t-plus";
-            } else {
-                result += " t-minus";
-            }
-
-            if (item.enabled === false) {
-                result += "-disabled";
-            }
-
-            return result;
-        },
-        text: function(item) {
-            return item.encoded === false ? item.text : kendo.htmlEncode(item.text);
-        },
-        tag: function(item) {
-            return item.url ? "a" : "span";
-        },
-        groupAttributes: function(group) {
-            return group.isExpanded !== true ? " style='display:none'" : "";
-        },
-        groupCssClass: function(group) {
-            var cssClass = "t-group";
-
-            if (group.isFirstLevel) {
-                cssClass += " t-treeview-lines";
-            }
-
-            return cssClass;
-        }
-    };
+                return result;
+            },
+            cssClass: function(group, item) {
+                var result = "",
+                    index = item.index,
+                    groupLength = group.length - 1;
                 
-    $.extend(TreeView, {
-        templates: {
-            group: template(
-                "<ul class='<%= groupCssClass(group) %>'<%= groupAttributes(group) %>>" +
-                    "<%= renderItems(data); %>" +
-                "</ul>"
-            ),
-            item: template(
-                "<li class='<%= wrapperCssClass(group, item) %>'>" +
-                    "<div class='<%= cssClass(group, item) %>'>" +
-                        "<%= toggleButton(data) %>" +
-                        "<%= checkbox(data) %>" +
-                        "<<%= tag(item) %> class='<%= textClass(item) %>'<%= textAttributes(item) %>>" +
-                            "<%= image(item) %><%= sprite(item) %><%= text(item) %><%= value(item) %>" +
-                        "</<%= tag(item) %>>" +
-                    "</div>" +
-                    "<%= subGroup({ items: item.items, treeview: treeview, group: { isExpanded: item.expanded } }) %>" +
-                "</li>"
-            ),
-            image: template("<img class='t-image' alt='' src='<%= imageUrl %>' />"),
-            value: template("<input type='hidden' class='t-input' name='itemValue' value='<%= value %>' />"),
-            toggleButton: template("<span class='<%= toggleButtonClass(item) %>'></span>"),
-            checkbox: template(
-                "<% var arrayName = treeview.id + '_checkedNodes', absoluteIndex = (group.level ? group.level + ':' : '') + item.index; %>" + 
-                "<span class='t-checkbox'>" + 
-                "<input type='hidden' value='<%= absoluteIndex %>' name='<%= arrayName %>.Index' class='t-input' />" +
-                    "<input type='checkbox' value='<%= item.checked ? 'True' : 'False' %>' " +
-                        "name='<%= arrayName %>[<%= absoluteIndex %>].Checked' class='t-input' " + 
-                        "<%= item.enabled === false ? 'disabled ' : '' %>" +
-                        "<%= item.checked === true ? 'checked ' : '' %>" + 
-                    "/>" +
-                    "<%= checkboxValues(data) %>" +
-                "</span>"
-            ),
-            checkboxValues: template(
-                "<% var arrayItem = treeview.id + '[' + group.level + ']'; %>" + 
-                "<input type='hidden' value='<%= item.value %>' name='<%= arrayItem %>.Value' class='t-input' />" +
-                "<input type='hidden' value='<%= item.text %>' name='<%= arrayItem %>.Text' class='t-input' />"
-            ),
-            sprite: template("<span class='t-sprite <%= spriteCssClass %>'></span>"),
-            empty: template("")
+                if (group.isFirstLevel && index == 0) {
+                    result += "t-top ";
+                }
+
+                if (index == 0 && index != groupLength) {
+                    result += "t-top";
+                } else if (index == groupLength) {
+                    result += "t-bot";
+                } else {
+                    result += "t-mid";
+                }
+                
+                return result;
+            },
+            textClass: function(item) {
+                var result = "t-in";
+
+                if (item.enabled === false) {
+                    result += " t-state-disabled";
+                }
+
+                if (item.selected === true) {
+                    result += " t-state-selected";
+                }
+
+                return result;
+            },
+            textAttributes: function(item) {
+                return item.url ? " href='" + item.url + "'" : "";
+            },
+            toggleButtonClass: function(item) {
+                var result = "t-icon";
+
+                if (item.expanded !== true) {
+                    result += " t-plus";
+                } else {
+                    result += " t-minus";
+                }
+
+                if (item.enabled === false) {
+                    result += "-disabled";
+                }
+
+                return result;
+            },
+            text: function(item) {
+                return item.encoded === false ? item.text : kendo.htmlEncode(item.text);
+            },
+            tag: function(item) {
+                return item.url ? "a" : "span";
+            },
+            groupAttributes: function(group) {
+                return group.isExpanded !== true ? " style='display:none'" : "";
+            },
+            groupCssClass: function(group) {
+                var cssClass = "t-group";
+
+                if (group.isFirstLevel) {
+                    cssClass += " t-treeview-lines";
+                }
+
+                return cssClass;
+            }
         },
 
-        getItemHtml: function (options) {
+        renderItem: function (options) {
             options = $.extend({ treeview: {}, group: {} }, options);
 
             var templates = TreeView.templates,
@@ -760,32 +719,76 @@
                 toggleButton: ((item.loadOnDemand && treeview.isAjax) || item.items) ? templates.toggleButton : empty,
                 checkbox: (treeview.showCheckboxes && item.checkable !== false) ? templates.checkbox : empty,
                 checkboxValues: item.checked === true ? templates.checkboxValues : empty,
-                subGroup: TreeView.getGroupHtml
-            }, renderingContext));
+                subGroup: $.proxy(this.renderGroup, this)
+            }, this.helpers));
         },
 
-        getItemsList: function (options) {
-            var html = "",
-                items = options.items,
-                getItemHtml = getItemHtml,
-                i, len;
+        renderGroup: function (options) {
+            var that = this;
 
-            for (i = 0, len = items ? items.length : 0; i < len; i++) {
-                html += TreeView.getItemHtml($.extend(options, {
-                    group: { length: len },
-                    item: $.extend({ index: i }, items[i])
-                }));
-            }
-
-            return html;
-        },
-
-        getGroupHtml: function (options) {
             return TreeView.templates.group($.extend({
-                renderItems: TreeView.getItemsList
-            }, options, renderingContext));
+                renderItems: function (options) {
+                    var html = "",
+                        i = 0,
+                        items = options.items,
+                        len = items ? items.length : 0;
+
+                    for (; i < len; i++) {
+                        html += that.renderItem($.extend(options, {
+                            group: { length: len },
+                            item: $.extend({ index: i }, items[i])
+                        }));
+                    }
+
+                    return html;
+                }
+            }, options, that.helpers));
         }
-    });
+    };
+
+    TreeView.TreeViewRendering = TreeViewRendering;
+                
+    TreeView.templates = {
+        group: template(
+            "<ul class='<%= groupCssClass(group) %>'<%= groupAttributes(group) %>>" +
+                "<%= renderItems(data); %>" +
+            "</ul>"
+        ),
+        item: template(
+            "<li class='<%= wrapperCssClass(group, item) %>'>" +
+                "<div class='<%= cssClass(group, item) %>'>" +
+                    "<%= toggleButton(data) %>" +
+                    "<%= checkbox(data) %>" +
+                    "<<%= tag(item) %> class='<%= textClass(item) %>'<%= textAttributes(item) %>>" +
+                        "<%= image(item) %><%= sprite(item) %><%= text(item) %><%= value(item) %>" +
+                    "</<%= tag(item) %>>" +
+                "</div>" +
+                "<%= subGroup({ items: item.items, treeview: treeview, group: { isExpanded: item.expanded } }) %>" +
+            "</li>"
+        ),
+        image: template("<img class='t-image' alt='' src='<%= imageUrl %>' />"),
+        value: template("<input type='hidden' class='t-input' name='itemValue' value='<%= value %>' />"),
+        toggleButton: template("<span class='<%= toggleButtonClass(item) %>'></span>"),
+        checkbox: template(
+            "<% var arrayName = treeview.id + '_checkedNodes', absoluteIndex = (group.level ? group.level + ':' : '') + item.index; %>" + 
+            "<span class='t-checkbox'>" + 
+            "<input type='hidden' value='<%= absoluteIndex %>' name='<%= arrayName %>.Index' class='t-input' />" +
+                "<input type='checkbox' value='<%= item.checked ? 'True' : 'False' %>' " +
+                    "name='<%= arrayName %>[<%= absoluteIndex %>].Checked' class='t-input' " + 
+                    "<%= item.enabled === false ? 'disabled ' : '' %>" +
+                    "<%= item.checked === true ? 'checked ' : '' %>" + 
+                "/>" +
+                "<%= checkboxValues(data) %>" +
+            "</span>"
+        ),
+        checkboxValues: template(
+            "<% var arrayItem = treeview.id + '[' + group.level + ']'; %>" + 
+            "<input type='hidden' value='<%= item.value %>' name='<%= arrayItem %>.Value' class='t-input' />" +
+            "<input type='hidden' value='<%= item.text %>' name='<%= arrayItem %>.Text' class='t-input' />"
+        ),
+        sprite: template("<span class='t-sprite <%= spriteCssClass %>'></span>"),
+        empty: template("")
+    };
 
     kendo.ui.plugin("TreeView", TreeView);
 

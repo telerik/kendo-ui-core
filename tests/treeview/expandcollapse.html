@@ -22,7 +22,9 @@
             var TreeView = kendo.ui.TreeView;
 
             function createTreeView(data) {
-                return $(TreeView.getGroupHtml({
+                var rendering = new kendo.ui.TreeView.TreeViewRendering();
+
+                return $(rendering.renderGroup({
                     group: {
                         isFirstLevel: true,
                         isExpanded: true
