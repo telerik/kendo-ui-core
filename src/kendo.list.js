@@ -77,6 +77,17 @@
             }
         },
 
+        _focus: function(li) {
+            var that = this;
+
+            that.select(li);
+            that._blur();
+
+            if (that._focused[0] !== document.activeElement) {
+                that._focused.focus();
+            }
+        },
+
         _scroll: function (item) {
 
             if (!item) return;
@@ -136,7 +147,15 @@
 
     kendo.ui.List = List;
 
-    kendo.ui.Select = {
+    ui.Select = List.extend({
+        init: function(element, options) {
+            List.fn.init.call(this, element, options);
+        },
+
+        close: function() {
+            this.popup.close();
+        },
+
         hideBusy: function () {
             var that = this;
             clearTimeout(that._busy);
@@ -150,7 +169,7 @@
             }, this), 100);
         },
 
-        _dataAccessors: function() {
+        _accessors: function() {
             var that = this,
                 element = that.element,
                 options = that.options,
@@ -200,30 +219,29 @@
             var that = this,
                 ul = that.ul,
                 wrapper = that.wrapper,
-                options = {
-                    anchor: wrapper
-                };
+                padding = ul.outerWidth() - ul.innerWidth();
 
-            if (toggleTarget) {
-                options.toggleTarget = toggleTarget;
-            }
+            that.popup = new ui.Popup(ul, {
+                anchor: wrapper,
+                toggleTarget: toggleTarget
+            });
 
-            that.popup = new ui.Popup(ul, options);
-
-            ul.width(wrapper.width() - (ul.outerWidth() - ul.innerWidth()));
+            ul.width(wrapper.width() - padding);
         },
 
-        _rebuildSelect: function(data) {
+        _options: function(data) {
             var that = this,
-            value = that.value(),
-            length = data.length,
-            options = [],
-            i = 0;
+                value = that.value(),
+                length = data.length,
+                options = [],
+                idx = 0;
+            //move var outside the for
+            //use template
 
             if (that.element.is(SELECT)) {
-                for (; i < length; i++) {
+                for (; idx < length; idx++) {
                     var option = "<option",
-                    dataItem = data[i],
+                    dataItem = data[idx],
                     dataText = that._text(dataItem),
                     dataValue = that._value(dataItem);
 
@@ -244,6 +262,6 @@
                 that.element.val(value);
             }
         }
-    };
+    });
 
 })(jQuery);

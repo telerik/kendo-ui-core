@@ -1,18 +1,19 @@
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
-        List = ui.List,
+        Select = ui.Select,
         CHANGE = "change",
         SELECTED = "t-state-selected",
-        DISABLED = "t-state-disabled";
+        DISABLED = "t-state-disabled",
+        proxy = $.proxy;
 
-    var DropDownList = List.extend({
+    var DropDownList = Select.extend({
         init: function(element, options) {
             var that = this;
 
             options = $.isArray(options) ? { dataSource: options } : options;
 
-            List.fn.init.call(that, element, options);
+            Select.fn.init.call(that, element, options);
 
             that._word = "";
 
@@ -22,7 +23,7 @@
 
             that._popup(that.wrapper);
 
-            that._dataAccessors();
+            that._accessors();
 
             that._dataSource();
 
@@ -64,13 +65,8 @@
                 wrapper
                     .removeClass(DISABLED)
                     .bind({
-                        keydown: $.proxy(that._keydown, that),
-                        keypress: function(e) {
-                            setTimeout(function() {
-                                that._word += String.fromCharCode(e.keyCode || e.charCode);
-                                that._search();
-                            });
-                        },
+                        keydown: proxy(that._keydown, that),
+                        keypress: proxy(that._keypress, that),
                         click: function() {
                             if(!that.ul[0].firstChild) {
                                 that.showBusy();
@@ -84,10 +80,6 @@
                         }
                     });
             }
-        },
-
-        close: function() {
-            this.popup.close();
         },
 
         open: function() {
@@ -116,7 +108,7 @@
             ul[0].innerHTML = kendo.render(that.template, data);
             ul.height(data.length * 20 > height ? height : "auto");
 
-            that._rebuildSelect(data);
+            that._options(data);
 
             that.select(that.options.index);
 
@@ -132,10 +124,12 @@
         search: function(word) {
             if(word){
                 var that = this;
+                word = word.toLowerCase();
+
                 that.select(function(dataItem) {
                     var text = that._text(dataItem);
                     if (text !== undefined) {
-                        return (text + "").toLowerCase().indexOf(word.toLowerCase()) === 0;
+                        return (text + "").toLowerCase().indexOf(word) === 0;
                     }
                 });
             }
@@ -205,10 +199,12 @@
 
                 if (data[0]) {
                     index = $.map(data, function(dataItem, idx) {
-                        var val = that._value(dataItem);
-                            val = val || val === 0 ? val : that._text(dataItem);
+                        var dataItemValue = that._value(dataItem);
+                        if (dataItemValue === undefined) {
+                            dataItemValue = that._text(dataItem);
+                        }
 
-                        if (val == value) {
+                        if (dataItemValue == value) {
                             return idx;
                         }
                     });
@@ -221,14 +217,7 @@
         },
 
         _accept: function(li) {
-            var that = this;
-
-            that.select(li);
-            that._blur();
-
-            if (that.wrapper[0] !== document.activeElement) {
-                that.wrapper.focus();
-            }
+            this._focus(li);
         },
 
         _keydown: function(e) {
@@ -269,6 +258,15 @@
             if (prevent) {
                 e.preventDefault();
             }
+        },
+
+        _keypress: function(e) {
+            var that = this;
+
+            setTimeout(function() {
+                that._word += String.fromCharCode(e.keyCode || e.charCode);
+                that._search();
+            });
         },
 
         _search: function() {
@@ -321,13 +319,11 @@
             wrapper[0].style.cssText = DOMelement.style.cssText;
             element.hide();
 
-            that.wrapper = wrapper
+            that._focused = that.wrapper = wrapper
                               .addClass("t-widget t-dropdown t-header")
                               .addClass(DOMelement.className);
         }
     });
-
-    $.extend(DropDownList.fn, ui.Select);
 
     ui.plugin("DropDownList", DropDownList);
 })(jQuery);

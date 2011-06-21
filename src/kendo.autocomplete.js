@@ -43,6 +43,8 @@
 
             List.fn.init.call(that, element, options);
 
+            that._focused = that.element;
+
             that.popup = new ui.Popup(that.ul, {
                 anchor: that.element
             });
@@ -188,12 +190,7 @@
         _accept: function(li) {
             var that = this;
 
-            that.select(li);
-            that._blur();
-
-            if (that.element[0] !== document.activeElement) {
-                that.element.focus();
-            }
+            that._focus(li);
 
             moveCaretAtEnd(that.element[0]);
         },
