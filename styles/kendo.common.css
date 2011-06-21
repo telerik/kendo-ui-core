@@ -3235,7 +3235,7 @@ width:628px;
     text-align:center;
 }
 
-// virtual scrollbar
+/* virtual scrollbar */
 .t-scrollbar
 {
     overflow: scroll;
