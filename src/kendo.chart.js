@@ -6,7 +6,6 @@
         Component = kendo.ui.Component,
         DataSource = kendo.data.DataSource,
         template = kendo.template,
-        extend = $.extend,
         proxy = $.proxy;
 
     // Constants ==============================================================
@@ -40,13 +39,9 @@
         init: function(element, options) {
             var chart = this;
 
-            // Clean up series colors as extend does not overwrite arrays,
-            // but tries to merge them as if they were objects.
-            if (options && options.seriesColors) {
-                chart.options.seriesColors = [];
-            }
+            Component.fn.init.call(chart, element);
 
-            Component.fn.init.call(chart, element, options);
+            chart.options = deepExtend(chart.options, options);
 
             chart.bind([DATABOUND], chart.options);
             chart._viewFactory = chart._supportsSVG() ? new SVGFactory() : new VMLFactory();
@@ -103,7 +98,7 @@
             }
 
             if (options.legend.visible) {
-                var legendOptions = extend({}, chart.options.legend,
+                var legendOptions = deepExtend({}, chart.options.legend,
                                     { series: chart.options.series });
 
                 model.children.push(new Legend(legendOptions));
@@ -135,14 +130,14 @@
                 // default settings for this type
                 seriesType = series[i].type || options.seriesDefaults.type;
 
-                series[i] = extend(
+                series[i] = deepExtend(
                     { color: colors[i % colors.length] },
                     options.seriesDefaults,
                     options.seriesDefaults[seriesType],
                     series[i]);
             }
 
-            options.categoryAxis = extend({}, options.axisDefaults, options.categoryAxis);
+            options.categoryAxis = deepExtend({}, options.axisDefaults, options.categoryAxis);
 
             if (!options.width) {
                 options.width = element.width() || DEFAULT_WIDTH;
@@ -342,7 +337,7 @@
             element.attributes = {};
             element.children = [];
 
-            element.options = extend(true, {}, element.options, options);
+            element.options = deepExtend({}, element.options, options);
         },
 
         updateLayout: function(targetBox) {
@@ -558,7 +553,7 @@
             BoxElement.fn.init.call(textBox, options);
 
             textBox.children.push(
-                new Text(content, $.extend({ }, textBox.options, {align: LEFT, vAlign: TOP}))
+                new Text(content, deepExtend({ }, textBox.options, {align: LEFT, vAlign: TOP}))
             );
 
             // Calculate size
@@ -901,7 +896,7 @@
                     max: axis.autoAxisMax(seriesMin, seriesMax)
                 };
 
-            ChartElement.fn.init.call(axis, extend(true, autoOptions, options));
+            ChartElement.fn.init.call(axis, deepExtend(autoOptions, options));
 
             options = axis.options;
 
@@ -1202,7 +1197,7 @@
             var axis = this;
             ChartElement.fn.init.call(axis);
 
-            var options = axis.options = extend({}, axis.options, options);
+            var options = axis.options = deepExtend({}, axis.options, options);
 
             for (var i = 0; i < options.categories.length; i++) {
                 var label = options.categories[i];
@@ -1544,7 +1539,7 @@
                 options = barChart.options,
                 children = barChart.children,
                 isStacked = barChart.options.isStacked,
-                labelOptions = extend({}, series.labels);
+                labelOptions = deepExtend({}, series.labels);
 
             if (isStacked) {
                 if (labelOptions.position == "outsideEnd") {
@@ -1728,12 +1723,12 @@
             var plotArea = this,
                 options = plotArea.options,
                 isColumn = (seriesType || COLUMN) === COLUMN,
-                categoryAxis = new CategoryAxis(extend({
+                categoryAxis = new CategoryAxis(deepExtend({
                         orientation: isColumn ? HORIZONTAL : VERTICAL,
                         axisCrossingValue: isColumn ? 0 : options.categoryAxis.categories.length
                     }, options.axesDefaults, options.categoryAxis)
                 ),
-                valueAxis = new NumericAxis(seriesMin, seriesMax, extend({
+                valueAxis = new NumericAxis(seriesMin, seriesMax, deepExtend({
                         orientation: isColumn ? VERTICAL : HORIZONTAL
                     }, options.axesDefaults, options.valueAxis)
                 );
@@ -1811,8 +1806,10 @@
     // **************************
 
     var ViewElement = Class.extend({
-        init: function() {
-            this.children = [];
+        init: function(options) {
+            var element = this;
+            element.children = [];
+            element.options = deepExtend({}, element.options, options);
         },
 
         render: function() {
@@ -1887,7 +1884,6 @@
         init: function(options) {
             var root = this;
 
-            options = root.options = extend({}, root.options, options);
             ViewElement.fn.init.call(root, options);
 
             root.template = SVGRoot.template;
@@ -1909,10 +1905,9 @@
 
     var SVGGroup = ViewElement.extend({
         init: function(options) {
-            var group = this,
-                options = group.options = extend({}, group.options, options);
+            var group = this;
+            ViewElement.fn.init.call(group, options);
 
-            ViewElement.fn.init.call(group);
             group.template = SVGGroup.template;
             if (!group.template) {
                 group.template = SVGGroup.template =
@@ -1924,12 +1919,10 @@
 
     var SVGText = ViewElement.extend({
         init: function(content, options) {
-            var text = this,
-                options = text.options = extend({}, text.options, options);
+            var text = this;
+            ViewElement.fn.init.call(text, options);
 
             text.content = content;
-
-            ViewElement.fn.init.call(text);
             text.template = SVGText.template;
             if (!text.template) {
                 text.template = SVGText.template = template(
@@ -1959,8 +1952,8 @@
     var SVGPath = ViewElement.extend({
         init: function(points, options) {
             var path = this;
+            ViewElement.fn.init.call(path, options);
 
-            ViewElement.fn.init.call(path);
             path.template = SVGPath.template;
             if (!path.template) {
                 path.template = SVGPath.template = template(
@@ -1971,7 +1964,6 @@
             }
 
             path.points = points || [];
-            path.options = extend({}, path.options, options);
         },
 
         options: {
@@ -2030,8 +2022,6 @@
     var VMLRoot = ViewElement.extend({
         init: function(options) {
             var root = this;
-
-            options = root.options = extend({}, root.options, options);
             ViewElement.fn.init.call(root, options);
 
             root.template = VMLRoot.template;
@@ -2052,12 +2042,10 @@
 
     var VMLText = ViewElement.extend({
         init: function(content, options) {
-            var text = this,
-                options = text.options = extend({}, text.options, options);
+            var text = this;
+            ViewElement.fn.init.call(text, options);
 
             text.content = content || "";
-
-            ViewElement.fn.init.call(text);
             text.template = VMLText.template;
             if (!text.template) {
                 text.template = VMLText.template = template(
@@ -2078,7 +2066,7 @@
     var VMLPath = ViewElement.extend({
         init: function(points, options) {
             var path = this;
-            ViewElement.fn.init.call(path);
+            ViewElement.fn.init.call(path, options);
 
             path.template = VMLPath.template;
             if (!path.template) {
@@ -2093,7 +2081,6 @@
             }
 
             path.points = points || [];
-            path.options = extend({}, path.options, options);
         },
 
         options: {
@@ -2127,12 +2114,10 @@
 
     var VMLGroup = ViewElement.extend({
         init: function(options) {
-            var group = this,
-                options = group.options = extend({}, group.options, options);
+            var group = this;
+            ViewElement.fn.init.call(group, options);
 
-            ViewElement.fn.init.call(group);
             group.template = VMLGroup.template;
-
             if (!group.template) {
                 group.template = VMLGroup.template = template(
                     "<div style='position: absolute; white-space: nowrap;'>" +
@@ -2294,6 +2279,30 @@
 
     function inArray(value, array) {
         return array.indexOf(value) != -1;
+    }
+
+    function deepExtend(destination) {
+        var i = 1,
+            length = arguments.length,
+            source,
+            property,
+            propValue;
+
+        for (i = 1; i < length; i++) {
+            source = arguments[i];
+
+            for (property in source) {
+                propValue = source[property];
+                if (typeof propValue === "object" && propValue !== null && propValue.constructor !== Array) {
+                    destination[property] = destination[property] || {};
+                    deepExtend(destination[property], propValue);
+                } else {
+                    destination[property] = propValue;
+                }
+            }
+        }
+
+        return destination;
     }
 
     // Exports ================================================================
