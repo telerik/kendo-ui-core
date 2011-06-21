@@ -58,8 +58,12 @@
             }
 
             dt {
-                display: inline-block;
                 margin-right: 10px;
+                float:left;
+            }
+
+            dt:after {
+                content: ":";
             }
         </style>
     </head>
@@ -83,8 +87,36 @@
                 <dd id="rowHeight"></dd>
             </dl>
             <dl>
-                <dt>currentPage</dt>
-                <dd id="currentPage"></dd>
+                <dt>page</dt>
+                <dd id="page"></dd>
+            </dl>
+            <dl>
+                <dt>skip</dt>
+                <dd id="skip"></dd>
+            </dl>
+            <dl>
+                <dt>rowsPerPage</dt>
+                <dd id="rowsPerPage"></dd>
+            </dl>
+            <dl>
+                <dt>totalRows</dt>
+                <dd id="totalRows"></dd>
+            </dl>
+            <dl>
+                <dt>rows</dt>
+                <dd id="rows"></dd>
+            </dl>
+            <dl>
+                <dt>firstRowIndex</dt>
+                <dd id="firstRowIndex"></dd>
+            </dl>
+            <dl>
+                <dt>lastRowIndex</dt>
+                <dd id="lastRowIndex"></dd>
+            </dl>
+            <dl>
+                <dt>last</dt>
+                <dd id="last"></dd>
             </dl>
         </fieldset>
         <div class="grid">
@@ -130,13 +162,13 @@
         <script>
             var data = [];
 
-            for (var i = 1; i <= 50000; i++) {
+            for (var i = 0; i < 50000; i++) {
                 data.push({ OrderID: i, ContactName: "Contact " + i, ShipAddress: "Ship Address " + i });
             }
 
             var dataSource = new kendo.data.DataSource({
                 data: data,
-                pageSize: 50
+                pageSize: 24
             });
 
             $("table#grid").kendoGrid({
@@ -144,36 +176,43 @@
             }).find("thead").remove();
 
             var rowHeight = $("table#grid td:first")[0].offsetHeight;
+            var visibleHeight = 300;
 
-            $(".grid-data, .grid-scroller").height(300);
+            $(".grid-data, .grid-scroller").height(visibleHeight);
 
             var totalHeight = data.length * rowHeight;
             var rowsPerPage = $(".grid-data").outerHeight() / rowHeight;
 
             $("<div />").height(totalHeight).width(10).appendTo($(".grid-scroller"));
 
-            var currentPage = 1;
-
-            var multiplier =  300 / totalHeight;
+            var ratio = rowsPerPage / dataSource.pageSize();
+            var firstRowIndex = 0;
+            var lastRowIndex = 11;
+            var skip = 0;
+            var page = 1;
+            var last = 23;
+            var scroll = 0;
 
             $(".grid-scroller").bind("scroll", function(e) {
-                var page = Math.ceil(Math.ceil(this.scrollTop / rowHeight) / dataSource.pageSize());
+                firstRowIndex = Math.floor(this.scrollTop / rowHeight);
+                lastRowIndex = Math.floor((this.scrollTop + visibleHeight) / rowHeight);
 
-                if (currentPage !== page) {
-                    console.log(kendo.stringify({
-                        scrollTop: this.scrollTop,
-                        scrollHeight: this.scrollHeight,
-                        rowsPerPage: rowsPerPage,
-                        height: this.offsetHeight,
-                        page: page
-                    }));
+                var take = dataSource.pageSize();
 
-                    currentPage = page;
+                if (lastRowIndex > last) {
+                    skip = firstRowIndex;
+                    page = (skip / take) + 1;
+                    last = firstRowIndex + take;
+
                     dataSource.page(page);
+
+                    $(".grid-data").scrollTop(rowHeight);
                 } else {
+                    scroll = this.scrollTop - (skip * rowHeight);
+                    $(".grid-data").scrollTop(scroll);
                 }
 
-                $(".grid-data").scrollTop(this.scrollTop % (dataSource.pageSize() * rowHeight));
+                e.preventDefault();
 
                 log();
             });
@@ -183,7 +222,14 @@
                 $("#scrollTop").text($(".grid-scroller")[0].scrollTop);
                 $("#rowHeight").text(rowHeight);
                 $("#totalHeight").text(totalHeight);
-                $("#currentPage").text(currentPage);
+                $("#page").text(page);
+                $("#skip").text(skip);
+                $("#rowsPerPage").text(rowsPerPage);
+                $("#totalRows").text($("#grid tbody tr").length);
+                $("#lastRowIndex").text(lastRowIndex);
+                $("#firstRowIndex").text(firstRowIndex);
+                $("#last").text(last);
+                $("#rows").text($(".grid-data tr").length);
             }
 
             log();
