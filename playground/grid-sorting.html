@@ -171,7 +171,7 @@
         <script>
             var data = [];
 
-            for (var i = 0; i < 10000; i++) {
+            for (var i = 0; i < 500000; i++) {
                 data.push({ OrderID: i, ContactName: "Contact " + i, ShipAddress: "Ship Address " + i });
             }
 
@@ -191,13 +191,13 @@
 
             var totalHeight = data.length * rowHeight;
 
-            var scrollHeight = Math.min(totalHeight, 25000);
+            var scrollHeight = Math.min(totalHeight, 250000);
             var scale = totalHeight / scrollHeight;
 
             var rowsPerPage = $(".grid-data").outerHeight() / rowHeight;
 
             $("<div />").height(scrollHeight).width(50).html(""
-               // $.map(data, function(item, index) { return "<div>" + item.OrderID + "</div>" }).join("")
+                //$.map(data, function(item, index) { return "<div>" + item.OrderID + "</div>" }).join("")
 
                 ).appendTo($(".grid-scroller"));
 
@@ -209,6 +209,8 @@
             var first = 0;
             var scroll = 0;
             var timeout;
+            var take = 24;
+            var scrollTop = 0;
 
             $(".grid-scroller").bind("scroll", function(e) {
                // clearTimeout(timeout);
@@ -217,24 +219,20 @@
                     firstRowIndex = Math.floor(scrollTop / rowHeight);
                     lastRowIndex = Math.floor((scrollTop + visibleHeight) / rowHeight);
 
-                    var take = dataSource.pageSize();
-                    page = dataSource.page();
+                    skip = first = dataSource._skip || 0;
 
-                    first = (page - 1) * take;
                     last = first + take;
 
                     if (firstRowIndex < first) {
-                        skip = firstRowIndex - take;
-                        page = (skip / take) + 1;
+                        skip = Math.max(0, firstRowIndex - take);
 
-                        dataSource.page(page);
+                        dataSource.range(skip, take);
 
                         $(".grid-data").scrollTop(0);
                     } else if (lastRowIndex > last) {
                         skip = firstRowIndex;
-                        page = (skip / take) + 1;
 
-                        dataSource.page(page);
+                        dataSource.range(skip, take);
 
                         $(".grid-data").scrollTop(rowHeight / 2);
                     } else {
