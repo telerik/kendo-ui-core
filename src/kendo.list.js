@@ -231,36 +231,38 @@
 
         _options: function(data) {
             var that = this,
+                element = that.element,
                 value = that.value(),
                 length = data.length,
                 options = [],
+                option,
+                dataItem,
+                dataText,
+                dataValue,
                 idx = 0;
-            //move var outside the for
-            //use template
 
-            if (that.element.is(SELECT)) {
-                for (; idx < length; idx++) {
-                    var option = "<option",
-                    dataItem = data[idx],
-                    dataText = that._text(dataItem),
-                    dataValue = that._value(dataItem);
+            for (; idx < length; idx++) {
+                option = "<option";
+                dataItem = data[idx];
+                dataText = that._text(dataItem);
+                dataValue = that._value(dataItem);
 
-                    if (dataValue !== undefined) {
-                        option += " value=" + dataValue;
-                    }
-
-                    option += ">";
-
-                    if (dataText !== undefined) {
-                        option += dataText;
-                    }
-
-                    option += "</option>";
-                    options.push(option);
+                if (dataValue !== undefined) {
+                    option += " value=" + dataValue;
                 }
-                that.element.html(options.join(""));
-                that.element.val(value);
+
+                option += ">";
+
+                if (dataText !== undefined) {
+                    option += dataText;
+                }
+
+                option += "</option>";
+                options.push(option);
             }
+
+            element.html(options.join(""));
+            element.val(value);
         }
     });
 
