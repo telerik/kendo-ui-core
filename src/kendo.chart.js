@@ -32,7 +32,8 @@
         WIDTH = "width",
         X = "x",
         Y = "y",
-        ZERO_THRESHOLD = 0.2;
+        ZERO_THRESHOLD = 0.2,
+        UNDEFINED = "undefined";
 
     // Chart ==================================================================
     var Chart = Component.extend({
@@ -195,10 +196,10 @@
     });
 
     function setContent(container, xml) {
-        if (typeof setContent.useParser == "undefined") {
+        if (typeof setContent.useParser == UNDEFINED) {
             var testFragment = "<svg xmlns='" + SVG_NS + "'></svg>",
                 testContainer = document.createElement("div"),
-                hasParser = typeof DOMParser != "undefined";
+                hasParser = typeof DOMParser != UNDEFINED;
 
             testContainer.innerHTML = testFragment;
             setContent.useParser = hasParser && testContainer.firstChild.namespaceURI != SVG_NS;
@@ -1242,8 +1243,8 @@
                 lineStart = lineBox[valueAxis + 1],
                 lineSize = isVertical ? lineBox.height() : lineBox.width(),
                 scale = lineSize / (options.max - options.min),
-                a = typeof a === "undefined" ? options.axisCrossingValue : a,
-                b = typeof b === "undefined" ? options.axisCrossingValue : b,
+                a = typeof a === UNDEFINED ? options.axisCrossingValue : a,
+                b = typeof b === UNDEFINED ? options.axisCrossingValue : b,
                 a = Math.max(Math.min(a, options.max), options.min),
                 b = Math.max(Math.min(b, options.max), options.min),
                 p1,
@@ -1609,7 +1610,7 @@
                 catMin = [];
 
             barChart.traverseDataPoints(function(value, categoryIx, series) {
-                if(typeof value !== "undefined") {
+                if(typeof value !== UNDEFINED) {
                     if (isStacked) {
                         var sums = value > 0 ? catMax : catMin;
                         sums[categoryIx] = sums[categoryIx] ? sums[categoryIx] + value : value;
@@ -2434,7 +2435,7 @@
             max = - Number.MAX_VALUE;
         for (var i = 0, length = arr.length; i < length; i++) {
             var n = arr[i];
-            if (typeof n !== "undefined") {
+            if (typeof n !== UNDEFINED) {
                 min = Math.min(min, n);
                 max = Math.max(max, n);
             }
@@ -2445,9 +2446,15 @@
 
     function getSpacing(value) {
         var spacing = {};
-        $.each(["top", "right", "bottom", "left"], function() {
-            spacing[this] = typeof(value) === "number" ? value : value[this] || 0;
-        });
+
+        if (typeof(value) === "number") {
+            spacing[TOP] = spacing[RIGHT] = spacing[BOTTOM] = spacing[LEFT] = value;
+        } else {
+            spacing[TOP] = value[TOP] || 0;
+            spacing[RIGHT] = value[RIGHT] || 0;
+            spacing[BOTTOM] = value[BOTTOM] || 0;
+            spacing[LEFT] = value[LEFT] || 0;
+        }
 
         return spacing;
     }
