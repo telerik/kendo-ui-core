@@ -554,6 +554,8 @@
                 options = text.options,
                 size = measureText(text.content, { font: text.options.font });
 
+            text.baseline = size.baseline;
+
             if (options.align == LEFT) {
                 text.box = new Box2D(
                     targetBox.x1, targetBox.y1,
@@ -591,6 +593,7 @@
             return [
                 factory.text(text.content, {
                     x: text.box.x1, y: text.box.y1,
+                    baseline: text.baseline,
                     font: text.options.font })
             ];
         }
@@ -2098,26 +2101,17 @@
             text.template = SVGText.template;
             if (!text.template) {
                 text.template = SVGText.template = template(
-                    "<text x='<%= options.x %>' y='<%= options._baselineY %>' " +
+                    "<text x='<%= options.x %>' y='<%= options.y + options.baseline %>' " +
                     "style='font: <%= options.font %>'><%= content %></text>"
                 );
             }
-
-            text.align();
         },
 
         options: {
             x: 0,
             y: 0,
-            _baselineY: 0,
+            baseline: 0,
             font: "16px Verdana, sans-serif"
-        },
-
-        align: function() {
-            var text = this,
-            size = measureText(text.content, { font: text.options.font });
-            text.options._baselineY = text.options.y + size.baseline;
-            text.options.y += size.baseline;
         }
     });
 
