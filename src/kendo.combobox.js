@@ -122,7 +122,9 @@
             ul[0].innerHTML = kendo.render(that.template, data);
             ul.height(length * 20 > height ? height : "auto");
 
-            that._options(data);
+            if (that.element.is("select")) {
+                that._options(data);
+            }
 
             if (length) {
                 if (suggest || options.highlightFirst) {
@@ -166,7 +168,8 @@
             var that = this,
                 word = that.text(),
                 length = word.length,
-                options = that.options;
+                options = that.options,
+                filter = options.filter;
 
             clearTimeout(that._typing);
 
@@ -174,11 +177,11 @@
                 that.close();
             } else if (length >= options.minLength) {
                 that.showBusy();
-                if (options.filter === "none") {
+                if (filter === "none") {
                     that._filter(word);
                 } else {
                     that._filtered = true;
-                    that.dataSource.filter( {field: options.dataTextField, operator: options.filter, value: word } );
+                    that.dataSource.filter( {field: options.dataTextField, operator: filter, value: word } );
                 }
             }
         },
