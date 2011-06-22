@@ -25,12 +25,12 @@
     function process(data, options) {
         var query = new Query(data),
             options = options || {},
-            page = options.page,
-            pageSize = options.pageSize,
             group = options.group,
             sort = Query.expandSort(options.sort).concat(Query.expandGroup(group || [])),
             total,
-            filter = options.filter;
+            filter = options.filter,
+            skip = options.skip,
+            take = options.take;
 
         if (filter) {
             query = query.filter(filter);
@@ -41,8 +41,8 @@
             query = query.sort(sort);
         }
 
-        if (page !== undefined && pageSize !== undefined) {
-            query = query.skip((page - 1) * pageSize).take(pageSize);
+        if (skip !== undefined && take !== undefined) {
+            query = query.skip(skip).take(take);
         }
 
         if (group) {
@@ -520,8 +520,8 @@
         read: function(additionalData) {
             var that = this,
                 options = extend(additionalData, {
-                    page: that._page,
-                    pageSize: that._pageSize,
+                    page: that.page(),
+                    pageSize: that.pageSize(),
                     sort: that._sort,
                     filter: that._filter,
                     group: that._group,
@@ -594,8 +594,12 @@
             });
 
             if (that.options.serverPaging !== true) {
-                options.page = that._page;
-                options.pageSize = that._pageSize;
+                options.skip = that._skip;
+                options.take = that._take || that._pageSize;
+
+                if(options.skip === undefined && that._page !== undefined && that._pageSize !== undefined) {
+                    options.skip = (that._page - 1) * that._pageSize;
+                }
             }
 
             if (that.options.serverSorting !== true) {
@@ -688,6 +692,18 @@
                 that._filter = options.filter;
                 that._group = options.group;
                 that._aggregates = options.aggregates;
+                that._skip = options.skip;
+                that._take = options.take;
+
+                if(that._skip === undefined && that._page !== undefined) {
+                    that._skip = (that._page - 1) * (that._pageSize || 1);
+                    options.skip = that._skip;
+                }
+
+                if(that._take === undefined && that._pageSize !== undefined) {
+                    that._take = that._pageSize;
+                    options.take = that._take;
+                }
 
                 if (options.sort) {
                     that._sort = options.sort = Query.expandSort(options.sort);
@@ -728,6 +744,7 @@
                 that.query({ page: val, pageSize: that.pageSize(), sort: that.sort(), filter: that.filter(), group: that.group(), aggregates: that.aggregate()});
                 return;
             }
+            //return Math.ceil((that._skip || 0) / (that._take || 1)) + 1;
             return that._page;
         },
 
@@ -789,14 +806,25 @@
 
             return that._aggregates;
         },
+
         aggregates: function() {
             return this._aggregateResult;
         },
+
         _totalPages: function() {
             var that = this,
                 pageSize = that.pageSize() || that.total();
 
             return Math.ceil((that.total() || 0) / pageSize);
+        },
+
+        range: function(index, count) {
+            var that = this;
+            if(count !== undefined) {
+                index = index || 0;
+
+                that.query({ skip: index, take: count, sort: that.sort(), filter: that.filter(), group: that.group(), aggregates: that.aggregate()  });
+            }
         }
     });
 
