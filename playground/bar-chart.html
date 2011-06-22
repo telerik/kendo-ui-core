@@ -40,31 +40,30 @@
                             c: 35
                         }
                     ],
+                    seriesDefaults: {
+                        labels: {
+                            font: "12px Verdana, sans-serif",
+                            visible: true,
+                            background: "#cf0",
+                            border: {
+                                color: "#8b0",
+                                width: 1
+                            }
+                        }
+                    },
                     series: [
                         {
                             name: "Value A",
-                            field: "a",
-                            labels: {
-                                font: "12px Verdana, sans-serif",
-                                visible: true
-                                // "outsideEnd", "insideEnd", "insideBase", "center"
-                            }
+                            field: "a"
                         }, {
                             name: "Value B",
                             field: "b",
                             labels: {
-                                font: "12px Verdana, sans-serif",
-                                visible: true
-                                // "outsideEnd", "insideEnd", "insideBase", "center"
+                                background: "#fc0"
                             }
                         }, {
                             name: "Value C",
-                            field: "c",
-                            labels: {
-                                font: "12px Verdana, sans-serif",
-                                visible: true
-                                // "outsideEnd", "insideEnd", "insideBase", "center"
-                            }
+                            field: "c"
                         }
                     ],
                     categoryAxis: {

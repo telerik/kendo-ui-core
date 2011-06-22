@@ -322,6 +322,30 @@
             return this;
         },
 
+        pad: function(padding) {
+            var box = this,
+                spacing = getSpacing(padding);
+
+            box.x1 -= spacing.left;
+            box.x2 += spacing.right;
+            box.y1 -= spacing.top;
+            box.y2 += spacing.bottom;
+
+            return box;
+        },
+
+        unpad: function(padding) {
+            var box = this,
+                spacing = getSpacing(padding);
+
+            spacing.left = -spacing.left;
+            spacing.top = -spacing.top;
+            spacing.right = -spacing.right;
+            spacing.bottom = -spacing.bottom;
+
+            return box.pad(spacing);
+        },
+
         clone: function() {
             var box = this;
 
@@ -440,10 +464,13 @@
         updateLayout: function(targetBox) {
             var element = this,
                 box,
-                childBox,
+                contentBox,
                 options = element.options,
                 children = element.children,
-                margin = getMargin(options.margin);
+                margin = getSpacing(options.margin),
+                padding = getSpacing(options.padding),
+                border = options.border,
+                borderWidth = border.width;
 
             ChartElement.fn.updateLayout.call(element, targetBox);
 
@@ -453,16 +480,18 @@
                 box = element.box;
             }
 
-            childBox = box.clone();
+            contentBox = box.clone();
 
-            box.expand(margin.left + margin.right, margin.top + margin.bottom);
+            box.pad(padding).pad(borderWidth).pad(margin);
 
             element.align(targetBox, X, options.align);
             element.align(targetBox, Y, options.vAlign);
 
+            element.paddingBox = box.clone().unpad(margin).unpad(borderWidth);
+
             element.translateChildren(
-                box.x1 - childBox.x1 + margin.left,
-                box.y1 - childBox.y1 + margin.top);
+                box.x1 - contentBox.x1 + margin.left + borderWidth + padding.left,
+                box.y1 - contentBox.y1 + margin.top + borderWidth + padding.left);
         },
 
         align: function(targetBox, axis, alignment) {
@@ -490,7 +519,7 @@
                 options = element.options,
                 border = options.border || {},
                 elements = [
-                    factory.rect(element.box, {
+                    factory.rect(element.paddingBox, {
                         stroke: border.width ? border.color : "",
                         strokeWidth: border.width,
                         fill: options.background })
@@ -592,7 +621,9 @@
         options: {
             font: "16px Verdana, sans-serif",
             aboveAxis: true,
-            position: "outsideEnd"
+            position: "outsideEnd",
+            margin: 2,
+            padding: 2
         },
 
         updateLayout: function(targetBox, isVertical) {
@@ -797,7 +828,7 @@
                 labelBox = children[0].box.clone(),
                 offsetX,
                 offsetY,
-                margin = getMargin(options.margin);
+                margin = getSpacing(options.margin);
 
             // Position labels below each other
             for (var i = 1; i < childrenCount; i++) {
@@ -836,7 +867,7 @@
                 markerWidth = legend.markerSize() * 3,
                 offsetX,
                 offsetY,
-                margin = getMargin(options.margin);
+                margin = getSpacing(options.margin);
 
             // Position labels next to each other
             for (var i = 1; i < childrenCount; i++) {
@@ -876,7 +907,7 @@
                 markerWidth = legend.markerSize() * 2,
                 offsetX,
                 offsetY,
-                margin = getMargin(options.margin);
+                margin = getSpacing(options.margin);
 
             // Position labels next to each other
             for (var i = 1; i < childrenCount; i++) {
@@ -1809,7 +1840,7 @@
                 axisY = plotArea.axisY,
                 axisX = plotArea.axisX,
                 options = plotArea.options.plotArea,
-                margin = getMargin(options.margin);
+                margin = getSpacing(options.margin);
 
             plotArea.box = targetBox.clone();
             plotArea.box.x1 += margin.left;
@@ -2412,13 +2443,13 @@
         return { min: min, max: max };
     }
 
-    function getMargin(value) {
-        var margin = {};
+    function getSpacing(value) {
+        var spacing = {};
         $.each(["top", "right", "bottom", "left"], function() {
-            margin[this] = typeof(value) === "number" ? value : value[this] || 0;
+            spacing[this] = typeof(value) === "number" ? value : value[this] || 0;
         });
 
-        return margin;
+        return spacing;
     }
 
     function inArray(value, array) {
