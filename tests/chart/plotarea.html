@@ -282,25 +282,29 @@
                     ok(plotArea.charts[0].options.isStacked);
                 });
 
-                // ------------------------------------------------------------
-                module("PlotArea / Gridlines", {
-                    setup: function() {
-                        viewFactory = new ViewFactoryStub();
-                    }
-                });
+            })();
 
 
-                test("renders gridlines", function() {
+            (function() {
+                var plotArea,
+                    viewFactory,
+                    axisY,
+                    axisX,
+                    barSeriesData = [{
+                        name: "Value A",
+                        type: "bar",
+                        data: [100]
+                    }];
+
+                function createPlotArea(categoryAxis, valueAxis) {
                     plotArea = new Chart.PlotArea({
-                        series: [{
-                            name: "Value A",
-                            type: "bar",
-                            data: [100]
-                        }],
-                        categoryAxis: {
-                            categories: ["A"]
-                        }
+                        series: barSeriesData,
+                        categoryAxis: categoryAxis,
+                        valueAxis: valueAxis
                     });
+
+                    axisY = plotArea.axisY;
+                    axisX = plotArea.axisX;
 
                     stubMethod(Chart.NumericAxis, "getViewElements", function() {},
                         function() {
@@ -310,8 +314,192 @@
                                     plotArea.getViewElements(viewFactory);
                                 }
                     )});
+                }
+
+                // ------------------------------------------------------------
+                module("PlotArea / Major Gridlines", {
+                    setup: function() {
+                        viewFactory = new ViewFactoryStub();
+                    }
+                });
+
+
+                test("renders gridlines", function() {
+                    createPlotArea({
+                        categories: ["A"],
+                        majorGridLines: {
+                            visible: true
+                        }
+                    });
 
                     equal(viewFactory.log.line.length, 7);
+                });
+
+                test("should not render gridlines for numeric axis", function() {
+                    var categoryAxis = {
+                            categories: ["A"],
+                            majorGridLines: {
+                                visible: true
+                            }
+                        },
+                        valueAxis = {
+                            majorGridLines: {
+                                visible: false
+                            }
+                        };
+
+                    createPlotArea(categoryAxis, valueAxis);
+
+                    equal(viewFactory.log.line.length, 1);
+                });
+
+                test("should not render gridlines for category axis", function() {
+                    var categoryAxis = {
+                            categories: ["A"]
+                        };
+
+                    createPlotArea(categoryAxis);
+
+                    equal(viewFactory.log.line.length, 6);
+                });
+
+                test("should not render gridlines", function() {
+                    var categoryAxis = {
+                            categories: ["A"],
+                            majorGridLines: {
+                                visible: false
+                            }
+                        },
+                        valueAxis = {
+                            majorGridLines: {
+                                visible: false
+                            }
+                        };
+
+                    createPlotArea(categoryAxis, valueAxis);
+
+                    equal(viewFactory.log.line.length, 0);
+                });
+
+                // ------------------------------------------------------------
+                module("PlotArea / Minor Gridlines", {
+                    setup: function() {
+                        viewFactory = new ViewFactoryStub();
+                    }
+                });
+
+
+                test("renders gridlines", function() {
+                    var categoryAxis = {
+                            categories: ["A"],
+                            majorGridLines: {
+                                visible: false
+                            },
+                            minorGridLines: {
+                                visible: true
+                            }
+                        },
+                        valueAxis = {
+                            majorGridLines: {
+                                visible: false
+                            },
+                            minorGridLines: {
+                                visible: true
+                            }
+                        };
+
+                    createPlotArea(categoryAxis, valueAxis);
+
+                    equal(viewFactory.log.line.length, 32);
+                });
+
+                test("should not render gridlines for numeric axis", function() {
+                    var categoryAxis = {
+                            categories: ["A"],
+                            majorGridLines: {
+                                visible: false
+                            },
+                            minorGridLines: {
+                                visible: true
+                            }
+                        },
+                        valueAxis = {
+                            majorGridLines: {
+                                visible: false
+                            },
+                            minorGridLines: {
+                                visible: false
+                            }
+                        };
+
+                    createPlotArea(categoryAxis, valueAxis);
+
+                    equal(viewFactory.log.line.length, 2);
+                });
+
+                test("should not render gridlines for category axis", function() {
+                    var categoryAxis = {
+                            categories: ["A"]
+                        },
+                        valueAxis = {
+                            majorGridLines: {
+                                visible: false
+                            },
+                            minorGridLines: {
+                                visible: true
+                            }
+                        };
+
+                    createPlotArea(categoryAxis, valueAxis);
+
+                    equal(viewFactory.log.line.length, 30);
+                });
+
+                test("should not render gridlines", function() {
+                    var categoryAxis = {
+                            categories: ["A"]
+                        },
+                        valueAxis = {
+                            majorGridLines: {
+                                visible: false
+                            }
+                        };
+
+                    createPlotArea(categoryAxis, valueAxis);
+
+                    equal(viewFactory.log.line.length, 0);
+                });
+
+                // ------------------------------------------------------------
+                module("PlotArea / Major and Minor GridLines", {
+                    setup: function() {
+                        viewFactory = new ViewFactoryStub();
+                    }
+                });
+
+
+                test("should not render minor and major gridline to a same point", function() {
+                    var categoryAxis = {
+                            categories: ["A"],
+                            majorGridLines: {
+                                visible: true
+                            },
+                            minorGridLines: {
+                                visible: true
+                            }
+                        },
+                        valueAxis = {
+                            majorGridLines: {
+                                visible: true
+                            },
+                            minorGridLines: {
+                                visible: true
+                            }
+                        };
+
+                    createPlotArea(categoryAxis, valueAxis);
+
+                    equal(viewFactory.log.line.length, 32);
                 });
             })();
         </script>
