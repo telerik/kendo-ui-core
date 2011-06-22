@@ -143,12 +143,10 @@
                             "<text>Text</text>");
                 });
 
-                test("text is aligned to top", function() {
-                    var yDiff = Math.abs(text.options._baselineY - 15);
-
-                    ok(yDiff <= 2,
-                        "_baselineY should be roughly 15, actual value "
-                        + text.options._baselineY);
+                test("baseline is added to y", function() {
+                    text.options.y = 5;
+                    text.options.baseline = 5;
+                    ok(text.render().indexOf("y='10'") > -1);
                 });
 
                 test("sets font", function() {
