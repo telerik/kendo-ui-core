@@ -170,9 +170,29 @@
                     ok(path.render().indexOf("fillcolor='#f00'") > -1);
                 });
 
+                test("sets filled attribute when fill color is set", function() {
+                    path.options.fill = "#f00";
+                    ok(path.render().indexOf("filled='true'") > -1);
+                });
+
+                test("sets filled attribute when fill color is not set", function() {
+                    path.options.fill = "";
+                    ok(path.render().indexOf("filled='false'") > -1);
+                });
+
                 test("renders stroke color", function() {
                     path.options.stroke = "#f00";
                     ok(path.render().indexOf("strokecolor='#f00'") > -1);
+                });
+
+                test("sets stroked attribute when stroke color is set", function() {
+                    path.options.stroke = "#f00";
+                    ok(path.render().indexOf("stroked='true'") > -1);
+                });
+
+                test("sets stroked attribute when stroke color is not set", function() {
+                    path.options.stroke = "";
+                    ok(path.render().indexOf("stroked='false'") > -1);
                 });
 
                 test("renders stroke width", function() {

@@ -293,17 +293,15 @@
                     });
                 });
 
-                test("top alignment", function() {
+                test("children moved after top alignment", function() {
                     boxElement.updateLayout(targetBox);
 
                     $.each(childElements, function() {
                         equal(this.box.y1, targetBox.y1);
                     });
-
-                    console.log(boxElement.box, targetBox);
                 });
 
-                test("bottom alignment", function() {
+                test("children moved after bottom alignment", function() {
                     boxElement.options.vAlign = "bottom";
                     boxElement.updateLayout(targetBox);
 
@@ -311,7 +309,7 @@
                     equal(childElements[1].box.y2, 200);
                 });
 
-                test("vertical center alignment", function() {
+                test("children moved after vertical center alignment", function() {
                     boxElement.options.vAlign = "center";
                     boxElement.updateLayout(targetBox);
 
@@ -319,7 +317,7 @@
                     equal(childElements[1].box.y1, 140);
                 });
 
-                test("left alignment", function() {
+                test("children moved after left alignment", function() {
                     boxElement.updateLayout(targetBox);
 
                     $.each(childElements, function() {
@@ -327,7 +325,7 @@
                     });
                 });
 
-                test("right alignment", function() {
+                test("children moved after right alignment", function() {
                     boxElement.options.align = "right";
                     boxElement.updateLayout(targetBox);
 
@@ -335,12 +333,55 @@
                     equal(childElements[1].box.x2, 200);
                 });
 
-                test("horizontal center alignment", function() {
+                test("children moved after horizontal center alignment", function() {
                     boxElement.options.align = "center";
                     boxElement.updateLayout(targetBox);
 
                     equal(childElements[0].box.x1, 140);
                     equal(childElements[1].box.x1, 140);
+                });
+
+                // ------------------------------------------------------------
+                var factory;
+
+                module("BoxElement / Rendering", {
+                    setup: function() {
+                        boxElement = new Chart.BoxElement();
+                        factory = new ViewFactoryStub();
+                    }
+                });
+
+                test("renders border width", function() {
+                    boxElement.options.border.width = 1;
+                    boxElement.updateLayout(targetBox);
+                    boxElement.getViewElements(factory);
+
+                    equal(factory.log.rect[0].style.strokeWidth, 1);
+                });
+
+                test("renders border color", function() {
+                    boxElement.options.border.color = "#f00";
+                    boxElement.options.border.width = 1;
+                    boxElement.updateLayout(targetBox);
+                    boxElement.getViewElements(factory);
+
+                    equal(factory.log.rect[0].style.stroke, "#f00");
+                });
+
+                test("does not render border color when no width is set", function() {
+                    boxElement.options.border.color = "#f00";
+                    boxElement.updateLayout(targetBox);
+                    boxElement.getViewElements(factory);
+
+                    equal(factory.log.rect[0].style.stroke, "");
+                });
+
+                test("renders fill color", function() {
+                    boxElement.options.background = "#f00";
+                    boxElement.updateLayout(targetBox);
+                    boxElement.getViewElements(factory);
+
+                    equal(factory.log.rect[0].style.fill, "#f00");
                 });
 
             })();
