@@ -187,6 +187,54 @@
                 equal(box.move(0, 0), box);
             });
 
+            test("pad adds top padding", function() {
+                var clone = box.clone().pad(10);
+                equal(clone.y1, box.y1 - 10);
+            });
+
+            test("pad adds right padding", function() {
+                var clone = box.clone().pad(10);
+                equal(clone.x2, box.x2 + 10);
+            });
+
+            test("pad adds bottom padding", function() {
+                var clone = box.clone().pad(10);
+                equal(clone.y2, box.y2 + 10);
+            });
+
+            test("pad adds left padding", function() {
+                var clone = box.clone().pad(10);
+                equal(clone.x1, box.x1 - 10);
+            });
+
+            test("pad returns box instance", function() {
+                equal(box.pad(0), box);
+            });
+
+            test("unpad adds top padding", function() {
+                var clone = box.clone().unpad(10);
+                equal(clone.y1, box.y1 + 10);
+            });
+
+            test("unpad adds right padding", function() {
+                var clone = box.clone().unpad(10);
+                equal(clone.x2, box.x2 - 10);
+            });
+
+            test("unpad adds bottom padding", function() {
+                var clone = box.clone().unpad(10);
+                equal(clone.y2, box.y2 - 10);
+            });
+
+            test("unpad adds left padding", function() {
+                var clone = box.clone().unpad(10);
+                equal(clone.x1, box.x1 + 10);
+            });
+
+            test("unpad returns box instance", function() {
+                equal(box.unpad(0), box);
+            });
+
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>

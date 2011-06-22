@@ -192,6 +192,30 @@
                           targetBox.y1 + HEIGHT + 2 * MARGIN]);
                 });
 
+                test("padding is added to outer box", function() {
+                    boxElement.options.padding = PADDING;
+                    boxElement.updateLayout(targetBox);
+
+                    equal(boxElement.box.width(), WIDTH + 2 * PADDING);
+                    equal(boxElement.box.height(), HEIGHT + 2 * PADDING);
+                });
+
+                test("border is added to outer box", function() {
+                    boxElement.options.border.width = BORDER;
+                    boxElement.updateLayout(targetBox);
+
+                    equal(boxElement.box.width(), WIDTH + 2 * BORDER);
+                    equal(boxElement.box.height(), HEIGHT + 2 * BORDER);
+                });
+
+                test("margin is added to outer box", function() {
+                    boxElement.options.margin = MARGIN;
+                    boxElement.updateLayout(targetBox);
+
+                    equal(boxElement.box.width(), WIDTH + 2 * MARGIN);
+                    equal(boxElement.box.height(), HEIGHT + 2 * MARGIN);
+                });
+
                 // ------------------------------------------------------------
                 module("BoxElement / Alignment", {
                     setup: function() {
@@ -200,7 +224,7 @@
                             height: HEIGHT,
                             margin: MARGIN,
                             padding: PADDING,
-                            border: BORDER
+                            border: { width: BORDER }
                         });
                     }
                 });
@@ -346,7 +370,10 @@
 
                 module("BoxElement / Rendering", {
                     setup: function() {
-                        boxElement = new Chart.BoxElement();
+                        boxElement = new Chart.BoxElement({
+                            width: WIDTH,
+                            height: HEIGHT
+                        });
                         factory = new ViewFactoryStub();
                     }
                 });
@@ -382,6 +409,36 @@
                     boxElement.getViewElements(factory);
 
                     equal(factory.log.rect[0].style.fill, "#f00");
+                });
+
+                test("content box includes padding", function() {
+                    boxElement.options.padding = PADDING;
+                    boxElement.updateLayout(targetBox);
+                    boxElement.getViewElements(factory);
+
+                    var rect = factory.log.rect[0];
+                    equal(rect.x2 - rect.x1, WIDTH + 2 * PADDING);
+                    equal(rect.y2 - rect.y1, HEIGHT + 2 * PADDING);
+                });
+
+                test("padding box does not include border", function() {
+                    boxElement.options.border.width = BORDER;
+                    boxElement.updateLayout(targetBox);
+                    boxElement.getViewElements(factory);
+
+                    var rect = factory.log.rect[0];
+                    equal(rect.x2 - rect.x1, WIDTH);
+                    equal(rect.y2 - rect.y1, HEIGHT);
+                });
+
+                test("padding box does not include margin", function() {
+                    boxElement.options.margin = MARGIN;
+                    boxElement.updateLayout(targetBox);
+                    boxElement.getViewElements(factory);
+
+                    var rect = factory.log.rect[0];
+                    equal(rect.x2 - rect.x1, WIDTH);
+                    equal(rect.y2 - rect.y1, HEIGHT);
                 });
 
             })();
