@@ -42,7 +42,7 @@
         }
 
         if (skip !== undefined && take !== undefined) {
-            query = query.skip(skip).take(take);
+            query = query.range(skip, take);
         }
 
         if (group) {

@@ -238,6 +238,9 @@
         toArray: function () {
             return this.data;
         },
+        range: function(index, count) {
+            return new Query(this.data.slice(index, index + count));
+        },
         skip: function (count) {
             return new Query(this.data.slice(count));
         },
