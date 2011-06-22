@@ -428,7 +428,11 @@
             vAlign: TOP,
             margin: { },
             padding: { },
-            border: { },
+            border: {
+                color: "#000",
+                width: 0
+            },
+            background: "",
             width: 0,
             height: 0
         },
@@ -479,6 +483,22 @@
                 box[c1] = targetBox[c1] + (targetBox[sizeFunc]() - size) / 2;
                 box[c2] = box[c1] + size;
             }
+        },
+
+        getViewElements: function(factory) {
+            var element = this,
+                options = element.options,
+                border = options.border || {},
+                elements = [
+                    factory.rect(element.box, {
+                        stroke: border.width ? border.color : "",
+                        strokeWidth: border.width,
+                        fill: options.background })
+                ];
+
+            return elements.concat(
+                ChartElement.fn.getViewElements.call(element, factory)
+            );
         }
     });
 
@@ -558,12 +578,6 @@
 
             // Calculate size
             textBox.updateLayout(defaultBox);
-        },
-
-        options: {
-            align: LEFT,
-            vAlign: TOP,
-            margin: { }
         }
     });
 
@@ -2009,7 +2023,8 @@
                 path.template = SVGPath.template = template(
                     "<path d='<%= renderPoints() %>' " +
                     "stroke='<%= options.stroke %>' stroke-width='<%= options.strokeWidth %>' " +
-                    "fill='<%= options.fill %>'></path>"
+                    "stroke-linecap='square' " +
+                    "fill='<%= options.fill || 'none' %>'></path>"
                 );
             }
 
@@ -2019,18 +2034,21 @@
         options: {
             stroke: "#000",
             strokeWidth: 1,
-            fill: "#fff"
+            fill: ""
         },
 
         renderPoints: function() {
-            var points = this.points,
+            var path = this,
+                points = this.points,
                 count = points.length,
+                shouldAlign = path.options.strokeWidth % 2 !== 0,
+                alignFunc = shouldAlign ? alignToPixel : Math.round,
                 first = points[0],
-                result = "M" + alignToPixel(first[0]) + " " + alignToPixel(first[1]);
+                result = "M" + alignFunc(first[0]) + " " + alignFunc(first[1]);
 
             for (var i = 1; i < count; i++) {
                 var p = points[i];
-                result += " L" + alignToPixel(p[0]) + " " + alignToPixel(p[1]);
+                result += " L" + alignFunc(p[0]) + " " + alignFunc(p[1]);
             }
 
             return result;
@@ -2122,9 +2140,9 @@
             if (!path.template) {
                 path.template = VMLPath.template = template(
                     "<kvml:shape style='position:absolute; width:1px; height:1px;' " +
-                    "strokecolor='<%= options.stroke %>' " +
+                    "strokecolor='<%= options.stroke %>' stroked='<%= !!options.stroke %>' " +
                     "strokeweight='<%= options.strokeWidth %>' " +
-                    "fillcolor='<%= options.fill %>' " +
+                    "fillcolor='<%= options.fill %>' filled='<%= !!options.fill %>' " +
                     "coordorigin='0 0' coordsize='1 1'>" +
                     "<kvml:path v='<%= renderPoints() %> e' /></kvml:shape>"
                 );
@@ -2328,7 +2346,7 @@
     }
 
     function inArray(value, array) {
-        return array.indexOf(value) != -1;
+        return $.inArray(value, array) != -1;
     }
 
     function deepExtend(destination) {

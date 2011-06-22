@@ -29,6 +29,22 @@
                 ok(Subclass.prototype.method);
             });
 
+            test("extend merges object members", function() {
+                var Parent = Class.extend({
+                    options: {
+                        a: 1
+                    }
+                });
+
+                var Child = Parent.extend({
+                    options: {
+                        b: 2
+                    }
+                });
+
+                ok(Child.prototype.options.a == 1 && Child.prototype.options.b == 2);
+            });
+
             test("extend aliases the prototype as fn", function() {
                 var Subclass = Class.extend();
 

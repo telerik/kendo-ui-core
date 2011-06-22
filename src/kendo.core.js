@@ -32,7 +32,7 @@
             };
 
         base.prototype = that.prototype;
-        subclass.fn = subclass.prototype = extend(new base, proto);
+        subclass.fn = subclass.prototype = extend(true, new base, proto);
         subclass.fn.constructor = subclass;
         subclass.extend = that.extend;
 
