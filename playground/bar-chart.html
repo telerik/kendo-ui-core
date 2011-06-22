@@ -68,11 +68,25 @@
                         }
                     ],
                     categoryAxis: {
-                        field: "name"
+                        field: "name",
+                        majorGridLines: {
+                            width: 1.5,
+                            color: "#4C8FBA"
+                        },
+                        minorGridLines: {
+                            width: 1,
+                            color: "#4C8FBA"
+                        }
                     },
                     valueAxis: {
-                        min: -40,
-                        max: 40
+                        majorGridLines: {
+                            width: 1,
+                            color: "#4C8FBA"
+                        },
+                        minorGridLines: {
+                            width: 1,
+                            color: "#4C8FBA"
+                        }
                     }
                 });
             });

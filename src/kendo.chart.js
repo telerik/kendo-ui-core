@@ -937,7 +937,17 @@
             majorTickType: OUTSIDE,
             tickSize: 4,
             axisCrossingValue: 0,
-            orientation: VERTICAL
+            orientation: VERTICAL,
+            majorGridLines: {
+                visible: true,
+                width: 1,
+                color: "#000"
+            },
+            minorGridLines: {
+                visible: false,
+                width: 1,
+                color: "#000"
+            }
         },
 
         updateLayout: function(targetBox) {
@@ -1128,14 +1138,20 @@
             return Math.round((options.max - options.min) / options.majorUnit) + 1;
         },
 
-        getMajorTickPositions: function() {
+        getMinorDevisions: function() {
+            var options = this.options;
+
+            return ((Math.round(options.max - options.min) / options.majorUnit) * 5) + 1;
+        },
+
+        getTickPositions: function(divisions) {
             var axis = this,
                 options = axis.options,
                 isVertical = options.orientation === VERTICAL,
                 children = axis.children,
                 box = axis.box,
                 lineBox = axis.getAxisLineBox(),
-                majorDivisions = axis.getMajorDivisions(),
+                majorDivisions = divisions,
                 lineSize = isVertical ? lineBox.height() : lineBox.width(),
                 step = lineSize / (majorDivisions - 1),
                 pos = lineBox[(isVertical ? Y : X) + 1],
@@ -1147,6 +1163,18 @@
             }
 
             return positions;
+        },
+
+        getMajorTickPositions: function() {
+            var axis = this;
+
+            return axis.getTickPositions(axis.getMajorDivisions());
+        },
+
+        getMinorTickPositions: function() {
+            var axis = this;
+
+            return axis.getTickPositions(axis.getMinorDevisions());
         },
 
         getAxisLineBox: function() {
@@ -1225,7 +1253,17 @@
             tickSize: 4,
             majorTickType: OUTSIDE,
             axisCrossingValue: 0,
-            orientation: HORIZONTAL
+            orientation: HORIZONTAL,
+            majorGridLines: {
+                visible: false,
+                width: 1,
+                color: "#000"
+            },
+            minorGridLines: {
+                visible: false,
+                width: 1,
+                color: "#000"
+            }
         },
 
         updateLayout: function(targetBox) {
@@ -1338,17 +1376,16 @@
             }
         },
 
-        getMajorTickPositions: function() {
+        getTickPositions: function(itemsCount) {
             var axis = this,
                 options = axis.options,
                 isVertical = options.orientation === VERTICAL,
-                children = axis.children,
                 size = isVertical ? axis.box.height() : axis.box.width(),
-                step = size / children.length,
+                step = size / itemsCount,
                 pos = isVertical ? axis.box.y1 : axis.box.x1,
                 positions = [];
 
-            for (var i = 0; i < children.length; i++) {
+            for (var i = 0; i < itemsCount; i++) {
                 positions.push(pos);
                 pos += step;
             };
@@ -1356,6 +1393,18 @@
             positions.push(isVertical ? axis.box.y2 : axis.box.x2);
 
             return positions;
+        },
+
+        getMajorTickPositions: function() {
+            var axis = this;
+
+            return axis.getTickPositions(axis.options.categories.length);
+        },
+
+        getMinorTickPositions: function() {
+            var axis = this;
+
+            return axis.getTickPositions(axis.options.categories.length * 2);
         },
 
         getSlot: function(categoryIx) {
@@ -1823,18 +1872,37 @@
                 lineStart = boundaries[0],
                 lineEnd = boundaries.pop(),
                 linePos,
+                majorTicks = axis.getMajorTickPositions(),
                 gridLines = [];
 
-                //if (options.majorGridLines.visible) {
+                if (options.majorGridLines.visible) {
+                    gridLines = $.map(majorTicks, function(pos) {
+                                    return {
+                                        pos: pos,
+                                        options: options.majorGridLines
+                                    };
+                                });
+                }
+
+                if (options.minorGridLines.visible) {
                     gridLines = gridLines.concat(
-                        $.map(axis.getMajorTickPositions(), function(pos) {
-                            return {
-                                pos: pos,
-                                options: options.majorGridLines
-                            };
+                        $.map(axis.getMinorTickPositions(), function(pos) {
+                            if (options.majorGridLines.visible) {
+                                if (!inArray(pos, majorTicks)) {
+                                    return {
+                                        pos: pos,
+                                        options: options.minorGridLines
+                                    };
+                                }
+                            } else {
+                                return {
+                                    pos: pos,
+                                    options: options.minorGridLines
+                                };
+                            }
                         }
                     ));
-                //}
+                }
 
                 return $.map(gridLines, function(line) {
                     linePos = line.pos;
@@ -1845,10 +1913,18 @@
 
                     if (isVertical) {
                         return factory.line(
-                            lineStart, linePos, lineEnd, linePos, line.options);
+                            lineStart, linePos, lineEnd, linePos,
+                            {
+                                strokeWidth: line.options.width,
+                                stroke: line.options.color
+                            });
                     } else {
                         return factory.line(
-                            linePos, lineStart, linePos, lineEnd, line.options);
+                            linePos, lineStart, linePos, lineEnd,
+                            {
+                                strokeWidth: line.options.width,
+                                stroke: line.options.color
+                            });
                     }
                 });
         },
@@ -1939,8 +2015,8 @@
             );
         },
 
-        line: function(x1, y1, x2, y2) {
-            return new SVGPath([[x1, y1], [x2, y2]]);
+        line: function(x1, y1, x2, y2, options) {
+            return new SVGPath([[x1, y1], [x2, y2]], options);
         }
     };
 
@@ -2078,8 +2154,8 @@
             );
         },
 
-        line: function(x1, y1, x2, y2) {
-            return new VMLPath([[x1, y1], [x2, y2]]);
+        line: function(x1, y1, x2, y2, options) {
+            return new VMLPath([[x1, y1], [x2, y2]], options);
         },
 
         group: function(options) {
