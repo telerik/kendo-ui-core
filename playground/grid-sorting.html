@@ -183,7 +183,7 @@
             var totalHeight = data.length * rowHeight;
             var rowsPerPage = $(".grid-data").outerHeight() / rowHeight;
 
-            $("<div />").height(totalHeight).width(10).appendTo($(".grid-scroller"));
+            $("<div />").height(totalHeight).width(17).appendTo($(".grid-scroller"));
 
             var ratio = rowsPerPage / dataSource.pageSize();
             var firstRowIndex = 0;
@@ -191,30 +191,43 @@
             var skip = 0;
             var page = 1;
             var last = 23;
+            var first = 0;
             var scroll = 0;
+            var timeout;
 
             $(".grid-scroller").bind("scroll", function(e) {
-                firstRowIndex = Math.floor(this.scrollTop / rowHeight);
-                lastRowIndex = Math.floor((this.scrollTop + visibleHeight) / rowHeight);
+               // clearTimeout(timeout);
+               // timeout = setTimeout($.proxy(function() {
+                    firstRowIndex = Math.floor(this.scrollTop / rowHeight);
+                    lastRowIndex = Math.floor((this.scrollTop + visibleHeight) / rowHeight);
 
-                var take = dataSource.pageSize();
+                    var take = dataSource.pageSize();
+                    page = dataSource.page();
 
-                if (lastRowIndex > last) {
-                    skip = firstRowIndex;
-                    page = (skip / take) + 1;
-                    last = firstRowIndex + take;
+                    first = (page - 1) * take;
+                    last = first + take;
 
-                    dataSource.page(page);
+                    if (firstRowIndex < first) {
+                        skip = firstRowIndex - take;
+                        page = (skip / take) + 1;
 
-                    $(".grid-data").scrollTop(rowHeight);
-                } else {
-                    scroll = this.scrollTop - (skip * rowHeight);
-                    $(".grid-data").scrollTop(scroll);
-                }
+                        dataSource.page(page);
 
-                e.preventDefault();
+                        $(".grid-data").scrollTop(0);
+                    } else if (lastRowIndex > last) {
+                        skip = firstRowIndex;
+                        page = (skip / take) + 1;
 
-                log();
+                        dataSource.page(page);
+
+                        $(".grid-data").scrollTop(rowHeight);
+                    } else {
+                        scroll = this.scrollTop - (skip * rowHeight);
+                        $(".grid-data").scrollTop(scroll);
+                    }
+
+                    log();
+               // }, this), 0);
             });
 
             function log() {
