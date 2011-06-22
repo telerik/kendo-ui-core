@@ -143,14 +143,15 @@
 
         overlay: function (visible) {
             var overlay = $("body > .t-overlay"),
-                doc = $(document);
+                doc = $(document),
+                wrapper = this.wrapper[0];
 
             if (overlay.length == 0) {
                 overlay = $("<div class='t-overlay' />")
                     .toggle(visible)
-                    .appendTo(this.wrapper[0].ownerDocument.body);
+                    .insertBefore(wrapper);
             } else {
-                overlay.toggle(visible);
+                overlay.insertBefore(wrapper).toggle(visible);
             }
 
             if ($.browser.msie && $.browser.version < 7) {
@@ -262,8 +263,13 @@
 
             if (wrapper.is(":visible")) {
                 if (!that.trigger(CLOSE)) {
+                    function windowObject(element) {
+                        return element.find(".t-window-content").data("kendoWindow");
+                    }
+
                     var openedModalWindows = $(TWINDOW).filter(function() {
-                        return $(this).is(":visible") && options.modal;
+                        var wnd = $(this);
+                        return wnd.is(":visible") && windowObject(wnd).options.modal;
                     });
 
                     var shouldHideOverlay = options.modal && openedModalWindows.length == 1;
@@ -280,6 +286,8 @@
                         } else {
                             overlay.hide();
                         }
+                    } else {
+                        windowObject(openedModalWindows.eq(openedModalWindows.length - 2)).overlay(true);
                     }
 
                     wrapper.kendoStop().kendoAnimate({
@@ -425,16 +433,21 @@
 
             that.wrapper.remove();
 
-            var openedModalWindows = $(TWINDOW)
-                .filter(function() {
-                    var window = $(this);
-                    return window.is(":visible") && that.options.modal;
-                });
+            function windowObject(element) {
+                return element.find(".t-window-content").data("kendoWindow");
+            }
+
+            var openedModalWindows = $(TWINDOW).filter(function() {
+                var wnd = $(this);
+                return wnd.is(":visible") && windowObject(wnd).options.modal;
+            });
 
             var shouldHideOverlay = that.options.modal && openedModalWindows.length == 0;
 
             if (shouldHideOverlay) {
                 that.overlay(false).remove();
+            } else if (openedModalWindows.length > 0) {
+                windowObject(openedModalWindows.eq(openedModalWindows.length - 2)).overlay(true);
             }
         }
     });

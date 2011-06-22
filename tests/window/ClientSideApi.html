@@ -9,36 +9,32 @@
         <script src="../../src/kendo.draganddrop.js"></script>
         <script src="../../src/kendo.fx.js"></script>
         <script src="../../src/kendo.window.js"></script>
-        <script type="text/javascript" src="../jquery.mockjax.js"></script>
+        <script src="../jquery.mockjax.js"></script>
         <link rel="stylesheet" href="../qunit.css" />
-        <link type="text/css" href="../../styles/kendo.common.css" rel="stylesheet"/>
-        <link type="text/css" href="../../styles/kendo.vista.css" rel="stylesheet"/>
+        <link href="../../styles/kendo.common.css" rel="stylesheet"/>
+        <link href="../../styles/kendo.vista.css" rel="stylesheet"/>
     </head>
     <body>
 
         <script type="text/javascript">
-            var Window = kendo.ui.Window,
-                div = {};
+            var Window = kendo.ui.Window;
 
-            module("Window / ClientSideAPI", {
-                setup: function () {
-                    div = $("<div />").appendTo(document.body);
-                },
+            module("ClientSideAPI", {
                 teardown: function() {
-                    $(".t-window").remove();
+                    $(".t-window,.t-overlay").remove();
                 }
             });
 
-            function newWindow(options) {
-                return new Window(div, options);
+            function createWindow(options) {
+                return $("<div />").appendTo(document.body).kendoWindow(options).data("kendoWindow");
             }
 
             test("title gets title", function() {
-                equal(newWindow({ title: "Title" }).title(), "Title");
+                equal(createWindow({ title: "Title" }).title(), "Title");
             });
 
             test("title sets title", function() {
-                var window = newWindow({ title: "Title"}),
+                var window = createWindow({ title: "Title"}),
                     oldTitle = window.title(),
                     titleElement = $(".t-window-title", window.wrapper);
 
@@ -52,13 +48,13 @@
             });
 
             test("open of modal window adds overlay if it does not exist", function() {
-                newWindow({ modal: true }).open();
+                createWindow({ modal: true }).open();
 
                 equal($("body > .t-overlay").length, 1);
             });
 
             test("dblclick on resizable window title maximizes window", function() {
-                var window = newWindow();
+                var window = createWindow();
 
                 window.wrapper.find(".t-window-titlebar").trigger("dblclick");
 
@@ -66,11 +62,35 @@
             });
 
             test("dblclick on non resizable window title does not maximize window", function() {
-                var window = newWindow({ resizable: false });
+                var window = createWindow({ resizable: false });
 
                 window.element.find(".t-window-titlebar").trigger("dblclick");
 
                 ok(!window.options.isMaximized);
+            });
+
+            test('destroying a modal window moves overlay before previous window', function() {
+                var dialog = createWindow({
+                        modal: true
+                    }),
+                    overlappingDialog = createWindow({
+                        modal: true
+                    });
+
+                overlappingDialog.destroy();
+                ok(dialog.wrapper.prev("div").is(".t-overlay"));
+            });
+
+            test('closing a modal window moves overlay before previous window', function() {
+                var dialog = createWindow({
+                        modal: true
+                    }), 
+                    overlappingDialog = createWindow({
+                        modal: true
+                    });
+
+                overlappingDialog.close();
+                ok(dialog.wrapper.prev("div").is(".t-overlay"));
             });
 
         </script>
