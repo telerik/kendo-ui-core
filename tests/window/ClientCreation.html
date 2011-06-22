@@ -9,28 +9,25 @@
         <script src="../../src/kendo.draganddrop.js"></script>
         <script src="../../src/kendo.fx.js"></script>
         <script src="../../src/kendo.window.js"></script>
-        <script type="text/javascript" src="../jquery.mockjax.js"></script>
+        <script src="../jquery.mockjax.js"></script>
         <link rel="stylesheet" href="../qunit.css" />
-        <link type="text/css" href="../../styles/kendo.common.css" rel="stylesheet"/>
-        <link type="text/css" href="../../styles/kendo.vista.css" rel="stylesheet"/>
+        <link href="../../styles/kendo.common.css" rel="stylesheet"/>
+        <link href="../../styles/kendo.vista.css" rel="stylesheet"/>
     </head>
     <body>
 
         <script type="text/javascript">
-            var Window = kendo.ui.Window,
-                div = {};
+            var Window = kendo.ui.Window;
 
-            module("Window / ClientCreation", {
-                setup: function () {
-                    div = $("<div />").appendTo(document.body);
-                },
+            module("ClientCreation", {
                 teardown: function() {
-                    $(".t-window").remove();
+                    $(".t-window,.t-overlay").remove();
                 }
             });
 
-            function createWindow(options, newDiv) {
-                return new Window(newDiv || div, options);
+            function createWindow(options, element) {
+                element = element || $("<div class='wnd' />").appendTo(document.body);
+                return element.kendoWindow(options).data("kendoWindow");
             }
 
             test("creates default html structure", function() {
@@ -109,14 +106,14 @@
                             open: false,
                             close: false
                         }
-                    },  $("<div />")),
+                    }),
                     dialog2 = createWindow({
                         modal: true,
                         animation: {
                             open: false,
                             close: false
                         }
-                    },  $("<div />"));
+                    });
 
                 dialog2.close();
 
@@ -134,10 +131,10 @@
             test("destroy() does not delete overlay if there are other opened modal windows", function() {
                 var dialog1 = createWindow({
                         modal: true
-                    },  $("<div />")),
+                    }),
                     dialog2 = createWindow({
                         modal: true
-                    }, $("<div />"));
+                    });
 
                 dialog2.destroy();
 
@@ -152,13 +149,13 @@
             test("creating a modal window after closing another shows overlay", function() {
                 var dialog1 = createWindow({
                     modal: true
-                }, $("<div />"));
+                });
 
                 dialog1.close();
 
                 var dialog2 = createWindow({
                     modal: true
-                }, $("<div />"));
+                });
 
                 ok($(".t-overlay").is(":visible"));
             });
@@ -187,6 +184,29 @@
                 var dialog = createWindow();
 
                 equals(dialog.element.find("iframe").length, 0);
+            });
+
+            test('creating a modal adds overlay and places it before the window markup', function() {
+                var dialog = createWindow({
+                    modal: true
+                });
+
+                ok(dialog.wrapper.prev("div").is(".t-overlay"));
+            });
+
+            test('creating a second modal moves overlay after the first one', function() {
+                var dialog = createWindow({
+                        modal: true
+                    }), 
+                    overlappingDialog = createWindow({
+                        modal: true
+                    });
+
+                equals($('.t-overlay').length, 1);
+
+                ok(!dialog.wrapper.prev("div").is(".t-overlay"));
+                ok(overlappingDialog.wrapper.prev("div").is(".t-overlay"));
+                same(dialog.wrapper.next("div")[0], overlappingDialog.wrapper.prev("div")[0]);
             });
 
         </script>
