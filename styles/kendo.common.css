@@ -333,7 +333,7 @@ div.t-window-content
     background-color: #000;
     filter: alpha(opacity=50);
     opacity: .5;
-    z-index: 10000;
+    z-index: 10001;
 }
 
 .t-window .t-overlay
