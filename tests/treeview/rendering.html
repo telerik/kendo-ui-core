@@ -37,6 +37,13 @@
                 ok(element.find("li").is(".t-item"));
             });
 
+            test("first level group sets lines", function() {
+                var element = treeviewFromHtml("<ul><li>item<ul><li>subitem</li></ul></li></ul>");
+
+                ok(element.find("ul:first").is(".t-treeview-lines"));
+                ok(element.find("ul:last").is(":not(.t-treeview-lines)"));
+            });
+
             module("group");
 
             var rendering = new kendo.ui.TreeView.TreeViewRendering();

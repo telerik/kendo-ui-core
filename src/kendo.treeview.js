@@ -88,7 +88,9 @@
         },
 
         _groups: function() {
-            this.element.find("ul").andSelf().addClass("t-group");
+            this.element
+                .addClass("t-treeview-lines")
+                .find("ul").andSelf().addClass("t-group");
         },
 
         _items: function() {

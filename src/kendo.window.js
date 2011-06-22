@@ -286,7 +286,7 @@
                         } else {
                             overlay.hide();
                         }
-                    } else {
+                    } else if (openedModalWindows.length > 0) {
                         windowObject(openedModalWindows.eq(openedModalWindows.length - 2)).overlay(true);
                     }
 
