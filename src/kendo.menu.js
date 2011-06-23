@@ -105,6 +105,7 @@
                     var ul = li.find(".t-group:first:hidden"), popup;
 
                     if (ul[0]) {
+                        li.data('zIndex', li.css('z-index'));
                         li.css("z-index", that.nextItemZIndex ++);
 
                         popup = ul.data(KENDOPOPUP);
@@ -142,6 +143,9 @@
                 li.data(TIMER, setTimeout(function () {
                     var ul = li.find(".t-group:first:visible"), popup;
                     if (ul[0]) {
+                        li.css("z-index", li.data('z-index'));
+                        li.removeData('z-index');
+                        
                         popup = ul.data(KENDOPOPUP);
                         popup.close();
                     }
