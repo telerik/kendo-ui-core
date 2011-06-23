@@ -520,11 +520,11 @@
         read: function(additionalData) {
             var that = this,
                 options = extend(additionalData, {
+                    take: that.take(),
+                    skip: that.skip(),
                     page: that.page(),
                     pageSize: that.pageSize(),
                     sort: that._sort,
-                    take: that._take || that.pageSize(),
-                    skip: that._skip || 0,
                     filter: that._filter,
                     group: that._group,
                     aggregates: that._aggregates
@@ -697,9 +697,9 @@
                 that._skip = options.skip;
                 that._take = options.take;
 
-                if(that._skip === undefined && that._page !== undefined) {
-                    that._skip = (that._page - 1) * (that._pageSize || 1);
-                    options.skip = that._skip;
+                if(that._skip === undefined) {
+                    that._skip = that.skip();
+                    options.skip = that.skip();
                 }
 
                 if(that._take === undefined && that._pageSize !== undefined) {
@@ -739,15 +739,17 @@
         },
 
         page: function(val) {
-            var that = this;
+            var that = this,
+                skip;
 
             if(val !== undefined) {
                 val = Math.max(Math.min(Math.max(val, 1), that._totalPages()), 1);
                 that.query({ page: val, pageSize: that.pageSize(), sort: that.sort(), filter: that.filter(), group: that.group(), aggregates: that.aggregate()});
                 return;
             }
-            //return Math.ceil((that._skip || 0) / (that._take || 1)) + 1;
-            return that._page;
+            skip = that.skip();
+
+            return skip !== undefined ? Math.ceil((skip || 0) / (that._take || 1)) + 1 : undefined;
         },
 
         pageSize: function(val) {
@@ -827,6 +829,14 @@
 
                 that.query({ skip: index, take: count, sort: that.sort(), filter: that.filter(), group: that.group(), aggregates: that.aggregate()  });
             }
+        },
+        skip: function() {
+            var that = this;
+            return that._skip || (that._page !== undefined ? (that._page  - 1) * (that.take() || 1) : undefined);
+        },
+        take: function() {
+            var that = this;
+            return that._take || that._pageSize;
         }
     });
 

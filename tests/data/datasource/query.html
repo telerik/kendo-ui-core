@@ -717,6 +717,40 @@
 
                 equal(result.length, 8);
             });
+
+            test("skip return skipped items for given page and pageSize", function() {
+                 var dataSource = new DataSource({
+                     data: [{age: 1}, {age: 2},{age: 3}, {age: 4},{age: 5}, {age: 6},{age: 7}, {age: 8}],
+                     page: 2,
+                     pageSize: 3
+                });
+                equal(dataSource.skip(), 3);
+            });
+
+            test("skip return value set through query", function() {
+                var dataSource = new DataSource({
+                    data: [{age: 1}, {age: 2},{age: 3}, {age: 4},{age: 5}, {age: 6},{age: 7}, {age: 8}]
+                });
+                dataSource.query({ skip: 3 });
+                equal(dataSource.skip(), 3);
+            });
+
+            test("take return pageSize is not set", function() {
+                var dataSource = new DataSource({
+                    data: [{age: 1}, {age: 2},{age: 3}, {age: 4},{age: 5}, {age: 6},{age: 7}, {age: 8}],
+                    pageSize: 4
+                });
+                equal(dataSource.take(), 4);
+            });
+
+            test("take return take set through query", function() {
+                var dataSource = new DataSource({
+                    data: [{age: 1}, {age: 2},{age: 3}, {age: 4},{age: 5}, {age: 6},{age: 7}, {age: 8}],
+                    pageSize: 4
+                });
+                dataSource.query({ take: 3 });
+                equal(dataSource.take(), 3);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
