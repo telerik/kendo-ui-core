@@ -523,6 +523,8 @@
                     page: that.page(),
                     pageSize: that.pageSize(),
                     sort: that._sort,
+                    take: that._take || that.pageSize(),
+                    skip: that._skip || 0,
                     filter: that._filter,
                     group: that._group,
                     aggregates: that._aggregates
