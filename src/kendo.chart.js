@@ -949,7 +949,75 @@
         }
     });
 
-    var NumericAxis = ChartElement.extend({
+    var Axis = ChartElement.extend({
+        init: function(options) {
+            var axis = this;
+
+            ChartElement.fn.init.call(axis, options);
+        },
+
+        options: {
+            lineWidth: 1,
+            majorTickType: OUTSIDE,
+            majorTickSize: 4,
+            minorTickType: NONE,
+            minorTickSize: 3,
+            axisCrossingValue: 0,
+            minorGridLines: {
+                visible: false,
+                width: 1,
+                color: "#000"
+            }
+        },
+
+        renderTicks: function(factory) {
+            var axis = this,
+                options = axis.options,
+                isVertical = options.orientation === VERTICAL,
+                box = axis.box,
+                majorTicks = axis.getMajorTickPositions(),
+                ticks = [];
+
+            if (options.minorTickType === OUTSIDE) {
+                ticks = $.map(axis.getMinorTickPositions(), function(pos) {
+                            if (!inArray(pos, majorTicks)) {
+                                return {
+                                    pos: pos,
+                                    size: options.minorTickSize
+                                };
+                            }
+                        });
+            }
+
+
+            if (options.majorTickType === OUTSIDE) {
+                ticks = ticks.concat($.map(majorTicks, function(pos) {
+                                        if (inArray(pos, majorTicks)) {
+                                            return {
+                                                pos: pos,
+                                                size: options.majorTickSize
+                                            };
+                                        }
+                                    }));
+            }
+
+            return $.map(ticks, function(tick) {
+                if (isVertical) {
+                    return factory.line(
+                        box.x2 - tick.size, tick.pos,
+                        box.x2, tick.pos
+                    );
+                } else {
+                    return factory.line(
+                        tick.pos, box.y1,
+                        tick.pos, box.y1 + tick.size
+                    );
+                }
+            });
+        }
+    });
+
+    var NumericAxis = Axis.extend({
         init: function(seriesMin, seriesMax, options) {
             var axis = this,
                 autoOptions = {
@@ -957,7 +1025,7 @@
                     max: axis.autoAxisMax(seriesMin, seriesMax)
                 };
 
-            ChartElement.fn.init.call(axis, deepExtend(autoOptions, options));
+            Axis.fn.init.call(axis, deepExtend(autoOptions, options));
 
             options = axis.options;
 
@@ -980,20 +1048,9 @@
         options: {
             min: 0,
             max: 1,
-            lineWidth: 1,
-            majorTickType: OUTSIDE,
-            majorTickSize: 4,
-            minorTickType: NONE,
-            minorTickSize: 3,
-            axisCrossingValue: 0,
             orientation: VERTICAL,
             majorGridLines: {
                 visible: true,
-                width: 1,
-                color: "#000"
-            },
-            minorGridLines: {
-                visible: false,
                 width: 1,
                 color: "#000"
             }
@@ -1077,52 +1134,6 @@
             [].push.apply(childElements, axis.renderTicks(factory));
 
             return childElements;
-        },
-
-        renderTicks: function(factory) {
-            var axis = this,
-                options = axis.options,
-                isVertical = options.orientation === VERTICAL,
-                box = axis.box,
-                majorTicks = axis.getMajorTickPositions(),
-                ticks = [];
-
-            if (options.minorTickType === OUTSIDE) {
-                ticks = $.map(axis.getMinorTickPositions(), function(pos) {
-                            if (!inArray(pos, majorTicks)) {
-                                return {
-                                    pos: pos,
-                                    size: options.minorTickSize
-                                };
-                            }
-                        });
-            }
-
-
-            if (options.majorTickType === OUTSIDE) {
-                ticks = ticks.concat($.map(majorTicks, function(pos) {
-                                        if (inArray(pos, majorTicks)) {
-                                            return {
-                                                pos: pos,
-                                                size: options.majorTickSize
-                                            };
-                                        }
-                                    }));
-            }
-
-            return $.map(ticks, function(tick) {
-                if (isVertical) {
-                    return factory.line(
-                        box.x2 - tick.size, tick.pos,
-                        box.x2, tick.pos
-                    );
-                } else {
-                    return factory.line(
-                        tick.pos, box.y1,
-                        tick.pos, box.y1 + tick.size
-                    );
-                }
-            });
         },
 
         autoMajorUnit: function (min, max) {
@@ -1303,12 +1314,12 @@
         }
     });
 
-    var CategoryAxis = ChartElement.extend({
+    var CategoryAxis = Axis.extend({
         init: function(options) {
             var axis = this;
-            ChartElement.fn.init.call(axis);
+            Axis.fn.init.call(axis, options);
 
-            var options = axis.options = deepExtend({}, axis.options, options);
+            var options = axis.options;
 
             for (var i = 0; i < options.categories.length; i++) {
                 var label = options.categories[i];
@@ -1318,19 +1329,8 @@
 
         options: {
             categories: [],
-            lineWidth: 1,
-            majorTickSize: 4,
-            majorTickType: OUTSIDE,
-            minorTickSize: 3,
-            minorTickType: OUTSIDE,
-            axisCrossingValue: 0,
             orientation: HORIZONTAL,
             majorGridLines: {
-                visible: false,
-                width: 1,
-                color: "#000"
-            },
-            minorGridLines: {
                 visible: false,
                 width: 1,
                 color: "#000"
@@ -1419,54 +1419,6 @@
             [].push.apply(childElements, axis.renderTicks(factory));
 
             return childElements;
-        },
-
-        renderTicks: function(factory) {
-            var axis = this,
-                options = axis.options,
-                isVertical = options.orientation === VERTICAL,
-                box = axis.box,
-                majorTicks = axis.getMajorTickPositions(),
-                ticks = [];
-
-            if (!inArray(NONE, [options.majorTickType, options.minorTickType])) {
-                if (options.minorTickType === OUTSIDE) {
-                    ticks = $.map(axis.getMinorTickPositions(), function(pos) {
-                                if (!inArray(pos, majorTicks)) {
-                                    return {
-                                        pos: pos,
-                                        size: options.minorTickSize
-                                    };
-                                }
-                            });
-                }
-
-
-                if (options.minorTickType === OUTSIDE) {
-                    ticks = ticks.concat($.map(majorTicks, function(pos) {
-                                            if (inArray(pos, majorTicks)) {
-                                                return {
-                                                    pos: pos,
-                                                    size: options.majorTickSize
-                                                };
-                                            }
-                                        }));
-                }
-
-                return $.map(ticks, function(tick) {
-                    if (isVertical) {
-                        return factory.line(
-                            box.x2 - tick.size, tick.pos,
-                            box.x2, tick.pos
-                        );
-                    } else {
-                        return factory.line(
-                            tick.pos, box.y1,
-                            tick.pos, box.y1 + tick.size
-                        );
-                    }
-                });
-            }
         },
 
         getTickPositions: function(itemsCount) {
