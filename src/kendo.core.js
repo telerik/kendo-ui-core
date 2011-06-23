@@ -1033,6 +1033,17 @@
 
     // feature detection
     (function() {
+        $(document).ready(function() {
+            var div = document.createElement("div");
+            div.style.cssText = "overflow:scroll;overflow-x:hidden;zoom:1";
+            div.innerHTML = "&nbsp;";
+            document.body.appendChild(div);
+
+            support.scrollbar = div.offsetWidth - div.scrollWidth;
+
+            document.body.removeChild(div);
+        });
+
         var table = document.createElement("table");
 
         // Internet Explorer does not support setting the innerHTML of TBODY and TABLE elements
@@ -1067,6 +1078,7 @@
         });
 
         support.devicePixelRatio = window.devicePixelRatio === undefined ? 1 : window.devicePixelRatio;
+
     })();
 
     var effectInit = {
@@ -1294,7 +1306,7 @@
                 element.toggleClass(value, add);
             });
         }
-        
+
         return element;
     }
 
