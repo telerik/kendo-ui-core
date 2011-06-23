@@ -117,14 +117,17 @@
                 });
 
                 test("sets position on text", function() {
-                    equal(text.render(),
-                        "<kvml:textbox style='position: absolute; left: 0px; top: 0px; " +
-                        "font: 16px Verdana, sans-serif'></kvml:textbox>");
+                    ok(text.render().indexOf("position: absolute; left: 0px; top: 0px;") > -1);
                 });
 
                 test("sets font", function() {
                     text.options.font = "12px sans-serif";
                     ok(text.render().indexOf("font: " + text.options.font) > -1);
+                });
+
+                test("sets color", function() {
+                    text.options.color = "#cf0";
+                    ok(text.render().indexOf("color: " + text.options.color) > -1);
                 });
             })();
 

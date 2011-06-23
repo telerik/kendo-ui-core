@@ -154,6 +154,11 @@
                     ok(text.render().indexOf("font: " + text.options.font) > -1);
                 });
 
+                test("sets color", function() {
+                    text.options.color = "#cf0";
+                    ok(text.render().indexOf("fill='" + text.options.color + "'") > -1);
+                });
+
             })();
 
             (function() {

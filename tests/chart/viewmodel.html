@@ -638,6 +638,18 @@
                     text.updateLayout(new Box2D());
                     text.getViewElements(factory)
                 });
+
+                test("sets color", 1, function() {
+                    var factory = {
+                        text: function(content, options) {
+                            equal(options.color, text.options.color);
+                        }
+                    };
+
+                    text.updateLayout(new Box2D());
+                    text.getViewElements(factory)
+                });
+
             })();
 
             (function() {
@@ -709,9 +721,21 @@
                 test("labels have set font", function() {
                     legend = new Chart.Legend({
                         series: [ { name: "Series 1" } ],
-                        font: "10px sans-serif"
+                        labels: {
+                            font: "10px sans-serif"
+                        }
                     });
-                    equal(legend.children[0].options.font, legend.options.font);
+                    equal(legend.children[0].options.font, legend.options.labels.font);
+                });
+
+                test("labels have set color", function() {
+                    legend = new Chart.Legend({
+                        series: [ { name: "Series 1" } ],
+                        labels: {
+                            color: "#cf0"
+                        }
+                    });
+                    equal(legend.children[0].options.color, legend.options.labels.color);
                 });
 
                 test("positions legend to absolute vertical center (relative to y=0)", function() {
