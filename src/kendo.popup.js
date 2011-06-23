@@ -60,6 +60,11 @@
             extend(options.animation.close, {
                 complete: function() {
                     that.wrapper.css({ display: "none" });
+                    var location = that.wrapper.data('location');
+
+                    if (location)
+                        that.wrapper.css(location);
+
                     that.trigger(CLOSE);
                 }
             });
@@ -69,7 +74,11 @@
             $(document.documentElement).mousedown(proxy(that._mousedown, that));
 
             $(window).bind("resize", function() {
-                if (that.wrapper[0]) {
+                that.wrapper
+                    .removeData('position')
+                    .removeData('location'); // Remove position and location to force originals reset.
+
+                if (that.wrapper.is(":visible")) {
                     that._update();
                 }
             });
@@ -84,7 +93,7 @@
             position: TOP + " " + LEFT,
             anchor: BODY,
             appendTo: BODY,
-            collision: "flip",
+            collision: "flip fit",
             animation: {
                 open: {
                     effects: "slideIn:down",
@@ -109,9 +118,14 @@
                 if (options.appendTo == BODY)
                     that.wrapper.css("top", "-10000px");
 
-                that._update();
+                var animation = extend({}, options.animation.open);
 
-                that.element.kendoStop(true).kendoAnimate(options.animation.open)
+                if (that._update()) {
+                    animation.effects = kendo.parseEffects(animation.effects, true);
+                }
+
+                that.element.data('effects', animation.effects);
+                that.element.kendoStop(true).kendoAnimate(animation);
             }
         },
 
@@ -130,8 +144,16 @@
                 options = that.options;
 
             if (that.visible()) {
+                var animation = extend({}, options.animation.close),
+                    effects = that.element.data('effects');
+
                 that.wrapper = kendo.wrap(that.element).css({ overflow: HIDDEN });
-                that.element.kendoStop(true).kendoAnimate(options.animation.close);
+
+                if (effects) {
+                    animation.effects = effects;
+                }
+
+                that.element.kendoStop(true).kendoAnimate(animation);
             }
         },
 
@@ -147,107 +169,111 @@
         },
 
         _update: function() {
-            this._position($(window));
+            return this._position($(window));
         },
 
         _fit: function(position, size, viewPortSize) {
+            var output = 0;
+
             if (position + size > viewPortSize) {
-                position = viewPortSize - size;
+                output = viewPortSize - (position + size);
             }
 
-            if (position < 0) {
-                position = 0;
-            }
+            if (position < 0)
+                output = position;
 
-            return position;
+            return output;
         },
 
-        _flipVertical: function(offset, size, viewPortSize) {
-            var that = this,
-                options = that.options,
-                origin,
-                position,
-                origins = options.origin.toLowerCase().split(" "),
-                positions = options.position.toLowerCase().split(" ");
+        _flip: function(offset, size, anchorSize, viewPortSize, origin, position) {
+            var output = 0;
 
-            if (positions[0] !== origins[0] && positions[0] !== CENTER && origins[0] !== CENTER) {
-                if (offset.top + size > viewPortSize) {
-                    position = BOTTOM + " " + positions[1];
-                    origin = TOP + " " + origins[1];
-                    offset = that._align(origin, position);
+            if (position !== origin && position !== CENTER && origin !== CENTER) {
+                if (offset + size > viewPortSize) {
+                    output += -(anchorSize + size);
                 }
 
-                if (offset.top < 0) {
-                    position = TOP + " " + positions[1];
-                    origin = BOTTOM + " " + origins[1];
-                    offset = that._align(origin, position);
+                if (offset + output < 0) {
+                    output += anchorSize + size;
                 }
             }
-            return offset;
-        },
-
-        _flipHorizontal: function(offset, size, viewPortSize) {
-            var that = this,
-                options = that.options,
-                origin,
-                position,
-                origins = options.origin.toLowerCase().split(" "),
-                positions = options.position.toLowerCase().split(" ");
-
-            if (positions[1] !== origins[1] && positions[1] !== CENTER && origins[1] !== CENTER) {
-
-                if (offset.left + size > viewPortSize) {
-                    position = positions[0] + " " + RIGHT;
-                    origin = origins[0] + " " + LEFT;
-                    offset = that._align(origin, position);
-                }
-
-                if (offset.left < 0) {
-                    position = positions[0] + " " + LEFT;
-                    origin = origins[0] + " " + RIGHT;
-                    offset = that._align(origin, position);
-                }
-            }
-            return offset;
+            return output;
         },
 
         _position: function(viewport) {
             var that = this,
+                element = that.element,
                 wrapper = that.wrapper,
-                offset,
                 options = that.options,
                 anchor = $(options.anchor),
-                origin = options.origin,
+                origins = options.origin.toLowerCase().split(" "),
+                positions = options.position.toLowerCase().split(" "),
                 collisions = that.collisions,
-                position = options.position;
+                aligned = false;
 
             if (options.appendTo === Popup.fn.options.appendTo) {
-                wrapper.css(that._align(origin, position));
+                wrapper.css(that._align(origins, positions));
+                aligned = true;
             }
-            offset = wrapper.offset();
+
+            var pos = wrapper.data('position'),
+                offset = wrapper.data('offset'),
+                zoomLevel = kendo.support.touch ? (document.documentElement.clientWidth / window.innerWidth) : 1;
+
+            if (!pos) {
+                pos = wrapper.position();
+                offset = wrapper.offset();
+
+                wrapper
+                    .data('position', pos)
+                    .data('offset', extend({}, offset));
+            }
+
+            var anchorParent = anchor.offsetParent().parent('.t-animation-container'); // If the parent is positioned, get the current positions
+            if (anchorParent.length && anchorParent.data('fitted')) {
+                pos = wrapper.position();
+                offset = wrapper.offset();
+            }
+
+            if (!that.wrapper.data('location')) // Needed to reset the popup location after every closure - fixes the resize bugs.
+                wrapper.data('location', extend({}, pos));
+
+            offset = { top: offset.top - (window.pageYOffset || document.documentElement.scrollTop || 0), left: offset.left - (window.pageXOffset || document.documentElement.scrollLeft || 0) };
+
+            if (!aligned && kendo.support.touch && !document.body.scrollLeft && !mobileSafari41)
+                offset = { top: offset.top - window.pageYOffset, left: offset.left - window.pageXOffset };
+
+            var offsets = extend({}, offset),
+                location = extend({}, pos);
 
             if (collisions[0] === "fit") {
-                offset.top = that._fit(offset.top, wrapper.outerHeight(), viewport.height());
-            }
-
-            if (collisions[0] === "flip") {
-                offset = that._flipVertical(offset, wrapper.outerHeight(), viewport.height());
+                location.top += that._fit(offsets.top, wrapper.outerHeight(), viewport.height() / zoomLevel);
             }
 
             if (collisions[1] === "fit") {
-                offset.left = that._fit(offset.left, wrapper.outerWidth(), viewport.width());
+                location.left += that._fit(offsets.left, wrapper.outerWidth(), viewport.width() / zoomLevel);
+            }
+
+            if (location.left != pos.left || location.top != pos.top)
+                wrapper.data('fitted', true);
+            else
+                wrapper.removeData('fitted');
+
+            var flipPos = extend({}, location);
+
+            if (collisions[0] === "flip") {
+                location.top += that._flip(offsets.top, element.outerHeight(), anchor.outerHeight(), viewport.height() / zoomLevel, origins[0], positions[0])
             }
 
             if (collisions[1] === "flip") {
-                offset = that._flipHorizontal(offset, wrapper.outerWidth(), viewport.width());
+                location.left += that._flip(offsets.left, element.outerWidth(), anchor.outerWidth(), viewport.width() / zoomLevel, origins[1], positions[1]);
             }
-            wrapper.css(offset);
 
+            wrapper.css(location);
+
+            return (location.left != flipPos.left || location.top != flipPos.top);
         },
         _align: function(origin, position) {
-            origin = origin.split(" ");
-            position = position.split(" ");
-
             var that = this,
                 element = that.wrapper,
                 anchor = $(that.options.anchor),
@@ -294,17 +320,6 @@
 
             if (horizontalPosition === CENTER) {
                 left -= round(width / 2);
-            }
-
-            if (kendo.support.touch) {
-
-                if (!document.body.scrollLeft && !mobileSafari41) {
-                    left -= window.pageXOffset;
-                }
-
-                if (!document.body.scrollTop && !mobileSafari41) {
-                    top -= window.pageYOffset;
-                }
             }
 
             return {

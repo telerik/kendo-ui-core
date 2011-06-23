@@ -108,9 +108,13 @@
                         li.css("z-index", that.nextItemZIndex ++);
 
                         popup = ul.data(KENDOPOPUP);
+                        var parentHorizontal = li.parent().hasClass("t-menu-horizontal");
 
                         if (!popup) {
                             popup = ul.kendoPopup({
+                                origin: parentHorizontal ? "bottom left" : "top right",
+                                position: "top left",
+                                collision: parentHorizontal ? "fit" : "fit flip",
                                 anchor: li,
                                 appendTo: li,
                                 animation: {

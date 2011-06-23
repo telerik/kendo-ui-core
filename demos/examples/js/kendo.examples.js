@@ -47,10 +47,10 @@
                 $.get(href, function(html) {
                     currentHtml = html;
 
-                    $(".description").empty().html(Application.description(html).trim());
+                    $(".description").empty().html($.trim(Application.description(html)));
                 });
             else
-                $(".description").empty().html(Application.description(currentHtml).trim());
+                $(".description").empty().html($.trim(Application.description(currentHtml)));
         },
 
         description: function(html) {
