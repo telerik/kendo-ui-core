@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>TreeView Expand/Collapse</title>
+        <title>TreeView interaction</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit.js"></script>
         <script src="../qunit-runner.js"></script>
@@ -12,7 +12,7 @@
         <link rel="stylesheet" href="../../styles/kendo.vista.css" />
     </head>
     <body>
-        <h1 id="qunit-header">Expand /Collapse</h1>
+        <h1 id="qunit-header">TreeView interaction</h1>
         <h2 id="qunit-banner"></h2>
         <div id="qunit-testrunner-toolbar"></div>
         <h2 id="qunit-userAgent"></h2>
@@ -33,10 +33,12 @@
                 }) + "</div>").appendTo(document.body).kendoTreeView();
             }
 
+            function removeTreeViews() {
+                $(".t-treeview").remove();
+            }
+
             module("expand / collapse", {
-                teardown: function() {
-                    $(".treeview").remove();
-                }
+                teardown: removeTreeViews
             });
 
             test("trying to expand disabled items does not expand them", function() {
@@ -92,6 +94,34 @@
                     .trigger("dblclick");
                 
                 equal(item.find(".t-group").css("display"), "none");
+            });
+
+            module("selection", {
+                teardown: removeTreeViews
+            });
+
+            test("clicking nodes selects them", function() {
+                treeview = createTreeView([
+                    { text: "foo" }
+                ]);
+
+                var item = $(".t-item:first", treeview).find(".t-in");
+
+                item.trigger("click");
+
+                ok(item.hasClass("t-state-selected"));
+            });
+
+            test("clicking disabled nodes does not select them", function() {
+                treeview = createTreeView([
+                    { text: "foo", enabled: false }
+                ]);
+
+                var item = $(".t-item:first", treeview).find(".t-in");
+
+                item.trigger("click");
+
+                ok(!item.hasClass("t-state-selected"));
             });
         </script>
 
