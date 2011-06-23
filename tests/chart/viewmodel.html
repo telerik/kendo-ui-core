@@ -449,10 +449,14 @@
                     titleText,
                     TITLE_TEXT_HEIGHT = 17,
                     TITLE_TEXT_WIDTH = 37,
-                    MARGIN = 10;
+                    MARGIN = 10,
+                    PADDING = 5;
 
                 function createTitle(options) {
-                    title = new kendo.ui.Chart.Title($.extend({ text: "Title" }, options));
+                    title = new kendo.ui.Chart.Title($.extend({
+                        text: "Title",
+                        margin: MARGIN,
+                        padding: PADDING }, options));
                     title.updateLayout(chartBox);
                     titleTextBox = title.children[0],
                     titleText = titleTextBox.children[0];
@@ -480,9 +484,34 @@
                     equal(titleText.options.font, title.options.font);
                 });
 
+                test("text box has set vAlign", function() {
+                    createTitle({
+                        position: "bottom"
+                    });
+
+                    equal(titleTextBox.options.vAlign, "bottom");
+                });
+
+                test("text box has set align", function() {
+                    createTitle({
+                        align: "right"
+                    });
+
+                    equal(titleTextBox.options.align, "right");
+                });
+
+                test("text box has set background", function() {
+                    createTitle({
+                        background: "#f00"
+                    });
+
+                    equal(titleTextBox.options.background, "#f00");
+                });
+
                 test("text is positioned at top", function() {
-                    equals(titleText.box.y1 - MARGIN, 0);
-                    equals(titleText.box.y2 - MARGIN, TITLE_TEXT_HEIGHT, TOLERANCE);
+                    equals(titleText.box.y1 - MARGIN - PADDING, 0);
+                    equals(titleText.box.y2 - MARGIN - PADDING,
+                           TITLE_TEXT_HEIGHT, TOLERANCE);
                 });
 
                 test("text is positioned at bottom", function() {
@@ -491,9 +520,9 @@
                     });
 
                     title.updateLayout(chartBox);
-                    equals(titleText.box.y1 + MARGIN,
+                    equals(titleText.box.y1 + MARGIN + PADDING,
                            chartBox.height() - TITLE_TEXT_HEIGHT, TOLERANCE);
-                    equals(titleText.box.y2 + MARGIN, chartBox.y2);
+                    equals(titleText.box.y2 + MARGIN + PADDING, chartBox.y2);
                 });
 
                 test("text is aligned at center", function() {
@@ -506,7 +535,8 @@
                 });
 
                 test("box height is equal to text height", function() {
-                    equals(title.box.height() - MARGIN * 2, TITLE_TEXT_HEIGHT, TOLERANCE);
+                    equals(title.box.height() - MARGIN * 2 - PADDING * 2,
+                           TITLE_TEXT_HEIGHT, TOLERANCE);
                 });
 
                 test("getViewElements returns text element", 1, function() {
@@ -517,7 +547,7 @@
                     deepEqual(title.getViewElements(), [ 42 ]);
                 });
 
-                test("positions title to the top with margin 20", function() {
+                test("positions title at top with margin 20", function() {
                     title = new kendo.ui.Chart.Title({
                         text: "Title",
                         margin: MARGIN * 2
@@ -530,10 +560,11 @@
 
                     title1.updateLayout(chartBox);
 
-                    equal(title.box.height(), title1.box.height() + MARGIN * 2);
+                    equal(title.box.height(),
+                          title1.box.height() + MARGIN * 2 + PADDING * 2);
                 });
 
-                test("positions title to the bottom with margin 20", function() {
+                test("positions title at bottom with margin 20", function() {
                     title = new kendo.ui.Chart.Title({
                         text: "Title",
                         position: "bottom",
@@ -549,7 +580,8 @@
 
                     title1.updateLayout(chartBox);
 
-                    equal(title.box.height(), title1.box.height() + MARGIN * 2);
+                    equal(title.box.height(),
+                          title1.box.height() + MARGIN * 2 + PADDING * 2);
                 });
 
             })();
