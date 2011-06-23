@@ -748,12 +748,13 @@
             font: "12px Verdana, sans-serif",
             offsetX: 0,
             offsetY: 0,
-            margin: {
-                top: 10,
-                right: 10,
-                bottom: 10,
-                left: 10
+            margin: 10,
+            padding: 5,
+            border: {
+                color: "#000",
+                width: 0
             },
+            background: "",
             zIndex: 1
         },
 
@@ -798,14 +799,17 @@
                 options = legend.options,
                 series = options.series,
                 markerSize = legend.markerSize(),
-                group = factory.group({ zIndex: options.zIndex });
+                group = factory.group({ zIndex: options.zIndex }),
+                border = options.border || {},
+                labelBox;
 
             [].push.apply(group.children, ChartElement.fn.getViewElements.call(legend, factory));
 
             for (var i = 0, length = series.length; i < length; i++) {
                 var color = series[i].color,
                     label = children[i],
-                    markerBox = new Box2D();
+                    markerBox = new Box2D(),
+                    labelBox = labelBox ? labelBox.wrap(label.box) : label.box.clone();
 
                 markerBox.x1 = label.box.x1 - markerSize * 2;
                 markerBox.x2 = markerBox.x1 + markerSize;
@@ -820,6 +824,17 @@
 
                 group.children.push(factory.rect(markerBox, { fill: color, stroke: color }));
             };
+
+            if (children.length > 0) {
+                var padding = getSpacing(options.padding);
+                padding.left += markerSize * 2;
+                labelBox.pad(padding);
+                group.children.unshift(factory.rect(labelBox, {
+                    stroke: border.width ? border.color : "",
+                    strokeWidth: border.width,
+                    fill: options.background })
+                );
+            }
 
             return [ group ];
         },
@@ -908,10 +923,7 @@
                 children = legend.children,
                 childrenCount = children.length,
                 labelBox = children[0].box.clone(),
-                markerWidth = legend.markerSize() * 2,
-                offsetX,
-                offsetY,
-                margin = getSpacing(options.margin);
+                markerWidth = legend.markerSize() * 2;
 
             // Position labels next to each other
             for (var i = 1; i < childrenCount; i++) {

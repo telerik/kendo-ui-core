@@ -31,18 +31,26 @@
 
             test("extend merges object members", function() {
                 var Parent = Class.extend({
-                    options: {
-                        a: 1
-                    }
+                    options: { a: 1 }
                 });
 
                 var Child = Parent.extend({
-                    options: {
-                        b: 2
-                    }
+                    options: { b: 2 }
                 });
 
-                ok(Child.prototype.options.a == 1 && Child.prototype.options.b == 2);
+                ok(Child.prototype.options.a && Child.prototype.options.b);
+            });
+
+            test("extend copies object members", function() {
+                var Parent = Class.extend({
+                    options: { a: 1 }
+                });
+
+                var Child = Parent.extend({
+                    options: { b: 2 }
+                });
+
+                ok(!Parent.prototype.options.b);
             });
 
             test("extend aliases the prototype as fn", function() {

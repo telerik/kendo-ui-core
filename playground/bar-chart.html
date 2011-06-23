@@ -15,12 +15,27 @@
                 $("#container").kendoChart({
                     title: {
                         text: "Teh chart",
-                        position: "top"
+                        position: "top",
+                        border: {
+                            color: "red",
+                            width: 1
+                        },
+                        background: "#cf0",
+                        margin: 20,
+                        padding: 10
+
                     },
                     legend: {
                         font: "12px Verdana, sans-serif",
                         position: "right", // "top", "bottom", "left", "right"
-                        visible: true
+                        visible: true,
+                        border: {
+                            color: "red",
+                            width: 2
+                        },
+                        background: "#cf0",
+                        margin: 20,
+                        padding: 10
                     },
                     dataSource: [
                         {
