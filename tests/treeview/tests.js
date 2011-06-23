@@ -8,8 +8,8 @@ tests.push(
         title: "treeview rendering"
     },
     {
-        page: "treeview/expandcollapse.html",
-        title: "treeview expand/collapse"
+        page: "treeview/interaction.html",
+        title: "treeview interaction"
     } /*,
     {
         page: "treeview/draganddrop.html",

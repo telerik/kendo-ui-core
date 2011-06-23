@@ -17,7 +17,8 @@
         NODEDROP = "nodeDrop",
         NODEDROPPED = "nodeDropped",
         CLICK = "click",
-        CHANGE = "change";
+        CHANGE = "change",
+        TSTATEHOVER = "t-state-hover";
 
     function markAjaxLoadableNodes(element) {
         element.find(".t-plus")
@@ -68,8 +69,8 @@
 
             that.wrapper
                 .delegate(".t-in.t-state-selected", "mouseenter", function(e) { e.preventDefault(); })
-                .delegate(clickableItems, "mouseenter", function () { $(this).addClass("t-state-hover"); })
-                .delegate(clickableItems, "mouseleave", function () { $(this).removeClass("t-state-hover"); })
+                .delegate(clickableItems, "mouseenter", function () { $(this).addClass(TSTATEHOVER); })
+                .delegate(clickableItems, "mouseleave", function () { $(this).removeClass(TSTATEHOVER); })
                 .delegate(clickableItems, CLICK, proxy(that.nodeSelect, that))
                 .delegate("div:not(.t-state-disabled) .t-in", "dblclick", proxy(that.nodeClick, that))
                 .delegate(":checkbox", CLICK, proxy(that.checkboxClick, that))
@@ -126,8 +127,9 @@
 
         expand: function (li) {
             $(li, this.element).each($.proxy(function (index, item) {
-                var item = $(item);
-                var contents = item.find("> .t-group, > .t-content");
+                var item = $(item),
+                    contents = item.find("> .t-group, > .t-content");
+
                 if ((contents.length > 0 && !contents.is(":visible")) || this.isAjax()) {
                     this.nodeToggle(null, item);
                 }
@@ -138,6 +140,7 @@
             $(li, this.element).each($.proxy(function (index, item) {
                 var item = $(item),
                     contents = item.find("> .t-group, > .t-content");
+
                 if (contents.length > 0 && contents.is(":visible")) {
                     this.nodeToggle(null, item);
                 }
@@ -187,27 +190,34 @@
             });
         },
 
-        _shouldNavigate: function (element) {
-            var contents = $(element).closest(".t-item").find("> .t-content, > .t-group");
-            var href = $(element).attr("href");
+        _shouldNavigate: function (node) {
+            var contents = node.closest(".t-item").find("> .t-content, > .t-group"),
+                href = node.attr("href"),
+                result;
 
-            return !((href && (href.charAt(href.length - 1) == "#" || href.indexOf("#" + this.element.id + "-") != -1)) ||
-                    (contents.length > 0 && contents.children().length == 0));
+            if (href) {
+                result = href == "#" || href.indexOf("#" + this.element.id + "-") >= 0;
+            } else {
+                result = contents.length > 0 && contents.children().length == 0;
+            }
+
+            return !result;
         },
 
-        nodeSelect: function (e, element) {
+        nodeSelect: function (e) {
+            var node = $(e.target),
+                that = this,
+                treeview = that.element;
 
-            if (!this._shouldNavigate(element)) {
+            if (!that._shouldNavigate(node)) {
                 e.preventDefault();
             }
 
-            var element = $(element);
+            if (!node.hasClass(".t-state-selected") &&
+                !that.trigger(treeview, "select", { item: node.closest(".t-item")[0] })) {
+                $(".t-in", treeview).removeClass("t-state-hover t-state-selected");
 
-            if (!element.hasClass(".t-state-selected") &&
-                !this.trigger(this.element, "select", { item: element.closest(".t-item")[0] })) {
-                $(".t-in", this.element).removeClass("t-state-hover t-state-selected");
-
-                element.addClass("t-state-selected");
+                node.addClass("t-state-selected");
             }
         },
 
@@ -497,7 +507,7 @@
                     var insertOnBottom = (itemTop + itemHeight - delta) < e.pageY;
                     var addChild = itemContent.length > 0 && !insertOnTop && !insertOnBottom;
 
-                    itemContent.toggleClass("t-state-hover", addChild);
+                    itemContent.toggleClass(TSTATEHOVER, addChild);
                     that.dropCue.css("visibility", addChild ? "hidden" : "visible");
 
                     if (addChild) {
