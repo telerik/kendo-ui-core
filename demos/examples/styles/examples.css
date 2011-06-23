@@ -67,8 +67,7 @@ body
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
-    background: white;
-    overflow: hidden;
+    background: #FFF;
     text-align: left;
     min-height: 200px;
 }
