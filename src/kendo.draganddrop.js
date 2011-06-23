@@ -134,7 +134,7 @@
 
             if (distance >= options.distance) {
                 if (hint) {
-                    that.hint = $.isFunction(hint) ? $(hint()) : hint;
+                    that.hint = $.isFunction(hint) ? $(hint(that.currentTarget)) : hint;
 
                     that.hint.css( {
                         position: "absolute",
