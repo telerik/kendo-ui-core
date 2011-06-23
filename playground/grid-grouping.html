@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script src="../src/jquery.js"></script>
+    <script src="../src/kendo.core.js"></script>
+    <script src="../src/kendo.draganddrop.js"></script>
+    <script src="../src/kendo.query.js"></script>
+    <script src="../src/kendo.datasource.js"></script>
+    <script src="../src/kendo.grid.js"></script>
+    <style>
+        table
+        {
+            border: 1px solid black;
+            border-collapse: collapse;
+            width: 100%;
+            table-layout: fixed;
+        }
+        
+        td, th
+        {
+            border: 1px solid black;
+            height: 22px;
+        }
+        
+        th
+        {
+            background: magenta;
+        }
+        
+        .grid
+        {
+            width: 500px;
+        }
+        
+        .grid-header
+        {
+            padding-right: 17px;
+            background: magenta;
+        }
+                
+        .t-grouping-header {
+            background-color: #EFF7FC;
+            cursor: default;
+            margin: 0;
+            padding: .25em;
+        }
+        
+        .draggable
+        {
+            border: 1px solid red;
+            background: blue;
+            width: 100px;
+            height: 100px;
+        }
+        .dropTarget
+        {
+            border: 1px solid red;
+            background: red;
+            width: 100px;
+            height: 100px;
+        }
+        
+        .t-grouping-header .t-group-indicator {
+            display: inline-block;
+            zoom: 1;
+            border-width: 1px;
+            border-style: solid;
+            line-height: 1.5em;
+            padding: .15em .15em .15em .4em;
+            margin: 0px 3px 0px 1px;
+            -moz-border-radius: 4px;
+            -webkit-border-radius: 4px;
+            border-radius: 4px;
+        }
+        
+        .t-grouping-header,
+        .t-grouping-dropclue
+        {
+            height: 24px;
+            line-height: 24px;
+        }
+
+        .t-grouping-dropclue
+        {
+            position: absolute;
+            width: 6px;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="grid-data">
+        <div class="t-grouping-header">Drag a column header and drop it here to group by that column</div>
+        <table id="grid">
+            <thead>
+                <tr>
+                    <th data-field="OrderID">
+                        OrderID
+                    </th>
+                    <th data-field="ContactName">
+                        ContactName
+                    </th>
+                    <th data-field="ShipAddress">
+                        ShipAddress
+                    </th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+
+    <script>
+        var data = [];
+
+        for (var i = 0; i < 100; i++) {
+            data.push({ OrderID: i, ContactName: "Contact " + i, ShipAddress: "Ship Address " + i });
+        }
+
+        var dataSource = new kendo.data.DataSource({
+            data: data,
+            pageSize: 10
+        });
+
+        $("table#grid").kendoGrid({
+            dataSource: dataSource
+        });
+                
+        var indicatorTmpl = window.kendo.template('<div class="t-group-indicator" data-field="${data.field}">' + 
+                '<a href="#" class="t-link">' +
+                    '<span class="t-icon t-arrow-${(data.dir || "asc") == "asc" ? "up" : "down"}-small">(sorted ${(data.dir || "asc") == "asc" ? "ascending": "descending"})</span>' +
+                    '${data.field}' + 
+                '</a>' + 
+                '<a class="t-button t-button-icon t-button-bare">' +
+                    '<span class="t-icon t-group-delete"></span>' + 
+                '</a>' +
+             '</div>',  {useWithBlock:false});
+
+        var insideDropTarget = false;
+        var groupHeader = $(".grid-data .t-grouping-header");
+        var currentIndicator;
+        var dropCue = $('<div class="t-grouping-dropclue">|</>');
+
+        $(document).ready(function() {
+            
+            $("#grid").kendoDraggable({
+                filter: "th",
+                hint: function(target) {                    
+                    return $("<span/>").text(target.data("field")).css({"background": "red","white-space": "nowrap"});
+                },
+                dragend: function(e) {                    
+                    if(this.dropped) {
+                        var field = e.currentTarget.data("field");    
+                        if($.grep($(".t-group-indicator", groupHeader), function (item) { return $(item).data("field") === field }).length == 0) {                            
+                            groupHeader.append(buildIndicator(field));
+                            
+                            //console.log(buildDescriptors());
+                            //dataSource.group(buildDescriptors());
+                        }
+                    }
+                    
+                }
+            });
+
+            groupHeader.kendoDropTarget({
+                dragenter: function() {
+                    insideDropTarget = true;
+                },
+                dragleave: function() {
+                    insideDropTarget = false;
+                }
+            });
+        });
+
+        function buildIndicator(field) {
+            return $(indicatorTmpl({field: field}))
+                    .kendoDraggable({
+                        hint: function(target) {
+                            return target.clone();
+                        },
+                        dragend: function(e) {                                                            
+                            if(!this.dropped) {
+                                this._destroy();
+                                this.element.remove();
+
+                                //console.log(buildDescriptors());
+                                //dataSource.group(buildDescriptors());
+                            } else {
+                                //
+                            }
+                            currentIndicator = null;
+                            dropCue.remove();
+                        },
+                        drag: function() {
+                            currentIndicator = this.element;
+                        }
+                    })
+                    .bind("mouseover", function(e) { 
+                        if(insideDropTarget && currentIndicator && currentIndicator[0] !== this) {                            
+                            if(dropCue.is(":not(:visible)")) {
+                                dropCue.css({ top: 3, left: 0 }).appendTo(groupHeader);
+                            }
+                            var left = $(this).position().left;                            
+
+                            dropCue.css({ display: "block", top: 3, left: left });
+                        }                        
+                    })
+                    .bind("mouseleave", function() { 
+                        if(insideDropTarget && currentIndicator && currentIndicator[0] !== this) {
+                             dropCue.css({display: "none"});
+                         }
+                    });
+        }
+
+        function buildDescriptors() {
+            var item;
+            return $.map($(".t-group-indicator", groupHeader), function(i) {
+                item = $(i);                
+                return {
+                    field: item.data("field"),
+                    dir: item.has("span.t-arrow-up-small") ? "asc" : "desc"
+                };
+            }); 
+        }
+    </script>
+</body>
+</html>
