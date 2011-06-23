@@ -2,6 +2,7 @@
     var Application,
         pushState = "pushState" in history,
         currentHtml = "",
+        transitionEffects = kendo.support.hasHW3D ? 'halfFlip:horizontal' : 'fadeOut',
         initialFolder = 0;
 
     Application = {
@@ -28,12 +29,14 @@
 
                 var exampleBody = $('#exampleBody');
 
-                exampleBody.kendoAnimate('halfFlip:horizontal', 300, function() {
+                exampleBody.kendoAnimate(transitionEffects, 300, function() {
                     exampleBody.empty().html(Application.body(html));
 
-                    exampleBody.css(kendo.support.transitions.css + 'transform', 'rotateY(-90deg)');
-                    exampleBody.css('height');
-                    exampleBody.kendoAnimate('halfFlip:horizontal', 300, true);
+                    kendo.support.hasHW3D &&
+                        exampleBody
+                            .css(kendo.support.transitions.css + 'transform', 'rotateY(-90deg)')
+                            .css('height');
+                    exampleBody.kendoAnimate(transitionEffects, 300, true);
                 });
             });
         },
@@ -126,14 +129,16 @@
                 $.get(url, function() {
                             var example = $('#example');
 
-                            example.kendoAnimate('halfFlip:horizontal', 300, function() {
+                            example.kendoAnimate(transitionEffects, 300, function() {
                                 skinLink.eq(0).before(newLink);
                                 skinLink.remove();
                                 example[0].style.cssText = example[0].style.cssText;
 
-                                example.css(kendo.support.transitions.css + 'transform', 'rotateY(-90deg)');
-                                example.css('height');
-                                example.kendoAnimate('halfFlip:horizontal', 300, true);
+                                kendo.support.hasHW3D &&
+                                    example
+                                        .css(kendo.support.transitions.css + 'transform', 'rotateY(-90deg)')
+                                        .css('height');
+                                example.kendoAnimate(transitionEffects, 300, true);
                             });
                         });
             });
