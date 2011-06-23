@@ -15,24 +15,16 @@
                 $("#container").kendoChart({
                     title: {
                         text: "Teh chart",
-                        position: "top",
-                        border: {
-                            color: "red",
-                            width: 2
-                        },
-                        background: "#cf0"
+                        position: "top"
                     },
                     legend: {
-                        font: "12px Verdana, sans-serif",
-                        position: "right", // "top", "bottom", "left", "right"
-                        visible: true,
-                        border: {
-                            color: "red",
-                            width: 2
+                        // NEW
+                        labels: {
+                            font: "12px sans-serif",
+                            color: "#854324"
                         },
-                        background: "#cf0",
-                        margin: 20,
-                        padding: 10
+                        position: "right",
+                        visible: true
                     },
                     dataSource: [
                         {
@@ -54,25 +46,28 @@
                     ],
                     seriesDefaults: {
                         labels: {
-                            font: "12px Verdana, sans-serif",
-                            visible: true,
-                            background: "#cf0",
-                            border: {
-                                color: "#8b0",
-                                width: 1
-                            }
+                            font: "12px sans-serif",
+                            // NEW
+                            color: "#854324",
+                            visible: true
                         }
                     },
+                    // NEW
+                    chartArea: {
+                        background: "#ececd8",
+                        border: {
+                            color: "#bbb99d",
+                            width: 1
+                        }
+                    },
+                    seriesColors: ["#3f1c12", "#ba3b01", "#d95a1a", "#e7931e", "#f9bc12ff"],
                     series: [
                         {
                             name: "Value A",
                             field: "a"
                         }, {
                             name: "Value B",
-                            field: "b",
-                            labels: {
-                                background: "#fc0"
-                            }
+                            field: "b"
                         }, {
                             name: "Value C",
                             field: "c"
@@ -80,23 +75,27 @@
                     ],
                     categoryAxis: {
                         field: "name",
-                        majorGridLines: {
-                            width: 1.5,
-                            color: "#4C8FBA"
+                        line: {
+                            color: "#854324"
                         },
-                        minorGridLines: {
-                            width: 1,
-                            color: "#4C8FBA"
+                        // NEW
+                        labels: {
+                            color: "#854324"
+                        },
+                        majorGridlines: {
+                            color: "#bbb99d",
+                            visible: true
                         }
                     },
                     valueAxis: {
-                        majorGridLines: {
-                            width: 1,
-                            color: "#4C8FBA"
+                        line: {
+                            color: "#854324"
                         },
-                        minorGridLines: {
-                            width: 1,
-                            color: "#4C8FBA"
+                        labels: {
+                            color: "#854324"
+                        },
+                        majorGridlines: {
+                            color: "#bbb99d"
                         }
                     }
                 });
@@ -178,10 +177,10 @@
             }
         </script>
 
-        <div id="container" style="width: 800px; height: 600px; border-style:dotted solid;">
+        <div id="container" style="width: 800px; height: 600px;">
         </div>
 
-            <div class="configurator">
+            <div class="configurator" style="margin-top: 30px;">
                 <div>
                     <input  id="typeColumn" name="type"
                             type="radio" checked="checked" autocomplete="off" />
