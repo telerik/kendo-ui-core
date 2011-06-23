@@ -545,6 +545,7 @@
 
         options: {
             font: "10pt Verdana, sans-serif",
+            color: "#000",
             align: LEFT,
             vAlign: ""
         },
@@ -588,13 +589,15 @@
         },
 
         getViewElements: function(factory) {
-            var text = this;
+            var text = this,
+                options = text.options;
 
             return [
                 factory.text(text.content, {
                     x: text.box.x1, y: text.box.y1,
                     baseline: text.baseline,
-                    font: text.options.font })
+                    font: options.font,
+                    color: options.color })
             ];
         }
     });
@@ -606,7 +609,7 @@
             BoxElement.fn.init.call(textBox, options);
 
             textBox.children.push(
-                new Text(content, deepExtend({ }, textBox.options, {align: LEFT, vAlign: TOP}))
+                new Text(content, deepExtend({ }, textBox.options, { align: LEFT, vAlign: TOP }))
             );
 
             // Calculate size
@@ -712,7 +715,7 @@
             var title = this,
                 options = title.options,
                 textBoxOptions = deepExtend({}, options, {
-                    vAlign: options.position,
+                    vAlign: options.position
                 });
 
             title.children.push(
@@ -739,7 +742,9 @@
         options: {
             position: RIGHT,
             series: [],
-            font: "12px Verdana, sans-serif",
+            labels: {
+                font: "12px Verdana, sans-serif"
+            },
             offsetX: 0,
             offsetY: 0,
             margin: 10,
@@ -759,7 +764,7 @@
 
             for (var i = 0; i < series.length; i++) {
                 var name = series[i].name,
-                    label = new Text(name, { font: legend.options.font });
+                    label = new Text(name, legend.options.labels);
 
                 legend.children.push(label);
             };
@@ -2134,7 +2139,8 @@
             if (!text.template) {
                 text.template = SVGText.template = template(
                     "<text x='<%= options.x %>' y='<%= options.y + options.baseline %>' " +
-                    "style='font: <%= options.font %>'><%= content %></text>"
+                    "style='font: <%= options.font %>' fill='<%= options.color %>'>" +
+                    "<%= content %></text>"
                 );
             }
         },
@@ -2253,7 +2259,8 @@
                 text.template = VMLText.template = template(
                     "<kvml:textbox style='position: absolute; " +
                     "left: <%= options.x %>px; top: <%= options.y %>px; " +
-                    "font: <%= options.font %>'><%= content %></kvml:textbox>"
+                    "font: <%= options.font %>; color: <%= options.color %>'>" +
+                    "<%= content %></kvml:textbox>"
                 );
             }
         },
@@ -2261,7 +2268,8 @@
         options: {
             x: 0,
             y: 0,
-            font: "16px Verdana, sans-serif"
+            font: "16px Verdana, sans-serif",
+            color: "#000"
         }
     });
 
