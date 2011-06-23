@@ -951,7 +951,10 @@
         },
 
         options: {
-            lineWidth: 1,
+            line: {
+                width: 1,
+                color: "#000",
+            },
             majorTickType: OUTSIDE,
             majorTickSize: 4,
             minorTickType: NONE,
@@ -977,7 +980,9 @@
                             if (!inArray(pos, majorTicks)) {
                                 return {
                                     pos: pos,
-                                    size: options.minorTickSize
+                                    size: options.minorTickSize,
+                                    width: options.line.width,
+                                    color: options.line.color
                                 };
                             }
                         });
@@ -989,7 +994,9 @@
                                         if (inArray(pos, majorTicks)) {
                                             return {
                                                 pos: pos,
-                                                size: options.majorTickSize
+                                                size: options.majorTickSize,
+                                                width: options.line.width,
+                                                color: options.line.color
                                             };
                                         }
                                     }));
@@ -998,13 +1005,19 @@
             return $.map(ticks, function(tick) {
                 if (isVertical) {
                     return factory.line(
-                        box.x2 - tick.size, tick.pos,
-                        box.x2, tick.pos
+                            box.x2 - tick.size, tick.pos, box.x2, tick.pos,
+                            {
+                                strokeWidth: tick.width,
+                                stroke: tick.color
+                            }
                     );
                 } else {
                     return factory.line(
-                        tick.pos, box.y1,
-                        tick.pos, box.y1 + tick.size
+                            tick.pos, box.y1, tick.pos, box.y1 + tick.size,
+                            {
+                                strokeWidth: tick.width,
+                                stroke: tick.color
+                            }
                     );
                 }
             });
@@ -1113,15 +1126,24 @@
                 childElements = ChartElement.fn.getViewElements.call(axis, factory);
 
             var majorTickPositions = axis.getMajorTickPositions();
-            if (options.lineWidth > 0) {
+            if (options.line.width > 0) {
                 if (isVertical) {
                     childElements.push(factory.line(
                         axis.box.x2, majorTickPositions[0],
-                        axis.box.x2, majorTickPositions[majorTickPositions.length - 1]));
+                        axis.box.x2, majorTickPositions[majorTickPositions.length - 1],
+                        {
+                            strokeWidth: options.line.width,
+                            stroke: options.line.color
+                        }
+                    ));
                 } else {
                     childElements.push(factory.line(
                         majorTickPositions[0], axis.box.y1,
-                        majorTickPositions[majorTickPositions.length - 1], axis.box.y1));
+                        majorTickPositions[majorTickPositions.length - 1], axis.box.y1),
+                        {
+                            strokeWidth: options.line.width,
+                            stroke: options.line.color
+                        });
                 }
             }
 
@@ -1398,15 +1420,21 @@
                 isVertical = options.orientation === VERTICAL,
                 childElements = ChartElement.fn.getViewElements.call(axis, factory);
 
-            if (options.lineWidth > 0) {
+            if (options.line.width > 0) {
                 if (isVertical) {
                     childElements.push(factory.line(
-                        axis.box.x2, axis.box.y1,
-                        axis.box.x2, axis.box.y2));
+                        axis.box.x2, axis.box.y1, axis.box.x2, axis.box.y2,
+                        {
+                            strokeWidth: options.line.width,
+                            stroke: options.line.color
+                        }));
                 } else {
                     childElements.push(factory.line(
-                        axis.box.x1, axis.box.y1,
-                        axis.box.x2, axis.box.y1));
+                        axis.box.x1, axis.box.y1, axis.box.x2, axis.box.y1,
+                        {
+                            strokeWidth: options.line.width,
+                            stroke: options.line.color
+                        }));
                 }
             }
 
