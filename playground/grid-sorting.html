@@ -25,7 +25,7 @@
             }
 
             .grid {
-                width: 500px;
+                width: 700px;
             }
 
             .grid-header {
@@ -171,7 +171,7 @@
         <script>
             var data = [];
 
-            for (var i = 0; i < 500000; i++) {
+            for (var i = 0; i < 500001; i++) {
                 data.push({ OrderID: i, ContactName: "Contact " + i, ShipAddress: "Ship Address " + i });
             }
 
@@ -190,16 +190,17 @@
             $(".grid-data, .grid-scroller").height(visibleHeight);
 
             var totalHeight = data.length * rowHeight;
+            var sliceHeight = 250000;
 
-            var scrollHeight = Math.min(totalHeight, 250000);
-            var scale = totalHeight / scrollHeight;
+            for (var i = 0; i < Math.floor(totalHeight / sliceHeight); i++) {
+                $("<div />").height(sliceHeight).width(50).appendTo($(".grid-scroller"));
+            }
+
+            if (totalHeight % sliceHeight) {
+                $("<div />").height(totalHeight % sliceHeight).width(50).appendTo($(".grid-scroller"));
+            }
 
             var rowsPerPage = $(".grid-data").outerHeight() / rowHeight;
-
-            $("<div />").height(scrollHeight).width(50).html(""
-                //$.map(data, function(item, index) { return "<div>" + item.OrderID + "</div>" }).join("")
-
-                ).appendTo($(".grid-scroller"));
 
             var firstRowIndex = 0;
             var lastRowIndex = 11;
@@ -215,7 +216,7 @@
             $(".grid-scroller").bind("scroll", function(e) {
                // clearTimeout(timeout);
                // timeout = setTimeout($.proxy(function() {
-                    var scrollTop = this.scrollTop * scale;
+                    var scrollTop = this.scrollTop;// * scale;
                     firstRowIndex = Math.floor(scrollTop / rowHeight);
                     lastRowIndex = Math.floor((scrollTop + visibleHeight) / rowHeight);
 
@@ -249,7 +250,6 @@
                 $("#scrollTop").text($(".grid-scroller")[0].scrollTop);
                 $("#rowHeight").text(rowHeight);
                 $("#totalHeight").text(totalHeight);
-                $("#scrollHeight").text(scrollHeight);
                 $("#page").text(page);
                 $("#skip").text(skip);
                 $("#rowsPerPage").text(rowsPerPage);
