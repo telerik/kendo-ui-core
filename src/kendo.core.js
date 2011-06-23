@@ -29,11 +29,19 @@
             that = this,
             subclass = proto && proto.init? proto.init : function () {
                 that.apply(this, arguments);
-            };
+            },
+            subProto;
 
         base.prototype = that.prototype;
-        subclass.fn = subclass.prototype = extend(true, new base, proto);
-        subclass.fn.constructor = subclass;
+        subProto = subclass.fn = subclass.prototype = extend(new base, proto);
+
+        for (var member in subProto) {
+            if (typeof subProto[member] === "object") {
+                subProto[member] = extend(true, {}, base.prototype[member], proto[member]);
+            }
+        }
+
+        subProto.constructor = subclass;
         subclass.extend = that.extend;
 
         return subclass;

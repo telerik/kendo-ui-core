@@ -829,12 +829,13 @@
 
                 //--------------------------------------------------------------
                 var marker, label;
-                module("markers", {
+                module("Legend / Markers", {
                     setup: function() {
                         legend = new Chart.Legend({
                             series: [ { name: "Series 1", color: "#f00" } ]
                         });
 
+                        viewFactory = new ViewFactoryStub();
                         legend.updateLayout(chartBox);
                         legend.getViewElements(viewFactory);
 
@@ -844,7 +845,7 @@
                 });
 
                 test("creates markers for series", function() {
-                    equal(viewFactory.log.rect.length, 1);
+                    equal(viewFactory.log.rect.length, 2);
                 });
 
                 test("sets marker color", function() {
@@ -869,6 +870,48 @@
 
                 test("markers are 1/2 of label size", function() {
                     equal(marker.y2 - marker.y1, legend.children[0].box.height() / 2);
+                });
+
+                // ------------------------------------------------------------
+                var legendBox,
+                    BORDER_WIDTH = 2,
+                    BORDER_COLOR = "#f00",
+                    BACKGROUND = "#0f0",
+                    PADDING = 10;
+                module("Legend / Box", {
+                    setup: function() {
+                        legend = new Chart.Legend({
+                            series: [ { name: "Series 1", color: "#f00" } ],
+                            border: {
+                                color: BORDER_COLOR,
+                                width: BORDER_WIDTH
+                            },
+                            background: BACKGROUND,
+                            padding: PADDING
+                        });
+
+                        viewFactory = new ViewFactoryStub();
+                        legend.updateLayout(chartBox);
+                        legend.getViewElements(viewFactory);
+
+                        legendBox = viewFactory.log.rect[1];
+                    }
+                });
+
+                test("renders box with padding", function() {
+                    sameBox(legendBox, new Box2D(915, 483, 1000, 517));
+                });
+
+                test("renders border width", function() {
+                    same(legendBox.style.strokeWidth, BORDER_WIDTH);
+                });
+
+                test("renders border color", function() {
+                    same(legendBox.style.stroke, BORDER_COLOR);
+                });
+
+                test("renders background color", function() {
+                    same(legendBox.style.fill, BACKGROUND);
                 });
             })();
 
