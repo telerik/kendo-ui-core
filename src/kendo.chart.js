@@ -970,7 +970,9 @@
             max: 1,
             lineWidth: 1,
             majorTickType: OUTSIDE,
-            tickSize: 4,
+            majorTickSize: 4,
+            minorTickType: NONE,
+            minorTickSize: 3,
             axisCrossingValue: 0,
             orientation: VERTICAL,
             majorGridLines: {
@@ -1002,12 +1004,12 @@
             if (isVertical) {
                 axis.box = new Box2D(
                     targetBox.x1, targetBox.y1,
-                    targetBox.x1 + maxLabelWidth + options.tickSize, targetBox.y2
+                    targetBox.x1 + maxLabelWidth + options.majorTickSize, targetBox.y2
                 );
             } else {
                 axis.box = new Box2D(
                     targetBox.x1, targetBox.y1,
-                    targetBox.x2, targetBox.y1 + options.tickSize + maxLabelHeight
+                    targetBox.x2, targetBox.y1 + options.majorTickSize + maxLabelHeight
                 );
             }
 
@@ -1031,9 +1033,9 @@
                         new Box2D(box.x1, labelPos,
                                 box.x1 + maxLabelWidth, labelPos + labelSize) :
                         new Box2D(labelPos,
-                                box.y1 + options.tickSize,
+                                box.y1 + options.majorTickSize,
                                 labelPos + labelSize,
-                                box.y1 + options.tickSize + maxLabelHeight);
+                                box.y1 + options.majorTickSize + maxLabelHeight);
 
 
                 label.updateLayout(labelBox);
@@ -1069,26 +1071,46 @@
             var axis = this,
                 options = axis.options,
                 isVertical = options.orientation === VERTICAL,
-                box = axis.box;
+                box = axis.box,
+                majorTicks = axis.getMajorTickPositions(),
+                ticks = [];
+
+            if (options.minorTickType === OUTSIDE) {
+                ticks = $.map(axis.getMinorTickPositions(), function(pos) {
+                            if (!inArray(pos, majorTicks)) {
+                                return {
+                                    pos: pos,
+                                    size: options.minorTickSize
+                                };
+                            }
+                        });
+            }
+
 
             if (options.majorTickType === OUTSIDE) {
-                var majorTickPositions = axis.getMajorTickPositions();
-                return $.map(majorTickPositions, function(tickPos) {
-                    if (isVertical) {
-                        return factory.line(
-                            box.x2 - options.tickSize, tickPos,
-                            box.x2, tickPos
-                        );
-                    } else {
-                        return factory.line(
-                            tickPos, box.y1,
-                            tickPos, box.y1 + options.tickSize
-                        );
-                    }
-                });
-            } else {
-                return [];
+                ticks = ticks.concat($.map(majorTicks, function(pos) {
+                                        if (inArray(pos, majorTicks)) {
+                                            return {
+                                                pos: pos,
+                                                size: options.majorTickSize
+                                            };
+                                        }
+                                    }));
             }
+
+            return $.map(ticks, function(tick) {
+                if (isVertical) {
+                    return factory.line(
+                        box.x2 - tick.size, tick.pos,
+                        box.x2, tick.pos
+                    );
+                } else {
+                    return factory.line(
+                        tick.pos, box.y1,
+                        tick.pos, box.y1 + tick.size
+                    );
+                }
+            });
         },
 
         autoMajorUnit: function (min, max) {
@@ -1285,8 +1307,10 @@
         options: {
             categories: [],
             lineWidth: 1,
-            tickSize: 4,
+            majorTickSize: 4,
             majorTickType: OUTSIDE,
+            minorTickSize: 3,
+            minorTickType: OUTSIDE,
             axisCrossingValue: 0,
             orientation: HORIZONTAL,
             majorGridLines: {
@@ -1321,19 +1345,19 @@
             if (isVertical) {
                 axis.box = new Box2D(
                     targetBox.x1, targetBox.y1,
-                    targetBox.x1 + options.tickSize + maxLabelWidth, targetBox.y2
+                    targetBox.x1 + options.majorTickSize + maxLabelWidth, targetBox.y2
                 );
             } else {
                 axis.box = new Box2D(
                     targetBox.x1, targetBox.y1,
-                    targetBox.x2, targetBox.y1 + options.tickSize + maxLabelHeight
+                    targetBox.x2, targetBox.y1 + options.majorTickSize + maxLabelHeight
                 );
             }
 
             var majorDivisions = axis.getMajorTickPositions();
 
             if (isVertical) {
-                labelX = axis.box.x2 - options.tickSize;
+                labelX = axis.box.x2 - options.majorTickSize;
                 for (var i = 0; i < children.length; i++) {
                     var label = children[i],
                         currentDivision = majorDivisions[i],
@@ -1347,7 +1371,7 @@
                     ));
                 }
             } else {
-                labelY = axis.box.y1 + options.tickSize;
+                labelY = axis.box.y1 + options.majorTickSize;
                 for (var i = 0; i < children.length; i++) {
                     var label = children[i],
                         currentDivision = majorDivisions[i],
@@ -1389,25 +1413,47 @@
             var axis = this,
                 options = axis.options,
                 isVertical = options.orientation === VERTICAL,
-                box = axis.box;
+                box = axis.box,
+                majorTicks = axis.getMajorTickPositions(),
+                ticks = [];
 
-            if (options.majorTickType === OUTSIDE) {
-                var majorTickPositions = axis.getMajorTickPositions();
-                return $.map(majorTickPositions, function(tickPos) {
+            if (!inArray(NONE, [options.majorTickType, options.minorTickType])) {
+                if (options.minorTickType === OUTSIDE) {
+                    ticks = $.map(axis.getMinorTickPositions(), function(pos) {
+                                if (!inArray(pos, majorTicks)) {
+                                    return {
+                                        pos: pos,
+                                        size: options.minorTickSize
+                                    };
+                                }
+                            });
+                }
+
+
+                if (options.minorTickType === OUTSIDE) {
+                    ticks = ticks.concat($.map(majorTicks, function(pos) {
+                                            if (inArray(pos, majorTicks)) {
+                                                return {
+                                                    pos: pos,
+                                                    size: options.majorTickSize
+                                                };
+                                            }
+                                        }));
+                }
+
+                return $.map(ticks, function(tick) {
                     if (isVertical) {
                         return factory.line(
-                            box.x2 - options.tickSize, tickPos,
-                            box.x2, tickPos
+                            box.x2 - tick.size, tick.pos,
+                            box.x2, tick.pos
                         );
                     } else {
                         return factory.line(
-                            tickPos, box.y1,
-                            tickPos, box.y1 + options.tickSize
+                            tick.pos, box.y1,
+                            tick.pos, box.y1 + tick.size
                         );
                     }
                 });
-            } else {
-                return [];
             }
         },
 
