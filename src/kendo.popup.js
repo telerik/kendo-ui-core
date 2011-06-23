@@ -185,11 +185,12 @@
             return output;
         },
 
-        _flip: function(offset, size, anchorSize, viewPortSize, origin, position) {
+        _flip: function(offset, size, anchorSize, viewPortSize, origin, position, boxSize) {
             var output = 0;
+                boxSize = boxSize || size;
 
             if (position !== origin && position !== CENTER && origin !== CENTER) {
-                if (offset + size > viewPortSize) {
+                if (offset + boxSize > viewPortSize) {
                     output += -(anchorSize + size);
                 }
 
@@ -262,11 +263,11 @@
             var flipPos = extend({}, location);
 
             if (collisions[0] === "flip") {
-                location.top += that._flip(offsets.top, element.outerHeight(), anchor.outerHeight(), viewport.height() / zoomLevel, origins[0], positions[0])
+                location.top += that._flip(offsets.top, element.outerHeight(), anchor.outerHeight(), viewport.height() / zoomLevel, origins[0], positions[0], wrapper.outerHeight())
             }
 
             if (collisions[1] === "flip") {
-                location.left += that._flip(offsets.left, element.outerWidth(), anchor.outerWidth(), viewport.width() / zoomLevel, origins[1], positions[1]);
+                location.left += that._flip(offsets.left, element.outerWidth(), anchor.outerWidth(), viewport.width() / zoomLevel, origins[1], positions[1], wrapper.outerWidth());
             }
 
             wrapper.css(location);
