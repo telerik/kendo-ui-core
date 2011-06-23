@@ -25,7 +25,7 @@
             }
 
             .grid {
-                width: 500px;
+                width: 700px;
             }
 
             .grid-header {
@@ -124,6 +124,14 @@
                 <dd id="lastRowIndex"></dd>
             </dl>
             <dl>
+                <dt>firstTableRowIndex</dt>
+                <dd id="firstTableRowIndex"></dd>
+            </dl>
+            <dl>
+                <dt>lastTableRowIndex</dt>
+                <dd id="lastTableRowIndex"></dd>
+            </dl>
+            <dl>
                 <dt>last</dt>
                 <dd id="last"></dd>
             </dl>
@@ -169,15 +177,31 @@
             </div>
         </div>
         <script>
-            var data = [];
-
-            for (var i = 0; i < 500000; i++) {
-                data.push({ OrderID: i, ContactName: "Contact " + i, ShipAddress: "Ship Address " + i });
-            }
-
             var dataSource = new kendo.data.DataSource({
-                data: data,
-                pageSize: 24
+                serverPaging: true,
+                transport: {
+                    read: function(options) {
+                        var take = options.data.take,
+                            skip = options.data.skip;
+
+                        var data = [];
+
+                        for (var i = skip; i < skip + take; i++) {
+                            data.push({ OrderID: i, ContactName: "Contact " + i, ShipAddress: "Ship Address " + i });
+                        }
+
+                        options.success(data);
+                    }
+                } ,
+                deserializer: {
+                    data: function(data) {
+                        return data;
+                    },
+                    total: function() {
+                        return 1000000;
+                    }
+                },
+                pageSize: 16
             });
 
             $("table#grid").kendoGrid({
@@ -187,57 +211,62 @@
             var rowHeight = $("table#grid td:first")[0].offsetHeight;
             var visibleHeight = 300;
 
-            $(".grid-data, .grid-scroller").height(visibleHeight);
+            $(".grid-data, .grid-scroller").height(Math.min(visibleHeight, dataSource.pageSize() * rowHeight));
 
-            var totalHeight = data.length * rowHeight;
+            var totalHeight = dataSource.total() * rowHeight;
+            var sliceHeight = 250000;
 
-            var scrollHeight = Math.min(totalHeight, 250000);
-            var scale = totalHeight / scrollHeight;
+            for (var i = 0; i < Math.floor(totalHeight / sliceHeight); i++) {
+                $("<div />").height(sliceHeight).width(50).appendTo($(".grid-scroller"));
+            }
+
+            if (totalHeight % sliceHeight) {
+                $("<div />").height(totalHeight % sliceHeight).width(50).appendTo($(".grid-scroller"));
+            }
 
             var rowsPerPage = $(".grid-data").outerHeight() / rowHeight;
 
-            $("<div />").height(scrollHeight).width(50).html(""
-                //$.map(data, function(item, index) { return "<div>" + item.OrderID + "</div>" }).join("")
-
-                ).appendTo($(".grid-scroller"));
-
-            var firstRowIndex = 0;
-            var lastRowIndex = 11;
+            var firstRowIndex;
+            var firstTableRowIndex = 0;
+            var lastTableRowIndex = 0;
+            var lastRowIndex;
             var skip = 0;
-            var page = 1;
-            var last = 23;
-            var first = 0;
+            var last;
+            var first;
             var scroll = 0;
             var timeout;
-            var take = 24;
+            var take = dataSource.pageSize();
             var scrollTop = 0;
+            var table = $("#grid")[0];
+            var tableParent = table.parentNode;
+
 
             $(".grid-scroller").bind("scroll", function(e) {
                // clearTimeout(timeout);
                // timeout = setTimeout($.proxy(function() {
-                    var scrollTop = this.scrollTop * scale;
+                    var scrollTop = this.scrollTop;// * scale;
                     firstRowIndex = Math.floor(scrollTop / rowHeight);
-                    lastRowIndex = Math.floor((scrollTop + visibleHeight) / rowHeight);
+                    lastRowIndex = Math.floor((scrollTop + take * rowHeight) / rowHeight);
 
                     skip = first = dataSource._skip || 0;
 
                     last = first + take;
 
                     if (firstRowIndex < first) {
-                        skip = Math.max(0, firstRowIndex - take);
+                        skip = Math.max(0, lastRowIndex - take);
 
                         dataSource.range(skip, take);
 
-                        $(".grid-data").scrollTop(0);
+                        tableParent.scrollTop = 0;
                     } else if (lastRowIndex > last) {
                         skip = firstRowIndex;
 
                         dataSource.range(skip, take);
 
-                        $(".grid-data").scrollTop(rowHeight / 2);
+                        tableParent.scrollTop = rowHeight;
                     } else {
                         scroll = scrollTop - (skip * rowHeight);
-                        $(".grid-data").scrollTop(scroll);
+                        tableParent.scrollTop = scroll;
                     }
 
                     log();
@@ -249,13 +278,13 @@
                 $("#scrollTop").text($(".grid-scroller")[0].scrollTop);
                 $("#rowHeight").text(rowHeight);
                 $("#totalHeight").text(totalHeight);
-                $("#scrollHeight").text(scrollHeight);
-                $("#page").text(page);
                 $("#skip").text(skip);
                 $("#rowsPerPage").text(rowsPerPage);
                 $("#totalRows").text($("#grid tbody tr").length);
                 $("#lastRowIndex").text(lastRowIndex);
                 $("#firstRowIndex").text(firstRowIndex);
+                $("#firstTableRowIndex").text(firstTableRowIndex);
+                $("#lastTableRowIndex").text(lastTableRowIndex);
                 $("#last").text(last);
                 $("#rows").text($(".grid-data tr").length);
             }

@@ -343,8 +343,10 @@
                 len,
                 result = {};
 
-            for(idx = 0, len = this.data.length; idx < len; idx++) {
-               calculateAggregate(result, aggregates, this.data[idx], idx, len);
+            if (aggregates && aggregates.length) {
+                for(idx = 0, len = this.data.length; idx < len; idx++) {
+                   calculateAggregate(result, aggregates, this.data[idx], idx, len);
+                }
             }
             return result;
         }
