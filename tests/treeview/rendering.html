@@ -44,6 +44,12 @@
                 ok(element.find("ul:last").is(":not(.t-treeview-lines)"));
             });
 
+            test("collapsed groups", function() {
+                var element = treeviewFromHtml("<ul><li data-expanded='false'>item<ul><li>subitem</li></ul></li></ul>");
+
+                equals(element.find("ul:last").css("display"), "none");
+            });
+
             module("group");
 
             var rendering = new kendo.ui.TreeView.TreeViewRendering();

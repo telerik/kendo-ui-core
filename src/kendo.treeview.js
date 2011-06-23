@@ -27,32 +27,60 @@
                 });
     }
 
+    function htmlFromArray(data) {
+        var html = "<ul>",
+            i = 0,
+            len = data.length;
+
+        for (; i < len; i++) {
+            html += "<li>" + data[i].text /* + htmlFromArray(data[i].items) */ + "</li>";
+        }
+
+        html += "</ul>";
+
+        return html;
+    }
+
     var TreeView = Component.extend({
         init: function (element, options) {
             var that = this,
                 element = $(element),
-                clickableItems = ".t-in:not(.t-state-selected,.t-state-disabled)";
+                clickableItems = ".t-in:not(.t-state-selected,.t-state-disabled)",
+                dataInit;
+
+            options = $.isArray(options) ? (dataInit = true, { dataSource: options }) : options;
 
             Component.prototype.init.call(that, element, options);
 
             options = that.options;
 
+            // render treeview if it's not already rendered
+            if (!element.hasClass("t-treeview")) {
+                that._wrapper();
+
+                if (!that.root.length) { // treeview initialized from empty element
+                    that.root = that.wrapper.html(htmlFromArray(options.dataSource)).children("ul");
+                }
+
+                that._groups();
+
+                that._items();
+            } else {
+                // otherwise just initialize properties
+                that.wrapper = element;
+                that.root = element.children("ul").eq(0);
+            }
+
             that.rendering = new TreeViewRendering(that);
             
-            that._wrapper();
-
-            that._groups();
-
-            that._items();
-
-            element
+            that.wrapper
                 .delegate(".t-in.t-state-selected", "mouseenter", function(e) { e.preventDefault(); })
                 .delegate(clickableItems, "mouseenter", function () { $(this).addClass("t-state-hover"); })
                 .delegate(clickableItems, "mouseleave", function () { $(this).removeClass("t-state-hover"); })
                 .delegate(clickableItems, CLICK, proxy(that.nodeSelect, that))
                 .delegate("div:not(.t-state-disabled) .t-in", "dblclick", proxy(that.nodeClick, that))
                 .delegate(":checkbox", CLICK, proxy(that.checkboxClick, that))
-                .delegate(".t-plus, .t-minus", CLICK, proxy(that.nodeClick, that));
+                .delegate(".t-plus,.t-minus", CLICK, proxy(that.nodeClick, that));
 
             if (that.isAjax()) {
                 markAjaxLoadableNodes(element);
@@ -67,30 +95,34 @@
         },
 
         options: {
-            queryString: {
-                text: "text",
-                value: "value",
-                checked: "checked"
-            },
-            dataTextField: "text",
-            dataValueField: "value"
+            dataSource: {}
         },
 
         _wrapper: function() {
             var that = this,
-                wrapper = that.wrapper;
+                element = that.element,
+                wrapper, root;
 
-            if (!wrapper || wrapper.is(":not(.t-treeview)")) {
-                wrapper = that.element.wrap('<div class="t-widget t-treeview t-reset" />').parent();
+            if (element.is("div")) {
+                wrapper = element.addClass("t-widget t-treeview t-reset");
+                root = wrapper.children("ul").eq(0);
+            } else { // element is ul
+                wrapper = element.wrap('<div class="t-widget t-treeview t-reset" />').parent();
+                root = element;
             }
 
             that.wrapper = wrapper;
+            that.root = root;
         },
 
         _groups: function() {
-            this.element
-                .addClass("t-treeview-lines")
-                .find("ul").andSelf().addClass("t-group");
+            this.root
+                .addClass("t-treeview-lines t-group")
+                .find("ul")
+                    .each(function() {
+                        var group = $(this);
+                        group.css("display", group.parent().data("expanded") === true ? "" : "none");
+                    });
         },
 
         _items: function() {

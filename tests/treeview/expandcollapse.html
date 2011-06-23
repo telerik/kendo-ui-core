@@ -24,17 +24,18 @@
             function createTreeView(data) {
                 var rendering = new kendo.ui.TreeView.TreeViewRendering();
 
-                return $(rendering.renderGroup({
+                return $("<div class='t-widget t-treeview t-reset'>" + rendering.renderGroup({
                     group: {
                         isFirstLevel: true,
                         isExpanded: true
                     },
                     items: data
-                })).appendTo(document.body).kendoTreeView();
+                }) + "</div>").appendTo(document.body).kendoTreeView();
             }
 
             module("expand / collapse", {
                 teardown: function() {
+                    $(".treeview").remove();
                 }
             });
 
@@ -70,6 +71,8 @@
                 treeview = createTreeView([
                     { text: "foo", expanded: true, items: [ { text: "bar" } ] }
                 ]);
+
+                debugger;
 
                 var item = $(".t-item:first", treeview);
 

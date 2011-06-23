@@ -19,9 +19,23 @@
             var TreeView = kendo.ui.TreeView,
                 list;
 
-            module("kendo.ui.treeview initialization", {
+            module("initialization from div");
+
+            test("adds necessary classes to div", function() {
+                var element = $("<div />").kendoTreeView();
+
+                ok(element.is(".t-widget.t-treeview.t-reset"));
+            });
+
+            test("attaches treeview object to div", function() {
+                var element = $("<div />").kendoTreeView();
+
+                ok(element.data("kendoTreeView") instanceof TreeView);
+            });
+
+            module("initialization from ul", {
                 setup: function() {
-                    list = $("<ul><li>item</li></ul>").appendTo(document.body);
+                    list = $("<ul><li>foo</li></ul>").appendTo(document.body);
                 },
                 teardown: function() {
                     list.closest(".t-treeview").remove();
@@ -29,7 +43,7 @@
                 }
             });
 
-            test("kendoTreeView attaches a treeview object to target", function() {
+            test("attaches treeview object to ul", function() {
                 list.kendoTreeView();
 
                 ok(list.data("kendoTreeView") instanceof TreeView);
@@ -41,6 +55,18 @@
                var options = list.data("kendoTreeView").options;
                notEqual(options.foo, undefined)
                equal(options.foo, "bar");
+            });
+
+            module("initialization from array");
+
+            test("initializing from array", function() {
+                var element = $("<div />").appendTo(document.body).kendoTreeView([{ text: "foo" }]);
+
+                ok(element.is(".t-treeview.t-widget.t-reset"));
+                equals(element.children("ul.t-treeview-lines.t-group").length, 1);
+                equals(element.find("li").length, 1);
+                ok(element.find("li").is(".t-item"));
+                equals(element.find("li").text(), "foo");
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
