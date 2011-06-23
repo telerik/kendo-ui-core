@@ -38,15 +38,7 @@
     <body>
         <!-- nav -->
         <div id="box">
-            <div id="header">
-                <br><br>
-                <select id="skinSelector" style="float: right" readonly="readonly">
-                    <option value="Hay">Hay</option>
-                    <option value="Black">Black</option>
-                    <option value="Vista">Vista</option>
-                    <option value="Web20">Web20</option>
-                </select>
-            </div>
+            <div id="header"></div>
             <ul id="nav">
                 <li>
                     Autocomplete
@@ -82,6 +74,15 @@
                     </ul>
                 </li>
             </ul>
+            <div id="exampleHead">
+                <span class="exampleName"></span>
+                <select id="skinSelector" class="skinSelector" readonly="readonly">
+                    <option value="Hay">Hay</option>
+                    <option value="Black">Black</option>
+                    <option value="Vista">Vista</option>
+                    <option value="Web20">Web20</option>
+                </select>
+            </div>
             <script type="text/javascript">
                 $('#nav').kendoPanelBar({ animation: { open: { effects: 'fadeIn expandVertical' } }, expandMode: 0 });
                 $('#skinSelector').kendoDropDownList();
