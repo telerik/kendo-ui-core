@@ -27,20 +27,6 @@
                 });
     }
 
-    function htmlFromArray(data) {
-        var html = "<ul>",
-            i = 0,
-            len = data.length;
-
-        for (; i < len; i++) {
-            html += "<li>" + data[i].text /* + htmlFromArray(data[i].items) */ + "</li>";
-        }
-
-        html += "</ul>";
-
-        return html;
-    }
-
     var TreeView = Component.extend({
         init: function (element, options) {
             var that = this,
@@ -54,25 +40,32 @@
 
             options = that.options;
 
+            that.rendering = new TreeViewRendering(that);
+            
             // render treeview if it's not already rendered
             if (!element.hasClass("t-treeview")) {
                 that._wrapper();
 
                 if (!that.root.length) { // treeview initialized from empty element
-                    that.root = that.wrapper.html(htmlFromArray(options.dataSource)).children("ul");
+                    that.root = that.wrapper.html(that.rendering.renderGroup({
+                        items: options.dataSource,
+                        group: {
+                            isFirstLevel: true,
+                            isExpanded: true
+                        },
+                        treeview: {}
+                    })).children("ul");
+                } else {
+                    that._groups();
+
+                    that._items();
                 }
-
-                that._groups();
-
-                that._items();
             } else {
                 // otherwise just initialize properties
                 that.wrapper = element;
                 that.root = element.children("ul").eq(0);
             }
 
-            that.rendering = new TreeViewRendering(that);
-            
             that.wrapper
                 .delegate(".t-in.t-state-selected", "mouseenter", function(e) { e.preventDefault(); })
                 .delegate(clickableItems, "mouseenter", function () { $(this).addClass("t-state-hover"); })

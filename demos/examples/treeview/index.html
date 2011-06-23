@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <!-- meta -->
+        <!-- meta -->
+        <title>Default TreeView Demo</title>
+        <!-- script -->
+        <script src="../../../src/jquery.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.fx.js"></script>
+        <script src="../../../src/kendo.treeview.js"></script>
+        <!-- script -->
+        <!-- css -->
+        <link type="text/css" href="../styles/examples.css" rel="stylesheet"/>
+        <link type="text/css" href="../../../styles/kendo.common.css" rel="stylesheet"/>
+        <link type="text/css" href="../../../styles/kendo.vista.css" rel="stylesheet"/>
+        <!-- css -->
+    </head>
+    <body>
+        <!-- nav -->
+        <!-- nav -->
+        <!-- description -->
+        <div class="description">This example shows how to bind the kendoTreeView to JSON.</div>
+        <!-- description -->
+        <div id="example">
+            <div id="TreeView"></div>
+            <script type="text/javascript">
+                $("#TreeView").kendoTreeView([
+                    { text: "foo", expanded: true, items: [
+                        { text: "fool" },
+                        { text: "food" },
+                        { text: "foot" }
+                    ] },
+                    { text: "bar", items: [
+                        { text: "bard" },
+                        { text: "barn" },
+                        { text: "bark" }
+                    ] },
+                    { text: "baz" }
+                ]);
+            </script>
+        </div>
+        <!-- tools -->
+        <!-- tools -->
+    </body>
+</html>
+
