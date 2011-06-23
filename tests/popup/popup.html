@@ -200,7 +200,7 @@
                 });
 
                 popup.open();
-                equal(div.parent().offset().top + div.outerHeight(), anchor.offset().top);
+                equal(Math.round(div.parent().offset().top) + Math.round(div.outerHeight()), Math.round(anchor.offset().top));
             });
 
             test("origin top and position center", function() {
@@ -506,7 +506,7 @@
                 });
                 popup.open();
 
-                equal(argsCount, 6);
+                equal(argsCount, 7);
             });
 
             test("collision flip calls flip strategy when opened horizontal", function() {
@@ -528,7 +528,7 @@
                 });
                 popup.open();
 
-                equal(argsCount, 6);
+                equal(argsCount, 7);
             });
 
             test("flip when element does not fit right should be position left", function() {
