@@ -10,43 +10,15 @@
          <script src="../src/jquery.js"></script>
         <script src="../src/kendo.core.js"></script>
         <script src="../src/kendo.query.js"></script>
-        <!--<script src="../src/kendo.datasource.js"></script>
-        <script src="../src/kendo.grid.js"></script>-->
-        <link href="../styles/kendo.common.css" type="text/css"/>
-        <link href="../styles/kendo.vista.css" type="text/css" rel="stylesheet"/>
-        <style type="text/css">
-            .t-marquee
-            {
-                position:absolute;
-                border:1px dotted black;
-                background: rgba(200, 200, 255, 0.7);
-                border: 1px solid rgba(100, 100, 255, 0.8);
-            }
-            .t-state-focused
-            {
-                background: #C8E844;
-            }
-            table
-            {
-                border-collapse: collapse;
-                border: 1px solid black;
-            }
+        <script src="../src/kendo.datasource.js"></script>
+        <script src="../src/kendo.grid.js"></script>
 
-            table th,
-            table td
-            {
-                border: 1px solid black;
-            }
-        </style>
+        <link href="../styles/kendo.common.css" type="text/css" rel="stylesheet" />
+        <link href="../styles/kendo.vista.css" type="text/css" rel="stylesheet" />
     </head>
     <body>
-        <table id="table1" style="table-layout:fixed" tabindex="0">
-            <thead>
-                <tr>
-                </tr>
-            </thead>
+        <table id="table1">
         </table>
-        <button data-field="foo">sort by foo</button>
         <script>
             $(document).ready(function() {
                 var data = [];
@@ -56,12 +28,11 @@
 
                 $("#table1").kendoGrid({
                     dataSource: {
-                        data: data,
-                        pageSize: 10
+                        data: data
+                    },
+                    scrollable: {
                     }
                 });
-
-                $("button").kendoSortable({ dataSource: $("#table1").data("kendoGrid").dataSource });
             });
         </script>
 

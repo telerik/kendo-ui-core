@@ -10,7 +10,7 @@
         map = $.map,
         isArray = $.isArray,
         proxy = $.proxy,
-        CELLSELECTOR =  ">tbody>tr>td",
+        CELL_SELECTOR =  ">tbody>tr>td",
         FIRST_CELL_SELECTOR = "td:first",
         CHANGE = "change",
         DATABOUND = "dataBound",
@@ -38,15 +38,13 @@
 
             that._thead();
 
-            that._wrapper();
-
             that._templates();
 
-            that._pager();
+            that._pageable();
 
-            that._navigation();
+            that._navigatable();
 
-            that._selection();
+            that._selectable();
 
             if (that.options.autoBind){
                 that.dataSource.query();
@@ -69,10 +67,12 @@
                 table = $("<table />").appendTo(that.element);
             }
 
-            that.table = table;
+            that.table = table.attr("cellspacing", 0);
+
+            that._wrapper();
         },
 
-        _selection: function() {
+        _selectable: function() {
             var that = this,
                 multi,
                 cell,
@@ -83,12 +83,13 @@
                 cell = typeof selectable === STRING && selectable.toLowerCase().indexOf("cell") > -1;
 
                 that.selectable = new kendo.ui.Selectable(that.element, {
-                    filter: cell ? CELLSELECTOR : ">tbody>tr",
+                    filter: cell ? CELL_SELECTOR : ">tbody>tr",
                     multi: multi,
                     change: function() {
                         that.trigger(CHANGE);
                     }
                 });
+
                 that.element.keydown(function(e) {
                     if (e.keyCode === keys.SPACEBAR) {
                         var current = that.current();
@@ -119,7 +120,7 @@
             }
         },
 
-        _navigation: function() {
+        _navigatable: function() {
             var that = this,
                 element = that.element;
 
@@ -158,7 +159,7 @@
             });
 
             element.addClass(FOCUSABLE)
-                  .delegate("." + FOCUSABLE + CELLSELECTOR, "mousedown", function(e) {
+                  .delegate("." + FOCUSABLE + CELL_SELECTOR, "mousedown", function(e) {
                       that.current($(e.currentTarget));
                   });
         },
@@ -191,6 +192,31 @@
             that.tbody = tbody;
         },
 
+        _scrollable: function() {
+            var that = this,
+                header,
+                content,
+                table,
+                scrollable = that.options.scrollable;
+
+            if (scrollable) {
+                header = that.wrapper.children().filter(".t-grid-header");
+
+                if (!header[0]) {
+                    header = $('<div class="t-grid-header" />').insertBefore(that.table);
+                }
+
+                header.css("padding-right", kendo.support.scrollbar);
+                table = $('<table cellspacing="0" />');
+                table.append(that.thead.remove());
+                header.empty().append($('<div class="t-grid-header-wrap" />').append(table));
+
+                if (!that.table.parent().is(".t-grid-content")) {
+                    that.table.wrap('<div class="t-grid-content" />');
+                }
+            }
+        },
+
         _dataSource: function() {
             var that = this,
                 options = that.options,
@@ -215,7 +241,7 @@
             that.dataSource = DataSource.create(dataSource).bind(CHANGE, proxy(that.refresh, that));
         },
 
-        _pager: function() {
+        _pageable: function() {
             var that = this,
                 wrapper,
                 pageable = that.options.pageable;
@@ -336,11 +362,15 @@
                 tr.html(html);
             }
 
+            tr.find("th").addClass("t-header");
+
             tr.appendTo(thead);
 
             that.thead = thead;
 
             that._sortable();
+
+            that._scrollable();
         },
 
         _autoColumns: function(schema) {
