@@ -1033,16 +1033,19 @@
 
     // feature detection
     (function() {
-        $(document).ready(function() {
-            var div = document.createElement("div");
+        support.scrollbar = function() {
+            var div = document.createElement("div"),
+                result;
+
             div.style.cssText = "overflow:scroll;overflow-x:hidden;zoom:1";
             div.innerHTML = "&nbsp;";
             document.body.appendChild(div);
 
-            support.scrollbar = div.offsetWidth - div.scrollWidth;
+            result = div.offsetWidth - div.scrollWidth;
 
             document.body.removeChild(div);
-        });
+            return result;
+        };
 
         var table = document.createElement("table");
 

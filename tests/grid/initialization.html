@@ -308,7 +308,7 @@
             test("scrollable grid header has right padding the same as the scrollbar width", function() {
                 var grid = new Grid($("<table />"), { scrollable: true, dataSource: [{foo:"bar"}] });
 
-                equal(grid.wrapper.children().filter("div.t-grid-header").css("padding-right"), kendo.support.scrollbar + "px");
+                equal(grid.wrapper.children().filter("div.t-grid-header").css("padding-right"), kendo.support.scrollbar() + "px");
             });
 
             test("scrollable grid has header wrap", function() {

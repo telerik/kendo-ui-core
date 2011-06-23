@@ -206,7 +206,7 @@
                     header = $('<div class="t-grid-header" />').insertBefore(that.table);
                 }
 
-                header.css("padding-right", kendo.support.scrollbar);
+                header.css("padding-right", kendo.support.scrollbar());
                 table = $('<table cellspacing="0" />');
                 table.append(that.thead.remove());
                 header.empty().append($('<div class="t-grid-header-wrap" />').append(table));
