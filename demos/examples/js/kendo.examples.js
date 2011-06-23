@@ -26,7 +26,15 @@
                 currentHtml = html;
                 Application.fetchDescription();
 
-                $("#exampleBody").empty().html(Application.body(html));
+                var exampleBody = $('#exampleBody');
+
+                exampleBody.kendoAnimate('halfFlip:horizontal', 300, function() {
+                    exampleBody.empty().html(Application.body(html));
+
+                    exampleBody.css(kendo.support.transitions.css + 'transform', 'rotateY(-90deg)');
+                    exampleBody.css('height');
+                    exampleBody.kendoAnimate('halfFlip:horizontal', 300, true);
+                });
             });
         },
 
@@ -58,7 +66,7 @@
         },
 
         body: function(html) {
-            var match = /<div id="example(\w*)">(([\u000a\u000d\u2028\u2029]|.)*?)<!-- tools -->/ig.exec(html);
+            var match = /<div id="example([Body]*)">(([\u000a\u000d\u2028\u2029]|.)*?)<!-- tools -->/ig.exec(html);
 
             return (match[1] != "") ? match[2] : "<div id=\"exampleBody\">" + match[0].replace("<!-- tools -->", "") + "</div>";
         },
@@ -100,7 +108,7 @@
             });
 
             $("#skinSelector").bind('change', function(e) {
-                var kendoLinks = $('link[href*="kendo."]', document.head),
+                var kendoLinks = $('link[href*="kendo."]', document.getElementsByTagName('head')[0]),
                     commonLink = kendoLinks.filter('[href*="kendo.common"]'),
                     skinLink = kendoLinks.filter(':not([href*="kendo.common"])'),
                     currentFolder = new Array(location.href.match(/\//g).length - initialFolder + 1).join("../"),
@@ -116,8 +124,17 @@
                                 .attr('href', url);
 
                 $.get(url, function() {
-                            skinLink.eq(0).before(newLink);
-                            skinLink.remove();
+                            var example = $('#example');
+
+                            example.kendoAnimate('halfFlip:horizontal', 300, function() {
+                                skinLink.eq(0).before(newLink);
+                                skinLink.remove();
+                                example[0].style.cssText = example[0].style.cssText;
+
+                                example.css(kendo.support.transitions.css + 'transform', 'rotateY(-90deg)');
+                                example.css('height');
+                                example.kendoAnimate('halfFlip:horizontal', 300, true);
+                            });
                         });
             });
         }

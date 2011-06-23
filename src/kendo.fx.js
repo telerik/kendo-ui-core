@@ -308,6 +308,37 @@
                 animate(element, extend({ scale: 1 }, properties), options);
             }
         },
+        halfFlip: {
+            play: function(element, properties, options) {
+                element
+                    .css(kendo.support.transitions.css + 'backface-visibility', 'hidden')
+                    .css('height');
+                element.parent()
+                    .css(kendo.support.transitions.css + 'perspective', 2000)
+                    .css(kendo.support.transitions.css + 'transform-style', 'preserve-3d')
+                    .css(kendo.support.transitions.css + 'transform-origin', '50% 50%')
+                    .css('height');
+
+                var extender = {};
+                extender[options.direction == 'vertical' ? 'rotateX' : 'rotateY'] = '90deg';
+                animate(element, extend(extender, properties), options);
+            },
+            reverse: function(element, properties, options) {
+                var extender = {};
+                extender[options.direction == 'vertical' ? 'rotateX' : 'rotateY'] = 0;
+                animate(element, extend(extender, properties), extend(options, {
+                    complete: function () {
+                        element
+                            .css(kendo.support.transitions.css + 'backface-visibility', '')
+                            .css('height');
+                        element.parent()
+                            .css(kendo.support.transitions.css + 'perspective', 0)
+                            .css(kendo.support.transitions.css + 'transform-style', '')
+                            .css('height');
+                    }
+                }));
+            }
+        },
         slide: {
             play: function(element, properties, options) {
                 var direction = kendo.directions[options.direction],
