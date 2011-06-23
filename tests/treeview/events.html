@@ -27,14 +27,14 @@
                 $(".t-treeview").remove();
             }
 
-            module("select", {
+            module("events", {
                 teardown: removeTreeViews
             });
 
-            test("items trigger selected event and pass item as argument", function() {
-                var triggeredArgs,
+            test("selecting items triggers selected event and passes item as argument", function() {
+                var selectedArgs,
                     treeview = createTreeView({
-                        select: function(e) { triggeredArgs = e; },
+                        select: function(e) { selectedArgs = e; },
                         dataSource: [ { text: "foo" } ]
                     });
                     
@@ -42,8 +42,26 @@
                 
                 item.find(".t-in").trigger("click");
 
-                ok(triggeredArgs);
-                equals(triggeredArgs.item, item[0]);
+                ok(selectedArgs);
+                equals(selectedArgs.item, item[0]);
+            });
+
+            test("clicking expand button triggers expand event", function() {
+                var expandArgs,
+                    treeview = createTreeView({
+                        expand: function(e) { expandArgs = e; },
+                        dataSource: [
+                            { text: "foo", items: [
+                                { text: "food" }
+                            ] }
+                        ]
+                    });
+
+                $(".t-plus", treeview)
+                    .trigger("click");
+
+                ok(expandArgs);
+                equals(expandArgs.item, $(".t-item")[0]);
             });
         </script>
 

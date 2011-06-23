@@ -220,7 +220,7 @@
             }
         },
 
-        nodeToggle: function (e, item, suppressAnimation) {
+        nodeToggle: function (e, item) {
             if (item.find(".t-minus").length == 0 && item.find(".t-plus").length == 0) {
                 return;
             }
@@ -233,15 +233,14 @@
                 return;
             }
 
-            item.data("animating", !suppressAnimation);
+            item.data("animating", true);
 
             var contents = item.find(">.t-group, >.t-content, >.t-animation-container>.t-group, >.t-animation-container>.t-content"),
                 isExpanding = !contents.is(":visible");
 
-            /// TODO: trigger client event
             if (contents.children().length > 0
-             && item.data("loaded") !== false /*
-             && !item.trigger(this.element, isExpanding ? "expand" : "collapse", { item: item[0] })*/ ) {
+             && item.data("loaded") !== false
+             && !this.trigger(isExpanding ? "expand" : "collapse", { item: item[0] }) ) {
                 item.find("> div > .t-icon")
                         .toggleClass("t-minus", isExpanding)
                         .toggleClass("t-plus", !isExpanding);
@@ -250,7 +249,7 @@
                 /// TODO: animate
                 contents[isExpanding ? "show" : "hide"]();
             } else if (isExpanding && this.isAjax() && (contents.length == 0 || item.data("loaded") === false)) {
-                if (!this.trigger(this.element, isExpanding ? "expand" : "collapse", { item: item[0] }))
+                if (!this.trigger(isExpanding ? "expand" : "collapse", { item: item[0] }))
                     this.ajaxRequest(item);
             }
         },
