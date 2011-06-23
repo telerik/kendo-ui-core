@@ -248,7 +248,8 @@
                     LAST_LABEL_WIDTH = 26,
                     MAX_LABEL_WIDTH = 30,
                     LABEL_HEIGHT = 17,
-                    MAJOR_TICK_HEIGHT = 4;
+                    MAJOR_TICK_HEIGHT = 4,
+                    MINOR_TICK_HEIGHT = 3;
 
                 function ViewFactoryStub() {
                     this.renderedLines = [];
@@ -320,9 +321,36 @@
                     same(ticksY, [9, 106, 203, 300, 397, 494, 591], TOLERANCE);
                 });
 
+                test("minor ticks can be disabled", function() {
+                    numericAxis.options.lineWidth = 0;
+                    numericAxis.options.majorTickType = "none";
+                    numericAxis.getViewElements(factoryStub);
+
+                    equal(factoryStub.renderedLines, 0);
+                });
+
+                test("minor ticks are distributed vertically", function() {
+                    numericAxis.options.lineWidth = 0;
+                    numericAxis.options.majorTickType = "none";
+                    numericAxis.options.minorTickType = "outside";
+                    numericAxis.getViewElements(factoryStub);
+
+                    var ticksY = $.map(factoryStub.renderedLines, function(line) {
+                        return line[1];
+                    });
+                    same(ticksY, [
+                        32.28, 55.56, 78.84, 102.12,
+                        125.4, 148.68, 171.96, 195.24,
+                        218.52, 241.8, 265.08, 288.36,
+                        311.64, 334.92, 358.2, 381.48,
+                        404.76, 428.04, 451.32, 474.6,
+                        497.88, 521.16, 544.44, 567.72], TOLERANCE);
+                });
+
                 test("major ticks can be disabled", function() {
                     numericAxis.options.lineWidth = 0;
                     numericAxis.options.majorTickType = "none";
+                    numericAxis.options.minorTickType = "none";
                     numericAxis.getViewElements(factoryStub);
 
                     equal(factoryStub.renderedLines, 0);
@@ -406,6 +434,73 @@
                     }
 
                     numericAxis.options.lineWidth = 0;
+                    numericAxis.getViewElements(factoryStub);
+                });
+
+                test("minor ticks are distributed horizontally", function() {
+                    numericAxis = new Chart.NumericAxis(0, 1, {
+                        orientation: "horizontal",
+                        majorTickType: "none",
+                        minorTickType: "outside" });
+                    numericAxis.updateLayout(chartBox);
+                    numericAxis.getViewElements(factoryStub);
+
+                    var ticksX = $.map(factoryStub.renderedLines, function(line) {
+                        return line[0];
+                    });
+                    same(ticksX, [
+                        5, 36.28, 67.56, 98.84, 130.12,
+                        161.4, 192.68, 223.96, 255.24,
+                        286.52, 317.8, 349.08, 380.36,
+                        411.64, 442.92, 474.2, 505.48,
+                        536.76, 568.04, 599.32, 630.6,
+                        661.88, 693.16, 724.44, 755.72], TOLERANCE);
+                });
+
+                test("minor ticks are vertical", 24, function() {
+                    numericAxis = new Chart.NumericAxis(0, 1, {
+                        orientation: "horizontal",
+                        majorTickType: "none",
+                        minorTickType: "outside",
+                        lineWidth: 0});
+                    numericAxis.updateLayout(chartBox);
+                    numericAxis.getViewElements(factoryStub);
+
+                    factoryStub.line = function(x1, y1, x2, y2) {
+                        equal(x2, x1);
+                    }
+
+                    numericAxis.getViewElements(factoryStub);
+                });
+
+                test("minor ticks are aligned to axis", 24, function() {
+                    numericAxis = new Chart.NumericAxis(0, 1, {
+                        orientation: "horizontal",
+                        majorTickType: "none",
+                        minorTickType: "outside",
+                        lineWidth: 0 });
+
+                    numericAxis.updateLayout(chartBox);
+                    numericAxis.getViewElements(factoryStub);
+                    factoryStub.line = function(x1, y1, x2, y2) {
+                        equal(y1, 0);
+                    }
+
+                    numericAxis.getViewElements(factoryStub);
+                });
+
+                test("minor ticks are of predefined height", 24, function() {
+                    numericAxis = new Chart.NumericAxis(0, 1, {
+                        orientation: "horizontal",
+                        majorTickType: "none",
+                        minorTickType: "outside",
+                        lineWidth: 0 });
+                    numericAxis.updateLayout(chartBox);
+                    numericAxis.getViewElements(factoryStub);
+                    factoryStub.line = function(x1, y1, x2, y2) {
+                        equal(y2 - y1, MINOR_TICK_HEIGHT);
+                    }
+
                     numericAxis.getViewElements(factoryStub);
                 });
             })();
