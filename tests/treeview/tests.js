@@ -1,18 +1,18 @@
 tests.push(
     {
         page: "treeview/initialization.html",
-        title: "treeview initialization"
+        title: "initialization"
     },
     {
         page: "treeview/rendering.html",
-        title: "treeview rendering"
+        title: "rendering"
     },
     {
         page: "treeview/interaction.html",
-        title: "treeview interaction"
-    } /*,
+        title: "interaction"
+    },
     {
-        page: "treeview/draganddrop.html",
-        title: "treeview drag&drop"
-    }*/
+        page: "treeview/events.html",
+        title: "events"
+    }
 );

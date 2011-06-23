@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TreeView events</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.treeview.js"></script>
+        <link rel="stylesheet" href="../qunit.css" />
+        <link rel="stylesheet" href="../../styles/kendo.common.css" />
+        <link rel="stylesheet" href="../../styles/kendo.vista.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">TreeView events</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+
+        <script>
+            function createTreeView(options) {
+                return $("<div />").appendTo(document.body).kendoTreeView(options);
+            }
+
+            function removeTreeViews() {
+                $(".t-treeview").remove();
+            }
+
+            module("select", {
+                teardown: removeTreeViews
+            });
+
+            test("items trigger selected event and pass item as argument", function() {
+                var triggeredArgs,
+                    treeview = createTreeView({
+                        select: function(e) { triggeredArgs = e; },
+                        dataSource: [ { text: "foo" } ]
+                    });
+                    
+                var item = $(".t-item:first", treeview);
+                
+                item.find(".t-in").trigger("click");
+
+                ok(triggeredArgs);
+                equals(triggeredArgs.item, item[0]);
+            });
+        </script>
+
+        <div id="qunit-fixture"> </div>
+        <ul id="log"></ul>
+    </body>
+</html>
+

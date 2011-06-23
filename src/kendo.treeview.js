@@ -213,8 +213,7 @@
                 e.preventDefault();
             }
 
-            if (!node.hasClass(".t-state-selected") &&
-                !that.trigger(treeview, "select", { item: node.closest(".t-item")[0] })) {
+            if (!node.hasClass(".t-state-selected") && !that.trigger("select", { item: node.closest(".t-item")[0] })) {
                 $(".t-in", treeview).removeClass("t-state-hover t-state-selected");
 
                 node.addClass("t-state-selected");
