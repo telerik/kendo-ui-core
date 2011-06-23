@@ -704,33 +704,27 @@
             font: "16px Verdana, sans-serif",
             position: TOP,
             align: CENTER,
-            margin: {
-                top: 10,
-                bottom: 10
-            }
+            margin: 5,
+            padding: 5
         },
 
         create: function() {
             var title = this,
-                options = title.options;
+                options = title.options,
+                textBoxOptions = deepExtend({}, options, {
+                    vAlign: options.position,
+                });
 
             title.children.push(
-                new TextBox(options.text, {
-                    align: options.align,
-                    vAlign: options.position,
-                    margin: options.margin,
-                    font: options.font
-                })
+                new TextBox(options.text, textBoxOptions)
             );
         },
 
         updateLayout: function(targetBox) {
-            var title = this,
-                options = title.options,
-                textBox = title.children[0];
+            var title = this;
 
-            textBox.updateLayout(targetBox);
-            title.box = textBox.box.clone().snapTo(targetBox, X);
+            ChartElement.fn.updateLayout.call(title, targetBox);
+            title.box.snapTo(targetBox, X);
         }
     });
 
