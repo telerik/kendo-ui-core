@@ -789,11 +789,12 @@
             var html = "",
                 i = 0,
                 items = options.items,
-                len = items ? items.length : 0;
+                len = items ? items.length : 0,
+                group = $.extend({ length: len }, options.group);
 
             for (; i < len; i++) {
                 html += this.renderItem($.extend(options, {
-                    group: { length: len },
+                    group: group,
                     item: $.extend({ index: i }, items[i])
                 }));
             }
