@@ -9,6 +9,7 @@
         <script src="../../../src/kendo.core.js"></script>
         <script src="../../../src/kendo.fx.js"></script>
         <script src="../../../src/kendo.treeview.js"></script>
+        <script src="../js/kendo.console.js"></script>
         <!-- script -->
         <!-- css -->
         <link type="text/css" href="../styles/examples.css" rel="stylesheet"/>
@@ -24,37 +25,34 @@
         <!-- description -->
         <div id="example">
             <div id="TreeView"></div>
+
             <script type="text/javascript">
-                $("#TreeView").kendoTreeView([
-                    { text: "foo", expanded: true, items: [
-                        { text: "fool" },
-                        { text: "food" },
-                        { text: "foot" }
-                    ] },
-                    { text: "bar", items: [
-                        { text: "bard" },
-                        { text: "barn" },
-                        { text: "bark" }
-                    ] },
-                    { text: "baz" }
-                ]);
+                function onSelect(e) {
+                    kendoConsole.log('Selected: ' + $(e.item).find('> div > .t-in').text());
+                };
+
+                function onError(e) {
+                    kendoConsole.error('Loading failed with ' + e.xhr.statusText + ' ' + e.xhr.status);
+                };
+
+                $("#TreeView").kendoTreeView({ dataSource: [
+                        { text: "foo", expanded: true, items: [
+                            { text: "fool" },
+                            { text: "food" },
+                            { text: "foot" }
+                        ] },
+                        { text: "bar", items: [
+                            { text: "bard" },
+                            { text: "barn" },
+                            { text: "bark" }
+                        ] },
+                        { text: "baz" }
+                    ],
+                    select: onSelect,
+                    error: onError
+                });
             </script>
         </div>
-        <script type="text/javascript">
-            var onSelect = function (e) {
-                if ('kendoConsole' in window) {
-                    kendoConsole.log('Selected: ' + $(e.item).find('> div > .t-in').text());
-                }
-            };
-
-            var onError = function (e) {
-                if ('kendoConsole' in window) {
-                    kendoConsole.error('Loading failed with ' + e.xhr.statusText + ' ' + e.xhr.status);
-                }
-            };
-
-            $("#TreeView").kendoTreeView({ select: onSelect, error: onError });
-        </script>
         <div class="console"></div>
         <!-- tools -->
         <!-- tools -->
