@@ -54,6 +54,7 @@
         options: {
             columns: [],
             autoBind: true,
+            scrollable: true,
             dataSource: {}
         },
 
@@ -216,7 +217,7 @@
 
                 header.css("padding-right", kendo.support.scrollbar());
                 table = $('<table cellspacing="0" />');
-                table.append(that.thead.remove());
+                table.append(that.thead);
                 header.empty().append($('<div class="t-grid-header-wrap" />').append(table));
 
                 if (!that.table.parent().is(".t-grid-content")) {
