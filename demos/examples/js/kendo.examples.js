@@ -2,7 +2,7 @@
     var Application,
         pushState = "pushState" in history,
         currentHtml = "",
-        transitionEffects = 'fadeOut',
+        transitionEffects = "fadeOut",
         initialFolder = 0;
 
     Application = {
@@ -17,7 +17,7 @@
                 var currentHref = $(this).attr("href");
                 if (currentHref && currentHref.toLowerCase() === href) {
                     Application.fetchExample(href);
-                    $('#viewDescription').trigger('click');
+                    $("#viewDescription").trigger("click");
                 }
             });
         },
@@ -30,29 +30,29 @@
                 currentHtml = html;
                 Application.fetchDescription();
 
-                var exampleBody = $('#exampleBody'),
+                var exampleBody = $("#exampleBody"),
                     exampleName = $(".exampleName");
 
-                exampleName.kendoAnimate('fadeOut', 300, function() {
+                exampleName.kendoAnimate("fadeOut", 300, function() {
                     exampleName.empty().html($.trim(/<title>(.*?)<\/title>/i.exec(html)[1]));
-                    exampleName.kendoAnimate('fadeOut', 300, true);
+                    exampleName.kendoAnimate("fadeOut", 300, true);
                 });
 
                 exampleBody.kendoAnimate(transitionEffects, 300, function() {
                     exampleBody.empty().html(Application.body(html));
 
-                    transitionEffects == 'halfFlip:horizontal' &&
+                    transitionEffects == "halfFlip:horizontal" &&
                         exampleBody
-                            .css(kendo.support.transitions.css + 'transform', 'rotateY(-90deg)')
-                            .css('height');
+                            .css(kendo.support.transitions.css + "transform", "rotateY(-90deg)")
+                            .css("height");
                     exampleBody.kendoAnimate(transitionEffects, 300, true);
                 });
             });
         },
 
         fetchCode: function(html, callback) {
-            html = html.replace(new RegExp('\\s*<!-- tools -->(([\\u000a\\u000d\\u2028\\u2029]|.)*?)<!-- tools -->', 'ig'), ''); // Remove tools first to strip description
-            html = html.replace(new RegExp('\\s*<!-- \\w+ -->(([\\u000a\\u000d\\u2028\\u2029]|.)*?)<!-- \\w+ -->', 'ig'), '');
+            html = html.replace(new RegExp("\\s*<!-- tools -->(([\\u000a\\u000d\\u2028\\u2029]|.)*?)<!-- tools -->", "ig"), ""); // Remove tools first to strip description
+            html = html.replace(new RegExp("\\s*<!-- \\w+ -->(([\\u000a\\u000d\\u2028\\u2029]|.)*?)<!-- \\w+ -->", "ig"), "");
 
             $("#code").empty().text(html);
 
@@ -119,34 +119,35 @@
                     });
             });
 
-            $("#skinSelector").bind('change', function(e) {
-                var kendoLinks = $('link[href*="kendo."]', document.getElementsByTagName('head')[0]),
-                    commonLink = kendoLinks.filter('[href*="kendo.common"]'),
-                    skinLink = kendoLinks.filter(':not([href*="kendo.common"])'),
+            $("#skinSelector").bind("change", function(e) {
+                var kendoLinks = $("link[href*='kendo.']", document.getElementsByTagName("head")[0]),
+                    commonLink = kendoLinks.filter("[href*='kendo.common']"),
+                    skinLink = kendoLinks.filter(":not([href*='kendo.common'])"),
                     currentFolder = new Array(location.href.match(/\//g).length - initialFolder + 1).join("../"),
-                    url = currentFolder + commonLink.attr('href').replace(/kendo\.\w+\.css/i, 'kendo.' + $("#skinSelector")[0].value.toLowerCase() + '.css'),
+                    url = currentFolder + commonLink.attr("href").replace(/kendo\.\w+\.css/i, "kendo." + $("#skinSelector")[0].value.toLowerCase() + ".css"),
                     newLink;
 
-                if ($.browser.msie)
+                if ($.browser.msie) {
                     newLink = document.createStyleSheet(url);
-                else
+                } else {
                     newLink = skinLink
-                                .eq(0)
-                                .clone()
-                                .attr('href', url);
+                        .eq(0)
+                        .clone()
+                        .attr("href", url);
+                }
 
                 $.get(url, function() {
-                            var example = $('#example');
+                            var example = $("#example");
 
                             example.kendoAnimate(transitionEffects, 300, function() {
                                 skinLink.eq(0).before(newLink);
                                 skinLink.remove();
                                 example[0].style.cssText = example[0].style.cssText;
 
-                                transitionEffects == 'halfFlip:horizontal' &&
+                                transitionEffects == "halfFlip:horizontal" &&
                                     example
-                                        .css(kendo.support.transitions.css + 'transform', 'rotateY(-90deg)')
-                                        .css('height');
+                                        .css(kendo.support.transitions.css + "transform", "rotateY(-90deg)")
+                                        .css("height");
                                 example.kendoAnimate(transitionEffects, 300, true);
                             });
                         });
