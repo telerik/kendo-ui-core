@@ -484,6 +484,13 @@
                     equal(titleText.options.font, title.options.font);
                 });
 
+                test("text element has set color", function() {
+                    createTitle({
+                        color: "#cf0"
+                    });
+                    equal(titleText.options.color, title.options.color);
+                });
+
                 test("text box has set vAlign", function() {
                     createTitle({
                         position: "bottom"
