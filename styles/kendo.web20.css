@@ -178,6 +178,11 @@
     background-color: #d4ffbc;
 }
 
+.t-state-focused
+{
+    background-color:#e3eeff;
+}
+
 .t-state-error
 {
     border-style: ridge;

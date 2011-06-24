@@ -183,6 +183,11 @@
     background: #4e8e13;
 }
 
+.t-state-focused
+{
+    background-color:#d2d0b6;
+}
+
 .t-state-selected,
 .t-state-selected .t-header,
 .t-state-selected .t-state-hover,
