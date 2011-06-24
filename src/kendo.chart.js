@@ -55,6 +55,7 @@
         },
 
         options: {
+            chartArea: {},
             title: {
                 visible: true
             },
@@ -92,15 +93,15 @@
         _redraw: function() {
             var chart = this,
                 options = chart.options,
-                model = new RootElement({ width: options.width, height: options.height });
+                model = new RootElement(options.chartArea);
 
             if (options.title && options.title.visible && options.title.text) {
-                model.children.push(new Title(chart.options.title));
+                model.children.push(new Title(options.title));
             }
 
             if (options.legend.visible) {
-                var legendOptions = deepExtend({}, chart.options.legend,
-                                    { series: chart.options.series });
+                var legendOptions = deepExtend({}, options.legend,
+                                    { series: options.series });
 
                 model.children.push(new Legend(legendOptions));
             }
@@ -415,7 +416,12 @@
 
         options: {
             width: DEFAULT_WIDTH,
-            height: DEFAULT_HEIGHT
+            height: DEFAULT_HEIGHT,
+            background: "#000",
+            border: {
+                color: "#000",
+                width: 0
+            }
         },
 
         updateLayout: function() {
@@ -438,6 +444,23 @@
             viewElements.push.apply(viewElements, root.getViewElements(factory));
 
             return viewRoot;
+        },
+
+        getViewElements: function(factory) {
+            var root = this,
+                options = root.options,
+                border = options.border || {},
+                box = root.box.clone().unpad(border.width),
+                elements = [
+                    factory.rect(box, {
+                        stroke: border.width ? border.color : "",
+                        strokeWidth: border.width,
+                        fill: options.background })
+                ];
+
+            return elements.concat(
+                ChartElement.fn.getViewElements.call(root, factory)
+            );
         }
     });
 
@@ -1595,8 +1618,10 @@
 
         options: {
             color: "#fff",
-            borderColor: "#000",
-            borderWidth: 1,
+            border: {
+                color: "#000",
+                width: 0
+            },
             isVertical: true
         },
 
@@ -1619,10 +1644,9 @@
 
             elements.push(
                 factory.rect(box, {
-                    fill: options.color,
-                    stroke: options.borderColor,
-                    strokeWidth: options.borderWidth
-                })
+                        fill: options.color,
+                        stroke: options.border.color,
+                        strokeWidth: options.border.width })
             );
             [].push.apply(elements,
                 ChartElement.fn.getViewElements.call(bar, factory)
@@ -1691,7 +1715,10 @@
                 }
             }
 
-            var bar = new Bar({ color: series.color, borderColor: series.color, isVertical: options.isVertical });
+            var bar = new Bar({
+                color: series.color,
+                border: series.border,
+                isVertical: options.isVertical });
 
             if (labelOptions.visible && value) {
                 var label = new BarLabel(value, labelOptions);
@@ -2521,7 +2548,7 @@
                 if (typeof propValue === "object" && propValue !== null && propValue.constructor !== Array) {
                     destination[property] = destination[property] || {};
                     deepExtend(destination[property], propValue);
-                } else {
+                } else if (typeof propValue !== "undefined") {
                     destination[property] = propValue;
                 }
             }

@@ -316,13 +316,13 @@
                 });
 
                 test("sets width on rootElement", function() {
-                    createChart({ width: 200});
+                    createChart({ chartArea: { width: 200 } });
 
                     equal(chart._model.options.width, 200);
                 });
 
                 test("sets height on rootElement", function() {
-                    createChart({ height: 200});
+                    createChart({ chartArea: { height: 200 } });
 
                     equal(chart._model.options.height, 200);
                 });

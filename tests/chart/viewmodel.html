@@ -69,18 +69,20 @@
                     setup: function() {
                         rootElement = new Chart.RootElement();
                         rootViewElement = new ViewElementStub();
-
-                        factory = {
-                            root: function() { return rootViewElement; }
-                        };
+                        factory = new ViewFactoryStub();
                     }
                 });
 
                 test("creates root view element", function() {
+                    rootElement.updateLayout();
+                    factory.root = function() {
+                        return rootViewElement;
+                    };
                     equal(rootElement.getView(factory), rootViewElement);
                 });
 
                 test("sets dimensions on view element", 2, function() {
+                    rootElement.updateLayout();
                     factory.root = function(options) {
                         equal(options.width, 600);
                         equal(options.height, 400);
@@ -94,11 +96,15 @@
                 test("creates view elements for child elements", function() {
                     var group = new ViewElementStub(),
                         text = new ViewElementStub();
-
+                    rootElement.updateLayout();
+                    factory.root = function() {
+                        return new ViewElementStub();
+                    };
                     rootElement.children.push(new ChartElementStub(group));
                     rootElement.children.push(new ChartElementStub(text));
 
                     var view = rootElement.getView(factory);
+                    view.children.shift(); // Remove the rect
                     deepEqual(view.children, [ group, text ]);
                 });
 
@@ -111,6 +117,25 @@
                     rootElement.children.push(childStub, childStub);
 
                     rootElement.updateLayout();
+                });
+
+                test("sets border to rootElement", function() {
+                    rootElement.options.border.width = 1;
+                    rootElement.options.border.color = "red";
+                    rootElement.updateLayout();
+                    rootElement.getViewElements(factory);
+
+                    sameBox(factory.log.rect, [1, 1, 599, 399]);
+                    equals(factory.log.rect[0].style.strokeWidth, 1);
+                    equals(factory.log.rect[0].style.stroke, "red");
+                });
+
+                test("sets background to rootElement", function() {
+                    rootElement.options.border.background = "red";
+                    rootElement.updateLayout();
+                    rootElement.getViewElements(factory);
+
+                    sameBox(factory.log.rect[0].style.fill, "red");
                 });
 
             })();
@@ -962,6 +987,7 @@
                 });
 
                 test("renders box with padding", function() {
+                    console.log(legendBox);
                     sameBox(legendBox, new Box2D(915, 483, 1000, 517));
                 });
 
@@ -1010,11 +1036,11 @@
                 });
 
                 test("sets stroke color", function() {
-                    same(rect.style.stroke, bar.options.borderColor);
+                    same(rect.style.stroke, bar.options.border.color);
                 });
 
                 test("sets stroke width", function() {
-                    same(rect.style.strokeWidth, bar.options.borderWidth);
+                    same(rect.style.strokeWidth, bar.options.border.width);
                 });
             })();
 
