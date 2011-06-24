@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <!-- meta -->
+        <!-- meta -->
+        <title>Remote data source</title>
+        <!-- script -->
+        <script src="../../../src/jquery.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.popup.js"></script>
+        <script src="../../../src/kendo.query.js"></script>
+        <script src="../../../src/kendo.datasource.js"></script>
+        <script src="../../../src/kendo.list.js"></script>
+        <script src="../../../src/kendo.combobox.js"></script>
+        <!-- script -->
+        <!-- css -->
+        <link type="text/css" href="../styles/examples.css" rel="stylesheet"/>
+        <link type="text/css" href="../../../styles/kendo.common.css" rel="stylesheet"/>
+        <link type="text/css" href="../../../styles/kendo.vista.css" rel="stylesheet"/>
+        <!-- css -->
+    </head>
+    <body>
+        <!-- nav -->
+        <!-- nav -->
+        <!-- description -->
+        <div class="description">Remote data source</div>
+        <!-- description -->
+        <div id="example">
+            <input id="geonames"/>
+            <input id="filter" value="Bulgaria"/>
+            <script type="text/javascript">
+                var remoteDataSource = new kendo.data.DataSource({
+                    transport: {
+                        read: {
+                            url: "http://ws.geonames.org/searchJSON",
+                            dataType: "jsonp",
+                            cache: true
+                        },
+                        cache: "inmemory",
+                        dialect: {
+                            read: function() {
+                                return {name_startsWith: $("#filter").val() };
+                            }
+                        }
+                    },
+                    deserializer: {
+                        data: function(result) {
+                            return result.geonames;
+                        }
+                    }
+                });
+
+                $("#geonames").kendoComboBox({
+                    dataTextField: "name",
+                    dataValueField: "countryName",
+                    dataSource: remoteDataSource,
+                    autoBind: false,
+                });
+
+                $("#filter").change(function() {
+                    $("#geonames").data("kendoComboBox").showBusy();
+                    remoteDataSource.read();
+                });
+            </script>
+        </div>
+        <!-- tools -->
+        <!-- tools -->
+    </body>
+</html>
