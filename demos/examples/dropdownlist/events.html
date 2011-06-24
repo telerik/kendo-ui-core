@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <!-- meta -->
+        <!-- meta -->
+        <title>Events Demo</title>
+        <!-- script -->
+        <script src="../../../src/jquery.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.popup.js"></script>
+        <script src="../../../src/kendo.query.js"></script>
+        <script src="../../../src/kendo.datasource.js"></script>
+        <script src="../../../src/kendo.list.js"></script>
+        <script src="../../../src/kendo.dropdownlist.js"></script>
+        <!-- script -->
+        <!-- css -->
+        <link type="text/css" href="../styles/examples.css" rel="stylesheet"/>
+        <link type="text/css" href="../../../styles/kendo.common.css" rel="stylesheet"/>
+        <link type="text/css" href="../../../styles/kendo.vista.css" rel="stylesheet"/>
+        <!-- css -->
+    </head>
+    <body>
+        <!-- nav -->
+        <!-- nav -->
+        <!-- description -->
+        <div class="description">This example shows how to attach events to a kendoTabStrip and how they are fired and triggered.</div>
+        <!-- description -->
+        <div id="example">
+        <div id="example">
+            <input id="products"/>
+            <script type="text/javascript">
+                var change = function () {
+                    if ("kendoConsole" in window) {
+                        kendoConsole.log("Changed: {text: " + this.text() + " , value: " + this.value() + "}");
+                    }
+                };
+
+                var data = [
+                    {text: "Chai", value:"1"},
+                    {text: "Chang", value:"2"},
+                    {text: "Aniseed Syrup", value:"3"},
+                    {text: "Chef Anton", value:"4"},
+                    {text: "Ikura", value:"5"},
+                    {text: "Mishi Kobe Niku", value:"6"},
+                    {text: "Queso Cabrales", value:"7"},
+                    {text: "Organic Dried Pears", value:"8"},
+                    {text: "Schoggi Schokolade", value:"9"},
+                    {text: "Alice Mutton", value:"10"},
+                    {text: "Carnarvon Tigers", value:"11"},
+                ];
+
+                $("#products").kendoDropDownList({
+                    dataSource: data,
+                    change: change
+                });
+
+            </script>
+        </div>
+        <div class="console"></div>
+        <!-- tools -->
+        <!-- tools -->
+    </body>
+</html>

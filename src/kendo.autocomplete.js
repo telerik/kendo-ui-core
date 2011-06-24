@@ -73,16 +73,19 @@
         options: {
             suggest: false,
             minLength: 1,
-            delay: 300
+            delay: 300,
+            height: 200
         },
 
         refresh: function() {
             var that = this,
-            data = that.dataSource.view();
+            data = that.dataSource.view(),
+            length = data.length;
 
+            that._height(length);
             that.ul[0].innerHTML = kendo.render(that.template, data);
 
-            that.popup[data.length ? "open" : "close"]();
+            that.popup[length ? "open" : "close"]();
         },
 
         close: function() {

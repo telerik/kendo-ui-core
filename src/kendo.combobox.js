@@ -119,8 +119,8 @@
                 data = that.dataSource.view(),
                 length = data.length;
 
+            that._height(length);
             ul[0].innerHTML = kendo.render(that.template, data);
-            ul.height(length * 20 > height ? height : "auto");
 
             if (that.element.is("select")) {
                 that._options(data);
