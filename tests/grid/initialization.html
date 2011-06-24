@@ -166,7 +166,7 @@
             test("div wrapper is created around the table", function() {
                 var grid = new Grid(table, []);
 
-                ok(grid.element.parent().is("div.t-grid.t-widget"));
+                ok(grid.wrapper.is("div.t-grid.t-widget"));
             });
 
             test("wrapper field is initialized", function() {
@@ -199,12 +199,19 @@
                 equal(grid.columns[0].field, "Foo1Bar");
             });
 
-            test("initializing a grid from something which is not a table", function() {
-                var div = $("<div />"), grid = new Grid(div, {dataSource: [] });
+            test("initializing a grid from a div", function() {
+                var div = $("<div />"), grid = new Grid(div, {scrollable: false, dataSource: [] });
 
                 ok(grid.element[0] === div[0]);
                 ok(div.children().first().is("table"));
                 ok(grid.table[0] === div.children().first()[0]);
+            });
+
+            test("initializing a scrollable grid from a div", function() {
+                var div = $("<div />"), grid = new Grid(div, { dataSource: [] });
+
+                ok(grid.element[0] === div[0]);
+                equal(grid.table[0], div.find(".t-grid-content").children().first()[0]);
             });
 
             test("autogenerating columns", function() {
@@ -228,16 +235,23 @@
             });
 
             test("autogenerating columns - generating the th", function() {
-                var grid = new Grid(table, [ { foo: "foo", bar: "bar" } ]);
+                var grid = new Grid(table, { scrollable: false, dataSource: [ { foo: "foo", bar: "bar" } ] });
 
                 equal(grid.table.find("tr>th:first").text(), "foo");
                 equal(grid.table.find("tr>th:last").text(), "bar");
             });
 
+            test("autogenerating columns - generating the th in scrollable grid", function() {
+                var grid = new Grid(table, { scrollable: true, dataSource: [ { foo: "foo", bar: "bar" } ] });
+
+                equal(grid.thead.find("tr>th:first").text(), "foo");
+                equal(grid.thead.find("tr>th:last").text(), "bar");
+            });
+
             test("generating the th from column metadata", function() {
                 var grid = new Grid(table, { columns: [ { field: "foo" } ] });
 
-                equal(grid.table.find("tr>th:first").text(), "foo");
+                equal(grid.thead.find("tr>th:first").text(), "foo");
             });
 
             test("thead initialization", function() {
@@ -249,14 +263,14 @@
             test("thead initialization when there is existing thead", function() {
                 var grid = new Grid($("<table><thead/></table>"), { columns: [ { field: "foo" } ] });
 
-                equal(grid.table.find("thead").length, 1);
+                equal(grid.wrapper.find("thead").length, 1);
                 equal(grid.thead.find("th").length, 1);
             });
 
             test("thead initialization when there is existing thead > tr", function() {
                 var grid = new Grid($("<table><thead><tr/></thead></table>"), { columns: [ { field: "foo" } ] });
 
-                equal(grid.table.find("thead").length, 1);
+                equal(grid.wrapper.find("thead").length, 1);
                 equal(grid.thead.find("tr").length, 1);
                 equal(grid.thead.find("th").length, 1);
             });
@@ -264,7 +278,7 @@
             test("thead initialization when there is existing thead > tr > th", function() {
                 var grid = new Grid($("<table><thead><tr><th>bar</th></tr></thead></table>"), { columns: [ { field: "foo" } ] });
 
-                equal(grid.table.find("thead").length, 1);
+                equal(grid.wrapper.find("thead").length, 1);
                 equal(grid.thead.find("tr").length, 1);
                 equal(grid.thead.find("th").length, 1);
                 equal(grid.thead.find("th").text(), "bar");
@@ -272,8 +286,8 @@
             test("thead initialization when there is no thead but th exists", function() {
                 var grid = new Grid($("<table><tr><th>bar</th></tr></table>"), { });
 
-                equal(grid.table.find("thead").length, 1);
-                equal(grid.table.find("tr").length, 1);
+                equal(grid.wrapper.find("thead").length, 1);
+                equal(grid.wrapper.find("tr").length, 1);
                 equal(grid.thead.find("th").length, 1);
                 equal(grid.thead.find("th").text(), "bar");
             });

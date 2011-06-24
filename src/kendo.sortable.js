@@ -1,73 +1,88 @@
 (function($, window) {
     var kendo = window.kendo,
+        proxy = $.proxy,
+        DIR = "dir",
+        ASC = "asc",
+        SINGLE = "single",
+        FIELD = "field",
+        DESC = "desc",
+        TLINK = ".t-link",
         Component = kendo.ui.Component;
 
     var Sortable = Component.extend({
-        init: function(elements, options) {
-            var that = this;
+        init: function(element, options) {
+            var that = this, link;
 
-            Component.fn.init.apply(that, arguments);
-            that.mode = that.options.mode;
-            that.allowUnsort = that.options.allowUnsort;
-            that.dataSource = that.options.dataSource;
-            that.dataSource.bind("change", $.proxy(that.refresh, that));
-            that.element.click($.proxy(that._click, that));
+            Component.fn.init.call(that, element, options);
+
+            that.dataSource = that.options.dataSource.bind("change", proxy(that.refresh, that));
+            link = that.element.find(TLINK);
+
+            if (!link[0]) {
+                link = that.element.wrapInner('<a class="t-link" href="#"/>').find(TLINK);
+            }
+
+            that.link = link;
+            that.element.click(proxy(that._click, that));
         },
 
         options: {
-            mode: "single",
+            mode: SINGLE,
             allowUnsort: true
         },
 
         refresh: function() {
-            var sort = this.dataSource.sort() || [],
+            var that = this,
+                sort = that.dataSource.sort() || [],
                 idx,
                 length,
                 descriptor,
                 dir,
-                element = this.element,
-                field = element.data("field");
+                element = that.element,
+                field = element.data(FIELD);
 
-            element.removeData("dir");
+            element.removeData(DIR);
 
             for (idx = 0, length = sort.length; idx < length; idx++) {
                descriptor = sort[idx];
 
                if (field == descriptor.field) {
-                   element.data("dir", descriptor.dir);
+                   element.data(DIR, descriptor.dir);
                }
             }
 
-            dir = element.data("dir");
+            dir = element.data(DIR);
 
-            element.children(".t-arrow-up,.t-arrow-down").remove();
+            element.find(".t-arrow-up,.t-arrow-down").remove();
 
-            if (dir === "asc") {
-                $('<span class="t-icon t-arrow-up" />').appendTo(element);
-            } else if (dir === "desc") {
-                $('<span class="t-icon t-arrow-down" />').appendTo(element);
+            if (dir === ASC) {
+                $('<span class="t-icon t-arrow-up" />').appendTo(that.link);
+            } else if (dir === DESC) {
+                $('<span class="t-icon t-arrow-down" />').appendTo(that.link);
             }
         },
 
         _click: function(e) {
-            var currentTarget = $(e.currentTarget),
-                field = currentTarget.data("field"),
-                dir = currentTarget.data("dir"),
-                sort = this.dataSource.sort(),
+            var that = this,
+                element = that.element,
+                field = element.data(FIELD),
+                dir = element.data(DIR),
+                options = that.options,
+                sort = that.dataSource.sort(),
                 idx,
                 length;
 
-            if (dir === "asc") {
-                dir = "desc";
-            } else if (dir === "desc" && this.allowUnsort) {
+            if (dir === ASC) {
+                dir = DESC;
+            } else if (dir === DESC && options.allowUnsort) {
                 dir = undefined;
             } else {
-                dir = "asc";
+                dir = ASC;
             }
 
-            if (this.mode === "single") {
+            if (options.mode === SINGLE) {
                 sort = [ { field: field, dir: dir } ];
-            } else if (this.mode === "multi") {
+            } else if (options.mode === "multiple") {
                 if (dir === undefined) {
                     for (idx = 0, length = sort.length; idx < length; idx++) {
                         if (sort[idx].field === field) {
@@ -82,7 +97,7 @@
 
             e.preventDefault();
 
-            this.dataSource.sort(sort);
+            that.dataSource.sort(sort);
         }
     });
 
