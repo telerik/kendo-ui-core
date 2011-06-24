@@ -63,6 +63,24 @@
                 ok(expandArgs);
                 equals(expandArgs.item, $(".t-item")[0]);
             });
+
+            test("clicking collapse button triggers collapse event", function() {
+                var collapseArgs,
+                    treeview = createTreeView({
+                        collapse: function(e) { collapseArgs = e; },
+                        dataSource: [
+                            { text: "foo", expanded: true, items: [
+                                { text: "food" }
+                            ] }
+                        ]
+                    });
+
+                $(".t-minus", treeview)
+                    .trigger("click");
+
+                ok(collapseArgs);
+                equals(collapseArgs.item, $(".t-item")[0]);
+            });
         </script>
 
         <div id="qunit-fixture"> </div>

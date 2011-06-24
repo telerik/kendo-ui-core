@@ -72,9 +72,9 @@
                 .delegate(clickableItems, "mouseenter", function () { $(this).addClass(TSTATEHOVER); })
                 .delegate(clickableItems, "mouseleave", function () { $(this).removeClass(TSTATEHOVER); })
                 .delegate(clickableItems, CLICK, proxy(that.nodeSelect, that))
-                .delegate("div:not(.t-state-disabled) .t-in", "dblclick", proxy(that.nodeClick, that))
+                .delegate("div:not(.t-state-disabled) .t-in", "dblclick", proxy(that._toggleButtonClick, that))
                 .delegate(":checkbox", CLICK, proxy(that.checkboxClick, that))
-                .delegate(".t-plus,.t-minus", CLICK, proxy(that.nodeClick, that));
+                .delegate(".t-plus,.t-minus", CLICK, proxy(that._toggleButtonClick, that));
 
             if (that.isAjax()) {
                 markAjaxLoadableNodes(element);
@@ -131,7 +131,7 @@
                     contents = item.find("> .t-group, > .t-content");
 
                 if ((contents.length > 0 && !contents.is(":visible")) || this.isAjax()) {
-                    this.nodeToggle(null, item);
+                    this.toggle(item);
                 }
             }, this));
         },
@@ -142,20 +142,14 @@
                     contents = item.find("> .t-group, > .t-content");
 
                 if (contents.length > 0 && contents.is(":visible")) {
-                    this.nodeToggle(null, item);
+                    this.toggle(item);
                 }
             }, this));
         },
 
-        enable: function (li) {
-            this.toggle(li, true);
-        },
+        enable: function (li, enable) {
+            enable = enable !== false;
 
-        disable: function (li) {
-            this.toggle(li, false);
-        },
-
-        toggle: function (li, enable) {
             $(li, this.element).each($.proxy(function (index, item) {
                 var item = $(item),
                     isCollapsed = !item.find("> .t-group, > .t-content").is(":visible");
@@ -220,13 +214,9 @@
             }
         },
 
-        nodeToggle: function (e, item) {
+        toggle: function (item) {
             if (item.find(".t-minus").length == 0 && item.find(".t-plus").length == 0) {
                 return;
-            }
-
-            if (e != null) {
-                e.preventDefault();
             }
 
             if (item.data("animating") || item.find("> div > .t-in").hasClass("t-state-disabled")) {
@@ -249,17 +239,14 @@
                 /// TODO: animate
                 contents[isExpanding ? "show" : "hide"]();
             } else if (isExpanding && this.isAjax() && (contents.length == 0 || item.data("loaded") === false)) {
-                if (!this.trigger(isExpanding ? "expand" : "collapse", { item: item[0] }))
+                if (!this.trigger(isExpanding ? "expand" : "collapse", { item: item[0] })) {
                     this.ajaxRequest(item);
+                }
             }
         },
 
-        nodeClick: function (e) {
-            var icon = $(e.target);
-
-            if (!icon.is(".t-plus-disabled,.t-minus-disabled")) {
-                this.nodeToggle(e, icon.closest(".t-item"));
-            }
+        _toggleButtonClick: function (e) {
+            this.toggle($(e.target).closest(".t-item"));
         },
 
         isAjax: function () {
@@ -285,7 +272,7 @@
                 success: $.proxy(function (data) {
                     data = eval("(" + data + ")");
                     data = data.d || data; // Support the `d` returned by MS Web Services
-                    this.dataBind(item, data);
+                    this._dataBind(item, data);
                 }, this)
             };
 
@@ -298,8 +285,9 @@
                 node[this.queryString.text] = this.getItemText(item);
 
                 var itemCheckbox = item.find(".t-checkbox:first :checkbox");
-                if (itemCheckbox.length)
+                if (itemCheckbox.length) {
                     node[this.queryString.checked] = itemCheckbox.is(":checked");
+                }
             }
 
             if (this.ws) {
@@ -311,26 +299,24 @@
         },
 
         ajaxRequest: function (item) {
+            var that = this, eventArgs;
 
-            item = item || $(this.element);
+            item = item || $(that.element);
 
-            var e = { item: item[0] };
+            eventArgs = { item: item[0] };
 
-            if (this.trigger(this.element, "dataBinding", e) || (!this.ajax && !this.ws))
+            if (that.trigger("dataBinding", eventArgs) || (!that.ajax && !that.ws)) {
                 return;
+            }
 
             item.data("loadingIconTimeout", setTimeout(function () {
                 item.find("> div > .t-icon").addClass("t-loading");
             }, 100));
 
-            $.ajax(this.ajaxOptions(item, {
-                data: $.extend({}, e.data),
-                url: this.url("selectUrl")
+            $.ajax(that.ajaxOptions(item, {
+                data: $.extend({}, eventArgs.data),
+                url: that.url("selectUrl")
             }));
-        },
-
-        _bindTo: function (data) {
-            this.dataBind(this.element, data);
         },
 
         _dataBind: function (item, data) {
@@ -362,12 +348,13 @@
 
             item.data("animating", true);
 
-            if (group.length > 0 && item.data("loaded") === false)
+            if (group.length > 0 && item.data("loaded") === false) {
                 $(html).prependTo(group);
-            else if (group.length > 0 && item.data("loaded") !== false)
+            } else if (group.length > 0 && item.data("loaded") !== false) {
                 group.html(html);
-            else if (group.length == 0)
+            } else if (group.length == 0) {
                 group = $(html).appendTo(item);
+            }
 
             /// TODO: play animations
             /*
@@ -384,30 +371,31 @@
                         .removeClass("t-plus")
                         .addClass("t-minus");
 
-            if (this.isAjax())
+            if (this.isAjax()) {
                 markAjaxLoadableNodes(item);
+            }
 
             that.trigger(DATABOUND);
         },
 
         checkboxClick: function (e, element) {
-            var isChecked = $(element).is(":checked");
+            var checked = $(element).is(":checked");
 
-            var isEventPrevented =
-                this.trigger(this.element, "checked", {
+            var isEventPrevented = this.trigger("checked", {
                     item: $(element).closest(".t-item")[0],
-                    checked: isChecked
+                    checked: checked
                 });
 
-            if (!isEventPrevented)
-                this.nodeCheck(element, isChecked);
-            else
+            if (!isEventPrevented) {
+                this.nodeCheck(element, checked);
+            } else {
                 e.preventDefault();
+            }
 
             return isEventPrevented;
         },
 
-        nodeCheck: function (li, isChecked) {
+        nodeCheck: function (li, checked) {
             $(li, this.element).each($.proxy(function (index, item) {
                 var item = $(item).closest(".t-item"),
                     checkboxHolder = $("> div > .t-checkbox", item),
@@ -419,11 +407,11 @@
 
                 checkboxHolder.find(":checkbox")
                                .attr({
-                                   checked: isChecked ? "checked" : "",
-                                   value: isChecked
+                                   checked: checked ? "checked" : "",
+                                   value: checked
                                });
 
-                if (isChecked)
+                if (checked)
                     $(t.treeview.getNodeInputsHtml(this.getItemValue(item), this.getItemText(item), arrayName, index))
                         .appendTo(checkboxHolder);
 
@@ -606,7 +594,7 @@
                             destinationItem.prepend("<span class='t-icon t-minus' />");
                         } else {
                             targetGroup.hide();
-                            treeview.nodeToggle(null, destinationItem.parent(), true);
+                            treeview.toggle(destinationItem.parent(), true);
                             targetGroup.show();
                         }
                     }
@@ -614,7 +602,7 @@
                     targetGroup.append(movedItem);
 
                     if (destinationItem.find("> .t-icon").hasClass("t-plus"))
-                        treeview.nodeToggle(null, destinationItem.parent(), true);
+                        treeview.toggle(destinationItem.parent(), true);
                 }
 
                 var level = movedItem.parents(".t-group").length;
