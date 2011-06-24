@@ -327,6 +327,22 @@
                     equal(chart._model.options.height, 200);
                 });
 
+                // ------------------------------------------------------------
+                module("Themes", {
+                    setup: function() {
+                        Chart.Themes.test = {
+                            flag: true
+                        };
+                    },
+                    teardown: destroyChart
+                });
+
+                test("Applies theme", function() {
+                    createChart({ theme: "test" });
+
+                    ok(chart.options.flag);
+                });
+
             })();
         </script>
 

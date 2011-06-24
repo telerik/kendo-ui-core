@@ -38,11 +38,12 @@
     // Chart ==================================================================
     var Chart = Component.extend({
         init: function(element, options) {
-            var chart = this;
+            var chart = this,
+                theme = options ? options.theme : "";
 
             Component.fn.init.call(chart, element);
 
-            chart.options = deepExtend(chart.options, options);
+            chart.options = deepExtend(chart.options, theme ? Chart.Themes[theme] : { }, options);
 
             chart.bind([DATABOUND], chart.options);
             chart._viewFactory = chart._supportsSVG() ? new SVGFactory() : new VMLFactory();
@@ -68,11 +69,11 @@
             categoryAxis: {
                 categories: []
             },
+            seriesColors: ["#d7df23", "#adc32b", "#799b28", "#4c7520"],
             seriesDefaults: {
                 type: COLUMN,
                 data: []
             },
-            seriesColors: ["#d7df23", "#adc32b", "#799b28", "#4c7520"],
             series: []
         },
 
@@ -219,6 +220,59 @@
     }
 
 
+    // **************************
+    // Themes
+    // **************************
+    Chart.Themes = {
+        sunset: {
+            title: {
+                color: "#854324"
+            },
+            legend: {
+                labels: {
+                    font: "12px sans-serif",
+                    color: "#854324"
+                }
+            },
+            seriesDefaults: {
+                labels: {
+                    font: "12px sans-serif",
+                    color: "#854324"
+                }
+            },
+            chartArea: {
+                background: "#ececd8",
+                border: {
+                    color: "#bbb99d",
+                    width: 1
+                }
+            },
+            seriesColors: ["#3f1c12", "#ba3b01", "#d95a1a", "#e7931e", "#f9bc12"],
+            categoryAxis: {
+                line: {
+                    color: "#854324"
+                },
+                labels: {
+                    color: "#854324"
+                },
+                majorGridlines: {
+                    color: "#bbb99d",
+                    visible: true
+                }
+            },
+            valueAxis: {
+                line: {
+                    color: "#854324"
+                },
+                labels: {
+                    color: "#854324"
+                },
+                majorGridlines: {
+                    color: "#bbb99d"
+                }
+            }
+        }
+    };
 
     // **************************
     // View Model
