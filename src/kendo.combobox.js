@@ -31,7 +31,7 @@
 
             that._dataSource();
 
-            that.bind([CHANGE], that.options);
+            that.bind(["init", CHANGE], that.options);
 
             that.input.bind({
                 keydown: proxy(that._keydown, that),
@@ -176,9 +176,9 @@
             }
         },
 
-        search: function() {
+        search: function(word) {
             var that = this,
-                word = that.text(),
+                word = word || that.text(),
                 length = word.length,
                 options = that.options,
                 filter = options.filter;

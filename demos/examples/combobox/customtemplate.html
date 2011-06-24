@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <!-- meta -->
+        <!-- meta -->
+        <title>Custom template</title>
+        <!-- script -->
+        <script src="../../../src/jquery.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.popup.js"></script>
+        <script src="../../../src/kendo.query.js"></script>
+        <script src="../../../src/kendo.datasource.js"></script>
+        <script src="../../../src/kendo.list.js"></script>
+        <script src="../../../src/kendo.combobox.js"></script>
+        <!-- script -->
+        <!-- css -->
+        <link type="text/css" href="../styles/examples.css" rel="stylesheet"/>
+        <link type="text/css" href="../../../styles/kendo.common.css" rel="stylesheet"/>
+        <link type="text/css" href="../../../styles/kendo.vista.css" rel="stylesheet"/>
+        <!-- css -->
+    </head>
+    <body>
+        <!-- nav -->
+        <!-- nav -->
+        <!-- description -->
+        <div class="description">Custom template</div>
+        <!-- description -->
+        <div id="example">
+            <input id="titles" />
+            <input id="name" value="King Kong"/>
+            <script type="text/javascript">
+                var remoteDataSource = new kendo.data.DataSource({
+                    serverSorting: true,
+                    transport: {
+                        read: {
+                            url: "http://odata.netflix.com/Catalog/Titles",
+                            dataType: "jsonp",
+                            jsonp: false,
+                            jsonpCallback: "callback",
+                            cache: false
+                        },
+                        dialect: {
+                            read: function() {
+                                return "$filter=substringof('" + escape($("#name").val()) + "',%20Name)&$format=json&$callback=callback";
+                            }
+                        }
+                    },
+                    deserializer: {
+                        data: function(result) {
+                            return result.d.results;
+                        }
+                    }
+                });
+
+                $("#titles").kendoComboBox({
+                    dataTextField: "Name",
+                    dataValueField: "Id",
+                    dataSource: remoteDataSource,
+                    template: '<img src="<%= data.BoxArt.SmallUrl %>" alt="<%= data.Name %>" />Title:<%= data.Name %>, Year: <%= data.Name %>',
+                    init: function() {
+                        this.ul.width(400)
+                    }
+                });
+
+                $("#name").change(function() {
+                    $("#titles").data("kendoComboBox").showBusy();
+                    remoteDataSource.query();
+                });
+            </script>
+        </div>
+        <!-- tools -->
+        <!-- tools -->
+    </body>
+</html>
