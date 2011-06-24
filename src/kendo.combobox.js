@@ -9,6 +9,7 @@
         CLOSE = "close",
         CHANGE = "change",
         DISABLED = "t-state-disabled",
+        STATE_SELECTED = "t-state-selected",
         SELECT = "select",
         proxy = $.proxy;
 
@@ -73,6 +74,17 @@
             highlightFirst: true,
             filter: "none",
             suggest: false
+        },
+
+        current: function(li) {
+            var that = this,
+                current = that._current;
+
+            if (current) {
+                current.removeClass(STATE_SELECTED);
+            }
+
+            Select.fn.current.call(that, li);
         },
 
         enable: function(enable) {
@@ -153,7 +165,7 @@
                 data = that.dataSource.view();
 
             if (idx !== -1) {
-                that._selected = that._current.addClass("t-state-selected");
+                that._selected = that._current.addClass(STATE_SELECTED);
 
                 data = data[idx];
                 text = that._text(data);

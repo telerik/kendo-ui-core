@@ -36,7 +36,7 @@
 
             if (candidate !== undefined) {
                 if (that._current) {
-                    that._current.removeClass(FOCUSED).removeClass("t-state-selected");
+                    that._current.removeClass(FOCUSED);
                 }
 
                 if (candidate) {
