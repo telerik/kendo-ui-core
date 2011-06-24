@@ -176,17 +176,12 @@
                 });
 
                 test("moves to first point", function() {
-                    equal(path.renderPoints(), "M10.5 20.5");
-                });
-
-                test("does not align to pixel grid when stroke width is even number", function() {
-                    path.options.strokeWidth = 2;
                     equal(path.renderPoints(), "M10 20");
                 });
 
                 test("draws line", function() {
                     path.points.push([20, 30], [40, 50]);
-                    equal(path.renderPoints(), "M10.5 20.5 L20.5 30.5 L40.5 50.5");
+                    equal(path.renderPoints(), "M10 20 L20 30 L40 50");
                 });
 
                 test("renders fill color", function() {
