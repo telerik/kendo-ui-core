@@ -36,11 +36,11 @@
 
             that._tbody();
 
+            that._pageable();
+
             that._thead();
 
             that._templates();
-
-            that._pageable();
 
             that._navigatable();
 
@@ -60,8 +60,6 @@
         _element: function() {
             var that = this,
                 table = that.element;
-
-            table.attr("tabIndex", Math.max(table.attr("tabIndex") || 0, 0));
 
             if (!table.is("table")) {
                 table = $("<table />").appendTo(that.element);
@@ -167,6 +165,7 @@
         _wrapper: function() {
             var that = this,
                 table = that.table,
+                height = that.options.height || table.css("height"),
                 wrapper;
 
             wrapper = table.parent();
@@ -175,7 +174,15 @@
                wrapper = table.wrap("<div />").parent();
             }
 
-            that.wrapper = wrapper.addClass("t-grid t-widget");
+            that.wrapper = wrapper.addClass("t-grid t-widget")
+                                  .attr("tabIndex", Math.max(table.attr("tabIndex") || 0, 0));
+
+            table.removeAttr("tabIndex");
+
+            if (height && height !== "0px") {
+                that.wrapper.css("height", height);
+                table.css("height", "auto");
+            }
         },
 
         _tbody: function() {
@@ -195,9 +202,10 @@
         _scrollable: function() {
             var that = this,
                 header,
-                content,
                 table,
-                scrollable = that.options.scrollable;
+                options = that.options,
+                height = that.wrapper.innerHeight(),
+                scrollable = options.scrollable;
 
             if (scrollable) {
                 header = that.wrapper.children().filter(".t-grid-header");
@@ -214,6 +222,14 @@
                 if (!that.table.parent().is(".t-grid-content")) {
                     that.table.wrap('<div class="t-grid-content" />');
                 }
+
+                height -= header.outerHeight();
+
+                if (that.pager) {
+                    height -= that.pager.element.outerHeight();
+                }
+
+                that.table.parent().height(height);
             }
         },
 
@@ -250,10 +266,14 @@
                 wrapper = that.wrapper.children("div.t-grid-pager");
 
                 if (!wrapper.length) {
-                    wrapper = $('<div class="t-grid-pager"><ul /></div>').appendTo(that.wrapper);
+                    wrapper = $('<div class="t-grid-pager"/>').appendTo(that.wrapper);
                 }
 
-                that.pager = pageable instanceof kendo.ui.Pager ? pageable : new kendo.ui.Pager(wrapper.children("ul"), extend({}, pageable, { dataSource: that.dataSource }));
+                if (typeof pageable === "object" && pageable instanceof kendo.ui.Pager) {
+                    that.pager = pageable;
+                } else {
+                    that.pager = new kendo.ui.Pager(wrapper, extend({}, pageable, { dataSource: that.dataSource }));
+                }
             }
         },
 
