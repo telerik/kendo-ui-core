@@ -31,9 +31,28 @@
                         { field: "foo" },
                         { field: "bar" }
                     ],
-                    sortable: true
+                    sortable: true,
+                    scrollable: false
                 });
                 var ths = $(element).find("th");
+                ok(ths.eq(0).data("kendoSortable") instanceof kendo.ui.Sortable);
+                ok(ths.eq(1).data("kendoSortable") instanceof kendo.ui.Sortable);
+            });
+
+            test("attach sortable to the header in scrollable grid", function() {
+                var element = $("<table><thead><tr><th/><th/></tr></thead></table>"),
+                    grid = new Grid(element, {
+                    data: [],
+                    columns: [
+                        { field: "foo" },
+                        { field: "bar" }
+                    ],
+                    sortable: true,
+                    scrollable: true
+                });
+
+                var ths = grid.wrapper.find("th");
+
                 ok(ths.eq(0).data("kendoSortable") instanceof kendo.ui.Sortable);
                 ok(ths.eq(1).data("kendoSortable") instanceof kendo.ui.Sortable);
             });
@@ -45,12 +64,12 @@
                     columns: [{ field: "foo" }],
                     sortable: {
                         allowUnsort: false,
-                        mode: "multi"
+                        mode: "multiple"
                     }
                 });
-                var sortable = $(element).find("th").data("kendoSortable");
-                equal(sortable.mode, "multi");
-                equal(sortable.allowUnsort, false);
+                var sortable = grid.wrapper.find("th").data("kendoSortable");
+                equal(sortable.options.mode, "multiple");
+                equal(sortable.options.allowUnsort, false);
             });
 
             test("sortable is properly attached when there is no table header initially", function() {
@@ -63,7 +82,7 @@
                     ],
                     sortable: true
                 });
-                var ths = $(element).find("th");
+                var ths = grid.wrapper.find("th");
                 ok(ths.eq(0).data("kendoSortable") instanceof kendo.ui.Sortable);
                 ok(ths.eq(1).data("kendoSortable") instanceof kendo.ui.Sortable);
             });
@@ -78,7 +97,7 @@
                     ],
                     sortable: true
                 });
-                var ths = $(element).find("th");
+                var ths = grid.wrapper.find("th");
                 ok(ths.eq(0).data("field") === "foo");
                 ok(ths.eq(1).data("field") === "bar");
             });
