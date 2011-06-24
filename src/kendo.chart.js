@@ -980,31 +980,37 @@
                 majorTicks = axis.getMajorTickPositions(),
                 ticks = [];
 
-            if (options.minorTickType === OUTSIDE) {
-                ticks = $.map(axis.getMinorTickPositions(), function(pos) {
-                            if (!inArray(pos, majorTicks)) {
-                                return {
-                                    pos: pos,
-                                    size: options.minorTickSize,
-                                    width: options.line.width,
-                                    color: options.line.color
-                                };
-                            }
-                        });
-            }
-
-
             if (options.majorTickType === OUTSIDE) {
                 ticks = ticks.concat($.map(majorTicks, function(pos) {
-                                        if (inArray(pos, majorTicks)) {
-                                            return {
-                                                pos: pos,
-                                                size: options.majorTickSize,
-                                                width: options.line.width,
-                                                color: options.line.color
-                                            };
-                                        }
+                                        return {
+                                            pos: pos,
+                                            size: options.majorTickSize,
+                                            width: options.line.width,
+                                            color: options.line.color
+                                        };
                                     }));
+            }
+
+            if (options.minorTickType === OUTSIDE) {
+                ticks = $.map(axis.getMinorTickPositions(), function(pos) {
+                            if (options.majorTickType !== NONE) {
+                                if (!inArray(pos, majorTicks)) {
+                                    return {
+                                        pos: pos,
+                                        size: options.minorTickSize,
+                                        width: options.line.width,
+                                        color: options.line.color
+                                    };
+                                }
+                            } else {
+                                    return {
+                                        pos: pos,
+                                        size: options.minorTickSize,
+                                        width: options.line.width,
+                                        color: options.line.color
+                                    };
+                            }
+                        });
             }
 
             return $.map(ticks, function(tick) {
@@ -1139,16 +1145,15 @@
                         {
                             strokeWidth: options.line.width,
                             stroke: options.line.color
-                        }
-                    ));
+                        }));
                 } else {
                     childElements.push(factory.line(
                         majorTickPositions[0], axis.box.y1,
-                        majorTickPositions[majorTickPositions.length - 1], axis.box.y1),
+                        majorTickPositions[majorTickPositions.length - 1], axis.box.y1,
                         {
                             strokeWidth: options.line.width,
                             stroke: options.line.color
-                        });
+                        }));
                 }
             }
 

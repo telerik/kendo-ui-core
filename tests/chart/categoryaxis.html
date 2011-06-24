@@ -60,11 +60,14 @@
 
                 test("creates axis line", function() {
                     categoryAxis.getViewElements(factoryStub);
+                    var lineCoordinates = [
+                            chartBox.x1, LINE_Y,
+                            chartBox.x2, LINE_Y
+                        ];
 
-                    same(factoryStub.renderedLines[0], [
-                        chartBox.x1, LINE_Y,
-                        chartBox.x2, LINE_Y
-                    ], TOLERANCE);
+                    for(var i = 0; i < factoryStub.renderedLines[0].length - 2; i++){
+                        equals(factoryStub.renderedLines[0][i], lineCoordinates[i], TOLERANCE);
+                    }
                 });
 
                 test("creates labels", 1, function() {
@@ -95,7 +98,7 @@
                 });
 
                 test("major ticks are distributed horizontally", function() {
-                    categoryAxis.options.lineWidth = 0;
+                    categoryAxis.options.line.width = 0;
                     categoryAxis.getViewElements(factoryStub);
 
                     var ticksX = $.map(factoryStub.renderedLines, function(line) {
@@ -105,8 +108,30 @@
                 });
 
                 test("major ticks can be disabled", function() {
-                    categoryAxis.options.lineWidth = 0;
+                    categoryAxis.options.line.width = 0;
                     categoryAxis.options.majorTickType = "none";
+                    categoryAxis.getViewElements(factoryStub);
+
+                    equal(factoryStub.renderedLines, 0);
+                });
+
+                test("minor ticks are distributed horizontally", function() {
+                    categoryAxis.options.line.width = 0;
+                    categoryAxis.options.majorTickType = "none";
+                    categoryAxis.options.minorTickType = "outside";
+                    categoryAxis.getViewElements(factoryStub);
+
+                    var ticksX = $.map(factoryStub.renderedLines, function(line) {
+                        return line[0];
+                    });
+
+                    same(ticksX, [0, 200, 400, 600, 800], TOLERANCE);
+                });
+
+                test("minor ticks can be disabled", function() {
+                    categoryAxis.options.line.width = 0;
+                    categoryAxis.options.majorTickType = "none";
+                    categoryAxis.options.minorTickType = "none";
                     categoryAxis.getViewElements(factoryStub);
 
                     equal(factoryStub.renderedLines, 0);
@@ -122,11 +147,14 @@
 
                 test("creates axis line", function() {
                     categoryAxis.getViewElements(factoryStub);
+                    var lineCoordinates = [
+                            LINE_X, chartBox.y1,
+                            LINE_X, chartBox.y2
+                        ];
 
-                    same(factoryStub.renderedLines[0], [
-                        LINE_X, chartBox.y1,
-                        LINE_X, chartBox.y2
-                    ], TOLERANCE);
+                    for(var i = 0; i < factoryStub.renderedLines[0].length - 2; i++){
+                        equals(factoryStub.renderedLines[0][i], lineCoordinates[i], TOLERANCE);
+                    }
                 });
 
                 test("creates labels", 1, function() {
@@ -159,13 +187,26 @@
                 });
 
                 test("major ticks are distributed vertically", function() {
-                    categoryAxis.options.lineWidth = 0;
+                    categoryAxis.options.line.width = 0;
                     categoryAxis.getViewElements(factoryStub);
 
                     var ticksY = $.map(factoryStub.renderedLines, function(line) {
                         return line[1];
                     });
                     same(ticksY, [0, 300, 600], TOLERANCE);
+                });
+
+                test("minor ticks are distributed vertically", function() {
+                    categoryAxis.options.line.width = 0;
+                    categoryAxis.options.majorTickType = "none";
+                    categoryAxis.options.minorTickType = "outside";
+                    categoryAxis.getViewElements(factoryStub);
+
+                    var ticksY = $.map(factoryStub.renderedLines, function(line) {
+                        return line[1];
+                    });
+
+                    same(ticksY, [0, 150, 300, 450, 600], TOLERANCE);
                 });
 
                 // ------------------------------------------------------------
