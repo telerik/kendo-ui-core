@@ -114,8 +114,8 @@
                 data = that.dataSource.view(),
                 length = data.length;
 
-            that._height(length);
             that.ul[0].innerHTML = kendo.render(that.template, data);
+            that._height(length);
 
             if (that.element.is("select")) {
                 that._options(data);
