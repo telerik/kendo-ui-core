@@ -37,8 +37,8 @@ ViewFactoryStub.prototype = {
     }
 };
 
-function sameBox(a, b) {
-    same([a.x1, a.y1, a.x2, a.y2], [b.x1, b.y1, b.x2, b.y2]);
+function sameBox(a, b, tolerance) {
+    same([a.x1, a.y1, a.x2, a.y2], [b.x1, b.y1, b.x2, b.y2], tolerance);
 }
 
 function stubMethod(fn, methodName, stub, callback) {
