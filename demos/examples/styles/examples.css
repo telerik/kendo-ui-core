@@ -95,6 +95,7 @@ body
     background: #FFF;
     text-align: left;
     min-height: 200px;
+    position: relative;
 }
 * html { height: 200px; }
 
@@ -204,3 +205,88 @@ pre.prettyprint
     height: 40px;
     float:  right;
 }
+
+/* Nav styles */
+
+#nav,
+#nav .t-group,
+#nav .t-item
+{
+    border: 0;
+    background: none;
+}
+
+#nav li
+{
+    padding-bottom: 2px;
+}
+
+#nav .t-link
+{
+    font-weight: bold;
+    color: #2175bd;
+    background: none;
+    border: 0;
+    position: relative;
+    line-height: 36px;
+    padding: 1px 11px;
+}
+
+#nav li li .t-link
+{
+    line-height: 18px;
+    padding: 1px 21px;
+}
+
+#nav .t-state-selected,
+#nav .t-state-highlighted>.t-link
+{
+    color: #0c303c;
+    border: 1px solid #cfd6d8;
+    background-color: #c7d0d2;
+    background: -moz-linear-gradient(top, #dadfe1 0%, #bac4c7 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#dadfe1), color-stop(100%,#bac4c7));
+    background: -webkit-linear-gradient(top, #dadfe1 0%,#bac4c7 100%);
+    background: -o-linear-gradient(top, #dadfe1 0%,#bac4c7 100%);
+    background: -ms-linear-gradient(top, #dadfe1 0%,#bac4c7 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dadfe1', endColorstr='#bac4c7',GradientType=0 );
+    background: linear-gradient(top, #dadfe1 0%,#bac4c7 100%);
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    padding: 0 10px;
+}
+
+#nav .t-state-selected:after,
+#nav .t-state-highlighted>.t-link:after
+{
+    border-color: #FFFFFF transparent;
+    border-style: double;
+    border-width: 60px 0 60px 45px;
+    content: "\a0";
+    height: 0;
+    position: absolute;
+    right: -7px;
+    top: -42px;
+    width: 5px;
+}
+
+#nav li li .t-state-selected,
+#nav li li .t-state-highlighted>.t-link
+{
+    border: 0;
+    background: none;
+}
+
+#nav li li .t-state-selected:after,
+#nav li li .t-state-highlighted>.t-link:after
+{
+    display: none;
+}
+
+#nav .t-icon
+{
+    display: none;
+}
+
+/* codeStrip styles */
