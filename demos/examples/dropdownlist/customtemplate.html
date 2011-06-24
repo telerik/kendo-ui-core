@@ -3,7 +3,7 @@
     <head>
         <!-- meta -->
         <!-- meta -->
-        <title>Title</title>
+        <title>Custom template</title>
         <!-- script -->
         <script src="../../../src/jquery.js"></script>
         <script src="../../../src/kendo.core.js"></script>
@@ -30,16 +30,20 @@
             <input id="name" value="King Kong"/>
             <script type="text/javascript">
                 var remoteDataSource = new kendo.data.DataSource({
+                    serverSorting: true,
                     transport: {
                         read: {
-                            url: "http://odata.netflix.com/Catalog/Titles?$filter=substringof('" + escape($("#name").val()) + "',%20Name)&$format=json&$callback=callback",
+                            url: "http://odata.netflix.com/Catalog/Titles",
                             dataType: "jsonp",
                             jsonp: false,
                             jsonpCallback: "callback",
-                            //processData: false,
-                            cache: true
+                            cache: false
                         },
-                        cache: "inmemory"
+                        dialect: {
+                            read: function() {
+                                return "$filter=substringof('" + escape($("#name").val()) + "',%20Name)&$format=json&$callback=callback";
+                            }
+                        }
                     },
                     deserializer: {
                         data: function(result) {
@@ -60,7 +64,7 @@
 
                 $("#name").change(function() {
                     $("#titles").data("kendoDropDownList").showBusy();
-                    remoteDataSource.read();
+                    remoteDataSource.query();
                 });
             </script>
         </div>

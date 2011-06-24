@@ -3,7 +3,7 @@
     <head>
         <!-- meta -->
         <!-- meta -->
-        <title>Events Demo</title>
+        <title>Events</title>
         <!-- script -->
         <script src="../../../src/jquery.js"></script>
         <script src="../../../src/kendo.core.js"></script>
@@ -29,6 +29,12 @@
         <div id="example">
             <input id="products"/>
             <script type="text/javascript">
+                var init = function init() {
+                    if ("kendoConsole" in window) {
+                        kendoConsole.log("DropDownList is initialized");
+                    }
+                };
+
                 var change = function () {
                     if ("kendoConsole" in window) {
                         kendoConsole.log("Changed: {text: " + this.text() + " , value: " + this.value() + "}");
@@ -46,12 +52,13 @@
                     {text: "Organic Dried Pears", value:"8"},
                     {text: "Schoggi Schokolade", value:"9"},
                     {text: "Alice Mutton", value:"10"},
-                    {text: "Carnarvon Tigers", value:"11"},
+                    {text: "Carnarvon Tigers", value:"11"}
                 ];
 
                 $("#products").kendoDropDownList({
                     dataSource: data,
-                    change: change
+                    change: change,
+                    init: init
                 });
 
             </script>
