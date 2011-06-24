@@ -9,18 +9,19 @@
 
             Component.fn.init.call(that, element, options);
 
+            options = that.options;
             that.dataSource = options.dataSource;
-            that.options = $.extend({}, that.options, options);
             that.linkTemplate = kendo.template(that.options.linkTemplate);
             that.selectTemplate = kendo.template(that.options.selectTemplate);
 
             that.dataSource.bind("change", proxy(that.refresh, that));
-            that.element.delegate("a:not(.currentPage)", "click",  proxy(that._click, that));
+            that.list = $('<ul class="t-pager t-reset t-numeric" />').appendTo(that.element).html(that.selectTemplate({ text: 1 }));
+            that.element.delegate("a", "click",  proxy(that._click, that));
         },
 
         options: {
-            selectTemplate: '<li><a href="#" class="currentPage"><%=text %></a></li>',
-            linkTemplate: '<li><a href="#" data-page="<%=idx %>"><%=text %></a></li>',
+            selectTemplate: '<li><span class="t-state-active"><%=text %></a></li>',
+            linkTemplate: '<li><a href="#" class="t-link" data-page="<%=idx %>"><%=text %></a></li>',
             buttonCount: 10
         },
 
@@ -55,7 +56,7 @@
                 html += that.linkTemplate({idx: idx, text: "...", isNum: false });
             }
 
-            that.element.empty().append(html);
+            that.list.empty().append(html);
         },
 
         _click: function(e) {

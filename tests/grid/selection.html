@@ -34,189 +34,196 @@
             }
 
             module("Grid selection and navigation", {
-                    setup: function() {
-                        table = $("<table><tbody/></table>").appendTo(document.body);
-                    },
-                    teardown: function() {
-                        table.remove();
-                        $(".t-grid-pager").remove();
+                setup: function() {
+                    table = $("<table><tbody/></table>").appendTo(document.body);
+                },
+                teardown: function() {
+                    table.remove();
+                    $(".t-grid-pager").remove();
+                }
+            });
+
+            test("tabindex is set to 0", function() {
+                var grid = setup();
+                equal(grid.wrapper.attr("tabIndex"), 0);
+            });
+
+            test("tabindex is removed from the table", function() {
+                table.attr("tabIndex", 1);
+                var grid = setup();
+
+                equal(table.attr("tabIndex"), undefined);
+            });
+
+            test("positive tabindex is retained", function() {
+                table.attr("tabIndex", 1);
+                var grid = setup();
+
+                equal(grid.wrapper.attr("tabIndex"), 1);
+            });
+
+            test("negative tabindex is set to 0", function() {
+                table.attr("tabIndex", -1);
+                var grid = setup();
+
+                equal(grid.wrapper.attr("tabIndex"), 0);
+            });
+
+            test("focusing grid element focus first cell", function() {
+                var grid = setup();
+                grid.element.focus();
+                ok(grid.element.find(">tbody>tr>td").first().is(".t-state-focused"));
+            });
+
+            test("focused state is removed on blur", function() {
+                var grid = setup();
+
+                table.focus().blur();
+
+                ok(!table.find(">tbody>tr>td").first().is(".t-state-focused"));
+            });
+
+            test("focused state is maintained after refocus", function() {
+                var grid = setup();
+                table.focus().blur().focus();
+
+                ok(table.find(">tbody>tr>td").first().is(".t-state-focused"));
+            });
+
+            test("clicking a child focuses it", function() {
+                var grid = setup();
+                table.find(">tbody>tr>td").last().mousedown();
+
+                ok(table.find(">tbody>tr>td").last().is(".t-state-focused"));
+            });
+
+            test("down arrow moves focus on the next row same cell", function() {
+                var grid = setup();
+                grid.element.focus().press(kendo.keys.DOWN);
+                ok(table.find("tbody tr:eq(1)").find("td").hasClass("t-state-focused"));
+                equal(table.find(".t-state-focused").length, 1);
+            });
+
+            test("right arrow moves focus on the next cell on the same row", function() {
+                var grid = setup();
+                grid.element.focus().press(kendo.keys.RIGHT);
+                ok(table.find("tbody tr:eq(0)").find("td:eq(1)").hasClass("t-state-focused"));
+            });
+
+            test("left arrow moves focus on the prev cell on the same row", function() {
+                var grid = setup();
+                grid.element.focus().press(kendo.keys.RIGHT).press(kendo.keys.LEFT);
+                ok(table.find("tbody tr:eq(0)").find("td:eq(0)").hasClass("t-state-focused"));
+            });
+
+            test("up arrow moves focus on the prev row same cell", function() {
+                var grid = setup();
+                grid.element.focus().press(kendo.keys.DOWN).press(kendo.keys.UP);
+                ok(table.find("tbody tr:eq(0)").find("td").hasClass("t-state-focused"));
+            });
+
+            test("pageUp should page to the next page", function() {
+                var grid = setup({
+                    pageable: {
+                        pageSize: 1
                     }
                 });
+                table.focus().press(kendo.keys.PAGEUP);
+                equal(grid.dataSource.page(), 2);
+            });
 
-                test("tabindex is set to 0", function() {
-                    var grid = setup();
-                    equal(table.attr("tabIndex"), 0);
+            test("pageDown should page to the prev page", function() {
+                var grid = setup({
+                    pageable: {
+                        pageSize: 1
+                    }
                 });
+                $(".t-grid-pager").find("a:not(.currentPage)").click();
+                table.focus().press(kendo.keys.PAGEDOWN);
+                equal(grid.dataSource.page(), 1);
+            });
 
-                test("positive tabindex is retained", function() {
-                    table.attr("tabIndex", 1);
-                    var grid = setup();
-
-                    equal(table.attr("tabIndex"), 1);
+            test("pageDown should not page to the pass first", function() {
+                var grid = setup({
+                    pageable: {
+                        pageSize: 1
+                    }
                 });
+                table.focus().press(kendo.keys.PAGEDOWN);
+                equal(grid.dataSource.page(), 1);
+            });
 
-                test("negative tabindex is set to 0", function() {
-                    table.attr("tabIndex", -1);
-                    var grid = setup();
-
-                    equal(table.attr("tabIndex"), 0);
+            test("down arrow after paging should select first cell", function() {
+                var grid = setup({
+                    pageable: {
+                        pageSize: 1
+                    }
                 });
+                table.focus().press(kendo.keys.PAGEDOWN).press(kendo.keys.DOWN);
 
-                test("focusing grid element focus first cell", function() {
-                    var grid = setup();
-                    grid.element.focus();
-                    ok(grid.element.find(">tbody>tr>td").first().is(".t-state-focused"));
-                });
+                ok(table.find(">tbody>tr>td").first().is(".t-state-focused"));
+            });
 
-                test("focused state is removed on blur", function() {
-                    var grid = setup();
+            test("space key select the focused cell", function() {
+                var grid = setup({ selectable: "cell" });
 
-                    table.focus().blur();
+                grid.element.focus().press(kendo.keys.DOWN).press(kendo.keys.SPACEBAR);
 
-                    ok(!table.find(">tbody>tr>td").first().is(".t-state-focused"));
-                });
+                ok(table.find("tbody tr:eq(1)").find("td").first().hasClass("t-state-selected"));
+            });
 
-                test("focused state is maintained after refocus", function() {
-                    var grid = setup();
-                    table.focus().blur().focus();
+            test("space key select the multiple focused cells if multiple selection is enabled", function() {
+                var grid = setup({ selectable: "multipleCell" });
 
-                    ok(table.find(">tbody>tr>td").first().is(".t-state-focused"));
-                });
+                grid.element.focus()
+                            .press(kendo.keys.DOWN)
+                            .press(kendo.keys.SPACEBAR)
+                            .press(kendo.keys.RIGHT)
+                            .press(kendo.keys.SPACEBAR, true);
+                var row = table.find("tbody tr").eq(1);
+                ok(row.find("td").first().hasClass("t-state-selected"));
+                ok(row.find("td").last().hasClass("t-state-selected"));
+            });
 
-                test("clicking a child focuses it", function() {
-                    var grid = setup();
-                    table.find(">tbody>tr>td").last().mousedown();
+            test("space key select single cells if multiple selection is enabled but ctrl is not active", function() {
+                var grid = setup({ selectable: "multipleCell" });
 
-                    ok(table.find(">tbody>tr>td").last().is(".t-state-focused"));
-                });
+                grid.element.focus()
+                            .press(kendo.keys.DOWN)
+                            .press(kendo.keys.SPACEBAR)
+                            .press(kendo.keys.RIGHT)
+                            .press(kendo.keys.SPACEBAR);
+                var row = table.find("tbody tr").eq(1);
+                ok(!row.find("td").first().hasClass("t-state-selected"));
+                ok(row.find("td").last().hasClass("t-state-selected"));
+            });
 
-                test("down arrow moves focus on the next row same cell", function() {
-                    var grid = setup();
-                    grid.element.focus().press(kendo.keys.DOWN);
-                    ok(table.find("tbody tr:eq(1)").find("td").hasClass("t-state-focused"));
-                    equal(table.find(".t-state-focused").length, 1);
-                });
+            test("clicking on cell selects it", function() {
+                var grid = setup({ selectable: "cell" }),
+                    cell = table.find("tbody tr:eq(1)").find("td").first();
+                cell.mousedown().mouseup();
+                ok(cell.hasClass("t-state-selected"));
+            });
 
-                test("right arrow moves focus on the next cell on the same row", function() {
-                    var grid = setup();
-                    grid.element.focus().press(kendo.keys.RIGHT);
-                    ok(table.find("tbody tr:eq(0)").find("td:eq(1)").hasClass("t-state-focused"));
-                });
+            test("clicking on cell selects the row if row selection is enabled", function() {
+                var grid = setup({ selectable: true }),
+                    cell = table.find("tbody tr:eq(1)").find("td").first();
+                cell.mousedown().mouseup();
+                ok(cell.parent().hasClass("t-state-selected"));
+            });
 
-                test("left arrow moves focus on the prev cell on the same row", function() {
-                    var grid = setup();
-                    grid.element.focus().press(kendo.keys.RIGHT).press(kendo.keys.LEFT);
-                    ok(table.find("tbody tr:eq(0)").find("td:eq(0)").hasClass("t-state-focused"));
-                });
-
-                test("up arrow moves focus on the prev row same cell", function() {
-                    var grid = setup();
-                    grid.element.focus().press(kendo.keys.DOWN).press(kendo.keys.UP);
-                    ok(table.find("tbody tr:eq(0)").find("td").hasClass("t-state-focused"));
-                });
-
-                test("pageUp should page to the next page", function() {
-                    var grid = setup({
-                        pageable: {
-                            pageSize: 1
+            test("selecting a cell triggers change event", function() {
+                var triggered = false,
+                    grid = setup({
+                        selectable: true,
+                        change: function() {
+                            triggered = true;
                         }
-                    });
-                    table.focus().press(kendo.keys.PAGEUP);
-                    equal(grid.dataSource.page(), 2);
-                });
-
-                test("pageDown should page to the prev page", function() {
-                    var grid = setup({
-                        pageable: {
-                            pageSize: 1
-                        }
-                    });
-                    $(".t-grid-pager").find("a:not(.currentPage)").click();
-                    table.focus().press(kendo.keys.PAGEDOWN);
-                    equal(grid.dataSource.page(), 1);
-                });
-
-                test("pageDown should not page to the pass first", function() {
-                    var grid = setup({
-                        pageable: {
-                            pageSize: 1
-                        }
-                    });
-                    table.focus().press(kendo.keys.PAGEDOWN);
-                    equal(grid.dataSource.page(), 1);
-                });
-
-                test("down arrow after paging should select first cell", function() {
-                    var grid = setup({
-                        pageable: {
-                            pageSize: 1
-                        }
-                    });
-                    table.focus().press(kendo.keys.PAGEDOWN).press(kendo.keys.DOWN);
-
-                    ok(table.find(">tbody>tr>td").first().is(".t-state-focused"));
-                });
-
-                test("space key select the focused cell", function() {
-                    var grid = setup({ selectable: "cell" });
-
-                    grid.element.focus().press(kendo.keys.DOWN).press(kendo.keys.SPACEBAR);
-
-                    ok(table.find("tbody tr:eq(1)").find("td").first().hasClass("t-state-selected"));
-                });
-
-                test("space key select the multiple focused cells if multiple selection is enabled", function() {
-                    var grid = setup({ selectable: "multipleCell" });
-
-                    grid.element.focus()
-                                .press(kendo.keys.DOWN)
-                                .press(kendo.keys.SPACEBAR)
-                                .press(kendo.keys.RIGHT)
-                                .press(kendo.keys.SPACEBAR, true);
-                    var row = table.find("tbody tr").eq(1);
-                    ok(row.find("td").first().hasClass("t-state-selected"));
-                    ok(row.find("td").last().hasClass("t-state-selected"));
-                });
-
-                test("space key select single cells if multiple selection is enabled but ctrl is not active", function() {
-                    var grid = setup({ selectable: "multipleCell" });
-
-                    grid.element.focus()
-                                .press(kendo.keys.DOWN)
-                                .press(kendo.keys.SPACEBAR)
-                                .press(kendo.keys.RIGHT)
-                                .press(kendo.keys.SPACEBAR);
-                    var row = table.find("tbody tr").eq(1);
-                    ok(!row.find("td").first().hasClass("t-state-selected"));
-                    ok(row.find("td").last().hasClass("t-state-selected"));
-                });
-
-                test("clicking on cell selects it", function() {
-                    var grid = setup({ selectable: "cell" }),
-                        cell = table.find("tbody tr:eq(1)").find("td").first();
-                    cell.mousedown().mouseup();
-                    ok(cell.hasClass("t-state-selected"));
-                });
-
-                test("clicking on cell selects the row if row selection is enabled", function() {
-                    var grid = setup({ selectable: true }),
-                        cell = table.find("tbody tr:eq(1)").find("td").first();
-                    cell.mousedown().mouseup();
-                    ok(cell.parent().hasClass("t-state-selected"));
-                });
-
-                test("selecting a cell triggers change event", function() {
-                    var triggered = false,
-                        grid = setup({
-                            selectable: true,
-                            change: function() {
-                                triggered = true;
-                            }
-                        }),
-                        cell = table.find("tbody tr:eq(1)").find("td").first();
-                    cell.mousedown().mouseup();
-                    ok(triggered);
-                });
+                    }),
+                    cell = table.find("tbody tr:eq(1)").find("td").first();
+                cell.mousedown().mouseup();
+                ok(triggered);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

@@ -840,6 +840,11 @@ div.t-grid-header .t-last-header
     line-height:1.2em;
 }
 
+.t-pager li
+{
+    display: inline;
+}
+
 .t-footer-template td
 {
     border-width: 1px 1px 0 0;
