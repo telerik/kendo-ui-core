@@ -417,9 +417,9 @@
         options: {
             width: DEFAULT_WIDTH,
             height: DEFAULT_HEIGHT,
-            background: "#000",
+            background: "#fff",
             border: {
-                color: "#000",
+                color: "#fff",
                 width: 0
             }
         },
@@ -983,7 +983,7 @@
             labels: { },
             line: {
                 width: 1,
-                color: "#000",
+                color: "#000"
             },
             majorTickType: OUTSIDE,
             majorTickSize: 4,
@@ -1639,14 +1639,15 @@
         getViewElements: function(factory) {
             var bar = this,
                 options = bar.options,
+                border = options.border.width > 0 ? {
+                    stroke: options.border.color,
+                    strokeWidth: options.border.width
+                } : {},
                 box = bar.box,
                 elements = [];
 
             elements.push(
-                factory.rect(box, {
-                        fill: options.color,
-                        stroke: options.border.color,
-                        strokeWidth: options.border.width })
+                factory.rect(box, deepExtend({}, { fill: options.color }, border))
             );
             [].push.apply(elements,
                 ChartElement.fn.getViewElements.call(bar, factory)
@@ -2198,7 +2199,7 @@
             if (!path.template) {
                 path.template = SVGPath.template = template(
                     "<path d='<%= renderPoints() %>' " +
-                    "stroke='<%= options.stroke %>' stroke-width='<%= options.strokeWidth %>' " +
+                    "<%= renderStroke() %><%= renderStrokeWidth() %>" +
                     "stroke-linecap='square' " +
                     "fill='<%= options.fill || 'none' %>'></path>"
                 );
@@ -2208,16 +2209,15 @@
         },
 
         options: {
-            stroke: "#000",
-            strokeWidth: 1,
-            fill: ""
+            fill: "#000"
         },
 
         renderPoints: function() {
             var path = this,
                 points = this.points,
                 count = points.length,
-                shouldAlign = path.options.strokeWidth % 2 !== 0,
+                strokeWidth = path.options.strokeWidth,
+                shouldAlign = strokeWidth && strokeWidth % 2 !== 0,
                 alignFunc = shouldAlign ? alignToPixel : Math.round,
                 first = points[0],
                 result = "M" + alignFunc(first[0]) + " " + alignFunc(first[1]);
@@ -2228,6 +2228,20 @@
             }
 
             return result;
+        },
+
+        renderStrokeWidth: function () {
+            var path = this,
+                options = path.options;
+
+            return options.strokeWidth > 0 ? "stroke-width='" + options.strokeWidth + "' " : "";
+        },
+
+        renderStroke: function () {
+            var path = this,
+                options = path.options;
+
+            return options.stroke ? "stroke='" + options.stroke + "' " : "";
         }
     });
 
@@ -2330,8 +2344,6 @@
         },
 
         options: {
-            stroke: "#000",
-            strokeWidth: 1,
             fill: "#fff"
         },
 

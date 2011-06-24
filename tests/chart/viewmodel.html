@@ -987,7 +987,6 @@
                 });
 
                 test("renders box with padding", function() {
-                    console.log(legendBox);
                     sameBox(legendBox, new Box2D(915, 483, 1000, 517));
                 });
 
@@ -1036,10 +1035,24 @@
                 });
 
                 test("sets stroke color", function() {
+                    bar.options.border.color = "red";
+                    bar.options.border.width = 1;
+                    factory = new ViewFactoryStub();
+                    bar.updateLayout(box);
+                    bar.getViewElements(factory);
+                    rect = factory.log.rect[0];
+
                     same(rect.style.stroke, bar.options.border.color);
                 });
 
                 test("sets stroke width", function() {
+                    bar.options.border.color = "red";
+                    bar.options.border.width = 1;
+                    factory = new ViewFactoryStub();
+                    bar.updateLayout(box);
+                    bar.getViewElements(factory);
+                    rect = factory.log.rect[0];
+
                     same(rect.style.strokeWidth, bar.options.border.width);
                 });
             })();
