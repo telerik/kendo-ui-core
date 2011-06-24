@@ -237,18 +237,17 @@
             }
         },
 
-        _popup: function(toggleTarget) {
+        _popup: function() {
             var that = this,
                 ul = that.ul,
                 wrapper = that.wrapper,
-                padding = ul.outerWidth() - ul.innerWidth();
+                spacing = ul.outerWidth() - ul.innerWidth();
 
             that.popup = new ui.Popup(ul, {
-                anchor: wrapper,
-                toggleTarget: toggleTarget
+                anchor: wrapper
             });
 
-            ul.width(wrapper.width() - padding);
+            ul.width(wrapper.width() - spacing);
         },
 
         _options: function(data) {

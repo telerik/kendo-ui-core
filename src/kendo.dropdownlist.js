@@ -2,6 +2,8 @@
     var kendo = window.kendo,
         ui = kendo.ui,
         Select = ui.Select,
+        OPEN = "open",
+        CLOSE  = "close",
         CHANGE = "change",
         SELECTED = "t-state-selected",
         DISABLED = "t-state-disabled",
@@ -21,7 +23,7 @@
 
             that._span();
 
-            that._popup(that.wrapper);
+            that._popup();
 
             that._accessors();
 
@@ -71,6 +73,8 @@
                             if(!that.ul[0].firstChild) {
                                 that.showBusy();
                                 that.dataSource.read();
+                            } else {
+                                that.toggle();
                             }
                         },
                         blur: function() {
@@ -98,6 +102,11 @@
             }
         },
 
+        toggle: function() {
+            var that = this;
+            that[that.popup.visible() ? CLOSE : OPEN]();
+        },
+
         refresh: function() {
             var that = this,
                 value = that.value(),
@@ -121,7 +130,7 @@
             that.previous = that.value();
 
             if (!options.autoBind) {
-                that[length ? "open" : "close"]();
+                that[length ? OPEN : CLOSE]();
             }
 
             that.hideBusy();
