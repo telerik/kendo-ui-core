@@ -18,7 +18,8 @@
         NODEDROPPED = "nodeDropped",
         CLICK = "click",
         CHANGE = "change",
-        TSTATEHOVER = "t-state-hover";
+        TSTATEHOVER = "t-state-hover",
+        NODECONTENTS = ">.t-group, >.t-content, >.t-animation-container>.t-group, >.t-animation-container>.t-content";
 
     function markAjaxLoadableNodes(element) {
         element.find(".t-plus")
@@ -71,7 +72,7 @@
                 .delegate(".t-in.t-state-selected", "mouseenter", function(e) { e.preventDefault(); })
                 .delegate(clickableItems, "mouseenter", function () { $(this).addClass(TSTATEHOVER); })
                 .delegate(clickableItems, "mouseleave", function () { $(this).removeClass(TSTATEHOVER); })
-                .delegate(clickableItems, CLICK, proxy(that.nodeSelect, that))
+                .delegate(clickableItems, CLICK, proxy(that._nodeClick, that))
                 .delegate("div:not(.t-state-disabled) .t-in", "dblclick", proxy(that._toggleButtonClick, that))
                 .delegate(":checkbox", CLICK, proxy(that.checkboxClick, that))
                 .delegate(".t-plus,.t-minus", CLICK, proxy(that._toggleButtonClick, that));
@@ -133,7 +134,7 @@
             this._processItems(items, function (index, item) {
                 item = $(item);
 
-                var contents = item.find("> .t-group, > .t-content");
+                var contents = item.find(NODECONTENTS);
 
                 if ((contents.length > 0 && !contents.is(":visible")) || this.isAjax()) {
                     this.toggle(item);
@@ -145,7 +146,7 @@
             this._processItems(items, function (index, item) {
                 item = $(item);
 
-                var contents = item.find("> .t-group, > .t-content");
+                var contents = item.find(NODECONTENTS);
 
                 if (contents.length > 0 && contents.is(":visible")) {
                     this.toggle(item);
@@ -190,7 +191,7 @@
         },
 
         _shouldNavigate: function (node) {
-            var contents = node.closest(".t-item").find("> .t-content, > .t-group"),
+            var contents = node.closest(".t-item").find(NODECONTENTS),
                 href = node.attr("href"),
                 result;
 
@@ -203,48 +204,72 @@
             return !result;
         },
 
-        nodeSelect: function (e) {
-            var node = $(e.target),
-                that = this,
-                treeview = that.element;
+        _trigger: function (eventName, node) {
+            return this.trigger(eventName, {
+                item: node.closest(".t-item")[0]
+            });
+        },
 
-            if (!that._shouldNavigate(node)) {
+        _nodeClick: function (e) {
+            var that = this,
+                node = $(e.target),
+                contents = node.closest(".t-item").find(NODECONTENTS),
+                href = node.attr("href"),
+                shouldNavigate;
+
+            if (href) {
+                shouldNavigate = href == "#" || href.indexOf("#" + this.element.id + "-") >= 0;
+            } else {
+                shouldNavigate = contents.length > 0 && contents.children().length == 0;
+            }
+
+            if (shouldNavigate) {
                 e.preventDefault();
             }
 
-            if (!node.hasClass(".t-state-selected") && !that.trigger("select", { item: node.closest(".t-item")[0] })) {
-                $(".t-in", treeview).removeClass("t-state-hover t-state-selected");
+            if (!node.hasClass(".t-state-selected") && !that._trigger("select", node)) {
+                that.select(node);
+            }
+        },
+
+        select: function (node) {
+            node = $(node);
+
+            if (node.length) {
+                this.element.find(".t-in").removeClass("t-state-hover t-state-selected");
 
                 node.addClass("t-state-selected");
             }
         },
 
         toggle: function (item) {
-            if (item.find(".t-minus").length == 0 && item.find(".t-plus").length == 0) {
+            if (item.find(".t-minus,.t-plus").length == 0) {
                 return;
             }
 
-            if (item.data("animating") || item.find("> div > .t-in").hasClass("t-state-disabled")) {
+            if (item.data("animating") || item.find("> div > .t-state-disabled").length) {
                 return;
             }
 
             item.data("animating", true);
 
-            var contents = item.find(">.t-group, >.t-content, >.t-animation-container>.t-group, >.t-animation-container>.t-content"),
-                isExpanding = !contents.is(":visible");
+            var that = this,
+                contents = item.find(NODECONTENTS),
+                isExpanding = !contents.is(":visible")
+                eventType = isExpanding ? "expand" : "collapse";
 
-            if (contents.children().length > 0
-             && item.data("loaded") !== false
-             && !this.trigger(isExpanding ? "expand" : "collapse", { item: item[0] }) ) {
-                item.find("> div > .t-icon")
+            if (contents.children().length > 0 && item.data("loaded") !== false) {
+                if (!that._trigger(eventType, item)) {
+                    item.find("> div > .t-icon")
                         .toggleClass("t-minus", isExpanding)
                         .toggleClass("t-plus", !isExpanding);
 
-                item.data("animating", false);
-                /// TODO: animate
-                contents[isExpanding ? "show" : "hide"]();
+                    item.data("animating", false);
+                    /// TODO: animate
+                    contents[isExpanding ? "show" : "hide"]();
+                }
             } else if (isExpanding && this.isAjax() && (contents.length == 0 || item.data("loaded") === false)) {
-                if (!this.trigger(isExpanding ? "expand" : "collapse", { item: item[0] })) {
+                if (!that._trigger(eventType, item)) {
                     this.ajaxRequest(item);
                 }
             }
