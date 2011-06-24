@@ -72,13 +72,16 @@
 
         expand: function (element) {
             var that = this;
-            
+
             $(element).each(function (index, item) {
                 item = $(item);
                 if (!item.hasClass(disabledClass) && item.find('> .t-group, > .t-content').length > 0) {
 
                     if (that.options.expandMode == expandModes.single && that._collapseAllExpanded(item))
                         return;
+
+                    $(highlightedClass, element).removeClass(highlightedClass.substr(1));
+                    item.addClass(highlightedClass.substr(1));
 
                     that._toggleItem(item, false, null);
                 }
@@ -91,8 +94,10 @@
             $(element).each(function (index, item) {
                 item = $(item);
 
-                if (!item.hasClass(disabledClass) && item.find('> .t-group, > .t-content').is(VISIBLE))
+                if (!item.hasClass(disabledClass) && item.find('> .t-group, > .t-content').is(VISIBLE)) {
+                    item.removeClass(highlightedClass.substr(1));
                     that._toggleItem(item, true, null);
+                }
 
             });
         },
