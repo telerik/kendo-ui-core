@@ -89,20 +89,16 @@
         },
 
         _height: function(length) {
-            var that = this,
-            ul = that.ul,
-            parent = ul.parent(".t-animation-container"),
-            height = that.options.height;
-
             if (length) {
-                parent.show();
+                var that = this,
+                    ul = that.ul,
+                    height = that.options.height;
 
-                ul.append("<li>empty</li>")
-                  .show()
+                ul.show()
+                  .parent(".t-animation-container").show()
+                  .end()
                   .height(length * $(ul[0].firstChild).height() > height ? height : "auto")
                   .hide();
-
-                parent.hide();
             }
         },
 
