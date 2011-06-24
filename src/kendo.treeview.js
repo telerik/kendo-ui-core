@@ -74,12 +74,14 @@
                 .delegate(clickableItems, "mouseleave", function () { $(this).removeClass(TSTATEHOVER); })
                 .delegate(clickableItems, CLICK, proxy(that._nodeClick, that))
                 .delegate("div:not(.t-state-disabled) .t-in", "dblclick", proxy(that._toggleButtonClick, that))
-                .delegate(":checkbox", CLICK, proxy(that.checkboxClick, that))
+                .delegate(":checkbox", CLICK, proxy(that._checkboxClick, that))
                 .delegate(".t-plus,.t-minus", CLICK, proxy(that._toggleButtonClick, that));
 
+/*
             if (that.isAjax()) {
                 markAjaxLoadableNodes(element);
             }
+*/
 
             if (options.dragAndDrop) {
                 that.bind([NODEDRAGGING, NODEDRAGCANCELLED, NODEDROP, NODEDROPPED], options);
@@ -136,7 +138,7 @@
 
                 var contents = item.find(NODECONTENTS);
 
-                if ((contents.length > 0 && !contents.is(":visible")) || this.isAjax()) {
+                if ((contents.length > 0 && !contents.is(":visible")) /* || this.isAjax() */) {
                     this.toggle(item);
                 }
             });
@@ -170,11 +172,11 @@
                 item.find("> div > .t-in")
                         .toggleClass("t-state-default", enable)
                         .toggleClass("t-state-disabled", !enable)
-                     .end()
-                     .find("> div > .t-checkbox > :checkbox")
+                    .end()
+                    .find("> div > .t-checkbox > :checkbox")
                         .attr("disabled", enable ? "" : "disabled")
-                     .end()
-                     .find("> div > .t-icon")
+                    .end()
+                    .find("> div > .t-icon")
                         .toggleClass("t-plus", isCollapsed && enable)
                         .toggleClass("t-plus-disabled", isCollapsed && !enable)
                         .toggleClass("t-minus", !isCollapsed && enable)
@@ -268,7 +270,7 @@
                     /// TODO: animate
                     contents[isExpanding ? "show" : "hide"]();
                 }
-            } else if (isExpanding && this.isAjax() && (contents.length == 0 || item.data("loaded") === false)) {
+            } else if (isExpanding /* && this.isAjax() */ && (contents.length == 0 || item.data("loaded") === false)) {
                 if (!that._trigger(eventType, item)) {
                     this.ajaxRequest(item);
                 }
@@ -278,7 +280,7 @@
         _toggleButtonClick: function (e) {
             this.toggle($(e.target).closest(".t-item"));
         },
-
+/*
         isAjax: function () {
             return this.ajax || this.ws || this.onDataBinding;
         },
@@ -389,10 +391,9 @@
             }
 
             /// TODO: play animations
-            /*
-            t.fx.play(this.effects, group, { direction: "bottom" }, function () {*/
+            t.fx.play(this.effects, group, { direction: "bottom" }, function () {
                 item.data("animating", false);
-            /*});*/
+            });
 
             clearTimeout(item.data("loadingIconTimeout"));
 
@@ -409,17 +410,16 @@
 
             that.trigger(DATABOUND);
         },
+*/
 
-        checkboxClick: function (e, element) {
-            var checked = $(element).is(":checked");
-
-            var isEventPrevented = this.trigger("checked", {
-                    item: $(element).closest(".t-item")[0],
-                    checked: checked
-                });
+        _checkboxClick: function (e) {
+            var that = this,
+                checkbox = $(e.target),
+                checked = checkbox.is(":checked"),
+                isEventPrevented = that._trigger("checked", checkbox, { checked: checked });
 
             if (!isEventPrevented) {
-                this.nodeCheck(element, checked);
+                that.check(checkbox, checked);
             } else {
                 e.preventDefault();
             }
@@ -427,10 +427,11 @@
             return isEventPrevented;
         },
 
-        nodeCheck: function (item, checked) {
-            $(item, this.element).each($.proxy(function (index, item) {
-                var item = $(item).closest(".t-item"),
-                    checkboxHolder = $("> div > .t-checkbox", item),
+        check: function (items, checked) {
+            this._processItems(items, function(index, item) {
+                item = $(item).closest(".t-item");
+
+                var checkboxHolder = $("> div > .t-checkbox", item),
                     arrayName = this.element.id + "_checkedNodes",
                     index = checkboxHolder.find(":input[name='" + arrayName + ".Index']").val();
 
@@ -443,11 +444,12 @@
                                    value: checked
                                });
 
-                if (checked)
+                if (checked) {
                     $(t.treeview.getNodeInputsHtml(this.getItemValue(item), this.getItemText(item), arrayName, index))
                         .appendTo(checkboxHolder);
+                }
 
-            }, this));
+            });
         },
 
         getItemText: function (item) {
@@ -606,13 +608,14 @@
                     return false;
                 }
                 // normalize source group
-                if (movedItem.hasClass("t-last"))
+                if (movedItem.hasClass("t-last")) {
                     movedItem.removeClass("t-last")
                             .prev()
                             .addClass("t-last")
                             .find("> div")
                             .removeClass("t-top t-mid")
                             .addClass("t-bot");
+                }
 
                 // perform reorder / move
                 if (that.dropCue.css("visibility") == "visible") {
@@ -623,19 +626,20 @@
                     if (targetGroup.length === 0) {
                         targetGroup = $("<ul class='t-group' />").appendTo(destinationItem.parent());
 
-                        if (!treeview.isAjax()) {
+                        /* if (!treeview.isAjax()) { */
                             destinationItem.prepend("<span class='t-icon t-minus' />");
-                        } else {
+                        /*} else {
                             targetGroup.hide();
                             treeview.toggle(destinationItem.parent(), true);
                             targetGroup.show();
-                        }
+                        }*/
                     }
 
                     targetGroup.append(movedItem);
 
-                    if (destinationItem.find("> .t-icon").hasClass("t-plus"))
+                    if (destinationItem.find("> .t-icon").hasClass("t-plus")) {
                         treeview.toggle(destinationItem.parent(), true);
+                    }
                 }
 
                 var level = movedItem.parents(".t-group").length;
