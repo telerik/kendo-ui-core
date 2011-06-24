@@ -3,7 +3,7 @@
     <head>
         <!-- meta -->
         <!-- meta -->
-        <title>Title</title>
+        <title>First Look</title>
         <!-- script -->
         <script src="../../../src/jquery.js"></script>
         <script src="../../../src/kendo.core.js"></script>
@@ -40,8 +40,9 @@
                 <option value="10">Alice Mutton</option>
                 <option value="11">Carnarvon Tigers</option>
             </select>
-            <button id="show">Show original select</button>
             <script type="text/javascript">
+
+                //input HTML element
                 var data = [
                     {text: "Chai", value:"1"},
                     {text: "Chang", value:"2"},
@@ -56,11 +57,9 @@
                     {text: "Carnarvon Tigers", value:"11"},
                 ];
                 $("#products").kendoDropDownList(data);
+
+                //select HTML element
                 $("#select").kendoDropDownList();
-                $("#show").click(function() {
-                    var select = $("#select");
-                    select.toggle(!select.is(":visible"));
-                });
            </script>
         </div>
         <!-- tools -->
