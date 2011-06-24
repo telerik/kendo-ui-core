@@ -13,17 +13,12 @@
 
             $(document).ready(function() {
                 $("#container").kendoChart({
+                    theme: "sunset",
                     title: {
                         text: "Teh chart",
-                        position: "top",
-                        color: "#854324"
+                        position: "top"
                     },
                     legend: {
-                        // NEW
-                        labels: {
-                            font: "12px sans-serif",
-                            color: "#854324"
-                        },
                         position: "right",
                         visible: true
                     },
@@ -53,21 +48,9 @@
                     ],
                     seriesDefaults: {
                         labels: {
-                            font: "12px sans-serif",
-                            // NEW
-                            color: "#854324",
                             visible: true
                         }
                     },
-                    // NEW
-                    chartArea: {
-                        background: "#ececd8",
-                        border: {
-                            color: "#bbb99d",
-                            width: 1
-                        }
-                    },
-                    seriesColors: ["#3f1c12", "#ba3b01", "#d95a1a", "#e7931e", "#f9bc12"],
                     series: [
                         {
                             name: "Value A",
@@ -87,30 +70,7 @@
                         }
                     ],
                     categoryAxis: {
-                        field: "name",
-                        line: {
-                            color: "#854324"
-                        },
-                        // NEW
-                        labels: {
-                            color: "#854324"
-                        },
-                        majorGridlines: {
-                            color: "#bbb99d",
-                            visible: true
-                        }
-                    },
-                    valueAxis: {
-                        line: {
-                            color: "#854324"
-                        },
-                        // NEW
-                        labels: {
-                            color: "#854324"
-                        },
-                        majorGridlines: {
-                            color: "#bbb99d"
-                        }
+                        field: "name"
                     }
                 });
             });
