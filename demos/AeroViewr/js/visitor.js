@@ -282,7 +282,7 @@
                     $("#viewslideshow").stop(true, true).fadeIn();
                     if (!kendo.support.touch)
                         $("#uploadphotos").stop(true, true).fadeIn();
-                    
+
                     element.text("Back to search results");
                     slideshow.init($("#flatMostPopularPhotos").data("kendoListView"));
                 }

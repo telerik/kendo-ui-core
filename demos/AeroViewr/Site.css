@@ -3,7 +3,9 @@
 html,body,h1,h2,p,ul,ol,li,dl,dt,dd,form,fieldset,button,input,textarea{margin:0;padding:0;font-size:100%;list-style:none;outline:none}
 .t-selectable,.t-focusable,#backButton{outline:none}
 table{border-spacing:0}
-
+* {
+    outline: none;
+}
 .floatWrap:after{content:"";display:block;height:0;clear:both;}
 
 header,
@@ -209,7 +211,7 @@ section#footer
     border-bottom: 20px solid rgba(0, 0, 0, .84);
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
-    
+
 }
 
 #main #signInInfo
@@ -775,18 +777,19 @@ header .i-hints
 
 /* paging */
 
-.paging
+.paging>ul
 {
     margin:2em 0 0;
 }
 
-.paging>li,
-.paging>li>a
+.paging>ul>li,
+.paging>ul>li>a
 {
     display:inline-block;
 }
 
-.paging>li>a
+.paging>ul>li>a,
+.paging>ul>li>span
 {
     min-width:35px;
     height:35px;
@@ -801,8 +804,12 @@ header .i-hints
 	border-radius:18px;
 }
 
-.paging>li>a:hover,
-.paging>li>a.currentPage
+.paging>ul>li>span.t-state-active {
+    display: block;
+}
+
+.paging>ul>li>a:hover,
+.paging>ul>li>span.t-state-active
 {
     min-width:33px;
     height:33px;
@@ -811,12 +818,12 @@ header .i-hints
     color:rgba(255,255,255,1);
 }
 
-.paging>li>a.currentPage
+.paging>ul>li>a.currentPage
 {
     cursor:default;
 }
 
-.paging>li>a span
+.paging>ul>li>a span
 {
     position:absolute;
     top:-3333px;
