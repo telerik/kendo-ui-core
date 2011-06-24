@@ -28,11 +28,15 @@
 
             <script type="text/javascript">
                 function onSelect(e) {
-                    kendoConsole.log('Selected: ' + $(e.item).find('> div > .t-in').text());
+                    kendoConsole.log("Selected: " + $(e.item).find("> div > .t-in").text());
                 };
 
                 function onError(e) {
-                    kendoConsole.error('Loading failed with ' + e.xhr.statusText + ' ' + e.xhr.status);
+                    kendoConsole.error("Loading failed with " + e.xhr.statusText + " " + e.xhr.status);
+                };
+
+                function onCollapse(e) {
+                    kendoConsole.error("Collapsing " + $(e.item).find("> div > .t-in").text());
                 };
 
                 $("#TreeView").kendoTreeView({ dataSource: [
