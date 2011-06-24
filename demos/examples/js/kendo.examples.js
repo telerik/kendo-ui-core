@@ -23,6 +23,7 @@
         },
 
         fetchTitle: function () {
+            return $.trim(/<title>(.*?)<\/title>/i.exec(currentHtml)[1]);
         },
 
         fetchExample: function (href) {
@@ -31,20 +32,24 @@
                 Application.fetchDescription();
 
                 var exampleBody = $("#exampleBody"),
-                    exampleName = $(".exampleName");
+                    exampleName = $(".exampleName"),
+                    tools = $("#codeStrip, .skinSelector.t-widget"),
+                    title = Application.fetchTitle();
 
-                exampleName.kendoAnimate("fadeOut", 300, function() {
-                    exampleName.empty().html($.trim(/<title>(.*?)<\/title>/i.exec(html)[1]));
-                    exampleName.kendoAnimate("fadeOut", 300, true);
+                if (title == "Overview")
+                    tools.kendoAnimate(transitionEffects, 300, function () { tools.hide(); });
+
+                exampleName.kendoAnimate(transitionEffects, 300, function() {
+                    $(".exampleName").empty().html(title);
+
+                    if (title != "Overview" && !tools.is(":visible"))
+                            tools.show().kendoAnimate(transitionEffects, 300, true);
+
+                    exampleName.kendoAnimate(transitionEffects, 300, true);
                 });
 
                 exampleBody.kendoAnimate(transitionEffects, 300, function() {
                     exampleBody.empty().html(Application.body(html));
-
-                    transitionEffects == "halfFlip:horizontal" &&
-                        exampleBody
-                            .css(kendo.support.transitions.css + "transform", "rotateY(-90deg)")
-                            .css("height");
                     exampleBody.kendoAnimate(transitionEffects, 300, true);
                 });
             });
@@ -67,7 +72,23 @@
                 $.get(href, function(html) {
                     currentHtml = html;
 
-                    $(".description").empty().html($.trim(Application.description(html)));
+                    var title = Application.fetchTitle();
+
+                    $(".exampleName").empty().html(title);
+
+                    if (title != "Overview") {
+                        $("#codeStrip, .skinSelector.t-widget").show();
+
+                        var link = $("#nav .t-link[href*='" + /[^\/]+\/[^\/]+?$/.exec(href)[0] + "']")
+                                .addClass("t-state-selected");
+
+                        $("#nav").data('kendoPanelBar').expand(link.parent().parents(".t-item"));
+
+                        $(".description").empty().html($.trim(Application.description(html)));
+                    } else {
+                        $("#nav .t-item > .t-link").eq(0).addClass("t-state-selected");
+                    }
+
                 });
             else
                 $(".description").empty().html($.trim(Application.description(currentHtml)));
@@ -106,7 +127,7 @@
 
             initialFolder = location.href.match(/\//g).length;
 
-            Application.fetchDescription(location.href);
+            Application.fetchDescription(location.href.substr(-1) == "/" ? location.href + "overview/index.html" : location.href);
 
             $("#viewCode").click(function(e) {
                 e.preventDefault();
@@ -144,10 +165,6 @@
                                 skinLink.remove();
                                 example[0].style.cssText = example[0].style.cssText;
 
-                                transitionEffects == "halfFlip:horizontal" &&
-                                    example
-                                        .css(kendo.support.transitions.css + "transform", "rotateY(-90deg)")
-                                        .css("height");
                                 example.kendoAnimate(transitionEffects, 300, true);
                             });
                         });

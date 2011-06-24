@@ -3,7 +3,7 @@ html, body
     margin: 0;
     width: 100%;
     height: 100%;
-    font: 12px Arial, Helvetica sans-serif;
+    font: 12px Arial, Helvetica, sans-serif;
     text-align: center;
 }
 
@@ -192,9 +192,10 @@ pre.prettyprint
     font: 20px Arial, Helvetica, sans-serif;
 }
 
-.skinSelector
+#exampleHead .skinSelector
 {
     float: right;
+    display: none;
 }
 
 .telerikLogo
@@ -223,7 +224,7 @@ pre.prettyprint
 
 #nav .t-link
 {
-    font-weight: bold;
+    font: 14px bold Arial, Helvetica, sans-serif;
     color: #2175bd;
     background: none;
     border: 0;
@@ -234,6 +235,7 @@ pre.prettyprint
 
 #nav li li .t-link
 {
+    font-size: 11px;
     line-height: 18px;
     padding: 1px 21px;
 }
@@ -290,3 +292,8 @@ pre.prettyprint
 }
 
 /* codeStrip styles */
+
+#codeStrip
+{
+    display: none;
+}
