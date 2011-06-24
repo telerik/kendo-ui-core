@@ -125,34 +125,41 @@
             that.element.find("li").addClass("t-item");
         },
 
-        expand: function (li) {
-            $(li, this.element).each($.proxy(function (index, item) {
-                var item = $(item),
-                    contents = item.find("> .t-group, > .t-content");
+        _processItems: function(items, callback) {
+            this.element.find(items).each($.proxy(callback, this));
+        },
+
+        expand: function (items) {
+            this._processItems(items, function (index, item) {
+                item = $(item);
+
+                var contents = item.find("> .t-group, > .t-content");
 
                 if ((contents.length > 0 && !contents.is(":visible")) || this.isAjax()) {
                     this.toggle(item);
                 }
-            }, this));
+            });
         },
 
-        collapse: function (li) {
-            $(li, this.element).each($.proxy(function (index, item) {
-                var item = $(item),
-                    contents = item.find("> .t-group, > .t-content");
+        collapse: function (items) {
+            this._processItems(items, function (index, item) {
+                item = $(item);
+
+                var contents = item.find("> .t-group, > .t-content");
 
                 if (contents.length > 0 && contents.is(":visible")) {
                     this.toggle(item);
                 }
-            }, this));
+            });
         },
 
-        enable: function (li, enable) {
+        enable: function (items, enable) {
             enable = enable !== false;
 
-            $(li, this.element).each($.proxy(function (index, item) {
-                var item = $(item),
-                    isCollapsed = !item.find("> .t-group, > .t-content").is(":visible");
+            this._processItems(items, function (index, item) {
+                item = $(item);
+
+                var isCollapsed = !item.find("> .t-group, > .t-content").is(":visible");
 
                 if (!enable) {
                     this.collapse(item);
@@ -171,13 +178,11 @@
                         .toggleClass("t-plus-disabled", isCollapsed && !enable)
                         .toggleClass("t-minus", !isCollapsed && enable)
                         .toggleClass("t-minus-disabled", !isCollapsed && !enable);
-
-            }, this));
+            });
         },
 
-        reload: function (li) {
-            var treeView = this;
-            $(li).each(function () {
+        reload: function (items) {
+            this._processItems(items, function (index, item) {
                 var item = $(this);
                 item.find(".t-group").remove();
                 treeView.ajaxRequest(item);
@@ -262,11 +267,13 @@
                 type: "POST",
                 dataType: "text",
                 error: $.proxy(function (xhr, status) {
-                    if (t.ajaxError(this.element, "error", xhr, status))
+                    if (t.ajaxError(this.element, "error", xhr, status)) {
                         return;
+                    }
 
-                    if (status == "parsererror")
+                    if (status == "parsererror") {
                         alert("Error! The requested URL did not return JSON.");
+                    }
                 }, this),
 
                 success: $.proxy(function (data) {
@@ -395,8 +402,8 @@
             return isEventPrevented;
         },
 
-        nodeCheck: function (li, checked) {
-            $(li, this.element).each($.proxy(function (index, item) {
+        nodeCheck: function (item, checked) {
+            $(item, this.element).each($.proxy(function (index, item) {
                 var item = $(item).closest(".t-item"),
                     checkboxHolder = $("> div > .t-checkbox", item),
                     arrayName = this.element.id + "_checkedNodes",
@@ -454,8 +461,9 @@
             var that = this,
                 treeview = that.owner;
 
-            if (treeview.trigger(treeview.element, "nodeDragStart", { item: e.draggable.closest(".t-item")[0] }))
+            if (treeview.trigger("nodeDragStart", { item: e.draggable.closest(".t-item")[0] })) {
                 return false;
+            }
 
             that.dropCue.appendTo(treeview.element);
         },
@@ -517,7 +525,7 @@
                 }
             }
 
-            treeview.trigger(treeview.element, "nodeDragging", {
+            treeview.trigger("nodeDragging", {
                 pageY: e.pageY,
                 pageX: e.pageX,
                 dropTarget: e.target,
@@ -539,7 +547,7 @@
                 dropPosition = "over", destinationItem;
 
             if (e.keyCode == kendo.keys.ESC){
-                treeview.trigger(treeview.element, "nodeDragCancelled", { item: e.draggable.closest(".t-item")[0] });
+                treeview.trigger("nodeDragCancelled", { item: e.draggable.closest(".t-item")[0] });
             } else {
                 if (that.dropCue.css("visibility") == "visible") {
                     dropPosition = that.dropCue.prevAll(".t-in").length > 0 ? "after" : "before";
@@ -549,7 +557,7 @@
                 }
 
                 var isValid = !e.cue.find(".t-drag-status").hasClass("t-denied"),
-                    isDropPrevented = treeview.trigger(treeview.element, "nodeDrop", {
+                    isDropPrevented = treeview.trigger("nodeDrop", {
                         isValid: isValid,
                         dropTarget: e.target,
                         destinationItem: destinationItem.parent()[0],
@@ -629,7 +637,7 @@
                     sourceGroup.remove();
                 }
 
-                treeview.trigger(treeview.element, "nodeDropped", {
+                treeview.trigger("nodeDropped", {
                     destinationItem: destinationItem.closest(".t-item")[0],
                     dropPosition: dropPosition,
                     item: sourceItem.parent(".t-item")[0]
