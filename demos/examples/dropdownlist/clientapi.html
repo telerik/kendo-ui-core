@@ -1,0 +1,130 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <!-- meta -->
+        <!-- meta -->
+        <title>Title</title>
+        <!-- script -->
+        <script src="../../../src/jquery.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.popup.js"></script>
+        <script src="../../../src/kendo.query.js"></script>
+        <script src="../../../src/kendo.datasource.js"></script>
+        <script src="../../../src/kendo.list.js"></script>
+        <script src="../../../src/kendo.dropdownlist.js"></script>
+        <!-- script -->
+        <!-- css -->
+        <link type="text/css" href="../styles/examples.css" rel="stylesheet"/>
+        <link type="text/css" href="../../../styles/kendo.common.css" rel="stylesheet"/>
+        <link type="text/css" href="../../../styles/kendo.vista.css" rel="stylesheet"/>
+        <!-- css -->
+    </head>
+    <body>
+        <!-- nav -->
+        <!-- nav -->
+        <!-- description -->
+        <div class="description">Popup position</div>
+        <!-- description -->
+        <div id="example">
+            <input id="products" value="2" />
+
+            <div id="options">
+                <div>
+                    <button id="enable">Enable</button>
+                    <button id="disable">Disable</button>
+                </div>
+                <div>
+                    <label for="open">Open:</label>
+                    <button id="open">Open drop down</button>
+                </div>
+                <div>
+                    <label for="close">Close:</label>
+                    <button id="close">Close drop down</button>
+                </div>
+                <div>
+                    <label for="value">
+                        Select by value:</label>
+                    <input id="value" value="1" />
+                    <button id="setValue">Set value</button>
+                    <br />
+                    <button id="getValue">Get value</button> /
+                    <button id="getText">Get text</button>
+                </div>
+                <div>
+                    <label for="select">
+                        Select by index:</label>
+                    <input id="index" value="0" />
+                    <button id="select">Select item</button>
+                </div>
+
+                <div>
+                    <label for="word">
+                     Find item which starts with:</label>
+                    <input id="word" value="Ch" />
+                    <button id="find">Find</button>
+                </div>
+           </div>
+
+            <script type="text/javascript">
+                var data = [
+                    {text: "Chai", value:"1"},
+                    {text: "Chang", value:"2"},
+                    {text: "Aniseed Syrup", value:"3"},
+                    {text: "Chef Anton", value:"4"},
+                    {text: "Ikura", value:"5"},
+                    {text: "Mishi Kobe Niku", value:"6"},
+                    {text: "Queso Cabrales", value:"7"},
+                    {text: "Organic Dried Pears", value:"8"},
+                    {text: "Schoggi Schokolade", value:"9"},
+                    {text: "Alice Mutton", value:"10"},
+                    {text: "Carnarvon Tigers", value:"11"},
+                ];
+
+                $("#products").kendoDropDownList(data);
+
+                var dropdownlist = $("#products").data("kendoDropDownList");
+
+                $("#enable").click(function() {
+                    dropdownlist.enable();
+                });
+
+                $("#disable").click(function() {
+                    dropdownlist.enable(false);
+                });
+
+                $("#open").click(function() {
+                    dropdownlist.open();
+                });
+
+                $("#close").click(function() {
+                    dropdownlist.close();
+                });
+
+                $("#setValue").click(function() {
+                    dropdownlist.value($("#value").val());
+                });
+
+                $("#getValue").click(function() {
+                    alert(dropdownlist.value());
+                });
+
+                $("#getText").click(function() {
+                    alert(dropdownlist.text());
+                });
+
+                $("#select").click(function() {
+                    var index = parseInt($("#index").val());
+                    dropdownlist.select(index);
+                });
+
+                $("#find").click(function() {
+                    dropdownlist.search($("#word").val());
+                });
+
+                //enable/disable
+           </script>
+        </div>
+        <!-- tools -->
+        <!-- tools -->
+    </body>
+</html>

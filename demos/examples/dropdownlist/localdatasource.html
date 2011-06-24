@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <!-- meta -->
+        <!-- meta -->
+        <title>Title</title>
+        <!-- script -->
+        <script src="../../../src/jquery.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.popup.js"></script>
+        <script src="../../../src/kendo.query.js"></script>
+        <script src="../../../src/kendo.datasource.js"></script>
+        <script src="../../../src/kendo.list.js"></script>
+        <script src="../../../src/kendo.dropdownlist.js"></script>
+        <!-- script -->
+        <!-- css -->
+        <link type="text/css" href="../styles/examples.css" rel="stylesheet"/>
+        <link type="text/css" href="../../../styles/kendo.common.css" rel="stylesheet"/>
+        <link type="text/css" href="../../../styles/kendo.vista.css" rel="stylesheet"/>
+        <!-- css -->
+    </head>
+    <body>
+        <!-- nav -->
+        <!-- nav -->
+        <!-- description -->
+        <div class="description">First Look</div>
+        <!-- description -->
+        <div id="example">
+            <input id="products"/>
+            <select id="select"></select>
+            <button id="filter">Reduce data - filter dataSource</button>
+            <script type="text/javascript">
+                var data = [
+                    {text: "Chai", value:"1"},
+                    {text: "Chang", value:"2"},
+                    {text: "Aniseed Syrup", value:"3"},
+                    {text: "Chef Anton", value:"4"},
+                    {text: "Ikura", value:"5"},
+                    {text: "Mishi Kobe Niku", value:"6"},
+                    {text: "Queso Cabrales", value:"7"},
+                    {text: "Organic Dried Pears", value:"8"},
+                    {text: "Schoggi Schokolade", value:"9"},
+                    {text: "Alice Mutton", value:"10"},
+                    {text: "Carnarvon Tigers", value:"11"},
+                ];
+
+                var dataSource = new kendo.data.DataSource.create(data);
+
+                $("#products").kendoDropDownList({
+                    dataSource: dataSource
+                });
+                $("#select").kendoDropDownList({
+                    dataSource: dataSource
+                });
+
+                $("#filter").click(function() {
+                    dataSource.filter( {field: "text", operator: "startswith", value: "a"} );
+                });
+            </script>
+        </div>
+        <!-- tools -->
+        <!-- tools -->
+    </body>
+</html>

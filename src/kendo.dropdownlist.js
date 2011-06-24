@@ -27,7 +27,7 @@
 
             that._dataSource();
 
-            that.bind([CHANGE], that.options);
+            that.bind(["init", CHANGE], that.options);
 
             if (that.element.prop("disabled")) {
                 that.options.enable = false;
@@ -100,24 +100,28 @@
 
         refresh: function() {
             var that = this,
-                ul = that.ul,
+                value = that.value(),
                 options = that.options,
-                height = options.height,
-                data = that.dataSource.view();
+                data = that.dataSource.view(),
+                length = data.length;
 
-            ul[0].innerHTML = kendo.render(that.template, data);
-            ul.height(data.length * 20 > height ? height : "auto");
+            that._height(length);
+            that.ul[0].innerHTML = kendo.render(that.template, data);
 
             if (that.element.is("select")) {
                 that._options(data);
             }
 
-            that.select(that.options.index);
+            if (value) {
+                that.value(value);
+            } else {
+                that.select(options.index);
+            }
 
             that.previous = that.value();
 
-            if (!that.options.autoBind) {
-                that[data.length ? "open" : "close"]();
+            if (!options.autoBind) {
+                that[length ? "open" : "close"]();
             }
 
             that.hideBusy();

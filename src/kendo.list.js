@@ -88,6 +88,24 @@
             }
         },
 
+        _height: function(length) {
+            var that = this,
+            ul = that.ul,
+            parent = ul.parent(".t-animation-container"),
+            height = that.options.height;
+
+            if (length) {
+                parent.show();
+
+                ul.append("<li>empty</li>")
+                  .show()
+                  .height(length * $(ul[0].firstChild).height() > height ? height : "auto")
+                  .hide();
+
+                parent.hide();
+            }
+        },
+
         _scroll: function (item) {
 
             if (!item) return;
@@ -191,6 +209,7 @@
 
         _dataSource: function() {
             var that = this,
+                selected,
                 element = that.element,
                 options = that.options,
                 dataSource = options.dataSource || {};
@@ -198,7 +217,10 @@
             dataSource = $.isArray(dataSource) ? {data: dataSource} : dataSource;
 
             if(that.element.is(SELECT)) {
-                options.index = element.children(":selected").index();
+                selected = element.children(":selected");
+                if (selected[0]) {
+                    options.index = selected.index();
+                }
 
                 dataSource.select = element;
                 dataSource.fields = [{ field: options.dataTextField },
