@@ -229,6 +229,46 @@
                 stop(300);
             });
 
+            test("press enter should select current item", function() {
+                var dropdownlist = input.kendoDropDownList(data).data("kendoDropDownList");
+
+                dropdownlist.popup.bind("close", function(){
+                    equal(dropdownlist._current.index(), 1);
+                    ok(dropdownlist._current.hasClass("t-state-focused"));
+                    ok(dropdownlist._current.hasClass("t-state-selected"));
+                    start();
+                });
+
+                dropdownlist.popup.open();
+
+                dropdownlist.select(0);
+                dropdownlist.wrapper.focus().press(keys.DOWN).press(keys.ENTER);
+
+                stop(300);
+            });
+
+            test("selected item with enter should persist selected state", function() {
+                var dropdownlist = input.kendoDropDownList(data).data("kendoDropDownList");
+                dropdownlist.popup.open();
+
+                dropdownlist.popup.bind("close", function(){
+                    dropdownlist.wrapper.click();
+                });
+
+                dropdownlist.popup.bind("open", function(){
+                    equal(dropdownlist._current.index(), 1);
+                    ok(dropdownlist._current.hasClass("t-state-focused"));
+                    ok(dropdownlist._current.hasClass("t-state-selected"));
+                    start();
+                });
+
+                dropdownlist.select(0);
+                dropdownlist.wrapper.focus().press(keys.DOWN).press(keys.ENTER);
+
+                stop(500);
+            });
+
+
             test("press esc should close popup when no change in selection", function() {
                 var dropdownlist = input.kendoDropDownList(data).data("kendoDropDownList");
 

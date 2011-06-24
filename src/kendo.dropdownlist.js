@@ -5,6 +5,7 @@
         OPEN = "open",
         CLOSE  = "close",
         CHANGE = "change",
+        SELECT = "select",
         SELECTED = "t-state-selected",
         DISABLED = "t-state-disabled",
         proxy = $.proxy;
@@ -40,6 +41,8 @@
             if (that.options.autoBind) {
                 that.showBusy();
                 that.dataSource.query();
+            } else if (that.element.is(SELECT)) {
+                that.text(that.element.children(":selected").text());
             }
         },
 
@@ -117,7 +120,7 @@
             that.ul[0].innerHTML = kendo.render(that.template, data);
             that._height(length);
 
-            if (that.element.is("select")) {
+            if (that.element.is(SELECT)) {
                 that._options(data);
             }
 
@@ -266,6 +269,8 @@
                 prevent = true;
             } else if (key === keys.ENTER || key === keys.TAB) {
                 that._accept(current);
+
+                prevent = true;
             } else if (key === keys.ESC) {
                 that.close();
             }
