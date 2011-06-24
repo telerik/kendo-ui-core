@@ -16,7 +16,6 @@ body
 {
     display: block;
     width: 1100px;
-    height: 100px;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -29,10 +28,36 @@ body
 }
 
 #footer {
-    border: 1px solid #adff2f;
+    height: 68px;
     position: absolute;
-    bottom: 0;
-    left: 0;
+    bottom: -68px;
+    color: #FFF;
+    line-height: 26px;
+    *left: 50%;
+    *margin-left: -550px;
+}
+
+#footer p
+{
+    margin: 6px 0 0 0;
+    padding: 0;
+}
+
+#footer a
+{
+    color: #FFF;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+#footer a:hover
+{
+    text-decoration: underline;
+}
+
+#footer span
+{
+    color: #808080;
 }
 
 #nav
@@ -62,8 +87,8 @@ body
 {
     margin: 10px 0;
     padding:  20px;
-    -webkit-box-shadow: 0 0 5px #BBB;
-    box-shadow: 0 0 5px #BBB;
+    -webkit-box-shadow: 0 -3px 2px #BBB;
+    box-shadow: 0 -3px 2px #BBB;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
@@ -80,14 +105,25 @@ body
 
 #box
 {
-    position: relative;
     display: inline-block;
+    position: relative;
     *display: inline;
     zoom: 1;
-    margin: -110px auto 0;
-    text-align: left;
+    width: 100%;
+    margin-top: -78px;
     min-height: 100%;
-    padding-bottom: 110px;
+    border-bottom: 68px solid #4D4D4D;
+    padding-bottom: 10px;
+    box-shadow: inset 0 -1px 3px #000;
+}
+
+.centerBox
+{
+    text-align: left;
+    display: inline-block;
+    *width: 1100px;
+    zoom: 1;
+    margin: 0 auto;
 }
 
 pre.prettyprint
@@ -122,7 +158,7 @@ pre.prettyprint
 
 .console div
 {
-    background: url("../img/sprite.png") no-repeat scroll 6px -95px transparent;
+    background: transparent url("../img/sprite.png") no-repeat 6px -95px;
     border-bottom: 1px solid #DDD;
     padding: 5px 5px 4px 24px;
 }
@@ -158,4 +194,13 @@ pre.prettyprint
 .skinSelector
 {
     float: right;
+}
+
+.telerikLogo
+{
+    margin-top: 13px;
+    background: transparent url("../img/sprite.png") no-repeat 0 -700px;
+    width: 107px;
+    height: 40px;
+    float:  right;
 }
