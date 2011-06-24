@@ -48,12 +48,12 @@
                 ok(pager instanceof kendo.ui.Pager);
             });
 
-            test("renders buttons for all pages", function(){
+            test("renders buttons for all pages", function() {
                 var ul = setup();
 
                 dataSource.read();
 
-                var links = ul.find("a");
+                var links = ul.find("a").add(ul.find(".t-state-active"));
                 equal(links.length, 5);
                 equal(links[0].innerHTML, "1");
                 equal(links[1].innerHTML, "2");
@@ -68,11 +68,11 @@
                 dataSource.read();
 
                 var links = ul.find("a");
-                equal(links.eq(0).data("page"), undefined);
-                equal(links.eq(1).data("page"), "2");
-                equal(links.eq(2).data("page"), "3");
-                equal(links.eq(3).data("page"), "4");
-                equal(links.eq(4).data("page"), "5");
+                equal(ul.find(".t-state-active").data("page"), undefined);
+                equal(links.eq(0).data("page"), "2");
+                equal(links.eq(1).data("page"), "3");
+                equal(links.eq(2).data("page"), "4");
+                equal(links.eq(3).data("page"), "5");
             });
 
             test("clear page number buttons on multiple datasource rebinds", function(){
@@ -81,7 +81,7 @@
                 dataSource.read();
                 dataSource.read();
 
-                var links = ul.find("a");
+                var links = ul.find("a").add(ul.find(".t-state-active"));
                 equal(links.length, 5);
                 equal(links[0].innerHTML, "1");
                 equal(links[1].innerHTML, "2");
@@ -102,10 +102,10 @@
                 var ul = setup();
 
                 dataSource.read();
-                ok(ul.find("a:eq(0)").hasClass("currentPage"));
+                ok(ul.find("span").hasClass("t-state-active"));
             });
 
-            test("changing page raises change event passing the new index", function(){
+            test("changing page raises change event passing the new index", function() {
                 var ul = setup(),
                     index;
 
@@ -114,7 +114,7 @@
                     index = arguments[0].index;
                 });
 
-                ul.find("a:eq(1)").click();
+                ul.find("a:eq(0)").click();
                 equal(index, 2);
             });
 
@@ -135,7 +135,7 @@
                 var ul = setup();
 
                 dataSource.read();
-                ul.find("a:eq(1)").click();
+                ul.find("a:eq(0)").click();
                 equal(dataSource.page(), 2);
             });
 
@@ -143,7 +143,7 @@
                 var ul = setup({},{ buttonCount: 3});
 
                 dataSource.read();
-                equal(ul.find("a").length, 4);
+                equal(ul.find("a").add(ul.find(".t-state-active")).length, 4);
                 equal(ul.find("a:last").data("page"), "4");
             });
 
@@ -151,7 +151,7 @@
                 var ul = setup({ page: 4 },{ buttonCount: 3});
 
                 dataSource.read();
-                equal(ul.find("a").length, 3);
+                equal(ul.find("a").add(ul.find(".t-state-active")).length, 3);
                 equal(ul.find("a:first").data("page"), "3");
             });
 
@@ -179,7 +179,7 @@
             test("page returns the current page", function(){
                 var ul = setup();
                 dataSource.read();
-                ul.find("a:eq(1)").click();
+                ul.find("a:eq(0)").click();
 
                 equal(ul.data("kendoPager").page(), 2);
             });
@@ -201,7 +201,7 @@
                     ul = $("<ul/>").kendoPager({ dataSource: data });
 
                 data.read();
-                equal(ul.find("a").length, 1);
+                equal(ul.find(".t-state-active").length, 1);
             });
         </script>
     </body>
