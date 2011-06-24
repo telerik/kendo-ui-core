@@ -4,27 +4,30 @@
 
     window.kendoConsole = {
         log: function(message, isError) {
+            var oldContainer = $(".console div:first"),
+                counter = oldContainer.find(".count");
+
             if (message != oldMessage) {
                 oldMessage = message;
                 count = 1;
 
-                $('<div' + (isError ? ' class="error"' : '') + '/>')
-                        .css({
-                            marginTop: -24,
-                            backgroundColor: isError ? '#ffbbbb' : '#bbddff'
-                        })
-                        .html(message)
-                        .prependTo('.console')
-                        .animate({ marginTop: 0 }, 300)
-                        .animate({ backgroundColor: isError ? '#ffdddd' : '#ffffff' }, 800);
+                $("<div" + (isError ? " class='error'" : "") + "/>")
+                    .css({
+                        marginTop: -24,
+                        backgroundColor: isError ? "#ffbbbb" : "#bbddff"
+                    })
+                    .html(message)
+                    .prependTo(".console")
+                    .animate({ marginTop: 0 }, 300)
+                    .animate({ backgroundColor: isError ? "#ffdddd" : "#ffffff" }, 800);
             } else {
                 count++;
-                var oldContainer = $('.console div:first');
-                if (oldContainer.find(".count").length) {
-                    oldContainer.find(".count").html(count);
+
+                if (counter.length) {
+                    counter.html(count);
                 } else {
                     oldContainer.html(oldMessage)
-                            .append("<span class='count'>" + count + "</span>");
+                        .append("<span class='count'>" + count + "</span>");
                 }
             }
         },
