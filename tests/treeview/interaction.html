@@ -41,7 +41,7 @@
                 teardown: removeTreeViews
             });
 
-            test("trying to expand disabled items does not expand them", function() {
+            test("expanding disabled items does not expand them", function() {
                 treeview = createTreeView([
                     { text: "foo", enabled: false, items: [ { text: "bar" } ] }
                 ]);
