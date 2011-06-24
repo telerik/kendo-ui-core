@@ -10,8 +10,10 @@
         CLICK = 'click',
         clickableItems = '.t-item:not(.t-state-disabled) > .t-link',
         disabledItems = '.t-item.t-state-disabled > .t-link',
+        activeClass = '.t-state-active',
         selectedClass = '.t-state-selected',
         disabledClass = '.t-state-disabled',
+        highlightedClass = '.t-state-highlighted',
         defaultState = 't-state-default',
         VISIBLE = ':visible',
         EMPTY = ':empty',
@@ -24,7 +26,7 @@
         init: function(element, options) {
             element = $(element);
             var that = this,
-                content = element.find('li.t-state-active > .t-content');
+                content = element.find('li' + activeClass + ' > .t-content');
 
             Component.fn.init.call(that, element, options);
 
@@ -124,7 +126,7 @@
                             .find('ul')
                             .addClass('t-group')
                             .end()
-                            .find('li:not(.t-state-active) > ul')
+                            .find('li:not(' + activeClass + ') > ul')
                             .css({ display: 'none' })
                             .end()
                             .find('li')
@@ -149,7 +151,7 @@
                 .filter(':not([class*=t-state])')
                 .children('a:focus')
                 .parent()
-                .addClass('t-state-active');
+                .addClass(activeClass.substr(1));
             items
                 .find('>div')
                 .addClass('t-content')
@@ -176,7 +178,7 @@
                     var item = $(this),
                         parent = item.parent();
 
-                    item.append('<span class="t-icon ' + (parent.hasClass('t-state-active') ? 't-arrow-up t-panelbar-collapse' : 't-arrow-down t-panelbar-expand') + '"></span>');
+                    item.append('<span class="t-icon ' + (parent.hasClass(activeClass.substr(1)) ? 't-arrow-up t-panelbar-collapse' : 't-arrow-down t-panelbar-expand') + '"></span>');
                 });
 
         },
@@ -193,8 +195,10 @@
                 item = link.closest('.t-item');
 
             $(selectedClass, element).removeClass(selectedClass.substr(1));
+            $(highlightedClass, element).removeClass(highlightedClass.substr(1));
 
             link.addClass(selectedClass.substr(1));
+            link.parentsUntil(that.element, '.t-item').filter(':has(.t-header)').addClass(highlightedClass.substr(1));
 
             if (that._triggerEvent('select', item)) {
                 e.preventDefault();
@@ -262,7 +266,7 @@
             element
                 .parent()
 	            .toggleClass(defaultState, visibility)
-				.toggleClass('t-state-active', !visibility)
+				.toggleClass(activeClass.substr(1), !visibility)
 				.find('> .t-link > .t-icon')
 					.toggleClass('t-arrow-up', !visibility)
 					.toggleClass('t-panelbar-collapse', !visibility)

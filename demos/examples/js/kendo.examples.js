@@ -2,7 +2,7 @@
     var Application,
         pushState = "pushState" in history,
         currentHtml = "",
-        transitionEffects = kendo.support.hasHW3D ? 'halfFlip:horizontal' : 'fadeOut',
+        transitionEffects = 'fadeOut',
         initialFolder = 0;
 
     Application = {
@@ -22,17 +22,26 @@
             });
         },
 
+        fetchTitle: function () {
+        },
+
         fetchExample: function (href) {
             $.get(href, function(html) {
                 currentHtml = html;
                 Application.fetchDescription();
 
-                var exampleBody = $('#exampleBody');
+                var exampleBody = $('#exampleBody'),
+                    exampleName = $(".exampleName");
+
+                exampleName.kendoAnimate('fadeOut', 300, function() {
+                    exampleName.empty().html($.trim(/<title>(.*?)<\/title>/i.exec(html)[1]));
+                    exampleName.kendoAnimate('fadeOut', 300, true);
+                });
 
                 exampleBody.kendoAnimate(transitionEffects, 300, function() {
                     exampleBody.empty().html(Application.body(html));
 
-                    kendo.support.hasHW3D &&
+                    transitionEffects == 'halfFlip:horizontal' &&
                         exampleBody
                             .css(kendo.support.transitions.css + 'transform', 'rotateY(-90deg)')
                             .css('height');
@@ -134,7 +143,7 @@
                                 skinLink.remove();
                                 example[0].style.cssText = example[0].style.cssText;
 
-                                kendo.support.hasHW3D &&
+                                transitionEffects == 'halfFlip:horizontal' &&
                                     example
                                         .css(kendo.support.transitions.css + 'transform', 'rotateY(-90deg)')
                                         .css('height');

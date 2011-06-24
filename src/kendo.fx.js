@@ -332,7 +332,7 @@
                             .css(kendo.support.transitions.css + 'backface-visibility', '')
                             .css('height');
                         element.parent()
-                            .css(kendo.support.transitions.css + 'perspective', 0)
+                            .css(kendo.support.transitions.css + 'perspective', '')
                             .css(kendo.support.transitions.css + 'transform-style', '')
                             .css('height');
                     }
