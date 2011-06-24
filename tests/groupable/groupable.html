@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.ui.Groupable Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.groupable.js"></script>
+        <script src="../../src/kendo.dataSource.js"></script>
+        <link rel="stylesheet" href="../qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.ui.Groupable Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+            var Groupable = kendo.ui.Groupable,
+                div;
+
+            module("kendo.ui.Groupable", {
+                setup: function() {
+                    div = $("<div><div class='container'></div><table><thead><th data-field='field1'></th><th data-field='field2'></th></thead></table></div>").appendTo(document.body);
+                },
+                teardown: function() {
+                    div.remove();
+                }
+            });
+
+            function moveOverDropTarget(draggable, dropTarget) {
+                var position = dropTarget.position();
+
+                draggable.trigger({ type: "mousedown", pageX: 0, pageY: 0 });
+                $(document).trigger({ type: "mousemove", pageX: position.left, pageY: position.top });
+                dropTarget.trigger({ type: "mouseup" });
+            }
+
+            function moveOutDropTarget(draggable, dropTarget) {
+                var position = dropTarget.position();
+
+                draggable.trigger({ type: "mousedown", pageX: 0, pageY: 0 });
+                $(document).trigger({ type: "mousemove", pageX: position.left, pageY: position.top });
+                $(document).trigger({ type: "mousemove", pageX: position.left, pageY: position.top - 10 });
+                $(document).trigger({ type: "mouseup" });
+            }
+
+            function ev(options) {
+                return $.extend(new $.Event, options);
+            }
+          
+            test("group container as string is intialized as DropTarget", function() {
+                var groupContainer = ".container";
+                var groupable = new Groupable(div, { groupContainer:  groupContainer });
+
+                ok($(groupContainer).data("kendoDropTarget"));
+            });
+
+            test("group container as jQuery object is intialized as DropTarget", function() {
+                var groupContainer = $(".container");
+                var groupable = new Groupable(div, { groupContainer:  groupContainer });
+
+                ok(groupContainer.data("kendoDropTarget"));
+            });
+            
+            test("element is initialized as Draggable ", function() {                
+                var groupable = new Groupable(div);
+                
+                ok(div.data("kendoDraggable"));                
+            });
+
+            test("dropping over group container creates group indicator", function() {
+                var groupContainer = $(".container"),                    
+                    groupable = new Groupable(div, { groupContainer:  groupContainer }),
+                    th = div.find("th:first");
+                
+                moveOverDropTarget(th, groupContainer);
+
+                equal(groupContainer.children().length, 1);
+            });
+
+            test("dropping over group container appends group indicator", function() {
+                var groupContainer = $(".container"),
+                    groupable = new Groupable(div, { groupContainer:  groupContainer }),
+                    th = div.find("th");
+                
+                moveOverDropTarget(th.eq(0), groupContainer);
+                moveOverDropTarget(th.eq(1), groupContainer);
+
+                equal(groupContainer.children().length, 2);
+            });
+
+            test("dropping over group container same indicator twice rejects it", function() {
+                var groupContainer = $(".container"),
+                    groupable = new Groupable(div, { groupContainer:  groupContainer }),
+                    th = div.find("th:first");
+                
+                moveOverDropTarget(th, groupContainer);
+                moveOverDropTarget(th, groupContainer);
+
+                equal(groupContainer.children().length, 1);
+            });
+
+            test("dropping out of group container indicator is not added", function() {
+                var groupContainer = $(".container"),
+                    groupable = new Groupable(div, { groupContainer:  groupContainer }),
+                    th = div.find("th:first");
+                
+                moveOutDropTarget(th, groupContainer);                
+
+                equal(groupContainer.children().length, 0);
+            });
+            
+            test("indicator from drag out of container is destroyed", function() {
+                var groupContainer = $(".container"),
+                    groupable = new Groupable(div, { groupContainer:  groupContainer }),
+                    indicator = groupContainer.append(groupable.buildIndicator("")).find(".t-group-indicator:first");
+                
+                moveOutDropTarget(indicator, groupContainer);                
+
+                equal(groupContainer.children().length, 0);
+            });
+
+            test("clicking close button ungroup", function() {
+                var groupContainer = $(".container"),
+                    groupable = new Groupable(div, { groupContainer:  groupContainer }),
+                    indicator = groupContainer.append(groupable.buildIndicator("")).find(".t-group-indicator:first");
+
+                indicator.find(".t-button").click();
+
+                equal(groupContainer.children().length, 0);
+            });
+
+            test("descriptors returns group descriptors", function() {
+                var groupContainer = $(".container"),
+                    groupable = new Groupable(div, { groupContainer:  groupContainer });
+
+               groupContainer.append(groupable.buildIndicator("field1"));
+               groupContainer.append(groupable.buildIndicator("field2", "desc"));
+
+               var descriptors = groupable.descriptors();
+
+               equal(descriptors.length, 2);
+               equal(descriptors[0].field, "field1");
+               equal(descriptors[0].dir, "asc");
+               equal(descriptors[1].field, "field2");
+               equal(descriptors[1].dir, "desc");
+            });
+
+            test("adding new group indicator calls dataSource group", function() {
+                var groupContainer = $(".container"),                    
+                    groupWasCalled = false,
+                    groupable = new Groupable(div, { groupContainer:  groupContainer, dataSource: { group: function() {groupWasCalled = true;}} }),
+                    th = div.find("th:first");
+                
+                moveOverDropTarget(th, groupContainer);
+
+                ok(groupWasCalled);
+            });
+
+            test("removing group indicator calls dataSource group", function() {
+                var groupContainer = $(".container"),                    
+                    groupWasCalled = false,
+                    groupable = new Groupable(div, { groupContainer:  groupContainer, dataSource: { group: function() {groupWasCalled = true;}} }),
+                    indicator = groupContainer.append(groupable.buildIndicator("")).find(".t-group-indicator:first");
+                
+                moveOutDropTarget(indicator, groupContainer); 
+
+                ok(groupWasCalled);
+            });
+
+            test("removing group indicator by clicking close button calls dataSource group", function() {
+                var groupContainer = $(".container"),                    
+                    groupWasCalled = false,
+                    groupable = new Groupable(div, { groupContainer:  groupContainer, dataSource: { group: function() {groupWasCalled = true;}} }),
+                    indicator = groupContainer.append(groupable.buildIndicator("")).find(".t-group-indicator:first");
+                
+                indicator.find(".t-button").click();
+
+                ok(groupWasCalled);
+            });
+
+            test("sort asc group indicator change to desc", function() {
+                var groupContainer = $(".container"),                    
+                    groupWasCalled = false,
+                    groupable = new Groupable(div, { groupContainer:  groupContainer }),
+                    indicator = groupContainer.append(groupable.buildIndicator("")).find(".t-group-indicator:first");
+                
+                indicator.find(".t-link").click();                
+
+                equal(groupContainer.find(".t-group-indicator:first").data("dir"), "desc");
+            });
+
+            test("sort desc group indicator change to asc", function() {
+                var groupContainer = $(".container"),                    
+                    groupWasCalled = false,
+                    groupable = new Groupable(div, { groupContainer:  groupContainer }),
+                    indicator = groupContainer.append(groupable.buildIndicator("", "desc")).find(".t-group-indicator:first");
+                
+                indicator.find(".t-link").click();
+
+                equal(groupContainer.find(".t-group-indicator:first").data("dir"), "asc");
+            });
+
+            test("sorting calls dataSource group", function() {
+                var groupContainer = $(".container"),                    
+                    groupWasCalled = false,
+                    groupable = new Groupable(div, { groupContainer:  groupContainer, dataSource: { group: function() {groupWasCalled = true;}} }),
+                    indicator = groupContainer.append(groupable.buildIndicator("")).find(".t-group-indicator:first");
+                
+                indicator.find(".t-link").click();
+
+                ok(groupWasCalled);
+            });
+        </script>
+    </body>
+</html>
