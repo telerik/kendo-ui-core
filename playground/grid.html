@@ -10,6 +10,7 @@
          <script src="../src/jquery.js"></script>
         <script src="../src/kendo.core.js"></script>
         <script src="../src/kendo.query.js"></script>
+        <script src="../src/kendo.pager.js"></script>
         <script src="../src/kendo.datasource.js"></script>
         <script src="../src/kendo.grid.js"></script>
 
@@ -17,7 +18,7 @@
         <link href="../styles/kendo.vista.css" type="text/css" rel="stylesheet" />
     </head>
     <body>
-        <table id="table1">
+        <table id="table1" style="height: 100px">
         </table>
         <script>
             $(document).ready(function() {
@@ -30,7 +31,9 @@
                     dataSource: {
                         data: data
                     },
-                    scrollable: {
+                    scrollable: true,
+                    pageable: {
+                        pageSize: 10
                     }
                 });
             });

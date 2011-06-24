@@ -8,6 +8,7 @@
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.query.js"></script>
         <script src="../../src/kendo.datasource.js"></script>
+        <script src="../../src/kendo.pager.js"></script>
         <script src="../../src/kendo.grid.js"></script>
         <link rel="stylesheet" href="../qunit.css" type="text/css" />
     </head>
@@ -19,11 +20,18 @@
         <ol id="qunit-tests"></ol>
         <script>
             var Grid = kendo.ui.Grid,
-            DataSource = kendo.data.DataSource;
+                table,
+                DataSource = kendo.data.DataSource;
 
-            function table() {
-                return document.createElement("table");
-            }
+            module("grid initialziation", {
+                setup: function() {
+                    table = document.createElement("table");
+                    document.body.appendChild(table);
+                },
+                teardown: function() {
+                    $(table).remove();
+                }
+            });
 
             test("kendoGrid attaches a grid object to target", function() {
                 var table = $("<table />").kendoGrid({ dataSource: [] });
@@ -39,13 +47,13 @@
                     readWasCalled = true;
                 };
 
-                new Grid(table(), { dataSource: dataSource } );
+                new Grid(table, { dataSource: dataSource } );
 
                 ok(readWasCalled);
             });
 
             test("column initialization - field", function() {
-                var grid = new Grid(table(), { dataSource: [], columns: [{ field: "foo" }, { field: "bar" }] });
+                var grid = new Grid(table, { dataSource: [], columns: [{ field: "foo" }, { field: "bar" }] });
 
                 equal(grid.columns.length, 2);
                 equal(grid.columns[0].field, "foo");
@@ -53,14 +61,14 @@
             });
 
             test("column initialization - template", function() {
-                var grid = new Grid(table(), { dataSource: [], columns: [{ field: "foo", template: "bar" }] });
+                var grid = new Grid(table, { dataSource: [], columns: [{ field: "foo", template: "bar" }] });
 
                 equal(grid.columns[0].field, "foo");
                 equal(grid.columns[0].template, "bar");
             });
 
             test("column initialization - treating strings as fields", function() {
-                var grid = new Grid(table(), { dataSource: [], columns: ["foo", { field: "bar" }] });
+                var grid = new Grid(table, { dataSource: [], columns: ["foo", { field: "bar" }] });
 
                 equal(grid.columns.length, 2);
                 equal(grid.columns[0].field, "foo");
@@ -82,25 +90,25 @@
                 equal(grid.columns[0].template, "bar");
             });
             test("rowTemplate is initialized", function() {
-                var grid = new Grid(table(), { dataSource: [], columns: [{ field: "foo" }, { field: "bar" }] });
+                var grid = new Grid(table, { dataSource: [], columns: [{ field: "foo" }, { field: "bar" }] });
 
                 ok(grid.rowTemplate);
             });
 
             test("default rowTemplate renders table row element", function() {
-                var grid = new Grid(table(), { dataSource: [], columns: [{ field: "foo" }, { field: "bar" }] });
+                var grid = new Grid(table, { dataSource: [], columns: [{ field: "foo" }, { field: "bar" }] });
 
                 ok($(grid.rowTemplate({ foo: "foo", bar: "bar" })).is("tr"));
             });
 
             test("default rowTemplate renders a table cell for each column", function() {
-                var grid = new Grid(table(), { dataSource: [], columns: [{ field: "foo" }, { field: "bar" }] });
+                var grid = new Grid(table, { dataSource: [], columns: [{ field: "foo" }, { field: "bar" }] });
 
                 equal($(grid.rowTemplate({ foo: "foo", bar: "bar" })).find(" > td").length, 2);
             });
 
             test("default rowTemplate renders data for the columns", function() {
-                var grid = new Grid(table(), { dataSource: [], columns: [{ field: "foo" }, { field: "bar" }] });
+                var grid = new Grid(table, { dataSource: [], columns: [{ field: "foo" }, { field: "bar" }] });
 
                 var tr = $(grid.rowTemplate({ foo: "foo", bar: "bar" }));
                 equal(tr.find("td").eq(0).text(), "foo");
@@ -108,61 +116,61 @@
             });
 
             test("default rowTemplate uses specified template settings renders data for the columns", function() {
-                var grid = new Grid(table(), { templateSettings: {useWithBlock: false, paramName: "item" }, dataSource: [], columns: [{ field: "foo" }] });
+                var grid = new Grid(table, { templateSettings: {useWithBlock: false, paramName: "item" }, dataSource: [], columns: [{ field: "foo" }] });
 
                 ok(grid.rowTemplate.toString().indexOf("item.foo") > -1);
             });
 
             test("default rowTemplate encodes html entities", function() {
-                var grid = new Grid(table(),  { columns: [{ field: "foo" }] });
+                var grid = new Grid(table,  { columns: [{ field: "foo" }] });
 
                 ok(grid.rowTemplate({ foo: "<" }).indexOf("&lt;") > -1);
             });
 
             test("default rowTemplate does not encode html entities if encoded is false", function() {
-                var grid = new Grid(table(),  { columns: [{ field: "foo", encoded: false }] });
+                var grid = new Grid(table,  { columns: [{ field: "foo", encoded: false }] });
 
                 ok(grid.rowTemplate({ foo: "<" }).indexOf("&lt;") == -1);
             });
 
             test("rowTemplate initialization from options.rowTemplate", function() {
                 var rowTemplate = function() { };
-                var grid = new Grid(table(), { rowTemplate: rowTemplate, dataSource: [], columns: [{ field: "foo" }] });
+                var grid = new Grid(table, { rowTemplate: rowTemplate, dataSource: [], columns: [{ field: "foo" }] });
 
                 ok(grid.rowTemplate === rowTemplate);
             });
 
             test("rowTemplate as string", function() {
                 var rowTemplate = function() { };
-                var grid = new Grid(table(), { rowTemplate: "<tr></tr>", dataSource: [], columns: [{ field: "foo" }] });
+                var grid = new Grid(table, { rowTemplate: "<tr></tr>", dataSource: [], columns: [{ field: "foo" }] });
                 equal($(grid.rowTemplate({}))[0].tagName, "TR");
             });
 
             test("default rowTemplate is using column templates", function() {
-                var grid = new Grid(table(), { dataSource: [], columns: [{ field: "foo", template: "item.foo" }] });
+                var grid = new Grid(table, { dataSource: [], columns: [{ field: "foo", template: "item.foo" }] });
 
                 ok(grid.rowTemplate.toString().indexOf("item.foo") > -1);
             });
 
             test("tbody is created if not present", function() {
-                var grid = new Grid(table(), { dataSource: [], columns: [{ field: "foo", template: "item.foo" }] });
+                var grid = new Grid(table, { dataSource: [], columns: [{ field: "foo", template: "item.foo" }] });
                 equal(grid.tbody.length, 1);
             });
 
             test("array passed as options is treated as data", function() {
                 var data = ["foo"];
-                var grid = new Grid(table(), data);
+                var grid = new Grid(table, data);
                 ok(grid.dataSource.data()[0] === data[0]);
             });
 
             test("div wrapper is created around the table", function() {
-                var grid = new Grid(table(), []);
+                var grid = new Grid(table, []);
 
                 ok(grid.element.parent().is("div.t-grid.t-widget"));
             });
 
             test("wrapper field is initialized", function() {
-                var grid = new Grid(table(), []);
+                var grid = new Grid(table, []);
 
                 ok(grid.wrapper.is("div.t-grid.t-widget"));
             });
@@ -200,40 +208,40 @@
             });
 
             test("autogenerating columns", function() {
-                var grid = new Grid(table(), [ { foo: "foo", bar: "bar" } ]);
+                var grid = new Grid(table, [ { foo: "foo", bar: "bar" } ]);
 
                 equal(grid.columns.length, 2);
             });
 
             test("autogenerating columns - inferring the field", function() {
-                var grid = new Grid(table(), [ { foo: "foo", bar: "bar" } ]);
+                var grid = new Grid(table, [ { foo: "foo", bar: "bar" } ]);
 
                 equal(grid.columns[0].field, "foo");
                 equal(grid.columns[1].field, "bar");
             });
 
             test("autogenerating columns - generating the templates", function() {
-                var grid = new Grid(table(), [ { foo: "foo", bar: "bar" } ]);
+                var grid = new Grid(table, [ { foo: "foo", bar: "bar" } ]);
 
                 equal(grid.tbody.find(">tr>td:first").text(), "foo");
                 equal(grid.tbody.find(">tr>td:last").text(), "bar");
             });
 
             test("autogenerating columns - generating the th", function() {
-                var grid = new Grid(table(), [ { foo: "foo", bar: "bar" } ]);
+                var grid = new Grid(table, [ { foo: "foo", bar: "bar" } ]);
 
                 equal(grid.table.find("tr>th:first").text(), "foo");
                 equal(grid.table.find("tr>th:last").text(), "bar");
             });
 
             test("generating the th from column metadata", function() {
-                var grid = new Grid(table(), { columns: [ { field: "foo" } ] });
+                var grid = new Grid(table, { columns: [ { field: "foo" } ] });
 
                 equal(grid.table.find("tr>th:first").text(), "foo");
             });
 
             test("thead initialization", function() {
-                var grid = new Grid(table(), { columns: [ { field: "foo" } ] });
+                var grid = new Grid(table, { columns: [ { field: "foo" } ] });
 
                 equal(grid.thead.length, 1);
             });
@@ -270,7 +278,7 @@
                 equal(grid.thead.find("th").text(), "bar");
             });
             test("autoBind false does not populate grid", function() {
-                var grid = new Grid(table(), { autoBind: false, dataSource: [ { foo: "foo", bar: "bar" } ]});
+                var grid = new Grid(table, { autoBind: false, dataSource: [ { foo: "foo", bar: "bar" } ]});
 
                 ok(grid.element.find("tbody > tr").length == 0);
             });
@@ -321,6 +329,27 @@
                 var grid = new Grid($("<table />"), { scrollable: true, dataSource: [{foo:"bar"}] });
 
                 ok(grid.table.parent().is("div.t-grid-content"));
+            });
+
+            test("scrollable area is sized", function() {
+                var grid = new Grid(table, { height: 100, pageable: true, scrollable: true, dataSource: [{foo:"bar"}] });
+
+                equal(grid.wrapper.find(".t-grid-content").height(), 100
+                    - grid.wrapper.find(".t-grid-header").outerHeight()
+                    - grid.wrapper.find(".t-grid-pager").outerHeight());
+            });
+
+            test("grid height is applied to the wrapper element", function() {
+                var grid = new Grid(table, { height: 100, dataSource: [{foo:"bar"}] });
+
+                equal(grid.wrapper.height(), 100);
+            });
+
+            test("grid height is intialized from table height", function() {
+                table.style.height = "100px";
+                var grid = new Grid(table, { dataSource: [{foo:"bar"}] });
+
+                equal(grid.wrapper.css("height"), "100px");
             });
        </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
