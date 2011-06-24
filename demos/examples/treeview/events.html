@@ -36,7 +36,11 @@
                 };
 
                 function onCollapse(e) {
-                    kendoConsole.error("Collapsing " + $(e.item).find("> div > .t-in").text());
+                    kendoConsole.log("Collapsing " + $(e.item).find("> div > .t-in").text());
+                };
+
+                function onExpand(e) {
+                    kendoConsole.log("Expanding " + $(e.item).find("> div > .t-in").text());
                 };
 
                 $("#TreeView").kendoTreeView({ dataSource: [
@@ -53,7 +57,9 @@
                         { text: "baz" }
                     ],
                     select: onSelect,
-                    error: onError
+                    error: onError,
+                    collapse: onCollapse,
+                    expand: onExpand
                 });
             </script>
         </div>
