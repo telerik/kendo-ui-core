@@ -705,6 +705,7 @@
         options: {
             text: "",
             font: "16px Verdana, sans-serif",
+            color: "#000",
             position: TOP,
             align: CENTER,
             margin: 5,
@@ -956,6 +957,7 @@
         },
 
         options: {
+            labels: { },
             line: {
                 width: 1,
                 color: "#000",
@@ -1053,10 +1055,11 @@
             }
 
             var majorDivisions = axis.getMajorDivisions(),
-                currentValue = options.min;
+                currentValue = options.min,
+                labelOptions = deepExtend({ }, options.labels, { align: RIGHT });
 
             for (var i = 0; i < majorDivisions; i++) {
-                var text = new Text(currentValue.toString(), { align: RIGHT });
+                var text = new Text(currentValue.toString(), labelOptions);
                 axis.children.push(text);
 
                 currentValue = round(currentValue + options.majorUnit, DEFAULT_PRECISION);
@@ -1345,11 +1348,12 @@
             var axis = this;
             Axis.fn.init.call(axis, options);
 
-            var options = axis.options;
+            var options = axis.options,
+                labelOptions = deepExtend({ }, options.labels, { align: CENTER });
 
             for (var i = 0; i < options.categories.length; i++) {
                 var label = options.categories[i];
-                axis.children.push(new Text(label, { align: CENTER }));
+                axis.children.push(new Text(label, labelOptions));
             }
         },
 
