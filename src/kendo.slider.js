@@ -19,52 +19,77 @@
         //constants
         PRECISION = 3;
 
-    function initSlider () {
-        var that = this,
+    var SliderBase = Component.extend({
+        init: function(element, options) {
+            var that = this;
+
+            Component.fn.init.call(that, element, options);
             options = that.options;
 
-        that._distance = options.max - options.min;
-        that._isHorizontal = options.orientation == "horizontal";
-        that._position = that._isHorizontal ? "left" : "bottom";
-        that._size = that._isHorizontal ? "width" : "height";
+            that._distance = options.max - options.min;
+            that._isHorizontal = options.orientation == "horizontal";
+            that._position = that._isHorizontal ? "left" : "bottom";
+            that._size = that._isHorizontal ? "width" : "height";
 
-        options.tooltip.format = options.tooltip.enabled ? options.tooltip.format || "{0}" : "{0}";
+            options.tooltip.format = options.tooltip.enabled ? options.tooltip.format || "{0}" : "{0}";
 
-        that._createHtml();
-        that.wrapper = that.element.closest(".t-slider");
-        that._trackDiv = that.wrapper.find(TRACK_SELECTOR);
+            that._createHtml();
+            that.wrapper = that.element.closest(".t-slider");
+            that._trackDiv = that.wrapper.find(TRACK_SELECTOR);
 
-        that._setTrackDivWidth();
+            that._setTrackDivWidth();
 
-        that._maxSelection = that._trackDiv[that._size]();
+            that._maxSelection = that._trackDiv[that._size]();
 
-        var sizeBetweenTicks = that._maxSelection / ((options.max - options.min) / options.smallStep);
-        var pixelWidths = that._calculateItemsWidth(math.floor(that._distance / options.smallStep));
+            var sizeBetweenTicks = that._maxSelection / ((options.max - options.min) / options.smallStep);
+            var pixelWidths = that._calculateItemsWidth(math.floor(that._distance / options.smallStep));
 
-        if (that.options.tickPlacement != "none" && sizeBetweenTicks >= 2) {
-            that._trackDiv.before(createSliderItems(options, that._distance));
-            that._setItemsWidth(pixelWidths);
-            that._setItemsTitle();
-            that._setItemsLargeTick();
-        }
+            if (that.options.tickPlacement != "none" && sizeBetweenTicks >= 2) {
+                that._trackDiv.before(createSliderItems(options, that._distance));
+                that._setItemsWidth(pixelWidths);
+                that._setItemsTitle();
+                that._setItemsLargeTick();
+            }
 
-        that._calculateSteps(pixelWidths);
+            that._calculateSteps(pixelWidths);
 
-        that[options.enabled ? "enable" : "disable"]();
+            that[options.enabled ? "enable" : "disable"]();
 
-        that._keyMap = {
-            37: step(-options.smallStep), // left arrow
-            40: step(-options.smallStep), // down arrow
-            39: step(+options.smallStep), // right arrow
-            38: step(+options.smallStep), // up arrow
-            35: setValue(options.max), // end
-            36: setValue(options.min), // home
-            33: step(+options.largeStep), // page up
-            34: step(-options.largeStep)  // page down
-        };
+            that._keyMap = {
+                37: step(-options.smallStep), // left arrow
+                40: step(-options.smallStep), // down arrow
+                39: step(+options.smallStep), // right arrow
+                38: step(+options.smallStep), // up arrow
+                35: setValue(options.max), // end
+                36: setValue(options.min), // home
+                33: step(+options.largeStep), // page up
+                34: step(-options.largeStep)  // page down
+            };
 
-        that.bind([LOAD, CHANGE, SLIDE], options);
-    }
+            that.bind([LOAD, CHANGE, SLIDE], options);
+        },
+        options: {
+            enabled: true,
+            min: 0,
+            max: 10,
+            smallStep: 1,
+            largeStep: 5,
+            orientation: "horizontal",
+            tickPlacement: "both",
+            tooltip: { enabled: true, format: "{0}" }
+        },
+        _setTrackDivWidth: _setTrackDivWidth,
+        _setItemsWidth: _setItemsWidth,
+        _setItemsTitle: _setItemsTitle,
+        _setItemsLargeTick: _setItemsLargeTick,
+        _calculateItemsWidth: _calculateItemsWidth,
+        _roudWidths: _roudWidths,
+        _addAdditionalSize: _addAdditionalSize,
+        _calculateSteps: _calculateSteps,
+        _getValueFromPosition: _getValueFromPosition,
+        _getDragableArea: _getDragableArea,
+        _createHtml: _createHtml
+    });
 
     function createWrapper (options, element, isHorizontal) {
         var orientationCssClass = isHorizontal ? " t-slider-horizontal" : " t-slider-vertical",
@@ -137,23 +162,11 @@
         element.before(createTrack(element));
     }
 
-    var defaultOptions = {
-        enabled: true,
-        min: 0,
-        max: 10,
-        smallStep: 1,
-        largeStep: 5,
-        orientation: "horizontal",
-        tickPlacement: "both",
-        tooltip: { enabled: true, format: "{0}" }
-    };
-
-    var Slider = Component.extend({
+    var Slider = SliderBase.extend({
         init: function(element, options) {
             var that = this;
-            Component.fn.init.call(that, element, options);
+            SliderBase.fn.init.call(that, element, options);
             options = that.options;
-            initSlider.call(that);
 
             that._setValueInRange(that.options.val);
 
@@ -163,12 +176,12 @@
             new Slider.Drag(dragHandle, "", that, that.options);
         },
 
-        options: extend({
+        options: {
             val: 0,
             showButtons: true,
             increaseButtonTitle: "Increase",
             decreaseButtonTitle: "Decrease"
-        }, defaultOptions),
+        },
 
         enable: function () {
             var that = this,
@@ -805,12 +818,11 @@
     // RangeSlider
     //
 
-    var RangeSlider = Component.extend({
+    var RangeSlider = SliderBase.extend({
         init: function(element, options) {
             var that = this;
-            Component.fn.init.call(that, element, options);
+            SliderBase.fn.init.call(that, element, options);
             options = that.options;
-            initSlider.call(that);
 
             that._setValueInRange(options.selectionStart, options.selectionEnd);
 
@@ -821,10 +833,10 @@
             new Slider.Drag(dragHandles.eq(1), "rightHandle" , that, options);
         },
 
-        options: extend({
+        options: {
             selectionStart: 0,
             selectionEnd: 10
-        }, defaultOptions),
+        },
 
         enable: function () {
             var that = this,
@@ -1036,23 +1048,6 @@
 
         that.bind([ CHANGE, SLIDE, MOVE_SELECTION ], handler);
     }
-
-    var methods = {
-        _setTrackDivWidth: _setTrackDivWidth,
-        _setItemsWidth: _setItemsWidth,
-        _setItemsTitle: _setItemsTitle,
-        _setItemsLargeTick: _setItemsLargeTick,
-        _calculateItemsWidth: _calculateItemsWidth,
-        _roudWidths: _roudWidths,
-        _addAdditionalSize: _addAdditionalSize,
-        _calculateSteps: _calculateSteps,
-        _getValueFromPosition: _getValueFromPosition,
-        _getDragableArea: _getDragableArea,
-        _createHtml: _createHtml
-    };
-
-    extend(Slider.prototype, methods);
-    extend(RangeSlider.prototype, methods);
 
     kendo.ui.plugin("RangeSlider", RangeSlider);
 
