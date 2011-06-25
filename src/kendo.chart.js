@@ -473,7 +473,7 @@
             height: DEFAULT_HEIGHT,
             background: "#fff",
             border: {
-                color: "#fff",
+                color: "#000",
                 width: 0
             }
         },
