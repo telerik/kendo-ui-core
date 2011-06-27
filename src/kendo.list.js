@@ -107,7 +107,10 @@
                 ul.show()
                   .parent(".t-animation-container").show()
                   .end()
-                  .height(length * $(ul[0].firstChild).height() > height ? height : "auto")
+                  .height(ul[0].scrollHeight > height ? height : "auto")
+                  .hide()
+                  .parent(".t-animation-container")
+                  .height(height)
                   .hide();
             }
         },
