@@ -238,14 +238,16 @@
         _popup: function() {
             var that = this,
                 ul = that.ul,
-                wrapper = that.wrapper,
-                spacing = ul.outerWidth() - ul.innerWidth();
+                wrapper = that.wrapper;
 
             that.popup = new ui.Popup(ul, {
                 anchor: wrapper
             });
 
-            ul.width(wrapper.width() - spacing);
+            var spacing = (parseInt(ul.css('border-left-width'), 10) || 0) +
+                          (parseInt(ul.css('border-right-width'), 10) || 0);
+
+            ul.width(wrapper.innerWidth() - spacing);
         },
 
         _options: function(data) {
