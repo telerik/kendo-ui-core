@@ -22,14 +22,6 @@
         TSTATEHOVER = "t-state-hover",
         NODECONTENTS = ">.t-group, >.t-content, >.t-animation-container>.t-group, >.t-animation-container>.t-content";
 
-    function markAjaxLoadableNodes(element) {
-        element.find(".t-plus")
-                .each(function () {
-                    var item = $(this.parentNode);
-                    item.parent().data("loaded", item.next(".t-group").length > 0);
-                });
-    }
-
     var TreeView = Component.extend({
         init: function (element, options) {
             var that = this,
@@ -44,7 +36,10 @@
             options = that.options;
 
             if (options.animation === false) {
-                options.animation = { expand: { show: true, effects: {} }, collapse: { hide:true, effects: {} } };
+                options.animation = {
+                    expand: { show: true, effects: {} },
+                    collapse: { hide: true, effects: {} }
+                };
             }
 
             that.rendering = new TreeViewRendering(that);
@@ -82,12 +77,6 @@
                 .delegate(":checkbox", CLICK, proxy(that._checkboxClick, that))
                 .delegate(".t-plus,.t-minus", CLICK, proxy(that._toggleButtonClick, that));
 
-/*
-            if (that.isAjax()) {
-                markAjaxLoadableNodes(element);
-            }
-*/
-
             if (options.dragAndDrop) {
                 that.bind([NODEDRAGGING, NODEDRAGCANCELLED, NODEDROP, NODEDROPPED], options);
                 that.dragging = new TreeViewDragAndDrop(that);
@@ -109,7 +98,7 @@
                     show: false,
                     hide: true
                 }
-            },
+            }
         },
 
         _wrapper: function() {
@@ -146,16 +135,16 @@
         },
 
         _processItems: function(items, callback) {
-            this.element.find(items).each($.proxy(callback, this));
+            this.element.find(items).each(function(index, item) {
+                callback.call(this, index, $(item).closest(".t-item"));
+            });
         },
 
         expand: function (items) {
             this._processItems(items, function (index, item) {
-                item = $(item);
-
                 var contents = item.find(NODECONTENTS);
 
-                if ((contents.length > 0 && !contents.is(":visible")) /* || this.isAjax() */) {
+                if (contents.length > 0 && !contents.is(":visible")) {
                     this.toggle(item);
                 }
             });
@@ -163,8 +152,6 @@
 
         collapse: function (items) {
             this._processItems(items, function (index, item) {
-                item = $(item);
-
                 var contents = item.find(NODECONTENTS);
 
                 if (contents.length > 0 && contents.is(":visible")) {
@@ -177,8 +164,6 @@
             enable = enable !== false;
 
             this._processItems(items, function (index, item) {
-                item = $(item);
-
                 var isCollapsed = !item.find("> .t-group, > .t-content").is(":visible");
 
                 if (!enable) {
@@ -203,7 +188,6 @@
 
         reload: function (items) {
             this._processItems(items, function (index, item) {
-                var item = $(this);
                 item.find(".t-group").remove();
                 treeView.ajaxRequest(item);
             });
@@ -290,15 +274,10 @@
                         .toggleClass("t-plus", !isExpanding);
                         
                     if (!isExpanding) {
-                        contents.css("height", contents.height())
-                            .css("height");
+                        contents.css("height", contents.height()).css("height");
                     }
 
                     contents.kendoStop(true, true).kendoAnimate(animation);
-                }
-            } else if (isExpanding /* && this.isAjax() */ && (contents.length == 0 || item.data("loaded") === false)) {
-                if (!that._trigger(eventType, item)) {
-                    this.ajaxRequest(item);
                 }
             }
         },
@@ -306,137 +285,6 @@
         _toggleButtonClick: function (e) {
             this.toggle($(e.target).closest(".t-item"));
         },
-/*
-        isAjax: function () {
-            return this.ajax || this.ws || this.onDataBinding;
-        },
-
-        url: function (which) {
-            return (this.ajax || this.ws)[which];
-        },
-
-        ajaxOptions: function (item, options) {
-            var result = {
-                type: "POST",
-                dataType: "text",
-                error: $.proxy(function (xhr, status) {
-                    if (t.ajaxError(this.element, "error", xhr, status)) {
-                        return;
-                    }
-
-                    if (status == "parsererror") {
-                        alert("Error! The requested URL did not return JSON.");
-                    }
-                }, this),
-
-                success: $.proxy(function (data) {
-                    data = eval("(" + data + ")");
-                    data = data.d || data; // Support the `d` returned by MS Web Services
-                    this._dataBind(item, data);
-                }, this)
-            };
-
-            result = $.extend(result, options);
-
-            var node = this.ws ? result.data.node = {} : result.data;
-
-            if (item.hasClass("t-item")) {
-                node[this.queryString.value] = this.getItemValue(item);
-                node[this.queryString.text] = this.getItemText(item);
-
-                var itemCheckbox = item.find(".t-checkbox:first :checkbox");
-                if (itemCheckbox.length) {
-                    node[this.queryString.checked] = itemCheckbox.is(":checked");
-                }
-            }
-
-            if (this.ws) {
-                result.data = t.toJson(result.data);
-                result.contentType = "application/json; charset=utf-8";
-            }
-
-            return result;
-        },
-
-        ajaxRequest: function (item) {
-            var that = this, eventArgs;
-
-            item = item || $(that.element);
-
-            eventArgs = { item: item[0] };
-
-            if (that.trigger("dataBinding", eventArgs) || (!that.ajax && !that.ws)) {
-                return;
-            }
-
-            item.data("loadingIconTimeout", setTimeout(function () {
-                item.find("> div > .t-icon").addClass("t-loading");
-            }, 100));
-
-            $.ajax(that.ajaxOptions(item, {
-                data: $.extend({}, eventArgs.data),
-                url: that.url("selectUrl")
-            }));
-        },
-
-        _dataBind: function (item, data) {
-            var that = this;
-
-            item = $(item); // can be called from user code with dom objects
-
-            if (data.length == 0) {
-                $(".t-icon", item).hide();
-                return;
-            }
-
-            var group = item.find("> .t-group"),
-                isGroup = group.length == 0;
-
-            var html = that.rendering[isGroup ? "renderGroup" : "renderItems"]({
-                group: {
-                    isExpanded: (isGroup ? item.eq(0).is(".t-treeview") ? true : data[0].expanded : false),
-                    isFirstLevel: item.hasClass("t-treeview"),
-                    level: item.find("> div > .t-checkbox :input[name='" + this.element.id + "_checkedNodes.Index']").val()
-                },
-                treeview: {
-                    id: this.element.id,
-                    isAjax: this.isAjax(),
-                    showCheckboxes: this.showCheckBox
-                },
-                items: data
-            });
-
-            item.data("animating", true);
-
-            if (group.length > 0 && item.data("loaded") === false) {
-                $(html).prependTo(group);
-            } else if (group.length > 0 && item.data("loaded") !== false) {
-                group.html(html);
-            } else if (group.length == 0) {
-                group = $(html).appendTo(item);
-            }
-
-            /// TODO: play animations
-            t.fx.play(this.effects, group, { direction: "bottom" }, function () {
-                item.data("animating", false);
-            });
-
-            clearTimeout(item.data("loadingIconTimeout"));
-
-            if (item.hasClass("t-item"))
-                item.data("loaded", true)
-                    .find(".t-icon:first")
-                        .removeClass("t-loading")
-                        .removeClass("t-plus")
-                        .addClass("t-minus");
-
-            if (this.isAjax()) {
-                markAjaxLoadableNodes(item);
-            }
-
-            that.trigger(DATABOUND);
-        },
-*/
 
         _checkboxClick: function (e) {
             var that = this,
@@ -455,8 +303,6 @@
 
         check: function (items, checked) {
             this._processItems(items, function(index, item) {
-                item = $(item).closest(".t-item");
-
                 var checkboxHolder = $("> div > .t-checkbox", item),
                     arrayName = this.element.id + "_checkedNodes",
                     index = checkboxHolder.find(":input[name='" + arrayName + ".Index']").val();
