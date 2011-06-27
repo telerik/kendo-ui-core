@@ -2,6 +2,7 @@
     var kendo = window.kendo,
         ui = kendo.ui,
         DataSource = kendo.data.DataSource,
+        Groupable = kendo.ui.Groupable,
         tbodySupportsInnerHtml = kendo.support.tbodyInnerHtml,
         Component = ui.Component,
         keys = kendo.keys,
@@ -46,6 +47,8 @@
 
             that._selectable();
 
+            that._groupable();
+
             if (that.options.autoBind){
                 that.dataSource.query();
             }
@@ -55,6 +58,7 @@
             columns: [],
             autoBind: true,
             scrollable: true,
+            groupable: false,
             dataSource: {}
         },
 
@@ -69,6 +73,24 @@
             that.table = table.attr("cellspacing", 0);
 
             that._wrapper();
+        },
+
+        _groupable: function() {
+            var that = this, 
+                wrapper = that.wrapper,
+                groupable = that.options.groupable;
+
+            if(groupable) {               
+                if(!wrapper.has("div.t-grouping-header")[0]) {
+                    $("<div />").addClass("t-grouping-header").prependTo(wrapper);
+                }
+                
+                that.groupable = new Groupable(wrapper, {
+                    filter: "th:not(.t-group-cell)",
+                    groupContainer: "div.t-grouping-header",
+                    dataSource: that.dataSource
+                });
+            }
         },
 
         _selectable: function() {
@@ -394,13 +416,18 @@
 
         _tmpl: function(start, rowTemplate) {
             var that = this,
-                settings = extend({}, kendo.Template, that.options.templateSettings);
+                settings = extend({}, kendo.Template, that.options.templateSettings),
+                groups = (that.dataSource.group() || []).length;
 
             if (!$.isFunction(rowTemplate)) {
 
                 if (!rowTemplate) {
                     rowTemplate = start;
-
+                    
+                    if(groups > 0) {
+                        rowTemplate += that._groupCell(groups);
+                    }
+                    
                     $.each(that.columns, function() {
                         var column = this, template = column.template, field = column.field;
 
@@ -411,7 +438,7 @@
                                 template = settings.begin + "=" + (settings.useWithBlock ? "" : settings.paramName + ".") + field + settings.end;
                             }
                         }
-
+                        
                         rowTemplate += "<td>" + template + "</td>";
                     });
 
@@ -429,7 +456,7 @@
                 options = that.options;
 
             that.rowTemplate = that._tmpl("<tr>", options.rowTemplate);
-            that.altRowTemplate = that._tmpl('<tr class="t-alt">', options.altRowTemplate || options.rowTemplate);
+            that.altRowTemplate = that._tmpl('<tr class="t-alt">', options.altRowTemplate || options.rowTemplate);            
         },
 
         _thead: function() {
@@ -491,31 +518,84 @@
                 that._templates();
             }
         },
+        _rowsHtml: function(data) {
+            var that = this,
+                html = "",
+                rowTemplate = that.rowTemplate,
+                altRowTemplate = that.altRowTemplate;
 
+            for (idx = 0, length = data.length; idx < length; idx++) {
+                if (idx % 2) {
+                    html += altRowTemplate(data[idx]);
+                } else {
+                    html += rowTemplate(data[idx]);
+                }
+            }
+
+            return html;
+        },
+        _groupCell: function(count) {
+            if(count == 0) {
+                return "";
+            }
+            return new Array(count + 1).join('<td class="t-group-cell"></td>');
+        },
+        _groupRowHtml: function(group, colspan, level) {
+            var that = this,
+                html = "",
+                idx,
+                length,                
+                groupItems = group.items;
+                        
+            html +=  '<tr class="t-grouping-row">' + that._groupCell(level) + 
+                      '<td colspan="' + colspan + '">' + 
+                        '<p class="t-reset">' +
+                         '<a class="t-icon t-collapse" href="#"></a>' +
+                         group.field + ': ' + group.value +'</p></td></tr>';
+            
+            if(group.hasSubgroups) {
+                for(idx = 0, length = groupItems.length; idx < length; idx++) {
+                    html += that._groupRowHtml(groupItems[idx], colspan - 1, level + 1);
+                }
+            } else {
+                html += that._rowsHtml(groupItems);
+            }
+
+            return html;
+        },
+        _updateHeader: function(groups) {
+            var that = this;
+            groups -= that.thead.find("th.t-group-cell").length;
+            $(new Array(groups + 1).join('<th class="t-group-cell t-header">&nbsp;</th>')).prependTo(that.thead.find("tr"));
+        },
         refresh: function() {
             var that = this,
                 length,
                 idx,
                 html = "",
-                data = that.dataSource.view(),
+                data = that.dataSource.view(),                
                 tbody,
                 placeholder,
                 rowTemplate,
-                altRowTemplate;
+                altRowTemplate,
+                groups = (that.dataSource.group() || []).length,
+                colspan = groups + that.columns.length;
 
             if (!that.columns.length) {
                 that._autoColumns(data[0]);
             }
-
+            
+            that._templates();
             rowTemplate = that.rowTemplate,
             altRowTemplate = that.altRowTemplate;
-
-            for (idx = 0, length = data.length; idx < length; idx++) {
-                if (idx % 2) {
-                   html += altRowTemplate(data[idx]);
-                } else {
-                   html += rowTemplate(data[idx]);
+            
+            if(groups > 0) {                                               
+                for (idx = 0, length = data.length; idx < length; idx++) {                    
+                    html += that._groupRowHtml(data[idx], colspan, 0);
                 }
+                that._updateHeader(groups);                
+            } else {
+                html += that._rowsHtml(data);
             }
 
             if (tbodySupportsInnerHtml) {

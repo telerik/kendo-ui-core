@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Grid grouping</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.query.js"></script>
+        <script src="../../src/kendo.datasource.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.groupable.js"></script>
+        <script src="../../src/kendo.grid.js"></script>
+        <link rel="stylesheet" href="../qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Grid grouping</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var Grid = kendo.ui.Grid,
+                DataSource = kendo.data.DataSource;
+
+            function table() {
+                return document.createElement("table");
+            }
+
+            test("groupable instanciate kendo.ui.Groupable", function() {
+                var grid = new Grid(table(), { data:[], groupable: true });
+                ok(grid.groupable);
+            });
+
+            test("groupable creates .t-grouping-header", function() {
+                var grid = new Grid(table(), { data:[], groupable: true }),
+                    gridElement = grid.wrapper;
+                
+                var groupingHeader = gridElement.find("div.t-grouping-header");
+                equal(groupingHeader.length, 1);
+            });
+            
+            test("grouping row is created for every group", function() {
+                var grid = new Grid(table(), { 
+                    data:[{foo: "foo"}, {foo: "bar"}], groupable: true 
+                }),
+                tbody = grid.tbody;
+                grid.dataSource.group({field: "foo"});
+
+                var groupingRows = tbody.find("tr.t-grouping-row");
+                equal(groupingRows.length, 2);               
+            });
+            
+            test("first level grouping row colspans is columns + number of groups", function() {
+                var grid = new Grid(table(), { 
+                    data:[{foo: "foo"}, {foo: "bar"}], groupable: true 
+                }),
+                tbody = grid.tbody;
+                grid.dataSource.group({field: "foo"});
+
+                var groupingRowCell = tbody.find("tr.t-grouping-row>td:first");
+                equal(groupingRowCell.attr("colspan"), 2);
+            });
+
+            test("nesting groups created grouping row for every group", function() {
+                var grid = new Grid(table(), { 
+                    data:[{foo: "foo", bar: "bar"}, {foo: "fooz", bar: "baz"}], groupable: true 
+                }),
+                tbody = grid.tbody;
+                grid.dataSource.group([{field: "foo"}, {field: "bar"}]);
+
+                var groupingRows = tbody.find("tr.t-grouping-row");
+                var groupingCells = groupingRows.find("td");
+                equal(groupingRows.length, 4);
+                equal(groupingCells.eq(0).attr("colspan"), 4);
+                ok(groupingCells.eq(1).is(".t-group-cell"));
+                equal(groupingCells.eq(2).attr("colspan"), 3);
+            });
+
+            test("nested groups creates group cells for nested grouping rows", function() {
+                var grid = new Grid(table(), { 
+                    data:[{foo: "foo", bar: "bar"}, {foo: "fooz", bar: "baz"}], groupable: true 
+                }),
+                tbody = grid.tbody;
+                grid.dataSource.group([{field: "foo"}, {field: "bar"}]);
+
+                var nestedGroupingRow = tbody.find("tr.t-grouping-row").eq(1);
+                ok(nestedGroupingRow.find("td:first").is(".t-group-cell"));
+            });
+
+            test("group cells are created for every data row", function() {
+                var grid = new Grid(table(), { 
+                    data:[{foo: "foo", bar: "bar"}, {foo: "fooz", bar: "baz"}], groupable: true 
+                }),
+                tbody = grid.tbody;
+                grid.dataSource.group([{field: "foo"}]);
+
+                var dataRows = tbody.find("tr:not(.t-grouping-row)").eq(0);                
+                ok(dataRows.find("td:first").is(".t-group-cell"));
+            });
+            
+            test("grouping scrollable grid creates header group cells", function() {
+                 var grid = new Grid(table(), { 
+                    data:[{foo: "foo", bar: "bar"}, {foo: "fooz", bar: "baz"}], 
+                    groupable: true,
+                    scrollable: true
+                }),
+                header = grid.thead;
+
+                grid.dataSource.group([{field: "foo"},{field: "bar"}]);                
+
+                var headerCells = header.find("th");                
+                equal(headerCells.length, 4);
+                ok(headerCells.is(".t-group-cell"));                
+            });
+
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>
