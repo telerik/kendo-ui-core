@@ -328,6 +328,22 @@
                ok(combobox.input.hasClass("test"));
            });
 
+           test("set height if items height is bigger than options.height", function() {
+               var dataSource = new kendo.data.DataSource.create([{text: 1, value: 1}, {text:2, value:2}]);
+               dataSource.read();
+
+               combobox = new ComboBox(input, {
+                   autoBind: false,
+                   dataSource: dataSource,
+                   template: "<div style='height:30px'><%= text %> </div>",
+                   height: 50
+               });
+
+               combobox.refresh();
+
+               equal(combobox.ul.height(), 50);
+           });
+
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

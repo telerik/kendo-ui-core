@@ -68,6 +68,18 @@
                 equal(combobox.previous, 0);
            });
 
+           test("select item with index -1 should not select anything", function() {
+               var combobox = new ComboBox(input, [{text: "foo", value: 1}, {text:2, value:2}]);
+
+               combobox.select(0);
+
+               combobox.select(-1);
+
+               equal(combobox.value(), "1");
+               equal(combobox.text(), "foo");
+           });
+
+
            test("select should select item by predicate", function() {
                 var combobox = new ComboBox(input, [{text: "foo", value: 1}, {text:2, value:2}]);
 

@@ -302,6 +302,17 @@
                 stop(500);
             });
 
+            test("raise init event when load combobox", function() {
+                input.kendoComboBox({
+                    dataSource: [{text: "foo"}, {text: "bar"}],
+                    init: function() {
+                        ok(true);
+                        start();
+                    }
+                });
+
+                stop(300);
+            });
        </script>
        <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

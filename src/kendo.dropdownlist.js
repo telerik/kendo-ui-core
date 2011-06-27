@@ -177,6 +177,10 @@
             }
 
             if (typeof li === "number") {
+                if (li < 0) {
+                    return;
+                }
+
                 li = $(children[li]);
             }
 
