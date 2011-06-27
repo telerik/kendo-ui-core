@@ -223,9 +223,18 @@
 
                 that.content = that.table.parent();
 
-                if (!that.content.is(".t-grid-content")) {
+                if(that.content.is(".t-grid-table-wrap")) {
+                    that.content = that.content.parent();
+                }
+
+                if (!that.content.is(".t-grid-content, .t-grid-table-wrap")) {
                     that.content = $('<div class="t-grid-content" />');
                     that.table.wrap(that.content);
+
+                    if (scrollable !== true && scrollable.virtual) {
+                        that.tableWrap = $('<div class="t-grid-table-wrap"/>');
+                        that.table.wrap(that.tableWrap);
+                    }
                 }
 
                 height -= header.outerHeight();
@@ -259,7 +268,7 @@
                 scrollTop = e.currentTarget.scrollTop,
                 dataSource = that.dataSource,
                 rowHeight = that._rowHeight,
-                skip = dataSource.skip(),
+                skip = dataSource.skip() || 0,
                 take = dataSource.take(),
                 firstRowIndex = Math.floor(scrollTop / rowHeight);
                 lastRowIndex = Math.floor((scrollTop + take * rowHeight) / rowHeight);
@@ -270,7 +279,6 @@
                 dataSource.range(skip, take);
 
                 that._scrollTop = 0;
-                //tableParent.scrollTop = 0;
             } else if (lastRowIndex > skip + take) {
                 skip = firstRowIndex;
 
@@ -304,7 +312,7 @@
 
             that.verticalScrollbar.html(html);
 
-            that.content.scrollTop(that._scrollTop);
+            that.tableWrap.scrollTop(that._scrollTop);
         },
 
         _dataSource: function() {
