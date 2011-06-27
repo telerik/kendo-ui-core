@@ -966,7 +966,7 @@
                     color: BLACK
                 },
                 majorGridLines: {
-                    color: "#dae2e8",
+                    color: "#d0d8dd",
                     visible: true
                 }
             },
@@ -978,7 +978,7 @@
                     color: BLACK
                 },
                 majorGridLines: {
-                    color: "#dae2e8"
+                    color: "#d0d8dd"
                 }
             }
         },
@@ -1000,14 +1000,14 @@
             },
             chartArea: {
                 border: {
-                    color: "#768ca5",
+                    color: "#a5b3c5",
                     width: 1
                 }
             },
-            seriesColors: ["#a2b3c7", "#76c8e8", "#358db0", "#426682", "#2d3d4f"],
+            seriesColors: ["#a5b3c5", "#82afe5", "#358db0", "#03597a", "#152435"],
             categoryAxis: {
                 line: {
-                    color: "#426682"
+                    color: BLACK
                 },
                 labels: {
                     color: BLACK
@@ -1019,7 +1019,7 @@
             },
             valueAxis: {
                 line: {
-                    color: "#426682"
+                    color: BLACK
                 },
                 labels: {
                     color: BLACK
