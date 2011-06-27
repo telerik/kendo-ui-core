@@ -652,6 +652,100 @@
                 }
             }
         },
+        Simple: {
+            title: {
+                color: BLACK
+            },
+            legend: {
+                labels: {
+                    font: SANS12,
+                    color: BLACK
+                }
+            },
+            seriesDefaults: {
+                labels: {
+                    font: SANS12,
+                    color: BLACK
+                }
+            },
+            chartArea: {
+                border: {
+                    color: "#aaaaaa",
+                    width: 1
+                }
+            },
+            seriesColors: ["#231f20", "#404041", "#58595b", "#808184", "#929497"],
+            categoryAxis: {
+                line: {
+                    color: BLACK
+                },
+                labels: {
+                    color: BLACK
+                },
+                majorGridLines: {
+                    color: "#d1d1d1",
+                    visible: true
+                }
+            },
+            valueAxis: {
+                line: {
+                    color: BLACK
+                },
+                labels: {
+                    color: BLACK
+                },
+                majorGridLines: {
+                    color: "#d1d1d1"
+                }
+            }
+        },
+        Sitefinity: {
+            title: {
+                color: BLACK
+            },
+            legend: {
+                labels: {
+                    font: SANS12,
+                    color: BLACK
+                }
+            },
+            seriesDefaults: {
+                labels: {
+                    font: SANS12,
+                    color: BLACK
+                }
+            },
+            chartArea: {
+                border: {
+                    color: "#aaaaaa",
+                    width: 1
+                }
+            },
+            seriesColors: ["#a2d5e2", "#95b979", "#f9d67b", "#ea9d73", "#f19ca8", "#d06c6c"],
+            categoryAxis: {
+                line: {
+                    color: "#989898"
+                },
+                labels: {
+                    color: BLACK
+                },
+                majorGridLines: {
+                    color: "#e2e2e2",
+                    visible: true
+                }
+            },
+            valueAxis: {
+                line: {
+                    color: "#989898"
+                },
+                labels: {
+                    color: BLACK
+                },
+                majorGridLines: {
+                    color: "#e2e2e2"
+                }
+            }
+        },
         Sunset: {
             title: {
                 color: "#854324"
@@ -697,6 +791,288 @@
                 },
                 majorGridLines: {
                     color: "#bbb99d"
+                }
+            }
+        },
+        Telerik: {
+            title: {
+                color: BLACK
+            },
+            legend: {
+                labels: {
+                    font: SANS12,
+                    color: BLACK
+                }
+            },
+            seriesDefaults: {
+                labels: {
+                    font: SANS12,
+                    color: BLACK
+                }
+            },
+            chartArea: {
+                border: {
+                    color: "#aaaaaa",
+                    width: 1
+                }
+            },
+            seriesColors: ["#7e7e7e", "#cbcbcb", "#a2ea8b", "#63ac39", "#000000"],
+            categoryAxis: {
+                line: {
+                    color: "#828282"
+                },
+                labels: {
+                    color: BLACK
+                },
+                majorGridLines: {
+                    color: "#c6c6c6",
+                    visible: true
+                }
+            },
+            valueAxis: {
+                line: {
+                    color: "#828282"
+                },
+                labels: {
+                    color: BLACK
+                },
+                majorGridLines: {
+                    color: "#c6c6c6"
+                }
+            }
+        },
+        Vista: {
+            title: {
+                color: BLACK
+            },
+            legend: {
+                labels: {
+                    font: SANS12,
+                    color: BLACK
+                }
+            },
+            seriesDefaults: {
+                labels: {
+                    font: SANS12,
+                    color: BLACK
+                }
+            },
+            chartArea: {
+                border: {
+                    color: "#a7bac5",
+                    width: 1
+                }
+            },
+            seriesColors: ["#83abc0", "#64d6f4", "#3399ff", "#03597a", "#000000"],
+            categoryAxis: {
+                line: {
+                    color: "#333333"
+                },
+                labels: {
+                    color: BLACK
+                },
+                majorGridLines: {
+                    color: "#d3d3d3",
+                    visible: true
+                }
+            },
+            valueAxis: {
+                line: {
+                    color: "#333333"
+                },
+                labels: {
+                    color: BLACK
+                },
+                majorGridLines: {
+                    color: "#d3d3d3"
+                }
+            }
+        },
+        Web20: {
+            title: {
+                color: BLACK
+            },
+            legend: {
+                labels: {
+                    font: SANS12,
+                    color: BLACK
+                }
+            },
+            seriesDefaults: {
+                labels: {
+                    font: SANS12,
+                    color: BLACK
+                }
+            },
+            chartArea: {
+                border: {
+                    color: "#829cbf",
+                    width: 1
+                }
+            },
+            seriesColors: ["#0e4302", "#64ba36", "#a0beea", "#3460b9", "#2c4072"],
+            categoryAxis: {
+                line: {
+                    color: "#4e75b3"
+                },
+                labels: {
+                    color: BLACK
+                },
+                majorGridLines: {
+                    color: "#cfd9e7",
+                    visible: true
+                }
+            },
+            valueAxis: {
+                line: {
+                    color: "#4e75b3"
+                },
+                labels: {
+                    color: BLACK
+                },
+                majorGridLines: {
+                    color: "#cfd9e7"
+                }
+            }
+        },
+        WebBlue: {
+            title: {
+                color: BLACK
+            },
+            legend: {
+                labels: {
+                    font: SANS12,
+                    color: BLACK
+                }
+            },
+            seriesDefaults: {
+                labels: {
+                    font: SANS12,
+                    color: BLACK
+                }
+            },
+            chartArea: {
+                border: {
+                    color: "#768ca5",
+                    width: 1
+                }
+            },
+            seriesColors: ["#a2b3c7", "#76c8e8", "#358db0", "#426682", "#2d3d4f"],
+            categoryAxis: {
+                line: {
+                    color: "#426682"
+                },
+                labels: {
+                    color: BLACK
+                },
+                majorGridLines: {
+                    color: "#dae2e8",
+                    visible: true
+                }
+            },
+            valueAxis: {
+                line: {
+                    color: "#426682"
+                },
+                labels: {
+                    color: BLACK
+                },
+                majorGridLines: {
+                    color: "#dae2e8"
+                }
+            }
+        },
+        WebBlue: {
+            title: {
+                color: BLACK
+            },
+            legend: {
+                labels: {
+                    font: SANS12,
+                    color: BLACK
+                }
+            },
+            seriesDefaults: {
+                labels: {
+                    font: SANS12,
+                    color: BLACK
+                }
+            },
+            chartArea: {
+                border: {
+                    color: "#768ca5",
+                    width: 1
+                }
+            },
+            seriesColors: ["#a2b3c7", "#76c8e8", "#358db0", "#426682", "#2d3d4f"],
+            categoryAxis: {
+                line: {
+                    color: "#426682"
+                },
+                labels: {
+                    color: BLACK
+                },
+                majorGridLines: {
+                    color: "#dae2e8",
+                    visible: true
+                }
+            },
+            valueAxis: {
+                line: {
+                    color: "#426682"
+                },
+                labels: {
+                    color: BLACK
+                },
+                majorGridLines: {
+                    color: "#dae2e8"
+                }
+            }
+        },
+        Windows7: {
+            title: {
+                color: BLACK
+            },
+            legend: {
+                labels: {
+                    font: SANS12,
+                    color: BLACK
+                }
+            },
+            seriesDefaults: {
+                labels: {
+                    font: SANS12,
+                    color: BLACK
+                }
+            },
+            chartArea: {
+                border: {
+                    color: "#768ca5",
+                    width: 1
+                }
+            },
+            seriesColors: ["#a2b3c7", "#76c8e8", "#358db0", "#426682", "#2d3d4f"],
+            categoryAxis: {
+                line: {
+                    color: "#426682"
+                },
+                labels: {
+                    color: BLACK
+                },
+                majorGridLines: {
+                    color: "#dae2e8",
+                    visible: true
+                }
+            },
+            valueAxis: {
+                line: {
+                    color: "#426682"
+                },
+                labels: {
+                    color: BLACK
+                },
+                majorGridLines: {
+                    color: "#dae2e8"
                 }
             }
         }
