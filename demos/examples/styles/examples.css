@@ -7,9 +7,17 @@ html, body
     text-align: center;
 }
 
+body,
+.skinSelector .t-arrow-down
+{
+    background-image: url('../img/sprite.png');
+}
+
 body
 {
-    background: #FFF url('../img/sprite.png') 0 -761px repeat-x;
+    background-color: #FFF;
+    background-position: 0 -761px;
+    background-repeat: repeat-x;
 }
 
 #header, #footer
@@ -217,6 +225,11 @@ pre.prettyprint
     background: none;
 }
 
+#nav .t-group
+{
+    padding-top: 5px;
+}
+
 #nav li
 {
     padding-bottom: 2px;
@@ -347,7 +360,24 @@ pre.prettyprint
 
 /* skinSelector styles */
 
-.skinSelector
+#exampleHead .skinSelector
 {
+    background: none;
+}
+
+.skinSelector .t-state-default
+{
+    color: #333;
     background: #FFF;
+    border-color: #dedede;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.skinSelector .t-dropdown-wrap .t-arrow-down
+{
+    background-color: transparent;
+    background-position: 100% -693px;
+    background-repeat: no-repeat;
 }
