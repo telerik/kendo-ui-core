@@ -11,29 +11,33 @@
     // Constants ==============================================================
     var BASELINE_MARKER_SIZE = 1,
         BAR = "bar",
+        BLACK = "#000",
         BOTTOM = "bottom",
         CENTER = "center",
         CHANGE = "change",
         COLUMN = "column",
         COORD_PRECISION = 3,
-        DEFAULT_HEIGHT = 400,
-        DEFAULT_WIDTH = 600,
         DATABOUND = "dataBound",
+        DEFAULT_HEIGHT = 400,
         DEFAULT_PRECISION = 6,
-        HORIZONTAL = "horizontal",
+        DEFAULT_WIDTH = 600,
         HEIGHT = "height",
+        HORIZONTAL = "horizontal",
         LEFT = "left",
         NONE = "none",
         OUTSIDE = "outside",
         RIGHT = "right",
+        SANS12 = "12px Verdana, sans-serif",
+        SANS16 = "16px Verdana, sans-serif",
         SVG_NS = "http://www.w3.org/2000/svg",
         TOP = "top",
+        UNDEFINED = "undefined",
         VERTICAL = "vertical",
         WIDTH = "width",
+        WHITE = "#fff",
         X = "x",
         Y = "y",
-        ZERO_THRESHOLD = 0.2,
-        UNDEFINED = "undefined";
+        ZERO_THRESHOLD = 0.2;
 
     // Chart ==================================================================
     var Chart = Component.extend({
@@ -224,19 +228,395 @@
     // Themes
     // **************************
     Chart.Themes = {
-        sunset: {
+        Black: {
+            title: {
+                color: WHITE
+            },
+            legend: {
+                labels: {
+                    font: SANS12,
+                    color: WHITE
+                }
+            },
+            seriesDefaults: {
+                labels: {
+                    font: SANS12,
+                    color: WHITE
+                }
+            },
+            chartArea: {
+                background: "#4f4f4f",
+                border: {
+                    color: "#222222",
+                    width: 1
+                }
+            },
+            seriesColors: ["#f9a319", "#1edee2", "#9eda29", "#ffce00", "#dd007f"],
+            categoryAxis: {
+                line: {
+                    color: WHITE
+                },
+                labels: {
+                    color: WHITE
+                },
+                majorGridLines: {
+                    color: "#854324",
+                    visible: true
+                }
+            },
+            valueAxis: {
+                line: {
+                    color: WHITE
+                },
+                labels: {
+                    color: WHITE
+                },
+                majorGridLines: {
+                    color: "#854324"
+                }
+            }
+        },
+        Default: {
+            title: {
+                color: BLACK
+            },
+            legend: {
+                labels: {
+                    font: SANS12,
+                    color: BLACK
+                }
+            },
+            seriesDefaults: {
+                labels: {
+                    font: SANS12,
+                    color: BLACK
+                }
+            },
+            chartArea: {
+                background: WHITE
+            },
+            seriesColors: ["#f6921e", "#d6de23", "#8bc53f", "#26a9e0", "#9e1f63"],
+            categoryAxis: {
+                line: {
+                    color: BLACK
+                },
+                labels: {
+                    color: BLACK
+                },
+                majorGridLines: {
+                    color: "#aaa",
+                    visible: true
+                }
+            },
+            valueAxis: {
+                line: {
+                    color: BLACK
+                },
+                labels: {
+                    color: BLACK
+                },
+                majorGridLines: {
+                    color: "#aaa"
+                }
+            }
+        },
+        Forest: {
+            title: {
+                color: BLACK
+            },
+            legend: {
+                labels: {
+                    font: SANS12,
+                    color: BLACK
+                }
+            },
+            seriesDefaults: {
+                labels: {
+                    font: SANS12,
+                    color: BLACK
+                }
+            },
+            chartArea: {
+                background: "#d1deb6",
+                border: {
+                    color: "#222222",
+                    width: 1
+                }
+            },
+            seriesColors: ["#4d7924", "#6dba3a", "#efab22", "#f05a28", "#603813"],
+            categoryAxis: {
+                line: {
+                    color: BLACK
+                },
+                labels: {
+                    color: BLACK
+                },
+                majorGridLines: {
+                    color: "#a7bc75",
+                    visible: true
+                }
+            },
+            valueAxis: {
+                line: {
+                    color: BLACK
+                },
+                labels: {
+                    color: BLACK
+                },
+                majorGridLines: {
+                    color: "#a7bc75"
+                }
+            }
+        },
+        Hay: {
+            title: {
+                color: BLACK
+            },
+            legend: {
+                labels: {
+                    font: SANS12,
+                    color: BLACK
+                }
+            },
+            seriesDefaults: {
+                labels: {
+                    font: SANS12,
+                    color: BLACK
+                }
+            },
+            chartArea: {
+                background: "#ececd8",
+                border: {
+                    color: "#bbb99d",
+                    width: 1
+                }
+            },
+            seriesColors: ["#205b02", "#61c407", "#9cd65f", "#bbbe94", "#323323"],
+            categoryAxis: {
+                line: {
+                    color: BLACK
+                },
+                labels: {
+                    color: BLACK
+                },
+                majorGridLines: {
+                    color: "#bfbdac",
+                    visible: true
+                }
+            },
+            valueAxis: {
+                line: {
+                    color: BLACK
+                },
+                labels: {
+                    color: BLACK
+                },
+                majorGridLines: {
+                    color: "#bfbdac"
+                }
+            }
+        },
+        Office2007: {
+            title: {
+                color: BLACK
+            },
+            legend: {
+                labels: {
+                    font: SANS12,
+                    color: BLACK
+                }
+            },
+            seriesDefaults: {
+                labels: {
+                    font: SANS12,
+                    color: BLACK
+                }
+            },
+            chartArea: {
+                background: WHITE
+            },
+            seriesColors: ["#99c62a", "#27adcc", "#2477c9", "#7042b2", "#d83636"],
+            categoryAxis: {
+                line: {
+                    color: BLACK
+                },
+                labels: {
+                    color: BLACK
+                },
+                majorGridLines: {
+                    color: "#868686",
+                    visible: true
+                }
+            },
+            valueAxis: {
+                line: {
+                    color: BLACK
+                },
+                labels: {
+                    color: BLACK
+                },
+                majorGridLines: {
+                    color: "#868686"
+                }
+            }
+        },
+        Office2010Black: {
+            title: {
+                color: WHITE
+            },
+            legend: {
+                labels: {
+                    font: SANS12,
+                    color: WHITE
+                }
+            },
+            seriesDefaults: {
+                labels: {
+                    font: SANS12,
+                    color: WHITE
+                }
+            },
+            chartArea: {
+                background: "#6f6f6f",
+                border: {
+                    color: "#4b4b4b",
+                    width: 1
+                }
+            },
+            seriesColors: ["#99c62a", "#27adcc", "#2477c9", "#7042b2", "#d83636"],
+            categoryAxis: {
+                line: {
+                    color: WHITE
+                },
+                labels: {
+                    color: WHITE
+                },
+                majorGridLines: {
+                    color: "#999",
+                    visible: true
+                }
+            },
+            valueAxis: {
+                line: {
+                    color: WHITE
+                },
+                labels: {
+                    color: WHITE
+                },
+                majorGridLines: {
+                    color: "#999"
+                }
+            }
+        },
+        Office2010Blue: {
+            title: {
+                color: "#384e73"
+            },
+            legend: {
+                labels: {
+                    font: SANS12,
+                    color: "#384e73"
+                }
+            },
+            seriesDefaults: {
+                labels: {
+                    font: SANS12,
+                    color: "#384e73"
+                }
+            },
+            chartArea: {
+                background: WHITE,
+                border: {
+                    color: "#688caf",
+                    width: 1
+                }
+            },
+            seriesColors: ["#99c62a", "#27adcc", "#2477c9", "#7042b2", "#d83636"],
+            categoryAxis: {
+                line: {
+                    color: "#384e73"
+                },
+                labels: {
+                    color: "#384e73"
+                },
+                majorGridLines: {
+                    color: "#d1dbe5",
+                    visible: true
+                }
+            },
+            valueAxis: {
+                line: {
+                    color: "#384e73"
+                },
+                labels: {
+                    color: "#384e73"
+                },
+                majorGridLines: {
+                    color: "#d1dbe5"
+                }
+            }
+        },
+        Office2010Silver: {
+            title: {
+                color: "#3b3b3b"
+            },
+            legend: {
+                labels: {
+                    font: SANS12,
+                    color: "#3b3b3b"
+                }
+            },
+            seriesDefaults: {
+                labels: {
+                    font: SANS12,
+                    color: "#3b3b3b"
+                }
+            },
+            chartArea: {
+                background: WHITE,
+                border: {
+                    color: "#a4abb2",
+                    width: 1
+                }
+            },
+            seriesColors: ["#99c62a", "#27adcc", "#2477c9", "#7042b2", "#d83636"],
+            categoryAxis: {
+                line: {
+                    color: "#3b3b3b"
+                },
+                labels: {
+                    color: "#3b3b3b"
+                },
+                majorGridLines: {
+                    color: "#dbdfe4",
+                    visible: true
+                }
+            },
+            valueAxis: {
+                line: {
+                    color: "#3b3b3b"
+                },
+                labels: {
+                    color: "#3b3b3b"
+                },
+                majorGridLines: {
+                    color: "#dbdfe4"
+                }
+            }
+        },
+        Sunset: {
             title: {
                 color: "#854324"
             },
             legend: {
                 labels: {
-                    font: "12px sans-serif",
+                    font: SANS12,
                     color: "#854324"
                 }
             },
             seriesDefaults: {
                 labels: {
-                    font: "12px sans-serif",
+                    font: SANS12,
                     color: "#854324"
                 }
             },
@@ -255,7 +635,7 @@
                 labels: {
                     color: "#854324"
                 },
-                majorGridlines: {
+                majorGridLines: {
                     color: "#bbb99d",
                     visible: true
                 }
@@ -267,7 +647,7 @@
                 labels: {
                     color: "#854324"
                 },
-                majorGridlines: {
+                majorGridLines: {
                     color: "#bbb99d"
                 }
             }
@@ -471,9 +851,9 @@
         options: {
             width: DEFAULT_WIDTH,
             height: DEFAULT_HEIGHT,
-            background: "#fff",
+            background: WHITE,
             border: {
-                color: "#000",
+                color: BLACK,
                 width: 0
             }
         },
@@ -531,7 +911,7 @@
             margin: { },
             padding: { },
             border: {
-                color: "#000",
+                color: BLACK,
                 width: 0
             },
             background: "",
@@ -622,7 +1002,7 @@
 
         options: {
             font: "10pt Verdana, sans-serif",
-            color: "#000",
+            color: BLACK,
             align: LEFT,
             vAlign: ""
         },
@@ -703,7 +1083,7 @@
         },
 
         options: {
-            font: "16px Verdana, sans-serif",
+            font: SANS16,
             aboveAxis: true,
             position: "outsideEnd",
             margin: 2,
@@ -781,8 +1161,8 @@
 
         options: {
             text: "",
-            font: "16px Verdana, sans-serif",
-            color: "#000",
+            font: SANS16,
+            color: BLACK,
             position: TOP,
             align: CENTER,
             margin: 5,
@@ -828,7 +1208,7 @@
             margin: 10,
             padding: 5,
             border: {
-                color: "#000",
+                color: BLACK,
                 width: 0
             },
             background: "",
@@ -1037,7 +1417,7 @@
             labels: { },
             line: {
                 width: 1,
-                color: "#000"
+                color: BLACK
             },
             majorTickType: OUTSIDE,
             majorTickSize: 4,
@@ -1047,7 +1427,7 @@
             minorGridLines: {
                 visible: false,
                 width: 1,
-                color: "#000"
+                color: BLACK
             }
         },
 
@@ -1150,7 +1530,7 @@
             majorGridLines: {
                 visible: true,
                 width: 1,
-                color: "#000"
+                color: BLACK
             }
         },
 
@@ -1440,7 +1820,7 @@
             majorGridLines: {
                 visible: false,
                 width: 1,
-                color: "#000"
+                color: BLACK
             }
         },
 
@@ -1671,9 +2051,9 @@
         },
 
         options: {
-            color: "#fff",
+            color: WHITE,
             border: {
-                color: "#000",
+                color: BLACK,
                 width: 0
             },
             isVertical: true
@@ -2240,7 +2620,7 @@
             x: 0,
             y: 0,
             baseline: 0,
-            font: "16px Verdana, sans-serif"
+            font: SANS16
         }
     });
 
@@ -2263,7 +2643,7 @@
         },
 
         options: {
-            fill: "#000"
+            fill: BLACK
         },
 
         renderPoints: function() {
@@ -2372,8 +2752,8 @@
         options: {
             x: 0,
             y: 0,
-            font: "16px Verdana, sans-serif",
-            color: "#000"
+            font: SANS16,
+            color: BLACK
         }
     });
 
@@ -2398,7 +2778,7 @@
         },
 
         options: {
-            fill: "#fff"
+            fill: WHITE
         },
 
         renderPoints: function() {
