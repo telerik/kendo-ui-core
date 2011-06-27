@@ -18,5 +18,9 @@ tests.push(
     {
         page: "grid/selection.html",
         title: "grid selection"
+    },
+    {
+        page: "grid/grouping.html",
+        title: "grid grouping"
     }
 );
