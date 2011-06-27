@@ -61,10 +61,6 @@
             that.close();
         },
 
-        _click: function(e) {
-            this._accept($(e.currentTarget));
-        },
-
         _change: function() {
             var that = this,
                 value = that.value();
@@ -76,6 +72,18 @@
                 that.element.trigger(CHANGE);
 
                 that.previous = value;
+            }
+        },
+
+        _click: function(e) {
+            this._accept($(e.currentTarget));
+        },
+
+        _close: function() {
+            var that = this;
+
+            if (that.popup.visible() && !that.trigger("close")) {
+                that.close();
             }
         },
 
@@ -103,6 +111,15 @@
                   .hide();
             }
         },
+
+        _open: function() {
+            var that = this;
+
+            if (!that.ul[0].firstChild || !that.trigger("open")) {
+                that.open();
+            }
+        },
+
 
         _scroll: function (item) {
 
