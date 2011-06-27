@@ -73,7 +73,6 @@
                 .delegate(clickableItems, "mouseleave", function () { $(this).removeClass(TSTATEHOVER); })
                 .delegate(clickableItems, CLICK, proxy(that._nodeClick, that))
                 .delegate("div:not(.t-state-disabled) .t-in", "dblclick", proxy(that._toggleButtonClick, that))
-                .delegate(":checkbox", CLICK, proxy(that._checkboxClick, that))
                 .delegate(".t-plus,.t-minus", CLICK, proxy(that._toggleButtonClick, that));
 
             if (options.dragAndDrop) {
@@ -314,45 +313,6 @@
 
         _toggleButtonClick: function (e) {
             this.toggle($(e.target).closest(".t-item"));
-        },
-
-        _checkboxClick: function (e) {
-            var that = this,
-                checkbox = $(e.target),
-                checked = checkbox.is(":checked"),
-                isEventPrevented = that._trigger("checked", checkbox, { checked: checked });
-
-            if (!isEventPrevented) {
-                that.check(checkbox, checked);
-            } else {
-                e.preventDefault();
-            }
-
-            return isEventPrevented;
-        },
-
-        check: function (items, checked) {
-            this._processItems(items, function(index, item) {
-                var that = this,
-                    checkboxHolder = $("> div > .t-checkbox", item),
-                    arrayName = this.element.id + "_checkedNodes",
-                    index = checkboxHolder.find(":input[name='" + arrayName + ".Index']").val();
-
-                checkboxHolder.find(":input[name='" + arrayName + "[" + index + "].Text']").remove();
-                checkboxHolder.find(":input[name='" + arrayName + "[" + index + "].Value']").remove();
-
-                checkboxHolder.find(":checkbox")
-                               .attr({
-                                   checked: checked ? "checked" : "",
-                                   value: checked
-                               });
-
-                if (checked) {
-                    $(t.treeview.getNodeInputsHtml(this.getItemValue(item), this.getItemText(item), arrayName, index))
-                        .appendTo(checkboxHolder);
-                }
-
-            });
         },
 
         getItemText: function (item) {
