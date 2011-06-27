@@ -1,6 +1,7 @@
 (function ($) {
     var kendo = window.kendo,
         ui = kendo.ui,
+        extend = $.extend,
         template = kendo.template,
         Component = kendo.ui.Component,
         proxy = $.proxy,
@@ -41,6 +42,10 @@
             Component.prototype.init.call(that, element, options);
 
             options = that.options;
+
+            if (options.animation === false) {
+                options.animation = { expand: { show: true, effects: {} }, collapse: { hide:true, effects: {} } };
+            }
 
             that.rendering = new TreeViewRendering(that);
             
@@ -92,7 +97,19 @@
         },
 
         options: {
-            dataSource: {}
+            dataSource: {},
+            animation: {
+                expand: {
+                    effects: "expandVertical",
+                    duration: 200,
+                    show: true
+                },
+                collapse: {
+                    duration: 100,
+                    show: false,
+                    hide: true
+                }
+            },
         },
 
         _wrapper: function() {
@@ -249,26 +266,35 @@
                 return;
             }
 
-            if (item.data("animating") || item.find("> div > .t-state-disabled").length) {
+            if (item.find("> div > .t-state-disabled").length) {
                 return;
             }
-
-            item.data("animating", true);
 
             var that = this,
                 contents = item.find(NODECONTENTS),
                 isExpanding = !contents.is(":visible")
-                eventType = isExpanding ? "expand" : "collapse";
+                eventType = isExpanding ? "expand" : "collapse",
+                animationSettings = that.options.animation,
+                animation = animationSettings.expand,
+                collapse = animationSettings.collapse,
+                hasCollapseAnimation = collapse && 'effects' in collapse;
+
+            if (!isExpanding) {
+                animation = hasCollapseAnimation ? collapse : extend({ reverse: true }, animation, { show: false, hide: true });
+            }
 
             if (contents.children().length > 0 && item.data("loaded") !== false) {
                 if (!that._trigger(eventType, item)) {
                     item.find("> div > .t-icon")
                         .toggleClass("t-minus", isExpanding)
                         .toggleClass("t-plus", !isExpanding);
+                        
+                    if (!isExpanding) {
+                        contents.css("height", contents.height())
+                            .css("height");
+                    }
 
-                    item.data("animating", false);
-                    /// TODO: animate
-                    contents[isExpanding ? "show" : "hide"]();
+                    contents.kendoStop(true, true).kendoAnimate(animation);
                 }
             } else if (isExpanding /* && this.isAjax() */ && (contents.length == 0 || item.data("loaded") === false)) {
                 if (!that._trigger(eventType, item)) {
