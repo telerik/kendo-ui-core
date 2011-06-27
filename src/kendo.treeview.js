@@ -146,29 +146,32 @@
 
             items.each(function(i, node) {
                     var qNode = $(node),
-                        firstChild = node.firstChild, wrapper,
                         item = {
                             index: i,
+                            text: "",
                             expanded: qNode.data("expanded") === true
-                        };
+                        },
+                        wrapper, currentNode, innerWrapper, tmp;
 
-                    $(this).addClass(helpers.wrapperCssClass(group, item));
+                    qNode.addClass(helpers.wrapperCssClass(group, item));
 
-                    if (firstChild.nodeType == 3) {
-                        wrapper = $(templates.itemWrapper(extend({
+                    // render (almost) empty template
+                    wrapper = $(templates.itemWrapper(extend({
                                 toggleButton: qNode.find(">ul").length ? templates.toggleButton : empty,
-                                checkbox: empty,
-                                image: empty,
-                                sprite: empty,
-                                value: empty,
-                                item: extend({
-                                    text: $.trim(firstChild.nodeValue)
-                                }, item),
+                                checkbox: empty, image: empty, sprite: empty, value: empty,
+                                item: item,
                                 group: group
-                            }, that.rendering.helpers)));
+                            }, helpers)))
+                            .prependTo(node);
 
-                        node.removeChild(firstChild);
-                        wrapper.prependTo(node);
+                    // move all non-group content in the t-in container
+                    currentNode = wrapper[0].nextSibling;
+                    innerWrapper = wrapper.find(".t-in")[0];
+
+                    while (currentNode && currentNode.nodeName.toLowerCase() != "ul") {
+                        tmp = currentNode;
+                        currentNode = currentNode.nextSibling;
+                        innerWrapper.appendChild(tmp);
                     }
 
                     that._group(qNode);

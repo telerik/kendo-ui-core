@@ -61,6 +61,15 @@
                 equals(wrapper.find("span.t-in").text(), "item");
             });
 
+            test("moves arbitrary content in the text wrapper", function() {
+                var element = treeviewFromHtml("<ul><li>item<span class='status'></span></li></ul>"),
+                    wrapper = element.find("div:first");
+
+                equals(wrapper.find("span.t-in").text(), "item");
+                equals(wrapper.find("span.status").length, 1);
+                ok(wrapper.find("span.status").parent().hasClass("t-in"));
+            });
+
             module("group");
 
             var rendering = new kendo.ui.TreeView.TreeViewRendering();
