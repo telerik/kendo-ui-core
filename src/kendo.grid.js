@@ -123,7 +123,7 @@
             var that = this,
                 element = that.element;
 
-            element.bind({
+            that.wrapper.bind({
                 focus: function() {
                     that.current(element.find(FIRST_CELL_SELECTOR));
                 },
