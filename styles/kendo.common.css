@@ -3247,14 +3247,9 @@ width:628px;
     position: absolute;
 }
 
-.t-scrollbar div
-{
-    width: 1px;
-    height: 1px;
-}
-
 .t-scrollbar-vertical
 {
+    overflow-x:hidden;
     top: 0;
     right: 0;
     height: 100%;
