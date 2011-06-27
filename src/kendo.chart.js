@@ -3370,7 +3370,11 @@
             for (property in source) {
                 propValue = source[property];
                 if (typeof propValue === "object" && propValue !== null && propValue.constructor !== Array) {
-                    destination[property] = destination[property] || {};
+                    if (typeof(destination[property]) === "object") {
+                        destination[property] = destination[property] || {};
+                    } else {
+                        destination[property] = {};
+                    }
                     deepExtend(destination[property], propValue);
                 } else if (typeof propValue !== "undefined") {
                     destination[property] = propValue;
