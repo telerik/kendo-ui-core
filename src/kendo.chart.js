@@ -276,7 +276,7 @@
                 }
             }
         },
-        default: {
+        "default": {
             title: {
                 color: BLACK
             },
@@ -1030,6 +1030,7 @@
             }
         }
     };
+
 
     // **************************
     // View Model
