@@ -42,12 +42,23 @@
 
                 ok(element.find("ul:first").is(".t-treeview-lines"));
                 ok(element.find("ul:last").is(":not(.t-treeview-lines)"));
+                ok(element.find("ul:last").is(".t-group"));
             });
 
             test("collapsed groups", function() {
                 var element = treeviewFromHtml("<ul><li data-expanded='false'>item<ul><li>subitem</li></ul></li></ul>");
 
                 equals(element.find("ul:last").css("display"), "none");
+            });
+
+            test("node wrappers", function() {
+                var element = treeviewFromHtml("<ul><li>item  </li></ul>"),
+                    wrapper = element.find("div:first");
+
+                equals(wrapper.length, 1);
+                ok(wrapper.hasClass("t-top"));
+                equals(wrapper.find("span.t-in").length, 1);
+                equals(wrapper.find("span.t-in").text(), "item");
             });
 
             module("group");
@@ -382,18 +393,15 @@
                 equal($item.find(".t-icon.t-minus").length, 0);
             });
 
-            test("renders plus icon on loadOnDemand items if treeview is AJAX-bound", function() {
+            test("does not render group, if there are no sub-items", function() {
                 var $item = $(rendering.renderItem({
                     item: {
-                        text: "foo",
-                        loadOnDemand: true
+                        text: "foo"
                     },
-                    treeview: {
-                        isAjax: true
-                    }
+                    treeview: {}
                 }));
 
-                equal($item.find(".t-icon.t-plus").length, 1);
+                equal($item.find(".t-group").length, 0);
             });
 
             module("checkboxes");

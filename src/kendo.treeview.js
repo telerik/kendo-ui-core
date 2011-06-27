@@ -59,9 +59,7 @@
                         treeview: {}
                     })).children("ul");
                 } else {
-                    that._groups();
-
-                    that._items();
+                    that._group(that.wrapper);
                 }
             } else {
                 // otherwise just initialize properties
@@ -119,20 +117,62 @@
             that.root = root;
         },
 
-        _groups: function() {
-            this.root
-                .addClass("t-treeview-lines t-group")
-                .find("ul")
-                    .each(function() {
-                        var group = $(this);
-                        group.css("display", group.parent().data("expanded") === true ? "" : "none");
-                    });
+        _group: function(item) {
+            var that = this,
+                isFirstLevel = item.is(".t-treeview"),
+                group = {
+                    isFirstLevel: isFirstLevel,
+                    isExpanded: isFirstLevel || item.data("expanded") === true
+                },
+                groupElement = item.find("> ul");
+
+            groupElement 
+                .addClass(that.rendering.helpers.groupCssClass(group))
+                .css("display", group.isExpanded ? "" : "none");
+
+            that._items(groupElement, group); 
         },
 
-        _items: function() {
-            var that = this;
+        _items: function(groupElement, group) {
+            var that = this,
+                helpers = that.rendering.helpers,
+                templates = TreeView.templates,
+                empty = templates.empty,
+                items = groupElement.find("> li");
 
-            that.element.find("li").addClass("t-item");
+            group = extend({
+                length: items.length
+            }, group);
+
+            items.each(function(i, node) {
+                    var qNode = $(node),
+                        firstChild = node.firstChild, wrapper,
+                        item = {
+                            index: i,
+                            expanded: qNode.data("expanded") === true
+                        };
+
+                    $(this).addClass(helpers.wrapperCssClass(group, item));
+
+                    if (firstChild.nodeType == 3) {
+                        wrapper = $(templates.itemWrapper(extend({
+                                toggleButton: qNode.find(">ul").length ? templates.toggleButton : empty,
+                                checkbox: empty,
+                                image: empty,
+                                sprite: empty,
+                                value: empty,
+                                item: extend({
+                                    text: $.trim(firstChild.nodeValue)
+                                }, item),
+                                group: group
+                            }, that.rendering.helpers)));
+
+                        node.removeChild(firstChild);
+                        wrapper.prependTo(node);
+                    }
+
+                    that._group(qNode);
+                });
         },
 
         _processItems: function(items, callback) {
@@ -637,8 +677,9 @@
             return templates.item($.extend(options, {
                 image: item.imageUrl ? templates.image : empty,
                 sprite: item.spriteCssClass ? templates.sprite : empty,
+                itemWrapper: templates.itemWrapper,
                 value: item.value ? templates.value : empty,
-                toggleButton: ((item.loadOnDemand && treeview.isAjax) || item.items) ? templates.toggleButton : empty,
+                toggleButton: item.items ? templates.toggleButton : empty,
                 checkbox: (treeview.showCheckboxes && item.checkable !== false) ? templates.checkbox : empty,
                 checkboxValues: item.checked === true ? templates.checkboxValues : empty,
                 subGroup: $.proxy(this.renderGroup, this)
@@ -679,15 +720,18 @@
                 "<%= renderItems(data); %>" +
             "</ul>"
         ),
+        itemWrapper: template(
+            "<div class='<%= cssClass(group, item) %>'>" +
+                "<%= toggleButton(data) %>" +
+                "<%= checkbox(data) %>" +
+                "<<%= tag(item) %> class='<%= textClass(item) %>'<%= textAttributes(item) %>>" +
+                    "<%= image(item) %><%= sprite(item) %><%= text(item) %><%= value(item) %>" +
+                "</<%= tag(item) %>>" +
+            "</div>"
+        ),
         item: template(
             "<li class='<%= wrapperCssClass(group, item) %>'>" +
-                "<div class='<%= cssClass(group, item) %>'>" +
-                    "<%= toggleButton(data) %>" +
-                    "<%= checkbox(data) %>" +
-                    "<<%= tag(item) %> class='<%= textClass(item) %>'<%= textAttributes(item) %>>" +
-                        "<%= image(item) %><%= sprite(item) %><%= text(item) %><%= value(item) %>" +
-                    "</<%= tag(item) %>>" +
-                "</div>" +
+                "<%= itemWrapper(data) %>" +
                 "<% if (item.items) { %>" +
                 "<%= subGroup({ items: item.items, treeview: treeview, group: { isExpanded: item.expanded } }) %>" +
                 "<% } %>" +
