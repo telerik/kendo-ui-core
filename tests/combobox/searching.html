@@ -50,7 +50,7 @@
                 });
 
                 combobox.text("b");
-                combobox.search();
+                combobox.search("b");
 
                 ok(combobox.ul.children().eq(1).hasClass("t-state-focused"));
             });
@@ -61,7 +61,7 @@
                 });
 
                 combobox.text("1");
-                combobox.search();
+                combobox.search("1");
 
                 ok(combobox.ul.children().eq(1).hasClass("t-state-focused"));
             });
@@ -72,7 +72,7 @@
                 });
 
                 combobox.text("0");
-                combobox.search();
+                combobox.search("0");
 
                 ok(combobox.ul.children().eq(1).hasClass("t-state-focused"));
             });
@@ -83,7 +83,7 @@
                 });
 
                 combobox.text("f");
-                combobox.search();
+                combobox.search("f");
 
                 equal(combobox.text(), "f");
             });
@@ -94,7 +94,7 @@
                 });
 
                 combobox.select(1);
-                combobox.search();
+                combobox.search("f");
 
                 ok(combobox._current);
             });
@@ -105,7 +105,7 @@
                 });
 
                 combobox.text("");
-                combobox.search();
+                combobox.search("");
 
                 ok(true);
             });
@@ -122,7 +122,7 @@
                 });
 
                 combobox.text("f");
-                combobox.search();
+                combobox.search("f");
 
                 stop(1000);
             });
@@ -138,7 +138,7 @@
                 });
 
                 combobox.text("fooooo");
-                combobox.search();
+                combobox.search("fooooo");
 
                 stop(1000);
 
@@ -155,7 +155,7 @@
 
                 combobox.options.filter = "startswith";
                 combobox.text("f");
-                combobox.search();
+                combobox.search("f");
 
                 equal(combobox.ul.children().length, 1);
             });
@@ -172,7 +172,7 @@
 
                 combobox.options.filter = "startswith";
                 combobox.text("f");
-                combobox.search();
+                combobox.search("f");
 
                 stop(1000);
             });
@@ -184,7 +184,7 @@
 
                 combobox.options.filter = "startswith";
                 combobox.text("b");
-                combobox.search();
+                combobox.search("b");
                 combobox.ul.children().eq(1).click();
 
                 equal(combobox.ul.children().length, 2);
@@ -199,7 +199,7 @@
 
                 combobox.options.filter = "startswith";
                 combobox.text("b");
-                combobox.search();
+                combobox.search("b");
                 combobox.ul.children().eq(1).click();
                 combobox.open();
 
@@ -214,7 +214,7 @@
 
                 combobox.options.filter = "startswith";
                 combobox.text("b");
-                combobox.search();
+                combobox.search("b");
                 combobox.ul.children().eq(1).click();
 
                 combobox.open();
@@ -244,7 +244,7 @@
 
                 combobox.value("1");
                 combobox.input.val("f");
-                combobox.search();
+                combobox.search("f");
 
                 equal(combobox.input.val(), "f");
             });
@@ -332,7 +332,7 @@
                 });
 
                 combobox.input.val("f");
-                combobox.search();
+                combobox.search("f");
 
                 setTimeout(function() {
                     ok(combobox.ul.children().eq(0).hasClass("t-state-focused"));
