@@ -604,6 +604,54 @@
                 }
             }
         },
+        Outlook: {
+            title: {
+                color: BLACK
+            },
+            legend: {
+                labels: {
+                    font: SANS12,
+                    color: BLACK
+                }
+            },
+            seriesDefaults: {
+                labels: {
+                    font: SANS12,
+                    color: BLACK
+                }
+            },
+            chartArea: {
+                background: "#d6e5f3",
+                border: {
+                    color: "#688caf",
+                    width: 1
+                }
+            },
+            seriesColors: ["#231f20", "#1b75bb", "#7da5e0", "#f9ec31", "#faaf40"],
+            categoryAxis: {
+                line: {
+                    color: BLACK
+                },
+                labels: {
+                    color: BLACK
+                },
+                majorGridLines: {
+                    color: "#7da5e0",
+                    visible: true
+                }
+            },
+            valueAxis: {
+                line: {
+                    color: BLACK
+                },
+                labels: {
+                    color: BLACK
+                },
+                majorGridLines: {
+                    color: "#7da5e0"
+                }
+            }
+        },
         Sunset: {
             title: {
                 color: "#854324"
