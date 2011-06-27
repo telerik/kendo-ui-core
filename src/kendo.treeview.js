@@ -20,6 +20,7 @@
         CLICK = "click",
         CHANGE = "change",
         TSTATEHOVER = "t-state-hover",
+        VISIBLE = ":visible",
         NODECONTENTS = ">.t-group, >.t-content, >.t-animation-container>.t-group, >.t-animation-container>.t-content";
 
     var TreeView = Component.extend({
@@ -144,7 +145,7 @@
             this._processItems(items, function (index, item) {
                 var contents = item.find(NODECONTENTS);
 
-                if (contents.length > 0 && !contents.is(":visible")) {
+                if (contents.length > 0 && !contents.is(VISIBLE)) {
                     this.toggle(item);
                 }
             });
@@ -154,7 +155,7 @@
             this._processItems(items, function (index, item) {
                 var contents = item.find(NODECONTENTS);
 
-                if (contents.length > 0 && contents.is(":visible")) {
+                if (contents.length > 0 && contents.is(VISIBLE)) {
                     this.toggle(item);
                 }
             });
@@ -164,7 +165,7 @@
             enable = enable !== false;
 
             this._processItems(items, function (index, item) {
-                var isCollapsed = !item.find("> .t-group, > .t-content").is(":visible");
+                var isCollapsed = !item.find(NODECONTENTS).is(VISIBLE);
 
                 if (!enable) {
                     this.collapse(item);
@@ -191,20 +192,6 @@
                 item.find(".t-group").remove();
                 treeView.ajaxRequest(item);
             });
-        },
-
-        _shouldNavigate: function (node) {
-            var contents = node.closest(".t-item").find(NODECONTENTS),
-                href = node.attr("href"),
-                result;
-
-            if (href) {
-                result = href == "#" || href.indexOf("#" + this.element.id + "-") >= 0;
-            } else {
-                result = contents.length > 0 && contents.children().length == 0;
-            }
-
-            return !result;
         },
 
         _trigger: function (eventName, node) {
@@ -256,7 +243,7 @@
 
             var that = this,
                 contents = item.find(NODECONTENTS),
-                isExpanding = !contents.is(":visible")
+                isExpanding = !contents.is(VISIBLE)
                 eventType = isExpanding ? "expand" : "collapse",
                 animationSettings = that.options.animation,
                 animation = animationSettings.expand,
@@ -303,7 +290,8 @@
 
         check: function (items, checked) {
             this._processItems(items, function(index, item) {
-                var checkboxHolder = $("> div > .t-checkbox", item),
+                var that = this,
+                    checkboxHolder = $("> div > .t-checkbox", item),
                     arrayName = this.element.id + "_checkedNodes",
                     index = checkboxHolder.find(":input[name='" + arrayName + ".Index']").val();
 
@@ -700,7 +688,9 @@
                         "<%= image(item) %><%= sprite(item) %><%= text(item) %><%= value(item) %>" +
                     "</<%= tag(item) %>>" +
                 "</div>" +
+                "<% if (item.items) { %>" +
                 "<%= subGroup({ items: item.items, treeview: treeview, group: { isExpanded: item.expanded } }) %>" +
+                "<% } %>" +
             "</li>"
         ),
         image: template("<img class='t-image' alt='' src='<%= imageUrl %>' />"),
