@@ -82,6 +82,17 @@
                 equal(dropdownlist.previous, 1);
             });
 
+            test("select item with index -1 should not select anything", function() {
+                var dropdownlist = new DropDownList(input, [{text: "foo", value: 1}, {text:2, value:2}]);
+
+                dropdownlist.select(0);
+
+                dropdownlist.select(-1);
+
+                equal(dropdownlist.value(), "1");
+                equal(dropdownlist.text(), "foo");
+            });
+
             test("open should open popup", function () {
                 var dropdownlist = input.kendoDropDownList(data).data("kendoDropDownList");
 

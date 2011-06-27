@@ -374,6 +374,10 @@
             }
 
             if (typeof li === "number") {
+                if (li < 0) {
+                    return idx;
+                }
+
                 li = $(children[li]);
             }
 
