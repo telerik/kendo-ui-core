@@ -37,7 +37,7 @@ function processfile(file) {
                 selfCSS = cssMatches ? cssMatches[1].trimLeft() : '',
                 rowSeparator = /[\r\n]+\s+/,
                 scriptStripper1 = /"(.*?)src/g,
-                scriptStripper2 = /src="([^"]*)"/g,
+                scriptStripper2 = /src="[.\/]*([^"]*)"/g,
                 cssStripper = /href="[.\/]*([^"]*)"/g;
 
             selfScripts.trim().split(rowSeparator).forEach(function(item) {

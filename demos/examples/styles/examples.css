@@ -278,6 +278,7 @@ pre.prettyprint
 {
     border: 0;
     background: none;
+    filter: none;
 }
 
 #nav li li .t-state-selected:after,
@@ -296,4 +297,57 @@ pre.prettyprint
 #codeStrip
 {
     display: none;
+    background: #f3f3f3;
+    border: 1px solid #dedede;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+#codeStrip .t-state-default
+{
+    color: #2175bd;
+    background: transparent;
+    border-color: #F3F3F3;
+}
+
+#codeStrip .t-link
+{
+    padding: 10px 20px;
+}
+
+#codeStrip .t-state-default .t-link
+{
+    color: #2175bd;
+}
+
+#codeStrip .t-state-active .t-link
+{
+    color: #000;
+}
+
+#codeStrip .t-state-hover .t-link
+{
+    color: #01559d;
+    text-decoration: underline;
+}
+
+#codeStrip .t-state-active,
+#codeStrip .t-content
+{
+    background: #FFF;
+    border-color: #e8e8e8;
+}
+
+#codeStrip .t-content
+{
+    padding: 20px;
+}
+
+/* skinSelector styles */
+
+.skinSelector
+{
+    background: #FFF;
 }
