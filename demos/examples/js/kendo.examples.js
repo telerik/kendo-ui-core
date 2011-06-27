@@ -42,15 +42,19 @@
                 exampleName.kendoAnimate(transitionEffects, 300, function() {
                     $(".exampleName").empty().html(title);
 
-                    if (title != "Overview" && !tools.is(":visible"))
-                            tools.show().kendoAnimate(transitionEffects, 300, true);
+                    setTimeout(function() {
+                        if (title != "Overview" && !tools.is(":visible"))
+                                tools.show().kendoAnimate(transitionEffects, 300, true);
 
-                    exampleName.kendoAnimate(transitionEffects, 300, true);
+                        exampleName.kendoAnimate(transitionEffects, 300, true);
+                    }, 100);
                 });
 
                 exampleBody.kendoAnimate(transitionEffects, 300, function() {
                     exampleBody.empty().html(Application.body(html));
-                    exampleBody.kendoAnimate(transitionEffects, 300, true);
+                    setTimeout(function() {
+                        exampleBody.kendoAnimate(transitionEffects, 300, true);
+                    }, 100);
                 });
             });
         },
@@ -165,7 +169,9 @@
                                 skinLink.remove();
                                 example[0].style.cssText = example[0].style.cssText;
 
-                                example.kendoAnimate(transitionEffects, 300, true);
+                                setTimeout(function() {
+                                    example.kendoAnimate(transitionEffects, 300, true);
+                                }, 100);
                             });
                         });
             });
