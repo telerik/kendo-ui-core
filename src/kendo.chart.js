@@ -47,7 +47,7 @@
 
             Component.fn.init.call(chart, element);
 
-            chart.options = deepExtend(chart.options, theme ? Chart.Themes[theme] : { }, options);
+            chart.options = deepExtend(chart.options, theme ? Chart.Themes[theme] || Chart.Themes[theme.toLowerCase()] : { }, options);
 
             chart.bind([DATABOUND], chart.options);
             chart._viewFactory = chart._supportsSVG() ? new SVGFactory() : new VMLFactory();
@@ -228,7 +228,7 @@
     // Themes
     // **************************
     Chart.Themes = {
-        Black: {
+        black: {
             title: {
                 color: WHITE
             },
@@ -276,7 +276,7 @@
                 }
             }
         },
-        Default: {
+        default: {
             title: {
                 color: BLACK
             },
@@ -320,7 +320,7 @@
                 }
             }
         },
-        Forest: {
+        forest: {
             title: {
                 color: BLACK
             },
@@ -368,7 +368,7 @@
                 }
             }
         },
-        Hay: {
+        hay: {
             title: {
                 color: BLACK
             },
@@ -416,7 +416,7 @@
                 }
             }
         },
-        Office2007: {
+        office2007: {
             title: {
                 color: BLACK
             },
@@ -460,7 +460,7 @@
                 }
             }
         },
-        Office2010Black: {
+        office2010black: {
             title: {
                 color: WHITE
             },
@@ -508,7 +508,7 @@
                 }
             }
         },
-        Office2010Blue: {
+        office2010blue: {
             title: {
                 color: "#384e73"
             },
@@ -556,7 +556,7 @@
                 }
             }
         },
-        Office2010Silver: {
+        office2010silver: {
             title: {
                 color: "#3b3b3b"
             },
@@ -604,7 +604,7 @@
                 }
             }
         },
-        Outlook: {
+        outlook: {
             title: {
                 color: BLACK
             },
@@ -652,7 +652,7 @@
                 }
             }
         },
-        Simple: {
+        simple: {
             title: {
                 color: BLACK
             },
@@ -699,7 +699,7 @@
                 }
             }
         },
-        Sitefinity: {
+        sitefinity: {
             title: {
                 color: BLACK
             },
@@ -746,7 +746,7 @@
                 }
             }
         },
-        Sunset: {
+        sunset: {
             title: {
                 color: "#854324"
             },
@@ -794,7 +794,7 @@
                 }
             }
         },
-        Telerik: {
+        telerik: {
             title: {
                 color: BLACK
             },
@@ -841,7 +841,7 @@
                 }
             }
         },
-        Vista: {
+        vista: {
             title: {
                 color: BLACK
             },
@@ -888,7 +888,7 @@
                 }
             }
         },
-        Web20: {
+        web20: {
             title: {
                 color: BLACK
             },
@@ -935,7 +935,7 @@
                 }
             }
         },
-        WebBlue: {
+        webblue: {
             title: {
                 color: BLACK
             },
@@ -982,54 +982,7 @@
                 }
             }
         },
-        WebBlue: {
-            title: {
-                color: BLACK
-            },
-            legend: {
-                labels: {
-                    font: SANS12,
-                    color: BLACK
-                }
-            },
-            seriesDefaults: {
-                labels: {
-                    font: SANS12,
-                    color: BLACK
-                }
-            },
-            chartArea: {
-                border: {
-                    color: "#768ca5",
-                    width: 1
-                }
-            },
-            seriesColors: ["#a2b3c7", "#76c8e8", "#358db0", "#426682", "#2d3d4f"],
-            categoryAxis: {
-                line: {
-                    color: "#426682"
-                },
-                labels: {
-                    color: BLACK
-                },
-                majorGridLines: {
-                    color: "#dae2e8",
-                    visible: true
-                }
-            },
-            valueAxis: {
-                line: {
-                    color: "#426682"
-                },
-                labels: {
-                    color: BLACK
-                },
-                majorGridLines: {
-                    color: "#dae2e8"
-                }
-            }
-        },
-        Windows7: {
+        windows7: {
             title: {
                 color: BLACK
             },
@@ -2830,7 +2783,7 @@
             );
         },
 
-        renderGridlines: function(factory, axis, secondaryAxis) {
+        renderGridLines: function(factory, axis, secondaryAxis) {
             var options = axis.options,
                 isVertical = options.orientation === VERTICAL,
                 boundaries = secondaryAxis.getMajorTickPositions(),
@@ -2900,8 +2853,8 @@
             var plotArea = this,
                 axisY = plotArea.axisY,
                 axisX = plotArea.axisX,
-                gridLinesY = plotArea.renderGridlines(factory, axisY, axisX),
-                gridLinesX = plotArea.renderGridlines(factory, axisX, axisY),
+                gridLinesY = plotArea.renderGridLines(factory, axisY, axisX),
+                gridLinesX = plotArea.renderGridLines(factory, axisX, axisY),
                 childElements = ChartElement.fn.getViewElements.call(plotArea, factory);
 
             return [].concat(gridLinesY, gridLinesX, childElements);
