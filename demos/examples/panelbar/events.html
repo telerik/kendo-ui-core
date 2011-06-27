@@ -82,23 +82,19 @@
         </div>
         <script type="text/javascript">
             var onSelect = function (e) {
-                if ('kendoConsole' in window)
-                    kendoConsole.log('Selected: ' + $(e.item).find('> .t-link').text());
+                kendoConsole.log('Selected: ' + $(e.item).find('> .t-link').text());
             };
 
             var onInit = function (e) {
-                if ('kendoConsole' in window)
-                    kendoConsole.log('TabStrip loaded');
+                kendoConsole.log('TabStrip loaded');
             };
 
             var onContentLoad = function (e) {
-                if ('kendoConsole' in window)
-                    kendoConsole.log('Content loaded in <b>'+ $(e.item).find('> .t-link').text() + '</b> and starts with <b>' + $(e.contentElement).text().substr(0, 20) + '...</b>');
+                kendoConsole.log('Content loaded in <b>'+ $(e.item).find('> .t-link').text() + '</b> and starts with <b>' + $(e.contentElement).text().substr(0, 20) + '...</b>');
             };
 
             var onError = function (e) {
-                if ('kendoConsole' in window)
-                    kendoConsole.error('Loading failed with ' + e.xhr.statusText + ' ' + e.xhr.status);
+                kendoConsole.error('Loading failed with ' + e.xhr.statusText + ' ' + e.xhr.status);
             };
 
             $("#PanelBar1").kendoPanelBar({ expandMode: 0, select: onSelect, init: onInit, contentLoad: onContentLoad, error: onError, contentUrls: [ , , , , , 'ajax/ajaxContent1.html', 'error.html' ] });

@@ -15,7 +15,7 @@ body
 #header, #footer
 {
     display: block;
-    width: 1100px;
+    width: 960px;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -72,7 +72,7 @@ body
 
 #content
 {
-    width: 900px;
+    width: 760px;
     display: inline-block;
     *display: inline;
     zoom: 1;
@@ -122,7 +122,7 @@ body
 {
     text-align: left;
     display: inline-block;
-    *width: 1100px;
+    *width: 960px;
     zoom: 1;
     margin: 0 auto;
 }
