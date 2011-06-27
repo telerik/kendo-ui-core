@@ -164,6 +164,13 @@
 
            });
 
+           test("if no options, do not set index", function() {
+               var select = $("<select/>"),
+                   dropdownlist = new DropDownList(select, {index: 2});
+
+               equal(dropdownlist.options.index, 2);
+           });
+
            test("selected index is get from select element", function() {
                var select = $("<select><option value=1>Chai</option><option value=1 selected='selected'>Chai</option></select>"),
                    dropdownlist = new DropDownList(select);
@@ -191,10 +198,12 @@
            });
 
            test("dropdownlist initializes a UL for its items", function() {
+                 input.attr("id", "dropdownlist");
                  var dropdownlist = new DropDownList(input, []);
 
                  ok(dropdownlist.ul);
                  ok(dropdownlist.ul.is("ul"));
+                 ok(dropdownlist.ul.attr("id"), input.attr("id") + "-list");
                  equal(dropdownlist.ul.css("overflow"), "auto");
            });
 
@@ -323,6 +332,22 @@
                });
 
                equal(dropdownlist.ul.width(), 200);
+           });
+
+           test("", function() {
+               var dataSource = new kendo.data.DataSource.create([{text: 1, value: 1}, {text:2, value:2}]);
+               dataSource.read();
+
+               dropdownlist = new DropDownList(input, {
+                   autoBind: false,
+                   dataSource: dataSource,
+                   template: "<div style='height:30px'><%= text %> </div>",
+                   height: 50
+               });
+
+               dropdownlist.refresh();
+
+               equal(dropdownlist.ul.height(), 50);
            });
 
       </script>

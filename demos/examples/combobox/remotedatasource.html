@@ -27,19 +27,24 @@
         <!-- description -->
         <div id="example">
             <input id="geonames"/>
-            <input id="filter" value="Bulgaria"/>
             <script type="text/javascript">
                 var remoteDataSource = new kendo.data.DataSource({
+                    serverFiltering: true,
                     transport: {
                         read: {
                             url: "http://ws.geonames.org/searchJSON",
                             dataType: "jsonp",
-                            cache: true
+                            cache: false
                         },
-                        cache: "inmemory",
                         dialect: {
                             read: function() {
-                                return {name_startsWith: $("#filter").val() };
+                                var filter = "Bulgaria",
+                                combobox = $("#geonames").data("kendoComboBox");
+
+                                if (combobox) {
+                                    filter = combobox.text() || filter;
+                                }
+                                return {name_startsWith: filter};
                             }
                         }
                     },
@@ -51,16 +56,15 @@
                 });
 
                 $("#geonames").kendoComboBox({
+                    index: 0,
+                    minLength: 3,
+                    filter: "startswith",
                     dataTextField: "name",
                     dataValueField: "countryName",
                     dataSource: remoteDataSource,
-                    autoBind: false
+                    autoBind: true
                 });
 
-                $("#filter").change(function() {
-                    $("#geonames").data("kendoComboBox").showBusy();
-                    remoteDataSource.read();
-                });
             </script>
         </div>
         <!-- tools -->

@@ -2,6 +2,7 @@
     var kendo = window.kendo,
         ui = kendo.ui,
         Component = ui.Component,
+        ID = "id",
         LI = "li",
         CHANGE = "change",
         CHARACTER = "character",
@@ -20,6 +21,7 @@
             that._template();
 
             that.ul = $('<ul class="t-list"/>')
+                        .attr(ID, that.element.attr(ID) + "-list")
                         .css("overflow", "auto")
                         .mousedown(function() {
                             setTimeout(function() {

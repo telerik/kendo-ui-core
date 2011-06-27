@@ -112,6 +112,7 @@
                 selected = that._selected;
 
             if (!that.ul[0].firstChild || (that._filtered && selected)) {
+                that.options.autoBind = false;
                 that._filtered = false;
                 that._select();
             } else {
@@ -152,8 +153,6 @@
                 that.popup[length ? OPEN : CLOSE]();
             }
 
-            options.autoBind = false;
-
             that.hideBusy();
         },
 
@@ -178,7 +177,6 @@
 
         search: function(word) {
             var that = this,
-                word = word || that.text(),
                 length = word.length,
                 options = that.options,
                 filter = options.filter;
@@ -193,6 +191,7 @@
                     that._filter(word);
                 } else {
                     that._filtered = true;
+                    options.autoBind = false;
                     that.dataSource.filter( {field: options.dataTextField, operator: filter, value: word } );
                 }
             }
@@ -337,7 +336,7 @@
             if (!that.ul[0].firstChild) {
                 options.autoBind = true;
                 dataSource.bind(CHANGE, function search() {
-                    that.search();
+                    that.search(word);
                     dataSource.unbind(CHANGE, handler);
                 }).query();
                 return;
@@ -454,10 +453,10 @@
             clearTimeout(that._typing);
 
             that._typing = setTimeout(function() {
-                var value = that.input.val();
-                if (value && that._previousText !== value) {
+                var value = that.text();
+                if (that._previousText !== value) {
                     that._previousText = value;
-                    that.search();
+                    that.search(value);
                 }
             }, that.options.delay);
         },
@@ -480,7 +479,7 @@
             dataSource.bind(CHANGE, handler);
 
             that.showBusy();
-            that.dataSource.query();
+            dataSource.query();
         },
 
 
