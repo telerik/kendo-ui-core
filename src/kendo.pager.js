@@ -3,7 +3,7 @@
         Component = kendo.ui.Component,
         proxy = $.proxy;
 
-    var Pager = Component.extend( {
+    var Pagable = Component.extend( {
         init: function(element, options) {
             var that = this;
 
@@ -81,5 +81,5 @@
         }
     });
 
-    kendo.ui.plugin("Pager", Pager);
+    kendo.ui.plugin("Pagable", Pagable);
 })(jQuery, window);

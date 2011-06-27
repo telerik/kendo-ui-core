@@ -252,7 +252,7 @@
         },
         initMainPictures: function() {
             var that = this;
-            $(".paging").kendoPager({ dataSource: setPhotosDataSource });
+            $(".paging").kendoPagerable({ dataSource: setPhotosDataSource });
 
             that._isSliderInit = false;
 
@@ -286,9 +286,10 @@
             });
 
             $("#mainSetPhotoGrid").kendoGrid({
+                scrollable: false,
                 autoBind: false,
                 dataSource: setPhotosDataSource,
-                pageable: $(".paging").data("kendoPager"),
+                pageable: $(".paging").data("kendoPagerable"),
                 selectable: true,
                 columns: [
                     { template: '<img data-photoid="<%= id %>" alt="<%= kendo.htmlEncode(title) %>" src="http://farm<%=farm%>.static.flickr.com/<%=server%>/<%=id%>_<%=secret%>_s.jpg">', title: "PHOTO" },

@@ -152,7 +152,7 @@
 
             that._isSliderInit = false;
 
-            $(".paging").kendoPager({ dataSource: dataSource });
+            $(".paging").kendoPagable({ dataSource: dataSource });
 
             $("#flatSearchPhotos").kendoListView({
                 autoBind: false,
@@ -170,6 +170,7 @@
                 }
             });
             $("#mainPhotoGrid").kendoGrid({
+                scrollable: false,
                 autoBind: false,
                 dataSource: dataSource,
                 pageable: $(".paging").data("kendoPager"),

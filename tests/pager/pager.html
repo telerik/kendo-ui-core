@@ -36,16 +36,16 @@
                 options = $.extend({
                     dataSource: dataSource
                 }, options);
-                var element = $("<ul />").kendoPager(options);
-                pager = element.data("kendoPager");
+                var element = $("<ul />").kendoPagable(options);
+                pager = element.data("kendoPagable");
                 return element;
             }
 
             test("kendoPager attach pager to an element", function() {
                 var ul = setup();
 
-                ok(ul.data("kendoPager") instanceof kendo.ui.Pager);
-                ok(pager instanceof kendo.ui.Pager);
+                ok(ul.data("kendoPagable") instanceof kendo.ui.Pagable);
+                ok(pager instanceof kendo.ui.Pagable);
             });
 
             test("renders buttons for all pages", function() {
@@ -167,21 +167,21 @@
                 var ul = setup();
 
                 dataSource.read();
-                equal(ul.data("kendoPager").totalPages(), 5);
+                equal(ul.data("kendoPagable").totalPages(), 5);
             });
 
             test("pageSize returns the dataSource pageSize value", function() {
                 var ul = setup();
                 dataSource.read();
 
-                equal(ul.data("kendoPager").pageSize(), dataSource.pageSize());
+                equal(ul.data("kendoPagable").pageSize(), dataSource.pageSize());
             });
             test("page returns the current page", function(){
                 var ul = setup();
                 dataSource.read();
                 ul.find("a:eq(0)").click();
 
-                equal(ul.data("kendoPager").page(), 2);
+                equal(ul.data("kendoPagable").page(), 2);
             });
 
             test("custom linkTemplate should be used instead of the default", function() {
@@ -198,7 +198,7 @@
 
             test("single page is rendered if no pageSize is set", function() {
                 var data = new DataSource( { data: [1,2,3,4,5], page: 1 }),
-                    ul = $("<ul/>").kendoPager({ dataSource: data });
+                    ul = $("<ul/>").kendoPagable({ dataSource: data });
 
                 data.read();
                 equal(ul.find(".t-state-active").length, 1);

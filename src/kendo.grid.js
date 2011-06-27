@@ -270,10 +270,10 @@
                     wrapper = $('<div class="t-grid-pager"/>').appendTo(that.wrapper);
                 }
 
-                if (typeof pageable === "object" && pageable instanceof kendo.ui.Pager) {
+                if (typeof pageable === "object" && pageable instanceof kendo.ui.Pagable) {
                     that.pager = pageable;
                 } else {
-                    that.pager = new kendo.ui.Pager(wrapper, extend({}, pageable, { dataSource: that.dataSource }));
+                    that.pager = new kendo.ui.Pagable(wrapper, extend({}, pageable, { dataSource: that.dataSource }));
                 }
             }
         },

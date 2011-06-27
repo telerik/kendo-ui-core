@@ -44,7 +44,7 @@
 
             test("pageable uses the passed kendo.ui.Pager", function() {
                 var dataSource = new DataSource({ data: [] }),
-                    pager = new kendo.ui.Pager(null, { dataSource: dataSource } ),
+                    pager = new kendo.ui.Pagable(null, { dataSource: dataSource } ),
                     grid = new Grid(table(), { data: dataSource, pageable: pager } );
 
                 equal(grid.pager, pager);
