@@ -362,13 +362,16 @@ pre.prettyprint
 
 #exampleHead .skinSelector
 {
+    font: 12px Arial, Helvetica, sans-serif;
+    margin-left: 5px;
     background: none;
+    width: 200px;
 }
 
 .skinSelector .t-state-default
 {
     color: #333;
-    background: #fff;
+    background: #F3F3F3;
     border-color: #dedede;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
@@ -384,12 +387,14 @@ pre.prettyprint
 
 #skinSelector-list
 {
+    margin-top: 2px;
+    padding-bottom: 3px;
     color: #2175bd;
-    background: #fff;
+    background: #F3F3F3;
     border-color: #dedede;
-    -webkit-border-radius: 5px 0 5px 5px;
-    -moz-border-radius: 5px 0 5px 5px;
-    border-radius: 5px 0 5px 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
     -webkit-box-shadow: 2px 2px 2px #555;
     -moz-box-shadow: 2px 2px 2px #555;
     box-shadow: 2px 2px 2px #bbb;
@@ -405,4 +410,79 @@ pre.prettyprint
 #skinSelector-list .t-state-hover
 {
     color: #000;
+}
+
+#skinSelector-list .thumbLink
+{
+    cursor: pointer;
+    display: inline-block;
+    width: 52px;
+    margin: 5px 0 5px 2px;
+    text-decoration: none;
+    font-size: 11px;
+    color: #555;
+    text-align: center;
+}
+
+#skinSelector-list .t-state-hover .thumbLink
+{
+    color: #222;
+}
+
+#skinSelector-list .t-item
+{
+    overflow: hidden;
+    float: left;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    margin-left: 3px;
+    margin-top: 3px;
+}
+
+#skinSelector-list .thumb
+{
+    background-color: transparent;
+    background-image: url("../img/Menu/thumbSprite.png");
+    background-repeat: no-repeat;
+    display: block;
+    height: 46px;
+    width: 46px;
+    border-width: 3px;
+    border-style: solid;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+
+#skinSelector-list .gloss
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: -moz-linear-gradient(top, rgba(242,242,242,0) 0%, rgba(135,135,135,0.4) 50%, rgba(0,0,0,0.39) 51%, rgba(119,119,119,0.2) 75%, rgba(43,43,43,0) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(242,242,242,0)), color-stop(50%,rgba(135,135,135,0.4)), color-stop(51%,rgba(0,0,0,0.39)), color-stop(75%,rgba(119,119,119,0.2)), color-stop(100%,rgba(43,43,43,0)));
+    background: -webkit-linear-gradient(top, rgba(242,242,242,0) 0%,rgba(135,135,135,0.4) 50%,rgba(0,0,0,0.39) 51%,rgba(119,119,119,0.2) 75%,rgba(43,43,43,0) 100%);
+    background: -o-linear-gradient(top, rgba(242,242,242,0) 0%,rgba(135,135,135,0.4) 50%,rgba(0,0,0,0.39) 51%,rgba(119,119,119,0.2) 75%,rgba(43,43,43,0) 100%);
+    background: -ms-linear-gradient(top, rgba(242,242,242,0) 0%,rgba(135,135,135,0.4) 50%,rgba(0,0,0,0.39) 51%,rgba(119,119,119,0.2) 75%,rgba(43,43,43,0) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00f2f2f2', endColorstr='#002b2b2b',GradientType=0 );
+    background: linear-gradient(top, rgba(242,242,242,0) 0%,rgba(135,135,135,0.4) 50%,rgba(0,0,0,0.39) 51%,rgba(119,119,119,0.2) 75%,rgba(43,43,43,0) 100%);
+}
+
+#skinSelector-list .opalThumb
+{
+    background-position: 0 0;
+    border-color: #606161;
+}
+
+#skinSelector-list .orangeThumb
+{
+    background-position: -64px 0;
+    border-color: #cdd4d7;
+}
+
+#skinSelector-list .kendoThumb
+{
+    background-position: -128px 0;
+    border-color: #cdd4d7;
 }

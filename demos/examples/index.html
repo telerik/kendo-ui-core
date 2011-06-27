@@ -105,16 +105,22 @@
                 </ul>
                 <div id="exampleHead">
                     <span class="exampleName"></span>
-                    <select id="skinSelector" class="skinSelector" readonly="readonly">
-                        <option value="Hay">Hay</option>
-                        <option value="Black">Black</option>
-                        <option value="Vista">Vista</option>
-                        <option value="Web20">Web20</option>
-                    </select>
+                    <select id="skinSelector" class="skinSelector" readonly="readonly"></select>
                 </div>
                 <script type="text/javascript">
+                    var skins = new kendo.data.DataSource.create([
+                        { text: "Opal", control: "Menu", value: "Hay" },
+                        { text: "Orange", control: "Menu", value: "Black" },
+                        { text: "Kendo", control: "Menu", value: "Vista" }
+                    ]);
+
                     $('#nav').kendoPanelBar({ animation: { open: { effects: 'fadeIn expandVertical' } }, expandMode: 0 });
-                    $('#skinSelector').kendoDropDownList();
+                    $('#skinSelector').kendoDropDownList({
+                        dataSource: skins,
+                        template: '<span class="thumbLink" href="#">\
+                                    <span class="thumb <%= data.text.toLowerCase() %>Thumb" style="background-image: url(../img/<%= data.control %>/thumbSprite.png)">\
+                                    <span class="gloss"></span></span><span class="skinTitle"><%= data.text %></span></span>'
+                    });
                 </script>
                 <div id="content">
                     <div id="exampleBody">
