@@ -368,7 +368,7 @@ pre.prettyprint
 .skinSelector .t-state-default
 {
     color: #333;
-    background: #FFF;
+    background: #fff;
     border-color: #dedede;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
@@ -380,4 +380,29 @@ pre.prettyprint
     background-color: transparent;
     background-position: 100% -693px;
     background-repeat: no-repeat;
+}
+
+#skinSelector-list
+{
+    color: #2175bd;
+    background: #fff;
+    border-color: #dedede;
+    -webkit-border-radius: 5px 0 5px 5px;
+    -moz-border-radius: 5px 0 5px 5px;
+    border-radius: 5px 0 5px 5px;
+    -webkit-box-shadow: 2px 2px 2px #555;
+    -moz-box-shadow: 2px 2px 2px #555;
+    box-shadow: 2px 2px 2px #bbb;
+}
+
+#skinSelector-list .t-state-selected,
+#skinSelector-list .t-state-hover
+{
+    color: #0c303c;
+    background: #C7CED1;
+}
+
+#skinSelector-list .t-state-hover
+{
+    color: #000;
 }
