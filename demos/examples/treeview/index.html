@@ -13,7 +13,7 @@
         <!-- css -->
         <link type="text/css" href="../styles/examples.css" rel="stylesheet"/>
         <link type="text/css" href="../../../styles/kendo.common.css" rel="stylesheet"/>
-        <link type="text/css" href="../../../styles/kendo.vista.css" rel="stylesheet"/>
+        <link type="text/css" href="../../../styles/kendo.hay.css" rel="stylesheet"/>
         <!-- css -->
     </head>
     <body>
@@ -23,21 +23,25 @@
         <div class="description">This example shows how to bind the kendoTreeView to JSON.</div>
         <!-- description -->
         <div id="example">
-            <div id="TreeView"></div>
+            <ul id="TreeView">
+                <li data-expanded="true">foo
+                    <ul>
+                        <li>fool</li>
+                        <li>food</li>
+                        <li>foot</li>
+                    </ul>
+                </li>
+                <li>bar
+                    <ul>
+                        <li>bard</li>
+                        <li>barn</li>
+                        <li>bark</li>
+                    </ul>
+                </li>
+                <li>baz</li>
+            </ul>
             <script type="text/javascript">
-                $("#TreeView").kendoTreeView([
-                    { text: "foo", expanded: true, items: [
-                        { text: "fool" },
-                        { text: "food" },
-                        { text: "foot" }
-                    ] },
-                    { text: "bar", items: [
-                        { text: "bard" },
-                        { text: "barn" },
-                        { text: "bark" }
-                    ] },
-                    { text: "baz" }
-                ]);
+                $("#TreeView").kendoTreeView();
             </script>
         </div>
         <!-- tools -->
