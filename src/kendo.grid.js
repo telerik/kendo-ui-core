@@ -206,6 +206,7 @@
                 table,
                 options = that.options,
                 height = that.wrapper.innerHeight(),
+                scrollbar = kendo.support.scrollbar(),
                 scrollable = options.scrollable;
 
             if (scrollable) {
@@ -215,13 +216,16 @@
                     header = $('<div class="t-grid-header" />').insertBefore(that.table);
                 }
 
-                header.css("padding-right", kendo.support.scrollbar());
+                header.css("padding-right", scrollbar);
                 table = $('<table cellspacing="0" />');
                 table.append(that.thead);
                 header.empty().append($('<div class="t-grid-header-wrap" />').append(table));
 
-                if (!that.table.parent().is(".t-grid-content")) {
-                    that.table.wrap('<div class="t-grid-content" />');
+                that.content = that.table.parent();
+
+                if (!that.content.is(".t-grid-content")) {
+                    that.content = $('<div class="t-grid-content" />');
+                    that.table.wrap(that.content);
                 }
 
                 height -= header.outerHeight();
@@ -230,8 +234,77 @@
                     height -= that.pager.element.outerHeight();
                 }
 
-                that.table.parent().height(height);
+                that.content.height(height);
+
+                if (scrollable !== true && scrollable.virtual) {
+                    that.content.css( {
+                        width: "auto",
+                        paddingRight: scrollbar,
+                        overflow: "hidden"
+                    });
+
+                    that.verticalScrollbar = $('<div class="t-scrollbar t-scrollbar-vertical" />')
+                        .css({
+                            width: scrollbar
+                        }).appendTo(that.content)
+                        .bind("scroll", proxy(that._scroll, that));
+
+                    that.bind(DATABOUND, proxy(that._dataBound, that));
+                }
             }
+        },
+
+        _scroll: function(e) {
+            var that = this,
+                scrollTop = e.currentTarget.scrollTop,
+                dataSource = that.dataSource,
+                rowHeight = that._rowHeight,
+                skip = dataSource.skip(),
+                take = dataSource.take(),
+                firstRowIndex = Math.floor(scrollTop / rowHeight);
+                lastRowIndex = Math.floor((scrollTop + take * rowHeight) / rowHeight);
+
+            if (firstRowIndex < skip) {
+                skip = Math.max(0, lastRowIndex - take);
+
+                dataSource.range(skip, take);
+
+                that._scrollTop = 0;
+                //tableParent.scrollTop = 0;
+            } else if (lastRowIndex > skip + take) {
+                skip = firstRowIndex;
+
+                dataSource.range(skip, take);
+
+                that._scrollTop = rowHeight;
+            } else {
+                that._scrollTop = scrollTop - (skip * rowHeight);
+            }
+        },
+
+        _dataBound: function() {
+            var that = this,
+                rowHeight,
+                totalHeight,
+                html = "",
+                idx,
+                maxHeight = 250000;
+
+            that._rowHeight = rowHeight = that.table[0].rows[0].offsetHeight;
+
+            totalHeight = that.dataSource.total() * rowHeight;
+
+            for (idx = 0; idx < Math.floor(totalHeight / maxHeight); idx++) {
+                html += '<div style="width:1px;height:' + maxHeight + 'px"></div>';
+            }
+
+            if (totalHeight % maxHeight) {
+                html += '<div style="width:1px;height:' + (totalHeight % maxHeight) + 'px"></div>';
+            }
+
+            that.verticalScrollbar.html(html);
+
+            that.content.scrollTop(that._scrollTop);
         },
 
         _dataSource: function() {
