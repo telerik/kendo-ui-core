@@ -108,7 +108,9 @@
 
                 $("#combobox").kendoComboBox({
                     dataSource: [{text: "foo", value: 1}, {text:"<script>alert('hi');<\/script>bar", value:2}, {text: "baz", value: 3}, {text:"2", value:4}],
-                    autoBind: false
+                    autoBind: false,
+                    close: function() {console.log("closeD") },
+                    open: function() {console.log("open") }
                 });
                 $("#select").kendoComboBox({
                     dataSource: [{text: "foo", value: 1}, {text:"bar", value:2}, {text: "baz", value: 3}, {text:"2", value:4}],

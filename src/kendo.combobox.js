@@ -5,8 +5,6 @@
         Select = ui.Select,
         CLICK = "click",
         ATTRIBUTE = "disabled",
-        OPEN = "open",
-        CLOSE = "close",
         CHANGE = "change",
         DISABLED = "t-state-disabled",
         STATE_SELECTED = "t-state-selected",
@@ -31,7 +29,7 @@
 
             that._dataSource();
 
-            that.bind(["init", CHANGE], that.options);
+            that.bind(["init", "open", "close", CHANGE], that.options);
 
             that.input.bind({
                 keydown: proxy(that._keydown, that),
@@ -150,7 +148,7 @@
             }
 
             if (!options.autoBind) {
-                that.popup[length ? OPEN : CLOSE]();
+                that.toggle(!!length);
             }
 
             that.hideBusy();
@@ -184,7 +182,7 @@
             clearTimeout(that._typing);
 
             if (!length) {
-                that.close();
+                that._close();
             } else if (length >= options.minLength) {
                 that.showBusy();
                 if (filter === "none") {
@@ -242,11 +240,16 @@
             }
         },
 
-        toggle: function() {
+        toggle: function(toggle) {
             var that = this;
             that.input[0].focus();
             clearTimeout(that._bluring);
-            that[that.popup.visible() ? CLOSE : OPEN]();
+
+            if (typeof toggle !== "boolean") {
+                toggle = !that.popup.visible();
+            }
+
+            that[toggle ? "_open" : "_close"]();
         },
 
         value: function(value) {
@@ -346,7 +349,7 @@
                 if (options.suggest && that._current) {
                     that.suggest(that._current);
                 }
-                that.open();
+                that._open();
             }
 
             that.hideBusy();
@@ -424,11 +427,7 @@
                 current = that._current;
 
             if (e.altKey) {
-                if (key === keys.DOWN) {
-                    that.open();
-                } else if (key === keys.UP) {
-                    that.close();
-                }
+                that.toggle(key === keys.DOWN);
             } else if (key === keys.DOWN) {
                 that._move(current ? current.next() : that.ul.children().first());
 
@@ -440,7 +439,7 @@
             } else if (key === keys.ENTER || key === keys.TAB) {
                 that._accept(current);
             } else if (key === keys.ESC) {
-                that.close();
+                that._close();
             } else {
                 that._search();
             }

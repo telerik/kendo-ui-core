@@ -219,6 +219,107 @@
                 stop(300);
             });
 
+            test("open event when click arrow", function() {
+                input.kendoDropDownList({
+                    dataSource: [{text: "foo"}, {text: "bar"}],
+                    open: function() {
+                        ok(true);
+                        start();
+                    }
+                });
+
+                input.data("kendoDropDownList").wrapper.click();
+
+                stop(300);
+            });
+
+            test("open event should be cancellable", function() {
+                input.kendoDropDownList({
+                    dataSource: [{text: "foo"}, {text: "bar"}],
+                    open: function(e) {
+                        e.preventDefault();
+                    }
+                });
+
+                var dropdownlist = input.data("kendoDropDownList");
+
+                dropdownlist.wrapper.click();
+
+                setTimeout(function() {
+                    ok(!dropdownlist.popup.visible());
+                    start();
+                }, 200);
+
+                stop(300);
+            });
+
+            test("open event when ALT + down arrow", function() {
+                input.kendoDropDownList({
+                    dataSource: [{text: "foo"}, {text: "bar"}],
+                    open: function() {
+                        ok(true);
+                        start();
+                    }
+                });
+
+                input.trigger({ type: "keydown", keyCode: kendo.keys.DOWN, altKey: true } );
+
+                stop(300);
+            });
+
+            test("close event when click arrow", function() {
+                input.kendoDropDownList({
+                    dataSource: [{text: "foo"}, {text: "bar"}],
+                    close: function() {
+                        ok(true);
+                        start();
+                    }
+                });
+
+                var dropdownlist = input.data("kendoDropDownList");
+                dropdownlist.open();
+                dropdownlist.wrapper.click();
+
+                stop(300);
+            });
+
+            test("close event should be cancellable", function() {
+                input.kendoDropDownList({
+                    dataSource: [{text: "foo"}, {text: "bar"}],
+                    close: function(e) {
+                        e.preventDefault();
+                    }
+                });
+
+                var dropdownlist = input.data("kendoDropDownList");
+
+                dropdownlist.open();
+                dropdownlist.wrapper.click();
+
+                setTimeout(function() {
+                    ok(dropdownlist.popup.visible());
+                    start();
+                }, 200);
+
+                stop(300);
+            });
+
+            test("close event when ALT + up arrow", function() {
+                input.kendoDropDownList({
+                    dataSource: [{text: "foo"}, {text: "bar"}],
+                    close: function() {
+                        ok(true);
+                        start();
+                    }
+                });
+
+                input.data("kendoDropDownList").open();
+
+                input.trigger({ type: "keydown", keyCode: kendo.keys.UP, altKey: true } );
+
+                stop(300);
+            });
+
        </script>
        <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

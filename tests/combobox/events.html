@@ -313,6 +313,153 @@
 
                 stop(300);
             });
+
+            test("open event when click arrow", function() {
+                input.kendoComboBox({
+                    dataSource: [{text: "foo"}, {text: "bar"}],
+                    open: function() {
+                        ok(true);
+                        start();
+                    }
+                });
+
+                input.data("kendoComboBox").arrow.click();
+
+                stop(300);
+            });
+
+            test("open event should be cancellable", function() {
+                input.kendoComboBox({
+                    dataSource: [{text: "foo"}, {text: "bar"}],
+                    open: function(e) {
+                        e.preventDefault();
+                    }
+                });
+
+                var combobox = input.data("kendoComboBox");
+
+                combobox.arrow.click();
+
+                setTimeout(function() {
+                    ok(!combobox.popup.visible());
+                    start();
+                }, 200);
+
+                stop(300);
+            });
+
+            test("open event should not raise twice on initial binding", function() {
+                var index = 0;
+                input.kendoComboBox({
+                    dataSource: [{text: "foo"}, {text: "bar"}],
+                    open: function(e) {
+                        index++;
+                    },
+                    autoBind: false
+                });
+
+                var combobox = input.data("kendoComboBox");
+
+                combobox.arrow.click();
+
+                setTimeout(function() {
+                    equal(index, 1);
+                    start();
+                }, 200);
+
+                stop(300);
+            });
+
+            test("open event when ALT + down arrow", function() {
+                input.kendoComboBox({
+                    dataSource: [{text: "foo"}, {text: "bar"}],
+                    open: function() {
+                        ok(true);
+                        start();
+                    }
+                });
+
+                var combobox = input.data("kendoComboBox");
+
+                combobox.input.trigger({ type: "keydown", keyCode: kendo.keys.DOWN, altKey: true } );
+
+                stop(300);
+            });
+
+            test("close event when click arrow", function() {
+                input.kendoComboBox({
+                    dataSource: [{text: "foo"}, {text: "bar"}],
+                    close: function() {
+                        ok(true);
+                        start();
+                    }
+                });
+
+                var combobox = input.data("kendoComboBox");
+                combobox.open();
+                debugger;
+                combobox.arrow.click();
+
+                stop(300);
+            });
+
+            test("close event should be cancellable", function() {
+                input.kendoComboBox({
+                    dataSource: [{text: "foo"}, {text: "bar"}],
+                    close: function(e) {
+                        e.preventDefault();
+                    }
+                });
+
+                var combobox = input.data("kendoComboBox");
+
+                combobox.open();
+                combobox.arrow.click();
+
+                setTimeout(function() {
+                    ok(combobox.popup.visible());
+                    start();
+                }, 200);
+
+                stop(300);
+            });
+
+            test("close should not raise if no data", function() {
+                var called = false;
+                input.kendoComboBox({
+                    close: function(e) {
+                        called = true;
+                    }
+                });
+
+                var combobox = input.data("kendoComboBox");
+                combobox.arrow.click();
+
+                setTimeout(function() {
+                    ok(!called);
+                    start();
+                }, 200);
+
+                stop(300);
+            });
+
+            test("close event when ALT + up arrow", function() {
+                input.kendoComboBox({
+                    dataSource: [{text: "foo"}, {text: "bar"}],
+                    close: function() {
+                        ok(true);
+                        start();
+                    }
+                });
+
+
+                var combobox = input.data("kendoComboBox");
+                combobox.open();
+
+                combobox.input.trigger({ type: "keydown", keyCode: kendo.keys.UP, altKey: true } );
+
+                stop(300);
+            });
        </script>
        <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

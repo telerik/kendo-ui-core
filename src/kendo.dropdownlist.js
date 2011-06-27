@@ -2,8 +2,6 @@
     var kendo = window.kendo,
         ui = kendo.ui,
         Select = ui.Select,
-        OPEN = "open",
-        CLOSE  = "close",
         CHANGE = "change",
         SELECT = "select",
         SELECTED = "t-state-selected",
@@ -30,7 +28,7 @@
 
             that._dataSource();
 
-            that.bind(["init", CHANGE], that.options);
+            that.bind(["init", "open", "close", CHANGE], that.options);
 
             if (that.element.prop("disabled")) {
                 that.options.enable = false;
@@ -105,9 +103,14 @@
             }
         },
 
-        toggle: function() {
+        toggle: function(toggle) {
             var that = this;
-            that[that.popup.visible() ? CLOSE : OPEN]();
+
+            if (toggle === undefined) {
+                toggle = !that.popup.visible();
+            }
+
+            that[toggle ? "_open" : "_close"]();
         },
 
         refresh: function() {
@@ -133,7 +136,7 @@
             that.previous = that.value();
 
             if (!options.autoBind) {
-                that[length ? OPEN : CLOSE]();
+                that.toggle(length);
             }
 
             that.hideBusy();
@@ -250,11 +253,7 @@
                 keys = kendo.keys;
 
             if (e.altKey) {
-                if (key === keys.DOWN) {
-                    that.open();
-                } else if (key === keys.UP) {
-                    that.close();
-                }
+                that.toggle(key === keys.DOWN);
             } else if (key === keys.DOWN) {
                 that._move(current.next());
 
@@ -276,7 +275,7 @@
 
                 prevent = true;
             } else if (key === keys.ESC) {
-                that.close();
+                that._close();
             }
 
             if (prevent) {
