@@ -68,6 +68,7 @@
 
             that.bind([LOAD, CHANGE, SLIDE], options);
         },
+
         options: {
             enabled: true,
             min: 0,
@@ -78,17 +79,228 @@
             tickPlacement: "both",
             tooltip: { enabled: true, format: "{0}" }
         },
-        _setTrackDivWidth: _setTrackDivWidth,
-        _setItemsWidth: _setItemsWidth,
-        _setItemsTitle: _setItemsTitle,
-        _setItemsLargeTick: _setItemsLargeTick,
-        _calculateItemsWidth: _calculateItemsWidth,
-        _roudWidths: _roudWidths,
-        _addAdditionalSize: _addAdditionalSize,
-        _calculateSteps: _calculateSteps,
-        _getValueFromPosition: _getValueFromPosition,
-        _getDragableArea: _getDragableArea,
-        _createHtml: _createHtml
+
+        _setTrackDivWidth: function() {
+        var that = this,
+            trackDivPosition = parseFloat(that._trackDiv.css(that._position), 10) * 2;
+
+            that._trackDiv[that._size]((that.wrapper[that._size]() - 2) - trackDivPosition);
+        },
+
+        _setItemsWidth: function(pixelWidths) {
+            var that = this,
+                options = that.options,
+                itemsCount = math.floor(that._distance / options.smallStep),
+                items = that.wrapper.find(TICK_SELECTOR),
+                i;
+
+            for (i = 0; i < items.length - 2; i++) {
+                $(items[i + 1])[that._size](pixelWidths[i]);
+            }
+
+            if (that._isHorizontal) {
+                $(items[0]).addClass("t-first")[that._size](pixelWidths[itemsCount]);
+                $(items[items.length - 1]).addClass("t-last")[that._size](pixelWidths[itemsCount - 1]);
+            } else {
+                $(items[items.length - 1]).addClass("t-first")[that._size](pixelWidths[itemsCount - 1]);
+                $(items[0]).addClass("t-last")[that._size](pixelWidths[itemsCount]);
+            }
+
+            if (that._distance % options.smallStep != 0 && !that._isHorizontal) {
+                var paddingTop = 0,
+                    bordersWidth = 2,
+                    selection = 0;
+                for (i = 0; i < pixelWidths.length; i++) {
+                    selection += pixelWidths[i];
+                }
+
+                paddingTop = that._maxSelection - selection;
+                paddingTop += parseFloat(that._trackDiv.css(that._position), 10) + bordersWidth;
+
+                that.wrapper.find(".t-slider-items").css("padding-top", paddingTop);
+            }
+        },
+
+        _setItemsTitle: function() {
+            var that = this,
+                options = that.options,
+                items = that.wrapper.find(TICK_SELECTOR),
+                titleNumber = options.min,
+                i = that._isHorizontal ? 0 : items.length - 1,
+                limit = that._isHorizontal ? items.length : -1,
+                increment = that._isHorizontal ? 1 : -1;
+
+            for (; i - limit != 0 ; i += increment) {
+                $(items[i]).attr("title", kendo.format(options.tooltip.format, round(titleNumber, PRECISION)));
+                titleNumber += options.smallStep;
+            }
+        },
+
+        _setItemsLargeTick: function() {
+            var that = this,
+                options = that.options
+                i;
+
+            if ((1000 * options.largeStep) % (1000 * options.smallStep) == 0) {
+                var items = that.wrapper.find(TICK_SELECTOR),
+                    item = {},
+                    step = round(options.largeStep / options.smallStep, PRECISION);
+
+                if (that._isHorizontal) {
+                    for (i = 0; i < items.length; i = round(i + step, PRECISION)) {
+                        item = $(items[i]);
+
+                        item.addClass("t-tick-large")
+                            .html("<span class='t-label'>" + item.attr("title") + "</span>");
+                    }
+                } else {
+                    for (i = items.length - 1; i >= 0; i = round(i - step, PRECISION)) {
+                        item = $(items[i]);
+
+                        item.addClass("t-tick-large")
+                            .html("<span class='t-label'>" + item.attr("title") + "</span>");
+
+                        if (i != 0 && i != items.length - 1) {
+                            item.css("line-height", item[that._size]() + "px");
+                        }
+                    }
+                }
+            }
+        },
+
+        _calculateItemsWidth: function(itemsCount) {
+            var that = this,
+                options = that.options,
+                trackDivSize = parseFloat(that._trackDiv.css(that._size)) + 1,
+                pixelStep = trackDivSize / that._distance;
+
+            if ((that._distance / options.smallStep) - math.floor(that._distance / options.smallStep) > 0) {
+                trackDivSize -= ((that._distance % options.smallStep) * pixelStep);
+            }
+
+            var itemWidth = trackDivSize / itemsCount,
+                pixelWidths = [];
+
+            for (var i = 0; i < itemsCount - 1; i++) {
+                pixelWidths[i] = itemWidth;
+            }
+
+            pixelWidths[itemsCount - 1] = pixelWidths[itemsCount] = itemWidth / 2;
+            return that._roudWidths(pixelWidths);
+        },
+
+        _roudWidths: function(pixelWidthsArray) {
+            var balance = 0;
+
+            for (i = 0; i < pixelWidthsArray.length; i++) {
+                balance += (pixelWidthsArray[i] - math.floor(pixelWidthsArray[i]));
+                pixelWidthsArray[i] = math.floor(pixelWidthsArray[i]);
+            }
+
+            balance = math.round(balance);
+
+            return this._addAdditionalSize(balance, pixelWidthsArray);
+        },
+
+        _addAdditionalSize: function(additionalSize, pixelWidthsArray) {
+            if (additionalSize == 0) {
+                return pixelWidthsArray;
+            }
+
+            //set step size
+            var step = parseFloat(pixelWidthsArray.length - 1) / parseFloat(additionalSize == 1 ? additionalSize : additionalSize - 1);
+
+            for (var i = 0; i < additionalSize; i++) {
+                pixelWidthsArray[parseInt(math.round(step * i))] += 1;
+            }
+
+            return pixelWidthsArray;
+        },
+
+        _calculateSteps: function(pixelWidths) {
+            var that = this,
+                options = that.options,
+                val = options.min,
+                selection = 0,
+                itemsCount = pixelWidths.length;
+                i = 1;
+
+            pixelWidths.splice(0, 0, pixelWidths.pop() * 2);
+            pixelWidths.splice(itemsCount, 1, pixelWidths.pop() * 2);
+
+            that._pixelStepsArray = [selection];
+            that._valuesArray = [val];
+
+            if (itemsCount == 0) {
+                return;
+            }
+
+            while (i < itemsCount) {
+                selection += (pixelWidths[i - 1] + pixelWidths [i]) / 2;
+                that._pixelStepsArray[i] = selection;
+                that._valuesArray[i] = val += options.smallStep;
+
+                i++;
+            }
+
+            var lastItem = options.max % options.smallStep == 0 ? itemsCount - 1 : itemsCount;
+
+            that._pixelStepsArray[lastItem] = that._maxSelection;
+            that._valuesArray[lastItem] = options.max;
+        },
+
+        _getValueFromPosition: function(mousePosition, dragableArea) {
+            var that = this,
+                options = that.options,
+                step = math.max(options.smallStep * (that._maxSelection / that._distance), 0),
+                position = 0,
+                halfStep = (step / 2),
+                val = 0;
+
+            if (that._isHorizontal) {
+                position = mousePosition - dragableArea.startPoint;
+            } else {
+                position = dragableArea.startPoint - mousePosition;
+            }
+
+            if (that._maxSelection - ((parseInt(that._maxSelection % step) - 3) / 2) < position) {
+                return options.max;
+            }
+
+            for (var i = 0; i < that._pixelStepsArray.length; i++) {
+                if (math.abs(that._pixelStepsArray[i] - position) - 1 <= halfStep) {
+                    return round(that._valuesArray[i], PRECISION);
+                }
+            }
+        },
+
+        _getDragableArea: function() {
+            var that = this,
+                offsetLeft = that._trackDiv.offset().left,
+                offsetTop = that._trackDiv.offset().top;
+
+            return {
+                startPoint: that._isHorizontal ? offsetLeft : offsetTop + that._maxSelection,
+                endPoint: that._isHorizontal ? offsetLeft + that._maxSelection : offsetTop
+            };
+        },
+
+        _createHtml: function() {
+            var that = this,
+                element = that.element,
+                options = that.options;
+
+            element.val(options.val);
+
+            element.wrap(createWrapper(options, element, that._isHorizontal)).hide();
+
+            if (options.showButtons) {
+                element.before(createButton(options, "increase", that._isHorizontal))
+                       .before(createButton(options, "decrease", that._isHorizontal));
+            }
+
+            element.before(createTrack(element));
+        }
     });
 
     function createWrapper (options, element, isHorizontal) {
@@ -145,21 +357,22 @@
                "</div>";
     }
 
-    function _createHtml () {
-        var that = this,
-            element = that.element,
-            options = that.options;
-
-        element.val(options.val);
-
-        element.wrap(createWrapper(options, element, that._isHorizontal)).hide();
-
-        if (options.showButtons) {
-            element.before(createButton(options, "increase", that._isHorizontal))
-                   .before(createButton(options, "decrease", that._isHorizontal));
+    function step(step) {
+        return function (value) {
+            return value + step;
         }
+    }
 
-        element.before(createTrack(element));
+    function setValue(value) {
+        return function () {
+            return value;
+        }
+    }
+
+    function round(value, precision) {
+        value = parseFloat(value, 10);
+        var power = Math.pow(10, precision || 0);
+        return Math.round(value * power) / power;
     }
 
     var Slider = SliderBase.extend({
@@ -350,229 +563,6 @@
             that._update(val);
         }
     });
-
-    function _setTrackDivWidth () {
-        var that = this,
-            trackDivPosition = parseFloat(that._trackDiv.css(that._position), 10) * 2;
-
-        that._trackDiv[that._size]((that.wrapper[that._size]() - 2) - trackDivPosition);
-    }
-
-    function _setItemsWidth (pixelWidths) {
-        var that = this,
-            options = that.options,
-            itemsCount = math.floor(that._distance / options.smallStep),
-            items = that.wrapper.find(TICK_SELECTOR),
-            i;
-
-        for (i = 0; i < items.length - 2; i++) {
-            $(items[i + 1])[that._size](pixelWidths[i]);
-        }
-
-        if (that._isHorizontal) {
-            $(items[0]).addClass("t-first")[that._size](pixelWidths[itemsCount]);
-            $(items[items.length - 1]).addClass("t-last")[that._size](pixelWidths[itemsCount - 1]);
-        } else {
-            $(items[items.length - 1]).addClass("t-first")[that._size](pixelWidths[itemsCount - 1]);
-            $(items[0]).addClass("t-last")[that._size](pixelWidths[itemsCount]);
-        }
-
-        if (that._distance % options.smallStep != 0 && !that._isHorizontal) {
-            var paddingTop = 0,
-                bordersWidth = 2,
-                selection = 0;
-            for (i = 0; i < pixelWidths.length; i++) {
-                selection += pixelWidths[i];
-            }
-
-            paddingTop = that._maxSelection - selection;
-            paddingTop += parseFloat(that._trackDiv.css(that._position), 10) + bordersWidth;
-
-            that.wrapper.find(".t-slider-items").css("padding-top", paddingTop);
-        }
-    }
-
-    function _setItemsTitle () {
-        var that = this,
-            options = that.options,
-            items = that.wrapper.find(TICK_SELECTOR),
-            titleNumber = options.min,
-            i = that._isHorizontal ? 0 : items.length - 1,
-            limit = that._isHorizontal ? items.length : -1,
-            increment = that._isHorizontal ? 1 : -1;
-
-        for (; i - limit != 0 ; i += increment) {
-            $(items[i]).attr("title", kendo.format(options.tooltip.format, round(titleNumber, PRECISION)));
-            titleNumber += options.smallStep;
-        }
-    }
-
-    function _setItemsLargeTick () {
-        var that = this,
-            options = that.options
-            i;
-
-        if ((1000 * options.largeStep) % (1000 * options.smallStep) == 0) {
-            var items = that.wrapper.find(TICK_SELECTOR),
-                item = {},
-                step = round(options.largeStep / options.smallStep, PRECISION);
-
-            if (that._isHorizontal) {
-                for (i = 0; i < items.length; i = round(i + step, PRECISION)) {
-                    item = $(items[i]);
-
-                    item.addClass("t-tick-large")
-                        .html("<span class='t-label'>" + item.attr("title") + "</span>");
-                }
-            } else {
-                for (i = items.length - 1; i >= 0; i = round(i - step, PRECISION)) {
-                    item = $(items[i]);
-
-                    item.addClass("t-tick-large")
-                        .html("<span class='t-label'>" + item.attr("title") + "</span>");
-
-                    if (i != 0 && i != items.length - 1) {
-                        item.css("line-height", item[that._size]() + "px");
-                    }
-                }
-            }
-        }
-    }
-
-    function _calculateItemsWidth (itemsCount) {
-        var that = this,
-            options = that.options,
-            trackDivSize = parseFloat(that._trackDiv.css(that._size)) + 1,
-            pixelStep = trackDivSize / that._distance;
-
-        if ((that._distance / options.smallStep) - math.floor(that._distance / options.smallStep) > 0) {
-            trackDivSize -= ((that._distance % options.smallStep) * pixelStep);
-        }
-
-        var itemWidth = trackDivSize / itemsCount,
-            pixelWidths = [];
-
-        for (var i = 0; i < itemsCount - 1; i++) {
-            pixelWidths[i] = itemWidth;
-        }
-
-        pixelWidths[itemsCount - 1] = pixelWidths[itemsCount] = itemWidth / 2;
-        return that._roudWidths(pixelWidths);
-    }
-
-    function _roudWidths (pixelWidthsArray) {
-        var balance = 0;
-
-        for (i = 0; i < pixelWidthsArray.length; i++) {
-            balance += (pixelWidthsArray[i] - math.floor(pixelWidthsArray[i]));
-            pixelWidthsArray[i] = math.floor(pixelWidthsArray[i]);
-        }
-
-        balance = math.round(balance);
-
-        return this._addAdditionalSize(balance, pixelWidthsArray);
-    }
-
-    function _addAdditionalSize (additionalSize, pixelWidthsArray) {
-        if (additionalSize == 0) {
-            return pixelWidthsArray;
-        }
-
-        //set step size
-        var step = parseFloat(pixelWidthsArray.length - 1) / parseFloat(additionalSize == 1 ? additionalSize : additionalSize - 1);
-
-        for (var i = 0; i < additionalSize; i++) {
-            pixelWidthsArray[parseInt(math.round(step * i))] += 1;
-        }
-
-        return pixelWidthsArray;
-    }
-
-    function _calculateSteps (pixelWidths) {
-        var that = this,
-            options = that.options,
-            val = options.min,
-            selection = 0,
-            itemsCount = pixelWidths.length;
-            i = 1;
-
-        pixelWidths.splice(0, 0, pixelWidths.pop() * 2);
-        pixelWidths.splice(itemsCount, 1, pixelWidths.pop() * 2);
-
-        that._pixelStepsArray = [selection];
-        that._valuesArray = [val];
-
-        if (itemsCount == 0) {
-            return;
-        }
-
-        while (i < itemsCount) {
-            selection += (pixelWidths[i - 1] + pixelWidths [i]) / 2;
-            that._pixelStepsArray[i] = selection;
-            that._valuesArray[i] = val += options.smallStep;
-
-            i++;
-        }
-
-        var lastItem = options.max % options.smallStep == 0 ? itemsCount - 1 : itemsCount;
-
-        that._pixelStepsArray[lastItem] = that._maxSelection;
-        that._valuesArray[lastItem] = options.max;
-    }
-
-    function _getValueFromPosition (mousePosition, dragableArea) {
-        var that = this,
-            options = that.options,
-            step = math.max(options.smallStep * (that._maxSelection / that._distance), 0),
-            position = 0,
-            halfStep = (step / 2),
-            val = 0;
-
-        if (that._isHorizontal) {
-            position = mousePosition - dragableArea.startPoint;
-        } else {
-            position = dragableArea.startPoint - mousePosition;
-        }
-
-        if (that._maxSelection - ((parseInt(that._maxSelection % step) - 3) / 2) < position) {
-            return options.max;
-        }
-
-        for (var i = 0; i < that._pixelStepsArray.length; i++) {
-            if (math.abs(that._pixelStepsArray[i] - position) - 1 <= halfStep) {
-                return round(that._valuesArray[i], PRECISION);
-            }
-        }
-    }
-
-    function _getDragableArea () {
-        var that = this,
-            offsetLeft = that._trackDiv.offset().left,
-            offsetTop = that._trackDiv.offset().top;
-
-        return {
-            startPoint: that._isHorizontal ? offsetLeft : offsetTop + that._maxSelection,
-            endPoint: that._isHorizontal ? offsetLeft + that._maxSelection : offsetTop
-        };
-    }
-
-    function step(step) {
-        return function (value) {
-            return value + step;
-        }
-    }
-
-    function setValue(value) {
-        return function () {
-            return value;
-        }
-    }
-
-    function round(value, precision) {
-        value = parseFloat(value, 10);
-        var power = Math.pow(10, precision || 0);
-        return Math.round(value * power) / power;
-    }
 
     Slider.Selection = function (dragHandle, that, options) {
         function moveSelection (val) {
