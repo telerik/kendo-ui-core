@@ -19,34 +19,45 @@
         <link href="../styles/kendo.vista.css" type="text/css" rel="stylesheet" />
     </head>
     <body>
-        <table id="table1" style="height: 200px">
-            <thead>
-                <tr>
-                    <th data-field="foo">Foo bar asdf asf asdf asdf asdf asdf asdf asdf asdf asdf </th>
-                    <th data-field="bar">asdfasdfasfasdf</th>
-                    <th data-field="bar">asdfasdfasfasdf</th>
-                    <th data-field="bar">asdfasdfasfasdf</th>
-                    <th data-field="bar">asdfasdfasfasdf</th>
-                </tr>
-            </thead>
+        <table id="table1" style="height: 400px">
         </table>
         <script>
             $(document).ready(function() {
-                var data = [];
-                for (var i = 1; i <= 20; i++ ) {
-                    data.push( { foo: "foo" + i, bar: "bar" + i, baz: { foo: "baz.foo" + i } } );
-                }
+                var dataSource = new kendo.data.DataSource({
+                    serverPaging: true,
+                    transport: {
+                        read: function(options) {
+                            var take = options.data.take,
+                                skip = options.data.skip;
+
+                            var data = [];
+
+                            for (var i = skip; i < skip + take; i++) {
+                                data.push({ OrderID: i, ContactName: "Contact " + i, ShipAddress: "Ship Address " + i });
+                            }
+
+                            options.success(data);
+                        }
+                    } ,
+                    deserializer: {
+                        data: function(data) {
+                            return data;
+                        },
+                        total: function() {
+                            return 1000000;
+                        }
+                    },
+                    pageSize: 16
+                });
+
 
                 $("#table1").kendoGrid({
-                    dataSource: {
-                        data: data
+                    dataSource: dataSource,
+                    scrollable: {
+                        virtual: true
                     },
-                    scrollable: true,
                     sortable: {
                         allowUnsort: false
-                    },
-                    pageable: {
-                        pageSize: 10
                     }
                 });
             });
