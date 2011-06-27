@@ -212,6 +212,14 @@
                 collisions = that.collisions,
                 aligned = false;
 
+            var anchorOffset = anchor.data('offset'),
+                currentOffset = anchor.offset();
+
+            if (!anchorOffset || (anchorOffset.left != currentOffset.left)) {
+                anchor.data('offset', currentOffset);
+                wrapper.removeData('position');
+            }
+
             if (options.appendTo === Popup.fn.options.appendTo) {
                 wrapper.css(that._align(origins, positions));
                 aligned = true;
