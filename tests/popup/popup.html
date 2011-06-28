@@ -35,7 +35,7 @@
             test("mousedown outside the element should close it", function(){
                  div.kendoPopup( {
                      close: function() {
-                        ok(!div.is(":visible"));
+                        ok(true);
                         start();
                     }
                 }).show();
@@ -104,15 +104,16 @@
             });
 
             test("close closes the element", function() {
-
-                div.kendoPopup( {
-                    close: function() {
-                        ok(!div.is(":visible"));
-                        start();
-                    }
-                });
+                div.kendoPopup();
 
                 div.show().data("kendoPopup").close();
+
+                setTimeout(function(){
+                    ok(!div.is(":visible"));
+                    start();
+                }, 400);
+
+                stop(500);
             });
 
             test("popup is made absolute", function() {

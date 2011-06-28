@@ -3,24 +3,80 @@
     <head>
         <!-- meta -->
         <!-- meta -->
-        <title>Index</title>
+        <title>Events</title>
         <!-- script -->
         <script src="../../../src/jquery.js"></script>
-        <script src="../js/kendo.console.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.popup.js"></script>
+        <script src="../../../src/kendo.query.js"></script>
+        <script src="../../../src/kendo.datasource.js"></script>
+        <script src="../../../src/kendo.list.js"></script>
+        <script src="../../../src/kendo.autocomplete.js"></script>
         <!-- script -->
         <!-- css -->
+        <link href="../styles/examples.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.common.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.blueopal.css" rel="stylesheet"/>
         <!-- css -->
     </head>
     <body>
         <!-- nav -->
         <!-- nav -->
         <!-- description -->
-        <div class="description">Autocomplete 2</div>
+        <div class="description">This example shows how to attach events to a kendoAutoComplete and how they are fired and triggered.</div>
         <!-- description -->
         <div id="example">
-            <h3>autocomplete/events</h3>
-            <input id="autocomplete" placeholder="type" />
+            <input id="products"/>
+            <script type="text/javascript">
+                var init = function () {
+                    if ("kendoConsole" in window) {
+                        kendoConsole.log("AutoComplete is initialized");
+                    }
+                };
+
+                var open = function () {
+                    if ("kendoConsole" in window) {
+                        kendoConsole.log("Drop-down is opening");
+                    }
+                };
+
+                var close = function () {
+                    if ("kendoConsole" in window) {
+                        kendoConsole.log("Drop-down is closing");
+                    }
+                };
+
+                var change = function () {
+                    if ("kendoConsole" in window) {
+                        kendoConsole.log("Changed: {text: " + this.text() + " , value: " + this.value() + "}");
+                    }
+                };
+
+                var data = [
+                    "Chai",
+                    "Chang",
+                    "Aniseed Syrup",
+                    "Chef Anton",
+                    "Ikura",
+                    "Mishi Kobe Niku",
+                    "Queso Cabrales",
+                    "Organic Dried Pears",
+                    "Schoggi Schokolade",
+                    "Alice Mutton",
+                    "Carnarvon Tigers"
+                ];
+
+                $("#products").kendoAutoComplete({
+                    dataSource: data,
+                    change: change,
+                    close: close,
+                    open: open,
+                    init: init
+                });
+
+            </script>
         </div>
+        <div class="console"></div>
         <!-- tools -->
         <!-- tools -->
     </body>

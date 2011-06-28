@@ -95,13 +95,14 @@
 
             test("select replaces the word at the caret position", function() {
                 var autocomplete = new AutoComplete(input, {
-                    dataSource: ["foo", "bar"],
+                    dataSource: ["foo", "bar", "baz"],
                     separator: ", "
                 });
 
                 input.val("foo, bar, ");
                 input[0].selectionStart = 0;
-                autocomplete.select($("<li>baz</li>"));
+                autocomplete.dataSource.read();
+                autocomplete.select(autocomplete.ul.children().eq(2));
                 equal(input.val(), "baz, bar, ");
             });
        </script>
