@@ -16,6 +16,7 @@
                 box,
                 targetBox;
 
+            // ------------------------------------------------------------
             module("Box2D", {
                 setup: function() {
                     box = new Box2D(0, 0, 20, 20);
@@ -233,6 +234,44 @@
 
             test("unpad returns box instance", function() {
                 equal(box.unpad(0), box);
+            });
+
+            // ------------------------------------------------------------
+            var deepExtend = Chart.deepExtend,
+                extendSrc,
+                extendDst;
+
+            module("deepExtend", {
+                setup: function() {
+                    extendSrc = {
+                        margin: {
+                            top: 10
+                        },
+                        colors: ["red"],
+                        border: 5
+                    };
+
+                    extendDst = {
+                        margin: 5,
+                        colors: ["green", "blue"],
+                        border: undefined
+                    }
+
+                    deepExtend(extendDst, extendSrc);
+                }
+            });
+
+            test("Overwrites arrays", function() {
+                equal(extendDst.colors[0], "red");
+                equal(extendDst.colors.length, 1);
+            });
+
+            test("Does not copy undefined values", function() {
+                equal(extendDst.border, 5);
+            });
+
+            test("Overwrites fields containing primitive types", function() {
+                equal(extendDst.margin.top, 10);
             });
 
         </script>
