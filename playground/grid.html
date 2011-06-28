@@ -26,14 +26,15 @@
                 var total = 1000000,
                      remoteDataSource = new kendo.data.DataSource({
                          serverPaging: true,
-                         pageSize: 16,
+                         pageSize: 100,
                          transport: {
                              read: {
                                  url: "http://odata.netflix.com/Catalog/Titles",
                                  dataType: "jsonp",
                                  jsonpCallback: "callback",
-                                 cache: false
+                                 cache: true
                              },
+                             cache: "inmemory",
                              dialect: {
                                  read: function(options) {
                                      return kendo.format("$format=json&$orderby=Name&$top={0}&$skip={1}&$inlinecount=allpages&$callback=callback", options.take, options.skip);
@@ -78,7 +79,8 @@
 
 
                 $("#table1").kendoGrid({
-                    dataSource: dataSource,
+                    dataSource: remoteDataSource,
+                    columns: ["Name"],
                     scrollable: {
                         virtual: true
                     },

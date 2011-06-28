@@ -89,19 +89,19 @@
                     filter: "th:not(.t-group-cell)",
                     groupContainer: "div.t-grouping-header",
                     dataSource: that.dataSource
-                });                
-            }
+                });
 
-            that.tbody.delegate(".t-grouping-row .t-collapse, .t-grouping-row .t-expand", "click", function(e) {
-                e.preventDefault();
-                var element = $(this),
-                    group = element.closest("tr");
-                if(element.hasClass('t-collapse')) {
-                    that.collapseGroup(group);
-                } else {
-                    that.expandGroup(group);
-                }
-            });
+                that.tbody.delegate(".t-grouping-row .t-collapse, .t-grouping-row .t-expand", "click", function(e) {
+                    e.preventDefault();
+                    var element = $(this),
+                        group = element.closest("tr");
+                    if(element.hasClass('t-collapse')) {
+                        that.collapseGroup(group);
+                    } else {
+                        that.expandGroup(group);
+                    }
+                });
+            }
         },
 
         _selectable: function() {
@@ -316,11 +316,27 @@
 
                 that._scrollTop = rowHeight;
 
-                dataSource.range(skip, take);
-            } else {
-                that._scrollTop = scrollTop - (skip * rowHeight);
-                that.tableWrap[0].scrollTop = that._scrollTop;
+                if (dataSource.inRange(skip, take)) {
+                    dataSource.range(skip, take);
+                } else {
+                    //if (dataSource.skip() !== skip) {
+                        clearTimeout(that._timeout);
+                    //}
+
+                    that._timeout = setTimeout(function() {
+                        dataSource.range(skip, take);
+                    }, 200);
+                }
+
+                return;
+            } else if (lastRowIndex > skip + take / 2) {
+                if (!dataSource.inRange(skip + take, take)) {
+                    dataSource.prefetch(skip + take, take);
+                }
             }
+
+            that._scrollTop = scrollTop - (skip * rowHeight);
+            that.tableWrap[0].scrollTop = that._scrollTop;
         },
 
         _dataBound: function() {
@@ -330,6 +346,8 @@
                 html = "",
                 idx,
                 maxHeight = 250000;
+
+            clearTimeout(that._timeout);
 
             that._rowHeight = rowHeight = that.table[0].rows[0].offsetHeight;
 
@@ -532,7 +550,6 @@
         _rowsHtml: function(data) {
             var that = this,
                 html = "",
-                length,
                 rowTemplate = that.rowTemplate,
                 altRowTemplate = that.altRowTemplate;
 
@@ -578,16 +595,16 @@
         collapseGroup: function(group) {
             group = $(group).find(".t-icon").addClass("t-expand").removeClass("t-collapse").end();
             var level = group.find(".t-group-cell").length;
-            
+
             group.nextUntil(function() {
                 return $(".t-group-cell", this).length <= level;
-            }).hide();            
+            }).hide();
         },
         expandGroup: function(group) {
             group = $(group).find(".t-icon").addClass("t-collapse").removeClass("t-expand").end();
             var that = this,
                 level = group.find(".t-group-cell").length;
-            
+
             group.nextAll("tr").each(function () {
                 var tr = $(this);
                 var offset = tr.find(".t-group-cell").length;
@@ -612,7 +629,7 @@
             } else if(groups < length) {
                 length = length - groups;
                 $($.grep(cells, function(item, index) { return length > index } )).remove();
-            }                        
+            }
         },
         refresh: function() {
             var that = this,
@@ -628,15 +645,12 @@
             if (!that.columns.length) {
                 that._autoColumns(data[0]);
             }
-            
-            that._group = groups > 0 || that._group;
-                        
-            if(that._group) {
+
+            if(that.groupable) {
                 that._templates();
                 that._updateHeader(groups);
-                that._group = groups > 0;
             }
-            
+
             if(groups > 0) {
                 for (idx = 0, length = data.length; idx < length; idx++) {
                     html += that._groupRowHtml(data[idx], colspan, 0);

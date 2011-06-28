@@ -113,6 +113,14 @@
             return $.ajax(this.setup(options, CREATE));
         },
 
+        inRange: function(options) {
+            var that = this;
+
+            options = that.setup({ data: options }, READ);
+
+            return !!that.cache.find(options.data);
+        },
+
         read: function(options) {
             var that = this,
                 success,
@@ -537,6 +545,21 @@
             });
         },
 
+        prefetch: function(skip, take) {
+            var that = this;
+
+            that.transport.read( {
+                data: {
+                    skip: skip,
+                    take: take,
+                    sort: that._sort,
+                    filter: that._filter,
+                    group: that._group,
+                    aggregates: that._aggregates
+                }
+            });
+        },
+
         update: function(id, values) {
             var that = this,
             model = that.model(id);
@@ -822,18 +845,34 @@
             return Math.ceil((that.total() || 0) / pageSize);
         },
 
-        range: function(index, count) {
+        inRange: function(skip, take) {
             var that = this;
-            if(count !== undefined) {
-                index = index || 0;
 
-                that.query({ skip: index, take: count, sort: that.sort(), filter: that.filter(), group: that.group(), aggregates: that.aggregate()  });
+            return that.transport.inRange( {
+                skip: skip,
+                take: take,
+                sort: that._sort,
+                filter: that._filter,
+                group: that._group,
+                aggregates: that._aggregates
+            });
+        },
+
+        range: function(skip, take) {
+            var that = this;
+
+            if (take !== undefined) {
+                skip = skip || 0;
+
+                that.query({ skip: skip, take: take, sort: that.sort(), filter: that.filter(), group: that.group(), aggregates: that.aggregate() });
             }
         },
+
         skip: function() {
             var that = this;
             return that._skip || (that._page !== undefined ? (that._page  - 1) * (that.take() || 1) : undefined);
         },
+
         take: function() {
             var that = this;
             return that._take || that._pageSize;
