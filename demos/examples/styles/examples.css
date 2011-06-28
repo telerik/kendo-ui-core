@@ -370,15 +370,19 @@ pre.prettyprint
     margin-left: 5px;
     background: none;
     width: 200px;
-    border-color: #dedede;
 }
 
 .skinSelector .t-state-default,
 .skinSelector .t-state-hover,
+.skinSelector .t-state-hover:hover,
 .skinSelector .t-state-active
 {
     color: #333;
     background: #F3F3F3;
+    border-color: #dedede;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
 }
 
 .skinSelector .t-dropdown-wrap .t-arrow-down
