@@ -90,6 +90,17 @@
                     groupContainer: "div.t-grouping-header",
                     dataSource: that.dataSource
                 });
+
+                that.tbody.delegate(".t-grouping-row .t-collapse, .t-grouping-row .t-expand", "click", function(e) {
+                    e.preventDefault();
+                    var element = $(this),
+                        group = element.closest("tr");
+                    if(element.hasClass('t-collapse')) {
+                        that.collapseGroup(group);
+                    } else {
+                        that.expandGroup(group);
+                    }
+                });
             }
         },
 
@@ -551,7 +562,7 @@
             html +=  '<tr class="t-grouping-row">' + that._groupCell(level) +
                       '<td colspan="' + colspan + '">' +
                         '<p class="t-reset">' +
-                         '<a class="t-icon t-collapse" href="#"></a>' +
+                         '<a class="t-icon t-collapse" href="#">C/E</a>' +
                          group.field + ': ' + group.value +'</p></td></tr>';
 
             if(group.hasSubgroups) {
@@ -564,10 +575,44 @@
 
             return html;
         },
+        collapseGroup: function(group) {
+            group = $(group).find(".t-icon").addClass("t-expand").removeClass("t-collapse").end();
+            var level = group.find(".t-group-cell").length;
+            
+            group.nextUntil(function() {
+                return $(".t-group-cell", this).length <= level;
+            }).hide();            
+        },
+        expandGroup: function(group) {
+            group = $(group).find(".t-icon").addClass("t-collapse").removeClass("t-expand").end();
+            var that = this,
+                level = group.find(".t-group-cell").length;
+            
+            group.nextAll("tr").each(function () {
+                var tr = $(this);
+                var offset = tr.find(".t-group-cell").length;
+                if (offset <= level)
+                    return false;
+
+                if (offset == level + 1) {
+                    tr.show();
+
+                    if (tr.hasClass("t-grouping-row") && tr.find(".t-icon").hasClass("t-collapse"))
+                        that.expandGroup(tr);
+                }
+            });
+        },
         _updateHeader: function(groups) {
-            var that = this;
-            groups -= that.thead.find("th.t-group-cell").length;
-            $(new Array(groups + 1).join('<th class="t-group-cell t-header">&nbsp;</th>')).prependTo(that.thead.find("tr"));
+            var that = this,
+                cells = that.thead.find("th.t-group-cell"),
+                length = cells.length;
+
+            if(groups > length) {
+                $(new Array(groups - length + 1).join('<th class="t-group-cell t-header">&nbsp;</th>')).prependTo(that.thead.find("tr"));
+            } else if(groups < length) {
+                length = length - groups;
+                $($.grep(cells, function(item, index) { return length > index } )).remove();
+            }                        
         },
         refresh: function() {
             var that = this,
@@ -576,25 +621,23 @@
                 html = "",
                 data = that.dataSource.view(),
                 tbody,
-                placeholder,
-                rowTemplate,
-                altRowTemplate,
+                placeholder,               
                 groups = (that.dataSource.group() || []).length,
                 colspan = groups + that.columns.length;
 
             if (!that.columns.length) {
                 that._autoColumns(data[0]);
             }
-
-            that._templates();
-            rowTemplate = that.rowTemplate,
-            altRowTemplate = that.altRowTemplate;
-
-            if(groups > 0) {
-                for (idx = 0, length = data.length; idx < length; idx++) {
-                    html += that._groupRowHtml(data[idx], colspan, 0);
-                }
+            
+            if(that.groupable) { 
+                that._templates();
                 that._updateHeader(groups);
+            }
+            
+            if(groups > 0) {                 
+                for (idx = 0, length = data.length; idx < length; idx++) {                    
+                    html += that._groupRowHtml(data[idx], colspan, 0);
+                }                                
             } else {
                 html += that._rowsHtml(data);
             }
