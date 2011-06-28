@@ -1234,14 +1234,15 @@
             border: {
                 color: BLACK,
                 width: 0
-            }
+            },
+            margin: { }
         },
 
         updateLayout: function() {
             var root = this,
                 currentBox = new Box2D(0, 0, root.options.width, root.options.height);
 
-            root.box = currentBox;
+            root.box = currentBox.unpad(root.options.margin);
 
             for (var i = 0; i < root.children.length; i++) {
                 root.children[i].updateLayout(currentBox);
@@ -1263,7 +1264,7 @@
             var root = this,
                 options = root.options,
                 border = options.border || {},
-                box = root.box.clone().unpad(border.width),
+                box = root.box.clone().pad(options.margin).unpad(border.width),
                 elements = [
                     factory.rect(box, {
                         stroke: border.width ? border.color : "",

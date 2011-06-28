@@ -63,18 +63,31 @@
             (function() {
                 var rootElement,
                     rootViewElement,
-                    factory;
+                    rootRect,
+                    factory,
+                    MARGIN = 10;
 
+                function createRoot(options) {
+                    rootElement = new Chart.RootElement(options);
+                    rootViewElement = new ViewElementStub();
+
+                    rootElement.updateLayout();
+                }
+
+                function renderRoot() {
+                    rootElement.getViewElements(factory);
+                    rootRect = factory.log.rect[0];
+                }
+
+                // ------------------------------------------------------------
                 module("RootElement", {
                     setup: function() {
-                        rootElement = new Chart.RootElement();
-                        rootViewElement = new ViewElementStub();
+                        createRoot();
                         factory = new ViewFactoryStub();
                     }
                 });
 
                 test("creates root view element", function() {
-                    rootElement.updateLayout();
                     factory.root = function() {
                         return rootViewElement;
                     };
@@ -82,7 +95,6 @@
                 });
 
                 test("sets dimensions on view element", 2, function() {
-                    rootElement.updateLayout();
                     factory.root = function(options) {
                         equal(options.width, 600);
                         equal(options.height, 400);
@@ -96,7 +108,7 @@
                 test("creates view elements for child elements", function() {
                     var group = new ViewElementStub(),
                         text = new ViewElementStub();
-                    rootElement.updateLayout();
+
                     factory.root = function() {
                         return new ViewElementStub();
                     };
@@ -120,22 +132,70 @@
                 });
 
                 test("sets border to rootElement", function() {
-                    rootElement.options.border.width = 1;
-                    rootElement.options.border.color = "red";
-                    rootElement.updateLayout();
-                    rootElement.getViewElements(factory);
+                    createRoot({
+                        border: {
+                            width: 1,
+                            color: "red"
+                        }
+                    });
+                    renderRoot();
 
-                    sameBox(factory.log.rect, [1, 1, 599, 399]);
-                    equals(factory.log.rect[0].style.strokeWidth, 1);
-                    equals(factory.log.rect[0].style.stroke, "red");
+                    sameBox(rootRect, new Box2D(1, 1, 599, 399));
+                    equals(rootRect.style.strokeWidth, 1);
+                    equals(rootRect.style.stroke, "red");
                 });
 
                 test("sets background to rootElement", function() {
-                    rootElement.options.border.background = "red";
-                    rootElement.updateLayout();
-                    rootElement.getViewElements(factory);
+                    createRoot({
+                        background: "red"
+                    });
+                    renderRoot();
 
-                    sameBox(factory.log.rect[0].style.fill, "red");
+                    equals(rootRect.style.fill, "red");
+                });
+
+                test("applies top margin", function() {
+                    createRoot({
+                        margin: {
+                            top: MARGIN
+                        }
+                    });
+                    renderRoot();
+
+                    equals(rootElement.box.y1, rootRect.y1 + MARGIN);
+                });
+
+                test("applies right margin", function() {
+                    createRoot({
+                        margin: {
+                            right: MARGIN
+                        }
+                    });
+                    renderRoot();
+
+                    equals(rootElement.box.x2, rootRect.x2 - MARGIN);
+                });
+
+                test("applies bottom margin", function() {
+                    createRoot({
+                        margin: {
+                            bottom: MARGIN
+                        }
+                    });
+                    renderRoot();
+
+                    equals(rootElement.box.y2, rootRect.y2 - MARGIN);
+                });
+
+                test("applies left margin", function() {
+                    createRoot({
+                        margin: {
+                            left: MARGIN
+                        }
+                    });
+                    renderRoot();
+
+                    equals(rootElement.box.x1, rootRect.x1 + MARGIN);
                 });
 
             })();
