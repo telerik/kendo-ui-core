@@ -1683,7 +1683,8 @@
                 labelBox = children[0].box.clone(),
                 offsetX,
                 offsetY,
-                margin = getSpacing(options.margin);
+                margin = getSpacing(options.margin),
+                markerSpace = legend.markerSize() * 2;
 
             // Position labels below each other
             for (var i = 1; i < childrenCount; i++) {
@@ -1694,14 +1695,14 @@
 
             // Vertical center is calculated relative to the container, not the parent!
             if (options.position == LEFT) {
-                offsetX = targetBox.x1 + legend.markerSize() * 2 + margin.left;
+                offsetX = targetBox.x1 + markerSpace + margin.left;
                 offsetY = (targetBox.y2 - labelBox.height()) / 2;
-                labelBox.x2 += margin.left + margin.right;
+                labelBox.x2 += markerSpace + margin.left + margin.right;
             } else {
                 offsetX = targetBox.x2 - labelBox.width() - margin.right;
                 offsetY = (targetBox.y2 - labelBox.height()) / 2;
                 labelBox.translate(offsetX, offsetY);
-                labelBox.x1 -= legend.markerSize() * 2 + margin.left;
+                labelBox.x1 -= markerSpace + margin.left;
             }
 
             legend.translateChildren(offsetX + options.offsetX,
