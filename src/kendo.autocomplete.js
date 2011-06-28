@@ -72,7 +72,6 @@
         },
 
         options: {
-            dataTextField: "data",
             suggest: false,
             minLength: 1,
             delay: 300,
@@ -111,12 +110,14 @@
                     return;
                 }
 
+                data = that.dataSource.view()[idx];
+                text = that._text(data);
+
                 if (separator) {
                     text = replaceWordAtCaret(caretPosition(that.element[0]), that.value(), text, separator);
                 }
-                data = that.dataSource.view()[idx];
 
-                that.value(that._text(data));
+                that.value(text);
                 that.current(li.addClass(SELECTED));
             }
         },

@@ -180,11 +180,14 @@
 
             test("separator and selecting a word", function() {
                 var autocomplete = new AutoComplete(input, {
+                    dataSource: ["foo", "bar"],
                     suggest: true,
                     separator: ", "
                 });
 
-                autocomplete.select($("<li>foo</li>"));
+                autocomplete.dataSource.read();
+
+                autocomplete.select(autocomplete.ul.children().eq(0));
                 equal(input.val(), "foo, ");
             });
 

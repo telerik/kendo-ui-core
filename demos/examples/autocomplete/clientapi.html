@@ -3,7 +3,7 @@
     <head>
         <!-- meta -->
         <!-- meta -->
-        <title>First Look</title>
+        <title>API</title>
         <!-- script -->
         <script src="../../../src/jquery.js"></script>
         <script src="../../../src/kendo.core.js"></script>
@@ -23,28 +23,24 @@
         <!-- nav -->
         <!-- nav -->
         <!-- description -->
-        <div class="description">First Look</div>
+        <div class="description">Client API</div>
         <!-- description -->
         <div id="example">
-            <input id="products"/>
+            <input id="products" />
 
-            available options:
-            [
-                    "Chai",
-                    "Chang",
-                    "Aniseed Syrup",
-                    "Chef Anton",
-                    "Ikura",
-                    "Mishi Kobe Niku",
-                    "Queso Cabrales",
-                    "Organic Dried Pears",
-                    "Schoggi Schokolade",
-                    "Alice Mutton",
-                    "Carnarvon Tigers"
-            ];
+            <div id="options">
+                With available API you can:
+                <div>
+                    <input id="value" />
+                    <button id="setValue">Set value</button>
+                </div>
+                <div>
+                    <button id="getValue">Get value</button>
+                </div>
+                <em>Maybe we can show search, select, suggest</em>
+           </div>
+
             <script type="text/javascript">
-
-                //input HTML element
                 var data = [
                     "Chai",
                     "Chang",
@@ -59,12 +55,17 @@
                     "Carnarvon Tigers"
                 ];
 
-                $("#products").kendoAutoComplete({
-                    dataSource: data,
-                    suggest: true,
-                    separator: ", "
+                $("#products").kendoAutoComplete(data);
+
+                var autocomplete = $("#products").data("kendoAutoComplete");
+
+                $("#setValue").click(function() {
+                    autocomplete.value($("#value").val());
                 });
 
+                $("#getValue").click(function() {
+                    alert(autocomplete.value());
+                });
            </script>
         </div>
         <!-- tools -->
