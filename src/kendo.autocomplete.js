@@ -159,10 +159,10 @@
             }
 
             if (!word) {
+                word = value.substring(0, caret);
+
                 if (separator) {
-                    word = value.substring(0, caret).split(separator).pop();
-                } else {
-                    word = value.substring(0, caret);
+                    word = word.split(separator).pop();
                 }
             }
 
