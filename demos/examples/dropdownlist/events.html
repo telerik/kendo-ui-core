@@ -34,6 +34,18 @@
                     }
                 };
 
+                var open = function () {
+                    if ("kendoConsole" in window) {
+                        kendoConsole.log("List is opening");
+                    }
+                };
+
+                var close = function () {
+                    if ("kendoConsole" in window) {
+                        kendoConsole.log("List is closing");
+                    }
+                };
+
                 var change = function () {
                     if ("kendoConsole" in window) {
                         kendoConsole.log("Changed: {text: " + this.text() + " , value: " + this.value() + "}");
@@ -57,6 +69,8 @@
                 $("#products").kendoDropDownList({
                     dataSource: data,
                     change: change,
+                    close: close,
+                    open: open,
                     init: init
                 });
 

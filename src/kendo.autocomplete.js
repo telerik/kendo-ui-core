@@ -47,6 +47,8 @@
 
             that._popup();
 
+            that._accessors();
+
             that.dataSource = DataSource.create(that.options.dataSource || {}).bind(CHANGE, proxy(that.refresh, that));
 
             that.bind(["init", CHANGE], that.options);
@@ -70,6 +72,7 @@
         },
 
         options: {
+            dataTextField: "data",
             suggest: false,
             minLength: 1,
             delay: 300,
@@ -97,16 +100,23 @@
         select: function(li) {
             var that = this,
             separator = that.options.separator,
-            text;
+            data = that.dataSource.view(),
+            text,
+            idx;
 
             if (li && !li.hasClass(SELECTED)) {
-                text = li.text();
+                idx = $.inArray(li[0], that.ul[0].childNodes);
+
+                if (idx === -1) {
+                    return;
+                }
 
                 if (separator) {
                     text = replaceWordAtCaret(caretPosition(that.element[0]), that.value(), text, separator);
                 }
+                data = that.dataSource.view()[idx];
 
-                that.value(text);
+                that.value(that._text(data));
                 that.current(li.addClass(SELECTED));
             }
         },

@@ -47,9 +47,11 @@
                 var dataSource = new kendo.data.DataSource.create(data);
 
                 $("#products").kendoDropDownList({
+                    index: 0,
                     dataSource: dataSource
                 });
                 $("#select").kendoDropDownList({
+                    index: 0,
                     dataSource: dataSource
                 });
 

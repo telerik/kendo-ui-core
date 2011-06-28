@@ -27,10 +27,9 @@
         <!-- description -->
         <div id="example">
             <input id="titles" />
-            <input id="name" value="King Kong"/>
             <script type="text/javascript">
                 var remoteDataSource = new kendo.data.DataSource({
-                    serverSorting: true,
+                    serverFiltering: true,
                     transport: {
                         read: {
                             url: "http://odata.netflix.com/Catalog/Titles",
@@ -41,7 +40,14 @@
                         },
                         dialect: {
                             read: function() {
-                                return "$filter=substringof('" + escape($("#name").val()) + "',%20Name)&$format=json&$callback=callback";
+                                var title = "King Kong",
+                                    dropdownlist = $("#titles").data("kendoDropDownList");
+
+                                if (dropdownlist) {
+                                    title = dropdownlist.text() || text;
+                                }
+
+                                return "$filter=substringof('" + title + "',Name)&$format=json&$callback=callback";
                             }
                         }
                     },
@@ -53,18 +59,16 @@
                 });
 
                 $("#titles").kendoDropDownList({
+                    index: 0,
+                    minLength: 3,
+                    filter: "startswith",
                     dataTextField: "Name",
                     dataValueField: "Id",
                     dataSource: remoteDataSource,
-                    template: '<img src="<%= data.BoxArt.SmallUrl %>" alt="<%= data.Name %>" />Title:<%= data.Name %>, Year: <%= data.Name %>',
+                    template: '<img src="${ data.BoxArt.SmallUrl }" alt="${ data.Name }" />Title:${ data.Name }, Year: ${ data.Name }',
                     init: function() {
                         this.ul.width(400)
                     }
-                });
-
-                $("#name").change(function() {
-                    $("#titles").data("kendoDropDownList").showBusy();
-                    remoteDataSource.query();
                 });
             </script>
         </div>
