@@ -232,9 +232,10 @@ pre.prettyprint
     padding-top: 5px;
 }
 
-#nav li
+#nav .t-item
 {
     padding-bottom: 2px;
+    padding-right: 10px;
 }
 
 #nav .t-link
@@ -245,14 +246,14 @@ pre.prettyprint
     border: 0;
     position: relative;
     line-height: 36px;
-    padding: 1px 11px;
+    padding: 1px 1px 1px 11px;
 }
 
 #nav li li .t-link
 {
     font-size: 11px;
     line-height: 18px;
-    padding: 1px 21px;
+    padding: 1px 1px 1px 21px;
 }
 
 #nav .t-state-selected,
@@ -271,7 +272,7 @@ pre.prettyprint
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
-    padding: 0 10px;
+    padding: 0 0 0 10px;
 }
 
 #nav .t-state-selected:after,

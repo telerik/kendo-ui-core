@@ -34,7 +34,8 @@
                 var exampleBody = $("#exampleBody"),
                     exampleName = $(".exampleName"),
                     tools = $("#codeStrip, .skinSelector.t-widget"),
-                    title = Application.fetchTitle();
+                    title = Application.fetchTitle(),
+                    toolsVisible = tools.is(":visible");
 
                 if (title == "Overview")
                     tools.kendoAnimate(transitionEffects, 300, function () { tools.hide(); });
@@ -43,8 +44,8 @@
                     $(".exampleName").empty().html(title);
 
                     setTimeout(function() {
-                        if (title != "Overview" && !tools.is(":visible"))
-                                tools.show().kendoAnimate(transitionEffects, 300, true);
+                        if (title != "Overview" && !toolsVisible)
+                            tools.show().kendoAnimate(transitionEffects, 300, true);
 
                         exampleName.kendoAnimate(transitionEffects, 300, true);
                     }, 100);
