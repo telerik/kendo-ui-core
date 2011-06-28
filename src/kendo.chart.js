@@ -1467,7 +1467,13 @@
             aboveAxis: true,
             position: "outsideEnd",
             margin: 2,
-            padding: 2
+            padding: 2,
+            color: "#000",
+            background: "",
+            border: {
+                width: 0,
+                color: BLACK
+            }
         },
 
         updateLayout: function(targetBox, isVertical) {
@@ -1572,6 +1578,7 @@
     var Legend = ChartElement.extend({
         init: function(options) {
             var legend = this;
+
             ChartElement.fn.init.call(legend, options);
 
             legend.createLabels();
@@ -1597,8 +1604,7 @@
 
         createLabels: function() {
             var legend = this,
-                series = legend.options.series,
-                labels = legend._labels = [];
+                series = legend.options.series;
 
             for (var i = 0; i < series.length; i++) {
                 var name = series[i].name,
