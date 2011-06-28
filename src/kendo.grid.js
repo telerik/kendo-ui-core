@@ -261,8 +261,7 @@
                 }
 
                 if (!that.content.is(".t-grid-content, .t-grid-table-wrap")) {
-                    that.content = $('<div class="t-grid-content" />');
-                    that.table.wrap(that.content);
+                    that.content = that.table.wrap('<div class="t-grid-content" />').parent();
 
                     if (scrollable !== true && scrollable.virtual) {
                         that.tableWrap = that.table.wrap('<div class="t-grid-table-wrap"/>').parent();
