@@ -3416,6 +3416,7 @@
     Chart.VMLText = VMLText;
     Chart.VMLPath = VMLPath;
     Chart.VMLGroup = VMLGroup;
+    Chart.deepExtend = deepExtend;
 
 })(jQuery);
 
