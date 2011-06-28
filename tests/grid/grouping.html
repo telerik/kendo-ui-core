@@ -24,8 +24,16 @@
                 DataSource = kendo.data.DataSource;
 
             function table() {
-                return document.createElement("table");
+                return document.body.appendChild(document.createElement("table"));                
             }
+
+             module("kendo.ui.Grid grouping", {
+                setup: function() {                    
+                },
+                teardown: function() {
+                    $("div.t-grid").remove();
+                }
+            });
 
             test("groupable instanciate kendo.ui.Groupable", function() {
                 var grid = new Grid(table(), { data:[], groupable: true });
@@ -114,6 +122,131 @@
                 ok(headerCells.is(".t-group-cell"));                
             });
 
+            test("grouping non-scrollable grid creates header group cells", function() {
+                 var grid = new Grid(table(), { 
+                    data:[{foo: "foo", bar: "bar"}, {foo: "fooz", bar: "baz"}], 
+                    groupable: true,
+                    scrollable: false
+                }),
+                header = grid.thead;
+
+                grid.dataSource.group([{field: "foo"},{field: "bar"}]);                
+
+                var headerCells = header.find("th");                
+                equal(headerCells.length, 4);
+                ok(headerCells.is(".t-group-cell"));                
+            });
+
+            test("ungroup remove header group cells", function() {
+                var grid = new Grid(table(), { 
+                    data:[{foo: "foo", bar: "bar"}, {foo: "fooz", bar: "baz"}], groupable: true 
+                }),
+                header = grid.thead;
+                grid.dataSource.group([{field: "foo"}, {field: "bar"}]);
+                grid.dataSource.group([{field: "foo"}]);
+                
+                var headerCells = header.find("th");                
+                equal(headerCells.length, 3);
+            });
+
+            test("ungroup all remove all header group cells", function() {
+                var grid = new Grid(table(), { 
+                    data:[{foo: "foo", bar: "bar"}, {foo: "fooz", bar: "baz"}], groupable: true 
+                }),
+                header = grid.thead;
+                grid.dataSource.group([{field: "foo"}, {field: "bar"}]);
+                grid.dataSource.group([]);
+                
+                var headerCells = header.find("th");                   
+                equal(headerCells.length, 2);
+            });
+
+            test("collapseGroup hides all grop data rows", function() {
+                var grid = new Grid(table(), { 
+                    data:[{foo: "foo", bar: "bar"}, {foo: "fooz", bar: "baz"}], 
+                    groupable: true 
+                }),
+                tbody = grid.tbody;
+
+                grid.dataSource.group([{field: "foo"}]);
+                grid.collapseGroup(tbody.find("tr.t-grouping-row:first"));
+
+                var dataRows = tbody.children(":not(.t-grouping-row)");                
+                equal(dataRows.length, 2);
+                ok(dataRows.eq(0).is(":hidden"));
+                ok(dataRows.eq(1).is(":visible"));
+            });
+
+            test("collapseGroup change button class to t-expand", function() {
+                var grid = new Grid(table(), { 
+                    data:[{foo: "foo", bar: "bar"}, {foo: "fooz", bar: "baz"}], 
+                    groupable: true 
+                }),
+                tbody = grid.tbody,
+                groupingRow;
+
+                grid.dataSource.group([{field: "foo"}]);
+                groupingRow = tbody.find("tr.t-grouping-row:first");
+                grid.collapseGroup(groupingRow);
+               
+                ok(groupingRow.find(".t-icon").hasClass("t-expand"));
+            });
+
+            test("expandGroup change button class to t-collapse", function() {
+                var grid = new Grid(table(), { 
+                    data:[{foo: "foo", bar: "bar"}, {foo: "fooz", bar: "baz"}], 
+                    groupable: true 
+                }),
+                tbody = grid.tbody,
+                groupingRow;
+
+                grid.dataSource.group([{field: "foo"}]);
+                groupingRow = tbody.find("tr.t-grouping-row:first");
+                grid.collapseGroup(groupingRow);
+                grid.expandGroup(groupingRow);
+               
+                ok(groupingRow.find(".t-icon").hasClass("t-collapse"));
+            });
+
+            test("expandGroup shows all grop data rows", function() {
+                var grid = new Grid(table(), { 
+                    data:[{foo: "foo", bar: "bar"}, {foo: "fooz", bar: "baz"}], 
+                    groupable: true 
+                }),
+                tbody = grid.tbody,
+                groupingRow;
+
+                grid.dataSource.group([{field: "foo"}]);
+                groupingRow = tbody.find("tr.t-grouping-row:first");
+                grid.collapseGroup(groupingRow);
+                grid.expandGroup(groupingRow);
+
+                var dataRows = tbody.children(":not(.t-grouping-row)");                
+                equal(dataRows.length, 2);
+                ok(dataRows.eq(0).is(":visible"));
+                ok(dataRows.eq(1).is(":visible"));
+            });
+
+            test("expand parent group does not expand collapsed sub groups", function() {
+                var grid = new Grid(table(), { 
+                    data:[{foo: "foo", bar: "bar"}, {foo: "foo", bar: "baz"}], 
+                    groupable: true 
+                }),
+                tbody = grid.tbody,
+                masterGroup, 
+                subGroup;
+
+                grid.dataSource.group([{field: "foo"}, {field: "bar"}]);
+                masterGroup = tbody.find(".t-grouping-row:first");
+                subGroup = tbody.find(".t-grouping-row").eq(1);
+
+                grid.collapseGroup(subGroup);
+                grid.collapseGroup(masterGroup);
+                grid.expandGroup(masterGroup);
+
+                equal(tbody.find("tr:visible").length, 4);
+                ok(subGroup.find(".t-icon").hasClass("t-expand"));
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
