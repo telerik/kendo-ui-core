@@ -89,7 +89,7 @@
             chart._applyDefaults();
 
             if (chart.options.dataSource) {
-                chart.dataSource.query();
+                chart.dataSource.read();
             } else {
                 chart._redraw();
             }
