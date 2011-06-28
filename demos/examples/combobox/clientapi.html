@@ -29,44 +29,38 @@
             <input id="products" />
 
             <div id="options">
+                With available API you can:
                 <div>
-                    <button id="enable">Enable</button>
+                    <button id="enable">Enable</button> or
                     <button id="disable">Disable</button>
                 </div>
                 <div>
-                    <label for="open">Open:</label>
-                    <button id="open">Open drop down</button>
+                    <button id="open">Open drop-down</button> or
+                    <button id="close">Close drop-down</button>
                 </div>
                 <div>
-                    <label for="close">Close:</label>
-                    <button id="close">Close drop down</button>
+                    <button id="select">Select by index</button>
+                    <input id="index" value="0" />
                 </div>
                 <div>
-                    <label for="value">
-                        Select by value:</label>
+                    <button id="setValue">Select by value</button>
                     <input id="value" value="1" />
-                    <button id="setValue">Set value</button>
-                    <br />
-                    <button id="getValue">Get value</button> /
+                </div>
+                <div>
+                    <button id="getValue">Get value</button> or
                     <button id="getText">Get text</button>
                 </div>
                 <div>
-                    <label for="index">
-                        Select by index:</label>
-                    <input id="index" value="0" />
-                    <button id="select">Select item</button>
-                </div>
-
-                <div>
-                    <label for="word">
-                     Find item which starts with:</label>
-                     <input id="word" value="Ch" />
+                    <label for="filter">
+                     Choose filter type</label>
                      <select id="filter" onchange="filterTypeChanged()">
                          <option value="none">None</option>
                          <option value="startswith">Starts with</option>
                          <option value="contains">Contains</option>
                          <option value="eq">Equal</option>
                      </select>
+                     and search for item :
+                     <input id="word" value="Ch" />
                      <button id="find">Find</button>
                 </div>
            </div>
