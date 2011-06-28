@@ -98,17 +98,74 @@
                 $(".description").empty().html($.trim(Application.description(currentHtml)));
         },
 
+        fetchSkin: function(skinName, animate) {
+            var kendoLinks = $("link[href*='kendo.']", document.getElementsByTagName("head")[0]),
+                commonLink = kendoLinks.filter("[href*='kendo.common']"),
+                skinLink = kendoLinks.filter(":not([href*='kendo.common'])"),
+                currentFolder = new Array(location.href.match(/\//g).length - initialFolder + 1).join("../"),
+                url = currentFolder + commonLink.attr("href").replace(/kendo\.\w+\.css/i, "kendo." + skinName + ".css"),
+                exampleElement = $("#example"), newLink;
+
+            if (!$.browser.msie) {
+                newLink = skinLink
+                    .eq(0)
+                    .clone()
+                    .attr("href", url);
+            }
+
+            var changeSkin = function () {
+
+                if ($.browser.msie) {
+                    newLink = document.createStyleSheet(url);
+                }
+
+                skinLink.eq(0).before(newLink);
+                skinLink.remove();
+                exampleElement[0].style.cssText = exampleElement[0].style.cssText;
+            };
+
+            $.get(url, function() {
+                if (animate) {
+                    exampleElement.kendoAnimate(transitionEffects, 300, function() {
+                        changeSkin();
+                        setTimeout(function() {
+                            exampleElement.kendoAnimate(transitionEffects, 300, true);
+                        }, 100);
+                    });
+                } else
+                    changeSkin();
+
+                $("#exampleBody").show();
+            });
+        },
+
         description: function(html) {
             return /<div class="description">(([\u000a\u000d\u2028\u2029]|.)*?)<\/\w+>\s*?<!-- description -->/ig.exec(html)[1];
         },
 
         body: function(html) {
-            var match = /<div id="example([Body]*)">(([\u000a\u000d\u2028\u2029]|.)*?)<!-- tools -->/ig.exec(html);
+            var match = /<div id="example([Body]*)">(([\u000a\u000d\u2028\u2029]|.)*?)<!-- tools -->/ig.exec(html),
+                hasBody = match[0].substr(16, 4) != "Body";
 
-            return (match[1] != "") ? match[2] : "<div id=\"exampleBody\">" + match[0].replace("<!-- tools -->", "") + "</div>";
+            return (match[1] != "") ? match[2] : (hasBody ? "" : "<div id=\"exampleBody\">") + match[0].replace("<!-- tools -->", "") + (hasBody ? "" : "</div>");
         },
 
         init: function() {
+
+            initialFolder = location.href.match(/\//g).length;
+
+            var skinSelector = $("#skinSelector");
+
+            if (sessionStorage && sessionStorage.length) {
+                var kendoSkin = sessionStorage.getItem("kendoSkin");
+
+                if (kendoSkin) {
+                    skinSelector.data("kendoDropDownList").value(kendoSkin);
+                    Application.fetchSkin(kendoSkin);
+                }
+            } else
+                $("#exampleBody").show();
+
             if (pushState) {
                 $("#nav li a").click(
                         function(e) {
@@ -129,8 +186,6 @@
                 history.replaceState({ href: location.href }, null, location.href);
             }
 
-            initialFolder = location.href.match(/\//g).length;
-
             Application.fetchDescription(location.href.substr(-1) == "/" ? location.href + "overview/index.html" : location.href);
 
             $("#viewCode").click(function(e) {
@@ -144,36 +199,12 @@
                     });
             });
 
-            $("#skinSelector").bind("change", function(e) {
-                var kendoLinks = $("link[href*='kendo.']", document.getElementsByTagName("head")[0]),
-                    commonLink = kendoLinks.filter("[href*='kendo.common']"),
-                    skinLink = kendoLinks.filter(":not([href*='kendo.common'])"),
-                    currentFolder = new Array(location.href.match(/\//g).length - initialFolder + 1).join("../"),
-                    url = currentFolder + commonLink.attr("href").replace(/kendo\.\w+\.css/i, "kendo." + $("#skinSelector")[0].value.toLowerCase() + ".css"),
-                    newLink;
+            skinSelector.bind("change", function(e) {
+                var newSkin = $("#skinSelector")[0].value.toLowerCase();
 
-                if ($.browser.msie) {
-                    newLink = document.createStyleSheet(url);
-                } else {
-                    newLink = skinLink
-                        .eq(0)
-                        .clone()
-                        .attr("href", url);
-                }
+                Application.fetchSkin(newSkin, true);
 
-                $.get(url, function() {
-                            var example = $("#example");
-
-                            example.kendoAnimate(transitionEffects, 300, function() {
-                                skinLink.eq(0).before(newLink);
-                                skinLink.remove();
-                                example[0].style.cssText = example[0].style.cssText;
-
-                                setTimeout(function() {
-                                    example.kendoAnimate(transitionEffects, 300, true);
-                                }, 100);
-                            });
-                        });
+                sessionStorage.setItem("kendoSkin", newSkin);
             });
         }
 

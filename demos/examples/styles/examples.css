@@ -89,6 +89,7 @@ body
 #exampleBody
 {
     padding: 0 1px;
+    display: none;
 }
 
 #example
@@ -179,9 +180,10 @@ pre.prettyprint
 
 .t-widget, #nav ul
 {
+    outline: none;
     -webkit-touch-callout: none;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    -webkit-backface-visibility: hidden;
+/*    -webkit-backface-visibility: hidden;*/ /* Very broken in Chrome 12, leaves artifacts on the screen. */
 }
 
 .t-animation-container
