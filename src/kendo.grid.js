@@ -76,15 +76,15 @@
         },
 
         _groupable: function() {
-            var that = this, 
+            var that = this,
                 wrapper = that.wrapper,
                 groupable = that.options.groupable;
 
-            if(groupable) {               
+            if(groupable) {
                 if(!wrapper.has("div.t-grouping-header")[0]) {
                     $("<div />").addClass("t-grouping-header").prependTo(wrapper);
                 }
-                
+
                 that.groupable = new Groupable(wrapper, {
                     filter: "th:not(.t-group-cell)",
                     groupContainer: "div.t-grouping-header",
@@ -245,7 +245,7 @@
 
                 that.content = that.table.parent();
 
-                if(that.content.is(".t-grid-table-wrap")) {
+                if (that.content.is(".t-grid-table-wrap")) {
                     that.content = that.content.parent();
                 }
 
@@ -254,8 +254,7 @@
                     that.table.wrap(that.content);
 
                     if (scrollable !== true && scrollable.virtual) {
-                        that.tableWrap = $('<div class="t-grid-table-wrap"/>');
-                        that.table.wrap(that.tableWrap);
+                        that.tableWrap = that.table.wrap('<div class="t-grid-table-wrap"/>').parent();
                     }
                 }
 
@@ -292,23 +291,25 @@
                 rowHeight = that._rowHeight,
                 skip = dataSource.skip() || 0,
                 take = dataSource.take(),
+                height = that.content.innerHeight(),
                 firstRowIndex = Math.floor(scrollTop / rowHeight);
-                lastRowIndex = Math.floor((scrollTop + take * rowHeight) / rowHeight);
+                lastRowIndex = firstRowIndex + Math.floor(height / rowHeight);
 
             if (firstRowIndex < skip) {
                 skip = Math.max(0, lastRowIndex - take);
 
-                dataSource.range(skip, take);
-
                 that._scrollTop = 0;
+
+                dataSource.range(skip, take);
             } else if (lastRowIndex > skip + take) {
                 skip = firstRowIndex;
 
-                dataSource.range(skip, take);
-
                 that._scrollTop = rowHeight;
+
+                dataSource.range(skip, take);
             } else {
                 that._scrollTop = scrollTop - (skip * rowHeight);
+                that.tableWrap[0].scrollTop = that._scrollTop;
             }
         },
 
@@ -423,11 +424,11 @@
 
                 if (!rowTemplate) {
                     rowTemplate = start;
-                    
+
                     if(groups > 0) {
                         rowTemplate += that._groupCell(groups);
                     }
-                    
+
                     $.each(that.columns, function() {
                         var column = this, template = column.template, field = column.field;
 
@@ -438,7 +439,7 @@
                                 template = settings.begin + "=" + (settings.useWithBlock ? "" : settings.paramName + ".") + field + settings.end;
                             }
                         }
-                        
+
                         rowTemplate += "<td>" + template + "</td>";
                     });
 
@@ -456,7 +457,7 @@
                 options = that.options;
 
             that.rowTemplate = that._tmpl("<tr>", options.rowTemplate);
-            that.altRowTemplate = that._tmpl('<tr class="t-alt">', options.altRowTemplate || options.rowTemplate);            
+            that.altRowTemplate = that._tmpl('<tr class="t-alt">', options.altRowTemplate || options.rowTemplate);
         },
 
         _thead: function() {
@@ -544,15 +545,15 @@
             var that = this,
                 html = "",
                 idx,
-                length,                
+                length,
                 groupItems = group.items;
-                        
-            html +=  '<tr class="t-grouping-row">' + that._groupCell(level) + 
-                      '<td colspan="' + colspan + '">' + 
+
+            html +=  '<tr class="t-grouping-row">' + that._groupCell(level) +
+                      '<td colspan="' + colspan + '">' +
                         '<p class="t-reset">' +
                          '<a class="t-icon t-collapse" href="#"></a>' +
                          group.field + ': ' + group.value +'</p></td></tr>';
-            
+
             if(group.hasSubgroups) {
                 for(idx = 0, length = groupItems.length; idx < length; idx++) {
                     html += that._groupRowHtml(groupItems[idx], colspan - 1, level + 1);
@@ -573,7 +574,7 @@
                 length,
                 idx,
                 html = "",
-                data = that.dataSource.view(),                
+                data = that.dataSource.view(),
                 tbody,
                 placeholder,
                 rowTemplate,
@@ -584,16 +585,16 @@
             if (!that.columns.length) {
                 that._autoColumns(data[0]);
             }
-            
+
             that._templates();
             rowTemplate = that.rowTemplate,
             altRowTemplate = that.altRowTemplate;
-            
-            if(groups > 0) {                                               
-                for (idx = 0, length = data.length; idx < length; idx++) {                    
+
+            if(groups > 0) {
+                for (idx = 0, length = data.length; idx < length; idx++) {
                     html += that._groupRowHtml(data[idx], colspan, 0);
                 }
-                that._updateHeader(groups);                
+                that._updateHeader(groups);
             } else {
                 html += that._rowsHtml(data);
             }
