@@ -784,6 +784,12 @@ div.t-grid-header .t-last-header
     zoom: 1;
 }
 
+.t-grid-table-wrap
+{
+    overflow: hidden;
+    height: 100%;
+}
+
 .t-grid-header table,
 .t-grid-content table,
 .t-grid-footer table
