@@ -1709,6 +1709,10 @@
             legend.translateChildren(offsetX + options.offsetX,
                     offsetY + options.offsetY);
 
+            var labelBoxWidth = labelBox.width();
+            labelBox.x1 = Math.max(targetBox.x1, labelBox.x1);
+            labelBox.x2 = labelBox.x1 + labelBoxWidth;
+
             labelBox.y1 = targetBox.y1;
             labelBox.y2 = targetBox.y2;
 
