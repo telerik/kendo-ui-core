@@ -1235,7 +1235,7 @@
                 color: BLACK,
                 width: 0
             },
-            margin: { }
+            margin: 5
         },
 
         updateLayout: function() {
