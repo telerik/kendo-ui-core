@@ -690,59 +690,52 @@
                     MARKER_MARGIN = MARKER_SIZE = 7,
                     MARGIN = 10;
 
+                function createLegend(options) {
+                    legend = new Chart.Legend($.extend(true,{
+                        series: [ { name: "Series 1" } ]
+                    }, options));
+
+                    legend.updateLayout(chartBox);
+                }
+
+                // ------------------------------------------------------------
                 module("Legend", {
                     setup: function() {
                         viewFactory = new ViewFactoryStub();
+                        createLegend();
                     }
                 });
 
                 test("renders legend in a group", function() {
-                    legend = new Chart.Legend({
-                        series: [ { name: "Series 1" } ]
-                    });
-
-                    legend.updateLayout(chartBox);
                     legend.getViewElements(viewFactory);
                     equal(viewFactory.log.group.length, 1);
                 });
 
                 test("sets zIndex on group", function() {
-                    legend = new Chart.Legend({
-                        series: [ { name: "Series 1" } ],
-                        zIndex: 10
+                    createLegend({
+                            zIndex: 10
                     });
 
-                    legend.updateLayout(chartBox);
                     legend.getViewElements(viewFactory);
                     equal(viewFactory.log.group[0].options.zIndex, 10);
                 });
 
                 test("default zIndex is 1", function() {
-                    legend = new Chart.Legend();
-
                     equal(legend.options.zIndex, 1);
                 });
 
                 test("creates labels for series", 1, function() {
-                    legend = new Chart.Legend({
-                        series: [ { name: "Series 1" } ]
-                    });
-
-                    legend.updateLayout(chartBox);
                     legend.getViewElements(viewFactory);
                     equal(viewFactory.log.text[0].content, "Series 1");
                 });
 
-
                 test("second label is below the first", function() {
-                    legend = new Chart.Legend({
+                    createLegend({
                         series: [
                             { name: "Series 1" },
                             { name: "Series 2" }
                         ]
                     });
-
-                    legend.updateLayout(chartBox);
 
                     var label1 = legend.children[0],
                         label2 = legend.children[1];
@@ -751,22 +744,22 @@
                 });
 
                 test("labels have set font", function() {
-                    legend = new Chart.Legend({
-                        series: [ { name: "Series 1" } ],
+                    createLegend({
                         labels: {
                             font: "10px sans-serif"
                         }
                     });
+
                     equal(legend.children[0].options.font, legend.options.labels.font);
                 });
 
                 test("labels have set color", function() {
-                    legend = new Chart.Legend({
-                        series: [ { name: "Series 1" } ],
+                    createLegend({
                         labels: {
                             color: "#cf0"
                         }
                     });
+
                     equal(legend.children[0].options.color, legend.options.labels.color);
                 });
 
@@ -784,135 +777,93 @@
                 });
 
                 test("legend fills available height", function() {
-                    legend = new Chart.Legend({
-                        series: [ { name: "Series 1" } ]
-                    });
-
-                    legend.updateLayout(chartBox);
-
                     deepEqual([legend.box.y1, legend.box.y2], [chartBox.y1, chartBox.y2]);
                 });
+
+                // ------------------------------------------------------------
+                var baseWidth,
+                    baseHeight;
 
                 module("Legend position", {
                     setup: function() {
                         viewFactory = new ViewFactoryStub();
+
+                        createLegend({ margin: 0 });
+                        baseWidth = legend.box.width();
+
+                        createLegend({ margin: 0, position: "top" });
+                        baseHeight = legend.box.height();
                     }
                 });
 
                 test("positions legend to the right", function() {
-                    legend = new Chart.Legend({
-                        series: [ { name: "Series 1" } ]
+                    createLegend({
+                        position: "right",
+                        margin: 0
                     });
 
-                    legend.updateLayout(chartBox);
-                    var label = legend.children[0];
-
-                    equal(label.box.x1, chartBox.x2 - label.box.width() - MARGIN);
+                    equal(legend.box.x1, chartBox.x2 - legend.box.width());
                 });
 
                 test("positions legend to the left", function() {
-                    legend = new Chart.Legend({
-                        series: [ { name: "Series 1" } ],
+                    createLegend({
                         position: "left"
                     });
-
-                    legend.updateLayout(chartBox);
 
                     equal(legend.box.x1, chartBox.x1);
                     equal(legend.box.x2, chartBox.x1 + legend.box.width());
                 });
 
                 test("positions legend to the top", function() {
-                    legend = new Chart.Legend({
-                    series: [ { name: "Series 1" } ],
+                    createLegend({
                         position: "top"
                     });
-
-                    legend.updateLayout(chartBox);
 
                     equal(legend.box.y1, chartBox.y1);
                 });
 
                 test("positions legend to the bottom", function() {
-                    legend = new Chart.Legend({
-                        series: [ { name: "Series 1" } ],
+                    createLegend({
                         position: "bottom"
                     });
 
-                    legend.updateLayout(chartBox);
-
-                    var label = legend.children[0];
-                    equal(legend.box.y1, chartBox.y2 - label.box.height() - MARGIN * 2);
+                    equal(legend.box.y1, chartBox.y2 - legend.box.height());
                 });
 
-                test("positions legend to the right with margin 10", function() {
-                    legend = new Chart.Legend({
-                        series: [ { name: "Series 1" } ],
+                test("applies left and right margin when positioned to the right", function() {
+                    createLegend({
                         position: "right",
                         margin: MARGIN
                     });
 
-                    legend.updateLayout(chartBox);
-
-                    equal(legend.box.x2, chartBox.x2 - MARGIN);
-                    equal(legend.box.x1, chartBox.x2 - legend.box.width() - MARGIN);
+                    equal(legend.box.x1, chartBox.x2 - baseWidth - 2 * MARGIN);
                 });
 
-                test("positions legend to the left with margin 10", function() {
-                    legend = new Chart.Legend({
-                    series: [ { name: "Series 1" } ],
+                test("applies left and right margin when positioned to the left", function() {
+                    createLegend({
+                        position: "left",
+                        margin: MARGIN
+                    });
+
+                    equals(legend.box.x2, chartBox.x1 + baseWidth + 2 * MARGIN);
+                });
+
+                test("applies top and bottom margin when positioned to the top", function() {
+                    createLegend({
                         position: "top",
-                        margin: MARGIN * 2
+                        margin: MARGIN
                     });
 
-                    legend.updateLayout(chartBox);
-
-                    legend1 = new Chart.Legend({
-                    series: [ { name: "Series 1" } ],
-                        position: "top"
-                    });
-
-                    legend1.updateLayout(chartBox);
-
-                    equal(legend.box.width(), legend1.box.width());
+                    equal(legend.box.y2, chartBox.y1 + baseHeight + 2 * MARGIN);
                 });
 
-                test("positions legend to the top with margin 10", function() {
-                    legend = new Chart.Legend({
-                    series: [ { name: "Series 1" } ],
-                        position: "top",
-                        margin: MARGIN * 2
-                    });
-
-                    legend.updateLayout(chartBox);
-
-                    legend1 = new Chart.Legend({
-                    series: [ { name: "Series 1" } ],
-                        position: "top"
-                    });
-
-                    legend1.updateLayout(chartBox);
-
-                    equal(legend.box.height(), legend1.box.height() + MARGIN * 2);
-                });
-
-                test("positions legend to the bottom with margin 10", function() {
-                    legend = new Chart.Legend({
-                        series: [ { name: "Series 1" } ],
+                test("applies top and bottom margin when positioned to the bottom", function() {
+                    createLegend({
                         position: "bottom",
-                        margin: MARGIN * 2
+                        margin: MARGIN
                     });
 
-                    legend.updateLayout(chartBox);
-
-                    legend1 = new Chart.Legend({
-                        series: [ { name: "Series 1" } ],
-                        position: "bottom"
-                    });
-
-                    legend1.updateLayout(chartBox);
-
-                    equal(legend.box.height(), legend1.box.height() + MARGIN * 2);
+                    equal(legend.box.height(), baseHeight + 2 * MARGIN);
                 });
 
                 //--------------------------------------------------------------
