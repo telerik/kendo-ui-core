@@ -3000,7 +3000,8 @@
             text.template = SVGText.template;
             if (!text.template) {
                 text.template = SVGText.template = template(
-                    "<text x='<%= options.x %>' y='<%= options.y + options.baseline %>' " +
+                    "<text x='<%= Math.round(options.x) %>' " +
+                    "y='<%= Math.round(options.y + options.baseline) %>' " +
                     "style='font: <%= options.font %>' fill='<%= options.color %>'>" +
                     "<%= content %></text>"
                 );
