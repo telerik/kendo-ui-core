@@ -6,6 +6,9 @@
         SELECT = "select",
         SELECTED = "t-state-selected",
         DISABLED = "t-state-disabled",
+        HOVER = "t-state-hover",
+        HOVEREVENTS = "mouseenter mouseleave",
+        INPUTWRAPPER = ".t-dropdown-wrap",
         proxy = $.proxy;
 
     var DropDownList = Select.extend({
@@ -61,7 +64,11 @@
                 ATTRIBUTE = "disabled";
 
             if (enable === false) {
-                wrapper.addClass(DISABLED).unbind();
+                wrapper
+                    .addClass(DISABLED)
+                    .unbind()
+                    .children(INPUTWRAPPER)
+                    .unbind(HOVEREVENTS);
                 element.attr(ATTRIBUTE, ATTRIBUTE);
             } else {
                 element.removeAttr(ATTRIBUTE, ATTRIBUTE);
@@ -83,7 +90,9 @@
                                 that._blur();
                             }, 100);
                         }
-                    });
+                    })
+                    .children(INPUTWRAPPER)
+                    .bind(HOVEREVENTS, that._toggleHover);
             }
         },
 
@@ -239,6 +248,10 @@
             } else {
                 return element.val();
             }
+        },
+
+        _toggleHover: function(e) {
+            $(e.currentTarget).toggleClass(HOVER, e.type == "mouseenter");
         },
 
         _accept: function(li) {

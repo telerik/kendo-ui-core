@@ -9,6 +9,9 @@
         DISABLED = "t-state-disabled",
         SELECT = "select",
         STATE_SELECTED = "t-state-selected",
+        HOVER = "t-state-hover",
+        HOVEREVENTS = "mouseenter mouseleave",
+        INPUTWRAPPER = ".t-dropdown-wrap",
         proxy = $.proxy;
 
     var ComboBox = Select.extend({
@@ -93,12 +96,20 @@
                 arrow = that.arrow;
 
             if (enable === false) {
-                wrapper.addClass(DISABLED);
+                wrapper
+                    .addClass(DISABLED)
+                    .children(INPUTWRAPPER)
+                    .unbind(HOVEREVENTS);
+
                 input.attr(ATTRIBUTE, ATTRIBUTE);
                 element.attr(ATTRIBUTE, ATTRIBUTE);
                 arrow.unbind(CLICK);
             } else {
-                wrapper.removeClass(DISABLED);
+                wrapper
+                    .removeClass(DISABLED)
+                    .children(INPUTWRAPPER)
+                    .bind(HOVEREVENTS, that._toggleHover);
+
                 input.removeAttr(ATTRIBUTE);
                 element.removeAttr(ATTRIBUTE);
                 arrow.bind(CLICK, proxy(that.toggle, that));
@@ -287,6 +298,10 @@
             } else {
                 return element.val();
             }
+        },
+
+        _toggleHover: function(e) {
+            $(e.currentTarget).toggleClass(HOVER, e.type == "mouseenter");
         },
 
         _accept: function(li) {

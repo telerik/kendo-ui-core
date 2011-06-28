@@ -11,6 +11,8 @@
         ABSOLUTE = "absolute",
         HIDDEN = "hidden",
         BODY = "body",
+        ACTIVE = "t-state-active",
+        ACTIVECHILDREN = ".t-dropdown-wrap, .t-link",
         extend = $.extend,
         proxy = $.proxy,
         Component = ui.Component,
@@ -133,6 +135,9 @@
 
                 that.element.data('effects', animation.effects);
                 that.element.kendoStop(true).kendoAnimate(animation);
+
+                if (options.anchor != BODY)
+                    options.anchor.children(ACTIVECHILDREN).addClass(ACTIVE);
             }
         },
 
@@ -168,6 +173,9 @@
                 }
 
                 that.element.kendoStop(true).kendoAnimate(animation);
+
+                if (options.anchor != BODY)
+                    options.anchor.children(ACTIVECHILDREN).removeClass(ACTIVE);
             }
         },
 

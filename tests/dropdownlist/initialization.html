@@ -290,6 +290,31 @@
                ok(wrapper.hasClass("t-state-disabled"));
            });
 
+            test("pointer over widget should add hover state", function() {
+                var data = [{text: 1, value: 1}, {text:2, value:2}],
+                    dropdownlist = new DropDownList(input, {
+                         dataSource: data
+                    });
+
+                var wrap = dropdownlist.wrapper.children(".t-dropdown-wrap");
+                wrap.mouseenter();
+
+                ok(wrap.hasClass("t-state-hover"));
+            });
+
+            test("leaving widget should remove hover state", function() {
+                var data = [{text: 1, value: 1}, {text:2, value:2}],
+                    dropdownlist = new DropDownList(input, {
+                         dataSource: data
+                    });
+
+                var wrap = dropdownlist.wrapper.children(".t-dropdown-wrap");
+                wrap.mouseenter();
+                wrap.mouseleave();
+
+                ok(!wrap.hasClass("t-state-hover"));
+            });
+
            test("pointer over li should add hover state", function() {
                var data = [{text: 1, value: 1}, {text:2, value:2}],
                    dropdownlist = new DropDownList(input, {

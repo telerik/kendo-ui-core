@@ -9,6 +9,7 @@
 .t-header,
 .t-grid-header,
 .t-toolbar,
+.t-dropdown-wrap,
 .t-grouping-header,
 .t-tooltip,
 .t-grid-pager
@@ -17,14 +18,25 @@
     background: #bccadd url('BlueOpal/gradient.png') repeat-x 0 center;
 }
 
+.t-tabstrip,
+.t-tabstrip-items .t-item,
 .t-menu-vertical,
 .t-editor,
-.t-tooltip
+.t-tooltip,
+.t-state-hover
 {
-    background-position:0 -48px;
+    background-position:0 -248px;
 }
 
-.t-panelbar .t-state-hover { background-image: none; }
+.t-link.t-state-hover,
+.t-dropdown-wrap .t-input,
+.t-dropdown-wrap .t-select,
+.t-tabstrip-items .t-item,
+.t-tabstrip-items .t-state-hover .t-link
+{
+    background-image: url('BlueOpal/gradient.png');
+    background-repeat: repeat-x;
+}
 
 .t-icon { background-image: url('BlueOpal/sprite.png'); }
 .t-editor .t-tool-icon { background-image: url('BlueOpal/editor.png'); }
@@ -102,12 +114,12 @@
 .t-popup,
 .t-grid .t-header
 {
-    color: #384e73;
+    color: #293135;
 }
 
 .t-group
 {
-    background-color:#dce3ed;
+    background-color:#dfe7ea;
     border-color:#8ba0bc;
 }
 
@@ -134,7 +146,22 @@
     background-color: #eff2f6;
 }
 
-.t-state-default
+.t-dropdown-wrap,
+.t-toolbar,
+.t-grouping-header,
+.t-grid-pager,
+.t-group-footer td,
+.t-grid-footer,
+.t-footer-template td,
+.t-widget .t-status
+{
+    border-color: #8ba0bc;
+    background-color: #dfe7ea;
+}
+
+.t-state-default,
+.t-state-default .t-select,
+.t-panelbar .t-link
 {
     border-color: #8ba0bc;
 }
@@ -145,33 +172,39 @@
 }
 
 .t-state-hover,
-.t-state-hover:hover
+.t-state-hover:hover,
+.t-state-focused
 {
-    background-color: #fae185;
-    border-color: #f3d64a;
+    color: #005c83;
+    background-color: #7bd2f6;
+    border-color: #6fccf3;
+}
+
+.t-state-hover .t-select
+{
+    border-color: #6fccf3;
 }
 
 .t-state-active,
+.t-state-active:hover,
 .t-header .t-state-active
 {
-    background-color: #fafbfd;
+    color: #293135;
+    background-color: #f1f4f5;
     border-color: #8ba0bc;
 }
 
-.t-state-selected
+.t-state-active .t-select
 {
-    background-color: #ffcd42;
+    border-color: #8ba0bc;
 }
 
-.t-state-focused
+.t-state-selected,
+.t-panelbar .t-state-selected
 {
-    background-color:#bfcde0;
-}
-
-.t-state-hover,
-.t-state-selected
-{
-    color:#1e395b;
+    color: #fff;
+    background-color: #008eca;
+    border-color: #009bdc;
 }
 
 .t-state-error
@@ -193,37 +226,26 @@ button.t-button.t-state-disabled:hover,
 a.t-button.t-state-disabled:hover,
 .t-state-disabled .t-button:hover
 {
-    background: #bccadd url('BlueOpal/gradient.png') repeat-x 0 center;
+    border-color: #e0e8eb;
+    background: #f1f4f5 url('BlueOpal/gradient.png') repeat-x 0 center;
 }
 
 .t-button:hover
 {
-    border-color:#f3d64a;
-    background-color: #fae185;
+    border-color:#6fccf3;
+    background-color: #7bd2f6;
 }
 
 .t-state-disabled,
 .t-state-disabled .t-link,
 .t-state-disabled .t-button
 {
-    color: #8ba0bc;
+    color: #b4bbbe;
 }
 
 .t-autocomplete
 {
     background-color: #fff;
-}
-
-.t-toolbar,
-.t-grouping-header,
-.t-grid-pager,
-.t-group-footer td,
-.t-grid-footer,
-.t-footer-template td,
-.t-widget .t-status
-{
-    border-color: #8ba0bc;
-    background-color: #dce3ed;
 }
 
 .t-widget .t-status
@@ -264,14 +286,9 @@ a.t-button.t-state-disabled:hover,
     background-position: 0 -358px;
 }
 
-.t-treeview .t-state-selected
-{
-    border-color: #e3bb4a;
-}
-
 .t-panelbar .t-link,
 .t-panelbar .t-group,
-.t-panelbar .t-content
+.t-panelbar .t-content,
 {
     border-color: #8ba0bc;
 }
@@ -285,6 +302,42 @@ a.t-button.t-state-disabled:hover,
 .t-other-month .t-link
 {
     color: #8ba0bc;
+}
+
+/* DropDown */
+
+.t-combobox,
+.t-dropdown
+{
+    background: none;
+}
+
+.t-dropdown-wrap
+{
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.t-dropdown-wrap .t-input
+{
+    -moz-border-radius: 4px 0 0 4px;
+    -webkit-border-radius: 4px 0 0 4px;
+    border-radius: 4px 0 0 4px;
+}
+
+.t-dropdown-wrap .t-input,
+.t-dropdown-wrap .t-select,
+.t-tabstrip-items .t-state-hover .t-link
+{
+    background-position: 0 -539px;
+}
+
+.t-tabstrip-items .t-state-hover .t-link
+{
+    -moz-border-radius: 4px 4px 0 0;
+    -webkit-border-radius: 4px 4px 0 0;
+    border-radius: 4px 4px 0 0;
 }
 
 /* Slider */
@@ -388,7 +441,7 @@ a.t-button.t-state-disabled:hover,
 .t-splitbar
 {
     border-color: #8ba0bc;
-    background-color: #dce3ed;
+    background-color: #dfe7ea;
 }
 
 .t-splitbar-vertical,
@@ -414,7 +467,7 @@ a.t-button.t-state-disabled:hover,
 .t-dropzone-hovered,
 .t-upload-files
 {
-    background-color: #dce3ed;    
+    background-color: #dfe7ea;    
 }
 
 .t-dropzone em
@@ -437,7 +490,7 @@ a.t-button.t-state-disabled:hover,
 .t-progress-status
 {
     background-position: 0 -472px;
-    border-color: #f3d64a transparent;
+    border-color: #6fccf3 transparent;
 }
 
 /* ImageBrowser */
@@ -458,7 +511,7 @@ a.t-button.t-state-disabled:hover,
 
 .t-tiles li.t-state-hover
 {
-    border-color: #f3d64a;
+    border-color: #6fccf3;
     background-position: 0 0;
 }
 
