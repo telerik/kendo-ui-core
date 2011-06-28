@@ -24,32 +24,57 @@
         <script>
             $(document).ready(function() {
                 var total = 1000000,
+                     remoteDataSource = new kendo.data.DataSource({
+                         serverPaging: true,
+                         pageSize: 16,
+                         transport: {
+                             read: {
+                                 url: "http://odata.netflix.com/Catalog/Titles",
+                                 dataType: "jsonp",
+                                 jsonpCallback: "callback",
+                                 cache: false
+                             },
+                             dialect: {
+                                 read: function(options) {
+                                     return kendo.format("$format=json&$orderby=Name&$top={0}&$skip={1}&$inlinecount=allpages&$callback=callback", options.take, options.skip);
+                                 }
+                             }
+                         },
+                         deserializer: {
+                             data: function(result) {
+                                 return result.d.results;
+                             },
+                             total: function(result) {
+                                 return result.d.__count;
+                             }
+                         }
+                    }),
                     dataSource = new kendo.data.DataSource({
-                    serverPaging: true,
-                    transport: {
-                        read: function(options) {
-                            var take = options.data.take,
+                        serverPaging: true,
+                        transport: {
+                            read: function(options) {
+                                var take = options.data.take,
                                 skip = options.data.skip;
 
-                            var data = [];
+                                var data = [];
 
-                            for (var i = skip; i < Math.min(skip + take, total); i++) {
-                                data.push({ OrderID: i, ContactName: "Contact " + i, ShipAddress: "Ship Address " + i });
+                                for (var i = skip; i < Math.min(skip + take, total); i++) {
+                                    data.push({ OrderID: i, ContactName: "Contact " + i, ShipAddress: "Ship Address " + i });
+                                }
+
+                                options.success(data);
                             }
-
-                            options.success(data);
-                        }
-                    } ,
-                    deserializer: {
-                        data: function(data) {
-                            return data;
+                        } ,
+                        deserializer: {
+                            data: function(data) {
+                                return data;
+                            },
+                            total: function() {
+                                return total;
+                            }
                         },
-                        total: function() {
-                            return total;
-                        }
-                    },
-                    pageSize: 16
-                });
+                        pageSize: 16
+                    });
 
 
                 $("#table1").kendoGrid({
