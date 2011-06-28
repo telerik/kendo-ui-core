@@ -345,7 +345,15 @@
                     negativeData = [-100, -150],
                     VALUE_AXIS_MAX = 200,
                     CATEGORY_AXIS_Y = 200,
-                    TOLERANCE = 0.1;
+                    TOLERANCE = 0.1,
+                    MARGIN = 10,
+                    PADDING = 10,
+                    COLOR = "red",
+                    BACKGROUND = "blue",
+                    BORDER = {
+                        width: 4,
+                        color: "green"
+                    };
 
                 function PlotAreaStub() { }
 
@@ -510,6 +518,70 @@
                         ok(this.box.x1 > text.box.x1 && this.box.x2 < text.box.x2);
                     });
                 });
+
+                // ------------------------------------------------------------
+                module("Bar Chart / Labels / options", {
+                    setup: function() {
+                        factory = new ViewFactoryStub();
+                    }
+                });
+
+                test("bars labels should have red color", function() {
+                    setupBarChart({ series: [{
+                        data: [ 100 ],
+                        labels: {
+                            color: COLOR,
+                            visible: true
+                        }
+                    }] });
+                    series.getViewElements(factory);
+                    equal(factory.log.text[0].style.color, COLOR);
+                });
+
+                test("bars labels should have background color", function() {
+                    setupBarChart({ series: [{
+                        data: [ 100 ],
+                        labels: {
+                            background: BACKGROUND,
+                            visible: true
+                        }
+                    }] });
+                    series.getViewElements(factory);
+                    equal(factory.log.rect[1].style.fill, BACKGROUND);
+                });
+
+                test("bars labels should have border", function() {
+                    setupBarChart({ series: [{
+                        data: [ 100 ],
+                        labels: {
+                            border: BORDER,
+                            visible: true
+                        }
+                    }] });
+                    series.getViewElements(factory);
+                    equal(factory.log.rect[1].style.stroke, BORDER.color);
+                    equal(factory.log.rect[1].style.strokeWidth, BORDER.width);
+                });
+
+                test("bars labels should have padding and margin", function() {
+                    setupBarChart({ series: [{
+                        data: [ 100 ],
+                        labels: {
+                            margin: MARGIN,
+                            visible: true
+                        }
+                    }] });
+                    series.getViewElements(factory);
+                    var barLabel = series._bars[0].children[0].children[0],
+                        paddingBox = barLabel.paddingBox,
+                        box = barLabel.box;
+
+                    equal(paddingBox.x1 - MARGIN, box.x1);
+                    equal(paddingBox.x2 + MARGIN, box.x2);
+                    equal(paddingBox.y1 - MARGIN, box.y1);
+                    equal(paddingBox.y2 + MARGIN, box.y2);
+                });
+
             })();
 
             (function() {
