@@ -23,7 +23,8 @@
         </table>
         <script>
             $(document).ready(function() {
-                var dataSource = new kendo.data.DataSource({
+                var total = 1000000,
+                    dataSource = new kendo.data.DataSource({
                     serverPaging: true,
                     transport: {
                         read: function(options) {
@@ -32,7 +33,7 @@
 
                             var data = [];
 
-                            for (var i = skip; i < skip + take; i++) {
+                            for (var i = skip; i < Math.min(skip + take, total); i++) {
                                 data.push({ OrderID: i, ContactName: "Contact " + i, ShipAddress: "Ship Address " + i });
                             }
 
@@ -44,7 +45,7 @@
                             return data;
                         },
                         total: function() {
-                            return 1000000;
+                            return total;
                         }
                     },
                     pageSize: 16
