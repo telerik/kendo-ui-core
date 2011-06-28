@@ -320,6 +320,22 @@
                 stop(300);
             });
 
+            test("close event when select item", function() {
+                input.kendoDropDownList({
+                    dataSource: [{text: "foo"}, {text: "bar"}],
+                    close: function() {
+                        ok(true);
+                        start();
+                    }
+                });
+
+                var ddl = input.data("kendoDropDownList");
+                ddl.open();
+
+                ddl.ul.children().eq(0).click();
+
+                stop(300);
+            });
        </script>
        <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

@@ -148,6 +148,63 @@
 
                 stop(300);
             });
+
+            test("open event when open popup on search", function() {
+                input.kendoAutoComplete({
+                    delay: 0,
+                    dataSource: ["foo", "bar"],
+                    open: function() {
+                        ok(true);
+                        start();
+                    }
+                });
+
+                var autocomplete = input.data("kendoAutoComplete");
+                input.focus().val("f");
+                debugger;
+                autocomplete.search();
+
+                stop(300);
+            });
+
+            test("open event should be cancellable", function() {
+                input.kendoAutoComplete({
+                    delay: 0,
+                    dataSource: ["foo", "bar"],
+                    open: function(e) {
+                        e.preventDefault();
+                    }
+                });
+
+                var autocomplete = input.data("kendoAutoComplete");
+                input.focus().val("f");
+                autocomplete.search();
+
+                setTimeout(function() {
+                    ok(!autocomplete.popup.visible());
+                    start();
+                }, 200);
+
+                stop(300);
+            });
+
+            test("close event when popup close on click", function() {
+                input.kendoAutoComplete({
+                    delay: 0,
+                    dataSource: ["foo", "bar"],
+                    close: function() {
+                        ok(true);
+                        start();
+                    }
+                });
+
+                var autocomplete = input.data("kendoAutoComplete");
+                input.focus().val("f");
+                autocomplete.search();
+                autocomplete._accept(autocomplete.ul.eq(0));
+
+                stop(300);
+            });
        </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
