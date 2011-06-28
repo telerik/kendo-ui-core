@@ -249,23 +249,17 @@
 
             test("selected item with enter should persist selected state", function() {
                 var dropdownlist = input.kendoDropDownList(data).data("kendoDropDownList");
-                dropdownlist.popup.open();
+                dropdownlist.popup.options.animation = false;
 
-                dropdownlist.popup.bind("close", function(){
-                    dropdownlist.wrapper.click();
-                });
-
-                dropdownlist.popup.bind("open", function(){
-                    equal(dropdownlist._current.index(), 1);
-                    ok(dropdownlist._current.hasClass("t-state-focused"));
-                    ok(dropdownlist._current.hasClass("t-state-selected"));
-                    start();
-                });
-
+                dropdownlist.ul.show();
                 dropdownlist.select(0);
                 dropdownlist.wrapper.focus().press(keys.DOWN).press(keys.ENTER);
 
-                stop(500);
+                dropdownlist.ul.show();
+
+                equal(dropdownlist._current.index(), 1);
+                ok(dropdownlist._current.hasClass("t-state-focused"));
+                ok(dropdownlist._current.hasClass("t-state-selected"));
             });
 
 

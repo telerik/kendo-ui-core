@@ -16,6 +16,11 @@
         Component = ui.Component,
         mobileSafari41 = /4_1\slike\sMac\sOS\sX;.*Mobile\/\S+/.test(navigator.userAgent);
 
+
+    function contains(container, target) {
+        return container === target || $.contains(container, target);
+    }
+
     var Popup = Component.extend({
         init: function(element, options) {
             var that = this;
@@ -48,7 +53,7 @@
             extend(options.animation.open, {
                 complete: function() {
                     that.wrapper.css({ overflow: "" });
-                    that.trigger(OPEN);
+                    that._animating = false;
                 }
             });
 
@@ -60,11 +65,13 @@
                     if (location)
                         that.wrapper.css(location);
 
-                    that.trigger(CLOSE);
+                    that._animating = false;
                 }
             });
 
             that.bind([OPEN, CLOSE], options);
+
+            $(document.documentElement).mousedown(proxy(that._mousedown, that));
 
             $(window).bind("resize", function() {
                 that.wrapper
@@ -106,6 +113,13 @@
                 options = that.options;
 
             if (!that.visible()) {
+
+                if(!that._animating && that.trigger(OPEN)) {
+                    return;
+                }
+
+                that._animating = true;
+
                 that.wrapper = kendo.wrap(that.element).css({ overflow: HIDDEN, display: "block", position: ABSOLUTE});
 
                 if (options.appendTo == BODY)
@@ -137,6 +151,13 @@
                 options = that.options;
 
             if (that.visible()) {
+
+                if(!that._animating && that.trigger(CLOSE)) {
+                    return;
+                }
+
+                that._animating = true;
+
                 var animation = extend({}, options.animation.close),
                     effects = that.element.data('effects');
 
@@ -147,6 +168,17 @@
                 }
 
                 that.element.kendoStop(true).kendoAnimate(animation);
+            }
+        },
+
+        _mousedown: function(e) {
+            var that = this,
+                container = that.element[0],
+                toggleTarget = that.options.toggleTarget,
+                target = e.target;
+
+            if (!contains(container, target) && !(toggleTarget && contains($(toggleTarget)[0], target))) {
+                that.close();
             }
         },
 

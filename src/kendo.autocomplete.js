@@ -49,7 +49,7 @@
 
             that.dataSource = DataSource.create(that.options.dataSource || {}).bind(CHANGE, proxy(that.refresh, that));
 
-            that.bind(["init", "open", "close", CHANGE], that.options);
+            that.bind(["init", CHANGE], that.options);
 
             that._template();
 
@@ -82,10 +82,6 @@
             that.popup.close();
         },
 
-        open: function() {
-            this.popup.open();
-        },
-
         refresh: function() {
             var that = this,
             data = that.dataSource.view(),
@@ -95,7 +91,7 @@
 
             that._height(length);
 
-            that[length ? "_open" : "_close"]();
+            that.popup[length ? "open" : "close"]();
         },
 
         select: function(li) {
