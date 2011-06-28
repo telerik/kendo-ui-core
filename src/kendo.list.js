@@ -64,7 +64,7 @@
             var that = this;
 
             that._change();
-            that._close();
+            that.close();
         },
 
         _change: function() {
@@ -83,14 +83,6 @@
 
         _click: function(e) {
             this._accept($(e.currentTarget));
-        },
-
-        _close: function() {
-            var that = this;
-
-            if (that.popup.visible() && !that.trigger("close")) {
-                that.close();
-            }
         },
 
         _focus: function(li) {
@@ -121,30 +113,16 @@
             }
         },
 
-        _mousedown: function(e) {
-            var that = this,
-            target = e.target;
-
-            if (!contains(that.ul[0], target) && !contains(that.wrapper[0], target)) {
-                that._close();
-            }
-        },
-
-        _open: function() {
-            var that = this;
-
-            if (!that.ul[0].firstChild || !that.trigger("open")) {
-                that.open();
-            }
-        },
-
         _popup: function() {
             var that = this,
                 ul = that.ul,
+                options = that.options,
                 wrapper = that.wrapper;
 
             that.popup = new ui.Popup(ul, {
-                anchor: wrapper
+                anchor: wrapper,
+                open: options.open,
+                close: options.close
             });
 
             var spacing = (parseInt(ul.css('border-left-width'), 10) || 0) +

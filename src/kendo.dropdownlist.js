@@ -28,7 +28,7 @@
 
             that._dataSource();
 
-            that.bind(["init", "open", "close", CHANGE], that.options);
+            that.bind(["init", CHANGE], that.options);
 
             if (that.element.prop("disabled")) {
                 that.options.enable = false;
@@ -110,7 +110,7 @@
                 toggle = !that.popup.visible();
             }
 
-            that[toggle ? "_open" : "_close"]();
+            that[toggle ? "open" : "close"]();
         },
 
         refresh: function() {
@@ -275,7 +275,7 @@
 
                 prevent = true;
             } else if (key === keys.ESC) {
-                that._close();
+                that.close();
             }
 
             if (prevent) {

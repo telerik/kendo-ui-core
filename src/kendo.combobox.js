@@ -7,8 +7,8 @@
         ATTRIBUTE = "disabled",
         CHANGE = "change",
         DISABLED = "t-state-disabled",
-        STATE_SELECTED = "t-state-selected",
         SELECT = "select",
+        STATE_SELECTED = "t-state-selected",
         proxy = $.proxy;
 
     var ComboBox = Select.extend({
@@ -29,7 +29,7 @@
 
             that._dataSource();
 
-            that.bind(["init", "open", "close", CHANGE], that.options);
+            that.bind(["init", CHANGE], that.options);
 
             that.input.bind({
                 keydown: proxy(that._keydown, that),
@@ -133,7 +133,7 @@
             ul[0].innerHTML = kendo.render(that.template, data);
             that._height(length);
 
-            if (that.element.is("select")) {
+            if (that.element.is(SELECT)) {
                 that._options(data);
             }
 
@@ -182,7 +182,7 @@
             clearTimeout(that._typing);
 
             if (!length) {
-                that._close();
+                that.close();
             } else if (length >= options.minLength) {
                 that.showBusy();
                 if (filter === "none") {
@@ -249,7 +249,7 @@
                 toggle = !that.popup.visible();
             }
 
-            that[toggle ? "_open" : "_close"]();
+            that[toggle ? "open" : "close"]();
         },
 
         value: function(value) {
@@ -349,7 +349,7 @@
                 if (options.suggest && that._current) {
                     that.suggest(that._current);
                 }
-                that._open();
+                that.open();
             }
 
             that.hideBusy();
@@ -439,7 +439,7 @@
             } else if (key === keys.ENTER || key === keys.TAB) {
                 that._accept(current);
             } else if (key === keys.ESC) {
-                that._close();
+                that.close();
             } else {
                 that._search();
             }
