@@ -344,6 +344,32 @@
                equal(combobox.ul.height(), 50);
            });
 
+            test("pointer over widget should add hover state", function() {
+                var data = [{text: 1, value: 1}, {text:2, value:2}],
+                    combobox = new ComboBox(input, {
+                         dataSource: data
+                    }),
+                    wrap = combobox.wrapper.children(".t-dropdown-wrap");
+
+                wrap.mouseenter();
+
+                ok(wrap.hasClass("t-state-hover"));
+            });
+
+            test("leaving widget should remove hover state", function() {
+                var data = [{text: 1, value: 1}, {text:2, value:2}],
+                    combobox = new ComboBox(input, {
+                         dataSource: data
+                    }),
+                    wrap = combobox.wrapper.children(".t-dropdown-wrap");
+
+                wrap.mouseenter();
+                wrap.mouseleave();
+
+                ok(!wrap.hasClass("t-state-hover"));
+            });
+
+
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
