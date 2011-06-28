@@ -130,7 +130,8 @@
                 options = chart.options,
                 series = options.series,
                 seriesType,
-                colors = options.seriesColors;
+                colors = options.seriesColors,
+                chartArea = options.chartArea;
 
             for (var i = 0, length = series.length; i < length; i++) {
                 // Determine series type in advance so we can apply the
@@ -146,12 +147,12 @@
 
             options.categoryAxis = deepExtend({}, options.axisDefaults, options.categoryAxis);
 
-            if (!options.width) {
-                options.width = element.width() || DEFAULT_WIDTH;
+            if (!chartArea.width) {
+                chartArea.width = element.width() || DEFAULT_WIDTH;
             }
 
-            if (!options.height) {
-                options.height = element.height() || DEFAULT_HEIGHT;
+            if (!chartArea.height) {
+                chartArea.height = element.height() || DEFAULT_HEIGHT;
             }
         },
 

@@ -292,27 +292,27 @@
                 test("picks width from container", function() {
                     createChart();
 
-                    equal(chart.options.width, 100);
+                    equal(chart.options.chartArea.width, 100);
                 });
 
                 test("picks height from container", function() {
                     createChart();
 
-                    equal(chart.options.height, 100);
+                    equal(chart.options.chartArea.height, 100);
                 });
 
                 test("uses default width when none is available", function() {
                     $("#container").width(0);
                     createChart();
 
-                    equal(chart.options.width, 600);
+                    equal(chart.options.chartArea.width, 600);
                 });
 
                 test("uses default height when none is available", function() {
                     $("#container").height(0);
                     createChart();
 
-                    equal(chart.options.height, 400);
+                    equal(chart.options.chartArea.height, 400);
                 });
 
                 test("sets width on rootElement", function() {
