@@ -16,11 +16,6 @@
         Component = ui.Component,
         mobileSafari41 = /4_1\slike\sMac\sOS\sX;.*Mobile\/\S+/.test(navigator.userAgent);
 
-
-    function contains(container, target) {
-        return container === target || $.contains(container, target);
-    }
-
     var Popup = Component.extend({
         init: function(element, options) {
             var that = this;
@@ -70,8 +65,6 @@
             });
 
             that.bind([OPEN, CLOSE], options);
-
-            $(document.documentElement).mousedown(proxy(that._mousedown, that));
 
             $(window).bind("resize", function() {
                 that.wrapper
@@ -157,17 +150,6 @@
             }
         },
 
-        _mousedown: function(e) {
-            var that = this,
-                container = that.element[0],
-                toggleTarget = that.options.toggleTarget,
-                target = e.target;
-
-            if (!contains(container, target) && !(toggleTarget && contains($(toggleTarget)[0], target))) {
-                that.close();
-            }
-        },
-
         _update: function() {
             return this._position($(window));
         },
@@ -211,14 +193,6 @@
                 positions = options.position.toLowerCase().split(" "),
                 collisions = that.collisions,
                 aligned = false;
-
-            var anchorOffset = anchor.data('offset'),
-                currentOffset = anchor.offset();
-
-            if (!anchorOffset || (anchorOffset.left != currentOffset.left)) {
-                anchor.data('offset', currentOffset);
-                wrapper.removeData('position');
-            }
 
             if (options.appendTo === Popup.fn.options.appendTo) {
                 wrapper.css(that._align(origins, positions));

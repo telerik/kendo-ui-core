@@ -12,6 +12,10 @@
         SELECT = "select",
         proxy = $.proxy;
 
+    function contains(container, target) {
+        return container === target || $.contains(container, target);
+    }
+
     var List = Component.extend({
         init: function(element, options) {
             var that = this;
@@ -31,6 +35,8 @@
                         .delegate(LI, "click", proxy(that._click, that))
                         .delegate(LI, "mouseenter", function() { $(this).addClass(HOVER); })
                         .delegate(LI, "mouseleave", function() { $(this).removeClass(HOVER); });
+
+            $(document.documentElement).bind("mousedown", proxy(that._mousedown, that));
         },
 
         current: function(candidate) {
@@ -58,7 +64,7 @@
             var that = this;
 
             that._change();
-            that.close();
+            that._close();
         },
 
         _change: function() {
@@ -115,6 +121,15 @@
             }
         },
 
+        _mousedown: function(e) {
+            var that = this,
+            target = e.target;
+
+            if (!contains(that.ul[0], target) && !contains(that.wrapper[0], target)) {
+                that._close();
+            }
+        },
+
         _open: function() {
             var that = this;
 
@@ -123,6 +138,20 @@
             }
         },
 
+        _popup: function() {
+            var that = this,
+                ul = that.ul,
+                wrapper = that.wrapper;
+
+            that.popup = new ui.Popup(ul, {
+                anchor: wrapper
+            });
+
+            var spacing = (parseInt(ul.css('border-left-width'), 10) || 0) +
+                          (parseInt(ul.css('border-right-width'), 10) || 0);
+
+            ul.width(wrapper.innerWidth() - spacing);
+        },
 
         _scroll: function (item) {
 
@@ -253,21 +282,6 @@
             if (li[0]) {
                 this.select(li);
             }
-        },
-
-        _popup: function() {
-            var that = this,
-                ul = that.ul,
-                wrapper = that.wrapper;
-
-            that.popup = new ui.Popup(ul, {
-                anchor: wrapper
-            });
-
-            var spacing = (parseInt(ul.css('border-left-width'), 10) || 0) +
-                          (parseInt(ul.css('border-right-width'), 10) || 0);
-
-            ul.width(wrapper.innerWidth() - spacing);
         },
 
         _options: function(data) {

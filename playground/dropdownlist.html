@@ -96,7 +96,9 @@
                 $("#dropdownlist").kendoDropDownList({
                     dataSource: [{text: "foo", value: 1}, {text:"bar", value:2}, {text: "baz", value: 1}, {text:2, value:2}],
                     autoBind: false,
-                    delay: 2000
+                    delay: 2000,
+                    open: function() { console.log("open"); },
+                    close: function() { console.log("close"); }
                 });
                 $("#select").kendoDropDownList({
                     dataSource: [{text: "foo", value: 1}, {text:"bar", value:2}, {text: "baz", value: 1}, {text:2, value:2}]

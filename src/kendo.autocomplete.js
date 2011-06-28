@@ -43,15 +43,13 @@
 
             List.fn.init.call(that, element, options);
 
-            that._focused = that.element;
+            that.wrapper = that._focused = that.element;
 
-            that.popup = new ui.Popup(that.ul, {
-                anchor: that.element
-            });
+            that._popup();
 
             that.dataSource = DataSource.create(that.options.dataSource || {}).bind(CHANGE, proxy(that.refresh, that));
 
-            that.bind(["init", CHANGE], that.options);
+            that.bind(["init", "open", "close", CHANGE], that.options);
 
             that._template();
 
@@ -70,11 +68,22 @@
                     }
                 });
         },
+
         options: {
             suggest: false,
             minLength: 1,
             delay: 300,
             height: 200
+        },
+
+        close: function() {
+            var that = this;
+            that._current = null;
+            that.popup.close();
+        },
+
+        open: function() {
+            this.popup.open();
         },
 
         refresh: function() {
@@ -86,13 +95,7 @@
 
             that._height(length);
 
-            that.popup[length ? "open" : "close"]();
-        },
-
-        close: function() {
-            var that = this;
-            that._current = null;
-            that.popup.close();
+            that[length ? "_open" : "_close"]();
         },
 
         select: function(li) {
