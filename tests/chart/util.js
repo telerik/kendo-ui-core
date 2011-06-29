@@ -17,6 +17,8 @@ ViewFactoryStub.prototype = {
             y2: box.y2,
             style: style
         });
+
+        return new kendo.ui.Chart.ViewElement();
     },
 
     text: function(content, style) {
@@ -24,6 +26,8 @@ ViewFactoryStub.prototype = {
             content: content,
             style: style
         });
+
+        return new kendo.ui.Chart.ViewElement();
     },
 
     group: function(options) {

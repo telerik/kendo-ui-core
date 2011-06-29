@@ -12,7 +12,8 @@
         <script src="../../src/kendo.chart.js"></script>
         <script type="text/javascript">
 
-            var Chart = kendo.ui.Chart;
+            var Chart = kendo.ui.Chart,
+                EMPTY_DIV = "<div id='container' style='width: 0px; height: 0px; line-height: 0px;'></div>";
 
             (function() {
                 var chart,
@@ -302,14 +303,14 @@
                 });
 
                 test("uses default width when none is available", function() {
-                    $("#container").width(0);
+                    $("#container").replaceWith(EMPTY_DIV);
                     createChart();
 
                     equal(chart.options.chartArea.width, 600);
                 });
 
                 test("uses default height when none is available", function() {
-                    $("#container").height(0);
+                    $("#container").replaceWith(EMPTY_DIV);
                     createChart();
 
                     equal(chart.options.chartArea.height, 400);

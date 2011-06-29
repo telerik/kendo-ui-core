@@ -3033,7 +3033,7 @@
                     "<path d='<%= renderPoints() %>' " +
                     "<%= renderStroke() %><%= renderStrokeWidth() %>" +
                     "stroke-linecap='square' " +
-                    "fill='<%= options.fill || 'none' %>'></path>"
+                    "fill='<%= options.fill || \"none\" %>'></path>"
                 );
             }
 
