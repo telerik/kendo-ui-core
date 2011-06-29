@@ -321,9 +321,16 @@ a.t-button.t-state-disabled:hover,
 
 .t-dropdown-wrap .t-input
 {
-    -moz-border-radius: 4px 0 0 4px;
-    -webkit-border-radius: 4px 0 0 4px;
-    border-radius: 4px 0 0 4px;
+    -moz-border-radius: 5px 0 0 5px;
+    -webkit-border-radius: 5px 0 0 5px;
+    border-radius: 5px 0 0 5px;
+}
+
+.t-dropdown-wrap .t-select
+{
+    -moz-border-radius: 0 5px 5px 0;
+    -webkit-border-radius: 0 5px 5px 0;
+    border-radius: 0 5px 5px 0;
 }
 
 .t-dropdown-wrap .t-input,
@@ -335,9 +342,9 @@ a.t-button.t-state-disabled:hover,
 
 .t-tabstrip-items .t-state-hover .t-link
 {
-    -moz-border-radius: 4px 4px 0 0;
-    -webkit-border-radius: 4px 4px 0 0;
-    border-radius: 4px 4px 0 0;
+    -moz-border-radius: 5px 5px 0 0;
+    -webkit-border-radius: 5px 5px 0 0;
+    border-radius: 5px 5px 0 0;
 }
 
 /* Slider */

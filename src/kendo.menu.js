@@ -11,6 +11,7 @@
         MOUSELEAVE = "mouseleave",
         CLICK = "click",
         TIMER = "timer",
+        EMPTY = ":empty",
         IMG = "img",
         KENDOPOPUP = "kendoPopup",
         DEFAULTSTATE = "t-state-default",
@@ -212,11 +213,12 @@
         },
 
         _mouseenter: function (e) {
-            var that = this;
+            var that = this,
+                element = $(e.currentTarget),
+                hasChildren = (element.children(".t-animation-container").length || element.children(".t-group").length);
 
-            var element = $(e.currentTarget);
             if (!that.options.openOnClick || that.clicked) {
-                if (!contains(e.currentTarget, e.relatedTarget)) {
+                if (!contains(e.currentTarget, e.relatedTarget) && hasChildren) {
                     if (that.trigger(OPEN, { item: element[0] }) === false)
                         that.open(element);
                 }
@@ -232,10 +234,11 @@
         },
 
         _mouseleave: function (e) {
-            var that = this;
+            var that = this,
+                element = $(e.currentTarget),
+                hasChildren = (element.children(".t-animation-container").length || element.children(".t-group").length);
 
-            if (!that.options.openOnClick && !contains(e.currentTarget, e.relatedTarget)) {
-                var element = $(e.currentTarget);
+            if (!that.options.openOnClick && !contains(e.currentTarget, e.relatedTarget) && hasChildren) {
                 if (that.trigger(CLOSE, { item: element[0] }) === false)
                     that.close(element);
             }
