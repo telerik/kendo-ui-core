@@ -36,6 +36,10 @@ tests.push(
         title: "datasource.sync"
     },
     {
+        page: "data/datasource/range.html",
+        title: "datasource.range"
+    },
+    {
         page: "data/query.html",
         title: "query"
     },

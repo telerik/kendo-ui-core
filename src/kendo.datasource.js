@@ -113,14 +113,6 @@
             return $.ajax(this.setup(options, CREATE));
         },
 
-        inRange: function(options) {
-            var that = this;
-
-            options = that.setup({ data: options }, READ);
-
-            return !!that.cache.find(options.data);
-        },
-
         read: function(options) {
             var that = this,
                 success,
@@ -239,6 +231,7 @@
                 _models: {},
                 _prefetch: {},
                 _data: [],
+                _ranges: [],
                 _view: [],
                 _pageSize: options.pageSize,
                 _page: options.page  || (options.pageSize ? 1 : undefined),
@@ -546,29 +539,6 @@
             });
         },
 
-        prefetch: function(skip, take) {
-            var that = this,
-                data = {
-                    skip: skip,
-                    take: take,
-                    sort: that._sort,
-                    filter: that._filter,
-                    group: that._group,
-                    aggregates: that._aggregates
-                },
-                key = stringify(data);
-
-            if (!that._prefetch[key]) {
-                that._prefetch[key] = true;
-                that.transport.read({
-                    data: data,
-                    success: function(){
-                        delete that._prefetch[key];
-                    }
-                });
-            }
-        },
-
         update: function(id, values) {
             var that = this,
             model = that.model(id);
@@ -855,16 +825,32 @@
         },
 
         inRange: function(skip, take) {
-            var that = this;
+            var that = this,
+                ranges = that._ranges,
+                end = skip + take,
+                range,
+                skipIdx,
+                takeIdx,
+                length;
 
-            return that.transport.inRange( {
-                skip: skip,
-                take: take,
-                sort: that._sort,
-                filter: that._filter,
-                group: that._group,
-                aggregates: that._aggregates
-            });
+            if (!that.options.serverPaging && that.data.length > 0) {
+                return true;
+            }
+
+            for (skipIdx = 0, length = ranges.length; skipIdx < length; skipIdx++) {
+                range = ranges[skipIdx];
+                if (range.start >= skip && skip <= range.end) {
+                    var x = 0;
+                    for (takeIdx = skipIdx; takeIdx < length; takeIdx++) {
+                        range = ranges[takeIdx];
+                        x += range.data.length;
+                        if (end <= range.end && x >= end) {
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
         },
 
         range: function(skip, take) {
@@ -885,6 +871,46 @@
         take: function() {
             var that = this;
             return that._take || that._pageSize;
+        },
+
+        prefetch: function(skip, take) {
+            var that = this,
+                range = { start: skip, end: skip + take, data: [] },
+                options = {
+                    take: take,
+                    skip: skip,
+                    //TODO: calculate
+                    //page: that.page(),
+                    //pageSize: that.pageSize(),
+                    sort: that._sort,
+                    filter: that._filter,
+                    group: that._group,
+                    aggregates: that._aggregates
+                };
+
+            if (!that._rangeExists(skip, skip + take)) {
+                that._ranges.push(range);
+
+                that.transport.read({
+                    data: options,
+                    success: function (data) {
+                        range.data = that._deserializer.data(data);
+                    }
+                });
+            }
+        },
+        _rangeExists: function(start, end) {
+            var that = this,
+                ranges = that._ranges,
+                idx,
+                length;
+
+            for (idx = 0, length = ranges.length; idx < length; idx++) {
+                if (ranges[idx].start == start && ranges[idx].end == end) {
+                    return true;
+                }
+            }
+            return false;
         }
     });
 
