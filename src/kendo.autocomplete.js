@@ -122,9 +122,9 @@
             }
         },
 
-        search: function() {
+        search: function(word) {
             var that = this,
-            word = that.value(),
+            word = word || that.value(),
             separator = that.options.separator,
             length,
             caret,

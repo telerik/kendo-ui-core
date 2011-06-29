@@ -186,6 +186,7 @@
 
         search: function(word) {
             var that = this,
+                word = word || that.text(),
                 length = word.length,
                 options = that.options,
                 filter = options.filter;
