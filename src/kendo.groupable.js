@@ -8,12 +8,14 @@
                     '${data.field}' + 
                 '</a>' + 
                 '<a class="t-button t-button-icon t-button-bare">' +
-                    '<span class="t-icon t-group-delete">X</span>' + 
+                    '<span class="t-icon t-group-delete"></span>' + 
                 '</a>' +
              '</div>',  { useWithBlock:false }),
         groupContainer,
         hint = function(target) {                    
-            return $("<span/>").text(target.data("field")).css({"background": "red","white-space": "nowrap"});
+            return $('<div class="t-header t-drag-clue" />')
+                .html(target.data("field"))
+                .prepend('<span class="t-icon t-drag-status t-denied" />');
         };
 
     var Groupable = Component.extend({
@@ -60,7 +62,19 @@
                         }
                     }                    
                 }
-            });            
+            });  
+            
+            that.dataSource = that.options.dataSource;
+
+            if(that.dataSource) {
+                that.dataSource.bind("change", function() {
+                    groupContainer.empty().append(
+                        $.map(this.group() || [], function(item) {
+                            return that.buildIndicator(item.field, item.dir);
+                        }).join('')
+                    );
+                });
+            }          
         },
 
         options: {
@@ -96,8 +110,8 @@
 
         _change: function() {
             var that = this;
-            if(that.options.dataSource) {
-                that.options.dataSource.group(that.descriptors());
+            if(that.dataSource) {
+                that.dataSource.group(that.descriptors());
             }
         }
     });

@@ -6,9 +6,10 @@
         <script src="../qunit.js"></script>
         <script src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.query.js"></script>
         <script src="../../src/kendo.draganddrop.js"></script>
-        <script src="../../src/kendo.groupable.js"></script>
         <script src="../../src/kendo.dataSource.js"></script>
+        <script src="../../src/kendo.groupable.js"></script>        
         <link rel="stylesheet" href="../qunit.css" />
     </head>
     <body>
@@ -22,7 +23,9 @@
 
         <script>
             var Groupable = kendo.ui.Groupable,
-                div;
+                DataSource = kendo.data.DataSource,
+                div,
+                extend = $.extend;
 
             module("kendo.ui.Groupable", {
                 setup: function() {
@@ -155,7 +158,10 @@
             test("adding new group indicator calls dataSource group", function() {
                 var groupContainer = $(".container"),                    
                     groupWasCalled = false,
-                    groupable = new Groupable(div, { groupContainer:  groupContainer, dataSource: { group: function() {groupWasCalled = true;}} }),
+                    groupable = new Groupable(div, { 
+                        groupContainer:  groupContainer, 
+                        dataSource: extend({}, DataSource.create(), { group: function() {groupWasCalled = true;}}) 
+                    }),
                     th = div.find("th:first");
                 
                 moveOverDropTarget(th, groupContainer);
@@ -166,7 +172,10 @@
             test("removing group indicator calls dataSource group", function() {
                 var groupContainer = $(".container"),                    
                     groupWasCalled = false,
-                    groupable = new Groupable(div, { groupContainer:  groupContainer, dataSource: { group: function() {groupWasCalled = true;}} }),
+                    groupable = new Groupable(div, { 
+                        groupContainer:  groupContainer, 
+                        dataSource: extend({}, DataSource.create(), { group: function() {groupWasCalled = true;}})
+                    }),
                     indicator = groupContainer.append(groupable.buildIndicator("")).find(".t-group-indicator:first");
                 
                 moveOutDropTarget(indicator, groupContainer); 
@@ -177,7 +186,10 @@
             test("removing group indicator by clicking close button calls dataSource group", function() {
                 var groupContainer = $(".container"),                    
                     groupWasCalled = false,
-                    groupable = new Groupable(div, { groupContainer:  groupContainer, dataSource: { group: function() {groupWasCalled = true;}} }),
+                    groupable = new Groupable(div, { 
+                        groupContainer:  groupContainer, 
+                        dataSource: extend({}, DataSource.create(), { group: function() {groupWasCalled = true;}})
+                    }),
                     indicator = groupContainer.append(groupable.buildIndicator("")).find(".t-group-indicator:first");
                 
                 indicator.find(".t-button").click();
@@ -210,12 +222,32 @@
             test("sorting calls dataSource group", function() {
                 var groupContainer = $(".container"),                    
                     groupWasCalled = false,
-                    groupable = new Groupable(div, { groupContainer:  groupContainer, dataSource: { group: function() {groupWasCalled = true;}} }),
+                    groupable = new Groupable(div, { 
+                        groupContainer:  groupContainer, 
+                        dataSource: extend({}, DataSource.create(), { group: function() {groupWasCalled = true;}})
+                    }),
                     indicator = groupContainer.append(groupable.buildIndicator("")).find(".t-group-indicator:first");
                 
                 indicator.find(".t-link").click();
 
                 ok(groupWasCalled);
+            });
+
+            test("change of grouped dataSource creates group indicators", function() {
+                var groupContainer = $(".container"),                    
+                    dataSource =  DataSource.create([{field1: "foo", field2: "bar"}, {field1: "foo", field2: "baz"}]),
+                    groupable = new Groupable(div, { 
+                        groupContainer:  groupContainer, 
+                        dataSource: dataSource 
+                    }),
+                    indicator;
+
+                dataSource.group({field: "field1", dir: "desc"});
+
+                indicator = groupContainer.find(".t-group-indicator");
+                equal(indicator.length, 1);
+                equal(indicator.data("field"), "field1");
+                equal(indicator.data("dir"), "desc");
             });
         </script>
     </body>
