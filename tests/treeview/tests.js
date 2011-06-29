@@ -12,6 +12,10 @@ tests.push(
         title: "interaction"
     },
     {
+        page: "treeview/api.html",
+        title: "api"
+    },
+    {
         page: "treeview/events.html",
         title: "events"
     }
