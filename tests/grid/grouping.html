@@ -247,6 +247,31 @@
                 equal(tbody.find("tr:visible").length, 4);
                 ok(subGroup.find(".t-icon").hasClass("t-expand"));
             });
+
+            test("grouping non-groupable grid updates html", function() {
+                var grid = new Grid(table(), { 
+                    data:[{foo: "foo", bar: "bar"}, {foo: "foo", bar: "baz"}], 
+                    groupable: false 
+                });
+
+                grid.dataSource.group([{field: "foo"}, {field: "bar"}]);
+
+                equal(grid.thead.find("th").length, 4);
+                equal(grid.wrapper.find(".t-group-cell").length, 8);                
+            });
+
+            test("ungrouping non-groupable grid updates html", function() {
+                var grid = new Grid(table(), { 
+                    data:[{foo: "foo", bar: "bar"}, {foo: "foo", bar: "baz"}], 
+                    groupable: false 
+                });
+
+                grid.dataSource.group([{field: "foo"}, {field: "bar"}]);
+                grid.dataSource.group([]);
+
+                equal(grid.thead.find("th").length, 2);
+                equal(grid.wrapper.find(".t-group-cell").length, 0);                
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
