@@ -2690,22 +2690,28 @@
                 charts = plotArea.charts = [],
                 range = { min: 0, max: 1 },
                 categories = options.categoryAxis.categories,
+                barSeries,
+                barChart,
+                categoriesToAdd,
+                gap,
                 seriesType;
 
-            var barSeries = $.grep(options.series, function(currentSeries) {
+            barSeries = $.grep(options.series, function(currentSeries) {
                 return currentSeries.type === BAR || currentSeries.type === COLUMN;
             });
 
             if (barSeries.length > 0) {
                 seriesType = barSeries[0].type;
+                gap = barSeries[0].gap;
 
-                var barChart = new BarChart(this, {
+                barChart = new BarChart(this, {
                         series: barSeries,
                         isVertical: seriesType === COLUMN,
-                        isStacked: barSeries[0].stack
+                        isStacked: barSeries[0].stack,
+                        gap: gap
                     });
 
-                var categoriesToAdd = Math.max(0, barChart.categoriesCount() - categories.length);
+                categoriesToAdd = Math.max(0, barChart.categoriesCount() - categories.length);
                 [].push.apply(options.categoryAxis.categories, new Array(categoriesToAdd));
 
                 range = barChart.valueRange();
