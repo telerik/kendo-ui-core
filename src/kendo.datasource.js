@@ -237,6 +237,7 @@
             extend(that, {
                 _map: {},
                 _models: {},
+                _prefetch: {},
                 _data: [],
                 _view: [],
                 _pageSize: options.pageSize,
@@ -546,18 +547,26 @@
         },
 
         prefetch: function(skip, take) {
-            var that = this;
-
-            that.transport.read( {
-                data: {
+            var that = this,
+                data = {
                     skip: skip,
                     take: take,
                     sort: that._sort,
                     filter: that._filter,
                     group: that._group,
                     aggregates: that._aggregates
-                }
-            });
+                },
+                key = stringify(data);
+
+            if (!that._prefetch[key]) {
+                that._prefetch[key] = true;
+                that.transport.read({
+                    data: data,
+                    success: function(){
+                        delete that._prefetch[key];
+                    }
+                });
+            }
         },
 
         update: function(id, values) {

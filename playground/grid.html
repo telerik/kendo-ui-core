@@ -26,7 +26,7 @@
                 var total = 1000000,
                      remoteDataSource = new kendo.data.DataSource({
                          serverPaging: true,
-                         pageSize: 100,
+                         pageSize: 20,
                          transport: {
                              read: {
                                  url: "http://odata.netflix.com/Catalog/Titles",
@@ -49,6 +49,32 @@
                                  return result.d.__count;
                              }
                          }
+                    }),
+                    remoteDataSource = new kendo.data.DataSource({
+                        serverPaging: true,
+                        pageSize: 20,
+                        transport: {
+                            read: {
+                                url: "http://korchev/Telerik.Mvc.Examples/Grid/_FirstLook",
+                                type: "POST",
+                                dataType: "json",
+                                cache: true
+                            },
+                            cache: "inmemory",
+                            dialect: {
+                                read: function(options) {
+                                    return { page: options.page, size: 20 };
+                                }
+                            }
+                        },
+                        deserializer: {
+                            data: function(result) {
+                                return result.data;
+                            },
+                            total: function(result) {
+                                return result.total;
+                            }
+                        }
                     }),
                     dataSource = new kendo.data.DataSource({
                         serverPaging: true,
@@ -80,7 +106,6 @@
 
                 $("#table1").kendoGrid({
                     dataSource: remoteDataSource,
-                    columns: ["Name"],
                     scrollable: {
                         virtual: true
                     },
