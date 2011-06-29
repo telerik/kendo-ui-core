@@ -1842,7 +1842,7 @@
             }
 
             if (options.minorTickType.toLowerCase()  === OUTSIDE) {
-                ticks = $.map(axis.getMinorTickPositions(), function(pos) {
+                ticks = ticks.concat($.map(axis.getMinorTickPositions(), function(pos) {
                             if (options.majorTickType !== NONE) {
                                 if (!inArray(pos, majorTicks)) {
                                     return {
@@ -1860,7 +1860,7 @@
                                         color: options.line.color
                                     };
                             }
-                        });
+                        }));
             }
 
             return $.map(ticks, function(tick) {
