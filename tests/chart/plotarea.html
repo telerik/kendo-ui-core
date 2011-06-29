@@ -316,9 +316,9 @@
                     axisY = plotArea.axisY;
                     axisX = plotArea.axisX;
 
-                    stubMethod(Chart.NumericAxis, "getViewElements", function() {},
+                    stubMethod(Chart.NumericAxis, "getViewElements", function() { return []; },
                         function() {
-                            stubMethod(Chart.CategoryAxis, "getViewElements", function() {},
+                            stubMethod(Chart.CategoryAxis, "getViewElements", function() { return []; },
                                 function() {
                                     plotArea.updateLayout(chartBox);
                                     plotArea.getViewElements(viewFactory);
