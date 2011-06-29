@@ -21,11 +21,11 @@
         <!-- nav -->
         <!-- nav -->
         <!-- description -->
-        <div class="description">This example shows how to attach events to a kendoPanelBar and how they are fired and triggered.</div>
+        <div class="description">This example shows how to attach events to a kendoMenu and how they are fired and triggered.</div>
         <!-- description -->
         <div id="example">
-            <ul id="PanelBar1">
-                <li class="t-state-active">
+            <ul id="Menu1">
+                <li>
                     First Item
                     <ul>
                         <li>Sub Item 1</li>
@@ -70,34 +70,26 @@
                         <li>Sub Item 4</li>
                     </ul>
                 </li>
-                <li>
-                    Ajax Item
-                    <div></div>
-                </li>
-                <li>
-                    Error Item
-                    <div></div>
-                </li>
             </ul>
         </div>
         <script type="text/javascript">
+            var onOpen = function (e) {
+                kendoConsole.log('Opened: ' + $(e.item).find('> .t-link').text());
+            };
+
+            var onClose = function (e) {
+                kendoConsole.log('Closed: ' + $(e.item).find('> .t-link').text());
+            };
+
             var onSelect = function (e) {
                 kendoConsole.log('Selected: ' + $(e.item).find('> .t-link').text());
             };
 
             var onInit = function (e) {
-                kendoConsole.log('PanelBar loaded');
+                kendoConsole.log('Menu loaded');
             };
 
-            var onContentLoad = function (e) {
-                kendoConsole.log('Content loaded in <b>'+ $(e.item).find('> .t-link').text() + '</b> and starts with <b>' + $(e.contentElement).text().substr(0, 20) + '...</b>');
-            };
-
-            var onError = function (e) {
-                kendoConsole.error('Loading failed with ' + e.xhr.statusText + ' ' + e.xhr.status);
-            };
-
-            $("#PanelBar1").kendoPanelBar({ expandMode: 0, select: onSelect, init: onInit, contentLoad: onContentLoad, error: onError, contentUrls: [ , , , , , 'ajax/ajaxContent1.html', 'error.html' ] });
+            $("#Menu1").kendoMenu({ select: onSelect, init: onInit, open: onOpen, close: onClose });
         </script>
         <div class="console"></div>
         <!-- tools -->
