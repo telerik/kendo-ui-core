@@ -26,14 +26,15 @@
                 var total = 1000000,
                      remoteDataSource = new kendo.data.DataSource({
                          serverPaging: true,
-                         pageSize: 16,
+                         pageSize: 20,
                          transport: {
                              read: {
                                  url: "http://odata.netflix.com/Catalog/Titles",
                                  dataType: "jsonp",
                                  jsonpCallback: "callback",
-                                 cache: false
+                                 cache: true
                              },
+                             cache: "inmemory",
                              dialect: {
                                  read: function(options) {
                                      return kendo.format("$format=json&$orderby=Name&$top={0}&$skip={1}&$inlinecount=allpages&$callback=callback", options.take, options.skip);
@@ -48,6 +49,32 @@
                                  return result.d.__count;
                              }
                          }
+                    }),
+                    remoteDataSource = new kendo.data.DataSource({
+                        serverPaging: true,
+                        pageSize: 20,
+                        transport: {
+                            read: {
+                                url: "http://korchev/Telerik.Mvc.Examples/Grid/_FirstLook",
+                                type: "POST",
+                                dataType: "json",
+                                cache: true
+                            },
+                            cache: "inmemory",
+                            dialect: {
+                                read: function(options) {
+                                    return { page: options.page, size: 20 };
+                                }
+                            }
+                        },
+                        deserializer: {
+                            data: function(result) {
+                                return result.data;
+                            },
+                            total: function(result) {
+                                return result.total;
+                            }
+                        }
                     }),
                     dataSource = new kendo.data.DataSource({
                         serverPaging: true,
@@ -78,7 +105,7 @@
 
 
                 $("#table1").kendoGrid({
-                    dataSource: dataSource,
+                    dataSource: remoteDataSource,
                     scrollable: {
                         virtual: true
                     },
