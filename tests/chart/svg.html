@@ -98,14 +98,14 @@
                 test("renders svg tag with default size", function() {
                     equal(root.render(),
                         "<svg xmlns='http://www.w3.org/2000/svg' version='1.1' " +
-                        "width='600px' height='400px'></svg>");
+                        "width='600px' height='400px' style='position: relative;'></svg>");
                 });
 
                 test("renders children", function() {
                     root.children.push(contentElementStub);
                     equal(root.render(),
                         "<svg xmlns='http://www.w3.org/2000/svg' version='1.1' " +
-                        "width='600px' height='400px'>Content</svg>");
+                        "width='600px' height='400px' style='position: relative;'>Content</svg>");
                 });
             })();
 
