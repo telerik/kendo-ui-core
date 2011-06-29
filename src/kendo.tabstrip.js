@@ -85,9 +85,12 @@
         },
 
         disable: function (element) {
-            $(element).removeClass(DEFAULTSTATE)
-                 .removeClass(ACTIVESTATE)
-				 .addClass(DISABLEDSTATE);
+            var item = $(element);
+
+            if (!item.hasClass("t-state-active"))
+                item.removeClass(DEFAULTSTATE)
+                     .removeClass(ACTIVESTATE)
+                     .addClass(DISABLEDSTATE);
         },
 
         reload: function (element) {
@@ -108,8 +111,9 @@
 
             that.element.addClass('t-widget t-header t-tabstrip');
 
-            var tabGroup = that.element.children('ul').addClass('t-tabstrip-items t-reset'),
-                items = tabGroup
+            that.tabGroup = that.element.children('ul').addClass('t-tabstrip-items t-reset');
+
+            var items = that.tabGroup
                             .find('li')
                             .addClass('t-item'),
                 activeItem = items.filter('.' + ACTIVESTATE).index(),

@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+    <head>
+        <!-- meta -->
+        <!-- meta -->
+        <title>TabStrip Client API</title>
+        <!-- script -->
+        <script src="../../../src/jquery.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.fx.js"></script>
+        <script src="../../../src/kendo.tabstrip.js"></script>
+        <!-- script -->
+        <!-- css -->
+        <link href="../styles/examples.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.common.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.blueopal.css" rel="stylesheet"/>
+        <!-- css -->
+    </head>
+    <body>
+        <!-- nav -->
+        <!-- nav -->
+        <!-- description -->
+        <div class="description">You can use the TabStrip client API to manipulate the tabs.</div>
+        <!-- description -->
+        <div id="example">
+            <button class="selectTab">Select Tab</button><input type="text" /><br>
+            <button class="toggleTab">Enable/Disable Tab</button><input type="text" /><br>
+
+            <div id="TabStrip1">
+                <ul>
+                    <li class="t-state-active">
+                        First Tab
+                    </li>
+                    <li>
+                        Second Tab
+                    </li>
+                    <li>
+                        Third Tab
+                    </li>
+                </ul>
+                <div>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer felis libero, lobortis ac rutrum quis, varius a velit. Donec lacus erat, cursus sed porta quis, adipiscing et ligula. Duis volutpat, sem pharetra accumsan pharetra, mi ligula cursus felis, ac aliquet leo diam eget risus. Integer facilisis, justo cursus venenatis vehicula, massa nisl tempor sem, in ullamcorper neque mauris in orci. Proin sagittis elementum odio, eu vestibulum arcu rhoncus eu. Pellentesque lorem arcu, tempus at dapibus nec, tincidunt a ante. Cras eget arcu id augue sollicitudin fermentum. Quisque ullamcorper ultrices ante, ut mollis neque tincidunt nec. Aenean sollicitudin lobortis nibh, vitae sagittis justo placerat et. Fusce laoreet consequat arcu, quis placerat massa lacinia vel. Etiam fringilla purus ac ipsum euismod nec aliquet lorem aliquet. Aliquam a nunc ac lorem lobortis pulvinar. Integer eleifend lobortis risus vel commodo. Integer nisl turpis, facilisis a porttitor nec, tempus ac enim. Proin pulvinar vestibulum ligula id mattis. Integer posuere faucibus accumsan.</p>
+                </div>
+                <div>
+                    <p>Ut orci ligula, varius ac consequat in, rhoncus in dolor. Mauris pulvinar molestie accumsan. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean velit ligula, pharetra quis aliquam sed, scelerisque sed sapien. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam dui mi, vulputate vitae pulvinar ac, condimentum sed eros. Donec varius tristique erat in consequat. Pellentesque a blandit nulla. Aenean mattis eros vel magna laoreet ut rutrum turpis ultrices. Sed feugiat, urna id vulputate vulputate, dui nibh fringilla erat, at molestie diam arcu sed velit. Sed imperdiet suscipit dolor, sollicitudin feugiat orci ullamcorper cursus. Nunc non nunc arcu, et malesuada urna. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nullam tempor urna sed sapien aliquam ultricies. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+                </div>
+                <div>
+                    <p>Aliquam at nisl quis est adipiscing bibendum. Nam malesuada eros facilisis arcu vulputate at aliquam nunc tempor. In commodo scelerisque enim, eget sodales lorem condimentum rutrum. Phasellus sem metus, ultricies at commodo in, tristique non est. Morbi vel mauris eget mauris commodo elementum. Nam eget libero lacus, ut sollicitudin ante. Nam odio quam, suscipit a fringilla eget, dignissim nec arcu. Donec tristique arcu ut sapien elementum pellentesque. Donec varius arcu in dolor elementum dignissim. Etiam ac consequat metus. Praesent semper diam id mi dictum sagittis. Etiam nulla metus, convallis sit amet rutrum non, cursus ornare ligula. Integer turpis leo, vulputate eget pulvinar in, condimentum sit amet metus. Pellentesque vulputate, velit non feugiat tincidunt, nulla dolor rutrum nibh, id gravida orci sem id nulla. Suspendisse egestas eleifend lorem vel lobortis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec odio elit, vestibulum ut placerat vitae, volutpat vitae erat. Aliquam sodales nisl in est varius at feugiat nibh sagittis. Cras et molestie erat. Integer elit lorem, mattis non tempus in, molestie vitae sapien.</p>
+                </div>
+            </div>
+            <script type="text/javascript">
+                $("#example > button").click(function (e) {
+                    switch (e.target.className) {
+                        case "selectTab":
+                                tabStrip.select(tabStrip.tabGroup.children("li").eq($(e.target).next()[0].value));
+                            break;
+                        case "toggleTab":
+                                var tab = tabStrip.tabGroup.children("li").eq($(e.target).next()[0].value);
+
+                                if (tab.hasClass("t-state-disabled"))
+                                    tabStrip.enable(tab);
+                                else
+                                    tabStrip.disable(tab);
+                            break;
+                    }
+                });
+
+                var tabStrip = $("#TabStrip1").kendoTabStrip().data("kendoTabStrip");
+            </script>
+        </div>
+        <!-- tools -->
+        <!-- tools -->
+    </body>
+</html>
