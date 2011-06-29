@@ -17,7 +17,8 @@
                 Box2D = Chart.Box2D,
                 chartBox = new Box2D(100, 100, 1000, 1000),
                 TOLERANCE = 1,
-                MARGIN = 10;
+                MARGIN = 10,
+                GAP = 4;
 
             (function() {
                 var plotArea,
@@ -27,7 +28,8 @@
                     barSeriesData = [{
                         name: "Value A",
                         type: "bar",
-                        data: [100, 200, 300]
+                        data: [100, 200, 300],
+                        gap: GAP
                     }, {
                         name: "Value B",
                         type: "bar",
@@ -36,7 +38,8 @@
                     columnSeriesData = [{
                         name: "Value A",
                         type: "column",
-                        data: [100, 200, 300]
+                        data: [100, 200, 300],
+                        gap: GAP
                     }, {
                         name: "Value B",
                         type: "column",
@@ -229,6 +232,10 @@
                     );
                 });
 
+                test("applies gap from first series", function() {
+                    equals(barChart.options.gap, GAP);
+                });
+
                 // ------------------------------------------------------------
                 module("PlotArea / Bar series", {
                     setup: function() {
@@ -280,6 +287,10 @@
                     });
 
                     ok(plotArea.charts[0].options.isStacked);
+                });
+
+                test("applies gap from first series", function() {
+                    equals(barChart.options.gap, GAP);
                 });
 
             })();
