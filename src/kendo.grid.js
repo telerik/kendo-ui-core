@@ -310,29 +310,41 @@
 
                 that._scrollTop = 0;
 
-                dataSource.range(skip, take);
+                 clearTimeout(that._timeout);
+
+                if (!that._mask) {
+                    var mask = $("<div class='t-overlay' style='position:absolute;text-align:center;color:#fff'><span>Loading ...</span></div>");
+
+                    mask.width(that.tableWrap.outerWidth()).height(that.tableWrap.outerHeight());
+
+                    that._mask = mask.insertBefore(that.tableWrap);
+                }
+
+                that._timeout = setTimeout(function() {
+                    dataSource.range(skip, take);
+                }, 100);
+
+                return;
             } else if (lastRowIndex > skip + take) {
                 skip = firstRowIndex;
 
                 that._scrollTop = rowHeight;
 
-                if (dataSource.inRange(skip, take)) {
-                    dataSource.range(skip, take);
-                } else {
-                    //if (dataSource.skip() !== skip) {
-                        clearTimeout(that._timeout);
-                    //}
+                clearTimeout(that._timeout);
 
-                    that._timeout = setTimeout(function() {
-                        dataSource.range(skip, take);
-                    }, 200);
+                if (!that._mask) {
+                    var mask = $("<div class='t-overlay' style='position:absolute;text-align:center;color:#fff'><span>Loading ...</span></div>");
+
+                    mask.width(that.tableWrap.outerWidth()).height(that.tableWrap.outerHeight());
+
+                    that._mask = mask.insertBefore(that.tableWrap);
                 }
+
+                that._timeout = setTimeout(function() {
+                    dataSource.range(skip, take);
+                }, 100);
 
                 return;
-            } else if (lastRowIndex > skip + take / 2) {
-                if (!dataSource.inRange(skip + take, take)) {
-                    dataSource.prefetch(skip + take, take);
-                }
             }
 
             that._scrollTop = scrollTop - (skip * rowHeight);
@@ -348,6 +360,11 @@
                 maxHeight = 250000;
 
             clearTimeout(that._timeout);
+
+            if (that._mask) {
+                that._mask.remove();
+                that._mask = null;
+            }
 
             that._rowHeight = rowHeight = that.table[0].rows[0].offsetHeight;
 
