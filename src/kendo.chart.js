@@ -2315,7 +2315,7 @@
                 positions = [];
 
             for (var i = 0; i < itemsCount; i++) {
-                positions.push(pos);
+                positions.push(round(pos, COORD_PRECISION));
                 pos += step;
             };
 
