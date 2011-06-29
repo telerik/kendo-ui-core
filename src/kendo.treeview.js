@@ -21,6 +21,7 @@
         CHANGE = "change",
         TSTATEHOVER = "t-state-hover",
         VISIBLE = ":visible",
+        NODE = ".t-item",
         NODECONTENTS = ">.t-group, >.t-content, >.t-animation-container>.t-group, >.t-animation-container>.t-content";
 
     var TreeView = Component.extend({
@@ -178,8 +179,9 @@
         },
 
         _processItems: function(items, callback) {
-            this.element.find(items).each(function(index, item) {
-                callback.call(this, index, $(item).closest(".t-item"));
+            var that = this;
+            that.element.find(items).each(function(index, item) {
+                callback.call(that, index, $(item).closest(NODE));
             });
         },
 
@@ -204,7 +206,7 @@
         },
 
         enable: function (items, enable) {
-            enable = enable !== false;
+            enable = arguments.length == 2 ? !!enable : true;
 
             this._processItems(items, function (index, item) {
                 var isCollapsed = !item.find(NODECONTENTS).is(VISIBLE);
@@ -229,23 +231,16 @@
             });
         },
 
-        reload: function (items) {
-            this._processItems(items, function (index, item) {
-                item.find(".t-group").remove();
-                treeView.ajaxRequest(item);
-            });
-        },
-
         _trigger: function (eventName, node) {
             return this.trigger(eventName, {
-                item: node.closest(".t-item")[0]
+                item: node.closest(NODE)[0]
             });
         },
 
         _nodeClick: function (e) {
             var that = this,
                 node = $(e.target),
-                contents = node.closest(".t-item").find(NODECONTENTS),
+                contents = node.closest(NODE).find(NODECONTENTS),
                 href = node.attr("href"),
                 shouldNavigate;
 
@@ -265,28 +260,27 @@
         },
 
         select: function (node) {
-            node = $(node);
+            node = $(node).closest(NODE);
 
             if (node.length) {
                 this.element.find(".t-in").removeClass("t-state-hover t-state-selected");
 
-                node.addClass("t-state-selected");
+                node.find(".t-in:first").addClass("t-state-selected");
             }
         },
 
-        toggle: function (item) {
-            if (item.find(".t-minus,.t-plus").length == 0) {
+        toggle: function (node) {
+            if (node.find(".t-minus,.t-plus").length == 0) {
                 return;
             }
 
-            if (item.find("> div > .t-state-disabled").length) {
+            if (node.find("> div > .t-state-disabled").length) {
                 return;
             }
 
             var that = this,
-                contents = item.find(NODECONTENTS),
+                contents = node.find(NODECONTENTS),
                 isExpanding = !contents.is(VISIBLE)
-                eventType = isExpanding ? "expand" : "collapse",
                 animationSettings = that.options.animation,
                 animation = animationSettings.expand,
                 collapse = animationSettings.collapse,
@@ -296,9 +290,9 @@
                 animation = hasCollapseAnimation ? collapse : extend({ reverse: true }, animation, { show: false, hide: true });
             }
 
-            if (contents.children().length > 0 && item.data("loaded") !== false) {
-                if (!that._trigger(eventType, item)) {
-                    item.find("> div > .t-icon")
+            if (contents.children().length > 0) {
+                if (!that._trigger(isExpanding ? "expand" : "collapse", node)) {
+                    node.find("> div > .t-icon")
                         .toggleClass("t-minus", isExpanding)
                         .toggleClass("t-plus", !isExpanding);
                         
@@ -312,11 +306,11 @@
         },
 
         _toggleButtonClick: function (e) {
-            this.toggle($(e.target).closest(".t-item"));
+            this.toggle($(e.target).closest(NODE));
         },
 
-        getItemText: function (item) {
-            return $(item).find("> div > .t-in").text();
+        text: function (node) {
+            return $(node).closest(NODE).find(".t-in:first").text();
         },
 
         getItemValue: function (item) {
@@ -351,7 +345,7 @@
             var that = this,
                 treeview = that.owner;
 
-            if (treeview.trigger("nodeDragStart", { item: e.draggable.closest(".t-item")[0] })) {
+            if (treeview.trigger("nodeDragStart", { item: e.draggable.closest(NODE)[0] })) {
                 return false;
             }
 
@@ -370,7 +364,7 @@
             } else if (!$.contains(treeview.element, e.target)) {
                 // dragging node outside of treeview
                 status = "t-denied";
-            } else if ($.contains(e.draggable.closest(".t-item")[0], e.target)) {
+            } else if ($.contains(e.draggable.closest(NODE)[0], e.target)) {
                 // dragging node within itself
                 status = "t-denied";
             } else {
@@ -402,7 +396,7 @@
 
                         that.dropCue
                             .css(hoveredItemPos)
-                            [insertOnTop ? "prependTo" : "appendTo"](that.dropTarget.closest(".t-item").find("> div:first"));
+                            [insertOnTop ? "prependTo" : "appendTo"](that.dropTarget.closest(NODE).find("> div:first"));
 
                         if (insertOnTop && hoveredItem.hasClass("t-top")) {
                             status = "t-insert-top";
@@ -421,7 +415,7 @@
                 dropTarget: e.target,
                 status: status.substring(2),
                 setStatusClass: function (value) { status = value },
-                item: e.draggable.closest(".t-item")[0]
+                item: e.draggable.closest(NODE)[0]
             });
 
             if (status.indexOf("t-insert") != 0) {
@@ -437,11 +431,11 @@
                 dropPosition = "over", destinationItem;
 
             if (e.keyCode == kendo.keys.ESC){
-                treeview.trigger("nodeDragCancelled", { item: e.draggable.closest(".t-item")[0] });
+                treeview.trigger("nodeDragCancelled", { item: e.draggable.closest(NODE)[0] });
             } else {
                 if (that.dropCue.css("visibility") == "visible") {
                     dropPosition = that.dropCue.prevAll(".t-in").length > 0 ? "after" : "before";
-                    destinationItem = that.dropCue.closest(".t-item").find("> div");
+                    destinationItem = that.dropCue.closest(NODE).find("> div");
                 } else if (that.dropTarget) {
                     destinationItem = that.dropTarget.closest(".t-top,.t-mid,.t-bot");
                 }
@@ -452,7 +446,7 @@
                         dropTarget: e.target,
                         destinationItem: destinationItem.parent()[0],
                         dropPosition: dropPosition,
-                        item: e.draggable.closest(".t-item")[0]
+                        item: e.draggable.closest(NODE)[0]
                     });
 
                 if (!isValid) {
@@ -530,9 +524,9 @@
                 }
 
                 treeview.trigger("nodeDropped", {
-                    destinationItem: destinationItem.closest(".t-item")[0],
+                    destinationItem: destinationItem.closest(NODE)[0],
                     dropPosition: dropPosition,
-                    item: sourceItem.parent(".t-item")[0]
+                    item: sourceItem.parent(NODE)[0]
                 });
 
                 return false;

@@ -1,0 +1,130 @@
+<!doctype html>
+<html>
+    <head>
+        <title>TreeView API</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.treeview.js"></script>
+        <link rel="stylesheet" href="../qunit.css" />
+        <link rel="stylesheet" href="../../styles/kendo.common.css" />
+        <link rel="stylesheet" href="../../styles/kendo.vista.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">TreeView API</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+
+        <script>
+            function createTreeView(options) {
+                return $("<div />").appendTo(document.body).kendoTreeView(options);
+            }
+
+            module("api", {
+                teardown: function () {
+                    $(".t-treeview").remove();
+                }
+            });
+
+            test("enable(node, false) disables node", function() {
+                var treeview = createTreeView({
+                        dataSource: [
+                            { text: "foo", items: [
+                                { text: "bar" }
+                            ] }
+                        ]
+                    });
+
+                var node = treeview.find(".t-item:first");
+
+                treeview.data("kendoTreeView").enable(node, false);
+
+                equals(node.find(".t-plus-disabled").length, 1);
+                ok(node.find(".t-in").hasClass("t-state-disabled"));
+            });
+
+            test("enable(node) enables node", function() {
+                var treeview = createTreeView({
+                        dataSource: [
+                            { text: "foo", enabled: false, items: [
+                                { text: "bar" }
+                            ] }
+                        ]
+                    });
+
+                var node = treeview.find(".t-item:first");
+
+                treeview.data("kendoTreeView").enable(node);
+
+                equals(node.find(".t-plus").length, 1);
+                ok(!node.find(".t-in").hasClass("t-state-disabled"));
+            });
+
+            test("select(node) selects node", function() {
+                var treeview = createTreeView({
+                        dataSource: [
+                            { text: "foo" }
+                        ]
+                    });
+
+                var node = treeview.find(".t-item:first");
+
+                treeview.data("kendoTreeView").select(node);
+
+                ok(node.find(".t-in").hasClass("t-state-selected"));
+            });
+
+            test("select(node) works with inner elements", function() {
+                var treeview = createTreeView({
+                        dataSource: [
+                            { text: "foo" }
+                        ]
+                    });
+
+                var node = treeview.find(".t-item:first").find(".t-in");
+
+                treeview.data("kendoTreeView").select(node);
+
+                ok(node.hasClass("t-state-selected"));
+            });
+
+            test("select(node) deselects other node", function() {
+                var treeview = createTreeView({
+                        dataSource: [
+                            { text: "foo", selected: true },
+                            { text: "bar" }
+                        ]
+                    });
+
+                var node = treeview.find(".t-item:last");
+
+                treeview.data("kendoTreeView").select(node);
+
+                equals(treeview.find(".t-state-selected").length, 1);
+            });
+
+            test("text(node) returns node text", function() {
+                var treeview = createTreeView({
+                        dataSource: [
+                            { text: "foo", items: [
+                                { text: "bar" }
+                            ] }
+                        ]
+                    });
+
+                var node = treeview.find(".t-item:first");
+
+                equals(treeview.data("kendoTreeView").text(node), "foo");
+                equals(treeview.data("kendoTreeView").text(node.find(".t-in:first")), "foo");
+            });
+        </script>
+
+        <div id="qunit-fixture"> </div>
+        <ul id="log"></ul>
+    </body>
+</html>
+
+
