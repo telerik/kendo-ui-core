@@ -1830,7 +1830,7 @@
                 majorTicks = axis.getMajorTickPositions(),
                 ticks = [];
 
-            if (options.majorTickType === OUTSIDE) {
+            if (options.majorTickType.toLowerCase() === OUTSIDE) {
                 ticks = ticks.concat($.map(majorTicks, function(pos) {
                                         return {
                                             pos: pos,
@@ -1841,7 +1841,7 @@
                                     }));
             }
 
-            if (options.minorTickType === OUTSIDE) {
+            if (options.minorTickType.toLowerCase()  === OUTSIDE) {
                 ticks = $.map(axis.getMinorTickPositions(), function(pos) {
                             if (options.majorTickType !== NONE) {
                                 if (!inArray(pos, majorTicks)) {
