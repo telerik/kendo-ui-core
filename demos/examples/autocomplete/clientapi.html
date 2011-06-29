@@ -26,18 +26,51 @@
         <div class="description">Client API</div>
         <!-- description -->
         <div id="example">
+            <style id="exampleCSS" scoped="scoped">
+                #products
+                {
+                    float: left
+                }
+
+                .configurator
+                {
+                    width: 300px;
+                    float: right;
+                    margin: 0 0 0 15em;
+                    display: inline;
+                }
+
+                .configurator li
+                {
+                    padding-bottom: 3px;
+                }
+
+                .configurator input
+                {
+                    width: 60px
+                }
+            </style>
+
             <input id="products" />
 
-            <div id="options">
+            <div class="configurator">
                 With available API you can:
-                <div>
-                    <input id="value" />
-                    <button id="setValue">Set value</button>
-                </div>
-                <div>
-                    <button id="getValue">Get value</button>
-                </div>
-                <em>Maybe we can show search, select, suggest</em>
+                <ul>
+                    <li>
+                        <button id="set">Set value</button>
+                        <input id="value" />
+                    </li>
+                    <li>
+                        <button id="get">Get value</button>
+                    </li>
+                    <li>
+                        search for options which starts with:
+                        <div>
+                            <button id="search">Search</button>
+                            <input id="word" value="ch" />
+                        </div>
+                    </li>
+                </ul>
            </div>
 
             <script type="text/javascript">
@@ -59,12 +92,16 @@
 
                 var autocomplete = $("#products").data("kendoAutoComplete");
 
-                $("#setValue").click(function() {
+                $("#set").click(function() {
                     autocomplete.value($("#value").val());
                 });
 
-                $("#getValue").click(function() {
+                $("#get").click(function() {
                     alert(autocomplete.value());
+                });
+
+                $("#search").click(function() {
+                    autocomplete.search($("#word").val());
                 });
            </script>
         </div>

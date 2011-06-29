@@ -26,36 +26,60 @@
         <div class="description">Client API</div>
         <!-- description -->
         <div id="example">
+            <style id="exampleCSS" scoped="scoped">
+                #products_wrapper
+                {
+                    float: left
+                }
+
+                .configurator
+                {
+                    width: 300px;
+                    float: right;
+                    margin: 0 0 0 15em;
+                    display: inline;
+                }
+
+                .configurator li
+                {
+                    padding-bottom: 3px;
+                }
+
+                .configurator input
+                {
+                    width: 60px
+                }
+            </style>
             <input id="products" />
 
-            <div id="options">
+            <div class="configurator">
                 With available API you can:
-                <div>
+                <li>
                     <button id="enable">Enable</button> or
                     <button id="disable">Disable</button>
-                </div>
-                <div>
+                </li>
+                <li>
                     <button id="open">Open drop-down</button> or
                     <button id="close">Close drop-down</button>
-                </div>
-                <div>
+                </li>
+                <li>
                     <button id="select">Select by index</button>
                     <input id="index" value="0" />
-                </div>
-                <div>
+                </li>
+                <li>
                     <button id="setValue">Select by value</button>
                     <input id="value" value="1" />
-                </div>
-                <div>
+                </li>
+                <li>
                     <button id="getValue">Get value</button> or
                     <button id="getText">Get text</button>
-                </div>
-                <div>
+                </li>
+                <li>
                     <label for="word">
                         Find item which starts with:</label>
                     <input id="word" value="Ch" />
                     <button id="find">Find</button>
-                </div>
+                </li>
             </div>
 
             <script type="text/javascript">
@@ -73,7 +97,9 @@
                     {text: "Carnarvon Tigers", value:"11"}
                 ];
 
-                $("#products").kendoDropDownList(data);
+                $("#products").kendoDropDownList(data)
+                              .closest(".t-widget")
+                              .attr("id", "products_wrapper");
 
                 var dropdownlist = $("#products").data("kendoDropDownList");
 
