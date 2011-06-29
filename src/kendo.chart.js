@@ -117,6 +117,7 @@
             model.updateLayout();
             var html = model.getView(chart._viewFactory).render();
             setContent(chart.element[0], html);
+            alignToScreen(chart.element[0].firstChild);
         },
 
         _supportsSVG: function() {
@@ -221,6 +222,15 @@
             container.appendChild(importedDoc);
         } else {
             container.innerHTML = xml;
+        }
+    }
+
+    function alignToScreen(element) {
+        if (element.getScreenCTM) {
+            var ctm = element.getScreenCTM();
+
+            element.style.left = -ctm.e % 1 + "px";
+            element.style.top = -ctm.f % 1 + "px";
         }
     }
 
@@ -2970,7 +2980,8 @@
             if (!root.template) {
                 root.template = SVGRoot.template = template(
                     "<svg xmlns='http://www.w3.org/2000/svg' version='1.1' " +
-                    "width='<%= options.width %>px' height='<%= options.height %>px'>" +
+                    "width='<%= options.width %>px' height='<%= options.height %>px' " +
+                    "style='position: relative;'>" +
                     "<%= renderContent() %></svg>"
                 );
             }
