@@ -1892,6 +1892,22 @@
                     );
                 }
             });
+        },
+
+        getActualTickSize: function () {
+            var axis = this,
+                options = axis.options,
+                tickSize = 0;
+
+            if (options.majorTickType != NONE && options.minorTickType != NONE ) {
+                tickSize = Math.max(options.majorTickSize, options.minorTickSize);
+            } else if (options.majorTickType != NONE) {
+                tickSize = options.majorTickSize;
+            } else if (options.minorTickType != NONE) {
+                tickSize = options.minorTickSize;
+            }
+
+            return tickSize;
         }
     });
 
@@ -1932,14 +1948,16 @@
                 visible: true,
                 width: 1,
                 color: BLACK
-            }
+            },
+            margin: 5
         },
 
         updateLayout: function(targetBox) {
             var axis = this,
                 options = axis.options,
                 isVertical = options.orientation === VERTICAL,
-                children = axis.children;
+                children = axis.children,
+                tickSize = axis.getActualTickSize();
 
             var maxLabelWidth = 0,
                 maxLabelHeight = 0;
@@ -1952,12 +1970,12 @@
             if (isVertical) {
                 axis.box = new Box2D(
                     targetBox.x1, targetBox.y1,
-                    targetBox.x1 + maxLabelWidth + options.majorTickSize, targetBox.y2
+                    targetBox.x1 + maxLabelWidth + tickSize + options.margin, targetBox.y2
                 );
             } else {
                 axis.box = new Box2D(
                     targetBox.x1, targetBox.y1,
-                    targetBox.x2, targetBox.y1 + options.majorTickSize + maxLabelHeight
+                    targetBox.x2, targetBox.y1 + tickSize + maxLabelHeight + options.margin
                 );
             }
 
@@ -1970,7 +1988,8 @@
                 isVertical = axis.options.orientation === VERTICAL,
                 children = axis.children,
                 box = axis.box,
-                tickPositions = axis.getMajorTickPositions();
+                tickPositions = axis.getMajorTickPositions(),
+                tickSize = axis.getActualTickSize();
 
             for (var i = 0; i < children.length; i++) {
                 var label = children[i],
@@ -1981,9 +2000,9 @@
                         new Box2D(box.x1, labelPos,
                                 box.x1 + maxLabelWidth, labelPos + labelSize) :
                         new Box2D(labelPos,
-                                box.y1 + options.majorTickSize,
+                                box.y1 + tickSize,
                                 labelPos + labelSize,
-                                box.y1 + options.majorTickSize + maxLabelHeight);
+                                box.y1 + tickSize + maxLabelHeight);
 
 
                 label.updateLayout(labelBox);
@@ -2222,7 +2241,8 @@
                 visible: false,
                 width: 1,
                 color: BLACK
-            }
+            },
+            margin: 5
         },
 
         updateLayout: function(targetBox) {
@@ -2234,7 +2254,8 @@
                 step = width / children.length,
                 x = (step / 2) + targetBox.x1,
                 maxLabelHeight = 0,
-                maxLabelWidth = 0;
+                maxLabelWidth = 0,
+                tickSize = axis.getActualTickSize();
 
             for (var i = 0; i < children.length; i++) {
                 var label = children[i];
@@ -2245,19 +2266,19 @@
             if (isVertical) {
                 axis.box = new Box2D(
                     targetBox.x1, targetBox.y1,
-                    targetBox.x1 + options.majorTickSize + maxLabelWidth, targetBox.y2
+                    targetBox.x1 + maxLabelWidth, targetBox.y2
                 );
             } else {
                 axis.box = new Box2D(
                     targetBox.x1, targetBox.y1,
-                    targetBox.x2, targetBox.y1 + options.majorTickSize + maxLabelHeight
+                    targetBox.x2, targetBox.y1 + maxLabelHeight
                 );
             }
 
             var majorDivisions = axis.getMajorTickPositions();
 
             if (isVertical) {
-                labelX = axis.box.x2 - options.majorTickSize;
+                labelX = axis.box.x2 - options.margin - tickSize;
                 for (var i = 0; i < children.length; i++) {
                     var label = children[i],
                         currentDivision = majorDivisions[i],
@@ -2271,7 +2292,7 @@
                     ));
                 }
             } else {
-                labelY = axis.box.y1 + options.majorTickSize;
+                labelY = axis.box.y1 + options.margin + tickSize;
                 for (var i = 0; i < children.length; i++) {
                     var label = children[i],
                         currentDivision = majorDivisions[i],
