@@ -308,8 +308,9 @@
                 });
 
                 test("major ticks are distributed vertically", function() {
-                    numericAxis.options.line.width = 0;
                     numericAxis.getViewElements(factory);
+
+                    factory.log.line.shift();
 
                     same($.map(factory.log.line, function(line) { return line.y1; }),
                          [9, 106, 203, 300, 397, 494, 591], TOLERANCE);
@@ -324,10 +325,11 @@
                 });
 
                 test("minor ticks are distributed vertically", function() {
-                    numericAxis.options.line.width = 0;
                     numericAxis.options.majorTickType = "none";
                     numericAxis.options.minorTickType = "outside";
                     numericAxis.getViewElements(factory);
+
+                    factory.log.line.shift();
 
                     same($.map(factory.log.line, function(line) { return line.y1; }),
                         [9, 32.28, 55.56, 78.84, 102.12, 125.4,
@@ -390,35 +392,31 @@
                 });
 
                 test("major ticks are distributed horizontally", function() {
-                    numericAxis.options.line.width = 0;
                     numericAxis.getViewElements(factory);
-
+                    factory.log.line.shift();
                     same($.map(factory.log.line, function(line) { return line.x1; }),
                          [5, 135, 265, 396, 526, 656, 787], TOLERANCE);
                 });
 
                 test("major ticks are vertical", 7, function() {
-                    numericAxis.options.line.width = 0;
                     numericAxis.getViewElements(factory);
-
+                    factory.log.line.shift();
                     $.each(factory.log.line, function() {
                             equal(this.x2, this.x1);
                     });
                 });
 
                 test("major ticks are aligned to axis", 7, function() {
-                    numericAxis.options.line.width = 0;
                     numericAxis.getViewElements(factory);
-
+                    factory.log.line.shift();
                     $.each(factory.log.line, function() {
                             equal(this.y1, 0);
                     });
                 });
 
                 test("major ticks are of predefined height", 7, function() {
-                    numericAxis.options.line.width = 0;
                     numericAxis.getViewElements(factory);
-
+                    factory.log.line.shift();
                     $.each(factory.log.line, function() {
                             equal(this.y2 - this.y1, MAJOR_TICK_HEIGHT);
                     });
@@ -427,10 +425,9 @@
                 test("minor ticks are distributed horizontally", function() {
                     numericAxis.options.majorTickType = "none",
                     numericAxis.options.minorTickType= "outside",
-                    numericAxis.options.line.width = 0;
                     numericAxis.updateLayout(chartBox);
                     numericAxis.getViewElements(factory);
-
+                    factory.log.line.shift();
                     same($.map(factory.log.line, function(line) { return line.x1; }),
                         [5, 36.28, 67.56, 98.84, 130.12,
                         161.4, 192.68, 223.96, 255.24,
@@ -443,10 +440,9 @@
                 test("minor ticks are vertical", 26, function() {
                     numericAxis.options.majorTickType = "none",
                     numericAxis.options.minorTickType= "outside",
-                    numericAxis.options.line.width = 0;
                     numericAxis.updateLayout(chartBox);
                     numericAxis.getViewElements(factory);
-
+                    factory.log.line.shift();
                     $.each(factory.log.line, function() {
                             equal(this.x2, this.x1);
                     });
@@ -455,10 +451,9 @@
                 test("minor ticks are aligned to axis", 26, function() {
                     numericAxis.options.majorTickType = "none",
                     numericAxis.options.minorTickType= "outside",
-                    numericAxis.options.line.width = 0;
                     numericAxis.updateLayout(chartBox);
                     numericAxis.getViewElements(factory);
-
+                    factory.log.line.shift();
                     $.each(factory.log.line, function() {
                             equal(this.y1, 0);
                     });
@@ -467,10 +462,9 @@
                 test("minor ticks are of predefined height", 26, function() {
                     numericAxis.options.majorTickType = "none",
                     numericAxis.options.minorTickType= "outside",
-                    numericAxis.options.line.width = 0;
                     numericAxis.updateLayout(chartBox);
                     numericAxis.getViewElements(factory);
-
+                    factory.log.line.shift();
                     $.each(factory.log.line, function() {
                             equal(this.y2 - this.y1, MINOR_TICK_HEIGHT);
                     });

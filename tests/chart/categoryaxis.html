@@ -89,37 +89,41 @@
                 });
 
                 test("major ticks are distributed horizontally", function() {
-                    categoryAxis.options.line.width = 0;
                     categoryAxis.getViewElements(factory);
-
+                    factory.log.line.shift();
                     same($.map(factory.log.line, function(line) { return line.x1; }),
                          [0, 400, 800], TOLERANCE);
                 });
 
                 test("major ticks can be disabled", function() {
-                    categoryAxis.options.line.width = 0;
                     categoryAxis.options.majorTickType = "none";
                     categoryAxis.getViewElements(factory);
-
+                    factory.log.line.shift();
                     equal(factory.log.line.length, 0);
                 });
 
                 test("minor ticks are distributed horizontally", function() {
-                    categoryAxis.options.line.width = 0;
                     categoryAxis.options.majorTickType = "none";
                     categoryAxis.options.minorTickType = "outside";
                     categoryAxis.getViewElements(factory);
-
+                    factory.log.line.shift();
                     same($.map(factory.log.line, function(line) { return line.x1; }),
                          [0, 200, 400, 600, 800], TOLERANCE);
                 });
 
                 test("minor ticks can be disabled", function() {
-                    categoryAxis.options.line.width = 0;
                     categoryAxis.options.majorTickType = "none";
                     categoryAxis.options.minorTickType = "none";
                     categoryAxis.getViewElements(factory);
+                    factory.log.line.shift();
+                    equal(factory.log.line.length, 0);
+                });
 
+                test("line width 0 remove all ticks", function() {
+                    categoryAxis.options.line.width = 0;
+                    categoryAxis.options.majorTickType = "outside";
+                    categoryAxis.options.minorTickType = "outside";
+                    categoryAxis.getViewElements(factory);
                     equal(factory.log.line.length, 0);
                 });
 
@@ -162,21 +166,28 @@
                 });
 
                 test("major ticks are distributed vertically", function() {
-                    categoryAxis.options.line.width = 0;
                     categoryAxis.getViewElements(factory);
-
+                    factory.log.line.shift();
                     same($.map(factory.log.line, function(line) { return line.y1; }),
                          [0, 300, 600], TOLERANCE);
                 });
 
                 test("minor ticks are distributed vertically", function() {
-                    categoryAxis.options.line.width = 0;
                     categoryAxis.options.majorTickType = "none";
                     categoryAxis.options.minorTickType = "outside";
                     categoryAxis.getViewElements(factory);
-
+                    factory.log.line.shift();
                     same($.map(factory.log.line, function(line) { return line.y1; }),
                         [0, 150, 300, 450, 600], TOLERANCE);
+                });
+
+                test("line width 0 remove all ticks", function() {
+                    categoryAxis.options.line.width = 0;
+                    categoryAxis.options.majorTickType = "outside";
+                    categoryAxis.options.minorTickType = "outside";
+                    categoryAxis.getViewElements(factory);
+
+                    equal(factory.log.line.length, 0);
                 });
 
                 // ------------------------------------------------------------

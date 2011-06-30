@@ -1998,8 +1998,7 @@
                 visible: true,
                 width: 1,
                 color: BLACK
-            },
-            margin: 5
+            }
         },
 
         updateLayout: function(targetBox) {
@@ -2058,9 +2057,9 @@
                             stroke: options.line.color
                         }));
                 }
-            }
 
-            [].push.apply(childElements, axis.renderTicks(factory));
+                [].push.apply(childElements, axis.renderTicks(factory));
+            }
 
             return childElements;
         },
@@ -2265,8 +2264,7 @@
                 visible: false,
                 width: 1,
                 color: BLACK
-            },
-            margin: 5
+            }
         },
 
         updateLayout: function(targetBox) {
@@ -2322,9 +2320,9 @@
                             stroke: options.line.color
                         }));
                 }
-            }
 
-            [].push.apply(childElements, axis.renderTicks(factory));
+                [].push.apply(childElements, axis.renderTicks(factory));
+            }
 
             return childElements;
         },
