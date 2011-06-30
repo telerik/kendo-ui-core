@@ -103,6 +103,7 @@
                             <li><a href="tabstrip/ajax.html">Loading Ajax Content</a></li>
                             <li><a href="tabstrip/events.html">Events</a></li>
                             <li><a href="tabstrip/api.html">API</a></li>
+                            <li><a href="tabstrip/animation.html">Animation Effects</a></li>
                         </ul>
                     </li>
                     <li>
@@ -121,15 +122,13 @@
                 <script type="text/javascript">
                     var initialPosition = location.href.match(/\/$/g) ? "" : "../";
 
-                    var skins = new kendo.data.DataSource.create([
-                        { text: "Blue Opal", control: "Menu", value: "blueopal" },
-                        { text: "Orange", control: "Menu", value: "black" },
-                        { text: "Kendo", control: "Menu", value: "vista" }
-                    ]);
-
                     $('#nav').kendoPanelBar({ animation: { open: { effects: 'fadeIn expandVertical' } }, expandMode: 0 });
                     $('#skinSelector').kendoDropDownList({
-                        dataSource: skins,
+                        dataSource: [
+                                        { text: "Blue Opal", control: "Menu", value: "blueopal" },
+                                        { text: "Orange", control: "Menu", value: "black" },
+                                        { text: "Kendo", control: "Menu", value: "vista" }
+                                    ],
                         template: '<span class="thumbLink" href="#">\
                                     <span class="thumb <%= data.text.toLowerCase() %>Thumb" style="background-image: url(<%= initialPosition %>img/<%= data.control %>/thumbSprite.png)">\
                                     <span class="gloss"></span></span><span class="skinTitle"><%= data.text %></span></span>'

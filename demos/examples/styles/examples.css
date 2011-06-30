@@ -18,6 +18,7 @@ body
     background-color: #FFF;
     background-position: 0 -761px;
     background-repeat: repeat-x;
+    overflow-y: scroll;
 }
 
 #header, #footer
@@ -217,6 +218,32 @@ pre.prettyprint
     float:  right;
 }
 
+.configuration
+{
+    padding: 10px;
+    float: right;
+    width: 180px;
+    height: 190px;
+    border: 1px solid #dedede;
+}
+
+.configuration .configTitle
+{
+    font-size: 14px;
+    color: #2175bd;
+    display: block;
+    border-bottom: 1px solid #bbb;
+    margin-bottom: 10px;
+}
+
+.configuration label,
+.configuration input
+{
+    vertical-align: middle;
+    line-height: 21px;
+    margin-top: 0;
+}
+
 /* Nav styles */
 
 #nav,
@@ -372,10 +399,11 @@ pre.prettyprint
     width: 200px;
 }
 
-.skinSelector .t-state-default,
-.skinSelector .t-state-hover,
-.skinSelector .t-state-hover:hover,
-.skinSelector .t-state-active
+.configuration,
+div.skinSelector .t-state-default,
+div.skinSelector .t-state-hover,
+div.skinSelector .t-state-hover:hover,
+div.skinSelector .t-state-active
 {
     color: #333;
     background: #F3F3F3;

@@ -1211,6 +1211,7 @@
             duration: 400, //jQuery default duration
             reverse: false,
             complete: $.noop,
+            teardown: $.noop,
             hide: false,
             show: false
         }, options);
@@ -1252,7 +1253,14 @@
                         settings.options = extend(settings.options, {
                             duration: options.duration,
                             direction: settings.direction,
-                            complete: deferred.resolve
+                            complete: function () {
+                                $.each(options.effects, function(idx, effect) {
+                                    if ('options' in effect && 'teardown' in effect.options)
+                                        effect.options.teardown(); // call the internal completion callbacks
+                                });
+
+                                deferred.resolve();
+                            }
                         });
 
                         effect[options.reverse? "reverse" : "play"](element, settings.properties, settings.options);

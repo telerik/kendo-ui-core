@@ -85,19 +85,36 @@
                 kendoConsole.log('Selected: ' + $(e.item).find('> .t-link').text());
             };
 
+            var onExpand = function (e) {
+                kendoConsole.log('Expanded: ' + $(e.item).find('> .t-link').text());
+            };
+
+            var onCollapse = function (e) {
+                kendoConsole.log('Collapsed: ' + $(e.item).find('> .t-link').text());
+            };
+
             var onInit = function (e) {
                 kendoConsole.log('PanelBar loaded');
             };
 
             var onContentLoad = function (e) {
-                kendoConsole.log('Content loaded in <b>'+ $(e.item).find('> .t-link').text() + '</b> and starts with <b>' + $(e.contentElement).text().substr(0, 20) + '...</b>');
+                kendoConsole.log('Content loaded in <b>'+ $(e.item).find('> .t-link').text() +
+                                 '</b> and starts with <b>' + $(e.contentElement).text().substr(0, 20) + '...</b>');
             };
 
             var onError = function (e) {
                 kendoConsole.error('Loading failed with ' + e.xhr.statusText + ' ' + e.xhr.status);
             };
 
-            $("#PanelBar1").kendoPanelBar({ expandMode: 0, select: onSelect, init: onInit, contentLoad: onContentLoad, error: onError, contentUrls: [ , , , , , 'ajax/ajaxContent1.html', 'error.html' ] });
+            $("#PanelBar1").kendoPanelBar({
+                                select: onSelect,
+                                expand: onExpand,
+                                collapse: onCollapse,
+                                init: onInit,
+                                contentLoad: onContentLoad,
+                                error: onError,
+                                contentUrls: [ , , , , , 'ajax/ajaxContent1.html', 'error.html' ]
+                            });
         </script>
         <div class="console"></div>
         <!-- tools -->
