@@ -8,8 +8,8 @@
         MOUSEENTER = 'mouseenter',
         MOUSELEAVE = 'mouseleave',
         CLICK = 'click',
-        clickableItems = '.t-item:not(.t-state-disabled) > .t-link',
-        disabledItems = '.t-item.t-state-disabled > .t-link',
+        clickableItems = '.t-item:not(.t-state-disabled) .t-link',
+        disabledItems = '.t-item.t-state-disabled .t-link',
         activeClass = '.t-state-active',
         selectedClass = '.t-state-selected',
         disabledClass = '.t-state-disabled',
@@ -107,6 +107,16 @@
                 $(this)
                     .toggleClass(defaultState, enable)
 				    .toggleClass(disabledClass.substr(1), !enable);
+            });
+        },
+
+        select: function (element) {
+            $(element).each(function (index, item) {
+                item = $(item);
+                if (item.is(disabledClass + ',' + activeClass))
+                    return;
+
+                item.trigger("click");
             });
         },
 

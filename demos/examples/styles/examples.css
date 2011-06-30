@@ -244,6 +244,18 @@ pre.prettyprint
     margin-top: 0;
 }
 
+.configuration input
+{
+    width: 40px;
+    height: 18px;
+    float: right;
+}
+
+.configuration .t-button
+{
+    margin-bottom: 3px;
+}
+
 /* Nav styles */
 
 #nav,
