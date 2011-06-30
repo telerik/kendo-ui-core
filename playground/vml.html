@@ -30,6 +30,34 @@
                     <v:path v="m 2,398 l 2,2 l 98,2 c 98,2 48,40 2,398 x e"/>
                 </v:shape>
             </div>
+            <v:shapetype id="gradient">
+                <v:fill type="gradient"
+                colors="5% #99c62a, 10% #99c62a, 25% #c2dd80, 92% #99c62a, 93% #add155, 100% #c2dd80",
+                angle="90" />
+            </v:shapetype>
+            <div style="position: absolute; top: 0px; left: 220px;">
+                <v:shape strokecolor="blue" coordorigin="0 0" coordsize="100 400"
+                         type="#gradient"
+                         style="position: absolute; width:100px;height:400px">
+                    <v:path v="m 0,0 l 0,400 l 100,400 l 100,0 x e" />
+                    <!--
+                        newColor = alpha * oldColor + (1 - alpha) * WHITE
+                        base color: #99c62a = rgb(153, 198, 42)
+
+                        a = 0 => 99c62a
+
+                        a = 0.2 =>
+                            r = 0.2 * 255 + 0.8 * 153 = ad
+                            g = 0.2 * 255 + 0.8 * 198 = d1
+                            b = 0.2 * 255 + 0.8 * 42 = 55
+
+                        a = 0.4 =>
+                            r = 0.4 * 255 + 0.6 * 153 = c2
+                            g = 0.4 * 255 + 0.6 * 198 = dd
+                            b = 0.4 * 255 + 0.6 * 42 = 80
+                    -->
+                </v:shape>
+            </div>
        </div>
     </body>
 </html>
