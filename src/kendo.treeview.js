@@ -313,6 +313,20 @@
             return $(node).closest(NODE).find(".t-in:first").text();
         },
 
+        findByText: function (text) {
+            var result;
+
+            $(".t-in", this.element).each(function() {
+                var that = $(this);
+                if (that.text() == text) {
+                    result = that.closest(NODE);
+                    return false;
+                }
+            });
+
+            return result;
+        },
+
         getItemValue: function (item) {
             return $(item).find(">div>:input[name='itemValue']").val() || this.getItemText(item);
         }

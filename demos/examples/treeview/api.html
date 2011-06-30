@@ -23,12 +23,36 @@
         <div class="description">This example shows how to use the client-side API of kendoTreeView.</div>
         <!-- description -->
         <div id="example">
-            Work in progress!
+            <div class="configuration">
+                <label>Node text: <input id="node" type="text" /></label><br>
+                <button class="t-button" id="selectNode">Select node</button><br>
+                <button class="t-button" id="disableNode">Disable node</button><br>
+            </div>
+
+            <script>
+                $(".configuration")
+                    .delegate(".t-button", "click", function(e) {
+
+                        var item = treeview.findByText($("#node").val());
+                        
+                        e.preventDefault();
+
+                        switch (this.id) {
+                            case "selectNode":
+                                treeview.select(item);
+                            break;
+
+                            case "disableNode":
+                                treeview.enable(item, false);
+                            break;
+                        }
+                    });
+            </script>
 
             <div id="TreeView"></div>
 
             <script type="text/javascript">
-                $("#TreeView").kendoTreeView({
+                var treeview = $("#TreeView").kendoTreeView({
                     dataSource: [
                         { text: "foo", expanded: true, items: [
                             { text: "fool" },
@@ -42,10 +66,9 @@
                         ] },
                         { text: "baz" }
                     ]
-                });
+                }).data("kendoTreeView");
             </script>
         </div>
-        <div class="console"></div>
         <!-- tools -->
         <!-- tools -->
     </body>
