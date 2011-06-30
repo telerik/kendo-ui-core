@@ -311,8 +311,12 @@
                 first: firstRowIndex,
                 last: lastRowIndex
                 }));
-            if (lastRowIndex > skip + take / 2) {
-                console.log("prefetchings",skip + take - (lastRowIndex - firstRowIndex) + 1, take);
+
+            if (firstRowIndex < skip - take / 2) {
+                console.log("prefetching prev", skip - take + (lastRowIndex - firstRowIndex), take);
+                dataSource.prefetch(skip - take + (lastRowIndex - firstRowIndex), take);
+            } else if (lastRowIndex > skip + take / 2) {
+                console.log("prefetching next",skip + take - (lastRowIndex - firstRowIndex) + 1, take);
                 dataSource.prefetch(skip + take - (lastRowIndex - firstRowIndex) + 1, take);
             }
 
@@ -323,17 +327,21 @@
 
                 clearTimeout(that._timeout);
 
-                if (!that._mask) {
-                    var mask = $("<div class='t-overlay' style='position:absolute;text-align:center;color:#fff'><span>Loading ...</span></div>");
-
-                    mask.width(that.tableWrap.outerWidth()).height(that.tableWrap.outerHeight());
-
-                    that._mask = mask.insertBefore(that.tableWrap);
-                }
-
-                that._timeout = setTimeout(function() {
+                if (dataSource.inRange(skip, take)) {
                     dataSource.range(skip, take);
-                }, 100);
+                } else {
+                    if (!that._mask) {
+                        var mask = $("<div class='t-overlay' style='position:absolute;text-align:center;color:#fff'><span>Loading ...</span></div>");
+
+                        mask.width(that.tableWrap.outerWidth()).height(that.tableWrap.outerHeight());
+
+                        that._mask = mask.insertBefore(that.tableWrap);
+                    }
+
+                    that._timeout = setTimeout(function() {
+                        dataSource.range(skip, take);
+                    }, 100);
+                }
 
                 return;
             } else if (lastRowIndex > skip + take) {
