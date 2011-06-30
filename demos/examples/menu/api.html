@@ -24,8 +24,8 @@
         <!-- description -->
         <div id="example">
             <div class="configuration">
-                <button class="selectTab t-button">Select</button><input type="text" /><br>
-                <button class="toggleTab t-button">Enable/Disable</button><input type="text" /><br>
+                <button class="selectTab">Select Tab</button><input type="text" /><br>
+                <button class="toggleTab">Enable/Disable Tab</button><input type="text" /><br>
             </div>
 
             <div id="TabStrip1">
@@ -64,7 +64,7 @@
             </div>
             <script type="text/javascript">
                 $(".configuration > button").click(function (e) {
-                    switch (e.target.className.split(" ")[0]) {
+                    switch (e.target.className) {
                         case "selectTab":
                                 tabStrip.select(tabStrip.tabGroup.children("li").eq($(e.target).next()[0].value));
                             break;

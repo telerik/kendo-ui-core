@@ -199,7 +199,14 @@
     border-color: #8ba0bc;
 }
 
+.t-button:hover
+{
+    border-color:#6fccf3;
+    background-color: #7bd2f6;
+}
+
 .t-state-selected,
+.t-button:active,
 .t-panelbar .t-state-selected
 {
     color: #fff;
@@ -217,8 +224,28 @@
 
 .t-button
 {
-	border-color: #8ba0bc;
+    outline: 0;
+    border-color: #8ba0bc;
     color: #384e73;
+}
+
+.t-button:before
+{
+    content: "\a0";
+    display: block;
+    height: 2px;
+    margin: -2px 0 0 -3px;
+    padding: 0 3px;
+    width: 100%;
+    border-top: 1px solid #FFF;
+    opacity: .7;
+    -webkit-margin-top-collapse: separate;
+}
+
+.t-button::-moz-focus-inner
+{
+    padding: 0;
+    border: none;
 }
 
 .t-button,
@@ -226,14 +253,8 @@ button.t-button.t-state-disabled:hover,
 a.t-button.t-state-disabled:hover,
 .t-state-disabled .t-button:hover
 {
-    border-color: #e0e8eb;
-    background: #f1f4f5 url('BlueOpal/gradient.png') repeat-x 0 center;
-}
-
-.t-button:hover
-{
-    border-color:#6fccf3;
-    background-color: #7bd2f6;
+    border-color: #8ba0bc;
+    background: #dfe7ea url('BlueOpal/gradient.png') repeat-x 0 center;
 }
 
 .t-state-disabled,
@@ -312,6 +333,7 @@ a.t-button.t-state-disabled:hover,
     background: none;
 }
 
+.t-button,
 .t-dropdown-wrap
 {
     -moz-border-radius: 5px;
