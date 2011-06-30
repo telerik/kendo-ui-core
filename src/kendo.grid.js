@@ -89,19 +89,19 @@
                     filter: "th:not(.t-group-cell)",
                     groupContainer: "div.t-grouping-header",
                     dataSource: that.dataSource
-                });
-
-                that.tbody.delegate(".t-grouping-row .t-collapse, .t-grouping-row .t-expand", "click", function(e) {
-                    e.preventDefault();
-                    var element = $(this),
-                        group = element.closest("tr");
-                    if(element.hasClass('t-collapse')) {
-                        that.collapseGroup(group);
-                    } else {
-                        that.expandGroup(group);
-                    }
-                });
+                });                
             }
+
+            that.tbody.delegate(".t-grouping-row .t-collapse, .t-grouping-row .t-expand", "click", function(e) {
+                e.preventDefault();
+                var element = $(this),
+                    group = element.closest("tr");
+                if(element.hasClass('t-collapse')) {
+                    that.collapseGroup(group);
+                } else {
+                    that.expandGroup(group);
+                }
+            });
         },
 
         _selectable: function() {
@@ -663,9 +663,12 @@
                 that._autoColumns(data[0]);
             }
 
-            if(that.groupable) {
+            that._group = groups > 0 || that._group;
+                        
+            if(that._group) {
                 that._templates();
                 that._updateHeader(groups);
+                that._group = groups > 0;
             }
 
             if(groups > 0) {
