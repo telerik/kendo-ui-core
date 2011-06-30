@@ -444,23 +444,15 @@
                 animate(element, extend({ height: height + 'px' }, properties), extend(options, { teardown: function () { element.css('overflow', element.data('overflow')) } }));
             },
             reverse: function(element, properties, options) {
-                if (!element.data('height')) {
-                    element.data({
-                        height: element.height(),
-                        overflow: element.css('overflow')
-                    });
-
-                    element
-                        .css({ overflow: 'hidden' });
+                if (!element.data('overflow')) {
+                    element.data({ overflow: element.css('overflow') });
+                    element.css({ overflow: 'hidden' });
                 }
 
-                animate(element, extend({ height: 0 }, properties), extend(options, { teardown: function () {
-                    element
-                        .css({
-                            overflow: element.data('overflow'),
-                            height: 'auto'
-                        });
-                } }));
+                if (!element.data('height'))
+                    element.data({ height: element.height() });
+
+                animate(element, extend({ height: 0 }, properties), extend(options, { teardown: function () { element.css('overflow', element.data('overflow')) } }));
             }
         },
         expandHorizontal: {
@@ -488,7 +480,7 @@
                     });
                 }
 
-                animate(element, extend({ width: width + 'px' }, properties), extend({ teardown: function () { element.css('overflow', element.data('overflow')) } }, options));
+                animate(element, extend({ width: width + 'px' }, properties), extend(options, { teardown: function () { element.css('overflow', element.data('overflow')) } }));
             },
             reverse: function(element, properties, options) {
                 if (!element.data('width')) {

@@ -1399,6 +1399,7 @@
         animate: animate,
         throttle: throttle,
         wrap: wrap,
+        size: size,
         parseEffects: parseEffects,
         directions: directions,
         Observable: Observable,
