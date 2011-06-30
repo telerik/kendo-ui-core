@@ -219,8 +219,13 @@
                 itemIndex = neighbours.index(item);
 
             // deactivate previously active tab
-            oldTab.kendoRemoveClass(ACTIVESTATE, { duration: closeAnimation.duration });
-            item.kendoRemoveClass(HOVERSTATE, { duration: closeAnimation.duration });
+            if (kendo.size(openAnimation.effects)) {
+                oldTab.kendoRemoveClass(ACTIVESTATE, { duration: closeAnimation.duration });
+                item.kendoRemoveClass(HOVERSTATE, { duration: closeAnimation.duration });
+            } else {
+                oldTab.removeClass(ACTIVESTATE);
+                item.removeClass(HOVERSTATE);
+            }
 
             // handle content elements
             var contentElements = that.contentElements;
@@ -248,8 +253,13 @@
                         .addClass(TABONTOP) // change these directly to bring the tab on top.
                         .css('z-index'); // nudgy nudgy...
 
-                    oldTab.kendoAddClass(DEFAULTSTATE, { duration: openAnimation.duration });
-                    item.kendoAddClass(ACTIVESTATE, { duration: openAnimation.duration });
+                    if (kendo.size(openAnimation.effects)) {
+                        oldTab.kendoAddClass(DEFAULTSTATE, { duration: openAnimation.duration });
+                        item.kendoAddClass(ACTIVESTATE, { duration: openAnimation.duration });
+                    } else {
+                        oldTab.addClass(DEFAULTSTATE);
+                        item.addClass(ACTIVESTATE);
+                    }
                     content
                         .addClass(ACTIVESTATE)
                         .kendoStop(true, true)
