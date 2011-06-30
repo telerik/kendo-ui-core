@@ -89,7 +89,7 @@
                     filter: "th:not(.t-group-cell)",
                     groupContainer: "div.t-grouping-header",
                     dataSource: that.dataSource
-                });                
+                });
             }
 
             that.tbody.delegate(".t-grouping-row .t-collapse, .t-grouping-row .t-expand", "click", function(e) {
@@ -305,12 +305,23 @@
                 firstRowIndex = Math.floor(scrollTop / rowHeight);
                 lastRowIndex = firstRowIndex + Math.floor(height / rowHeight);
 
+            console.log(kendo.stringify({
+                skip: skip,
+                take: take,
+                first: firstRowIndex,
+                last: lastRowIndex
+                }));
+            if (lastRowIndex > skip + take / 2) {
+                console.log("prefetchings",skip + take - (lastRowIndex - firstRowIndex) + 1, take);
+                dataSource.prefetch(skip + take - (lastRowIndex - firstRowIndex) + 1, take);
+            }
+
             if (firstRowIndex < skip) {
                 skip = Math.max(0, lastRowIndex - take);
 
                 that._scrollTop = 0;
 
-                 clearTimeout(that._timeout);
+                clearTimeout(that._timeout);
 
                 if (!that._mask) {
                     var mask = $("<div class='t-overlay' style='position:absolute;text-align:center;color:#fff'><span>Loading ...</span></div>");
@@ -332,21 +343,24 @@
 
                 clearTimeout(that._timeout);
 
-                if (!that._mask) {
-                    var mask = $("<div class='t-overlay' style='position:absolute;text-align:center;color:#fff'><span>Loading ...</span></div>");
-
-                    mask.width(that.tableWrap.outerWidth()).height(that.tableWrap.outerHeight());
-
-                    that._mask = mask.insertBefore(that.tableWrap);
-                }
-
-                that._timeout = setTimeout(function() {
+                if (dataSource.inRange(skip, take)) {
+                    that._scrollTop = 0;
                     dataSource.range(skip, take);
-                }, 100);
+                } else {
+                    if (!that._mask) {
+                        var mask = $("<div class='t-overlay' style='position:absolute;text-align:center;color:#fff'><span>Loading ...</span></div>");
+
+                        mask.width(that.tableWrap.outerWidth()).height(that.tableWrap.outerHeight());
+
+                        that._mask = mask.insertBefore(that.tableWrap);
+                    }
+                    that._timeout = setTimeout(function() {
+                        dataSource.range(skip, take);
+                    }, 100);
+                }
 
                 return;
             }
-
             that._scrollTop = scrollTop - (skip * rowHeight);
             that.tableWrap[0].scrollTop = that._scrollTop;
         },
@@ -664,7 +678,7 @@
             }
 
             that._group = groups > 0 || that._group;
-                        
+
             if(that._group) {
                 that._templates();
                 that._updateHeader(groups);

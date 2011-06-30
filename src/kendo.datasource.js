@@ -235,6 +235,7 @@
                 _view: [],
                 _pageSize: options.pageSize,
                 _page: options.page  || (options.pageSize ? 1 : undefined),
+
                 _sort: options.sort,
                 _filter: options.filter,
                 _group: options.group,
@@ -850,7 +851,7 @@
             for (skipIdx = 0, length = ranges.length; skipIdx < length; skipIdx++) {
                 range = ranges[skipIdx];
                 if (range.start >= skip && skip <= range.end) {
-                    var x = 0;
+                    var x = skip;
                     for (takeIdx = skipIdx; takeIdx < length; takeIdx++) {
                         range = ranges[takeIdx];
                         x += range.data.length;
@@ -873,13 +874,15 @@
             for (skipIdx = 0, length = ranges.length; skipIdx < length; skipIdx++) {
                 range = ranges[skipIdx];
                 if (range.start >= skip && skip <= range.end) {
-                    var x = 0;
+                    var x = skip;
                     for (takeIdx = skipIdx; takeIdx < length; takeIdx++) {
                         range = ranges[takeIdx];
                         x += range.data.length;
                         data = data.concat(range.data);
 
                         if (end <= range.end && x >= end) {
+                            that._skip = skip;
+                            that._take = take;
                             that._process(data);
                             return;
                         }
@@ -910,6 +913,7 @@
                 options = {
                     take: take,
                     skip: skip,
+                    page: skip / take + 1,
                     //TODO: calculate
                     //page: that.page(),
                     //pageSize: that.pageSize(),

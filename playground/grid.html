@@ -22,22 +22,22 @@
         <table id="table1" style="height: 400px">
         </table>
         <script>
+            var index = 0;
             $(document).ready(function() {
                 var total = 1000000,
                      remoteDataSource = new kendo.data.DataSource({
                          serverPaging: true,
-                         pageSize: 20,
+                         pageSize: 40,
                          transport: {
                              read: {
-                                 url: "http://odata.netflix.com/Catalog/Titles",
+                                 url: "http://services.odata.org/Northwind/Northwind.svc/Orders",
                                  dataType: "jsonp",
                                  jsonpCallback: "callback",
                                  cache: true
                              },
-                             cache: "inmemory",
                              dialect: {
                                  read: function(options) {
-                                     return kendo.format("$format=json&$orderby=Name&$top={0}&$skip={1}&$inlinecount=allpages&$callback=callback", options.take, options.skip);
+                                     return kendo.format("$format=json&$top={0}&$skip={1}&$inlinecount=allpages&$callback=callback", options.take, options.skip);
                                  }
                              }
                          },
@@ -50,7 +50,7 @@
                              }
                          }
                     }),
-                    remoteDataSource = new kendo.data.DataSource({
+                    remoteDataSource2 = new kendo.data.DataSource({
                         serverPaging: true,
                         pageSize: 20,
                         transport: {
@@ -60,7 +60,6 @@
                                 dataType: "json",
                                 cache: true
                             },
-                            cache: "inmemory",
                             dialect: {
                                 read: function(options) {
                                     return { page: options.page, size: 20 };
@@ -106,6 +105,11 @@
 
                 $("#table1").kendoGrid({
                     dataSource: remoteDataSource,
+                    columns: [ {
+                            title: "OrderID",
+                            template: "<%= OrderID - 10248 %>",
+                        }, "CustomerID"
+                    ],
                     scrollable: {
                         virtual: true
                     },
