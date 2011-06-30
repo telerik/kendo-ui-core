@@ -327,7 +327,7 @@
                 var extender = {};
                 extender[options.direction == 'vertical' ? 'rotateX' : 'rotateY'] = 0;
                 animate(element, extend(extender, properties), extend(options, {
-                    complete: function () {
+                    teardown: function () {
                         element
                             .css(kendo.support.transitions.css + 'backface-visibility', '')
                             .css('height');
@@ -399,7 +399,7 @@
                 animate(element, extend({ height: 0 }, properties), options);
             },
             reverse: function(element, properties, options) {
-                animate(element, extend({ height: element.data('height') + 'px' }, properties), extend({ complete: function () { element.css('overflow', element.data('overflow')) } }, options) );
+                animate(element, extend({ height: element.data('height') + 'px' }, properties), extend(options, { teardown: function () { element.css('overflow', element.data('overflow')) } }) );
             }
         },
         shrinkHorizontal: {
@@ -412,7 +412,7 @@
                 animate(element, extend({ width: 0 }, properties), options);
             },
             reverse: function(element, properties, options) {
-                animate(element, extend({ width: element.data('width') + 'px' }, properties), extend({ complete: function () { element.css('overflow', element.data('overflow')) } }, options) );
+                animate(element, extend({ width: element.data('width') + 'px' }, properties), extend(options, { teardown: function () { element.css('overflow', element.data('overflow')) } }) );
             }
         },
         expandVertical: {
@@ -429,7 +429,7 @@
                     element.css('height');
 
                     clone
-                        .css({ position: 'absolute', height: 'auto', overflow: 'hidden', visibility: 'hidden', top: '-10000px', width: element.parent().innerWidth() })
+                        .css({ position: 'absolute', height: 'auto', overflow: 'hidden', visibility: 'hidden', top: '-10000px', width: element.width() })
                         .appendTo(element.parent());
 
                     height = clone.height();
@@ -441,7 +441,7 @@
                     });
                 }
 
-                animate(element, extend({ height: height + 'px' }, properties), extend({ complete: function () { element.css('overflow', element.data('overflow')) } }, options));
+                animate(element, extend({ height: height + 'px' }, properties), extend(options, { teardown: function () { element.css('overflow', element.data('overflow')) } }));
             },
             reverse: function(element, properties, options) {
                 if (!element.data('height')) {
@@ -450,10 +450,17 @@
                         overflow: element.css('overflow')
                     });
 
-                    element.css({ overflow: 'hidden' });
+                    element
+                        .css({ overflow: 'hidden' });
                 }
 
-                animate(element, extend({ height: 0 }, properties), extend({ complete: function () { element.css('overflow', element.data('overflow')) } }, options));
+                animate(element, extend({ height: 0 }, properties), extend(options, { teardown: function () {
+                    element
+                        .css({
+                            overflow: element.data('overflow'),
+                            height: 'auto'
+                        });
+                } }));
             }
         },
         expandHorizontal: {
@@ -481,7 +488,7 @@
                     });
                 }
 
-                animate(element, extend({ width: width + 'px' }, properties), extend({ complete: function () { element.css('overflow', element.data('overflow')) } }, options));
+                animate(element, extend({ width: width + 'px' }, properties), extend({ teardown: function () { element.css('overflow', element.data('overflow')) } }, options));
             },
             reverse: function(element, properties, options) {
                 if (!element.data('width')) {
@@ -493,7 +500,7 @@
                     element.css({ overflow: 'hidden' });
                 }
 
-                animate(element, extend({ width: 0 }, properties), extend({ complete: function () { element.css('overflow', element.data('overflow')) } }, options));
+                animate(element, extend({ width: 0 }, properties), extend({ teardown: function () { element.css('overflow', element.data('overflow')) } }, options));
             }
         },
         simple: {
