@@ -25,7 +25,15 @@
             Component.fn.init.call(that, element, options);
 
             groupContainer = $(that.options.groupContainer, that.element)
-                .kendoDropTarget()
+                .kendoDropTarget({
+                    dragenter: function(e) {
+                        e.draggable.hint.find(".t-drag-status").removeClass("t-denied").addClass("t-add");
+                    },
+
+                    dragleave: function(e) {
+                        e.draggable.hint.find(".t-drag-status").removeClass("t-add").addClass("t-denied");
+                    },
+                })
                 .kendoDraggable({
                     filter: "div.t-group-indicator",
                     hint: hint,
@@ -34,6 +42,9 @@
                         if(!draggable.dropped) {                            
                             that._removeIndicator(e.currentTarget);
                         }
+                    },
+                    dragstart: function() {
+                        this.hint.find(".t-drag-status").removeClass("t-denied").addClass("t-add");
                     }
                 })
                 .delegate(".t-button", "click", function(e) {
