@@ -385,7 +385,7 @@
                     numericAxis.getViewElements(factory);
 
                     $.each(factory.log.text, function() {
-                            equal(this.style.y, MAJOR_TICK_HEIGHT);
+                            equal(this.style.y, MAJOR_TICK_HEIGHT + MARGIN);
                     })
                 });
 

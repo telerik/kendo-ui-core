@@ -26,7 +26,7 @@
                     MAX_LABEL_HEIGHT = 17,
                     MAJOR_TICK_HEIGHT = 4,
                     LINE_Y = chartBox.y1,
-                    LINE_X = 30,
+                    LINE_X = 33,
                     MARGIN = 5;
 
                 function createCategoryAxis(options) {
@@ -134,8 +134,8 @@
                 test("creates axis line", function() {
                     categoryAxis.getViewElements(factory);
                     sameBox(factory.log.line[0], new Box2D(
-                            LINE_X, chartBox.y1,
-                            LINE_X, chartBox.y2),
+                            LINE_X + MARGIN, chartBox.y1,
+                            LINE_X + MARGIN, chartBox.y2),
                             TOLERANCE
                     );
                 });
@@ -157,8 +157,8 @@
                 test("labels are positioned to the left of the axis line", function() {
                     categoryAxis.getViewElements(factory);
 
-                    same($.map(factory.log.text, function(text) { return text.style.x + MARGIN }),
-                         [-4, -2]);
+                    same($.map(factory.log.text, function(text) { return text.style.x }),
+                         [0, 2]);
                 });
 
                 test("major ticks are distributed vertically", function() {
