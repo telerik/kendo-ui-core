@@ -250,7 +250,8 @@
                     MAX_LABEL_WIDTH = 30,
                     LABEL_HEIGHT = 17,
                     MAJOR_TICK_HEIGHT = 4,
-                    MINOR_TICK_HEIGHT = 3;
+                    MINOR_TICK_HEIGHT = 3,
+                    MARGIN = 5;
 
                 // ------------------------------------------------------------
                 module("View Rendering / Vertical", {
@@ -266,8 +267,8 @@
                     numericAxis.getViewElements(factory);
 
                     sameBox(factory.log.line[0], new Box2D(
-                            MAX_LABEL_WIDTH, chartBox.y1 + LABEL_HEIGHT / 2,
-                            MAX_LABEL_WIDTH, chartBox.y2 - LABEL_HEIGHT / 2),
+                            MAX_LABEL_WIDTH + MARGIN, chartBox.y1 + LABEL_HEIGHT / 2,
+                            MAX_LABEL_WIDTH + MARGIN, chartBox.y2 - LABEL_HEIGHT / 2),
                             TOLERANCE
                     );
                 });

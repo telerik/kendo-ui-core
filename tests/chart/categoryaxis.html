@@ -26,7 +26,8 @@
                     MAX_LABEL_HEIGHT = 17,
                     MAJOR_TICK_HEIGHT = 4,
                     LINE_Y = chartBox.y1,
-                    LINE_X = 33;
+                    LINE_X = 30,
+                    MARGIN = 5;
 
                 function createCategoryAxis(options) {
                     categoryAxis = new Chart.CategoryAxis(
@@ -83,7 +84,7 @@
                 test("labels are positioned below axis line", 2, function() {
                     categoryAxis.getViewElements(factory);
                     $.each(factory.log.text, function() {
-                            equal(this.style.y, LINE_Y + MAJOR_TICK_HEIGHT, TOLERANCE);
+                            equal(this.style.y, LINE_Y + MAJOR_TICK_HEIGHT + MARGIN, TOLERANCE);
                     })
                 });
 
@@ -156,8 +157,8 @@
                 test("labels are positioned to the left of the axis line", function() {
                     categoryAxis.getViewElements(factory);
 
-                    same($.map(factory.log.text, function(text) { return text.style.x }),
-                         [0, 2]);
+                    same($.map(factory.log.text, function(text) { return text.style.x + MARGIN }),
+                         [-4, -2]);
                 });
 
                 test("major ticks are distributed vertically", function() {
