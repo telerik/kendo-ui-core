@@ -1829,7 +1829,8 @@
                 visible: false,
                 width: 1,
                 color: BLACK
-            }
+            },
+            margin: 5
         },
 
         renderTicks: function(factory) {
@@ -1908,6 +1909,54 @@
             }
 
             return tickSize;
+        },
+
+        arrangeLabels: function(maxLabelWidth, maxLabelHeight, positions) {
+            var axis = this,
+                options = axis.options,
+                isVertical = axis.options.orientation === VERTICAL,
+                children = axis.children,
+                box = axis.box,
+                tickPositions = axis.getMajorTickPositions(),
+                tickSize = axis.getActualTickSize();
+
+            for (var i = 0; i < children.length; i++) {
+                var label = children[i],
+                    tickIx = isVertical ? (children.length - 1 - i) : i,
+                    labelSize = isVertical ? label.box.height() : label.box.width(),
+                    labelPos = tickPositions[tickIx] - (labelSize / 2),
+                    firstTickPosition,
+                    nextTickPosition,
+                    middle;
+
+                if (isVertical) {
+                    if (positions == "onMinorTicks") {
+                        firstTickPosition = tickPositions[i],
+                        nextTickPosition = tickPositions[i + 1];
+
+                        middle = firstTickPosition + (nextTickPosition - firstTickPosition) / 2;
+                        labelPos = middle - (labelSize / 2);
+                    }
+                    var labelX = axis.box.x2 - options.margin - tickSize;
+
+                    labelBox = new Box2D(labelX - label.box.width(), labelPos,
+                                         labelX, labelPos)
+                } else {
+                    if (positions == "onMinorTicks") {
+                        firstTickPosition = tickPositions[i],
+                        nextTickPosition = tickPositions[i + 1];
+                    } else {
+                        firstTickPosition = labelPos;
+                        nextTickPosition = labelPos + labelSize;
+                    }
+                    var labelY = axis.box.y1 + tickSize + options.margin;
+
+                    labelBox = new Box2D(firstTickPosition, labelY,
+                                         nextTickPosition, labelY);
+                }
+
+                label.updateLayout(labelBox);
+            }
         }
     });
 
@@ -1930,7 +1979,8 @@
 
             var majorDivisions = axis.getMajorDivisions(),
                 currentValue = options.min,
-                labelOptions = deepExtend({ }, options.labels, { align: RIGHT });
+                align = options.orientation === VERTICAL ? RIGHT : CENTER,
+                labelOptions = deepExtend({ }, options.labels, { align: align })
 
             for (var i = 0; i < majorDivisions; i++) {
                 var text = new Text(currentValue.toString(), labelOptions);
@@ -1957,7 +2007,7 @@
                 options = axis.options,
                 isVertical = options.orientation === VERTICAL,
                 children = axis.children,
-                tickSize = axis.getActualTickSize();
+                space = axis.getActualTickSize() + options.margin;
 
             var maxLabelWidth = 0,
                 maxLabelHeight = 0;
@@ -1970,43 +2020,16 @@
             if (isVertical) {
                 axis.box = new Box2D(
                     targetBox.x1, targetBox.y1,
-                    targetBox.x1 + maxLabelWidth + tickSize + options.margin, targetBox.y2
+                    targetBox.x1 + maxLabelWidth + space, targetBox.y2
                 );
             } else {
                 axis.box = new Box2D(
                     targetBox.x1, targetBox.y1,
-                    targetBox.x2, targetBox.y1 + tickSize + maxLabelHeight + options.margin
+                    targetBox.x2, targetBox.y1 + maxLabelHeight + space
                 );
             }
 
             axis.arrangeLabels(maxLabelWidth, maxLabelHeight);
-        },
-
-        arrangeLabels: function(maxLabelWidth, maxLabelHeight) {
-            var axis = this,
-                options = axis.options,
-                isVertical = axis.options.orientation === VERTICAL,
-                children = axis.children,
-                box = axis.box,
-                tickPositions = axis.getMajorTickPositions(),
-                tickSize = axis.getActualTickSize();
-
-            for (var i = 0; i < children.length; i++) {
-                var label = children[i],
-                    tickIx = isVertical ? (children.length - 1 - i) : i,
-                    labelSize = isVertical ? label.box.height() : label.box.width(),
-                    labelPos = tickPositions[tickIx] - (labelSize / 2),
-                    labelBox = isVertical ?
-                        new Box2D(box.x1, labelPos,
-                                box.x1 + maxLabelWidth, labelPos + labelSize) :
-                        new Box2D(labelPos,
-                                box.y1 + tickSize,
-                                labelPos + labelSize,
-                                box.y1 + tickSize + maxLabelHeight);
-
-
-                label.updateLayout(labelBox);
-            }
         },
 
         getViewElements: function(factory) {
@@ -2226,7 +2249,8 @@
             Axis.fn.init.call(axis, options);
 
             var options = axis.options,
-                labelOptions = deepExtend({ }, options.labels, { align: CENTER });
+                align = options.orientation === VERTICAL ? RIGHT : CENTER,
+                labelOptions = deepExtend({ }, options.labels, { align: align });
 
             for (var i = 0; i < options.categories.length; i++) {
                 var label = options.categories[i];
@@ -2250,12 +2274,9 @@
                 options = axis.options,
                 isVertical = options.orientation === VERTICAL,
                 children = axis.children,
-                width = targetBox.width(),
-                step = width / children.length,
-                x = (step / 2) + targetBox.x1,
+                space = axis.getActualTickSize() + options.margin,
                 maxLabelHeight = 0,
-                maxLabelWidth = 0,
-                tickSize = axis.getActualTickSize();
+                maxLabelWidth = 0;
 
             for (var i = 0; i < children.length; i++) {
                 var label = children[i];
@@ -2266,44 +2287,16 @@
             if (isVertical) {
                 axis.box = new Box2D(
                     targetBox.x1, targetBox.y1,
-                    targetBox.x1 + maxLabelWidth, targetBox.y2
+                    targetBox.x1 + maxLabelWidth + space, targetBox.y2
                 );
             } else {
                 axis.box = new Box2D(
                     targetBox.x1, targetBox.y1,
-                    targetBox.x2, targetBox.y1 + maxLabelHeight
+                    targetBox.x2, targetBox.y1 + maxLabelHeight + space
                 );
             }
 
-            var majorDivisions = axis.getMajorTickPositions();
-
-            if (isVertical) {
-                labelX = axis.box.x2 - options.margin - tickSize;
-                for (var i = 0; i < children.length; i++) {
-                    var label = children[i],
-                        currentDivision = majorDivisions[i],
-                        nextDivision = majorDivisions[i + 1],
-                        middle = currentDivision + (nextDivision - currentDivision) / 2,
-                        labelY = middle - label.box.height() / 2;
-
-                    label.updateLayout(new Box2D(
-                        labelX - label.box.width(), labelY,
-                        labelX, labelY + label.box.height()
-                    ));
-                }
-            } else {
-                labelY = axis.box.y1 + options.margin + tickSize;
-                for (var i = 0; i < children.length; i++) {
-                    var label = children[i],
-                        currentDivision = majorDivisions[i],
-                        nextDivision = majorDivisions[i + 1];
-
-                    label.updateLayout(new Box2D(
-                        currentDivision, labelY,
-                        nextDivision, labelY + label.box.height()
-                    ));
-                }
-            }
+            axis.arrangeLabels(maxLabelWidth, maxLabelHeight, "onMinorTicks");
         },
 
         getViewElements: function(factory) {
