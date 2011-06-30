@@ -27,7 +27,7 @@
                 var total = 1000000,
                      remoteDataSource = new kendo.data.DataSource({
                          serverPaging: true,
-                         pageSize: 40,
+                         pageSize: 20,
                          transport: {
                              read: {
                                  url: "http://services.odata.org/Northwind/Northwind.svc/Orders",
@@ -85,7 +85,7 @@
                                 var data = [];
 
                                 for (var i = skip; i < Math.min(skip + take, total); i++) {
-                                    data.push({ OrderID: i, ContactName: "Contact " + i, ShipAddress: "Ship Address " + i });
+                                    data.push({ OrderID: i + 10248, CustomerID: "Contact " + i });
                                 }
 
                                 options.success(data);
