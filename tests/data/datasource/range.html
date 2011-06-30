@@ -102,12 +102,20 @@
                 var ranges = dataSource._ranges;
                 equal(ranges.length, 2);
             });
+
             test("inRange returns true if skip is within range", function() {
                 var dataSource = remoteDataSource();
 
                 dataSource.prefetch(0, 1);
                 dataSource.prefetch(1, 1);
                 ok(dataSource.inRange(0, 2));
+            });
+
+            test("inRange returns true if start is more than one", function() {
+                var dataSource = remoteDataSource();
+
+                dataSource.prefetch(1, 1);
+                ok(dataSource.inRange(1, 1));
             });
 
             test("inRange returns false if skip is in range but take is not", function() {
