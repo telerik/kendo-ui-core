@@ -118,12 +118,75 @@
                 ok(!dataSource.inRange(0, 3));
             });
 
-            test("inRange returns false if skip and take are in range but prefetch data is missing", function() {
+            test("inRange returns false if skip and take are in range but prefetched data is missing", function() {
                 var dataSource = remoteDataSource();
 
                 dataSource.prefetch(0, 1);
                 dataSource.prefetch(2, 1);
                 ok(!dataSource.inRange(0, 3));
+            });
+
+            test("ranges are sorted by start", function() {
+                var dataSource = remoteDataSource();
+
+                dataSource.prefetch(2, 1);
+                dataSource.prefetch(0, 1);
+                equal(dataSource._ranges[0].start, 0);
+                equal(dataSource._ranges[1].start, 2);
+            });
+
+            test("prefetch end of range is correctly set when returned data is less than page size", function() {
+                var dataSource = remoteDataSource();
+
+                dataSource.prefetch(10000 - 16, 18);
+                equal(dataSource._ranges[0].start, 10000 - 16);
+                equal(dataSource._ranges[0].end, 10000);
+            });
+
+            test("range if range exists transport is not called", function() {
+                var called = 0,
+                    dataSource = remoteDataSource(function () {
+                        called++;
+                    });
+
+                dataSource.prefetch(0, 1);
+                dataSource.range(0, 1);
+                equal(called, 1);
+            });
+
+            test("range if range does not exist transport is called", function() {
+                var called = 0,
+                    dataSource = remoteDataSource(function () {
+                        called++;
+                    });
+
+                dataSource.range(0, 1);
+                equal(called, 1);
+            });
+
+            test("change is raised when range is prefetched", function() {
+                var data,
+                    dataSource = remoteDataSource();
+
+                dataSource.bind("change", function() {
+                    data = dataSource.view();
+                });
+
+                dataSource.prefetch(0, 1);
+                dataSource.range(0, 1);
+
+                equal(data.length, 1);
+            });
+
+            test("change is raised when range is not", function() {
+                var called = false, dataSource = remoteDataSource();
+                dataSource.bind("change", function() {
+                    called = true;
+                });
+
+                dataSource.prefetch(0, 1);
+                dataSource.range(0, 1);
+                ok(called);
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

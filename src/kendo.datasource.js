@@ -585,6 +585,16 @@
             } else {
                 data = that._deserializer.data(data);
             }
+            that._process(data);
+        },
+
+        _process: function (data) {
+            var that = this,
+                options = {},
+                result,
+                updated = Model ? that._updatedModels() : [],
+                hasGroups = that.options.serverGrouping === true && that._group && that._group.length > 0,
+                models = that._models;
 
             that._data = data;
 
@@ -854,7 +864,28 @@
         },
 
         range: function(skip, take) {
-            var that = this;
+            var that = this,
+                ranges = that._ranges,
+                end = skip + take,
+                range,
+                data = [];
+
+            for (skipIdx = 0, length = ranges.length; skipIdx < length; skipIdx++) {
+                range = ranges[skipIdx];
+                if (range.start >= skip && skip <= range.end) {
+                    var x = 0;
+                    for (takeIdx = skipIdx; takeIdx < length; takeIdx++) {
+                        range = ranges[takeIdx];
+                        x += range.data.length;
+                        data = data.concat(range.data);
+
+                        if (end <= range.end && x >= end) {
+                            that._process(data);
+                            return;
+                        }
+                    }
+                }
+            }
 
             if (take !== undefined) {
                 skip = skip || 0;
@@ -895,6 +926,8 @@
                     data: options,
                     success: function (data) {
                         range.data = that._deserializer.data(data);
+                        range.end = range.start + range.data.length;
+                        that._ranges.sort( function(x, y) { return x.start - y.start; } );
                     }
                 });
             }
