@@ -274,6 +274,74 @@
                 equal(extendDst.margin.top, 10);
             });
 
+            // ------------------------------------------------------------
+            var Color = Chart.Color;
+
+            module("Color");
+
+            test("parses #xxyyzz", function() {
+                var c = new Color("#aabbcc");
+                equals(c.toHex(), "#aabbcc");
+            });
+
+            test("parses #xyz", function() {
+                var c = new Color("#abc");
+                equals(c.toHex(), "#aabbcc");
+            });
+
+            test("parses rgb(x, y, z)", function() {
+                var c = new Color("rgb(170, 187, 204)");
+                equals(c.toHex(), "#aabbcc");
+            });
+
+            test("normalizes rgb(x, y, z)", function() {
+                var c = new Color("rgb(0, 400, 500)");
+                equals(c.toHex(), "#00ffff");
+            });
+
+            test("parses named color", function() {
+                var c = new Color("lemonchiffon");
+                equals(c.toHex(), "#fffacd");
+            });
+
+            test("accepts rgb values", function() {
+                var c = new Color(0, 255, 255);
+                equals(c.toHex(), "#00ffff");
+            });
+
+            // ------------------------------------------------------------
+            module("blendColors");
+
+            test("#fff, #99c62a with alpha 0.2 => #add155", function() {
+                equals(Chart.blendColors("#99c62a", "#fff", 0.2), "#add155");
+            });
+
+            // ------------------------------------------------------------
+            var blendGradient = Chart.blendGradient,
+                gradient;
+
+            module("blendGradient", {
+                setup: function() {
+                    gradient = {
+                        stops: [{
+                            offset: 0.05,
+                            color: "#fff",
+                            opacity: 0.2
+                        }]
+                    };
+                }
+            });
+
+            test("blend over #99c62a with alpha 0.2", function() {
+                var result = blendGradient("#99c62a", gradient);
+
+                same(result.stops[0], {
+                    offset: 0.05,
+                    color: "#add155",
+                    opacity: 0
+                });
+            });
+
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>

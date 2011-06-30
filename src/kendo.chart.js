@@ -2486,6 +2486,7 @@
         getViewElements: function(factory) {
             var bar = this,
                 options = bar.options,
+                isVertical = options.isVertical,
                 border = options.border.width > 0 ? {
                     stroke: options.border.color,
                     strokeWidth: options.border.width
@@ -2979,6 +2980,10 @@
 
         line: function(x1, y1, x2, y2, options) {
             return new SVGPath([[x1, y1], [x2, y2]], options);
+        },
+
+        linearGradient: function(options) {
+            return new SVGLinearGradient(options);
         }
     };
 
@@ -3100,6 +3105,33 @@
         }
     });
 
+    var SVGLinearGradient = ViewElement.extend({
+        init: function(options) {
+            var gradient = this;
+            ViewElement.fn.init.call(gradient, options);
+
+            gradient.template = SVGLinearGradient.template;
+            if (!gradient.template) {
+                gradient.template = SVGLinearGradient.template = template(
+                    "<linearGradient id='<%= options.id %>' " +
+                    "gradientTransform='rotate(<%= options.rotation %>)'> " +
+                    "<stop offset='5%' style='stop-color:#fff;stop-opacity:0'/>" +
+                    "<stop offset='10%' style='stop-color:#fff;stop-opacity:0'/>" +
+                    "<stop offset='25%' style='stop-color:#fff;stop-opacity:0.4'/>" +
+                    "<stop offset='92%' style='stop-color:#fff;stop-opacity:0'/>" +
+                    "<stop offset='93%' style='stop-color:#fff;stop-opacity:0.2'/>" +
+                    "<stop offset='100%' style='stop-color:#fff;stop-opacity:0.4'/>" +
+                    "</linearGradient>"
+                );
+            }
+        },
+
+        options: {
+            id: "",
+            rotation: 0
+        }
+    });
+
     function VMLFactory() {
         if (document.namespaces) {
             document.namespaces.add("kvml", "urn:schemas-microsoft-com:vml", "#default#VML");
@@ -3191,7 +3223,8 @@
                     "strokeweight='<%= options.strokeWidth %>' " +
                     "fillcolor='<%= options.fill %>' filled='<%= !!options.fill %>' " +
                     "coordorigin='0 0' coordsize='1 1'>" +
-                    "<kvml:path v='<%= renderPoints() %> e' /></kvml:shape>"
+                        "<kvml:path v='<%= renderPoints() %> e' />" +
+                    "</kvml:shape>"
                 );
             }
 
@@ -3428,6 +3461,220 @@
         return destination;
     }
 
+    var Color = function(value) {
+        var color = this,
+            formats = Color.formats,
+            re,
+            processor,
+            bits,
+            channels;
+
+        if(arguments.length === 1) {
+            value = color.resolveColor(value);
+
+            for (i = 0; i < formats.length; i++) {
+                re = formats[i].re;
+                processor = formats[i].process;
+                bits = re.exec(value);
+
+                if (bits) {
+                    channels = processor(bits);
+                    color.r = channels[0];
+                    color.g = channels[1];
+                    color.b = channels[2];
+                }
+            }
+        } else {
+            color.r = arguments[0];
+            color.g = arguments[1];
+            color.b = arguments[2];
+        }
+
+        color.r = color.normalizeByte(color.r);
+        color.g = color.normalizeByte(color.g);
+        color.b = color.normalizeByte(color.b);
+    };
+
+    Color.prototype = {
+        toHex: function() {
+            var color = this,
+                pad = color.padDigit,
+                r = color.r.toString(16);
+                g = color.g.toString(16);
+                b = color.b.toString(16);
+
+            return '#' + pad(r) + pad(g) + pad(b);
+        },
+
+        resolveColor: function(value) {
+            var color = this,
+                namedColors = Color.namedColors,
+                key;
+
+            if (value.charAt(0) == '#') {
+                value = value.substr(1, 6);
+            }
+
+            value = value.replace(/ /g, '');
+            value = value.toLowerCase();
+
+            for (key in namedColors) {
+                if (value === key) {
+                    value = namedColors[key];
+                }
+            }
+
+            return value;
+        },
+
+        normalizeByte: function(value) {
+            return (value < 0 || isNaN(value)) ? 0 : ((value > 255) ? 255 : value);
+        },
+
+        padDigit: function(value) {
+            return (value.length === 1) ? '0' + value : value;
+        }
+    };
+
+    Color.formats = [{
+            re: /^rgb\((\d{1,3}),\s*(\d{1,3}),\s*(\d{1,3})\)$/,
+            process: function(bits) {
+                return [
+                    parseInt(bits[1], 10), parseInt(bits[2], 10), parseInt(bits[3], 10)
+                ];
+            }
+        }, {
+            re: /^(\w{2})(\w{2})(\w{2})$/,
+            process: function(bits) {
+                return [
+                    parseInt(bits[1], 16), parseInt(bits[2], 16), parseInt(bits[3], 16)
+                ];
+            }
+        }, {
+            re: /^(\w{1})(\w{1})(\w{1})$/,
+            process: function(bits) {
+                return [
+                    parseInt(bits[1] + bits[1], 16),
+                    parseInt(bits[2] + bits[2], 16),
+                    parseInt(bits[3] + bits[3], 16)
+                ];
+            }
+        }
+    ];
+
+    Color.namedColors = {
+        aliceblue: 'f0f8ff', antiquewhite: 'faebd7', aqua: '00ffff',
+        aquamarine: '7fffd4', azure: 'f0ffff', beige: 'f5f5dc',
+        bisque: 'ffe4c4', black: '000000', blanchedalmond: 'ffebcd',
+        blue: '0000ff', blueviolet: '8a2be2', brown: 'a52a2a',
+        burlywood: 'deb887', cadetblue: '5f9ea0', chartreuse: '7fff00',
+        chocolate: 'd2691e', coral: 'ff7f50', cornflowerblue: '6495ed',
+        cornsilk: 'fff8dc', crimson: 'dc143c', cyan: '00ffff',
+        darkblue: '00008b', darkcyan: '008b8b', darkgoldenrod: 'b8860b',
+        darkgray: 'a9a9a9', darkgreen: '006400', darkkhaki: 'bdb76b',
+        darkmagenta: '8b008b', darkolivegreen: '556b2f', darkorange: 'ff8c00',
+        darkorchid: '9932cc', darkred: '8b0000', darksalmon: 'e9967a',
+        darkseagreen: '8fbc8f', darkslateblue: '483d8b', darkslategray: '2f4f4f',
+        darkturquoise: '00ced1', darkviolet: '9400d3', deeppink: 'ff1493',
+        deepskyblue: '00bfff', dimgray: '696969', dodgerblue: '1e90ff',
+        feldspar: 'd19275', firebrick: 'b22222', floralwhite: 'fffaf0',
+        forestgreen: '228b22', fuchsia: 'ff00ff', gainsboro: 'dcdcdc',
+        ghostwhite: 'f8f8ff', gold: 'ffd700', goldenrod: 'daa520',
+        gray: '808080', green: '008000', greenyellow: 'adff2f',
+        honeydew: 'f0fff0', hotpink: 'ff69b4', indianred: 'cd5c5c',
+        indigo: '4b0082', ivory: 'fffff0', khaki: 'f0e68c',
+        lavender: 'e6e6fa', lavenderblush: 'fff0f5', lawngreen: '7cfc00',
+        lemonchiffon: 'fffacd', lightblue: 'add8e6', lightcoral: 'f08080',
+        lightcyan: 'e0ffff', lightgoldenrodyellow: 'fafad2', lightgrey: 'd3d3d3',
+        lightgreen: '90ee90', lightpink: 'ffb6c1', lightsalmon: 'ffa07a',
+        lightseagreen: '20b2aa', lightskyblue: '87cefa', lightslateblue: '8470ff',
+        lightslategray: '778899', lightsteelblue: 'b0c4de', lightyellow: 'ffffe0',
+        lime: '00ff00', limegreen: '32cd32', linen: 'faf0e6',
+        magenta: 'ff00ff', maroon: '800000', mediumaquamarine: '66cdaa',
+        mediumblue: '0000cd', mediumorchid: 'ba55d3', mediumpurple: '9370d8',
+        mediumseagreen: '3cb371', mediumslateblue: '7b68ee', mediumspringgreen: '00fa9a',
+        mediumturquoise: '48d1cc', mediumvioletred: 'c71585', midnightblue: '191970',
+        mintcream: 'f5fffa', mistyrose: 'ffe4e1', moccasin: 'ffe4b5',
+        navajowhite: 'ffdead', navy: '000080', oldlace: 'fdf5e6',
+        olive: '808000', olivedrab: '6b8e23', orange: 'ffa500',
+        orangered: 'ff4500', orchid: 'da70d6', palegoldenrod: 'eee8aa',
+        palegreen: '98fb98', paleturquoise: 'afeeee', palevioletred: 'd87093',
+        papayawhip: 'ffefd5', peachpuff: 'ffdab9', peru: 'cd853f',
+        pink: 'ffc0cb', plum: 'dda0dd', powderblue: 'b0e0e6',
+        purple: '800080', red: 'ff0000', rosybrown: 'bc8f8f',
+        royalblue: '4169e1', saddlebrown: '8b4513', salmon: 'fa8072',
+        sandybrown: 'f4a460', seagreen: '2e8b57', seashell: 'fff5ee',
+        sienna: 'a0522d', silver: 'c0c0c0', skyblue: '87ceeb',
+        slateblue: '6a5acd', slategray: '708090', snow: 'fffafa',
+        springgreen: '00ff7f', steelblue: '4682b4', tan: 'd2b48c',
+        teal: '008080', thistle: 'd8bfd8', tomato: 'ff6347',
+        turquoise: '40e0d0', violet: 'ee82ee', violetred: 'd02090',
+        wheat: 'f5deb3', white: 'ffffff', whitesmoke: 'f5f5f5',
+        yellow: 'ffff00', yellowgreen: '9acd32'
+    };
+
+    function blendColors(base, overlay, alpha) {
+        var a = new Color(base),
+            b = new Color(overlay),
+            r = blendChannel(a.r, b.r, alpha),
+            g = blendChannel(a.g, b.g, alpha),
+            b = blendChannel(a.b, b.b, alpha);
+
+        return new Color(r, g, b).toHex();
+    }
+
+    function blendChannel(a, b, alpha) {
+        return Math.round(alpha * b + (1 - alpha) * a);
+    }
+
+    glassGradient = {
+        type: "linear",
+        rotation: 0,
+        stops: [{
+            offset: 0.05,
+            color: WHITE,
+            opacity: 0
+        }, {
+            offset: 0.1,
+            color: WHITE,
+            opacity: 0
+        }, {
+            offset: 0.25,
+            color: WHITE,
+            opacity: 0.4
+        }, {
+            offset: 0.92,
+            color: WHITE,
+            opacity: 0
+        }, {
+            offset: 0.93,
+            color: WHITE,
+            opacity: 0.2
+        }, {
+            offset: 1,
+            color: WHITE,
+            opacity: 0.4
+        }]
+    };
+
+    function blendGradient(color, gradient) {
+        var srcStops = gradient.stops,
+            stopsLength = srcStops.length,
+            result = deepExtend({}, gradient),
+            i,
+            stop,
+            resultStop;
+
+        for (i = 0; i < stopsLength; i++) {
+            stop = srcStops[i];
+            resultStop = result.stops[i];
+            resultStop.color = blendColors(color, stop.color, stop.opacity);
+            resultStop.opacity = 0;
+        }
+
+        return result;
+    }
+
     // Exports ================================================================
 
     kendo.ui.plugin("Chart", Chart);
@@ -3459,6 +3706,9 @@
     Chart.VMLPath = VMLPath;
     Chart.VMLGroup = VMLGroup;
     Chart.deepExtend = deepExtend;
+    Chart.Color = Color;
+    Chart.blendColors = blendColors;
+    Chart.blendGradient = blendGradient;
 
 })(jQuery);
 
