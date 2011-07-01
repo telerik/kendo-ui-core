@@ -16,7 +16,9 @@
             return $('<div class="t-header t-drag-clue" />')
                 .html(target.data("field"))
                 .prepend('<span class="t-icon t-drag-status t-denied" />');
-        };
+        },
+        dropCue = $('<div class="t-grouping-dropclue"/>'),
+        dropCuePositions = [];
 
     var Groupable = Component.extend({
         init: function(element, options) {
@@ -28,23 +30,27 @@
                 .kendoDropTarget({
                     dragenter: function(e) {
                         e.draggable.hint.find(".t-drag-status").removeClass("t-denied").addClass("t-add");
+                        dropCue.css({top:3, left: 0}).appendTo(groupContainer);
                     },
 
                     dragleave: function(e) {
                         e.draggable.hint.find(".t-drag-status").removeClass("t-add").addClass("t-denied");
+                        dropCue.remove();
                     },
                 })
                 .kendoDraggable({
                     filter: "div.t-group-indicator",
                     hint: hint,
-                    dragend: function(e) {
-                        var draggable = this;                        
-                        if(!draggable.dropped) {                            
-                            that._removeIndicator(e.currentTarget);
-                        }
+                    dragend: function(e) {                        
+                        that._dragEnd(this, e);
                     },
                     dragstart: function() {
                         this.hint.find(".t-drag-status").removeClass("t-denied").addClass("t-add");
+                        that._dragStart();
+                        dropCue.css({top:3, left: 0}).appendTo(groupContainer);                        
+                    },
+                    drag: function(e) {
+                        that._drag(this, e);
                     }
                 })
                 .delegate(".t-button", "click", function(e) {
@@ -63,15 +69,14 @@
             that.element.kendoDraggable({
                 filter: that.options.filter,
                 hint: hint,                
-                dragend: function(e) {                                       
-                    if(this.dropped) {
-                        var field = e.currentTarget.data("field");
-                        
-                        if(!that.indicator(field)) {
-                            groupContainer.append(that.buildIndicator(field));                            
-                            that._change();
-                        }
-                    }                    
+                dragend: function(e) {                    
+                    that._dragEnd(this, e);                                                           
+                },
+                dragstart: function() {
+                    that._dragStart();
+                },
+                drag: function(e) {
+                    that._drag(this, e);
                 }
             });  
             
@@ -123,7 +128,96 @@
             var that = this;
             if(that.dataSource) {
                 that.dataSource.group(that.descriptors());
+            }            
+        },
+
+        _dragStart: function() {
+            dropCuePositions = $.map($(".t-group-indicator", groupContainer), function(item) {
+                item = $(item);
+                var left = item.position().left;
+                return {
+                    left: left,
+                    right: left + item.outerWidth(),
+                    element: item
+                };
+            }); 
+        },
+        _drag: function(draggable, event) {
+            if(!dropCue.is(":visible") || dropCuePositions.length == 0) {
+                return;
             }
+            
+            var position = event.pageX,
+                lastCuePosition = dropCuePositions[dropCuePositions.length - 1],
+                right = lastCuePosition.right,
+                marginLeft = parseInt(lastCuePosition.element.css("marginLeft")),
+                marginRight = parseInt(lastCuePosition.element.css("marginRight"));
+                            
+            if(position >= right) {
+                dropCue.css({ left: right + marginRight});                
+            } else {
+                position = $.grep(dropCuePositions, function(item) {
+                    return item.left <= position && position <= item.right;
+                })[0];
+
+                if(position) {
+                    dropCue.css({ left: position.left - marginLeft });                    
+                }
+            }
+            
+            console.log(dropCue.position().left);
+        },
+        _canDrop: function(source, target, position) {
+            var next = source.next();
+            return source[0] !== target[0] && (!next[0] || target[0] !== next[0] || position > next.position().left);
+        }, 
+        _dragEnd: function(draggable, event) {
+            var that = this,                
+                field = event.currentTarget.data("field"),
+                sourceIndicator = that.indicator(field),
+                targetIndicator,
+                insertBefore = true,
+                lastCuePosition = dropCuePositions[dropCuePositions.length - 1],
+                right,
+                position;
+                
+            if(draggable.dropped) {                
+                if(lastCuePosition) {
+                    right = lastCuePosition.right,                    
+                    position = dropCue.position().left + parseInt(lastCuePosition.element.css("marginLeft"));
+
+                    if(position >= right) {
+                        targetIndicator = lastCuePosition.element;
+                        insertBefore = false;
+                    } else {
+                        targetIndicator = $.grep(dropCuePositions, function(item) {
+                            return item.left <= position && position <= item.right;
+                        })[0].element;
+                        insertBefore = true;
+                    }
+                             
+                    if(that._canDrop($(sourceIndicator), targetIndicator, position)) {
+                        if(insertBefore) {                            
+                            targetIndicator.before(sourceIndicator || that.buildIndicator(field));
+                        } else {                                                        
+                            targetIndicator.after(sourceIndicator || that.buildIndicator(field));
+                        }
+                        
+                        that._change();
+                    }
+                } else {
+                    groupContainer.append(that.buildIndicator(field));
+                    that._change();
+                }
+
+            } else {
+                if(sourceIndicator) {
+                    that._removeIndicator($(sourceIndicator));
+                }
+            }
+
+            dropCue.remove();
+            dropCuePositions = [];
         }
     });
 

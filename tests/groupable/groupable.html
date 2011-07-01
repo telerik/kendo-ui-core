@@ -41,6 +41,7 @@
 
                 draggable.trigger({ type: "mousedown", pageX: 0, pageY: 0 });
                 $(document).trigger({ type: "mousemove", pageX: position.left, pageY: position.top });
+                dropTarget.trigger({ type: "mouseenter" });
                 dropTarget.trigger({ type: "mouseup" });
             }
 
@@ -249,6 +250,8 @@
                 equal(indicator.data("field"), "field1");
                 equal(indicator.data("dir"), "desc");
             });
+
+            
         </script>
     </body>
 </html>
