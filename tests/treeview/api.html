@@ -120,6 +120,20 @@
                 equals(treeview.data("kendoTreeView").text(node), "foo");
                 equals(treeview.data("kendoTreeView").text(node.find(".t-in:first")), "foo");
             });
+
+            test("findByText(text) returns correct node", function() {
+                var treeview = createTreeView({
+                        dataSource: [
+                            { text: "foo", items: [
+                                { text: "bar" }
+                            ] }
+                        ]
+                    });
+
+                var node = treeview.find(".t-item:first");
+
+                equals(treeview.data("kendoTreeView").findByText("foo")[0], node[0]);
+            });
         </script>
 
         <div id="qunit-fixture"> </div>
