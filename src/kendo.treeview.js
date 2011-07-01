@@ -100,6 +100,38 @@
             }
         },
 
+        _trigger: function (eventName, node) {
+            return this.trigger(eventName, {
+                item: node.closest(NODE)[0]
+            });
+        },
+
+        _toggleButtonClick: function (e) {
+            this.toggle($(e.target).closest(NODE));
+        },
+
+        _nodeClick: function (e) {
+            var that = this,
+                node = $(e.target),
+                contents = node.closest(NODE).find(NODECONTENTS),
+                href = node.attr("href"),
+                shouldNavigate;
+
+            if (href) {
+                shouldNavigate = href == "#" || href.indexOf("#" + this.element.id + "-") >= 0;
+            } else {
+                shouldNavigate = contents.length > 0 && contents.children().length == 0;
+            }
+
+            if (shouldNavigate) {
+                e.preventDefault();
+            }
+
+            if (!node.hasClass(".t-state-selected") && !that._trigger("select", node)) {
+                that.select(node);
+            }
+        },
+
         _wrapper: function() {
             var that = this,
                 element = that.element,
@@ -178,7 +210,7 @@
                 });
         },
 
-        _processItems: function(items, callback) {
+        processItems: function(items, callback) {
             var that = this;
             that.element.find(items).each(function(index, item) {
                 callback.call(that, index, $(item).closest(NODE));
@@ -186,7 +218,7 @@
         },
 
         expand: function (items) {
-            this._processItems(items, function (index, item) {
+            this.processItems(items, function (index, item) {
                 var contents = item.find(NODECONTENTS);
 
                 if (contents.length > 0 && !contents.is(VISIBLE)) {
@@ -196,7 +228,7 @@
         },
 
         collapse: function (items) {
-            this._processItems(items, function (index, item) {
+            this.processItems(items, function (index, item) {
                 var contents = item.find(NODECONTENTS);
 
                 if (contents.length > 0 && contents.is(VISIBLE)) {
@@ -208,7 +240,7 @@
         enable: function (items, enable) {
             enable = arguments.length == 2 ? !!enable : true;
 
-            this._processItems(items, function (index, item) {
+            this.processItems(items, function (index, item) {
                 var isCollapsed = !item.find(NODECONTENTS).is(VISIBLE);
 
                 if (!enable) {
@@ -229,34 +261,6 @@
                         .toggleClass("t-minus", !isCollapsed && enable)
                         .toggleClass("t-minus-disabled", !isCollapsed && !enable);
             });
-        },
-
-        _trigger: function (eventName, node) {
-            return this.trigger(eventName, {
-                item: node.closest(NODE)[0]
-            });
-        },
-
-        _nodeClick: function (e) {
-            var that = this,
-                node = $(e.target),
-                contents = node.closest(NODE).find(NODECONTENTS),
-                href = node.attr("href"),
-                shouldNavigate;
-
-            if (href) {
-                shouldNavigate = href == "#" || href.indexOf("#" + this.element.id + "-") >= 0;
-            } else {
-                shouldNavigate = contents.length > 0 && contents.children().length == 0;
-            }
-
-            if (shouldNavigate) {
-                e.preventDefault();
-            }
-
-            if (!node.hasClass(".t-state-selected") && !that._trigger("select", node)) {
-                that.select(node);
-            }
         },
 
         select: function (node) {
@@ -305,12 +309,12 @@
             }
         },
 
-        _toggleButtonClick: function (e) {
-            this.toggle($(e.target).closest(NODE));
+        text: function (node) {
+            return $(node).closest(NODE).find(">div>.t-in").text();
         },
 
-        text: function (node) {
-            return $(node).closest(NODE).find(".t-in:first").text();
+        value: function (node) {
+            return $(node).closest(NODE).find(">div>:input[name='value']").val() || this.text(node);
         },
 
         findByText: function (text) {
@@ -325,10 +329,6 @@
             });
 
             return result;
-        },
-
-        getItemValue: function (item) {
-            return $(item).find(">div>:input[name='itemValue']").val() || this.getItemText(item);
         }
     });
 
@@ -696,8 +696,9 @@
                 "<%= toggleButton(data) %>" +
                 "<%= checkbox(data) %>" +
                 "<<%= tag(item) %> class='<%= textClass(item) %>'<%= textAttributes(item) %>>" +
-                    "<%= image(item) %><%= sprite(item) %><%= text(item) %><%= value(item) %>" +
+                    "<%= image(item) %><%= sprite(item) %><%= text(item) %>" +
                 "</<%= tag(item) %>>" +
+                "<%= value(item) %>"+
             "</div>"
         ),
         item: template(
@@ -709,7 +710,7 @@
             "</li>"
         ),
         image: template("<img class='t-image' alt='' src='<%= imageUrl %>' />"),
-        value: template("<input type='hidden' class='t-input' name='itemValue' value='<%= value %>' />"),
+        value: template("<input type='hidden' class='t-input' name='value' value='<%= value %>' />"),
         toggleButton: template("<span class='<%= toggleButtonClass(item) %>'></span>"),
         checkbox: template(
             "<% var arrayName = treeview.id + '_checkedNodes', absoluteIndex = (group.level ? group.level + ':' : '') + item.index; %>" + 
