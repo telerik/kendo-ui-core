@@ -304,7 +304,7 @@
                 height = that.content.innerHeight(),
                 firstRowIndex = Math.floor(scrollTop / rowHeight);
                 lastRowIndex = firstRowIndex + Math.floor(height / rowHeight),
-                prefetchAt = 0.3;
+                prefetchAt = 0.33;
 
             console.log(kendo.stringify({
                 skip: skip,
@@ -312,14 +312,6 @@
                 first: firstRowIndex,
                 last: lastRowIndex
                 }));
-
-            if (firstRowIndex < (skip + take * prefetchAt) && firstRowIndex > take * prefetchAt) {
-                console.log("prefetching prev", skip - take + (lastRowIndex - firstRowIndex) - 1, take);
-                dataSource.prefetch(skip - take + (lastRowIndex - firstRowIndex) - 1, take);
-            } else if (lastRowIndex > skip + take * prefetchAt) {
-                console.log("prefetching next",skip + take - (lastRowIndex - firstRowIndex) + 1, take);
-                dataSource.prefetch(skip + take - (lastRowIndex - firstRowIndex) + 1, take);
-            }
 
             if (firstRowIndex < skip) {
                 skip = Math.max(0, lastRowIndex - take);
@@ -371,6 +363,13 @@
                 }
 
                 return;
+            }
+            if (firstRowIndex < (skip + take * prefetchAt) && firstRowIndex > take * prefetchAt) {
+                console.log("prefetching prev", skip - take + (lastRowIndex - firstRowIndex) - 1, take);
+                dataSource.prefetch(Math.max(skip - take + (lastRowIndex - firstRowIndex) - 1, 0), take);
+            } else if (lastRowIndex > skip + take * prefetchAt) {
+                console.log("prefetching next",skip + take - (lastRowIndex - firstRowIndex) + 1, take);
+                dataSource.prefetch(skip + take - (lastRowIndex - firstRowIndex) + 1, take);
             }
             that._scrollTop = scrollTop - (skip * rowHeight);
             that.tableWrap[0].scrollTop = that._scrollTop;
