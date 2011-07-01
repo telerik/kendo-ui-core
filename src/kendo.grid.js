@@ -328,6 +328,8 @@
                 clearTimeout(that._timeout);
 
                 if (dataSource.inRange(skip, take)) {
+                    that._scrollTop = (firstRowIndex - skip) * rowHeight;
+
                     dataSource.range(skip, take);
                 } else {
                     if (!that._mask) {
