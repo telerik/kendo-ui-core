@@ -312,9 +312,9 @@
                 last: lastRowIndex
                 }));
 
-            if (firstRowIndex < skip - take / 2) {
-                console.log("prefetching prev", skip - take + (lastRowIndex - firstRowIndex), take);
-                dataSource.prefetch(skip - take + (lastRowIndex - firstRowIndex), take);
+            if (firstRowIndex < (skip + take / 2) && firstRowIndex > take / 2) {
+                console.log("prefetching prev", skip - take + (lastRowIndex - firstRowIndex) - 1, take);
+                dataSource.prefetch(skip - take + (lastRowIndex - firstRowIndex) - 1, take);
             } else if (lastRowIndex > skip + take / 2) {
                 console.log("prefetching next",skip + take - (lastRowIndex - firstRowIndex) + 1, take);
                 dataSource.prefetch(skip + take - (lastRowIndex - firstRowIndex) + 1, take);
