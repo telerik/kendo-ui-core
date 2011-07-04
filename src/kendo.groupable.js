@@ -20,6 +20,18 @@
         dropCue = $('<div class="t-grouping-dropclue"/>'),
         dropCuePositions = [];
 
+    function intializePositions() {
+        dropCuePositions = $.map($(".t-group-indicator", groupContainer), function(item) {
+            item = $(item);
+            var left = item.position().left;
+            return {
+                left: left,
+                right: left + item.outerWidth(),
+                element: item
+            };
+        }); 
+    }
+
     var Groupable = Component.extend({
         init: function(element, options) {
             var that = this;
@@ -41,17 +53,19 @@
                 .kendoDraggable({
                     filter: "div.t-group-indicator",
                     hint: hint,
-                    dragend: function(e) {                        
+                    dragend: function(e) {
                         that._dragEnd(this, e);
                     },
-                    dragstart: function() {
+                    dragstart: function(e) {
+                        var element = e.currentTarget,
+                            marginLeft = parseInt(element.css("marginLeft")),
+                            left = element.position().left - marginLeft;
+
+                        intializePositions();
+                        dropCue.css({top:3, left: left}).appendTo(groupContainer);
                         this.hint.find(".t-drag-status").removeClass("t-denied").addClass("t-add");
-                        that._dragStart();
-                        dropCue.css({top:3, left: 0}).appendTo(groupContainer);                        
                     },
-                    drag: function(e) {
-                        that._drag(this, e);
-                    }
+                    drag: proxy(that._drag, that)
                 })
                 .delegate(".t-button", "click", function(e) {
                     e.preventDefault();
@@ -73,11 +87,9 @@
                     that._dragEnd(this, e);                                                           
                 },
                 dragstart: function() {
-                    that._dragStart();
+                    intializePositions();
                 },
-                drag: function(e) {
-                    that._drag(this, e);
-                }
+                drag: proxy(that._drag, that)
             });  
             
             that.dataSource = that.options.dataSource;
@@ -130,42 +142,42 @@
                 that.dataSource.group(that.descriptors());
             }            
         },
-
-        _dragStart: function() {
-            dropCuePositions = $.map($(".t-group-indicator", groupContainer), function(item) {
-                item = $(item);
-                var left = item.position().left;
-                return {
-                    left: left,
-                    right: left + item.outerWidth(),
-                    element: item
-                };
-            }); 
-        },
-        _drag: function(draggable, event) {
+        _dropCuePosition: function(position) {
             if(!dropCue.is(":visible") || dropCuePositions.length == 0) {
                 return;
             }
-            
-            var position = event.pageX,
-                lastCuePosition = dropCuePositions[dropCuePositions.length - 1],
+            var lastCuePosition = dropCuePositions[dropCuePositions.length - 1],
                 right = lastCuePosition.right,
                 marginLeft = parseInt(lastCuePosition.element.css("marginLeft")),
                 marginRight = parseInt(lastCuePosition.element.css("marginRight"));
-                            
-            if(position >= right) {
-                dropCue.css({ left: right + marginRight});                
+
+            if(position >= right) {                
+                position = {
+                    left: right + marginRight,
+                    element: lastCuePosition.element,
+                    before: false
+                };
             } else {
                 position = $.grep(dropCuePositions, function(item) {
                     return item.left <= position && position <= item.right;
                 })[0];
 
-                if(position) {
-                    dropCue.css({ left: position.left - marginLeft });                    
+                if(position) {                    
+                    position = {
+                        left: position.left - marginLeft,
+                        element: position.element,
+                        before: true
+                    };
                 }
             }
-            
-            console.log(dropCue.position().left);
+
+            return position;
+        },        
+        _drag: function(event) {            
+            var position = this._dropCuePosition(event.pageX);
+            if(position) {
+                dropCue.css({ left: position.left });
+            }
         },
         _canDrop: function(source, target, position) {
             var next = source.next();
@@ -175,32 +187,18 @@
             var that = this,                
                 field = event.currentTarget.data("field"),
                 sourceIndicator = that.indicator(field),
-                targetIndicator,
-                insertBefore = true,
                 lastCuePosition = dropCuePositions[dropCuePositions.length - 1],
-                right,
                 position;
                 
-            if(draggable.dropped) {                
-                if(lastCuePosition) {
-                    right = lastCuePosition.right,                    
-                    position = dropCue.position().left + parseInt(lastCuePosition.element.css("marginLeft"));
-
-                    if(position >= right) {
-                        targetIndicator = lastCuePosition.element;
-                        insertBefore = false;
-                    } else {
-                        targetIndicator = $.grep(dropCuePositions, function(item) {
-                            return item.left <= position && position <= item.right;
-                        })[0].element;
-                        insertBefore = true;
-                    }
+            if(draggable.dropped) {
+                if(lastCuePosition) {                    
+                    position = that._dropCuePosition(dropCue.position().left + parseInt(lastCuePosition.element.css("marginLeft")));
                              
-                    if(that._canDrop($(sourceIndicator), targetIndicator, position)) {
-                        if(insertBefore) {                            
-                            targetIndicator.before(sourceIndicator || that.buildIndicator(field));
+                    if(that._canDrop($(sourceIndicator), position.element, position.left)) {
+                        if(position.before) {                            
+                            position.element.before(sourceIndicator || that.buildIndicator(field));
                         } else {                                                        
-                            targetIndicator.after(sourceIndicator || that.buildIndicator(field));
+                            position.element.after(sourceIndicator || that.buildIndicator(field));
                         }
                         
                         that._change();
@@ -209,7 +207,6 @@
                     groupContainer.append(that.buildIndicator(field));
                     that._change();
                 }
-
             } else {
                 if(sourceIndicator) {
                     that._removeIndicator($(sourceIndicator));
