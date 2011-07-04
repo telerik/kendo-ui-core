@@ -43,13 +43,13 @@
 
              function Load() {
                  isRaised = true;
-                 onLoadMenu = $("#Menu1").data("kendoMenu");
+                 onLoadMenu = getMenu();
              }
         </script>
     </head>
     <body onload="Load()">
 
-    <ul id="Menu1" class="t-widget t-reset t-header t-menu">
+    <ul id="Menu1" class="t-widget t-reset t-header t-menu" style="visibility: hidden; top: -10000px">
         <li class="t-item t-state-default" style=""><span class="t-link"><img
                 src="../../playground/Icons/Suites/mvc.png" class="t-image" alt="image">ASP.NET MVC<span
                 class="t-icon t-arrow-down"></span></span>
@@ -153,13 +153,13 @@
 
 <script type="text/javascript">
 
-        $("#Menu1").kendoMenu({ animation: false, select: Select });
+        $("#Menu1").kendoMenu({ animation: false, select: Select, open: Open, close: Close });
 
         var menu;
 
         module("Menu / ClientSideAPI", {
             setup: function () {
-                menu = $("#Menu1").data('kendoMenu');
+                menu = getMenu();
             }
         });
 
@@ -186,14 +186,20 @@
             ok(isCalled);
         });
 
-        test('hovering root item opens it', function() {
-            var opend = false,
-                item = getRootItem(0);
+        test('hovering root item opens it and raises open event', function() {
+            var item = getRootItem(1);
 
-            menu.open = function() { opend = true };
             menu._mouseenter({}, $("li:first", item)[0]);
 
-            ok(opend);
+            ok(isOpenRaised);
+        });
+
+        test('leaving root item closes it and raises close event', function() {
+            var item = getRootItem(1);
+
+            menu._mouseleave({}, $("li:first", item)[0]);
+
+            ok(isCloseRaised);
         });
 
         test('clicking should raise select event', function() {
