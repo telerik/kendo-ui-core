@@ -13,7 +13,6 @@
 
             $(document).ready(function() {
                 $("#container").kendoChart({
-                    theme: "Office2010Black",
                     title: {
                         text: "Teh chart",
                         position: "top"
@@ -70,8 +69,12 @@
                         }
                     ],
                     categoryAxis: {
-                        field: "name"
-                    }
+                        field: "name",
+                        majorGridLines: {
+                            visible: true,
+                            color: "red"
+                        }
+                    },
                 });
             });
 

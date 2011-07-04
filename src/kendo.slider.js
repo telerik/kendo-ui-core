@@ -10,10 +10,11 @@
         LOAD = "load",
         CHANGE = "change",
         SLIDE = "slide",
-        CLICK = "click",
+        MOUSE_DOWN = "mousedown",
         MOVE_SELECTION = "moveSelection",
+        KEY_DOWN = "keydown",
         //css selectors
-        DRAGHANDLE_SELECTOR = ".t-draghandle",
+        DRAG_HANDLE = ".t-draghandle",
         TRACK_SELECTOR = ".t-slider-track",
         TICK_SELECTOR = ".t-tick",
         //constants
@@ -383,10 +384,10 @@
 
             that._setValueInRange(that.options.val);
 
-            var dragHandle = that.wrapper.find(DRAGHANDLE_SELECTOR);
+            var dragHandle = that.wrapper.find(DRAG_HANDLE);
 
             new Slider.Selection(dragHandle, that, that.options);
-            new Slider.Drag(dragHandle, "", that, that.options);
+            that._drag = new Slider.Drag(dragHandle, "", that, that.options);
         },
 
         options: {
@@ -406,16 +407,21 @@
                 .addClass("t-state-default");
 
             var clickHandler = function (e) {
+                if ($(e.target).hasClass("t-draghandle"))
+                    return;
+
                 var mousePosition = that._isHorizontal ? e.pageX : e.pageY,
                     dragableArea = that._getDragableArea();
 
                 that._update(that._getValueFromPosition(mousePosition, dragableArea));
+
+                that._drag.dragstart(e);
             }
 
             that.wrapper
-                .find(TICK_SELECTOR).bind(CLICK, clickHandler)
+                .find(TICK_SELECTOR).bind(MOUSE_DOWN, clickHandler)
                 .end()
-                .find(TRACK_SELECTOR).bind(CLICK, clickHandler);
+                .find(TRACK_SELECTOR).bind(MOUSE_DOWN, clickHandler);
 
             var move = proxy(function (e, sign) {
                 var index = math.ceil(options.val / options.smallStep);
@@ -452,20 +458,18 @@
                         this._clearTimer();
                     }, that))
                     .eq(0)
-                    .bind("mousedown", proxy(function (e) {
+                    .bind(MOUSE_DOWN, proxy(function (e) {
                         mouseDownHandler(e, 1);
                     }, that))
                     .end()
                     .eq(1)
-                    .bind("mousedown", proxy(function (e) {
+                    .bind(MOUSE_DOWN, proxy(function (e) {
                         mouseDownHandler(e, -1);
                     }, that));
             }
 
             that.wrapper
-                .find(DRAGHANDLE_SELECTOR).bind({
-                    keydown: proxy(this._keydown, that)
-                });
+                .find(DRAG_HANDLE).bind(KEY_DOWN, proxy(this._keydown, that));
 
             options.enabled = true;
         },
@@ -480,8 +484,8 @@
 
             that.wrapper
                 .find(".t-button")
-                .unbind("mousedown")
-                .bind("mousedown", false)
+                .unbind(MOUSE_DOWN)
+                .bind(MOUSE_DOWN, false)
                 .unbind("mouseup")
                 .bind("mouseup", false)
                 .unbind("mouseleave")
@@ -490,14 +494,14 @@
                 .bind("mouseover", false);
 
             that.wrapper
-                .find(TICK_SELECTOR).unbind(CLICK)
+                .find(TICK_SELECTOR).unbind(MOUSE_DOWN)
                 .end()
-                .find(TRACK_SELECTOR).unbind(CLICK);
+                .find(TRACK_SELECTOR).unbind(MOUSE_DOWN);
 
             that.wrapper
-                .find(DRAGHANDLE_SELECTOR)
-                .unbind("keydown")
-                .bind("keydown", false)
+                .find(DRAG_HANDLE)
+                .unbind(KEY_DOWN)
+                .bind(KEY_DOWN, false)
 
             that.options.enabled = false;
         },
@@ -593,8 +597,8 @@
         that.dragHandleSize = dragHandle[owner._size]();
         that.type = type;
 
-        new Draggable(dragHandle, {
-            dragstart: proxy(that.dragstart, that),
+        that.draggable = new Draggable(dragHandle, {
+            dragstart: proxy(that._dragstart, that),
             drag: proxy(that.drag, that),
             dragend: proxy(that.dragend, that)
         });
@@ -602,6 +606,10 @@
 
     Slider.Drag.prototype = {
         dragstart: function (e) {
+            this.draggable._startDrag(e);
+        },
+
+        _dragstart: function (e) {
             var that = this,
                 owner = that.owner,
                 options = that.options;
@@ -662,7 +670,7 @@
                 that.oldVal = that.val;
 
                 if (that.type) {
-                    if (that.type == "leftHandle") {
+                    if (that.type == "firstHandle") {
                         if (that.val < that.selectionEnd) {
                             that.selectionStart = that.val;
                         } else {
@@ -728,7 +736,7 @@
                 positionLeft = 0;
 
             if (that.type) {
-                var dragHandles = owner.wrapper.find(DRAGHANDLE_SELECTOR),
+                var dragHandles = owner.wrapper.find(DRAG_HANDLE),
                     firstDragHandleOffset = dragHandles.eq(0).offset(),
                     secondDragHandleOffset = dragHandles.eq(1).offset();
 
@@ -816,11 +824,11 @@
 
             that._setValueInRange(options.selectionStart, options.selectionEnd);
 
-            var dragHandles = that.wrapper.find(DRAGHANDLE_SELECTOR);
+            var dragHandles = that.wrapper.find(DRAG_HANDLE);
 
             new RangeSlider.Selection(dragHandles, that, options);
-            new Slider.Drag(dragHandles.eq(0), "leftHandle", that, options);
-            new Slider.Drag(dragHandles.eq(1), "rightHandle" , that, options);
+            that._firstHandleDrag = new Slider.Drag(dragHandles.eq(0), "firstHandle", that, options);
+            that._lastHandleDrag = new Slider.Drag(dragHandles.eq(1), "lastHandle" , that, options);
         },
 
         options: {
@@ -838,40 +846,47 @@
                 .addClass("t-state-default");
 
             var clickHandler = function (e) {
+                if ($(e.target).hasClass("t-draghandle"))
+                    return;
+
                 var mousePosition = that._isHorizontal ? e.pageX : e.pageY,
                     dragableArea = that._getDragableArea(),
                     val = that._getValueFromPosition(mousePosition, dragableArea);
 
                 if (val < options.selectionStart) {
                     that._setValueInRange(val, options.selectionEnd);
+                    that._firstHandleDrag.dragstart(e);
                 } else if (val > that.selectionEnd) {
                     that._setValueInRange(options.selectionStart, val);
+                    that._lastHandleDrag.dragstart(e);
                 } else {
                     if (val - options.selectionStart <= options.selectionEnd - val) {
                         that._setValueInRange(val, options.selectionEnd);
+                        that._firstHandleDrag.dragstart(e);
                     } else {
                         that._setValueInRange(options.selectionStart, val);
+                        that._lastHandleDrag.dragstart(e);
                     }
                 }
             };
 
             that.wrapper
-                .find(TICK_SELECTOR).bind(CLICK, clickHandler)
+                .find(TICK_SELECTOR).bind(MOUSE_DOWN, clickHandler)
                 .end()
-                .find(TRACK_SELECTOR).bind(CLICK, clickHandler);
+                .find(TRACK_SELECTOR).bind(MOUSE_DOWN, clickHandler);
 
-            that.wrapper.find(DRAGHANDLE_SELECTOR)
-                .eq(0).bind({
-                    keydown: proxy(function(e) {
-                        this._keydown(e, "leftHandle");
+            that.wrapper.find(DRAG_HANDLE)
+                .eq(0).bind(KEY_DOWN,
+                    proxy(function(e) {
+                        this._keydown(e, "firstHandle");
                     }, that)
-                })
+                )
                 .end()
-                .eq(1).bind({
-                    keydown: proxy(function(e) {
-                        this._keydown(e, "rightHandle");
+                .eq(1).bind(KEY_DOWN,
+                    proxy(function(e) {
+                        this._keydown(e, "lastHandle");
                     }, that)
-                });
+                );
 
             that.enabled = true;
         },
@@ -886,14 +901,14 @@
                 .addClass("t-state-disabled");
 
             that.wrapper
-                .find(TICK_SELECTOR).unbind(CLICK)
+                .find(TICK_SELECTOR).unbind(MOUSE_DOWN)
                 .end()
-                .find(TRACK_SELECTOR).unbind(CLICK);
+                .find(TRACK_SELECTOR).unbind(MOUSE_DOWN);
 
             that.wrapper
-                .find(DRAGHANDLE_SELECTOR)
-                .unbind("keydown")
-                .bind("keydown", false);
+                .find(DRAG_HANDLE)
+                .unbind(KEY_DOWN)
+                .bind(KEY_DOWN, false);
 
             that.enabled = false;
         },
@@ -904,7 +919,7 @@
                 selectionEndValue = that.options.selectionEnd;
 
             if (e.keyCode in that._keyMap) {
-                if (handle == "leftHandle") {
+                if (handle == "firstHandle") {
                     selectionStartValue = that._keyMap[e.keyCode](selectionStartValue);
 
                     if (selectionStartValue > selectionEndValue) {
@@ -974,7 +989,7 @@
             that.trigger(MOVE_SELECTION, { values: [options.selectionStart, options.selectionEnd] });
 
             if (options.selectionStart == options.max && options.selectionEnd == options.max) {
-                that._setZIndex("leftHandle");
+                that._setZIndex("firstHandle");
             }
         },
 
@@ -986,15 +1001,15 @@
             selectionEnd = math.max(math.min(selectionEnd, options.max), options.min);
 
             if (selectionStart == options.max && selectionEnd == options.max) {
-                this._setZIndex("leftHandle");
+                this._setZIndex("firstHandle");
             }
 
             this._update(math.min(selectionStart, selectionEnd), math.max(selectionStart, selectionEnd));
         },
 
         _setZIndex: function (type) {
-            this.wrapper.find(DRAGHANDLE_SELECTOR).each(function (index) {
-                $(this).css("z-index", type == "leftHandle" ? 1 - index : index);
+            this.wrapper.find(DRAG_HANDLE).each(function (index) {
+                $(this).css("z-index", type == "firstHandle" ? 1 - index : index);
             });
         }
     });
