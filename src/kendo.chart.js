@@ -1204,7 +1204,7 @@
             element.box = box;
         },
 
-        getViewElements: function(factory) {
+        getViewElements: function(viewRoot, factory) {
             var element = this,
                 viewElements = [],
                 children = element.children,
@@ -1212,7 +1212,7 @@
 
             for (var i = 0; i < childrenCount; i++) {
                 viewElements.push.apply(viewElements,
-                    children[i].getViewElements(factory));
+                    children[i].getViewElements(viewRoot, factory));
             };
 
             return viewElements;
@@ -1265,25 +1265,25 @@
                 viewRoot = factory.root(root.options),
                 viewElements = viewRoot.children;
 
-            viewElements.push.apply(viewElements, root.getViewElements(factory));
+            viewElements.push.apply(viewElements, root.getViewElements(viewRoot, factory));
 
             return viewRoot;
         },
 
-        getViewElements: function(factory) {
+        getViewElements: function(viewRoot, factory) {
             var root = this,
                 options = root.options,
                 border = options.border || {},
                 box = root.box.clone().pad(options.margin).unpad(border.width),
                 elements = [
-                    factory.rect(box, {
+                    factory.rect(viewRoot, box, {
                         stroke: border.width ? border.color : "",
                         strokeWidth: border.width,
                         fill: options.background })
                 ];
 
             return elements.concat(
-                ChartElement.fn.getViewElements.call(root, factory)
+                ChartElement.fn.getViewElements.call(root, viewRoot, factory)
             );
         }
     });
@@ -1362,19 +1362,19 @@
             }
         },
 
-        getViewElements: function(factory) {
+        getViewElements: function(viewRoot, factory) {
             var element = this,
                 options = element.options,
                 border = options.border || {},
                 elements = [
-                    factory.rect(element.paddingBox, {
+                    factory.rect(viewRoot, element.paddingBox, {
                         stroke: border.width ? border.color : "",
                         strokeWidth: border.width,
                         fill: options.background })
                 ];
 
             return elements.concat(
-                ChartElement.fn.getViewElements.call(element, factory)
+                ChartElement.fn.getViewElements.call(element, viewRoot, factory)
             );
         }
     });
@@ -1435,7 +1435,7 @@
             }
         },
 
-        getViewElements: function(factory) {
+        getViewElements: function(viewRoot, factory) {
             var text = this,
                 options = text.options;
 
@@ -1646,7 +1646,7 @@
             }
         },
 
-        getViewElements: function(factory) {
+        getViewElements: function(viewRoot, factory) {
             var legend = this,
                 children = legend.children,
                 options = legend.options,
@@ -1656,7 +1656,7 @@
                 border = options.border || {},
                 labelBox;
 
-            [].push.apply(group.children, ChartElement.fn.getViewElements.call(legend, factory));
+            [].push.apply(group.children, ChartElement.fn.getViewElements.call(legend, viewRoot, factory));
 
             for (var i = 0, length = series.length; i < length; i++) {
                 var color = series[i].color,
@@ -1675,14 +1675,14 @@
 
                 markerBox.y2 = markerBox.y1 + markerSize;
 
-                group.children.push(factory.rect(markerBox, { fill: color, stroke: color }));
+                group.children.push(factory.rect(viewRoot, markerBox, { fill: color, stroke: color }));
             };
 
             if (children.length > 0) {
                 var padding = getSpacing(options.padding);
                 padding.left += markerSize * 2;
                 labelBox.pad(padding);
-                group.children.unshift(factory.rect(labelBox, {
+                group.children.unshift(factory.rect(viewRoot, labelBox, {
                     stroke: border.width ? border.color : "",
                     strokeWidth: border.width,
                     fill: options.background })
@@ -2031,12 +2031,12 @@
             axis.arrangeLabels(maxLabelWidth, maxLabelHeight);
         },
 
-        getViewElements: function(factory) {
+        getViewElements: function(viewRoot, factory) {
             var axis = this,
                 children = axis.children,
                 options = axis.options,
                 isVertical = options.orientation === VERTICAL,
-                childElements = ChartElement.fn.getViewElements.call(axis, factory);
+                childElements = ChartElement.fn.getViewElements.call(axis, viewRoot, factory);
 
             var majorTickPositions = axis.getMajorTickPositions();
             if (options.line.width > 0) {
@@ -2297,12 +2297,12 @@
             axis.arrangeLabels(maxLabelWidth, maxLabelHeight, "onMinorTicks");
         },
 
-        getViewElements: function(factory) {
+        getViewElements: function(viewRoot, factory) {
             var axis = this,
                 children = axis.children,
                 options = axis.options,
                 isVertical = options.orientation === VERTICAL,
-                childElements = ChartElement.fn.getViewElements.call(axis, factory);
+                childElements = ChartElement.fn.getViewElements.call(axis, viewRoot, factory);
 
             if (options.line.width > 0) {
                 if (isVertical) {
@@ -2483,7 +2483,7 @@
             }
         },
 
-        getViewElements: function(factory) {
+        getViewElements: function(viewRoot, factory) {
             var bar = this,
                 options = bar.options,
                 isVertical = options.isVertical,
@@ -2492,13 +2492,19 @@
                     strokeWidth: options.border.width
                 } : {},
                 box = bar.box,
+                rectStyle = deepExtend({
+                    fill: options.color,
+                    // TODO: class: [ isVertical ? "glassV" : "glassH" ]
+                    glassEffect: true,
+                    glassEffectRotation: isVertical ? 0 : 90
+                }, border),
                 elements = [];
 
             elements.push(
-                factory.rect(box, deepExtend({}, { fill: options.color }, border))
+                factory.rect(viewRoot, box, rectStyle)
             );
             [].push.apply(elements,
-                ChartElement.fn.getViewElements.call(bar, factory)
+                ChartElement.fn.getViewElements.call(bar, viewRoot, factory)
             );
             return elements;
         }
@@ -2892,13 +2898,13 @@
                 });
         },
 
-        getViewElements: function(factory) {
+        getViewElements: function(viewRoot, factory) {
             var plotArea = this,
                 axisY = plotArea.axisY,
                 axisX = plotArea.axisX,
                 gridLinesY = plotArea.renderGridLines(factory, axisY, axisX),
                 gridLinesX = plotArea.renderGridLines(factory, axisX, axisY),
-                childElements = ChartElement.fn.getViewElements.call(plotArea, factory);
+                childElements = ChartElement.fn.getViewElements.call(plotArea, viewRoot, factory);
 
             return [].concat(gridLinesY, gridLinesX, childElements);
         }
@@ -2955,6 +2961,30 @@
         }
     });
 
+    // TODO: Refactor into alpha overlay + two fill types
+    //       Avoid instantiating gradients more than once
+    function SVGGlassEffect(element, rotation, viewRoot, factory) {
+        var gradientId = "glass" + rotation,
+            gradientOptions = deepExtend({}, glassGradient, {
+                rotation: rotation,
+                id: gradientId
+            }),
+            gradient = factory.linearGradient(gradientOptions),
+            group = factory.group(),
+            overlay = element.clone();
+
+        overlay.options.fill = idRef(gradientId);
+        viewRoot.define(gradientId, gradient);
+
+        group.children.push(element, overlay);
+
+        return group;
+    }
+
+    function idRef(id) {
+        return "url(#" + id + ")";
+    }
+
     function SVGFactory() {}
 
     SVGFactory.prototype = {
@@ -2970,12 +3000,18 @@
             return new SVGText(content, options);
         },
 
-        rect: function(box, style) {
-            return new SVGPath(
+        rect: function(viewRoot, box, style) {
+            var rect = new SVGPath(
                 [[box.x1, box.y1], [box.x2, box.y1],
                 [box.x2, box.y2], [box.x1, box.y2], [box.x1, box.y1]],
                 style
             );
+
+            if (style && style.glassEffect) {
+                return SVGGlassEffect(rect, style.glassEffectRotation, viewRoot, this);
+            }
+
+            return rect;
         },
 
         line: function(x1, y1, x2, y2, options) {
@@ -2993,12 +3029,16 @@
 
             ViewElement.fn.init.call(root, options);
 
+            root.definitions = [];
+            root.definitionIds = [];
+
             root.template = SVGRoot.template;
             if (!root.template) {
                 root.template = SVGRoot.template = template(
                     "<svg xmlns='http://www.w3.org/2000/svg' version='1.1' " +
                     "width='<%= options.width %>px' height='<%= options.height %>px' " +
                     "style='position: relative;'>" +
+                    "<%= renderDefinitions() %>" +
                     "<%= renderContent() %></svg>"
                 );
             }
@@ -3006,7 +3046,39 @@
 
         options: {
             width: DEFAULT_WIDTH,
-            height: DEFAULT_HEIGHT
+            height: DEFAULT_HEIGHT,
+            idPrefix: ""
+        },
+
+        define: function(id, element) {
+            var root = this,
+                defs = root.definitions,
+                definitionIds = root.definitionIds;
+
+            if(!inArray(id, definitionIds)) {
+                defs.push(element);
+                definitionIds.push(id);
+            }
+
+            return id;
+        },
+
+        renderDefinitions: function() {
+            var root = this,
+                definitions = root.definitions,
+                i,
+                length = definitions.length,
+                output = "";
+
+            if (length == 0) {
+                return output;
+            }
+
+            for (i = 0; i < length; i++) {
+                output = definitions[i].render();
+            }
+
+            return "<defs>" + output + "</defs>";
         }
     });
 
@@ -3102,6 +3174,11 @@
                 options = path.options;
 
             return options.stroke ? "stroke='" + options.stroke + "' " : "";
+        },
+
+        clone: function() {
+            var path = this;
+            return new SVGPath(path.points, deepExtend({}, path.options));
         }
     });
 
@@ -3111,26 +3188,56 @@
             ViewElement.fn.init.call(gradient, options);
 
             gradient.template = SVGLinearGradient.template;
+            gradient.stopTemplate = SVGLinearGradient.stopTemplate;
             if (!gradient.template) {
                 gradient.template = SVGLinearGradient.template = template(
                     "<linearGradient id='<%= options.id %>' " +
                     "gradientTransform='rotate(<%= options.rotation %>)'> " +
-                    "<stop offset='5%' style='stop-color:#fff;stop-opacity:0'/>" +
-                    "<stop offset='10%' style='stop-color:#fff;stop-opacity:0'/>" +
-                    "<stop offset='25%' style='stop-color:#fff;stop-opacity:0.4'/>" +
-                    "<stop offset='92%' style='stop-color:#fff;stop-opacity:0'/>" +
-                    "<stop offset='93%' style='stop-color:#fff;stop-opacity:0.2'/>" +
-                    "<stop offset='100%' style='stop-color:#fff;stop-opacity:0.4'/>" +
+                    "<%= renderStops() %>" +
                     "</linearGradient>"
                 );
+
+                gradient.stopTemplate = SVGLinearGradient.stopTemplate = template(
+                    "<stop offset='<%= Math.round(offset * 100) %>%' " +
+                    "style='stop-color:<%= color %>;stop-opacity:<%= opacity %>' />");
             }
         },
 
         options: {
             id: "",
             rotation: 0
+        },
+
+        renderStops: function() {
+            var gradient = this,
+                stops = gradient.options.stops,
+                stopTemplate = gradient.stopTemplate,
+                i,
+                length = stops.length,
+                currentStop,
+                output = '';
+
+            for (i = 0; i < length; i++) {
+                currentStop = stops[i];
+                output += stopTemplate(currentStop);
+            }
+
+            return output;
         }
     });
+
+    function VMLGlassEffect(element, rotation, viewRoot, factory) {
+        var gradientOptions = deepExtend(
+                blendGradient(element.options.fill, glassGradient),
+                { rotation: 270 - rotation }
+            ),
+            gradient = factory.linearGradient(gradientOptions);
+
+        element.options.fill = "";
+        element.children.push(gradient);
+
+        return element;
+    }
 
     function VMLFactory() {
         if (document.namespaces) {
@@ -3147,12 +3254,18 @@
             return new VMLText(content, options);
         },
 
-        rect: function(box, style) {
-            return new VMLPath(
+        rect: function(viewRoot, box, style) {
+            var rect = new VMLPath(
                 [[box.x1, box.y1], [box.x2, box.y1],
                 [box.x2, box.y2], [box.x1, box.y2], [box.x1, box.y1]],
                 style
             );
+
+            if (style && style.glassEffect) {
+                return VMLGlassEffect(rect, style.glassEffectRotation, viewRoot, this);
+            }
+
+            return rect;
         },
 
         line: function(x1, y1, x2, y2, options) {
@@ -3161,6 +3274,10 @@
 
         group: function(options) {
             return new VMLGroup(options);
+        },
+
+        linearGradient: function(options) {
+            return new VMLLinearGradient(options);
         }
     };
 
@@ -3219,11 +3336,13 @@
             if (!path.template) {
                 path.template = VMLPath.template = template(
                     "<kvml:shape style='position:absolute; width:1px; height:1px;' " +
-                    "strokecolor='<%= options.stroke %>' stroked='<%= !!options.stroke %>' " +
-                    "strokeweight='<%= options.strokeWidth %>' " +
-                    "fillcolor='<%= options.fill %>' filled='<%= !!options.fill %>' " +
+                    "strokecolor='<%= options.stroke || '' %>' stroked='<%= !!options.stroke %>' " +
+                    "strokeweight='<%= options.strokeWidth || '' %>' " +
+                    "fillcolor='<%= options.fill %>' " +
+                    "filled='<%= !!options.fill || children.length > 0 %>' " +
                     "coordorigin='0 0' coordsize='1 1'>" +
                         "<kvml:path v='<%= renderPoints() %> e' />" +
+                        "<%= renderContent() %>" +
                     "</kvml:shape>"
                 );
             }
@@ -3270,6 +3389,47 @@
                     "<%= renderContent() %></div>"
                 );
             }
+        }
+    });
+
+    var VMLLinearGradient = ViewElement.extend({
+        init: function(options) {
+            var gradient = this;
+            ViewElement.fn.init.call(gradient, options);
+
+            gradient.template = VMLLinearGradient.template;
+            if (!gradient.template) {
+                gradient.template = VMLLinearGradient.template = template(
+                    "<kvml:fill type='gradient' angle='<%= options.rotation %>' " +
+                    "colors='<%= renderColors() %>'" +
+                    "/> "
+                );
+            }
+        },
+
+        options: {
+            rotation: 0
+        },
+
+        renderColors: function() {
+            var gradient = this,
+                options = gradient.options,
+                stops = options.stops,
+                currentStop,
+                i,
+                length = stops.length,
+                output = [],
+                round = Math.round;
+
+            for (i = 0; i < length; i++) {
+                currentStop = stops[i];
+                output.push(
+                    round(currentStop.offset * 100) + "% " +
+                    currentStop.color
+                );
+            }
+
+            return output.join(",");
         }
     });
 
@@ -3631,7 +3791,7 @@
         type: "linear",
         rotation: 0,
         stops: [{
-            offset: 0.05,
+            offset: 0,
             color: WHITE,
             opacity: 0
         }, {
@@ -3647,13 +3807,9 @@
             color: WHITE,
             opacity: 0
         }, {
-            offset: 0.93,
-            color: WHITE,
-            opacity: 0.2
-        }, {
             offset: 1,
             color: WHITE,
-            opacity: 0.4
+            opacity: 0
         }]
     };
 
@@ -3665,9 +3821,11 @@
             stop,
             resultStop;
 
+        result.stops = [];
+
         for (i = 0; i < stopsLength; i++) {
             stop = srcStops[i];
-            resultStop = result.stops[i];
+            resultStop = result.stops[i] = deepExtend({}, srcStops[i]);
             resultStop.color = blendColors(color, stop.color, stop.opacity);
             resultStop.opacity = 0;
         }

@@ -9,7 +9,7 @@ function ViewFactoryStub() {
 }
 
 ViewFactoryStub.prototype = {
-    rect: function(box, style) {
+    rect: function(viewRoot, box, style) {
         this.log.rect.push({
             x1: box.x1,
             y1: box.y1,
@@ -40,6 +40,10 @@ ViewFactoryStub.prototype = {
         return new kendo.ui.Chart.ViewElement();
     }
 };
+
+function ViewElementStub() {
+    this.children = [];
+}
 
 function sameBox(a, b, tolerance) {
     same([a.x1, a.y1, a.x2, a.y2], [b.x1, b.y1, b.x2, b.y2], tolerance);

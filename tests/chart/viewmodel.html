@@ -16,6 +16,8 @@
             var Chart = kendo.ui.Chart,
                 Box2D = Chart.Box2D,
                 chartBox = new Box2D(5, 5, 1000, 1000),
+                viewRoot,
+                factory,
                 TOLERANCE = 2;
 
                 function ChartElementStub(viewElement) {
@@ -31,8 +33,9 @@
                     this.updateLayout = function() { }
                 }
 
-                function ViewElementStub() {
-                    this.children = [];
+                function moduleSetup() {
+                    viewRoot = new ViewElementStub();
+                    factory = new ViewFactoryStub();
                 }
 
 
@@ -42,6 +45,8 @@
                 // ------------------------------------------------------------
                 module("ChartElement", {
                     setup: function() {
+                        moduleSetup();
+
                         chartElement = new Chart.ChartElement();
                     }
                 });
@@ -62,36 +67,34 @@
 
             (function() {
                 var rootElement,
-                    rootViewElement,
                     rootRect,
-                    factory,
                     MARGIN = 10;
 
                 function createRoot(options) {
                     rootElement = new Chart.RootElement(options);
-                    rootViewElement = new ViewElementStub();
 
                     rootElement.updateLayout();
                 }
 
                 function renderRoot() {
-                    rootElement.getViewElements(factory);
+                    rootElement.getViewElements(viewRoot, factory);
                     rootRect = factory.log.rect[0];
                 }
 
                 // ------------------------------------------------------------
                 module("RootElement", {
                     setup: function() {
+                        moduleSetup();
+
                         createRoot();
-                        factory = new ViewFactoryStub();
                     }
                 });
 
                 test("creates root view element", function() {
                     factory.root = function() {
-                        return rootViewElement;
+                        return viewRoot;
                     };
-                    equal(rootElement.getView(factory), rootViewElement);
+                    equal(rootElement.getView(factory), viewRoot);
                 });
 
                 test("sets dimensions on view element", 2, function() {
@@ -215,6 +218,8 @@
                 // ------------------------------------------------------------
                 module("BoxElement", {
                     setup: function() {
+                        moduleSetup();
+
                         boxElement = new Chart.BoxElement({
                             width: WIDTH,
                             height: HEIGHT
@@ -304,6 +309,7 @@
                 // ------------------------------------------------------------
                 module("BoxElement / Alignment", {
                     setup: function() {
+                        moduleSetup();
                         boxElement = new Chart.BoxElement({
                             width: WIDTH,
                             height: HEIGHT,
@@ -359,6 +365,8 @@
                 // ------------------------------------------------------------
                 module("BoxElement / With children", {
                     setup: function() {
+                        moduleSetup();
+
                         boxElement = new Chart.BoxElement();
                         childElements = [
                             new ChartElementStub(),
@@ -451,22 +459,21 @@
                 });
 
                 // ------------------------------------------------------------
-                var factory;
-
                 module("BoxElement / Rendering", {
                     setup: function() {
+                        moduleSetup();
+
                         boxElement = new Chart.BoxElement({
                             width: WIDTH,
                             height: HEIGHT
                         });
-                        factory = new ViewFactoryStub();
                     }
                 });
 
                 test("renders border width", function() {
                     boxElement.options.border.width = 1;
                     boxElement.updateLayout(targetBox);
-                    boxElement.getViewElements(factory);
+                    boxElement.getViewElements(viewRoot, factory);
 
                     equal(factory.log.rect[0].style.strokeWidth, 1);
                 });
@@ -475,7 +482,7 @@
                     boxElement.options.border.color = "#f00";
                     boxElement.options.border.width = 1;
                     boxElement.updateLayout(targetBox);
-                    boxElement.getViewElements(factory);
+                    boxElement.getViewElements(viewRoot, factory);
 
                     equal(factory.log.rect[0].style.stroke, "#f00");
                 });
@@ -483,7 +490,7 @@
                 test("does not render border color when no width is set", function() {
                     boxElement.options.border.color = "#f00";
                     boxElement.updateLayout(targetBox);
-                    boxElement.getViewElements(factory);
+                    boxElement.getViewElements(viewRoot, factory);
 
                     equal(factory.log.rect[0].style.stroke, "");
                 });
@@ -491,7 +498,7 @@
                 test("renders fill color", function() {
                     boxElement.options.background = "#f00";
                     boxElement.updateLayout(targetBox);
-                    boxElement.getViewElements(factory);
+                    boxElement.getViewElements(viewRoot, factory);
 
                     equal(factory.log.rect[0].style.fill, "#f00");
                 });
@@ -499,7 +506,7 @@
                 test("content box includes padding", function() {
                     boxElement.options.padding = PADDING;
                     boxElement.updateLayout(targetBox);
-                    boxElement.getViewElements(factory);
+                    boxElement.getViewElements(viewRoot, factory);
 
                     var rect = factory.log.rect[0];
                     equal(rect.x2 - rect.x1, WIDTH + 2 * PADDING);
@@ -509,7 +516,7 @@
                 test("padding box does not include border", function() {
                     boxElement.options.border.width = BORDER;
                     boxElement.updateLayout(targetBox);
-                    boxElement.getViewElements(factory);
+                    boxElement.getViewElements(viewRoot, factory);
 
                     var rect = factory.log.rect[0];
                     equal(rect.x2 - rect.x1, WIDTH);
@@ -519,7 +526,7 @@
                 test("padding box does not include margin", function() {
                     boxElement.options.margin = MARGIN;
                     boxElement.updateLayout(targetBox);
-                    boxElement.getViewElements(factory);
+                    boxElement.getViewElements(viewRoot, factory);
 
                     var rect = factory.log.rect[0];
                     equal(rect.x2 - rect.x1, WIDTH);
@@ -549,6 +556,8 @@
 
                 module("Title", {
                     setup: function() {
+                        moduleSetup();
+
                         createTitle();
                     }
                 });
@@ -683,6 +692,8 @@
 
                 module("Text", {
                     setup: function() {
+                        moduleSetup();
+
                         text = new Chart.Text();
                     }
                 });
@@ -694,7 +705,7 @@
                         }
                     };
 
-                    deepEqual(text.getViewElements(factory), [ 42 ]);
+                    deepEqual(text.getViewElements(viewRoot, factory), [ 42 ]);
                 });
 
                 test("sets content on view element", 1, function() {
@@ -705,7 +716,7 @@
                     };
 
                     text.content = "Content";
-                    text.getViewElements(factory)
+                    text.getViewElements(viewRoot, factory)
                 });
 
                 test("sets position on view element", 2, function() {
@@ -717,7 +728,7 @@
                     };
 
                     text.updateLayout(new Box2D(100, 110, 200, 200));
-                    text.getViewElements(factory)
+                    text.getViewElements(viewRoot, factory)
                 });
 
                 test("sets font", 1, function() {
@@ -728,7 +739,7 @@
                     };
 
                     text.updateLayout(new Box2D());
-                    text.getViewElements(factory)
+                    text.getViewElements(viewRoot, factory)
                 });
 
                 test("sets color", 1, function() {
@@ -739,14 +750,13 @@
                     };
 
                     text.updateLayout(new Box2D());
-                    text.getViewElements(factory)
+                    text.getViewElements(viewRoot, factory)
                 });
 
             })();
 
             (function() {
                 var legend,
-                    viewFactory,
                     MARKER_MARGIN = MARKER_SIZE = 7,
                     MARGIN = 10;
 
@@ -761,14 +771,15 @@
                 // ------------------------------------------------------------
                 module("Legend", {
                     setup: function() {
-                        viewFactory = new ViewFactoryStub();
+                        moduleSetup();
+
                         createLegend();
                     }
                 });
 
                 test("renders legend in a group", function() {
-                    legend.getViewElements(viewFactory);
-                    equal(viewFactory.log.group.length, 1);
+                    legend.getViewElements(viewRoot, factory);
+                    equal(factory.log.group.length, 1);
                 });
 
                 test("sets zIndex on group", function() {
@@ -776,8 +787,8 @@
                             zIndex: 10
                     });
 
-                    legend.getViewElements(viewFactory);
-                    equal(viewFactory.log.group[0].options.zIndex, 10);
+                    legend.getViewElements(viewRoot, factory);
+                    equal(factory.log.group[0].options.zIndex, 10);
                 });
 
                 test("default zIndex is 1", function() {
@@ -785,8 +796,8 @@
                 });
 
                 test("creates labels for series", 1, function() {
-                    legend.getViewElements(viewFactory);
-                    equal(viewFactory.log.text[0].content, "Series 1");
+                    legend.getViewElements(viewRoot, factory);
+                    equal(factory.log.text[0].content, "Series 1");
                 });
 
                 test("second label is below the first", function() {
@@ -846,7 +857,7 @@
 
                 module("Legend position", {
                     setup: function() {
-                        viewFactory = new ViewFactoryStub();
+                        moduleSetup();
 
                         createLegend({ margin: 0 });
                         baseWidth = legend.box.width();
@@ -930,21 +941,22 @@
                 var marker, label;
                 module("Legend / Markers", {
                     setup: function() {
+                        moduleSetup();
+
                         legend = new Chart.Legend({
                             series: [ { name: "Series 1", color: "#f00" } ]
                         });
 
-                        viewFactory = new ViewFactoryStub();
                         legend.updateLayout(chartBox);
-                        legend.getViewElements(viewFactory);
+                        legend.getViewElements(viewRoot, factory);
 
-                        marker = viewFactory.log.rect[0];
-                        label = viewFactory.log.text[0];
+                        marker = factory.log.rect[0];
+                        label = factory.log.text[0];
                     }
                 });
 
                 test("creates markers for series", function() {
-                    equal(viewFactory.log.rect.length, 2);
+                    equal(factory.log.rect.length, 2);
                 });
 
                 test("sets marker color", function() {
@@ -979,6 +991,8 @@
                     PADDING = 10;
                 module("Legend / Box", {
                     setup: function() {
+                        moduleSetup();
+
                         legend = new Chart.Legend({
                             series: [ { name: "Series 1", color: "#f00" } ],
                             border: {
@@ -989,11 +1003,10 @@
                             padding: PADDING
                         });
 
-                        viewFactory = new ViewFactoryStub();
                         legend.updateLayout(chartBox);
-                        legend.getViewElements(viewFactory);
+                        legend.getViewElements(viewRoot, factory);
 
-                        legendBox = viewFactory.log.rect[1];
+                        legendBox = factory.log.rect[1];
                     }
                 });
 
@@ -1018,17 +1031,17 @@
                 var Bar = Chart.Bar,
                     bar,
                     box,
-                    factory,
                     rect;
 
                 module("Bar", {
                     setup: function() {
+                        moduleSetup();
+
                         box = new Box2D(0, 0, 100, 100);
                         bar = new Bar();
-                        factory = new ViewFactoryStub();
 
                         bar.updateLayout(box);
-                        bar.getViewElements(factory);
+                        bar.getViewElements(viewRoot, factory);
                         rect = factory.log.rect[0];
                     }
                 });
@@ -1050,7 +1063,7 @@
                     bar.options.border.width = 1;
                     factory = new ViewFactoryStub();
                     bar.updateLayout(box);
-                    bar.getViewElements(factory);
+                    bar.getViewElements(viewRoot, factory);
                     rect = factory.log.rect[0];
 
                     same(rect.style.stroke, bar.options.border.color);
@@ -1061,7 +1074,7 @@
                     bar.options.border.width = 1;
                     factory = new ViewFactoryStub();
                     bar.updateLayout(box);
-                    bar.getViewElements(factory);
+                    bar.getViewElements(viewRoot, factory);
                     rect = factory.log.rect[0];
 
                     same(rect.style.strokeWidth, bar.options.border.width);
