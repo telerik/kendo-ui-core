@@ -383,13 +383,18 @@
 
             if (!that._rowHeight) {
                 that._rowHeight = rowHeight = that.table.outerHeight() / that.table[0].rows.length;
+                that._sum = rowHeight;
+                that._measures = 1;
+
                 totalHeight = Math.round(that.dataSource.total() * rowHeight);
             }
 
             var currentRowHeight = that.table.outerHeight() / that.table[0].rows.length;
 
             if (rowHeight !== currentRowHeight) {
-                that._rowHeight = rowHeight = (currentRowHeight + rowHeight) / 2;
+                that._measures ++;
+                that._sum += currentRowHeight;
+                that._rowHeight = that._sum / that._measures;
             }
 
             var currentTotalHeight = Math.round(that.dataSource.total() * rowHeight);
@@ -672,9 +677,9 @@
                 $($.grep(cells, function(item, index) { return length > index } )).remove();
             }
         },
-        _firstDataItem: function(data, grouped) {            
+        _firstDataItem: function(data, grouped) {
             if(data && grouped) {
-                if(data.hasSubgroups) {                    
+                if(data.hasSubgroups) {
                     data = this._firstDataItem(data.items[0], grouped);
                 } else {
                     data = data.items[0];
@@ -692,7 +697,7 @@
                 placeholder,
                 groups = (that.dataSource.group() || []).length,
                 colspan = groups + that.columns.length;
-                
+
             if (!that.columns.length) {
                 that._autoColumns(that._firstDataItem(data[0], groups));
             }
