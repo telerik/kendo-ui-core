@@ -11,6 +11,8 @@ var parser = require("./uglify-js").parser;
 var examples = require("./build-examples");
 var spawn = require('child_process').spawn;
 
+var stat = fs.statSync("./");
+var RELEASE = "release";
 var VERSION = "1.0.0"; //build version upon date
 var PATH = "release/" + VERSION;
 var JS = PATH + "/js";
@@ -46,10 +48,21 @@ var scripts = [
     "kendo.splitter.js",
     "kendo.upload.js",
     "kendo.window.js"
-]
+];
+
+function mkdir(newDir) {
+    try {
+        fs.statSync(newDir)
+    } catch(e) {
+        fs.mkdirSync(newDir, stat.mode);
+    }
+}
 
 function processScripts() {
-    //create folders if not exist!!!
+    mkdir(PATH, stat.mode);
+    mkdir(JS, stat.mode);
+    mkdir(SRC, stat.mode);
+
 
     var all = "";
     scripts.forEach(function(file, key) {
@@ -95,6 +108,9 @@ function processScripts() {
             console.log("end processing scritps...");
     });
 }
+
+mkdir("release");
+
 //scripts
 console.log("\r\nstart processing scritps...");
 processScripts();
@@ -106,7 +122,7 @@ wrench.copyDirSyncRecursive("styles", PATH + "/styles");
 examples.build(PATH + "/examples");
 
 //archive everything
-var zip = spawn("zip", ["-r", PATH + "/kendo." + VERSION + ".zip", PATH]);
+var zip = spawn("zip", ["-r", "release/kendo." + VERSION + ".zip", PATH]);
 
 zip.stdout.on('data', function (data) {
   sys.print('stdout: ' + data);
@@ -118,12 +134,12 @@ zip.stderr.on('data', function (data) {
 
 zip.on('exit', function (code) {
     console.log('child process exited with code ' + code);
-    //console.log("delete folder: " + PATH);
-    //wrench.rmdirRecursive(PATH, function(error) {
-    //    if (error) {
-    //        console.log("could not delete directory : " + PATH);
-    //    }
-    //});
+    console.log("delete folder: " + PATH);
+    wrench.rmdirRecursive(PATH, function(error) {
+        if (error) {
+            console.log("could not delete directory : " + PATH);
+        }
+    });
 });
 
 //  res.writeHead(200, {'Content-Type': 'text/plain'});
