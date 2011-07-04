@@ -190,6 +190,121 @@
 
                 equals(treeview.data("kendoTreeView").findByText("foo")[0], node[0]);
             });
+
+            test("append(nodeData, root) appends new node to empty parent", function() {
+                var treeview = createTreeView({
+                        dataSource: [
+                            { text: "foo" }
+                        ]
+                    }),
+                    treeviewObject = treeview.data("kendoTreeView"),
+                    root = treeview.find(".t-item:first");
+
+                var appendedNode = treeviewObject.append({ text: "bar" }, root);
+
+                equals(root.find(".t-group").length, 1);
+                equals(root.find(".t-group").css("display"), "block");
+                equals(root.find(".t-item").length, 1);
+                equals(appendedNode[0], root.find(".t-item")[0]);
+                equals(treeviewObject.text(appendedNode), "bar");
+                ok(appendedNode.find(">div").hasClass("t-bot"));
+                ok(appendedNode.hasClass("t-last"));
+                //equals(root.find(">div>.t-minus").length, 1);
+            });
+
+            test("append(nodeData, root) appends new node to parent with existing group", function() {
+                var treeview = createTreeView({
+                        dataSource: [
+                            { text: "foo", expanded: true, items: [
+                                { text: "bar" }
+                            ] }
+                        ]
+                    }),
+                    treeviewObject = treeview.data("kendoTreeView"),
+                    root = treeview.find(".t-item:first");
+
+                var appendedNode = treeviewObject.append({ text: "bar" }, root);
+
+                equals(root.find(".t-group").length, 1);
+                equals(root.find(".t-group").css("display"), "block");
+                equals(root.find(".t-item").length, 2);
+                equals(appendedNode[0], root.find(".t-item:last")[0]);
+                ok(!appendedNode.prev(".t-item").hasClass("t-last"));
+                equals(appendedNode.find(">div.t-bot").length, 1);
+            });
+
+            test("append(nodeData) appends new node to root", function() {
+                var treeview = createTreeView({
+                        dataSource: [
+                            { text: "foo", expanded: true }
+                        ]
+                    }),
+                    treeviewObject = treeview.data("kendoTreeView"),
+                    rootGroup = treeview.find(".t-group");
+
+                var appendedNode = treeviewObject.append({ text: "bar" });
+
+                equals(rootGroup.length, 1);
+                equals(rootGroup.find("> .t-item").length, 2);
+                ok(rootGroup.find("> .t-item").hasClass("t-first"));
+            });
+
+            test("insertBefore(nodeData, element) inserts new node before element", function() {
+                var treeview = createTreeView({
+                        dataSource: [
+                            { text: "foo", expanded: true },
+                            { text: "baz", expanded: true }
+                        ]
+                    }),
+                    treeviewObject = treeview.data("kendoTreeView"),
+                    rootItem = treeview.find(".t-item:last"),
+                    rootGroup = treeview.find(".t-group");
+
+                var insertedNode = treeviewObject.insertBefore({ text: "bar" }, rootItem);
+
+                equals(rootGroup.find("> .t-item").length, 3);
+                equals(rootGroup.find("> .t-item:contains('bar')").index(), 1);
+                equals(insertedNode[0], rootGroup.find("> .t-item")[1]);
+            });
+
+            test("insertBefore(nodeData, element) updates item classes", function() {
+                var treeview = createTreeView({
+                        dataSource: [
+                            { text: "foo" }
+                        ]
+                    }),
+                    treeviewObject = treeview.data("kendoTreeView"),
+                    rootItem = treeview.find(".t-item");
+
+                var insertedNode = treeviewObject.insertBefore({ text: "bar" }, rootItem);
+
+                ok(insertedNode.hasClass("t-first"));
+                ok(!rootItem.hasClass("t-first"));
+                ok(rootItem.hasClass("t-last"));
+                ok(!rootItem.find(">div").hasClass("t-top"));
+                ok(rootItem.find(">div").hasClass("t-bot"));
+            });
+
+            test("remove(node) removes nodes", function() {
+                var treeview = createTreeView({
+                        dataSource: [
+                            { text: "foo" },
+                            { text: "bar" }
+                        ]
+                    }),
+                    treeviewObject = treeview.data("kendoTreeView"),
+                    rootItems = treeview.find(".t-item"),
+                    rootGroup = treeview.find(".t-group");
+
+                treeviewObject.remove(rootItems[0]);
+
+                rootItems = treeview.find(".t-item");
+
+                equals(rootItems.length, 1);
+                equals(rootGroup.find(".t-in:contains('bar')").length, 1);
+                equals(rootGroup.find("li.t-first").length, 1);
+                equals(rootGroup.find("div.t-top").length, 1);
+            });
         </script>
 
         <div id="qunit-fixture"> </div>

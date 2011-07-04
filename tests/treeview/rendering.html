@@ -70,6 +70,14 @@
                 ok(wrapper.find("span.status").parent().hasClass("t-in"));
             });
 
+            test("does not nest wrapper elements", function() {
+                var element = treeviewFromHtml("<ul><li><div class='t-bot'><span class='t-in'>text</span></div></li></ul>"),
+                    wrapper = element.find("div:first");
+
+                equals(element.find("div.t-bot").length, 1);
+                equals(element.find("span.t-in").length, 1);
+            });
+
             module("group");
 
             var rendering = new kendo.ui.TreeView.TreeViewRendering();

@@ -20,9 +20,11 @@
         CLICK = "click",
         CHANGE = "change",
         TSTATEHOVER = "t-state-hover",
+        TTREEVIEW = "t-treeview",
         VISIBLE = ":visible",
         NODE = ".t-item",
-        NODECONTENTS = ">.t-group, >.t-content, >.t-animation-container>.t-group, >.t-animation-container>.t-content";
+        SUBGROUP = ">.t-group,>.t-animation-container>.t-group",
+        NODECONTENTS = SUBGROUP + ",>.t-content,>.t-animation-container>.t-content";
 
     var TreeView = Component.extend({
         init: function (element, options) {
@@ -47,7 +49,7 @@
             that.rendering = new TreeViewRendering(that);
             
             // render treeview if it's not already rendered
-            if (!element.hasClass("t-treeview")) {
+            if (!element.hasClass(TTREEVIEW)) {
                 that._wrapper();
 
                 if (!that.root.length) { // treeview initialized from empty element
@@ -135,13 +137,14 @@
         _wrapper: function() {
             var that = this,
                 element = that.element,
-                wrapper, root;
+                wrapper, root,
+                wrapperClasses = "t-widget t-treeview t-reset";
 
             if (element.is("div")) {
-                wrapper = element.addClass("t-widget t-treeview t-reset");
+                wrapper = element.addClass(wrapperClasses);
                 root = wrapper.children("ul").eq(0);
             } else { // element is ul
-                wrapper = element.wrap('<div class="t-widget t-treeview t-reset" />').parent();
+                wrapper = element.wrap('<div class="' + wrapperClasses + '" />').parent();
                 root = element;
             }
 
@@ -151,7 +154,7 @@
 
         _group: function(item) {
             var that = this,
-                isFirstLevel = item.is(".t-treeview"),
+                isFirstLevel = item.hasClass(TTREEVIEW),
                 group = {
                     isFirstLevel: isFirstLevel,
                     isExpanded: isFirstLevel || item.data("expanded") === true
@@ -185,16 +188,30 @@
                         },
                         wrapper, currentNode, innerWrapper, tmp;
 
-                    qNode.addClass(helpers.wrapperCssClass(group, item));
+                    qNode.removeClass("t-first t-last")
+                         .addClass(helpers.wrapperCssClass(group, item));
 
-                    // render (almost) empty template
-                    wrapper = $(templates.itemWrapper(extend({
-                                toggleButton: qNode.find(">ul").length ? templates.toggleButton : empty,
-                                checkbox: empty, image: empty, sprite: empty, value: empty,
-                                item: item,
-                                group: group
-                            }, helpers)))
-                            .prependTo(node);
+                    wrapper = qNode.find(">.t-top,>.t-mid,>.t-bot");
+
+                    if (!wrapper.length) {
+                        // create new wrapping div
+                        wrapper = $(templates.itemWrapper(extend({
+                                    toggleButton: qNode.find(">ul").length ? templates.toggleButton : empty,
+                                    checkbox: empty, image: empty, sprite: empty, value: empty,
+                                    item: item,
+                                    group: group
+                                }, helpers)))
+                                .prependTo(node);
+                    } else {
+                        // reset cssClass
+                        wrapper.removeClass("t-top t-mid t-bot").addClass(helpers.cssClass(group, item));
+
+                        if (qNode.find(NODECONTENTS).length) {
+                            // reset toggle buttons
+                            wrapper.find("> .t-icon").remove().end()
+                                .prepend(templates.toggleButton(extend({ item: item }, helpers)));
+                        }
+                    }
 
                     // move all non-group content in the t-in container
                     currentNode = wrapper[0].nextSibling;
@@ -206,6 +223,7 @@
                         innerWrapper.appendChild(tmp);
                     }
 
+                    // iterate over child items
                     that._group(qNode);
                 });
         },
@@ -291,7 +309,8 @@
                 hasCollapseAnimation = collapse && 'effects' in collapse;
 
             if (!isExpanding) {
-                animation = hasCollapseAnimation ? collapse : extend({ reverse: true }, animation, { show: false, hide: true });
+                animation = hasCollapseAnimation ? collapse
+                                    : extend({ reverse: true }, animation, { show: false, hide: true });
             }
 
             if (contents.children().length > 0) {
@@ -315,6 +334,73 @@
 
         value: function (node) {
             return $(node).closest(NODE).find(">div>:input[name='value']").val() || this.text(node);
+        },
+
+        insertBefore: function (nodeData, referenceNode) {
+            var that = this,
+                group = referenceNode.parent(),
+                updatedGroupLength = group.children().length + 1,
+                groupOptions = {
+                    isFirstLevel: group.parent().hasClass(TTREEVIEW),
+                    length: updatedGroupLength
+                },
+                result = $(that.rendering.renderItem({
+                    group: groupOptions,
+                    item: extend({
+                        index: referenceNode.index()
+                    }, nodeData)
+                })).insertBefore(referenceNode);
+
+            that._items(group, groupOptions);
+
+            return result;
+        },
+
+        append: function (nodeData, parentNode) {
+            parentNode = parentNode || this.element;
+
+            var that = this,
+                group = parentNode.find(SUBGROUP),
+                result,
+                updatedGroupLength = group.children().length + 1,
+                groupOptions = {
+                    isFirstLevel: group.parent().hasClass(TTREEVIEW),
+                    isExpanded: true,
+                    length: updatedGroupLength
+                };
+
+            parentNode.data("expanded", true);
+
+            if (!group.length) {
+                group = $(that.rendering.renderGroup({
+                    group: groupOptions
+                })).appendTo(parentNode);
+            }
+
+            result = $(that.rendering.renderItem({
+                group: groupOptions,
+                item: extend({
+                    index: updatedGroupLength - 1
+                }, nodeData)
+            })).appendTo(group);
+
+            that._items(group, groupOptions);
+
+            return result;
+        },
+
+        remove: function (node) {
+            node = $(node);
+
+            var group = node.parent();
+
+            node.remove();
+
+            this._items(group, {
+                isFirstLevel: group.parent().hasClass(TTREEVIEW),
+                isExpanded: true,
+                length: group.children().length
+            });
         },
 
         findByText: function (text) {

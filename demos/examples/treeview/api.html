@@ -13,7 +13,7 @@
         <!-- css -->
         <link href="../styles/examples.css" rel="stylesheet"/>
         <link href="../../../styles/kendo.common.css" rel="stylesheet"/>
-        <link href="../../../styles/kendo.blueopal.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.web20.css" rel="stylesheet"/>
         <!-- css -->
     </head>
     <body>
@@ -27,23 +27,32 @@
                 <label>Node text: <input id="node" type="text" /></label><br>
                 <button class="t-button" id="selectNode">Select node</button><br>
                 <button class="t-button" id="disableNode">Disable node</button><br>
+                <button class="t-button" id="removeNode">Remove node</button><br>
+                <button class="t-button" id="appendNode">Append node</button><br>
             </div>
 
             <script>
                 $(".configuration")
                     .delegate(".t-button", "click", function(e) {
+                        e.preventDefault();
 
                         var item = treeview.findByText($("#node").val());
                         
-                        e.preventDefault();
-
                         switch (this.id) {
                             case "selectNode":
                                 treeview.select(item);
                             break;
 
+                            case "removeNode":
+                                treeview.remove(item);
+                            break;
+
                             case "disableNode":
                                 treeview.enable(item, false);
+                            break;
+
+                            case "appendNode":
+                                treeview.append({ text: "new node" }, item);
                             break;
                         }
                     });
