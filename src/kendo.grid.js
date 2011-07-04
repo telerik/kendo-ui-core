@@ -672,6 +672,16 @@
                 $($.grep(cells, function(item, index) { return length > index } )).remove();
             }
         },
+        _firstDataItem: function(data, grouped) {            
+            if(data && grouped) {
+                if(data.hasSubgroups) {                    
+                    data = this._firstDataItem(data.items[0], grouped);
+                } else {
+                    data = data.items[0];
+                }
+            }
+            return data;
+        },
         refresh: function() {
             var that = this,
                 length,
@@ -682,9 +692,9 @@
                 placeholder,
                 groups = (that.dataSource.group() || []).length,
                 colspan = groups + that.columns.length;
-
+                
             if (!that.columns.length) {
-                that._autoColumns(data[0]);
+                that._autoColumns(that._firstDataItem(data[0], groups));
             }
 
             that._group = groups > 0 || that._group;

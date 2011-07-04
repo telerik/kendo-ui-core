@@ -272,6 +272,19 @@
                 equal(grid.thead.find("th").length, 2);
                 equal(grid.wrapper.find(".t-group-cell").length, 0);                
             });
+
+            test("columns are retrieved from grouped dataSource", function() {
+                var dataSource = new DataSource({
+                    data: [{foo: "foo", bar: "bar"}, {foo: "foo1", bar: "baz"}],                    
+                    group: [{field: "foo"}, {field: "bar"}]
+                }),
+                grid = new Grid($("div"), { dataSource: dataSource });
+                
+                var columns = grid.columns;
+                equal(columns.length, 2);
+                equal(columns[0].field, "foo");
+                equal(columns[1].field, "bar");
+            })
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
