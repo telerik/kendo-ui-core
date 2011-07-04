@@ -8,7 +8,7 @@
         <script src="../../../src/jquery.js"></script>
         <script src="../../../src/kendo.core.js"></script>
         <script src="../../../src/kendo.fx.js"></script>
-        <script src="../../../src/kendo.tabstrip.js"></script>
+        <script src="../../../src/kendo.panelbar.js"></script>
         <!-- script -->
         <!-- css -->
         <link href="../styles/examples.css" rel="stylesheet"/>
@@ -24,6 +24,7 @@
         <!-- description -->
         <div id="example">
             <div class="configuration">
+                <span class="configTitle">API Functions</span>
                 <button class="selectItem t-button">Select</button><input type="text" /><br>
                 <button class="toggleItem t-button">Enable/Disable</button><input type="text" /><br>
                 <button class="triggerItem t-button">Expand/Collapse</button><input type="text" /><br>
@@ -77,35 +78,36 @@
                 </li>
             </ul>
             <script type="text/javascript">
-                $(".configuration > button").click(function (e) {
-                    var item;
-                    
-                    switch (e.target.className.split(" ")[0]) {
-                        case "selectItem":
-                                panelBar.select(panelBar.element.children("li").eq($(e.target).next()[0].value));
-                            break;
-                        case "toggleItem":
-                                item = panelBar.element.children("li").eq($(e.target).next()[0].value);
 
-                                if (item.hasClass("t-state-disabled"))
-                                    panelBar.enable(item);
-                                else
-                                    panelBar.disable(item);
-                            break;
-                        case "triggerItem":
-                                item = panelBar.element.children("li").eq($(e.target).next()[0].value);
+                var getItem = function (target) {
+                    var itemIndex = $(target).next()[0].value;
 
-                                if (item.hasClass("t-state-active"))
-                                    panelBar.collapse(item);
-                                else
-                                    panelBar.expand(item);
-                            break;
-                    }
+                    return panelBar.element.children("li").eq(itemIndex);
+                };
 
-                    return false;
+                $(".selectItem").click(function (e) {
+                    panelBar.select(getItem(e.target));
                 });
 
-                var panelBar = $("#PanelBar1").kendoPanelBar().css({ width: 500 }).data("kendoPanelBar");
+                $(".toggleItem").click( function (e) {
+                    var item = getItem(e.target);
+
+                    if (item.hasClass("t-state-disabled"))
+                        panelBar.enable(item);
+                    else
+                        panelBar.disable(item);
+                });
+
+                $(".triggerItem").click( function (e) {
+                    var item = getItem(e.target);
+
+                    if (item.hasClass("t-state-active"))
+                        panelBar.collapse(item);
+                    else
+                        panelBar.expand(item);
+                });
+
+                var panelBar = $("#PanelBar1").kendoPanelBar().css({ marginRight: "220px" }).data("kendoPanelBar");
             </script>
         </div>
         <!-- tools -->

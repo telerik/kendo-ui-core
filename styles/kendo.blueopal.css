@@ -239,10 +239,11 @@
     width: 100%;
     border-top: 1px solid #FFF;
     opacity: .7;
+    box-sizing: content-box;
     -webkit-margin-top-collapse: separate;
 }
 
-.t-button::-moz-focus-inner
+.t-button::-moz-focus-inner /* Remove phantom button padding in FF */
 {
     padding: 0;
     border: none;
