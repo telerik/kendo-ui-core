@@ -306,13 +306,6 @@
                 lastRowIndex = firstRowIndex + Math.floor(height / rowHeight),
                 prefetchAt = 0.33;
 
-            console.log(kendo.stringify({
-                skip: skip,
-                take: take,
-                first: firstRowIndex,
-                last: lastRowIndex
-                }));
-
             if (firstRowIndex < skip) {
                 skip = Math.max(0, lastRowIndex - take);
 
@@ -365,10 +358,8 @@
                 return;
             }
             if (firstRowIndex < (skip + take * prefetchAt) && firstRowIndex > take * prefetchAt) {
-                console.log("prefetching prev", skip - take + (lastRowIndex - firstRowIndex) - 1, take);
                 dataSource.prefetch(Math.max(skip - take + (lastRowIndex - firstRowIndex) - 1, 0), take);
             } else if (lastRowIndex > skip + take * prefetchAt) {
-                console.log("prefetching next",skip + take - (lastRowIndex - firstRowIndex) + 1, take);
                 dataSource.prefetch(skip + take - (lastRowIndex - firstRowIndex) + 1, take);
             }
             that._scrollTop = scrollTop - (skip * rowHeight);
@@ -377,7 +368,7 @@
 
         _dataBound: function() {
             var that = this,
-                rowHeight,
+                rowHeight = that._rowHeight,
                 totalHeight,
                 html = "",
                 idx,
@@ -390,23 +381,32 @@
                 that._mask = null;
             }
 
-            that._rowHeight = rowHeight = that.table[0].rows[0].offsetHeight;
+            if (!that._rowHeight) {
+                that._rowHeight = rowHeight = that.table.outerHeight() / that.table[0].rows.length;
+                totalHeight = Math.round(that.dataSource.total() * rowHeight);
+            }
 
-            totalHeight = that.dataSource.total() * rowHeight;
+            var currentRowHeight = that.table.outerHeight() / that.table[0].rows.length;
 
-            for (idx = 0; idx < Math.floor(totalHeight / maxHeight); idx++) {
+            if (rowHeight !== currentRowHeight) {
+                that._rowHeight = rowHeight = (currentRowHeight + rowHeight) / 2;
+            }
+
+            var currentTotalHeight = Math.round(that.dataSource.total() * rowHeight);
+            console.log(currentTotalHeight, that.verticalScrollbar[0].scrollTop);
+
+            for (idx = 0; idx < Math.floor(currentTotalHeight / maxHeight); idx++) {
                 html += '<div style="width:1px;height:' + maxHeight + 'px"></div>';
             }
 
-            if (totalHeight % maxHeight) {
-                html += '<div style="width:1px;height:' + (totalHeight % maxHeight) + 'px"></div>';
+            if (currentTotalHeight % maxHeight) {
+                html += '<div style="width:1px;height:' + (currentTotalHeight % maxHeight) + 'px"></div>';
             }
 
             that.verticalScrollbar.html(html);
 
             that.tableWrap.scrollTop(that._scrollTop);
         },
-
         _dataSource: function() {
             var that = this,
                 options = that.options,

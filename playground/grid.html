@@ -12,6 +12,8 @@
         <script src="../src/kendo.query.js"></script>
         <script src="../src/kendo.pager.js"></script>
         <script src="../src/kendo.sortable.js"></script>
+        <script src="../src/kendo.draganddrop.js"></script>
+        <script src="../src/kendo.groupable.js"></script>
         <script src="../src/kendo.datasource.js"></script>
         <script src="../src/kendo.grid.js"></script>
 
@@ -104,12 +106,20 @@
 
 
                 $("#table1").kendoGrid({
-                    dataSource: remoteDataSource,
+                    dataSource: {
+                        data: $.map(new Array(1000), function(value, index) {
+                            return {
+                                Group: index % 10,
+                                OrderID: index,
+                                CustomerID: "Contact " + index
+                            };
+                        }),
+                        pageSize: 20
+                    },
                     columns: [ {
-                            title: "OrderID",
-                            template: "<%= OrderID - 10248 %>",
-                        }, "CustomerID"
-                    ],
+                        title: "Foo",
+                        template: "<div style='line-height: <%= [50, 60, 70][OrderID % 3] %>px'><%= Group %></div>"
+                    }, "OrderID", "CustomerID"],
                     scrollable: {
                         virtual: true
                     },
