@@ -28,7 +28,8 @@
                 <input id="toggle" name="animation" type="radio" /><label for="toggle">toggle animation</label><br />
                 <input id="slide" name="animation" type="radio" checked="checked" /><label for="slide">slide animation</label><br />
                 <input id="expand" name="animation" type="radio" checked="checked" /><label for="expand">expand animation</label><br />
-                <input id="opacity" type="checkbox" checked="checked" /><label for="opacity">animate opacity</label>
+                <input id="opacity" type="checkbox" checked="checked" /><label for="opacity">animate opacity</label><br />
+                <input id="delay" name="animation" type="text" value="100" /><label for="delay">open/close delay</label><br />
             </div>
             <ul id="Menu1">
                 <li>
@@ -90,7 +91,7 @@
                 };
 
                 var initMenu = function () {
-                    $("#Menu1").kendoMenu({ animation: { open: { effects: getEffects() } } }).css({ marginRight: "220px" });
+                    $("#Menu1").kendoMenu({ animation: { open: { effects: getEffects() } }, hoverDelay: $("#delay")[0].value }).css({ marginRight: "220px" });
                 };
 
                 $(".configuration input").change( function() {
