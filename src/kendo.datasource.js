@@ -238,7 +238,7 @@
 
                 _sort: options.sort,
                 _filter: options.filter,
-                _group: options.group,
+                _group: Query.expandGroup(options.group),
                 _aggregates: options.aggregates
             });
 
