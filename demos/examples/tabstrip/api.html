@@ -20,7 +20,7 @@
         <!-- nav -->
         <!-- nav -->
         <!-- description -->
-        <div class="description">You can use the TabStrip client API to manipulate the tabs.</div>
+        <div class="description">You can use the TabStrip API to manipulate the tabs.</div>
         <!-- description -->
         <div id="example">
             <div class="configuration">
@@ -64,22 +64,23 @@
                 </div>
             </div>
             <script type="text/javascript">
-                $(".configuration > button").click(function (e) {
-                    switch (e.target.className.split(" ")[0]) {
-                        case "selectTab":
-                                tabStrip.select(tabStrip.tabGroup.children("li").eq($(e.target).next()[0].value));
-                            break;
-                        case "toggleTab":
-                                var tab = tabStrip.tabGroup.children("li").eq($(e.target).next()[0].value);
+                var getItem = function (target) {
+                    var itemIndex = $(target).next()[0].value;
 
-                                if (tab.hasClass("t-state-disabled"))
-                                    tabStrip.enable(tab);
-                                else
-                                    tabStrip.disable(tab);
-                            break;
-                    }
+                    return tabStrip.tabGroup.children("li").eq(itemIndex);
+                };
 
-                    return false;
+                $(".selectTab").click(function(e) {
+                    tabStrip.select(getItem(e.target));
+                });
+
+                $(".toggleTab").click(function(e) {
+                    var tab = getItem(e.target);
+
+                    if (tab.hasClass("t-state-disabled"))
+                        tabStrip.enable(tab);
+                    else
+                        tabStrip.disable(tab);
                 });
 
                 var tabStrip = $("#TabStrip1").kendoTabStrip().css({ marginRight: "220px" }).data("kendoTabStrip");

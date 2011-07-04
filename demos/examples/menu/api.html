@@ -3,12 +3,13 @@
     <head>
         <!-- meta -->
         <!-- meta -->
-        <title>TabStrip API</title>
+        <title>Menu API</title>
         <!-- script -->
         <script src="../../../src/jquery.js"></script>
         <script src="../../../src/kendo.core.js"></script>
         <script src="../../../src/kendo.fx.js"></script>
-        <script src="../../../src/kendo.tabstrip.js"></script>
+        <script src="../../../src/kendo.popup.js"></script>
+        <script src="../../../src/kendo.menu.js"></script>
         <!-- script -->
         <!-- css -->
         <link href="../styles/examples.css" rel="stylesheet"/>
@@ -20,69 +21,88 @@
         <!-- nav -->
         <!-- nav -->
         <!-- description -->
-        <div class="description">You can use the TabStrip client API to manipulate the tabs.</div>
+        <div class="description">You can use the Menu API to manipulate the menu items.</div>
         <!-- description -->
         <div id="example">
             <div class="configuration">
                 <span class="configTitle">API Functions</span>
-                <button class="selectTab">Select Tab</button><input type="text" /><br>
-                <button class="toggleTab">Enable/Disable Tab</button><input type="text" /><br>
+                <button class="toggleItem t-button">Enable/Disable</button><input type="text" /><br>
+                <button class="triggerItem t-button">Open/Close</button><input type="text" /><br>
             </div>
 
-            <div id="TabStrip1">
-                <ul>
-                    <li class="t-state-active">
-                        First Tab
-                    </li>
-                    <li>
-                        Second Tab
-                    </li>
-                    <li>
-                        Third Tab
-                    </li>
-                    <li>
-                        Fourth Tab
-                    </li>
-                    <li>
-                        Fifth Tab
-                    </li>
-                </ul>
-                <div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer felis libero, lobortis ac rutrum quis, varius a velit. Donec lacus erat, cursus sed porta quis, adipiscing et ligula. Duis volutpat, sem pharetra accumsan pharetra, mi ligula cursus felis, ac aliquet leo diam eget risus. Integer facilisis, justo cursus venenatis vehicula, massa nisl tempor sem, in ullamcorper neque mauris in orci. Proin sagittis elementum odio, eu vestibulum arcu rhoncus eu. Pellentesque lorem arcu, tempus at dapibus nec, tincidunt a ante. Cras eget arcu id augue sollicitudin fermentum. Quisque ullamcorper ultrices ante, ut mollis neque tincidunt nec. Aenean sollicitudin lobortis nibh, vitae sagittis justo placerat et.</p>
-                </div>
-                <div>
-                    <p>Ut orci ligula, varius ac consequat in, rhoncus in dolor. Mauris pulvinar molestie accumsan. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean velit ligula, pharetra quis aliquam sed, scelerisque sed sapien. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam dui mi, vulputate vitae pulvinar ac, condimentum sed eros. Donec varius tristique erat in consequat. Pellentesque a blandit nulla. Aenean mattis eros vel magna laoreet ut rutrum turpis ultrices. Sed feugiat, urna id vulputate vulputate, dui nibh fringilla erat, at molestie diam arcu sed velit. Sed imperdiet suscipit dolor, sollicitudin feugiat orci ullamcorper cursus.</p>
-                </div>
-                <div>
-                    <p>Aliquam at nisl quis est adipiscing bibendum. Nam malesuada eros facilisis arcu vulputate at aliquam nunc tempor. In commodo scelerisque enim, eget sodales lorem condimentum rutrum. Phasellus sem metus, ultricies at commodo in, tristique non est. Morbi vel mauris eget mauris commodo elementum. Nam eget libero lacus, ut sollicitudin ante. Nam odio quam, suscipit a fringilla eget, dignissim nec arcu. Donec tristique arcu ut sapien elementum pellentesque. Donec varius arcu in dolor elementum dignissim. Etiam ac consequat metus. Praesent semper diam id mi dictum sagittis. Etiam nulla metus, convallis sit amet rutrum non, cursus ornare ligula. Integer turpis leo, vulputate eget pulvinar in, condimentum sit amet metus.</p>
-                </div>
-                <div>
-                    <p>Maecenas vitae eros vel enim molestie cursus. Proin ut lacinia ipsum. Nam at elit arcu, at porttitor ipsum. Praesent id viverra lorem. Nam lacinia elementum fermentum. Nulla facilisi. Nulla bibendum erat sed sem interdum suscipit. Vestibulum eget molestie leo. Aliquam erat volutpat. Ut sed nulla libero. Suspendisse id euismod quam. Aliquam interdum turpis vitae purus consectetur in pulvinar libero accumsan. In id augue dui, ac volutpat ante. Suspendisse purus est, ullamcorper id bibendum sed, placerat id leo. Cras ipsum augue, adipiscing ac fringilla ac, posuere tempor purus. Ut at rhoncus ipsum. Sed sodales aliquam dolor, non dictum ipsum facilisis at. Integer non orci arcu, auctor aliquam purus.</p>
-                </div>
-                <div>
-                    <p>Fusce nec mauris enim, non pharetra neque. Etiam elementum nunc ut velit fermentum sed porta eros dignissim. Duis at nisl eros. Integer arcu nisl, accumsan non molestie at, elementum nec odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque arcu odio, aliquam vel viverra ac, varius at sapien. Nullam elementum nulla non libero interdum vestibulum at in lacus. Curabitur ac magna ac lacus dapibus convallis non at turpis. Curabitur risus diam, adipiscing vel bibendum non, luctus ut lectus. Donec erat felis, volutpat quis tincidunt eget, condimentum at enim. Cras condimentum, elit vitae facilisis fermentum, quam justo pulvinar lacus, in semper nunc lorem vel risus. Nunc quis mauris orci. Sed ultricies sagittis aliquam. </p>
-                </div>
-            </div>
+            <ul id="Menu1">
+                <li>
+                    First Item
+                    <ul>
+                        <li>Sub Item 1</li>
+                        <li>Sub Item 2</li>
+                        <li>Sub Item 3</li>
+                        <li>Sub Item 4</li>
+                    </ul>
+                </li>
+                <li>
+                    Second Item
+                    <ul>
+                        <li>Sub Item 1</li>
+                        <li>Sub Item 2</li>
+                        <li>Sub Item 3</li>
+                        <li>Sub Item 4</li>
+                    </ul>
+                </li>
+                <li>
+                    Third Item
+                    <ul>
+                        <li>Sub Item 1</li>
+                        <li>Sub Item 2</li>
+                        <li>Sub Item 3</li>
+                        <li>Sub Item 4</li>
+                    </ul>
+                </li>
+                <li>
+                    Fourth Item
+                    <ul>
+                        <li>Sub Item 1</li>
+                        <li>Sub Item 2</li>
+                        <li>Sub Item 3</li>
+                        <li>Sub Item 4</li>
+                    </ul>
+                </li>
+                <li>
+                    Fifth Item
+                    <ul>
+                        <li>Sub Item 1</li>
+                        <li>Sub Item 2</li>
+                        <li>Sub Item 3</li>
+                        <li>Sub Item 4</li>
+                    </ul>
+                </li>
+            </ul>
             <script type="text/javascript">
-                $(".configuration > button").click(function (e) {
-                    switch (e.target.className) {
-                        case "selectTab":
-                                tabStrip.select(tabStrip.tabGroup.children("li").eq($(e.target).next()[0].value));
-                            break;
-                        case "toggleTab":
-                                var tab = tabStrip.tabGroup.children("li").eq($(e.target).next()[0].value);
+                var getItem = function (target) {
+                    var itemIndex = $(target).next()[0].value;
 
-                                if (tab.hasClass("t-state-disabled"))
-                                    tabStrip.enable(tab);
-                                else
-                                    tabStrip.disable(tab);
-                            break;
-                    }
+                    return menu.element.children("li").eq(itemIndex);
+                };
 
-                    return false;
+                $(".toggleItem").click( function (e) {
+                    var item = getItem(e.target);
+
+                    if (item.hasClass("t-state-disabled"))
+                        menu.enable(item);
+                    else
+                        menu.disable(item);
                 });
 
-                var tabStrip = $("#TabStrip1").kendoTabStrip().css({ marginRight: "220px" }).data("kendoTabStrip");
+                $(".triggerItem").click( function (e) {
+                    var item = getItem(e.target);
+
+                    if (item.hasClass("t-state-active"))
+                        menu.close(item);
+                    else
+                        menu.open(item);
+                });
+
+                var menu = $("#Menu1").kendoMenu().css({ marginRight: "220px" }).data("kendoMenu");
             </script>
         </div>
         <!-- tools -->
