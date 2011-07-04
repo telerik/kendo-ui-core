@@ -306,13 +306,6 @@
                 lastRowIndex = firstRowIndex + Math.floor(height / rowHeight),
                 prefetchAt = 0.33;
 
-            console.log(kendo.stringify({
-                skip: skip,
-                take: take,
-                first: firstRowIndex,
-                last: lastRowIndex
-                }));
-
             if (firstRowIndex < skip) {
                 skip = Math.max(0, lastRowIndex - take);
 
@@ -365,10 +358,8 @@
                 return;
             }
             if (firstRowIndex < (skip + take * prefetchAt) && firstRowIndex > take * prefetchAt) {
-                console.log("prefetching prev", skip - take + (lastRowIndex - firstRowIndex) - 1, take);
                 dataSource.prefetch(Math.max(skip - take + (lastRowIndex - firstRowIndex) - 1, 0), take);
             } else if (lastRowIndex > skip + take * prefetchAt) {
-                console.log("prefetching next",skip + take - (lastRowIndex - firstRowIndex) + 1, take);
                 dataSource.prefetch(skip + take - (lastRowIndex - firstRowIndex) + 1, take);
             }
             that._scrollTop = scrollTop - (skip * rowHeight);
@@ -377,7 +368,7 @@
 
         _dataBound: function() {
             var that = this,
-                rowHeight,
+                rowHeight = that._rowHeight,
                 totalHeight,
                 html = "",
                 idx,
@@ -390,23 +381,37 @@
                 that._mask = null;
             }
 
-            that._rowHeight = rowHeight = that.table[0].rows[0].offsetHeight;
+            if (!that._rowHeight) {
+                that._rowHeight = rowHeight = that.table.outerHeight() / that.table[0].rows.length;
+                that._sum = rowHeight;
+                that._measures = 1;
 
-            totalHeight = that.dataSource.total() * rowHeight;
+                totalHeight = Math.round(that.dataSource.total() * rowHeight);
+            }
 
-            for (idx = 0; idx < Math.floor(totalHeight / maxHeight); idx++) {
+            var currentRowHeight = that.table.outerHeight() / that.table[0].rows.length;
+
+            if (rowHeight !== currentRowHeight) {
+                that._measures ++;
+                that._sum += currentRowHeight;
+                that._rowHeight = that._sum / that._measures;
+            }
+
+            var currentTotalHeight = Math.round(that.dataSource.total() * rowHeight);
+            console.log(currentTotalHeight, that.verticalScrollbar[0].scrollTop);
+
+            for (idx = 0; idx < Math.floor(currentTotalHeight / maxHeight); idx++) {
                 html += '<div style="width:1px;height:' + maxHeight + 'px"></div>';
             }
 
-            if (totalHeight % maxHeight) {
-                html += '<div style="width:1px;height:' + (totalHeight % maxHeight) + 'px"></div>';
+            if (currentTotalHeight % maxHeight) {
+                html += '<div style="width:1px;height:' + (currentTotalHeight % maxHeight) + 'px"></div>';
             }
 
             that.verticalScrollbar.html(html);
 
             that.tableWrap.scrollTop(that._scrollTop);
         },
-
         _dataSource: function() {
             var that = this,
                 options = that.options,
@@ -672,9 +677,9 @@
                 $($.grep(cells, function(item, index) { return length > index } )).remove();
             }
         },
-        _firstDataItem: function(data, grouped) {            
+        _firstDataItem: function(data, grouped) {
             if(data && grouped) {
-                if(data.hasSubgroups) {                    
+                if(data.hasSubgroups) {
                     data = this._firstDataItem(data.items[0], grouped);
                 } else {
                     data = data.items[0];
@@ -692,7 +697,7 @@
                 placeholder,
                 groups = (that.dataSource.group() || []).length,
                 colspan = groups + that.columns.length;
-                
+
             if (!that.columns.length) {
                 that._autoColumns(that._firstDataItem(data[0], groups));
             }
