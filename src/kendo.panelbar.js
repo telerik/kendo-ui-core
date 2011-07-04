@@ -111,12 +111,20 @@
         },
 
         select: function (element) {
+            var that = this;
+
             $(element).each(function (index, item) {
                 item = $(item);
-                if (item.is(disabledClass + ',' + activeClass))
+                var link = item.children(".t-link");
+                
+                if (item.is(disabledClass))
                     return;
 
-                item.trigger("click");
+                $(selectedClass, that.element).removeClass(selectedClass.substr(1));
+                $(highlightedClass, that.element).removeClass(highlightedClass.substr(1));
+
+                link.addClass(selectedClass.substr(1));
+                link.parentsUntil(that.element, '.t-item').filter(':has(.t-header)').addClass(highlightedClass.substr(1));
             });
         },
 
@@ -129,7 +137,10 @@
         },
 
         _toggleHover: function(e) {
-            $(e.currentTarget).toggleClass('t-state-hover', e.type == MOUSEENTER);
+            var target = $(e.currentTarget);
+
+            if (!target.parents('li' + disabledClass).length)
+                target.toggleClass('t-state-hover', e.type == MOUSEENTER);
         },
 
         _updateClasses: function() {
@@ -202,6 +213,9 @@
             var that = this,
                 target = $(e.currentTarget),
                 element = that.element;
+
+            if (target.parents('li' + disabledClass).length)
+                return;
 
             if (target.closest('.t-widget')[0] != element[0])
                 return;

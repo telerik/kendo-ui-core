@@ -19,12 +19,11 @@ body
     background-position: 0 -761px;
     background-repeat: repeat-x;
     overflow-y: scroll;
+    *overflow-y: auto;
 }
 
 #header, #footer
 {
-    display: block;
-    width: 960px;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -32,18 +31,22 @@ body
 }
 
 #header {
+    width: 100%;
     margin-top: 110px;
     height: 240px;
 }
 
 #footer {
+    width: 80%;
+    min-width: 960px;
+    max-width: 1260px;
     height: 68px;
     position: absolute;
     bottom: -68px;
     color: #FFF;
     line-height: 26px;
     *left: 50%;
-    *margin-left: -550px;
+    *margin-left: -480px;
 }
 
 #footer p
@@ -71,7 +74,7 @@ body
 
 #nav
 {
-    display: block;
+    display: inline-block;
     float: left;
     width: 190px;
     text-align: left;
@@ -81,10 +84,8 @@ body
 
 #content
 {
-    width: 760px;
-    display: inline-block;
-    *display: inline;
-    zoom: 1;
+    display: block;
+    margin-left: 200px;
 }
 
 #exampleBody
@@ -130,9 +131,12 @@ body
 
 .centerBox
 {
+    width: 80%;
+    min-width: 960px;
+    max-width: 1260px;
+    *width: 960px;
     text-align: left;
     display: inline-block;
-    *width: 960px;
     zoom: 1;
     margin: 0 auto;
 }
@@ -195,6 +199,7 @@ pre.prettyprint
 #exampleHead
 {
     margin-top: 10px;
+    margin-left: 200px;
     height: 24px;
 }
 

@@ -584,10 +584,10 @@ div.t-window-content
 .t-menu:after /* add a clear fix to expand content */
 {
     content: '\A0';
-    clear: both;
     display: block;
-    height: 0;
-}
+    overflow: hidden;
+    width: 100%;
+    height: 0;}
 
 .t-menu .t-item .t-item,
 .t-menu-vertical .t-item
