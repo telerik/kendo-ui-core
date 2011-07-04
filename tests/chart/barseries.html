@@ -14,7 +14,11 @@
         <script type="text/javascript">
             var Chart = kendo.ui.Chart,
                 Box2D = Chart.Box2D,
-                chartBox = new Box2D(0, 0, 800, 600);
+                chartBox = new Box2D(0, 0, 800, 600),
+                plotArea,
+                series,
+                viewRoot,
+                factory;
 
             function BarStub(box) {
                 this.box = box;
@@ -26,11 +30,16 @@
                 }
             };
 
+            function setupBarChart(plotArea, options) {
+                viewRoot = new ViewElementStub();
+                factory = new ViewFactoryStub();
+
+                series = new Chart.BarChart(plotArea, options);
+                series.updateLayout();
+            }
+
             (function() {
-                var series,
-                    plotArea,
-                    viewFactory,
-                    positiveSeries = { data: [1, 2], labels: {} },
+                var positiveSeries = { data: [1, 2], labels: {} },
                     negativeSeries = { data: [-1, -2], labels: {} },
                     VALUE_AXIS_MAX = 2,
                     CATEGORY_AXIS_Y = 2,
@@ -58,19 +67,11 @@
                     }
                 });
 
-                function setupBarChart(options) {
-                    plotArea = new PlotAreaStub();
-                    viewFactory = new ViewFactoryStub();
-
-                    series = new Chart.BarChart(plotArea, options);
-
-                    series.updateLayout();
-                }
-
                 // ------------------------------------------------------------
                 module("Bar Chart / Positive Values", {
                     setup: function() {
-                        setupBarChart({ series: [ positiveSeries ] });
+                        plotArea = new PlotAreaStub();
+                        setupBarChart(plotArea, { series: [ positiveSeries ] });
                     }
                 });
 
@@ -87,7 +88,7 @@
                 });
 
                 test("Reports number of categories", function() {
-                    setupBarChart({series: [ positiveSeries ]});
+                    setupBarChart(plotArea, {series: [ positiveSeries ]});
                     equal(series.categoriesCount(), positiveSeries.data.length);
                 });
 
@@ -124,7 +125,8 @@
                 // ------------------------------------------------------------
                 module("Bar Chart / Negative Values", {
                     setup: function() {
-                        setupBarChart({ series: [ negativeSeries ] });
+                        plotArea = new PlotAreaStub();
+                        setupBarChart(plotArea, { series: [ negativeSeries ] });
                     }
                 });
 
@@ -155,19 +157,21 @@
                 // ------------------------------------------------------------
                 module("Bar Chart / Mixed Values", {
                     setup: function() {
-                        setupBarChart({ series: [ negativeSeries, positiveSeries ] });
+                        plotArea = new PlotAreaStub();
+                        setupBarChart(plotArea, { series: [ negativeSeries, positiveSeries ] });
                     }
                 });
 
                 test("Reports number of categories for two series", function() {
-                    setupBarChart({series: [ positiveSeries, negativeSeries ]});
+                    setupBarChart(plotArea, {series: [ positiveSeries, negativeSeries ]});
                     equal(series.categoriesCount(), positiveSeries.data.length);
                 });
 
                 // ------------------------------------------------------------
                 module("Bar Chart / Mismatching series", {
                     setup: function() {
-                        setupBarChart({
+                        plotArea = new PlotAreaStub();
+                        setupBarChart(plotArea, {
                         series: [ { data: [1, 2, 3] },
                                   positiveSeries
                             ]
@@ -204,7 +208,8 @@
                 // ------------------------------------------------------------
                 module("Bar Chart / Cluster", {
                     setup: function() {
-                        setupBarChart({ series: [ positiveSeries, negativeSeries ] });
+                        plotArea = new PlotAreaStub();
+                        setupBarChart(plotArea, { series: [ positiveSeries, negativeSeries ] });
                     }
                 });
 
@@ -215,7 +220,8 @@
                 // ------------------------------------------------------------
                 module("Bar Chart / Stack / Positive Values", {
                     setup: function() {
-                        setupBarChart({
+                        plotArea = new PlotAreaStub();
+                        setupBarChart(plotArea, {
                             series: [ positiveSeries, positiveSeries ],
                             isStacked: true }
                         );
@@ -249,7 +255,8 @@
                 // ------------------------------------------------------------
                 module("Bar Chart / Stack / Negative Values", {
                     setup: function() {
-                        setupBarChart({
+                        plotArea = new PlotAreaStub();
+                        setupBarChart(plotArea, {
                             series: [ negativeSeries, negativeSeries ],
                             isStacked: true
                         });
@@ -284,7 +291,8 @@
                 // ------------------------------------------------------------
                 module("Bar Chart / Stack / Mixed Values", {
                     setup: function() {
-                        setupBarChart({
+                        plotArea = new PlotAreaStub();
+                        setupBarChart(plotArea, {
                             series: [{
                                 data: [1, -1],
                                 labels: {}
@@ -313,7 +321,8 @@
                 // ------------------------------------------------------------
                 module("Bar Chart / Stack / Mixed Series", {
                     setup: function() {
-                        setupBarChart({
+                        plotArea = new PlotAreaStub();
+                        setupBarChart(plotArea, {
                             series: [ positiveSeries, negativeSeries ],
                             isStacked: true
                         });
@@ -338,10 +347,7 @@
             })();
 
             (function() {
-                var series,
-                    plotArea,
-                    viewFactory,
-                    positiveData = [100, 150],
+                var positiveData = [100, 150],
                     negativeData = [-100, -150],
                     VALUE_AXIS_MAX = 200,
                     CATEGORY_AXIS_Y = 200,
@@ -382,19 +388,11 @@
                     }
                 });
 
-                function setupBarChart(options) {
-                    plotArea = new PlotAreaStub();
-                    viewFactory = new ViewFactoryStub();
-
-                    series = new Chart.BarChart(plotArea, options);
-
-                    series.updateLayout();
-                }
-
                 // ------------------------------------------------------------
                 module("Bar Chart / Labels / Positive Values", {
                     setup: function() {
-                        setupBarChart({ series: [{
+                        plotArea = new PlotAreaStub();
+                        setupBarChart(plotArea, { series: [{
                             data: positiveData,
                             labels: { position: "insideEnd", visible: true }
                         }] });
@@ -410,7 +408,7 @@
                 });
 
                 test("bars labels have insideBase position", function() {
-                    setupBarChart({ series: [{
+                    setupBarChart(plotArea, { series: [{
                         data: positiveData,
                         labels: {
                             position: "insideBase",
@@ -425,7 +423,7 @@
                 });
 
                 test("bars labels have outsideEnd position", function() {
-                    setupBarChart({ series: [{
+                    setupBarChart(plotArea, { series: [{
                         data: positiveData,
                         labels: {
                             position: "outsideEnd",
@@ -440,7 +438,7 @@
                 });
 
                 test("bars labels have center position", function() {
-                    setupBarChart({ series: [{
+                    setupBarChart(plotArea, { series: [{
                         data: positiveData,
                         labels: {
                             position: "center",
@@ -458,7 +456,8 @@
                 // ------------------------------------------------------------
                 module("Bar Chart / Labels / Negative Values", {
                     setup: function() {
-                        setupBarChart({ series: [{
+                        plotArea = new PlotAreaStub();
+                        setupBarChart(plotArea, { series: [{
                             data: negativeData,
                             labels: { position: "insideEnd", visible: true }
                             }] });
@@ -474,7 +473,7 @@
                 });
 
                 test("bars labels have insideBase position", function() {
-                    setupBarChart({ series: [{
+                    setupBarChart(plotArea, { series: [{
                         data: negativeData,
                             labels: {
                             position: "insideBase",
@@ -489,7 +488,7 @@
                 });
 
                 test("bars labels have outsideEnd position", function() {
-                    setupBarChart({ series: [{
+                    setupBarChart(plotArea, { series: [{
                         data: negativeData,
                         labels: {
                             position: "outsideEnd",
@@ -504,7 +503,7 @@
                 });
 
                 test("bars labels have center position", function() {
-                    setupBarChart({ series: [{
+                    setupBarChart(plotArea, { series: [{
                         data: negativeData,
                         labels: {
                             position: "center",
@@ -522,56 +521,56 @@
                 // ------------------------------------------------------------
                 module("Bar Chart / Labels / options", {
                     setup: function() {
-                        factory = new ViewFactoryStub();
+                        plotArea = new PlotAreaStub();
                     }
                 });
 
                 test("bars labels should have red color", function() {
-                    setupBarChart({ series: [{
+                    setupBarChart(plotArea, { series: [{
                         data: [ 100 ],
                         labels: {
                             color: COLOR,
                             visible: true
                         }
                     }] });
-                    series.getViewElements(factory);
+                    series.getViewElements(viewRoot, factory);
                     equal(factory.log.text[0].style.color, COLOR);
                 });
 
                 test("bars labels should have background color", function() {
-                    setupBarChart({ series: [{
+                    setupBarChart(plotArea, { series: [{
                         data: [ 100 ],
                         labels: {
                             background: BACKGROUND,
                             visible: true
                         }
                     }] });
-                    series.getViewElements(factory);
+                    series.getViewElements(viewRoot, factory);
                     equal(factory.log.rect[1].style.fill, BACKGROUND);
                 });
 
                 test("bars labels should have border", function() {
-                    setupBarChart({ series: [{
+                    setupBarChart(plotArea, { series: [{
                         data: [ 100 ],
                         labels: {
                             border: BORDER,
                             visible: true
                         }
                     }] });
-                    series.getViewElements(factory);
+                    series.getViewElements(viewRoot, factory);
                     equal(factory.log.rect[1].style.stroke, BORDER.color);
                     equal(factory.log.rect[1].style.strokeWidth, BORDER.width);
                 });
 
                 test("bars labels should have padding and margin", function() {
-                    setupBarChart({ series: [{
+                    setupBarChart(plotArea, { series: [{
                         data: [ 100 ],
                         labels: {
                             margin: MARGIN,
                             visible: true
                         }
                     }] });
-                    series.getViewElements(factory);
+                    series.getViewElements(viewRoot, factory);
                     var barLabel = series._bars[0].children[0].children[0],
                         paddingBox = barLabel.paddingBox,
                         box = barLabel.box;
@@ -585,10 +584,7 @@
             })();
 
             (function() {
-                var series,
-                    plotArea,
-                    viewFactory,
-                    positiveData = [100, 150],
+                var positiveData = [100, 150],
                     negativeData = [-100, -150],
                     VALUE_AXIS_MAX = 200,
                     CATEGORY_AXIS_X = 200,
@@ -620,19 +616,11 @@
                     }
                 });
 
-                function setupBarChart(options) {
-                    plotArea = new PlotAreaStub();
-                    viewFactory = new ViewFactoryStub();
-
-                    series = new Chart.BarChart(plotArea, options);
-
-                    series.updateLayout();
-                }
-
                 // ------------------------------------------------------------
                 module("Bar Chart / Labels / Positive Values with bar series", {
                     setup: function() {
-                        setupBarChart({ series: [{
+                        factory = new ViewFactoryStub();
+                        setupBarChart(plotArea, { series: [{
                             data: positiveData,
                             labels: {
                                 visible: true
@@ -642,7 +630,7 @@
                 });
 
                 test("bars labels have insideEnd position", function() {
-                    setupBarChart({ series: [{
+                    setupBarChart(plotArea, { series: [{
                         data: positiveData,
                         labels: {
                             visible: true,
@@ -657,7 +645,7 @@
                 });
 
                 test("bars labels have insideBase position", function() {
-                    setupBarChart({ series: [{
+                    setupBarChart(plotArea, { series: [{
                         data: positiveData,
                         labels: {
                             position: "insideBase",
@@ -672,7 +660,7 @@
                 });
 
                 test("bars labels have outsideEnd position", function() {
-                    setupBarChart({ series: [{
+                    setupBarChart(plotArea, { series: [{
                         data: positiveData,
                         labels: {
                             position: "outsideEnd",
@@ -687,7 +675,7 @@
                 });
 
                 test("bars labels have center position", function() {
-                    setupBarChart({ series: [{
+                    setupBarChart(plotArea, { series: [{
                         data: positiveData,
                         labels: {
                             position: "center",
@@ -705,13 +693,14 @@
                 // ------------------------------------------------------------
                 module("Bar Chart / Labels / Negative Values with bar series", {
                     setup: function() {
-                    setupBarChart({ series: [{
-                        data: negativeData,
-                        labels: {
-                            visible: true,
-                            position: "insideEnd"
-                        }
-                    }], isVertical: false });
+                        factory = new ViewFactoryStub();
+                        setupBarChart(plotArea, { series: [{
+                            data: negativeData,
+                            labels: {
+                                visible: true,
+                                position: "insideEnd"
+                            }
+                        }], isVertical: false });
                     }
                 });
 
@@ -724,7 +713,7 @@
                 });
 
                 test("bars labels have insideBase position", function() {
-                    setupBarChart({ series: [{
+                    setupBarChart(plotArea, { series: [{
                         data: negativeData,
                         labels: {
                             position: "insideBase",
@@ -739,7 +728,7 @@
                 });
 
                 test("bars labels have outsideEnd position", function() {
-                    setupBarChart({ series: [{
+                    setupBarChart(plotArea, { series: [{
                         data: negativeData,
                         labels: {
                             position: "outsideEnd",
@@ -754,7 +743,7 @@
                 });
 
                 test("bars labels have center position", function() {
-                    setupBarChart({ series: [{
+                    setupBarChart(plotArea, { series: [{
                         data: negativeData,
                         labels: {
                             position: "center",
@@ -771,10 +760,7 @@
             })();
 
             (function() {
-                var series,
-                    plotArea,
-                    viewFactory,
-                    positiveSeries = { data: [1, 2], labels: {} },
+                var positiveSeries = { data: [1, 2], labels: {} },
                     negativeSeries = { data: [-1, -2], labels: {} },
                     CATEGORY_AXIS_X = 2,
                     TOLERANCE = 0.1;
@@ -801,19 +787,11 @@
                     }
                 });
 
-                function setupBarChart(options) {
-                    plotArea = new PlotAreaStub();
-                    viewFactory = new ViewFactoryStub();
-
-                    series = new Chart.BarChart(plotArea, options);
-
-                    series.updateLayout();
-                }
-
                 // ------------------------------------------------------------
                 module("Bar Chart / Horizontal / Positive Values", {
                     setup: function() {
-                        setupBarChart({ isVertical: false, series: [ positiveSeries ] });
+                        plotArea = new PlotAreaStub();
+                        setupBarChart(plotArea, { isVertical: false, series: [ positiveSeries ] });
                     }
                 });
 
@@ -850,7 +828,8 @@
                 // ------------------------------------------------------------
                 module("Bar Chart / Horizontal / Negative Values", {
                     setup: function() {
-                        setupBarChart({ isVertical: false, series: [ negativeSeries ] });
+                        plotArea = new PlotAreaStub();
+                        setupBarChart(plotArea, { isVertical: false, series: [ negativeSeries ] });
                     }
                 });
 
@@ -881,7 +860,12 @@
                 // ------------------------------------------------------------
                 module("Bar Chart / Horizontal / Cluster", {
                     setup: function() {
-                        setupBarChart({ isVertical: false, series: [ positiveSeries, negativeSeries ] });
+                        plotArea = new PlotAreaStub();
+                        setupBarChart(plotArea,
+                            { isVertical: false,
+                              series: [ positiveSeries, negativeSeries ]
+                            }
+                        );
                     }
                 });
 
@@ -892,7 +876,8 @@
                 // ------------------------------------------------------------
                 module("Bar Chart / Horizontal / Stack / Positive Values", {
                     setup: function() {
-                        setupBarChart({
+                        plotArea = new PlotAreaStub();
+                        setupBarChart(plotArea, {
                             isVertical: false,
                             series: [ positiveSeries, positiveSeries ],
                             isStacked: true }
@@ -927,7 +912,8 @@
                 // ------------------------------------------------------------
                 module("Bar Chart / Horizontal / Stack / Negative Values", {
                     setup: function() {
-                        setupBarChart({
+                        plotArea = new PlotAreaStub();
+                        setupBarChart(plotArea, {
                             isVertical: false,
                             series: [ negativeSeries, negativeSeries ],
                             isStacked: true }
@@ -963,7 +949,8 @@
                 // ------------------------------------------------------------
                 module("Bar Chart / Horizontal / Stack / Mixed Values", {
                     setup: function() {
-                        setupBarChart({
+                        plotArea = new PlotAreaStub();
+                        setupBarChart(plotArea, {
                             isVertical: false,
                             series: [ positiveSeries, negativeSeries ],
                             isStacked: true }

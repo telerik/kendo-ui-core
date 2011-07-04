@@ -16,13 +16,19 @@
             var Chart = kendo.ui.Chart,
                 Box2D = Chart.Box2D,
                 chartBox = new Box2D(100, 100, 1000, 1000),
+                viewRoot,
+                factory,
                 TOLERANCE = 1,
                 MARGIN = 10,
                 GAP = 4;
 
+                function moduleSetup() {
+                    viewRoot = new ViewElementStub();
+                    factory = new ViewFactoryStub();
+                }
+
             (function() {
                 var plotArea,
-                    viewFactory,
                     axisY,
                     axisX,
                     barSeriesData = [{
@@ -61,6 +67,8 @@
                 // ------------------------------------------------------------
                 module("PlotArea", {
                     setup: function() {
+                        moduleSetup();
+
                         createPlotArea(columnSeriesData);
                     }
                 });
@@ -161,6 +169,8 @@
                 var barChart;
                 module("PlotArea / Column series", {
                     setup: function() {
+                        moduleSetup();
+
                         createPlotArea(columnSeriesData);
                         barChart = plotArea.charts[0];
                     }
@@ -239,6 +249,8 @@
                 // ------------------------------------------------------------
                 module("PlotArea / Bar series", {
                     setup: function() {
+                        moduleSetup();
+
                         createPlotArea(barSeriesData);
                     }
                 });
@@ -297,7 +309,6 @@
 
             (function() {
                 var plotArea,
-                    viewFactory,
                     axisY,
                     axisX,
                     barSeriesData = [{
@@ -321,7 +332,7 @@
                             stubMethod(Chart.CategoryAxis, "getViewElements", function() { return []; },
                                 function() {
                                     plotArea.updateLayout(chartBox);
-                                    plotArea.getViewElements(viewFactory);
+                                    plotArea.getViewElements(viewRoot, factory);
                                 }
                     )});
                 }
@@ -329,7 +340,7 @@
                 // ------------------------------------------------------------
                 module("PlotArea / Major Gridlines", {
                     setup: function() {
-                        viewFactory = new ViewFactoryStub();
+                        moduleSetup();
                     }
                 });
 
@@ -341,7 +352,7 @@
                         }
                     });
 
-                    equal(viewFactory.log.line.length, 7);
+                    equal(factory.log.line.length, 7);
                 });
 
                 test("should not render gridlines for numeric axis", function() {
@@ -359,7 +370,7 @@
 
                     createPlotArea(categoryAxis, valueAxis);
 
-                    equal(viewFactory.log.line.length, 1);
+                    equal(factory.log.line.length, 1);
                 });
 
                 test("should not render gridlines for category axis", function() {
@@ -369,7 +380,7 @@
 
                     createPlotArea(categoryAxis);
 
-                    equal(viewFactory.log.line.length, 6);
+                    equal(factory.log.line.length, 6);
                 });
 
                 test("should not render gridlines", function() {
@@ -387,13 +398,13 @@
 
                     createPlotArea(categoryAxis, valueAxis);
 
-                    equal(viewFactory.log.line.length, 0);
+                    equal(factory.log.line.length, 0);
                 });
 
                 // ------------------------------------------------------------
                 module("PlotArea / Minor Gridlines", {
                     setup: function() {
-                        viewFactory = new ViewFactoryStub();
+                        moduleSetup();
                     }
                 });
 
@@ -418,7 +429,7 @@
 
                     createPlotArea(categoryAxis, valueAxis);
 
-                    equal(viewFactory.log.line.length, 32);
+                    equal(factory.log.line.length, 32);
                 });
 
                 test("should not render gridlines for numeric axis", function() {
@@ -442,7 +453,7 @@
 
                     createPlotArea(categoryAxis, valueAxis);
 
-                    equal(viewFactory.log.line.length, 2);
+                    equal(factory.log.line.length, 2);
                 });
 
                 test("should not render gridlines for category axis", function() {
@@ -460,7 +471,7 @@
 
                     createPlotArea(categoryAxis, valueAxis);
 
-                    equal(viewFactory.log.line.length, 30);
+                    equal(factory.log.line.length, 30);
                 });
 
                 test("should not render gridlines", function() {
@@ -475,13 +486,13 @@
 
                     createPlotArea(categoryAxis, valueAxis);
 
-                    equal(viewFactory.log.line.length, 0);
+                    equal(factory.log.line.length, 0);
                 });
 
                 // ------------------------------------------------------------
                 module("PlotArea / Major and Minor GridLines", {
                     setup: function() {
-                        viewFactory = new ViewFactoryStub();
+                        moduleSetup();
                     }
                 });
 
@@ -506,7 +517,7 @@
 
                     createPlotArea(categoryAxis, valueAxis);
 
-                    equal(viewFactory.log.line.length, 32);
+                    equal(factory.log.line.length, 32);
                 });
             })();
         </script>

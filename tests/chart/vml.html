@@ -10,9 +10,11 @@
     <body>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.chart.js"></script>
+        <script src="util.js"></script>
         <script type="text/javascript">
             var Chart = kendo.ui.Chart,
                 Box2D = Chart.Box2D,
+                viewRoot = new ViewElementStub(),
                 contentElementStub = {
                     render: function() { return "Content"; }
                 };
@@ -54,19 +56,20 @@
                 });
 
                 test("rect returns VMLPath", function() {
-                    var rect = factory.rect(10, 20, 100, 100);
+                    var rect = factory.rect(viewRoot, 10, 20, 100, 100);
                     ok(rect instanceof Chart.VMLPath);
                 });
 
                 test("rect draws rectangle", function() {
-                    var rect = factory.rect(new Box2D(10, 20, 110, 220));
+                    var rect = factory.rect(viewRoot, new Box2D(10, 20, 110, 220));
                     deepEqual(rect.points, [
                         [10, 20], [110, 20], [110, 220], [10, 220], [10, 20]
                     ]);
                 });
 
                 test("rect sets fill color", function() {
-                    var rect = factory.rect(new Box2D(10, 20, 110, 220), { fill: "#f00" });
+                    var rect = factory.rect(viewRoot,
+                        new Box2D(10, 20, 110, 220), { fill: "#f00" });
                     equal(rect.options.fill, "#f00");
                 });
 

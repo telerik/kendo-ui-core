@@ -18,13 +18,17 @@
                 numericAxis,
                 gridLayout,
                 chartBox = new Box2D(0, 0, 800, 600),
+                viewRoot,
+                factory,
                 TOLERANCE = 1.5;
 
             // Tests expect particular font size
             Chart.Text.fn.options.font = "16px Verdana, sans-serif";
 
             function moduleSetup() {
-                numericAxis = new kendo.ui.Chart.NumericAxis();
+                numericAxis = new kendo.ui.Chart.NumericAxis(0, 1);
+                viewRoot = new ViewElementStub();
+                factory = new ViewFactoryStub();
             }
 
             module("Automatic Major Unit", {
@@ -243,9 +247,7 @@
             })();
 
             (function() {
-                var numericAxis,
-                    factory,
-                    FIRST_LABEL_WIDTH = 10,
+                var FIRST_LABEL_WIDTH = 10,
                     LAST_LABEL_WIDTH = 26,
                     MAX_LABEL_WIDTH = 30,
                     LABEL_HEIGHT = 17,
@@ -256,15 +258,14 @@
                 // ------------------------------------------------------------
                 module("View Rendering / Vertical", {
                     setup: function() {
-                        factory = new ViewFactoryStub();
+                        moduleSetup();
 
-                        numericAxis = new Chart.NumericAxis(0, 1);
                         numericAxis.updateLayout(chartBox);
                     }
                 });
 
                 test("creates axis line", function() {
-                    numericAxis.getViewElements(factory);
+                    numericAxis.getViewElements(viewRoot, factory);
 
                     sameBox(factory.log.line[0], new Box2D(
                             MAX_LABEL_WIDTH + MARGIN, chartBox.y1 + LABEL_HEIGHT / 2,
@@ -274,7 +275,7 @@
                 });
 
                 test("creates labels", 1, function() {
-                    numericAxis.getViewElements(factory);
+                    numericAxis.getViewElements(viewRoot, factory);
 
                     same($.map(factory.log.text, function(text) { return text.content }),
                          ["0", "0.2", "0.4", "0.6", "0.8", "1", "1.2"]);
@@ -288,27 +289,27 @@
                     });
                     numericAxis.updateLayout(chartBox);
 
-                    numericAxis.getViewElements(factory);
+                    numericAxis.getViewElements(viewRoot, factory);
 
                     equals(factory.log.text[0].style.color, "#f00");
                 });
 
                 test("labels are distributed vertically", function() {
-                    numericAxis.getViewElements(factory);
+                    numericAxis.getViewElements(viewRoot, factory);
 
                     same($.map(factory.log.text, function(text) { return text.style.y }),
                          [582, 485, 388, 291, 194, 97, 0], TOLERANCE);
                 });
 
                 test("labels are aligned right", function() {
-                    numericAxis.getViewElements(factory);
+                    numericAxis.getViewElements(viewRoot, factory);
 
                     same($.map(factory.log.text, function(text) { return text.style.x }),
                          [16, 0, 0, 0, 0, 16, 0]);
                 });
 
                 test("major ticks are distributed vertically", function() {
-                    numericAxis.getViewElements(factory);
+                    numericAxis.getViewElements(viewRoot, factory);
 
                     factory.log.line.shift();
 
@@ -319,7 +320,7 @@
                 test("minor ticks can be disabled", function() {
                     numericAxis.options.line.width = 0;
                     numericAxis.options.majorTickType = "none";
-                    numericAxis.getViewElements(factory);
+                    numericAxis.getViewElements(viewRoot, factory);
 
                     equal(factory.log.line.length, 0);
                 });
@@ -327,7 +328,7 @@
                 test("minor ticks are distributed vertically", function() {
                     numericAxis.options.majorTickType = "none";
                     numericAxis.options.minorTickType = "outside";
-                    numericAxis.getViewElements(factory);
+                    numericAxis.getViewElements(viewRoot, factory);
 
                     factory.log.line.shift();
 
@@ -344,7 +345,7 @@
                     numericAxis.options.line.width = 0;
                     numericAxis.options.majorTickType = "none";
                     numericAxis.options.minorTickType = "none";
-                    numericAxis.getViewElements(factory);
+                    numericAxis.getViewElements(viewRoot, factory);
 
                     equal(factory.log.line.length, 0);
                 });
@@ -352,7 +353,7 @@
                 // ------------------------------------------------------------
                 module("View Rendering / Horizontal", {
                     setup: function() {
-                        factory = new ViewFactoryStub();
+                        moduleSetup();
 
                         numericAxis = new Chart.NumericAxis(0, 1, { orientation: "horizontal" });
                         numericAxis.updateLayout(chartBox);
@@ -360,7 +361,7 @@
                 });
 
                 test("creates axis line", function() {
-                    numericAxis.getViewElements(factory);
+                    numericAxis.getViewElements(viewRoot, factory);
 
                     sameBox(factory.log.line[0], new Box2D(
                             chartBox.x1 + (FIRST_LABEL_WIDTH / 2), chartBox.y1,
@@ -370,21 +371,21 @@
                 });
 
                 test("creates labels", 1, function() {
-                    numericAxis.getViewElements(factory);
+                    numericAxis.getViewElements(viewRoot, factory);
 
                     same($.map(factory.log.text, function(text) { return text.content }),
                          ["0", "0.2", "0.4", "0.6", "0.8", "1", "1.2"]);
                 });
 
                 test("labels are distributed horizontally", function() {
-                    numericAxis.getViewElements(factory);
+                    numericAxis.getViewElements(viewRoot, factory);
 
                     same($.map(factory.log.text, function(text) { return text.style.x }),
                          [0, 122.333, 252.667, 383, 513.333, 651.667, 774], TOLERANCE);
                 });
 
                 test("labels are aligned top", 7, function() {
-                    numericAxis.getViewElements(factory);
+                    numericAxis.getViewElements(viewRoot, factory);
 
                     $.each(factory.log.text, function() {
                             equal(this.style.y, MAJOR_TICK_HEIGHT + MARGIN);
@@ -392,14 +393,14 @@
                 });
 
                 test("major ticks are distributed horizontally", function() {
-                    numericAxis.getViewElements(factory);
+                    numericAxis.getViewElements(viewRoot, factory);
                     factory.log.line.shift();
                     same($.map(factory.log.line, function(line) { return line.x1; }),
                          [5, 135, 265, 396, 526, 656, 787], TOLERANCE);
                 });
 
                 test("major ticks are vertical", 7, function() {
-                    numericAxis.getViewElements(factory);
+                    numericAxis.getViewElements(viewRoot, factory);
                     factory.log.line.shift();
                     $.each(factory.log.line, function() {
                             equal(this.x2, this.x1);
@@ -407,7 +408,7 @@
                 });
 
                 test("major ticks are aligned to axis", 7, function() {
-                    numericAxis.getViewElements(factory);
+                    numericAxis.getViewElements(viewRoot, factory);
                     factory.log.line.shift();
                     $.each(factory.log.line, function() {
                             equal(this.y1, 0);
@@ -415,7 +416,7 @@
                 });
 
                 test("major ticks are of predefined height", 7, function() {
-                    numericAxis.getViewElements(factory);
+                    numericAxis.getViewElements(viewRoot, factory);
                     factory.log.line.shift();
                     $.each(factory.log.line, function() {
                             equal(this.y2 - this.y1, MAJOR_TICK_HEIGHT);
@@ -426,7 +427,7 @@
                     numericAxis.options.majorTickType = "none",
                     numericAxis.options.minorTickType= "outside",
                     numericAxis.updateLayout(chartBox);
-                    numericAxis.getViewElements(factory);
+                    numericAxis.getViewElements(viewRoot, factory);
                     factory.log.line.shift();
                     same($.map(factory.log.line, function(line) { return line.x1; }),
                         [5, 36.28, 67.56, 98.84, 130.12,
@@ -441,7 +442,7 @@
                     numericAxis.options.majorTickType = "none",
                     numericAxis.options.minorTickType= "outside",
                     numericAxis.updateLayout(chartBox);
-                    numericAxis.getViewElements(factory);
+                    numericAxis.getViewElements(viewRoot, factory);
                     factory.log.line.shift();
                     $.each(factory.log.line, function() {
                             equal(this.x2, this.x1);
@@ -452,7 +453,7 @@
                     numericAxis.options.majorTickType = "none",
                     numericAxis.options.minorTickType= "outside",
                     numericAxis.updateLayout(chartBox);
-                    numericAxis.getViewElements(factory);
+                    numericAxis.getViewElements(viewRoot, factory);
                     factory.log.line.shift();
                     $.each(factory.log.line, function() {
                             equal(this.y1, 0);
@@ -463,7 +464,7 @@
                     numericAxis.options.majorTickType = "none",
                     numericAxis.options.minorTickType= "outside",
                     numericAxis.updateLayout(chartBox);
-                    numericAxis.getViewElements(factory);
+                    numericAxis.getViewElements(viewRoot, factory);
                     factory.log.line.shift();
                     $.each(factory.log.line, function() {
                             equal(this.y2 - this.y1, MINOR_TICK_HEIGHT);
@@ -472,11 +473,10 @@
             })();
 
             (function() {
-                var numericAxis;
-
                 module("Slots / Vertical", {
                     setup: function() {
-                        numericAxis = new Chart.NumericAxis(0, 1);
+                        moduleSetup();
+
                         numericAxis.updateLayout(chartBox);
                     }
                 });
@@ -520,6 +520,8 @@
 
                 module("Slots / Vertical / Negative Values", {
                     setup: function() {
+                        moduleSetup();
+
                         numericAxis = new Chart.NumericAxis(-1, 0);
                         numericAxis.updateLayout(chartBox);
                     }
@@ -559,6 +561,8 @@
 
                 module("Slots / Horizontal", {
                     setup: function() {
+                        moduleSetup();
+
                         numericAxis = new Chart.NumericAxis(0, 1, { orientation: "horizontal" });
                         numericAxis.updateLayout(chartBox);
                     }
@@ -597,6 +601,8 @@
 
                 module("Slots / Horizontal / Negative Values", {
                     setup: function() {
+                        moduleSetup();
+
                         numericAxis = new Chart.NumericAxis(-1, 0, { orientation: "horizontal" });
                         numericAxis.updateLayout(chartBox);
                     }
