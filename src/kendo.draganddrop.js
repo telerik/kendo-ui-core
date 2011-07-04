@@ -99,20 +99,26 @@
             dropped: false
         },
 
-        _wait: function (e) {
+        _startDrag: function(e) {
             var that = this,
                 filter = that.options.filter;
 
             that._offset = kendo.touchLocation(e);
 
-            if(filter) {
+            if (filter) {
                 that.currentTarget = $(e.target).is(filter) ? $(e.target) : $(e.target).closest(filter);
-            }else {
+            } else {
                 that.currentTarget = $(e.currentTarget);
             }
 
             $(document).bind(MOUSEMOVE + NAMESPACE, proxy(that._start, that))
                        .bind(MOUSEUP + NAMESPACE, proxy(that._destroy, that));
+        },
+
+        _wait: function (e) {
+            var that = this;
+
+            that._startDrag(e);
 
             // Prevent text selection for Gecko and WebKit
             if (!touch) {
