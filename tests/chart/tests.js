@@ -21,11 +21,11 @@ tests.push(
     },
     {
         page: "chart/svg.html",
-        title: "SVG Renderer"
+        title: "SVG View"
     },
     {
         page: "chart/vml.html",
-        title: "VML Renderer"
+        title: "VML View"
     },
     {
         page: "chart/plotarea.html",

@@ -15,16 +15,14 @@
             var Chart = kendo.ui.Chart,
                 Box2D = Chart.Box2D,
                 chartBox = new Box2D(0, 0, 800, 600),
-                viewRoot,
-                factory,
+                view,
                 TOLERANCE = 2;
 
             // Tests expect particular font size
             Chart.Text.fn.options.font = "16px Verdana, sans-serif";
 
             function moduleSetup() {
-                viewRoot = new ViewElementStub();
-                factory = new ViewFactoryStub();
+                view = new ViewStub();
             }
 
             (function() {
@@ -54,8 +52,8 @@
                 });
 
                 test("creates axis line", function() {
-                    categoryAxis.getViewElements(viewRoot, factory);
-                    sameBox(factory.log.line[0], new Box2D(
+                    categoryAxis.getViewElements(view);
+                    sameBox(view.log.line[0], new Box2D(
                             chartBox.x1, LINE_Y,
                             chartBox.x2, LINE_Y),
                             TOLERANCE
@@ -63,9 +61,9 @@
                 });
 
                 test("creates labels", 1, function() {
-                    categoryAxis.getViewElements(viewRoot, factory);
+                    categoryAxis.getViewElements(view);
 
-                    same($.map(factory.log.text, function(text) { return text.content }),
+                    same($.map(view.log.text, function(text) { return text.content }),
                          ["Foo", "Bar"]);
                 });
 
@@ -76,62 +74,62 @@
                         }
                     });
 
-                    categoryAxis.getViewElements(viewRoot, factory);
+                    categoryAxis.getViewElements(view);
 
-                    equals(factory.log.text[0].style.color, "#f00");
+                    equals(view.log.text[0].style.color, "#f00");
                 });
 
                 test("labels are distributed horizontally", function() {
-                    categoryAxis.getViewElements(viewRoot, factory);
+                    categoryAxis.getViewElements(view);
 
-                    same($.map(factory.log.text, function(text) { return text.style.x }),
+                    same($.map(view.log.text, function(text) { return text.style.x }),
                          [185.5, 586.5], TOLERANCE);
                 });
 
                 test("labels are positioned below axis line", 2, function() {
-                    categoryAxis.getViewElements(viewRoot, factory);
-                    $.each(factory.log.text, function() {
+                    categoryAxis.getViewElements(view);
+                    $.each(view.log.text, function() {
                             equal(this.style.y, LINE_Y + MAJOR_TICK_HEIGHT + MARGIN, TOLERANCE);
                     })
                 });
 
                 test("major ticks are distributed horizontally", function() {
-                    categoryAxis.getViewElements(viewRoot, factory);
-                    factory.log.line.shift();
-                    same($.map(factory.log.line, function(line) { return line.x1; }),
+                    categoryAxis.getViewElements(view);
+                    view.log.line.shift();
+                    same($.map(view.log.line, function(line) { return line.x1; }),
                          [0, 400, 800], TOLERANCE);
                 });
 
                 test("major ticks can be disabled", function() {
                     categoryAxis.options.majorTickType = "none";
-                    categoryAxis.getViewElements(viewRoot, factory);
-                    factory.log.line.shift();
-                    equal(factory.log.line.length, 0);
+                    categoryAxis.getViewElements(view);
+                    view.log.line.shift();
+                    equal(view.log.line.length, 0);
                 });
 
                 test("minor ticks are distributed horizontally", function() {
                     categoryAxis.options.majorTickType = "none";
                     categoryAxis.options.minorTickType = "outside";
-                    categoryAxis.getViewElements(viewRoot, factory);
-                    factory.log.line.shift();
-                    same($.map(factory.log.line, function(line) { return line.x1; }),
+                    categoryAxis.getViewElements(view);
+                    view.log.line.shift();
+                    same($.map(view.log.line, function(line) { return line.x1; }),
                          [0, 200, 400, 600, 800], TOLERANCE);
                 });
 
                 test("minor ticks can be disabled", function() {
                     categoryAxis.options.majorTickType = "none";
                     categoryAxis.options.minorTickType = "none";
-                    categoryAxis.getViewElements(viewRoot, factory);
-                    factory.log.line.shift();
-                    equal(factory.log.line.length, 0);
+                    categoryAxis.getViewElements(view);
+                    view.log.line.shift();
+                    equal(view.log.line.length, 0);
                 });
 
                 test("line width 0 remove all ticks", function() {
                     categoryAxis.options.line.width = 0;
                     categoryAxis.options.majorTickType = "outside";
                     categoryAxis.options.minorTickType = "outside";
-                    categoryAxis.getViewElements(viewRoot, factory);
-                    equal(factory.log.line.length, 0);
+                    categoryAxis.getViewElements(view);
+                    equal(view.log.line.length, 0);
                 });
 
                 // ------------------------------------------------------------
@@ -144,8 +142,8 @@
                 });
 
                 test("creates axis line", function() {
-                    categoryAxis.getViewElements(viewRoot, factory);
-                    sameBox(factory.log.line[0], new Box2D(
+                    categoryAxis.getViewElements(view);
+                    sameBox(view.log.line[0], new Box2D(
                             LINE_X + MARGIN, chartBox.y1,
                             LINE_X + MARGIN, chartBox.y2),
                             TOLERANCE
@@ -153,39 +151,39 @@
                 });
 
                 test("creates labels", 1, function() {
-                    categoryAxis.getViewElements(viewRoot, factory);
+                    categoryAxis.getViewElements(view);
 
-                    same($.map(factory.log.text, function(text) { return text.content }),
+                    same($.map(view.log.text, function(text) { return text.content }),
                          ["Foo", "Bar"]);
                 });
 
                 test("labels are distributed vertically", function() {
-                    categoryAxis.getViewElements(viewRoot, factory);
+                    categoryAxis.getViewElements(view);
 
-                    same($.map(factory.log.text, function(text) { return text.style.y }),
+                    same($.map(view.log.text, function(text) { return text.style.y }),
                          [141, 441], TOLERANCE);
                 });
 
                 test("labels are positioned to the left of the axis line", function() {
-                    categoryAxis.getViewElements(viewRoot, factory);
+                    categoryAxis.getViewElements(view);
 
-                    same($.map(factory.log.text, function(text) { return text.style.x }),
+                    same($.map(view.log.text, function(text) { return text.style.x }),
                          [0, 2]);
                 });
 
                 test("major ticks are distributed vertically", function() {
-                    categoryAxis.getViewElements(viewRoot, factory);
-                    factory.log.line.shift();
-                    same($.map(factory.log.line, function(line) { return line.y1; }),
+                    categoryAxis.getViewElements(view);
+                    view.log.line.shift();
+                    same($.map(view.log.line, function(line) { return line.y1; }),
                          [0, 300, 600], TOLERANCE);
                 });
 
                 test("minor ticks are distributed vertically", function() {
                     categoryAxis.options.majorTickType = "none";
                     categoryAxis.options.minorTickType = "outside";
-                    categoryAxis.getViewElements(viewRoot, factory);
-                    factory.log.line.shift();
-                    same($.map(factory.log.line, function(line) { return line.y1; }),
+                    categoryAxis.getViewElements(view);
+                    view.log.line.shift();
+                    same($.map(view.log.line, function(line) { return line.y1; }),
                         [0, 150, 300, 450, 600], TOLERANCE);
                 });
 
@@ -193,9 +191,9 @@
                     categoryAxis.options.line.width = 0;
                     categoryAxis.options.majorTickType = "outside";
                     categoryAxis.options.minorTickType = "outside";
-                    categoryAxis.getViewElements(viewRoot, factory);
+                    categoryAxis.getViewElements(view);
 
-                    equal(factory.log.line.length, 0);
+                    equal(view.log.line.length, 0);
                 });
 
                 // ------------------------------------------------------------

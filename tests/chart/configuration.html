@@ -34,23 +34,6 @@
                 }
 
                 // ------------------------------------------------------------
-                module("SVG / VML output selection", {
-                    teardown: destroyChart
-                });
-
-                test("SVGFactory is chosen if browser supports SVG", function() {
-                    Chart.prototype._supportsSVG = function() { return true; };
-                    createChart();
-                    ok(chart._viewFactory instanceof Chart.SVGFactory);
-                });
-
-                test("VMLFactory is chosen if browser does not support SVG", function() {
-                    Chart.prototype._supportsSVG = function() { return false; };
-                    createChart();
-                    ok(chart._viewFactory instanceof Chart.VMLFactory);
-                });
-
-                // ------------------------------------------------------------
                 module("Category Axis Configuration", {
                     teardown: destroyChart
                 });

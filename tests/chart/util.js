@@ -1,4 +1,4 @@
-function ViewFactoryStub() {
+function ViewStub() {
     var factory = this,
         log = factory.log = { };
 
@@ -8,7 +8,7 @@ function ViewFactoryStub() {
     log.line = [];
 }
 
-ViewFactoryStub.prototype = {
+ViewStub.prototype = {
     rect: function(viewRoot, box, style) {
         this.log.rect.push({
             x1: box.x1,
