@@ -1245,7 +1245,8 @@
                 color: BLACK,
                 width: 0
             },
-            margin: 5
+            margin: 5,
+            zIndex: -1
         },
 
         updateLayout: function() {
@@ -1279,7 +1280,8 @@
                     factory.rect(viewRoot, box, {
                         stroke: border.width ? border.color : "",
                         strokeWidth: border.width,
-                        fill: options.background })
+                        fill: options.background,
+                        zIndex: options.zIndex })
                 ];
 
             return elements.concat(
@@ -1478,7 +1480,7 @@
             position: "outsideEnd",
             margin: 2,
             padding: 2,
-            color: "#000",
+            color: BLACK,
             background: "",
             border: {
                 width: 0,
@@ -1998,7 +2000,8 @@
                 visible: true,
                 width: 1,
                 color: BLACK
-            }
+            },
+            zIndex: 1
         },
 
         updateLayout: function(targetBox) {
@@ -2046,7 +2049,8 @@
                         axis.box.x2, majorTickPositions[majorTickPositions.length - 1],
                         {
                             strokeWidth: options.line.width,
-                            stroke: options.line.color
+                            stroke: options.line.color,
+                            zIndex: options.zIndex
                         }));
                 } else {
                     childElements.push(factory.line(
@@ -2054,7 +2058,8 @@
                         majorTickPositions[majorTickPositions.length - 1], axis.box.y1,
                         {
                             strokeWidth: options.line.width,
-                            stroke: options.line.color
+                            stroke: options.line.color,
+                            zIndex: options.zIndex
                         }));
                 }
 
@@ -2264,7 +2269,8 @@
                 visible: false,
                 width: 1,
                 color: BLACK
-            }
+            },
+            zIndex: 1
         },
 
         updateLayout: function(targetBox) {
@@ -2310,14 +2316,16 @@
                         axis.box.x2, axis.box.y1, axis.box.x2, axis.box.y2,
                         {
                             strokeWidth: options.line.width,
-                            stroke: options.line.color
+                            stroke: options.line.color,
+                            zIndex: options.zIndex
                         }));
                 } else {
                     childElements.push(factory.line(
                         axis.box.x1, axis.box.y1, axis.box.x2, axis.box.y1,
                         {
                             strokeWidth: options.line.width,
-                            stroke: options.line.color
+                            stroke: options.line.color,
+                            zIndex: options.zIndex
                         }));
                 }
 
@@ -2373,6 +2381,13 @@
             return isVertical ?
                    new Box2D(box.x2, p1, box.x2, p2) :
                    new Box2D(p1, box.y1, p2, box.y1);
+        },
+
+        getAxisLineBox: function() {
+            var axis = this,
+                options = axis.options;
+
+            return axis.getSlot(0).wrap(axis.getSlot(options.categories.length - 1));
         }
     });
 
@@ -2709,7 +2724,12 @@
             valueAxis: { },
             series: [ ],
             plotArea: {
-                margin: 0
+                margin: {}
+            },
+            background: WHITE,
+            border: {
+                color: BLACK,
+                width: 0
             }
         },
 
@@ -2781,11 +2801,7 @@
                 margin = getSpacing(options.margin);
 
             plotArea.box = targetBox.clone();
-            plotArea.box.x1 += margin.left;
-            plotArea.box.x2 -= margin.right;
-            plotArea.box.y1 += margin.top;
-            plotArea.box.y2 -= margin.bottom;
-
+            plotArea.box.unpad(margin);
             axisY.updateLayout(plotArea.box);
             axisX.updateLayout(plotArea.box);
 
@@ -2812,6 +2828,10 @@
             for (var i = 0; i < charts.length; i++) {
                 charts[i].updateLayout(plotArea.box);
             }
+            var lineBoxX = axisX.getAxisLineBox(),
+                lineBoxY = axisY.getAxisLineBox();
+
+            plotArea.box = lineBoxX.clone().wrap(lineBoxY);
         },
 
         alignAxes: function() {
@@ -2900,13 +2920,25 @@
 
         getViewElements: function(viewRoot, factory) {
             var plotArea = this,
+                options = plotArea.options.plotArea,
                 axisY = plotArea.axisY,
                 axisX = plotArea.axisX,
                 gridLinesY = plotArea.renderGridLines(factory, axisY, axisX),
                 gridLinesX = plotArea.renderGridLines(factory, axisX, axisY),
-                childElements = ChartElement.fn.getViewElements.call(plotArea, viewRoot, factory);
+                childElements = ChartElement.fn.getViewElements.call(plotArea, viewRoot, factory),
+                border = options.border || {},
+                elements = [
+                    factory.rect(plotArea.box, {
+                        fill: options.background,
+                        zIndex: -1 }),
+                    factory.rect(plotArea.box, {
+                        stroke: border.width ? border.color : "",
+                        strokeWidth: border.width,
+                        fill: "",
+                        zIndex: 0 })
+                ];
 
-            return [].concat(gridLinesY, gridLinesX, childElements);
+            return [].concat(gridLinesY, gridLinesX, childElements, elements);
         }
     });
 
@@ -3141,7 +3173,7 @@
         },
 
         options: {
-            fill: BLACK
+            fill: WHITE
         },
 
         renderPoints: function() {
