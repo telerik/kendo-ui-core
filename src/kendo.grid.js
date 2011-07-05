@@ -19,6 +19,115 @@
         FOCUSABLE = "t-focusable",
         STRING = "string";
 
+    var VirtualScrollable =  Component.extend({
+        init: function(element, options) {
+            var that = this;
+
+            Component.fn.init.call(that, element, options);
+            that.dataSource = options.dataSource;
+            that.refresh();
+        },
+
+        options: {
+            filter: "tbody>tr"
+        },
+
+        refresh: function() {
+            var that = this,
+                scrollbar = kendo.support.scrollbar(),
+                element = that.element;
+
+            element.css( {
+                width: "auto",
+                paddingRight: scrollbar,
+                overflow: "hidden"
+            });
+            that.content = element.children().first();
+            that.wrapper = that.content.wrap('<div class="t-virtual-scrollable-wrap"/>').parent();
+            that.verticalScrollbar = $('<div class="t-scrollbar t-scrollbar-vertical" />')
+                                        .css({
+                                            width: scrollbar
+                                        }).appendTo(element)
+                                        .bind("scroll", proxy(that._scroll, that));
+        },
+
+        _itemHeight: function() {
+            var that = this,
+                selector = that.options.filter;
+
+            return that.content.find(selector)[0].offsetHeight;
+        },
+
+        _scroll: function(e) {
+            var that = this,
+                scrollTop = e.currentTarget.scrollTop,
+                dataSource = that.dataSource,
+                rowHeight = that._itemHeight(),
+                skip = dataSource.skip() || 0;
+
+            that._fetch();
+            that.wrapper[0].scrollTop = scrollTop - (skip * rowHeight);
+        },
+
+        _fetch: function(firstRowIndex, lastRowIndex) {
+            var that = this,
+                dataSource = that.dataSource,
+                skip = dataSource.skip(),
+                take = dataSource.take();
+
+            if (firstRowIndex <= skip) {
+                skip = Math.max(0, lastRowIndex - take);
+            } else if (lastRowIndex >= skip + take) {
+                skip = firstRowIndex;
+            }
+
+            clearTimeout(that._timeout);
+
+            if (dataSource.inRange(skip, take)) {
+                dataSource.range(skip, take);
+            } else {
+                that._progress(true);
+                that._timeout = setTimeout(function() {
+                    dataSource.range(skip, take);
+                }, 100);
+            }
+        },
+
+        _progress: function(toggle) {
+            var that = this,
+                mask;
+            if (toggle) {
+                if (!that._mask) {
+                    mask = $("<div class='t-overlay' style='position:absolute;text-align:center;color:#fff'><span>Loading ...</span></div>");
+                    mask.width(that.wrapper.outerWidth()).height(that.wrapper.outerHeight());
+                    that._mask = mask.insertBefore(that.wrapper);
+                }
+            } else if (that._mask) {
+                that._mask.remove();
+                that._mask = null;
+            }
+        },
+        resize: function() {
+            var that = this,
+                html = "",
+                maxHeight = 250000;
+
+            rowHeight = that._itemHeight();
+
+            totalHeight = that.dataSource.total() * rowHeight;
+
+            for (idx = 0; idx < Math.floor(totalHeight / maxHeight); idx++) {
+                html += '<div style="width:1px;height:' + maxHeight + 'px"></div>';
+            }
+
+            if (totalHeight % maxHeight) {
+                html += '<div style="width:1px;height:' + (totalHeight % maxHeight) + 'px"></div>';
+            }
+
+            that.verticalScrollbar.html(html);
+        }
+    });
+
     var Grid = Component.extend({
         init: function(element, options) {
             var that = this;
@@ -731,7 +840,8 @@
             }
             that.trigger(DATABOUND);
        }
-    });
+   });
 
-    ui.plugin("Grid", Grid);
+   ui.plugin("Grid", Grid);
+   ui.plugin("VirtualScrollable", VirtualScrollable);
 })(jQuery);
