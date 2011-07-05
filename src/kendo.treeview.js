@@ -21,6 +21,7 @@
         CHANGE = "change",
         TSTATEHOVER = "t-state-hover",
         TTREEVIEW = "t-treeview",
+        TITEM = "t-item",
         VISIBLE = ":visible",
         NODE = ".t-item",
         SUBGROUP = ">.t-group,>.t-animation-container>.t-group",
@@ -381,9 +382,16 @@
                     item: extend({
                         index: referenceNode.index()
                     }, nodeData)
-                })).insertBefore(referenceNode);
+                })).insertBefore(referenceNode)
+                parentNode = group.parent();
 
-            that._items(group, groupData);
+            if (parentNode.hasClass("t-item")) {
+                that._updateNodeHtml(parentNode);
+                that._updateNodeClasses(parentNode);
+            }
+
+            that._updateNodeClasses(result.prev());
+            that._updateNodeClasses(result.next());
 
             return result;
         },
@@ -414,8 +422,11 @@
                 }, nodeData)
             })).appendTo(group);
 
-            that._updateNodeHtml(parentNode);
-            that._updateNodeClasses(parentNode);
+            if (parentNode.hasClass("t-item")) {
+                that._updateNodeHtml(parentNode);
+                that._updateNodeClasses(parentNode);
+            }
+
             that._updateNodeClasses(result.prev());
             that._updateNodeClasses(result.next());
 
