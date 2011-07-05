@@ -245,6 +245,7 @@
                 var appendedNode = treeviewObject.append({ text: "bar" });
 
                 equals(rootGroup.length, 1);
+                equals(treeview.find("div").length, 2);
                 equals(rootGroup.find("> .t-item").length, 2);
                 ok(rootGroup.find("> .t-item").hasClass("t-first"));
             });
@@ -283,6 +284,8 @@
                 ok(rootItem.hasClass("t-last"));
                 ok(!rootItem.find(">div").hasClass("t-top"));
                 ok(rootItem.find(">div").hasClass("t-bot"));
+                equals(treeview.find("li").length, 2);
+                equals(treeview.find("div").length, 2);
             });
 
             test("remove(node) removes nodes", function() {
