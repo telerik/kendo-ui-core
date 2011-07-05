@@ -1271,7 +1271,7 @@
                 border = options.border || {},
                 box = root.box.clone().pad(options.margin).unpad(border.width),
                 elements = [
-                    viewRoot.rect(viewRoot, box, {
+                    viewRoot.createRect(viewRoot, box, {
                         stroke: border.width ? border.color : "",
                         strokeWidth: border.width,
                         fill: options.background,
@@ -1368,7 +1368,7 @@
                 options = element.options,
                 border = options.border || {},
                 elements = [
-                    viewRoot.rect(viewRoot, element.paddingBox, {
+                    viewRoot.createRect(viewRoot, element.paddingBox, {
                         stroke: border.width ? border.color : "",
                         strokeWidth: border.width,
                         fill: options.background })
@@ -1441,7 +1441,7 @@
                 options = text.options;
 
             return [
-                viewRoot.text(text.content, {
+                viewRoot.createText(text.content, {
                     x: text.box.x1, y: text.box.y1,
                     baseline: text.baseline,
                     font: options.font,
@@ -1653,7 +1653,7 @@
                 options = legend.options,
                 series = options.series,
                 markerSize = legend.markerSize(),
-                group = viewRoot.group({ zIndex: options.zIndex }),
+                group = viewRoot.createGroup({ zIndex: options.zIndex }),
                 border = options.border || {},
                 labelBox;
 
@@ -1676,14 +1676,14 @@
 
                 markerBox.y2 = markerBox.y1 + markerSize;
 
-                group.children.push(viewRoot.rect(viewRoot, markerBox, { fill: color, stroke: color }));
+                group.children.push(viewRoot.createRect(viewRoot, markerBox, { fill: color, stroke: color }));
             };
 
             if (children.length > 0) {
                 var padding = getSpacing(options.padding);
                 padding.left += markerSize * 2;
                 labelBox.pad(padding);
-                group.children.unshift(viewRoot.rect(viewRoot, labelBox, {
+                group.children.unshift(viewRoot.createRect(viewRoot, labelBox, {
                     stroke: border.width ? border.color : "",
                     strokeWidth: border.width,
                     fill: options.background })
@@ -1877,7 +1877,7 @@
 
             return $.map(ticks, function(tick) {
                 if (isVertical) {
-                    return view.line(
+                    return view.createLine(
                             box.x2 - tick.size, tick.pos, box.x2, tick.pos,
                             {
                                 strokeWidth: tick.width,
@@ -1885,7 +1885,7 @@
                             }
                     );
                 } else {
-                    return view.line(
+                    return view.createLine(
                             tick.pos, box.y1, tick.pos, box.y1 + tick.size,
                             {
                                 strokeWidth: tick.width,
@@ -2043,7 +2043,7 @@
             var majorTickPositions = axis.getMajorTickPositions();
             if (options.line.width > 0) {
                 if (isVertical) {
-                    childElements.push(viewRoot.line(
+                    childElements.push(viewRoot.createLine(
                         axis.box.x2, majorTickPositions[0],
                         axis.box.x2, majorTickPositions[majorTickPositions.length - 1],
                         {
@@ -2052,7 +2052,7 @@
                             zIndex: options.zIndex
                         }));
                 } else {
-                    childElements.push(viewRoot.line(
+                    childElements.push(viewRoot.createLine(
                         majorTickPositions[0], axis.box.y1,
                         majorTickPositions[majorTickPositions.length - 1], axis.box.y1,
                         {
@@ -2311,7 +2311,7 @@
 
             if (options.line.width > 0) {
                 if (isVertical) {
-                    childElements.push(viewRoot.line(
+                    childElements.push(viewRoot.createLine(
                         axis.box.x2, axis.box.y1, axis.box.x2, axis.box.y2,
                         {
                             strokeWidth: options.line.width,
@@ -2319,7 +2319,7 @@
                             zIndex: options.zIndex
                         }));
                 } else {
-                    childElements.push(viewRoot.line(
+                    childElements.push(viewRoot.createLine(
                         axis.box.x1, axis.box.y1, axis.box.x2, axis.box.y1,
                         {
                             strokeWidth: options.line.width,
@@ -2515,7 +2515,7 @@
                 elements = [];
 
             elements.push(
-                viewRoot.rect(viewRoot, box, rectStyle)
+                viewRoot.createRect(viewRoot, box, rectStyle)
             );
             [].push.apply(elements,
                 ChartElement.fn.getViewElements.call(bar, viewRoot)
@@ -2900,14 +2900,14 @@
                     }
 
                     if (isVertical) {
-                        return view.line(
+                        return view.createLine(
                             lineStart, linePos, lineEnd, linePos,
                             {
                                 strokeWidth: line.options.width,
                                 stroke: line.options.color
                             });
                     } else {
-                        return view.line(
+                        return view.createLine(
                             linePos, lineStart, linePos, lineEnd,
                             {
                                 strokeWidth: line.options.width,
@@ -2927,10 +2927,10 @@
                 childElements = ChartElement.fn.getViewElements.call(plotArea, viewRoot),
                 border = options.border || {},
                 elements = [
-                    viewRoot.rect(viewRoot, plotArea.box, {
+                    viewRoot.createRect(viewRoot, plotArea.box, {
                         fill: options.background,
                         zIndex: -1 }),
-                    viewRoot.rect(viewRoot, plotArea.box, {
+                    viewRoot.createRect(viewRoot, plotArea.box, {
                         stroke: border.width ? border.color : "",
                         strokeWidth: border.width,
                         fill: "",
@@ -3000,8 +3000,8 @@
                 rotation: rotation,
                 id: gradientId
             }),
-            gradient = viewRoot.linearGradient(gradientOptions),
-            group = viewRoot.group(),
+            gradient = viewRoot.createLinearGradient(gradientOptions),
+            group = viewRoot.createGroup(),
             overlay = element.clone();
 
         overlay.options.fill = idRef(gradientId);
@@ -3074,15 +3074,15 @@
             return "<defs>" + output + "</defs>";
         },
 
-        group: function(options) {
+        createGroup: function(options) {
             return new SVGGroup(options);
         },
 
-        text: function(content, options) {
+        createText: function(content, options) {
             return new SVGText(content, options);
         },
 
-        rect: function(viewRoot, box, style) {
+        createRect: function(viewRoot, box, style) {
             var rect = new SVGPath(
                 [[box.x1, box.y1], [box.x2, box.y1],
                 [box.x2, box.y2], [box.x1, box.y2], [box.x1, box.y1]],
@@ -3096,11 +3096,11 @@
             return rect;
         },
 
-        line: function(x1, y1, x2, y2, options) {
+        createLine: function(x1, y1, x2, y2, options) {
             return new SVGPath([[x1, y1], [x2, y2]], options);
         },
 
-        linearGradient: function(options) {
+        createLinearGradient: function(options) {
             return new SVGLinearGradient(options);
         }
     });
@@ -3254,7 +3254,7 @@
                 blendGradient(element.options.fill, glassGradient),
                 { rotation: 270 - rotation }
             ),
-            gradient = viewRoot.linearGradient(gradientOptions);
+            gradient = viewRoot.createLinearGradient(gradientOptions);
 
         element.options.fill = "";
         element.children.push(gradient);
@@ -3287,11 +3287,11 @@
             height: DEFAULT_HEIGHT
         },
 
-        text: function(content, options) {
+        createText: function(content, options) {
             return new VMLText(content, options);
         },
 
-        rect: function(viewRoot, box, style) {
+        createRect: function(viewRoot, box, style) {
             var rect = new VMLPath(
                 [[box.x1, box.y1], [box.x2, box.y1],
                 [box.x2, box.y2], [box.x1, box.y2], [box.x1, box.y1]],
@@ -3305,15 +3305,15 @@
             return rect;
         },
 
-        line: function(x1, y1, x2, y2, options) {
+        createLine: function(x1, y1, x2, y2, options) {
             return new VMLPath([[x1, y1], [x2, y2]], options);
         },
 
-        group: function(options) {
+        createGroup: function(options) {
             return new VMLGroup(options);
         },
 
-        linearGradient: function(options) {
+        createLinearGradient: function(options) {
             return new VMLLinearGradient(options);
         }
     });
