@@ -48,7 +48,7 @@
                     dragleave: function(e) {
                         e.draggable.hint.find(".t-drag-status").removeClass("t-add").addClass("t-denied");
                         dropCue.remove();
-                    },
+                    }
                 })
                 .kendoDraggable({
                     filter: "div.t-group-indicator",

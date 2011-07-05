@@ -596,6 +596,8 @@
         _rowsHtml: function(data) {
             var that = this,
                 html = "",
+                idx,
+                length,
                 rowTemplate = that.rowTemplate,
                 altRowTemplate = that.altRowTemplate;
 
