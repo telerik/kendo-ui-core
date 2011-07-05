@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+    <head>
+        <!-- meta -->
+        <!-- meta -->
+        <title>Slider Default Settings</title>
+        <!-- script -->
+        <script src="../../../src/jquery.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.draganddrop.js"></script>
+        <script src="../../../src/kendo.slider.js"></script>
+        <!-- script -->
+        <!-- css -->
+        <link href="../styles/examples.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.common.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.blueopal.css" rel="stylesheet"/>
+        <!-- css -->
+    </head>
+    <body>
+        <!-- nav -->
+        <!-- nav -->
+        <!-- description -->
+        <div class="description">First Look</div>
+        <!-- description -->
+        <div id="example">
+            <input type="range" id="slider" />
+            <br />
+            <div id="rangeSlider" style="margin-top: 40px;">
+                <input type="range" />
+                <input type="range" />
+            </div>
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    $("#slider").kendoSlider();
+                    $("#rangeSlider").kendoRangeSlider();
+                });
+            </script>
+        </div>
+        <!-- tools -->
+        <!-- tools -->
+    </body>
+</html>

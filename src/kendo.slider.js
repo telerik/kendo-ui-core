@@ -7,7 +7,7 @@
         proxy = $.proxy,
         math = Math,
         //events
-        LOAD = "load",
+        INIT = "init",
         CHANGE = "change",
         SLIDE = "slide",
         MOUSE_DOWN = "mousedown",
@@ -67,7 +67,7 @@
                 34: step(-options.largeStep)  // page down
             };
 
-            that.bind([LOAD, CHANGE, SLIDE], options);
+            that.bind([INIT, CHANGE, SLIDE], options);
         },
 
         options: {

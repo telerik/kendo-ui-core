@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+    <head>
+        <!-- meta -->
+        <!-- meta -->
+        <title>Slider Events</title>
+        <!-- script -->
+        <script src="../../../src/jquery.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.draganddrop.js"></script>
+        <script src="../../../src/kendo.slider.js"></script>
+        <script src="../js/kendo.console.js"></script>
+        <!-- script -->
+        <!-- css -->
+        <link href="../styles/examples.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.common.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.blueopal.css" rel="stylesheet"/>
+        <!-- css -->
+    </head>
+    <body>
+        <!-- nav -->
+        <!-- nav -->
+        <!-- description -->
+        <div class="description">This example shows how to attach events to the kendoSlider and kendoRangeSlider.</div>
+        <!-- description -->
+        <div id="example">
+            <input type="range" id="slider" />
+            <br />
+            <div id="rangeSlider" style="margin-top: 40px;">
+                <input type="range" />
+                <input type="range" />
+            </div>
+            <script type="text/javascript">
+                var sliderInit = function () {
+                    if ("kendoConsole" in window) {
+                        kendoConsole.log("Slider is initialized.");
+                    }
+                };
+
+                var sliderSlide = function (e) {
+                    if ("kendoConsole" in window) {
+                        kendoConsole.log("Change :: new value is: " + e.value);
+                    }
+                };
+
+                var sliderChange = function (e) {
+                    if ("kendoConsole" in window) {
+                        kendoConsole.log("Slide :: new slide value is: " + e.value);
+                    }
+                };
+
+                 var rangeSliderInit = function () {
+                    if ("kendoConsole" in window) {
+                        kendoConsole.log("Range slideris initialized.");
+                    }
+                };
+
+                var rangeSliderSlide = function (e) {
+                    if ("kendoConsole" in window) {
+                        kendoConsole.log("Slide :: new slide value are: " + e.values.toString().replace(',', ' - '));
+                    }
+                };
+
+                var rangeSliderChange = function (e) {
+                    if ("kendoConsole" in window) {
+                        kendoConsole.log("Change :: new values are: " + e.values.toString().replace(',', ' - '));
+                    }
+                };
+
+                $("#slider").kendoSlider({
+                    change: sliderChange,
+                    slide: sliderSlide,
+                    init: sliderInit
+                });
+
+                $("#rangeSlider").kendoRangeSlider({
+                    change: rangeSliderChange,
+                    slide: rangeSliderSlide,
+                    init: rangeSliderInit
+                });
+
+            </script>
+        </div>
+        <div class="console"></div>
+        <!-- tools -->
+        <!-- tools -->
+    </body>
+</html>
