@@ -114,9 +114,7 @@
             chart._model = model;
 
             model.reflow();
-            var html = model.getView().render();
-            setContent(chart.element[0], html);
-            alignToScreen(chart.element[0].firstChild);
+            model.getView().renderTo(chart.element[0]);
         },
 
         _applyDefaults: function() {
@@ -196,37 +194,6 @@
             chart._redraw();
         }
     });
-
-    function setContent(container, xml) {
-        if (typeof setContent.useParser == UNDEFINED) {
-            var testFragment = "<svg xmlns='" + SVG_NS + "'></svg>",
-                testContainer = document.createElement("div"),
-                hasParser = typeof DOMParser != UNDEFINED;
-
-            testContainer.innerHTML = testFragment;
-            setContent.useParser = hasParser && testContainer.firstChild.namespaceURI != SVG_NS;
-        }
-
-        if (setContent.useParser) {
-            var parser = new DOMParser(),
-                chartDoc = parser.parseFromString(xml, "text/xml"),
-                importedDoc = document.adoptNode(chartDoc.documentElement);
-
-            container.innerHTML = "";
-            container.appendChild(importedDoc);
-        } else {
-            container.innerHTML = xml;
-        }
-    }
-
-    function alignToScreen(element) {
-        if (element.getScreenCTM) {
-            var ctm = element.getScreenCTM();
-
-            element.style.left = -ctm.e % 1 + "px";
-            element.style.top = -ctm.f % 1 + "px";
-        }
-    }
 
 
     // **************************
@@ -3043,6 +3010,14 @@
             idPrefix: ""
         },
 
+        renderTo: function(container) {
+            var view = this,
+                svgText = view.render();
+
+            renderSVG(container, svgText);
+            view.alignToScreen(container.firstChild);
+        },
+
         define: function(id, element) {
             var root = this,
                 defs = root.definitions,
@@ -3102,6 +3077,20 @@
 
         createLinearGradient: function(options) {
             return new SVGLinearGradient(options);
+        },
+
+        alignToScreen: function(element) {
+            if (element.getScreenCTM) {
+                var ctm = element.getScreenCTM(),
+                    left = - ctm.e % 1,
+                    top = - ctm.f % 1,
+                    style = element.style;
+
+                if (left > 0 || top > 0) {
+                    style.left = left + "px";
+                    style.top = top + "px";
+                }
+            }
         }
     });
 
@@ -3285,6 +3274,10 @@
         options: {
             width: DEFAULT_WIDTH,
             height: DEFAULT_HEIGHT
+        },
+
+        renderTo: function(container) {
+            container.innerHTML = this.render();
         },
 
         createText: function(content, options) {
@@ -3636,6 +3629,30 @@
 
         return destination;
     }
+
+    // renderSVG ==============================================================
+    function renderSVG(container, svg) {
+        container.innerHTML = svg;
+    }
+
+    (function() {
+        var testFragment = "<svg xmlns='" + SVG_NS + "'></svg>",
+            testContainer = document.createElement("div"),
+            hasParser = typeof DOMParser != UNDEFINED;
+
+        testContainer.innerHTML = testFragment;
+
+        if (hasParser && testContainer.firstChild.namespaceURI != SVG_NS) {
+            renderSVG = function(container, svg) {
+                var parser = new DOMParser(),
+                    chartDoc = parser.parseFromString(svg, "text/xml"),
+                    importedDoc = document.adoptNode(chartDoc.documentElement);
+
+                container.innerHTML = "";
+                container.appendChild(importedDoc);
+            };
+        }
+    })();
 
     var Color = function(value) {
         var color = this,
