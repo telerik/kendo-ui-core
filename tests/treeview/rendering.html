@@ -309,21 +309,6 @@
                 equal(image.attr("src"), "foo");
             });
 
-            test("renders item value", function() {
-                var $item = $(rendering.renderItem({
-                    item: {
-                        text: "text",
-                        value: "foo"
-                    }
-                }));
-
-                var input = $item.find(".t-input");
-
-                equal(input.length, 1);
-                equal(input.val(), "foo");
-                equal(input.attr("type"), "hidden");
-            });
-
             test("renders text", function() {
                 var $item = $(rendering.renderItem({
                     item: {

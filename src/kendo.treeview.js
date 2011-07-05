@@ -368,10 +368,6 @@
             return $(node).closest(NODE).find(">div>.t-in").text();
         },
 
-        value: function (node) {
-            return $(node).closest(NODE).find(">div>:input[name='value']").val() || this.text(node);
-        },
-
         _insertNode: function(nodeData, parentNode, group, insertCallback) {
             var that = this,
                 updatedGroupLength = group.children().length + 1,
@@ -777,7 +773,6 @@
                 image: item.imageUrl ? templates.image : empty,
                 sprite: item.spriteCssClass ? templates.sprite : empty,
                 itemWrapper: templates.itemWrapper,
-                value: item.value ? templates.value : empty,
                 toggleButton: item.items ? templates.toggleButton : empty,
                 checkbox: (treeview.showCheckboxes && item.checkable !== false) ? templates.checkbox : empty,
                 checkboxValues: item.checked === true ? templates.checkboxValues : empty,
@@ -826,7 +821,6 @@
                 "<<%= tag(item) %> class='<%= textClass(item) %>'<%= textAttributes(item) %>>" +
                     "<%= image(item) %><%= sprite(item) %><%= text(item) %>" +
                 "</<%= tag(item) %>>" +
-                "<%= value(item) %>"+
             "</div>"
         ),
         item: template(

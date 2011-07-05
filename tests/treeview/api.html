@@ -135,48 +135,6 @@
                 equals(treeview.data("kendoTreeView").text(node), "foo");
             });
 
-            test("value(node) returns node value", function() {
-                var treeview = createTreeView({
-                        dataSource: [
-                            { text: "foo", value: 7, items: [
-                                { text: "bar", value: 42 }
-                            ] }
-                        ]
-                    });
-
-                var node = treeview.find(".t-item:first");
-
-                equals(treeview.data("kendoTreeView").value(node), 7);
-            });
-
-            test("value(node) returns node text, if it is of no value", function() {
-                var treeview = createTreeView({
-                        dataSource: [
-                            { text: "foo", items: [
-                                { text: "bar", value: 42 }
-                            ] }
-                        ]
-                    });
-
-                var node = treeview.find(".t-item:first");
-
-                equals(treeview.data("kendoTreeView").value(node), "foo");
-            });
-
-            test("value(node) returns node if inner element is passed", function() {
-                var treeview = createTreeView({
-                        dataSource: [
-                            { text: "foo", value: 7, items: [
-                                { text: "bar", value: 42 }
-                            ] }
-                        ]
-                    });
-
-                var node = treeview.find(".t-item:first .t-icon");
-
-                equals(treeview.data("kendoTreeView").value(node), 7);
-            });
-
             test("findByText(text) returns correct node", function() {
                 var treeview = createTreeView({
                         dataSource: [
