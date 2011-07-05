@@ -24,38 +24,59 @@
         <!-- description -->
         <div id="example">
             <div class="configuration">
-                <label>Node text: <input id="node" type="text" /></label><br>
-                <button class="t-button" id="selectNode">Select node</button><br>
                 <button class="t-button" id="disableNode">Disable node</button><br>
+                <button class="t-button" id="enableAllNodes">Enable all nodes</button><br>
                 <button class="t-button" id="removeNode">Remove node</button><br>
-                <button class="t-button" id="appendNode">Append node</button><br>
+                <button class="t-button" id="expandAllNodes">Expand all nodes</button><br>
+                <button class="t-button" id="collapseAllNodes">Collapse all nodes</button><br>
+
+                <fieldset>
+                    <legend>Insert new node</legend>
+                    <label for="text">Node text</label><input name="text" id="text" /><br>
+                    <button class="t-button" id="appendNodeToSelected">Append node</button><br>
+                </fieldset>
             </div>
 
             <script>
-                $(".configuration")
-                    .delegate(".t-button", "click", function(e) {
-                        e.preventDefault();
-
-                        var item = treeview.findByText($("#node").val());
+                $("#disableNode").click(function() {
+                    var selectedNode = treeview.selected();
                         
-                        switch (this.id) {
-                            case "selectNode":
-                                treeview.select(item);
-                            break;
+                    treeview.enable(selectedNode, false);
+                });
+                
+                $("#enableAllNodes").click(function() {
+                    var selectedNode = treeview.selected();
+                        
+                    treeview.enable(".t-item");
+                });
+                
+                $("#removeNode").click(function() {
+                    var selectedNode = treeview.selected();
+                        
+                    treeview.remove(selectedNode);
+                });
 
-                            case "removeNode":
-                                treeview.remove(item);
-                            break;
+                $("#expandAllNodes").click(function() {
+                    treeview.expand(".t-item");
+                });
+                
+                $("#collapseAllNodes").click(function() {
+                    treeview.collapse(".t-item");
+                });
+                
+                $("#appendNodeToSelected").click(function() {
+                    var selectedNode = treeview.selected();
 
-                            case "disableNode":
-                                treeview.enable(item, false);
-                            break;
+                    // passing a falsy value as the second append() parameter
+                    // will append the new node to the root group
+                    if (selectedNode.length == 0) {
+                        selectedNode = null;
+                    }
 
-                            case "appendNode":
-                                treeview.append({ text: "new node" }, item);
-                            break;
-                        }
-                    });
+                    treeview.append({
+                        text: $("#text").val()
+                    }, selectedNode);
+                });
             </script>
 
             <div id="TreeView"></div>

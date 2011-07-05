@@ -183,7 +183,7 @@
 
                 that._updateNodeHtml(node);
 
-                that._updateNodeClasses(node, nodeData, groupData);
+                that._updateNodeClasses(node, groupData, nodeData);
 
                 // iterate over child items
                 that._group(node);
@@ -223,7 +223,7 @@
             }
         },
 
-        _updateNodeClasses: function(node, nodeData, groupData) {
+        _updateNodeClasses: function(node, groupData, nodeData) {
             var helpers = this.rendering.helpers,
                 wrapper = node.find(">div"),
                 subGroup = node.find(SUBGROUP),
@@ -323,6 +323,10 @@
             }
         },
 
+        selected: function() {
+            return this.element.find(".t-state-selected").closest(NODE);
+        },
+
         toggle: function (node) {
             if (node.find(".t-minus,.t-plus").length == 0) {
                 return;
@@ -368,45 +372,18 @@
             return $(node).closest(NODE).find(">div>:input[name='value']").val() || this.text(node);
         },
 
-        insertBefore: function (nodeData, referenceNode) {
+        _insertNode: function(nodeData, parentNode, group, insertCallback) {
             var that = this,
-                group = referenceNode.parent(),
-                updatedGroupLength = group.children().length + 1,
-                groupData = {
-                    isFirstLevel: group.parent().hasClass(TTREEVIEW),
-                    length: updatedGroupLength
-                },
-                result = $(that.rendering.renderItem({
-                    group: groupData,
-                    item: extend({
-                        index: referenceNode.index()
-                    }, nodeData)
-                })).insertBefore(referenceNode)
-                parentNode = group.parent();
-
-            if (parentNode.hasClass("t-item")) {
-                that._updateNodeHtml(parentNode);
-                that._updateNodeClasses(parentNode);
-            }
-
-            that._updateNodeClasses(result.prev());
-            that._updateNodeClasses(result.next());
-
-            return result;
-        },
-
-        append: function (nodeData, parentNode) {
-            parentNode = parentNode || this.element;
-
-            var that = this,
-                group = parentNode.find(SUBGROUP),
-                result,
                 updatedGroupLength = group.children().length + 1,
                 groupData = {
                     isFirstLevel: parentNode.hasClass(TTREEVIEW),
                     isExpanded: true,
                     length: updatedGroupLength
-                };
+                },
+                node = $(that.rendering.renderItem({
+                    group: groupData,
+                    item: nodeData
+                }));
 
             if (!group.length) {
                 group = $(that.rendering.renderGroup({
@@ -414,22 +391,39 @@
                 })).appendTo(parentNode);
             }
 
-            result = $(that.rendering.renderItem({
-                group: groupData,
-                item: extend({
-                    index: updatedGroupLength - 1
-                }, nodeData)
-            })).appendTo(group);
+            insertCallback(node, group);
 
             if (parentNode.hasClass("t-item")) {
                 that._updateNodeHtml(parentNode);
                 that._updateNodeClasses(parentNode);
             }
 
-            that._updateNodeClasses(result.prev());
-            that._updateNodeClasses(result.next());
+            that._updateNodeClasses(node.prev(), groupData);
+            that._updateNodeClasses(node.next(), groupData);
 
-            return result;
+            return node;
+        },
+
+        insertBefore: function (nodeData, referenceNode) {
+            var group = referenceNode.parent();
+
+            nodeData = extend(nodeData, { index: referenceNode.index() });
+
+            return this._insertNode(nodeData, group.parent(), group, function(item, group) {
+                item.insertBefore(referenceNode);
+            });
+        },
+
+        append: function (nodeData, parentNode) {
+            parentNode = parentNode || this.element;
+
+            var group = parentNode.find(SUBGROUP);
+
+            nodeData = extend(nodeData, { index: group.children().length });
+
+            return this._insertNode(nodeData, parentNode, group, function(item, group) {
+                item.appendTo(group);
+            });
         },
 
         remove: function (node) {
