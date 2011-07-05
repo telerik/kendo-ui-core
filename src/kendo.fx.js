@@ -417,80 +417,72 @@
         },
         expandVertical: {
             play: function(element, properties, options) {
+                if (!element.data('overflow'))
+                    element.data('overflow', element.css('overflow'));
+
+                element
+                    .css({ overflow: 'hidden' })
+                    .css('overflow');
+
                 var height = element.data('height'),
                     scrollHeight = element[0].scrollHeight + element.height() - element.innerHeight();
 
-                if (!height || scrollHeight != Math.round(height)) {
-                    var clone = element.clone(true);
-                    element.css({
-                        height: 0,
-                        overflow: 'hidden'
-                    });
-                    element.css('height');
-
-                    clone
-                        .css({ position: 'absolute', height: 'auto', overflow: 'hidden', visibility: 'hidden', top: '-10000px', width: element.width() })
-                        .appendTo(element.parent());
-
-                    height = clone.height();
-                    clone.remove();
-
-                    element.data({
-                        height: height,
-                        overflow: clone.css('overflow')
-                    });
+                if (!height || Math.abs(scrollHeight - height) > 1) {
+                    height = element.height();
+                    element.data('height', height);
                 }
 
-                animate(element, extend({ height: height + 'px' }, properties), extend(options, { teardown: function () { element.css('overflow', element.data('overflow')) } }));
+                element
+                    .css({ height: 0 })
+                    .css('height');
+
+                animate(element, extend({ height: height + 'px' }, properties), extend(options, { teardown: function () { element.css('overflow', element.data('overflow')); } }));
             },
             reverse: function(element, properties, options) {
-                if (!element.data('overflow')) {
-                    element.data({ overflow: element.css('overflow') });
-                    element.css({ overflow: 'hidden' });
-                }
-
                 if (!element.data('height'))
-                    element.data({ height: element.height() });
+                    element.data('height', element.height());
 
-                animate(element, extend({ height: 0 }, properties), extend(options, { teardown: function () { element.css('overflow', element.data('overflow')) } }));
+                if (!element.data('overflow'))
+                    element.data('overflow', element.css('overflow'));
+
+                element
+                    .css({ overflow: 'hidden' })
+                    .css('overflow');
+
+                animate(element, extend({ height: 0 }, properties), extend(options, { teardown: function () { element.css('overflow', element.data('overflow')); } }));
             }
         },
         expandHorizontal: {
             play: function(element, properties, options) {
+                if (!element.data('overflow'))
+                    element.data('overflow', element.css('overflow'));
+
+                element
+                    .css({ overflow: 'hidden' })
+                    .css('overflow');
+
                 var width = element.data('width'),
                     scrollWidth = element[0].scrollWidth + element.width() - element.innerWidth();
                 
-                if (!width || scrollWidth != Math.round(width)) {
-                    var clone = element.clone(true);
-                    element.css({
-                        width: 0,
-                        overflow: 'hidden'
-                    });
-
-                    clone
-                        .css({ position: 'absolute', width: '100%', overflow: 'hidden', visibility: 'hidden', top: '-10000px' })
-                        .appendTo(element.parent());
-
-                    width = clone.width();
-                    clone.remove();
-
-                    element.data({
-                        width: width,
-                        overflow: clone.css('overflow')
-                    });
+                if (!width || Math.abs(scrollWidth - width) > 1) {
+                    width = element.width();
+                    element.data('width', width);
                 }
+
+                element
+                    .css({ width: 0 })
+                    .css('width');
 
                 animate(element, extend({ width: width + 'px' }, properties), extend(options, { teardown: function () { element.css('overflow', element.data('overflow')) } }));
             },
             reverse: function(element, properties, options) {
-                if (!element.data('width')) {
-                    element.data({
-                        width: element.width(),
-                        overflow: element.css('overflow')
-                    });
+                if (!element.data('width'))
+                    element.data({ width: element.width() });
 
-                    element.css({ overflow: 'hidden' });
-                }
+                if (!element.data('overflow'))
+                    element.data({ overflow: element.css('overflow') });
+
+                element.css({ overflow: 'hidden' });
 
                 animate(element, extend({ width: 0 }, properties), extend({ teardown: function () { element.css('overflow', element.data('overflow')) } }, options));
             }
