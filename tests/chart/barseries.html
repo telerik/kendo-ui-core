@@ -17,8 +17,7 @@
                 chartBox = new Box2D(0, 0, 800, 600),
                 plotArea,
                 series,
-                viewRoot,
-                factory;
+                view;
 
             function BarStub(box) {
                 this.box = box;
@@ -31,8 +30,7 @@
             };
 
             function setupBarChart(plotArea, options) {
-                viewRoot = new ViewElementStub();
-                factory = new ViewFactoryStub();
+                view = new ViewStub();
 
                 series = new Chart.BarChart(plotArea, options);
                 series.reflow();
@@ -533,8 +531,8 @@
                             visible: true
                         }
                     }] });
-                    series.getViewElements(viewRoot, factory);
-                    equal(factory.log.text[0].style.color, COLOR);
+                    series.getViewElements(view);
+                    equal(view.log.text[0].style.color, COLOR);
                 });
 
                 test("bars labels should have background color", function() {
@@ -545,8 +543,8 @@
                             visible: true
                         }
                     }] });
-                    series.getViewElements(viewRoot, factory);
-                    equal(factory.log.rect[1].style.fill, BACKGROUND);
+                    series.getViewElements(view);
+                    equal(view.log.rect[1].style.fill, BACKGROUND);
                 });
 
                 test("bars labels should have border", function() {
@@ -557,9 +555,9 @@
                             visible: true
                         }
                     }] });
-                    series.getViewElements(viewRoot, factory);
-                    equal(factory.log.rect[1].style.stroke, BORDER.color);
-                    equal(factory.log.rect[1].style.strokeWidth, BORDER.width);
+                    series.getViewElements(view);
+                    equal(view.log.rect[1].style.stroke, BORDER.color);
+                    equal(view.log.rect[1].style.strokeWidth, BORDER.width);
                 });
 
                 test("bars labels should have padding and margin", function() {
@@ -570,7 +568,7 @@
                             visible: true
                         }
                     }] });
-                    series.getViewElements(viewRoot, factory);
+                    series.getViewElements(view);
                     var barLabel = series._bars[0].children[0].children[0],
                         paddingBox = barLabel.paddingBox,
                         box = barLabel.box;
@@ -619,7 +617,7 @@
                 // ------------------------------------------------------------
                 module("Bar Chart / Labels / Positive Values with bar series", {
                     setup: function() {
-                        factory = new ViewFactoryStub();
+                        view = new ViewStub();
                         setupBarChart(plotArea, { series: [{
                             data: positiveData,
                             labels: {
@@ -693,7 +691,7 @@
                 // ------------------------------------------------------------
                 module("Bar Chart / Labels / Negative Values with bar series", {
                     setup: function() {
-                        factory = new ViewFactoryStub();
+                        view = new ViewStub();
                         setupBarChart(plotArea, { series: [{
                             data: negativeData,
                             labels: {

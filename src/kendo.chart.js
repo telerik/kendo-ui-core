@@ -50,7 +50,6 @@
             chart.options = deepExtend(chart.options, theme ? Chart.Themes[theme] || Chart.Themes[theme.toLowerCase()] : { }, options);
 
             chart.bind([DATABOUND], chart.options);
-            chart._viewFactory = chart._supportsSVG() ? new SVGFactory() : new VMLFactory();
 
             if (chart.options.dataSource) {
                 chart._initDataSource();
@@ -115,14 +114,9 @@
             chart._model = model;
 
             model.reflow();
-            var html = model.getView(chart._viewFactory).render();
+            var html = model.getView().render();
             setContent(chart.element[0], html);
             alignToScreen(chart.element[0].firstChild);
-        },
-
-        _supportsSVG: function() {
-            return document.implementation.hasFeature(
-                "http://www.w3.org/TR/SVG11/feature#BasicStructure", "1.1");
         },
 
         _applyDefaults: function() {
@@ -1204,7 +1198,7 @@
             element.box = box;
         },
 
-        getViewElements: function(viewRoot, factory) {
+        getViewElements: function(viewRoot) {
             var element = this,
                 viewElements = [],
                 children = element.children,
@@ -1212,7 +1206,7 @@
 
             for (var i = 0; i < childrenCount; i++) {
                 viewElements.push.apply(viewElements,
-                    children[i].getViewElements(viewRoot, factory));
+                    children[i].getViewElements(viewRoot));
             };
 
             return viewElements;
@@ -1261,23 +1255,23 @@
             };
         },
 
-        getView: function(factory) {
+        getView: function() {
             var root = this,
-                viewRoot = factory.root(root.options),
-                viewElements = viewRoot.children;
+                options = root.options,
+                viewRoot = root.supportsSVG() ? new SVGView(options) : new VMLView(options);
 
-            viewElements.push.apply(viewElements, root.getViewElements(viewRoot, factory));
+            [].push.apply(viewRoot.children, root.getViewElements(viewRoot));
 
             return viewRoot;
         },
 
-        getViewElements: function(viewRoot, factory) {
+        getViewElements: function(viewRoot) {
             var root = this,
                 options = root.options,
                 border = options.border || {},
                 box = root.box.clone().pad(options.margin).unpad(border.width),
                 elements = [
-                    factory.rect(viewRoot, box, {
+                    viewRoot.rect(viewRoot, box, {
                         stroke: border.width ? border.color : "",
                         strokeWidth: border.width,
                         fill: options.background,
@@ -1285,8 +1279,13 @@
                 ];
 
             return elements.concat(
-                ChartElement.fn.getViewElements.call(root, viewRoot, factory)
+                ChartElement.fn.getViewElements.call(root, viewRoot)
             );
+        },
+
+        supportsSVG: function() {
+            return document.implementation.hasFeature(
+                "http://www.w3.org/TR/SVG11/feature#BasicStructure", "1.1");
         }
     });
 
@@ -1364,19 +1363,19 @@
             }
         },
 
-        getViewElements: function(viewRoot, factory) {
+        getViewElements: function(viewRoot) {
             var element = this,
                 options = element.options,
                 border = options.border || {},
                 elements = [
-                    factory.rect(viewRoot, element.paddingBox, {
+                    viewRoot.rect(viewRoot, element.paddingBox, {
                         stroke: border.width ? border.color : "",
                         strokeWidth: border.width,
                         fill: options.background })
                 ];
 
             return elements.concat(
-                ChartElement.fn.getViewElements.call(element, viewRoot, factory)
+                ChartElement.fn.getViewElements.call(element, viewRoot)
             );
         }
     });
@@ -1437,12 +1436,12 @@
             }
         },
 
-        getViewElements: function(viewRoot, factory) {
+        getViewElements: function(viewRoot) {
             var text = this,
                 options = text.options;
 
             return [
-                factory.text(text.content, {
+                viewRoot.text(text.content, {
                     x: text.box.x1, y: text.box.y1,
                     baseline: text.baseline,
                     font: options.font,
@@ -1648,17 +1647,17 @@
             }
         },
 
-        getViewElements: function(viewRoot, factory) {
+        getViewElements: function(viewRoot) {
             var legend = this,
                 children = legend.children,
                 options = legend.options,
                 series = options.series,
                 markerSize = legend.markerSize(),
-                group = factory.group({ zIndex: options.zIndex }),
+                group = viewRoot.group({ zIndex: options.zIndex }),
                 border = options.border || {},
                 labelBox;
 
-            [].push.apply(group.children, ChartElement.fn.getViewElements.call(legend, viewRoot, factory));
+            [].push.apply(group.children, ChartElement.fn.getViewElements.call(legend, viewRoot));
 
             for (var i = 0, length = series.length; i < length; i++) {
                 var color = series[i].color,
@@ -1677,14 +1676,14 @@
 
                 markerBox.y2 = markerBox.y1 + markerSize;
 
-                group.children.push(factory.rect(viewRoot, markerBox, { fill: color, stroke: color }));
+                group.children.push(viewRoot.rect(viewRoot, markerBox, { fill: color, stroke: color }));
             };
 
             if (children.length > 0) {
                 var padding = getSpacing(options.padding);
                 padding.left += markerSize * 2;
                 labelBox.pad(padding);
-                group.children.unshift(factory.rect(viewRoot, labelBox, {
+                group.children.unshift(viewRoot.rect(viewRoot, labelBox, {
                     stroke: border.width ? border.color : "",
                     strokeWidth: border.width,
                     fill: options.background })
@@ -1835,7 +1834,7 @@
             margin: 5
         },
 
-        renderTicks: function(factory) {
+        renderTicks: function(view) {
             var axis = this,
                 options = axis.options,
                 isVertical = options.orientation === VERTICAL,
@@ -1878,7 +1877,7 @@
 
             return $.map(ticks, function(tick) {
                 if (isVertical) {
-                    return factory.line(
+                    return view.line(
                             box.x2 - tick.size, tick.pos, box.x2, tick.pos,
                             {
                                 strokeWidth: tick.width,
@@ -1886,7 +1885,7 @@
                             }
                     );
                 } else {
-                    return factory.line(
+                    return view.line(
                             tick.pos, box.y1, tick.pos, box.y1 + tick.size,
                             {
                                 strokeWidth: tick.width,
@@ -2034,17 +2033,17 @@
             axis.arrangeLabels(maxLabelWidth, maxLabelHeight);
         },
 
-        getViewElements: function(viewRoot, factory) {
+        getViewElements: function(viewRoot) {
             var axis = this,
                 children = axis.children,
                 options = axis.options,
                 isVertical = options.orientation === VERTICAL,
-                childElements = ChartElement.fn.getViewElements.call(axis, viewRoot, factory);
+                childElements = ChartElement.fn.getViewElements.call(axis, viewRoot);
 
             var majorTickPositions = axis.getMajorTickPositions();
             if (options.line.width > 0) {
                 if (isVertical) {
-                    childElements.push(factory.line(
+                    childElements.push(viewRoot.line(
                         axis.box.x2, majorTickPositions[0],
                         axis.box.x2, majorTickPositions[majorTickPositions.length - 1],
                         {
@@ -2053,7 +2052,7 @@
                             zIndex: options.zIndex
                         }));
                 } else {
-                    childElements.push(factory.line(
+                    childElements.push(viewRoot.line(
                         majorTickPositions[0], axis.box.y1,
                         majorTickPositions[majorTickPositions.length - 1], axis.box.y1,
                         {
@@ -2063,7 +2062,7 @@
                         }));
                 }
 
-                [].push.apply(childElements, axis.renderTicks(factory));
+                [].push.apply(childElements, axis.renderTicks(viewRoot));
             }
 
             return childElements;
@@ -2303,16 +2302,16 @@
             axis.arrangeLabels(maxLabelWidth, maxLabelHeight, "onMinorTicks");
         },
 
-        getViewElements: function(viewRoot, factory) {
+        getViewElements: function(viewRoot) {
             var axis = this,
                 children = axis.children,
                 options = axis.options,
                 isVertical = options.orientation === VERTICAL,
-                childElements = ChartElement.fn.getViewElements.call(axis, viewRoot, factory);
+                childElements = ChartElement.fn.getViewElements.call(axis, viewRoot);
 
             if (options.line.width > 0) {
                 if (isVertical) {
-                    childElements.push(factory.line(
+                    childElements.push(viewRoot.line(
                         axis.box.x2, axis.box.y1, axis.box.x2, axis.box.y2,
                         {
                             strokeWidth: options.line.width,
@@ -2320,7 +2319,7 @@
                             zIndex: options.zIndex
                         }));
                 } else {
-                    childElements.push(factory.line(
+                    childElements.push(viewRoot.line(
                         axis.box.x1, axis.box.y1, axis.box.x2, axis.box.y1,
                         {
                             strokeWidth: options.line.width,
@@ -2329,7 +2328,7 @@
                         }));
                 }
 
-                [].push.apply(childElements, axis.renderTicks(factory));
+                [].push.apply(childElements, axis.renderTicks(viewRoot));
             }
 
             return childElements;
@@ -2498,7 +2497,7 @@
             }
         },
 
-        getViewElements: function(viewRoot, factory) {
+        getViewElements: function(viewRoot) {
             var bar = this,
                 options = bar.options,
                 isVertical = options.isVertical,
@@ -2516,10 +2515,10 @@
                 elements = [];
 
             elements.push(
-                factory.rect(viewRoot, box, rectStyle)
+                viewRoot.rect(viewRoot, box, rectStyle)
             );
             [].push.apply(elements,
-                ChartElement.fn.getViewElements.call(bar, viewRoot, factory)
+                ChartElement.fn.getViewElements.call(bar, viewRoot)
             );
             return elements;
         }
@@ -2852,7 +2851,7 @@
             );
         },
 
-        renderGridLines: function(factory, axis, secondaryAxis) {
+        renderGridLines: function(view, axis, secondaryAxis) {
             var options = axis.options,
                 isVertical = options.orientation === VERTICAL,
                 boundaries = secondaryAxis.getMajorTickPositions(),
@@ -2901,14 +2900,14 @@
                     }
 
                     if (isVertical) {
-                        return factory.line(
+                        return view.line(
                             lineStart, linePos, lineEnd, linePos,
                             {
                                 strokeWidth: line.options.width,
                                 stroke: line.options.color
                             });
                     } else {
-                        return factory.line(
+                        return view.line(
                             linePos, lineStart, linePos, lineEnd,
                             {
                                 strokeWidth: line.options.width,
@@ -2918,20 +2917,20 @@
                 });
         },
 
-        getViewElements: function(viewRoot, factory) {
+        getViewElements: function(viewRoot) {
             var plotArea = this,
                 options = plotArea.options.plotArea,
                 axisY = plotArea.axisY,
                 axisX = plotArea.axisX,
-                gridLinesY = plotArea.renderGridLines(factory, axisY, axisX),
-                gridLinesX = plotArea.renderGridLines(factory, axisX, axisY),
-                childElements = ChartElement.fn.getViewElements.call(plotArea, viewRoot, factory),
+                gridLinesY = plotArea.renderGridLines(viewRoot, axisY, axisX),
+                gridLinesX = plotArea.renderGridLines(viewRoot, axisX, axisY),
+                childElements = ChartElement.fn.getViewElements.call(plotArea, viewRoot),
                 border = options.border || {},
                 elements = [
-                    factory.rect(viewRoot, plotArea.box, {
+                    viewRoot.rect(viewRoot, plotArea.box, {
                         fill: options.background,
                         zIndex: -1 }),
-                    factory.rect(viewRoot, plotArea.box, {
+                    viewRoot.rect(viewRoot, plotArea.box, {
                         stroke: border.width ? border.color : "",
                         strokeWidth: border.width,
                         fill: "",
@@ -2995,14 +2994,14 @@
 
     // TODO: Refactor into alpha overlay + two fill types
     //       Avoid instantiating gradients more than once
-    function SVGGlassEffect(element, rotation, viewRoot, factory) {
+    function SVGGlassEffect(element, rotation, viewRoot) {
         var gradientId = "glass" + rotation,
             gradientOptions = deepExtend({}, glassGradient, {
                 rotation: rotation,
                 id: gradientId
             }),
-            gradient = factory.linearGradient(gradientOptions),
-            group = factory.group(),
+            gradient = viewRoot.linearGradient(gradientOptions),
+            group = viewRoot.group(),
             overlay = element.clone();
 
         overlay.options.fill = idRef(gradientId);
@@ -3017,45 +3016,7 @@
         return "url(#" + id + ")";
     }
 
-    function SVGFactory() {}
-
-    SVGFactory.prototype = {
-        root: function(options) {
-            return new SVGRoot(options);
-        },
-
-        group: function(options) {
-            return new SVGGroup(options);
-        },
-
-        text: function(content, options) {
-            return new SVGText(content, options);
-        },
-
-        rect: function(viewRoot, box, style) {
-            var rect = new SVGPath(
-                [[box.x1, box.y1], [box.x2, box.y1],
-                [box.x2, box.y2], [box.x1, box.y2], [box.x1, box.y1]],
-                style
-            );
-
-            if (style && style.glassEffect) {
-                return SVGGlassEffect(rect, style.glassEffectRotation, viewRoot, this);
-            }
-
-            return rect;
-        },
-
-        line: function(x1, y1, x2, y2, options) {
-            return new SVGPath([[x1, y1], [x2, y2]], options);
-        },
-
-        linearGradient: function(options) {
-            return new SVGLinearGradient(options);
-        }
-    };
-
-    var SVGRoot = ViewElement.extend({
+    var SVGView = ViewElement.extend({
         init: function(options) {
             var root = this;
 
@@ -3064,9 +3025,9 @@
             root.definitions = [];
             root.definitionIds = [];
 
-            root.template = SVGRoot.template;
+            root.template = SVGView.template;
             if (!root.template) {
-                root.template = SVGRoot.template = template(
+                root.template = SVGView.template = template(
                     "<svg xmlns='http://www.w3.org/2000/svg' version='1.1' " +
                     "width='<%= options.width %>px' height='<%= options.height %>px' " +
                     "style='position: relative;'>" +
@@ -3111,6 +3072,36 @@
             }
 
             return "<defs>" + output + "</defs>";
+        },
+
+        group: function(options) {
+            return new SVGGroup(options);
+        },
+
+        text: function(content, options) {
+            return new SVGText(content, options);
+        },
+
+        rect: function(viewRoot, box, style) {
+            var rect = new SVGPath(
+                [[box.x1, box.y1], [box.x2, box.y1],
+                [box.x2, box.y2], [box.x1, box.y2], [box.x1, box.y1]],
+                style
+            );
+
+            if (style && style.glassEffect) {
+                return SVGGlassEffect(rect, style.glassEffectRotation, this);
+            }
+
+            return rect;
+        },
+
+        line: function(x1, y1, x2, y2, options) {
+            return new SVGPath([[x1, y1], [x2, y2]], options);
+        },
+
+        linearGradient: function(options) {
+            return new SVGLinearGradient(options);
         }
     });
 
@@ -3258,12 +3249,12 @@
         }
     });
 
-    function VMLGlassEffect(element, rotation, viewRoot, factory) {
+    function VMLGlassEffect(element, rotation, viewRoot) {
         var gradientOptions = deepExtend(
                 blendGradient(element.options.fill, glassGradient),
                 { rotation: 270 - rotation }
             ),
-            gradient = factory.linearGradient(gradientOptions);
+            gradient = viewRoot.linearGradient(gradientOptions);
 
         element.options.fill = "";
         element.children.push(gradient);
@@ -3271,15 +3262,29 @@
         return element;
     }
 
-    function VMLFactory() {
-        if (document.namespaces) {
-            document.namespaces.add("kvml", "urn:schemas-microsoft-com:vml", "#default#VML");
-        }
-    }
+    var VMLView = ViewElement.extend({
+        init: function(options) {
+            // TODO: Move to actual rendering phase
+            if (document.namespaces) {
+                document.namespaces.add("kvml", "urn:schemas-microsoft-com:vml", "#default#VML");
+            }
 
-    VMLFactory.prototype = {
-        root: function(options) {
-            return new VMLRoot(options);
+            var root = this;
+            ViewElement.fn.init.call(root, options);
+
+            root.template = VMLView.template;
+            if (!root.template) {
+                root.template = VMLView.template = template(
+                    "<div style='width:<%= options.width %>px; height:<%= options.height %>px; " +
+                    "position: relative;'>" +
+                    "<%= renderContent() %></div>"
+                );
+            }
+        },
+
+        options: {
+            width: DEFAULT_WIDTH,
+            height: DEFAULT_HEIGHT
         },
 
         text: function(content, options) {
@@ -3294,7 +3299,7 @@
             );
 
             if (style && style.glassEffect) {
-                return VMLGlassEffect(rect, style.glassEffectRotation, viewRoot, this);
+                return VMLGlassEffect(rect, style.glassEffectRotation, this);
             }
 
             return rect;
@@ -3310,27 +3315,6 @@
 
         linearGradient: function(options) {
             return new VMLLinearGradient(options);
-        }
-    };
-
-    var VMLRoot = ViewElement.extend({
-        init: function(options) {
-            var root = this;
-            ViewElement.fn.init.call(root, options);
-
-            root.template = VMLRoot.template;
-            if (!root.template) {
-                root.template = VMLRoot.template = template(
-                    "<div style='width:<%= options.width %>px; height:<%= options.height %>px; " +
-                    "position: relative;'>" +
-                    "<%= renderContent() %></div>"
-                );
-            }
-        },
-
-        options: {
-            width: DEFAULT_WIDTH,
-            height: DEFAULT_HEIGHT
         }
     });
 
@@ -3885,13 +3869,11 @@
     Chart.Legend = Legend;
     Chart.PlotArea = PlotArea;
     Chart.ViewElement = ViewElement;
-    Chart.SVGFactory = SVGFactory;
-    Chart.SVGRoot = SVGRoot;
+    Chart.SVGView = SVGView;
     Chart.SVGGroup = SVGGroup;
     Chart.SVGText = SVGText;
     Chart.SVGPath = SVGPath;
-    Chart.VMLFactory = VMLFactory;
-    Chart.VMLRoot = VMLRoot;
+    Chart.VMLView = VMLView;
     Chart.VMLText = VMLText;
     Chart.VMLPath = VMLPath;
     Chart.VMLGroup = VMLGroup;

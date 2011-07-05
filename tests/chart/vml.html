@@ -20,66 +20,60 @@
                 };
 
             (function() {
-                var factory;
+                var view;
 
-                module("VMLFactory", {
+                module("VMLView", {
                     setup: function() {
-                        factory = new Chart.VMLFactory();
+                        view = new Chart.VMLView();
                     }
                 });
 
-                test("root returns VMLRoot", function() {
-                    var root = factory.root();
-                    ok(root instanceof Chart.VMLRoot);
+                test("has default dimensions", function() {
+                    equal(view.options.width, 600);
+                    equal(view.options.height, 400);
                 });
 
-                test("root has default dimensions", function() {
-                    var root = factory.root();
-                    equal(root.options.width, 600);
-                    equal(root.options.height, 400);
-                });
-
-                test("root sets dimensions", function() {
-                    var root = factory.root({ width: "100px", height: "100px" });
-                    equal(root.options.width, "100px");
-                    equal(root.options.height, "100px");
+                test("sets dimensions", function() {
+                    view = new Chart.VMLView({ width: "100px", height: "100px" });
+                    equal(view.options.width, "100px");
+                    equal(view.options.height, "100px");
                 });
 
                 test("text returns VMLText", function() {
-                    var text = factory.text();
+                    var text = view.text();
                     ok(text instanceof Chart.VMLText);
                 });
 
                 test("text sets content", function() {
-                    var text = factory.text("Text");
+                    var text = view.text("Text");
                     equal(text.content, "Text");
                 });
 
                 test("rect returns VMLPath", function() {
-                    var rect = factory.rect(viewRoot, 10, 20, 100, 100);
+                    var rect = view.rect(viewRoot, 10, 20, 100, 100);
                     ok(rect instanceof Chart.VMLPath);
                 });
 
                 test("rect draws rectangle", function() {
-                    var rect = factory.rect(viewRoot, new Box2D(10, 20, 110, 220));
+                    var rect = view.rect(viewRoot, new Box2D(10, 20, 110, 220));
                     deepEqual(rect.points, [
                         [10, 20], [110, 20], [110, 220], [10, 220], [10, 20]
                     ]);
                 });
 
                 test("rect sets fill color", function() {
-                    var rect = factory.rect(viewRoot,
+                    var rect = view.rect(viewRoot,
                         new Box2D(10, 20, 110, 220), { fill: "#f00" });
                     equal(rect.options.fill, "#f00");
                 });
 
                 test("line returns VMLPath", function() {
-                    var line = factory.line();
+                    var line = view.line();
                     ok(line instanceof Chart.VMLPath);
                 });
 
                 test("line draws a line", function() {
-                    var line = factory.line(10, 20, 100, 200);
+                    var line = view.line(10, 20, 100, 200);
                     deepEqual(line.points, [ [10, 20], [100, 200] ]);
                 });
             })();
@@ -87,9 +81,9 @@
             (function() {
                 var root;
 
-                module("VMLRoot", {
+                module("VMLView", {
                     setup: function() {
-                        root = new Chart.VMLRoot();
+                        root = new Chart.VMLView();
                     }
                 });
 

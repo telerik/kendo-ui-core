@@ -16,8 +16,7 @@
             var Chart = kendo.ui.Chart,
                 Box2D = Chart.Box2D,
                 chartBox = new Box2D(5, 5, 1000, 1000),
-                viewRoot,
-                factory,
+                view,
                 TOLERANCE = 2;
 
                 function ChartElementStub(viewElement) {
@@ -34,8 +33,7 @@
                 }
 
                 function moduleSetup() {
-                    viewRoot = new ViewElementStub();
-                    factory = new ViewFactoryStub();
+                    view = new ViewStub();
                 }
 
 
@@ -77,8 +75,8 @@
                 }
 
                 function renderRoot() {
-                    rootElement.getViewElements(viewRoot, factory);
-                    rootRect = factory.log.rect[0];
+                    rootElement.getViewElements(view);
+                    rootRect = view.log.rect[0];
                 }
 
                 // ------------------------------------------------------------
@@ -90,35 +88,32 @@
                     }
                 });
 
-                test("creates root view element", function() {
-                    factory.root = function() {
-                        return viewRoot;
-                    };
-                    equal(rootElement.getView(factory), viewRoot);
+                test("SVGView is created if browser supports SVG", function() {
+                    Chart.RootElement.prototype.supportsSVG = function() { return true; };
+                    createRoot();
+                    ok(rootElement.getView() instanceof Chart.SVGView);
+                });
+
+                test("VMLView is created if browser does not support SVG", function() {
+                    Chart.RootElement.prototype.supportsSVG = function() { return false; };
+                    createRoot();
+                    ok(rootElement.getView() instanceof Chart.VMLView);
                 });
 
                 test("sets dimensions on view element", 2, function() {
-                    factory.root = function(options) {
-                        equal(options.width, 600);
-                        equal(options.height, 400);
-
-                        return new ViewElementStub();
-                    };
-
-                    rootElement.getView(factory);
+                    var view = rootElement.getView();
+                    equals(view.options.width, 600);
+                    equals(view.options.height, 400);
                 });
 
                 test("creates view elements for child elements", function() {
                     var group = new ViewElementStub(),
                         text = new ViewElementStub();
 
-                    factory.root = function() {
-                        return new ViewElementStub();
-                    };
                     rootElement.children.push(new ChartElementStub(group));
                     rootElement.children.push(new ChartElementStub(text));
 
-                    var view = rootElement.getView(factory);
+                    var view = rootElement.getView(view);
                     view.children.shift(); // Remove the rect
                     deepEqual(view.children, [ group, text ]);
                 });
@@ -473,42 +468,42 @@
                 test("renders border width", function() {
                     boxElement.options.border.width = 1;
                     boxElement.reflow(targetBox);
-                    boxElement.getViewElements(viewRoot, factory);
+                    boxElement.getViewElements(view);
 
-                    equal(factory.log.rect[0].style.strokeWidth, 1);
+                    equal(view.log.rect[0].style.strokeWidth, 1);
                 });
 
                 test("renders border color", function() {
                     boxElement.options.border.color = "#f00";
                     boxElement.options.border.width = 1;
                     boxElement.reflow(targetBox);
-                    boxElement.getViewElements(viewRoot, factory);
+                    boxElement.getViewElements(view);
 
-                    equal(factory.log.rect[0].style.stroke, "#f00");
+                    equal(view.log.rect[0].style.stroke, "#f00");
                 });
 
                 test("does not render border color when no width is set", function() {
                     boxElement.options.border.color = "#f00";
                     boxElement.reflow(targetBox);
-                    boxElement.getViewElements(viewRoot, factory);
+                    boxElement.getViewElements(view);
 
-                    equal(factory.log.rect[0].style.stroke, "");
+                    equal(view.log.rect[0].style.stroke, "");
                 });
 
                 test("renders fill color", function() {
                     boxElement.options.background = "#f00";
                     boxElement.reflow(targetBox);
-                    boxElement.getViewElements(viewRoot, factory);
+                    boxElement.getViewElements(view);
 
-                    equal(factory.log.rect[0].style.fill, "#f00");
+                    equal(view.log.rect[0].style.fill, "#f00");
                 });
 
                 test("content box includes padding", function() {
                     boxElement.options.padding = PADDING;
                     boxElement.reflow(targetBox);
-                    boxElement.getViewElements(viewRoot, factory);
+                    boxElement.getViewElements(view);
 
-                    var rect = factory.log.rect[0];
+                    var rect = view.log.rect[0];
                     equal(rect.x2 - rect.x1, WIDTH + 2 * PADDING);
                     equal(rect.y2 - rect.y1, HEIGHT + 2 * PADDING);
                 });
@@ -516,9 +511,9 @@
                 test("padding box does not include border", function() {
                     boxElement.options.border.width = BORDER;
                     boxElement.reflow(targetBox);
-                    boxElement.getViewElements(viewRoot, factory);
+                    boxElement.getViewElements(view);
 
-                    var rect = factory.log.rect[0];
+                    var rect = view.log.rect[0];
                     equal(rect.x2 - rect.x1, WIDTH);
                     equal(rect.y2 - rect.y1, HEIGHT);
                 });
@@ -526,9 +521,9 @@
                 test("padding box does not include margin", function() {
                     boxElement.options.margin = MARGIN;
                     boxElement.reflow(targetBox);
-                    boxElement.getViewElements(viewRoot, factory);
+                    boxElement.getViewElements(view);
 
-                    var rect = factory.log.rect[0];
+                    var rect = view.log.rect[0];
                     equal(rect.x2 - rect.x1, WIDTH);
                     equal(rect.y2 - rect.y1, HEIGHT);
                 });
@@ -699,28 +694,28 @@
                 });
 
                 test("creates text view element", function() {
-                    var factory = {
+                    var view = {
                         text: function() {
                             return 42;
                         }
                     };
 
-                    deepEqual(text.getViewElements(viewRoot, factory), [ 42 ]);
+                    deepEqual(text.getViewElements(view), [ 42 ]);
                 });
 
                 test("sets content on view element", 1, function() {
-                    var factory = {
+                    var view = {
                         text: function(content) {
                             equal(content, "Content");
                         }
                     };
 
                     text.content = "Content";
-                    text.getViewElements(viewRoot, factory)
+                    text.getViewElements(view)
                 });
 
                 test("sets position on view element", 2, function() {
-                    var factory = {
+                    var view = {
                         text: function(content, options) {
                             equal(options.x, 100);
                             equal(options.y, 110);
@@ -728,29 +723,29 @@
                     };
 
                     text.reflow(new Box2D(100, 110, 200, 200));
-                    text.getViewElements(viewRoot, factory)
+                    text.getViewElements(view)
                 });
 
                 test("sets font", 1, function() {
-                    var factory = {
+                    var view = {
                         text: function(content, options) {
                             equal(options.font, text.options.font);
                         }
                     };
 
                     text.reflow(new Box2D());
-                    text.getViewElements(viewRoot, factory)
+                    text.getViewElements(view)
                 });
 
                 test("sets color", 1, function() {
-                    var factory = {
+                    var view = {
                         text: function(content, options) {
                             equal(options.color, text.options.color);
                         }
                     };
 
                     text.reflow(new Box2D());
-                    text.getViewElements(viewRoot, factory)
+                    text.getViewElements(view)
                 });
 
             })();
@@ -778,8 +773,8 @@
                 });
 
                 test("renders legend in a group", function() {
-                    legend.getViewElements(viewRoot, factory);
-                    equal(factory.log.group.length, 1);
+                    legend.getViewElements(view);
+                    equal(view.log.group.length, 1);
                 });
 
                 test("sets zIndex on group", function() {
@@ -787,8 +782,8 @@
                             zIndex: 10
                     });
 
-                    legend.getViewElements(viewRoot, factory);
-                    equal(factory.log.group[0].options.zIndex, 10);
+                    legend.getViewElements(view);
+                    equal(view.log.group[0].options.zIndex, 10);
                 });
 
                 test("default zIndex is 1", function() {
@@ -796,8 +791,8 @@
                 });
 
                 test("creates labels for series", 1, function() {
-                    legend.getViewElements(viewRoot, factory);
-                    equal(factory.log.text[0].content, "Series 1");
+                    legend.getViewElements(view);
+                    equal(view.log.text[0].content, "Series 1");
                 });
 
                 test("second label is below the first", function() {
@@ -948,15 +943,15 @@
                         });
 
                         legend.reflow(chartBox);
-                        legend.getViewElements(viewRoot, factory);
+                        legend.getViewElements(view);
 
-                        marker = factory.log.rect[0];
-                        label = factory.log.text[0];
+                        marker = view.log.rect[0];
+                        label = view.log.text[0];
                     }
                 });
 
                 test("creates markers for series", function() {
-                    equal(factory.log.rect.length, 2);
+                    equal(view.log.rect.length, 2);
                 });
 
                 test("sets marker color", function() {
@@ -1004,9 +999,9 @@
                         });
 
                         legend.reflow(chartBox);
-                        legend.getViewElements(viewRoot, factory);
+                        legend.getViewElements(view);
 
-                        legendBox = factory.log.rect[1];
+                        legendBox = view.log.rect[1];
                     }
                 });
 
@@ -1041,8 +1036,8 @@
                         bar = new Bar();
 
                         bar.reflow(box);
-                        bar.getViewElements(viewRoot, factory);
-                        rect = factory.log.rect[0];
+                        bar.getViewElements(view);
+                        rect = view.log.rect[0];
                     }
                 });
 
@@ -1061,10 +1056,10 @@
                 test("sets stroke color", function() {
                     bar.options.border.color = "red";
                     bar.options.border.width = 1;
-                    factory = new ViewFactoryStub();
+                    view = new ViewStub();
                     bar.reflow(box);
-                    bar.getViewElements(viewRoot, factory);
-                    rect = factory.log.rect[0];
+                    bar.getViewElements(view);
+                    rect = view.log.rect[0];
 
                     same(rect.style.stroke, bar.options.border.color);
                 });
@@ -1072,10 +1067,10 @@
                 test("sets stroke width", function() {
                     bar.options.border.color = "red";
                     bar.options.border.width = 1;
-                    factory = new ViewFactoryStub();
+                    view = new ViewStub();
                     bar.reflow(box);
-                    bar.getViewElements(viewRoot, factory);
-                    rect = factory.log.rect[0];
+                    bar.getViewElements(view);
+                    rect = view.log.rect[0];
 
                     same(rect.style.strokeWidth, bar.options.border.width);
                 });

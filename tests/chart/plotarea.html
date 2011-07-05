@@ -16,15 +16,13 @@
             var Chart = kendo.ui.Chart,
                 Box2D = Chart.Box2D,
                 chartBox = new Box2D(100, 100, 1000, 1000),
-                viewRoot,
-                factory,
+                view,
                 TOLERANCE = 1,
                 MARGIN = 10,
                 GAP = 4;
 
                 function moduleSetup() {
-                    viewRoot = new ViewElementStub();
-                    factory = new ViewFactoryStub();
+                    view = new ViewStub();
                 }
 
             (function() {
@@ -321,7 +319,7 @@
                             stubMethod(Chart.CategoryAxis, "getViewElements", function() { return []; },
                                 function() {
                                     plotArea.reflow(chartBox);
-                                    plotArea.getViewElements(viewRoot, factory);
+                                    plotArea.getViewElements(view);
                                 }
                     )});
                 }
@@ -341,7 +339,7 @@
                         }
                     });
 
-                    equal(factory.log.line.length, 7);
+                    equal(view.log.line.length, 7);
                 });
 
                 test("should not render gridlines for numeric axis", function() {
@@ -359,7 +357,7 @@
 
                     createPlotArea(categoryAxis, valueAxis);
 
-                    equal(factory.log.line.length, 1);
+                    equal(view.log.line.length, 1);
                 });
 
                 test("should not render gridlines for category axis", function() {
@@ -369,7 +367,7 @@
 
                     createPlotArea(categoryAxis);
 
-                    equal(factory.log.line.length, 6);
+                    equal(view.log.line.length, 6);
                 });
 
                 test("should not render gridlines", function() {
@@ -387,7 +385,7 @@
 
                     createPlotArea(categoryAxis, valueAxis);
 
-                    equal(factory.log.line.length, 0);
+                    equal(view.log.line.length, 0);
                 });
 
                 // ------------------------------------------------------------
@@ -418,7 +416,7 @@
 
                     createPlotArea(categoryAxis, valueAxis);
 
-                    equal(factory.log.line.length, 32);
+                    equal(view.log.line.length, 32);
                 });
 
                 test("should not render gridlines for numeric axis", function() {
@@ -442,7 +440,7 @@
 
                     createPlotArea(categoryAxis, valueAxis);
 
-                    equal(factory.log.line.length, 2);
+                    equal(view.log.line.length, 2);
                 });
 
                 test("should not render gridlines for category axis", function() {
@@ -460,7 +458,7 @@
 
                     createPlotArea(categoryAxis, valueAxis);
 
-                    equal(factory.log.line.length, 30);
+                    equal(view.log.line.length, 30);
                 });
 
                 test("should not render gridlines", function() {
@@ -475,7 +473,7 @@
 
                     createPlotArea(categoryAxis, valueAxis);
 
-                    equal(factory.log.line.length, 0);
+                    equal(view.log.line.length, 0);
                 });
 
                 // ------------------------------------------------------------
@@ -506,7 +504,7 @@
 
                     createPlotArea(categoryAxis, valueAxis);
 
-                    equal(factory.log.line.length, 32);
+                    equal(view.log.line.length, 32);
                 });
             })();
         </script>

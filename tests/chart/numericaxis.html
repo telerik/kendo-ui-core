@@ -18,8 +18,7 @@
                 numericAxis,
                 gridLayout,
                 chartBox = new Box2D(0, 0, 800, 600),
-                viewRoot,
-                factory,
+                view,
                 TOLERANCE = 1.5;
 
             // Tests expect particular font size
@@ -27,8 +26,7 @@
 
             function moduleSetup() {
                 numericAxis = new kendo.ui.Chart.NumericAxis(0, 1);
-                viewRoot = new ViewElementStub();
-                factory = new ViewFactoryStub();
+                view = new ViewStub();
             }
 
             module("Automatic Major Unit", {
@@ -265,9 +263,9 @@
                 });
 
                 test("creates axis line", function() {
-                    numericAxis.getViewElements(viewRoot, factory);
+                    numericAxis.getViewElements(view);
 
-                    sameBox(factory.log.line[0], new Box2D(
+                    sameBox(view.log.line[0], new Box2D(
                             MAX_LABEL_WIDTH + MARGIN, chartBox.y1 + LABEL_HEIGHT / 2,
                             MAX_LABEL_WIDTH + MARGIN, chartBox.y2 - LABEL_HEIGHT / 2),
                             TOLERANCE
@@ -275,9 +273,9 @@
                 });
 
                 test("creates labels", 1, function() {
-                    numericAxis.getViewElements(viewRoot, factory);
+                    numericAxis.getViewElements(view);
 
-                    same($.map(factory.log.text, function(text) { return text.content }),
+                    same($.map(view.log.text, function(text) { return text.content }),
                          ["0", "0.2", "0.4", "0.6", "0.8", "1", "1.2"]);
                 });
 
@@ -289,65 +287,65 @@
                     });
                     numericAxis.reflow(chartBox);
 
-                    numericAxis.getViewElements(viewRoot, factory);
+                    numericAxis.getViewElements(view);
 
-                    equals(factory.log.text[0].style.color, "#f00");
+                    equals(view.log.text[0].style.color, "#f00");
                 });
 
                 test("labels are distributed vertically", function() {
-                    numericAxis.getViewElements(viewRoot, factory);
+                    numericAxis.getViewElements(view);
 
-                    same($.map(factory.log.text, function(text) { return text.style.y }),
+                    same($.map(view.log.text, function(text) { return text.style.y }),
                          [582, 485, 388, 291, 194, 97, 0], TOLERANCE);
                 });
 
                 test("labels are aligned right", function() {
-                    numericAxis.getViewElements(viewRoot, factory);
+                    numericAxis.getViewElements(view);
 
-                    same($.map(factory.log.text, function(text) { return text.style.x }),
+                    same($.map(view.log.text, function(text) { return text.style.x }),
                          [16, 0, 0, 0, 0, 16, 0]);
                 });
 
                 test("major ticks are distributed vertically", function() {
-                    numericAxis.getViewElements(viewRoot, factory);
+                    numericAxis.getViewElements(view);
 
-                    factory.log.line.shift();
+                    view.log.line.shift();
 
-                    same($.map(factory.log.line, function(line) { return line.y1; }),
+                    same($.map(view.log.line, function(line) { return line.y1; }),
                          [9, 106, 203, 300, 397, 494, 591], TOLERANCE);
                 });
 
                 test("minor ticks can be disabled", function() {
                     numericAxis.options.line.width = 0;
                     numericAxis.options.majorTickType = "none";
-                    numericAxis.getViewElements(viewRoot, factory);
+                    numericAxis.getViewElements(view);
 
-                    equal(factory.log.line.length, 0);
+                    equal(view.log.line.length, 0);
                 });
 
                 test("minor ticks are distributed vertically", function() {
                     numericAxis.options.majorTickType = "none";
                     numericAxis.options.minorTickType = "outside";
-                    numericAxis.getViewElements(viewRoot, factory);
+                    numericAxis.getViewElements(view);
 
-                    factory.log.line.shift();
+                    view.log.line.shift();
 
-                    same($.map(factory.log.line, function(line) { return line.y1; }),
+                    same($.map(view.log.line, function(line) { return line.y1; }),
                         [9, 32.28, 55.56, 78.84, 102.12, 125.4,
                         148.68, 171.96, 195.24, 218.52, 241.8,
                         265.08, 288.36, 311.64, 334.92, 358.2,
                         381.48, 404.76, 428.04, 451.32, 474.6,
                         497.88, 521.16, 544.44, 567.72, 591], TOLERANCE);
- 
+
                 });
 
                 test("major ticks can be disabled", function() {
                     numericAxis.options.line.width = 0;
                     numericAxis.options.majorTickType = "none";
                     numericAxis.options.minorTickType = "none";
-                    numericAxis.getViewElements(viewRoot, factory);
+                    numericAxis.getViewElements(view);
 
-                    equal(factory.log.line.length, 0);
+                    equal(view.log.line.length, 0);
                 });
 
                 // ------------------------------------------------------------
@@ -361,9 +359,9 @@
                 });
 
                 test("creates axis line", function() {
-                    numericAxis.getViewElements(viewRoot, factory);
+                    numericAxis.getViewElements(view);
 
-                    sameBox(factory.log.line[0], new Box2D(
+                    sameBox(view.log.line[0], new Box2D(
                             chartBox.x1 + (FIRST_LABEL_WIDTH / 2), chartBox.y1,
                             chartBox.x2 - (LAST_LABEL_WIDTH / 2), chartBox.y1),
                             TOLERANCE
@@ -371,54 +369,54 @@
                 });
 
                 test("creates labels", 1, function() {
-                    numericAxis.getViewElements(viewRoot, factory);
+                    numericAxis.getViewElements(view);
 
-                    same($.map(factory.log.text, function(text) { return text.content }),
+                    same($.map(view.log.text, function(text) { return text.content }),
                          ["0", "0.2", "0.4", "0.6", "0.8", "1", "1.2"]);
                 });
 
                 test("labels are distributed horizontally", function() {
-                    numericAxis.getViewElements(viewRoot, factory);
+                    numericAxis.getViewElements(view);
 
-                    same($.map(factory.log.text, function(text) { return text.style.x }),
+                    same($.map(view.log.text, function(text) { return text.style.x }),
                          [0, 122.333, 252.667, 383, 513.333, 651.667, 774], TOLERANCE);
                 });
 
                 test("labels are aligned top", 7, function() {
-                    numericAxis.getViewElements(viewRoot, factory);
+                    numericAxis.getViewElements(view);
 
-                    $.each(factory.log.text, function() {
+                    $.each(view.log.text, function() {
                             equal(this.style.y, MAJOR_TICK_HEIGHT + MARGIN);
                     })
                 });
 
                 test("major ticks are distributed horizontally", function() {
-                    numericAxis.getViewElements(viewRoot, factory);
-                    factory.log.line.shift();
-                    same($.map(factory.log.line, function(line) { return line.x1; }),
+                    numericAxis.getViewElements(view);
+                    view.log.line.shift();
+                    same($.map(view.log.line, function(line) { return line.x1; }),
                          [5, 135, 265, 396, 526, 656, 787], TOLERANCE);
                 });
 
                 test("major ticks are vertical", 7, function() {
-                    numericAxis.getViewElements(viewRoot, factory);
-                    factory.log.line.shift();
-                    $.each(factory.log.line, function() {
+                    numericAxis.getViewElements(view);
+                    view.log.line.shift();
+                    $.each(view.log.line, function() {
                             equal(this.x2, this.x1);
                     });
                 });
 
                 test("major ticks are aligned to axis", 7, function() {
-                    numericAxis.getViewElements(viewRoot, factory);
-                    factory.log.line.shift();
-                    $.each(factory.log.line, function() {
+                    numericAxis.getViewElements(view);
+                    view.log.line.shift();
+                    $.each(view.log.line, function() {
                             equal(this.y1, 0);
                     });
                 });
 
                 test("major ticks are of predefined height", 7, function() {
-                    numericAxis.getViewElements(viewRoot, factory);
-                    factory.log.line.shift();
-                    $.each(factory.log.line, function() {
+                    numericAxis.getViewElements(view);
+                    view.log.line.shift();
+                    $.each(view.log.line, function() {
                             equal(this.y2 - this.y1, MAJOR_TICK_HEIGHT);
                     });
                 });
@@ -427,9 +425,9 @@
                     numericAxis.options.majorTickType = "none",
                     numericAxis.options.minorTickType= "outside",
                     numericAxis.reflow(chartBox);
-                    numericAxis.getViewElements(viewRoot, factory);
-                    factory.log.line.shift();
-                    same($.map(factory.log.line, function(line) { return line.x1; }),
+                    numericAxis.getViewElements(view);
+                    view.log.line.shift();
+                    same($.map(view.log.line, function(line) { return line.x1; }),
                         [5, 36.28, 67.56, 98.84, 130.12,
                         161.4, 192.68, 223.96, 255.24,
                         286.52, 317.8, 349.08, 380.36,
@@ -442,9 +440,9 @@
                     numericAxis.options.majorTickType = "none",
                     numericAxis.options.minorTickType= "outside",
                     numericAxis.reflow(chartBox);
-                    numericAxis.getViewElements(viewRoot, factory);
-                    factory.log.line.shift();
-                    $.each(factory.log.line, function() {
+                    numericAxis.getViewElements(view);
+                    view.log.line.shift();
+                    $.each(view.log.line, function() {
                             equal(this.x2, this.x1);
                     });
                 });
@@ -453,9 +451,9 @@
                     numericAxis.options.majorTickType = "none",
                     numericAxis.options.minorTickType= "outside",
                     numericAxis.reflow(chartBox);
-                    numericAxis.getViewElements(viewRoot, factory);
-                    factory.log.line.shift();
-                    $.each(factory.log.line, function() {
+                    numericAxis.getViewElements(view);
+                    view.log.line.shift();
+                    $.each(view.log.line, function() {
                             equal(this.y1, 0);
                     });
                 });
@@ -464,9 +462,9 @@
                     numericAxis.options.majorTickType = "none",
                     numericAxis.options.minorTickType= "outside",
                     numericAxis.reflow(chartBox);
-                    numericAxis.getViewElements(viewRoot, factory);
-                    factory.log.line.shift();
-                    $.each(factory.log.line, function() {
+                    numericAxis.getViewElements(view);
+                    view.log.line.shift();
+                    $.each(view.log.line, function() {
                             equal(this.y2 - this.y1, MINOR_TICK_HEIGHT);
                     });
                 });
