@@ -2,6 +2,11 @@ var fs = require("fs");
 var path = require("path");
 var sys = require("sys");
 var wrench = require("./wrench");
+//minifiers
+var uglify = require("./uglify-js").uglify;
+var parser = require("./uglify-js").parser;
+var cssmin = require("./lib/cssmin").cssmin;
+
 var PATH = "live";
 var regions = {};
 
@@ -101,6 +106,45 @@ exports.build = function(destination) {
     wrench.copyDirSyncRecursive("demos/examples", destination);
     wrench.copyDirSyncRecursive("src", destination + "/js");
     wrench.copyDirSyncRecursive("styles", destination + "/styles");
+    fs.unlinkSync(destination + "/template.html");
+
+    fs.readdir("demos/examples/styles", function(err, files) {
+        files.forEach(function(file) {
+            wrench.copyFile("demos/examples/styles/" + file, destination + "/styles/" + file);
+        });
+    });
+
+    fs.readdir("demos/examples/js", function(err, files) {
+        files.forEach(function(file) {
+            wrench.copyFile("demos/examples/js/" + file, destination + "/js/" + file);
+        });
+    });
+
+    processdir(destination);
+}
+
+exports.onlineExamples = function(origin, destination) {
+    PATH = destination;
+
+    var indexHtml = fs.readFileSync("demos/examples/index.html", "utf8");
+
+    "nav,script,tools,css,meta".split(",").forEach(function(region) {
+        var re = new RegExp("<!--\\s*" + region + "\\s*-->([\\u000a\\u000d\\u2028\\u2029]|.)*<!--\\s*" + region + "\\s*-->", "g");
+        var html = re.exec(indexHtml)[0].trim();
+
+        regions[region] = {
+            html: html,
+            exec: function(data, value) {
+                value = value || html;
+
+                return data.replace(re, value);
+            }
+        };
+    });
+
+    wrench.copyDirSyncRecursive("demos/examples", destination);
+    wrench.copyDirSyncRecursive(origin + "/js", destination + "/js");
+    wrench.copyDirSyncRecursive(origin + "/styles", destination + "/styles");
     fs.unlinkSync(destination + "/template.html");
 
     fs.readdir("demos/examples/styles", function(err, files) {
