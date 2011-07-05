@@ -461,47 +461,48 @@
     function TreeViewDragAndDrop(treeview) {
         var that = this;
 
-        that.owner = treeview;
-        that.dropCue = $("<div class='t-drop-clue' />");
+        that.treeview = treeview;
+        that.dropHint = $("<div class='t-drop-hint' />");
 
-        that._draggable = new t.draggable({
+        that._draggable = new kendo.ui.Draggable(treeview.element, {
            filter: "div:not(.t-state-disabled) .t-in",
-           group: treeview.element.id,
-           cue: function(e) {
-                return t.dragCue(e.$draggable.text());
-           },
-           start: $.proxy(that.start, that),
-           drag: $.proxy(that.drag, that),
-           stop: $.proxy(that.stop, that),
-           destroy: function(e) {
-                that.dropCue.remove();
-                e.cue.remove();
-           }
+//           group: treeview.element.id,
+//           hint: function(e) {
+//                return t.dragCue(e.$draggable.text());
+//           },
+           dragstart: proxy(that.dragstart, that),
+           drag: proxy(that.drag, that),
+           dragend: proxy(that.dragend, that)
         });
     }
 
     TreeViewDragAndDrop.prototype = {
-        start: function (e) {
+        dragstart: function (e) {
             var that = this,
-                treeview = that.owner;
+                treeview = that.treeview;
 
-            if (treeview.trigger("nodeDragStart", { item: e.draggable.closest(NODE)[0] })) {
-                return false;
-            }
+            //if (treeview.trigger("nodeDragStart", { item: e.draggable.closest(NODE)[0] })) {
+                //return false;
+            //}
 
-            that.dropCue.appendTo(treeview.element);
+            that.dropHint.appendTo(treeview.element);
         },
         drag: function (e) {
             var that = this,
                 status,
-                treeview = that.owner;
+                treeview = that.treeview;
+
+            console.log(e);
+
+            return;
 
             that.dropTarget = $(e.target);
 
-            if (treeview.dragAndDrop.dropTargets && $(e.target).closest(treeview.dragAndDrop.dropTargets).length > 0) {
-                // dragging node to a dropTarget area
-                status = "t-add";
-            } else if (!$.contains(treeview.element, e.target)) {
+            //if (treeview.dragAndDrop.dropTargets && $(e.target).closest(treeview.dragAndDrop.dropTargets).length > 0) {
+                //// dragging node to a dropTarget area
+                //status = "t-add";
+            //} else
+            if (!$.contains(treeview.element, e.target)) {
                 // dragging node outside of treeview
                 status = "t-denied";
             } else if ($.contains(e.draggable.closest(NODE)[0], e.target)) {
@@ -511,7 +512,7 @@
                 // moving or reordering node
                 status = "t-insert-middle";
 
-                that.dropCue.css("visibility", "visible");
+                that.dropHint.css("visibility", "visible");
 
                 var hoveredItem = that.dropTarget.closest(".t-top,.t-mid,.t-bot");
 
@@ -526,7 +527,7 @@
                     var addChild = itemContent.length > 0 && !insertOnTop && !insertOnBottom;
 
                     itemContent.toggleClass(TSTATEHOVER, addChild);
-                    that.dropCue.css("visibility", addChild ? "hidden" : "visible");
+                    that.dropHint.css("visibility", addChild ? "hidden" : "visible");
 
                     if (addChild) {
                         status = "t-add";
@@ -534,7 +535,7 @@
                         var hoveredItemPos = hoveredItem.position();
                         hoveredItemPos.top += insertOnTop ? 0 : itemHeight;
 
-                        that.dropCue
+                        that.dropHint
                             .css(hoveredItemPos)
                             [insertOnTop ? "prependTo" : "appendTo"](that.dropTarget.closest(NODE).find("> div:first"));
 
@@ -559,13 +560,13 @@
             });
 
             if (status.indexOf("t-insert") != 0) {
-                that.dropCue.css("visibility", "hidden");
+                that.dropHint.css("visibility", "hidden");
             }
 
-            t.dragCueStatus(e.$cue, status);
+            //t.dragCueStatus(e.$cue, status);
         },
 
-        stop: function (e) {
+        dragend: function (e) {
             var that = this,
                 treeview = that.owner,
                 dropPosition = "over", destinationItem;
@@ -573,29 +574,29 @@
             if (e.keyCode == kendo.keys.ESC){
                 treeview.trigger("nodeDragCancelled", { item: e.draggable.closest(NODE)[0] });
             } else {
-                if (that.dropCue.css("visibility") == "visible") {
-                    dropPosition = that.dropCue.prevAll(".t-in").length > 0 ? "after" : "before";
-                    destinationItem = that.dropCue.closest(NODE).find("> div");
+                if (that.dropHint.css("visibility") == "visible") {
+                    dropPosition = that.dropHint.prevAll(".t-in").length > 0 ? "after" : "before";
+                    destinationItem = that.dropHint.closest(NODE).find("> div");
                 } else if (that.dropTarget) {
                     destinationItem = that.dropTarget.closest(".t-top,.t-mid,.t-bot");
                 }
 
-                var isValid = !e.cue.find(".t-drag-status").hasClass("t-denied"),
-                    isDropPrevented = treeview.trigger("nodeDrop", {
-                        isValid: isValid,
-                        dropTarget: e.target,
-                        destinationItem: destinationItem.parent()[0],
-                        dropPosition: dropPosition,
-                        item: e.draggable.closest(NODE)[0]
-                    });
+                //var isValid = !e.cue.find(".t-drag-status").hasClass("t-denied"),
+                    //isDropPrevented = treeview.trigger("nodeDrop", {
+                        //isValid: isValid,
+                        //dropTarget: e.target,
+                        //destinationItem: destinationItem.parent()[0],
+                        //dropPosition: dropPosition,
+                        //item: e.draggable.closest(NODE)[0]
+                    //});
 
-                if (!isValid) {
-                    return false;
-                }
+                //if (!isValid) {
+                    //return false;
+                //}
 
-                if (isDropPrevented || !$.contains(treeview.element, e.target)) {
-                    return !isDropPrevented;
-                }
+                //if (isDropPrevented || !$.contains(treeview.element, e.target)) {
+                    //return !isDropPrevented;
+                //}
 
                 var sourceItem = e.draggable.closest(".t-top,.t-mid,.t-bot");
                 var movedItem = sourceItem.parent(); // .t-item
@@ -615,7 +616,7 @@
                 }
 
                 // perform reorder / move
-                if (that.dropCue.css("visibility") == "visible") {
+                if (that.dropHint.css("visibility") == "visible") {
                     destinationItem.parent()[dropPosition](movedItem);
                 } else {
                     var targetGroup = destinationItem.next(".t-group");
