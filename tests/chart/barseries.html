@@ -25,7 +25,7 @@
             }
 
             BarStub.prototype = {
-                updateLayout: function(box) {
+                reflow: function(box) {
                     this.box = box;
                 }
             };
@@ -35,7 +35,7 @@
                 factory = new ViewFactoryStub();
 
                 series = new Chart.BarChart(plotArea, options);
-                series.updateLayout();
+                series.reflow();
             }
 
             (function() {
@@ -1023,7 +1023,7 @@
                     cluster = new Chart.ClusterLayout(options);
                     bars = [ new BarStub(barBox), new BarStub(barBox) ];
                     [].push.apply(cluster.children, bars);
-                    cluster.updateLayout(clusterBox);
+                    cluster.reflow(clusterBox);
                 }
 
                 // ------------------------------------------------------------
@@ -1087,7 +1087,7 @@
                             new BarStub(new Box2D(0, 70, 100, 100))
                         );
 
-                        stack.updateLayout(stackBox);
+                        stack.reflow(stackBox);
                     }
                 });
 
@@ -1141,7 +1141,7 @@
                             new BarStub(new Box2D(0, 70, 100, 100))
                         );
 
-                        stack.updateLayout(stackBox);
+                        stack.reflow(stackBox);
                     }
                 });
 
@@ -1194,7 +1194,7 @@
                             new BarStub(new Box2D(0, 0, 40, 10))
                         );
 
-                        stack.updateLayout(stackBox);
+                        stack.reflow(stackBox);
                     }
                 });
 
@@ -1247,7 +1247,7 @@
                             new BarStub(new Box2D(100, 0, 140, 10))
                         );
 
-                        stack.updateLayout(stackBox);
+                        stack.reflow(stackBox);
                     }
                 });
 

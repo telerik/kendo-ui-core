@@ -30,7 +30,7 @@
                         return [viewElement];
                     },
 
-                    this.updateLayout = function() { }
+                    this.reflow = function() { }
                 }
 
                 function moduleSetup() {
@@ -53,12 +53,12 @@
 
                 test("box wraps children", function() {
                     var childStub = {
-                        updateLayout: function() { },
+                        reflow: function() { },
                         box: new Chart.Box2D(10, 10, 100, 100)
                     };
 
                     chartElement.children.push(childStub);
-                    chartElement.updateLayout();
+                    chartElement.reflow();
 
                     sameBox(chartElement.box, childStub.box);
                 });
@@ -73,7 +73,7 @@
                 function createRoot(options) {
                     rootElement = new Chart.RootElement(options);
 
-                    rootElement.updateLayout();
+                    rootElement.reflow();
                 }
 
                 function renderRoot() {
@@ -123,15 +123,15 @@
                     deepEqual(view.children, [ group, text ]);
                 });
 
-                test("updateLayout is called for all children", 2, function() {
+                test("reflow is called for all children", 2, function() {
                     var childStub = {
-                        updateLayout: function() { ok(true); },
+                        reflow: function() { ok(true); },
                         box: new Chart.Box2D()
                     };
 
                     rootElement.children.push(childStub, childStub);
 
-                    rootElement.updateLayout();
+                    rootElement.reflow();
                 });
 
                 test("sets border to rootElement", function() {
@@ -228,20 +228,20 @@
                 });
 
                 test("sets width", function() {
-                    boxElement.updateLayout(targetBox);
+                    boxElement.reflow(targetBox);
 
                     equal(boxElement.box.width(), WIDTH);
                 });
 
                 test("sets height", function() {
-                    boxElement.updateLayout(targetBox);
+                    boxElement.reflow(targetBox);
 
                     equal(boxElement.box.height(), HEIGHT);
                 });
 
                 test("applies top margin", function() {
                     boxElement.options.margin.top = MARGIN;
-                    boxElement.updateLayout(targetBox);
+                    boxElement.reflow(targetBox);
 
                     same([boxElement.box.y1, boxElement.box.y2],
                          [targetBox.y1, targetBox.y1 + HEIGHT + MARGIN]);
@@ -249,7 +249,7 @@
 
                 test("applies right margin", function() {
                     boxElement.options.margin.right = MARGIN;
-                    boxElement.updateLayout(targetBox);
+                    boxElement.reflow(targetBox);
 
                     same([boxElement.box.x1, boxElement.box.x2],
                          [targetBox.x1, targetBox.x1 + WIDTH + MARGIN]);
@@ -257,7 +257,7 @@
 
                 test("applies bottom margin", function() {
                     boxElement.options.margin.bottom = MARGIN;
-                    boxElement.updateLayout(targetBox);
+                    boxElement.reflow(targetBox);
 
                     same([boxElement.box.y1, boxElement.box.y2],
                          [targetBox.y1, targetBox.y1 + HEIGHT + MARGIN]);
@@ -265,7 +265,7 @@
 
                 test("applies left margin", function() {
                     boxElement.options.margin.left = MARGIN;
-                    boxElement.updateLayout(targetBox);
+                    boxElement.reflow(targetBox);
 
                     same([boxElement.box.x1, boxElement.box.x2],
                          [targetBox.x1, targetBox.x1 + WIDTH + MARGIN]);
@@ -273,7 +273,7 @@
 
                 test("applies margins", function() {
                     boxElement.options.margin = MARGIN;
-                    boxElement.updateLayout(targetBox);
+                    boxElement.reflow(targetBox);
 
                     same([boxElement.box.x1, boxElement.box.y1,
                           boxElement.box.x2, boxElement.box.y2],
@@ -284,7 +284,7 @@
 
                 test("padding is added to outer box", function() {
                     boxElement.options.padding = PADDING;
-                    boxElement.updateLayout(targetBox);
+                    boxElement.reflow(targetBox);
 
                     equal(boxElement.box.width(), WIDTH + 2 * PADDING);
                     equal(boxElement.box.height(), HEIGHT + 2 * PADDING);
@@ -292,7 +292,7 @@
 
                 test("border is added to outer box", function() {
                     boxElement.options.border.width = BORDER;
-                    boxElement.updateLayout(targetBox);
+                    boxElement.reflow(targetBox);
 
                     equal(boxElement.box.width(), WIDTH + 2 * BORDER);
                     equal(boxElement.box.height(), HEIGHT + 2 * BORDER);
@@ -300,7 +300,7 @@
 
                 test("margin is added to outer box", function() {
                     boxElement.options.margin = MARGIN;
-                    boxElement.updateLayout(targetBox);
+                    boxElement.reflow(targetBox);
 
                     equal(boxElement.box.width(), WIDTH + 2 * MARGIN);
                     equal(boxElement.box.height(), HEIGHT + 2 * MARGIN);
@@ -321,42 +321,42 @@
                 });
 
                 test("top alignment", function() {
-                    boxElement.updateLayout(targetBox);
+                    boxElement.reflow(targetBox);
 
                     equal(boxElement.box.y1, targetBox.y1);
                 });
 
                 test("bottom alignment", function() {
                     boxElement.options.vAlign = "bottom";
-                    boxElement.updateLayout(targetBox);
+                    boxElement.reflow(targetBox);
 
                     equal(boxElement.box.y2, targetBox.y2);
                 });
 
                 test("vertical center alignment", function() {
                     boxElement.options.vAlign = "center";
-                    boxElement.updateLayout(targetBox);
+                    boxElement.reflow(targetBox);
 
                     equal(boxElement.box.y1,
                           targetBox.y1 + (targetBox.height() - boxElement.box.height()) / 2);
                 });
 
                 test("left alignment", function() {
-                    boxElement.updateLayout(targetBox);
+                    boxElement.reflow(targetBox);
 
                     equal(boxElement.box.x1, targetBox.x1);
                 });
 
                 test("right alignment", function() {
                     boxElement.options.align = "right";
-                    boxElement.updateLayout(targetBox);
+                    boxElement.reflow(targetBox);
 
                     equal(boxElement.box.x2, targetBox.x2);
                 });
 
                 test("horizontal center alignment", function() {
                     boxElement.options.align = "center";
-                    boxElement.updateLayout(targetBox);
+                    boxElement.reflow(targetBox);
 
                     equal(boxElement.box.x1,
                           targetBox.x1 + (targetBox.width() - boxElement.box.width()) / 2);
@@ -385,20 +385,20 @@
                 });
 
                 test("children set width", function() {
-                    boxElement.updateLayout(targetBox);
+                    boxElement.reflow(targetBox);
 
                     equal(boxElement.box.width(), childrenBox.width());
                 });
 
                 test("children set height", function() {
-                    boxElement.updateLayout(targetBox);
+                    boxElement.reflow(targetBox);
 
                     equal(boxElement.box.height(), childrenBox.height());
                 });
 
                 test("applies margins", function() {
                     boxElement.options.margin = MARGIN;
-                    boxElement.updateLayout(targetBox);
+                    boxElement.reflow(targetBox);
 
                     $.each(childElements, function() {
                         same([this.box.x1, this.box.y1,
@@ -411,7 +411,7 @@
                 });
 
                 test("children moved after top alignment", function() {
-                    boxElement.updateLayout(targetBox);
+                    boxElement.reflow(targetBox);
 
                     $.each(childElements, function() {
                         equal(this.box.y1, targetBox.y1);
@@ -420,7 +420,7 @@
 
                 test("children moved after bottom alignment", function() {
                     boxElement.options.vAlign = "bottom";
-                    boxElement.updateLayout(targetBox);
+                    boxElement.reflow(targetBox);
 
                     equal(childElements[0].box.y2, 190);
                     equal(childElements[1].box.y2, 200);
@@ -428,14 +428,14 @@
 
                 test("children moved after vertical center alignment", function() {
                     boxElement.options.vAlign = "center";
-                    boxElement.updateLayout(targetBox);
+                    boxElement.reflow(targetBox);
 
                     equal(childElements[0].box.y1, 140);
                     equal(childElements[1].box.y1, 140);
                 });
 
                 test("children moved after left alignment", function() {
-                    boxElement.updateLayout(targetBox);
+                    boxElement.reflow(targetBox);
 
                     $.each(childElements, function() {
                         equal(this.box.x1, targetBox.x1);
@@ -444,7 +444,7 @@
 
                 test("children moved after right alignment", function() {
                     boxElement.options.align = "right";
-                    boxElement.updateLayout(targetBox);
+                    boxElement.reflow(targetBox);
 
                     equal(childElements[0].box.x2, 190);
                     equal(childElements[1].box.x2, 200);
@@ -452,7 +452,7 @@
 
                 test("children moved after horizontal center alignment", function() {
                     boxElement.options.align = "center";
-                    boxElement.updateLayout(targetBox);
+                    boxElement.reflow(targetBox);
 
                     equal(childElements[0].box.x1, 140);
                     equal(childElements[1].box.x1, 140);
@@ -472,7 +472,7 @@
 
                 test("renders border width", function() {
                     boxElement.options.border.width = 1;
-                    boxElement.updateLayout(targetBox);
+                    boxElement.reflow(targetBox);
                     boxElement.getViewElements(viewRoot, factory);
 
                     equal(factory.log.rect[0].style.strokeWidth, 1);
@@ -481,7 +481,7 @@
                 test("renders border color", function() {
                     boxElement.options.border.color = "#f00";
                     boxElement.options.border.width = 1;
-                    boxElement.updateLayout(targetBox);
+                    boxElement.reflow(targetBox);
                     boxElement.getViewElements(viewRoot, factory);
 
                     equal(factory.log.rect[0].style.stroke, "#f00");
@@ -489,7 +489,7 @@
 
                 test("does not render border color when no width is set", function() {
                     boxElement.options.border.color = "#f00";
-                    boxElement.updateLayout(targetBox);
+                    boxElement.reflow(targetBox);
                     boxElement.getViewElements(viewRoot, factory);
 
                     equal(factory.log.rect[0].style.stroke, "");
@@ -497,7 +497,7 @@
 
                 test("renders fill color", function() {
                     boxElement.options.background = "#f00";
-                    boxElement.updateLayout(targetBox);
+                    boxElement.reflow(targetBox);
                     boxElement.getViewElements(viewRoot, factory);
 
                     equal(factory.log.rect[0].style.fill, "#f00");
@@ -505,7 +505,7 @@
 
                 test("content box includes padding", function() {
                     boxElement.options.padding = PADDING;
-                    boxElement.updateLayout(targetBox);
+                    boxElement.reflow(targetBox);
                     boxElement.getViewElements(viewRoot, factory);
 
                     var rect = factory.log.rect[0];
@@ -515,7 +515,7 @@
 
                 test("padding box does not include border", function() {
                     boxElement.options.border.width = BORDER;
-                    boxElement.updateLayout(targetBox);
+                    boxElement.reflow(targetBox);
                     boxElement.getViewElements(viewRoot, factory);
 
                     var rect = factory.log.rect[0];
@@ -525,7 +525,7 @@
 
                 test("padding box does not include margin", function() {
                     boxElement.options.margin = MARGIN;
-                    boxElement.updateLayout(targetBox);
+                    boxElement.reflow(targetBox);
                     boxElement.getViewElements(viewRoot, factory);
 
                     var rect = factory.log.rect[0];
@@ -549,7 +549,7 @@
                         text: "Title",
                         margin: MARGIN,
                         padding: PADDING }, options));
-                    title.updateLayout(chartBox);
+                    title.reflow(chartBox);
                     titleTextBox = title.children[0],
                     titleText = titleTextBox.children[0];
                 }
@@ -620,7 +620,7 @@
                         position: "bottom"
                     });
 
-                    title.updateLayout(chartBox);
+                    title.reflow(chartBox);
                     equals(titleText.box.y1 + MARGIN + PADDING,
                            chartBox.y2 - TITLE_TEXT_HEIGHT, TOLERANCE);
                     equals(titleText.box.y2 + MARGIN + PADDING, chartBox.y2);
@@ -653,13 +653,13 @@
                         text: "Title",
                         margin: MARGIN * 2
                     });
-                    title.updateLayout(chartBox);
+                    title.reflow(chartBox);
 
                     title1 = new kendo.ui.Chart.Title({
                         text: "Title"
                     });
 
-                    title1.updateLayout(chartBox);
+                    title1.reflow(chartBox);
 
                     equal(title.box.height(),
                           title1.box.height() + MARGIN * 2 + PADDING * 2);
@@ -672,14 +672,14 @@
                         margin: MARGIN * 2
                     });
 
-                    title.updateLayout(chartBox);
+                    title.reflow(chartBox);
 
                     title1 = new kendo.ui.Chart.Title({
                         text: "Title",
                         position: "bottom"
                     });
 
-                    title1.updateLayout(chartBox);
+                    title1.reflow(chartBox);
 
                     equal(title.box.height(),
                           title1.box.height() + MARGIN * 2 + PADDING * 2);
@@ -727,7 +727,7 @@
                         }
                     };
 
-                    text.updateLayout(new Box2D(100, 110, 200, 200));
+                    text.reflow(new Box2D(100, 110, 200, 200));
                     text.getViewElements(viewRoot, factory)
                 });
 
@@ -738,7 +738,7 @@
                         }
                     };
 
-                    text.updateLayout(new Box2D());
+                    text.reflow(new Box2D());
                     text.getViewElements(viewRoot, factory)
                 });
 
@@ -749,7 +749,7 @@
                         }
                     };
 
-                    text.updateLayout(new Box2D());
+                    text.reflow(new Box2D());
                     text.getViewElements(viewRoot, factory)
                 });
 
@@ -765,7 +765,7 @@
                         series: [ { name: "Series 1" } ]
                     }, options));
 
-                    legend.updateLayout(chartBox);
+                    legend.reflow(chartBox);
                 }
 
                 // ------------------------------------------------------------
@@ -840,7 +840,7 @@
                     });
 
                     var legendBox = chartBox.clone().translate(100, 100);
-                    legend.updateLayout(legendBox);
+                    legend.reflow(legendBox);
 
                     var label = legend.children[0];
                     equal(label.box.y1,
@@ -947,7 +947,7 @@
                             series: [ { name: "Series 1", color: "#f00" } ]
                         });
 
-                        legend.updateLayout(chartBox);
+                        legend.reflow(chartBox);
                         legend.getViewElements(viewRoot, factory);
 
                         marker = factory.log.rect[0];
@@ -1003,7 +1003,7 @@
                             padding: PADDING
                         });
 
-                        legend.updateLayout(chartBox);
+                        legend.reflow(chartBox);
                         legend.getViewElements(viewRoot, factory);
 
                         legendBox = factory.log.rect[1];
@@ -1040,7 +1040,7 @@
                         box = new Box2D(0, 0, 100, 100);
                         bar = new Bar();
 
-                        bar.updateLayout(box);
+                        bar.reflow(box);
                         bar.getViewElements(viewRoot, factory);
                         rect = factory.log.rect[0];
                     }
@@ -1062,7 +1062,7 @@
                     bar.options.border.color = "red";
                     bar.options.border.width = 1;
                     factory = new ViewFactoryStub();
-                    bar.updateLayout(box);
+                    bar.reflow(box);
                     bar.getViewElements(viewRoot, factory);
                     rect = factory.log.rect[0];
 
@@ -1073,7 +1073,7 @@
                     bar.options.border.color = "red";
                     bar.options.border.width = 1;
                     factory = new ViewFactoryStub();
-                    bar.updateLayout(box);
+                    bar.reflow(box);
                     bar.getViewElements(viewRoot, factory);
                     rect = factory.log.rect[0];
 

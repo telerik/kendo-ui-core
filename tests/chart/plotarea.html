@@ -82,7 +82,7 @@
                 });
 
                 test("aligns axises at default crossing values", function() {
-                    plotArea.updateLayout(chartBox);
+                    plotArea.reflow(chartBox);
 
                     var crossingSlotY = axisY.getSlot(axisY.options.axisCrossingValue),
                         crossingSlotX = axisX.getSlot(axisX.options.axisCrossingValue);
@@ -92,7 +92,7 @@
                 test("aligns axises at non-default crossing values", function() {
                     axisY.options.axisCrossingValue = 10;
                     axisX.options.axisCrossingValue = 1;
-                    plotArea.updateLayout(chartBox);
+                    plotArea.reflow(chartBox);
 
                     var crossingSlotY = axisY.getSlot(axisY.options.axisCrossingValue),
                         crossingSlotX = axisX.getSlot(axisX.options.axisCrossingValue);
@@ -149,7 +149,7 @@
                         }
                     });
 
-                    plotArea.updateLayout(chartBox);
+                    plotArea.reflow(chartBox);
 
                     sameBox(plotArea.box, new Box2D(140, 118, 990, 965));
                 });
@@ -320,7 +320,7 @@
                         function() {
                             stubMethod(Chart.CategoryAxis, "getViewElements", function() { return []; },
                                 function() {
-                                    plotArea.updateLayout(chartBox);
+                                    plotArea.reflow(chartBox);
                                     plotArea.getViewElements(viewRoot, factory);
                                 }
                     )});

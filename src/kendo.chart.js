@@ -114,7 +114,7 @@
             model.children.push(new PlotArea(chart.options));
             chart._model = model;
 
-            model.updateLayout();
+            model.reflow();
             var html = model.getView(chart._viewFactory).render();
             setContent(chart.element[0], html);
             alignToScreen(chart.element[0].firstChild);
@@ -1189,7 +1189,7 @@
             element.options = deepExtend({}, element.options, options);
         },
 
-        updateLayout: function(targetBox) {
+        reflow: function(targetBox) {
             var element = this,
                 children = element.children,
                 box;
@@ -1197,7 +1197,7 @@
             for (var i = 0; i < children.length; i++) {
                 var currentChild = children[i];
 
-                currentChild.updateLayout(targetBox);
+                currentChild.reflow(targetBox);
                 box = box ? box.wrap(currentChild.box) : currentChild.box.clone();
             }
 
@@ -1249,14 +1249,14 @@
             zIndex: -1
         },
 
-        updateLayout: function() {
+        reflow: function() {
             var root = this,
                 currentBox = new Box2D(0, 0, root.options.width, root.options.height);
 
             root.box = currentBox.unpad(root.options.margin);
 
             for (var i = 0; i < root.children.length; i++) {
-                root.children[i].updateLayout(currentBox);
+                root.children[i].reflow(currentBox);
                 currentBox = boxDiff(currentBox, root.children[i].box);
             };
         },
@@ -1311,7 +1311,7 @@
             height: 0
         },
 
-        updateLayout: function(targetBox) {
+        reflow: function(targetBox) {
             var element = this,
                 box,
                 contentBox,
@@ -1322,7 +1322,7 @@
                 border = options.border,
                 borderWidth = border.width;
 
-            ChartElement.fn.updateLayout.call(element, targetBox);
+            ChartElement.fn.reflow.call(element, targetBox);
 
             if (children.length === 0) {
                 box = element.box = new Box2D(0, 0, options.width, options.height);
@@ -1389,7 +1389,7 @@
 
             // Calculate size
             text.content = content;
-            text.updateLayout(defaultBox);
+            text.reflow(defaultBox);
         },
 
         options: {
@@ -1399,7 +1399,7 @@
             vAlign: ""
         },
 
-        updateLayout: function(targetBox) {
+        reflow: function(targetBox) {
             var text = this,
                 options = text.options,
                 size = measureText(text.content, { font: text.options.font });
@@ -1462,7 +1462,7 @@
             );
 
             // Calculate size
-            textBox.updateLayout(defaultBox);
+            textBox.reflow(defaultBox);
         }
     });
 
@@ -1488,7 +1488,7 @@
             }
         },
 
-        updateLayout: function(targetBox, isVertical) {
+        reflow: function(targetBox, isVertical) {
             var barLabel = this,
                 options = barLabel.options,
                 text = barLabel.children[0],
@@ -1545,7 +1545,7 @@
                 }
             }
 
-            text.updateLayout(targetBox);
+            text.reflow(targetBox);
         }
     });
 
@@ -1579,10 +1579,10 @@
             );
         },
 
-        updateLayout: function(targetBox) {
+        reflow: function(targetBox) {
             var title = this;
 
-            ChartElement.fn.updateLayout.call(title, targetBox);
+            ChartElement.fn.reflow.call(title, targetBox);
             title.box.snapTo(targetBox, X);
         }
     });
@@ -1626,7 +1626,7 @@
             };
         },
 
-        updateLayout: function(targetBox) {
+        reflow: function(targetBox) {
             var legend = this,
                 options = legend.options,
                 childrenCount = legend.children.length;
@@ -1957,7 +1957,7 @@
                                          nextTickPosition, labelY);
                 }
 
-                label.updateLayout(labelBox);
+                label.reflow(labelBox);
             }
         }
     });
@@ -2000,11 +2000,11 @@
                 visible: true,
                 width: 1,
                 color: BLACK
-            },
+        },
             zIndex: 1
         },
 
-        updateLayout: function(targetBox) {
+        reflow: function(targetBox) {
             var axis = this,
                 options = axis.options,
                 isVertical = options.orientation === VERTICAL,
@@ -2269,11 +2269,11 @@
                 visible: false,
                 width: 1,
                 color: BLACK
-            },
+        },
             zIndex: 1
         },
 
-        updateLayout: function(targetBox) {
+        reflow: function(targetBox) {
             var axis = this,
                 options = axis.options,
                 isVertical = options.orientation === VERTICAL,
@@ -2402,7 +2402,7 @@
             gap: 1.5
         },
 
-        updateLayout: function(box) {
+        reflow: function(box) {
             var cluster = this,
                 options = cluster.options,
                 isVertical = options.isVertical,
@@ -2419,7 +2419,7 @@
                 childBox[axis + 1] = position;
                 childBox[axis + 2] = position + slotSize;
 
-                children[i].updateLayout(childBox);
+                children[i].reflow(childBox);
 
                 position += slotSize;
             };
@@ -2437,7 +2437,7 @@
             isReversed: false
         },
 
-        updateLayout: function(targetBox) {
+        reflow: function(targetBox) {
             var stack = this,
                 options = stack.options,
                 isVertical = options.isVertical,
@@ -2465,7 +2465,7 @@
                     box = stack.box = childBox.clone();
                 }
 
-                currentChild.updateLayout(childBox);
+                currentChild.reflow(childBox);
 
                 box.wrap(childBox);
             }
@@ -2487,14 +2487,14 @@
             isVertical: true
         },
 
-        updateLayout: function(targetBox) {
+        reflow: function(targetBox) {
             var bar = this,
                 children = bar.children,
                 options = bar.options;
 
             bar.box = targetBox;
             for(var i = 0, length = children.length; i < length; i++) {
-                children[i].updateLayout(targetBox, options.isVertical);
+                children[i].reflow(targetBox, options.isVertical);
             }
         },
 
@@ -2654,7 +2654,7 @@
             return categories;
         },
 
-        updateLayout: function(targetBox) {
+        reflow: function(targetBox) {
             var barChart = this,
                 options = barChart.options,
                 isVertical = options.isVertical,
@@ -2688,7 +2688,7 @@
             });
 
             for (var i = 0; i < children.length; i++) {
-                children[i].updateLayout(categorySlots[i]);
+                children[i].reflow(categorySlots[i]);
             };
 
             barChart.box = targetBox;
@@ -2792,7 +2792,7 @@
             plotArea.children.push(plotArea.axisX);
         },
 
-        updateLayout: function(targetBox) {
+        reflow: function(targetBox) {
             var plotArea = this,
                 charts = plotArea.charts,
                 axisY = plotArea.axisY,
@@ -2802,8 +2802,8 @@
 
             plotArea.box = targetBox.clone();
             plotArea.box.unpad(margin);
-            axisY.updateLayout(plotArea.box);
-            axisX.updateLayout(plotArea.box);
+            axisY.reflow(plotArea.box);
+            axisX.reflow(plotArea.box);
 
             plotArea.alignAxes();
 
@@ -2815,18 +2815,18 @@
             var offsetX = plotArea.box.x1 - axisBox.x1;
             var offsetY = plotArea.box.y1 - axisBox.y1;
 
-            axisY.updateLayout(
+            axisY.reflow(
                 axisY.box.translate(offsetX, offsetY).shrink(0, overflowY)
             );
 
-            axisX.updateLayout(
+            axisX.reflow(
                 axisX.box.translate(offsetX, offsetY).shrink(overflowX, 0)
             );
 
             plotArea.alignAxes();
 
             for (var i = 0; i < charts.length; i++) {
-                charts[i].updateLayout(plotArea.box);
+                charts[i].reflow(plotArea.box);
             }
             var lineBoxX = axisX.getAxisLineBox(),
                 lineBoxY = axisY.getAxisLineBox();
@@ -2843,11 +2843,11 @@
                 crossingValueX = axisX.options.axisCrossingValue,
                 axisCrossingX = axisX.getSlot(crossingValueX, crossingValueX);
 
-            axisY.updateLayout(
+            axisY.reflow(
                 axisY.box.translate(axisCrossingX.x1 - axisCrossingY.x1, 0)
             );
 
-            axisX.updateLayout(
+            axisX.reflow(
                 axisX.box.translate(0, axisCrossingY.y1 - axisCrossingX.y1)
             );
         },
@@ -2928,10 +2928,10 @@
                 childElements = ChartElement.fn.getViewElements.call(plotArea, viewRoot, factory),
                 border = options.border || {},
                 elements = [
-                    factory.rect(plotArea.box, {
+                    factory.rect(viewRoot, plotArea.box, {
                         fill: options.background,
                         zIndex: -1 }),
-                    factory.rect(plotArea.box, {
+                    factory.rect(viewRoot, plotArea.box, {
                         stroke: border.width ? border.color : "",
                         strokeWidth: border.width,
                         fill: "",
