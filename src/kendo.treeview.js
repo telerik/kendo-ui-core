@@ -193,7 +193,7 @@
         _updateNodeHtml: function(node) {
             var helpers = this.rendering.helpers,
                 wrapper = node.find(">div"),
-                subGroup = node.find(SUBGROUP),
+                subGroup = node.find(">ul"),
                 toggleButton = wrapper.find(">.t-icon"),
                 innerWrapper = wrapper.find(">.t-in");
 
@@ -226,7 +226,7 @@
         _updateNodeClasses: function(node, groupData, nodeData) {
             var helpers = this.rendering.helpers,
                 wrapper = node.find(">div"),
-                subGroup = node.find(SUBGROUP),
+                subGroup = node.find(">ul"),
                 toggleButton = wrapper.find(">.t-icon"),
                 innerWrapper = wrapper.find(">.t-in");
 
@@ -257,6 +257,8 @@
             if (subGroup.length) {
                 toggleButton.removeClass("t-plus t-minus t-plus-disabled t-minus-disabled")
                     .addClass(helpers.toggleButtonClass(nodeData));
+
+                subGroup.addClass("t-group");
             }
         },
 

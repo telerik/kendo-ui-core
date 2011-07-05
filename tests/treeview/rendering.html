@@ -81,6 +81,14 @@
                 equals(element.find("span.t-in").length, 1);
             });
 
+            test("creates toggle buttons", function() {
+                var element = treeviewFromHtml("<ul><li data-expanded='true'>foo<ul><li>bar</li></ul></li></ul>"),
+                    wrapper = element.find("div:first");
+
+                equals(wrapper.find("span.t-icon.t-minus").length, 1);
+                equals(element.find(".t-group:not(.t-treeview-lines)").length, 1);
+            });
+
             module("group");
 
             var rendering = new kendo.ui.TreeView.TreeViewRendering();
