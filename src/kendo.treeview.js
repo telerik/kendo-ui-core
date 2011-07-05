@@ -258,7 +258,6 @@
                 toggleButton.removeClass("t-plus t-minus t-plus-disabled t-minus-disabled")
                     .addClass(helpers.toggleButtonClass(nodeData));
             }
-
         },
 
         processItems: function(items, callback) {
@@ -404,7 +403,7 @@
                 result,
                 updatedGroupLength = group.children().length + 1,
                 groupData = {
-                    isFirstLevel: group.parent().hasClass(TTREEVIEW),
+                    isFirstLevel: parentNode.hasClass(TTREEVIEW),
                     isExpanded: true,
                     length: updatedGroupLength
                 };
