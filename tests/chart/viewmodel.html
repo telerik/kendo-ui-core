@@ -695,7 +695,7 @@
 
                 test("creates text view element", function() {
                     var view = {
-                        text: function() {
+                        createText: function() {
                             return 42;
                         }
                     };
@@ -705,7 +705,7 @@
 
                 test("sets content on view element", 1, function() {
                     var view = {
-                        text: function(content) {
+                        createText: function(content) {
                             equal(content, "Content");
                         }
                     };
@@ -716,7 +716,7 @@
 
                 test("sets position on view element", 2, function() {
                     var view = {
-                        text: function(content, options) {
+                        createText: function(content, options) {
                             equal(options.x, 100);
                             equal(options.y, 110);
                         }
@@ -728,7 +728,7 @@
 
                 test("sets font", 1, function() {
                     var view = {
-                        text: function(content, options) {
+                        createText: function(content, options) {
                             equal(options.font, text.options.font);
                         }
                     };
@@ -739,7 +739,7 @@
 
                 test("sets color", 1, function() {
                     var view = {
-                        text: function(content, options) {
+                        createText: function(content, options) {
                             equal(options.color, text.options.color);
                         }
                     };

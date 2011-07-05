@@ -1,6 +1,6 @@
 function ViewStub() {
-    var factory = this,
-        log = factory.log = { };
+    var view = this,
+        log = view.log = { };
 
     log.rect = [];
     log.text = [];
@@ -9,7 +9,7 @@ function ViewStub() {
 }
 
 ViewStub.prototype = {
-    rect: function(viewRoot, box, style) {
+    createRect: function(viewRoot, box, style) {
         this.log.rect.push({
             x1: box.x1,
             y1: box.y1,
@@ -21,7 +21,7 @@ ViewStub.prototype = {
         return new kendo.ui.Chart.ViewElement();
     },
 
-    text: function(content, style) {
+    createText: function(content, style) {
         this.log.text.push({
             content: content,
             style: style
@@ -30,12 +30,12 @@ ViewStub.prototype = {
         return new kendo.ui.Chart.ViewElement();
     },
 
-    group: function(options) {
+    createGroup: function(options) {
         this.log.group.push({options: options});
         return new kendo.ui.Chart.ViewElement();
     },
 
-    line: function(x1, y1, x2, y2) {
+    createLine: function(x1, y1, x2, y2) {
         this.log.line.push({ x1: x1, y1: y1, x2: x2, y2: y2 });
         return new kendo.ui.Chart.ViewElement();
     }

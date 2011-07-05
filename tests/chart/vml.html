@@ -39,41 +39,46 @@
                     equal(view.options.height, "100px");
                 });
 
-                test("text returns VMLText", function() {
-                    var text = view.text();
+                test("createGroup returns VMLGroup", function() {
+                    var group = view.createGroup();
+                    ok(group instanceof Chart.VMLGroup);
+                });
+
+                test("createText returns VMLText", function() {
+                    var text = view.createText();
                     ok(text instanceof Chart.VMLText);
                 });
 
-                test("text sets content", function() {
-                    var text = view.text("Text");
+                test("createText sets content", function() {
+                    var text = view.createText("Text");
                     equal(text.content, "Text");
                 });
 
-                test("rect returns VMLPath", function() {
-                    var rect = view.rect(viewRoot, 10, 20, 100, 100);
+                test("createRect returns VMLPath", function() {
+                    var rect = view.createRect(viewRoot, 10, 20, 100, 100);
                     ok(rect instanceof Chart.VMLPath);
                 });
 
-                test("rect draws rectangle", function() {
-                    var rect = view.rect(viewRoot, new Box2D(10, 20, 110, 220));
+                test("createRect draws rectangle", function() {
+                    var rect = view.createRect(viewRoot, new Box2D(10, 20, 110, 220));
                     deepEqual(rect.points, [
                         [10, 20], [110, 20], [110, 220], [10, 220], [10, 20]
                     ]);
                 });
 
-                test("rect sets fill color", function() {
-                    var rect = view.rect(viewRoot,
+                test("createRect sets fill color", function() {
+                    var rect = view.createRect(viewRoot,
                         new Box2D(10, 20, 110, 220), { fill: "#f00" });
                     equal(rect.options.fill, "#f00");
                 });
 
-                test("line returns VMLPath", function() {
-                    var line = view.line();
+                test("createLine returns VMLPath", function() {
+                    var line = view.createLine();
                     ok(line instanceof Chart.VMLPath);
                 });
 
                 test("line draws a line", function() {
-                    var line = view.line(10, 20, 100, 200);
+                    var line = view.createLine(10, 20, 100, 200);
                     deepEqual(line.points, [ [10, 20], [100, 200] ]);
                 });
             })();
