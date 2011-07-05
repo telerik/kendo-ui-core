@@ -53,9 +53,12 @@
 
             test("node wrappers", function() {
                 var element = treeviewFromHtml("<ul><li>item  </li></ul>"),
+                    outerWrapper = element.find("li"),
                     wrapper = element.find("div:first");
 
                 equals(wrapper.length, 1);
+                ok(outerWrapper.hasClass("t-first"));
+                ok(outerWrapper.hasClass("t-last"));
                 ok(wrapper.hasClass("t-top"));
                 equals(wrapper.find("span.t-in").length, 1);
                 equals(wrapper.find("span.t-in").text(), "item  ");
