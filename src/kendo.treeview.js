@@ -168,64 +168,96 @@
             that._items(groupElement, group); 
         },
 
-        _items: function(groupElement, group) {
+        _items: function(groupElement, groupData) {
             var that = this,
-                helpers = that.rendering.helpers,
-                templates = TreeView.templates,
-                empty = templates.empty,
-                items = groupElement.find("> li");
+                items = groupElement.find("> li"),
+                nodeData;
 
-            group = extend({
-                length: items.length
-            }, group);
+            groupData = extend({ length: items.length }, groupData);
 
             items.each(function(i, node) {
-                    var qNode = $(node),
-                        item = {
-                            index: i,
-                            text: "",
-                            expanded: qNode.data("expanded") === true
-                        },
-                        wrapper, currentNode, innerWrapper, tmp;
+                node = $(node);
 
-                    qNode.removeClass("t-first t-last")
-                         .addClass(helpers.wrapperCssClass(group, item));
+                nodeData = { index: i, expanded: node.data("expanded") === true };
 
-                    wrapper = qNode.find(">.t-top,>.t-mid,>.t-bot");
+                that._updateNodeHtml(node);
 
-                    if (!wrapper.length) {
-                        // create new wrapping div
-                        wrapper = $(templates.itemWrapper(extend({
-                                    toggleButton: qNode.find(">ul").length ? templates.toggleButton : empty,
-                                    checkbox: empty, image: empty, sprite: empty, value: empty,
-                                    item: item,
-                                    group: group
-                                }, helpers)))
-                                .prependTo(node);
-                    } else {
-                        // reset cssClass
-                        wrapper.removeClass("t-top t-mid t-bot").addClass(helpers.cssClass(group, item));
+                that._updateNodeClasses(node, nodeData, groupData);
 
-                        if (qNode.find(NODECONTENTS).length) {
-                            // reset toggle buttons
-                            wrapper.find("> .t-icon").remove().end()
-                                .prepend(templates.toggleButton(extend({ item: item }, helpers)));
-                        }
-                    }
+                // iterate over child items
+                that._group(node);
+            });
+        },
 
-                    // move all non-group content in the t-in container
-                    currentNode = wrapper[0].nextSibling;
-                    innerWrapper = wrapper.find(".t-in")[0];
+        _updateNodeHtml: function(node) {
+            var helpers = this.rendering.helpers,
+                wrapper = node.find(">div"),
+                subGroup = node.find(SUBGROUP),
+                toggleButton = wrapper.find(">.t-icon"),
+                innerWrapper = wrapper.find(">.t-in");
 
-                    while (currentNode && currentNode.nodeName.toLowerCase() != "ul") {
-                        tmp = currentNode;
-                        currentNode = currentNode.nextSibling;
-                        innerWrapper.appendChild(tmp);
-                    }
+            if (!wrapper.length) {
+                wrapper = $("<div />").prependTo(node);
+            }
 
-                    // iterate over child items
-                    that._group(qNode);
-                });
+            if (!toggleButton.length && subGroup.length) {
+                toggleButton = $("<span class='t-icon' />").prependTo(wrapper);
+            } else if (!subGroup.length || !subGroup.children().length) {
+                toggleButton.remove();
+                subGroup.remove();
+            }
+
+            if (!innerWrapper.length) {
+                innerWrapper = $("<span class='t-in' />").appendTo(wrapper)[0];
+
+                // move all non-group content in the t-in container
+                currentNode = wrapper[0].nextSibling;
+                innerWrapper = wrapper.find(".t-in")[0];
+
+                while (currentNode && currentNode.nodeName.toLowerCase() != "ul") {
+                    tmp = currentNode;
+                    currentNode = currentNode.nextSibling;
+                    innerWrapper.appendChild(tmp);
+                }
+            }
+        },
+
+        _updateNodeClasses: function(node, nodeData, groupData) {
+            var helpers = this.rendering.helpers,
+                wrapper = node.find(">div"),
+                subGroup = node.find(SUBGROUP),
+                toggleButton = wrapper.find(">.t-icon"),
+                innerWrapper = wrapper.find(">.t-in");
+
+            if (!nodeData) {
+                nodeData = {
+                    expanded: !(subGroup.css("display") == "none"),
+                    index: node.index(),
+                    enabled: !innerWrapper.hasClass("t-state-disabled")
+                };
+            }
+
+            if (!groupData) {
+                groupData = {
+                    isFirstLevel: node.parent().parent().hasClass(TTREEVIEW),
+                    length: node.parent().children().length
+                };
+            }
+
+            // li
+            node.removeClass("t-first t-last")
+                .addClass(helpers.wrapperCssClass(groupData, nodeData));
+
+            // div
+            wrapper.removeClass("t-top t-mid t-bot")
+                   .addClass(helpers.cssClass(groupData, nodeData));
+
+            // toggle button
+            if (subGroup.length) {
+                toggleButton.removeClass("t-plus t-minus t-plus-disabled t-minus-disabled")
+                    .addClass(helpers.toggleButtonClass(nodeData));
+            }
+
         },
 
         processItems: function(items, callback) {
@@ -340,18 +372,18 @@
             var that = this,
                 group = referenceNode.parent(),
                 updatedGroupLength = group.children().length + 1,
-                groupOptions = {
+                groupData = {
                     isFirstLevel: group.parent().hasClass(TTREEVIEW),
                     length: updatedGroupLength
                 },
                 result = $(that.rendering.renderItem({
-                    group: groupOptions,
+                    group: groupData,
                     item: extend({
                         index: referenceNode.index()
                     }, nodeData)
                 })).insertBefore(referenceNode);
 
-            that._items(group, groupOptions);
+            that._items(group, groupData);
 
             return result;
         },
@@ -363,28 +395,29 @@
                 group = parentNode.find(SUBGROUP),
                 result,
                 updatedGroupLength = group.children().length + 1,
-                groupOptions = {
+                groupData = {
                     isFirstLevel: group.parent().hasClass(TTREEVIEW),
                     isExpanded: true,
                     length: updatedGroupLength
                 };
 
-            parentNode.data("expanded", true);
-
             if (!group.length) {
                 group = $(that.rendering.renderGroup({
-                    group: groupOptions
+                    group: groupData
                 })).appendTo(parentNode);
             }
 
             result = $(that.rendering.renderItem({
-                group: groupOptions,
+                group: groupData,
                 item: extend({
                     index: updatedGroupLength - 1
                 }, nodeData)
             })).appendTo(group);
 
-            that._items(group, groupOptions);
+            that._updateNodeHtml(parentNode);
+            that._updateNodeClasses(parentNode);
+            that._updateNodeClasses(result.prev());
+            that._updateNodeClasses(result.next());
 
             return result;
         },
@@ -392,15 +425,20 @@
         remove: function (node) {
             node = $(node);
 
-            var group = node.parent();
+            var that = this,
+                parentNode = node.parent().parent(),
+                prevSibling = node.prev(),
+                nextSibling = node.next();
 
             node.remove();
 
-            this._items(group, {
-                isFirstLevel: group.parent().hasClass(TTREEVIEW),
-                isExpanded: true,
-                length: group.children().length
-            });
+            if (parentNode.hasClass("t-item")) {
+                that._updateNodeHtml(parentNode);
+                that._updateNodeClasses(parentNode);
+            }
+
+            that._updateNodeClasses(prevSibling);
+            that._updateNodeClasses(nextSibling);
         },
 
         findByText: function (text) {

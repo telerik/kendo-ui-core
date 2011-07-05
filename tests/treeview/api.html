@@ -209,7 +209,7 @@
                 equals(treeviewObject.text(appendedNode), "bar");
                 ok(appendedNode.find(">div").hasClass("t-bot"));
                 ok(appendedNode.hasClass("t-last"));
-                //equals(root.find(">div>.t-minus").length, 1);
+                equals(root.find(">div>.t-minus.t-icon").length, 1);
             });
 
             test("append(nodeData, root) appends new node to parent with existing group", function() {
@@ -302,8 +302,26 @@
 
                 equals(rootItems.length, 1);
                 equals(rootGroup.find(".t-in:contains('bar')").length, 1);
-                equals(rootGroup.find("li.t-first").length, 1);
-                equals(rootGroup.find("div.t-top").length, 1);
+                equals(treeview.find("li").length, 1);
+                equals(treeview.find("div").length, 1);
+            });
+
+            test("remove(node) updates classes", function() {
+                var treeview = createTreeView({
+                        dataSource: [
+                            { text: "foo", items: [
+                                { text: "bar" }
+                            ] }
+                        ]
+                    }),
+                    treeviewObject = treeview.data("kendoTreeView");
+
+                treeviewObject.remove(treeviewObject.findByText("bar"));
+
+                var items = treeview.find(".t-item");
+
+                equals(items.length, 1);
+                equals(items.find(".t-group").length, 0);
             });
         </script>
 
