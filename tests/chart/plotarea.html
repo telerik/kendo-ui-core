@@ -99,14 +99,6 @@
                     same([crossingSlotY.x1, crossingSlotY.y1], [crossingSlotX.x1, crossingSlotX.y1]);
                 });
 
-                test("axes are contained in plot area", function() {
-                    plotArea.updateLayout(chartBox);
-                    var axisBox = axisY.box.clone().wrap(axisX.box);
-                    same([axisBox.x1, axisBox.y1, axisBox.x2, axisBox.y2],
-                         [plotArea.box.x1, plotArea.box.y1, plotArea.box.x2, plotArea.box.y2],
-                         TOLERANCE);
-                });
-
                 test("axis limit is [0, 1] when no series are configured", 2, function() {
                     stubMethod(Chart.PlotArea, "createAxes",
                         function(seriesMin, seriesMax) {
@@ -159,10 +151,7 @@
 
                     plotArea.updateLayout(chartBox);
 
-                    equals(plotArea.box.x1, chartBox.x1 + MARGIN);
-                    equals(plotArea.box.x2, chartBox.x2 - MARGIN);
-                    equals(plotArea.box.y1, chartBox.y1 + MARGIN);
-                    equals(plotArea.box.y2, chartBox.y2 - MARGIN);
+                    sameBox(plotArea.box, new Box2D(140, 118, 990, 965));
                 });
 
                 // ------------------------------------------------------------
