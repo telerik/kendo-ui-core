@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Query Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.query.js"></script>
+        <script src="../../src/kendo.datasource.js"></script>
+        <link rel="stylesheet" href="../qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">QUnit example</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var DataReader = kendo.data.DataReader;
+
+            test("data returns the passed value by default", function() {
+                var reader = new DataReader(), result = {};
+
+                ok(reader.data(result) === result);
+            });
+
+            test("groups returns the passed value by default", function() {
+                var reader = new DataReader(), result = {};
+
+                ok(reader.groups(result) === result);
+            });
+
+            test("members of the schema override the prototype members", function() {
+                var reader = new DataReader({
+                    data: function(result) {
+                        return result + "bar"
+                    }
+                });
+
+                equal(reader.data("foo"), "foobar");
+            });
+
+            test("string members of the schema are treated as getters", function() {
+                var reader = new DataReader({
+                    data: "foo"
+                });
+
+                equal(reader.data({ foo: "bar" }), "bar");
+            });
+
+            test("total returns the length by default", function() {
+                var reader = new DataReader();
+
+                equal(reader.total([1]), 1);
+            });
+
+            test("status returns the status field by default", function() {
+                var reader = new DataReader();
+
+                equal(reader.status({ status: "foo" }), "foo");
+            });
+
+            test("aggregates returns an empty object default", function() {
+                var reader = new DataReader();
+
+                ok($.isEmptyObject(reader.aggregates()));
+            });
+        </script>
+    </body>
+</html>
