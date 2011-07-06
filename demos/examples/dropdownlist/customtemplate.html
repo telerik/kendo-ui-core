@@ -38,17 +38,15 @@
                             jsonpCallback: "callback",
                             cache: false
                         },
-                        dialect: {
-                            read: function() {
-                                var title = "King Kong",
-                                    dropdownlist = $("#titles").data("kendoDropDownList");
+                        dialect: function() {
+                            var title = "King Kong",
+                            dropdownlist = $("#titles").data("kendoDropDownList");
 
-                                if (dropdownlist) {
-                                    title = dropdownlist.text() || text;
-                                }
-
-                                return "$filter=substringof('" + title + "',Name)&$format=json&$callback=callback";
+                            if (dropdownlist) {
+                                title = dropdownlist.text() || text;
                             }
+
+                            return "$filter=substringof('" + title + "',Name)&$format=json&$callback=callback";
                         }
                     },
                     schema: {

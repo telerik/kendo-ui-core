@@ -12,38 +12,34 @@
         dataSource = data.dataSource({
             pageSize: computePageSize(120, true),
             serverSorting: true,
-            dialect: {
-                read: function(data) {
-                    var params = {
-                        text: $("#searchBox").val(),
-                        extras: EXTRAS,
-                        per_page: PAGESIZE
-                    };
+            dialect: function(data) {
+                var params = {
+                    text: $("#searchBox").val(),
+                    extras: EXTRAS,
+                    per_page: PAGESIZE
+                };
 
-                    if (!$.support.cors) {
-                        params.jsoncallback = "searchPhotos";
-                    }
-
-                    return flickr.searchParams(params);
+                if (!$.support.cors) {
+                    params.jsoncallback = "searchPhotos";
                 }
+
+                return flickr.searchParams(params);
             },
             schema: searchDeserializer,
             jsoncallback: "searchPhotos"
         }),
         mostPopularDataSource = data.dataSource({
-            dialect: {
-                read: function(data) {
-                    var params = {
-                        extras: EXTRAS,
-                        per_page: 100
-                    };
+            dialect: function(data) {
+                var params = {
+                    extras: EXTRAS,
+                    per_page: 100
+                };
 
-                    if (!$.support.cors) {
-                        params.jsoncallback = "mostPopularPhotos";
-                    }
-
-                    return flickr.mostPopularParams(params);
+                if (!$.support.cors) {
+                    params.jsoncallback = "mostPopularPhotos";
                 }
+
+                return flickr.mostPopularParams(params);
             },
             schema: searchDeserializer,
             jsoncallback: "mostPopularPhotos"
