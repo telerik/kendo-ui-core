@@ -6,6 +6,12 @@
         Template,
         JSON = JSON || {},
         support = {},
+        FUNCTION = "function",
+        STRING = "string",
+        NUMBER = "number",
+        OBJECT = "object",
+        NULL = "null",
+        BOOLEAN = "boolean",
         dateCheck = /\d/;
 //Event ================================
     function Event() {
@@ -26,26 +32,27 @@
 
     Class.extend = function(proto) {
         var base = function() {},
+            member,
             that = this,
             subclass = proto && proto.init? proto.init : function () {
                 that.apply(this, arguments);
             },
-            subProto;
+            fn;
 
         base.prototype = that.prototype;
-        subProto = subclass.fn = subclass.prototype = extend(new base, proto);
+        fn = subclass.fn = subclass.prototype = extend(new base, proto);
 
-        for (var member in subProto) {
-            if (typeof subProto[member] === "object") {
-                subProto[member] = extend(true, {}, base.prototype[member], proto[member]);
+        for (member in fn) {
+            if (typeof fn[member] === OBJECT) {
+                fn[member] = extend(true, {}, base.prototype[member], proto[member]);
             }
         }
 
-        subProto.constructor = subclass;
+        fn.constructor = subclass;
         subclass.extend = that.extend;
 
         return subclass;
-    };
+    }
 
 //Observable ================================
     var Observable = Class.extend({
@@ -118,8 +125,8 @@
     Template = {
         paramName: "data", // name of the parameter of the generated template
         useWithBlock: true, // whether to wrap the template in a with() block
-        begin: "<%", // the marker which denotes the beginning of executable code
-        end: "%>", // the marker which denotes the end of executable code
+        begin: "<#", // the marker which denotes the beginning of executable code
+        end: "#>", // the marker which denotes the end of executable code
         render: function(template, data) {
             var idx,
                 length,
@@ -184,12 +191,6 @@
         },
         rep,
         formatters,
-        FUNCTION = "function",
-        STRING = "string",
-        NUMBER = "number",
-        OBJECT = "object",
-        NULL = "null",
-        BOOLEAN = "boolean",
         toString = {}.toString,
         hasOwnProperty = {}.hasOwnProperty;
 
