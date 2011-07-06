@@ -42,7 +42,7 @@ if (!isInferiorBrowser) {
                     return flickr.getRelatedTagParams(params);
                 }
             },
-            deserializer: {
+            schema: {
                 data: function(result) {
                     if(result && result.tags) {
                         return $.map(result.tags.tag, function(tag) {

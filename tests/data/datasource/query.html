@@ -25,26 +25,12 @@
                 }
             });
 
-            var deserializer = {
-                id: function(record) {
-                    return record.id;
-                },
-                data: function(data) {
-                    return data;
-                },
-                group: function(data) {
-                    return data;
-                }
-            },
-            data = [],
-            RemoteTransport = kendo.data.RemoteTransport,
-            DataSource = kendo.data.DataSource;
+            var data = [], RemoteTransport = kendo.data.RemoteTransport, DataSource = kendo.data.DataSource;
 
             function setup(source) {
                 data = source || [{ id:1, bar: "foo" },{ id: 2, bar: "foo" }];
 
                 var dataSource = new DataSource( {
-                    deserializer: deserializer,
                     data: data
                 });
 

@@ -72,7 +72,7 @@
                     }
                 });
 
-                dataSource.create({ foo: "bar" });                
+                dataSource.create({ foo: "bar" });
                 dataSource.create({ foo: "baz" });
                 dataSource.sync();
 
@@ -128,13 +128,13 @@
                         update: function(options) {
                             updated = options.data;
                         }
-                    }, 
+                    },
                     [{ id: 1, foo: "foo", bar: "bar" }],
                     { sendAllFields: true });
 
                 dataSource.update(1, { foo: "bar" });
                 dataSource.sync();
-               
+
                 equal(updated[0].foo, "bar");
                 equal(updated[0].bar, "bar");
             });
@@ -145,13 +145,13 @@
                         update: function(options) {
                             updated = options.data;
                         }
-                    }, 
+                    },
                     [{ id: 1, foo: "foo", bar: "bar" }],
                     { sendAllFields: false });
 
                 dataSource.update(1, { foo: "bar" });
                 dataSource.sync();
-               
+
                 equal(updated[0].foo, "bar");
                 equal(updated[0].bar, undefined);
             });
@@ -168,7 +168,7 @@
 
                 dataSource.destroy(1);
                 dataSource.sync();
-               
+
                 equal(destroyed[0].foo, "foo");
                 equal(destroyed[0].bar, "bar");
             });
@@ -185,32 +185,32 @@
 
                 dataSource.destroy(1);
                 dataSource.sync();
-               
+
                 equal(destroyed[0].id, 1);
                 equal(destroyed[0].foo, undefined);
                 equal(destroyed[0].bar, undefined);
             });
 
-            test("sync with batch=false calls transport update for every record", function() {                
+            test("sync with batch=false calls transport update for every record", function() {
                 var updated = [],
                     dataSource = setup({
                         update: function(options) {
                             updated.push(options.data);
                         }
-                    }, 
+                    },
                     [{ id: 1, foo: "foo"}, { id: 2, foo: "bar"}],
                     { batch: false });
 
                 dataSource.update(1, { foo: "bar" });
-                dataSource.update(2, { foo: "baz" });                
+                dataSource.update(2, { foo: "baz" });
                 dataSource.sync();
-               
+
                 equal(updated.length, 2);
                 equal(updated[0].foo, "bar");
                 equal(updated[1].foo, "baz");
             });
 
-            test("sync with batch=false calls transport create for every new record", function() {                
+            test("sync with batch=false calls transport create for every new record", function() {
                var created = [],
                     dataSource = setup({
                         create: function(options) {
@@ -220,14 +220,14 @@
                     undefined,
                     { batch: false });
 
-                dataSource.create({ foo: "bar" });               
+                dataSource.create({ foo: "bar" });
                 dataSource.sync();
-               
+
                 equal(created.length, 1);
-                equal(created[0].foo, "bar");                
+                equal(created[0].foo, "bar");
             });
 
-            test("sync with batch=false calls transport destroy for destroyed record", function() {                
+            test("sync with batch=false calls transport destroy for destroyed record", function() {
                var destroyed = [],
                     dataSource = setup({
                         destroy: function(options) {
@@ -237,11 +237,11 @@
                     [{ id: 1, foo: "foo", bar: "bar" }],
                     { batch: false });
 
-                dataSource.destroy(1);               
+                dataSource.destroy(1);
                 dataSource.sync();
-               
+
                 equal(destroyed.length, 1);
-                equal(destroyed[0].foo, "foo");                
+                equal(destroyed[0].foo, "foo");
             });
 
             test("sync with batch.mode=single calls transport update with created/updated/destroyed records", function() {
@@ -252,7 +252,7 @@
                         }
                     },
                     [{ id: 1, foo: "foo" }, { id: 2, foo: "baz" }],
-                    { 
+                    {
                         batch: { mode: "single" }
                     });
 
@@ -260,81 +260,81 @@
                 dataSource.create({ foo: "bar" });
                 dataSource.update(2, { foo: "foo" });
                 dataSource.sync();
-                
+
                 equal(data.updated[0].id, 2);
                 equal(data.updated[0].foo, "foo");
                 equal(data.destroyed[0].id, 1);
                 equal(data.created[0].foo, "bar");
             });
-            
-            test("sync change the state of created model when successful", function() {            
+
+            test("sync change the state of created model when successful", function() {
                 var dataSource = new DataSource({
                     transport: {
-                        create: { 
-                            url: "foo", 
+                        create: {
+                            url: "foo",
                             dataType: "json",
                             type: "POST",
                             contentType: "text/json"
                         }
-                    }, 
-                    model: Model.define(),                    
-                    batch: false, 
-                    deserializer: {
+                    },
+                    model: Model.define(),
+                    batch: false,
+                    schema: {
                         status: function() {
                             return true;
                         }
-                    }                    
+                    }
                 });
 
                 $.mockjax({
                     contentType: "text/json",
-                    url: "foo",                   
+                    url: "foo",
                     responseText: '[{"id": 1, "foo": "bar"}]',
-                    response: function() {                        
+                    response: function() {
                         ok(true);
                         start();
                     }
-                });                
+                });
                 stop(1000);
-                
+
                 dataSource.create({ foo: "bar" });
                 dataSource.bind("change", function() {
                     var createdModels = dataSource._createdModels();
                     equal(createdModels.length, 0);
                 });
-                dataSource.sync();                                
+                dataSource.sync();
             });
 
-            test("sync change the state for the successful created record to Model.PRISTINE", function() {            
+            test("sync change the state for the successful created record to Model.PRISTINE", function() {
                 var dataSource = new DataSource({
                     transport: {
-                        create: { 
-                            url: "foo", 
+                        create: {
+                            url: "foo",
                             dataType: "json",
                             type: "POST",
                             contentType: "text/json"
                         }
-                    }, 
+                    },
                     model: Model.define(),
                     batch: false,
-                    deserializer: {
+                    schema: {
                         status: function() {
                             return true;
                         }
-                    }      
+                    }
                 });
 
                 $.mockjax({
                     contentType: "text/json",
-                    url: "foo",                   
+                    url: "foo",
                     responseText: '[{"id": 1, "foo": "bar"}]',
-                    response: function() {                        
+                    response: function() {
                         ok(true);
                         start();
                     }
-                });                
+                });
                 stop(1000);
-                
+
                 dataSource.create({ foo: "bar" });
                 dataSource.bind("change", function() {
                     var model = this.model(1);
@@ -342,20 +342,20 @@
                     equal(model.get("foo"), "bar");
                     equal(model.state, Model.PRISTINE);
                 });
-                dataSource.sync(); 
+                dataSource.sync();
             });
 
             test("sync triggers error if error callback", function() {
                 var data = [{id: 1, foo: "foo"}],
                     errorWasCalled = false;
                 var dataSource = setup({
-                    update: function() {                        
+                    update: function() {
                         dataSource._syncError(data);
                     }},
                     data
                 );
                 dataSource.update(1, { foo: "bar" });
-                dataSource.bind("error", function() {                
+                dataSource.bind("error", function() {
                    errorWasCalled = true;
                 });
                 dataSource.sync();
@@ -367,21 +367,21 @@
                 var data = [{id: 1, foo: "foo"}],
                     errorWasCalled = false;
                 var dataSource = setup({
-                    update: function() {                        
+                    update: function() {
                         dataSource._syncSuccess(data, {status:false, data: arguments[0].data});
                     }},
                     data
                 );
                 dataSource.update(1, { foo: "bar" });
-                dataSource.bind("error", function() {                
-                   errorWasCalled = true;                   
+                dataSource.bind("error", function() {
+                   errorWasCalled = true;
                    equal(this.model(1).state, Model.UPDATED);
-                });                
+                });
                 dataSource.sync();
                 ok(errorWasCalled);
             });
 
-            test("sync change the state for the successful updated record to Model.PRISTINE", function() {               
+            test("sync change the state for the successful updated record to Model.PRISTINE", function() {
                 var data = {data: [{id: 1, foo: "foo"}]};
                 var dataSource = setup({
                     update: function() {
@@ -389,16 +389,16 @@
                     }},
                     data,
                     {
-                        deserializer:{
-                            data: function(data) {                                
+                        schema:{
+                            data: function(data) {
                                 return data.data;
                             }
                         }
                     }
                 );
-                                              
+
                 dataSource.update(1, { foo: "bar" });
-                dataSource.bind("change", function() {                
+                dataSource.bind("change", function() {
                     var model = this.model(1);
                     equal(model.id(), 1);
                     equal(model.get("foo"), "bar");
@@ -411,30 +411,30 @@
             test("sync remove destroyed models and remove its data", function() {
                 var data = [{id: 1, foo: "foo"}];
                 var dataSource = setup({
-                    destroy: function() {                        
+                    destroy: function() {
                         dataSource._syncSuccess(data, []);
                     }},
                     $.map(data, function(i) { return i; }),
                     {
-                        deserializer:{
+                        schema:{
                             status: function() {
                                 return true;
                             }
                         }
                     }
                 );
-                                              
+
                 dataSource.destroy(1);
-                dataSource.bind("change", function() {                    
-                    equal(this._data.length, 0);                    
+                dataSource.bind("change", function() {
+                    equal(this._data.length, 0);
                     equal(this._models[1], undefined);
                     equal(this._map[1], undefined);
                 });
                 dataSource.sync();
             });
-            
-            test("sync merge the results if read before sync complete", function() {                
-                var dataSource = new DataSource({ 
+
+            test("sync merge the results if read before sync complete", function() {
+                var dataSource = new DataSource({
                     transport: {
                         read: function(options) {
                             options.success([{id: 1, foo: "foo"}, {id: 2, foo: "bar"}]);
@@ -446,9 +446,9 @@
 
                 dataSource.create({foo: "baz"});
                 dataSource.update(1, {foo: "bar"});
-                dataSource.destroy(2);                
+                dataSource.destroy(2);
                 dataSource.read();
-                
+
                 var created = dataSource._createdModels();
                 var updated = dataSource._updatedModels();
                 var destroyed = dataSource._destroyedModels();
@@ -466,7 +466,7 @@
                 equal(view[0].foo, "foo");
                 equal(view[1].id, 2);
                 equal(view[1].foo, "bar");
-            });  
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
