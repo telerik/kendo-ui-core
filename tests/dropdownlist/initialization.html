@@ -269,11 +269,11 @@
            test("changing the template", function() {
                var dropdownlist = new DropDownList(input, {
                    datatextField: "",
-                   template: "<%= data.toUpperCase() %>"
+                   template: "<#= data.toUpperCase() #>"
                });
 
                equal(dropdownlist.template("foo"), "<li class='t-item' unselectable='on'>FOO</li>");
-               equal(dropdownlist.options.template, "<%= data.toUpperCase() %>");
+               equal(dropdownlist.options.template, "<#= data.toUpperCase() #>");
            });
 
            test("should populate text and value if items", function() {

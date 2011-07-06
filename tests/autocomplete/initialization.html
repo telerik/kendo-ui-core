@@ -87,7 +87,7 @@
 
             test("changing the template", function() {
                 var autocomplete = new AutoComplete(input, {
-                    template: "<%= data.toUpperCase() %>"
+                    template: "<#= data.toUpperCase() #>"
                 });
 
                 equal(autocomplete.template("foo"), "<li class='t-item' unselectable='on'>FOO</li>");
