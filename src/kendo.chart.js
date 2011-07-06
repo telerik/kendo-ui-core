@@ -2280,7 +2280,7 @@
                     top = - ctm.f % 1,
                     style = element.style;
 
-                if (left > 0 || top > 0) {
+                if (left !== 0 || top !== 0) {
                     style.left = left + "px";
                     style.top = top + "px";
                 }
