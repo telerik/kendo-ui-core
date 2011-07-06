@@ -371,18 +371,28 @@
             return $(node).closest(NODE).find(">div>.t-in").text();
         },
 
-        _insertNode: function(nodeData, parentNode, group, insertCallback) {
+        _insertNode: function(nodeData, index, parentNode, group, insertCallback) {
             var that = this,
                 updatedGroupLength = group.children().length + 1,
+                fromNodeData = $.isPlainObject(nodeData),
                 groupData = {
                     isFirstLevel: parentNode.hasClass(TTREEVIEW),
                     isExpanded: true,
                     length: updatedGroupLength
-                },
+                }, node;
+
+            if (fromNodeData) {
                 node = $(that.rendering.renderItem({
                     group: groupData,
-                    item: nodeData
+                    item: extend(nodeData, { index: index })
                 }));
+            } else {
+                node = $(nodeData);
+
+                if (node.closest(".t-treeview")[0] == that.wrapper[0]) {
+                    that.remove(node);
+                }
+            }
 
             if (!group.length) {
                 group = $(that.rendering.renderGroup({
@@ -397,6 +407,10 @@
                 that._updateNodeClasses(parentNode);
             }
 
+            if (!fromNodeData) {
+                that._updateNodeClasses(node);
+            }
+
             that._updateNodeClasses(node.prev(), groupData);
             that._updateNodeClasses(node.next(), groupData);
 
@@ -406,9 +420,7 @@
         insertBefore: function (nodeData, referenceNode) {
             var group = referenceNode.parent();
 
-            nodeData = extend(nodeData, { index: referenceNode.index() });
-
-            return this._insertNode(nodeData, group.parent(), group, function(item, group) {
+            return this._insertNode(nodeData, referenceNode.index(), group.parent(), group, function(item, group) {
                 item.insertBefore(referenceNode);
             });
         },
@@ -418,9 +430,7 @@
 
             var group = parentNode.find(SUBGROUP);
 
-            nodeData = extend(nodeData, { index: group.children().length });
-
-            return this._insertNode(nodeData, parentNode, group, function(item, group) {
+            return this._insertNode(nodeData, group.children().length, parentNode, group, function(item, group) {
                 item.appendTo(group);
             });
         },
@@ -587,7 +597,7 @@
                     //});
 
                 if (!isValid) {
-                that.dropHint.remove();
+                    that.dropHint.remove();
                     return false;
                 }
 
@@ -603,29 +613,12 @@
                     that.dropHint.remove();
                     return false;
                 }
-                // normalize source group
-                if (movedItem.hasClass("t-last")) {
-                    movedItem.removeClass("t-last")
-                            .prev()
-                            .addClass("t-last")
-                            .find("> div")
-                            .removeClass("t-top t-mid")
-                            .addClass("t-bot");
-                }
 
                 // perform reorder / move
                 if (that.dropHint.css(VISIBILITY) == "visible") {
                     destinationItem.parent()[dropPosition](movedItem);
                 } else {
-                    var targetGroup = destinationItem.next(".t-group");
-
-                    if (targetGroup.length === 0) {
-                        targetGroup = $("<ul class='t-group' />").appendTo(destinationItem.parent());
-
-                        destinationItem.prepend("<span class='t-icon t-minus' />");
-                    }
-
-                    targetGroup.append(movedItem);
+                    treeview.append(movedItem, destinationItem.parent());
 
                     if (destinationItem.find("> .t-icon").hasClass("t-plus")) {
                         treeview.toggle(destinationItem.parent(), true);
@@ -633,30 +626,6 @@
                 }
 
                 that.dropHint.remove();
-
-                var level = movedItem.parents(".t-group").length;
-
-                function normalizeClasses(item) {
-                    var isFirstItem = item.prev().length === 0;
-                    var isLastItem = item.next().length === 0;
-
-                    item.toggleClass("t-first", isFirstItem && level === 1)
-                        .toggleClass("t-last", isLastItem)
-                        .find("> div")
-                            .toggleClass("t-top", isFirstItem && !isLastItem)
-                            .toggleClass("t-mid", !isFirstItem && !isLastItem)
-                            .toggleClass("t-bot", isLastItem);
-                };
-
-                normalizeClasses(movedItem);
-                normalizeClasses(movedItem.prev());
-                normalizeClasses(movedItem.next());
-
-                // remove source group if it is empty
-                if (sourceGroup.children().length === 0) {
-                    sourceGroup.prev("div").find(".t-plus,.t-minus").remove();
-                    sourceGroup.remove();
-                }
 
                 //treeview.trigger("nodeDropped", {
                     //destinationItem: destinationItem.closest(NODE)[0],

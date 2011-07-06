@@ -170,7 +170,7 @@
                 equals(root.find(">div>.t-minus.t-icon").length, 1);
             });
 
-            test("append(nodeData, root) appends new node to parent with existing group", function() {
+            test("append(nodeData, parentNode) appends new node to parent with existing group", function() {
                 var treeview = createTreeView({
                         dataSource: [
                             { text: "foo", expanded: true, items: [
@@ -179,14 +179,14 @@
                         ]
                     }),
                     treeviewObject = treeview.data("kendoTreeView"),
-                    root = treeview.find(".t-item:first");
+                    parentNode = treeview.find(".t-item:first");
 
-                var appendedNode = treeviewObject.append({ text: "bar" }, root);
+                var appendedNode = treeviewObject.append({ text: "bar" }, parentNode);
 
-                equals(root.find(".t-group").length, 1);
-                equals(root.find(".t-group").css("display"), "block");
-                equals(root.find(".t-item").length, 2);
-                equals(appendedNode[0], root.find(".t-item:last")[0]);
+                equals(parentNode.find(".t-group").length, 1);
+                equals(parentNode.find(".t-group").css("display"), "block");
+                equals(parentNode.find(".t-item").length, 2);
+                equals(appendedNode[0], parentNode.find(".t-item:last")[0]);
                 ok(!appendedNode.prev(".t-item").hasClass("t-last"));
                 equals(appendedNode.find(">div.t-bot").length, 1);
             });
@@ -194,7 +194,7 @@
             test("append(nodeData) appends new node to root", function() {
                 var treeview = createTreeView({
                         dataSource: [
-                            { text: "foo", expanded: true }
+                            { text: "foo" }
                         ]
                     }),
                     treeviewObject = treeview.data("kendoTreeView"),
@@ -206,6 +206,48 @@
                 equals(treeview.find("div").length, 2);
                 equals(rootGroup.find("> .t-item").length, 2);
                 ok(rootGroup.find("> .t-item").hasClass("t-first"));
+            });
+
+            test("append(nodeElement, parentNode) appends node to parent", function() {
+                var treeview = createTreeView({
+                        dataSource: [
+                            { text: "foo", expanded: true, items: [
+                                { text: "buzz" },
+                                { text: "bar" }
+                            ] },
+                            { text: "baz" }
+                        ]
+                    }),
+                    treeviewObject = treeview.data("kendoTreeView"),
+                    rootGroup = treeview.find("> .t-group"),
+                    subNode = treeviewObject.findByText("buzz"),
+                    newParent = treeviewObject.findByText("baz");
+
+                var appendedNode = treeviewObject.append(subNode[0], newParent);
+
+                equals(appendedNode[0], newParent.find(".t-item")[0]);
+                equals(rootGroup.children().length, 2);
+                equals(subNode.find(".t-bot").length, 1);
+            });
+
+            test("append(nodeElement) appends node to root", function() {
+                var treeview = createTreeView({
+                        dataSource: [
+                            { text: "foo", expanded: true, items: [
+                                { text: "bar" }
+                            ] }
+                        ]
+                    }),
+                    treeviewObject = treeview.data("kendoTreeView"),
+                    rootGroup = treeview.find("> .t-group"),
+                    subNode = treeviewObject.findByText("bar");
+
+                var appendedNode = treeviewObject.append(subNode[0]);
+
+                equals(subNode[0], appendedNode[0]);
+                equals(rootGroup.children().length, 2);
+                equals(treeview.find(".t-icon").length, 0);
+                equals(rootGroup.find(".t-group").length, 0);
             });
 
             test("insertBefore(nodeData, element) inserts new node before element", function() {
