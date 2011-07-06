@@ -48,7 +48,7 @@
             }
 
             that.rendering = new TreeViewRendering(that);
-            
+
             // render treeview if it's not already rendered
             if (!element.hasClass(TTREEVIEW)) {
                 that._wrapper();
@@ -162,11 +162,11 @@
                 },
                 groupElement = item.find("> ul");
 
-            groupElement 
+            groupElement
                 .addClass(that.rendering.helpers.groupCssClass(group))
                 .css("display", group.isExpanded ? "" : "none");
 
-            that._items(groupElement, group); 
+            that._items(groupElement, group);
         },
 
         _items: function(groupElement, groupData) {
@@ -356,7 +356,7 @@
                     node.find("> div > .t-icon")
                         .toggleClass("t-minus", isExpanding)
                         .toggleClass("t-plus", !isExpanding);
-                        
+
                     if (!isExpanding) {
                         contents.css("height", contents.height()).css("height");
                     }
@@ -698,7 +698,7 @@
                 var result = "",
                     index = item.index,
                     groupLength = group.length - 1;
-                
+
                 if (group.isFirstLevel && index == 0) {
                     result += "t-top ";
                 }
@@ -710,7 +710,7 @@
                 } else {
                     result += "t-mid";
                 }
-                
+
                 return result;
             },
             textClass: function(item) {
@@ -810,51 +810,51 @@
     };
 
     TreeView.TreeViewRendering = TreeViewRendering;
-                
+
     TreeView.templates = {
         group: template(
-            "<ul class='<%= groupCssClass(group) %>'<%= groupAttributes(group) %>>" +
-                "<%= renderItems(data); %>" +
+            "<ul class='<#= groupCssClass(group) #>'<#= groupAttributes(group) #>>" +
+                "<#= renderItems(data); #>" +
             "</ul>"
         ),
         itemWrapper: template(
-            "<div class='<%= cssClass(group, item) %>'>" +
-                "<%= toggleButton(data) %>" +
-                "<%= checkbox(data) %>" +
-                "<<%= tag(item) %> class='<%= textClass(item) %>'<%= textAttributes(item) %>>" +
-                    "<%= image(item) %><%= sprite(item) %><%= text(item) %>" +
-                "</<%= tag(item) %>>" +
+            "<div class='<#= cssClass(group, item) #>'>" +
+                "<#= toggleButton(data) #>" +
+                "<#= checkbox(data) #>" +
+                "<<#= tag(item) #> class='<#= textClass(item) #>'<#= textAttributes(item) #>>" +
+                    "<#= image(item) #><#= sprite(item) #><#= text(item) #>" +
+                "</<#= tag(item) #>>" +
             "</div>"
         ),
         item: template(
-            "<li class='<%= wrapperCssClass(group, item) %>'>" +
-                "<%= itemWrapper(data) %>" +
-                "<% if (item.items) { %>" +
-                "<%= subGroup({ items: item.items, treeview: treeview, group: { isExpanded: item.expanded } }) %>" +
-                "<% } %>" +
+            "<li class='<#= wrapperCssClass(group, item) #>'>" +
+                "<#= itemWrapper(data) #>" +
+                "<# if (item.items) { #>" +
+                "<#= subGroup({ items: item.items, treeview: treeview, group: { isExpanded: item.expanded } }) #>" +
+                "<# } #>" +
             "</li>"
         ),
-        image: template("<img class='t-image' alt='' src='<%= imageUrl %>' />"),
-        value: template("<input type='hidden' class='t-input' name='value' value='<%= value %>' />"),
-        toggleButton: template("<span class='<%= toggleButtonClass(item) %>'></span>"),
+        image: template("<img class='t-image' alt='' src='<#= imageUrl #>' />"),
+        value: template("<input type='hidden' class='t-input' name='value' value='<#= value #>' />"),
+        toggleButton: template("<span class='<#= toggleButtonClass(item) #>'></span>"),
         checkbox: template(
-            "<% var arrayName = treeview.id + '_checkedNodes', absoluteIndex = (group.level ? group.level + ':' : '') + item.index; %>" + 
-            "<span class='t-checkbox'>" + 
-            "<input type='hidden' value='<%= absoluteIndex %>' name='<%= arrayName %>.Index' class='t-input' />" +
-                "<input type='checkbox' value='<%= item.checked ? 'True' : 'False' %>' " +
-                    "name='<%= arrayName %>[<%= absoluteIndex %>].Checked' class='t-input' " + 
-                    "<%= item.enabled === false ? 'disabled ' : '' %>" +
-                    "<%= item.checked === true ? 'checked ' : '' %>" + 
+            "<# var arrayName = treeview.id + '_checkedNodes', absoluteIndex = (group.level ? group.level + ':' : '') + item.index; #>" +
+            "<span class='t-checkbox'>" +
+            "<input type='hidden' value='<#= absoluteIndex #>' name='<#= arrayName #>.Index' class='t-input' />" +
+                "<input type='checkbox' value='<#= item.checked ? 'True' : 'False' #>' " +
+                    "name='<#= arrayName #>[<#= absoluteIndex #>].Checked' class='t-input' " +
+                    "<#= item.enabled === false ? 'disabled ' : '' #>" +
+                    "<#= item.checked === true ? 'checked ' : '' #>" +
                 "/>" +
-                "<%= checkboxValues(data) %>" +
+                "<#= checkboxValues(data) #>" +
             "</span>"
         ),
         checkboxValues: template(
-            "<% var arrayItem = treeview.id + '[' + group.level + ']'; %>" + 
-            "<input type='hidden' value='<%= item.value %>' name='<%= arrayItem %>.Value' class='t-input' />" +
-            "<input type='hidden' value='<%= item.text %>' name='<%= arrayItem %>.Text' class='t-input' />"
+            "<# var arrayItem = treeview.id + '[' + group.level + ']'; #>" +
+            "<input type='hidden' value='<#= item.value #>' name='<#= arrayItem #>.Value' class='t-input' />" +
+            "<input type='hidden' value='<#= item.text #>' name='<#= arrayItem #>.Text' class='t-input' />"
         ),
-        sprite: template("<span class='t-sprite <%= spriteCssClass %>'></span>"),
+        sprite: template("<span class='t-sprite <#= spriteCssClass #>'></span>"),
         empty: template("")
     };
 

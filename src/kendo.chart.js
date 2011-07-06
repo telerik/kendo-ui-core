@@ -2194,10 +2194,10 @@
             if (!root.template) {
                 root.template = SVGView.template = template(
                     "<svg xmlns='http://www.w3.org/2000/svg' version='1.1' " +
-                    "width='<%= options.width %>px' height='<%= options.height %>px' " +
+                    "width='<#= options.width #>px' height='<#= options.height #>px' " +
                     "style='position: relative;'>" +
-                    "<%= renderDefinitions() %>" +
-                    "<%= renderContent() %></svg>"
+                    "<#= renderDefinitions() #>" +
+                    "<#= renderContent() #></svg>"
                 );
             }
         },
@@ -2301,7 +2301,7 @@
             group.template = SVGGroup.template;
             if (!group.template) {
                 group.template = SVGGroup.template =
-                    template("<g><%= renderContent() %></g>");
+                    template("<g><#= renderContent() #></g>");
             }
         }
     });
@@ -2316,10 +2316,10 @@
             text.template = SVGText.template;
             if (!text.template) {
                 text.template = SVGText.template = template(
-                    "<text x='<%= Math.round(options.x) %>' " +
-                    "y='<%= Math.round(options.y + options.baseline) %>' " +
-                    "style='font: <%= options.font %>' fill='<%= options.color %>'>" +
-                    "<%= content %></text>"
+                    "<text x='<#= Math.round(options.x) #>' " +
+                    "y='<#= Math.round(options.y + options.baseline) #>' " +
+                    "style='font: <#= options.font #>' fill='<#= options.color #>'>" +
+                    "<#= content #></text>"
                 );
             }
         },
@@ -2340,10 +2340,10 @@
             path.template = SVGPath.template;
             if (!path.template) {
                 path.template = SVGPath.template = template(
-                    "<path d='<%= renderPoints() %>' " +
-                    "<%= renderStroke() %><%= renderStrokeWidth() %>" +
+                    "<path d='<#= renderPoints() #>' " +
+                    "<#= renderStroke() #><#= renderStrokeWidth() #>" +
                     "stroke-linecap='square' " +
-                    "fill='<%= options.fill || \"none\" %>'></path>"
+                    "fill='<#= options.fill || \"none\" #>'></path>"
                 );
             }
 
@@ -2401,15 +2401,15 @@
             gradient.stopTemplate = SVGLinearGradient.stopTemplate;
             if (!gradient.template) {
                 gradient.template = SVGLinearGradient.template = template(
-                    "<linearGradient id='<%= options.id %>' " +
-                    "gradientTransform='rotate(<%= options.rotation %>)'> " +
-                    "<%= renderStops() %>" +
+                    "<linearGradient id='<#= options.id #>' " +
+                    "gradientTransform='rotate(<#= options.rotation #>)'> " +
+                    "<#= renderStops() #>" +
                     "</linearGradient>"
                 );
 
                 gradient.stopTemplate = SVGLinearGradient.stopTemplate = template(
-                    "<stop offset='<%= Math.round(offset * 100) %>%' " +
-                    "style='stop-color:<%= color %>;stop-opacity:<%= opacity %>' />");
+                    "<stop offset='<#= Math.round(offset * 100) #>%' " +
+                    "style='stop-color:<#= color #>;stop-opacity:<#= opacity #>' />");
             }
         },
 
@@ -2462,9 +2462,9 @@
             root.template = VMLView.template;
             if (!root.template) {
                 root.template = VMLView.template = template(
-                    "<div style='width:<%= options.width %>px; height:<%= options.height %>px; " +
+                    "<div style='width:<#= options.width #>px; height:<#= options.height #>px; " +
                     "position: relative;'>" +
-                    "<%= renderContent() %></div>"
+                    "<#= renderContent() #></div>"
                 );
             }
         },
@@ -2519,9 +2519,9 @@
             if (!text.template) {
                 text.template = VMLText.template = template(
                     "<kvml:textbox style='position: absolute; " +
-                    "left: <%= options.x %>px; top: <%= options.y %>px; " +
-                    "font: <%= options.font %>; color: <%= options.color %>'>" +
-                    "<%= content %></kvml:textbox>"
+                    "left: <#= options.x #>px; top: <#= options.y #>px; " +
+                    "font: <#= options.font #>; color: <#= options.color #>'>" +
+                    "<#= content #></kvml:textbox>"
                 );
             }
         },
@@ -2543,13 +2543,13 @@
             if (!path.template) {
                 path.template = VMLPath.template = template(
                     "<kvml:shape style='position:absolute; width:1px; height:1px;' " +
-                    "strokecolor='<%= options.stroke || '' %>' stroked='<%= !!options.stroke %>' " +
-                    "strokeweight='<%= options.strokeWidth || '' %>' " +
-                    "fillcolor='<%= options.fill %>' " +
-                    "filled='<%= !!options.fill || children.length > 0 %>' " +
+                    "strokecolor='<#= options.stroke || '' #>' stroked='<#= !!options.stroke #>' " +
+                    "strokeweight='<#= options.strokeWidth || '' #>' " +
+                    "fillcolor='<#= options.fill #>' " +
+                    "filled='<#= !!options.fill || children.length > 0 #>' " +
                     "coordorigin='0 0' coordsize='1 1'>" +
-                        "<kvml:path v='<%= renderPoints() %> e' />" +
-                        "<%= renderContent() %>" +
+                        "<kvml:path v='<#= renderPoints() #> e' />" +
+                        "<#= renderContent() #>" +
                     "</kvml:shape>"
                 );
             }
@@ -2593,7 +2593,7 @@
             if (!group.template) {
                 group.template = VMLGroup.template = template(
                     "<div style='position: absolute; white-space: nowrap;'>" +
-                    "<%= renderContent() %></div>"
+                    "<#= renderContent() #></div>"
                 );
             }
         }
@@ -2607,8 +2607,8 @@
             gradient.template = VMLLinearGradient.template;
             if (!gradient.template) {
                 gradient.template = VMLLinearGradient.template = template(
-                    "<kvml:fill type='gradient' angle='<%= options.rotation %>' " +
-                    "colors='<%= renderColors() %>'" +
+                    "<kvml:fill type='gradient' angle='<#= options.rotation #>' " +
+                    "colors='<#= renderColors() #>'" +
                     "/> "
                 );
             }
