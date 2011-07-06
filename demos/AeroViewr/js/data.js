@@ -3,7 +3,7 @@
         dataSource: function(options) {
             options = $.extend(true, {}, options, {
                 transport: createTransport(options.dialect, options.cache, options.jsoncallback),
-                deserializer: options.deserializer
+                schema: options.schema
             });
             return new kendo.data.DataSource(options);
         }

@@ -27,7 +27,7 @@
                     return flickr.searchParams(params);
                 }
             },
-            deserializer: searchDeserializer,
+            schema: searchDeserializer,
             jsoncallback: "searchPhotos"
         }),
         mostPopularDataSource = data.dataSource({
@@ -45,7 +45,7 @@
                     return flickr.mostPopularParams(params);
                 }
             },
-            deserializer: searchDeserializer,
+            schema: searchDeserializer,
             jsoncallback: "mostPopularPhotos"
         });
 

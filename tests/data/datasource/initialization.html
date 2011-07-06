@@ -18,15 +18,7 @@
         <h2 id="qunit-userAgent"></h2>
         <ol id="qunit-tests"></ol>
         <script>
-            var deserializer = {
-                id: function(record) {
-                    return record.id;
-                },
-                data: function(data) {
-                    return data;
-                }
-            },
-            data = [],
+            var data = [],
             RemoteTransport = kendo.data.RemoteTransport,
             Model = kendo.data.Model,
             DataSource = kendo.data.DataSource;
@@ -35,7 +27,6 @@
                 data = source || [{ id:1, bar: "foo" },{ id: 2, bar: "foo" }];
 
                 var dataSource = new DataSource( {
-                    deserializer: deserializer,
                     data: data
                 });
 
