@@ -248,6 +248,97 @@
         }
     });
 
+    var ModelSet = Class.extend({
+        init: function(options) {
+            this.options = options;
+            this.models = {};
+        },
+
+        model: function(id) {
+            var that = this,
+                model = id && that.models[id];
+
+            if(!model) {
+                model = new that.options.model(that.options.find(id));
+                that.models[model.id()] = model;
+                model.bind(CHANGE, function() {
+                    that.options.update({ model: model });
+                });
+            }
+
+            return model;
+        },
+
+        changes: function(id) {
+            var that = this,
+                model = that.models[id];
+
+            if (model && model.state === Model.UPDATED) {
+                return model.changes();
+            }
+        },
+
+        hasChanges: function(id) {
+            var that = this,
+                model,
+                models = that.models,
+                id;
+
+            if (id === undefined) {
+                for (id in models) {
+                    if (models[id].state !== Model.PRISTINE) {
+                        return true;
+                    }
+                }
+
+                return false;
+            }
+
+            model = models[id];
+
+            return !!model && model.state === Model.UPDATED;
+        },
+
+        find: function(state, selector) {
+            var models = this.models,
+                result = [],
+                model,
+                selector = selector || identity,
+                id;
+
+            for (id in models) {
+                model = models[id];
+
+                if(model.state === state) {
+                    result.push(selector(model));
+                }
+            }
+
+            return result;
+        },
+
+        syncUpdated: function(data) {
+            var updated = this.find(Model.UPDATED), model = this.options.model, models = this.models;
+
+            $.each(updated, function() {
+                var id = this.id();
+                $.each(data, function() {
+                    if (id === model.id(this)) {
+                        delete models[id];
+                    }
+                });
+            });
+        },
+
+        sync: function(data) {
+            var id = this.options.model.id, models = this.models;
+
+            $.each(data, function(index, value) {
+                delete models[id(value)];
+            });
+        }
+    });
+
     var DataSource = Observable.extend({
         init: function(options) {
             var that = this, id, model, transport;
@@ -256,7 +347,6 @@
 
             extend(that, {
                 _map: {},
-                _models: {},
                 _prefetch: {},
                 _data: [],
                 _ranges: [],
@@ -296,6 +386,15 @@
                 that.find = that.at;
             }
 
+            if (Model) {
+                that.modelSet = new ModelSet({
+                    find: proxy(that.find, that),
+                    model: model,
+                    update: function(e) {
+                        that.trigger(UPDATE, e);
+                    }
+                });
+            }
             that.bind([ERROR, CHANGE, CREATE, DESTROY, UPDATE], options);
         },
 
@@ -314,18 +413,7 @@
         },
 
         model: function(id) {
-            var that = this,
-                model = id && that._models[id];
-
-            if(!model) {
-                model = new that.reader.model(that.find(id));
-                that._models[model.id()] = model;
-                model.bind(CHANGE, function() {
-                    that.trigger(UPDATE, { model: model });
-                });
-            }
-
-            return model;
+            return this.modelSet.model(id);
         },
 
         _idMap: function(data) {
@@ -340,26 +428,8 @@
             that._map = map;
         },
 
-        _byState: function(state, selector) {
-            var models = this._models,
-                result = [],
-                model,
-                selector = selector || identity,
-                id;
-
-            for (id in models) {
-                model = models[id];
-
-                if(model.state === state) {
-                    result.push(selector(model));
-                }
-            }
-
-            return result;
-        },
-
         _createdModels: function() {
-            return this._byState(Model.CREATED, function(model) {
+            return this.modelSet.find(Model.CREATED, function(model) {
                 return model.data;
             });
         },
@@ -367,20 +437,21 @@
         _updatedModels: function() {
             var that = this,
                 sendAllFields = that.options.sendAllFields;
-            return  that._byState(Model.UPDATED, function(model) {
-                        if(sendAllFields) {
-                            return model.data;
-                        }
 
-                        return model.changes();
-                    });
+            return that.modelSet.find(Model.UPDATED, function(model) {
+                if(sendAllFields) {
+                    return model.data;
+                }
+
+                return model.changes();
+            });
         },
 
         _destroyedModels: function() {
             var that = this,
                 options = that.options;
 
-            return that._byState(Model.DESTROYED, function(model) {
+            return that.modelSet.find(Model.DESTROYED, function(model) {
                 var data = {};
 
                 if (options.sendAllFields) {
@@ -440,7 +511,6 @@
             var that = this,
                 origValue,
                 origId,
-                models = that._models
                 map = that._map,
                 reader= that.reader;
 
@@ -448,11 +518,10 @@
                 return that.error({data: origData});
             }
 
-            $.each(origData, function(index, value) {
-                delete models[that.id(value)];
-            });
+            that.modelSet.sync(origData);
 
             data = reader.data(data);
+
             $.each(data, function(index, value) {
                 origValue = origData[index];
                 if(origValue) {
@@ -464,6 +533,7 @@
                     }
                 }
             });
+
             that._idMap(that._data);
         },
 
@@ -581,19 +651,20 @@
             options = {},
             result,
             updated = Model ? that._updatedModels() : [],
-            hasGroups = that.options.serverGrouping === true && that._group && that._group.length > 0,
-            models = that._models;
+            hasGroups = that.options.serverGrouping === true && that._group && that._group.length > 0;
 
             that._total = that.reader.total(data);
-            if(that._aggregates && that.options.serverAggregates) {
+
+            if (that._aggregates && that.options.serverAggregates) {
                 that._aggregateResult = that.reader.aggregates(data);
             }
 
-            if(hasGroups) {
+            if (hasGroups) {
                 data = that.reader.groups(data);
             } else {
                 data = that.reader.data(data);
             }
+
             that._process(data);
         },
 
@@ -601,20 +672,13 @@
             var that = this,
                 options = {},
                 result,
-                updated = Model ? that._updatedModels() : [],
-                hasGroups = that.options.serverGrouping === true && that._group && that._group.length > 0,
-                models = that._models;
+                hasGroups = that.options.serverGrouping === true && that._group && that._group.length > 0;
 
             that._data = data;
 
-            $.each(updated, function() {
-                var updatedId = that.id(this);
-                $.each(data, function() {
-                    if(updatedId === that.id(this)) {
-                        delete models[updatedId];
-                    }
-                });
-            });
+            if (that.modelSet) {
+                that.modelSet.syncUpdated(data);
+            }
 
             if (that.options.serverPaging !== true) {
                 options.skip = that._skip;
@@ -656,34 +720,11 @@
         },
 
         changes: function(id) {
-            var that = this,
-                model = that._models[id];
-
-            if (model && model.state === Model.UPDATED) {
-                return model.changes();
-            }
+            return this.modelSet.changes(id);
         },
 
         hasChanges: function(id) {
-            var that = this,
-                state,
-                model,
-                models = that._models,
-                id;
-
-            if (id === undefined) {
-                for (id in models) {
-                    if (models[id].state !== Model.PRISTINE) {
-                        return true;
-                    }
-                }
-
-                return false;
-            }
-
-            model = models[id];
-
-            return !!model && model.state === Model.UPDATED;
+            return this.modelSet.hasChanges(id);
         },
 
         at: function(index) {

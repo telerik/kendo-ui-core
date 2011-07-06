@@ -63,26 +63,6 @@
                 ok(model);
             });
 
-            test("_modelsByState with Model.UPDATED returns models for update", function() {
-                var models,
-                    dataSource = new DataSource({
-                        schema: {
-                            model: { id: "foo" }
-                        },
-                        data: [ { foo: "1", bar: "bar1"}, { foo: "2", bar: "bar2"}],
-                        update: function() {
-                            model = arguments[0];
-                        }
-                    });
-                dataSource.read();
-                dataSource.model("2").set( {bar: "baz"} );
-                models = dataSource._byState(Model.UPDATED);
-
-                equal(models.length, 1);
-                equal(models[0].get("foo"), "2");
-                equal(models[0].get("bar"), "baz");
-            });
-
             </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

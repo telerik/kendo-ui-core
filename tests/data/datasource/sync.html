@@ -429,7 +429,7 @@
                 dataSource.destroy(1);
                 dataSource.bind("change", function() {
                     equal(this._data.length, 0);
-                    equal(this._models[1], undefined);
+                    equal(this.modelSet.models[1], undefined);
                     equal(this._map[1], undefined);
                 });
                 dataSource.sync();
