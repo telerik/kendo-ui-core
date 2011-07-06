@@ -28,29 +28,29 @@
             });
 
             test("template evaluates value expressions", function() {
-                var t = template.compile("<%= foo.bar %>");
+                var t = template.compile("<#= foo.bar #>");
                 equal(t({ foo: { bar: "baz" } }), "baz");
             });
 
             test("default paramName is 'data'", function() {
-                var t = template.compile("<%= data.foo %>");
+                var t = template.compile("<#= data.foo #>");
                 equal(t({ foo: "bar" }), "bar");
             });
 
             test("template evaluates value expressions using with", function() {
-                var t = template.compile("<%= foo %>");
+                var t = template.compile("<#= foo #>");
                 equal(t({ foo: "bar" }), "bar");
             });
 
             test("template evaluates value expressions in single quotes", function() {
-                var t = template.compile("'<%= foo %>'");
+                var t = template.compile("'<#= foo #>'");
                 equal(t({ foo: "bar" }), "'bar'");
             });
 
             test("template with custom paramName", function() {
                 template.paramName = "foo";
 
-                var t = template.compile("<%= foo.bar %>");
+                var t = template.compile("<#= foo.bar #>");
 
                 equal(t({ bar: "baz" }), "baz");
             });
@@ -58,19 +58,19 @@
             test("disabling with block generation", function() {
                 template.useWithBlock = false;
 
-                var t = template.compile("<%= foo %>");
+                var t = template.compile("<#= foo #>");
 
                 ok(!/with/.test(t));
             });
 
             test("with block generation", function() {
-                var t = template.compile("<%= foo %>");
+                var t = template.compile("<#= foo #>");
 
                 ok(/with/.test(t));
             });
 
             test("can specify custom settings", function() {
-                var t = template.compile("<%= foo.bar %>", { paramName: "foo" });
+                var t = template.compile("<#= foo.bar #>", { paramName: "foo" });
 
                 equal(t({ bar: "baz" }), "baz");
             });
@@ -83,7 +83,7 @@
 
             test("can execute code", function() {
                 var executed = false,
-                    t = template.compile("<% var result = 'foo'; %><%= result %>");
+                    t = template.compile("<# var result = 'foo'; #><#= result #>");
 
                 equal(t({}), "foo");
             });
@@ -125,10 +125,10 @@
             <strong>${foo}</strong>
         </script>
         <script id="raw" type="text/x-jquery-template">
-            <strong><%= foo %></strong>
+            <strong><#= foo #></strong>
         </script>
         <script id="code" type="text/x-jquery-template">
-            <% var foo = "foo"; %><%= foo %>
+            <# var foo = "foo"; #><#= foo #>
         </script>
     </body>
 </html>

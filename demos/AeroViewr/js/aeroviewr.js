@@ -100,26 +100,26 @@ if (!isInferiorBrowser) {
                 }
 
                 $(kendo.template('<div id="exifWindow">\
-                    <div class="exif-author">by <span><%= author %></span></div>\
+                    <div class="exif-author">by <span><#= author #></span></div>\
                     <dl class="floatWrap">\
-                        <dt>Description</dt><dd><%= description %></dd>\
+                        <dt>Description</dt><dd><#= description #></dd>\
                         <dt>Tags</dt><dd>\
-                            <% if (tags.length) { %>\
+                            <# if (tags.length) { #>\
                             <ul class="taglist">\
-                            <% $.each(tags, function(index, tag) { %> \
-                               <li<%= (index == tags.length - 1 ? \' class="last"\' : "") %>><a href="#" data-tagid="<%= tag.id %>"><%= tag.text %></a></li> \
-                            <% }); %> \
+                            <# $.each(tags, function(index, tag) { #> \
+                               <li<#= (index == tags.length - 1 ? \' class="last"\' : "") #>><a href="#" data-tagid="<#= tag.id #>"><#= tag.text #></a></li> \
+                            <# }); #> \
                             </ul>\
-                            <% } else { %>\
+                            <# } else { #>\
                             (none)\
-                            <% } %>\
+                            <# } #>\
                         </dd>\
-                        <dt>Location</dt><dd><%= location %></dd>\
-                        <dt>Posted to Flickr</dt><dd><%= posted %></dd>\
+                        <dt>Location</dt><dd><#= location #></dd>\
+                        <dt>Posted to Flickr</dt><dd><#= posted #></dd>\
                     </dl>\
-                    <% if (url) { %>\
-                    <div class="exif-actions"><a href="<%= url %>">See on flickr</a></div>\
-                    <% } %>\
+                    <# if (url) { #>\
+                    <div class="exif-actions"><a href="<#= url #>">See on flickr</a></div>\
+                    <# } #>\
                 </div>'
                 )({
                     posted: kendo.toString(new Date(parseInt(photo.dates.posted) * 1000), "MMMM dd, yyyy"),
