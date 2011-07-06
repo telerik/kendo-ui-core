@@ -226,7 +226,7 @@
             depends: "core"
         },
         datasource: {
-            url: "kendo.datasource.js",
+            url: "kendo.data.js",
             depends: "query"
         },
         pageable: {
