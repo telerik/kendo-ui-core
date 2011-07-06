@@ -37,10 +37,8 @@
                                  jsonpCallback: "callback",
                                  cache: true
                              },
-                             dialect: {
-                                 read: function(options) {
-                                     return kendo.format("$format=json&$top={0}&$skip={1}&$inlinecount=allpages&$callback=callback", options.take, options.skip);
-                                 }
+                             dialect: function(options) {
+                                 return kendo.format("$format=json&$top={0}&$skip={1}&$inlinecount=allpages&$callback=callback", options.take, options.skip);
                              }
                          },
                          schema: {
@@ -62,10 +60,8 @@
                                 dataType: "json",
                                 cache: true
                             },
-                            dialect: {
-                                read: function(options) {
-                                    return { page: options.page, size: 20 };
-                                }
+                            dialect: function(options) {
+                                return { page: options.page, size: 20 };
                             }
                         },
                         schema: {

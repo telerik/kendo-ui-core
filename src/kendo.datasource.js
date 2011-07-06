@@ -101,12 +101,7 @@
         },
 
         options: {
-            dialect: {
-                read: identity,
-                update: identity,
-                destroy: identity,
-                create: identity
-            }
+            dialect: identity
         },
 
         create: function(options) {
@@ -155,7 +150,7 @@
                 data = isFunction(operation.data) ? operation.data() : operation.data;
 
             options = extend(true, {}, operation, options);
-            options.data = that.dialect[type](extend(data, options.data));
+            options.data = that.dialect(extend(data, options.data));
 
             return options;
         }

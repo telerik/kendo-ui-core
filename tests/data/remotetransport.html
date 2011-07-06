@@ -70,10 +70,8 @@
                         read: {
                             url: "foo"
                         },
-                        dialect: {
-                            read: function() {
-                                dialectWasCalled = true;
-                            }
+                        dialect: function() {
+                            dialectWasCalled = true;
                         }
                     });
 
@@ -97,11 +95,9 @@
                                 foo: "bar"
                             }
                         },
-                        dialect: {
-                            read: function() {
-                                data = arguments[0];
-                                return data;
-                            }
+                        dialect: function() {
+                            data = arguments[0];
+                            return data;
                         }
                     });
 
@@ -128,11 +124,9 @@
                                 }
                             }
                         },
-                        dialect: {
-                            read: function() {
-                                data = arguments[0];
-                                return data;
-                            }
+                        dialect: function() {
+                            data = arguments[0];
+                            return data;
                         }
                     });
 
@@ -161,11 +155,9 @@
                                 }
                             }
                         },
-                        dialect: {
-                            read: function() {
-                                data = arguments[0];
-                                return data;
-                            }
+                        dialect: function() {
+                            data = arguments[0];
+                            return data;
                         }
                     });
 
@@ -507,10 +499,8 @@
                         update: {
                             url: "foo"
                         },
-                        dialect: {
-                            update: function() {
-                                dialectWasCalled = true;
-                            }
+                        dialect: function() {
+                            dialectWasCalled = true;
                         }
                     });
 
@@ -534,11 +524,9 @@
                                 foo: "bar"
                             }
                         },
-                        dialect: {
-                            update: function() {
-                                data = arguments[0];
-                                return data;
-                            }
+                        dialect: function() {
+                            data = arguments[0];
+                            return data;
                         }
                     });
 
@@ -563,14 +551,12 @@
                                 return {
                                     foo: "bar"
                                 }
-                        }
-                    },
-                    dialect: {
-                        update: function() {
+                            }
+                        },
+                        dialect: function() {
                             data = arguments[0];
                             return data;
                         }
-                    }
                     });
 
                 $.mockjax({

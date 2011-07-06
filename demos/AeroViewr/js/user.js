@@ -27,49 +27,43 @@
                 return Math.min(result.photos.total, PAGESIZE);
             }
         },
-        searchDialect = {
-            read: function(data) {
-                var params = {
-                    text: $("#searchBox").val(),
-                    extras: EXTRAS,
-                    per_page: PAGESIZE
-                };
+        searchDialect = function(data) {
+            var params = {
+                text: $("#searchBox").val(),
+                extras: EXTRAS,
+                per_page: PAGESIZE
+            };
 
-                if (!$.support.cors) {
-                        params.jsoncallback = "searchPhotos";
-                }
-
-                return flickr.searchParams(params);
+            if (!$.support.cors) {
+                params.jsoncallback = "searchPhotos";
             }
+
+            return flickr.searchParams(params);
         },
-        defaultDialect = {
-            read: function(data) {
-                var params = { extras: "owner_name,tags", per_page: PAGESIZE };
+        defaultDialect = function(data) {
+            var params = { extras: "owner_name,tags", per_page: PAGESIZE };
 
-                if (!$.support.cors) {
-                    params.jsoncallback = "defaultCallback";
-                }
+            if (!$.support.cors) {
+                params.jsoncallback = "defaultCallback";
+            }
 
-                if(photosInSet) {
-                    params.photoset_id = photoSetId();
-                    return flickr.getInSetParams(params);
-                }
-                else {
-                    return flickr.getNotInSetParams(params);
-                }
+            if(photosInSet) {
+                params.photoset_id = photoSetId();
+                return flickr.getInSetParams(params);
+            }
+            else {
+                return flickr.getNotInSetParams(params);
             }
         },
         setsDataSource = data.dataSource({
-            dialect: {
-                read: function(data) {
-                    var params = {};
+            dialect: function(data) {
+                var params = {};
 
-                    if (!$.support.cors) {
-                        params.jsoncallback = "getSets";
-                    }
-
-                    return flickr.getSetsParams(params);
+                if (!$.support.cors) {
+                    params.jsoncallback = "getSets";
                 }
+
+                return flickr.getSetsParams(params);
             },
             schema: {
                 data: function(result) {
