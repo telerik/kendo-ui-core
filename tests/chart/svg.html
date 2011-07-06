@@ -14,7 +14,7 @@
         <script type="text/javascript">
             var Chart = kendo.ui.Chart,
                 Box2D = Chart.Box2D,
-                viewRoot = new ViewElementStub(),
+                view = new ViewElementStub(),
                 contentElementStub = {
                     render: function() { return "Content"; }
                 };
@@ -55,19 +55,19 @@
                 });
 
                 test("createRect returns SVGPath", function() {
-                    var rect = view.createRect(viewRoot, new Box2D(10, 20, 110, 120));
+                    var rect = view.createRect(view, new Box2D(10, 20, 110, 120));
                     ok(rect instanceof Chart.SVGPath);
                 });
 
                 test("createRect draws rectangle", function() {
-                    var rect = view.createRect(viewRoot, new Box2D(10, 20, 110, 220));
+                    var rect = view.createRect(view, new Box2D(10, 20, 110, 220));
                     deepEqual(rect.points, [
                         [10, 20], [110, 20], [110, 220], [10, 220], [10, 20]
                     ]);
                 });
 
                 test("createRect sets fill color", function() {
-                    var rect = view.createRect(viewRoot,
+                    var rect = view.createRect(view,
                         new Box2D(10, 20, 110, 220), { fill: "#f00" });
                     equal(rect.options.fill, "#f00");
                 });
@@ -84,23 +84,23 @@
             })();
 
             (function() {
-                var root;
+                var view;
 
                 module("SVGView", {
                     setup: function() {
-                        root = new Chart.SVGView();
+                        view = new Chart.SVGView();
                     }
                 });
 
                 test("renders svg tag with default size", function() {
-                    equal(root.render(),
+                    equal(view.render(),
                         "<svg xmlns='http://www.w3.org/2000/svg' version='1.1' " +
                         "width='600px' height='400px' style='position: relative;'></svg>");
                 });
 
                 test("renders children", function() {
-                    root.children.push(contentElementStub);
-                    equal(root.render(),
+                    view.children.push(contentElementStub);
+                    equal(view.render(),
                         "<svg xmlns='http://www.w3.org/2000/svg' version='1.1' " +
                         "width='600px' height='400px' style='position: relative;'>Content</svg>");
                 });

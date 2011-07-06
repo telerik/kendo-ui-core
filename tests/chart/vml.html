@@ -14,7 +14,7 @@
         <script type="text/javascript">
             var Chart = kendo.ui.Chart,
                 Box2D = Chart.Box2D,
-                viewRoot = new ViewElementStub(),
+                view = new ViewElementStub(),
                 contentElementStub = {
                     render: function() { return "Content"; }
                 };
@@ -55,19 +55,19 @@
                 });
 
                 test("createRect returns VMLPath", function() {
-                    var rect = view.createRect(viewRoot, 10, 20, 100, 100);
+                    var rect = view.createRect(view, 10, 20, 100, 100);
                     ok(rect instanceof Chart.VMLPath);
                 });
 
                 test("createRect draws rectangle", function() {
-                    var rect = view.createRect(viewRoot, new Box2D(10, 20, 110, 220));
+                    var rect = view.createRect(view, new Box2D(10, 20, 110, 220));
                     deepEqual(rect.points, [
                         [10, 20], [110, 20], [110, 220], [10, 220], [10, 20]
                     ]);
                 });
 
                 test("createRect sets fill color", function() {
-                    var rect = view.createRect(viewRoot,
+                    var rect = view.createRect(view,
                         new Box2D(10, 20, 110, 220), { fill: "#f00" });
                     equal(rect.options.fill, "#f00");
                 });
@@ -84,22 +84,22 @@
             })();
 
             (function() {
-                var root;
+                var view;
 
                 module("VMLView", {
                     setup: function() {
-                        root = new Chart.VMLView();
+                        view = new Chart.VMLView();
                     }
                 });
 
                 test("renders div tag with default size", function() {
-                    equal(root.render(),
+                    equal(view.render(),
                     "<div style='width:600px; height:400px; position: relative;'></div>");
                 });
 
                 test("renders children", function() {
-                    root.children.push(contentElementStub);
-                    equal(root.render(),
+                    view.children.push(contentElementStub);
+                    equal(view.render(),
                     "<div style='width:600px; height:400px; position: relative;'>Content</div>");
                 });
             })();
