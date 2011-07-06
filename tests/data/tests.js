@@ -1,5 +1,9 @@
 tests.push(
     {
+        page: "data/datareader.html",
+        title: "datareader"
+    },
+    {
         page: "data/datasource/read.html",
         title: "datasource.read"
     },

@@ -43,7 +43,7 @@
                                  }
                              }
                          },
-                         deserializer: {
+                         schema: {
                              data: function(result) {
                                  return result.d.results;
                              },
@@ -68,7 +68,7 @@
                                 }
                             }
                         },
-                        deserializer: {
+                        schema: {
                             data: function(result) {
                                 return result.data;
                             },
@@ -93,7 +93,7 @@
                                 options.success(data);
                             }
                         } ,
-                        deserializer: {
+                        schema: {
                             data: function(data) {
                                 return data;
                             },

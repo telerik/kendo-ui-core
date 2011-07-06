@@ -220,6 +220,35 @@
         }
     }
 
+    var DataReader = Class.extend({
+        init: function(schema) {
+            var that = this, member, getter;
+
+            schema = schema || {};
+
+            for (member in schema) {
+                getter = schema[member];
+
+                if (typeof getter === "string") {
+                    getter = kendo.getter(getter);
+                }
+
+                that[member] = getter;
+            }
+        },
+        data: identity,
+        total: function(data) {
+            return data.length;
+        },
+        groups: identity,
+        status: function(data) {
+            return data.status;
+        },
+        aggregates: function() {
+            return {};
+        }
+    });
+
     var DataSource = Observable.extend({
         init: function(options) {
             var that = this, id, model, transport;
@@ -255,21 +284,7 @@
 
             id = model.id;
 
-            that._deserializer = extend({
-                data: identity,
-                total: function(data) {
-                    return data.length;
-                },
-                status: function(data) {
-                    return data.status;
-                },
-                groups: function(data) {
-                    return data;
-                },
-                aggregates: function(data) {
-                    return {};
-                }
-            }, options.deserializer);
+            that.reader = new DataReader(options.schema);
 
             if (transport) {
                 that.transport = isFunction(transport.read) ? transport: new RemoteTransport(transport);
@@ -434,9 +449,9 @@
                 origId,
                 models = that._models
                 map = that._map,
-                deserializer= that._deserializer;
+                reader= that.reader;
 
-            if(!deserializer.status(data)) {
+            if(!reader.status(data)) {
                 return that.error({data: origData});
             }
 
@@ -444,7 +459,7 @@
                 delete models[that.id(value)];
             });
 
-            data = deserializer.data(data);
+            data = reader.data(data);
             $.each(data, function(index, value) {
                 origValue = origData[index];
                 if(origValue) {
@@ -576,15 +591,15 @@
             hasGroups = that.options.serverGrouping === true && that._group && that._group.length > 0,
             models = that._models;
 
-            that._total = that._deserializer.total(data);
+            that._total = that.reader.total(data);
             if(that._aggregates && that.options.serverAggregates) {
-                that._aggregateResult = that._deserializer.aggregates(data);
+                that._aggregateResult = that.reader.aggregates(data);
             }
 
             if(hasGroups) {
-                data = that._deserializer.groups(data);
+                data = that.reader.groups(data);
             } else {
-                data = that._deserializer.data(data);
+                data = that.reader.data(data);
             }
             that._process(data);
         },
@@ -930,7 +945,7 @@
                 that.transport.read({
                     data: options,
                     success: function (data) {
-                        range.data = that._deserializer.data(data);
+                        range.data = that.reader.data(data);
                         range.end = range.start + range.data.length;
                         that._ranges.sort( function(x, y) { return x.start - y.start; } );
                     }
@@ -1033,6 +1048,7 @@
         LocalTransport: LocalTransport,
         RemoteTransport: RemoteTransport,
         LocalStorageCache: LocalStorageCache,
-        Cache: Cache
+        Cache: Cache,
+        DataReader: DataReader
     });
 })(jQuery);

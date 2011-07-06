@@ -71,7 +71,7 @@
                     return flickr.getSetsParams(params);
                 }
             },
-            deserializer: {
+            schema: {
                 data: function(result) {
                     var sets = [];
                     if (result.stat == "ok" && result.photosets.photoset) {
@@ -86,7 +86,7 @@
             serverSorting: true,
             pageSize: computePageSize(imageSize.size),
             dialect: defaultDialect,
-            deserializer: defaultDeserializer,
+            schema: defaultDeserializer,
             jsoncallback: "defaultCallback"
         }),
         photoSetId = function() {
@@ -137,7 +137,7 @@
             $("#exifButton").fadeOut();
             changeState("searchresult");
             setPhotosDataSource.transport.dialect = searchDialect;
-            setPhotosDataSource._deserializer = searchDeserializer;
+            setPhotosDataSource.reader = searchDeserializer;
 
             if (!$.support.cors) {
                 setPhotosDataSource.transport.options.read.jsonpCallback = "searchPhotos";
@@ -164,7 +164,7 @@
         if (state == "initial") {
             el.text("");
             setPhotosDataSource.transport.dialect = defaultDialect;
-            setPhotosDataSource._deserializer = defaultDeserializer;
+            setPhotosDataSource.reader = defaultDeserializer;
 
             if (!$.support.cors) {
                 setPhotosDataSource.transport.options.read.jsonpCallback = "defaultCallback";

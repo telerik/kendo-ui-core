@@ -17,7 +17,7 @@
         <h2 id="qunit-userAgent"></h2>
         <ol id="qunit-tests"></ol>
         <script>
-            var deserializer = {
+            var schema = {
                 id: function(record) {
                     return record.id;
                 },
@@ -38,7 +38,7 @@
                 data = source || [{ id:1, bar: "foo" },{ id: 2, bar: "foo" }];
 
                 var dataSource = new DataSource( {
-                    deserializer: deserializer,
+                    schema: schema,
                     data: data,
                     model: {
                         id: "id"
@@ -52,7 +52,7 @@
             test("reads data through transport", function() {
                 var readWasCalled = false,
                 dataSource = new DataSource( {
-                    deserializer: deserializer,
+                    schema: schema,
                     transport: {
                         read: function(callback) {
                             readWasCalled = true;
@@ -171,10 +171,10 @@
                 equal(view[0].bar, "foo");
             });
 
-            test("read calls deserializer set through constructor", function() {
+            test("read calls schema set through constructor", function() {
                 var dataSource = new DataSource({
                     data: [{ id:1, bar: "foo" },{ id: 2, bar: "baz" }],
-                    deserializer: {
+                    schema: {
                         data: function(data) {
                             readerWasCalled = true;
                             return data;
@@ -199,7 +199,7 @@
             test("read reads total through function passed in constructor", function() {
                 var dataSource = new DataSource({
                     data: [{ id:1, bar: "foo" },{ id: 2, bar: "baz" }],
-                    deserializer: {
+                    schema: {
                         total: function() {
                             totalWasCalled = true;
                             return arguments[0].length;
@@ -218,7 +218,7 @@
                         transport: {
                             read: "foo"
                         },
-                        deserializer: deserializer
+                        schema: schema
                     }),
                     args;
 
@@ -266,7 +266,7 @@
                     dataSource = new DataSource({
                     data: [{ id:1, bar: "foo" }, { id: 2, bar: "baz" }, { id: 3, bar: "baz"} ],
                     group: { field: "bar" },
-                    deserializer: {
+                    schema: {
                         groups: function() {
                             isCalled = true;
                             return [];
