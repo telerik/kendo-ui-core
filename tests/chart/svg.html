@@ -81,12 +81,9 @@
                     var line = view.createLine(10, 20, 100, 200);
                     deepEqual(line.points, [ [10, 20], [100, 200] ]);
                 });
-            })();
 
-            (function() {
-                var view;
-
-                module("SVGView", {
+                // ------------------------------------------------------------
+                module("SVGView / Rendering", {
                     setup: function() {
                         view = new Chart.SVGView();
                     }
@@ -104,6 +101,60 @@
                         "<svg xmlns='http://www.w3.org/2000/svg' version='1.1' " +
                         "width='600px' height='400px' style='position: relative;'>Content</svg>");
                 });
+
+                test("renders definitions", function() {
+                    view.definitions.test = contentElementStub;
+                    equal(view.render(),
+                        "<svg xmlns='http://www.w3.org/2000/svg' version='1.1' " +
+                        "width='600px' height='400px' style='position: relative;'>" +
+                        "<defs>Content</defs></svg>");
+                });
+
+                // ------------------------------------------------------------
+                var gradient = {
+                        id: "gradient",
+                        type: "linear",
+                        rotation: 0,
+                        stops: [{
+                            offset: 0,
+                            color: "#f00",
+                            opacity: 1
+                        }, {
+                            offset: 1,
+                            color: "#00f",
+                            opacity: 1
+                        }]
+                    };
+
+                module("SVGView / Gradient fill", {
+                    setup: function() {
+                        view = new Chart.SVGView();
+                    }
+                });
+
+                test("applies gradient fill", function() {
+                    var path = view.createRect(null, new Box2D(), { fill: gradient });
+                    equals(path.options.fill, "url(#gradient)");
+                });
+
+                test("preserves solid fill", function() {
+                    var path = view.createRect(null, new Box2D(), { fill: "#f00" });
+                    equals(path.options.fill, "#f00");
+                });
+
+                test("defines gradient", function() {
+                    var path = view.createRect(null, new Box2D(), { fill: gradient });
+                    ok(view.definitions[gradient.id]);
+                });
+
+                test("reuses existing gradient definition", function() {
+                    var path = view.createRect(null, new Box2D(), { fill: gradient });
+                    view.definitions[gradient.id] = { options: { id: "existingGradient" } };
+                    path = view.createRect(null, new Box2D(), { fill: gradient });
+
+                    equals(path.options.fill, "url(#existingGradient)");
+                });
+
             })();
 
             (function() {
@@ -206,6 +257,29 @@
                 });
 
             })();
+
+            (function() {
+                var view,
+                    decorator;
+
+                module("SVGOverlayDecorator", {
+                    setup: function() {
+                        view = new Chart.SVGView();
+                        decorator = new Chart.SVGOverlayDecorator(view);
+                    }
+                });
+
+                test("creates overlay group", function() {
+                    var rect = view.createRect(null, new Box2D());
+                    ok(decorator.decorate(rect, "glass") instanceof Chart.SVGGroup);
+                });
+
+                test("does not decorate element if no overlay specified", function() {
+                    var rect = view.createRect(null, new Box2D());
+                    equals(decorator.decorate(rect), rect);
+                });
+            })();
+
        </script>
 
         <h1 id="qunit-header">kendo.chart</h1>

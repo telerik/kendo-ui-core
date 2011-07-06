@@ -23,10 +23,12 @@
         DEFAULT_HEIGHT = 400,
         DEFAULT_PRECISION = 6,
         DEFAULT_WIDTH = 600,
+        GLASS = "glass",
         HEIGHT = "height",
         HORIZONTAL = "horizontal",
         LEFT = "left",
         NONE = "none",
+        OBJECT = "object",
         OUTSIDE = "outside",
         RIGHT = "right",
         SANS12 = "12px Verdana, sans-serif",
@@ -49,7 +51,11 @@
 
             Component.fn.init.call(chart, element);
 
-            chart.options = deepExtend(chart.options, theme ? Chart.Themes[theme] || Chart.Themes[theme.toLowerCase()] : { }, options);
+            chart.options = deepExtend(
+                chart.options,
+                theme ? Chart.Themes[theme] || Chart.Themes[theme.toLowerCase()] : { },
+                options
+            );
 
             chart.bind([DATABOUND], chart.options);
 
@@ -1644,7 +1650,8 @@
                 color: BLACK,
                 width: 0
             },
-            isVertical: true
+            isVertical: true,
+            overlay: GLASS
         },
 
         reflow: function(targetBox) {
@@ -1669,9 +1676,8 @@
                 box = bar.box,
                 rectStyle = deepExtend({
                     fill: options.color,
-                    // TODO: class: [ isVertical ? "glassV" : "glassH" ]
-                    glassEffect: true,
-                    glassEffectRotation: isVertical ? 0 : 90
+                    overlay: options.overlay,
+                    rotation: isVertical ? 0 : 90
                 }, border),
                 elements = [];
 
@@ -2153,28 +2159,33 @@
         }
     });
 
-    // TODO: Refactor into alpha overlay + two fill types
-    //       Avoid instantiating gradients more than once
-    function SVGGlassEffect(element, rotation, view) {
-        var gradientId = "glass" + rotation,
-            gradientOptions = deepExtend({}, glassGradient, {
-                rotation: rotation,
-                id: gradientId
-            }),
-            gradient = view.createLinearGradient(gradientOptions),
-            group = view.createGroup(),
-            overlay = element.clone();
-
-        overlay.options.fill = idRef(gradientId);
-        view.define(gradientId, gradient);
-
-        group.children.push(element, overlay);
-
-        return group;
+    function SVGOverlayDecorator(view) {
+        this.view = view;
     }
 
-    function idRef(id) {
-        return "url(#" + id + ")";
+    SVGOverlayDecorator.prototype = {
+        decorate: function(element, overlayName) {
+            var decorator = this,
+                view = decorator.view,
+                overlay = Chart.Overlays[overlayName];
+
+            if (!overlay) {
+                return element;
+            }
+
+            var fill = overlay.fill,
+                fillRotation = element.options.rotation || 0,
+                fillId = overlayName + fillRotation,
+                group = view.createGroup(),
+                overlayElement = element.clone();
+
+            group.children.push(element, overlayElement);
+
+            overlayElement.options.fill = view.getPaint(
+                deepExtend(fill, { id: fillId, rotation: fillRotation }));
+
+            return group;
+        }
     }
 
     var SVGView = ViewElement.extend({
@@ -2183,8 +2194,10 @@
 
             ViewElement.fn.init.call(view, options);
 
-            view.definitions = [];
-            view.definitionIds = [];
+            view.definitions = { };
+            view.decorators = {
+                overlay: new SVGOverlayDecorator(view)
+            };
 
             view.template = SVGView.template;
             if (!view.template) {
@@ -2212,35 +2225,19 @@
             view.alignToScreen(container.firstChild);
         },
 
-        define: function(id, element) {
-            var view = this,
-                defs = view.definitions,
-                definitionIds = view.definitionIds;
-
-            if(!inArray(id, definitionIds)) {
-                defs.push(element);
-                definitionIds.push(id);
-            }
-
-            return id;
-        },
-
         renderDefinitions: function() {
             var view = this,
                 definitions = view.definitions,
-                i,
-                length = definitions.length,
+                definitionId,
                 output = "";
 
-            if (length == 0) {
-                return output;
+            for (var definitionId in definitions) {
+                if (definitions.hasOwnProperty(definitionId)) {
+                    output += definitions[definitionId].render();
+                }
             }
 
-            for (i = 0; i < length; i++) {
-                output = definitions[i].render();
-            }
-
-            return "<defs>" + output + "</defs>";
+            return output.length > 0 ? "<defs>" + output + "</defs>" : "";
         },
 
         createGroup: function(options) {
@@ -2252,25 +2249,48 @@
         },
 
         createRect: function(view, box, style) {
-            var rect = new SVGPath(
-                [[box.x1, box.y1], [box.x2, box.y1],
-                [box.x2, box.y2], [box.x1, box.y2], [box.x1, box.y1]],
-                style
-            );
+            var view = this;
 
-            if (style && style.glassEffect) {
-                return SVGGlassEffect(rect, style.glassEffectRotation, this);
+            if (style) {
+                style = deepExtend({ }, style, { fill: view.getPaint(style.fill) });
             }
 
-            return rect;
+            return view.decorate(
+                new SVGPath([
+                        [box.x1, box.y1], [box.x2, box.y1],
+                        [box.x2, box.y2], [box.x1, box.y2], [box.x1, box.y1]
+                    ],
+                    style
+                )
+            );
         },
 
         createLine: function(x1, y1, x2, y2, options) {
             return new SVGPath([[x1, y1], [x2, y2]], options);
         },
 
-        createLinearGradient: function(options) {
+        createGradient: function(options) {
             return new SVGLinearGradient(options);
+        },
+
+        getPaint: function(paint) {
+            var view = this,
+                definitions = view.definitions,
+                gradient,
+                gradientId;
+
+            if (typeof paint === OBJECT) {
+                gradientId = paint.id;
+                gradient = definitions[gradientId];
+                if (!gradient) {
+                    gradient = view.createGradient(paint);
+                    definitions[gradientId] = gradient;
+                }
+
+                return "url(#" + gradient.options.id + ")";
+            } else {
+                return paint;
+            }
         },
 
         alignToScreen: function(element) {
@@ -2285,6 +2305,19 @@
                     style.top = top + "px";
                 }
             }
+        },
+
+        decorate: function(element) {
+            var view = this,
+                decorators = view.decorators,
+                options = element.options,
+                decoratedElement = element;
+
+            if (options && options.overlay) {
+                decoratedElement = decorators.overlay.decorate(element, options.overlay);
+            }
+
+            return decoratedElement;
         }
     });
 
@@ -2350,6 +2383,11 @@
             fill: WHITE
         },
 
+        clone: function() {
+            var path = this;
+            return new SVGPath(path.points, deepExtend({}, path.options));
+        },
+
         renderPoints: function() {
             var path = this,
                 points = this.points,
@@ -2380,11 +2418,6 @@
                 options = path.options;
 
             return options.stroke ? "stroke='" + options.stroke + "' " : "";
-        },
-
-        clone: function() {
-            var path = this;
-            return new SVGPath(path.points, deepExtend({}, path.options));
         }
     });
 
@@ -2437,7 +2470,7 @@
                 blendGradient(element.options.fill, glassGradient),
                 { rotation: 270 - rotation }
             ),
-            gradient = view.createLinearGradient(gradientOptions);
+            gradient = view.createGradient(gradientOptions);
 
         element.options.fill = "";
         element.children.push(gradient);
@@ -2484,8 +2517,8 @@
                 style
             );
 
-            if (style && style.glassEffect) {
-                return VMLGlassEffect(rect, style.glassEffectRotation, this);
+            if (style && style.overlay === GLASS) {
+                return VMLGlassEffect(rect, style.rotation, this);
             }
 
             return rect;
@@ -2499,7 +2532,7 @@
             return new VMLGroup(options);
         },
 
-        createLinearGradient: function(options) {
+        createGradient: function(options) {
             return new VMLLinearGradient(options);
         }
     });
@@ -2807,8 +2840,8 @@
 
             for (property in source) {
                 propValue = source[property];
-                if (typeof propValue === "object" && propValue !== null && propValue.constructor !== Array) {
-                    if (typeof(destination[property]) === "object") {
+                if (typeof propValue === OBJECT && propValue !== null && propValue.constructor !== Array) {
+                    if (typeof(destination[property]) === OBJECT) {
                         destination[property] = destination[property] || {};
                     } else {
                         destination[property] = {};
@@ -3050,6 +3083,36 @@
         return result;
     }
 
+    Chart.Overlays = {
+        glass: {
+            fill: {
+                type: "linear",
+                rotation: 0,
+                stops: [{
+                    offset: 0,
+                    color: WHITE,
+                    opacity: 0
+                }, {
+                    offset: 0.1,
+                    color: WHITE,
+                    opacity: 0
+                }, {
+                    offset: 0.25,
+                    color: WHITE,
+                    opacity: 0.4
+                }, {
+                    offset: 0.92,
+                    color: WHITE,
+                    opacity: 0
+                }, {
+                    offset: 1,
+                    color: WHITE,
+                    opacity: 0
+                }]
+            }
+        }
+    };
+
     // Exports ================================================================
 
     kendo.ui.plugin("Chart", Chart);
@@ -3074,6 +3137,7 @@
     Chart.SVGGroup = SVGGroup;
     Chart.SVGText = SVGText;
     Chart.SVGPath = SVGPath;
+    Chart.SVGOverlayDecorator = SVGOverlayDecorator;
     Chart.VMLView = VMLView;
     Chart.VMLText = VMLText;
     Chart.VMLPath = VMLPath;
