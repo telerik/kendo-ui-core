@@ -37,10 +37,8 @@
                             dataType: "jsonp",
                             cache: false
                         },
-                        dialect: {
-                            read: function() {
-                                return {name_startsWith: $("#geonames").val()};
-                            }
+                        dialect: function() {
+                            return {name_startsWith: $("#geonames").val()};
                         }
                     },
                     schema: {

@@ -36,16 +36,14 @@
                             dataType: "jsonp",
                             cache: false
                         },
-                        dialect: {
-                            read: function() {
-                                var filter = "Bulgaria",
-                                combobox = $("#geonames").data("kendoComboBox");
+                        dialect: function() {
+                            var filter = "Bulgaria",
+                            combobox = $("#geonames").data("kendoComboBox");
 
-                                if (combobox) {
-                                    filter = combobox.text() || filter;
-                                }
-                                return {name_startsWith: filter};
+                            if (combobox) {
+                                filter = combobox.text() || filter;
                             }
+                            return {name_startsWith: filter};
                         }
                     },
                     schema: {

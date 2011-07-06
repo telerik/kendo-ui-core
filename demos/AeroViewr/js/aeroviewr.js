@@ -31,16 +31,14 @@ if (!isInferiorBrowser) {
         var tagHotListDataSource = data.dataSource( {
             serverFiltering: true,
             pageSize: 10,
-            dialect: {
-                read: function(data) {
-                    var params = { tag: data.filter[0].value };
+            dialect: function(data) {
+                var params = { tag: data.filter[0].value };
 
-                    if (!$.support.cors) {
-                        params.jsoncallback = "relatedTags";
-                    }
-
-                    return flickr.getRelatedTagParams(params);
+                if (!$.support.cors) {
+                    params.jsoncallback = "relatedTags";
                 }
+
+                return flickr.getRelatedTagParams(params);
             },
             schema: {
                 data: function(result) {

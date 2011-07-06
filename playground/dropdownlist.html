@@ -80,10 +80,8 @@
                             cache: true
                         },
                         cache: "inmemory",
-                        dialect: {
-                            read: function() {
-                                return {name_startsWith: $("#searchCriteria").val() };
-                            }
+                        dialect: function() {
+                            return { name_startsWith: $("#searchCriteria").val() };
                         }
                     },
                     schema: {
