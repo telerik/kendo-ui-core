@@ -38,11 +38,12 @@
                 data = source || [{ id:1, bar: "foo" },{ id: 2, bar: "foo" }];
 
                 var dataSource = new DataSource( {
-                    schema: schema,
-                    data: data,
-                    model: {
-                        id: "id"
-                    }
+                    schema: $.extend(schema, {
+                        model: {
+                            id: "id"
+                        }
+                    }),
+                    data: data
                 });
 
                 dataSource.read();

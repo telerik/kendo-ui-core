@@ -22,7 +22,9 @@
                 data = source || [{ id:1, bar: "foo" },{ id: 2, bar: "foo" }];
 
                 var dataSource = new DataSource( {
-                    model: kendo.data.Model.define()
+                    schema: {
+                        model: kendo.data.Model.define()
+                    }
                 });
 
                 dataSource.read();
