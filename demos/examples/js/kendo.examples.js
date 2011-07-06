@@ -17,7 +17,7 @@
 
             $("#nav li a").each(function() {
                 var currentHref = $(this).attr("href");
-                if (currentHref && currentHref.toLowerCase() === href.toLowerCase()) {
+                if (currentHref && currentHref.toLowerCase() === href) {
                     Application.fetchExample(href);
                     $("#viewDescription").trigger("click");
                 }

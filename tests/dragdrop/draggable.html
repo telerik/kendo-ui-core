@@ -86,6 +86,22 @@
                 ok(!dragstartWasCalled);
             });
 
+            test("prevent default from drag start event should not triggered drag event", function() {
+                var dragWasCalled = false,
+                    draggable = setup({
+                        dragstart: function(e) {
+                            e.preventDefault();
+                            ok(true);
+                        },
+                        drag: function() {
+                            ok(false);
+                        }
+                    });
+
+                draggable.element.trigger(ev({ type: "mousedown", pageX:0, pageY: 0 }));
+                $(document).trigger( { type: "mousemove", pageX: 10, pageY: 0 } );
+            });
+
             test("drag event is raised during dragging", function() {
                 var dragWasCalled = false,
                     draggable = setup({

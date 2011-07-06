@@ -613,8 +613,8 @@
             var that = this,
                 owner = that.owner,
                 options = that.options;
-
             if (!options.enabled) {
+                e.preventDefault();
                 return false;
             }
 

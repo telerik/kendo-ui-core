@@ -158,7 +158,10 @@
                            .bind(SELECTSTART + NAMESPACE, false);
 
                 that.dropped = false;
-                that._trigger(DRAGSTART, e);
+
+                if (that._trigger(DRAGSTART, e)) {
+                    that._destroy(e);
+                }
             }
         },
 
@@ -196,7 +199,7 @@
             var that = this,
                 location = kendo.touchLocation(e);
 
-            that.trigger(eventName, extend({}, e, {
+            return that.trigger(eventName, extend({}, e, {
                 currentTarget: that.currentTarget,
                 pageX: location.x,
                 pageY: location.y
