@@ -419,7 +419,7 @@
             for (var i = 0; i < root.children.length; i++) {
                 root.children[i].reflow(currentBox);
                 currentBox = boxDiff(currentBox, root.children[i].box);
-            };
+            }
         },
 
         getView: function() {
@@ -829,8 +829,9 @@
             for (var i = 0, length = series.length; i < length; i++) {
                 var color = series[i].color,
                     label = children[i],
-                    markerBox = new Box2D(),
-                    labelBox = labelBox ? labelBox.wrap(label.box) : label.box.clone();
+                    markerBox = new Box2D();
+
+                labelBox = labelBox ? labelBox.wrap(label.box) : label.box.clone();
 
                 markerBox.x1 = label.box.x1 - markerSize * 2;
                 markerBox.x2 = markerBox.x1 + markerSize;
@@ -2990,11 +2991,11 @@
     };
 
     function blendColors(base, overlay, alpha) {
-        var a = new Color(base),
-            b = new Color(overlay),
-            r = blendChannel(a.r, b.r, alpha),
-            g = blendChannel(a.g, b.g, alpha),
-            b = blendChannel(a.b, b.b, alpha);
+        var baseColor = new Color(base),
+            overlayColor = new Color(overlay),
+            r = blendChannel(baseColor.r, overlayColor.r, alpha),
+            g = blendChannel(baseColor.g, overlayColor.g, alpha),
+            b = blendChannel(baseColor.b, overlayColor.b, alpha);
 
         return new Color(r, g, b).toHex();
     }
