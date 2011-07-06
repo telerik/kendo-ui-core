@@ -33,7 +33,9 @@
 
             test("model returns same model instance for same id", function() {
                 var dataSource = new DataSource({
-                    model: { id: "foo" },
+                    schema: {
+                        model: { id: "foo" }
+                    },
                     data: [ { foo: "1", bar: "bar1"}, { foo: "2", bar: "bar2"}]
                 });
                 dataSource.read();
@@ -46,7 +48,9 @@
             test("datasource raises update event if model is changed", function() {
                 var model,
                     dataSource = new DataSource({
-                        model: { id: "foo" },
+                        schema: {
+                            model: { id: "foo" }
+                        },
                         data: [ { foo: "1", bar: "bar1"}, { foo: "2", bar: "bar2"}],
                         update: function() {
                             model = arguments[0];
@@ -62,7 +66,9 @@
             test("_modelsByState with Model.UPDATED returns models for update", function() {
                 var models,
                     dataSource = new DataSource({
-                        model: { id: "foo" },
+                        schema: {
+                            model: { id: "foo" }
+                        },
                         data: [ { foo: "1", bar: "bar1"}, { foo: "2", bar: "bar2"}],
                         update: function() {
                             model = arguments[0];

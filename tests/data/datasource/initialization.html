@@ -123,7 +123,9 @@
 
             test("model returns a model instance", function() {
                 var dataSource = new DataSource({
-                    model: Model.define(),
+                    schema: {
+                        model: Model.define()
+                    },
                     data: [ { id: 1, foo: "bar"}, { id: 2, foo: "baz"}]
                 });
                 dataSource.read();
@@ -134,7 +136,9 @@
 
             test("model use model metadata", function() {
                 var dataSource = new DataSource({
-                    model: Model.define( { id: "foo" }),
+                    schema: {
+                        model: Model.define( { id: "foo" })
+                    },
                     data: [ { foo: "1", bar: "bar1"}, { foo: "2", bar: "bar2"}]
                 });
                 dataSource.read();
@@ -144,7 +148,9 @@
             });
             test("model use model literal", function() {
                 var dataSource = new DataSource({
-                    model: { id: "foo" },
+                    schema: {
+                        model: { id: "foo" }
+                    },
                     data: [ { foo: "1", bar: "bar1"}, { foo: "2", bar: "bar2"}]
                 });
                 dataSource.read();
