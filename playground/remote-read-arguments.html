@@ -17,10 +17,8 @@
                         }
                     }
                 },
-                dialect: {
-                    read: function (data) {
-                        return $.extend(data, { fromDialect: "bar" } );
-                    }
+                dialect: function (data) {
+                    return $.extend(data, { fromDialect: "bar" } );
                 }
             });
 

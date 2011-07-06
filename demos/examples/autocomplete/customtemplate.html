@@ -39,10 +39,8 @@
                             jsonpCallback: "callback",
                             cache: false
                         },
-                        dialect: {
-                            read: function() {
-                                return "$filter=substringof('" + $("#titles").val() + "',Name)&$format=json&$callback=callback";
-                            }
+                        dialect: function() {
+                            return "$filter=substringof('" + $("#titles").val() + "',Name)&$format=json&$callback=callback";
                         }
                     },
                     schema: {

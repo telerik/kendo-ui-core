@@ -34,10 +34,8 @@
                         read: {
                             url: "http://ws.geonames.org/searchJSON",
                             dataType: "jsonp",
-                            cache: false
-                        },
-                        dialect: {
-                            read: function() {
+                            cache: false,
+                            data: function() {
                                 var filter = "Bulgaria",
                                 dropdownlist = $("#geonames").data("kendoDropDownList");
 
@@ -46,7 +44,7 @@
                                 }
                                 return {name_startsWith: filter};
                             }
-                        }
+                        },
                     },
                     schema: {
                         data: function(result) {
