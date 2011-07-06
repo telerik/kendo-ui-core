@@ -134,7 +134,7 @@
                     equals(plotArea.axisX.options.categories.length, 2);
                 });
 
-                test("set margin 10", function() {
+                test("applies margin", function() {
                     var plotArea = new Chart.PlotArea({
                         series: [{
                             data: [100]
@@ -149,7 +149,7 @@
 
                     plotArea.reflow(chartBox);
 
-                    sameBox(plotArea.box, new Box2D(140, 118, 990, 965));
+                    sameBox(plotArea.box, new Box2D(140, 118, 990, 965), TOLERANCE);
                 });
 
                 // ------------------------------------------------------------
