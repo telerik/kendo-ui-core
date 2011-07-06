@@ -28,7 +28,7 @@ var scripts = [
     "kendo.core.js",
     "kendo.fx.js",
     "kendo.query.js",
-    "kendo.datasource.js",
+    "kendo.data.js",
     "kendo.model.js",
     "kendo.binder.js",
     "kendo.draganddrop.js",
