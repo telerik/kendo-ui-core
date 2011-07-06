@@ -25,14 +25,15 @@
 
             Component.fn.init.call(that, element, options);
             that.dataSource = options.dataSource;
-            that.refresh();
+            that.dataSource.bind("change", proxy(that.refresh, that));
+            that.wrap();
         },
 
         options: {
-            filter: "tbody>tr"
+            itemHeight: $.noop
         },
 
-        refresh: function() {
+        wrap: function() {
             var that = this,
                 scrollbar = kendo.support.scrollbar(),
                 element = that.element;
@@ -51,35 +52,55 @@
                                         .bind("scroll", proxy(that._scroll, that));
         },
 
-        _itemHeight: function() {
-            var that = this,
-                selector = that.options.filter;
-
-            return that.content.find(selector)[0].offsetHeight;
-        },
-
         _scroll: function(e) {
             var that = this,
                 scrollTop = e.currentTarget.scrollTop,
                 dataSource = that.dataSource,
-                rowHeight = that._itemHeight(),
-                skip = dataSource.skip() || 0;
+                rowHeight = that.itemHeight,
+                skip = dataSource.skip() || 0,
+                height = that.element.innerHeight(),
+                isScrollingUp = !!(that._scrollbarTop && that._scrollbarTop > scrollTop),
+                firstItemIndex = Math.max(Math.floor(scrollTop / rowHeight), 0),
+                lastItemIndex = Math.max(firstItemIndex + Math.floor(height / rowHeight), 0);
 
-            that._fetch();
-            that.wrapper[0].scrollTop = scrollTop - (skip * rowHeight);
-        },
+                that._scrollTop = scrollTop - (skip * rowHeight);
+                that._scrollbarTop = scrollTop;
 
-        _fetch: function(firstRowIndex, lastRowIndex) {
+                if (!that._fetch(firstItemIndex, lastItemIndex, isScrollingUp)) {
+                    that.wrapper[0].scrollTop = that._scrollTop;
+                }
+            },
+
+        _fetch: function(firstItemIndex, lastItemIndex, scrollingUp) {
             var that = this,
                 dataSource = that.dataSource,
-                skip = dataSource.skip(),
-                take = dataSource.take();
+                itemHeight = that.itemHeight,
+                skip = dataSource.skip() || 0,
+                take = dataSource.take(),
+                fetching = false,
+                prefetchAt = 0.33;
 
-            if (firstRowIndex <= skip) {
-                skip = Math.max(0, lastRowIndex - take);
-            } else if (lastRowIndex >= skip + take) {
-                skip = firstRowIndex;
+            if (firstItemIndex < skip) {
+                fetching = true;
+                skip = Math.max(0, lastItemIndex - take);
+                that._scrollTop = (firstItemIndex - skip) * itemHeight;
+                that._page(skip, take);
+            } else if (lastItemIndex >= skip + take && !scrollingUp) {
+                fetching = true;
+                skip = firstItemIndex;
+                that._scrollTop = itemHeight;
+                that._page(skip, take);
+            } else if (firstItemIndex < (skip + take * prefetchAt) && firstItemIndex > take * prefetchAt) {
+                dataSource.prefetch(Math.max(skip - take + (lastItemIndex - firstItemIndex) - 1, 0), take);
+            } else if (lastItemIndex > skip + take * prefetchAt) {
+                dataSource.prefetch(skip + take - (lastItemIndex - firstItemIndex) + 1, take);
             }
+            return fetching;
+        },
+
+        _page: function(skip, take) {
+            var that = this,
+                dataSource = that.dataSource;
 
             clearTimeout(that._timeout);
 
@@ -107,14 +128,20 @@
                 that._mask = null;
             }
         },
-        resize: function() {
+
+        refresh: function() {
             var that = this,
                 html = "",
-                maxHeight = 250000;
+                maxHeight = 250000,
+                itemHeight;
 
-            rowHeight = that._itemHeight();
+            clearTimeout(that._timeout);
 
-            totalHeight = that.dataSource.total() * rowHeight;
+            that._progress(false);
+
+            itemHeight = that.itemHeight = that.options.itemHeight() || 0;
+
+            totalHeight = that.dataSource.total() * itemHeight;
 
             for (idx = 0; idx < Math.floor(totalHeight / maxHeight); idx++) {
                 html += '<div style="width:1px;height:' + maxHeight + 'px"></div>';
@@ -125,6 +152,7 @@
             }
 
             that.verticalScrollbar.html(html);
+            that.wrapper[0].scrollTop = that._scrollTop;
         }
     });
 
@@ -365,15 +393,18 @@
 
                 that.content = that.table.parent();
 
-                if (that.content.is(".t-grid-table-wrap")) {
+                if (that.content.is(".t-virtual-scrollable-wrap")) {
                     that.content = that.content.parent();
                 }
 
-                if (!that.content.is(".t-grid-content, .t-grid-table-wrap")) {
+                if (!that.content.is(".t-grid-content, .t-virtual-scrollable-wrap")) {
                     that.content = that.table.wrap('<div class="t-grid-content" />').parent();
 
                     if (scrollable !== true && scrollable.virtual) {
-                        that.tableWrap = that.table.wrap('<div class="t-grid-table-wrap"/>').parent();
+                        new VirtualScrollable(that.content, {
+                            dataSource: that.dataSource,
+                            itemHeight: proxy(that._calculateRowHeight, that)
+                        });
                     }
                 }
 
@@ -384,111 +415,12 @@
                 }
 
                 that.content.height(height);
-
-                if (scrollable !== true && scrollable.virtual) {
-                    that.content.css( {
-                        width: "auto",
-                        paddingRight: scrollbar,
-                        overflow: "hidden"
-                    });
-
-                    that.verticalScrollbar = $('<div class="t-scrollbar t-scrollbar-vertical" />')
-                        .css({
-                            width: scrollbar
-                        }).appendTo(that.content)
-                        .bind("scroll", proxy(that._scroll, that));
-
-                    that.bind(DATABOUND, proxy(that._dataBound, that));
-                }
             }
         },
 
-        _scroll: function(e) {
+        _calculateRowHeight: function() {
             var that = this,
-                scrollTop = e.currentTarget.scrollTop,
-                dataSource = that.dataSource,
-                rowHeight = that._rowHeight,
-                skip = dataSource.skip() || 0,
-                take = dataSource.take(),
-                height = that.content.innerHeight(),
-                firstRowIndex = Math.floor(scrollTop / rowHeight);
-                lastRowIndex = firstRowIndex + Math.floor(height / rowHeight),
-                prefetchAt = 0.33;
-
-            if (firstRowIndex < skip) {
-                skip = Math.max(0, lastRowIndex - take);
-
-                that._scrollTop = 0;
-
-                clearTimeout(that._timeout);
-
-                if (dataSource.inRange(skip, take)) {
-                    that._scrollTop = (firstRowIndex - skip) * rowHeight;
-
-                    dataSource.range(skip, take);
-                } else {
-                    if (!that._mask) {
-                        var mask = $("<div class='t-overlay' style='position:absolute;text-align:center;color:#fff'><span>Loading ...</span></div>");
-
-                        mask.width(that.tableWrap.outerWidth()).height(that.tableWrap.outerHeight());
-
-                        that._mask = mask.insertBefore(that.tableWrap);
-                    }
-
-                    that._timeout = setTimeout(function() {
-                        dataSource.range(skip, take);
-                    }, 100);
-                }
-
-                return;
-            } else if (lastRowIndex > skip + take) {
-                skip = firstRowIndex;
-
-                that._scrollTop = rowHeight;
-
-                clearTimeout(that._timeout);
-
-                if (dataSource.inRange(skip, take)) {
-                    that._scrollTop = 0;
-                    dataSource.range(skip, take);
-                } else {
-                    if (!that._mask) {
-                        var mask = $("<div class='t-overlay' style='position:absolute;text-align:center;color:#fff'><span>Loading ...</span></div>");
-
-                        mask.width(that.tableWrap.outerWidth()).height(that.tableWrap.outerHeight());
-
-                        that._mask = mask.insertBefore(that.tableWrap);
-                    }
-                    that._timeout = setTimeout(function() {
-                        dataSource.range(skip, take);
-                    }, 100);
-                }
-
-                return;
-            }
-            if (firstRowIndex < (skip + take * prefetchAt) && firstRowIndex > take * prefetchAt) {
-                dataSource.prefetch(Math.max(skip - take + (lastRowIndex - firstRowIndex) - 1, 0), take);
-            } else if (lastRowIndex > skip + take * prefetchAt) {
-                dataSource.prefetch(skip + take - (lastRowIndex - firstRowIndex) + 1, take);
-            }
-            that._scrollTop = scrollTop - (skip * rowHeight);
-            that.tableWrap[0].scrollTop = that._scrollTop;
-        },
-
-        _dataBound: function() {
-            var that = this,
-                rowHeight = that._rowHeight,
-                totalHeight,
-                html = "",
-                idx,
-                maxHeight = 250000;
-
-            clearTimeout(that._timeout);
-
-            if (that._mask) {
-                that._mask.remove();
-                that._mask = null;
-            }
+                rowHeight = that._rowHeight;
 
             if (!that._rowHeight) {
                 that._rowHeight = rowHeight = that.table.outerHeight() / that.table[0].rows.length;
@@ -505,22 +437,9 @@
                 that._sum += currentRowHeight;
                 that._rowHeight = that._sum / that._measures;
             }
-
-            var currentTotalHeight = Math.round(that.dataSource.total() * rowHeight);
-            console.log(currentTotalHeight, that.verticalScrollbar[0].scrollTop);
-
-            for (idx = 0; idx < Math.floor(currentTotalHeight / maxHeight); idx++) {
-                html += '<div style="width:1px;height:' + maxHeight + 'px"></div>';
-            }
-
-            if (currentTotalHeight % maxHeight) {
-                html += '<div style="width:1px;height:' + (currentTotalHeight % maxHeight) + 'px"></div>';
-            }
-
-            that.verticalScrollbar.html(html);
-
-            that.tableWrap.scrollTop(that._scrollTop);
+            return rowHeight;
         },
+
         _dataSource: function() {
             var that = this,
                 options = that.options,

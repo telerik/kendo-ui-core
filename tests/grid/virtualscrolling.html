@@ -49,7 +49,10 @@
             function setup(element, data) {
                 dataSource = DataSource.create( { data: data || [ { foo: 2, bar: 2 }, { foo: 1, bar: 1 } ] } );
                 return  new VirtualScrollable(element || container, {
-                    dataSource: dataSource
+                    dataSource: dataSource,
+                    itemHeight: function() {
+                        return 32;
+                    }
                 });
             }
 
@@ -86,11 +89,11 @@
                 ok(scrollBar.width(), kendo.support.scrollbar());
             });
 
-            test("resize inserts elements into the scrollbar element to for correct scroll height", function() {
+            test("refresh inserts elements into the scrollbar element to for correct scroll height", function() {
                 var scroller = setup();
                 container.find("table").html(new Array(30).join('<tr><td style="height:30px">foo</td></tr>'));
                 dataSource._total = 300;
-                scroller.resize();
+                scroller.refresh();
                 equal(container.find(".t-scrollbar-vertical").children().length, 1);
             });
 
@@ -124,23 +127,10 @@
 
                 container.find("table").html(new Array(30).join('<tr><td style="height:30px">foo</td></tr>'));
                 dataSource._total = 300;
-                scroller.resize();
+                scroller.refresh();
                 container.find(".t-scrollbar-vertical").scroll();
 
                 ok(called)
-            });
-
-            test("fetch gets range of data through the dataSource", function() {
-                var called = false, MyDataSource = DataSource.extend({
-                    range: function(skip, take) {
-                        called = true;
-                    }
-                }),
-                scroller = new VirtualScrollable(container, {
-                    dataSource: new MyDataSource({ data: [ { foo: 2, bar: 2 }, { foo: 1, bar: 1 } ] })
-                });
-                scroller._fetch();
-                ok(called);
             });
 
             test("scroll content is scrolled if items are rendered", function() {
@@ -148,24 +138,29 @@
                     content = container.find("table").html(new Array(300).join('<tr><td style="height:30px">foo</td></tr>'));
 
                 dataSource._total = 300;
-                scroller.resize();
+                scroller.refresh();
                 container.find(".t-scrollbar-vertical").scrollTop(70).scroll();
                 equal(content.parent().scrollTop(), 70);
             });
 
             test("fetch shows loading mask if items are not present", function() {
-                var MyDataSource = DataSource.extend({
-                    inRange: function() {
-                        return false;
-                    }
-                }),
-                scroller = new VirtualScrollable(container, {
-                    dataSource: new MyDataSource({ data: [ { foo: 2, bar: 2 }, { foo: 1, bar: 1 } ] })
-                });
-
-                scroller._fetch(0, 15);
+                 var MyDataSource = DataSource.extend({
+                        inRange: function() {
+                            return false;
+                    }}),
+                    scroller = new VirtualScrollable(container, {
+                        dataSource: new MyDataSource({
+                            pageSize: 2,
+                            page: 2,
+                            data: [ 1,2,3,4,5,6,7,8,9,10 ]
+                        })
+                    });
+                firstRowIndex = 1,
+                lastRowIndex = 2;
+                scroller._fetch(firstRowIndex, lastRowIndex);
                 equal(container.find("div.t-overlay").length, 1);
             });
+
             test("fetch does not show loading mask if items are present", function() {
                 var MyDataSource = DataSource.extend({
                     inRange: function() {
@@ -196,6 +191,14 @@
                 equal(container.find("div.t-overlay").length, 0);
             });
 
+            test("mask is hidden on refresh", function() {
+                var scroller = setup();
+
+                scroller._progress(true);
+                scroller.refresh();
+                equal(container.find("div.t-overlay").length, 0);
+            });
+
             test("fetch if lastRow is at the end of the available page fetches next page", function() {
                 var skip, take,
                 MyDataSource = DataSource.extend({
@@ -212,7 +215,8 @@
                 }),
                 firstRowIndex = 1,
                 lastRowIndex = 2;
-                scroller._fetch(firstRowIndex, lastRowIndex);
+                var fetching = scroller._fetch(firstRowIndex, lastRowIndex);
+                ok(fetching);
                 equal(skip, 1);
                 equal(take, 2);
             });
@@ -237,7 +241,8 @@
                 firstRowIndex = 1,
                 lastRowIndex = 2;
                 stop(250);
-                scroller._fetch(firstRowIndex, lastRowIndex);
+                var fetching = scroller._fetch(firstRowIndex, lastRowIndex);
+                ok(fetching);
             });
 
             test("fetch if firstRow is at the begining of the available page fetches prev page", function() {
@@ -251,12 +256,13 @@
                     dataSource: new MyDataSource({
                         pageSize: 2,
                         page: 2,
-                        data: [ { foo: 2, bar: 2 }, { foo: 1, bar: 1 }, { foo: 3, bar: 3 } ]
+                        data: [ 1,2,3,4,5,6,7,8,9,10 ]
                     })
                 }),
-                firstRowIndex = 2,
+                firstRowIndex = 1,
                 lastRowIndex = 2;
-                scroller._fetch(firstRowIndex, lastRowIndex);
+                var fetching = scroller._fetch(firstRowIndex, lastRowIndex);
+                ok(fetching);
                 equal(skip, 0);
                 equal(take, 2);
             });
@@ -275,13 +281,147 @@
                     dataSource: new MyDataSource({
                         pageSize: 2,
                         page: 2,
-                        data: [ { foo: 2, bar: 2 }, { foo: 1, bar: 1 }, { foo: 3, bar: 3 } ]
+                        data: [ 1,2,3,4,5,6,7,8,9,10 ]
                     })
                 }),
-                firstRowIndex = 2,
+                firstRowIndex = 1,
                 lastRowIndex = 2;
                 stop(250);
+                var fetching = scroller._fetch(firstRowIndex, lastRowIndex);
+                ok(fetching);
+            });
+
+            test("fetch no new page is requested if first and last rows are in range", function() {
+                var called = false,
+                    MyDataSource = DataSource.extend({
+                    range: function() {
+                        called = true;
+                    }
+                }), scroller = new VirtualScrollable(container, {
+                    dataSource: new MyDataSource({
+                        pageSize: 2,
+                        page: 1,
+                        data: [ { foo: 2, bar: 2 }, { foo: 1, bar: 1 }, { foo: 3, bar: 3 } ]
+                    })
+                });
+                firstRowIndex = 1,
+                lastRowIndex = 1;
+                var fetching = scroller._fetch(firstRowIndex, lastRowIndex);
+                ok(!fetching);
+                ok(!called);
+            });
+
+            test("scroll passes firstRowIndex and lastRowIndex", function() {
+                var firstRowIndex, lastRowIndex,
+                    content = container.height(60).find("table").html(new Array(2).join('<tr><td style="height:30px">foo</td></tr>')),
+                    MyVirtualScrollable = VirtualScrollable.extend( {
+                        _fetch: function() {
+                            firstRowIndex = arguments[0];
+                            lastRowIndex = arguments[1];
+                        }
+                    }),
+                    scroller = new MyVirtualScrollable(container, {
+                        itemHeight: function() {
+                            return 35;
+                        },
+                        dataSource: new DataSource({
+                            pageSize: 2,
+                            page: 1,
+                            data: [ { foo: 2, bar: 2 }, { foo: 1, bar: 1 }, { foo: 3, bar: 3 } ]
+                        })
+                    });
+
+                scroller.refresh();
+                scroller._scroll({ currentTarget: { scrollTop: 40 } });
+                equal(firstRowIndex, 1);
+                equal(lastRowIndex, 2);
+            });
+
+            test("fetch prefetch the next page if lastRowIndex is after middle of the page", function() {
+                var skip, take
+                    MyDataSource = DataSource.extend({
+                        prefetch: function() {
+                            skip = arguments[0];
+                            take = arguments[1];
+                        }
+                    }),
+                    scroller = new VirtualScrollable(container, {
+                            itemHeight: function() {
+                            return 35;
+                        },
+                        dataSource: new MyDataSource({
+                            pageSize: 4,
+                            page: 1,
+                            data: [ 1,2,3,4,5,6,7,8,9,10 ]
+                        })
+                    });
+                firstRowIndex = 0,
+                lastRowIndex = 3;
                 scroller._fetch(firstRowIndex, lastRowIndex);
+                equal(skip, 2);
+                equal(take, 4);
+            });
+
+            test("fetch prefetch the prev page if firstRow is before middle of the page", function() {
+                var skip, take
+                    MyDataSource = DataSource.extend({
+                        prefetch: function() {
+                            skip = arguments[0];
+                            take = arguments[1];
+                        }
+                    }), scroller = new VirtualScrollable(container, {
+                        dataSource: new MyDataSource({
+                            pageSize: 4,
+                            page: 2,
+                            data: [ 1,2,3,4,5,6,7,8,9,10 ]
+                        })
+                    });
+                firstRowIndex = 4,
+                lastRowIndex = 7;
+                scroller._fetch(firstRowIndex, lastRowIndex, true);
+                equal(skip, 2);
+                equal(take, 4);
+            });
+
+            test("content is scrolled to the second record of the new page when the next page is fetched", function() {
+                var firstRowIndex, lastRowIndex,
+                    content = container.height(60).find("table").html(new Array(10).join('<tr><td style="height:30px">foo</td></tr>')),
+                    scroller = new VirtualScrollable(container, {
+                        itemHeight: function() {
+                            return 35;
+                        },
+                        dataSource: new DataSource({
+                            pageSize: 2,
+                            page: 1,
+                            data: [ 1,2,3,4,5,6,7,8,9,10 ]
+                        })
+                    });
+
+                scroller.refresh();
+                scroller._scroll({ currentTarget: { scrollTop: 70 } });
+                equal(content.parent().scrollTop(), 35);
+            });
+
+            test("content is scrolled to the last record of the new page when the prev page is fetched", function() {
+                var firstRowIndex, lastRowIndex,
+                    idxToLoad = 7,
+                    itemHeight = 35,
+                    visibleHeight = 60,
+                    content = container.height(visibleHeight).find("table").html(new Array(10).join('<tr><td style="height:30px">foo</td></tr>')),
+                    scroller = new VirtualScrollable(container, {
+                        itemHeight: function() {
+                            return itemHeight;
+                        },
+                        dataSource: new DataSource({
+                            pageSize: 4,
+                            page: 3,
+                            data: [ 1,2,3,4,5,6,7,8,9,10 ]
+                        })
+                    });
+
+                scroller.refresh();
+                scroller._scroll({ currentTarget: { scrollTop: 35 * idxToLoad } });
+                equal(content.parent().scrollTop(), (idxToLoad - 4) * 35);
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

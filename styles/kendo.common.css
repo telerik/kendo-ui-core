@@ -784,7 +784,7 @@ div.t-grid-header .t-last-header
     zoom: 1;
 }
 
-.t-grid-table-wrap
+.t-virtual-scrollable-wrap
 {
     overflow: hidden;
     height: 100%;
