@@ -23,7 +23,9 @@
 
                 var dataSource = new DataSource( {
                     data: data,
-                    model: kendo.data.Model.define()
+                    schema: {
+                        model: kendo.data.Model.define()
+                    }
                 });
 
                 dataSource.read();

@@ -235,6 +235,10 @@
 
                 that[member] = getter;
             }
+
+            if (isPlainObject(that.model)) {
+                that.model = Model.define(that.model);
+            }
         },
         data: identity,
         total: function(data) {
@@ -264,7 +268,6 @@
                 _view: [],
                 _pageSize: options.pageSize,
                 _page: options.page  || (options.pageSize ? 1 : undefined),
-
                 _sort: options.sort,
                 _filter: options.filter,
                 _group: Query.expandGroup(options.group),
@@ -273,18 +276,13 @@
 
             Observable.fn.init.call(that);
 
-            model = options.model;
+            that.reader = new DataReader(options.schema);
+
+            model = that.reader.model || {};
+
             transport = options.transport;
 
-            if (model === undefined) {
-                model = {};
-            } else if (isPlainObject(model)) {
-                options.model = model = Model.define(model);
-            }
-
             id = model.id;
-
-            that.reader = new DataReader(options.schema);
 
             if (transport) {
                 that.transport = isFunction(transport.read) ? transport: new RemoteTransport(transport);
@@ -325,7 +323,7 @@
                 model = id && that._models[id];
 
             if(!model) {
-                model = new that.options.model(that.find(id));
+                model = new that.reader.model(that.find(id));
                 that._models[model.id()] = model;
                 model.bind(CHANGE, function() {
                     that.trigger(UPDATE, { model: model });
@@ -394,7 +392,7 @@
                     return model.data;
                 }
 
-                options.model.id(data, model.id());
+                that.reader.model.id(data, model.id());
 
                 return data;
             });

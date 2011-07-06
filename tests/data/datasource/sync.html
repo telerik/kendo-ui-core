@@ -21,8 +21,10 @@
                 Model = kendo.data.Model;
 
             function setup(transport, data, options) {
-                options = $.extend({
-                    model: kendo.data.Model.define(),
+                options = $.extend(true, {
+                    schema: {
+                        model: kendo.data.Model.define()
+                    },
                     transport: $.extend({
                         read: function(options) {
                            options.success(data || [{ id: 1, foo: "foo" }]);
@@ -277,9 +279,9 @@
                             contentType: "text/json"
                         }
                     },
-                    model: Model.define(),
                     batch: false,
                     schema: {
+                        model: Model.define(),
                         status: function() {
                             return true;
                         }
@@ -315,9 +317,9 @@
                             contentType: "text/json"
                         }
                     },
-                    model: Model.define(),
                     batch: false,
                     schema: {
+                        model: Model.define(),
                         status: function() {
                             return true;
                         }
@@ -440,7 +442,9 @@
                             options.success([{id: 1, foo: "foo"}, {id: 2, foo: "bar"}]);
                         }
                     },
-                    model: Model.define()
+                    schema: {
+                        model: Model.define()
+                    }
                 });
                 dataSource.read();
 
