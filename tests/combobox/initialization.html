@@ -262,11 +262,11 @@
            test("changing the template", function() {
                var combobox = new ComboBox(input, {
                    datatextField: "",
-                   template: "<%= data.toUpperCase() %>"
+                   template: "<#= data.toUpperCase() #>"
                });
 
                equal(combobox.template("foo"), "<li class='t-item' unselectable='on'>FOO</li>");
-               equal(combobox.options.template, "<%= data.toUpperCase() %>");
+               equal(combobox.options.template, "<#= data.toUpperCase() #>");
            });
 
            test("should populate text and value if items", function() {
@@ -335,7 +335,7 @@
                combobox = new ComboBox(input, {
                    autoBind: false,
                    dataSource: dataSource,
-                   template: "<div style='height:30px'><%= text %> </div>",
+                   template: "<div style='height:30px'><#= text #> </div>",
                    height: 50
                });
 
