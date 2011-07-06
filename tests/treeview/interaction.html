@@ -6,6 +6,7 @@
         <script src="../qunit.js"></script>
         <script src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
         <script src="../../src/kendo.treeview.js"></script>
         <link rel="stylesheet" href="../qunit.css" />
         <link rel="stylesheet" href="../../styles/kendo.common.css" />
@@ -19,18 +20,8 @@
         <ol id="qunit-tests"></ol>
 
         <script>
-            var TreeView = kendo.ui.TreeView;
-
-            function createTreeView(data) {
-                var rendering = new kendo.ui.TreeView.TreeViewRendering();
-
-                return $("<div class='t-widget t-treeview t-reset'>" + rendering.renderGroup({
-                    group: {
-                        isFirstLevel: true,
-                        isExpanded: true
-                    },
-                    items: data
-                }) + "</div>").appendTo(document.body).kendoTreeView();
+            function createTreeView(options) {
+                return $("<div />").appendTo(document.body).kendoTreeView(options);
             }
 
             function removeTreeViews() {
@@ -42,7 +33,7 @@
             });
 
             test("expanding disabled items does not expand them", function() {
-                treeview = createTreeView([
+                var treeview = createTreeView([
                     { text: "foo", enabled: false, items: [ { text: "bar" } ] }
                 ]);
 
@@ -56,7 +47,7 @@
             });
 
             test("clicking plus icon should toggle minus icon and show subgroup", function() {
-                treeview = createTreeView([
+                var treeview = createTreeView([
                     { text: "foo", items: [ { text: "bar" } ] }
                 ]);
 
@@ -70,7 +61,7 @@
             });
 
             test("clicking minus icon should toggle plus icon and collaspe subgroup", function() {
-                treeview = createTreeView([
+                var treeview = createTreeView([
                     { text: "foo", expanded: true, items: [ { text: "bar" } ] }
                 ]);
 
@@ -84,7 +75,7 @@
             });
 
             test("double clicking disabled items does not expand them", function() {
-                treeview = createTreeView([
+                var treeview = createTreeView([
                     { text: "foo", disabled: true, items: [ { text: "bar" } ] }
                 ]);
 
@@ -101,7 +92,7 @@
             });
 
             test("clicking nodes selects them", function() {
-                treeview = createTreeView([
+                var treeview = createTreeView([
                     { text: "foo" }
                 ]);
 
@@ -113,7 +104,7 @@
             });
 
             test("clicking disabled nodes does not select them", function() {
-                treeview = createTreeView([
+                var treeview = createTreeView([
                     { text: "foo", enabled: false }
                 ]);
 
@@ -122,6 +113,67 @@
                 item.trigger("click");
 
                 ok(!item.hasClass("t-state-selected"));
+            });
+
+            module("drag & drop", {
+                teardown: removeTreeViews
+            });
+
+            function moveNode(treeview, sourceText, destinationText) {
+                var sourceNode = treeview.findByText(sourceText).find(".t-in:first"),
+                    destinationNode = treeview.findByText(destinationText).find(".t-in:first"),
+                    startOffset = sourceNode.offset(),
+                    endOffset = destinationNode.offset(),
+                    extend = $.extend,
+                    sourcePosition = {
+                        pageX: startOffset.left + 5,
+                        pageY: startOffset.top + 5,
+                        relatedTarget: sourceNode[0] 
+                    },
+                    destinationPosition = {
+                        pageX: endOffset.left + 5,
+                        pageY: endOffset.top + 7,
+                        target: destinationNode[0]
+                    };
+
+                sourceNode
+                    .trigger(extend({ type: "mousedown" }, sourcePosition));
+
+                destinationNode
+                    .trigger(extend({ type: "mousemove"}, destinationPosition))
+                    .trigger(extend({ type: "mousemove"}, destinationPosition))
+                    .trigger(extend({ type: "mouseup"}, destinationPosition));
+            }
+
+            test("moving item between parents", function () {
+                var treeview = createTreeView({
+                        dragAndDrop: true,
+                        dataSource: [
+                            { text: "foo", expanded: true, items: [
+                                { text: "bar" }
+                            ] },
+                            { text: "baz" }
+                        ]
+                    }),
+                    treeviewObject = treeview.data("kendoTreeView");
+
+                moveNode(treeviewObject, "bar", "baz");
+
+                equals(treeviewObject.findByText("foo").find(".t-item").length, 0);
+                equals(treeviewObject.findByText("baz").find(".t-item").length, 1);
+            });
+
+            test("moving parent to child item does not move it", function () {
+                var treeview = createTreeView([
+                        { text: "foo", expanded: true, items: [
+                            { text: "bar" }
+                        ] }
+                    ]),
+                    treeviewObject = treeview.data("kendoTreeView");
+
+                moveNode(treeviewObject, "foo", "bar");
+
+                ok(treeviewObject.findByText("foo").parent().hasClass("t-treeview-lines"));
             });
         </script>
 

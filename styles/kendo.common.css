@@ -1743,7 +1743,7 @@ div.t-treeview
     border-radius: 4px;
 }
 
-.t-treeview .t-drop-clue
+.t-treeview .t-drop-hint
 {
     width: 80px;
     visibility: hidden;

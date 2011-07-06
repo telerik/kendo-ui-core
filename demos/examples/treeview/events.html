@@ -8,13 +8,14 @@
         <script src="../../../src/jquery.js"></script>
         <script src="../../../src/kendo.core.js"></script>
         <script src="../../../src/kendo.fx.js"></script>
+        <script src="../../../src/kendo.draganddrop.js"></script>
         <script src="../../../src/kendo.treeview.js"></script>
         <script src="../js/kendo.console.js"></script>
         <!-- script -->
         <!-- css -->
         <link href="../styles/examples.css" rel="stylesheet"/>
         <link href="../../../styles/kendo.common.css" rel="stylesheet"/>
-        <link href="../../../styles/kendo.blueopal.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.web20.css" rel="stylesheet"/>
         <!-- css -->
     </head>
     <body>
@@ -57,6 +58,7 @@
                         ] },
                         { text: "baz" }
                     ],
+                    dragAndDrop: true,
                     select: onSelect,
                     error: onError,
                     collapse: onCollapse,
