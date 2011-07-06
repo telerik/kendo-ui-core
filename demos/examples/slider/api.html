@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+    <head>
+        <!-- meta -->
+        <!-- meta -->
+        <title>Slider API</title>
+        <!-- script -->
+        <script src="../../../src/jquery.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.draganddrop.js"></script>
+        <script src="../../../src/kendo.slider.js"></script>
+        <!-- script -->
+        <!-- css -->
+        <link href="../styles/examples.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.common.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.web20.css" rel="stylesheet"/>
+        <!-- css -->
+    </head>
+    <body>
+        <!-- nav -->
+        <!-- nav -->
+        <!-- description -->
+        <div class="description">This example shows how to use the client-side API of kendoSlider and kendoRangeSlider.</div>
+        <!-- description -->
+        <div id="example">
+            <input type="range" id="slider" />
+
+            <div>
+                <input type="text" id="newValue" value="1" />
+                <button class="t-button" id="setSliderValue">Set value</button>
+                <button class="t-button" id="getSliderValue">Get value</button><br>
+                <button class="t-button" id="enableSlider">Enable</button><br>
+                <button class="t-button" id="disableSlider">Disable</button><br>
+            </div>
+
+            <div id="rangeSlider" style="margin-top: 40px;">
+                <input type="range" />
+                <input type="range" />
+            </div>
+
+            <div>
+                <input type="text" id="startValue" value="1" />
+                <button class="t-button" id="setStartValue">Set value</button>
+                <input type="text" id="endValue" value="1" />
+                <button class="t-button" id="setEndValue">Set value</button>
+                <button class="t-button" id="getRangeSliderValue">Get value</button><br>
+                <button class="t-button" id="enableRangeSlider">Enable</button><br>
+                <button class="t-button" id="disableRangeSlider">Disable</button><br>
+            </div>
+
+            <script>
+                $("#setSliderValue").click(function() {
+                    var value = $("#newValue").val();
+                    slider.value(value);
+                });
+
+                $("#getSliderValue").click(function() {
+                    alert(slider.value());
+                });
+
+                $("#enableSlider").click(function() {
+                    slider.enable();
+                });
+
+                $("#disableSlider").click(function() {
+                    slider.disable();
+                });
+
+                function getValues() {
+                    return rangeSlider.values();
+                }
+
+                $("#setStartValue").click(function() {
+                    var startValue = $("#startValue").val();
+                    var endValue = getValues()[1];
+                    rangeSlider.values(startValue, endValue);
+                });
+
+                $("#setEndValue").click(function() {
+                    var startValue = getValues()[0];
+                    var endValue = $("#endValue").val();
+                    rangeSlider.values(startValue, endValue);
+                });
+
+                $("#getRangeSliderValue").click(function() {
+                    alert(getValues());
+                });
+
+                $("#enableRangeSlider").click(function() {
+                    rangeSlider.enable();
+                });
+
+                $("#disableRangeSlider").click(function() {
+                    rangeSlider.disable();
+                });
+            </script>
+
+            <script type="text/javascript">
+                var slider = $("#slider").kendoSlider().data("kendoSlider");
+                var rangeSlider = $("#rangeSlider").kendoRangeSlider().data("kendoRangeSlider");
+            </script>
+        </div>
+        <!-- tools -->
+        <!-- tools -->
+    </body>
+</html>
