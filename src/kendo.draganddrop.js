@@ -188,7 +188,7 @@
                 that._trigger(DRAGEND, e);
 
                 if (that.hint && !that.dropped) {
-                    that.hint.animate(that.element.offset(), "fast", destroy);
+                    that.hint.animate(that.currentTarget.offset(), "fast", destroy);
                 } else {
                     destroy();
                 }
