@@ -22,5 +22,9 @@ tests.push(
     {
         page: "grid/grouping.html",
         title: "grid grouping"
+    },
+    {
+        page: "grid/virtualscrolling.html",
+        title: "virtual scrolling"
     }
 );
