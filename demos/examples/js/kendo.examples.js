@@ -13,9 +13,11 @@
         },
 
         fetch: function(href) {
+            var href = href.toLowerCase();
+
             $("#nav li a").each(function() {
                 var currentHref = $(this).attr("href");
-                if (currentHref && currentHref.toLowerCase() === href) {
+                if (currentHref && currentHref.toLowerCase() === href.toLowerCase()) {
                     Application.fetchExample(href);
                     $("#viewDescription").trigger("click");
                 }
