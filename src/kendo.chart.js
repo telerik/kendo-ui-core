@@ -189,8 +189,8 @@
                             currentSeries.data.push(value);
                         }
                     }
-                };
-            };
+                }
+            }
 
             chart.trigger(DATABOUND);
             chart._redraw();
@@ -374,7 +374,7 @@
             for (var i = 0; i < childrenCount; i++) {
                 viewElements.push.apply(viewElements,
                     children[i].getViewElements(view));
-            };
+            }
 
             return viewElements;
         },
@@ -789,7 +789,7 @@
                     label = new Text(name, legend.options.labels);
 
                 legend.children.push(label);
-            };
+            }
         },
 
         reflow: function(targetBox) {
@@ -844,7 +844,7 @@
                 markerBox.y2 = markerBox.y1 + markerSize;
 
                 group.children.push(view.createRect(view, markerBox, { fill: color, stroke: color }));
-            };
+            }
 
             if (children.length > 0) {
                 var padding = getSpacing(options.padding);
@@ -876,7 +876,7 @@
                 var label = legend.children[i];
                 label.box.alignTo(legend.children[i - 1].box, BOTTOM);
                 labelBox.wrap(label.box);
-            };
+            }
 
             // Vertical center is calculated relative to the container, not the parent!
             if (options.position == LEFT) {
@@ -920,7 +920,7 @@
                 label.box.alignTo(legend.children[i - 1].box, RIGHT);
                 labelBox.wrap(label.box);
                 label.box.x1 = label.box.x1 + i * markerWidth;
-            };
+            }
 
             if (options.position == TOP) {
                 offsetX = (targetBox.x2 - labelBox.width() - markerWidth) / 2;
@@ -956,7 +956,7 @@
                 var label = legend.children[i]
                 label.box.alignTo(legend.children[i - 1].box, BOTTOM);
                 labelBox.wrap(label.box);
-            };
+            }
 
             legend.translateChildren(options.offsetX + markerWidth, options.offsetY);
 
@@ -1084,7 +1084,6 @@
                 options = axis.options,
                 isVertical = axis.options.orientation === VERTICAL,
                 children = axis.children,
-                box = axis.box,
                 tickPositions = axis.getMajorTickPositions(),
                 tickSize = axis.getActualTickSize();
 
@@ -1183,7 +1182,7 @@
                 var label = children[i];
                 maxLabelWidth = Math.max(maxLabelWidth, label.box.width());
                 maxLabelHeight = Math.max(maxLabelHeight, label.box.height());
-            };
+            }
 
             if (isVertical) {
                 axis.box = new Box2D(
@@ -1202,7 +1201,6 @@
 
         getViewElements: function(view) {
             var axis = this,
-                children = axis.children,
                 options = axis.options,
                 isVertical = options.orientation === VERTICAL,
                 childElements = ChartElement.fn.getViewElements.call(axis, view);
@@ -1327,8 +1325,6 @@
             var axis = this,
                 options = axis.options,
                 isVertical = options.orientation === VERTICAL,
-                children = axis.children,
-                box = axis.box,
                 lineBox = axis.getAxisLineBox(),
                 majorDivisions = divisions,
                 lineSize = isVertical ? lineBox.height() : lineBox.width(),
@@ -1382,7 +1378,6 @@
 
         getSlot: function(a, b) {
             var axis = this,
-                children = axis.children,
                 options = axis.options,
                 isVertical = options.orientation === VERTICAL,
                 valueAxis = isVertical ? Y : X,
@@ -1471,7 +1466,6 @@
 
         getViewElements: function(view) {
             var axis = this,
-                children = axis.children,
                 options = axis.options,
                 isVertical = options.orientation === VERTICAL,
                 childElements = ChartElement.fn.getViewElements.call(axis, view);
@@ -1513,7 +1507,7 @@
             for (var i = 0; i < itemsCount; i++) {
                 positions.push(round(pos, COORD_PRECISION));
                 pos += step;
-            };
+            }
 
             positions.push(isVertical ? axis.box.y2 : axis.box.x2);
 
@@ -1588,7 +1582,7 @@
                 children[i].reflow(childBox);
 
                 position += slotSize;
-            };
+            }
         }
     });
 
@@ -1607,7 +1601,6 @@
             var stack = this,
                 options = stack.options,
                 isVertical = options.isVertical,
-                stackAxis = isVertical ? Y : X,
                 positionAxis = isVertical ? X : Y,
                 children = stack.children,
                 box = stack.box = new Box2D(),
@@ -1714,7 +1707,7 @@
         render: function() {
             var barChart = this,
                 options = barChart.options,
-                isStacked = barChart.options.isStacked,
+                isStacked = options.isStacked,
                 catMax = [],
                 catMin = [];
 
@@ -1855,7 +1848,7 @@
 
             for (var i = 0; i < children.length; i++) {
                 children[i].reflow(categorySlots[i]);
-            };
+            }
 
             barChart.box = targetBox;
        },
