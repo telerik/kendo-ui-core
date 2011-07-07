@@ -182,6 +182,8 @@
     var ModelSet = kendo.Class.extend({
         init: function(options) {
             this.options = options;
+            this.data = [];
+            this.map = {};
             this.models = {};
         },
 
@@ -230,7 +232,22 @@
             return !!model && model.state === UPDATED;
         },
 
-        find: function(state, selector) {
+        find: function(id) {
+            return this.data[this.map[id]];
+        },
+
+        refresh: function(data) {
+            var that = this, id = that.options.model.id, idx, length, map = {};
+
+            for (idx = 0, length = data.length; idx < length; idx++) {
+                map[id(data[idx])] = idx;
+            }
+
+            that.map = map;
+            that.data = data;
+        },
+
+        select: function(state, selector) {
             var models = this.models,
                 result = [],
                 model,
@@ -249,7 +266,7 @@
         },
 
         sync: function(data) {
-            var updated = this.find(UPDATED),
+            var updated = this.select(UPDATED),
                 model = this.options.model,
                 models = this.models, id;
 
