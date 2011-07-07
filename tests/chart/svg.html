@@ -17,6 +17,20 @@
                 view = new ViewElementStub(),
                 contentElementStub = {
                     render: function() { return "Content"; }
+                },
+                gradient = {
+                    id: "gradient",
+                    type: "linear",
+                    rotation: 0,
+                    stops: [{
+                        offset: 0,
+                        color: "#f00",
+                        opacity: 1
+                    }, {
+                        offset: 1,
+                        color: "#00f",
+                        opacity: 1
+                    }]
                 };
 
             (function() {
@@ -111,21 +125,6 @@
                 });
 
                 // ------------------------------------------------------------
-                var gradient = {
-                        id: "gradient",
-                        type: "linear",
-                        rotation: 0,
-                        stops: [{
-                            offset: 0,
-                            color: "#f00",
-                            opacity: 1
-                        }, {
-                            offset: 1,
-                            color: "#00f",
-                            opacity: 1
-                        }]
-                    };
-
                 module("SVGView / Gradient fill", {
                     setup: function() {
                         view = new Chart.SVGView();
@@ -298,18 +297,51 @@
                     ok(glassyRect instanceof Chart.SVGGroup);
                 });
 
-                test("resolves overlay fill paint", function() {
-                    equals(glassyRect.children[1].options.fill, "url(#glass90)");
+                test("generates unique id for gradient", function() {
+                    equals(glassyRect.children[1].options.fill.id, "glass90");
                 });
 
                 test("applies rotation transform to fill gradient", function() {
-                    equals(view.definitions["glass90"].options.rotation, 90);
+                    equals(glassyRect.children[1].options.fill.rotation, 90);
                 });
 
                 test("does not decorate element if no overlay specified", function() {
                     var rect = view.createRect(new Box2D());
                     ok(rect instanceof Chart.SVGPath);
                 });
+            })();
+
+            (function() {
+                var view,
+                    rect,
+                    decorator;
+
+                module("SVGPaintDecorator", {
+                    setup: function() {
+                        view = new Chart.SVGView();
+                        rect = new Chart.SVGPath([[10, 20]], {
+                            fill: gradient
+                        });
+                        decorator = new Chart.SVGPaintDecorator(view);
+                    }
+                });
+
+                test("resolves overlay fill paint", function() {
+                    decorator.decorate(rect);
+                    equals(rect.options.fill, "url(#gradient)");
+                });
+
+                test("resolves overlay fill paint recursively", function() {
+                    rect.children.push(rect.clone());
+                    decorator.decorate(rect);
+                    equals(rect.children[0].options.fill, "url(#gradient)");
+                });
+
+                test("registers gradient definition", function() {
+                    decorator.decorate(rect);
+                    ok(view.definitions.gradient);
+                });
+
             })();
 
        </script>
