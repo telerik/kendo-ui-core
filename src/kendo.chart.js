@@ -14,6 +14,8 @@
     var BASELINE_MARKER_SIZE = 1,
         BAR = "bar",
         BAR_BORDER_BRIGHTNESS = 0.7,
+        BAR_GAP = 1.5,
+        BAR_SPACING = 0.4,
         BLACK = "#000",
         BOTTOM = "bottom",
         CENTER = "center",
@@ -84,7 +86,15 @@
             seriesColors: ["#d7df23", "#adc32b", "#799b28", "#4c7520"],
             seriesDefaults: {
                 type: COLUMN,
-                data: []
+                data: [],
+                bar: {
+                    gap: BAR_GAP,
+                    spacing: BAR_SPACING
+                },
+                column: {
+                    gap: BAR_GAP,
+                    spacing: BAR_SPACING
+                }
             },
             series: []
         },
@@ -1567,7 +1577,7 @@
 
         options: {
             isVertical: false,
-            gap: 1.5,
+            gap: 0,
             spacing: 0
         },
 
