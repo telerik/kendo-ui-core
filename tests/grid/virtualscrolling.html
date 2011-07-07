@@ -155,10 +155,14 @@
                             data: [ 1,2,3,4,5,6,7,8,9,10 ]
                         })
                     });
+                kendo.ui.progress = function() {
+                    ok(true);
+                    start();
+                }
                 firstRowIndex = 1,
                 lastRowIndex = 2;
                 scroller._fetch(firstRowIndex, lastRowIndex);
-                equal(container.find("div.t-overlay").length, 1);
+                stop(300);
             });
 
             test("fetch does not show loading mask if items are present", function() {
@@ -175,26 +179,10 @@
                 equal(container.find("div.t-overlay").length, 0);
             });
 
-            test("progress multiple calls shows only one", function() {
-                var scroller = setup();
-
-                scroller._progress(true);
-                scroller._progress(true);
-                equal(container.find("div.t-overlay").length, 1);
-            });
-
-            test("progress false hides the mask", function() {
-                var scroller = setup();
-
-                scroller._progress(true);
-                scroller._progress(false);
-                equal(container.find("div.t-overlay").length, 0);
-            });
-
             test("mask is hidden on refresh", function() {
                 var scroller = setup();
 
-                scroller._progress(true);
+                kendo.ui.progress(container, true);
                 scroller.refresh();
                 equal(container.find("div.t-overlay").length, 0);
             });
