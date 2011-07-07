@@ -60,7 +60,7 @@ function generateVersion() {
     if (day < 10) {
         day = "0" + day;
     }
-    return date.getFullYear() + "_1_" + date.getMonth() + "" + day;
+    return date.getFullYear() + "_1_" + (date.getMonth() + 1) + "" + day;
 }
 
 function mkdir(newDir) {
