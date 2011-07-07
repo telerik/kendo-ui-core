@@ -1057,6 +1057,20 @@
                     same(rect.style.normalAngle, 0);
                 });
 
+                test("sets default border color based on color", function() {
+                    bar.options.color = "#cf0";
+                    view = new ViewStub();
+                    bar.getViewElements(view);
+                    equals(view.log.rect[0].style.stroke, "#a3cc00");
+                });
+
+                test("does not change border color if set", function() {
+                    bar.options.border.color = "";
+                    view = new ViewStub();
+                    bar.getViewElements(view);
+                    equals(view.log.rect[0].style.stroke, "");
+                });
+
                 test("sets normalAngle for horizontal bars", function() {
                     bar.options.isVertical = false;
 
