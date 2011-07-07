@@ -57,8 +57,8 @@
                     that.root = that.wrapper.html(TreeView.renderGroup({
                         items: options.dataSource,
                         group: {
-                            isFirstLevel: true,
-                            isExpanded: true
+                            firstLevel: true,
+                            expanded: true
                         },
                         treeview: {}
                     })).children("ul");
@@ -155,16 +155,16 @@
 
         _group: function(item) {
             var that = this,
-                isFirstLevel = item.hasClass(TTREEVIEW),
+                firstLevel = item.hasClass(TTREEVIEW),
                 group = {
-                    isFirstLevel: isFirstLevel,
-                    isExpanded: isFirstLevel || item.data("expanded") === true
+                    firstLevel: firstLevel,
+                    expanded: firstLevel || item.data("expanded") === true
                 },
                 groupElement = item.find("> ul");
 
             groupElement
                 .addClass(TreeView.rendering.groupCssClass(group))
-                .css("display", group.isExpanded ? "" : "none");
+                .css("display", group.expanded ? "" : "none");
 
             that._items(groupElement, group);
         },
@@ -237,7 +237,7 @@
 
             if (!groupData) {
                 groupData = {
-                    isFirstLevel: node.parent().parent().hasClass(TTREEVIEW),
+                    firstLevel: node.parent().parent().hasClass(TTREEVIEW),
                     length: node.parent().children().length
                 };
             }
@@ -369,8 +369,8 @@
                 updatedGroupLength = group.children().length + 1,
                 fromNodeData = $.isPlainObject(nodeData),
                 groupData = {
-                    isFirstLevel: parentNode.hasClass(TTREEVIEW),
-                    isExpanded: true,
+                    firstLevel: parentNode.hasClass(TTREEVIEW),
+                    expanded: true,
                     length: updatedGroupLength
                 }, node;
 
@@ -687,7 +687,7 @@
             var result = "t-item",
                 index = item.index;
 
-            if (group.isFirstLevel && index == 0) {
+            if (group.firstLevel && index == 0) {
                 result += " t-first"
             }
 
@@ -702,7 +702,7 @@
                 index = item.index,
                 groupLength = group.length - 1;
 
-            if (group.isFirstLevel && index == 0) {
+            if (group.firstLevel && index == 0) {
                 result += "t-top ";
             }
 
@@ -754,12 +754,12 @@
             return item.url ? "a" : "span";
         },
         groupAttributes: function(group) {
-            return group.isExpanded !== true ? " style='display:none'" : "";
+            return group.expanded !== true ? " style='display:none'" : "";
         },
         groupCssClass: function(group) {
             var cssClass = "t-group";
 
-            if (group.isFirstLevel) {
+            if (group.firstLevel) {
                 cssClass += " t-treeview-lines";
             }
 
@@ -785,7 +785,7 @@
             "<li class='<#= wrapperCssClass(group, item) #>'>" +
                 "<#= itemWrapper(data) #>" +
                 "<# if (item.items) { #>" +
-                "<#= subGroup({ items: item.items, treeview: treeview, group: { isExpanded: item.expanded } }) #>" +
+                "<#= subGroup({ items: item.items, treeview: treeview, group: { expanded: item.expanded } }) #>" +
                 "<# } #>" +
             "</li>"
         ),
