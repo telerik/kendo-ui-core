@@ -417,6 +417,14 @@
             return node;
         },
 
+        insertAfter: function (nodeData, referenceNode) {
+            var group = referenceNode.parent();
+
+            return this._insertNode(nodeData, referenceNode.index() + 1, group.parent(), group, function(item, group) {
+                item.insertAfter(referenceNode);
+            });
+        },
+
         insertBefore: function (nodeData, referenceNode) {
             var group = referenceNode.parent();
 
@@ -572,32 +580,34 @@
         dragend: function (e) {
             var that = this,
                 treeview = that.treeview,
-                dropPosition = "over", destinationItem;
+                dropPosition = "over",
+                sourceNode = e.currentTarget.closest(NODE),
+                destinationNode;
+
 
             if (e.keyCode == kendo.keys.ESC){
                 that.dropHint.remove();
-                treeview.trigger("nodeDragCancelled", { item: e.currentTarget.closest(NODE)[0] });
+                treeview.trigger("nodeDragCancelled", { item: sourceNode[0] });
             } else {
                 if (that.dropHint.css(VISIBILITY) == "visible") {
                     dropPosition = that.dropHint.prevAll(".t-in").length > 0 ? "after" : "before";
-                    destinationItem = that.dropHint.closest(NODE).find("> div");
+                    destinationNode = that.dropHint.closest(NODE);
                 } else if (that.dropTarget) {
-                    destinationItem = that.dropTarget.closest(".t-top,.t-mid,.t-bot");
+                    destinationNode = that.dropTarget.closest(NODE);
                 }
-
-                that._draggable.dropped = true;
 
                 var isValid = !that._draggable.hint.find(".t-drag-status").hasClass("t-denied");
                     //isDropPrevented = treeview.trigger("nodeDrop", {
                         //isValid: isValid,
                         //dropTarget: e.target,
-                        //destinationItem: destinationItem.parent()[0],
+                        //destinationNode: destinationNode[0],
                         //dropPosition: dropPosition,
-                        //item: e.currentTarget.closest(NODE)[0]
+                        //item: sourceNode[0]
                     //});
 
+                that.dropHint.remove();
+
                 if (!isValid) {
-                    that.dropHint.remove();
                     return false;
                 }
 
@@ -605,32 +615,27 @@
                     //return !isDropPrevented;
                 //}
 
-                var sourceItem = e.currentTarget.closest(".t-top,.t-mid,.t-bot");
-                var movedItem = sourceItem.parent(); // .t-item
-                var sourceGroup = sourceItem.closest(".t-group");
                 // dragging item within itself
-                if ($.contains(movedItem[0], e.target)) {
-                    that.dropHint.remove();
+                if ($.contains(sourceNode[0], e.target)) {
                     return false;
                 }
 
-                // perform reorder / move
-                if (that.dropHint.css(VISIBILITY) == "visible") {
-                    destinationItem.parent()[dropPosition](movedItem);
-                } else {
-                    treeview.append(movedItem, destinationItem.parent());
+                that._draggable.dropped = true;
 
-                    if (destinationItem.find("> .t-icon").hasClass("t-plus")) {
-                        treeview.toggle(destinationItem.parent(), true);
-                    }
+                // perform reorder / move
+                if (dropPosition == "over") {
+                    treeview.append(sourceNode, destinationNode);
+                    treeview.expand(destinationNode);
+                } else if (dropPosition == "before") {
+                    treeview.insertBefore(sourceNode, destinationNode);
+                } else if (dropPosition == "after") {
+                    treeview.insertAfter(sourceNode, destinationNode);
                 }
 
-                that.dropHint.remove();
-
                 //treeview.trigger("nodeDropped", {
-                    //destinationItem: destinationItem.closest(NODE)[0],
+                    //destinationNode: destinationNode[0],
                     //dropPosition: dropPosition,
-                    //item: sourceItem.parent(NODE)[0]
+                    //item: sourceNode[0]
                 //});
 
                 return false;
