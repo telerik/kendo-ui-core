@@ -3,7 +3,7 @@
         ui = kendo.ui,
         extend = $.extend,
         template = kendo.template,
-        Component = kendo.ui.Component,
+        Component = ui.Component,
         proxy = $.proxy,
         SELECT = "select",
         EXPAND = "expand",
@@ -49,14 +49,12 @@
                 };
             }
 
-            that.rendering = new TreeViewRendering(that);
-
             // render treeview if it's not already rendered
             if (!element.hasClass(TTREEVIEW)) {
                 that._wrapper();
 
                 if (!that.root.length) { // treeview initialized from empty element
-                    that.root = that.wrapper.html(that.rendering.renderGroup({
+                    that.root = that.wrapper.html(TreeView.renderGroup({
                         items: options.dataSource,
                         group: {
                             isFirstLevel: true,
@@ -165,7 +163,7 @@
                 groupElement = item.find("> ul");
 
             groupElement
-                .addClass(that.rendering.helpers.groupCssClass(group))
+                .addClass(TreeView.rendering.groupCssClass(group))
                 .css("display", group.isExpanded ? "" : "none");
 
             that._items(groupElement, group);
@@ -225,7 +223,7 @@
         },
 
         _updateNodeClasses: function(node, groupData, nodeData) {
-            var helpers = this.rendering.helpers,
+            var helpers = TreeView.rendering,
                 wrapper = node.find(">div"),
                 subGroup = node.find(">ul")
 
@@ -377,7 +375,7 @@
                 }, node;
 
             if (fromNodeData) {
-                node = $(that.rendering.renderItem({
+                node = $(TreeView.renderItem({
                     group: groupData,
                     item: extend(nodeData, { index: index })
                 }));
@@ -390,7 +388,7 @@
             }
 
             if (!group.length) {
-                group = $(that.rendering.renderGroup({
+                group = $(TreeView.renderGroup({
                     group: groupData
                 })).appendTo(parentNode);
             }
@@ -477,7 +475,7 @@
 
         that.treeview = treeview;
 
-        that._draggable = new kendo.ui.Draggable(treeview.element, {
+        that._draggable = new ui.Draggable(treeview.element, {
            filter: "div:not(.t-state-disabled) .t-in",
            hint: function(node) {
                 return "<div class='t-header t-drag-clue'><span class='t-icon t-drag-status'></span>" + node.text() + "</div>";
@@ -643,138 +641,131 @@
     };
 
     // client-side rendering
-    TreeViewRendering = function () {};
 
-    TreeViewRendering.prototype = {
-        helpers: {
-            wrapperCssClass: function (group, item) {
-                var result = "t-item",
-                    index = item.index;
-
-                if (group.isFirstLevel && index == 0) {
-                    result += " t-first"
-                }
-
-                if (index == group.length-1) {
-                    result += " t-last";
-                }
-
-                return result;
-            },
-            cssClass: function(group, item) {
-                var result = "",
-                    index = item.index,
-                    groupLength = group.length - 1;
-
-                if (group.isFirstLevel && index == 0) {
-                    result += "t-top ";
-                }
-
-                if (index == 0 && index != groupLength) {
-                    result += "t-top";
-                } else if (index == groupLength) {
-                    result += "t-bot";
-                } else {
-                    result += "t-mid";
-                }
-
-                return result;
-            },
-            textClass: function(item) {
-                var result = "t-in";
-
-                if (item.enabled === false) {
-                    result += " t-state-disabled";
-                }
-
-                if (item.selected === true) {
-                    result += " t-state-selected";
-                }
-
-                return result;
-            },
-            textAttributes: function(item) {
-                return item.url ? " href='" + item.url + "'" : "";
-            },
-            toggleButtonClass: function(item) {
-                var result = "t-icon";
-
-                if (item.expanded !== true) {
-                    result += " t-plus";
-                } else {
-                    result += " t-minus";
-                }
-
-                if (item.enabled === false) {
-                    result += "-disabled";
-                }
-
-                return result;
-            },
-            text: function(item) {
-                return item.encoded === false ? item.text : kendo.htmlEncode(item.text);
-            },
-            tag: function(item) {
-                return item.url ? "a" : "span";
-            },
-            groupAttributes: function(group) {
-                return group.isExpanded !== true ? " style='display:none'" : "";
-            },
-            groupCssClass: function(group) {
-                var cssClass = "t-group";
-
-                if (group.isFirstLevel) {
-                    cssClass += " t-treeview-lines";
-                }
-
-                return cssClass;
-            }
-        },
-
+    extend(TreeView, {
         renderItem: function (options) {
-            options = $.extend({ treeview: {}, group: {} }, options);
+            options = extend({ treeview: {}, group: {} }, options);
 
             var templates = TreeView.templates,
                 empty = templates.empty,
                 item = options.item,
                 treeview = options.treeview;
 
-            return templates.item($.extend(options, {
+            return templates.item(extend(options, {
                 image: item.imageUrl ? templates.image : empty,
                 sprite: item.spriteCssClass ? templates.sprite : empty,
                 itemWrapper: templates.itemWrapper,
                 toggleButton: item.items ? templates.toggleButton : empty,
-                subGroup: $.proxy(this.renderGroup, this)
-            }, this.helpers));
-        },
-
-        renderItems: function(options) {
-            var html = "",
-                i = 0,
-                items = options.items,
-                len = items ? items.length : 0,
-                group = $.extend({ length: len }, options.group);
-
-            for (; i < len; i++) {
-                html += this.renderItem($.extend(options, {
-                    group: group,
-                    item: $.extend({ index: i }, items[i])
-                }));
-            }
-
-            return html;
+                subGroup: TreeView.renderGroup
+            }, TreeView.rendering));
         },
 
         renderGroup: function (options) {
-            var that = this;
+            return TreeView.templates.group(extend({
+                renderItems: function(options) {
+                    var html = "",
+                        i = 0,
+                        items = options.items,
+                        len = items ? items.length : 0,
+                        group = extend({ length: len }, options.group);
 
-            return TreeView.templates.group($.extend({
-                renderItems: $.proxy(that.renderItems, that)
-            }, options, that.helpers));
+                    for (; i < len; i++) {
+                        html += TreeView.renderItem(extend(options, {
+                            group: group,
+                            item: extend({ index: i }, items[i])
+                        }));
+                    }
+
+                    return html;
+                }
+            }, options, TreeView.rendering));
+        }
+    });
+
+    TreeView.rendering = {
+        wrapperCssClass: function (group, item) {
+            var result = "t-item",
+                index = item.index;
+
+            if (group.isFirstLevel && index == 0) {
+                result += " t-first"
+            }
+
+            if (index == group.length-1) {
+                result += " t-last";
+            }
+
+            return result;
+        },
+        cssClass: function(group, item) {
+            var result = "",
+                index = item.index,
+                groupLength = group.length - 1;
+
+            if (group.isFirstLevel && index == 0) {
+                result += "t-top ";
+            }
+
+            if (index == 0 && index != groupLength) {
+                result += "t-top";
+            } else if (index == groupLength) {
+                result += "t-bot";
+            } else {
+                result += "t-mid";
+            }
+
+            return result;
+        },
+        textClass: function(item) {
+            var result = "t-in";
+
+            if (item.enabled === false) {
+                result += " t-state-disabled";
+            }
+
+            if (item.selected === true) {
+                result += " t-state-selected";
+            }
+
+            return result;
+        },
+        textAttributes: function(item) {
+            return item.url ? " href='" + item.url + "'" : "";
+        },
+        toggleButtonClass: function(item) {
+            var result = "t-icon";
+
+            if (item.expanded !== true) {
+                result += " t-plus";
+            } else {
+                result += " t-minus";
+            }
+
+            if (item.enabled === false) {
+                result += "-disabled";
+            }
+
+            return result;
+        },
+        text: function(item) {
+            return item.encoded === false ? item.text : kendo.htmlEncode(item.text);
+        },
+        tag: function(item) {
+            return item.url ? "a" : "span";
+        },
+        groupAttributes: function(group) {
+            return group.isExpanded !== true ? " style='display:none'" : "";
+        },
+        groupCssClass: function(group) {
+            var cssClass = "t-group";
+
+            if (group.isFirstLevel) {
+                cssClass += " t-treeview-lines";
+            }
+
+            return cssClass;
         }
     };
-
-    TreeView.TreeViewRendering = TreeViewRendering;
 
     TreeView.templates = {
         group: template(
@@ -799,13 +790,12 @@
             "</li>"
         ),
         image: template("<img class='t-image' alt='' src='<#= imageUrl #>' />"),
-        value: template("<input type='hidden' class='t-input' name='value' value='<#= value #>' />"),
         toggleButton: template("<span class='<#= toggleButtonClass(item) #>'></span>"),
         sprite: template("<span class='t-sprite <#= spriteCssClass #>'></span>"),
         empty: template("")
     };
 
-    kendo.ui.plugin("TreeView", TreeView);
+    ui.plugin("TreeView", TreeView);
 
 })(jQuery);
 
