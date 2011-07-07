@@ -280,6 +280,21 @@
 
             id = model.id;
 
+            if (Model && !isEmptyObject(model)) {
+                that.modelSet = new ModelSet({
+                    model: model,
+                    update: function(e) {
+                        that.trigger(UPDATE, e);
+                    }
+                });
+            } else {
+                that.modelSet = {
+                    refresh: noop,
+                    select: noop,
+                    sync: noop
+                };
+            }
+
             if (transport) {
                 that.transport = isFunction(transport.read) ? transport: new RemoteTransport(transport);
             } else {
@@ -287,9 +302,7 @@
             }
 
             if (id) {
-                that.find = function(id) {
-                    return that._data[that._map[id]];
-                };
+                that.find = proxy(that.modelSet.find, that.modelSet);
                 that.id = function(record) {
                     return id(record);
                 };
@@ -297,15 +310,6 @@
                 that.find = that.at;
             }
 
-            if (Model) {
-                that.modelSet = new ModelSet({
-                    find: proxy(that.find, that),
-                    model: model,
-                    update: function(e) {
-                        that.trigger(UPDATE, e);
-                    }
-                });
-            }
             that.bind([ERROR, CHANGE, CREATE, DESTROY, UPDATE, REQUESTSTART], options);
         },
 
@@ -340,7 +344,7 @@
         },
 
         _createdModels: function() {
-            return this.modelSet.find(Model.CREATED, function(model) {
+            return this.modelSet.select(Model.CREATED, function(model) {
                 return model.data;
             });
         },
@@ -349,7 +353,7 @@
             var that = this,
                 sendAllFields = that.options.sendAllFields;
 
-            return that.modelSet.find(Model.UPDATED, function(model) {
+            return that.modelSet.select(Model.UPDATED, function(model) {
                 if(sendAllFields) {
                     return model.data;
                 }
@@ -362,7 +366,7 @@
             var that = this,
                 options = that.options;
 
-            return that.modelSet.find(Model.DESTROYED, function(model) {
+            return that.modelSet.select(Model.DESTROYED, function(model) {
                 var data = {};
 
                 if (options.sendAllFields) {
@@ -445,7 +449,7 @@
                 }
             });
 
-            that._idMap(that._data);
+            that.modelSet.refresh(that._data);
         },
 
         _syncError: function(origData, data) {
@@ -502,7 +506,7 @@
 
             data.splice(index, 0, model.data);
 
-            that._idMap(data);
+            that.modelSet.refresh(data);
 
             that.trigger(CREATE, { model: model });
 
@@ -547,7 +551,7 @@
             if (model) {
                 that._data.splice(that._map[id], 1);
 
-                that._idMap(that._data);
+                that.modelSet.refresh(that._data);
 
                 model.destroy();
 
@@ -627,7 +631,7 @@
                 that._total = result.total;
             }
 
-            that._idMap(data);
+            that.modelSet.refresh(data);
 
             that.trigger(CHANGE);
         },
