@@ -55,19 +55,19 @@
                 });
 
                 test("createRect returns VMLPath", function() {
-                    var rect = view.createRect(view, 10, 20, 100, 100);
+                    var rect = view.createRect(10, 20, 100, 100);
                     ok(rect instanceof Chart.VMLPath);
                 });
 
                 test("createRect draws rectangle", function() {
-                    var rect = view.createRect(view, new Box2D(10, 20, 110, 220));
+                    var rect = view.createRect(new Box2D(10, 20, 110, 220));
                     deepEqual(rect.points, [
                         [10, 20], [110, 20], [110, 220], [10, 220], [10, 20]
                     ]);
                 });
 
                 test("createRect sets fill color", function() {
-                    var rect = view.createRect(view,
+                    var rect = view.createRect(
                         new Box2D(10, 20, 110, 220), { fill: "#f00" });
                     equal(rect.options.fill, "#f00");
                 });
