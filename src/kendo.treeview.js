@@ -24,6 +24,7 @@
         TTREEVIEW = "t-treeview",
         TITEM = "t-item",
         VISIBLE = ":visible",
+        TREEVIEW = "." + TTREEVIEW,
         NODE = ".t-item",
         SUBGROUP = ">.t-group,>.t-animation-container>.t-group",
         NODECONTENTS = SUBGROUP + ",>.t-content,>.t-animation-container>.t-content";
@@ -411,8 +412,8 @@
                 that._updateNodeClasses(node);
             }
 
-            that._updateNodeClasses(node.prev(), groupData);
-            that._updateNodeClasses(node.next(), groupData);
+            that._updateNodeClasses(node.prev());
+            that._updateNodeClasses(node.next());
 
             return node;
         },
