@@ -6,6 +6,7 @@
         <script src="../qunit.js"></script>
         <script src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
         <script src="../../src/kendo.treeview.js"></script>
         <link rel="stylesheet" href="../qunit.css" />
         <link rel="stylesheet" href="../../styles/kendo.common.css" />
@@ -31,19 +32,19 @@
                 teardown: removeTreeViews
             });
 
-            test("selecting items triggers selected event and passes item as argument", function() {
+            test("selecting nodes triggers selected event and passes node as argument", function() {
                 var selectedArgs,
                     treeview = createTreeView({
                         select: function(e) { selectedArgs = e; },
                         dataSource: [ { text: "foo" } ]
                     });
                     
-                var item = $(".t-item:first", treeview);
+                var node = $(".t-item:first", treeview);
                 
-                item.find(".t-in").trigger("click");
+                node.find(".t-in").trigger("click");
 
                 ok(selectedArgs);
-                equals(selectedArgs.item, item[0]);
+                equals(selectedArgs.node, node[0]);
             });
 
             test("clicking expand button triggers expand event", function() {
@@ -61,7 +62,7 @@
                     .trigger("click");
 
                 ok(expandArgs);
-                equals(expandArgs.item, $(".t-item")[0]);
+                equals(expandArgs.node, $(".t-item")[0]);
             });
 
             test("clicking collapse button triggers collapse event", function() {
@@ -79,8 +80,149 @@
                     .trigger("click");
 
                 ok(collapseArgs);
-                equals(collapseArgs.item, $(".t-item")[0]);
+                equals(collapseArgs.node, $(".t-item")[0]);
             });
+
+            module("drag & drop", {
+                teardown: removeTreeViews
+            });
+
+            function moveNode(treeview, sourceText, destinationText) {
+                var sourceNode = treeview.findByText(sourceText).find(".t-in:first"),
+                    destinationNode = treeview.findByText(destinationText).find(".t-in:first"),
+                    startOffset = sourceNode.offset(),
+                    endOffset = destinationNode.offset(),
+                    extend = $.extend,
+                    sourcePosition = {
+                        pageX: startOffset.left + 5,
+                        pageY: startOffset.top + 5,
+                        relatedTarget: sourceNode[0] 
+                    },
+                    destinationPosition = {
+                        pageX: endOffset.left + 5,
+                        pageY: endOffset.top + 7,
+                        target: destinationNode[0]
+                    };
+
+                sourceNode
+                    .trigger(extend({ type: "mousedown" }, sourcePosition));
+
+                destinationNode
+                    .trigger(extend({ type: "mousemove" }, destinationPosition))
+                    .trigger(extend({ type: "mousemove" }, destinationPosition))
+                    .trigger(extend({ type: "mouseup" }, destinationPosition));
+            }
+
+            test("moving node triggers dragstart", function () {
+                var dragStartTriggered,
+                    treeview = createTreeView({
+                        dragAndDrop: true,
+                        dataSource: [
+                            { text: "foo", expanded: true, items: [
+                                { text: "bar" }
+                            ] },
+                            { text: "baz" }
+                        ],
+                        dragstart: function(e) { dragStartTriggered = e; }
+                    }),
+                    treeviewObject = treeview.data("kendoTreeView");
+
+                moveNode(treeviewObject, "bar", "baz");
+
+                ok(dragStartTriggered);
+                equals(dragStartTriggered.sourceNode, treeviewObject.findByText("bar")[0]);
+            });
+
+            test("moving node triggers drag", function () {
+                var dragTriggered,
+                    treeview = createTreeView({
+                        dragAndDrop: true,
+                        dataSource: [
+                            { text: "foo", expanded: true, items: [
+                                { text: "bar" }
+                            ] },
+                            { text: "baz" }
+                        ],
+                        drag: function(e) { dragTriggered = e; }
+                    }),
+                    treeviewObject = treeview.data("kendoTreeView");
+
+                moveNode(treeviewObject, "bar", "baz");
+
+                ok(dragTriggered);
+                equals(dragTriggered.sourceNode, treeviewObject.findByText("bar")[0]);
+                ok(dragTriggered.setStatusClass);
+                equals(dragTriggered.statusClass, "add");
+                ok(dragTriggered.pageX);
+                ok(dragTriggered.pageY);
+            });
+
+            test("moving node triggers drop", function () {
+                var dropTriggered,
+                    treeview = createTreeView({
+                        dragAndDrop: true,
+                        dataSource: [
+                            { text: "foo", expanded: true, items: [
+                                { text: "bar" }
+                            ] },
+                            { text: "baz" }
+                        ],
+                        drop: function(e) { dropTriggered = e; }
+                    }),
+                    treeviewObject = treeview.data("kendoTreeView");
+
+                moveNode(treeviewObject, "bar", "baz");
+
+                ok(dropTriggered);
+                equals(dropTriggered.sourceNode, treeviewObject.findByText("bar")[0]);
+                equals(dropTriggered.destinationNode, treeviewObject.findByText("baz")[0]);
+                ok(dropTriggered.isValid);
+                equals(dropTriggered.dropPosition, "over");
+            });
+
+            test("moving node triggers dragstart/drag/drop/dragend", function () {
+                var dragEndTriggered,
+                    treeview = createTreeView({
+                        dragAndDrop: true,
+                        dataSource: [
+                            { text: "foo", expanded: true, items: [
+                                { text: "bar" }
+                            ] },
+                            { text: "baz" }
+                        ],
+                        dragend: function(e) { dragEndTriggered = e; }
+                    }),
+                    treeviewObject = treeview.data("kendoTreeView");
+
+                moveNode(treeviewObject, "bar", "baz");
+
+                ok(dragEndTriggered);
+                equals(dragEndTriggered.sourceNode, treeviewObject.findByText("bar")[0]);
+                equals(dragEndTriggered.destinationNode, treeviewObject.findByText("baz")[0]);
+                equals(dragEndTriggered.dropPosition, "over");
+            });
+
+            test("drop event can be cancelled", function() {
+                var treeview = createTreeView({
+                        dragAndDrop: true,
+                        dataSource: [
+                            { text: "foo", expanded: true, items: [
+                                { text: "bar" }
+                            ] },
+                            { text: "baz" }
+                        ],
+                        drop: function(e) {
+                            ok(e.preventDefault);
+                            e.preventDefault();
+                        }
+                    }),
+                    treeviewObject = treeview.data("kendoTreeView");
+
+                moveNode(treeviewObject, "bar", "baz");
+
+                equals(treeviewObject.findByText("foo").find(".t-group").length, 1);
+                equals(treeviewObject.findByText("baz").find(".t-group").length, 0);
+           });
         </script>
 
         <div id="qunit-fixture"> </div>

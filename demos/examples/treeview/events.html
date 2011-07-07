@@ -28,21 +28,7 @@
             <div id="TreeView"></div>
 
             <script type="text/javascript">
-                function onSelect(e) {
-                    kendoConsole.log("Selected: " + $(e.item).find("> div > .t-in").text());
-                }
-
-                function onError(e) {
-                    kendoConsole.error("Loading failed with " + e.xhr.statusText + " " + e.xhr.status);
-                }
-
-                function onCollapse(e) {
-                    kendoConsole.log("Collapsing " + $(e.item).find("> div > .t-in").text());
-                }
-
-                function onExpand(e) {
-                    kendoConsole.log("Expanding " + $(e.item).find("> div > .t-in").text());
-                }
+                var treeview;
 
                 $("#TreeView").kendoTreeView({
                     dataSource: [
@@ -58,12 +44,46 @@
                         ] },
                         { text: "baz" }
                     ],
+
+                    select: function (e) {
+                        kendoConsole.log("Selected: " + treeview.text(e.node));
+                    },
+
+                    error: function (e) {
+                        kendoConsole.error("Loading failed with " + e.xhr.statusText + " " + e.xhr.status);
+                    },
+
+                    collapse: function (e) {
+                        kendoConsole.log("Collapsing " + treeview.text(e.node));
+                    },
+
+                    expand: function (e) {
+                        kendoConsole.log("Expanding " + treeview.text(e.node));
+                    },
+
                     dragAndDrop: true,
-                    select: onSelect,
-                    error: onError,
-                    collapse: onCollapse,
-                    expand: onExpand
+
+                    /* drag & drop events */
+
+                    dragstart: function (e) {
+                        kendoConsole.log("Started dragging " + treeview.text(e.sourceNode));
+                    },
+
+                    drag: function (e) {
+                        // omitted event logging in order to prevent console flood
+                        // kendoConsole.log("Started dragging " + treeview.text(e.sourceNode));
+                    },
+
+                    drop: function (e) {
+                        kendoConsole.log("Dropped " + treeview.text(e.sourceNode));
+                    },
+
+                    dragend: function (e) {
+                        kendoConsole.log("Finished dragging " + treeview.text(e.sourceNode));
+                    }
                 });
+
+                treeview = $("#TreeView").data("kendoTreeView");
             </script>
         </div>
         <div class="console"></div>
