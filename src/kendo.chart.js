@@ -444,7 +444,7 @@
                 border = options.border || {},
                 box = root.box.clone().pad(options.margin).unpad(border.width),
                 elements = [
-                    view.createRect(view, box, {
+                    view.createRect(box, {
                         stroke: border.width ? border.color : "",
                         strokeWidth: border.width,
                         fill: options.background,
@@ -541,7 +541,7 @@
                 options = element.options,
                 border = options.border || {},
                 elements = [
-                    view.createRect(view, element.paddingBox, {
+                    view.createRect(element.paddingBox, {
                         stroke: border.width ? border.color : "",
                         strokeWidth: border.width,
                         fill: options.background })
@@ -850,14 +850,14 @@
 
                 markerBox.y2 = markerBox.y1 + markerSize;
 
-                group.children.push(view.createRect(view, markerBox, { fill: color, stroke: color }));
+                group.children.push(view.createRect(markerBox, { fill: color, stroke: color }));
             }
 
             if (children.length > 0) {
                 var padding = getSpacing(options.padding);
                 padding.left += markerSize * 2;
                 labelBox.pad(padding);
-                group.children.unshift(view.createRect(view, labelBox, {
+                group.children.unshift(view.createRect(labelBox, {
                     stroke: border.width ? border.color : "",
                     strokeWidth: border.width,
                     fill: options.background })
@@ -1677,12 +1677,12 @@
                 rectStyle = deepExtend({
                     fill: options.color,
                     overlay: options.overlay,
-                    rotation: isVertical ? 0 : 90
+                    normalAngle: isVertical ? 0 : 90
                 }, border),
                 elements = [];
 
             elements.push(
-                view.createRect(view, box, rectStyle)
+                view.createRect(box, rectStyle)
             );
             [].push.apply(elements,
                 ChartElement.fn.getViewElements.call(bar, view)
@@ -2094,10 +2094,10 @@
                 childElements = ChartElement.fn.getViewElements.call(plotArea, view),
                 border = options.border || {},
                 elements = [
-                    view.createRect(view, plotArea.box, {
+                    view.createRect(plotArea.box, {
                         fill: options.background,
                         zIndex: -1 }),
-                    view.createRect(view, plotArea.box, {
+                    view.createRect(plotArea.box, {
                         stroke: border.width ? border.color : "",
                         strokeWidth: border.width,
                         fill: "",
@@ -2164,9 +2164,10 @@
     }
 
     SVGOverlayDecorator.prototype = {
-        decorate: function(element, overlayName) {
+        decorate: function(element) {
             var decorator = this,
                 view = decorator.view,
+                overlayName = element.options ? element.options.overlay : "",
                 overlay = Chart.Overlays[overlayName];
 
             if (!overlay) {
@@ -2174,7 +2175,7 @@
             }
 
             var fill = overlay.fill,
-                fillRotation = element.options.rotation || 0,
+                fillRotation = element.options.normalAngle || 0,
                 fillId = overlayName + fillRotation,
                 group = view.createGroup(),
                 overlayElement = element.clone();
@@ -2195,9 +2196,9 @@
             ViewElement.fn.init.call(view, options);
 
             view.definitions = { };
-            view.decorators = {
-                overlay: new SVGOverlayDecorator(view)
-            };
+            view.decorators = [
+                new SVGOverlayDecorator(view)
+            ];
 
             view.template = SVGView.template;
             if (!view.template) {
@@ -2248,7 +2249,7 @@
             return new SVGText(content, options);
         },
 
-        createRect: function(view, box, style) {
+        createRect: function(box, style) {
             var view = this;
 
             if (style) {
@@ -2310,14 +2311,14 @@
         decorate: function(element) {
             var view = this,
                 decorators = view.decorators,
-                options = element.options,
-                decoratedElement = element;
+                i,
+                length = decorators.length;
 
-            if (options && options.overlay) {
-                decoratedElement = decorators.overlay.decorate(element, options.overlay);
+            for (i = 0; i < length; i++) {
+                element = decorators[i].decorate(element);
             }
 
-            return decoratedElement;
+            return element;
         }
     });
 
@@ -2510,7 +2511,7 @@
             return new VMLText(content, options);
         },
 
-        createRect: function(view, box, style) {
+        createRect: function(box, style) {
             var rect = new VMLPath(
                 [[box.x1, box.y1], [box.x2, box.y1],
                 [box.x2, box.y2], [box.x1, box.y2], [box.x1, box.y1]],

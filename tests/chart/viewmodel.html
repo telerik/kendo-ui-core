@@ -1053,6 +1053,20 @@
                     same(rect.style.fill, bar.options.color);
                 });
 
+                test("sets default normalAngle", function() {
+                    same(rect.style.normalAngle, 0);
+                });
+
+                test("sets normalAngle for horizontal bars", function() {
+                    bar.options.isVertical = false;
+
+                    view = new ViewStub();
+                    bar.getViewElements(view);
+                    rect = view.log.rect[0];
+
+                    same(rect.style.normalAngle, 90);
+                });
+
                 test("sets stroke color", function() {
                     bar.options.border.color = "red";
                     bar.options.border.width = 1;

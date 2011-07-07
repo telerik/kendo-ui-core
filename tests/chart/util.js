@@ -9,7 +9,7 @@ function ViewStub() {
 }
 
 ViewStub.prototype = {
-    createRect: function(view, box, style) {
+    createRect: function(box, style) {
         this.log.rect.push({
             x1: box.x1,
             y1: box.y1,
