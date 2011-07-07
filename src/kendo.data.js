@@ -17,6 +17,7 @@
         DESTROY = "destroy",
         CHANGE = "change",
         ERROR = "error",
+        REQUESTSTART = "requestStart",
         crud = [CREATE, READ, UPDATE, DESTROY],
         identity = function(o) { return o; },
         stringify = kendo.stringify;
@@ -395,7 +396,8 @@
                     }
                 });
             }
-            that.bind([ERROR, CHANGE, CREATE, DESTROY, UPDATE], options);
+
+            that.bind([ERROR, CHANGE, CREATE, DESTROY, UPDATE, REQUESTSTART], options);
         },
 
         options: {
@@ -611,6 +613,8 @@
                     aggregates: that._aggregates
                 });
 
+            that.trigger(REQUESTSTART);
+
             that.transport.read({
                 data: options,
                 success: proxy(that.success, that),
@@ -788,6 +792,7 @@
             if (remote || (that._data === undefined || that._data.length == 0)) {
                 that.read(options);
             } else {
+                that.trigger(REQUESTSTART);
                 result = process(that._data, options);
 
                 if (result.total !== undefined && !that.options.serverFiltering) {

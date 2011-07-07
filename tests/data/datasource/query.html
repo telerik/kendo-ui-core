@@ -737,6 +737,33 @@
                 dataSource.query({ take: 3 });
                 equal(dataSource.take(), 3);
             });
+
+            test("query raised requestStart", function() {
+                var called = false,
+                    dataSource = new DataSource({
+                    data: [{age: 1}, {age: 2},{age: 3}, {age: 4},{age: 5}, {age: 6},{age: 7}, {age: 8}],
+                    pageSize: 4,
+                    requestStart: function() {
+                        called = true;
+                    }
+                });
+                dataSource.read();
+                dataSource.query({ take: 3 });
+                ok(called);
+            });
+
+            test("read raised requestStart", function() {
+                var called = false,
+                    dataSource = new DataSource({
+                    data: [{age: 1}, {age: 2},{age: 3}, {age: 4},{age: 5}, {age: 6},{age: 7}, {age: 8}],
+                    pageSize: 4,
+                    requestStart: function() {
+                        called = true;
+                    }
+                });
+                dataSource.read();
+                ok(called);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
