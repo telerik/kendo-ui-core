@@ -2165,46 +2165,52 @@
         }
     });
 
-    function SVGOverlayDecorator(view) {
-        this.view = view;
-    }
-
-    SVGOverlayDecorator.prototype = {
-        decorate: function(element) {
-            var decorator = this,
-                view = decorator.view,
-                overlayName = element.options ? element.options.overlay : "",
-                overlay = Chart.Overlays[overlayName];
-
-            if (!overlay) {
-                return element;
-            }
-
-            var fill = overlay.fill,
-                fillRotation = element.options.normalAngle || 0,
-                fillId = overlayName + fillRotation,
-                group = view.createGroup(),
-                overlayElement = element.clone();
-
-            group.children.push(element, overlayElement);
-
-            overlayElement.options.fill = view.getPaint(
-                deepExtend(fill, { id: fillId, rotation: fillRotation }));
-
-            return group;
-        }
-    }
-
-    var SVGView = ViewElement.extend({
+    var ViewBase = ViewElement.extend({
         init: function(options) {
             var view = this;
 
             ViewElement.fn.init.call(view, options);
 
             view.definitions = { };
-            view.decorators = [
-                new SVGOverlayDecorator(view)
-            ];
+            view.decorators = [ ];
+        },
+
+        renderDefinitions: function() {
+            var view = this,
+                definitions = view.definitions,
+                definitionId,
+                output = "";
+
+            for (var definitionId in definitions) {
+                if (definitions.hasOwnProperty(definitionId)) {
+                    output += definitions[definitionId].render();
+                }
+            }
+
+            return output;
+        },
+
+        decorate: function(element) {
+            var view = this,
+                decorators = view.decorators,
+                i,
+                length = decorators.length;
+
+            for (i = 0; i < length; i++) {
+                element = decorators[i].decorate(element);
+            }
+
+            return element;
+        }
+    });
+
+    var SVGView = ViewBase.extend({
+        init: function(options) {
+            var view = this;
+
+            ViewBase.fn.init.call(view, options);
+
+            view.decorators.push(new SVGOverlayDecorator(view));
 
             view.template = SVGView.template;
             if (!view.template) {
@@ -2234,15 +2240,7 @@
 
         renderDefinitions: function() {
             var view = this,
-                definitions = view.definitions,
-                definitionId,
-                output = "";
-
-            for (var definitionId in definitions) {
-                if (definitions.hasOwnProperty(definitionId)) {
-                    output += definitions[definitionId].render();
-                }
-            }
+                output = ViewBase.fn.renderDefinitions.call(view);
 
             return output.length > 0 ? "<defs>" + output + "</defs>" : "";
         },
@@ -2312,19 +2310,6 @@
                     style.top = top + "px";
                 }
             }
-        },
-
-        decorate: function(element) {
-            var view = this,
-                decorators = view.decorators,
-                i,
-                length = decorators.length;
-
-            for (i = 0; i < length; i++) {
-                element = decorators[i].decorate(element);
-            }
-
-            return element;
         }
     });
 
@@ -2472,23 +2457,95 @@
         }
     });
 
-    function VMLGlassEffect(element, rotation, view) {
-        var gradientOptions = deepExtend(
-                blendGradient(element.options.fill, glassGradient),
-                { rotation: 270 - rotation }
-            ),
-            gradient = view.createGradient(gradientOptions);
-
-        element.options.fill = "";
-        element.children.push(gradient);
-
-        return element;
+    function SVGOverlayDecorator(view) {
+        this.view = view;
     }
 
-    var VMLView = ViewElement.extend({
+    SVGOverlayDecorator.prototype = {
+        decorate: function(element) {
+            var decorator = this,
+                view = decorator.view,
+                overlayName = element.options ? element.options.overlay : "",
+                overlay = Chart.Overlays[overlayName];
+
+            if (!overlay) {
+                return element;
+            }
+
+            var fill = overlay.fill,
+                fillRotation = element.options.normalAngle || 0,
+                fillId = overlayName + fillRotation,
+                group = view.createGroup(),
+                overlayElement = element.clone();
+
+            group.children.push(element, overlayElement);
+
+            overlayElement.options.fill = view.getPaint(
+                deepExtend(fill, { id: fillId, rotation: fillRotation }));
+
+            return group;
+        }
+    }
+
+    function VMLOverlayDecorator(view) {
+        this.view = view;
+    }
+
+    VMLOverlayDecorator.prototype = {
+        decorate: function(element) {
+            var decorator = this,
+                view = decorator.view,
+                overlayName = element.options ? element.options.overlay : "",
+                overlay = Chart.Overlays[overlayName];
+
+            if (!overlay) {
+                return element;
+            }
+
+            var fill = overlay.fill,
+                fillRotation = 270 - element.options.normalAngle || 0;
+
+            element.options.overlay = "";
+            element.options.fill = deepExtend(
+                { },
+                blendGradient(element.options.fill, glassGradient),
+                { rotation: fillRotation }
+            );
+
+            return element;
+        }
+    };
+
+    function VMLGradientDecorator(view) {
+        this.view = view;
+    }
+
+    VMLGradientDecorator.prototype = {
+        decorate: function(element) {
+            var decorator = this,
+                view = decorator.view,
+                options = element.options,
+                fill = options.fill,
+                gradient;
+
+            if (typeof fill === OBJECT) {
+                element.children.push(view.createGradient(fill));
+                options.fill = "";
+            }
+
+            return element;
+        }
+    };
+
+    var VMLView = ViewBase.extend({
         init: function(options) {
             var view = this;
-            ViewElement.fn.init.call(view, options);
+            ViewBase.fn.init.call(view, options);
+
+            view.decorators.push(
+                new VMLOverlayDecorator(view),
+                new VMLGradientDecorator(view)
+            );
 
             view.template = VMLView.template;
             if (!view.template) {
@@ -2518,17 +2575,13 @@
         },
 
         createRect: function(box, style) {
-            var rect = new VMLPath(
-                [[box.x1, box.y1], [box.x2, box.y1],
-                [box.x2, box.y2], [box.x1, box.y2], [box.x1, box.y1]],
-                style
+            return this.decorate(
+                new VMLPath(
+                    [[box.x1, box.y1], [box.x2, box.y1],
+                    [box.x2, box.y2], [box.x1, box.y2], [box.x1, box.y1]],
+                    style
+                )
             );
-
-            if (style && style.overlay === GLASS) {
-                return VMLGlassEffect(rect, style.rotation, this);
-            }
-
-            return rect;
         },
 
         createLine: function(x1, y1, x2, y2, options) {
@@ -3149,6 +3202,8 @@
     Chart.VMLText = VMLText;
     Chart.VMLPath = VMLPath;
     Chart.VMLGroup = VMLGroup;
+    Chart.VMLOverlayDecorator = VMLOverlayDecorator;
+    Chart.VMLLinearGradient = VMLLinearGradient;
     Chart.deepExtend = deepExtend;
     Chart.Color = Color;
     Chart.blendColors = blendColors;
