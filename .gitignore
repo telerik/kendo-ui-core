@@ -1,7 +1,8 @@
 .livereload
 *.swp
 tags
+*.dll
 *.pdb
-*.min.js
+.DS_Store*.min.js
 live/
 release/
