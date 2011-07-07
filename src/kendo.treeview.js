@@ -303,9 +303,6 @@
                         .toggleClass("t-state-default", enable)
                         .toggleClass("t-state-disabled", !enable)
                     .end()
-                    .find("> div > .t-checkbox > :checkbox")
-                        .attr("disabled", enable ? "" : "disabled")
-                    .end()
                     .find("> div > .t-icon")
                         .toggleClass("t-plus", isCollapsed && enable)
                         .toggleClass("t-plus-disabled", isCollapsed && !enable)
@@ -747,8 +744,6 @@
                 sprite: item.spriteCssClass ? templates.sprite : empty,
                 itemWrapper: templates.itemWrapper,
                 toggleButton: item.items ? templates.toggleButton : empty,
-                checkbox: (treeview.showCheckboxes && item.checkable !== false) ? templates.checkbox : empty,
-                checkboxValues: item.checked === true ? templates.checkboxValues : empty,
                 subGroup: $.proxy(this.renderGroup, this)
             }, this.helpers));
         },
@@ -790,7 +785,6 @@
         itemWrapper: template(
             "<div class='<#= cssClass(group, item) #>'>" +
                 "<#= toggleButton(data) #>" +
-                "<#= checkbox(data) #>" +
                 "<<#= tag(item) #> class='<#= textClass(item) #>'<#= textAttributes(item) #>>" +
                     "<#= image(item) #><#= sprite(item) #><#= text(item) #>" +
                 "</<#= tag(item) #>>" +
@@ -807,23 +801,6 @@
         image: template("<img class='t-image' alt='' src='<#= imageUrl #>' />"),
         value: template("<input type='hidden' class='t-input' name='value' value='<#= value #>' />"),
         toggleButton: template("<span class='<#= toggleButtonClass(item) #>'></span>"),
-        checkbox: template(
-            "<# var arrayName = treeview.id + '_checkedNodes', absoluteIndex = (group.level ? group.level + ':' : '') + item.index; #>" +
-            "<span class='t-checkbox'>" +
-            "<input type='hidden' value='<#= absoluteIndex #>' name='<#= arrayName #>.Index' class='t-input' />" +
-                "<input type='checkbox' value='<#= item.checked ? 'True' : 'False' #>' " +
-                    "name='<#= arrayName #>[<#= absoluteIndex #>].Checked' class='t-input' " +
-                    "<#= item.enabled === false ? 'disabled ' : '' #>" +
-                    "<#= item.checked === true ? 'checked ' : '' #>" +
-                "/>" +
-                "<#= checkboxValues(data) #>" +
-            "</span>"
-        ),
-        checkboxValues: template(
-            "<# var arrayItem = treeview.id + '[' + group.level + ']'; #>" +
-            "<input type='hidden' value='<#= item.value #>' name='<#= arrayItem #>.Value' class='t-input' />" +
-            "<input type='hidden' value='<#= item.text #>' name='<#= arrayItem #>.Text' class='t-input' />"
-        ),
         sprite: template("<span class='t-sprite <#= spriteCssClass #>'></span>"),
         empty: template("")
     };
