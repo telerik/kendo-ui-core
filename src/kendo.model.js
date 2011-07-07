@@ -5,6 +5,7 @@
         getter = kendo.getter,
         setter = kendo.setter,
         accessor = kendo.accessor,
+        CHANGE = "change",
         UPDATED = "UPDATED",
         PRISTINE = "PRISTINE",
         CREATED = "CREATED",
@@ -115,7 +116,7 @@
 
             if (that._modified) {
                 that.state = that.isNew() ? CREATED : UPDATED;
-                that.trigger("change");
+                that.trigger(CHANGE);
             }
         },
 
@@ -178,7 +179,97 @@
         return model;
     }
 
+    var ModelSet = kendo.Class.extend({
+        init: function(options) {
+            this.options = options;
+            this.models = {};
+        },
+
+        model: function(id) {
+            var that = this,
+                model = id && that.models[id];
+
+            if(!model) {
+                model = new that.options.model(that.options.find(id));
+                that.models[model.id()] = model;
+                model.bind(CHANGE, function() {
+                    that.options.update({ model: model });
+                });
+            }
+
+            return model;
+        },
+
+        changes: function(id) {
+            var that = this,
+                model = that.models[id];
+
+            if (model && model.state === UPDATED) {
+                return model.changes();
+            }
+        },
+
+        hasChanges: function(id) {
+            var that = this,
+                model,
+                models = that.models,
+                id;
+
+            if (id === undefined) {
+                for (id in models) {
+                    if (models[id].state !== PRISTINE) {
+                        return true;
+                    }
+                }
+
+                return false;
+            }
+
+            model = models[id];
+
+            return !!model && model.state === UPDATED;
+        },
+
+        find: function(state, selector) {
+            var models = this.models,
+                result = [],
+                model,
+                selector = selector || function(o) { return o; },
+                id;
+
+            for (id in models) {
+                model = models[id];
+
+                if(model.state === state) {
+                    result.push(selector(model));
+                }
+            }
+
+            return result;
+        },
+
+        sync: function(data) {
+            var updated = this.find(UPDATED),
+                model = this.options.model,
+                models = this.models, id;
+
+            $.each(updated, function() {
+                var id = this.id();
+                $.each(data, function() {
+                    if (id === model.id(this)) {
+                        delete models[id];
+                    }
+                });
+            });
+        },
+
+        clear: function(data) {
+            this.models = {};
+        }
+    });
+
     kendo.data.Model = Model;
+    kendo.data.ModelSet = ModelSet;
     Model.UPDATED = UPDATED;
     Model.PRISTINE = PRISTINE;
     Model.CREATED = CREATED;
