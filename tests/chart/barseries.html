@@ -32,6 +32,7 @@
             function setupBarChart(plotArea, options) {
                 view = new ViewStub();
 
+                options.gap = 1.5;
                 series = new Chart.BarChart(plotArea, options);
                 series.reflow();
             }
@@ -1045,7 +1046,7 @@
                 });
 
                 test("leaves 75% gap on both sides", function() {
-                    createCluster(/* Default gap size */);
+                    createCluster({ gap: 1.5 });
 
                     equal(bars[0].box.x1, 75);
                     equal(bars[1].box.x2, 275);
