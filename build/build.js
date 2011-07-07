@@ -7,16 +7,19 @@ var cssmin = require("./lib/cssmin").cssmin;
 var examples = require("./build-examples");
 var spawn = require('child_process').spawn;
 
+var date = new Date();
 var STAT = fs.statSync("./");
-var VERSION = "1.0.0"; //build version upon date
-var RELEASE = "release/beta";
-var PATH = "kendo-" + VERSION;
+var VERSION = generateVersion();
+var QUATTER = "2011 Q1";
+var RELEASE = "release/" + QUATTER + "/BETA";
+var PATH = "kendo_" + VERSION;
 var JS = PATH + "/js";
 var STYLES = PATH + "/styles";
 var SOURCE = PATH + "/source";
 var SOURCEJS = SOURCE + "/js";
 var SOURCESTYLES = SOURCE + "/styles";
-var ONLINEEXAMPLES = "Kendo-OnlineExamples-" + VERSION;
+var ONLINEEXAMPLES = "Kendo_OnlineExamples_" + VERSION;
+var count = 0;
 
 var cssRegExp = /\.css$/;
 
@@ -52,6 +55,14 @@ var scripts = [
     "kendo.window.js"
 ];
 
+function generateVersion() {
+    var day = date.getDate();
+    if (day < 10) {
+        day = "0" + day;
+    }
+    return date.getFullYear() + "_1_" + date.getMonth() + "" + day;
+}
+
 function mkdir(newDir) {
     try {
         fs.statSync(newDir)
@@ -63,22 +74,25 @@ function mkdir(newDir) {
 function zip(name, path) {
     var archive = spawn("./build/lib/zip", ["-r", name, path]);
 
-    //zip.stdout.on('data', function (data) {
-    //  sys.print('stdout: ' + data);
-    //});
-
     archive.stderr.on('data', function (data) {
         sys.print('stderr: ' + data);
     });
 
     archive.on('exit', function (code) {
-        console.log('child process exited with code ' + code);
-        //delete zipped folders here!!!
+        console.log("deleting temp folder: " + path);
+        wrench.rmdirSyncRecursive(path);
+
+        if (count === 1) {
+            console.log("Time elapsed: " + ((new Date() - date) / 1000) + " seconds");
+        }
+
+        count++;
     });
 }
 
 function createDirectories() {
     mkdir("release");
+    mkdir("release/" + QUATTER);
     mkdir(RELEASE);
     mkdir(PATH);
     mkdir(SOURCE);
@@ -130,15 +144,26 @@ function processStyles() {
     });
 }
 
-//start build
+console.log("start building...");
 createDirectories();
+
+//processing
+console.log("process scripts...");
 processScripts();
+
+console.log("process styles...");
 processStyles();
 
 //examples
+console.log("build examples...");
 examples.build(SOURCE, PATH + "/examples", false);
+
+console.log("build online examples...");
 examples.build(PATH, ONLINEEXAMPLES, true);
 
 //archives
+console.log("archieve kendo.version.zip...");
 zip(RELEASE + "/kendo." + VERSION + ".zip", PATH);
+
+console.log("archieve online examples...");
 zip(RELEASE + "/onlineExamples." + VERSION + ".zip", ONLINEEXAMPLES);
