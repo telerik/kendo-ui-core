@@ -17,6 +17,20 @@
                 view = new ViewElementStub(),
                 contentElementStub = {
                     render: function() { return "Content"; }
+                },
+                gradient = {
+                    id: "gradient",
+                    type: "linear",
+                    rotation: 0,
+                    stops: [{
+                        offset: 0,
+                        color: "#f00",
+                        opacity: 1
+                    }, {
+                        offset: 1,
+                        color: "#00f",
+                        opacity: 1
+                    }]
                 };
 
             (function() {
@@ -81,6 +95,25 @@
                     var line = view.createLine(10, 20, 100, 200);
                     deepEqual(line.points, [ [10, 20], [100, 200] ]);
                 });
+
+                // ------------------------------------------------------------
+                module("VML View / Decorators", {
+                    setup: function() {
+                        view = new Chart.VMLView();
+                    }
+                });
+
+                test("Applies registered decorators", 1, function() {
+                    view.decorators.push({
+                        decorate: function(element) {
+                            ok(true);
+                            return element;
+                        }
+                    });
+
+                    view.createRect(new Box2D());
+                });
+
             })();
 
             (function() {
@@ -228,6 +261,92 @@
                 });
 
             })();
+
+            (function() {
+                var view,
+                    decorator;
+
+                // ------------------------------------------------------------
+                module("VMLGradientDecorator", {
+                    setup: function() {
+                        view = new Chart.VMLView();
+                    }
+                });
+
+                test("applies gradient fill", function() {
+                    var path = view.createRect(new Box2D(), { fill: gradient });
+                    ok(path.children[0] instanceof Chart.VMLLinearGradient);
+                });
+
+                test("cleans original fill when appliying gradient", function() {
+                    var path = view.createRect(new Box2D(), { fill: gradient });
+                    equals(path.options.fill, "");
+                });
+
+                test("preserves solid fill", function() {
+                    var path = view.createRect(new Box2D(), { fill: "#f00" });
+                    equals(path.options.fill, "#f00");
+                });
+
+            })();
+
+            (function() {
+                var view,
+                    decorator;
+
+                // ------------------------------------------------------------
+                module("VMLOverlayDecorator", {
+                    setup: function() {
+                        view = new Chart.VMLView();
+                    }
+                });
+
+                test("applies gradient fill", function() {
+                    var path = view.createRect(new Box2D(), { fill: gradient });
+                    ok(path.children[0] instanceof Chart.VMLLinearGradient);
+                });
+
+                test("cleans original fill when appliying gradient", function() {
+                    var path = view.createRect(new Box2D(), { fill: gradient });
+                    equals(path.options.fill, "");
+                });
+
+                test("preserves solid fill", function() {
+                    var path = view.createRect(new Box2D(), { fill: "#f00" });
+                    equals(path.options.fill, "#f00");
+                });
+
+            })();
+
+            (function() {
+                var view,
+                    rect,
+                    glassyRect,
+                    decorator;
+
+                module("VMLOverlayDecorator", {
+                    setup: function() {
+                        view = new Chart.VMLView();
+                        rect = new Chart.VMLPath([[10, 20]], {
+                            fill: "#fff",
+                            overlay: "glass",
+                            normalAngle: 90
+                        });
+                        decorator = new Chart.VMLOverlayDecorator(view);
+                        glassyRect = decorator.decorate(rect);
+                    }
+                });
+
+                test("applies rotation transform to fill gradient", function() {
+                    equals(glassyRect.options.fill.rotation, 270 - 90);
+                });
+
+                test("does not decorate element if no overlay specified", function() {
+                    var rect = view.createRect(new Box2D());
+                    equals(rect.options.fill, "#fff");
+                });
+            })();
+
        </script>
 
         <h1 id="qunit-header">kendo.chart</h1>

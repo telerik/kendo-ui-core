@@ -48,6 +48,12 @@
                     seriesDefaults: {
                         labels: {
                             visible: false
+                        },
+
+                        column: {
+                            border: {
+                                width: 1
+                            }
                         }
                     },
                     series: [
@@ -60,16 +66,38 @@
                         }, {
                             name: "Value C",
                             field: "c"
-                        }, {
-                            name: "Value D",
-                            field: "d"
-                        }, {
-                            name: "Value E",
-                            field: "e"
                         }
                     ],
                     categoryAxis: {
                         field: "name"
+                    },
+                    valueAxis: {
+                        min: -100,
+                        max: 100
+                    },
+                    plotArea: {
+                        background: {
+                            id: "redGradient",
+                            type: "linear",
+                            rotation: 60,
+                            stops: [{
+                                offset: 0,
+                                color: "#fff",
+                                opacity: 0
+                            }, {
+                                offset: 0.1,
+                                color: "#cf0",
+                                opacity: 0
+                            }, {
+                                offset: 0.25,
+                                color: "#cf0",
+                                opacity: 0.6
+                            }, {
+                                offset: 1,
+                                color: "#fff",
+                                opacity: 0
+                            }]
+                        }
                     }
                 });
             });
@@ -221,6 +249,9 @@
 
                 var start = new Date();
                 function step() {
+                    chart.options.plotArea.background.rotation =
+                        (chart.options.plotArea.background.rotation + 9) % 360;
+
                     for (var i = 0, length = data.length; i < length; i++) {
                         var point = data[i];
                         point.a = (point.a + direction * STEP) % MAX_DATA;
