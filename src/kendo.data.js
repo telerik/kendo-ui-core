@@ -396,7 +396,6 @@
                     }
                 });
             }
-
             that.bind([ERROR, CHANGE, CREATE, DESTROY, UPDATE, REQUESTSTART], options);
         },
 

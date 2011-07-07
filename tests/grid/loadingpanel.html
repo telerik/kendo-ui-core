@@ -19,50 +19,47 @@
         <ol id="qunit-tests"></ol>
         <script>
             var DataSource = kendo.data.DataSource,
-                LoadingMask = kendo.ui.LoadingMask,
+                Grid = kendo.ui.Grid,
                 dataSource,
                 container;
 
             function setup(options) {
                 dataSource = DataSource.create( { data: [ { foo: 2, bar: 2 }, { foo: 1, bar: 1 } ] } );
-                options = $.extend({}, { dataSource: dataSource } , options);
-                return  new LoadingMask(container, options);
+                options = $.extend({}, { dataSource: dataSource }, options);
+                return new Grid(container, options);
             }
 
             module("kendo.ui.LoadingMask", {
                 setup: function() {
-                    container = $('<div></div>');
+                    container = $('<table></table>');
                 },
                 teardown: function() {
                 }
             });
 
             test("progress true shows the mask", function() {
-                var mask = setup();
-                mask.progress(true);
+                kendo.ui.progress(container, true);
                 equal(container.find(".t-loading-mask").length, 1);
             });
 
             test("progress multiple calls shows only one", function() {
-                var mask = setup();
+                kendo.ui.progress(container, true);
+                kendo.ui.progress(container, true);
 
-                mask.progress(true);
-                mask.progress(true);
                 equal(container.find("div.t-loading-mask").length, 1);
             });
 
             test("progress false hides the mask", function() {
-                var mask = setup();
-
-                mask.progress(true);
-                mask.progress(false);
+                kendo.ui.progress(container, true);
+                kendo.ui.progress(container, false);
                 equal(container.find("div.t-loading-mask").length, 0);
             });
 
-            test("mask is show when request is made", function() {
+            test("mask is shown when request starts", function() {
                 setup();
+
                 dataSource.bind("requestStart", function() {
-                    equal(container.find("div.t-loading-mask").length, 1);
+                    equal(container.parent().find("div.t-loading-mask").length, 1);
                 });
                 dataSource.read();
             });
@@ -70,15 +67,16 @@
             test("mask is hidden when request finish", function() {
                 setup();
                 dataSource.read();
-                equal(container.find("div.t-loading-mask").length, 0);
+                equal(container.parent().find("div.t-loading-mask").length, 0);
             });
 
-            test("loading text is displayed", function() {
-                var mask = setup({ text: "foo" });
-                mask.progress(true);
-                equal(container.find("div.t-loading-mask > span").text(), "foo");
+            test("mask is shown without scrolling when request starts", function() {
+                setup( { scrolling: false });
+                dataSource.bind("requestStart", function() {
+                    equal(container.parent().find(" > div.t-loading-mask").length, 1);
+                });
+                dataSource.read();
             });
-
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
