@@ -10,6 +10,7 @@
         Observable = kendo.Observable,
         Class = kendo.Class,
         Model = kendo.data.Model,
+        ModelSet = kendo.data.ModelSet,
         Query = kendo.data.Query,
         CREATE = "create",
         READ = "read",
@@ -249,97 +250,6 @@
         }
     });
 
-    var ModelSet = Class.extend({
-        init: function(options) {
-            this.options = options;
-            this.models = {};
-        },
-
-        model: function(id) {
-            var that = this,
-                model = id && that.models[id];
-
-            if(!model) {
-                model = new that.options.model(that.options.find(id));
-                that.models[model.id()] = model;
-                model.bind(CHANGE, function() {
-                    that.options.update({ model: model });
-                });
-            }
-
-            return model;
-        },
-
-        changes: function(id) {
-            var that = this,
-                model = that.models[id];
-
-            if (model && model.state === Model.UPDATED) {
-                return model.changes();
-            }
-        },
-
-        hasChanges: function(id) {
-            var that = this,
-                model,
-                models = that.models,
-                id;
-
-            if (id === undefined) {
-                for (id in models) {
-                    if (models[id].state !== Model.PRISTINE) {
-                        return true;
-                    }
-                }
-
-                return false;
-            }
-
-            model = models[id];
-
-            return !!model && model.state === Model.UPDATED;
-        },
-
-        find: function(state, selector) {
-            var models = this.models,
-                result = [],
-                model,
-                selector = selector || identity,
-                id;
-
-            for (id in models) {
-                model = models[id];
-
-                if(model.state === state) {
-                    result.push(selector(model));
-                }
-            }
-
-            return result;
-        },
-
-        syncUpdated: function(data) {
-            var updated = this.find(Model.UPDATED), model = this.options.model, models = this.models;
-
-            $.each(updated, function() {
-                var id = this.id();
-                $.each(data, function() {
-                    if (id === model.id(this)) {
-                        delete models[id];
-                    }
-                });
-            });
-        },
-
-        sync: function(data) {
-            var id = this.options.model.id, models = this.models;
-
-            $.each(data, function(index, value) {
-                delete models[id(value)];
-            });
-        }
-    });
-
     var DataSource = Observable.extend({
         init: function(options) {
             var that = this, id, model, transport;
@@ -481,14 +391,14 @@
 
             destroyed = that._destroyedModels();
 
-            if(batch === false) {
+            if (batch === false) {
                 mode = "multiple";
             }
             else if ((batch.mode || "multiple") === "multiple") {
                 mode = "single";
             }
 
-            if(mode) {
+            if (mode) {
                 that._send(created, proxy(transport.create, transport), mode);
                 that._send(updated, proxy(transport.update, transport), mode);
                 that._send(destroyed, proxy(transport.destroy, transport), mode);
@@ -515,11 +425,11 @@
                 map = that._map,
                 reader= that.reader;
 
-            if(!reader.status(data)) {
+            if (!reader.status(data)) {
                 return that.error({data: origData});
             }
 
-            that.modelSet.sync(origData);
+            that.modelSet.clear();
 
             data = reader.data(data);
 
@@ -680,7 +590,7 @@
             that._data = data;
 
             if (that.modelSet) {
-                that.modelSet.syncUpdated(data);
+                that.modelSet.sync(data);
             }
 
             if (that.options.serverPaging !== true) {
