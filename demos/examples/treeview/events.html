@@ -75,7 +75,10 @@
                     },
 
                     drop: function (e) {
-                        kendoConsole.log("Dropped " + treeview.text(e.sourceNode));
+                        kendoConsole.log(
+                            "Dropped " + treeview.text(e.sourceNode) +
+                            " (" + (e.valid ? "valid" : "invalid") + ")"
+                        );
                     },
 
                     dragend: function (e) {

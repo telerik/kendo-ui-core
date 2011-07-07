@@ -589,7 +589,7 @@
                 dropPosition = "over",
                 sourceNode = that.sourceNode,
                 destinationNode,
-                isValid, isDropPrevented;
+                valid, dropPrevented;
 
             if (e.keyCode == kendo.keys.ESC){
                 that.dropHint.remove();
@@ -602,30 +602,22 @@
                     destinationNode = that.dropTarget.closest(NODE);
                 }
 
-                isValid = that._hintStatus() != "t-denied";
+                valid = that._hintStatus() != "t-denied";
 
-                isDropPrevented = treeview.trigger(DROP, {
+                dropPrevented = treeview.trigger(DROP, {
                     sourceNode: sourceNode[0],
                     destinationNode: destinationNode[0],
-                    isValid: isValid,
+                    valid: valid,
+                    setValid: function(newValid) { valid = newValid; },
                     dropTarget: e.target,
                     dropPosition: dropPosition
                 });
 
                 that.dropHint.remove();
 
-                if (!isValid) {
-                    return false;
-                }
-
-                if (isDropPrevented) {
-                    that._draggable.dropped = true;
-                    return !isDropPrevented;
-                }
-
-                // dragging item within itself
-                if ($.contains(sourceNode[0], e.target)) {
-                    return false;
+                if (!valid || dropPrevented) {
+                    that._draggable.dropped = valid;
+                    return;
                 }
 
                 that._draggable.dropped = true;
@@ -645,8 +637,6 @@
                     destinationNode: destinationNode[0],
                     dropPosition: dropPosition
                 });
-
-                return false;
             }
         }
     };
