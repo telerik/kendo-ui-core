@@ -1912,7 +1912,7 @@
             plotArea: {
                 margin: {}
             },
-            background: WHITE,
+            background: "",
             border: {
                 color: BLACK,
                 width: 0
@@ -2363,7 +2363,7 @@
         },
 
         options: {
-            fill: WHITE
+            fill: ""
         },
 
         clone: function() {
