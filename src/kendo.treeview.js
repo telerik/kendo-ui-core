@@ -193,8 +193,7 @@
         },
 
         _updateNodeHtml: function(node) {
-            var helpers = this.rendering.helpers,
-                wrapper = node.find(">div"),
+            var wrapper = node.find(">div"),
                 subGroup = node.find(">ul"),
                 toggleButton = wrapper.find(">.t-icon"),
                 innerWrapper = wrapper.find(">.t-in");
@@ -228,15 +227,13 @@
         _updateNodeClasses: function(node, groupData, nodeData) {
             var helpers = this.rendering.helpers,
                 wrapper = node.find(">div"),
-                subGroup = node.find(">ul"),
-                toggleButton = wrapper.find(">.t-icon"),
-                innerWrapper = wrapper.find(">.t-in");
+                subGroup = node.find(">ul")
 
             if (!nodeData) {
                 nodeData = {
                     expanded: !(subGroup.css("display") == "none"),
                     index: node.index(),
-                    enabled: !innerWrapper.hasClass("t-state-disabled")
+                    enabled: !wrapper.find(">.t-in").hasClass("t-state-disabled")
                 };
             }
 
@@ -257,7 +254,7 @@
 
             // toggle button
             if (subGroup.length) {
-                toggleButton.removeClass("t-plus t-minus t-plus-disabled t-minus-disabled")
+                wrapper.find(">.t-icon").removeClass("t-plus t-minus t-plus-disabled t-minus-disabled")
                     .addClass(helpers.toggleButtonClass(nodeData));
 
                 subGroup.addClass("t-group");
@@ -495,6 +492,10 @@
     }
 
     TreeViewDragAndDrop.prototype = {
+        _updateHintStatus: function(newStatus) {
+            this._draggable.hint.find(".t-drag-status")[0].className = "t-icon t-drag-status " + newStatus;
+        },
+
         dragstart: function (e) {
             var that = this,
                 treeview = that.treeview;
@@ -575,7 +576,7 @@
                 that.dropHint.css(VISIBILITY, "hidden");
             }
 
-            that._draggable.hint.find(".t-drag-status")[0].className = "t-icon t-drag-status " + status;
+            that._updateHintStatus(status);
         },
 
         dragend: function (e) {
