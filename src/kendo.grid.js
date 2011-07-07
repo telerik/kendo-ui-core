@@ -11,6 +11,7 @@
         map = $.map,
         isArray = $.isArray,
         proxy = $.proxy,
+        REQUESTSTART = "requestStart",
         CELL_SELECTOR =  ">tbody>tr>td",
         FIRST_CELL_SELECTOR = "td:first",
         CHANGE = "change",
@@ -25,7 +26,7 @@
 
             Component.fn.init.call(that, element, options);
             that.dataSource = options.dataSource;
-            that.dataSource.bind("change", proxy(that.refresh, that));
+            that.dataSource.bind(CHANGE, proxy(that.refresh, that));
             that.wrap();
         },
 
@@ -153,6 +154,44 @@
 
             that.verticalScrollbar.html(html);
             that.wrapper[0].scrollTop = that._scrollTop;
+        }
+    });
+
+    var LoadingMask = Component.extend({
+        init: function(element, options) {
+            var that = this;
+
+            Component.fn.init.call(that, element, options);
+
+            that.dataSource = dataSource;
+            dataSource.bind(CHANGE, proxy(that.refresh, that));
+            dataSource.bind(REQUESTSTART, proxy(that._start, that));
+
+
+        },
+        options: {
+            text: "Loading..."
+        },
+        refresh: function() {
+            this.progress(false);
+        },
+        _start: function() {
+            this.progress(true);
+        },
+        progress: function(toggle) {
+            var that = this,
+                mask;
+
+            if (toggle) {
+                if (!that._mask) {
+                    mask = $("<div class='t-loading-mask t-overlay' style='position:absolute;text-align:center;color:#fff'><span>" + that.options.text + "</span></div>");
+                    mask.width(that.element.outerWidth()).height(that.element.outerHeight());
+                    that._mask = mask.prependTo(that.element);
+                }
+            } else if (that._mask) {
+                that._mask.remove();
+                that._mask = null;
+            }
         }
     });
 
@@ -763,4 +802,5 @@
 
    ui.plugin("Grid", Grid);
    ui.plugin("VirtualScrollable", VirtualScrollable);
+   ui.plugin("LoadingMask", LoadingMask);
 })(jQuery);
