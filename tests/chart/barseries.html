@@ -1015,7 +1015,8 @@
                 var cluster,
                     bars,
                     clusterBox = new Box2D(0, 0, 350, 350),
-                    barBox = new Box2D(1, 1, 1, 1);
+                    barBox = new Box2D(1, 1, 1, 1),
+                    TOLERANCE = 0.1;
 
                 function createCluster(options) {
                     cluster = new Chart.ClusterLayout(options);
@@ -1050,6 +1051,13 @@
                     equal(bars[1].box.x2, 275);
                 });
 
+                test("positions children next to each other with spacing", function() {
+                    createCluster({ gap: 0, spacing: 1 });
+                    $.each(bars, function(index) {
+                        equal(this.box.x1, (this.box.width() * 2) * index, TOLERANCE)
+                    });
+                });
+
                 // ------------------------------------------------------------
                 module("Cluster Layout / Vertical", {
                     setup: function() {
@@ -1066,6 +1074,13 @@
                 test("positions children below each other", function() {
                     $.each(bars, function(index) {
                         equal(this.box.y1, this.box.height() * index)
+                    });
+                });
+
+                test("positions children next to each other with spacing", function() {
+                    createCluster({ isVertical: true, gap: 0, spacing: 1 });
+                    $.each(bars, function(index) {
+                        equal(this.box.y1, (this.box.height() * 2) * index, TOLERANCE)
                     });
                 });
             })();
