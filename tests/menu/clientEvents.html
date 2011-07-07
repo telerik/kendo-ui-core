@@ -25,6 +25,10 @@
                  return $("#Menu2").data("kendoMenu");
              }
 
+             function onSelect() {
+                 isRaised = true;
+             }
+
         </script>
     </head>
     <body>
@@ -76,7 +80,7 @@
                 <li class="t-item t-state-default"><span class="t-link"><img
                         src="../../playground/Icons/Sl/Docking.gif" class="t-image" alt="image">Docking</span>
                 </li>
-                <li class="t-item t-state-default"><span class="t-link"><img
+                <li class="t-item t-state-disabled"><span class="t-link"><img
                         src="../../playground/Icons/Sl/Chart.gif" class="t-image" alt="image">Chart</span></li>
                 <li class="t-item t-state-default"><a href="http://www.telerik.com/products/silverlight.aspx"
                                                       class="t-link">... and 28 more!</a></li>
@@ -137,7 +141,7 @@
 			return $('> .t-item', menu.element).eq(index);
         }
 
-        $("#Menu2").kendoMenu({ animation: false });
+        $("#Menu2").kendoMenu({ animation: false, select: onSelect });
 
         var menu;
 
@@ -158,6 +162,16 @@
             item.trigger("click");
 
             equals(triggerCount, 1);
+        });
+
+        test('clicking disabled item should not raise onSelect event on parent item', function() {
+            var item = getRootItem(1);
+
+            isRaised = false;
+
+            item.find('.t-item > .t-link').eq(3).trigger('click');
+
+            ok(!isRaised);
         });
 
         test("open event can be canceled", function() {

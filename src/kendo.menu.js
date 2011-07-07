@@ -16,6 +16,7 @@
         KENDOPOPUP = "kendoPopup",
         DEFAULTSTATE = "t-state-default",
         DISABLEDSTATE = "t-state-disabled",
+        disabledSelector = '.t-item.t-state-disabled',
         itemSelector = ".t-item:not(.t-state-disabled)",
         linkSelector = ".t-item:not(.t-state-disabled) > .t-link";
 
@@ -50,6 +51,8 @@
             }
 
             that.nextItemZIndex = 100;
+
+            element.delegate(disabledSelector, CLICK, false);
 
             element.delegate(itemSelector, MOUSEENTER, proxy(that._mouseenter, that))
                    .delegate(itemSelector, MOUSELEAVE, proxy(that._mouseleave, that))
