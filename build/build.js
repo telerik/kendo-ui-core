@@ -1,8 +1,3 @@
-//var http = require('http');
-
-//var x = 0;
-//http.createServer(function (req, res) {
-
 var fs = require("fs");
 var sys = require("sys");
 var wrench = require("./wrench");
@@ -21,6 +16,7 @@ var STYLES = PATH + "/styles";
 var SOURCE = PATH + "/source";
 var SOURCEJS = SOURCE + "/js";
 var SOURCESTYLES = SOURCE + "/styles";
+var ONLINEEXAMPLES = "Kendo-OnlineExamples-" + VERSION;
 
 var cssRegExp = /\.css$/;
 
@@ -62,6 +58,31 @@ function mkdir(newDir) {
     } catch(e) {
         fs.mkdirSync(newDir, STAT.mode);
     }
+}
+
+function zip(name, path) {
+    var archive = spawn("./build/lib/zip", ["-r", name, path]);
+
+    //zip.stdout.on('data', function (data) {
+    //  sys.print('stdout: ' + data);
+    //});
+
+    archive.stderr.on('data', function (data) {
+        sys.print('stderr: ' + data);
+    });
+
+    archive.on('exit', function (code) {
+        console.log('child process exited with code ' + code);
+        //delete zipped folders here!!!
+    });
+}
+
+function createDirectories() {
+    mkdir("release");
+    mkdir(RELEASE);
+    mkdir(PATH);
+    mkdir(SOURCE);
+    mkdir(ONLINEEXAMPLES)
 }
 
 function processScripts() {
@@ -109,66 +130,15 @@ function processStyles() {
     });
 }
 
-var time = new Date();
-
-//start build process
-mkdir("release"); //should make mkdir to create folders recursively !!!
-mkdir(RELEASE);
-mkdir(PATH);
-mkdir(SOURCE);
-
-//scripts
-console.log("\r\nstart processing scritps...");
+//start build
+createDirectories();
 processScripts();
-
-//styles
 processStyles();
 
 //examples
-examples.build(PATH + "/examples");
+examples.build(SOURCE, PATH + "/examples", false);
+examples.build(PATH, ONLINEEXAMPLES, true);
 
-//archive everything
-var zip = spawn("./build/lib/zip", ["-r", RELEASE + "/kendo." + VERSION + ".zip", PATH]);
-
-//zip.stdout.on('data', function (data) {
-//  sys.print('stdout: ' + data);
-//});
-
-zip.stderr.on('data', function (data) {
-  sys.print('stderr: ' + data);
-});
-
-zip.on('exit', function (code) {
-    console.log('child process exited with code ' + code);
-    console.log("delete folder: " + PATH);
-    wrench.rmdirRecursive(PATH, function(error) {
-        if (error) {
-            console.log("could not delete directory : " + PATH);
-        }
-    });
-});
-
-var onlineExamples = "onlineExamples-" + VERSION;
-mkdir(onlineExamples)
-
-examples.onlineExamples(PATH, onlineExamples);
-
-zip2 = spawn("./build/lib/zip", ["-r", RELEASE + "/onlineExamples." + VERSION + ".zip", onlineExamples]);
-
-zip2.stderr.on('data', function (data) {
-  sys.print('stderr: ' + data);
-});
-
-zip2.on('exit', function (code) {
-    console.log("delete folder: " + onlineExamples);
-    wrench.rmdirRecursive(onlineExamples, function(error) {
-        if (error) {
-            console.log("could not delete directory : " + onlineExamples);
-        }
-    });
-});
-
-//  res.writeHead(200, {'Content-Type': 'text/plain'});
-//  res.end('Hello World ' + x);
-//}).listen(8124);
-//console.log('Server running at http://127.0.0.1:8124/');
+//archives
+zip(RELEASE + "/kendo." + VERSION + ".zip", PATH);
+zip(RELEASE + "/onlineExamples." + VERSION + ".zip", ONLINEEXAMPLES);
