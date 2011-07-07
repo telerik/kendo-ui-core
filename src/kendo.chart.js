@@ -13,6 +13,7 @@
     // Constants ==============================================================
     var BASELINE_MARKER_SIZE = 1,
         BAR = "bar",
+        BAR_BORDER_BRIGHTNESS = 0.7,
         BLACK = "#000",
         BOTTOM = "bottom",
         CENTER = "center",
@@ -1653,8 +1654,7 @@
         options: {
             color: WHITE,
             border: {
-                color: BLACK,
-                width: 0
+                width: 1
             },
             isVertical: true,
             overlay: GLASS
@@ -1676,7 +1676,7 @@
                 options = bar.options,
                 isVertical = options.isVertical,
                 border = options.border.width > 0 ? {
-                    stroke: options.border.color,
+                    stroke: bar.getBorderColor(),
                     strokeWidth: options.border.width
                 } : {},
                 box = bar.box,
@@ -1694,6 +1694,20 @@
                 ChartElement.fn.getViewElements.call(bar, view)
             );
             return elements;
+        },
+
+        getBorderColor: function() {
+            var bar = this,
+                options = bar.options,
+                color = options.color,
+                borderColor = options.border.color;
+
+            if (typeof borderColor === UNDEFINED) {
+                borderColor =
+                    new Color(color).brightness(BAR_BORDER_BRIGHTNESS).toHex();
+            }
+
+            return borderColor;
         }
     });
 
@@ -3022,6 +3036,17 @@
 
         padDigit: function(value) {
             return (value.length === 1) ? "0" + value : value;
+        },
+
+        brightness: function(value) {
+            var color = this,
+                round = Math.round;
+
+            color.r = round(color.normalizeByte(color.r * value));
+            color.g = round(color.normalizeByte(color.g * value));
+            color.b = round(color.normalizeByte(color.b * value));
+
+            return color;
         }
     };
 

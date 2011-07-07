@@ -309,6 +309,16 @@
                 equals(c.toHex(), "#00ffff");
             });
 
+            test("brightness lightens colors", function() {
+                var c = new Color(100, 100, 240).brightness(1.2);
+                equals(c.toHex(), "#7878ff");
+            });
+
+            test("brightness darkens colors", function() {
+                var c = new Color(100, 100, 0).brightness(0.2);
+                equals(c.toHex(), "#141400");
+            });
+
             // ------------------------------------------------------------
             module("blendColors");
 
