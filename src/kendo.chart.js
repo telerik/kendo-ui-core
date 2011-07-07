@@ -1566,7 +1566,8 @@
 
         options: {
             isVertical: false,
-            gap: 1.5
+            gap: 1.5,
+            spacing: 0
         },
 
         reflow: function(box) {
@@ -1576,17 +1577,22 @@
                 axis = isVertical ? Y : X,
                 children = cluster.children,
                 gap = options.gap,
-                slots = children.length + gap,
+                spacing = options.spacing,
+                count = children.length,
+                slots = count + gap + (spacing * (count - 1)),
                 slotSize = (isVertical ? box.height() : box.width()) / slots,
                 position = box[axis + 1] + slotSize * (gap / 2);
 
-            for (var i = 0; i < children.length; i++) {
+            for (var i = 0; i < count; i++) {
                 var childBox = (children[i].box || box).clone();
 
                 childBox[axis + 1] = position;
                 childBox[axis + 2] = position + slotSize;
 
                 children[i].reflow(childBox);
+                if (i < count - 1) {
+                    position += (slotSize * spacing);
+                }
 
                 position += slotSize;
             }
@@ -1707,8 +1713,7 @@
         options: {
             series: [],
             isVertical: true,
-            isStacked: false,
-            gap: 1.5
+            isStacked: false
         },
 
         render: function() {
@@ -1767,7 +1772,8 @@
             if (!cluster) {
                 cluster = children[categoryIx] = new ClusterLayout({
                     isVertical: !options.isVertical,
-                    gap: options.gap
+                    gap: options.gap,
+                    spacing: options.spacing
                 });
             }
 
@@ -1908,7 +1914,6 @@
                 barSeries,
                 barChart,
                 categoriesToAdd,
-                gap,
                 seriesType;
 
             barSeries = $.grep(options.series, function(currentSeries) {
@@ -1916,14 +1921,15 @@
             });
 
             if (barSeries.length > 0) {
-                seriesType = barSeries[0].type;
-                gap = barSeries[0].gap;
+                var firstSeries = barSeries[0];
+                seriesType = firstSeries.type;
 
                 barChart = new BarChart(this, {
                         series: barSeries,
                         isVertical: seriesType === COLUMN,
-                        isStacked: barSeries[0].stack,
-                        gap: gap
+                        isStacked: firstSeries.stack,
+                        gap: firstSeries.gap,
+                        spacing: firstSeries.spacing
                     });
 
                 categoriesToAdd = Math.max(0, barChart.categoriesCount() - categories.length);
