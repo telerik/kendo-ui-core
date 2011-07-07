@@ -95,7 +95,7 @@
                 var html = TreeView.renderGroup({
                     items: [],
                     group: {
-                        isExpanded: true
+                        expanded: true
                     }
                 });
 
@@ -106,8 +106,8 @@
                 var html = TreeView.renderGroup({ 
                     items: [],
                     group: {
-                        isFirstLevel: true,
-                        isExpanded: true
+                        firstLevel: true,
+                        expanded: true
                     }
                 });
 
@@ -118,7 +118,7 @@
                 var html = TreeView.renderGroup({
                     items: [],
                     group: {
-                        isExpanded: false
+                        expanded: false
                     }
                 });
 
@@ -131,8 +131,8 @@
                         { text: "foo" }
                     ],
                     group: {
-                        isFirstLevel: true,
-                        isExpanded: true
+                        firstLevel: true,
+                        expanded: true
                     }
                 });
 
@@ -155,7 +155,7 @@
                         index: 0
                     },
                     group: {
-                        isFirstLevel: true
+                        firstLevel: true
                     }
                 }));
 
@@ -169,7 +169,7 @@
                     },
                     group: {
                         length: 1,
-                        isFirstLevel: true
+                        firstLevel: true
                     }
                 }));
 
@@ -234,7 +234,7 @@
                         index: 0
                     },
                     group: {
-                        isFirstLevel: true,
+                        firstLevel: true,
                         length: 1
                     }
                 }));
