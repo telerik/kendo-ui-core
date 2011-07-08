@@ -2075,10 +2075,6 @@
             BarChart.fn.init.call(chart, plotArea, options);
         },
 
-        options: {
-            width: 2
-        },
-
         addValue: function(value, categoryIx, series, seriesIx) {
             var chart = this,
                 options = chart.options,
@@ -2168,7 +2164,7 @@
                 lines.push(
                     view.createPath(linePoints, {
                         stroke: currentSeries.color,
-                        strokeWidth: options.width,
+                        strokeWidth: currentSeries.width,
                         fill: ""
                     })
                 );

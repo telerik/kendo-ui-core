@@ -316,6 +316,35 @@
 
                     same(pointHeights, [1, 1, 2, 2]);
                 });
+
+                // ------------------------------------------------------------
+                module("Line Chart / Rendering", {
+                    setup: function() {
+                        plotArea = new PlotAreaStub();
+                        setupLineChart(plotArea, {
+                            series: [
+                                $.extend({
+                                        width: 4,
+                                        color: "#cf0"
+                                    },
+                                    positiveSeries
+                                )
+                            ]
+                        });
+
+                        lineChart.reflow(chartBox);
+                        lineChart.getViewElements(view);
+                    }
+                });
+
+                test("sets line width", function() {
+                    equals(view.log.path[0].style.strokeWidth, 4);
+                });
+
+                test("sets line color", function() {
+                    equals(view.log.path[0].style.stroke, "#cf0");
+                });
+
             })();
 
             (function() {
@@ -443,9 +472,6 @@
 
                     marker = point.children[0];
                     label = point.children[1];
-
-                    view = new ViewStub();
-                    point.getViewElements(view);
                 }
 
                 // ------------------------------------------------------------

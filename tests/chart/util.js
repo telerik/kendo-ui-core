@@ -6,6 +6,7 @@ function ViewStub() {
     log.text = [];
     log.group = [];
     log.line = [];
+    log.path = [];
 }
 
 ViewStub.prototype = {
@@ -37,6 +38,11 @@ ViewStub.prototype = {
 
     createLine: function(x1, y1, x2, y2) {
         this.log.line.push({ x1: x1, y1: y1, x2: x2, y2: y2 });
+        return new kendo.ui.Chart.ViewElement();
+    },
+
+    createPath: function(points, style) {
+        this.log.path.push({ points: points, style: style });
         return new kendo.ui.Chart.ViewElement();
     }
 };
