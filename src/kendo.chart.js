@@ -2068,9 +2068,7 @@
         },
 
         options: {
-            line: {
-                width: 2
-            }
+            width: 2
         },
 
         addValue: function(value, categoryIx, series, seriesIx) {
@@ -2162,7 +2160,7 @@
                 lines.push(
                     view.createPath(linePoints, {
                         stroke: currentSeries.color,
-                        strokeWidth: options.line.width,
+                        strokeWidth: options.width,
                         fill: ""
                     })
                 );
