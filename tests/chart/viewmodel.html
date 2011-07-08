@@ -528,6 +528,14 @@
                     equal(rect.y2 - rect.y1, HEIGHT);
                 });
 
+                test("does not render when visible is false", function() {
+                    boxElement.options.visible = false;
+                    boxElement.reflow(targetBox);
+                    boxElement.getViewElements(view);
+
+                    equals(view.log.rect.length, 0);
+                });
+
             })();
 
             (function() {

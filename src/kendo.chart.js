@@ -505,7 +505,8 @@
             },
             background: "",
             width: 0,
-            height: 0
+            height: 0,
+            visible: true
         },
 
         reflow: function(targetBox) {
@@ -563,8 +564,13 @@
 
         getViewElements: function(view) {
             var element = this,
-                options = element.options,
-                border = options.border || {},
+                options = element.options;
+
+            if (!options.visible) {
+                return [];
+            }
+
+            var border = options.border || {},
                 elements = [
                     view.createRect(element.paddingBox, {
                         stroke: border.width ? border.color : "",
@@ -1962,9 +1968,12 @@
                 visible: true,
                 background: BLACK,
                 size: LINE_MARKER_SIZE,
-                type: LINE_MARKER_SQUARE
+                type: LINE_MARKER_SQUARE,
+                border: {
+                    width: 1
+                }
             },
-            label: {
+            labels: {
                 position: ABOVE
             }
         },
@@ -1973,14 +1982,23 @@
             var point = this,
                 options = point.options,
                 markers = options.markers,
-                children = point.children;
+                labels = options.labels,
+                children = point.children,
+                markerBackground = markers.background,
+                markerBorder = deepExtend({}, markers.border);
+
+            if (typeof markerBorder.color === UNDEFINED) {
+                markerBorder.color =
+                    new Color(markerBackground).brightness(BAR_BORDER_BRIGHTNESS).toHex();
+            }
 
             children.push(
                 new BoxElement({
+                    visible: markers.visible,
                     width: markers.size,
                     height: markers.size,
-                    background: markers.background,
-                    border: markers.border,
+                    background: markerBackground,
+                    border: markerBorder,
                     align: CENTER,
                     vAlign: CENTER
                 })
@@ -1988,13 +2006,14 @@
 
             children.push(
                 new TextBox(point.value, deepExtend({
+                    visible: labels.visible,
                     align: CENTER,
                     vAlign: CENTER,
                     margin: {
                         left: 5,
                         right: 5
                     }
-                }, options.labels))
+                }, labels))
             );
         },
 
@@ -2037,7 +2056,7 @@
                 options = point.options,
                 marker = point.children[0],
                 label = point.children[1],
-                edge = options.label.position;
+                edge = options.labels.position;
 
             edge = edge === ABOVE ? TOP : edge;
             edge = edge === BELOW ? BOTTOM : edge;
@@ -2045,17 +2064,6 @@
             label.reflow(box);
             label.box.alignTo(marker.box, edge);
             label.reflow(label.box);
-        },
-
-        getViewElements: function(view) {
-            var point = this,
-                options = point.options;
-
-            if (options.markers.visible) {
-                return ChartElement.fn.getViewElements.call(point, view);
-            }
-
-            return [];
         }
     });
 
@@ -3536,10 +3544,12 @@
     Chart.ChartElement = ChartElement;
     Chart.RootElement = RootElement;
     Chart.BoxElement = BoxElement;
+    Chart.TextBox = TextBox;
     Chart.NumericAxis = NumericAxis;
     Chart.CategoryAxis = CategoryAxis;
     Chart.Bar = Bar;
     Chart.BarChart = BarChart;
+    Chart.LinePoint = LinePoint;
     Chart.LineChart = LineChart;
     Chart.ClusterLayout = ClusterLayout;
     Chart.StackLayout = StackLayout;

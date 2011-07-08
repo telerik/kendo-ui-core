@@ -320,7 +320,8 @@
 
             (function() {
                 var lineChart,
-                    MARGIN = PADDING = BORDER = 5;
+                    MARGIN = PADDING = BORDER = 5,
+                    linePoint;
 
                 function PlotAreaStub() { }
 
@@ -368,61 +369,148 @@
                                 }
                             }]
                         });
+                        linePoint = lineChart._bars[0];
                     }
                 });
 
                 test("applies visible to point markers", function() {
-                    equal(lineChart._bars[0].options.markers.visible, false);
+                    equal(linePoint.options.markers.visible, false);
                 });
 
                 test("applies series fill color to point markers", function() {
-                    equal(lineChart._bars[0].options.markers.background, "#f00");
+                    equal(linePoint.options.markers.background, "#f00");
                 });
 
                 test("applies size to point markers", function() {
-                    equal(lineChart._bars[0].options.markers.size, 10);
+                    equal(linePoint.options.markers.size, 10);
                 });
 
                 test("applies type to point markers", function() {
-                    equal(lineChart._bars[0].options.markers.type, "triangle");
+                    equal(linePoint.options.markers.type, "triangle");
                 });
 
                 test("applies border color to point markers", function() {
-                    equal(lineChart._bars[0].options.markers.border.color, "marker-border");
+                    equal(linePoint.options.markers.border.color, "marker-border");
                 });
 
                 test("applies border width to point markers.", function() {
-                    equal(lineChart._bars[0].options.markers.border.width, BORDER);
+                    equal(linePoint.options.markers.border.width, BORDER);
                 });
 
                 test("applies visible to point labels", function() {
-                    equal(lineChart._bars[0].options.labels.visible, false);
+                    equal(linePoint.options.labels.visible, false);
                 });
 
                 test("applies color to point labels", function() {
-                    equal(lineChart._bars[0].options.labels.color, "labels-color");
+                    equal(linePoint.options.labels.color, "labels-color");
                 });
 
                 test("applies background to point labels", function() {
-                    equal(lineChart._bars[0].options.labels.background, "labels-background");
+                    equal(linePoint.options.labels.background, "labels-background");
                 });
 
                 test("applies border color to point labels", function() {
-                    equal(lineChart._bars[0].options.labels.border.color, "labels-border");
+                    equal(linePoint.options.labels.border.color, "labels-border");
                 });
 
                 test("applies border width to point labels", function() {
-                    equal(lineChart._bars[0].options.labels.border.width, BORDER);
+                    equal(linePoint.options.labels.border.width, BORDER);
                 });
 
                 test("applies padding to point labels", function() {
-                    equal(lineChart._bars[0].options.labels.padding, PADDING);
+                    equal(linePoint.options.labels.padding, PADDING);
                 });
 
                 test("applies margin to point labels", function() {
-                    equal(lineChart._bars[0].options.labels.margin, MARGIN);
+                    equal(linePoint.options.labels.margin, MARGIN);
                 });
 
+            })();
+
+            (function() {
+                var LinePoint = Chart.LinePoint,
+                    point,
+                    box,
+                    marker,
+                    VALUE = 1;
+
+                function createPoint(options) {
+                    point = new LinePoint(VALUE, options);
+
+                    box = new Box2D(0, 0, 100, 100);
+                    point.reflow(box);
+
+                    marker = point.children[0];
+
+                    view = new ViewStub();
+                    point.getViewElements(view);
+                }
+
+                // ------------------------------------------------------------
+                module("Line Point", {
+                    setup: function() {
+                        createPoint();
+                    }
+                });
+
+                test("fills target box", function() {
+                    sameBox(point.box, box);
+                });
+
+                test("creates marker", function() {
+                    ok(marker instanceof Chart.BoxElement);
+                });
+
+                test("sets marker width", function() {
+                    createPoint({ markers: { size: 10 } });
+                    equals(marker.options.width, 10);
+                });
+
+                test("sets marker height", function() {
+                    createPoint({ markers: { size: 10 } });
+                    equals(marker.options.height, 10);
+                });
+
+                test("sets marker background color", function() {
+                    same(marker.options.background, point.options.markers.background);
+                });
+
+                test("sets default marker border color based on background", function() {
+                    createPoint({ markers: { background: "#cf0" } });
+                    equals(marker.options.border.color, "#8fb300");
+                });
+
+                test("does not change marker border color if set", function() {
+                    createPoint({ markers: { border: { color: "" } } });
+                    equals(marker.options.border.color, "");
+                });
+
+                test("sets marker border width", function() {
+                    createPoint({ markers: { border: { width: 4 } } });
+                    equals(marker.options.border.width, 4);
+                });
+
+                test("does not render marker", function() {
+                    createPoint({ markers: { visible: false }, labels: { visible: false }});
+                    equals(view.log.rect.length, 0);
+                });
+
+                // ------------------------------------------------------------
+                module("Line Point / Labels", {
+                    setup: function() {
+                        createPoint();
+                    }
+                });
+
+                test("does not render label", function() {
+                    createPoint({ labels: { visible: false }});
+                    equals(view.log.text.length, 0);
+                });
+
+                test("renders label when marker is disabled", function() {
+                    createPoint({ markers: { visible: false }});
+                    equals(view.log.text.length, 1);
+                });
             })();
 
         </script>
