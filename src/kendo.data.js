@@ -4,6 +4,7 @@
         isFunction = $.isFunction,
         isPlainObject = $.isPlainObject,
         isEmptyObject = $.isEmptyObject,
+        isArray = $.isArray,
         each = $.each,
         noop = $.noop,
         kendo = window.kendo,
@@ -237,6 +238,7 @@
                 that.model = Model.define(that.model);
             }
         },
+        parse: identity,
         data: identity,
         total: function(data) {
             return data.length;
@@ -249,6 +251,151 @@
             return {};
         }
     });
+
+    var XmlDataReader = Class.extend({
+        init: function(options) {
+            var that = this,
+                total = options.total,
+                data = options.data;
+
+            if (total) {
+                total = kendo.getter(that.xpathToMember(total));
+                that.total = function(data) {
+                    return parseInt(total(data));
+                };
+            }
+
+            if (data) {
+                data = that.xpathToMember(data);
+                that.data = function(value) {
+                    var result = [], raw, idx, rawCount;
+
+                    raw = that.evaluate(value, data);
+
+                    for (idx = 0, rawCount = raw.length; idx < rawCount; idx++) {
+                        result.push(raw[idx]);
+                    }
+
+                    return result;
+                };
+            }
+        },
+        parseDOM: function(element) {
+            var result = {},
+                parsedNode,
+                node,
+                nodeType,
+                nodeName,
+                member,
+                attribute,
+                attributes = element.attributes,
+                attributeCount = attributes.length,
+                idx;
+
+            for (idx = 0; idx < attributeCount; idx++) {
+                attribute = attributes[idx];
+                result["@" + attribute.nodeName] = attribute.nodeValue;
+            }
+
+            for (node = element.firstChild; node; node = node.nextSibling) {
+                nodeType = node.nodeType;
+
+                if (nodeType === 3) {
+                    // text nodes are stored as #text field
+                    result["#text"] = node.nodeValue;
+                } else if (nodeType === 1) {
+                    // elements are stored as fields
+                    parsedNode = this.parseDOM(node);
+
+                    nodeName = node.nodeName;
+
+                    member = result[nodeName];
+
+                    if ($.isArray(member)) {
+                        // elements of same nodeName are stored as array
+                        member.push(parsedNode);
+                    } else if (member !== undefined) {
+                        member = [member, parsedNode];
+                    } else {
+                        member = parsedNode;
+                    }
+
+                    result[nodeName] = member;
+                }
+            }
+            return result;
+        },
+
+        evaluate: function(value, expression) {
+            var members = expression.split("."),
+                member,
+                result,
+                length,
+                intermediateResult,
+                idx;
+
+            while (member = members.shift()) {
+                value = value[member];
+
+                if ($.isArray(value)) {
+                    result = [];
+                    expression = members.join(".");
+
+                    for (idx = 0, length = value.length; idx < length; idx++) {
+                        intermediateResult = this.evaluate(value[idx], expression);
+
+                        intermediateResult = isArray(intermediateResult) ? intermediateResult : [intermediateResult];
+
+                        result.push.apply(result, intermediateResult);
+                    }
+
+                    return result;
+                }
+            }
+
+            return value;
+        },
+
+        parse: function(xml) {
+            var documentElement,
+                tree,
+                result = {};
+
+            documentElement = xml.documentElement || $.parseXML(xml).documentElement;
+
+            tree = this.parseDOM(documentElement);
+
+            result[documentElement.nodeName] = tree;
+
+            return result;
+        },
+
+        xpathToMember: function(member) {
+            if (!member) {
+                return "";
+            }
+
+            member = member.replace(/^\//, "") // remove the first "/"
+                           .replace(/\//g, "."); // replace all "/" with "."
+
+            if (member.indexOf("@") >= 0) {
+                // replace @attribute with '["@attribute"]'
+                return member.replace(/\.?(@.*)/, '["$1"]');
+            }
+
+            if (member.indexOf("text()") >= 0) {
+                // replace ".text()" with '["#text"]'
+                return member.replace(/(\.?text\(\))/, '["#text"]');
+            }
+
+            return member;
+        }
+    });
+
+    var readers = {
+        json: DataReader,
+        xml: XmlDataReader
+    };
 
     var DataSource = Observable.extend({
         init: function(options) {
@@ -272,7 +419,7 @@
 
             Observable.fn.init.call(that);
 
-            that.reader = new DataReader(options.schema);
+            that.reader = new readers[options.schema.type || "json" ](options.schema);
 
             model = that.reader.model || {};
 
@@ -321,6 +468,7 @@
 
         options: {
             data: [],
+            schema: {},
             serverSorting: false,
             serverPaging: false,
             serverFiltering: false,
@@ -435,6 +583,8 @@
                 map = that._map,
                 reader= that.reader;
 
+            data = reader.parse(data);
+
             if (!reader.status(data)) {
                 return that.error({data: origData});
             }
@@ -528,6 +678,8 @@
             result,
             updated = Model ? that._updatedModels() : [],
             hasGroups = that.options.serverGrouping === true && that._group && that._group.length > 0;
+
+            data = that.reader.parse(data);
 
             that._total = that.reader.total(data);
 
@@ -857,6 +1009,7 @@
                 that.transport.read({
                     data: options,
                     success: function (data) {
+                        data = that.reader.parse(data);
                         range.data = that.reader.data(data);
                         range.end = range.start + range.data.length;
                         that._ranges.sort( function(x, y) { return x.start - y.start; } );
@@ -961,6 +1114,7 @@
         RemoteTransport: RemoteTransport,
         LocalStorageCache: LocalStorageCache,
         Cache: Cache,
-        DataReader: DataReader
+        DataReader: DataReader,
+        XmlDataReader: XmlDataReader
     });
 })(jQuery);
