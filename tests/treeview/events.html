@@ -176,7 +176,7 @@
                 ok(dropTriggered);
                 equals(dropTriggered.sourceNode, treeviewObject.findByText("bar")[0]);
                 equals(dropTriggered.destinationNode, treeviewObject.findByText("baz")[0]);
-                ok(dropTriggered.isValid);
+                ok(dropTriggered.valid);
                 equals(dropTriggered.dropPosition, "over");
             });
 
