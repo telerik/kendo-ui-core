@@ -523,6 +523,11 @@
                     equals(marker.options.visible, false);
                 });
 
+                test("sets marker shape type", function() {
+                    createPoint({ markers: { type: "triangle" }});
+                    equal(marker.options.type, "triangle");
+                });
+
                 test("marker is positioned at top", function() {
                     createPoint({ isVertical: false, aboveAxis: true });
                     sameBox(marker.box, new Box2D(46, -4, 54, 4));

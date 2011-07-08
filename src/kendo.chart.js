@@ -22,6 +22,7 @@
         BOTTOM = "bottom",
         CENTER = "center",
         CHANGE = "change",
+        CIRCLE = "circle",
         COLUMN = "column",
         COORD_PRECISION = 3,
         DATABOUND = "dataBound",
@@ -41,8 +42,10 @@
         RIGHT = "right",
         SANS12 = "12px Verdana, sans-serif",
         SANS16 = "16px Verdana, sans-serif",
+        SQUARE = "square",
         SVG_NS = "http://www.w3.org/2000/svg",
         TOP = "top",
+        TRIANGLE = "triangle",
         UNDEFINED = "undefined",
         VERTICAL = "vertical",
         WIDTH = "width",
@@ -1950,6 +1953,40 @@
        }
     });
 
+    var PointMarker = BoxElement.extend({
+        init: function(options) {
+            var marker = this;
+
+            BoxElement.fn.init.call(marker, options);
+        },
+
+        options: {
+            type: SQUARE
+        },
+
+        getViewElements: function(view) {
+            var marker = this,
+                options = marker.options,
+                type = options.type,
+                box = marker.box,
+                element = BoxElement.fn.getViewElements.call(marker, view)[0];
+
+            if (type === TRIANGLE) {
+                element = view.createPath([
+                    [box.x1 + box.width() / 2, box.y1],
+                    [box.x1, box.y2],
+                    [box.x2, box.y2]
+                ], element.options);
+            } else if (type === CIRCLE) {
+                element = view.createCircle([
+                    box.x1 + box.width() / 2, box.y1 + box.height() / 2
+                ], options.width, element.options);
+            }
+
+            return [ element ];
+        }
+    });
+
     var LinePoint = ChartElement.extend({
         init: function(value, options) {
             var point = this;
@@ -1993,8 +2030,9 @@
             }
 
             children.push(
-                new BoxElement({
+                new PointMarker({
                     visible: markers.visible,
+                    type: markers.type,
                     width: markers.size,
                     height: markers.size,
                     background: markerBackground,
@@ -2169,7 +2207,6 @@
                     })
                 );
             }
-
 
             return lines.concat(elements);
         },
@@ -2499,6 +2536,10 @@
             }
 
             return a._childIndex - b._childIndex;
+        },
+
+        renderAttr: function (name, value) {
+            return value ? name + "='" + value + "' " : "";
         }
     });
 
@@ -2610,6 +2651,10 @@
 
         createPath: function(points, options) {
             return new SVGPath(points, options);
+        },
+
+        createCircle: function(center, radius, options) {
+            return new SVGCircle(center, radius, options);
         },
 
         createGradient: function(options) {
@@ -2728,6 +2773,31 @@
                 options = path.options;
 
             return options.stroke ? "stroke='" + options.stroke + "' " : "";
+        }
+    });
+
+    var SVGCircle = ViewElement.extend({
+        init: function(center, radius, options) {
+            var circle = this;
+            ViewElement.fn.init.call(circle, options);
+
+            circle.center = center;
+            circle.radius = radius;
+
+            circle.template = SVGCircle.template;
+            if (!circle.template) {
+                circle.template = SVGCircle.template = template(
+                    "<circle cx='<#= d.center[0] #>' cy='<#= d.center[1] #>' " +
+                    "r='<#= d.radius #>' " +
+                    "<#= d.renderAttr('stroke', d.options.stroke) #> " +
+                    "<#= d.renderAttr('stroke-width', d.options.strokeWidth) #>" +
+                    "fill='<#= d.options.fill || \"none\" #>'></circle>"
+                );
+            }
+        },
+
+        options: {
+            fill: ""
         }
     });
 
@@ -2903,6 +2973,10 @@
             return new VMLPath(points, options);
         },
 
+        createCircle: function(center, radius, options) {
+            return new VMLCircle(center, radius, options);
+        },
+
         createGroup: function(options) {
             return new VMLGroup(options);
         },
@@ -2985,6 +3059,36 @@
             }
 
             return result;
+        }
+    });
+
+    var VMLCircle = ViewElement.extend({
+        init: function(center, radius, options) {
+            var circle = this;
+            ViewElement.fn.init.call(circle, options);
+
+            circle.center = center;
+            circle.radius = radius;
+
+            circle.template = VMLCircle.template;
+            if (!circle.template) {
+                circle.template = VMLCircle.template = template(
+                    "<kvml:oval style='position:absolute; " +
+                            "width:<#= d.radius #>px; height:<#= d.radius #>px; " +
+                            "top:<#= d.center[1] - d.radius / 2 #>px; " +
+                            "left:<#= d.center[0] - d.radius / 2 #>px' " +
+                        "strokecolor='<#= d.options.stroke || '' #>' " +
+                        "stroked='<#= !!d.options.stroke #>' " +
+                        "strokeweight='<#= d.options.strokeWidth || '' #>' " +
+                        "fillcolor='<#= d.options.fill #>' " +
+                        "filled='<#= !!d.options.fill || d.children.length > 0 #>'>" +
+                    "</kvml:oval>"
+                );
+            }
+        },
+
+        options: {
+            fill: ""
         }
     });
 
