@@ -355,7 +355,13 @@
                         contents.css("height", contents.height()).css("height");
                     }
 
-                    contents.kendoStop(true, true).kendoAnimate(animation);
+                    contents.kendoStop(true, true).kendoAnimate(extend(animation, {
+                        complete: function() {
+                            if (isExpanding) {
+                                contents.css("height", "");
+                            }
+                        }
+                    }));
                 }
             }
         },
