@@ -209,6 +209,32 @@
                     notEqual(chart.options.series[0].gap, 1);
                 });
 
+                test("line series defaults are applied", function() {
+                    createChart({
+                        seriesDefaults: {
+                            line: {
+                                width: 2
+                            }
+                        },
+                        series: [{ type: "line" }]
+                    });
+
+                    equal(chart.options.series[0].width, 2);
+                });
+
+                test("line series defaults are not applied to other series", function() {
+                    createChart({
+                        seriesDefaults: {
+                            line: {
+                                width: 1
+                            }
+                        },
+                        series: [{ type: "bar" }]
+                    });
+
+                    notEqual(chart.options.series[0].width, 1);
+                });
+
                 // ------------------------------------------------------------
                 module("Title", {
                     teardown: destroyChart
