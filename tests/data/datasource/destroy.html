@@ -44,14 +44,14 @@
                 var dataSource = setup();
 
                 dataSource.destroy(1);
-                ok(dataSource._map[1] === undefined);
+                ok(dataSource.modelSet.map[1] === undefined);
             });
 
             test("destroy updates the idmap", function() {
                 var dataSource = setup();
 
                 dataSource.destroy(1);
-                equal(dataSource._map[2], 0);
+                equal(dataSource.modelSet.map[2], 0);
             });
 
             test("destroy raises the destroy event", function() {
