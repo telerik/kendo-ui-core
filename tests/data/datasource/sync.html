@@ -28,7 +28,7 @@
                     transport: $.extend({
                         read: function(options) {
                            options.success(data || [{ id: 1, foo: "foo" }]);
-                        },
+                        }
                     }, transport)
                 }, options);
                 var dataSource = new DataSource(options);

@@ -31,7 +31,7 @@
                 data = source || [{ id:1, bar: "foo" },{ id: 2, bar: "foo" }];
 
                 var dataSource = new DataSource( {
-                    data: data
+                   data: data
                 });
 
                 dataSource.read();
@@ -643,7 +643,7 @@
                         read: function() {
                             options = arguments[0].data;
                         }
-                    },
+                    }
                 });
 
                 dataSource.query({foo: "bar"});
