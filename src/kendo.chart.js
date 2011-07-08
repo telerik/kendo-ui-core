@@ -815,7 +815,7 @@
                 childrenCount = legend.children.length;
 
             if (childrenCount === 0) {
-                legend.box = new Box2D();
+                legend.box = targetBox.clone();
                 return;
             }
 
@@ -1183,7 +1183,7 @@
                 visible: true,
                 width: 1,
                 color: BLACK
-        },
+            },
             zIndex: 1
         },
 
@@ -1192,10 +1192,10 @@
                 options = axis.options,
                 isVertical = options.orientation === VERTICAL,
                 children = axis.children,
-                space = axis.getActualTickSize() + options.margin;
-
-            var maxLabelWidth = 0,
+                space = axis.getActualTickSize() + options.margin,
+                maxLabelWidth = 0,
                 maxLabelHeight = 0;
+
             for (var i = 0; i < children.length; i++) {
                 var label = children[i];
                 maxLabelWidth = Math.max(maxLabelWidth, label.box.width());
@@ -1448,7 +1448,7 @@
                 visible: false,
                 width: 1,
                 color: BLACK
-        },
+            },
             zIndex: 1
         },
 
@@ -1835,7 +1835,12 @@
 
         valueRange: function() {
             var barChart = this;
-            return { min: barChart._seriesMin, max: barChart._seriesMax };
+
+            if (barChart._bars.length) {
+                return { min: barChart._seriesMin, max: barChart._seriesMax };
+            }
+
+            return null;
         },
 
         categoriesCount: function() {
@@ -1947,7 +1952,6 @@
             if (barSeries.length > 0) {
                 var firstSeries = barSeries[0];
                 seriesType = firstSeries.type;
-
                 barChart = new BarChart(this, {
                         series: barSeries,
                         isVertical: seriesType === COLUMN,
@@ -1959,7 +1963,7 @@
                 categoriesToAdd = Math.max(0, barChart.categoriesCount() - categories.length);
                 [].push.apply(options.categoryAxis.categories, new Array(categoriesToAdd));
 
-                range = barChart.valueRange();
+                range = barChart.valueRange() || range;
                 charts.push(barChart);
                 [].push.apply(plotArea.children, charts);
             }
