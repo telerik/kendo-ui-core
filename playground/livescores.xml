@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LiveScores>
+	<MatchData>
+		<Team1>Uruguay</Team1>
+		<Team2>Korea Republic</Team2>
+		<Score>2:1</Score>
+	</MatchData>
+	<MatchData>
+		<Team1>USA</Team1>
+		<Team2>Ghana</Team2>
+		<Score>1:2</Score>
+	</MatchData>
+	<MatchData>
+		<Team1>Germany</Team1>
+		<Team2>England</Team2>
+		<Score>4:1</Score>
+	</MatchData>
+	<MatchData>
+		<Team1>Argentina</Team1>
+		<Team2>Mexico</Team2>
+		<Score>3:1</Score>
+	</MatchData>
+	<MatchData>
+		<Team1>Netherlands</Team1>
+		<Team2>Slovakia</Team2>
+		<Score>2:1</Score>
+	</MatchData>
+	<MatchData>
+		<Team1>Brazil</Team1>
+		<Team2>Chile</Team2>
+		<Score>3:0</Score>
+	</MatchData>
+	<MatchData>
+		<Team1>Paraguay</Team1>
+		<Team2>Japan</Team2>
+		<Score>5:3</Score>
+	</MatchData>
+	<MatchData>
+		<Team1>Spain</Team1>
+		<Team2>Portugal</Team2>
+		<Score>1:0</Score>
+	</MatchData>
+	<MatchData>
+		<Team1>Netherlands</Team1>
+		<Team2>Brazil</Team2>
+		<Score>2:1</Score>
+	</MatchData>
+	<MatchData>
+		<Team1>Uruguay</Team1>
+		<Team2>Ghana</Team2>
+		<Score>4:2</Score>
+	</MatchData>
+	<MatchData>
+		<Team1>Argentina</Team1>
+		<Team2>Germany</Team2>
+		<Score>0:4</Score>
+	</MatchData>
+	<MatchData>
+		<Team1>Paraguay</Team1>
+		<Team2>Spain</Team2>
+		<Score>0:1</Score>
+	</MatchData>
+	<MatchData>
+		<Team1>Uruguay</Team1>
+		<Team2>Netherlands</Team2>
+		<Score>2:3</Score>
+	</MatchData>
+	<MatchData>
+		<Team1>Germany</Team1>
+		<Team2>Spain</Team2>
+		<Score>0:1</Score>
+	</MatchData>
+	<MatchData>
+		<Team1>Uruguay</Team1>
+		<Team2>Germany</Team2>
+		<Score>2:3</Score>
+	</MatchData>
+	<MatchData>
+		<Team1>Netherlands</Team1>
+		<Team2>Spain</Team2>
+		<Score>0:1</Score>
+	</MatchData>
+</LiveScores>
+
+
+

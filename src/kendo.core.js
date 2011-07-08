@@ -1141,7 +1141,13 @@
         formatters: formatters,
         htmlEncode: htmlEncode,
         getter: function(expression) {
-            return new Function("d", "return d" + (expression ? "." + expression : ""));
+            expression = expression || "";
+
+            if (expression && expression.charAt(0) !== "[") {
+                expression = "." + expression;
+            }
+
+            return new Function("d", "return d" + expression);
         },
         setter: function(expression) {
             return new Function("d,value", "d." + expression + "=value");

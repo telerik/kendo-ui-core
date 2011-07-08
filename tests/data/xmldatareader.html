@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Query Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.query.js"></script>
+        <script src="../../src/kendo.model.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <link rel="stylesheet" href="../qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">QUnit example</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+
+        <script src="../script/datareader.js"></script>
+
+        <script>
+            var XmlDataReader = kendo.data.XmlDataReader;
+
+            test("parse of empty element", function() {
+                var reader = new XmlDataReader({});
+
+                var result = reader.parse("<foo />");
+
+                ok(result.foo);
+            });
+
+            test("parse with xml document", function() {
+                var reader = new XmlDataReader({});
+                var result = reader.parse($.parseXML("<foo />"));
+
+                ok(result.foo);
+            });
+
+            test("parse sets the text field to be the contents of the result", function() {
+                var reader = new XmlDataReader({});
+
+                var result = reader.parse("<foo>bar</foo>");
+
+                equal(result.foo["#text"], "bar");
+            });
+
+            test("parse child element as a field", function() {
+                var reader = new XmlDataReader({});
+
+                var result = reader.parse("<foo><bar>baz</bar></foo>");
+
+                equal(result.foo.bar["#text"], "baz");
+            });
+
+            test("parse grand child element as a field", function() {
+                var reader = new XmlDataReader({});
+
+                var result = reader.parse("<foo><bar><baz/></bar></foo>");
+
+                ok(result.foo.bar.baz);
+            });
+
+            test("parse multiple children with same nodeName as array", function() {
+                var reader = new XmlDataReader({});
+
+                var result = reader.parse("<foo><bar/><bar/></foo>");
+
+                ok($.isArray(result.foo.bar));
+            });
+
+            test("parse attributes as @ fields", function() {
+                var reader = new XmlDataReader({});
+
+                var result = reader.parse("<foo bar='baz' />");
+
+                equal(result.foo["@bar"], "baz");
+            });
+
+            test("xpathToMember with attribute", function() {
+                var reader = new XmlDataReader({});
+
+                equal(reader.xpathToMember("/foo/@bar"), 'foo["@bar"]');
+            });
+
+            test("xpathToMember with attribute only", function() {
+                var reader = new XmlDataReader({});
+
+                equal(reader.xpathToMember("@bar"), '["@bar"]');
+            });
+
+            test("xpathToMember with text() only", function() {
+                var reader = new XmlDataReader({});
+
+                equal(reader.xpathToMember("text()"), '["#text"]');
+            });
+
+            test("xpathToMember with attribute of nested element", function() {
+                var reader = new XmlDataReader({});
+
+                equal(reader.xpathToMember("/foo/bar/@baz"), 'foo.bar["@baz"]');
+            });
+
+            test("xpathToMember and text()", function() {
+                var reader = new XmlDataReader({});
+
+                equal(reader.xpathToMember("/foo/text()"), 'foo["#text"]');
+            });
+
+            test("xpathToMember and element only", function() {
+                var reader = new XmlDataReader({});
+
+                equal(reader.xpathToMember("/foo"), 'foo');
+            });
+
+            test("xpathToMember and nested elements ", function() {
+                var reader = new XmlDataReader({});
+
+                equal(reader.xpathToMember("/foo/bar"), 'foo.bar');
+            });
+
+            test("xpathToMember text() of nested elements ", function() {
+                var reader = new XmlDataReader({});
+
+                equal(reader.xpathToMember("/foo/bar/text()"), 'foo.bar["#text"]');
+            });
+
+            test("xpathToMember returns empty string when argument is null, undefined or empty string ", function() {
+                var reader = new XmlDataReader({});
+
+                equal(reader.xpathToMember(null), "");
+                equal(reader.xpathToMember(undefined), "");
+                equal(reader.xpathToMember(""), "");
+            });
+
+            test("total returns a number", function() {
+                var reader = new XmlDataReader({ total: "/foo/text()"});
+
+                var result = reader.parse("<foo>1</foo>");
+
+                ok(reader.total(result) === 1);
+            });
+
+            test("data returns the records", function() {
+                var reader = new XmlDataReader({ data: "/foo/bar"});
+
+                var result = reader.data({foo: { bar: [1,2] } });
+
+                ok($.isArray(result));
+                equal(result[0], 1);
+                equal(result[1], 2);
+                equal(result.length, 2);
+            });
+
+            test("data returns the records with nested elements on two levels", function() {
+                var reader = new XmlDataReader({ data: "/foo/bar/baz"});
+
+                var result = reader.data({
+                    foo: {
+                        bar: [ {
+                            baz: [{},{}]
+                            }, {
+                            baz: [{},{}]
+                        }]
+                    }
+                });
+
+                ok($.isArray(result));
+                equal(result.length, 4);
+            });
+
+            test("data returns the records with nested elements on three levels", function() {
+                var reader = new XmlDataReader({ data: "/root/foo/bar/baz"});
+
+                var result = reader.data({
+                    root: {
+                        foo: [
+                        {
+                            bar: [ {
+                                baz: [{},{}]
+                                }, {
+                                baz: [{},{}]
+                            }]
+                        },
+                        {
+                            bar: [ {
+                                baz: [{},{}]
+                                }, {
+                                baz: [{},{}]
+                            }]
+                        }
+                        ]
+                    }
+                });
+                ok($.isArray(result));
+
+                equal(result.length, 8);
+            });
+            test("data returns the records with nested elements on four levels", function() {
+                var reader = new XmlDataReader({ data: "/root/foo/bar/baz"});
+
+                var result = reader.data({
+                    root: {
+                        foo: [
+                        {
+                            bar:  {
+                                baz: [{},{}]
+                            }
+                        },
+                        {
+                            bar: {
+                                baz: [{},{}]
+                            }
+                        }
+                        ]
+                    }
+                });
+
+                ok($.isArray(result));
+                equal(result.length, 4);
+            });
+
+            test("data returns the records in right order", function() {
+                var reader = new XmlDataReader({ data: "/root/foo/bar/baz"});
+
+                var result = reader.data({
+                    root: {
+                        foo: [
+                        {
+                            bar:  {
+                                baz: [1, 2]
+                            }
+                        },
+                        {
+                            bar: {
+                                baz: [3, 4]
+                            }
+                        }
+                        ]
+                    }
+                });
+
+                ok($.isArray(result));
+                equal(result[0], 1);
+                equal(result[1], 2);
+                equal(result[2], 3);
+                equal(result[3], 4);
+            });
+            test("data returns the records with mixed items", function() {
+                var reader = new XmlDataReader({ data: "/root/foo/bar/baz"});
+
+                var result = reader.data({
+                    root: {
+                        foo: [
+                        {
+                            bar:  {
+                                baz: [{},{}]
+                            }
+                        },
+                        {
+                            bar: {
+                                baz: {}
+                            }
+                        }
+                        ]
+                    }
+                });
+
+                ok($.isArray(result));
+                equal(result.length, 3);
+            });
+
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>

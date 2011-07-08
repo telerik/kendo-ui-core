@@ -4,6 +4,10 @@ tests.push(
         title: "datareader"
     },
     {
+        page: "data/xmldatareader.html",
+        title: "xmldatareader"
+    },
+    {
         page: "data/datasource/read.html",
         title: "datasource.read"
     },
