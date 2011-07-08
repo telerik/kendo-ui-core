@@ -131,85 +131,10 @@
 
 	</PropertyGroup>
 
-	<ItemGroup>
-		<!--  SOLUTIONS
-     The paths of the solutions to build. Paths can be server paths or local paths, but server paths
-     relative to the location of this file are highly recommended.  To add/delete solutions, edit this
-     ItemGroup. For example, to add a solution MySolution.sln, add the following line:
-
-         <SolutionToBuild Include="$(BuildProjectFolderPath)/path/MySolution.sln" />
-
-     To change the order in which the solutions are built, modify the order in which the solutions
-     appear below.
-
-     To call a target (or targets) other than the default, add a metadata item named Targets.  To pass
-     custom properties to the solution, add a metadata item named Properties.  For example, to call
-     the targets MyCustomTarget1 and MyCustomTarget2, passing in properties Property1 and Property2,
-     add the following:
-
-         <SolutionToBuild Include="$(BuildProjectFolderPath)/path/MySolution.sln">
-             <Targets>MyCustomTarget1;MyCustomTarget2</Targets>
-             <Properties>Property1=Value1;Property2=Value2</Properties>
-         </SolutionToBuild>
-    -->
-	</ItemGroup>
-
-	<ItemGroup>
-		<!--  CONFIGURATIONS
-     The list of configurations to build. To add/delete configurations, edit this value. For example,
-     to add a new configuration, add the following lines:
-
-         <ConfigurationToBuild Include="Debug|x86">
-             <FlavorToBuild>Debug</FlavorToBuild>
-             <PlatformToBuild>x86</PlatformToBuild>
-         </ConfigurationToBuild>
-
-     The Include attribute value should be unique for each ConfigurationToBuild node.
-    -->
-        <ConfigurationToBuild Include="Release|Any CPU">
-            <FlavorToBuild>Release</FlavorToBuild>
-            <PlatformToBuild>Any CPU</PlatformToBuild>
-        </ConfigurationToBuild>
-
-        <ConfigurationToBuild Include="Release MVC2|Any CPU">
-            <FlavorToBuild>Release MVC2</FlavorToBuild>
-            <PlatformToBuild>Any CPU</PlatformToBuild>
-        </ConfigurationToBuild>
-
-		<ConfigurationToBuild Include="Release MVC3|Any CPU">
-			<FlavorToBuild>Release MVC3</FlavorToBuild>
-			<PlatformToBuild>Any CPU</PlatformToBuild>
-		</ConfigurationToBuild>
-
-	</ItemGroup>
-
-	<ItemGroup>
-		<!--  TEST ARGUMENTS
-     If the RunTest property is set to true then the following test arguments will be used to run
-     tests. Tests can be run by specifying one or more test lists and/or one or more test containers.
-
-     To run tests using test lists, add MetaDataFile items and associated TestLists here.  Paths can
-     be server paths or local paths, but server paths relative to the location of this file are highly
-     recommended:
-
-        <MetaDataFile Include="$(BuildProjectFolderPath)/HelloWorld/HelloWorld.vsmdi">
-            <TestList>BVT1;BVT2</TestList>
-        </MetaDataFile>
-
-     To run tests using test containers, add TestContainer items here:
-
-        <TestContainer Include="$(OutDir)\HelloWorldTests.dll" />
-        <TestContainer Include="$(SolutionRoot)\TestProject\WebTest1.webtest" />
-        <TestContainer Include="$(SolutionRoot)\TestProject\LoadTest1.loadtest" />
-
-     Use %2a instead of * and %3f instead of ? to prevent expansion before test assemblies are built
-    -->
-
-	</ItemGroup>
-
-    <Target Name="BuildKendoUI">
-        <Exec Command="&quot;node.exe&quot; &quot;build/build.js&quot;"/>
-    </Target>
+  <Target Name="BuildKendoUI">
+    <!-- set security on binaries-->
+    <Exec Command="node.exe build/build.js"/>
+  </Target>
 
     <PropertyGroup>
         <SkipLabel>true</SkipLabel>
