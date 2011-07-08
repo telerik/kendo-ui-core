@@ -66,7 +66,7 @@ function processfile(file) {
         else
             data = regions.tools.exec(data);
 
-        fs.writeFile(file, data);
+        fs.writeFileSync(file, data, "utf8");
     }
 }
 
@@ -119,7 +119,7 @@ exports.build = function(orig, dest, min) {
 
     if (!MINIFY) {
         var data = fs.readFileSync("src/jquery.js", "utf8");
-        fs.writeFile(dest + "/js/jquery.js", data);
+        fs.writeFileSync(dest + "/js/jquery.js", data, "utf8");
     }
 
     fs.readdirSync("demos/examples/styles")
@@ -130,7 +130,7 @@ exports.build = function(orig, dest, min) {
             file = file.replace(".css", ".min.css");
         }
 
-        fs.writeFile(dest + "/styles/" + file, data);
+        fs.writeFileSync(dest + "/styles/" + file, data, "utf8");
     });
 
 
@@ -145,7 +145,7 @@ exports.build = function(orig, dest, min) {
 
             file = file.replace(".js", ".min.js");
         }
-        fs.writeFile(dest + "/js/" + file, data);
+        fs.writeFileSync(dest + "/js/" + file, data, "utf8");
     });
 
     processdir(dest);

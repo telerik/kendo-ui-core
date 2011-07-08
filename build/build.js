@@ -29,7 +29,6 @@ var scripts = [
     "kendo.query.js",
     "kendo.data.js",
     "kendo.model.js",
-    "kendo.binder.js",
     "kendo.draganddrop.js",
     "kendo.groupable.js",
     "kendo.resizable.js",
@@ -39,7 +38,6 @@ var scripts = [
     "kendo.pager.js",
     "kendo.popup.js",
     "kendo.list.js",
-    "kendo.listView.js",
     "kendo.autocomplete.js",
     "kendo.dropdownlist.js",
     "kendo.combobox.js",
@@ -71,16 +69,19 @@ function mkdir(newDir) {
     }
 }
 
-function zip(name, path) {
-    var archive = spawn("./build/lib/zip", ["-r", name, path]);
+function zip(name, path, folder) {
+    var archive = spawn("./build/lib/7z/7z", ["a", "-tzip", name, path]);
 
     archive.stderr.on('data', function (data) {
         sys.print('stderr: ' + data);
     });
 
     archive.on('exit', function (code) {
-        console.log("deleting temp folder: " + path);
-        wrench.rmdirSyncRecursive(path);
+        if (code !== 0) {
+            console.log("zip errro: " + code);
+        }
+        console.log("deleting temp folder: " + folder);
+        wrench.rmdirSyncRecursive(folder);
 
         if (count === 1) {
             console.log("Time elapsed: " + ((new Date() - date) / 1000) + " seconds");
@@ -144,26 +145,26 @@ function processStyles() {
     });
 }
 
-console.log("start building...");
+console.log("build start...");
 createDirectories();
 
 //processing
-console.log("process scripts...");
+console.log("processing scripts...");
 processScripts();
 
-console.log("process styles...");
+console.log("processing styles...");
 processStyles();
 
 //examples
-console.log("build examples...");
+console.log("building examples...");
 examples.build(SOURCE, PATH + "/examples", false);
 
-console.log("build online examples...");
+console.log("building online examples...");
 examples.build(PATH, ONLINEEXAMPLES, true);
 
 //archives
-console.log("archieve kendo.version.zip...");
-zip(RELEASE + "/kendo." + VERSION + ".zip", PATH);
+console.log("archieving kendo.version.zip...");
+zip(RELEASE + "/kendo_" + VERSION + ".zip", ".\\" + PATH.replace("/", "\\") + "\\*", PATH);
 
-console.log("archieve online examples...");
-zip(RELEASE + "/onlineExamples." + VERSION + ".zip", ONLINEEXAMPLES);
+console.log("archieving online examples...");
+zip(RELEASE + "/onlineExamples_" + VERSION + ".zip", ".\\" + ONLINEEXAMPLES.replace("/", "\\") + "\\*", ONLINEEXAMPLES);
