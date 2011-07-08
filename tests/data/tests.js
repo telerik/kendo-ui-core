@@ -12,16 +12,8 @@ tests.push(
         title: "datasource initialization"
     },
     {
-        page: "data/datasource/create.html",
-        title: "datasource.create"
-    },
-    {
-        page: "data/datasource/destroy.html",
-        title: "datasource.destroy"
-    },
-    {
-        page: "data/datasource/update.html",
-        title: "datasource.update"
+        page: "data/datasource/crud.html",
+        title: "datasource crud"
     },
     {
         page: "data/datasource/find.html",
@@ -74,6 +66,10 @@ tests.push(
     {
         page: "data/model/modified.html",
         title: "model modified"
+    },
+    {
+        page: "data/model/modelset.html",
+        title: "modelset"
     },
     {
         page: "data/binder/mapping.html",

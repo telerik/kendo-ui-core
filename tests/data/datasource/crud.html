@@ -16,13 +16,12 @@
         <h2 id="qunit-userAgent"></h2>
         <ol id="qunit-tests"></ol>
         <script>
-            var data = [], DataSource = kendo.data.DataSource;
+            var dataSource, data = [], DataSource = kendo.data.DataSource;
 
             function setup(source) {
                 data = source || [{ id:1, bar: "foo" },{ id: 2, bar: "foo" }];
 
                 var dataSource = new DataSource( {
-                    data: data,
                     schema: {
                         model: kendo.data.Model.define()
                     }
@@ -32,54 +31,59 @@
                 return dataSource;
             }
 
-            test("destroy removes the record with the specified id", function() {
-                var dataSource = setup();
-
-                dataSource.destroy(1);
-                equal(dataSource.data().length, 1);
-                equal(dataSource.at(0).id, 2);
+            module("DataSource crud", {
+                setup: function() {
+                    dataSource = setup();
+                }
             });
 
-            test("destroy removes the record with the specified id from the _map", function() {
-                var dataSource = setup();
+            test("create delegates to the modelset", function() {
+                var model = {};
 
-                dataSource.destroy(1);
-                ok(dataSource.modelSet.map[1] === undefined);
+                dataSource.modelSet.create = function() {
+                    return model;
+                };
+
+                ok(dataSource.create() === model);
             });
 
-            test("destroy updates the idmap", function() {
-                var dataSource = setup();
+            test("destroy delegates to the modelset", function() {
+                var called = false;
 
-                dataSource.destroy(1);
-                equal(dataSource.modelSet.map[2], 0);
+                dataSource.modelSet.destroy = function() {
+                    called = true;
+                };
+
+                dataSource.destroy();
+                ok(called);
             });
 
-            test("destroy raises the destroy event", function() {
-                var dataSource = setup();
-                var destroyArgument;
+            test("update delegates to the modelset", function() {
+                var called = false;
 
-                dataSource.bind("destroy", function(e) {
-                    destroyArgument = e;
-                });
-                var first = dataSource.model(1);
+                dataSource.modelSet.update = function() {
+                    called = true;
+                };
 
-                dataSource.destroy(1);
-                equal(destroyArgument.model, first);
+                dataSource.update();
+                ok(called);
             });
 
-            test("destroy sets model state to DESTROYED", function() {
-                var dataSource = setup();
-                var destroyArgument;
-
-                var model = dataSource.model(1);
-
-                dataSource.destroy(1);
-                equal(model.state, kendo.data.Model.DESTROYED);
-            });
-
-            test("destroy raises the destroy event", function() {
-                var dataSource = setup();
+            test("create raises the create event", function() {
                 var model;
+
+                dataSource.bind("create", function(e) {
+                    model = e.model;
+                });
+
+                dataSource.create();
+
+                ok(model);
+            });
+
+            test("destroy raises the destroy event", function() {
+                var model;
+
                 dataSource.bind("destroy", function(e) {
                     model = e.model;
                 });
@@ -88,6 +92,15 @@
                 ok(model);
             });
 
+            test("update triggers the update event", function() {
+                var model;
+                dataSource.bind("update", function(e) {
+                    model = e.model;
+                });
+                dataSource.update(1, { bar: "moo" } );
+
+                ok(model);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
