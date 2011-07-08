@@ -279,6 +279,11 @@
 
             module("Color");
 
+            test("assumes black when parsing undefined", function() {
+                var c = new Color(undefined);
+                equals(c.toHex(), "#000000");
+            });
+
             test("parses #xxyyzz", function() {
                 var c = new Color("#aabbcc");
                 equals(c.toHex(), "#aabbcc");

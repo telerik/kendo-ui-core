@@ -2170,6 +2170,7 @@
                 );
             }
 
+
             return lines.concat(elements);
         },
 
@@ -3351,6 +3352,8 @@
         },
 
         resolveColor: function(value) {
+            value = value || BLACK;
+
             if (value.charAt(0) == "#") {
                 value = value.substr(1, 6);
             }
@@ -3541,6 +3544,7 @@
     Chart.CategoryAxis = CategoryAxis;
     Chart.Bar = Bar;
     Chart.BarChart = BarChart;
+    Chart.LineChart = LineChart;
     Chart.ClusterLayout = ClusterLayout;
     Chart.StackLayout = StackLayout;
     Chart.Title = Title;
