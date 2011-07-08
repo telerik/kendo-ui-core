@@ -1987,14 +1987,14 @@
             );
 
             children.push(
-                new TextBox(point.value, {
+                new TextBox(point.value, deepExtend({
                     align: CENTER,
                     vAlign: CENTER,
                     margin: {
                         left: 5,
                         right: 5
                     }
-                })
+                }, options.labels))
             );
         },
 
