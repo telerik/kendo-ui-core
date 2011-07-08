@@ -319,7 +319,8 @@
             })();
 
             (function() {
-                var lineChart;
+                var lineChart,
+                    MARGIN = PADDING = BORDER = 5;
 
                 function PlotAreaStub() { }
 
@@ -341,17 +342,85 @@
                     setup: function() {
                         plotArea = new PlotAreaStub();
                         lineChart = new Chart.LineChart(plotArea, {
-                            width: 4,
                             series: [{
                                 data: [0, 1],
-                                color: "#f00"
+                                color: "#f00",
+                                markers: {
+                                    visible: false,
+                                    size: 10,
+                                    type: "triangle",
+                                    border: {
+                                        color: "marker-border",
+                                        width: BORDER
+                                    }
+                                },
+                                labels: {
+                                    visible: false,
+                                    font: "labels-font",
+                                    color: "labels-color",
+                                    background: "labels-background",
+                                    border: {
+                                        color: "labels-border",
+                                        width: BORDER
+                                    },
+                                    margin: MARGIN,
+                                    padding: PADDING
+                                }
                             }]
                         });
                     }
                 });
 
-                test("applies series fill color to points markers", function() {
-                    equal(lineChart._bars[0].options.marker.background, "#f00");
+                test("applies visible to point markers", function() {
+                    equal(lineChart._bars[0].options.markers.visible, false);
+                });
+
+                test("applies series fill color to point markers", function() {
+                    equal(lineChart._bars[0].options.markers.background, "#f00");
+                });
+
+                test("applies size to point markers", function() {
+                    equal(lineChart._bars[0].options.markers.size, 10);
+                });
+
+                test("applies type to point markers", function() {
+                    equal(lineChart._bars[0].options.markers.type, "triangle");
+                });
+
+                test("applies border color to point markers", function() {
+                    equal(lineChart._bars[0].options.markers.border.color, "marker-border");
+                });
+
+                test("applies border width to point markers.", function() {
+                    equal(lineChart._bars[0].options.markers.border.width, BORDER);
+                });
+
+                test("applies visible to point labels", function() {
+                    equal(lineChart._bars[0].options.labels.visible, false);
+                });
+
+                test("applies color to point labels", function() {
+                    equal(lineChart._bars[0].options.labels.color, "labels-color");
+                });
+
+                test("applies background to point labels", function() {
+                    equal(lineChart._bars[0].options.labels.background, "labels-background");
+                });
+
+                test("applies border color to point labels", function() {
+                    equal(lineChart._bars[0].options.labels.border.color, "labels-border");
+                });
+
+                test("applies border width to point labels", function() {
+                    equal(lineChart._bars[0].options.labels.border.width, BORDER);
+                });
+
+                test("applies padding to point labels", function() {
+                    equal(lineChart._bars[0].options.labels.padding, PADDING);
+                });
+
+                test("applies margin to point labels", function() {
+                    equal(lineChart._bars[0].options.labels.margin, MARGIN);
                 });
 
             })();

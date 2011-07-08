@@ -1958,7 +1958,7 @@
         options: {
             aboveAxis: true,
             isVertical: false,
-            marker: {
+            markers: {
                 visible: true,
                 background: BLACK,
                 size: LINE_MARKER_SIZE,
@@ -1972,15 +1972,15 @@
         render: function() {
             var point = this,
                 options = point.options,
-                marker = options.marker,
+                markers = options.markers,
                 children = point.children;
 
             children.push(
                 new BoxElement({
-                    width: marker.size,
-                    height: marker.size,
-                    background: marker.background,
-                    border: marker.border,
+                    width: markers.size,
+                    height: markers.size,
+                    background: markers.background,
+                    border: markers.border,
                     align: CENTER,
                     vAlign: CENTER
                 })
@@ -2051,7 +2051,7 @@
             var point = this,
                 options = point.options;
 
-            if (options.marker.visible) {
+            if (options.markers.visible) {
                 return ChartElement.fn.getViewElements.call(point, view);
             }
 
@@ -2083,19 +2083,17 @@
                 labelOptions = deepExtend({}, series.labels),
                 points = chart.seriesPoints[seriesIx];
 
-            var point = new LinePoint(value, {
-                isVertical: !options.isVertical,
-                marker: {
-                    border: {
-                        width: 1,
-                        color:
-                            new Color(currentSeries.color)
-                                .brightness(BAR_BORDER_BRIGHTNESS)
-                                .toHex()
+            var point = new LinePoint(value,
+                deepExtend(
+                    {
+                        isVertical: !options.isVertical,
+                        markers: {
+                            background: currentSeries.color
+                        }
                     },
-                    background: currentSeries.color
-                }
-            });
+                    currentSeries
+                )
+            );
             chart._bars.push(point);
 
             if (!points) {
