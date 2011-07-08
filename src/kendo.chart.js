@@ -7,15 +7,17 @@
         Class = kendo.Class,
         Component = kendo.ui.Component,
         DataSource = kendo.data.DataSource,
-        template = kendo.template,
+        baseTemplate = kendo.template,
         proxy = $.proxy;
 
     // Constants ==============================================================
-    var BASELINE_MARKER_SIZE = 1,
+    var ABOVE = "above",
+        BASELINE_MARKER_SIZE = 1,
         BAR = "bar",
         BAR_BORDER_BRIGHTNESS = 0.7,
         BAR_GAP = 1.5,
         BAR_SPACING = 0.4,
+        BELOW = "below",
         BLACK = "#000",
         BOTTOM = "bottom",
         CENTER = "center",
@@ -30,6 +32,9 @@
         HEIGHT = "height",
         HORIZONTAL = "horizontal",
         LEFT = "left",
+        LINE = "line",
+        LINE_MARKER_SIZE = 6,
+        LINE_MARKER_SQUARE = "square",
         NONE = "none",
         OBJECT = "object",
         OUTSIDE = "outside",
@@ -353,6 +358,15 @@
             var box = this;
 
             return new Box2D(box.x1, box.y1, box.x2, box.y2);
+        },
+
+        center: function() {
+            var box = this;
+
+            return [
+                box.x1 + box.width() / 2,
+                box.y1 + box.height() / 2
+            ];
         }
     });
 
@@ -659,7 +673,6 @@
 
         options: {
             font: SANS16,
-            aboveAxis: true,
             position: "outsideEnd",
             margin: 2,
             padding: 2,
@@ -668,12 +681,16 @@
             border: {
                 width: 0,
                 color: BLACK
-            }
+            },
+            aboveAxis: true,
+            isVertical: false
         },
 
-        reflow: function(targetBox, isVertical) {
+        reflow: function(targetBox) {
             var barLabel = this,
                 options = barLabel.options,
+                isVertical = options.isVertical,
+                aboveAxis = options.aboveAxis,
                 text = barLabel.children[0],
                 box = text.box;
 
@@ -684,24 +701,24 @@
                 if (isVertical) {
                     text.options.vAlign = TOP;
 
-                    if (!options.aboveAxis && box.height() < targetBox.height()) {
+                    if (!aboveAxis && box.height() < targetBox.height()) {
                         text.options.vAlign = BOTTOM;
                     }
                 } else {
-                    text.options.align = options.aboveAxis ? RIGHT : LEFT;
+                    text.options.align = aboveAxis ? RIGHT : LEFT;
                 }
             } else if (options.position == CENTER) {
                 text.options.vAlign = CENTER;
                 text.options.align = CENTER;
             } else if (options.position == "insideBase") {
                 if (isVertical) {
-                    text.options.vAlign = options.aboveAxis ? BOTTOM : TOP;
+                    text.options.vAlign = aboveAxis ? BOTTOM : TOP;
                 } else {
-                    text.options.align = options.aboveAxis ? LEFT : RIGHT;
+                    text.options.align = aboveAxis ? LEFT : RIGHT;
                 }
             } else if (options.position == "outsideEnd") {
                 if (isVertical) {
-                    if (options.aboveAxis) {
+                    if (aboveAxis) {
                         targetBox = new Box2D(
                             targetBox.x1, targetBox.y1 - box.height(),
                             targetBox.x2, targetBox.y1
@@ -714,7 +731,7 @@
                     }
                 } else {
                     text.options.align = CENTER;
-                    if (options.aboveAxis) {
+                    if (aboveAxis) {
                         targetBox = new Box2D(
                             targetBox.x2 + box.width(), targetBox.y1,
                             targetBox.x2, targetBox.y2
@@ -1183,7 +1200,7 @@
                 visible: true,
                 width: 1,
                 color: BLACK
-            },
+        },
             zIndex: 1
         },
 
@@ -1448,7 +1465,7 @@
                 visible: false,
                 width: 1,
                 color: BLACK
-            },
+        },
             zIndex: 1
         },
 
@@ -1677,7 +1694,7 @@
 
             bar.box = targetBox;
             for(var i = 0, length = children.length; i < length; i++) {
-                children[i].reflow(targetBox, options.isVertical);
+                children[i].reflow(targetBox);
             }
         },
 
@@ -1747,7 +1764,7 @@
                 catMax = [],
                 catMin = [];
 
-            barChart.traverseDataPoints(function(value, categoryIx, series) {
+            barChart.traverseDataPoints(function(value, categoryIx, series, seriesIx) {
                 if(typeof value !== UNDEFINED) {
                     if (isStacked) {
                         var sums = value > 0 ? catMax : catMin;
@@ -1758,7 +1775,7 @@
                     }
                 }
 
-                barChart.addValue(value, categoryIx, series);
+                barChart.addValue(value, categoryIx, series, seriesIx);
             });
 
             if (isStacked) {
@@ -1767,12 +1784,14 @@
             }
         },
 
-        addValue: function(value, categoryIx, series) {
+        addValue: function(value, categoryIx, series, seriesIx) {
             var barChart = this,
                 options = barChart.options,
                 children = barChart.children,
                 isStacked = barChart.options.isStacked,
-                labelOptions = deepExtend({}, series.labels);
+                labelOptions = deepExtend({
+                    isVertical: options.isVertical
+                }, series.labels);
 
             if (isStacked) {
                 if (labelOptions.position == "outsideEnd") {
@@ -1837,7 +1856,7 @@
             var barChart = this;
 
             if (barChart._bars.length) {
-                return { min: barChart._seriesMin, max: barChart._seriesMax };
+            return { min: barChart._seriesMin, max: barChart._seriesMax };
             }
 
             return null;
@@ -1872,27 +1891,40 @@
                 var slotY = plotArea.axisY.getSlot(isVertical ? value : categoryIx);
 
                 var barSlot = new Box2D(slotX.x1, slotY.y1, slotX.x2, slotY.y2);
+
+                var valueAxis = options.isVertical ? plotArea.axisY : plotArea.axisX,
+                    axisCrossingValue = valueAxis.options.axisCrossingValue,
+                    aboveAxis = value >= axisCrossingValue;
+
                 var label = bar.children[0];
 
                 if (label) {
-                    var axis = options.isVertical ? plotArea.axisY : plotArea.axisX,
-                        axisCrossingValue = axis.options.axisCrossingValue;
-                    label.options.aboveAxis = value >= axisCrossingValue;
+                    label.options.aboveAxis = aboveAxis;
                     label.content = label.content || axisCrossingValue;
                 }
 
                 bar.box = barSlot;
+                bar.options.aboveAxis = aboveAxis;
 
                 if(!categorySlots[categoryIx]) {
                     categorySlots[categoryIx] = isVertical ? slotX : slotY;
                 }
             });
 
-            for (var i = 0; i < children.length; i++) {
-                children[i].reflow(categorySlots[i]);
-            }
+            barChart.reflowCategories(categorySlots);
 
             barChart.box = targetBox;
+       },
+
+        reflowCategories: function(categorySlots) {
+            var chart = this,
+                children = chart.children,
+                childrenLength = children.length,
+                i;
+
+            for (i = 0; i < childrenLength; i++) {
+                children[i].reflow(categorySlots[i]);
+            }
        },
 
        traverseDataPoints: function(callback) {
@@ -1906,10 +1938,254 @@
                     var currentSeries = series[seriesIx],
                         value = currentSeries.data[categoryIx];
 
-                    callback(value, categoryIx, currentSeries);
+                    callback(value, categoryIx, currentSeries, seriesIx);
                 }
             }
        }
+    });
+
+    var LinePoint = ChartElement.extend({
+        init: function(value, options) {
+            var point = this;
+
+            point.value = value;
+
+            ViewElement.fn.init.call(point, options);
+
+            point.render();
+        },
+
+        options: {
+            aboveAxis: true,
+            isVertical: false,
+            marker: {
+                visible: true,
+                background: BLACK,
+                size: LINE_MARKER_SIZE,
+                type: LINE_MARKER_SQUARE
+            },
+            label: {
+                position: ABOVE
+            }
+        },
+
+        render: function() {
+            var point = this,
+                options = point.options,
+                marker = options.marker,
+                children = point.children;
+
+            children.push(
+                new BoxElement({
+                    width: marker.size,
+                    height: marker.size,
+                    background: marker.background,
+                    border: marker.border,
+                    align: CENTER,
+                    vAlign: CENTER
+                })
+            );
+
+            children.push(
+                new TextBox(point.value, {
+                    align: CENTER,
+                    vAlign: CENTER,
+                    margin: {
+                        left: 5,
+                        right: 5
+                    }
+                })
+            );
+        },
+
+        markerBox: function() {
+            return this.children[0].box;
+        },
+
+        reflow: function(targetBox) {
+            var point = this,
+                options = point.options,
+                isVertical = options.isVertical,
+                aboveAxis = options.aboveAxis,
+                childBox;
+
+            point.box = targetBox;
+            childBox = targetBox.clone();
+
+            if (isVertical) {
+                if (aboveAxis) {
+                    childBox.x1 += childBox.width();
+                } else {
+                    childBox.x2 -= childBox.width();
+                }
+            } else {
+                if (aboveAxis) {
+                    childBox.y1 -= childBox.height();
+                } else {
+                    childBox.y2 += childBox.height();
+                }
+            }
+
+            var marker = point.children[0];
+            marker.reflow(childBox);
+
+            point.reflowLabel(childBox);
+        },
+
+        reflowLabel: function(box) {
+            var point = this,
+                options = point.options,
+                marker = point.children[0],
+                label = point.children[1],
+                edge = options.label.position;
+
+            edge = edge === ABOVE ? TOP : edge;
+            edge = edge === BELOW ? BOTTOM : edge;
+
+            label.reflow(box);
+            label.box.alignTo(marker.box, edge);
+            label.reflow(label.box);
+        },
+
+        getViewElements: function(view) {
+            var point = this,
+                options = point.options;
+
+            if (options.marker.visible) {
+                return ChartElement.fn.getViewElements.call(point, view);
+            }
+
+            return [];
+        }
+    });
+
+    var LineChart = BarChart.extend({
+        init: function(plotArea, options) {
+            var chart = this;
+            chart.seriesPoints = [];
+
+            BarChart.fn.init.call(chart, plotArea, options);
+        },
+
+        options: {
+            line: {
+                width: 2
+            }
+        },
+
+        addValue: function(value, categoryIx, series, seriesIx) {
+            var chart = this,
+                options = chart.options,
+                series = options.series,
+                currentSeries = series[seriesIx],
+                children = chart.children,
+                isStacked = options.isStacked,
+                labelOptions = deepExtend({}, series.labels),
+                points = chart.seriesPoints[seriesIx];
+
+            var point = new LinePoint(value, {
+                isVertical: !options.isVertical,
+                marker: {
+                    border: {
+                        width: 1,
+                        color:
+                            new Color(currentSeries.color)
+                                .brightness(BAR_BORDER_BRIGHTNESS)
+                                .toHex()
+                    },
+                    background: currentSeries.color
+                }
+            });
+            chart._bars.push(point);
+
+            if (!points) {
+                chart.seriesPoints[seriesIx] = points = [];
+            }
+            points.push(point);
+
+            if (isStacked) {
+                var stackWrap = chart.children[categoryIx],
+                    positiveStack,
+                    negativeStack;
+
+                if (!stackWrap) {
+                    stackWrap = chart.children[categoryIx] = new ChartElement();
+
+                    positiveStack = new StackLayout({
+                        isVertical: options.isVertical
+                    });
+                    negativeStack = new StackLayout({
+                        isVertical: options.isVertical,
+                        isReversed: true
+                    });
+                    stackWrap.children.push(positiveStack, negativeStack);
+                } else {
+                    positiveStack = stackWrap.children[0];
+                    negativeStack = stackWrap.children[1];
+                }
+
+                if (value > 0) {
+                    positiveStack.children.push(point);
+                } else {
+                    negativeStack.children.push(point);
+                }
+            } else {
+                children.push(point);
+            }
+        },
+
+        getViewElements: function(view) {
+            var chart = this,
+                options = chart.options,
+                elements = BarChart.fn.getViewElements.call(chart, view),
+                series = options.series,
+                currentSeries,
+                seriesIx,
+                seriesPoints = chart.seriesPoints,
+                seriesCount = seriesPoints.length,
+                currentSeriesPoints,
+                pointIx,
+                pointCount,
+                point,
+                linePoints,
+                lines = [];
+
+            for (seriesIx = 0; seriesIx < seriesCount; seriesIx++) {
+                currentSeriesPoints = seriesPoints[seriesIx];
+                pointCount = currentSeriesPoints.length;
+                currentSeries = series[seriesIx];
+                linePoints = [];
+
+                for (pointIx = 0; pointIx < pointCount; pointIx++) {
+                    point = currentSeriesPoints[pointIx];
+                    linePoints.push(point.markerBox().center());
+                }
+
+                lines.push(
+                    view.createPath(linePoints, {
+                        stroke: currentSeries.color,
+                        strokeWidth: options.line.width,
+                        fill: ""
+                    })
+                );
+            }
+
+            return lines.concat(elements);
+        },
+
+        reflowCategories: function(categorySlots) {
+            var chart = this,
+                isStacked = chart.options.isStacked,
+                children = chart.children,
+                childrenLength = children.length,
+                currentChild,
+                i;
+
+            for (i = 0; i < childrenLength; i++) {
+                currentChild = children[i];
+                currentChild.reflow(isStacked ? categorySlots[i] : currentChild.box);
+            }
+        }
     });
 
     var PlotArea = ChartElement.extend({
@@ -1940,21 +2216,34 @@
                 charts = plotArea.charts = [],
                 range = { min: 0, max: 1 },
                 categories = options.categoryAxis.categories,
-                barSeries,
+                invertAxes = options.categoryAxis.orientation === VERTICAL,
+                i,
+                series = options.series,
+                seriesLength = series.length,
+                currentSeries,
+                barSeries = [],
+                lineSeries = [],
                 barChart,
+                lineChart,
                 categoriesToAdd,
-                seriesType;
+                firstSeries;
 
-            barSeries = $.grep(options.series, function(currentSeries) {
-                return currentSeries.type === BAR || currentSeries.type === COLUMN;
-            });
+            for (i = 0; i < seriesLength; i++) {
+                currentSeries = series[i];
+
+                if (currentSeries.type === BAR || currentSeries.type === COLUMN) {
+                    barSeries.push(currentSeries);
+                } else if (currentSeries.type === LINE) {
+                    lineSeries.push(currentSeries);
+                }
+            }
 
             if (barSeries.length > 0) {
-                var firstSeries = barSeries[0];
-                seriesType = firstSeries.type;
+                firstSeries = barSeries[0];
+                invertAxes = firstSeries.type === BAR;
                 barChart = new BarChart(this, {
                         series: barSeries,
-                        isVertical: seriesType === COLUMN,
+                        isVertical: !invertAxes,
                         isStacked: firstSeries.stack,
                         gap: firstSeries.gap,
                         spacing: firstSeries.spacing
@@ -1965,28 +2254,47 @@
 
                 range = barChart.valueRange() || range;
                 charts.push(barChart);
-                [].push.apply(plotArea.children, charts);
             }
 
-            plotArea.createAxes(range.min, range.max, seriesType);
+            if (lineSeries.length > 0) {
+                firstSeries = lineSeries[0];
+                lineChart = new LineChart(this, {
+                    // TODO: Rename isVertical to invertAxes, flip logic
+                    isVertical: !invertAxes,
+                    isStacked: firstSeries.stack,
+                    series: lineSeries
+                });
+
+                categoriesToAdd = Math.max(0, lineChart.categoriesCount() - categories.length);
+                [].push.apply(options.categoryAxis.categories, new Array(categoriesToAdd));
+
+                var lineChartRange = lineChart.valueRange() || range;
+                range.min = Math.min(range.min, lineChartRange.min);
+                range.max = Math.max(range.max, lineChartRange.max);
+                charts.push(lineChart);
+            }
+
+            [].push.apply(plotArea.children, charts);
+
+            plotArea.createAxes(range.min, range.max, invertAxes);
         },
 
-        createAxes: function(seriesMin, seriesMax, seriesType) {
+        createAxes: function(seriesMin, seriesMax, invertAxes) {
             var plotArea = this,
                 options = plotArea.options,
-                isColumn = (seriesType || COLUMN) === COLUMN,
+                categoriesCount = options.categoryAxis.categories.length,
                 categoryAxis = new CategoryAxis(deepExtend({
-                        orientation: isColumn ? HORIZONTAL : VERTICAL,
-                        axisCrossingValue: isColumn ? 0 : options.categoryAxis.categories.length
+                        orientation: invertAxes ? VERTICAL : HORIZONTAL,
+                        axisCrossingValue: invertAxes ? categoriesCount : 0
                     }, options.axesDefaults, options.categoryAxis)
                 ),
                 valueAxis = new NumericAxis(seriesMin, seriesMax, deepExtend({
-                        orientation: isColumn ? VERTICAL : HORIZONTAL
+                        orientation: invertAxes ? HORIZONTAL : VERTICAL
                     }, options.axesDefaults, options.valueAxis)
                 );
 
-            plotArea.axisX = isColumn ? categoryAxis : valueAxis;
-            plotArea.axisY = isColumn ? valueAxis : categoryAxis;
+            plotArea.axisX = invertAxes ? valueAxis : categoryAxis;
+            plotArea.axisY = invertAxes ? categoryAxis : valueAxis;
 
             plotArea.children.push(plotArea.axisY);
             plotArea.children.push(plotArea.axisX);
@@ -2247,10 +2555,10 @@
             if (!view.template) {
                 view.template = SVGView.template = template(
                     "<svg xmlns='http://www.w3.org/2000/svg' version='1.1' " +
-                    "width='<#= options.width #>px' height='<#= options.height #>px' " +
+                    "width='<#= d.options.width #>px' height='<#= d.options.height #>px' " +
                     "style='position: relative;'>" +
-                    "<#= renderDefinitions() #>" +
-                    "<#= renderContent() #></svg>"
+                    "<#= d.renderDefinitions() #>" +
+                    "<#= d.renderContent() #></svg>"
                 );
             }
         },
@@ -2299,6 +2607,10 @@
             return new SVGPath([[x1, y1], [x2, y2]], options);
         },
 
+        createPath: function(points, options) {
+            return new SVGPath(points, options);
+        },
+
         createGradient: function(options) {
             return new SVGLinearGradient(options);
         },
@@ -2327,7 +2639,7 @@
             group.template = SVGGroup.template;
             if (!group.template) {
                 group.template = SVGGroup.template =
-                    template("<g><#= renderContent() #></g>");
+                    template("<g><#= d.renderContent() #></g>");
             }
         }
     });
@@ -2342,10 +2654,10 @@
             text.template = SVGText.template;
             if (!text.template) {
                 text.template = SVGText.template = template(
-                    "<text x='<#= Math.round(options.x) #>' " +
-                    "y='<#= Math.round(options.y + options.baseline) #>' " +
-                    "style='font: <#= options.font #>' fill='<#= options.color #>'>" +
-                    "<#= content #></text>"
+                    "<text x='<#= Math.round(d.options.x) #>' " +
+                    "y='<#= Math.round(d.options.y + d.options.baseline) #>' " +
+                    "style='font: <#= d.options.font #>' fill='<#= d.options.color #>'>" +
+                    "<#= d.content #></text>"
                 );
             }
         },
@@ -2366,10 +2678,10 @@
             path.template = SVGPath.template;
             if (!path.template) {
                 path.template = SVGPath.template = template(
-                    "<path d='<#= renderPoints() #>' " +
-                    "<#= renderStroke() #><#= renderStrokeWidth() #>" +
+                    "<path d='<#= d.renderPoints() #>' " +
+                    "<#= d.renderStroke() #><#= d.renderStrokeWidth() #>" +
                     "stroke-linecap='square' " +
-                    "fill='<#= options.fill || \"none\" #>'></path>"
+                    "fill='<#= d.options.fill || \"none\" #>'></path>"
                 );
             }
 
@@ -2427,15 +2739,15 @@
             gradient.stopTemplate = SVGLinearGradient.stopTemplate;
             if (!gradient.template) {
                 gradient.template = SVGLinearGradient.template = template(
-                    "<linearGradient id='<#= options.id #>' " +
-                    "gradientTransform='rotate(<#= options.rotation #>)'> " +
-                    "<#= renderStops() #>" +
+                    "<linearGradient id='<#= d.options.id #>' " +
+                    "gradientTransform='rotate(<#= d.options.rotation #>)'> " +
+                    "<#= d.renderStops() #>" +
                     "</linearGradient>"
                 );
 
                 gradient.stopTemplate = SVGLinearGradient.stopTemplate = template(
-                    "<stop offset='<#= Math.round(offset * 100) #>%' " +
-                    "style='stop-color:<#= color #>;stop-opacity:<#= opacity #>' />");
+                    "<stop offset='<#= Math.round(d.offset * 100) #>%' " +
+                    "style='stop-color:<#= d.color #>;stop-opacity:<#= d.opacity #>' />");
             }
         },
 
@@ -2547,9 +2859,10 @@
             view.template = VMLView.template;
             if (!view.template) {
                 view.template = VMLView.template = template(
-                    "<div style='width:<#= options.width #>px; height:<#= options.height #>px; " +
+                    "<div style='width:<#= d.options.width #>px; " +
+                    "height:<#= d.options.height #>px; " +
                     "position: relative;'>" +
-                    "<#= renderContent() #></div>"
+                    "<#= d.renderContent() #></div>"
                 );
             }
         },
@@ -2585,6 +2898,10 @@
             return new VMLPath([[x1, y1], [x2, y2]], options);
         },
 
+        createPath: function(points, options) {
+            return new VMLPath(points, options);
+        },
+
         createGroup: function(options) {
             return new VMLGroup(options);
         },
@@ -2604,9 +2921,9 @@
             if (!text.template) {
                 text.template = VMLText.template = template(
                     "<kvml:textbox style='position: absolute; " +
-                    "left: <#= options.x #>px; top: <#= options.y #>px; " +
-                    "font: <#= options.font #>; color: <#= options.color #>'>" +
-                    "<#= content #></kvml:textbox>"
+                    "left: <#= d.options.x #>px; top: <#= d.options.y #>px; " +
+                    "font: <#= d.options.font #>; color: <#= d.options.color #>'>" +
+                    "<#= d.content #></kvml:textbox>"
                 );
             }
         },
@@ -2628,13 +2945,14 @@
             if (!path.template) {
                 path.template = VMLPath.template = template(
                     "<kvml:shape style='position:absolute; width:1px; height:1px;' " +
-                    "strokecolor='<#= options.stroke || '' #>' stroked='<#= !!options.stroke #>' " +
-                    "strokeweight='<#= options.strokeWidth || '' #>' " +
-                    "fillcolor='<#= options.fill #>' " +
-                    "filled='<#= !!options.fill || children.length > 0 #>' " +
+                    "strokecolor='<#= d.options.stroke || '' #>' " +
+                    "stroked='<#= !!d.options.stroke #>' " +
+                    "strokeweight='<#= d.options.strokeWidth || '' #>' " +
+                    "fillcolor='<#= d.options.fill #>' " +
+                    "filled='<#= !!d.options.fill || d.children.length > 0 #>' " +
                     "coordorigin='0 0' coordsize='1 1'>" +
-                        "<kvml:path v='<#= renderPoints() #> e' />" +
-                        "<#= renderContent() #>" +
+                        "<kvml:path v='<#= d.renderPoints() #> e' />" +
+                        "<#= d.renderContent() #>" +
                     "</kvml:shape>"
                 );
             }
@@ -2678,7 +2996,7 @@
             if (!group.template) {
                 group.template = VMLGroup.template = template(
                     "<div style='position: absolute; white-space: nowrap;'>" +
-                    "<#= renderContent() #></div>"
+                    "<#= d.renderContent() #></div>"
                 );
             }
         }
@@ -2692,8 +3010,8 @@
             gradient.template = VMLLinearGradient.template;
             if (!gradient.template) {
                 gradient.template = VMLLinearGradient.template = template(
-                    "<kvml:fill type='gradient' angle='<#= options.rotation #>' " +
-                    "colors='<#= renderColors() #>'" +
+                    "<kvml:fill type='gradient' angle='<#= d.options.rotation #>' " +
+                    "colors='<#= d.renderColors() #>'" +
                     "/> "
                 );
             }
@@ -3204,6 +3522,10 @@
             }
         }
     };
+
+    function template(definition) {
+        return baseTemplate(definition, { useWithBlock: false, paramName: "d" });
+    }
 
     // Exports ================================================================
 

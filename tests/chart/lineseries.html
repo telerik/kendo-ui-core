@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.chart</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <link href="../qunit.css" type="text/css" rel="stylesheet"/>
+    </head>
+    <body>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.chart.js"></script>
+        <script src="util.js"></script>
+        <script type="text/javascript">
+            var Chart = kendo.ui.Chart,
+                Box2D = Chart.Box2D,
+                chartBox = new Box2D(0, 0, 800, 600),
+                plotArea,
+                series,
+                view;
+
+            function PointStub(box) {
+                this.box = box;
+            }
+
+            PointStub.prototype = {
+                reflow: function(box) {
+                    this.box = box;
+                }
+            };
+
+            function setupLineChart(plotArea, options) {
+                view = new ViewStub();
+
+                series = new Chart.LineChart(plotArea, options);
+                series.reflow();
+            }
+
+            (function() {
+                var positiveSeries = { data: [1, 2], labels: {} },
+                    negativeSeries = { data: [-1, -2], labels: {} },
+                    VALUE_AXIS_MAX = 2,
+                    CATEGORY_AXIS_Y = 2,
+                    TOLERANCE = 0.1;
+
+                function PlotAreaStub() { }
+
+                $.extend(PlotAreaStub.prototype, {
+                    axisX: {
+                        getSlot: function(categoryIndex) {
+                            return new Box2D(categoryIndex, CATEGORY_AXIS_Y,
+                            categoryIndex + 1, CATEGORY_AXIS_Y);
+                        }
+                    },
+                    axisY: {
+                        getSlot: function(value) {
+                            var value = typeof value === "undefined" ? 0 : value,
+                                valueY = VALUE_AXIS_MAX - value,
+                                slotTop = Math.min(CATEGORY_AXIS_Y, valueY),
+                                slotBottom = Math.max(CATEGORY_AXIS_Y, valueY);
+
+                            return new Box2D(0, slotTop, 0, slotBottom);
+                        },
+                        options: {}
+                    }
+                });
+
+                // ------------------------------------------------------------
+                module("Line Chart / Positive Values", {
+                    setup: function() {
+                        plotArea = new PlotAreaStub();
+                        setupLineChart(plotArea, { series: [ positiveSeries ] });
+                    }
+                });
+
+                test("Creates bars for series data points", function() {
+                    equal(series._bars.length, positiveSeries.data.length);
+                });
+
+                test("Reports minimum series value", function() {
+                    same(series.valueRange().min, positiveSeries.data[0]);
+                });
+
+                test("Reports maximum series value", function() {
+                    same(series.valueRange().max, positiveSeries.data[1]);
+                });
+
+                test("Reports number of categories", function() {
+                    setupBarChart(plotArea, {series: [ positiveSeries ]});
+                    equal(series.categoriesCount(), positiveSeries.data.length);
+                });
+
+                test("bars are distributed across category axis", function() {
+                    var barsX = $.map(series._bars, function(bar) {
+                        return bar.box.x1;
+                    });
+
+                    same(barsX, [0.3, 1.3], TOLERANCE);
+                });
+
+                test("bar bottoms are aligned to category axis", function() {
+                    var barsY = $.map(series._bars, function(bar) {
+                        return bar.box.y2;
+                    });
+
+                    same(barsY, [CATEGORY_AXIS_Y, CATEGORY_AXIS_Y]);
+                });
+
+                test("bars have set width", function() {
+                    $.each(series._bars, function() {
+                        equal(this.box.width(), 0.4, TOLERANCE);
+                    });
+                });
+
+                test("bars have set height according to value", function() {
+                    var barHeights = $.map(series._bars, function(bar) {
+                        return bar.box.height();
+                    });
+
+                    same(barHeights, [1, 2]);
+                });
+
+                // ------------------------------------------------------------
+                module("Bar Chart / Negative Values", {
+                    setup: function() {
+                        plotArea = new PlotAreaStub();
+                        setupBarChart(plotArea, { series: [ negativeSeries ] });
+                    }
+                });
+
+                test("Reports minimum series value", function() {
+                    same(series.valueRange().min, negativeSeries.data[1]);
+                });
+
+                test("Reports maximum series value", function() {
+                    same(series.valueRange().max, negativeSeries.data[0]);
+                });
+
+                test("bar tops are aligned to category axis", function() {
+                    var barsY = $.map(series._bars, function(bar) {
+                        return bar.box.y1;
+                    });
+
+                    same(barsY, [CATEGORY_AXIS_Y, CATEGORY_AXIS_Y]);
+                });
+
+                test("bars have set height according to value", function() {
+                    var barHeights = $.map(series._bars, function(bar) {
+                        return bar.box.height();
+                    });
+
+                    same(barHeights, [1, 2]);
+                });
+
+                // ------------------------------------------------------------
+                module("Bar Chart / Mixed Values", {
+                    setup: function() {
+                        plotArea = new PlotAreaStub();
+                        setupBarChart(plotArea, { series: [ negativeSeries, positiveSeries ] });
+                    }
+                });
+
+                test("Reports number of categories for two series", function() {
+                    setupBarChart(plotArea, {series: [ positiveSeries, negativeSeries ]});
+                    equal(series.categoriesCount(), positiveSeries.data.length);
+                });
+
+                // ------------------------------------------------------------
+                module("Bar Chart / Mismatching series", {
+                    setup: function() {
+                        plotArea = new PlotAreaStub();
+                        setupBarChart(plotArea, {
+                        series: [ { data: [1, 2, 3] },
+                                  positiveSeries
+                            ]
+                        });
+                    }
+                });
+
+                test("Reports minimum series value", function() {
+                    same(series.valueRange().min, 1);
+                });
+
+                test("Reports maximum series value", function() {
+                    same(series.valueRange().max, 3);
+                });
+
+                test("Reports number of categories", function() {
+                    equal(series.categoriesCount(), 3);
+                });
+
+                test("Missing values are represented as bars with zero height", function() {
+                    var barHeights = $.map(series._bars, function(bar) {
+                        return bar.box.height();
+                    });
+
+                    same(barHeights, [1, 1, 2, 2, 3, 0]);
+                });
+
+                test("bar bottoms are aligned to category axis", 6, function() {
+                    $.each(series._bars, function() {
+                        equal(this.box.y2, CATEGORY_AXIS_Y);
+                    });
+                });
+
+                // ------------------------------------------------------------
+                module("Bar Chart / Stack / Positive Values", {
+                    setup: function() {
+                        plotArea = new PlotAreaStub();
+                        setupBarChart(plotArea, {
+                            series: [ positiveSeries, positiveSeries ],
+                            isStacked: true }
+                        );
+                    }
+                });
+
+                test("reports stacked minumum value", function() {
+                    equal(series.valueRange().min, 2);
+                });
+
+                test("reports stacked maximum value", function() {
+                    equal(series.valueRange().max, 4);
+                });
+
+                test("bars in first category are stacked", function() {
+                    equal(series._bars[1].box.y2, series._bars[0].box.y1);
+                });
+
+                test("series have 75% margin", function() {
+                    equal(series._bars[0].box.x1, 0.3, TOLERANCE);
+                });
+
+                test("bars have set height according to value", function() {
+                    var barHeights = $.map(series._bars, function(bar) {
+                        return bar.box.height();
+                    });
+
+                    same(barHeights, [1, 1, 2, 2]);
+                });
+
+                // ------------------------------------------------------------
+                module("Bar Chart / Stack / Negative Values", {
+                    setup: function() {
+                        plotArea = new PlotAreaStub();
+                        setupBarChart(plotArea, {
+                            series: [ negativeSeries, negativeSeries ],
+                            isStacked: true
+                        });
+                    }
+                });
+
+                test("reports stacked minumum value", function() {
+                    equal(series.valueRange().min, -4);
+                });
+
+                test("reports stacked maximum value", function() {
+                    equal(series.valueRange().max, -2);
+                });
+
+                test("bars in first category are stacked", function() {
+                    equal(series._bars[1].box.y1, series._bars[0].box.y2);
+                });
+
+                test("stack tops are aligned to category axis", function() {
+                    same([series._bars[0].box.y1, series._bars[2].box.y1],
+                         [CATEGORY_AXIS_Y, CATEGORY_AXIS_Y]);
+                });
+
+                test("bars have set height according to value", function() {
+                    var barHeights = $.map(series._bars, function(bar) {
+                        return bar.box.height();
+                    });
+
+                    same(barHeights, [1, 1, 2, 2]);
+                });
+
+                // ------------------------------------------------------------
+                module("Bar Chart / Stack / Mixed Values", {
+                    setup: function() {
+                        plotArea = new PlotAreaStub();
+                        setupBarChart(plotArea, {
+                            series: [{
+                                data: [1, -1],
+                                labels: {}
+                            }],
+                            isStacked: true
+                        });
+                    }
+                });
+
+                test("reports stacked minumum value", function() {
+                    equal(series.valueRange().min, -1);
+                });
+
+                test("reports stacked maximum value", function() {
+                    equal(series.valueRange().max, 1);
+                });
+
+                test("bars have set height according to value", function() {
+                    var barHeights = $.map(series._bars, function(bar) {
+                        return bar.box.height();
+                    });
+
+                    same(barHeights, [1, 1]);
+                });
+
+                // ------------------------------------------------------------
+                module("Bar Chart / Stack / Mixed Series", {
+                    setup: function() {
+                        plotArea = new PlotAreaStub();
+                        setupBarChart(plotArea, {
+                            series: [ positiveSeries, negativeSeries ],
+                            isStacked: true
+                        });
+                    }
+                });
+
+                test("reports stacked minumum value", function() {
+                    equal(series.valueRange().min, -2);
+                });
+
+                test("reports stacked maximum value", function() {
+                    equal(series.valueRange().max, 2);
+                });
+
+                test("bars have set height according to value", function() {
+                    var barHeights = $.map(series._bars, function(bar) {
+                        return bar.box.height();
+                    });
+
+                    same(barHeights, [1, 1, 2, 2]);
+                });
+            })();
+
+            (function() {
+                var barChart;
+
+                function PlotAreaStub() { }
+
+                $.extend(PlotAreaStub.prototype, {
+                    axisX: {
+                        getSlot: function(value) {
+                            return new Box2D();
+                        }
+                    },
+                    axisY: {
+                        getSlot: function(categoryIndex) {
+                            return new Box2D();
+                        }
+                    }
+                });
+
+                // ------------------------------------------------------------
+                module("Bar Chart / Configuration", {
+                    setup: function() {
+                        plotArea = new PlotAreaStub();
+                        barChart = new Chart.BarChart(plotArea, {
+                            series: [{
+                                data: [0, 1],
+                                color: "#f00"
+                            }]
+                        });
+                    }
+                });
+
+                test("applies series fill color to bars", function() {
+                    equal(barChart._bars[0].options.color, "#f00");
+                });
+
+            })();
+
+        </script>
+
+        <h1 id="qunit-header">kendo.chart</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+    </body>
+</html>

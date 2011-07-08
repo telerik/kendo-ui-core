@@ -11,6 +11,43 @@
     <body>
         <script type="text/javascript">
 
+            var data = [],
+                sample = [
+                {
+                    name: "Alpha",
+                    a: 15,
+                    b: 20,
+                    c: 15,
+                    d: 20
+                }, {
+                    name: "Beta",
+                    a: -5,
+                    b: -20,
+                    c: -5,
+                    d: -20
+                }, {
+                    name: "Gamma",
+                    a: 20,
+                    b: 30,
+                    c: 20,
+                    d: 30
+                }
+            ];
+
+            /*
+            for(var i = 0; i < 30; i++) {
+                data.push({
+                    name: "",
+                    a: i,
+                    b: i + 5,
+                    c: i + 10,
+                    d: i + 15
+                });
+            }
+            */
+
+            data = sample;
+
             $(document).ready(function() {
                 $("#container").kendoChart({
                     title: {
@@ -21,37 +58,18 @@
                         position: "right",
                         visible: true
                     },
-                    dataSource: [
-                        {
-                            name: "Alpha",
-                            a: 15,
-                            b: 20,
-                            c: 15,
-                            d: -10,
-                            e: 10
-                        }, {
-                            name: "Beta",
-                            a: -5,
-                            b: -20,
-                            c: -15,
-                            d: -10,
-                            e: -15
-                        }, {
-                            name: "Gamma",
-                            a: 20,
-                            b: 30,
-                            c: 35,
-                            d: 30,
-                            e: 35
-                        }
-                    ],
+                    dataSource: data,
                     seriesDefaults: {
                         labels: {
                             visible: false
                         },
 
                         column: {
-                            spacing: 0.4
+                            //stack: true
+                        },
+
+                        line: {
+                            //stack: true
                         }
                     },
                     series: [
@@ -62,8 +80,63 @@
                             name: "Value B",
                             field: "b"
                         }, {
+                            type: "line",
                             name: "Value C",
                             field: "c"
+                        }, {
+                            type: "line",
+                            name: "Value D",
+                            field: "d"
+                        }
+                    ],
+                    categoryAxis: {
+                        field: "name"
+                    },
+                    valueAxis: {
+                        min: -100,
+                        max: 100
+                    },
+                    plotArea: {
+                    }
+                });
+
+                $("#containerV").kendoChart({
+                    title: {
+                        text: "Teh chart",
+                        position: "top"
+                    },
+                    legend: {
+                        position: "right",
+                        visible: true
+                    },
+                    dataSource: data,
+                    seriesDefaults: {
+                        labels: {
+                            visible: false
+                        },
+                        type: "bar",
+                        bar: {
+                            stack: true
+                        },
+                        line: {
+                            stack: true
+                        }
+                    },
+                    series: [
+                        {
+                            name: "Value A",
+                            field: "a"
+                        }, {
+                            name: "Value B",
+                            field: "b"
+                        }, {
+                            type: "line",
+                            name: "Value C",
+                            field: "c"
+                        }, {
+                            type: "line",
+                            name: "Value D",
+                            field: "d"
                         }
                     ],
                     categoryAxis: {
@@ -154,10 +227,13 @@
             }
         </script>
 
-        <div id="container" style="width: 800px; height: 600px;">
+        <div id="container" style="width: 500px; height: 400px; float: left;">
         </div>
 
-            <div class="configurator" style="margin-top: 30px;">
+        <div id="containerV" style="width: 500px; height: 400px; float: left;">
+        </div>
+
+            <div class="configurator" style="margin-top: 30px; clear: both;">
                 <div>
                     <input  id="typeColumn" name="type"
                             type="radio" checked="checked" autocomplete="off" />
@@ -218,6 +294,7 @@
                 MAX_DATA = 400,
                 direction = 1;
 
+            var view;
             $("#animate").click(function() {
                 var chart = $("#container").data("kendoChart"),
                     data = chart.options.dataSource,
@@ -225,9 +302,6 @@
 
                 var start = new Date();
                 function step() {
-                    chart.options.plotArea.background.rotation =
-                        (chart.options.plotArea.background.rotation + 9) % 360;
-
                     for (var i = 0, length = data.length; i < length; i++) {
                         var point = data[i];
                         point.a = (point.a + direction * STEP) % MAX_DATA;
@@ -235,6 +309,12 @@
                         point.c = (point.c - direction * STEP) % MAX_DATA;
                     };
 
+                    /*
+                if (!view) {
+                    view = chart._model.getView();
+                }
+                view.renderTo(chart.element[0]);
+                */
                     chart.refresh();
 
                     if (frame++ < FRAMES) {
