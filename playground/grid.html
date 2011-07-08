@@ -103,19 +103,28 @@
 
                 $("#table1").kendoGrid({
                     dataSource: {
-                        data: $.map(new Array(1000), function(value, index) {
-                            return {
-                                Group: index % 10,
-                                OrderID: index,
-                                CustomerID: "Contact " + index
-                            };
-                        }),
+                        transport: {
+                            read: function(options) {
+                                $.get("livescores.xml", options.success);
+                            }
+                        },
+                        schema: {
+                            type: "xml",
+                            data: "/LiveScores/MatchData"
+                        },
                         pageSize: 20
                     },
                     columns: [ {
-                        title: "Foo",
-                        template: "<div style='line-height: <%= [50, 60, 70][OrderID % 3] %>px'><%= Group %></div>"
-                    }, "OrderID", "CustomerID"],
+                        title: "Team 1",
+                        field: 'Team1["#text"]'
+                        }, {
+                        title: "Team 2",
+                        field: 'Team2["#text"]'
+                        } , {
+                        title: "Score",
+                        field: 'Score["#text"]'
+                        }
+                    ],
                     scrollable: {
                         virtual: true
                     },

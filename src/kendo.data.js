@@ -280,6 +280,9 @@
                 };
             }
         },
+        total: function(result) {
+            return this.data(result).length;
+        },
         parseDOM: function(element) {
             var result = {},
                 parsedNode,
