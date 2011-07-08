@@ -121,6 +121,17 @@
                 ok(dataSource.data() === data);
             });
 
+            test("XmlDataReader is initialized when the type of the schema is xml", function() {
+                var dataSource = new DataSource({
+                    schema: {
+                        type: "xml",
+                        model: Model.define()
+                    }
+                });
+
+                ok(dataSource.reader instanceof kendo.data.XmlDataReader);
+            });
+
             test("model returns a model instance", function() {
                 var dataSource = new DataSource({
                     schema: {
