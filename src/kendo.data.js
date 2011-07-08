@@ -283,8 +283,14 @@
             if (Model && !isEmptyObject(model)) {
                 that.modelSet = new ModelSet({
                     model: model,
+                    create: function(e) {
+                        that.trigger(CREATE, e);
+                    },
                     update: function(e) {
                         that.trigger(UPDATE, e);
+                    },
+                    destroy: function(e) {
+                        that.trigger(DESTROY, e);
                     }
                 });
             } else {
@@ -433,23 +439,10 @@
                 return that.error({data: origData});
             }
 
-            that.modelSet.clear();
-
             data = reader.data(data);
 
-            $.each(data, function(index, value) {
-                origValue = origData[index];
-                if(origValue) {
-                    origId = that.id(origValue);
-                    index = map[origId];
-
-                    if(index >= 0) {
-                        that._data[index] = value;
-                    }
-                }
-            });
-
-            that.modelSet.refresh(that._data);
+            that.modelSet.clear();
+            that.modelSet.merge(origData, data);
         },
 
         _syncError: function(origData, data) {
@@ -491,26 +484,7 @@
         },
 
         create: function(index, values) {
-            var that = this,
-                data = that._data,
-                model = that.model();
-
-            if (typeof index !== "number") {
-                values = index;
-                index = undefined;
-            }
-
-            model.set(values);
-
-            index = index !== undefined ? index : data.length;
-
-            data.splice(index, 0, model.data);
-
-            that.modelSet.refresh(data);
-
-            that.trigger(CREATE, { model: model });
-
-            return model;
+            return this.modelSet.create(index, values);
         },
 
         read: function(additionalData) {
@@ -536,27 +510,11 @@
         },
 
         update: function(id, values) {
-            var that = this,
-            model = that.model(id);
-
-            if (model) {
-                model.set(values);
-            }
+            this.modelSet.update(id, values);
         },
 
         destroy: function(id) {
-            var that = this,
-            model = that.model(id);
-
-            if (model) {
-                that._data.splice(that._map[id], 1);
-
-                that.modelSet.refresh(that._data);
-
-                model.destroy();
-
-                that.trigger(DESTROY, { model: model });
-            }
+            this.modelSet.destroy(id);
         },
 
         error: function() {

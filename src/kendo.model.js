@@ -10,6 +10,11 @@
         PRISTINE = "PRISTINE",
         CREATED = "CREATED",
         DESTROYED = "DESTROYED",
+
+        CREATE = "create",
+        DESTROY = "destroy",
+        UPDATE = "update",
+
         Observable = kendo.Observable;
 
     function equal(x, y) {
@@ -179,12 +184,18 @@
         return model;
     }
 
-    var ModelSet = kendo.Class.extend({
+    var ModelSet = Observable.extend({
         init: function(options) {
-            this.options = options;
-            this.data = [];
-            this.map = {};
-            this.models = {};
+            var that = this;
+
+            Observable.call(that);
+
+            that.options = options;
+            that.data = [];
+            that.map = {};
+            that.models = {};
+
+            that.bind([CREATE, UPDATE, DESTROY], options);
         },
 
         model: function(id) {
@@ -192,10 +203,10 @@
                 model = id && that.models[id];
 
             if(!model) {
-                model = new that.options.model(that.options.find(id));
+                model = new that.options.model(that.find(id));
                 that.models[model.id()] = model;
                 model.bind(CHANGE, function() {
-                    that.options.update({ model: model });
+                    that.trigger(UPDATE, { model: model });
                 });
             }
 
@@ -282,6 +293,73 @@
 
         clear: function(data) {
             this.models = {};
+        },
+
+        merge: function(origData, data) {
+            var that = this,
+                origValue,
+                origId,
+                model = that.options.model;
+
+            $.each(data, function(index, value) {
+                origValue = origData[index];
+
+                if (origValue) {
+                    origId = model.id(origValue);
+                    index = that.map[origId];
+
+                    if (index >= 0) {
+                        that.data[index] = value;
+                    }
+                }
+            });
+
+            that.refresh(data);
+        },
+
+        create: function(index, values) {
+            var that = this,
+                data = that.data,
+                model = that.model();
+
+            if (typeof index !== "number") {
+                values = index;
+                index = undefined;
+            }
+
+            model.set(values);
+
+            index = index !== undefined ? index : data.length;
+
+            data.splice(index, 0, model.data);
+
+            that.refresh(data);
+
+            that.trigger(CREATE, { model: model });
+
+            return model;
+        },
+
+        update: function(id, values) {
+            var that = this, model = that.model(id);
+
+            if (model) {
+                model.set(values);
+            }
+        },
+
+        destroy: function(id) {
+            var that = this, model = that.model(id);
+
+            if (model) {
+                that.data.splice(that.map[id], 1);
+
+                model.destroy();
+
+                that.refresh(that.data);
+
+                that.trigger(DESTROY, { model: model });
+            }
         }
     });
 
