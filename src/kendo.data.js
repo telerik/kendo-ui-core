@@ -10,6 +10,7 @@
         Observable = kendo.Observable,
         Class = kendo.Class,
         Model = kendo.data.Model,
+        ModelSet = kendo.data.ModelSet,
         Query = kendo.data.Query,
         CREATE = "create",
         READ = "read",
@@ -249,97 +250,6 @@
         }
     });
 
-    var ModelSet = Class.extend({
-        init: function(options) {
-            this.options = options;
-            this.models = {};
-        },
-
-        model: function(id) {
-            var that = this,
-                model = id && that.models[id];
-
-            if(!model) {
-                model = new that.options.model(that.options.find(id));
-                that.models[model.id()] = model;
-                model.bind(CHANGE, function() {
-                    that.options.update({ model: model });
-                });
-            }
-
-            return model;
-        },
-
-        changes: function(id) {
-            var that = this,
-                model = that.models[id];
-
-            if (model && model.state === Model.UPDATED) {
-                return model.changes();
-            }
-        },
-
-        hasChanges: function(id) {
-            var that = this,
-                model,
-                models = that.models,
-                id;
-
-            if (id === undefined) {
-                for (id in models) {
-                    if (models[id].state !== Model.PRISTINE) {
-                        return true;
-                    }
-                }
-
-                return false;
-            }
-
-            model = models[id];
-
-            return !!model && model.state === Model.UPDATED;
-        },
-
-        find: function(state, selector) {
-            var models = this.models,
-                result = [],
-                model,
-                selector = selector || identity,
-                id;
-
-            for (id in models) {
-                model = models[id];
-
-                if(model.state === state) {
-                    result.push(selector(model));
-                }
-            }
-
-            return result;
-        },
-
-        syncUpdated: function(data) {
-            var updated = this.find(Model.UPDATED), model = this.options.model, models = this.models;
-
-            $.each(updated, function() {
-                var id = this.id();
-                $.each(data, function() {
-                    if (id === model.id(this)) {
-                        delete models[id];
-                    }
-                });
-            });
-        },
-
-        sync: function(data) {
-            var id = this.options.model.id, models = this.models;
-
-            $.each(data, function(index, value) {
-                delete models[id(value)];
-            });
-        }
-    });
-
     var DataSource = Observable.extend({
         init: function(options) {
             var that = this, id, model, transport;
@@ -370,6 +280,27 @@
 
             id = model.id;
 
+            if (Model && !isEmptyObject(model)) {
+                that.modelSet = new ModelSet({
+                    model: model,
+                    create: function(e) {
+                        that.trigger(CREATE, e);
+                    },
+                    update: function(e) {
+                        that.trigger(UPDATE, e);
+                    },
+                    destroy: function(e) {
+                        that.trigger(DESTROY, e);
+                    }
+                });
+            } else {
+                that.modelSet = {
+                    refresh: noop,
+                    select: noop,
+                    sync: noop
+                };
+            }
+
             if (transport) {
                 that.transport = isFunction(transport.read) ? transport: new RemoteTransport(transport);
             } else {
@@ -377,9 +308,7 @@
             }
 
             if (id) {
-                that.find = function(id) {
-                    return that._data[that._map[id]];
-                };
+                that.find = proxy(that.modelSet.find, that.modelSet);
                 that.id = function(record) {
                     return id(record);
                 };
@@ -387,15 +316,6 @@
                 that.find = that.at;
             }
 
-            if (Model) {
-                that.modelSet = new ModelSet({
-                    find: proxy(that.find, that),
-                    model: model,
-                    update: function(e) {
-                        that.trigger(UPDATE, e);
-                    }
-                });
-            }
             that.bind([ERROR, CHANGE, CREATE, DESTROY, UPDATE, REQUESTSTART], options);
         },
 
@@ -430,7 +350,7 @@
         },
 
         _createdModels: function() {
-            return this.modelSet.find(Model.CREATED, function(model) {
+            return this.modelSet.select(Model.CREATED, function(model) {
                 return model.data;
             });
         },
@@ -439,7 +359,7 @@
             var that = this,
                 sendAllFields = that.options.sendAllFields;
 
-            return that.modelSet.find(Model.UPDATED, function(model) {
+            return that.modelSet.select(Model.UPDATED, function(model) {
                 if(sendAllFields) {
                     return model.data;
                 }
@@ -452,7 +372,7 @@
             var that = this,
                 options = that.options;
 
-            return that.modelSet.find(Model.DESTROYED, function(model) {
+            return that.modelSet.select(Model.DESTROYED, function(model) {
                 var data = {};
 
                 if (options.sendAllFields) {
@@ -481,14 +401,14 @@
 
             destroyed = that._destroyedModels();
 
-            if(batch === false) {
+            if (batch === false) {
                 mode = "multiple";
             }
             else if ((batch.mode || "multiple") === "multiple") {
                 mode = "single";
             }
 
-            if(mode) {
+            if (mode) {
                 that._send(created, proxy(transport.create, transport), mode);
                 that._send(updated, proxy(transport.update, transport), mode);
                 that._send(destroyed, proxy(transport.destroy, transport), mode);
@@ -515,27 +435,14 @@
                 map = that._map,
                 reader= that.reader;
 
-            if(!reader.status(data)) {
+            if (!reader.status(data)) {
                 return that.error({data: origData});
             }
 
-            that.modelSet.sync(origData);
-
             data = reader.data(data);
 
-            $.each(data, function(index, value) {
-                origValue = origData[index];
-                if(origValue) {
-                    origId = that.id(origValue);
-                    index = map[origId];
-
-                    if(index >= 0) {
-                        that._data[index] = value;
-                    }
-                }
-            });
-
-            that._idMap(that._data);
+            that.modelSet.clear();
+            that.modelSet.merge(origData, data);
         },
 
         _syncError: function(origData, data) {
@@ -577,26 +484,7 @@
         },
 
         create: function(index, values) {
-            var that = this,
-                data = that._data,
-                model = that.model();
-
-            if (typeof index !== "number") {
-                values = index;
-                index = undefined;
-            }
-
-            model.set(values);
-
-            index = index !== undefined ? index : data.length;
-
-            data.splice(index, 0, model.data);
-
-            that._idMap(data);
-
-            that.trigger(CREATE, { model: model });
-
-            return model;
+            return this.modelSet.create(index, values);
         },
 
         read: function(additionalData) {
@@ -622,27 +510,11 @@
         },
 
         update: function(id, values) {
-            var that = this,
-            model = that.model(id);
-
-            if (model) {
-                model.set(values);
-            }
+            this.modelSet.update(id, values);
         },
 
         destroy: function(id) {
-            var that = this,
-            model = that.model(id);
-
-            if (model) {
-                that._data.splice(that._map[id], 1);
-
-                that._idMap(that._data);
-
-                model.destroy();
-
-                that.trigger(DESTROY, { model: model });
-            }
+            this.modelSet.destroy(id);
         },
 
         error: function() {
@@ -680,7 +552,7 @@
             that._data = data;
 
             if (that.modelSet) {
-                that.modelSet.syncUpdated(data);
+                that.modelSet.sync(data);
             }
 
             if (that.options.serverPaging !== true) {
@@ -717,7 +589,7 @@
                 that._total = result.total;
             }
 
-            that._idMap(data);
+            that.modelSet.refresh(data);
 
             that.trigger(CHANGE);
         },

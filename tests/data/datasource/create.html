@@ -44,7 +44,7 @@
 
                 var model = dataSource.create();
 
-                equal(dataSource._map[model.id()], dataSource.data().length - 1);
+                equal(dataSource.modelSet.map[model.id()], dataSource.data().length - 1);
             });
 
             test("create inserts the new item at the specified index", function() {
@@ -59,7 +59,7 @@
                 var dataSource = setup();
 
                 var model = dataSource.create(0);
-                equal(dataSource._map[model.id()], 0);
+                equal(dataSource.modelSet.map[model.id()], 0);
             });
 
             test("create raises the create event", function() {
