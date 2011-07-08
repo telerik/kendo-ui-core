@@ -452,6 +452,7 @@
         _send: function(data, method, mode) {
             var that = this,
                 idx,
+                length,
                 promises = that._promises,
                 success = proxy(that._syncSuccess, that, data),
                 error = proxy(that._syncError, that, data);
@@ -792,6 +793,7 @@
 
         range: function(skip, take) {
             var that = this,
+                length,
                 ranges = that._ranges,
                 end = skip + take,
                 range,
