@@ -432,6 +432,7 @@
                     point,
                     box,
                     marker,
+                    label,
                     VALUE = 1;
 
                 function createPoint(options) {
@@ -441,6 +442,7 @@
                     point.reflow(box);
 
                     marker = point.children[0];
+                    label = point.children[1];
 
                     view = new ViewStub();
                     point.getViewElements(view);
@@ -490,9 +492,29 @@
                     equals(marker.options.border.width, 4);
                 });
 
-                test("does not render marker", function() {
-                    createPoint({ markers: { visible: false }, labels: { visible: false }});
-                    equals(view.log.rect.length, 0);
+                test("sets marker visibility", function() {
+                    createPoint({ markers: { visible: false }});
+                    equals(marker.options.visible, false);
+                });
+
+                test("marker is positioned at top", function() {
+                    createPoint({ isVertical: false, aboveAxis: true });
+                    sameBox(marker.box, new Box2D(46, -4, 54, 4));
+                });
+
+                test("marker is positioned at bottom", function() {
+                    createPoint({ isVertical: false, aboveAxis: false });
+                    sameBox(marker.box, new Box2D(46, 96, 54, 104));
+                });
+
+                test("marker is positioned at right", function() {
+                    createPoint({ isVertical: true, aboveAxis: true });
+                    sameBox(marker.box, new Box2D(96, 46, 104, 54));
+                });
+
+                test("marker is positioned at left", function() {
+                    createPoint({ isVertical: true, aboveAxis: false });
+                    sameBox(marker.box, new Box2D(-4, 46, 4, 54));
                 });
 
                 // ------------------------------------------------------------
@@ -502,14 +524,62 @@
                     }
                 });
 
-                test("does not render label", function() {
-                    createPoint({ labels: { visible: false }});
-                    equals(view.log.text.length, 0);
+                test("sets label color", function() {
+                    createPoint({ labels: { color: "#cf0" }});
+                    same(label.options.color, "#cf0");
                 });
 
-                test("renders label when marker is disabled", function() {
-                    createPoint({ markers: { visible: false }});
-                    equals(view.log.text.length, 1);
+                test("sets label background", function() {
+                    createPoint({ labels: { background: "#cf0" }});
+                    same(label.options.background, "#cf0");
+                });
+
+                test("sets label border color", function() {
+                    createPoint({ labels: { border: { color: "#cf0" } }});
+                    same(label.options.border.color, "#cf0");
+                });
+
+                test("sets label border width", function() {
+                    createPoint({ labels: { border: { width: 4 } }});
+                    same(label.options.border.width, 4);
+                });
+
+                test("sets label font", function() {
+                    createPoint({ labels: { font: "label-font" }});
+                    same(label.options.font, "label-font");
+                });
+
+                test("sets default left margin", function() {
+                    same(label.options.margin.left, 5);
+                });
+
+                test("sets default right margin", function() {
+                    same(label.options.margin.right, 5);
+                });
+
+                test("sets label visibility", function() {
+                    createPoint({ labels: { visible: false }});
+                    equals(label.options.visible, false);
+                });
+
+                test("label is positioned above marker", function() {
+                    createPoint({ labels: { position: "above" } });
+                    sameBox(label.box, new Box2D(41, -20, 59, -4));
+                });
+
+                test("label is positioned below marker", function() {
+                    createPoint({ labels: { position: "below" } });
+                    sameBox(marker.box, new Box2D(46, -4, 54, 4));
+                });
+
+                test("label is positioned right of marker", function() {
+                    createPoint({ labels: { position: "right" } });
+                    sameBox(marker.box, new Box2D(46, -4, 54, 4));
+                });
+
+                test("label is positioned left of marker", function() {
+                    createPoint({ labels: { position: "left" } });
+                    sameBox(marker.box, new Box2D(46, -4, 54, 4));
                 });
             })();
 
