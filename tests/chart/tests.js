@@ -48,7 +48,7 @@ tests.push(
         title: "Bar Series"
     },
     {
-        page: "chart/lineseries.html",
-        title: "Line Series"
+        page: "chart/linechart.html",
+        title: "Line Chart"
     }
 );
