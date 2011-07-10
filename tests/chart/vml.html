@@ -91,9 +91,70 @@
                     ok(line instanceof Chart.VMLPath);
                 });
 
-                test("line draws a line", function() {
+                test("createLine draws a line", function() {
                     var line = view.createLine(10, 20, 100, 200);
                     deepEqual(line.points, [ [10, 20], [100, 200] ]);
+                });
+
+                test("createLine draws a line", function() {
+                    var line = view.createLine(10, 20, 100, 200);
+                    deepEqual(line.points, [ [10, 20], [100, 200] ]);
+                });
+
+                test("createPath returns VMLPath", function() {
+                    var path = view.createPath();
+                    ok(path instanceof Chart.VMLPath);
+                });
+
+                test("createPath sets fill color", function() {
+                    var path = view.createPath([], { fill: "#cf0" });
+
+                    equals(path.options.fill, "#cf0");
+                });
+
+                test("createPath sets stroke color", function() {
+                    var path = view.createPath([], { stroke: "#cf0" });
+
+                    equals(path.options.stroke, "#cf0");
+                });
+
+                test("createPath sets stroke width", function() {
+                    var path = view.createPath([], { strokeWidth: 2});
+
+                    equals(path.options.strokeWidth, 2);
+                });
+
+                test("createCircle returns VMLCircle", function() {
+                    var circle = view.createCircle();
+                    ok(circle instanceof Chart.VMLCircle);
+                });
+
+                test("createCircle sets center point", function() {
+                    var circle = view.createCircle([10, 10]);
+                    same(circle.center, [10, 10]);
+                });
+
+                test("createCircle sets radius", function() {
+                    var circle = view.createCircle([10, 10], 10);
+                    same(circle.radius, 10);
+                });
+
+                test("createCircle sets fill color", function() {
+                    var circle = view.createCircle([], 10, { fill: "#cf0" });
+
+                    equals(circle.options.fill, "#cf0");
+                });
+
+                test("createCircle sets stroke color", function() {
+                    var circle = view.createCircle([], 10, { stroke: "#cf0" });
+
+                    equals(circle.options.stroke, "#cf0");
+                });
+
+                test("createCircle sets stroke width", function() {
+                    var circle = view.createCircle([], 10, { strokeWidth: 2});
+
+                    equals(circle.options.strokeWidth, 2);
                 });
 
                 // ------------------------------------------------------------
@@ -258,6 +319,73 @@
                     group.children.push(contentElementStub);
                     equal(group.render(),
                         "<div style='position: absolute; white-space: nowrap;'>Content</div>");
+                });
+
+            })();
+
+            (function() {
+                var circle;
+
+                module("VMLCircle", {
+                    setup: function() {
+                        circle = new Chart.VMLCircle([10, 20], 10);
+                    }
+                });
+
+                test("renders oval tag", function() {
+                    equal(circle.render().replace(/\<kvml:oval.*?\>/, "<kvml:oval>"),
+                        "<kvml:oval></kvml:oval>");
+                });
+
+                test("renders center top", function() {
+                    ok(circle.render().indexOf("top:10px;") > -1);
+                });
+
+                test("renders center left", function() {
+                    ok(circle.render().indexOf("left:0px;") > -1);
+                });
+
+                test("renders width", function() {
+                    ok(circle.render().indexOf("width:20px") > -1);
+                });
+
+                test("renders height", function() {
+                    ok(circle.render().indexOf("height:20px") > -1);
+                });
+
+                test("renders fill color", function() {
+                    circle.options.fill = "#f00";
+                    ok(circle.render().indexOf("fillcolor='#f00'") > -1);
+                });
+
+                test("sets filled attribute when fill color is set", function() {
+                    circle.options.fill = "#f00";
+                    ok(circle.render().indexOf("filled='true'") > -1);
+                });
+
+                test("sets filled attribute when fill color is not set", function() {
+                    circle.options.fill = "";
+                    ok(circle.render().indexOf("filled='false'") > -1);
+                });
+
+                test("renders stroke color", function() {
+                    circle.options.stroke = "#f00";
+                    ok(circle.render().indexOf("strokecolor='#f00'") > -1);
+                });
+
+                test("sets stroked attribute when stroke color is set", function() {
+                    circle.options.stroke = "#f00";
+                    ok(circle.render().indexOf("stroked='true'") > -1);
+                });
+
+                test("sets stroked attribute when stroke color is not set", function() {
+                    circle.options.stroke = "";
+                    ok(circle.render().indexOf("stroked='false'") > -1);
+                });
+
+                test("renders stroke width", function() {
+                    circle.options.strokeWidth = "2";
+                    ok(circle.render().indexOf("strokeweight='2'") > -1);
                 });
 
             })();
