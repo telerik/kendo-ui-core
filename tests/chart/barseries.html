@@ -1000,7 +1000,8 @@
                         barChart = new Chart.BarChart(plotArea, {
                             series: [{
                                 data: [0, 1],
-                                color: "#f00"
+                                color: "#f00",
+                                opacity: 0.5
                             }]
                         });
                     }
@@ -1008,6 +1009,10 @@
 
                 test("applies series fill color to bars", function() {
                     equal(barChart._bars[0].options.color, "#f00");
+                });
+
+                test("applies series opacity color to bars", function() {
+                    equal(barChart._bars[0].options.opacity, 0.5);
                 });
 
             })();
