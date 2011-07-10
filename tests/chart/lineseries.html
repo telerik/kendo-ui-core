@@ -386,7 +386,6 @@
                                 },
                                 labels: {
                                     visible: false,
-                                    font: "labels-font",
                                     color: "labels-color",
                                     background: "labels-background",
                                     border: {
@@ -580,8 +579,8 @@
                 });
 
                 test("sets label font", function() {
-                    createPoint({ labels: { font: "label-font" }});
-                    same(label.options.font, "label-font");
+                    createPoint({ labels: { font: "12px comic-sans" }});
+                    same(label.options.font, "12px comic-sans");
                 });
 
                 test("sets default left margin", function() {
