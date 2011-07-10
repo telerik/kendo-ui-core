@@ -7,6 +7,7 @@ function ViewStub() {
     log.group = [];
     log.line = [];
     log.path = [];
+    log.circle = [];
 }
 
 ViewStub.prototype = {
@@ -43,6 +44,13 @@ ViewStub.prototype = {
 
     createPath: function(points, style) {
         this.log.path.push({ points: points, style: style });
+        return new kendo.ui.Chart.ViewElement();
+    },
+
+    createCircle: function(center, radius, style) {
+        this.log.circle.push({
+            center: center, radius: radius, style: style });
+
         return new kendo.ui.Chart.ViewElement();
     }
 };

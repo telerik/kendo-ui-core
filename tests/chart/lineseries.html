@@ -555,6 +555,10 @@
                     }
                 });
 
+                test("sets label text", function() {
+                    equals(label.children[0].content, VALUE);
+                });
+
                 test("sets label color", function() {
                     createPoint({ labels: { color: "#cf0" }});
                     same(label.options.color, "#cf0");
@@ -612,6 +616,60 @@
                     createPoint({ labels: { position: "left" } });
                     sameBox(marker.box, new Box2D(46, -4, 54, 4));
                 });
+            })();
+
+            (function() {
+                var ShapeElement = Chart.ShapeElement,
+                    SIZE = 5,
+                    BORDER = 2,
+                    BORDER_COLOR = "#cf0",
+                    BACKGROUND = "#f00",
+                    shape,
+                    box,
+                    view;
+
+                function createShape(options) {
+                    shape = new ShapeElement(
+                        $.extend({
+                            width: SIZE,
+                            height: SIZE
+                        },
+                           options
+                        )
+                    );
+
+                    box = new Box2D(0, 0, SIZE, SIZE);
+                    shape.reflow(box);
+
+                    view = new ViewStub();
+                    shape.getViewElements(view);
+                }
+
+                // ------------------------------------------------------------
+                module("ShapeElement", {
+                    setup: function() {
+                        createShape();
+                    }
+                });
+
+                test("renders square", function() {
+                    var square = view.log.rect[0];
+                    same([square.x1, square.y1, square.x2, square.y2],
+                         [0, 0, SIZE, SIZE]);
+                });
+
+                test("renders triangle", function() {
+                    createShape({ type: "triangle" });
+                    same(view.log.path[0].points, [[SIZE / 2, 0], [0, SIZE], [SIZE, SIZE]]);
+                });
+
+                test("renders circle", function() {
+                    createShape({ type: "circle" });
+                    var circle = view.log.circle[0];
+                    same(circle.center, [SIZE / 2, SIZE / 2]);
+                    same(circle.radius, SIZE);
+                });
+
             })();
 
         </script>
