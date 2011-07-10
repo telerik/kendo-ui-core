@@ -482,6 +482,14 @@
                     equal(view.log.rect[0].style.stroke, "#f00");
                 });
 
+                test("renders opacity as strokeOpacity", function() {
+                    boxElement.options.opacity = 0.5;
+                    boxElement.reflow(targetBox);
+                    boxElement.getViewElements(view);
+
+                    equal(view.log.rect[0].style.strokeOpacity, 0.5);
+                });
+
                 test("does not render border color when no width is set", function() {
                     boxElement.options.border.color = "#f00";
                     boxElement.reflow(targetBox);
@@ -496,6 +504,14 @@
                     boxElement.getViewElements(view);
 
                     equal(view.log.rect[0].style.fill, "#f00");
+                });
+
+                test("renders opacity as fillOpacity", function() {
+                    boxElement.options.opacity = 0.5;
+                    boxElement.reflow(targetBox);
+                    boxElement.getViewElements(view);
+
+                    equal(view.log.rect[0].style.fillOpacity, 0.5);
                 });
 
                 test("content box includes padding", function() {
@@ -1036,16 +1052,20 @@
                     box,
                     rect;
 
+                function createBar(options) {
+                    box = new Box2D(0, 0, 100, 100);
+                    bar = new Bar(options);
+
+                    bar.reflow(box);
+                    view = new ViewStub();
+                    bar.getViewElements(view);
+                    rect = view.log.rect[0];
+                }
+
                 module("Bar", {
                     setup: function() {
                         moduleSetup();
-
-                        box = new Box2D(0, 0, 100, 100);
-                        bar = new Bar();
-
-                        bar.reflow(box);
-                        bar.getViewElements(view);
-                        rect = view.log.rect[0];
+                        createBar();
                     }
                 });
 
@@ -1066,50 +1086,40 @@
                 });
 
                 test("sets default border color based on color", function() {
-                    bar.options.color = "#cf0";
-                    view = new ViewStub();
-                    bar.getViewElements(view);
-                    equals(view.log.rect[0].style.stroke, "#8fb300");
+                    createBar({ color: "#cf0" });
+                    equals(rect.style.stroke, "#8fb300");
                 });
 
                 test("does not change border color if set", function() {
-                    bar.options.border.color = "";
-                    view = new ViewStub();
-                    bar.getViewElements(view);
+                    createBar({ border: { color: "" } });
                     equals(view.log.rect[0].style.stroke, "");
                 });
 
                 test("sets normalAngle for horizontal bars", function() {
-                    bar.options.isVertical = false;
-
-                    view = new ViewStub();
-                    bar.getViewElements(view);
-                    rect = view.log.rect[0];
-
+                    createBar({ isVertical: false });
                     same(rect.style.normalAngle, 90);
                 });
 
                 test("sets stroke color", function() {
-                    bar.options.border.color = "red";
-                    bar.options.border.width = 1;
-                    view = new ViewStub();
-                    bar.reflow(box);
-                    bar.getViewElements(view);
-                    rect = view.log.rect[0];
-
+                    createBar({ border: { color: "red", width: 1 } });
                     same(rect.style.stroke, bar.options.border.color);
                 });
 
                 test("sets stroke width", function() {
-                    bar.options.border.color = "red";
-                    bar.options.border.width = 1;
-                    view = new ViewStub();
-                    bar.reflow(box);
-                    bar.getViewElements(view);
-                    rect = view.log.rect[0];
-
+                    createBar({ border: { color: "red", width: 1 } });
                     same(rect.style.strokeWidth, bar.options.border.width);
                 });
+
+                test("sets fill opacity", function() {
+                    createBar({ opacity: 0.5 });
+                    same(rect.style.fillOpacity, bar.options.opacity);
+                });
+
+                test("sets stroke opacity", function() {
+                    createBar({ opacity: 0.5 });
+                    same(rect.style.strokeOpacity, bar.options.opacity);
+                });
+
             })();
 
         </script>

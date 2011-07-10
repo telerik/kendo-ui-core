@@ -578,7 +578,9 @@
                     view.createRect(element.paddingBox, {
                         stroke: border.width ? border.color : "",
                         strokeWidth: border.width,
-                        fill: options.background })
+                        strokeOpacity: options.opacity,
+                        fill: options.background,
+                        fillOpacity: options.opacity })
                 ];
 
             return elements.concat(
@@ -1719,7 +1721,9 @@
                 rectStyle = deepExtend({
                     fill: options.color,
                     overlay: options.overlay,
-                    normalAngle: isVertical ? 0 : 90
+                    normalAngle: isVertical ? 0 : 90,
+                    fillOpacity: options.opacity,
+                    strokeOpacity: options.opacity
                 }, border),
                 elements = [];
 
@@ -1810,6 +1814,7 @@
 
             var bar = new Bar({
                 color: series.color,
+                opacity: series.opacity,
                 border: series.border,
                 isVertical: options.isVertical });
 
@@ -2011,7 +2016,8 @@
                 type: LINE_MARKER_SQUARE,
                 border: {
                     width: 1
-                }
+                },
+                opacity: 1
             },
             labels: {
                 position: ABOVE
@@ -2039,7 +2045,8 @@
                     width: markers.size,
                     height: markers.size,
                     background: markerBackground,
-                    border: markerBorder
+                    border: markerBorder,
+                    opacity: markers.opacity
                 })
             );
 
@@ -2129,7 +2136,8 @@
                     {
                         isVertical: !options.isVertical,
                         markers: {
-                            background: currentSeries.color
+                            background: currentSeries.color,
+                            opacity: currentSeries.opacity
                         }
                     },
                     currentSeries
@@ -2204,6 +2212,7 @@
                     view.createPath(linePoints, {
                         stroke: currentSeries.color,
                         strokeWidth: currentSeries.width,
+                        strokeOpacity: currentSeries.opacity,
                         fill: ""
                     })
                 );
@@ -3152,14 +3161,14 @@
             if (!gradient.template) {
                 gradient.template = VMLLinearGradient.template = template(
                     "<kvml:fill type='gradient' angle='<#= d.options.rotation #>' " +
-                    "colors='<#= d.renderColors() #>'" +
-                    "/> "
+                    "colors='<#= d.renderColors() #>' opacity='<#= d.options.opacity #>' />"
                 );
             }
         },
 
         options: {
-            rotation: 0
+            rotation: 0,
+            opacity: 1
         },
 
         renderColors: function() {
@@ -3192,7 +3201,8 @@
         decorate: function(element) {
             var decorator = this,
                 view = decorator.view,
-                overlayName = element.options ? element.options.overlay : "",
+                options = element.options,
+                overlayName = options ? options.overlay : "",
                 overlay = Chart.Overlays[overlayName];
 
             if (!overlay) {
@@ -3200,13 +3210,19 @@
             }
 
             var fill = overlay.fill,
-                fillRotation = 270 - element.options.normalAngle || 0;
+                fillRotation = 270 - options.normalAngle || 0,
+                fillOpacity = options.fillOpacity;
 
-            element.options.overlay = "";
-            element.options.fill = deepExtend(
+            if (typeof fillOpacity === UNDEFINED) {
+                fillOpacity = 1;
+            }
+
+            options.overlay = "";
+            options.fill = deepExtend(
                 { },
-                blendGradient(element.options.fill, fill),
-                { rotation: fillRotation }
+                blendGradient(options.fill, fill),
+                { rotation: fillRotation,
+                  opacity: fillOpacity }
             );
 
             return element;

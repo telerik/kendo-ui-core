@@ -325,7 +325,8 @@
                             series: [
                                 $.extend({
                                         width: 4,
-                                        color: "#cf0"
+                                        color: "#cf0",
+                                        opacity: 0.5
                                     },
                                     positiveSeries
                                 )
@@ -343,6 +344,10 @@
 
                 test("sets line color", function() {
                     equals(view.log.path[0].style.stroke, "#cf0");
+                });
+
+                test("sets line opacity", function() {
+                    equals(view.log.path[0].style.strokeOpacity, 0.5);
                 });
 
             })();
@@ -394,7 +399,8 @@
                                     },
                                     margin: MARGIN,
                                     padding: PADDING
-                                }
+                                },
+                                opacity: 0.5
                             }]
                         });
                         linePoint = lineChart._bars[0];
@@ -407,6 +413,10 @@
 
                 test("applies series fill color to point markers", function() {
                     equal(linePoint.options.markers.background, "#f00");
+                });
+
+                test("applies series opacity color to point markers", function() {
+                    equal(linePoint.options.markers.opacity, 0.5);
                 });
 
                 test("applies size to point markers", function() {
@@ -545,6 +555,11 @@
                 test("marker is positioned at left", function() {
                     createPoint({ isVertical: true, aboveAxis: false });
                     sameBox(marker.box, new Box2D(-4, 46, 4, 54));
+                });
+
+                test("sets marker opacity", function() {
+                    createPoint({ markers: { opacity: 0.5 }});
+                    same(marker.options.opacity, point.options.markers.opacity);
                 });
 
                 // ------------------------------------------------------------

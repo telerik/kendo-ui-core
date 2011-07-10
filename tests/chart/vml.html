@@ -492,23 +492,36 @@
 
             (function() {
                 var view,
-                    decorator;
+                    linearGradient;
 
                 // ------------------------------------------------------------
-                module("VMLGradientDecorator", {
+                module("VMLLinearGradient", {
                     setup: function() {
                         view = new Chart.VMLView();
+                        linearGradient = new Chart.VMLLinearGradient(gradient);
                     }
                 });
 
-                test("applies gradient fill", function() {
-                    var path = view.createRect(new Box2D(), { fill: gradient });
-                    ok(path.fill instanceof Chart.VMLLinearGradient);
+                test("renders fill tag", function() {
+                    equal(linearGradient.render().replace(/\<kvml:fill.*?\/\>/, "<kvml:fill/>"),
+                    "<kvml:fill/>");
                 });
 
-                test("preserves solid fill", function() {
-                    var path = view.createRect(new Box2D(), { fill: "#f00" });
-                    equals(path.options.fill, "#f00");
+                test("renders type", function() {
+                    ok(linearGradient.render().indexOf("type='gradient'") > -1);
+                });
+
+                test("renders angle", function() {
+                    ok(linearGradient.render().indexOf("angle='0'") > -1);
+                });
+
+                test("renders colors", function() {
+                    ok(linearGradient.render().indexOf("colors='0% #f00,100% #00f'") > -1);
+                });
+
+                test("renders opacity", function() {
+                    linearGradient.options.opacity = 0.5;
+                    ok(linearGradient.render().indexOf("opacity='0.5'") > -1);
                 });
 
             })();
@@ -518,7 +531,7 @@
                     decorator;
 
                 // ------------------------------------------------------------
-                module("VMLOverlayDecorator", {
+                module("VMLGradientDecorator", {
                     setup: function() {
                         view = new Chart.VMLView();
                     }
@@ -547,6 +560,7 @@
                         view = new Chart.VMLView();
                         rect = new Chart.VMLPath([[10, 20]], {
                             fill: "#fff",
+                            fillOpacity: 0.5,
                             overlay: "glass",
                             normalAngle: 90
                         });
@@ -557,6 +571,10 @@
 
                 test("applies rotation transform to fill gradient", function() {
                     equals(glassyRect.options.fill.rotation, 270 - 90);
+                });
+
+                test("applies fill opacity gradient", function() {
+                    equals(glassyRect.options.fill.opacity, 0.5);
                 });
 
                 test("does not decorate element if no overlay specified", function() {
