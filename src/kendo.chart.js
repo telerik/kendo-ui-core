@@ -1953,7 +1953,7 @@
        }
     });
 
-    var PointMarker = BoxElement.extend({
+    var ShapeElement = BoxElement.extend({
         init: function(options) {
             var marker = this;
 
@@ -1961,7 +1961,9 @@
         },
 
         options: {
-            type: SQUARE
+            type: SQUARE,
+            align: CENTER,
+            vAlign: CENTER
         },
 
         getViewElements: function(view) {
@@ -2030,15 +2032,13 @@
             }
 
             children.push(
-                new PointMarker({
+                new ShapeElement({
                     visible: markers.visible,
                     type: markers.type,
                     width: markers.size,
                     height: markers.size,
                     background: markerBackground,
-                    border: markerBorder,
-                    align: CENTER,
-                    vAlign: CENTER
+                    border: markerBorder
                 })
             );
 
@@ -3649,6 +3649,7 @@
     Chart.CategoryAxis = CategoryAxis;
     Chart.Bar = Bar;
     Chart.BarChart = BarChart;
+    Chart.ShapeElement = ShapeElement;
     Chart.LinePoint = LinePoint;
     Chart.LineChart = LineChart;
     Chart.ClusterLayout = ClusterLayout;
