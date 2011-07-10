@@ -2728,6 +2728,8 @@
                     "<path d='<#= d.renderPoints() #>' " +
                     "<#= d.renderStroke() #><#= d.renderStrokeWidth() #>" +
                     "stroke-linecap='square' " +
+                    "fill-opacity='<#= d.options.fillOpacity #>' " +
+                    "stroke-opacity='<#= d.options.strokeOpacity #>'  " +
                     "fill='<#= d.options.fill || \"none\" #>'></path>"
                 );
             }
@@ -2736,7 +2738,9 @@
         },
 
         options: {
-            fill: ""
+            fill: "",
+            fillOpacity: 1,
+            strokeOpacity: 1
         },
 
         clone: function() {
@@ -3021,19 +3025,16 @@
             if (!path.template) {
                 path.template = VMLPath.template = template(
                     "<kvml:shape style='position:absolute; width:1px; height:1px;' " +
-                    "strokecolor='<#= d.options.stroke || '' #>' " +
-                    "stroked='<#= !!d.options.stroke #>' " +
-                    "strokeweight='<#= d.options.strokeWidth || '' #>' " +
-                    "fillcolor='<#= d.options.fill #>' " +
-                    "filled='<#= !!d.options.fill || d.children.length > 0 #>' " +
                     "coordorigin='0 0' coordsize='1 1'>" +
                         "<kvml:path v='<#= d.renderPoints() #> e' />" +
-                        "<#= d.renderContent() #>" +
+                        "<#= d.fill.render() + d.stroke.render() #>" +
                     "</kvml:shape>"
                 );
             }
 
             path.points = points || [];
+            path.stroke = new VMLStroke(path.options);
+            path.fill = new VMLFill(path.options);
         },
 
         options: {
@@ -3060,6 +3061,40 @@
             }
 
             return result;
+        }
+    });
+
+    var VMLStroke = ViewElement.extend({
+        init: function(options) {
+            var stroke = this;
+            ViewElement.fn.init.call(stroke, options);
+
+            stroke.template = VMLStroke.template;
+            if (!stroke.template) {
+                stroke.template = VMLStroke.template = template(
+                    "<kvml:stroke on='<#= !!d.options.stroke #>' " +
+                    "<#= d.renderAttr(\"color\", d.options.stroke) #>" +
+                    "<#= d.renderAttr(\"weight\", d.options.strokeWidth) #>" +
+                    "<#= d.renderAttr(\"opacity\", d.options.strokeOpacity) #> />"
+                );
+            }
+        }
+    });
+
+    var VMLFill = ViewElement.extend({
+        init: function(options) {
+            var stroke = this;
+            ViewElement.fn.init.call(stroke, options);
+
+            stroke.template = VMLFill.template;
+            if (!stroke.template) {
+                stroke.template = VMLFill.template = template(
+                    "<kvml:fill on='<#= !!d.options.fill #>' " +
+                    "<#= d.renderAttr(\"color\", d.options.fill) #>" +
+                    "<#= d.renderAttr(\"weight\", d.options.fillWidth) #>" +
+                    "<#= d.renderAttr(\"opacity\", d.options.fillOpacity) #> />"
+                );
+            }
         }
     });
 
@@ -3191,8 +3226,7 @@
                 gradient;
 
             if (typeof fill === OBJECT) {
-                element.children.push(view.createGradient(fill));
-                options.fill = "";
+                element.fill = view.createGradient(fill);
             }
 
             return element;
@@ -3673,6 +3707,8 @@
     Chart.VMLGroup = VMLGroup;
     Chart.VMLOverlayDecorator = VMLOverlayDecorator;
     Chart.VMLLinearGradient = VMLLinearGradient;
+    Chart.VMLStroke = VMLStroke;
+    Chart.VMLFill = VMLFill;
     Chart.deepExtend = deepExtend;
     Chart.Color = Color;
     Chart.blendColors = blendColors;

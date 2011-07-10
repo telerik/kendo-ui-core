@@ -329,6 +329,16 @@
                     ok(path.render().indexOf("stroke-linecap='square'") > -1);
                 });
 
+                test("renders stroke opacity", function() {
+                    path.options.strokeOpacity = 0.5;
+                    ok(path.render().indexOf("stroke-opacity='0.5'") > -1);
+                });
+
+                test("renders fill opacity", function() {
+                    path.options.fillOpacity = 0.5;
+                    ok(path.render().indexOf("fill-opacity='0.5'") > -1);
+                });
+
             })();
 
             (function() {

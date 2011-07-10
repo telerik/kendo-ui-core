@@ -230,14 +230,21 @@
             (function() {
                 var path;
 
+                function createPath(options) {
+                    path = new Chart.VMLPath([[10, 20]], options);
+                }
+
                 module("VMLPath", {
                     setup: function() {
-                        path = new Chart.VMLPath([[10, 20]]);
+                        createPath();
                     }
                 });
 
                 test("renders path tag", function() {
-                    equal(path.render().replace(/\<kvml:shape.*?\>/, "<kvml:shape>"),
+                    equal(path.render()
+                            .replace(/\<kvml:shape.*?\>/, "<kvml:shape>")
+                            .replace(/\<kvml:stroke.*?\/\>/, "")
+                            .replace(/\<kvml:fill.*?\/\>/, ""),
                     "<kvml:shape>" +
                         "<kvml:path v='m 10,20 e' />" +
                     "</kvml:shape>");
@@ -264,39 +271,132 @@
                     equal(path.renderPoints(), "m 10,20 l 20,30, 40,50");
                 });
 
-                test("renders fill color", function() {
-                    path.options.fill = "#f00";
-                    ok(path.render().indexOf("fillcolor='#f00'") > -1);
+                test("creates stroke", function() {
+                    ok(path.stroke instanceof Chart.VMLStroke);
                 });
 
-                test("sets filled attribute when fill color is set", function() {
-                    path.options.fill = "#f00";
-                    ok(path.render().indexOf("filled='true'") > -1);
+                test("sets stroke color", function() {
+                    var options = { stroke: "#cf0" };
+
+                    createPath(options);
+                    same(path.stroke.options.stroke, "#cf0");
                 });
 
-                test("sets filled attribute when fill color is not set", function() {
-                    path.options.fill = "";
-                    ok(path.render().indexOf("filled='false'") > -1);
+                test("sets stroke width", function() {
+                    var options = { strokeWidth: 2 };
+
+                    createPath(options);
+                    same(path.stroke.options.strokeWidth, 2);
                 });
 
-                test("renders stroke color", function() {
-                    path.options.stroke = "#f00";
-                    ok(path.render().indexOf("strokecolor='#f00'") > -1);
+                test("sets stroke opacity", function() {
+                    var options = { opacity: 0.5 };
+
+                    createPath(options);
+                    same(path.stroke.options.opacity, 0.5);
                 });
 
-                test("sets stroked attribute when stroke color is set", function() {
-                    path.options.stroke = "#f00";
-                    ok(path.render().indexOf("stroked='true'") > -1);
+                test("renders stroke", function() {
+                    ok(path.render().indexOf("<kvml:stroke") > -1);
                 });
 
-                test("sets stroked attribute when stroke color is not set", function() {
-                    path.options.stroke = "";
-                    ok(path.render().indexOf("stroked='false'") > -1);
+                test("creates fill", function() {
+                    ok(path.fill instanceof Chart.VMLFill);
                 });
 
-                test("renders stroke width", function() {
-                    path.options.strokeWidth = "2";
-                    ok(path.render().indexOf("strokeweight='2'") > -1);
+                test("sets fill color", function() {
+                    var options = { fill: "#cf0" };
+
+                    createPath(options);
+                    same(path.fill.options.fill, "#cf0");
+                });
+
+                test("sets fill opacity", function() {
+                    var options = { opacity: 0.5 };
+
+                    createPath(options);
+                    same(path.fill.options.opacity, 0.5);
+                });
+
+                test("renders fill", function() {
+                    ok(path.render().indexOf("<kvml:fill") > -1);
+                });
+
+            })();
+
+            (function() {
+                var stroke;
+
+                module("VMLStroke", {
+                    setup: function() {
+                        stroke = new Chart.VMLStroke();
+                    }
+                });
+
+                test("renders stroke tag", function() {
+                    equal(stroke.render().replace(/\<kvml:stroke.*?\/\>/, "<kvml:stroke/>"),
+                    "<kvml:stroke/>");
+                });
+
+                test("sets on attribute when stroke color is set", function() {
+                    stroke.options.stroke = "#f00";
+                    ok(stroke.render().indexOf("on='true'") > -1);
+                });
+
+                test("sets on attribute when stroke color is not set", function() {
+                    stroke.options.stroke = "";
+                    ok(stroke.render().indexOf("on='false'") > -1);
+                });
+
+                test("renders color", function() {
+                    stroke.options.stroke = "#f00";
+                    ok(stroke.render().indexOf("color='#f00'") > -1);
+                });
+
+                test("renders width", function() {
+                    stroke.options.strokeWidth = "2";
+                    ok(stroke.render().indexOf("weight='2'") > -1);
+                });
+
+                test("renders opacity", function() {
+                    stroke.options.strokeOpacity = "0.5";
+                    ok(stroke.render().indexOf("opacity='0.5'") > -1);
+                });
+
+            })();
+
+            (function() {
+                var fill;
+
+                module("VMLFill", {
+                    setup: function() {
+                        fill = new Chart.VMLFill();
+                    }
+                });
+
+                test("renders fill tag", function() {
+                    equal(fill.render().replace(/\<kvml:fill.*?\/\>/, "<kvml:fill/>"),
+                    "<kvml:fill/>");
+                });
+
+                test("sets on attribute when fill color is set", function() {
+                    fill.options.fill = "#f00";
+                    ok(fill.render().indexOf("on='true'") > -1);
+                });
+
+                test("sets on attribute when fill color is not set", function() {
+                    fill.options.fill = "";
+                    ok(fill.render().indexOf("on='false'") > -1);
+                });
+
+                test("renders color", function() {
+                    fill.options.fill = "#f00";
+                    ok(fill.render().indexOf("color='#f00'") > -1);
+                });
+
+                test("renders opacity", function() {
+                    fill.options.fillOpacity = "0.5";
+                    ok(fill.render().indexOf("opacity='0.5'") > -1);
                 });
 
             })();
@@ -403,12 +503,7 @@
 
                 test("applies gradient fill", function() {
                     var path = view.createRect(new Box2D(), { fill: gradient });
-                    ok(path.children[0] instanceof Chart.VMLLinearGradient);
-                });
-
-                test("cleans original fill when appliying gradient", function() {
-                    var path = view.createRect(new Box2D(), { fill: gradient });
-                    equals(path.options.fill, "");
+                    ok(path.fill instanceof Chart.VMLLinearGradient);
                 });
 
                 test("preserves solid fill", function() {
@@ -431,12 +526,7 @@
 
                 test("applies gradient fill", function() {
                     var path = view.createRect(new Box2D(), { fill: gradient });
-                    ok(path.children[0] instanceof Chart.VMLLinearGradient);
-                });
-
-                test("cleans original fill when appliying gradient", function() {
-                    var path = view.createRect(new Box2D(), { fill: gradient });
-                    equals(path.options.fill, "");
+                    ok(path.fill instanceof Chart.VMLLinearGradient);
                 });
 
                 test("preserves solid fill", function() {
