@@ -96,6 +96,62 @@
                     deepEqual(line.points, [ [10, 20], [100, 200] ]);
                 });
 
+                test("createPath returns SVGPath", function() {
+                    var path = view.createPath();
+                    ok(path instanceof Chart.SVGPath);
+                });
+
+                test("createPath sets fill color", function() {
+                    var path = view.createPath([], { fill: "#cf0" });
+
+                    equals(path.options.fill, "#cf0");
+                });
+
+                test("createPath sets stroke color", function() {
+                    var path = view.createPath([], { stroke: "#cf0" });
+
+                    equals(path.options.stroke, "#cf0");
+                });
+
+                test("createPath sets stroke width", function() {
+                    var path = view.createPath([], { strokeWidth: 2});
+
+                    equals(path.options.strokeWidth, 2);
+                });
+
+                test("createCircle returns SVGCircle", function() {
+                    var circle = view.createCircle();
+                    ok(circle instanceof Chart.SVGCircle);
+                });
+
+                test("createCircle sets center point", function() {
+                    var circle = view.createCircle([10, 10]);
+                    same(circle.center, [10, 10]);
+                });
+
+                test("createCircle sets radius", function() {
+                    var circle = view.createCircle([10, 10], 10);
+                    same(circle.radius, 10);
+                });
+
+                test("createCircle sets fill color", function() {
+                    var circle = view.createCircle([], 10, { fill: "#cf0" });
+
+                    equals(circle.options.fill, "#cf0");
+                });
+
+                test("createCircle sets stroke color", function() {
+                    var circle = view.createCircle([], 10, { stroke: "#cf0" });
+
+                    equals(circle.options.stroke, "#cf0");
+                });
+
+                test("createCircle sets stroke width", function() {
+                    var circle = view.createCircle([], 10, { strokeWidth: 2});
+
+                    equals(circle.options.strokeWidth, 2);
+                });
+
                 // ------------------------------------------------------------
                 module("SVGView / Rendering", {
                     setup: function() {
@@ -271,6 +327,54 @@
 
                 test("renders stroke linecap", function() {
                     ok(path.render().indexOf("stroke-linecap='square'") > -1);
+                });
+
+            })();
+
+            (function() {
+                var circle;
+
+                module("SVGCircle", {
+                    setup: function() {
+                        circle = new Chart.SVGCircle([10, 20], 30);
+                    }
+                });
+
+                test("renders circle tag", function() {
+                    equal(circle.render().replace(/\<circle.*?\>/, "<circle>"),
+                        "<circle></circle>");
+                });
+
+                test("renders center x", function() {
+                    ok(circle.render().indexOf("cx='10'") > -1);
+                });
+
+                test("renders center y", function() {
+                    ok(circle.render().indexOf("cy='20'") > -1);
+                });
+
+                test("renders radius", function() {
+                    ok(circle.render().indexOf("r='30'") > -1);
+                });
+
+                test("renders fill color", function() {
+                    circle.options.fill = "#f00";
+                    ok(circle.render().indexOf("fill='#f00'") > -1);
+                });
+
+                test("renders empty fill when no fill is set", function() {
+                    circle.options.fill = "";
+                    ok(circle.render().indexOf("fill='none") > -1);
+                });
+
+                test("renders stroke color", function() {
+                    circle.options.stroke = "#f00";
+                    ok(circle.render().indexOf("stroke='#f00'") > -1);
+                });
+
+                test("renders stroke width", function() {
+                    circle.options.strokeWidth = "2";
+                    ok(circle.render().indexOf("stroke-width='2'") > -1);
                 });
 
             })();

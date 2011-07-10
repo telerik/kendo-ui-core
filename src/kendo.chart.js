@@ -1971,18 +1971,19 @@
                 options = marker.options,
                 type = options.type,
                 box = marker.box,
-                element = BoxElement.fn.getViewElements.call(marker, view)[0];
+                element = BoxElement.fn.getViewElements.call(marker, view)[0],
+                halfWidth = box.width() / 2;
 
             if (type === TRIANGLE) {
                 element = view.createPath([
-                    [box.x1 + box.width() / 2, box.y1],
+                    [box.x1 + halfWidth, box.y1],
                     [box.x1, box.y2],
                     [box.x2, box.y2]
                 ], element.options);
             } else if (type === CIRCLE) {
                 element = view.createCircle([
-                    box.x1 + box.width() / 2, box.y1 + box.height() / 2
-                ], options.width, element.options);
+                    box.x1 + halfWidth, box.y1 + box.height() / 2
+                ], halfWidth, element.options);
             }
 
             return [ element ];
@@ -2789,8 +2790,8 @@
                 circle.template = SVGCircle.template = template(
                     "<circle cx='<#= d.center[0] #>' cy='<#= d.center[1] #>' " +
                     "r='<#= d.radius #>' " +
-                    "<#= d.renderAttr('stroke', d.options.stroke) #> " +
-                    "<#= d.renderAttr('stroke-width', d.options.strokeWidth) #>" +
+                    "<#= d.renderAttr(\"stroke\", d.options.stroke) #> " +
+                    "<#= d.renderAttr(\"stroke-width\", d.options.strokeWidth) #>" +
                     "fill='<#= d.options.fill || \"none\" #>'></circle>"
                 );
             }
@@ -3074,9 +3075,9 @@
             if (!circle.template) {
                 circle.template = VMLCircle.template = template(
                     "<kvml:oval style='position:absolute; " +
-                            "width:<#= d.radius #>px; height:<#= d.radius #>px; " +
-                            "top:<#= d.center[1] - d.radius / 2 #>px; " +
-                            "left:<#= d.center[0] - d.radius / 2 #>px' " +
+                            "width:<#= d.radius * 2 #>px; height:<#= d.radius * 2 #>px; " +
+                            "top:<#= d.center[1] - d.radius #>px; " +
+                            "left:<#= d.center[0] - d.radius #>px;' " +
                         "strokecolor='<#= d.options.stroke || '' #>' " +
                         "stroked='<#= !!d.options.stroke #>' " +
                         "strokeweight='<#= d.options.strokeWidth || '' #>' " +
@@ -3662,11 +3663,13 @@
     Chart.SVGGroup = SVGGroup;
     Chart.SVGText = SVGText;
     Chart.SVGPath = SVGPath;
+    Chart.SVGCircle = SVGCircle;
     Chart.SVGOverlayDecorator = SVGOverlayDecorator;
     Chart.SVGPaintDecorator = SVGPaintDecorator;
     Chart.VMLView = VMLView;
     Chart.VMLText = VMLText;
     Chart.VMLPath = VMLPath;
+    Chart.VMLCircle = VMLCircle;
     Chart.VMLGroup = VMLGroup;
     Chart.VMLOverlayDecorator = VMLOverlayDecorator;
     Chart.VMLLinearGradient = VMLLinearGradient;
