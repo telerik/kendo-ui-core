@@ -811,7 +811,7 @@
             position: RIGHT,
             series: [],
             labels: {
-                font: "12px Verdana, sans-serif"
+                font: SANS12
             },
             offsetX: 0,
             offsetY: 0,
