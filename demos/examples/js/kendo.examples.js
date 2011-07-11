@@ -174,7 +174,8 @@
                         function(e) {
                             e.preventDefault();
 
-                            Application.load($(this).attr("href"));
+                            if (!location.href.match($(this).attr("href")) && !$("#exampleBody").data("animating"))
+                                Application.load($(this).attr("href"));
                         }).each(function() {
                             $(this).attr("href", this.href);
                         });
