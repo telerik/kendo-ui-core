@@ -170,6 +170,17 @@
                     notEqual(chart.options.series[0].gap, 1);
                 });
 
+                test("bar series defaults are not copied in series", function() {
+                    createChart({
+                        seriesDefaults: {
+                            bar: { }
+                        },
+                        series: [{ type: "bar" }]
+                    });
+
+                    ok(typeof(chart.options.series[0].bar) === "undefined");
+                });
+
                 test("column series defaults are applied", function() {
                     createChart({
                         seriesDefaults: {
@@ -209,6 +220,17 @@
                     notEqual(chart.options.series[0].gap, 1);
                 });
 
+                test("column series defaults are not copied in series", function() {
+                    createChart({
+                        seriesDefaults: {
+                            column: { }
+                        },
+                        series: [{ type: "column" }]
+                    });
+
+                    ok(typeof(chart.options.series[0].column) === "undefined");
+                });
+
                 test("line series defaults are applied", function() {
                     createChart({
                         seriesDefaults: {
@@ -233,6 +255,17 @@
                     });
 
                     notEqual(chart.options.series[0].width, 1);
+                });
+
+                test("line series defaults are not copied in series", function() {
+                    createChart({
+                        seriesDefaults: {
+                            line: { }
+                        },
+                        series: [{ type: "line" }]
+                    });
+
+                    ok(typeof(chart.options.series[0].line) === "undefined");
                 });
 
                 // ------------------------------------------------------------

@@ -152,7 +152,13 @@
                 series = options.series,
                 seriesType,
                 colors = options.seriesColors,
-                chartArea = options.chartArea;
+                chartArea = options.chartArea,
+                seriesDefaults = options.seriesDefaults,
+                baseSeriesDefaults = deepExtend({}, options.seriesDefaults);
+
+            delete baseSeriesDefaults.bar;
+            delete baseSeriesDefaults.column;
+            delete baseSeriesDefaults.line;
 
             for (var i = 0, length = series.length; i < length; i++) {
                 // Determine series type in advance so we can apply the
@@ -161,7 +167,7 @@
 
                 series[i] = deepExtend(
                     { color: colors[i % colors.length] },
-                    options.seriesDefaults,
+                    baseSeriesDefaults,
                     options.seriesDefaults[seriesType],
                     series[i]);
             }
