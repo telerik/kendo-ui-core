@@ -132,7 +132,7 @@
 	</PropertyGroup>
 
     <Target Name="BeforeCompile">
-        <Exec Command="dir"/>  
+        <Exec Command="node"/>  
     </Target>
 
   <Target Name="AfterCompile">
