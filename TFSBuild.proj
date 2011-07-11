@@ -132,12 +132,12 @@
 	</PropertyGroup>
 
     <Target Name="BeforeCompile">
-        <Exec Command="node"/>  
+        <Exec Command="node.exe" WorkingDirectory="C:\Program Files (x86)\NodeJS\bin"/>  
     </Target>
 
   <Target Name="AfterCompile">
       <ItemGroup>
-        <Resources Include="$(SolutionRoot)\**" />
+        <Resources Include="$(SolutionRoot)" />
       </ItemGroup>
 
       <Copy SourceFiles="@(Resources)" DestinationFolder="$(DeployLocation)" />
