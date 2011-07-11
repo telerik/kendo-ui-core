@@ -957,19 +957,22 @@
                 element.bind(support.transitions.event, px);
             }
 
+            var teardowns = [];
+
             // create a promise for each effect
             $.each(effects, function(effectName, settings) {
                 var promise = $.Deferred(function(deferred) {
                     var effect = kendo.fx[effectName];
 
                     if (effect) {
-                        settings.options = extend(settings.options, {
+                        var opt = settings.options; // Something goes wrong when there's no variable and the complete callback is called too many times.
+                        settings.options = extend(opt, {
                             duration: options.duration,
                             direction: settings.direction,
                             complete: function () {
                                 $.each(options.effects, function(idx, effect) {
                                     if ('options' in effect && 'teardown' in effect.options)
-                                        effect.options.teardown(); // call the internal completion callbacks
+                                        teardowns.push(effect.options.teardown); // collect the internal completion callbacks
                                 });
 
                                 deferred.resolve();
@@ -994,6 +997,7 @@
                 }
 
                 options.complete(); // call the complete callback
+                $.each(teardowns, function () { this(); }); // call the internal completion callbacks
             });
        });
     }

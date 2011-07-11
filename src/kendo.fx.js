@@ -421,17 +421,12 @@
                     element.data('overflow', element.css('overflow'));
 
                 element
-                    .css({ overflow: 'hidden' })
+                    .css('overflow', 'hidden')
                     .css('overflow');
 
-                var height = element.data('height'),
-                    scrollHeight = element[0].scrollHeight + element.height() - element.innerHeight();
-
-                if (!height || Math.abs(scrollHeight - height) > 1) {
-                    height = element.height();
-                    element.data('height', height);
-                }
-
+                var fixedHeight = parseInt(element[0].style.height, 10),
+                    height = fixedHeight || Math.round(element.height("auto").height());
+                    
                 element
                     .css({ height: 0 })
                     .css('height');
@@ -439,14 +434,11 @@
                 animate(element, extend({ height: height + 'px' }, properties), extend(options, { teardown: function () { element.css('overflow', element.data('overflow')); } }));
             },
             reverse: function(element, properties, options) {
-                if (!element.data('height'))
-                    element.data('height', element.height());
-
                 if (!element.data('overflow'))
                     element.data('overflow', element.css('overflow'));
 
                 element
-                    .css({ overflow: 'hidden' })
+                    .css('overflow', 'hidden')
                     .css('overflow');
 
                 animate(element, extend({ height: 0 }, properties), extend(options, { teardown: function () { element.css('overflow', element.data('overflow')); } }));
@@ -458,16 +450,11 @@
                     element.data('overflow', element.css('overflow'));
 
                 element
-                    .css({ overflow: 'hidden' })
+                    .css('overflow', 'hidden')
                     .css('overflow');
 
-                var width = element.data('width'),
-                    scrollWidth = element[0].scrollWidth + element.width() - element.innerWidth();
-                
-                if (!width || Math.abs(scrollWidth - width) > 1) {
-                    width = element.width();
-                    element.data('width', width);
-                }
+                var fixedWidth = parseInt(element[0].style.width, 10),
+                    width = fixedWidth || Math.round(element.width("auto").width());
 
                 element
                     .css({ width: 0 })
@@ -476,13 +463,10 @@
                 animate(element, extend({ width: width + 'px' }, properties), extend(options, { teardown: function () { element.css('overflow', element.data('overflow')) } }));
             },
             reverse: function(element, properties, options) {
-                if (!element.data('width'))
-                    element.data({ width: element.width() });
-
                 if (!element.data('overflow'))
-                    element.data({ overflow: element.css('overflow') });
+                    element.data('overflow', element.css('overflow'));
 
-                element.css({ overflow: 'hidden' });
+                element.css('overflow', 'hidden');
 
                 animate(element, extend({ width: 0 }, properties), extend({ teardown: function () { element.css('overflow', element.data('overflow')) } }, options));
             }

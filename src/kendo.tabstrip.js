@@ -155,7 +155,7 @@
                 if (!item.children('.t-link').length)
                     item
                         .contents()      // exclude groups, real links, templates and empty text nodes
-                        .filter(function() { return (this.nodeName != 'A' && this.nodeName != 'DIV' && !(this.nodeType == 3 && !$.trim(this.nodeValue))); })
+                        .filter(function() { return (!(this.nodeName.toLowerCase() in { a: {}, div: {} }) && !(this.nodeType == 3 && !$.trim(this.nodeValue))); })
                         .wrapAll('<a class="t-link"/>');
             });
 
