@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+	<PropertyGroup>
+        <!--Change for every major (quarterly) release -->
+        <Year>2011</Year>
+        <Release>2</Release>
+        <InstallerVersionFormatString>11.$(Release).{0}.{1}</InstallerVersionFormatString>
+        <MSBuildCommunityTasksPath>.</MSBuildCommunityTasksPath>
+        <!-- Leave empty if this is a major release -->
+        <ServicePack>BETA</ServicePack>
+	</PropertyGroup>
+</Project>
