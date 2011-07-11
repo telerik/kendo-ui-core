@@ -1815,7 +1815,9 @@
                 color: series.color,
                 opacity: series.opacity,
                 border: series.border,
-                isVertical: options.isVertical });
+                isVertical: options.isVertical,
+                overlay: series.overlay
+            });
 
             if (labelOptions.visible && value) {
                 var label = new BarLabel(value, labelOptions);

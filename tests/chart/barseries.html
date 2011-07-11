@@ -1001,7 +1001,8 @@
                             series: [{
                                 data: [0, 1],
                                 color: "#f00",
-                                opacity: 0.5
+                                opacity: 0.5,
+                                overlay: "none"
                             }]
                         });
                     }
@@ -1013,6 +1014,10 @@
 
                 test("applies series opacity color to bars", function() {
                     equal(barChart._bars[0].options.opacity, 0.5);
+                });
+
+                test("applies series overlay to bars", function() {
+                    equal(barChart._bars[0].options.overlay, "none");
                 });
 
             })();
