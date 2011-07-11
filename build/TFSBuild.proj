@@ -131,14 +131,8 @@
 
 	</PropertyGroup>
 
-    <Import Project="Config.proj" />
-    <!--<Import Project="MSBuildTasks\MSBuild.Community.Tasks.Targets"/>
-    <Import Project="MSBuildTasks\Microsoft.Sdc.Common.tasks"/>
-
-    <UsingTask TaskName="Telerik.MSBuildTasks.GenerateVersionDependentSuffix" AssemblyFile="MSBuildTasks\Telerik.MSBuildTasks.dll"/>-->
-
     <Target Name="BeforeCompile">
-        <!--<Exec Command="node.exe build/build.js"/>-->
+        <Exec Command="node.exe build/build.js"/>
         <!--<BuildStep TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)" Name="XUnitTestStep" Message="try to copy examples">
             <Output TaskParameter="Id" PropertyName="StepId" />
         </BuildStep>
@@ -147,9 +141,16 @@
             <Output TaskParameter="Suffix" PropertyName="Suffix" />
         </GenerateVersionDependentSuffix>-->
 
-        <Message Text="4urka $(SolutionRoot)\demos"></Message>     
-
+        <!--<Message Text="4urka $(SolutionRoot)\demos"></Message>-->     
     </Target>
+
+  <Target Name="AfterCompile">
+      <ItemGroup>
+        <Resources Include="$(SolutionRoot)\**" />
+      </ItemGroup>
+
+      <Copy SourceFiles="@(Resources)" DestinationFolder="$(DeployLocation)" />
+  </Target>
 
     <PropertyGroup>
         <SkipLabel>true</SkipLabel>
