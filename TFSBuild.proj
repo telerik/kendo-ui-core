@@ -132,7 +132,7 @@
 	</PropertyGroup>
 
     <Target Name="BeforeCompile">
-        <Exec Command="node.exe" WorkingDirectory="C:\Program Files (x86)\NodeJS\bin"/>  
+        <Exec Command="C:\Program Files (x86)\NodeJS\bin\node.exe" />  
     </Target>
 
   <Target Name="AfterCompile">
