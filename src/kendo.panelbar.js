@@ -17,6 +17,7 @@
         defaultState = "t-state-default",
         VISIBLE = ":visible",
         EMPTY = ":empty",
+        animating = false,
         expandModes = {
             "single": 0,
             "multi": 1
@@ -229,13 +230,16 @@
             link.addClass(selectedClass.substr(1));
             link.parentsUntil(that.element, ".t-item").filter(":has(.t-header)").addClass(highlightedClass.substr(1));
 
-            if (that._triggerEvent("select", item)) {
-                e.preventDefault();
-            }
-
             var contents = item.find("> .t-content, > .t-group"),
                 href = link.attr("href"),
                 isAnchor = link.data("ContentUrl") || (href && (href.charAt(href.length - 1) == "#" || href.indexOf("#" + that.element[0].id + "-") != -1));
+
+            if (contents.data("animating"))
+                return;
+
+            if (that._triggerEvent("select", item)) {
+                e.preventDefault();
+            }
 
             if (isAnchor || contents.length)
                 e.preventDefault();

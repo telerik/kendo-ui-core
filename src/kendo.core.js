@@ -957,6 +957,8 @@
                 element.bind(support.transitions.event, px);
             }
 
+            element.data("animating", true);
+
             var teardowns = [];
 
             // create a promise for each effect
@@ -998,6 +1000,8 @@
 
                 options.complete(); // call the complete callback
                 $.each(teardowns, function () { this(); }); // call the internal completion callbacks
+
+                element.removeData("animating");
             });
        });
     }

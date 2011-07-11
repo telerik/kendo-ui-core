@@ -190,6 +190,9 @@
                 return;
             }
 
+             if (content.data("animating"))
+                return;
+
             if (that.trigger('select', { item: item[0], contentElement: content[0] })) {
                 e.preventDefault();
             } else {
