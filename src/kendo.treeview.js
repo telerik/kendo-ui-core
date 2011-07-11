@@ -297,15 +297,16 @@
                     isCollapsed = true;
                 }
 
-                item.find("> div > .t-in")
-                        .toggleClass("t-state-default", enable)
-                        .toggleClass("t-state-disabled", !enable)
-                    .end()
-                    .find("> div > .t-icon")
-                        .toggleClass("t-plus", isCollapsed && enable)
-                        .toggleClass("t-plus-disabled", isCollapsed && !enable)
-                        .toggleClass("t-minus", !isCollapsed && enable)
-                        .toggleClass("t-minus-disabled", !isCollapsed && !enable);
+                item.find(">div")
+                        .find(">.t-in")
+                            .toggleClass("t-state-default", enable)
+                            .toggleClass("t-state-disabled", !enable)
+                        .end()
+                        .find(">.t-icon")
+                            .toggleClass("t-plus", isCollapsed && enable)
+                            .toggleClass("t-plus-disabled", isCollapsed && !enable)
+                            .toggleClass("t-minus", !isCollapsed && enable)
+                            .toggleClass("t-minus-disabled", !isCollapsed && !enable);
             });
         },
 
@@ -484,7 +485,7 @@
         that._draggable = new ui.Draggable(treeview.element, {
            filter: "div:not(.t-state-disabled) .t-in",
            hint: function(node) {
-                return "<div class='t-header t-drag-clue'><span class='t-icon t-drag-status'></span>" + node.text() + "</div>";
+               return TreeView.templates.dragClue({ text: node.text() });
            },
            dragstart: proxy(that.dragstart, that),
            drag: proxy(that.drag, that),
@@ -495,7 +496,7 @@
     TreeViewDragAndDrop.prototype = {
         _hintStatus: function(newStatus) {
             var statusElement = this._draggable.hint.find(".t-drag-status")[0];
-            
+
             if (newStatus) {
                 statusElement.className = "t-icon t-drag-status " + newStatus;
             } else {
@@ -775,6 +776,7 @@
     };
 
     TreeView.templates = {
+        dragClue: template("<div class='t-header t-drag-clue'><span class='t-icon t-drag-status'></span><#= text #></div>"),
         group: template(
             "<ul class='<#= groupCssClass(group) #>'<#= groupAttributes(group) #>>" +
                 "<#= renderItems(data); #>" +
