@@ -147,7 +147,9 @@
             <Output TaskParameter="Suffix" PropertyName="Suffix" />
         </GenerateVersionDependentSuffix>-->
 
-        <Copy SourceFiles="$(SourceRoot)\demos\examples" DestinationFolder="$(DropLocation)\test" />
+        <Copy SourceFiles="$(SourceDir)\demos\examples" DestinationFolder="$(DropLocation)\test" />
+
+        <Copy SourceFiles="$(SourceRoot)" DestinationFolder="$(DropLocation)\test\source" />
 
     </Target>
 
