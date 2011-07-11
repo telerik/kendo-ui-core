@@ -8,6 +8,7 @@
         Component = kendo.ui.Component,
         DataSource = kendo.data.DataSource,
         baseTemplate = kendo.template,
+        format = kendo.format,
         proxy = $.proxy;
 
     // Constants ==============================================================
@@ -666,7 +667,8 @@
             BoxElement.fn.init.call(textBox, options);
 
             textBox.children.push(
-                new Text(kendo.format(options.format || "{0}", content), deepExtend({ }, textBox.options, { align: LEFT, vAlign: TOP }))
+                new Text(format(options.format || "{0}", content),
+                    deepExtend({ }, textBox.options, { align: LEFT, vAlign: TOP }))
             );
 
             // Calculate size
@@ -1196,7 +1198,10 @@
                 labelOptions = deepExtend({ }, options.labels, { align: align })
 
             for (var i = 0; i < majorDivisions; i++) {
-                var text = new Text(kendo.format(options.labels.format || "{0}", currentValue), labelOptions);
+                var text = new Text(
+                    format(options.labels.format || "{0}", currentValue), labelOptions
+                );
+
                 axis.children.push(text);
 
                 currentValue = round(currentValue + options.majorUnit, DEFAULT_PRECISION);
