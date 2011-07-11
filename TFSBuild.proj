@@ -132,16 +132,7 @@
 	</PropertyGroup>
 
     <Target Name="BeforeCompile">
-        <Exec Command="node.exe build/build.js"/>
-        <!--<BuildStep TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)" Name="XUnitTestStep" Message="try to copy examples">
-            <Output TaskParameter="Id" PropertyName="StepId" />
-        </BuildStep>
-
-        <GenerateVersionDependentSuffix ReleaseYear="$(Year)" ReleaseQ="$(Release)">
-            <Output TaskParameter="Suffix" PropertyName="Suffix" />
-        </GenerateVersionDependentSuffix>-->
-
-        <!--<Message Text="4urka $(SolutionRoot)\demos"></Message>-->     
+        <Exec Command="dir"/>  
     </Target>
 
   <Target Name="AfterCompile">
