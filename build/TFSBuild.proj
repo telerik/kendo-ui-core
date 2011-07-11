@@ -132,21 +132,20 @@
 	</PropertyGroup>
 
     <Import Project="Config.proj" />
-    <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\TeamBuild\Microsoft.TeamFoundation.Build.targets" />
-    <Import Project="MSBuildTasks\MSBuild.Community.Tasks.Targets"/>
+    <!--<Import Project="MSBuildTasks\MSBuild.Community.Tasks.Targets"/>
     <Import Project="MSBuildTasks\Microsoft.Sdc.Common.tasks"/>
 
-    <UsingTask TaskName="Telerik.MSBuildTasks.GenerateVersionDependentSuffix" AssemblyFile="MSBuildTasks\Telerik.MSBuildTasks.dll"/>
+    <UsingTask TaskName="Telerik.MSBuildTasks.GenerateVersionDependentSuffix" AssemblyFile="MSBuildTasks\Telerik.MSBuildTasks.dll"/>-->
 
     <Target Name="BeforeCompile">
         <!--<Exec Command="node.exe build/build.js"/>-->
-        <BuildStep TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)" Name="XUnitTestStep" Message="try to copy examples">
+        <!--<BuildStep TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)" Name="XUnitTestStep" Message="try to copy examples">
             <Output TaskParameter="Id" PropertyName="StepId" />
         </BuildStep>
 
         <GenerateVersionDependentSuffix ReleaseYear="$(Year)" ReleaseQ="$(Release)">
             <Output TaskParameter="Suffix" PropertyName="Suffix" />
-        </GenerateVersionDependentSuffix>
+        </GenerateVersionDependentSuffix>-->
 
         <Copy SourceFiles="$(SourceRoot)\demos\examples\**" DestinationFolder="$(DropLocation)\" />
 
