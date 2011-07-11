@@ -573,6 +573,10 @@
                     equals(label.children[0].content, VALUE);
                 });
 
+                test("labels are not visible by default", function() {
+                    equals(label.options.visible, false);
+                });
+
                 test("sets label color", function() {
                     createPoint({ labels: { color: "#cf0" }});
                     same(label.options.color, "#cf0");

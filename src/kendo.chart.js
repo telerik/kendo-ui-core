@@ -2020,6 +2020,7 @@
                 opacity: 1
             },
             labels: {
+                visible: false,
                 position: ABOVE
             }
         },
@@ -2124,8 +2125,6 @@
         addValue: function(value, categoryIx, series, seriesIx) {
             var chart = this,
                 options = chart.options,
-                series = options.series,
-                currentSeries = series[seriesIx],
                 children = chart.children,
                 isStacked = options.isStacked,
                 points = chart.seriesPoints[seriesIx];
@@ -2135,11 +2134,11 @@
                     {
                         isVertical: !options.isVertical,
                         markers: {
-                            background: currentSeries.color,
-                            opacity: currentSeries.opacity
+                            background: series.color,
+                            opacity: series.opacity
                         }
                     },
-                    currentSeries
+                    series
                 )
             );
             chart._bars.push(point);
@@ -3197,8 +3196,7 @@
 
     VMLOverlayDecorator.prototype = {
         decorate: function(element) {
-            var decorator = this,
-                options = element.options,
+            var options = element.options,
                 overlayName = options ? options.overlay : "",
                 overlay = Chart.Overlays[overlayName];
 
