@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- DO NOT EDIT the project element - the ToolsVersion specified here does not prevent the solutions
+     and projects in the SolutionToBuild item group from targeting other versions of the .NET framework.
+     -->
+<Project DefaultTargets="DesktopBuild" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+
+	<!-- Do not edit this -->
+	<Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\TeamBuild\Microsoft.TeamFoundation.Build.targets" />
+
+	<ProjectExtensions>
+
+		<!-- Team Foundation Build Version - DO NOT CHANGE -->
+		<ProjectFileVersion>2</ProjectFileVersion>
+
+		<!--  DESCRIPTION
+     This property is included only for backwards compatibility. The description of a build definition
+     is now stored in the database. For compatibility with V1 clients, keep this property in sync with
+     the value in the database.
+    -->
+		<Description></Description>
+
+		<!--  BUILD MACHINE
+     This property is included only for backwards compatibility. The default machine used for a build
+     definition is now stored in the database, as the MachineName property of the definition's
+     DefaultBuildAgent. For compatibility with V1 clients, keep this property in sync with the value
+     in the database.
+    -->
+		<BuildMachine>bpc2</BuildMachine>
+
+	</ProjectExtensions>
+
+	<PropertyGroup>
+
+		<!--  TEAM PROJECT
+     This property is included only for backwards compatibility. The team project for a build
+     definition is now stored in the database. For compatibility with V1 clients, keep this property in
+     sync with the value in the database.
+    -->
+		<TeamProject>Griffin</TeamProject>
+
+		<!--  BUILD DIRECTORY
+     This property is included only for backwards compatibility. The build directory used for a build
+     definition is now stored in the database, as the BuildDirectory property of the definition's
+     DefaultBuildAgent. For compatibility with V1 clients, keep this property in sync with the value
+     in the database.
+    -->
+		<BuildDirectoryPath>c:\TeamBuilds\Griffin\Kendo Full</BuildDirectoryPath>
+
+		<!--  DROP LOCATION
+     This property is included only for backwards compatibility. The drop location used for a build
+     definition is now stored in the database. For compatibility with V1 clients, keep this property
+     in sync with the value in the database.
+    -->
+		<DropLocation>\\UNKNOWN\drops</DropLocation>
+
+		<!--  TESTING
+     Set this flag to enable/disable running tests as a post-compilation build step.
+    -->
+		<RunTest>false</RunTest>
+
+		<!--  CODE ANALYSIS
+     Set this property to enable/disable running code analysis. Valid values for this property are
+     Default, Always and Never.
+
+         Default - Perform code analysis as per the individual project settings
+         Always  - Always perform code analysis irrespective of project settings
+         Never   - Never perform code analysis irrespective of project settings
+     -->
+		<RunCodeAnalysis>Never</RunCodeAnalysis>
+
+		<!-- Additional Properties -->
+
+		<!--  WorkItemType
+     The type of the work item created on a build failure.
+     -->
+		<WorkItemType>Bug</WorkItemType>
+
+		<!--  WorkItemFieldValues
+     Fields and values of the work item created on a build failure.
+
+     Note: Use reference names for fields if you want the build to be resistant to field name
+     changes. Reference names are language independent while friendly names are changed depending
+     on the installed language. For example, "System.Reason" is the reference name for the "Reason"
+     field.
+     -->
+		<WorkItemFieldValues>System.Reason=Build Failure;System.Description=Start the build using Team Build</WorkItemFieldValues>
+
+		<!--  WorkItemTitle
+     Title of the work item created on build failure.
+     -->
+		<WorkItemTitle>Build failure in build:</WorkItemTitle>
+
+		<!--  DescriptionText
+     History comment of the work item created on a build failure.
+     -->
+		<DescriptionText>This work item was created by Team Build on a build failure.</DescriptionText>
+
+		<!--  BuildLogText
+     Additional comment text for the work item created on a build failure.
+     -->
+		<BuildlogText>The build log file is at:</BuildlogText>
+
+		<!--  ErrorWarningLogText
+     Additional comment text for the work item created on a build failure.
+     This text will only be added if there were errors or warnings.
+     -->
+		<ErrorWarningLogText>The errors/warnings log file is at:</ErrorWarningLogText>
+
+		<!--  UpdateAssociatedWorkItems
+     Set this flag to enable/disable updating associated workitems on a successful build.
+     -->
+		<UpdateAssociatedWorkItems>true</UpdateAssociatedWorkItems>
+
+		<!--  AdditionalVCOverrides
+     Additional text for the VCOverrides file generated for VC++ projects.
+     -->
+		<AdditionalVCOverrides></AdditionalVCOverrides>
+
+		<!--  CustomPropertiesForClean
+     Custom properties to pass to the MSBuild task while calling the "Clean" target for all solutions.
+     The format should be: PropertyName1=value1;PropertyName2=value2;...
+     -->
+		<CustomPropertiesForClean></CustomPropertiesForClean>
+
+		<!--  CustomPropertiesForBuild
+     Custom properties to pass to the MSBuild task while calling the default targets for all solutions.
+     The format should be: Property1=value1;Property2=value2;...  To pass custom properties to
+     individual solutions, use the Properties metadata item of the SolutionToBuild ItemGroup.
+     -->
+		<CustomPropertiesForBuild></CustomPropertiesForBuild>
+
+	</PropertyGroup>
+
+    <Target Name="BeforeCompile">
+        <Exec Command="node.exe build/build.js"/>
+        <!--<BuildStep TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)" Name="XUnitTestStep" Message="try to copy examples">
+            <Output TaskParameter="Id" PropertyName="StepId" />
+        </BuildStep>
+
+        <GenerateVersionDependentSuffix ReleaseYear="$(Year)" ReleaseQ="$(Release)">
+            <Output TaskParameter="Suffix" PropertyName="Suffix" />
+        </GenerateVersionDependentSuffix>-->
+
+        <!--<Message Text="4urka $(SolutionRoot)\demos"></Message>-->     
+    </Target>
+
+  <Target Name="AfterCompile">
+      <ItemGroup>
+        <Resources Include="$(SolutionRoot)\**" />
+      </ItemGroup>
+
+      <Copy SourceFiles="@(Resources)" DestinationFolder="$(DeployLocation)" />
+  </Target>
+
+    <PropertyGroup>
+        <SkipLabel>true</SkipLabel>
+        <SkipPostBuild>true</SkipPostBuild>
+        <SkipWorkItemCreation>true</SkipWorkItemCreation>
+        <SkipDropBuild>true</SkipDropBuild>
+        <ForceGet>true</ForceGet>
+    </PropertyGroup>
+</Project>
