@@ -1700,8 +1700,7 @@
 
         reflow: function(targetBox) {
             var bar = this,
-                children = bar.children,
-                options = bar.options;
+                children = bar.children;
 
             bar.box = targetBox;
             for(var i = 0, length = children.length; i < length; i++) {
@@ -1893,7 +1892,6 @@
                 options = barChart.options,
                 isVertical = options.isVertical,
                 plotArea = barChart.plotArea,
-                children = barChart.children,
                 barIndex = 0,
                 categorySlots = [],
                 bars = barChart._bars;
@@ -2128,7 +2126,6 @@
                 currentSeries = series[seriesIx],
                 children = chart.children,
                 isStacked = options.isStacked,
-                labelOptions = deepExtend({}, series.labels),
                 points = chart.seriesPoints[seriesIx];
 
             var point = new LinePoint(value,
@@ -2569,7 +2566,7 @@
                 definitionId,
                 output = "";
 
-            for (var definitionId in definitions) {
+            for (definitionId in definitions) {
                 if (definitions.hasOwnProperty(definitionId)) {
                     output += definitions[definitionId].render();
                 }
@@ -2896,7 +2893,6 @@
     SVGPaintDecorator.prototype = {
         decorate: function(element) {
             var decorator = this,
-                view = decorator.view,
                 options = element.options;
 
             options.fill = decorator.getPaint(options.fill);
@@ -3200,7 +3196,6 @@
     VMLOverlayDecorator.prototype = {
         decorate: function(element) {
             var decorator = this,
-                view = decorator.view,
                 options = element.options,
                 overlayName = options ? options.overlay : "",
                 overlay = Chart.Overlays[overlayName];
@@ -3238,8 +3233,7 @@
             var decorator = this,
                 view = decorator.view,
                 options = element.options,
-                fill = options.fill,
-                gradient;
+                fill = options.fill;
 
             if (typeof fill === OBJECT) {
                 element.fill = view.createGradient(fill);
