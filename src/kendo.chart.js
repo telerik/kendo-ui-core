@@ -667,7 +667,7 @@
             BoxElement.fn.init.call(textBox, options);
 
             textBox.children.push(
-                new Text(format(options.format || "{0}", content),
+                new Text(options.format ? format(options.format, content) : content,
                     deepExtend({ }, textBox.options, { align: LEFT, vAlign: TOP }))
             );
 
@@ -1195,11 +1195,13 @@
             var majorDivisions = axis.getMajorDivisions(),
                 currentValue = options.min,
                 align = options.orientation === VERTICAL ? RIGHT : CENTER,
-                labelOptions = deepExtend({ }, options.labels, { align: align })
+                labelOptions = deepExtend({ }, options.labels, { align: align }),
+                labelFormat = options.labels.format;
 
             for (var i = 0; i < majorDivisions; i++) {
                 var text = new Text(
-                    format(options.labels.format || "{0}", currentValue), labelOptions
+                    labelFormat ? format(labelFormat, currentValue) : currentValue.toString(),
+                    labelOptions
                 );
 
                 axis.children.push(text);
