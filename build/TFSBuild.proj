@@ -130,7 +130,12 @@
 		<CustomPropertiesForBuild></CustomPropertiesForBuild>
 
 	</PropertyGroup>
+
     <Import Project="Config.proj" />
+    <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\TeamBuild\Microsoft.TeamFoundation.Build.targets" />
+    <Import Project="MSBuildTasks\MSBuild.Community.Tasks.Targets"/>
+    <Import Project="MSBuildTasks\Microsoft.Sdc.Common.tasks"/>
+
     <UsingTask TaskName="Telerik.MSBuildTasks.GenerateVersionDependentSuffix" AssemblyFile="MSBuildTasks\Telerik.MSBuildTasks.dll"/>
 
     <Target Name="BeforeCompile">
