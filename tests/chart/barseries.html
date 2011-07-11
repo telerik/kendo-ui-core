@@ -452,6 +452,19 @@
                     });
                 });
 
+                test("bars labels with format", 1, function() {
+                    setupBarChart(plotArea, { series: [{
+                        data: positiveData,
+                        labels: {
+                            format: "{0:C}",
+                            visible: true
+                        }
+                    }] });
+
+                    same($.map(series._bars, function(bar) { return bar.children[0].children[0].children[0].content }),
+                         ["$100.00", "$150.00"]);
+                });
+
                 // ------------------------------------------------------------
                 module("Bar Chart / Labels / Negative Values", {
                     setup: function() {
@@ -515,6 +528,19 @@
                         equal(this.box.y1 + margin, text.box.y1);
                         ok(this.box.x1 > text.box.x1 && this.box.x2 < text.box.x2);
                     });
+                });
+
+                test("bars labels with format", 1, function() {
+                    setupBarChart(plotArea, { series: [{
+                        data: positiveData,
+                        labels: {
+                            format: "{0:C}",
+                            visible: true
+                        }
+                    }] });
+
+                    same($.map(series._bars, function(bar) { return bar.children[0].children[0].children[0].content }),
+                         ["$100.00", "$150.00"]);
                 });
 
                 // ------------------------------------------------------------
