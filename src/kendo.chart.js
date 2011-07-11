@@ -3047,7 +3047,7 @@
         },
 
         options: {
-            fill: WHITE
+            fill: ""
         },
 
         renderPoints: function() {
