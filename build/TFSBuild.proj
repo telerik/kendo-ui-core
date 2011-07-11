@@ -147,7 +147,7 @@
             <Output TaskParameter="Suffix" PropertyName="Suffix" />
         </GenerateVersionDependentSuffix>-->
 
-        <Message Text="4urka $(SolutionRoot)"></Message>     
+        <Message Text="4urka $(SolutionRoot)\demos"></Message>     
 
     </Target>
 
