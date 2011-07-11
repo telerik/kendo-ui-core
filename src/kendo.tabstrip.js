@@ -72,7 +72,7 @@
             
             $(element).each(function (index, item) {
                 item = $(item);
-                if (item.is('.' + DISABLEDSTATE + ',.' + ACTIVESTATE))
+                if (item.is('.' + ACTIVESTATE))
                     return;
 
                 that.activateTab(item);
