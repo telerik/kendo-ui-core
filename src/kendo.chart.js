@@ -172,8 +172,6 @@
                     series[i]);
             }
 
-            options.categoryAxis = deepExtend({}, options.axisDefaults, options.categoryAxis);
-
             if (!chartArea.width) {
                 chartArea.width = element.width() || DEFAULT_WIDTH;
             }
@@ -2345,11 +2343,11 @@
                 categoryAxis = new CategoryAxis(deepExtend({
                         orientation: invertAxes ? VERTICAL : HORIZONTAL,
                         axisCrossingValue: invertAxes ? categoriesCount : 0
-                    }, options.axesDefaults, options.categoryAxis)
+                    }, options.axisDefaults, options.categoryAxis)
                 ),
                 valueAxis = new NumericAxis(seriesMin, seriesMax, deepExtend({
                         orientation: invertAxes ? HORIZONTAL : VERTICAL
-                    }, options.axesDefaults, options.valueAxis)
+                    }, options.axisDefaults, options.valueAxis)
                 );
 
             plotArea.axisX = invertAxes ? valueAxis : categoryAxis;
