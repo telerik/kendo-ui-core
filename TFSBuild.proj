@@ -145,7 +145,7 @@
   <Target Name="BeforeCompile">
     <!--<SetEnvironmentVariable Name="PATH" value="$(NodeJS)" />
     <Exec Command="$(NodeJS)cygpath.exe" ContinueOnError="true" />-->
-    <Exec Command="NodeJS\bin\cygpath.exe"></Exec>
+    <Exec Command="NodeJS\bin\node.exe $(SolutionRoot)\build\build.js"></Exec>
   </Target>
 
   <Target Name="AfterCompile">
