@@ -21,6 +21,8 @@
         UPDATE = "update",
         DESTROY = "destroy",
         CHANGE = "change",
+        MULTIPLE = "multiple",
+        SINGLE = "single",
         ERROR = "error",
         REQUESTSTART = "requestStart",
         crud = [CREATE, READ, UPDATE, DESTROY],
@@ -517,7 +519,7 @@
             autoSync: false,
             sendAllFields: true,
             batch: {
-                mode: "multiple"
+                mode: MULTIPLE
             }
         },
 
@@ -590,10 +592,10 @@
             destroyed = that._destroyedModels();
 
             if (batch === false) {
-                mode = "multiple";
+                mode = MULTIPLE;
             }
-            else if ((batch.mode || "multiple") === "multiple") {
-                mode = "single";
+            else if ((batch.mode || MULTIPLE) === MULTIPLE) {
+                mode = SINGLE;
             }
 
             if (mode) {
@@ -607,7 +609,7 @@
                         destroyed: destroyed
                     },
                     proxy(transport.update, transport),
-                    "single"
+                    SINGLE
                 );
             }
 
@@ -651,7 +653,7 @@
                 return;
             }
 
-            if(mode === "multiple") {
+            if(mode === MULTIPLE) {
                 for(idx = 0, length = data.length; idx < length; idx++) {
                     promises.push(
                         method({
