@@ -190,7 +190,7 @@
                 return;
             }
 
-             if (content.data("animating"))
+            if ($(".t-content", this.element).filter(function() { return $(this).data("animating"); }).length)
                 return;
 
             if (that.trigger('select', { item: item[0], contentElement: content[0] })) {

@@ -992,6 +992,7 @@
 
             //wait for all effects to complete
             $.when.apply(null, promises).then(function() {
+                element.removeData("animating");
                 element.dequeue(); // call next animation from the queue
 
                 if (options.hide) {
@@ -1000,8 +1001,6 @@
 
                 options.complete(); // call the complete callback
                 $.each(teardowns, function () { this(); }); // call the internal completion callbacks
-
-                element.removeData("animating");
             });
        });
     }
