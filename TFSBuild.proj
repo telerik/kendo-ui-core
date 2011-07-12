@@ -133,9 +133,9 @@
 
   <UsingTask AssemblyFile="$(SolutionRoot)\build\MSBuildTasks\TelerikSetEnvironmentVariableTask.dll" TaskName="TelerikSetEnvironmentVariableTask.SetEnvironmentVariable" />
 
-  <PropertyGroup>
+  <!--<PropertyGroup>
     <NodeJS>C:\NodeJS\bin\</NodeJS>
-  </PropertyGroup>
+  </PropertyGroup>-->
 
   <PropertyGroup>
     <ProgramFilesPath Condition="Exists('$(PROGRAMFILES) (x86)')">$(PROGRAMFILES) (x86)</ProgramFilesPath>
@@ -143,8 +143,9 @@
   </PropertyGroup>
 
   <Target Name="BeforeCompile">
-    <SetEnvironmentVariable Name="PATH" value="$(NodeJS)" />
-    <Exec Command="$(NodeJS)cygpath.exe" ContinueOnError="true" />
+    <!--<SetEnvironmentVariable Name="PATH" value="$(NodeJS)" />
+    <Exec Command="$(NodeJS)cygpath.exe" ContinueOnError="true" />-->
+    <Exec Command="NodeJS\bin\cygpath.exe"></Exec>
   </Target>
 
   <Target Name="AfterCompile">
