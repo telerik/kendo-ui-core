@@ -24,11 +24,13 @@
 
                 lineChart = new Chart.LineChart(plotArea, options);
                 lineChart.reflow();
+                lineChart.getViewElements(view);
             }
 
             (function() {
                 var positiveSeries = { data: [1, 2], labels: {} },
                     negativeSeries = { data: [-1, -2], labels: {} },
+                    sparseSeries = { data: [1, 2, null, 2] },
                     VALUE_AXIS_MAX = 2,
                     CATEGORY_AXIS_Y = 2,
                     TOLERANCE = 0.1;
@@ -179,18 +181,41 @@
                     equal(lineChart.categoriesCount(), 3);
                 });
 
-                test("Missing values are represented as points with zero height", function() {
-                    var pointHeights = $.map(lineChart._bars, function(point) {
-                        return point.box.height();
-                    });
+                // ------------------------------------------------------------
+                module("Line Chart / Missing values", {
+                    setup: function() {
+                        plotArea = new PlotAreaStub();
+                    }
 
-                    same(pointHeights, [1, 1, 2, 2, 3, 0]);
+
                 });
 
-                test("points are aligned to category axis", 6, function() {
-                    $.each(lineChart._bars, function() {
-                        equal(this.box.y2, CATEGORY_AXIS_Y);
+                test("omits missing points by default", function() {
+                    setupLineChart(plotArea, {
+                        series: [ sparseSeries ]
                     });
+
+                    equals(lineChart._bars[2], null);
+                });
+
+                test("omits missing points when interpolating", function() {
+                    setupLineChart(plotArea, {
+                        series: [
+                            $.extend({ missingValues: "interpolate" }, sparseSeries)
+                        ]
+                    });
+
+                    equals(lineChart._bars[2], null);
+                });
+
+                test("missing points are assumed to be 0", function() {
+                    setupLineChart(plotArea, {
+                        series: [
+                            $.extend({ missingValues: "zero" }, sparseSeries)
+                        ]
+                    });
+
+                    equals(lineChart._bars[2].value, 0);
                 });
 
                 // ------------------------------------------------------------
@@ -213,19 +238,15 @@
                 });
 
                 test("points in first category are stacked", function() {
-                    equal(lineChart._bars[1].box.y2, lineChart._bars[0].box.y1);
+                    equal(lineChart._bars[1].stackValue, 2);
                 });
 
-                test("points have set height according to value", function() {
-                    var pointHeights = $.map(lineChart._bars, function(point) {
-                        return point.box.height();
-                    });
-
-                    same(pointHeights, [1, 1, 2, 2]);
+                test("points in second category are stacked", function() {
+                    equal(lineChart._bars[3].stackValue, 4);
                 });
 
                 // ------------------------------------------------------------
-                module("Bar Chart / Stack / Negative Values", {
+                module("Line Chart / Stack / Negative Values", {
                     setup: function() {
                         plotArea = new PlotAreaStub();
                         setupLineChart(plotArea, {
@@ -244,20 +265,11 @@
                 });
 
                 test("points in first category are stacked", function() {
-                    equal(lineChart._bars[1].box.y1, lineChart._bars[0].box.y2);
+                    equal(lineChart._bars[1].stackValue, -2);
                 });
 
-                test("stack tops are aligned to category axis", function() {
-                    same([lineChart._bars[0].box.y1, lineChart._bars[2].box.y1],
-                         [CATEGORY_AXIS_Y, CATEGORY_AXIS_Y]);
-                });
-
-                test("points have set height according to value", function() {
-                    var pointHeights = $.map(lineChart._bars, function(point) {
-                        return point.box.height();
-                    });
-
-                    same(pointHeights, [1, 1, 2, 2]);
+                test("points in second category are stacked", function() {
+                    equal(lineChart._bars[3].stackValue, -4);
                 });
 
                 // ------------------------------------------------------------
@@ -266,7 +278,7 @@
                         plotArea = new PlotAreaStub();
                         setupLineChart(plotArea, {
                             series: [{
-                                data: [1, -1],
+                                data: [1, 0, -1],
                                 labels: {}
                             }],
                             isStacked: true
@@ -287,7 +299,7 @@
                         return point.box.height();
                     });
 
-                    same(pointHeights, [1, 1]);
+                    same(pointHeights, [1, 0, 1]);
                 });
 
                 // ------------------------------------------------------------
@@ -302,19 +314,50 @@
                 });
 
                 test("reports stacked minumum value", function() {
-                    equal(lineChart.valueRange().min, -2);
+                    equal(lineChart.valueRange().min, 0);
                 });
 
                 test("reports stacked maximum value", function() {
-                    equal(lineChart.valueRange().max, 2);
+                    equal(lineChart.valueRange().max, 0);
                 });
 
-                test("points have set height according to value", function() {
-                    var pointHeights = $.map(lineChart._bars, function(point) {
-                        return point.box.height();
+                // ------------------------------------------------------------
+                module("Line Chart / Stack / Missing values", {
+                    setup: function() {
+                        plotArea = new PlotAreaStub();
+                    }
+
+
+                });
+
+                test("missing points are assumed to be 0 by default", function() {
+                    setupLineChart(plotArea, {
+                        series: [ sparseSeries ],
+                        isStacked: true
+                    });
+                    equals(lineChart._bars[2].value, 0);
+                });
+
+                test("ignores interpolate option", function() {
+                    setupLineChart(plotArea, {
+                        series: [
+                            $.extend({ missingValues: "interpolate" }, sparseSeries)
+                        ],
+                        isStacked: true
                     });
 
-                    same(pointHeights, [1, 1, 2, 2]);
+                    equals(lineChart._bars[2].value, 0);
+                });
+
+                test("ignores gap option", function() {
+                    setupLineChart(plotArea, {
+                        series: [
+                            $.extend({ missingValues: "gap" }, sparseSeries)
+                        ],
+                        isStacked: true
+                    });
+
+                    equals(lineChart._bars[2].value, 0);
                 });
 
                 // ------------------------------------------------------------
@@ -332,9 +375,6 @@
                                 )
                             ]
                         });
-
-                        lineChart.reflow(chartBox);
-                        lineChart.getViewElements(view);
                     }
                 });
 
@@ -348,6 +388,71 @@
 
                 test("sets line opacity", function() {
                     equals(view.log.path[0].style.strokeOpacity, 0.5);
+                });
+
+                // ------------------------------------------------------------
+                module("Line Chart / Rendering / Missing Values", {
+                    setup: function() {
+                        plotArea = new PlotAreaStub();
+                    }
+                });
+
+                test("line stops before missing value", function() {
+                    setupLineChart(plotArea, {
+                        series: [
+                            sparseSeries
+                        ]
+                    });
+
+                    same(view.log.path[0].points, [
+                        [ 0.5, 2 ], [ 1.5, 2 ]
+                    ]);
+                });
+
+                test("no line is created for isolated points", function() {
+                    setupLineChart(plotArea, {
+                        series: [
+                            sparseSeries
+                        ]
+                    });
+
+                    equals(view.log.path.length, 1);
+                });
+
+                test("line continues after missing value", function() {
+                    setupLineChart(plotArea, {
+                        series: [
+                            { data: [ null, 1, 2] }
+                        ]
+                    });
+
+                    same(view.log.path[0].points, [
+                        [ 1.5, 2 ], [ 2.5, 2 ]
+                    ]);
+                });
+
+                test("line is drawn between existing points", function() {
+                    setupLineChart(plotArea, {
+                        series: [
+                            $.extend({ missingValues: "interpolate" }, sparseSeries)
+                        ]
+                    });
+
+                    same(view.log.path[0].points, [
+                        [ 0.5, 2 ], [ 1.5, 2 ], [ 3.5, 2 ]
+                    ]);
+                });
+
+                test("line goes to zero for missing point", function() {
+                    setupLineChart(plotArea, {
+                        series: [
+                            $.extend({ missingValues: "zero" }, sparseSeries)
+                        ]
+                    });
+
+                    same(view.log.path[0].points, [
+                        [ 0.5, 2 ], [ 1.5, 2 ], [ 2.5, 2 ], [ 3.5, 2 ]
+                    ]);
                 });
 
             })();
