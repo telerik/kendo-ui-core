@@ -5,6 +5,7 @@
         isPlainObject = $.isPlainObject,
         isEmptyObject = $.isEmptyObject,
         isArray = $.isArray,
+        map = $.map,
         each = $.each,
         noop = $.noop,
         kendo = window.kendo,
@@ -271,7 +272,22 @@
         init: function(options) {
             var that = this,
                 total = options.total,
+                model = options.model,
                 data = options.data;
+
+            if (model) {
+                if (isPlainObject(model)) {
+                    model.id = kendo.getter(that.xpathToMember(model.id));
+                    if (model.fields) {
+                        each(model.fields, function(field, value) {
+                            model.fields[field] = kendo.getter(that.xpathToMember(value));
+                        });
+                    }
+                    model = Model.define(model);
+                }
+
+                that.model = model;
+            }
 
             if (total) {
                 total = kendo.getter(that.xpathToMember(total));
@@ -283,12 +299,16 @@
             if (data) {
                 data = that.xpathToMember(data);
                 that.data = function(value) {
-                    var result = [], raw, idx, rawCount;
+                    var result = that.evaluate(value, data);
 
-                    raw = that.evaluate(value, data);
-
-                    for (idx = 0, rawCount = raw.length; idx < rawCount; idx++) {
-                        result.push(raw[idx]);
+                    if (that.model && that.model.fields) {
+                        return map(result, function(value) {
+                            var record = {};
+                            for (var field in that.model.fields) {
+                                record[field] = that.model.fields[field](value);
+                            }
+                            return record;
+                        });
                     }
 
                     return result;
@@ -329,7 +349,7 @@
 
                     member = result[nodeName];
 
-                    if ($.isArray(member)) {
+                    if (isArray(member)) {
                         // elements of same nodeName are stored as array
                         member.push(parsedNode);
                     } else if (member !== undefined) {
@@ -355,7 +375,7 @@
             while (member = members.shift()) {
                 value = value[member];
 
-                if ($.isArray(value)) {
+                if (isArray(value)) {
                     result = [];
                     expression = members.join(".");
 
@@ -1086,7 +1106,7 @@
     });
 
     DataSource.create = function(options) {
-        options = $.isArray(options) ? { data: options } : options;
+        options = isArray(options) ? { data: options } : options;
 
         var dataSource = options || {},
             data = dataSource.data,

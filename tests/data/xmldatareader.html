@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Query Tests</title>
+        <title>XmlDataReader Tests</title>
         <script src="../../src/jquery.js"></script>
         <script type="text/javascript" src="../qunit.js"></script>
         <script type="text/javascript" src="../qunit-runner.js"></script>
@@ -17,8 +17,6 @@
         <div id="qunit-testrunner-toolbar"></div>
         <h2 id="qunit-userAgent"></h2>
         <ol id="qunit-tests"></ol>
-
-        <script src="../script/datareader.js"></script>
 
         <script>
             var XmlDataReader = kendo.data.XmlDataReader;
@@ -247,6 +245,7 @@
                 equal(result[2], 3);
                 equal(result[3], 4);
             });
+
             test("data returns the records with mixed items", function() {
                 var reader = new XmlDataReader({ data: "/root/foo/bar/baz"});
 
@@ -271,6 +270,45 @@
                 equal(result.length, 3);
             });
 
+            test("model is initialized from options", function() {
+                var reader = new XmlDataReader({
+                    model: {
+                    }
+                });
+
+                ok(new reader.model instanceof kendo.data.Model);
+            });
+
+            test("parse model id", function() {
+                var reader = new XmlDataReader({
+                    model: {
+                        id: "@id"
+                    },
+                    data: "/root/foo"
+                });
+
+                var result = reader.parse('<root><foo id="bar" /><foo id="baz" /></root>');
+                var data = reader.data(result);
+
+                equal(reader.model.id(data[0]), "bar");
+            });
+
+            test("model fields are parsed", function() {
+                var reader = new XmlDataReader({
+                    model: {
+                        id: "@id",
+                        fields: {
+                            foo: "@foo"
+                        }
+                    },
+                    data: "/root/foo"
+                });
+
+                var result = reader.parse('<root><foo foo="bar" /><foo foo="baz" /></root>');
+                var data = reader.data(result);
+
+                equal(data[0].foo, "bar");
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
