@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>grid</title>
+         <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.query.js"></script>
+        <script src="../src/kendo.pager.js"></script>
+        <script src="../src/kendo.sortable.js"></script>
+        <script src="../src/kendo.draganddrop.js"></script>
+        <script src="../src/kendo.groupable.js"></script>
+        <script src="../src/kendo.model.js"></script>
+        <script src="../src/kendo.data.js"></script>
+        <script src="../src/kendo.grid.js"></script>
+
+        <link href="../styles/kendo.common.css" type="text/css" rel="stylesheet" />
+        <link href="../styles/kendo.vista.css" type="text/css" rel="stylesheet" />
+    </head>
+    <body>
+        <table id="table1" style="height: 400px">
+        </table>
+        <script>
+            $("#table1").kendoGrid({
+                dataSource: {
+                    transport: {
+                        read: "livescores.xml"
+                    },
+                    schema: {
+                        type: "xml",
+                        data: "/LiveScores/MatchData",
+                        model: {
+                            fields: {
+                                team1: "Team1/text()",
+                                team2: "Team2/text()",
+                                score: "Score/text()"
+                            }
+                        }
+                    }
+                },
+                sortable: true
+            });
+        </script>
+    </body>
+</html>
