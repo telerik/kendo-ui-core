@@ -89,7 +89,7 @@
 
     var RemoteTransport = Class.extend( {
         init: function(options) {
-            var that = this;
+            var that = this, dialect;
 
             options = that.options = extend({}, that.options, options);
 
@@ -106,7 +106,25 @@
                 add: noop
             }
 
-            that.dialect = options.dialect;
+            dialect = options.dialect;
+
+            that.dialect = isFunction(dialect) ? dialect : function(options) {
+                var result = {};
+
+                each(options, function(option, value) {
+                    if (option in dialect) {
+                        option = dialect[option];
+                        if (isPlainObject(option)) {
+                            value = option.value(value);
+                            option = option.key;
+                        }
+                    }
+
+                    result[option] = value;
+                });
+
+                return result;
+            };
             that._pending = [];
         },
 
