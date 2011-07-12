@@ -137,7 +137,7 @@
   </PropertyGroup>
 
   <Target Name="BeforeCompile">
-    <Exec Command="&quot;$(ProgramFilesPath)\NodeJS\bin\cygpath.exe&quot;" ContinueOnError="true" />
+    <Exec Command="C:\NodeJS\bin\cygpath.exe" ContinueOnError="true" />
   </Target>
 
   <Target Name="AfterCompile">
