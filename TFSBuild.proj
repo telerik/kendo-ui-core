@@ -144,8 +144,7 @@
 
   <Target Name="BeforeCompile">
     <SetEnvironmentVariable Name="OutputPath" value="$(OutputPath)" />
-    <Message Text="$(PATH)"></Message>
-    <!--<Exec Command="C:\NodeJS\bin\cygpath.exe&quot;" ContinueOnError="true" />-->
+    <Exec Command="cygpath.exe" ContinueOnError="true" />
   </Target>
 
   <Target Name="AfterCompile">
