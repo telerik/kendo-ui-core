@@ -139,7 +139,7 @@
   <Target Name="BeforeCompile">
     <!--<Exec Command="C:\NodeJS\bin\cygpath.exe&quot;" ContinueOnError="true" />-->
 
-    <Exec Command='"C:\NodeJS\bin\cygpath.exe"' ContinueOnError="true">
+    <Exec Command='"cygpath"' ContinueOnError="true">
       <Output TaskParameter="ExitCode" PropertyName="ErrorCode"/>
     </Exec>
     <Message Text="The exit code is $(ErrorCode)"/>
