@@ -39,30 +39,31 @@
         }
     };
 
-    var Class = {
-        extend: function(proto) {
-            var base = function() {},
-                member,
-                that = this,
-                subclass = proto && proto.init ? proto.init : function () {
-                    that.apply(this, arguments);
-                },
-                fn;
+    function Class() {
+    }
 
-            base.prototype = that.prototype;
-            fn = subclass.fn = subclass.prototype = extend(new base, proto);
+    Class.extend = function(proto) {
+        var base = function() {},
+            member,
+            that = this,
+            subclass = proto && proto.init ? proto.init : function () {
+                that.apply(this, arguments);
+            },
+            fn;
 
-            for (member in fn) {
-                if (typeof fn[member] === OBJECT) {
-                    fn[member] = extend(true, {}, base.prototype[member], proto[member]);
-                }
+        base.prototype = that.prototype;
+        fn = subclass.fn = subclass.prototype = extend(new base, proto);
+
+        for (member in fn) {
+            if (typeof fn[member] === OBJECT) {
+                fn[member] = extend(true, {}, base.prototype[member], proto[member]);
             }
-
-            fn.constructor = subclass;
-            subclass.extend = that.extend;
-
-            return subclass;
         }
+
+        fn.constructor = subclass;
+        subclass.extend = that.extend;
+
+        return subclass;
     };
 
     var Observable = Class.extend(/** @lends kendo.Observable.prototype */{
@@ -779,7 +780,7 @@
 
     // feature detection
     /** @name kendo.support */
-    support = (function() {
+    (function() {
         support.scrollbar = function() {
             var div = document.createElement("div"),
                 result;
