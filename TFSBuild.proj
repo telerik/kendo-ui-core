@@ -135,8 +135,9 @@
     <ProgramFilesPath Condition="Exists('$(PROGRAMFILES) (x86)')">$(PROGRAMFILES) (x86)</ProgramFilesPath>
     <ProgramFilesPath Condition="$(ProgramFilesPath) == ''">$(PROGRAMFILES)</ProgramFilesPath>
   </PropertyGroup>
-
+  
   <Target Name="BeforeCompile">
+    <Message Text="$(WorkingDirectory)"></Message>
     <Exec Command="$(SolutionRoot)\build\lib\zip" ContinueOnError="true" />
   </Target>
 
