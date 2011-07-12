@@ -134,7 +134,8 @@
             var plain = $.isPlainObject(item),
                 items,
                 groupData = {
-                                firstLevel: parent.parent().hasClass(".t-menu"),
+                                firstLevel: parent.parent().hasClass("t-menu"),
+                                horizontal: parent.hasClass("t-menu-horizontal"),
                                 expanded: true,
                                 length: parent.children().length
                             };
@@ -250,7 +251,10 @@
         },
 
         _toggleHover: function(e) {
-            $(e.currentTarget).toggleClass("t-state-hover", e.type == MOUSEENTER);
+            var target = $(e.currentTarget);
+
+            if (!target.parents("li." + DISABLEDSTATE).length)
+                target.toggleClass("t-state-hover", e.type == MOUSEENTER);
         },
 
         _updateClasses: function() {
@@ -305,6 +309,8 @@
         },
 
         _updateArrow: function (item) {
+            item = $(item);
+
             item.find(".t-icon").remove();
 
             item.filter(":has(.t-group)")
@@ -318,6 +324,8 @@
         },
 
         _updateFirstLast: function (item) {
+            item = $(item);
+            
             item.filter(".t-first:not(:first-child)").removeClass("t-first");
             item.filter(".t-last:not(:last-child)").removeClass("t-last");
             item.filter(":first-child").addClass("t-first");
@@ -460,10 +468,10 @@
         textAttributes: function(item) {
             return item.url ? " href='" + item.url + "'" : "";
         },
-        arrowClass: function(item) {
+        arrowClass: function(item, group) {
             var result = "t-icon";
 
-            if (item.parent().parent().hasClass("t-menu-horizontal")) {
+            if (group.horizontal) {
                 result += " t-arrow-down";
             } else {
                 result += " t-arrow-right";
@@ -506,7 +514,7 @@
             "</li>"
         ),
         image: template("<img class='t-image' alt='' src='<#= imageUrl #>' />"),
-        arrow: template("<span class='<#= arrowClass(item) #>'></span>"),
+        arrow: template("<span class='<#= arrowClass(item, group) #>'></span>"),
         sprite: template("<span class='t-sprite <#= spriteCssClass #>'></span>"),
         empty: template("")
     };

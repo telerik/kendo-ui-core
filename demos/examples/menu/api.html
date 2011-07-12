@@ -86,7 +86,9 @@
                     var itemIndexes = $(target).prev().val().split(/[.,]/),
                         rootItem = menu.element.children("li").eq(itemIndexes[0]);
 
-                    return itemIndexes.length > 1 ? rootItem.find(".t-group > .t-item").eq(itemIndexes[1]) : rootItem;
+                    return itemIndexes.length > 1 ?
+                                rootItem.find(".t-group > .t-item").eq(itemIndexes[1]) :
+                                rootItem;
                 };
 
                 $(".toggleItem").click( function (e) {
@@ -109,27 +111,21 @@
                 });
 
                 $(".appendItem").click( function (e) {
-                    menu.append([
-                        {
+                    menu.append({
                             text: $(e.target).prev().prev().val()
-                        }
-                    ], getItem(e.target));
+                        }, getItem(e.target));
                 });
 
                 $(".beforeItem").click( function (e) {
-                    menu.insertBefore([
-                        {
+                    menu.insertBefore({
                             text: $(e.target).prev().prev().val()
-                        }
-                    ], getItem(e.target));
+                        }, getItem(e.target));
                 });
 
                 $(".afterItem").click( function (e) {
-                    menu.insertAfter([
-                        {
+                    menu.insertAfter({
                             text: $(e.target).prev().prev().val()
-                        }
-                    ], getItem(e.target));
+                        }, getItem(e.target));
                 });
 
                 var menu = $("#Menu1").kendoMenu().css({ marginRight: "220px" }).data("kendoMenu");

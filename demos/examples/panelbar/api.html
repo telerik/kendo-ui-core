@@ -22,12 +22,16 @@
         <!-- description -->
         <div class="description">You can use the PanelBar API to manipulate the items.</div>
         <!-- description -->
-        <div id="example">
-            <div class="configuration">
+        <div id="example" style="min-height: 226px">
+            <div class="configuration" style="height: 216px">
                 <span class="configTitle">API Functions</span>
-                <button class="selectItem t-button">Select</button><input type="text" /><br>
-                <button class="toggleItem t-button">Enable/Disable</button><input type="text" /><br>
-                <button class="triggerItem t-button">Expand/Collapse</button><input type="text" /><br>
+                <input type="text" value="0" /><button class="selectItem t-button">Select</button><br>
+                <button class="toggleItem t-button">Enable/Disable</button><br>
+                <button class="triggerItem t-button">Expand/Collapse</button><br>
+                <button class="removeItem t-button">Remove</button><br>
+                <input type="text" value="Item" /><button class="appendItem t-button">Append</button><br>
+                <input type="text" value="Item" /><button class="beforeItem t-button">Insert Before</button><br>
+                <input type="text" value="Item" /><button class="afterItem t-button">Insert After</button><br>
             </div>
 
             <ul id="PanelBar1">
@@ -80,9 +84,12 @@
             <script type="text/javascript">
 
                 var getItem = function (target) {
-                    var itemIndex = $(target).next()[0].value;
+                    var itemIndexes = $(target).prev().val().split(/[.,]/),
+                        rootItem = panelBar.element.children("li").eq(itemIndexes[0]);
 
-                    return panelBar.element.children("li").eq(itemIndex);
+                    return itemIndexes.length > 1 ?
+                                rootItem.find(".t-group > .t-item").eq(itemIndexes[1]) :
+                                rootItem;
                 };
 
                 $(".selectItem").click(function (e) {
@@ -90,21 +97,40 @@
                 });
 
                 $(".toggleItem").click( function (e) {
-                    var item = getItem(e.target);
+                    var item = panelBar.getSelectedItem();
 
-                    if (item.hasClass("t-state-disabled"))
-                        panelBar.enable(item);
-                    else
-                        panelBar.disable(item);
+                    panelBar.enable(item, item.hasClass("t-state-disabled"));
                 });
 
                 $(".triggerItem").click( function (e) {
-                    var item = getItem(e.target);
+                    var item = panelBar.getSelectedItem();
 
                     if (item.hasClass("t-state-active"))
                         panelBar.collapse(item);
                     else
                         panelBar.expand(item);
+                });
+
+                $(".removeItem").click( function (e) {
+                    panelBar.remove(panelBar.getSelectedItem());
+                });
+
+                $(".appendItem").click( function (e) {
+                    panelBar.append({
+                            text: $(e.target).prev().val()
+                        }, panelBar.getSelectedItem());
+                });
+
+                $(".beforeItem").click( function (e) {
+                    panelBar.insertBefore({
+                            text: $(e.target).prev().val()
+                        }, panelBar.getSelectedItem());
+                });
+
+                $(".afterItem").click( function (e) {
+                    panelBar.insertAfter({
+                            text: $(e.target).prev().val()
+                        }, panelBar.getSelectedItem());
                 });
 
                 var panelBar = $("#PanelBar1").kendoPanelBar().css({ marginRight: "220px" }).data("kendoPanelBar");
