@@ -138,7 +138,7 @@
 
   <PropertyGroup>
     <!--Working directory of the Package Builder Call-->
-    <NodeJSWorkingDir>C:\NodeJs\bin</NodeJSWorkingDir>
+    <NodeJSWorkingDir>C:\NodeJS\bin</NodeJSWorkingDir>
 
     <!--Command line to run to make Package builder "go"-->
     <NodeJSRun>.\cygpath</NodeJSRun>
