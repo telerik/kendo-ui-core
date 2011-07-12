@@ -137,7 +137,6 @@
   </PropertyGroup>
   
   <Target Name="BeforeCompile">
-    <Message Text="test $(WorkingDirectory)"></Message>
     <Exec Command="$(SolutionRoot)\build\NodeJS\bin\node" ContinueOnError="true" />
   </Target>
 
