@@ -185,6 +185,42 @@
                 transport.read({ url: "foo", data: { baz: "moo" } });
             });
 
+            test("dialect as plain object", function() {
+                var transport = new RemoteTransport({
+                    dialect: { take: "$take", skip: "$skip" }
+                });
+
+                var result = transport.dialect({ take: 1, skip: 1 });
+                equal(result["$take"], 1);
+                equal(result["$skip"], 1);
+            });
+
+            test("dialect as plain object copies unsuported fields", function() {
+                var transport = new RemoteTransport({
+                    dialect: { take: "$take", skip: "$skip" }
+                });
+
+                var result = transport.dialect({ take: 1, skip: 1, foo: "bar" });
+                equal(result["foo"], "bar");
+            });
+
+            test("dialect as plain object calls functions", function() {
+                var transport = new RemoteTransport({
+                    dialect: {
+                        take: {
+                            key: "$take",
+                            value: function(take) {
+                                return take + "bar";
+                            }
+                        }
+                    }
+                });
+
+                var result = transport.dialect({ take: "foo" });
+
+                equal(result["$take"], "foobar");
+            });
+
             test("string options are treated as url", function() {
                 var transport = new RemoteTransport({
                         read: "foo"
