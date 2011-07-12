@@ -26,8 +26,12 @@
         <div id="example">
             <div class="configuration">
                 <span class="configTitle">API Functions</span>
-                <button class="toggleItem t-button">Enable/Disable</button><input type="text" /><br>
-                <button class="triggerItem t-button">Open/Close</button><input type="text" /><br>
+                <input type="text" /><button class="toggleItem t-button">Enable/Disable</button><br>
+                <input type="text" /><button class="triggerItem t-button">Open/Close</button><br>
+                <input type="text" /><button class="removeItem t-button">Remove</button><br>
+                <input type="text" value="Item" /><input type="text" value="0.0" /><button class="appendItem t-button">Append</button><br>
+                <input type="text" value="Item" /><input type="text" value="0" /><button class="beforeItem t-button">Before</button><br>
+                <input type="text" value="Item" /><input type="text" value="0" /><button class="afterItem t-button">After</button><br>
             </div>
 
             <ul id="Menu1">
@@ -79,18 +83,16 @@
             </ul>
             <script type="text/javascript">
                 var getItem = function (target) {
-                    var itemIndex = $(target).next()[0].value;
+                    var itemIndexes = $(target).prev().val().split(/[.,]/),
+                        rootItem = menu.element.children("li").eq(itemIndexes[0]);
 
-                    return menu.element.children("li").eq(itemIndex);
+                    return itemIndexes.length > 1 ? rootItem.find(".t-group > .t-item").eq(itemIndexes[1]) : rootItem;
                 };
 
                 $(".toggleItem").click( function (e) {
                     var item = getItem(e.target);
 
-                    if (item.hasClass("t-state-disabled"))
-                        menu.enable(item);
-                    else
-                        menu.disable(item);
+                    menu.enable(item, item.hasClass("t-state-disabled"));
                 });
 
                 $(".triggerItem").click( function (e) {
@@ -100,6 +102,34 @@
                         menu.close(item);
                     else
                         menu.open(item);
+                });
+
+                $(".removeItem").click( function (e) {
+                    menu.remove(getItem(e.target));
+                });
+
+                $(".appendItem").click( function (e) {
+                    menu.append([
+                        {
+                            text: $(e.target).prev().prev().val()
+                        }
+                    ], getItem(e.target));
+                });
+
+                $(".beforeItem").click( function (e) {
+                    menu.insertBefore([
+                        {
+                            text: $(e.target).prev().prev().val()
+                        }
+                    ], getItem(e.target));
+                });
+
+                $(".afterItem").click( function (e) {
+                    menu.insertAfter([
+                        {
+                            text: $(e.target).prev().prev().val()
+                        }
+                    ], getItem(e.target));
                 });
 
                 var menu = $("#Menu1").kendoMenu().css({ marginRight: "220px" }).data("kendoMenu");

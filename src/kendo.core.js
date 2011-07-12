@@ -733,6 +733,11 @@
                              paddingRight: right,
                              paddingBottom: bottom
                          }));
+        } else {
+            element.parent().show().css({
+                width: element.outerWidth(),
+                height: element.outerHeight()
+            });
         }
 
         if ($.browser.msie && Math.floor($.browser.version) <= 7)
