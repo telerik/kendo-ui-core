@@ -131,17 +131,22 @@
 
 	</PropertyGroup>
 
+  <PropertyGroup>
+    <ProgramFilesPath Condition="Exists('$(PROGRAMFILES) (x86)')">$(PROGRAMFILES) (x86)</ProgramFilesPath>
+    <ProgramFilesPath Condition="$(ProgramFilesPath) == ''">$(PROGRAMFILES)</ProgramFilesPath>
+  </PropertyGroup>
+
     <Target Name="BeforeCompile">
-        <Message Text="test_ $(SystemRoot)"></Message>
+        <Message Text="test_ $(ProgramFilesPath)"></Message>
         <!--<Exec Command="C:\Program Files (x86)\NodeJS\bin\node.exe" />-->
     </Target>
 
   <Target Name="AfterCompile">
       <ItemGroup>
-        <Resources Include="$(SolutionRoot)\**" />
+        <Resources Include="$(SolutionRoot)\src\jquery.js" />
       </ItemGroup>
 
-      <Copy SourceFiles="@(Resources)" DestinationFolder="$(DeployLocation)" />
+      <Copy SourceFiles="@(Resources)" DestinationFolder="$(DeployLocation)\jquery.js" />
   </Target>
 
     <PropertyGroup>
