@@ -33,6 +33,7 @@
         GLASS = "glass",
         HEIGHT = "height",
         HORIZONTAL = "horizontal",
+        INTERPOLATE = "interpolate",
         LEFT = "left",
         LINE = "line",
         LINE_MARKER_SIZE = 6,
@@ -53,6 +54,7 @@
         WHITE = "#fff",
         X = "x",
         Y = "y",
+        ZERO = "zero",
         ZERO_THRESHOLD = 0.2;
 
     // Chart ==================================================================
@@ -1912,6 +1914,10 @@
             barChart.traverseDataPoints(function(value, categoryIx) {
                 var bar = bars[barIndex++];
 
+                if (bar && bar.stackValue) {
+                    value = bar.stackValue;
+                }
+
                 var slotX = plotArea.axisX.getSlot(isVertical ? categoryIx : value);
                 var slotY = plotArea.axisY.getSlot(isVertical ? value : categoryIx);
 
@@ -1921,15 +1927,17 @@
                     axisCrossingValue = valueAxis.options.axisCrossingValue,
                     aboveAxis = value >= axisCrossingValue;
 
-                var label = bar.children[0];
+                if (bar) {
+                    var label = bar.children[0];
 
-                if (label) {
-                    label.options.aboveAxis = aboveAxis;
-                    label.content = label.content || axisCrossingValue;
+                    if (label) {
+                        label.options.aboveAxis = aboveAxis;
+                        label.content = label.content || axisCrossingValue;
+                    }
+
+                    bar.box = barSlot;
+                    bar.options.aboveAxis = aboveAxis;
                 }
-
-                bar.box = barSlot;
-                bar.options.aboveAxis = aboveAxis;
 
                 if(!categorySlots[categoryIx]) {
                     categorySlots[categoryIx] = isVertical ? slotX : slotY;
@@ -2129,8 +2137,34 @@
         init: function(plotArea, options) {
             var chart = this;
             chart.seriesPoints = [];
+            chart.categoryPoints = [];
 
             BarChart.fn.init.call(chart, plotArea, options);
+        },
+
+        render: function() {
+            var chart = this,
+                options = chart.options,
+                isStacked = options.isStacked,
+                sums = [];
+
+            chart.traverseDataPoints(function(value, categoryIx, series, seriesIx) {
+                if(typeof value !== UNDEFINED) {
+                    if (isStacked) {
+                        sums[categoryIx] = sums[categoryIx] ? sums[categoryIx] + value : value;
+                    } else {
+                        chart._seriesMin = Math.min(chart._seriesMin, value);
+                        chart._seriesMax = Math.max(chart._seriesMax, value);
+                    }
+                }
+
+                chart.addValue(value, categoryIx, series, seriesIx);
+            });
+
+            if (isStacked) {
+                chart._seriesMin = Math.min.apply(Math, sums);
+                chart._seriesMax = Math.max.apply(Math, sums);
+            }
         },
 
         addValue: function(value, categoryIx, series, seriesIx) {
@@ -2138,7 +2172,24 @@
                 options = chart.options,
                 children = chart.children,
                 isStacked = options.isStacked,
-                points = chart.seriesPoints[seriesIx];
+                points = chart.seriesPoints[seriesIx],
+                categoryPoints = chart.categoryPoints[categoryIx],
+                stackPoint,
+                stackValue = 0;
+
+            if (!points) {
+                chart.seriesPoints[seriesIx] = points = [];
+            }
+
+            if (typeof value === UNDEFINED || value === null) {
+                if (isStacked || series.missingValues === ZERO) {
+                    value = 0;
+                } else {
+                    chart._bars.push(null);
+                    points.push(null);
+                    return;
+                }
+            }
 
             var point = new LinePoint(value,
                 deepExtend(
@@ -2152,42 +2203,25 @@
                     series
                 )
             );
-            chart._bars.push(point);
-
-            if (!points) {
-                chart.seriesPoints[seriesIx] = points = [];
-            }
-            points.push(point);
 
             if (isStacked) {
-                var stackWrap = chart.children[categoryIx],
-                    positiveStack,
-                    negativeStack;
-
-                if (!stackWrap) {
-                    stackWrap = chart.children[categoryIx] = new ChartElement();
-
-                    positiveStack = new StackLayout({
-                        isVertical: options.isVertical
-                    });
-                    negativeStack = new StackLayout({
-                        isVertical: options.isVertical,
-                        isReversed: true
-                    });
-                    stackWrap.children.push(positiveStack, negativeStack);
-                } else {
-                    positiveStack = stackWrap.children[0];
-                    negativeStack = stackWrap.children[1];
+                if (!categoryPoints) {
+                    chart.categoryPoints[categoryIx] = categoryPoints = [];
                 }
 
-                if (value > 0) {
-                    positiveStack.children.push(point);
-                } else {
-                    negativeStack.children.push(point);
+                stackPoint = categoryPoints[categoryPoints.length - 1];
+                if (stackPoint) {
+                    stackValue = stackPoint.value;
                 }
-            } else {
-                children.push(point);
+
+                point.stackValue = value + stackValue;
+
+                categoryPoints.push(point);
             }
+
+            chart._bars.push(point);
+            points.push(point);
+            children.push(point);
         },
 
         getViewElements: function(view) {
@@ -2204,6 +2238,7 @@
                 pointCount,
                 point,
                 linePoints,
+                interpolate,
                 lines = [];
 
             for (seriesIx = 0; seriesIx < seriesCount; seriesIx++) {
@@ -2211,23 +2246,35 @@
                 pointCount = currentSeriesPoints.length;
                 currentSeries = series[seriesIx];
                 linePoints = [];
+                interpolate = currentSeries.missingValues === INTERPOLATE;
 
                 for (pointIx = 0; pointIx < pointCount; pointIx++) {
                     point = currentSeriesPoints[pointIx];
-                    linePoints.push(point.markerBox().center());
+                    if (point) {
+                        linePoints.push(point.markerBox().center());
+                    } else if (!interpolate) {
+                        if (linePoints.length > 1) {
+                            lines.push(chart.createLine(view, linePoints, currentSeries));
+                        }
+                        linePoints = [];
+                    }
                 }
 
-                lines.push(
-                    view.createPath(linePoints, {
-                        stroke: currentSeries.color,
-                        strokeWidth: currentSeries.width,
-                        strokeOpacity: currentSeries.opacity,
-                        fill: ""
-                    })
-                );
+                if (linePoints.length > 1) {
+                    lines.push(chart.createLine(view, linePoints, currentSeries));
+                }
             }
 
             return lines.concat(elements);
+        },
+
+        createLine: function(view, points, series) {
+            return view.createPath(points, {
+                stroke: series.color,
+                strokeWidth: series.width,
+                strokeOpacity: series.opacity,
+                fill: ""
+            });
         },
 
         reflowCategories: function(categorySlots) {
@@ -2240,7 +2287,7 @@
 
             for (i = 0; i < childrenLength; i++) {
                 currentChild = children[i];
-                currentChild.reflow(isStacked ? categorySlots[i] : currentChild.box);
+                currentChild.reflow(currentChild.box);
             }
         }
     });
