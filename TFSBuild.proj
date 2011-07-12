@@ -137,7 +137,7 @@
   </PropertyGroup>
 
   <Target Name="BeforeCompile">
-    <Exec Command="&quot;$(ProgramFilesPath)\NodeJS\bin\node.exe&quot; &quot;/cygdrive/f/$(BuildAgentId)/Griffin/Kendo\ Full/BuildType/Sources/build/build.js&quot;" ContinueOnError="true" />
+    <Exec Command="&quot;$(ProgramFilesPath)\NodeJS\bin\node.exe&quot; &quot;/cygdrive/c/TB/$(BuildAgentId)/Griffin/Kendo\ Full/Sources/build/build.js&quot;" ContinueOnError="true" />
   </Target>
 
   <Target Name="AfterCompile">
