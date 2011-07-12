@@ -21,6 +21,8 @@
         UPDATE = "update",
         DESTROY = "destroy",
         CHANGE = "change",
+        MULTIPLE = "multiple",
+        SINGLE = "single",
         ERROR = "error",
         REQUESTSTART = "requestStart",
         crud = [CREATE, READ, UPDATE, DESTROY],
@@ -87,7 +89,7 @@
 
     var RemoteTransport = Class.extend( {
         init: function(options) {
-            var that = this;
+            var that = this, dialect;
 
             options = that.options = extend({}, that.options, options);
 
@@ -104,7 +106,25 @@
                 add: noop
             }
 
-            that.dialect = options.dialect;
+            dialect = options.dialect;
+
+            that.dialect = isFunction(dialect) ? dialect : function(options) {
+                var result = {};
+
+                each(options, function(option, value) {
+                    if (option in dialect) {
+                        option = dialect[option];
+                        if (isPlainObject(option)) {
+                            value = option.value(value);
+                            option = option.key;
+                        }
+                    }
+
+                    result[option] = value;
+                });
+
+                return result;
+            };
             that._pending = [];
         },
 
@@ -517,7 +537,7 @@
             autoSync: false,
             sendAllFields: true,
             batch: {
-                mode: "multiple"
+                mode: MULTIPLE
             }
         },
 
@@ -590,10 +610,10 @@
             destroyed = that._destroyedModels();
 
             if (batch === false) {
-                mode = "multiple";
+                mode = MULTIPLE;
             }
-            else if ((batch.mode || "multiple") === "multiple") {
-                mode = "single";
+            else if ((batch.mode || MULTIPLE) === MULTIPLE) {
+                mode = SINGLE;
             }
 
             if (mode) {
@@ -607,7 +627,7 @@
                         destroyed: destroyed
                     },
                     proxy(transport.update, transport),
-                    "single"
+                    SINGLE
                 );
             }
 
@@ -651,7 +671,7 @@
                 return;
             }
 
-            if(mode === "multiple") {
+            if(mode === MULTIPLE) {
                 for(idx = 0, length = data.length; idx < length; idx++) {
                     promises.push(
                         method({
