@@ -5,6 +5,7 @@
         isPlainObject = $.isPlainObject,
         isEmptyObject = $.isEmptyObject,
         isArray = $.isArray,
+        ajax = $.ajax,
         map = $.map,
         each = $.each,
         noop = $.noop,
@@ -14,6 +15,7 @@
         Model = kendo.data.Model,
         ModelSet = kendo.data.ModelSet,
         Query = kendo.data.Query,
+        STRING = "string",
         CREATE = "create",
         READ = "read",
         UPDATE = "update",
@@ -23,6 +25,7 @@
         REQUESTSTART = "requestStart",
         crud = [CREATE, READ, UPDATE, DESTROY],
         identity = function(o) { return o; },
+        getter = kendo.getter,
         stringify = kendo.stringify;
 
 
@@ -89,7 +92,7 @@
             options = that.options = extend({}, that.options, options);
 
             each(crud, function(index, type) {
-                if (typeof options[type] === "string") {
+                if (typeof options[type] === STRING) {
                     options[type] = {
                         url: options[type]
                     };
@@ -110,7 +113,7 @@
         },
 
         create: function(options) {
-            return $.ajax(this.setup(options, CREATE));
+            return ajax(this.setup(options, CREATE));
         },
 
         read: function(options) {
@@ -139,14 +142,14 @@
 
                     if (that._pending.length) {
                         that._inproggress = true;
-                        $.ajax(that._pending.pop());
+                        ajax(that._pending.pop());
                         that._pending = [];
                     }
                 };
 
                 if (!that._inproggress) {
                     that._inproggress = true;
-                    $.ajax(options);
+                    ajax(options);
                 } else {
                     that._pending.push(options);
                 }
@@ -154,11 +157,11 @@
         },
 
         update: function(options) {
-            return $.ajax(this.setup(options, UPDATE));
+            return ajax(this.setup(options, UPDATE));
         },
 
         destroy: function(options) {
-            return $.ajax(this.setup(options, DESTROY));
+            return ajax(this.setup(options, DESTROY));
         },
 
         setup: function(options, type) {
@@ -236,18 +239,14 @@
 
     var DataReader = Class.extend({
         init: function(schema) {
-            var that = this, member, getter;
+            var that = this, member, get;
 
             schema = schema || {};
 
             for (member in schema) {
-                getter = schema[member];
+                get = schema[member];
 
-                if (typeof getter === "string") {
-                    getter = kendo.getter(getter);
-                }
-
-                that[member] = getter;
+                that[member] = typeof get === STRING ? getter(get) : get;
             }
 
             if (isPlainObject(that.model)) {
@@ -277,10 +276,10 @@
 
             if (model) {
                 if (isPlainObject(model)) {
-                    model.id = kendo.getter(that.xpathToMember(model.id));
+                    model.id = that.getter(model.id);
                     if (model.fields) {
                         each(model.fields, function(field, value) {
-                            model.fields[field] = kendo.getter(that.xpathToMember(value));
+                            model.fields[field] = that.getter(value);
                         });
                     }
                     model = Model.define(model);
@@ -290,7 +289,7 @@
             }
 
             if (total) {
-                total = kendo.getter(that.xpathToMember(total));
+                total = that.getter(total);
                 that.total = function(data) {
                     return parseInt(total(data));
                 };
@@ -299,13 +298,13 @@
             if (data) {
                 data = that.xpathToMember(data);
                 that.data = function(value) {
-                    var result = that.evaluate(value, data);
+                    var record, field, result = that.evaluate(value, data);
 
-                    if (that.model && that.model.fields) {
+                    if (that.model && model.fields) {
                         return map(result, function(value) {
-                            var record = {};
-                            for (var field in that.model.fields) {
-                                record[field] = that.model.fields[field](value);
+                            record = {};
+                            for (field in model.fields) {
+                                record[field] = model.fields[field](value);
                             }
                             return record;
                         });
@@ -427,6 +426,9 @@
             }
 
             return member;
+        },
+        getter: function(member) {
+            return getter(this.xpathToMember(member));
         }
     });
 
