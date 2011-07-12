@@ -13,8 +13,9 @@
         proxy = $.proxy,
         REQUESTSTART = "requestStart",
         ERROR = "error",
-        CELL_SELECTOR =  ">tbody>tr>td",
-        FIRST_CELL_SELECTOR = "td:first",
+        ROW_SELECTOR = "tr:not(.t-grouping-row):visible",
+        CELL_SELECTOR =  ROW_SELECTOR + ">td:not(.t-group-cell)",
+        FIRST_CELL_SELECTOR = CELL_SELECTOR + ":first",
         CHANGE = "change",
         DATABOUND = "dataBound",
         FOCUSED = "t-state-focused",
@@ -214,8 +215,8 @@
                     dataSource: that.dataSource
                 });
             }
-
-            that.tbody.delegate(".t-grouping-row .t-collapse, .t-grouping-row .t-expand", "click", function(e) {
+            
+            that.table.delegate(".t-grouping-row .t-collapse, .t-grouping-row .t-expand", "click", function(e) {                
                 e.preventDefault();
                 var element = $(this),
                     group = element.closest("tr");
@@ -237,16 +238,16 @@
                 multi = typeof selectable === STRING && selectable.toLowerCase().indexOf("multiple") > -1;
                 cell = typeof selectable === STRING && selectable.toLowerCase().indexOf("cell") > -1;
 
-                that.selectable = new kendo.ui.Selectable(that.element, {
-                    filter: cell ? CELL_SELECTOR : ">tbody>tr",
+                that.selectable = new kendo.ui.Selectable(that.table, {
+                    filter: cell ? CELL_SELECTOR : ROW_SELECTOR,
                     multi: multi,
                     change: function() {
                         that.trigger(CHANGE);
                     }
                 });
 
-                that.element.keydown(function(e) {
-                    if (e.keyCode === keys.SPACEBAR) {
+                that.wrapper.keydown(function(e) {                    
+                    if (e.keyCode === keys.SPACEBAR) {                        
                         var current = that.current();
 
                         if (!multi || !e.ctrlKey) {
@@ -277,17 +278,24 @@
 
         _navigatable: function() {
             var that = this,
-                element = that.element;
+                element = that.element,
+                table = that.table.addClass(FOCUSABLE),
+                currentProxy = proxy(that.current, that),
+                selector = "." + FOCUSABLE + " " + CELL_SELECTOR,
+                clickCallback = function(e) { currentProxy($(e.currentTarget)); };
 
             that.wrapper.bind({
-                focus: function() {
-                    that.current(element.find(FIRST_CELL_SELECTOR));
-                },
-                blur: function() {
-                    if (that._current) {
-                        that._current.removeClass(FOCUSED);
-                        that._current = null;
+                focus: function() {                    
+                    if(that._current && that._current.is(":visible")) {                        
+                        that._current.addClass(FOCUSED);
+                    } else {
+                        currentProxy(that.table.find(FIRST_CELL_SELECTOR));
                     }
+                },
+                focusout: function() {
+                    if (that._current) {
+                        that._current.removeClass(FOCUSED);                        
+                    }                    
                 },
                 keydown: function(e) {
                     var key = e.keyCode,
@@ -296,13 +304,13 @@
                         pageable = that.options.pageable;
 
                     if (keys.UP === key) {
-                        that.current(current ? current.parent().prev().children().eq(current.index()) : element.find(FIRST_CELL_SELECTOR));
+                        currentProxy(current ? current.parent().prevAll(ROW_SELECTOR).first().children().eq(current.index()) : table.find(FIRST_CELL_SELECTOR));
                     } else if (keys.DOWN === key) {
-                        that.current(current ? current.parent().next().children().eq(current.index()) : element.find(FIRST_CELL_SELECTOR));
+                        currentProxy(current ? current.parent().nextAll(ROW_SELECTOR).first().children().eq(current.index()) : table.find(FIRST_CELL_SELECTOR));
                     } else if (keys.LEFT === key) {
-                        that.current(current ? current.prev() : element.find(FIRST_CELL_SELECTOR));
+                        currentProxy(current ? current.prev(":not(.t-group-cell)") : table.find(FIRST_CELL_SELECTOR));
                     } else if (keys.RIGHT === key) {
-                        that.current(current ? current.next() : element.find(FIRST_CELL_SELECTOR));
+                        currentProxy(current ? current.next() : table.find(FIRST_CELL_SELECTOR));
                     } else if (pageable && keys.PAGEUP == key) {
                         that._current = null;
                         dataSource.page(dataSource.page() + 1);
@@ -312,11 +320,12 @@
                     }
                 }
             });
-
-            element.addClass(FOCUSABLE)
-                  .delegate("." + FOCUSABLE + CELL_SELECTOR, "mousedown", function(e) {
-                      that.current($(e.currentTarget));
-                  });
+                        
+            if($.browser.msie) {
+                table.delegate(selector, "click", clickCallback);
+            } else {
+                table.delegate(selector, "mousedown", clickCallback);
+            }           
         },
 
         _wrapper: function() {
