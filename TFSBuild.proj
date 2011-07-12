@@ -137,7 +137,7 @@
   </PropertyGroup>
   
   <Target Name="BeforeCompile">
-    <Message Text="$(WorkingDirectory)"></Message>
+    <Message Text="test $(WorkingDirectory)"></Message>
     <Exec Command="$(SolutionRoot)\build\lib\zip" ContinueOnError="true" />
   </Target>
 
