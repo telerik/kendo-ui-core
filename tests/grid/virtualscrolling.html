@@ -44,6 +44,7 @@
                 DataSource = kendo.data.DataSource,
                 VirtualScrollable = kendo.ui.VirtualScrollable,
                 dataSource,
+                timeout,
                 container;
 
             function setup(element, data) {
@@ -58,10 +59,15 @@
 
             module("kendo.ui.VirtualScrollable", {
                 setup: function() {
+                    timeout = window.setTimeout;
+                    window.setTimeout = function(callback) {
+                        callback();
+                    }
                     container = $('<div style="height:300px;position:relative; overflow-x: hidden; overflow-y: hidden;"><table></table></div>').appendTo($(document.body));
                 },
                 teardown: function() {
                     container.remove();
+                    window.setTimeout = timeout;
                 }
             });
 
@@ -217,7 +223,6 @@
                     range: function(skip, take) {
                         equal(skip, 1);
                         equal(take, 2);
-                        start();
                     }
                 }), scroller = new VirtualScrollable(container, {
                     dataSource: new MyDataSource({
@@ -228,7 +233,6 @@
                 }),
                 firstRowIndex = 1,
                 lastRowIndex = 2;
-                stop(250);
                 var fetching = scroller._fetch(firstRowIndex, lastRowIndex);
                 ok(fetching);
             });
@@ -263,7 +267,6 @@
                     range: function(skip,take) {
                         equal(skip, 0);
                         equal(take, 2);
-                        start();
                     }
                 }), scroller = new VirtualScrollable(container, {
                     dataSource: new MyDataSource({
@@ -274,7 +277,6 @@
                 }),
                 firstRowIndex = 1,
                 lastRowIndex = 2;
-                stop(250);
                 var fetching = scroller._fetch(firstRowIndex, lastRowIndex);
                 ok(fetching);
             });
@@ -346,7 +348,7 @@
                 firstRowIndex = 0,
                 lastRowIndex = 3;
                 scroller._fetch(firstRowIndex, lastRowIndex);
-                equal(skip, 2);
+                equal(skip, 4);
                 equal(take, 4);
             });
 
@@ -367,7 +369,7 @@
                 firstRowIndex = 4,
                 lastRowIndex = 7;
                 scroller._fetch(firstRowIndex, lastRowIndex, true);
-                equal(skip, 2);
+                equal(skip, 0);
                 equal(take, 4);
             });
 

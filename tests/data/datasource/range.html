@@ -16,7 +16,20 @@
         <h2 id="qunit-userAgent"></h2>
         <ol id="qunit-tests"></ol>
         <script>
-            var  data = [], DataSource = kendo.data.DataSource;
+            var  data = [], DataSource = kendo.data.DataSource,
+                timeout;
+
+            module("kendo.ui.DataSource ranges", {
+                setup: function() {
+                    timeout = window.setTimeout;
+                    window.setTimeout = function(callback) {
+                        callback();
+                    }
+                },
+                teardown: function() {
+                    window.setTimeout = timeout;
+                }
+            });
 
             function setup(source) {
                 data = source || [{ id:1, bar: "foo" },{ id: 2, bar: "foo" }];
@@ -187,6 +200,126 @@
                 dataSource.prefetch(0, 1);
                 dataSource.range(0, 1);
                 ok(called);
+            });
+
+            test("inRange return false if skip is below available range", function() {
+                 var dataSource = remoteDataSource();
+
+                dataSource.prefetch(20, 40);
+                ok(!dataSource.inRange(0, 40));
+            });
+
+            test("range calls transport if skip is below available range", function() {
+                var called = 0,
+                    dataSource = remoteDataSource(function () {
+                        called++;
+                    });
+
+                dataSource.prefetch(20, 40);
+                dataSource.range(0, 1);
+                equal(called, 2);
+            });
+
+            test("range fetches range accross multiple prefech ranges", function() {
+                var dataSource = remoteDataSource();
+
+                dataSource.prefetch(20, 20);
+                dataSource.prefetch(0, 20);
+                dataSource.range(9, 20);
+
+                equal(dataSource.view().length, 20);
+                equal(dataSource.view()[0].OrderID, 9);
+                equal(dataSource.view()[19].OrderID, 28);
+            });
+
+            test("range fetches range accross multiple overlapping prefech ranges", function() {
+                var dataSource = remoteDataSource();
+
+                dataSource.prefetch(0, 15);
+                dataSource.prefetch(10, 20);
+                dataSource.range(9, 10);
+
+                equal(dataSource.view().length, 10);
+                equal(dataSource.view()[0].OrderID, 9);
+                equal(dataSource.view()[9].OrderID, 18);
+            });
+
+            test("range fetches range accross multiple overlapping prefech ranges 2", function() {
+                var dataSource = remoteDataSource();
+
+                dataSource.prefetch(0, 20);
+                dataSource.prefetch(20, 20);
+                dataSource.range(9, 20);
+
+                equal(dataSource.view().length, 20);
+                equal(dataSource.view()[0].OrderID, 9);
+                equal(dataSource.view()[19].OrderID, 28);
+            });
+
+            test("inRange returns false if not the entire range is available", function() {
+                 var called = 0,
+                    dataSource = remoteDataSource();
+
+                dataSource.prefetch(0, 5);
+                dataSource.prefetch(10, 5);
+                ok(!dataSource.inRange(0, 10));
+            });
+
+            test("read adds result as range", function() {
+                var dataSource = remoteDataSource();
+                dataSource.read();
+                equal(dataSource._ranges[0].start, 0);
+                equal(dataSource._ranges[0].end, 16);
+            });
+
+            test("read clear previous ranges", function() {
+                var dataSource = remoteDataSource();
+                dataSource.prefetch(20, 20);
+                dataSource.read();
+                equal(dataSource._ranges.length, 1);
+                equal(dataSource._ranges[0].start, 0);
+                equal(dataSource._ranges[0].end, 16);
+            });
+            test("range page given number of items from index", function() {
+                var dataSource = new DataSource({
+                    data: [{age: 1}, {age: 2},{age: 3}, {age: 4},{age: 5}, {age: 6},{age: 7}, {age: 8}]
+                });
+                dataSource.read();
+                dataSource.range(2, 3);
+
+                var result = dataSource.view();
+
+                equal(result.length, 3);
+                equal(result[0].age, 3);
+                equal(result[1].age, 4);
+                equal(result[2].age, 5);
+            });
+
+            test("range if index undefined set to zero", function() {
+                var dataSource = new DataSource({
+                    data: [{age: 1}, {age: 2},{age: 3}, {age: 4},{age: 5}, {age: 6},{age: 7}, {age: 8}]
+                });
+                dataSource.read();
+                dataSource.range(undefined, 3);
+
+                var result = dataSource.view();
+
+                equal(result.length, 3);
+                equal(result[0].age, 1);
+                equal(result[1].age, 2);
+                equal(result[2].age, 3);
+            });
+
+            test("range if count is undefined return all data", function() {
+                var dataSource = new DataSource({
+                    data: [{age: 1}, {age: 2},{age: 3}, {age: 4},{age: 5}, {age: 6},{age: 7}, {age: 8}]
+                });
+                dataSource.read();
+                dataSource.range(0, undefined);
+
+                var result = dataSource.view();
+
+                equal(result.length, 8);
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
