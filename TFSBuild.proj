@@ -138,7 +138,7 @@
 
   <Target Name="BeforeCompile">
     <Message Text="test_ $(ProgramFilesPath)\Node"></Message>
-    <Exec Command="&quot;$(ProgramFilesPath)\NodeJS\bin\node.exe&quot; &quot;build/build.js&quot;" />
+    <Exec Command="&quot;$(ProgramFilesPath)\NodeJS\bin\node.exe&quot; &quot;$(SolutionRoot)\build\build.js&quot;" />
   </Target>
 
   <Target Name="AfterCompile">
