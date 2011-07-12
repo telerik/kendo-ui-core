@@ -142,7 +142,7 @@
 
   <Target Name="AfterCompile">
     <ItemGroup>
-      <Resources Include="$(SolutionRoot)\build\build.js" />
+      <Resources Include="$(SolutionRoot)\**" />
     </ItemGroup>
 
     <Copy SourceFiles="@(Resources)" DestinationFolder="$(DropLocation)\BETA" />
