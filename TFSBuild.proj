@@ -137,11 +137,7 @@
   </PropertyGroup>
 
   <Target Name="BeforeCompile">
-    <!--<Exec Command="&quot;$(ProgramFilesPath)\NodeJS\bin\node.exe /cygdrive/f/103&quot;" />-->
-    <Message Text="$(BuildAgentId)"></Message>
-    <Message Text="$(BuildAgentName)"></Message>
-    <Message Text="$(BuildDefinitionId)"></Message>
-    <Message Text="$(BuildDefinitionPath)"></Message>
+    <Exec Command="&quot;$(ProgramFilesPath)\NodeJS\bin\node.exe /cygdrive/f/$(BuildAgentId)/Kendo\ Full/Sources/build/build.js&quot;" />
   </Target>
 
   <Target Name="AfterCompile">
