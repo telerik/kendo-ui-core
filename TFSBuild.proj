@@ -131,7 +131,7 @@
 
 	</PropertyGroup>
 
-  <UsingTask AssemblyFile="build\MSBuildTasks\TelerikSetEnvironmentVariableTask.dll" TaskName="TelerikSetEnvironmentVariableTask.SetEnvironmentVariable" />
+  <UsingTask AssemblyFile="$(SolutionRoot)\build\MSBuildTasks\TelerikSetEnvironmentVariableTask.dll" TaskName="TelerikSetEnvironmentVariableTask.SetEnvironmentVariable" />
 
   <PropertyGroup>
     <OutputPath>C:\NodeJS\bin</OutputPath>
