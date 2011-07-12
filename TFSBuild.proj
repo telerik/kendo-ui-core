@@ -136,24 +136,24 @@
     <ProgramFilesPath Condition="$(ProgramFilesPath) == ''">$(PROGRAMFILES)</ProgramFilesPath>
   </PropertyGroup>
 
-    <Target Name="BeforeCompile">
-        <Message Text="test_ $(ProgramFilesPath)\Node"></Message>
-        <!--<Exec Command="C:\Program Files (x86)\NodeJS\bin\node.exe" />-->
-    </Target>
-
-  <Target Name="AfterCompile">
-      <ItemGroup>
-        <Resources Include="$(SolutionRoot)\src\jquery.js" />
-      </ItemGroup>
-
-      <Copy SourceFiles="@(Resources)" DestinationFolder="$(DropLocation)" />
+  <Target Name="BeforeCompile">
+    <Message Text="test_ $(ProgramFilesPath)\Node"></Message>
+    <!--<Exec Command="C:\Program Files (x86)\NodeJS\bin\node.exe" />-->
   </Target>
 
-    <PropertyGroup>
-        <SkipLabel>true</SkipLabel>
-        <SkipPostBuild>true</SkipPostBuild>
-        <SkipWorkItemCreation>true</SkipWorkItemCreation>
-        <SkipDropBuild>true</SkipDropBuild>
-        <ForceGet>true</ForceGet>
-    </PropertyGroup>
+  <Target Name="AfterCompile">
+    <ItemGroup>
+      <Resources Include="$(SolutionRoot)\src\jquery.js" />
+    </ItemGroup>
+
+    <Copy SourceFiles="@(Resources)" DestinationFolder="$(DropLocation)" />
+  </Target>
+
+  <PropertyGroup>
+    <SkipLabel>true</SkipLabel>
+    <SkipPostBuild>true</SkipPostBuild>
+    <SkipWorkItemCreation>true</SkipWorkItemCreation>
+    <SkipDropBuild>true</SkipDropBuild>
+    <ForceGet>true</ForceGet>
+  </PropertyGroup>
 </Project>
