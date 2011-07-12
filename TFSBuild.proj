@@ -138,17 +138,7 @@
 
   <Target Name="BeforeCompile">
     <!--<Exec Command="C:\NodeJS\bin\cygpath.exe&quot;" ContinueOnError="true" />-->
-
-    <Exec Command='"cygpath"' ContinueOnError="true">
-      <Output TaskParameter="ExitCode" PropertyName="ErrorCode"/>
-    </Exec>
-    <Message Text="The exit code is $(ErrorCode)"/>
-    <Error Text="Error while executing cygpath EXE" Condition="'$(ErrorCode)' > '0'" />
-    <OnError ExecuteTargets="MessageErrorHandler"/>
-  </Target>
-
-  <Target Name="MessageErrorHandler">
-    <Message Text="An error has occurred while executing SomeEXE"/>
+    <Message Text="$(PATH)"></Message>
   </Target>
 
   <Target Name="AfterCompile">
