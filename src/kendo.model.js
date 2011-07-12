@@ -181,6 +181,10 @@
         model = Model.extend(proto);
         model.id = id;
 
+        if (proto.fields) {
+            model.fields = proto.fields;
+        }
+
         return model;
     }
 

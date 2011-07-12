@@ -150,8 +150,6 @@
 
             Component.fn.init.call(that, element, options);
 
-            that.bind([CHANGE,DATABOUND], that.options);
-
             that._element();
 
             that._columns(that.options.columns);
@@ -175,6 +173,8 @@
             if (that.options.autoBind){
                 that.dataSource.query();
             }
+
+            that.bind([CHANGE,DATABOUND], that.options);
         },
 
         options: {

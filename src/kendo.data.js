@@ -5,6 +5,8 @@
         isPlainObject = $.isPlainObject,
         isEmptyObject = $.isEmptyObject,
         isArray = $.isArray,
+        ajax = $.ajax,
+        map = $.map,
         each = $.each,
         noop = $.noop,
         kendo = window.kendo,
@@ -13,6 +15,7 @@
         Model = kendo.data.Model,
         ModelSet = kendo.data.ModelSet,
         Query = kendo.data.Query,
+        STRING = "string",
         CREATE = "create",
         READ = "read",
         UPDATE = "update",
@@ -22,6 +25,7 @@
         REQUESTSTART = "requestStart",
         crud = [CREATE, READ, UPDATE, DESTROY],
         identity = function(o) { return o; },
+        getter = kendo.getter,
         stringify = kendo.stringify;
 
 
@@ -88,7 +92,7 @@
             options = that.options = extend({}, that.options, options);
 
             each(crud, function(index, type) {
-                if (typeof options[type] === "string") {
+                if (typeof options[type] === STRING) {
                     options[type] = {
                         url: options[type]
                     };
@@ -109,7 +113,7 @@
         },
 
         create: function(options) {
-            return $.ajax(this.setup(options, CREATE));
+            return ajax(this.setup(options, CREATE));
         },
 
         read: function(options) {
@@ -138,14 +142,14 @@
 
                     if (that._pending.length) {
                         that._inproggress = true;
-                        $.ajax(that._pending.pop());
+                        ajax(that._pending.pop());
                         that._pending = [];
                     }
                 };
 
                 if (!that._inproggress) {
                     that._inproggress = true;
-                    $.ajax(options);
+                    ajax(options);
                 } else {
                     that._pending.push(options);
                 }
@@ -153,11 +157,11 @@
         },
 
         update: function(options) {
-            return $.ajax(this.setup(options, UPDATE));
+            return ajax(this.setup(options, UPDATE));
         },
 
         destroy: function(options) {
-            return $.ajax(this.setup(options, DESTROY));
+            return ajax(this.setup(options, DESTROY));
         },
 
         setup: function(options, type) {
@@ -235,18 +239,14 @@
 
     var DataReader = Class.extend({
         init: function(schema) {
-            var that = this, member, getter;
+            var that = this, member, get;
 
             schema = schema || {};
 
             for (member in schema) {
-                getter = schema[member];
+                get = schema[member];
 
-                if (typeof getter === "string") {
-                    getter = kendo.getter(getter);
-                }
-
-                that[member] = getter;
+                that[member] = typeof get === STRING ? getter(get) : get;
             }
 
             if (isPlainObject(that.model)) {
@@ -271,10 +271,25 @@
         init: function(options) {
             var that = this,
                 total = options.total,
+                model = options.model,
                 data = options.data;
 
+            if (model) {
+                if (isPlainObject(model)) {
+                    model.id = that.getter(model.id);
+                    if (model.fields) {
+                        each(model.fields, function(field, value) {
+                            model.fields[field] = that.getter(value);
+                        });
+                    }
+                    model = Model.define(model);
+                }
+
+                that.model = model;
+            }
+
             if (total) {
-                total = kendo.getter(that.xpathToMember(total));
+                total = that.getter(total);
                 that.total = function(data) {
                     return parseInt(total(data));
                 };
@@ -283,12 +298,16 @@
             if (data) {
                 data = that.xpathToMember(data);
                 that.data = function(value) {
-                    var result = [], raw, idx, rawCount;
+                    var record, field, result = that.evaluate(value, data);
 
-                    raw = that.evaluate(value, data);
-
-                    for (idx = 0, rawCount = raw.length; idx < rawCount; idx++) {
-                        result.push(raw[idx]);
+                    if (that.model && model.fields) {
+                        return map(result, function(value) {
+                            record = {};
+                            for (field in model.fields) {
+                                record[field] = model.fields[field](value);
+                            }
+                            return record;
+                        });
                     }
 
                     return result;
@@ -329,7 +348,7 @@
 
                     member = result[nodeName];
 
-                    if ($.isArray(member)) {
+                    if (isArray(member)) {
                         // elements of same nodeName are stored as array
                         member.push(parsedNode);
                     } else if (member !== undefined) {
@@ -355,7 +374,7 @@
             while (member = members.shift()) {
                 value = value[member];
 
-                if ($.isArray(value)) {
+                if (isArray(value)) {
                     result = [];
                     expression = members.join(".");
 
@@ -407,6 +426,9 @@
             }
 
             return member;
+        },
+        getter: function(member) {
+            return getter(this.xpathToMember(member));
         }
     });
 
@@ -1086,7 +1108,7 @@
     });
 
     DataSource.create = function(options) {
-        options = $.isArray(options) ? { data: options } : options;
+        options = isArray(options) ? { data: options } : options;
 
         var dataSource = options || {},
             data = dataSource.data,
