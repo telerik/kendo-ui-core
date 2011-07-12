@@ -281,7 +281,7 @@
         /**
          * Expands items!
          *
-         * @param {string} items
+         * @param {String} items
          */
         expand: function (items) {
             this.processItems(items, function (index, item) {

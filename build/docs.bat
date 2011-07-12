@@ -1,0 +1,1 @@
+node build/node-jsdoc-toolkit/app/run.js -c=build/docs.conf
