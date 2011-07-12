@@ -29,7 +29,7 @@
             }
 
             function setup(options) {
-                options = $.extend({ dataSource: [{foo: 1, bar: 1}, {foo: 2, bar:2}] }, options);
+                options = $.extend({ dataSource: [{foo: 1, bar: 1}, {foo: 2, bar:2}, {foo: 3, bar:3}] }, options);
                 return new Grid(table, options);
             }
 
@@ -38,8 +38,7 @@
                     table = $("<table><tbody/></table>").appendTo(document.body);
                 },
                 teardown: function() {
-                    table.remove();
-                    $(".t-grid-pager").remove();
+                    table.closest(".t-grid").remove();
                 }
             });
 
@@ -78,7 +77,7 @@
             test("focused state is removed on blur", function() {
                 var grid = setup();
 
-                table.focus().blur();
+                table.focus().blur().trigger("focusout");
 
                 ok(!table.find(">tbody>tr>td").first().is(".t-state-focused"));
             });
@@ -223,6 +222,73 @@
                     cell = table.find("tbody tr:eq(1)").find("td").first();
                 cell.mousedown().mouseup();
                 ok(triggered);
+            });
+
+            test("last selected cell on blur is highlighted on focus", function() {
+                var grid = setup();
+
+                grid.element.focus().press(kendo.keys.DOWN);
+                grid.element.trigger("focusout").trigger("focus");
+                            
+                var row = table.find("tbody tr").eq(1);
+                ok(row.find("td").first().hasClass("t-state-focused"));
+            });
+
+            test("focus on grouped grid focus first non-group cell", function() {
+                var grid = setup();
+                grid.dataSource.group({field: "foo"});
+
+                grid.element.focus();
+
+                var row = table.find("tbody tr:not(.t-grouping-row)").first();
+                ok(row.find("td:not(.t-group-cell)").first().hasClass("t-state-focused"));
+            });
+
+            test("left arrow on grouped grid skips group cell", function() {
+                var grid = setup();
+                grid.dataSource.group({field: "foo"});
+
+                grid.element.focus().press(kendo.keys.LEFT);
+
+                var row = table.find("tbody tr:not(.t-grouping-row)").first();
+                ok(!row.find("td").eq(0).hasClass("t-state-focused"));
+                ok(row.find("td").eq(1).hasClass("t-state-focused"));
+            });
+
+            test("down arrow on grouped grid skips grouping row", function() {
+                var grid = setup();
+                grid.dataSource.group({field: "foo"});
+
+                grid.element.focus().press(kendo.keys.DOWN);
+
+                var row = table.find("tbody tr:not(.t-grouping-row)").eq(1);
+                ok(!row.find("td").eq(0).hasClass("t-state-focused"));
+                ok(row.find("td").eq(1).hasClass("t-state-focused"));
+            });
+
+            test("up arrow on grouped grid skips grouping row", function() {
+                var grid = setup();
+                grid.dataSource.group({field: "foo"});
+
+                grid.element.focus()
+                    .press(kendo.keys.DOWN)
+                    .press(kendo.keys.DOWN)
+                    .press(kendo.keys.UP);
+
+                var row = table.find("tbody tr:not(.t-grouping-row)").eq(1);
+                ok(!row.find("td").eq(0).hasClass("t-state-focused"));
+                ok(row.find("td").eq(1).hasClass("t-state-focused"));
+            });
+
+            test("focus after grid refresh selects first cell", function() {
+                var grid = setup();
+
+                grid.element.focus().trigger("focusout");
+                grid.refresh();
+                grid.element.focus();
+
+                var row = table.find("tbody tr").eq(0);                
+                ok(row.find("td:first").hasClass("t-state-focused"));                
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
