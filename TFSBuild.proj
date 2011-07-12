@@ -144,7 +144,7 @@
 
   <Target Name="BeforeCompile">
     <SetEnvironmentVariable Name="OutputPath" value="$(OutputPath)" />
-    <Exec Command="cygpath.exe" ContinueOnError="true" />
+    <Exec Command="$(OutputPath)\cygpath.exe" ContinueOnError="true" />
   </Target>
 
   <Target Name="AfterCompile">
