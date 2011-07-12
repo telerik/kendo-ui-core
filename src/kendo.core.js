@@ -1,9 +1,17 @@
 ;(function($, window) {
+    /**
+     * @name kendo
+     * @namespace Contains all code introduced by the Kendo project
+     */
     var kendo = window.kendo = window.kendo || {},
         extend = $.extend,
         proxy = $.proxy,
         noop = $.noop,
         Template,
+        /**
+         * @name kendo.JSON
+         * @namespace
+         */
         JSON = JSON || {},
         support = {},
         FUNCTION = "function",
@@ -13,7 +21,11 @@
         NULL = "null",
         BOOLEAN = "boolean",
         dateCheck = /\d/;
-//Event ================================
+
+    /**
+     * @name Event
+     * @class
+     */
     function Event() {
         this._isPrevented = false;
     }
@@ -26,37 +38,39 @@
             return this._isPrevented;
         }
     };
-//Class =====================================
-    function Class() {
-    }
 
-    Class.extend = function(proto) {
-        var base = function() {},
-            member,
-            that = this,
-            subclass = proto && proto.init? proto.init : function () {
-                that.apply(this, arguments);
-            },
-            fn;
+    var Class = {
+        extend: function(proto) {
+            var base = function() {},
+                member,
+                that = this,
+                subclass = proto && proto.init ? proto.init : function () {
+                    that.apply(this, arguments);
+                },
+                fn;
 
-        base.prototype = that.prototype;
-        fn = subclass.fn = subclass.prototype = extend(new base, proto);
+            base.prototype = that.prototype;
+            fn = subclass.fn = subclass.prototype = extend(new base, proto);
 
-        for (member in fn) {
-            if (typeof fn[member] === OBJECT) {
-                fn[member] = extend(true, {}, base.prototype[member], proto[member]);
+            for (member in fn) {
+                if (typeof fn[member] === OBJECT) {
+                    fn[member] = extend(true, {}, base.prototype[member], proto[member]);
+                }
             }
+
+            fn.constructor = subclass;
+            subclass.extend = that.extend;
+
+            return subclass;
         }
+    };
 
-        fn.constructor = subclass;
-        subclass.extend = that.extend;
+    var Observable = Class.extend(/** @lends kendo.Observable.prototype */{
 
-        return subclass;
-    }
-
-//Observable ================================
-    var Observable = Class.extend({
-
+        /**
+         * Creates an observable instance
+         * @constructs
+         */
         init: function() {
             this._events = {};
         },
@@ -121,12 +135,19 @@
         }
     });
 
-//Template ================================
+    /**
+     * @name kendo.Template
+     * @namespace
+     */
     Template = {
         paramName: "data", // name of the parameter of the generated template
         useWithBlock: true, // whether to wrap the template in a with() block
         begin: "<#", // the marker which denotes the beginning of executable code
         end: "#>", // the marker which denotes the end of executable code
+        /**
+         * @memberOf kendo.Template
+         * @static
+         */
         render: function(template, data) {
             var idx,
                 length,
@@ -138,6 +159,10 @@
 
             return html;
         },
+        /**
+         * @memberOf kendo.Template
+         * @static
+         */
         compile: function(template, options) {
             var settings = extend({}, this, options),
                 paramName = settings.paramName,
@@ -295,6 +320,9 @@
     }
 
     if (typeof JSON.stringify !== FUNCTION) {
+        /**
+         * @memberOf kendo.JSON
+         */
         JSON.stringify = function (value, replacer, space) {
             var i;
             gap = "";
@@ -750,7 +778,8 @@
     }
 
     // feature detection
-    (function() {
+    /** @name kendo.support */
+    support = (function() {
         support.scrollbar = function() {
             var div = document.createElement("div"),
                 result;
@@ -1010,16 +1039,17 @@
        });
     }
 
-    $.fn.kendoStop = function(clearQueue, gotoEnd) {
-        if (kendo.support.transitions && 'stopQueue' in kendo.fx)
-            return kendo.fx.stopQueue(this, clearQueue || false, gotoEnd || false);
-        else
-            return this.stop(clearQueue, gotoEnd);
-    };
-
-    $.fn.kendoAnimate = function(options, duration, reverse, complete) {
-        return animate(this, options, duration, reverse, complete);
-    };
+    extend($.fn, {
+        kendoStop: function(clearQueue, gotoEnd) {
+            if (kendo.support.transitions && 'stopQueue' in kendo.fx)
+                return kendo.fx.stopQueue(this, clearQueue || false, gotoEnd || false);
+            else
+                return this.stop(clearQueue, gotoEnd);
+        },
+        kendoAnimate: function(options, duration, reverse, complete) {
+            return animate(this, options, duration, reverse, complete);
+        }
+    });
 
     function toggleClass(element, classes, options, add) {
         if (classes) {
@@ -1101,7 +1131,11 @@
         });
     }
 
-    extend(kendo, {
+    extend(kendo, /** @lends kendo */ {
+        /**
+         * @name kendo.ui
+         * @namespace Contains all classes for the UI components
+         */
         ui: {
             progress: function(container, toggle) {
                 var mask = container.find(".t-loading-mask");
@@ -1174,7 +1208,11 @@
     // This is required for Internet Explorer as jQuery.extend will not copy toString properly
     kendo.toString = toString;
 
-    var Component = Observable.extend( {
+    var Component = Observable.extend( /** @lends kendo.ui.Component.prototype */ {
+        /**
+         * Base class for all UI components
+         * @constructs
+         */
         init: function(element, options) {
             var that = this;
 
@@ -1184,7 +1222,7 @@
         }
     });
 
-    extend(kendo.ui, {
+    extend(kendo.ui, /** @lends kendo.ui */{
         Component: Component,
         plugin: function(name, component) {
             // expose it in the kendo.ui namespace

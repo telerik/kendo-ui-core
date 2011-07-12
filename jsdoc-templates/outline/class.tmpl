@@ -1,0 +1,443 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset={+IO.encoding+}" />
+		<meta name="generator" content="JsDoc Toolkit" />
+		{! Link.base = "../"; /* all generated links will be relative to this */ !}
+		<title>JsDoc Reference - {+data.alias+}</title>
+
+    <script type="text/javascript" src="../jproton.js"></script>
+    <script type="text/javascript" src="../ui.js"></script>
+    <script type="text/javascript" src="../sh.js"></script>
+		<link rel=stylesheet href="../sh.css" type="text/css">
+		<link rel=stylesheet href="../default.css" type="text/css">
+	</head>
+
+	<body>
+		<div id="main-wrapper">
+			<div id="main">
+<!-- ============================== classes index ============================ -->
+				<div id="index" class="fixed">
+					{+publish.classesIndex+}
+				</div>
+				<div id="index-toggler" class="fixed">&laquo;</div>
+
+<!-- ============================== header ================================= -->	
+				<!-- begin static/header.html -->
+				{+include("static/header.html")+}
+				<!-- end static/header.html -->
+		
+				<div id="content">
+<!-- ============================== class title ============================ -->
+					<h1 class="classTitle">
+						<if test="data.isBuiltin()">Built-In </if>{!output+=(data.isNamespace)?"Namespace ":"Class ";!}{+data.alias+}
+					</h1>
+		
+<!-- ============================== class summary ========================== -->			
+<!-- 
+					<if test="data.augments.length"><br></br>Extends
+						{+
+							data.augments
+							.sort()
+							.map(
+								function($) { return new Link().toSymbol($); }
+							)
+							.join(", ")
+						+}.<br></br>
+					</if>
+-->
+					<div class="full-description">
+						<p>{+resolveLinks(data.classDesc)+}</p>
+					</div>
+					<if test="!data.isBuiltin()">{# isn't defined in any file #}
+						<p class="fileName itemName"><i>Defined in: </i> <span class="icon">{+new Link().toSrc(data.srcFile)+}.</span></p>
+					</if>
+		
+<!-- ============================== constructor summary ==================== -->			
+					<if test="!data.isNamespace && !data.isBuiltin()">{# have no documented constructor #}
+					<div class="summary section">
+						<div class="sectionTitle">Constructor Summary</div>
+						<div class="sectionItems{!if (hasModule(data)) output += " module-"+getModule(data)!}">
+							<div class="sectionItem">
+								<div class="itemName{!if (hasModule(data)) output += " module-"+getModule(data)!}">
+								  <!--
+									<div class="module-filter">{+getModule(data)+}&nbsp;</div>
+									-->
+									<b class="icon">new {+ new Link().toSymbol(data.alias).inner('constructor').withText(data.alias)+}</b>
+									<span class='signature'>{+ makeSignature(data.params) +}</span>
+									<span class='description'>{+getDesc(data)+}</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					</if>
+		
+<!-- ============================== properties summary ===================== -->
+					<if test="data.properties.length">
+						{! var ownProperties = data.properties.filter(function($){return $.memberOf == data.alias}); !}
+						<if test="ownProperties.length">
+						<div class="summary section">
+							<div class="sectionTitle">Field Summary</div>
+							<div class="sectionItems">
+							<for each="member" in="ownProperties">
+								<div class="sectionItem classProperty{!if (hasModule(member)) output += " module-"+getModule(member)!}">
+								  <!--
+									<div class="module-filter">{+getModule(member)+}&nbsp;</div>
+									-->
+									<b class="icon{+getPrivateClass(member)+}" title="{+getPlainDesc(member)+}">{+new Link().toSymbol(member.alias).withText(member.name)+}</b>
+									<span class='description'>{+getDesc(member)+}</span>
+								</div>
+							</for>
+							</div>
+						</div>
+						</if>
+					</if>
+		
+<!-- ============================== methods summary ======================== -->
+					<if test="data.methods.length">
+						{! var ownMethods = data.methods.filter(function($){return $.memberOf == data.alias}); !}
+						<if test="ownMethods.length">
+						<div class="summary section">
+							<div class="sectionTitle">Method Summary</div>
+							<div class="sectionItems">
+							<for each="member" in="ownMethods">
+								<div class="sectionItem classMethod{!if (hasModule(member)) output += " module-"+getModule(member)!}">
+								  <!--
+									<div class="module-filter">{+getModule(member)+}&nbsp;</div>
+									-->
+									<b class="icon{+getPrivateClass(member)+}" title="{+getPlainDesc(member)+}">{+new Link().toSymbol(member.alias).withText(member.name)+}</b><span class='signature'>{+makeSignature(member.params)+}</span>
+									<span class='description'>{+getDesc(member)+}</span>
+								</div>
+							</for>
+							</div>
+						</div>
+						</if>
+					</if>
+		
+<!-- ============================== constructor details ==================== -->		
+					<if test="!data.isNamespace  && !data.isBuiltin()">
+					<div class="section details">
+						<div class="sectionTitle">
+							Constructor Detail
+						</div>
+						<div class="sectionItems">
+							<div class="sectionItem classItem itemName{!if (hasModule(data)) output += " module-"+getModule(data)!}">
+								<div class="details"><a name="constructor"> </a>
+									
+									<div class="icon">
+										new <b>{+ data.alias +}</b>{+ makeSignature(data.params) +}
+									</div>
+									
+									<div class="full-description">
+										{+resolveLinks(data.desc)+}
+										<if test="data.author"><br></br><i>Author: </i>{+data.author+}.</if>
+									</div>
+									
+									<if test="data.example">
+									<pre class="prettyprint">{+data.example+}</pre>
+									</if>
+									
+									
+										<if test="data.params.length">
+											<dl class="detailList">
+											<dt class="heading">Parameters:</dt>
+											<for each="item" in="data.params">
+												<dt>
+													{+((item.type)?""+("<span class=\"light\">{"+(new Link().toSymbol(item.type)+"}</span> ")) : "")+} <b>{+item.name+}</b>
+													<if test="item.isOptional"><i>Optional<if test="defined(item.defaultValue)">, Default: {+item.defaultValue+}</if></i></if>
+												</dt>
+													<dd>{+resolveLinks(item.desc)+}</dd>
+											</for>
+											</dl>
+										</if>
+										<if test="data.deprecated">
+											<dl class="detailList">
+											<dt class="heading">Deprecated:</dt>
+											<dt>
+												{+data.deprecated+}
+											</dt>
+											</dl>
+										</if>
+										<if test="data.since.length">
+											<dl class="detailList">
+											<dt class="heading">Since:</dt>
+											<for each="item" in="data.since">
+												<dd>{+ item +}</dd>
+											</for>
+											</dl>
+										</if>
+										<if test="data.exceptions.length">
+											<dl class="detailList">
+											<dt class="heading">Exceptions:</dt>
+											<for each="item" in="data.exceptions">
+												<dt>
+													{+((item.type)?"<span class=\"light\">{"+(new Link().toSymbol(item.type))+"}</span> " : "")+} <b>{+item.name+}</b>
+												</dt>
+													<dd>{+resolveLinks(item.desc)+}</dd>
+											</for>
+											</dl>
+										</if>
+										<if test="data.returns.length">
+											<dl class="detailList">
+											<dt class="heading">Returns:</dt>
+											<for each="item" in="data.returns">
+													<dd>{+((item.type)?"<span class=\"light\">{"+(new Link().toSymbol(item.type))+"}</span> " : "")+}{+resolveLinks(item.desc)+}</dd>
+											</for>
+											</dl>
+										</if>
+										<if test="data.requires.length">
+											<dl class="detailList">
+											<dt class="heading">Requires:</dt>
+											<for each="item" in="data.requires">
+												<dd>{+ resolveLinks(item) +}</dd>
+											</for>
+											</dl>
+										</if>
+										<if test="data.see.length">
+											<dl class="detailList">
+											<dt class="heading">See:</dt>
+											<for each="item" in="data.see">
+												<dd>{+ new Link().toSymbol(item) +}</dd>
+											</for>
+											</dl>
+										</if>
+					
+								</div>
+							</div>
+						</div>
+					</div>
+					</if>
+		
+<!-- ============================== field details ========================== -->		
+					<if test="defined(ownProperties) && ownProperties.length">
+					<div class="section details">
+						<div class="sectionTitle">
+							Field Detail
+						</div>
+						<div class="sectionItems">
+							<for each="member" in="ownProperties">
+								{!
+									var module = getModule(member);
+									var pClass = getPrivateClass(member);
+									var link = new Link().toSymbol(member.alias);
+                  var fakeOut = "";
+
+									if (hasModule(member)) {
+										output += "<div class='sectionItem classProperty module-" + module + pClass + "'>";
+										fakeOut += "<div class='module-filter'>" + link.withText(module) + "</div>";
+									} else {
+										output += "<div class='sectionItem classProperty'>";
+										fakeOut += "<div class='module-filter'>&nbsp;</div>";
+									}
+									
+								!}
+									<a name="{+Link.symbolNameToLinkName(member)+}"> </a>
+									<div class="itemTitle signature icon{+pClass+}">
+										<if test="member.isStatic && member.memberOf != '_global_'">{+member.memberOf+}.</if><b>{+member.name+}</b>
+										<if test="member.type"><span class="light">: {+new Link().toSymbol(member.type)+}</span></if>
+									</div>
+
+									<div class="full-description">
+										{+resolveLinks(member.desc)+}
+										<if test="member.srcFile != data.srcFile">
+											<p class="fileName itemName"><i>Defined in: </i> <span class="icon">{+new Link().toSrc(member.srcFile)+}.</span></p>
+										</if>
+										<if test="member.author"><br></br><i>Author: </i>{+member.author+}.</if>
+									</div>
+									
+									<if test="member.example">
+									<pre class="prettyprint">{+member.example+}</pre>
+									</if>
+								
+									
+										<if test="member.deprecated">
+											<dl class="detailList">
+											<dt class="heading">Deprecated:</dt>
+											<dt>
+												{+ member.deprecated +}
+											</dt>
+											</dl>
+										</if>
+										<if test="member.since.length">
+											<dl class="detailList">
+											<dt class="heading">Since:</dt>
+												<dd>{+ member.since +}</dd>
+											</dl>
+										</if>
+										<if test="member.see.length">
+											<dl class="detailList">
+											<dt class="heading">See:</dt>
+											<for each="item" in="member.see">
+											<dd>{+ new Link().toSymbol(item) +}</dd>
+											</for>
+											</dl>
+										</if>
+										<if test="member.defaultValue">
+											<dl class="detailList">
+											<dt class="heading">Default Value:</dt>
+											<dd>
+												{+resolveLinks(member.defaultValue)+}
+											</dd>
+											</dl>
+										</if>
+				
+								</div>
+							</for>
+						</div>
+					</div>
+					</if>
+		
+<!-- ============================== method details ========================= -->		
+					<if test="defined(ownMethods) && ownMethods.length">
+					<div class="details section">
+						<div class="sectionTitle">
+							Method Detail
+						</div>
+						<div class="sectionItems">
+							<for each="member" in="ownMethods">
+							
+								{!
+									var module = getModule(member);
+									var pClass = getPrivateClass(member);
+									var link = new Link().toSymbol(member.alias);
+                  var fakeOut = "";
+
+									if (hasModule(member)) {
+										output += "<div class='sectionItem classMethod module-" + module + pClass + "'>";
+										fakeOut += "<div class='module-filter'>" + link.withText(module) + "</div>";
+									} else {
+										output += "<div class='sectionItem classMethod " + pClass + "'>";
+										fakeOut += "<div class='module-filter'>&nbsp;</div>";
+									}
+									
+								!}
+									<a name="{+Link.symbolNameToLinkName(member)+}"> </a>
+									<div class="itemTitle icon">
+										<if test="member.isStatic && member.memberOf != '_global_'">{+member.memberOf+}.</if>{+member.name+}<span class="signature">{+makeSignature(member.params)+}</span>
+										<if test="member.type"><span class="light" title="returns {+member.type+}">: {+new Link().toSymbol(member.type)+}</span></if>
+									</div>
+									<div class="full-description">
+										{+resolveLinks(member.desc)+}
+										<if test="member.srcFile != data.srcFile">
+											<p class="fileName itemName"><i>Defined in: </i> <span class="icon">{+new Link().toSrc(member.srcFile)+}.</span></p>
+										</if>
+										<if test="member.author"><br></br><i>Author: </i>{+member.author+}.</if>
+									
+										<if test="member.example">
+										<pre class="prettyprint">{+member.example+}</pre>
+										</if>
+									</div>
+									
+									<if test="member.params.length">
+										<div class="heading">Parameters:</div>
+										<table class="methodItem"><tbody>
+										<for each="item" in="member.params">
+											<tr>
+												<td class="methodItemType">
+												  {+((item.type)?"<span class=\"light\">{"+(new Link().toSymbol(item.type))+"}</span> " : "")+}
+												</td>
+												<td class="methodItemName">
+												  <b>{+item.name+}</b><if test="item.isOptional"><i class="help" title="Optional parameter">?</i><if test="defined(item.defaultValue)">, Default: {+item.defaultValue+}</i></if></if>
+												</td>
+												<td class="methodItemDesc">
+											    {+resolveLinks(item.desc)+}
+												</td>
+											</tr>
+										</for>
+										</tbody></table>
+									</if>
+									<if test="member.deprecated">
+										<div class="heading">Deprecated:</div>
+										<table class="methodItem"><tbody>
+											<tr>
+												<td>
+													{+member.deprecated+}
+												</td>
+											</tr>
+										</tbody></table>
+									</if>
+									<if test="member.since.length">
+										<div class="heading">Since:</div>
+										<table class="methodItem"><tbody>
+											<tr>
+												<td>
+													{+ member.since +}
+												</td>
+											</tr>
+										</tbody></table>
+									</if>
+									<if test="member.exceptions.length">
+										<div class="heading">Exceptions:</div>
+										<table class="methodItem"><tbody>
+										<for each="item" in="member.exceptions">
+											<tr>
+												<td class="methodItemType">
+													{+((item.type)?"<span class=\"light\">{"+(new Link().toSymbol(item.type))+"}</span> " : "")+} <b>{+item.name+}</b>
+												</td>
+												<td class="methodItemDesc">
+													{+resolveLinks(item.desc)+}
+												</td>
+											</tr>
+										</for>
+										</tbody></table>
+									</if>
+									<if test="member.returns.length">
+										<div class="heading">Returns:</div>
+										<table class="methodItem"><tbody>
+										<for each="item" in="member.returns">
+											<tr>
+												<td class="methodItemType">
+													{+((item.type)?"<span class=\"light\">{"+(new Link().toSymbol(item.type))+"}</span> " : "")+}
+												</td>
+												<td class="methodItemDesc">
+													{+resolveLinks(item.desc)+}
+												</td>
+											</tr>
+										</for>
+										</tbody></table>
+									</if>
+									<if test="member.requires.length">
+										<div class="heading">Requires:</div>
+										<table class="methodItem"><tbody>
+										<for each="item" in="member.requires">
+											<tr>
+												<td class="methodItemDesc">
+													{+ resolveLinks(item) +}
+												</td>
+											</tr>
+										</for>
+										</tbody></table>
+									</if>
+									<if test="member.see.length">
+										<div class="heading">See:</div>
+										<table class="methodItem"><tbody>
+										<for each="item" in="member.see">
+											<tr>
+												<td class="methodItemDesc">
+													{+ new Link().toSymbol(item) +}
+												</td>
+											</tr>
+										</for>
+										</tbody></table>
+									</if>
+				
+								</div>
+							</for>
+						</div>
+					</div>
+					</if>
+					
+				</div>
+				
+<!-- ============================== footer ================================= -->
+				<div class="fineprint" style="clear:both">
+					<if test="JSDOC.opt.D.copyright">&copy;{+JSDOC.opt.D.copyright+}<br></br></if>
+					Documentation generated by <a href="http://www.jsdoctoolkit.org/" target="_blank">JsDoc Toolkit</a> {+JSDOC.VERSION+} on {+new Date()+}
+				</div>
+				
+			</div>
+		</div>
+		
+	</body>
+</html>

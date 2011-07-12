@@ -1,0 +1,74 @@
+<div id="index-wrapper">
+	<div class="header">
+	  <div id="index-close" title="Esconde o outline.">&nbsp;</div>
+	  <div id="index-title">Project Outline</div>
+	</div>
+	<div id="index-menu">{+new Link().toFile("index.html").withText("Class Index")+}
+	| {+new Link().toFile("files.html").withText("File Index")+}</div>
+	
+	<div id="index-content">
+		
+		<div class="classList">
+			<for each="thisClass" in="data">
+			<div class="section">
+				{!
+					if (thisClass.alias == "_global_")
+						output += "<div title='Global namespace.' class='itemName";
+					else
+						output += "<div title='"+getPlainDesc(thisClass)+"' class='itemName";
+
+					output += getNSClass(thisClass);
+					output += "'>";
+				!}
+				<div class='method-toggler'>&nbsp;</div>{!
+			
+				if (thisClass.alias == "_global_") {
+					output += "<span class='icon'>"+"<i>"+new Link().toClass(thisClass.alias)+"</i>"+"</span>";
+				}
+				else {
+					output += "<span class='icon'>"+new Link().toClass(thisClass.alias)+"</span>";
+				}
+				
+				output += "</div><div class='sectionItems'>";
+
+				for (var i=0, a=thisClass.properties, ai; ai=a[i]; i++) {
+					var module = getModule(ai);
+					var pClass = getPrivateClass(ai);
+					var link = new Link().toSymbol(ai.alias);
+					var fakeOut = "";
+					
+					if (hasModule(ai)) {
+						output += "<div class='sectionItem classProperty module-" + module + "'>";
+						fakeOut += "<div class='module-filter'>" + module + "</div>";
+					} else {
+						output += "<div class='sectionItem classProperty'>";
+						fakeOut += "<div class='module-filter'>&nbsp;</div>";
+					}
+
+					output +=	"<b class='icon{+pClass+}' title='" + getPlainDesc(ai) + "'>" + link.withText(ai.name) + "</b></div>";
+				}
+
+				for (var i=0, a=thisClass.methods, ai; ai=a[i]; i++) {
+					var module = getModule(ai);
+					var pClass = getPrivateClass(ai);
+					var link = new Link().toSymbol(ai.alias);
+					var fakeOut = "";
+					
+					if (hasModule(ai)) {
+						output += "<div class='sectionItem classMethod module-" + module + "'>";
+						fakeOut += "<div class='module-filter'>" + module + "</div>";
+					} else {
+						output += "<div class='sectionItem classMethod'>";
+						fakeOut += "<div class='module-filter'>&nbsp;</div>";
+					}
+					
+					output +=	"<b class='icon{+pClass+}' title='" + getPlainDesc(ai) + "'>" +	link.withText(ai.name) + "</b><span class='signature'>" +
+						makeSignature(ai.params) + "</span></div>";
+				}
+				output += "</div>";
+			!}</div>
+			</for>
+		</div>
+	</div>
+</div>
+	
