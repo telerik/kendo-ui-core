@@ -145,7 +145,7 @@
   </PropertyGroup>
 
   <Target Name="BeforeCompile">
-    <Exec Command="$(NodeJSRun)" WorkingDirectory="$(NodeJSWorkingDir)" ContinueOnError="true" />
+    <Exec Command="$(NodeJSRun)" ContinueOnError="true" />
   </Target>
 
   <Target Name="AfterCompile">
