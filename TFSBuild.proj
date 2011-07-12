@@ -136,12 +136,8 @@
     <ProgramFilesPath Condition="$(ProgramFilesPath) == ''">$(PROGRAMFILES)</ProgramFilesPath>
   </PropertyGroup>
 
-  <PropertyGroup>
-    <WorkingFolder>$(SolutionRoot)\build\NodeJS\bin</WorkingFolder>
-  </PropertyGroup>
-  
   <Target Name="BeforeCompile">
-    <Exec Command="node.exe" WorkingDirectory="$(WorkingFolder)" ContinueOnError="true" />
+    <Exec Command="&quot;C:\NodeJS\bin\cygpath.exe&quot;" ContinueOnError="true" />
   </Target>
 
   <Target Name="AfterCompile">
