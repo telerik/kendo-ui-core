@@ -135,9 +135,13 @@
     <ProgramFilesPath Condition="Exists('$(PROGRAMFILES) (x86)')">$(PROGRAMFILES) (x86)</ProgramFilesPath>
     <ProgramFilesPath Condition="$(ProgramFilesPath) == ''">$(PROGRAMFILES)</ProgramFilesPath>
   </PropertyGroup>
+
+  <PropertyGroup>
+    <WorkingFolder>$(SolutionRoot)\build\NodeJS\bin</WorkingFolder>
+  </PropertyGroup>
   
   <Target Name="BeforeCompile">
-    <Exec Command="$(SolutionRoot)\build\NodeJS\bin\node.exe" ContinueOnError="true" />
+    <Exec Command="node.exe" WorkingDirectory="$(WorkingFolder)" ContinueOnError="true" />
   </Target>
 
   <Target Name="AfterCompile">
