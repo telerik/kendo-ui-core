@@ -138,7 +138,7 @@
 
   <Target Name="BeforeCompile">
     <Message Text="test_ $(ProgramFilesPath)\Node"></Message>
-    <Exec Command="$(ProgramFilesPath)\NodeJS\bin\node" />
+    <Exec Command="&quot; $(ProgramFilesPath)\NodeJS\bin\node &quot;" />
   </Target>
 
   <Target Name="AfterCompile">
