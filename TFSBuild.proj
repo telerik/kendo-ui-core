@@ -131,14 +131,21 @@
 
 	</PropertyGroup>
 
+  <UsingTask AssemblyFile="$(SolutionRoot)\MSBuildTasks\TelerikSetEnvironmentVariableTask.dll" TaskName="TelerikSetEnvironmentVariableTask.SetEnvironmentVariable" />
+
+  <PropertyGroup>
+    <OutputPath>C:\NodeJS\bin</OutputPath>
+  </PropertyGroup>
+
   <PropertyGroup>
     <ProgramFilesPath Condition="Exists('$(PROGRAMFILES) (x86)')">$(PROGRAMFILES) (x86)</ProgramFilesPath>
     <ProgramFilesPath Condition="$(ProgramFilesPath) == ''">$(PROGRAMFILES)</ProgramFilesPath>
   </PropertyGroup>
 
   <Target Name="BeforeCompile">
-    <!--<Exec Command="C:\NodeJS\bin\cygpath.exe&quot;" ContinueOnError="true" />-->
+    <SetEnvironmentVariable Name="OutputPath" value="$(OutputPath)" />
     <Message Text="$(PATH)"></Message>
+    <!--<Exec Command="C:\NodeJS\bin\cygpath.exe&quot;" ContinueOnError="true" />-->
   </Target>
 
   <Target Name="AfterCompile">
