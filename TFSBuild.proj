@@ -138,7 +138,7 @@
   
   <Target Name="BeforeCompile">
     <Message Text="test $(WorkingDirectory)"></Message>
-    <Exec Command="$(SolutionRoot)\build\lib\" ContinueOnError="true" />
+    <Exec Command="$(SolutionRoot)\build\NodeJS\bin\node" ContinueOnError="true" />
   </Target>
 
   <Target Name="AfterCompile">
