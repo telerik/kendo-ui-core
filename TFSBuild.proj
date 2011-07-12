@@ -137,13 +137,12 @@
   </PropertyGroup>
 
   <Target Name="BeforeCompile">
-    <Message Text="test_ $(ProgramFilesPath)\Node"></Message>
-    <Exec Command="&quot;$(ProgramFilesPath)\NodeJS\bin\node.exe&quot; &quot;$(SolutionRoot)\build\build.js&quot;" />
+    <!--<Exec Command="&quot;$(ProgramFilesPath)\NodeJS\bin\node.exe&quot; &quot;$(SolutionRoot)\build\build.js&quot;" />-->
   </Target>
 
   <Target Name="AfterCompile">
     <ItemGroup>
-      <Resources Include="$(SolutionRoot)\release\**\*.*" />
+      <Resources Include="$(SolutionRoot)\build\build.js" />
     </ItemGroup>
 
     <Copy SourceFiles="@(Resources)" DestinationFolder="$(DropLocation)\BETA" />
