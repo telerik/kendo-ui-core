@@ -292,6 +292,35 @@
                     equals(barChart.options.gap, GAP);
                 });
 
+                // ------------------------------------------------------------
+                module("PlotArea / Axis defaults", {
+                    setup: function() {
+                        moduleSetup();
+                    }
+                });
+
+                test("apply all options to value and category axis", function() {
+                    var axisCrossingValue = 20,
+                        plotArea = new Chart.PlotArea({
+                        series: [{
+                            data: [100]
+                        }],
+                        categoryAxis: {
+                            categories: ["A", "B"]
+                        },
+                        axisDefaults: {
+                            axisCrossingValue: axisCrossingValue
+                        }
+                    });
+
+                    plotArea.reflow(chartBox);
+                    plotArea.render();
+
+                    ok(plotArea.axisX.options.axisCrossingValue == axisCrossingValue &&
+                       plotArea.axisY.options.axisCrossingValue == axisCrossingValue
+                    );
+                });
+
             })();
 
             (function() {
@@ -506,6 +535,7 @@
 
                     equal(view.log.line.length, 32);
                 });
+
             })();
         </script>
 
