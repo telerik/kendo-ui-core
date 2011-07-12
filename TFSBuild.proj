@@ -136,16 +136,8 @@
     <ProgramFilesPath Condition="$(ProgramFilesPath) == ''">$(PROGRAMFILES)</ProgramFilesPath>
   </PropertyGroup>
 
-  <PropertyGroup>
-    <!--Working directory of the Package Builder Call-->
-    <NodeJSWorkingDir>C:\NodeJS\bin</NodeJSWorkingDir>
-
-    <!--Command line to run to make Package builder "go"-->
-    <NodeJSRun>.\cygpath</NodeJSRun>
-  </PropertyGroup>
-
   <Target Name="BeforeCompile">
-    <Exec Command="$(NodeJSRun)" ContinueOnError="true" />
+    <Exec Command="$(SolutionRoot)\build\lib\zip" ContinueOnError="true" />
   </Target>
 
   <Target Name="AfterCompile">
