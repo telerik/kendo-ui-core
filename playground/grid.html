@@ -25,17 +25,19 @@
         </table>
         <script>
             var index = 0;
+            var remoteDataSource;
             $(document).ready(function() {
-                var total = 1000000,
+                var total = 1000000;
+
                      remoteDataSource = new kendo.data.DataSource({
                          serverPaging: true,
-                         pageSize: 40,
+                         pageSize: 20,
                          transport: {
                              read: {
                                  url: "http://services.odata.org/Northwind/Northwind.svc/Orders",
                                  dataType: "jsonp",
                                  jsonpCallback: "callback",
-                                 cache: true
+                                 cache: false
                              },
                              dialect: function(options) {
                                  return kendo.format("$format=json&$top={0}&$skip={1}&$inlinecount=allpages&$callback=callback", options.take, options.skip);
@@ -49,8 +51,8 @@
                                  return result.d.__count;
                              }
                          }
-                    }),
-                    remoteDataSource2 = new kendo.data.DataSource({
+                     });
+                     var remoteDataSource2 = new kendo.data.DataSource({
                         serverPaging: true,
                         pageSize: 20,
                         transport: {
@@ -102,29 +104,12 @@
 
 
                 $("#table1").kendoGrid({
-                    dataSource: {
-                        transport: {
-                            read: function(options) {
-                                $.get("livescores.xml", options.success);
-                            }
-                        },
-                        schema: {
-                            type: "xml",
-                            data: "/LiveScores/MatchData"
-                        },
-                        pageSize: 20
-                    },
+                    dataSource: remoteDataSource,
                     columns: [ {
-                        title: "Team 1",
-                        field: 'Team1["#text"]'
-                        }, {
-                        title: "Team 2",
-                        field: 'Team2["#text"]'
-                        } , {
-                        title: "Score",
-                        field: 'Score["#text"]'
-                        }
-                    ],
+                        title: "Foo",
+                        template: "<#=OrderID - 10248#>"
+                    }, "OrderID",
+                    "CustomerID" ],
                     scrollable: {
                         virtual: true
                     },

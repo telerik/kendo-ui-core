@@ -101,6 +101,7 @@
             }
 
             that.dialect = options.dialect;
+            that._pending = [];
         },
 
         options: {
@@ -132,8 +133,22 @@
                     cache.add(options.data, result);
 
                     success(result);
+
+                    that._inproggress = false;
+
+                    if (that._pending.length) {
+                        that._inproggress = true;
+                        $.ajax(that._pending.pop());
+                        that._pending = [];
+                    }
                 };
-                $.ajax(options);
+
+                if (!that._inproggress) {
+                    that._inproggress = true;
+                    $.ajax(options);
+                } else {
+                    that._pending.push(options);
+                }
             }
         },
 
@@ -655,7 +670,7 @@
                 });
 
             that.trigger(REQUESTSTART);
-
+            that._ranges = [];
             that.transport.read({
                 data: options,
                 success: proxy(that.success, that),
@@ -695,6 +710,14 @@
             } else {
                 data = that.reader.data(data);
             }
+
+            var start = that._skip || 0,
+                end = start + data.length;
+
+            console.log("success", start, end);
+            clearTimeout(that._timeout);
+            that._ranges.push({ start: start, end: end, data: data });
+            that._ranges.sort( function(x, y) { return x.start - y.start; } );
 
             that._process(data);
         },
@@ -929,55 +952,76 @@
                 return true;
             }
 
-            for (skipIdx = 0, length = ranges.length; skipIdx < length; skipIdx++) {
-                range = ranges[skipIdx];
-                if (range.start >= skip && skip <= range.end) {
-                    var x = skip;
-                    for (takeIdx = skipIdx; takeIdx < length; takeIdx++) {
-                        range = ranges[takeIdx];
-                        x += range.data.length;
-                        if (end <= range.end && x >= end) {
-                            return true;
-                        }
-                    }
-                }
-            }
-
-            return false;
+            return that._findRange(skip, end).length > 0;
         },
 
         range: function(skip, take) {
             var that = this,
-                length,
-                ranges = that._ranges,
                 end = skip + take,
-                range,
-                data = [];
+                data;
 
-            for (skipIdx = 0, length = ranges.length; skipIdx < length; skipIdx++) {
-                range = ranges[skipIdx];
-                if (range.start >= skip && skip <= range.end) {
-                    var x = skip;
-                    for (takeIdx = skipIdx; takeIdx < length; takeIdx++) {
-                        range = ranges[takeIdx];
-                        x += range.data.length;
-                        data = data.concat(range.data);
+            if (that.options.serverPaging){
+                data = that._findRange(skip, end);
 
-                        if (end <= range.end && x >= end) {
-                            that._skip = skip;
-                            that._take = take;
-                            that._process(data);
-                            return;
-                        }
-                    }
+                if (data.length) {
+                    that._skip = skip;
+                    that._take = take;
+                    that._process(data);
+                    return;
                 }
             }
 
             if (take !== undefined) {
                 skip = skip || 0;
 
-                that.query({ skip: skip, take: take, sort: that.sort(), filter: that.filter(), group: that.group(), aggregates: that.aggregate() });
+                console.log("range", skip, end);
+                clearTimeout(that._timeout);
+                that._timeout = setTimeout(function() {
+                    that.query({ skip: skip, take: take, sort: that.sort(), filter: that.filter(), group: that.group(), aggregates: that.aggregate() });
+                }, 250);
             }
+        },
+
+        _findRange: function(start, end) {
+            var that = this,
+                length,
+                ranges = that._ranges,
+                range,
+                data = [],
+                skipIdx,
+                takeIdx,
+                startIndex,
+                endIndex,
+                length;
+
+            for (skipIdx = 0, length = ranges.length; skipIdx < length; skipIdx++) {
+                range = ranges[skipIdx];
+                if (start >= range.start && start <= range.end) {
+                    var count = 0;
+
+                    for (takeIdx = skipIdx; takeIdx < length; takeIdx++) {
+                        range = ranges[takeIdx];
+                        if (range.data.length && start + count >= range.start && count + count <= range.end) {
+                            startIndex = 0;
+                            if (start + count > range.start) {
+                                startIndex = (start + count) - range.start;
+                            }
+                            endIndex = range.data.length;
+                            if (range.end > end) {
+                                endIndex = endIndex - (range.end - end);
+                            }
+                            count += endIndex - startIndex;
+                            data = data.concat(range.data.slice(startIndex, endIndex));
+
+                            if (end <= range.end && count == end - start) {
+                                return data;
+                            }
+                        }
+                    }
+                    break;
+                }
+            }
+            return [];
         },
 
         skip: function() {
@@ -997,9 +1041,7 @@
                     take: take,
                     skip: skip,
                     page: skip / take + 1,
-                    //TODO: calculate
-                    //page: that.page(),
-                    //pageSize: that.pageSize(),
+                    pageSize: take,
                     sort: that._sort,
                     filter: that._filter,
                     group: that._group,
@@ -1007,17 +1049,25 @@
                 };
 
             if (!that._rangeExists(skip, skip + take)) {
-                that._ranges.push(range);
 
-                that.transport.read({
-                    data: options,
-                    success: function (data) {
-                        data = that.reader.parse(data);
-                        range.data = that.reader.data(data);
-                        range.end = range.start + range.data.length;
-                        that._ranges.sort( function(x, y) { return x.start - y.start; } );
-                    }
-                });
+                console.log("before", skip, skip + take, range);
+                that._ranges.push(range);
+                clearTimeout(that._timeout);
+                that._timeout = setTimeout(function() {
+
+                console.log("before timeout", skip, skip + take, range);
+                    that.transport.read({
+                        data: options,
+                        success: function (data) {
+                            index = skip;
+                            data = that.reader.parse(data);
+                            range.start = index;
+                            range.data = that.reader.data(data);
+                            range.end = index + range.data.length;
+                            that._ranges.sort( function(x, y) { return x.start - y.start; } );
+                            console.log("after", index, range.end, range);
+                        }
+                    })}, 250);
             }
         },
         _rangeExists: function(start, end) {

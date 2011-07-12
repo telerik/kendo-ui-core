@@ -662,48 +662,6 @@
                 equal(result[2].age, 5);
             });
 
-            test("range page given number of items from index", function() {
-                var dataSource = new DataSource({
-                    data: [{age: 1}, {age: 2},{age: 3}, {age: 4},{age: 5}, {age: 6},{age: 7}, {age: 8}]
-                });
-                dataSource.read();
-                dataSource.range(2, 3);
-
-                var result = dataSource.view();
-
-                equal(result.length, 3);
-                equal(result[0].age, 3);
-                equal(result[1].age, 4);
-                equal(result[2].age, 5);
-            });
-
-            test("range if index undefined set to zero", function() {
-                var dataSource = new DataSource({
-                    data: [{age: 1}, {age: 2},{age: 3}, {age: 4},{age: 5}, {age: 6},{age: 7}, {age: 8}]
-                });
-                dataSource.read();
-                dataSource.range(undefined, 3);
-
-                var result = dataSource.view();
-
-                equal(result.length, 3);
-                equal(result[0].age, 1);
-                equal(result[1].age, 2);
-                equal(result[2].age, 3);
-            });
-
-            test("range if count is undefined return all data", function() {
-                var dataSource = new DataSource({
-                    data: [{age: 1}, {age: 2},{age: 3}, {age: 4},{age: 5}, {age: 6},{age: 7}, {age: 8}]
-                });
-                dataSource.read();
-                dataSource.range(0, undefined);
-
-                var result = dataSource.view();
-
-                equal(result.length, 8);
-            });
-
             test("skip return skipped items for given page and pageSize", function() {
                  var dataSource = new DataSource({
                      data: [{age: 1}, {age: 2},{age: 3}, {age: 4},{age: 5}, {age: 6},{age: 7}, {age: 8}],

@@ -93,9 +93,9 @@
                 that._scrollTop = itemHeight;
                 that._page(skip, take);
             } else if (firstItemIndex < (skip + take * prefetchAt) && firstItemIndex > take * prefetchAt) {
-                dataSource.prefetch(Math.max(skip - take + (lastItemIndex - firstItemIndex) - 1, 0), take);
+                dataSource.prefetch(Math.max(skip - take, 0), take);
             } else if (lastItemIndex > skip + take * prefetchAt) {
-                dataSource.prefetch(skip + take - (lastItemIndex - firstItemIndex) + 1, take);
+                dataSource.prefetch(skip + take, take);
             }
             return fetching;
         },
@@ -109,8 +109,8 @@
             if (dataSource.inRange(skip, take)) {
                 dataSource.range(skip, take);
             } else {
+                kendo.ui.progress(that.wrapper, true);
                 that._timeout = setTimeout(function() {
-                    kendo.ui.progress(that.wrapper, true);
                     dataSource.range(skip, take);
                 }, 100);
             }

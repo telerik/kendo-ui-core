@@ -1104,7 +1104,6 @@
 
                 if (toggle) {
                     if (!mask.length) {
-                        console.log(container);
                         mask = $("<div class='t-loading-mask t-overlay' style='position:absolute;text-align:center;color:#fff'><span>Loading...</span></div>");
                         mask.width(container.outerWidth()).height(container.outerHeight());
                         mask.prependTo(container);
