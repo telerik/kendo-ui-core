@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>crypto - Node.js Manual &amp; Documentation</title>
+  <link type="image/x-icon" rel="icon" href="/favicon.ico" />
+  <link type="image/x-icon" rel="shortcut icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="assets/style.css" type="text/css" media="all" />
+  <link rel="stylesheet" href="assets/sh.css" type="text/css" media="all"/>
+</head>
+<body>
+  <div id="container">
+    <header>
+      <h1>Node.js Manual &amp; Documentation</h1>
+      <div id="gtoc">
+        <p><a href="index.html">Index</a> | <a href="all.html">View on single page</a></p>
+      </div>
+      <hr />
+    </header>
+    <div id="toc"><h2>Table Of Contents</h2><ul><li><a href="#crypto">Crypto</a><ul><li><a href="#crypto.createCredentials">crypto.createCredentials(details)</a></li><li><a href="#crypto.createHash">crypto.createHash(algorithm)</a></li><li><a href="#hash.update">hash.update(data)</a></li><li><a href="#hash.digest">hash.digest(encoding='binary')</a></li><li><a href="#crypto.createHmac">crypto.createHmac(algorithm, key)</a></li><li><a href="#hmac.update">hmac.update(data)</a></li><li><a href="#hmac.digest">hmac.digest(encoding='binary')</a></li><li><a href="#crypto.createCipher">crypto.createCipher(algorithm, key)</a></li><li><a href="#cipher.update">cipher.update(data, input_encoding='binary', output_encoding='binary')</a></li><li><a href="#cipher.final">cipher.final(output_encoding='binary')</a></li><li><a href="#crypto.createDecipher">crypto.createDecipher(algorithm, key)</a></li><li><a href="#decipher.update">decipher.update(data, input_encoding='binary', output_encoding='binary')</a></li><li><a href="#decipher.final">decipher.final(output_encoding='binary')</a></li><li><a href="#crypto.createSign">crypto.createSign(algorithm)</a></li><li><a href="#signer.update">signer.update(data)</a></li><li><a href="#signer.sign">signer.sign(private_key, output_format='binary')</a></li><li><a href="#crypto.createVerify">crypto.createVerify(algorithm)</a></li><li><a href="#verifier.update">verifier.update(data)</a></li><li><a href="#verifier.verify">verifier.verify(cert, signature, signature_format='binary')</a></li></ul></li></ul><hr /></div>
+<h2 id="crypto">Crypto</h2>
+
+<p>Use <code>require('crypto')</code> to access this module.</p>
+
+<p>The crypto module requires OpenSSL to be available on the underlying platform.
+It offers a way of encapsulating secure credentials to be used as part
+of a secure HTTPS net or http connection.</p>
+
+<p>It also offers a set of wrappers for OpenSSL's hash, hmac, cipher, decipher, sign and verify methods.</p>
+
+<h3 id="crypto.createCredentials">crypto.createCredentials(details)</h3>
+
+<p>Creates a credentials object, with the optional details being a dictionary with keys:</p>
+
+<ul><li><code>key</code> : a string holding the PEM encoded private key</li><li><code>cert</code> : a string holding the PEM encoded certificate</li><li><code>ca</code> : either a string or list of strings of PEM encoded CA certificates to trust.</li></ul>
+
+<p>If no 'ca' details are given, then node.js will use the default publicly trusted list of CAs as given in
+<a href="http://mxr.mozilla.org/mozilla/source/security/nss/lib/ckfw/builtins/certdata.txt">http://mxr.mozilla.org/mozilla/source/security/nss/lib/ckfw/builtins/certdata.txt</a>.</p>
+
+<h3 id="crypto.createHash">crypto.createHash(algorithm)</h3>
+
+<p>Creates and returns a hash object, a cryptographic hash with the given algorithm
+which can be used to generate hash digests.</p>
+
+<p><code>algorithm</code> is dependent on the available algorithms supported by the version
+of OpenSSL on the platform. Examples are <code>'sha1'</code>, <code>'md5'</code>, <code>'sha256'</code>, <code>'sha512'</code>, etc.
+On recent releases, <code>openssl list-message-digest-algorithms</code> will display the available digest algorithms.</p>
+
+<p>Example: this program that takes the sha1 sum of a file</p>
+
+<pre><code>var filename = process.argv[2];
+var crypto = require('crypto');
+var fs = require('fs');
+
+var shasum = crypto.createHash('sha1');
+
+var s = fs.ReadStream(filename);
+s.on('data', function(d) {
+  shasum.update(d);
+});
+
+s.on('end', function() {
+  var d = shasum.digest('hex');
+  console.log(d + '  ' + filename);
+});</code></pre>
+
+<h3 id="hash.update">hash.update(data)</h3>
+
+<p>Updates the hash content with the given <code>data</code>.
+This can be called many times with new data as it is streamed.</p>
+
+<h3 id="hash.digest">hash.digest(encoding='binary')</h3>
+
+<p>Calculates the digest of all of the passed data to be hashed.
+The <code>encoding</code> can be <code>'hex'</code>, <code>'binary'</code> or <code>'base64'</code>.</p>
+
+<h3 id="crypto.createHmac">crypto.createHmac(algorithm, key)</h3>
+
+<p>Creates and returns a hmac object, a cryptographic hmac with the given algorithm and key.</p>
+
+<p><code>algorithm</code> is dependent on the available algorithms supported by OpenSSL - see createHash above.
+<code>key</code> is the hmac key to be used.</p>
+
+<h3 id="hmac.update">hmac.update(data)</h3>
+
+<p>Update the hmac content with the given <code>data</code>.
+This can be called many times with new data as it is streamed.</p>
+
+<h3 id="hmac.digest">hmac.digest(encoding='binary')</h3>
+
+<p>Calculates the digest of all of the passed data to the hmac.
+The <code>encoding</code> can be <code>'hex'</code>, <code>'binary'</code> or <code>'base64'</code>.</p>
+
+<h3 id="crypto.createCipher">crypto.createCipher(algorithm, key)</h3>
+
+<p>Creates and returns a cipher object, with the given algorithm and key.</p>
+
+<p><code>algorithm</code> is dependent on OpenSSL, examples are <code>'aes192'</code>, etc.
+On recent releases, <code>openssl list-cipher-algorithms</code> will display the available cipher algorithms.</p>
+
+<h3 id="cipher.update">cipher.update(data, input_encoding='binary', output_encoding='binary')</h3>
+
+<p>Updates the cipher with <code>data</code>, the encoding of which is given in <code>input_encoding</code>
+and can be <code>'utf8'</code>, <code>'ascii'</code> or <code>'binary'</code>. The <code>output_encoding</code> specifies
+the output format of the enciphered data, and can be <code>'binary'</code>, <code>'base64'</code> or <code>'hex'</code>.</p>
+
+<p>Returns the enciphered contents, and can be called many times with new data as it is streamed.</p>
+
+<h3 id="cipher.final">cipher.final(output_encoding='binary')</h3>
+
+<p>Returns any remaining enciphered contents, with <code>output_encoding</code> being one of: <code>'binary'</code>, <code>'ascii'</code> or <code>'utf8'</code>.</p>
+
+<h3 id="crypto.createDecipher">crypto.createDecipher(algorithm, key)</h3>
+
+<p>Creates and returns a decipher object, with the given algorithm and key.
+This is the mirror of the cipher object above.</p>
+
+<h3 id="decipher.update">decipher.update(data, input_encoding='binary', output_encoding='binary')</h3>
+
+<p>Updates the decipher with <code>data</code>, which is encoded in <code>'binary'</code>, <code>'base64'</code> or <code>'hex'</code>.
+The <code>output_decoding</code> specifies in what format to return the deciphered plaintext: <code>'binary'</code>, <code>'ascii'</code> or <code>'utf8'</code>.</p>
+
+<h3 id="decipher.final">decipher.final(output_encoding='binary')</h3>
+
+<p>Returns any remaining plaintext which is deciphered,
+with <code>output_encoding' being one of: </code>'binary'<code>, </code>'ascii'<code> or </code>'utf8'`.</p>
+
+<h3 id="crypto.createSign">crypto.createSign(algorithm)</h3>
+
+<p>Creates and returns a signing object, with the given algorithm.
+On recent OpenSSL releases, <code>openssl list-public-key-algorithms</code> will display
+the available signing algorithms. Examples are <code>'RSA-SHA256'</code>.</p>
+
+<h3 id="signer.update">signer.update(data)</h3>
+
+<p>Updates the signer object with data.
+This can be called many times with new data as it is streamed.</p>
+
+<h3 id="signer.sign">signer.sign(private_key, output_format='binary')</h3>
+
+<p>Calculates the signature on all the updated data passed through the signer.
+<code>private_key</code> is a string containing the PEM encoded private key for signing.</p>
+
+<p>Returns the signature in <code>output_format</code> which can be <code>'binary'</code>, <code>'hex'</code> or <code>'base64'</code>.</p>
+
+<h3 id="crypto.createVerify">crypto.createVerify(algorithm)</h3>
+
+<p>Creates and returns a verification object, with the given algorithm.
+This is the mirror of the signing object above.</p>
+
+<h3 id="verifier.update">verifier.update(data)</h3>
+
+<p>Updates the verifier object with data.
+This can be called many times with new data as it is streamed.</p>
+
+<h3 id="verifier.verify">verifier.verify(cert, signature, signature_format='binary')</h3>
+
+<p>Verifies the signed data by using the <code>cert</code> which is a string containing
+the PEM encoded certificate, and <code>signature</code>, which is the previously calculates
+signature for the data, in the <code>signature_format</code> which can be <code>'binary'</code>, <code>'hex'</code> or <code>'base64'</code>.</p>
+
+<p>Returns true or false depending on the validity of the signature for the data and public key.</p>
+  </div>
+  <script type="text/javascript" src="assets/sh_main.js"></script>
+  <script type="text/javascript" src="assets/sh_javascript.min.js"></script>
+  <script type="text/javascript">highlight(undefined, undefined, 'pre');</script>
+</body>
+</html>

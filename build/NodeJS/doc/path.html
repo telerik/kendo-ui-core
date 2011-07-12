@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>path - Node.js Manual &amp; Documentation</title>
+  <link type="image/x-icon" rel="icon" href="/favicon.ico" />
+  <link type="image/x-icon" rel="shortcut icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="assets/style.css" type="text/css" media="all" />
+  <link rel="stylesheet" href="assets/sh.css" type="text/css" media="all"/>
+</head>
+<body>
+  <div id="container">
+    <header>
+      <h1>Node.js Manual &amp; Documentation</h1>
+      <div id="gtoc">
+        <p><a href="index.html">Index</a> | <a href="all.html">View on single page</a></p>
+      </div>
+      <hr />
+    </header>
+    <div id="toc"><h2>Table Of Contents</h2><ul><li><a href="#path">Path</a><ul><li><a href="#path.normalize">path.normalize(p)</a></li><li><a href="#path.join">path.join([path1], [path2], [...])</a></li><li><a href="#path.resolve">path.resolve([from ...], to)</a></li><li><a href="#path.dirname">path.dirname(p)</a></li><li><a href="#path.basename">path.basename(p, [ext])</a></li><li><a href="#path.extname">path.extname(p)</a></li><li><a href="#path.exists">path.exists(p, [callback])</a></li><li><a href="#path.existsSync">path.existsSync(p)</a></li></ul></li></ul><hr /></div>
+<h2 id="path">Path</h2>
+
+<p>This module contains utilities for dealing with file paths.  Use
+<code>require('path')</code> to use it.  It provides the following methods:</p>
+
+<h3 id="path.normalize">path.normalize(p)</h3>
+
+<p>Normalize a string path, taking care of <code>'..'</code> and <code>'.'</code> parts.</p>
+
+<p>When multiple slashes are found, they're replaces by a single one;
+when the path contains a trailing slash, it is preserved.
+On windows backslashes are used. </p>
+
+<p>Example:</p>
+
+<pre><code>path.normalize('/foo/bar//baz/asdf/quux/..')
+// returns
+'/foo/bar/baz/asdf'</code></pre>
+
+<h3 id="path.join">path.join([path1], [path2], [...])</h3>
+
+<p>Join all arguments together and normalize the resulting path.</p>
+
+<p>Example:</p>
+
+<pre><code>node&gt; require('path').join(
+...   '/foo', 'bar', 'baz/asdf', 'quux', '..')
+'/foo/bar/baz/asdf'</code></pre>
+
+<h3 id="path.resolve">path.resolve([from ...], to)</h3>
+
+<p>Resolves <code>to</code> to an absolute path.</p>
+
+<p>If <code>to</code> isn't already absolute <code>from</code> arguments are prepended in right to left
+order, until an absolute path is found. If after using all <code>from</code> paths still
+no absolute path is found, the current working directory is used as well. The
+resulting path is normalized, and trailing slashes are removed unless the path 
+gets resolved to the root directory.</p>
+
+<p>Another way to think of it is as a sequence of <code>cd</code> commands in a shell.</p>
+
+<pre><code>path.resolve('foo/bar', '/tmp/file/', '..', 'a/../subfile')</code></pre>
+
+<p>Is similar to:</p>
+
+<pre><code>cd foo/bar
+cd /tmp/file/
+cd ..
+cd a/../subfile
+pwd</code></pre>
+
+<p>The difference is that the different paths don't need to exist and may also be
+files.</p>
+
+<p>Examples:</p>
+
+<pre><code>path.resolve('/foo/bar', './baz')
+// returns
+'/foo/bar/baz'
+
+path.resolve('/foo/bar', '/tmp/file/')
+// returns
+'/tmp/file'
+
+path.resolve('wwwroot', 'static_files/png/', '../gif/image.gif')
+// if currently in /home/myself/node, it returns
+'/home/myself/node/wwwroot/static_files/gif/image.gif'</code></pre>
+
+<h3 id="path.dirname">path.dirname(p)</h3>
+
+<p>Return the directory name of a path.  Similar to the Unix <code>dirname</code> command.</p>
+
+<p>Example:</p>
+
+<pre><code>path.dirname('/foo/bar/baz/asdf/quux')
+// returns
+'/foo/bar/baz/asdf'</code></pre>
+
+<h3 id="path.basename">path.basename(p, [ext])</h3>
+
+<p>Return the last portion of a path.  Similar to the Unix <code>basename</code> command.</p>
+
+<p>Example:</p>
+
+<pre><code>path.basename('/foo/bar/baz/asdf/quux.html')
+// returns
+'quux.html'
+
+path.basename('/foo/bar/baz/asdf/quux.html', '.html')
+// returns
+'quux'</code></pre>
+
+<h3 id="path.extname">path.extname(p)</h3>
+
+<p>Return the extension of the path.  Everything after the last '.' in the last portion
+of the path.  If there is no '.' in the last portion of the path or the only '.' is
+the first character, then it returns an empty string.  Examples:</p>
+
+<pre><code>path.extname('index.html')
+// returns
+'.html'
+
+path.extname('index')
+// returns
+''</code></pre>
+
+<h3 id="path.exists">path.exists(p, [callback])</h3>
+
+<p>Test whether or not the given path exists.  Then, call the <code>callback</code> argument
+with either true or false. Example:</p>
+
+<pre><code>path.exists('/etc/passwd', function (exists) {
+  util.debug(exists ? "it's there" : "no passwd!");
+});</code></pre>
+
+<h3 id="path.existsSync">path.existsSync(p)</h3>
+
+<p>Synchronous version of <code>path.exists</code>.</p>
+  </div>
+  <script type="text/javascript" src="assets/sh_main.js"></script>
+  <script type="text/javascript" src="assets/sh_javascript.min.js"></script>
+  <script type="text/javascript">highlight(undefined, undefined, 'pre');</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+{ "name" : "npm"
+, "description" : "A package manager for node"
+, "keywords" : [ "package manager", "modules", "install", "package.json" ]
+, "version" : "1.0.6"
+, "preferGlobal" : true
+, "config" : { "publishtest" : false }
+, "homepage" : "http://npmjs.org/"
+, "author" : "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me)"
+, "repository" :
+  { "type" : "git"
+  , "url" : "git://github.com/isaacs/npm.git"
+  }
+, "bugs" :
+  { "mail" : "npm-@googlegroups.com"
+  , "web" : "http://github.com/isaacs/npm/issues"
+  }
+, "directories" : { "doc" : "./doc"
+                  , "man" : "./man1"
+                  , "lib" : "./lib"
+                  , "bin" : "./bin"
+                  }
+, "main" : "npm"
+, "bin" : "./bin/npm.js"
+, "dependencies" :
+  { "semver" : "1"
+  , "abbrev" : "1"
+  , "nopt" : "1"
+  , "node-uuid" : "1.1" }
+, "bundleDependencies" : [ "semver", "abbrev", "nopt" ]
+, "devDependencies" : { "ronn" : "" }
+, "engines" : { "node" : "0.4 || 0.5", "npm" : "1" }
+, "scripts" : { "test" : "./test/run.sh"
+              , "prepublish" : "make doc"
+              }
+, "licenses" :
+  [ { "type" : "MIT"
+    , "url" : "http://github.com/isaacs/npm/raw/master/LICENSE"
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>debugger - Node.js Manual &amp; Documentation</title>
+  <link type="image/x-icon" rel="icon" href="/favicon.ico" />
+  <link type="image/x-icon" rel="shortcut icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="assets/style.css" type="text/css" media="all" />
+  <link rel="stylesheet" href="assets/sh.css" type="text/css" media="all"/>
+</head>
+<body>
+  <div id="container">
+    <header>
+      <h1>Node.js Manual &amp; Documentation</h1>
+      <div id="gtoc">
+        <p><a href="index.html">Index</a> | <a href="all.html">View on single page</a></p>
+      </div>
+      <hr />
+    </header>
+    <div id="toc"><h2>Table Of Contents</h2><ul><li><a href="#debugger">Debugger</a><ul><li><a href="#advanced_Usage">Advanced Usage</a></li></ul></li></ul><hr /></div>
+<h2 id="debugger">Debugger</h2>
+
+<p>V8 comes with an extensive debugger which is accessible out-of-process via a
+simple <a href="http://code.google.com/p/v8/wiki/DebuggerProtocol">TCP protocol</a>.
+Node has a built-in client for this debugger. To use this, start Node with the
+<code>debug</code> argument; a prompt will appear:</p>
+
+<pre><code>% node debug myscript.js
+debug&gt;</code></pre>
+
+<p>At this point <code>myscript.js</code> is not yet running. To start the script, enter
+the command <code>run</code>. If everything works okay, the output should look like
+this:</p>
+
+<pre><code>% node debug myscript.js
+debug&gt; run
+debugger listening on port 5858
+connecting...ok</code></pre>
+
+<p>Node's debugger client doesn't support the full range of commands, but
+simple step and inspection is possible. By putting the statement <code>debugger;</code>
+into the source code of your script, you will enable a breakpoint.</p>
+
+<p>For example, suppose <code>myscript.js</code> looked like this:</p>
+
+<pre><code>// myscript.js
+x = 5;
+setTimeout(function () {
+  debugger;
+  console.log("world");
+}, 1000);
+console.log("hello");</code></pre>
+
+<p>Then once the debugger is run, it will break on line 4.</p>
+
+<pre><code>% ./node debug myscript.js
+debug&gt; run
+debugger listening on port 5858
+connecting...ok
+hello
+break in #&lt;an Object&gt;._onTimeout(), myscript.js:4
+  debugger;
+  ^
+debug&gt; next
+break in #&lt;an Object&gt;._onTimeout(), myscript.js:5
+  console.log("world");
+  ^
+debug&gt; print x
+5
+debug&gt; print 2+2
+4
+debug&gt; next
+world
+break in #&lt;an Object&gt;._onTimeout() returning undefined, myscript.js:6
+}, 1000);
+^
+debug&gt; quit
+A debugging session is active. Quit anyway? (y or n) y
+%</code></pre>
+
+<p>The <code>print</code> command allows you to evaluate variables. The <code>next</code> command steps
+over to the next line. There are a few other commands available and more to
+come type <code>help</code> to see others.</p>
+
+<h3 id="advanced_Usage">Advanced Usage</h3>
+
+<p>The V8 debugger can be enabled and accessed either by starting Node with
+the <code>--debug</code> command-line flag or by signaling an existing Node process
+with <code>SIGUSR1</code>.</p>
+  </div>
+  <script type="text/javascript" src="assets/sh_main.js"></script>
+  <script type="text/javascript" src="assets/sh_javascript.min.js"></script>
+  <script type="text/javascript">highlight(undefined, undefined, 'pre');</script>
+</body>
+</html>

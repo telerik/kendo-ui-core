@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>tls - Node.js Manual &amp; Documentation</title>
+  <link type="image/x-icon" rel="icon" href="/favicon.ico" />
+  <link type="image/x-icon" rel="shortcut icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="assets/style.css" type="text/css" media="all" />
+  <link rel="stylesheet" href="assets/sh.css" type="text/css" media="all"/>
+</head>
+<body>
+  <div id="container">
+    <header>
+      <h1>Node.js Manual &amp; Documentation</h1>
+      <div id="gtoc">
+        <p><a href="index.html">Index</a> | <a href="all.html">View on single page</a></p>
+      </div>
+      <hr />
+    </header>
+    <div id="toc"><h2>Table Of Contents</h2><ul><li><a href="#tLS_">TLS (SSL)</a><ul><li><a href="#s_tls.connect">s = tls.connect(port, [host], [options], callback)</a></li><li><a href="#sTARTTLS">STARTTLS</a></li><li><a href="#tls.Server">tls.Server</a><ul><li><a href="#tls.createServer">tls.createServer(options, secureConnectionListener)</a></li><li><a href="#event_secureConnection_">Event: 'secureConnection'</a></li><li><a href="#server.listen">server.listen(port, [host], [callback])</a></li><li><a href="#server.close">server.close()</a></li><li><a href="#server.maxConnections">server.maxConnections</a></li><li><a href="#server.connections">server.connections</a></li></ul></li></ul></li></ul><hr /></div>
+<h2 id="tLS_">TLS (SSL)</h2>
+
+<p>Use <code>require('tls')</code> to access this module.</p>
+
+<p>The <code>tls</code> module uses OpenSSL to provide Transport Layer Security and/or
+Secure Socket Layer: encrypted stream communication.</p>
+
+<p>TLS/SSL is a public/private key infrastructure. Each client and each
+server must have a private key. A private key is created like this</p>
+
+<pre><code>openssl genrsa -out ryans-key.pem 1024</code></pre>
+
+<p>All severs and some clients need to have a certificate. Certificates are public
+keys signed by a Certificate Authority or self-signed. The first step to
+getting a certificate is to create a "Certificate Signing Request" (CSR)
+file. This is done with:</p>
+
+<pre><code>openssl req -new -key ryans-key.pem -out ryans-csr.pem</code></pre>
+
+<p>To create a self-signed certificate with the CSR, do this:</p>
+
+<pre><code>openssl x509 -req -in ryans-csr.pem -signkey ryans-key.pem -out ryans-cert.pem</code></pre>
+
+<p>Alternatively you can send the CSR to a Certificate Authority for signing.</p>
+
+<p>(TODO: docs on creating a CA, for now interested users should just look at
+<code>test/fixtures/keys/Makefile</code> in the Node source code)</p>
+
+<h3 id="s_tls.connect">s = tls.connect(port, [host], [options], callback)</h3>
+
+<p>Creates a new client connection to the given <code>port</code> and <code>host</code>. (If <code>host</code>
+defaults to <code>localhost</code>.) <code>options</code> should be an object which specifies</p>
+
+<ul><li><p><code>key</code>: A string or <code>Buffer</code> containing the private key of the server in
+PEM format. (Required)</p></li><li><p><code>cert</code>: A string or <code>Buffer</code> containing the certificate key of the server in
+PEM format.</p></li><li><p><code>ca</code>: An array of strings or <code>Buffer</code>s of trusted certificates. If this is
+omitted several well known "root" CAs will be used, like VeriSign.
+These are used to authorize connections.</p></li></ul>
+
+<p><code>tls.connect()</code> returns a cleartext <code>CryptoStream</code> object.</p>
+
+<p>After the TLS/SSL handshake the <code>callback</code> is called. The <code>callback</code> will be
+called no matter if the server's certificate was authorized or not. It is up
+to the user to test <code>s.authorized</code> to see if the server certificate was
+signed by one of the specified CAs. If <code>s.authorized === false</code> then the error
+can be found in <code>s.authorizationError</code>.</p>
+
+<h3 id="sTARTTLS">STARTTLS</h3>
+
+<p>In the v0.4 branch no function exists for starting a TLS session on an
+already existing TCP connection.  This is possible it just requires a bit of
+work. The technique is to use <code>tls.createSecurePair()</code> which returns two
+streams: an encrypted stream and a plaintext stream. The encrypted stream is then
+piped to the socket, the plaintext stream is what the user interacts with thereafter.</p>
+
+<p><a href="http://gist.github.com/848444">Here is some code that does it.</a></p>
+
+<h3 id="tls.Server">tls.Server</h3>
+
+<p>This class is a subclass of <code>net.Server</code> and has the same methods on it.
+Instead of accepting just raw TCP connections, this accepts encrypted
+connections using TLS or SSL.</p>
+
+<p>Here is a simple example echo server:</p>
+
+<pre><code>var tls = require('tls');
+var fs = require('fs');
+
+var options = {
+  key: fs.readFileSync('server-key.pem'),
+  cert: fs.readFileSync('server-cert.pem')
+};
+
+tls.createServer(options, function (s) {
+  s.write("welcome!\n");
+  s.pipe(s);
+}).listen(8000);</code></pre>
+
+<p>You can test this server by connecting to it with <code>openssl s_client</code>:</p>
+
+<pre><code>openssl s_client -connect 127.0.0.1:8000</code></pre>
+
+<h4 id="tls.createServer">tls.createServer(options, secureConnectionListener)</h4>
+
+<p>This is a constructor for the <code>tls.Server</code> class. The options object
+has these possibilities:</p>
+
+<ul><li><p><code>key</code>: A string or <code>Buffer</code> containing the private key of the server in
+PEM format. (Required)</p></li><li><p><code>cert</code>: A string or <code>Buffer</code> containing the certificate key of the server in
+PEM format. (Required)</p></li><li><p><code>ca</code>: An array of strings or <code>Buffer</code>s of trusted certificates. If this is
+omitted several well known "root" CAs will be used, like VeriSign.
+These are used to authorize connections.</p></li><li><p><code>requestCert</code>: If <code>true</code> the server will request a certificate from
+clients that connect and attempt to verify that certificate. Default:
+<code>false</code>.</p></li><li><p><code>rejectUnauthorized</code>: If <code>true</code> the server will reject any connection
+which is not authorized with the list of supplied CAs. This option only
+has an effect if <code>requestCert</code> is <code>true</code>. Default: <code>false</code>.</p></li></ul>
+
+<h4 id="event_secureConnection_">Event: 'secureConnection'</h4>
+
+<p><code>function (cleartextStream) {}</code></p>
+
+<p>This event is emitted after a new connection has been successfully
+handshaked. The argument is a duplex instance of <code>stream.Stream</code>. It has all
+the common stream methods and events.</p>
+
+<p><code>cleartextStream.authorized</code> is a boolean value which indicates if the
+client has verified by one of the supplied certificate authorities for the
+server. If <code>cleartextStream.authorized</code> is false, then
+<code>cleartextStream.authorizationError</code> is set to describe how authorization
+failed. Implied but worth mentioning: depending on the settings of the TLS
+server, you unauthorized connections may be accepted.</p>
+
+<h4 id="server.listen">server.listen(port, [host], [callback])</h4>
+
+<p>Begin accepting connections on the specified <code>port</code> and <code>host</code>.  If the
+<code>host</code> is omitted, the server will accept connections directed to any
+IPv4 address (<code>INADDR_ANY</code>).</p>
+
+<p>This function is asynchronous. The last parameter <code>callback</code> will be called
+when the server has been bound.</p>
+
+<p>See <code>net.Server</code> for more information.</p>
+
+<h4 id="server.close">server.close()</h4>
+
+<p>Stops the server from accepting new connections. This function is
+asynchronous, the server is finally closed when the server emits a <code>'close'</code>
+event.</p>
+
+<h4 id="server.maxConnections">server.maxConnections</h4>
+
+<p>Set this property to reject connections when the server's connection count gets high.</p>
+
+<h4 id="server.connections">server.connections</h4>
+
+<p>The number of concurrent connections on the server.</p>
+  </div>
+  <script type="text/javascript" src="assets/sh_main.js"></script>
+  <script type="text/javascript" src="assets/sh_javascript.min.js"></script>
+  <script type="text/javascript">highlight(undefined, undefined, 'pre');</script>
+</body>
+</html>

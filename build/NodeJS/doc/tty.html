@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>tty - Node.js Manual &amp; Documentation</title>
+  <link type="image/x-icon" rel="icon" href="/favicon.ico" />
+  <link type="image/x-icon" rel="shortcut icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="assets/style.css" type="text/css" media="all" />
+  <link rel="stylesheet" href="assets/sh.css" type="text/css" media="all"/>
+</head>
+<body>
+  <div id="container">
+    <header>
+      <h1>Node.js Manual &amp; Documentation</h1>
+      <div id="gtoc">
+        <p><a href="index.html">Index</a> | <a href="all.html">View on single page</a></p>
+      </div>
+      <hr />
+    </header>
+    <div id="toc"><h2>Table Of Contents</h2><ul><li><a href="#tTY">TTY</a><ul><li><a href="#tty.open">tty.open(path, args=[])</a></li><li><a href="#tty.isatty">tty.isatty(fd)</a></li><li><a href="#tty.setRawMode">tty.setRawMode(mode)</a></li><li><a href="#tty.setWindowSize">tty.setWindowSize(fd, row, col)</a></li><li><a href="#tty.getWindowSize">tty.getWindowSize(fd)</a></li></ul></li></ul><hr /></div>
+<h2 id="tTY">TTY</h2>
+
+<p>Use <code>require('tty')</code> to access this module.</p>
+
+<p>Example:</p>
+
+<pre><code>var tty = require('tty');
+tty.setRawMode(true);
+process.stdin.resume();
+process.stdin.on('keypress', function(char, key) {
+  if (key &amp;&amp; key.ctrl &amp;&amp; key.name == 'c') {
+    console.log('graceful exit');
+    process.exit()
+  }
+});</code></pre>
+
+<h3 id="tty.open">tty.open(path, args=[])</h3>
+
+<p>Spawns a new process with the executable pointed to by <code>path</code> as the session
+leader to a new pseudo terminal.</p>
+
+<p>Returns an array <code>[slaveFD, childProcess]</code>. <code>slaveFD</code> is the file descriptor
+of the slave end of the pseudo terminal. <code>childProcess</code> is a child process
+object.</p>
+
+<h3 id="tty.isatty">tty.isatty(fd)</h3>
+
+<p>Returns <code>true</code> or <code>false</code> depending on if the <code>fd</code> is associated with a
+terminal.</p>
+
+<h3 id="tty.setRawMode">tty.setRawMode(mode)</h3>
+
+<p><code>mode</code> should be <code>true</code> or <code>false</code>. This sets the properties of the current
+process's stdin fd to act either as a raw device or default.</p>
+
+<h3 id="tty.setWindowSize">tty.setWindowSize(fd, row, col)</h3>
+
+<p><code>ioctl</code>s the window size settings to the file descriptor.</p>
+
+<h3 id="tty.getWindowSize">tty.getWindowSize(fd)</h3>
+
+<p>Returns <code>[row, col]</code> for the TTY associated with the file descriptor.</p>
+  </div>
+  <script type="text/javascript" src="assets/sh_main.js"></script>
+  <script type="text/javascript" src="assets/sh_javascript.min.js"></script>
+  <script type="text/javascript">highlight(undefined, undefined, 'pre');</script>
+</body>
+</html>
