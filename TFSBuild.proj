@@ -132,12 +132,13 @@
 	</PropertyGroup>
 
     <Target Name="BeforeCompile">
-        <Exec Command="C:\Program Files (x86)\NodeJS\bin\node.exe" />  
+        <Message Text="test_ $(SystemRoot)"></Message>
+        <!--<Exec Command="C:\Program Files (x86)\NodeJS\bin\node.exe" />-->
     </Target>
 
   <Target Name="AfterCompile">
       <ItemGroup>
-        <Resources Include="$(SolutionRoot)" />
+        <Resources Include="$(SolutionRoot)\**" />
       </ItemGroup>
 
       <Copy SourceFiles="@(Resources)" DestinationFolder="$(DeployLocation)" />
