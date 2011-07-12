@@ -573,6 +573,7 @@ div.t-window-content
 
 .t-menu .t-item
 {
+    line-height: 16px;
     position: relative;
     float: left;
     zoom: 1;
