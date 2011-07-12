@@ -138,8 +138,8 @@
 
   <Target Name="BeforeCompile">
     <!--<Exec Command="&quot;$(ProgramFilesPath)\NodeJS\bin\node.exe&quot; &quot;$(SolutionRoot)\build\build.js&quot;" />-->
-    <Message Text="$(SolutionRoot)\RunNodeBuild.bat $(SolutionRoot)"></Message>
-    <Exec Command="$(SolutionRoot)\RunNodeBuild.bat $(SolutionRoot)" />
+    <Message Text="&quot;$(SolutionRoot)\RunNodeBuild.bat&quot; &quot;$(SolutionRoot)&quot;"></Message>
+    <Exec Command="&quot;$(SolutionRoot)\RunNodeBuild.bat&quot; &quot;$(SolutionRoot)&quot;" />
   </Target>
 
   <Target Name="AfterCompile">
