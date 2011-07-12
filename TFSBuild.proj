@@ -137,7 +137,7 @@
   </PropertyGroup>
 
   <Target Name="BeforeCompile">
-    <Exec Command="&quot;$(ProgramFilesPath)\NodeJS\bin\node.exe $(SolutionRoot)\build\build.js&quot;" />
+    <Exec Command="&quot;$(ProgramFilesPath)\NodeJS\bin\node.exe&quot;" />
   </Target>
 
   <Target Name="AfterCompile">
