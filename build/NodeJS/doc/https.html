@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>https - Node.js Manual &amp; Documentation</title>
+  <link type="image/x-icon" rel="icon" href="/favicon.ico" />
+  <link type="image/x-icon" rel="shortcut icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="assets/style.css" type="text/css" media="all" />
+  <link rel="stylesheet" href="assets/sh.css" type="text/css" media="all"/>
+</head>
+<body>
+  <div id="container">
+    <header>
+      <h1>Node.js Manual &amp; Documentation</h1>
+      <div id="gtoc">
+        <p><a href="index.html">Index</a> | <a href="all.html">View on single page</a></p>
+      </div>
+      <hr />
+    </header>
+    <div id="toc"><h2>Table Of Contents</h2><ul><li><a href="#hTTPS">HTTPS</a></li><li><a href="#https.Server">https.Server</a></li><li><a href="#https.createServer">https.createServer(options, [requestListener])</a></li><li><a href="#https.request">https.request(options, callback)</a></li><li><a href="#https.get">https.get(options, callback)</a></li></ul><hr /></div>
+<h2 id="hTTPS">HTTPS</h2>
+
+<p>HTTPS is the HTTP protocol over TLS/SSL. In Node this is implemented as a
+separate module.</p>
+
+<h2 id="https.Server">https.Server</h2>
+
+<p>This class is a subclass of <code>tls.Server</code> and emits events same as
+<code>http.Server</code>. See <code>http.Server</code> for more information.</p>
+
+<h2 id="https.createServer">https.createServer(options, [requestListener])</h2>
+
+<p>Returns a new HTTPS web server object. The <code>options</code> is similer to
+<code>tls.createServer()</code>. The <code>requestListener</code> is a function which is
+automatically added to the <code>'request'</code> event.</p>
+
+<p>Example:</p>
+
+<pre><code>// curl -k https://localhost:8000/
+var https = require('https');
+var fs = require('fs');
+
+var options = {
+  key: fs.readFileSync('test/fixtures/keys/agent2-key.pem'),
+  cert: fs.readFileSync('test/fixtures/keys/agent2-cert.pem')
+};
+
+https.createServer(options, function (req, res) {
+  res.writeHead(200);
+  res.end("hello world\n");
+}).listen(8000);</code></pre>
+
+<h2 id="https.request">https.request(options, callback)</h2>
+
+<p>Makes a request to a secure web server.
+Similar options to <code>http.request()</code>.</p>
+
+<p>Example:</p>
+
+<pre><code>var https = require('https');
+
+var options = {
+  host: 'encrypted.google.com',
+  port: 443,
+  path: '/',
+  method: 'GET'
+};
+
+var req = https.request(options, function(res) {
+  console.log("statusCode: ", res.statusCode);
+  console.log("headers: ", res.headers);
+
+  res.on('data', function(d) {
+    process.stdout.write(d);
+  });
+});
+req.end();
+
+req.on('error', function(e) {
+  console.error(e);
+});</code></pre>
+
+<p>The options argument has the following options</p>
+
+<ul><li>host: IP or domain of host to make request to. Defaults to <code>'localhost'</code>.</li><li>port: port of host to request to. Defaults to 443.</li><li>path: Path to request. Default <code>'/'</code>.</li><li>method: HTTP request method. Default <code>'GET'</code>.</li><li>key: Private key to use for SSL. Default <code>null</code>.</li><li>cert: Public x509 certificate to use. Default <code>null</code>.</li><li>ca: An authority certificate or array of authority certificates to check
+the remote host against.</li></ul>
+
+<h2 id="https.get">https.get(options, callback)</h2>
+
+<p>Like <code>http.get()</code> but for HTTPS.</p>
+
+<p>Example:</p>
+
+<pre><code>var https = require('https');
+
+https.get({ host: 'encrypted.google.com', path: '/' }, function(res) {
+  console.log("statusCode: ", res.statusCode);
+  console.log("headers: ", res.headers);
+
+  res.on('data', function(d) {
+    process.stdout.write(d);
+  });
+
+}).on('error', function(e) {
+  console.error(e);
+});</code></pre>
+  </div>
+  <script type="text/javascript" src="assets/sh_main.js"></script>
+  <script type="text/javascript" src="assets/sh_javascript.min.js"></script>
+  <script type="text/javascript">highlight(undefined, undefined, 'pre');</script>
+</body>
+</html>

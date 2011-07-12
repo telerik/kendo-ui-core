@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>url - Node.js Manual &amp; Documentation</title>
+  <link type="image/x-icon" rel="icon" href="/favicon.ico" />
+  <link type="image/x-icon" rel="shortcut icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="assets/style.css" type="text/css" media="all" />
+  <link rel="stylesheet" href="assets/sh.css" type="text/css" media="all"/>
+</head>
+<body>
+  <div id="container">
+    <header>
+      <h1>Node.js Manual &amp; Documentation</h1>
+      <div id="gtoc">
+        <p><a href="index.html">Index</a> | <a href="all.html">View on single page</a></p>
+      </div>
+      <hr />
+    </header>
+    <div id="toc"><h2>Table Of Contents</h2><ul><li><a href="#uRL">URL</a><ul><li><a href="#url.parse">url.parse(urlStr, parseQueryString=false)</a></li><li><a href="#url.format">url.format(urlObj)</a></li><li><a href="#url.resolve">url.resolve(from, to)</a></li></ul></li></ul><hr /></div>
+<h2 id="uRL">URL</h2>
+
+<p>This module has utilities for URL resolution and parsing.
+Call <code>require('url')</code> to use it.</p>
+
+<p>Parsed URL objects have some or all of the following fields, depending on
+whether or not they exist in the URL string. Any parts that are not in the URL
+string will not be in the parsed object. Examples are shown for the URL</p>
+
+<p><code>'http://user:pass@host.com:8080/p/a/t/h?query=string#hash'</code></p>
+
+<ul><li><p><code>href</code>: The full URL that was originally parsed.</p><p>Example: <code>'http://user:pass@host.com:8080/p/a/t/h?query=string#hash'</code></p></li><li><p><code>protocol</code>: The request protocol.</p><p>Example: <code>'http:'</code></p></li><li><p><code>host</code>: The full host portion of the URL, including port and authentication information.</p><p>Example: <code>'user:pass@host.com:8080'</code></p></li><li><p><code>auth</code>: The authentication information portion of a URL.</p><p>Example: <code>'user:pass'</code></p></li><li><p><code>hostname</code>: Just the hostname portion of the host.</p><p>Example: <code>'host.com'</code></p></li><li><p><code>port</code>: The port number portion of the host.</p><p>Example: <code>'8080'</code></p></li><li><p><code>pathname</code>: The path section of the URL, that comes after the host and before the query, including the initial slash if present.</p><p>Example: <code>'/p/a/t/h'</code></p></li><li><p><code>search</code>: The 'query string' portion of the URL, including the leading question mark.</p><p>Example: <code>'?query=string'</code></p></li><li><p><code>query</code>: Either the 'params' portion of the query string, or a querystring-parsed object.</p><p>Example: <code>'query=string'</code> or <code>{'query':'string'}</code></p></li><li><p><code>hash</code>: The 'fragment' portion of the URL including the pound-sign.</p><p>Example: <code>'#hash'</code></p></li></ul>
+
+<p>The following methods are provided by the URL module:</p>
+
+<h3 id="url.parse">url.parse(urlStr, parseQueryString=false)</h3>
+
+<p>Take a URL string, and return an object.  Pass <code>true</code> as the second argument to also parse
+the query string using the <code>querystring</code> module.</p>
+
+<h3 id="url.format">url.format(urlObj)</h3>
+
+<p>Take a parsed URL object, and return a formatted URL string.</p>
+
+<h3 id="url.resolve">url.resolve(from, to)</h3>
+
+<p>Take a base URL, and a href URL, and resolve them as a browser would for an anchor tag.</p>
+  </div>
+  <script type="text/javascript" src="assets/sh_main.js"></script>
+  <script type="text/javascript" src="assets/sh_javascript.min.js"></script>
+  <script type="text/javascript">highlight(undefined, undefined, 'pre');</script>
+</body>
+</html>

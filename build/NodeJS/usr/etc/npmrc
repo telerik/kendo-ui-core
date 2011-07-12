@@ -1,0 +1,4 @@
+loglevel = info
+unsafe-perm = true
+root = /lib
+binroot = /bin

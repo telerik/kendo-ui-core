@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>http - Node.js Manual &amp; Documentation</title>
+  <link type="image/x-icon" rel="icon" href="/favicon.ico" />
+  <link type="image/x-icon" rel="shortcut icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="assets/style.css" type="text/css" media="all" />
+  <link rel="stylesheet" href="assets/sh.css" type="text/css" media="all"/>
+</head>
+<body>
+  <div id="container">
+    <header>
+      <h1>Node.js Manual &amp; Documentation</h1>
+      <div id="gtoc">
+        <p><a href="index.html">Index</a> | <a href="all.html">View on single page</a></p>
+      </div>
+      <hr />
+    </header>
+    <div id="toc"><h2>Table Of Contents</h2><ul><li><a href="#hTTP">HTTP</a></li><li><a href="#http.Server">http.Server</a><ul><li><a href="#event_request_">Event: 'request'</a></li><li><a href="#event_connection_">Event: 'connection'</a></li><li><a href="#event_close_">Event: 'close'</a></li><li><a href="#event_checkContinue_">Event: 'checkContinue'</a></li><li><a href="#event_upgrade_">Event: 'upgrade'</a></li><li><a href="#event_clientError_">Event: 'clientError'</a></li><li><a href="#http.createServer">http.createServer([requestListener])</a></li><li><a href="#server.listen">server.listen(port, [hostname], [callback])</a></li><li><a href="#server.listen">server.listen(path, [callback])</a></li><li><a href="#server.close">server.close()</a></li></ul></li><li><a href="#http.ServerRequest">http.ServerRequest</a><ul><li><a href="#event_data_">Event: 'data'</a></li><li><a href="#event_end_">Event: 'end'</a></li><li><a href="#event_close_">Event: 'close'</a></li><li><a href="#request.method">request.method</a></li><li><a href="#request.url">request.url</a></li><li><a href="#request.headers">request.headers</a></li><li><a href="#request.trailers">request.trailers</a></li><li><a href="#request.httpVersion">request.httpVersion</a></li><li><a href="#request.setEncoding">request.setEncoding(encoding=null)</a></li><li><a href="#request.pause">request.pause()</a></li><li><a href="#request.resume">request.resume()</a></li><li><a href="#request.connection">request.connection</a></li></ul></li><li><a href="#http.ServerResponse">http.ServerResponse</a><ul><li><a href="#response.writeContinue">response.writeContinue()</a></li><li><a href="#response.writeHead">response.writeHead(statusCode, [reasonPhrase], [headers])</a></li><li><a href="#response.statusCode">response.statusCode</a></li><li><a href="#response.setHeader">response.setHeader(name, value)</a></li><li><a href="#response.getHeader">response.getHeader(name)</a></li><li><a href="#response.removeHeader">response.removeHeader(name)</a></li><li><a href="#response.write">response.write(chunk, encoding='utf8')</a></li><li><a href="#response.addTrailers">response.addTrailers(headers)</a></li><li><a href="#response.end">response.end([data], [encoding])</a></li></ul></li><li><a href="#http.request">http.request(options, callback)</a></li><li><a href="#http.get">http.get(options, callback)</a></li><li><a href="#http.Agent">http.Agent</a></li><li><a href="#http.getAgent">http.getAgent(host, port)</a><ul><li><a href="#event_upgrade_">Event: 'upgrade'</a></li><li><a href="#event_continue_">Event: 'continue'</a></li><li><a href="#agent.maxSockets">agent.maxSockets</a></li><li><a href="#agent.sockets">agent.sockets</a></li><li><a href="#agent.queue">agent.queue</a></li></ul></li><li><a href="#http.ClientRequest">http.ClientRequest</a><ul><li><a href="#event_response_">Event 'response'</a></li><li><a href="#request.write">request.write(chunk, encoding='utf8')</a></li><li><a href="#request.end">request.end([data], [encoding])</a></li><li><a href="#request.abort">request.abort()</a></li></ul></li><li><a href="#http.ClientResponse">http.ClientResponse</a><ul><li><a href="#event_data_">Event: 'data'</a></li><li><a href="#event_end_">Event: 'end'</a></li><li><a href="#response.statusCode">response.statusCode</a></li><li><a href="#response.httpVersion">response.httpVersion</a></li><li><a href="#response.headers">response.headers</a></li><li><a href="#response.trailers">response.trailers</a></li><li><a href="#response.setEncoding">response.setEncoding(encoding=null)</a></li><li><a href="#response.pause">response.pause()</a></li><li><a href="#response.resume">response.resume()</a></li></ul></li></ul><hr /></div>
+<h2 id="hTTP">HTTP</h2>
+
+<p>To use the HTTP server and client one must <code>require('http')</code>.</p>
+
+<p>The HTTP interfaces in Node are designed to support many features
+of the protocol which have been traditionally difficult to use.
+In particular, large, possibly chunk-encoded, messages. The interface is
+careful to never buffer entire requests or responses--the
+user is able to stream data.</p>
+
+<p>HTTP message headers are represented by an object like this:</p>
+
+<pre><code>{ 'content-length': '123',
+  'content-type': 'text/plain',
+  'connection': 'keep-alive',
+  'accept': '*/*' }</code></pre>
+
+<p>Keys are lowercased. Values are not modified.</p>
+
+<p>In order to support the full spectrum of possible HTTP applications, Node's
+HTTP API is very low-level. It deals with stream handling and message
+parsing only. It parses a message into headers and body but it does not
+parse the actual headers or the body.</p>
+
+<h2 id="http.Server">http.Server</h2>
+
+<p>This is an <code>EventEmitter</code> with the following events:</p>
+
+<h3 id="event_request_">Event: 'request'</h3>
+
+<p><code>function (request, response) { }</code></p>
+
+<p>Emitted each time there is request. Note that there may be multiple requests
+per connection (in the case of keep-alive connections).
+ <code>request</code> is an instance of <code>http.ServerRequest</code> and <code>response</code> is
+ an instance of <code>http.ServerResponse</code></p>
+
+<h3 id="event_connection_">Event: 'connection'</h3>
+
+<p><code>function (stream) { }</code></p>
+
+<p> When a new TCP stream is established. <code>stream</code> is an object of type
+ <code>net.Stream</code>. Usually users will not want to access this event. The
+ <code>stream</code> can also be accessed at <code>request.connection</code>.</p>
+
+<h3 id="event_close_">Event: 'close'</h3>
+
+<p><code>function (errno) { }</code></p>
+
+<p> Emitted when the server closes.</p>
+
+<h3 id="event_checkContinue_">Event: 'checkContinue'</h3>
+
+<p><code>function (request, response) {}</code></p>
+
+<p>Emitted each time a request with an http Expect: 100-continue is received.
+If this event isn't listened for, the server will automatically respond
+with a 100 Continue as appropriate.</p>
+
+<p>Handling this event involves calling <code>response.writeContinue</code> if the client
+should continue to send the request body, or generating an appropriate HTTP
+response (e.g., 400 Bad Request) if the client should not continue to send the
+request body.</p>
+
+<p>Note that when this event is emitted and handled, the <code>request</code> event will
+not be emitted.</p>
+
+<h3 id="event_upgrade_">Event: 'upgrade'</h3>
+
+<p><code>function (request, socket, head)</code></p>
+
+<p>Emitted each time a client requests a http upgrade. If this event isn't
+listened for, then clients requesting an upgrade will have their connections
+closed.</p>
+
+<ul><li><code>request</code> is the arguments for the http request, as it is in the request event.</li><li><code>socket</code> is the network socket between the server and client.</li><li><code>head</code> is an instance of Buffer, the first packet of the upgraded stream, this may be empty.</li></ul>
+
+<p>After this event is emitted, the request's socket will not have a <code>data</code>
+event listener, meaning you will need to bind to it in order to handle data
+sent to the server on that socket.</p>
+
+<h3 id="event_clientError_">Event: 'clientError'</h3>
+
+<p><code>function (exception) {}</code></p>
+
+<p>If a client connection emits an 'error' event - it will forwarded here.</p>
+
+<h3 id="http.createServer">http.createServer([requestListener])</h3>
+
+<p>Returns a new web server object.</p>
+
+<p>The <code>requestListener</code> is a function which is automatically
+added to the <code>'request'</code> event.</p>
+
+<h3 id="server.listen">server.listen(port, [hostname], [callback])</h3>
+
+<p>Begin accepting connections on the specified port and hostname.  If the
+hostname is omitted, the server will accept connections directed to any
+IPv4 address (<code>INADDR_ANY</code>).</p>
+
+<p>To listen to a unix socket, supply a filename instead of port and hostname.</p>
+
+<p>This function is asynchronous. The last parameter <code>callback</code> will be called
+when the server has been bound to the port.</p>
+
+<h3 id="server.listen">server.listen(path, [callback])</h3>
+
+<p>Start a UNIX socket server listening for connections on the given <code>path</code>.</p>
+
+<p>This function is asynchronous. The last parameter <code>callback</code> will be called
+when the server has been bound.</p>
+
+<h3 id="server.close">server.close()</h3>
+
+<p>Stops the server from accepting new connections.</p>
+
+<h2 id="http.ServerRequest">http.ServerRequest</h2>
+
+<p>This object is created internally by a HTTP server -- not by
+the user -- and passed as the first argument to a <code>'request'</code> listener.</p>
+
+<p>This is an <code>EventEmitter</code> with the following events:</p>
+
+<h3 id="event_data_">Event: 'data'</h3>
+
+<p><code>function (chunk) { }</code></p>
+
+<p>Emitted when a piece of the message body is received.</p>
+
+<p>Example: A chunk of the body is given as the single
+argument. The transfer-encoding has been decoded.  The
+body chunk is a string.  The body encoding is set with
+<code>request.setEncoding()</code>.</p>
+
+<h3 id="event_end_">Event: 'end'</h3>
+
+<p><code>function () { }</code></p>
+
+<p>Emitted exactly once for each request. After that, no more <code>'data'</code> events
+will be emitted on the request.</p>
+
+<h3 id="event_close_">Event: 'close'</h3>
+
+<p><code>function (err) { }</code></p>
+
+<p>Indicates that the underlaying connection was terminated before
+<code>response.end()</code> was called or able to flush.</p>
+
+<p>The <code>err</code> parameter is always present and indicates the reason for the timeout:</p>
+
+<p><code>err.code === 'timeout'</code> indicates that the underlaying connection timed out.
+This may happen because all incoming connections have a default timeout of 2
+minutes.</p>
+
+<p><code>err.code === 'aborted'</code> means that the client has closed the underlaying
+connection prematurely.</p>
+
+<p>Just like <code>'end'</code>, this event occurs only once per request, and no more <code>'data'</code>
+events will fire afterwards.</p>
+
+<p>Note: <code>'close'</code> can fire after <code>'end'</code>, but not vice versa.</p>
+
+<h3 id="request.method">request.method</h3>
+
+<p>The request method as a string. Read only. Example:
+<code>'GET'</code>, <code>'DELETE'</code>.</p>
+
+<h3 id="request.url">request.url</h3>
+
+<p>Request URL string. This contains only the URL that is
+present in the actual HTTP request. If the request is:</p>
+
+<pre><code>GET /status?name=ryan HTTP/1.1\r\n
+Accept: text/plain\r\n
+\r\n</code></pre>
+
+<p>Then <code>request.url</code> will be:</p>
+
+<pre><code>'/status?name=ryan'</code></pre>
+
+<p>If you would like to parse the URL into its parts, you can use
+<code>require('url').parse(request.url)</code>.  Example:</p>
+
+<pre><code>node&gt; require('url').parse('/status?name=ryan')
+{ href: '/status?name=ryan',
+  search: '?name=ryan',
+  query: 'name=ryan',
+  pathname: '/status' }</code></pre>
+
+<p>If you would like to extract the params from the query string,
+you can use the <code>require('querystring').parse</code> function, or pass
+<code>true</code> as the second argument to <code>require('url').parse</code>.  Example:</p>
+
+<pre><code>node&gt; require('url').parse('/status?name=ryan', true)
+{ href: '/status?name=ryan',
+  search: '?name=ryan',
+  query: { name: 'ryan' },
+  pathname: '/status' }</code></pre>
+
+<h3 id="request.headers">request.headers</h3>
+
+<p>Read only.</p>
+
+<h3 id="request.trailers">request.trailers</h3>
+
+<p>Read only; HTTP trailers (if present). Only populated after the 'end' event.</p>
+
+<h3 id="request.httpVersion">request.httpVersion</h3>
+
+<p>The HTTP protocol version as a string. Read only. Examples:
+<code>'1.1'</code>, <code>'1.0'</code>.
+Also <code>request.httpVersionMajor</code> is the first integer and
+<code>request.httpVersionMinor</code> is the second.</p>
+
+<h3 id="request.setEncoding">request.setEncoding(encoding=null)</h3>
+
+<p>Set the encoding for the request body. Either <code>'utf8'</code> or <code>'binary'</code>. Defaults
+to <code>null</code>, which means that the <code>'data'</code> event will emit a <code>Buffer</code> object..</p>
+
+<h3 id="request.pause">request.pause()</h3>
+
+<p>Pauses request from emitting events.  Useful to throttle back an upload.</p>
+
+<h3 id="request.resume">request.resume()</h3>
+
+<p>Resumes a paused request.</p>
+
+<h3 id="request.connection">request.connection</h3>
+
+<p>The <code>net.Stream</code> object associated with the connection.</p>
+
+<p>With HTTPS support, use request.connection.verifyPeer() and
+request.connection.getPeerCertificate() to obtain the client's
+authentication details.</p>
+
+<h2 id="http.ServerResponse">http.ServerResponse</h2>
+
+<p>This object is created internally by a HTTP server--not by the user. It is
+passed as the second parameter to the <code>'request'</code> event. It is a <code>Writable Stream</code>.</p>
+
+<h3 id="response.writeContinue">response.writeContinue()</h3>
+
+<p>Sends a HTTP/1.1 100 Continue message to the client, indicating that
+the request body should be sent. See the <a href="#event_checkContinue_">checkContinue</a> event on
+<code>Server</code>.</p>
+
+<h3 id="response.writeHead">response.writeHead(statusCode, [reasonPhrase], [headers])</h3>
+
+<p>Sends a response header to the request. The status code is a 3-digit HTTP
+status code, like <code>404</code>. The last argument, <code>headers</code>, are the response headers.
+Optionally one can give a human-readable <code>reasonPhrase</code> as the second
+argument.</p>
+
+<p>Example:</p>
+
+<pre><code>var body = 'hello world';
+response.writeHead(200, {
+  'Content-Length': body.length,
+  'Content-Type': 'text/plain' });</code></pre>
+
+<p>This method must only be called once on a message and it must
+be called before <code>response.end()</code> is called.</p>
+
+<p>If you call <code>response.write()</code> or <code>response.end()</code> before calling this, the
+implicit/mutable headers will be calculated and call this function for you.</p>
+
+<p>Note: that Content-Length is given in bytes not characters. The above example
+works because the string <code>'hello world'</code> contains only single byte characters.
+If the body contains higher coded characters then <code>Buffer.byteLength()</code>
+should be used to determine the number of bytes in a given encoding.</p>
+
+<h3 id="response.statusCode">response.statusCode</h3>
+
+<p>When using implicit headers (not calling <code>response.writeHead()</code> explicitly), this property
+controls the status code that will be send to the client when the headers get
+flushed.</p>
+
+<p>Example:</p>
+
+<pre><code>response.statusCode = 404;</code></pre>
+
+<h3 id="response.setHeader">response.setHeader(name, value)</h3>
+
+<p>Sets a single header value for implicit headers.  If this header already exists
+in the to-be-sent headers, it's value will be replaced.  Use an array of strings
+here if you need to send multiple headers with the same name.</p>
+
+<p>Example:</p>
+
+<pre><code>response.setHeader("Content-Type", "text/html");</code></pre>
+
+<p>or</p>
+
+<pre><code>response.setHeader("Set-Cookie", ["type=ninja", "language=javascript"]);</code></pre>
+
+<h3 id="response.getHeader">response.getHeader(name)</h3>
+
+<p>Reads out a header that's already been queued but not sent to the client.  Note
+that the name is case insensitive.  This can only be called before headers get
+implicitly flushed.</p>
+
+<p>Example:</p>
+
+<pre><code>var contentType = response.getHeader('content-type');</code></pre>
+
+<h3 id="response.removeHeader">response.removeHeader(name)</h3>
+
+<p>Removes a header that's queued for implicit sending.</p>
+
+<p>Example:</p>
+
+<pre><code>response.removeHeader("Content-Encoding");</code></pre>
+
+<h3 id="response.write">response.write(chunk, encoding='utf8')</h3>
+
+<p>If this method is called and <code>response.writeHead()</code> has not been called, it will
+switch to implicit header mode and flush the implicit headers.</p>
+
+<p>This sends a chunk of the response body. This method may
+be called multiple times to provide successive parts of the body.</p>
+
+<p><code>chunk</code> can be a string or a buffer. If <code>chunk</code> is a string,
+the second parameter specifies how to encode it into a byte stream.
+By default the <code>encoding</code> is <code>'utf8'</code>.</p>
+
+<p><strong>Note</strong>: This is the raw HTTP body and has nothing to do with
+higher-level multi-part body encodings that may be used.</p>
+
+<p>The first time <code>response.write()</code> is called, it will send the buffered
+header information and the first body to the client. The second time
+<code>response.write()</code> is called, Node assumes you're going to be streaming
+data, and sends that separately. That is, the response is buffered up to the
+first chunk of body.</p>
+
+<h3 id="response.addTrailers">response.addTrailers(headers)</h3>
+
+<p>This method adds HTTP trailing headers (a header but at the end of the
+message) to the response.</p>
+
+<p>Trailers will <strong>only</strong> be emitted if chunked encoding is used for the
+response; if it is not (e.g., if the request was HTTP/1.0), they will
+be silently discarded.</p>
+
+<p>Note that HTTP requires the <code>Trailer</code> header to be sent if you intend to
+emit trailers, with a list of the header fields in its value. E.g.,</p>
+
+<pre><code>response.writeHead(200, { 'Content-Type': 'text/plain',
+                          'Trailer': 'TraceInfo' });
+response.write(fileData);
+response.addTrailers({'Content-MD5': "7895bf4b8828b55ceaf47747b4bca667"});
+response.end();</code></pre>
+
+<h3 id="response.end">response.end([data], [encoding])</h3>
+
+<p>This method signals to the server that all of the response headers and body
+has been sent; that server should consider this message complete.
+The method, <code>response.end()</code>, MUST be called on each
+response.</p>
+
+<p>If <code>data</code> is specified, it is equivalent to calling <code>response.write(data, encoding)</code>
+followed by <code>response.end()</code>.</p>
+
+<h2 id="http.request">http.request(options, callback)</h2>
+
+<p>Node maintains several connections per server to make HTTP requests.
+This function allows one to transparently issue requests.</p>
+
+<p>Options:</p>
+
+<ul><li><code>host</code>: A domain name or IP address of the server to issue the request to.</li><li><code>port</code>: Port of remote server.</li><li><code>method</code>: A string specifying the HTTP request method. Possible values:
+<code>'GET'</code> (default), <code>'POST'</code>, <code>'PUT'</code>, and <code>'DELETE'</code>.</li><li><code>path</code>: Request path. Should include query string and fragments if any.
+E.G. <code>'/index.html?page=12'</code></li><li><code>headers</code>: An object containing request headers.</li></ul>
+
+<p><code>http.request()</code> returns an instance of the <code>http.ClientRequest</code>
+class. The <code>ClientRequest</code> instance is a writable stream. If one needs to
+upload a file with a POST request, then write to the <code>ClientRequest</code> object.</p>
+
+<p>Example:</p>
+
+<pre><code>var options = {
+  host: 'www.google.com',
+  port: 80,
+  path: '/upload',
+  method: 'POST'
+};
+
+var req = http.request(options, function(res) {
+  console.log('STATUS: ' + res.statusCode);
+  console.log('HEADERS: ' + JSON.stringify(res.headers));
+  res.setEncoding('utf8');
+  res.on('data', function (chunk) {
+    console.log('BODY: ' + chunk);
+  });
+});
+
+req.on('error', function(e) {
+  console.log('problem with request: ' + e.message);
+});
+
+// write data to request body
+req.write('data\n');
+req.write('data\n');
+req.end();</code></pre>
+
+<p>Note that in the example <code>req.end()</code> was called. With <code>http.request()</code> one
+must always call <code>req.end()</code> to signify that you're done with the request -
+even if there is no data being written to the request body.</p>
+
+<p>If any error is encountered during the request (be that with DNS resolution,
+TCP level errors, or actual HTTP parse errors) an <code>'error'</code> event is emitted
+on the returned request object.</p>
+
+<p>There are a few special headers that should be noted.</p>
+
+<ul><li><p>Sending a 'Connection: keep-alive' will notify Node that the connection to
+the server should be persisted until the next request.</p></li><li><p>Sending a 'Content-length' header will disable the default chunked encoding.</p></li><li><p>Sending an 'Expect' header will immediately send the request headers.
+Usually, when sending 'Expect: 100-continue', you should both set a timeout
+and listen for the <code>continue</code> event. See RFC2616 Section 8.2.3 for more
+information.</p></li></ul>
+
+<h2 id="http.get">http.get(options, callback)</h2>
+
+<p>Since most requests are GET requests without bodies, Node provides this
+convenience method. The only difference between this method and <code>http.request()</code> is
+that it sets the method to GET and calls <code>req.end()</code> automatically.</p>
+
+<p>Example:</p>
+
+<pre><code>var options = {
+  host: 'www.google.com',
+  port: 80,
+  path: '/index.html'
+};
+
+http.get(options, function(res) {
+  console.log("Got response: " + res.statusCode);
+}).on('error', function(e) {
+  console.log("Got error: " + e.message);
+});</code></pre>
+
+<h2 id="http.Agent">http.Agent</h2>
+
+<h2 id="http.getAgent">http.getAgent(host, port)</h2>
+
+<p><code>http.request()</code> uses a special <code>Agent</code> for managing multiple connections to
+an HTTP server. Normally <code>Agent</code> instances should not be exposed to user
+code, however in certain situations it's useful to check the status of the
+agent. The <code>http.getAgent()</code> function allows you to access the agents.</p>
+
+<h3 id="event_upgrade_">Event: 'upgrade'</h3>
+
+<p><code>function (response, socket, head)</code></p>
+
+<p>Emitted each time a server responds to a request with an upgrade. If this
+event isn't being listened for, clients receiving an upgrade header will have
+their connections closed.</p>
+
+<p>A client server pair that show you how to listen for the <code>upgrade</code> event using <code>http.getAgent</code>:</p>
+
+<pre><code>var http = require('http');
+var net = require('net');
+
+// Create an HTTP server
+var srv = http.createServer(function (req, res) {
+  res.writeHead(200, {'Content-Type': 'text/plain'});
+  res.end('okay');
+});
+srv.on('upgrade', function(req, socket, upgradeHead) {
+  socket.write('HTTP/1.1 101 Web Socket Protocol Handshake\r\n' +
+               'Upgrade: WebSocket\r\n' +
+               'Connection: Upgrade\r\n' +
+               '\r\n\r\n');
+
+  socket.ondata = function(data, start, end) {
+    socket.write(data.toString('utf8', start, end), 'utf8'); // echo back
+  };
+});
+
+// now that server is running
+srv.listen(1337, '127.0.0.1', function() {
+
+  // make a request
+  var agent = http.getAgent('127.0.0.1', 1337);
+
+  var options = {
+    agent: agent,
+    port: 1337,
+    host: '127.0.0.1',
+    headers: {
+      'Connection': 'Upgrade',
+      'Upgrade': 'websocket'
+    }
+  };
+
+  var req = http.request(options);
+  req.end();
+
+  agent.on('upgrade', function(res, socket, upgradeHead) {
+    console.log('got upgraded!');
+    socket.end();
+    process.exit(0);
+  });
+});</code></pre>
+
+<h3 id="event_continue_">Event: 'continue'</h3>
+
+<p><code>function ()</code></p>
+
+<p>Emitted when the server sends a '100 Continue' HTTP response, usually because
+the request contained 'Expect: 100-continue'. This is an instruction that
+the client should send the request body.</p>
+
+<h3 id="agent.maxSockets">agent.maxSockets</h3>
+
+<p>By default set to 5. Determines how many concurrent sockets the agent can have open.</p>
+
+<h3 id="agent.sockets">agent.sockets</h3>
+
+<p>An array of sockets currently in use by the Agent. Do not modify.</p>
+
+<h3 id="agent.queue">agent.queue</h3>
+
+<p>A queue of requests waiting to be sent to sockets.</p>
+
+<h2 id="http.ClientRequest">http.ClientRequest</h2>
+
+<p>This object is created internally and returned from <code>http.request()</code>.  It
+represents an <em>in-progress</em> request whose header has already been queued.  The
+header is still mutable using the <code>setHeader(name, value)</code>, <code>getHeader(name)</code>,
+<code>removeHeader(name)</code> API.  The actual header will be sent along with the first
+data chunk or when closing the connection.</p>
+
+<p>To get the response, add a listener for <code>'response'</code> to the request object.
+<code>'response'</code> will be emitted from the request object when the response
+headers have been received.  The <code>'response'</code> event is executed with one
+argument which is an instance of <code>http.ClientResponse</code>.</p>
+
+<p>During the <code>'response'</code> event, one can add listeners to the
+response object; particularly to listen for the <code>'data'</code> event. Note that
+the <code>'response'</code> event is called before any part of the response body is received,
+so there is no need to worry about racing to catch the first part of the
+body. As long as a listener for <code>'data'</code> is added during the <code>'response'</code>
+event, the entire body will be caught.</p>
+
+<pre><code>// Good
+request.on('response', function (response) {
+  response.on('data', function (chunk) {
+    console.log('BODY: ' + chunk);
+  });
+});
+
+// Bad - misses all or part of the body
+request.on('response', function (response) {
+  setTimeout(function () {
+    response.on('data', function (chunk) {
+      console.log('BODY: ' + chunk);
+    });
+  }, 10);
+});</code></pre>
+
+<p>This is a <code>Writable Stream</code>.</p>
+
+<p>This is an <code>EventEmitter</code> with the following events:</p>
+
+<h3 id="event_response_">Event 'response'</h3>
+
+<p><code>function (response) { }</code></p>
+
+<p>Emitted when a response is received to this request. This event is emitted only once. The
+<code>response</code> argument will be an instance of <code>http.ClientResponse</code>.</p>
+
+<h3 id="request.write">request.write(chunk, encoding='utf8')</h3>
+
+<p>Sends a chunk of the body.  By calling this method
+many times, the user can stream a request body to a
+server--in that case it is suggested to use the
+<code>['Transfer-Encoding', 'chunked']</code> header line when
+creating the request.</p>
+
+<p>The <code>chunk</code> argument should be an array of integers
+or a string.</p>
+
+<p>The <code>encoding</code> argument is optional and only
+applies when <code>chunk</code> is a string.</p>
+
+<h3 id="request.end">request.end([data], [encoding])</h3>
+
+<p>Finishes sending the request. If any parts of the body are
+unsent, it will flush them to the stream. If the request is
+chunked, this will send the terminating <code>'0\r\n\r\n'</code>.</p>
+
+<p>If <code>data</code> is specified, it is equivalent to calling <code>request.write(data, encoding)</code>
+followed by <code>request.end()</code>.</p>
+
+<h3 id="request.abort">request.abort()</h3>
+
+<p>Aborts a request.  (New since v0.3.8.)</p>
+
+<h2 id="http.ClientResponse">http.ClientResponse</h2>
+
+<p>This object is created when making a request with <code>http.request()</code>. It is
+passed to the <code>'response'</code> event of the request object.</p>
+
+<p>The response implements the <code>Readable Stream</code> interface.</p>
+
+<h3 id="event_data_">Event: 'data'</h3>
+
+<p><code>function (chunk) {}</code></p>
+
+<p>Emitted when a piece of the message body is received.</p>
+
+<h3 id="event_end_">Event: 'end'</h3>
+
+<p><code>function () {}</code></p>
+
+<p>Emitted exactly once for each message. No arguments. After
+emitted no other events will be emitted on the response.</p>
+
+<h3 id="response.statusCode">response.statusCode</h3>
+
+<p>The 3-digit HTTP response status code. E.G. <code>404</code>.</p>
+
+<h3 id="response.httpVersion">response.httpVersion</h3>
+
+<p>The HTTP version of the connected-to server. Probably either
+<code>'1.1'</code> or <code>'1.0'</code>.
+Also <code>response.httpVersionMajor</code> is the first integer and
+<code>response.httpVersionMinor</code> is the second.</p>
+
+<h3 id="response.headers">response.headers</h3>
+
+<p>The response headers object.</p>
+
+<h3 id="response.trailers">response.trailers</h3>
+
+<p>The response trailers object. Only populated after the 'end' event.</p>
+
+<h3 id="response.setEncoding">response.setEncoding(encoding=null)</h3>
+
+<p>Set the encoding for the response body. Either <code>'utf8'</code>, <code>'ascii'</code>, or <code>'base64'</code>.
+Defaults to <code>null</code>, which means that the <code>'data'</code> event will emit a <code>Buffer</code> object..</p>
+
+<h3 id="response.pause">response.pause()</h3>
+
+<p>Pauses response from emitting events.  Useful to throttle back a download.</p>
+
+<h3 id="response.resume">response.resume()</h3>
+
+<p>Resumes a paused response.</p>
+  </div>
+  <script type="text/javascript" src="assets/sh_main.js"></script>
+  <script type="text/javascript" src="assets/sh_javascript.min.js"></script>
+  <script type="text/javascript">highlight(undefined, undefined, 'pre');</script>
+</body>
+</html>

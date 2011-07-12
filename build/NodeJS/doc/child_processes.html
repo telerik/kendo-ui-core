@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>child_processes - Node.js Manual &amp; Documentation</title>
+  <link type="image/x-icon" rel="icon" href="/favicon.ico" />
+  <link type="image/x-icon" rel="shortcut icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="assets/style.css" type="text/css" media="all" />
+  <link rel="stylesheet" href="assets/sh.css" type="text/css" media="all"/>
+</head>
+<body>
+  <div id="container">
+    <header>
+      <h1>Node.js Manual &amp; Documentation</h1>
+      <div id="gtoc">
+        <p><a href="index.html">Index</a> | <a href="all.html">View on single page</a></p>
+      </div>
+      <hr />
+    </header>
+    <div id="toc"><h2>Table Of Contents</h2><ul><li><a href="#child_Processes">Child Processes</a><ul><li><a href="#event_exit_">Event:  'exit'</a></li><li><a href="#child.stdin">child.stdin</a></li><li><a href="#child.stdout">child.stdout</a></li><li><a href="#child.stderr">child.stderr</a></li><li><a href="#child.pid">child.pid</a></li><li><a href="#child_process.spawn">child_process.spawn(command, args=[], [options])</a></li><li><a href="#child_process.exec">child_process.exec(command, [options], callback)</a></li><li><a href="#child.kill">child.kill(signal='SIGTERM')</a></li></ul></li></ul><hr /></div>
+<h2 id="child_Processes">Child Processes</h2>
+
+<p>Node provides a tri-directional <code>popen(3)</code> facility through the <code>ChildProcess</code>
+class.</p>
+
+<p>It is possible to stream data through the child's <code>stdin</code>, <code>stdout</code>, and
+<code>stderr</code> in a fully non-blocking way.</p>
+
+<p>To create a child process use <code>require('child_process').spawn()</code>.</p>
+
+<p>Child processes always have three streams associated with them. <code>child.stdin</code>,
+<code>child.stdout</code>, and <code>child.stderr</code>.</p>
+
+<p><code>ChildProcess</code> is an <code>EventEmitter</code>.</p>
+
+<h3 id="event_exit_">Event:  'exit'</h3>
+
+<p><code>function (code, signal) {}</code></p>
+
+<p>This event is emitted after the child process ends. If the process terminated
+normally, <code>code</code> is the final exit code of the process, otherwise <code>null</code>. If
+the process terminated due to receipt of a signal, <code>signal</code> is the string name
+of the signal, otherwise <code>null</code>.</p>
+
+<p>See <code>waitpid(2)</code>.</p>
+
+<h3 id="child.stdin">child.stdin</h3>
+
+<p>A <code>Writable Stream</code> that represents the child process's <code>stdin</code>.
+Closing this stream via <code>end()</code> often causes the child process to terminate.</p>
+
+<h3 id="child.stdout">child.stdout</h3>
+
+<p>A <code>Readable Stream</code> that represents the child process's <code>stdout</code>.</p>
+
+<h3 id="child.stderr">child.stderr</h3>
+
+<p>A <code>Readable Stream</code> that represents the child process's <code>stderr</code>.</p>
+
+<h3 id="child.pid">child.pid</h3>
+
+<p>The PID of the child process.</p>
+
+<p>Example:</p>
+
+<pre><code>var spawn = require('child_process').spawn,
+    grep  = spawn('grep', ['ssh']);
+
+console.log('Spawned child pid: ' + grep.pid);
+grep.stdin.end();</code></pre>
+
+<h3 id="child_process.spawn">child_process.spawn(command, args=[], [options])</h3>
+
+<p>Launches a new process with the given <code>command</code>, with  command line arguments in <code>args</code>.
+If omitted, <code>args</code> defaults to an empty Array.</p>
+
+<p>The third argument is used to specify additional options, which defaults to:</p>
+
+<pre><code>{ cwd: undefined,
+  env: process.env,
+  customFds: [-1, -1, -1],
+  setsid: false
+}</code></pre>
+
+<p><code>cwd</code> allows you to specify the working directory from which the process is spawned.
+Use <code>env</code> to specify environment variables that will be visible to the new process.
+With <code>customFds</code> it is possible to hook up the new process' [stdin, stout, stderr] to
+existing streams; <code>-1</code> means that a new stream should be created. <code>setsid</code>,
+if set true, will cause the subprocess to be run in a new session.</p>
+
+<p>Example of running <code>ls -lh /usr</code>, capturing <code>stdout</code>, <code>stderr</code>, and the exit code:</p>
+
+<pre><code>var util  = require('util'),
+    spawn = require('child_process').spawn,
+    ls    = spawn('ls', ['-lh', '/usr']);
+
+ls.stdout.on('data', function (data) {
+  console.log('stdout: ' + data);
+});
+
+ls.stderr.on('data', function (data) {
+  console.log('stderr: ' + data);
+});
+
+ls.on('exit', function (code) {
+  console.log('child process exited with code ' + code);
+});</code></pre>
+
+<p>Example: A very elaborate way to run 'ps ax | grep ssh'</p>
+
+<pre><code>var util  = require('util'),
+    spawn = require('child_process').spawn,
+    ps    = spawn('ps', ['ax']),
+    grep  = spawn('grep', ['ssh']);
+
+ps.stdout.on('data', function (data) {
+  grep.stdin.write(data);
+});
+
+ps.stderr.on('data', function (data) {
+  console.log('ps stderr: ' + data);
+});
+
+ps.on('exit', function (code) {
+  if (code !== 0) {
+    console.log('ps process exited with code ' + code);
+  }
+  grep.stdin.end();
+});
+
+grep.stdout.on('data', function (data) {
+  console.log(data);
+});
+
+grep.stderr.on('data', function (data) {
+  console.log('grep stderr: ' + data);
+});
+
+grep.on('exit', function (code) {
+  if (code !== 0) {
+    console.log('grep process exited with code ' + code);
+  }
+});</code></pre>
+
+<p>Example of checking for failed exec:</p>
+
+<pre><code>var spawn = require('child_process').spawn,
+    child = spawn('bad_command');
+
+child.stderr.setEncoding('utf8');
+child.stderr.on('data', function (data) {
+  if (/^execvp\(\)/.test(data)) {
+    console.log('Failed to start child process.');
+  }
+});</code></pre>
+
+<p>See also: <code>child_process.exec()</code></p>
+
+<h3 id="child_process.exec">child_process.exec(command, [options], callback)</h3>
+
+<p>High-level way to execute a command as a child process, buffer the
+output, and return it all in a callback.</p>
+
+<pre><code>var util = require('util'),
+    exec = require('child_process').exec,
+    child;
+
+child = exec('cat *.js bad_file | wc -l',
+  function (error, stdout, stderr) {
+    console.log('stdout: ' + stdout);
+    console.log('stderr: ' + stderr);
+    if (error !== null) {
+      console.log('exec error: ' + error);
+    }
+});</code></pre>
+
+<p>The callback gets the arguments <code>(error, stdout, stderr)</code>. On success, <code>error</code>
+will be <code>null</code>.  On error, <code>error</code> will be an instance of <code>Error</code> and <code>err.code</code>
+will be the exit code of the child process, and <code>err.signal</code> will be set to the
+signal that terminated the process.</p>
+
+<p>There is a second optional argument to specify several options. The default options are</p>
+
+<pre><code>{ encoding: 'utf8',
+  timeout: 0,
+  maxBuffer: 200*1024,
+  killSignal: 'SIGTERM',
+  cwd: null,
+  env: null }</code></pre>
+
+<p>If <code>timeout</code> is greater than 0, then it will kill the child process
+if it runs longer than <code>timeout</code> milliseconds. The child process is killed with
+<code>killSignal</code> (default: <code>'SIGTERM'</code>). <code>maxBuffer</code> specifies the largest
+amount of data allowed on stdout or stderr - if this value is exceeded then
+the child process is killed.</p>
+
+<h3 id="child.kill">child.kill(signal='SIGTERM')</h3>
+
+<p>Send a signal to the child process. If no argument is given, the process will
+be sent <code>'SIGTERM'</code>. See <code>signal(7)</code> for a list of available signals.</p>
+
+<pre><code>var spawn = require('child_process').spawn,
+    grep  = spawn('grep', ['ssh']);
+
+grep.on('exit', function (code, signal) {
+  console.log('child process terminated due to receipt of signal '+signal);
+});
+
+// send SIGHUP to process
+grep.kill('SIGHUP');</code></pre>
+
+<p>Note that while the function is called <code>kill</code>, the signal delivered to the child
+process may not actually kill it.  <code>kill</code> really just sends a signal to a process.</p>
+
+<p>See <code>kill(2)</code></p>
+  </div>
+  <script type="text/javascript" src="assets/sh_main.js"></script>
+  <script type="text/javascript" src="assets/sh_javascript.min.js"></script>
+  <script type="text/javascript">highlight(undefined, undefined, 'pre');</script>
+</body>
+</html>

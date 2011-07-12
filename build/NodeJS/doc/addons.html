@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>addons - Node.js Manual &amp; Documentation</title>
+  <link type="image/x-icon" rel="icon" href="/favicon.ico" />
+  <link type="image/x-icon" rel="shortcut icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="assets/style.css" type="text/css" media="all" />
+  <link rel="stylesheet" href="assets/sh.css" type="text/css" media="all"/>
+</head>
+<body>
+  <div id="container">
+    <header>
+      <h1>Node.js Manual &amp; Documentation</h1>
+      <div id="gtoc">
+        <p><a href="index.html">Index</a> | <a href="all.html">View on single page</a></p>
+      </div>
+      <hr />
+    </header>
+    <div id="toc"><h2>Table Of Contents</h2><ul><li><a href="#addons">Addons</a></li></ul><hr /></div>
+<h2 id="addons">Addons</h2>
+
+<p>Addons are dynamically linked shared objects. They can provide glue to C and
+C++ libraries. The API (at the moment) is rather complex, involving
+knowledge of several libraries:</p>
+
+<ul><li><p>V8 JavaScript, a C++ library. Used for interfacing with JavaScript:
+creating objects, calling functions, etc.  Documented mostly in the
+<code>v8.h</code> header file (<code>deps/v8/include/v8.h</code> in the Node source tree).</p></li><li><p>libev, C event loop library. Anytime one needs to wait for a file
+descriptor to become readable, wait for a timer, or wait for a signal to
+received one will need to interface with libev.  That is, if you perform
+any I/O, libev will need to be used.  Node uses the <code>EV_DEFAULT</code> event
+loop.  Documentation can be found <a href="http://cvs.schmorp.de/libev/ev.html">here</a>.</p></li><li><p>libeio, C thread pool library. Used to execute blocking POSIX system
+calls asynchronously. Mostly wrappers already exist for such calls, in
+<code>src/file.cc</code> so you will probably not need to use it. If you do need it,
+look at the header file <code>deps/libeio/eio.h</code>.</p></li><li><p>Internal Node libraries. Most importantly is the <code>node::ObjectWrap</code>
+class which you will likely want to derive from.</p></li><li><p>Others. Look in <code>deps/</code> for what else is available.</p></li></ul>
+
+<p>Node statically compiles all its dependencies into the executable. When
+compiling your module, you don't need to worry about linking to any of these
+libraries.</p>
+
+<p>To get started let's make a small Addon which does the following except in
+C++:</p>
+
+<pre><code>exports.hello = 'world';</code></pre>
+
+<p>To get started we create a file <code>hello.cc</code>:</p>
+
+<pre><code>#include &lt;v8.h&gt;
+
+using namespace v8;
+
+extern "C" void
+init (Handle&lt;Object&gt; target)
+{
+  HandleScope scope;
+  target-&gt;Set(String::New("hello"), String::New("world"));
+}</code></pre>
+
+<p>This source code needs to be built into <code>hello.node</code>, the binary Addon. To
+do this we create a file called <code>wscript</code> which is python code and looks
+like this:</p>
+
+<pre><code>srcdir = '.'
+blddir = 'build'
+VERSION = '0.0.1'
+
+def set_options(opt):
+  opt.tool_options('compiler_cxx')
+
+def configure(conf):
+  conf.check_tool('compiler_cxx')
+  conf.check_tool('node_addon')
+
+def build(bld):
+  obj = bld.new_task_gen('cxx', 'shlib', 'node_addon')
+  obj.target = 'hello'
+  obj.source = 'hello.cc'</code></pre>
+
+<p>Running <code>node-waf configure build</code> will create a file
+<code>build/default/hello.node</code> which is our Addon.</p>
+
+<p><code>node-waf</code> is just <a href="http://code.google.com/p/waf">WAF</a>, the python-based build system. <code>node-waf</code> is
+provided for the ease of users.</p>
+
+<p>All Node addons must export a function called <code>init</code> with this signature:</p>
+
+<pre><code>extern 'C' void init (Handle&lt;Object&gt; target)</code></pre>
+
+<p>For the moment, that is all the documentation on addons. Please see
+<a href="https://github.com/ry/node_postgres">https://github.com/ry/node_postgres</a> for a real example.</p>
+  </div>
+  <script type="text/javascript" src="assets/sh_main.js"></script>
+  <script type="text/javascript" src="assets/sh_javascript.min.js"></script>
+  <script type="text/javascript">highlight(undefined, undefined, 'pre');</script>
+</body>
+</html>

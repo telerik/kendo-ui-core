@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>streams - Node.js Manual &amp; Documentation</title>
+  <link type="image/x-icon" rel="icon" href="/favicon.ico" />
+  <link type="image/x-icon" rel="shortcut icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="assets/style.css" type="text/css" media="all" />
+  <link rel="stylesheet" href="assets/sh.css" type="text/css" media="all"/>
+</head>
+<body>
+  <div id="container">
+    <header>
+      <h1>Node.js Manual &amp; Documentation</h1>
+      <div id="gtoc">
+        <p><a href="index.html">Index</a> | <a href="all.html">View on single page</a></p>
+      </div>
+      <hr />
+    </header>
+    <div id="toc"><h2>Table Of Contents</h2><ul><li><a href="#streams">Streams</a></li><li><a href="#readable_Stream">Readable Stream</a><ul><li><a href="#event_data_">Event: 'data'</a></li><li><a href="#event_end_">Event: 'end'</a></li><li><a href="#event_error_">Event: 'error'</a></li><li><a href="#event_close_">Event: 'close'</a></li><li><a href="#event_fd_">Event: 'fd'</a></li><li><a href="#stream.readable">stream.readable</a></li><li><a href="#stream.setEncoding">stream.setEncoding(encoding)</a></li><li><a href="#stream.pause">stream.pause()</a></li><li><a href="#stream.resume">stream.resume()</a></li><li><a href="#stream.destroy">stream.destroy()</a></li><li><a href="#stream.destroySoon">stream.destroySoon()</a></li><li><a href="#stream.pipe">stream.pipe(destination, [options])</a></li></ul></li><li><a href="#writable_Stream">Writable Stream</a><ul><li><a href="#event_drain_">Event: 'drain'</a></li><li><a href="#event_error_">Event: 'error'</a></li><li><a href="#event_close_">Event: 'close'</a></li><li><a href="#event_pipe_">Event: 'pipe'</a></li><li><a href="#stream.writable">stream.writable</a></li><li><a href="#stream.write">stream.write(string, encoding='utf8', [fd])</a></li><li><a href="#stream.write">stream.write(buffer)</a></li><li><a href="#stream.end">stream.end()</a></li><li><a href="#stream.end">stream.end(string, encoding)</a></li><li><a href="#stream.end">stream.end(buffer)</a></li><li><a href="#stream.destroy">stream.destroy()</a></li><li><a href="#stream.destroySoon">stream.destroySoon()</a></li></ul></li></ul><hr /></div>
+<h2 id="streams">Streams</h2>
+
+<p>A stream is an abstract interface implemented by various objects in Node.
+For example a request to an HTTP server is a stream, as is stdout. Streams
+are readable, writable, or both. All streams are instances of <code>EventEmitter</code>.</p>
+
+<h2 id="readable_Stream">Readable Stream</h2>
+
+<p>A <code>Readable Stream</code> has the following methods, members, and events.</p>
+
+<h3 id="event_data_">Event: 'data'</h3>
+
+<p><code>function (data) { }</code></p>
+
+<p>The <code>'data'</code> event emits either a <code>Buffer</code> (by default) or a string if
+<code>setEncoding()</code> was used.</p>
+
+<h3 id="event_end_">Event: 'end'</h3>
+
+<p><code>function () { }</code></p>
+
+<p>Emitted when the stream has received an EOF (FIN in TCP terminology).
+Indicates that no more <code>'data'</code> events will happen. If the stream is also
+writable, it may be possible to continue writing.</p>
+
+<h3 id="event_error_">Event: 'error'</h3>
+
+<p><code>function (exception) { }</code></p>
+
+<p>Emitted if there was an error receiving data.</p>
+
+<h3 id="event_close_">Event: 'close'</h3>
+
+<p><code>function () { }</code></p>
+
+<p>Emitted when the underlying file descriptor has been closed. Not all streams
+will emit this.  (For example, an incoming HTTP request will not emit
+<code>'close'</code>.)</p>
+
+<h3 id="event_fd_">Event: 'fd'</h3>
+
+<p><code>function (fd) { }</code></p>
+
+<p>Emitted when a file descriptor is received on the stream. Only UNIX streams
+support this functionality; all others will simply never emit this event.</p>
+
+<h3 id="stream.readable">stream.readable</h3>
+
+<p>A boolean that is <code>true</code> by default, but turns <code>false</code> after an <code>'error'</code>
+occurred, the stream came to an <code>'end'</code>, or <code>destroy()</code> was called.</p>
+
+<h3 id="stream.setEncoding">stream.setEncoding(encoding)</h3>
+
+<p>Makes the data event emit a string instead of a <code>Buffer</code>. <code>encoding</code> can be
+<code>'utf8'</code>, <code>'ascii'</code>, or <code>'base64'</code>.</p>
+
+<h3 id="stream.pause">stream.pause()</h3>
+
+<p>Pauses the incoming <code>'data'</code> events.</p>
+
+<h3 id="stream.resume">stream.resume()</h3>
+
+<p>Resumes the incoming <code>'data'</code> events after a <code>pause()</code>.</p>
+
+<h3 id="stream.destroy">stream.destroy()</h3>
+
+<p>Closes the underlying file descriptor. Stream will not emit any more events.</p>
+
+<h3 id="stream.destroySoon">stream.destroySoon()</h3>
+
+<p>After the write queue is drained, close the file descriptor.</p>
+
+<h3 id="stream.pipe">stream.pipe(destination, [options])</h3>
+
+<p>This is a <code>Stream.prototype</code> method available on all <code>Stream</code>s.</p>
+
+<p>Connects this read stream to <code>destination</code> WriteStream. Incoming
+data on this stream gets written to <code>destination</code>. The destination and source
+streams are kept in sync by pausing and resuming as necessary.</p>
+
+<p>Emulating the Unix <code>cat</code> command:</p>
+
+<pre><code>process.stdin.resume();
+process.stdin.pipe(process.stdout);</code></pre>
+
+<p>By default <code>end()</code> is called on the destination when the source stream emits
+<code>end</code>, so that <code>destination</code> is no longer writable. Pass <code>{ end: false }</code> as
+<code>options</code> to keep the destination stream open.</p>
+
+<p>This keeps <code>process.stdout</code> open so that "Goodbye" can be written at the end.</p>
+
+<pre><code>process.stdin.resume();
+
+process.stdin.pipe(process.stdout, { end: false });
+
+process.stdin.on("end", function() {
+  process.stdout.write("Goodbye\n");
+});</code></pre>
+
+<p>NOTE: If the source stream does not support <code>pause()</code> and <code>resume()</code>, this function
+adds simple definitions which simply emit <code>'pause'</code> and <code>'resume'</code> events on
+the source stream.</p>
+
+<h2 id="writable_Stream">Writable Stream</h2>
+
+<p>A <code>Writable Stream</code> has the following methods, members, and events.</p>
+
+<h3 id="event_drain_">Event: 'drain'</h3>
+
+<p><code>function () { }</code></p>
+
+<p>Emitted after a <code>write()</code> method was called that returned <code>false</code> to
+indicate that it is safe to write again.</p>
+
+<h3 id="event_error_">Event: 'error'</h3>
+
+<p><code>function (exception) { }</code></p>
+
+<p>Emitted on error with the exception <code>exception</code>.</p>
+
+<h3 id="event_close_">Event: 'close'</h3>
+
+<p><code>function () { }</code></p>
+
+<p>Emitted when the underlying file descriptor has been closed.</p>
+
+<h3 id="event_pipe_">Event: 'pipe'</h3>
+
+<p><code>function (src) { }</code></p>
+
+<p>Emitted when the stream is passed to a readable stream's pipe method.</p>
+
+<h3 id="stream.writable">stream.writable</h3>
+
+<p>A boolean that is <code>true</code> by default, but turns <code>false</code> after an <code>'error'</code>
+occurred or <code>end()</code> / <code>destroy()</code> was called.</p>
+
+<h3 id="stream.write">stream.write(string, encoding='utf8', [fd])</h3>
+
+<p>Writes <code>string</code> with the given <code>encoding</code> to the stream.  Returns <code>true</code> if
+the string has been flushed to the kernel buffer.  Returns <code>false</code> to
+indicate that the kernel buffer is full, and the data will be sent out in
+the future. The <code>'drain'</code> event will indicate when the kernel buffer is
+empty again. The <code>encoding</code> defaults to <code>'utf8'</code>.</p>
+
+<p>If the optional <code>fd</code> parameter is specified, it is interpreted as an integral
+file descriptor to be sent over the stream. This is only supported for UNIX
+streams, and is silently ignored otherwise. When writing a file descriptor in
+this manner, closing the descriptor before the stream drains risks sending an
+invalid (closed) FD.</p>
+
+<h3 id="stream.write">stream.write(buffer)</h3>
+
+<p>Same as the above except with a raw buffer.</p>
+
+<h3 id="stream.end">stream.end()</h3>
+
+<p>Terminates the stream with EOF or FIN.</p>
+
+<h3 id="stream.end">stream.end(string, encoding)</h3>
+
+<p>Sends <code>string</code> with the given <code>encoding</code> and terminates the stream with EOF
+or FIN. This is useful to reduce the number of packets sent.</p>
+
+<h3 id="stream.end">stream.end(buffer)</h3>
+
+<p>Same as above but with a <code>buffer</code>.</p>
+
+<h3 id="stream.destroy">stream.destroy()</h3>
+
+<p>Closes the underlying file descriptor. Stream will not emit any more events.</p>
+
+<h3 id="stream.destroySoon">stream.destroySoon()</h3>
+
+<p>After the write queue is drained, close the file descriptor. <code>destroySoon()</code>
+can still destroy straight away, as long as there is no data left in the queue
+for writes.</p>
+  </div>
+  <script type="text/javascript" src="assets/sh_main.js"></script>
+  <script type="text/javascript" src="assets/sh_javascript.min.js"></script>
+  <script type="text/javascript">highlight(undefined, undefined, 'pre');</script>
+</body>
+</html>
