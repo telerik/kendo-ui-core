@@ -1,4 +1,4 @@
-(function ($) {
+(function($){
     var kendo = window.kendo,
         ui = kendo.ui,
         extend = $.extend,
@@ -29,7 +29,13 @@
         SUBGROUP = ">.t-group,>.t-animation-container>.t-group",
         NODECONTENTS = SUBGROUP + ",>.t-content,>.t-animation-container>.t-content";
 
-    var TreeView = Component.extend({
+    var TreeView = Component.extend(/** @lends kendo.ui.TreeView.prototype */ {
+        /**
+         * Creates a TreeView instance
+         * @constructs
+         * @param element DOM element
+         * @param options options used in the TreeView creation
+         */
         init: function (element, options) {
             var that = this,
                 element = $(element),
@@ -84,7 +90,13 @@
                 that.dragging = new TreeViewDragAndDrop(that);
             }
 
-            that.bind([EXPAND, COLLAPSE, CHECKED, ERROR, LOAD, DATABINDING, DATABOUND, SELECT], options);
+            that.bind([
+                /**
+                 * Fires before a subgroup gets expanded.
+                 * @name kendo.ui.TreeView#expand
+                 * @event expand
+                 */
+                EXPAND, COLLAPSE, CHECKED, ERROR, LOAD, DATABINDING, DATABOUND, SELECT], options);
         },
 
         options: {
@@ -266,6 +278,11 @@
             });
         },
 
+        /**
+         * Expands items!
+         *
+         * @param {string} items
+         */
         expand: function (items) {
             this.processItems(items, function (index, item) {
                 var contents = item.find(NODECONTENTS);
@@ -504,6 +521,7 @@
             }
         },
 
+        /** @ignore */
         dragstart: function (e) {
             var that = this,
                 treeview = that.treeview,
@@ -517,6 +535,7 @@
                 .css(VISIBILITY, "hidden")
                 .appendTo(treeview.element);
         },
+        /** @ignore */
         drag: function (e) {
             var that = this,
                 treeview = that.treeview,
@@ -590,6 +609,7 @@
             that._hintStatus(statusClass);
         },
 
+        /** @ignore */
         dragend: function (e) {
             var that = this,
                 treeview = that.treeview,
@@ -691,6 +711,7 @@
     });
 
     TreeView.rendering = {
+        /** @ignore */
         wrapperCssClass: function (group, item) {
             var result = "t-item",
                 index = item.index;
@@ -705,6 +726,7 @@
 
             return result;
         },
+        /** @ignore */
         cssClass: function(group, item) {
             var result = "",
                 index = item.index,
@@ -724,6 +746,7 @@
 
             return result;
         },
+        /** @ignore */
         textClass: function(item) {
             var result = "t-in";
 
@@ -737,9 +760,11 @@
 
             return result;
         },
+        /** @ignore */
         textAttributes: function(item) {
             return item.url ? " href='" + item.url + "'" : "";
         },
+        /** @ignore */
         toggleButtonClass: function(item) {
             var result = "t-icon";
 
@@ -755,15 +780,19 @@
 
             return result;
         },
+        /** @ignore */
         text: function(item) {
             return item.encoded === false ? item.text : kendo.htmlEncode(item.text);
         },
+        /** @ignore */
         tag: function(item) {
             return item.url ? "a" : "span";
         },
+        /** @ignore */
         groupAttributes: function(group) {
             return group.expanded !== true ? " style='display:none'" : "";
         },
+        /** @ignore */
         groupCssClass: function(group) {
             var cssClass = "t-group";
 
@@ -805,6 +834,4 @@
     };
 
     ui.plugin("TreeView", TreeView);
-
 })(jQuery);
-

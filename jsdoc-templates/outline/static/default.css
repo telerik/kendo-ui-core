@@ -1,0 +1,440 @@
+/* --- Basic Layout -------------------------------------------------------- */
+/* For IE for Windows \*/
+* html{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+* html body{
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+
+* html .fixed{
+    position: absolute;
+}
+.fixed {
+  position: fixed;
+  overflow: auto;
+}
+/* */
+/* --- Basic Layout -------------------------------------------------------- */
+body {
+  padding: 0;
+  margin: 0;
+  background: #fafafa;
+	font: 100% Verdana, Arial, Helvetica, sans-serif;
+}
+
+#main {
+  border-left: 0.625em #356aa0 solid;
+  margin-left: 16.25em;
+}
+
+#index {
+	top: 0;
+  left: 0;
+	width: 16.25em;
+  height: 100%;
+  overflow: auto;
+  overflow-x: hidden;
+  border-right: 0.625em solid #356aa0;
+}
+/* --- General layout ------------------------------------------------------ */
+h1 {
+  margin: 0.625em 0 0.625em;
+	font-size: 1.5em;
+	font-weight: bold;
+}
+
+h1.classTitle {
+  color: #007b00;
+	font-size: 1.5em;
+	line-height:130%;
+}
+
+h2 { 
+  font-size: 1.25em; 
+  color: #6277AA;
+  margin: 2em 0pt 1em;
+}
+
+h3 {
+  font-size: 1.1em;
+  color: #6277AA;
+}
+
+p {
+  margin: 1em 0;
+  text-align: justify;
+}
+
+a:link {
+	color: #001C58;
+}
+
+a:visited {
+  color: #6277AA;
+}
+
+hr {
+	border: none 0;
+	border-top: 0.0625em solid #7f8fb1;
+	height: 0.0625em;
+}
+
+.invisible {
+  display: none !important;
+}
+
+.clear {
+  clear: both;
+  line-height: 0.0625em;
+}
+
+.description {
+	font: 0.8125em Verdana, Arial;
+	line-height: 0.9375em;
+	padding: 0.25em;
+	padding-left: 0.25em;
+}
+
+.fineprint {
+  padding-top: 1.25em;
+	text-align: right;
+	font-size: 0.625em;
+}
+
+div.sectionTitle {
+	background-color: #356aa0;
+	color: #fff;
+	font-size: 1.1em;
+  font-weight: bold;
+	text-align: left;
+	padding: 0.125em 0.5em 0.125em 0.5em;
+	border: 0.0625em #7F8FB1 solid;
+}
+
+/* --- Index toggler ------------------------------------------------------- */
+#index-toggler {
+  width: 1em;
+  top: 0.25em;
+  left: 16.25em;
+  cursor: pointer;
+  font-weight: bold;
+  font-family: Arial;
+  font-size: 1em;
+  color: #fff;
+  z-index: 100;
+}
+#index-close {
+  background: url(images/never_translate.png) no-repeat left;
+  height: 1em;
+  width: 1em;
+  float: left;
+  cursor: pointer;
+  margin: 0.0625em 0.25em;
+  display: inline;
+}
+body.index-collapsed { background-position: 0; }
+body.index-collapsed #main { margin-left: 0; }
+body.index-collapsed #index { width: 0; }
+body.index-collapsed #index-wrapper { display: none; }
+body.index-collapsed #index-toggler { left: 0; }
+
+/* --- Module Filter ------------------------------------------------------- */
+.module-filter {
+  display: inline;
+  float: left;
+  cursor: pointer;
+  width: 4em;
+  font-size: 0.8em;
+  text-align: center;
+  padding-top: 0.125em;
+}
+.module-filter, .module-filter a {
+  text-decoration: none;
+  color: #007B00 !important;
+}
+body.filter .sectionItem { display: none; }
+body.filter .module-filter, body.filter .module-filter a  { color: red !important; }
+body.filter.module-core .module-core { display: block; }
+body.filter.module-dom .module-dom { display: block; }
+body.filter.module-css .module-css { display: block; }
+body.filter.module-ajax .module-ajax { display: block; }
+body.filter.module-event .module-event { display: block; }
+
+/* --- Method Toggler ------------------------------------------------------ */
+.method-toggler {
+  background: url(images/minus.gif) no-repeat left;
+  cursor: pointer;
+  float: left;
+  width: 0.875em;
+  height: 0.875em;
+}
+.method-toggler.toggled {
+  background: url(images/plus.gif) no-repeat left;  
+}
+
+/* --- Class Name and File Name Icons -------------------------------------- */
+.itemName .icon, .itemName .icon a {
+  color: #007B00 !important;
+}
+.itemName .icon {
+  font-size: 1em;
+  font-weight: bold;
+  padding: 0 0 0.125em 1.5em;
+}
+
+.itemName .icon {
+  background: url(images/class_obj.png) no-repeat left;
+}
+
+.itemName.namespace .icon {
+  background-image: url(images/namespace_obj.png) !important;
+}
+
+.itemName.namespace-function .icon {
+  background-image: url(images/namespace_function_obj.png) !important;
+}
+
+.fileName .icon {
+  background: url(images/file_obj.png) no-repeat left !important;
+}
+
+/* --- Class Method and Property Icons ------------------------------------- */
+div.classMethod .icon {
+  padding-left: 1.275em;
+  background: url(images/method_public_obj.png) no-repeat left;
+}
+
+div.classMethod .private {
+  background-image: url(images/method_private_obj.png) !important;
+}
+
+div.classProperty .icon {
+  padding-left: 1.275em;
+  background: url(images/field_public_obj.png) no-repeat left;
+}
+
+div.classProperty .private {
+  background-image: url(images/field_private_obj.png) !important;
+}
+
+
+/* --- Headers ------------------------------------------------------------- */
+.header {
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.4em;
+  height: 1.2em;
+	background: #356aa0;
+	padding: 0.15em 0.4375em;
+}
+
+#index .header {
+	padding: 0.5em 0 0 0;
+  height: 1.625em;
+  font-size: 1em;
+  background: #356aa0;
+}
+
+/* --- Main/Index Shared Layouts ------------------------------------------- */
+#content .section {
+  margin-top: 1.5em;  
+}
+
+div.classList {
+	padding: 0.625em;
+	font-family: arial, sans-serif;
+	font-size: 0.75em;
+}
+
+div.sectionItem .signature {
+	color: #000;
+  margin-left: 0.250em;
+  font-weight: normal;
+}
+
+.help, div.sectionItem .signature span {
+  cursor: help;
+}
+
+/* --- Main layout --------------------------------------------------------- */
+#main .full-description {
+  font-size: 0.9em;
+  line-height: 135%;
+}
+
+#main code {
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #666;
+}
+
+html:not([lang*=""]) #main code {
+  font-size: 1.4em !important; /* Firefox hack */
+}
+
+#main p p, #main .full-description p, #main span a {
+  font-size: 1em;  
+}
+
+#content {
+  padding: 0 1.25em 1.25em 1.25em;
+}
+
+#main .sectionItem  {
+  background: #fff;
+  padding-left: 0.8em;
+}
+
+#main .sectionItem .description {
+  font-size: 0.8em;
+  padding-left: 0.4375em;
+	color: #777;
+}
+
+#main .summary .sectionItems, #main .details .sectionItem {
+  border: 0.25em #8DA6C6 solid;
+  padding: 0.625em;
+}
+
+/* --- Summary layout ------------------------------------------------------ */
+#main .summary {
+  background: #fff;
+}
+
+#main .summary .sectionItems {
+  border-width: 0.125em 0.125em 0.250em;
+}
+
+#main .summary .sectionItem {
+  padding: 0 0 0.3em 1.6em;
+	font-family: Verdana, Arial;
+  font-size: 0.875em;
+}
+
+#main .summary .sectionItem b {
+  margin-left: -1.4286em;
+}
+
+#main .summary .module-filter {
+  margin-left: -5.3571em;
+}
+
+/* --- Details layout ------------------------------------------------------ */
+#main .details .module-filter {
+  font-size: 70%;
+}
+
+#main .details .sectionItem {
+  border-width: 0.125em 0.125em 0.250em;
+  margin-bottom: 0.75em;
+}
+
+#main .details .itemTitle {
+	color: #001C58;
+	font-family: Verdana;
+  font-weight: bold;
+	font-size: 1em;
+  display: inline;
+}
+
+#main .details .itemTitle .light {
+  font-size: 0.9em;
+}
+
+#main .details .full-description {
+  padding: 0 0.625em;
+}
+
+
+.light, .light a:link, .light a:visited {
+	color: #777;
+  font-weight: normal;
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+}
+
+/* --- Details data -------------------------------------------------------- */
+table.methodItem {
+  font-size: 0.8em;
+}
+table.methodItem p {
+  margin: 0;
+}
+table.methodItem td {
+  padding: 0 0.1em 0.1em;
+  vertical-align: text-top;
+}
+table.methodItem .methodItemType {
+  text-align: center;
+}
+div.heading {
+  color: #6277AA;
+  font-size: 0.875em;
+  font-weight: bold;
+  margin: 0.625em 0 0;
+}
+
+/* --- Index Layout -------------------------------------------------------- */
+#index-wrapper {
+  width: 100%;
+}
+
+#index-menu {
+  background: #8DA6C6;
+  color: #fff;
+  text-align: center;
+  padding: 0.125em 0 0.25em;
+  font-weight: bold;
+  font-size: 0.9em;
+}
+
+#index-menu a:link, #index-menu a:visited  {
+  color: #fff;
+}
+
+#index-title {
+  float: left;
+}
+
+#index-content {
+  background: #fff;
+  border: 0 #8DA6C6 solid;
+  border-width: 0 0 0.25em;
+  font-size: 1.1em;
+}
+
+#index-content .signature {
+  font-size: 0.85em;
+}
+
+#index .section {
+  padding-bottom: 0.625em;
+}
+
+/* --- Class index / File index layout ------------------------------------- */
+* html #content.index-page {
+  width: 92%; /* IE only hack para evitar bug no layout */
+}
+  
+#content.index-page .sectionItem {
+  padding: 0.125em;
+}
+
+#content.index-page .sectionItems {
+  border-top-width: 0.125em;
+}
+
+#content.index-page .summary {
+  margin: 0;
+}
+
+/* --- Hide private members ------------------------------------------------ */
+/*
+div.sectionItem.private {
+  display: none !important;
+}
+/**/
