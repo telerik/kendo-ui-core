@@ -14,6 +14,7 @@
         <script src="../src/kendo.draganddrop.js"></script>
         <script src="../src/kendo.groupable.js"></script>
         <script src="../src/kendo.data.js"></script>
+        <script src="../src/kendo.data.odata.js"></script>
         <script src="../src/kendo.grid.js"></script>
 
         <link href="../styles/kendo.common.css" type="text/css" rel="stylesheet" />
@@ -29,26 +30,11 @@
                 var total = 1000000;
 
                      remoteDataSource = new kendo.data.DataSource({
+                         type: "odata",
                          serverPaging: true,
                          pageSize: 200,
                          transport: {
-                             read: {
-                                 url: "http://services.odata.org/Northwind/Northwind.svc/Orders",
-                                 dataType: "jsonp",
-                                 jsonpCallback: "callback",
-                                 cache: false
-                             },
-                             dialect: function(options) {
-                                 return kendo.format("$format=json&$top={0}&$skip={1}&$inlinecount=allpages&$callback=callback", options.take, options.skip);
-                             }
-                         },
-                         schema: {
-                             data: function(result) {
-                                 return result.d.results;
-                             },
-                             total: function(result) {
-                                 return result.d.__count;
-                             }
+                             read: "http://services.odata.org/Northwind/Northwind.svc/Orders"
                          }
                      });
                      var remoteDataSource2 = new kendo.data.DataSource({
