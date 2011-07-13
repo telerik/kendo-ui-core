@@ -137,7 +137,7 @@
     <!-- Leave empty if this is a major release -->
     <ServicePack>SP1</ServicePack>
     <!-- Leave empty if this is not a BETA release -->
-    <Beta>BETA</Beta>
+    <Beta></Beta>
     
     <DirPath>$(YEAR) Q$(Release)</DirPath>
   </PropertyGroup>
