@@ -223,26 +223,25 @@
                     setup: function() {
                         plotArea = new PlotAreaStub();
                         setupLineChart(plotArea, {
-                            series: [ positiveSeries, positiveSeries ],
+                            series: [ positiveSeries, positiveSeries, positiveSeries ],
                             isStacked: true }
                         );
                     }
                 });
 
                 test("reports stacked minumum value", function() {
-                    equal(lineChart.valueRange().min, 2);
+                    equal(lineChart.valueRange().min, 3);
                 });
 
                 test("reports stacked maximum value", function() {
-                    equal(lineChart.valueRange().max, 4);
+                    equal(lineChart.valueRange().max, 6);
                 });
 
-                test("points in first category are stacked", function() {
-                    equal(lineChart._bars[1].stackValue, 2);
-                });
-
-                test("points in second category are stacked", function() {
-                    equal(lineChart._bars[3].stackValue, 4);
+                test("point values are stacked", function() {
+                    same(
+                        $.map(lineChart._bars, function(point) { return point.stackValue }),
+                        [1, 2, 3, 2, 4, 6]
+                    );
                 });
 
                 // ------------------------------------------------------------
@@ -250,26 +249,25 @@
                     setup: function() {
                         plotArea = new PlotAreaStub();
                         setupLineChart(plotArea, {
-                            series: [ negativeSeries, negativeSeries ],
+                            series: [ negativeSeries, negativeSeries, negativeSeries ],
                             isStacked: true
                         });
                     }
                 });
 
                 test("reports stacked minumum value", function() {
-                    equal(lineChart.valueRange().min, -4);
+                    equal(lineChart.valueRange().min, -6);
                 });
 
                 test("reports stacked maximum value", function() {
-                    equal(lineChart.valueRange().max, -2);
+                    equal(lineChart.valueRange().max, -3);
                 });
 
-                test("points in first category are stacked", function() {
-                    equal(lineChart._bars[1].stackValue, -2);
-                });
-
-                test("points in second category are stacked", function() {
-                    equal(lineChart._bars[3].stackValue, -4);
+                test("point values are stacked", function() {
+                    same(
+                        $.map(lineChart._bars, function(point) { return point.stackValue }),
+                        [-1, -2, -3, -2, -4, -6]
+                    );
                 });
 
                 // ------------------------------------------------------------
