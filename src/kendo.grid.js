@@ -259,6 +259,28 @@
             }
         },
 
+        clearSelection: function() {
+            var that = this;
+            that.selectable.clear();
+            that.trigger(CHANGE);
+        },
+
+        select: function(items) {
+            var that = this,
+                selectable = that.selectable;
+
+            if(items) {
+                if(!selectable.options.multi) {
+                    selectable.clear();
+                    items = items.first();
+                }
+                selectable.value(items);
+                return;
+            }
+
+            return selectable.value();
+        },
+
         current: function(element) {
             var that = this,
                 current = that._current;
