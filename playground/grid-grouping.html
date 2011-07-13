@@ -5,7 +5,6 @@
     <script src="../src/jquery.js"></script>
     <script src="../src/kendo.core.js"></script>
     <script src="../src/kendo.draganddrop.js"></script>
-    <script src="../src/kendo.query.js"></script>
     <script src="../src/kendo.data.js"></script>
     <script src="../src/kendo.groupable.js"></script>
     <script src="../src/kendo.grid.js"></script>
@@ -17,36 +16,36 @@
             width: 100%;
             table-layout: fixed;
         }
-        
+
         td, th
         {
             border: 1px solid black;
             height: 22px;
         }
-        
+
         th
         {
             background: magenta;
         }
-        
+
         .grid
         {
             width: 500px;
         }
-        
+
         .grid-header
         {
             padding-right: 17px;
             background: magenta;
         }
-                
+
         .t-grouping-header {
             background-color: #EFF7FC;
             cursor: default;
             margin: 0;
             padding: .25em;
         }
-        
+
         .draggable
         {
             border: 1px solid red;
@@ -61,7 +60,7 @@
             width: 100px;
             height: 100px;
         }
-        
+
         .t-grouping-header .t-group-indicator {
             display: inline-block;
             zoom: 1;
@@ -74,7 +73,7 @@
             -webkit-border-radius: 4px;
             border-radius: 4px;
         }
-        
+
         .t-grouping-header,
         .t-grouping-dropclue
         {
@@ -90,7 +89,7 @@
     </style>
 </head>
 <body>
-    
+
     <div class="grid-data">
         <div class="t-grouping-header"></div>
         <table id="grid">
@@ -130,40 +129,40 @@
             filter: "th",
             groupContainer: "div.t-grouping-header"
         });
-//        hint = function(target) {                    
+//        hint = function(target) {
 //            return $("<span/>").text(target.data("field")).css({"background": "red","white-space": "nowrap"});
 //        };
-//        var indicatorTmpl = window.kendo.template('<div class="t-group-indicator" data-field="${data.field}">' + 
+//        var indicatorTmpl = window.kendo.template('<div class="t-group-indicator" data-field="${data.field}">' +
 //                '<a href="#" class="t-link">' +
 //                    '<span class="t-icon t-arrow-${(data.dir || "asc") == "asc" ? "up" : "down"}-small">(sorted ${(data.dir || "asc") == "asc" ? "ascending": "descending"})</span>' +
-//                    '${data.field}' + 
-//                '</a>' + 
+//                    '${data.field}' +
+//                '</a>' +
 //                '<a class="t-button t-button-icon t-button-bare">' +
-//                    '<span class="t-icon t-group-delete"></span>' + 
+//                    '<span class="t-icon t-group-delete"></span>' +
 //                '</a>' +
 //             '</div>',  {useWithBlock:false});
 
 //        var insideDropTarget = false;
-//        var groupHeader = $(".grid-data .t-grouping-header");        
+//        var groupHeader = $(".grid-data .t-grouping-header");
 //        var dropCue = $('<div class="t-grouping-dropclue">|</>');
 //        var indicators = [];
 
 //        $(document).ready(function() {
-//            
+//
 //            $("#grid").kendoDraggable({
 //                filter: "th",
 //                hint: hint,
 //                dragend: function(e) {
 //                    dragEnd(this);
 //                    if(this.dropped) {
-//                        var field = e.currentTarget.data("field");    
-//                        if($.grep($(".t-group-indicator", groupHeader), function (item) { return $(item).data("field") === field }).length == 0) {                            
+//                        var field = e.currentTarget.data("field");
+//                        if($.grep($(".t-group-indicator", groupHeader), function (item) { return $(item).data("field") === field }).length == 0) {
 //                            groupHeader.append(buildIndicator(field));
-//                            
+//
 //                            //console.log(buildDescriptors());
 //                            //dataSource.group(buildDescriptors());
 //                        }
-//                    }                                      
+//                    }
 //                },
 //                dragstart: dragStart,
 //                drag: drag });
@@ -188,7 +187,7 @@
 //                            e.currentTarget.remove();
 //                            //console.log(buildDescriptors());
 //                            //dataSource.group(buildDescriptors());
-//                        }                            
+//                        }
 //                    },
 //                    dragstart: dragStart,
 //                    drag: drag
@@ -208,23 +207,23 @@
 
 ////                                //console.log(buildDescriptors());
 ////                                //dataSource.group(buildDescriptors());
-////                            }                            
+////                            }
 ////                        },
 ////                        dragstart: dragStart,
 ////                        drag: drag
 ////                    });
 //        }
 
-//        function dragEnd(draggable) {            
+//        function dragEnd(draggable) {
 
 ////            if(draggable.dropped && indicators.length > 0) {
 ////                var left = dropCue.position().left;
 ////                debugger;
-////                if(left < indicators[0].left) {                   
+////                if(left < indicators[0].left) {
 ////                    draggable.element.insertBefore(indicators[0].element);
 ////                } else if(left > indicators[indicators.length - 1].right) {
 ////                    draggable.element.insertAfter(indicators[indicators.length - 1].element);
-////                } else {                             
+////                } else {
 ////                    range = $.grep(indicators, function(item) {
 ////                        return item.element[0] !== draggable.element && item.left <= left && left <= item.right;
 ////                    })[0];
@@ -247,7 +246,7 @@
 //                    element: item
 //                };
 //            });
-//                            
+//
 //            dropCue.css({top:0, left: 0}).appendTo(groupHeader);
 //        }
 
@@ -255,14 +254,14 @@
 //            if(!insideDropTarget || indicators.length == 0) {
 //                return;
 //            }
-//            var pageX = e.pageX,                                
+//            var pageX = e.pageX,
 //                positionX = this.element.position().left,
 //                range,
 //                element = this.element[0];
-//                            
+//
 //            if(pageX > indicators[indicators.length - 1].right) {
 //                positionX = indicators[indicators.length - 1].right;
-//            } else {                             
+//            } else {
 //                range = $.grep(indicators, function(item) {
 //                    return item.element[0] !== element && item.left <= pageX && pageX <= item.right;
 //                })[0];
@@ -271,18 +270,18 @@
 //                    positionX = range.left;
 //                }
 //            }
-//                            
-//            dropCue.css({ left: positionX });            
+//
+//            dropCue.css({ left: positionX });
 //        }
 
-//        function buildDescriptors() {            
+//        function buildDescriptors() {
 //            return $.map($(".t-group-indicator", groupHeader), function(item) {
-//                item = $(item);                
+//                item = $(item);
 //                return {
 //                    field: item.data("field"),
 //                    dir: item.has("span.t-arrow-up-small") ? "asc" : "desc"
 //                };
-//            }); 
+//            });
 //        }
     </script>
 </body>
