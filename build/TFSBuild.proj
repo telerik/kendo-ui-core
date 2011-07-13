@@ -139,6 +139,12 @@
     <!-- Leave empty if this is not a BETA release -->
     <Beta>BETA</Beta>
   </PropertyGroup>
+
+  <PropertyGroup>
+    <DirPath>$(YEAR) $(Release)</DirPath>
+    <DirPath Condition="$(BETA) == 'BETA'">$(YEAR) $(Release)\$(BETA)</DirPath>
+    <DirPath Condition="Exists($(ServicePack))">$(YEAR) $(Release)\$(ServicePack)</DirPath>
+  </PropertyGroup>
   
   <Target Name="BeforeCompile">
     <Exec Command="$(SolutionRoot)\build\TeamBuild.bat $(SolutionRoot)" />
