@@ -140,6 +140,7 @@
     <Beta></Beta>
 
     <Quarter>$(YEAR) Q$(Release)</Quarter>
+    <DirPath>$(Quarter)\Q$(Release) $(YEAR)</DirPath>
   </PropertyGroup>
 
   
@@ -152,11 +153,6 @@
     <When Condition="$(BETA) == 'BETA'">
       <PropertyGroup>
         <DirPath>$(Quarter)\$(BETA)</DirPath>
-      </PropertyGroup>
-    </When>
-    <When>
-      <PropertyGroup>
-        <DirPath>$(Quarter)\Q$(Release) $(YEAR)</DirPath>
       </PropertyGroup>
     </When>
   </Choose>
