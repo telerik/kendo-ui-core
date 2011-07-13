@@ -10,6 +10,7 @@
         <script src="../src/kendo.draganddrop.js"></script>
         <script src="../src/kendo.groupable.js"></script>
         <script src="../src/kendo.model.js"></script>
+        <script src="../src/kendo.data.xml.js"></script>
         <script src="../src/kendo.data.js"></script>
         <script src="../src/kendo.grid.js"></script>
 
@@ -22,11 +23,19 @@
         <script>
             $("#table1").kendoGrid({
                 dataSource: {
-                    type: "odata",
                     transport: {
                         read: "livescores.xml"
                     },
                     schema: {
+                        type: "xml",
+                        data: "/LiveScores/MatchData",
+                        model: {
+                            fields: {
+                                team1: "Team1/text()",
+                                team2: "Team2/text()",
+                                score: "Score/text()"
+                            }
+                        }
                     }
                 },
                 sortable: true
