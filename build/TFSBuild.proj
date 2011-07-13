@@ -142,8 +142,8 @@
 
   <PropertyGroup>
     <DirPath>$(YEAR) Q$(Release)</DirPath>
-    <DirPath Condition="Exists($(ServicePack))">$(YEAR) Q$(Release)\$(ServicePack)</DirPath>
     <DirPath Condition="!Exists($(ServicePack)) And $(BETA) == 'BETA'">$(YEAR) Q$(Release)\$(BETA)</DirPath>
+    <DirPath Condition="Exists($(ServicePack))">$(YEAR) Q$(Release)\$(ServicePack)</DirPath>
   </PropertyGroup>
   
   <Target Name="BeforeCompile">
