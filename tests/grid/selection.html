@@ -384,7 +384,18 @@
                 ok(!rows.eq(1).hasClass("t-state-selected"));
                 ok(!rows.eq(2).hasClass("t-state-selected"));
             });
-                      
+            
+            test("ctrl space on selected item unselects it", function() {
+                var grid = setup({
+                        selectable: "multiple"
+                    });
+                
+                grid.element.focus()
+                    .press(kendo.keys.SPACEBAR)
+                    .press(kendo.keys.SPACEBAR, true);
+                
+                ok(!table.find("tbody tr:first").hasClass("t-state-selected"));
+            });          
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

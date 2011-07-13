@@ -20,6 +20,7 @@
         DATABOUND = "dataBound",
         FOCUSED = "t-state-focused",
         FOCUSABLE = "t-focusable",
+        SELECTED = "t-state-selected",
         STRING = "string";
 
     var VirtualScrollable =  Component.extend({
@@ -253,11 +254,22 @@
                 that.wrapper.keydown(function(e) {
                     if (e.keyCode === keys.SPACEBAR) {
                         var current = that.current();
+                        current = cell ? current : current.parent();
 
-                        if (!multi || !e.ctrlKey) {
+                        if(multi) {
+                            if(!e.ctrlKey) {
+                                that.selectable.clear();
+                            } else {
+                                if(current.hasClass(SELECTED)) {
+                                    current.removeClass(SELECTED);
+                                    current = null;
+                                }
+                            }
+                        } else {
                             that.selectable.clear();
                         }
-                        that.selectable.value(cell ? current : current.parent());
+
+                        that.selectable.value(current);
                     }
                 });
             }
