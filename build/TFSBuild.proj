@@ -158,7 +158,7 @@
   </Choose>
   
   <Target Name="BeforeCompile">
-    <Exec Command="'$(SolutionRoot)\build\TeamBuild.bat' '$(SolutionRoot)'" />
+    <Exec Command='"$(SolutionRoot)\build\TeamBuild.bat" $(SolutionRoot)' />
   </Target>
 
   <Target Name="AfterCompile">
