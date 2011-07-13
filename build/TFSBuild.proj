@@ -156,7 +156,7 @@
       <Resources Include="$(SolutionRoot)\release\**" />
     </ItemGroup>
 
-    <Copy SourceFiles="@(Resources)" DestinationFolder="$(DropLocation)\$(BETA)" />
+    <Copy SourceFiles="@(Resources)" DestinationFolder="$(DropLocation)\$(DirPath)" />
   </Target>
 
   <PropertyGroup>
