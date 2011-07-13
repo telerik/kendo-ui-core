@@ -5,10 +5,11 @@ echo %1
 
 C:\NodeJS\bin\cygpath.exe -u %1 > tmpFile
 
-set /p myvar= < tmpFile 
+set /p converted= < tmpFile 
 del tmpFile
 
-set buildPath=%myvar%/build/build.js
+set buildPath=%converted%/build/build.js
+set buildPath=%buildPath: =\ %
 
 echo %buildPath%
 
