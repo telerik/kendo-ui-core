@@ -80,15 +80,50 @@
                     teardown: destroyChart
                 });
 
-                test("tickSize is propagated to both axes", function() {
+                test("axisDefaults are applied to categoryAxis", function() {
                     createChart({
                         axisDefaults: {
-                            tickSize: 5
+                            flag: true
                         }
                     });
 
-                    equal(plotArea.axisX.options.tickSize, 5);
-                    equal(plotArea.axisY.options.tickSize, 5);
+                    ok(chart.options.categoryAxis.flag === true);
+                });
+
+                test("axisDefaults are applied to valueAxis", function() {
+                    createChart({
+                        axisDefaults: {
+                            flag: true
+                        }
+                    });
+
+                    ok(chart.options.valueAxis.flag === true);
+                });
+
+                test("categoryAxis settings override axisDefaults settings", function() {
+                    createChart({
+                        axisDefaults: {
+                            flag: false
+                        },
+                        categoryAxis: {
+                            flag: true
+                        }
+                    });
+
+                    ok(chart.options.categoryAxis.flag === true);
+                });
+
+                test("valueAxis settings override axisDefaults settings", function() {
+                    createChart({
+                        axisDefaults: {
+                            flag: false
+                        },
+                        valueAxis: {
+                            flag: true
+                        }
+                    });
+
+                    ok(chart.options.valueAxis.flag === true);
                 });
 
                 test("axisDefaults override theme", function() {
