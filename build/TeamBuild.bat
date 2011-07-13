@@ -1,6 +1,6 @@
 @echo off
 
-set /p path= < "C:\NodeJS\bin\cygpath.exe" "-u %1"
+"C:\NodeJS\bin\cygpath.exe" "-u %1" > path
 
 echo path;
 
