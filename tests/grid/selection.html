@@ -299,6 +299,92 @@
                 var row = table.find("tbody tr").eq(0);
                 ok(row.find("td:first").hasClass("t-state-focused"));
             });
+
+            test("clearSelection clears selected items", function() {                
+                var grid = setup({
+                        selectable: true
+                    }),
+                    cell = table.find("tbody tr:eq(1)").find("td").first();
+                cell.mousedown().mouseup();
+                grid.clearSelection();
+
+                ok(!cell.parent().hasClass("t-state-selected"));
+            });
+
+            test("clearSelection triggers change event", function() {                
+                var triggered = false,
+                    grid = setup({
+                        selectable: true,
+                        change: function() {
+                            triggered = true;
+                        }
+                    }),
+                    row = table.find("tbody tr:eq(1)").addClass("t-state-selected");                
+                grid.clearSelection();
+
+                ok(triggered);
+            });
+
+            test("select without arguments return all selected items", function() {
+                var grid = setup({
+                        selectable: true
+                    }),
+                    firstRow = table.find("tbody tr:eq(0)").addClass("t-state-selected");
+
+                var selected = grid.select();
+                
+                equal(selected.length, 1);
+                equal(selected[0], firstRow[0]);
+            });
+
+            test("select with arguments mark the arguments as selected", function() {
+                var grid = setup({
+                        selectable: true
+                    }),
+                    firstRow = table.find("tbody tr:eq(0)");                
+
+                grid.select(firstRow);
+                
+                ok(firstRow.hasClass("t-state-selected"));
+            });
+
+            test("select clears previously selected items if single select", function() {
+                var grid = setup({
+                        selectable: true
+                    }),
+                    rows = table.find("tbody tr");
+                rows.eq(0).addClass("t-state-selected");
+                grid.select(rows.eq(1));
+                
+                ok(!rows.eq(0).hasClass("t-state-selected"));
+                ok(rows.eq(1).hasClass("t-state-selected"));
+            });
+
+            test("select persist previously selected items if multi select", function() {
+                var grid = setup({
+                        selectable: "multiple"
+                    }),
+                    rows = table.find("tbody tr");
+                rows.eq(0).addClass("t-state-selected");
+                grid.select(rows.eq(1));
+                
+                ok(rows.eq(0).hasClass("t-state-selected"));
+                ok(rows.eq(1).hasClass("t-state-selected"));
+            });
+
+            test("select with array of items as argument select first if single select", function() {
+                var grid = setup({
+                        selectable: true
+                    }),
+                    rows = table.find("tbody tr");
+                                    
+                grid.select(rows);
+                
+                ok(rows.eq(0).hasClass("t-state-selected"));
+                ok(!rows.eq(1).hasClass("t-state-selected"));
+                ok(!rows.eq(2).hasClass("t-state-selected"));
+            });
+                      
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
