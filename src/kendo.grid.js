@@ -66,13 +66,13 @@
                 firstItemIndex = Math.max(Math.floor(scrollTop / rowHeight), 0),
                 lastItemIndex = Math.max(firstItemIndex + Math.floor(height / rowHeight), 0);
 
-                that._scrollTop = scrollTop - (skip * rowHeight);
-                that._scrollbarTop = scrollTop;
+            that._scrollTop = scrollTop - (skip * rowHeight);
+            that._scrollbarTop = scrollTop;
 
-                if (!that._fetch(firstItemIndex, lastItemIndex, isScrollingUp)) {
-                    that.wrapper[0].scrollTop = that._scrollTop;
-                }
-            },
+            if (!that._fetch(firstItemIndex, lastItemIndex, isScrollingUp)) {
+                that.wrapper[0].scrollTop = that._scrollTop;
+            }
+        },
 
         _fetch: function(firstItemIndex, lastItemIndex, scrollingUp) {
             var that = this,
@@ -80,6 +80,7 @@
                 itemHeight = that.itemHeight,
                 skip = dataSource.skip() || 0,
                 take = dataSource.take(),
+                originalSkip = dataSource._currentPage(), //change this !!
                 fetching = false,
                 prefetchAt = 0.33;
 
@@ -93,10 +94,13 @@
                 skip = firstItemIndex;
                 that._scrollTop = itemHeight;
                 that._page(skip, take);
-            } else if (firstItemIndex < (skip + take * prefetchAt) && firstItemIndex > take * prefetchAt) {
-                dataSource.prefetch(Math.max(skip - take, 0), take);
-            } else if (lastItemIndex > skip + take * prefetchAt) {
-                dataSource.prefetch(skip + take, take);
+            } else {
+                if (firstItemIndex < originalSkip + take * prefetchAt && firstItemIndex > take * prefetchAt) {
+                    dataSource.fetchPrevPage();
+                }
+                if (lastItemIndex > (originalSkip + take) - (take * prefetchAt)) {
+                    dataSource.fetchNextPage();
+                }
             }
             return fetching;
         },
@@ -215,8 +219,8 @@
                     dataSource: that.dataSource
                 });
             }
-            
-            that.table.delegate(".t-grouping-row .t-collapse, .t-grouping-row .t-expand", "click", function(e) {                
+
+            that.table.delegate(".t-grouping-row .t-collapse, .t-grouping-row .t-expand", "click", function(e) {
                 e.preventDefault();
                 var element = $(this),
                     group = element.closest("tr");
@@ -246,8 +250,8 @@
                     }
                 });
 
-                that.wrapper.keydown(function(e) {                    
-                    if (e.keyCode === keys.SPACEBAR) {                        
+                that.wrapper.keydown(function(e) {
+                    if (e.keyCode === keys.SPACEBAR) {
                         var current = that.current();
 
                         if (!multi || !e.ctrlKey) {
@@ -312,8 +316,8 @@
                 };
 
             wrapper.bind({
-                focus: function() {                    
-                    if(that._current && that._current.is(":visible")) {                        
+                focus: function() {
+                    if(that._current && that._current.is(":visible")) {
                         that._current.addClass(FOCUSED);
                     } else {
                         currentProxy(that.table.find(FIRST_CELL_SELECTOR));
@@ -321,8 +325,8 @@
                 },
                 focusout: function() {
                     if (that._current) {
-                        that._current.removeClass(FOCUSED);                        
-                    }                    
+                        that._current.removeClass(FOCUSED);
+                    }
                 },
                 keydown: function(e) {
                     var key = e.keyCode,
@@ -347,7 +351,7 @@
                     }
                 }
             });
-                        
+
             if($.browser.msie) {
                 wrapper.delegate(selector, "click", clickCallback);                
             } else {
