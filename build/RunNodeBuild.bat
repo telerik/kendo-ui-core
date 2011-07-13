@@ -1,7 +1,9 @@
 @echo off
 
 echo "fooo"
-echo "\TB\%1\Griffin\Kendo\Sources"
+dir "\TB\%1\Griffin\Kendo\Sources"
+echo "node bin folder"
+dir "C:\NodeJS\bin\"
 
 cd "\TB\%1\Griffin\Kendo\Sources"
 
