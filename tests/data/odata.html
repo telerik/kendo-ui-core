@@ -19,10 +19,10 @@
         <ol id="qunit-tests"></ol>
         <script>
 
-            var odatajson = kendo.data.transports["odata"].dialect;
+            var dialect = kendo.data.transports["odata"].dialect;
             var DataSource = kendo.data.DataSource;
 
-            test("datasource with type odata creates remote transport with odatajson dialect", function() {
+            test("datasource with type odata creates remote transport with dialect dialect", function() {
                 var dataSource = new DataSource({
                     type: "odata",
                     transport: {
@@ -30,7 +30,7 @@
                     }
                 });
 
-                ok(dataSource.transport.dialect === odatajson);
+                ok(dataSource.transport.dialect === dialect);
             });
 
             test("datasource with type odata creates remote transport sets default values for read", function() {
@@ -61,16 +61,28 @@
                 equal(schema.data, "d.results");
             });
 
-            test("odatajson adds $format and $inlinecount and $callback to the request", function() {
-                equal(odatajson(), "$format=json&$inlinecount=allpages&$callback=callback");
+            test("dialect adds $format and $inlinecount and $callback to the request", function() {
+                equal(dialect(), "$format=json&$inlinecount=allpages&$callback=callback");
             });
 
-            test("odatajson adds $skip for skip", function() {
-                ok(odatajson({skip: 1}).indexOf("&$skip=1") > -1 );
+            test("dialect adds $skip for skip", function() {
+                ok(dialect({skip: 1}).indexOf("&$skip=1") > -1 );
             });
 
-            test("odatajson adds $top for take", function() {
-                ok(odatajson({take: 1}).indexOf("&$top=1") > -1 );
+            test("dialect adds $top for take", function() {
+                ok(dialect({take: 1}).indexOf("&$top=1") > -1 );
+            });
+
+            test("dialect adds $orderby", function() {
+                ok(dialect({ sort: [ { field:"foo", dir: "asc" } ]}).indexOf("&$orderby=foo") > -1 );
+            });
+
+            test("dialect adds $orderby when direction is descending", function() {
+                ok(dialect({ sort: [ { field:"foo", dir: "desc" } ]}).indexOf("&$orderby=foo desc") > -1 );
+            });
+
+            test("dialect adds $orderby when there are multiple order by expressions", function() {
+                ok(dialect({ sort: [ { field:"bar", dir: "desc" }, { field:"foo", dir: "asc" } ]}).indexOf("&$orderby=bar desc,foo") > -1 );
             });
         </script>
     </body>
