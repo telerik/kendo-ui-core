@@ -8,10 +8,6 @@
         proxy = $.proxy,
         noop = $.noop,
         Template,
-        /**
-         * @name kendo.JSON
-         * @namespace
-         */
         JSON = JSON || {},
         support = {},
         FUNCTION = "function",
@@ -22,10 +18,6 @@
         BOOLEAN = "boolean",
         dateCheck = /\d/;
 
-    /**
-     * @name Event
-     * @class
-     */
     function Event() {
         this._isPrevented = false;
     }
@@ -39,8 +31,7 @@
         }
     };
 
-    function Class() {
-    }
+    function Class() {}
 
     Class.extend = function(proto) {
         var base = function() {},
@@ -146,8 +137,13 @@
         begin: "<#", // the marker which denotes the beginning of executable code
         end: "#>", // the marker which denotes the end of executable code
         /**
-         * @memberOf kendo.Template
+         * Renders a template for each item of the data.
+         * @name kendo.Template.render
          * @static
+         * @function
+         * @param {String} template The template that will be rendered
+         * @param {Array} data Compilation options
+         * @returns {String} The rendered template
          */
         render: function(template, data) {
             var idx,
@@ -161,8 +157,13 @@
             return html;
         },
         /**
-         * @memberOf kendo.Template
+         * Compiles a template to a function that builds HTML. Useful when a template will be used several times.
+         * @name kendo.Template.compile
          * @static
+         * @function
+         * @param {String} template The template that will be compiled
+         * @param {Object} options Compilation options
+         * @returns {Function} The compiled template
          */
         compile: function(template, options) {
             var settings = extend({}, this, options),
@@ -321,9 +322,6 @@
     }
 
     if (typeof JSON.stringify !== FUNCTION) {
-        /**
-         * @memberOf kendo.JSON
-         */
         JSON.stringify = function (value, replacer, space) {
             var i;
             gap = "";
