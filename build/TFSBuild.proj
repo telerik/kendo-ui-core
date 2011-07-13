@@ -6,7 +6,6 @@
 
 	<!-- Do not edit this -->
 	<Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\TeamBuild\Microsoft.TeamFoundation.Build.targets" />
-  <Import Project="Config.proj" />
 
 	<ProjectExtensions>
 
