@@ -178,17 +178,17 @@
                 .addClass(TreeView.rendering.groupCssClass(group))
                 .css("display", group.expanded ? "" : "none");
 
-            that._items(groupElement, group);
+            that._nodes(groupElement, group);
         },
 
-        _items: function(groupElement, groupData) {
+        _nodes: function(groupElement, groupData) {
             var that = this,
-                items = groupElement.find("> li"),
+                nodes = groupElement.find("> li"),
                 nodeData;
 
-            groupData = extend({ length: items.length }, groupData);
+            groupData = extend({ length: nodes.length }, groupData);
 
-            items.each(function(i, node) {
+            nodes.each(function(i, node) {
                 node = $(node);
 
                 nodeData = { index: i, expanded: node.data("expanded") === true };
@@ -197,7 +197,7 @@
 
                 that._updateNodeClasses(node, groupData, nodeData);
 
-                // iterate over child items
+                // iterate over child nodes
                 that._group(node);
             });
         },
@@ -271,20 +271,24 @@
             }
         },
 
-        processItems: function(items, callback) {
+        processItems: function(nodes, callback) {
             var that = this;
-            that.element.find(items).each(function(index, item) {
+            that.element.find(nodes).each(function(index, item) {
                 callback.call(that, index, $(item).closest(NODE));
             });
         },
 
         /**
-         * Expands items!
+         * Expands one or more nodes
          *
-         * @param {String} items
+         * @param {String} nodes
+         *
+         * @example
+         * var treeview = $("TreeView").data("kendoTreeView");
+         * treeview.expand(".t-item"); // expands all items
          */
-        expand: function (items) {
-            this.processItems(items, function (index, item) {
+        expand: function (nodes) {
+            this.processItems(nodes, function (index, item) {
                 var contents = item.find(NODECONTENTS);
 
                 if (contents.length > 0 && !contents.is(VISIBLE)) {
@@ -293,8 +297,8 @@
             });
         },
 
-        collapse: function (items) {
-            this.processItems(items, function (index, item) {
+        collapse: function (nodes) {
+            this.processItems(nodes, function (index, item) {
                 var contents = item.find(NODECONTENTS);
 
                 if (contents.length > 0 && contents.is(VISIBLE)) {
@@ -303,10 +307,10 @@
             });
         },
 
-        enable: function (items, enable) {
+        enable: function (nodes, enable) {
             enable = arguments.length == 2 ? !!enable : true;
 
-            this.processItems(items, function (index, item) {
+            this.processItems(nodes, function (index, item) {
                 var isCollapsed = !item.find(NODECONTENTS).is(VISIBLE);
 
                 if (!enable) {
