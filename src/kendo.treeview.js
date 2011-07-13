@@ -8,18 +8,12 @@
         SELECT = "select",
         EXPAND = "expand",
         COLLAPSE = "collapse",
-        CHECKED = "checked",
-        ERROR = "error",
-        LOAD = "load",
-        DATABINDING = "dataBinding",
-        DATABOUND = "dataBound",
         DRAGSTART = "dragstart",
         DRAG = "drag",
         NODEDRAGCANCELLED = "nodeDragCancelled",
         DROP = "drop",
         DRAGEND = "dragend",
         CLICK = "click",
-        CHANGE = "change",
         VISIBILITY = "visibility",
         TSTATEHOVER = "t-state-hover",
         TTREEVIEW = "t-treeview",
@@ -33,8 +27,12 @@
         /**
          * Creates a TreeView instance
          * @constructs
-         * @param element DOM element
-         * @param options options used in the TreeView creation
+         * @param {DomElement} element DOM element
+         * @param {Object} options options used in the TreeView creation
+         * @param {Array} options.dataSource The data that the TreeView will be bound to
+         * @param {Object} options.animation A collection of {Animation} objects, used to change default animations. A value of false will disable all animations in the component.
+         * @param {Animation} options.animation.expand The animation that will be used when expanding items
+         * @param {Animation} options.animation.collapse The animation that will be used when collapsing items
          */
         init: function (element, options) {
             var that = this,
@@ -94,9 +92,28 @@
                 /**
                  * Fires before a subgroup gets expanded.
                  * @name kendo.ui.TreeView#expand
-                 * @event expand
+                 * @event
+                 * @param {Event} e
+                 * @param {Node} e.node The expanded node
                  */
-                EXPAND, COLLAPSE, CHECKED, ERROR, LOAD, DATABINDING, DATABOUND, SELECT], options);
+                EXPAND,
+                /**
+                 * Fires before a subgroup gets collapsed.
+                 * @name kendo.ui.TreeView#collapse
+                 * @event
+                 * @param {Event} e
+                 * @param {Node} e.node The collapsed node
+                 */
+                COLLAPSE,
+                /**
+                 * Fires when a node gets selected.
+                 * @name kendo.ui.TreeView#select
+                 * @event
+                 * @param {Event} e
+                 * @param {Node} e.node The selected node
+                 */
+                SELECT
+            ], options);
         },
 
         options: {
@@ -280,9 +297,7 @@
 
         /**
          * Expands one or more nodes
-         *
          * @param {String} nodes
-         *
          * @example
          * var treeview = $("TreeView").data("kendoTreeView");
          * treeview.expand(".t-item"); // expands all items
