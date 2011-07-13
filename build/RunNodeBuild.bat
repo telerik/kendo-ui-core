@@ -1,3 +1,3 @@
 @echo off
 
-node
+C:\Windows\System32\ping localhost
