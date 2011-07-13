@@ -694,11 +694,24 @@
 
             Observable.fn.init.call(that);
 
+            transport = options.transport;
+
+            if (transport) {
+                transport.read = typeof transport.read === STRING ? { url: transport.read } : transport.read;
+
+                if (options.type) {
+                    transport = extend(true, {}, kendo.data.transports[options.type], transport);
+                    options.schema = extend(true, {}, kendo.data.schemas[options.type], options.schema);
+                }
+
+                that.transport = isFunction(transport.read) ? transport: new RemoteTransport(transport);
+            } else {
+                that.transport = new LocalTransport({ data: options.data });
+            }
+
             that.reader = new kendo.data.readers[options.schema.type || "json" ](options.schema);
 
             model = that.reader.model || {};
-
-            transport = options.transport;
 
             id = model.id;
 
@@ -723,16 +736,6 @@
                 };
             }
 
-            if (transport) {
-
-                if (options.type) {
-                    transport = extend({ dialect: kendo.data.dialects[options.type + (options.schema.type || "json")] }, transport);
-                }
-
-                that.transport = isFunction(transport.read) ? transport: new RemoteTransport(transport);
-            } else {
-                that.transport = new LocalTransport({ data: options.data });
-            }
 
             if (id) {
                 that.find = proxy(that.modelSet.find, that.modelSet);
@@ -1458,12 +1461,6 @@
     }
 
     extend(true, kendo.data, {
-        dialects: {
-            odatajson: function() {
-            },
-            odataxml: function() {
-            }
-        },
         readers: {
             json: DataReader
         },
