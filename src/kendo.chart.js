@@ -1698,16 +1698,20 @@
                 width: 1
             },
             isVertical: true,
-            overlay: GLASS
+            overlay: GLASS,
+            aboveAxis: true
         },
 
         reflow: function(targetBox) {
             var bar = this,
-                children = bar.children;
+                children = bar.children,
+                label = children[0];
 
             bar.box = targetBox;
-            for(var i = 0, length = children.length; i < length; i++) {
-                children[i].reflow(targetBox);
+
+            if (label) {
+                label.options.aboveAxis = bar.options.aboveAxis;
+                label.reflow(targetBox);
             }
         },
 
@@ -1815,33 +1819,24 @@
                 plotArea = chart.plotArea,
                 pointIx = 0,
                 categorySlots = [],
-                points = chart.points;
+                chartPoints = chart.points,
+                valueAxis = isVertical ? plotArea.axisY : plotArea.axisX,
+                axisCrossingValue = valueAxis.options.axisCrossingValue;
 
             chart.traverseDataPoints(function(value, categoryIx) {
-                var point = points[pointIx++];
-
+                var point = chartPoints[pointIx++];
                 if (point && point.stackValue) {
                     value = point.stackValue;
                 }
 
-                var slotX = plotArea.axisX.getSlot(isVertical ? categoryIx : value);
-                var slotY = plotArea.axisY.getSlot(isVertical ? value : categoryIx);
-
-                var pointSlot = new Box2D(slotX.x1, slotY.y1, slotX.x2, slotY.y2);
-
-                var valueAxis = options.isVertical ? plotArea.axisY : plotArea.axisX,
-                    axisCrossingValue = valueAxis.options.axisCrossingValue,
+                var slotX = plotArea.axisX.getSlot(isVertical ? categoryIx : value),
+                    slotY = plotArea.axisY.getSlot(isVertical ? value : categoryIx),
+                    pointSlot = new Box2D(slotX.x1, slotY.y1, slotX.x2, slotY.y2),
                     aboveAxis = value >= axisCrossingValue;
 
                 if (point) {
-                    var label = point.children[0];
-
-                    if (label) {
-                        label.options.aboveAxis = aboveAxis;
-                    }
-
-                    point.box = pointSlot;
                     point.options.aboveAxis = aboveAxis;
+                    point.reflow(pointSlot);
                 }
 
                 if(!categorySlots[categoryIx]) {
@@ -1853,6 +1848,8 @@
 
             chart.box = targetBox;
         },
+
+        reflowCategories: function() { },
 
         valueRange: function() {
             var chart = this;
@@ -2285,20 +2282,6 @@
                 strokeOpacity: series.opacity,
                 fill: ""
             });
-        },
-
-        reflowCategories: function(categorySlots) {
-            var chart = this,
-                isStacked = chart.options.isStacked,
-                children = chart.children,
-                childrenLength = children.length,
-                currentChild,
-                i;
-
-            for (i = 0; i < childrenLength; i++) {
-                currentChild = children[i];
-                currentChild.reflow(currentChild.box);
-            }
         }
     });
 
