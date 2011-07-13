@@ -1,5 +1,5 @@
 @echo off
 
-cd "F:\%1\Griffin\Kendo\Sources\build"
+cd "F:\%1\Griffin\Kendo\Sources"
 
-"C:\NodeJS\bin\node.exe" "build.js"
+"C:\NodeJS\bin\node.exe" "build/build.js"
