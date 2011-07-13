@@ -131,21 +131,16 @@
 
 	</PropertyGroup>
 
-  <UsingTask AssemblyFile="$(SolutionRoot)\build\MSBuildTasks\TelerikSetEnvironmentVariableTask.dll" TaskName="TelerikSetEnvironmentVariableTask.SetEnvironmentVariable" />
-  <PropertyGroup>
+  <!--<UsingTask AssemblyFile="$(SolutionRoot)\build\MSBuildTasks\TelerikSetEnvironmentVariableTask.dll" TaskName="TelerikSetEnvironmentVariableTask.SetEnvironmentVariable" />-->
+  <!--<PropertyGroup>
     <NodeJSPath>C:\NodeJS\bin</NodeJSPath>
     <PATH>$(NodeJSPath);$(PATH)</PATH>
-  </PropertyGroup>
-
-  <!--<PropertyGroup>
-    <ProgramFilesPath Condition="Exists('$(PROGRAMFILES) (x86)')">$(PROGRAMFILES) (x86)</ProgramFilesPath>
-    <ProgramFilesPath Condition="$(ProgramFilesPath) == ''">$(PROGRAMFILES)</ProgramFilesPath>
   </PropertyGroup>-->
 
   <Target Name="BeforeCompile">
     <!--<SetEnvironmentVariable Name="NodePath" value="$(NodeJS)"></SetEnvironmentVariable>
     <Exec Command='"$(NodePath)zip.exe" text.zip /cygdrive/c/NodeJS/lib'></Exec>-->
-    <SetEnvironmentVariable Name="PATH" Value="$(PATH)"/>
+    <!--<SetEnvironmentVariable Name="PATH" Value="$(PATH)"/>-->
     <Exec Command="$(SolutionRoot)\build\RunNodeBuild.bat $(BuildAgentId)" />
   </Target>
 
