@@ -3,7 +3,8 @@
         pushState = "pushState" in history,
         currentHtml = "",
         transitionEffects = "fadeOut",
-        initialFolder = 0;
+        initialFolder = 0,
+        initialRelativePath = "";
 
     Application = {
         load: function(href) {
@@ -13,7 +14,7 @@
         },
 
         fetch: function(href) {
-            var href = href.toLowerCase();
+            href = href.toLowerCase();
 
             $("#nav li a").each(function() {
                 var currentHref = $(this).attr("href");
@@ -156,6 +157,7 @@
         init: function() {
 
             initialFolder = location.href.match(/\//g).length;
+            initialRelativePath = document.getElementsByTagName("head")[0].innerHTML.match(/href=\W([\.\/]*)([\w\/]*?)kendo\.common/)[1];
 
             var skinSelector = $("#skinSelector");
 
@@ -190,7 +192,10 @@
                 history.replaceState({ href: location.href }, null, location.href);
             }
 
-            Application.fetchDescription(location.href.substr(-1) == "/" ? location.href + "overview/index.html" : location.href);
+            if (location.href.substr(-1) == "/" && !initialRelativePath)
+                Application.fetch(location.href.toLowerCase() + "overview/index.html");
+            else
+                Application.fetchDescription(location.href.substr(-1) == "/" ? location.href + "index.html" : location.href);
 
             $("#viewCode").click(function(e) {
                 e.preventDefault();
