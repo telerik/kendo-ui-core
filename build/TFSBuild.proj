@@ -135,9 +135,9 @@
     <Year>2011</Year>
     <Release>2</Release>
     <!-- Leave empty if this is a major release -->
-    <ServicePack>SP1</ServicePack>
+    <ServicePack></ServicePack>
     <!-- Leave empty if this is not a BETA release -->
-    <Beta></Beta>
+    <Beta>BETA</Beta>
 
     <Quarter>$(YEAR) Q$(Release)</Quarter>
     <DirPath>$(Quarter)\Q$(Release) $(YEAR)</DirPath>
