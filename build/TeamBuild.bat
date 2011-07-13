@@ -1,9 +1,15 @@
 @echo off
 
+echo "windows format path:"
 echo %1
 
-C:\NodeJS\bin\cygpath.exe -u "%1" > tmpPath
+C:\NodeJS\bin\cygpath.exe -u %1 > tmpFile
 
-echo %tmpPath%
+set /p myvar= < tmpFile 
+del tmpFile
 
-"C:\NodeJS\bin\node.exe" path
+set buildPath=cygdrive/%myvar%/build/build.js
+
+echo %buildPath%
+
+"C:\NodeJS\bin\node.exe" buildPath
