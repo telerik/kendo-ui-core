@@ -580,7 +580,7 @@
 					</h2>
 					
 					<for each="member" in="ownEvents">
-						<div class="fixedFont heading" id="event:{+Link.symbolNameToLinkName(member)+}">
+						<div class="fixedFont heading" id="{+Link.symbolNameToLinkName(member)+}">
 							<span class='lighter'>
 							{!
 								if (member.isPrivate) output += "&lt;private&gt; ";
