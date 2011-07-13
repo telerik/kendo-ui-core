@@ -149,7 +149,7 @@
     <SetEnvironmentVariable Name="NodeJSPath" Value="$(NodeJSPath)"/>
     <SetEnvironmentVariable Name="PATH" Value="$(PATH)"/>
     <Exec Command="set" />
-    <Exec Command="$(NodeJSPath)\zip" />
+    <Exec Command="C:\windows\microsoft.net\framework\v4.0.30319\msbuild.exe $(SolutionRoot)\build\TFSBuild.proj"></Exec>
   </Target>
 
   <Target Name="AfterCompile">
