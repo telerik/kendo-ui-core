@@ -144,7 +144,7 @@
 
   
   <Choose>
-    <When Condition="Exists($(ServicePack))">
+    <When Condition="$(ServicePack) != ''">
       <PropertyGroup>
         <DirPath>$(YEAR) Q$(Release)\$(ServicePack)</DirPath>
       </PropertyGroup>
