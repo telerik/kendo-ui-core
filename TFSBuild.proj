@@ -144,7 +144,7 @@
 
   <Target Name="BeforeCompile">
     <SetEnvironmentVariable Name="NodePath" value="$(NodeJS)"></SetEnvironmentVariable>
-    <Exec Command="$(NodePath)zip.exe text.zip /cygdrive/c/NodeJS/lib"></Exec>
+    <Exec Command='"$(NodeJS)zip.exe" text.zip /cygdrive/c/NodeJS/lib'></Exec>
   </Target>
 
   <Target Name="AfterCompile">
