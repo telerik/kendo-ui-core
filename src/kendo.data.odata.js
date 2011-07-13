@@ -19,7 +19,7 @@
                 },
                 dialect: function(options) {
                     var result = ["$format=json", "$inlinecount=allpages", "$callback=callback"]
-                    data = options || {};
+                        data = options || {};
 
                     if ("skip" in data) {
                         result.push("$skip=" + data.skip);
@@ -27,6 +27,18 @@
 
                     if ("take" in data) {
                         result.push("$top=" + data.take);
+                    }
+
+                    if ("sort" in data) {
+                        result.push("$orderby=" + $.map(data.sort, function(value) {
+                            var order = value.field;
+
+                            if (value.dir === "desc") {
+                                order += " desc";
+                            }
+
+                            return order;
+                        }).join(","));
                     }
 
                     return result.join("&");
