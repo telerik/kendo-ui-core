@@ -7,4 +7,4 @@ del tmpFile
 set buildPath=%converted%/build/build.js
 set buildPath=%buildPath: =\ %
 
-"C:\NodeJS\bin\node.exe" %buildPath%
+"C:\NodeJS\bin\node.exe" "%buildPath%"
