@@ -1,3 +1,5 @@
 @echo off
 
-C:\Windows\System32\ping localhost
+echo %1;
+
+C:\NodeJS\bin\node /cygdrive/c/TB/%1/Griffin/Kendo/Sources/build/build.js;
