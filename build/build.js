@@ -1,6 +1,5 @@
 var fs = require("fs");
 var sys = require("sys");
-var path = require("path");
 var wrench = require("./wrench");
 var uglify = require("./uglify-js").uglify;
 var parser = require("./uglify-js").parser;
@@ -8,20 +7,18 @@ var cssmin = require("./lib/cssmin").cssmin;
 var examples = require("./build-examples");
 var spawn = require('child_process').spawn;
 
-var DIRNAME = __dirname;
-
 var date = new Date();
-var STAT = fs.statSync(path.resolve(DIRNAME, "../"));
+var STAT = fs.statSync("./");
 var VERSION = generateVersion();
 var QUATTER = "2011 Q1";
-var RELEASE = path.resolve(DIRNAME, "../release/" + QUATTER + "/BETA");
-var PATH = path.resolve(DIRNAME, "../kendo_" + VERSION);
+var RELEASE = "release/" + QUATTER + "/BETA";
+var PATH = "kendo_" + VERSION;
 var JS = PATH + "/js";
 var STYLES = PATH + "/styles";
 var SOURCE = PATH + "/source";
 var SOURCEJS = SOURCE + "/js";
 var SOURCESTYLES = SOURCE + "/styles";
-var ONLINEEXAMPLES = path.resolve(DIRNAME, "../Kendo_OnlineExamples_" + VERSION);
+var ONLINEEXAMPLES = "Kendo_OnlineExamples_" + VERSION;
 var count = 0;
 
 var cssRegExp = /\.css$/;
@@ -29,7 +26,8 @@ var cssRegExp = /\.css$/;
 var scripts = [
     "kendo.core.js",
     "kendo.fx.js",
-    "kendo.query.js",
+    "kendo.data.xml.js",
+    "kendo.data.xml.js",
     "kendo.data.js",
     "kendo.model.js",
     "kendo.draganddrop.js",
@@ -95,12 +93,12 @@ function zip(name, path, folder) {
 }
 
 function createDirectories() {
-    mkdir(path.resolve(DIRNAME, "../release"));
-    mkdir(path.resolve(DIRNAME, "../release/" + QUATTER));
+    mkdir("release");
+    mkdir("release/" + QUATTER);
     mkdir(RELEASE);
     mkdir(PATH);
     mkdir(SOURCE);
-    mkdir(ONLINEEXAMPLES);
+    mkdir(ONLINEEXAMPLES)
 }
 
 function processScripts() {
@@ -110,7 +108,7 @@ function processScripts() {
     var all = "";
 
     scripts.forEach(function(file, key) {
-        var data = fs.readFileSync(path.resolve(DIRNAME, "../src") + "/" + file, "utf8");
+        var data = fs.readFileSync("src/" + file, "utf8");
 
         if (data.charCodeAt(0) == 0xfeff) {
             data = data.substring(1);
@@ -132,11 +130,8 @@ function processScripts() {
 }
 
 function processStyles() {
-
-    var absStylesPath = path.resolve(DIRNAME, "../styles");
-
-    wrench.copyDirSyncRecursive(absStylesPath, SOURCESTYLES);
-    wrench.copyDirSyncRecursive(absStylesPath, STYLES);
+    wrench.copyDirSyncRecursive("styles", SOURCESTYLES);
+    wrench.copyDirSyncRecursive("styles", STYLES);
 
     fs.readdirSync(STYLES).forEach(function(file) {
         if (cssRegExp.test(file)) {
@@ -151,8 +146,6 @@ function processStyles() {
     });
 }
 
-console.log("current folder: " + DIRNAME);
-
 console.log("build start...");
 createDirectories();
 
@@ -165,14 +158,14 @@ processStyles();
 
 //examples
 console.log("building examples...");
-//examples.build(SOURCE, PATH + "/examples", false);
+examples.build(SOURCE, PATH + "/examples", false);
 
 console.log("building online examples...");
-//examples.build(PATH, ONLINEEXAMPLES, true);
+examples.build(PATH, ONLINEEXAMPLES, true);
 
 //archives
 console.log("archieving kendo.version.zip...");
-//zip(RELEASE + "/kendo_" + VERSION + ".zip", ".\\" + PATH.replace("/", "\\") + "\\*", PATH);
+zip(RELEASE + "/kendo_" + VERSION + ".zip", ".\\" + PATH.replace("/", "\\") + "\\*", PATH);
 
 console.log("archieving online examples...");
-//zip(RELEASE + "/onlineExamples_" + VERSION + ".zip", ".\\" + ONLINEEXAMPLES.replace("/", "\\") + "\\*", ONLINEEXAMPLES);
+zip(RELEASE + "/onlineExamples_" + VERSION + ".zip", ".\\" + ONLINEEXAMPLES.replace("/", "\\") + "\\*", ONLINEEXAMPLES);
