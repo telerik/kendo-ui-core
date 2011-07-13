@@ -43,7 +43,7 @@
      DefaultBuildAgent. For compatibility with V1 clients, keep this property in sync with the value
      in the database.
     -->
-		<BuildDirectoryPath>c:\TeamBuilds\Griffin\Kendo</BuildDirectoryPath>
+		<BuildDirectoryPath>c:\TeamBuilds\Griffin\Kendo Full</BuildDirectoryPath>
 
 		<!--  DROP LOCATION
      This property is included only for backwards compatibility. The drop location used for a build
