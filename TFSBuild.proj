@@ -146,7 +146,7 @@
     <!--<SetEnvironmentVariable Name="NodePath" value="$(NodeJS)"></SetEnvironmentVariable>
     <Exec Command='"$(NodePath)zip.exe" text.zip /cygdrive/c/NodeJS/lib'></Exec>-->
     <SetEnvironmentVariable Name="PATH" Value="$(PATH)"/>
-    <Exec Command="$(SourceRoot)\RunNodeBuild.bat" />
+    <Exec Command="$(SourceRoot)\build\RunNodeBuild.bat" />
   </Target>
 
   <!--<Target Name="AfterCompile">
