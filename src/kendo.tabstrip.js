@@ -3,6 +3,7 @@
     var kendo = window.kendo,
         ui = kendo.ui,
         extend = $.extend,
+        template = kendo.template,
         Component = ui.Component,
         events = [ 'select', 'contentLoad', 'error', 'init' ],
         MOUSEENTER = 'mouseenter',
@@ -79,18 +80,15 @@
             });
         },
 
-        enable: function (element) {
-            $(element).addClass(DEFAULTSTATE)
-                 .removeClass(DISABLEDSTATE);
+        enable: function (element, state) {
+            if (state !== false)
+                state = true;
+
+            this._toggleDisabled(element, state);
         },
 
         disable: function (element) {
-            var item = $(element);
-
-            if (!item.hasClass("t-state-active"))
-                item.removeClass(DEFAULTSTATE)
-                     .removeClass(ACTIVESTATE)
-                     .addClass(DISABLEDSTATE);
+            this._toggleDisabled(element, false);
         },
 
         reload: function (element) {
@@ -106,6 +104,93 @@
             });
         },
 
+        append: function (tab) {
+            var that = this,
+                creatures = that._create(tab);
+
+            $.each (creatures.tabs, function (idx) {
+                that.tabGroup.append(this);
+                that.element.append(creatures.contents[idx]);
+            });
+
+            that._updateFirstLast();
+            that._updateContentElements();
+        },
+
+        insertBefore: function (tab, referenceTab) {
+            var that = this,
+                creatures = this._create(tab),
+                referenceContent = $(that.getContentElement(referenceTab.index()));
+
+            $.each (creatures.tabs, function (idx) {
+                referenceTab.before(this);
+                referenceContent.before(creatures.contents[idx]);
+            });
+
+            that._updateFirstLast();
+            that._updateContentElements();
+        },
+
+        insertAfter: function (tab, referenceTab) {
+            var that = this,
+                creatures = this._create(tab),
+                referenceContent = $(that.getContentElement(referenceTab.index()));
+
+            $.each (creatures.tabs, function (idx) {
+                referenceTab.after(this);
+                referenceContent.after(creatures.contents[idx]);
+            });
+
+            that._updateFirstLast();
+            that._updateContentElements();
+        },
+
+        remove: function (element) {
+            element = $(element);
+
+            var that = this,
+                content = $(that.getContentElement(element.index()));
+
+            content.remove();
+            element.remove();
+
+            that._updateContentElements();
+        },
+
+        _create: function (tab) {
+            var plain = $.isPlainObject(tab),
+                that = this, tabs, contents;
+
+            if (plain || $.isArray(tab)) { // is JSON
+                tabs = $.map(plain ? [ tab ] : tab, function (value, idx) {
+                            return $(TabStrip.renderItem({
+                                group: that.tabGroup,
+                                item: extend(value, { index: idx })
+                            }));
+                        });
+                contents = $.map(plain ? [ tab ] : tab, function (value, idx) {
+                            return $(TabStrip.renderContent({
+                                item: extend(value, { index: idx })
+                            }));
+                        });
+            } else {
+                tabs = $(tab);
+                contents = $("<div class=\"t-content\"></div>");
+
+                this._updateTabClasses(tab);
+            }
+
+            return { tabs: tabs, contents: contents };
+        },
+
+        _toggleDisabled: function(element, enable) {
+            $(element).each(function () {
+                $(this)
+                    .toggleClass(DEFAULTSTATE, enable)
+				    .toggleClass(DISABLEDSTATE, !enable);
+            });
+        },
+
         _updateClasses: function() {
             var that = this;
 
@@ -113,12 +198,11 @@
 
             that.tabGroup = that.element.children('ul').addClass('t-tabstrip-items t-reset');
 
-            var items = that.tabGroup
+            var tabs = that.tabGroup
                             .find('li')
                             .addClass('t-item'),
-                activeItem = items.filter('.' + ACTIVESTATE).index(),
-                activeTab = activeItem >= 0 ? activeItem : undefined,
-                tabStripID = that.element.attr('id');
+                activeItem = tabs.filter('.' + ACTIVESTATE).index(),
+                activeTab = activeItem >= 0 ? activeItem : undefined;
 
             that.contentElements = that.element.children('div');
 
@@ -128,28 +212,34 @@
                 .addClass(ACTIVESTATE)
                 .css({ display: 'block' });
 
-            items
+            that._updateTabClasses(tabs);
+
+            that._updateContentElements();
+        },
+
+        _updateTabClasses: function(tabs) {
+            tabs
                 .children('img')
                 .addClass('t-image');
-            items
+            tabs
                 .children('a')
                 .addClass('t-link')
                 .children('img')
                 .addClass('t-image');
-            items
+            tabs
                 .filter(':not([disabled]):not([class*=t-state-disabled])')
                 .addClass(DEFAULTSTATE);
-            items
+            tabs
                 .filter('li[disabled]')
                 .addClass(DISABLEDSTATE)
                 .removeAttr('disabled');
-            items
+            tabs
                 .filter(':not([class*=t-state])')
                 .children('a:focus')
                 .parent()
                 .addClass(ACTIVESTATE);
 
-            items.each(function() {
+            tabs.each(function() {
                 var item = $(this);
 
                 if (!item.children('.t-link').length)
@@ -159,7 +249,15 @@
                         .wrapAll('<a class="t-link"/>');
             });
 
-            items.each(function(idx) {
+        },
+
+        _updateContentElements: function() {
+            var that = this,
+                tabStripID = that.element.attr('id');
+
+            that.contentElements = that.element.children('div');
+
+            that.tabGroup.find('.t-item').each(function(idx) {
                 var currentContent = that.contentElements.eq(idx),
                     id = tabStripID + '-' + (idx+1),
                     href = $(this).children('.t-link').attr('href');
@@ -167,11 +265,19 @@
                 if (!currentContent.length)
                     $('<div id="'+ id +'" class="t-content"></div>').appendTo(that.element);
                 else
-                    if (!currentContent.attr('id'))
-                        currentContent.attr('id', id);
+                    currentContent.attr('id', id);
             });
 
             that.contentElements = that.element.children('div'); // refresh the contents
+        },
+
+        _updateFirstLast: function () {
+            var tabs = this.tabGroup.children(".t-item");
+
+            tabs.filter(".t-first:not(:first-child)").removeClass("t-first");
+            tabs.filter(".t-last:not(:last-child)").removeClass("t-last");
+            tabs.filter(":first-child").addClass("t-first");
+            tabs.filter(":last-child").addClass("t-last");
         },
 
         _toggleHover: function(e) {
@@ -294,8 +400,12 @@
             return true;
         },
 
+        getSelectedTab: function () {
+            return this.element.find('li.' + ACTIVESTATE);
+        },
+
         getSelectedTabIndex: function () {
-            return this.element.find('li.' + ACTIVESTATE).index();
+            return this.getSelectedTab().index();
         },
 
         getContentElement: function (itemIndex) {
@@ -353,10 +463,94 @@
         }
     });
 
+    // client-side rendering
     extend(TabStrip, {
-        create: function () {
+        renderItem: function (options) {
+            options = extend({ tabStrip: {}, group: {} }, options);
+
+            var templates = TabStrip.templates,
+                empty = templates.empty,
+                item = options.item,
+                tabStrip = options.tabStrip;
+
+            return templates.item(extend(options, {
+                image: item.imageUrl ? templates.image : empty,
+                sprite: item.spriteCssClass ? templates.sprite : empty,
+                itemWrapper: templates.itemWrapper
+            }, TabStrip.rendering));
+        },
+
+        renderContent: function (options) {
+            return TabStrip.templates.content(extend(options, TabStrip.rendering));
         }
     });
+
+    TabStrip.rendering = {
+        wrapperCssClass: function (group, item) {
+            var result = "t-item",
+                index = item.index;
+
+            if (item.enabled === false) {
+                result += " t-state-disabled";
+            } else {
+                result += " t-state-default";
+            }
+
+            if (index == 0) {
+                result += " t-first"
+            }
+
+            if (index == group.length-1) {
+                result += " t-last";
+            }
+
+            return result;
+        },
+        textClass: function(item) {
+            var result = "t-link";
+
+            return result;
+        },
+        textAttributes: function(item) {
+            return item.url ? " href='" + item.url + "'" : "";
+        },
+        text: function(item) {
+            return item.encoded === false ? item.text : kendo.htmlEncode(item.text);
+        },
+        tag: function(item) {
+            return item.url ? "a" : "span";
+        },
+        contentAttributes: function(content) {
+            return content.active !== true ? " style='display:none'" : "";
+        },
+        contentCssClass: function(content) {
+            return "t-content";
+        },
+        contents: function(data) {
+            return "&nbsp;";
+        }
+    };
+
+    TabStrip.templates = {
+        content: template(
+            "<div class='<#= contentCssClass(content) #>'<#= contentAttributes(content) #>>" +
+                "<#= contents(data); #>" +
+            "</div>"
+        ),
+        itemWrapper: template(
+            "<<#= tag(item) #> class='<#= textClass(item) #>'<#= textAttributes(item) #>>" +
+                "<#= image(item) #><#= sprite(item) #><#= text(item) #>" +
+            "</<#= tag(item) #>>"
+        ),
+        item: template(
+            "<li class='<#= wrapperCssClass(group, item) #>'>" +
+                "<#= itemWrapper(data) #>" +
+            "</li>"
+        ),
+        image: template("<img class='t-image' alt='' src='<#= imageUrl #>' />"),
+        sprite: template("<span class='t-sprite <#= spriteCssClass #>'></span>"),
+        empty: template("")
+    };
 
     kendo.ui.plugin("TabStrip", TabStrip, Component);
 

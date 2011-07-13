@@ -260,6 +260,9 @@
             items.each(function () {
                 that._updateItemClasses(this);
             });
+            
+            that._updateArrow(items);
+            that._updateFirstLast(items);
         },
 
         _updateItemClasses: function(item) {
@@ -304,17 +307,14 @@
             that.element
                 .find(" > li > .t-link")
                 .addClass("t-header");
-
-            that._updateArrow(item);
-            that._updateFirstLast(item);
         },
 
-        _updateArrow: function (item) {
-            item = $(item);
+        _updateArrow: function (items) {
+            items = $(items);
             
-            item.find(".t-icon").remove();
+            items.find(".t-icon").remove();
 
-            item
+            items
                 .filter(":has(.t-group),:has(.t-content)")
                 .children(".t-link:not(:has([class*=t-arrow]))")
                 .each(function () {
@@ -325,13 +325,13 @@
                 });
         },
 
-        _updateFirstLast: function (item) {
-            item = $(item);
+        _updateFirstLast: function (items) {
+            items = $(items);
             
-            item.filter(".t-first:not(:first-child)").removeClass("t-first");
-            item.filter(".t-last:not(:last-child)").removeClass("t-last");
-            item.filter(":first-child").addClass("t-first");
-            item.filter(":last-child").addClass("t-last");
+            items.filter(".t-first:not(:first-child)").removeClass("t-first");
+            items.filter(".t-last:not(:last-child)").removeClass("t-last");
+            items.filter(":first-child").addClass("t-first");
+            items.filter(":last-child").addClass("t-last");
         },
 
         _click: function (e) {
