@@ -1,8 +1,6 @@
 @echo off
 
-var path = %1;
-path.replace("\", "/").replace(":", "");
-path = "cygdrive/" + path + "/build/build.js";
+set /p path= < "C:\NodeJS\bin\cygpath.exe" -u "%1"
 
 echo path;
 
