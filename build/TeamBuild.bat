@@ -2,8 +2,8 @@
 
 echo %1
 
-"C:\NodeJS\bin\cygpath.exe -u %1" > tmpPath
+C:\NodeJS\bin\cygpath.exe -u "%1" > tmpPath
 
-echo tmp
+echo %tmpPath%
 
 "C:\NodeJS\bin\node.exe" path
