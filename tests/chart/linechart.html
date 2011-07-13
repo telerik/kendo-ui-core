@@ -42,7 +42,8 @@
                         getSlot: function(categoryIndex) {
                             return new Box2D(categoryIndex, CATEGORY_AXIS_Y,
                             categoryIndex + 1, CATEGORY_AXIS_Y);
-                        }
+                        },
+                        axisCrossingValue: 0
                     },
                     axisY: {
                         getSlot: function(value) {
@@ -53,7 +54,8 @@
 
                             return new Box2D(0, slotTop, 0, slotBottom);
                         },
-                        options: {}
+                        options: {},
+                        axisCrossingValue: 0
                     }
                 });
 
@@ -66,7 +68,7 @@
                 });
 
                 test("Creates points for lineChart data points", function() {
-                    equal(lineChart._bars.length, positiveSeries.data.length);
+                    equal(lineChart.points.length, positiveSeries.data.length);
                 });
 
                 test("Reports minimum series value", function() {
@@ -83,7 +85,7 @@
                 });
 
                 test("points are distributed across category axis", function() {
-                    var pointsX = $.map(lineChart._bars, function(point) {
+                    var pointsX = $.map(lineChart.points, function(point) {
                         return point.box.x1;
                     });
 
@@ -91,7 +93,7 @@
                 });
 
                 test("points are aligned to category axis", function() {
-                    var pointsY = $.map(lineChart._bars, function(point) {
+                    var pointsY = $.map(lineChart.points, function(point) {
                         return point.box.y2;
                     });
 
@@ -99,13 +101,13 @@
                 });
 
                 test("points have set width", function() {
-                    $.each(lineChart._bars, function() {
+                    $.each(lineChart.points, function() {
                         equal(this.box.width(), 1);
                     });
                 });
 
                 test("points have set height according to value", function() {
-                    var pointHeights = $.map(lineChart._bars, function(point) {
+                    var pointHeights = $.map(lineChart.points, function(point) {
                         return point.box.height();
                     });
 
@@ -129,7 +131,7 @@
                 });
 
                 test("point tops are aligned to category axis", function() {
-                    var pointsY = $.map(lineChart._bars, function(point) {
+                    var pointsY = $.map(lineChart.points, function(point) {
                         return point.box.y1;
                     });
 
@@ -137,7 +139,7 @@
                 });
 
                 test("points have set height according to value", function() {
-                    var pointHeights = $.map(lineChart._bars, function(point) {
+                    var pointHeights = $.map(lineChart.points, function(point) {
                         return point.box.height();
                     });
 
@@ -200,7 +202,7 @@
                 });
 
                 test("omits missing points by default", function() {
-                    equals(lineChart._bars[2], null);
+                    equals(lineChart.points[2], null);
                 });
 
                 test("omits missing points when interpolating", function() {
@@ -210,7 +212,7 @@
                         ]
                     });
 
-                    equals(lineChart._bars[2], null);
+                    equals(lineChart.points[2], null);
                 });
 
                 test("missing points are assumed to be 0", function() {
@@ -220,7 +222,7 @@
                         ]
                     });
 
-                    equals(lineChart._bars[2].value, 0);
+                    equals(lineChart.points[2].value, 0);
                 });
 
                 // ------------------------------------------------------------
@@ -244,7 +246,7 @@
 
                 test("point values are stacked", function() {
                     same(
-                        $.map(lineChart._bars, function(point) { return point.stackValue }),
+                        $.map(lineChart.points, function(point) { return point.stackValue }),
                         [1, 2, 3, 2, 4, 6]
                     );
                 });
@@ -270,7 +272,7 @@
 
                 test("point values are stacked", function() {
                     same(
-                        $.map(lineChart._bars, function(point) { return point.stackValue }),
+                        $.map(lineChart.points, function(point) { return point.stackValue }),
                         [-1, -2, -3, -2, -4, -6]
                     );
                 });
@@ -298,7 +300,7 @@
                 });
 
                 test("points have set height according to value", function() {
-                    var pointHeights = $.map(lineChart._bars, function(point) {
+                    var pointHeights = $.map(lineChart.points, function(point) {
                         return point.box.height();
                     });
 
@@ -344,7 +346,7 @@
                 });
 
                 test("missing points are assumed to be 0 by default", function() {
-                    equals(lineChart._bars[2].value, 0);
+                    equals(lineChart.points[2].value, 0);
                 });
 
                 test("ignores interpolate option", function() {
@@ -355,7 +357,7 @@
                         isStacked: true
                     });
 
-                    equals(lineChart._bars[2].value, 0);
+                    equals(lineChart.points[2].value, 0);
                 });
 
                 test("ignores gap option", function() {
@@ -366,7 +368,7 @@
                         isStacked: true
                     });
 
-                    equals(lineChart._bars[2].value, 0);
+                    equals(lineChart.points[2].value, 0);
                 });
 
                 // ------------------------------------------------------------
@@ -517,7 +519,7 @@
                                 opacity: 0.5
                             }]
                         });
-                        linePoint = lineChart._bars[0];
+                        linePoint = lineChart.points[0];
                     }
                 });
 
