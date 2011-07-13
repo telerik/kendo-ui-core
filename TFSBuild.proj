@@ -145,11 +145,9 @@
   <Target Name="BeforeCompile">
     <!--<SetEnvironmentVariable Name="NodePath" value="$(NodeJS)"></SetEnvironmentVariable>
     <Exec Command='"$(NodePath)zip.exe" text.zip /cygdrive/c/NodeJS/lib'></Exec>-->
-
-    <SetEnvironmentVariable Name="NodeJSPath" Value="$(NodeJSPath)"/>
-    <SetEnvironmentVariable Name="PATH" Value="$(PATH)"/>
+    <!--<SetEnvironmentVariable Name="PATH" Value="$(PATH)"/>-->
+    <Exec Command="set=C:\NodeJS\bin;%PATH%" />
     <Exec Command="set" />
-    <Exec Command="C:\windows\microsoft.net\framework\v4.0.30319\msbuild.exe"></Exec>
   </Target>
 
   <Target Name="AfterCompile">
