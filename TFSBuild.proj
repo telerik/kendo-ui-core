@@ -146,8 +146,8 @@
     <!--<SetEnvironmentVariable Name="NodePath" value="$(NodeJS)"></SetEnvironmentVariable>
     <Exec Command='"$(NodePath)zip.exe" text.zip /cygdrive/c/NodeJS/lib'></Exec>-->
 
-    <SetEnvironmentVariable Variable="PATH" Value="$(NodeJSPath)"/>
-    <SetEnvironmentVariable Variable="PATH" Value="$(PATH)"/>
+    <SetEnvironmentVariable Name="NodeJSPath" Value="$(NodeJSPath)"/>
+    <SetEnvironmentVariable Name="PATH" Value="$(PATH)"/>
     <Message Text="test: $(PATH)"></Message>
     <Warning Condition="!Exists('$(NodeJSPath)')" Text="$(NodeJSPath) doesn't exist. Check version number."/>
     <Warning Condition="!Exists('$(NodeJSPath)\node.exe')" Text="$(NodeJSPath)\node.exe doesn't exist. Check version number."/>
