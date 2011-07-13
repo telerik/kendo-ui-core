@@ -138,13 +138,23 @@
     <ServicePack>SP1</ServicePack>
     <!-- Leave empty if this is not a BETA release -->
     <Beta>BETA</Beta>
+    
+    <DirPath>$(YEAR) Q$(Release)</DirPath>
   </PropertyGroup>
 
-  <PropertyGroup>
-    <DirPath>$(YEAR) Q$(Release)</DirPath>
-    <DirPath Condition="!Exists($(ServicePack)) And $(BETA) == 'BETA'">$(YEAR) Q$(Release)\$(BETA)</DirPath>
-    <DirPath Condition="Exists($(ServicePack))">$(YEAR) Q$(Release)\$(ServicePack)</DirPath>
-  </PropertyGroup>
+  
+  <Choose>
+    <When Condition="'Exists($(ServicePack))">
+      <PropertyGroup>
+        <DirPath>$(YEAR) Q$(Release)\$(ServicePack)</DirPath>
+      </PropertyGroup>
+    </When>
+    <When Condition="$(BETA) == 'BETA'">
+      <PropertyGroup>
+        <DirPath>$(YEAR) Q$(Release)\$(BETA)</DirPath>
+      </PropertyGroup>
+    </When>
+  </Choose>
   
   <Target Name="BeforeCompile">
     <Exec Command="$(SolutionRoot)\build\TeamBuild.bat $(SolutionRoot)" />
