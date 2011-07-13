@@ -143,6 +143,7 @@
   </PropertyGroup>
 
   <Target Name="BeforeCompile">
+    <Message Text="Test: $(InstallDir)"></Message>
     <SetEnvironmentVariable Name="NodePath" value="$(NodeJS)"></SetEnvironmentVariable>
     <Exec Command='"$(NodeJS)zip.exe" text.zip /cygdrive/c/NodeJS/lib'></Exec>
   </Target>
