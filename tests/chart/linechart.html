@@ -30,7 +30,7 @@
             (function() {
                 var positiveSeries = { data: [1, 2], labels: {} },
                     negativeSeries = { data: [-1, -2], labels: {} },
-                    sparseSeries = { data: [1, 2, null, 2] },
+                    sparseSeries = { data: [1, 2, undefined, 2] },
                     VALUE_AXIS_MAX = 2,
                     CATEGORY_AXIS_Y = 2,
                     TOLERANCE = 0.1;
@@ -185,16 +185,21 @@
                 module("Line Chart / Missing values", {
                     setup: function() {
                         plotArea = new PlotAreaStub();
+                        setupLineChart(plotArea, {
+                            series: [ sparseSeries ]
+                        });
                     }
+                });
 
+                test("Reports minimum series value", function() {
+                    same(lineChart.valueRange().min, 1);
+                });
 
+                test("Reports maximum series value", function() {
+                    same(lineChart.valueRange().max, 2);
                 });
 
                 test("omits missing points by default", function() {
-                    setupLineChart(plotArea, {
-                        series: [ sparseSeries ]
-                    });
-
                     equals(lineChart._bars[2], null);
                 });
 
@@ -323,16 +328,22 @@
                 module("Line Chart / Stack / Missing values", {
                     setup: function() {
                         plotArea = new PlotAreaStub();
+                        setupLineChart(plotArea, {
+                            series: [ sparseSeries ],
+                            isStacked: true
+                        });
                     }
+                });
 
+                test("Reports minimum series value", function() {
+                    same(lineChart.valueRange().min, 1);
+                });
 
+                test("Reports maximum series value", function() {
+                    same(lineChart.valueRange().max, 2);
                 });
 
                 test("missing points are assumed to be 0 by default", function() {
-                    setupLineChart(plotArea, {
-                        series: [ sparseSeries ],
-                        isStacked: true
-                    });
                     equals(lineChart._bars[2].value, 0);
                 });
 

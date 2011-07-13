@@ -2152,8 +2152,8 @@
             });
 
             if (isStacked) {
-                chart._seriesMin = Math.min.apply(Math, sums);
-                chart._seriesMax = Math.max.apply(Math, sums);
+                chart._seriesMin = sparseArrayMin(sums);
+                chart._seriesMax = sparseArrayMax(sums);
             }
         },
 
