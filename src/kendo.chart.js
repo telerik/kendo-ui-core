@@ -2211,7 +2211,7 @@
 
                 stackPoint = categoryPoints[categoryPoints.length - 1];
                 if (stackPoint) {
-                    stackValue = stackPoint.value;
+                    stackValue = stackPoint.stackValue;
                 }
 
                 point.stackValue = value + stackValue;
