@@ -22,19 +22,11 @@
         <script>
             $("#table1").kendoGrid({
                 dataSource: {
+                    type: "odata",
                     transport: {
                         read: "livescores.xml"
                     },
                     schema: {
-                        type: "xml",
-                        data: "/LiveScores/MatchData",
-                        model: {
-                            fields: {
-                                team1: "Team1/text()",
-                                team2: "Team2/text()",
-                                score: "Score/text()"
-                            }
-                        }
                     }
                 },
                 sortable: true

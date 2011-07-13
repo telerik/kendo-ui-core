@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>OData Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.query.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <link rel="stylesheet" href="../qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">OData example</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+
+            var odatajson = kendo.data.dialects["odatajson"];
+            var odataxml = kendo.data.dialects["odataxml"];
+            var DataSource = kendo.data.DataSource;
+
+            test("datasource with type odata creates remote transport with odatajson dialect", function() {
+                var dataSource = new DataSource({
+                    type: "odata",
+                    transport: {
+                        read: "foo"
+                    }
+                });
+
+                ok(dataSource.transport.dialect === odatajson);
+            });
+
+            test("datasource with type odata creates remote transport with odataxml dialect if the schema type is xml", function() {
+                var dataSource = new DataSource({
+                    type: "odata",
+                    transport: {
+                        read: "foo"
+                    },
+                    schema: {
+                        type: "xml"
+                    }
+                });
+
+                ok(dataSource.transport.dialect === odataxml);
+            });
+        </script>
+    </body>
+</html>
