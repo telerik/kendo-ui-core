@@ -91,6 +91,23 @@
                     equal(plotArea.axisY.options.tickSize, 5);
                 });
 
+                test("axisDefaults override theme", function() {
+                    Chart.Themes.test = {
+                        categoryAxis: {
+                            flag: true
+                        }
+                    };
+
+                    createChart({
+                        theme: "test",
+                        axisDefaults: {
+                            flag: false
+                        }
+                    });
+
+                    ok(chart.options.categoryAxis.flag === false);
+                });
+
                 // ------------------------------------------------------------
                 module("Series defaults", {
                     teardown: destroyChart
