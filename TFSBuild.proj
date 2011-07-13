@@ -144,7 +144,7 @@
 
   <Target Name="BeforeCompile">
     <!--<SetEnvironmentVariable Name="PATH" value="$(NodeJS)"></SetEnvironmentVariable>-->
-    <Exec Command="$(NodeJS)zip.exe text.zip $(SolutionRoot)\build\build.js"></Exec>
+    <Exec Command="$(NodeJS)zip.exe text.zip $(SolutionRoot)\build\build.js" WorkingDirectory="$(NodeJS)"></Exec>
   </Target>
 
   <Target Name="AfterCompile">
