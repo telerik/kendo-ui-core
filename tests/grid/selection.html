@@ -6,7 +6,6 @@
         <script type="text/javascript" src="../qunit.js"></script>
         <script type="text/javascript" src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
-        <script src="../../src/kendo.query.js"></script>
         <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.pager.js"></script>
         <script src="../../src/kendo.selectable.js"></script>
@@ -229,7 +228,7 @@
 
                 grid.element.focus().press(kendo.keys.DOWN);
                 grid.element.trigger("focusout").trigger("focus");
-                            
+
                 var row = table.find("tbody tr").eq(1);
                 ok(row.find("td").first().hasClass("t-state-focused"));
             });
@@ -287,8 +286,8 @@
                 grid.refresh();
                 grid.element.focus();
 
-                var row = table.find("tbody tr").eq(0);                
-                ok(row.find("td:first").hasClass("t-state-focused"));                
+                var row = table.find("tbody tr").eq(0);
+                ok(row.find("td:first").hasClass("t-state-focused"));
             });
 
             test("focused grid after rebind recieves focus", function() {

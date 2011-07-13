@@ -217,10 +217,6 @@
 
     kendo.loader.define( {
         core: "kendo.core.js",
-        query: {
-            url: "kendo.query.js",
-            depends: "core"
-        },
         fx: {
             url: "kendo.fx.js",
             depends: "core"
@@ -236,10 +232,6 @@
         sortable: {
             url: "kendo.sortable.js",
             depends: "datasource"
-        },
-        navigatable: {
-            url: "kendo.navigatable.js",
-            depends: "core"
         },
         selectable: {
             url: "kendo.selectable.js",

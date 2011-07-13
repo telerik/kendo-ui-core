@@ -52,6 +52,10 @@ tests.push(
         title: "remote transport"
     },
     {
+        page: "data/odata.html",
+        title: "odata"
+    },
+    {
         page: "data/inmemorycache.html",
         title: "in-memory cache"
     },

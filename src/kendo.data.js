@@ -5,8 +5,9 @@
         isPlainObject = $.isPlainObject,
         isEmptyObject = $.isEmptyObject,
         isArray = $.isArray,
+        grep = $.grep,
         ajax = $.ajax,
-        map = $.map,
+        map,
         each = $.each,
         noop = $.noop,
         kendo = window.kendo,
@@ -14,7 +15,6 @@
         Class = kendo.Class,
         Model = kendo.data.Model,
         ModelSet = kendo.data.ModelSet,
-        Query = kendo.data.Query,
         STRING = "string",
         CREATE = "create",
         READ = "read",
@@ -30,7 +30,407 @@
         getter = kendo.getter,
         stringify = kendo.stringify;
 
+    var Comparer = {
+        selector: function(field) {
+            return isFunction(field) ? field : getter(field);
+        },
 
+        asc: function(field) {
+            var selector = this.selector(field);
+            return function (a, b) {
+                a = selector(a);
+                b = selector(b);
+
+                return a > b ? 1 : (a < b ? -1 : 0);
+            };
+        },
+
+        desc: function(field) {
+            var selector = this.selector(field);
+            return function (a, b) {
+                a = selector(a);
+                b = selector(b);
+
+                return a < b ? 1 : (a > b ? -1 : 0);
+            };
+        },
+
+        create: function(descriptor) {
+            return Comparer[descriptor.dir.toLowerCase()](descriptor.field);
+        },
+
+        combine: function(comparers) {
+             return function(a, b) {
+                 var result = comparers[0](a, b),
+                     idx,
+                     length;
+
+                 for (idx = 1, length = comparers.length; idx < length; idx ++) {
+                     result = result || comparers[idx](a, b);
+                 }
+
+                 return result;
+             }
+        }
+    };
+
+    var Filter = {
+        create: function(expressions) {
+            var idx,
+                length,
+                expr,
+                selector,
+                operator,
+                desc,
+                descriptors = [],
+                caseSensitive,
+                predicate;
+
+            expressions = expressions || [];
+            for(idx = 0, length = expressions.length; idx < length; idx ++) {
+                expr = expressions[idx];
+                if(typeof expr.value === STRING && !expr.caseSensitive) {
+                     caseSensitive = function(value) {
+                        return value.toLowerCase();
+                     };
+                } else {
+                    caseSensitive = function(value) {
+                        return value;
+                    };
+                }
+                selector = Filter.selector(expr.field, caseSensitive);
+                operator = Filter.operator(expr.operator);
+                desc = operator(selector, caseSensitive(expr.value));
+                descriptors.push(desc);
+            }
+            predicate = Filter.combine(descriptors);
+
+            return function(data) {
+                return Filter.execute(predicate, data);
+            };
+        },
+        selector: function(field, caseSensitive) {
+            if (field) {
+                return isFunction(field) ? field : function(record) {
+                    return caseSensitive(record[field]);
+                };
+            }
+            return function(record) {
+                return caseSensitive(record);
+            };
+        },
+        execute: function(predicate, data) {
+            var idx,
+                length = data.length,
+                record,
+                result = [];
+
+            for(idx = 0; idx < length; idx ++) {
+                record = data[idx];
+
+                if (predicate(record)) {
+                    result.push(record);
+                }
+            }
+
+            return result;
+        },
+        combine: function(descriptors) {
+            return function(record) {
+                var result = true,
+                    idx = 0,
+                    length = descriptors.length;
+
+                while (result && idx < length) {
+                    result = descriptors[idx ++](record);
+                }
+
+                return result;
+            };
+        },
+        operator: function(operator) {
+            if (!operator) {
+                return Filter.eq;
+            }
+
+            if (isFunction(operator)) {
+                return operator;
+            }
+
+            operator = operator.toLowerCase();
+            operatorStrings = Filter.operatorStrings;
+            for (var op in operatorStrings) {
+                if ($.inArray(operator, operatorStrings[op]) > -1) {
+                    operator = op;
+                    break;
+                }
+            }
+
+            return Filter[operator];
+        },
+        operatorStrings: {
+            "eq": ["eq", "==", "isequalto", "equals", "equalto", "equal"],
+            "neq": ["neq", "!=", "isnotequalto", "notequals", "notequalto", "notequal", "not"],
+            "lt": ["lt", "<", "islessthan", "lessthan", "less"],
+            "lte": ["lte", "<=", "islessthanorequalto", "lessthanequal"],
+            "gt": ["gt", ">", "isgreaterthan", "greaterthan", "greater"],
+            "gte": ["gte", ">=", "isgreaterthanorequalto", "greaterthanequal"],
+            "startswith": ["startswith"],
+            "endswith": ["endswith"],
+            "contains": ["contains", "substringof"]
+        },
+        eq: function(selector, value) {
+            return function(record){
+                var item = selector(record);
+                return item > value ? false : (value > item ? false : true);
+            };
+        },
+        neq: function(selector, value) {
+            return function(record){
+                return selector(record) != value;
+            };
+        },
+        lt: function(selector, value) {
+            return function(record){
+                return selector(record) < value;
+            };
+        },
+        lte: function(selector, value) {
+            return function(record){
+                return selector(record) <= value;
+            };
+        },
+        gt: function(selector, value) {
+            return function(record){
+                return selector(record) > value;
+            };
+        },
+        gte: function(selector, value) {
+            return function(record){
+                return selector(record) >= value;
+            };
+        },
+        startswith: function(selector, value) {
+            return function(record){
+                return selector(record).indexOf(value) == 0;
+            };
+        },
+        endswith: function(selector, value) {
+            return function(record){
+                var item = selector(record);
+                return item.lastIndexOf(value) == item.length - 1;
+            };
+        },
+        contains: function(selector, value) {
+            return function(record){
+                return selector(record).indexOf(value) > -1;
+            };
+        }
+    }
+
+    if (Array.prototype.map !== undefined) {
+        map = function (array, callback) {
+            return array.map(callback);
+        }
+    } else {
+        map = function (array, callback) {
+            var length = array.length, result = new Array(length);
+
+            for (var i = 0; i < length; i++) {
+                result[i] = callback(array[i], i, array);
+            }
+
+            return result;
+        }
+    }
+
+    function Query(data) {
+        this.data = data || [];
+    }
+
+    Query.expandSort = function(field, dir) {
+        var descriptor = typeof field === STRING ? { field: field, dir: dir } : field,
+            descriptors = isArray(descriptor) ? descriptor : (descriptor !== undefined ? [descriptor] : []);
+
+        return grep(descriptors, function(d) { return !!d.dir; });
+    }
+    Query.expandFilter = function(expressions) {
+        return expressions = isArray(expressions) ? expressions : [expressions];
+    }
+    Query.expandAggregates = function(expressions) {
+        return expressions = isArray(expressions) ? expressions : [expressions];
+    }
+    Query.expandGroup = function(field, dir) {
+       var descriptor = typeof field === STRING ? { field: field, dir: dir } : field,
+           descriptors = isArray(descriptor) ? descriptor : (descriptor !== undefined ? [descriptor] : []);
+
+        return map(descriptors, function(d) { return { field: d.field, dir: d.dir || "asc", aggregates: d.aggregates }; });
+    }
+    Query.prototype = {
+        toArray: function () {
+            return this.data;
+        },
+        range: function(index, count) {
+            return new Query(this.data.slice(index, index + count));
+        },
+        skip: function (count) {
+            return new Query(this.data.slice(count));
+        },
+        take: function (count) {
+            return new Query(this.data.slice(0, count));
+        },
+        select: function (selector) {
+            return new Query(map(this.data, selector));
+        },
+        orderBy: function (selector) {
+            var result = this.data.slice(0),
+                comparer = isFunction(selector) || !selector ? Comparer.asc(selector) : selector.compare;
+
+            return new Query(result.sort(comparer));
+        },
+        orderByDescending: function (selector) {
+            return new Query(this.data.slice(0).sort(Comparer.desc(selector)));
+        },
+        sort: function(field, dir) {
+            var idx,
+                length,
+                descriptors = Query.expandSort(field, dir),
+                comparers = [];
+
+            if (descriptors.length) {
+                for (idx = 0, length = descriptors.length; idx < length; idx++) {
+                    comparers.push(Comparer.create(descriptors[idx]));
+                }
+
+                return this.orderBy({ compare: Comparer.combine(comparers) });
+            }
+
+            return this;
+        },
+        filter: function(expressions) {
+            var predicate = Filter.create(Query.expandFilter(expressions));
+            return new Query(predicate(this.data));
+        },
+        group: function(descriptors, allData) {
+            descriptors =  Query.expandGroup(descriptors || []);
+            allData = allData || this.data;
+
+            var that = this,
+                result = new Query(that.data),
+                descriptor;
+
+            if (descriptors.length > 0) {
+                descriptor = descriptors[0];
+                result = result.groupBy(descriptor).select(function(group) {
+                    var data = new Query(allData).filter([ { field: group.field, operator: "eq", value: group.value } ]);
+                    return {
+                        field: group.field,
+                        value: group.value,
+                        items: descriptors.length > 1 ? new Query(group.items).group(descriptors.slice(1), data.toArray()).toArray() : group.items,
+                        hasSubgroups: descriptors.length > 1,
+                        aggregates: data.aggregate(descriptor.aggregates)
+                    }
+                });
+            }
+            return result;
+        },
+        groupBy: function(descriptor) {
+            if (isEmptyObject(descriptor)) {
+                return new Query(result);
+            }
+
+            var field = descriptor.field,
+                sorted = this.sort(field, descriptor.dir || "asc").toArray(),
+                accessor = kendo.accessor(field),
+                item,
+                groupValue = accessor.get(sorted[0], field),
+                group = {
+                    field: field,
+                    value: groupValue,
+                    items: []
+                },
+                currentValue,
+                idx,
+                len,
+                result = [group];
+
+            for(idx = 0, len = sorted.length; idx < len; idx++) {
+                item = sorted[idx];
+                currentValue = accessor.get(item, field);
+                if(groupValue !== currentValue) {
+                    groupValue = currentValue;
+                    group = {
+                        field: field,
+                        value: groupValue,
+                        items: []
+                    };
+                    result.push(group);
+                }
+                group.items.push(item);
+            }
+            return new Query(result);
+        },
+        aggregate: function (aggregates) {
+            var idx,
+                len,
+                result = {};
+
+            if (aggregates && aggregates.length) {
+                for(idx = 0, len = this.data.length; idx < len; idx++) {
+                   calculateAggregate(result, aggregates, this.data[idx], idx, len);
+                }
+            }
+            return result;
+        }
+    }
+    function calculateAggregate(accumulator, aggregates, item, index, length) {
+            aggregates = aggregates || [];
+            var idx,
+                aggr,
+                functionName,
+                fieldAccumulator,
+                len = aggregates.length;
+
+            for (idx = 0; idx < len; idx++) {
+                aggr = aggregates[idx];
+                functionName = aggr.aggregate;
+                var field = aggr.field;
+                accumulator[field] = accumulator[field] || {};
+                accumulator[field][functionName] = functions[functionName.toLowerCase()](accumulator[field][functionName], item, kendo.accessor(field), index, length);
+            }
+        }
+
+    var functions = {
+        sum: function(accumulator, item, accessor) {
+            return accumulator = (accumulator || 0) + accessor.get(item);
+        },
+        count: function(accumulator, item, accessor) {
+            return (accumulator || 0) + 1;
+        },
+        average: function(accumulator, item, accessor, index, length) {
+            accumulator = (accumulator || 0) + accessor.get(item);
+            if(index == length - 1) {
+                accumulator = accumulator / length;
+            }
+            return accumulator;
+        },
+        max: function(accumulator, item, accessor) {
+            var accumulator =  (accumulator || 0),
+                value = accessor.get(item);
+            if(accumulator < value) {
+                accumulator = value;
+            }
+            return accumulator;
+        },
+        min: function(accumulator, item, accessor) {
+            var value = accessor.get(item),
+                accumulator = (accumulator || value)
+            if(accumulator > value) {
+                accumulator = value;
+            }
+            return accumulator;
+        }
+    };
     function process(data, options) {
         var query = new Query(data),
             options = options || {},
@@ -287,176 +687,6 @@
         }
     });
 
-    var XmlDataReader = Class.extend({
-        init: function(options) {
-            var that = this,
-                total = options.total,
-                model = options.model,
-                data = options.data;
-
-            if (model) {
-                if (isPlainObject(model)) {
-                    model.id = that.getter(model.id);
-                    if (model.fields) {
-                        each(model.fields, function(field, value) {
-                            model.fields[field] = that.getter(value);
-                        });
-                    }
-                    model = Model.define(model);
-                }
-
-                that.model = model;
-            }
-
-            if (total) {
-                total = that.getter(total);
-                that.total = function(data) {
-                    return parseInt(total(data));
-                };
-            }
-
-            if (data) {
-                data = that.xpathToMember(data);
-                that.data = function(value) {
-                    var record, field, result = that.evaluate(value, data);
-
-                    if (that.model && model.fields) {
-                        return map(result, function(value) {
-                            record = {};
-                            for (field in model.fields) {
-                                record[field] = model.fields[field](value);
-                            }
-                            return record;
-                        });
-                    }
-
-                    return result;
-                };
-            }
-        },
-        total: function(result) {
-            return this.data(result).length;
-        },
-        parseDOM: function(element) {
-            var result = {},
-                parsedNode,
-                node,
-                nodeType,
-                nodeName,
-                member,
-                attribute,
-                attributes = element.attributes,
-                attributeCount = attributes.length,
-                idx;
-
-            for (idx = 0; idx < attributeCount; idx++) {
-                attribute = attributes[idx];
-                result["@" + attribute.nodeName] = attribute.nodeValue;
-            }
-
-            for (node = element.firstChild; node; node = node.nextSibling) {
-                nodeType = node.nodeType;
-
-                if (nodeType === 3) {
-                    // text nodes are stored as #text field
-                    result["#text"] = node.nodeValue;
-                } else if (nodeType === 1) {
-                    // elements are stored as fields
-                    parsedNode = this.parseDOM(node);
-
-                    nodeName = node.nodeName;
-
-                    member = result[nodeName];
-
-                    if (isArray(member)) {
-                        // elements of same nodeName are stored as array
-                        member.push(parsedNode);
-                    } else if (member !== undefined) {
-                        member = [member, parsedNode];
-                    } else {
-                        member = parsedNode;
-                    }
-
-                    result[nodeName] = member;
-                }
-            }
-            return result;
-        },
-
-        evaluate: function(value, expression) {
-            var members = expression.split("."),
-                member,
-                result,
-                length,
-                intermediateResult,
-                idx;
-
-            while (member = members.shift()) {
-                value = value[member];
-
-                if (isArray(value)) {
-                    result = [];
-                    expression = members.join(".");
-
-                    for (idx = 0, length = value.length; idx < length; idx++) {
-                        intermediateResult = this.evaluate(value[idx], expression);
-
-                        intermediateResult = isArray(intermediateResult) ? intermediateResult : [intermediateResult];
-
-                        result.push.apply(result, intermediateResult);
-                    }
-
-                    return result;
-                }
-            }
-
-            return value;
-        },
-
-        parse: function(xml) {
-            var documentElement,
-                tree,
-                result = {};
-
-            documentElement = xml.documentElement || $.parseXML(xml).documentElement;
-
-            tree = this.parseDOM(documentElement);
-
-            result[documentElement.nodeName] = tree;
-
-            return result;
-        },
-
-        xpathToMember: function(member) {
-            if (!member) {
-                return "";
-            }
-
-            member = member.replace(/^\//, "") // remove the first "/"
-                           .replace(/\//g, "."); // replace all "/" with "."
-
-            if (member.indexOf("@") >= 0) {
-                // replace @attribute with '["@attribute"]'
-                return member.replace(/\.?(@.*)/, '["$1"]');
-            }
-
-            if (member.indexOf("text()") >= 0) {
-                // replace ".text()" with '["#text"]'
-                return member.replace(/(\.?text\(\))/, '["#text"]');
-            }
-
-            return member;
-        },
-        getter: function(member) {
-            return getter(this.xpathToMember(member));
-        }
-    });
-
-    var readers = {
-        json: DataReader,
-        xml: XmlDataReader
-    };
-
     var DataSource = Observable.extend({
         init: function(options) {
             var that = this, id, model, transport;
@@ -479,7 +709,7 @@
 
             Observable.fn.init.call(that);
 
-            that.reader = new readers[options.schema.type || "json" ](options.schema);
+            that.reader = new kendo.data.readers[options.schema.type || "json" ](options.schema);
 
             model = that.reader.model || {};
 
@@ -509,6 +739,11 @@
             }
 
             if (transport) {
+
+                if (options.type) {
+                    transport = extend({ dialect: kendo.data.dialects[options.type + (options.schema.type || "json")] }, transport);
+                }
+
                 that.transport = isFunction(transport.read) ? transport: new RemoteTransport(transport);
             } else {
                 that.transport = new LocalTransport({ data: options.data });
@@ -1203,13 +1438,22 @@
         return data;
     }
 
-    extend(kendo.data, {
+    extend(true, kendo.data, {
+        dialects: {
+            odatajson: function() {
+            },
+            odataxml: function() {
+            }
+        },
+        readers: {
+            json: DataReader
+        },
+        Query: Query,
         DataSource: DataSource,
         LocalTransport: LocalTransport,
         RemoteTransport: RemoteTransport,
         LocalStorageCache: LocalStorageCache,
         Cache: Cache,
-        DataReader: DataReader,
-        XmlDataReader: XmlDataReader
+        DataReader: DataReader
     });
 })(jQuery);
