@@ -1,3 +1,3 @@
 @echo off
 
-set
+node
