@@ -6,9 +6,7 @@
 
 	<!-- Do not edit this -->
 	<Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\TeamBuild\Microsoft.TeamFoundation.Build.targets" />
-  <Import Project="$(SolutionRoot)\build\Config.proj" />
-
-	<ProjectExtensions>
+  <ProjectExtensions>
 
 		<!-- Team Foundation Build Version - DO NOT CHANGE -->
 		<ProjectFileVersion>2</ProjectFileVersion>
@@ -132,6 +130,16 @@
 
 	</PropertyGroup>
 
+  <PropertyGroup>
+    <!--Change for every major (quarterly) release -->
+    <Year>2011</Year>
+    <Release>2</Release>
+    <!-- Leave empty if this is a major release -->
+    <ServicePack></ServicePack>
+    <!-- Leave empty if this is not a BETA release -->
+    <Beta>BETA</Beta>
+  </PropertyGroup>
+  
   <Target Name="BeforeCompile">
     <Exec Command="$(SolutionRoot)\build\TeamBuild.bat $(SolutionRoot)" />
   </Target>
