@@ -65,9 +65,13 @@
 
             Component.fn.init.call(chart, element);
 
+            options = deepExtend({}, chart.options, options);
+            applySeriesDefaults(options);
+            applyAxisDefaults(options);
+
             chart.options = deepExtend(
-                chart.options,
-                theme ? Chart.Themes[theme] || Chart.Themes[theme.toLowerCase()] : { },
+                {},
+                theme ? Chart.Themes[theme] || Chart.Themes[theme.toLowerCase()] : {},
                 options
             );
 
@@ -77,7 +81,8 @@
                 chart._initDataSource();
             }
 
-            chart.refresh();
+            chart._ensureSize();
+            chart._refresh();
         },
 
         options: {
@@ -115,8 +120,14 @@
         refresh: function() {
             var chart = this;
 
-            chart._applyDefaults();
+            applySeriesDefaults(chart.options);
+            applyAxisDefaults(chart.options);
 
+            chart._refresh();
+        },
+
+        _refresh: function() {
+            var chart = this;
             if (chart.options.dataSource) {
                 chart.dataSource.read();
             } else {
@@ -147,32 +158,11 @@
             model.getView().renderTo(chart.element[0]);
         },
 
-        _applyDefaults: function() {
+        _ensureSize: function() {
             var chart = this,
                 element = chart.element,
                 options = chart.options,
-                series = options.series,
-                seriesType,
-                colors = options.seriesColors,
-                chartArea = options.chartArea,
-                seriesDefaults = options.seriesDefaults,
-                baseSeriesDefaults = deepExtend({}, options.seriesDefaults);
-
-            delete baseSeriesDefaults.bar;
-            delete baseSeriesDefaults.column;
-            delete baseSeriesDefaults.line;
-
-            for (var i = 0, length = series.length; i < length; i++) {
-                // Determine series type in advance so we can apply the
-                // default settings for this type
-                seriesType = series[i].type || options.seriesDefaults.type;
-
-                series[i] = deepExtend(
-                    { color: colors[i % colors.length] },
-                    baseSeriesDefaults,
-                    options.seriesDefaults[seriesType],
-                    series[i]);
-            }
+                chartArea = options.chartArea;
 
             if (!chartArea.width) {
                 chartArea.width = element.width() || DEFAULT_WIDTH;
@@ -2390,11 +2380,11 @@
                 categoryAxis = new CategoryAxis(deepExtend({
                         orientation: invertAxes ? VERTICAL : HORIZONTAL,
                         axisCrossingValue: invertAxes ? categoriesCount : 0
-                    }, options.axisDefaults, options.categoryAxis)
+                    }, options.categoryAxis)
                 ),
                 valueAxis = new NumericAxis(seriesMin, seriesMax, deepExtend({
                         orientation: invertAxes ? HORIZONTAL : VERTICAL
-                    }, options.axisDefaults, options.valueAxis)
+                    }, options.valueAxis)
                 );
 
             plotArea.axisX = invertAxes ? valueAxis : categoryAxis;
@@ -3735,6 +3725,42 @@
 
     function template(definition) {
         return baseTemplate(definition, { useWithBlock: false, paramName: "d" });
+    }
+
+    function applySeriesDefaults(options) {
+        var series = options.series,
+            i,
+            seriesLength = series.length,
+            seriesType,
+            colors = options.seriesColors,
+            seriesDefaults = options.seriesDefaults,
+            baseSeriesDefaults = deepExtend({}, options.seriesDefaults);
+
+        delete baseSeriesDefaults.bar;
+        delete baseSeriesDefaults.column;
+        delete baseSeriesDefaults.line;
+
+        for (i = 0; i < seriesLength; i++) {
+            seriesType = series[i].type || options.seriesDefaults.type;
+
+            series[i] = deepExtend(
+                { color: colors[i % colors.length] },
+                baseSeriesDefaults,
+                seriesDefaults[seriesType],
+                series[i]);
+        }
+    }
+
+    function applyAxisDefaults(options) {
+        options.categoryAxis = deepExtend({},
+            options.axisDefaults,
+            options.categoryAxis
+        );
+
+        options.valueAxis = deepExtend({},
+            options.axisDefaults,
+            options.valueAxis
+        );
     }
 
     // Exports ================================================================
