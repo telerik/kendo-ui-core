@@ -457,6 +457,13 @@
         xml: XmlDataReader
     };
 
+    var dialects = {
+        odatajson: function() {
+        },
+        odataxml: function() {
+        }
+    };
+
     var DataSource = Observable.extend({
         init: function(options) {
             var that = this, id, model, transport;
@@ -509,6 +516,11 @@
             }
 
             if (transport) {
+
+                if (options.type) {
+                    transport = extend({ dialect: dialects[options.type + (options.schema.type || "json")] }, transport);
+                }
+
                 that.transport = isFunction(transport.read) ? transport: new RemoteTransport(transport);
             } else {
                 that.transport = new LocalTransport({ data: options.data });
@@ -1204,6 +1216,7 @@
     }
 
     extend(kendo.data, {
+        dialects: dialects,
         DataSource: DataSource,
         LocalTransport: LocalTransport,
         RemoteTransport: RemoteTransport,
