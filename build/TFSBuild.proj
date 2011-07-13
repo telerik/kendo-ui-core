@@ -6,7 +6,7 @@
 
 	<!-- Do not edit this -->
 	<Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\TeamBuild\Microsoft.TeamFoundation.Build.targets" />
-  <Import Project="Config.proj" />
+  <Import Project="$(SolutionRoot)\build\Config.proj" />
 
 	<ProjectExtensions>
 
@@ -137,9 +137,6 @@
   </Target>
 
   <Target Name="AfterCompile">
-    <PropertyGroup>
-        <
-    </PropertyGroup>
     <ItemGroup>
       <Resources Include="$(SolutionRoot)\release\**" />
     </ItemGroup>
