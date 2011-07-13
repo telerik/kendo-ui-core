@@ -138,20 +138,25 @@
     <ServicePack></ServicePack>
     <!-- Leave empty if this is not a BETA release -->
     <Beta></Beta>
-    
-    <DirPath>$(YEAR) Q$(Release)</DirPath>
+
+    <Quarter>$(YEAR) Q$(Release)</Quarter>
   </PropertyGroup>
 
   
   <Choose>
     <When Condition="$(ServicePack) != ''">
       <PropertyGroup>
-        <DirPath>$(YEAR) Q$(Release)\$(ServicePack)</DirPath>
+        <DirPath>$(Quarter)\Q$(Release) $(YEAR) $(ServicePack)</DirPath>
       </PropertyGroup>
     </When>
     <When Condition="$(BETA) == 'BETA'">
       <PropertyGroup>
-        <DirPath>$(YEAR) Q$(Release)\$(BETA)</DirPath>
+        <DirPath>$(Quarter)\$(BETA)</DirPath>
+      </PropertyGroup>
+    </When>
+    <When>
+      <PropertyGroup>
+        <DirPath>$(Quarter)\Q$(Release) $(YEAR)</DirPath>
       </PropertyGroup>
     </When>
   </Choose>
