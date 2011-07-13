@@ -24,77 +24,18 @@
         <table id="table1" style="height: 400px">
         </table>
         <script>
-            var index = 0;
-            var remoteDataSource;
             $(document).ready(function() {
-                var total = 1000000;
-
-                     remoteDataSource = new kendo.data.DataSource({
-                         type: "odata",
-                         serverPaging: true,
-                         pageSize: 200,
-                         transport: {
-                             read: "http://services.odata.org/Northwind/Northwind.svc/Orders"
-                         }
-                     });
-                     var remoteDataSource2 = new kendo.data.DataSource({
-                        serverPaging: true,
-                        pageSize: 20,
-                        transport: {
-                            read: {
-                                url: "http://korchev/Telerik.Mvc.Examples/Grid/_FirstLook",
-                                type: "POST",
-                                dataType: "json",
-                                cache: true
-                            },
-                            dialect: function(options) {
-                                return { page: options.page, size: 20 };
-                            }
-                        },
-                        schema: {
-                            data: function(result) {
-                                return result.data;
-                            },
-                            total: function(result) {
-                                return result.total;
-                            }
-                        }
-                    }),
-                    dataSource = new kendo.data.DataSource({
-                        serverPaging: true,
-                        transport: {
-                            read: function(options) {
-                                var take = options.data.take,
-                                skip = options.data.skip;
-
-                                var data = [];
-
-                                for (var i = skip; i < Math.min(skip + take, total); i++) {
-                                    data.push({ OrderID: i + 10248, CustomerID: "Contact " + i });
-                                }
-
-                                options.success(data);
-                            }
-                        } ,
-                        schema: {
-                            data: function(data) {
-                                return data;
-                            },
-                            total: function() {
-                                return total;
-                            }
-                        },
-                        pageSize: 20
-                    });
-
-
                 $("#table1").kendoGrid({
-                    dataSource: remoteDataSource,
-                    columns: [ {
-                        title: "Foo",
-                        template: "<#=OrderID - 10248#>"
-                    }, "OrderID",
-                    "CustomerID" ],
+                    dataSource: {
+                        type: "odata",
+                        serverPaging: true,
+                        serverSorting: true,
+                        pageSize: 100,
+                        transport: {
+                            read: "http://services.odata.org/Northwind/Northwind.svc/Orders"
+                        }
+                    },
+                    columns: ["OrderID", "CustomerID", "ShipCity", "ShipCountry"],
                     scrollable: {
                         virtual: true
                     },
