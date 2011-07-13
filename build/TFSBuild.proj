@@ -135,7 +135,7 @@
     <Year>2011</Year>
     <Release>2</Release>
     <!-- Leave empty if this is a major release -->
-    <ServicePack></ServicePack>
+    <ServicePack>SP1</ServicePack>
     <!-- Leave empty if this is not a BETA release -->
     <Beta></Beta>
 
