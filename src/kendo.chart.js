@@ -1753,7 +1753,7 @@
         }
     });
 
-    var BarChart = ChartElement.extend({
+    var CategoricalChart = ChartElement.extend({
         init: function(plotArea, options) {
             var chart = this;
             ChartElement.fn.init.call(chart, options);
@@ -1761,7 +1761,11 @@
             chart.plotArea = plotArea;
             chart._seriesMin = Number.MAX_VALUE;
             chart._seriesMax = - Number.MAX_VALUE;
-            chart._bars = [];
+            chart._categoryTotalsPos = [];
+            chart._categoryTotalsNeg = [];
+            chart._categoryTotals = [];
+
+            chart.points = [];
 
             chart.render();
         },
@@ -1773,30 +1777,141 @@
         },
 
         render: function() {
-            var barChart = this,
-                options = barChart.options,
-                isStacked = options.isStacked,
-                catMax = [],
-                catMin = [];
+            var chart = this,
+                options = chart.options,
+                isStacked = options.isStacked;
 
-            barChart.traverseDataPoints(function(value, categoryIx, series, seriesIx) {
-                if(typeof value !== UNDEFINED) {
-                    if (isStacked) {
-                        var sums = value > 0 ? catMax : catMin;
-                        sums[categoryIx] = sums[categoryIx] ? sums[categoryIx] + value : value;
-                    } else {
-                        barChart._seriesMin = Math.min(barChart._seriesMin, value);
-                        barChart._seriesMax = Math.max(barChart._seriesMax, value);
-                    }
+            chart.traverseDataPoints(proxy(chart.addValue, chart));
+        },
+
+        addValue: function(value, categoryIx, series, seriesIx) {
+            var chart = this,
+                options = chart.options,
+                isStacked = options.isStacked,
+                totalsPos = chart._categoryTotalsPos,
+                totalsNeg = chart._categoryTotalsNeg,
+                totals = chart._categoryTotals,
+                splitTotals;
+
+            if (typeof value !== UNDEFINED) {
+                if (isStacked) {
+                    splitTotals = value > 0 ? totalsPos : totalsNeg;
+                    splitTotals[categoryIx] =
+                        splitTotals[categoryIx] ? splitTotals[categoryIx] + value : value;
+
+                    totals[categoryIx] =
+                        totals[categoryIx] ? totals[categoryIx] + value : value;
+                } else {
+                    chart._seriesMin = Math.min(chart._seriesMin, value);
+                    chart._seriesMax = Math.max(chart._seriesMax, value);
+                }
+            }
+        },
+
+        reflow: function(targetBox) {
+            var chart = this,
+                options = chart.options,
+                isVertical = options.isVertical,
+                plotArea = chart.plotArea,
+                pointIx = 0,
+                categorySlots = [],
+                points = chart.points;
+
+            chart.traverseDataPoints(function(value, categoryIx) {
+                var point = points[pointIx++];
+
+                if (point && point.stackValue) {
+                    value = point.stackValue;
                 }
 
-                barChart.addValue(value, categoryIx, series, seriesIx);
+                var slotX = plotArea.axisX.getSlot(isVertical ? categoryIx : value);
+                var slotY = plotArea.axisY.getSlot(isVertical ? value : categoryIx);
+
+                var pointSlot = new Box2D(slotX.x1, slotY.y1, slotX.x2, slotY.y2);
+
+                var valueAxis = options.isVertical ? plotArea.axisY : plotArea.axisX,
+                    axisCrossingValue = valueAxis.options.axisCrossingValue,
+                    aboveAxis = value >= axisCrossingValue;
+
+                if (point) {
+                    var label = point.children[0];
+
+                    if (label) {
+                        label.options.aboveAxis = aboveAxis;
+                        label.content = label.content || axisCrossingValue;
+                    }
+
+                    point.box = pointSlot;
+                    point.options.aboveAxis = aboveAxis;
+                }
+
+                if(!categorySlots[categoryIx]) {
+                    categorySlots[categoryIx] = isVertical ? slotX : slotY;
+                }
             });
 
-            if (isStacked) {
-                barChart._seriesMin = sparseArrayMin(catMin.length ? catMin : catMax);
-                barChart._seriesMax = sparseArrayMax(catMax.length ? catMax : catMin);
+            chart.reflowCategories(categorySlots);
+
+            chart.box = targetBox;
+        },
+
+        valueRange: function() {
+            var chart = this;
+
+            if (chart.points.length) {
+                chart.updateValueRange();
+                return { min: chart._seriesMin, max: chart._seriesMax };
             }
+
+            return null;
+        },
+
+        updateValueRange: function() {
+            var chart = this,
+                options = chart.options,
+                isStacked = options.isStacked,
+                totalsPos = chart._categoryTotalsPos,
+                totalsNeg = chart._categoryTotalsNeg;
+
+            if (isStacked) {
+                chart._seriesMin = sparseArrayMin(totalsNeg.length ? totalsNeg : totalsPos);
+                chart._seriesMax = sparseArrayMax(totalsPos.length ? totalsPos : totalsNeg);
+            }
+        },
+
+        traverseDataPoints: function(callback) {
+            var chart = this,
+            options = chart.options,
+            series = options.series,
+            categoriesCount = chart.categoriesCount();
+
+            for (var categoryIx = 0; categoryIx < categoriesCount; categoryIx++) {
+                for (var seriesIx = 0; seriesIx < series.length; seriesIx++) {
+                    var currentSeries = series[seriesIx],
+                    value = currentSeries.data[categoryIx];
+
+                    callback(value, categoryIx, currentSeries, seriesIx);
+                }
+            }
+        },
+
+        categoriesCount: function() {
+            var chart = this,
+                series = chart.options.series,
+                categories = 0;
+
+            for (var i = 0, length = series.length; i < length; i++) {
+                categories = Math.max(categories, series[i].data.length);
+            }
+
+            return categories;
+        }
+    });
+
+    var BarChart = CategoricalChart.extend({
+        init: function(plotArea, options) {
+            var chart = this;
+            CategoricalChart.fn.init.call(chart, plotArea, options);
         },
 
         addValue: function(value, categoryIx, series, seriesIx) {
@@ -1807,6 +1922,8 @@
                 labelOptions = deepExtend({
                     isVertical: options.isVertical
                 }, series.labels);
+
+            CategoricalChart.fn.addValue.apply(barChart, arguments);
 
             if (isStacked) {
                 if (labelOptions.position == "outsideEnd") {
@@ -1827,7 +1944,7 @@
                 bar.children.push(label);
             }
 
-            barChart._bars.push(bar);
+            barChart.points.push(bar);
 
             var cluster = children[categoryIx];
             if (!cluster) {
@@ -1870,75 +1987,6 @@
             }
         },
 
-        valueRange: function() {
-            var barChart = this;
-
-            if (barChart._bars.length) {
-            return { min: barChart._seriesMin, max: barChart._seriesMax };
-            }
-
-            return null;
-        },
-
-        categoriesCount: function() {
-            var barChart = this,
-                series = barChart.options.series,
-                categories = 0;
-
-            for (var i = 0, length = series.length; i < length; i++) {
-                categories = Math.max(categories, series[i].data.length);
-            }
-
-            return categories;
-        },
-
-        reflow: function(targetBox) {
-            var barChart = this,
-                options = barChart.options,
-                isVertical = options.isVertical,
-                plotArea = barChart.plotArea,
-                barIndex = 0,
-                categorySlots = [],
-                bars = barChart._bars;
-
-            barChart.traverseDataPoints(function(value, categoryIx) {
-                var bar = bars[barIndex++];
-
-                if (bar && bar.stackValue) {
-                    value = bar.stackValue;
-                }
-
-                var slotX = plotArea.axisX.getSlot(isVertical ? categoryIx : value);
-                var slotY = plotArea.axisY.getSlot(isVertical ? value : categoryIx);
-
-                var barSlot = new Box2D(slotX.x1, slotY.y1, slotX.x2, slotY.y2);
-
-                var valueAxis = options.isVertical ? plotArea.axisY : plotArea.axisX,
-                    axisCrossingValue = valueAxis.options.axisCrossingValue,
-                    aboveAxis = value >= axisCrossingValue;
-
-                if (bar) {
-                    var label = bar.children[0];
-
-                    if (label) {
-                        label.options.aboveAxis = aboveAxis;
-                        label.content = label.content || axisCrossingValue;
-                    }
-
-                    bar.box = barSlot;
-                    bar.options.aboveAxis = aboveAxis;
-                }
-
-                if(!categorySlots[categoryIx]) {
-                    categorySlots[categoryIx] = isVertical ? slotX : slotY;
-                }
-            });
-
-            barChart.reflowCategories(categorySlots);
-
-            barChart.box = targetBox;
-       },
-
         reflowCategories: function(categorySlots) {
             var chart = this,
                 children = chart.children,
@@ -1947,22 +1995,6 @@
 
             for (i = 0; i < childrenLength; i++) {
                 children[i].reflow(categorySlots[i]);
-            }
-       },
-
-       traverseDataPoints: function(callback) {
-            var barChart = this,
-                options = barChart.options,
-                series = options.series,
-                categoriesCount = barChart.categoriesCount();
-
-            for (var categoryIx = 0; categoryIx < categoriesCount; categoryIx++) {
-                for (var seriesIx = 0; seriesIx < series.length; seriesIx++) {
-                    var currentSeries = series[seriesIx],
-                        value = currentSeries.data[categoryIx];
-
-                    callback(value, categoryIx, currentSeries, seriesIx);
-                }
             }
        }
     });
@@ -2123,38 +2155,13 @@
         }
     });
 
-    var LineChart = BarChart.extend({
+    var LineChart = CategoricalChart.extend({
         init: function(plotArea, options) {
             var chart = this;
             chart.seriesPoints = [];
             chart.categoryPoints = [];
 
-            BarChart.fn.init.call(chart, plotArea, options);
-        },
-
-        render: function() {
-            var chart = this,
-                options = chart.options,
-                isStacked = options.isStacked,
-                sums = [];
-
-            chart.traverseDataPoints(function(value, categoryIx, series, seriesIx) {
-                if(typeof value !== UNDEFINED) {
-                    if (isStacked) {
-                        sums[categoryIx] = sums[categoryIx] ? sums[categoryIx] + value : value;
-                    } else {
-                        chart._seriesMin = Math.min(chart._seriesMin, value);
-                        chart._seriesMax = Math.max(chart._seriesMax, value);
-                    }
-                }
-
-                chart.addValue(value, categoryIx, series, seriesIx);
-            });
-
-            if (isStacked) {
-                chart._seriesMin = sparseArrayMin(sums);
-                chart._seriesMax = sparseArrayMax(sums);
-            }
+            CategoricalChart.fn.init.call(chart, plotArea, options);
         },
 
         addValue: function(value, categoryIx, series, seriesIx) {
@@ -2167,6 +2174,8 @@
                 stackPoint,
                 stackValue = 0;
 
+            CategoricalChart.fn.addValue.apply(chart, arguments);
+
             if (!points) {
                 chart.seriesPoints[seriesIx] = points = [];
             }
@@ -2175,7 +2184,7 @@
                 if (isStacked || series.missingValues === ZERO) {
                     value = 0;
                 } else {
-                    chart._bars.push(null);
+                    chart.points.push(null);
                     points.push(null);
                     return;
                 }
@@ -2209,15 +2218,27 @@
                 categoryPoints.push(point);
             }
 
-            chart._bars.push(point);
+            chart.points.push(point);
             points.push(point);
             children.push(point);
+        },
+
+        updateValueRange: function() {
+            var chart = this,
+                options = chart.options,
+                isStacked = options.isStacked,
+                totals = chart._categoryTotals;
+
+            if (isStacked) {
+                chart._seriesMin = sparseArrayMin(totals);
+                chart._seriesMax = sparseArrayMax(totals);
+            }
         },
 
         getViewElements: function(view) {
             var chart = this,
                 options = chart.options,
-                elements = BarChart.fn.getViewElements.call(chart, view),
+                elements = CategoricalChart.fn.getViewElements.call(chart, view),
                 series = options.series,
                 currentSeries,
                 seriesIx,
