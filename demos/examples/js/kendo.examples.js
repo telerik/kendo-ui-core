@@ -1,8 +1,19 @@
 (function() {
     var Application,
+        extend = $.extend,
         pushState = "pushState" in history,
         currentHtml = "",
-        transitionEffects = "fadeOut",
+        animation = {
+            show: {
+                effects: "fadeIn",
+                duration: 300,
+                show: true
+            },
+            hide: {
+                effects: "fadeOut",
+                duration: 300
+            }
+        },
         initialFolder = 0,
         initialRelativePath = "";
 
@@ -32,7 +43,6 @@
         fetchExample: function (href) {
             $.get(href, function(html) {
                 currentHtml = html;
-                Application.fetchDescription();
 
                 var exampleBody = $("#exampleBody"),
                     exampleName = $(".exampleName"),
@@ -41,25 +51,28 @@
                     toolsVisible = tools.is(":visible");
 
                 if (title == "Overview")
-                    tools.kendoAnimate(transitionEffects, 300, function () { tools.hide(); });
+                    tools.kendoStop(true).kendoAnimate(extend({ show: false, hide: true }, animation.hide));
+                else {
+                    Application.fetchDescription();
+                }
 
-                exampleName.kendoAnimate(transitionEffects, 300, function() {
+                exampleName.kendoStop().kendoAnimate(extend({}, animation.hide, { complete: function() {
                     $(".exampleName").empty().html(title);
 
                     setTimeout(function() {
-                        if (title != "Overview" && !toolsVisible)
-                            tools.show().kendoAnimate(transitionEffects, 300, true);
+                    if (title != "Overview" && !toolsVisible)
+                        tools.kendoStop(true).kendoAnimate(extend({ show: true, hide: false }, animation.show));
 
-                        exampleName.kendoAnimate(transitionEffects, 300, true);
+                    exampleName.kendoStop().kendoAnimate(animation.show);
                     }, 100);
-                });
+                }}));
 
-                exampleBody.kendoAnimate(transitionEffects, 300, function() {
+                exampleBody.kendoStop().kendoAnimate(extend({}, animation.hide, { complete: function() {
                     exampleBody.empty().html(Application.body(html));
                     setTimeout(function() {
-                        exampleBody.kendoAnimate(transitionEffects, 300, true);
+                        exampleBody.kendoStop().kendoAnimate(animation.show);
                     }, 100);
-                });
+                }}));
             });
         },
 
@@ -95,8 +108,8 @@
                         $(".description").empty().html($.trim(Application.description(html)));
                     } else {
                         $("#nav .t-item > .t-link").eq(0).addClass("t-state-selected");
+                        Application.fetchExample(href);
                     }
-
                 });
             else
                 $(".description").empty().html($.trim(Application.description(currentHtml)));
@@ -130,12 +143,12 @@
 
             $.get(url, function() {
                 if (animate) {
-                    exampleElement.kendoAnimate(transitionEffects, 300, function() {
+                    exampleElement.kendoStop().kendoAnimate(extend({}, animation.hide, { complete: function() {
                         changeSkin();
                         setTimeout(function() {
-                            exampleElement.kendoAnimate(transitionEffects, 300, true);
+                            exampleElement.kendoStop().kendoAnimate(animation.show);
                         }, 100);
-                    });
+                    }}));
                 } else
                     changeSkin();
 
@@ -192,10 +205,7 @@
                 history.replaceState({ href: location.href }, null, location.href);
             }
 
-            if (location.href.substr(-1) == "/" && !initialRelativePath)
-                Application.fetch(location.href.toLowerCase() + "overview/index.html");
-            else
-                Application.fetchDescription(location.href.substr(-1) == "/" ? location.href + "index.html" : location.href);
+            Application.fetchDescription(location.href.substr(-1) == "/" ? initialRelativePath ? location.href + "index.html" : location.href + "overview/index.html" : location.href);
 
             $("#viewCode").click(function(e) {
                 e.preventDefault();
