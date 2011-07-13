@@ -525,7 +525,6 @@
 
                 return result;
             };
-            that._pending = [];
         },
 
         options: {
@@ -557,22 +556,8 @@
                     cache.add(options.data, result);
 
                     success(result);
-
-                    that._inproggress = false;
-
-                    if (that._pending.length) {
-                        that._inproggress = true;
-                        ajax(that._pending.pop());
-                        that._pending = [];
-                    }
                 };
-
-                if (!that._inproggress) {
-                    that._inproggress = true;
-                    ajax(options);
-                } else {
-                    that._pending.push(options);
-                }
+                $.ajax(options);
             }
         },
 
@@ -945,16 +930,35 @@
                     group: that._group,
                     aggregates: that._aggregates
                 });
-
-            that.trigger(REQUESTSTART);
-            that._ranges = [];
-            that.transport.read({
-                data: options,
-                success: proxy(that.success, that),
-                error: proxy(that.error, that)
+            that._queueRequest(options, function() {
+                that.trigger(REQUESTSTART);
+                that._ranges = [];
+                that.transport.read({
+                    data: options,
+                    success: proxy(that.success, that),
+                    error: proxy(that.error, that)
+                });
             });
         },
 
+        _queueRequest: function(options, callback) {
+            var that = this;
+
+            if (!that._requestInProgress) {
+                that._requestInProgress = true;
+                that._pending = null;
+                callback();
+            } else {
+                that._pending = options;
+            }
+        },
+        _dequeueRequest: function() {
+            var that = this;
+            that._requestInProgress = false;
+            if (that._pending) {
+                that.read(that._pending);
+            }
+        },
         update: function(id, values) {
             this.modelSet.update(id, values);
         },
@@ -991,12 +995,12 @@
             var start = that._skip || 0,
                 end = start + data.length;
 
-            console.log("success", start, end);
             clearTimeout(that._timeout);
             that._ranges.push({ start: start, end: end, data: data });
             that._ranges.sort( function(x, y) { return x.start - y.start; } );
 
             that._process(data);
+            that._dequeueRequest();
         },
 
         _process: function (data) {
@@ -1154,7 +1158,7 @@
                 return;
             }
 
-            return that._pageSize;
+            return that.take();
         },
 
         sort: function(val) {
@@ -1218,12 +1222,7 @@
 
         inRange: function(skip, take) {
             var that = this,
-                ranges = that._ranges,
-                end = skip + take,
-                range,
-                skipIdx,
-                takeIdx,
-                length;
+                end = Math.min(skip + take, (that._totalPages() - 1) * take);
 
             if (!that.options.serverPaging && that.data.length > 0) {
                 return true;
@@ -1234,10 +1233,10 @@
 
         range: function(skip, take) {
             var that = this,
-                end = skip + take,
+                end = Math.min(skip + take, (that._totalPages() - 1) * take),
                 data;
 
-            if (that.options.serverPaging){
+            if (that.options.serverPaging) {
                 data = that._findRange(skip, end);
 
                 if (data.length) {
@@ -1251,12 +1250,34 @@
             if (take !== undefined) {
                 skip = skip || 0;
 
-                console.log("range", skip, end);
                 clearTimeout(that._timeout);
                 that._timeout = setTimeout(function() {
                     that.query({ skip: skip, take: take, sort: that.sort(), filter: that.filter(), group: that.group(), aggregates: that.aggregate() });
                 }, 250);
             }
+        },
+
+        _currentPage: function() {
+            var that = this,
+                take = that.take();
+            return Math.max(Math.round(that.skip() / take), 0) * take;
+        },
+
+        fetchNextPage: function() {
+            var that = this,
+                take = that.take(),
+                skip = Math.max(Math.round(that.skip() / take), 0) * take;
+
+            if (that.page() < that._totalPages()) {
+                that.prefetch(skip + take, take);
+            }
+        },
+
+        fetchPrevPage: function() {
+            var that = this,
+                take = that.take(),
+                skip = Math.max(Math.max(Math.floor(that.skip() / take), 0) * take - take,0);
+            that.prefetch(skip, take);
         },
 
         _findRange: function(start, end) {
@@ -1327,26 +1348,24 @@
 
             if (!that._rangeExists(skip, skip + take)) {
 
-                console.log("before", skip, skip + take, range);
                 that._ranges.push(range);
                 clearTimeout(that._timeout);
                 that._timeout = setTimeout(function() {
-
-                console.log("before timeout", skip, skip + take, range);
+                    that._queueRequest(options, function() {
                     that.transport.read({
                         data: options,
                         success: function (data) {
-                            index = skip;
+                            that._dequeueRequest();
                             data = that.reader.parse(data);
-                            range.start = index;
                             range.data = that.reader.data(data);
-                            range.end = index + range.data.length;
+                            range.end = range.start + range.data.length;
                             that._ranges.sort( function(x, y) { return x.start - y.start; } );
-                            console.log("after", index, range.end, range);
                         }
-                    })}, 250);
+                    })});
+                }, 250);
             }
         },
+
         _rangeExists: function(start, end) {
             var that = this,
                 ranges = that._ranges,

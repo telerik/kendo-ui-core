@@ -60,10 +60,15 @@
                                 options.success(data);
                             }
                         },
+                        schema: {
+                            total:  function () {
+                                return total;
+                            }
+                        },
                         pageSize: 16
                     });
 
-
+                dataSource._total = total;
                 return dataSource;
             }
             test("inrange returns true if available", function() {
@@ -153,6 +158,81 @@
                 dataSource.prefetch(10000 - 16, 18);
                 equal(dataSource._ranges[0].start, 10000 - 16);
                 equal(dataSource._ranges[0].end, 10000);
+            });
+
+            test("fetchPrevPage adds prev page to the ranges", function() {
+                var dataSource = remoteDataSource();
+                dataSource.read();
+                dataSource.page(4);
+                dataSource.fetchPrevPage();
+                equal(dataSource._ranges[0].start, 32);
+                equal(dataSource._ranges[0].end, 48);
+            });
+
+            test("fetchPrevPage if current page is first", function() {
+                var dataSource = remoteDataSource();
+                dataSource.read();
+                dataSource.fetchPrevPage();
+                dataSource.fetchPrevPage();
+                equal(dataSource._ranges.length, 1);
+                equal(dataSource._ranges[0].start, 0);
+                equal(dataSource._ranges[0].end, 16);
+            });
+
+            test("fetchPrevPage adds prev page to the ranges even if skip is not on begining of the page (second half of the page)", function() {
+                var dataSource = remoteDataSource();
+                dataSource.read();
+                dataSource.range(40, 16);
+                dataSource.fetchPrevPage();
+                equal(dataSource._ranges[0].start, 16);
+                equal(dataSource._ranges[0].end, 32);
+            });
+
+            test("fetchNextPage adds prev page to the ranges even if skip is not on begining of the page (first half of the page)", function() {
+                var dataSource = remoteDataSource();
+                dataSource.read();
+                dataSource.range(34, 16);
+                dataSource.fetchPrevPage();
+                equal(dataSource._ranges[0].start, 16);
+                equal(dataSource._ranges[0].end, 32);
+            });
+
+            test("fetchNextPage when current page is last no more pages are fetch", function() {
+                var dataSource = remoteDataSource();
+                dataSource.read();
+                dataSource.page(10000/16);
+                dataSource.fetchNextPage();
+                dataSource.fetchNextPage();
+                equal(dataSource._ranges.length, 1);
+                equal(dataSource._ranges[0].start, 10000 - 16);
+                equal(dataSource._ranges[0].end, 10000);
+            });
+
+            test("fetchNextPage adds next page to the ranges", function() {
+                var dataSource = remoteDataSource();
+                dataSource.read();
+                dataSource.page(2);
+                dataSource.fetchNextPage();
+                equal(dataSource._ranges[1].start, 32);
+                equal(dataSource._ranges[1].end, 48);
+            });
+
+            test("fetchNextPage adds next page to the ranges even if skip is not on begining of the page (second half of the page)", function() {
+                var dataSource = remoteDataSource();
+                dataSource.read();
+                dataSource.range(20, 16);
+                dataSource.fetchNextPage();
+                equal(dataSource._ranges[1].start, 32);
+                equal(dataSource._ranges[1].end, 48);
+            });
+
+            test("fetchNextPage adds next page to the ranges even if skip is not on begining of the page (first half of the page)", function() {
+                var dataSource = remoteDataSource();
+                dataSource.read();
+                dataSource.range(32, 16);
+                dataSource.fetchNextPage();
+                equal(dataSource._ranges[1].start, 48);
+                equal(dataSource._ranges[1].end, 64);
             });
 
             test("range if range exists transport is not called", function() {

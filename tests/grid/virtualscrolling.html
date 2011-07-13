@@ -332,7 +332,8 @@
                         prefetch: function() {
                             skip = arguments[0];
                             take = arguments[1];
-                        }
+                        },
+                        _total: 10000
                     }),
                     scroller = new VirtualScrollable(container, {
                             itemHeight: function() {

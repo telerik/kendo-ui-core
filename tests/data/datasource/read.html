@@ -304,6 +304,41 @@
                 dataSource.read();
                 ok(aggregates);
             });
+
+            test("mutiple simultaneous requests are queued", function() {
+                var called = 0, dataSource = new DataSource({
+                    transport: {
+                        read: function(options) {
+                            called++;
+                        }
+                    }
+                });
+                dataSource.read();
+                dataSource.read();
+                dataSource.read();
+
+                equal(called, 1);
+                ok(dataSource._pending);
+            });
+
+            test("mutiple simultaneous requests are queued and only last one is executed", function() {
+                var called = 0, dataSource = new DataSource({
+                    transport: {
+                        read: function(options) {
+                            called++;
+                            if (called == 1) {
+                                dataSource.read();
+                                dataSource.read();
+                            }
+                            options.success([]);
+                        }
+                    }
+                });
+                dataSource.read();
+                equal(called, 2);
+                ok(!dataSource._pending);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
