@@ -10,15 +10,14 @@ var spawn = require('child_process').spawn;
 var date = new Date();
 var STAT = fs.statSync("./");
 var VERSION = generateVersion();
-var QUATTER = "2011 Q1";
-var RELEASE = "release/" + QUATTER + "/BETA";
-var PATH = "kendo_" + VERSION;
+var RELEASE = "release/";
+var PATH = "kendoUI_" + VERSION;
 var JS = PATH + "/js";
 var STYLES = PATH + "/styles";
 var SOURCE = PATH + "/source";
 var SOURCEJS = SOURCE + "/js";
 var SOURCESTYLES = SOURCE + "/styles";
-var ONLINEEXAMPLES = "Kendo_OnlineExamples_" + VERSION;
+var ONLINEEXAMPLES = "kendoUI_onlineExamples_" + VERSION;
 var count = 0;
 
 var cssRegExp = /\.css$/;
@@ -93,8 +92,6 @@ function zip(name, path, folder) {
 }
 
 function createDirectories() {
-    mkdir("release");
-    mkdir("release/" + QUATTER);
     mkdir(RELEASE);
     mkdir(PATH);
     mkdir(SOURCE);
@@ -165,7 +162,7 @@ examples.build(PATH, ONLINEEXAMPLES, true);
 
 //archives
 console.log("archieving kendo.version.zip...");
-zip(RELEASE + "/kendo_" + VERSION + ".zip", ".\\" + PATH.replace("/", "\\") + "\\*", PATH);
+zip(RELEASE + "/KendoUI_" + VERSION + ".zip", ".\\" + PATH.replace("/", "\\") + "\\*", PATH);
 
 console.log("archieving online examples...");
-zip(RELEASE + "/onlineExamples_" + VERSION + ".zip", ".\\" + ONLINEEXAMPLES.replace("/", "\\") + "\\*", ONLINEEXAMPLES);
+zip(RELEASE + "/OnlineExamples_" + VERSION + ".zip", ".\\" + ONLINEEXAMPLES.replace("/", "\\") + "\\*", ONLINEEXAMPLES);
