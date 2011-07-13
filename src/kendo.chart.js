@@ -681,7 +681,7 @@
         },
 
         options: {
-            font: SANS16,
+            font: SANS12,
             position: "outsideEnd",
             margin: 2,
             padding: 2,
@@ -1838,7 +1838,6 @@
 
                     if (label) {
                         label.options.aboveAxis = aboveAxis;
-                        label.content = label.content || axisCrossingValue;
                     }
 
                     point.box = pointSlot;
