@@ -132,9 +132,9 @@
 	</PropertyGroup>
 
   <UsingTask AssemblyFile="$(SolutionRoot)\build\MSBuildTasks\TelerikSetEnvironmentVariableTask.dll" TaskName="TelerikSetEnvironmentVariableTask.SetEnvironmentVariable" />
-
   <PropertyGroup>
-    <NodeJS>C:\NodeJS\bin\</NodeJS>
+    <NodeJSPath>C:\NodeJS\bin</NodeJSPath>
+    <PATH>$(NodeJSPath);$(PATH)</PATH>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -143,8 +143,15 @@
   </PropertyGroup>
 
   <Target Name="BeforeCompile">
-    <SetEnvironmentVariable Name="NodePath" value="$(NodeJS)"></SetEnvironmentVariable>
-    <Exec Command='"$(NodePath)zip.exe" text.zip /cygdrive/c/NodeJS/lib'></Exec>
+    <!--<SetEnvironmentVariable Name="NodePath" value="$(NodeJS)"></SetEnvironmentVariable>
+    <Exec Command='"$(NodePath)zip.exe" text.zip /cygdrive/c/NodeJS/lib'></Exec>-->
+
+    <SetEnvironmentVariable Variable="PATH" Value="$(NodeJSPath)"/>
+    <SetEnvironmentVariable Variable="PATH" Value="$(PATH)"/>
+    <Message Text="test: $(PATH)"></Message>
+    <Warning Condition="!Exists('$(NodeJSPath)')" Text="$(NodeJSPath) doesn't exist. Check version number."/>
+    <Warning Condition="!Exists('$(NodeJSPath)\node.exe')" Text="$(NodeJSPath)\node.exe doesn't exist. Check version number."/>
+    <Exec Command="set" />
   </Target>
 
   <Target Name="AfterCompile">
