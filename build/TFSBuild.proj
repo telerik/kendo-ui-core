@@ -6,6 +6,7 @@
 
 	<!-- Do not edit this -->
 	<Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\TeamBuild\Microsoft.TeamFoundation.Build.targets" />
+  <Import Project="Config.proj" />
 
 	<ProjectExtensions>
 
@@ -44,7 +45,7 @@
      DefaultBuildAgent. For compatibility with V1 clients, keep this property in sync with the value
      in the database.
     -->
-		<BuildDirectoryPath>c:\TeamBuilds\Griffin\Kendo Full</BuildDirectoryPath>
+		<BuildDirectoryPath>c:\TeamBuilds\Griffin\Kendo</BuildDirectoryPath>
 
 		<!--  DROP LOCATION
      This property is included only for backwards compatibility. The drop location used for a build
@@ -136,11 +137,14 @@
   </Target>
 
   <Target Name="AfterCompile">
+    <PropertyGroup>
+        <
+    </PropertyGroup>
     <ItemGroup>
       <Resources Include="$(SolutionRoot)\release\**" />
     </ItemGroup>
 
-    <Copy SourceFiles="@(Resources)" DestinationFolder="$(DropLocation)\BETA" />
+    <Copy SourceFiles="@(Resources)" DestinationFolder="$(DropLocation)\$(BETA)" />
   </Target>
 
   <PropertyGroup>
