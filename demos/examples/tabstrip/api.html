@@ -25,8 +25,12 @@
         <div id="example">
             <div class="configuration">
                 <span class="configTitle">API Functions</span>
-                <button class="selectTab t-button">Select</button><input type="text" /><br>
-                <button class="toggleTab t-button">Enable/Disable</button><input type="text" /><br>
+                <input type="text" value="0" /><button class="selectTab t-button">Select</button><br>
+                <button class="toggleTab t-button">Enable/Disable Selected</button><br>
+                <button class="removeItem t-button">Remove Selected</button><br>
+                <input type="text" value="Item" /><button class="appendItem t-button">Append</button><br>
+                <input type="text" value="Item" /><button class="beforeItem t-button">Insert Before</button><br>
+                <input type="text" value="Item" /><button class="afterItem t-button">Insert After</button><br>
             </div>
 
             <div id="TabStrip1">
@@ -65,7 +69,7 @@
             </div>
             <script type="text/javascript">
                 var getItem = function (target) {
-                    var itemIndex = $(target).next()[0].value;
+                    var itemIndex = $(target).prev()[0].value;
 
                     return tabStrip.tabGroup.children("li").eq(itemIndex);
                 };
@@ -75,12 +79,36 @@
                 });
 
                 $(".toggleTab").click(function(e) {
-                    var tab = getItem(e.target);
+                    var tab = tabStrip.getSelectedTab();
 
-                    if (tab.hasClass("t-state-disabled"))
-                        tabStrip.enable(tab);
-                    else
-                        tabStrip.disable(tab);
+                    tabStrip.enable(tab, tab.hasClass("t-state-disabled"));
+                });
+
+                $(".removeItem").click( function (e) {
+                    var tab = tabStrip.getSelectedTab(),
+                        otherTab = tab.next();
+                    otherTab = otherTab.length ? otherTab : tab.prev();
+
+                    tabStrip.remove(tab);
+                    tabStrip.select(otherTab);
+                });
+
+                $(".appendItem").click( function (e) {
+                    tabStrip.append({
+                            text: $(e.target).prev().val()
+                        });
+                });
+
+                $(".beforeItem").click( function (e) {
+                    tabStrip.insertBefore({
+                            text: $(e.target).prev().val()
+                        }, tabStrip.getSelectedTab());
+                });
+
+                $(".afterItem").click( function (e) {
+                    tabStrip.insertAfter({
+                            text: $(e.target).prev().val()
+                        }, tabStrip.getSelectedTab());
                 });
 
                 var tabStrip = $("#TabStrip1").kendoTabStrip().css({ marginRight: "220px" }).data("kendoTabStrip");
