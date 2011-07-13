@@ -1,9 +1,5 @@
 @echo off
 
-setlocal
-set PATH=c:\NodeJS\bin;%PATH%;
+cd "\TB\%1\Griffin\Kendo\Sources"
 
-echo %CD%
-
-"C:\NodeJS\bin\node.exe" "/cygdrive/c/TB/%1/Griffin/Kendo/Sources/build/build.js"
-endlocal
+"C:\NodeJS\bin\node.exe" "build/build.js"
