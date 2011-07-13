@@ -278,13 +278,18 @@
 
         _navigatable: function() {
             var that = this,
-                element = that.element,
+                wrapper = that.wrapper,
                 table = that.table.addClass(FOCUSABLE),
                 currentProxy = proxy(that.current, that),
                 selector = "." + FOCUSABLE + " " + CELL_SELECTOR,
-                clickCallback = function(e) { currentProxy($(e.currentTarget)); };
+                clickCallback = function(e) { 
+                    currentProxy($(e.currentTarget)); 
+                    if(e.type == "click") {
+                        wrapper.focus();
+                    }
+                };
 
-            that.wrapper.bind({
+            wrapper.bind({
                 focus: function() {                    
                     if(that._current && that._current.is(":visible")) {                        
                         that._current.addClass(FOCUSED);
@@ -311,7 +316,7 @@
                         currentProxy(current ? current.prev(":not(.t-group-cell)") : table.find(FIRST_CELL_SELECTOR));
                     } else if (keys.RIGHT === key) {
                         currentProxy(current ? current.next() : table.find(FIRST_CELL_SELECTOR));
-                    } else if (pageable && keys.PAGEUP == key) {
+                    } else if (pageable && keys.PAGEUP == key) {                       
                         that._current = null;
                         dataSource.page(dataSource.page() + 1);
                     } else if (pageable && keys.PAGEDOWN == key) {
@@ -322,10 +327,18 @@
             });
                         
             if($.browser.msie) {
-                table.delegate(selector, "click", clickCallback);
+                wrapper.delegate(selector, "click", clickCallback);                
             } else {
-                table.delegate(selector, "mousedown", clickCallback);
-            }           
+                wrapper.delegate(selector, "mousedown", clickCallback);
+            }
+
+            that.bind(DATABOUND, function() {                   
+                var activeElement = document.activeElement,
+                    wrapperElement = wrapper[0];                
+                if(wrapperElement === activeElement || $.contains(wrapperElement, activeElement)) {
+                    wrapper.focus();                    
+                }
+            });
         },
 
         _wrapper: function() {
