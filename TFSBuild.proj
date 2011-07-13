@@ -147,7 +147,7 @@
     <Exec Command='"$(NodePath)zip.exe" text.zip /cygdrive/c/NodeJS/lib'></Exec>-->
     <SetEnvironmentVariable Name="PATH" Value="$(PATH)"/>
     <Exec Command="set" />
-    <Exec Command="notepad" />
+    <Exec Command="TestPing" />
   </Target>
 
   <!--<Target Name="AfterCompile">
