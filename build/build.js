@@ -151,6 +151,8 @@ function processStyles() {
     });
 }
 
+console.log("current folder: " + DIRNAME);
+
 console.log("build start...");
 createDirectories();
 
