@@ -85,7 +85,53 @@
                 .delegate(".t-plus,.t-minus", CLICK, proxy(that._toggleButtonClick, that));
 
             if (options.dragAndDrop) {
-                that.bind([DRAGSTART, DRAG, DROP, DRAGEND], options);
+                that.bind([
+                        /**
+                         * Fires before the dragging of a node starts.
+                         * @name kendo.ui.TreeView#dragstart
+                         * @event
+                         * @param {Event} e
+                         * @param {Node} e.sourceNode The node that will be dragged.
+                         */
+                        DRAGSTART,
+                        /**
+                         * Fires while a node is being dragged.
+                         * @name kendo.ui.TreeView#drag
+                         * @event
+                         * @param {Event} e
+                         * @param {Node} e.sourceNode The node that is being dragged.
+                         * @param {DomElement} e.dropTarget The element that the node is placed over.
+                         * @param {Integer} e.pageX The x coordinate of the mouse.
+                         * @param {Integer} e.pageY The y coordinate of the mouse.
+                         * @param {String} e.statusClass The status that the drag clue shows.
+                         * @param {Function} e.setStatusClass Allows a custom drag clue status to be set.
+                         */
+                        DRAG,
+                        /**
+                         * Fires when a node is being dropped.
+                         * @name kendo.ui.TreeView#drop
+                         * @event
+                         * @param {Event} e
+                         * @param {Node} e.sourceNode The node that is being dropped.
+                         * @param {Node} e.destinationNode The node that the sourceNode is being dropped upon.
+                         * @param {Boolean} e.valid Whether this drop operation is permitted
+                         * @param {Function} e.setValid Allows the drop to be prevented.
+                         * @param {DomElement} e.dropTarget The element that the node is placed over.
+                         * @param {String} e.dropPosition Shows where the new sourceLocation would be.
+                         */
+                        DROP,
+                        /**
+                         * Fires after a node is has been dropped.
+                         * @name kendo.ui.TreeView#dragend
+                         * @event
+                         * @param {Event} e
+                         * @param {Node} e.sourceNode The node that is being dropped.
+                         * @param {Node} e.destinationNode The node that the sourceNode is being dropped upon.
+                         * @param {String} e.dropPosition Shows where the new sourceLocation would be.
+                         */
+                        DRAGEND
+                    ], options);
+
                 that.dragging = new TreeViewDragAndDrop(that);
             }
 
@@ -289,7 +335,7 @@
             }
         },
 
-        processItems: function(nodes, callback) {
+        _processNodes: function(nodes, callback) {
             var that = this;
             that.element.find(nodes).each(function(index, item) {
                 callback.call(that, index, $(item).closest(NODE));
@@ -297,14 +343,19 @@
         },
 
         /**
-         * Expands one or more nodes
-         * @param {String} nodes
+         * Expands nodes.
+         * @param {Selector} nodes The nodes that are to be expanded.
          * @example
          * var treeview = $("TreeView").data("kendoTreeView");
-         * treeview.expand(".t-item"); // expands all items
+         *
+         * // expands the node with id="firstItem"
+         * treeview.expand(document.getElementById("firstItem"));
+         *
+         * // expands all nodes
+         * treeview.expand(".t-item");
          */
         expand: function (nodes) {
-            this.processItems(nodes, function (index, item) {
+            this._processNodes(nodes, function (index, item) {
                 var contents = item.find(NODECONTENTS);
 
                 if (contents.length > 0 && !contents.is(VISIBLE)) {
@@ -313,8 +364,20 @@
             });
         },
 
+        /**
+         * Collapses nodes.
+         * @param {Selector} nodes The nodes that are to be collapsed.
+         * @example
+         * var treeview = $("TreeView").data("kendoTreeView");
+         *
+         * // collapse the node with id="firstItem"
+         * treeview.collapse(document.getElementById("firstItem"));
+         *
+         * // collapse all nodes
+         * treeview.collapse(".t-item");
+         */
         collapse: function (nodes) {
-            this.processItems(nodes, function (index, item) {
+            this._processNodes(nodes, function (index, item) {
                 var contents = item.find(NODECONTENTS);
 
                 if (contents.length > 0 && contents.is(VISIBLE)) {
@@ -323,10 +386,23 @@
             });
         },
 
+        /**
+         * Enables or disables nodes.
+         * @param {Selector} nodes The nodes that are to be enabled/disabled.
+         * @param {Boolean} [enable=true] Whether the nodes should be enabled or disabled.
+         * @example
+         * var treeview = $("TreeView").data("kendoTreeView");
+         *
+         * // disable the node with id="firstItem"
+         * treeview.enable(document.getElementById("firstItem"), false);
+         *
+         * // enable all nodes
+         * treeview.enable(".t-item");
+         */
         enable: function (nodes, enable) {
             enable = arguments.length == 2 ? !!enable : true;
 
-            this.processItems(nodes, function (index, item) {
+            this._processNodes(nodes, function (index, item) {
                 var isCollapsed = !item.find(NODECONTENTS).is(VISIBLE);
 
                 if (!enable) {
@@ -347,6 +423,15 @@
             });
         },
 
+        /**
+         * Selects a node.
+         * @param {Selector} node The node that should be selected.
+         * @example
+         * var treeview = $("TreeView").data("kendoTreeView");
+         *
+         * // select the node with id="firstItem"
+         * treeview.select(document.getElementById("firstItem"));
+         */
         select: function (node) {
             node = $(node).closest(NODE);
 
@@ -357,10 +442,27 @@
             }
         },
 
+        /**
+         * Returns the currently selected node.
+         * @returns {jQueryObject} - the currently selected node.
+         * @example
+         * var treeview = $("TreeView").data("kendoTreeView");
+         *
+         * var selectedItem = treeview.selected();
+         */
         selected: function() {
             return this.element.find(".t-state-selected").closest(NODE);
         },
 
+        /**
+         * Toggles a node between expanded and collapsed state.
+         * @param {jQueryObject} node The node that should be toggled.
+         * @example
+         * var treeview = $("TreeView").data("kendoTreeView");
+         *
+         * // toggle the node with id="firstItem"
+         * treeview.toggle(document.getElementById("firstItem"));
+         */
         toggle: function (node) {
             if (node.find(".t-minus,.t-plus").length == 0) {
                 return;
@@ -404,6 +506,16 @@
             }
         },
 
+        /**
+         * Get the text of a node.
+         * @param {Selector} node The node that you need the text for.
+         * @returns {String} The text of the node.
+         * @example
+         * var treeview = $("TreeView").data("kendoTreeView");
+         *
+         * // get the text of the node with id="firstItem"
+         * var nodeText = treeview.text(document.getElementById("firstItem"));
+         */
         text: function (node) {
             return $(node).closest(NODE).find(">div>.t-in").text();
         },
@@ -454,6 +566,19 @@
             return node;
         },
 
+        /**
+         * Inserts a node after another node.
+         * @param {NodeData} nodeData JSON that specifies the node data, or a reference to a node in the TreeView.
+         * @param {Node} referenceNode The node that will be before the newly appended node.
+         * @example
+         * var treeview = $("TreeView").data("kendoTreeView");
+         *
+         * // inserts a new node with the text "new node" after the node with id="firstItem"
+         * treeview.insertAfter({ text: "new node" }, document.getElementById("firstItem"));
+         *
+         * // moves the node with id="secondNode" after the node with id="firstItem"
+         * treeview.insertAfter(document.getElementById("secondNode"), document.getElementById("firstItem"));
+         */
         insertAfter: function (nodeData, referenceNode) {
             var group = referenceNode.parent();
 
@@ -462,6 +587,19 @@
             });
         },
 
+        /**
+         * Inserts a node before another node.
+         * @param {NodeData} nodeData JSON that specifies the node data, or a reference to a node in the TreeView.
+         * @param {Node} referenceNode The node that will be after the newly appended node.
+         * @example
+         * var treeview = $("TreeView").data("kendoTreeView");
+         *
+         * // inserts a new node with the text "new node" before the node with id="firstItem"
+         * treeview.insertBefore({ text: "new node" }, document.getElementById("firstItem"));
+         *
+         * // moves the node with id="secondNode" before the node with id="firstItem"
+         * treeview.insertBefore(document.getElementById("secondNode"), document.getElementById("firstItem"));
+         */
         insertBefore: function (nodeData, referenceNode) {
             var group = referenceNode.parent();
 
@@ -470,6 +608,19 @@
             });
         },
 
+        /**
+         * Appends a node to a treeview group.
+         * @param {NodeData} nodeData JSON that specifies the node data, or a reference to a node in the TreeView.
+         * @param {Node} [parentNode] The node that will contain the newly appended node. If not specified, the new node will be appended to the root group of the treeview.
+         * @example
+         * var treeview = $("TreeView").data("kendoTreeView");
+         *
+         * // appends a new node with the text "new node" to the node with id="firstItem"
+         * treeview.append({ text: "new node" }, document.getElementById("firstItem"));
+         *
+         * // moves the node with id="secondNode" as a last child of the node with id="firstItem"
+         * treeview.append(document.getElementById("secondNode"), document.getElementById("firstItem"));
+         */
         append: function (nodeData, parentNode) {
             parentNode = parentNode || this.element;
 
@@ -480,6 +631,15 @@
             });
         },
 
+        /**
+         * Removes a node
+         * @param {Selector} node The node that is to be removed.
+         * @example
+         * var treeview = $("TreeView").data("kendoTreeView");
+         *
+         * // remove the node with id="firstItem"
+         * treeview.remove(document.getElementById("firstItem"));
+         */
         remove: function (node) {
             node = $(node);
 
@@ -499,6 +659,16 @@
             that._updateNodeClasses(nextSibling);
         },
 
+        /**
+         * Searches the treeview for a node that has specific text.
+         * @param {String} text The text that is being searched for.
+         * @returns {Node} The first node that contains the text.
+         * @example
+         * var treeview = $("TreeView").data("kendoTreeView");
+         *
+         * // searches the treeview for the item that has the text "foo"
+         * var foundNode = treeview.findByText("foo");
+         */
         findByText: function (text) {
             var result;
 
@@ -530,7 +700,7 @@
         });
     }
 
-    TreeViewDragAndDrop.prototype = {
+    TreeViewDragAndDrop.prototype = /** @ignore */{
         _hintStatus: function(newStatus) {
             var statusElement = this._draggable.hint.find(".t-drag-status")[0];
 
@@ -541,7 +711,6 @@
             }
         },
 
-        /** @ignore */
         dragstart: function (e) {
             var that = this,
                 treeview = that.treeview,
@@ -555,7 +724,7 @@
                 .css(VISIBILITY, "hidden")
                 .appendTo(treeview.element);
         },
-        /** @ignore */
+
         drag: function (e) {
             var that = this,
                 treeview = that.treeview,
@@ -629,7 +798,6 @@
             that._hintStatus(statusClass);
         },
 
-        /** @ignore */
         dragend: function (e) {
             var that = this,
                 treeview = that.treeview,
@@ -730,8 +898,7 @@
         }
     });
 
-    TreeView.rendering = {
-        /** @ignore */
+    TreeView.rendering = /** @ignore */{
         wrapperCssClass: function (group, item) {
             var result = "t-item",
                 index = item.index;
@@ -746,7 +913,6 @@
 
             return result;
         },
-        /** @ignore */
         cssClass: function(group, item) {
             var result = "",
                 index = item.index,
@@ -766,7 +932,6 @@
 
             return result;
         },
-        /** @ignore */
         textClass: function(item) {
             var result = "t-in";
 
@@ -780,11 +945,9 @@
 
             return result;
         },
-        /** @ignore */
         textAttributes: function(item) {
             return item.url ? " href='" + item.url + "'" : "";
         },
-        /** @ignore */
         toggleButtonClass: function(item) {
             var result = "t-icon";
 
@@ -800,19 +963,15 @@
 
             return result;
         },
-        /** @ignore */
         text: function(item) {
             return item.encoded === false ? item.text : kendo.htmlEncode(item.text);
         },
-        /** @ignore */
         tag: function(item) {
             return item.url ? "a" : "span";
         },
-        /** @ignore */
         groupAttributes: function(group) {
             return group.expanded !== true ? " style='display:none'" : "";
         },
-        /** @ignore */
         groupCssClass: function(group) {
             var cssClass = "t-group";
 
