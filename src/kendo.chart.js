@@ -1768,9 +1768,6 @@
             chart.plotArea = plotArea;
             chart._seriesMin = Number.MAX_VALUE;
             chart._seriesMax = - Number.MAX_VALUE;
-            chart._categoryTotalsPos = [];
-            chart._categoryTotalsNeg = [];
-            chart._categoryTotals = [];
 
             chart.points = [];
 
@@ -1792,23 +1789,26 @@
         },
 
         addValue: function(value, categoryIx, series, seriesIx) {
-            var chart = this,
-                options = chart.options,
-                isStacked = options.isStacked,
-                totalsPos = chart._categoryTotalsPos,
-                totalsNeg = chart._categoryTotalsNeg,
-                totals = chart._categoryTotals,
-                splitTotals;
+            this.updateRange(value, categoryIx);
+        },
+
+        updateRange: function(value, categoryIx) {
+            var chart = this;
 
             if (typeof value !== UNDEFINED) {
-                if (isStacked) {
-                    incrementSlot(value > 0 ? totalsPos : totalsNeg, categoryIx, value);
-                    incrementSlot(totals, categoryIx, value);
-                } else {
-                    chart._seriesMin = Math.min(chart._seriesMin, value);
-                    chart._seriesMax = Math.max(chart._seriesMax, value);
-                }
+                chart._seriesMin = Math.min(chart._seriesMin, value);
+                chart._seriesMax = Math.max(chart._seriesMax, value);
             }
+        },
+
+        valueRange: function() {
+            var chart = this;
+
+            if (chart.points.length) {
+                return { min: chart._seriesMin, max: chart._seriesMax };
+            }
+
+            return null;
         },
 
         reflow: function(targetBox) {
@@ -1850,30 +1850,6 @@
 
         reflowCategories: function() { },
 
-        valueRange: function() {
-            var chart = this;
-
-            if (chart.points.length) {
-                chart.updateValueRange();
-                return { min: chart._seriesMin, max: chart._seriesMax };
-            }
-
-            return null;
-        },
-
-        updateValueRange: function() {
-            var chart = this,
-                options = chart.options,
-                isStacked = options.isStacked,
-                totalsPos = chart._categoryTotalsPos,
-                totalsNeg = chart._categoryTotalsNeg;
-
-            if (isStacked) {
-                chart._seriesMin = sparseArrayMin(totalsNeg.length ? totalsNeg : totalsPos);
-                chart._seriesMax = sparseArrayMax(totalsPos.length ? totalsPos : totalsNeg);
-            }
-        },
-
         traverseDataPoints: function(callback) {
             var chart = this,
             options = chart.options,
@@ -1906,6 +1882,10 @@
     var BarChart = CategoricalChart.extend({
         init: function(plotArea, options) {
             var chart = this;
+
+            chart._categoryTotalsPos = [];
+            chart._categoryTotalsNeg = [];
+
             CategoricalChart.fn.init.call(chart, plotArea, options);
         },
 
@@ -1980,6 +1960,37 @@
             } else {
                 cluster.children.push(bar);
             }
+        },
+
+        updateRange: function(value, categoryIx) {
+            var chart = this,
+                options = chart.options,
+                isStacked = options.isStacked,
+                totalsPos = chart._categoryTotalsPos,
+                totalsNeg = chart._categoryTotalsNeg;
+
+            if (typeof value !== UNDEFINED) {
+                if (isStacked) {
+                    incrementSlot(value > 0 ? totalsPos : totalsNeg, categoryIx, value);
+                } else {
+                    CategoricalChart.fn.updateRange.apply(chart, arguments);
+                }
+            }
+        },
+
+        valueRange: function() {
+            var chart = this,
+                options = chart.options,
+                isStacked = options.isStacked,
+                totalsPos = chart._categoryTotalsPos,
+                totalsNeg = chart._categoryTotalsNeg;
+
+            if (isStacked) {
+                chart._seriesMin = sparseArrayMin(totalsNeg.length ? totalsNeg : totalsPos);
+                chart._seriesMax = sparseArrayMax(totalsPos.length ? totalsPos : totalsNeg);
+            }
+
+            return CategoricalChart.fn.valueRange.call(chart);
         },
 
         reflowCategories: function(categorySlots) {
@@ -2153,8 +2164,10 @@
     var LineChart = CategoricalChart.extend({
         init: function(plotArea, options) {
             var chart = this;
+
             chart.seriesPoints = [];
             chart.categoryPoints = [];
+            chart._categoryTotals = [];
 
             CategoricalChart.fn.init.call(chart, plotArea, options);
         },
@@ -2218,15 +2231,20 @@
             children.push(point);
         },
 
-        updateValueRange: function() {
+        updateRange: function(value, categoryIx) {
             var chart = this,
                 options = chart.options,
                 isStacked = options.isStacked,
                 totals = chart._categoryTotals;
 
-            if (isStacked) {
-                chart._seriesMin = sparseArrayMin(totals);
-                chart._seriesMax = sparseArrayMax(totals);
+            if (typeof value !== UNDEFINED) {
+                if (isStacked) {
+                    incrementSlot(totals, categoryIx, value);
+                    chart._seriesMin = Math.min(chart._seriesMin, sparseArrayMin(totals));
+                    chart._seriesMax = Math.max(chart._seriesMax, sparseArrayMax(totals));
+                } else {
+                    CategoricalChart.fn.updateRange.apply(chart, arguments);
+                }
             }
         },
 
