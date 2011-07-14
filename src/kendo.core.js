@@ -1279,6 +1279,7 @@
         /**
          * Base class for all UI components
          * @constructs
+         * @extends kendo.Observable
          */
         init: function(element, options) {
             var that = this;
