@@ -59,8 +59,9 @@
 
     var Observable = Class.extend(/** @lends kendo.Observable.prototype */{
         /**
-         * Creates an observable instance
+         * Creates an observable instance.
          * @constructs
+         * @class Represents a class that can trigger events, along with methods that subscribe handlers to these events.
          */
         init: function() {
             this._events = {};
@@ -866,6 +867,7 @@
 
     /**
      * Exposed by jQuery.
+     * @ignore
      * @name jQuery.fn
      * @namespace Handy jQuery plug-ins that are used by all Kendo components.
      */
@@ -1277,8 +1279,9 @@
 
     var Component = Observable.extend( /** @lends kendo.ui.Component.prototype */ {
         /**
-         * Base class for all UI components
+         * Initializes component. Sets `element` and `options` properties.
          * @constructs
+         * @class Represents a UI component. Base class for all Kendo components
          * @extends kendo.Observable
          */
         init: function(element, options) {
