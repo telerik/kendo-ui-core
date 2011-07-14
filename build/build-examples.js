@@ -1,13 +1,13 @@
 var fs = require("fs"),
-sys = require("sys"),
-wrench = require("./wrench"),
-uglify = require("./uglify-js").uglify,
-parser = require("./uglify-js").parser,
-cssmin = require("./lib/cssmin").cssmin,
-regions = {},
-PATH = "live",
-MINIFY = false,
-jQueryCDN = "http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js";
+    sys = require("sys"),
+    wrench = require("./wrench"),
+    uglify = require("./uglify-js").uglify,
+    parser = require("./uglify-js").parser,
+    cssmin = require("./lib/cssmin").cssmin,
+    regions = {},
+    PATH = "live",
+    MINIFY = false,
+    jQueryCDN = "http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js";
 
 function processfile(file) {
     if (/\.html$/.test(file)) {
@@ -85,8 +85,17 @@ function processdir(dir) {
 }
 
 exports.build = function(orig, dest, min) {
-    PATH = dest;
     MINIFY = min;
+
+    if (dest) {
+        PATH = dest;
+    }
+
+    try {
+        fs.statSync(PATH)
+    } catch(e) {
+        fs.mkdirSync(PATH, fs.statSync("./").mode);
+    }
 
     var originJS = "src",
         originStyles = "styles";
@@ -112,41 +121,41 @@ exports.build = function(orig, dest, min) {
         };
     });
 
-    wrench.copyDirSyncRecursive("demos/examples", dest);
-    wrench.copyDirSyncRecursive(originJS, dest + "/js");
-    wrench.copyDirSyncRecursive(originStyles, dest+ "/styles");
-    fs.unlinkSync(dest + "/template.html");
+    wrench.copyDirSyncRecursive("demos/examples", PATH);
+    wrench.copyDirSyncRecursive(originJS, PATH + "/js");
+    wrench.copyDirSyncRecursive(originStyles, PATH + "/styles");
+    fs.unlinkSync(PATH + "/template.html");
 
     if (!MINIFY) {
         var data = fs.readFileSync("src/jquery.js", "utf8");
-        fs.writeFileSync(dest + "/js/jquery.js", data, "utf8");
+        fs.writeFileSync(PATH + "/js/jquery.js", data, "utf8");
     }
 
     fs.readdirSync("demos/examples/styles")
-    .forEach(function(file) {
-        var data = fs.readFileSync("demos/examples/styles/" + file, "utf8");
-        if (MINIFY) {
-            data = cssmin(data);
-            file = file.replace(".css", ".min.css");
-        }
+        .forEach(function(file) {
+            var data = fs.readFileSync("demos/examples/styles/" + file, "utf8");
+            if (MINIFY) {
+                data = cssmin(data);
+                file = file.replace(".css", ".min.css");
+            }
 
-        fs.writeFileSync(dest + "/styles/" + file, data, "utf8");
-    });
+            fs.writeFileSync(PATH + "/styles/" + file, data, "utf8");
+        });
 
 
     fs.readdirSync("demos/examples/js")
-    .forEach(function(file) {
-        var data = fs.readFileSync("demos/examples/js/" + file, "utf8");
-        if (MINIFY) {
-            var ast = parser.parse(data);
-            ast = uglify.ast_mangle(ast);
-            ast = uglify.ast_squeeze(ast);
-            data = uglify.gen_code(ast);
+        .forEach(function(file) {
+            var data = fs.readFileSync("demos/examples/js/" + file, "utf8");
+            if (MINIFY) {
+                var ast = parser.parse(data);
+                ast = uglify.ast_mangle(ast);
+                ast = uglify.ast_squeeze(ast);
+                data = uglify.gen_code(ast);
 
-            file = file.replace(".js", ".min.js");
-        }
-        fs.writeFileSync(dest + "/js/" + file, data, "utf8");
-    });
+                file = file.replace(".js", ".min.js");
+            }
+            fs.writeFileSync(PATH + "/js/" + file, data, "utf8");
+        });
 
-    processdir(dest);
+    processdir(PATH);
 }
