@@ -42,8 +42,7 @@
                         getSlot: function(categoryIndex) {
                             return new Box2D(categoryIndex, CATEGORY_AXIS_Y,
                             categoryIndex + 1, CATEGORY_AXIS_Y);
-                        },
-                        axisCrossingValue: 0
+                        }
                     },
                     axisY: {
                         getSlot: function(value) {
@@ -54,8 +53,7 @@
 
                             return new Box2D(0, slotTop, 0, slotBottom);
                         },
-                        options: {},
-                        axisCrossingValue: 0
+                        options: {}
                     }
                 });
 
@@ -244,9 +242,9 @@
                     equal(lineChart.valueRange().max, 6);
                 });
 
-                test("point values are stacked", function() {
+                test("point plot values are stacked", function() {
                     same(
-                        $.map(lineChart.points, function(point) { return point.stackValue }),
+                        $.map(lineChart.points, function(point) { return point.plotValue }),
                         [1, 2, 3, 2, 4, 6]
                     );
                 });
@@ -270,9 +268,9 @@
                     equal(lineChart.valueRange().max, -3);
                 });
 
-                test("point values are stacked", function() {
+                test("point plot values are stacked", function() {
                     same(
-                        $.map(lineChart.points, function(point) { return point.stackValue }),
+                        $.map(lineChart.points, function(point) { return point.plotValue }),
                         [-1, -2, -3, -2, -4, -6]
                     );
                 });
