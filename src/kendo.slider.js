@@ -11,6 +11,7 @@
         CHANGE = "change",
         SLIDE = "slide",
         MOUSE_DOWN = "mousedown",
+        MOUSE_UP = "mouseup",
         MOVE_SELECTION = "moveSelection",
         KEY_DOWN = "keydown",
         //css selectors
@@ -139,7 +140,7 @@
 
         _setItemsLargeTick: function() {
             var that = this,
-                options = that.options
+                options = that.options,
                 i;
 
             if ((1000 * options.largeStep) % (1000 * options.smallStep) == 0) {
@@ -407,8 +408,10 @@
                 .addClass("t-state-default");
 
             var clickHandler = function (e) {
-                if ($(e.target).hasClass("t-draghandle"))
+                if ($(e.target).hasClass("t-draghandle")) {
+                    $(e.target).addClass("t-state-active");
                     return;
+                }
 
                 var mousePosition = that._isHorizontal ? e.pageX : e.pageY,
                     dragableArea = that._getDragableArea();
@@ -416,12 +419,16 @@
                 that._update(that._getValueFromPosition(mousePosition, dragableArea));
 
                 that._drag.dragstart(e);
-            }
+            };
 
             that.wrapper
                 .find(TICK_SELECTOR).bind(MOUSE_DOWN, clickHandler)
                 .end()
                 .find(TRACK_SELECTOR).bind(MOUSE_DOWN, clickHandler);
+
+            that.wrapper.find(DRAG_HANDLE).bind(MOUSE_UP, function (e) {
+                $(e.target).removeClass("t-state-active");
+            });
 
             var move = proxy(function (e, sign) {
                 var index = math.ceil(options.val / options.smallStep);
@@ -436,7 +443,7 @@
             if (options.showButtons) {
                 var mouseDownHandler = proxy(function(e, sign) {
                     if (e.which == 1) {
-                        move(e, sign)
+                        move(e, sign);
 
                         this.timeout = setTimeout(proxy(function () {
                             this.timer = setInterval(function () {
@@ -447,7 +454,7 @@
                 }, that);
 
                 that.wrapper.find(".t-button")
-                    .bind("mouseup", proxy(function (e) {
+                    .bind(MOUSE_UP, proxy(function (e) {
                         this._clearTimer();
                     }, that))
                     .bind("mouseover", function (e) {
@@ -486,8 +493,8 @@
                 .find(".t-button")
                 .unbind(MOUSE_DOWN)
                 .bind(MOUSE_DOWN, false)
-                .unbind("mouseup")
-                .bind("mouseup", false)
+                .unbind(MOUSE_UP)
+                .bind(MOUSE_UP, false)
                 .unbind("mouseleave")
                 .bind("mouseleave", false)
                 .unbind("mouseover")
@@ -500,8 +507,9 @@
 
             that.wrapper
                 .find(DRAG_HANDLE)
+                .unbind(MOUSE_UP)
                 .unbind(KEY_DOWN)
-                .bind(KEY_DOWN, false)
+                .bind(KEY_DOWN, false);
 
             that.options.enabled = false;
         },
@@ -587,7 +595,7 @@
         };
 
         that.bind([CHANGE, SLIDE, MOVE_SELECTION], handler);
-    }
+    };
 
     Slider.Drag = function (dragHandle, type, owner, options) {
         var that = this;
@@ -619,6 +627,8 @@
             }
 
             owner.element.unbind("mouseover");
+            that.dragHandle.addClass("t-state-active");
+
             that.dragableArea = owner._getDragableArea();
             that.step = math.max(options.smallStep * (owner._maxSelection / owner._distance), 0);
 
@@ -724,16 +734,18 @@
                 that.tooltipDiv.remove();
             }
 
+            that.dragHandle.removeClass("t-state-active");
             owner.element.bind("mouseover");
 
             return false;
         },
 
         moveTooltip: function () {
-            var that = this
+            var that = this,
                 owner = that.owner,
                 positionTop = 0,
-                positionLeft = 0;
+                positionLeft = 0,
+                dragHandleOffset = that.dragHandle.offset();
 
             if (that.type) {
                 var dragHandles = owner.wrapper.find(DRAG_HANDLE),
@@ -748,15 +760,12 @@
                     positionLeft = secondDragHandleOffset.left;
                 }
             } else {
-                var dragHandleOffset = that.dragHandle.offset();
-
                 positionTop = dragHandleOffset.top;
                 positionLeft = dragHandleOffset.left;
             }
 
             var halfTooltipDiv = that.tooltipDiv[owner._size]() / 2 + 1,
-                margin = 10,
-                dragHandleOffset = that.dragHandle.offset();
+                margin = 10;
 
             if (owner._isHorizontal) {
                 positionLeft -= halfTooltipDiv;
@@ -808,7 +817,7 @@
 
             return val;
         }
-    }
+    };
 
     kendo.ui.plugin("Slider", Slider);
 
@@ -846,8 +855,10 @@
                 .addClass("t-state-default");
 
             var clickHandler = function (e) {
-                if ($(e.target).hasClass("t-draghandle"))
+                if ($(e.target).hasClass("t-draghandle")) {
+                    $(e.target).addClass("t-state-active");
                     return;
+                }
 
                 var mousePosition = that._isHorizontal ? e.pageX : e.pageY,
                     dragableArea = that._getDragableArea(),
@@ -874,6 +885,10 @@
                 .find(TICK_SELECTOR).bind(MOUSE_DOWN, clickHandler)
                 .end()
                 .find(TRACK_SELECTOR).bind(MOUSE_DOWN, clickHandler);
+
+            that.wrapper.find(DRAG_HANDLE).bind("mouseup", function (e) {
+                $(e.target).removeClass("t-state-active");
+            });
 
             that.wrapper.find(DRAG_HANDLE)
                 .eq(0).bind(KEY_DOWN,
@@ -907,6 +922,7 @@
 
             that.wrapper
                 .find(DRAG_HANDLE)
+                .unbind(MOUSE_UP)
                 .unbind(KEY_DOWN)
                 .bind(KEY_DOWN, false);
 
@@ -1052,7 +1068,7 @@
         };
 
         that.bind([ CHANGE, SLIDE, MOVE_SELECTION ], handler);
-    }
+    };
 
     kendo.ui.plugin("RangeSlider", RangeSlider);
 
