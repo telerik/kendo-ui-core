@@ -76,27 +76,23 @@
                         },
 
                         column: {
-                            //stack: true
+                            stack: true
                         },
 
                         line: {
-                            //stack: true
                             missingValues: "interpolate"
                         }
                     },
                     series: [
                         {
                             name: "Value A",
-                            field: "a",
-                            opacity: 0.2
+                            field: "a"
                         }, {
                             name: "Value B",
                             field: "b"
                         }, {
-                            type: "line",
                             name: "Value C",
-                            field: "c",
-                            opacity: 0.2
+                            field: "c"
                         }, {
                             type: "line",
                             name: "Value D",
@@ -108,62 +104,6 @@
                     ],
                     categoryAxis: {
                         field: "name"
-                    },
-                    valueAxis: {
-                        min: -100,
-                        max: 100
-                    },
-                    plotArea: {
-                    }
-                });
-
-                $("#containerV").kendoChart({
-                    title: {
-                        text: "Teh chart",
-                        position: "top"
-                    },
-                    legend: {
-                        position: "right",
-                        visible: true
-                    },
-                    dataSource: data,
-                    seriesDefaults: {
-                        labels: {
-                            visible: false
-                        },
-                        type: "bar",
-                        bar: {
-                            stack: true
-                        },
-                        line: {
-                            stack: true
-                        }
-                    },
-                    series: [
-                        {
-                            name: "Value A",
-                            field: "a"
-                        }, {
-                            name: "Value B",
-                            field: "b"
-                        }, {
-                            type: "line",
-                            name: "Value C",
-                            field: "c"
-                        }, {
-                            type: "line",
-                            name: "Value D",
-                            field: "d"
-                        }
-                    ],
-                    categoryAxis: {
-                        field: "name"
-                    },
-                    valueAxis: {
-                        min: -100,
-                        max: 100
-                    },
-                    plotArea: {
                     }
                 });
             });
@@ -244,10 +184,7 @@
             }
         </script>
 
-        <div id="container" style="width: 500px; height: 400px; float: left;">
-        </div>
-
-        <div id="containerV" style="width: 500px; height: 400px; float: left;">
+        <div id="container" style="width: 600px; height: 400px; float: left;">
         </div>
 
             <div class="configurator" style="margin-top: 30px; clear: both;">

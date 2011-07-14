@@ -1825,8 +1825,8 @@
 
             chart.traverseDataPoints(function(value, categoryIx) {
                 var point = chartPoints[pointIx++];
-                if (point && point.stackValue) {
-                    value = point.stackValue;
+                if (point && point.plotValue) {
+                    value = point.plotValue;
                 }
 
                 var slotX = plotArea.axisX.getSlot(isVertical ? categoryIx : value),
@@ -2168,7 +2168,7 @@
                 points = chart.seriesPoints[seriesIx],
                 categoryPoints = chart.categoryPoints[categoryIx],
                 stackPoint,
-                stackValue = 0;
+                plotValue = 0;
 
             CategoricalChart.fn.addValue.apply(chart, arguments);
 
@@ -2206,10 +2206,10 @@
 
                 stackPoint = categoryPoints[categoryPoints.length - 1];
                 if (stackPoint) {
-                    stackValue = stackPoint.stackValue;
+                    plotValue = stackPoint.plotValue;
                 }
 
-                point.stackValue = value + stackValue;
+                point.plotValue = value + plotValue;
 
                 categoryPoints.push(point);
             }
