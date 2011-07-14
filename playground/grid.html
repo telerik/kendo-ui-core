@@ -35,7 +35,12 @@
                             read: "http://services.odata.org/Northwind/Northwind.svc/Orders"
                         }
                     },
-                    columns: ["OrderID", "CustomerID", "ShipCity", "ShipCountry"],
+                    columns: [
+                    {
+                        title: "Foo",
+                        template: "<#=OrderID - 10248#>"
+                    },
+                    "OrderID", "CustomerID", "ShipCity", "ShipCountry"],
                     scrollable: {
                         virtual: true
                     },

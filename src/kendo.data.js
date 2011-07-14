@@ -1236,7 +1236,7 @@
 
         range: function(skip, take) {
             var that = this,
-                end = Math.min(skip + take, (that._totalPages() - 1) * take),
+                end = Math.min(skip + take, that.total()),
                 data;
 
             if (that.options.serverPaging) {
@@ -1253,10 +1253,18 @@
             if (take !== undefined) {
                 skip = skip || 0;
 
-                clearTimeout(that._timeout);
-                that._timeout = setTimeout(function() {
-                    that.query({ skip: skip, take: take, sort: that.sort(), filter: that.filter(), group: that.group(), aggregates: that.aggregate() });
-                }, 250);
+                var pageSkip = (Math.max(Math.floor(skip / take), 0) * take);
+                if (!that._rangeExists(pageSkip, pageSkip + take)) {
+                    that.prefetch(pageSkip, take, function() {
+                        that.prefetch(pageSkip + take, take, function() {
+                            that.range(skip, take);
+                        });
+                    });
+                } else if (pageSkip < skip) {
+                    that.prefetch(pageSkip + take, take, function() {
+                        that.range(skip, take);
+                    });
+                }
             }
         },
 
@@ -1335,7 +1343,7 @@
             return that._take || that._pageSize;
         },
 
-        prefetch: function(skip, take) {
+        prefetch: function(skip, take, callback) {
             var that = this,
                 range = { start: skip, end: skip + take, data: [] },
                 options = {
@@ -1351,10 +1359,12 @@
 
             if (!that._rangeExists(skip, skip + take)) {
 
+                console.log("prefetch outer");
                 that._ranges.push(range);
                 clearTimeout(that._timeout);
                 that._timeout = setTimeout(function() {
                     that._queueRequest(options, function() {
+                    console.log("prefetch inner");
                     that.transport.read({
                         data: options,
                         success: function (data) {
@@ -1363,6 +1373,9 @@
                             range.data = that.reader.data(data);
                             range.end = range.start + range.data.length;
                             that._ranges.sort( function(x, y) { return x.start - y.start; } );
+                            if (callback) {
+                                callback();
+                            }
                         }
                     })});
                 }, 250);
