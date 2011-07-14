@@ -235,7 +235,7 @@
                 });
 
                 test("reports stacked minumum value", function() {
-                    equal(lineChart.valueRange().min, 3);
+                    equal(lineChart.valueRange().min, 1);
                 });
 
                 test("reports stacked maximum value", function() {
@@ -265,7 +265,7 @@
                 });
 
                 test("reports stacked maximum value", function() {
-                    equal(lineChart.valueRange().max, -3);
+                    equal(lineChart.valueRange().max, -1);
                 });
 
                 test("point plot values are stacked", function() {
@@ -281,7 +281,10 @@
                         plotArea = new PlotAreaStub();
                         setupLineChart(plotArea, {
                             series: [{
-                                data: [1, 0, -1],
+                                data: [2, 2],
+                                labels: {}
+                            }, {
+                                data: [-1, -1],
                                 labels: {}
                             }],
                             isStacked: true
@@ -290,19 +293,19 @@
                 });
 
                 test("reports stacked minumum value", function() {
-                    equal(lineChart.valueRange().min, -1);
+                    equal(lineChart.valueRange().min, 1);
                 });
 
                 test("reports stacked maximum value", function() {
-                    equal(lineChart.valueRange().max, 1);
+                    equal(lineChart.valueRange().max, 2);
                 });
 
-                test("points have set height according to value", function() {
+                test("points have set height according to stack value", function() {
                     var pointHeights = $.map(lineChart.points, function(point) {
                         return point.box.height();
                     });
 
-                    same(pointHeights, [1, 0, 1]);
+                    same(pointHeights, [2, 1, 2, 1]);
                 });
 
                 // ------------------------------------------------------------
@@ -321,7 +324,7 @@
                 });
 
                 test("reports stacked maximum value", function() {
-                    equal(lineChart.valueRange().max, 0);
+                    equal(lineChart.valueRange().max, 2);
                 });
 
                 // ------------------------------------------------------------
