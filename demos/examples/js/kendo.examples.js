@@ -50,27 +50,27 @@
                     title = Application.fetchTitle(),
                     toolsVisible = tools.is(":visible");
 
-                if (title == "Overview")
-                    tools.kendoStop(true).kendoAnimate(extend({ show: false, hide: true }, animation.hide));
+                if (title == "Overview" && toolsVisible)
+                    tools.kendoStop(true).kendoAnimate(extend({ hide: true }, animation.hide));
                 else {
                     Application.fetchDescription();
                 }
 
-                exampleName.kendoStop().kendoAnimate(extend({}, animation.hide, { complete: function() {
+                exampleName.kendoStop(true).kendoAnimate(extend({}, animation.hide, { complete: function() {
                     $(".exampleName").empty().html(title);
 
                     setTimeout(function() {
-                    if (title != "Overview" && !toolsVisible)
-                        tools.kendoStop(true).kendoAnimate(extend({ show: true, hide: false }, animation.show));
+                        if (title != "Overview" && !toolsVisible)
+                            tools.kendoStop(true).kendoAnimate(animation.show);
 
-                    exampleName.kendoStop().kendoAnimate(animation.show);
+                        exampleName.kendoStop(true).kendoAnimate(animation.show);
                     }, 100);
                 }}));
 
-                exampleBody.kendoStop().kendoAnimate(extend({}, animation.hide, { complete: function() {
+                exampleBody.kendoStop(true).kendoAnimate(extend({}, animation.hide, { complete: function() {
                     exampleBody.empty().html(Application.body(html));
                     setTimeout(function() {
-                        exampleBody.kendoStop().kendoAnimate(animation.show);
+                        exampleBody.kendoStop(true).kendoAnimate(animation.show);
                     }, 100);
                 }}));
             });
@@ -185,15 +185,16 @@
                 $("#exampleBody").show();
 
             if (pushState) {
-                $("#nav li a").click(
-                        function(e) {
-                            e.preventDefault();
+                $("#nav li a")
+                    .click(function(e) {
+                        e.preventDefault();
 
-                            if (!location.href.match($(this).attr("href")) && !$("#exampleBody").data("animating"))
-                                Application.load($(this).attr("href"));
-                        }).each(function() {
-                            $(this).attr("href", this.href);
-                        });
+                        if (!location.href.match($(this).attr("href")) && !$("#exampleBody").data("animating"))
+                            Application.load($(this).attr("href"));
+                    })
+                    .each(function() {
+                        $(this).attr("href", this.href);
+                    });
 
                 $(window).bind("popstate", function(e) {
                     var state = e.originalEvent.state;

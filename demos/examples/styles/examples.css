@@ -357,6 +357,7 @@ pre.prettyprint
 
 #codeStrip
 {
+    font: 12px bold Arial, Helvetica, sans-serif;
     display: none;
     background: #f3f3f3;
     border: 1px solid #dedede;
