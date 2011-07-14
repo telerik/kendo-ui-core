@@ -27,6 +27,7 @@
         /**
          * Creates a TreeView instance
          * @constructs
+         * @extends kendo.ui.Component
          * @param {DomElement} element DOM element
          * @param {Object} options Configuration options.
          * @param {Array} options.dataSource The data that the TreeView will be bound to.
