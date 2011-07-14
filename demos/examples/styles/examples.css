@@ -398,6 +398,7 @@ pre.prettyprint
 #codeStrip .t-state-active,
 #codeStrip .t-content
 {
+    color: #000;
     background: #FFF;
     border-color: #e8e8e8;
 }
