@@ -81,7 +81,7 @@
                 itemHeight = that.itemHeight,
                 skip = dataSource.skip() || 0,
                 take = dataSource.take(),
-                originalSkip = dataSource._currentPage(), //change this !!
+                originalSkip = Math.max(Math.round(skip / take), 0) * take,
                 fetching = false,
                 prefetchAt = 0.33;
 
@@ -320,8 +320,8 @@
                 table = that.table.addClass(FOCUSABLE),
                 currentProxy = proxy(that.current, that),
                 selector = "." + FOCUSABLE + " " + CELL_SELECTOR,
-                clickCallback = function(e) { 
-                    currentProxy($(e.currentTarget)); 
+                clickCallback = function(e) {
+                    currentProxy($(e.currentTarget));
                     if(e.type == "click") {
                         wrapper.focus();
                     }
@@ -354,7 +354,7 @@
                         currentProxy(current ? current.prev(":not(.t-group-cell)") : table.find(FIRST_CELL_SELECTOR));
                     } else if (keys.RIGHT === key) {
                         currentProxy(current ? current.next() : table.find(FIRST_CELL_SELECTOR));
-                    } else if (pageable && keys.PAGEUP == key) {                       
+                    } else if (pageable && keys.PAGEUP == key) {
                         that._current = null;
                         dataSource.page(dataSource.page() + 1);
                     } else if (pageable && keys.PAGEDOWN == key) {
@@ -365,16 +365,16 @@
             });
 
             if($.browser.msie) {
-                wrapper.delegate(selector, "click", clickCallback);                
+                wrapper.delegate(selector, "click", clickCallback);
             } else {
                 wrapper.delegate(selector, "mousedown", clickCallback);
             }
 
-            that.bind(DATABOUND, function() {                   
+            that.bind(DATABOUND, function() {
                 var activeElement = document.activeElement,
-                    wrapperElement = wrapper[0];                
+                    wrapperElement = wrapper[0];
                 if(wrapperElement === activeElement || $.contains(wrapperElement, activeElement)) {
-                    wrapper.focus();                    
+                    wrapper.focus();
                 }
             });
         },
