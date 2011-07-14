@@ -1066,7 +1066,7 @@
 
             if (options.minorTickType.toLowerCase()  === OUTSIDE) {
                 ticks = ticks.concat($.map(axis.getMinorTickPositions(), function(pos) {
-                            if (options.majorTickType !== NONE) {
+                            if (options.majorTickType.toLowerCase() !== NONE) {
                                 if (!inArray(pos, majorTicks)) {
                                     return {
                                         pos: pos,
@@ -1193,7 +1193,7 @@
 
             options = axis.options;
 
-            var majorDivisions = axis.getMajorDivisions(),
+            var majorDivisions = axis.getDivisions(options.majorUnit),
                 currentValue = options.min,
                 align = options.orientation === VERTICAL ? RIGHT : CENTER,
                 labelOptions = deepExtend({ }, options.labels, { align: align }),
@@ -1259,12 +1259,12 @@
                 isVertical = options.orientation === VERTICAL,
                 childElements = ChartElement.fn.getViewElements.call(axis, view);
 
-            var majorTickPositions = axis.getMajorTickPositions();
+            var tickPositions = axis.getMinorTickPositions();
             if (options.line.width > 0) {
                 if (isVertical) {
                     childElements.push(view.createLine(
-                        axis.box.x2, majorTickPositions[0],
-                        axis.box.x2, majorTickPositions[majorTickPositions.length - 1],
+                        axis.box.x2, tickPositions[0],
+                        axis.box.x2, tickPositions[tickPositions.length - 1],
                         {
                             strokeWidth: options.line.width,
                             stroke: options.line.color,
@@ -1272,8 +1272,8 @@
                         }));
                 } else {
                     childElements.push(view.createLine(
-                        majorTickPositions[0], axis.box.y1,
-                        majorTickPositions[majorTickPositions.length - 1], axis.box.y1,
+                        tickPositions[0], axis.box.y1,
+                        tickPositions[tickPositions.length - 1], axis.box.y1,
                         {
                             strokeWidth: options.line.width,
                             stroke: options.line.color,
@@ -1363,47 +1363,45 @@
             return floor(axisMin, mu);
         },
 
-        getMajorDivisions: function() {
-            var options = this.options;
+        getDivisions: function(stepValue) {
+            var options = this.options,
+                range = options.max - options.min;
 
-            return Math.round((options.max - options.min) / options.majorUnit) + 1;
+            return Math.floor(round(range / stepValue, COORD_PRECISION)) + 1;
         },
 
-        getMinorDevisions: function() {
-            var options = this.options;
-
-            return ((Math.round(options.max - options.min) / options.majorUnit) * 5) + 1;
-        },
-
-        getTickPositions: function(divisions) {
+        getTickPositions: function(stepValue) {
             var axis = this,
                 options = axis.options,
                 isVertical = options.orientation === VERTICAL,
                 lineBox = axis.getAxisLineBox(),
-                majorDivisions = divisions,
                 lineSize = isVertical ? lineBox.height() : lineBox.width(),
-                step = lineSize / (majorDivisions - 1),
-                pos = lineBox[(isVertical ? Y : X) + 1],
+                range = options.max - options.min,
+                scale = lineSize / range,
+                step = stepValue * scale,
+                divisions = axis.getDivisions(stepValue),
+                pos = lineBox[isVertical ? "y2" : "x1"],
+                multuplier = isVertical ? -1 : 1,
                 positions = [];
 
-            for (var i = 0; i < majorDivisions; i++) {
+            for (var i = 0; i < divisions; i++) {
                 positions.push(round(pos, COORD_PRECISION));
-                pos += step;
+                pos = pos + step * multuplier;
             }
 
-            return positions;
+            return isVertical ? positions.reverse() : positions;
         },
 
         getMajorTickPositions: function() {
             var axis = this;
 
-            return axis.getTickPositions(axis.getMajorDivisions());
+            return axis.getTickPositions(axis.options.majorUnit);
         },
 
         getMinorTickPositions: function() {
             var axis = this;
 
-            return axis.getTickPositions(axis.getMinorDevisions());
+            return axis.getTickPositions(axis.options.majorUnit / 5);
         },
 
         getAxisLineBox: function() {
