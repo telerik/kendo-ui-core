@@ -28,11 +28,12 @@
          * Creates a TreeView instance
          * @constructs
          * @param {DomElement} element DOM element
-         * @param {Object} options options used in the TreeView creation
-         * @param {Array} options.dataSource The data that the TreeView will be bound to
+         * @param {Object} options Configuration options.
+         * @param {Array} options.dataSource The data that the TreeView will be bound to.
          * @param {Object} options.animation A collection of {Animation} objects, used to change default animations. A value of false will disable all animations in the component.
-         * @param {Animation} options.animation.expand The animation that will be used when expanding items
-         * @param {Animation} options.animation.collapse The animation that will be used when collapsing items
+         * @param {Boolean} options.dragAndDrop Controls whether the treeview nodes can be dragged and rearranged.
+         * @param {Animation} options.animation.expand The animation that will be used when expanding items.
+         * @param {Animation} options.animation.collapse The animation that will be used when collapsing items.
          */
         init: function (element, options) {
             var that = this,

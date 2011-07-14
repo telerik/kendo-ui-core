@@ -1,7 +1,7 @@
 ;(function($, window) {
     /**
      * @name kendo
-     * @namespace Contains all code introduced by the Kendo project
+     * @namespace This object contains all code introduced by the Kendo project, plus helper functions that are used across all components.
      */
     var kendo = window.kendo = window.kendo || {},
         extend = $.extend,
@@ -58,7 +58,6 @@
     };
 
     var Observable = Class.extend(/** @lends kendo.Observable.prototype */{
-
         /**
          * Creates an observable instance
          * @constructs
@@ -223,6 +222,7 @@
 
     if (typeof Date.prototype.toJSON !== FUNCTION) {
 
+        /** @ignore */
         Date.prototype.toJSON = function (key) {
             var that = this;
 
@@ -235,7 +235,7 @@
                 pad(that.getUTCSeconds())   + "Z" : null;
         };
 
-        String.prototype.toJSON = Number.prototype.toJSON = Boolean.prototype.toJSON = function (key) {
+        String.prototype.toJSON = Number.prototype.toJSON = /** @ignore */ Boolean.prototype.toJSON = function (key) {
             return this.valueOf();
         };
     }
@@ -776,9 +776,17 @@
         return element.parent();
     }
 
-    // feature detection
-    /** @name kendo.support */
+    /**
+     * Contains results from feature detection.
+     * @name kendo.support
+     * @namespace Contains results from feature detection.
+     */
     (function() {
+        /**
+         * Indicates the width of the browser scrollbar. A value of zero means that the browser does not show a visual representation of a scrollbar (i.e. mobile browsers).
+         * @name kendo.support.scrollbar
+         * @property {Boolean}
+         */
         support.scrollbar = function() {
             var div = document.createElement("div"),
                 result;
@@ -798,14 +806,36 @@
         // Internet Explorer does not support setting the innerHTML of TBODY and TABLE elements
         try {
             table.innerHTML = "<tr><td></td></tr>";
+
+            /**
+             * Indicates whether the browser supports setting of the &lt;tbody&gt; innerHtml.
+             * @name kendo.support.tbodyInnerHtml
+             * @property {Boolean}
+             */
             support.tbodyInnerHtml = true;
         } catch (e) {
             support.tbodyInnerHtml = false;
         }
 
+        /**
+         * Indicates whether the browser supports touch events.
+         * @name kendo.support.touch
+         * @property {Boolean}
+         */
         support.touch = "ontouchstart" in window;
 
+        /**
+         * Indicates whether the browser supports CSS transitions.
+         * @name kendo.support.transitions
+         * @property {Boolean}
+         */
         support.transitions = false;
+
+        /**
+         * Indicates whether the browser supports hardware 3d transitions.
+         * @name kendo.support.hasHW3D
+         * @property {Boolean}
+         */
         support.hasHW3D = 'WebKitCSSMatrix' in window && 'm11' in new WebKitCSSMatrix();
 
         $.each([ 'Moz', 'webkit', 'O', 'ms' ], function () {
@@ -826,9 +856,19 @@
             }
         });
 
+        /**
+         * Indicates the browser device pixel ratio.
+         * @name kendo.support.devicePixelRatio
+         * @property {Float}
+         */
         support.devicePixelRatio = window.devicePixelRatio === undefined ? 1 : window.devicePixelRatio;
-
     })();
+
+    /**
+     * Exposed by jQuery.
+     * @name jQuery.fn
+     * @namespace Handy jQuery plug-ins that are used by all Kendo components.
+     */
 
     var effectInit = {
             fadeIn: function(element) {
@@ -1038,7 +1078,7 @@
        });
     }
 
-    extend($.fn, {
+    extend($.fn, /** @lends jQuery.fn */{
         kendoStop: function(clearQueue, gotoEnd) {
             if (kendo.support.transitions && 'stopQueue' in kendo.fx)
                 return kendo.fx.stopQueue(this, clearQueue || false, gotoEnd || false);
@@ -1075,7 +1115,7 @@
         return element;
     }
 
-    extend($.fn, {
+    extend($.fn, /** @lends jQuery.fn */{
         kendoAddClass: function(classes, options){
             return toggleClass(this, classes, options, true);
         },
@@ -1087,6 +1127,13 @@
         }
     });
 
+    /**
+     * Encodes HTML characters to entities.
+     * @name kendo.htmlEncode
+     * @function
+     * @param {String} value The string that needs to be HTML encoded.
+     * @returns {String} The encoded string.
+     */
     function htmlEncode(value) {
         return ("" + value).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
     }
@@ -1100,6 +1147,7 @@
     };
 
     if (support.touch) {
+        /** @ignore */
         touchLocation = function(e, id) {
             var changedTouches = e.changedTouches || e.originalEvent.changedTouches;
 
@@ -1133,9 +1181,16 @@
     extend(kendo, /** @lends kendo */ {
         /**
          * @name kendo.ui
-         * @namespace Contains all classes for the UI components
+         * @namespace Contains all classes for the Kendo UI components.
          */
         ui: {
+            /**
+             * Shows an overlay with a loading message, indicating that an action is in progress.
+             * @name kendo.ui.progress
+             * @function
+             * @param {jQueryObject} container The container that will hold the overlay
+             * @param {Boolean} toggle Whether the overlay should be shown or hidden
+             */
             progress: function(container, toggle) {
                 var mask = container.find(".t-loading-mask");
 
@@ -1177,13 +1232,24 @@
         Observable: Observable,
         Class: Class,
         Template: Template,
+        /**
+         * Shorthand for {@link kendo.Template.compile}.
+         * @name kendo.template
+         * @function
+         */
         template: proxy(Template.compile, Template),
+        /**
+         * Shorthand for {@link kendo.Template.render}.
+         * @name kendo.render
+         * @function
+         */
         render: proxy(Template.render, Template),
         stringify: proxy(JSON.stringify, JSON),
         touchLocation: touchLocation,
         format: format,
         formatters: formatters,
         htmlEncode: htmlEncode,
+        /** @ignore */
         getter: function(expression) {
             expression = expression || "";
 
@@ -1193,9 +1259,11 @@
 
             return new Function("d", "return d" + expression);
         },
+        /** @ignore */
         setter: function(expression) {
             return new Function("d,value", "d." + expression + "=value");
         },
+        /** @ignore */
         accessor: function(expression) {
             return {
                 get: kendo.getter(expression),
@@ -1223,6 +1291,23 @@
 
     extend(kendo.ui, /** @lends kendo.ui */{
         Component: Component,
+        /**
+         * Helper method for writing new components.
+         * Exposes a jQuery plug-in that will handle the component creation and attach its client-side object in the appropriate data-kendo* attribute.
+         * Also triggers the init event, when the component has been created.
+         * @name kendo.ui.plugin
+         * @function
+         * @param {String} name The name of the component.
+         * @param {kendo.ui.Component} component The component function.
+         * @example
+         * function TextBox(element, options);
+         * kendo.ui.plugin("TextBox", TextBox);
+         *
+         * // initialize a new TextBox for each input, with the given options object.
+         * $("input").kendoTextBox({ }); 
+         * // get the TextBox object and call the value API method
+         * $("input").data("kendoTextBox").value();
+         */
         plugin: function(name, component) {
             // expose it in the kendo.ui namespace
             kendo.ui[name] = component;
