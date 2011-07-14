@@ -1176,17 +1176,22 @@
             var axis = this,
                 autoOptions = {
                     min: axis.autoAxisMin(seriesMin, seriesMax),
-                    max: axis.autoAxisMax(seriesMin, seriesMax)
+                    max: axis.autoAxisMax(seriesMin, seriesMax),
+                    majorUnit: axis.autoMajorUnit(seriesMin, seriesMax)
                 };
+
+            if(options && !options.majorUnit) {
+                if (options.min || options.max) {
+                    options = deepExtend(autoOptions, options);
+
+                    // Determine an auto major unit after min/max have been set
+                    autoOptions.majorUnit = axis.autoMajorUnit(options.min, options.max);
+                }
+            }
 
             Axis.fn.init.call(axis, deepExtend(autoOptions, options));
 
             options = axis.options;
-
-            if(!options.majorUnit) {
-                // Determine an auto major unit after min/max have been set
-                options.majorUnit = axis.autoMajorUnit(options.min, options.max);
-            }
 
             var majorDivisions = axis.getMajorDivisions(),
                 currentValue = options.min,
@@ -1799,12 +1804,8 @@
 
             if (typeof value !== UNDEFINED) {
                 if (isStacked) {
-                    splitTotals = value > 0 ? totalsPos : totalsNeg;
-                    splitTotals[categoryIx] =
-                        splitTotals[categoryIx] ? splitTotals[categoryIx] + value : value;
-
-                    totals[categoryIx] =
-                        totals[categoryIx] ? totals[categoryIx] + value : value;
+                    incrementSlot(value > 0 ? totalsPos : totalsNeg, categoryIx, value);
+                    incrementSlot(totals, categoryIx, value);
                 } else {
                     chart._seriesMin = Math.min(chart._seriesMin, value);
                     chart._seriesMax = Math.max(chart._seriesMax, value);
@@ -3764,6 +3765,10 @@
             options.axisDefaults,
             options.valueAxis
         );
+    }
+
+    function incrementSlot(slots, index, value) {
+        slots[index] = (slots[index] || 0) + value;
     }
 
     // Exports ================================================================

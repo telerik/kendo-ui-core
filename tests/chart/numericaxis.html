@@ -71,7 +71,7 @@
            test("Major unit calculation for positive values", function() {
                 for (var i = 0; i < referenceUnits.length; i++) {
                     var d = referenceUnits[i],
-                        min = d[0];
+                        min = d[0],
                         max = d[1],
                         mu = d[2];
 
@@ -82,7 +82,7 @@
            test("Major unit calculation for negative values", function() {
                 for (var i = 0; i < referenceUnits.length; i++) {
                     var d = referenceUnits[i],
-                        min = -d[1];
+                        min = -d[1],
                         max = -d[0],
                         mu = d[2];
 
@@ -100,7 +100,7 @@
                     }
 
                     // Take a test triplet [min, max, mu] and transform it to [-max/2, max/2, mu]
-                    var min = -d[1] / 2;
+                    var min = -d[1] / 2,
                         max = d[1] / 2,
                         mu = d[2];
 
@@ -231,15 +231,37 @@
             });
 
             (function() {
-                module("Configuration");
+                module("Numeric Axis / Configuration");
 
-                test("Major unit is determined from options min/max", function() {
+                test("Major unit is calculated for user set min/max", function() {
                     numericAxis = new NumericAxis(1000, 10000, {
                         min: 10,
                         max: 100
                     });
 
                     equal(numericAxis.options.majorUnit, 10);
+                });
+
+                test("Major unit is calculated for user set min and automatic max", function() {
+                    numericAxis = new NumericAxis(1000, 10000, {
+                        min: 9000
+                    });
+
+                    equal(numericAxis.options.majorUnit, 500);
+                });
+
+                test("Major unit is calculated for user set max and automatic min", function() {
+                    numericAxis = new NumericAxis(1000, 10000, {
+                        max: 2000
+                    });
+
+                    equal(numericAxis.options.majorUnit, 500);
+                });
+
+                test("Major unit is calculated for series when user min/max are not set", function() {
+                    numericAxis = new NumericAxis(0, 190);
+
+                    equal(numericAxis.options.majorUnit, 20);
                 });
 
                 test("creates labels with format", 1, function() {
