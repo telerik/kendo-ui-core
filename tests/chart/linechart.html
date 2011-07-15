@@ -679,6 +679,10 @@
                     same(marker.options.opacity, point.options.markers.opacity);
                 });
 
+                test("sets marker id", function() {
+                    ok(marker.options.id.length > 0);
+                });
+
                 // ------------------------------------------------------------
                 module("Line Point / Labels", {
                     setup: function() {
@@ -761,6 +765,7 @@
                     BACKGROUND = "#f00",
                     shape,
                     box,
+                    root,
                     view;
 
                 function createShape(options) {
@@ -775,6 +780,9 @@
 
                     box = new Box2D(0, 0, SIZE, SIZE);
                     shape.reflow(box);
+
+                    root = new Chart.RootElement();
+                    root.append(shape);
 
                     view = new ViewStub();
                     shape.getViewElements(view);
@@ -803,6 +811,16 @@
                     var circle = view.log.circle[0];
                     same(circle.center, [SIZE / 2, SIZE / 2]);
                     same(circle.radius, SIZE / 2);
+                });
+
+                test("renders id", function() {
+                    createShape({ id: "id" });
+                    equals(view.log.rect[0].style.id, "id");
+                });
+
+                test("registers id with root", function() {
+                    createShape({ id: "id" });
+                    ok(root.idMap["id"] === shape);
                 });
 
             })();

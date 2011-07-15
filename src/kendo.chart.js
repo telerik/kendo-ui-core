@@ -140,22 +140,42 @@
                 options = chart.options,
                 model = new RootElement(options.chartArea);
 
+            chart._model = model;
+
             if (options.title && options.title.visible && options.title.text) {
-                model.children.push(new Title(options.title));
+                model.append(new Title(options.title));
             }
 
             if (options.legend.visible) {
                 var legendOptions = deepExtend({}, options.legend,
                                     { series: options.series });
 
-                model.children.push(new Legend(legendOptions));
+                model.append(new Legend(legendOptions));
             }
 
-            model.children.push(new PlotArea(chart.options));
-            chart._model = model;
-
+            model.append(new PlotArea(chart.options));
             model.reflow();
-            model.getView().renderTo(chart.element[0]);
+
+            chart._viewElement = model.getView().renderTo(chart.element[0]);
+            chart._attachEvents();
+        },
+
+        _attachEvents: function() {
+            var chart = this,
+                viewElement = chart._viewElement,
+                model = chart._model,
+                id,
+                element;
+
+            $(viewElement).bind("mouseover", function(e) {
+                id = e.target.id;
+                if (id) {
+                    element = model.idMap[id];
+                    if (element) {
+                        console.log("mouseover", element);
+                    }
+                }
+            });
         },
 
         _ensureSize: function() {
@@ -400,7 +420,16 @@
             var element = this,
                 viewElements = [],
                 children = element.children,
-                childrenCount = children.length;
+                childrenCount = children.length,
+                id = element.options.id,
+                root;
+
+            if (id) {
+                root = element.getRoot();
+                if (root) {
+                    root.idMap[id] = element;
+                }
+            }
 
             for (var i = 0; i < childrenCount; i++) {
                 viewElements.push.apply(viewElements,
@@ -419,12 +448,33 @@
             for (i = 0; i < childrenCount; i++) {
                 children[i].box.translate(dx, dy);
             }
+        },
+
+        append: function() {
+            var element = this,
+                i,
+                length = arguments.length;
+
+            [].push.apply(element.children, arguments);
+
+            for (i = 0; i < length; i++) {
+                arguments[i].parent = element;
+            }
+        },
+
+        getRoot: function() {
+            var element = this,
+                parent = element.parent;
+
+            return parent ? parent.getRoot() : null;
         }
     });
 
     var RootElement = ChartElement.extend({
         init: function(options) {
             var root = this;
+
+            root.idMap = {};
 
             ChartElement.fn.init.call(root, options);
         },
@@ -484,6 +534,10 @@
         supportsSVG: function() {
             return doc.implementation.hasFeature(
                 "http://www.w3.org/TR/SVG11/feature#BasicStructure", "1.1");
+        },
+
+        getRoot: function() {
+            return this;
         }
     });
 
@@ -573,6 +627,7 @@
             var border = options.border || {},
                 elements = [
                     view.createRect(element.paddingBox, {
+                        id: options.id,
                         stroke: border.width ? border.color : "",
                         strokeWidth: border.width,
                         strokeOpacity: options.opacity,
@@ -646,6 +701,8 @@
             var text = this,
                 options = text.options;
 
+            ChartElement.fn.getViewElements.call(this, view);
+
             return [
                 view.createText(text.content, {
                     x: text.box.x1, y: text.box.y1,
@@ -662,7 +719,7 @@
 
             BoxElement.fn.init.call(textBox, options);
 
-            textBox.children.push(
+            textBox.append(
                 new Text(options.format ? format(options.format, content) : content,
                     deepExtend({ }, textBox.options, { align: LEFT, vAlign: TOP }))
             );
@@ -677,7 +734,7 @@
             var barLabel = this;
             ChartElement.fn.init.call(barLabel, options);
 
-            barLabel.children.push(new TextBox(content, barLabel.options));
+            barLabel.append(new TextBox(content, barLabel.options));
         },
 
         options: {
@@ -783,7 +840,7 @@
                     vAlign: options.position
                 });
 
-            title.children.push(
+            title.append(
                 new TextBox(options.text, textBoxOptions)
             );
         },
@@ -831,7 +888,7 @@
                 var name = series[i].name,
                     label = new Text(name, legend.options.labels);
 
-                legend.children.push(label);
+                legend.append(label);
             }
         },
 
@@ -1205,7 +1262,7 @@
                     labelOptions
                 );
 
-                axis.children.push(text);
+                axis.append(text);
 
                 currentValue = round(currentValue + options.majorUnit, DEFAULT_PRECISION);
             }
@@ -1471,7 +1528,7 @@
 
             for (var i = 0; i < options.categories.length; i++) {
                 var label = options.categories[i];
-                axis.children.push(new Text(label, labelOptions));
+                axis.append(new Text(label, labelOptions));
             }
         },
 
@@ -1916,7 +1973,7 @@
 
             if (labelOptions.visible && value) {
                 var label = new BarLabel(value, labelOptions);
-                bar.children.push(label);
+                bar.append(label);
             }
 
             barChart.points.push(bar);
@@ -1937,7 +1994,7 @@
 
                 if (!stackWrap) {
                     stackWrap = new ChartElement();
-                    cluster.children.push(stackWrap);
+                    cluster.append(stackWrap);
 
                     positiveStack = new StackLayout({
                         isVertical: options.isVertical
@@ -1946,19 +2003,19 @@
                         isVertical: options.isVertical,
                         isReversed: true
                     });
-                    stackWrap.children.push(positiveStack, negativeStack);
+                    stackWrap.append(positiveStack, negativeStack);
                 } else {
                     positiveStack = stackWrap.children[0];
                     negativeStack = stackWrap.children[1];
                 }
 
                 if (value > 0) {
-                    positiveStack.children.push(bar);
+                    positiveStack.append(bar);
                 } else {
-                    negativeStack.children.push(bar);
+                    negativeStack.append(bar);
                 }
             } else {
-                cluster.children.push(bar);
+                cluster.append(bar);
             }
         },
 
@@ -2034,7 +2091,8 @@
                 ], element.options);
             } else if (type === CIRCLE) {
                 element = view.createCircle([
-                    box.x1 + halfWidth, box.y1 + box.height() / 2
+                    round(box.x1 + halfWidth, COORD_PRECISION),
+                    round(box.y1 + box.height() / 2, COORD_PRECISION)
                 ], halfWidth, element.options);
             }
 
@@ -2086,8 +2144,9 @@
                     new Color(markerBackground).brightness(BAR_BORDER_BRIGHTNESS).toHex();
             }
 
-            children.push(
+            point.append(
                 new ShapeElement({
+                    id: uniqueId(),
                     visible: markers.visible,
                     type: markers.type,
                     width: markers.size,
@@ -2095,10 +2154,7 @@
                     background: markerBackground,
                     border: markerBorder,
                     opacity: markers.opacity
-                })
-            );
-
-            children.push(
+                }),
                 new TextBox(point.value, deepExtend({
                     visible: labels.visible,
                     align: CENTER,
@@ -2228,7 +2284,7 @@
 
             chart.points.push(point);
             points.push(point);
-            children.push(point);
+            chart.append(point);
         },
 
         updateRange: function(value, categoryIx) {
@@ -2388,7 +2444,7 @@
                 charts.push(lineChart);
             }
 
-            [].push.apply(plotArea.children, charts);
+            plotArea.append.apply(plotArea, charts);
 
             plotArea.createAxes(range.min, range.max, invertAxes);
         },
@@ -2410,8 +2466,8 @@
             plotArea.axisX = invertAxes ? valueAxis : categoryAxis;
             plotArea.axisY = invertAxes ? categoryAxis : valueAxis;
 
-            plotArea.children.push(plotArea.axisY);
-            plotArea.children.push(plotArea.axisX);
+            plotArea.append(plotArea.axisY);
+            plotArea.append(plotArea.axisX);
         },
 
         reflow: function(targetBox) {
@@ -2615,7 +2671,7 @@
         },
 
         renderAttr: function (name, value) {
-            return value ? name + "='" + value + "' " : "";
+            return value ? " " + name + "='" + value + "' " : "";
         }
     });
 
@@ -2625,8 +2681,8 @@
 
             ViewElement.fn.init.call(view, options);
 
-            view.definitions = { };
-            view.decorators = [ ];
+            view.definitions = {};
+            view.decorators = [];
         },
 
         renderDefinitions: function() {
@@ -2689,10 +2745,14 @@
 
         renderTo: function(container) {
             var view = this,
-                svgText = view.render();
+                svgText = view.render(),
+                viewElement;
 
             renderSVG(container, svgText);
-            view.alignToScreen(container.firstChild);
+            viewElement = container.firstChild;
+            view.alignToScreen(viewElement);
+
+            return viewElement;
         },
 
         renderDefinitions: function() {
@@ -2761,7 +2821,8 @@
             group.template = SVGGroup.template;
             if (!group.template) {
                 group.template = SVGGroup.template =
-                    template("<g><#= d.renderContent() #></g>");
+                template("<g<#= d.renderAttr(\"id\", d.options.id) #>>" +
+                         "<#= d.renderContent() #></g>");
             }
         }
     });
@@ -2776,7 +2837,8 @@
             text.template = SVGText.template;
             if (!text.template) {
                 text.template = SVGText.template = template(
-                    "<text x='<#= Math.round(d.options.x) #>' " +
+                    "<text <#= d.renderAttr(\"id\", d.options.id) #> " +
+                    "x='<#= Math.round(d.options.x) #>' " +
                     "y='<#= Math.round(d.options.y + d.options.baseline) #>' " +
                     "style='font: <#= d.options.font #>' fill='<#= d.options.color #>'>" +
                     "<#= d.content #></text>"
@@ -2800,7 +2862,8 @@
             path.template = SVGPath.template;
             if (!path.template) {
                 path.template = SVGPath.template = template(
-                    "<path d='<#= d.renderPoints() #>' " +
+                    "<path <#= d.renderAttr(\"id\", d.options.id) #>" +
+                    "d='<#= d.renderPoints() #>' " +
                     "<#= d.renderStroke() #><#= d.renderStrokeWidth() #>" +
                     "stroke-linecap='square' " +
                     "fill-opacity='<#= d.options.fillOpacity #>' " +
@@ -2867,7 +2930,8 @@
             circle.template = SVGCircle.template;
             if (!circle.template) {
                 circle.template = SVGCircle.template = template(
-                    "<circle cx='<#= d.center[0] #>' cy='<#= d.center[1] #>' " +
+                    "<circle <#= d.renderAttr(\"id\", d.options.id) #> " +
+                    "cx='<#= d.center[0] #>' cy='<#= d.center[1] #>' " +
                     "r='<#= d.radius #>' " +
                     "<#= d.renderAttr(\"stroke\", d.options.stroke) #> " +
                     "<#= d.renderAttr(\"stroke-width\", d.options.strokeWidth) #>" +
@@ -3074,7 +3138,8 @@
             text.template = VMLText.template;
             if (!text.template) {
                 text.template = VMLText.template = template(
-                    "<kvml:textbox style='position: absolute; " +
+                    "<kvml:textbox <#= d.renderAttr(\"id\", d.options.id) #> " +
+                    "style='position: absolute; " +
                     "left: <#= d.options.x #>px; top: <#= d.options.y #>px; " +
                     "font: <#= d.options.font #>; color: <#= d.options.color #>'>" +
                     "<#= d.content #></kvml:textbox>"
@@ -3098,7 +3163,8 @@
             path.template = VMLPath.template;
             if (!path.template) {
                 path.template = VMLPath.template = template(
-                    "<kvml:shape style='position:absolute; width:1px; height:1px;' " +
+                    "<kvml:shape <#= d.renderAttr(\"id\", d.options.id) #> " +
+                    "style='position:absolute; width:1px; height:1px;' " +
                     "coordorigin='0 0' coordsize='1 1'>" +
                         "<kvml:path v='<#= d.renderPoints() #> e' />" +
                         "<#= d.fill.render() + d.stroke.render() #>" +
@@ -3183,7 +3249,8 @@
             circle.template = VMLCircle.template;
             if (!circle.template) {
                 circle.template = VMLCircle.template = template(
-                    "<kvml:oval style='position:absolute; " +
+                    "<kvml:oval <#= d.renderAttr(\"id\", d.options.id) #> " +
+                            "style='position:absolute; " +
                             "width:<#= d.radius * 2 #>px; height:<#= d.radius * 2 #>px; " +
                             "top:<#= d.center[1] - d.radius #>px; " +
                             "left:<#= d.center[0] - d.radius #>px;' " +
@@ -3210,7 +3277,8 @@
             group.template = VMLGroup.template;
             if (!group.template) {
                 group.template = VMLGroup.template = template(
-                    "<div style='position: absolute; white-space: nowrap;'>" +
+                    "<div <#= d.renderAttr(\"id\", d.options.id) #>" +
+                    "style='position: absolute; white-space: nowrap;'>" +
                     "<#= d.renderContent() #></div>"
                 );
             }
@@ -3785,6 +3853,16 @@
 
     function incrementSlot(slots, index, value) {
         slots[index] = (slots[index] || 0) + value;
+    }
+
+    function uniqueId() {
+        var id = "k", i;
+
+        for (i = 0; i < 16; i++) {
+            id += (Math.random() * 16 | 0).toString(16);
+        }
+
+        return id;
     }
 
     // Exports ================================================================

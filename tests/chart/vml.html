@@ -225,6 +225,12 @@
                     text.options.color = "#cf0";
                     ok(text.render().indexOf("color: " + text.options.color) > -1);
                 });
+
+                test("renders id", function() {
+                    text.options.id = "id";
+                    ok(text.render().indexOf("id='id'") > -1);
+                });
+
             })();
 
             (function() {
@@ -320,6 +326,11 @@
 
                 test("renders fill", function() {
                     ok(path.render().indexOf("<kvml:fill") > -1);
+                });
+
+                test("renders id", function() {
+                    path.options.id = "id";
+                    ok(path.render().indexOf("id='id'") > -1);
                 });
 
             })();
@@ -421,6 +432,11 @@
                         "<div style='position: absolute; white-space: nowrap;'>Content</div>");
                 });
 
+                test("renders id", function() {
+                    group.options.id = "id";
+                    ok(group.render().indexOf("id='id'") > -1);
+                });
+
             })();
 
             (function() {
@@ -486,6 +502,11 @@
                 test("renders stroke width", function() {
                     circle.options.strokeWidth = "2";
                     ok(circle.render().indexOf("strokeweight='2'") > -1);
+                });
+
+                test("renders id", function() {
+                    circle.options.id = "id";
+                    ok(circle.render().indexOf("id='id'") > -1);
                 });
 
             })();
