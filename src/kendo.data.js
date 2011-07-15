@@ -1235,30 +1235,38 @@
         },
 
         range: function(skip, take) {
+            skip = skip || 0;
             var that = this,
                 end = Math.min(skip + take, that.total()),
                 data;
 
-            if (that.options.serverPaging) {
                 data = that._findRange(skip, end);
 
                 if (data.length) {
                     that._skip = skip;
                     that._take = take;
-                    that._process(data);
+                    var paging = that.options.serverPaging;
+                    try {
+                        that.options.serverPaging = true;
+                        that._process(data);
+                    } finally {
+                        that.options.serverPaging = paging;
+                    }
                     return;
                 }
-            }
 
             if (take !== undefined) {
-                skip = skip || 0;
 
                 var pageSkip = (Math.max(Math.floor(skip / take), 0) * take);
                 if (!that._rangeExists(pageSkip, pageSkip + take)) {
                     that.prefetch(pageSkip, take, function() {
-                        that.prefetch(pageSkip + take, take, function() {
+                        if (skip > pageSkip) {
+                            that.prefetch(pageSkip + take, take, function() {
+                                that.range(skip, take);
+                            });
+                        } else {
                             that.range(skip, take);
-                        });
+                        }
                     });
                 } else if (pageSkip < skip) {
                     that.prefetch(pageSkip + take, take, function() {
@@ -1358,13 +1366,10 @@
                 };
 
             if (!that._rangeExists(skip, skip + take)) {
-
-                console.log("prefetch outer");
                 that._ranges.push(range);
                 clearTimeout(that._timeout);
                 that._timeout = setTimeout(function() {
                     that._queueRequest(options, function() {
-                    console.log("prefetch inner");
                     that.transport.read({
                         data: options,
                         success: function (data) {
