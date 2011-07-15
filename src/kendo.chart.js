@@ -172,7 +172,7 @@
                 if (id) {
                     element = model.idMap[id];
                     if (element) {
-                        console.log("mouseover", element);
+
                     }
                 }
             });
@@ -420,16 +420,7 @@
             var element = this,
                 viewElements = [],
                 children = element.children,
-                childrenCount = children.length,
-                id = element.options.id,
-                root;
-
-            if (id) {
-                root = element.getRoot();
-                if (root) {
-                    root.idMap[id] = element;
-                }
-            }
+                childrenCount = children.length;
 
             for (var i = 0; i < childrenCount; i++) {
                 viewElements.push.apply(viewElements,
@@ -437,6 +428,16 @@
             }
 
             return viewElements;
+        },
+
+        registerId: function(id) {
+            var element = this,
+                root;
+
+            root = element.getRoot();
+            if (root) {
+                root.idMap[id] = element;
+            }
         },
 
         translateChildren: function(dx, dy) {
@@ -2214,6 +2215,15 @@
             label.reflow(box);
             label.box.alignTo(marker.box, edge);
             label.reflow(label.box);
+        },
+
+        getViewElements: function(view) {
+            var element = this,
+                marker = element.children[0];
+
+            element.registerId(marker.options.id);
+
+            return ChartElement.fn.getViewElements.call(element, view);
         }
     });
 
