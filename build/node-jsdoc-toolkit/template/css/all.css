@@ -364,3 +364,23 @@ ul.desc li, ol.desc li {
 /*
  * END JSDOC
  */
+
+.detailBody
+{
+    display: none;
+}
+
+.detailHandle
+{
+    margin-top: 5px;
+    background: #EEE;
+    border-bottom: 3px solid #CCC;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.detailHandle:hover
+{
+    background: #CCC;
+    border-bottom: 3px solid #AAA;
+}

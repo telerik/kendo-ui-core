@@ -7,6 +7,7 @@ function publish(symbolSet) {
 		staticDir:   "static/",
 		symbolsDir:  "symbols/",
 		srcDir:      "symbols/src/",
+        kendoSrcDir:      "src/",
 		cssDir:      "css/",
 		fontsDir:    "css/fonts/",
 		jsDir:       "javascript/",
@@ -125,10 +126,16 @@ function publish(symbolSet) {
 	
 	// copy static files
 	IO.copyFile(publish.conf.templatesDir+"/"+publish.conf.cssDir+"all.css", publish.conf.outDir+"/"+publish.conf.cssDir);
+    IO.copyFile(publish.conf.templatesDir+"/"+publish.conf.cssDir+"prettify.css", publish.conf.outDir+"/"+publish.conf.cssDir);
 	IO.copyFile(publish.conf.templatesDir+"/"+publish.conf.cssDir+"screen.css", publish.conf.outDir+"/"+publish.conf.cssDir);
 	IO.copyFile(publish.conf.templatesDir+"/"+publish.conf.cssDir+"handheld.css", publish.conf.outDir+"/"+publish.conf.cssDir);
 	IO.copyFile(publish.conf.templatesDir+"/"+publish.conf.jsDir+"all.js", publish.conf.outDir+"/"+publish.conf.jsDir);
+    IO.copyFile(publish.conf.templatesDir+"/"+publish.conf.jsDir+"prettify.js", publish.conf.outDir+"/"+publish.conf.jsDir);
 	IO.copyFile(publish.conf.templatesDir+"/"+publish.conf.jsDir+"html5.js", publish.conf.outDir+"/"+publish.conf.jsDir);
+    IO.copyFile(publish.conf.templatesDir+"/"+publish.conf.jsDir+"kendo.js", publish.conf.outDir+"/"+publish.conf.jsDir);
+    IO.copyFile(publish.conf.kendoSrcDir+"jquery.js", publish.conf.outDir+"/"+publish.conf.jsDir);
+    IO.copyFile(publish.conf.kendoSrcDir+"kendo.core.js", publish.conf.outDir+"/"+publish.conf.jsDir);
+    IO.copyFile(publish.conf.kendoSrcDir+"kendo.fx.js", publish.conf.outDir+"/"+publish.conf.jsDir);
 	IO.copyFile(publish.conf.templatesDir+"/"+publish.conf.fontsDir+"mplus-1m-regular-webfont.eot", publish.conf.outDir+"/"+publish.conf.fontsDir);
 	IO.copyFile(publish.conf.templatesDir+"/"+publish.conf.fontsDir+"mplus-1m-regular-webfont.svg", publish.conf.outDir+"/"+publish.conf.fontsDir);
 	IO.copyFile(publish.conf.templatesDir+"/"+publish.conf.fontsDir+"mplus-1m-regular-webfont.ttf", publish.conf.outDir+"/"+publish.conf.fontsDir);

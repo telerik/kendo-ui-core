@@ -40,7 +40,7 @@ wbos.CssTools.MediaQueryFallBack = ( function() {
 		testDivClass: "cssLoadCheck",
 		dynamicCssLinkId: "DynCssLink",
 		resizeDelay: 30
-	}
+	};
 	var noMediaQuery = false;
 	var delay;
 	var currentCssMediaType;
@@ -48,7 +48,7 @@ wbos.CssTools.MediaQueryFallBack = ( function() {
 	// Adding events to elements in the DOM without overwriting it
 	function addEvent(element, newFunction, eventType) {
 		var oldEvent = eval("element." + eventType);
-		var eventContentType = eval("typeof element." + eventType)
+		var eventContentType = eval("typeof element." + eventType);
 		
 		if ( eventContentType != 'function' ) {
 			eval("element." + eventType + " = newFunction")
@@ -114,7 +114,7 @@ wbos.CssTools.MediaQueryFallBack = ( function() {
 			if (cssloadCheckNode.offsetWidth != 100 && noMediaQuery == false) {
 				noMediaQuery = true;
 			}
-			cssloadCheckNode.parentNode.removeChild(cssloadCheckNode)
+			cssloadCheckNode.parentNode.removeChild(cssloadCheckNode);
 			
 			if (noMediaQuery == true) {
 				// Browser does not support Media Queries, so JavaScript will supply a fallback 
@@ -137,13 +137,13 @@ wbos.CssTools.MediaQueryFallBack = ( function() {
 							if (typeof(currentCssLinks[i].media) == "object") {
 								if (currentCssLinks[i].media.item(ii) == "fallback") {
 									currentCssLinks[i].ownerNode.parentNode.removeChild(currentCssLinks[i].ownerNode)
-									i--
+									i--;
 									break;
 								}
 							} else {
 								if (currentCssLinks[i].media.indexOf("fallback") >= 0) {
 									currentCssLinks[i].owningElement.parentNode.removeChild(currentCssLinks[i].owningElement)
-									i--
+									i--;
 									break;
 								}
 							}
@@ -179,7 +179,7 @@ wbos.CssTools.MediaQueryFallBack = ( function() {
 			delay = setTimeout( "wbos.CssTools.MediaQueryFallBack.LoadCss()", config.resizeDelay)
 		}
 		
-	}
+	};
 	/* End public */
 })();
 
@@ -219,7 +219,7 @@ wbos.Events = ( function() {
 				eval("element." + eventType + " = function(e) { oldEvent(e); newFunction(e); }")
 			}
 		}
-	}
+	};
 	/* End public */
 })();
 
@@ -281,9 +281,9 @@ codeview.classFilter = ( function() {
 	}
 	
 	function filterList(listItems, search, relatedElements) {
-		var itemContent = ""
+		var itemContent = "";
 		for (var i=0; i < listItems.length; i++) {
-			itemContent = listItems[i].textContent||listItems[i].innerText
+			itemContent = listItems[i].textContent||listItems[i].innerText;
 			if (itemContent != undefined) {
 				itemContent = itemContent.toLowerCase()
 				itemContent = itemContent.replace(/\s/g, "")
@@ -300,7 +300,7 @@ codeview.classFilter = ( function() {
 	}
 	
 	function filterRelatedList(listItem, search, relatedElements) {
-		var itemIndex = parseInt(listItem.className.replace('item', ''))
+		var itemIndex = parseInt(listItem.className.replace('item', ''));
 		if (itemIndex <= relatedElements.length) {
 			if (relatedElements[itemIndex].className == "item"+ itemIndex) {
 				relatedElements[itemIndex].style.display = listItem.style.display
@@ -321,6 +321,6 @@ codeview.classFilter = ( function() {
 				"onkeyup"
 			)					
 		}
-	}
+	};
 	/* End public */
 })();
