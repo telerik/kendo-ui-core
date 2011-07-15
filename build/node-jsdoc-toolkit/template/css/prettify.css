@@ -1,0 +1,25 @@
+/* Coda scheme ported from TextMate to google prettify */
+
+pre.prettyprint { padding: 5px; border-left: 5px solid #939393;
+border-width: 0 0 0 5px !important;}
+pre .nocode { background-color: none; color: #000 }
+pre .str { color: #731318; } /* string */
+pre .kwd { color: #8C1751;} /* keyword */
+pre .com { color: #256D24; } /* comment */
+pre .typ { color: #606; } /* type */
+pre .lit { color: #066;} /* literal */
+pre .pun { color: #660 }    /* punctuation */
+pre .pln { color: #000 }    /* plaintext */
+pre .tag { color: #861681;} /* html/xml tag */
+pre .atn { color: #C5680C;} /* attribute name */
+pre .atv { color: #221AA6;} /* attribute value */
+pre .dec { color: #1F00FF; } /* decimal */
+
+/* Specify class=linenums on a pre to get line numbering */
+ol.linenums { margin-top: 0; margin-bottom: 0;
+color: #333; }
+/* IE indents via margin-left */
+li.L0,li.L1,li.L2,li.L3,li.L5,li.L6,li.L7,li.L8 {
+ list-style-type: none }
+/* Alternate shading for lines */
+li.L1,li.L3,li.L5,li.L7,li.L9 {background: #eee;}

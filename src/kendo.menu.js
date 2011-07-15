@@ -7,7 +7,39 @@
         Component = ui.Component,
         OPEN = "open",
         CLOSE = "close",
-        events = [ OPEN, CLOSE, "select", "init" ],
+        events = [
+            /**
+             * Fires before a sub menu gets opened.
+             * @name kendo.ui.Menu#open
+             * @event
+             * @param {Event} e
+             * @param {Item} e.item The opened item
+             */
+            OPEN,
+            /**
+             * Fires after a sub menu gets closed.
+             * @name kendo.ui.Menu#close
+             * @event
+             * @param {Event} e
+             * @param {Item} e.item The closed item
+             */
+            CLOSE,
+            /**
+             * Fires when a menu item gets selected.
+             * @name kendo.ui.Menu#select
+             * @event
+             * @param {Event} e
+             * @param {Item} e.item The selected item
+             */
+            "select",
+            /**
+             * Fires when the menu gets initialized.
+             * @name kendo.ui.Menu#init
+             * @event
+             * @param {Event} e
+             */
+            "init"
+        ],
         MOUSEENTER = "mouseenter",
         MOUSELEAVE = "mouseleave",
         CLICK = "click",
@@ -36,7 +68,21 @@
         }
     }
 
-    var Menu = Component.extend({
+    var Menu = Component.extend({/** @lends kendo.ui.Menu.prototype */
+        /**
+         * Creates a Menu instance.
+         * @constructs
+         * @extends kendo.ui.Component
+         * @class Menu UI component
+         * @param {Selector} element DOM element
+         * @param {Object} options Configuration options.
+         * @param {Object} options.animation A collection of {Animation} objects, used to change default animations. A value of false will disable all animations in the component.
+         * @param {Animation} options.animation.open The animation that will be used when opening sub menus.
+         * @param {Animation} options.animation.close The animation that will be used when closing sub menus.
+         * @param {String} options.orientation Root menu orientation, horizontal by default.
+         * @param {Boolean} options.openOnClick Specifies that the root sub menus will be opened on item click.
+         * @param {Number} options.hoverDelay Specifies the delay in ms before the menu is opened/closed - used to avoid accidental closure on leaving - 100ms by default.
+         */
         init: function(element, options) {
             element = $(element);
             var that = this;
@@ -82,17 +128,41 @@
             hoverDelay: 100
         },
 
-        enable: function (element, state) {
-            if (state !== false)
-                state = true;
-            
-            this._toggleDisabled(element, state);
+        /**
+         * Enables/disables a Menu item
+         * @param {Selector} element Target element
+         * @param {Boolean} enable Desired state
+         */
+        enable: function (element, enable) {
+            if (enable !== false)
+                enable = true;
+
+            this._toggleDisabled(element, enable);
         },
 
+        /**
+         * Disables a Menu item
+         * @param {Selector} element Target element
+         */
         disable: function (element) {
             this._toggleDisabled(element, false);
         },
 
+        /**
+         * Appends a Menu item in the specified referenceItem's sub menu
+         * @param {Selector} item Target item, specified as a JSON object. Can also handle an array of such objects.
+         * @param {Item} referenceItem A reference item to append the new item in
+         * @example
+         * menu.append(
+         *     [{
+         *         text: "Item 1"
+         *     },
+         *     {
+         *         text: "Item 2"
+         *     }],
+         *     referenceItem
+         * );
+         */
         append: function (item, referenceItem) {
             var that = this,
                 creatures = that._insert(item, referenceItem, referenceItem.find("> .t-group, .t-animation-container > .t-group"));
@@ -106,6 +176,21 @@
             that._updateFirstLast(referenceItem.find(".t-first, .t-last"));
         },
 
+        /**
+         * Inserts a Menu item before the specified referenceItem
+         * @param {Selector} item Target item, specified as a JSON object. Can also handle an array of such objects.
+         * @param {Item} referenceItem A reference item to insert the new item before
+         * @example
+         * menu.insertBefore(
+         *     [{
+         *         text: "Item 1"
+         *     },
+         *     {
+         *         text: "Item 2"
+         *     }],
+         *     referenceItem
+         * );
+         */
         insertBefore: function (item, referenceItem) {
             var that = this,
                 creatures = this._insert(item, referenceItem, referenceItem.parent());
@@ -118,6 +203,21 @@
             that._updateFirstLast(referenceItem);
         },
 
+        /**
+         * Inserts a Menu item after the specified referenceItem
+         * @param {Selector} item Target item, specified as a JSON object. Can also handle an array of such objects.
+         * @param {Item} referenceItem A reference item to insert the new item after
+         * @example
+         * menu.insertAfter(
+         *     [{
+         *         text: "Item 1"
+         *     },
+         *     {
+         *         text: "Item 2"
+         *     }],
+         *     referenceItem
+         * );
+         */
         insertAfter: function (item, referenceItem) {
             var that = this,
                 creatures = this._insert(item, referenceItem, referenceItem.parent());
@@ -160,6 +260,12 @@
             return { items: items, group: parent };
         },
 
+        /**
+         * Removes the specified Menu item/s from the Menu
+         * @param {Selector} element Target item selector.
+         * @example
+         * menu.remove("#Item1");
+         */
         remove: function (element) {
             element = $(element);
 
@@ -176,12 +282,18 @@
 
             if (parent.length) {
                 parent = parent.eq(0);
-                
+
                 that._updateArrow(parent);
                 that._updateFirstLast(parent);
             }
         },
 
+        /**
+         * Opens the sub menu of the specified Menu item/s
+         * @param {Selector} element Target item selector.
+         * @example
+         * menu.open("#Item1");
+         */
         open: function (element) {
             var that = this;
 
@@ -221,6 +333,12 @@
             });
         },
 
+        /**
+         * Closes the sub menu of the specified Menu item/s
+         * @param {Selector} element Target item selector.
+         * @example
+         * menu.close("#Item1");
+         */
         close: function (element) {
             var that = this;
 
@@ -234,7 +352,7 @@
                     if (ul[0]) {
                         li.css("z-index", li.data('z-index'));
                         li.removeData('z-index');
-                        
+
                         popup = ul.data(KENDOPOPUP);
                         popup.close();
                     }
@@ -325,7 +443,7 @@
 
         _updateFirstLast: function (item) {
             item = $(item);
-            
+
             item.filter(".t-first:not(:first-child)").removeClass("t-first");
             item.filter(".t-last:not(:last-child)").removeClass("t-last");
             item.filter(":first-child").addClass("t-first");
@@ -442,6 +560,7 @@
     });
 
     Menu.rendering = {
+        /** @ignore */
         wrapperCssClass: function (group, item) {
             var result = "t-item",
                 index = item.index;
@@ -462,12 +581,15 @@
 
             return result;
         },
+        /** @ignore */
         textClass: function(item) {
             return "t-link";
         },
+        /** @ignore */
         textAttributes: function(item) {
             return item.url ? " href='" + item.url + "'" : "";
         },
+        /** @ignore */
         arrowClass: function(item, group) {
             var result = "t-icon";
 
@@ -479,15 +601,19 @@
 
             return result;
         },
+        /** @ignore */
         text: function(item) {
             return item.encoded === false ? item.text : kendo.htmlEncode(item.text);
         },
+        /** @ignore */
         tag: function(item) {
             return item.url ? "a" : "span";
         },
+        /** @ignore */
         groupAttributes: function(group) {
             return group.expanded !== true ? " style='display:none'" : "";
         },
+        /** @ignore */
         groupCssClass: function(group) {
             return "t-group";
         }
