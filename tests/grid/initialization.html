@@ -408,7 +408,7 @@
             });
 
             test("column width is applied on col element", function() {
-                var width = 200,
+                var width = "200px",
                     grid = new Grid(table, { 
                         dataSource: [], 
                         columns: [{field: "foo", width: width }],
@@ -417,12 +417,12 @@
 
                 var cols = grid.wrapper.find("col");
                 equal(cols.length, 2);
-                equal(cols.eq(0).attr("width"), width);
-                equal(cols.eq(1).attr("width"), width);
+                equal(cols.eq(0).css("width"), width);
+                equal(cols.eq(1).css("width"), width);
             });
 
             test("column width is parsed from DOM col element when grid created from table element", function() {
-                var element = '<table><colgroup><col width="200"/><col /><th data-field="foo"></th><th data-field="bar"></th><th data-field="baz"></th></colgroup></table>',
+                var element = $('<table><colgroup><col style="width:200px"/><col /><th data-field="foo"></th><th data-field="bar"></th><th data-field="baz"></th></colgroup></table>'),
                     grid = new Grid(element, { 
                         dataSource: [],
                         scrollable: false
@@ -430,9 +430,9 @@
 
                 var cols = grid.wrapper.find("col");
                 equal(cols.length, 3);
-                equal(cols.eq(0).attr("width"), 200);
-                ok(!cols.eq(1).attr("width"));
-                ok(!cols.eq(2).attr("width"));
+                equal(cols.eq(0).css("width"), "200px");
+                equal(cols.eq(1).css("width"), "0px");
+                equal(cols.eq(2).css("width"), "0px");
             });
        </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

@@ -557,7 +557,7 @@
                 return {
                     field: field,
                     template: th.data("template"),
-                    width: cols.eq(idx).attr("width")
+                    width: cols.eq(idx).css("width")
                 };
             });
 
@@ -667,7 +667,7 @@
                 colgroup = table.find("colgroup").empty(),
                 cols = map(that.columns, function(column) {
                     if(column.width) {
-                        return kendo.format('<col width="{0}"/>', column.width);
+                        return kendo.format('<col style="width:{0}"/>', column.width);
                     }
 
                     return "<col />";
