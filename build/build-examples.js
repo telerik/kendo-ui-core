@@ -109,9 +109,12 @@ function importComponentHelp(exampleHTML, component) {
         var helpFile = "docs/symbols/kendo.ui." + component + ".html",
             helpHTML = fs.readFileSync(helpFile, "utf8");
 
-        var tabs = regionRegex.helpTabs.exec(helpHTML)[1];
+        var tabs = regionRegex.helpTabs.exec(helpHTML)[1],
+            data = regionRegex.helpData.exec(helpHTML)[1];
 
+        // could be improved if example has appropriate markers, or better yet, if loaded through AJAX (and not importing at all)
         exampleHTML = exampleHTML.replace(/codeStrip(([\r\n]|.)*?)<\/ul>/i, "codeStrip$1" + tabs + "</ul>");
+        exampleHTML = exampleHTML.replace(/codeStrip(([\r\n]|.)*?)<\/div>([\r\n\s\t])*?<script/i, "codeStrip$1" + data + "</div><script");
     } catch (e) {
         // file does not exist. probably.
     }
