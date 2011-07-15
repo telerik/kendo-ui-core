@@ -6,7 +6,7 @@
 		<h1 class="classTitle">
 			{!
 				var classType = "";
-				
+
 				if (data.isBuiltin()) {
 					classType += "Built-In ";
 				}
@@ -286,170 +286,292 @@
 			</if>
 		</if>
 <!--
+#### TABS
+-->
+        {!
+            var ownOptions = data.comment.getTag("option");
+
+            if (defined(ownOptions) && ownOptions.length)
+                ownOptions.forEach(function (value, idx) {
+                    var description = /\[(.*)\]/i.exec(ownOptions[idx].desc);
+                    description && (ownOptions[idx].name = description[1]);
+        
+                    var defaultValue = /\<(.*)\>/i.exec(ownOptions[idx].desc);
+                    defaultValue && (ownOptions[idx].defaultValue = defaultValue[1]);
+
+                    ownOptions[idx].desc = ownOptions[idx].desc.replace(/[\[\<](.*)[\]\>]/i, '');
+                    ownOptions[idx].isOptional = true;
+                })
+        !}
+        <div id="codeStrip">
+        <ul>
+            <if test="!data.isBuiltin() && (data.isNamespace || data.is('CONSTRUCTOR'))">
+                <li class="t-state-active">Constructors</li>
+            </if>
+            <if test="defined(ownOptions) && ownOptions.length">
+                <li>Options ({+ ownOptions.length +})</li>
+            </if>
+            <if test="defined(ownProperties) && ownProperties.length">
+                <li>Fields ({+ ownProperties.length +})</li>
+            </if>
+            <if test="defined(ownMethods) && ownMethods.length">
+                <li>Methods ({+ ownMethods.length +})</li>
+            </if>
+            <if test="defined(ownEvents) && ownEvents.length">
+                <li>Events ({+ ownEvents.length +})</li>
+            </if>
+        </ul>
+<!--
 #### CONSTRUCTOR DETAILS
 -->
 		<if test="!data.isBuiltin() && (data.isNamespace || data.is('CONSTRUCTOR'))">
-			<div class="details props">
-				<div class="innerProps">
-					<h2 class="sectionTitle" id="constructor">
-						{+classType+}Detail
-					</h2>
+			<div class="">
+				<div class="">
+					<!--h2 class="sectionTitle" id="constructor">
+						{+classType+}Details
+					</h2-->
 					
-					<div class="fixedFont">{!
-						if (data.isPrivate) output += "&lt;private&gt; ";
-						if (data.isInner) output += "&lt;inner&gt; ";
-					!}
-						<b>{+ data.alias +}</b><if test="classType != 'Namespace '">{+ makeSignature(data.params) +}</if>
-					</div>
-					
-					<div class="description">
-						{+resolveLinks(data.desc)+}
-						<if test="data.author"><br /><i>Author: </i>{+data.author+}.</if>
-					</div>
-					
-					<if test="data.example.length">
-						<for each="example" in="data.example">
-                            <dl class="detailList nomargin">
-                                <dt class="heading">Example:</dt>
-                                <dd><pre class="code prettyprint lang-js">{+example+}</pre></dd>
-                            </dl>
-						</for>
-					</if>
+                    <div class="detailHandle">
+                        <div class="fixedFont">{!
+                            if (data.isPrivate) output += "&lt;private&gt; ";
+                            if (data.isInner) output += "&lt;inner&gt; ";
+                        !}
+                            <b>{+ data.alias +}</b><if test="classType != 'Namespace '">{+ makeSignature(data.params) +}</if>
+                        </div>
 
-					<if test="data.params.length">
-						<dl class="detailList params">
-							<dt class="heading">Parameters:</dt>
-							<for each="item" in="data.params">
-								<dt>
-									{+((item.type)?""+("<span class=\"light fixedFont\">{"+(new Link().toSymbol(item.type)+"}</span> ")) : "")+} <b>{+item.name+}</b>
-									<if test="item.isOptional"><i>Optional<if test="item.defaultValue">, Default: {+item.defaultValue+}</if></i></if>
-								</dt>
-								<dd>{+resolveLinks(item.desc)+}</dd>
-							</for>
-						</dl>
-					</if>
-
-					<if test="data.deprecated || data.since || data.exceptions.length || data.returns.length || data.requires.length || data.see.length">
-						<dl class="detailList nomargin">
-							<if test="data.deprecated">
-								<dt>
-									{+resolveLinks(data.deprecated)+}
-								</dt>
-							</if>
-
-							<if test="data.since">
-								<dt class="heading">Since:</dt>
-								<dd>{+ data.since +}</dd>
-							</if>
-
-							<if test="data.exceptions.length">
-								<dt class="heading">Throws:</dt>
-								<for each="item" in="data.exceptions">
-									<dt>
-										{+((item.type)?"<span class=\"light fixedFont\">{"+(new Link().toSymbol(item.type))+"}</span> " : "")+} <b>{+item.name+}</b>
-									</dt>
-										<dd>{+resolveLinks(item.desc)+}</dd>
-								</for>
-							</if>
-
-							<if test="data.returns.length">
-								<dt class="heading">Returns:</dt>
-								<for each="item" in="data.returns">
-										<dd>{+((item.type)?"<span class=\"light fixedFont\">{"+(new Link().toSymbol(item.type))+"}</span> " : "")+}{+resolveLinks(item.desc)+}</dd>
-								</for>
-							</if>
-
-							<if test="data.requires.length">
-								<dt class="heading">Requires:</dt>
-								<for each="item" in="data.requires">
-									<dd>{+ resolveLinks(item) +}</dd>
-								</for>
-							</if>
-
-							<if test="data.see.length">
-								<dt class="heading">See:</dt>
-								<for each="item" in="data.see">
-									<dd>{+ new Link().toSymbol(item) +}</dd>
-								</for>
-							</if>
-						</dl>
-					</if>
-				</div>
-			</div>
-		</if>
-<!--
-#### FIELD DETAILS
--->
-		<if test="defined(ownProperties) && ownProperties.length">
-			<div class="details props">
-				<div class="innerProps">
-					<h2 class="sectionTitle">
-						Field Detail
-					</h2>
-
-					<for each="member" in="ownProperties">
-						<div class="fixedFont heading" id="{+Link.symbolNameToLinkName(member)+}">
-							<span class='lighter'>
-							{!
-								if (member.isPrivate) output += "&lt;private&gt; ";
-								if (member.isInner) output += "&lt;inner&gt; ";
-								if (member.isStatic) output += "&lt;static&gt; ";
-								if (member.isConstant) output += "&lt;constant&gt; ";
-							!}
-							</span>
-
-							<if test="member.type"><span class="light">{{+new Link().toSymbol(member.type)+}}</span></if>
-
-							<if test="member.isStatic && member.memberOf != '_global_'"><span class="light">{+member.memberOf+}.</span></if><b>{+member.name+}</b>
-						</div>
-
-						<div class="description">
-							{+resolveLinks(member.desc)+}
-							<if test="member.srcFile != data.srcFile">
-								<br />
-								<i>Defined in: </i> {+new Link().toSrc(member.srcFile)+}.
-							</if>
-
-							<if test="member.author"><br /><i>Author: </i>{+member.author+}.</if>
-						</div>
-
-						<if test="member.example.length">
-							<for each="example" in="member.example">
+                        <div class="description">
+                            {+resolveLinks(data.desc)+}
+                            <if test="data.author"><br /><i>Author: </i>{+data.author+}.</if>
+                        </div>
+                    </div>
+                    <div class="detailBody">
+                        <if test="data.example.length">
+                            <for each="example" in="data.example">
                                 <dl class="detailList nomargin">
                                     <dt class="heading">Example:</dt>
                                     <dd><pre class="code prettyprint lang-js">{+example+}</pre></dd>
                                 </dl>
-							</for>
-						</if>
-							<if test="member.deprecated || member.since || member.see.length || member.defaultValue">
-							<dl class="detailList nomargin">
+                            </for>
+                        </if>
 
-								<if test="member.deprecated">
-									<dt class="heading">Deprecated:</dt>
-									<dt>
-										{+ resolveLinks(member.deprecated) +}
-									</dt>
-								</if>
-								<if test="member.since">
-									<dt class="heading">Since:</dt>
-									<dd>{+ member.since +}</dd>
-								</if>
-								<if test="member.see.length">
-									<dt class="heading">See:</dt>
-									<for each="item" in="member.see">
-										<dd>{+ new Link().toSymbol(item) +}</dd>
-									</for>
-								</if>
-								<if test="member.defaultValue">
-									<dt class="heading">Default Value:</dt>
-									<dd>
-										{+resolveLinks(member.defaultValue)+}
-									</dd>
-								</if>
-							</dl>
-						</if>
+                        <if test="data.params.length">
+                            <dl class="detailList params">
+                                <dt class="heading">Parameters:</dt>
+                                <for each="item" in="data.params">
+                                    <dt>
+                                        {+((item.type)?""+("<span class=\"light fixedFont\">{"+(new Link().toSymbol(item.type)+"}</span> ")) : "")+} <b>{+item.name+}</b>
+                                        <if test="item.isOptional"><i>Optional<if test="item.defaultValue">, Default: {+item.defaultValue+}</if></i></if>
+                                    </dt>
+                                    <dd>{+resolveLinks(item.desc)+}</dd>
+                                </for>
+                            </dl>
+                        </if>
 
-						<if test="!$member_last"><div class="hr"></div></if>
+                        <if test="data.deprecated || data.since || data.exceptions.length || data.returns.length || data.requires.length || data.see.length">
+                            <dl class="detailList nomargin">
+                                <if test="data.deprecated">
+                                    <dt>
+                                        {+resolveLinks(data.deprecated)+}
+                                    </dt>
+                                </if>
+
+                                <if test="data.since">
+                                    <dt class="heading">Since:</dt>
+                                    <dd>{+ data.since +}</dd>
+                                </if>
+
+                                <if test="data.exceptions.length">
+                                    <dt class="heading">Throws:</dt>
+                                    <for each="item" in="data.exceptions">
+                                        <dt>
+                                            {+((item.type)?"<span class=\"light fixedFont\">{"+(new Link().toSymbol(item.type))+"}</span> " : "")+} <b>{+item.name+}</b>
+                                        </dt>
+                                            <dd>{+resolveLinks(item.desc)+}</dd>
+                                    </for>
+                                </if>
+
+                                <if test="data.returns.length">
+                                    <dt class="heading">Returns:</dt>
+                                    <for each="item" in="data.returns">
+                                            <dd>{+((item.type)?"<span class=\"light fixedFont\">{"+(new Link().toSymbol(item.type))+"}</span> " : "")+}{+resolveLinks(item.desc)+}</dd>
+                                    </for>
+                                </if>
+
+                                <if test="data.requires.length">
+                                    <dt class="heading">Requires:</dt>
+                                    <for each="item" in="data.requires">
+                                        <dd>{+ resolveLinks(item) +}</dd>
+                                    </for>
+                                </if>
+
+                                <if test="data.see.length">
+                                    <dt class="heading">See:</dt>
+                                    <for each="item" in="data.see">
+                                        <dd>{+ new Link().toSymbol(item) +}</dd>
+                                    </for>
+                                </if>
+                            </dl>
+                        </if>
+                    </div>
+				</div>
+			</div>
+		</if>
+<!--
+#### OPTION DETAILS
+-->
+        <if test="defined(ownOptions) && ownOptions.length">
+            <div class="">
+                <div class="">
+                    <!--h2 class="sectionTitle">
+                        Field Details
+                    </h2-->
+
+                    <for each="member" in="ownOptions">
+                        <div class="detailHandle">
+                            <div class="fixedFont" id="{+Link.symbolNameToLinkName(member)+}">
+                                <span class='lighter'>
+                                {!
+                                    if (member.isPrivate) output += "&lt;private&gt; ";
+                                    if (member.isInner) output += "&lt;inner&gt; ";
+                                    if (member.isStatic) output += "&lt;static&gt; ";
+                                    if (member.isConstant) output += "&lt;constant&gt; ";
+                                !}
+                                </span>
+
+                                <if test="member.type"><span class="light">{{+new Link().toSymbol(member.type)+}}</span></if>
+
+                                <if test="member.isStatic && member.memberOf != '_global_'"><span class="light">{+member.memberOf+}.</span></if><b>{+member.name+}</b>
+                            </div>
+
+                            <div class="description">
+                                {+resolveLinks(member.desc)+}
+                                <if test="member.srcFile && member.srcFile != data.srcFile">
+                                    <br />
+                                    <i>Defined in: </i> {+new Link().toSrc(member.srcFile)+}.
+                                </if>
+
+                                <if test="member.author"><br /><i>Author: </i>{+member.author+}.</if>
+                            </div>
+                        </div>
+                        <div class="detailBody">
+                            <if test="member.example && member.example.length">
+                                <for each="example" in="member.example">
+                                    <dl class="detailList nomargin">
+                                        <dt class="heading">Example:</dt>
+                                        <dd><pre class="code prettyprint lang-js">{+example+}</pre></dd>
+                                    </dl>
+                                </for>
+                            </if>
+                                <if test="member.deprecated || member.since || member.see || member.defaultValue">
+                                <dl class="detailList nomargin">
+
+                                    <if test="member.deprecated">
+                                        <dt class="heading">Deprecated:</dt>
+                                        <dt>
+                                            {+ resolveLinks(member.deprecated) +}
+                                        </dt>
+                                    </if>
+                                    <if test="member.since">
+                                        <dt class="heading">Since:</dt>
+                                        <dd>{+ member.since +}</dd>
+                                    </if>
+                                    <if test="member.see && member.see.length">
+                                        <dt class="heading">See:</dt>
+                                        <for each="item" in="member.see">
+                                            <dd>{+ new Link().toSymbol(item) +}</dd>
+                                        </for>
+                                    </if>
+                                    <if test="member.defaultValue">
+                                        <dt class="heading">Default Value:</dt>
+                                        <dd>
+                                            {+resolveLinks(member.defaultValue)+}
+                                        </dd>
+                                    </if>
+                                </dl>
+                            </if>
+                        </div>
+
+                        <!--if test="!$member_last"><div class="hr"></div></if-->
+                    </for>
+                </div>
+            </div>
+        </if>
+<!--
+#### FIELD DETAILS
+-->
+		<if test="defined(ownProperties) && ownProperties.length">
+			<div class="">
+				<div class="">
+					<!--h2 class="sectionTitle">
+						Field Details
+					</h2-->
+
+					<for each="member" in="ownProperties">
+                        <div class="detailHandle">
+                            <div class="fixedFont" id="{+Link.symbolNameToLinkName(member)+}">
+                                <span class='lighter'>
+                                {!
+                                    if (member.isPrivate) output += "&lt;private&gt; ";
+                                    if (member.isInner) output += "&lt;inner&gt; ";
+                                    if (member.isStatic) output += "&lt;static&gt; ";
+                                    if (member.isConstant) output += "&lt;constant&gt; ";
+                                !}
+                                </span>
+
+                                <if test="member.type"><span class="light">{{+new Link().toSymbol(member.type)+}}</span></if>
+
+                                <if test="member.isStatic && member.memberOf != '_global_'"><span class="light">{+member.memberOf+}.</span></if><b>{+member.name+}</b>
+                            </div>
+
+                            <div class="description">
+                                {+resolveLinks(member.desc)+}
+                                <if test="member.srcFile != data.srcFile">
+                                    <br />
+                                    <i>Defined in: </i> {+new Link().toSrc(member.srcFile)+}.
+                                </if>
+
+                                <if test="member.author"><br /><i>Author: </i>{+member.author+}.</if>
+                            </div>
+                        </div>
+                        <div class="detailBody">
+                            <if test="member.example.length">
+                                <for each="example" in="member.example">
+                                    <dl class="detailList nomargin">
+                                        <dt class="heading">Example:</dt>
+                                        <dd><pre class="code prettyprint lang-js">{+example+}</pre></dd>
+                                    </dl>
+                                </for>
+                            </if>
+                                <if test="member.deprecated || member.since || member.see.length || member.defaultValue">
+                                <dl class="detailList nomargin">
+
+                                    <if test="member.deprecated">
+                                        <dt class="heading">Deprecated:</dt>
+                                        <dt>
+                                            {+ resolveLinks(member.deprecated) +}
+                                        </dt>
+                                    </if>
+                                    <if test="member.since">
+                                        <dt class="heading">Since:</dt>
+                                        <dd>{+ member.since +}</dd>
+                                    </if>
+                                    <if test="member.see.length">
+                                        <dt class="heading">See:</dt>
+                                        <for each="item" in="member.see">
+                                            <dd>{+ new Link().toSymbol(item) +}</dd>
+                                        </for>
+                                    </if>
+                                    <if test="member.defaultValue">
+                                        <dt class="heading">Default Value:</dt>
+                                        <dd>
+                                            {+resolveLinks(member.defaultValue)+}
+                                        </dd>
+                                    </if>
+                                </dl>
+                            </if>
+                        </div>
+
+						<!--if test="!$member_last"><div class="hr"></div></if-->
 					</for>
 				</div>
 			</div>
@@ -458,11 +580,11 @@
 #### METHOD DETAILS
 -->
 		<if test="defined(ownMethods) && ownMethods.length">
-			<div class="details props">
-				<div class="innerProps">
-					<h2 class="sectionTitle">
-						Method Detail
-					</h2>
+			<div class="">
+				<div class="">
+					<!--h2 class="sectionTitle">
+						Method Details
+					</h2-->
 
 					<ul class="methodDetail" id="MethodDetail">
 						{!
@@ -476,7 +598,7 @@
 								!}
 							>
                                 <div class="detailHandle">
-                                    <div class="fixedFont heading" id="{+Link.symbolNameToLinkName(member)+}">
+                                    <div class="fixedFont" id="{+Link.symbolNameToLinkName(member)+}">
                                         <span class='lighter'>
                                         {!
                                             if (member.isPrivate) output += "&lt;private&gt; ";
@@ -585,15 +707,15 @@
 #### EVENT DETAILS
 -->
 		<if test="defined(ownEvents) && ownEvents.length">
-			<div class="details props">
-				<div class="innerProps">
-					<h2 class="sectionTitle">
-						Event Detail
-					</h2>
+			<div class="">
+				<div class="">
+					<!--h2 class="sectionTitle">
+						Event Details
+					</h2-->
 
 					<for each="member" in="ownEvents">
                         <div class="detailHandle">
-                            <div class="fixedFont heading" id="{+Link.symbolNameToLinkName(member)+}">
+                            <div class="fixedFont" id="{+Link.symbolNameToLinkName(member)+}">
                                 <span class='lighter'>
                                 {!
                                     if (member.isPrivate) output += "&lt;private&gt; ";
@@ -692,6 +814,7 @@
 				</div>
 			</div>
 		</if>
+        </div>
 	</div>
 </div>
 {+subtemplate("subtemplates/foot.tmpl")+}

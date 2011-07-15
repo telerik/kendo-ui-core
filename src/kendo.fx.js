@@ -426,12 +426,18 @@
 
                 var fixedHeight = parseInt(element[0].style.height, 10),
                     height = fixedHeight || Math.round(element.height("auto").height());
-                    
+
                 element
                     .css({ height: 0 })
                     .css('height');
 
-                animate(element, extend({ height: height + 'px' }, properties), extend(options, { teardown: function () { element.css('overflow', element.data('overflow')); } }));
+                animate(element, extend({ height: height + 'px' }, properties), extend(options, { teardown: function () {
+                    element.css('overflow', element.data('overflow'));
+
+                    var height = element.data('initialHeight');
+                    if (height == "auto" || height === "")
+                        element.css("height", "auto");
+                } }));
             },
             reverse: function(element, properties, options) {
                 if (!element.data('overflow'))
@@ -441,7 +447,13 @@
                     .css('overflow', 'hidden')
                     .css('overflow');
 
-                animate(element, extend({ height: 0 }, properties), extend(options, { teardown: function () { element.css('overflow', element.data('overflow')); } }));
+                animate(element, extend({ height: 0 }, properties), extend(options, { teardown: function () {
+                    element.css('overflow', element.data('overflow'));
+
+                    var height = element.data('initialHeight');
+                    if (height == "auto" || height === "")
+                        element.css("height", "auto");
+                } }));
             }
         },
         expandHorizontal: {
