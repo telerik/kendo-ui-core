@@ -35,12 +35,12 @@ function removeDuplicateResources(resource, target) {
 
 function splitScriptRegion(exampleHTML, base) {
     var baseScripts = baseRegions.script.html,
-        jsExtension = MINIFY ? '.min.js' : '.js',
         scriptMatches = regionRegex.script.exec(exampleHTML),
-        jQueryStripper = /src="js\/jquery\.min\.js"/g,
+        currentPageScripts = scriptMatches ? scriptMatches[1].trimLeft() : '',
         scriptStripper1 = /"(.*?)src/g,
         scriptStripper2 = /src="[.\/]*([^"]*)([^\.min]*)\.js"/g,
-        currentPageScripts = scriptMatches ? scriptMatches[1].trimLeft() : '';
+        jsExtension = MINIFY ? '.min.js' : '.js',
+        rebasedSrc = 'src="' + base + '$1' + jsExtension + '"';
 
     if (!currentPageScripts)
         return false;
@@ -50,12 +50,12 @@ function splitScriptRegion(exampleHTML, base) {
     });
 
     currentPageScripts = currentPageScripts.replace(scriptStripper1, '"js');
-    currentPageScripts = currentPageScripts.replace(scriptStripper2, 'src="' + base + '$1' + jsExtension + '"');
+    currentPageScripts = currentPageScripts.replace(scriptStripper2, rebasedSrc);
     baseScripts = baseScripts.replace(scriptStripper1, '"js');
-    baseScripts = baseScripts.replace(scriptStripper2, 'src="' + base + '$1' + jsExtension + '"');
+    baseScripts = baseScripts.replace(scriptStripper2, rebasedSrc);
 
     if (MINIFY) {
-        currentPageScripts = currentPageScripts.replace(jQueryStripper, 'src="' + jQueryCDN + '"');
+        currentPageScripts = currentPageScripts.replace(/src="js\/jquery\.min\.js"/g, 'src="' + jQueryCDN + '"');
     }
 
     return currentPageScripts + baseScripts;
@@ -63,10 +63,11 @@ function splitScriptRegion(exampleHTML, base) {
 
 function splitCSSRegion(exampleHTML, base) {
     var baseCSS = baseRegions.css.html,
-        cssExtension = MINIFY ? '.min.css' : '.css',
         cssMatches = regionRegex.css.exec(exampleHTML),
         currentPageCSS = cssMatches ? cssMatches[1].trimLeft() : '',
-        cssStripper = /href="[.\/]*([^"]*)\.css"/g;
+        cssStripper = /href="[.\/]*([^"]*)\.css"/g,
+        cssExtension = MINIFY ? '.min.css' : '.css',
+        rebasedHref = 'href="' + base + '$1' + cssExtension + '"';
 
     if (!currentPageCSS)
         return false;
@@ -75,8 +76,8 @@ function splitCSSRegion(exampleHTML, base) {
         baseCSS = removeDuplicateResources(item, baseCSS);
     });
 
-    currentPageCSS = currentPageCSS.replace(cssStripper, 'href="' + base + '$1' + cssExtension + '"');
-    baseCSS = baseCSS.replace(cssStripper, 'href="' + base + '$1' + cssExtension + '"');
+    currentPageCSS = currentPageCSS.replace(cssStripper, rebasedHref);
+    baseCSS = baseCSS.replace(cssStripper, rebasedHref);
 
     return currentPageCSS + baseCSS;
 }
@@ -91,14 +92,6 @@ function processExample(file) {
         scriptRegion = splitScriptRegion(exampleHTML, base),
         cssRegion = splitCSSRegion(exampleHTML, base);
 
-    if (!scriptRegion || ! cssRegion) {
-        if (DEBUG) {
-            console.warn("Skipping file " + file + ": Empty script or CSS region.");
-        }
-
-        return;
-    }
-
     exampleHTML = baseRegions.meta.exec(exampleHTML, baseRegions.meta.html);
 
     exampleHTML = baseRegions.script.exec(exampleHTML, scriptRegion);
@@ -110,7 +103,12 @@ function processExample(file) {
     var description = regionRegex.description.exec(exampleHTML);
     exampleHTML = exampleHTML.replace(regionRegex.description, '');
 
-    exampleHTML = baseRegions.tools.exec(exampleHTML, baseRegions.tools.html.replace(regionRegex.description, description[0]));
+    if (description) {
+        exampleHTML = baseRegions.tools.exec(exampleHTML, baseRegions.tools.html.replace(regionRegex.description, description[0]));
+    } else {
+        // overview has no description
+        exampleHTML = baseRegions.tools.exec(exampleHTML);
+    }
 
     fs.writeFileSync(file, exampleHTML, "utf8");
 }
