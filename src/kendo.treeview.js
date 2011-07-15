@@ -21,9 +21,39 @@
         VISIBLE = ":visible",
         NODE = ".t-item",
         SUBGROUP = ">.t-group,>.t-animation-container>.t-group",
-        NODECONTENTS = SUBGROUP + ",>.t-content,>.t-animation-container>.t-content";
+        NODECONTENTS = SUBGROUP + ",>.t-content,>.t-animation-container>.t-content",
+        templates, rendering, TreeView;
 
-    var TreeView = Component.extend(/** @lends kendo.ui.TreeView.prototype */ {
+    templates = {
+        dragClue: template("<div class='t-header t-drag-clue'><span class='t-icon t-drag-status'></span><#= text #></div>"),
+        group: template(
+            "<ul class='<#= groupCssClass(group) #>'<#= groupAttributes(group) #>>" +
+                "<#= renderItems(data); #>" +
+            "</ul>"
+        ),
+        itemWrapper: template(
+            "<div class='<#= cssClass(group, item) #>'>" +
+                "<#= toggleButton(data) #>" +
+                "<<#= tag(item) #> class='<#= textClass(item) #>'<#= textAttributes(item) #>>" +
+                    "<#= image(item) #><#= sprite(item) #><#= text(item) #>" +
+                "</<#= tag(item) #>>" +
+            "</div>"
+        ),
+        item: template(
+            "<li class='<#= wrapperCssClass(group, item) #>'>" +
+                "<#= itemWrapper(data) #>" +
+                "<# if (item.items) { #>" +
+                "<#= subGroup({ items: item.items, treeview: treeview, group: { expanded: item.expanded } }) #>" +
+                "<# } #>" +
+            "</li>"
+        ),
+        image: template("<img class='t-image' alt='' src='<#= imageUrl #>' />"),
+        toggleButton: template("<span class='<#= toggleButtonClass(item) #>'></span>"),
+        sprite: template("<span class='t-sprite <#= spriteCssClass #>'></span>"),
+        empty: template("")
+    };
+
+    TreeView = Component.extend(/** @lends kendo.ui.TreeView.prototype */ {
         /**
          * Creates a TreeView instance
          * @constructs
@@ -240,7 +270,7 @@
                 groupElement = item.find("> ul");
 
             groupElement
-                .addClass(TreeView.rendering.groupCssClass(group))
+                .addClass(rendering.groupCssClass(group))
                 .css("display", group.expanded ? "" : "none");
 
             that._nodes(groupElement, group);
@@ -300,8 +330,7 @@
         },
 
         _updateNodeClasses: function(node, groupData, nodeData) {
-            var helpers = TreeView.rendering,
-                wrapper = node.find(">div"),
+            var wrapper = node.find(">div"),
                 subGroup = node.find(">ul")
 
             if (!nodeData) {
@@ -321,16 +350,16 @@
 
             // li
             node.removeClass("t-first t-last")
-                .addClass(helpers.wrapperCssClass(groupData, nodeData));
+                .addClass(rendering.wrapperCssClass(groupData, nodeData));
 
             // div
             wrapper.removeClass("t-top t-mid t-bot")
-                   .addClass(helpers.cssClass(groupData, nodeData));
+                   .addClass(rendering.cssClass(groupData, nodeData));
 
             // toggle button
             if (subGroup.length) {
                 wrapper.find(">.t-icon").removeClass("t-plus t-minus t-plus-disabled t-minus-disabled")
-                    .addClass(helpers.toggleButtonClass(nodeData));
+                    .addClass(rendering.toggleButtonClass(nodeData));
 
                 subGroup.addClass("t-group");
             }
@@ -693,7 +722,7 @@
         that._draggable = new ui.Draggable(treeview.element, {
            filter: "div:not(.t-state-disabled) .t-in",
            hint: function(node) {
-               return TreeView.templates.dragClue({ text: node.text() });
+               return templates.dragClue({ text: node.text() });
            },
            dragstart: proxy(that.dragstart, that),
            drag: proxy(that.drag, that),
@@ -863,7 +892,7 @@
         renderItem: function (options) {
             options = extend({ treeview: {}, group: {} }, options);
 
-            var templates = TreeView.templates,
+            var templates = templates,
                 empty = templates.empty,
                 item = options.item,
                 treeview = options.treeview;
@@ -874,11 +903,11 @@
                 itemWrapper: templates.itemWrapper,
                 toggleButton: item.items ? templates.toggleButton : empty,
                 subGroup: TreeView.renderGroup
-            }, TreeView.rendering));
+            }, rendering));
         },
 
         renderGroup: function (options) {
-            return TreeView.templates.group(extend({
+            return templates.group(extend({
                 renderItems: function(options) {
                     var html = "",
                         i = 0,
@@ -895,11 +924,11 @@
 
                     return html;
                 }
-            }, options, TreeView.rendering));
+            }, options, rendering));
         }
     });
 
-    TreeView.rendering = /** @ignore */{
+    rendering = /** @ignore */{
         wrapperCssClass: function (group, item) {
             var result = "t-item",
                 index = item.index;
@@ -982,35 +1011,6 @@
 
             return cssClass;
         }
-    };
-
-    TreeView.templates = {
-        dragClue: template("<div class='t-header t-drag-clue'><span class='t-icon t-drag-status'></span><#= text #></div>"),
-        group: template(
-            "<ul class='<#= groupCssClass(group) #>'<#= groupAttributes(group) #>>" +
-                "<#= renderItems(data); #>" +
-            "</ul>"
-        ),
-        itemWrapper: template(
-            "<div class='<#= cssClass(group, item) #>'>" +
-                "<#= toggleButton(data) #>" +
-                "<<#= tag(item) #> class='<#= textClass(item) #>'<#= textAttributes(item) #>>" +
-                    "<#= image(item) #><#= sprite(item) #><#= text(item) #>" +
-                "</<#= tag(item) #>>" +
-            "</div>"
-        ),
-        item: template(
-            "<li class='<#= wrapperCssClass(group, item) #>'>" +
-                "<#= itemWrapper(data) #>" +
-                "<# if (item.items) { #>" +
-                "<#= subGroup({ items: item.items, treeview: treeview, group: { expanded: item.expanded } }) #>" +
-                "<# } #>" +
-            "</li>"
-        ),
-        image: template("<img class='t-image' alt='' src='<#= imageUrl #>' />"),
-        toggleButton: template("<span class='<#= toggleButtonClass(item) #>'></span>"),
-        sprite: template("<span class='t-sprite <#= spriteCssClass #>'></span>"),
-        empty: template("")
     };
 
     ui.plugin("TreeView", TreeView);
