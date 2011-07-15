@@ -572,36 +572,31 @@
                 settings = extend({}, kendo.Template, that.options.templateSettings),
                 groups = (that.dataSource.group() || []).length;
 
-            if (!$.isFunction(rowTemplate)) {
+            if (!rowTemplate) {
+                rowTemplate = start;
 
-                if (!rowTemplate) {
-                    rowTemplate = start;
-
-                    if(groups > 0) {
-                        rowTemplate += that._groupCell(groups);
-                    }
-
-                    $.each(that.columns, function() {
-                        var column = this, template = column.template, field = column.field;
-
-                        if (!template) {
-                            if (column.encoded === true) {
-                                template = "${" + (settings.useWithBlock ? "" : settings.paramName + ".") + field + "}";
-                            } else {
-                                template = settings.begin + "=" + (settings.useWithBlock ? "" : settings.paramName + ".") + field + settings.end;
-                            }
-                        }
-
-                        rowTemplate += "<td>" + template + "</td>";
-                    });
-
-                    rowTemplate += "</tr>";
+                if (groups > 0) {
+                    rowTemplate += that._groupCell(groups);
                 }
 
-                rowTemplate = kendo.template(rowTemplate, settings);
+                $.each(that.columns, function() {
+                    var column = this, template = column.template, field = column.field;
+
+                    if (!template) {
+                        if (column.encoded === true) {
+                            template = "${" + (settings.useWithBlock ? "" : settings.paramName + ".") + field + "}";
+                        } else {
+                            template = settings.begin + "=" + (settings.useWithBlock ? "" : settings.paramName + ".") + field + settings.end;
+                        }
+                    }
+
+                    rowTemplate += "<td>" + template + "</td>";
+                });
+
+                rowTemplate += "</tr>";
             }
 
-            return rowTemplate;
+            return kendo.template(rowTemplate, settings);
         },
 
         _templates: function() {

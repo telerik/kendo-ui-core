@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>grid</title>
+        <script src="../src/jquery.js"></script>
+        <script src="../src/jquery.tmpl.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.pager.js"></script>
+        <script src="../src/kendo.sortable.js"></script>
+        <script src="../src/kendo.draganddrop.js"></script>
+        <script src="../src/kendo.groupable.js"></script>
+        <script src="../src/kendo.data.js"></script>
+        <script src="../src/kendo.data.odata.js"></script>
+        <script src="../src/kendo.grid.js"></script>
+
+        <link href="../styles/kendo.common.css" type="text/css" rel="stylesheet" />
+        <link href="../styles/kendo.vista.css" type="text/css" rel="stylesheet" />
+    </head>
+    <body>
+        <div id="foo"></div>
+        <table id="table1" style="height: 400px">
+        </table>
+        <script>
+            $(document).ready(function() {
+                $("#table1").kendoGrid({
+                    rowTemplate: $.template("<tr><td colspan='5'><strong>${ OrderID }</strong></td></tr>"),
+                    dataSource: {
+                        type: "odata",
+                        serverPaging: true,
+                        serverSorting: true,
+                        pageSize: 100,
+                        transport: {
+                            read: "http://services.odata.org/Northwind/Northwind.svc/Orders"
+                        }
+                    },
+                    columns: [
+                    {
+                        title: "Foo",
+                        template: "<#=OrderID - 10248#>"
+                    },
+                    "OrderID", "CustomerID", "ShipCity", "ShipCountry"],
+                    scrollable: {
+                        virtual: true
+                    },
+                    sortable: {
+                        allowUnsort: false
+                    }
+                });
+            });
+        </script>
+
+    </body>
+</html>

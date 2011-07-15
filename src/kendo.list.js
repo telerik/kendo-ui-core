@@ -171,12 +171,19 @@
 
         _template: function() {
             var that = this,
-                options = that.options;
+                options = that.options,
+                template = options.template,
+                dataTextField = options.dataTextField || "data";
 
-            options.template = options.template || "${" + (options.dataTextField || "data") + "}";
-
-            //unselectable=on is required for IE to prevent the suggestion box from stealing focus from the input
-            that.template = kendo.template("<li class='t-item' unselectable='on'>" + options.template + "</li>");
+            if (!template) {
+                //unselectable=on is required for IE to prevent the suggestion box from stealing focus from the input
+                that.template = kendo.template("<li class='t-item' unselectable='on'>${" + dataTextField + "}</li>");
+            } else {
+                template = kendo.template(template);
+                that.template = function(data) {
+                    return "<li class='t-item' unselectable='on'>" + template(data) + "</li>";
+                };
+            }
         }
     });
 
@@ -272,9 +279,9 @@
                 dataItem,
                 dataText,
                 dataValue,
-                idx = 0;
+                idx;
 
-            for (; idx < length; idx++) {
+            for (idx = 0; idx < length; idx++) {
                 option = "<option";
                 dataItem = data[idx];
                 dataText = that._text(dataItem);

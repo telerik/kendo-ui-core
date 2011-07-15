@@ -4,6 +4,10 @@ tests.push(
         title: "grid initialization"
     },
     {
+        page: "grid/rowtemplate.html",
+        title: "grid rowtemplate"
+    },
+    {
         page: "grid/paging.html",
         title: "grid paging"
     },
