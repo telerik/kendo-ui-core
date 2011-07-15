@@ -541,20 +541,23 @@
         },
 
         _columns: function(columns) {
-            var that = this;
+            var that = this,
+                table = that.table,
+                cols = table.find("col");
 
             // using HTML5 data attributes as a configuration option e.g. <th data-field="foo">Foo</foo>
-            columns = columns.length ? columns : map(that.table.find("th"), function(th) {
+            columns = columns.length ? columns : map(table.find("th"), function(th, idx) {
                 var th = $(th),
                     field = th.data("field");
 
                 if (!field) {
                    field = th.text().replace(/\s|[^A-z0-9]/g, "");
                 }
-
+                
                 return {
                     field: field,
-                    template: th.data("template")
+                    template: th.data("template"),
+                    width: cols.eq(idx).attr("width")
                 };
             });
 
@@ -643,6 +646,10 @@
 
             tr.find("th").addClass("t-header");
 
+            if(!that.options.scrollable) {
+                thead.addClass("t-grid-header");
+            }
+
             tr.appendTo(thead);
 
             that.thead = thead;
@@ -650,6 +657,27 @@
             that._sortable();
 
             that._scrollable();
+            
+            that._intializeCols(that.thead.parent());
+            that._intializeCols(that.table);
+        },
+
+        _intializeCols: function(table) {
+            var that = this,
+                colgroup = table.find("colgroup").empty(),
+                cols = map(that.columns, function(column) {
+                    if(column.width) {
+                        return kendo.format('<col width="{0}"/>', column.width);
+                    }
+
+                    return "<col />";
+                });                
+
+            if(!colgroup.length) {
+                colgroup = $("<colgroup></colgroup>").prependTo(table);
+            }
+
+            $(cols.join("")).appendTo(colgroup);
         },
 
         _autoColumns: function(schema) {
@@ -702,7 +730,7 @@
             html +=  '<tr class="t-grouping-row">' + that._groupCell(level) +
                       '<td colspan="' + colspan + '">' +
                         '<p class="t-reset">' +
-                         '<a class="t-icon t-collapse" href="#">C/E</a>' +
+                         '<a class="t-icon t-collapse" href="#"></a>' +
                          group.field + ': ' + group.value +'</p></td></tr>';
 
             if(group.hasSubgroups) {
