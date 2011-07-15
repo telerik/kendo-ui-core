@@ -80,7 +80,9 @@ function zip(name, path, folder) {
         if (code !== 0) {
             console.log("zip errro: " + code);
         }
-        console.log("deleting temp folder: " + folder);
+
+        console.log("package " + name + " created.");
+
         wrench.rmdirSyncRecursive(folder);
 
         if (count === 1) {
@@ -143,7 +145,7 @@ function processStyles() {
     });
 }
 
-console.log("build start...");
+console.log("build initiated.");
 createDirectories();
 
 //processing
@@ -161,8 +163,8 @@ console.log("building online examples...");
 examples.build(PATH, ONLINEEXAMPLES, true);
 
 //archives
-console.log("archieving kendo.version.zip...");
-zip(RELEASE + "/KendoUI_" + VERSION + ".zip", ".\\" + PATH.replace("/", "\\") + "\\*", PATH);
+console.log("packaging distribution...");
+zip(RELEASE + "KendoUI_" + VERSION + ".zip", ".\\" + PATH.replace("/", "\\") + "\\*", PATH);
 
-console.log("archieving online examples...");
-zip(RELEASE + "/OnlineExamples_" + VERSION + ".zip", ".\\" + ONLINEEXAMPLES.replace("/", "\\") + "\\*", ONLINEEXAMPLES);
+console.log("packaging online examples...");
+zip(RELEASE + "OnlineExamples_" + VERSION + ".zip", ".\\" + ONLINEEXAMPLES.replace("/", "\\") + "\\*", ONLINEEXAMPLES);

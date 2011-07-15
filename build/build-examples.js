@@ -1,16 +1,21 @@
+/* requries */
 var fs = require("fs"),
     sys = require("sys"),
     wrench = require("./wrench"),
     uglify = require("./uglify-js").uglify,
     parser = require("./uglify-js").parser,
     cssmin = require("./lib/cssmin").cssmin,
-    regions = {},
-    PATH = "live",
+
+/* options  */
+    examplesLocation = "demos/examples",
+    outputPath = "live",
     MINIFY = false,
+    DEBUG = false,
     jQueryCDN = "http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js",
-    jsExtension = MINIFY ? '.min.js' : '.js',
-    cssExtension = MINIFY ? '.min.css' : '.css',
+
+/* globals  */
     rowSeparator = /[\r\n]+\s+/,
+    baseRegions = {},
     regionRegex = {
         description: getRegionRegex("description"),
         script: getRegionRegex("script"),
@@ -21,7 +26,7 @@ function getRegionRegex(regionName) {
     return new RegExp("\\s*<!--\\s*" + regionName + "\\s*-->(([\\r\\n]|.)*?)<!--\\s*" + regionName + "\\s*-->", "im");
 }
 
-function removeDuplicate(resource, target) {
+function removeDuplicateResources(resource, target) {
     var scriptTag = resource.replace(/(\.\.\/)+/g, '[\.\/]*').replace(/\//g, '\\/').replace(/\./g, '\\.'),
         rex = new RegExp('[\\r\\n]+\\s+' + scriptTag, 'i');
 
@@ -29,7 +34,8 @@ function removeDuplicate(resource, target) {
 }
 
 function splitScriptRegion(exampleHTML, base) {
-    var baseScripts = regions.script.html,
+    var baseScripts = baseRegions.script.html,
+        jsExtension = MINIFY ? '.min.js' : '.js',
         scriptMatches = regionRegex.script.exec(exampleHTML),
         jQueryStripper = /src="js\/jquery\.min\.js"/g,
         scriptStripper1 = /"(.*?)src/g,
@@ -40,7 +46,7 @@ function splitScriptRegion(exampleHTML, base) {
         return false;
 
     currentPageScripts.trim().split(rowSeparator).forEach(function(item) {
-        baseScripts = removeDuplicate(item, baseScripts);
+        baseScripts = removeDuplicateResources(item, baseScripts);
     });
 
     currentPageScripts = currentPageScripts.replace(scriptStripper1, '"js');
@@ -55,8 +61,9 @@ function splitScriptRegion(exampleHTML, base) {
     return currentPageScripts + baseScripts;
 }
 
-function splitCSSRegion (exampleHTML, base) {
-    var baseCSS = regions.css.html,
+function splitCSSRegion(exampleHTML, base) {
+    var baseCSS = baseRegions.css.html,
+        cssExtension = MINIFY ? '.min.css' : '.css',
         cssMatches = regionRegex.css.exec(exampleHTML),
         currentPageCSS = cssMatches ? cssMatches[1].trimLeft() : '',
         cssStripper = /href="[.\/]*([^"]*)\.css"/g;
@@ -65,7 +72,7 @@ function splitCSSRegion (exampleHTML, base) {
         return false;
 
     currentPageCSS.trim().split(rowSeparator).forEach(function(item) {
-        baseCSS = removeDuplicate(item, baseCSS);
+        baseCSS = removeDuplicateResources(item, baseCSS);
     });
 
     currentPageCSS = currentPageCSS.replace(cssStripper, 'href="' + base + '$1' + cssExtension + '"');
@@ -74,79 +81,103 @@ function splitCSSRegion (exampleHTML, base) {
     return currentPageCSS + baseCSS;
 }
 
+function updateBaseLocation(html, base) {
+    return html.replace(/href="([^"]*)"/g, 'href="' + base + '$1"');
+}
+
 function processExample(file) {
     var exampleHTML = fs.readFileSync(file, "utf8"),
-        base = file === PATH + "/index.html" ? "" : "../",
+        base = file === outputPath + "/index.html" ? "" : "../",
         scriptRegion = splitScriptRegion(exampleHTML, base),
         cssRegion = splitCSSRegion(exampleHTML, base);
 
     if (!scriptRegion || ! cssRegion) {
-        console.warn("Skipping file " + file + ": Empty script or CSS region.");
+        if (DEBUG) {
+            console.warn("Skipping file " + file + ": Empty script or CSS region.");
+        }
+
         return;
     }
 
-    exampleHTML = regions.meta.exec(exampleHTML, regions.meta.html);
+    exampleHTML = baseRegions.meta.exec(exampleHTML, baseRegions.meta.html);
 
-    exampleHTML = regions.script.exec(exampleHTML, scriptRegion);
+    exampleHTML = baseRegions.script.exec(exampleHTML, scriptRegion);
 
-    exampleHTML = regions.css.exec(exampleHTML, cssRegion);
+    exampleHTML = baseRegions.css.exec(exampleHTML, cssRegion);
 
-    exampleHTML = regions.nav.exec(exampleHTML, regions.nav.html.replace(/href="([^"]*)"/g, 'href="' + base + '$1"'));
+    exampleHTML = baseRegions.nav.exec(exampleHTML, updateBaseLocation(baseRegions.nav.html, base));
 
     var description = regionRegex.description.exec(exampleHTML);
     exampleHTML = exampleHTML.replace(regionRegex.description, '');
 
     if (description)
-        exampleHTML = regions.tools.exec(exampleHTML, regions.tools.html.replace(regionRegex.description, description[0]));
+        exampleHTML = baseRegions.tools.exec(exampleHTML, baseRegions.tools.html.replace(regionRegex.description, description[0]));
     else
-        exampleHTML = regions.tools.exec(exampleHTML);
+        exampleHTML = baseRegions.tools.exec(exampleHTML);
 
     fs.writeFileSync(file, exampleHTML, "utf8");
 }
 
-function processdir(dir) {
+function processExamplesDirectory(dir) {
     var children = fs.readdirSync(dir);
+
     for (var i = 0; i < children.length; i++) {
         var name = dir + "/" + children[i];
         var stat = fs.statSync(name);
 
-        if (stat.isFile()) {
-            if (/\.html$/.test(name))
-                processExample(name);
-        } else {
-            processdir(name);
+        if (!stat.isFile()) {
+            processExamplesDirectory(name);
+        } else if (/\.html$/.test(name)) {
+            processExample(name);
         }
     }
 }
 
-exports.build = function(orig, dest, min) {
-    MINIFY = min;
+function copyResources(source, destination, processCallback) {
+    processCallback = processCallback || function(data) { return data; };
 
-    if (dest) {
-        PATH = dest;
+    fs.readdirSync(source)
+        .forEach(function(file) {
+            var data = fs.readFileSync(source + file, "utf8");
+
+            data = processCallback(data);
+
+            if (MINIFY) {
+                file = file.replace(/\.(css|js)$/, ".min.$1");
+            }
+
+            fs.writeFileSync(destination + file, data, "utf8");
+        });
+}
+
+exports.build = function(origin, destination, minify) {
+    MINIFY = minify;
+
+    if (destination) {
+        outputPath = destination;
     }
 
     try {
-        fs.statSync(PATH)
+        fs.statSync(outputPath)
     } catch(e) {
-        fs.mkdirSync(PATH, fs.statSync("./").mode);
+        fs.mkdirSync(outputPath, fs.statSync("./").mode);
     }
 
     var originJS = "src",
         originStyles = "styles";
 
-    if (orig) {
-        originJS = orig + "/js";
-        originStyles = orig + "/styles";
+    if (origin) {
+        originJS = origin + "/js";
+        originStyles = origin + "/styles";
     }
 
-    var indexHtml = fs.readFileSync("demos/examples/index.html", "utf8");
+    var indexHtml = fs.readFileSync(examplesLocation + "/index.html", "utf8");
 
     "nav,script,tools,css,meta".split(",").forEach(function(region) {
         var re = new RegExp("<!--\\s*" + region + "\\s*-->([\\u000a\\u000d\\u2028\\u2029]|.)*<!--\\s*" + region + "\\s*-->", "ig");
         var html = re.exec(indexHtml)[0].trim();
 
-        regions[region] = {
+        baseRegions[region] = {
             rex: re,
             html: html,
             exec: function(data, value) {
@@ -157,41 +188,40 @@ exports.build = function(orig, dest, min) {
         };
     });
 
-    wrench.copyDirSyncRecursive("demos/examples", PATH);
-    wrench.copyDirSyncRecursive(originJS, PATH + "/js");
-    wrench.copyDirSyncRecursive(originStyles, PATH + "/styles");
-    fs.unlinkSync(PATH + "/template.html");
+    wrench.copyDirSyncRecursive(examplesLocation, outputPath);
+    wrench.copyDirSyncRecursive(originJS, outputPath + "/js");
+    wrench.copyDirSyncRecursive(originStyles, outputPath + "/styles");
+    fs.unlinkSync(outputPath + "/template.html");
 
     if (!MINIFY) {
         var data = fs.readFileSync("src/jquery.js", "utf8");
-        fs.writeFileSync(PATH + "/js/jquery.js", data, "utf8");
+        fs.writeFileSync(outputPath + "/js/jquery.js", data, "utf8");
     }
 
-    fs.readdirSync("demos/examples/styles")
-        .forEach(function(file) {
-            var data = fs.readFileSync("demos/examples/styles/" + file, "utf8");
+    copyResources(
+        examplesLocation + "/styles/",
+        outputPath + "/styles/",
+        function(data) {
             if (MINIFY) {
                 data = cssmin(data);
-                file = file.replace(".css", ".min.css");
             }
 
-            fs.writeFileSync(PATH + "/styles/" + file, data, "utf8");
+            return data;
         });
 
-
-    fs.readdirSync("demos/examples/js")
-        .forEach(function(file) {
-            var data = fs.readFileSync("demos/examples/js/" + file, "utf8");
+    copyResources(
+        examplesLocation + "/js/",
+        outputPath + "/js/",
+        function(data) {
             if (MINIFY) {
                 var ast = parser.parse(data);
                 ast = uglify.ast_mangle(ast);
                 ast = uglify.ast_squeeze(ast);
                 data = uglify.gen_code(ast);
-
-                file = file.replace(".js", ".min.js");
             }
-            fs.writeFileSync(PATH + "/js/" + file, data, "utf8");
+
+            return data;
         });
 
-    processdir(PATH);
+    processExamplesDirectory(outputPath);
 }
