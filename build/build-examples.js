@@ -110,10 +110,7 @@ function processExample(file) {
     var description = regionRegex.description.exec(exampleHTML);
     exampleHTML = exampleHTML.replace(regionRegex.description, '');
 
-    if (description)
-        exampleHTML = baseRegions.tools.exec(exampleHTML, baseRegions.tools.html.replace(regionRegex.description, description[0]));
-    else
-        exampleHTML = baseRegions.tools.exec(exampleHTML);
+    exampleHTML = baseRegions.tools.exec(exampleHTML, baseRegions.tools.html.replace(regionRegex.description, description[0]));
 
     fs.writeFileSync(file, exampleHTML, "utf8");
 }
