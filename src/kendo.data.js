@@ -933,6 +933,7 @@
                     group: that._group,
                     aggregates: that._aggregates
                 });
+
             that._queueRequest(options, function() {
                 that.trigger(REQUESTSTART);
                 that._ranges = [];
@@ -946,7 +947,6 @@
 
         _queueRequest: function(options, callback) {
             var that = this;
-
             if (!that._requestInProgress) {
                 that._requestInProgress = true;
                 that._pending = null;
@@ -998,12 +998,11 @@
             var start = that._skip || 0,
                 end = start + data.length;
 
-            clearTimeout(that._timeout);
             that._ranges.push({ start: start, end: end, data: data });
             that._ranges.sort( function(x, y) { return x.start - y.start; } );
 
-            that._process(data);
             that._dequeueRequest();
+            that._process(data);
         },
 
         _process: function (data) {
@@ -1238,12 +1237,15 @@
             skip = skip || 0;
             var that = this,
                 end = Math.min(skip + take, that.total()),
+                pageSkip = (Math.max(Math.floor(skip / take), 0) * take);
                 data;
+
 
                 data = that._findRange(skip, end);
 
                 if (data.length) {
-                    that._skip = skip;
+
+                    that._skip = pageSkip;
                     that._take = take;
                     var paging = that.options.serverPaging;
                     try {
@@ -1257,10 +1259,9 @@
 
             if (take !== undefined) {
 
-                var pageSkip = (Math.max(Math.floor(skip / take), 0) * take);
                 if (!that._rangeExists(pageSkip, pageSkip + take)) {
                     that.prefetch(pageSkip, take, function() {
-                        if (skip > pageSkip) {
+                        if (skip > pageSkip && pageSkip + take < that.total()) {
                             that.prefetch(pageSkip + take, take, function() {
                                 that.range(skip, take);
                             });
@@ -1366,13 +1367,13 @@
                 };
 
             if (!that._rangeExists(skip, skip + take)) {
-                that._ranges.push(range);
                 clearTimeout(that._timeout);
                 that._timeout = setTimeout(function() {
                     that._queueRequest(options, function() {
                     that.transport.read({
                         data: options,
                         success: function (data) {
+                            that._ranges.push(range);
                             that._dequeueRequest();
                             data = that.reader.parse(data);
                             range.data = that.reader.data(data);

@@ -331,6 +331,17 @@
                 equal(dataSource.view()[19].OrderID, 28);
             });
 
+            test("range fetches range accross multiple overlapping not prefeched ranges transport is called two times", function() {
+                var called = 0, dataSource = remoteDataSource(function () { called ++;});
+
+                dataSource.range(9, 20);
+
+                equal(called, 2);
+                equal(dataSource.view().length, 20);
+                equal(dataSource.view()[0].OrderID, 9);
+                equal(dataSource.view()[19].OrderID, 28);
+            });
+
             test("inRange returns false if not the entire range is available", function() {
                  var called = 0,
                     dataSource = remoteDataSource();
@@ -396,6 +407,7 @@
 
                 equal(result.length, 8);
             });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
