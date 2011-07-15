@@ -7,6 +7,7 @@
         extend = $.extend,
         proxy = $.proxy,
         noop = $.noop,
+        isFunction = $.isFunction,
         Template,
         JSON = JSON || {},
         support = {},
@@ -77,7 +78,7 @@
             for (idx = 0, length = eventNames.length; idx < length; idx++) {
                 eventName = eventNames[idx];
 
-                handler = $.isFunction(handlers) ? handlers : handlers[eventName];
+                handler = isFunction(handlers) ? handlers : handlers[eventName];
 
                 if (handler) {
                     events = that._events[eventName] || []
@@ -175,6 +176,16 @@
                 encodeRegExp = /\${([^}]*)}/g,
                 evalRegExp = new RegExp(begin + "=(.+?)" + end, "g"),
                 quoteRegExp = new RegExp("'(?=[^" + end[0] + "]*" + end + ")", "g");
+
+            if (isFunction(template)) {
+                if (template.length === 2) {
+                    //looks like jQuery.template
+                    return function(d) {
+                        return template($, { data: d }).join("");
+                    }
+                }
+                return template;
+            }
 
             functionBody += useWithBlock ? "with(" + paramName + "){" : "";
 
@@ -975,13 +986,13 @@
             effects = parseEffects(options);
 
             // only callback is provided e.g. animate(element, options, function() {});
-            if ($.isFunction(duration)) {
+            if (isFunction(duration)) {
                 complete = duration;
                 duration = 400;
                 reverse = false;
             }
 
-            if ($.isFunction(reverse)) {
+            if (isFunction(reverse)) {
                 complete = reverse;
                 reverse = false;
             }
@@ -1318,7 +1329,7 @@
          * kendo.ui.plugin("TextBox", TextBox);
          *
          * // initialize a new TextBox for each input, with the given options object.
-         * $("input").kendoTextBox({ }); 
+         * $("input").kendoTextBox({ });
          * // get the TextBox object and call the value API method
          * $("input").data("kendoTextBox").value();
          */

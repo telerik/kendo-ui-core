@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Grid row template</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.pager.js"></script>
+        <script src="../../src/kendo.grid.js"></script>
+        <link rel="stylesheet" href="../qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Grid row template</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var Grid = kendo.ui.Grid,
+                table,
+                DataSource = kendo.data.DataSource;
+
+            module("grid initialziation", {
+                setup: function() {
+                    table = document.createElement("table");
+                    document.body.appendChild(table);
+                },
+                teardown: function() {
+                    $(table).remove();
+                }
+            });
+
+            test("rowTemplate is initialized", function() {
+                var grid = new Grid(table, { dataSource: [], columns: [{ field: "foo" }, { field: "bar" }] });
+
+                ok(grid.rowTemplate);
+            });
+
+            test("default rowTemplate renders table row element", function() {
+                var grid = new Grid(table, { dataSource: [], columns: [{ field: "foo" }, { field: "bar" }] });
+
+                ok($(grid.rowTemplate({ foo: "foo", bar: "bar" })).is("tr"));
+            });
+
+            test("default rowTemplate renders a table cell for each column", function() {
+                var grid = new Grid(table, { dataSource: [], columns: [{ field: "foo" }, { field: "bar" }] });
+
+                equal($(grid.rowTemplate({ foo: "foo", bar: "bar" })).find(" > td").length, 2);
+            });
+
+            test("default rowTemplate renders data for the columns", function() {
+                var grid = new Grid(table, { dataSource: [], columns: [{ field: "foo" }, { field: "bar" }] });
+
+                var tr = $(grid.rowTemplate({ foo: "foo", bar: "bar" }));
+                equal(tr.find("td").eq(0).text(), "foo");
+                equal(tr.find("td").eq(1).text(), "bar");
+            });
+
+            test("default rowTemplate uses specified template settings renders data for the columns", function() {
+                var grid = new Grid(table, { templateSettings: {useWithBlock: false, paramName: "item" }, dataSource: [], columns: [{ field: "foo" }] });
+
+                ok(grid.rowTemplate.toString().indexOf("item.foo") > -1);
+            });
+
+            test("default rowTemplate encodes html entities", function() {
+                var grid = new Grid(table,  { columns: [{ field: "foo" }] });
+
+                ok(grid.rowTemplate({ foo: "<" }).indexOf("&lt;") > -1);
+            });
+
+            test("default rowTemplate does not encode html entities if encoded is false", function() {
+                var grid = new Grid(table,  { columns: [{ field: "foo", encoded: false }] });
+
+                ok(grid.rowTemplate({ foo: "<" }).indexOf("&lt;") == -1);
+            });
+
+            test("rowTemplate initialization from options.rowTemplate", function() {
+                var rowTemplate = function() { };
+                var grid = new Grid(table, { rowTemplate: rowTemplate, dataSource: [], columns: [{ field: "foo" }] });
+
+                ok(grid.rowTemplate === rowTemplate);
+            });
+
+            test("rowTemplate as string", function() {
+                var rowTemplate = function() { };
+                var grid = new Grid(table, { rowTemplate: "<tr></tr>", dataSource: [], columns: [{ field: "foo" }] });
+                equal($(grid.rowTemplate({}))[0].tagName, "TR");
+            });
+
+            test("default rowTemplate is using column templates", function() {
+                var grid = new Grid(table, { dataSource: [], columns: [{ field: "foo", template: "item.foo" }] });
+
+                ok(grid.rowTemplate.toString().indexOf("item.foo") > -1);
+            });
+
+       </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>
