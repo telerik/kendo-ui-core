@@ -247,6 +247,12 @@
                     group.children.push(contentElementStub);
                     equal(group.render(), "<g>Content</g>");
                 });
+
+                test("renders id", function() {
+                    group.options.id = "id";
+                    ok(group.render().indexOf("id='id'") > -1);
+                });
+
             })();
 
             (function() {
@@ -278,6 +284,11 @@
                 test("sets color", function() {
                     text.options.color = "#cf0";
                     ok(text.render().indexOf("fill='" + text.options.color + "'") > -1);
+                });
+
+                test("renders id", function() {
+                    text.options.id = "id";
+                    ok(text.render().indexOf("id='id'") > -1);
                 });
 
             })();
@@ -339,6 +350,11 @@
                     ok(path.render().indexOf("fill-opacity='0.5'") > -1);
                 });
 
+                test("renders id", function() {
+                    path.options.id = "id";
+                    ok(path.render().indexOf("id='id'") > -1);
+                });
+
             })();
 
             (function() {
@@ -385,6 +401,11 @@
                 test("renders stroke width", function() {
                     circle.options.strokeWidth = "2";
                     ok(circle.render().indexOf("stroke-width='2'") > -1);
+                });
+
+                test("renders id", function() {
+                    circle.options.id = "id";
+                    ok(circle.render().indexOf("id='id'") > -1);
                 });
 
             })();

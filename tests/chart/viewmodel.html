@@ -61,6 +61,34 @@
                     sameBox(chartElement.box, childStub.box);
                 });
 
+                test("parent set to appended children", function() {
+                    var child = new Chart.ChartElement();
+                    chartElement.append(child);
+                    ok(child.parent === chartElement);
+                });
+
+                test("getRoot returns root for first level children", function() {
+                    var child = new Chart.ChartElement();
+
+                    chartElement.getRoot = function() { return this; }
+
+                    chartElement.append(child);
+                    ok(child.getRoot() === chartElement);
+                });
+
+                test("getRoot returns root for second level children", function() {
+                    var child1 = new Chart.ChartElement(),
+                        child2 = new Chart.ChartElement();
+
+                    chartElement.getRoot = function() { return this; }
+
+                    child1.append(child2);
+                    chartElement.append(child1);
+
+                    ok(child2.getRoot() === chartElement);
+                });
+
+
             })();
 
             (function() {
@@ -196,6 +224,10 @@
                     equals(rootElement.box.x1, rootRect.x1 + MARGIN);
                 });
 
+                test("getRoot returns self", function() {
+                    ok(rootElement.getRoot() === rootElement);
+                });
+
             })();
 
             (function() {
@@ -232,7 +264,7 @@
                     boxElement.reflow(targetBox);
 
                     equal(boxElement.box.height(), HEIGHT);
-                });
+                })
 
                 test("applies top margin", function() {
                     boxElement.options.margin.top = MARGIN;
@@ -550,6 +582,14 @@
                     boxElement.getViewElements(view);
 
                     equals(view.log.rect.length, 0);
+                });
+
+                test("renders id", function() {
+                    boxElement.options.id = "id";
+                    boxElement.reflow(targetBox);
+                    boxElement.getViewElements(view);
+
+                    equals(view.log.rect[0].style.id, "id");
                 });
 
             })();
