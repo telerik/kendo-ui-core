@@ -384,9 +384,7 @@
                 };
 
             visibleContentElements
-                    .removeClass(ACTIVESTATE)
-                    .css('height', visibleContentElements.height())
-                    .css('height');
+                    .removeClass(ACTIVESTATE);
 
             if (visibleContentElements.length)
                 visibleContentElements

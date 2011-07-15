@@ -76,12 +76,12 @@
          * @class Menu UI component
          * @param {Selector} element DOM element
          * @param {Object} options Configuration options.
-         * @param {Object} options.animation A collection of {Animation} objects, used to change default animations. A value of false will disable all animations in the component.
-         * @param {Animation} options.animation.open The animation that will be used when opening sub menus.
-         * @param {Animation} options.animation.close The animation that will be used when closing sub menus.
-         * @param {String} options.orientation Root menu orientation, horizontal by default.
-         * @param {Boolean} options.openOnClick Specifies that the root sub menus will be opened on item click.
-         * @param {Number} options.hoverDelay Specifies the delay in ms before the menu is opened/closed - used to avoid accidental closure on leaving - 100ms by default.
+         * @option {Object} [animation] A collection of {Animation} objects, used to change default animations. A value of false will disable all animations in the component.
+         * @option {Animation} [animation.open] The animation that will be used when opening sub menus.
+         * @option {Animation} [animation.close] The animation that will be used when closing sub menus.
+         * @option {String} [orientation] <"horizontal"> Root menu orientation.
+         * @option {Boolean} [openOnClick] <false> Specifies that the root sub menus will be opened on item click.
+         * @option {Number} [hoverDelay] <100> Specifies the delay in ms before the menu is opened/closed - used to avoid accidental closure on leaving.
          */
         init: function(element, options) {
             element = $(element);

@@ -879,11 +879,20 @@
             zoomIn: function(element) {
                 if (kendo.support.transitions)
                     element.css(kendo.support.transitions.css + "transform", "scale(.01)");
+            },
+            expandVertical: function(element) {
+                if (element.data('initialHeight') === undefined)
+                    element.data('initialHeight', element[0].style.height);
+
+                element
+                    .css('height', element.height())
+                    .css('height')
             }
         };
     extend(effectInit, {
                 fadeOutReverse: effectInit.fadeIn,
-                zoomOutReverse: effectInit.zoomIn
+                zoomOutReverse: effectInit.zoomIn,
+                expandVerticalReverse: effectInit.expandVertical
             });
 
     function size(obj) {
@@ -1004,13 +1013,14 @@
             show: false
         }, options);
 
-        if (options.show && !element.is(':visible')) {
-            $.each( options.effects, function (effectName) {
-                var effect = options.reverse ? effectName + 'Reverse' : effectName;
+        $.each( options.effects, function (effectName) {
+            var effect = options.reverse ? effectName + 'Reverse' : effectName;
 
-                if (effect in effectInit)
-                    effectInit[effect](element);
-            });
+            if (effect in effectInit)
+                effectInit[effect](element);
+        });
+
+        if (options.show && !element.is(':visible')) {
             element.show();
         }
 

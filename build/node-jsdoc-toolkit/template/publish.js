@@ -7,7 +7,8 @@ function publish(symbolSet) {
 		staticDir:   "static/",
 		symbolsDir:  "symbols/",
 		srcDir:      "symbols/src/",
-        kendoSrcDir:      "src/",
+        kendoSrcDir: "src/",
+        kendoCSSDir: "styles/",
 		cssDir:      "css/",
 		fontsDir:    "css/fonts/",
 		jsDir:       "javascript/",
@@ -129,6 +130,8 @@ function publish(symbolSet) {
     IO.copyFile(publish.conf.templatesDir+"/"+publish.conf.cssDir+"prettify.css", publish.conf.outDir+"/"+publish.conf.cssDir);
 	IO.copyFile(publish.conf.templatesDir+"/"+publish.conf.cssDir+"screen.css", publish.conf.outDir+"/"+publish.conf.cssDir);
 	IO.copyFile(publish.conf.templatesDir+"/"+publish.conf.cssDir+"handheld.css", publish.conf.outDir+"/"+publish.conf.cssDir);
+    IO.copyFile(publish.conf.kendoCSSDir+"kendo.common.css", publish.conf.outDir+"/"+publish.conf.cssDir);
+    IO.copyFile(publish.conf.kendoCSSDir+"kendo.blueopal.css", publish.conf.outDir+"/"+publish.conf.cssDir);
 	IO.copyFile(publish.conf.templatesDir+"/"+publish.conf.jsDir+"all.js", publish.conf.outDir+"/"+publish.conf.jsDir);
     IO.copyFile(publish.conf.templatesDir+"/"+publish.conf.jsDir+"prettify.js", publish.conf.outDir+"/"+publish.conf.jsDir);
 	IO.copyFile(publish.conf.templatesDir+"/"+publish.conf.jsDir+"html5.js", publish.conf.outDir+"/"+publish.conf.jsDir);
@@ -136,6 +139,7 @@ function publish(symbolSet) {
     IO.copyFile(publish.conf.kendoSrcDir+"jquery.js", publish.conf.outDir+"/"+publish.conf.jsDir);
     IO.copyFile(publish.conf.kendoSrcDir+"kendo.core.js", publish.conf.outDir+"/"+publish.conf.jsDir);
     IO.copyFile(publish.conf.kendoSrcDir+"kendo.fx.js", publish.conf.outDir+"/"+publish.conf.jsDir);
+    IO.copyFile(publish.conf.kendoSrcDir+"kendo.tabstrip.js", publish.conf.outDir+"/"+publish.conf.jsDir);
 	IO.copyFile(publish.conf.templatesDir+"/"+publish.conf.fontsDir+"mplus-1m-regular-webfont.eot", publish.conf.outDir+"/"+publish.conf.fontsDir);
 	IO.copyFile(publish.conf.templatesDir+"/"+publish.conf.fontsDir+"mplus-1m-regular-webfont.svg", publish.conf.outDir+"/"+publish.conf.fontsDir);
 	IO.copyFile(publish.conf.templatesDir+"/"+publish.conf.fontsDir+"mplus-1m-regular-webfont.ttf", publish.conf.outDir+"/"+publish.conf.fontsDir);
@@ -143,7 +147,10 @@ function publish(symbolSet) {
 	IO.copyFile(publish.conf.templatesDir+"/"+publish.conf.fontsDir+"mplus-1m-bold-webfont.eot", publish.conf.outDir+"/"+publish.conf.fontsDir);
 	IO.copyFile(publish.conf.templatesDir+"/"+publish.conf.fontsDir+"mplus-1m-bold-webfont.svg", publish.conf.outDir+"/"+publish.conf.fontsDir);
 	IO.copyFile(publish.conf.templatesDir+"/"+publish.conf.fontsDir+"mplus-1m-bold-webfont.ttf", publish.conf.outDir+"/"+publish.conf.fontsDir);
-	IO.copyFile(publish.conf.templatesDir+"/"+publish.conf.fontsDir+"mplus-1m-bold-webfont.woff", publish.conf.outDir+"/"+publish.conf.fontsDir);	}
+	IO.copyFile(publish.conf.templatesDir+"/"+publish.conf.fontsDir+"mplus-1m-bold-webfont.woff", publish.conf.outDir+"/"+publish.conf.fontsDir);
+
+    IO.copyDir(publish.conf.kendoCSSDir + "BlueOpal", publish.conf.outDir+"/"+publish.conf.cssDir + "BlueOpal");
+}
 
 /** Include a sub-template in the current template, specifying a data object */
 function subtemplate(template, data) {

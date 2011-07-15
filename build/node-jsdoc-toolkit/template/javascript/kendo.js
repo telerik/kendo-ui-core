@@ -21,4 +21,9 @@
         extender.kendoStop(true).kendoAnimate(!visible ? animation.show : animation.hide, visible);
     });
 
+    $().ready(function () {
+        prettyPrint();
+        $("#codeStrip").kendoTabStrip();
+    });
+    
 })($, window);

@@ -106,7 +106,7 @@ div.innerContent {
 	padding: 0 0 0 2.5em;
 }
 
-div.content ul,
+div.content ul.summary,
 div.content ol {
 	margin-bottom: 3em;
 }
