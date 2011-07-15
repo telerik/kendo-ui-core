@@ -2,6 +2,7 @@
 var fs = require("fs"),
     sys = require("sys"),
     wrench = require("./wrench"),
+    jsdoctoolkit = require("./node-jsdoc-toolkit/app/nodemodule").jsdoctoolkit,
     uglify = require("./uglify-js").uglify,
     parser = require("./uglify-js").parser,
     cssmin = require("./lib/cssmin").cssmin,
@@ -86,11 +87,29 @@ function updateBaseLocation(html, base) {
     return html.replace(/href="([^"]*)"/g, 'href="' + base + '$1"');
 }
 
+function componentFromFilename(file) {
+    var candidate = file.split("/").filter(function(val) {
+            return val != outputPath && !/\.html$/i.test(val);
+        })[0];
+
+    if (candidate == "overview") {
+        candidate = undefined;
+    }
+
+    return candidate;
+}
+
+function helpSectionsFor(component) {
+}
+
 function processExample(file) {
     var exampleHTML = fs.readFileSync(file, "utf8"),
         base = file === outputPath + "/index.html" ? "" : "../",
         scriptRegion = splitScriptRegion(exampleHTML, base),
-        cssRegion = splitCSSRegion(exampleHTML, base);
+        cssRegion = splitCSSRegion(exampleHTML, base),
+        component = componentFromFilename(file);
+
+    //console.log(helpSectionFor(component));
 
     exampleHTML = baseRegions.meta.exec(exampleHTML, baseRegions.meta.html);
 
@@ -166,6 +185,7 @@ exports.build = function(origin, destination, minify) {
         originStyles = origin + "/styles";
     }
 
+    console.log("Parsing master page...");
     var indexHtml = fs.readFileSync(examplesLocation + "/index.html", "utf8");
 
     "nav,script,tools,css,meta".split(",").forEach(function(region) {
@@ -183,6 +203,7 @@ exports.build = function(origin, destination, minify) {
         };
     });
 
+    console.log("Copying resources...");
     wrench.copyDirSyncRecursive(examplesLocation, outputPath);
     wrench.copyDirSyncRecursive(originJS, outputPath + "/js");
     wrench.copyDirSyncRecursive(originStyles, outputPath + "/styles");
@@ -218,5 +239,9 @@ exports.build = function(origin, destination, minify) {
             return data;
         });
 
+    console.log("Building documentation...");
+    jsdoctoolkit.run(["-c=build/docs.conf"]);
+
+    console.log("Processing examples...");
     processExamplesDirectory(outputPath);
 }
