@@ -20,7 +20,9 @@ var fs = require("fs"),
     regionRegex = {
         description: getRegionRegex("description"),
         script: getRegionRegex("script"),
-        css: getRegionRegex("css")
+        css: getRegionRegex("css"),
+        helpTabs: getRegionRegex("help-tabs"),
+        helpData: getRegionRegex("help-data")
     };
 
 function getRegionRegex(regionName) {
@@ -92,14 +94,29 @@ function componentFromFilename(file) {
             return val != outputPath && !/\.html$/i.test(val);
         })[0];
 
-    if (candidate == "overview") {
-        candidate = undefined;
+    if (candidate == "overview" || candidate === undefined) {
+        return;
     }
 
     return candidate;
 }
 
-function helpSectionsFor(component) {
+function importComponentHelp(exampleHTML, component) {
+    if (!component)
+        return exampleHTML;
+
+    try {
+        var helpFile = "docs/symbols/kendo.ui." + component + ".html",
+            helpHTML = fs.readFileSync(helpFile, "utf8");
+
+        var tabs = regionRegex.helpTabs.exec(helpHTML)[1];
+
+        exampleHTML = exampleHTML.replace(/(codeStrip.*?<ul>.*?)(<\/ul>)/i, "$1" + tabs + "$2");
+    } catch (e) {
+        // file does not exist. probably.
+    }
+
+    return exampleHTML;
 }
 
 function processExample(file) {
@@ -108,8 +125,6 @@ function processExample(file) {
         scriptRegion = splitScriptRegion(exampleHTML, base),
         cssRegion = splitCSSRegion(exampleHTML, base),
         component = componentFromFilename(file);
-
-    //console.log(helpSectionFor(component));
 
     exampleHTML = baseRegions.meta.exec(exampleHTML, baseRegions.meta.html);
 
@@ -128,6 +143,8 @@ function processExample(file) {
         // overview has no description
         exampleHTML = baseRegions.tools.exec(exampleHTML);
     }
+
+    exampleHTML = importComponentHelp(exampleHTML, component);
 
     fs.writeFileSync(file, exampleHTML, "utf8");
 }
