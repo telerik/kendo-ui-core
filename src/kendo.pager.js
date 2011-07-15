@@ -20,7 +20,7 @@
         },
 
         options: {
-            selectTemplate: '<li><span class="t-state-active"><#= text #></a></li>',
+            selectTemplate: '<li><span class="t-state-active"><#= text #></span></li>',
             linkTemplate: '<li><a href="#" class="t-link" data-page="<#= idx #>"><#= text #></a></li>',
             buttonCount: 10
         },
