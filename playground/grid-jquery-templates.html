@@ -23,7 +23,7 @@
         <script>
             $(document).ready(function() {
                 $("#table1").kendoGrid({
-                    rowTemplate: $.template("<tr><td colspan='5'><strong>${ OrderID }</strong></td></tr>"),
+                    rowTemplate: $.template("<strong>${ OrderID }</strong>"),
                     dataSource: {
                         type: "odata",
                         serverPaging: true,
