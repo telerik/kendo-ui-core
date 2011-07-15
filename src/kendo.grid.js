@@ -148,6 +148,28 @@
         }
     });
 
+    function groupCells(count) {
+        if (count === 0) {
+            return "";
+        }
+
+        return new Array(count + 1).join('<td class="t-group-cell"></td>');
+    }
+
+    function columnTemplate(column, settings) {
+        var template = column.template, field = column.field;
+
+        if (!template) {
+            if (column.encoded === true) {
+                template = "${" + (settings.useWithBlock ? "" : settings.paramName + ".") + field + "}";
+            } else {
+                template = settings.begin + "=" + (settings.useWithBlock ? "" : settings.paramName + ".") + field + settings.end;
+            }
+        }
+
+        return template;
+    }
+
     var Grid = Component.extend({
         init: function(element, options) {
             var that = this;
@@ -176,7 +198,7 @@
 
             that._groupable();
 
-            if (that.options.autoBind){
+            if (that.options.autoBind) {
                 that.dataSource.query();
             }
 
@@ -209,7 +231,7 @@
                 wrapper = that.wrapper,
                 groupable = that.options.groupable;
 
-            if(groupable) {
+            if (groupable) {
                 if(!wrapper.has("div.t-grouping-header")[0]) {
                     $("<div />").addClass("t-grouping-header").prependTo(wrapper);
                 }
@@ -567,36 +589,76 @@
             });
         },
 
+        _compositeTmpl: function(start, settings) {
+            var that = this,
+                templates=[],
+                idx,
+                length,
+                groups = (that.dataSource.group() || []).length;
+
+            if (groups > 0) {
+                templates.push(function() {
+                    return groupCells(groups);
+                });
+            }
+
+            for (idx = 0, length = that.columns.length; idx < length; idx++) {
+                templates.push(kendo.template(columnTemplate(that.columns[idx], settings)));
+            }
+
+            return function(data) {
+                var html = [start], idx, length;
+
+                for (idx = 0, length = templates.length; idx < length; idx++) {
+                    html.push("<td>");
+                    html.push(templates[idx](data));
+                    html.push("</td>");
+                }
+
+                return html.join("") + "</tr>";
+            }
+        },
+
         _tmpl: function(start, rowTemplate) {
             var that = this,
                 settings = extend({}, kendo.Template, that.options.templateSettings),
+                idx,
+                length,
+                template,
                 groups = (that.dataSource.group() || []).length;
 
             if (!rowTemplate) {
                 rowTemplate = start;
 
                 if (groups > 0) {
-                    rowTemplate += that._groupCell(groups);
+                    rowTemplate += groupCells(groups);
                 }
 
-                $.each(that.columns, function() {
-                    var column = this, template = column.template, field = column.field;
+                for (idx = 0, length = that.columns.length; idx < length; idx++) {
+                    template = columnTemplate(that.columns[idx], settings);
 
-                    if (!template) {
-                        if (column.encoded === true) {
-                            template = "${" + (settings.useWithBlock ? "" : settings.paramName + ".") + field + "}";
-                        } else {
-                            template = settings.begin + "=" + (settings.useWithBlock ? "" : settings.paramName + ".") + field + settings.end;
-                        }
+                    if ($.isFunction(template)) {
+                        return that._compositeTmpl(start, settings);
                     }
 
                     rowTemplate += "<td>" + template + "</td>";
-                });
+                }
 
                 rowTemplate += "</tr>";
-            }
 
-            return kendo.template(rowTemplate, settings);
+                return kendo.template(rowTemplate, settings);
+            } else {
+                rowTemplate = kendo.template(rowTemplate, settings);
+
+                return function(data) {
+                    var html = start;
+
+                    if (groups > 0) {
+                        html += groupCells(groups);
+                    }
+                    return html + '<td colspan="' + that.columns.length + '">' + rowTemplate(data) + "</td></tr>";
+                };
+            }
         },
 
         _templates: function() {
@@ -709,12 +771,6 @@
 
             return html;
         },
-        _groupCell: function(count) {
-            if(count == 0) {
-                return "";
-            }
-            return new Array(count + 1).join('<td class="t-group-cell"></td>');
-        },
         _groupRowHtml: function(group, colspan, level) {
             var that = this,
                 html = "",
@@ -722,7 +778,7 @@
                 length,
                 groupItems = group.items;
 
-            html +=  '<tr class="t-grouping-row">' + that._groupCell(level) +
+            html +=  '<tr class="t-grouping-row">' + groupCells(level) +
                       '<td colspan="' + colspan + '">' +
                         '<p class="t-reset">' +
                          '<a class="t-icon t-collapse" href="#"></a>' +

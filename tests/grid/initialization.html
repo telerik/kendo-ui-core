@@ -66,16 +66,6 @@
                 equal(grid.columns[0].template, "bar");
             });
 
-            test("column template as function", function() {
-                var template = function(data) {return "foo" + data.foo; };
-                var grid = new Grid(table, { dataSource: [{ foo: "bar"}], columns: [{ field: "foo", template: template }] });
-
-                ok(grid.columns[0].template === template);
-
-                //TODO: make it work
-                //equal(grid.tbody.find("td").text(), "foobar");
-            });
-
             test("column initialization - treating strings as fields", function() {
                 var grid = new Grid(table, { dataSource: [], columns: ["foo", { field: "bar" }] });
 
