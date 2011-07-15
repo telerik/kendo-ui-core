@@ -369,14 +369,6 @@
             } else {
                 wrapper.delegate(selector, "mousedown", clickCallback);
             }
-
-            that.bind(DATABOUND, function() {
-                var activeElement = document.activeElement,
-                    wrapperElement = wrapper[0];
-                if(wrapperElement === activeElement || $.contains(wrapperElement, activeElement)) {
-                    wrapper.focus();
-                }
-            });
         },
 
         _wrapper: function() {
