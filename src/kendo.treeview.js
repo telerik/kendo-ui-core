@@ -892,8 +892,7 @@
         renderItem: function (options) {
             options = extend({ treeview: {}, group: {} }, options);
 
-            var templates = templates,
-                empty = templates.empty,
+            var empty = templates.empty,
                 item = options.item,
                 treeview = options.treeview;
 

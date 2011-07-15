@@ -305,6 +305,7 @@
         !}
         <div id="codeStrip">
         <ul>
+            <!-- help-tabs -->
             <if test="!data.isBuiltin() && (data.isNamespace || data.is('CONSTRUCTOR'))">
                 <li class="t-state-active">Constructors</li>
             </if>
@@ -320,10 +321,12 @@
             <if test="defined(ownEvents) && ownEvents.length">
                 <li>Events ({+ ownEvents.length +})</li>
             </if>
+            <!-- help-tabs -->
         </ul>
 <!--
 #### CONSTRUCTOR DETAILS
 -->
+        <!-- help-data -->
 		<if test="!data.isBuiltin() && (data.isNamespace || data.is('CONSTRUCTOR'))">
 			<div class="">
 				<div class="">
@@ -814,6 +817,8 @@
 				</div>
 			</div>
 		</if>
+
+        <!-- help-data -->
         </div>
 	</div>
 </div>
