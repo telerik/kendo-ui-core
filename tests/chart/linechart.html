@@ -588,6 +588,7 @@
                     box,
                     marker,
                     label,
+                    root,
                     VALUE = 1;
 
                 function createPoint(options) {
@@ -595,6 +596,9 @@
 
                     box = new Box2D(0, 0, 100, 100);
                     point.reflow(box);
+
+                    root = new Chart.RootElement();
+                    root.append(point);
 
                     marker = point.children[0];
                     label = point.children[1];
@@ -683,6 +687,13 @@
                     ok(marker.options.id.length > 0);
                 });
 
+                test("registers id with root", function() {
+                    createPoint();
+                    var view = new ViewStub();
+                    point.getViewElements(view);
+                    ok(root.idMap[marker.options.id] === point);
+                });
+
                 // ------------------------------------------------------------
                 module("Line Point / Labels", {
                     setup: function() {
@@ -765,7 +776,6 @@
                     BACKGROUND = "#f00",
                     shape,
                     box,
-                    root,
                     view;
 
                 function createShape(options) {
@@ -780,9 +790,6 @@
 
                     box = new Box2D(0, 0, SIZE, SIZE);
                     shape.reflow(box);
-
-                    root = new Chart.RootElement();
-                    root.append(shape);
 
                     view = new ViewStub();
                     shape.getViewElements(view);
@@ -816,11 +823,6 @@
                 test("renders id", function() {
                     createShape({ id: "id" });
                     equals(view.log.rect[0].style.id, "id");
-                });
-
-                test("registers id with root", function() {
-                    createShape({ id: "id" });
-                    ok(root.idMap["id"] === shape);
                 });
 
             })();
