@@ -111,7 +111,7 @@ function importComponentHelp(exampleHTML, component) {
 
         var tabs = regionRegex.helpTabs.exec(helpHTML)[1];
 
-        exampleHTML = exampleHTML.replace(/(codeStrip.*?<ul>.*?)(<\/ul>)/i, "$1" + tabs + "$2");
+        exampleHTML = exampleHTML.replace(/codeStrip(([\r\n]|.)*?)<\/ul>/i, "codeStrip$1" + tabs + "</ul>");
     } catch (e) {
         // file does not exist. probably.
     }
