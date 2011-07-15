@@ -32,6 +32,25 @@
                 equal(t({ foo: { bar: "baz" } }), "baz");
             });
 
+            test("function template returns the same function", function() {
+                var t = $.noop;
+
+                ok(template.compile(t) === t);
+            });
+
+            test("function with 2 parameters is treated as jQuery template", function() {
+                var data;
+
+                var t = function(foo, bar) {
+                    data = bar.data;
+                    return [];
+                };
+
+                template.compile(t)({ foo: "bar" });
+
+                equal(data.foo, "bar");
+            });
+
             test("default paramName is 'data'", function() {
                 var t = template.compile("<#= data.foo #>");
                 equal(t({ foo: "bar" }), "bar");
