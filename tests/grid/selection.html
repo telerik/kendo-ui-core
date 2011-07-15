@@ -289,17 +289,7 @@
                 var row = table.find("tbody tr").eq(0);
                 ok(row.find("td:first").hasClass("t-state-focused"));
             });
-
-            test("focused grid after rebind recieves focus", function() {
-                var grid = setup();
-
-                grid.wrapper.focus();
-                grid.refresh();
-
-                var row = table.find("tbody tr").eq(0);
-                ok(row.find("td:first").hasClass("t-state-focused"));
-            });
-
+            
             test("clearSelection clears selected items", function() {                
                 var grid = setup({
                         selectable: true
