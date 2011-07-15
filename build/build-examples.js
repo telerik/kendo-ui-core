@@ -7,67 +7,101 @@ var fs = require("fs"),
     regions = {},
     PATH = "live",
     MINIFY = false,
-    jQueryCDN = "http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js";
+    jQueryCDN = "http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js",
+    jsExtension = MINIFY ? '.min.js' : '.js',
+    cssExtension = MINIFY ? '.min.css' : '.css',
+    rowSeparator = /[\r\n]+\s+/,
+    regionRegex = {
+        description: getRegionRegex("description"),
+        script: getRegionRegex("script"),
+        css: getRegionRegex("css")
+    };
 
-function processfile(file) {
-    if (/\.html$/.test(file)) {
-        var data = fs.readFileSync(file, "utf8"),
-            jsExtention = MINIFY ? '.min.js' : '.js',
-            cssExtention = MINIFY ? '.min.css' : '.css',
-            descRE = /\s*<!--\s*description\s*-->([\u000a\u000d\u2028\u2029]|.)*?<!--\s*description\s*-->/g,
-            scriptRE = /\s*<!--\s*script\s*-->(([\u000a\u000d\u2028\u2029]|.)*?)<!--\s*script\s*-->/g,
-            cssRE = /\s*<!--\s*css\s*-->(([\u000a\u000d\u2028\u2029]|.)*?)<!--\s*css\s*-->/g,
-            base = file === PATH + "/index.html" ? "" : "../",
-            scripts = regions.script.html,
-            scriptMatches = scriptRE.exec(data),
-            selfScripts = scriptMatches ? scriptMatches[1].trimLeft() : '',
-            css = regions.css.html,
-            cssMatches = cssRE.exec(data),
-            selfCSS = cssMatches ? cssMatches[1].trimLeft() : '',
-            rowSeparator = /[\r\n]+\s+/,
-            jQueryStripper = /src="js\/jquery\.min\.js"/g,
-            scriptStripper1 = /"(.*?)src/g,
-            scriptStripper2 = /src="[.\/]*([^"]*)([^\.min]*)\.js"/g,
-            cssStripper = /href="[.\/]*([^"]*)\.css"/g;
+function getRegionRegex(regionName) {
+    return new RegExp("\\s*<!--\\s*" + regionName + "\\s*-->(([\\r\\n]|.)*?)<!--\\s*" + regionName + "\\s*-->", "im");
+}
 
-        selfScripts.trim().split(rowSeparator).forEach(function(item) {
-            scripts = scripts.replace(new RegExp('[\\r\\n]+\\s+'+item.replace(/(\.\.\/)+/, '[\\.\/]*').replace(/\//g, '\\/').replace(/\./g, '\\.'), 'i'), '');
-        });
+function removeDuplicate(resource, target) {
+    var scriptTag = resource.replace(/(\.\.\/)+/g, '[\.\/]*').replace(/\//g, '\\/').replace(/\./g, '\\.'),
+        rex = new RegExp('[\\r\\n]+\\s+' + scriptTag, 'i');
 
-        selfScripts = selfScripts.replace(scriptStripper1, '"js');
-        selfScripts = selfScripts.replace(scriptStripper2, 'src="' + base + '$1' + jsExtention + '"');
-        scripts = scripts.replace(scriptStripper1, '"js');
-        scripts = scripts.replace(scriptStripper2, 'src="' + base + '$1' + jsExtention + '"');
+    return target.replace(rex, '');
+}
 
-        if (MINIFY) {
-            selfScripts = selfScripts.replace(jQueryStripper, 'src="' + jQueryCDN + '"');
-        }
+function splitScriptRegion(exampleHTML, base) {
+    var baseScripts = regions.script.html,
+        scriptMatches = regionRegex.script.exec(exampleHTML),
+        jQueryStripper = /src="js\/jquery\.min\.js"/g,
+        scriptStripper1 = /"(.*?)src/g,
+        scriptStripper2 = /src="[.\/]*([^"]*)([^\.min]*)\.js"/g,
+        currentPageScripts = scriptMatches ? scriptMatches[1].trimLeft() : '';
 
-        selfCSS.trim().split(rowSeparator).forEach(function(item) {
-            css = css.replace(new RegExp('[\\r\\n]+\\s+'+item.replace(/(\.\.\/)+/g, '[\\.\/]*').replace(/\//g, '\\/').replace(/\./g, '\\.'), 'i'), '');
-        });
+    if (!currentPageScripts)
+        return false;
 
-        selfCSS = selfCSS.replace(cssStripper, 'href="' + base + '$1' + cssExtention + '"');
-        css = css.replace(cssStripper, 'href="' + base + '$1' + cssExtention + '"');
+    currentPageScripts.trim().split(rowSeparator).forEach(function(item) {
+        baseScripts = removeDuplicate(item, baseScripts);
+    });
 
-        data = regions.meta.exec(data, regions.meta.html.replace(cssStripper, 'href="' + base + '$1"'));
+    currentPageScripts = currentPageScripts.replace(scriptStripper1, '"js');
+    currentPageScripts = currentPageScripts.replace(scriptStripper2, 'src="' + base + '$1' + jsExtension + '"');
+    baseScripts = baseScripts.replace(scriptStripper1, '"js');
+    baseScripts = baseScripts.replace(scriptStripper2, 'src="' + base + '$1' + jsExtension + '"');
 
-        data = regions.script.exec(data, selfScripts + scripts);
-
-        data = regions.css.exec(data, selfCSS + css);
-
-        data = regions.nav.exec(data, regions.nav.html.replace(/href="([^"]*)"/g, 'href="' + base + '$1"'));
-
-        var description = descRE.exec(data);
-        data = data.replace(descRE, '');
-
-        if (description)
-            data = regions.tools.exec(data, regions.tools.html.replace(descRE, description[0]));
-        else
-            data = regions.tools.exec(data);
-
-        fs.writeFileSync(file, data, "utf8");
+    if (MINIFY) {
+        currentPageScripts = currentPageScripts.replace(jQueryStripper, 'src="' + jQueryCDN + '"');
     }
+
+    return currentPageScripts + baseScripts;
+}
+
+function splitCSSRegion (exampleHTML, base) {
+    var baseCSS = regions.css.html,
+        cssMatches = regionRegex.css.exec(exampleHTML),
+        currentPageCSS = cssMatches ? cssMatches[1].trimLeft() : '',
+        cssStripper = /href="[.\/]*([^"]*)\.css"/g;
+
+    if (!currentPageCSS)
+        return false;
+
+    currentPageCSS.trim().split(rowSeparator).forEach(function(item) {
+        baseCSS = removeDuplicate(item, baseCSS);
+    });
+
+    currentPageCSS = currentPageCSS.replace(cssStripper, 'href="' + base + '$1' + cssExtension + '"');
+    baseCSS = baseCSS.replace(cssStripper, 'href="' + base + '$1' + cssExtension + '"');
+
+    return currentPageCSS + baseCSS;
+}
+
+function processExample(file) {
+    var exampleHTML = fs.readFileSync(file, "utf8"),
+        base = file === PATH + "/index.html" ? "" : "../",
+        scriptRegion = splitScriptRegion(exampleHTML, base),
+        cssRegion = splitCSSRegion(exampleHTML, base);
+
+    if (!scriptRegion || ! cssRegion) {
+        console.warn("Skipping file " + file + ": Empty script or CSS region.");
+        return;
+    }
+
+    exampleHTML = regions.meta.exec(exampleHTML, regions.meta.html);
+
+    exampleHTML = regions.script.exec(exampleHTML, scriptRegion);
+
+    exampleHTML = regions.css.exec(exampleHTML, cssRegion);
+
+    exampleHTML = regions.nav.exec(exampleHTML, regions.nav.html.replace(/href="([^"]*)"/g, 'href="' + base + '$1"'));
+
+    var description = regionRegex.description.exec(exampleHTML);
+    exampleHTML = exampleHTML.replace(regionRegex.description, '');
+
+    if (description)
+        exampleHTML = regions.tools.exec(exampleHTML, regions.tools.html.replace(regionRegex.description, description[0]));
+    else
+        exampleHTML = regions.tools.exec(exampleHTML);
+
+    fs.writeFileSync(file, exampleHTML, "utf8");
 }
 
 function processdir(dir) {
@@ -77,7 +111,8 @@ function processdir(dir) {
         var stat = fs.statSync(name);
 
         if (stat.isFile()) {
-            processfile(name);
+            if (/\.html$/.test(name))
+                processExample(name);
         } else {
             processdir(name);
         }
@@ -108,10 +143,11 @@ exports.build = function(orig, dest, min) {
     var indexHtml = fs.readFileSync("demos/examples/index.html", "utf8");
 
     "nav,script,tools,css,meta".split(",").forEach(function(region) {
-        var re = new RegExp("<!--\\s*" + region + "\\s*-->([\\u000a\\u000d\\u2028\\u2029]|.)*<!--\\s*" + region + "\\s*-->", "g");
+        var re = new RegExp("<!--\\s*" + region + "\\s*-->([\\u000a\\u000d\\u2028\\u2029]|.)*<!--\\s*" + region + "\\s*-->", "ig");
         var html = re.exec(indexHtml)[0].trim();
 
         regions[region] = {
+            rex: re,
             html: html,
             exec: function(data, value) {
                 value = value || html;
