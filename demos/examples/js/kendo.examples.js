@@ -263,6 +263,17 @@
 
                 sessionStorage.setItem("kendoSkin", newSkin);
             });
+
+            setTimeout(function () {
+                $(".headerBack").animate({
+                    top: 0,
+                    height: 180
+                }, 400);
+                $("#header").animate({
+                    marginTop: 0,
+                    height: 200
+                }, 400);
+            }, 2000);
         }
 
     };

@@ -7,7 +7,7 @@ html, body
     text-align: center;
 }
 
-body,
+.headerGradient,
 .skinSelector .t-arrow-down
 {
     background-image: url('../img/sprite.png');
@@ -16,10 +16,30 @@ body,
 body
 {
     background-color: #FFF;
-    background-position: 0 -761px;
-    background-repeat: repeat-x;
     overflow-y: scroll;
     *overflow-y: auto;
+}
+
+.headerBack
+{
+    position: absolute;
+    width: 100%;
+    top: 78px;
+    left: 0;
+    height: 239px;
+    background-color: #ef652a;
+    border-bottom: 1px solid #be5e35;
+}
+
+.headerGradient
+{
+    height: 139px;
+    background-color: transparent;
+    background-position: 0 -761px;
+    background-repeat: repeat-x;
+    -webkit-box-shadow: 0 2px 3px #792D0E;
+    -moz-box-shadow: 0 2px 3px #792D0E;
+    box-shadow: 0 2px 3px #792D0E;
 }
 
 #header, #footer
@@ -126,7 +146,7 @@ body
     min-height: 100%;
     border-bottom: 68px solid #4D4D4D;
     padding-bottom: 10px;
-    box-shadow: inset 0 -1px 3px #000;
+/*    box-shadow: inset 0 -1px 3px #000;*/
 }
 
 .centerBox
