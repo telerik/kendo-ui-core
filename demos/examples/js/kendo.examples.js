@@ -3,6 +3,19 @@
         extend = $.extend,
         pushState = "pushState" in history,
         currentHtml = "",
+        docsAnimation = {
+            show: {
+                effects: "expandVertical fadeIn",
+                duration: 300,
+                show: true
+            },
+            hide: {
+                effects: "expandVertical fadeIn",
+                duration: 300,
+                reverse: true,
+                hide: true
+            }
+        },
         animation = {
             show: {
                 effects: "fadeIn",
@@ -15,6 +28,7 @@
             }
         },
         initialFolder = 0,
+        codeStrip = false,
         initialRelativePath = "";
 
     Application = {
@@ -60,6 +74,11 @@
                     $(".exampleName").empty().html(title);
 
                     setTimeout(function() {
+                        var newTabs = $($.trim(Application.helpTabs(html)));
+                        $(".codeTab").nextAll().remove().end().after(newTabs);
+                        $(".codeContainer").nextAll().remove().end().after($($.trim(Application.helpData(html))));
+                        codeStrip._updateClasses();
+
                         if (title != "Overview" && !toolsVisible)
                             tools.kendoStop(true).kendoAnimate(animation.show);
 
@@ -156,6 +175,14 @@
             });
         },
 
+        helpTabs: function (html) {
+            return /<!--\s*help-tabs\s*-->(([\r\n]|.)*?)<!--\s*help-tabs\s*-->/im.exec(html)[1];
+        },
+
+        helpData: function (html) {
+            return /<!--\s*help-data\s*-->(([\r\n]|.)*?)<!--\s*help-data\s*-->/im.exec(html)[1];
+        },
+
         description: function(html) {
             return /<div class="description">(([\u000a\u000d\u2028\u2029]|.)*?)<\/\w+>\s*?<!-- description -->/ig.exec(html)[1];
         },
@@ -171,6 +198,7 @@
 
             initialFolder = location.href.match(/\//g).length;
             initialRelativePath = document.getElementsByTagName("head")[0].innerHTML.match(/href=\W([\.\/]*)([\w\/]*?)kendo\.common/)[1];
+            codeStrip = $("#codeStrip").data("kendoTabStrip");
 
             var skinSelector = $("#skinSelector");
 
@@ -195,6 +223,13 @@
                     .each(function() {
                         $(this).attr("href", this.href);
                     });
+
+                $(".detailHandle").live("click", function (e) {
+                    var extender = $(this).next(),
+                        visible = extender.is(":visible");
+
+                    extender.kendoStop(true).kendoAnimate(!visible ? docsAnimation.show : docsAnimation.hide, visible);
+                });
 
                 $(window).bind("popstate", function(e) {
                     var state = e.originalEvent.state;

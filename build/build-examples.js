@@ -113,8 +113,8 @@ function importComponentHelp(exampleHTML, component) {
             data = regionRegex.helpData.exec(helpHTML)[1];
 
         // could be improved if example has appropriate markers, or better yet, if loaded through AJAX (and not importing at all)
-        exampleHTML = exampleHTML.replace(/codeStrip(([\r\n]|.)*?)<\/ul>/i, "codeStrip$1" + tabs + "</ul>");
-        exampleHTML = exampleHTML.replace(/codeStrip(([\r\n]|.)*?)<\/div>([\r\n\s\t])*?<script/i, "codeStrip$1" + data + "</div><script");
+        exampleHTML = exampleHTML.replace(regionRegex.helpTabs, "<!-- help-tabs -->" + tabs + "<!-- help-tabs -->");
+        exampleHTML = exampleHTML.replace(regionRegex.helpData, "<!-- help-data -->" + data + "<!-- help-data -->");
     } catch (e) {
         // file does not exist. probably.
     }
