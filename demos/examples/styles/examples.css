@@ -541,3 +541,42 @@ div.skinSelector .t-state-active
     background-position: -128px 0;
     border-color: #cdd4d7;
 }
+
+/* Documentation styles */
+.detailBody
+{
+    display: none;
+}
+
+.detailHandle
+{
+    margin-top: 5px;
+    background: #EEE;
+    border-bottom: 3px solid #CCC;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.detailHandle:hover
+{
+    background: #CCC;
+    border-bottom: 3px solid #AAA;
+}
+
+.light
+{
+    color: #555;
+}
+
+.heading
+{
+    font-weight: bold;
+    border-bottom:  1px solid #CCC;
+}
+
+.methodDetail
+{
+    margin: 0;
+    padding: 0;
+    list-style: none outside;
+}

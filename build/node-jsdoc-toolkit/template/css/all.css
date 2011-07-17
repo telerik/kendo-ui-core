@@ -293,7 +293,7 @@ table.summaryTable td.nameDescription div.fixedFont {
 	font-weight: bold;
 }
 
-table.summaryTable div.description {
+table.summaryTable div.desc {
 	color: #333;
 }
 
@@ -322,7 +322,7 @@ dl.inheritsList dd {
 	line-height: 1.1em
 }
 
-.fixedFont.heading + .description {
+.fixedFont.heading + .desc {
 	font-size: 1.2em;
 }
 
