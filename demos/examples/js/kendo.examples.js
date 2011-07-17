@@ -78,6 +78,7 @@
                         $(".codeTab").nextAll().remove().end().after(newTabs);
                         $(".codeContainer").nextAll().remove().end().after($($.trim(Application.helpData(html))));
                         codeStrip._updateClasses();
+                        prettyPrint();
 
                         if (title != "Overview" && !toolsVisible)
                             tools.kendoStop(true).kendoAnimate(animation.show);
@@ -242,6 +243,7 @@
             }
 
             Application.fetchDescription(location.href.substr(-1) == "/" ? initialRelativePath ? location.href + "index.html" : location.href + "overview/index.html" : location.href);
+            prettyPrint();
 
             $("#viewCode").click(function(e) {
                 e.preventDefault();

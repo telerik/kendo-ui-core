@@ -1,1 +1,39 @@
-.str{color:#080}.kwd{color:#008}.com{color:#800}.typ{color:#606}.lit{color:#066}.pun{color:#660}.pln{color:#000}.tag{color:#008}.atn{color:#606}.atv{color:#080}.dec{color:#606}pre.prettyprint{padding:2px;margin:0}ol.linenums{margin-top:0;margin-bottom:0}li.L0,li.L1,li.L2,li.L3,li.L5,li.L6,li.L7,li.L8{list-style:none}li.L1,li.L3,li.L5,li.L7,li.L9{background:#eee}@media print{.str{color:#060}.kwd{color:#006;font-weight:bold}.com{color:#600;font-style:italic}.typ{color:#404;font-weight:bold}.lit{color:#044}.pun{color:#440}.pln{color:#000}.tag{color:#006;font-weight:bold}.atn{color:#404}.atv{color:#060}}
+/* Coda scheme ported from TextMate to google prettify */
+
+pre.prettyprint
+{
+    padding: 5px;
+    background: #E9EDF7;
+    border-left: 3px solid #9FB4E7;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+.codeContainer pre.prettyprint
+{
+    padding: 0;
+    border: 0;
+    background: 0;
+}
+
+pre .nocode { background-color: none; color: #000 }
+pre .str { color: #cc3300; } /* string */
+pre .kwd { color: #8C1751;} /* keyword */
+pre .com { color: #256D24; } /* comment */
+pre .typ { color: #606; } /* type */
+pre .lit { color: #066;} /* literal */
+pre .pun { color: #660 }    /* punctuation */
+pre .pln { color: #000 }    /* plaintext */
+pre .tag { color: #861681;} /* html/xml tag */
+pre .atn { color: #C5680C;} /* attribute name */
+pre .atv { color: #221AA6;} /* attribute value */
+pre .dec { color: #1F00FF; } /* decimal */
+
+/* Specify class=linenums on a pre to get line numbering */
+ol.linenums { margin-top: 0; margin-bottom: 0;
+color: #333; }
+/* IE indents via margin-left */
+li.L0,li.L1,li.L2,li.L3,li.L5,li.L6,li.L7,li.L8 {
+ list-style-type: none }
+/* Alternate shading for lines */
+li.L1,li.L3,li.L5,li.L7,li.L9 {background: #eee;}
