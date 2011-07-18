@@ -454,34 +454,32 @@
         },
 
         /**
-         * Selects a node.
-         * @param {Selector} node The node that should be selected.
+         * Gets/sets the selected node.
+         * @param {Selector} [node] The node that should be selected.
+         * @returns {Node} The currently selected node
          * @example
          * var treeview = $("TreeView").data("kendoTreeView");
          *
          * // select the node with id="firstItem"
          * treeview.select(document.getElementById("firstItem"));
+         *
+         * // get the currently selected node
+         * var selectedNode = treeview.select();
          */
         select: function (node) {
+            var element = this.element;
+
+            if (arguments.length == 0) {
+                return element.find(".t-state-selected").closest(NODE);
+            }
+
             node = $(node).closest(NODE);
 
             if (node.length) {
-                this.element.find(".t-in").removeClass("t-state-hover t-state-selected");
+                element.find(".t-in").removeClass("t-state-hover t-state-selected");
 
                 node.find(".t-in:first").addClass("t-state-selected");
             }
-        },
-
-        /**
-         * Returns the currently selected node.
-         * @returns {jQueryObject} - the currently selected node.
-         * @example
-         * var treeview = $("TreeView").data("kendoTreeView");
-         *
-         * var selectedItem = treeview.selected();
-         */
-        selected: function() {
-            return this.element.find(".t-state-selected").closest(NODE);
         },
 
         /**
