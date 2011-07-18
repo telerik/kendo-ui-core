@@ -720,15 +720,17 @@
                     }
 
                     return "<col />";
-                });
+                }),
+                groups = (that.dataSource.group() || []).length;
 
-            if(colgroup.length) {
+            if (colgroup.length) {
                 colgroup.remove();
             }
+
             colgroup = $("<colgroup></colgroup>").append($(new Array(groups + 1).join('<col class="t-group-col">') + cols.join("")));
-            
-            table.prepend(colgroup);            
-        },
+
+            table.prepend(colgroup);
+                    },
 
         _autoColumns: function(schema) {
             if (schema) {
@@ -850,7 +852,7 @@
                 colspan = groups + that.columns.length;
 
             kendo.ui.progress(that.element.parent(), false);
-            
+
             if (!that.columns.length) {
                 that._autoColumns(that._firstDataItem(data[0], groups));
                 colspan = groups + that.columns.length;
