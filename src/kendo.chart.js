@@ -3,12 +3,12 @@
     // Imports ================================================================
     var $ = jQuery,
         doc = document,
-        $t = $.telerik,
-        Class = $t.Class,
-        Component = $t.Component,
-        DataSource = $t.DataSource,
-        baseTemplate = $t.template,
-        format = function() { return $t.formatString.apply($t, arguments); },
+        kendo = window.kendo,
+        Class = kendo.Class,
+        Component = kendo.ui.Component,
+        DataSource = kendo.data.DataSource,
+        baseTemplate = kendo.template,
+        format = kendo.format,
         proxy = $.proxy;
 
     // Constants ==============================================================
@@ -71,7 +71,7 @@
 
             chart.options = deepExtend(
                 {},
-                theme ? Chart.Themes[theme] || Chart.Themes[theme.toLowerCase()] : { },
+                theme ? Chart.Themes[theme] || Chart.Themes[theme.toLowerCase()] : {},
                 options
             );
 
@@ -140,22 +140,42 @@
                 options = chart.options,
                 model = new RootElement(options.chartArea);
 
+            chart._model = model;
+
             if (options.title && options.title.visible && options.title.text) {
-                model.children.push(new Title(options.title));
+                model.append(new Title(options.title));
             }
 
             if (options.legend.visible) {
                 var legendOptions = deepExtend({}, options.legend,
                                     { series: options.series });
 
-                model.children.push(new Legend(legendOptions));
+                model.append(new Legend(legendOptions));
             }
 
-            model.children.push(new PlotArea(chart.options));
-            chart._model = model;
-
+            model.append(new PlotArea(chart.options));
             model.reflow();
-            model.getView().renderTo(chart.element[0]);
+
+            chart._viewElement = model.getView().renderTo(chart.element[0]);
+            chart._attachEvents();
+        },
+
+        _attachEvents: function() {
+            var chart = this,
+                viewElement = chart._viewElement,
+                model = chart._model,
+                id,
+                element;
+
+            $(viewElement).bind("mouseover", function(e) {
+                id = e.target.id;
+                if (id) {
+                    element = model.idMap[id];
+                    if (element) {
+
+                    }
+                }
+            });
         },
 
         _ensureSize: function() {
@@ -163,8 +183,6 @@
                 element = chart.element,
                 options = chart.options,
                 chartArea = options.chartArea;
-
-            options.categoryAxis = deepExtend({}, options.axisDefaults, options.categoryAxis);
 
             if (!chartArea.width) {
                 chartArea.width = element.width() || DEFAULT_WIDTH;
@@ -412,6 +430,16 @@
             return viewElements;
         },
 
+        registerId: function(id) {
+            var element = this,
+                root;
+
+            root = element.getRoot();
+            if (root) {
+                root.idMap[id] = element;
+            }
+        },
+
         translateChildren: function(dx, dy) {
             var element = this,
                 children = element.children,
@@ -420,13 +448,34 @@
 
             for (i = 0; i < childrenCount; i++) {
                 children[i].box.translate(dx, dy);
-        }
+            }
+        },
+
+        append: function() {
+            var element = this,
+                i,
+                length = arguments.length;
+
+            [].push.apply(element.children, arguments);
+
+            for (i = 0; i < length; i++) {
+                arguments[i].parent = element;
+            }
+        },
+
+        getRoot: function() {
+            var element = this,
+                parent = element.parent;
+
+            return parent ? parent.getRoot() : null;
         }
     });
 
     var RootElement = ChartElement.extend({
         init: function(options) {
             var root = this;
+
+            root.idMap = {};
 
             ChartElement.fn.init.call(root, options);
         },
@@ -486,6 +535,10 @@
         supportsSVG: function() {
             return doc.implementation.hasFeature(
                 "http://www.w3.org/TR/SVG11/feature#BasicStructure", "1.1");
+        },
+
+        getRoot: function() {
+            return this;
         }
     });
 
@@ -575,6 +628,7 @@
             var border = options.border || {},
                 elements = [
                     view.createRect(element.paddingBox, {
+                        id: options.id,
                         stroke: border.width ? border.color : "",
                         strokeWidth: border.width,
                         strokeOpacity: options.opacity,
@@ -626,7 +680,7 @@
                 text.box = new Box2D(
                     round(targetBox.x1 + margin, COORD_PRECISION), targetBox.y1,
                     round(targetBox.x2 - margin, COORD_PRECISION), targetBox.y1 + size.height);
-                }
+            }
 
             if (options.vAlign == CENTER) {
                 var margin = (targetBox.height() - size.height) /2;
@@ -648,6 +702,8 @@
             var text = this,
                 options = text.options;
 
+            ChartElement.fn.getViewElements.call(this, view);
+
             return [
                 view.createText(text.content, {
                     x: text.box.x1, y: text.box.y1,
@@ -664,7 +720,7 @@
 
             BoxElement.fn.init.call(textBox, options);
 
-            textBox.children.push(
+            textBox.append(
                 new Text(options.format ? format(options.format, content) : content,
                     deepExtend({ }, textBox.options, { align: LEFT, vAlign: TOP }))
             );
@@ -679,7 +735,7 @@
             var barLabel = this;
             ChartElement.fn.init.call(barLabel, options);
 
-            barLabel.children.push(new TextBox(content, barLabel.options));
+            barLabel.append(new TextBox(content, barLabel.options));
         },
 
         options: {
@@ -785,7 +841,7 @@
                     vAlign: options.position
                 });
 
-            title.children.push(
+            title.append(
                 new TextBox(options.text, textBoxOptions)
             );
         },
@@ -795,7 +851,7 @@
 
             ChartElement.fn.reflow.call(title, targetBox);
             title.box.snapTo(targetBox, X);
-            }
+        }
     });
 
     var Legend = ChartElement.extend({
@@ -833,7 +889,7 @@
                 var name = series[i].name,
                     label = new Text(name, legend.options.labels);
 
-                legend.children.push(label);
+                legend.append(label);
             }
         },
 
@@ -1177,10 +1233,10 @@
         init: function(seriesMin, seriesMax, options) {
             var axis = this,
                 autoOptions = {
-                min: axis.autoAxisMin(seriesMin, seriesMax),
+                    min: axis.autoAxisMin(seriesMin, seriesMax),
                     max: axis.autoAxisMax(seriesMin, seriesMax),
                     majorUnit: axis.autoMajorUnit(seriesMin, seriesMax)
-            };
+                };
 
             if(options && !options.majorUnit) {
                 if (options.min || options.max) {
@@ -1207,7 +1263,7 @@
                     labelOptions
                 );
 
-                axis.children.push(text);
+                axis.append(text);
 
                 currentValue = round(currentValue + options.majorUnit, DEFAULT_PRECISION);
             }
@@ -1473,7 +1529,7 @@
 
             for (var i = 0; i < options.categories.length; i++) {
                 var label = options.categories[i];
-                axis.children.push(new Text(label, labelOptions));
+                axis.append(new Text(label, labelOptions));
             }
         },
 
@@ -1484,7 +1540,7 @@
                 visible: false,
                 width: 1,
                 color: BLACK
-            },
+        },
             zIndex: 1
         },
 
@@ -1756,7 +1812,7 @@
             if (typeof borderColor === UNDEFINED) {
                 borderColor =
                     new Color(color).brightness(BAR_BORDER_BRIGHTNESS).toHex();
-        }
+            }
 
             return borderColor;
         }
@@ -1797,9 +1853,9 @@
         updateRange: function(value, categoryIx) {
             var chart = this;
 
-                if(typeof value !== UNDEFINED) {
-                    chart._seriesMin = Math.min(chart._seriesMin, value);
-                    chart._seriesMax = Math.max(chart._seriesMax, value);
+            if (typeof value !== UNDEFINED) {
+                chart._seriesMin = Math.min(chart._seriesMin, value);
+                chart._seriesMax = Math.max(chart._seriesMax, value);
             }
         },
 
@@ -1808,7 +1864,7 @@
 
             if (chart.points.length) {
                 return { min: chart._seriesMin, max: chart._seriesMax };
-                }
+            }
 
             return null;
         },
@@ -1918,7 +1974,7 @@
 
             if (labelOptions.visible && value) {
                 var label = new BarLabel(value, labelOptions);
-                bar.children.push(label);
+                bar.append(label);
             }
 
             barChart.points.push(bar);
@@ -1939,7 +1995,7 @@
 
                 if (!stackWrap) {
                     stackWrap = new ChartElement();
-                    cluster.children.push(stackWrap);
+                    cluster.append(stackWrap);
 
                     positiveStack = new StackLayout({
                         isVertical: options.isVertical
@@ -1948,19 +2004,19 @@
                         isVertical: options.isVertical,
                         isReversed: true
                     });
-                    stackWrap.children.push(positiveStack, negativeStack);
+                    stackWrap.append(positiveStack, negativeStack);
                 } else {
                     positiveStack = stackWrap.children[0];
                     negativeStack = stackWrap.children[1];
                 }
 
                 if (value > 0) {
-                    positiveStack.children.push(bar);
+                    positiveStack.append(bar);
                 } else {
-                    negativeStack.children.push(bar);
+                    negativeStack.append(bar);
                 }
             } else {
-                cluster.children.push(bar);
+                cluster.append(bar);
             }
         },
 
@@ -2004,7 +2060,7 @@
             for (i = 0; i < childrenLength; i++) {
                 children[i].reflow(categorySlots[i]);
             }
-                }
+       }
     });
 
     var ShapeElement = BoxElement.extend({
@@ -2036,7 +2092,8 @@
                 ], element.options);
             } else if (type === CIRCLE) {
                 element = view.createCircle([
-                    box.x1 + halfWidth, box.y1 + box.height() / 2
+                    round(box.x1 + halfWidth, COORD_PRECISION),
+                    round(box.y1 + box.height() / 2, COORD_PRECISION)
                 ], halfWidth, element.options);
             }
 
@@ -2065,7 +2122,7 @@
                 type: LINE_MARKER_SQUARE,
                 border: {
                     width: 1
-            },
+                },
                 opacity: 1
             },
             labels: {
@@ -2088,8 +2145,9 @@
                     new Color(markerBackground).brightness(BAR_BORDER_BRIGHTNESS).toHex();
             }
 
-            children.push(
+            point.append(
                 new ShapeElement({
+                    id: uniqueId(),
                     visible: markers.visible,
                     type: markers.type,
                     width: markers.size,
@@ -2097,10 +2155,7 @@
                     background: markerBackground,
                     border: markerBorder,
                     opacity: markers.opacity
-                })
-            );
-
-            children.push(
+                }),
                 new TextBox(point.value, deepExtend({
                     visible: labels.visible,
                     align: CENTER,
@@ -2160,7 +2215,16 @@
             label.reflow(box);
             label.box.alignTo(marker.box, edge);
             label.reflow(label.box);
-            }
+        },
+
+        getViewElements: function(view) {
+            var element = this,
+                marker = element.children[0];
+
+            element.registerId(marker.options.id);
+
+            return ChartElement.fn.getViewElements.call(element, view);
+        }
     });
 
     var LineChart = CategoricalChart.extend({
@@ -2216,7 +2280,7 @@
             if (isStacked) {
                 if (!categoryPoints) {
                     chart.categoryPoints[categoryIx] = categoryPoints = [];
-            }
+                }
 
                 stackPoint = categoryPoints[categoryPoints.length - 1];
                 if (stackPoint) {
@@ -2226,11 +2290,11 @@
                 point.plotValue = value + plotValue;
 
                 categoryPoints.push(point);
-                }
+            }
 
             chart.points.push(point);
             points.push(point);
-                children.push(point);
+            chart.append(point);
         },
 
         updateRange: function(value, categoryIx) {
@@ -2241,11 +2305,11 @@
 
             if (typeof value !== UNDEFINED) {
                 if (isStacked) {
-                        incrementSlot(totals, categoryIx, value);
-                        chart._seriesMin = Math.min(chart._seriesMin, sparseArrayMin(totals));
-                        chart._seriesMax = Math.max(chart._seriesMax, sparseArrayMax(totals));
-                    } else {
-                        CategoricalChart.fn.updateRange.apply(chart, arguments);
+                    incrementSlot(totals, categoryIx, value);
+                    chart._seriesMin = Math.min(chart._seriesMin, sparseArrayMin(totals));
+                    chart._seriesMax = Math.max(chart._seriesMax, sparseArrayMax(totals));
+                } else {
+                    CategoricalChart.fn.updateRange.apply(chart, arguments);
                 }
             }
         },
@@ -2277,18 +2341,18 @@
                 for (pointIx = 0; pointIx < pointCount; pointIx++) {
                     point = currentSeriesPoints[pointIx];
                     if (point) {
-                    linePoints.push(point.markerBox().center());
+                        linePoints.push(point.markerBox().center());
                     } else if (!interpolate) {
                         if (linePoints.length > 1) {
                             lines.push(chart.createLine(view, linePoints, currentSeries));
-                }
+                        }
                         linePoints = [];
                     }
                 }
 
                 if (linePoints.length > 1) {
                     lines.push(chart.createLine(view, linePoints, currentSeries));
-            }
+                }
             }
 
             return lines.concat(elements);
@@ -2301,7 +2365,7 @@
                 strokeOpacity: series.opacity,
                 fill: ""
             });
-            }
+        }
     });
 
     var PlotArea = ChartElement.extend({
@@ -2390,7 +2454,7 @@
                 charts.push(lineChart);
             }
 
-            [].push.apply(plotArea.children, charts);
+            plotArea.append.apply(plotArea, charts);
 
             plotArea.createAxes(range.min, range.max, invertAxes);
         },
@@ -2412,8 +2476,8 @@
             plotArea.axisX = invertAxes ? valueAxis : categoryAxis;
             plotArea.axisY = invertAxes ? categoryAxis : valueAxis;
 
-            plotArea.children.push(plotArea.axisY);
-            plotArea.children.push(plotArea.axisX);
+            plotArea.append(plotArea.axisY);
+            plotArea.append(plotArea.axisX);
         },
 
         reflow: function(targetBox) {
@@ -2495,7 +2559,7 @@
                                         options: options.majorGridLines
                                     };
                                 });
-        }
+                }
 
                 if (options.minorGridLines.visible) {
                     gridLines = gridLines.concat(
@@ -2530,7 +2594,7 @@
                             {
                                 strokeWidth: line.options.width,
                                 stroke: line.options.color
-    });
+                            });
                     } else {
                         return view.createLine(
                             linePos, lineStart, linePos, lineEnd,
@@ -2600,7 +2664,7 @@
 
             for (var i = 0, length = children.length; i < length; i++) {
                 children[i]._childIndex = i;
-        }
+            }
 
             return children.slice(0).sort(element.compareChildren);
         },
@@ -2617,7 +2681,7 @@
         },
 
         renderAttr: function (name, value) {
-            return value ? name + "='" + value + "' " : "";
+            return value ? " " + name + "='" + value + "' " : "";
         }
     });
 
@@ -2627,8 +2691,8 @@
 
             ViewElement.fn.init.call(view, options);
 
-            view.definitions = { };
-            view.decorators = [ ];
+            view.definitions = {};
+            view.decorators = [];
         },
 
         renderDefinitions: function() {
@@ -2640,7 +2704,7 @@
             for (definitionId in definitions) {
                 if (definitions.hasOwnProperty(definitionId)) {
                     output += definitions[definitionId].render();
-    }
+                }
             }
 
             return output;
@@ -2654,7 +2718,7 @@
 
             for (i = 0; i < length; i++) {
                 element = decorators[i].decorate(element);
-    }
+            }
 
             return element;
         }
@@ -2691,10 +2755,14 @@
 
         renderTo: function(container) {
             var view = this,
-                svgText = view.render();
+                svgText = view.render(),
+                viewElement;
 
             renderSVG(container, svgText);
-            view.alignToScreen(container.firstChild);
+            viewElement = container.firstChild;
+            view.alignToScreen(viewElement);
+
+            return viewElement;
         },
 
         renderDefinitions: function() {
@@ -2718,7 +2786,7 @@
                         [box.x1, box.y1], [box.x2, box.y1],
                         [box.x2, box.y2], [box.x1, box.y2], [box.x1, box.y1]
                     ],
-                style
+                    style
                 )
             );
         },
@@ -2763,7 +2831,8 @@
             group.template = SVGGroup.template;
             if (!group.template) {
                 group.template = SVGGroup.template =
-                    template("<g><#= d.renderContent() #></g>");
+                template("<g<#= d.renderAttr(\"id\", d.options.id) #>>" +
+                         "<#= d.renderContent() #></g>");
             }
         }
     });
@@ -2778,7 +2847,8 @@
             text.template = SVGText.template;
             if (!text.template) {
                 text.template = SVGText.template = template(
-                    "<text x='<#= Math.round(d.options.x) #>' " +
+                    "<text <#= d.renderAttr(\"id\", d.options.id) #> " +
+                    "x='<#= Math.round(d.options.x) #>' " +
                     "y='<#= Math.round(d.options.y + d.options.baseline) #>' " +
                     "style='font: <#= d.options.font #>' fill='<#= d.options.color #>'>" +
                     "<#= d.content #></text>"
@@ -2802,7 +2872,8 @@
             path.template = SVGPath.template;
             if (!path.template) {
                 path.template = SVGPath.template = template(
-                    "<path d='<#= d.renderPoints() #>' " +
+                    "<path <#= d.renderAttr(\"id\", d.options.id) #>" +
+                    "d='<#= d.renderPoints() #>' " +
                     "<#= d.renderStroke() #><#= d.renderStrokeWidth() #>" +
                     "stroke-linecap='square' " +
                     "fill-opacity='<#= d.options.fillOpacity #>' " +
@@ -2869,7 +2940,8 @@
             circle.template = SVGCircle.template;
             if (!circle.template) {
                 circle.template = SVGCircle.template = template(
-                    "<circle cx='<#= d.center[0] #>' cy='<#= d.center[1] #>' " +
+                    "<circle <#= d.renderAttr(\"id\", d.options.id) #> " +
+                    "cx='<#= d.center[0] #>' cy='<#= d.center[1] #>' " +
                     "r='<#= d.radius #>' " +
                     "<#= d.renderAttr(\"stroke\", d.options.stroke) #> " +
                     "<#= d.renderAttr(\"stroke-width\", d.options.strokeWidth) #>" +
@@ -2939,8 +3011,8 @@
                 overlay = Chart.Overlays[overlayName];
 
             if (!overlay) {
-        return element;
-    }
+                return element;
+            }
 
             var fill = overlay.fill,
                 fillRotation = element.options.normalAngle || 0,
@@ -3016,7 +3088,7 @@
                     "position: relative;'>" +
                     "<#= d.renderContent() #></div>"
                 );
-    }
+            }
         },
 
         options: {
@@ -3039,9 +3111,9 @@
         createRect: function(box, style) {
             return this.decorate(
                 new VMLPath(
-                [[box.x1, box.y1], [box.x2, box.y1],
-                [box.x2, box.y2], [box.x1, box.y2], [box.x1, box.y1]],
-                style
+                    [[box.x1, box.y1], [box.x2, box.y1],
+                    [box.x2, box.y2], [box.x1, box.y2], [box.x1, box.y1]],
+                    style
                 )
             );
         },
@@ -3076,7 +3148,8 @@
             text.template = VMLText.template;
             if (!text.template) {
                 text.template = VMLText.template = template(
-                    "<kvml:textbox style='position: absolute; " +
+                    "<kvml:textbox <#= d.renderAttr(\"id\", d.options.id) #> " +
+                    "style='position: absolute; " +
                     "left: <#= d.options.x #>px; top: <#= d.options.y #>px; " +
                     "font: <#= d.options.font #>; color: <#= d.options.color #>'>" +
                     "<#= d.content #></kvml:textbox>"
@@ -3100,7 +3173,8 @@
             path.template = VMLPath.template;
             if (!path.template) {
                 path.template = VMLPath.template = template(
-                    "<kvml:shape style='position:absolute; width:1px; height:1px;' " +
+                    "<kvml:shape <#= d.renderAttr(\"id\", d.options.id) #> " +
+                    "style='position:absolute; width:1px; height:1px;' " +
                     "coordorigin='0 0' coordsize='1 1'>" +
                         "<kvml:path v='<#= d.renderPoints() #> e' />" +
                         "<#= d.fill.render() + d.stroke.render() #>" +
@@ -3185,7 +3259,8 @@
             circle.template = VMLCircle.template;
             if (!circle.template) {
                 circle.template = VMLCircle.template = template(
-                    "<kvml:oval style='position:absolute; " +
+                    "<kvml:oval <#= d.renderAttr(\"id\", d.options.id) #> " +
+                            "style='position:absolute; " +
                             "width:<#= d.radius * 2 #>px; height:<#= d.radius * 2 #>px; " +
                             "top:<#= d.center[1] - d.radius #>px; " +
                             "left:<#= d.center[0] - d.radius #>px;' " +
@@ -3212,7 +3287,8 @@
             group.template = VMLGroup.template;
             if (!group.template) {
                 group.template = VMLGroup.template = template(
-                    "<div style='position: absolute; white-space: nowrap;'>" +
+                    "<div <#= d.renderAttr(\"id\", d.options.id) #>" +
+                    "style='position: absolute; white-space: nowrap;'>" +
                     "<#= d.renderContent() #></div>"
                 );
             }
@@ -3487,7 +3563,7 @@
                 propValue = source[property];
                 if (typeof propValue === OBJECT && propValue !== null && propValue.constructor !== Array) {
                     if (typeof(destination[property]) === OBJECT) {
-                    destination[property] = destination[property] || {};
+                        destination[property] = destination[property] || {};
                     } else {
                         destination[property] = {};
                     }
@@ -3718,31 +3794,31 @@
     Chart.Overlays = {
         glass: {
             fill: {
-        type: "linear",
-        rotation: 0,
-        stops: [{
-            offset: 0,
-            color: WHITE,
-            opacity: 0
-        }, {
-            offset: 0.1,
-            color: WHITE,
-            opacity: 0
-        }, {
-            offset: 0.25,
-            color: WHITE,
-            opacity: 0.4
-        }, {
-            offset: 0.92,
-            color: WHITE,
-            opacity: 0
-        }, {
-            offset: 1,
-            color: WHITE,
-            opacity: 0
-        }]
+                type: "linear",
+                rotation: 0,
+                stops: [{
+                    offset: 0,
+                    color: WHITE,
+                    opacity: 0
+                }, {
+                    offset: 0.1,
+                    color: WHITE,
+                    opacity: 0
+                }, {
+                    offset: 0.25,
+                    color: WHITE,
+                    opacity: 0.4
+                }, {
+                    offset: 0.92,
+                    color: WHITE,
+                    opacity: 0
+                }, {
+                    offset: 1,
+                    color: WHITE,
+                    opacity: 0
+                }]
+            }
         }
-    }
     };
 
     function template(definition) {
@@ -3789,638 +3865,60 @@
         slots[index] = (slots[index] || 0) + value;
     }
 
+    function uniqueId() {
+        var id = "k", i;
+
+        for (i = 0; i < 16; i++) {
+            id += (Math.random() * 16 | 0).toString(16);
+        }
+
+        return id;
+    }
+
     // Exports ================================================================
 
-    $t.scripts.push("telerik.chart.js");
+    kendo.ui.plugin("Chart", Chart);
 
-    $t.chart = function (element, options) {
-        var wrapper = this;
-        wrapper.element = element;
-
-        $t.bind(wrapper.element, {
-            load: options.onLoad
-        });
-
-        wrapper._chart = new Chart(element, options);
-        wrapper.options = wrapper._chart.options;
-    };
-
-    $t.chart.prototype = {
-        refresh: function() {
-            var wrapper = this,
-                chart = wrapper._chart;
-
-            chart.options = wrapper.options;
-            chart.refresh();
-        }
-    };
-
-    $.fn.tChart = function(options) {
-        return $t.create(this, {
-            name: "tChart",
-            init: function(element, options) {
-                return new $t.chart(element, options);
-            },
-            options: options
-        });
-    };
-
-    $.fn.tChart.defaults = {
-    };
-
-    // Themes =================================================================
-    Chart.Themes = {
-        black: {
-            title: {
-                color: WHITE
-            },
-            legend: {
-                labels: {
-                    font: SANS12,
-                    color: WHITE
-                }
-            },
-            seriesDefaults: {
-                labels: {
-                    font: SANS12,
-                    color: WHITE
-                }
-            },
-            chartArea: {
-                background: "#4f4f4f",
-                border: {
-                    color: "#222222",
-                    width: 1
-                }
-            },
-            seriesColors: ["#f9a319", "#1edee2", "#9eda29", "#ffce00", "#dd007f"],
-            categoryAxis: {
-                line: {
-                    color: WHITE
-                },
-                labels: {
-                    color: WHITE
-                },
-                majorGridLines: {
-                    color: "#854324",
-                    visible: true
-                }
-            },
-            valueAxis: {
-                line: {
-                    color: WHITE
-                },
-                labels: {
-                    color: WHITE
-                },
-                majorGridLines: {
-                    color: "#854324"
-                }
-            }
-        },
-        "default": {
-            seriesDefaults: {
-                labels: {
-                    font: SANS12
-                }
-            },
-            seriesColors: ["#f6921e", "#d6de23", "#8bc53f", "#26a9e0", "#9e1f63"],
-            categoryAxis: {
-                majorGridLines: {
-                    color: "#aaa",
-                    visible: true
-                }
-            },
-            valueAxis: {
-                majorGridLines: {
-                    color: "#aaa"
-                }
-            }
-        },
-        forest: {
-            seriesDefaults: {
-                labels: {
-                    font: SANS12
-                }
-            },
-            chartArea: {
-                background: "#d1deb6",
-                border: {
-                    color: "#222222",
-                    width: 1
-                }
-            },
-            seriesColors: ["#4d7924", "#6dba3a", "#efab22", "#f05a28", "#603813"],
-            categoryAxis: {
-                majorGridLines: {
-                    color: "#a7bc75",
-                    visible: true
-                }
-            },
-            valueAxis: {
-                majorGridLines: {
-                    color: "#a7bc75"
-                }
-            }
-        },
-        hay: {
-            seriesDefaults: {
-                labels: {
-                    font: SANS12
-                }
-            },
-            chartArea: {
-                background: "#ececd8",
-                border: {
-                    color: "#bbb99d",
-                    width: 1
-                }
-            },
-            seriesColors: ["#205b02", "#61c407", "#9cd65f", "#bbbe94", "#323323"],
-            categoryAxis: {
-                majorGridLines: {
-                    color: "#bfbdac",
-                    visible: true
-                }
-            },
-            valueAxis: {
-                majorGridLines: {
-                    color: "#bfbdac"
-                }
-            }
-        },
-        office2007: {
-            seriesDefaults: {
-                labels: {
-                    font: SANS12
-                }
-            },
-            seriesColors: ["#99c62a", "#27adcc", "#2477c9", "#7042b2", "#d83636"],
-            categoryAxis: {
-                majorGridLines: {
-                    color: "#868686",
-                    visible: true
-                }
-            },
-            valueAxis: {
-                majorGridLines: {
-                    color: "#868686"
-                }
-            }
-        },
-        office2010black: {
-            title: {
-                color: WHITE
-            },
-            legend: {
-                labels: {
-                    color: WHITE
-                }
-            },
-            seriesDefaults: {
-                labels: {
-                    font: SANS12,
-                    color: WHITE
-                }
-            },
-            chartArea: {
-                background: "#6f6f6f",
-                border: {
-                    color: "#4b4b4b",
-                    width: 1
-                }
-            },
-            seriesColors: ["#99c62a", "#27adcc", "#2477c9", "#7042b2", "#d83636"],
-            categoryAxis: {
-                line: {
-                    color: WHITE
-                },
-                labels: {
-                    color: WHITE
-                },
-                majorGridLines: {
-                    color: "#999",
-                    visible: true
-                }
-            },
-            valueAxis: {
-                line: {
-                    color: WHITE
-                },
-                labels: {
-                    color: WHITE
-                },
-                majorGridLines: {
-                    color: "#999"
-                }
-            }
-        },
-        office2010blue: {
-            title: {
-                color: "#384e73"
-            },
-            legend: {
-                labels: {
-                    color: "#384e73"
-                }
-            },
-            seriesDefaults: {
-                labels: {
-                    font: SANS12,
-                    color: "#384e73"
-                }
-            },
-            chartArea: {
-                border: {
-                    color: "#688caf",
-                    width: 1
-                }
-            },
-            seriesColors: ["#99c62a", "#27adcc", "#2477c9", "#7042b2", "#d83636"],
-            categoryAxis: {
-                line: {
-                    color: "#384e73"
-                },
-                labels: {
-                    color: "#384e73"
-                },
-                majorGridLines: {
-                    color: "#d1dbe5",
-                    visible: true
-                }
-            },
-            valueAxis: {
-                line: {
-                    color: "#384e73"
-                },
-                labels: {
-                    color: "#384e73"
-                },
-                majorGridLines: {
-                    color: "#d1dbe5"
-                }
-            }
-        },
-        office2010silver: {
-            title: {
-                color: "#3b3b3b"
-            },
-            legend: {
-                labels: {
-                    font: SANS12,
-                    color: "#3b3b3b"
-                }
-            },
-            seriesDefaults: {
-                labels: {
-                    font: SANS12,
-                    color: "#3b3b3b"
-                }
-            },
-            chartArea: {
-                border: {
-                    color: "#a4abb2",
-                    width: 1
-                }
-            },
-            seriesColors: ["#99c62a", "#27adcc", "#2477c9", "#7042b2", "#d83636"],
-            categoryAxis: {
-                line: {
-                    color: "#3b3b3b"
-                },
-                labels: {
-                    color: "#3b3b3b"
-                },
-                majorGridLines: {
-                    color: "#dbdfe4",
-                    visible: true
-                }
-            },
-            valueAxis: {
-                line: {
-                    color: "#3b3b3b"
-                },
-                labels: {
-                    color: "#3b3b3b"
-                },
-                majorGridLines: {
-                    color: "#dbdfe4"
-                }
-            }
-        },
-        outlook: {
-            seriesDefaults: {
-                labels: {
-                    font: SANS12
-                }
-            },
-            chartArea: {
-                background: "#d6e5f3",
-                border: {
-                    color: "#688caf",
-                    width: 1
-                }
-            },
-            seriesColors: ["#231f20", "#1b75bb", "#7da5e0", "#f9ec31", "#faaf40"],
-            categoryAxis: {
-                majorGridLines: {
-                    color: "#7da5e0",
-                    visible: true
-                }
-            },
-            valueAxis: {
-                majorGridLines: {
-                    color: "#7da5e0"
-                }
-            }
-        },
-        simple: {
-            seriesDefaults: {
-                labels: {
-                    font: SANS12
-                }
-            },
-            chartArea: {
-                border: {
-                    color: "#aaaaaa",
-                    width: 1
-                }
-            },
-            seriesColors: ["#231f20", "#404041", "#58595b", "#808184", "#929497"],
-            categoryAxis: {
-                majorGridLines: {
-                    color: "#d1d1d1",
-                    visible: true
-                }
-            },
-            valueAxis: {
-                majorGridLines: {
-                    color: "#d1d1d1"
-                }
-            }
-        },
-        sitefinity: {
-            seriesDefaults: {
-                labels: {
-                    font: SANS12
-                }
-            },
-            chartArea: {
-                border: {
-                    color: "#aaaaaa",
-                    width: 1
-                }
-            },
-            seriesColors: ["#a2d5e2", "#95b979", "#f9d67b", "#ea9d73", "#f19ca8", "#d06c6c"],
-            categoryAxis: {
-                line: {
-                    color: "#989898"
-                },
-                majorGridLines: {
-                    color: "#e2e2e2",
-                    visible: true
-                }
-            },
-            valueAxis: {
-                line: {
-                    color: "#989898"
-                },
-                majorGridLines: {
-                    color: "#e2e2e2"
-                }
-            }
-        },
-        sunset: {
-            title: {
-                color: "#854324"
-            },
-            legend: {
-                labels: {
-                    font: SANS12,
-                    color: "#854324"
-                }
-            },
-            seriesDefaults: {
-                labels: {
-                    font: SANS12,
-                    color: "#854324"
-                }
-            },
-            chartArea: {
-                background: "#ececd8",
-                border: {
-                    color: "#bbb99d",
-                    width: 1
-                }
-            },
-            seriesColors: ["#3f1c12", "#ba3b01", "#d95a1a", "#e7931e", "#f9bc12"],
-            categoryAxis: {
-                line: {
-                    color: "#854324"
-                },
-                labels: {
-                    color: "#854324"
-                },
-                majorGridLines: {
-                    color: "#bbb99d",
-                    visible: true
-                }
-            },
-            valueAxis: {
-                line: {
-                    color: "#854324"
-                },
-                labels: {
-                    color: "#854324"
-                },
-                majorGridLines: {
-                    color: "#bbb99d"
-                }
-            }
-        },
-        telerik: {
-            seriesDefaults: {
-                labels: {
-                    font: SANS12
-                }
-            },
-            chartArea: {
-                border: {
-                    color: "#aaaaaa",
-                    width: 1
-                }
-            },
-            seriesColors: ["#7e7e7e", "#cbcbcb", "#a2ea8b", "#63ac39", "#000000"],
-            categoryAxis: {
-                line: {
-                    color: "#828282"
-                },
-                majorGridLines: {
-                    color: "#c6c6c6",
-                    visible: true
-                }
-            },
-            valueAxis: {
-                line: {
-                    color: "#828282"
-                },
-                majorGridLines: {
-                    color: "#c6c6c6"
-                }
-            }
-        },
-        transparent: {
-            seriesDefaults: {
-                labels: {
-                    font: SANS12
-                },
-                opacity: 0.6
-            },
-            chartArea: {
-                background: "",
-                border: {
-                    color: "#c5c5c5",
-                    width: 1
-                }
-            },
-            seriesColors: ["#f2f2f2", "#4d4d4d", "#d4d4d4", "#0d0d0d", "#999999"],
-            categoryAxis: {
-                line: {
-                    color: "#828282"
-                },
-                majorGridLines: {
-                    color: "#c5c5c5",
-                    visible: true
-                }
-            },
-            valueAxis: {
-                line: {
-                    color: "#828282"
-                },
-                majorGridLines: {
-                    color: "#c6c6c6"
-                }
-            }
-        },
-        vista: {
-            seriesDefaults: {
-                labels: {
-                    font: SANS12
-                }
-            },
-            chartArea: {
-                border: {
-                    color: "#a7bac5",
-                    width: 1
-                }
-            },
-            seriesColors: ["#83abc0", "#64d6f4", "#3399ff", "#03597a", "#000000"],
-            categoryAxis: {
-                line: {
-                    color: "#333333"
-                },
-                majorGridLines: {
-                    color: "#d3d3d3",
-                    visible: true
-                }
-            },
-            valueAxis: {
-                line: {
-                    color: "#333333"
-                },
-                majorGridLines: {
-                    color: "#d3d3d3"
-                }
-            }
-        },
-        web20: {
-            seriesDefaults: {
-                labels: {
-                    font: SANS12
-                }
-            },
-            chartArea: {
-                border: {
-                    color: "#829cbf",
-                    width: 1
-                }
-            },
-            seriesColors: ["#0e4302", "#64ba36", "#a0beea", "#3460b9", "#2c4072"],
-            categoryAxis: {
-                line: {
-                    color: "#4e75b3"
-                },
-                majorGridLines: {
-                    color: "#cfd9e7",
-                    visible: true
-                }
-            },
-            valueAxis: {
-                line: {
-                    color: "#4e75b3"
-                },
-                majorGridLines: {
-                    color: "#cfd9e7"
-                }
-            }
-        },
-        webblue: {
-            seriesDefaults: {
-                labels: {
-                    font: SANS12
-                }
-            },
-            chartArea: {
-                border: {
-                    color: "#768ca5",
-                    width: 1
-                }
-            },
-            seriesColors: ["#a2b3c7", "#76c8e8", "#358db0", "#426682", "#2d3d4f"],
-            categoryAxis: {
-                line: {
-                    color: "#426682"
-                },
-                majorGridLines: {
-                    color: "#d0d8dd",
-                    visible: true
-                }
-            },
-            valueAxis: {
-                line: {
-                    color: "#426682"
-                },
-                majorGridLines: {
-                    color: "#d0d8dd"
-                }
-            }
-        },
-        windows7: {
-            seriesDefaults: {
-                labels: {
-                    font: SANS12
-                }
-            },
-            chartArea: {
-                border: {
-                    color: "#a5b3c5",
-                    width: 1
-                }
-            },
-            seriesColors: ["#a5b3c5", "#82afe5", "#358db0", "#03597a", "#152435"],
-            categoryAxis: {
-                majorGridLines: {
-                    color: "#dae2e8",
-                    visible: true
-                }
-            },
-            valueAxis: {
-                majorGridLines: {
-                    color: "#dae2e8"
-                }
-            }
-        }
-    };
+    Chart.Box2D = Box2D;
+    Chart.Text = Text;
+    Chart.BarLabel = BarLabel;
+    Chart.ChartElement = ChartElement;
+    Chart.RootElement = RootElement;
+    Chart.BoxElement = BoxElement;
+    Chart.TextBox = TextBox;
+    Chart.NumericAxis = NumericAxis;
+    Chart.CategoryAxis = CategoryAxis;
+    Chart.Bar = Bar;
+    Chart.BarChart = BarChart;
+    Chart.ShapeElement = ShapeElement;
+    Chart.LinePoint = LinePoint;
+    Chart.LineChart = LineChart;
+    Chart.ClusterLayout = ClusterLayout;
+    Chart.StackLayout = StackLayout;
+    Chart.Title = Title;
+    Chart.Legend = Legend;
+    Chart.PlotArea = PlotArea;
+    Chart.ViewElement = ViewElement;
+    Chart.SVGView = SVGView;
+    Chart.SVGGroup = SVGGroup;
+    Chart.SVGText = SVGText;
+    Chart.SVGPath = SVGPath;
+    Chart.SVGCircle = SVGCircle;
+    Chart.SVGOverlayDecorator = SVGOverlayDecorator;
+    Chart.SVGPaintDecorator = SVGPaintDecorator;
+    Chart.VMLView = VMLView;
+    Chart.VMLText = VMLText;
+    Chart.VMLPath = VMLPath;
+    Chart.VMLCircle = VMLCircle;
+    Chart.VMLGroup = VMLGroup;
+    Chart.VMLOverlayDecorator = VMLOverlayDecorator;
+    Chart.VMLLinearGradient = VMLLinearGradient;
+    Chart.VMLStroke = VMLStroke;
+    Chart.VMLFill = VMLFill;
+    Chart.deepExtend = deepExtend;
+    Chart.Color = Color;
+    Chart.blendColors = blendColors;
+    Chart.blendGradient = blendGradient;
 
 })();
 
