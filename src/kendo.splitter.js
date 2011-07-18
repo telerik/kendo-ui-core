@@ -6,7 +6,6 @@
         splitBarSize = 7,
         pxUnitsRegex = /^\d+px$/i,
         percentageUnitsRegex = /^\d+(\.\d+)?%$/i,
-        INIT = "init",
         EXPAND = "expand",
         COLLAPSE = "collapse",
         CONTENTLOAD = "contentLoad",
@@ -59,7 +58,7 @@
             splitbarSelector = ".t-splitbar-draggable-" + that.orientation;
             that.ajaxOptions = that.options.ajaxOptions || that.ajaxOptions;
 
-            that.bind([INIT, EXPAND, COLLAPSE, CONTENTLOAD, RESIZE], that.options);
+            that.bind([EXPAND, COLLAPSE, CONTENTLOAD, RESIZE], that.options);
             that.bind(RESIZE, $.proxy(that._resize, that));
 
             that._initPanes();

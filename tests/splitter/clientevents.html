@@ -26,20 +26,6 @@
                 }
             });
 
-            test("initialization triggers init", function() {
-                var triggered = false;
-
-                $(getSplitterHtml())
-                    .appendTo(document.body)
-                    .kendoSplitter({
-                        init:  function() {
-                            triggered = true;
-                        }
-                    });
-
-                ok(triggered);
-            });
-
             test("initialization triggers resize", function() {
                 var triggered = false;
 
