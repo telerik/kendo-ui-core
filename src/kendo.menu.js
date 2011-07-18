@@ -7,39 +7,7 @@
         Component = ui.Component,
         OPEN = "open",
         CLOSE = "close",
-        events = [
-            /**
-             * Fires before a sub menu gets opened.
-             * @name kendo.ui.Menu#open
-             * @event
-             * @param {Event} e
-             * @param {Item} e.item The opened item
-             */
-            OPEN,
-            /**
-             * Fires after a sub menu gets closed.
-             * @name kendo.ui.Menu#close
-             * @event
-             * @param {Event} e
-             * @param {Item} e.item The closed item
-             */
-            CLOSE,
-            /**
-             * Fires when a menu item gets selected.
-             * @name kendo.ui.Menu#select
-             * @event
-             * @param {Event} e
-             * @param {Item} e.item The selected item
-             */
-            "select",
-            /**
-             * Fires when the menu gets initialized.
-             * @name kendo.ui.Menu#init
-             * @event
-             * @param {Event} e
-             */
-            "init"
-        ],
+        SELECT = "select",
         MOUSEENTER = "mouseenter",
         MOUSELEAVE = "mouseleave",
         CLICK = "click",
@@ -49,7 +17,7 @@
         KENDOPOPUP = "kendoPopup",
         DEFAULTSTATE = "t-state-default",
         DISABLEDSTATE = "t-state-disabled",
-        disabledSelector = '.t-item.t-state-disabled',
+        disabledSelector = ".t-item.t-state-disabled",
         itemSelector = ".t-item:not(.t-state-disabled)",
         linkSelector = ".t-item:not(.t-state-disabled) > .t-link";
 
@@ -109,7 +77,32 @@
 
             $(document).click($.proxy( that._documentClick, that ));
 
-            that.bind(events, that.options);
+            that.bind([
+                /**
+                 * Fires before a sub menu gets opened.
+                 * @name kendo.ui.Menu#open
+                 * @event
+                 * @param {Event} e
+                 * @param {Item} e.item The opened item
+                 */
+                OPEN,
+                /**
+                 * Fires after a sub menu gets closed.
+                 * @name kendo.ui.Menu#close
+                 * @event
+                 * @param {Event} e
+                 * @param {Item} e.item The closed item
+                 */
+                CLOSE,
+                /**
+                 * Fires when a menu item gets selected.
+                 * @name kendo.ui.Menu#select
+                 * @event
+                 * @param {Event} e
+                 * @param {Item} e.item The selected item
+                 */
+                SELECT
+            ], that.options);
         },
         options: {
             animation: {
@@ -306,7 +299,7 @@
                     var ul = li.find(".t-group:first:hidden"), popup;
 
                     if (ul[0]) {
-                        li.data('zIndex', li.css('z-index'));
+                        li.data("zIndex", li.css("z-index"));
                         li.css("z-index", that.nextItemZIndex ++);
 
                         popup = ul.data(KENDOPOPUP);
@@ -350,8 +343,8 @@
                 li.data(TIMER, setTimeout(function () {
                     var ul = li.find(".t-group:first:visible"), popup;
                     if (ul[0]) {
-                        li.css("z-index", li.data('z-index'));
-                        li.removeData('z-index');
+                        li.css("z-index", li.data("z-index"));
+                        li.removeData("z-index");
 
                         popup = ul.data(KENDOPOPUP);
                         popup.close();
@@ -420,7 +413,7 @@
                 item
                     .contents()      // exclude groups, real links, templates and empty text nodes
                     .filter(function() { return (!(this.nodeName.toLowerCase() in { ul: {}, a: {}, div: {} }) && !(this.nodeType == 3 && !$.trim(this.nodeValue))); })
-                    .wrapAll('<span class="t-link"/>');
+                    .wrapAll("<span class='t-link'/>");
 
             that._updateArrow(item);
             that._updateFirstLast(item);
@@ -437,7 +430,7 @@
                     var item = $(this),
                         parent = item.parent().parent();
 
-                    item.append('<span class="t-icon ' + (parent.hasClass("t-menu-horizontal") ? "t-arrow-down" : "t-arrow-next") + '"></span>');
+                    item.append("<span class='t-icon " + (parent.hasClass("t-menu-horizontal") ? "t-arrow-down" : "t-arrow-next") + "'></span>");
                 });
         },
 
@@ -493,7 +486,7 @@
                 return;
             }
 
-            that.trigger("select", { item: element[0] });
+            that.trigger(SELECT, { item: element[0] });
 
             if (!element.parent().hasClass("t-menu") || !that.options.openOnClick)
                 return;
