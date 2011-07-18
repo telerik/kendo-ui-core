@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+    <head>
+        <!-- meta -->
+        <!-- meta -->
+        <title>Binding to rempote data</title>
+        <!-- script -->
+        <script src="../../../src/jquery.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.data.js"></script>
+        <!-- script -->
+        <!-- css -->
+        <link href="../styles/examples.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.common.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.web20.css" rel="stylesheet"/>
+        <!-- css -->
+    </head>
+    <body>
+        <!-- nav -->
+        <!-- nav -->
+        <!-- description -->
+        <div class="description">Binding to remote data</div>
+        <!-- description -->
+        <div id="example">
+            <style scoped>
+                .tweet
+                {
+                    vertical-align: top;
+                    padding: 10px;
+                    border: 1px solid black;
+                    margin: 10px 0;
+                    -webkit-border-radius: 10px;
+                    -moz-border-radius: 10px;
+                    border-radius: 10px;
+                }
+                #results
+                {
+                    overflow: auto;
+                    height: 400px;
+                }
+            </style>
+            <label>Show tweets for:<input type="text" value="html5" id="searchFor" /></label><button class="t-button" id="search">search</button>
+            <div id="results">
+                <div>Loading ... </div>
+            </div>
+            <script id="template" type="text/x-kendo-template">
+                <div class="tweet t-header">
+                    <img width="48" height="48" src="<#= profile_image_url #>" alt="<#= from_user #>" />
+                    <#= text #>
+                    <div class="text">
+                        <a class="t-link" href="http://twitter.com/<#= from_user #>"><#= from_user #></a>
+                        <#= kendo.toString(new Date(Date.parse(created_at)), "dd MMM HH:mm") #>
+                    </div>
+                </div>
+            </script>
+            <script>
+                // create a template using the above definition
+                var template = kendo.template($("#template").html());
+
+                var dataSource = new kendo.data.DataSource({
+                    transport: {
+                        read: {
+                            url: "http://search.twitter.com/search.json", // the remove service url
+                            dataType: "jsonp", // JSONP (JSON with padding) is required for cross-domain AJAX
+                            data: { //additional parameters sent to the remote service
+                                q: function() {
+                                    return $("#searchFor").val();
+                                }
+                            }
+                        }
+                    },
+                    schema: { // describe the result format
+                        data: "results" // the data which the data source will be bound to is in the "results" field
+                    },
+                    change: function() { // subscribe to the CHANGE event of the data source
+                        $("#results").html(kendo.render(template, this.view()));
+                    }
+                });
+
+                // read data from the remote service
+                dataSource.read();
+
+                $("#search").click(function() {
+                    dataSource.read();
+                });
+
+                $("#searchFor").keydown(function(e) {
+                    if (e.keyCode === kendo.keys.ENTER) {
+                        dataSource.read();
+                    }
+                });
+            </script>
+        </div>
+        <!-- tools -->
+        <!-- tools -->
+    </body>
+</html>
+
+
