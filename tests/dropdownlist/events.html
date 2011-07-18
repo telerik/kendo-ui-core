@@ -206,18 +206,6 @@
                 ok(origCalled);
             });
 
-            test("raise init event when load dropdownlist", function() {
-                input.kendoDropDownList({
-                    dataSource: [{text: "foo"}, {text: "bar"}],
-                    init: function() {
-                        ok(true);
-                        start();
-                    }
-                });
-
-                stop(300);
-            });
-
             test("open event when click arrow", function() {
                 input.kendoDropDownList({
                     dataSource: [{text: "foo"}, {text: "bar"}],

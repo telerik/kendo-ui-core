@@ -1343,8 +1343,6 @@
                 $(this).each(function() {
                     var comp = new component(this, options);
                     $(this).data(name, comp);
-
-                    comp.trigger("init");
                 });
                 return this;
             }

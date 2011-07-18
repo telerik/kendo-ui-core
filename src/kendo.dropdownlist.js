@@ -31,7 +31,7 @@
 
             that._dataSource();
 
-            that.bind(["init", CHANGE], that.options);
+            that.bind([CHANGE], that.options);
 
             if (that.element.prop("disabled")) {
                 that.options.enable = false;

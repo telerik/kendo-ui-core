@@ -51,7 +51,7 @@
 
             that.dataSource = DataSource.create(that.options.dataSource || {}).bind(CHANGE, proxy(that.refresh, that));
 
-            that.bind(["init", CHANGE], that.options);
+            that.bind([CHANGE], that.options);
 
             that._template();
 

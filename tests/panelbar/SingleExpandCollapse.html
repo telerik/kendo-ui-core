@@ -8,9 +8,9 @@
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.fx.js"></script>
         <script src="../../src/kendo.panelbar.js"></script>
-        <script type="text/javascript" src="../jquery.mockjax.js"></script>
+        <script src="../jquery.mockjax.js"></script>
         <link rel="stylesheet" href="../qunit.css" />
-        <style type="text/css">
+        <style>
             html
             {
                 font-size: 12px;
@@ -25,13 +25,13 @@
                 margin-left: 7px;
             }
         </style>
-        <link type="text/css" href="../../styles/kendo.common.css" rel="stylesheet"/>
-        <link type="text/css" href="../../styles/kendo.vista.css" rel="stylesheet"/>
+        <link href="../../styles/kendo.common.css" rel="stylesheet"/>
+        <link href="../../styles/kendo.vista.css" rel="stylesheet"/>
 
    <script type="text/javascript">
 
         function getRootItem(index) {
-			return $('#PanelBar1').find('.t-header').parent().eq(index)
+            return $('#PanelBar1').find('.t-header').parent().eq(index)
         }
 
         function getPanelBar() {
@@ -39,7 +39,7 @@
         }
 
         $(document).ready(function() {
-            $("#PanelBar1").kendoPanelBar({ animation: false, expandMode: 0 });
+            $("#PanelBar1").kendoPanelBar({ animation: false, expandMode: "single" });
         });
 
    </script>

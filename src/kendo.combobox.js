@@ -32,7 +32,7 @@
 
             that._dataSource();
 
-            that.bind(["init", CHANGE], that.options);
+            that.bind([CHANGE], that.options);
 
             that.input.bind({
                 keydown: proxy(that._keydown, that),
