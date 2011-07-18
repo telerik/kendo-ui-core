@@ -296,6 +296,16 @@
                 ok(cols.eq(0).hasClass("t-group-col"));
                 ok(cols.eq(1).hasClass("t-group-col"));
             });
+
+            test("colspan of group cell when grouping is disabled initial grouped grid with auto columns", function() {
+                var dataSource = new DataSource({
+                    data: [{foo: "foo", bar: "bar"}, {foo: "foo1", bar: "baz"}],
+                    group: [{field: "foo"}]
+                }),
+                grid = new Grid(table(), { dataSource: dataSource });
+
+                equal(grid.tbody.find("tr>td:first").attr("colspan"), 3);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

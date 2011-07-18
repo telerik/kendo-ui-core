@@ -864,6 +864,7 @@
             
             if (!that.columns.length) {
                 that._autoColumns(that._firstDataItem(data[0], groups));
+                colspan = groups + that.columns.length;
             }
 
             that._group = groups > 0 || that._group;
