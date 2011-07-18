@@ -120,11 +120,6 @@
                     if (title != "Overview") {
                         $("#codeStrip, .skinSelector.t-widget").show();
 
-                        var link = $("#nav .t-link[href*='" + /[^\/]+\/[^\/]+?$/.exec(href)[0] + "']")
-                                .addClass("t-state-selected");
-
-                        $("#nav").data('kendoPanelBar').expand(link.parent().parents(".t-item"));
-
                         $(".description").empty().html($.trim(Application.description(html)));
                     } else {
                         $("#nav .t-item > .t-link").eq(0).addClass("t-state-selected");
@@ -264,16 +259,6 @@
                 sessionStorage.setItem("kendoSkin", newSkin);
             });
 
-            setTimeout(function () {
-                $(".headerBack").animate({
-                    top: 0,
-                    height: 180
-                }, 400);
-                $("#header").animate({
-                    marginTop: 0,
-                    height: 200
-                }, 400);
-            }, 2000);
         }
 
     };
