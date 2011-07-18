@@ -112,6 +112,10 @@
                     same(pointHeights, [1, 2]);
                 });
 
+                test("sets series on points", function() {
+                    same(lineChart.points[0].options.series, lineChart.options.series[0]);
+                });
+
                 // ------------------------------------------------------------
                 module("Line Chart / Negative Values", {
                     setup: function() {

@@ -121,6 +121,10 @@
                     same(barHeights, [1, 2]);
                 });
 
+                test("sets series on bars", function() {
+                    same(series.points[0].options.series, series.options.series[0]);
+                });
+
                 // ------------------------------------------------------------
                 module("Bar Chart / Negative Values", {
                     setup: function() {

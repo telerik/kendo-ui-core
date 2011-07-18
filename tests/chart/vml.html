@@ -157,6 +157,12 @@
                     equals(circle.options.strokeWidth, 2);
                 });
 
+                test("renderTo returns DOM element", function() {
+                    var container = $("<div />").appendTo(document.body);
+                    equals(view.renderTo(container[0]), container[0].firstChild);
+                    container.remove();
+                });
+
                 // ------------------------------------------------------------
                 module("VML View / Decorators", {
                     setup: function() {
