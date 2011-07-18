@@ -5,12 +5,17 @@
         extend = $.extend,
         template = kendo.template,
         Component = ui.Component,
-        events = [ "expand", "collapse", "select", "error", "init", "contentLoad" ],
+        EXPAND = "expand",
+        COLLAPSE = "collapse",
+        SELECT = "select",
+        ERROR = "error",
+        CONTENTLOAD = "contentLoad",
         MOUSEENTER = "mouseenter",
         MOUSELEAVE = "mouseleave",
         CLICK = "click",
-        clickableItems = ".t-item:not(.t-state-disabled) .t-link",
-        disabledItems = ".t-item.t-state-disabled .t-link",
+        ITEM = ".t-item",
+        clickableItems = ITEM + ":not(.t-state-disabled) .t-link",
+        disabledItems = ITEM + ".t-state-disabled .t-link",
         activeClass = ".t-state-active",
         selectedClass = ".t-state-selected",
         disabledClass = ".t-state-disabled",
@@ -19,10 +24,7 @@
         VISIBLE = ":visible",
         EMPTY = ":empty",
         animating = false,
-        expandModes = {
-            "single": 0,
-            "multi": 1
-        };
+        SINGLE = "single";
 
     var PanelBar = Component.extend({
         init: function(element, options) {
@@ -42,10 +44,10 @@
 
             element
                 .delegate(clickableItems, CLICK, $.proxy(that._click, that))
-				.delegate(clickableItems, MOUSEENTER + " " + MOUSELEAVE, that._toggleHover)
+                .delegate(clickableItems, MOUSEENTER + " " + MOUSELEAVE, that._toggleHover)
                 .delegate(disabledItems, CLICK, false);
 
-            that.bind(events, that.options);
+            that.bind([ EXPAND, COLLAPSE, SELECT, ERROR, CONTENTLOAD ], that.options);
 
             if (that.options.contentUrls)
                 element.find("> .t-item")
@@ -69,7 +71,7 @@
                     hide: true
                 }
             },
-            expandMode: 1
+            expandMode: "multiple"
         },
 
         expand: function (element, useAnimation) {
@@ -81,10 +83,10 @@
                 item = $(item);
                 if (!item.hasClass(disabledClass) && item.find("> .t-group, > .t-content").length > 0) {
 
-                    if (that.options.expandMode == expandModes.single && that._collapseAllExpanded(item))
+                    if (that.options.expandMode == SINGLE && that._collapseAllExpanded(item))
                         return;
 
-                    $(highlightedClass, element).removeClass(highlightedClass.substr(1));
+                    element.find(highlightedClass).removeClass(highlightedClass.substr(1));
                     item.addClass(highlightedClass.substr(1));
 
                     if (!useAnimation) {
@@ -126,28 +128,31 @@
         },
 
         toggle: function (element, enable) {
-            $(element).each(function () {
-                $(this)
-                    .toggleClass(defaultState, enable)
-				    .toggleClass(disabledClass.substr(1), !enable);
-            });
+            $(element)
+                .toggleClass(defaultState, enable)
+                .toggleClass(disabledClass.substr(1), !enable);
         },
 
         select: function (element) {
             var that = this;
 
+            if (arguments.length === 0) {
+                return that.element.find('.t-item > ' + selectedClass).parent();
+            }
+
             $(element).each(function (index, item) {
                 item = $(item);
                 var link = item.children(".t-link");
-                
-                if (item.is(disabledClass))
+
+                if (item.is(disabledClass)) {
                     return;
+                }
 
                 $(selectedClass, that.element).removeClass(selectedClass.substr(1));
                 $(highlightedClass, that.element).removeClass(highlightedClass.substr(1));
 
                 link.addClass(selectedClass.substr(1));
-                link.parentsUntil(that.element, ".t-item").filter(":has(.t-header)").addClass(highlightedClass.substr(1));
+                link.parentsUntil(that.element, ITEM).filter(":has(.t-header)").addClass(highlightedClass.substr(1));
             });
         },
 
@@ -206,12 +211,12 @@
             element = $(element);
 
             var that = this,
-                parent = element.parentsUntil(that.element, ".t-item"),
+                parent = element.parentsUntil(that.element, ITEM),
                 group = element.parent("ul");
 
             element.remove();
 
-            if (group && !group.children(".t-item").length) {
+            if (group && !group.children(ITEM).length) {
                 group.remove();
             }
 
@@ -223,18 +228,14 @@
             }
         },
 
-        getSelectedItem: function () {
-            return this.element.find('.t-item > ' + selectedClass).parent();
-        },
-
         _insert: function (item, referenceItem, parent) {
             var plain = $.isPlainObject(item),
                 items,
                 groupData = {
-                                firstLevel: parent.hasClass("t-panelbar"),
-                                expanded: parent.parent().hasClass("t-state-active"),
-                                length: parent.children().length
-                            };
+                    firstLevel: parent.hasClass("t-panelbar"),
+                    expanded: parent.parent().hasClass("t-state-active"),
+                    length: parent.children().length
+                };
 
             if (!parent.length) {
                 parent = $(PanelBar.renderGroup({ group: groupData })).appendTo(referenceItem);
@@ -259,8 +260,9 @@
         _toggleHover: function(e) {
             var target = $(e.currentTarget);
 
-            if (!target.parents("li" + disabledClass).length)
+            if (!target.parents("li" + disabledClass).length) {
                 target.toggleClass("t-state-hover", e.type == MOUSEENTER);
+            }
         },
 
         _updateClasses: function() {
@@ -281,7 +283,7 @@
             items.each(function () {
                 that._updateItemClasses(this);
             });
-            
+
             that._updateArrow(items);
             that._updateFirstLast(items);
         },
@@ -332,7 +334,7 @@
 
         _updateArrow: function (items) {
             items = $(items);
-            
+
             items.find(".t-icon").remove();
 
             items
@@ -348,7 +350,7 @@
 
         _updateFirstLast: function (items) {
             items = $(items);
-            
+
             items.filter(".t-first:not(:first-child)").removeClass("t-first");
             items.filter(".t-last:not(:last-child)").removeClass("t-last");
             items.filter(":first-child").addClass("t-first");
@@ -367,13 +369,13 @@
                 return;
 
             var link = target.closest(".t-link"),
-                item = link.closest(".t-item");
+                item = link.closest(ITEM);
 
             $(selectedClass, element).removeClass(selectedClass.substr(1));
             $(highlightedClass, element).removeClass(highlightedClass.substr(1));
 
             link.addClass(selectedClass.substr(1));
-            link.parentsUntil(that.element, ".t-item").filter(":has(.t-header)").addClass(highlightedClass.substr(1));
+            link.parentsUntil(that.element, ITEM).filter(":has(.t-header)").addClass(highlightedClass.substr(1));
 
             var contents = item.find("> .t-content, > .t-group"),
                 href = link.attr("href"),
@@ -382,7 +384,7 @@
             if (contents.data("animating"))
                 return;
 
-            if (that._triggerEvent("select", item)) {
+            if (that._triggerEvent(SELECT, item)) {
                 e.preventDefault();
             }
 
@@ -391,14 +393,14 @@
             else
                 return;
 
-            if (that.options.expandMode == expandModes.single)
+            if (that.options.expandMode == SINGLE)
                 if (that._collapseAllExpanded(item))
                     return;
 
             if (contents.length) {
                 var visibility = contents.is(VISIBLE);
 
-                if (!that._triggerEvent(!visibility ? "expand" : "collapse", item))
+                if (!that._triggerEvent(!visibility ? EXPAND : COLLAPSE, item))
                     that._toggleItem(item, visibility, e);
             }
         },
@@ -443,13 +445,13 @@
 
             element
                 .parent()
-	            .toggleClass(defaultState, visibility)
-				.toggleClass(activeClass.substr(1), !visibility)
-				.find("> .t-link > .t-icon")
-					.toggleClass("t-arrow-up", !visibility)
-					.toggleClass("t-panelbar-collapse", !visibility)
-					.toggleClass("t-arrow-down", visibility)
-					.toggleClass("t-panelbar-expand", visibility);
+                .toggleClass(defaultState, visibility)
+                .toggleClass(activeClass.substr(1), !visibility)
+                .find("> .t-link > .t-icon")
+                    .toggleClass("t-arrow-up", !visibility)
+                    .toggleClass("t-panelbar-collapse", !visibility)
+                    .toggleClass("t-arrow-down", visibility)
+                    .toggleClass("t-panelbar-expand", visibility);
 
             element
                 .kendoStop(true, true)
@@ -496,7 +498,7 @@
                 data: data,
 
                 error: function (xhr, status) {
-                    if (that.trigger("error", { xhr: xhr, status: status }))
+                    if (that.trigger(ERROR, { xhr: xhr, status: status }))
                         this.complete();
                 },
 
@@ -509,7 +511,7 @@
                     contentElement.html(data);
                     that._toggleGroup(contentElement, isVisible);
 
-                    that.trigger("contentLoad", { item: element[0], contentElement: contentElement[0] });
+                    that.trigger(CONTENTLOAD, { item: element[0], contentElement: contentElement[0] });
                 }
             });
         },

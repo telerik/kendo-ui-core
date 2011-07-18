@@ -81,8 +81,8 @@
                     </ul>
                 </li>
             </ul>
-            <script type="text/javascript">
 
+            <script>
                 var getItem = function (target) {
                     var itemIndexes = $(target).prev().val().split(/[.,]/),
                         rootItem = panelBar.element.children("li").eq(itemIndexes[0]);
@@ -97,40 +97,41 @@
                 });
 
                 $(".toggleItem").click( function (e) {
-                    var item = panelBar.getSelectedItem();
+                    var item = panelBar.select();
 
                     panelBar.enable(item, item.hasClass("t-state-disabled"));
                 });
 
                 $(".triggerItem").click( function (e) {
-                    var item = panelBar.getSelectedItem();
+                    var item = panelBar.select();
 
-                    if (item.hasClass("t-state-active"))
+                    if (item.hasClass("t-state-active")) {
                         panelBar.collapse(item);
-                    else
+                    } else {
                         panelBar.expand(item);
+                    }
                 });
 
                 $(".removeItem").click( function (e) {
-                    panelBar.remove(panelBar.getSelectedItem());
+                    panelBar.remove(panelBar.select());
                 });
 
                 $(".appendItem").click( function (e) {
                     panelBar.append({
                             text: $(e.target).prev().val()
-                        }, panelBar.getSelectedItem());
+                        }, panelBar.select());
                 });
 
                 $(".beforeItem").click( function (e) {
                     panelBar.insertBefore({
                             text: $(e.target).prev().val()
-                        }, panelBar.getSelectedItem());
+                        }, panelBar.select());
                 });
 
                 $(".afterItem").click( function (e) {
                     panelBar.insertAfter({
                             text: $(e.target).prev().val()
-                        }, panelBar.getSelectedItem());
+                        }, panelBar.select());
                 });
 
                 var panelBar = $("#PanelBar1").kendoPanelBar().css({ marginRight: "220px" }).data("kendoPanelBar");

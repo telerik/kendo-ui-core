@@ -65,8 +65,7 @@
                     show: false,
                     hide: true
                 }
-            },
-            expandMode: "multi"
+            }
         },
 
         select: function (element) {
