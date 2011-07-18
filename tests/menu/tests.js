@@ -1,10 +1,10 @@
 tests.push(
     {
-        page: "menu/clientAPI.html",
+        page: "menu/api.html",
         title: "menu api"
     },
     {
-        page: "menu/clientEvents.html",
+        page: "menu/events.html",
         title: "menu events"
     },
     {

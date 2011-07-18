@@ -1,6 +1,6 @@
 tests.push(
     {
-        page: "tabstrip/ClientAPI.html",
+        page: "tabstrip/api.html",
         title: "tabstrip api"
     },
     {

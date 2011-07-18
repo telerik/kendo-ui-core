@@ -12,8 +12,8 @@ tests.push(
         title: "dropdownlist events"
     },
     {
-        page: "dropdownlist/clientapi.html",
-        title: "dropdownlist client api"
+        page: "dropdownlist/api.html",
+        title: "dropdownlist api"
     },
     {
         page: "dropdownlist/searching.html",
