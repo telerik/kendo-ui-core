@@ -48,12 +48,20 @@
                 overflow: "hidden"
             });
             that.content = element.children().first();
-            that.wrapper = that.content.wrap('<div class="t-virtual-scrollable-wrap"/>').parent();
+            that.wrapper = that.content.wrap('<div class="t-virtual-scrollable-wrap"/>')
+                                .parent().bind("DOMMouseScroll, mousewheel", proxy(that._wheelScroll, that));
             that.verticalScrollbar = $('<div class="t-scrollbar t-scrollbar-vertical" />')
                                         .css({
                                             width: scrollbar
                                         }).appendTo(element)
                                         .bind("scroll", proxy(that._scroll, that));
+        },
+
+        _wheelScroll: function(e) {
+            var that = this,
+                scrollTop = that.verticalScrollbar.scrollTop();
+            e.preventDefault();
+            that.verticalScrollbar.scrollTop(scrollTop + e.wheelDelta * -1);
         },
 
         _scroll: function(e) {
@@ -730,7 +738,7 @@
             colgroup = $("<colgroup></colgroup>").append($(new Array(groups + 1).join('<col class="t-group-col">') + cols.join("")));
 
             table.prepend(colgroup);
-                    },
+        },
 
         _autoColumns: function(schema) {
             if (schema) {
