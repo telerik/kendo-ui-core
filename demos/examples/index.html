@@ -44,20 +44,25 @@
         <div id="box">
             <div class="headerBack">
                 <div class="headerGradient"></div>
+                <div class="flowers"></div>
             </div>
             <div class="centerBox">
-                <div id="header"></div>
-                <script type="text/javascript">
-                    if (location.href.substr(-1) == "/")
-                        setTimeout(function () {
-                            $(".headerBack").animate({ top: 0, height: 180 }, 400);
-                            $("#header").animate({ marginTop: 0, height: 200 }, 400);
-                        }, 2000);
-                    else {
-                        $(".headerBack").css({ top: 0, height: 180 });
-                        $("#header").css({ marginTop: 0, height: 200 });
-                    }
-                </script>
+                <div id="header">
+                    <ul id="navi">
+                        <li><a title="Home" href="/">KendoUI</a></li>
+                        <li><span>Demo</span></li>
+                        <li><a title="" href="#roadmap">Roadmap</a></li>
+                        <li class="download-beta"><a title="" href="#download-beta">Download Beta</a></li>
+                    </ul>
+                    <a id="logo" class="logoLink" title="Home" href="/"></a>
+                    <ul id="categories">
+                        <li><a class="selected">Overview</a></li>
+                        <li><a>Framework</a></li>
+                        <li><a>UI Components</a></li>
+                        <li><a>Styling</a></li>
+                        <li><a>Integration</a></li>
+                    </ul>
+                </div>
                 <ul id="nav">
                     <li>
                         <a href="overview/index.html">Overview</a>

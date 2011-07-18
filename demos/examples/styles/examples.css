@@ -22,24 +22,34 @@ body
 
 .headerBack
 {
+    overflow: hidden;
     position: absolute;
     width: 100%;
-    top: 78px;
+    top: -15px;
     left: 0;
-    height: 239px;
+    height: 185px;
     background-color: #ef652a;
     border-bottom: 1px solid #be5e35;
 }
 
 .headerGradient
 {
+    position: relative;
+    z-index: 2;
     height: 139px;
     background-color: transparent;
     background-position: 0 -761px;
     background-repeat: repeat-x;
-    -webkit-box-shadow: 0 2px 3px #792D0E;
-    -moz-box-shadow: 0 2px 3px #792D0E;
-    box-shadow: 0 2px 3px #792D0E;
+    -webkit-box-shadow: 0 0 4px #555;
+    -moz-box-shadow: 0 0 4px #555;
+    box-shadow: 0 0 4px #555;
+}
+
+.flowers
+{
+    height: 100px;
+    width: 100%;
+    background: transparent url("../img/flowers.png") no-repeat 50% 0;
 }
 
 #header, #footer
@@ -52,8 +62,9 @@ body
 
 #header {
     width: 100%;
-    margin-top: 110px;
-    height: 240px;
+    margin-top: 78px;
+    height: 93px;
+    position: relative;
 }
 
 #footer {
@@ -92,6 +103,143 @@ body
     color: #808080;
 }
 
+#navi,
+#logo
+{
+    position: relative;
+    z-index: 3;
+}
+
+#logo
+{
+    margin: 0;
+    padding: 8px 0 6px;
+}
+
+.logoLink
+{
+    background: transparent url("../img/kendo-logo.png") 0 8px no-repeat;
+    width: 139px;
+    height: 30px;
+    display: block;
+}
+
+#navi
+{
+    float: right;
+    margin: 15px 0 0;
+}
+
+#navi li,
+#categories li
+{
+    float: left;
+    list-style: none outside none;
+    margin: 0 0 0 38px;
+}
+
+#navi a,
+#navi span
+{
+    font-size: 14px;
+    color: #2E2E2E;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+#navi a:hover
+{
+    color: #4E4E4E;
+}
+
+#navi span
+{
+    color: #ef652a;
+    cursor: default;
+}
+
+.download-beta
+{
+    position: relative;
+    top: -5px;
+}
+
+.download-beta a
+{
+    background: #4C4C4C url("../img/bg-glossy.png") no-repeat 0 100%;
+    background-image: url("../img/bg-glossy.png"), -moz-linear-gradient(center top, #4C4C4C 0%, #2E2E2E 100%);
+    background-image: url("../img/bg-glossy.png"), -webkit-linear-gradient(center top, #4C4C4C 0%, #2E2E2E 100%);
+    background-image: url("../img/bg-glossy.png"), -o-linear-gradient(center top, #4C4C4C 0%, #2E2E2E 100%);
+    background-image: url("../img/bg-glossy.png"), -ms-linear-gradient(center top, #4C4C4C 0%, #2E2E2E 100%);
+    background-image: url("../img/bg-glossy.png"), -webkit-gradient(linear, center top, center bottom, color-stop(0%,#4C4C4C), color-stop(100%, #2E2E2E));
+    border-radius: 5px;
+    cursor: pointer;
+    display: block;
+    padding: 5px 16px 6px 15px;
+    text-decoration: none;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+}
+
+.download-beta a:hover
+{
+    background: #6C6C6C url("../img/bg-glossy.png") no-repeat 0 100%;
+    background-image: url("../img/bg-glossy.png"), -moz-linear-gradient(center top, #6C6C6C 0%, #4E4E4E 100%);
+    background-image: url("../img/bg-glossy.png"), -webkit-linear-gradient(center top, #6C6C6C 0%, #4E4E4E 100%);
+    background-image: url("../img/bg-glossy.png"), -o-linear-gradient(center top, #6C6C6C 0%, #4E4E4E 100%);
+    background-image: url("../img/bg-glossy.png"), -ms-linear-gradient(center top, #6C6C6C 0%, #4E4E4E 100%);
+    background-image: url("../img/bg-glossy.png"), -webkit-gradient(linear, center top, center bottom, color-stop(0%,#6C6C6C), color-stop(100%, #4E4E4E));
+}
+
+#navi .download-beta a
+{
+    color: #FFFFFF;
+}
+
+#categories
+{
+    float: left;
+    height: 47px;
+    margin: 2px 0 0;
+    padding: 0;
+    width: 100%;
+    line-height: 46px;
+    vertical-align: middle;
+    border-left: 1px solid #d75b26;
+    border-right: 1px solid #f28455;
+}
+
+#categories li
+{
+    margin: 0;
+    width: 20%;
+    height: 100%;
+    font-size: 18px;
+    color: #FFF;
+}
+
+#categories li a
+{
+    text-indent: 20px;
+    display: block;
+    height: 100%;
+    cursor: pointer;
+    border-left: 1px solid #f28455;
+    border-right: 1px solid #d75b26;
+}
+
+#categories li a:hover
+{
+    background-color: #f17c4a;
+    background-color: rgba(255, 156, 106, .5);
+}
+
+#categories li a.selected,
+#categories li a.selected:hover
+{
+    background: #FFF;
+    color: #2e2e2e;
+}
+
 #nav
 {
     display: inline-block;
@@ -99,7 +247,7 @@ body
     width: 190px;
     text-align: left;
     margin-right: 8px;
-    margin-top: 10px;
+    margin-top: 30px;
 }
 
 #content
@@ -218,7 +366,7 @@ pre.prettyprint
 
 #exampleHead
 {
-    margin-top: 10px;
+    margin-top: 30px;
     margin-left: 200px;
     height: 24px;
 }
