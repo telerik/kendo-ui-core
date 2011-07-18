@@ -13,7 +13,7 @@
         <!-- css -->
         <link href="../styles/examples.css" rel="stylesheet"/>
         <link href="../../../styles/kendo.common.css" rel="stylesheet"/>
-        <link href="../../../styles/kendo.web20.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.blueopal.css" rel="stylesheet"/>
         <!-- css -->
     </head>
     <body>
@@ -39,33 +39,33 @@
 
             <script>
                 $("#disableNode").click(function() {
-                    var selectedNode = treeview.selected();
-                        
+                    var selectedNode = treeview.select();
+
                     treeview.enable(selectedNode, false);
                 });
-                
+
                 $("#enableAllNodes").click(function() {
-                    var selectedNode = treeview.selected();
-                        
+                    var selectedNode = treeview.select();
+
                     treeview.enable(".t-item");
                 });
-                
+
                 $("#removeNode").click(function() {
-                    var selectedNode = treeview.selected();
-                        
+                    var selectedNode = treeview.select();
+
                     treeview.remove(selectedNode);
                 });
 
                 $("#expandAllNodes").click(function() {
                     treeview.expand(".t-item");
                 });
-                
+
                 $("#collapseAllNodes").click(function() {
                     treeview.collapse(".t-item");
                 });
-                
+
                 $("#appendNodeToSelected").click(function() {
-                    var selectedNode = treeview.selected();
+                    var selectedNode = treeview.select();
 
                     // passing a falsy value as the second append() parameter
                     // will append the new node to the root group
