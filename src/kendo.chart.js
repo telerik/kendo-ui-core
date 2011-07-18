@@ -247,7 +247,7 @@
     // Themes
     // **************************
     Chart.Themes = {
-        default: {
+        "default": {
             seriesColors: ["#d7df23", "#adc32b", "#799b28", "#4c7520"]
         }
     };
