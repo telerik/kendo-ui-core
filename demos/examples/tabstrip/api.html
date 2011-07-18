@@ -79,13 +79,13 @@
                 });
 
                 $(".toggleTab").click(function(e) {
-                    var tab = tabStrip.getSelectedTab();
+                    var tab = tabStrip.select();
 
                     tabStrip.enable(tab, tab.hasClass("t-state-disabled"));
                 });
 
                 $(".removeItem").click( function (e) {
-                    var tab = tabStrip.getSelectedTab(),
+                    var tab = tabStrip.select(),
                         otherTab = tab.next();
                     otherTab = otherTab.length ? otherTab : tab.prev();
 
@@ -102,13 +102,13 @@
                 $(".beforeItem").click( function (e) {
                     tabStrip.insertBefore({
                             text: $(e.target).prev().val()
-                        }, tabStrip.getSelectedTab());
+                        }, tabStrip.select());
                 });
 
                 $(".afterItem").click( function (e) {
                     tabStrip.insertAfter({
                             text: $(e.target).prev().val()
-                        }, tabStrip.getSelectedTab());
+                        }, tabStrip.select());
                 });
 
                 var tabStrip = $("#TabStrip1").kendoTabStrip().css({ marginRight: "220px" }).data("kendoTabStrip");

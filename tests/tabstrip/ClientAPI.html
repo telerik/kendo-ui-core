@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>kendo.ui.panelbar Tests</title>
+        <title>TabStrip API</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit.js"></script>
         <script src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.fx.js"></script>
         <script src="../../src/kendo.tabstrip.js"></script>
-        <script type="text/javascript" src="../jquery.mockjax.js"></script>
+        <script src="../jquery.mockjax.js"></script>
         <link rel="stylesheet" href="../qunit.css" />
-        <link type="text/css" href="../../styles/kendo.common.css" rel="stylesheet"/>
-        <link type="text/css" href="../../styles/kendo.vista.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="../../styles/kendo.common.css" />
+        <link rel="stylesheet" href="../../styles/kendo.vista.css" />
 
         <script type="text/javascript">
 
@@ -33,7 +33,7 @@
                 isRaised = true;
                 onLoadTabStrip = $('#TabStrip1').data('kendoTabStrip');
             }
-            
+
             $(document).ready(function() {
                 $("#TabStrip1").kendoTabStrip({ animation: false, select: Select });
             });
@@ -46,28 +46,13 @@
 
 <div class="t-widget t-tabstrip t-header" id="TabStrip1" style="visibility: hidden; position: absolute;">
     <ul class="t-reset t-tabstrip-items">
-        <li class="t-item t-state-default t-state-active"><a class="t-link" href="#TabStrip1-1"><img alt="image"
-                                                                                                    class="t-image"
-                                                                                                    src="../../playground/Icons/Suites/mvc.png">ASP.NET
-            MVC</a></li>
-        <li class="t-item t-state-default"><a class="t-link" href="#TabStrip1-2"><img alt="image" class="t-image"
-                                                                                     src="../../playground/Icons/Suites/sl.png">Silverlight</a>
-        </li>
-        <li class="t-item t-state-default"><a class="t-link" href="#TabStrip1-3"><img alt="image" class="t-image"
-                                                                                     src="../../playground/Icons/Suites/ajax.png">ASP.NET
-            AJAX</a></li>
-        <li class="t-item t-state-default"><a class="t-link" href="#TabStrip1-4"><img alt="image" class="t-image"
-                                                                                     src="../../playground/Icons/Suites/orm.png">OpenAccess
-            ORM</a></li>
-        <li class="t-item t-state-default"><a class="t-link" href="#TabStrip1-5"><img alt="image" class="t-image"
-                                                                                     src="../../playground/Icons/Suites/rep.png">Reporting</a>
-        </li>
-        <li class="t-item t-state-default"><a class="t-link" href="#TabStrip1-6"><img alt="image" class="t-image"
-                                                                                     src="../../playground/Icons/Suites/sitefinity.png">Sitefinity
-            ASP.NET CMS</a></li>
-        <li class="t-item t-state-default"><a class="t-link" href="http://www.google.com"><img alt="image" class="t-image"
-                                                                                     src="../../playground/Icons/Suites/sitefinity.png">Sitefinity
-            ASP.NET CMS</a></li>
+        <li class="t-item t-state-default t-state-active"><a class="t-link" href="#TabStrip1-1"><img alt="image" class="t-image" src="../../playground/Icons/Suites/mvc.png">ASP.NET MVC</a></li>
+        <li class="t-item t-state-default"><a class="t-link" href="#TabStrip1-2"><img alt="image" class="t-image" src="../../playground/Icons/Suites/sl.png">Silverlight</a></li>
+        <li class="t-item t-state-default"><a class="t-link" href="#TabStrip1-3"><img alt="image" class="t-image" src="../../playground/Icons/Suites/ajax.png">ASP.NET AJAX</a></li>
+        <li class="t-item t-state-default"><a class="t-link" href="#TabStrip1-4"><img alt="image" class="t-image" src="../../playground/Icons/Suites/orm.png">OpenAccess ORM</a></li>
+        <li class="t-item t-state-default"><a class="t-link" href="#TabStrip1-5"><img alt="image" class="t-image" src="../../playground/Icons/Suites/rep.png">Reporting</a></li>
+        <li class="t-item t-state-default"><a class="t-link" href="#TabStrip1-6"><img alt="image" class="t-image" src="../../playground/Icons/Suites/sitefinity.png">Sitefinity ASP.NET CMS</a></li>
+        <li class="t-item t-state-default"><a class="t-link" href="http://www.google.com"><img alt="image" class="t-image" src="../../playground/Icons/Suites/sitefinity.png">Sitefinity ASP.NET CMS</a></li>
     </ul>
     <div class="t-content t-state-active" id="TabStrip1-1" style="display: block;">
         <ul>
@@ -140,22 +125,22 @@
 </div>
 
     <script type="text/javascript">
-        
+
         function getRootItem(index) {
             return $('#TabStrip1').find('.t-item').eq(index)
         }
-        
+
         function getTabStrip() {
             return $("#TabStrip1").data("kendoTabStrip");
         }
 
         test('clicking item with url should navigate', function() {
-            
+
             var tabstrip = getTabStrip();
             var $item = $(getRootItem(6));
 
             var e = new $.Event('click');
-                        
+
             $item.find('> .t-link').trigger(e);
 
             ok(!e.isDefaultPrevented());
@@ -176,19 +161,19 @@
             ok(!isRaised);
         });
 
-        test('reload method should call ajaxRequest', function() { 
+        test('reload method should call ajaxRequest', function() {
             var tabstrip = getTabStrip();
             var isCalled = false;
             var $item = $(getRootItem(4));
 
             $item.find('> .t-link').data('ContentUrl', 'fake');
             tabstrip.ajaxRequest = function () { isCalled = true; };
-            
+
             tabstrip.reload($item);
 
             ok(isCalled);
         });
-    
+
         test('clicking should raise onSelect event', function() {
 
             var item = getRootItem(2);
@@ -249,9 +234,9 @@
 
         test('getContentElement should return content of seventh tab', function() {
             var tabstrip = getTabStrip();
-            
+
             var expectedContent = $(tabstrip.element).find('> .t-content').eq(6); //second content under Tab-7
-            
+
             equal($(tabstrip.getContentElement(6)).index(), expectedContent.index());
         });
 
@@ -273,14 +258,14 @@
             var item = getRootItem(0);
             tabstrip.select(item);
 
-            equal(tabstrip.getSelectedTabIndex(), $(item).index());
+            equal(tabstrip.select()[0], item[0]);
         });
 
         test('getSelectedTab should return negative if no selected tabs', function() {
             var tabstrip = getTabStrip();
             tabstrip.element.find('.t-state-active').removeClass('t-state-active').addClass('t-state-default');
 
-            equal(tabstrip.getSelectedTabIndex(), -1);
+            equal(tabstrip.select().length, 0);
         });
 
         test('click should raise select event and pass corresponding content', function() {
@@ -301,7 +286,6 @@
         });
 
         test('animated text-only content is opened on load', function() {
-            
             equals($('#TabStrip1 .t-content').css('opacity'), '1');
         });
 
