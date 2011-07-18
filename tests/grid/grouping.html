@@ -284,6 +284,18 @@
                 equal(columns[0].field, "foo");
                 equal(columns[1].field, "bar");
             })
+
+            test("col elemens are generated for every group cell", function() {
+                var dataSource = new DataSource({
+                    data: [{foo: "foo", bar: "bar"}, {foo: "foo1", bar: "baz"}],
+                    group: [{field: "foo"}, {field: "bar"}]
+                }),
+                grid = new Grid(table(), { dataSource: dataSource, scrollable: false });
+
+                var cols = grid.table.find("col");
+                ok(cols.eq(0).hasClass("t-group-col"));
+                ok(cols.eq(1).hasClass("t-group-col"));
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

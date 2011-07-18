@@ -715,26 +715,30 @@
 
             that._scrollable();
             
-            that._intializeCols(that.thead.parent());
-            that._intializeCols(that.table);
+            that._updateCols();
         },
 
-        _intializeCols: function(table) {
+        _updateCols: function() {
             var that = this,
-                colgroup = table.find("colgroup").empty(),
+                table = that.thead.parent().add(that.table),
+                colgroup = table.find("colgroup"),
+                width,
                 cols = map(that.columns, function(column) {
-                    if(column.width) {
-                        return kendo.format('<col style="width:{0}"/>', column.width);
+                    width = column.width;
+                    if(width && parseInt(width) != 0) {
+                        return kendo.format('<col style="width:{0}"/>', width);
                     }
 
                     return "<col />";
-                });                
+                }),
+                groups = (that.dataSource.group() || []).length;                
 
-            if(!colgroup.length) {
-                colgroup = $("<colgroup></colgroup>").prependTo(table);
+            if(colgroup.length) {
+                colgroup.remove();
             }
-
-            $(cols.join("")).appendTo(colgroup);
+            colgroup = $("<colgroup></colgroup>").append($(new Array(groups + 1).join('<col class="t-group-col">') + cols.join("")));
+            
+            table.prepend(colgroup);            
         },
 
         _autoColumns: function(schema) {
@@ -857,7 +861,7 @@
                 colspan = groups + that.columns.length;
 
             kendo.ui.progress(that.element.parent(), false);
-
+            
             if (!that.columns.length) {
                 that._autoColumns(that._firstDataItem(data[0], groups));
             }
@@ -867,6 +871,7 @@
             if(that._group) {
                 that._templates();
                 that._updateHeader(groups);
+                that._updateCols();
                 that._group = groups > 0;
             }
 
