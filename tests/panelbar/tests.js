@@ -1,6 +1,6 @@
 tests.push(
     {
-        page: "panelbar/ClientAPI.html",
+        page: "panelbar/api.html",
         title: "panelbar api"
     },
     {
@@ -12,7 +12,7 @@ tests.push(
         title: "panelbar selection"
     },
     {
-        page: "panelbar/SingleExpandClientAPI.html",
+        page: "panelbar/SingleExpandApi.html",
         title: "panelbar single expand/collapse api"
     },
     {

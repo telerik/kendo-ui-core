@@ -12,8 +12,8 @@ tests.push(
         title: "combobox searching"
     },
     {
-        page: "combobox/clientapi.html",
-        title: "combobox client api"
+        page: "combobox/api.html",
+        title: "combobox api"
     },
     {
         page: "combobox/events.html",
