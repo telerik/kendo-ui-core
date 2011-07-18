@@ -575,7 +575,7 @@
                 if (!field) {
                    field = th.text().replace(/\s|[^A-z0-9]/g, "");
                 }
-                
+
                 return {
                     field: field,
                     template: th.data("template"),
@@ -646,19 +646,9 @@
 
                 rowTemplate += "</tr>";
 
-                return kendo.template(rowTemplate, settings);
-            } else {
-                rowTemplate = kendo.template(rowTemplate, settings);
-
-                return function(data) {
-                    var html = start;
-
-                    if (groups > 0) {
-                        html += groupCells(groups);
-                    }
-                    return html + '<td colspan="' + that.columns.length + '">' + rowTemplate(data) + "</td></tr>";
-                };
             }
+
+            return kendo.template(rowTemplate, settings);
         },
 
         _templates: function() {
@@ -714,7 +704,7 @@
             that._sortable();
 
             that._scrollable();
-            
+
             that._updateCols();
         },
 
@@ -731,15 +721,16 @@
 
                     return "<col />";
                 }),
-                groups = (that.dataSource.group() || []).length;                
+                groups = (that.dataSource.group() || []).length;
 
-            if(colgroup.length) {
+            if (colgroup.length) {
                 colgroup.remove();
             }
+
             colgroup = $("<colgroup></colgroup>").append($(new Array(groups + 1).join('<col class="t-group-col">') + cols.join("")));
-            
-            table.prepend(colgroup);            
-        },
+
+            table.prepend(colgroup);
+                    },
 
         _autoColumns: function(schema) {
             if (schema) {
@@ -861,7 +852,7 @@
                 colspan = groups + that.columns.length;
 
             kendo.ui.progress(that.element.parent(), false);
-            
+
             if (!that.columns.length) {
                 that._autoColumns(that._firstDataItem(data[0], groups));
                 colspan = groups + that.columns.length;

@@ -96,41 +96,6 @@
                 ok(grid.rowTemplate.toString().indexOf("item.foo") > -1);
             });
 
-            test("rowTemplate as function", function() {
-                var grid = new Grid(table, {
-                    dataSource: [],
-                    rowTemplate: function() {
-                        return "foo";
-                    }
-                });
-
-                ok($(grid.rowTemplate()).is("tr"))
-            });
-
-            test("rowTemplate as string", function() {
-                var grid = new Grid(table, {
-                    dataSource: [],
-                    rowTemplate: "<#= foo #>"
-                });
-
-                ok($(grid.rowTemplate({ foo:"bar" })).is("tr"))
-            });
-
-            test("groups are prepended when custom template is used", function() {
-                var MyDataSource = kendo.data.DataSource.extend({
-                        group: function() {
-                            return [1];
-                        }
-                    });
-
-                var grid = new Grid(table, {
-                    dataSource: new MyDataSource,
-                    rowTemplate: "<#= foo #>"
-                });
-
-                equal($(grid.rowTemplate({ foo:"bar" })).find(".t-group-cell").length, 1);
-            });
-
             test("column template as function", function() {
                 var template = function(data) {return "foo" + data.foo; };
                 var grid = new Grid(table, { dataSource: [{ foo: "bar"}], columns: [{ field: "foo", template: template }] });
@@ -140,16 +105,7 @@
                 equal(grid.tbody.find("td").text(), "foobar");
             });
 
-            test("rowtemplate is rendered inside a td with collspan the same as the number of columns", function() {
-                var grid = new Grid(table, {
-                    dataSource: [],
-                    columns: ["foo", "bar"],
-                    rowTemplate: "<#= foo #><#= bar #>"
-                });
-
-                equal($(grid.rowTemplate({ foo:"foo", bar: "bar" })).find("td").attr("colspan"), 2)
-            });
-       </script>
+            </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
     </body>
