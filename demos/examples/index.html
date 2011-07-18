@@ -47,6 +47,17 @@
             </div>
             <div class="centerBox">
                 <div id="header"></div>
+                <script type="text/javascript">
+                    if (location.href.substr(-1) == "/")
+                        setTimeout(function () {
+                            $(".headerBack").animate({ top: 0, height: 180 }, 400);
+                            $("#header").animate({ marginTop: 0, height: 200 }, 400);
+                        }, 2000);
+                    else {
+                        $(".headerBack").css({ top: 0, height: 180 });
+                        $("#header").css({ marginTop: 0, height: 200 });
+                    }
+                </script>
                 <ul id="nav">
                     <li>
                         <a href="overview/index.html">Overview</a>
@@ -137,9 +148,17 @@
                 </div>
                 <script type="text/javascript">
 
-                    var initialRelativePath = document.getElementsByTagName("head")[0].innerHTML.match(/href=\W([\.\/]*)([\w\/]*?)kendo\.common/)[1];
+                    var initialRelativePath = document.getElementsByTagName("head")[0].innerHTML.match(/href=\W([\.\/]*)([\w\/]*?)kendo\.common/)[1],
+                        panelBar = $('#nav').kendoPanelBar({ animation: { open: { effects: 'fadeIn expandVertical' } }, expandMode: 0 }).data("kendoPanelBar"),
+                        loc = /[^\/]+\/[^\/]+?$/.exec(location.href);
 
-                    $('#nav').kendoPanelBar({ animation: { open: { effects: 'fadeIn expandVertical' } }, expandMode: 0 });
+                    if (loc) {
+                        var link = $("#nav .t-link[href*='" + loc[0] + "']")
+                            .addClass("t-state-selected");
+
+                        panelBar.expand(link.parent().parents(".t-item"), false);
+                    }
+
                     $('#skinSelector').kendoDropDownList({
                         dataSource: [
                                         { text: "Blue Opal", control: "Menu", value: "blueopal" },

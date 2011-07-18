@@ -72,8 +72,10 @@
             expandMode: 1
         },
 
-        expand: function (element) {
-            var that = this;
+        expand: function (element, useAnimation) {
+            var that = this,
+                animBackup = {};
+            useAnimation = useAnimation !== false;
 
             $(element).each(function (index, item) {
                 item = $(item);
@@ -85,20 +87,39 @@
                     $(highlightedClass, element).removeClass(highlightedClass.substr(1));
                     item.addClass(highlightedClass.substr(1));
 
+                    if (!useAnimation) {
+                        animBackup = that.options.animation;
+                        that.options.animation = { open: { show: true, effects: {} }, close: { hide:true, effects: {} } };
+                    }
+
                     that._toggleItem(item, false, null);
+
+                    if (!useAnimation)
+                        that.options.animation = animBackup;
                 }
             });
         },
 
-        collapse: function (element) {
-            var that = this;
+        collapse: function (element, useAnimation) {
+            var that = this,
+                animBackup = {};
+            useAnimation = useAnimation !== false;
 
             $(element).each(function (index, item) {
                 item = $(item);
 
                 if (!item.hasClass(disabledClass) && item.find("> .t-group, > .t-content").is(VISIBLE)) {
                     item.removeClass(highlightedClass.substr(1));
+
+                    if (!useAnimation) {
+                        animBackup = that.options.animation;
+                        that.options.animation = { open: { show: true, effects: {} }, close: { hide:true, effects: {} } };
+                    }
+
                     that._toggleItem(item, true, null);
+
+                    if (!useAnimation)
+                        that.options.animation = animBackup;
                 }
 
             });
