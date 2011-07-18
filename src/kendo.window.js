@@ -14,7 +14,6 @@
         REFRESH = "refresh",
         RESIZE = "resize",
         ERROR = "error",
-        LOAD = "load",
         MOVE = "move"
 
     function isLocalUrl(url) {
@@ -106,7 +105,7 @@
                 that.dragging = new WindowDragging(that);
             }
 
-            that.bind([OPEN, ACTIVATE, CLOSE, REFRESH, RESIZE, ERROR, LOAD, MOVE], options);
+            that.bind([OPEN, ACTIVATE, CLOSE, REFRESH, RESIZE, ERROR, MOVE], options);
 
             $(window).resize($.proxy(that.onDocumentResize, that));
 
@@ -399,32 +398,30 @@
         },
 
         ajaxRequest: function (url) {
-            var loadingIconTimeout = setTimeout(function () {
-                $(".t-refresh", this.wrapper).addClass("t-loading");
-            }, 100);
-
-            var data = {};
+            var that = this,
+                loadingIconTimeout = setTimeout(function () {
+                    $(".t-refresh", that.wrapper).addClass("t-loading");
+                }, 100),
+                data = {};
 
             $.ajax({
                 type: "GET",
-                url: url || this.options.contentUrl,
+                url: url || that.options.contentUrl,
                 dataType: "html",
                 data: data,
                 cache: false,
                 error: $.proxy(function (xhr, status) {
-                    //fix
-                    if ($t.ajaxError(this.wrapper, "error", xhr, status))
-                        return;
-                }, this),
+                    that.trigger(ERROR);
+                }, that),
                 complete: function () {
                     clearTimeout(loadingIconTimeout);
-                    $(".t-refresh", this.wrapper).removeClass("t-loading");
+                    $(".t-refresh", that.wrapper).removeClass("t-loading");
                 },
                 success: $.proxy(function (data, textStatus) {
-                    $(".t-window-content", this.wrapper).html(data);
+                    $(".t-window-content", that.wrapper).html(data);
 
-                    this.trigger(REFRESH);
-                }, this)
+                    that.trigger(REFRESH);
+                }, that)
             });
         },
 
