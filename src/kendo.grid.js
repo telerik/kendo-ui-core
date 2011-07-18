@@ -575,7 +575,7 @@
                 if (!field) {
                    field = th.text().replace(/\s|[^A-z0-9]/g, "");
                 }
-                
+
                 return {
                     field: field,
                     template: th.data("template"),
@@ -646,19 +646,9 @@
 
                 rowTemplate += "</tr>";
 
-                return kendo.template(rowTemplate, settings);
-            } else {
-                rowTemplate = kendo.template(rowTemplate, settings);
-
-                return function(data) {
-                    var html = start;
-
-                    if (groups > 0) {
-                        html += groupCells(groups);
-                    }
-                    return html + '<td colspan="' + that.columns.length + '">' + rowTemplate(data) + "</td></tr>";
-                };
             }
+
+            return kendo.template(rowTemplate, settings);
         },
 
         _templates: function() {
@@ -714,7 +704,7 @@
             that._sortable();
 
             that._scrollable();
-            
+
             that._updateCols();
         },
 
@@ -730,8 +720,7 @@
                     }
 
                     return "<col />";
-                }),
-                groups = (that.dataSource.group() || []).length;                
+                });
 
             if(colgroup.length) {
                 colgroup.remove();
