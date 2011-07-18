@@ -137,7 +137,7 @@
             var that = this;
 
             if (arguments.length === 0) {
-                return that.element.find('.t-item > ' + selectedClass).parent();
+                return that.element.find(".t-item > " + selectedClass).parent();
             }
 
             $(element).each(function (index, item) {
@@ -324,7 +324,7 @@
                     item
                         .contents()      // exclude groups, real links, templates and empty text nodes
                         .filter(function() { return (!(this.nodeName.toLowerCase() in { ul: {}, a: {}, div: {} }) && !(this.nodeType == 3 && !$.trim(this.nodeValue))); })
-                        .wrapAll('<span class="t-link"/>');
+                        .wrapAll("<span class='t-link'/>");
             });
 
             that.element
@@ -344,7 +344,7 @@
                     var item = $(this),
                         parent = item.parent();
 
-                    item.append('<span class="t-icon ' + (parent.hasClass(activeClass.substr(1)) ? "t-arrow-up t-panelbar-collapse" : "t-arrow-down t-panelbar-expand") + '"></span>');
+                    item.append("<span class='t-icon " + (parent.hasClass(activeClass.substr(1)) ? "t-arrow-up t-panelbar-collapse" : "t-arrow-down t-panelbar-expand") + "'></span>");
                 });
         },
 
