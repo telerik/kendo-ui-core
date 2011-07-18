@@ -295,14 +295,7 @@
 
                 equal(grid.wrapper.height(), 100);
             });
-
-            test("grid height is intialized from table height", function() {
-                table.style.height = "100px";
-                var grid = new Grid(table, { dataSource: [{foo:"bar"}] });
-
-                equal(grid.wrapper.css("height"), "100px");
-            });
-
+           
             test("non-scrollable grid thead has t-grid-header class", function() {
                 var grid = new Grid(table, { dataSource: [{foo:"bar"}], scrollable: false });
 

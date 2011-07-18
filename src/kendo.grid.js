@@ -396,7 +396,7 @@
         _wrapper: function() {
             var that = this,
                 table = that.table,
-                height = that.options.height || table.css("height"),
+                height = that.options.height,
                 wrapper;
 
             wrapper = table.parent();
