@@ -23,7 +23,6 @@
                     $("#container").kendoChart(options);
 
                     chart = $("#container").data("kendoChart");
-                    chart.refresh();
 
                     plotArea = chart._model.children[1];
                 }
@@ -426,16 +425,37 @@
                 module("Themes", {
                     setup: function() {
                         Chart.Themes.test = {
-                            flag: true
+                            flag: true,
+                            seriesColors: ["#f00", "#cf0"]
                         };
                     },
                     teardown: destroyChart
                 });
 
-                test("Applies theme", function() {
+                test("applies theme", function() {
                     createChart({ theme: "test" });
 
                     ok(chart.options.flag);
+                });
+
+                test("applies default theme when not set by user", function() {
+                    createChart();
+                    equals(chart.options.theme, "default");
+                });
+
+                test("default theme can be disabled", function() {
+                    createChart({ theme: "" });
+                    equals(chart.options.theme, "");
+                });
+
+                test("overrides series colors", function() {
+                    createChart({
+                        theme: "test",
+                        series: [{}, {}]
+                    });
+
+                    equal(chart.options.series[0].color, "#f00");
+                    equal(chart.options.series[1].color, "#cf0");
                 });
 
             })();

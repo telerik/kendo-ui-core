@@ -61,19 +61,22 @@
     var Chart = Component.extend({
         init: function(element, options) {
             var chart = this,
-                theme = options ? options.theme : "";
+                theme;
 
             Component.fn.init.call(chart, element);
 
             options = deepExtend({}, chart.options, options);
-            applySeriesDefaults(options);
             applyAxisDefaults(options);
+
+            theme = options.theme;
 
             chart.options = deepExtend(
                 {},
                 theme ? Chart.Themes[theme] || Chart.Themes[theme.toLowerCase()] : {},
                 options
             );
+
+            applySeriesDefaults(chart.options);
 
             chart.bind([DATABOUND], chart.options);
 
@@ -86,6 +89,7 @@
         },
 
         options: {
+            theme: "default",
             chartArea: {},
             title: {
                 visible: true
@@ -99,7 +103,6 @@
             categoryAxis: {
                 categories: []
             },
-            seriesColors: ["#d7df23", "#adc32b", "#799b28", "#4c7520"],
             seriesDefaults: {
                 type: COLUMN,
                 data: [],
@@ -243,7 +246,11 @@
     // **************************
     // Themes
     // **************************
-    Chart.Themes = { };
+    Chart.Themes = {
+        default: {
+            seriesColors: ["#d7df23", "#adc32b", "#799b28", "#4c7520"]
+        }
+    };
 
 
     // **************************
@@ -3830,7 +3837,7 @@
             i,
             seriesLength = series.length,
             seriesType,
-            colors = options.seriesColors,
+            colors = options.seriesColors || [],
             seriesDefaults = options.seriesDefaults,
             baseSeriesDefaults = deepExtend({}, options.seriesDefaults);
 
