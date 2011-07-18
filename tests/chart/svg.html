@@ -210,6 +210,12 @@
                     equals(path.options.fill, "url(#existingGradient)");
                 });
 
+                test("renderTo returns DOM element", function() {
+                    var container = $("<div />").appendTo(document.body);
+                    equals(view.renderTo(container[0]), container[0].firstChild);
+                    container.remove();
+                });
+
                 // ------------------------------------------------------------
                 module("SVG View / Decorators", {
                     setup: function() {
@@ -413,37 +419,49 @@
             (function() {
                 var view,
                     rect,
-                    glassyRect,
+                    group,
+                    overlay,
                     decorator;
 
                 module("SVGOverlayDecorator", {
                     setup: function() {
                         view = new Chart.SVGView();
                         rect = new Chart.SVGPath([[10, 20]], {
+                            id: "1",
                             overlay: "glass",
                             normalAngle: 90
                         });
                         decorator = new Chart.SVGOverlayDecorator(view);
-                        glassyRect = decorator.decorate(rect);
+                        group = decorator.decorate(rect);
+                        overlay = group.children[1];
                     }
                 });
 
                 test("creates overlay group", function() {
-                    ok(glassyRect instanceof Chart.SVGGroup);
+                    ok(group instanceof Chart.SVGGroup);
+                });
+
+                test("moves id to overlay", function() {
+                    ok(overlay.options.id.length > 0);
+                });
+
+                test("moves id from decorated element", function() {
+                    ok(rect.options.id == null);
                 });
 
                 test("generates unique id for gradient", function() {
-                    equals(glassyRect.children[1].options.fill.id, "glass90");
+                    equals(overlay.options.fill.id, "glass90");
                 });
 
                 test("applies rotation transform to fill gradient", function() {
-                    equals(glassyRect.children[1].options.fill.rotation, 90);
+                    equals(overlay.options.fill.rotation, 90);
                 });
 
                 test("does not decorate element if no overlay specified", function() {
                     var rect = view.createRect(new Box2D());
                     ok(rect instanceof Chart.SVGPath);
                 });
+
             })();
 
             (function() {

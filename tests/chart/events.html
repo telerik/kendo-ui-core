@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>UI5.Chart Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <link href="../qunit.css" type="text/css" rel="stylesheet"/>
+    </head>
+    <body>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.chart.js"></script>
+        <script type="text/javascript">
+
+            var Chart = kendo.ui.Chart;
+
+            (function() {
+                var chart,
+                plotArea,
+                marker,
+                bar;
+
+                function createChart(options) {
+                    $("#container").kendoChart(options);
+
+                    chart = $("#container").data("kendoChart");
+                    plotArea = chart._model.children[1]
+                }
+
+                function destroyChart() {
+                    $("#container").empty();
+                    chart = null;
+                }
+
+                function linePointClick(seriesClickHandler) {
+                    createChart({
+                        seriesClick: seriesClickHandler,
+                        series: [{
+                            type: "line",
+                            data: [1]
+                        }]
+                    });
+
+                    marker = plotArea.charts[0].points[0].children[0];
+                    $("#" + marker.options.id).click();
+                }
+
+                function barClick(seriesClickHandler) {
+                    createChart({
+                        seriesClick: seriesClickHandler,
+                        series: [{
+                            type: "bar",
+                            data: [1]
+                        }]
+                    });
+
+                    bar = plotArea.charts[0].points[0];
+                    $("#" + bar.options.id).click();
+                }
+
+                // ------------------------------------------------------------
+                module("seriesClick / LinePoint", {
+                    teardown: destroyChart
+                });
+
+                test("fires when clicking line points", 1, function() {
+                    linePointClick(function() { ok(true); });
+                });
+
+                test("event arguments contain value", 1, function() {
+                    linePointClick(function(e) { equals(e.value, 1); });
+                });
+
+                test("event arguments contain series", 1, function() {
+                    linePointClick(function(e) {
+                        same(e.series, chart.options.series[0]);
+                    });
+                });
+
+                test("event arguments contain jQuery element", 1, function() {
+                    linePointClick(function(e) {
+                        equals(e.element.attr("id"), marker.options.id);
+                    });
+                });
+
+                // ------------------------------------------------------------
+                module("seriesClick / Bar", {
+                    teardown: destroyChart
+                });
+
+                test("fires when clicking bars", 1, function() {
+                    barClick(function() { ok(true); });
+                });
+
+                test("event arguments contain value", 1, function() {
+                    barClick(function(e) { equals(e.value, 1); });
+                });
+
+                test("event arguments contain series", 1, function() {
+                    barClick(function(e) {
+                        same(e.series, chart.options.series[0]);
+                    });
+                });
+
+                test("event arguments contain jQuery element", 1, function() {
+                    barClick(function(e) {
+                        equals(e.element.attr("id"), bar.options.id);
+                    });
+                });
+
+            })();
+        </script>
+
+        <h1 id="qunit-header">kendo.chart</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <div id="container">
+        </div>
+    </body>
+</html>

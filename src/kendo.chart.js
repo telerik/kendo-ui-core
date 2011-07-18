@@ -44,6 +44,7 @@
         RIGHT = "right",
         SANS12 = "12px Verdana, sans-serif",
         SANS16 = "16px Verdana, sans-serif",
+        SERIES_CLICK = "seriesClick",
         SQUARE = "square",
         SVG_NS = "http://www.w3.org/2000/svg",
         TOP = "top",
@@ -78,7 +79,10 @@
 
             applySeriesDefaults(chart.options);
 
-            chart.bind([DATABOUND], chart.options);
+            chart.bind([
+                DATABOUND,
+                SERIES_CLICK
+            ], chart.options);
 
             if (chart.options.dataSource) {
                 chart._initDataSource();
@@ -170,12 +174,16 @@
                 id,
                 element;
 
-            $(viewElement).bind("mouseover", function(e) {
+            $(viewElement).bind("click", function(e) {
                 id = e.target.id;
                 if (id) {
-                    element = model.idMap[id];
-                    if (element) {
-
+                    point = model.idMap[id];
+                    if (point) {
+                        chart.trigger(SERIES_CLICK, {
+                            value: point.value,
+                            series: point.options.series,
+                            element: $(doc.getElementById(id))
+                        });
                     }
                 }
             });
@@ -1755,8 +1763,12 @@
     });
 
     var Bar = ChartElement.extend({
-        init: function(options) {
+        init: function(value, options) {
             var bar = this;
+
+            bar.value = value;
+            bar.options.id = uniqueId();
+
             ChartElement.fn.init.call(bar, options);
         },
 
@@ -1793,6 +1805,7 @@
                 } : {},
                 box = bar.box,
                 rectStyle = deepExtend({
+                    id: options.id,
                     fill: options.color,
                     overlay: options.overlay,
                     normalAngle: isVertical ? 0 : 90,
@@ -1807,6 +1820,9 @@
             [].push.apply(elements,
                 ChartElement.fn.getViewElements.call(bar, view)
             );
+
+            bar.registerId(options.id);
+
             return elements;
         },
 
@@ -1971,12 +1987,13 @@
                 }
             }
 
-            var bar = new Bar({
+            var bar = new Bar(value, {
                 color: series.color,
                 opacity: series.opacity,
                 border: series.border,
                 isVertical: options.isVertical,
-                overlay: series.overlay
+                overlay: series.overlay,
+                series: series
             });
 
             if (labelOptions.visible && value) {
@@ -1988,11 +2005,12 @@
 
             var cluster = children[categoryIx];
             if (!cluster) {
-                cluster = children[categoryIx] = new ClusterLayout({
+                cluster = new ClusterLayout({
                     isVertical: !options.isVertical,
                     gap: options.gap,
                     spacing: options.spacing
                 });
+                barChart.append(cluster);
             }
 
             if (isStacked) {
@@ -2272,16 +2290,14 @@
             }
 
             var point = new LinePoint(value,
-                deepExtend(
-                    {
-                        isVertical: !options.isVertical,
-                        markers: {
-                            background: series.color,
-                            opacity: series.opacity
-                        }
-                    },
-                    series
-                )
+                deepExtend({
+                    series: series,
+                    isVertical: !options.isVertical,
+                    markers: {
+                        background: series.color,
+                        opacity: series.opacity
+                    }
+                }, series)
             );
 
             if (isStacked) {
@@ -3014,12 +3030,15 @@
         decorate: function(element) {
             var decorator = this,
                 view = decorator.view,
+                id = element.options.id,
                 overlayName = element.options ? element.options.overlay : "",
                 overlay = Chart.Overlays[overlayName];
 
             if (!overlay) {
                 return element;
             }
+
+            delete element.options.id;
 
             var fill = overlay.fill,
                 fillRotation = element.options.normalAngle || 0,
@@ -3028,6 +3047,8 @@
                 overlayElement = element.clone();
 
             group.children.push(element, overlayElement);
+
+            overlayElement.options.id = id;
 
             overlayElement.options.fill =
                 deepExtend(fill, { id: fillId, rotation: fillRotation });
@@ -3109,6 +3130,8 @@
             }
 
             container.innerHTML = this.render();
+
+            return container.firstChild;
         },
 
         createText: function(content, options) {

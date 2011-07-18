@@ -1090,11 +1090,15 @@
                 var Bar = Chart.Bar,
                     bar,
                     box,
-                    rect;
+                    rect,
+                    root;
 
                 function createBar(options) {
                     box = new Box2D(0, 0, 100, 100);
-                    bar = new Bar(options);
+                    bar = new Bar(1, options);
+
+                    root = new Chart.RootElement();
+                    root.append(bar);
 
                     bar.reflow(box);
                     view = new ViewStub();
@@ -1107,6 +1111,10 @@
                         moduleSetup();
                         createBar();
                     }
+                });
+
+                test("sets value", function() {
+                    equals(bar.value, 1);
                 });
 
                 test("fills target box", function() {
@@ -1158,6 +1166,19 @@
                 test("sets stroke opacity", function() {
                     createBar({ opacity: 0.5 });
                     same(rect.style.strokeOpacity, bar.options.opacity);
+                });
+
+                test("generates id", function() {
+                    ok(bar.options.id.length > 0);
+                });
+
+                test("registers id with root", function() {
+                    createBar();
+                    ok(root.idMap[bar.options.id] === bar);
+                });
+
+                test("sets id on rect", function() {
+                    ok(rect.style.id.length > 0);
                 });
 
             })();
