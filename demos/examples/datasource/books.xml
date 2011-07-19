@@ -44,9 +44,4 @@
         <author>Dan Cederholm and Ethan Marcotte</author>
         <url>http://www.amazon.com/Handcrafted-CSS-More-Bulletproof-Design/dp/0321643380</url>
     </book>
-    <book cover="designing-with-web-standards.png">
-        <title>Designing with Web Standards</title>
-        <author>Jeffrey Zeldman and Ethan Marcotte</author>
-        <url>http://www.amazon.com/Designing-Web-Standards-Jeffrey-Zeldman/dp/0321616952</url>
-    </book>
 </books>
