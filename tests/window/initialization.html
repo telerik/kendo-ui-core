@@ -161,11 +161,11 @@
             });
 
             test("creating a window with a remote contentUrl creates iframe", function() {
-                var dialog = Window.create({
+                var dialog = createWindow({
                         contentUrl: "http://google.com/",
                         title: "title"
                     }),
-                    iframe = dialog.find("iframe");
+                    iframe = dialog.element.find("iframe");
 
                 equals(iframe.length, 1);
                 equals(iframe.attr("title"), "title");
