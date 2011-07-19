@@ -39,7 +39,8 @@
 
         wrap: function() {
             var that = this,
-                scrollbar = kendo.support.scrollbar(),
+                // workaround for IE issue where scroll is not raised if container is same width as the scrollbar
+                scrollbar = kendo.support.scrollbar() + 1,
                 element = that.element;
 
             element.css( {
@@ -50,6 +51,7 @@
             that.content = element.children().first();
             that.wrapper = that.content.wrap('<div class="t-virtual-scrollable-wrap"/>')
                                 .parent().bind("DOMMouseScroll, mousewheel", proxy(that._wheelScroll, that));
+
             that.verticalScrollbar = $('<div class="t-scrollbar t-scrollbar-vertical" />')
                                         .css({
                                             width: scrollbar
@@ -405,7 +407,7 @@
         _wrapper: function() {
             var that = this,
                 table = that.table,
-                height = that.options.height,
+                height = that.options.height || table.css("height"),
                 wrapper;
 
             wrapper = table.parent();
