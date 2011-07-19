@@ -198,15 +198,15 @@
 
             that._pageable();
 
+            that._groupable();
+
             that._thead();
 
             that._templates();
 
             that._navigatable();
 
-            that._selectable();
-
-            that._groupable();
+            that._selectable();            
 
             if (that.options.autoBind) {
                 that.dataSource.query();
@@ -483,6 +483,10 @@
 
                 if (that.pager) {
                     height -= that.pager.element.outerHeight();
+                }
+
+                if(options.groupable) {
+                    height -= $(".t-grouping-header").outerHeight();
                 }
 
                 that.content.height(height);
