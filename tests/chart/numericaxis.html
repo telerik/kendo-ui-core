@@ -264,6 +264,11 @@
                     equal(numericAxis.options.majorUnit, 20);
                 });
 
+                test("Automatic maximum is rounded to set major unit", function() {
+                    numericAxis = new NumericAxis(0, 3, { majorUnit: 1 });
+                    equals(numericAxis.options.max, 4);
+                });
+
                 test("creates labels with format", 1, function() {
                     numericAxis = new Chart.NumericAxis(0, 1, { labels: { format: "{0:C}"} });
                     numericAxis.reflow(chartBox);
