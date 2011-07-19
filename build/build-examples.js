@@ -127,9 +127,10 @@ function processExample(file) {
         base = file === outputPath + "/index.html" ? "" : "../",
         scriptRegion = splitScriptRegion(exampleHTML, base),
         cssRegion = splitCSSRegion(exampleHTML, base),
-        component = componentFromFilename(file);
+        component = componentFromFilename(file),
+        isLive = '\n\t\t<script type="text/javascript"> var live = true; </script>\n';
 
-    exampleHTML = baseRegions.meta.exec(exampleHTML, baseRegions.meta.html);
+    exampleHTML = baseRegions.meta.exec(exampleHTML, isLive + baseRegions.meta.html);
 
     exampleHTML = baseRegions.script.exec(exampleHTML, scriptRegion);
 
@@ -264,4 +265,4 @@ exports.build = function(origin, destination, minify) {
 
     console.log("Processing examples...");
     processExamplesDirectory(outputPath);
-}
+};
