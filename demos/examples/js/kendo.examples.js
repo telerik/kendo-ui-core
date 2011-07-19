@@ -1,7 +1,6 @@
-(function() {
+(function($, window) {
     var Application,
         extend = $.extend,
-        panelBar = window.panelBar,
         pushState = "pushState" in history,
         currentHtml = "",
         docsAnimation = {
@@ -31,6 +30,23 @@
         initialFolder = 0,
         codeStrip = false,
         initialRelativePath = "";
+
+    window.selectCategory = function(element) {
+        $("#categories .selected").removeClass("selected");
+        $(element).addClass("selected");
+
+        window.panelBar = $("#nav").empty().kendoPanelBar({
+            animation: { open: { effects: 'fadeIn expandVertical' } },
+            expandMode: "single",
+            dataSource: categories[element.id]
+        }).data("kendoPanelBar");
+
+        var referenceUrl = $("#logo")[0].href;
+        $("#nav li a").each(function() {
+            var match = $(this).attr("href").match(/[^\/]+\/[^\/]+?$/);
+            $(this).attr("href", referenceUrl + (match ? match[0] : ""));
+        });
+    };
 
     Application = {
         load: function(href) {
@@ -213,25 +229,6 @@
             } else
                 $("#exampleBody").show();
 
-            $("#categories li a").live("click", function(e) {
-                e.preventDefault();
-
-                $("#categories .selected").removeClass("selected");
-                $(e.target).addClass("selected");
-
-                panelBar = $("#nav").empty().kendoPanelBar({
-                    animation: { open: { effects: 'fadeIn expandVertical' } },
-                    expandMode: "single",
-                    dataSource: categories[e.target.id]
-                }).data("kendoPanelBar");
-
-                var referenceUrl = $("#logo")[0].href;
-                $("#nav li a").each(function() {
-                    var match = $(this).attr("href").match(/[^\/]+\/[^\/]+?$/);
-                    $(this).attr("href", referenceUrl + (match ? match[0] : ""));
-                });
-            });
-
             if (pushState) {
                 $("#nav li a")
                     .live("click", function(e) {
@@ -286,9 +283,15 @@
 
     $(Application.init);
 
-})(jQuery);
+})(jQuery, window);
 
 var categories = {
+    overview: {
+        text: "Overview",
+        item: {
+            url: "overview/index.html"
+        }
+    },
     controls: [
         { text: "Autocomplete", expanded: true, items: [
             {
@@ -475,19 +478,11 @@ var categories = {
             }
         ] }
     ],
-    styling: [
-        { text: "DataSource", items: [
-            {
-                text: "Binding to remote data",
-                url: "datasource/remote-data.html"
-            }
-        ] }
-    ],
     integration: [
         { text: "DataSource", items: [
             {
                 text: "Binding to remote data",
-                url: "datasource/remote-data.html"
+                url: "mata/remote-data.html"
             }
         ] }
     ]

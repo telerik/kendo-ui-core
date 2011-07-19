@@ -58,11 +58,10 @@
                     </ul>
                     <a id="logo" class="logoLink" title="Home" href=""></a>
                     <ul id="categories">
-                        <li><a id="overview" class="selected">Overview</a></li>
-                        <li><a id="framework">Framework</a></li>
-                        <li><a id="controls">UI Components</a></li>
-                        <li><a id="styling">Styling</a></li>
-                        <li><a id="integration">Integration</a></li>
+                        <li><a id="overview" href="overview/index.html">Overview</a></li>
+                        <li><a id="framework" href="datasource/remote-data.html">Framework</a></li>
+                        <li><a id="controls" href="menu/index.html">UI Components</a></li>
+                        <li><a id="integration" href="ïntegration/something.html">Integration</a></li>
                     </ul>
                 </div>
                 <ul id="nav"></ul>
@@ -72,24 +71,44 @@
                 </div>
                 <script type="text/javascript">
 
-//                    var panelBar = $("#nav").empty().kendoPanelBar({
-//                            animation: { open: { effects: 'fadeIn expandVertical' } },
-//                            expandMode: "single",
-//                            dataSource: categories[$("#categories .selected")[0].id]
-//                        }).data("kendoPanelBar"),
-
                     var initialRelativePath = document.getElementsByTagName("head")[0].innerHTML.match(/href=\W([\.\/]*)([\w\/]*?)kendo\.common/)[1],
-                        loc = /[^\/]+\/[^\/]+?$/.exec(location.href),
-                        panelBar;
+                        loc = /[^\/]+\/[^\/]+?$/.exec(location.href);
 
-                    $("#categories .selected").click();
+                    function locatePage(url) {
+                        var category = "",
+                            iterate = function(item) {
+                            var result = true;
+                            
+                            $.each(item, function (idx, value) {
+                                if ($.isPlainObject(value) && "url" in value && value.url === url) {
+                                    result = false;
+                                    return result;
+                                }
 
-                    if (loc && panelBar) {
+                                if ($.isPlainObject(value) || $.isArray(value)) {
+                                    result = iterate(value);
+
+                                    category = idx;
+                                    return result;
+                                }
+                            });
+                            return result;
+                        };
+
+                        iterate(categories);
+
+                        return category;
+                    }
+
+                    if (loc) {
+                        selectCategory($("#categories #" + locatePage(loc[0]))[0]);
+
                         var link = $("#nav .t-link[href*='" + loc[0] + "']")
                             .addClass("t-state-selected");
 
                         panelBar.expand(link.parent().parents(".t-item"), false);
-                    }
+                    } else
+                        selectCategory($("#categories #overview"));
 
                     $('#skinSelector').kendoDropDownList({
                         dataSource: [
