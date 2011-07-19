@@ -180,7 +180,7 @@
 
         helpData: function (html) {
             var result = /<!--\s*help-data\s*-->(([\r\n]|.)*?)<!--\s*help-data\s*-->/im.exec(html);
-            
+
             return result ? result[1] : "";
         },
 
@@ -468,6 +468,10 @@ var categories = {
             {
                 text: "Binding to remote data",
                 url: "datasource/remote-data.html"
+            },
+            {
+                text: "Binding to XML",
+                url: "datasource/xml-data.html"
             }
         ] }
     ],
