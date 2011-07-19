@@ -755,6 +755,12 @@ div.skinSelector .t-state-active
     list-style: none outside;
 }
 
+#box .nomargin
+{
+    margin-left: 0;
+    box-shadow: none;
+}
+
 .nomargin dd
 {
     margin: 0;
