@@ -83,7 +83,7 @@
                 setup();
                 equal(container[0].style.width, "auto");
                 equal(container.css("overflow"), "hidden");
-                equal(container.css("paddingRight"), kendo.support.scrollbar() + "px");
+                equal(container.css("paddingRight"), kendo.support.scrollbar() + 1 + "px");
             });
 
             test("scrollbars are added to the container", function() {
