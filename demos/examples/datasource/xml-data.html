@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+    <head>
+        <!-- meta -->
+        <!-- meta -->
+        <title>Binding to XML</title>
+        <!-- script -->
+        <script src="../../../src/jquery.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.model.js"></script>
+        <script src="../../../src/kendo.data.js"></script>
+        <script src="../../../src/kendo.data.xml.js"></script>
+        <!-- script -->
+        <!-- css -->
+        <link href="../styles/examples.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.common.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.web20.css" rel="stylesheet"/>
+        <!-- css -->
+    </head>
+    <body>
+        <!-- nav -->
+        <!-- nav -->
+        <!-- description -->
+        <div class="description">Binding to XML</div>
+        <!-- description -->
+        <div id="example">
+            <style scoped>
+            </style>
+            <div id="books">
+            </div>
+            <script id="template" type="text/x-kendo-template">
+                <div class="book">
+                    <a href="<#= url #>"><img src="<#= cover #>" /></a>
+                    <h3><#= title #></h3>
+                </div>
+            </script>
+            <script>
+                // create a template using the above definition
+                var template = kendo.template($("#template").html());
+
+                var dataSource = new kendo.data.DataSource({
+                    transport: {
+                        read: "books.xml" //specify the XML file to read. The same as read: { url: "books.xml" }
+                    },
+                    schema: {
+                        type: "xml", //specify the the schema is XML
+                        data: "/books/book", // the XML element which represents a single data record
+                        model: { // define the model - the object which will represent a single data record
+                            fields: { // configure the fields of the object
+                                title: "title/text()", //the "title" field is mapped to the text of the "title" XML element
+                                author: "author/text()",//the "author" field is mapped to the text of the "author" XML element
+                                url: "url/text()", //the "url" field is mapped to the text of the "url" XML element
+                                cover: "@cover" // the "cover" field is mapped to the "id" attribute of the "book" XML element
+                            }
+                        }
+                    },
+                    change: function() {
+                        $("#books").html(kendo.render(template, this.view()));
+                    }
+                });
+
+                dataSource.read();
+            </script>
+        </div>
+        <!-- tools -->
+        <!-- tools -->
+    </body>
+</html>
+
+
