@@ -1,6 +1,7 @@
 (function($, window) {
     var Application,
         extend = $.extend,
+        live = window.live,
         pushState = "pushState" in history,
         currentHtml = "",
         docsAnimation = {
@@ -40,6 +41,9 @@
             expandMode: "single",
             dataSource: categories[element.id]
         }).data("kendoPanelBar");
+
+        if (!live)
+            $("#exampleHead, #content").toggleClass("nomargin", element.attr("href") != "overview/index.html");
 
         var referenceUrl = $("#logo")[0].href;
         $("#nav li a").each(function() {
@@ -237,6 +241,13 @@
                 }
             } else
                 $("#exampleBody").show();
+
+            if (!live)
+                $("#categories li a").live("click", function(e) {
+                    e.preventDefault();
+
+                    selectCategory(e.target);
+                });
 
             if (pushState) {
                 $("#nav li a")
