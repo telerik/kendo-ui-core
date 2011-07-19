@@ -3,6 +3,7 @@
         Component = kendo.ui.Component,
         Draggable = kendo.ui.Draggable,
         fx = kendo.fx,
+        template = kendo.template,
         //classNames
         TWINDOW = ".t-window",
         TWINDOWTITLEBAR = ".t-window-titlebar",
@@ -94,7 +95,7 @@
             if (options.resizable) {
                 that.wrapper
                     .delegate(TWINDOWTITLEBAR, "dblclick", $.proxy(that.toggleMaximization, that))
-                    .append(getResizeHandlesHtml());
+                    .append(templates.resizeHandles("n e s w se sw ne nw".split(" ")));
 
                 fixIE6Sizing(that.wrapper);
 
@@ -451,42 +452,44 @@
         }
     });
 
+    var templates = {
+        wrapper: template("<div class='t-widget t-window'></div>"),
+        titlebar: template(
+            "<div class='t-window-titlebar t-header'>&nbsp;" +
+                "<span class='t-window-title'><#= title #></span>" +
+                "<div class='t-window-actions t-header'>" +
+                "<# for (var i = 0; i < actions.length; i++) { #>" +
+                    "<a href='#' class='t-window-action t-link'>" +
+                        "<span class='t-icon t-<#= actions[i].toLowerCase() #>'><#= actions[i] #></span>" +
+                    "</a>" +
+                "<# } #>" +
+                "</div>" +
+            "</div>"
+        ),
+        iframe: template(
+            "<iframe src='<#= contentUrl #>' title='<#= title #>' frameborder='0'" +
+                " style='border:0;width:100%;height:100%;'>" +
+                    "This page requires frames in order to show content" +
+            "</iframe>"
+        ),
+        resizeHandles: template("<div class='t-resize-handle t-resize-<#= data #>'></div>")
+    };
+
     function createWindow(element, options) {
-        var titleHtml = "",
-            contentHtml = "";
-
-        titleHtml += "<div class='t-window-titlebar t-header'>&nbsp;<span class='t-window-title'>" +
-                      options.title + "</span><div class='t-window-actions t-header'>";
-
-        $.map(options.actions, function (command) {
-            titleHtml += "<a href='#' class='t-window-action t-link'><span class='t-icon t-" +
-                          command.toLowerCase() + "'>" + command + "</span></a>";
-        });
-
-        titleHtml += "</div>";
-
-        contentHtml = $(element);
+        var contentHtml = $(element);
 
         if (typeof (options.scrollable) != "undefined" && options.scrollable === false) {
             contentHtml.attr("style", "overflow:hidden;");
         }
 
         if (options.contentUrl && !isLocalUrl(options.contentUrl)) {
-            contentHtml.html("<iframe src='" + options.contentUrl + "' title='" + options.title +
-                          "' frameborder='0' style='border:0;width:100%;height:100%;'>This page requires frames in order to show content</iframe>");
+            contentHtml.html(templates.iframe(options));
         }
 
-        $("<div class='t-widget t-window'></div>").append(titleHtml).append(contentHtml).appendTo(document.body);
-    }
-
-    function getResizeHandlesHtml() {
-        var html = "";
-
-        $.each("n e s w se sw ne nw".split(" "), function (i, item) {
-            html += "<div class='t-resize-handle t-resize-" + item + "'></div>";
-        });
-
-        return html;
+        $(templates.wrapper(options))
+            .append(templates.titlebar(options))
+            .append(contentHtml)
+            .appendTo(document.body);
     }
 
     function WindowResizing(wnd) {
