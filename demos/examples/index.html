@@ -70,65 +70,65 @@
                     <span class="exampleName"></span>
                 </div>
                 <div id="content">
+                    <script type="text/javascript">
+
+                        var initialRelativePath = document.getElementsByTagName("head")[0].innerHTML.match(/href=\W([\.\/]*)([\w\/]*?)kendo\.common/)[1],
+                            loc = /[^\/]+\/[^\/]+?$/.exec(location.href);
+
+                        function locatePage(url) {
+                            var category = "",
+                                iterate = function(item) {
+                                var result = true;
+
+                                $.each(item, function (idx, value) {
+                                    if ($.isPlainObject(value) && "url" in value && value.url === url) {
+                                        result = false;
+                                        return result;
+                                    }
+
+                                    if ($.isPlainObject(value) || $.isArray(value)) {
+                                        result = iterate(value);
+
+                                        category = idx;
+                                        return result;
+                                    }
+                                });
+                                return result;
+                            };
+
+                            iterate(categories);
+
+                            return category;
+                        }
+
+                        if (loc) {
+                            var url = loc[0].toLowerCase();
+
+                            $("#exampleHead, #content").toggleClass("nomargin", url == "overview/index.html");
+
+                            selectCategory($("#categories #" + locatePage(url))[0]);
+
+                            var link = $("#nav .t-link[href*='" + url + "']")
+                                .addClass("t-state-selected");
+
+                            panelBar.expand(link.parent().parents(".t-item"), false);
+                        } else {
+                            $("#exampleHead, #content").addClass("nomargin");
+                            selectCategory($("#categories #overview"));
+                        }
+
+                        $('#skinSelector').kendoDropDownList({
+                            dataSource: [
+                                            { text: "Blue Opal", control: "Menu", value: "blueopal" },
+                                            { text: "Orange", control: "Menu", value: "black" },
+                                            { text: "Kendo", control: "Menu", value: "vista" }
+                                        ],
+                            template: '<span class="thumbLink" href="#">\
+                                        <span class="thumb <#= data.text.toLowerCase() #>Thumb" style="background-image: url(<#= initialRelativePath #>img/<#= data.control #>/thumbSprite.png)">\
+                                        <span class="gloss"></span></span><span class="skinTitle"><#= data.text #></span></span>'
+                        });
+                    </script>
                     <div id="exampleBody">
-                        <script type="text/javascript">
-
-                            var initialRelativePath = document.getElementsByTagName("head")[0].innerHTML.match(/href=\W([\.\/]*)([\w\/]*?)kendo\.common/)[1],
-                                loc = /[^\/]+\/[^\/]+?$/.exec(location.href);
-
-                            function locatePage(url) {
-                                var category = "",
-                                    iterate = function(item) {
-                                    var result = true;
-
-                                    $.each(item, function (idx, value) {
-                                        if ($.isPlainObject(value) && "url" in value && value.url === url) {
-                                            result = false;
-                                            return result;
-                                        }
-
-                                        if ($.isPlainObject(value) || $.isArray(value)) {
-                                            result = iterate(value);
-
-                                            category = idx;
-                                            return result;
-                                        }
-                                    });
-                                    return result;
-                                };
-
-                                iterate(categories);
-
-                                return category;
-                            }
-
-                            if (loc) {
-                                var url = loc[0].toLowerCase();
-                                
-                                $("#exampleHead, #content").toggleClass("nomargin", url == "overview/index.html");
-
-                                selectCategory($("#categories #" + locatePage(url))[0]);
-
-                                var link = $("#nav .t-link[href*='" + url + "']")
-                                    .addClass("t-state-selected");
-
-                                panelBar.expand(link.parent().parents(".t-item"), false);
-                            } else {
-                                $("#exampleHead, #content").addClass("nomargin");
-                                selectCategory($("#categories #overview"));
-                            }
-
-                            $('#skinSelector').kendoDropDownList({
-                                dataSource: [
-                                                { text: "Blue Opal", control: "Menu", value: "blueopal" },
-                                                { text: "Orange", control: "Menu", value: "black" },
-                                                { text: "Kendo", control: "Menu", value: "vista" }
-                                            ],
-                                template: '<span class="thumbLink" href="#">\
-                                            <span class="thumb <#= data.text.toLowerCase() #>Thumb" style="background-image: url(<#= initialRelativePath #>img/<#= data.control #>/thumbSprite.png)">\
-                                            <span class="gloss"></span></span><span class="skinTitle"><#= data.text #></span></span>'
-                            });
-                        </script>
                     <!-- nav -->
                         <div id="example"></div>
                     <!-- tools -->
