@@ -132,6 +132,8 @@
                     hide: true
                 }
             },
+            title: "",
+            actions: ["Close"],
             modal: false,
             resizable: true,
             draggable: true,
@@ -449,31 +451,8 @@
         }
     });
 
-    // client-side rendering
-    $.extend(Window, {
-
-    });
-
-    function createWindow() {
-        var element, options, args = arguments;
-
-        if ($.isPlainObject(args[0])) {
-            options = args[0];
-        } else {
-            element = args[0];
-            options = $.extend({
-                html: element.innerHTML
-            }, args[1]);
-        }
-
-        options = $.extend({
-            title: "",
-            html: "",
-            actions: ["Close"]
-        }, options);
-
-        var windowHtml = "<div class='t-widget t-window'></div>",
-            titleHtml = ""
+    function createWindow(element, options) {
+        var titleHtml = "",
             contentHtml = "";
 
         titleHtml += "<div class='t-window-titlebar t-header'>&nbsp;<span class='t-window-title'>" +
@@ -486,11 +465,7 @@
 
         titleHtml += "</div>";
 
-        if (!element) {
-            contentHtml = $("<div class='t-window-content t-content'></div>");
-        } else {
-            contentHtml = $(element);
-        }
+        contentHtml = $(element);
 
         if (typeof (options.scrollable) != "undefined" && options.scrollable === false) {
             contentHtml.attr("style", "overflow:hidden;");
@@ -501,11 +476,7 @@
                           "' frameborder='0' style='border:0;width:100%;height:100%;'>This page requires frames in order to show content</iframe>");
         }
 
-        if (element) {
-            $(windowHtml).append(titleHtml).append(contentHtml).appendTo(document.body);
-        } else {
-            return $(windowHtml).appendTo(document.body).kendoWindow(options);
-        }
+        $("<div class='t-widget t-window'></div>").append(titleHtml).append(contentHtml).appendTo(document.body);
     }
 
     function getResizeHandlesHtml() {
