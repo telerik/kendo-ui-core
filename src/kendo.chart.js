@@ -24,6 +24,7 @@
         CENTER = "center",
         CHANGE = "change",
         CIRCLE = "circle",
+        CLICK = "click",
         COLUMN = "column",
         COORD_PRECISION = 3,
         DATABOUND = "dataBound",
@@ -38,6 +39,8 @@
         LINE = "line",
         LINE_MARKER_SIZE = 6,
         LINE_MARKER_SQUARE = "square",
+        MOUSEOVER = "mouseover",
+        MOUSEOUT = "mouseout",
         NONE = "none",
         OBJECT = "object",
         OUTSIDE = "outside",
@@ -168,25 +171,30 @@
         },
 
         _attachEvents: function() {
-            var chart = this,
-                viewElement = chart._viewElement,
-                model = chart._model,
-                id,
-                element;
+            var chart = this;
 
-            $(viewElement).bind("click", function(e) {
-                id = e.target.id;
-                if (id) {
-                    point = model.idMap[id];
-                    if (point) {
-                        chart.trigger(SERIES_CLICK, {
-                            value: point.value,
-                            series: point.options.series,
-                            element: $(doc.getElementById(id))
-                        });
-                    }
+            $(chart._viewElement)
+                .bind("click mouseover mouseout", proxy(chart._eventDispatcher, chart));
+        },
+
+        _eventDispatcher: function(e) {
+            var chart = this,
+                model = chart._model,
+                target = e.target,
+                point = model.idMap[target.id],
+                tooltip,
+                offset;
+
+            if (point) {
+                tooltip = point._tooltip;
+                if (e.type === CLICK) {
+                    chart.trigger(SERIES_CLICK, {
+                        value: point.value,
+                        series: point.options.series,
+                        element: $(e.target)
+                    });
                 }
-            });
+            }
         },
 
         _ensureSize: function() {
@@ -1253,8 +1261,11 @@
                     majorUnit: axis.autoMajorUnit(seriesMin, seriesMax)
                 };
 
-            if(options && !options.majorUnit) {
-                if (options.min || options.max) {
+            if (options) {
+                if (options.majorUnit) {
+                    autoOptions.min = floor(autoOptions.min, options.majorUnit);
+                    autoOptions.max = ceil(autoOptions.max, options.majorUnit);
+                } else if (options.min || options.max) {
                     options = deepExtend(autoOptions, options);
 
                     // Determine an auto major unit after min/max have been set
