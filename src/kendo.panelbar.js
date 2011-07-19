@@ -36,6 +36,17 @@
 
             options = that.options;
 
+            if (that.element.is(EMPTY)) {
+                that.element.append($(PanelBar.renderGroup({
+                    items: options.dataSource,
+                    group: {
+                        firstLevel: true,
+                        expanded: true
+                    },
+                    panelBar: {}
+                })).children());
+            }
+
             that._updateClasses();
 
             if (options.animation === false) {

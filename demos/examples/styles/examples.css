@@ -172,6 +172,8 @@ body
     background-image: url("../img/bg-glossy.png"), -o-linear-gradient(center top, #4C4C4C 0%, #2E2E2E 100%);
     background-image: url("../img/bg-glossy.png"), -ms-linear-gradient(center top, #4C4C4C 0%, #2E2E2E 100%);
     background-image: url("../img/bg-glossy.png"), -webkit-gradient(linear, center top, center bottom, color-stop(0%,#4C4C4C), color-stop(100%, #2E2E2E));
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
     border-radius: 5px;
     cursor: pointer;
     display: block;
@@ -453,7 +455,7 @@ pre.prettyprint
 
 #nav .t-link
 {
-    font: 14px bold Arial, Helvetica, sans-serif;
+    font: 16px bold Arial, Helvetica, sans-serif;
     color: #2175bd;
     background: none;
     border: 0;
@@ -472,16 +474,16 @@ pre.prettyprint
 #nav .t-state-selected,
 #nav .t-state-highlighted>.t-link
 {
-    color: #0c303c;
-    border: 1px solid #cfd6d8;
-    background-color: #c7d0d2;
-    background: -moz-linear-gradient(top, #dadfe1 0%, #bac4c7 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#dadfe1), color-stop(100%,#bac4c7));
-    background: -webkit-linear-gradient(top, #dadfe1 0%,#bac4c7 100%);
-    background: -o-linear-gradient(top, #dadfe1 0%,#bac4c7 100%);
-    background: -ms-linear-gradient(top, #dadfe1 0%,#bac4c7 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dadfe1', endColorstr='#bac4c7',GradientType=0 );
-    background: linear-gradient(top, #dadfe1 0%,#bac4c7 100%);
+    color: #2e2e2e;
+    border: 1px solid #d0d0d0;
+    background-color: #c1c1c1;
+    background: -moz-linear-gradient(top, #dedede 0%, #c1c1c1 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#dedede), color-stop(100%,#c1c1c1));
+    background: -webkit-linear-gradient(top, #dedede 0%,#c1c1c1 100%);
+    background: -o-linear-gradient(top, #dedede 0%,#c1c1c1 100%);
+    background: -ms-linear-gradient(top, #dedede 0%,#c1c1c1 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dedede', endColorstr='#c1c1c1',GradientType=0 );
+    background: linear-gradient(top, #dedede 0%,#c1c1c1 100%);
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
@@ -489,6 +491,7 @@ pre.prettyprint
     text-shadow: 0 1px 1px #FFF;
 }
 
+/*
 #nav .t-state-selected:after,
 #nav .t-state-highlighted>.t-link:after
 {
@@ -503,6 +506,7 @@ pre.prettyprint
     width: 5px;
 }
 
+*/
 #nav li li .t-state-selected,
 #nav li li .t-state-highlighted>.t-link
 {
