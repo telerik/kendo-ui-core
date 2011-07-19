@@ -1,0 +1,52 @@
+<books>
+    <book>
+        <title>Eloquent JavaScript: A Modern Introduction to Programming</title>
+        <author>Marijn Haverbeke</author>
+        <url>http://www.amazon.com/Eloquent-JavaScript-Modern-Introduction-Programming/dp/1593272820</url>
+    </book>
+    <book>
+        <title>JavaScript: The Good Parts</title>
+        <author>Douglas Crockford</author>
+        <url>http://www.amazon.com/JavaScript-Good-Parts-Douglas-Crockford/dp/0596517742</url>
+    </book>
+    <book>
+        <title>Secrets of the JavaScript Ninja</title>
+        <author>John Resig</author>
+        <url>http://www.amazon.com/Secrets-JavaScript-Ninja-John-Resig/dp/193398869X</url>
+    </book>
+    <book>
+        <title>JavaScript Patterns</title>
+        <author>Stoyan Stefanov</author>
+        <url>http://www.amazon.com/JavaScript-Patterns-Stoyan-Stefanov/dp/0596806752</url>
+    </book>
+    <book>
+        <title>High Performance JavaScript (Build Faster Web Application Interfaces)</title>
+        <author>Nicholas C. Zakas</author>
+        <url>http://www.amazon.com/Performance-JavaScript-Faster-Application-Interfaces/dp/059680279X</url>
+    </book>
+    <book>
+        <title>Stunning CSS3: A project-based guide to the latest in CSS (Voices That Matter)</title>
+        <author>Zoe Mickley Gillenwater</author>
+        <url>http://www.amazon.com/Stunning-CSS3-project-based-latest-Voices/dp/0321722132</url>
+    </book>
+    <book>
+        <title>Responsive Web Design</title>
+        <author>Ethan Marcotte</author>
+        <url>http://www.abookapart.com/products/responsive-web-design</url>
+    </book>
+    <book>
+        <title>Bulletproof Web Design: Improving flexibility and protecting against worst-case scenarios with XHTML and CSS (2nd Edition)</title>
+        <author>Dan Cederholm</author>
+        <url>http://www.amazon.com/Bulletproof-Web-Design-flexibility-protecting/dp/0321509021</url>
+    </book>
+    <book>
+        <title>Handcrafted CSS: More Bulletproof Web Design</title>
+        <author>Dan Cederholm and Ethan Marcotte</author>
+        <url>http://www.amazon.com/Handcrafted-CSS-More-Bulletproof-Design/dp/0321643380</url>
+    </book>
+    <book>
+        <title>Designing with Web Standards (3rd Edition)</title>
+        <author>Jeffrey Zeldman and Ethan Marcotte</author>
+        <url>http://www.amazon.com/Designing-Web-Standards-Jeffrey-Zeldman/dp/0321616952</url>
+    </book>
+</books>

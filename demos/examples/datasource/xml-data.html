@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+    <head>
+        <!-- meta -->
+        <!-- meta -->
+        <title>Binding to XML</title>
+        <!-- script -->
+        <script src="../../../src/jquery.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.data.js"></script>
+        <!-- script -->
+        <!-- css -->
+        <link href="../styles/examples.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.common.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.web20.css" rel="stylesheet"/>
+        <!-- css -->
+    </head>
+    <body>
+        <!-- nav -->
+        <!-- nav -->
+        <!-- description -->
+        <div class="description">Binding to XML</div>
+        <!-- description -->
+        <div id="example">
+            <style scoped>
+            </style>
+            <div id="results">
+            </div>
+            <script id="template" type="text/x-kendo-template">
+                <div class="book t-header">
+                </div>
+            </script>
+            <script>
+                // create a template using the above definition
+                var template = kendo.template($("#template").html());
+
+                var dataSource = new kendo.data.DataSource({
+                    transport: {
+                        read: {
+                            url: "books.xml"
+                        }
+                    },
+                    schema: {
+                        data: "results"
+                    },
+                    change: function() {
+                        $("#results").html(kendo.render(template, this.view()));
+                    }
+                });
+
+                dataSource.read();
+            </script>
+        </div>
+        <!-- tools -->
+        <!-- tools -->
+    </body>
+</html>
+
+
