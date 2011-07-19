@@ -1,50 +1,50 @@
 <books>
-    <book>
+    <book cover="http://eloquentjavascript.net/img/ejs.png">
         <title>Eloquent JavaScript: A Modern Introduction to Programming</title>
         <author>Marijn Haverbeke</author>
         <url>http://www.amazon.com/Eloquent-JavaScript-Modern-Introduction-Programming/dp/1593272820</url>
     </book>
-    <book>
+    <book cover="http://covers.oreilly.com/images/9780596517748/cat.gif">
         <title>JavaScript: The Good Parts</title>
         <author>Douglas Crockford</author>
         <url>http://www.amazon.com/JavaScript-Good-Parts-Douglas-Crockford/dp/0596517742</url>
     </book>
-    <book>
+    <book cover="http://www.manning.com/resig/resig_cover150.jpg">
         <title>Secrets of the JavaScript Ninja</title>
         <author>John Resig</author>
         <url>http://www.amazon.com/Secrets-JavaScript-Ninja-John-Resig/dp/193398869X</url>
     </book>
-    <book>
+    <book cover="http://covers.oreilly.com/images/9780596806767/cat.gif">
         <title>JavaScript Patterns</title>
         <author>Stoyan Stefanov</author>
         <url>http://www.amazon.com/JavaScript-Patterns-Stoyan-Stefanov/dp/0596806752</url>
     </book>
-    <book>
+    <book cover="http://covers.oreilly.com/images/9780596802806/cat.gif">
         <title>High Performance JavaScript (Build Faster Web Application Interfaces)</title>
         <author>Nicholas C. Zakas</author>
         <url>http://www.amazon.com/Performance-JavaScript-Faster-Application-Interfaces/dp/059680279X</url>
     </book>
-    <book>
+    <book cover="http://photo.goodreads.com/books/1282776544l/8727446.jpg">
         <title>Stunning CSS3: A project-based guide to the latest in CSS (Voices That Matter)</title>
         <author>Zoe Mickley Gillenwater</author>
         <url>http://www.amazon.com/Stunning-CSS3-project-based-latest-Voices/dp/0321722132</url>
     </book>
-    <book>
+    <book cover="http://www.alistapart.com/pix/rwd-promo-3d.png">
         <title>Responsive Web Design</title>
         <author>Ethan Marcotte</author>
         <url>http://www.abookapart.com/products/responsive-web-design</url>
     </book>
-    <book>
+    <book cover="http://simplebits.com/img/bitstream/bp-big.gif">
         <title>Bulletproof Web Design: Improving flexibility and protecting against worst-case scenarios with XHTML and CSS (2nd Edition)</title>
         <author>Dan Cederholm</author>
         <url>http://www.amazon.com/Bulletproof-Web-Design-flexibility-protecting/dp/0321509021</url>
     </book>
-    <book>
+    <book cover="http://handcraftedcss.com/img/cover.jpg">
         <title>Handcrafted CSS: More Bulletproof Web Design</title>
         <author>Dan Cederholm and Ethan Marcotte</author>
         <url>http://www.amazon.com/Handcrafted-CSS-More-Bulletproof-Design/dp/0321643380</url>
     </book>
-    <book>
+    <book cover="http://img2.imagesbn.com/images/42570000/42574851.JPG">
         <title>Designing with Web Standards (3rd Edition)</title>
         <author>Jeffrey Zeldman and Ethan Marcotte</author>
         <url>http://www.amazon.com/Designing-Web-Standards-Jeffrey-Zeldman/dp/0321616952</url>
