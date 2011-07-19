@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+    <head>
+        <!-- meta -->
+        <!-- meta -->
+        <title>Remote data operations</title>
+        <!-- script -->
+        <script src="../../../src/jquery.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.data.js"></script>
+        <script src="../../../src/kendo.pager.js"></script>
+        <script src="../../../src/kendo.data.odata.js"></script>
+        <!-- script -->
+        <!-- css -->
+        <link href="../styles/examples.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.common.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.web20.css" rel="stylesheet"/>
+        <!-- css -->
+    </head>
+    <body>
+        <!-- nav -->
+        <!-- nav -->
+        <!-- description -->
+        <div class="description">Remote data operations</div>
+        <!-- description -->
+        <div id="example">
+            <style scoped>
+            </style>
+            <div id="pager"></div>
+            <table id="results">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+            <script id="template" type="text/x-kendo-template">
+                <tr>
+                    <td><img src="<#= BoxArt.LargeUrl #>" /></td>
+                    <td><#= Name #></td>
+                </tr>
+            </script>
+            <script>
+                // create a template using the above definition
+                var template = kendo.template($("#template").html());
+
+                var dataSource = new kendo.data.DataSource({
+                    type: "odata",
+                    serverPaging: true,
+                    serverSorting: true,
+                    pageSize: 10,
+                    transport: {
+                        read: "http://odata.netflix.com/Catalog/Titles"
+                    },
+                    change: function() { // subscribe to the CHANGE event of the data source
+                        $("#results tbody").html(kendo.render(template, this.view()));
+                    }
+                });
+
+
+                $("#pager").kendoPagable({
+                    dataSource: dataSource
+                });
+                // read data from the remote service
+                dataSource.read();
+
+            </script>
+        </div>
+        <!-- tools -->
+        <!-- tools -->
+    </body>
+</html>
+
+

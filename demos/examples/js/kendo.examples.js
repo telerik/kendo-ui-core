@@ -520,6 +520,10 @@ var categories = {
             {
                 text: "Binding to local data",
                 url: "datasource/local-data.html"
+            },
+            {
+                text: "Remote data operations",
+                url: "datasource/remote-operations.html"
             }
         ] },
         { text: "Templates", items: [
