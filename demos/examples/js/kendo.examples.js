@@ -87,29 +87,34 @@
                     Application.fetchDescription();
                 }
 
-                exampleName.kendoStop(true).kendoAnimate(extend({}, animation.hide, { complete: function() {
+                if (title == "Overview") {
                     $(".exampleName").empty().html(title);
-
-                    setTimeout(function() {
-                        var newTabs = $($.trim(Application.helpTabs(html)));
-                        $(".codeTab").nextAll().remove().end().after(newTabs);
-                        $(".codeContainer").nextAll().remove().end().after($($.trim(Application.helpData(html))));
-                        codeStrip._updateClasses();
-                        prettyPrint();
-
-                        if (title != "Overview" && !toolsVisible)
-                            tools.kendoStop(true).kendoAnimate(animation.show);
-
-                        exampleName.kendoStop(true).kendoAnimate(animation.show);
-                    }, 100);
-                }}));
-
-                exampleBody.kendoStop(true).kendoAnimate(extend({}, animation.hide, { complete: function() {
                     exampleBody.empty().html(Application.body(html));
-                    setTimeout(function() {
-                        exampleBody.kendoStop(true).kendoAnimate(animation.show);
-                    }, 100);
-                }}));
+                } else {
+                    exampleName.kendoStop(true).kendoAnimate(extend({}, animation.hide, { complete: function() {
+                        $(".exampleName").empty().html(title);
+
+                        setTimeout(function() {
+                            var newTabs = $($.trim(Application.helpTabs(html)));
+                            $(".codeTab").nextAll().remove().end().after(newTabs);
+                            $(".codeContainer").nextAll().remove().end().after($($.trim(Application.helpData(html))));
+                            codeStrip._updateClasses();
+                            prettyPrint();
+
+                            if (!toolsVisible)
+                                tools.kendoStop(true).kendoAnimate(animation.show);
+
+                            exampleName.kendoStop(true).kendoAnimate(animation.show);
+                        }, 100);
+                    }}));
+
+                    exampleBody.kendoStop(true).kendoAnimate(extend({}, animation.hide, { complete: function() {
+                        exampleBody.empty().html(Application.body(html));
+                        setTimeout(function() {
+                            exampleBody.kendoStop(true).kendoAnimate(animation.show);
+                        }, 100);
+                    }}));
+                }
             });
         },
 
