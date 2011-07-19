@@ -49,121 +49,40 @@
             <div class="centerBox">
                 <div id="header">
                     <ul id="navi">
-                        <li><a title="Home" href="/">KendoUI</a></li>
+                        <li><a title="Home" href="">KendoUI</a></li>
                         <li><span>Demo</span></li>
                         <li><a title="" href="#roadmap">Roadmap</a></li>
                         <li class="download-beta"><a title="" href="#download-beta">Download Beta</a></li>
                     </ul>
-                    <a id="logo" class="logoLink" title="Home" href="/"></a>
+                    <a id="logo" class="logoLink" title="Home" href=""></a>
                     <ul id="categories">
-                        <li><a class="selected">Overview</a></li>
-                        <li><a>Framework</a></li>
-                        <li><a>UI Components</a></li>
-                        <li><a>Styling</a></li>
-                        <li><a>Integration</a></li>
+                        <li><a id="overview" class="selected">Overview</a></li>
+                        <li><a id="framework">Framework</a></li>
+                        <li><a id="controls">UI Components</a></li>
+                        <li><a id="styling">Styling</a></li>
+                        <li><a id="integration">Integration</a></li>
                     </ul>
                 </div>
-                <ul id="nav">
-                    <li>
-                        <a href="overview/index.html">Overview</a>
-                    </li>
-                    <li>
-                        DataSource
-                        <ul>
-                            <li><a href="datasource/remote-data.html">Binding to remote data</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        Autocomplete
-                        <ul>
-                            <li><a href="autocomplete/index.html">Default Settings</a></li>
-                            <li><a href="autocomplete/remotedatasource.html">Remote Data Source</a></li>
-                            <li><a href="autocomplete/customtemplate.html">Custom Template</a></li>
-                            <li><a href="autocomplete/events.html">Events</a></li>
-                            <li><a href="autocomplete/api.html">API</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        DropDownList
-                        <ul>
-                            <li><a href="dropdownlist/index.html">Default Settings</a></li>
-                            <li><a href="dropdownlist/transformation.html">Transformation</a></li>
-                            <li><a href="dropdownlist/localdatasource.html">Local Data Source</a></li>
-                            <li><a href="dropdownlist/remotedatasource.html">Remote Data Source</a></li>
-                            <li><a href="dropdownlist/customtemplate.html">Custom Template</a></li>
-                            <li><a href="dropdownlist/events.html">Events</a></li>
-                            <li><a href="dropdownlist/api.html">API</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        ComboBox
-                        <ul>
-                            <li><a href="combobox/index.html">Default Settings</a></li>
-                            <li><a href="combobox/transformation.html">Transformation</a></li>
-                            <li><a href="combobox/localdatasource.html">Local Data Source</a></li>
-                            <li><a href="combobox/remotedatasource.html">Remote Data Source</a></li>
-                            <li><a href="combobox/customtemplate.html">Custom Template</a></li>
-                            <li><a href="combobox/events.html">Events</a></li>
-                            <li><a href="combobox/api.html">API</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        Menu
-                        <ul>
-                            <li><a href="menu/index.html">Default Settings</a></li>
-                            <li><a href="menu/events.html">Events</a></li>
-                            <li><a href="menu/api.html">API</a></li>
-                            <li><a href="menu/animation.html">Animation Effects</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        PanelBar
-                        <ul>
-                            <li><a href="panelbar/index.html">Default Settings</a></li>
-                            <li><a href="panelbar/ajax.html">Loading Ajax Content</a></li>
-                            <li><a href="panelbar/events.html">Events</a></li>
-                            <li><a href="panelbar/api.html">API</a></li>
-                            <li><a href="panelbar/animation.html">Animation Effects</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                       Slider
-                        <ul>
-                            <li><a href="slider/index.html">Default Settings</a></li>
-                            <li><a href="slider/events.html">Events</a></li>
-                            <li><a href="slider/api.html">API</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        TabStrip
-                        <ul>
-                            <li><a href="tabstrip/index.html">Default Settings</a></li>
-                            <li><a href="tabstrip/ajax.html">Loading Ajax Content</a></li>
-                            <li><a href="tabstrip/events.html">Events</a></li>
-                            <li><a href="tabstrip/api.html">API</a></li>
-                            <li><a href="tabstrip/animation.html">Animation Effects</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        TreeView
-                        <ul>
-                            <li><a href="treeview/index.html">Default Settings</a></li>
-                            <li><a href="treeview/events.html">Events</a></li>
-                            <li><a href="treeview/api.html">API</a></li>
-                        </ul>
-                    </li>
-                </ul>
+                <ul id="nav"></ul>
                 <div id="exampleHead">
                     <select id="skinSelector" class="skinSelector" readonly="readonly"></select>
                     <span class="exampleName"></span>
                 </div>
                 <script type="text/javascript">
 
-                    var initialRelativePath = document.getElementsByTagName("head")[0].innerHTML.match(/href=\W([\.\/]*)([\w\/]*?)kendo\.common/)[1],
-                        panelBar = $('#nav').kendoPanelBar({ animation: { open: { effects: 'fadeIn expandVertical' } }, expandMode: 0 }).data("kendoPanelBar"),
-                        loc = /[^\/]+\/[^\/]+?$/.exec(location.href);
+//                    var panelBar = $("#nav").empty().kendoPanelBar({
+//                            animation: { open: { effects: 'fadeIn expandVertical' } },
+//                            expandMode: "single",
+//                            dataSource: categories[$("#categories .selected")[0].id]
+//                        }).data("kendoPanelBar"),
 
-                    if (loc) {
+                    var initialRelativePath = document.getElementsByTagName("head")[0].innerHTML.match(/href=\W([\.\/]*)([\w\/]*?)kendo\.common/)[1],
+                        loc = /[^\/]+\/[^\/]+?$/.exec(location.href),
+                        panelBar;
+
+                    $("#categories .selected").click();
+
+                    if (loc && panelBar) {
                         var link = $("#nav .t-link[href*='" + loc[0] + "']")
                             .addClass("t-state-selected");
 

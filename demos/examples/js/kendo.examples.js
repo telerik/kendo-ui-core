@@ -1,6 +1,7 @@
 (function() {
     var Application,
         extend = $.extend,
+        panelBar = window.panelBar,
         pushState = "pushState" in history,
         currentHtml = "",
         docsAnimation = {
@@ -172,11 +173,15 @@
         },
 
         helpTabs: function (html) {
-            return /<!--\s*help-tabs\s*-->(([\r\n]|.)*?)<!--\s*help-tabs\s*-->/im.exec(html)[1];
+            var result = /<!--\s*help-tabs\s*-->(([\r\n]|.)*?)<!--\s*help-tabs\s*-->/im.exec(html);
+
+            return result ? result[1] : "";
         },
 
         helpData: function (html) {
-            return /<!--\s*help-data\s*-->(([\r\n]|.)*?)<!--\s*help-data\s*-->/im.exec(html)[1];
+            var result = /<!--\s*help-data\s*-->(([\r\n]|.)*?)<!--\s*help-data\s*-->/im.exec(html);
+            
+            return result ? result[1] : "";
         },
 
         description: function(html) {
@@ -208,16 +213,32 @@
             } else
                 $("#exampleBody").show();
 
+            $("#categories li a").live("click", function(e) {
+                e.preventDefault();
+
+                $("#categories .selected").removeClass("selected");
+                $(e.target).addClass("selected");
+
+                panelBar = $("#nav").empty().kendoPanelBar({
+                    animation: { open: { effects: 'fadeIn expandVertical' } },
+                    expandMode: "single",
+                    dataSource: categories[e.target.id]
+                }).data("kendoPanelBar");
+
+                var referenceUrl = $("#logo")[0].href;
+                $("#nav li a").each(function() {
+                    var match = $(this).attr("href").match(/[^\/]+\/[^\/]+?$/);
+                    $(this).attr("href", referenceUrl + (match ? match[0] : ""));
+                });
+            });
+
             if (pushState) {
                 $("#nav li a")
-                    .click(function(e) {
+                    .live("click", function(e) {
                         e.preventDefault();
 
                         if (!location.href.match($(this).attr("href")) && !$("#exampleBody").data("animating"))
                             Application.load($(this).attr("href"));
-                    })
-                    .each(function() {
-                        $(this).attr("href", this.href);
                     });
 
                 $(".detailHandle").live("click", function (e) {
@@ -266,3 +287,204 @@
     $(Application.init);
 
 })(jQuery);
+
+var categories = {
+    controls: [
+        { text: "Autocomplete", expanded: true, items: [
+            {
+                text: "Default Settings",
+                url: "autocomplete/index.html"
+            },
+            {
+                text: "Remote Data Source",
+                url: "autocomplete/remotedatasource.html"
+            },
+            {
+                text: "Custom Template",
+                url: "autocomplete/customtemplate.html"
+            },
+            {
+                text: "Events",
+                url: "autocomplete/events.html"
+            },
+            {
+                text: "API",
+                url: "autocomplete/api.html"
+            }
+        ] },
+        { text: "DropDownList", items: [
+            {
+                text: "Default Settings",
+                url: "dropdownlist/index.html"
+            },
+            {
+                text: "Transformation",
+                url: "dropdownlist/transformation.html"
+            },
+            {
+                text: "Local Data Source",
+                url: "dropdownlist/localdatasource.html"
+            },
+            {
+                text: "Remote Data Source",
+                url: "dropdownlist/remotedatasource.html"
+            },
+            {
+                text: "Custom Template",
+                url: "dropdownlist/customtemplate.html"
+            },
+            {
+                text: "Events",
+                url: "dropdownlist/events.html"
+            },
+            {
+                text: "API",
+                url: "dropdownlist/api.html"
+            }
+        ] },
+        { text: "ComboBox", items: [
+            {
+                text: "Default Settings",
+                url: "combobox/index.html"
+            },
+            {
+                text: "Transformation",
+                url: "combobox/transformation.html"
+            },
+            {
+                text: "Local Data Source",
+                url: "combobox/localdatasource.html"
+            },
+            {
+                text: "Remote Data Source",
+                url: "combobox/remotedatasource.html"
+            },
+            {
+                text: "Custom Template",
+                url: "combobox/customtemplate.html"
+            },
+            {
+                text: "Events",
+                url: "combobox/events.html"
+            },
+            {
+                text: "API",
+                url: "combobox/api.html"
+            }
+        ] },
+        { text: "Menu", items: [
+            {
+                text: "Default Settings",
+                url: "menu/index.html"
+            },
+            {
+                text: "Events",
+                url: "menu/events.html"
+            },
+            {
+                text: "API",
+                url: "menu/api.html"
+            },
+            {
+                text: "Animation Effects",
+                url: "menu/animation.html"
+            }
+        ] },
+        { text: "PanelBar", items: [
+            {
+                text: "Default Settings",
+                url: "panelbar/index.html"
+            },
+            {
+                text: "Loading Ajax Content",
+                url: "panelbar/ajax.html"
+            },
+            {
+                text: "Events",
+                url: "panelbar/events.html"
+            },
+            {
+                text: "API",
+                url: "panelbar/api.html"
+            },
+            {
+                text: "Animation Effects",
+                url: "panelbar/animation.html"
+            }
+        ] },
+        { text: "Slider", items: [
+            {
+                text: "Default Settings",
+                url: "slider/index.html"
+            },
+            {
+                text: "Events",
+                url: "slider/events.html"
+            },
+            {
+                text: "API",
+                url: "slider/api.html"
+            }
+        ] },
+        { text: "TabStrip", items: [
+            {
+                text: "Default Settings",
+                url: "tabstrip/index.html"
+            },
+            {
+                text: "Loading Ajax Content",
+                url: "tabstrip/ajax.html"
+            },
+            {
+                text: "Events",
+                url: "tabstrip/events.html"
+            },
+            {
+                text: "API",
+                url: "tabstrip/api.html"
+            },
+            {
+                text: "Animation Effects",
+                url: "tabstrip/animation.html"
+            }
+        ] },
+        { text: "TreeView", items: [
+            {
+                text: "Default Settings",
+                url: "treeview/index.html"
+            },
+            {
+                text: "Events",
+                url: "treeview/events.html"
+            },
+            {
+                text: "API",
+                url: "treeview/api.html"
+            }
+        ] }
+    ],
+    framework: [
+        { text: "DataSource", items: [
+            {
+                text: "Binding to remote data",
+                url: "datasource/remote-data.html"
+            }
+        ] }
+    ],
+    styling: [
+        { text: "DataSource", items: [
+            {
+                text: "Binding to remote data",
+                url: "datasource/remote-data.html"
+            }
+        ] }
+    ],
+    integration: [
+        { text: "DataSource", items: [
+            {
+                text: "Binding to remote data",
+                url: "datasource/remote-data.html"
+            }
+        ] }
+    ]
+};
