@@ -1149,7 +1149,7 @@
             }
             skip = that.skip();
 
-            return skip !== undefined ? Math.ceil((skip || 0) / (that._take || 1)) + 1 : undefined;
+            return skip !== undefined ? Math.round((skip || 0) / (that._take || 1)) + 1 : undefined;
         },
 
         pageSize: function(val) {
@@ -1234,49 +1234,32 @@
         },
 
         range: function(skip, take) {
-            skip = skip || 0;
             var that = this,
-                end = Math.min(skip + take, that.total()),
-                pageSkip = (Math.max(Math.floor(skip / take), 0) * take);
+                end = Math.min(Math.min(skip + take, (that._totalPages() - 1) * take), that.total()),
+                pageSkip = (Math.max(Math.floor(skip / take), 0) * take),
                 data;
 
-
+            if (that.options.serverPaging) {
                 data = that._findRange(skip, end);
-
                 if (data.length) {
-
                     that._skip = pageSkip;
+
                     that._take = take;
-                    var paging = that.options.serverPaging;
-                    try {
-                        that.options.serverPaging = true;
-                        that._process(data);
-                    } finally {
-                        that.options.serverPaging = paging;
-                    }
+                    that._process(data);
+
                     return;
                 }
+            }
 
             if (take !== undefined) {
+                skip = skip || 0;
 
-                if (!that._rangeExists(pageSkip, pageSkip + take)) {
-                    that.prefetch(pageSkip, take, function() {
-                        if (skip > pageSkip && pageSkip + take < that.total()) {
-                            that.prefetch(pageSkip + take, take, function() {
-                                that.range(skip, take);
-                            });
-                        } else {
-                            that.range(skip, take);
-                        }
-                    });
-                } else if (pageSkip < skip) {
-                    that.prefetch(pageSkip + take, take, function() {
-                        that.range(skip, take);
-                    });
-                }
+                clearTimeout(that._timeout);
+                that._timeout = setTimeout(function() {
+                    that.query({ skip: skip, take: take, sort: that.sort(), filter: that.filter(), group: that.group(), aggregates: that.aggregate() });
+                }, 250);
             }
         },
-
         _currentPage: function() {
             var that = this,
                 take = that.take();
