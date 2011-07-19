@@ -61,7 +61,7 @@
                         <li><a id="overview" href="overview/index.html">Overview</a></li>
                         <li><a id="framework" href="datasource/remote-data.html">Framework</a></li>
                         <li><a id="controls" href="menu/index.html">UI Components</a></li>
-                        <li><a id="integration" href="ïntegration/something.html">Integration</a></li>
+                        <li><a id="integration" href="integration/index.html">Integration</a></li>
                     </ul>
                 </div>
                 <ul id="nav"></ul>
@@ -107,6 +107,7 @@
                                 
                                 $("#exampleHead, #content").toggleClass("nomargin", url == "overview/index.html");
 
+                                debugger;
                                 selectCategory($("#categories #" + locatePage(url))[0]);
 
                                 var link = $("#nav .t-link[href*='" + url + "']")

@@ -513,13 +513,31 @@ var categories = {
                 text: "Binding to XML",
                 url: "datasource/xml-data.html"
             }
+        ] },
+        { text: "Templates", items: [
+            {
+                text: "Basic Usage",
+                url: "templates/index.html"
+            }
+        ] },
+        { text: "Drag & Drop", items: [
+            {
+                text: "Basic Usage",
+                url: "dragdrop/index.html"
+            }
+        ] },
+        { text: "Animation", items: [
+            {
+                text: "Animation Types",
+                url: "animation/index.html"
+            }
         ] }
     ],
     integration: [
-        { text: "DataSource", items: [
+        { text: "Integration Examples", items: [
             {
-                text: "Binding to remote data",
-                url: "mata/remote-data.html"
+                text: "Using KnockoutJS with Kendo",
+                url: "integration/index.html"
             }
         ] }
     ]
