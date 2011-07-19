@@ -298,178 +298,210 @@ var categories = {
         }
     },
     controls: [
-        { text: "Autocomplete", expanded: true, items: [
-            {
-                text: "Default Settings",
-                url: "autocomplete/index.html"
-            },
-            {
-                text: "Remote Data Source",
-                url: "autocomplete/remotedatasource.html"
-            },
-            {
-                text: "Custom Template",
-                url: "autocomplete/customtemplate.html"
-            },
-            {
-                text: "Events",
-                url: "autocomplete/events.html"
-            },
-            {
-                text: "API",
-                url: "autocomplete/api.html"
-            }
+        {
+            text: "Autocomplete",
+            expanded: true,
+            spriteCssClass: "autoCompleteIcon",
+            items: [
+                {
+                    text: "Default Settings",
+                    url: "autocomplete/index.html"
+                },
+                {
+                    text: "Remote Data Source",
+                    url: "autocomplete/remotedatasource.html"
+                },
+                {
+                    text: "Custom Template",
+                    url: "autocomplete/customtemplate.html"
+                },
+                {
+                    text: "Events",
+                    url: "autocomplete/events.html"
+                },
+                {
+                    text: "API",
+                    url: "autocomplete/api.html"
+                }
+            ]
+        },
+        {
+            text: "DropDownList",
+            spriteCssClass: "dropDownIcon",
+            items: [
+                {
+                    text: "Default Settings",
+                    url: "dropdownlist/index.html"
+                },
+                {
+                    text: "Transformation",
+                    url: "dropdownlist/transformation.html"
+                },
+                {
+                    text: "Local Data Source",
+                    url: "dropdownlist/localdatasource.html"
+                },
+                {
+                    text: "Remote Data Source",
+                    url: "dropdownlist/remotedatasource.html"
+                },
+                {
+                    text: "Custom Template",
+                    url: "dropdownlist/customtemplate.html"
+                },
+                {
+                    text: "Events",
+                    url: "dropdownlist/events.html"
+                },
+                {
+                    text: "API",
+                    url: "dropdownlist/api.html"
+                }
+            ]
+        },
+        {
+            text: "ComboBox",
+            spriteCssClass: "comboBoxIcon",
+            items: [
+                {
+                    text: "Default Settings",
+                    url: "combobox/index.html"
+                },
+                {
+                    text: "Transformation",
+                    url: "combobox/transformation.html"
+                },
+                {
+                    text: "Local Data Source",
+                    url: "combobox/localdatasource.html"
+                },
+                {
+                    text: "Remote Data Source",
+                    url: "combobox/remotedatasource.html"
+                },
+                {
+                    text: "Custom Template",
+                    url: "combobox/customtemplate.html"
+                },
+                {
+                    text: "Events",
+                    url: "combobox/events.html"
+                },
+                {
+                    text: "API",
+                    url: "combobox/api.html"
+                }
+            ]
+        },
+        {
+            text: "Menu",
+            spriteCssClass: "menuIcon",
+            items: [
+                {
+                    text: "Default Settings",
+                    url: "menu/index.html"
+                },
+                {
+                    text: "Events",
+                    url: "menu/events.html"
+                },
+                {
+                    text: "API",
+                    url: "menu/api.html"
+                },
+                {
+                    text: "Animation Effects",
+                    url: "menu/animation.html"
+                }
         ] },
-        { text: "DropDownList", items: [
-            {
-                text: "Default Settings",
-                url: "dropdownlist/index.html"
-            },
-            {
-                text: "Transformation",
-                url: "dropdownlist/transformation.html"
-            },
-            {
-                text: "Local Data Source",
-                url: "dropdownlist/localdatasource.html"
-            },
-            {
-                text: "Remote Data Source",
-                url: "dropdownlist/remotedatasource.html"
-            },
-            {
-                text: "Custom Template",
-                url: "dropdownlist/customtemplate.html"
-            },
-            {
-                text: "Events",
-                url: "dropdownlist/events.html"
-            },
-            {
-                text: "API",
-                url: "dropdownlist/api.html"
-            }
-        ] },
-        { text: "ComboBox", items: [
-            {
-                text: "Default Settings",
-                url: "combobox/index.html"
-            },
-            {
-                text: "Transformation",
-                url: "combobox/transformation.html"
-            },
-            {
-                text: "Local Data Source",
-                url: "combobox/localdatasource.html"
-            },
-            {
-                text: "Remote Data Source",
-                url: "combobox/remotedatasource.html"
-            },
-            {
-                text: "Custom Template",
-                url: "combobox/customtemplate.html"
-            },
-            {
-                text: "Events",
-                url: "combobox/events.html"
-            },
-            {
-                text: "API",
-                url: "combobox/api.html"
-            }
-        ] },
-        { text: "Menu", items: [
-            {
-                text: "Default Settings",
-                url: "menu/index.html"
-            },
-            {
-                text: "Events",
-                url: "menu/events.html"
-            },
-            {
-                text: "API",
-                url: "menu/api.html"
-            },
-            {
-                text: "Animation Effects",
-                url: "menu/animation.html"
-            }
-        ] },
-        { text: "PanelBar", items: [
-            {
-                text: "Default Settings",
-                url: "panelbar/index.html"
-            },
-            {
-                text: "Loading Ajax Content",
-                url: "panelbar/ajax.html"
-            },
-            {
-                text: "Events",
-                url: "panelbar/events.html"
-            },
-            {
-                text: "API",
-                url: "panelbar/api.html"
-            },
-            {
-                text: "Animation Effects",
-                url: "panelbar/animation.html"
-            }
-        ] },
-        { text: "Slider", items: [
-            {
-                text: "Default Settings",
-                url: "slider/index.html"
-            },
-            {
-                text: "Events",
-                url: "slider/events.html"
-            },
-            {
-                text: "API",
-                url: "slider/api.html"
-            }
-        ] },
-        { text: "TabStrip", items: [
-            {
-                text: "Default Settings",
-                url: "tabstrip/index.html"
-            },
-            {
-                text: "Loading Ajax Content",
-                url: "tabstrip/ajax.html"
-            },
-            {
-                text: "Events",
-                url: "tabstrip/events.html"
-            },
-            {
-                text: "API",
-                url: "tabstrip/api.html"
-            },
-            {
-                text: "Animation Effects",
-                url: "tabstrip/animation.html"
-            }
-        ] },
-        { text: "TreeView", items: [
-            {
-                text: "Default Settings",
-                url: "treeview/index.html"
-            },
-            {
-                text: "Events",
-                url: "treeview/events.html"
-            },
-            {
-                text: "API",
-                url: "treeview/api.html"
-            }
-        ] }
+        {
+            text: "PanelBar",
+            spriteCssClass: "panelBarIcon",
+            items: [
+                {
+                    text: "Default Settings",
+                    url: "panelbar/index.html"
+                },
+                {
+                    text: "Loading Ajax Content",
+                    url: "panelbar/ajax.html"
+                },
+                {
+                    text: "Events",
+                    url: "panelbar/events.html"
+                },
+                {
+                    text: "API",
+                    url: "panelbar/api.html"
+                },
+                {
+                    text: "Animation Effects",
+                    url: "panelbar/animation.html"
+                }
+            ]
+        },
+        {
+            text: "Slider",
+            spriteCssClass: "sliderIcon",
+            items: [
+                {
+                    text: "Default Settings",
+                    url: "slider/index.html"
+                },
+                {
+                    text: "Events",
+                    url: "slider/events.html"
+                },
+                {
+                    text: "API",
+                    url: "slider/api.html"
+                }
+            ]
+        },
+        {
+            text: "TabStrip",
+            spriteCssClass: "tabStripIcon",
+            items: [
+                {
+                    text: "Default Settings",
+                    url: "tabstrip/index.html"
+                },
+                {
+                    text: "Loading Ajax Content",
+                    url: "tabstrip/ajax.html"
+                },
+                {
+                    text: "Events",
+                    url: "tabstrip/events.html"
+                },
+                {
+                    text: "API",
+                    url: "tabstrip/api.html"
+                },
+                {
+                    text: "Animation Effects",
+                    url: "tabstrip/animation.html"
+                }
+            ]
+        },
+        {
+            text: "TreeView",
+            spriteCssClass: "treeViewIcon",
+            items: [
+                {
+                    text: "Default Settings",
+                    url: "treeview/index.html"
+                },
+                {
+                    text: "Events",
+                    url: "treeview/events.html"
+                },
+                {
+                    text: "API",
+                    url: "treeview/api.html"
+                }
+            ]
+        }
     ],
     framework: [
         { text: "DataSource", items: [

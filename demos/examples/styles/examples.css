@@ -8,9 +8,21 @@ html, body
 }
 
 .headerGradient,
-.skinSelector .t-arrow-down
+.skinSelector .t-arrow-down,
+#nav .t-sprite,
+.console div,
+.telerikLogo
 {
     background-image: url('../img/sprite.png');
+}
+
+* html .headerGradient,
+* html .skinSelector .t-arrow-down,
+* html #nav .t-sprite,
+* html .console div,
+* html .telerikLogo
+{
+    background-image: url('../img/sprite_ie6.png');
 }
 
 body
@@ -254,6 +266,64 @@ body
     margin-top: 30px;
 }
 
+#nav .t-image,
+#nav .t-sprite
+{
+    margin-top: 10px;
+}
+
+.autoCompleteIcon,
+.comboBoxIcon,
+.dropDownIcon
+{
+    background-position: 0 -200px;
+}
+
+.chartIcon
+{
+    background-position: 0 -260px;
+}
+
+.gridIcon
+{
+    background-position: 0 -280px;
+}
+
+.menuIcon
+{
+    background-position: 0 -300px;
+}
+
+.panelBarIcon
+{
+    background-position: 0 -320px;
+}
+
+.sliderIcon
+{
+    background-position: 0 -340px;
+}
+
+.splitterIcon
+{
+    background-position: 0 -360px;
+}
+
+.tabStripIcon
+{
+    background-position: 0 -380px;
+}
+
+.treeViewIcon
+{
+    background-position: 0 -400px;
+}
+
+.uploadIcon
+{
+    background-position: 0 -420px;
+}
+
 #content
 {
     display: block;
@@ -345,7 +415,9 @@ pre.prettyprint
 
 .console div
 {
-    background: transparent url("../img/sprite.png") no-repeat 6px -95px;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: 6px -95px;
     border-bottom: 1px solid #DDD;
     padding: 5px 5px 4px 24px;
 }
@@ -389,7 +461,9 @@ pre.prettyprint
 .telerikLogo
 {
     margin-top: 13px;
-    background: transparent url("../img/sprite.png") no-repeat 0 -700px;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: 0 -700px;
     width: 107px;
     height: 40px;
     float:  right;
