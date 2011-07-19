@@ -90,7 +90,7 @@
 
             test("clicking a child focuses it", function() {
                 var grid = setup();
-                table.find(">tbody>tr>td").last().mousedown();
+                table.find(">tbody>tr>td").last().mousedown().click();
 
                 ok(table.find(">tbody>tr>td").last().is(".t-state-focused"));
             });
