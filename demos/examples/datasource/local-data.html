@@ -1,0 +1,142 @@
+<!doctype html>
+<html>
+    <head>
+        <!-- meta -->
+        <!-- meta -->
+        <title>Binding to local data</title>
+        <!-- script -->
+        <script src="../../../src/jquery.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.data.js"></script>
+        <!-- script -->
+        <!-- css -->
+        <link href="../styles/examples.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.common.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.web20.css" rel="stylesheet"/>
+        <!-- css -->
+    </head>
+    <body>
+        <!-- nav -->
+        <!-- nav -->
+        <!-- description -->
+        <div class="description">Binding to local data</div>
+        <!-- description -->
+        <div id="example">
+            <style scoped>
+                #movies
+                {
+                    border-collapse: collapse;
+                }
+                #movies td,
+                #movies th
+                {
+                    border: 1px solid black;
+                }
+            </style>
+            <table id="movies">
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Rating</th>
+                        <th>Title</th>
+                        <th>Year</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="4"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <script id="template" type="text/x-kendo-template">
+                <tr>
+                    <td><#= rank #></td>
+                    <td><#= rating #></td>
+                    <td><#= title #></td>
+                    <td><#= year #></td>
+                </tr>
+            </script>
+            <script>
+                // create a template using the above definition
+                var template = kendo.template($("#template").html());
+
+                var movies = [
+                {
+                    "rank":1,
+                    "rating":9.2,
+                    "title":"The Shawshank Redemption",
+                    "year":1994
+                },
+                {
+                    "rank":2,
+                    "rating":9.2,
+                    "title":"The Godfather",
+                    "year":1972
+                },
+                {
+                    "rank":3,
+                    "rating":9,
+                    "title":"The Godfather: Part II",
+                    "year":1974
+                },
+                {
+                    "rank":4,
+                    "rating":8.9,
+                    "title":"Il buono, il brutto, il cattivo.",
+                    "year":1966
+                },
+                {
+                    "rank":5,
+                    "rating":8.9,
+                    "title":"Pulp Fiction",
+                    "year":1994
+                },
+                {
+                    "rank":6,
+                    "rating":8.9,
+                    "title":"12 Angry Men",
+                    "year":1957
+                },
+                {
+                    "rank":7,
+                    "rating":8.9,
+                    "title":"Schindler's List",
+                    "year":1993
+                },
+                {
+                    "rank":8,
+                    "rating":8.8,
+                    "title":"One Flew Over the Cuckoo's Nest",
+                    "year":1975
+                },
+                {
+                    "rank":9,
+                    "rating":8.8,
+                    "title":"Inception",
+                    "year":2010
+                },
+                {
+                    "rank":10,
+                    "rating":8.8,
+                    "title":"The Dark Knight",
+                    "year":2008
+                }];
+
+                var dataSource = new kendo.data.DataSource({
+                    data: movies,
+                    change: function() { // subscribe to the CHANGE event of the data source
+                        $("#movies tbody").html(kendo.render(template, this.view())); // populate the table
+                    }
+                });
+
+                // read data from the "movies" array
+                dataSource.read();
+
+            </script>
+        </div>
+        <!-- tools -->
+        <!-- tools -->
+    </body>
+</html>
+
+

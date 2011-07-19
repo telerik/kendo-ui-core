@@ -512,6 +512,10 @@ var categories = {
             {
                 text: "Binding to XML",
                 url: "datasource/xml-data.html"
+            },
+            {
+                text: "Binding to local data",
+                url: "datasource/local-data.html"
             }
         ] },
         { text: "Templates", items: [
