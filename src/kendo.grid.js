@@ -315,7 +315,8 @@
             var that = this,
                 selectable = that.selectable;
 
-            if(items) {
+            items = $(items);
+            if(items.length) {
                 if(!selectable.options.multi) {
                     selectable.clear();
                     items = items.first();
