@@ -33,14 +33,14 @@
                     -moz-border-radius: 10px;
                     border-radius: 10px;
                 }
-                #results
+                .tweets
                 {
                     overflow: auto;
                     height: 400px;
                 }
             </style>
             <label>Show latest tweets for:<input type="text" value="html5" id="searchFor" /></label><button class="t-button" id="search">search</button>
-            <div id="results">
+            <div id="tweets">
                 <div>Loading ... </div>
             </div>
             <script id="template" type="text/x-kendo-template">
@@ -73,7 +73,7 @@
                         data: "results" // the data which the data source will be bound to is in the "results" field
                     },
                     change: function() { // subscribe to the CHANGE event of the data source
-                        $("#results").html(kendo.render(template, this.view()));
+                        $("#tweets").html(kendo.render(template, this.view()));
                     }
                 });
 
