@@ -10,6 +10,7 @@ html, body
 .headerGradient,
 .skinSelector .t-arrow-down,
 #nav .t-sprite,
+.exampleIcon,
 .console div,
 .telerikLogo
 {
@@ -19,6 +20,7 @@ html, body
 * html .headerGradient,
 * html .skinSelector .t-arrow-down,
 * html #nav .t-sprite,
+* html .exampleIcon,
 * html .console div,
 * html .telerikLogo
 {
@@ -272,56 +274,133 @@ body
     margin-top: 10px;
 }
 
-.autoCompleteIcon,
-.comboBoxIcon,
-.dropDownIcon
+.autocompleteIcon
 {
     background-position: 0 -200px;
 }
 
-.chartIcon
+.comboBoxIcon
+{
+    background-position: 0 -230px;
+}
+
+.dropDownListIcon
 {
     background-position: 0 -260px;
 }
 
+.chartIcon
+{
+    background-position: 0 -290px;
+}
+
 .gridIcon
-{
-    background-position: 0 -280px;
-}
-
-.menuIcon
-{
-    background-position: 0 -300px;
-}
-
-.panelBarIcon
 {
     background-position: 0 -320px;
 }
 
-.sliderIcon
+.menuIcon
 {
-    background-position: 0 -340px;
+    background-position: 0 -350px;
 }
 
-.splitterIcon
-{
-    background-position: 0 -360px;
-}
-
-.tabStripIcon
+.panelBarIcon
 {
     background-position: 0 -380px;
 }
 
+.sliderIcon
+{
+    background-position: 0 -410px;
+}
+
+.splitterIcon
+{
+    background-position: 0 -440px;
+}
+
+.tabStripIcon
+{
+    background-position: 0 -470px;
+}
+
 .treeViewIcon
 {
-    background-position: 0 -400px;
+    background-position: 0 -500px;
 }
 
 .uploadIcon
 {
-    background-position: 0 -420px;
+    background-position: 0 -530px;
+}
+
+.exampleIcon
+{
+    width: 24px;
+    height: 24px;
+    display: block;
+    float: left;
+    margin-right: 8px;
+}
+
+#exampleHead .autocompleteIcon
+{
+    background-position: -20px -200px;
+}
+
+#exampleHead .comboBoxIcon
+{
+    background-position: -20px -230px;
+}
+
+#exampleHead .dropDownListIcon
+{
+    background-position: -20px -260px;
+}
+
+#exampleHead .chartIcon
+{
+    background-position: -20px -290px;
+}
+
+#exampleHead .gridIcon
+{
+    background-position: -20px -320px;
+}
+
+#exampleHead .menuIcon
+{
+    background-position: -20px -350px;
+}
+
+#exampleHead .panelBarIcon
+{
+    background-position: -20px -380px;
+}
+
+#exampleHead .sliderIcon
+{
+    background-position: -20px -410px;
+}
+
+#exampleHead .splitterIcon
+{
+    background-position: -20px -440px;
+}
+
+#exampleHead .tabStripIcon
+{
+    background-position: -20px -470px;
+}
+
+#exampleHead .treeViewIcon
+{
+    background-position: -20px -500px;
+}
+
+#exampleHead .uploadIcon
+{
+    background-position: -20px -530px;
 }
 
 #content
@@ -450,6 +529,7 @@ pre.prettyprint
 .exampleName
 {
     font: 20px Arial, Helvetica, sans-serif;
+    display: block;
 }
 
 #exampleHead .skinSelector
@@ -567,25 +647,10 @@ pre.prettyprint
     text-shadow: 0 1px 1px #FFF;
 }
 
-/*
-#nav .t-state-selected:after,
-#nav .t-state-highlighted>.t-link:after
-{
-    border-color: #FFFFFF transparent;
-    border-style: double;
-    border-width: 60px 0 60px 45px;
-    content: "\a0";
-    height: 0;
-    position: absolute;
-    right: -7px;
-    top: -42px;
-    width: 5px;
-}
-
-*/
 #nav li li .t-state-selected,
 #nav li li .t-state-highlighted>.t-link
 {
+    text-shadow: none;
     border: 0;
     background: none;
     filter: none;

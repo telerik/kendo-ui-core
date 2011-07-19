@@ -92,7 +92,8 @@
                     exampleBody.empty().html(Application.body(html));
                 } else {
                     exampleName.kendoStop(true).kendoAnimate(extend({}, animation.hide, { complete: function() {
-                        $(".exampleName").empty().html(title);
+                        var currentControl = $("#nav > .t-state-highlighted > .t-link").text();
+                        $(".exampleName").empty().html('<span class="exampleIcon '+ currentControl[0].toLowerCase() + currentControl.substr(1) +'Icon"></span>'+title);
 
                         setTimeout(function() {
                             var newTabs = $($.trim(Application.helpTabs(html)));
@@ -137,13 +138,16 @@
 
                     var title = Application.fetchTitle();
 
-                    $(".exampleName").empty().html(title);
-
                     if (title != "Overview") {
+                        var currentControl = $("#nav > .t-state-highlighted > .t-link").text();
+                        $(".exampleName").empty().html('<span class="exampleIcon '+ currentControl[0].toLowerCase() + currentControl.substr(1) +'Icon"></span>'+title);
+
                         $("#codeStrip, .skinSelector.t-widget").show();
 
                         $(".description").empty().html($.trim(Application.description(html)));
                     } else {
+                        $(".exampleName").empty().html(title);
+
                         $("#nav .t-item > .t-link").eq(0).addClass("t-state-selected");
                         Application.fetchExample(href);
                     }
@@ -301,7 +305,7 @@ var categories = {
         {
             text: "Autocomplete",
             expanded: true,
-            spriteCssClass: "autoCompleteIcon",
+            spriteCssClass: "autocompleteIcon",
             items: [
                 {
                     text: "Default Settings",
@@ -327,7 +331,7 @@ var categories = {
         },
         {
             text: "DropDownList",
-            spriteCssClass: "dropDownIcon",
+            spriteCssClass: "dropDownListIcon",
             items: [
                 {
                     text: "Default Settings",
