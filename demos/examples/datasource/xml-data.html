@@ -24,33 +24,42 @@
         <div class="description">Binding to XML</div>
         <!-- description -->
         <div id="example">
-            <style scoped>
-            </style>
-            <div id="books">
-            </div>
+
+            <ul id="books"></ul>
+
             <script id="template" type="text/x-kendo-template">
-                <div class="book">
-                    <a href="<#= url #>"><img src="<#= cover #>" /></a>
+                <li class="book">
+                    <a href="<#= url #>"><img src="../content/datasource/xml-data/<#= cover #>" /></a>
                     <h3><#= title #></h3>
-                </div>
+                </li>
             </script>
+
             <script>
                 // create a template using the above definition
                 var template = kendo.template($("#template").html());
 
                 var dataSource = new kendo.data.DataSource({
                     transport: {
-                        read: "books.xml" //specify the XML file to read. The same as read: { url: "books.xml" }
+                        // specify the XML file to read. The same as read: { url: "books.xml" }
+                        read: "books.xml"
                     },
                     schema: {
-                        type: "xml", //specify the the schema is XML
-                        data: "/books/book", // the XML element which represents a single data record
-                        model: { // define the model - the object which will represent a single data record
-                            fields: { // configure the fields of the object
-                                title: "title/text()", //the "title" field is mapped to the text of the "title" XML element
-                                author: "author/text()",//the "author" field is mapped to the text of the "author" XML element
-                                url: "url/text()", //the "url" field is mapped to the text of the "url" XML element
-                                cover: "@cover" // the "cover" field is mapped to the "id" attribute of the "book" XML element
+                        // specify the the schema is XML
+                        type: "xml",
+                        // the XML element which represents a single data record
+                        data: "/books/book",
+                        // define the model - the object which will represent a single data record
+                        model: {
+                            // configure the fields of the object
+                            fields: {
+                                // the "title" field is mapped to the text of the "title" XML element
+                                title: "title/text()",
+                                // the "author" field is mapped to the text of the "author" XML element
+                                author: "author/text()",
+                                // the "url" field is mapped to the text of the "url" XML element
+                                url: "url/text()",
+                                // the "cover" field is mapped to the "id" attribute of the "book" XML element
+                                cover: "@cover"
                             }
                         }
                     },
@@ -61,6 +70,44 @@
 
                 dataSource.read();
             </script>
+
+            <div class="configuration">
+                The XML file goes here.
+
+                <pre><code>&lt;?xml version="1.0" ?&gt;
+                </code></pre>
+            </div>
+
+            <style scoped>
+                .configuration {
+                    width: 30%;
+                    display: inline-block;
+                }
+
+                #books {
+                    list-style-type: none;
+                    width: 60%;
+                    display: inline-block;
+                }
+
+                .book {
+                    display: inline-block;
+                    vertical-align: top;
+                    width: 32%;
+                    text-align: center;
+                }
+
+                .book a {
+                    display: inline-block;
+                    max-width: 128px;
+                    border: 1px solid #b6b6b6;
+                }
+
+                .book img {
+                    vertical-align: middle;
+                    max-width: 100%;
+                }
+            </style>
         </div>
         <!-- tools -->
         <!-- tools -->
