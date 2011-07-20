@@ -81,7 +81,9 @@
                         dataSource: sharedDataSource,
                         height: 250,
                         scrollable: true,
-                        sortable: true,
+                        sortable: {
+                            allowUnsort: false
+                        },
                         columns: [
                             {
                                 field: "year",
@@ -103,7 +105,7 @@
                         series: [{
                             type: "line",
                             field: "value",
-                            name: "Internet Users"
+                            name: "Estimated Internet Users (Source: ITU)"
                         }],
                         axisDefaults: {
                             labels: {
