@@ -128,7 +128,7 @@ function processExample(file) {
         scriptRegion = splitScriptRegion(exampleHTML, base),
         cssRegion = splitCSSRegion(exampleHTML, base),
         component = componentFromFilename(file),
-        isLive = '\n\t\t<script type="text/javascript"> var live = true; </script>\n';
+        isLive = '<script type="text/javascript"> var live = true; </script>\n';
 
     exampleHTML = baseRegions.meta.exec(exampleHTML, isLive + baseRegions.meta.html);
 
