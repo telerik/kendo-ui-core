@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+    <head>
+        <!-- meta -->
+        <!-- meta -->
+        <title>Grid virtualization using local data</title>
+        <!-- script -->
+        <script src="../../../src/jquery.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.data.js"></script>
+        <script src="../../../src/kendo.pageable.js"></script>
+        <script src="../../../src/kendo.sortable.js"></script>
+        <script src="../../../src/kendo.draganddrop.js"></script>
+        <script src="../../../src/kendo.groupable.js"></script>
+        <script src="../../../src/kendo.grid.js"></script>
+        <script src="../js/people.js"></script>
+        <!-- script -->
+        <!-- css -->
+        <link href="../styles/examples.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.common.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.blueopal.css" rel="stylesheet"/>
+        <!-- css -->
+    </head>
+    <body>
+        <!-- nav -->
+        <!-- nav -->
+        <!-- description -->
+        <div class="description">Grid virtualization using local data</div>
+        <!-- description -->
+        <div id="example">
+            <div class="t-grid"> </div>
+
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    $(".t-grid").kendoGrid({
+                        dataSource: {
+                            data: createRandomData(500),
+                            pageSize: 50
+                        },
+                        height: 280,
+                        scrollable: {
+                            virtual: true
+                        },
+                        columns: [
+                            { field: "FirstName" },
+                            { field: "LastName" },
+                            { field: "City" },
+                            { field: "Title" }
+                        ],
+                        sortable: true
+                    });
+                });
+            </script>
+        </div>
+        <!-- tools -->
+        <!-- tools -->
+    </body>
+</html>
+
+
