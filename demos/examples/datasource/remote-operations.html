@@ -8,7 +8,6 @@
         <script src="../../../src/jquery.js"></script>
         <script src="../../../src/kendo.core.js"></script>
         <script src="../../../src/kendo.data.js"></script>
-        <script src="../../../src/kendo.pager.js"></script>
         <script src="../../../src/kendo.data.odata.js"></script>
         <!-- script -->
         <!-- css -->
@@ -25,26 +24,46 @@
         <!-- description -->
         <div id="example">
             <style scoped>
+                .title
+                {
+                    float:left;
+                    width: 200px;
+                }
             </style>
-            <div id="pager"></div>
-            <table id="results">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
+
+            <div class="configuration">
+                <div>
+                    <label>Page: <input type="number" value="1" id="page" min="1" /></label>
+                </div>
+                <div>
+                    <label>Order by: <select id="order">
+                            <option value="Id">Id</option>
+                            <option value="Name">Name</option>
+                            <option value="AverageRating">Average Rating</option>
+                            <option value="ReleaseYear">Release Year</option>
+                        </select>
+                    </label>
+                    <label>Direction: <select id="dir">
+                            <option value="asc">Ascending</option>
+                            <option value="desc">Descending</option>
+                        </select>
+                    </label>
+                </div>
+                <div>
+                    <button class="t-button" id="apply">Apply</button>
+                </div>
+            </div>
+
+            <div id="results">
+            </div>
             <script id="template" type="text/x-kendo-template">
-                <tr>
-                    <td><img src="<#= BoxArt.LargeUrl #>" /></td>
-                    <td><#= Name #></td>
-                </tr>
+                <div class="title">
+                    <# if (BoxArt.LargeUrl) { #>
+                        <img src="<#= BoxArt.LargeUrl #>" />
+                    <# } #>
+                    Name: <span><#= Name #></span>
+                    Average Rating: <span><#= AverageRating #></span>
+                </div>
             </script>
             <script>
                 // create a template using the above definition
@@ -59,17 +78,36 @@
                         read: "http://odata.netflix.com/Catalog/Titles"
                     },
                     change: function() { // subscribe to the CHANGE event of the data source
-                        $("#results tbody").html(kendo.render(template, this.view()));
+                        // update the max attribute of the "page" input
+                        $("#page").attr("max", this.totalPages());
+
+                        console.log(kendo.stringify(this.view()));
+                        $("#results").html(kendo.render(template, this.view()));
                     }
                 });
 
-
-                $("#pager").kendoPagable({
-                    dataSource: dataSource
-                });
                 // read data from the remote service
                 dataSource.read();
 
+                $("#apply").click(function() {
+                    var page = parseInt($("#page").val(), 10);
+
+                    // validate the page - it must be a number within the allowed range
+                    if (isNaN(page) || page < 1 || page > dataSource.totalPages()) {
+                        alert(kendo.format("Page must be a number between 1 and {0}", dataSource.totalPages()));
+                        return;
+                    }
+
+                    // query the remote service
+                    dataSource.query({
+                        page: page,
+                        pageSize: 10,
+                        sort: {
+                            field: $("#order").val(),
+                            dir:$("#dir").val()
+                        }
+                    });
+                });
             </script>
         </div>
         <!-- tools -->
