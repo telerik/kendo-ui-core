@@ -2074,8 +2074,8 @@
                 totalsNeg = chart._categoryTotalsNeg;
 
             if (isStacked) {
-                chart._seriesMin = sparseArrayMin(totalsNeg.length ? totalsNeg : totalsPos);
-                chart._seriesMax = sparseArrayMax(totalsPos.length ? totalsPos : totalsNeg);
+                chart._seriesMin = sparseArrayMin(totalsNeg.concat(0));
+                chart._seriesMax = sparseArrayMax(totalsPos.concat(0));
             }
 
             return CategoricalChart.fn.valueRange.call(chart);
