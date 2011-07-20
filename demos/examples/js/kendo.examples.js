@@ -602,6 +602,10 @@ var categories = {
                 {
                     text: "Virtualization with local data",
                     url: "grid/virtualization-local-data.html"
+                },
+                {
+                    text: "Virtualization with remote data",
+                    url: "grid/virtualization-remote-data.html"
                 }
             ]
         }

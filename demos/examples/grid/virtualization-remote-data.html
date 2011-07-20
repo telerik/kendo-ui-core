@@ -3,7 +3,7 @@
     <head>
         <!-- meta -->
         <!-- meta -->
-        <title>Grid virtualization using local data</title>
+        <title>Grid virtualization using remote data</title>
         <!-- script -->
         <script src="../../../src/jquery.js"></script>
         <script src="../../../src/kendo.core.js"></script>
@@ -25,7 +25,7 @@
         <!-- nav -->
         <!-- nav -->
         <!-- description -->
-        <div class="description">Grid virtualization using local data</div>
+        <div class="description">Grid virtualization using remote data</div>
         <!-- description -->
         <div id="example">
             <div class="t-grid"> </div>
@@ -34,15 +34,27 @@
                 $(document).ready(function() {
                     $(".t-grid").kendoGrid({
                         dataSource: {
-                            data: createRandomData(100000),
-                            pageSize: 50
+                            type: "odata",
+                            serverPaging: true,
+                            serverSorting: true,
+                            pageSize: 80,
+                            transport: {
+                                read: "http://odata.netflix.com/v2/Catalog/Titles"
+                            }
                         },
                         height: 280,
                         scrollable: {
                             virtual: true
                         },
-                        columns: [ "Id", "FirstName", "LastName", "City", "Title" ],
-                        sortable: true
+                        columns: [
+                                    { field: "Id", width: "70px" },
+                                    "Name",
+                                    { field: "AverageRating", title: "Average Rating", width: "120px" },
+                                    { field: "ReleaseYear", title: "Release Year", width: "100px" }
+                        ],
+                        sortable: {
+                            allowUnsort: false
+                        }
                     });
                 });
             </script>
@@ -51,5 +63,3 @@
         <!-- tools -->
     </body>
 </html>
-
-

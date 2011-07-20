@@ -105,7 +105,6 @@
                 itemHeight = that.itemHeight,
                 skip = dataSource.skip() || 0,
                 take = dataSource.take(),
-                originalSkip = Math.max(Math.round(skip / take), 0) * take,
                 fetching = false,
                 prefetchAt = 0.33;
 
@@ -120,11 +119,11 @@
                 that._scrollTop = itemHeight;
                 that._page(skip, take);
             } else {
-                if (firstItemIndex < originalSkip + take * prefetchAt && firstItemIndex > take * prefetchAt) {
-                    dataSource.fetchPrevPage();
+                if (firstItemIndex < skip + take * prefetchAt && firstItemIndex > take * prefetchAt) {
+                    dataSource.prefetch(Math.max(skip - take, 0), take);
                 }
-                if (lastItemIndex > (originalSkip + take) - (take * prefetchAt)) {
-                    dataSource.fetchNextPage();
+                if (lastItemIndex > skip + take * prefetchAt) {
+                    dataSource.prefetch(skip + take, take);
                 }
             }
             return fetching;
@@ -556,10 +555,10 @@
                                 .bind(ERROR, proxy(that._error, that));
         },
         _error: function() {
-            kendo.ui.progress(this.element.parent(), false);
+            this._progress(false);
         },
         _requestStart: function() {
-            kendo.ui.progress(this.element.parent(), true);
+            this._progress(true);
         },
 
         _pageable: function() {
@@ -868,7 +867,12 @@
             }
             return data;
         },
+        _progress: function(toggle) {
+            var that = this,
+                element = that.element.is("table") ? that.element : that.element.find(".t-grid-content");
 
+            kendo.ui.progress(element, toggle);
+        },
         refresh: function() {
             var that = this,
                 length,
@@ -880,7 +884,7 @@
                 groups = (that.dataSource.group() || []).length,
                 colspan = groups + that.columns.length;
 
-            kendo.ui.progress(that.element.parent(), false);
+            that._progress(false);
 
             if (!that.columns.length) {
                 that._autoColumns(that._firstDataItem(data[0], groups));
