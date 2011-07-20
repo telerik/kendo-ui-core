@@ -609,16 +609,16 @@ var categories = {
     framework: [
         { text: "DataSource", items: [
             {
+                text: "Basic usage",
+                url: "datasource/index.html"
+            },
+            {
                 text: "Binding to remote data",
                 url: "datasource/remote-data.html"
             },
             {
                 text: "Binding to XML",
                 url: "datasource/xml-data.html"
-            },
-            {
-                text: "Binding to local data",
-                url: "datasource/local-data.html"
             },
             {
                 text: "Remote data operations",
