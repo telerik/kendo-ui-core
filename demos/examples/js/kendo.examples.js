@@ -552,6 +552,10 @@ var categories = {
                 {
                     text: "Default Settings",
                     url: "grid/index.html"
+                },
+                {
+                    text: "Initialization from table",
+                    url: "grid/from-table.html"
                 }
             ]
         }
