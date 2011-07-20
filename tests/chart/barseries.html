@@ -231,8 +231,8 @@
                     }
                 });
 
-                test("reports stacked minumum value", function() {
-                    equal(series.valueRange().min, 2);
+                test("reports 0 as minumum value", function() {
+                    equal(series.valueRange().min, 0);
                 });
 
                 test("reports stacked maximum value", function() {
@@ -270,8 +270,8 @@
                     equal(series.valueRange().min, -4);
                 });
 
-                test("reports stacked maximum value", function() {
-                    equal(series.valueRange().max, -2);
+                test("reports 0 as maximum value", function() {
+                    equal(series.valueRange().max, 0);
                 });
 
                 test("bars in first category are stacked", function() {
@@ -914,8 +914,8 @@
                     }
                 });
 
-                test("reports stacked minumum value", function() {
-                    equal(series.valueRange().min, 2);
+                test("reports 0 as minumum value", function() {
+                    equal(series.valueRange().min, 0);
                 });
 
                 test("reports stacked maximum value", function() {
@@ -954,8 +954,8 @@
                     equal(series.valueRange().min, -4);
                 });
 
-                test("reports stacked maximum value", function() {
-                    equal(series.valueRange().max, -2);
+                test("reports 0 as maximum value", function() {
+                    equal(series.valueRange().max, 0);
                 });
 
                 test("bars in first category are stacked", function() {
