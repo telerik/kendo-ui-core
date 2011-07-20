@@ -81,7 +81,7 @@
         </if>
         
         <if test="data.properties.length">
-            {! var ownProperties = data.properties.filter(function($){return $.memberOf == data.alias && !$.isNamespace}).sort(makeSortby("name")); !}
+            {! var ownProperties = data.properties.filter(function($){return $.memberOf == data.alias && !$.isNamespace && $.name != "Description" }).sort(makeSortby("name")); !}
             <if test="ownProperties.length">
                 <div class="props">
                     <table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class {+data.alias+}.">
