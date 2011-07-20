@@ -786,6 +786,14 @@
 
                 ok(result);
             });
+
+            test("group on empty array", function() {
+                var data = [ ];
+
+                var result = new Query(data).group( [ { field: "foo" } ], data).toArray();
+
+                equal(result.length, 0);
+            });
         </script>
     </body>
 </html>
