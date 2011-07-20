@@ -554,7 +554,7 @@ pre.prettyprint
     padding: 10px;
     float: right;
     width: 180px;
-    height: 190px;
+    min-height: 190px;
     border: 1px solid #dedede;
 }
 
