@@ -30,38 +30,40 @@
         <div id="example">
             <div class="t-grid"></div>
             
-            <script type="text/javascript">                               
-                $(".t-grid").kendoGrid({
-                    dataSource: {
-                        transport: {
-                            read: "../datasource/top250movies.json"
-                        },                        
-                        pageSize: 10
-                    },
-                    height: 250,
-                    groupable: true,
-                    scrollable: true,
-                    sortable: true,
-                    pageable: true,
-                    columns: [
-                        {
-                            field: "rank",
-                            title: "Rank"
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    $(".t-grid").kendoGrid({
+                        dataSource: {
+                            transport: {
+                                read: "../datasource/top250movies.json"
+                            },                        
+                            pageSize: 10
                         },
-                        {
-                            field: "rating",
-                            title: "Rating"
-                        },
-                        {
-                            field: "title",
-                            title: "Title"
-                        },
-                        {
-                            field: "year",
-                            title: "Year"
-                        }
-                    ]
-                });                
+                        height: 250,
+                        groupable: true,
+                        scrollable: true,
+                        sortable: true,
+                        pageable: true,
+                        columns: [
+                            {
+                                field: "rank",
+                                title: "Rank"
+                            },
+                            {
+                                field: "rating",
+                                title: "Rating"
+                            },
+                            {
+                                field: "title",
+                                title: "Title"
+                            },
+                            {
+                                field: "year",
+                                title: "Year"
+                            }
+                        ]
+                    });
+                });
             </script>
         </div>
         <!-- tools -->
