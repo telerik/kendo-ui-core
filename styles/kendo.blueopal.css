@@ -1,6 +1,7 @@
 ﻿/* BlueOpal theme*/
 
-.t-widget
+.t-widget,
+.t-input
 {
     border-color: #8ba0bc;
     background-color: #fff;
@@ -41,68 +42,7 @@
 .t-icon { background-image: url('BlueOpal/sprite.png'); }
 .t-editor .t-tool-icon { background-image: url('BlueOpal/editor.png'); }
 
-.t-expand { background-position: 0 -256px; } /*160*/
-.t-collapse { background-position: -16px -256px; } /*0 -176px*/
-.t-rtl .t-expand { background-position: 0 -272px; } /*-64px -160px*/
-
-.t-plus, .t-plus-disabled { background-position: 0 -256px; }
-.t-minus, .t-minus-disabled { background-position: -16px -256px; }
-
-.t-rtl .t-plus, .t-rtl .t-plus-disabled { background-position: 0 -272px; }
-.t-rtl .t-minus, .t-rtl .t-minus-disabled { background-position: -16px -272px; }
-
-.t-arrow-up { background-position: -16px -160px; }
-.t-arrow-down { background-position: -16px -176px; }
-
-.t-state-disabled .t-arrow-up { background-position: -32px -160px; }
-.t-state-disabled .t-arrow-down { background-position: -32px -176px; }
-
-.t-state-hover .t-arrow-up { background-position: -48px -160px; }
-.t-state-hover .t-arrow-down { background-position: -48px -176px; }
-
-.t-numerictextbox .t-arrow-up { background-position: -16px -162px; }
-.t-numerictextbox .t-arrow-down { background-position: -16px -178px; }
-
-.t-arrow-up-small { background-position: 0 -304px; }
-.t-arrow-down-small { background-position: -16px -304px; }
-
-.t-arrow-first { background-position: 0 -192px; }
-.t-arrow-prev { background-position: -16px -192px; }
-.t-arrow-next { background-position: -32px -192px; }
-.t-arrow-last { background-position: -48px -192px; }
-
-.t-state-disabled .t-arrow-first { background-position: 0 -208px; }
-.t-state-disabled .t-arrow-prev { background-position: -16px -208px; }
-.t-state-disabled .t-arrow-next { background-position: -32px -208px; }
-.t-state-disabled .t-arrow-last { background-position: -48px -208px; }
-
-.t-state-hover .t-arrow-first { background-position: 0 -224px; }
-.t-state-hover .t-arrow-prev { background-position: -16px -224px; }
-.t-state-hover .t-arrow-next { background-position: -32px -224px; }
-.t-state-hover .t-arrow-last { background-position: -48px -224px; }
-
-.t-filter { background-position: 0 -240px; }
-.t-clear-filter { background-position: -16px -240px; }
-
-.t-refresh { background-position: -32px -240px; }
-.t-icon-calendar { background-position: -48px -240px; }
-.t-icon-clock { background-position: -64px -336px; }
-
-.t-edit { background-position: 0 -336px; }
-.t-delete { background-position: -16px -336px; }
-.t-insert, .t-update { background-position: -32px -336px; }
-.t-cancel { background-position: -48px -336px; }
-.t-group-delete { background-position: 0 -288px; }
-
-.t-maximize { background-position: -16px -288px; }
-.t-restore { background-position: -32px -288px; }
-.t-close { background-position: -64px -288px; }
-
-.t-insert-top { background-position: 0 -320px; }
-.t-insert-middle { background-position: -16px -320px; }
-.t-insert-bottom { background-position: -32px -320px; }
-.t-add { background-position: -48px -320px; }
-.t-denied { background-position: -64px -320px; }
+.t-picker-wrap{padding-right: 23px;}
 
 .t-loading,
 .t-widget .t-loading { background: transparent url('BlueOpal/loading.gif') no-repeat 0 0; }
@@ -275,10 +215,15 @@ a.t-button.t-state-disabled:hover,
     background-color:transparent;
 }
 
+.t-grid-header-wrap,
+.t-grid-footer-wrap
+{
+    border-color: #8ba0bc;
+}
+
 .t-grid td
 {
     border-color: #bfcde0;
-    border-right: 1px solid #bfcde0;
 }
 
 .t-grouping-row td
