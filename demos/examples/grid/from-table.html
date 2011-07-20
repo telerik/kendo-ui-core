@@ -8,10 +8,10 @@
         <script src="../../../src/jquery.js"></script>
         <script src="../../../src/kendo.core.js"></script>
         <script src="../../../src/kendo.data.js"></script>
-        <script src="../../../src/kendo.pager.js"></script>
+        <script src="../../../src/kendo.pageable.js"></script>
         <script src="../../../src/kendo.sortable.js"></script>
         <script src="../../../src/kendo.draganddrop.js"></script>
-        <script src="../../../src/kendo.groupable.js"></script>        
+        <script src="../../../src/kendo.groupable.js"></script>
         <script src="../../../src/kendo.grid.js"></script>
         <!-- script -->
         <!-- css -->
@@ -47,14 +47,14 @@
                     </tbody>
                 </table>
             </div>
-            
+
             <script type="text/javascript">
                 $(document).ready(function() {
                     $(".t-grid").kendoGrid({
                         dataSource: {
                             transport: {
                                 read: "../datasource/top250movies.json"
-                            },                        
+                            },
                             pageSize: 10
                         },
                         height: 250,

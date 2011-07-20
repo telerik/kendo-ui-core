@@ -7,7 +7,7 @@
         <script type="text/javascript" src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.data.js"></script>
-        <script src="../../src/kendo.pager.js"></script>
+        <script src="../../src/kendo.pageable.js"></script>
         <script src="../../src/kendo.grid.js"></script>
         <link rel="stylesheet" href="../qunit.css" type="text/css" />
     </head>
@@ -295,7 +295,7 @@
 
                 equal(grid.wrapper.height(), 100);
             });
-           
+
             test("non-scrollable grid thead has t-grid-header class", function() {
                 var grid = new Grid(table, { dataSource: [{foo:"bar"}], scrollable: false });
 
@@ -303,8 +303,8 @@
             });
 
             test("col elements are created for every column in non-scrollable grid", function() {
-                var grid = new Grid(table, { 
-                    dataSource: [], 
+                var grid = new Grid(table, {
+                    dataSource: [],
                     columns: [{field: "foo" }, {field: "bar"}],
                     scrollable: false
                 });
@@ -315,12 +315,12 @@
             });
 
             test("col elements are created for every column in scrollable grid", function() {
-                var grid = new Grid(table, { 
-                    dataSource: [], 
+                var grid = new Grid(table, {
+                    dataSource: [],
                     columns: [{field: "foo" }, {field: "bar"}],
                     scrollable: true
                 });
-                
+
                 var colgroups = grid.wrapper.find("colgroup");
 
                 equal(colgroups.length, 2);
@@ -330,8 +330,8 @@
 
             test("column width is applied on col element", function() {
                 var width = "200px",
-                    grid = new Grid(table, { 
-                        dataSource: [], 
+                    grid = new Grid(table, {
+                        dataSource: [],
                         columns: [{field: "foo", width: width }],
                         scrollable: true
                     });
@@ -344,7 +344,7 @@
 
             test("column width is parsed from DOM col element when grid created from table element", function() {
                 var element = $('<table><colgroup><col style="width:200px"/><col /><th data-field="foo"></th><th data-field="bar"></th><th data-field="baz"></th></colgroup></table>'),
-                    grid = new Grid(element, { 
+                    grid = new Grid(element, {
                         dataSource: [],
                         scrollable: false
                     });

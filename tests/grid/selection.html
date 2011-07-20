@@ -7,7 +7,7 @@
         <script type="text/javascript" src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.data.js"></script>
-        <script src="../../src/kendo.pager.js"></script>
+        <script src="../../src/kendo.pageable.js"></script>
         <script src="../../src/kendo.selectable.js"></script>
         <script src="../../src/kendo.grid.js"></script>
         <link rel="stylesheet" href="../qunit.css" type="text/css" />
@@ -289,8 +289,8 @@
                 var row = table.find("tbody tr").eq(0);
                 ok(row.find("td:first").hasClass("t-state-focused"));
             });
-            
-            test("clearSelection clears selected items", function() {                
+
+            test("clearSelection clears selected items", function() {
                 var grid = setup({
                         selectable: true
                     }),
@@ -301,7 +301,7 @@
                 ok(!cell.parent().hasClass("t-state-selected"));
             });
 
-            test("clearSelection triggers change event", function() {                
+            test("clearSelection triggers change event", function() {
                 var triggered = false,
                     grid = setup({
                         selectable: true,
@@ -309,7 +309,7 @@
                             triggered = true;
                         }
                     }),
-                    row = table.find("tbody tr:eq(1)").addClass("t-state-selected");                
+                    row = table.find("tbody tr:eq(1)").addClass("t-state-selected");
                 grid.clearSelection();
 
                 ok(triggered);
@@ -322,7 +322,7 @@
                     firstRow = table.find("tbody tr:eq(0)").addClass("t-state-selected");
 
                 var selected = grid.select();
-                
+
                 equal(selected.length, 1);
                 equal(selected[0], firstRow[0]);
             });
@@ -331,10 +331,10 @@
                 var grid = setup({
                         selectable: true
                     }),
-                    firstRow = table.find("tbody tr:eq(0)");                
+                    firstRow = table.find("tbody tr:eq(0)");
 
                 grid.select(firstRow);
-                
+
                 ok(firstRow.hasClass("t-state-selected"));
             });
 
@@ -345,7 +345,7 @@
                     rows = table.find("tbody tr");
                 rows.eq(0).addClass("t-state-selected");
                 grid.select(rows.eq(1));
-                
+
                 ok(!rows.eq(0).hasClass("t-state-selected"));
                 ok(rows.eq(1).hasClass("t-state-selected"));
             });
@@ -357,7 +357,7 @@
                     rows = table.find("tbody tr");
                 rows.eq(0).addClass("t-state-selected");
                 grid.select(rows.eq(1));
-                
+
                 ok(rows.eq(0).hasClass("t-state-selected"));
                 ok(rows.eq(1).hasClass("t-state-selected"));
             });
@@ -367,25 +367,25 @@
                         selectable: true
                     }),
                     rows = table.find("tbody tr");
-                                    
+
                 grid.select(rows);
-                
+
                 ok(rows.eq(0).hasClass("t-state-selected"));
                 ok(!rows.eq(1).hasClass("t-state-selected"));
                 ok(!rows.eq(2).hasClass("t-state-selected"));
             });
-            
+
             test("ctrl space on selected item unselects it", function() {
                 var grid = setup({
                         selectable: "multiple"
                     });
-                
+
                 grid.element.focus()
                     .press(kendo.keys.SPACEBAR)
                     .press(kendo.keys.SPACEBAR, true);
-                
+
                 ok(!table.find("tbody tr:first").hasClass("t-state-selected"));
-            });          
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
