@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+    <head>
+        <!-- meta -->
+        <!-- meta -->
+        <title>Binding to remote data</title>
+        <!-- script -->
+        <script src="../../../src/jquery.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.data.odata.js"></script>
+        <script src="../../../src/kendo.data.js"></script>
+        <script src="../../../src/kendo.pageable.js"></script>
+        <script src="../../../src/kendo.sortable.js"></script>        
+        <script src="../../../src/kendo.grid.js"></script>        
+        <!-- script -->
+        <!-- css -->
+        <link href="../styles/examples.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.common.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.blueopal.css" rel="stylesheet"/>
+        <!-- css -->
+    </head>
+    <body>
+        <!-- nav -->
+        <!-- nav -->
+        <!-- description -->
+        <div class="description">Binding to remote data</div>
+        <!-- description -->
+        <div id="example">
+            <div class="t-grid"></div>
+            
+            <script type="text/javascript">                
+                $(document).ready(function() {
+                    $(".t-grid").kendoGrid({
+                        dataSource: {
+                            type: "odata",
+                            transport: {
+                                read: {
+                                    url: "http://services.odata.org/Northwind/Northwind.svc/Orders"
+                                }
+                            },
+                            pageSize: 10,
+                            serverPaging: true,
+                            serverSorting: true
+                        },
+                        height: 250,                      
+                        scrollable: true,
+                        sortable: true,
+                        pageable: true,
+                        columns: ["OrderID", "CustomerID", "EmployeeID", "ShipVia"]
+                    });
+                });
+            </script>
+        </div>
+        <!-- tools -->
+        <!-- tools -->
+    </body>
+</html>
+
+
