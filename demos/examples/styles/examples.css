@@ -10,6 +10,7 @@ html, body
 .headerGradient,
 .skinSelector .t-arrow-down,
 #nav .t-sprite,
+#codeStrip .t-link,
 .exampleIcon,
 .console div,
 .telerikLogo
@@ -20,6 +21,7 @@ html, body
 * html .headerGradient,
 * html .skinSelector .t-arrow-down,
 * html #nav .t-sprite,
+* html #codeStrip .t-link,
 * html .exampleIcon,
 * html .console div,
 * html .telerikLogo
@@ -674,40 +676,87 @@ pre.prettyprint
 {
     font: 12px bold Arial, Helvetica, sans-serif;
     display: none;
-    background: #f3f3f3;
-    border: 1px solid #dedede;
+    background: none;
+    border: 0;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
-    padding: 10px;
+}
+
+#codeStrip .t-tabstrip-items
+{
+    padding: 0;
+}
+
+#codeStrip .t-item
+{
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    overflow: hidden;
+    margin-right: 0;
+    border-width: 1px 1px 0;
+    width: 20%;
+    *width: auto;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    background-color: #4d4d4d;
 }
 
 #codeStrip .t-state-default
 {
-    color: #2175bd;
-    background: transparent;
-    border-color: #F3F3F3;
+    border-color: #808080 #585858 transparent #808080;
+}
+
+#codeStrip .t-first
+{
+    -webkit-border-radius: 5px 0 0 0;
+    -moz-border-radius: 5px 0 0 0;
+    border-radius: 5px 0 0 0;
+}
+
+#codeStrip .t-last
+{
+    -webkit-border-radius: 0 5px 0 0;
+    -moz-border-radius: 0 5px 0 0;
+    border-radius: 0 5px 0 0;
+    border-right-color: #808080;
 }
 
 #codeStrip .t-link
 {
+    display: block;
     padding: 10px 20px;
+    line-height: 22px;
+    text-align: center;
 }
 
 #codeStrip .t-state-default .t-link
 {
-    color: #2175bd;
+    color: #FFF;
+    background-position: 0 -630px;
 }
 
 #codeStrip .t-state-active .t-link
 {
     color: #000;
+    background: none;
+}
+
+#codeStrip .t-state-hover
+{
+    background-color: #2d2d2d;
 }
 
 #codeStrip .t-state-hover .t-link
 {
-    color: #01559d;
+    opacity: .8;
+    filter: alpha(opacity=80);
     text-decoration: underline;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
 }
 
 #codeStrip .t-state-active,
@@ -715,12 +764,16 @@ pre.prettyprint
 {
     color: #000;
     background: #FFF;
-    border-color: #e8e8e8;
+    border-color: #dedede;
 }
 
 #codeStrip .t-content
 {
+    margin: 0;
     padding: 20px;
+    -webkit-border-radius: 0 0 5px 5px;
+    -moz-border-radius: 0 0 5px 5px;
+    border-radius: 0 0 5px 5px;
 }
 
 /* skinSelector styles */
