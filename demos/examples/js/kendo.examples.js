@@ -102,7 +102,7 @@
                 } else {
                     exampleName.kendoStop(true).kendoAnimate(extend({}, animation.hide, { complete: function() {
                         var currentControl = $("#nav > .t-state-highlighted > .t-link").text();
-                        $(".exampleName").empty().html('<span class="exampleIcon '+ currentControl[0].toLowerCase() + currentControl.substr(1) +'Icon"></span>'+title);
+                        $(".exampleName").empty().html('<span class="exampleIcon '+ currentControl.substr(0,1).toLowerCase() + currentControl.substr(1) +'Icon"></span>'+title);
 
                         setTimeout(function() {
                             var newTabs = $($.trim(Application.helpTabs(html)));
@@ -145,7 +145,7 @@
 
             if (title != "Overview") {
                 var currentControl = $("#nav > .t-state-highlighted > .t-link").text();
-                $(".exampleName").empty().html('<span class="exampleIcon '+ currentControl[0].toLowerCase() + currentControl.substr(1) +'Icon"></span>'+title);
+                $(".exampleName").empty().html('<span class="exampleIcon '+ currentControl.substr(0,1).toLowerCase() + currentControl.substr(1) +'Icon"></span>'+title);
 
                 $("#codeStrip, .skinSelector.t-widget").show();
 
