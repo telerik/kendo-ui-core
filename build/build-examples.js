@@ -110,10 +110,12 @@ function importComponentHelp(exampleHTML, component) {
         var helpFile = "docs/symbols/kendo.ui." + component + ".html",
             helpHTML = fs.readFileSync(helpFile, "utf8");
 
-        var tabs = regionRegex.helpTabs.exec(helpHTML)[1],
+        var description = regionRegex.description.exec(helpHTML)[1],
+            tabs = regionRegex.helpTabs.exec(helpHTML)[1],
             data = regionRegex.helpData.exec(helpHTML)[1];
 
         // could be improved if example has appropriate markers, or better yet, if loaded through AJAX (and not importing at all)
+        exampleHTML = exampleHTML.replace(regionRegex.description, "<!-- description -->" + description + "<!-- description -->");
         exampleHTML = exampleHTML.replace(regionRegex.helpTabs, "<!-- help-tabs -->" + tabs + "<!-- help-tabs -->");
         exampleHTML = exampleHTML.replace(regionRegex.helpData, "<!-- help-data -->" + data + "<!-- help-data -->");
     } catch (e) {
