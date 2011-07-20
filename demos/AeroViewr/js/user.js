@@ -381,7 +381,7 @@
 
             setPhotosDataSource.bind("change", function() {
                 if (uploadedPhotos[0]) {
-                    var lastPage = setPhotosDataSource._totalPages(),
+                    var lastPage = setPhotosDataSource.totalPages(),
                         data = setPhotosDataSource.data(),
                         photosLength = uploadedPhotos.length,
                         i = data.length - 1,
