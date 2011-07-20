@@ -30,19 +30,19 @@ function getRegionRegex(regionName) {
 }
 
 function removeDuplicateResources(resource, target) {
-    var scriptTag = resource.replace(/(\.\.\/)+/g, '[\.\/]*').replace(/\//g, '\\/').replace(/\./g, '\\.'),
-        rex = new RegExp('[\\r\\n]+\\s+' + scriptTag, 'i');
+    var scriptTag = resource.replace(/(\.\.\/)+/g, "[\.\/]*").replace(/\//g, "\\/").replace(/\./g, "\\."),
+        rex = new RegExp("[\\r\\n]+\\s+" + scriptTag, "i");
 
-    return target.replace(rex, '');
+    return target.replace(rex, "");
 }
 
 function splitScriptRegion(exampleHTML, base) {
     var baseScripts = baseRegions.script.html,
         scriptMatches = regionRegex.script.exec(exampleHTML),
-        currentPageScripts = scriptMatches ? scriptMatches[1].trimLeft() : '',
+        currentPageScripts = scriptMatches ? scriptMatches[1].trimLeft() : "",
         scriptStripper1 = /"(.*?)src/g,
         scriptStripper2 = /src="[.\/]*([^"]*)([^\.min]*)\.js"/g,
-        jsExtension = MINIFY ? '.min.js' : '.js',
+        jsExtension = MINIFY ? ".min.js" : ".js",
         rebasedSrc = 'src="' + base + '$1' + jsExtension + '"';
 
     if (!currentPageScripts)
@@ -67,9 +67,9 @@ function splitScriptRegion(exampleHTML, base) {
 function splitCSSRegion(exampleHTML, base) {
     var baseCSS = baseRegions.css.html,
         cssMatches = regionRegex.css.exec(exampleHTML),
-        currentPageCSS = cssMatches ? cssMatches[1].trimLeft() : '',
+        currentPageCSS = cssMatches ? cssMatches[1].trimLeft() : "",
         cssStripper = /href="[.\/]*([^"]*)\.css"/g,
-        cssExtension = MINIFY ? '.min.css' : '.css',
+        cssExtension = MINIFY ? ".min.css" : ".css",
         rebasedHref = 'href="' + base + '$1' + cssExtension + '"';
 
     if (!currentPageCSS)
@@ -128,7 +128,7 @@ function processExample(file) {
         scriptRegion = splitScriptRegion(exampleHTML, base),
         cssRegion = splitCSSRegion(exampleHTML, base),
         component = componentFromFilename(file),
-        isLive = '<script type="text/javascript"> var live = true; </script>\n';
+        isLive = "\n        <script type=\"text/javascript\">var live = true;</script>\n";
 
     exampleHTML = baseRegions.meta.exec(exampleHTML, isLive + baseRegions.meta.html);
 
