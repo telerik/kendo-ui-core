@@ -3,12 +3,12 @@
     <head>
         <!-- meta -->
         <!-- meta -->
-        <title>Remote data operations</title>
+        <title>Local data operations</title>
         <!-- script -->
         <script src="../../../src/jquery.js"></script>
         <script src="../../../src/kendo.core.js"></script>
         <script src="../../../src/kendo.data.js"></script>
-        <script src="../../../src/kendo.data.odata.js"></script>
+        <script src="../js/people.js"></script>
         <!-- script -->
         <!-- css -->
         <link href="../styles/examples.css" rel="stylesheet"/>
@@ -20,17 +20,11 @@
         <!-- nav -->
         <!-- nav -->
         <!-- description -->
-        <div class="description">Remote data operations</div>
+        <div class="description">Local data operations</div>
         <!-- description -->
         <div id="example">
             <style scoped>
-                .title
-                {
-                    float:left;
-                    width: 200px;
-                }
             </style>
-
             <div class="configuration">
                 <div>
                     <label>Page: <input type="number" value="1" id="page" min="1" /></label>
@@ -38,9 +32,9 @@
                 <div>
                     <label>Order by: <select id="order">
                             <option value="Id">Id</option>
-                            <option value="Name">Name</option>
-                            <option value="AverageRating">Average Rating</option>
-                            <option value="ReleaseYear">Release Year</option>
+                            <option value="FirstName">First Name</option>
+                            <option value="LastName">Last Name</option>
+                            <option value="Age">Age</option>
                         </select>
                     </label>
                     <label>Direction: <select id="dir">
@@ -54,38 +48,49 @@
                 </div>
             </div>
 
-            <div id="results">
-            </div>
+            <table id="people">
+                <thead>
+                    <th>Id</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Title</th>
+                    <th>Age</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
             <script id="template" type="text/x-kendo-template">
-                <div class="title">
-                    <# if (BoxArt.LargeUrl) { #>
-                        <img src="<#= BoxArt.LargeUrl #>" />
-                    <# } #>
-                    Name: <span><#= Name #></span>
-                    Average Rating: <span><#= AverageRating #></span>
-                </div>
+                <tr>
+                    <td><#= Id #></td>
+                    <td><#= FirstName #></td>
+                    <td><#= LastName #></td>
+                    <td><#= Title #></td>
+                    <td><#= Age #></td>
+                </tr>
             </script>
             <script>
                 // create a template using the above definition
                 var template = kendo.template($("#template").html());
 
                 var dataSource = new kendo.data.DataSource({
-                    type: "odata",
-                    serverPaging: true,
-                    serverSorting: true,
                     pageSize: 10,
-                    transport: {
-                        read: "http://odata.netflix.com/Catalog/Titles"
-                    },
+                    data: createRandomData(500),
                     change: function() { // subscribe to the CHANGE event of the data source
                         // update the max attribute of the "page" input
                         $("#page").attr("max", this.totalPages());
 
-                        $("#results").html(kendo.render(template, this.view()));
+                        $("#people tbody").html(kendo.render(template, this.view()));
                     }
                 });
 
-                // read data from the remote service
+                // read the data
                 dataSource.read();
 
                 $("#apply").click(function() {
@@ -113,4 +118,3 @@
         <!-- tools -->
     </body>
 </html>
-
