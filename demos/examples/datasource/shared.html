@@ -1,0 +1,130 @@
+<!doctype html>
+<html>
+    <head>
+        <!-- meta -->
+        <!-- meta -->
+        <title>Shared DataSource</title>
+        <!-- script -->
+        <script src="../../../src/jquery.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.data.js"></script>
+        <script src="../../../src/kendo.pageable.js"></script>
+        <script src="../../../src/kendo.sortable.js"></script>
+        <script src="../../../src/kendo.draganddrop.js"></script>
+        <script src="../../../src/kendo.groupable.js"></script>
+        <script src="../../../src/kendo.grid.js"></script>
+        <script src="../../../src/kendo.chart.js"></script>
+        <!-- script -->
+        <!-- css -->
+        <link href="../styles/examples.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.common.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.blueopal.css" rel="stylesheet"/>
+        <!-- css -->
+    </head>
+    <body>
+        <!-- nav -->
+        <!-- nav -->
+        <!-- description -->
+        <div class="description">
+            Multiple components can be bound to a single data source.
+            <p>
+                Any operations on the data source (sorting, filtering, etc.)
+                are automatically propagated to all bound components.
+            </p>
+        </div>
+        <!-- description -->
+        <div id="example">
+            <input id="country" style="width: 250px;"/>
+            <div id="chart"></div>
+            <div id="grid"></div>
+            <script>
+                var transport = {
+                    read: "../datasource/internet-users.json"
+                };
+
+                var countriesDataSource = new kendo.data.DataSource({
+                    transport: transport,
+                    group: {
+                        field: "country",
+                        dir: "asc"
+                    }
+                });
+
+                var sharedDataSource = new kendo.data.DataSource({
+                    transport: transport,
+                    sort: {
+                        field: "year",
+                        dir: "asc"
+                    }
+                });
+
+                function filterCountries() {
+                    sharedDataSource.filter({
+                        field: "country",
+                        operator: "equals",
+                        value: $("#country").val()
+                    });
+                }
+
+                $(document).ready(function() {
+                    $("#country")
+                        .val("United States")
+                        .kendoDropDownList({
+                            dataSource: countriesDataSource,
+                            dataTextField: "value",
+                            change: filterCountries
+                        });
+
+                    filterCountries();
+
+                    $("#grid").kendoGrid({
+                        dataSource: sharedDataSource,
+                        height: 250,
+                        scrollable: true,
+                        sortable: true,
+                        columns: [
+                            {
+                                field: "year",
+                                title: "Year"
+                            },
+                            {
+                                field: "value",
+                                title: "Estimated Internet Users",
+                                template: '<#= kendo.toString(value, "#,##0") #>'
+                            }
+                        ]
+                    });
+
+                    $("#chart").kendoChart({
+                        dataSource: sharedDataSource,
+                        legend: {
+                            position: "bottom"
+                        },
+                        series: [{
+                            type: "line",
+                            field: "value",
+                            name: "Internet Users"
+                        }],
+                        axisDefaults: {
+                            labels: {
+                                font: "11px Tahoma, sans-serif"
+                            }
+                        },
+                        valueAxis: {
+                            labels: {
+                                format: "{0:#,##0}"
+                            }
+                        },
+                        categoryAxis: {
+                            field: "year"
+                        }
+                    });
+                });
+            </script>
+        </div>
+        <!-- tools -->
+        <!-- tools -->
+    </body>
+</html>
+
+

@@ -593,6 +593,10 @@ var categories = {
             {
                 text: "Remote data operations",
                 url: "datasource/remote-operations.html"
+            },
+            {
+                text: "Shared DataSource",
+                url: "datasource/shared.html"
             }
         ] },
         { text: "Templates", items: [

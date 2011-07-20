@@ -69,6 +69,12 @@
 
             Component.fn.init.call(chart, element);
 
+            if (options && options.dataSource) {
+                chart.dataSource = DataSource
+                    .create(options.dataSource)
+                    .bind(CHANGE, proxy(chart._onDataChanged, chart));
+            }
+
             options = deepExtend({}, chart.options, options);
             applyAxisDefaults(options);
 
@@ -86,10 +92,6 @@
                 DATABOUND,
                 SERIES_CLICK
             ], chart.options);
-
-            if (chart.options.dataSource) {
-                chart._initDataSource();
-            }
 
             chart._ensureSize();
             chart._refresh();
@@ -210,14 +212,6 @@
             if (!chartArea.height) {
                 chartArea.height = element.height() || DEFAULT_HEIGHT;
             }
-        },
-
-        _initDataSource: function() {
-            var chart = this;
-
-            chart.dataSource = DataSource
-                .create(chart.options.dataSource)
-                .bind(CHANGE, proxy(chart._onDataChanged, chart));
         },
 
         _onDataChanged: function() {
