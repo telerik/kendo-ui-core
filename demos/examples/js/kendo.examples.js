@@ -566,6 +566,10 @@ var categories = {
                 {
                     text: "Initialization from table",
                     url: "grid/from-table.html"
+                },
+                {
+                    text: "Binding to local data",
+                    url: "grid/local-data.html"
                 }
             ]
         }

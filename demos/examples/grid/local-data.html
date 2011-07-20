@@ -3,7 +3,7 @@
     <head>
         <!-- meta -->
         <!-- meta -->
-        <title>Grid initialization from table element</title>
+        <title>Binding to local data</title>
         <!-- script -->
         <script src="../../../src/jquery.js"></script>
         <script src="../../../src/kendo.core.js"></script>
@@ -13,6 +13,7 @@
         <script src="../../../src/kendo.draganddrop.js"></script>
         <script src="../../../src/kendo.groupable.js"></script>
         <script src="../../../src/kendo.grid.js"></script>
+        <script src="../js/people.js"></script>
         <!-- script -->
         <!-- css -->
         <link href="../styles/examples.css" rel="stylesheet"/>
@@ -24,37 +25,17 @@
         <!-- nav -->
         <!-- nav -->
         <!-- description -->
-        <div class="description">Grid initialization from table element</div>
+        <div class="description">Binding to local data</div>
         <!-- description -->
         <div id="example">
-            <div>
-                <table class="t-grid">
-                    <thead>
-                        <tr>
-                            <th data-field="rank">Rank</th>
-                            <th data-field="rating">Rating</th>
-                            <th data-field="title">Title</th>
-                            <th data-field="year">Year</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+            <div class="t-grid"></div>
+            
+            <script type="text/javascript">                
 
-            <script type="text/javascript">
                 $(document).ready(function() {
                     $(".t-grid").kendoGrid({
                         dataSource: {
-                            transport: {
-                                read: "../datasource/top250movies.json"
-                            },
+                            data: createRandomData(50),
                             pageSize: 10
                         },
                         height: 250,
