@@ -403,6 +403,16 @@ var categories = {
             ]
         },
         {
+            text: "Chart",
+            spriteCssClass: "chartIcon",
+            items: [
+                {
+                    text: "Default Settings",
+                    url: "chart/index.html"
+                }
+            ]
+        },
+        {
             text: "ComboBox",
             spriteCssClass: "comboBoxIcon",
             items: [
