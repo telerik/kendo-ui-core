@@ -557,6 +557,10 @@
 
                     success(result);
                 };
+                if (!options || options.url == null)
+                {
+                    debugger;
+                }
                 $.ajax(options);
             }
         },
@@ -1143,7 +1147,7 @@
                 skip;
 
             if(val !== undefined) {
-                val = Math.max(Math.min(Math.max(val, 1), that._totalPages()), 1);
+                val = Math.max(Math.min(Math.max(val, 1), that.totalPages()), 1);
                 that.query({ page: val, pageSize: that.pageSize(), sort: that.sort(), filter: that.filter(), group: that.group(), aggregates: that.aggregate()});
                 return;
             }
@@ -1215,7 +1219,7 @@
             return this._aggregateResult;
         },
 
-        _totalPages: function() {
+        totalPages: function() {
             var that = this,
                 pageSize = that.pageSize() || that.total();
 
@@ -1224,7 +1228,7 @@
 
         inRange: function(skip, take) {
             var that = this,
-                end = Math.min(skip + take, (that._totalPages() - 1) * take);
+                end = Math.min(skip + take, (that.totalPages() - 1) * take);
 
             if (!that.options.serverPaging && that.data.length > 0) {
                 return true;
@@ -1235,7 +1239,7 @@
 
         range: function(skip, take) {
             var that = this,
-                end = Math.min(Math.min(skip + take, (that._totalPages() - 1) * take), that.total()),
+                end = Math.min(Math.min(skip + take, (that.totalPages() - 1) * take), that.total()),
                 pageSkip = (Math.max(Math.floor(skip / take), 0) * take),
                 data;
 
@@ -1271,7 +1275,7 @@
                 take = that.take(),
                 skip = Math.max(Math.round(that.skip() / take), 0) * take;
 
-            if (that.page() < that._totalPages()) {
+            if (that.page() < that.totalPages()) {
                 that.prefetch(skip + take, take);
             }
         },
