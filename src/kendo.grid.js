@@ -50,7 +50,9 @@
             });
             that.content = element.children().first();
             that.wrapper = that.content.wrap('<div class="t-virtual-scrollable-wrap"/>')
-                                .parent().bind("DOMMouseScroll, mousewheel", proxy(that._wheelScroll, that));
+                                .parent()
+                                .bind("DOMMouseScroll", proxy(that._wheelScroll, that))
+                                .bind("mousewheel", proxy(that._wheelScroll, that));
 
             that.verticalScrollbar = $('<div class="t-scrollbar t-scrollbar-vertical" />')
                                         .css({
@@ -60,10 +62,22 @@
         },
 
         _wheelScroll: function(e) {
+            console.log(e);
             var that = this,
-                scrollTop = that.verticalScrollbar.scrollTop();
+                scrollTop = that.verticalScrollbar.scrollTop(),
+                originalEvent = e.originalEvent,
+                delta;
+
             e.preventDefault();
-            that.verticalScrollbar.scrollTop(scrollTop + e.wheelDelta * -1);
+
+            if (originalEvent.wheelDelta) {
+                delta = originalEvent.wheelDelta;
+            } else if (originalEvent.detail) {
+                delta = -originalEvent.detail;
+            } else if ($.browser.opera) {
+                delta = -originalEvent.wheelDelta;
+            }
+            that.verticalScrollbar.scrollTop(scrollTop + (-delta));
         },
 
         _scroll: function(e) {

@@ -1241,6 +1241,7 @@
             var that = this,
                 end = Math.min(Math.min(skip + take, (that.totalPages() - 1) * take), that.total()),
                 pageSkip = (Math.max(Math.floor(skip / take), 0) * take),
+                time = that.options.serverPaging ? 250 : 0,
                 data;
 
             if (that.options.serverPaging) {
@@ -1261,7 +1262,7 @@
                 clearTimeout(that._timeout);
                 that._timeout = setTimeout(function() {
                     that.query({ skip: skip, take: take, sort: that.sort(), filter: that.filter(), group: that.group(), aggregates: that.aggregate() });
-                }, 250);
+                }, time);
             }
         },
         _currentPage: function() {

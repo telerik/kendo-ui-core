@@ -572,6 +572,10 @@ var categories = {
                 {
                     text: "Binding to local data",
                     url: "grid/local-data.html"
+                },
+                {
+                    text: "Virtualization with local data",
+                    url: "grid/virtualization-local-data.html"
                 }
             ]
         }
