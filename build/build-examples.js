@@ -16,6 +16,7 @@ var fs = require("fs"),
 
 /* globals  */
     rowSeparator = /[\r\n]+\s+/,
+    isLive = /<script[^>]*?>\s*var\slive\s*=\s*false;*\s*<\/script>\s+/im,
     baseRegions = {},
     regionRegex = {
         description: getRegionRegex("description"),
@@ -127,10 +128,9 @@ function processExample(file) {
         base = file === outputPath + "/index.html" ? "" : "../",
         scriptRegion = splitScriptRegion(exampleHTML, base),
         cssRegion = splitCSSRegion(exampleHTML, base),
-        component = componentFromFilename(file),
-        isLive = "\n        <script type=\"text/javascript\">var live = true;</script>\n";
+        component = componentFromFilename(file);
 
-    exampleHTML = baseRegions.meta.exec(exampleHTML, isLive + baseRegions.meta.html);
+    exampleHTML = baseRegions.meta.exec(exampleHTML, baseRegions.meta.html);
 
     exampleHTML = baseRegions.script.exec(exampleHTML, scriptRegion);
 
@@ -228,6 +228,7 @@ exports.build = function(origin, destination, minify) {
     wrench.copyDirSyncRecursive(examplesLocation, outputPath);
     wrench.copyDirSyncRecursive(originJS, outputPath + "/js");
     wrench.copyDirSyncRecursive(originStyles, outputPath + "/styles");
+    fs.writeFileSync(outputPath + "/index.html", indexHtml.replace(isLive, ""), "utf8");
     fs.unlinkSync(outputPath + "/template.html");
 
     if (!MINIFY) {
