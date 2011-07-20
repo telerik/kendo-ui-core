@@ -31,6 +31,7 @@
                 <li class="book">
                     <a href="<#= url #>"><img src="../content/datasource/xml-data/<#= cover #>" /></a>
                     <h3><#= title #></h3>
+                    by <#= author #>
                 </li>
             </script>
 
@@ -71,23 +72,13 @@
                 dataSource.read();
             </script>
 
-            <div class="configuration">
-                The XML file goes here.
-
-                <pre><code>&lt;?xml version="1.0" ?&gt;
-                </code></pre>
-            </div>
-
             <style scoped>
-                .configuration {
-                    width: 30%;
-                    display: inline-block;
-                }
-
                 #books {
                     list-style-type: none;
-                    width: 60%;
                     display: inline-block;
+                    width: 65%;
+                    margin: 0;
+                    padding: 0;
                 }
 
                 .book {
@@ -95,19 +86,46 @@
                     vertical-align: top;
                     width: 32%;
                     text-align: center;
+                    margin-bottom: 2em;
+                }
+
+                .book h3 {
+                    margin-bottom: 0;
                 }
 
                 .book a {
                     display: inline-block;
                     max-width: 128px;
                     border: 1px solid #b6b6b6;
+                    box-shadow: 0 0 4px #ccf;
+                }
+
+                .book a:hover {
+                    box-shadow: 0 0 6px #99f;
                 }
 
                 .book img {
                     vertical-align: middle;
                     max-width: 100%;
                 }
+
+                .configuration {
+                    width: 32%;
+                }
             </style>
+
+            <div class="configuration">
+                This example is bound to XML in the following format:
+
+                <pre class="prettyprint"><code>&lt;book cover="javascript-the-good-parts.png"&gt;
+    &lt;title&gt;JavaScript: The Good Parts&lt;/title&gt;
+    &lt;author&gt;Douglas Crockford&lt;/author&gt;
+    &lt;url&gt;http://www.amazon.com/&hellip;&lt;/url&gt;
+&lt;/book&gt;
+&vellip;</code></pre>
+
+                <a href="books.xml">see the full XML</a>
+            </div>
         </div>
         <!-- tools -->
         <!-- tools -->
