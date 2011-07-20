@@ -43,7 +43,7 @@
             dataSource: categories[element.id]
         }).data("kendoPanelBar");
 
-        if (!live)
+        if (live === false)
             $("#exampleHead, #content").toggleClass("nomargin", $(element).attr("href") == "overview/index.html");
 
         var referenceUrl = $("#logo")[0].href;
