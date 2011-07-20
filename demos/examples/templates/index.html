@@ -6,6 +6,7 @@
         <title>Title</title>
         <!-- script -->
         <script src="../../../src/jquery.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
         <!-- script -->
         <!-- css -->
         <link href="../styles/prettify.css" rel="stylesheet"/>
@@ -21,7 +22,39 @@
         <div class="description"></div>
         <!-- description -->
         <div id="example">
-            <h3>Example goes here</h3>
+            <fieldset>
+                <legend>Blog post</legend>
+                <ul>
+                    <li><label>Title: <input type="text" id="blog-title" value="Demo Title" /></label></li>
+                    <li><label>Author's Twitter: <input type="text" id="blog-twitter" value="kendoui" /></label></li>
+                    <li><label>Content: <textarea type="text" id="blog-content" rows="10" cols="120">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</textarea></label></li>
+                </ul>
+                <button id="preview" class="t-button">preview</button>
+            </fieldset>
+            <div id="blog-preview">
+            </div>
+            <script type="text/x-kendo-template" id="template">
+                <h3><#= title #></h3>
+                <p class="article">
+                <img src="http://api.twitter.com/1/users/profile_image?screen_name=<#= twitter #>&size=bigger" />
+                <#= content #>
+                </p>
+            </script>
+            <script>
+                var template = kendo.template($("#template").html());
+
+                function preview() {
+                    $("#blog-preview").html(template({
+                        title: $("#blog-title").val(),
+                        twitter: $("#blog-twitter").val(),
+                        content: $("#blog-content").val()
+                    }));
+                }
+
+                preview();
+
+                $("#preview").click(preview);
+            </script>
         </div>
         <!-- tools -->
         <!-- tools -->
