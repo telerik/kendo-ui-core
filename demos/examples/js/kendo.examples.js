@@ -371,46 +371,34 @@ var categories = {
             ]
         },
         {
-            text: "DropDownList",
-            spriteCssClass: "dropDownListIcon",
-            items: [
-                {
-                    text: "Basic usage",
-                    url: "dropdownlist/index.html"
-                },
-                {
-                    text: "Transformation",
-                    url: "dropdownlist/transformation.html"
-                },
-                {
-                    text: "Local Data Source",
-                    url: "dropdownlist/localdatasource.html"
-                },
-                {
-                    text: "Remote Data Source",
-                    url: "dropdownlist/remotedatasource.html"
-                },
-                {
-                    text: "Custom Template",
-                    url: "dropdownlist/customtemplate.html"
-                },
-                {
-                    text: "Events",
-                    url: "dropdownlist/events.html"
-                },
-                {
-                    text: "API",
-                    url: "dropdownlist/api.html"
-                }
-            ]
-        },
-        {
             text: "Chart",
             spriteCssClass: "chartIcon",
             items: [
                 {
                     text: "Basic usage",
                     url: "chart/index.html"
+                }
+            ]
+        },
+        {
+            text: "Grid",
+            spriteCssClass: "gridIcon",
+            items: [
+                {
+                    text: "Basic usage",
+                    url: "grid/index.html"
+                },
+                {
+                    text: "Initialization from table",
+                    url: "grid/from-table.html"
+                },
+                {
+                    text: "Binding to local data",
+                    url: "grid/local-data.html"
+                },
+                {
+                    text: "Virtualization with local data",
+                    url: "grid/virtualization-local-data.html"
                 }
             ]
         },
@@ -445,6 +433,40 @@ var categories = {
                 {
                     text: "API",
                     url: "combobox/api.html"
+                }
+            ]
+        },
+        {
+            text: "DropDownList",
+            spriteCssClass: "dropDownListIcon",
+            items: [
+                {
+                    text: "Basic usage",
+                    url: "dropdownlist/index.html"
+                },
+                {
+                    text: "Transformation",
+                    url: "dropdownlist/transformation.html"
+                },
+                {
+                    text: "Local Data Source",
+                    url: "dropdownlist/localdatasource.html"
+                },
+                {
+                    text: "Remote Data Source",
+                    url: "dropdownlist/remotedatasource.html"
+                },
+                {
+                    text: "Custom Template",
+                    url: "dropdownlist/customtemplate.html"
+                },
+                {
+                    text: "Events",
+                    url: "dropdownlist/events.html"
+                },
+                {
+                    text: "API",
+                    url: "dropdownlist/api.html"
                 }
             ]
         },
@@ -554,28 +576,6 @@ var categories = {
                 {
                     text: "API",
                     url: "treeview/api.html"
-                }
-            ]
-        },
-        {
-            text: "Grid",
-            spriteCssClass: "gridIcon",
-            items: [
-                {
-                    text: "Basic usage",
-                    url: "grid/index.html"
-                },
-                {
-                    text: "Initialization from table",
-                    url: "grid/from-table.html"
-                },
-                {
-                    text: "Binding to local data",
-                    url: "grid/local-data.html"
-                },
-                {
-                    text: "Virtualization with local data",
-                    url: "grid/virtualization-local-data.html"
                 }
             ]
         }
