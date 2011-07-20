@@ -335,8 +335,8 @@
             return result;
         },
         groupBy: function(descriptor) {
-            if (isEmptyObject(descriptor)) {
-                return new Query(result);
+            if (isEmptyObject(descriptor) || !this.data.length) {
+                return new Query([]);
             }
 
             var field = descriptor.field,
