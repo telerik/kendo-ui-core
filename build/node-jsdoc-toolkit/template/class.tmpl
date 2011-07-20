@@ -330,18 +330,23 @@
         {!
             var description = data.properties.filter(function(x) { return x._name == "Description"; })[0];
 
+            function htmlEncode(value) {
+                return ("" + value).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+            }
+
             if (description) {
                 description = description.comment;
 
                 for (var i in description.tags) {
                     var tag = description.tags[i];
+
                     switch (tag.title) {
                         case "exampleTitle":
                             output += '<h4 class="code-title">' + tag.desc + '</h4>';
                         break;
 
                         case "example":
-                            output += '<pre class="code prettyprint lang-js">' + tag.desc + '</pre>';
+                            output += '<pre class="code prettyprint lang-js">' + htmlEncode(tag.desc) + '</pre>';
                         break;
 
                         case "section":

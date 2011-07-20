@@ -349,7 +349,7 @@ var categories = {
             spriteCssClass: "autocompleteIcon",
             items: [
                 {
-                    text: "Default Settings",
+                    text: "Basic usage",
                     url: "autocomplete/index.html"
                 },
                 {
@@ -375,7 +375,7 @@ var categories = {
             spriteCssClass: "dropDownListIcon",
             items: [
                 {
-                    text: "Default Settings",
+                    text: "Basic usage",
                     url: "dropdownlist/index.html"
                 },
                 {
@@ -409,7 +409,7 @@ var categories = {
             spriteCssClass: "chartIcon",
             items: [
                 {
-                    text: "Default Settings",
+                    text: "Basic usage",
                     url: "chart/index.html"
                 }
             ]
@@ -419,7 +419,7 @@ var categories = {
             spriteCssClass: "comboBoxIcon",
             items: [
                 {
-                    text: "Default Settings",
+                    text: "Basic usage",
                     url: "combobox/index.html"
                 },
                 {
@@ -453,7 +453,7 @@ var categories = {
             spriteCssClass: "menuIcon",
             items: [
                 {
-                    text: "Default Settings",
+                    text: "Basic usage",
                     url: "menu/index.html"
                 },
                 {
@@ -474,7 +474,7 @@ var categories = {
             spriteCssClass: "panelBarIcon",
             items: [
                 {
-                    text: "Default Settings",
+                    text: "Basic usage",
                     url: "panelbar/index.html"
                 },
                 {
@@ -500,7 +500,7 @@ var categories = {
             spriteCssClass: "sliderIcon",
             items: [
                 {
-                    text: "Default Settings",
+                    text: "Basic usage",
                     url: "slider/index.html"
                 },
                 {
@@ -518,7 +518,7 @@ var categories = {
             spriteCssClass: "tabStripIcon",
             items: [
                 {
-                    text: "Default Settings",
+                    text: "Basic usage",
                     url: "tabstrip/index.html"
                 },
                 {
@@ -544,7 +544,7 @@ var categories = {
             spriteCssClass: "treeViewIcon",
             items: [
                 {
-                    text: "Default Settings",
+                    text: "Basic usage",
                     url: "treeview/index.html"
                 },
                 {
@@ -562,7 +562,7 @@ var categories = {
             spriteCssClass: "gridIcon",
             items: [
                 {
-                    text: "Basic Usage",
+                    text: "Basic usage",
                     url: "grid/index.html"
                 },
                 {
@@ -609,13 +609,13 @@ var categories = {
         ] },
         { text: "Templates", items: [
             {
-                text: "Basic Usage",
+                text: "Basic usage",
                 url: "templates/index.html"
             }
         ] },
         { text: "Drag & Drop", items: [
             {
-                text: "Basic Usage",
+                text: "Basic usage",
                 url: "dragdrop/index.html"
             }
         ] },
