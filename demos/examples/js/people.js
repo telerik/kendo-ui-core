@@ -11,7 +11,7 @@ function createRandomData(count) {
         var firstName = firstNames[Math.floor(Math.random() * firstNames.length)],
             lastName = lastNames[Math.floor(Math.random() * lastNames.length)],
             city = cities[Math.floor(Math.random() * cities.length)],
-            title = lastNames[Math.floor(Math.random() * titles.length)],
+            title = titles[Math.floor(Math.random() * titles.length)],
             birthDate = birthDates[Math.floor(Math.random() * birthDates.length)],
             age = now.getFullYear() - birthDate.getFullYear();            
 
