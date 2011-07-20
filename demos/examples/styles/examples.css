@@ -686,6 +686,9 @@ pre.prettyprint
 #codeStrip .t-tabstrip-items
 {
     padding: 0;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
 }
 
 #codeStrip .t-item
@@ -702,6 +705,7 @@ pre.prettyprint
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     background-color: #4d4d4d;
+    float: left;
 }
 
 #codeStrip .t-state-default
@@ -741,7 +745,7 @@ pre.prettyprint
 #codeStrip .t-state-active .t-link
 {
     color: #000;
-    background: none;
+    background: #FFF;
 }
 
 #codeStrip .t-state-hover
@@ -769,7 +773,7 @@ pre.prettyprint
 
 #codeStrip .t-content
 {
-    margin: 0;
+    margin: -1px 0 0;
     padding: 20px;
     -webkit-border-radius: 0 0 5px 5px;
     -moz-border-radius: 0 0 5px 5px;
