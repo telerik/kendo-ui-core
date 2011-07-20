@@ -57,6 +57,7 @@
 
             that.element
                 .attr("autocomplete", "off")
+                .addClass('t-widget t-input t-autocomplete')
                 .bind({
                     keydown: proxy(that._keydown, that),
                     paste: proxy(that._search, that),
