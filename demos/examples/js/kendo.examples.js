@@ -2,6 +2,7 @@
     var Application,
         extend = $.extend,
         live = window.live,
+        nonLocal = location.protocol != "file:",
         pushState = "pushState" in history,
         currentHtml = "",
         docsAnimation = {
@@ -72,7 +73,9 @@
         },
 
         fetchTitle: function () {
-            return $.trim(/<title>(.*?)<\/title>/i.exec(currentHtml)[1]);
+            var result = /<title>(.*?)<\/title>/i.exec(currentHtml);
+
+            return result ? $.trim(result[1]) : "";
         },
 
         fetchExample: function (href) {
@@ -135,29 +138,40 @@
                 callback();
         },
 
+        populateTools: function(html, href) {
+            var title = Application.fetchTitle();
+
+            if (title != "Overview") {
+                var currentControl = $("#nav > .t-state-highlighted > .t-link").text();
+                $(".exampleName").empty().html('<span class="exampleIcon '+ currentControl[0].toLowerCase() + currentControl.substr(1) +'Icon"></span>'+title);
+
+                $("#codeStrip, .skinSelector.t-widget").show();
+
+                $(".description").empty().html($.trim(Application.description(html)));
+            } else {
+                $(".exampleName").empty().html(title);
+
+                $("#nav .t-item > .t-link").eq(0).addClass("t-state-selected");
+                if (nonLocal)
+                    Application.fetchExample(href);
+            }
+        },
+
         fetchDescription: function(href) {
-            if (href)
-                $.get(href, function(html) {
-                    currentHtml = html;
+            if (nonLocal) {
+                if (href) {
+                    $.get(href, function(html) {
+                        currentHtml = html;
 
-                    var title = Application.fetchTitle();
+                        Application.populateTools(currentHtml, href);
+                    });
+                } else
+                    $(".description").empty().html($.trim(Application.description(currentHtml)));
+            } else {
+                currentHtml = "<!doctype html>\n<html>\n" + $("html").html() + "\n</html>";
 
-                    if (title != "Overview") {
-                        var currentControl = $("#nav > .t-state-highlighted > .t-link").text();
-                        $(".exampleName").empty().html('<span class="exampleIcon '+ currentControl[0].toLowerCase() + currentControl.substr(1) +'Icon"></span>'+title);
-
-                        $("#codeStrip, .skinSelector.t-widget").show();
-
-                        $(".description").empty().html($.trim(Application.description(html)));
-                    } else {
-                        $(".exampleName").empty().html(title);
-
-                        $("#nav .t-item > .t-link").eq(0).addClass("t-state-selected");
-                        Application.fetchExample(href);
-                    }
-                });
-            else
-                $(".description").empty().html($.trim(Application.description(currentHtml)));
+                Application.populateTools(currentHtml, href);
+            }
         },
 
         fetchSkin: function(skinName, animate) {
@@ -186,19 +200,24 @@
                 exampleElement[0].style.cssText = exampleElement[0].style.cssText;
             };
 
-            $.get(url, function() {
-                if (animate) {
-                    exampleElement.kendoStop().kendoAnimate(extend({}, animation.hide, { complete: function() {
+            if (nonLocal)
+                $.get(url, function() {
+                    if (animate) {
+                        exampleElement.kendoStop().kendoAnimate(extend({}, animation.hide, { complete: function() {
+                            changeSkin();
+                            setTimeout(function() {
+                                exampleElement.kendoStop().kendoAnimate(animation.show);
+                            }, 100);
+                        }}));
+                    } else
                         changeSkin();
-                        setTimeout(function() {
-                            exampleElement.kendoStop().kendoAnimate(animation.show);
-                        }, 100);
-                    }}));
-                } else
-                    changeSkin();
 
-                $("#exampleBody").show();
-            });
+                    $("#exampleBody").show();
+                });
+            else {
+                changeSkin();
+            }
+
         },
 
         helpTabs: function (html) {
@@ -214,7 +233,9 @@
         },
 
         description: function(html) {
-            return /<div class="description">(([\u000a\u000d\u2028\u2029]|.)*?)<\/\w+>\s*?<!-- description -->/ig.exec(html)[1];
+            var result = /<div class="description">(([\u000a\u000d\u2028\u2029]|.)*?)<\/\w+>\s*?<!-- description -->/ig.exec(html);
+
+            return result ? result[1] : "";
         },
 
         body: function(html) {
@@ -232,15 +253,19 @@
 
             var skinSelector = $("#skinSelector");
 
-            if (sessionStorage && sessionStorage.length) {
-                var kendoSkin = sessionStorage.getItem("kendoSkin");
+            try {
+                if (sessionStorage && sessionStorage.length) {
+                    var kendoSkin = sessionStorage.getItem("kendoSkin");
 
-                if (kendoSkin) {
-                    skinSelector.data("kendoDropDownList").value(kendoSkin);
-                    Application.fetchSkin(kendoSkin);
-                }
-            } else
+                    if (kendoSkin) {
+                        skinSelector.data("kendoDropDownList").value(kendoSkin);
+                        Application.fetchSkin(kendoSkin);
+                    }
+                } else
+                    $("#exampleBody").show();
+            } catch(err) {
                 $("#exampleBody").show();
+            }
 
             if (!live)
                 $("#categories li a").live("click", function(e) {
@@ -249,7 +274,7 @@
                     selectCategory(e.target);
                 });
 
-            if (pushState) {
+            if (pushState && nonLocal) {
                 $("#nav li a")
                     .live("click", function(e) {
                         e.preventDefault();
@@ -257,13 +282,6 @@
                         if (!location.href.match($(this).attr("href")) && !$("#exampleBody").data("animating"))
                             Application.load($(this).attr("href"));
                     });
-
-                $(".detailHandle").live("click", function (e) {
-                    var extender = $(this).next(),
-                        visible = extender.is(":visible");
-
-                    extender.kendoStop(true).kendoAnimate(!visible ? docsAnimation.show : docsAnimation.hide, visible);
-                });
 
                 $(window).bind("popstate", function(e) {
                     var state = e.originalEvent.state;
@@ -275,7 +293,14 @@
                 history.replaceState({ href: location.href }, null, location.href);
             }
 
-            Application.fetchDescription(location.href.substr(-1) == "/" ? initialRelativePath ? location.href + "index.html" : location.href + "overview/index.html" : location.href);
+            $(".detailHandle").live("click", function (e) {
+                var extender = $(this).next(),
+                    visible = extender.is(":visible");
+
+                extender.kendoStop(true).kendoAnimate(!visible ? docsAnimation.show : docsAnimation.hide, visible);
+            });
+
+            Application.fetchDescription(normalizedUrl);
             prettyPrint();
 
             $("#viewCode").click(function(e) {
@@ -294,7 +319,10 @@
 
                 Application.fetchSkin(newSkin, true);
 
-                sessionStorage.setItem("kendoSkin", newSkin);
+                try {
+                    sessionStorage.setItem("kendoSkin", newSkin);
+                } catch(err) {
+                }
             });
 
         }

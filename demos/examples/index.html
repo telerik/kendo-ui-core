@@ -56,12 +56,23 @@
             <div class="centerBox">
                 <div id="header">
                     <ul id="navi">
-                        <li><a title="Home" href="">KendoUI</a></li>
+                        <li><a title="Home" href="">Kendo UI</a></li>
                         <li><span>Demo</span></li>
                         <li><a title="" href="#roadmap">Roadmap</a></li>
                         <li class="download-beta"><a title="" href="#download-beta">Download Beta</a></li>
                     </ul>
                     <a id="logo" class="logoLink" title="Home" href=""></a>
+                    <script type="text/javascript">
+                        var normalizedUrl = (function() {
+                            var href = location.href.toLowerCase(), reference = $("#logo")[0].href.toLowerCase();
+
+                            return href == reference ?
+                                       reference.replace("/index.html", "/") + "overview/index.html" :
+                                       href.substr(-1) == "/" ?
+                                           href + "index.html" :
+                                           href;
+                        })();
+                    </script>
                     <ul id="categories">
                         <li><a id="overview" href="overview/index.html">Overview</a></li>
                         <li><a id="framework" href="datasource/remote-data.html">Framework</a></li>
@@ -78,7 +89,7 @@
                     <script type="text/javascript">
 
                         var initialRelativePath = document.getElementsByTagName("head")[0].innerHTML.match(/href=\W([\.\/]*)([\w\/]*?)kendo\.common/)[1],
-                            loc = /[^\/]+\/[^\/]+?$/.exec(location.href);
+                            loc = /[^\/]+\/[^\/]+?$/.exec(normalizedUrl);
 
                         function locatePage(url) {
                             var category = "",

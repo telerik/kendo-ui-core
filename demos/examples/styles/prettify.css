@@ -17,7 +17,8 @@ pre.prettyprint
 }
 
 pre .nocode { background-color: none; color: #000 }
-pre .str { color: #cc3300; } /* string */
+pre .str,                    /* string */
+pre .atv { color: #cc3300; } /* attribute value */
 pre .kwd { color: #8C1751;} /* keyword */
 pre .com { color: #256D24; } /* comment */
 pre .typ { color: #606; } /* type */
@@ -25,8 +26,7 @@ pre .lit { color: #066;} /* literal */
 pre .pun { color: #660 }    /* punctuation */
 pre .pln { color: #000 }    /* plaintext */
 pre .tag { color: #861681;} /* html/xml tag */
-pre .atn { color: #C5680C;} /* attribute name */
-pre .atv { color: #221AA6;} /* attribute value */
+pre .atn { color: #221AA6;} /* attribute name */
 pre .dec { color: #1F00FF; } /* decimal */
 
 /* Specify class=linenums on a pre to get line numbering */
