@@ -578,6 +578,32 @@ var categories = {
                     url: "treeview/api.html"
                 }
             ]
+        },
+        {
+            text: "Grid",
+            spriteCssClass: "gridIcon",
+            items: [
+                {
+                    text: "Basic usage",
+                    url: "grid/index.html"
+                },
+                {
+                    text: "Initialization from table",
+                    url: "grid/from-table.html"
+                },
+                {
+                    text: "Binding to local data",
+                    url: "grid/local-data.html"
+                },
+                {
+                    text: "Binding to remote data",
+                    url: "grid/remote-data.html"
+                },
+                {
+                    text: "Virtualization with local data",
+                    url: "grid/virtualization-local-data.html"
+                }
+            ]
         }
     ],
     framework: [
