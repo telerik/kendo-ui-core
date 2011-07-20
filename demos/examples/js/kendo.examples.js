@@ -31,6 +31,7 @@
         },
         initialFolder = 0,
         codeStrip = false,
+        referenceUrl = "",
         initialRelativePath = "";
 
     window.selectCategory = function(element) {
@@ -46,7 +47,8 @@
         if (live === false)
             $("#exampleHead, #content").toggleClass("nomargin", $(element).attr("href") == "overview/index.html");
 
-        var referenceUrl = $("#logo")[0].href;
+        if (!referenceUrl)
+            referenceUrl = $("#logo")[0].href;
         $("#nav li a").each(function() {
             var match = $(this).attr("href").match(/[^\/]+\/[^\/]+?$/);
             $(this).attr("href", referenceUrl + (match ? match[0] : ""));
