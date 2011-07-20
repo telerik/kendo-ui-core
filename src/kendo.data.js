@@ -557,10 +557,7 @@
 
                     success(result);
                 };
-                if (!options || options.url == null)
-                {
-                    debugger;
-                }
+                
                 $.ajax(options);
             }
         },
