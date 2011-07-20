@@ -207,6 +207,11 @@
             activeItem = tabs.filter("." + ACTIVESTATE).index();
             activeTab = activeItem >= 0 ? activeItem : undefined;
 
+            that.tabGroup // Remove empty text nodes
+                .contents()
+                .filter(function () { return (this.nodeType == 3 && !$.trim(this.nodeValue)); })
+                .remove();
+
             that.contentElements = that.element.children("div");
 
             that.contentElements
@@ -218,6 +223,7 @@
             that._updateTabClasses(tabs);
 
             that._updateContentElements();
+            that._updateFirstLast();
         },
 
         _updateTabClasses: function(tabs) {
