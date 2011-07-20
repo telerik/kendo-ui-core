@@ -206,7 +206,7 @@
 
             that._navigatable();
 
-            that._selectable();            
+            that._selectable();
 
             if (that.options.autoBind) {
                 that.dataSource.query();
@@ -560,10 +560,10 @@
                     wrapper = $('<div class="t-grid-pager"/>').appendTo(that.wrapper);
                 }
 
-                if (typeof pageable === "object" && pageable instanceof kendo.ui.Pagable) {
+                if (typeof pageable === "object" && pageable instanceof kendo.ui.Pageable) {
                     that.pager = pageable;
                 } else {
-                    that.pager = new kendo.ui.Pagable(wrapper, extend({}, pageable, { dataSource: that.dataSource }));
+                    that.pager = new kendo.ui.Pageable(wrapper, extend({}, pageable, { dataSource: that.dataSource }));
                 }
             }
         },

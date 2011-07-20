@@ -148,7 +148,7 @@
 
             that._isSliderInit = false;
 
-            $(".paging").kendoPagable({ dataSource: dataSource });
+            $(".paging").kendoPageable({ dataSource: dataSource });
 
             $("#flatSearchPhotos").kendoListView({
                 autoBind: false,
@@ -169,7 +169,7 @@
                 scrollable: false,
                 autoBind: false,
                 dataSource: dataSource,
-                pageable: $(".paging").data("kendoPager"),
+                pageable: $(".paging").data("kendoPageable"),
                 selectable: true,
                 columns: [
                     { template: '<img data-photoid="<#= id #>" alt="<#= kendo.htmlEncode(title) #>" src="http://farm<#=farm#>.static.flickr.com/<#=server#>/<#=id#>_<#=secret#>_s.jpg">', title: "PHOTO" },

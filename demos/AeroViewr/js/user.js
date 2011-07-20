@@ -246,7 +246,7 @@
         },
         initMainPictures: function() {
             var that = this;
-            $(".paging").kendoPagerable({ dataSource: setPhotosDataSource });
+            $(".paging").kendoPageable({ dataSource: setPhotosDataSource });
 
             that._isSliderInit = false;
 
@@ -283,7 +283,7 @@
                 scrollable: false,
                 autoBind: false,
                 dataSource: setPhotosDataSource,
-                pageable: $(".paging").data("kendoPagerable"),
+                pageable: $(".paging").data("kendoPageable"),
                 selectable: true,
                 columns: [
                     { template: '<img data-photoid="<#= id #>" alt="<#= kendo.htmlEncode(title) #>" src="http://farm<#=farm#>.static.flickr.com/<#=server#>/<#=id#>_<#=secret#>_s.jpg">', title: "PHOTO" },
