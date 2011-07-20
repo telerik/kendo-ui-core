@@ -22,27 +22,12 @@
         <div class="description">Binding to remote data</div>
         <!-- description -->
         <div id="example">
-            <style scoped>
-                .tweet
-                {
-                    vertical-align: top;
-                    padding: 10px;
-                    border: 1px solid black;
-                    margin: 10px 0;
-                    -webkit-border-radius: 10px;
-                    -moz-border-radius: 10px;
-                    border-radius: 10px;
-                }
-                #results
-                {
-                    overflow: auto;
-                    height: 400px;
-                }
-            </style>
-            <label>Show latest tweets for:<input type="text" value="html5" id="searchFor" /></label><button class="t-button" id="search">search</button>
+            <label>Show latest tweets for: <input type="text" value="html5" id="searchFor" /></label><button class="t-button" id="search">search</button>
+
             <div id="results">
                 <div>Loading ... </div>
             </div>
+
             <script id="template" type="text/x-kendo-template">
                 <div class="tweet t-header">
                     <img width="48" height="48" src="<#= profile_image_url #>" alt="<#= from_user #>" />
@@ -53,6 +38,7 @@
                     </div>
                 </div>
             </script>
+
             <script>
                 // create a template using the above definition
                 var template = kendo.template($("#template").html());
@@ -90,6 +76,24 @@
                     }
                 });
             </script>
+
+            <style scoped>
+                .tweet
+                {
+                    vertical-align: top;
+                    padding: 10px;
+                    border: 1px solid black;
+                    margin: 10px 0;
+                    -webkit-border-radius: 10px;
+                    -moz-border-radius: 10px;
+                    border-radius: 10px;
+                }
+                #results
+                {
+                    overflow: auto;
+                    height: 400px;
+                }
+            </style>
         </div>
         <!-- tools -->
         <!-- tools -->
