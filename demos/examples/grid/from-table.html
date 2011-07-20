@@ -24,10 +24,29 @@
         <!-- nav -->
         <!-- nav -->
         <!-- description -->
-        <div class="description">Basic grid initialization</div>
+        <div class="description">Grid initialization from table element</div>
         <!-- description -->
         <div id="example">
-            <div class="t-grid"></div>
+            <div>
+                <table class="t-grid">
+                    <thead>
+                        <tr>
+                            <th data-field="rank">Rank</th>
+                            <th data-field="rating">Rating</th>
+                            <th data-field="title">Title</th>
+                            <th data-field="year">Year</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             
             <script type="text/javascript">
                 $(document).ready(function() {
@@ -42,25 +61,7 @@
                         groupable: true,
                         scrollable: true,
                         sortable: true,
-                        pageable: true,
-                        columns: [
-                            {
-                                field: "rank",
-                                title: "Rank"
-                            },
-                            {
-                                field: "rating",
-                                title: "Rating"
-                            },
-                            {
-                                field: "title",
-                                title: "Title"
-                            },
-                            {
-                                field: "year",
-                                title: "Year"
-                            }
-                        ]
+                        pageable: true
                     });
                 });
             </script>
