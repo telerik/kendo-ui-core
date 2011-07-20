@@ -35,8 +35,11 @@
         <!-- description -->
         <div id="example">
             <input id="country" style="width: 250px;"/>
-            <div id="chart"></div>
-            <div id="grid"></div>
+            <div style="height: 280px; margin-top: 20px;">
+                <div id="grid" style="width: 270px; float: left;"></div>
+                <div id="chart"
+                     style="width: 480px; height: 280px; margin-left: 10px; float: left;"></div>
+            </div>
             <script>
                 var transport = {
                     read: "../datasource/internet-users.json"
@@ -59,11 +62,15 @@
                 });
 
                 function filterCountries() {
-                    sharedDataSource.filter({
+                    sharedDataSource.filter([{
                         field: "country",
                         operator: "equals",
                         value: $("#country").val()
-                    });
+                    }, {
+                        field: "year",
+                        operator: "greaterThanEqual",
+                        value: 2000
+                    }]);
                 }
 
                 $(document).ready(function() {
@@ -79,33 +86,36 @@
 
                     $("#grid").kendoGrid({
                         dataSource: sharedDataSource,
-                        height: 250,
-                        scrollable: true,
+                        scrollable: false,
                         sortable: {
                             allowUnsort: false
                         },
                         columns: [
                             {
                                 field: "year",
-                                title: "Year"
+                                title: "Year",
+                                width: "80px"
                             },
                             {
                                 field: "value",
                                 title: "Estimated Internet Users",
-                                template: '<#= kendo.toString(value, "#,##0") #>'
+                                template: '<#= kendo.toString(value, "#,##0") #>',
+                                width: "190px"
                             }
                         ]
                     });
 
                     $("#chart").kendoChart({
                         dataSource: sharedDataSource,
+                        title: {
+                            text: "Estimated Internet Users (Source: ITU)"
+                        },
                         legend: {
-                            position: "bottom"
+                            visible: false
                         },
                         series: [{
                             type: "line",
-                            field: "value",
-                            name: "Estimated Internet Users (Source: ITU)"
+                            field: "value"
                         }],
                         axisDefaults: {
                             labels: {
