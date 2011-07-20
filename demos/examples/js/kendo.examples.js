@@ -516,6 +516,16 @@ var categories = {
                     url: "treeview/api.html"
                 }
             ]
+        },
+        {
+            text: "Grid",
+            spriteCssClass: "gridIcon",
+            items: [
+                {
+                    text: "Default Settings",
+                    url: "grid/index.html"
+                }
+            ]
         }
     ],
     framework: [
