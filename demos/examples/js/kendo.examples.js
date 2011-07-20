@@ -2,7 +2,7 @@
     var Application,
         extend = $.extend,
         live = window.live,
-        nonLocal = location.protocol != "file:",
+        local = location.protocol == "file:" && /Chrome/.test(navigator.userAgent), // Chrome doesn't allow ajax to local content
         pushState = "pushState" in history,
         currentHtml = "",
         docsAnimation = {
@@ -123,7 +123,7 @@
                         }, 100);
                     }}));
                 }
-            });
+            }, "html");
         },
 
         fetchCode: function(html, callback) {
@@ -152,26 +152,25 @@
                 $(".exampleName").empty().html(title);
 
                 $("#nav .t-item > .t-link").eq(0).addClass("t-state-selected");
-                if (nonLocal)
-                    Application.fetchExample(href);
+
+                Application.fetchExample(href);
             }
         },
 
         fetchDescription: function(href) {
-            if (nonLocal) {
-                if (href) {
-                    $.get(href, function(html) {
-                        currentHtml = html;
+            if (href) {
+                $.get(href, function(html) {
+                    currentHtml = html;
 
-                        Application.populateTools(currentHtml, href);
-                    });
-                } else
-                    $(".description").empty().html($.trim(Application.description(currentHtml)));
-            } else {
-                currentHtml = "<!doctype html>\n<html>\n" + $("html").html() + "\n</html>";
+                    Application.populateTools(currentHtml, href);
+                }, "html")
+                .error(function() {
+                    currentHtml = "<!doctype html>\n<html>\n" + $("html").html() + "\n</html>";
 
-                Application.populateTools(currentHtml, href);
-            }
+                    Application.populateTools(currentHtml, href);
+                });
+            } else
+                $(".description").empty().html($.trim(Application.description(currentHtml)));
         },
 
         fetchSkin: function(skinName, animate) {
@@ -200,23 +199,24 @@
                 exampleElement[0].style.cssText = exampleElement[0].style.cssText;
             };
 
-            if (nonLocal)
-                $.get(url, function() {
-                    if (animate) {
-                        exampleElement.kendoStop().kendoAnimate(extend({}, animation.hide, { complete: function() {
-                            changeSkin();
-                            setTimeout(function() {
-                                exampleElement.kendoStop().kendoAnimate(animation.show);
-                            }, 100);
-                        }}));
-                    } else
+            var fadeSkin = function() {
+                if (animate) {
+                    exampleElement.kendoStop().kendoAnimate(extend({}, animation.hide, { complete: function() {
                         changeSkin();
+                        setTimeout(function() {
+                            exampleElement.kendoStop().kendoAnimate(animation.show);
+                        }, 100);
+                    }}));
+                } else
+                    changeSkin();
 
-                    $("#exampleBody").show();
+                $("#exampleBody").show();
+            };
+
+            $.get(url)
+                .complete(function() {
+                    fadeSkin();
                 });
-            else {
-                changeSkin();
-            }
 
         },
 
@@ -233,7 +233,7 @@
         },
 
         description: function(html) {
-            var result = /<div class="description">(([\u000a\u000d\u2028\u2029]|.)*?)<\/\w+>\s*?<!-- description -->/ig.exec(html);
+            var result = /<div[^>]*description[^>]*>(([\u000a\u000d\u2028\u2029]|.)*?)<\/\w+>\s*?<!-- description -->/ig.exec(html);
 
             return result ? result[1] : "";
         },
@@ -267,14 +267,14 @@
                 $("#exampleBody").show();
             }
 
-            if (!live)
+            if (live === false)
                 $("#categories li a").live("click", function(e) {
                     e.preventDefault();
 
                     selectCategory(e.target);
                 });
 
-            if (pushState && nonLocal) {
+            if (pushState && !local) {
                 $("#nav li a")
                     .live("click", function(e) {
                         e.preventDefault();
@@ -311,7 +311,7 @@
                 else
                     $.get(location.href, function(html) {
                         Application.fetchCode(html);
-                    });
+                    }, "html");
             });
 
             skinSelector.bind("change", function(e) {

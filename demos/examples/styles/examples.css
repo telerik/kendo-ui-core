@@ -417,6 +417,7 @@ body
 
 #example
 {
+    font-family: Tahoma, Geneva, sans-serif;
     margin: 10px 0;
     padding:  20px;
     -webkit-box-shadow: 0 -3px 2px #BBB;
@@ -622,7 +623,7 @@ pre.prettyprint
 
 #nav li li .t-link
 {
-    font-size: 11px;
+    font-size: 12px;
     line-height: 18px;
     padding: 1px 1px 1px 21px;
 }
