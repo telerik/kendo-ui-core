@@ -562,7 +562,7 @@ var categories = {
             spriteCssClass: "gridIcon",
             items: [
                 {
-                    text: "Default Settings",
+                    text: "Basic Usage",
                     url: "grid/index.html"
                 },
                 {
