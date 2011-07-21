@@ -353,11 +353,11 @@ var categories = {
                     url: "autocomplete/index.html"
                 },
                 {
-                    text: "Remote Data Source",
+                    text: "Remote data source",
                     url: "autocomplete/remotedatasource.html"
                 },
                 {
-                    text: "Custom Template",
+                    text: "Custom template",
                     url: "autocomplete/customtemplate.html"
                 },
                 {
@@ -393,15 +393,15 @@ var categories = {
                     url: "combobox/transformation.html"
                 },
                 {
-                    text: "Local Data Source",
+                    text: "Local data source",
                     url: "combobox/localdatasource.html"
                 },
                 {
-                    text: "Remote Data Source",
+                    text: "Remote data source",
                     url: "combobox/remotedatasource.html"
                 },
                 {
-                    text: "Custom Template",
+                    text: "Custom template",
                     url: "combobox/customtemplate.html"
                 },
                 {
@@ -427,15 +427,15 @@ var categories = {
                     url: "dropdownlist/transformation.html"
                 },
                 {
-                    text: "Local Data Source",
+                    text: "Local data source",
                     url: "dropdownlist/localdatasource.html"
                 },
                 {
-                    text: "Remote Data Source",
+                    text: "Remote data source",
                     url: "dropdownlist/remotedatasource.html"
                 },
                 {
-                    text: "Custom Template",
+                    text: "Custom template",
                     url: "dropdownlist/customtemplate.html"
                 },
                 {
@@ -465,7 +465,7 @@ var categories = {
                     url: "menu/api.html"
                 },
                 {
-                    text: "Animation Effects",
+                    text: "Animation effects",
                     url: "menu/animation.html"
                 }
         ] },
@@ -478,7 +478,7 @@ var categories = {
                     url: "panelbar/index.html"
                 },
                 {
-                    text: "Loading Ajax Content",
+                    text: "Loading content with AJAX",
                     url: "panelbar/ajax.html"
                 },
                 {
@@ -490,7 +490,7 @@ var categories = {
                     url: "panelbar/api.html"
                 },
                 {
-                    text: "Animation Effects",
+                    text: "Animation effects",
                     url: "panelbar/animation.html"
                 }
             ]
@@ -522,7 +522,7 @@ var categories = {
                     url: "tabstrip/index.html"
                 },
                 {
-                    text: "Loading Ajax Content",
+                    text: "Loading content with AJAX",
                     url: "tabstrip/ajax.html"
                 },
                 {
@@ -534,7 +534,7 @@ var categories = {
                     url: "tabstrip/api.html"
                 },
                 {
-                    text: "Animation Effects",
+                    text: "Animation effects",
                     url: "tabstrip/animation.html"
                 }
             ]
@@ -578,11 +578,11 @@ var categories = {
                     url: "grid/remote-data.html"
                 },
                 {
-                    text: "Virtualization with local data",
+                    text: "Virtualization of local data",
                     url: "grid/virtualization-local-data.html"
                 },
                 {
-                    text: "Virtualization with remote data",
+                    text: "Virtualization of remote data",
                     url: "grid/virtualization-remote-data.html"
                 }
             ]
@@ -639,7 +639,7 @@ var categories = {
         ] },
         { text: "Animation", items: [
             {
-                text: "Animation Types",
+                text: "Animation types",
                 url: "animation/index.html"
             }
         ] }
