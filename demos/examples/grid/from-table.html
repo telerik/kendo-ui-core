@@ -24,7 +24,7 @@
         <!-- description -->
         <div id="example">
             <div>
-                <table class="t-grid">
+                <table id="grid">
                     <thead>
                         <tr>
                             <th data-field="rank">Rank</th>
@@ -70,7 +70,7 @@
 
             <script type="text/javascript">
                 $(document).ready(function() {
-                    $(".t-grid").kendoGrid({                        
+                    $("#grid").kendoGrid({                        
                         height: 250                                                
                     });
                 });
