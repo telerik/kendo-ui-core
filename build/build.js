@@ -35,7 +35,7 @@ var scripts = [
     "kendo.sortable.js",
     "kendo.selectable.js",
     "kendo.scroller.js",
-    "kendo.pager.js",
+    "kendo.pageable.js",
     "kendo.popup.js",
     "kendo.list.js",
     "kendo.autocomplete.js",
