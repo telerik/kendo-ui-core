@@ -660,12 +660,6 @@ var categories = {
                 text: "Basic usage",
                 url: "dragdrop/index.html"
             }
-        ] },
-        { text: "Animation", items: [
-            {
-                text: "Animation types",
-                url: "animation/index.html"
-            }
         ] }
     ],
     integration: [
