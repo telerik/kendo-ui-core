@@ -26,35 +26,8 @@
         <div class="description">Binding to Remote Data</div>
         <!-- description -->
         <div id="example">
-            <div>
-                <pre class="prettyprint" style="float:left">
-                    <h3>HTML</h3>
-                    &lt;input id="titles" /&gt;
 
-                    <h3>Script</h3>
-                    $("titles").kendoDropDownList({
-                        dataTextField: "Name",
-                        dataValueField: "Id",
-                        dataSource: new kendo.data.DataSource({
-                            type: "odata",
-                            serverPaging: true,
-                            pageSize: 20,
-                            transport: {
-                                read: {
-                                    url: "http://odata.netflix.com/Catalog/Titles",
-                                    data: { //additional parameters sent to the remote service
-                                        q: function() {
-                                            return "$filter=substringof('King Kong',Name)";
-                                        }
-                                    }
-                                }
-                            }
-                        })
-                    });
-                </pre>
-
-                <input id="titles"/>
-            </div>
+            <input id="titles"/>
 
             <script type="text/javascript">
                 $("#titles").kendoDropDownList({
@@ -65,7 +38,11 @@
                         type: "odata",
                         serverPaging: true,
                         serverFiltering: true,
-                        pageSize: 20
+                        pageSize: 20,
+                        transport: {
+                            read: "http://odata.netflix.com/Catalog/Titles"
+                        },
+
                     })
                 });
 

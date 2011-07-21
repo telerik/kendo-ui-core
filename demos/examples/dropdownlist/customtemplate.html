@@ -27,37 +27,7 @@
         <!-- description -->
         <div id="example">
 
-            <div>
-                <pre class="prettyprint" style="float:left">
-                    <h3>HTML</h3>
-                    &lt;input id="titles" /&gt;
-
-                    <h3>Script</h3>
-                    $("titles").kendoDropDownList({
-                        dataTextField: "Name",
-                        dataValueField: "Id",
-                        //define custom template
-                        <strong>template: '&lt;img src="${ data.BoxArt.SmallUrl }" alt="${ data.Name }" /&gt;Title:${ data.Name }, Year: ${ data.Name }',</strong>
-                        dataSource: new kendo.data.DataSource({
-                            type: "odata",
-                            serverPaging: true,
-                            pageSize: 20,
-                            transport: {
-                                read: {
-                                    url: "http://odata.netflix.com/Catalog/Titles", // the remove service url
-                                    data: { //additional parameters sent to the remote service
-                                        q: function() {
-                                            return "$filter=substringof('King Kong',Name)";
-                                        }
-                                    }
-                                }
-                            }
-                        })
-                    });
-                </pre>
-
-                <input id="titles"/>
-            </div>
+            <input id="titles"/>
 
             <script type="text/javascript">
                 $("#titles").kendoDropDownList({

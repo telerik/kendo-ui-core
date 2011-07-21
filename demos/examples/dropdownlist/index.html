@@ -26,46 +26,52 @@
         <!-- description -->
         <div id="example">
             <div>
-                <pre class="prettyprint" style="float:left">
-                    <h3>HTML</h3>
-                    &lt;input id="input" /&gt;
-
-                    <h3>Script</h3>
-                    $("#input").kendoDropDownList([
-                        {text: "Item1", value:"1"},
-                        {text: "Item2", value:"2"}
-                    ]);
+                <pre class="prettyprint">
+&lt;input id="input" /&gt;
                 </pre>
-                <input id="input" value="1" style="float:left; margin-top:30px; margin-left:130px;"/>
+
+                <pre class="prettyprint lang-js">
+$("#input").kendoDropDownList([
+    {text: "Item1", value:"1"},
+    {text: "Item2", value:"2"},
+    {text: "Item3", value:"3"}
+]);
+                </pre>
+
+                <input id="input" value="1"/>
             </div>
-            <div style="clear:both;">
-                <pre class="prettyprint" style="float:left">
-                    <h2>HTML</h2>
-                    &lt;select id="select"&gt;
-                        &lt;option&gt;Item1&lt;/option&gt;
-                        &lt;option&gt;Item2&lt;/option&gt;
-                    &lt;/select&gt;
-                    <h2>Script</h2>
-                    $("#select").kendoDropDownList();
+            <div >
+                <pre class="prettyprint">
+&lt;select id="select"&gt;
+    &lt;option&gt;Item1&lt;/option&gt;
+    &lt;option&gt;Item2&lt;/option&gt;
+    &lt;option&gt;Item3&lt;/option&gt;
+&lt;/select&gt;
+                </pre>
+                <pre class="prettyprint lang-js">
+$("#select").kendoDropDownList();
                 </pre>
 
-                <select id="select" style="float:left">
+                <select id="select">
                     <option>Item1</option>
                     <option>Item2</option>
+                    <option>Item3</option>
                 </select>
             </div>
 
             <script type="text/javascript">
 
-                //input HTML element
+                // local data
                 var data = [
                     {text: "Item1", value:"1"},
-                    {text: "Item2", value:"2"}
+                    {text: "Item2", value:"2"},
+                    {text: "Item3", value:"2"}
                 ];
 
+                //create kendo DropDownList from input Html element
                 $("#input").kendoDropDownList(data);
 
-                //select HTML element
+                //create kendo DropDownList from select Html element
                 $("#select").kendoDropDownList();
            </script>
         </div>

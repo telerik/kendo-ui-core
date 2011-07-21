@@ -435,10 +435,6 @@ var categories = {
                     url: "dropdownlist/index.html"
                 },
                 {
-                    text: "Binding to Local Data",
-                    url: "dropdownlist/localdatasource.html"
-                },
-                {
                     text: "Binding to Remote Data",
                     url: "dropdownlist/remotedatasource.html"
                 },
