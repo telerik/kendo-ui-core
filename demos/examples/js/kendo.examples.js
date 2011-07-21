@@ -421,19 +421,11 @@ var categories = {
                     url: "combobox/index.html"
                 },
                 {
-                    text: "Transformation",
-                    url: "combobox/transformation.html"
-                },
-                {
-                    text: "Local data source",
-                    url: "combobox/localdatasource.html"
-                },
-                {
-                    text: "Remote data source",
+                    text: "Binding to Remote Data",
                     url: "combobox/remotedatasource.html"
                 },
                 {
-                    text: "Custom template",
+                    text: "Customizing Template",
                     url: "combobox/customtemplate.html"
                 },
                 {

@@ -22,32 +22,60 @@
         <!-- nav -->
         <!-- nav -->
         <!-- description -->
-        <div class="description">First Look</div>
+        <div class="description">Basic Usage of ComboBox</div>
         <!-- description -->
-        <div id="example" class="t-content">
-            <input id="origin" value="1" />
-            <input id="products" value="1" />
+<div id="example" class="t-content">
+            <div>
+                <pre class="prettyprint">
+&lt;input id="input" /&gt;
+                </pre>
+
+                <pre class="prettyprint lang-js">
+$("#input").kendoComboBox([
+    {text: "Item1", value:"1"},
+    {text: "Item2", value:"2"},
+    {text: "Item3", value:"3"}
+]);
+                </pre>
+
+                <input id="input" value="1"/>
+            </div>
+            <div >
+                <pre class="prettyprint">
+&lt;select id="select"&gt;
+    &lt;option&gt;Item1&lt;/option&gt;
+    &lt;option&gt;Item2&lt;/option&gt;
+    &lt;option&gt;Item3&lt;/option&gt;
+&lt;/select&gt;
+                </pre>
+                <pre class="prettyprint lang-js">
+$("#select").kendoComboBox();
+                </pre>
+
+                <select id="select">
+                    <option>Item1</option>
+                    <option>Item2</option>
+                    <option>Item3</option>
+                </select>
+            </div>
 
             <script type="text/javascript">
 
-                //input HTML element
+                // local data
                 var data = [
-                    {text: "Chai", value:"1"},
-                    {text: "Chang", value:"2"},
-                    {text: "Aniseed Syrup", value:"3"},
-                    {text: "Chef Anton", value:"4"},
-                    {text: "Ikura", value:"5"},
-                    {text: "Mishi Kobe Niku", value:"6"},
-                    {text: "Queso Cabrales", value:"7"},
-                    {text: "Organic Dried Pears", value:"8"},
-                    {text: "Schoggi Schokolade", value:"9"},
-                    {text: "Alice Mutton", value:"10"},
-                    {text: "Carnarvon Tigers", value:"11"}
+                    {text: "Item1", value:"1"},
+                    {text: "Item2", value:"2"},
+                    {text: "Item3", value:"2"}
                 ];
-                $("#products").kendoComboBox(data);
 
+                //create kendo ComboBox from input Html element
+                $("#input").kendoComboBox(data);
+
+                //create kendo ComboBox from select Html element
+                $("#select").kendoComboBox();
            </script>
         </div>
+
         <!-- tools -->
         <!-- tools -->
     </body>

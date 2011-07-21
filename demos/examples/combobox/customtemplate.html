@@ -14,6 +14,7 @@
         <script src="../../../src/kendo.core.js"></script>
         <script src="../../../src/kendo.popup.js"></script>
         <script src="../../../src/kendo.data.js"></script>
+        <script src="../../../src/kendo.data.odata.js"></script>
         <script src="../../../src/kendo.list.js"></script>
         <script src="../../../src/kendo.combobox.js"></script>
         <!-- script -->
@@ -25,50 +26,32 @@
         <div class="description">Custom template</div>
         <!-- description -->
         <div id="example" class="t-content">
-            <input id="titles" />
+
+            <input id="titles"/>
+
             <script type="text/javascript">
-                var remoteDataSource = new kendo.data.DataSource({
-                    serverFiltering: true,
-                    transport: {
-                        read: {
-                            url: "http://odata.netflix.com/Catalog/Titles",
-                            dataType: "jsonp",
-                            jsonp: false,
-                            jsonpCallback: "callback",
-                            cache: false
-                        },
-                        dialect: function() {
-                            var title = "King Kong",
-                            combobox = $("#titles").data("kendoComboBox");
-
-                            if (combobox) {
-                                title = combobox.text() || text;
-                            }
-
-                            return "$filter=substringof('" + title + "',Name)&$format=json&$callback=callback";
-                        }
-                    },
-                    schema: {
-                        data: function(result) {
-                            return result.d.results;
-                        }
-                    }
-                });
-
                 $("#titles").kendoComboBox({
-                    index: 0,
-                    minLength: 3,
-                    filter: "startswith",
                     dataTextField: "Name",
                     dataValueField: "Id",
-                    dataSource: remoteDataSource,
+                    //define custom template
                     template: '<img src="${ data.BoxArt.SmallUrl }" alt="${ data.Name }" />Title:${ data.Name }, Year: ${ data.Name }',
-                    init: function() {
-                        this.ul.width(400)
-                    }
+                    dataSource: new kendo.data.DataSource({
+                        type: "odata",
+                        serverPaging: true,
+                        serverFiltering: true,
+                        pageSize: 20,
+                        transport: {
+                            read: "http://odata.netflix.com/Catalog/Titles"
+                        }
+                    })
                 });
+
+                //set width of the drop-down list
+                $("#titles").data("kendoComboBox").ul.width(400);
+
             </script>
         </div>
+
         <!-- tools -->
         <!-- tools -->
     </body>
