@@ -381,6 +381,14 @@ var categories = {
                 {
                     text: "Basic usage",
                     url: "chart/index.html"
+                },
+                {
+                    text: "Events",
+                    url: "chart/events.html"
+                },
+                {
+                    text: "API",
+                    url: "chart/api.html"
                 }
             ]
         },
