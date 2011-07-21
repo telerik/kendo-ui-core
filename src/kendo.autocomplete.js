@@ -57,7 +57,6 @@
 
             that.element
                 .attr("autocomplete", "off")
-                .addClass('t-widget t-input t-autocomplete')
                 .bind({
                     keydown: proxy(that._keydown, that),
                     paste: proxy(that._search, that),
@@ -126,7 +125,8 @@
         search: function(word) {
             var that = this,
             word = word || that.value(),
-            separator = that.options.separator,
+            options = that.options,
+            separator = options.separator,
             length,
             caret,
             index;
@@ -144,7 +144,7 @@
             if (!length) {
                 that.popup.close();
             } else if (length >= that.options.minLength) {
-                that.dataSource.filter( { operator: "startswith", value: word } );
+                that.dataSource.filter( {field: options.dataTextField, operator: "startswith", value: word } );
             }
         },
 
