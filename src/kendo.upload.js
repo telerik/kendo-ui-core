@@ -1,4 +1,37 @@
 (function($, window, undefined) {
+    /**
+     * @name kendo.ui.Upload.Description
+     *
+     * @section The upload component uses progressive enhancement
+     * to deliver better file uploading experience for both end-users and developers.
+     *
+     * <p>
+     * Key features:
+     * </p>
+     * <ul>
+     *    <li>Asynchronous and synchronous (on form submit) file upload</li>
+     *    <li>Multiple file selection</li>
+     *    <li>Progress tracking *</li>
+     *    <li>Drag and drop *</li>
+     *    <li>Cancelling upload in progress *</li>
+     *    <li>Removing uploaded files</li>
+     *    <li>Standards based, no plug-ins required</li>
+     * </ul>
+     * * These features will be automatically turned on if available in the browser.
+     * @exampleTitle Enhancing existing &lt;input type="file" /&gt; elements
+     * @example
+     * <!-- HTML -->
+     * <form method="post">
+     *     <div>
+     *         <input name="files" id="files" type="file" />
+     *     </div>
+     * </form>
+     * <script type="text/javascript">
+     *    $(document).ready(function() {
+     *        $("#files").kendoUpload();
+     *    });
+     * </script>
+     */
     var kendo = window.kendo,
         Component = kendo.ui.Component,
         rFileExtension = /\.([^\.]+)$/,
@@ -11,7 +44,75 @@
         LOAD = "load",
         REMOVE = "remove";
 
-    var Upload = Component.extend({
+    var Upload = Component.extend(/** @lends kendo.ui.Upload.prototype */{
+        /**
+         * @constructs
+         * @extends kendo.ui.Component
+         * @param {DomElement} element DOM element
+         * @param {Object} options Configuration options.
+         * @option {Boolean} [enabled] <true>
+         * Can be used to disable the upload. A disabled upload can be enabled by calling enable().
+         * @option {Boolean} [multiple] <true>
+         * Enables or disables multiple file selection.
+         * If set to false, users will be able to select only one file at a time.
+         * Note: This option does not limit the total number of uploaded files
+         * in asynchronous configuration.
+         * @option {Boolean} [showFileList] <true>
+         * Controls whether to show the list of uploaded files.
+         * Hiding the list can be useful when you want to fully customize the UI.
+         * Use the client-side events to build your own UI.
+         * @option {Object} [async] <null>
+         * Configures the upload for asynchronous operation.
+         * <dl>
+         *     <dt>
+         *         saveUrl: (String)
+         *     </dt>
+         *     <dd>
+         *         The URL of the handler that will receive the submitted files.
+         *         The handler must accept POST requests containing one or more
+         *         files with the same name as the upload component.
+         *     </dd>
+         *     <dt>
+         *         removeUrl: (String)
+         *     </dt>
+         *     <dd>
+         *         The URL of the handler responsible for removing uploaded files (if any).
+         *         The handler must accept POST requests containing one or more
+         *         "fileNames" fields specifying the files to be deleted.
+         *     </dd>
+         *     <dt>
+         *         autoUpload: (Boolean)
+         *     </dt>
+         *     <dd>
+         *         The selected files will be uploaded immediately by default.
+         *         You can change this behavior by setting autoUpload to false.
+         *     </dd>
+         * </dl>
+         * <p>
+         *     <strong>Fallback to synchronous upload</strong>
+         * </p>
+         * The Upload has a fallback mechanism when it is placed inside a form
+         * and is configured for asynchronous operation.
+         * Any files that were not fully uploaded will be sent as part of the form
+         * when the user submits it. This ensures that no files will be lost,
+         * even if you do not take any special measures to block the submit button during upload.
+         * <p><em>
+         * You have to handle the uploaded files both in the save handler and in the form submit action.
+         * </em></p>
+         * @option {Object} [localization]
+         * Configures the upload localizable strings.
+         * <ul>
+         *     <li>select ("Select...")</li>
+         *     <li>cancel ("Cancel")</li>
+         *     <li>retry ("Retry")</li>
+         *     <li>remove ("Remove")</li>
+         *     <li>uploadSelectedFiles ("Upload files")</li>
+         *     <li>dropFilesHere ("drop files here to upload")</li>
+         *     <li>statusUploading ("uploading")</li>
+         *     <li>statusUploaded ("uploaded")</li>
+         *     <li>statusFailed ("failed")</li>
+         * </ul>
+         */
         init: function(element, options) {
             var that = this;
 
@@ -74,16 +175,43 @@
                 "statusFailed": "failed"
             }
         },
+
+        /**
+         * Enables the upload.
+         * @example
+         * var upload = $("#upload").data("kendoUpload");
+         *
+         * // enables the upload
+         * upload.enable();
+         */
         enable: function() {
             this.toggle(true);
         },
 
+        /**
+         * Disables the upload.
+         * @example
+         * var upload = $("#upload").data("kendoUpload");
+         *
+         * // disables the upload
+         * upload.enable();
+         */
         disable: function() {
             this.toggle(false);
         },
 
+        /**
+         * Toggles the upload enabled state.
+         * @param {Boolean} enable (Optional) The new enabled state.
+         * @example
+         * var upload = $("#upload").data("kendoUpload");
+         *
+         * // toggles the upload enabled state
+         * upload.toggle();
+         */
         toggle: function(enable) {
-            this.wrapper.toggleClass("t-state-disabled", !enable);
+            enable = typeof enable === "undefined" ? enable : !enable;
+            this.wrapper.toggleClass("t-state-disabled", enable);
         },
 
         _addInput: function(input) {
@@ -450,7 +578,7 @@
                 .attr("encoding", "multipart/form-data");
     };
 
-    syncUploadModule.prototype = {
+    syncUploadModule.prototype = /** @ignore */  {
         onSelect: function(e) {
             var upload = this.upload;
             var sourceInput = $(e.target);
@@ -482,7 +610,7 @@
             .bind("t:abort", $.proxy(this.onAbort, this));
     };
 
-    iframeUploadModule.prototype = {
+    iframeUploadModule.prototype = /** @ignore */ {
         onSelect: function(e) {
             var upload = this.upload,
                 sourceInput = $(e.target);
@@ -707,7 +835,7 @@
             .bind("t:abort", $.proxy(this.onAbort, this));
     };
 
-    formDataUploadModule.prototype = {
+    formDataUploadModule.prototype = /** @ignore */ {
         onSelect: function(e, rawFiles) {
             var upload = this.upload,
                 module = this,

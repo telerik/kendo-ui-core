@@ -74,12 +74,19 @@
             test("enable removes t-state-disabled class", function () {
                 uploadInstance.disable();
                 uploadInstance.enable();
-                ok(!$("#uploadInstance").hasClass("t-state-disabled"));
+                ok(!uploadInstance.wrapper.hasClass("t-state-disabled"));
             });
 
             test("initially disabled state is applied", function () {
                 uploadInstance = createUpload({ enabled: false });
                 ok(uploadInstance.wrapper.hasClass("t-state-disabled"));
+            });
+
+            test("toggle alternates between states", function() {
+                uploadInstance.toggle();
+                ok(uploadInstance.wrapper.hasClass("t-state-disabled"));
+                uploadInstance.toggle();
+                ok(!uploadInstance.wrapper.hasClass("t-state-disabled"));
             });
 
             // -----------------------------------------------------------------------------------

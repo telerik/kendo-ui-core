@@ -19,25 +19,13 @@
         <!-- nav -->
         <!-- nav -->
         <!-- description -->
-        <div class="description">
-            This example shows how to use the kendoUpload API.
-            <p>
-                Available functions:
-            </p>
-            <ul>
-                <li>
-                    You can enable the Upload using <em>enable()</em>
-                </li>
-                <li>
-                    You can disable the Upload using <em>disable()</em>
-                </li>
-            </ul>
-        </div>
         <!-- description -->
         <div id="example" class="t-content">
             <div class="configuration">
                 <span class="configTitle">API Functions</span>
-                <button class="toggleEnabled t-button">Enable/Disable</button>
+                <button class="toggleEnabled t-button">Toggle enabled state</button><br />
+                <button class="enable t-button">Enable</button><br />
+                <button class="disable t-button">Disable</button><br />
             </div>
             <form method="post">
                 <div>
@@ -45,15 +33,22 @@
                 </div>
             </form>
             <script type="text/javascript">
+                function getUpload() {
+                    return $("#files").data("kendoUpload");
+                }
                 $(document).ready(function() {
-                    var upload = $("#files").kendoUpload();
+                    $("#files").kendoUpload();
 
                     $(".toggleEnabled").click(function() {
-                        if (upload.element.parents().is(".t-state-disabled")) {
-                            upload.enable();
-                        } else {
-                            upload.disable();
-                        }
+                        getUpload().toggle();
+                    });
+
+                    $(".enable").click(function() {
+                        getUpload().enable();
+                    });
+
+                    $(".disable").click(function() {
+                        getUpload().disable();
                     });
                 });
             </script>
