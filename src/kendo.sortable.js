@@ -68,7 +68,7 @@
                 field = element.data(FIELD),
                 dir = element.data(DIR),
                 options = that.options,
-                sort = that.dataSource.sort(),
+                sort = that.dataSource.sort() || [],
                 idx,
                 length;
 
@@ -79,7 +79,7 @@
             } else {
                 dir = ASC;
             }
-
+            
             if (options.mode === SINGLE) {
                 sort = [ { field: field, dir: dir } ];
             } else if (options.mode === "multiple") {
