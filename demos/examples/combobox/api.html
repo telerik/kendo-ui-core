@@ -10,6 +10,7 @@
         <script src="../../../src/kendo.popup.js"></script>
         <script src="../../../src/kendo.data.js"></script>
         <script src="../../../src/kendo.list.js"></script>
+        <script src="../../../src/kendo.dropdownlist.js"></script>
         <script src="../../../src/kendo.combobox.js"></script>
         <!-- script -->
         <!-- css -->
@@ -24,75 +25,28 @@
         <!-- description -->
         <div class="description">Client API</div>
         <!-- description -->
-        <div id="example">
-            <style id="exampleCSS" scoped="scoped">
-                #products_wrapper
-                {
-                    float: left
-                }
-
-                .configurator
-                {
-                    width: 300px;
-                    float: right;
-                    margin: 0 0 0 15em;
-                    display: inline;
-                }
-
-                .configurator li
-                {
-                    padding-bottom: 3px;
-                }
-
-                .configurator input
-                {
-                    width: 60px
-                }
-            </style>
-
-            <input id="products" />
-
-            <div class="configurator">
-                With available API you can:
-                <li>
-                    <button id="enable">Enable</button> or
-                    <button id="disable">Disable</button>
-                </li>
-                <li>
-                    <button id="open">Open drop-down</button> or
-                    <button id="close">Close drop-down</button>
-                </li>
-                <li>
-                    <button id="select">Select by index</button>
-                    <input id="index" value="0" />
-                </li>
-                <li>
-                    <button id="setValue">Select by value</button>
-                    <input id="value" value="1" />
-                </li>
-                <li>
-                    <button id="getValue">Get value</button> or
-                    <button id="getText">Get text</button>
-                </li>
-                <li>
-                    <div>
-                        <label for="filter">
-                            Choose filter type</label>
-                        <select id="filter" onchange="filterTypeChanged()">
-                            <option value="none">None</option>
-                            <option value="startswith">Starts with</option>
-                            <option value="contains">Contains</option>
-                            <option value="eq">Equal</option>
-                        </select>
-                        and
-                    </div>
-                    <div>
-                        search for item :
-                        <input id="word" value="Ch" />
-                        <button id="find">Find</button>
-                    </div>
-                </li>
+        <div id="example" style="min-height: 240px">
+            <div class="configuration" style="width: 210px">
+                <span class="configHead">Configure</span>
+                <span class="configTitle">API Functions</span>
+                <button id="enable" class="t-button">Enable</button> or <button id="disable" class="t-button">Disable</button><br />
+                <button id="open" class="t-button">Open</button> or <button id="close" class="t-button">Close</button> the drop-down<br />
+                <button id="getValue" class="t-button">Get value</button> or <button id="getText" class="t-button">Get text</button><br />
+                <select id="filter" onchange="filterTypeChanged()" style="vertical-align: top; width: 120px; float: right; margin-bottom: 3px;">
+                    <option value="none">None</option>
+                    <option value="startswith">Starts with</option>
+                    <option value="contains">Contains</option>
+                    <option value="eq">Equal</option>
+                </select>
+                <script type="text/javascript">
+                    $("#filter").kendoDropDownList();
+                </script>
+                <label for="filter" style="display: block; margin-bottom: 2px;">Filter type:</label>
+                <button id="find" class="t-button">Find item</button><input id="word" value="Ch" />
+                <button id="select" class="t-button">Select by index</button><input id="index" value="0" /><br />
+                <button id="setValue" class="t-button">Select by value</button><input id="value" value="1" /><br />
            </div>
+           <input id="products" />
 
             <script type="text/javascript">
                 var data = [

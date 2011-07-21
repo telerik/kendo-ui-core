@@ -11,17 +11,23 @@ html, body
 .skinSelector .t-arrow-down,
 #nav .t-sprite,
 #codeStrip .t-link,
+.configuration .configHead,
+.configuration .configTitle,
 .exampleIcon,
 .console div,
 .telerikLogo
 {
     background-image: url('../img/sprite.png');
+    background-repeat: no-repeat;
+    background-color: transparent;
 }
 
 * html .headerGradient,
 * html .skinSelector .t-arrow-down,
 * html #nav .t-sprite,
 * html #codeStrip .t-link,
+* html .configuration .configHead,
+* html .configuration .configTitle,
 * html .exampleIcon,
 * html .console div,
 * html .telerikLogo
@@ -53,7 +59,6 @@ body
     position: relative;
     z-index: 2;
     height: 139px;
-    background-color: transparent;
     background-position: 0 -761px;
     background-repeat: repeat-x;
     -webkit-box-shadow: 0 0 4px #555;
@@ -422,17 +427,16 @@ body
     font-family: Tahoma, Geneva, sans-serif;
     margin: 10px 0;
     padding:  20px;
-    -webkit-box-shadow: 0 -3px 2px #BBB;
-    box-shadow: 0 -3px 2px #BBB;
+    border: 1px solid #dedede;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
     background: #FFF;
     text-align: left;
-    min-height: 200px;
+    min-height: 220px;
     position: relative;
 }
-* html { height: 200px; }
+* html { height: 220px; }
 
 #example h3
 {
@@ -497,8 +501,6 @@ pre.prettyprint
 
 .console div
 {
-    background-color: transparent;
-    background-repeat: no-repeat;
     background-position: 6px -95px;
     border-bottom: 1px solid #DDD;
     padding: 5px 5px 4px 24px;
@@ -544,8 +546,6 @@ pre.prettyprint
 .telerikLogo
 {
     margin-top: 13px;
-    background-color: transparent;
-    background-repeat: no-repeat;
     background-position: 0 -700px;
     width: 107px;
     height: 40px;
@@ -554,19 +554,39 @@ pre.prettyprint
 
 .configuration
 {
-    padding: 10px;
-    float: right;
+    -webkit-border-radius: 0 5px 5px 0;
+    -moz-border-radius: 0 5px 5px 0;
+    border-radius: 0 5px 5px 0;
+    position: absolute;
+    right: 20px;
     width: 180px;
     min-height: 190px;
     border: 1px solid #dedede;
+    margin: -21px;
+    height: 100%;
+    padding: 0 20px;
+    background: #f2f2f2;
+}
+
+.configuration .configHead
+{
+    display: block;
+    color: #4c4c4c;
+    font-size: 16px;
+    text-indent: 20px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    background-position: 0 -178px;
 }
 
 .configuration .configTitle
 {
-    font-size: 14px;
+    font-size: 12px;
     color: #2175bd;
     display: block;
-    border-bottom: 1px solid #bbb;
+    line-height: 22px;
+    background-position: 0 21px;
+    border-bottom: 1px solid #fff;
     margin-bottom: 10px;
 }
 
@@ -734,6 +754,7 @@ pre.prettyprint
     padding: 10px 20px;
     line-height: 22px;
     text-align: center;
+    background-repeat: repeat-x;
 }
 
 #codeStrip .t-state-default .t-link
@@ -790,7 +811,6 @@ pre.prettyprint
     width: 200px;
 }
 
-.configuration,
 div.skinSelector .t-state-default,
 div.skinSelector .t-state-hover,
 div.skinSelector .t-state-hover:hover,
@@ -806,9 +826,7 @@ div.skinSelector .t-state-active
 
 .skinSelector .t-dropdown-wrap .t-arrow-down
 {
-    background-color: transparent;
     background-position: 100% -693px;
-    background-repeat: no-repeat;
 }
 
 #skinSelector-list
