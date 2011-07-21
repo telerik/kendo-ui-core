@@ -42,7 +42,10 @@
             </div>
             <script>
                 var transport = {
-                    read: "../datasource/internet-users.json"
+                    read: {
+                        url: "../datasource/internet-users.json",
+                        dataType: "json"
+                    }
                 };
 
                 var countriesDataSource = new kendo.data.DataSource({
