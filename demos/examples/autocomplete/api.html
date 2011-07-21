@@ -25,52 +25,7 @@
         <div class="description">Client API</div>
         <!-- description -->
         <div id="example">
-            <style id="exampleCSS" scoped="scoped">
-                #products
-                {
-                    float: left
-                }
-
-                .configurator
-                {
-                    width: 300px;
-                    float: right;
-                    margin: 0 0 0 15em;
-                    display: inline;
-                }
-
-                .configurator li
-                {
-                    padding-bottom: 3px;
-                }
-
-                .configurator input
-                {
-                    width: 60px
-                }
-            </style>
-
-            <input id="products" />
-
-            <div class="configurator">
-                With available API you can:
-                <ul>
-                    <li>
-                        <button id="set">Set value</button>
-                        <input id="value" />
-                    </li>
-                    <li>
-                        <button id="get">Get value</button>
-                    </li>
-                    <li>
-                        search for options which starts with:
-                        <div>
-                            <button id="search">Search</button>
-                            <input id="word" value="ch" />
-                        </div>
-                    </li>
-                </ul>
-           </div>
+           <input id="products" />
 
             <script type="text/javascript">
                 var data = [
@@ -103,6 +58,13 @@
                     autocomplete.search($("#word").val());
                 });
            </script>
+            <div class="configuration">
+                <span class="configHead">Configure</span>
+                <span class="configTitle">API Functions</span>
+                <input id="value" /><button id="set" class="t-button">Set value</button><br />
+                <button id="get" class="t-button">Get value</button><br />
+                <input id="word" value="ch" /><button id="search" class="t-button">Find starting with</button>
+           </div>
         </div>
         <!-- tools -->
         <!-- tools -->
