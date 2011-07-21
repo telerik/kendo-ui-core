@@ -1,14 +1,34 @@
 ﻿(function ($, window) {
+    /**
+     * @name kendo.ui.Window.Description
+     *
+     * @section The window component is used to display modal or non-modal content.
+     *
+     * @exampleTitle Creating a basic window
+     * @example
+     * <!-- HTML -->
+     * <form id="feedback-form" action="/submit-feedback">
+     *     <legend>Submit feedback</legend>
+     *
+     *     <label for="message">Message:</label>
+     *     <textarea name="message"></textarea>
+     *
+     *     <button type="submit">Send</button>
+     * </form>
+     *
+     * // JavaScript
+     * $("#feedback-form").kendoWindow();
+     */
     var kendo = window.kendo,
         Component = kendo.ui.Component,
         Draggable = kendo.ui.Draggable,
         fx = kendo.fx,
         template = kendo.template,
-        //classNames
+        // classNames
         TWINDOW = ".t-window",
         TWINDOWTITLEBAR = ".t-window-titlebar",
         TOVERLAY = ".t-overlay",
-        //events
+        // events
         OPEN = "open",
         ACTIVATE = "activate",
         CLOSE = "close",
@@ -30,7 +50,25 @@
         }
     }
 
-    var Window = Component.extend({
+    var Window = Component.extend(/** @lends kendo.ui.Window.prototype */ {
+        /**
+         * @constructs
+         * @extends kendo.ui.Component
+         * @param {DomElement} element DOM element
+         * @param {Object} options Configuration options.
+         * @option {Boolean} [modal] Specifies whether the window should block interaction with other page elements.
+         * @option {Boolean} [visible] Specifies whether the window will be initially visible.
+         * @option {Boolean} [draggable] Specifies whether the users may move the window.
+         * @option {Boolean} [resizable] Specifies whether the users may to resize the window.
+         * @option {Integer} [minWidth] The minimum width that may be achieved by resizing the window.
+         * @option {Integer} [minHeight] The minimum height that may be achieved by resizing the window.
+         * @option {String} [contentUrl] Specifies a URL that the window should load its content from. For remote URLs, a container iframe element is automatically created.
+         * @option {Array<String>} [actions] <"Close"> The buttons for interacting with the window. Predefined array values are "Close", "Refresh", "Minimize", "Maximize".
+         * @option {String} [title] The text in the window title bar.
+         * @option {Object} [animation] A collection of {Animation} objects, used to change default animations. A value of false will disable all animations in the component.
+         * @option {Animation} [animation.open] The animation that will be used when the window opens.
+         * @option {Animation} [animation.close] The animation that will be used when the window closes.
+         */
         init: function(element, options) {
             var that = this,
                 windowActions = ".t-window-titlebar .t-window-action",
@@ -84,13 +122,13 @@
             }
 
             if (options.modal) {
-                that.overlay(that.wrapper.is(":visible")).css({ opacity: 0.5 });
+                that._overlay(that.wrapper.is(":visible")).css({ opacity: 0.5 });
             }
 
             that.wrapper
                 .delegate(windowActions, "mouseenter", function () { $(this).addClass('t-state-hover'); })
                 .delegate(windowActions, "mouseleave", function () { $(this).removeClass('t-state-hover'); })
-                .delegate(windowActions, "click", $.proxy(that.windowActionHandler, that));
+                .delegate(windowActions, "click", $.proxy(that._windowActionHandler, that));
 
             if (options.resizable) {
                 that.wrapper
@@ -106,12 +144,64 @@
                 that.dragging = new WindowDragging(that);
             }
 
-            that.bind([OPEN, ACTIVATE, CLOSE, REFRESH, RESIZE, ERROR, MOVE], options);
+            that.bind([
+                /**
+                 * Fires when the window is opened (i.e. the open() method is called).
+                 * @name kendo.ui.Window#open
+                 * @event
+                 * @param {Event} e
+                 * @cancellable
+                 */
+                OPEN,
+                /**
+                 * Fires when the window has finished its opening animation
+                 * @name kendo.ui.Window#activate
+                 * @event
+                 * @param {Event} e
+                 */
+                ACTIVATE,
+                /**
+                 * Fires when the window is being closed (by the user or through the close() method)
+                 * @name kendo.ui.Window#close
+                 * @event
+                 * @param {Event} e
+                 * @cancellable
+                 */
+                CLOSE,
+                /**
+                 * Fires when the window contents have been refreshed through AJAX.
+                 * @name kendo.ui.Window#refresh
+                 * @event
+                 * @param {Event} e
+                 */
+                REFRESH,
+                /**
+                 * Fires when the window has been resized by the user.
+                 * @name kendo.ui.Window#resize
+                 * @event
+                 * @param {Event} e
+                 */
+                RESIZE,
+                /**
+                 * Fires when an AJAX request for content fails.
+                 * @name kendo.ui.Window#error
+                 * @event
+                 * @param {Event} e
+                 */
+                ERROR,
+                /**
+                 * Fires when the window has been moved by the user.
+                 * @name kendo.ui.Window#move
+                 * @event
+                 * @param {Event} e
+                 */
+                MOVE
+            ], options);
 
-            $(window).resize($.proxy(that.onDocumentResize, that));
+            $(window).resize($.proxy(that._onDocumentResize, that));
 
             if (isLocalUrl(that.contentUrl)) {
-                that.ajaxRequest();
+                that._ajaxRequest();
             }
 
             if (that.wrapper.is(":visible")) {
@@ -143,7 +233,7 @@
             visible: true
         },
 
-        overlay: function (visible) {
+        _overlay: function (visible) {
             var overlay = $("body > .t-overlay"),
                 doc = $(document),
                 wrapper = this.wrapper[0];
@@ -167,7 +257,7 @@
             return overlay;
         },
 
-        windowActionHandler: function (e) {
+        _windowActionHandler: function (e) {
             var target = $(e.target).closest(".t-window-action").find(".t-icon"),
                 that = this;
 
@@ -185,6 +275,13 @@
             });
         },
 
+        /**
+         * Centers the window within the viewport.
+         * @example
+         * var wnd = $("#window").data("kendoWindow");
+         *
+         * wnd.center();
+         */
         center: function () {
             var wrapper = this.wrapper,
                 documentWindow = $(window);
@@ -197,6 +294,18 @@
             return this;
         },
 
+        /**
+         * Sets/gets the window title.
+         * @param {String} The new window title
+         * @example
+         * var wnd = $("#window").data("kendoWindow");
+         *
+         * // get the title
+         * var title = wnd.title();
+         *
+         * // set the title
+         * wnd.title("New title");
+         */
         title: function (text) {
             var title = $(".t-window-titlebar > .t-window-title", this.wrapper);
 
@@ -208,6 +317,18 @@
             return this;
         },
 
+        /**
+         * Sets/gets the window content.
+         * @param {String} The new window content
+         * @example
+         * var wnd = $("#window").data("kendoWindow");
+         *
+         * // get the content
+         * var content = wnd.content();
+         *
+         * // set the content
+         * wnd.content("<p>New content</p>");
+         */
         content: function (html) {
             var content = $("> .t-window-content", this.wrapper);
 
@@ -219,14 +340,21 @@
             return this;
         },
 
-        open: function (e) {
+        /**
+         * Opens the window
+         * @example
+         * var wnd = $("#window").data("kendoWindow");
+         *
+         * wnd.open();
+         */
+        open: function () {
             var that = this,
                 wrapper = that.wrapper,
                 showOptions = that.options.animation.open;
 
             if (!that.trigger(OPEN)) {
                 if (that.options.modal) {
-                    var overlay = that.overlay(false);
+                    var overlay = that._overlay(false);
 
                     if (showOptions.duration) {
                         overlay.kendoStop().kendoAnimate({
@@ -257,6 +385,13 @@
             return that;
         },
 
+        /**
+         * Closes the window
+         * @example
+         * var wnd = $("#window").data("kendoWindow");
+         *
+         * wnd.close();
+         */
         close: function () {
             var that = this,
                 wrapper = that.wrapper,
@@ -276,7 +411,7 @@
 
                     var shouldHideOverlay = options.modal && openedModalWindows.length == 1;
 
-                    var overlay = options.modal ? that.overlay(true) : $(undefined);
+                    var overlay = options.modal ? that._overlay(true) : $(undefined);
 
                     if (shouldHideOverlay) {
                         if (hideOptions.duration) {
@@ -289,7 +424,7 @@
                             overlay.hide();
                         }
                     } else if (openedModalWindows.length > 0) {
-                        windowObject(openedModalWindows.eq(openedModalWindows.length - 2)).overlay(true);
+                        windowObject(openedModalWindows.eq(openedModalWindows.length - 2))._overlay(true);
                     }
 
                     wrapper.kendoStop().kendoAnimate({
@@ -309,6 +444,9 @@
             return that;
         },
 
+        /**
+         * Toggles the window between a maximized and restored state.
+         */
         toggleMaximization: function (e) {
             if (e && $(e.target).closest(".t-window-action").length > 0) {
                 return;
@@ -317,6 +455,9 @@
             this[this.options.isMaximized ? "restore" : "maximize"]();
         },
 
+        /**
+         * Restores a maximized window to its previous size.
+         */
         restore: function () {
             var that = this;
 
@@ -344,6 +485,9 @@
             return that;
         },
 
+        /**
+         * Maximizes a window so that it fills the entire screen.
+         */
         maximize: function (e) {
             var that = this;
 
@@ -369,12 +513,12 @@
 
             that.options.isMaximized = true;
 
-            that.onDocumentResize();
+            that._onDocumentResize();
 
             return that;
         },
 
-        onDocumentResize: function () {
+        _onDocumentResize: function () {
             if (!this.options.isMaximized) {
                 return;
             }
@@ -392,15 +536,23 @@
             this.trigger(RESIZE);
         },
 
-        refresh: function () {
-            if (isLocalUrl(this.options.contentUrl)) {
-                this.ajaxRequest();
+        /**
+         * Refreshes the window content from a remote url.
+         * @param {String} url The URL that the window should be refreshed from. If omitted, the window content is refreshed from the contentUrl that was supplied upon the window creation.
+         */
+        refresh: function (url) {
+            var that = this;
+
+            url = url || that.options.contentUrl;
+
+            if (isLocalUrl(url)) {
+                that._ajaxRequest(url);
             }
 
-            return this;
+            return that;
         },
 
-        ajaxRequest: function (url) {
+        _ajaxRequest: function (url) {
             var that = this,
                 loadingIconTimeout = setTimeout(function () {
                     $(".t-refresh", that.wrapper).addClass("t-loading");
@@ -409,7 +561,7 @@
 
             $.ajax({
                 type: "GET",
-                url: url || that.options.contentUrl,
+                url: url,
                 dataType: "html",
                 data: data,
                 cache: false,
@@ -428,6 +580,9 @@
             });
         },
 
+        /**
+         * Destroys the window and its modal overlay, if necessary. Useful for removing modal windows.
+         */
         destroy: function () {
             var that = this;
 
@@ -445,9 +600,9 @@
             var shouldHideOverlay = that.options.modal && openedModalWindows.length == 0;
 
             if (shouldHideOverlay) {
-                that.overlay(false).remove();
+                that._overlay(false).remove();
             } else if (openedModalWindows.length > 0) {
-                windowObject(openedModalWindows.eq(openedModalWindows.length - 2)).overlay(true);
+                windowObject(openedModalWindows.eq(openedModalWindows.length - 2))._overlay(true);
             }
         }
     });
@@ -505,7 +660,7 @@
         });
     }
 
-    WindowResizing.prototype = {
+    WindowResizing.prototype = /** @ignore */ {
         dragstart: function (e) {
             var wnd = this.owner,
                 wrapper = wnd.wrapper;
@@ -616,7 +771,7 @@
         });
     }
 
-    WindowDragging.prototype = {
+    WindowDragging.prototype = /** @ignore */{
         dragstart: function (e) {
             var wnd = this.owner;
 
