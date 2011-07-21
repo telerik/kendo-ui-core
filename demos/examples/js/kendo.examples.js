@@ -586,6 +586,16 @@ var categories = {
                     url: "grid/virtualization-remote-data.html"
                 }
             ]
+        },
+        {
+            text: "Upload",
+            spriteCssClass: "uploadIcon",
+            items: [
+                {
+                    text: "Basic usage",
+                    url: "upload/index.html"
+                }
+            ]
         }
     ],
     framework: [

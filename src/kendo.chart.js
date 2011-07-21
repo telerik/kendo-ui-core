@@ -2836,11 +2836,14 @@
         },
 
         alignToScreen: function(element) {
-            if (element.getScreenCTM) {
-                var ctm = element.getScreenCTM(),
-                    left = - ctm.e % 1,
-                    top = - ctm.f % 1,
-                    style = element.style;
+            try {
+                var ctm = element.getScreenCTM ? element.getScreenCTM() : null;
+            } catch (e) { }
+
+            if (ctm) {
+                var left = - ctm.e % 1,
+                top = - ctm.f % 1,
+                style = element.style;
 
                 if (left !== 0 || top !== 0) {
                     style.left = left + "px";
