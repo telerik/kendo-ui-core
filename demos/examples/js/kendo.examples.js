@@ -659,6 +659,10 @@ var categories = {
             {
                 text: "Basic usage",
                 url: "dragdrop/index.html"
+            },
+            {
+                text: "Events",
+                url: "dragdrop/events.html"
             }
         ] }
     ],
