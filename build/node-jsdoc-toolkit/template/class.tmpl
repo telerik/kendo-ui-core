@@ -369,6 +369,9 @@
 
                     <for each="member" in="ownOptions">
                         <div class="detailHandle">
+                            <if test="(member.example && member.example.length) || member.deprecated || member.since || (member.see && member.see.length) || member.defaultValue">
+                                <div class="detailCollapsed"></div>
+                            </if>
                             <div class="fixedFont" id="{+Link.symbolNameToLinkName(member)+}">
                                 <span class='lighter'>
                                 {!
@@ -379,7 +382,7 @@
                                 !}
                                 </span>
 
-                                <b>{+member.name+}: </b><if test="member.type"><span class="light">{+new Link().toSymbol(member.type)+}</span></if>
+                                <b>{+member.name+}:</b> <if test="member.type"><span class="light">{+new Link().toSymbol(member.type)+}</span></if>
 
                                 <if test="member.isStatic && member.memberOf != '_global_'"><span class="light">{+member.memberOf+}.</span></if>
                             </div>
@@ -449,6 +452,9 @@
 
                     <for each="member" in="ownProperties">
                         <div class="detailHandle">
+                            <if test="(member.example && member.example.length) || member.deprecated || member.since || (member.see && member.see.length) || member.defaultValue">
+                                <div class="detailCollapsed"></div>
+                            </if>
                             <div class="fixedFont" id="{+Link.symbolNameToLinkName(member)+}">
                                 <span class='lighter'>
                                 {!
@@ -539,6 +545,9 @@
                                 !}
                             >
                                 <div class="detailHandle">
+                                    <if test="(member.example && member.example.length) || (member.params && member.params.length) || member.deprecated || member.since || (member.exceptions && member.exceptions.length) || member.returns.length || member.requires.length || member.see.length">
+                                        <div class="detailCollapsed"></div>
+                                    </if>
                                     <div class="fixedFont" id="{+Link.symbolNameToLinkName(member)+}">
                                         <span class='lighter'>
                                         {!
@@ -656,6 +665,9 @@
 
                     <for each="member" in="ownEvents">
                         <div class="detailHandle">
+                            <if test="(member.example && member.example.length) || member.params.length || member.deprecated || member.since || (member.exceptions && member.exceptions.length) || (member.returns && member.returns.length) || member.see.length">
+                                <div class="detailCollapsed"></div>
+                            </if>
                             <div class="fixedFont" id="{+Link.symbolNameToLinkName(member)+}">
                                 <span class='lighter'>
                                 {!

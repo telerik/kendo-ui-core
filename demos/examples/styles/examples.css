@@ -15,6 +15,8 @@ html, body
 .configuration .infoHead,
 .configuration .configTitle,
 .exampleIcon,
+.detailCollapsed,
+.detailExpanded,
 .console div,
 .telerikLogo
 {
@@ -31,6 +33,8 @@ html, body
 * html .configuration .infoHead,
 * html .configuration .configTitle,
 * html .exampleIcon,
+* html .detailCollapsed,
+* html .detailExpanded,
 * html .console div,
 * html .telerikLogo
 {
@@ -803,10 +807,17 @@ pre.prettyprint
 #codeStrip .t-content
 {
     margin: -1px 0 0;
-    padding: 20px;
+    padding: 20px 0 0;
     -webkit-border-radius: 0 0 5px 5px;
     -moz-border-radius: 0 0 5px 5px;
     border-radius: 0 0 5px 5px;
+    overflow: hidden;
+}
+
+#codeStrip .description,
+#codeStrip .codeContainer
+{
+    padding: 20px;
 }
 
 /* skinSelector styles */
@@ -947,17 +958,74 @@ div.skinSelector .t-state-active
 
 .detailHandle
 {
-    margin-top: 5px;
-    background: #EEE;
-    border-bottom: 3px solid #CCC;
-    padding: 5px 10px;
-    cursor: pointer;
+    font-size: 12px;
+    margin: 0;
+    padding: 5px 10px 5px 25px;
+    color: #4d4d4d;
+    border-bottom: 1px solid #fff;
+    background: #f2f2f2;
+    background: -moz-linear-gradient(top, #f2f2f2 0%, #e3e3e3 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f2f2f2), color-stop(100%,#e3e3e3));
+    background: -webkit-linear-gradient(top, #f2f2f2 0%,#e3e3e3 100%);
+    background: -o-linear-gradient(top, #f2f2f2 0%,#e3e3e3 100%);
+    background: -ms-linear-gradient(top, #f2f2f2 0%,#e3e3e3 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f2f2', endColorstr='#e3e3e3',GradientType=0 );
+    background: linear-gradient(top, #f2f2f2 0%,#e3e3e3 100%);
 }
 
-.detailHandle:hover
+.detailHandleExpanded
 {
-    background: #CCC;
-    border-bottom: 3px solid #AAA;
+    border-bottom: 1px solid #e3e3e3;
+}
+
+.detailHandle b
+{
+    color: #000;
+    text-decoration: underline;
+}
+
+.detailHover b
+{
+    color: #00234c;
+}
+
+.detailHover
+{
+    cursor: pointer;
+    border-bottom: 1px solid #fff;
+    background: #e2e2e2;
+    background: -moz-linear-gradient(top, #e2e2e2 0%, #d3d3d3 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e2e2e2), color-stop(100%,#d3d3d3));
+    background: -webkit-linear-gradient(top, #e2e2e2 0%,#d3d3d3 100%);
+    background: -o-linear-gradient(top, #e2e2e2 0%,#d3d3d3 100%);
+    background: -ms-linear-gradient(top, #e2e2e2 0%,#d3d3d3 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2e2e2', endColorstr='#d3d3d3',GradientType=0 );
+    background: linear-gradient(top, #e2e2e2 0%,#d3d3d3 100%);
+}
+
+.detailHandle .desc,
+.detailBody
+{
+    font-size: 11px;
+}
+
+.detailBody
+{
+    padding: 0 25px;
+    background: #f2f2f2;
+    background: -moz-linear-gradient(top, #e3e3e3 0%, #f2f2f2 50px);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e3e3e3), color-stop(50px,#f2f2f2));
+    background: -webkit-linear-gradient(top, #e3e3e3 0%,#f2f2f2 50px);
+    background: -o-linear-gradient(top, #e3e3e3 0%,#f2f2f2 50px);
+    background: -ms-linear-gradient(top, #e3e3e3 0%,#f2f2f2 50px);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e3e3e3', endColorstr='#f2f2f2',GradientType=0 );
+    background: linear-gradient(top, #e3e3e3 0%,#f2f2f2 50px);
+    border-bottom: 1px solid #fff;
+}
+
+.detailBody .prettyprint
+{
+    margin-bottom: 0;
 }
 
 .light
@@ -968,23 +1036,54 @@ div.skinSelector .t-state-active
 .heading
 {
     font-weight: bold;
-    border-bottom:  1px solid #CCC;
+    border-bottom: 1px solid #CCC;
+    padding-top: 10px;
+    margin-bottom: 10px;
 }
 
-.methodDetail
+.methodDetail,
+.detailList
 {
     margin: 0;
     padding: 0;
     list-style: none outside;
 }
 
+.detailList
+{
+    padding-bottom: 10px;
+}
+
 #box .nomargin
 {
-    margin-left: 0;
+    margin: 0;
     box-shadow: none;
 }
 
 .nomargin dd
 {
     margin: 0;
+}
+
+.optionsContainer,
+.propertiesContainer,
+.methodsContainer,
+.eventsContainer
+{
+    border-top: 1px solid #dedede;
+}
+
+.detailCollapsed,
+.detailExpanded
+{
+    background-position: 0 -15px;
+    float: left;
+    height: 15px;
+    margin-left: -25px;
+    width: 20px;
+}
+
+.detailExpanded
+{
+    background-position: 0 -52px;
 }

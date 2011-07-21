@@ -300,12 +300,25 @@
                 } catch (err) {}
             }
 
-            $(".detailHandle").live("click", function (e) {
-                var extender = $(this).next(),
-                    visible = extender.is(":visible");
+            $(".detailHandle")
+                .live("mouseenter mouseleave", function(e) {
+                    var element = $(this),
+                        extender = element.next();
 
-                extender.kendoStop(true).kendoAnimate(!visible ? docsAnimation.show : docsAnimation.hide, visible);
-            });
+                    if ($.trim(extender.text()))
+                        element.toggleClass("detailHover", e.type == "mouseenter");
+                })
+                .live("click", function (e) {
+                    var element = $(this),
+                        extender = element.next(),
+                        visible = extender.is(":visible");
+
+                    if ($.trim(extender.text())) {
+                        extender.kendoStop(true).kendoAnimate(!visible ? docsAnimation.show : docsAnimation.hide, visible);
+                        $(".detailExpanded,.detailCollapsed", this).toggleClass("detailExpanded", !visible).toggleClass("detailCollapsed", visible);
+                        element.toggleClass("detailHandleExpanded", !visible);
+                    }
+                });
 
             Application.fetchDescription(normalizedUrl);
 
