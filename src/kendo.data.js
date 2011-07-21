@@ -121,9 +121,14 @@
         },
         selector: function(field, caseSensitive) {
             if (field) {
-                return isFunction(field) ? field : function(record) {
-                    return caseSensitive(getter(field)(record));
-                };
+                if (isFunction(field)) {
+                    return field;
+                } else {
+                    var accessor = getter(field);
+                    return function(record) {
+                        return caseSensitive(accessor(record));
+                    };
+                }
             }
             return function(record) {
                 return caseSensitive(record);

@@ -20,25 +20,41 @@
         <!-- nav -->
         <!-- description -->
         <div class="description">
+            This example shows how to use the kendoUpload API.
             <p>
-                This example shows how to enhance a regular file input with kendoUpload.
+                Available functions:
             </p>
-            <p>
-                <strong>Note:</strong>
-                The form cannot be submitted as this requires a server handler.
-            </p>
+            <ul>
+                <li>
+                    You can enable the Upload using <em>enable()</em>
+                </li>
+                <li>
+                    You can disable the Upload using <em>disable()</em>
+                </li>
+            </ul>
         </div>
         <!-- description -->
         <div id="example">
+            <div class="configuration">
+                <span class="configTitle">API Functions</span>
+                <button class="toggleEnabled t-button">Enable/Disable</button>
+            </div>
             <form method="post">
                 <div>
                     <input name="files" id="files" type="file" />
                 </div>
-                <input type="reset" value="Reset form" />
             </form>
             <script type="text/javascript">
                 $(document).ready(function() {
-                    $("#files").kendoUpload();
+                    var upload = $("#files").kendoUpload();
+
+                    $(".toggleEnabled").click(function() {
+                        if (upload.element.parents().is(".t-state-disabled")) {
+                            upload.enable();
+                        } else {
+                            upload.disable();
+                        }
+                    });
                 });
             </script>
         </div>

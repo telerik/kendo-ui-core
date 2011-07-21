@@ -1,0 +1,127 @@
+<!doctype html>
+<html>
+    <head>
+        <!-- meta -->
+        <!-- meta -->
+        <title>Upload Events</title>
+        <!-- script -->
+        <script src="../../../src/jquery.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.upload.js"></script>
+        <!-- script -->
+        <!-- css -->
+        <link href="../styles/examples.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.common.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.blueopal.css" rel="stylesheet"/>
+        <!-- css -->
+    </head>
+    <body>
+        <!-- nav -->
+        <!-- nav -->
+        <!-- description -->
+        <div class="description">
+            This example shows how to handle events triggered by kendoUpload.
+            <p>
+                Available events:
+            </p>
+            <ul>
+                <li>
+                    <em>OnSelect</em> -
+                    raised when one or more files are selected (cancelable)
+                </li>
+                <li>
+                    <em>OnUpload</em> -
+                    raised when one or more files are about to be uploaded (cancellable)
+                </li>
+                <li>
+                    <em>OnSuccess</em> -
+                    raised when an upload / remove operation has been completed successfully
+                </li>
+                <li>
+                    <em>OnError</em> -
+                    raised when an upload / remove operation has failed
+                </li>
+                <li>
+                    <em>OnComplete</em> -
+                    raised when all active uploads have completed
+                    either successfully or with errors
+                </li>
+                <li>
+                    <em>OnCancel</em> -
+                    raised when the upload has been cancelled while in progress
+                </li>
+                <li>
+                    <em>OnRemove</em> -
+                    raised when an uploaded file is about to be removed (cancellable)
+                </li>
+            </ul>
+        </div>
+        <!-- description -->
+        <div id="example">
+            <input name="files" id="files" type="file" />
+            <script type="text/javascript">
+                function onSelect(e) {
+                    kendoConsole.log("Select :: " + getFileInfo(e));
+                }
+
+                function onUpload(e) {
+                    kendoConsole.log("Upload :: " + getFileInfo(e));
+                }
+
+                function onSuccess(e) {
+                    kendoConsole.log("Success (" + e.operation + ") :: " + getFileInfo(e));
+                }
+
+                function onError(e) {
+                    kendoConsole.log("Error (" + e.operation + ") :: " + getFileInfo(e));
+                    e.preventDefault(); // Suppress error message
+                }
+
+                function onComplete(e) {
+                    kendoConsole.log("Complete");
+                }
+
+                function onCancel(e) {
+                    kendoConsole.log("Cancel :: " + getFileInfo(e));
+                }
+
+                function onRemove(e) {
+                    kendoConsole.log("Remove :: " + getFileInfo(e));
+                }
+
+                function getFileInfo(e) {
+                    return $.map(e.files, function(file) {
+                        var info = file.name;
+
+                        // File size is not available in all browsers
+                        if (file.size > 0) {
+                            info  += " (" + Math.ceil(file.size / 1024) + " KB)";
+                        }
+                        return info;
+                    }).join(", ");
+                }
+
+                $(document).ready(function() {
+                    $("#files").kendoUpload({
+                        async: {
+                            saveUrl: "blank.html",
+                            removeUrl: "blank.html",
+                            autoUpload: true
+                        },
+                        select: onSelect,
+                        upload: onUpload,
+                        success: onSuccess,
+                        error: onError,
+                        complete: onComplete,
+                        cancel: onCancel,
+                        remove: onRemove
+                    });
+                });
+            </script>
+        </div>
+        <div class="console"></div>
+        <!-- tools -->
+        <!-- tools -->
+    </body>
+</html>
+
