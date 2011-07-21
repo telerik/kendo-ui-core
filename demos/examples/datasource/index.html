@@ -21,18 +21,7 @@
         <!-- description -->
         <div class="description">Binding to local data</div>
         <!-- description -->
-        <div id="example" class="t-content">
-            <style scoped>
-                #movies
-                {
-                    border-collapse: collapse;
-                }
-                #movies td,
-                #movies th
-                {
-                    border: 1px solid black;
-                }
-            </style>
+        <div id="example">
             <table id="movies">
                 <thead>
                     <tr>
@@ -48,6 +37,7 @@
                     </tr>
                 </tbody>
             </table>
+
             <script id="template" type="text/x-kendo-template">
                 <tr>
                     <td><#= rank #></td>
@@ -56,71 +46,23 @@
                     <td><#= year #></td>
                 </tr>
             </script>
+
             <script>
                 // create a template using the above definition
                 var template = kendo.template($("#template").html());
 
                 var movies = [
-                {
-                    "rank":1,
-                    "rating":9.2,
-                    "title":"The Shawshank Redemption",
-                    "year":1994
-                },
-                {
-                    "rank":2,
-                    "rating":9.2,
-                    "title":"The Godfather",
-                    "year":1972
-                },
-                {
-                    "rank":3,
-                    "rating":9,
-                    "title":"The Godfather: Part II",
-                    "year":1974
-                },
-                {
-                    "rank":4,
-                    "rating":8.9,
-                    "title":"Il buono, il brutto, il cattivo.",
-                    "year":1966
-                },
-                {
-                    "rank":5,
-                    "rating":8.9,
-                    "title":"Pulp Fiction",
-                    "year":1994
-                },
-                {
-                    "rank":6,
-                    "rating":8.9,
-                    "title":"12 Angry Men",
-                    "year":1957
-                },
-                {
-                    "rank":7,
-                    "rating":8.9,
-                    "title":"Schindler's List",
-                    "year":1993
-                },
-                {
-                    "rank":8,
-                    "rating":8.8,
-                    "title":"One Flew Over the Cuckoo's Nest",
-                    "year":1975
-                },
-                {
-                    "rank":9,
-                    "rating":8.8,
-                    "title":"Inception",
-                    "year":2010
-                },
-                {
-                    "rank":10,
-                    "rating":8.8,
-                    "title":"The Dark Knight",
-                    "year":2008
-                }];
+                    { "rank": 1,  "rating": 9.2, "year": 1994, "title": "The Shawshank Redemption" },
+                    { "rank": 2,  "rating": 9.2, "year": 1972, "title": "The Godfather" },
+                    { "rank": 3,  "rating": 9,   "year": 1974, "title": "The Godfather: Part II" },
+                    { "rank": 4,  "rating": 8.9, "year": 1966, "title": "Il buono, il brutto, il cattivo." },
+                    { "rank": 5,  "rating": 8.9, "year": 1994, "title": "Pulp Fiction" },
+                    { "rank": 6,  "rating": 8.9, "year": 1957, "title": "12 Angry Men" },
+                    { "rank": 7,  "rating": 8.9, "year": 1993, "title": "Schindler's List" },
+                    { "rank": 8,  "rating": 8.8, "year": 1975, "title": "One Flew Over the Cuckoo's Nest" },
+                    { "rank": 9,  "rating": 8.8, "year": 2010, "title": "Inception" },
+                    { "rank": 10, "rating": 8.8, "year": 2008, "title": "The Dark Knight" }
+                ];
 
                 var dataSource = new kendo.data.DataSource({
                     data: movies,
@@ -131,8 +73,35 @@
 
                 // read data from the "movies" array
                 dataSource.read();
-
             </script>
+
+            <style scoped>
+                #movies {
+                    border-collapse: separate;
+                    border-spacing: 0;
+                }
+
+                #movies th {
+                    background-color: #ef652a;
+                    padding: 9px 6px;
+                    color: #fff;
+                    text-align: left;
+                    line-height: 14px;
+                    border-width: 1px;
+                    border-style: solid;
+                    border-color: #d75b26 #d75b26 #d75b26 #f28455;
+                }
+
+                #movies td {
+                    line-height: 23px;
+                    padding: 0 6px;
+                    background: #d4e5ec;
+                    color: #244451;
+                    border-width: 1px;
+                    border-style: solid;
+                    border-color: #e1edf2 #bbd6e1 #bbd6e1 #e1edf2;
+                }
+            </style>
         </div>
         <!-- tools -->
         <!-- tools -->
