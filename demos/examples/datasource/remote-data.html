@@ -22,18 +22,27 @@
         <div class="description">Binding to remote data</div>
         <!-- description -->
         <div id="example" class="t-content">
-            <label>Show latest tweets for: <input type="text" value="html5" id="searchFor" /></label><button class="t-button" id="search">search</button>
 
-            <div id="results">
-                <div>Loading ... </div>
+            <div id="tweets-container" class="t-header">
+                <h3>Twitter feed</h3>
+
+                <div id="search-box">
+                    <label>See what people say about: <input type="text" value="html5" id="searchFor" /></label>
+                    <button class="t-button" id="search">search</button>
+                </div>
+
+                <div id="tweets">
+                    <div>Loading ... </div>
+                </div>
             </div>
 
             <script id="template" type="text/x-kendo-template">
                 <div class="tweet t-header">
                     <img width="48" height="48" src="<#= profile_image_url #>" alt="<#= from_user #>" />
                     <#= text #>
-                    <div class="text">
-                        <a class="t-link" href="http://twitter.com/<#= from_user #>"><#= from_user #></a>
+                    <div class="metadata">
+                        <a class="t-link" href="http://twitter.com/<#= from_user #>" rel="nofollow"><#= from_user #></a>
+                        |
                         <#= kendo.toString(new Date(Date.parse(created_at)), "dd MMM HH:mm") #>
                     </div>
                 </div>
@@ -59,7 +68,7 @@
                         data: "results" // the data which the data source will be bound to is in the "results" field
                     },
                     change: function() { // subscribe to the CHANGE event of the data source
-                        $("#results").html(kendo.render(template, this.view()));
+                        $("#tweets").html(kendo.render(template, this.view()));
                     }
                 });
 
@@ -78,20 +87,65 @@
             </script>
 
             <style scoped>
-                .tweet
-                {
-                    vertical-align: top;
-                    padding: 10px;
-                    border: 1px solid black;
-                    margin: 10px 0;
+                #tweets-container {
+                    width: 60%;
+                    margin: 0 auto;
+                    border-width: 1px;
+                    border-style: solid;
                     -webkit-border-radius: 10px;
                     -moz-border-radius: 10px;
                     border-radius: 10px;
+                    padding: 18px 16px 29px 26px;
+                    position: relative;
                 }
-                #results
-                {
+
+                #tweets-container h3 {
+                    color: #358ae0;
+                    font-size: 18px;
+                    line-height: 32px;
+                    padding-left: 40px;
+                    font-weight: normal;
+                    background: transparent url("../content/datasource/remote-data/twitter-icon.png") no-repeat 0 50%;
+                }
+
+                #search-box {
+                    position: absolute;
+                    top: 30px;
+                    right: 16px;
+                }
+
+                #tweets {
                     overflow: auto;
+                    padding-right: 10px;
                     height: 400px;
+                }
+
+                .tweet {
+                    color: #384e73;
+                    vertical-align: top;
+                    padding: 6px;
+                    border-width: 1px;
+                    border-style: solid;
+                    margin: 0 0 5px;
+                    -webkit-border-radius: 10px;
+                    -moz-border-radius: 10px;
+                    border-radius: 10px;
+                    overflow: hidden;
+                }
+
+                .tweet img {
+                    float: left;
+                    margin-right: 10px;
+                }
+
+                .tweet .metadata {
+                    clear: left;
+                    padding-top: 6px;
+                    font-size: 10px;
+                }
+
+                .tweet .t-link:hover {
+                    text-decoration: underline;
                 }
             </style>
         </div>
