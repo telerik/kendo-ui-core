@@ -170,11 +170,11 @@
         },
         operatorStrings: {
             "eq": ["eq", "==", "isequalto", "equals", "equalto", "equal"],
-            "neq": ["neq", "!=", "isnotequalto", "notequals", "notequalto", "notequal", "not"],
+            "neq": ["neq", "!=", "isnotequalto", "notequals", "notequalto", "notequal", "not", "ne"],
             "lt": ["lt", "<", "islessthan", "lessthan", "less"],
-            "lte": ["lte", "<=", "islessthanorequalto", "lessthanequal"],
+            "lte": ["lte", "<=", "islessthanorequalto", "lessthanequal", "le"],
             "gt": ["gt", ">", "isgreaterthan", "greaterthan", "greater"],
-            "gte": ["gte", ">=", "isgreaterthanorequalto", "greaterthanequal"],
+            "gte": ["gte", ">=", "isgreaterthanorequalto", "greaterthanequal", "ge"],
             "startswith": ["startswith"],
             "endswith": ["endswith"],
             "contains": ["contains", "substringof"]
