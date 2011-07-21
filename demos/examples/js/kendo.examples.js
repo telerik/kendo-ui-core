@@ -594,6 +594,18 @@ var categories = {
                 {
                     text: "Basic usage",
                     url: "upload/index.html"
+                },
+                {
+                    text: "Asynchronous Upload",
+                    url: "upload/async.html"
+                },
+                {
+                    text: "Events",
+                    url: "upload/events.html"
+                },
+                {
+                    text: "API",
+                    url: "upload/api.html"
                 }
             ]
         }

@@ -3,7 +3,7 @@
     <head>
         <!-- meta -->
         <!-- meta -->
-        <title>Upload Basic Usage</title>
+        <title>Asynchronous Upload</title>
         <!-- script -->
         <script src="../../../src/jquery.js"></script>
         <script src="../../../src/kendo.core.js"></script>
@@ -21,24 +21,25 @@
         <!-- description -->
         <div class="description">
             <p>
-                This example shows how to enhance a regular file input with kendoUpload.
+                This example shows how to configure kendoUpload for asynchronous operation.
             </p>
             <p>
-                <strong>Note:</strong>
-                The form cannot be submitted as this requires a server handler.
+                In this mode, the files are uploaded out-of-band without interrupting
+                the user interaction with the page.
             </p>
         </div>
         <!-- description -->
         <div id="example">
-            <form method="post">
-                <div>
-                    <input name="files" id="files" type="file" />
-                </div>
-                <input type="reset" value="Reset form" />
-            </form>
+            <input name="files" id="files" type="file" />
             <script type="text/javascript">
                 $(document).ready(function() {
-                    $("#files").kendoUpload();
+                    $("#files").kendoUpload({
+                        async: {
+                            saveUrl: "blank.html",
+                            removeUrl: "blank.html",
+                            autoUpload: true
+                        }
+                    });
                 });
             </script>
         </div>
