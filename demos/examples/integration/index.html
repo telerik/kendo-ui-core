@@ -3,9 +3,16 @@
     <head>
         <!-- meta -->
         <!-- meta -->
-        <title>Integration</title>
+        <title>Integration with KnockoutJS</title>
         <!-- script -->
         <script src="../../../src/jquery.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.data.js"></script>
+        <script src="../../../src/kendo.popup.js"></script>
+        <script src="../../../src/kendo.list.js"></script>
+        <script src="../../../src/kendo.dropdownlist.js"></script>
+        <script src="jquery.tmpl.js"></script>
+        <script src="knockout-1.2.1.js"></script>
         <!-- script -->
         <!-- css -->
         <link href="../styles/prettify.css" rel="stylesheet"/>
@@ -21,7 +28,38 @@
         <div class="description"></div>
         <!-- description -->
         <div id="example" class="t-content">
-            <h3>Example goes here</h3>
+            <p> Choose a ticket class: <select id="ticket" data-bind="options: tickets,
+                optionsCaption: 'Choose...',
+                optionsText: 'name',
+                value: chosenTicket"></select>
+            </p>
+            <p data-bind="template: 'ticketTemplate'"></p>
+
+            <script id="ticketTemplate" type="text/x-jquery-tmpl">
+                {{if chosenTicket}}
+                You have chosen <b>${ chosenTicket().name }</b>
+                ($${ chosenTicket().price })
+                <button data-bind="click: resetTicket">Clear</button>
+                {{/if}}
+            </script>
+
+            <script>
+                $(document).ready(function() {
+
+                    var viewModel = {
+                        tickets: [
+                        { name: "Economy", price: 199.95 },
+                        { name: "Business", price: 449.22 },
+                        { name: "First Class", price: 1199.99 }
+                        ],
+                        chosenTicket: ko.observable(),
+                        resetTicket: function() { this.chosenTicket(null) }
+                    };
+                    ko.applyBindings(viewModel);
+
+                    //$("#ticket").kendoDropDownList();
+                });
+            </script>
         </div>
         <!-- tools -->
         <!-- tools -->
