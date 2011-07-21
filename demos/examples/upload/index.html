@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+    <head>
+        <!-- meta -->
+        <!-- meta -->
+        <title>Upload Basic Usage</title>
+        <!-- script -->
+        <script src="../../../src/jquery.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.upload.js"></script>
+        <!-- script -->
+        <!-- css -->
+        <link href="../styles/examples.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.common.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.blueopal.css" rel="stylesheet"/>
+        <!-- css -->
+    </head>
+    <body>
+        <!-- nav -->
+        <!-- nav -->
+        <!-- description -->
+        <div class="description">This example shows how to use the kendoUpload.</div>
+        <!-- description -->
+        <div id="example">
+            <form method="post">
+                <div>
+                    <input name="files" id="files" type="file" />
+                </div>
+                <input type="submit" value="Submit" />
+            </form>
+            <script type="text/javascript">
+                $("#files").kendoUpload({
+                    async: {
+                        saveUrl: "blank.html"
+                    }
+                });
+            </script>
+        </div>
+        <!-- tools -->
+        <!-- tools -->
+    </body>
+</html>
+
