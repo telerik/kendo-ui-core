@@ -194,14 +194,14 @@
             }
 
             var changeSkin = function () {
-
                 if ($.browser.msie) {
                     newLink = document.createStyleSheet(url);
                 }
 
                 skinLink.eq(0).before(newLink);
                 skinLink.remove();
-                exampleElement[0].style.cssText = exampleElement[0].style.cssText;
+                if (exampleElement)
+                    exampleElement[0].style.cssText = exampleElement[0].style.cssText;
             };
 
             var fadeSkin = function() {
@@ -218,11 +218,14 @@
                 $("#exampleBody").show();
             };
 
-            $.get(url)
-                .complete(function() {
-                    fadeSkin();
-                });
-
+            debugger;
+            if ($("#exampleBody").length)
+                $.get(url)
+                    .complete(function() {
+                        fadeSkin();
+                    });
+            else
+                changeSkin();
         },
 
         helpTabs: function (html) {
@@ -252,24 +255,14 @@
 
         init: function() {
 
-            initialFolder = location.href.match(/\//g).length;
-            initialRelativePath = document.getElementsByTagName("head")[0].innerHTML.match(/href=\W([\.\/]*)([\w\/]*?)kendo\.common/)[1];
             codeStrip = $("#codeStrip").data("kendoTabStrip");
 
             var skinSelector = $("#skinSelector");
 
-            try {
-                if (sessionStorage && sessionStorage.length) {
-                    var kendoSkin = sessionStorage.getItem("kendoSkin");
+            $("#exampleBody").show();
 
-                    if (kendoSkin) {
-                        skinSelector.data("kendoDropDownList").value(kendoSkin);
-                        Application.fetchSkin(kendoSkin);
-                    }
-                } else
-                    $("#exampleBody").show();
-            } catch(err) {
-                $("#exampleBody").show();
+            if (kendoSkin) {
+                skinSelector.data("kendoDropDownList").value(kendoSkin);
             }
 
             if (live === false)
@@ -347,6 +340,20 @@
         }
 
     };
+
+    initialFolder = location.href.match(/\//g).length;
+    initialRelativePath = document.getElementsByTagName("head")[0].innerHTML.match(/href=\W([\.\/]*)([\w\/]*?)kendo\.common/)[1];
+
+    try {
+        if (sessionStorage && sessionStorage.length) {
+            var kendoSkin = sessionStorage.getItem("kendoSkin");
+
+            if (kendoSkin) {
+                Application.fetchSkin(kendoSkin);
+            }
+        }
+    } catch(err) {
+    }
 
     $(Application.init);
 
