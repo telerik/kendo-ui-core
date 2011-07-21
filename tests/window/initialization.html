@@ -42,7 +42,7 @@
 
                 dialog.options.contentUrl = "~/something";
 
-                dialog.ajaxRequest = function () { ok(true); };
+                dialog._ajaxRequest = function () { ok(true); };
 
                 dialog.refresh();
             });
@@ -53,7 +53,7 @@
 
                 dialog.options.contentUrl = "http://";
 
-                dialog.ajaxRequest = function () { hasRequestedData = true };
+                dialog._ajaxRequest = function () { hasRequestedData = true };
 
                 dialog.refresh();
 
@@ -65,7 +65,7 @@
 
                 dialog.options.contentUrl = "httpfoo";
 
-                dialog.ajaxRequest = function () { ok(true); };
+                dialog._ajaxRequest = function () { ok(true); };
 
                 dialog.refresh();
             });
