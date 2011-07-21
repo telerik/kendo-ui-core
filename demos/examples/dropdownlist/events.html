@@ -25,32 +25,24 @@
         <div class="description">This example shows how to attach events to a kendoTabStrip and how they are fired and triggered.</div>
         <!-- description -->
         <div id="example">
-            <pre class="prettyprint">
-                $("#input").kendoDropDownList({
-                    dataSource: data,
-                    change: function(e) { kendoConsole.log("Changed: {text: " + this.text() + " , value: " + this.value() + "}"); },
-                    close: function(e) { kendoConsole.log("List is closing"); },
-                    open: function(e) { kendoConsole.log("List is opening"); }
-                });
-            </pre>
             <input id="input"/>
 
             <script type="text/javascript">
                 var open = function () {
                     if ("kendoConsole" in window) {
-                        kendoConsole.log("List is opening");
+                        kendoConsole.log("event: open");
                     }
                 };
 
                 var close = function () {
                     if ("kendoConsole" in window) {
-                        kendoConsole.log("List is closing");
+                        kendoConsole.log("event: close");
                     }
                 };
 
                 var change = function () {
                     if ("kendoConsole" in window) {
-                        kendoConsole.log("Changed: {text: " + this.text() + " , value: " + this.value() + "}");
+                        kendoConsole.log("event: change");
                     }
                 };
 
