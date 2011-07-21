@@ -24,6 +24,7 @@
         <div class="description">This example shows the default behaviour of a newly initialized kendoTabStrip.</div>
         <!-- description -->
         <div id="example">
+            <!-- configurator -->
             <div class="configuration">
                 <span class="configHead">Configure</span>
                 <span class="configTitle">Animation Settings</span>
@@ -33,6 +34,7 @@
                 <input id="opacity" type="checkbox" checked="checked" /><label for="opacity">animate opacity</label><br />
                 <input id="delay" name="animation" type="text" value="100" /><label for="delay">open/close delay</label><br />
             </div>
+            <!-- configurator -->
             <ul id="Menu1">
                 <li>
                     First Item
@@ -93,7 +95,13 @@
                 };
 
                 var initMenu = function () {
-                    $("#Menu1").kendoMenu({ animation: { open: { effects: getEffects() } }, hoverDelay: $("#delay")[0].value }).css({ marginRight: "220px" });
+                    $("#Menu1").kendoMenu({
+                        animation: { open: { effects: getEffects() } },
+                        hoverDelay: $("#delay")[0].value
+                    })
+                    .css({
+                        marginRight: "220px"
+                    });
                 };
 
                 $(".configuration input").change( function() {
