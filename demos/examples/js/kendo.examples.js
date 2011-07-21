@@ -492,6 +492,10 @@ var categories = {
                 {
                     text: "Virtualization of remote data",
                     url: "grid/virtualization-remote-data.html"
+                },
+                {
+                    text: "Grid sorting",
+                    url: "grid/sorting.html"
                 }
             ]
         },
