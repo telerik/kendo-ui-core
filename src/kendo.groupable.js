@@ -2,6 +2,7 @@
     var kendo = window.kendo,       
         Component = kendo.ui.Component,
         proxy = $.proxy,
+        CONTAINER_EMPTY_TEXT = "Drag a column header and drop it here to group by that column",
         indicatorTmpl = kendo.template('<div class="t-group-indicator" data-field="${data.field}" data-dir="${data.dir || "asc"}">' + 
                 '<a href="#" class="t-link">' +
                     '<span class="t-icon t-arrow-${(data.dir || "asc") == "asc" ? "up" : "down"}-small">(sorted ${(data.dir || "asc") == "asc" ? "ascending": "descending"})</span>' +
@@ -32,6 +33,12 @@
         });         
     }
 
+    function invalidateGroupContainer() {
+        if(groupContainer.is(":empty")) {
+            groupContainer.html(CONTAINER_EMPTY_TEXT);
+        }
+    }
+
     var Groupable = Component.extend({
         init: function(element, options) {
             var that = this;
@@ -40,7 +47,7 @@
 
             groupContainer = $(that.options.groupContainer, that.element)
                 .kendoDropTarget({
-                    dragenter: function(e) {
+                    dragenter: function(e) {                        
                         e.draggable.hint.find(".t-drag-status").removeClass("t-denied").addClass("t-add");
                         dropCue.css({top:3, left: 0}).appendTo(groupContainer);
                     },
@@ -101,6 +108,7 @@
                             return that.buildIndicator(item.field, item.dir);
                         }).join('')
                     );
+                    invalidateGroupContainer();
                 });
             }          
         },
@@ -133,6 +141,7 @@
 
         _removeIndicator: function(indicator) {
             indicator.remove();
+            invalidateGroupContainer();
             this._change();
         },
 
