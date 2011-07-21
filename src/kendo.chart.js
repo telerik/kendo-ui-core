@@ -3958,5 +3958,172 @@
     Chart.blendColors = blendColors;
     Chart.blendGradient = blendGradient;
 
+    // Themes
+    var TAHOMA11 = "11px Tahoma,sans-serif",
+        TAHOMA12 = "12px Tahoma,sans-serif",
+        TAHOMA16 = "16px Tahoma,sans-serif",
+        baseTheme = {
+            title: {
+                font: TAHOMA16
+            },
+            legend: {
+                font: TAHOMA12
+            },
+            seriesDefaults: {
+                labels: {
+                    font: TAHOMA11
+                }
+            },
+            categoryAxis: {
+                labels: {
+                    font: TAHOMA12
+                }
+            },
+            valueAxis: {
+                labels: {
+                    font: TAHOMA12
+                }
+            }
+        };
+
+    Chart.Themes.black = deepExtend({}, baseTheme, {
+        title: {
+            color: WHITE
+        },
+        legend: {
+            labels: {
+                color: WHITE
+            }
+        },
+        seriesDefaults: {
+            labels: {
+                color: WHITE
+            }
+        },
+        chartArea: {
+            background: "#393939",
+            border: {
+                color: "#262626",
+                width: 1
+            }
+        },
+        seriesColors: ["#e34a00", "#ff8517", "#ffb800", "#94c400", "#0098ee", "#0069a5"],
+        categoryAxis: {
+            line: {
+                color: "#808184"
+            },
+            labels: {
+                color: WHITE
+            },
+            majorGridLines: {
+                color: "#58595b",
+                visible: true
+            }
+        },
+        valueAxis: {
+            line: {
+                color: "#808184"
+            },
+            labels: {
+                color: WHITE
+            },
+            majorGridLines: {
+                color: "#58595b"
+            }
+        }
+    });
+
+    Chart.Themes.vista = deepExtend({}, baseTheme, {
+        title: {
+            color: "#6d6e70"
+        },
+        legend: {
+            labels: {
+                color: "#6d6e70"
+            }
+        },
+        seriesDefaults: {
+            labels: {
+                color: "#6d6e70"
+            }
+        },
+        chartArea: {
+            border: {
+                color: "#d0d2d3",
+                width: 1
+            }
+        },
+        seriesColors: ["#ffb800", "#ff8517", "#e34a00", "#545454", "#161616"],
+        categoryAxis: {
+            line: {
+                color: "#696e70"
+            },
+            labels: {
+                color: "#696e70"
+            },
+            majorGridLines: {
+                color: "#d0d2d3",
+                visible: true
+            }
+        },
+        valueAxis: {
+            line: {
+                color: "#696e70"
+            },
+            labels: {
+                color: "#696e70"
+            },
+            majorGridLines: {
+                color: "#d0d2d3"
+            }
+        }
+    });
+
+    Chart.Themes.blueopal = deepExtend({}, baseTheme, {
+        title: {
+            color: "#6d6e70"
+        },
+        legend: {
+            labels: {
+                color: "#6d6e70"
+            }
+        },
+        seriesDefaults: {
+            labels: {
+                color: "#6d6e70"
+            }
+        },
+        chartArea: {
+            border: {
+                color: "#d0d2d3",
+                width: 1
+            }
+        },
+        seriesColors: ["#ffb800", "#ff8517", "#e34a00", "#545454", "#161616"],
+        categoryAxis: {
+            line: {
+                color: "#696e70"
+            },
+            labels: {
+                color: "#696e70"
+            },
+            majorGridLines: {
+                color: "#d0d2d3",
+                visible: true
+            }
+        },
+        valueAxis: {
+            line: {
+                color: "#696e70"
+            },
+            labels: {
+                color: "#696e70"
+            },
+            majorGridLines: {
+                color: "#d0d2d3"
+            }
+        }
+    });
+
 })();
 

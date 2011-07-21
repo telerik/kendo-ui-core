@@ -26,21 +26,22 @@
         <div id="example" class="t-content">
             <div id="chart" style="width:800px; height:500px;"></div>
             <script type="text/javascript">
-                $(document).ready(function() {
-                    var dataSource = new kendo.data.DataSource({
-                        transport: {
-                            read: {
-                                url: "spain-electricity.json",
-                                dataType: "json"
-                            }
-                        },
-                        sort: {
-                            field: "year",
-                            dir: "desc"
+                var dataSource = new kendo.data.DataSource({
+                    transport: {
+                        read: {
+                            url: "spain-electricity.json",
+                            dataType: "json"
                         }
-                    });
+                    },
+                    sort: {
+                        field: "year",
+                        dir: "desc"
+                    }
+                });
 
+                function createChart() {
                     $("#chart").kendoChart({
+                        theme: getSkin(),
                         dataSource: dataSource,
                         title: {
                             text: "Spain electricity production (GWh)"
@@ -72,17 +73,29 @@
                         },
                         seriesClick: seriesClick
                     });
+                }
 
-                    function seriesClick(e) {
-                        if ("kendoConsole" in window) {
-                            kendoConsole.log("Series click :: " + e.series.name + ": " + kendo.toString(e.value, "#,##0") + " GWh");
-                        }
+                function seriesClick(e) {
+                    if ("kendoConsole" in window) {
+                        kendoConsole.log(
+                            "Series click :: " +
+                            e.series.name + ": " +
+                            kendo.toString(e.value, "#,##0") + " GWh"
+                        );
                     }
+                }
+
+                $(document).ready(function() {
+                    createChart();
 
                     $("#skinSelector").bind("change", function(e) {
-                        var newSkin = this.value.toLowerCase();
+                        createChart();
                     });
                 });
+
+                function getSkin() {
+                    return $("#skinSelector").val().toLowerCase();
+                }
             </script>
         </div>
         <div class="console"></div>

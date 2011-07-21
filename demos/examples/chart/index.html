@@ -25,21 +25,22 @@
         <div id="example" class="t-content">
             <div id="chart" style="width:800px; height:500px;"></div>
             <script type="text/javascript">
-                $(document).ready(function() {
-                    var dataSource = new kendo.data.DataSource({
-                        transport: {
-                            read: {
-                                url: "spain-electricity.json",
-                                dataType: "json"
-                            }
-                        },
-                        sort: {
-                            field: "year",
-                            dir: "asc"
+                var dataSource = new kendo.data.DataSource({
+                    transport: {
+                        read: {
+                            url: "spain-electricity.json",
+                            dataType: "json"
                         }
-                    });
+                    },
+                    sort: {
+                        field: "year",
+                        dir: "asc"
+                    }
+                });
 
+                function createChart() {
                     $("#chart").kendoChart({
+                        theme: getSkin(),
                         dataSource: dataSource,
                         title: {
                             text: "Spain electricity production (GWh)"
@@ -69,11 +70,19 @@
                             }
                         }
                     });
+                }
+
+                $(document).ready(function() {
+                    createChart();
 
                     $("#skinSelector").bind("change", function(e) {
-                        var newSkin = this.value.toLowerCase();
+                        createChart();
                     });
                 });
+
+                function getSkin() {
+                    return $("#skinSelector").val().toLowerCase();
+                }
             </script>
         </div>
         <!-- tools -->
