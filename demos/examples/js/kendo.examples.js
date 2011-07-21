@@ -629,6 +629,10 @@ var categories = {
             {
                 text: "Basic usage",
                 url: "templates/index.html"
+            },
+            {
+                text: "Expressions",
+                url: "templates/expressions.html"
             }
         ] },
         { text: "Drag & Drop", items: [
