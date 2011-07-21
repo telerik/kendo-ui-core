@@ -55,39 +55,22 @@
             </div>
             <div id="chart" style="margin-right:200px;"></div>
             <script type="text/javascript">
-                function getChart() {
-                    return $("#chart").data("kendoChart");
-                }
-
-                function refresh() {
-                    var chart = getChart(),
-                        series = chart.options.series,
-                        type = $("input[name=seriesType]:checked").val(),
-                        stack = $("#stack").attr("checked") === "checked";
-
-                    for (var i = 0, length = series.length; i < length; i++) {
-                        series[i].stack = stack;
-                        series[i].type = type;
-                    };
-
-                    chart.refresh();
-                }
-
-                $(document).ready(function() {
-                    var dataSource = new kendo.data.DataSource({
-                        transport: {
-                            read: {
-                                url: "spain-electricity.json",
-                                dataType: "json"
-                            }
-                        },
-                        sort: {
-                            field: "year",
-                            dir: "asc"
+                var dataSource = new kendo.data.DataSource({
+                    transport: {
+                        read: {
+                            url: "spain-electricity.json",
+                            dataType: "json"
                         }
-                    });
+                    },
+                    sort: {
+                        field: "year",
+                        dir: "asc"
+                    }
+                });
 
+                function createChart() {
                     $("#chart").kendoChart({
+                        theme: getSkin(),
                         dataSource: dataSource,
                         title: {
                             text: "Spain electricity production (GWh)"
@@ -117,11 +100,37 @@
                             }
                         }
                     });
+                }
+
+                $(document).ready(function() {
+                    createChart();
 
                     $("#skinSelector").bind("change", function(e) {
-                        var newSkin = this.value.toLowerCase();
+                        createChart();
                     });
                 });
+
+                function refresh() {
+                    var chart = getChart(),
+                        series = chart.options.series,
+                        type = $("input[name=seriesType]:checked").val(),
+                        stack = $("#stack").attr("checked") === "checked";
+
+                    for (var i = 0, length = series.length; i < length; i++) {
+                        series[i].stack = stack;
+                        series[i].type = type;
+                    };
+
+                    chart.refresh();
+                }
+
+                function getChart() {
+                    return $("#chart").data("kendoChart");
+                }
+
+                function getSkin() {
+                    return $("#skinSelector").val().toLowerCase();
+                }
             </script>
         </div>
         <!-- tools -->
