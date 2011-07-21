@@ -8,6 +8,7 @@
         <script src="../../../src/jquery.js"></script>
         <script src="../../../src/kendo.core.js"></script>
         <script src="../../../src/kendo.popup.js"></script>
+        <script src="../../../src/kendo.data.odata.js"></script>
         <script src="../../../src/kendo.data.js"></script>
         <script src="../../../src/kendo.list.js"></script>
         <script src="../../../src/kendo.dropdownlist.js"></script>
@@ -25,48 +26,65 @@
         <div class="description">Custom template</div>
         <!-- description -->
         <div id="example">
-            <input id="titles" />
-            <script type="text/javascript">
-                var remoteDataSource = new kendo.data.DataSource({
-                    serverFiltering: true,
-                    transport: {
-                        read: {
-                            url: "http://odata.netflix.com/Catalog/Titles",
-                            dataType: "jsonp",
-                            jsonp: false,
-                            jsonpCallback: "callback",
-                            cache: false
-                        },
-                        dialect: function() {
-                            var title = "King Kong",
-                            dropdownlist = $("#titles").data("kendoDropDownList");
 
-                            if (dropdownlist) {
-                                title = dropdownlist.text() || text;
+            <div>
+                <pre class="prettyprint" style="float:left">
+                    <h3>HTML</h3>
+                    &lt;input id="titles" /&gt;
+
+                    <h3>Script</h3>
+                    $("titles").kendoDropDownList({
+                        dataTextField: "Name",
+                        dataValueField: "Id",
+                        //define custom template
+                        <strong>template: '&lt;img src="${ data.BoxArt.SmallUrl }" alt="${ data.Name }" /&gt;Title:${ data.Name }, Year: ${ data.Name }',</strong>
+                        dataSource: new kendo.data.DataSource({
+                            type: "odata",
+                            serverPaging: true,
+                            pageSize: 20,
+                            transport: {
+                                read: {
+                                    url: "http://odata.netflix.com/Catalog/Titles", // the remove service url
+                                    data: { //additional parameters sent to the remote service
+                                        q: function() {
+                                            return "$filter=substringof('King Kong',Name)";
+                                        }
+                                    }
+                                }
                             }
+                        })
+                    });
+                </pre>
 
-                            return "$filter=substringof('" + title + "',Name)&$format=json&$callback=callback";
-                        }
-                    },
-                    schema: {
-                        data: function(result) {
-                            return result.d.results;
-                        }
-                    }
-                });
+                <input id="titles"/>
+            </div>
 
+            <script type="text/javascript">
                 $("#titles").kendoDropDownList({
-                    index: 0,
-                    minLength: 3,
-                    filter: "startswith",
                     dataTextField: "Name",
                     dataValueField: "Id",
-                    dataSource: remoteDataSource,
+                    //define custom template
                     template: '<img src="${ data.BoxArt.SmallUrl }" alt="${ data.Name }" />Title:${ data.Name }, Year: ${ data.Name }',
-                    init: function() {
-                        this.ul.width(400)
-                    }
+                    dataSource: new kendo.data.DataSource({
+                        type: "odata",
+                        serverPaging: true,
+                        pageSize: 20,
+                        transport: {
+                            read: {
+                                url: "http://odata.netflix.com/Catalog/Titles",
+                                data: { //additional parameters sent to the remote service
+                                    q: function() {
+                                        return "$filter=substringof('King Kong',Name)";
+                                    }
+                                }
+                            }
+                        }
+                    })
                 });
+
+                //set width of the drop-down list
+                $("#titles").data("kendoDropDownList").ul.width(400);
+
             </script>
         </div>
         <!-- tools -->

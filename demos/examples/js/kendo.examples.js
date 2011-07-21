@@ -348,21 +348,21 @@ var categories = {
         }
     },
     controls: [
-        {
+       {
             text: "Autocomplete",
             expanded: true,
             spriteCssClass: "autocompleteIcon",
             items: [
                 {
-                    text: "Basic usage",
+                    text: "Basic Usage",
                     url: "autocomplete/index.html"
                 },
                 {
-                    text: "Remote data source",
+                    text: "Binding to Remote Data",
                     url: "autocomplete/remotedatasource.html"
                 },
                 {
-                    text: "Custom template",
+                    text: "Customizing Template",
                     url: "autocomplete/customtemplate.html"
                 },
                 {
@@ -424,23 +424,19 @@ var categories = {
             spriteCssClass: "dropDownListIcon",
             items: [
                 {
-                    text: "Basic usage",
+                    text: "Basic Usage",
                     url: "dropdownlist/index.html"
                 },
                 {
-                    text: "Transformation",
-                    url: "dropdownlist/transformation.html"
-                },
-                {
-                    text: "Local data source",
+                    text: "Binding to Local Data",
                     url: "dropdownlist/localdatasource.html"
                 },
                 {
-                    text: "Remote data source",
+                    text: "Binding to Remote Data",
                     url: "dropdownlist/remotedatasource.html"
                 },
                 {
-                    text: "Custom template",
+                    text: "Customizing Templates",
                     url: "dropdownlist/customtemplate.html"
                 },
                 {

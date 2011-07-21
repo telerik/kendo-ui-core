@@ -3,7 +3,7 @@
     <head>
         <!-- meta -->
         <!-- meta -->
-        <title>DropDownList with Local Data Source</title>
+        <title>Binding to Local Data</title>
         <!-- script -->
         <script src="../../../src/jquery.js"></script>
         <script src="../../../src/kendo.core.js"></script>
@@ -22,40 +22,60 @@
         <!-- nav -->
         <!-- nav -->
         <!-- description -->
-        <div class="description">Local data source</div>
+        <div class="description">Binding to local data.</div>
         <!-- description -->
         <div id="example">
-            <input id="products"/>
-            <select id="select"></select>
-            <button id="filter" class="t-button" style="vertical-align: top">Filter data source</button>
+            <div>
+                <pre class="prettyprint" style="float:left">
+                    <h3>HTML</h3>
+                    &lt;input id="input" /&gt;
+
+                    <h3>Script</h3>
+                    var data = [
+                        {text: "Item1", value:"1"},
+                        {text: "Item2", value:"2"},
+                        {text: "Item3", value:"3"}
+                    ];
+
+                    $("#input").kendoDropDownList({
+                        dataSource: data
+                    });
+                </pre>
+
+                <input id="input"/>
+            </div>
+            <div style="clear:both">
+                <pre class="prettyprint" style="float:left">
+                    <h3>HTML</h3>
+                    &lt;select id="select" /&gt;
+
+                    <h3>Script</h3>
+                    var data = [
+                        {text: "Item1", value:"1"},
+                        {text: "Item2", value:"2"},
+                        {text: "Item3", value:"3"}
+                    ];
+
+                    $("#select").kendoDropDownList({
+                        dataSource: data
+                    });
+                </pre>
+
+                <select id="select"></select>
+            </div>
             <script type="text/javascript">
                 var data = [
-                    {text: "Chai", value:"1"},
-                    {text: "Chang", value:"2"},
-                    {text: "Aniseed Syrup", value:"3"},
-                    {text: "Chef Anton", value:"4"},
-                    {text: "Ikura", value:"5"},
-                    {text: "Mishi Kobe Niku", value:"6"},
-                    {text: "Queso Cabrales", value:"7"},
-                    {text: "Organic Dried Pears", value:"8"},
-                    {text: "Schoggi Schokolade", value:"9"},
-                    {text: "Alice Mutton", value:"10"},
-                    {text: "Carnarvon Tigers", value:"11"}
+                    {text: "Item1", value:"1"},
+                    {text: "Item2", value:"2"},
+                    {text: "Item3", value:"3"}
                 ];
 
-                var dataSource = new kendo.data.DataSource.create(data);
-
-                $("#products").kendoDropDownList({
-                    index: 0,
-                    dataSource: dataSource
+                $("#input").kendoDropDownList({
+                    dataSource: data
                 });
+
                 $("#select").kendoDropDownList({
-                    index: 0,
-                    dataSource: dataSource
-                });
-
-                $("#filter").click(function() {
-                    dataSource.filter( {field: "text", operator: "startswith", value: "a"} );
+                    dataSource: data
                 });
             </script>
         </div>

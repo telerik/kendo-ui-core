@@ -25,14 +25,17 @@
         <div class="description">This example shows how to attach events to a kendoTabStrip and how they are fired and triggered.</div>
         <!-- description -->
         <div id="example">
-            <input id="products"/>
-            <script type="text/javascript">
-                var init = function () {
-                    if ("kendoConsole" in window) {
-                        kendoConsole.log("DropDownList is initialized");
-                    }
-                };
+            <pre class="prettyprint">
+                $("#input").kendoDropDownList({
+                    dataSource: data,
+                    change: function(e) { kendoConsole.log("Changed: {text: " + this.text() + " , value: " + this.value() + "}"); },
+                    close: function(e) { kendoConsole.log("List is closing"); },
+                    open: function(e) { kendoConsole.log("List is opening"); }
+                });
+            </pre>
+            <input id="input"/>
 
+            <script type="text/javascript">
                 var open = function () {
                     if ("kendoConsole" in window) {
                         kendoConsole.log("List is opening");
@@ -52,25 +55,16 @@
                 };
 
                 var data = [
-                    {text: "Chai", value:"1"},
-                    {text: "Chang", value:"2"},
-                    {text: "Aniseed Syrup", value:"3"},
-                    {text: "Chef Anton", value:"4"},
-                    {text: "Ikura", value:"5"},
-                    {text: "Mishi Kobe Niku", value:"6"},
-                    {text: "Queso Cabrales", value:"7"},
-                    {text: "Organic Dried Pears", value:"8"},
-                    {text: "Schoggi Schokolade", value:"9"},
-                    {text: "Alice Mutton", value:"10"},
-                    {text: "Carnarvon Tigers", value:"11"}
+                    {text: "Item1", value:"1"},
+                    {text: "Item2", value:"2"},
+                    {text: "Item3", value:"3"}
                 ];
 
-                $("#products").kendoDropDownList({
+                $("#input").kendoDropDownList({
                     dataSource: data,
                     change: change,
                     close: close,
-                    open: open,
-                    init: init
+                    open: open
                 });
 
             </script>

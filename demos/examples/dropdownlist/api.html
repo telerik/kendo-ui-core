@@ -24,21 +24,62 @@
         <!-- description -->
         <div class="description">Client API</div>
         <!-- description -->
-        <div id="example" style="min-height: 300px">
-            <!-- configurator -->
-            <div class="configuration" style="width: 210px">
-                <span class="configHead">Configure</span>
-                <span class="configTitle">API Functions</span>
-                <button id="enable" class="t-button">Enable</button> or <button id="disable" class="t-button">Disable</button><br/>
-                <button id="open" class="t-button">Open</button> or <button id="close" class="t-button">Close</button> the drop-down<br/>
-                <button id="getValue" class="t-button">Get value</button> or <button id="getText" class="t-button">Get text</button><br/>
-                <button id="select" class="t-button">Select by index</button><input id="index" value="0" /><br/>
-                <button id="setValue" class="t-button">Select by value</button><input id="value" value="1" /><br/>
-                <button id="find" class="t-button">Find item starting with</button><input id="word" value="Ch" />
-            </div>
-            <!-- configurator -->
+        <div id="example">
+            <style id="exampleCSS" scoped="scoped">
+                #products_wrapper
+                {
+                    float: left
+                }
 
+                .configurator
+                {
+                    width: 300px;
+                    float: right;
+                    margin: 0 0 0 15em;
+                    display: inline;
+                }
+
+                .configurator li
+                {
+                    padding-bottom: 3px;
+                }
+
+                .configurator input
+                {
+                    width: 60px
+                }
+            </style>
             <input id="products" />
+
+            <div class="configurator">
+                With available API you can:
+                <li>
+                    <button id="enable">Enable</button> or
+                    <button id="disable">Disable</button>
+                </li>
+                <li>
+                    <button id="open">Open drop-down</button> or
+                    <button id="close">Close drop-down</button>
+                </li>
+                <li>
+                    <button id="select">Select by index</button>
+                    <input id="index" value="0" />
+                </li>
+                <li>
+                    <button id="setValue">Select by value</button>
+                    <input id="value" value="1" />
+                </li>
+                <li>
+                    <button id="getValue">Get value</button> or
+                    <button id="getText">Get text</button>
+                </li>
+                <li>
+                    <label for="word">
+                        Find item which starts with:</label>
+                    <input id="word" value="Ch" />
+                    <button id="find">Find</button>
+                </li>
+            </div>
 
             <script type="text/javascript">
                 var data = [
