@@ -159,6 +159,7 @@
 
                 Application.fetchExample(href);
             }
+            prettyPrint();
         },
 
         fetchDescription: function(href) {
@@ -307,7 +308,6 @@
             });
 
             Application.fetchDescription(normalizedUrl);
-            prettyPrint();
 
             $("#viewCode").click(function(e) {
                 e.preventDefault();
