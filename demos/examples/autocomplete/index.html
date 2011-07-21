@@ -26,23 +26,28 @@
         <!-- description -->
         <div id="example" class="t-content">
             <div>
-                <pre class="prettyprint" style="float:left">
-                    <h3>HTML</h3>
-                    &lt;input id="input" /&gt;
-
-                    <h3>Script</h3>
-                    $("#input").kendoAutoComplete([ "Item1", "Item2", "Item3", "Item4"]);
+                <pre class="prettyprint">
+&lt;input id="input" /&gt;
                 </pre>
-                <input id="input" style="float:left; margin-top:30px; margin-left:130px;"/>
+
+                <pre class="prettyprint lang-js">
+$("#input").kendoAutoComplete([ "Item1", "Item2", "Item3", "Item4"]);
+                </pre>
+
+                <input id="input" />
             </div>
 
             <script type="text/javascript">
+                $(document).ready(function() {
+                    //input HTML element
+                    var data = [ "Item1", "Item2", "Item3", "Item4"];
 
-                //input HTML element
-                var data = [ "Item1", "Item2", "Item3", "Item4"];
-
-                $("#input").kendoAutoComplete(data);
-
+                    //create AutoComplete UI component
+                    $("#input").kendoAutoComplete({
+                        dataSource: data,
+                        separator: ", "
+                    });
+                });
            </script>
         </div>
         <!-- tools -->

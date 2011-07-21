@@ -25,55 +25,28 @@
         <!-- description -->
         <div class="description">Binding to Remote Data</div>
         <!-- description -->
-        <div id="example" class="t-content">
-            <div>
-                <pre class="prettyprint" style="float:left">
-                    <h3>HTML</h3>
-                    &lt;input id="titles" /&gt;
+        <div id="example">
+            Enter name of movie (minimum 3 chars):
+            <input id="titles"/>
 
-                    <h3>Script</h3>
-                    $("titles").kendoAutoComplete({
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    $("#titles").kendoAutoComplete({
+                        minLength: 3,
                         dataTextField: "Name",
+                        dataValueField: "Id",
+                        severFiltering: true,
                         dataSource: new kendo.data.DataSource({
                             type: "odata",
                             serverPaging: true,
+                            serverFiltering: true,
                             pageSize: 20,
                             transport: {
-                                read: {
-                                    url: "http://odata.netflix.com/Catalog/Titles",
-                                    data: { //additional parameters sent to the remote service
-                                        q: function() {
-                                            return "$filter=substringof('" + $("#titles").val() + "',Name)";
-                                        }
-                                    }
-                                }
+                                read: "http://odata.netflix.com/Catalog/Titles"
                             }
                         })
                     });
-                </pre>
-
-                <input id="titles"/>
-            </div>
-
-            <script type="text/javascript">
-                $("#titles").kendoAutoComplete({
-                    minLength: 3,
-                    dataTextField: "Name",
-                    dataSource: new kendo.data.DataSource({
-                        type: "odata",
-                        transport: {
-                            read: {
-                                url: "http://odata.netflix.com/Catalog/Titles",
-                                data: { //additional parameters sent to the remote service
-                                    q: function() {
-                                        return "$filter=substringof('" + $("#titles").val() + "',Name)";
-                                    }
-                                }
-                            }
-                        }
-                    })
                 });
-
             </script>
         </div>
 
