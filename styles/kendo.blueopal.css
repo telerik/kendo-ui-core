@@ -3,7 +3,7 @@
 .t-widget,
 .t-input
 {
-    border-color: #8ba0bc;
+    border-color: #c4d0d5;
     background-color: #fff;
 }
 
@@ -15,8 +15,8 @@
 .t-tooltip,
 .t-grid-pager
 {
-    border-color: #8ba0bc;
-    background: #bccadd url('BlueOpal/gradient.png') repeat-x 0 center;
+    border-color: #c4d0d5;
+    background: #dfe7ea url('BlueOpal/gradient.png') repeat-x 0 center;
 }
 
 .t-tabstrip,
@@ -59,31 +59,31 @@
 
 .t-group
 {
-    background-color:#dfe7ea;
-    border-color:#8ba0bc;
+    background-color:#f1f4f5;
+    border-color:#c4d0d5;
 }
 
 .t-content,
 .t-editable-area
 {
-    border-color: #8ba0bc;
+    border-color: #c4d0d5;
     background-color: #fff;
 }
 
 .t-colorpicker .t-arrow-down
 {
-    border-color: #8ba0bc;
+    border-color: #c4d0d5;
 }
 
 .t-separator
 {
-    border-color: #8ba0bc;
-    background-color: #f1f4f8;
+    border-color: #c4d0d5;
+    background-color: #f1f4f5;
 }
 
 .t-alt
 {
-    background-color: #eff2f6;
+    background-color: #f1f4f5;
 }
 
 .t-dropdown-wrap,
@@ -95,20 +95,34 @@
 .t-footer-template td,
 .t-widget .t-status
 {
-    border-color: #8ba0bc;
-    background-color: #dfe7ea;
+    border-color: #c4d0d5;
+    background-color: #f1f4f5;
 }
 
 .t-state-default,
 .t-state-default .t-select,
 .t-panelbar .t-link
 {
-    border-color: #8ba0bc;
+    border-color: #c4d0d5;
 }
 
 .t-active-filter
 {
     background-color: #fff;
+}
+
+.t-state-active,
+.t-state-active:hover,
+.t-header .t-state-active
+{
+    color: #293135;
+    background-color: #f5f7f8;
+    border-color: #9aabb2;
+}
+
+.t-state-active .t-select
+{
+    border-color: #c4d0d5;
 }
 
 .t-state-hover,
@@ -123,20 +137,6 @@
 .t-state-hover .t-select
 {
     border-color: #6fccf3;
-}
-
-.t-state-active,
-.t-state-active:hover,
-.t-header .t-state-active
-{
-    color: #293135;
-    background-color: #f1f4f5;
-    border-color: #8ba0bc;
-}
-
-.t-state-active .t-select
-{
-    border-color: #8ba0bc;
 }
 
 .t-button:hover
@@ -156,25 +156,23 @@
 
 .t-state-error
 {
-    border-style: ridge;
-    border-color: #ff7c7c;
-    background-color: #ffe4e4;
-    color:#f20000;
+    border-color: #f77;
+    background-color: #fff1f1;
+    color:#f60000;
 }
 
 .t-button
 {
     outline: 0;
-    border-color: #8ba0bc;
-    color: #384e73;
+    color: #293135;
 }
 
 .t-button:before
 {
     content: "\a0";
     display: block;
-    height: 0;
-    margin: -1px 0 0 -3px;
+    height: 2px;
+    margin: -2px 0 0 -3px;
     padding: 0 3px;
     width: 100%;
     border-top: 1px solid #FFF;
@@ -183,12 +181,18 @@
     -webkit-margin-top-collapse: separate;
 }
 
+.t-button::-moz-focus-inner /* Remove phantom button padding in FF */
+{
+    padding: 0;
+    border: none;
+}
+
 .t-button,
 button.t-button.t-state-disabled:hover,
 a.t-button.t-state-disabled:hover,
 .t-state-disabled .t-button:hover
 {
-    border-color: #8ba0bc;
+    border-color: #c4d0d5;
     background: #dfe7ea url('BlueOpal/gradient.png') repeat-x 0 center;
 }
 
@@ -199,11 +203,6 @@ a.t-button.t-state-disabled:hover,
     color: #b4bbbe;
 }
 
-.t-autocomplete
-{
-    background-color: #fff;
-}
-
 .t-widget .t-status
 {
     background-color:transparent;
@@ -212,33 +211,28 @@ a.t-button.t-state-disabled:hover,
 .t-grid-header-wrap,
 .t-grid-footer-wrap
 {
-    border-color: #8ba0bc;
+    border-color: #c4d0d5;
 }
 
 .t-grid td
 {
-    border-color: #bfcde0;
+    border-color: #c4d0d5;
 }
 
-.t-grouping-row td
+.t-grouping-row td,
+td.t-group-cell
 {
-    background:url('BlueOpal/sprite.png') repeat-x 0 -48px;
+    background:#dfe7ea;
 }
 
 .t-grouping-header .t-group-indicator
 {
-    border-color: #8ba0bc;
+    border-color: #c4d0d5;
 }
 
 .t-grouping-dropclue
 {
     background: url('BlueOpal/sprite.png') no-repeat -48px -288px;
-}
-
-.t-grouping-row .t-group-cell,
-.t-grouping-row p
-{
-    background: #fff;
 }
 
 .t-treeview .t-drop-hint
@@ -249,20 +243,20 @@ a.t-button.t-state-disabled:hover,
 
 .t-panelbar .t-link,
 .t-panelbar .t-group,
-.t-panelbar .t-content,
+.t-panelbar .t-content
 {
-    border-color: #8ba0bc;
+    border-color: #c4d0d5;
 }
 
 .t-calendar th
 {
-    border-color: #dadcdd;
-    background-color:#dbe3ee;
+    border-color: #c4d0d5;
+    background-color:#dfe7ea;
 }
 
 .t-other-month .t-link
 {
-    color: #8ba0bc;
+    color: #8b9097;
 }
 
 /* DropDown */
@@ -314,7 +308,7 @@ a.t-button.t-state-disabled:hover,
 .t-slider .t-draghandle
 {
 	background-image: url('BlueOpal/sprite.png');
-	color: #666;
+	color: #8b9097;
 }
 
 .t-slider .t-slider-track .t-state-active
@@ -326,7 +320,7 @@ a.t-button.t-state-disabled:hover,
 
 .t-slider-track
 {
-	border-color:#8ba0bc;
+	border-color:#c4d0d5;
 }
 
 .t-slider-horizontal .t-slider-track,
@@ -356,7 +350,7 @@ a.t-button.t-state-disabled:hover,
 .t-tooltip
 {
     border-width:2px;
-    border-color:#beccde;
+    border-color:#c4d0d5;
 }
 
 .t-callout
@@ -416,7 +410,7 @@ a.t-button.t-state-disabled:hover,
 
 .t-splitbar
 {
-    border-color: #8ba0bc;
+    border-color: #c4d0d5;
     background-color: #dfe7ea;
 }
 
@@ -437,18 +431,18 @@ a.t-button.t-state-disabled:hover,
 .t-dropzone-active,
 .t-upload-files
 {
-    border-color: #8ba0bc;
+    border-color: #c4d0d5;
 }
 
 .t-dropzone-hovered,
 .t-upload-files
 {
-    background-color: #dfe7ea;    
+    background-color: #f1f4f5;    
 }
 
 .t-dropzone em
 {
-    color: #8ba0bc;
+    color: #b4bbbe;
 }
 
 .t-progress,
@@ -460,20 +454,20 @@ a.t-button.t-state-disabled:hover,
 .t-progress
 {
     background-position: 0 -464px;
-    border-color: #8ba0bc;
+    border-color: #c4d0d5;
 }
 
 .t-progress-status
 {
     background-position: 0 -472px;
-    border-color: #6fccf3 transparent;
+    border-color: #009bdc transparent;
 }
 
 /* ImageBrowser */
 
 .t-tiles
 {
-    border-color: #8ba0bc;
+    border-color: #c4d0d5;
     background: #fff;
 }
 
@@ -493,7 +487,7 @@ a.t-button.t-state-disabled:hover,
 
 .t-tiles li.t-state-selected
 {
-    border-color: #e3bb4a;
+    border-color: #009bdc;
     background-position: 0 0;
 }
 
