@@ -3,10 +3,11 @@
     <head>
         <!-- meta -->
         <!-- meta -->
-        <title>Chart Default Settings</title>
+        <title>Chart Events</title>
         <!-- script -->
         <script src="../../../src/jquery.js"></script>
         <script src="../../../src/kendo.core.js"></script>
+        <script src="../js/kendo.console.js"></script>
         <script src="../../../src/kendo.data.js"></script>
         <script src="../../../src/kendo.chart.js"></script>
         <!-- script -->
@@ -20,7 +21,7 @@
         <!-- nav -->
         <!-- nav -->
         <!-- description -->
-        <div class="description">This example shows how to bind the kendoChart to json object.</div>
+        <div class="description">This example shows how to attach events to a kendoChart and how they are fired and triggered.</div>
         <!-- description -->
         <div id="example">
             <div id="chart" style="width:800px; height:500px;"></div>
@@ -35,7 +36,7 @@
                         },
                         sort: {
                             field: "year",
-                            dir: "asc"
+                            dir: "desc"
                         }
                     });
 
@@ -45,7 +46,8 @@
                             text: "Spain electricity production (GWh)"
                         },
                         seriesDefaults: {
-                            column: {
+                            type: "bar",
+                            bar: {
                                 stack: true
                             }
                         },
@@ -67,8 +69,15 @@
                             labels: {
                                 format: "{0:#,##0}"
                             }
-                        }
+                        },
+                        seriesClick: seriesClick
                     });
+
+                    function seriesClick(e) {
+                        if ("kendoConsole" in window) {
+                            kendoConsole.log("Series click :: " + e.series.name + ": " + kendo.toString(e.value, "#,##0") + " GWh");
+                        }
+                    }
 
                     $("#skinSelector").bind("change", function(e) {
                         var newSkin = this.value.toLowerCase();
@@ -76,8 +85,8 @@
                 });
             </script>
         </div>
+        <div class="console"></div>
         <!-- tools -->
         <!-- tools -->
     </body>
 </html>
-

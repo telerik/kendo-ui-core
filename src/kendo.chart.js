@@ -93,7 +93,6 @@
                 SERIES_CLICK
             ], chart.options);
 
-            chart._ensureSize();
             chart._refresh();
         },
 
@@ -140,6 +139,7 @@
 
         _refresh: function() {
             var chart = this;
+            chart._ensureSize();
             if (chart.options.dataSource) {
                 chart.dataSource.read();
             } else {

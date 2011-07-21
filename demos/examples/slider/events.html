@@ -31,12 +31,6 @@
                 <input type="range" />
             </div>
             <script type="text/javascript">
-                var sliderInit = function () {
-                    if ("kendoConsole" in window) {
-                        kendoConsole.log("Slider is initialized.");
-                    }
-                };
-
                 var sliderSlide = function (e) {
                     if ("kendoConsole" in window) {
                         kendoConsole.log("Change :: new value is: " + e.value);
@@ -46,12 +40,6 @@
                 var sliderChange = function (e) {
                     if ("kendoConsole" in window) {
                         kendoConsole.log("Slide :: new slide value is: " + e.value);
-                    }
-                };
-
-                 var rangeSliderInit = function () {
-                    if ("kendoConsole" in window) {
-                        kendoConsole.log("Range slideris initialized.");
                     }
                 };
 
@@ -69,14 +57,12 @@
 
                 $("#slider").kendoSlider({
                     change: sliderChange,
-                    slide: sliderSlide,
-                    init: sliderInit
+                    slide: sliderSlide
                 });
 
                 $("#rangeSlider").kendoRangeSlider({
                     change: rangeSliderChange,
-                    slide: rangeSliderSlide,
-                    init: rangeSliderInit
+                    slide: rangeSliderSlide
                 });
 
             </script>
