@@ -31,6 +31,7 @@
             <p> Choose a ticket class: <select id="ticket" data-bind="options: tickets,
                 optionsCaption: 'Choose...',
                 optionsText: 'name',
+                optionsValue: 'price',
                 value: chosenTicket"></select>
             </p>
             <p data-bind="template: 'ticketTemplate'"></p>
@@ -38,14 +39,12 @@
             <script id="ticketTemplate" type="text/x-jquery-tmpl">
                 {{if chosenTicket}}
                 You have chosen <b>${ chosenTicket().name }</b>
-                ($${ chosenTicket().price })
+                ($${ chosenTicket() })
                 <button data-bind="click: resetTicket">Clear</button>
                 {{/if}}
             </script>
-
             <script>
                 $(document).ready(function() {
-
                     var viewModel = {
                         tickets: [
                         { name: "Economy", price: 199.95 },
@@ -55,9 +54,10 @@
                         chosenTicket: ko.observable(),
                         resetTicket: function() { this.chosenTicket(null) }
                     };
+
                     ko.applyBindings(viewModel);
 
-                    //$("#ticket").kendoDropDownList();
+                    $("#ticket").kendoDropDownList();
                 });
             </script>
         </div>
