@@ -3,9 +3,11 @@
     <head>
         <!-- meta -->
         <!-- meta -->
-        <title>Title</title>
+        <title>Basic usage</title>
         <!-- script -->
         <script src="../../../src/jquery.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.draganddrop.js"></script>
         <!-- script -->
         <!-- css -->
         <link href="../styles/prettify.css" rel="stylesheet"/>
@@ -21,7 +23,55 @@
         <div class="description"></div>
         <!-- description -->
         <div id="example">
-            <h3>Example goes here</h3>
+            <h3>Basic usage</h3>
+            <div id="draggable" class="t-header">
+                Draggable
+            </div>
+            <div id="droptarget" class="t-header t-state-selected">
+                Drop here
+            </div>
+            <script>
+                $(document).ready(function() {
+                    $("#draggable").kendoDraggable({
+                        hint: function() {
+                            return $("#draggable").clone();
+                        },
+                        dragstart: function() {
+                            $("#droptarget").text("Drop here");
+                        }
+                    });
+                    $("#droptarget").kendoDropTarget({
+                        dragenter: function() {
+                            $("#droptarget").addClass("t-state-hover").text("Draggable entered the drop target");
+                            console.log("wtf?");
+                        },
+                        dragleave: function() {
+                            $("#droptarget").removeClass("t-state-hover").text("Drop here");
+                        },
+                        drop: function(e) {
+                            e.draggable.dropped = true;
+                            $("#droptarget").removeClass("t-state-hover").text("Dropped!");
+                        }
+                    });
+                });
+            </script>
+            <style scoped>
+                #draggable
+                {
+                    border: 1px solid black;
+                    width: 100px;
+                    height: 100px;
+                    position: absolute;
+                }
+                #droptarget
+                {
+                    border: 1px solid black;
+                    width: 100px;
+                    height: 100px;
+                    position: absolute;
+                    left: 500px;
+                }
+            </style>
         </div>
         <!-- tools -->
         <!-- tools -->
