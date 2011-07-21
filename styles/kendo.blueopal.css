@@ -183,12 +183,6 @@
     -webkit-margin-top-collapse: separate;
 }
 
-.t-button::-moz-focus-inner /* Remove phantom button padding in FF */
-{
-    padding: 0;
-    border: none;
-}
-
 .t-button,
 button.t-button.t-state-disabled:hover,
 a.t-button.t-state-disabled:hover,
