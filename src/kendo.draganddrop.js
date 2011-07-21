@@ -157,6 +157,7 @@
 
                     that.hint.css( {
                         position: "absolute",
+                        zIndex: 10010, //the Window's z-index is 10000
                         left: pageX + cursorOffset.left,
                         top: pageY + cursorOffset.top
                     })

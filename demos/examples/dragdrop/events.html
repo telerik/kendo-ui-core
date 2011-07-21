@@ -3,11 +3,12 @@
     <head>
         <!-- meta -->
         <!-- meta -->
-        <title>Basic usage</title>
+        <title>Drag and Drop Events</title>
         <!-- script -->
         <script src="../../../src/jquery.js"></script>
         <script src="../../../src/kendo.core.js"></script>
         <script src="../../../src/kendo.draganddrop.js"></script>
+        <script src="../js/kendo.console.js"></script>
         <!-- script -->
         <!-- css -->
         <link href="../styles/prettify.css" rel="stylesheet"/>
@@ -23,12 +24,14 @@
         <div class="description"></div>
         <!-- description -->
         <div id="example">
-            <h3>Basic usage</h3>
-            <div id="draggable" class="t-header">
-                Draggable
-            </div>
-            <div id="droptarget" class="t-header t-state-selected">
-                Drop here
+            <h3>Drag and Drop Events</h3>
+            <div style="height:200px">
+                <div id="draggable" class="t-header">
+                    Draggable
+                </div>
+                <div id="droptarget" class="t-header t-state-selected">
+                    Drop here
+                </div>
             </div>
             <script>
                 $(document).ready(function() {
@@ -37,23 +40,33 @@
                             return $("#draggable").clone();
                         },
                         dragstart: function() {
-                            $("#droptarget").text("Drop here");
+                            kendoConsole.log("dragstart");
+                        },
+                        drag: function() {
+                            kendoConsole.log("drag");
+                        },
+                        dragend: function() {
+                            kendoConsole.log("dragend");
                         }
                     });
                     $("#droptarget").kendoDropTarget({
                         dragenter: function() {
-                            $("#droptarget").addClass("t-state-hover").text("Draggable entered the drop target");
+                            $("#droptarget").addClass("t-state-hover");
+                            kendoConsole.log("dragenter");
                         },
                         dragleave: function() {
-                            $("#droptarget").removeClass("t-state-hover").text("Drop here");
+                            $("#droptarget").removeClass("t-state-hover");
+                            kendoConsole.log("dragleave");
                         },
                         drop: function(e) {
-                            e.draggable.dropped = true; // tell the draggable that it was successfully dragged
-                            $("#droptarget").removeClass("t-state-hover").text("Dropped!");
+                            e.draggable.dropped = true;
+                            $("#droptarget").removeClass("t-state-hover");
+                            kendoConsole.log("drop");
                         }
                     });
                 });
             </script>
+            <div class="console"></div>
             <style scoped>
                 #draggable
                 {
