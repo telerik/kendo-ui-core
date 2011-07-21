@@ -217,8 +217,7 @@
 
                 $("#exampleBody").show();
             };
-
-            debugger;
+            
             if ($("#exampleBody").length)
                 $.get(url)
                     .complete(function() {
