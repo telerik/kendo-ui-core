@@ -23,33 +23,6 @@
         <div class="description">Local data operations</div>
         <!-- description -->
         <div id="example">
-            <style scoped>
-            </style>
-            <!-- configurator -->
-            <div class="configuration">
-                <div>
-                    <label>Page: <input type="number" value="1" id="page" min="1" /></label>
-                </div>
-                <div>
-                    <label>Order by: <select id="order">
-                            <option value="Id">Id</option>
-                            <option value="FirstName">First Name</option>
-                            <option value="LastName">Last Name</option>
-                            <option value="Age">Age</option>
-                        </select>
-                    </label>
-                    <label>Direction: <select id="dir">
-                            <option value="asc">Ascending</option>
-                            <option value="desc">Descending</option>
-                        </select>
-                    </label>
-                </div>
-                <div>
-                    <button class="t-button" id="apply">Apply</button>
-                </div>
-            </div>
-            <!-- configurator -->
-
             <table id="people">
                 <thead>
                     <th>Id</th>
@@ -115,6 +88,28 @@
                     });
                 });
             </script>
+            <div class="configuration">
+                <div>
+                    <label>Page: <input type="number" value="1" id="page" min="1" /></label>
+                </div>
+                <div>
+                    <label>Order by: <select id="order">
+                            <option value="Id">Id</option>
+                            <option value="FirstName">First Name</option>
+                            <option value="LastName">Last Name</option>
+                            <option value="Age">Age</option>
+                        </select>
+                    </label>
+                    <label>Direction: <select id="dir">
+                            <option value="asc">Ascending</option>
+                            <option value="desc">Descending</option>
+                        </select>
+                    </label>
+                </div>
+                <div>
+                    <button class="t-button" id="apply">Apply</button>
+                </div>
+            </div>
         </div>
         <!-- tools -->
         <!-- tools -->

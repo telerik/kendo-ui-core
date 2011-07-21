@@ -23,15 +23,6 @@
         <div class="description">This example shows how easy PanelBar animation effects can be initialized/customized.</div>
         <!-- description -->
         <div id="example">
-            <!-- configurator -->
-            <div class="configuration">
-                <span class="configHead">Configure</span>
-                <span class="configTitle">Animation Settings</span>
-                <input id="toggle" name="animation" type="radio" /><label for="toggle">toggle animation</label><br />
-                <input id="expand" name="animation" type="radio" checked="checked" /><label for="expand">expand animation</label><br />
-                <input id="opacity" type="checkbox" checked="checked" /><label for="opacity">animate opacity</label>
-            </div>
-            <!-- configurator -->
             <ul id="PanelBar1">
                 <li class="t-state-active">
                     First Item
@@ -79,6 +70,13 @@
                     </ul>
                 </li>
             </ul>
+            <div class="configuration">
+                <span class="configHead">Configure</span>
+                <span class="configTitle">Animation Settings</span>
+                <input id="toggle" name="animation" type="radio" /><label for="toggle">toggle animation</label><br />
+                <input id="expand" name="animation" type="radio" checked="checked" /><label for="expand">expand animation</label><br />
+                <input id="opacity" type="checkbox" checked="checked" /><label for="opacity">animate opacity</label>
+            </div>
             <script type="text/javascript">
                 var original = $("#PanelBar1").clone(true);
                 original.find(".t-state-active").removeClass("t-state-active");
