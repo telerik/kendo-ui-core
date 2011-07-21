@@ -155,7 +155,148 @@
             .delegate(".t-file", "t:upload-success", $.proxy(that._onUploadSuccess, that))
             .delegate(".t-file", "t:upload-error", $.proxy(that._onUploadError, that));
 
-            that.bind([SELECT, UPLOAD, SUCCESS, ERROR, COMPLETE, CANCEL, REMOVE], that.options);
+            that.bind([
+                /**
+                 * Fires when one or more files are selected.
+                 * Cancelling the event will prevent the selection.
+                 * @name kendo.ui.Upload#select
+                 * @event
+                 * @param {Event} e
+                 * @param {Array} e.files
+                 * List of the selected files. Each file has:
+                 * <ul>
+                 *     <li>name</li>
+                 *     <li>
+                 *         extension - the file extension
+                 *         inlcuding the leading dot - ".jpg", ".png", etc.
+                 *      </li>
+                 *     <li>size - the file size in bytes (null if not available)</li>
+                 * </ul>
+                 */
+                SELECT,
+
+                /**
+                 * Fires when one or more files are about to be uploaded.
+                 * Cancelling the event will prevent the upload.
+                 * @name kendo.ui.Upload#upload
+                 * @event
+                 * @param {Event} e
+                 * @param {Array} e.files
+                 * List of the files that will be uploaded. Each file has:
+                 * <ul>
+                 *     <li>name</li>
+                 *     <li>
+                 *         extension - the file extension
+                 *         inlcuding the leading dot - ".jpg", ".png", etc.
+                 *      </li>
+                 *     <li>size - the file size in bytes (null if not available)</li>
+                 * </ul>
+                 * @param {Object} data - undefined by default,
+                 * but can be set to a custom object to pass information to the save handler.
+                 */
+                UPLOAD,
+
+                /**
+                 * Fires when an upload / remove operation has been completed successfully. 
+                 * @name kendo.ui.Upload#success
+                 * @event
+                 * @param {Event} e
+                 * @param {Array} e.files
+                 * List of the files that were uploaded or removed . Each file has:
+                 * <ul>
+                 *     <li>name</li>
+                 *     <li>
+                 *         extension - the file extension
+                 *         inlcuding the leading dot - ".jpg", ".png", etc.
+                 *      </li>
+                 *     <li>size - the file size in bytes (null if not available)</li>
+                 * </ul>
+                 * @param {String} operation - "upload" or "remove".
+                 * @param {String} response - the response object returned by the server.
+                 * @param {Object} XMLHttpRequest
+                 * This is either the original XHR used for the operation or a stub containing:
+                 * <ul>
+                 *     <li>responseText</li>
+                 *     <li>status</li>
+                 *     <li>statusText</li>
+                 * </ul>
+                 * Verify that this is an actual XHR before accessing any other fields.
+                 */
+                SUCCESS,
+
+                /**
+                 * Fires when an upload / remove operation has failed.
+                 * @name kendo.ui.Upload#error
+                 * @event
+                 * @param {Event} e
+                 * @param {Array} e.files
+                 * List of the files that were uploaded or removed . Each file has:
+                 * <ul>
+                 *     <li>name</li>
+                 *     <li>
+                 *         extension - the file extension
+                 *         inlcuding the leading dot - ".jpg", ".png", etc.
+                 *      </li>
+                 *     <li>size - the file size in bytes (null if not available)</li>
+                 * </ul>
+                 * @param {String} operation - "upload" or "remove".
+                 * @param {Object} XMLHttpRequest
+                 * This is either the original XHR used for the operation or a stub containing:
+                 * <ul>
+                 *     <li>responseText</li>
+                 *     <li>status</li>
+                 *     <li>statusText</li>
+                 * </ul>
+                 * Verify that this is an actual XHR before accessing any other fields.
+                 */
+                ERROR,
+
+                /**
+                 * Fires when all active uploads have completed either successfully or with errors.
+                 * @name kendo.ui.Upload#complete
+                 * @event
+                 * @param {Event} e
+                 */
+                COMPLETE,
+
+                /**
+                 * Fires when the upload has been cancelled while in progress.
+                 * @name kendo.ui.Upload#cancel
+                 * @event
+                 * @param {Event} e
+                 * @param {Array} e.files
+                 * List of the files that were uploaded or removed . Each file has:
+                 * <ul>
+                 *     <li>name</li>
+                 *     <li>
+                 *         extension - the file extension
+                 *         inlcuding the leading dot - ".jpg", ".png", etc.
+                 *      </li>
+                 *     <li>size - the file size in bytes (null if not available)</li>
+                 * </ul>
+                 */
+                CANCEL,
+
+                /**
+                 * Fires when an uploaded file is about to be removed.
+                 * Cancelling the event will prevent the remove.
+                 * @name kendo.ui.Upload#remove
+                 * @event
+                 * @param {Event} e
+                 * @param {Array} e.files
+                 * List of the files that were uploaded or removed . Each file has:
+                 * <ul>
+                 *     <li>name</li>
+                 *     <li>
+                 *         extension - the file extension
+                 *         inlcuding the leading dot - ".jpg", ".png", etc.
+                 *      </li>
+                 *     <li>size - the file size in bytes (null if not available)</li>
+                 * </ul>
+                 * @param {Object} data - undefined by default,
+                 * but can be set to a custom object to pass information to the save handler.
+                 */
+                REMOVE], that.options);
         },
 
         options: {

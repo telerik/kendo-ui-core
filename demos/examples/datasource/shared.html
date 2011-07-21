@@ -76,17 +76,7 @@
                     }]);
                 }
 
-                $(document).ready(function() {
-                    $("#country")
-                        .val("United States")
-                        .kendoDropDownList({
-                            dataSource: countriesDataSource,
-                            dataTextField: "value",
-                            change: filterCountries
-                        });
-
-                    filterCountries();
-
+                function createGrid() {
                     $("#grid").kendoGrid({
                         dataSource: sharedDataSource,
                         scrollable: false,
@@ -107,8 +97,11 @@
                             }
                         ]
                     });
+                }
 
+                function createChart() {
                     $("#chart").kendoChart({
+                        theme: getSkin(),
                         dataSource: sharedDataSource,
                         title: {
                             text: "Estimated Internet Users (Source: ITU)"
@@ -134,7 +127,30 @@
                             field: "year"
                         }
                     });
+                }
+
+                $(document).ready(function() {
+                    $("#country")
+                        .val("United States")
+                        .kendoDropDownList({
+                            dataSource: countriesDataSource,
+                            dataTextField: "value",
+                            change: filterCountries
+                        });
+
+                    filterCountries();
+
+                    createGrid();
+                    createChart();
+
+                    $("#skinSelector").bind("change", function(e) {
+                        createChart();
+                    });
                 });
+
+                function getSkin() {
+                    return $("#skinSelector").val().toLowerCase();
+                }
             </script>
         </div>
         <!-- tools -->
