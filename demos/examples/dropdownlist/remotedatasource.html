@@ -3,11 +3,12 @@
     <head>
         <!-- meta -->
         <!-- meta -->
-        <title>DropDownList with Remote Data Source</title>
+        <title>Binding to Remote Data</title>
         <!-- script -->
         <script src="../../../src/jquery.js"></script>
         <script src="../../../src/kendo.core.js"></script>
         <script src="../../../src/kendo.popup.js"></script>
+        <script src="../../../src/kendo.data.odata.js"></script>
         <script src="../../../src/kendo.data.js"></script>
         <script src="../../../src/kendo.list.js"></script>
         <script src="../../../src/kendo.dropdownlist.js"></script>
@@ -22,44 +23,50 @@
         <!-- nav -->
         <!-- nav -->
         <!-- description -->
-        <div class="description">Remote data source</div>
+        <div class="description">Binding to Remote Data</div>
         <!-- description -->
         <div id="example">
-            <input id="geonames"/>
-            <script type="text/javascript">
-                var remoteDataSource = new kendo.data.DataSource({
-                    serverFiltering: true,
-                    transport: {
-                        read: {
-                            url: "http://ws.geonames.org/searchJSON",
-                            dataType: "jsonp",
-                            cache: false,
-                            data: function() {
-                                var filter = "Bulgaria",
-                                dropdownlist = $("#geonames").data("kendoDropDownList");
+            <div>
+                <pre class="prettyprint" style="float:left">
+                    <h3>HTML</h3>
+                    &lt;input id="titles" /&gt;
 
-                                if (dropdownlist) {
-                                    filter = dropdownlist.text() || filter;
+                    <h3>Script</h3>
+                    $("titles").kendoDropDownList({
+                        dataTextField: "Name",
+                        dataValueField: "Id",
+                        dataSource: new kendo.data.DataSource({
+                            type: "odata",
+                            serverPaging: true,
+                            pageSize: 20,
+                            transport: {
+                                read: {
+                                    url: "http://odata.netflix.com/Catalog/Titles",
+                                    data: { //additional parameters sent to the remote service
+                                        q: function() {
+                                            return "$filter=substringof('King Kong',Name)";
+                                        }
+                                    }
                                 }
-                                return {name_startsWith: filter};
                             }
-                        },
-                    },
-                    schema: {
-                        data: function(result) {
-                            return result.geonames;
-                        }
-                    }
-                });
+                        })
+                    });
+                </pre>
 
-                $("#geonames").kendoDropDownList({
-                    index: 0,
-                    minLength: 3,
-                    filter: "startswith",
-                    dataTextField: "name",
-                    dataValueField: "countryName",
-                    dataSource: remoteDataSource,
-                    autoBind: true
+                <input id="titles"/>
+            </div>
+
+            <script type="text/javascript">
+                $("#titles").kendoDropDownList({
+                    dataTextField: "Name",
+                    dataValueField: "Id",
+                    severFiltering: true,
+                    dataSource: new kendo.data.DataSource({
+                        type: "odata",
+                        serverPaging: true,
+                        serverFiltering: true,
+                        pageSize: 20
+                    })
                 });
 
             </script>

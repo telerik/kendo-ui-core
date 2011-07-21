@@ -3,11 +3,12 @@
     <head>
         <!-- meta -->
         <!-- meta -->
-        <title>Autocomplete with Remote Data Source</title>
+        <title>Binding to Remote Data</title>
         <!-- script -->
         <script src="../../../src/jquery.js"></script>
         <script src="../../../src/kendo.core.js"></script>
         <script src="../../../src/kendo.popup.js"></script>
+        <script src="../../../src/kendo.data.odata.js"></script>
         <script src="../../../src/kendo.data.js"></script>
         <script src="../../../src/kendo.list.js"></script>
         <script src="../../../src/kendo.autocomplete.js"></script>
@@ -22,39 +23,60 @@
         <!-- nav -->
         <!-- nav -->
         <!-- description -->
-        <div class="description">Remote data source</div>
+        <div class="description">Binding to Remote Data</div>
         <!-- description -->
         <div id="example">
-            Type name of city (minimum 3 chars):
-            <input id="geonames"/>
-            <script type="text/javascript">
-                var remoteDataSource = new kendo.data.DataSource({
-                    serverFiltering: true,
-                    transport: {
-                        read: {
-                            url: "http://ws.geonames.org/searchJSON",
-                            dataType: "jsonp",
-                            cache: false
-                        },
-                        dialect: function() {
-                            return {name_startsWith: $("#geonames").val()};
-                        }
-                    },
-                    schema: {
-                        data: function(result) {
-                            return result.geonames;
-                        }
-                    }
-                });
+            <div>
+                <pre class="prettyprint" style="float:left">
+                    <h3>HTML</h3>
+                    &lt;input id="titles" /&gt;
 
-                $("#geonames").kendoAutoComplete({
-                    dataTextField: "name",
-                    dataSource: remoteDataSource,
-                    minLength: 3
+                    <h3>Script</h3>
+                    $("titles").kendoAutoComplete({
+                        dataTextField: "Name",
+                        dataSource: new kendo.data.DataSource({
+                            type: "odata",
+                            serverPaging: true,
+                            pageSize: 20,
+                            transport: {
+                                read: {
+                                    url: "http://odata.netflix.com/Catalog/Titles",
+                                    data: { //additional parameters sent to the remote service
+                                        q: function() {
+                                            return "$filter=substringof('" + $("#titles").val() + "',Name)";
+                                        }
+                                    }
+                                }
+                            }
+                        })
+                    });
+                </pre>
+
+                <input id="titles"/>
+            </div>
+
+            <script type="text/javascript">
+                $("#titles").kendoAutoComplete({
+                    minLength: 3,
+                    dataTextField: "Name",
+                    dataSource: new kendo.data.DataSource({
+                        type: "odata",
+                        transport: {
+                            read: {
+                                url: "http://odata.netflix.com/Catalog/Titles",
+                                data: { //additional parameters sent to the remote service
+                                    q: function() {
+                                        return "$filter=substringof('" + $("#titles").val() + "',Name)";
+                                    }
+                                }
+                            }
+                        }
+                    })
                 });
 
             </script>
         </div>
+
         <!-- tools -->
         <!-- tools -->
     </body>

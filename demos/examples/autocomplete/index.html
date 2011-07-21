@@ -25,59 +25,23 @@
         <div class="description">First Look</div>
         <!-- description -->
         <div id="example">
-            <style id="exampleCSS" scoped="scoped">
-                #products
-                {
-                    float: left
-                }
+            <div>
+                <pre class="prettyprint" style="float:left">
+                    <h3>HTML</h3>
+                    &lt;input id="input" /&gt;
 
-                #options
-                {
-                    width: 200px;
-                    float: left;
-                    margin: 0 0 0 15em;
-                }
-            </style>
+                    <h3>Script</h3>
+                    $("#input").kendoAutoComplete([ "Item1", "Item2", "Item3", "Item4"]);
+                </pre>
+                <input id="input" style="float:left; margin-top:30px; margin-left:130px;"/>
+            </div>
 
-            <input id="products"/>
-
-            <pre id="options">
-            available options:
-            [
-                "Chai",
-                "Chang",
-                "Aniseed Syrup",
-                "Chef Anton",
-                "Ikura",
-                "Mishi Kobe Niku",
-                "Queso Cabrales",
-                "Organic Dried Pears",
-                "Schoggi Schokolade",
-                "Alice Mutton",
-                "Carnarvon Tigers"
-            ];
-            </pre>
             <script type="text/javascript">
 
-                var data = [
-                    "Chai",
-                    "Chang",
-                    "Aniseed Syrup",
-                    "Chef Anton",
-                    "Ikura",
-                    "Mishi Kobe Niku",
-                    "Queso Cabrales",
-                    "Organic Dried Pears",
-                    "Schoggi Schokolade",
-                    "Alice Mutton",
-                    "Carnarvon Tigers"
-                ];
+                //input HTML element
+                var data = [ "Item1", "Item2", "Item3", "Item4"];
 
-                $("#products").kendoAutoComplete({
-                    dataSource: data,
-                    suggest: true,
-                    separator: ", "
-                });
+                $("#input").kendoAutoComplete(data);
 
            </script>
         </div>

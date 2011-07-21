@@ -25,27 +25,48 @@
         <div class="description">First Look</div>
         <!-- description -->
         <div id="example">
-            <input id="origin" value="1" />
-            <input id="products" value="1" />
+            <div>
+                <pre class="prettyprint" style="float:left">
+                    <h3>HTML</h3>
+                    &lt;input id="input" /&gt;
+
+                    <h3>Script</h3>
+                    $("#input").kendoDropDownList([
+                        {text: "Item1", value:"1"},
+                        {text: "Item2", value:"2"}
+                    ]);
+                </pre>
+                <input id="input" value="1" style="float:left; margin-top:30px; margin-left:130px;"/>
+            </div>
+            <div style="clear:both;">
+                <pre class="prettyprint" style="float:left">
+                    <h2>HTML</h2>
+                    &lt;select id="select"&gt;
+                        &lt;option&gt;Item1&lt;/option&gt;
+                        &lt;option&gt;Item2&lt;/option&gt;
+                    &lt;/select&gt;
+                    <h2>Script</h2>
+                    $("#select").kendoDropDownList();
+                </pre>
+
+                <select id="select" style="float:left">
+                    <option>Item1</option>
+                    <option>Item2</option>
+                </select>
+            </div>
 
             <script type="text/javascript">
 
                 //input HTML element
                 var data = [
-                    {text: "Chai", value:"1"},
-                    {text: "Chang", value:"2"},
-                    {text: "Aniseed Syrup", value:"3"},
-                    {text: "Chef Anton", value:"4"},
-                    {text: "Ikura", value:"5"},
-                    {text: "Mishi Kobe Niku", value:"6"},
-                    {text: "Queso Cabrales", value:"7"},
-                    {text: "Organic Dried Pears", value:"8"},
-                    {text: "Schoggi Schokolade", value:"9"},
-                    {text: "Alice Mutton", value:"10"},
-                    {text: "Carnarvon Tigers", value:"11"}
+                    {text: "Item1", value:"1"},
+                    {text: "Item2", value:"2"}
                 ];
-                $("#products").kendoDropDownList(data);
 
+                $("#input").kendoDropDownList(data);
+
+                //select HTML element
+                $("#select").kendoDropDownList();
            </script>
         </div>
         <!-- tools -->
