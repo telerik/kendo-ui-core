@@ -23,13 +23,13 @@
     function intializePositions() {
         dropCuePositions = $.map($(".t-group-indicator", groupContainer), function(item) {
             item = $(item);
-            var left = item.position().left;
+            var left = item.offset().left;
             return {
                 left: left,
                 right: left + item.outerWidth(),
                 element: item
             };
-        }); 
+        });         
     }
 
     var Groupable = Component.extend({
@@ -142,10 +142,11 @@
                 that.dataSource.group(that.descriptors());
             }            
         },
-        _dropCuePosition: function(position) {
+        _dropCuePosition: function(position) {            
             if(!dropCue.is(":visible") || dropCuePositions.length == 0) {
                 return;
             }
+
             var lastCuePosition = dropCuePositions[dropCuePositions.length - 1],
                 right = lastCuePosition.right,
                 marginLeft = parseInt(lastCuePosition.element.css("marginLeft")),
@@ -153,7 +154,7 @@
 
             if(position >= right) {                
                 position = {
-                    left: right + marginRight,
+                    left: lastCuePosition.element.position().left + lastCuePosition.element.outerWidth() + marginRight /*right + marginRight*/,
                     element: lastCuePosition.element,
                     before: false
                 };
@@ -161,10 +162,10 @@
                 position = $.grep(dropCuePositions, function(item) {
                     return item.left <= position && position <= item.right;
                 })[0];
-
+                
                 if(position) {                    
                     position = {
-                        left: position.left - marginLeft,
+                        left: position.element.position().left - marginLeft,
                         element: position.element,
                         before: true
                     };
@@ -173,9 +174,9 @@
 
             return position;
         },        
-        _drag: function(event) {            
+        _drag: function(event) {
             var position = this._dropCuePosition(event.pageX);
-            if(position) {
+            if(position) {                
                 dropCue.css({ left: position.left });
             }
         },
@@ -192,12 +193,11 @@
                 
             if(draggable.dropped) {
                 if(lastCuePosition) {                    
-                    position = that._dropCuePosition(dropCue.position().left + parseInt(lastCuePosition.element.css("marginLeft")));
-                             
+                    position = that._dropCuePosition(dropCue.offset().left + parseInt(lastCuePosition.element.css("marginLeft")) + parseInt(lastCuePosition.element.css("marginRight")));
                     if(that._canDrop($(sourceIndicator), position.element, position.left)) {
-                        if(position.before) {                            
+                        if(position.before) {
                             position.element.before(sourceIndicator || that.buildIndicator(field));
-                        } else {                                                        
+                        } else {
                             position.element.after(sourceIndicator || that.buildIndicator(field));
                         }
                         
