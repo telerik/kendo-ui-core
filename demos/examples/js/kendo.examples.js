@@ -132,6 +132,7 @@
 
         fetchCode: function(html, callback) {
             html = html.replace(new RegExp("\\s*<!-- tools -->(([\\u000a\\u000d\\u2028\\u2029]|.)*?)<!-- tools -->", "ig"), ""); // Remove tools first to strip description
+            html = html.replace(new RegExp("\\s*<!-- configurator -->(([\\u000a\\u000d\\u2028\\u2029]|.)*?)<!-- configurator -->", "ig"), "");
             html = html.replace(new RegExp("\\s*<!-- \\w+ -->(([\\u000a\\u000d\\u2028\\u2029]|.)*?)<!-- \\w+ -->", "ig"), "");
 
             $("#code").empty().text(html);
