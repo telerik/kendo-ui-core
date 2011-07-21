@@ -377,6 +377,20 @@
                 equal(result[1].field, 10);
             });
 
+            test("filter filters with ne", function() {
+                var data = [ {field: 100} , {field: 10} , {field: 1} ];
+
+                var result = new Query(data).filter( {
+                    field: "field",
+                    operator: "ne",
+                    value: 1
+                }).toArray();
+
+                equal(result.length, 2);
+                equal(result[0].field, 100);
+                equal(result[1].field, 10);
+            });
+
             test("filter filters with lt", function() {
                 var data = [ {field: 100} , {field: 10} , {field: 1} ];
 
@@ -384,6 +398,20 @@
                     field: "field",
                     operator: "lt",
                     value: 100
+                }).toArray();
+
+                equal(result.length, 2);
+                equal(result[0].field, 10);
+                equal(result[1].field, 1);
+            });
+
+            test("filter filters with le", function() {
+                var data = [ {field: 100} , {field: 10} , {field: 1} ];
+
+                var result = new Query(data).filter( {
+                    field: "field",
+                    operator: "le",
+                    value: 10
                 }).toArray();
 
                 equal(result.length, 2);
@@ -424,6 +452,20 @@
                 var result = new Query(data).filter( {
                     field: "field",
                     operator: "gte",
+                    value: 10
+                }).toArray();
+
+                equal(result.length, 2);
+                equal(result[0].field, 100);
+                equal(result[1].field, 10);
+            });
+
+            test("filter filters with ge", function() {
+                var data = [ {field: 100} , {field: 10} , {field: 1} ];
+
+                var result = new Query(data).filter( {
+                    field: "field",
+                    operator: "ge",
                     value: 10
                 }).toArray();
 
