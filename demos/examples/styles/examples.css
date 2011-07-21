@@ -12,6 +12,7 @@ html, body
 #nav .t-sprite,
 #codeStrip .t-link,
 .configuration .configHead,
+.configuration .infoHead,
 .configuration .configTitle,
 .exampleIcon,
 .console div,
@@ -27,6 +28,7 @@ html, body
 * html #nav .t-sprite,
 * html #codeStrip .t-link,
 * html .configuration .configHead,
+* html .configuration .infoHead,
 * html .configuration .configTitle,
 * html .exampleIcon,
 * html .console div,
@@ -569,7 +571,8 @@ pre.prettyprint
     background: #f2f2f2;
 }
 
-.configuration .configHead
+.configuration .configHead,
+.configuration .infoHead
 {
     display: block;
     color: #4c4c4c;
@@ -578,6 +581,11 @@ pre.prettyprint
     margin-top: 15px;
     margin-bottom: 10px;
     background-position: 0 -178px;
+}
+
+.configuration .infoHead
+{
+    background-position: -107px -722px;
 }
 
 .configuration .configTitle
