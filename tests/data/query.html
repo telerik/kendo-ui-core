@@ -544,6 +544,31 @@
                 equal(result[0], 100);
                 equal(result[1], 10);
             });
+
+            test("filter on nested objects", function () {
+                var data = [{foo: { bar: 1 }}];
+
+                var result = new Query(data).filter( {
+                    operator: "gte",
+                    field: "foo.bar",
+                    value: 1
+                }).toArray();
+
+                equal(result.length, 1);
+                equal(result[0].foo.bar, 1);
+            });
+            test("filter on nested nullable objects", function () {
+                var data = [{foo: { bar: 1 }}, {foo: { bar: undefined }}];
+
+                var result = new Query(data).filter( {
+                    operator: "gte",
+                    field: "foo.bar",
+                    value: 1
+                }).toArray();
+
+                equal(result.length, 1);
+                equal(result[0].foo.bar, 1);
+            });
             test("groupby groups data by field", function() {
                 var data = [ {field: 100} , {field: 100} , {field: 1} ];
 
