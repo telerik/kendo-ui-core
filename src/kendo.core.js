@@ -129,10 +129,16 @@
     });
 
     /**
+     * @name kendo.Template.Description
+     *
+     * @section Template-fu description
+     */
+
+    /**
      * @name kendo.Template
      * @namespace
      */
-    Template = {
+    Template = /** @lends kendo.Template */ {
         paramName: "data", // name of the parameter of the generated template
         useWithBlock: true, // whether to wrap the template in a with() block
         begin: "<#", // the marker which denotes the beginning of executable code

@@ -106,8 +106,16 @@ function importComponentHelp(exampleHTML, component) {
     if (!component)
         return exampleHTML;
 
+    var helpFiles = {
+        "templates": "kendo.Template",
+        "datasource": "kendo.data.DataSource",
+        "dragdrop": "kendo.Draggable",
+        "animation": "kendo.Animation"
+    };
+
     try {
-        var helpFile = "docs/symbols/kendo.ui." + component + ".html",
+        var helpSymbol = (helpFiles[component] || "kendo.ui." + component),
+            helpFile = "docs/symbols/" + helpSymbol + ".html",
             helpHTML = fs.readFileSync(helpFile, "utf8");
 
         var description = regionRegex.description.exec(helpHTML)[1],
@@ -115,7 +123,10 @@ function importComponentHelp(exampleHTML, component) {
             data = regionRegex.helpData.exec(helpHTML)[1];
 
         // could be improved if example has appropriate markers, or better yet, if loaded through AJAX (and not importing at all)
-        exampleHTML = exampleHTML.replace(regionRegex.description, "<!-- description -->" + description + "<!-- description -->");
+        if (description) {
+            exampleHTML = exampleHTML.replace(regionRegex.description, "<!-- description -->" + description + "<!-- description -->");
+        }
+
         exampleHTML = exampleHTML.replace(regionRegex.helpTabs, "<!-- help-tabs -->" + tabs + "<!-- help-tabs -->");
         exampleHTML = exampleHTML.replace(regionRegex.helpData, "<!-- help-data -->" + data + "<!-- help-data -->");
     } catch (e) {

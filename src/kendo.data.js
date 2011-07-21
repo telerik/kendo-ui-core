@@ -1,4 +1,14 @@
 (function($, undefined) {
+    /**
+     * @name kendo.data
+     * @namespace
+     */
+
+    /**
+     * @name kendo.data.DataSource.Description
+     *
+     * @section The DataSource separates the way you fetch data from the way you use the data.
+     */
     var extend = $.extend,
         proxy = $.proxy,
         isFunction = $.isFunction,
@@ -601,10 +611,12 @@
         return store[options]();
     }
 
+    /** @ignore */
     function Cache() {
         this._store = {};
     }
 
+    /** @ignore */
     Cache.prototype = {
         add: function(key, data) {
             if(key !== undefined) {
@@ -673,7 +685,14 @@
         }
     });
 
-    var DataSource = Observable.extend({
+
+    var DataSource = Observable.extend(/** @lends kendo.data.DataSource.prototype */ {
+        /**
+         * @constructs
+         * @extends kendo.Observable
+         * @param {Object} options Configuration options.
+         * @option {Array} [data] The data in the DataSource.
+         */
         init: function(options) {
             var that = this, id, model, transport;
 
@@ -1388,6 +1407,10 @@
         }
     });
 
+    /**
+     * @name kendo.data.DataSource.create
+     * @param {Object} options
+     */
     DataSource.create = function(options) {
         options = isArray(options) ? { data: options } : options;
 
@@ -1464,7 +1487,7 @@
         return data;
     }
 
-    extend(true, kendo.data, {
+    extend(true, kendo.data, /** @lends kendo.data */ {
         readers: {
             json: DataReader
         },
