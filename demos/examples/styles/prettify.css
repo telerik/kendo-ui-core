@@ -1,13 +1,12 @@
-/* Coda scheme ported from TextMate to google prettify */
-
 pre.prettyprint
 {
     padding: 5px;
-    background: #E9EDF7;
-    border-left: 3px solid #9FB4E7;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
+    background: #fff;
+    border: 1px solid #e3e3e3;
+    border-left: 3px solid #9fb4e7;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
 }
 .codeContainer pre.prettyprint
 {
@@ -18,22 +17,18 @@ pre.prettyprint
 
 pre .nocode { background-color: none; color: #000 }
 pre .str,                    /* string */
-pre .atv { color: #cc3300; } /* attribute value */
-pre .kwd { color: #8C1751;} /* keyword */
-pre .com { color: #256D24; } /* comment */
-pre .typ { color: #606; } /* type */
-pre .lit { color: #066;} /* literal */
-pre .pun { color: #660 }    /* punctuation */
+pre .atv { color: #cc6600; } /* attribute value */
+pre .kwd { color: #669900;} /* keyword */
+pre .com { color: #666666; } /* comment */
+pre .typ { color: #009999; } /* type */
+pre .lit { color: #006666;} /* literal */
+pre .pun { color: #990033}    /* punctuation */
 pre .pln { color: #000 }    /* plaintext */
-pre .tag { color: #861681;} /* html/xml tag */
-pre .atn { color: #221AA6;} /* attribute name */
-pre .dec { color: #1F00FF; } /* decimal */
+pre .tag { color: #0066cc;} /* html/xml tag */
+pre .atn { color: #6666ff;} /* attribute name */
+pre .dec { color: #cc0000; } /* decimal */
 
 /* Specify class=linenums on a pre to get line numbering */
-ol.linenums { margin-top: 0; margin-bottom: 0;
-color: #333; }
-/* IE indents via margin-left */
-li.L0,li.L1,li.L2,li.L3,li.L5,li.L6,li.L7,li.L8 {
- list-style-type: none }
-/* Alternate shading for lines */
-li.L1,li.L3,li.L5,li.L7,li.L9 {background: #eee;}
+ol.linenums { margin-top: 0; margin-bottom: 0; color: #333; }
+li.L0,li.L1,li.L2,li.L3,li.L5,li.L6,li.L7,li.L8 { list-style-type: none }
+li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }

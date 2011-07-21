@@ -2,7 +2,7 @@
     var Application,
         extend = $.extend,
         live = window.live,
-        local = location.protocol == "file:" && /Chrome/.test(navigator.userAgent), // Chrome doesn't allow ajax to local content
+        local = location.protocol == "file:",
         pushState = "pushState" in history,
         currentHtml = "",
         docsAnimation = {
@@ -59,7 +59,9 @@
         load: function(href) {
             Application.fetch(href);
 
-            history.pushState({ href: href }, null, href);
+            try {
+                history.pushState({ href: href }, null, href);
+            } catch(err) {}
         },
 
         fetch: function(href) {
@@ -292,7 +294,9 @@
                     }
                 });
 
-                history.replaceState({ href: location.href }, null, location.href);
+                try {
+                    history.replaceState({ href: location.href }, null, location.href);
+                } catch (err) {}
             }
 
             $(".detailHandle").live("click", function (e) {

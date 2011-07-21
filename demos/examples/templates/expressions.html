@@ -24,8 +24,8 @@
         <div id="example">
             <h3>Inline template</h3>
             Source:
-            <pre class="prettyprint">
-var inlineTemplate = kendo.template("Hello, &lt;#= firstName #&gt; &lt;#= lastName #&gt;
+            <pre class="prettyprint lang-js">
+var inlineTemplate = kendo.template("Hello, &lt;#= firstName #&gt; &lt;#= lastName #&gt;");
 var inlineData = { firstName: "John", lastName: "Doe" };
 $("#inline").html(inlineTemplate(inlineData));
             </pre>
@@ -34,7 +34,7 @@ $("#inline").html(inlineTemplate(inlineData));
             </div>
             <h3>Template as script element</h3>
             Source:
-            <pre class="prettyprint">
+            <pre class="prettyprint lang-js">
 &lt;script id="scriptTemplate" type="text/x-kendo-template"&gt;
     Hello, <#= firstName #> <#= lastName #>!
 &lt;/script&gt;
@@ -47,7 +47,7 @@ $("#script").html(scriptTemplate(scriptData));
             </div>
             <h3>Encoding HTML</h3>
             Source:
-            <pre class="prettyprint">
+            <pre class="prettyprint lang-js">
 var encodingTemplate = kendo.template("HTML tags are encoded like this - ${ html }");
 var encodingData = { html: "&lt;strong&gt;lorem ipsum&lt;/strong&gt;" };
 $("#encoding").html(encodingTemplate(encodingData));
@@ -57,7 +57,7 @@ $("#encoding").html(encodingTemplate(encodingData));
             </div>
             <h3>Using JavaScript inside templates</h3>
             Source:
-            <pre class="prettyprint">
+            <pre class="prettyprint lang-js">
 &lt;script id="javascriptTemplate" type="text/x-kendo-template"&gt;
     &lt;ul&gt;
     &lt;# for (var i = 0; i &lt; data.length; i++) { #&gt;
