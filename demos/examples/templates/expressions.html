@@ -1,0 +1,107 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <!-- meta -->
+        <!-- meta -->
+        <title>Template Expressions</title>
+        <!-- script -->
+        <script src="../../../src/jquery.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <!-- script -->
+        <!-- css -->
+        <link href="../styles/prettyprint.css" rel="stylesheet"/>
+        <link href="../styles/examples.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.common.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.blueopal.css" rel="stylesheet"/>
+        <!-- css -->
+    </head>
+    <body>
+        <!-- nav -->
+        <!-- nav -->
+        <!-- description -->
+        <div class="description"></div>
+        <!-- description -->
+        <div id="example">
+            <h3>Inline template</h3>
+            Source:
+            <pre class="prettyprint">
+var inlineTemplate = kendo.template("Hello, &lt;#= firstName #&gt; &lt;#= lastName #&gt;
+var inlineData = { firstName: "John", lastName: "Doe" };
+$("#inline").html(inlineTemplate(inlineData));
+            </pre>
+            Output:
+            <div id="inline">
+            </div>
+            <h3>Template as script element</h3>
+            Source:
+            <pre class="prettyprint">
+&lt;script id="scriptTemplate" type="text/x-kendo-template"&gt;
+    Hello, <#= firstName #> <#= lastName #>!
+&lt;/script&gt;
+var scriptTemplate = kendo.template($("#scriptTemplate").html());
+var scriptData = { firstName: "John", lastName: "Doe" };
+$("#script").html(scriptTemplate(scriptData));
+            </pre>
+            Output:
+            <div id="script">
+            </div>
+            <h3>Encoding HTML</h3>
+            Source:
+            <pre class="prettyprint">
+var encodingTemplate = kendo.template("HTML tags are encoded like this - ${ html }");
+var encodingData = { html: "&lt;strong&gt;lorem ipsum&lt;/strong&gt;" };
+$("#encoding").html(encodingTemplate(encodingData));
+            </pre>
+            Output:
+            <div id="encoding">
+            </div>
+            <h3>Using JavaScript inside templates</h3>
+            Source:
+            <pre class="prettyprint">
+&lt;script id="javascriptTemplate" type="text/x-kendo-template"&gt;
+    &lt;ul&gt;
+    &lt;# for (var i = 0; i &lt; data.length; i++) { #&gt;
+        &lt;li&gt;lt;#= data[i] #&gt;li&gt;
+    &lt;# } #&gt;
+    &lt;ul&gt;
+&lt;script&gt;
+
+var javascriptTemplate = kendo.template($("#javascriptTemplate").html());
+var javascriptData = ["First", "Second", "Third"];
+$("#javascript").html(javascriptTemplate(javascriptData));
+            </pre>
+            Output:
+            <div id="javascript">
+            </div>
+            <script id="scriptTemplate" type="text/x-kendo-template">
+                Hello, <#= firstName #> <#= lastName #>!
+            </script>
+            <script id="javascriptTemplate" type="text/x-kendo-template">
+                <ul>
+                    <# for (var i = 0; i < data.length; i++) { #>
+                        <li><#= data[i] #></li>
+                    <# } #>
+                </ul>
+            </script>
+            <script>
+                var inlineTemplate = kendo.template("Hello, <#= firstName #> <#= lastName #>!");
+                var inlineData = { firstName: "John", lastName: "Doe" };
+                $("#inline").html(inlineTemplate(inlineData));
+
+                var encodingTemplate = kendo.template("HTML tags are encoded like this - ${ html }");
+                var encodingData = { html: "<strong>lorem ipsum</strong>" };
+                $("#encoding").html(encodingTemplate(encodingData));
+
+                var scriptTemplate = kendo.template($("#scriptTemplate").html());
+                var scriptData = { firstName: "John", lastName: "Doe" };
+                $("#script").html(scriptTemplate(scriptData));
+
+                var javascriptTemplate = kendo.template($("#javascriptTemplate").html());
+                var javascriptData = ["First", "Second", "Third"];
+                $("#javascript").html(javascriptTemplate(javascriptData));
+            </script>
+        </div>
+        <!-- tools -->
+        <!-- tools -->
+    </body>
+</html>
