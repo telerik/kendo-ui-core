@@ -4081,46 +4081,46 @@
 
     Chart.Themes.blueopal = deepExtend({}, baseTheme, {
         title: {
-            color: "#6d6e70"
+            color: "#293135"
         },
         legend: {
             labels: {
-                color: "#6d6e70"
+                color: "#293135"
             }
         },
         seriesDefaults: {
             labels: {
-                color: "#6d6e70"
+                color: "#293135"
             }
         },
         chartArea: {
             border: {
-                color: "#d0d2d3",
+                color: "#c4d0d5",
                 width: 1
             }
         },
-        seriesColors: ["#ffb800", "#ff8517", "#e34a00", "#545454", "#161616"],
+        seriesColors: ["#e34a00", "#ff8517", "#ffb800", "#7bd2f6", "#0098ee", "#0069a5"],
         categoryAxis: {
             line: {
-                color: "#696e70"
+                color: "#9aabb2"
             },
             labels: {
-                color: "#696e70"
+                color: "#293135"
             },
             majorGridLines: {
-                color: "#d0d2d3",
+                color: "#c4d0d5",
                 visible: true
             }
         },
         valueAxis: {
             line: {
-                color: "#696e70"
+                color: "#9aabb2"
             },
             labels: {
-                color: "#696e70"
+                color: "#293135"
             },
             majorGridLines: {
-                color: "#d0d2d3"
+                color: "#c4d0d5"
             }
         }
     });
