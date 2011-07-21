@@ -46,12 +46,12 @@ html body .t-button
 {
 	display: inline-block;
 	margin: 0;
-	padding: 2px 6px;
+	padding: 1px 6px 2px;
 	border-width: 1px;
 	border-style: solid;
 	font-family: inherit;
 	font-size: 100%;
-	line-height: 1.435;
+	line-height: 1.5;
 	text-align: center;
 	cursor: pointer;
 

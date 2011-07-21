@@ -173,8 +173,8 @@
 {
     content: "\a0";
     display: block;
-    height: 2px;
-    margin: -2px 0 0 -3px;
+    height: 0;
+    margin: -1px 0 0 -3px;
     padding: 0 3px;
     width: 100%;
     border-top: 1px solid #FFF;
