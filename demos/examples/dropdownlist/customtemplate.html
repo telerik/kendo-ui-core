@@ -38,16 +38,10 @@
                     dataSource: new kendo.data.DataSource({
                         type: "odata",
                         serverPaging: true,
+                        serverFiltering: true,
                         pageSize: 20,
                         transport: {
-                            read: {
-                                url: "http://odata.netflix.com/Catalog/Titles",
-                                data: { //additional parameters sent to the remote service
-                                    q: function() {
-                                        return "$filter=substringof('King Kong',Name)";
-                                    }
-                                }
-                            }
+                            read: "http://odata.netflix.com/Catalog/Titles"
                         }
                     })
                 });

@@ -37,15 +37,12 @@
                     dataSource: new kendo.data.DataSource({
                         type: "odata",
                         serverPaging: true,
-                        serverFiltering: true,
                         pageSize: 20,
                         transport: {
                             read: "http://odata.netflix.com/Catalog/Titles"
-                        },
-
+                        }
                     })
                 });
-
             </script>
         </div>
         <!-- tools -->

@@ -24,10 +24,8 @@
         <!-- description -->
         <div class="description">Client API</div>
         <!-- description -->
-        <div id="example" class="t-content">
-           <input id="products" />
-
-            <script type="text/javascript">
+        <div id="example">
+            <pre class="prettyprint lang-js">
                 var data = [
                     "Chai",
                     "Chang",
@@ -41,21 +39,41 @@
                     "Alice Mutton",
                     "Carnarvon Tigers"
                 ];
+            </pre>
 
-                $("#products").kendoAutoComplete(data);
+           <input id="products" />
 
-                var autocomplete = $("#products").data("kendoAutoComplete");
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    var data = [
+                        "Chai",
+                        "Chang",
+                        "Aniseed Syrup",
+                        "Chef Anton",
+                        "Ikura",
+                        "Mishi Kobe Niku",
+                        "Queso Cabrales",
+                        "Organic Dried Pears",
+                        "Schoggi Schokolade",
+                        "Alice Mutton",
+                        "Carnarvon Tigers"
+                    ];
 
-                $("#set").click(function() {
-                    autocomplete.value($("#value").val());
-                });
+                    $("#products").kendoAutoComplete(data);
 
-                $("#get").click(function() {
-                    alert(autocomplete.value());
-                });
+                    var autocomplete = $("#products").data("kendoAutoComplete");
 
-                $("#search").click(function() {
-                    autocomplete.search($("#word").val());
+                    $("#set").click(function() {
+                        autocomplete.value($("#value").val());
+                    });
+
+                    $("#get").click(function() {
+                        alert(autocomplete.value());
+                    });
+
+                    $("#search").click(function() {
+                        autocomplete.search($("#word").val());
+                    });
                 });
            </script>
             <div class="configuration">
