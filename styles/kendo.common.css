@@ -75,7 +75,7 @@ html body .t-button
 button.t-button::-moz-focus-inner,
 input.t-button::-moz-focus-inner
 {
-    padding: 1px 0;
+    padding: 0;
     border: 0;
 }
 
