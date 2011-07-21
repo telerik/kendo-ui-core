@@ -93,8 +93,14 @@
                 dragend: function(e) {                    
                     that._dragEnd(this, e);                                                           
                 },
-                dragstart: function() {
+                dragstart: function(e) {
+                    var element = e.currentTarget,
+                        marginLeft = parseInt(element.css("marginLeft")),
+                        left = element.position().left - marginLeft;
+
                     intializePositions();
+                    dropCue.css({top:3, left: left}).appendTo(groupContainer);
+                    this.hint.find(".t-drag-status").removeClass("t-denied").addClass("t-add");
                 },
                 drag: proxy(that._drag, that)
             });  
