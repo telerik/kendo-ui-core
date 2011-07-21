@@ -112,7 +112,7 @@
         selector: function(field, caseSensitive) {
             if (field) {
                 return isFunction(field) ? field : function(record) {
-                    return caseSensitive(record[field]);
+                    return caseSensitive(getter(field)(record));
                 };
             }
             return function(record) {
@@ -557,7 +557,7 @@
 
                     success(result);
                 };
-                
+
                 $.ajax(options);
             }
         },
