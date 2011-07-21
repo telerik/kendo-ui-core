@@ -109,7 +109,7 @@ function importComponentHelp(exampleHTML, component) {
     var helpFiles = {
         "templates": "kendo.Template",
         "datasource": "kendo.data.DataSource",
-        "dragdrop": "kendo.Draggable",
+        "dragdrop": "kendo.ui.Draggable",
         "animation": "kendo.Animation"
     };
 

@@ -78,7 +78,20 @@
 
     kendo.ui.plugin("DropTarget", DropTarget);
 
-    var Draggable = Component.extend( {
+    /**
+     * @name kendo.ui.Draggable.Description
+     *
+     * @section Draggable description
+     */
+
+    var Draggable = Component.extend(/** @lends kendo.ui.Draggable.prototype */{
+        /**
+         * @constructs
+         * @extends kendo.ui.Component
+         * @param {DomElement} element DOM element
+         * @param {Object} options Configuration options.
+         * @option {Integer} [distance] <5> The required distance that the mouse should travel in order to initiate a drag.
+         */
         init: function (element, options) {
             var that = this;
 
