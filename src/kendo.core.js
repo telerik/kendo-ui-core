@@ -900,6 +900,10 @@
             expandVertical: function(element) {
                 if (element.data('initialHeight') === undefined)
                     element.data('initialHeight', element[0].style.height);
+            },
+            expandVerticalReverse: function(element) {
+                if (element.data('initialHeight') === undefined)
+                    element.data('initialHeight', element[0].style.height);
 
                 element
                     .css('height', element.height())
@@ -908,8 +912,7 @@
         };
     extend(effectInit, {
                 fadeOutReverse: effectInit.fadeIn,
-                zoomOutReverse: effectInit.zoomIn,
-                expandVerticalReverse: effectInit.expandVertical
+                zoomOutReverse: effectInit.zoomIn
             });
 
     function size(obj) {

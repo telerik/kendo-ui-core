@@ -424,7 +424,7 @@
                     .css('overflow', 'hidden')
                     .css('overflow');
 
-                var fixedHeight = parseInt(element[0].style.height, 10),
+                var fixedHeight = parseInt(element.data('initialHeight'), 10),
                     height = fixedHeight || Math.round(element.height("auto").height());
 
                 element
@@ -435,8 +435,11 @@
                     element.css('overflow', element.data('overflow'));
 
                     var height = element.data('initialHeight');
-                    if (height == "auto" || height === "")
-                        element.css("height", "auto");
+                    if (height == "auto" || height === "") {
+                        if ($.browser.webkit)
+                            element.css(kendo.support.transitions.css + 'transition', 'none'); // Force WebKit to stop transitions.
+                        setTimeout(function () { element.css("height", "auto") }, 0);
+                    }
                 } }));
             },
             reverse: function(element, properties, options) {
@@ -451,8 +454,11 @@
                     element.css('overflow', element.data('overflow'));
 
                     var height = element.data('initialHeight');
-                    if (height == "auto" || height === "")
-                        element.css("height", "auto");
+                    if (height == "auto" || height === "") {
+                        if ($.browser.webkit)
+                            element.css(kendo.support.transitions.css + 'transition', 'none');
+                        setTimeout(function () { element.css("height", "auto") }, 0);
+                    }
                 } }));
             }
         },
