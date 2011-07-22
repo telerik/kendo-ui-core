@@ -426,7 +426,7 @@ body
     background-position: -50px -230px;
 }
 
-.dragDropIcon
+.dragdropIcon
 {
     background-position: -50px -260px;
 }
@@ -441,7 +441,7 @@ body
     background-position: -70px -230px;
 }
 
-#exampleHead .dragDropIcon
+#exampleHead .dragdropIcon
 {
     background-position: -70px -260px;
 }

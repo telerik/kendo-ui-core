@@ -103,8 +103,8 @@
                     exampleBody.empty().html(Application.body(html));
                 } else {
                     exampleName.kendoStop(true).kendoAnimate(extend({}, animation.hide, { complete: function() {
-                        var currentControl = $("#nav > .t-state-highlighted > .t-link").text();
-                        $(".exampleName").empty().html('<span class="exampleIcon '+ currentControl.charAt(0).toLowerCase() + currentControl.substr(1) +'Icon"></span>'+title);
+                        var currentControl = $("#nav > .t-state-highlighted > .t-link > .t-sprite")[0].className.match(/\s(\w+Icon)/i)[1];
+                        $(".exampleName").empty().html('<span class="exampleIcon '+ currentControl.charAt(0).toLowerCase() + currentControl.substr(1) +'"></span>'+title);
 
                         setTimeout(function() {
                             var newTabs = $($.trim(Application.helpTabs(html)));
@@ -146,8 +146,8 @@
             var title = Application.fetchTitle();
 
             if (title != "Overview") {
-                var currentControl = $("#nav > .t-state-highlighted > .t-link").text();
-                $(".exampleName").empty().html('<span class="exampleIcon '+ currentControl.charAt(0).toLowerCase() + currentControl.substr(1) +'Icon"></span>'+title);
+                var currentControl = $("#nav > .t-state-highlighted > .t-link > .t-sprite")[0].className.match(/\s(\w+Icon)/i)[1];
+                $(".exampleName").empty().html('<span class="exampleIcon '+ currentControl.charAt(0).toLowerCase() + currentControl.substr(1) +'"></span>'+title);
 
                 $("#codeStrip, .skinSelector.t-widget").show();
 
@@ -676,7 +676,7 @@ var categories = {
         },
         {
             text: "Drag & Drop",
-            spriteCssClass: "dragDropIcon",
+            spriteCssClass: "dragdropIcon",
             items: [
                 {
                     text: "Basic usage",

@@ -15,17 +15,17 @@ pre.prettyprint
     background: 0;
 }
 
-pre .nocode { background-color: none; color: #000 }
+pre .nocode { background-color: transparent; color: #000; }
 pre .str,                    /* string */
-pre .atv { color: #cc6600; } /* attribute value */
-pre .kwd { color: #669900;} /* keyword */
+pre .atv { color: #e25000; } /* attribute value */
+pre .kwd { color: #0033ff; } /* keyword */
 pre .com { color: #666666; } /* comment */
-pre .typ { color: #009999; } /* type */
-pre .lit { color: #006666;} /* literal */
-pre .pun { color: #990033}    /* punctuation */
-pre .pln { color: #000 }    /* plaintext */
-pre .tag { color: #0066cc;} /* html/xml tag */
-pre .atn { color: #6666ff;} /* attribute name */
+pre .typ { color: #000; } /* type */
+pre .lit { color: #006666; } /* literal */
+pre .pun { color: #333; }    /* punctuation */
+pre .pln { color: #42545a; }    /* plaintext */
+pre .tag { color: #0066cc; } /* html/xml tag */
+pre .atn { color: #6666ff; } /* attribute name */
 pre .dec { color: #cc0000; } /* decimal */
 
 /* Specify class=linenums on a pre to get line numbering */
