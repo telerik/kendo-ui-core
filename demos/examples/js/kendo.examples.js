@@ -77,9 +77,13 @@
         },
 
         fetchTitle: function () {
-            var result = /<title>(.*?)<\/title>/i.exec(currentHtml);
+            var result = /<title>(.*?)<\/title>/i.exec(currentHtml),
+                title = result ? $.trim(result[1]) : "";
 
-            return result ? $.trim(result[1]) : "";
+            if (title)
+                document.title = title;
+
+            return title;
         },
 
         fetchExample: function (href) {
