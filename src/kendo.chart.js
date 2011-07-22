@@ -5098,7 +5098,7 @@
         }
     });
 
-    Chart.Themes.vista = deepExtend({}, baseTheme, {
+    Chart.Themes.kendo = deepExtend({}, baseTheme, {
         title: {
             color: "#6d6e70"
         },
