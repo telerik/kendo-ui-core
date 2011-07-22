@@ -16,7 +16,11 @@
         return container === target || $.contains(container, target);
     }
 
-    var List = Component.extend({
+    var List = Component.extend(/** @lends kendo.ui.List */{
+        /**
+         * @constructs
+         * @extends kendo.ui.Component
+         */
         init: function(element, options) {
             var that = this;
 
@@ -217,7 +221,11 @@
 
     kendo.ui.List = List;
 
-    ui.Select = List.extend({
+    ui.Select = List.extend(/** @lends kendo.ui.Select */{
+        /**
+         * @extends kendo.ui.List
+         * @constructs
+         */
         init: function(element, options) {
             List.fn.init.call(this, element, options);
         },
