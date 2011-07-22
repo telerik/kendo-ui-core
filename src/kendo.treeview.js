@@ -3,7 +3,7 @@
      * @name kendo.ui.TreeView.Description
      *
      * @section The treeview component displays hierarchical data and
-     * can enable users to perform reodering operations with it.
+     * can enable users to perform reordering operations with it.
      *
      * @exampleTitle Creating a treeview from existing HTML
      * @example
