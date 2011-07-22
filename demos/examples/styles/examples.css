@@ -998,7 +998,7 @@ div.skinSelector .t-state-active
 {
     font-size: 12px;
     margin: 0;
-    padding: 5px 10px 5px 25px;
+    padding: 10px 10px 10px 25px;
     color: #4d4d4d;
     border-bottom: 1px solid #fff;
     background: #f2f2f2;
@@ -1041,15 +1041,9 @@ div.skinSelector .t-state-active
     background: linear-gradient(top, #e2e2e2 0%,#d3d3d3 100%);
 }
 
-.detailHandle .desc,
 .detailBody
 {
-    font-size: 11px;
-}
-
-.detailBody
-{
-    padding: 0 25px;
+    padding: 1px 25px;
     background: #f2f2f2;
     background: -moz-linear-gradient(top, #e3e3e3 0%, #f2f2f2 50px);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e3e3e3), color-stop(50px,#f2f2f2));
@@ -1059,6 +1053,11 @@ div.skinSelector .t-state-active
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e3e3e3', endColorstr='#f2f2f2',GradientType=0 );
     background: linear-gradient(top, #e3e3e3 0%,#f2f2f2 50px);
     border-bottom: 1px solid #fff;
+}
+
+.detailBody .desc
+{
+    margin: 10px 0;
 }
 
 .detailBody .prettyprint
