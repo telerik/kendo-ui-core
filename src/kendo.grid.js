@@ -62,7 +62,6 @@
         },
 
         _wheelScroll: function(e) {
-            console.log(e);
             var that = this,
                 scrollTop = that.verticalScrollbar.scrollTop(),
                 originalEvent = e.originalEvent,
