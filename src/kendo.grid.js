@@ -424,12 +424,10 @@
             var that = this,
                 table = that.table,
                 height = that.options.height || table.css("height"),
-                wrapper;
-
-            wrapper = table.parent();
+                wrapper = that.element;
 
             if (!wrapper.is("div")) {
-               wrapper = table.wrap("<div />").parent();
+               wrapper = wrapper.wrap("<div />").parent();
             }
 
             that.wrapper = wrapper.addClass("t-grid t-widget")
