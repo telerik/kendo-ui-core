@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+    <head>
+        <!-- meta -->
+        <!-- meta -->
+        <title>Grid selection</title>
+        <!-- css -->
+        <link href="../styles/examples.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.common.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.blueopal.css" rel="stylesheet"/>
+        <!-- css -->
+        <!-- script -->
+        <script src="../../../src/jquery.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.data.js"></script>
+        <script src="../../../src/kendo.pageable.js"></script>        
+        <script src="../../../src/kendo.selectable.js"></script>
+        <script src="../../../src/kendo.grid.js"></script>
+        <script src="../js/people.js"></script>
+        <!-- script -->
+    </head>
+    <body>
+        <!-- nav -->
+        <!-- nav -->
+        <!-- description -->
+        <div class="description">Grid selection</div>
+        <!-- description -->
+        <div id="example" class="t-content">
+            <span>Grid with multiple row selection enabled</span>
+            <div id="rowSelection" style="width:500px;"></div>
+
+            <span>Grid with multiple cell selection enabled</span>
+            <div id="cellSelection" style="width:500px;"></div>
+
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    $("#rowSelection").kendoGrid({
+                        dataSource: {                            
+                            data: createRandomData(20),
+                            pageSize: 5
+                        },
+                        selectable: "multiple",
+                        pageable: true,
+                        scrollable: false,
+                        columns: [
+                            {
+                                field: "FirstName",
+                                title: "First Name"
+                            },
+                            {
+                                field: "LastName",
+                                title: "Last Name"
+                            },
+                            {
+                                field: "Age",
+                                title: "Age"
+                            }
+                        ]
+                    });
+
+                    $("#cellSelection").kendoGrid({
+                        dataSource: {                            
+                            data: createRandomData(20),
+                            pageSize: 5
+                        },
+                        selectable: "multiple cell",
+                        pageable: true,
+                        scrollable: false,
+                        columns: [
+                            {
+                                field: "FirstName",
+                                title: "First Name"
+                            },
+                            {
+                                field: "LastName",
+                                title: "Last Name"
+                            },
+                            {
+                                field: "Age",
+                                title: "Age"
+                            }
+                        ]
+                    });
+                });                
+            </script>
+        </div>
+        <!-- tools -->
+        <!-- tools -->
+    </body>
+</html>
+
+
