@@ -46,7 +46,7 @@
 
                 function createChart() {
                     $("#chart").kendoChart({
-                        theme: getSkin(),
+                        theme: $(document).data("kendoSkin"),
                         dataSource: dataSource,
                         title: {
                             text: "Spain electricity production (GWh)"
@@ -96,14 +96,10 @@
                 $(document).ready(function() {
                     createChart();
 
-                    $("#skinSelector").bind("change", function(e) {
+                    $(document).bind("kendo:skinChange", function(e) {
                         createChart();
                     });
                 });
-
-                function getSkin() {
-                    return $("#skinSelector").val().toLowerCase();
-                }
             </script>
         </div>
         <div class="console"></div>

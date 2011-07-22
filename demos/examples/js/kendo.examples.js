@@ -206,6 +206,8 @@
                 skinLink.remove();
                 if (exampleElement)
                     exampleElement[0].style.cssText = exampleElement[0].style.cssText;
+
+                $(document).data("kendoSkin", skinName).trigger("kendo:skinChange");
             };
 
             var fadeSkin = function() {
@@ -330,7 +332,7 @@
             });
 
             skinSelector.bind("change", function(e) {
-                var newSkin = $("#skinSelector")[0].value.toLowerCase();
+                var newSkin = skinSelector.val().toLowerCase();
 
                 Application.fetchSkin(newSkin, true);
 
@@ -340,6 +342,7 @@
                 }
             });
 
+            $(document).data("kendoSkin", skinSelector.val())
         }
 
     };
@@ -412,6 +415,10 @@ var categories = {
                 {
                     text: "API",
                     url: "chart/api.html"
+                },
+                {
+                    text: "Binding to local data",
+                    url: "chart/local-data.html"
                 }
             ]
         },
