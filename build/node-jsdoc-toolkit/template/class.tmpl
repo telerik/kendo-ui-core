@@ -220,9 +220,6 @@
             </div>
         </if>
 
-<!--
-#### EVENTS SUMMARY
--->
         <if test="data.events.length">
             {! var ownEvents = data.events.filter(function($){return !$.isNamespace}).sort(makeSortby("name")); !}
             <if test="ownEvents.length">
