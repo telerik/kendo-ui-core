@@ -78,7 +78,7 @@
 
                 $(".configuration input").change( function() {
                     var tabStrip = $("#TabStrip1"),
-                        selectedIndex = tabStrip.data("kendoTabStrip").getSelectedTabIndex(),
+                        selectedIndex = tabStrip.data("kendoTabStrip").select().index(),
                         clone = original.clone(true);
 
                     clone.children("ul")
@@ -91,7 +91,6 @@
 
                     initTabStrip();
                 });
-
 
                 initTabStrip();
             </script>
