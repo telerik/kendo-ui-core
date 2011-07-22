@@ -170,6 +170,29 @@
                 equal(model.get("bar"), "bar2");
             });
 
+            test("sort as object is expanded to array", function() {
+                var dataSource = new DataSource({
+                    data: [],
+                    sort: { field: "foo", dir: "asc" }
+                });
+
+                ok($.isArray(dataSource._sort));
+                equal(dataSource._sort[0].field, "foo");
+                equal(dataSource._sort[0].dir, "asc");
+            });
+
+            test("filter as object is expanded to array", function() {
+                var dataSource = new DataSource({
+                    data: [],
+                    filter: { field: "foo", value: "bar", operator: "eq" }
+                });
+
+                ok($.isArray(dataSource._filter));
+                equal(dataSource._filter[0].field, "foo");
+                equal(dataSource._filter[0].value, "bar");
+                equal(dataSource._filter[0].operator, "eq");
+            });
+
             </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

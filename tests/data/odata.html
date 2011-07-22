@@ -22,7 +22,7 @@
             var dialect = kendo.data.transports["odata"].dialect;
             var DataSource = kendo.data.DataSource;
 
-            test("datasource with type odata creates remote transport with dialect dialect", function() {
+            test("datasource with type odata creates remote transport with dialect", function() {
                 var dataSource = new DataSource({
                     type: "odata",
                     transport: {
@@ -33,7 +33,7 @@
                 ok(dataSource.transport.dialect === dialect);
             });
 
-            test("datasource with type odata creates remote transport sets default values for read", function() {
+            test("datasource with type odata creates remote transport and sets default values for read", function() {
                 var dataSource = new DataSource({
                     type: "odata",
                     transport: {
@@ -65,47 +65,77 @@
                 equal(dialect(), "$format=json&$inlinecount=allpages&$callback=callback");
             });
 
-            test("dialect adds $skip for skip", function() {
+            test("dialect adds $skip when skip is specified", function() {
                 ok(dialect({skip: 1}).indexOf("&$skip=1") > -1 );
             });
 
-            test("dialect adds $top for take", function() {
+            test("dialect does not add $skip when skip is not specified", function() {
+                ok(dialect({}).indexOf("&$skip=1") === -1 );
+            });
+
+            test("dialect adds $top when take is specified", function() {
                 ok(dialect({take: 1}).indexOf("&$top=1") > -1 );
             });
 
-            test("dialect adds $orderby", function() {
+            test("dialect does not add $top when take is not specified", function() {
+                ok(dialect({}).indexOf("&$top=1") === -1 );
+            });
+
+            test("dialect adds $orderby when sort is specified", function() {
                 ok(dialect({ sort: [ { field:"foo", dir: "asc" } ]}).indexOf("&$orderby=foo") > -1 );
             });
 
-            test("dialect adds $orderby when direction is descending", function() {
+            test("$orderby with nested field", function() {
+                ok(dialect({ sort: [ { field:"foo.bar", dir: "asc" } ]}).indexOf("&$orderby=foo/bar") > -1 );
+            });
+
+            test("dialect does not add $orderby if sort is not specified", function() {
+                ok(dialect({ }).indexOf("&$orderby=foo") === -1 );
+            });
+
+            test("$orderby when direction is descending", function() {
                 ok(dialect({ sort: [ { field:"foo", dir: "desc" } ]}).indexOf("&$orderby=foo desc") > -1 );
             });
 
-            test("dialect adds $orderby when there are multiple order by expressions", function() {
+            test("$orderby when there are multiple order by expressions", function() {
                 ok(dialect({ sort: [ { field:"bar", dir: "desc" }, { field:"foo", dir: "asc" } ]}).indexOf("&$orderby=bar desc,foo") > -1 );
             });
 
-            test("dialect adds $filter if filter by startswith operator", function() {
+            test("dialect adds $filter if filter is specified", function() {
                 ok(dialect({ filter: [ {field: "Name", operator: "startswith", value: "bar"} ]}).indexOf("&$filter=startswith('bar',Name)") > -1 );
             });
 
-            test("dialect adds $filter if filter by endswith operator", function() {
+            test("dialect does not add $filter if filter is not specified", function() {
+                ok(dialect({}).indexOf("&$filter=") === -1 );
+            });
+
+            test("$filter and endswith operator", function() {
                 ok(dialect({ filter: [ {field: "Name", operator: "endswith", value: "bar"} ]}).indexOf("&$filter=endswith('bar',Name)") > -1 );
             });
 
-            test("dialect adds $filter if filter by contains operator", function() {
+            test("$filter and contains operator", function() {
                 ok(dialect({ filter: [ {field: "Name", operator: "contains", value: "bar"} ]}).indexOf("&$filter=substringof('bar',Name)") > -1 );
             });
 
-            test("dialect adds $filter if filter by neq operator", function() {
+            test("$filter and neq operator", function() {
                 ok(dialect({ filter: [ {field: "Name", operator: "neq", value: "bar"} ]}).indexOf("&$filter=Name ne 'bar'") > -1 );
             });
 
-            test("dialect adds $filter with no apostrophe when number ", function() {
+            test("$filter with nested field", function() {
+                ok(dialect({ filter: [ {field: "foo.bar", operator: "neq", value: "bar"} ]}).indexOf("&$filter=foo/bar ne 'bar'") > -1 );
+            });
+
+            test("$filter does not quote apostrophe when numberic value is specifed", function() {
                 ok(dialect({ filter: [ {field: "ID", operator: "neq", value: 10} ]}).indexOf("&$filter=ID ne 10") > -1 );
             });
 
+            test("$filter and null value", function() {
+                ok(dialect({ filter: [ {field: "ID", operator: "neq", value: null} ]}).indexOf("&$filter=ID ne null") > -1 );
+            });
 
+            test("multipler filter expressions", function() {
+                ok(dialect({ filter: [ {field: "ID", operator: "neq", value: null},{field: "ID", operator: "neq", value: null} ]}).indexOf("&$filter=ID ne null and ID ne null") > -1 );
+            });
         </script>
     </body>
 </html>
