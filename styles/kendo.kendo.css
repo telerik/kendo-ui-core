@@ -52,7 +52,8 @@
 .t-link:active,
 .t-link:visited,
 .t-popup,
-.t-grid .t-header
+.t-grid .t-header,
+.t-tabstrip .t-content
 {
     color: #2e2e2e;
 }
