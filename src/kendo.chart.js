@@ -107,41 +107,25 @@
          * @param {DomElement} element DOM element
          * @param {Object} options Configuration options.
          * @option {String} [theme] Sets Chart theme.
-         * @option {Object} [title]
-         * The chart title configuration options.
-         *<dl>
-         *     <dt>
-         *         text: {String}
-         *     </dt>
-         *     <dd>
-         *         The title of the chart.
-         *     </dd>
-         *     <dt>
-         *         font: {String}
-         *     </dt>
-         *     <dd>
-         *         The font style of the title. Default font style is: "16px Verdana, sans-serif"
-         *     </dd>
-         *     <dt>
-         *         position: {String}
-         *     </dt>
-         *     <dd>
-         *         The positions of the title. Default position is: "top"
-         *         <dl>
-         *              <dt>
-         *                   "top"
-         *              </dt>
-         *              <dd>
-         *                   The title is positioned on the top.
-         *              </dd>
-         *              <dt>
-         *                   "bottom"
-         *              </dt>
-         *              <dd>
-         *                   The title is positioned on the bottom.
-         *              </dd>
-         *         </dl>
-         *     </dd>
+         * @option {Object} [title] The chart title configuration options.
+         * @option {String} [title.text] The title of the chart.
+         * @option {String} [title.font] <"16px Verdana, sans-serif"> The font style of the title.
+         * @option {String} [title.position] <"top"> The positions of the title.
+         * <dl>
+         *      <dt>
+         *           "top"
+         *      </dt>
+         *      <dd>
+         *           The title is positioned on the top.
+         *      </dd>
+         *      <dt>
+         *           "bottom"
+         *      </dt>
+         *      <dd>
+         *           The title is positioned on the bottom.
+         *      </dd>
+         * </dl>
+         * <dl>
          *     <dt>
          *         align: {String}
          *     </dt>
