@@ -295,27 +295,29 @@
                     }
                 });
 
-                that.wrapper.keydown(function(e) {
-                    if (e.keyCode === keys.SPACEBAR) {
-                        var current = that.current();
-                        current = cell ? current : current.parent();
+                if (that.options.navigatable) {
+                    that.wrapper.keydown(function(e) {
+                        if (e.keyCode === keys.SPACEBAR) {
+                            var current = that.current();
+                            current = cell ? current : current.parent();
 
-                        if(multi) {
-                            if(!e.ctrlKey) {
-                                that.selectable.clear();
-                            } else {
-                                if(current.hasClass(SELECTED)) {
-                                    current.removeClass(SELECTED);
-                                    current = null;
+                            if(multi) {
+                                if(!e.ctrlKey) {
+                                    that.selectable.clear();
+                                } else {
+                                    if(current.hasClass(SELECTED)) {
+                                        current.removeClass(SELECTED);
+                                        current = null;
+                                    }
                                 }
+                            } else {
+                                that.selectable.clear();
                             }
-                        } else {
-                            that.selectable.clear();
-                        }
 
-                        that.selectable.value(current);
-                    }
-                });
+                            that.selectable.value(current);
+                        }
+                    });
+                }
             }
         },
 
@@ -372,47 +374,49 @@
                     }
                 };
 
-            wrapper.bind({
-                focus: function() {
-                    if(that._current && that._current.is(":visible")) {
-                        that._current.addClass(FOCUSED);
-                    } else {
-                        currentProxy(that.table.find(FIRST_CELL_SELECTOR));
-                    }
-                },
-                focusout: function() {
-                    if (that._current) {
-                        that._current.removeClass(FOCUSED);
-                    }
-                },
-                keydown: function(e) {
-                    var key = e.keyCode,
-                        current = that.current(),
-                        dataSource = that.dataSource,
-                        pageable = that.options.pageable;
+            if (that.options.navigatable) {
+                wrapper.bind({
+                    focus: function() {
+                        if(that._current && that._current.is(":visible")) {
+                            that._current.addClass(FOCUSED);
+                        } else {
+                            currentProxy(that.table.find(FIRST_CELL_SELECTOR));
+                        }
+                    },
+                    focusout: function() {
+                        if (that._current) {
+                            that._current.removeClass(FOCUSED);
+                        }
+                    },
+                    keydown: function(e) {
+                        var key = e.keyCode,
+                            current = that.current(),
+                            dataSource = that.dataSource,
+                            pageable = that.options.pageable;
 
-                    if (keys.UP === key) {
-                        currentProxy(current ? current.parent().prevAll(ROW_SELECTOR).first().children().eq(current.index()) : table.find(FIRST_CELL_SELECTOR));
-                    } else if (keys.DOWN === key) {
-                        currentProxy(current ? current.parent().nextAll(ROW_SELECTOR).first().children().eq(current.index()) : table.find(FIRST_CELL_SELECTOR));
-                    } else if (keys.LEFT === key) {
-                        currentProxy(current ? current.prev(":not(.t-group-cell)") : table.find(FIRST_CELL_SELECTOR));
-                    } else if (keys.RIGHT === key) {
-                        currentProxy(current ? current.next() : table.find(FIRST_CELL_SELECTOR));
-                    } else if (pageable && keys.PAGEUP == key) {
-                        that._current = null;
-                        dataSource.page(dataSource.page() + 1);
-                    } else if (pageable && keys.PAGEDOWN == key) {
-                        that._current = null;
-                        dataSource.page(dataSource.page() - 1);
+                        if (keys.UP === key) {
+                            currentProxy(current ? current.parent().prevAll(ROW_SELECTOR).first().children().eq(current.index()) : table.find(FIRST_CELL_SELECTOR));
+                        } else if (keys.DOWN === key) {
+                            currentProxy(current ? current.parent().nextAll(ROW_SELECTOR).first().children().eq(current.index()) : table.find(FIRST_CELL_SELECTOR));
+                        } else if (keys.LEFT === key) {
+                            currentProxy(current ? current.prev(":not(.t-group-cell)") : table.find(FIRST_CELL_SELECTOR));
+                        } else if (keys.RIGHT === key) {
+                            currentProxy(current ? current.next() : table.find(FIRST_CELL_SELECTOR));
+                        } else if (pageable && keys.PAGEUP == key) {
+                            that._current = null;
+                            dataSource.page(dataSource.page() + 1);
+                        } else if (pageable && keys.PAGEDOWN == key) {
+                            that._current = null;
+                            dataSource.page(dataSource.page() - 1);
+                        }
                     }
+                });
+
+                if($.browser.msie) {
+                    wrapper.delegate(selector, "click", clickCallback);
+                } else {
+                    wrapper.delegate(selector, "mousedown", clickCallback);
                 }
-            });
-
-            if($.browser.msie) {
-                wrapper.delegate(selector, "click", clickCallback);
-            } else {
-                wrapper.delegate(selector, "mousedown", clickCallback);
             }
         },
 
