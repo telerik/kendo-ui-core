@@ -1,4 +1,5 @@
-.code-sample
+.code-sample,
+.details-list
 {
     margin: 6px 0;
     border: 3px solid #dedede;
@@ -9,10 +10,11 @@
     border-radius: 5px;
 }
 
-.code-title
+.code-title,
+.details-title
 {
     margin: 0;
-    padding: 8px;
+    padding: 8px 10px;
     font-size: 12px;
     font-weight: normal;
     background: -moz-linear-gradient(top, #ebebeb 0%, #dedede 100%);
@@ -24,7 +26,8 @@
     background: linear-gradient(top, #ebebeb 0%,#dedede 100%);
 }
 
-pre.prettyprint
+pre.prettyprint,
+.details-list dl
 {
     padding: 0;
     margin: 0;
@@ -32,9 +35,11 @@ pre.prettyprint
     -moz-border-radius: 2px;
     border-radius: 2px;
 }
-.code-sample pre.prettyprint
+
+.code-sample pre.prettyprint,
+.details-list dl
 {
-    padding: 15px 12px;
+    padding: 10px;
     background: #f9f9f9;
     border: 0;
 }
@@ -56,3 +61,31 @@ pre .dec { color: #cc0000; } /* decimal */
 ol.linenums { margin-top: 0; margin-bottom: 0; color: #333; }
 li.L0,li.L1,li.L2,li.L3,li.L5,li.L6,li.L7,li.L8 { list-style-type: none }
 li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
+
+.details-list dl
+{
+    overflow: hidden;
+    padding: 0;
+    background-color: #ededed;
+}
+
+.details-list dt,
+.details-list dd
+{
+    margin: 0;
+    padding: 7px 10px;
+}
+
+.details-list dt
+{
+    float: left;
+    clear: left;
+    width: 200px;
+}
+
+.details-list dt:nth-child(4n+1),
+.details-list dd:nth-child(4n+2)
+{
+    background-color: #fff;
+}
+

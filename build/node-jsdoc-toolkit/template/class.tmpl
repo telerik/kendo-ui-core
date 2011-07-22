@@ -572,23 +572,26 @@
                             </for>
                         </if>
 
-                        <if test="member.params.length">
-                            <dl class="detailList params">
-                                <dt class="heading">Event data:</dt>
+                        <if test="member.params.length > 1">
+                            <div class="details-list">
+                                <h4 class="details-title">Event data:</h4>
+                                <dl>
                                 <for each="item" in="member.params">
                                     <if test="item.name != 'e'">
                                     <dt>
-                                        <code>{+item.name.replace(/^e\./i,"")+}</code>: {+((item.type)?"<span class=\"light fixedFont\">"+(new Link().toSymbol(item.type))+"</span> " : "")+}
-                                        <if test="item.isOptional"><i>Optional<if test="item.defaultValue">, Default: {+item.defaultValue+}</if></i></if>
+                                        <code>{+item.name.replace(/^e\./i,"")+}</code>
+                                        {+((item.type)?"<span class=\"type\">: "+(new Link().toSymbol(item.type))+"</span> " : "")+}
+                                        <if test="item.isOptional"><i>optional<if test="item.defaultValue">, default: {+item.defaultValue+}</if></i></if>
                                     </dt>
                                     <dd>{+ resolveLinks(item.desc) +}</dd>
                                     </if>
                                 </for>
-                            </dl>
+                                </dl>
+                            </div>
                         </if>
 
                         <if test="member.deprecated || member.since || member.exceptions.length || member.returns.length || member.see.length">
-                            <dl class="detailList nomargin">
+                            <dl class="detailList">
                                 <if test="member.deprecated">
                                     <dt class="heading">Deprecated:</dt>
                                     <dt>{+ resolveLinks(member.deprecated) +}</dt>
