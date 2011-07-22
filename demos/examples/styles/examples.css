@@ -20,7 +20,7 @@ html, body
 .console div,
 .telerikLogo
 {
-    background-image: url('../img/sprite.png');
+    background-image: url("../img/sprite.png");
     background-repeat: no-repeat;
     background-color: transparent;
 }
@@ -38,7 +38,7 @@ html, body
 * html .console div,
 * html .telerikLogo
 {
-    background-image: url('../img/sprite_ie6.png');
+    background-image: url("../img/sprite_ie6.png");
 }
 
 body

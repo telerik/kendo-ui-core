@@ -69,22 +69,22 @@
         </div>
         <script type="text/javascript">
             var onSelect = function (e) {
-                kendoConsole.log('Selected: ' + $(e.item).find('> .t-link').text());
+                kendoConsole.log("Selected: " + $(e.item).find("> .t-link").text());
             };
 
             var onInit = function (e) {
-                kendoConsole.log('TabStrip loaded');
+                kendoConsole.log("TabStrip loaded");
             };
 
             var onContentLoad = function (e) {
-                kendoConsole.log('Content loaded in <b>'+ $(e.item).find('> .t-link').text() + '</b> and starts with <b>' + $(e.contentElement).text().substr(0, 20) + '...</b>');
+                kendoConsole.log("Content loaded in <b>"+ $(e.item).find("> .t-link").text() + "</b> and starts with <b>" + $(e.contentElement).text().substr(0, 20) + "...</b>");
             };
 
             var onError = function (e) {
-                kendoConsole.error('Loading failed with ' + e.xhr.statusText + ' ' + e.xhr.status);
+                kendoConsole.error("Loading failed with " + e.xhr.statusText + " " + e.xhr.status);
             };
 
-            $("#TabStrip1").kendoTabStrip({ select: onSelect, init: onInit, contentLoad: onContentLoad, error: onError, contentUrls: [ , , , , , 'ajax/ajaxContent1.html', 'error.html' ] });
+            $("#TabStrip1").kendoTabStrip({ select: onSelect, init: onInit, contentLoad: onContentLoad, error: onError, contentUrls: [ , , , , , "ajax/ajaxContent1.html", "error.html" ] });
         </script>
         <div class="console"></div>
         <!-- tools -->
