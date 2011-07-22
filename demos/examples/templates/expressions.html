@@ -21,41 +21,48 @@
         <div class="description"></div>
         <!-- description -->
         <div id="example" class="t-content">
-            Source:
-            <pre class="prettyprint">
+            <div class="code-sample">
+                <h4 class="code-title">Source:</h4>
+                <pre class="prettyprint">
 var inlineTemplate = kendo.template("Hello, &lt;#= firstName #&gt; &lt;#= lastName #&gt;");
 var inlineData = { firstName: "John", lastName: "Doe" };
 $("#inline").html(inlineTemplate(inlineData));</pre>
+            </div>
             Output:
             <div id="inline">
             </div>
             <h3>Template as script element</h3>
-            Source:
-            <pre class="prettyprint">
+            <div class="code-sample">
+                <h4 class="code-title">Source:</h4>
+                <pre class="prettyprint">
 &lt;script id="scriptTemplate" type="text/x-kendo-template"&gt;
     Hello, <#= firstName #> <#= lastName #>!
 &lt;/script&gt;
 
-&lt;script type="text/javascript&gt;
+&lt;script type="text/javascript"&gt;
     var scriptTemplate = kendo.template($("#scriptTemplate").html());
     var scriptData = { firstName: "John", lastName: "Doe" };
     $("#script").html(scriptTemplate(scriptData));
 &lt;/script&gt;</pre>
+            </div>
             Output:
             <div id="script">
             </div>
             <h3>Encoding HTML</h3>
-            Source:
-            <pre class="prettyprint">
+            <div class="code-sample">
+                <h4 class="code-title">Source:</h4>
+                <pre class="prettyprint">
 var encodingTemplate = kendo.template("HTML tags are encoded like this - ${ html }");
 var encodingData = { html: "&lt;strong&gt;lorem ipsum&lt;/strong&gt;" };
 $("#encoding").html(encodingTemplate(encodingData));</pre>
+            </div>
             Output:
             <div id="encoding">
             </div>
             <h3>Using JavaScript inside templates</h3>
-            Source:
-            <pre class="prettyprint">
+            <div class="code-sample">
+                <h4 class="code-title">Source</h4>
+                <pre class="prettyprint lang-html">
 &lt;script id="javascriptTemplate" type="text/x-kendo-template"&gt;
     &lt;ul&gt;
     &lt;# for (var i = 0; i &lt; data.length; i++) { #&gt;
@@ -64,11 +71,12 @@ $("#encoding").html(encodingTemplate(encodingData));</pre>
     &lt;ul&gt;
 &lt;script&gt;
 
-&lt;script type="text/javascript&gt;
+&lt;script type="text/javascript"&gt;
     var javascriptTemplate = kendo.template($("#javascriptTemplate").html());
     var javascriptData = ["First", "Second", "Third"];
     $("#javascript").html(javascriptTemplate(javascriptData));
 &lt;script&gt;</pre>
+            </div>
             Output:
             <div id="javascript">
             </div>

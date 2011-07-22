@@ -26,37 +26,43 @@
         <!-- description -->
         <div id="example" class="t-content">
             <div>
-                <pre class="prettyprint">
-&lt;input id="input" /&gt;
-                </pre>
+                <input id="input" value="1"/>
+                <div class="code-sample">
+                    <h4 class="code-title">Source element</h4>
+                    <pre class="prettyprint">
+&lt;input id="input" /&gt;</pre>
+                </div>
 
-                <pre class="prettyprint lang-js">
+                <div class="code-sample">
+                    <h4 class="code-title">Initialization</h4>
+                    <pre class="prettyprint lang-js">
 $("#input").kendoDropDownList([
     {text: "Item1", value:"1"},
     {text: "Item2", value:"2"},
     {text: "Item3", value:"3"}
-]);
-                </pre>
-
-                <input id="input" value="1"/>
+]);</pre>
+                </div>
             </div>
             <div >
-                <pre class="prettyprint">
-&lt;select id="select"&gt;
-    &lt;option&gt;Item1&lt;/option&gt;
-    &lt;option&gt;Item2&lt;/option&gt;
-    &lt;option&gt;Item3&lt;/option&gt;
-&lt;/select&gt;
-                </pre>
-                <pre class="prettyprint lang-js">
-$("#select").kendoDropDownList();
-                </pre>
-
                 <select id="select">
                     <option>Item1</option>
                     <option>Item2</option>
                     <option>Item3</option>
                 </select>
+                <div class="code-sample">
+                    <h4 class="code-title">Source element</h4>
+                    <pre class="prettyprint">
+&lt;select id="select"&gt;
+    &lt;option&gt;Item1&lt;/option&gt;
+    &lt;option&gt;Item2&lt;/option&gt;
+    &lt;option&gt;Item3&lt;/option&gt;
+&lt;/select&gt;</pre>
+                </div>
+                <div class="code-sample">
+                    <h4 class="code-title">Initialization</h4>
+                    <pre class="prettyprint lang-js">
+$("#select").kendoDropDownList();</pre>
+                </div>
             </div>
 
             <script type="text/javascript">
