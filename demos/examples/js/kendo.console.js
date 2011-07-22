@@ -47,7 +47,7 @@
 (function(jQuery) {
 
     // We override the animation for all of these color styles
-    jQuery.each(['backgroundColor', 'borderBottomColor', 'borderLeftColor', 'borderRightColor', 'borderTopColor', 'color', 'outlineColor'], function(i, attr) {
+    jQuery.each(["backgroundColor", "borderBottomColor", "borderLeftColor", "borderRightColor", "borderTopColor", "color", "outlineColor"], function(i, attr) {
         jQuery.fx.step[attr] = function(fx) {
             if (fx.state == 0 || typeof fx.end == typeof "") {
                 fx.start = getColor(fx.elem, attr);
@@ -58,7 +58,7 @@
                 Math.max(Math.min(parseInt((fx.pos * (fx.end[0] - fx.start[0])) + fx.start[0]), 255), 0),
                 Math.max(Math.min(parseInt((fx.pos * (fx.end[1] - fx.start[1])) + fx.start[1]), 255), 0),
                 Math.max(Math.min(parseInt((fx.pos * (fx.end[2] - fx.start[2])) + fx.start[2]), 255), 0)
-            ].join(","), ")"].join('');
+            ].join(","), ")"].join("");
         }
     });
 
@@ -94,7 +94,7 @@
             color = jQuery.curCSS(elem, attr);
 
             // Keep going until we find an element that has color, or we hit the body
-            if (color != '' && color != 'transparent' || jQuery.nodeName(elem, "body"))
+            if (color != "" && color != "transparent" || jQuery.nodeName(elem, "body"))
                 break;
 
             attr = "backgroundColor";
@@ -104,19 +104,19 @@
     }
 
     var href = window.location.href;
-    if (href.indexOf('culture') > -1) {
-        $('#culture').val(href.replace(/(.*)culture=([^&]*)/, '$2'));
+    if (href.indexOf("culture") > -1) {
+        $("#culture").val(href.replace(/(.*)culture=([^&]*)/, "$2"));
     }
 
-    $('#culture').change(onlocalizationchange);
+    $("#culture").change(onlocalizationchange);
 
     function onlocalizationchange() {
         var value = $(this).val();
         var href = window.location.href;
-        if (href.indexOf('culture') > -1) {
-            href = href.replace(/culture=([^&]*)/, 'culture=' + value);
+        if (href.indexOf("culture") > -1) {
+            href = href.replace(/culture=([^&]*)/, "culture=" + value);
         } else {
-            href += href.indexOf('?') > -1 ? '&culture=' + value : '?culture=' + value;
+            href += href.indexOf("?") > -1 ? "&culture=" + value : "?culture=" + value;
         }
         window.location.href = href;
     }
