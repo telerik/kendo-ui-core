@@ -1124,3 +1124,95 @@ div.skinSelector .t-state-active
 {
     background-position: 0 -52px;
 }
+
+.code-sample,
+.details-list
+{
+    margin: 6px 0;
+    border: 3px solid #dedede;
+    background: #e5e5e5;
+    color: #000;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.code-title,
+.details-title
+{
+    margin: 0;
+    padding: 8px 10px;
+    font-size: 12px;
+    font-weight: normal;
+    background: -moz-linear-gradient(top, #ebebeb 0%, #dedede 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ebebeb), color-stop(100%,#dedede));
+    background: -webkit-linear-gradient(top, #ebebeb 0%,#dedede 100%);
+    background: -o-linear-gradient(top, #ebebeb 0%,#dedede 100%);
+    background: -ms-linear-gradient(top, #ebebeb 0%,#dedede 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebebeb', endColorstr='#dedede',GradientType=0 );
+    background: linear-gradient(top, #ebebeb 0%,#dedede 100%);
+}
+
+pre.prettyprint,
+.details-list dl
+{
+    padding: 0;
+    margin: 0;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+.code-sample pre.prettyprint,
+.details-list dl
+{
+    padding: 10px;
+    background: #f9f9f9;
+    border: 0;
+}
+
+pre .nocode { background-color: transparent; color: #000; }
+pre .str,                    /* string */
+pre .atv { color: #e25000; } /* attribute value */
+pre .kwd { color: #0033ff; } /* keyword */
+pre .com { color: #666666; } /* comment */
+pre .typ { color: #000; } /* type */
+pre .lit { color: #006666; } /* literal */
+pre .pun { color: #333; }    /* punctuation */
+pre .pln { color: #42545a; }    /* plaintext */
+pre .tag { color: #0066cc; } /* html/xml tag */
+pre .atn { color: #6666ff; } /* attribute name */
+pre .dec { color: #cc0000; } /* decimal */
+
+/* Specify class=linenums on a pre to get line numbering */
+ol.linenums { margin-top: 0; margin-bottom: 0; color: #333; }
+li.L0,li.L1,li.L2,li.L3,li.L5,li.L6,li.L7,li.L8 { list-style-type: none }
+li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
+
+.details-list dl
+{
+    overflow: hidden;
+    padding: 0;
+    background-color: #ededed;
+}
+
+.details-list dt,
+.details-list dd
+{
+    margin: 0;
+    padding: 7px 10px;
+}
+
+.details-list dt
+{
+    float: left;
+    clear: left;
+    width: 250px;
+}
+
+.details-list dt:nth-child(4n+1),
+.details-list dd:nth-child(4n+2)
+{
+    background-color: #fff;
+}
+
