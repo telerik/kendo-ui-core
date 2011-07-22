@@ -492,7 +492,7 @@ var categories = {
                     url: "grid/virtualization-remote-data.html"
                 },
                 {
-                    text: "Grid sorting",
+                    text: "Sorting",
                     url: "grid/sorting.html"
                 }
             ]
