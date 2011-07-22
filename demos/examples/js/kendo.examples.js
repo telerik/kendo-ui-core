@@ -494,6 +494,10 @@ var categories = {
                 {
                     text: "Sorting",
                     url: "grid/sorting.html"
+                },
+                {
+                    text: "Selection",
+                    url: "grid/selection.html"
                 }
             ]
         },
