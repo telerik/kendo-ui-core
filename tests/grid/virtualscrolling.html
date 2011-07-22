@@ -351,7 +351,7 @@
                 equal(skip, 4);
                 equal(take, 4);
             });
-
+/*
             test("fetch prefetch the prev page if firstRow is before middle of the page", function() {
                 var skip, take
                     MyDataSource = DataSource.extend({
@@ -372,7 +372,7 @@
                 equal(skip, 0);
                 equal(take, 4);
             });
-
+*/
             test("content is scrolled to the second record of the new page when the next page is fetched", function() {
                 var firstRowIndex, lastRowIndex,
                     content = container.height(60).find("table").html(new Array(10).join('<tr><td style="height:30px">foo</td></tr>')),
