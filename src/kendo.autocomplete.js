@@ -1,4 +1,18 @@
 (function($, undefined) {
+    /**
+    * @name kendo.ui.AutoComplete.Description
+    *
+    * @section The autocomplete component provide suggestions depending on the typed text. Also it allows
+    * to enter multiple values devided by predefined separator.
+    *
+    * @exampleTitle Creating an autocomplete from existing input HTML element
+    * @example
+    * <input id="autocomplete" />
+    *
+    * @exampleTitle AutoComplete initialization
+    * @example
+    * var autocomplete = $("#autocomplete").kendoAutoComplete(["Item1", "Item2"]);
+    */
     var kendo = window.kendo,
         ui = kendo.ui,
         DataSource = kendo.data.DataSource,
@@ -35,7 +49,21 @@
         selectText(element, length, length);
     }
 
-    var AutoComplete = List.extend({
+    var AutoComplete = List.extend/** @lends kendo.ui.AutoComplete.prototype */({
+        /**
+        * @constructs
+        * @extends kendo.ui.List
+        * @param {DomElement} element DOM element
+        * @param {Object} options Configuration options.
+        * @option {Array} [dataSource] The data that the AutoComplete will be bound to.
+        * @option {Boolean} [enable] <true> Controls whether the AutoComplete should be initially enabled.
+        * @option {Boolean} [suggest] <false> Controls whether the AutoComplete should automatically auto-type the rest of text.
+        * @option {Number} [delay] <200> Specifies the delay in ms after which the AutoComplete will start filtering dataSource.
+        * @option {Number} [minLength] <1> Specifies the minimum characters that should be typed before the AutoComplete activates
+        * @option {String} [dataTextField] <null> Sets the field of the data item that provides the text content of the list items.
+        * @option {String} [filter] <"startswith"> Defines the type of filtration.
+        * @option {Number} [height] <200> Define the height of the drop-down list in pixels.
+        */
         init: function(element, options) {
             var that = this;
 
@@ -51,7 +79,27 @@
 
             that.dataSource = DataSource.create(that.options.dataSource || {}).bind(CHANGE, proxy(that.refresh, that));
 
-            that.bind([CHANGE], that.options);
+            that.bind([
+                /**
+                * Fires when the drop-down list is opened
+                * @name kendo.ui.AutoComplete#open
+                * @event
+                * @param {Event} e
+                */
+                /**
+                * Fires when the drop-down list is closed
+                * @name kendo.ui.AutoComplete#close
+                * @event
+                * @param {Event} e
+                */
+                /**
+                * Fires when the value has been changed.
+                * @name kendo.ui.AutoComplete#change
+                * @event
+                * @param {Event} e
+                */
+                CHANGE
+            ], that.options);
 
             that._template();
 
@@ -75,10 +123,16 @@
         options: {
             suggest: false,
             minLength: 1,
-            delay: 300,
-            height: 200
+            delay: 200,
+            height: 200,
+            filter: "startswith"
         },
 
+        /**
+        * Closes the drop-down list.
+        * @example
+        * autocomplete.close();
+        */
         close: function() {
             var that = this;
             that._current = null;
@@ -97,6 +151,15 @@
             that.popup[length ? "open" : "close"]();
         },
 
+        /**
+        * Selects drop-down list item and sets the value and the text of the dropdownlist.
+        * @param {jQueryObject} li The LI element.
+        * @example
+        * var autocomplete = $("#autocomplete").data("kendoAutoComplete");
+        *
+        * // selects by jQuery object
+        * autocomplete.select(autocomplete.ul.children().eq(0));
+        */
         select: function(li) {
             var that = this,
             separator = that.options.separator,
@@ -145,7 +208,7 @@
             if (!length) {
                 that.popup.close();
             } else if (length >= that.options.minLength) {
-                that.dataSource.filter( {field: options.dataTextField, operator: "startswith", value: word } );
+                that.dataSource.filter( {field: options.dataTextField, operator: options.filter, value: word } );
             }
         },
 
@@ -192,6 +255,16 @@
             }
         },
 
+        /**
+        * Gets/Sets the value of the autocomplete.
+        * @param {String} value The value to set.
+        * @returns {String} The value of the autocomplete.
+        * @example
+        * var autocomplete = $("#autocomplete").data("kendoAutoComplete");
+        *
+        * // get the text of the autocomplete.
+        * var value = autocomplete.value();
+        */
         value: function(value) {
             var that = this,
                 element = that.element[0];
