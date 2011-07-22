@@ -24,50 +24,18 @@
         <!-- description -->
         <div class="description">Basic Usage of ComboBox</div>
         <!-- description -->
-<div id="example" class="t-content">
-            <div>
-                <input id="input" value="1"/>
-                <div class="code-sample">
-                    <h4 class="code-title">Source element</h4>
-                    <pre class="prettyprint">
-&lt;input id="input" /&gt;</pre>
-                </div>
+        <div id="example" class="t-content">
+            <h3>Created from &lt;input /&gt;</h3>
+            <input id="input" value="1"/>
 
-                <div class="code-sample">
-                    <h4 class="code-title">Initialization</h4>
-                    <pre class="prettyprint lang-js">
-$("#input").kendoComboBox([
-    {text: "Item1", value:"1"},
-    {text: "Item2", value:"2"},
-    {text: "Item3", value:"3"}
-]);</pre>
-                </div>
-            </div>
-            <div >
-                <select id="select">
-                    <option>Item1</option>
-                    <option>Item2</option>
-                    <option>Item3</option>
-                </select>
-                <div class="code-sample">
-                    <h4 class="code-title">Source element</h4>
-                    <pre class="prettyprint">
-&lt;select id="select"&gt;
-    &lt;option&gt;Item1&lt;/option&gt;
-    &lt;option&gt;Item2&lt;/option&gt;
-    &lt;option&gt;Item3&lt;/option&gt;
-&lt;/select&gt;</pre>
-                </div>
-                <div class="code-sample">
-                    <h4 class="code-title">Initialization</h4>
-                    <pre class="prettyprint lang-js">
-$("#select").kendoComboBox();</pre>
-                </div>
-
-            </div>
+            <h3>Created from &lt;select /&gt;</h3>
+            <select id="select">
+                <option>Item1</option>
+                <option>Item2</option>
+                <option>Item3</option>
+            </select>
 
             <script type="text/javascript">
-
                 // local data
                 var data = [
                     {text: "Item1", value:"1"},
@@ -80,9 +48,8 @@ $("#select").kendoComboBox();</pre>
 
                 //create kendo ComboBox from select Html element
                 $("#select").kendoComboBox();
-           </script>
+            </script>
         </div>
-
         <!-- tools -->
         <!-- tools -->
     </body>
