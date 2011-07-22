@@ -443,6 +443,17 @@ body
 }
 * html { height: 220px; }
 
+#example:after
+{
+    content: ".";
+    clear: both;
+    display: block;
+    overflow: hidden;
+    height: 0;
+    line-height: 0;
+    font-size: 0;
+}
+
 #example h3
 {
     margin-top: 5px;
