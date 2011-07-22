@@ -3,11 +3,11 @@
         oldMessage;
 
     window.kendoConsole = {
-        log: function(message, isError) {
+        log: function(message, isError) {            
             var oldContainer = $(".console div:first"),
                 counter = oldContainer.find(".count");
 
-            if (message != oldMessage) {
+            if (!oldContainer.length || message != oldMessage) {
                 oldMessage = message;
                 count = 1;
 
