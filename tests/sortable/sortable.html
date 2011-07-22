@@ -141,6 +141,52 @@
                 equal(button.find("span.t-icon.t-arrow-down").length, 0);
                 equal(button.find("span.t-icon.t-arrow-up").length, 0);
             });
+
+            test("multiple sorting on same field", function() {
+                var sorter = setup(button.data("field", "foo"), { dataSource: dataSource, mode: "multiple", allowUnsort: true } );                
+
+                button.click().click();
+
+                var sort = dataSource.sort();
+
+                equal(sort.length, 1);
+                equal(sort[0].field, "foo");
+                equal(sort[0].dir, "desc");
+            });
+
+            test("mode:multiple unsorting field", function() {
+                var sorter = setup(button.data("field", "foo"), { dataSource: dataSource, mode: "multiple", allowUnsort: true } );                
+
+                button.click().click().click();
+
+                var sort = dataSource.sort();
+                
+                equal(sort.length, 0);                
+            });
+
+            test("multiple sorting on same field allowUnsort: false", function() {
+                var sorter = setup(button.data("field", "foo"), { dataSource: dataSource, mode: "multiple", allowUnsort: false } );                
+
+                button.click().click();
+
+                var sort = dataSource.sort();
+
+                equal(sort.length, 1);
+                equal(sort[0].field, "foo");
+                equal(sort[0].dir, "desc");
+            });
+
+            test("mode:multiple unsorting field allowUnsort: false", function() {
+                var sorter = setup(button.data("field", "foo"), { dataSource: dataSource, mode: "multiple", allowUnsort: false } );                
+
+                button.click().click().click();
+
+                var sort = dataSource.sort();
+                
+                equal(sort.length, 1);
+                equal(sort[0].field, "foo");
+                equal(sort[0].dir, "asc");               
+            });
        </script>
     </body>
 </html>
