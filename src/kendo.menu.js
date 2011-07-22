@@ -66,7 +66,7 @@
          * @class Menu UI component
          * @param {Selector} element DOM element
          * @param {Object} options Configuration options.
-         * @option {Object} [animation] A collection of Animation objects, used to change default animations. A value of false will disable all animations in the component.
+         * @option {Object} [animation] A collection of <b>Animation</b> objects, used to change default animations. A value of false will disable all animations in the component.
          * @option {Animation} [animation.open] The animation that will be used when opening sub menus.
          * @option {Animation} [animation.close] The animation that will be used when closing sub menus.
          * @option {String} [orientation] <"horizontal"> Root menu orientation.
