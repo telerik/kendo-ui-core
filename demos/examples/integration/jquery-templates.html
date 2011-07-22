@@ -1,0 +1,109 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <!-- meta -->
+        <!-- meta -->
+        <title>Integration with jQuery Templates</title>
+        <!-- css -->
+        <link href="../styles/prettify.css" rel="stylesheet"/>
+        <link href="../styles/examples.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.common.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.blueopal.css" rel="stylesheet"/>
+        <!-- css -->
+        <!-- script -->
+        <script src="../../../src/jquery.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.data.js"></script>
+        <script src="../../../src/kendo.data.odata.js"></script>
+        <script src="../../../src/kendo.popup.js"></script>
+        <script src="../../../src/kendo.list.js"></script>
+        <script src="../../../src/kendo.dropdownlist.js"></script>
+        <script src="../../../src/kendo.grid.js"></script>
+        <script src="./jquery.tmpl.js"></script>
+        <script src="./knockout-1.2.1.js"></script>
+        <!-- script -->
+    </head>
+    <body>
+        <!-- nav -->
+        <!-- nav -->
+        <!-- description -->
+        <div class="description"></div>
+        <!-- description -->
+        <div id="example" class="t-content">
+            <select id="netflixDropDown" style="width:500px"></select>
+
+            <table id="netflixTable">
+                <thead>
+                    <tr>
+                        <th>
+                            Cover
+                        </th>
+                        <th>
+                            Title
+                        </th>
+                        <th>
+                            Rating
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="3"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <script id="dropDownTemplate" type="text/x-jquery-tmpl">
+                <img src="${ BoxArt.SmallUrl }" alt="${ Name }" /> ${ Name }
+            </script>
+            <script id="rowTemplate" type="text/x-jquery-tmpl">
+                <tr>
+                    <td>
+                        <img src="${ BoxArt.SmallUrl }" alt="${ Name }" />
+                    </td>
+                    <td>
+                        ${ Name }
+                    </td>
+                    <td>
+                        ${ AverageRating }
+                    </td>
+                </tr>
+            </script>
+            <script>
+                $(document).ready(function() {
+                    var dataSource = new kendo.data.DataSource({
+                        type: "odata",
+                        serverFiltering: true,
+                        filter: [{
+                            field: "Name",
+                            operator: "contains",
+                            value: "Star Wars"
+                            },{
+                            field: "BoxArt.SmallUrl",
+                            operator: "neq",
+                            value: null
+                        }],
+                        transport: {
+                            read: "http://odata.netflix.com/Catalog/Titles"
+                        }
+                    });
+
+                    $("#netflixDropDown").kendoDropDownList({
+                        dataTextField: "Name",
+                        dataValueField: "Id",
+                        template: $.template($("#dropDownTemplate")),
+                        dataSource: dataSource
+                    });
+
+                    $("#netflixTable").kendoGrid({
+                        dataSource: dataSource,
+                        rowTemplate: $.template($("#rowTemplate")),
+                        height: 200
+                    });
+                });
+            </script>
+        </div>
+        <!-- tools -->
+        <!-- tools -->
+    </body>
+</html>
