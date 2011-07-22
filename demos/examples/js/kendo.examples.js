@@ -511,6 +511,10 @@ var categories = {
                     url: "grid/selection.html"
                 },
                 {
+                    text: "Row template",
+                    url: "grid/rowtemplate.html"
+                },
+                {
                     text: "Events",
                     url: "grid/events.html"
                 }
