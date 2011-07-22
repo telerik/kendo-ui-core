@@ -31,14 +31,19 @@
 
             <script type="text/javascript">
                 $("#titles").kendoComboBox({
+                    index: 0,
                     dataTextField: "Name",
                     dataValueField: "Id",
                     severFiltering: true,
                     filter: "contains",
                     dataSource: new kendo.data.DataSource({
                         type: "odata",
-                        serverPaging: true,
-                        pageSize: 20,
+                        serverFiltering: true,
+                        filter: [{
+                            field: "BoxArt.SmallUrl",
+                            operator: "neq",
+                            value: null
+                        }],
                         transport: {
                             read: "http://odata.netflix.com/Catalog/Titles"
                         }

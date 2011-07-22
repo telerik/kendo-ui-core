@@ -25,45 +25,15 @@
         <div class="description">Basic Usage of DropDownList</div>
         <!-- description -->
         <div id="example" class="t-content">
-            <div>
-                <input id="input" value="1"/>
-                <div class="code-sample">
-                    <h4 class="code-title">Source element</h4>
-                    <pre class="prettyprint">
-&lt;input id="input" /&gt;</pre>
-                </div>
+            <h3>Created from &lt;input /&gt;</h3>
+            <input id="input" value="1"/>
 
-                <div class="code-sample">
-                    <h4 class="code-title">Initialization</h4>
-                    <pre class="prettyprint lang-js">
-$("#input").kendoDropDownList([
-    {text: "Item1", value:"1"},
-    {text: "Item2", value:"2"},
-    {text: "Item3", value:"3"}
-]);</pre>
-                </div>
-            </div>
-            <div >
-                <select id="select">
-                    <option>Item1</option>
-                    <option>Item2</option>
-                    <option>Item3</option>
-                </select>
-                <div class="code-sample">
-                    <h4 class="code-title">Source element</h4>
-                    <pre class="prettyprint">
-&lt;select id="select"&gt;
-    &lt;option&gt;Item1&lt;/option&gt;
-    &lt;option&gt;Item2&lt;/option&gt;
-    &lt;option&gt;Item3&lt;/option&gt;
-&lt;/select&gt;</pre>
-                </div>
-                <div class="code-sample">
-                    <h4 class="code-title">Initialization</h4>
-                    <pre class="prettyprint lang-js">
-$("#select").kendoDropDownList();</pre>
-                </div>
-            </div>
+            <h3>Created from &lt;select /&gt;</h3>
+            <select id="select">
+                <option>Item1</option>
+                <option>Item2</option>
+                <option>Item3</option>
+            </select>
 
             <script type="text/javascript">
 

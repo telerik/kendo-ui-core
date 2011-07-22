@@ -36,8 +36,16 @@
                     severFiltering: true,
                     dataSource: new kendo.data.DataSource({
                         type: "odata",
-                        serverPaging: true,
-                        pageSize: 20,
+                        serverFiltering: true,
+                        filter: [{
+                            field: "Name",
+                            operator: "contains",
+                            value: "Star Wars"
+                        },{
+                            field: "BoxArt.SmallUrl",
+                            operator: "neq",
+                            value: null
+                        }],
                         transport: {
                             read: "http://odata.netflix.com/Catalog/Titles"
                         }

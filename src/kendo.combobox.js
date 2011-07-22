@@ -1,4 +1,33 @@
 (function($, undefined) {
+    /**
+    * @name kendo.ui.ComboBox.Description
+    *
+    * @section The combobox component displays flat data as a list of values
+    * and provides easy way to select one value from it.
+    *
+    * @exampleTitle Creating a combobox from existing input HTML element
+    * @example
+    * <!-- HTML -->
+    * <input id="combobox" />
+    *
+    * @exampleTitle ComboBox initialization
+    * @example
+    * var combobox = $("#combobox").kendoComboBox([{text: "Item1", value: "1"}, {text: "Item2", value: "2"}]);
+
+    *
+    * @exampleTitle Creating a combobox from existing select HTML element
+    * @example
+    * <!-- HTML -->
+    * <select id="combobox">
+    *     <option>Item 1</option>
+    *     <option>Item 2</option>
+    *     <option>Item 3</option>
+    * </select>
+    *
+    * @exampleTitle ComboBox initialization
+    * @example
+    * var combobox = $("#combobox").kendoComboBox();
+    */
     var kendo = window.kendo,
         ui = kendo.ui,
         List = ui.List,
@@ -14,7 +43,25 @@
         INPUTWRAPPER = ".t-dropdown-wrap",
         proxy = $.proxy;
 
-    var ComboBox = Select.extend({
+    var ComboBox = Select.extend(/** @lends kendo.ui.ComboBox.prototype */{
+        /**
+        * @constructs
+        * @extends kendo.ui.Select
+        * @param {DomElement} element DOM element
+        * @param {Object} options Configuration options.
+        * @option {Array} [dataSource] The data that the ComboBox will be bound to.
+        * @option {Boolean} [enable] <true> Controls whether the ComboBox should be initially enabled.
+        * @option {Number} [index] <-1> Defines the initial selected item.
+        * @option {Boolean} [autoBind] <true> Controls whether to bind the component on initialization.
+        * @option {Boolean} [highlightFirst] <true> Controls whether the first item will be automatically highlighted.
+        * @option {Boolean} [suggest] <false> Controls whether the ComboBox should automatically auto-type the rest of text.
+        * @option {Number} [delay] <200> Specifies the delay in ms after which the ComboBox will start filtering dataSource.
+        * @option {Number} [minLength] <1> Specifies the minimum characters that should be typed before the ComboBox activates
+        * @option {String} [dataTextField] <"text"> Sets the field of the data item that provides the text content of the list items.
+        * @option {String} [dataValueField] <"value"> Sets the field of the data item that provides the value content of the list items.
+        * @option {String} [filter] <"none"> Defines the type of filtration. If "none" the ComboBox will not filter the items.
+        * @option {Number} [height] <200> Define the height of the drop-down list in pixels.
+        */
         init: function(element, options) {
             var that = this;
 
@@ -32,7 +79,27 @@
 
             that._dataSource();
 
-            that.bind([CHANGE], that.options);
+            that.bind([
+                /**
+                * Fires when the drop-down list is opened
+                * @name kendo.ui.ComboBox#open
+                * @event
+                * @param {Event} e
+                */
+                /**
+                * Fires when the drop-down list is closed
+                * @name kendo.ui.ComboBox#close
+                * @event
+                * @param {Event} e
+                */
+                /**
+                * Fires when the value has been changed.
+                * @name kendo.ui.ComboBox#change
+                * @event
+                * @param {Event} e
+                */
+                CHANGE
+            ], that.options);
 
             that.input.bind({
                 keydown: proxy(that._keydown, that),
@@ -88,6 +155,10 @@
             Select.fn.current.call(that, li);
         },
 
+        /**
+        * Enables/disables the combobox component
+        * @param {Boolean} enable Desired state
+        */
         enable: function(enable) {
             var that = this,
                 element = that.element,
@@ -116,6 +187,11 @@
             }
         },
 
+        /**
+        * Opens the drop-down list.
+        * @example
+        * combobox.open();
+        */
         open: function() {
             var that = this,
                 selected = that._selected;
@@ -165,6 +241,23 @@
             that.hideBusy();
         },
 
+        /**
+        * Selects drop-down list item and sets the value and the text of the combobox.
+        * @param {jQueryObject | Number | Function} li LI element or index of the item or predicate function, which defines the item that should be selected.
+        * @example
+        * var combobox = $("#combobox").data("kendoComboBox");
+        *
+        * // selects by jQuery object
+        * combobox.select(combobox.ul.children().eq(0));
+        *
+        * // selects by index
+        * combobox.select(1);
+        *
+        * // selects item if its text is equal to "test" using predicate function
+        * combobox.select(function(dataItem) {
+        *     return dataItem.text === "test";
+        * });
+        */
         select: function(li) {
             var that = this,
                 text,
@@ -232,6 +325,16 @@
             }
         },
 
+        /**
+        * Gets/Sets the text of the ComboBox.
+        * @param {String} text The text to set.
+        * @returns {String} The text of the combobox.
+        * @example
+        * var combobox = $("#combobox").data("kendoComboBox");
+        *
+        * // get the text of the combobox.
+        * var text = combobox.text();
+        */
         text: function (text) {
             var that = this,
                 input = that.input[0];
@@ -252,6 +355,15 @@
             }
         },
 
+        /**
+        * Toggles the drop-down list between opened and closed state.
+        * @param {Boolean} toggle Defines the whether to open/close the drop-down list.
+        * @example
+        * var combobox = $("#combobox").data("kendoComboBox");
+        *
+        * // toggles the open state of the drop-down list.
+        * combobox.toggle();
+        */
         toggle: function(toggle) {
             var that = this;
             that.input[0].focus();
@@ -264,6 +376,19 @@
             that[toggle ? "open" : "close"]();
         },
 
+        /**
+        * Gets/Sets the value of the combobox. If the value is undefined, text of the data item will be used.
+        * @param {String} value The value to set.
+        * @returns {String} The value of the combobox.
+        * @example
+        * var combobox = $("#combobox").data("kendoComboBox");
+        *
+        * // get the value of the combobox.
+        * var value = combobox.value();
+        *
+        * // set the value of the combobox.
+        * combobox.value("1"); //looks for item which has value "1"
+        */
         value: function(value) {
             var that = this,
                 element = that.element;

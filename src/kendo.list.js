@@ -1,4 +1,9 @@
 (function($, undefined) {
+    /**
+    * @name kendo.ui.List.Description
+    *
+    * @section Common class for ComboBox, DropDownList and AutoComplete components.
+    */
     var kendo = window.kendo,
         ui = kendo.ui,
         Component = ui.Component,
@@ -18,6 +23,7 @@
 
     var List = Component.extend(/** @lends kendo.ui.List */{
         /**
+         * Creates a List instance.
          * @constructs
          * @extends kendo.ui.Component
          */
@@ -221,6 +227,11 @@
 
     kendo.ui.List = List;
 
+    /**
+    * @name kendo.ui.Select.Description
+    *
+    * @section Common class for ComboBox and DropDownList components.
+    */
     ui.Select = List.extend(/** @lends kendo.ui.Select */{
         /**
          * @extends kendo.ui.List
@@ -230,16 +241,40 @@
             List.fn.init.call(this, element, options);
         },
 
+        /**
+        * Closes the drop-down list.
+        * @example
+        * dropdownlist.close();
+        *
+        * @example
+        * combobox.close();
+        */
         close: function() {
             this.popup.close();
         },
 
+        /**
+        * Hides loading icon
+        * @example
+        * dropdownlist.hideBusy();
+        *
+        * @example
+        * combobox.hideBusy();
+        */
         hideBusy: function () {
             var that = this;
             clearTimeout(that._busy);
             that.arrow.removeClass(LOADING);
         },
 
+        /**
+        * Shows loading icon
+        * @example
+        * dropdownlist.showBusy();
+        *
+        * @example
+        * combobox.showBusy();
+        */
         showBusy: function () {
             var that = this;
             that._busy = setTimeout(proxy(function () {
