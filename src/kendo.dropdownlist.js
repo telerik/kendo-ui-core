@@ -13,7 +13,6 @@
     * @exampleTitle DropDownList initialization
     * @example
     * var dropdownlist = $("#dropdownlist").kendoDropDownList([{text: "Item1", value: "1"}, {text: "Item2", value: "2"}]);
-
     *
     * @exampleTitle Creating a dropdownlist from existing select HTML element
     * @example

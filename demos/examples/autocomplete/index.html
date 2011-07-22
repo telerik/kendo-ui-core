@@ -25,26 +25,39 @@
         <div class="description">First Look</div>
         <!-- description -->
         <div id="example" class="t-content">
-            <div>
-                <div class="code-sample">
-                    <h4 class="code-title">Source element</h4>
-                    <pre class="prettyprint">
-&lt;input id="input" /&gt;</pre>
+<div class="code-sample">
+                <h4 class="code-title">Initialization Data</h4>
+                <pre class="prettyprint lang-js">
+var data = [
+    "The Shawshank Redemption",
+    "The Godfather",
+    "The Godfather: Part II",
+    "Il buono, il brutto, il cattivo.",
+    "Pulp Fiction",
+    "12 Angry Men",
+    "Schindler's List",
+    "One Flew Over the Cuckoo's Nest",
+    "Inception",
+    "The Dark Knight"
+];</pre>
                 </div>
 
-                <div class="code-sample">
-                    <h4 class="code-title">Initialization</h4>
-                    <pre class="prettyprint lang-js">
-$("#input").kendoAutoComplete([ "Item1", "Item2", "Item3", "Item4"]);</pre>
-                </div>
-
-                <input id="input" />
-            </div>
+            <input id="input" />
 
             <script type="text/javascript">
                 $(document).ready(function() {
-                    //input HTML element
-                    var data = [ "Item1", "Item2", "Item3", "Item4"];
+                    var data = [
+                        "The Shawshank Redemption",
+                        "The Godfather",
+                        "The Godfather: Part II",
+                        "Il buono, il brutto, il cattivo.",
+                        "Pulp Fiction",
+                        "12 Angry Men",
+                        "Schindler's List",
+                        "One Flew Over the Cuckoo's Nest",
+                        "Inception",
+                        "The Dark Knight"
+                    ];
 
                     //create AutoComplete UI component
                     $("#input").kendoAutoComplete({

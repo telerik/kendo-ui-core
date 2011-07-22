@@ -26,7 +26,7 @@
         <div class="description">Binding to Remote Data</div>
         <!-- description -->
         <div id="example">
-            Enter name of movie (minimum 3 chars):
+            Search Netflix for movie title (minimum 3 chars):
             <input id="titles"/>
 
             <script type="text/javascript">
@@ -38,9 +38,12 @@
                         severFiltering: true,
                         dataSource: new kendo.data.DataSource({
                             type: "odata",
-                            serverPaging: true,
                             serverFiltering: true,
-                            pageSize: 20,
+                            filter: [{
+                                field: "BoxArt.SmallUrl",
+                                operator: "neq",
+                                value: null
+                            }],
                             transport: {
                                 read: "http://odata.netflix.com/Catalog/Titles"
                             }
