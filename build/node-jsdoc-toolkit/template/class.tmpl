@@ -293,10 +293,10 @@
                     var description = /\[(.*)\]/i.exec(ownOptions[idx].desc);
                     description && (ownOptions[idx].name = description[1]);
 
-                    var defaultValue = /\<(.*)\>/i.exec(ownOptions[idx].desc);
+                    var defaultValue = /]\s*\<(.*)\>/i.exec(ownOptions[idx].desc);
                     defaultValue && (ownOptions[idx].defaultValue = defaultValue[1]);
 
-                    ownOptions[idx].desc = ownOptions[idx].desc.replace(/[\[\<](.*)[\]\>]/i, '');
+                    ownOptions[idx].desc = ownOptions[idx].desc.replace(/\[(.*)\]/i, "").replace(/^\s*\<([\S]+)\>/i, "");
                     ownOptions[idx].isOptional = true;
                 });
 
