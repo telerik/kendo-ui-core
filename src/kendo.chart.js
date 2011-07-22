@@ -107,13 +107,477 @@
          * @param {DomElement} element DOM element
          * @param {Object} options Configuration options.
          * @option {String} [theme] <default> Sets Chart theme.
-         * @option {Object} [title]
-         * @option {Object} [legend]
+         * @option {Object} [title] <null>
+         * The chart title configuration options.
+         *<dl>
+         *     <dt>
+         *         text: {String}
+         *     </dt>
+         *     <dd>
+         *         The title of the chart.
+         *     </dd>
+         *     <dt>
+         *         font: {String}
+         *     </dt>
+         *     <dd>
+         *         The font of the title. Default font style is: "16px Verdana, sans-serif"
+         *     </dd>
+         *     <dt>
+         *         position: {Object}
+         *     </dt>
+         *     <dd>
+         *         The positions of the title. Default position is: "top"
+         *         <dl>
+         *              <dt>
+         *                   top: {String}
+         *              </dt>
+         *              <dd>
+         *                   The title is positioned on the top.
+         *              </dd>
+         *              <dt>
+         *                   bottom: {String}
+         *              </dt>
+         *              <dd>
+         *                   The title is positioned on the bottom.
+         *              </dd>
+         *         </dl>
+         *     </dd>
+         *     <dt>
+         *         align: {Object}
+         *     </dt>
+         *     <dd>
+         *         The alignment of the title. Default alignment is: "center"
+         *         <dl>
+         *              <dt>
+         *                   left: {String}
+         *              </dt>
+         *              <dd>
+         *                   The text is aligned to the left.
+         *              </dd>
+         *              <dt>
+         *                   center: {String}
+         *              </dt>
+         *              <dd>
+         *                   The text is aligned to the middle.
+         *              </dd>
+         *              <dt>
+         *                   right: {String}
+         *              </dt>
+         *              <dd>
+         *                   The text is aligned to the right.
+         *              </dd>
+         *         </dl>
+         *     </dd>
+         *     <dt>
+         *         visible: {Boolean}
+         *     </dt>
+         *     <dd>
+         *         The visibility of the title. Default visibility is: false
+         *     </dd>
+         *     <dt>
+         *         margin: {Number}
+         *     </dt>
+         *     <dd>
+         *         The margin of the title. Default margin is: 5
+         *     </dd>
+         *     <dt>
+         *         margin: {Object}
+         *     </dt>
+         *     <dd>
+         *         The margin of the title.
+         *         <dl>
+         *              <dt>
+         *                   top: {Number}
+         *              </dt>
+         *              <dd>
+         *                   The top margin.
+         *              </dd>
+         *              <dt>
+         *                   right: {Number}
+         *              </dt>
+         *              <dd>
+         *                   The right margin.
+         *              </dd>
+         *              <dt>
+         *                   bottom: {Number}
+         *              </dt>
+         *              <dd>
+         *                   The bottom margin.
+         *              </dd>
+         *              <dt>
+         *                   left: {Number}
+         *              </dt>
+         *              <dd>
+         *                   The left margin.
+         *              </dd>
+         *         </dl>
+         *     </dd>
+         *     <dt>
+         *         padding: {Number}
+         *     </dt>
+         *     <dd>
+         *         The padding of the title. Default padding is: 5
+         *     </dd>
+         *     <dt>
+         *         padding: {Object}
+         *     </dt>
+         *     <dd>
+         *         The padding of the title.
+         *         <dl>
+         *              <dt>
+         *                   top: {Number}
+         *              </dt>
+         *              <dd>
+         *                   The top padding.
+         *              </dd>
+         *              <dt>
+         *                   right: {Number}
+         *              </dt>
+         *              <dd>
+         *                   The right padding.
+         *              </dd>
+         *              <dt>
+         *                   bottom: {Number}
+         *              </dt>
+         *              <dd>
+         *                   The bottom padding.
+         *              </dd>
+         *              <dt>
+         *                   left: {Number}
+         *              </dt>
+         *              <dd>
+         *                   The left padding.
+         *              </dd>
+         *         </dl>
+         *     </dd>
+         *     <dt>
+         *         border: {Object}
+         *     </dt>
+         *     <dd>
+         *         The border of the title.
+         *         <dl>
+         *              <dt>
+         *                   width: {Number}
+         *              </dt>
+         *              <dd>
+         *                   The width of the border. Default width is: 0
+         *              </dd>
+         *              <dt>
+         *                   color: {String}
+         *              </dt>
+         *              <dd>
+         *                   The color of the border. Default color is: "black"
+         *              </dd>
+         *         </dl>
+         *     </dd>
+         * </dl>
+         * @option {Object} [legend] <null>
+         *The chart legend configuration options.
+         *<dl>
+         *     <dt>
+         *         font: {String}
+         *     </dt>
+         *     <dd>
+         *         The font of the legend. Default font style is: "12px Verdana, sans-serif"
+         *     </dd>
+         *     <dt>
+         *         position: {Object}
+         *     </dt>
+         *     <dd>
+         *         The positions of the legend. Default position is: "right"
+         *         <dl>
+         *              <dt>
+         *                   top: {String}
+         *              </dt>
+         *              <dd>
+         *                   The legend is positioned on the top.
+         *              </dd>
+         *              <dt>
+         *                   bottom: {String}
+         *              </dt>
+         *              <dd>
+         *                   The legend is positioned on the bottom.
+         *              </dd>
+         *              <dt>
+         *                   left: {String}
+         *              </dt>
+         *              <dd>
+         *                   The legend is positioned on the left.
+         *              </dd>
+         *              <dt>
+         *                   right: {String}
+         *              </dt>
+         *              <dd>
+         *                   The legend is positioned on the right.
+         *              </dd>
+         *              <dt>
+         *                   custom: {String}
+         *              </dt>
+         *              <dd>
+         *                   The legend is positioned using OffsetX and OffsetY.
+         *              </dd>
+         *         </dl>
+         *     </dd>
+         *     <dd>
+         *         The legend X and Y offset from its position.
+         *         <dl>
+         *              <dt>
+         *                   offsetX: {Number}
+         *              </dt>
+         *              <dd>
+         *                   The X offset from its position. Default X offset is: 0
+         *              </dd>
+         *              <dt>
+         *                   offsetY: {String}
+         *              </dt>
+         *              <dd>
+         *                   The Y offset from its position. Default Y offset is: 0
+         *              </dd>
+         *         </dl>
+         *     </dd>
+         *     <dt>
+         *         visible: {Boolean}
+         *     </dt>
+         *     <dd>
+         *         The visibility of the legend. Default visibility is: true
+         *     </dd>
+         *     <dt>
+         *         margin: {Number}
+         *     </dt>
+         *     <dd>
+         *         The margin of the legend. Default margin is: 10
+         *     </dd>
+         *     <dt>
+         *         margin: {Object}
+         *     </dt>
+         *     <dd>
+         *         The margin of the legend.
+         *         <dl>
+         *              <dt>
+         *                   top: {Number}
+         *              </dt>
+         *              <dd>
+         *                   The top margin.
+         *              </dd>
+         *              <dt>
+         *                   right: {Number}
+         *              </dt>
+         *              <dd>
+         *                   The right margin.
+         *              </dd>
+         *              <dt>
+         *                   bottom: {Number}
+         *              </dt>
+         *              <dd>
+         *                   The bottom margin.
+         *              </dd>
+         *              <dt>
+         *                   left: {Number}
+         *              </dt>
+         *              <dd>
+         *                   The left margin.
+         *              </dd>
+         *         </dl>
+         *     </dd>
+         *     <dt>
+         *         padding: {Number}
+         *     </dt>
+         *     <dd>
+         *         The padding of the legend. Default padding is: 5
+         *     </dd>
+         *     <dt>
+         *         padding: {Object}
+         *     </dt>
+         *     <dd>
+         *         The padding of the legend.
+         *         <dl>
+         *              <dt>
+         *                   top: {Number}
+         *              </dt>
+         *              <dd>
+         *                   The top padding.
+         *              </dd>
+         *              <dt>
+         *                   right: {Number}
+         *              </dt>
+         *              <dd>
+         *                   The right padding.
+         *              </dd>
+         *              <dt>
+         *                   bottom: {Number}
+         *              </dt>
+         *              <dd>
+         *                   The bottom padding.
+         *              </dd>
+         *              <dt>
+         *                   left: {Number}
+         *              </dt>
+         *              <dd>
+         *                   The left padding.
+         *              </dd>
+         *         </dl>
+         *     </dd>
+         *     <dt>
+         *         border: {Object}
+         *     </dt>
+         *     <dd>
+         *         The border of the legend.
+         *         <dl>
+         *              <dt>
+         *                   width: {Number}
+         *              </dt>
+         *              <dd>
+         *                   The width of the border. Default width is: 0
+         *              </dd>
+         *              <dt>
+         *                   color: {String}
+         *              </dt>
+         *              <dd>
+         *                   The color of the border. Default color is: "black"
+         *              </dd>
+         *         </dl>
+         *     </dd>
+         * </dl>
          * @option {Object} [valueAxis]
          * @option {Object} [categoryAxis]
          * @option {Object} [seriesDefaults]
          * @option {Object} [series]
-         * @option {Object} [chartArea]
+         * @option {Object} [chartArea] {null}
+         *The chart area configuration options.
+         *<dl>
+         *     <dt>
+         *         background: {string}
+         *     </dt>
+         *     <dd>
+         *         The background color of the chart area. Default background color is: "white"
+         *     </dd>
+         *     <dt>
+         *         margin: {Number}
+         *     </dt>
+         *     <dd>
+         *         The margin of the chart area. Default margin is: 5
+         *     </dd>
+         *     <dt>
+         *         margin: {Object}
+         *     </dt>
+         *     <dd>
+         *         The margin of the chart area.
+         *         <dl>
+         *              <dt>
+         *                   top: {Number}
+         *              </dt>
+         *              <dd>
+         *                   The top margin.
+         *              </dd>
+         *              <dt>
+         *                   right: {Number}
+         *              </dt>
+         *              <dd>
+         *                   The right margin.
+         *              </dd>
+         *              <dt>
+         *                   bottom: {Number}
+         *              </dt>
+         *              <dd>
+         *                   The bottom margin.
+         *              </dd>
+         *              <dt>
+         *                   left: {Number}
+         *              </dt>
+         *              <dd>
+         *                   The left margin.
+         *              </dd>
+         *         </dl>
+         *     </dd>
+         *     <dt>
+         *         border: {Object}
+         *     </dt>
+         *     <dd>
+         *         The border of the chart area.
+         *         <dl>
+         *              <dt>
+         *                   width: {Number}
+         *              </dt>
+         *              <dd>
+         *                   The width of the border. Default width is: 0
+         *              </dd>
+         *              <dt>
+         *                   color: {String}
+         *              </dt>
+         *              <dd>
+         *                   The color of the border. Default color is: "black"
+         *              </dd>
+         *         </dl>
+         *     </dd>
+         *</dl>
+         * @option {Object} [plotArea] {null}
+         *The plot area configuration options.
+         *<dl>
+         *     <dt>
+         *         background: {string}
+         *     </dt>
+         *     <dd>
+         *         The background color of the plot area. Default background color is: "white"
+         *     </dd>
+         *     <dt>
+         *         margin: {Number}
+         *     </dt>
+         *     <dd>
+         *         The margin of the plot area. Default margin is: 0
+         *     </dd>
+         *     <dt>
+         *         margin: {Object}
+         *     </dt>
+         *     <dd>
+         *         The margin of the plot area.
+         *         <dl>
+         *              <dt>
+         *                   top: {Number}
+         *              </dt>
+         *              <dd>
+         *                   The top margin.
+         *              </dd>
+         *              <dt>
+         *                   right: {Number}
+         *              </dt>
+         *              <dd>
+         *                   The right margin.
+         *              </dd>
+         *              <dt>
+         *                   bottom: {Number}
+         *              </dt>
+         *              <dd>
+         *                   The bottom margin.
+         *              </dd>
+         *              <dt>
+         *                   left: {Number}
+         *              </dt>
+         *              <dd>
+         *                   The left margin.
+         *              </dd>
+         *         </dl>
+         *     </dd>
+         *     <dt>
+         *         border: {Object}
+         *     </dt>
+         *     <dd>
+         *         The border of the plot area.
+         *         <dl>
+         *              <dt>
+         *                   width: {Number}
+         *              </dt>
+         *              <dd>
+         *                   The width of the border. Default width is: 0
+         *              </dd>
+         *              <dt>
+         *                   color: {String}
+         *              </dt>
+         *              <dd>
+         *                   The color of the border. Default color is: "black"
+         *              </dd>
+         *         </dl>
+         *     </dd>
+         *</dl>
          */
         init: function(element, options) {
             var chart = this,
