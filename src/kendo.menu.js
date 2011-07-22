@@ -1,4 +1,26 @@
 (function ($, window) {
+    /**
+     * @name kendo.ui.Menu.Description
+     *
+     * @section The menu component initializes hierarchical
+     * data as a multiple level drop down menu.
+     *
+     * @exampleTitle Creating a menu from existing HTML
+     * @example
+     * <ul id="menu">
+     *     <li>Item 1
+     *         <ul>
+     *             <li>Item 1.1</li>
+     *             <li>Item 1.2</li>
+     *         </ul>
+     *     </li>
+     *     <li>Item 2</li>
+     * </ul>
+     *
+     * @exampleTitle Menu initialization
+     * @example
+     * var menu = $("#menu").kendoMenu();
+     */
     var kendo = window.kendo,
         ui = kendo.ui,
         extend = $.extend,
@@ -44,7 +66,7 @@
          * @class Menu UI component
          * @param {Selector} element DOM element
          * @param {Object} options Configuration options.
-         * @option {Object} [animation] A collection of {Animation} objects, used to change default animations. A value of false will disable all animations in the component.
+         * @option {Object} [animation] A collection of Animation objects, used to change default animations. A value of false will disable all animations in the component.
          * @option {Animation} [animation.open] The animation that will be used when opening sub menus.
          * @option {Animation} [animation.close] The animation that will be used when closing sub menus.
          * @option {String} [orientation] <"horizontal"> Root menu orientation.
@@ -83,7 +105,7 @@
                  * @name kendo.ui.Menu#open
                  * @event
                  * @param {Event} e
-                 * @param {Item} e.item The opened item
+                 * @param {Element} e.item The opened item
                  */
                 OPEN,
                 /**
@@ -91,7 +113,7 @@
                  * @name kendo.ui.Menu#close
                  * @event
                  * @param {Event} e
-                 * @param {Item} e.item The closed item
+                 * @param {Element} e.item The closed item
                  */
                 CLOSE,
                 /**
@@ -99,7 +121,7 @@
                  * @name kendo.ui.Menu#select
                  * @event
                  * @param {Event} e
-                 * @param {Item} e.item The selected item
+                 * @param {Element} e.item The selected item
                  */
                 SELECT
             ], that.options);
