@@ -146,8 +146,18 @@
         _popup: function() {
             var that = this,
                 ul = that.ul,
+                zIndex = "auto",
                 options = that.options,
                 wrapper = that.wrapper;
+
+            //calculate z-index
+            wrapper.parents().andSelf().each(function () {
+                zIndex = $(this).css("zIndex");
+                if (!isNaN(zIndex)) {
+                    zIndex = Number(zIndex) + 1;
+                    return false;
+                }
+            });
 
             that.popup = new ui.Popup(ul, {
                 anchor: wrapper,
@@ -158,7 +168,10 @@
             var spacing = (parseInt(ul.css('border-left-width'), 10) || 0) +
                           (parseInt(ul.css('border-right-width'), 10) || 0);
 
-            ul.width(wrapper.innerWidth() - spacing);
+            ul.css({
+                width: (wrapper.innerWidth() - spacing),
+                zIndex: zIndex
+            });
         },
 
         _scroll: function (item) {
