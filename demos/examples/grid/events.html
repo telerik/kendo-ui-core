@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+    <head>
+        <!-- meta -->
+        <!-- meta -->
+        <title>Grid events</title>
+        <!-- css -->
+        <link href="../styles/examples.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.common.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.blueopal.css" rel="stylesheet"/>
+        <!-- css -->
+        <!-- script -->
+        <script src="../../../src/jquery.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.data.js"></script>
+        <script src="../../../src/kendo.pageable.js"></script>        
+        <script src="../../../src/kendo.selectable.js"></script>
+        <script src="../../../src/kendo.sortable.js"></script>
+        <script src="../../../src/kendo.grid.js"></script>
+        <script src="../js/people.js"></script>
+        <script src="../js/kendo.console.js"></script>
+        <!-- script -->
+    </head>
+    <body>
+        <!-- nav -->
+        <!-- nav -->
+        <!-- description -->
+        <div class="description">Grid events</div>
+        <!-- description -->
+        <div id="example" class="t-content">           
+            <div class="t-grid"></div>
+
+            <script type="text/javascript">
+                function onChange(arg) {
+                    var selected = $.map(this.select(), function(item) {                        
+                        return $(item).text();
+                    });
+
+                    kendoConsole.log("Selected: " + selected.length + " item(s), [" + selected.join(", ") + "]");
+                }
+
+                function onDataBound(arg) {
+                    kendoConsole.log("Grid data bound");
+                }
+
+                $(document).ready(function() {
+                    $(".t-grid").kendoGrid({
+                        dataSource: {                            
+                            data: createRandomData(50),
+                            pageSize: 5
+                        },
+                        change: onChange,
+                        dataBound: onDataBound,
+                        selectable: "multiple cell",
+                        pageable: true,
+                        sortable: true,
+                        scrollable: false,
+                        columns: [
+                            {
+                                field: "FirstName",
+                                title: "First Name"
+                            },
+                            {
+                                field: "LastName",
+                                title: "Last Name"
+                            },
+                            {
+                                field: "Age",
+                                title: "Age"
+                            }
+                        ]
+                    });
+                });                
+            </script>
+        </div>
+        <div class="console"></div>
+        <!-- tools -->
+        <!-- tools -->
+    </body>
+</html>
+
+
