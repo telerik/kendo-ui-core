@@ -460,8 +460,8 @@
                 table,
                 options = that.options,
                 height = that.wrapper.innerHeight(),
-                scrollbar = kendo.support.scrollbar(),
-                scrollable = options.scrollable;
+                scrollable = options.scrollable,
+                scrollbar = kendo.support.scrollbar();
 
             if (scrollable) {
                 header = that.wrapper.children().filter(".t-grid-header");
@@ -470,7 +470,8 @@
                     header = $('<div class="t-grid-header" />').insertBefore(that.table);
                 }
 
-                header.css("padding-right", scrollbar);
+                // workaround for IE issue where scroll is not raised if container is same width as the scrollbar
+                header.css("padding-right", scrollable.virtual ? scrollbar + 1 : scrollbar);
                 table = $('<table cellspacing="0" />');
                 table.append(that.thead);
                 header.empty().append($('<div class="t-grid-header-wrap" />').append(table));

@@ -37,21 +37,16 @@
                             type: "odata",
                             serverPaging: true,
                             serverSorting: true,
-                            pageSize: 80,
+                            pageSize: 100,
                             transport: {
-                                read: "http://odata.netflix.com/v2/Catalog/Titles"
+                                read: "http://services.odata.org/Northwind/Northwind.svc/Orders"
                             }
                         },
                         height: 280,
                         scrollable: {
                             virtual: true
                         },
-                        columns: [
-                                    { field: "Id", width: "70px" },
-                                    "Name",
-                                    { field: "AverageRating", title: "Average Rating", width: "120px" },
-                                    { field: "ReleaseYear", title: "Release Year", width: "100px" }
-                        ],
+                        columns: ["OrderID", "CustomerID", "Freight", "ShipName", "ShipCity"],
                         sortable: {
                             allowUnsort: false
                         }
