@@ -1,4 +1,22 @@
 (function($, undefined) {
+     /**
+     * @name kendo.ui.DropDownList.Description
+     *
+     * @section The dropdownlist component displays flat data as a list of values
+     * and provides easy way to select from it. It is similar to HTML select element.
+     *
+     * @exampleTitle Creating a dropdownlist from existing HTML
+     * @example
+     * <!-- HTML -->
+     * <select id="dropdownlist">
+     *     <option>Item 1</option>
+     *     <option>Item 2</option>
+     *     <option>Item 3</option>
+     * </select>
+     *
+     * // JavaScript
+     * var dropdownlist = $("#dropdownlist").kendoDropDownList();
+     */
     var kendo = window.kendo,
         ui = kendo.ui,
         Select = ui.Select,
@@ -11,7 +29,21 @@
         INPUTWRAPPER = ".t-dropdown-wrap",
         proxy = $.proxy;
 
-    var DropDownList = Select.extend({
+    var DropDownList = Select.extend( /** @lends kendo.ui.DropDownList.prototype */ {
+        /**
+         * @constructs
+         * @extends kendo.ui.Select
+         * @param {DomElement} element DOM element
+         * @param {Object} options Configuration options.
+         * @option {Array} [dataSource] The data that the TreeView will be bound to.
+         * @option {Boolean} [enable] <true> Controls whether the dropdownlist should be initially enabled.
+         * @option {Number} [index] <0> Defines the initial selected item.
+         * @option {Boolean} [index] <true> Controls whether to bind the component on initialization.
+         * @option {Number} [delay] <500> Specifies the delay in ms before the searcg text typed by the end user is cleared.
+         * @option {String} [dataTextField] <"text"> Sets the field of the data item that provides the text content of the list items.
+         * @option {String} [dataValueField] <"value"> Sets the field of the data item that provides the value content of the list items.
+         * @option {Number} [height] <200> Define the height of the drop-down list in pixels.
+         */
         init: function(element, options) {
             var that = this;
 
@@ -31,7 +63,15 @@
 
             that._dataSource();
 
-            that.bind([CHANGE], that.options);
+            that.bind([
+                /**
+                * Fires when the value has been changed.
+                * @name kendo.ui.DropDownList#change
+                * @event
+                * @param {Event} e
+                */
+                CHANGE
+            ], that.options);
 
             if (that.element.prop("disabled")) {
                 that.options.enable = false;
@@ -57,6 +97,10 @@
             height: 200
         },
 
+        /**
+        * Enables/disables the DropDownList component
+        * @param {Boolean} enable Desired state
+        */
         enable: function(enable) {
             var that = this,
                 wrapper = that.wrapper,
@@ -96,6 +140,11 @@
             }
         },
 
+        /**
+        * Opens the drop-down list.
+        * @example
+        * dropdownlist.open();
+        */
         open: function() {
             var that = this,
                 current = that._current;
@@ -112,6 +161,16 @@
             }
         },
 
+        /**
+        * Toggles the drop-down list between opened and closed state.
+        * @param {Boolean} toggle Defines the whether to open/close the drop-down list.
+        * @example
+        * @example
+        * var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
+        *
+        * // close/open if drop-down list is opened/closed.
+        * dropdownlist.toggle();
+        */
         toggle: function(toggle) {
             var that = this;
 
@@ -165,6 +224,23 @@
             }
         },
 
+        /**
+        * Selects drop-down list item and sets the value and the text of the DropDownList.
+        * @param {jQueryObject|Number|Function} li The LI element or the index of the item or predicate which defines the item that should be selected.
+        * @example
+        * var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
+        *
+        * // selects the first LI element
+        * dropdownlist.select(dropdownlist.ul.children().eq(0));
+        *
+        * // selects the second LI element.
+        * dropdownlist.select(1);
+        *
+        * // selects item, which text is equal to "test"
+        * dropdownlist.select(function(dataItem) {
+        *     return dataItem.text === "test";
+        * });
+        */
         select: function(li) {
             var that = this,
                 idx,
@@ -213,6 +289,16 @@
             }
         },
 
+        /**
+         * Gets/Sets the text of the DropDownList.
+         * @param {String} The text to set.
+         * @returns {String} The text of the DropDownList.
+         * @example
+         * var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
+         *
+         * // get the text of the DropDownList.
+         * var text = dropdownlist.text();
+         */
         text: function (text) {
             var span = this.span;
 
@@ -223,6 +309,19 @@
             }
         },
 
+        /**
+        * Gets/Sets the value of the DropDownList. The value will not be set if there is no item with such value. If value is undefined, text of the dataItem is used.
+        * @param {String} The value to set.
+        * @returns {String} The value of the DropDownList.
+        * @example
+        * var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
+        *
+        * // get the value of the DropDownList.
+        * var value = dropdownlist.value();
+        *
+        * // set the value of the DropDownList.
+        * dropdownlist.value("1"); //looks for item which has value "1"
+        */
         value: function(value) {
             var that = this,
                 element = that.element;
