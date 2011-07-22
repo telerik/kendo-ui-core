@@ -204,7 +204,7 @@
 
                 skinLink.eq(0).before(newLink);
                 skinLink.remove();
-                if (exampleElement)
+                if (exampleElement.length)
                     exampleElement[0].style.cssText = exampleElement[0].style.cssText;
 
                 $(document).data("kendoSkin", skinName).trigger("kendo:skinChange");

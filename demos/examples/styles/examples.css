@@ -976,13 +976,13 @@ div.skinSelector .t-state-active
     border-color: #606161;
 }
 
-#skinSelector-list .orangeThumb
+#skinSelector-list .kendoThumb
 {
     background-position: -64px 0;
     border-color: #cdd4d7;
 }
 
-#skinSelector-list .kendoThumb
+#skinSelector-list .blackThumb
 {
     background-position: -128px 0;
     border-color: #cdd4d7;

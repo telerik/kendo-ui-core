@@ -1359,6 +1359,12 @@ html body .t-grid tbody .t-button-icon
     height: 25px;
 }
 
+.t-marquee
+{
+    opacity: .3;
+    filter: alpha(opacity=30);
+}
+
 /* ComboBox & Drop-down*/
 
 .t-combobox,
