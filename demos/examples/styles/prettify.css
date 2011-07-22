@@ -80,7 +80,7 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
 {
     float: left;
     clear: left;
-    width: 200px;
+    width: 250px;
 }
 
 .details-list dt:nth-child(4n+1),

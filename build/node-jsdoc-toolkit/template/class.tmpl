@@ -224,7 +224,7 @@
 #### EVENTS SUMMARY
 -->
         <if test="data.events.length">
-            {! var ownEvents = data.events.filter(function($){return $.memberOf == data.alias  && !$.isNamespace}).sort(makeSortby("name")); !}
+            {! var ownEvents = data.events.filter(function($){return !$.isNamespace}).sort(makeSortby("name")); !}
             <if test="ownEvents.length">
             <div class="props">
                 <table class="summaryTable" cellspacing="0" summary="A summary of the events documented in the class {+data.alias+}.">
@@ -379,7 +379,7 @@
                         <if test="member.example && member.example.length">
                             <for each="example" in="member.example">
                                 <div class="code-sample">
-                                    <h4 class="code-title">Example:</h4>
+                                    <h4 class="code-title">Example</h4>
                                     <pre class="code prettyprint lang-js"><code>{+example+}</code></pre>
                                 </div>
                             </for>
@@ -430,7 +430,7 @@
                         <if test="member.example && member.example.length">
                             <for each="example" in="member.example">
                                 <div class="code-sample">
-                                    <h4 class="code-title">Example:</h4>
+                                    <h4 class="code-title">Example</h4>
                                     <pre class="code prettyprint lang-js"><code>{+example+}</code></pre>
                                 </div>
                             </for>
@@ -484,23 +484,25 @@
                                 <if test="member.example && member.example.length">
                                     <for each="example" in="member.example">
                                         <div class="code-sample">
-                                            <h4 class="code-title">Example:</h4>
+                                            <h4 class="code-title">Example</h4>
                                             <pre class="code prettyprint lang-js"><code>{+example+}</code></pre>
                                         </div>
                                     </for>
                                 </if>
 
                                 <if test="member.params.length">
-                                    <dl class="detailList params">
-                                        <dt class="heading">Parameters:</dt>
-                                        <for each="item" in="member.params">
-                                            <dt>
-                                                <code>{+item.name+}</code>: {+((item.type)?"<span class=\"light fixedFont\">"+(new Link().toSymbol(item.type))+"</span> " : "")+}
-                                                <if test="item.isOptional">(<i>optional<if test="item.defaultValue">, default: {+item.defaultValue+}</if></i>)</if>
-                                            </dt>
-                                            <dd>{+resolveLinks(item.desc)+}</dd>
-                                        </for>
+                                <div class="details-list">
+                                    <h4 class="details-title">Parameters</h4>
+                                    <dl>
+                                    <for each="item" in="member.params">
+                                        <dt>
+                                            <code>{+item.name+}</code>{+((item.type)?"<span class=\"light fixedFont\">: "+(new Link().toSymbol(item.type))+"</span> " : "")+}
+                                            <if test="item.isOptional">(<i>optional<if test="item.defaultValue">, default: {+item.defaultValue+}</if></i>)</if>
+                                        </dt>
+                                        <dd>{+resolveLinks(item.desc)+}</dd>
+                                    </for>
                                     </dl>
+                                </div>
                                 </if>
 
                                 <if test="member.deprecated || member.since || member.exceptions.length || member.returns.length || member.requires.length || member.see.length">
@@ -516,7 +518,7 @@
                                         </if>
 
                                         <if test="member.returns.length">
-                                            <dt class="heading">Returns:</dt>
+                                            <dt class="heading">Returns</dt>
                                             <for each="item" in="member.returns">
                                                 <dd>{+((item.type)?"<span class=\"light fixedFont\">"+(new Link().toSymbol(item.type))+"</span> " : "")+}{+resolveLinks(item.desc)+}</dd>
                                             </for>
@@ -566,7 +568,7 @@
                         <if test="member.example && member.example.length">
                             <for each="example" in="member.example">
                                 <div class="code-sample">
-                                    <h4 class="code-title">Example:</h4>
+                                    <h4 class="code-title">Example</h4>
                                     <pre class="code prettyprint lang-js"><code>{+example+}</code></pre>
                                 </div>
                             </for>
@@ -574,7 +576,7 @@
 
                         <if test="member.params.length > 1">
                             <div class="details-list">
-                                <h4 class="details-title">Event data:</h4>
+                                <h4 class="details-title">Event data</h4>
                                 <dl>
                                 <for each="item" in="member.params">
                                     <if test="item.name != 'e'">
@@ -590,7 +592,14 @@
                             </div>
                         </if>
 
-                        <if test="member.deprecated || member.since || member.exceptions.length || member.returns.length || member.see.length">
+                        <if test="member.returns.length">
+                        <div class="returns">
+                            <strong>Returns</strong>
+                            <span>{+((member.returns[0].type)?"<span class=\"light fixedFont\">"+(new Link().toSymbol(member.returns[0].type))+"</span> " : "")+}{+resolveLinks(member.returns[0].desc)+}</span>
+                        </div>
+                        </if>
+
+                        <if test="member.deprecated || member.since || member.exceptions.length || member.see.length">
                             <dl class="detailList">
                                 <if test="member.deprecated">
                                     <dt class="heading">Deprecated:</dt>
@@ -602,12 +611,6 @@
                                     <dd>{+ member.since +}</dd>
                                 </if>
 
-                                <if test="member.returns.length">
-                                    <dt class="heading">Returns:</dt>
-                                    <for each="item" in="member.returns">
-                                        <dd>{+((item.type)?"<span class=\"light fixedFont\">"+(new Link().toSymbol(item.type))+"</span> " : "")+}{+resolveLinks(item.desc)+}</dd>
-                                    </for>
-                                </if>
 
                                 <if test="member.requires.length">
                                     <dt class="heading">Requires:</dt>
