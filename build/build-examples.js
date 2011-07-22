@@ -42,9 +42,11 @@ function splitScriptRegion(exampleHTML, base) {
         scriptMatches = regionRegex.script.exec(exampleHTML),
         currentPageScripts = scriptMatches ? scriptMatches[1].trimLeft() : "",
         scriptStripper1 = /"(.*?)src/g,
-        scriptStripper2 = /src="[.\/]*([^"]*)([^\.min]*)\.js"/g,
+        scriptStripper2 = /src="([.\/]*)([^"]*)([^\.min]*)\.js"/g,
         jsExtension = MINIFY ? ".min.js" : ".js",
-        rebasedSrc = 'src="' + base + '$1' + jsExtension + '"';
+        rebaser = function (match, g1, g2) {
+            return 'src="' + ( (g1 != "./") ? base : g1 ) + g2 + jsExtension + '"';
+        };
 
     if (!currentPageScripts)
         return false;
@@ -54,9 +56,9 @@ function splitScriptRegion(exampleHTML, base) {
     });
 
     currentPageScripts = currentPageScripts.replace(scriptStripper1, '"js');
-    currentPageScripts = currentPageScripts.replace(scriptStripper2, rebasedSrc);
+    currentPageScripts = currentPageScripts.replace(scriptStripper2, rebaser);
     baseScripts = baseScripts.replace(scriptStripper1, '"js');
-    baseScripts = baseScripts.replace(scriptStripper2, rebasedSrc);
+    baseScripts = baseScripts.replace(scriptStripper2, rebaser);
 
     if (MINIFY) {
         currentPageScripts = currentPageScripts.replace(/src="js\/jquery\.min\.js"/g, 'src="' + jQueryCDN + '"');
