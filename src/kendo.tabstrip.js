@@ -1,10 +1,30 @@
 (function ($, window) {
-
+    /**
+     * @name kendo.ui.TabStrip.Description
+     *
+     * @section The TabStrip component initializes a set of unordered list items
+     * and content div elements as a switchable tab and content pairs.
+     *
+     * @exampleTitle Creating a <b>TabStrip</b> from existing HTML
+     * @example
+     * <ul id="tabStrip">
+     *     <li>Item 1</li>
+     *     <li>Item 2</li>
+     * </ul>
+     * <div></div>
+     * <div></div>
+     * @section You can also omit the content elements in the above structure
+     * 
+     * @exampleTitle <b>TabStrip</b> initialization
+     * @example
+     * var tabStrip = $("#tabStrip").kendoTabStrip();
+     */
     var kendo = window.kendo,
         ui = kendo.ui,
         extend = $.extend,
         template = kendo.template,
         Component = ui.Component,
+        ERROR = "error",
         SELECT = "select",
         CONTENTLOAD = "contentLoad",
         MOUSEENTER = "mouseenter",
@@ -20,7 +40,19 @@
         TABONTOP = "t-tab-on-top",
         EMPTY = ":empty";
 
-    var TabStrip = Component.extend({
+    var TabStrip = Component.extend({/** @lends kendo.ui.TabStrip.prototype */
+        /**
+         * Creates a TabStrip instance.
+         * @constructs
+         * @extends kendo.ui.Component
+         * @class TabStrip UI component
+         * @param {Selector} element DOM element
+         * @param {Object} options Configuration options.
+         * @option {Object} [animation] A collection of Animation objects, used to change default animations. A value of false will disable all animations in the component.
+         * @option {Animation} [animation.open] The animation that will be used when opening content.
+         * @option {Animation} [animation.close] The animation that will be used when closing content.
+         */
+
         init: function(element, options) {
             element = $(element);
             var that = this;
@@ -37,7 +69,34 @@
                 .delegate(HOVERABLEITEMS, MOUSEENTER + " " + MOUSELEAVE, that._toggleHover)
                 .delegate(DISABLEDLINKS, CLICK, false);
 
-            that.bind([ SELECT, CONTENTLOAD ], that.options);
+            that.bind([
+                /**
+                 * Fires before a tab is selected.
+                 * @name kendo.ui.TabStrip#select
+                 * @event
+                 * @param {Event} e
+                 * @param {Element} e.item The selected item
+                 */
+                SELECT,
+                /**
+                 * Fires when ajax request results in an error.
+                 * @name kendo.ui.TabStrip#error
+                 * @event
+                 * @param {Event} e
+                 * @param {jqXHR} e.xhr The jqXHR object used to load the content
+                 * @param {String} e.status The returned status.
+                 */
+                ERROR,
+                /**
+                 * Fires when content is fetched from an ajax request.
+                 * @name kendo.ui.TabStrip#contentLoad
+                 * @event
+                 * @param {Event} e
+                 * @param {Element} e.item The selected item
+                 * @param {Element} e.item The loaded content element
+                 */
+                CONTENTLOAD
+            ], that.options);
 
             that._updateClasses();
 
@@ -68,6 +127,12 @@
             }
         },
 
+        /**
+         * Selects the specified TabStrip tab/s. If called without arguments - returns the selected tab.
+         * @param {Selector} element Target item selector.
+         * @example
+         * tabStrip.select("#Item1");
+         */
         select: function (element) {
             var that = this;
 
@@ -83,6 +148,11 @@
             });
         },
 
+        /**
+         * Enables/disables a TabStrip tab
+         * @param {Selector} element Target element
+         * @param {Boolean} enable Desired state
+         */
         enable: function (element, state) {
             if (state !== false) {
                 state = true;
@@ -91,10 +161,19 @@
             this._toggleDisabled(element, state);
         },
 
+        /**
+         * Disables a TabStrip tab
+         * @param {Selector} element Target element
+         */
         disable: function (element) {
             this._toggleDisabled(element, false);
         },
 
+
+        /**
+         * Reloads a TabStrip tab from ajax request
+         * @param {Selector} element Target element
+         */
         reload: function (element) {
             var that = this;
 
@@ -108,6 +187,19 @@
             });
         },
 
+        /**
+         * Appends a TabStrip item to the end of the tab list.
+         * @param {Selector} tab Target tab, specified as a JSON object. Can also handle an array of such objects.
+         * @example
+         * tabStrip.append(
+         *     [{
+         *         text: "Item 1"
+         *     },
+         *     {
+         *         text: "Item 2"
+         *     }]
+         * );
+         */
         append: function (tab) {
             var that = this,
                 creatures = that._create(tab);
@@ -121,6 +213,21 @@
             that._updateContentElements();
         },
 
+        /**
+         * Inserts a TabStrip item before the specified referenceItem
+         * @param {Selector} item Target tab, specified as a JSON object. Can also handle an array of such objects.
+         * @param {Item} referenceTab A reference tab to insert the new item before
+         * @example
+         * tabStrip.insertBefore(
+         *     [{
+         *         text: "Item 1"
+         *     },
+         *     {
+         *         text: "Item 2"
+         *     }],
+         *     referenceItem
+         * );
+         */
         insertBefore: function (tab, referenceTab) {
             var that = this,
                 creatures = this._create(tab),
@@ -135,6 +242,21 @@
             that._updateContentElements();
         },
 
+        /**
+         * Inserts a TabStrip tab after the specified referenceTab
+         * @param {Selector} item Target tab, specified as a JSON object. Can also handle an array of such objects.
+         * @param {Item} referenceTab A reference tab to insert the new item after
+         * @example
+         * tabStrip.insertAfter(
+         *     [{
+         *         text: "Item 1"
+         *     },
+         *     {
+         *         text: "Item 2"
+         *     }],
+         *     referenceItem
+         * );
+         */
         insertAfter: function (tab, referenceTab) {
             var that = this,
                 creatures = this._create(tab),
@@ -149,6 +271,12 @@
             that._updateContentElements();
         },
 
+        /**
+         * Removes the specified TabStrip item/s
+         * @param {Selector} element Target item selector.
+         * @example
+         * tabStrip.remove("#Item1");
+         */
         remove: function (element) {
             element = $(element);
 

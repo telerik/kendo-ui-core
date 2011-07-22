@@ -1,5 +1,26 @@
 (function ($, window) {
-
+    /**
+     * @name kendo.ui.PanelBar.Description
+     *
+     * @section The PanelBar component initializes hierarchical
+     * data as a multiple level expandable panel bar.
+     *
+     * @exampleTitle Creating a PanelBar from existing HTML
+     * @example
+     * <ul id="panelBar">
+     *     <li>Item 1
+     *         <ul>
+     *             <li>Item 1.1</li>
+     *             <li>Item 1.2</li>
+     *         </ul>
+     *     </li>
+     *     <li>Item 2</li>
+     * </ul>
+     *
+     * @exampleTitle PanelBar initialization
+     * @example
+     * var panelBar = $("#panelBar").kendoPanelBar();
+     */
     var kendo = window.kendo,
         ui = kendo.ui,
         extend = $.extend,
@@ -26,7 +47,19 @@
         animating = false,
         SINGLE = "single";
 
-    var PanelBar = Component.extend({
+    var PanelBar = Component.extend({/** @lends kendo.ui.PanelBar.prototype */
+        /**
+         * Creates a PanelBar instance.
+         * @constructs
+         * @extends kendo.ui.Component
+         * @class PanelBar UI component
+         * @param {Selector} element DOM element
+         * @param {Object} options Configuration options.
+         * @option {Object} [animation] A collection of Animation objects, used to change default animations. A value of false will disable all animations in the component.
+         * @option {Animation} [animation.open] The animation that will be used when expanding items.
+         * @option {Animation} [animation.close] The animation that will be used when collapsing items.
+         * @option {String} [expandMode] <multiple> Specifies if PanelBar should collapse the already expanded item when expanding next item
+         */
         init: function(element, options) {
             element = $(element);
             var that = this,
@@ -58,7 +91,50 @@
                 .delegate(clickableItems, MOUSEENTER + " " + MOUSELEAVE, that._toggleHover)
                 .delegate(disabledItems, CLICK, false);
 
-            that.bind([ EXPAND, COLLAPSE, SELECT, ERROR, CONTENTLOAD ], that.options);
+            that.bind([
+                /**
+                 * Fires before an item is expanded.
+                 * @name kendo.ui.PanelBar#expand
+                 * @event
+                 * @param {Event} e
+                 * @param {Element} e.item The expanding item
+                 */
+                EXPAND,
+                /**
+                 * Fires before an item is collapsed.
+                 * @name kendo.ui.PanelBar#collapse
+                 * @event
+                 * @param {Event} e
+                 * @param {Element} e.item The collapsing item
+                 */
+                COLLAPSE,
+                /**
+                 * Fires before an item is selected.
+                 * @name kendo.ui.PanelBar#select
+                 * @event
+                 * @param {Event} e
+                 * @param {Element} e.item The selected item
+                 */
+                SELECT,
+                /**
+                 * Fires when ajax request results in an error.
+                 * @name kendo.ui.PanelBar#error
+                 * @event
+                 * @param {Event} e
+                 * @param {jqXHR} e.xhr The jqXHR object used to load the content
+                 * @param {String} e.status The returned status.
+                 */
+                ERROR,
+                /**
+                 * Fires when content is fetched from an ajax request.
+                 * @name kendo.ui.PanelBar#contentLoad
+                 * @event
+                 * @param {Event} e
+                 * @param {Element} e.item The selected item
+                 * @param {Element} e.item The loaded content element
+                 */
+                CONTENTLOAD
+            ], that.options);
 
             if (that.options.contentUrls)
                 element.find("> .t-item")
@@ -85,6 +161,13 @@
             expandMode: "multiple"
         },
 
+        /**
+         * Expands the specified PanelBar item/s
+         * @param {Selector} element Target item selector.
+         * @param {Boolean} useAnimation Use this parameter to temporary disable the animation.
+         * @example
+         * panelBar.expand("#Item1");
+         */
         expand: function (element, useAnimation) {
             var that = this,
                 animBackup = {};
@@ -113,6 +196,13 @@
             });
         },
 
+        /**
+         * Collapses the specified PanelBar item/s
+         * @param {Selector} element Target item selector.
+         * @param {Boolean} useAnimation Use this parameter to temporary disable the animation.
+         * @example
+         * panelBar.collapse("#Item1");
+         */
         collapse: function (element, useAnimation) {
             var that = this,
                 animBackup = {};
@@ -144,6 +234,12 @@
                 .toggleClass(disabledClass.substr(1), !enable);
         },
 
+        /**
+         * Selects the specified PanelBar item/s. If called without arguments - returns the selected item.
+         * @param {Selector} element Target item selector.
+         * @example
+         * panelBar.select("#Item1");
+         */
         select: function (element) {
             var that = this;
 
@@ -167,6 +263,11 @@
             });
         },
 
+        /**
+         * Enables/disables a PanelBar item
+         * @param {Selector} element Target element
+         * @param {Boolean} enable Desired state
+         */
         enable: function (element, state) {
             if (state !== false)
                 state = true;
@@ -174,10 +275,29 @@
             this.toggle(element, state);
         },
 
+        /**
+         * Disables a PanelBar item
+         * @param {Selector} element Target element
+         */
         disable: function (element) {
             this.toggle(element, false);
         },
 
+        /**
+         * Appends a PanelBar item in the specified referenceItem
+         * @param {Selector} item Target item, specified as a JSON object. Can also handle an array of such objects.
+         * @param {Item} referenceItem A reference item to append the new item in
+         * @example
+         * panelBar.append(
+         *     [{
+         *         text: "Item 1"
+         *     },
+         *     {
+         *         text: "Item 2"
+         *     }],
+         *     referenceItem
+         * );
+         */
         append: function (item, referenceItem) {
             var that = this,
                 creatures = that._insert(item, referenceItem, referenceItem.find("> .t-group"));
@@ -192,6 +312,21 @@
             creatures.group.height("auto");
         },
 
+        /**
+         * Inserts a PanelBar item before the specified referenceItem
+         * @param {Selector} item Target item, specified as a JSON object. Can also handle an array of such objects.
+         * @param {Item} referenceItem A reference item to insert the new item before
+         * @example
+         * panelBar.insertBefore(
+         *     [{
+         *         text: "Item 1"
+         *     },
+         *     {
+         *         text: "Item 2"
+         *     }],
+         *     referenceItem
+         * );
+         */
         insertBefore: function (item, referenceItem) {
             var that = this,
                 creatures = this._insert(item, referenceItem, referenceItem.parent());
@@ -205,6 +340,21 @@
             creatures.group.height("auto");
         },
 
+        /**
+         * Inserts a PanelBar item after the specified referenceItem
+         * @param {Selector} item Target item, specified as a JSON object. Can also handle an array of such objects.
+         * @param {Item} referenceItem A reference item to insert the new item after
+         * @example
+         * panelBar.insertAfter(
+         *     [{
+         *         text: "Item 1"
+         *     },
+         *     {
+         *         text: "Item 2"
+         *     }],
+         *     referenceItem
+         * );
+         */
         insertAfter: function (item, referenceItem) {
             var that = this,
                 creatures = this._insert(item, referenceItem, referenceItem.parent());
@@ -218,6 +368,12 @@
             creatures.group.height("auto");
         },
 
+        /**
+         * Removes the specified PanelBar item/s
+         * @param {Selector} element Target item selector.
+         * @example
+         * panelBar.remove("#Item1");
+         */
         remove: function (element) {
             element = $(element);
 
