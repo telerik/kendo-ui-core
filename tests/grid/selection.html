@@ -28,7 +28,7 @@
             }
 
             function setup(options) {
-                options = $.extend({ dataSource: [{foo: 1, bar: 1}, {foo: 2, bar:2}, {foo: 3, bar:3}] }, options);
+                options = $.extend({ dataSource: [{foo: 1, bar: 1}, {foo: 2, bar:2}, {foo: 3, bar:3}], navigatable: true }, options);
                 return new Grid(table, options);
             }
 

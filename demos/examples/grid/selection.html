@@ -13,7 +13,7 @@
         <script src="../../../src/jquery.js"></script>
         <script src="../../../src/kendo.core.js"></script>
         <script src="../../../src/kendo.data.js"></script>
-        <script src="../../../src/kendo.pageable.js"></script>        
+        <script src="../../../src/kendo.pageable.js"></script>
         <script src="../../../src/kendo.selectable.js"></script>
         <script src="../../../src/kendo.grid.js"></script>
         <script src="../js/people.js"></script>
@@ -35,13 +35,14 @@
             <script type="text/javascript">
                 $(document).ready(function() {
                     $("#rowSelection").kendoGrid({
-                        dataSource: {                            
+                        dataSource: {
                             data: createRandomData(20),
                             pageSize: 5
                         },
                         selectable: "multiple",
                         pageable: true,
                         scrollable: false,
+                        navigatable: true,
                         columns: [
                             {
                                 field: "FirstName",
@@ -59,13 +60,14 @@
                     });
 
                     $("#cellSelection").kendoGrid({
-                        dataSource: {                            
+                        dataSource: {
                             data: createRandomData(20),
                             pageSize: 5
                         },
                         selectable: "multiple cell",
                         pageable: true,
                         scrollable: false,
+                        navigatable: true,
                         columns: [
                             {
                                 field: "FirstName",
@@ -81,7 +83,7 @@
                             }
                         ]
                     });
-                });                
+                });
             </script>
         </div>
         <!-- tools -->
