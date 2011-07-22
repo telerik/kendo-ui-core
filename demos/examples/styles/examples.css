@@ -416,6 +416,36 @@ body
     background-position: -20px -530px;
 }
 
+.dataSourceIcon
+{
+    background-position: -50px -200px;
+}
+
+.templatesIcon
+{
+    background-position: -50px -230px;
+}
+
+.dragDropIcon
+{
+    background-position: -50px -260px;
+}
+
+#exampleHead .dataSourceIcon
+{
+    background-position: -70px -200px;
+}
+
+#exampleHead .templatesIcon
+{
+    background-position: -70px -230px;
+}
+
+#exampleHead .dragDropIcon
+{
+    background-position: -70px -260px;
+}
+
 #content
 {
     display: block;
@@ -445,13 +475,11 @@ body
 
 #example:after
 {
-    content: ".";
-    clear: both;
+    content: "\A0";
     display: block;
     overflow: hidden;
+    width: 100%;
     height: 0;
-    line-height: 0;
-    font-size: 0;
 }
 
 #example h3
@@ -617,14 +645,13 @@ pre.prettyprint
 .configuration input
 {
     vertical-align: middle;
-    line-height: 24px;
+    line-height: 20px;
     margin-top: 0;
 }
 
 .configuration input
 {
     width: 40px;
-    height: 18px;
     float: right;
 }
 
