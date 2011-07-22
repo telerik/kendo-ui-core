@@ -217,7 +217,7 @@
 
                 $("#exampleBody").show();
             };
-            
+
             if ($("#exampleBody").length)
                 $.get(url)
                     .complete(function() {
@@ -701,6 +701,10 @@ var categories = {
                 {
                     text: "Using KnockoutJS with Kendo",
                     url: "integration/index.html"
+                },
+                {
+                    text: "Using jQuery templates with Kendo",
+                    url: "integration/jquery-templates.html"
                 }
             ]
         }

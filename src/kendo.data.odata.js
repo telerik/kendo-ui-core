@@ -1,15 +1,15 @@
 (function($) {
     var kendo = window.kendo,
         odataFilters = {
-            "eq": "eq",
-            "neq": "ne",
-            "gt": "gt",
-            "gte": "ge",
-            "lt": "lt",
-            "lte": "le",
-            "contains" : "substringof",
-            "endswith": "endswith",
-            "startswith": "startswith"
+            eq: "eq",
+            neq: "ne",
+            gt: "gt",
+            gte: "ge",
+            lt: "lt",
+            lte: "le",
+            contains : "substringof",
+            endswith: "endswith",
+            startswith: "startswith"
         };
 
     $.extend(true, kendo.data, {
@@ -42,7 +42,7 @@
 
                     if ("sort" in data) {
                         result.push("$orderby=" + $.map(data.sort, function(value) {
-                            var order = value.field;
+                            var order = value.field.replace(/\./g, "/");
 
                             if (value.dir === "desc") {
                                 order += " desc";
@@ -53,25 +53,23 @@
                     }
 
                     if ("filter" in data) {
-                        var format, valueFormat,
-                            filter = data.filter[0],
-                            value = filter.value,
-                            valueFormat = typeof value === "string" ? "'{1}'" : "{1}",
-                            odataFilter = odataFilters[filter.operator];
+                        result.push("$filter=" + $.map(data.filter, function(filter) {
+                            var value = filter.value,
+                                field = filter.field.replace(/\./g, "/"),
+                                format = typeof value === "string" ? "'{1}'" : "{1}";
 
-                        if (odataFilter && value !== undefined) {
-                            format = "$filter=";
+                            filter = odataFilters[filter.operator];
 
-                            if (odataFilter.length > 3) {
-                                format += "{0}(" + valueFormat + ",{2})";
-                            } else {
-                                format += "{2} {0} " + valueFormat;
+                            if (filter && value !== undefined) {
+                                if (filter.length > 3) {
+                                    format = "{0}(" + format + ",{2})";
+                                } else {
+                                    format = "{2} {0} " + format;
+                                }
+                                return kendo.format(format, filter, value, field);
                             }
-
-                            result.push(kendo.format(format, odataFilter, value, filter.field));
-                        }
+                        }).join(" and "));
                     }
-
                     return result.join("&");
                 }
             }

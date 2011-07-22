@@ -263,24 +263,32 @@
         this.data = data || [];
     }
 
-    Query.expandSort = function(field, dir) {
+    function expandSort(field, dir) {
+        if (field) {
         var descriptor = typeof field === STRING ? { field: field, dir: dir } : field,
             descriptors = isArray(descriptor) ? descriptor : (descriptor !== undefined ? [descriptor] : []);
 
         return grep(descriptors, function(d) { return !!d.dir; });
+        }
     }
-    Query.expandFilter = function(expressions) {
+
+    function expandFilter(expressions) {
+        if (expressions) {
+            return expressions = isArray(expressions) ? expressions : [expressions];
+        }
+    }
+
+    function expandAggregates(expressions) {
         return expressions = isArray(expressions) ? expressions : [expressions];
     }
-    Query.expandAggregates = function(expressions) {
-        return expressions = isArray(expressions) ? expressions : [expressions];
-    }
-    Query.expandGroup = function(field, dir) {
+
+    function expandGroup(field, dir) {
        var descriptor = typeof field === STRING ? { field: field, dir: dir } : field,
            descriptors = isArray(descriptor) ? descriptor : (descriptor !== undefined ? [descriptor] : []);
 
         return map(descriptors, function(d) { return { field: d.field, dir: d.dir || "asc", aggregates: d.aggregates }; });
     }
+
     Query.prototype = {
         toArray: function () {
             return this.data;
@@ -309,7 +317,7 @@
         sort: function(field, dir) {
             var idx,
                 length,
-                descriptors = Query.expandSort(field, dir),
+                descriptors = expandSort(field, dir),
                 comparers = [];
 
             if (descriptors.length) {
@@ -323,11 +331,11 @@
             return this;
         },
         filter: function(expressions) {
-            var predicate = Filter.create(Query.expandFilter(expressions));
+            var predicate = Filter.create(expandFilter(expressions));
             return new Query(predicate(this.data));
         },
         group: function(descriptors, allData) {
-            descriptors =  Query.expandGroup(descriptors || []);
+            descriptors =  expandGroup(descriptors || []);
             allData = allData || this.data;
 
             var that = this,
@@ -446,11 +454,12 @@
             return accumulator;
         }
     };
+
     function process(data, options) {
         var query = new Query(data),
             options = options || {},
             group = options.group,
-            sort = Query.expandSort(options.sort).concat(Query.expandGroup(group || [])),
+            sort = expandSort(options.sort || []).concat(expandGroup(group || [])),
             total,
             filter = options.filter,
             skip = options.skip,
@@ -711,9 +720,9 @@
                 _view: [],
                 _pageSize: options.pageSize,
                 _page: options.page  || (options.pageSize ? 1 : undefined),
-                _sort: options.sort,
-                _filter: options.filter,
-                _group: Query.expandGroup(options.group),
+                _sort: expandSort(options.sort),
+                _filter: expandFilter(options.filter),
+                _group: expandGroup(options.group),
                 _aggregates: options.aggregates
             });
 
@@ -1132,18 +1141,18 @@
                 }
 
                 if (options.sort) {
-                    that._sort = options.sort = Query.expandSort(options.sort);
+                    that._sort = options.sort = expandSort(options.sort);
                 }
 
                 if (options.filter) {
-                    that._filter = options.filter = Query.expandFilter(options.filter);
+                    that._filter = options.filter = expandFilter(options.filter);
                 }
 
                 if (options.group) {
-                    that._group = options.group = Query.expandGroup(options.group);
+                    that._group = options.group = expandGroup(options.group);
                 }
                 if (options.aggregates) {
-                    that._aggregates = options.aggregates = Query.expandAggregates(options.aggregates);
+                    that._aggregates = options.aggregates = expandAggregates(options.aggregates);
                 }
             }
 
