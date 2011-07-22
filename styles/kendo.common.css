@@ -46,7 +46,7 @@ html body .t-button
 {
 	display: inline-block;
 	margin: 0;
-	padding: 1px 6px 2px;
+	padding: 1px 6px 1px;
 	border-width: 1px;
 	border-style: solid;
 	font-family: inherit;
@@ -684,7 +684,8 @@ div.t-window-content
     display: block;
     overflow: hidden;
     width: 100%;
-    height: 0;}
+    height: 0;
+}
 
 .t-menu .t-item .t-item,
 .t-menu-vertical .t-item

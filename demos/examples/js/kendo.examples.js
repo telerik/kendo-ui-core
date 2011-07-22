@@ -630,59 +630,75 @@ var categories = {
         }
     ],
     framework: [
-        { text: "DataSource", items: [
-            {
-                text: "Basic usage",
-                url: "datasource/index.html"
-            },
-            {
-                text: "Binding to remote data",
-                url: "datasource/remote-data.html"
-            },
-            {
-                text: "Binding to XML",
-                url: "datasource/xml-data.html"
-            },
-            {
-                text: "Remote data operations",
-                url: "datasource/remote-operations.html"
-            },
-            {
-                text: "Local data operations",
-                url: "datasource/local-operations.html"
-            },
-            {
-                text: "Shared DataSource",
-                url: "datasource/shared.html"
-            },
-        ] },
-        { text: "Templates", items: [
-            {
-                text: "Basic usage",
-                url: "templates/index.html"
-            },
-            {
-                text: "Expressions",
-                url: "templates/expressions.html"
-            }
-        ] },
-        { text: "Drag & Drop", items: [
-            {
-                text: "Basic usage",
-                url: "dragdrop/index.html"
-            },
-            {
-                text: "Events",
-                url: "dragdrop/events.html"
-            }
-        ] }
+        {
+            text: "DataSource",
+            spriteCssClass: "dataSourceIcon",
+            items: [
+                {
+                    text: "Basic usage",
+                    url: "datasource/index.html"
+                },
+                {
+                    text: "Binding to remote data",
+                    url: "datasource/remote-data.html"
+                },
+                {
+                    text: "Binding to XML",
+                    url: "datasource/xml-data.html"
+                },
+                {
+                    text: "Remote data operations",
+                    url: "datasource/remote-operations.html"
+                },
+                {
+                    text: "Local data operations",
+                    url: "datasource/local-operations.html"
+                },
+                {
+                    text: "Shared DataSource",
+                    url: "datasource/shared.html"
+                }
+            ]
+        },
+        {
+            text: "Templates",
+            spriteCssClass: "templatesIcon",
+            items: [
+                {
+                    text: "Basic usage",
+                    url: "templates/index.html"
+                },
+                {
+                    text: "Expressions",
+                    url: "templates/expressions.html"
+                }
+            ]
+        },
+        {
+            text: "Drag & Drop",
+            spriteCssClass: "dragDropIcon",
+            items: [
+                {
+                    text: "Basic usage",
+                    url: "dragdrop/index.html"
+                },
+                {
+                    text: "Events",
+                    url: "dragdrop/events.html"
+                }
+            ]
+        }
     ],
     integration: [
-        { text: "Integration Examples", items: [
-            {
-                text: "Using KnockoutJS with Kendo",
-                url: "integration/index.html"
-            }
-        ] }
+        {
+            text: "Integration",
+            spriteCssClass: "integrationIcon",
+            items: [
+                {
+                    text: "Using KnockoutJS with Kendo",
+                    url: "integration/index.html"
+                }
+            ]
+        }
     ]
 };
