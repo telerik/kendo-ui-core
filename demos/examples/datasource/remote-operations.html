@@ -23,15 +23,8 @@
         <div class="description">Remote data operations</div>
         <!-- description -->
         <div id="example" class="t-content">
-            <style scoped>
-                .title
-                {
-                    float:left;
-                    width: 200px;
-                }
-            </style>
-            <div id="results">
-            </div>
+            <div id="results"></div>
+
             <script id="template" type="text/x-kendo-template">
                 <div class="title">
                     <# if (BoxArt.LargeUrl) { #>
@@ -41,6 +34,7 @@
                     Average Rating: <span><#= AverageRating #></span>
                 </div>
             </script>
+
             <script>
                 // create a template using the above definition
                 var template = kendo.template($("#template").html());
@@ -84,6 +78,7 @@
                     });
                 });
             </script>
+
             <div class="configuration">
                 <div>
                     <label>Page: <input type="number" value="1" id="page" min="1" /></label>
@@ -106,6 +101,13 @@
                     <button class="t-button" id="apply">Apply</button>
                 </div>
             </div>
+
+            <style scoped>
+                .title {
+                    float: left;
+                    width: 200px;
+                }
+            </style>
         </div>
         <!-- tools -->
         <!-- tools -->
