@@ -7,8 +7,39 @@
     /**
      * @name kendo.data.DataSource.Description
      *
-     * @section The DataSource separates the way you fetch data from the way you use the data.
-     */
+     * @section The DataSource component is an abstraction for using local (arrays of JavaScript objects) or remote (XML, JSON, JSONP) data.
+     * It fully supports the CRUD (Create, Read, Update and Destroy) data operations. The DataSource also provides means to sort, page, filter, group and aggregate (both locally and server side).
+     * @exampleTitle Creating a DataSource bound to local data (array of JavaScript objects)
+     * @example
+     * var movies = [ {
+    *       title: "Star Wars: A New Hope",
+    *       year: 1977
+    *    }, {
+    *      name: "Star Wars: The Empire Strikes Back",
+    *      age: 1980
+    *    }, {
+    *      name: "Star Wars: Return of the Jedi",
+    *      age: 1983
+    *    }
+    * ];
+    * var localDataSource = new kendo.data.DataSource(movies);
+    * @exampleTitle Binding to remote data service (Twitter)
+    * @example
+    *var dataSource = new kendo.data.DataSource({
+    *    transport: {
+    *        read: {
+    *            url: "http://search.twitter.com/search.json", // the remove service url
+    *            dataType: "jsonp", // JSONP (JSON with padding) is required for cross-domain AJAX
+    *            data: {
+    *                q: "html5" //additional parameters sent to the remote service
+    *            }
+    *        }
+    *    },
+    *    schema: { // describe the result format
+    *        data: "results" // the data which the data source will be bound to is in the "results" field
+    *    }
+    *});
+    */
     var extend = $.extend,
         proxy = $.proxy,
         isFunction = $.isFunction,
@@ -1421,10 +1452,7 @@
         }
     });
 
-    /**
-     * @name kendo.data.DataSource.create
-     * @param {Object} options
-     */
+    /** @ignore */
     DataSource.create = function(options) {
         options = isArray(options) ? { data: options } : options;
 
