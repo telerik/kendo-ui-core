@@ -62,7 +62,59 @@
         ZERO_THRESHOLD = 0.2;
 
     // Chart ==================================================================
-    var Chart = Component.extend({
+    /**
+     * @name kendo.ui.Chart.Description
+     *
+     * @section The chart component uses modern browser technologies to
+     * deliver high-quality data visualizations.
+     * All graphics are rendered using SVG with a fallback to VML for legacy browsers.
+     *
+     * <p>
+     * Key features:
+     * </p>
+     * <ul>
+     *    <li>Bar Chart </li>
+     *    <li>Column Chart </li>
+     *    <li>Line Chart </li>
+     *    <li>Standards based, no plug-ins required</li>
+     * </ul>
+     * @exampleTitle Bar Chart with inline data
+     * @example
+     * <!-- HTML -->
+     * <div id="chart" style="width: 600px; 400px"> </div>
+     * <script type="text/javascript">
+     *    $(document).ready(function() {
+     *        $("#chart").kendoChart({
+     *            title: {
+     *                text: "Spain electricity production (GWh)"
+     *            },
+     *            series:
+     *            [{
+     *                data: [31807, 43864, 26270],
+     *                name: "Hydro"
+     *            }],
+     *            categoryAxis: {
+     *                categories: ["2000", "2001", "2002"]
+     *            }
+     *        });
+     *    });
+     * </script>
+     */
+    var Chart = Component.extend(/** @lends kendo.ui.Chart.prototype */{
+        /**
+         * @constructs
+         * @extends kendo.ui.Component
+         * @param {DomElement} element DOM element
+         * @param {Object} options Configuration options.
+         * @option {String} [theme] <default> Sets Chart theme.
+         * @option {Object} [title]
+         * @option {Object} [legend]
+         * @option {Object} [valueAxis]
+         * @option {Object} [categoryAxis]
+         * @option {Object} [seriesDefaults]
+         * @option {Object} [series]
+         * @option {Object} [chartArea]
+         */
         init: function(element, options) {
             var chart = this,
                 theme;
@@ -89,7 +141,24 @@
             applySeriesDefaults(chart.options);
 
             chart.bind([
+                /**
+                 * Fires when the chart has received data from the data source
+                 * and is about to render it.
+                 * @name kendo.ui.Chart#dataBound
+                 * @event
+                 * @param {Event} e
+                 */
                 DATABOUND,
+
+                /**
+                 * Fires when chart series are clicked.
+                 * @name kendo.ui.Chart#seriesClick
+                 * @event
+                 * @param {Event} e
+                 * @param {Object} e.value The data point value.
+                 * @param {Object} e.series The clicked series.
+                 * @param {Object} e.element The DOM element of the data point.
+                 */
                 SERIES_CLICK
             ], chart.options);
 
@@ -126,8 +195,14 @@
             series: []
         },
 
-        types: { },
-
+        /**
+         * Reloads the data and repaints the chart.
+         * @example
+         * var chart = $("#chart").data("kendoChart");
+         *
+         * // refreshes the chart
+         * chart.refresh();
+         */
         refresh: function() {
             var chart = this;
 
@@ -3034,7 +3109,7 @@
         this.view = view;
     }
 
-    SVGOverlayDecorator.prototype = {
+    SVGOverlayDecorator.prototype = /** @ignore */ {
         decorate: function(element) {
             var decorator = this,
                 view = decorator.view,
@@ -3069,7 +3144,7 @@
         this.view = view;
     }
 
-    SVGPaintDecorator.prototype = {
+    SVGPaintDecorator.prototype = /** @ignore */ {
         decorate: function(element) {
             var decorator = this,
                 options = element.options;
@@ -3378,7 +3453,7 @@
         this.view = view;
     }
 
-    VMLOverlayDecorator.prototype = {
+    VMLOverlayDecorator.prototype = /** @ignore */ {
         decorate: function(element) {
             var options = element.options,
                 overlayName = options ? options.overlay : "",
@@ -3412,7 +3487,7 @@
         this.view = view;
     }
 
-    VMLGradientDecorator.prototype = {
+    VMLGradientDecorator.prototype = /** @ignore */ {
         decorate: function(element) {
             var decorator = this,
                 view = decorator.view,
@@ -3673,7 +3748,7 @@
         color.b = color.normalizeByte(color.b);
     };
 
-    Color.prototype = {
+    Color.prototype = /** @ignore */ {
         toHex: function() {
             var color = this,
                 pad = color.padDigit,
@@ -4099,7 +4174,7 @@
                 width: 1
             }
         },
-        seriesColors: ["#e34a00", "#ff8517", "#ffb800", "#7bd2f6", "#0098ee", "#0069a5"],
+        seriesColors: ["#0069a5", "#0098ee", "#7bd2f6", "#ffb800", "#ff8517", "#e34a00"],
         categoryAxis: {
             line: {
                 color: "#9aabb2"

@@ -61,7 +61,7 @@
          * Controls whether to show the list of uploaded files.
          * Hiding the list can be useful when you want to fully customize the UI.
          * Use the client-side events to build your own UI.
-         * @option {Object} [async] <null>
+         * @option {Object} [async]
          * Configures the upload for asynchronous operation.
          * <dl>
          *     <dt>
@@ -197,7 +197,7 @@
                 UPLOAD,
 
                 /**
-                 * Fires when an upload / remove operation has been completed successfully. 
+                 * Fires when an upload / remove operation has been completed successfully.
                  * @name kendo.ui.Upload#success
                  * @event
                  * @param {Event} e
@@ -211,9 +211,9 @@
                  *      </li>
                  *     <li>size - the file size in bytes (null if not available)</li>
                  * </ul>
-                 * @param {String} operation - "upload" or "remove".
-                 * @param {String} response - the response object returned by the server.
-                 * @param {Object} XMLHttpRequest
+                 * @param {String} e.operation - "upload" or "remove".
+                 * @param {String} e.response - the response object returned by the server.
+                 * @param {Object} e.XMLHttpRequest
                  * This is either the original XHR used for the operation or a stub containing:
                  * <ul>
                  *     <li>responseText</li>
@@ -239,8 +239,8 @@
                  *      </li>
                  *     <li>size - the file size in bytes (null if not available)</li>
                  * </ul>
-                 * @param {String} operation - "upload" or "remove".
-                 * @param {Object} XMLHttpRequest
+                 * @param {String} e.operation - "upload" or "remove".
+                 * @param {Object} e.XMLHttpRequest
                  * This is either the original XHR used for the operation or a stub containing:
                  * <ul>
                  *     <li>responseText</li>
@@ -293,7 +293,7 @@
                  *      </li>
                  *     <li>size - the file size in bytes (null if not available)</li>
                  * </ul>
-                 * @param {Object} data - undefined by default,
+                 * @param {Object} e.data - undefined by default,
                  * but can be set to a custom object to pass information to the save handler.
                  */
                 REMOVE], that.options);

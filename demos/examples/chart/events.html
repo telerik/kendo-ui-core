@@ -36,6 +36,11 @@
                     sort: {
                         field: "year",
                         dir: "desc"
+                    },
+                    filter: {
+                        field: "year",
+                        operator: ">=",
+                        value: 2005
                     }
                 });
 
@@ -48,11 +53,10 @@
                         },
                         seriesDefaults: {
                             type: "bar",
-                            bar: {
-                                stack: true
-                            },
                             labels: {
-                                visible: true
+                                visible: true,
+                                position: "insideEnd",
+                                format: "{0:#,##0}"
                             }
                         },
                         series:
@@ -72,7 +76,8 @@
                         valueAxis: {
                             labels: {
                                 format: "{0:#,##0}"
-                            }
+                            },
+                            majorUnit: 10000
                         },
                         seriesClick: seriesClick
                     });
