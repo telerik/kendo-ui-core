@@ -111,999 +111,268 @@
          * @option {String} [title.text] The title of the chart.
          * @option {String} [title.font] <"16px Verdana, sans-serif"> The font style of the title.
          * @option {String} [title.position] <"top"> The positions of the title.
-         * <dl>
-         *      <dt>
-         *           "top"
-         *      </dt>
-         *      <dd>
-         *           The title is positioned on the top.
-         *      </dd>
-         *      <dt>
-         *           "bottom"
-         *      </dt>
-         *      <dd>
-         *           The title is positioned on the bottom.
-         *      </dd>
-         * </dl>
-         * <dl>
-         *     <dt>
-         *         align: {String}
-         *     </dt>
-         *     <dd>
-         *         The alignment of the title. Default alignment is: "center"
-         *         <dl>
-         *              <dt>
-         *                   "left"
-         *              </dt>
-         *              <dd>
-         *                   The text is aligned to the left.
-         *              </dd>
-         *              <dt>
-         *                   "center"
-         *              </dt>
-         *              <dd>
-         *                   The text is aligned to the middle.
-         *              </dd>
-         *              <dt>
-         *                   "right"
-         *              </dt>
-         *              <dd>
-         *                   The text is aligned to the right.
-         *              </dd>
-         *         </dl>
-         *     </dd>
-         *     <dt>
-         *         visible: {Boolean}
-         *     </dt>
-         *     <dd>
-         *         The visibility of the title. Default visibility is: false
-         *     </dd>
-         *     <dt>
-         *         margin: {Number}
-         *     </dt>
-         *     <dd>
-         *         The margin of the title. Default margin is: 5
-         *     </dd>
-         *     <dt>
-         *         margin: {Object}
-         *     </dt>
-         *     <dd>
-         *         The margin of the title.
-         *         <dl>
-         *              <dt>
-         *                   top: {Number}
-         *              </dt>
-         *              <dd>
-         *                   The top margin.
-         *              </dd>
-         *              <dt>
-         *                   right: {Number}
-         *              </dt>
-         *              <dd>
-         *                   The right margin.
-         *              </dd>
-         *              <dt>
-         *                   bottom: {Number}
-         *              </dt>
-         *              <dd>
-         *                   The bottom margin.
-         *              </dd>
-         *              <dt>
-         *                   left: {Number}
-         *              </dt>
-         *              <dd>
-         *                   The left margin.
-         *              </dd>
-         *         </dl>
-         *     </dd>
-         *     <dt>
-         *         padding: {Number}
-         *     </dt>
-         *     <dd>
-         *         The padding of the title. Default padding is: 5
-         *     </dd>
-         *     <dt>
-         *         padding: {Object}
-         *     </dt>
-         *     <dd>
-         *         The padding of the title.
-         *         <dl>
-         *              <dt>
-         *                   top: {Number}
-         *              </dt>
-         *              <dd>
-         *                   The top padding.
-         *              </dd>
-         *              <dt>
-         *                   right: {Number}
-         *              </dt>
-         *              <dd>
-         *                   The right padding.
-         *              </dd>
-         *              <dt>
-         *                   bottom: {Number}
-         *              </dt>
-         *              <dd>
-         *                   The bottom padding.
-         *              </dd>
-         *              <dt>
-         *                   left: {Number}
-         *              </dt>
-         *              <dd>
-         *                   The left padding.
-         *              </dd>
-         *         </dl>
-         *     </dd>
-         *     <dt>
-         *         border: {Object}
-         *     </dt>
-         *     <dd>
-         *         The border of the title.
-         *         <dl>
-         *              <dt>
-         *                   width: {Number}
-         *              </dt>
-         *              <dd>
-         *                   The width of the border. Default width is: 0
-         *              </dd>
-         *              <dt>
-         *                   color: {String}
-         *              </dt>
-         *              <dd>
-         *                   The color of the border. Default color is: "black"
-         *              </dd>
-         *         </dl>
-         *     </dd>
-         * </dl>
-         * @option {Object} [legend]
-         *The chart legend configuration options.
-         *<dl>
-         *     <dt>
-         *         font: {String}
-         *     </dt>
-         *     <dd>
-         *         The font style of the legend. Default font style is: "12px Verdana, sans-serif"
-         *     </dd>
-         *     <dt>
-         *         position: {String}
-         *     </dt>
-         *     <dd>
-         *         The positions of the legend. Default position is: "right"
-         *         <dl>
-         *              <dt>
-         *                   "top"
-         *              </dt>
-         *              <dd>
-         *                   The legend is positioned on the top.
-         *              </dd>
-         *              <dt>
-         *                   "bottom"
-         *              </dt>
-         *              <dd>
-         *                   The legend is positioned on the bottom.
-         *              </dd>
-         *              <dt>
-         *                   "left"
-         *              </dt>
-         *              <dd>
-         *                   The legend is positioned on the left.
-         *              </dd>
-         *              <dt>
-         *                   "right"
-         *              </dt>
-         *              <dd>
-         *                   The legend is positioned on the right.
-         *              </dd>
-         *              <dt>
-         *                   "custom"
-         *              </dt>
-         *              <dd>
-         *                   The legend is positioned using OffsetX and OffsetY.
-         *              </dd>
-         *         </dl>
-         *     </dd>
-         *     <dt>
-         *          offsetX: {Number}
-         *     </dt>
-         *     <dd>
-         *          The X offset from its position. Default X offset is: 0
-         *     </dd>
-         *     <dt>
-         *          offsetY: {Number}
-         *     </dt>
-         *     <dd>
-         *          The Y offset from its position. Default Y offset is: 0
-         *     </dd>
-         *     </dd>
-         *     <dt>
-         *         visible: {Boolean}
-         *     </dt>
-         *     <dd>
-         *         The visibility of the legend. Default visibility is: true
-         *     </dd>
-         *     <dt>
-         *         margin: {Number}
-         *     </dt>
-         *     <dd>
-         *         The margin of the legend. Default margin is: 10
-         *     </dd>
-         *     <dt>
-         *         margin: {Object}
-         *     </dt>
-         *     <dd>
-         *         The margin of the legend.
-         *         <dl>
-         *              <dt>
-         *                   top: {Number}
-         *              </dt>
-         *              <dd>
-         *                   The top margin.
-         *              </dd>
-         *              <dt>
-         *                   right: {Number}
-         *              </dt>
-         *              <dd>
-         *                   The right margin.
-         *              </dd>
-         *              <dt>
-         *                   bottom: {Number}
-         *              </dt>
-         *              <dd>
-         *                   The bottom margin.
-         *              </dd>
-         *              <dt>
-         *                   left: {Number}
-         *              </dt>
-         *              <dd>
-         *                   The left margin.
-         *              </dd>
-         *         </dl>
-         *     </dd>
-         *     <dt>
-         *         padding: {Number}
-         *     </dt>
-         *     <dd>
-         *         The padding of the legend. Default padding is: 5
-         *     </dd>
-         *     <dt>
-         *         padding: {Object}
-         *     </dt>
-         *     <dd>
-         *         The padding of the legend.
-         *         <dl>
-         *              <dt>
-         *                   top: {Number}
-         *              </dt>
-         *              <dd>
-         *                   The top padding.
-         *              </dd>
-         *              <dt>
-         *                   right: {Number}
-         *              </dt>
-         *              <dd>
-         *                   The right padding.
-         *              </dd>
-         *              <dt>
-         *                   bottom: {Number}
-         *              </dt>
-         *              <dd>
-         *                   The bottom padding.
-         *              </dd>
-         *              <dt>
-         *                   left: {Number}
-         *              </dt>
-         *              <dd>
-         *                   The left padding.
-         *              </dd>
-         *         </dl>
-         *     </dd>
-         *     <dt>
-         *         border: {Object}
-         *     </dt>
-         *     <dd>
-         *         The border of the legend.
-         *         <dl>
-         *              <dt>
-         *                   width: {Number}
-         *              </dt>
-         *              <dd>
-         *                   The width of the border. Default width is: 0
-         *              </dd>
-         *              <dt>
-         *                   color: {String}
-         *              </dt>
-         *              <dd>
-         *                   The color of the border. Default color is: "black"
-         *              </dd>
-         *         </dl>
-         *     </dd>
-         * </dl>
-         * @option {Object} [valueAxis]
-         *The value axis configuration options.
-         *<dl>
-         *     <dt>
-         *         categories: {array}
-         *     </dt>
-         *     <dd>
-         *         Categories are used instead of numbers for that axis.
-         *     </dd>
-         *     <dt>
-         *         axisCrossingValue: {Number}
-         *     </dt>
-         *     <dd>
-         *         Value at which the first perpendicular axis crosses this axis. Default value is: 0
-         *     </dd>
-         *     <dt>
-         *         minorTickSize: {Number}
-         *     </dt>
-         *     <dd>
-         *         The axis minor tick size. Default minor tick size is: 3
-         *     </dd>
-         *     <dt>
-         *         minorTickType: {String}
-         *     </dt>
-         *     <dd>
-         *         The minor tick type.
-         *         <dl>
-         *              <dt>
-         *                   "outside"
-         *              </dt>
-         *              <dd>
-         *                   The tick is drawn on the outer side of the axis.
-         *              </dd>
-         *              <dt>
-         *                   "none"
-         *              </dt>
-         *              <dd>
-         *                   No tick is drawn.
-         *              </dd>
-         *         </dl>
-         *     </dd>
-         *     <dt>
-         *         majorTickSize: {Number}
-         *     </dt>
-         *     <dd>
-         *         The axis major tick size. Default major tick size is: 4
-         *     </dd>
-         *     <dt>
-         *         majorTickType: {String}
-         *     </dt>
-         *     <dd>
-         *         The major tick type.
-         *         <dl>
-         *              <dt>
-         *                   "outside"
-         *              </dt>
-         *              <dd>
-         *                   The tick is drawn on the outer side of the axis.
-         *              </dd>
-         *              <dt>
-         *                   "none"
-         *              </dt>
-         *              <dd>
-         *                   No tick is drawn.
-         *              </dd>
-         *         </dl>
-         *     </dd>
-         *     <dt>
-         *         minorGridLines: {Object}
-         *     </dt>
-         *     <dd>
-         *         Configures the minor grid lines.
-         *         <dl>
-         *              <dt>
-         *                   width: {Number}
-         *              </dt>
-         *              <dd>
-         *                   The width of the lines. Default width is: 1
-         *              </dd>
-         *              <dt>
-         *                   color: {String}
-         *              </dt>
-         *              <dd>
-         *                   The color of the lines. Default color is: "black"
-         *              </dd>
-         *              <dt>
-         *                   visible: {Boolean}
-         *              </dt>
-         *              <dd>
-         *                   The visibility of the lines. Default visibility is: false
-         *              </dd>
-         *         </dl>
-         *     </dd>
-         *     <dt>
-         *         majorGridLines: {Object}
-         *     </dt>
-         *     <dd>
-         *         Configures the major grid lines.
-         *         <dl>
-         *              <dt>
-         *                   width: {Number}
-         *              </dt>
-         *              <dd>
-         *                   The width of the lines. Default width is: 1
-         *              </dd>
-         *              <dt>
-         *                   color: {String}
-         *              </dt>
-         *              <dd>
-         *                   The color of the lines. Default color is: "black"
-         *              </dd>
-         *              <dt>
-         *                   visible: {Boolean}
-         *              </dt>
-         *              <dd>
-         *                   The visibility of the lines. Default visibility is: true
-         *              </dd>
-         *         </dl>
-         *     </dd>
-         *     <dt>
-         *         line: {Object}
-         *     </dt>
-         *     <dd>
-         *         Configures the axis line.
-         *         <dl>
-         *              <dt>
-         *                   width: {Number}
-         *              </dt>
-         *              <dd>
-         *                   The width of the line. Default width is: 1
-         *              </dd>
-         *              <dt>
-         *                   color: {String}
-         *              </dt>
-         *              <dd>
-         *                   The color of the line. Default color is: "black"
-         *              </dd>
-         *              <dt>
-         *                   visible: {Boolean}
-         *              </dt>
-         *              <dd>
-         *                   The visibility of the line. Default visibility is: true
-         *              </dd>
-         *         </dl>
-         *     </dd>
-         *     <dt>
-         *         labels: {Object}
-         *     </dt>
-         *     <dd>
-         *         Configures the axis labels.
-         *         <dl>
-         *              <dt>
-         *                   font: {String}
-         *              </dt>
-         *              <dd>
-         *                   The font style of the labels. Default font style is: "12px Verdana, sans-serif"
-         *              </dd>
-         *              <dt>
-         *                   visible: {Boolean}
-         *              </dt>
-         *              <dd>
-         *                   The visibility of the labels. Default visibility is: true
-         *              </dd>
-         *              <dt>
-         *                   margin: {Number}
-         *              </dt>
-         *              <dd>
-         *                   The margin of the labels. Default margin is: 0
-         *              </dd>
-         *              <dt>
-         *                   margin: {Object}
-         *              </dt>
-         *              <dd>
-         *                   The margin of the labels.
-         *              <dl>
-         *                  <dt>
-         *                       top: {Number}
-         *                  </dt>
-         *                  <dd>
-         *                       The top margin.
-         *                  </dd>
-         *                  <dt>
-         *                       right: {Number}
-         *                  </dt>
-         *                  <dd>
-         *                       The right margin.
-         *                  </dd>
-         *                  <dt>
-         *                       bottom: {Number}
-         *                  </dt>
-         *                  <dd>
-         *                       The bottom margin.
-         *                  </dd>
-         *                  <dt>
-         *                       left: {Number}
-         *                  </dt>
-         *                  <dd>
-         *                       The left margin.
-         *                  </dd>
-         *              </dl>
-         *
-         *              <dt>
-         *                   padding: {Number}
-         *              </dt>
-         *              <dd>
-         *                   The padding of the labels. Default padding is: 5
-         *              </dd>
-         *              <dt>
-         *                   padding: {Object}
-         *              </dt>
-         *              <dd>
-         *                   The padding of the labels.
-         *                   <dl>
-         *                        <dt>
-         *                             top: {Number}
-         *                        </dt>
-         *                        <dd>
-         *                             The top padding.
-         *                        </dd>
-         *                        <dt>
-         *                             right: {Number}
-         *                        </dt>
-         *                        <dd>
-         *                             The right padding.
-         *                        </dd>
-         *                        <dt>
-         *                             bottom: {Number}
-         *                        </dt>
-         *                        <dd>
-         *                             The bottom padding.
-         *                        </dd>
-         *                        <dt>
-         *                             left: {Number}
-         *                        </dt>
-         *                        <dd>
-         *                             The left padding.
-         *                       </dd>
-         *                   </dl>
-         *              </dd>
-         *              <dt>
-         *                   border: {Object}
-         *              </dt>
-         *              <dd>
-         *                   The border of the labels.
-         *                   <dl>
-         *                        <dt>
-         *                             width: {Number}
-         *                        </dt>
-         *                        <dd>
-         *                             The width of the border. Default width is: 0
-         *                        </dd>
-         *                        <dt>
-         *                             color: {String}
-         *                        </dt>
-         *                        <dd>
-         *                             The color of the border. Default color is: "black"
-         *                        </dd>
-         *                   </dl>
-         *              </dd>
-         *              <dt>
-         *                   format: {String}
-         *              </dt>
-         *              <dd>
-         *                   The format of the labels.
-         *              </dd>
-         *         </dl>
-         *     </dd>
-         *</dl>
-         * @option {Object} [categoryAxis]
-         *The value axis configuration options.
-         *<dl>
-         *     <dt>
-         *         min: {Number}
-         *     </dt>
-         *     <dd>
-         *         The minimum value of the axis. Default minimum value is: 0
-         *     </dd>
-         *     <dt>
-         *         max: {Number}
-         *     </dt>
-         *     <dd>
-         *         The maximum value of the axis. Default maximum value is: 1
-         *     </dd>
-         *     <dt>
-         *         majorUnits: {Number}
-         *     </dt>
-         *     <dd>
-         *         The interval between major divisions.
-         *     </dd>
-         *     <dt>
-         *         axisCrossingValue: {Number}
-         *     </dt>
-         *     <dd>
-         *         Value at which the first perpendicular axis crosses this axis. Default value is: 0
-         *     </dd>
-         *     <dt>
-         *         minorTickSize: {Number}
-         *     </dt>
-         *     <dd>
-         *         The axis minor tick size. Default minor tick size is: 3
-         *     </dd>
-         *     <dt>
-         *         minorTickType: {String}
-         *     </dt>
-         *     <dd>
-         *         The minor tick type.
-         *         <dl>
-         *              <dt>
-         *                   "outside"
-         *              </dt>
-         *              <dd>
-         *                   The tick is drawn on the outer side of the axis.
-         *              </dd>
-         *              <dt>
-         *                   "none"
-         *              </dt>
-         *              <dd>
-         *                   No tick is drawn.
-         *              </dd>
-         *         </dl>
-         *     </dd>
-         *     <dt>
-         *         majorTickSize: {Number}
-         *     </dt>
-         *     <dd>
-         *         The axis major tick size. Default major tick size is: 4
-         *     </dd>
-         *     <dt>
-         *         majorTickType: {String}
-         *     </dt>
-         *     <dd>
-         *         The major tick type.
-         *         <dl>
-         *              <dt>
-         *                   "outside"
-         *              </dt>
-         *              <dd>
-         *                   The tick is drawn on the outer side of the axis.
-         *              </dd>
-         *              <dt>
-         *                   "none"
-         *              </dt>
-         *              <dd>
-         *                   No tick is drawn.
-         *              </dd>
-         *         </dl>
-         *     </dd>
-         *     <dt>
-         *         minorGridLines: {Object}
-         *     </dt>
-         *     <dd>
-         *         Configures the minor grid lines.
-         *         <dl>
-         *              <dt>
-         *                   width: {Number}
-         *              </dt>
-         *              <dd>
-         *                   The width of the lines. Default width is: 1
-         *              </dd>
-         *              <dt>
-         *                   color: {String}
-         *              </dt>
-         *              <dd>
-         *                   The color of the lines. Default color is: "black"
-         *              </dd>
-         *              <dt>
-         *                   visible: {Boolean}
-         *              </dt>
-         *              <dd>
-         *                   The visibility of the lines. Default visibility is: false
-         *              </dd>
-         *         </dl>
-         *     </dd>
-         *     <dt>
-         *         majorGridLines: {Object}
-         *     </dt>
-         *     <dd>
-         *         Configures the major grid lines.
-         *         <dl>
-         *              <dt>
-         *                   width: {Number}
-         *              </dt>
-         *              <dd>
-         *                   The width of the lines. Default width is: 1
-         *              </dd>
-         *              <dt>
-         *                   color: {String}
-         *              </dt>
-         *              <dd>
-         *                   The color of the lines. Default color is: "black"
-         *              </dd>
-         *              <dt>
-         *                   visible: {Boolean}
-         *              </dt>
-         *              <dd>
-         *                   The visibility of the lines. Default visibility is: true
-         *              </dd>
-         *         </dl>
-         *     </dd>
-         *     <dt>
-         *         line: {Object}
-         *     </dt>
-         *     <dd>
-         *         Configures the axis line.
-         *         <dl>
-         *              <dt>
-         *                   width: {Number}
-         *              </dt>
-         *              <dd>
-         *                   The width of the line. Default width is: 1
-         *              </dd>
-         *              <dt>
-         *                   color: {String}
-         *              </dt>
-         *              <dd>
-         *                   The color of the line. Default color is: "black"
-         *              </dd>
-         *              <dt>
-         *                   visible: {Boolean}
-         *              </dt>
-         *              <dd>
-         *                   The visibility of the line. Default visibility is: true
-         *              </dd>
-         *         </dl>
-         *     </dd>
-         *     <dt>
-         *         labels: {Object}
-         *     </dt>
-         *     <dd>
-         *         Configures the axis labels.
-         *         <dl>
-         *              <dt>
-         *                   font: {String}
-         *              </dt>
-         *              <dd>
-         *                   The font style of the labels. Default font style is: "12px Verdana, sans-serif"
-         *              </dd>
-         *              <dt>
-         *                   visible: {Boolean}
-         *              </dt>
-         *              <dd>
-         *                   The visibility of the labels. Default visibility is: true
-         *              </dd>
-         *              <dt>
-         *                   margin: {Number}
-         *              </dt>
-         *              <dd>
-         *                   The margin of the labels. Default margin is: 0
-         *              </dd>
-         *              <dt>
-         *                   margin: {Object}
-         *              </dt>
-         *              <dd>
-         *                   The margin of the labels.
-         *              <dl>
-         *                  <dt>
-         *                       top: {Number}
-         *                  </dt>
-         *                  <dd>
-         *                       The top margin.
-         *                  </dd>
-         *                  <dt>
-         *                       right: {Number}
-         *                  </dt>
-         *                  <dd>
-         *                       The right margin.
-         *                  </dd>
-         *                  <dt>
-         *                       bottom: {Number}
-         *                  </dt>
-         *                  <dd>
-         *                       The bottom margin.
-         *                  </dd>
-         *                  <dt>
-         *                       left: {Number}
-         *                  </dt>
-         *                  <dd>
-         *                       The left margin.
-         *                  </dd>
-         *              </dl>
-         *
-         *              <dt>
-         *                   padding: {Number}
-         *              </dt>
-         *              <dd>
-         *                   The padding of the labels. Default padding is: 5
-         *              </dd>
-         *              <dt>
-         *                   padding: {Object}
-         *              </dt>
-         *              <dd>
-         *                   The padding of the labels.
-         *                   <dl>
-         *                        <dt>
-         *                             top: {Number}
-         *                        </dt>
-         *                        <dd>
-         *                             The top padding.
-         *                        </dd>
-         *                        <dt>
-         *                             right: {Number}
-         *                        </dt>
-         *                        <dd>
-         *                             The right padding.
-         *                        </dd>
-         *                        <dt>
-         *                             bottom: {Number}
-         *                        </dt>
-         *                        <dd>
-         *                             The bottom padding.
-         *                        </dd>
-         *                        <dt>
-         *                             left: {Number}
-         *                        </dt>
-         *                        <dd>
-         *                             The left padding.
-         *                       </dd>
-         *                   </dl>
-         *              </dd>
-         *              <dt>
-         *                   border: {Object}
-         *              </dt>
-         *              <dd>
-         *                   The border of the labels.
-         *                   <dl>
-         *                        <dt>
-         *                             width: {Number}
-         *                        </dt>
-         *                        <dd>
-         *                             The width of the border. Default width is: 0
-         *                        </dd>
-         *                        <dt>
-         *                             color: {String}
-         *                        </dt>
-         *                        <dd>
-         *                             The color of the border. Default color is: "black"
-         *                        </dd>
-         *                   </dl>
-         *              </dd>
-         *              <dt>
-         *                   format: {String}
-         *              </dt>
-         *              <dd>
-         *                   The format of the labels.
-         *              </dd>
-         *         </dl>
-         *     </dd>
-         *</dl>
+         *    <dl>
+         *         <dt>
+         *              "top"
+         *         </dt>
+         *         <dd>
+         *              The title is positioned on the top.
+         *         </dd>
+         *         <dt>
+         *              "bottom"
+         *         </dt>
+         *         <dd>
+         *              The title is positioned on the bottom.
+         *         </dd>
+         *    </dl>
+         * @option {String} [title.align] <"center"> The alignment of the title.
+         *    <dl>
+         *         <dt>
+         *              "left"
+         *         </dt>
+         *         <dd>
+         *              The text is aligned to the left.
+         *         </dd>
+         *         <dt>
+         *              "center"
+         *         </dt>
+         *         <dd>
+         *              The text is aligned to the middle.
+         *         </dd>
+         *         <dt>
+         *              "right"
+         *         </dt>
+         *         <dd>
+         *              The text is aligned to the right.
+         *         </dd>
+         *    </dl>
+         * @option {Boolean} [title.visible] <"falce"> The visibility of the title.
+         * @option {Number} [title.margin] <5> The margin of the title.
+         * @option {Object} [title.margin] The margin of the title.
+         * @option {Number} [title.margin.top] <0> The top margin.
+         * @option {Number} [title.margin.right] <0> The right margin.
+         * @option {Number} [title.margin.bottom] <0> The bottom margin.
+         * @option {Number} [title.margin.left] <0> The left margin.
+         * @option {Number} [title.padding] <5> The padding of the title.
+         * @option {Object} [title.padding] The padding of the title.
+         * @option {number} [title.padding.top] <0> The top padding.
+         * @option {number} [title.padding.right] <0> The right padding.
+         * @option {number} [title.padding.bottom] <0> The bottom padding.
+         * @option {number} [title.padding.left] <0> The left padding.
+         * @option {Object} [title.border] The border of the title.
+         * @option {Number} [title.border.width] <0> The width of the border.
+         * @option {String} [title.border.color] <"black"> The color of the border.
+         * @option {Object} [legend] The chart legend configuration options.
+         * @option {String} [legend.font] <12px Verdana, sans-serif> The font style of the legend.
+         * @option {String} [legend.position] <right> The positions of the legend.
+         *    <dl>
+         *         <dt>
+         *              "top"
+         *         </dt>
+         *         <dd>
+         *              The legend is positioned on the top.
+         *         </dd>
+         *         <dt>
+         *              "bottom"
+         *         </dt>
+         *         <dd>
+         *              The legend is positioned on the bottom.
+         *         </dd>
+         *         <dt>
+         *              "left"
+         *         </dt>
+         *         <dd>
+         *              The legend is positioned on the left.
+         *         </dd>
+         *         <dt>
+         *              "right"
+         *         </dt>
+         *         <dd>
+         *              The legend is positioned on the right.
+         *         </dd>
+         *         <dt>
+         *              "custom"
+         *         </dt>
+         *         <dd>
+         *              The legend is positioned using OffsetX and OffsetY.
+         *         </dd>
+         *    </dl>
+         * @option {Number} [legend.offsetX] <0> The X offset from its position.
+         * @option {Number} [legend.offsetY] <0> The Y offset from its position.
+         * @option {Boolean} [legend.visible] <true> The visibility of the legend.
+         * @option {Number} [legend.margin] <10> The margin of the legend.
+         * @option {Object} [legend.margin] The margin of the labels.
+         * @option {Number} [legend.margin.top] <0> The top margin.
+         * @option {Number} [legend.margin.right] <0> The right margin.
+         * @option {Number} [legend.margin.bottom] <0> The bottom margin.
+         * @option {Number} [legend.margin.left] <0> The left margin.
+         * @option {Number} [legend.padding] <5> The padding of the legend.
+         * @option {Object} [legend.padding] The margin of the labels.
+         * @option {Number} [legend.padding.top] <0> The top padding.
+         * @option {Number} [legend.padding.right] <0> The right padding.
+         * @option {Number} [legend.padding.bottom] <0> The bottom padding.
+         * @option {Number} [legend.padding.left] <0> The left padding.
+         * @option {Object} [legend.border] The border of the legend.
+         * @option {Number} [legend.border.width] <0> The width of the border.
+         * @option {String} [legend.border.color] <"black"> The color of the border.
+         * @option {Object} [valueAxis] The value axis configuration options.
+         * @option {array} [valueAxis.categories] Categories are used instead of numbers for that axis.
+         * @option {Number} [valueAxis.axisCrossingValue] <0> Value at which the first perpendicular axis crosses this axis.
+         * @option {Number} [valueAxis.minorTickSize] <3> The axis minor tick size.
+         * @option {String} [valueAxis.minorTickType] <none> The minor tick type.
+         *    <dl>
+         *         <dt>
+         *              "outside"
+         *         </dt>
+         *         <dd>
+         *              The tick is drawn on the outer side of the axis.
+         *         </dd>
+         *         <dt>
+         *              "none"
+         *         </dt>
+         *         <dd>
+         *              No tick is drawn.
+         *         </dd>
+         *    </dl>
+         * @option {Number} [valueAxis.majorTickSize] <4> The axis major tick size.
+         * @option {String} [valueAxis.majorTickType] <outside> The major tick type.
+         *    <dl>
+         *         <dt>
+         *              "outside"
+         *         </dt>
+         *         <dd>
+         *              The tick is drawn on the outer side of the axis.
+         *         </dd>
+         *         <dt>
+         *              "none"
+         *         </dt>
+         *         <dd>
+         *              No tick is drawn.
+         *         </dd>
+         *    </dl>
+         * @option {Object} [valueAxis.minorGridLines] Configures the minor grid lines.
+         * @option {Number} [valueAxis.minorGridLines.width] <1> The width of the lines.
+         * @option {String} [valueAxis.minorGridLines.color] <"black"> The color of the lines.
+         * @option {Boolean} [valueAxis.minorGridLines.visible] <false> The visibility of the lines.
+         * @option {Object} [valueAxis.majorGridLines] Configures the major grid lines.
+         * @option {Number} [valueAxis.majorGridLines.width] <1> The width of the lines.
+         * @option {String} [valueAxis.majorGridLines.color] <"black"> The color of the lines.
+         * @option {Boolean} [valueAxis.majorGridLines.visible] <true> The visibility of the lines.
+         * @option {Object} [valueAxis.line] Configures the axis line.
+         * @option {Number} [valueAxis.line.width] <1> The width of the lines.
+         * @option {String} [valueAxis.line.color] <"black"> The color of the lines.
+         * @option {Boolean} [valueAxis.line.visible] <true> The visibility of the lines.
+         * @option {Object} [valueAxis.labels] Configures the axis labels.
+         * @option {String} [valueAxis.labels.font] <"12px Verdana, sans-serif"> The font style of the labels.
+         * @option {Boolean} [valueAxis.labels.visible] <true> The visibility of the labels.
+         * @option {Number} [valueAxis.labels.margin] <0> The margin of the labels.
+         * @option {Object} [valueAxis.labels.margin] The margin of the labels.
+         * @option {Number} [valueAxis.labels.margin.top] <0> The top margin.
+         * @option {Number} [valueAxis.labels.margin.right] <0> The right margin.
+         * @option {Number} [valueAxis.labels.margin.bottom] <0> The bottom margin.
+         * @option {Number} [valueAxis.labels.margin.left] <0> The left margin.
+         * @option {Number} [valueAxis.labels.padding] <0> The padding of the labels.
+         * @option {Object} [valueAxis.labels.padding] The padding of the labels.
+         * @option {Number} [valueAxis.labels.padding.top] <0> The top padding.
+         * @option {Number} [valueAxis.labels.padding.right] <0> The right padding.
+         * @option {Number} [valueAxis.labels.padding.bottom] <0> The bottom padding.
+         * @option {Number} [valueAxis.labels.padding.left] <0> The left padding.
+         * @option {Object} [valueAxis.labels.border] The border of the labels.
+         * @option {Number} [valueAxis.labels.border.width] <0> The width of the border.
+         * @option {String} [valueAxis.labels.border.color] <"black"> The color of the border.
+         * @option {String} [valueAxis.labels.format] The format of the labels.
+         * @option {Object} [categoryAxis] The value axis configuration options.
+         * @option {Number} [categoryAxis.min] <0> The minimum value of the axis.
+         * @option {Number} [categoryAxis.max] <1> The maximum value of the axis.
+         * @option {Number} [categoryAxis.majorUnits] The interval between major divisions.
+         * @option {Number} [categoryAxis.axisCrossingValue] <0> Value at which the first perpendicular axis crosses this axis.
+         * @option {Number} [categoryAxis.minorTickSize] <3> The axis minor tick size.
+         * @option {String} [categoryAxis.minorTickType] <"none"> The axis minor tick size.
+         *    <dl>
+         *         <dt>
+         *              "outside"
+         *         </dt>
+         *         <dd>
+         *              The tick is drawn on the outer side of the axis.
+         *         </dd>
+         *         <dt>
+         *              "none"
+         *         </dt>
+         *         <dd>
+         *              No tick is drawn.
+         *         </dd>
+         *    </dl>
+         * @option {Number} [categoryAxis.majorTickSize] <3> The axis major tick size.
+         * @option {String} [categoryAxis.majorTickType] <"none"> The axis major tick size.
+         *    <dl>
+         *         <dt>
+         *              "outside"
+         *         </dt>
+         *         <dd>
+         *              The tick is drawn on the outer side of the axis.
+         *         </dd>
+         *         <dt>
+         *              "none"
+         *         </dt>
+         *         <dd>
+         *              No tick is drawn.
+         *         </dd>
+         *    </dl>
+         * @option {Object} [categoryAxis.minorGridLines] Configures the minor grid lines.
+         * @option {Number} [categoryAxis.minorGridLines.width] <1> The width of the lines.
+         * @option {String} [categoryAxis.minorGridLines.color] <"black"> The color of the lines.
+         * @option {Boolean} [categoryAxis.minorGridLines.visible] <false> The visibility of the lines.
+         * @option {Object} [categoryAxis.majorGridLines] Configures the major grid lines.
+         * @option {Number} [categoryAxis.majorGridLines.width] <1> The width of the lines.
+         * @option {String} [categoryAxis.majorGridLines.color] <"black"> The color of the lines.
+         * @option {Boolean} [categoryAxis.majorGridLines.visible] <true> The visibility of the lines.
+         * @option {Object} [categoryAxis.line] Configures the axis line.
+         * @option {Number} [categoryAxis.line.width] <1> The width of the lines.
+         * @option {String} [categoryAxis.line.color] <"black"> The color of the lines.
+         * @option {Boolean} [categoryAxis.line.visible] <true> The visibility of the lines.
+         * @option {Object} [categoryAxis.labels] Configures the axis labels.
+         * @option {String} [categoryAxis.labels.font] <"12px Verdana, sans-serif"> The font style of the labels.
+         * @option {Boolean} [categoryAxis.labels.visible] <true> The visibility of the labels.
+         * @option {Number} [categoryAxis.labels.margin] <0> The margin of the labels.
+         * @option {Object} [categoryAxis.labels.margin] The margin of the labels.
+         * @option {Number} [categoryAxis.labels.margin.top] <0> The top margin.
+         * @option {Number} [categoryAxis.labels.margin.right] <0> The right margin.
+         * @option {Number} [categoryAxis.labels.margin.bottom] <0> The bottom margin.
+         * @option {Number} [categoryAxis.labels.margin.left] <0> The left margin.
+         * @option {Number} [categoryAxis.labels.padding] <0> The padding of the labels.
+         * @option {Object} [categoryAxis.labels.padding] The padding of the labels.
+         * @option {Number} [categoryAxis.labels.padding.top] <0> The top padding.
+         * @option {Number} [categoryAxis.labels.padding.right] <0> The right padding.
+         * @option {Number} [categoryAxis.labels.padding.bottom] <0> The bottom padding.
+         * @option {Number} [categoryAxis.labels.padding.left] <0> The left padding.
+         * @option {Object} [categoryAxis.labels.border] The border of the labels.
+         * @option {Number} [categoryAxis.labels.border.width] <0> The width of the border.
+         * @option {String} [categoryAxis.labels.border.color] <"black"> The color of the border.
+         * @option {String} [categoryAxis.labels.format] The format of the labels.
          * @option {Object} [seriesDefaults]
          * @option {Object} [series]
-         * @option {Object} [chartArea]
-         *The chart area configuration options.
-         *<dl>
-         *     <dt>
-         *         background: {String}
-         *     </dt>
-         *     <dd>
-         *         The background color of the chart area. Default background color is: "white"
-         *     </dd>
-         *     <dt>
-         *         margin: {Number}
-         *     </dt>
-         *     <dd>
-         *         The margin of the chart area. Default margin is: 5
-         *     </dd>
-         *     <dt>
-         *         margin: {Object}
-         *     </dt>
-         *     <dd>
-         *         The margin of the chart area.
-         *         <dl>
-         *              <dt>
-         *                   top: {Number}
-         *              </dt>
-         *              <dd>
-         *                   The top margin.
-         *              </dd>
-         *              <dt>
-         *                   right: {Number}
-         *              </dt>
-         *              <dd>
-         *                   The right margin.
-         *              </dd>
-         *              <dt>
-         *                   bottom: {Number}
-         *              </dt>
-         *              <dd>
-         *                   The bottom margin.
-         *              </dd>
-         *              <dt>
-         *                   left: {Number}
-         *              </dt>
-         *              <dd>
-         *                   The left margin.
-         *              </dd>
-         *         </dl>
-         *     </dd>
-         *     <dt>
-         *         border: {Object}
-         *     </dt>
-         *     <dd>
-         *         The border of the chart area.
-         *         <dl>
-         *              <dt>
-         *                   width: {Number}
-         *              </dt>
-         *              <dd>
-         *                   The width of the border. Default width is: 0
-         *              </dd>
-         *              <dt>
-         *                   color: {String}
-         *              </dt>
-         *              <dd>
-         *                   The color of the border. Default color is: "black"
-         *              </dd>
-         *         </dl>
-         *     </dd>
-         *</dl>
-         * @option {Object} [plotArea]
-         *The plot area configuration options.
-         *<dl>
-         *     <dt>
-         *         background: {String}
-         *     </dt>
-         *     <dd>
-         *         The background color of the plot area. Default background color is: "white"
-         *     </dd>
-         *     <dt>
-         *         margin: {Number}
-         *     </dt>
-         *     <dd>
-         *         The margin of the plot area. Default margin is: 0
-         *     </dd>
-         *     <dt>
-         *         margin: {Object}
-         *     </dt>
-         *     <dd>
-         *         The margin of the plot area.
-         *         <dl>
-         *              <dt>
-         *                   top: {Number}
-         *              </dt>
-         *              <dd>
-         *                   The top margin.
-         *              </dd>
-         *              <dt>
-         *                   right: {Number}
-         *              </dt>
-         *              <dd>
-         *                   The right margin.
-         *              </dd>
-         *              <dt>
-         *                   bottom: {Number}
-         *              </dt>
-         *              <dd>
-         *                   The bottom margin.
-         *              </dd>
-         *              <dt>
-         *                   left: {Number}
-         *              </dt>
-         *              <dd>
-         *                   The left margin.
-         *              </dd>
-         *         </dl>
-         *     </dd>
-         *     <dt>
-         *         border: {Object}
-         *     </dt>
-         *     <dd>
-         *         The border of the plot area.
-         *         <dl>
-         *              <dt>
-         *                   width: {Number}
-         *              </dt>
-         *              <dd>
-         *                   The width of the border. Default width is: 0
-         *              </dd>
-         *              <dt>
-         *                   color: {String}
-         *              </dt>
-         *              <dd>
-         *                   The color of the border. Default color is: "black"
-         *              </dd>
-         *         </dl>
-         *     </dd>
-         *</dl>
+         * @option {Object} [chartArea] The chart area configuration options.
+         * @option {String} [chartArea.background] <"white"> The background color of the chart area.
+         * @option {Number} [chartArea.margin] <5> The margin of the chart area.
+         * @option {Object} [chartArea.margin] The margin of the chart area.
+         * @option {Number} [chartArea.margin.top] <0> The top margin.
+         * @option {Number} [chartArea.margin.right] <0> The right margin.
+         * @option {Number} [chartArea.margin.bottom] <0> The bottom margin.
+         * @option {Number} [chartArea.margin.left] <0> The left margin.
+         * @option {Object} [chartArea.border] The border of the chart area.
+         * @option {Number} [chartArea.border.width] <0> The width of the border.
+         * @option {String} [chartArea.border.color] <"black"> The color of the border.
+         * @option {Object} [plotArea] The plot area configuration options.
+         * @option {String} [plotArea.background] <"white"> The background color of the plot area.
+         * @option {Number} [plotArea.margin] <0> The margin of the plot area.
+         * @option {Object} [plotArea.margin] The margin of the plot area.
+         * @option {Number} [plotArea.margin.top] <0> The top margin.
+         * @option {Number} [plotArea.margin.right] <0> The right margin.
+         * @option {Number} [plotArea.margin.bottom] <0> The bottom margin.
+         * @option {Number} [plotArea.margin.left] <0> The left margin.
+         * @option {Object} [plotArea.border] The border of the plot area.
+         * @option {Number} [plotArea.border.width] <0> The width of the border.
+         * @option {String} [plotArea.border.color] <"black"> The color of the border.
          */
         init: function(element, options) {
             var chart = this,

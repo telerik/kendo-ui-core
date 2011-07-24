@@ -20,32 +20,42 @@
         <!-- nav -->
         <!-- nav -->
         <!-- description -->
-        <div class="description">This example shows how to use the client-side API of kendoSlider and kendoRangeSlider.</div>
         <!-- description -->
-        <div id="example" class="t-content">
-            <input type="range" id="slider" />
-
+        <div id="example" class="t-content" style="height: 330px;">
             <div>
-                <input type="text" id="newValue" value="1" />
-                <button class="t-button" id="setSliderValue">Set value</button>
-                <button class="t-button" id="getSliderValue">Get value</button><br>
-                <button class="t-button" id="enableSlider">Enable</button><br>
-                <button class="t-button" id="disableSlider">Disable</button><br>
+                <input type="range" id="slider" />
+            </div>
+            <div class="configuration" style="width: 240px;">
+                <span class="configHead">Configure</span>
+                <span class="configTitle">API Functions</span>
+                <fieldset>
+                    <legend>Slider configuration</legend>
+                    <input type="text" id="newValue" value="1" />
+                    <button class="t-button" id="setSliderValue">Set value</button>
+                    <button class="t-button" id="getSliderValue">Get value</button><br>
+                    <button class="t-button" id="enableSlider">Enable</button><br>
+                    <button class="t-button" id="disableSlider">Disable</button><br>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Range slider configuration</legend>
+                    <div>
+                        <input type="text" id="startValue" value="1" />
+                        <button class="t-button" id="setStartValue">Set selection start</button>
+                    </div>
+                    <div>
+                        <input type="text" id="endValue" value="1" />
+                        <button class="t-button" id="setEndValue">Set selection end</button>
+                    </div>
+                    <button class="t-button" id="getRangeSliderValue">Get value</button><br>
+                    <button class="t-button" id="enableRangeSlider">Enable</button><br>
+                    <button class="t-button" id="disableRangeSlider">Disable</button><br>
+                </fieldset>
             </div>
 
             <div id="rangeSlider" style="margin-top: 40px;">
                 <input type="range" />
                 <input type="range" />
-            </div>
-
-            <div>
-                <input type="text" id="startValue" value="1" />
-                <button class="t-button" id="setStartValue">Set value</button>
-                <input type="text" id="endValue" value="1" />
-                <button class="t-button" id="setEndValue">Set value</button>
-                <button class="t-button" id="getRangeSliderValue">Get value</button><br>
-                <button class="t-button" id="enableRangeSlider">Enable</button><br>
-                <button class="t-button" id="disableRangeSlider">Disable</button><br>
             </div>
 
             <script>
