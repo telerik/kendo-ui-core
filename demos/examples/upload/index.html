@@ -21,9 +21,28 @@
         <!-- description -->
         <!-- description -->
         <div id="example" class="t-content">
+            <div class="configuration">
+                <span class="infoHead">Information</span>
+                <p>
+                    The Upload can be used as a drop-in replacement
+                    for file input elements.
+                </p>
+                <p>
+                    This "synchronous" mode does not require
+                    special handling on the server.
+                </p>
+                <p>
+                    <strong>Note:</strong>
+                    Form submit action is not configured in this demo.
+                </p>
+            </div>
             <form method="post">
                 <div>
                     <input name="files" id="files" type="file" />
+                    <p>
+                        <button type="button" class="t-button t-state-disabled"
+                            disabled="disabled">Submit</button>
+                    </p>
                 </div>
             </form>
             <script type="text/javascript">

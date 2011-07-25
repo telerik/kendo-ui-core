@@ -3,16 +3,15 @@
     <head>
         <!-- meta -->
         <!-- meta -->
-        <title>Chart Events</title>
+        <title>Binding to local data</title>
         <!-- css -->
         <link href="../styles/examples.css" rel="stylesheet"/>
         <link href="../../../styles/kendo.common.css" rel="stylesheet"/>
-        <link href="../../../styles/kendo.kendo.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.blueopal.css" rel="stylesheet"/>
         <!-- css -->
         <!-- script -->
         <script src="../../../src/jquery.js"></script>
         <script src="../../../src/kendo.core.js"></script>
-        <script src="../js/kendo.console.js"></script>
         <script src="../../../src/kendo.data.js"></script>
         <script src="../../../src/kendo.chart.js"></script>
         <!-- script -->
@@ -21,14 +20,45 @@
         <!-- nav -->
         <!-- nav -->
         <!-- description -->
-        <div class="description">This example shows how to attach events to a kendoChart and how they are fired and triggered.</div>
+        <div class="description">This example shows how to bind the kendoChart to objects.</div>
         <!-- description -->
         <div id="example" class="t-content">
             <div id="chart" style="width:650px; height:450px;margin: 0 auto;"></div>
             <script type="text/javascript">
+                var internetUsers = [
+                    {
+                        "country": "United States",
+                        "year": "2005",
+                        "value": 67.96
+                    },
+                    {
+                        "country": "United States",
+                        "year": "2006",
+                        "value": 68.93
+                    },
+                    {
+                        "country": "United States",
+                        "year": "2007",
+                        "value": 75
+                    },
+                    {
+                        "country": "United States",
+                        "year": "2008",
+                        "value": 74
+                    },
+                    {
+                        "country": "United States",
+                        "year": "2009",
+                        "value": 78
+                    }
+                ];
+
                 function createChart() {
                     $("#chart").kendoChart({
                         theme: $(document).data("kendoSkin"),
+                        dataSource: {
+                            data: internetUsers
+                        },
                         title: {
                             text: "Internet Users"
                         },
@@ -36,19 +66,15 @@
                             position: "bottom"
                         },
                         seriesDefaults: {
-                            type: "bar",
+                            type: "line",
                             labels: {
                                 visible: true,
-                                position: "insideEnd",
-                                format: "{0}%"
+                                format: "{0} %"
                             }
                         },
                         series: [{
-                            name: "World",
-                            data: [15.7, 16.7, 20, 23.5, 26.6]
-                        }, {
-                            name: "United States",
-                            data: [67.96, 68.93, 75, 74, 78]
+                            field: "value",
+                            name: "United States"
                         }],
                         valueAxis: {
                             labels: {
@@ -56,20 +82,9 @@
                             }
                         },
                         categoryAxis: {
-                            categories: [2005, 2006, 2007, 2008, 2009]
-                        },
-                        seriesClick: seriesClick
+                            field: "year"
+                        }
                     });
-                }
-
-                function seriesClick(e) {
-                    if ("kendoConsole" in window) {
-                        kendoConsole.log(
-                            "Series click :: " +
-                            e.series.name + ": " +
-                            kendo.toString(e.value, "#,##0") + " %"
-                        );
-                    }
                 }
 
                 $(document).ready(function() {
@@ -81,8 +96,8 @@
                 });
             </script>
         </div>
-        <div class="console"></div>
         <!-- tools -->
         <!-- tools -->
     </body>
 </html>
+

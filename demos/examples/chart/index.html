@@ -20,54 +20,36 @@
         <!-- nav -->
         <!-- nav -->
         <!-- description -->
-        <div class="description">This example shows how to bind the kendoChart to json object.</div>
         <!-- description -->
         <div id="example" class="t-content">
             <div id="chart" style="width:650px; height:450px;margin: 0 auto;"></div>
             <script type="text/javascript">
-                var dataSource = new kendo.data.DataSource({
-                    transport: {
-                        read: {
-                            url: "spain-electricity.json",
-                            dataType: "json"
-                        }
-                    },
-                    sort: {
-                        field: "year",
-                        dir: "asc"
-                    }
-                });
-
                 function createChart() {
                     $("#chart").kendoChart({
                         theme: $(document).data("kendoSkin"),
-                        dataSource: dataSource,
                         title: {
-                            text: "Spain electricity production (GWh)"
+                            text: "Internet Users"
+                        },
+                        legend: {
+                            position: "bottom"
                         },
                         seriesDefaults: {
-                            column: {
-                                stack: true
-                            }
+                            type: "column"
                         },
-                        series:
-                        [{
-                            field: "nuclear",
-                            name: "Nuclear"
-                        },{
-                            field: "hydro",
-                            name: "Hydro"
-                        },{
-                            field: "wind",
-                            name: "Wind"
+                        series: [{
+                            name: "World",
+                            data: [15.7, 16.7, 20, 23.5, 26.6]
+                        }, {
+                            name: "United States",
+                            data: [67.96, 68.93, 75, 74, 78]
                         }],
-                        categoryAxis: {
-                            field: "year"
-                        },
                         valueAxis: {
                             labels: {
-                                format: "{0:#,##0}"
+                                format: "{0}%"
                             }
+                        },
+                        categoryAxis: {
+                            categories: [2005, 2006, 2007, 2008, 2009]
                         }
                     });
                 }
