@@ -18,6 +18,7 @@
         <script src="../../../src/kendo.draganddrop.js"></script>
         <script src="../../../src/kendo.groupable.js"></script>
         <script src="../../../src/kendo.grid.js"></script>
+        <script src="../js/people.js"></script>
         <!-- script -->
     </head>
     <body>
@@ -33,9 +34,7 @@
                 $(document).ready(function() {
                     $(".t-grid").kendoGrid({
                         dataSource: {
-                            transport: {
-                                read: "../datasource/top250movies.json"
-                            },
+                            data: createRandomData(50),
                             pageSize: 10
                         },
                         height: 250,
@@ -45,20 +44,33 @@
                         pageable: true,
                         columns: [
                             {
-                                field: "rank",
-                                title: "Rank"
+                                field: "FirstName",
+                                title: "First Name"
                             },
                             {
-                                field: "rating",
-                                title: "Rating"
+                                field: "LastName",
+                                title: "Last Name"
                             },
                             {
-                                field: "title",
+                                field: "FirstName",
+                                title: "First Name"
+                            },
+                            {
+                                field: "City",
+                                title: "City"
+                            },
+                            {
+                                field: "Title",
                                 title: "Title"
                             },
                             {
-                                field: "year",
-                                title: "Year"
+                                field: "BirthDate",
+                                title: "Birth Date",
+                                template: '<#= kendo.toString(BirthDate,"dd MMMM yyyy") #>'
+                            },
+                            {
+                                field: "Age",
+                                title: "Age"
                             }
                         ]
                     });
