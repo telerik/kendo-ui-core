@@ -74,12 +74,13 @@
                         visible: true
                     },
                     dataSource: data,
-                    seriesDefaults: {
+                seriesDefaults: {
+                        type: "bar",
                         labels: {
-                            visible: false
+                            visible: true
                         },
 
-                        column: {
+                        bar: {
                             stack: true
                         },
 
@@ -89,20 +90,14 @@
                     },
                     series: [
                         {
-                            name: "Value A",
-                            field: "a"
-                        }, {
-                            name: "Value B",
-                            field: "b"
-                        }, {
-                            name: "Value C",
-                            field: "c"
-                        }, {
                             type: "line",
                             name: "Value D",
                             field: "d",
                             markers: {
                                 type: "circle"
+                            },
+                            labels: {
+                                position: "right"
                             }
                         }
                     ],
