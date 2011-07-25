@@ -812,6 +812,14 @@
                     text.getViewElements(view)
                 });
 
+                test("renders id", function() {
+                    text.options.id = "id";
+                    text.reflow(new Box2D());
+                    text.getViewElements(view);
+
+                    equals(view.log.text[0].style.id, "id");
+                });
+
             })();
 
             (function() {

@@ -32,9 +32,8 @@
                     chart = null;
                 }
 
-                function linePointClick(seriesClickHandler) {
-                    createChart({
-                        seriesClick: seriesClickHandler,
+                function createLineChart(options) {
+                    createChart($.extend({
                         series: [{
                             type: "line",
                             data: [1]
@@ -42,15 +41,19 @@
                         categoryAxis: {
                             categories: ["A"]
                         }
-                    });
+                    }, options));
+                }
 
+                function linePointClick(seriesClickHandler) {
+                    createLineChart({
+                        seriesClick: seriesClickHandler
+                    });
                     marker = plotArea.charts[0].points[0].children[0];
                     $("#" + marker.options.id).click();
                 }
 
-                function barClick(seriesClickHandler) {
-                    createChart({
-                        seriesClick: seriesClickHandler,
+                function createBarChart(options) {
+                    createChart($.extend({
                         series: [{
                             type: "bar",
                             data: [1]
@@ -58,6 +61,12 @@
                         categoryAxis: {
                             categories: ["A"]
                         }
+                    }, options));
+                }
+
+                function barClick(seriesClickHandler) {
+                    createBarChart({
+                        seriesClick: seriesClickHandler
                     });
 
                     bar = plotArea.charts[0].points[0];
@@ -71,6 +80,21 @@
 
                 test("fires when clicking line points", 1, function() {
                     linePointClick(function() { ok(true); });
+                });
+
+                test("fires when clicking line point labels", 1, function() {
+                    createLineChart({
+                        seriesDefaults: {
+                            line: {
+                                labels: {
+                                    visible: true
+                                }
+                            }
+                        },
+                        seriesClick: function() { ok(true); }
+                    });
+                    label = plotArea.charts[0].points[0].children[1];
+                    $("#" + label.options.id).click();
                 });
 
                 test("event arguments contain value", 1, function() {
@@ -100,6 +124,21 @@
 
                 test("fires when clicking bars", 1, function() {
                     barClick(function() { ok(true); });
+                });
+
+                test("fires when clicking bar labels", 1, function() {
+                    createBarChart({
+                        seriesDefaults: {
+                            bar: {
+                                labels: {
+                                    visible: true
+                                }
+                            }
+                        },
+                        seriesClick: function() { ok(true); }
+                    });
+                    label = plotArea.charts[0].points[0].children[0];
+                    $("#" + label.options.id).click();
                 });
 
                 test("event arguments contain value", 1, function() {
