@@ -147,21 +147,23 @@
          *              The text is aligned to the right.
          *         </dd>
          *    </dl>
-         * @option {Boolean} [title.visible] <"falce"> The visibility of the title.
+         * @option {Boolean} [title.visible] <false> The visibility of the title.
          * @option {Number|Object} [title.margin] <5> The margin of the title.
          * _example
-         * // sets 3px margin
+         * // sets the top, right, bottom and left margin to 3px.
          * margin: 3
          *
-         * // sets 2px margin on top, 1px on left, 
-         * // and leaves the default margin (5) on the right and bottom
-         * margin: { top: 2, left: 1 }
-         * @option {Number} [title.padding] <5> The padding of the title.
-         * @option {Object} [title.padding] The padding of the title.
-         * @option {number} [title.padding.top] <5> The top padding.
-         * @option {number} [title.padding.right] <5> The right padding.
-         * @option {number} [title.padding.bottom] <5> The bottom padding.
-         * @option {number} [title.padding.left] <5> The left padding.
+         * // sets the top and left margin to 1px
+         * // margin right and bottom are with 5px (by default)
+         * margin: { top: 1, left: 1 }
+         * @option {Number|Object} [title.padding] <5> The padding of the title.
+         * _example
+         * // sets the top, right, bottom and left padding to 3px.
+         * padding: 3
+         *
+         * // sets the top and left padding to 1px
+         * // padding right and bottom are with 5px (by default)
+         * padding: { top: 1, left: 1 }
          * @option {Object} [title.border] The border of the title.
          * @option {Number} [title.border.width] <0> The width of the border.
          * @option {String} [title.border.color] <"black"> The color of the border.
@@ -203,18 +205,22 @@
          * @option {Number} [legend.offsetX] <0> The X offset from its position.
          * @option {Number} [legend.offsetY] <0> The Y offset from its position.
          * @option {Boolean} [legend.visible] <true> The visibility of the legend.
-         * @option {Number} [legend.margin] <10> The margin of the legend.
-         * @option {Object} [legend.margin] The margin of the labels.
-         * @option {Number} [legend.margin.top] <10> The top margin.
-         * @option {Number} [legend.margin.right] <10> The right margin.
-         * @option {Number} [legend.margin.bottom] <10> The bottom margin.
-         * @option {Number} [legend.margin.left] <10> The left margin.
-         * @option {Number} [legend.padding] <5> The padding of the legend.
-         * @option {Object} [legend.padding] The margin of the labels.
-         * @option {Number} [legend.padding.top] <5> The top padding.
-         * @option {Number} [legend.padding.right] <5> The right padding.
-         * @option {Number} [legend.padding.bottom] <5> The bottom padding.
-         * @option {Number} [legend.padding.left] <5> The left padding.
+         * @option {Number|Object} [legend.margin] <10> The margin of the legend.
+         * _example
+         * // sets the top, right, bottom and left margin to 3px.
+         * margin: 3
+         *
+         * // sets the top and left margin to 1px
+         * // margin right and bottom are with 10px (by default)
+         * margin: { top: 1, left: 1 }
+         * @option {Number|Object} [legend.padding] <5> The padding of the legend.
+         * _example
+         * // sets the top, right, bottom and left padding to 3px.
+         * padding: 3
+         *
+         * // sets the top and left padding to 1px
+         * // padding right and bottom are with 5px (by default)
+         * padding: { top: 1, left: 1 }
          * @option {Object} [legend.border] The border of the legend.
          * @option {Number} [legend.border.width] <0> The width of the border.
          * @option {String} [legend.border.color] <"black"> The color of the border.
@@ -268,18 +274,22 @@
          * @option {Object} [valueAxis.labels] Configures the axis labels.
          * @option {String} [valueAxis.labels.font] <"12px Verdana, sans-serif"> The font style of the labels.
          * @option {Boolean} [valueAxis.labels.visible] <true> The visibility of the labels.
-         * @option {Number} [valueAxis.labels.margin] <0> The margin of the labels.
-         * @option {Object} [valueAxis.labels.margin] The margin of the labels.
-         * @option {Number} [valueAxis.labels.margin.top] <0> The top margin.
-         * @option {Number} [valueAxis.labels.margin.right] <0> The right margin.
-         * @option {Number} [valueAxis.labels.margin.bottom] <0> The bottom margin.
-         * @option {Number} [valueAxis.labels.margin.left] <0> The left margin.
-         * @option {Number} [valueAxis.labels.padding] <0> The padding of the labels.
-         * @option {Object} [valueAxis.labels.padding] The padding of the labels.
-         * @option {Number} [valueAxis.labels.padding.top] <0> The top padding.
-         * @option {Number} [valueAxis.labels.padding.right] <0> The right padding.
-         * @option {Number} [valueAxis.labels.padding.bottom] <0> The bottom padding.
-         * @option {Number} [valueAxis.labels.padding.left] <0> The left padding.
+         * @option {Number|Object} [valueAxis.labels.margin] <0> The margin of the labels.
+         * _example
+         * // sets the top, right, bottom and left margin to 3px.
+         * margin: 3
+         *
+         * // sets the top and left margin to 1px
+         * // margin right and bottom are with 0px (by default)
+         * margin: { top: 1, left: 1 }
+         * @option {Number|Object} [valueAxis.labels.padding] <0> The padding of the labels.
+         * _example
+         * // sets the top, right, bottom and left padding to 3px.
+         * padding: 3
+         *
+         * // sets the top and left padding to 1px
+         * // padding right and bottom are with 0px (by default)
+         * padding: { top: 1, left: 1 }
          * @option {Object} [valueAxis.labels.border] The border of the labels.
          * @option {Number} [valueAxis.labels.border.width] <0> The width of the border.
          * @option {String} [valueAxis.labels.border.color] <"black"> The color of the border.
@@ -336,18 +346,22 @@
          * @option {Object} [categoryAxis.labels] Configures the axis labels.
          * @option {String} [categoryAxis.labels.font] <"12px Verdana, sans-serif"> The font style of the labels.
          * @option {Boolean} [categoryAxis.labels.visible] <true> The visibility of the labels.
-         * @option {Number} [categoryAxis.labels.margin] <0> The margin of the labels.
-         * @option {Object} [categoryAxis.labels.margin] The margin of the labels.
-         * @option {Number} [categoryAxis.labels.margin.top] <0> The top margin.
-         * @option {Number} [categoryAxis.labels.margin.right] <0> The right margin.
-         * @option {Number} [categoryAxis.labels.margin.bottom] <0> The bottom margin.
-         * @option {Number} [categoryAxis.labels.margin.left] <0> The left margin.
-         * @option {Number} [categoryAxis.labels.padding] <0> The padding of the labels.
-         * @option {Object} [categoryAxis.labels.padding] The padding of the labels.
-         * @option {Number} [categoryAxis.labels.padding.top] <0> The top padding.
-         * @option {Number} [categoryAxis.labels.padding.right] <0> The right padding.
-         * @option {Number} [categoryAxis.labels.padding.bottom] <0> The bottom padding.
-         * @option {Number} [categoryAxis.labels.padding.left] <0> The left padding.
+         * @option {Number|Object} [categoryAxis.labels.margin] <0> The margin of the labels.
+         * _example
+         * // sets the top, right, bottom and left margin to 3px.
+         * margin: 3
+         *
+         * // sets the top and left margin to 1px
+         * // margin right and bottom are with 0px (by default)
+         * margin: { top: 1, left: 1 }
+         * @option {Number|Object} [categoryAxis.labels.padding] <0> The padding of the labels.
+         * _example
+         * // sets the top, right, bottom and left padding to 3px.
+         * padding: 3
+         *
+         * // sets the top and left padding to 1px
+         * // padding right and bottom are with 0px (by default)
+         * padding: { top: 1, left: 1 }
          * @option {Object} [categoryAxis.labels.border] The border of the labels.
          * @option {Number} [categoryAxis.labels.border.width] <0> The width of the border.
          * @option {String} [categoryAxis.labels.border.color] <"black"> The color of the border.
@@ -362,18 +376,22 @@
          * @option {Object} [seriesDefaults.labels] Configures the series data labels.
          * @option {String} [seriesDefaults.labels.font] <"12px Verdana, sans-serif"> The font style of the labels.
          * @option {Boolean} [seriesDefaults.labels.visible] <true> The visibility of the labels.
-         * @option {Number} [seriesDefaults.labels.margin] <0> The margin of the labels.
-         * @option {Object} [seriesDefaults.labels.margin] The margin of the labels.
-         * @option {Number} [seriesDefaults.labels.margin.top] <0> The top margin.
-         * @option {Number} [seriesDefaults.labels.margin.right] <0> The right margin.
-         * @option {Number} [seriesDefaults.labels.margin.bottom] <0> The bottom margin.
-         * @option {Number} [seriesDefaults.labels.margin.left] <0> The left margin.
-         * @option {Number} [seriesDefaults.labels.padding] <0> The padding of the labels.
-         * @option {Object} [seriesDefaults.labels.padding] The padding of the labels.
-         * @option {Number} [seriesDefaults.labels.padding.top] <0> The top padding.
-         * @option {Number} [seriesDefaults.labels.padding.right] <0> The right padding.
-         * @option {Number} [seriesDefaults.labels.padding.bottom] <0> The bottom padding.
-         * @option {Number} [seriesDefaults.labels.padding.left] <0> The left padding.
+         * @option {Number|Object} [seriesDefaults.labels.margin] <0> The margin of the labels.
+         * _example
+         * // sets the top, right, bottom and left margin to 3px.
+         * margin: 3
+         *
+         * // sets the top and left margin to 1px
+         * // margin right and bottom are with 0px (by default)
+         * margin: { top: 1, left: 1 }
+         * @option {Number|Object} [seriesDefaults.labels.padding] <0> The padding of the labels.
+         * _example
+         * // sets the top, right, bottom and left padding to 3px.
+         * padding: 3
+         *
+         * // sets the top and left padding to 1px
+         * // padding right and bottom are with 0px (by default)
+         * padding: { top: 1, left: 1 }
          * @option {Object} [seriesDefaults.labels.border] The border of the labels.
          * @option {Number} [seriesDefaults.labels.border.width] <0> The width of the border.
          * @option {String} [seriesDefaults.labels.border.color] <"black"> The color of the border.
@@ -399,35 +417,36 @@
          * @option {Object} [seriesDefaults.bar] The bar configuration options. For more details examine the series.
          * @option {Object} [seriesDefaults.column] The column configuration options. For more details examine the series.
          * @option {Object} [seriesDefaults.line] The line configuration options. For more details examine the series.
-         *
-         * @option {Array} [series]
-         * @option {Array} [series(type="bar")] The type of the series.
-         * @option {Array} [series(type="column")] The type of the series.
-         * @option {Array} [series(type="line")] The type of the series.
-         * @option {String} [series.name] The series name.
-         * @option {String} [series.color] The series base color.
-         * @option {Number} [series.opacity] <0> The series opacity.
-         *
-         *
+         * @option {Array} [series] The chart series type.
+         * @option [series.type="bar"] The type of the series.
+         * @option {String} [series.type="bar".name] The series name.
+         * @option {String} [series.type="bar".color] The series base color.
+         * @option {Number} [series.type="bar".opacity] <0> The series opacity.
+         * @option [series.type="column"] The type of the series.
+         * @option [series.type="line"] The type of the series.
          * @option {Object} [chartArea] The chart area configuration options.
          * @option {String} [chartArea.background] <"white"> The background color of the chart area.
-         * @option {Number} [chartArea.margin] <5> The margin of the chart area.
-         * @option {Object} [chartArea.margin] The margin of the chart area.
-         * @option {Number} [chartArea.margin.top] <5> The top margin.
-         * @option {Number} [chartArea.margin.right] <5> The right margin.
-         * @option {Number} [chartArea.margin.bottom] <5> The bottom margin.
-         * @option {Number} [chartArea.margin.left] <5> The left margin.
+         * @option {Number|Object} [chartArea.margin] <5> The margin of the chart area.
+         * _example
+         * // sets the top, right, bottom and left margin to 3px.
+         * margin: 3
+         *
+         * // sets the top and left margin to 1px
+         * // margin right and bottom are with 5px (by default)
+         * margin: { top: 1, left: 1 }
          * @option {Object} [chartArea.border] The border of the chart area.
          * @option {Number} [chartArea.border.width] <0> The width of the border.
          * @option {String} [chartArea.border.color] <"black"> The color of the border.
          * @option {Object} [plotArea] The plot area configuration options.
          * @option {String} [plotArea.background] <"white"> The background color of the plot area.
-         * @option {Number} [plotArea.margin] <0> The margin of the plot area.
-         * @option {Object} [plotArea.margin] The margin of the plot area.
-         * @option {Number} [plotArea.margin.top] <5> The top margin.
-         * @option {Number} [plotArea.margin.right] <5> The right margin.
-         * @option {Number} [plotArea.margin.bottom] <5> The bottom margin.
-         * @option {Number} [plotArea.margin.left] <5> The left margin.
+         * @option {Number|Object} [plotArea.margin] <5> The margin of the plot area.
+         * _example
+         * // sets the top, right, bottom and left margin to 3px.
+         * margin: 3
+         *
+         * // sets the top and left margin to 1px
+         * // margin right and bottom are with 5px (by default)
+         * margin: { top: 1, left: 1 }
          * @option {Object} [plotArea.border] The border of the plot area.
          * @option {Number} [plotArea.border.width] <0> The width of the border.
          * @option {String} [plotArea.border.color] <"black"> The color of the border.
@@ -1672,10 +1691,7 @@
                 labelFormat = options.labels.format;
 
             for (var i = 0; i < majorDivisions; i++) {
-                var text = new TextBox(
-                    labelFormat ? format(labelFormat, currentValue) : currentValue.toString(),
-                    labelOptions
-                );
+                var text = new TextBox(currentValue, labelOptions);
 
                 axis.append(text);
 
