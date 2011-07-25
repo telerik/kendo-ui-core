@@ -306,6 +306,49 @@
                 });
 
                 ownOptions.sort(makeSortby("name"));
+
+                var rootOptions = [];
+
+                // add suboptions and determine root-level options
+                for (var i = 0; i < ownOptions.length; i++) {
+                    var currentOption = ownOptions[i],
+                        currentOptionName = currentOption.name,
+                        subOptions = [];
+
+                    for (var j = i+1; j < ownOptions.length; j++) {
+                        var name = ownOptions[j].name;
+
+                        if (name.indexOf(currentOptionName) == 0 && name.substring(currentOptionName.length + 1).indexOf('.') < 0) {
+                            subOptions.push(ownOptions[j]);
+                        }
+                    }
+
+                    if (subOptions.length) {
+                        currentOption.subOptions = subOptions;
+                    }
+
+                    if (currentOptionName.indexOf(".") < 0) {
+                        rootOptions.push(currentOption);
+                    }
+                }
+
+                ownOptions = rootOptions;
+
+                // remove prefixes of suboptions
+
+                function removeRedundantPrefixes(options, containerName) {
+                    for (var i = 0; i < options.length; i++) {
+                        if (containerName && options[i].name.indexOf(containerName) == 0) {
+                            options[i].name = options[i].name.substring(containerName.length);
+                        }
+
+                        if (options[i].subOptions) {
+                            removeRedundantPrefixes(options[i].subOptions, containerName + options[i].name + ".");
+                        }
+                    }
+                }
+
+                removeRedundantPrefixes(ownOptions, "");
             }
         !}
 
@@ -399,6 +442,50 @@
       };
     })();
 
+
+    function extend () {
+        var options, name, src, copy, copyIsArray, clone, target = arguments[0] || {},
+            i = 1,
+            length = arguments.length,
+            deep = false;
+        if (typeof target === "boolean") {
+            deep = target;
+            target = arguments[1] || {};
+            i = 2;
+        }
+        if (typeof target !== "object" && !jQuery.isFunction(target)) {
+            target = {};
+        }
+        if (length === i) {
+            target = this;
+            --i;
+        }
+        for (; i < length; i++) {
+            if ((options = arguments[i]) != null) {
+                for (name in options) {
+                    src = target[name];
+                    copy = options[name];
+                    if (target === copy) {
+                        continue;
+                    }
+                    if (deep && copy && (jQuery.isPlainObject(copy) || (copyIsArray = jQuery.isArray(copy)))) {
+                        if (copyIsArray) {
+                            copyIsArray = false;
+                            clone = src && jQuery.isArray(src) ? src : [];
+                        } else {
+                            clone = src && jQuery.isPlainObject(src) ? src : {};
+                        }
+                        target[name] = jQuery.extend(deep, clone, copy);
+                    } else if (copy !== undefined) {
+                        target[name] = copy;
+                    }
+                }
+            }
+        }
+        return target;
+    }
+
+
     var optionsTemplate = tmpl(
         '<div class="detailHandle">' +
             '<div class="detailCollapsed"></div>' +
@@ -414,6 +501,7 @@
                     '<pre class="code prettyprint lang-js"><code><%= example[exampleIdx] %></code></pre>' +
                 '</div>' +
             '<% } %>' +
+            '<%= typeof subOptions != "undefined" ? renderChildOptions(subOptions) : "" %>' +
         '</div>'
     );
 
@@ -440,7 +528,9 @@
         var html = "";
 
         for (var i in options) {
-            html += optionsTemplate(options[i]);
+            html += optionsTemplate(extend({
+                renderChildOptions: renderOptions
+            }, options[i]));
         }
 
         return html;
