@@ -521,6 +521,10 @@ var categories = {
                 {
                     text: "Events",
                     url: "grid/events.html"
+                },
+                {
+                    text: "API",
+                    url: "grid/api.html"
                 }
             ]
         },

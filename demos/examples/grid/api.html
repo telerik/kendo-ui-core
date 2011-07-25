@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+    <head>
+        <!-- meta -->
+        <!-- meta -->
+        <title>Grid API</title>
+        <!-- css -->
+        <link href="../styles/examples.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.common.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.kendo.css" rel="stylesheet"/>
+        <!-- css -->
+        <!-- script -->
+        <script src="../../../src/jquery.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.data.js"></script>
+        <script src="../../../src/kendo.pageable.js"></script>
+        <script src="../../../src/kendo.selectable.js"></script>
+        <script src="../../../src/kendo.draganddrop.js"></script>
+        <script src="../../../src/kendo.groupable.js"></script>
+        <script src="../../../src/kendo.grid.js"></script>
+        <script src="../js/people.js"></script>
+        <!-- script -->
+    </head>
+    <body>
+        <!-- nav -->
+        <!-- nav -->
+        <!-- description -->
+        <div class="description"></div>
+        <!-- description -->
+        <div id="example" class="t-content">                
+            <div id="grid" style="width:500px;"></div>
+
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    $("#grid").kendoGrid({
+                        dataSource: {
+                            data: createRandomData(20),
+                            pageSize: 5,
+                            group: [{
+                                field: "Age",
+                                dir: "asc"
+                            }]
+                        },
+                        selectable: "multiple row",
+                        pageable: true,
+                        scrollable: false,
+                        groupable: true,
+                        columns: [
+                            {
+                                field: "FirstName",
+                                title: "First Name"
+                            },
+                            {
+                                field: "LastName",
+                                title: "Last Name"
+                            },
+                            {
+                                field: "Age",
+                                title: "Age"
+                            }
+                        ]
+                    });
+
+                    $(".clearSelection").click(function() {
+                        $("#grid").data("kendoGrid").clearSelection();
+                    });
+
+                    $(".selectRow").click(function(e) {
+                        var grid = $("#grid").data("kendoGrid"),
+                            rowIndex = $(e.target).prev().val(),
+                            row = grid.tbody.find(">tr").eq(rowIndex);
+
+                        grid.select(row);
+                    });
+
+                    $(".toggleGroup").click(function(e) {
+                        var grid = $("#grid").data("kendoGrid"),
+                            rowIndex = $(e.target).prev().val(),
+                            row = grid.tbody.find(">tr.t-grouping-row").eq(rowIndex);
+                                                    
+                        if(row.has(".t-collapse").length) {
+                            grid.collapseGroup(row);
+                        } else {
+                            grid.expandGroup(row);
+                        }
+                    });
+                });
+            </script>
+
+            <div class="configuration" style="width:200px">
+                <span class="configHead">Configure</span>
+                <span class="configTitle">API Functions</span>                
+                <input type="text" /><button class="selectRow t-button">Select row</button>
+                <button class="clearSelection t-button">Clear seleced rows</button>
+                <input type="text" /><button class="toggleGroup t-button">Collapse/Expand group</button>
+            </div>
+
+        </div>
+        <!-- tools -->
+        <!-- tools -->
+    </body>
+</html>
+
+
