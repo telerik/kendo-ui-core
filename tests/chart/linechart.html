@@ -54,6 +54,9 @@
                             return new Box2D(0, slotTop, 0, slotBottom);
                         },
                         options: {}
+                    },
+                    options: {
+                        categoryAxis: { }
                     }
                 });
 
@@ -490,6 +493,9 @@
                         getSlot: function(categoryIndex) {
                             return new Box2D();
                         }
+                    },
+                    options: {
+                        categoryAxis: { }
                     }
                 });
 

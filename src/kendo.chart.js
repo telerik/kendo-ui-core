@@ -485,6 +485,7 @@
                  * @event
                  * @param {Event} e
                  * @param {Object} e.value The data point value.
+                 * @param {Object} e.category The data point category
                  * @param {Object} e.series The clicked series.
                  * @param {Object} e.element The DOM element of the data point.
                  */
@@ -596,6 +597,7 @@
                 if (e.type === CLICK) {
                     chart.trigger(SERIES_CLICK, {
                         value: point.value,
+                        category: point.options.category,
                         series: point.options.series,
                         element: $(e.target)
                     });
@@ -2278,7 +2280,7 @@
             chart.traverseDataPoints(proxy(chart.addValue, chart));
         },
 
-        addValue: function(value, categoryIx, series, seriesIx) {
+        addValue: function(value, category, categoryIx, series, seriesIx) {
             this.updateRange(value, categoryIx);
         },
 
@@ -2312,7 +2314,7 @@
                 valueAxis = isVertical ? plotArea.axisY : plotArea.axisX,
                 axisCrossingValue = valueAxis.options.axisCrossingValue;
 
-            chart.traverseDataPoints(function(value, categoryIx) {
+            chart.traverseDataPoints(function(value, category, categoryIx) {
                 var point = chartPoints[pointIx++];
                 if (point && point.plotValue) {
                     value = point.plotValue;
@@ -2344,14 +2346,21 @@
             var chart = this,
             options = chart.options,
             series = options.series,
-            categoriesCount = chart.categoriesCount();
+            categories = chart.plotArea.options.categoryAxis.categories || [],
+            categoriesCount = chart.categoriesCount(),
+            categoryIx,
+            seriesIx,
+            value,
+            currentCategory,
+            currentSeries;
 
-            for (var categoryIx = 0; categoryIx < categoriesCount; categoryIx++) {
-                for (var seriesIx = 0; seriesIx < series.length; seriesIx++) {
-                    var currentSeries = series[seriesIx],
+            for (categoryIx = 0; categoryIx < categoriesCount; categoryIx++) {
+                for (seriesIx = 0; seriesIx < series.length; seriesIx++) {
+                    currentCategory = categories[categoryIx];
+                    currentSeries = series[seriesIx];
                     value = currentSeries.data[categoryIx];
 
-                    callback(value, categoryIx, currentSeries, seriesIx);
+                    callback(value, currentCategory, categoryIx, currentSeries, seriesIx);
                 }
             }
         },
@@ -2379,7 +2388,7 @@
             CategoricalChart.fn.init.call(chart, plotArea, options);
         },
 
-        addValue: function(value, categoryIx, series, seriesIx) {
+        addValue: function(value, category, categoryIx, series, seriesIx) {
             var barChart = this,
                 options = barChart.options,
                 children = barChart.children,
@@ -2402,7 +2411,8 @@
                 border: series.border,
                 isVertical: options.isVertical,
                 overlay: series.overlay,
-                series: series
+                series: series,
+                category: category
             });
 
             if (labelOptions.visible && value) {
@@ -2672,7 +2682,7 @@
             CategoricalChart.fn.init.call(chart, plotArea, options);
         },
 
-        addValue: function(value, categoryIx, series, seriesIx) {
+        addValue: function(value, category, categoryIx, series, seriesIx) {
             var chart = this,
                 options = chart.options,
                 children = chart.children,
@@ -2698,9 +2708,11 @@
                 }
             }
 
+            console.log(category);
             var point = new LinePoint(value,
                 deepExtend({
                     series: series,
+                    category: category,
                     isVertical: !options.isVertical,
                     markers: {
                         background: series.color,
