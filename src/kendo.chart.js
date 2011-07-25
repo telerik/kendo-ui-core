@@ -147,12 +147,14 @@
          *         </dd>
          *    </dl>
          * @option {Boolean} [title.visible] <"falce"> The visibility of the title.
-         * @option {Number} [title.margin] <5> The margin of the title.
-         * @option {Object} [title.margin] The margin of the title.
-         * @option {Number} [title.margin.top] <5> The top margin.
-         * @option {Number} [title.margin.right] <5> The right margin.
-         * @option {Number} [title.margin.bottom] <5> The bottom margin.
-         * @option {Number} [title.margin.left] <5> The left margin.
+         * @option {Number|Object} [title.margin] <5> The margin of the title.
+         * _example
+         * // sets 3px margin
+         * margin: 3
+         *
+         * // sets 2px margin on top, 1px on left, 
+         * // and leaves the default margin (5) on the right and bottom
+         * margin: { top: 2, left: 1 }
          * @option {Number} [title.padding] <5> The padding of the title.
          * @option {Object} [title.padding] The padding of the title.
          * @option {number} [title.padding.top] <5> The top padding.
