@@ -38,7 +38,10 @@
                         series: [{
                             type: "line",
                             data: [1]
-                        }]
+                        }],
+                        categoryAxis: {
+                            categories: "A"
+                        }
                     });
 
                     marker = plotArea.charts[0].points[0].children[0];
@@ -51,7 +54,10 @@
                         series: [{
                             type: "bar",
                             data: [1]
-                        }]
+                        }],
+                        categoryAxis: {
+                            categories: "A"
+                        }
                     });
 
                     bar = plotArea.charts[0].points[0];
@@ -69,6 +75,10 @@
 
                 test("event arguments contain value", 1, function() {
                     linePointClick(function(e) { equals(e.value, 1); });
+                });
+
+                test("event arguments contain category", 1, function() {
+                    linePointClick(function(e) { equals(e.category, "A"); });
                 });
 
                 test("event arguments contain series", 1, function() {
@@ -94,6 +104,10 @@
 
                 test("event arguments contain value", 1, function() {
                     barClick(function(e) { equals(e.value, 1); });
+                });
+
+                test("event arguments contain category", 1, function() {
+                    barClick(function(e) { equals(e.category, "A"); });
                 });
 
                 test("event arguments contain series", 1, function() {
