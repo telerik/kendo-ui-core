@@ -1,4 +1,4 @@
-<!DOCTYPE HTML>
+<!doctype html>
 <html>
     <head>
         <!-- meta -->
@@ -21,6 +21,7 @@
         <div class="description"></div>
         <!-- description -->
         <div id="example" class="t-content">
+            <h3>Basic template</h3>
             <div class="code-sample">
                 <h4 class="code-title">Source:</h4>
                 <pre class="prettyprint">
@@ -28,14 +29,16 @@ var inlineTemplate = kendo.template("Hello, &lt;#= firstName #&gt; &lt;#= lastNa
 var inlineData = { firstName: "John", lastName: "Doe" };
 $("#inline").html(inlineTemplate(inlineData));</pre>
             </div>
-            Output:
-            <div id="inline">
+            <div class="code-sample output">
+                <h4 class="code-title">Output:</h4>
+                <div class="prettyprint" id="inline"></div>
             </div>
+
             <h3>Template as script element</h3>
             <div class="code-sample">
                 <h4 class="code-title">Source:</h4>
                 <pre class="prettyprint">
-&lt;script id="scriptTemplate" type="text/x-kendo-template"&gt;
+&lt;script id="scriptTemplate" <strong>type="text/x-kendo-template"</strong>&gt;
     Hello, <#= firstName #> <#= lastName #>!
 &lt;/script&gt;
 
@@ -45,9 +48,11 @@ $("#inline").html(inlineTemplate(inlineData));</pre>
     $("#script").html(scriptTemplate(scriptData));
 &lt;/script&gt;</pre>
             </div>
-            Output:
-            <div id="script">
+            <div class="code-sample output">
+                <h4 class="code-title">Output:</h4>
+                <div class="prettyprint" id="script"></div>
             </div>
+
             <h3>Encoding HTML</h3>
             <div class="code-sample">
                 <h4 class="code-title">Source:</h4>
@@ -56,9 +61,11 @@ var encodingTemplate = kendo.template("HTML tags are encoded like this - ${ html
 var encodingData = { html: "&lt;strong&gt;lorem ipsum&lt;/strong&gt;" };
 $("#encoding").html(encodingTemplate(encodingData));</pre>
             </div>
-            Output:
-            <div id="encoding">
+            <div class="code-sample output">
+                <h4 class="code-title">Output:</h4>
+                <div class="prettyprint" id="encoding"></div>
             </div>
+
             <h3>Using JavaScript inside templates</h3>
             <div class="code-sample">
                 <h4 class="code-title">Source</h4>
@@ -77,12 +84,15 @@ $("#encoding").html(encodingTemplate(encodingData));</pre>
     $("#javascript").html(javascriptTemplate(javascriptData));
 &lt;script&gt;</pre>
             </div>
-            Output:
-            <div id="javascript">
+            <div class="code-sample output">
+                <h4 class="code-title">Output:</h4>
+                <div class="prettyprint" id="javascript"></div>
             </div>
+
             <script id="scriptTemplate" type="text/x-kendo-template">
                 Hello, <#= firstName #> <#= lastName #>!
             </script>
+
             <script id="javascriptTemplate" type="text/x-kendo-template">
                 <ul>
                     <# for (var i = 0; i < data.length; i++) { #>
@@ -90,6 +100,7 @@ $("#encoding").html(encodingTemplate(encodingData));</pre>
                     <# } #>
                 </ul>
             </script>
+
             <script>
                 var inlineTemplate = kendo.template("Hello, <#= firstName #> <#= lastName #>!");
                 var inlineData = { firstName: "John", lastName: "Doe" };
@@ -107,6 +118,25 @@ $("#encoding").html(encodingTemplate(encodingData));</pre>
                 var javascriptData = ["First", "Second", "Third"];
                 $("#javascript").html(javascriptTemplate(javascriptData));
             </script>
+
+            <style scoped>
+                #example h3:not(:first-child) {
+                    clear: both;
+                }
+
+                #example .code-sample {
+                    width: 70%;
+                    display: inline-block;
+                    margin-bottom: 20px;
+                    vertical-align: top;
+                }
+
+                #example .output {
+                    width: 24%;
+                    margin-left: 4%;
+                    display: inline-block;
+                }
+            </style>
         </div>
         <!-- tools -->
         <!-- tools -->

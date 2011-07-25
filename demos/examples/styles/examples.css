@@ -1162,7 +1162,7 @@ div.skinSelector .t-state-active
     background: linear-gradient(top, #ebebeb 0%,#dedede 100%);
 }
 
-pre.prettyprint,
+.prettyprint,
 .details-list dl
 {
     padding: 0;
@@ -1172,7 +1172,7 @@ pre.prettyprint,
     border-radius: 2px;
 }
 
-.code-sample pre.prettyprint,
+.code-sample .prettyprint,
 .details-list dl
 {
     padding: 10px;
