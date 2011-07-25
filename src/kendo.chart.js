@@ -1669,10 +1669,21 @@
                 };
 
             if (options) {
+                var userSetLimits = defined(options.min) || defined(options.max);
+                if (userSetLimits) {
+                    if (options.min === options.max) {
+                        if (options.min > 0) {
+                            options.min = 0;
+                        } else {
+                            options.max = 1;
+                        }
+                    }
+                }
+
                 if (options.majorUnit) {
                     autoOptions.min = floor(autoOptions.min, options.majorUnit);
                     autoOptions.max = ceil(autoOptions.max, options.majorUnit);
-                } else if (options.min || options.max) {
+                } else if (userSetLimits) {
                     options = deepExtend(autoOptions, options);
 
                     // Determine an auto major unit after min/max have been set
@@ -1925,8 +1936,8 @@
                 lineStart = lineBox[valueAxis + 1],
                 lineSize = isVertical ? lineBox.height() : lineBox.width(),
                 scale = lineSize / (options.max - options.min),
-                a = typeof a === UNDEFINED ? options.axisCrossingValue : a,
-                b = typeof b === UNDEFINED ? options.axisCrossingValue : b,
+                a = defined(a) ? a : options.axisCrossingValue,
+                b = defined(b) ? b : options.axisCrossingValue,
                 a = Math.max(Math.min(a, options.max), options.min),
                 b = Math.max(Math.min(b, options.max), options.min),
                 p1,
@@ -2247,7 +2258,7 @@
                 color = options.color,
                 borderColor = options.border.color;
 
-            if (typeof borderColor === UNDEFINED) {
+            if (!defined(borderColor)) {
                 borderColor =
                     new Color(color).brightness(BAR_BORDER_BRIGHTNESS).toHex();
             }
@@ -2291,7 +2302,7 @@
         updateRange: function(value, categoryIx) {
             var chart = this;
 
-            if (typeof value !== UNDEFINED) {
+            if (defined(value)) {
                 chart._seriesMin = Math.min(chart._seriesMin, value);
                 chart._seriesMax = Math.max(chart._seriesMax, value);
             }
@@ -2475,7 +2486,7 @@
                 totalsPos = chart._categoryTotalsPos,
                 totalsNeg = chart._categoryTotalsNeg;
 
-            if (typeof value !== UNDEFINED) {
+            if (defined(value)) {
                 if (isStacked) {
                     incrementSlot(value > 0 ? totalsPos : totalsNeg, categoryIx, value);
                 } else {
@@ -2588,7 +2599,7 @@
                 markerBackground = markers.background,
                 markerBorder = deepExtend({}, markers.border);
 
-            if (typeof markerBorder.color === UNDEFINED) {
+            if (!defined(markerBorder.color)) {
                 markerBorder.color =
                     new Color(markerBackground).brightness(BAR_BORDER_BRIGHTNESS).toHex();
             }
@@ -2702,7 +2713,7 @@
                 chart.seriesPoints[seriesIx] = points = [];
             }
 
-            if (typeof value === UNDEFINED || value === null) {
+            if (!defined(value) || value === null) {
                 if (isStacked || series.missingValues === ZERO) {
                     value = 0;
                 } else {
@@ -2750,7 +2761,7 @@
                 isStacked = options.isStacked,
                 totals = chart._categoryTotals;
 
-            if (typeof value !== UNDEFINED) {
+            if (defined(value)) {
                 if (isStacked) {
                     incrementSlot(totals, categoryIx, value);
                     chart._seriesMin = Math.min(chart._seriesMin, sparseArrayMin(totals));
@@ -3811,7 +3822,7 @@
                 fillRotation = 270 - options.normalAngle || 0,
                 fillOpacity = options.fillOpacity;
 
-            if (typeof fillOpacity === UNDEFINED) {
+            if (!defined(fillOpacity)) {
                 fillOpacity = 1;
             }
 
@@ -3978,7 +3989,7 @@
             max = - Number.MAX_VALUE;
         for (var i = 0, length = arr.length; i < length; i++) {
             var n = arr[i];
-            if (typeof n !== UNDEFINED) {
+            if (defined(n)) {
                 min = Math.min(min, n);
                 max = Math.max(max, n);
             }
@@ -4025,7 +4036,7 @@
                         destination[property] = {};
                     }
                     deepExtend(destination[property], propValue);
-                } else if (typeof propValue !== "undefined") {
+                } else if (defined(propValue)) {
                     destination[property] = propValue;
                 }
             }
@@ -4330,6 +4341,10 @@
         }
 
         return id;
+    }
+
+    function defined(value) {
+        return typeof value !== UNDEFINED;
     }
 
     // Exports ================================================================
