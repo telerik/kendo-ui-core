@@ -398,27 +398,12 @@
          * @option {Object} [seriesDefaults.line] The line configuration options. For more details examine the series.
          *
          * @option {Array} [series]
-         * @option {Array} [series(type="bar")]
-         * @option {Array} [series(type="column")]
-         * @option {Array} [series(type="line")]
-         * @options {String} [series.type] The type of the series.
-         *    <dl>
-         *         <dt>
-         *              
-         *         </dt>
-         *         <dd>
-         *              The bars have glass effect overlay.
-         *         </dd>
-         *         <dt>
-         *              "none"
-         *         </dt>
-         *         <dd>
-         *              The bars have no effect overlay.
-         *         </dd>
-         *    </dl>         * @option {String} [series.name] The series name.
+         * @option {Array} [series(type="bar")] The type of the series.
+         * @option {Array} [series(type="column")] The type of the series.
+         * @option {Array} [series(type="line")] The type of the series.
+         * @option {String} [series.name] The series name.
          * @option {String} [series.color] The series base color.
          * @option {Number} [series.opacity] <0> The series opacity.
-         * 
          *
          *
          * @option {Object} [chartArea] The chart area configuration options.
@@ -1684,7 +1669,7 @@
                 labelFormat = options.labels.format;
 
             for (var i = 0; i < majorDivisions; i++) {
-                var text = new Text(
+                var text = new TextBox(
                     labelFormat ? format(labelFormat, currentValue) : currentValue.toString(),
                     labelOptions
                 );
@@ -1955,7 +1940,7 @@
 
             for (var i = 0; i < options.categories.length; i++) {
                 var label = options.categories[i];
-                axis.append(new Text(label, labelOptions));
+                axis.append(new TextBox(label, labelOptions));
             }
         },
 
