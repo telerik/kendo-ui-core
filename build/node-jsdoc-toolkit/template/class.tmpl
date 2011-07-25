@@ -283,9 +283,10 @@
         </if>
 
         {!
-            var ownOptions = data.comment.getTag("option");
+            var ownOptions = data.comment.getTag("option")
+                exampleRe = /[\r\n]?_example(([\r\n]|.)*)/i;
 
-            if (defined(ownOptions) && ownOptions.length)
+            if (defined(ownOptions) && ownOptions.length) {
                 ownOptions.forEach(function (value, idx) {
                     var description = /\[(.*)\]/i.exec(ownOptions[idx].desc);
                     description && (ownOptions[idx].name = description[1]);
@@ -295,10 +296,19 @@
 
                     ownOptions[idx].desc = ownOptions[idx].desc.replace(/\[(.*)\]/i, "").replace(/^\s*\<([\S]+)\>/i, "");
                     ownOptions[idx].isOptional = true;
+
+                    var example = exampleRe.exec(ownOptions[idx].desc);
+
+                    if (example) {
+                        ownOptions[idx].example = [example[1].trim()];
+                        ownOptions[idx].desc = ownOptions[idx].desc.replace(exampleRe, "");
+                    }
                 });
 
                 ownOptions.sort(makeSortby("name"));
+            }
         !}
+
         <div id="codeStrip">
         <ul>
             <if test="!data.isBuiltin() && (data.isNamespace || data.is('CONSTRUCTOR'))">
@@ -352,56 +362,96 @@
         !}
         </div>
         <!-- description -->
+{!
+    // Simple JavaScript Templating
+    // John Resig - http://ejohn.org/ - MIT Licensed
+    (function(){
+      var cache = {};
+
+      this.tmpl = function tmpl(str, data){
+        // Figure out if we're getting a template, or if we need to
+        // load the template - and be sure to cache the result.
+        var fn = !/\W/.test(str) ?
+          cache[str] = cache[str] ||
+            tmpl(document.getElementById(str).innerHTML) :
+
+          // Generate a reusable function that will serve as a template
+          // generator (and which will be cached).
+          new Function("obj",
+            "var p=[],print=function(){p.push.apply(p,arguments);};" +
+
+            // Introduce the data as local variables using with(){}
+            "with(obj){p.push('" +
+
+            // Convert the template into pure JavaScript
+            str
+              .replace(/[\r\t\n]/g, " ")
+              .split("<%").join("\t")
+              .replace(/((^|%>)[^\t]*)'/g, "$1\r")
+              .replace(/\t=(.*?)%>/g, "',$1,'")
+              .split("\t").join("');")
+              .split("%>").join("p.push('")
+              .split("\r").join("\\'")
+          + "');}return p.join('');");
+
+        // Provide some basic currying to the user
+        return data ? fn( data ) : fn;
+      };
+    })();
+
+    var optionsTemplate = tmpl(
+        '<div class="detailHandle">' +
+            '<div class="detailCollapsed"></div>' +
+            '<code class="symbol"><%= name %></code>' +
+            '<%= type ? \': <span class="type">\' + type + \'</span>\' : \'\' %>' +
+            '<%= defaultValue ? \'<span class="defaultValue">(default: \' + defaultValue + \')</span>\' : \'\' %>' +
+        '</div>' +
+        '<div class="detailBody">' +
+            '<div class="desc"><%= desc %></div>' +
+            '<% for (var exampleIdx = 0; typeof example != "undefined" && exampleIdx < example.length; exampleIdx++) { %>' +
+                '<div class="code-sample">' +
+                    '<h4 class="code-title">Example</h4>' +
+                    '<pre class="code prettyprint lang-js"><code><%= example[exampleIdx] %></code></pre>' +
+                '</div>' +
+            '<% } %>' +
+        '</div>'
+    );
+
+    function sectionDistribution(options) {
+        var result = {};
+
+        // nest options
+        for (var idx = 0; idx < ownOptions.length; idx++) {
+            var currentName = ownOptions[idx].name;
+
+            var nameSplit = currentName.split('.');
+
+            var currentNamespace = result;
+
+            for (var j = 0; j < nameSplit.length; j++) {
+                currentNamespace = currentNamespace[nameSplit[j]] = currentNamespace[nameSplit[j]] || { index: idx };
+            }
+        }
+
+        return result;
+    }
+
+    function renderOptions (options) {
+        var html = "";
+
+        for (var i in options) {
+            html += optionsTemplate(options[i]);
+        }
+
+        return html;
+    }
+!}
 
         <!-- help-data -->
         <if test="defined(ownOptions) && ownOptions.length">
             <div class="optionsContainer">
-                <for each="member" in="ownOptions">
-                    <div class="detailHandle" id="{+Link.symbolNameToLinkName(member)+}">
-                        <div class="detailCollapsed"></div>
-
-                        <code class="symbol">{+member.name+}</code>
-
-                        <if test="member.type">: <span class="type">{+new Link().toSymbol(member.type)+}</span></if>
-                        <if test="member.defaultValue"><span class="defaultValue">(default: {+resolveLinks(member.defaultValue)+})</span></if>
-                    </div>
-                    <div class="detailBody">
-                        <div class="desc">{+resolveLinks(member.desc)+}</div>
-
-                        <if test="member.srcFile && member.srcFile != data.srcFile">
-                            <br />
-                            <i>Defined in: </i> {+new Link().toSrc(member.srcFile)+}.
-                        </if>
-
-                        <if test="member.example && member.example.length">
-                            <for each="example" in="member.example">
-                                <div class="code-sample">
-                                    <h4 class="code-title">Example</h4>
-                                    <pre class="code prettyprint lang-js"><code>{+example+}</code></pre>
-                                </div>
-                            </for>
-                        </if>
-
-                        <if test="member.deprecated || member.since || member.see">
-                            <dl class="detailList">
-                                <if test="member.deprecated">
-                                    <dt class="heading">Deprecated:</dt>
-                                    <dt>{+ resolveLinks(member.deprecated) +}</dt>
-                                </if>
-                                <if test="member.since">
-                                    <dt class="heading">Since:</dt>
-                                    <dd>{+ member.since +}</dd>
-                                </if>
-                                <if test="member.see && member.see.length">
-                                    <dt class="heading">See:</dt>
-                                    <for each="item" in="member.see">
-                                        <dd>{+ new Link().toSymbol(item) +}</dd>
-                                    </for>
-                                </if>
-                            </dl>
-                        </if>
-                    </div>
-                </for>
+                {# options are rendered through js + micro-templates in order to achieve recursive template rendering #}
+                {+ renderOptions(ownOptions) +}
             </div>
         </if>
 
