@@ -327,7 +327,7 @@
                     numericAxis.getViewElements(view);
 
                     same($.map(view.log.text, function(text) { return text.content }),
-                         ["0", "0.2", "0.4", "0.6", "0.8", "1", "1.2"]);
+                         [0, 0.2, 0.4, 0.6, 0.8, 1, 1.2]);
                 });
 
                 test("labels have set color", 1, function() {
@@ -468,7 +468,7 @@
                     numericAxis.getViewElements(view);
 
                     same($.map(view.log.text, function(text) { return text.content }),
-                         ["0", "0.2", "0.4", "0.6", "0.8", "1", "1.2"]);
+                         [0, 0.2, 0.4, 0.6, 0.8, 1, 1.2]);
                 });
 
                 test("labels are distributed horizontally", function() {
