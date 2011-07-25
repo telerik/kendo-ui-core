@@ -94,11 +94,17 @@
                     that._dragEnd(this, e);                                                           
                 },
                 dragstart: function(e) {
-                    var element = e.currentTarget,
-                        marginLeft = parseInt(element.css("marginLeft")),
-                        left = element.position().left - marginLeft;
+                    var element, marginRight, left;
 
                     intializePositions();
+                    if(dropCuePositions.length) {
+                        element = dropCuePositions[dropCuePositions.length - 1].element;
+                        marginRight = parseInt(element.css("marginRight"));
+                        left = element.position().left + element.outerWidth() + marginRight;
+                    } else {
+                        left = 0;
+                    }
+                    
                     dropCue.css({top:3, left: left}).appendTo(groupContainer);
                     this.hint.find(".t-drag-status").removeClass("t-denied").addClass("t-add");
                 },
@@ -169,7 +175,7 @@
 
             if(position >= right) {                
                 position = {
-                    left: lastCuePosition.element.position().left + lastCuePosition.element.outerWidth() + marginRight /*right + marginRight*/,
+                    left: lastCuePosition.element.position().left + lastCuePosition.element.outerWidth() + marginRight,
                     element: lastCuePosition.element,
                     before: false
                 };
