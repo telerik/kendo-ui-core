@@ -75,8 +75,9 @@
                     if ("kendoConsole" in window) {
                         kendoConsole.log(
                             "Series click :: " +
-                            e.series.name + ": " +
-                            kendo.toString(e.value, "#,##0") + " %"
+                            e.series.name + " (" +
+                            e.category + "): " +
+                            kendo.toString(e.value, "#,##0") + "%"
                         );
                     }
                 }
