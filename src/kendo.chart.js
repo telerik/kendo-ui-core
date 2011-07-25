@@ -2696,7 +2696,6 @@
                 }
             }
 
-            console.log(category);
             var point = new LinePoint(value,
                 deepExtend({
                     series: series,
