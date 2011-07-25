@@ -1040,14 +1040,14 @@ div.skinSelector .t-state-active
 {
     cursor: pointer;
     border-bottom: 1px solid #fff;
-    background: #ddd;
-    background: -moz-linear-gradient(top, #ddd 0%, #c1c1c1 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ddd), color-stop(100%,#c1c1c1));
-    background: -webkit-linear-gradient(top, #ddd 0%,#c1c1c1 100%);
-    background: -o-linear-gradient(top, #ddd 0%,#c1c1c1 100%);
-    background: -ms-linear-gradient(top, #ddd 0%,#c1c1c1 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ddd', endColorstr='#c1c1c1',GradientType=0 );
-    background: linear-gradient(top, #ddd 0%,#c1c1c1 100%);
+    background: #dddddd;
+    background: -moz-linear-gradient(top, #dddddd 0%, #c1c1c1 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#dddddd), color-stop(100%,#c1c1c1));
+    background: -webkit-linear-gradient(top, #dddddd 0%,#c1c1c1 100%);
+    background: -o-linear-gradient(top, #dddddd 0%,#c1c1c1 100%);
+    background: -ms-linear-gradient(top, #dddddd 0%,#c1c1c1 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dddddd', endColorstr='#c1c1c1',GradientType=0 );
+    background: linear-gradient(top, #dddddd 0%,#c1c1c1 100%);
 }
 
 .detailBody
