@@ -73,9 +73,17 @@
             <div class="configuration">
                 <span class="configHead">Configure</span>
                 <span class="configTitle">Animation Settings</span>
-                <input id="toggle" name="animation" type="radio" /><label for="toggle">toggle animation</label><br />
-                <input id="expand" name="animation" type="radio" checked="checked" /><label for="expand">expand animation</label><br />
-                <input id="opacity" type="checkbox" checked="checked" /><label for="opacity">animate opacity</label>
+                <ul class="options">
+                    <li>
+                        <input id="toggle" name="animation" type="radio" /> <label for="toggle">toggle animation</label>
+                    </li>
+                    <li>
+                        <input id="expand" name="animation" type="radio" checked="checked" /> <label for="expand">expand animation</label>
+                    </li>
+                    <li>
+                        <input id="opacity" type="checkbox" checked="checked" /> <label for="opacity">animate opacity</label>
+                    </li>
+                </ul>
             </div>
             <script type="text/javascript">
                 var original = $("#PanelBar1").clone(true);

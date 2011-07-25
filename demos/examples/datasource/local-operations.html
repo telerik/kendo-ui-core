@@ -89,26 +89,32 @@
                 });
             </script>
             <div class="configuration">
-                <div>
-                    <label>Page: <input type="number" value="1" id="page" min="1" /></label>
-                </div>
-                <div>
-                    <label>Order by: <select id="order">
+                <span class="configHead">Configure</span>
+                <ul class="options">
+                    <li>
+                        <label for="page">Page:</label>
+                        <input type="number" value="1" id="page" min="1" />
+                    </li>
+                    <li>
+                        <label for="order">Order by:</label>
+                        <select id="order">
                             <option value="Id">Id</option>
                             <option value="FirstName">First Name</option>
                             <option value="LastName">Last Name</option>
                             <option value="Age">Age</option>
                         </select>
-                    </label>
-                    <label>Direction: <select id="dir">
+                    </li>
+                    <li>
+                        <label for="dir">Direction:</label>
+                        <select id="dir">
                             <option value="asc">Ascending</option>
                             <option value="desc">Descending</option>
                         </select>
-                    </label>
-                </div>
-                <div>
-                    <button class="t-button" id="apply">Apply</button>
-                </div>
+                    </li>
+                    <li>
+                        <button class="t-button" id="apply">Apply</button>
+                    </li>
+                </ul>
             </div>
         </div>
         <!-- tools -->
