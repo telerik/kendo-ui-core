@@ -1223,6 +1223,7 @@
 
             return [
                 view.createText(text.content, {
+                    id: options.id,
                     x: text.box.x1, y: text.box.y1,
                     baseline: text.baseline,
                     font: options.font,
@@ -2325,7 +2326,8 @@
                     fillOpacity: options.opacity,
                     strokeOpacity: options.opacity
                 }, border),
-                elements = [];
+                elements = [],
+                label = bar.children[0];
 
             elements.push(
                 view.createRect(box, rectStyle)
@@ -2335,6 +2337,9 @@
             );
 
             bar.registerId(options.id);
+            if (label) {
+                bar.registerId(label.options.id);
+            }
 
             return elements;
         },
@@ -2496,7 +2501,8 @@
                 children = barChart.children,
                 isStacked = barChart.options.isStacked,
                 labelOptions = deepExtend({
-                    isVertical: options.isVertical
+                    isVertical: options.isVertical,
+                    id: uniqueId()
                 }, series.labels);
 
             CategoricalChart.fn.addValue.apply(barChart, arguments);
@@ -2703,6 +2709,7 @@
                     opacity: markers.opacity
                 }),
                 new TextBox(point.value, deepExtend({
+                    id: uniqueId(),
                     visible: labels.visible,
                     align: CENTER,
                     vAlign: CENTER,
@@ -2765,9 +2772,12 @@
 
         getViewElements: function(view) {
             var element = this,
-                marker = element.children[0];
+                children = element.children,
+                marker = children[0],
+                label = children[1];
 
             element.registerId(marker.options.id);
+            element.registerId(label.options.id);
 
             return ChartElement.fn.getViewElements.call(element, view);
         }
