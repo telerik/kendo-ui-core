@@ -69,32 +69,33 @@
      * deliver high-quality data visualizations.
      * All graphics are rendered using SVG with a fallback to VML for legacy browsers.
      *
-     * <p>
-     * Key features:
-     * </p>
+     * <p>Key features:</p>
+     *
      * <ul>
      *    <li>Bar Chart </li>
      *    <li>Column Chart </li>
      *    <li>Line Chart </li>
      *    <li>Standards based, no plug-ins required</li>
      * </ul>
+     *
      * @exampleTitle Bar Chart with inline data
      * @example
-     * <!-- HTML -->
      * <div id="chart" style="width: 600px; 400px"> </div>
-     * <script type="text/javascript">
+     *
+     * <script>
      *    $(document).ready(function() {
      *        $("#chart").kendoChart({
      *            title: {
      *                text: "Spain electricity production (GWh)"
      *            },
-     *            series:
-     *            [{
-     *                data: [31807, 43864, 26270],
-     *                name: "Hydro"
-     *            }],
+     *            series: [
+     *                {
+     *                    name: "Hydro",
+     *                    data: [ 31807, 43864, 26270 ]
+     *                }
+     *            ],
      *            categoryAxis: {
-     *                categories: ["2000", "2001", "2002"]
+     *                categories: [ "2000", "2001", "2002" ]
      *            }
      *        });
      *    });
