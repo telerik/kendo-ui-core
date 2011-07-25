@@ -59,6 +59,17 @@
                 equal(autocomplete.dataSource.data().length, 2);
             });
 
+            test("rendering honers dataTextField", function() {
+                var data = [{text: 1}, {text: 2}], autocomplete = new AutoComplete(input, {
+                    dataSource: data,
+                    dataTextField: "text"
+                });
+
+                autocomplete.dataSource.query();
+
+                equal(autocomplete.ul.children().eq(0).text(), "1");
+            });
+
             test("autocomplate initializes a UL for its items", function() {
                 var autocomplete = new AutoComplete(input, []);
 
@@ -91,6 +102,18 @@
 
                 equal(autocomplete.template("foo"), "<li class='t-item' unselectable='on'>FOO</li>");
             });
+
+            test("highlight first item", function() {
+                var autocomplete = new AutoComplete(input, {
+                    dataSource: ["1", "2", "3"],
+                    highlightFirst: true
+                });
+
+                autocomplete.dataSource.query();
+
+                ok(autocomplete.ul.children().eq(0).hasClass("t-state-focused"));
+            });
+
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

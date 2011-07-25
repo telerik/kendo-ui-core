@@ -214,6 +214,39 @@
                 autocomplete.suggest("");
                 equal(input.val(), "foo, b, ");
             });
+
+            test("search should filter items using filter property", function() {
+                var autocomplete = new AutoComplete(input, {
+                    dataSource: ["foo", "bar", "bafoo"],
+                    filter: "contains"
+                });
+
+                autocomplete.dataSource.bind("change", function() {
+                    equal(autocomplete.dataSource.view().length, 2);
+                    start();
+                });
+
+                autocomplete.search("foo");
+
+                stop(200);
+            });
+
+            test("filtering honers dataTextField", function() {
+                var data = [{text: "foo"}, {text: "2"}], autocomplete = new AutoComplete(input, {
+                    dataSource: data,
+                    dataTextField: "text"
+                });
+
+                autocomplete.dataSource.bind("change", function() {
+                    equal(autocomplete.dataSource.view().length, 1);
+                    equal(autocomplete.dataSource.view()[0].text, "foo");
+                    start();
+                });
+
+                autocomplete.search("f");
+
+                stop(300);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

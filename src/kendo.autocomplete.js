@@ -101,8 +101,6 @@
                 CHANGE
             ], that.options);
 
-            that._template();
-
             that.element
                 .attr("autocomplete", "off")
                 .addClass('t-widget t-input t-autocomplete')
@@ -118,6 +116,9 @@
                         }, 100);
                     }
                 });
+
+
+            that.ul.width(that.element.width());
         },
 
         options: {
@@ -141,12 +142,17 @@
 
         refresh: function() {
             var that = this,
+            ul = that.ul[0],
             data = that.dataSource.view(),
             length = data.length;
 
-            that.ul[0].innerHTML = kendo.render(that.template, data);
+            ul.innerHTML = kendo.render(that.template, data);
 
             that._height(length);
+
+            if (length && that.options.highlightFirst) {
+                that.current($(ul.firstChild));
+            }
 
             that.popup[length ? "open" : "close"]();
         },

@@ -136,18 +136,6 @@
                 ok(changeWasCalled);
             });
 
-            test("raise init event when load autocomplete", function() {
-                input.kendoAutoComplete({
-                    dataSource: [{text: "foo"}, {text: "bar"}],
-                    init: function() {
-                        ok(true);
-                        start();
-                    }
-                });
-
-                stop(300);
-            });
-
             test("open event when open popup on search", function() {
                 input.kendoAutoComplete({
                     delay: 0,
