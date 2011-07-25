@@ -63,24 +63,19 @@
                 $("#container").kendoChart({
                     title: {
                         text: "Teh chart",
-                        position: "top",
-                        border: {
-                            width: 1,
-                            color: "red"
-                        }
+                        position: "top"
                     },
                     legend: {
                         position: "right",
                         visible: true
                     },
                     dataSource: data,
-                seriesDefaults: {
-                        type: "bar",
+                    seriesDefaults: {
                         labels: {
-                            visible: true
+                            visible: false
                         },
 
-                        bar: {
+                        column: {
                             stack: true
                         },
 
@@ -90,41 +85,25 @@
                     },
                     series: [
                         {
+                            name: "Value A",
+                            field: "a"
+                        }, {
+                            name: "Value B",
+                            field: "b"
+                        }, {
+                            name: "Value C",
+                            field: "c"
+                        }, {
                             type: "line",
                             name: "Value D",
                             field: "d",
                             markers: {
                                 type: "circle"
-                            },
-                            labels: {
-                                position: "right"
                             }
                         }
                     ],
                     categoryAxis: {
-                        field: "name",
-                        labels: {
-                            color: "red",
-                            border: {
-                                color: "blue",
-                                width: 2
-                            },
-                            margin: 5,
-                            padding: 5,
-                            background: "green"
-                        }
-                    },
-                    valueAxis: {
-                        labels: {
-                            color: "red",
-                            border: {
-                                color: "blue",
-                                width: 2
-                            },
-                            margin: 25,
-                            padding: 5,
-                            background: "green"
-                        }
+                        field: "name"
                     },
                     seriesClick: function(e) {
                     }
