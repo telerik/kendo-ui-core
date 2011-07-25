@@ -419,6 +419,10 @@ var categories = {
                 {
                     text: "Binding to local data",
                     url: "chart/local-data.html"
+                },
+                {
+                    text: "Binding to remote data",
+                    url: "chart/remote-data.html"
                 }
             ]
         },
