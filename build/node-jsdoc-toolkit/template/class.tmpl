@@ -318,7 +318,7 @@
                     for (var j = i+1; j < ownOptions.length; j++) {
                         var name = ownOptions[j].name;
 
-                        if (name.indexOf(currentOptionName) == 0 && name.substring(currentOptionName.length + 1).indexOf('.') < 0) {
+                        if (name.indexOf(currentOptionName + ".") == 0 && name.substring(currentOptionName.length + 1).indexOf('.') < 0) {
                             subOptions.push(ownOptions[j]);
                         }
                     }
