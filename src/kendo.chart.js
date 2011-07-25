@@ -149,16 +149,16 @@
          * @option {Boolean} [title.visible] <"falce"> The visibility of the title.
          * @option {Number} [title.margin] <5> The margin of the title.
          * @option {Object} [title.margin] The margin of the title.
-         * @option {Number} [title.margin.top] <0> The top margin.
-         * @option {Number} [title.margin.right] <0> The right margin.
-         * @option {Number} [title.margin.bottom] <0> The bottom margin.
-         * @option {Number} [title.margin.left] <0> The left margin.
+         * @option {Number} [title.margin.top] <5> The top margin.
+         * @option {Number} [title.margin.right] <5> The right margin.
+         * @option {Number} [title.margin.bottom] <5> The bottom margin.
+         * @option {Number} [title.margin.left] <5> The left margin.
          * @option {Number} [title.padding] <5> The padding of the title.
          * @option {Object} [title.padding] The padding of the title.
-         * @option {number} [title.padding.top] <0> The top padding.
-         * @option {number} [title.padding.right] <0> The right padding.
-         * @option {number} [title.padding.bottom] <0> The bottom padding.
-         * @option {number} [title.padding.left] <0> The left padding.
+         * @option {number} [title.padding.top] <5> The top padding.
+         * @option {number} [title.padding.right] <5> The right padding.
+         * @option {number} [title.padding.bottom] <5> The bottom padding.
+         * @option {number} [title.padding.left] <5> The left padding.
          * @option {Object} [title.border] The border of the title.
          * @option {Number} [title.border.width] <0> The width of the border.
          * @option {String} [title.border.color] <"black"> The color of the border.
@@ -202,16 +202,16 @@
          * @option {Boolean} [legend.visible] <true> The visibility of the legend.
          * @option {Number} [legend.margin] <10> The margin of the legend.
          * @option {Object} [legend.margin] The margin of the labels.
-         * @option {Number} [legend.margin.top] <0> The top margin.
-         * @option {Number} [legend.margin.right] <0> The right margin.
-         * @option {Number} [legend.margin.bottom] <0> The bottom margin.
-         * @option {Number} [legend.margin.left] <0> The left margin.
+         * @option {Number} [legend.margin.top] <10> The top margin.
+         * @option {Number} [legend.margin.right] <10> The right margin.
+         * @option {Number} [legend.margin.bottom] <10> The bottom margin.
+         * @option {Number} [legend.margin.left] <10> The left margin.
          * @option {Number} [legend.padding] <5> The padding of the legend.
          * @option {Object} [legend.padding] The margin of the labels.
-         * @option {Number} [legend.padding.top] <0> The top padding.
-         * @option {Number} [legend.padding.right] <0> The right padding.
-         * @option {Number} [legend.padding.bottom] <0> The bottom padding.
-         * @option {Number} [legend.padding.left] <0> The left padding.
+         * @option {Number} [legend.padding.top] <5> The top padding.
+         * @option {Number} [legend.padding.right] <5> The right padding.
+         * @option {Number} [legend.padding.bottom] <5> The bottom padding.
+         * @option {Number} [legend.padding.left] <5> The left padding.
          * @option {Object} [legend.border] The border of the legend.
          * @option {Number} [legend.border.width] <0> The width of the border.
          * @option {String} [legend.border.color] <"black"> The color of the border.
@@ -303,7 +303,7 @@
          *         </dd>
          *    </dl>
          * @option {Number} [categoryAxis.majorTickSize] <3> The axis major tick size.
-         * @option {String} [categoryAxis.majorTickType] <"none"> The axis major tick size.
+         * @option {String} [categoryAxis.majorTickType] <"outside"> The axis major tick size.
          *    <dl>
          *         <dt>
          *              "outside"
@@ -325,7 +325,7 @@
          * @option {Object} [categoryAxis.majorGridLines] Configures the major grid lines.
          * @option {Number} [categoryAxis.majorGridLines.width] <1> The width of the lines.
          * @option {String} [categoryAxis.majorGridLines.color] <"black"> The color of the lines.
-         * @option {Boolean} [categoryAxis.majorGridLines.visible] <true> The visibility of the lines.
+         * @option {Boolean} [categoryAxis.majorGridLines.visible] <false> The visibility of the lines.
          * @option {Object} [categoryAxis.line] Configures the axis line.
          * @option {Number} [categoryAxis.line.width] <1> The width of the lines.
          * @option {String} [categoryAxis.line.color] <"black"> The color of the lines.
@@ -349,16 +349,86 @@
          * @option {Number} [categoryAxis.labels.border.width] <0> The width of the border.
          * @option {String} [categoryAxis.labels.border.color] <"black"> The color of the border.
          * @option {String} [categoryAxis.labels.format] The format of the labels.
+         *
+         *
+         *
          * @option {Object} [seriesDefaults]
-         * @option {Object} [series]
+         * @option {Boolean} [seriesDefaults.stacked] <false> A value indicating if the series should be stacked.
+         * @option {Number} [seriesDefaults.gap] <1.5> The distance between category clusters.
+         * @option {Number} [seriesDefaults.spacing] <0.4> Space between bars.
+         * @option {Object} [seriesDefaults.labels] Configures the series data labels.
+         * @option {String} [seriesDefaults.labels.font] <"12px Verdana, sans-serif"> The font style of the labels.
+         * @option {Boolean} [seriesDefaults.labels.visible] <true> The visibility of the labels.
+         * @option {Number} [seriesDefaults.labels.margin] <0> The margin of the labels.
+         * @option {Object} [seriesDefaults.labels.margin] The margin of the labels.
+         * @option {Number} [seriesDefaults.labels.margin.top] <0> The top margin.
+         * @option {Number} [seriesDefaults.labels.margin.right] <0> The right margin.
+         * @option {Number} [seriesDefaults.labels.margin.bottom] <0> The bottom margin.
+         * @option {Number} [seriesDefaults.labels.margin.left] <0> The left margin.
+         * @option {Number} [seriesDefaults.labels.padding] <0> The padding of the labels.
+         * @option {Object} [seriesDefaults.labels.padding] The padding of the labels.
+         * @option {Number} [seriesDefaults.labels.padding.top] <0> The top padding.
+         * @option {Number} [seriesDefaults.labels.padding.right] <0> The right padding.
+         * @option {Number} [seriesDefaults.labels.padding.bottom] <0> The bottom padding.
+         * @option {Number} [seriesDefaults.labels.padding.left] <0> The left padding.
+         * @option {Object} [seriesDefaults.labels.border] The border of the labels.
+         * @option {Number} [seriesDefaults.labels.border.width] <0> The width of the border.
+         * @option {String} [seriesDefaults.labels.border.color] <"black"> The color of the border.
+         * @option {String} [seriesDefaults.labels.format] The format of the labels.
+         * @option {Object} [seriesDefaults.border] The border of the series.
+         * @option {Number} [seriesDefaults.border.width] <0> The width of the border.
+         * @option {String} [seriesDefaults.border.color] <"black"> The color of the border.
+         * @option {String} [seriesDefaults.overlay] <"glass"> The effects overlay.
+         *    <dl>
+         *         <dt>
+         *              "glass"
+         *         </dt>
+         *         <dd>
+         *              The bars have glass effect overlay.
+         *         </dd>
+         *         <dt>
+         *              "none"
+         *         </dt>
+         *         <dd>
+         *              The bars have no effect overlay.
+         *         </dd>
+         *    </dl>
+         * @option {Object} [seriesDefaults.bar] The bar configuration options. For more details examine the series.
+         * @option {Object} [seriesDefaults.column] The column configuration options. For more details examine the series.
+         * @option {Object} [seriesDefaults.line] The line configuration options. For more details examine the series.
+         *
+         * @option {Array} [series]
+         * @option {Array} [series(type="bar")]
+         * @option {Array} [series(type="column")]
+         * @option {Array} [series(type="line")]
+         * @options {String} [series.type] The type of the series.
+         *    <dl>
+         *         <dt>
+         *              
+         *         </dt>
+         *         <dd>
+         *              The bars have glass effect overlay.
+         *         </dd>
+         *         <dt>
+         *              "none"
+         *         </dt>
+         *         <dd>
+         *              The bars have no effect overlay.
+         *         </dd>
+         *    </dl>         * @option {String} [series.name] The series name.
+         * @option {String} [series.color] The series base color.
+         * @option {Number} [series.opacity] <0> The series opacity.
+         * 
+         *
+         *
          * @option {Object} [chartArea] The chart area configuration options.
          * @option {String} [chartArea.background] <"white"> The background color of the chart area.
          * @option {Number} [chartArea.margin] <5> The margin of the chart area.
          * @option {Object} [chartArea.margin] The margin of the chart area.
-         * @option {Number} [chartArea.margin.top] <0> The top margin.
-         * @option {Number} [chartArea.margin.right] <0> The right margin.
-         * @option {Number} [chartArea.margin.bottom] <0> The bottom margin.
-         * @option {Number} [chartArea.margin.left] <0> The left margin.
+         * @option {Number} [chartArea.margin.top] <5> The top margin.
+         * @option {Number} [chartArea.margin.right] <5> The right margin.
+         * @option {Number} [chartArea.margin.bottom] <5> The bottom margin.
+         * @option {Number} [chartArea.margin.left] <5> The left margin.
          * @option {Object} [chartArea.border] The border of the chart area.
          * @option {Number} [chartArea.border.width] <0> The width of the border.
          * @option {String} [chartArea.border.color] <"black"> The color of the border.
@@ -366,10 +436,10 @@
          * @option {String} [plotArea.background] <"white"> The background color of the plot area.
          * @option {Number} [plotArea.margin] <0> The margin of the plot area.
          * @option {Object} [plotArea.margin] The margin of the plot area.
-         * @option {Number} [plotArea.margin.top] <0> The top margin.
-         * @option {Number} [plotArea.margin.right] <0> The right margin.
-         * @option {Number} [plotArea.margin.bottom] <0> The bottom margin.
-         * @option {Number} [plotArea.margin.left] <0> The left margin.
+         * @option {Number} [plotArea.margin.top] <5> The top margin.
+         * @option {Number} [plotArea.margin.right] <5> The right margin.
+         * @option {Number} [plotArea.margin.bottom] <5> The bottom margin.
+         * @option {Number} [plotArea.margin.left] <5> The left margin.
          * @option {Object} [plotArea.border] The border of the plot area.
          * @option {Number} [plotArea.border.width] <0> The width of the border.
          * @option {String} [plotArea.border.color] <"black"> The color of the border.
@@ -839,7 +909,7 @@
                 color: BLACK,
                 width: 0
             },
-            margin: 5,
+            margin: getSpacing(5),
             zIndex: -1
         },
 
@@ -1092,8 +1162,8 @@
         options: {
             font: SANS12,
             position: "outsideEnd",
-            margin: 2,
-            padding: 2,
+            margin: getSpacing(2),
+            padding: getSpacing(2),
             color: BLACK,
             background: "",
             border: {
@@ -1181,8 +1251,8 @@
             color: BLACK,
             position: TOP,
             align: CENTER,
-            margin: 5,
-            padding: 5
+            margin: getSpacing(5),
+            padding: getSpacing(5)
         },
 
         create: function() {
@@ -1222,8 +1292,8 @@
             },
             offsetX: 0,
             offsetY: 0,
-            margin: 10,
-            padding: 5,
+            margin: getSpacing(10),
+            padding: getSpacing(5),
             border: {
                 color: BLACK,
                 width: 0
