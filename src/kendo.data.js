@@ -15,11 +15,11 @@
     *       title: "Star Wars: A New Hope",
     *       year: 1977
     *    }, {
-    *      name: "Star Wars: The Empire Strikes Back",
-    *      age: 1980
+    *      title: "Star Wars: The Empire Strikes Back",
+    *      year: 1980
     *    }, {
-    *      name: "Star Wars: Return of the Jedi",
-    *      age: 1983
+    *      title: "Star Wars: Return of the Jedi",
+    *      year: 1983
     *    }
     * ];
     * var localDataSource = new kendo.data.DataSource(movies);
@@ -737,7 +737,41 @@
          * @extends kendo.Observable
          * @param {Object} options Configuration options.
          * @option {Array} [data] The data in the DataSource.
-         */
+         * @option {Boolean} [serverPaging] <false> Determines if paging of the data should be handled on the server.
+         * @option {Boolean} [serverSorting] <false> Determines if sorting of the data should be handled on the server.
+         * @option {Boolean} [serverGrouping] <false> Determines if grouping of the data should be handled on the server.
+         * @option {Boolean} [serverFiltering] <false> Determines if filtering of the data should be handled on the server.
+         * @option {Boolean} [serverAggregates] <false> Determines if aggregates should be calculated on the server.
+         * @option {Number} [pageSize] <undefined> Sets the number of records which contains a given page of data.
+         * @option {Number} [page] <undefined> Sets the index of the displayed page of data.
+         * @option {Array|Object} [sort] <undefined> Sets initial sort order
+         * _example
+         * // sorts data ascending by orderId field
+         * sort: { field: "orderId", dir: "asc" }
+         *
+         * // sorts data ascending by orderId field and then descending by shipmentDate
+         * sort: [ { field: "orderId", dir: "asc" }, { field: "shipmentDate", dir: "desc" } ]
+         * @option {Array|Object} [filter] <undefined> Sets initial filter
+         * _example
+         * // returns only data where orderId is equal to 10248
+         * filter: { field: "orderId", operation: "eq", value: 10248 }
+         *
+         * // returns only data where orderId is equal to 10248 and customerName starts with Paul
+         * filter: [ { field: "orderId", operation: "eq", value: 10248 }, { field: "customerName", operation: "startswith", value: "Paul" } ]
+         * @option {Array|Object} [group] <undefined> Sets initial grouping
+         * _example
+         * // groups data by orderId field
+         * group: { field: "orderId" }
+         *
+         * // groups data by orderId and customerName fields
+         * group: [ { field: "orderId", dir: "desc" }, { field: "customerName", dir: "asc" } ]
+         * @option {Array|Object} [aggregates] <undefined> Sets fields on which initial aggregates should be calculated
+         * _example
+         * // calculates total sum of unitPrice field's values.
+         * [{ field: "unitPrice", aggregate: "sum" }]
+         * @option {Object} [transport] Sets the object responsible for loading and saving of data
+         * @option {Object} [schema] Set the object responsible for describing the raw data format
+         **/
         init: function(options) {
             var that = this, id, model, transport;
 
@@ -811,7 +845,19 @@
                 that.find = that.at;
             }
 
-            that.bind([ERROR, CHANGE, CREATE, DESTROY, UPDATE, REQUESTSTART], options);
+            that.bind([ /**
+                         * Fires when an error occurs during data retrieval.
+                         * @name kendo.data.DataSource#error
+                         * @event
+                         */
+                        ERROR,
+                        /**
+                         * Fires when data is changed
+                         * @name kendo.data.DataSource#change
+                         * @event
+                         */
+                        CHANGE,
+                        CREATE, DESTROY, UPDATE, REQUESTSTART], options);
         },
 
         options: {
@@ -986,6 +1032,9 @@
             return this.modelSet.create(index, values);
         },
 
+        /**
+         * Read data from transport
+         */
         read: function(additionalData) {
             var that = this,
                 options = extend(additionalData, {
@@ -1133,6 +1182,9 @@
             return this._data[index];
         },
 
+        /**
+         * Get data return from the transport
+         */
         data: function(value) {
             if (value !== undefined) {
                 this._data = value;
@@ -1141,10 +1193,30 @@
             }
         },
 
+        /**
+         * Returns a view of the data with operation such as in-memory sorting, paring, grouping and filtering are applied.
+         * To ensure that data is available this method should be use from within change event of the dataSource.
+         * @example
+         * dataSource.bind("change", function() {
+         *   renderView(dataSource.view());
+         * });
+         */
         view: function() {
             return this._view;
         },
-
+        /**
+         * Executes a query over the data. Available operations are paging, sorting, filtering, grouping.
+         * If data is not available or remote operations are enabled data is requested through the transport,
+         * otherwise operations are executed over the available data.
+         * @param {Object} [options] Contains the settings for the operations. Note: If setting for previous operation is omitted, this operation is not applied to the resulting view
+         * @example
+         *
+         * //create a view containing at most 20 records, taken from the 5th page and sorted ascending by orderId field.
+         * dataSource.query({ page: 5, pageSize: 20, sort: { field: "orderId", dir: "asc" } });
+         *
+         * // moves the view to the first page returning at most 20 records but without particular ordering.
+         * dataSource.query({ page: 1, pageSize: 20 });
+         */
         query: function(options) {
             var that = this,
                 options = options,
@@ -1203,6 +1275,12 @@
             }
         },
 
+        /**
+         * Get current page index or request a page with specified index.
+         * @param {Number} [val] <undefined> The index of the page to be retrieved
+         * @example
+         * dataSource.page(2);
+         */
         page: function(val) {
             var that = this,
                 skip;
@@ -1217,6 +1295,12 @@
             return skip !== undefined ? Math.round((skip || 0) / (that._take || 1)) + 1 : undefined;
         },
 
+        /**
+         * Get current pageSize or request a page with specified number of records.
+         * @param {Number} [val] <undefined> The of number of records to be retrieved.
+         * @example
+         * dataSource.pageSiza(25);
+         */
         pageSize: function(val) {
             var that = this;
 
@@ -1228,6 +1312,13 @@
             return that.take();
         },
 
+        /**
+         * Get current sort descriptors or sort the data.
+         * @param {Object|Array} [val] <undefined> Sort options to be applied to the data
+         * @example
+         * dataSource.sort({ field: "orderId", dir: "desc" });
+         * dataSource.sort([ { field: "orderId", dir: "desc" }, { field: "unitPrice", dir: "asc" } ]);
+         */
         sort: function(val) {
             var that = this;
 
@@ -1239,6 +1330,27 @@
             return this._sort;
         },
 
+        /**
+         * Get current filters or filter the data.
+         *<p>
+         * <i>Supported filter operations/aliases are</i>:
+         * <ul>
+         * <li><strong>Equal To</strong>: "eq", "==", "isequalto", "equals", "equalto", "equal"</li>
+         * <li><strong>Not Equal To</strong>: "neq", "!=", "isnotequalto", "notequals", "notequalto", "notequal", "not", "ne"</li>
+         * <li><strong>Less Then</strong>: "lt", "<", "islessthan", "lessthan", "less"</li>
+         * <li><strong>Less Then or Equal To</strong>: "lte", "<=", "islessthanorequalto", "lessthanequal", "le"</li>
+         * <li><strong>Greater Then</strong>: "gt", ">", "isgreaterthan", "greaterthan", "greater"</li>
+         * <li><strong>Greater Then or Equal To</strong>: "gte", ">=", "isgreaterthanorequalto", "greaterthanequal", "ge"</li>
+         * <li><strong>Starts With</strong>: "startswith"</li>
+         * <li><strong>Ends With</strong>: "endswith"</li>
+         * <li><strong>Contains</strong>: "contains", "substringof"</li>
+         * </ul>
+         * </p>
+         * @param {Object|Array} [val] <undefined> Filter(s) to be applied to the data.
+         * @example
+         * dataSource.filter({ field: "orderId", operation: "eq", value: 10428 });
+         * dataSource.filter([ { field: "orderId", operation: "neq", value: 42 }, { field: "unitPrice", operation: "ge", value: 3.14 } ]);
+         */
         filter: function(val) {
             var that = this;
 
@@ -1250,6 +1362,12 @@
             return that._filter;
         },
 
+        /**
+         * Get current group descriptors or group the data.
+         * @param {Object|Array} [val] <undefined> Group(s) to be applied to the data.
+         * @example
+         * dataSource.group({ field: "orderId" });
+         */
         group: function(val) {
             var that = this;
 
@@ -1261,10 +1379,19 @@
             return that._group;
         },
 
+        /**
+         * Get the total number of records
+         */
         total: function() {
             return this._total;
         },
 
+        /**
+         * Get current aggregate descriptors or applies aggregates to the data.
+         * @param {Object|Array} [val] <undefined> Aggregate(s) to be applied to the data.
+         * @example
+         * dataSource.aggregate({ field: "orderId", aggregate: "sum" });
+         */
         aggregate: function(val) {
             var that = this;
 
@@ -1276,10 +1403,16 @@
             return that._aggregates;
         },
 
+        /**
+         * Get result of aggregates calculation
+         */
         aggregates: function() {
             return this._aggregateResult;
         },
 
+        /**
+         * Get the number of available pages.
+         */
         totalPages: function() {
             var that = this,
                 pageSize = that.pageSize() || that.total();
