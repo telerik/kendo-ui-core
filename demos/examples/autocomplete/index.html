@@ -25,38 +25,22 @@
         <div class="description">First Look</div>
         <!-- description -->
         <div id="example" class="t-content">
-<div class="code-sample">
-                <h4 class="code-title">Initialization Data</h4>
-                <pre class="prettyprint lang-js">
-var data = [
-    "The Shawshank Redemption",
-    "The Godfather",
-    "The Godfather: Part II",
-    "Il buono, il brutto, il cattivo.",
-    "Pulp Fiction",
-    "12 Angry Men",
-    "Schindler's List",
-    "One Flew Over the Cuckoo's Nest",
-    "Inception",
-    "The Dark Knight"
-];</pre>
-                </div>
 
             <input id="input" />
 
             <script type="text/javascript">
                 $(document).ready(function() {
                     var data = [
-                        "The Shawshank Redemption",
+                        "12 Angry Men",
+                        "Il buono, il brutto, il cattivo.",
+                        "Inception",
+                        "One Flew Over the Cuckoo's Nest",
+                        "Pulp Fiction",
+                        "Schindler's List",
+                        "The Dark Knight",
                         "The Godfather",
                         "The Godfather: Part II",
-                        "Il buono, il brutto, il cattivo.",
-                        "Pulp Fiction",
-                        "12 Angry Men",
-                        "Schindler's List",
-                        "One Flew Over the Cuckoo's Nest",
-                        "Inception",
-                        "The Dark Knight"
+                        "The Shawshank Redemption"
                     ];
 
                     //create AutoComplete UI component
@@ -66,6 +50,39 @@ var data = [
                     });
                 });
            </script>
+
+<div class="code-sample">
+                <h4 class="code-title">Initialization Data</h4>
+                <pre class="prettyprint lang-js">
+var data = [
+    "12 Angry Men",
+    "Il buono, il brutto, il cattivo.",
+    "Inception",
+    "One Flew Over the Cuckoo's Nest",
+    "Pulp Fiction",
+    "Schindler's List",
+    "The Dark Knight",
+    "The Godfather",
+    "The Godfather: Part II",
+    "The Shawshank Redemption"
+];</pre>
+                </div>
+
+                <style scoped>
+                    #input,
+                    .code-sample {
+                        float: left;
+                    }
+
+                    #input {
+                        margin-right: 50px;
+                    }
+
+                    .code-sample {
+                        margin-top: 0;
+                        width: 400px;
+                    }
+                </style>
         </div>
         <!-- tools -->
         <!-- tools -->
