@@ -31,7 +31,7 @@
                     MAJOR_TICK_HEIGHT = 4,
                     LINE_Y = chartBox.y1,
                     LINE_X = 33,
-                    MARGIN = 5;
+                    MARGIN = PADDING = 5;
 
                 function createCategoryAxis(options) {
                     categoryAxis = new Chart.CategoryAxis(
@@ -77,6 +77,33 @@
                     categoryAxis.getViewElements(view);
 
                     equals(view.log.text[0].style.color, "#f00");
+                });
+
+                test("labels have set background", 1, function() {
+                    createCategoryAxis({
+                        labels: {
+                            background: "#f0f"
+                        }
+                    });
+
+                    categoryAxis.getViewElements(view);
+
+                    equals(view.log.rect[0].style.fill, "#f0f");
+                });
+
+                test("labels are positioned below axis line with margin and padding", 2, function() {
+                    createCategoryAxis({
+                        labels: {
+                            margin: MARGIN,
+                            padding: PADDING
+                        }
+                    });
+
+                    categoryAxis.getViewElements(view);
+
+                    $.each(view.log.text, function() {
+                            equal(this.style.y, LINE_Y + MAJOR_TICK_HEIGHT + 2 * MARGIN + PADDING, TOLERANCE);
+                    })
                 });
 
                 test("labels are distributed horizontally", function() {
@@ -194,6 +221,34 @@
                     categoryAxis.getViewElements(view);
 
                     equal(view.log.line.length, 0);
+                });
+
+                test("labels have set background", 1, function() {
+                    createCategoryAxis({
+                        orientation: "vertical",
+                        labels: {
+                            background: "#f0f"
+                        }
+                    });
+
+                    categoryAxis.getViewElements(view);
+
+                    equals(view.log.rect[0].style.fill, "#f0f");
+                });
+
+                test("labels are positioned to the left of the axis line with margin and padding", function() {
+                    createCategoryAxis({
+                        orientation: "vertical",
+                        labels: {
+                            margin: MARGIN,
+                            padding: PADDING
+                        }
+                    });
+
+                    categoryAxis.getViewElements(view);
+
+                    same($.map(view.log.text, function(text) { return text.style.x }),
+                         [0 + MARGIN + PADDING, 2 + MARGIN + PADDING]);
                 });
 
                 // ------------------------------------------------------------

@@ -287,7 +287,7 @@
                     LABEL_HEIGHT = 17,
                     MAJOR_TICK_HEIGHT = 4,
                     MINOR_TICK_HEIGHT = 3,
-                    MARGIN = 5;
+                    MARGIN = PADDING = 5;
 
                 // ------------------------------------------------------------
                 module("View Rendering / Vertical", {
@@ -328,6 +328,19 @@
                     equals(view.log.text[0].style.color, "#f00");
                 });
 
+                test("labels have set background", 1, function() {
+                    numericAxis = new Chart.NumericAxis(0, 1, {
+                        labels: {
+                            background: "#f0f"
+                        }
+                    });
+                    numericAxis.reflow(chartBox);
+
+                    numericAxis.getViewElements(view);
+
+                    equals(view.log.rect[0].style.fill, "#f0f");
+                });
+
                 test("labels are distributed vertically", function() {
                     numericAxis.getViewElements(view);
 
@@ -340,6 +353,20 @@
 
                     same($.map(view.log.text, function(text) { return text.style.x }),
                          [16, 0, 0, 0, 0, 16, 0]);
+                });
+
+                test("labels are aligned right with margin and padding", function() {
+                    numericAxis = new Chart.NumericAxis(0, 1, {
+                        labels: {
+                            margin: MARGIN,
+                            padding: PADDING
+                        }
+                    });
+                    numericAxis.reflow(chartBox);
+                    numericAxis.getViewElements(view);
+
+                    same($.map(view.log.text, function(text) { return text.style.x }),
+                         [ 26, 10, 10, 10, 10, 26, 10 ]);
                 });
 
                 test("major ticks are distributed vertically", function() {
@@ -441,6 +468,22 @@
 
                     $.each(view.log.text, function() {
                             equal(this.style.y, MAJOR_TICK_HEIGHT + MARGIN);
+                    })
+                });
+
+                test("labels are aligned top", 7, function() {
+                    numericAxis = new Chart.NumericAxis(0, 1, {
+                        orientation: "horizontal",
+                        labels: {
+                            margin: MARGIN,
+                            padding: PADDING
+                        }
+                    });
+                    numericAxis.reflow(chartBox);
+                    numericAxis.getViewElements(view);
+
+                    $.each(view.log.text, function() {
+                            equal(this.style.y, MAJOR_TICK_HEIGHT + 2 * MARGIN + PADDING);
                     })
                 });
 
