@@ -26,12 +26,27 @@
             <div class="configuration">
                 <span class="configHead">Configure</span>
                 <span class="configTitle">API Functions</span>
-                <button class="t-button" id="disableNode">Disable node</button><br>
-                <button class="t-button" id="enableAllNodes">Enable all nodes</button><br>
-                <button class="t-button" id="removeNode">Remove node</button><br>
-                <button class="t-button" id="expandAllNodes">Expand all nodes</button><br>
-                <button class="t-button" id="collapseAllNodes">Collapse all nodes</button><br>
-                <input name="text" id="text" value="Node"/><button class="t-button" id="appendNodeToSelected">Append node</button><br>
+                <ul class="options">
+                    <li>
+                        <button class="t-button" id="disableNode">Disable node</button>
+                    </li>
+                    <li>
+                        <button class="t-button" id="enableAllNodes">Enable all nodes</button>
+                    </li>
+                    <li>
+                        <button class="t-button" id="removeNode">Remove node</button>
+                    </li>
+                    <li>
+                        <button class="t-button" id="expandAllNodes">Expand all nodes</button>
+                    </li>
+                    <li>
+                        <button class="t-button" id="collapseAllNodes">Collapse all nodes</button>
+                    </li>
+                    <li>
+                        <input name="text" id="text" value="Node"/>
+                        <button class="t-button" id="appendNodeToSelected">Append node</button>
+                    </li>
+                </ul>
             </div>
             <script>
                 $("#disableNode").click(function() {

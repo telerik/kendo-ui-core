@@ -30,26 +30,41 @@
                 <span class="configTitle">API Functions</span>
                 <fieldset>
                     <legend>Slider configuration</legend>
-                    <input type="text" id="newValue" value="1" />
-                    <button class="t-button" id="setSliderValue">Set value</button>
-                    <button class="t-button" id="getSliderValue">Get value</button><br>
-                    <button class="t-button" id="enableSlider">Enable</button><br>
-                    <button class="t-button" id="disableSlider">Disable</button><br>
+                    <ul class="options">
+                        <li>
+                            <input type="text" id="newValue" value="1" />
+                            <button class="t-button" id="setSliderValue">Set value</button>
+                        </li>
+                        <li>
+                            <button class="t-button" id="getSliderValue">Get value</button>
+                        </li>
+                        <li>
+                            <button class="t-button" id="enableSlider">Enable</button> or <button class="t-button" id="disableSlider">Disable</button>
+                        </li>
+                    </ul>
                 </fieldset>
 
                 <fieldset>
                     <legend>Range slider configuration</legend>
-                    <div>
-                        <input type="text" id="startValue" value="1" />
-                        <button class="t-button" id="setStartValue">Set selection start</button>
-                    </div>
-                    <div>
-                        <input type="text" id="endValue" value="1" />
-                        <button class="t-button" id="setEndValue">Set selection end</button>
-                    </div>
-                    <button class="t-button" id="getRangeSliderValue">Get value</button><br>
-                    <button class="t-button" id="enableRangeSlider">Enable</button><br>
-                    <button class="t-button" id="disableRangeSlider">Disable</button><br>
+                    <ul class="options">
+                        <li>
+                            <input type="text" id="startValue" value="1" />
+                            <button class="t-button" id="setStartValue">Set selection start</button>
+                        </li>
+                        <li>
+                            <input type="text" id="endValue" value="1" />
+                            <button class="t-button" id="setEndValue">Set selection end</button>
+                        </li>
+                        <li>
+                            <button class="t-button" id="getRangeSliderValue">Get value</button>
+                        </li>
+                        <li>
+                            <button class="t-button" id="enableRangeSlider">Enable</button>
+                        </li>
+                        <li>
+                            <button class="t-button" id="disableRangeSlider">Disable</button>
+                        </li>
+                    </ul>
                 </fieldset>
             </div>
 
