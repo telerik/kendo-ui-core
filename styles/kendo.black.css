@@ -3,8 +3,8 @@
 .t-widget,
 .t-input
 {
-    border-color: #d7d7d7;
-    background-color: #fff;
+    border-color: #262626;
+    background-color: #393939;
 }
 
 .t-header,
@@ -15,8 +15,8 @@
 .t-tooltip,
 .t-grid-pager
 {
-    border-color: #d7d7d7;
-    background: #e3e3e3 url('Kendo/gradient.png') repeat-x 0 center;
+    border-color: #2e2e2e;
+    background: #1d1d1d url('Black/gradient.png') repeat-x 0 center;
 }
 
 .t-tabstrip,
@@ -35,15 +35,15 @@
 .t-tabstrip-items .t-item,
 .t-tabstrip-items .t-state-hover .t-link
 {
-    background-image: url('Kendo/gradient.png');
+    background-image: url('Black/gradient.png');
     background-repeat: repeat-x;
 }
 
-.t-icon { background-image: url('Kendo/sprite.png'); }
-.t-editor .t-tool-icon { background-image: url('Kendo/editor.png'); }
+.t-icon { background-image: url('Black/sprite.png'); }
+.t-editor .t-tool-icon { background-image: url('Black/editor.png'); }
 
 .t-loading,
-.t-widget .t-loading { background: transparent url('Kendo/loading.gif') no-repeat 0 0; }
+.t-widget .t-loading { background: transparent url('Black/loading.gif') no-repeat 0 0; }
 
 .t-widget,
 .t-link:link,
@@ -53,36 +53,37 @@
 .t-grid .t-header,
 .t-tabstrip .t-content
 {
-    color: #2e2e2e;
+    color: #fff;
 }
 
 .t-group
 {
-    background-color:#ebebeb;
-    border-color:#d7d7d7;
+    background-color:#393939;
+    border-color:#262626;
 }
 
 .t-content,
 .t-editable-area
 {
-    border-color: #d7d7d7;
-    background-color: #fff;
+    border-color: #262626;
+    background-color: #393939;
+    color: #fff;
 }
 
 .t-colorpicker .t-arrow-down
 {
-    border-color: #d7d7d7;
+    border-color: #262626;
 }
 
 .t-separator
 {
-    border-color: #d7d7d7;
-    background-color: #f5f5f5;
+    border-color: #262626;
+    background-color: #7e7e7e;
 }
 
 .t-alt
 {
-    background-color: #f5f5f5;
+    background-color: #2f2f2f;
 }
 
 .t-dropdown-wrap,
@@ -94,34 +95,39 @@
 .t-footer-template td,
 .t-widget .t-status
 {
-    border-color: #d7d7d7;
-    background-color: #ebebeb;
+    border-color: #262626;
+    background-color: #1d1d1d;
 }
 
 .t-state-default,
 .t-state-default .t-select,
 .t-panelbar .t-link
 {
-    border-color: #d7d7d7;
+    border-color: #262626;
 }
 
 .t-active-filter
 {
-    background-color: #fff;
+    background-color: #000;
 }
 
 .t-state-active,
 .t-state-active:hover,
 .t-header .t-state-active
 {
-    color: #fa6713;
-    background-color: #fff;
-    border-color: #ff8b29;
+    color: #fff;
+    background-color: #000;
+    border-color: #8b8b8b;
+}
+
+.t-tabstrip-items .t-state-active
+{
+    background-image: none;
 }
 
 .t-state-active .t-select
 {
-    border-color: #d7d7d7;
+    border-color: #262626;
 }
 
 .t-state-hover,
@@ -129,33 +135,33 @@
 .t-state-focused
 {
     color: #fff;
-    background-color: #ff8b47;
-    border-color: #ff8d4a;
+    background-color: #7e7e7e;
+    border-color: #a5a5a5;
 }
 
 .t-state-hover .t-select
 {
-    border-color: #ff8d4a;
+    border-color: #a5a5a5;
 }
 
 .t-button:hover
 {
-    border-color:#ff8d4a;
-    background-color: #ff8b47;
+    border-color:#a5a5a5;
+    background-color: #393939;
 }
 
 .t-state-selected,
 .t-button:active,
 .t-panelbar .t-state-selected
 {
-    color: #fff;
-    background-color: #4c4c4c;
-    border-color: #696969;
+    color: #062430;
+    background-color: #0098ee;
+    border-color: #8bd0f7;
 }
 
 .t-state-error
 {
-    border-color: #e20000;
+    border-color: #ff9b9b;
     background-color: #ff5252;
     color:#fff;
 }
@@ -163,22 +169,8 @@
 .t-button
 {
     outline: 0;
-    color: #2e2e2e;
+    color: #fff;
     padding: 0 6px 1px;
-}
-
-.t-button:before
-{
-    content: "\a0";
-    display: block;
-    height: 0;
-    margin: 0 0 0 -3px;
-    padding: 0 3px;
-    width: 100%;
-    border-top: 1px solid #fff;
-    opacity: .7;
-    box-sizing: content-box;
-    -webkit-margin-top-collapse: separate;
 }
 
 .t-button,
@@ -186,15 +178,15 @@ button.t-button.t-state-disabled:hover,
 a.t-button.t-state-disabled:hover,
 .t-state-disabled .t-button:hover
 {
-    border-color: #d7d7d7;
-    background: #e3e3e3 url('Kendo/gradient.png') repeat-x 0 center;
+    border-color: #989898;
+    background: #1d1d1d url('Black/gradient.png') repeat-x 0 center;
 }
 
 .t-state-disabled,
 .t-state-disabled .t-link,
 .t-state-disabled .t-button
 {
-    color: #9f9e9e;
+    color: #7e7e7e;
 }
 
 .t-widget .t-status
@@ -205,33 +197,33 @@ a.t-button.t-state-disabled:hover,
 .t-grid-header-wrap,
 .t-grid-footer-wrap
 {
-    border-color: #d7d7d7;
+    border-color: #262626;
 }
 
 .t-grid td
 {
-    border-color: #d7d7d7;
+    border-color: #262626;
 }
 
 .t-grouping-row td,
 td.t-group-cell
 {
-    background:#ebebeb;
+    background:#1d1d1d;
 }
 
 .t-grouping-header .t-group-indicator
 {
-    border-color: #d7d7d7;
+    border-color: #262626;
 }
 
 .t-grouping-dropclue
 {
-    background: url('Kendo/sprite.png') no-repeat -48px -288px;
+    background: url('Black/sprite.png') no-repeat -48px -288px;
 }
 
 .t-treeview .t-drop-hint
 {
-    background-image: url('Kendo/sprite.png');
+    background-image: url('Black/sprite.png');
     background-position: 0 -358px;
 }
 
@@ -239,13 +231,13 @@ td.t-group-cell
 .t-panelbar .t-group,
 .t-panelbar .t-content
 {
-    border-color: #d7d7d7;
+    border-color: #262626;
 }
 
 .t-calendar th
 {
-    border-color: #d7d7d7;
-    background-color:#ebebeb;
+    border-color: #262626;
+    background-color:#393939;
 }
 
 .t-other-month .t-link
@@ -301,7 +293,7 @@ td.t-group-cell
 
 .t-slider .t-draghandle
 {
-	background-image: url('Kendo/sprite.png');
+	background-image: url('Black/sprite.png');
 	color: #8b9097;
 }
 
@@ -320,23 +312,23 @@ td.t-group-cell
 .t-slider-horizontal .t-slider-track,
 .t-slider-horizontal .t-slider-selection
 {
-	background-image: url('Kendo/sprite.png');
+	background-image: url('Black/sprite.png');
 }
 
 .t-slider-vertical .t-slider-track,
 .t-slider-vertical .t-slider-selection
 {
-	background-image: url('Kendo/sprite-vertical.png');
+	background-image: url('Black/sprite-vertical.png');
 }
 
 .t-slider-horizontal .t-tick
 {
-    background-image:url('Kendo/slider-h.gif');
+    background-image:url('Black/slider-h.gif');
 }
 
 .t-slider-vertical .t-tick
 {
-    background-image:url('Kendo/slider-v.gif');
+    background-image:url('Black/slider-v.gif');
 }
 
 /* Tooltip */
@@ -344,14 +336,14 @@ td.t-group-cell
 .t-tooltip
 {
     border-width:2px;
-    border-color:#4c4c4c;
-    background-color:#4c4c4c;
-    color:#fff;
+    border-color:#0098ee;
+    background-color:#0098ee;
+    color:#062430;
 }
 
 .t-callout
 {
-	background-image: url('Kendo/sprite.png');
+	background-image: url('Black/sprite.png');
 }
 
 .t-callout-n,
@@ -406,20 +398,20 @@ td.t-group-cell
 
 .t-splitbar
 {
-    border-color: #d7d7d7;
-    background-color: #e3e3e3;
+    border-color: #191919;
+    background-color: #4c4c4c;
 }
 
 .t-splitbar-vertical,
 .t-ghost-splitbar-vertical
 {
-    background-image: url('Kendo/sprite.png');
+    background-image: url('Black/sprite.png');
 }
 
 .t-splitbar-horizontal,
 .t-ghost-splitbar-horizontal
 {
-    background-image: url('Kendo/sprite-vertical.png');
+    background-image: url('Black/sprite-vertical.png');
 }
 
 /* Upload */
@@ -427,69 +419,69 @@ td.t-group-cell
 .t-dropzone-active,
 .t-upload-files
 {
-    border-color: #d7d7d7;
+    border-color: #979797;
 }
 
 .t-dropzone-hovered,
 .t-upload-files
 {
-    background-color: #ebebeb;    
+    background-color: #393939;    
 }
 
 .t-dropzone em
 {
-    color: #878787;
+    color: #7e7e7e;
 }
 
 .t-progress,
 .t-progress-status
 {
-    background-image: url('Kendo/sprite.png');
+    background-image: url('Black/sprite.png');
 }
 
 .t-progress
 {
     background-position: 0 -464px;
-    border-color: #d7d7d7;
+    border-color: #262626;
 }
 
 .t-progress-status
 {
     background-position: 0 -472px;
-    border-color: #ff8d4a transparent;
+    border-color: #8bd0f7 transparent;
 }
 
 /* ImageBrowser */
 
 .t-tiles
 {
-    border-color: #d7d7d7;
-    background: #fff;
+    border-color: #191919;
+    background: #393939;
 }
 
 .t-tile
 {
-    border-color: #fff;
-    background-image:url('Kendo/gradient.png');
+    border-color: #393939;
+    background-image:url('Black/gradient.png');
     background-position:0 100px;
     background-repeat:repeat-x;
 }
 
 .t-tiles li.t-state-hover
 {
-    border-color: #ff8d4a;
+    border-color: #a5a5a5;
     background-position: 0 0;
 }
 
 .t-tiles li.t-state-selected
 {
-    border-color: #696969;
+    border-color: #8bd0f7;
     background-position: 0 0;
 }
 
 .t-tile .t-folder
 {
-    background-image: url('Kendo/imagebrowser.png');
+    background-image: url('Black/imagebrowser.png');
 }
 
 .t-tile-empty strong

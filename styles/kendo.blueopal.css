@@ -42,8 +42,6 @@
 .t-icon { background-image: url('BlueOpal/sprite.png'); }
 .t-editor .t-tool-icon { background-image: url('BlueOpal/editor.png'); }
 
-.t-picker-wrap{padding-right: 23px;}
-
 .t-loading,
 .t-widget .t-loading { background: transparent url('BlueOpal/loading.gif') no-repeat 0 0; }
 
@@ -180,12 +178,6 @@
     opacity: .7;
     box-sizing: content-box;
     -webkit-margin-top-collapse: separate;
-}
-
-.t-button::-moz-focus-inner /* Remove phantom button padding in FF */
-{
-    padding: 0;
-    border: none;
 }
 
 .t-button,
