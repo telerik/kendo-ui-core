@@ -621,6 +621,16 @@ pre.prettyprint
     background: #f2f2f2;
 }
 
+.configuration-horizontal
+{
+    border-radius: 5px 5px 0 0;
+    position: static;
+    height: auto;
+    min-height: 0;
+    width: auto;
+    margin-bottom: 20px;
+}
+
 .configuration .configHead,
 .configuration .infoHead
 {

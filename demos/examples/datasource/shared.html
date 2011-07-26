@@ -27,7 +27,7 @@
         <!-- description -->
         <!-- description -->
         <div id="example" class="t-content">
-            <div class="configuration">
+            <div class="configuration configuration-horizontal">
                 <span class="infoHead">Information</span>
                 <p>
                     Multiple components can be bound to a single data source.
@@ -43,14 +43,33 @@
                     loaded from the file system (via file:// protocol).
                 </p>
             </div>
-            <div style="width: 770px; margin: 0 auto;">
-                <input id="country" style="width: 250px;"/>
-                <div style="height: 280px; margin-top: 20px;">
-                    <div id="grid" style="width: 270px; float: left;"></div>
-                    <div id="chart"
-                        style="width: 480px; height: 280px; margin-left: 10px; float: left;"></div>
-                </div>
+
+            <input id="country" />
+
+            <div id="datasource-views">
+                <div id="grid"></div>
+                <div id="chart"></div>
             </div>
+
+            <style scoped>
+                #country {
+                    width: 250px;
+                }
+
+                #grid {
+                    float: left;
+                    margin-top: 25px;
+                    margin-right: 1%;
+                }
+
+                #chart {
+                    width: 450px;
+                    height: 280px;
+                    margin-top: 25px;
+                    float: left;
+                }
+            </style>
+
             <script>
                 var transport = {
                     read: {
@@ -98,13 +117,13 @@
                             {
                                 field: "year",
                                 title: "Year",
-                                width: "80px"
+                                width: "50px"
                             },
                             {
                                 field: "value",
                                 title: "Estimated Internet Users",
                                 template: '<#= kendo.toString(value, "#,##0") #>',
-                                width: "190px"
+                                width: "150px"
                             }
                         ]
                     });
