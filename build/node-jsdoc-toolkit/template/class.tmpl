@@ -25,7 +25,7 @@
 
         <div class="intro">
             <p class="desc summary">
-                {+resolveLinks(data.classDesc)+}
+3               {+resolveLinks(data.classDesc)+}
             </p>
 
             <if test="data.version || !data.isBuiltin() || data.augments.length">
@@ -291,7 +291,7 @@
                     var defaultValue = /]\s*\<(.*)\>/i.exec(ownOptions[idx].desc);
                     defaultValue && (ownOptions[idx].defaultValue = defaultValue[1]);
 
-                    ownOptions[idx].desc = ownOptions[idx].desc.replace(/\[(.*)\]/i, "").replace(/^\s*\<([\S]+)\>/i, "");
+                    ownOptions[idx].desc = ownOptions[idx].desc.replace(/^(\[[^\]]*\])?\s*(\<[^\>]*\>)?/i, "");
                     ownOptions[idx].isOptional = true;
 
                     var example = exampleRe.exec(ownOptions[idx].desc);
