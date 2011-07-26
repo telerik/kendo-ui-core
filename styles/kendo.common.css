@@ -1361,6 +1361,7 @@ html body .t-grid tbody .t-button-icon
 
 .t-marquee
 {
+    position: absolute;
     opacity: .3;
     filter: alpha(opacity=30);
 }
