@@ -45,6 +45,9 @@
 .t-loading,
 .t-widget .t-loading { background: transparent url('Black/loading.gif') no-repeat 0 0; }
 
+.t-loading-image { background-image: url('Black/loading-image.gif'); }
+.t-loading-color { background-color: #666; }
+
 .t-widget,
 .t-link:link,
 .t-link:active,

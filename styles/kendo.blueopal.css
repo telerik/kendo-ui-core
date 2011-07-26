@@ -45,6 +45,9 @@
 .t-loading,
 .t-widget .t-loading { background: transparent url('BlueOpal/loading.gif') no-repeat 0 0; }
 
+.t-loading-image { background-image: url('BlueOpal/loading-image.gif'); }
+.t-loading-color { background-color: #fff; }
+
 .t-widget,
 .t-link:link,
 .t-link:active,
