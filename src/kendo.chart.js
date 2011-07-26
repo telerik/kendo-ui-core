@@ -108,6 +108,38 @@
          * @param {DomElement} element DOM element
          * @param {Object} options Configuration options.
          * @option {String} [theme] Sets Chart theme. Available themes: kendo, blueOpal, black.
+         * @option {Object} [dataSource] DataSource configuration or instance.
+         * _example
+         * $("#chart").kendoChart({
+         *     dataSource: {
+         *         transport: {
+         *              read: "spain-electricity.json"
+         *         }
+         *     },
+         *     series: [{
+         *         field: "value"
+         *     }],
+         *     categoryAxis: {
+         *         field: "year"
+         *     }
+         * });
+         *
+         * // Alternative configuraiton
+         * var dataSource = new kendo.data.DataSource({
+         *     transport: {
+         *          read: "spain-electricity.json"
+         *     }
+         * });
+         *
+         * $("#chart").kendoChart({
+         *     dataSource: dataSource,
+         *     series: [{
+         *         field: "value"
+         *     }],
+         *     categoryAxis: {
+         *         field: "year"
+         *     }
+         * });
          * @option {Object} [title] The chart title configuration options.
          * @option {String} [title.text] The title of the chart.
          * @option {String} [title.font] <"16px Verdana, sans-serif"> The font style of the title.
@@ -300,6 +332,7 @@
          * //sets format of the labels
          * format: "{0:C}"
          * @option {Object} [categoryAxis] The value axis configuration options.
+         * @option {String} [categoryAxis.field] The data field containing the category name.
          * @option {Number} [categoryAxis.min] <0> The minimum value of the axis.
          * @option {Number} [categoryAxis.max] <1> The maximum value of the axis.
          * @option {Number} [categoryAxis.majorUnits] The interval between major divisions.
@@ -438,8 +471,10 @@
          * If a type value is missing, the type is assumed to be the one specified in seriesDefaults.
          * </p>
          * <p>
-         * Each series type has a different set of options:
+         * Each series type has a different set of options.
          * </p>
+         * @option {String} [series.name] The series name visible in the legend.
+         * @option {String} [series.field] The data field containing the series value.
          * @option [series.type="bar"] The type of the series.
          * @option {Boolean} [series.type="bar".stacked] <false>
          * A value indicating if the series should be stacked.
