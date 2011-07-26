@@ -23,16 +23,23 @@
         <div class="description">Remote data operations</div>
         <!-- description -->
         <div id="example" class="t-content">
-            <div id="results"></div>
+
+            <div id="movies-container" class="t-widget t-header">
+                <ul id="movies"</ul>
+            </div>
 
             <script id="template" type="text/x-kendo-template">
-                <div class="title">
+                <li class="title">
                     <# if (BoxArt.LargeUrl) { #>
                         <img src="<#= BoxArt.LargeUrl #>" />
                     <# } #>
-                    Name: <span><#= Name #></span>
-                    Average Rating: <span><#= AverageRating #></span>
-                </div>
+                    <dl>
+                        <dt>Name:</dt>
+                        <dd><#= Name #></dd>
+                        <dt>Average Rating:</dt>
+                        <dd><#= AverageRating #></dd>
+                    </dl>
+                </li>
             </script>
 
             <script>
@@ -51,7 +58,7 @@
                         // update the max attribute of the "page" input
                         $("#page").attr("max", this.totalPages());
 
-                        $("#results").html(kendo.render(template, this.view()));
+                        $("#movies").html(kendo.render(template, this.view()));
                     }
                 });
 
@@ -108,10 +115,35 @@
                 </ul>
             </div>
 
-            <style scoped="scoped">
+            <style scoped>
+                #movies-container {
+                    padding: 10px;
+                    overflow: auto;
+                    height: 400px;
+                    margin: 0 300px 0 0;
+                    border-radius: 5px;
+                }
+
+                #movies {
+                    padding: 0;
+                    height: 410px;
+                }
+
                 .title {
                     float: left;
                     width: 200px;
+                    list-style-type: none;
+                    margin: 0 0 20px;
+                    padding: 5px;
+                    width: 300px;
+                    height: 110px;
+                    overflow: hidden;
+                }
+
+                .title img {
+                    float: left;
+                    border-radius: 3px;
+                    box-shadow: 0 0 5px #ccc;
                 }
             </style>
         </div>
