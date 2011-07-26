@@ -312,7 +312,7 @@
                         visible = extender.is(":visible");
 
                     if ($.trim(extender.text())) {
-                        extender.kendoStop(true).kendoAnimate(!visible ? docsAnimation.show : docsAnimation.hide, visible);
+                        extender.kendoStop(true).kendoAnimate(!visible ? docsAnimation.show : docsAnimation.hide, visible, function() { $(this).css("height", ""); });
                         $(".detailExpanded,.detailCollapsed", this).toggleClass("detailExpanded", !visible).toggleClass("detailCollapsed", visible);
                         element.toggleClass("detailHandleExpanded", !visible);
                     }

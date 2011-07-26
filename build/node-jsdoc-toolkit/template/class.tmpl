@@ -144,9 +144,6 @@
             </if>
         </if>
 
-<!--
-#### METHODS SUMMARY
--->
         <if test="data.methods.length">
             {! var ownMethods = data.methods.filter(function($){return $.memberOf == data.alias  && !$.isNamespace}).sort(makeSortby("name")); !}
 
@@ -538,15 +535,19 @@
 !}
 
         <!-- help-data -->
+
         <if test="defined(ownOptions) && ownOptions.length">
             <div class="optionsContainer">
+                <!-- configuration -->
                 {# options are rendered through js + micro-templates in order to achieve recursive template rendering #}
                 {+ renderOptions(ownOptions) +}
+                <!-- configuration -->
             </div>
         </if>
 
         <if test="defined(ownProperties) && ownProperties.length">
             <div class="propertiesContainer">
+                <!-- properties -->
                 <for each="member" in="ownProperties">
                     <div class="detailHandle" id="{+Link.symbolNameToLinkName(member)+}">
                         <div class="detailCollapsed"></div>
@@ -593,11 +594,13 @@
                         </if>
                     </div>
                 </for>
+                <!-- properties -->
             </div>
         </if>
 
         <if test="defined(ownMethods) && ownMethods.length">
             <div class="methodsContainer">
+                <!-- methods -->
                 <ul class="methodDetail" id="MethodDetail">
                     <for each="member" in="ownMethods">
                         <li>
@@ -681,11 +684,13 @@
                         </li>
                     </for>
                 </ul>
+                <!-- methods -->
             </div>
         </if>
 
         <if test="defined(ownEvents) && ownEvents.length">
             <div class="eventsContainer">
+                <!-- events -->
                 <for each="member" in="ownEvents">
                     <div class="detailHandle" id="{+Link.symbolNameToLinkName(member)+}">
                         <div class="detailCollapsed"></div>
@@ -766,6 +771,7 @@
                         </if>
                     </div>
                 </for>
+                <!-- events -->
             </div>
         </if>
         <!-- help-data -->
