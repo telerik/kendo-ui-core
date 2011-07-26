@@ -599,6 +599,20 @@
                 equal(result.length, 1);
                 equal(result[0].foo.bar, 1);
             });
+
+            test("filter on .net date literals", function () {
+                var data = [{ bar: "\/Date(850082400000)\/"},{ bar: "\/Date(850092400000)\/"}];
+
+                var result = new Query(data).filter( {
+                    operator: "eq",
+                    field: "bar",
+                    value: new Date(1996, 11, 9)
+                }).toArray();
+
+                equal(result.length, 1);
+                equal(result[0].bar, "\/Date(850082400000)\/");
+            });
+
             test("filter on nested nullable objects", function () {
                 var data = [{foo: { bar: 1 }}, {foo: { bar: undefined }}];
 
@@ -611,6 +625,7 @@
                 equal(result.length, 1);
                 equal(result[0].foo.bar, 1);
             });
+
             test("groupby groups data by field", function() {
                 var data = [ {field: 100} , {field: 100} , {field: 1} ];
 
