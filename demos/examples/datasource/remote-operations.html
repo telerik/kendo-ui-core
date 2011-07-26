@@ -25,7 +25,7 @@
         <div id="example" class="t-content">
 
             <div id="movies-container" class="t-widget t-header">
-                <ul id="movies"</ul>
+                <ul id="movies"></ul>
             </div>
 
             <script id="template" type="text/x-kendo-template">
@@ -120,23 +120,21 @@
                     padding: 10px;
                     overflow: auto;
                     height: 400px;
-                    margin: 0 300px 0 0;
+                    margin: 0 220px 0 0;
                     border-radius: 5px;
                 }
 
                 #movies {
-                    padding: 0;
-                    height: 410px;
+                    padding: 0 1%;
                 }
 
                 .title {
                     float: left;
-                    width: 200px;
+                    padding: 1%;
+                    width: 47%;
                     list-style-type: none;
                     margin: 0 0 20px;
-                    padding: 5px;
-                    width: 300px;
-                    height: 110px;
+                    height: 160px;
                     overflow: hidden;
                 }
 
@@ -144,6 +142,19 @@
                     float: left;
                     border-radius: 3px;
                     box-shadow: 0 0 5px #ccc;
+                }
+
+                .title dl {
+                    margin-left: 133px;
+                }
+
+                .title dt {
+                    font-weight: bold;
+                }
+
+                .title dd {
+                    padding: 5px 0 10px;
+                    margin: 0;
                 }
             </style>
         </div>
