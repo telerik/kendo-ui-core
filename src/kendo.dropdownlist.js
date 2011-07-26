@@ -45,7 +45,7 @@
          * @extends kendo.ui.Select
          * @param {DomElement} element DOM element
          * @param {Object} options Configuration options.
-         * @option {Array} [dataSource] The data that the DropDownList will be bound to.
+         * @option {kendo.data.DataSource|Object} [dataSource] Instance of DataSource or the data that the DropDownList will be bound to.
          * @option {Boolean} [enable] <true> Controls whether the DropDownList should be initially enabled.
          * @option {Number} [index] <0> Defines the initial selected item.
          * @option {Boolean} [autoBind] <true> Controls whether to bind the component on initialization.
@@ -118,6 +118,32 @@
             dataValueField: "value",
             height: 200
         },
+
+        /**
+        * Closes the drop-down list.
+        * @name kendo.ui.DropDownList#close
+        * @function
+        * @example
+        * dropdownlist.close();
+        */
+
+        /**
+        * Hides loading icon
+        * @name kendo.ui.DropDownList#hideBusy
+        * @function
+        * @example
+        * dropdownlist.hideBusy();
+        *
+        */
+
+        /**
+        * Shows loading icon
+        * @name kendo.ui.DropDownList#showBusy
+        * @function
+        * @example
+        * dropdownlist.hideBusy();
+        *
+        */
 
         /**
         * Enables/disables the dropdownlist component
@@ -231,6 +257,15 @@
             that.hideBusy();
         },
 
+        /**
+        * Selects item, which starts with the provided parameter.
+        * @param {string} word The search value.
+        * @example
+        * var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
+        *
+        * // Selects item which starts with "In".
+        * autocomplete.search("In");
+        */
         search: function(word) {
             if(word){
                 var that = this;
