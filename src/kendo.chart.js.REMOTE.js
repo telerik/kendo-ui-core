@@ -147,23 +147,21 @@
          *              The text is aligned to the right.
          *         </dd>
          *    </dl>
-         * @option {Boolean} [title.visible] <false> The visibility of the title.
+         * @option {Boolean} [title.visible] <"falce"> The visibility of the title.
          * @option {Number|Object} [title.margin] <5> The margin of the title.
          * _example
-         * // sets the top, right, bottom and left margin to 3px.
+         * // sets 3px margin
          * margin: 3
          *
-         * // sets the top and left margin to 1px
-         * // margin right and bottom are with 5px (by default)
-         * margin: { top: 1, left: 1 }
-         * @option {Number|Object} [title.padding] <5> The padding of the title.
-         * _example
-         * // sets the top, right, bottom and left padding to 3px.
-         * padding: 3
-         *
-         * // sets the top and left padding to 1px
-         * // padding right and bottom are with 5px (by default)
-         * padding: { top: 1, left: 1 }
+         * // sets 2px margin on top, 1px on left, 
+         * // and leaves the default margin (5) on the right and bottom
+         * margin: { top: 2, left: 1 }
+         * @option {Number} [title.padding] <5> The padding of the title.
+         * @option {Object} [title.padding] The padding of the title.
+         * @option {number} [title.padding.top] <5> The top padding.
+         * @option {number} [title.padding.right] <5> The right padding.
+         * @option {number} [title.padding.bottom] <5> The bottom padding.
+         * @option {number} [title.padding.left] <5> The left padding.
          * @option {Object} [title.border] The border of the title.
          * @option {Number} [title.border.width] <0> The width of the border.
          * @option {String} [title.border.color] <"black"> The color of the border.
@@ -205,27 +203,23 @@
          * @option {Number} [legend.offsetX] <0> The X offset from its position.
          * @option {Number} [legend.offsetY] <0> The Y offset from its position.
          * @option {Boolean} [legend.visible] <true> The visibility of the legend.
-         * @option {Number|Object} [legend.margin] <10> The margin of the legend.
-         * _example
-         * // sets the top, right, bottom and left margin to 3px.
-         * margin: 3
-         *
-         * // sets the top and left margin to 1px
-         * // margin right and bottom are with 10px (by default)
-         * margin: { top: 1, left: 1 }
-         * @option {Number|Object} [legend.padding] <5> The padding of the legend.
-         * _example
-         * // sets the top, right, bottom and left padding to 3px.
-         * padding: 3
-         *
-         * // sets the top and left padding to 1px
-         * // padding right and bottom are with 5px (by default)
-         * padding: { top: 1, left: 1 }
+         * @option {Number} [legend.margin] <10> The margin of the legend.
+         * @option {Object} [legend.margin] The margin of the labels.
+         * @option {Number} [legend.margin.top] <10> The top margin.
+         * @option {Number} [legend.margin.right] <10> The right margin.
+         * @option {Number} [legend.margin.bottom] <10> The bottom margin.
+         * @option {Number} [legend.margin.left] <10> The left margin.
+         * @option {Number} [legend.padding] <5> The padding of the legend.
+         * @option {Object} [legend.padding] The margin of the labels.
+         * @option {Number} [legend.padding.top] <5> The top padding.
+         * @option {Number} [legend.padding.right] <5> The right padding.
+         * @option {Number} [legend.padding.bottom] <5> The bottom padding.
+         * @option {Number} [legend.padding.left] <5> The left padding.
          * @option {Object} [legend.border] The border of the legend.
          * @option {Number} [legend.border.width] <0> The width of the border.
          * @option {String} [legend.border.color] <"black"> The color of the border.
          * @option {Object} [valueAxis] The value axis configuration options.
-         * @option {Array} [valueAxis.categories] Categories are used instead of numbers for that axis.
+         * @option {array} [valueAxis.categories] Categories are used instead of numbers for that axis.
          * @option {Number} [valueAxis.axisCrossingValue] <0> Value at which the first perpendicular axis crosses this axis.
          * @option {Number} [valueAxis.minorTickSize] <3> The axis minor tick size.
          * @option {String} [valueAxis.minorTickType] <none> The minor tick type.
@@ -274,22 +268,18 @@
          * @option {Object} [valueAxis.labels] Configures the axis labels.
          * @option {String} [valueAxis.labels.font] <"12px Verdana, sans-serif"> The font style of the labels.
          * @option {Boolean} [valueAxis.labels.visible] <true> The visibility of the labels.
-         * @option {Number|Object} [valueAxis.labels.margin] <0> The margin of the labels.
-         * _example
-         * // sets the top, right, bottom and left margin to 3px.
-         * margin: 3
-         *
-         * // sets the top and left margin to 1px
-         * // margin right and bottom are with 0px (by default)
-         * margin: { top: 1, left: 1 }
-         * @option {Number|Object} [valueAxis.labels.padding] <0> The padding of the labels.
-         * _example
-         * // sets the top, right, bottom and left padding to 3px.
-         * padding: 3
-         *
-         * // sets the top and left padding to 1px
-         * // padding right and bottom are with 0px (by default)
-         * padding: { top: 1, left: 1 }
+         * @option {Number} [valueAxis.labels.margin] <0> The margin of the labels.
+         * @option {Object} [valueAxis.labels.margin] The margin of the labels.
+         * @option {Number} [valueAxis.labels.margin.top] <0> The top margin.
+         * @option {Number} [valueAxis.labels.margin.right] <0> The right margin.
+         * @option {Number} [valueAxis.labels.margin.bottom] <0> The bottom margin.
+         * @option {Number} [valueAxis.labels.margin.left] <0> The left margin.
+         * @option {Number} [valueAxis.labels.padding] <0> The padding of the labels.
+         * @option {Object} [valueAxis.labels.padding] The padding of the labels.
+         * @option {Number} [valueAxis.labels.padding.top] <0> The top padding.
+         * @option {Number} [valueAxis.labels.padding.right] <0> The right padding.
+         * @option {Number} [valueAxis.labels.padding.bottom] <0> The bottom padding.
+         * @option {Number} [valueAxis.labels.padding.left] <0> The left padding.
          * @option {Object} [valueAxis.labels.border] The border of the labels.
          * @option {Number} [valueAxis.labels.border.width] <0> The width of the border.
          * @option {String} [valueAxis.labels.border.color] <"black"> The color of the border.
@@ -346,26 +336,25 @@
          * @option {Object} [categoryAxis.labels] Configures the axis labels.
          * @option {String} [categoryAxis.labels.font] <"12px Verdana, sans-serif"> The font style of the labels.
          * @option {Boolean} [categoryAxis.labels.visible] <true> The visibility of the labels.
-         * @option {Number|Object} [categoryAxis.labels.margin] <0> The margin of the labels.
-         * _example
-         * // sets the top, right, bottom and left margin to 3px.
-         * margin: 3
-         *
-         * // sets the top and left margin to 1px
-         * // margin right and bottom are with 0px (by default)
-         * margin: { top: 1, left: 1 }
-         * @option {Number|Object} [categoryAxis.labels.padding] <0> The padding of the labels.
-         * _example
-         * // sets the top, right, bottom and left padding to 3px.
-         * padding: 3
-         *
-         * // sets the top and left padding to 1px
-         * // padding right and bottom are with 0px (by default)
-         * padding: { top: 1, left: 1 }
+         * @option {Number} [categoryAxis.labels.margin] <0> The margin of the labels.
+         * @option {Object} [categoryAxis.labels.margin] The margin of the labels.
+         * @option {Number} [categoryAxis.labels.margin.top] <0> The top margin.
+         * @option {Number} [categoryAxis.labels.margin.right] <0> The right margin.
+         * @option {Number} [categoryAxis.labels.margin.bottom] <0> The bottom margin.
+         * @option {Number} [categoryAxis.labels.margin.left] <0> The left margin.
+         * @option {Number} [categoryAxis.labels.padding] <0> The padding of the labels.
+         * @option {Object} [categoryAxis.labels.padding] The padding of the labels.
+         * @option {Number} [categoryAxis.labels.padding.top] <0> The top padding.
+         * @option {Number} [categoryAxis.labels.padding.right] <0> The right padding.
+         * @option {Number} [categoryAxis.labels.padding.bottom] <0> The bottom padding.
+         * @option {Number} [categoryAxis.labels.padding.left] <0> The left padding.
          * @option {Object} [categoryAxis.labels.border] The border of the labels.
          * @option {Number} [categoryAxis.labels.border.width] <0> The width of the border.
          * @option {String} [categoryAxis.labels.border.color] <"black"> The color of the border.
          * @option {String} [categoryAxis.labels.format] The format of the labels.
+         *
+         *
+         *
          * @option {Object} [seriesDefaults]
          * @option {Boolean} [seriesDefaults.stacked] <false> A value indicating if the series should be stacked.
          * @option {Number} [seriesDefaults.gap] <1.5> The distance between category clusters.
@@ -373,22 +362,18 @@
          * @option {Object} [seriesDefaults.labels] Configures the series data labels.
          * @option {String} [seriesDefaults.labels.font] <"12px Verdana, sans-serif"> The font style of the labels.
          * @option {Boolean} [seriesDefaults.labels.visible] <true> The visibility of the labels.
-         * @option {Number|Object} [seriesDefaults.labels.margin] <0> The margin of the labels.
-         * _example
-         * // sets the top, right, bottom and left margin to 3px.
-         * margin: 3
-         *
-         * // sets the top and left margin to 1px
-         * // margin right and bottom are with 0px (by default)
-         * margin: { top: 1, left: 1 }
-         * @option {Number|Object} [seriesDefaults.labels.padding] <0> The padding of the labels.
-         * _example
-         * // sets the top, right, bottom and left padding to 3px.
-         * padding: 3
-         *
-         * // sets the top and left padding to 1px
-         * // padding right and bottom are with 0px (by default)
-         * padding: { top: 1, left: 1 }
+         * @option {Number} [seriesDefaults.labels.margin] <0> The margin of the labels.
+         * @option {Object} [seriesDefaults.labels.margin] The margin of the labels.
+         * @option {Number} [seriesDefaults.labels.margin.top] <0> The top margin.
+         * @option {Number} [seriesDefaults.labels.margin.right] <0> The right margin.
+         * @option {Number} [seriesDefaults.labels.margin.bottom] <0> The bottom margin.
+         * @option {Number} [seriesDefaults.labels.margin.left] <0> The left margin.
+         * @option {Number} [seriesDefaults.labels.padding] <0> The padding of the labels.
+         * @option {Object} [seriesDefaults.labels.padding] The padding of the labels.
+         * @option {Number} [seriesDefaults.labels.padding.top] <0> The top padding.
+         * @option {Number} [seriesDefaults.labels.padding.right] <0> The right padding.
+         * @option {Number} [seriesDefaults.labels.padding.bottom] <0> The bottom padding.
+         * @option {Number} [seriesDefaults.labels.padding.left] <0> The left padding.
          * @option {Object} [seriesDefaults.labels.border] The border of the labels.
          * @option {Number} [seriesDefaults.labels.border.width] <0> The width of the border.
          * @option {String} [seriesDefaults.labels.border.color] <"black"> The color of the border.
@@ -411,259 +396,38 @@
          *              The bars have no effect overlay.
          *         </dd>
          *    </dl>
-         * @option {Object} [seriesDefaults.bar] The bar configuration options. For more details examine the bar type series.
-         * @option {Object} [seriesDefaults.column] The column configuration options. For more details examine the column type series.
-         * @option {Object} [seriesDefaults.line] The line configuration options. For more details examine the line type series.
-         * @option {Array} [series] The series configuration with array of options. Each type has different set of options:
-         * @option [series.type="bar"] The type of the series.
-         * @option {Boolean} [series.type="bar".stacked] <false> A value indicating if the series should be stacked.
-         * @option {Number} [series.type="bar".gap] <1.5> The distance between category clusters.
-         * @option {Number} [series.type="bar".spacing] <0.4> Space between bars.
-         * @option {String} [series.type="bar".name] The series name.
-         * @option {String} [series.type="bar".color] The series base color.
-         * @option {Number} [series.type="bar".opacity] <1> The series opacity.
-         * @option {Object} [series.type="bar".labels] Configures the series data labels.
-         * @option {String} [series.type="bar".labels.font] <"12px Verdana, sans-serif"> The font style of the labels.
-         * @option {String} [series.type="bar".labels.position] <"outsideEnd"> Defines the position of the bar labels.
-         *    <dl>
-         *         <dt>
-         *              "center"
-         *         </dt>
-         *         <dd>
-         *              The label is positioned at the bar center.
-         *         </dd>
-         *         <dt>
-         *              "insideEnd"
-         *         </dt>
-         *         <dd>
-         *              The label is positioned inside, near the end of the bar.
-         *         </dd>
-         *         <dt>
-         *              "insideBase"
-         *         </dt>
-         *         <dd>
-         *              The label is positioned inside, near the base of the bar.
-         *         </dd>
-         *         <dt>
-         *              "outsideEnd"
-         *         </dt>
-         *         <dd>
-         *              The label is positioned outside, near the end of the bar. Not applicable for stacked bar series.
-         *         </dd>
-         *    </dl>
-         * @option {Boolean} [series.type="bar".labels.visible] <true> The visibility of the labels.
-         * @option {Number|Object} [series.type="bar".labels.margin] <2> The margin of the labels.
-         * _example
-         * // sets the top, right, bottom and left margin to 3px.
-         * margin: 3
+         * @option {Object} [seriesDefaults.bar] The bar configuration options. For more details examine the series.
+         * @option {Object} [seriesDefaults.column] The column configuration options. For more details examine the series.
+         * @option {Object} [seriesDefaults.line] The line configuration options. For more details examine the series.
          *
-         * // sets the top and left margin to 1px
-         * // margin right and bottom are with 2px (by default)
-         * margin: { top: 1, left: 1 }
-         * @option {Number|Object} [series.type="bar".labels.padding] <2> The padding of the labels.
-         * _example
-         * // sets the top, right, bottom and left padding to 3px.
-         * padding: 3
+         * @option {Array} [series]
+         * @option {Array} [series(type="bar")] The type of the series.
+         * @option {Array} [series(type="column")] The type of the series.
+         * @option {Array} [series(type="line")] The type of the series.
+         * @option {String} [series.name] The series name.
+         * @option {String} [series.color] The series base color.
+         * @option {Number} [series.opacity] <0> The series opacity.
          *
-         * // sets the top and left padding to 1px
-         * // padding right and bottom are with 2px (by default)
-         * padding: { top: 1, left: 1 }
-         * @option {Object} [series.type="bar".labels.border] The border of the labels.
-         * @option {Number} [series.type="bar".labels.border.width] <0> The width of the border.
-         * @option {String} [series.type="bar".labels.border.color] <"black"> The color of the border.
-         * @option {String} [series.type="bar".labels.format] The format of the labels.
-         * @option {Object} [series.type="bar".border] The border of the series.
-         * @option {Number} [series.type="bar".border.width] <1> The width of the border.
-         * @option {String} [series.type="bar".border.color] <the color of the curren series> The color of the border.
-         * @option {String} [series.type="bar".overlay] <"glass"> The effects overlay.
-         * @option [series.type="column"] The type of the series.
-         * @option {Boolean} [series.type="column".stacked] <false> A value indicating if the series should be stacked.
-         * @option {Number} [series.type="column".gap] <1.5> The distance between category clusters.
-         * @option {Number} [series.type="column".spacing] <0.4> Space between bars.
-         * @option {String} [series.type="column".name] The series name.
-         * @option {String} [series.type="column".color] The series base color.
-         * @option {Number} [series.type="column".opacity] <1> The series opacity.
-         * @option {Object} [series.type="column".labels] Configures the series data labels.
-         * @option {String} [series.type="column".labels.font] <"12px Verdana, sans-serif"> The font style of the labels.
-         * @option {String} [series.type="column".labels.position] <"outsideEnd"> Defines the position of the column labels.
-         *    <dl>
-         *         <dt>
-         *              "center"
-         *         </dt>
-         *         <dd>
-         *              The label is positioned at the bar center.
-         *         </dd>
-         *         <dt>
-         *              "insideEnd"
-         *         </dt>
-         *         <dd>
-         *              The label is positioned inside, near the end of the bar.
-         *         </dd>
-         *         <dt>
-         *              "insideBase"
-         *         </dt>
-         *         <dd>
-         *              The label is positioned inside, near the base of the bar.
-         *         </dd>
-         *         <dt>
-         *              "outsideEnd"
-         *         </dt>
-         *         <dd>
-         *              The label is positioned outside, near the end of the bar. Not applicable for stacked bar series.
-         *         </dd>
-         *    </dl>
-         * @option {Boolean} [series.type="column".labels.visible] <true> The visibility of the labels.
-         * @option {Number|Object} [series.type="column".labels.margin] <2> The margin of the labels.
-         * _example
-         * // sets the top, right, bottom and left margin to 3px.
-         * margin: 3
          *
-         * // sets the top and left margin to 1px
-         * // margin right and bottom are with 2px (by default)
-         * margin: { top: 1, left: 1 }
-         * @option {Number|Object} [series.type="column".labels.padding] <2> The padding of the labels.
-         * _example
-         * // sets the top, right, bottom and left padding to 3px.
-         * padding: 3
-         *
-         * // sets the top and left padding to 1px
-         * // padding right and bottom are with 2px (by default)
-         * padding: { top: 1, left: 1 }
-         * @option {Object} [series.type="column".labels.border] The border of the labels.
-         * @option {Number} [series.type="column".labels.border.width] <0> The width of the border.
-         * @option {String} [series.type="column".labels.border.color] <"black"> The color of the border.
-         * @option {String} [series.type="column".labels.format] The format of the labels.
-         * @option {Object} [series.type="column".border] The border of the series.
-         * @option {Number} [series.type="column".border.width] <1> The width of the border.
-         * @option {String} [series.type="column".border.color] <the color of the curren series> The color of the border.
-         * @option {String} [series.type="column".overlay] <"glass"> The effects overlay.
-         * @option [series.type="line"] The type of the series.
-         * @option {Boolean} [series.type="line".stacked] <false> A value indicating if the series should be stacked.
-         * @option {String} [series.type="line".name] The series name.
-         * @option {String} [series.type="line".color] The series base color.
-         * @option {Number} [series.type="line".opacity] <1> The series opacity.
-         * @option {Object} [series.type="line".labels] Configures the series data labels.
-         * @option {String} [series.type="line".labels.font] <"12px Verdana, sans-serif"> The font style of the labels.
-         * @option {String} [series.type="line".labels.missingValues] <"gap"> Configures the behavior for handling missing values in line series.
-         *    <dl>
-         *         <dt>
-         *              "interpolate"
-         *         </dt>
-         *         <dd>
-         *              The value is interpolated from neighboring points.
-         *         </dd>
-         *         <dt>
-         *              "zero"
-         *         </dt>
-         *         <dd>
-         *              The value is assumed to be zero.
-         *         </dd>
-         *         <dt>
-         *              "gap"
-         *         </dt>
-         *         <dd>
-         *              The line stops before the missing point and continues after it.
-         *         </dd>
-         *    </dl>
-         * @option {Object} [series.type="line".markers] Configures the line markers.
-         * @option {String} [series.type="line".markers.type] <"square"> Configures the markers shape type.
-         *    <dl>
-         *         <dt>
-         *              "square"
-         *         </dt>
-         *         <dd>
-         *              The marker shape is square.
-         *         </dd>
-         *         <dt>
-         *              "triagle"
-         *         </dt>
-         *         <dd>
-         *              The marker shape is triagle.
-         *         </dd>
-         *         <dt>
-         *              "circle"
-         *         </dt>
-         *         <dd>
-         *              The marker shape is circle.
-         *         </dd>
-         *    </dl>
-         * @option {Number} [series.type="line".markers.size] <6> The marker size.
-         * @option {Boolean} [series.type="line".markers.visible] <true> The markers visibility.
-         * @option {Object} [series.type="line".markers.border] The border of the markers.
-         * @option {Number} [series.type="line".markers.border.width] <0> The width of the border.
-         * @option {String} [series.type="line".markers.border.color] <"black"> The color of the border.
-         * @option {String} [series.type="line".markers.background] The background color of the current series markers.
-         * @option {String} [series.type="line".labels.position] <"above"> Defines the position of the bar labels.
-         *    <dl>
-         *         <dt>
-         *              "above"
-         *         </dt>
-         *         <dd>
-         *              The label is positioned at the top of the line chart marker.
-         *         </dd>
-         *         <dt>
-         *              "right"
-         *         </dt>
-         *         <dd>
-         *              The label is positioned at the right of the line chart marker.
-         *         </dd>
-         *         <dt>
-         *              "below"
-         *         </dt>
-         *         <dd>
-         *              The label is positioned at the bottom of the line chart marker.
-         *         </dd>
-         *         <dt>
-         *              "left"
-         *         </dt>
-         *         <dd>
-         *              The label is positioned at the left of the line chart marker.
-         *         </dd>
-         *    </dl>
-         * @option {Boolean} [series.type="line".labels.visible] <true> The visibility of the labels.
-         * @option {Number|Object} [series.type="line".labels.margin] <{ left: 5, right: 5}> The margin of the labels.
-         * _example
-         * // sets the top, right, bottom and left margin to 3px.
-         * margin: 3
-         *
-         * // sets the top and bottom margin to 1px
-         * // margin left and right are with 5px (by default)
-         * margin: { top: 1, bottom: 1 }
-         * @option {Number|Object} [series.type="line".labels.padding] <0> The padding of the labels.
-         * _example
-         * // sets the top, right, bottom and left padding to 3px.
-         * padding: 3
-         *
-         * // sets the top and left padding to 1px
-         * // padding right and bottom are with 0px (by default)
-         * padding: { top: 1, left: 1 }
-         * @option {Object} [series.type="line".labels.border] The border of the labels.
-         * @option {Number} [series.type="line".labels.border.width] <0> The width of the border.
-         * @option {String} [series.type="line".labels.border.color] <"black"> The color of the border.
-         * @option {String} [series.type="line".labels.format] The format of the labels.
          * @option {Object} [chartArea] The chart area configuration options.
          * @option {String} [chartArea.background] <"white"> The background color of the chart area.
-         * @option {Number|Object} [chartArea.margin] <5> The margin of the chart area.
-         * _example
-         * // sets the top, right, bottom and left margin to 3px.
-         * margin: 3
-         *
-         * // sets the top and left margin to 1px
-         * // margin right and bottom are with 5px (by default)
-         * margin: { top: 1, left: 1 }
+         * @option {Number} [chartArea.margin] <5> The margin of the chart area.
+         * @option {Object} [chartArea.margin] The margin of the chart area.
+         * @option {Number} [chartArea.margin.top] <5> The top margin.
+         * @option {Number} [chartArea.margin.right] <5> The right margin.
+         * @option {Number} [chartArea.margin.bottom] <5> The bottom margin.
+         * @option {Number} [chartArea.margin.left] <5> The left margin.
          * @option {Object} [chartArea.border] The border of the chart area.
          * @option {Number} [chartArea.border.width] <0> The width of the border.
          * @option {String} [chartArea.border.color] <"black"> The color of the border.
          * @option {Object} [plotArea] The plot area configuration options.
          * @option {String} [plotArea.background] <"white"> The background color of the plot area.
-         * @option {Number|Object} [plotArea.margin] <5> The margin of the plot area.
-         * _example
-         * // sets the top, right, bottom and left margin to 3px.
-         * margin: 3
-         *
-         * // sets the top and left margin to 1px
-         * // margin right and bottom are with 5px (by default)
-         * margin: { top: 1, left: 1 }
+         * @option {Number} [plotArea.margin] <0> The margin of the plot area.
+         * @option {Object} [plotArea.margin] The margin of the plot area.
+         * @option {Number} [plotArea.margin.top] <5> The top margin.
+         * @option {Number} [plotArea.margin.right] <5> The right margin.
+         * @option {Number} [plotArea.margin.bottom] <5> The bottom margin.
+         * @option {Number} [plotArea.margin.left] <5> The left margin.
          * @option {Object} [plotArea.border] The border of the plot area.
          * @option {Number} [plotArea.border.width] <0> The width of the border.
          * @option {String} [plotArea.border.color] <"black"> The color of the border.
@@ -1353,7 +1117,6 @@
 
             return [
                 view.createText(text.content, {
-                    id: options.id,
                     x: text.box.x1, y: text.box.y1,
                     baseline: text.baseline,
                     font: options.font,
@@ -1887,21 +1650,10 @@
                 };
 
             if (options) {
-                var userSetLimits = defined(options.min) || defined(options.max);
-                if (userSetLimits) {
-                    if (options.min === options.max) {
-                        if (options.min > 0) {
-                            options.min = 0;
-                        } else {
-                            options.max = 1;
-                        }
-                    }
-                }
-
                 if (options.majorUnit) {
                     autoOptions.min = floor(autoOptions.min, options.majorUnit);
                     autoOptions.max = ceil(autoOptions.max, options.majorUnit);
-                } else if (userSetLimits) {
+                } else if (options.min || options.max) {
                     options = deepExtend(autoOptions, options);
 
                     // Determine an auto major unit after min/max have been set
@@ -1920,7 +1672,10 @@
                 labelFormat = options.labels.format;
 
             for (var i = 0; i < majorDivisions; i++) {
-                var text = new TextBox(currentValue, labelOptions);
+                var text = new TextBox(
+                    labelFormat ? format(labelFormat, currentValue) : currentValue.toString(),
+                    labelOptions
+                );
 
                 axis.append(text);
 
@@ -2154,8 +1909,8 @@
                 lineStart = lineBox[valueAxis + 1],
                 lineSize = isVertical ? lineBox.height() : lineBox.width(),
                 scale = lineSize / (options.max - options.min),
-                a = defined(a) ? a : options.axisCrossingValue,
-                b = defined(b) ? b : options.axisCrossingValue,
+                a = typeof a === UNDEFINED ? options.axisCrossingValue : a,
+                b = typeof b === UNDEFINED ? options.axisCrossingValue : b,
                 a = Math.max(Math.min(a, options.max), options.min),
                 b = Math.max(Math.min(b, options.max), options.min),
                 p1,
@@ -2456,8 +2211,7 @@
                     fillOpacity: options.opacity,
                     strokeOpacity: options.opacity
                 }, border),
-                elements = [],
-                label = bar.children[0];
+                elements = [];
 
             elements.push(
                 view.createRect(box, rectStyle)
@@ -2467,9 +2221,6 @@
             );
 
             bar.registerId(options.id);
-            if (label) {
-                bar.registerId(label.options.id);
-            }
 
             return elements;
         },
@@ -2480,7 +2231,7 @@
                 color = options.color,
                 borderColor = options.border.color;
 
-            if (!defined(borderColor)) {
+            if (typeof borderColor === UNDEFINED) {
                 borderColor =
                     new Color(color).brightness(BAR_BORDER_BRIGHTNESS).toHex();
             }
@@ -2524,7 +2275,7 @@
         updateRange: function(value, categoryIx) {
             var chart = this;
 
-            if (defined(value)) {
+            if (typeof value !== UNDEFINED) {
                 chart._seriesMin = Math.min(chart._seriesMin, value);
                 chart._seriesMax = Math.max(chart._seriesMax, value);
             }
@@ -2631,8 +2382,7 @@
                 children = barChart.children,
                 isStacked = barChart.options.isStacked,
                 labelOptions = deepExtend({
-                    isVertical: options.isVertical,
-                    id: uniqueId()
+                    isVertical: options.isVertical
                 }, series.labels);
 
             CategoricalChart.fn.addValue.apply(barChart, arguments);
@@ -2709,7 +2459,7 @@
                 totalsPos = chart._categoryTotalsPos,
                 totalsNeg = chart._categoryTotalsNeg;
 
-            if (defined(value)) {
+            if (typeof value !== UNDEFINED) {
                 if (isStacked) {
                     incrementSlot(value > 0 ? totalsPos : totalsNeg, categoryIx, value);
                 } else {
@@ -2822,7 +2572,7 @@
                 markerBackground = markers.background,
                 markerBorder = deepExtend({}, markers.border);
 
-            if (!defined(markerBorder.color)) {
+            if (typeof markerBorder.color === UNDEFINED) {
                 markerBorder.color =
                     new Color(markerBackground).brightness(BAR_BORDER_BRIGHTNESS).toHex();
             }
@@ -2839,7 +2589,6 @@
                     opacity: markers.opacity
                 }),
                 new TextBox(point.value, deepExtend({
-                    id: uniqueId(),
                     visible: labels.visible,
                     align: CENTER,
                     vAlign: CENTER,
@@ -2902,12 +2651,9 @@
 
         getViewElements: function(view) {
             var element = this,
-                children = element.children,
-                marker = children[0],
-                label = children[1];
+                marker = element.children[0];
 
             element.registerId(marker.options.id);
-            element.registerId(label.options.id);
 
             return ChartElement.fn.getViewElements.call(element, view);
         }
@@ -2940,7 +2686,7 @@
                 chart.seriesPoints[seriesIx] = points = [];
             }
 
-            if (!defined(value) || value === null) {
+            if (typeof value === UNDEFINED || value === null) {
                 if (isStacked || series.missingValues === ZERO) {
                     value = 0;
                 } else {
@@ -2988,7 +2734,7 @@
                 isStacked = options.isStacked,
                 totals = chart._categoryTotals;
 
-            if (defined(value)) {
+            if (typeof value !== UNDEFINED) {
                 if (isStacked) {
                     incrementSlot(totals, categoryIx, value);
                     chart._seriesMin = Math.min(chart._seriesMin, sparseArrayMin(totals));
@@ -4049,7 +3795,7 @@
                 fillRotation = 270 - options.normalAngle || 0,
                 fillOpacity = options.fillOpacity;
 
-            if (!defined(fillOpacity)) {
+            if (typeof fillOpacity === UNDEFINED) {
                 fillOpacity = 1;
             }
 
@@ -4216,7 +3962,7 @@
             max = - Number.MAX_VALUE;
         for (var i = 0, length = arr.length; i < length; i++) {
             var n = arr[i];
-            if (defined(n)) {
+            if (typeof n !== UNDEFINED) {
                 min = Math.min(min, n);
                 max = Math.max(max, n);
             }
@@ -4263,7 +4009,7 @@
                         destination[property] = {};
                     }
                     deepExtend(destination[property], propValue);
-                } else if (defined(propValue)) {
+                } else if (typeof propValue !== "undefined") {
                     destination[property] = propValue;
                 }
             }
@@ -4568,10 +4314,6 @@
         }
 
         return id;
-    }
-
-    function defined(value) {
-        return typeof value !== UNDEFINED;
     }
 
     // Exports ================================================================
