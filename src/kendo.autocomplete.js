@@ -192,6 +192,15 @@
             }
         },
 
+        /**
+        * Filters dataSource using the provided parameter and rebinds drop-down list.
+        * @param {string} word The filter value.
+        * @example
+        * var autocomplete = $("#autocomplete").data("kendoAutoComplete");
+        *
+        * // Searches for item which has "Inception" in the name.
+        * autocomplete.search("Inception");
+        */
         search: function(word) {
             var that = this,
             word = word || that.value(),

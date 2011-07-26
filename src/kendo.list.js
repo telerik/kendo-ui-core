@@ -130,16 +130,19 @@
             if (length) {
                 var that = this,
                     ul = that.ul,
+                    parent = ul.parent(".t-animation-container"),
                     height = that.options.height;
 
-                ul.show()
-                  .parent(".t-animation-container").show()
-                  .end()
-                  .height(ul[0].scrollHeight > height ? height : "auto")
-                  .hide()
-                  .parent(".t-animation-container")
-                  .height(height)
-                  .hide();
+                if (that.popup.visible()) {
+                    ul.height(ul[0].scrollHeight > height ? height : "auto");
+                    parent.height(height);
+                } else {
+                    ul.show()
+                      .height(ul[0].scrollHeight > height ? height : "auto")
+                      .hide();
+
+                    parent.show().height(height).hide();
+                }
             }
         },
 
@@ -232,8 +235,7 @@
                 textRange.moveEnd(CHARACTER, selectionEnd - selectionStart);
                 textRange.select();
             } else {
-                element.selectionStart = selectionStart;
-                element.selectionEnd = selectionEnd;
+                element.setSelectionRange(selectionStart, selectionEnd);
             }
         }
     });

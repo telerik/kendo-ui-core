@@ -156,6 +156,32 @@
         },
 
         /**
+        * Closes the drop-down list.
+        * @name kendo.ui.ComboBox#close
+        * @function
+        * @example
+        * combobox.close();
+        */
+
+        /**
+        * Hides loading icon
+        * @name kendo.ui.ComboBox#hideBusy
+        * @function
+        * @example
+        * combobox.hideBusy();
+        *
+        */
+
+        /**
+        * Shows loading icon
+        * @name kendo.ui.ComboBox#showBusy
+        * @function
+        * @example
+        * combobox.hideBusy();
+        *
+        */
+
+        /**
         * Enables/disables the combobox component
         * @param {Boolean} enable Desired state
         */
@@ -277,6 +303,15 @@
             }
         },
 
+        /**
+        * Filters dataSource using the provided parameter and rebinds drop-down list.
+        * @param {string} word The filter value.
+        * @example
+        * var combobox = $("#combobox").data("kendoComboBox");
+        *
+        * // Searches for item which has "In" in the name.
+        * combobox.search("In");
+        */
         search: function(word) {
             var that = this,
                 word = word || that.text(),
