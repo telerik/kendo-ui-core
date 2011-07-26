@@ -125,7 +125,8 @@
 
 .t-state-hover,
 .t-state-hover:hover,
-.t-state-focused
+.t-state-focused,
+.t-marquee
 {
     color: #005c83;
     background-color: #7bd2f6;

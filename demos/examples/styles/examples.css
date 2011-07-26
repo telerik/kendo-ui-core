@@ -619,6 +619,7 @@ pre.prettyprint
     height: 100%;
     padding: 0 20px;
     background: #f2f2f2;
+    color: #000;
 }
 
 .configuration-horizontal
@@ -635,12 +636,12 @@ pre.prettyprint
 .configuration .infoHead
 {
     display: block;
-    color: #4c4c4c;
     font-size: 16px;
     text-indent: 20px;
     margin-top: 15px;
     margin-bottom: 10px;
     background-position: 0 -178px;
+    color: #4c4c4c;
 }
 
 .configuration .infoHead
@@ -873,11 +874,15 @@ pre.prettyprint
 #codeStrip .t-state-hover .t-link
 {
     opacity: .8;
-    filter: alpha(opacity=80);
     text-decoration: underline;
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
     border-radius: 0;
+}
+
+*+html #codeStrip .t-state-hover .t-link
+{
+    filter: alpha(opacity=80);
 }
 
 #codeStrip .t-state-active,
