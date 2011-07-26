@@ -253,9 +253,27 @@
          *      }
          *  });
          * @option {Array} [columns] A collection of column objects or collection of strings that represents the name of the fields.
-         * @option {Column} [columns.field] The field that will displayed in the column.
-         * @option {Column} [columns.title] The title that will displayed in the column header.
-         * @option {Column} [columns.width] The width of the column.
+         * @option {String} [columns.field] The field that will displayed in the column.
+         * @option {String} [columns.title] The title that will displayed in the column header.
+         * @option {String} [columns.width] The width of the column.
+         * @option {String} [columns.template] The template for column's cells.
+         * _example
+         *  $(".t-grid").kendoGrid({
+         *      dataSource: {
+         *          data: createRandomData(50),
+         *          pageSize: 10
+         *      },
+         *      columns: [
+         *          {
+         *              field: "Name"
+         *          },
+         *          {
+         *              field: "BirthDate",
+         *              title: "Birth Date",
+         *              template: '<#= kendo.toString(BirthDate,"dd MMMM yyyy") #>'
+         *         }
+         *      ]
+         *   });         
          * @option {Boolean} [pageable] <false> Indicates whether paging is enabled/disabled.
          * @option {Boolean} [groupable] <false> Indicates whether grouping is enabled/disabled.
          * @option {Boolean} [navigatable] <false> Indicates whether keyboard navigation is enabled/disabled.
@@ -287,6 +305,64 @@
          *         </dd>         
          *    </dl>
          * @option {Boolean} [autoBind] <false> Indicates whether the grid will call query on DataSource initially.
+         * @option {Boolean|Object} [scrollable] <true> Enable/disable grid scrolling. Possible values:
+         *    <dl>
+         *         <dt>
+         *              true
+         *         </dt>
+         *         <dd>
+         *              Enables grid vertical scrolling
+         *         </dd>
+         *         <dt>
+         *              false
+         *         </dt>
+         *         <dd>
+         *              Disables grid vertical scrolling
+         *         </dd>
+         *         <dt>
+         *              { virtual: false }
+         *         </dt>
+         *         <dd>
+         *              Enables grid vertical scrolling without data virtualization. Same as first option.
+         *         </dd>
+         *         <dt>
+         *              { virtual: true }
+         *         </dt>
+         *         <dd>
+         *              Enables grid vertical scrolling with data virtualization.
+         *         </dd>
+         *    </dl>
+         * _example
+         *  $("#grid").kendoGrid({
+         *      scrollable: {
+         *          virtual: true //false
+         *      }
+         *  });
+         * @option {Function} [rowTemplate] Template to be used for rendering the rows in the grid.         
+         * _example
+         *  //template
+         *  &lt;script id="rowTemplate" type="text/x-kendo-tmpl"&gt;
+         *      &lt;tr&gt;
+         *          &lt;td&gt;
+         *              &lt;img src="${ BoxArt.SmallUrl }" alt="${ Name }" /&gt;
+         *          &lt;/td&gt;
+         *          &lt;td&gt;
+         *              ${ Name }
+         *          &lt;/td&gt;
+         *          &lt;td&gt;
+         *              ${ AverageRating }
+         *          &lt;/td&gt;
+         *      &lt;/tr&gt;
+         *  &lt;/script&gt;
+         *         
+         *  //grid intialization
+         *  &lt;script&gt;         
+         *      $("#grid").kendoGrid({
+         *          dataSource: dataSource,
+         *          rowTemplate: kendo.template($("#rowTemplate").html()),
+         *          height: 200
+         *      });         
+         *  &lt;/script&gt;
          */
         init: function(element, options) {
             var that = this;
