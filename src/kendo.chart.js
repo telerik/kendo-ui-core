@@ -226,7 +226,8 @@
          * @option {String} [legend.border.color] <"black"> The color of the border.
          * @option {Object} [valueAxis] The value axis configuration options.
          * @option {Array} [valueAxis.categories] Categories are used instead of numbers for that axis.
-         * @option {Number} [valueAxis.axisCrossingValue] <0> Value at which the first perpendicular axis crosses this axis.
+         * @option {Number} [valueAxis.axisCrossingValue] <0>
+         * Value at which the first perpendicular axis crosses this axis.
          * @option {Number} [valueAxis.minorTickSize] <3> The axis minor tick size.
          * @option {String} [valueAxis.minorTickType] <none> The minor tick type.
          *    <dl>
@@ -272,7 +273,8 @@
          * @option {String} [valueAxis.line.color] <"black"> The color of the lines.
          * @option {Boolean} [valueAxis.line.visible] <true> The visibility of the lines.
          * @option {Object} [valueAxis.labels] Configures the axis labels.
-         * @option {String} [valueAxis.labels.font] <"12px Verdana, sans-serif"> The font style of the labels.
+         * @option {String} [valueAxis.labels.font] <"12px Verdana, sans-serif">
+         * The font style of the labels.
          * @option {Boolean} [valueAxis.labels.visible] <true> The visibility of the labels.
          * @option {Number|Object} [valueAxis.labels.margin] <0> The margin of the labels.
          * _example
@@ -301,7 +303,8 @@
          * @option {Number} [categoryAxis.min] <0> The minimum value of the axis.
          * @option {Number} [categoryAxis.max] <1> The maximum value of the axis.
          * @option {Number} [categoryAxis.majorUnits] The interval between major divisions.
-         * @option {Number} [categoryAxis.axisCrossingValue] <0> Value at which the first perpendicular axis crosses this axis.
+         * @option {Number} [categoryAxis.axisCrossingValue] <0>
+         * Value at which the first perpendicular axis crosses this axis.
          * @option {Number} [categoryAxis.minorTickSize] <3> The axis minor tick size.
          * @option {String} [categoryAxis.minorTickType] <"none"> The axis minor tick size.
          *    <dl>
@@ -347,7 +350,8 @@
          * @option {String} [categoryAxis.line.color] <"black"> The color of the lines.
          * @option {Boolean} [categoryAxis.line.visible] <true> The visibility of the lines.
          * @option {Object} [categoryAxis.labels] Configures the axis labels.
-         * @option {String} [categoryAxis.labels.font] <"12px Verdana, sans-serif"> The font style of the labels.
+         * @option {String} [categoryAxis.labels.font] <"12px Verdana, sans-serif">
+         * The font style of the labels.
          * @option {Boolean} [categoryAxis.labels.visible] <true> The visibility of the labels.
          * @option {Number|Object} [categoryAxis.labels.margin] <0> The margin of the labels.
          * _example
@@ -372,12 +376,14 @@
          * _example
          * //sets format of the labels
          * format: "{0:C}"
-         * @option {Object} [seriesDefaults]
-         * @option {Boolean} [seriesDefaults.stacked] <false> A value indicating if the series should be stacked.
+         * @option {Object} [seriesDefaults] Default values for each series.
+         * @option {Boolean} [seriesDefaults.stacked] <false>
+         * A value indicating if the series should be stacked.
          * @option {Number} [seriesDefaults.gap] <1.5> The distance between category clusters.
          * @option {Number} [seriesDefaults.spacing] <0.4> Space between bars.
          * @option {Object} [seriesDefaults.labels] Configures the series data labels.
-         * @option {String} [seriesDefaults.labels.font] <"12px Verdana, sans-serif"> The font style of the labels.
+         * @option {String} [seriesDefaults.labels.font] <"12px Verdana, sans-serif">
+         * The font style of the labels.
          * @option {Boolean} [seriesDefaults.labels.visible] <true> The visibility of the labels.
          * @option {Number|Object} [seriesDefaults.labels.margin] <0> The margin of the labels.
          * _example
@@ -420,20 +426,33 @@
          *              The bars have no effect overlay.
          *         </dd>
          *    </dl>
-         * @option {Object} [seriesDefaults.bar] The bar configuration options. For more details examine the bar type series.
-         * @option {Object} [seriesDefaults.column] The column configuration options. For more details examine the column type series.
-         * @option {Object} [seriesDefaults.line] The line configuration options. For more details examine the line type series.
-         * @option {Array} [series] Array of series definitions. Each type has different set of options:
+         * @option {Object} [seriesDefaults.bar]
+         * The default options for all bar series. For more details see the series options.
+         * @option {Object} [seriesDefaults.column] The column configuration options.
+         * The default options for all column series. For more details see the series options.
+         * @option {Object} [seriesDefaults.line] The line configuration options.
+         * The default options for all line series. For more details see the series options.
+         * @option {Array} [series] Array of series definitions.
+         * <p>
+         * The series type is determined by the value of the type field.
+         * If a type value is missing, the type is assumed to be the one specified in seriesDefaults.
+         * </p>
+         * <p>
+         * Each series type has a different set of options:
+         * </p>
          * @option [series.type="bar"] The type of the series.
-         * @option {Boolean} [series.type="bar".stacked] <false> A value indicating if the series should be stacked.
+         * @option {Boolean} [series.type="bar".stacked] <false>
+         * A value indicating if the series should be stacked.
          * @option {Number} [series.type="bar".gap] <1.5> The distance between category clusters.
          * @option {Number} [series.type="bar".spacing] <0.4> Space between bars.
          * @option {String} [series.type="bar".name] The series name.
          * @option {String} [series.type="bar".color] The series base color.
          * @option {Number} [series.type="bar".opacity] <1> The series opacity.
          * @option {Object} [series.type="bar".labels] Configures the series data labels.
-         * @option {String} [series.type="bar".labels.font] <"12px Verdana, sans-serif"> The font style of the labels.
-         * @option {String} [series.type="bar".labels.position] <"outsideEnd"> Defines the position of the bar labels.
+         * @option {String} [series.type="bar".labels.font] <"12px Verdana, sans-serif">
+         * The font style of the labels.
+         * @option {String} [series.type="bar".labels.position] <"outsideEnd">
+         * Defines the position of the bar labels.
          *    <dl>
          *         <dt>
          *              "center"
@@ -457,7 +476,8 @@
          *              "outsideEnd"
          *         </dt>
          *         <dd>
-         *              The label is positioned outside, near the end of the bar. Not applicable for stacked bar series.
+         *              The label is positioned outside, near the end of the bar.
+         *              Not applicable for stacked bar series.
          *         </dd>
          *    </dl>
          * @option {Boolean} [series.type="bar".labels.visible] <true> The visibility of the labels.
@@ -486,18 +506,22 @@
          * format: "{0:C}"
          * @option {Object} [series.type="bar".border] The border of the series.
          * @option {Number} [series.type="bar".border.width] <1> The width of the border.
-         * @option {String} [series.type="bar".border.color] <the color of the curren series> The color of the border.
+         * @option {String} [series.type="bar".border.color] <the color of the curren series>
+         * The color of the border.
          * @option {String} [series.type="bar".overlay] <"glass"> The effects overlay.
          * @option [series.type="column"] The type of the series.
-         * @option {Boolean} [series.type="column".stacked] <false> A value indicating if the series should be stacked.
+         * @option {Boolean} [series.type="column".stacked] <false>
+         * A value indicating if the series should be stacked.
          * @option {Number} [series.type="column".gap] <1.5> The distance between category clusters.
          * @option {Number} [series.type="column".spacing] <0.4> Space between bars.
          * @option {String} [series.type="column".name] The series name.
          * @option {String} [series.type="column".color] The series base color.
          * @option {Number} [series.type="column".opacity] <1> The series opacity.
          * @option {Object} [series.type="column".labels] Configures the series data labels.
-         * @option {String} [series.type="column".labels.font] <"12px Verdana, sans-serif"> The font style of the labels.
-         * @option {String} [series.type="column".labels.position] <"outsideEnd"> Defines the position of the column labels.
+         * @option {String} [series.type="column".labels.font] <"12px Verdana, sans-serif">
+         * The font style of the labels.
+         * @option {String} [series.type="column".labels.position] <"outsideEnd">
+         * Defines the position of the column labels.
          *    <dl>
          *         <dt>
          *              "center"
@@ -521,7 +545,8 @@
          *              "outsideEnd"
          *         </dt>
          *         <dd>
-         *              The label is positioned outside, near the end of the bar. Not applicable for stacked bar series.
+         *              The label is positioned outside, near the end of the bar.
+         *              Not applicable for stacked bar series.
          *         </dd>
          *    </dl>
          * @option {Boolean} [series.type="column".labels.visible] <true> The visibility of the labels.
@@ -543,23 +568,28 @@
          * padding: { top: 1, left: 1 }
          * @option {Object} [series.type="column".labels.border] The border of the labels.
          * @option {Number} [series.type="column".labels.border.width] <0> The width of the border.
-         * @option {String} [series.type="column".labels.border.color] <"black"> The color of the border.
+         * @option {String} [series.type="column".labels.border.color] <"black">
+         * The color of the border.
          * @option {String} [series.type="column".labels.format] The format of the labels.
          * _example
          * //sets format of the labels
          * format: "{0:C}"
          * @option {Object} [series.type="column".border] The border of the series.
          * @option {Number} [series.type="column".border.width] <1> The width of the border.
-         * @option {String} [series.type="column".border.color] <the color of the curren series> The color of the border.
+         * @option {String} [series.type="column".border.color] <the color of the current series>
+         * The color of the border.
          * @option {String} [series.type="column".overlay] <"glass"> The effects overlay.
          * @option [series.type="line"] The type of the series.
-         * @option {Boolean} [series.type="line".stacked] <false> A value indicating if the series should be stacked.
+         * @option {Boolean} [series.type="line".stacked] <false>
+         * A value indicating if the series should be stacked.
          * @option {String} [series.type="line".name] The series name.
          * @option {String} [series.type="line".color] The series base color.
          * @option {Number} [series.type="line".opacity] <1> The series opacity.
          * @option {Object} [series.type="line".labels] Configures the series data labels.
-         * @option {String} [series.type="line".labels.font] <"12px Verdana, sans-serif"> The font style of the labels.
-         * @option {String} [series.type="line".labels.missingValues] <"gap"> Configures the behavior for handling missing values in line series.
+         * @option {String} [series.type="line".labels.font] <"12px Verdana, sans-serif">
+         * The font style of the labels.
+         * @option {String} [series.type="line".labels.missingValues] <"gap">
+         * Configures the behavior for handling missing values in line series.
          *    <dl>
          *         <dt>
          *              "interpolate"
@@ -581,7 +611,8 @@
          *         </dd>
          *    </dl>
          * @option {Object} [series.type="line".markers] Configures the line markers.
-         * @option {String} [series.type="line".markers.type] <"square"> Configures the markers shape type.
+         * @option {String} [series.type="line".markers.type] <"square">
+         * Configures the markers shape type.
          *    <dl>
          *         <dt>
          *              "square"
@@ -607,8 +638,10 @@
          * @option {Object} [series.type="line".markers.border] The border of the markers.
          * @option {Number} [series.type="line".markers.border.width] <0> The width of the border.
          * @option {String} [series.type="line".markers.border.color] <"black"> The color of the border.
-         * @option {String} [series.type="line".markers.background] The background color of the current series markers.
-         * @option {String} [series.type="line".labels.position] <"above"> Defines the position of the bar labels.
+         * @option {String} [series.type="line".markers.background]
+         * The background color of the current series markers.
+         * @option {String} [series.type="line".labels.position] <"above">
+         * Defines the position of the bar labels.
          *    <dl>
          *         <dt>
          *              "above"
@@ -636,7 +669,8 @@
          *         </dd>
          *    </dl>
          * @option {Boolean} [series.type="line".labels.visible] <true> The visibility of the labels.
-         * @option {Number|Object} [series.type="line".labels.margin] <{ left: 5, right: 5}> The margin of the labels.
+         * @option {Number|Object} [series.type="line".labels.margin] <{ left: 5, right: 5}>
+         * The margin of the labels.
          * _example
          * // sets the top, right, bottom and left margin to 3px.
          * margin: 3
@@ -660,6 +694,7 @@
          * //sets format of the labels
          * format: "{0:C}"
          * @option {Object} [chartArea] The chart area configuration options.
+         * This is the entire visible area of the chart.
          * @option {String} [chartArea.background] <"white"> The background color of the chart area.
          * @option {Number|Object} [chartArea.margin] <5> The margin of the chart area.
          * _example
@@ -672,7 +707,8 @@
          * @option {Object} [chartArea.border] The border of the chart area.
          * @option {Number} [chartArea.border.width] <0> The width of the border.
          * @option {String} [chartArea.border.color] <"black"> The color of the border.
-         * @option {Object} [plotArea] The plot area configuration options.
+         * @option {Object} [plotArea]
+         * The plot area configuration options. This is the area containing the plotted series.
          * @option {String} [plotArea.background] <"white"> The background color of the plot area.
          * @option {Number|Object} [plotArea.margin] <5> The margin of the plot area.
          * _example
