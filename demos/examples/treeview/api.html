@@ -23,6 +23,70 @@
         <div class="description">This example shows how to use the client-side API of kendoTreeView.</div>
         <!-- description -->
         <div id="example" class="t-content">
+            <div id="TreeView"></div>
+
+            <script type="text/javascript">
+                var treeview = $("#TreeView").kendoTreeView({
+                    dataSource: [
+                        { text: "Item 1", expanded: true, items: [
+                            { text: "Item 1.1" },
+                            { text: "Item 1.2" },
+                            { text: "Item 1.3" }
+                        ] },
+                        { text: "Item 2", items: [
+                            { text: "Item 2.1" },
+                            { text: "Item 2.2" },
+                            { text: "Item 2.3" }
+                        ] },
+                        { text: "Item 3" }
+                    ]
+                }).data("kendoTreeView");
+            </script>
+
+            <script>
+                $(document).ready(function() {
+                    $("#disableNode").click(function() {
+                        var selectedNode = treeview.select();
+
+                        treeview.enable(selectedNode, false);
+                    });
+
+                    $("#enableAllNodes").click(function() {
+                        var selectedNode = treeview.select();
+
+                        treeview.enable(".t-item");
+                    });
+
+                    $("#removeNode").click(function() {
+                        var selectedNode = treeview.select();
+
+                        treeview.remove(selectedNode);
+                    });
+
+                    $("#expandAllNodes").click(function() {
+                        treeview.expand(".t-item");
+                    });
+
+                    $("#collapseAllNodes").click(function() {
+                        treeview.collapse(".t-item");
+                    });
+
+                    $("#appendNodeToSelected").click(function() {
+                        var selectedNode = treeview.select();
+
+                        // passing a falsy value as the second append() parameter
+                        // will append the new node to the root group
+                        if (selectedNode.length == 0) {
+                            selectedNode = null;
+                        }
+
+                        treeview.append({
+                            text: $("#text").val()
+                        }, selectedNode);
+                    });
+                });
+            </script>
+
             <div class="configuration">
                 <span class="configHead">Configure</span>
                 <span class="configTitle">API Functions</span>
@@ -48,67 +112,6 @@
                     </li>
                 </ul>
             </div>
-            <script>
-                $("#disableNode").click(function() {
-                    var selectedNode = treeview.select();
-
-                    treeview.enable(selectedNode, false);
-                });
-
-                $("#enableAllNodes").click(function() {
-                    var selectedNode = treeview.select();
-
-                    treeview.enable(".t-item");
-                });
-
-                $("#removeNode").click(function() {
-                    var selectedNode = treeview.select();
-
-                    treeview.remove(selectedNode);
-                });
-
-                $("#expandAllNodes").click(function() {
-                    treeview.expand(".t-item");
-                });
-
-                $("#collapseAllNodes").click(function() {
-                    treeview.collapse(".t-item");
-                });
-
-                $("#appendNodeToSelected").click(function() {
-                    var selectedNode = treeview.select();
-
-                    // passing a falsy value as the second append() parameter
-                    // will append the new node to the root group
-                    if (selectedNode.length == 0) {
-                        selectedNode = null;
-                    }
-
-                    treeview.append({
-                        text: $("#text").val()
-                    }, selectedNode);
-                });
-            </script>
-
-            <div id="TreeView"></div>
-
-            <script type="text/javascript">
-                var treeview = $("#TreeView").kendoTreeView({
-                    dataSource: [
-                        { text: "foo", expanded: true, items: [
-                            { text: "fool" },
-                            { text: "food" },
-                            { text: "foot" }
-                        ] },
-                        { text: "bar", items: [
-                            { text: "bard" },
-                            { text: "barn" },
-                            { text: "bark" }
-                        ] },
-                        { text: "baz" }
-                    ]
-                }).data("kendoTreeView");
-            </script>
         </div>
         <!-- tools -->
         <!-- tools -->
