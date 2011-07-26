@@ -7,7 +7,6 @@
      *
      * @exampleTitle Creating a treeview from existing HTML
      * @example
-     * <!-- HTML -->
      * <ul id="treeview">
      *     <li>Item 1
      *         <ul>
@@ -18,8 +17,9 @@
      *     <li>Item 2</li>
      * </ul>
      *
-     * // JavaScript
-     * var treeview = $("#treeview").kendoTreeView();
+     * <script>
+     *     var treeview = $("#treeview").kendoTreeView();
+     * </script>
      */
     var kendo = window.kendo,
         ui = kendo.ui,
