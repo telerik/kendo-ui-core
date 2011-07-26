@@ -23,7 +23,11 @@ var fs = require("fs"),
         script: getRegionRegex("script"),
         css: getRegionRegex("css"),
         helpTabs: getRegionRegex("help-tabs"),
-        helpData: getRegionRegex("help-data")
+        helpData: getRegionRegex("help-data"),
+        configuration: getRegionRegex("configuration"),
+        properties: getRegionRegex("properties"),
+        methods: getRegionRegex("methods"),
+        events: getRegionRegex("events")
     };
 
 function getRegionRegex(regionName) {
@@ -115,25 +119,82 @@ function importComponentHelp(exampleHTML, component) {
         "animation": "kendo.Animation"
     };
 
-    try {
-        var helpSymbol = (helpFiles[component] || "kendo.ui." + component),
-            helpFile = "docs/symbols/" + helpSymbol + ".html",
-            helpHTML = fs.readFileSync(helpFile, "utf8");
+    // merge documentation for multiple components
+    var relatedComponents = {
+        "slider": ["slider", "rangeslider"]
+    }[component];
 
-        var description = regionRegex.description.exec(helpHTML)[1],
-            tabs = regionRegex.helpTabs.exec(helpHTML)[1],
-            data = regionRegex.helpData.exec(helpHTML)[1];
+    function helpFileFor(component) {
+        var result = "";
 
-        // could be improved if example has appropriate markers, or better yet, if loaded through AJAX (and not importing at all)
-        if (description) {
-            exampleHTML = exampleHTML.replace(regionRegex.description, "<!-- description -->" + description + "<!-- description -->");
+        try {
+            var helpSymbol = (helpFiles[component] || "kendo.ui." + component),
+                helpFile = "docs/symbols/" + helpSymbol + ".html",
+
+            result = fs.readFileSync(helpFile, "utf8");
+        } catch (e) {
+            // file does not exist.
         }
 
-        exampleHTML = exampleHTML.replace(regionRegex.helpTabs, "<!-- help-tabs -->" + tabs + "<!-- help-tabs -->");
-        exampleHTML = exampleHTML.replace(regionRegex.helpData, "<!-- help-data -->" + data + "<!-- help-data -->");
-    } catch (e) {
-        // file does not exist. probably.
+        return result;
     }
+
+    var description = "", tabs = "", data = "",
+        configuration = "", methods = "", events = "";
+
+
+    function getRegion(regionName) {
+        var matches = regionRegex[regionName].exec(helpHTML);
+
+        if (matches) {
+            return matches[1];
+        }
+
+        return "None";
+    }
+
+    function formatComponentRegion(component, region, expanded) {
+        return '<div class="detailHandle' + (expanded ? ' detailHandleExpanded' : '') + '">' +
+                    '<div class="' + (expanded ? 'detailExpanded' : 'detailCollapsed') + '"></div>' + component +
+                '</div>' +
+                '<div class="detailBody"' + (expanded ? ' style="display:block;"' : '') + '>' + region + '</div>';
+    }
+
+    if (relatedComponents) {
+        for (var c in relatedComponents) {
+            helpHTML = helpFileFor(relatedComponents[c]);
+
+            description = description || getRegion("description");
+            tabs = tabs || getRegion("helpTabs");
+
+            configuration += formatComponentRegion(relatedComponents[c], getRegion("configuration"), c == 0);
+            methods += formatComponentRegion(relatedComponents[c], getRegion("methods"), c == 0);
+            events += formatComponentRegion(relatedComponents[c], getRegion("events"), c == 0);
+        }
+
+        data = '<div class="optionsContainer">' + configuration + '</div>' +
+               '<div class="methodsContainer">' + methods + '</div>' +
+               '<div class="eventsContainer">' + events + '</div>';
+
+        if (relatedComponents.length > 1) {
+            // remove stats from tabs
+            tabs = tabs.replace(/\s+\([\s\d]+\)/g, "");
+        }
+    } else {
+        helpHTML = helpFileFor(component);
+
+        description = getRegion("description");
+        tabs = getRegion("helpTabs");
+        data = getRegion("helpData");
+    }
+
+    // could be improved if example has appropriate markers, or better yet, if loaded through AJAX (and not importing at all)
+    if (description) {
+        exampleHTML = exampleHTML.replace(regionRegex.description, "<!-- description -->" + description + "<!-- description -->");
+    }
+
+    exampleHTML = exampleHTML.replace(regionRegex.helpTabs, "<!-- help-tabs -->" + tabs + "<!-- help-tabs -->");
+    exampleHTML = exampleHTML.replace(regionRegex.helpData, "<!-- help-data -->" + data + "<!-- help-data -->");
 
     return exampleHTML;
 }
