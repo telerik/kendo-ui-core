@@ -69,7 +69,8 @@
         crud = [CREATE, READ, UPDATE, DESTROY],
         identity = function(o) { return o; },
         getter = kendo.getter,
-        stringify = kendo.stringify;
+        stringify = kendo.stringify,
+        rgDate = /^\/Date\((.*?)\)\/$/;
 
     var Comparer = {
         selector: function(field) {
@@ -157,7 +158,14 @@
                 } else {
                     var accessor = getter(field);
                     return function(record) {
-                        return caseSensitive(accessor(record));
+                        var value = accessor(record);
+                        if (typeof value === "string") {
+                            var date = rgDate.exec(value);
+                            if (date) {
+                                value = new Date(parseInt(date[1]));
+                            }
+                        }
+                        return caseSensitive(value);
                     };
                 }
             }
