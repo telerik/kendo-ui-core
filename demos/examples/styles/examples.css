@@ -873,16 +873,12 @@ pre.prettyprint
 
 #codeStrip .t-state-hover .t-link
 {
-    opacity: .8;
+    /*opacity: .8;*/ /*tab text disappears in IE*/
+    /*filter: alpha(opacity=80);*/
     text-decoration: underline;
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
     border-radius: 0;
-}
-
-*+html #codeStrip .t-state-hover .t-link
-{
-    filter: alpha(opacity=80);
 }
 
 #codeStrip .t-state-active,
