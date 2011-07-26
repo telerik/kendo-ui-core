@@ -41,6 +41,7 @@
                     </tr>
                 </tbody>
             </table>
+
             <script id="template" type="text/x-kendo-template">
                 <tr>
                     <td><#= Id #></td>
@@ -50,6 +51,7 @@
                     <td><#= Age #></td>
                 </tr>
             </script>
+
             <script>
                 // create a template using the above definition
                 var template = kendo.template($("#template").html());
@@ -88,6 +90,7 @@
                     });
                 });
             </script>
+
             <div class="configuration">
                 <span class="configHead">Configure</span>
                 <ul class="options">
@@ -116,6 +119,34 @@
                     </li>
                 </ul>
             </div>
+
+            <style scoped>
+                #people {
+                    border-collapse: separate;
+                    border-spacing: 0;
+                }
+
+                #people th {
+                    background-color: #ef652a;
+                    padding: 9px 6px;
+                    color: #fff;
+                    text-align: left;
+                    line-height: 14px;
+                    border-width: 1px;
+                    border-style: solid;
+                    border-color: #d75b26 #d75b26 #d75b26 #f28455;
+                }
+
+                #people td {
+                    line-height: 23px;
+                    padding: 0 6px;
+                    background: #eaeaea;
+                    color: #3d3d3d;
+                    border-width: 1px;
+                    border-style: solid;
+                    border-color: #f4f4f4 #d6d6d6 #d6d6d6 #f4f4f4;
+                }
+            </style>
         </div>
         <!-- tools -->
         <!-- tools -->
