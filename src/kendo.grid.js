@@ -191,8 +191,103 @@
 
         return template;
     }
-
-    var Grid = Component.extend({
+    
+    /**
+     * @name kendo.ui.Grid.Description
+     *
+     * @section The Grid component displays tabular data.
+     *
+     * @exampleTitle Creating a <b>Grid</b> from existing HTML Div element
+     * @example
+     * <div id="grid">
+     * </div>
+     *
+     * @exampleTitle Creating a <b>Grid</b> from existing HTML Table element
+     * @example
+     * <table id="grid">
+     *  <thead>
+     *      <tr>
+     *          <th data-field="title">Title<th>
+     *          <th data-field="year">Year<th>
+     *      </tr>
+     *  </thead>
+     *  <tbody>
+     *      <tr>
+     *          <td>Star Wars: A New Hope<td>
+     *          <td>1977<td>
+     *      </tr>
+     *      <tr>
+     *          <td>Star Wars: The Empire Strikes Back<td>
+     *          <td>1980<td>
+     *      </tr>
+     *  </tbody>
+     * </table>
+     * 
+     * @exampleTitle <b>Grid</b> initialization
+     * @example
+     * var grid = $("#grid").kendoGrid();
+     */
+    var Grid = Component.extend(/** @lends kendo.ui.Grid.prototype */ {
+        /**
+         * @constructs
+         * @extends kendo.ui.Component
+         * @param {DomElement} element DOM element
+         * @param {Object} options Configuration options.
+         * @option {kendo.data.DataSource|Object} [dataSource] Instance of DataSource or Object with DataSource configuration.
+         * _example
+         * var sharedDataSource = new kendo.data.DataSource({ 
+         *      data: [{title: "Star Wars: A New Hope", year: 1977}, {title: "Star Wars: The Empire Strikes Back", year: 1980}],
+         *      pageSize: 1
+         * });
+         *
+         * $("#grid").kendoGrid({
+         *      dataSource: sharedDataSource
+         *  });
+         *  
+         *  //or
+         *
+         *  $("#grid").kendoGrid({
+         *      dataSource: {
+         *          data: [{title: "Star Wars: A New Hope", year: 1977}, {title: "Star Wars: The Empire Strikes Back", year: 1980}],
+         *          pageSize: 1
+         *      }
+         *  });
+         * @option {Array} [columns] A collection of column objects or collection of strings that represents the name of the fields.
+         * @option {Column} [columns.field] The field that will displayed in the column.
+         * @option {Column} [columns.title] The title that will displayed in the column header.
+         * @option {Column} [columns.width] The width of the column.
+         * @option {Boolean} [pageable] <false> Indicates whether paging is enabled/disabled.
+         * @option {Boolean} [groupable] <false> Indicates whether grouping is enabled/disabled.
+         * @option {Boolean} [navigatable] <false> Indicates whether keyboard navigation is enabled/disabled.
+         * @option {String} [selectable] <undefined> Indicates whether selection is enabled/disabled. Possible values:
+         *    <dl>
+         *         <dt>
+         *              "row"
+         *         </dt>
+         *         <dd>
+         *              Single row selection.
+         *         </dd>
+         *         <dt>
+         *              "cell"
+         *         </dt>
+         *         <dd>
+         *              Single cell selection.
+         *         </dd>
+         *         <dt>
+         *              "multiple, row"
+         *         </dt>
+         *         <dd>
+         *              Multiple row selection.
+         *         </dd>
+         *         <dt>
+         *              "multiple, cell"
+         *         </dt>
+         *         <dd>
+         *              Multiple cell selection.
+         *         </dd>         
+         *    </dl>
+         * @option {Boolean} [autoBind] <false> Indicates whether the grid will call query on DataSource initially.
+         */
         init: function(element, options) {
             var that = this;
 
@@ -224,7 +319,22 @@
                 that.dataSource.query();
             }
 
-            that.bind([CHANGE,DATABOUND], that.options);
+            that.bind([
+                /**
+                 * Fires when the grid selection has changed.
+                 * @name kendo.ui.Grid#change
+                 * @event
+                 * @param {Event} e
+                 */
+                CHANGE,
+                /**
+                 * Fires when the grid has received data from the data source.
+                 * @name kendo.ui.Grid#dataBound
+                 * @event
+                 * @param {Event} e
+                 */
+                DATABOUND
+            ], that.options);
         },
 
         options: {
