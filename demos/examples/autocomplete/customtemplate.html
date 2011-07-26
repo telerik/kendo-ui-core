@@ -25,8 +25,17 @@
         <div class="description">Customizing Templates</div>
         <!-- description -->
         <div id="example" class="t-content">
-            Search Netflix for movie title (minimum 3 chars):
+            Search Netflix for movie (minimum 3 chars):
             <input id="titles" />
+
+            <script id="scriptTemplate" type="text/x-kendo-template">
+                <# if (data.BoxArt.SmallUrl) { #>
+                    <img src="${ data.BoxArt.SmallUrl }" alt="${ data.Name }" />Title:${ data.Name }, Year: ${ data.Name }
+                <# } else { #>
+                    <img alt="${ data.Name }" />Title:${ data.Name }, Year: ${ data.Name }
+                <# } #>
+            </script>
+
             <script type="text/javascript">
                 $(document).ready(function() {
                     $("#titles").kendoAutoComplete({
@@ -34,15 +43,12 @@
                         dataTextField: "Name",
                         dataValueField: "Id",
                         severFiltering: true,
-                        template: '<img src="${ data.BoxArt.SmallUrl }" alt="${ data.Name }" />Title:${ data.Name }, Year: ${ data.Name }',
+                        serverPaging: true,
+                        pageSize: 20,
+                        template: $("#scriptTemplate").html(),
                         dataSource: new kendo.data.DataSource({
                             type: "odata",
                             serverFiltering: true,
-                            filter: [{
-                                field: "BoxArt.SmallUrl",
-                                operator: "neq",
-                                value: null
-                            }],
                             transport: {
                                 read: "http://odata.netflix.com/Catalog/Titles"
                             }

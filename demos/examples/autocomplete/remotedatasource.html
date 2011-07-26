@@ -26,7 +26,7 @@
         <div class="description">Binding to Remote Data</div>
         <!-- description -->
         <div id="example">
-            Search Netflix for movie title (minimum 3 chars):
+            Search Netflix for movie (minimum 3 chars):
             <input id="titles"/>
 
             <script type="text/javascript">
@@ -36,6 +36,8 @@
                         dataTextField: "Name",
                         dataValueField: "Id",
                         severFiltering: true,
+                        serverPaging: true,
+                        pageSize: 20,
                         dataSource: new kendo.data.DataSource({
                             type: "odata",
                             serverFiltering: true,

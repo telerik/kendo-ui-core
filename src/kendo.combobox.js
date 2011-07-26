@@ -49,7 +49,7 @@
         * @extends kendo.ui.Select
         * @param {DomElement} element DOM element
         * @param {Object} options Configuration options.
-        * @option {Array} [dataSource] The data that the ComboBox will be bound to.
+        * @option {kendo.data.DataSource|Object} [dataSource] Instance of DataSource or the data that the ComboBox will be bound to.
         * @option {Boolean} [enable] <true> Controls whether the ComboBox should be initially enabled.
         * @option {Number} [index] <-1> Defines the initial selected item.
         * @option {Boolean} [autoBind] <true> Controls whether to bind the component on initialization.

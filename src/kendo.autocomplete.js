@@ -55,7 +55,7 @@
         * @extends kendo.ui.List
         * @param {DomElement} element DOM element
         * @param {Object} options Configuration options.
-        * @option {Array} [dataSource] The data that the AutoComplete will be bound to.
+        * @option {kendo.data.DataSource|Object} [dataSource] Instance of DataSource or the data that the AutoComplete will be bound to.
         * @option {Boolean} [enable] <true> Controls whether the AutoComplete should be initially enabled.
         * @option {Boolean} [suggest] <false> Controls whether the AutoComplete should automatically auto-type the rest of text.
         * @option {Number} [delay] <200> Specifies the delay in ms after which the AutoComplete will start filtering dataSource.
