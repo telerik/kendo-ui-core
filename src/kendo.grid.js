@@ -431,12 +431,22 @@
             }
         },
 
+        /**
+         * Clears currently selected items.          
+         */
         clearSelection: function() {
             var that = this;
             that.selectable.clear();
             that.trigger(CHANGE);
         },
 
+        /**
+         * Selects the specified Grid rows/cells. If called without arguments - returns the selected rows/cells.
+         * @param {Selector|Array} items Items to select.
+         * @example
+         * // selects first grid item
+         * grid.select(grid.tbody.find(">tr:first"));
+         */
         select: function(items) {
             var that = this,
                 selectable = that.selectable;
@@ -453,7 +463,7 @@
 
             return selectable.value();
         },
-
+        
         current: function(element) {
             var that = this,
                 current = that._current;
@@ -929,6 +939,14 @@
 
             return html;
         },
+
+        /**
+         * Collapses specified group.
+         * @param {Selector|DOMElement} group Target group item to collapse.
+         * @example
+         * // collapses first group item
+         * grid.collapseGroup(grid.tbody.find(">tr.t-grouping-row:first"));
+         */
         collapseGroup: function(group) {
             group = $(group).find(".t-icon").addClass("t-expand").removeClass("t-collapse").end();
             var level = group.find(".t-group-cell").length;
@@ -937,6 +955,14 @@
                 return $(".t-group-cell", this).length <= level;
             }).hide();
         },
+
+        /**
+         * Expands specified group.
+         * @param {Selector|DOMElement} group Target group item to expand.
+         * @example
+         * // expands first group item
+         * grid.expandGroup(grid.tbody.find(">tr.t-grouping-row:first"));
+         */
         expandGroup: function(group) {
             group = $(group).find(".t-icon").addClass("t-collapse").removeClass("t-expand").end();
             var that = this,
@@ -985,6 +1011,15 @@
 
             kendo.ui.progress(element, toggle);
         },
+
+        /**
+         * Reloads the data and repaints the grid.
+         * @example
+         * var grid = $("#grid").data("kendoGrid");
+         *
+         * // refreshes the grid
+         * grid.refresh();
+         */
         refresh: function() {
             var that = this,
                 length,
