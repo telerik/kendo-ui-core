@@ -1228,7 +1228,7 @@
 
                 if (toggle) {
                     if (!mask.length) {
-                        mask = $("<div class='t-loading-mask t-overlay' style='position:absolute;text-align:center;color:#fff'><span>Loading...</span></div>");
+                        mask = $("<div class='t-loading-mask'><span class='t-loading-text'>Loading...</span><div class='t-loading-image'></div><div class='t-loading-color'></div></div>");
                         mask.width(container.outerWidth()).height(container.outerHeight());
                         mask.prependTo(container);
                     }

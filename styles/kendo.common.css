@@ -447,6 +447,44 @@ div.t-window-content
     z-index: 10002;
 }
 
+/* Loading */
+
+.t-loading-mask,
+.t-loading-image
+{
+    position:absolute;
+}
+
+.t-loading-text
+{
+    position:absolute;
+    top:-4000px;
+    left:-4000px;
+}
+
+.t-loading-image,
+.t-loading-color
+{
+    width:100%;
+    height:100%;
+}
+    
+.t-loading-image
+{
+    background-position:center center;
+    background-repeat:no-repeat;
+    background-color:transparent;
+    top:0;
+    left:0;
+    z-index:2;
+}
+
+.t-loading-color
+{
+    filter: alpha(opacity=30);
+    opacity: .3;
+}
+
 /* TabStrip */
 .t-tabstrip
 {
