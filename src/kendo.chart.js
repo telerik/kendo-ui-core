@@ -107,7 +107,7 @@
          * @extends kendo.ui.Component
          * @param {DomElement} element DOM element
          * @param {Object} options Configuration options.
-         * @option {String} [theme] Sets Chart theme.
+         * @option {String} [theme] Sets Chart theme. Available themes: kendo, blueOpal, black.
          * @option {Object} [title] The chart title configuration options.
          * @option {String} [title.text] The title of the chart.
          * @option {String} [title.font] <"16px Verdana, sans-serif"> The font style of the title.
@@ -294,6 +294,9 @@
          * @option {Number} [valueAxis.labels.border.width] <0> The width of the border.
          * @option {String} [valueAxis.labels.border.color] <"black"> The color of the border.
          * @option {String} [valueAxis.labels.format] The format of the labels.
+         * _example
+         * //sets format of the labels
+         * format: "{0:C}"
          * @option {Object} [categoryAxis] The value axis configuration options.
          * @option {Number} [categoryAxis.min] <0> The minimum value of the axis.
          * @option {Number} [categoryAxis.max] <1> The maximum value of the axis.
@@ -366,6 +369,9 @@
          * @option {Number} [categoryAxis.labels.border.width] <0> The width of the border.
          * @option {String} [categoryAxis.labels.border.color] <"black"> The color of the border.
          * @option {String} [categoryAxis.labels.format] The format of the labels.
+         * _example
+         * //sets format of the labels
+         * format: "{0:C}"
          * @option {Object} [seriesDefaults]
          * @option {Boolean} [seriesDefaults.stacked] <false> A value indicating if the series should be stacked.
          * @option {Number} [seriesDefaults.gap] <1.5> The distance between category clusters.
@@ -393,6 +399,9 @@
          * @option {Number} [seriesDefaults.labels.border.width] <0> The width of the border.
          * @option {String} [seriesDefaults.labels.border.color] <"black"> The color of the border.
          * @option {String} [seriesDefaults.labels.format] The format of the labels.
+         * _example
+         * //sets format of the labels
+         * format: "{0:C}"
          * @option {Object} [seriesDefaults.border] The border of the series.
          * @option {Number} [seriesDefaults.border.width] <0> The width of the border.
          * @option {String} [seriesDefaults.border.color] <"black"> The color of the border.
@@ -414,7 +423,7 @@
          * @option {Object} [seriesDefaults.bar] The bar configuration options. For more details examine the bar type series.
          * @option {Object} [seriesDefaults.column] The column configuration options. For more details examine the column type series.
          * @option {Object} [seriesDefaults.line] The line configuration options. For more details examine the line type series.
-         * @option {Array} [series] The series configuration with array of options. Each type has different set of options:
+         * @option {Array} [series] Array of series definitions. Each type has different set of options:
          * @option [series.type="bar"] The type of the series.
          * @option {Boolean} [series.type="bar".stacked] <false> A value indicating if the series should be stacked.
          * @option {Number} [series.type="bar".gap] <1.5> The distance between category clusters.
@@ -472,6 +481,9 @@
          * @option {Number} [series.type="bar".labels.border.width] <0> The width of the border.
          * @option {String} [series.type="bar".labels.border.color] <"black"> The color of the border.
          * @option {String} [series.type="bar".labels.format] The format of the labels.
+         * _example
+         * //sets format of the labels
+         * format: "{0:C}"
          * @option {Object} [series.type="bar".border] The border of the series.
          * @option {Number} [series.type="bar".border.width] <1> The width of the border.
          * @option {String} [series.type="bar".border.color] <the color of the curren series> The color of the border.
@@ -533,6 +545,9 @@
          * @option {Number} [series.type="column".labels.border.width] <0> The width of the border.
          * @option {String} [series.type="column".labels.border.color] <"black"> The color of the border.
          * @option {String} [series.type="column".labels.format] The format of the labels.
+         * _example
+         * //sets format of the labels
+         * format: "{0:C}"
          * @option {Object} [series.type="column".border] The border of the series.
          * @option {Number} [series.type="column".border.width] <1> The width of the border.
          * @option {String} [series.type="column".border.color] <the color of the curren series> The color of the border.
@@ -641,6 +656,9 @@
          * @option {Number} [series.type="line".labels.border.width] <0> The width of the border.
          * @option {String} [series.type="line".labels.border.color] <"black"> The color of the border.
          * @option {String} [series.type="line".labels.format] The format of the labels.
+         * _example
+         * //sets format of the labels
+         * format: "{0:C}"
          * @option {Object} [chartArea] The chart area configuration options.
          * @option {String} [chartArea.background] <"white"> The background color of the chart area.
          * @option {Number|Object} [chartArea.margin] <5> The margin of the chart area.
