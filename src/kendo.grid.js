@@ -195,7 +195,7 @@
     /**
      * @name kendo.ui.Grid.Description
      *
-     * @section The Grid component displays tabular data.
+     * @section The Grid component displays tabular data. It makes it easy to manipulate large amounts of data.
      *
      * @exampleTitle Creating a <b>Grid</b> from existing HTML Div element
      * @example
