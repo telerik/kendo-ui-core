@@ -551,10 +551,30 @@
                         current.removeClass(FOCUSED);
                     }
                     that._current = element;
+                    that._scrollTo(element.parent()[0]);
                 }
             } else {
                 return that._current;
             }
+        },
+
+        _scrollTo: function(element) {            
+            var container = this.tbody.closest("div.t-grid-content")[0];
+            if(!element || !container) {
+                return;
+            }
+            
+            var elementOffsetTop = element.offsetTop,
+                elementOffsetHeight = element.offsetHeight,                
+                containerScrollTop = container.scrollTop,
+                containerOffsetHeight = container.clientHeight,
+                bottomDistance = elementOffsetTop + elementOffsetHeight;
+                        
+            container.scrollTop = containerScrollTop > elementOffsetTop
+                                    ? elementOffsetTop
+                                    : bottomDistance > (containerScrollTop + containerOffsetHeight)
+                                    ? bottomDistance - containerOffsetHeight
+                                    : containerScrollTop;        
         },
 
         _navigatable: function() {
@@ -588,22 +608,33 @@
                         var key = e.keyCode,
                             current = that.current(),
                             dataSource = that.dataSource,
-                            pageable = that.options.pageable;
+                            pageable = that.options.pageable,
+                            handled = false;
 
                         if (keys.UP === key) {
                             currentProxy(current ? current.parent().prevAll(ROW_SELECTOR).first().children().eq(current.index()) : table.find(FIRST_CELL_SELECTOR));
+                            handled = true;
                         } else if (keys.DOWN === key) {
                             currentProxy(current ? current.parent().nextAll(ROW_SELECTOR).first().children().eq(current.index()) : table.find(FIRST_CELL_SELECTOR));
+                            handled = true;
                         } else if (keys.LEFT === key) {
                             currentProxy(current ? current.prev(":not(.t-group-cell)") : table.find(FIRST_CELL_SELECTOR));
+                            handled = true;
                         } else if (keys.RIGHT === key) {
                             currentProxy(current ? current.next() : table.find(FIRST_CELL_SELECTOR));
+                            handled = true;
                         } else if (pageable && keys.PAGEUP == key) {
                             that._current = null;
                             dataSource.page(dataSource.page() + 1);
+                            handled = true;
                         } else if (pageable && keys.PAGEDOWN == key) {
                             that._current = null;
                             dataSource.page(dataSource.page() - 1);
+                            handled = true;
+                        }
+
+                        if(handled) {
+                            e.preventDefault();
                         }
                     }
                 });
