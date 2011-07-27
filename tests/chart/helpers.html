@@ -236,6 +236,22 @@
                 equal(box.unpad(0), box);
             });
 
+            test("containsPoint returns true for points within box", function() {
+                ok(box.containsPoint(5, 5));
+            });
+
+            test("containsPoint returns false for points outside box", function() {
+                ok(box.containsPoint(5, 5));
+            });
+
+            test("center returns x center", function() {
+                equals(box.center().x, 10);
+            });
+
+            test("center returns y center", function() {
+                equals(box.center().y, 10);
+            });
+
             // ------------------------------------------------------------
             var deepExtend = Chart.deepExtend,
                 extendSrc,
