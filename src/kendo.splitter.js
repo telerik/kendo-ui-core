@@ -1,4 +1,27 @@
 (function($, window, undefined) {
+    /**
+    * @name kendo.ui.Splitter.Description
+    *
+    * @section The splitter component provides a easy way to separate content.
+    * The component converts the children of an HTML element to resizable and/or collapsible
+    * panes.
+    *
+    * @exampleTitle Creating a basic splitter
+    * @example
+    * <!-- HTML -->
+    * <div id="splitter">
+    *    <div>
+    *        Area 1
+    *    </div>
+    *    <div>
+    *        Area 2
+    *    </div>
+    * </div>
+    *
+    * // JavaScript
+    * $("#splitter").kendoSplitter();
+    *
+    */
     var kendo = window.kendo,
         ui = kendo.ui,
         extend = $.extend,
@@ -45,7 +68,69 @@
         };
     }
 
-    var Splitter = Component.extend({
+    var Splitter = Component.extend(/** @lends kendo.ui.Splitter.prototype */ {
+        /**
+         * Creates a Splitter instance.
+         * @constructs
+         * @extends kendo.ui.Component
+         * @param {DomElement} element DOM element
+         * @param {Object} options Configuration options.
+         * @option {String} [orientation] <horizontal> Specifies the orientation of the splitter.
+         *    <dl>
+         *         <dt>
+         *              "horizontal"
+         *         </dt>
+         *         <dd>
+         *              Define horizontal orientation of the splitter.
+         *         </dd>
+         *         <dt>
+         *              "vertical"
+         *         </dt>
+         *         <dd>
+         *              Define vertical orientation of the splitter.
+         *         </dd>
+         *    </dl>
+         * @option {Array} [panes] Array of pane definitions.
+         * _example
+         *  $("#splitter").kendoSplitter({
+         *      //definitions for the first three panes
+         *      panes: [
+         *          {
+         *              size: "200px",
+         *              min: "100px",
+         *              max: "300px"
+         *          },
+         *          {
+         *              size: "20%",
+         *              resizable: false
+         *         },
+         *         {
+         *              collapsed: true,
+         *              collapsible: true
+         *         }
+         *      ]
+         *   });
+         * @option {String} [panes.size] Specifies the size of the pane.
+         * <p>
+         * The size can be defined in pixes or in percents.
+         * </p>
+         * <p>
+         * The size cannot be more than panes.max and less then panes.min.
+         * </p>
+         * @option {String} [panes.min] Specifies the minimum size of the pane.
+         * <p>
+         * Resized pane cannot be smaller then the defined minimum size.
+         * </p>
+         * @option {String} [panes.max] Specifies the maximum size of the pane.
+         * <p>
+         * Resized pane cannot be bigger then the defined maximum size.
+         * </p>
+         * @option {Boolean} [panes.collapsed] <false> Specifies whether the pane is initially collapsed.
+         * @option {Boolean} [panes.collapsible] <false> Specifies whether the pane can be collapsed by the user.
+         * @option {Boolean} [panes.scrollable] <true> Specifies whether the pane shows a scrollbar when its content overflows.
+         * @option {Boolean} [panes.resizable] <true> Specifies whether the pane can be resized by the user.
+         * @option {Boolean} [panes.contentUrl] <true> Specifies URL from which to load the pane content.
+         */
         init: function(element, options) {
             var that = this,
                 panesConfig,
@@ -58,7 +143,40 @@
             splitbarSelector = ".t-splitbar-draggable-" + that.orientation;
             that.ajaxOptions = that.options.ajaxOptions || that.ajaxOptions;
 
-            that.bind([EXPAND, COLLAPSE, CONTENTLOAD, RESIZE], that.options);
+            that.bind([
+                /**
+                 * Fires before a pane is expanded.
+                 * @name kendo.ui.Splitter#expand
+                 * @event
+                 * @param {Event} e
+                 * @param {Element} e.pane The expanding pane
+                 */
+                EXPAND,
+                /**
+                 * Fires before a pane is collapsed.
+                 * @name kendo.ui.Splitter#collapse
+                 * @event
+                 * @param {Event} e
+                 * @param {Element} e.pane The collapsing pane
+                 */
+                COLLAPSE,
+                /**
+                 * Fires when a request for the pane contents has finished
+                 * @name kendo.ui.Splitter#contentLoad
+                 * @event
+                 * @param {Event} e
+                 * @param {Element} e.pane The pane whose content has been loaded.
+                 */
+                CONTENTLOAD,
+                /**
+                 * Fires when a pane is resized
+                 * @name kendo.ui.Splitter#resize
+                 * @event
+                 * @param {Event} e
+                 * @param {Element} e.pane The pane which is resized
+                 */
+                RESIZE
+            ], that.options);
             that.bind(RESIZE, $.proxy(that._resize, that));
 
             that._initPanes();
@@ -85,16 +203,18 @@
         },
         _initPanes: function() {
             var that = this,
-                panesConfig = that.options.panes;
+                panesConfig = that.options.panes || [];
 
             that.element
                 .addClass("t-widget").addClass("t-splitter")
                 .children()
                     .addClass("t-pane")
                     .each(function (index, pane) {
-                        var $pane = $(pane);
-                        $pane.data("pane", panesConfig ? panesConfig[index] : {})
-                            .toggleClass("t-scrollable", panesConfig ? panesConfig[index].scrollable !== false : true);
+                        var $pane = $(pane),
+                            config = panesConfig && panesConfig[index];
+
+                        $pane.data("pane", config ? config : {})
+                            .toggleClass("t-scrollable", config ? config.scrollable !== false : true);
                         that.ajaxRequest($pane);
                     })
                 .end();
@@ -113,6 +233,14 @@
                 }
             }, options);
         },
+
+        /**
+        * Loads the pane content from the specified URL.
+        * @param {Selector|DomElement|jQueryObject} pane The pane whose content
+        * @param {String} url The URL which returns the pane content.
+        * @example
+        * splitter.ajaxRequest("#Pane1", "/Home/Pane1Content.html");
+        */
         ajaxRequest: function(pane, url) {
             var $pane = $(pane),
                 paneConfig = $pane.data("pane");
@@ -299,14 +427,53 @@
 
             this.trigger(RESIZE);
         },
+        /**
+        * Collapses the specified Pane item
+        * @param {Selector|DomElement|jQueryObject} pane The pane, which will be collapsed.
+        * @example
+        * splitter.collapse("#Item1"); //id of the first pane
+        */
         collapse: function(pane) {
             this.toggle(pane, false);
         },
+        /**
+        * Expands the specified Pane item
+        * @param {Selector|DomElement|jQueryObject} pane The pane, which will be expanded.
+        * @example
+        * splitter.expand("#Item1"); //id of the first pane
+        */
         expand: function(pane) {
             this.toggle(pane, true);
         },
+        /**
+        * Set the size of the pane.
+        * @name kendo.ui.Splitter#size
+        * @function
+        * @param {Selector|DomElement|jQueryObject} pane The pane
+        * @param {String} value The new size of the pane.
+        * @example
+        * splitter.size("#Item1", "200px");
+        */
         size: panePropertyAccessor("size", true),
+        /**
+        * Set the minimum size of the pane.
+        * @name kendo.ui.Splitter#min
+        * @function
+        * @param {Selector|DomElement|jQueryObject} pane The pane
+        * @param {String} value The minimum size value.
+        * @example
+        * splitter.min("#Item1", "100px");
+        */
         min: panePropertyAccessor("min"),
+        /**
+        * Set the maximum size of the pane.
+        * @name kendo.ui.Splitter#max
+        * @function
+        * @param {Selector|DomElement|jQueryObject} pane The pane
+        * @param {String} value The maximum size value.
+        * @example
+        * splitter.max("#Item1", "300px");
+        */
         max: panePropertyAccessor("max")
     });
 

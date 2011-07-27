@@ -594,6 +594,16 @@ var categories = {
             ]
         },
         {
+            text: "Splitter",
+            spriteCssClass: "splitterIcon",
+            items: [
+                {
+                    text: "Basic usage",
+                    url: "splitter/index.html"
+                }
+            ]
+        },
+        {
             text: "TabStrip",
             spriteCssClass: "tabStripIcon",
             items: [
