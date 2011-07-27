@@ -21,21 +21,21 @@
         <div class="description"></div>
         <!-- description -->
         <div id="example" class="t-content">
-            <fieldset>
-                <legend>Blog post</legend>
+                <h3>Blog post</h3>
                 <ul>
-                    <li><label>Title: <input type="text" id="blog-title" value="Demo Title" /></label></li>
-                    <li><label>Author's Twitter: <input type="text" id="blog-twitter" value="kendoui" /></label></li>
-                    <li><label>Content: <textarea type="text" id="blog-content" rows="10" cols="120">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</textarea></label></li>
+                    <li><label for="blog-title">Title:</label> <input type="text" id="blog-title" value="Demo Title" /></li>
+                    <li><label for="blog-twitter">Author's Twitter:</label> <input type="text" id="blog-twitter" value="kendoui" /></li>
+                    <li><label for="blog-content">Content:</label> <textarea id="blog-content" rows="4" cols="60">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</textarea></li>
                 </ul>
                 <button id="preview" class="t-button">preview</button>
-            </fieldset>
             <div id="blog-preview">
             </div>
             <script type="text/x-kendo-template" id="template">
-                <h3><#= title #></h3>
+                <h3 class="t-widget t-header"><#= title #></h3>
                 <p class="article">
-                <img src="http://api.twitter.com/1/users/profile_image?screen_name=<#= twitter #>&size=bigger" />
+                <img  alt="<#= twitter #>" title="<#= twitter #>" width="73" height="73" class="t=widget"
+                    src="http://api.twitter.com/1/users/profile_image?screen_name=<#= twitter #>&size=bigger" />
+                <h4>posted on <em><#= new Date().toLocaleDateString() #></em> by <strong><#= twitter #></strong></h4>
                 <#= content #>
                 </p>
             </script>
@@ -54,6 +54,68 @@
 
                 $("#preview").click(preview);
             </script>
+            <style scoped="scoped">
+                #example ul h3
+                {
+                    margin-bottom:0.6em;
+                    padding:0;
+                }
+                #example ul
+                {
+                    list-style:none;
+                    margin:0;
+                    padding:0;
+                }
+                #example ul label
+                {
+                    display:inline-block;
+                    vertical-align:top;
+                    width:110px;
+                    padding:0 8px;
+                    text-align:right;
+                }
+                #example h3,
+                #preview
+                {
+                    margin-left:129px;
+                }
+                #example li
+                {
+                    margin:0.4em 0;
+                }
+                #example h3.t-header
+                {
+                    margin:1.4em 0 0;
+                    padding:.4em 1.4em;
+                    font-size:1.4em;
+                }
+                #blog-preview
+                {
+                    width:84%;
+                    margin:0 auto;
+                }
+                #blog-preview img
+                {
+                    float:left;
+                    margin:0 14px 0 0;
+                    border:3px solid #dedede;
+                    -moz-border-radius:3px;
+                    -webkit-border-radius:3px;
+                    border-radius:3px;
+                }
+                #blog-preview h4
+                {
+                    font-size:13px;
+                    font-weight:normal;
+                    text-transform:uppercase;
+                    color:#8d8d8d;
+                    margin-top:0;
+                }
+                #blog-preview h4 strong
+                {
+                    color:#ed662e;
+                }
+            </style>
         </div>
         <!-- tools -->
         <!-- tools -->
