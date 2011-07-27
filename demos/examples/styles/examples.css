@@ -1021,19 +1021,19 @@ div.skinSelector .t-state-active
 #skinSelector-list .opalThumb
 {
     background-position: 0 0;
-    border-color: #606161;
+    border-color: #d7d7d7;
 }
 
 #skinSelector-list .kendoThumb
 {
-    background-position: -64px 0;
-    border-color: #cdd4d7;
+    background-position: -46px 0;
+    border-color: #d7d7d7;
 }
 
 #skinSelector-list .blackThumb
 {
-    background-position: -128px 0;
-    border-color: #cdd4d7;
+    background-position: -92px 0;
+    border-color: #d7d7d7;
 }
 
 /* Documentation styles */
