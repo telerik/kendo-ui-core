@@ -94,7 +94,13 @@
                     that._dragEnd(this, e);                                                           
                 },
                 dragstart: function(e) {
-                    var element, marginRight, left;
+                    var element, marginRight, left,
+                        field = e.currentTarget.data("field");
+
+                    if(that.indicator(field)) {
+                        e.preventDefault();
+                        return;
+                    }
 
                     intializePositions();
                     if(dropCuePositions.length) {
