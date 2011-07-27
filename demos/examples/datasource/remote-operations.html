@@ -65,7 +65,7 @@
                 // read data from the remote service
                 dataSource.read();
 
-                $("#apply").click(function() {
+                $("#apply").live("click", function() {
                     var page = parseInt($("#page").val(), 10);
 
                     // validate the page - it must be a number within the allowed range
