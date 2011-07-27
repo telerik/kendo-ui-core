@@ -929,6 +929,11 @@ div.skinSelector .t-state-active
     border-radius: 5px;
 }
 
+div.skinSelector .t-input
+{
+    color:#333;
+}
+
 .skinSelector .t-dropdown-wrap .t-arrow-down
 {
     background-position: 100% -693px;

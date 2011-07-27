@@ -1,9 +1,14 @@
 ﻿/* Kendo theme*/
 
-.t-widget,
-.t-input
+.t-widget
 {
     border-color: #262626;
+    background-color: #393939;
+}
+
+.t-input
+{
+    border-color: #7e7e7e;
     background-color: #393939;
 }
 
@@ -54,9 +59,21 @@
 .t-link:visited,
 .t-popup,
 .t-grid .t-header,
-.t-tabstrip .t-content
+.t-tabstrip .t-content,
+.t-input
 {
     color: #fff;
+}
+
+.t-popup,
+.t-menu .t-group,
+.t-grid .t-filter-options,
+.t-time-popup,
+.t-datepicker-calendar
+{
+    -moz-box-shadow: 2px 2px 2px #222;
+    -webkit-box-shadow: 2px 2px 2px #222;
+    box-shadow: 2px 2px 2px #222;
 }
 
 .t-group
