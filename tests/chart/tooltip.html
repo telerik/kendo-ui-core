@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.chart</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <link href="../qunit.css" type="text/css" rel="stylesheet"/>
+    </head>
+    <body>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.chart.js"></script>
+        <script type="text/javascript">
+            var Chart = kendo.ui.Chart,
+                tooltip,
+                element;
+
+            function createTooltip(options) {
+                tooltip = new Chart.Tooltip($("#chart"), options);
+                element = tooltip.element;
+            }
+
+            // ------------------------------------------------------------
+            module("Tooltip", {
+                setup: function() {
+                    createTooltip();
+                }
+            });
+
+            test("attaches to document body", function() {
+                ok(element[0].parentNode === document.body);
+            });
+
+            test("sets font", function() {
+                createTooltip({ font: "16px Tahoma" });
+                equals(element.css("fontSize"), "16px");
+                equals(element.css("fontFamily"), "Tahoma");
+            });
+
+            test("sets padding", function() {
+                createTooltip({ padding: 5 });
+                equals(element.css("paddingTop"), "5px");
+                equals(element.css("paddingRight"), "5px");
+                equals(element.css("paddingBottom"), "5px");
+                equals(element.css("paddingLeft"), "5px");
+            });
+
+            test("sets border width", function() {
+                createTooltip({ border: { width: 1 } });
+                equals(element.css("border-top-width"), "1px");
+            });
+
+            test("sets border color", function() {
+                createTooltip({ border: { color: "rgb(255, 0, 0)" } });
+                equals(element.css("border-top-color").replace(/\s/g, ''), "rgb(255,0,0)");
+            });
+
+            test("sets background to current series", function() {
+                tooltip.show({
+                    value: 1,
+                    box: new Chart.Box2D(),
+                    options: {
+                        aboveAxis: true
+                    },
+                    series: {
+                        color: "#f00"
+                    }
+                });
+                equals(element.css("backgroundColor").replace(/\s/g, ''), "rgb(255,0,0)");
+            });
+
+        </script>
+
+        <div id="chart"></div>
+
+        <h1 id="qunit-header">kendo.chart</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+    </body>
+</html> 

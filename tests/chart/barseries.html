@@ -65,7 +65,9 @@
                         options: {}
                     },
                     options: {
-                        categoryAxis: { }
+                        categoryAxis: {
+                            categories: ["A", "B"]
+                        }
                     }
                 });
 
@@ -124,8 +126,34 @@
                     same(barHeights, [1, 2]);
                 });
 
-                test("sets series on bars", function() {
-                    same(series.points[0].options.series, series.options.series[0]);
+                test("getSeriesPoint returns nearest series point", function() {
+                    var bar = series.points[1],
+                        result = series.getSeriesPoint(bar.box.x1 + 100, bar.box.y1, 0);
+
+                    ok(result === bar);
+                });
+
+                test("getSeriesPoint returns nearest point of any series", function() {
+                    var bar = series.points[1],
+                        result = series.getSeriesPoint(bar.box.x1 + 100, bar.box.y1);
+
+                    ok(result === bar);
+                });
+
+                test("sets bar owner", function() {
+                    ok(series.points[0].owner === series);
+                });
+
+                test("sets bar series", function() {
+                    ok(series.points[0].series === positiveSeries);
+                });
+
+                test("sets bar series index", function() {
+                    ok(series.points[0].seriesIx === 0);
+                });
+
+                test("sets bar category", function() {
+                    equal(series.points[0].category, "A");
                 });
 
                 // ------------------------------------------------------------
@@ -160,8 +188,22 @@
                     same(barHeights, [1, 2]);
                 });
 
+                test("getSeriesPoint returns nearest series point", function() {
+                    var bar = series.points[1],
+                        result = series.getSeriesPoint(bar.box.x2 + 100, bar.box.y2, 0);
+
+                    ok(result === bar);
+                });
+
+                test("getSeriesPoint returns nearest point of any series", function() {
+                    var bar = series.points[1],
+                        result = series.getSeriesPoint(bar.box.x2 + 100, bar.box.y2);
+
+                    ok(result === bar);
+                });
+
                 // ------------------------------------------------------------
-                module("Bar Chart / Mixed Values", {
+                module("Bar Chart / Multiple Series", {
                     setup: function() {
                         plotArea = new PlotAreaStub();
                         setupBarChart(plotArea, { series: [ negativeSeries, positiveSeries ] });
@@ -173,8 +215,22 @@
                     equal(series.categoriesCount(), positiveSeries.data.length);
                 });
 
+                test("getSeriesPoint returns nearest series point", function() {
+                    var bar = series.points[1],
+                        result = series.getSeriesPoint(bar.box.x2, bar.box.y2 + 100, 1);
+
+                    ok(result === bar);
+                });
+
+                test("getSeriesPoint returns nearest point of any series", function() {
+                    var bar = series.points[1],
+                        result = series.getSeriesPoint(bar.box.x2, bar.box.y2 + 100);
+
+                    ok(result === bar);
+                });
+
                 // ------------------------------------------------------------
-                module("Bar Chart / Mismatching series", {
+                module("Bar Chart / Mismatched series", {
                     setup: function() {
                         plotArea = new PlotAreaStub();
                         setupBarChart(plotArea, {
@@ -209,6 +265,20 @@
                     $.each(series.points, function() {
                         equal(this.box.y2, CATEGORY_AXIS_Y);
                     });
+                });
+
+                test("getSeriesPoint returns nearest series point", function() {
+                    var bar = series.points[3],
+                        result = series.getSeriesPoint(bar.box.x2 + 100, bar.box.y2, 1);
+
+                    ok(result === bar);
+                });
+
+                test("getSeriesPoint returns nearest point of any series", function() {
+                    var bar = series.points[4],
+                        result = series.getSeriesPoint(bar.box.x2 + 100, bar.box.y2);
+
+                    ok(result === bar);
                 });
 
                 // ------------------------------------------------------------
@@ -896,6 +966,27 @@
                     });
 
                     same(barWidths, [1, 2]);
+                });
+
+                // ------------------------------------------------------------
+                module("Bar Chart / Horizontal / Missing values", {
+                    setup: function() {
+                        plotArea = new PlotAreaStub();
+                        setupBarChart(plotArea, {
+                            isVertical: false,
+                            series: [ { data: [1, 2, 3] },
+                                      positiveSeries
+                                ]
+                        });
+                    }
+                });
+
+                test("Missing values are represented as bars with zero width", function() {
+                    var barWidths = $.map(series.points, function(bar) {
+                        return bar.box.width();
+                    });
+
+                    same(barWidths, [1, 1, 2, 2, 3, 0]);
                 });
 
                 // ------------------------------------------------------------

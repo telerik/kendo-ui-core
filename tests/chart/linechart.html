@@ -56,7 +56,9 @@
                         options: {}
                     },
                     options: {
-                        categoryAxis: { }
+                        categoryAxis: {
+                            categories: ["A", "B"]
+                        }
                     }
                 });
 
@@ -115,8 +117,34 @@
                     same(pointHeights, [1, 2]);
                 });
 
-                test("sets series on points", function() {
-                    same(lineChart.points[0].options.series, lineChart.options.series[0]);
+                test("getSeriesPoint returns nearest series point", function() {
+                    var point = lineChart.points[1],
+                        result = lineChart.getSeriesPoint(point.box.x2 + 100, point.box.y2, 0);
+
+                    ok(result === point);
+                });
+
+                test("getSeriesPoint returns nearest point of any series", function() {
+                    var point = lineChart.points[1],
+                        result = lineChart.getSeriesPoint(point.box.x2 + 100, point.box.y2);
+
+                    ok(result === point);
+                });
+
+                test("sets point owner", function() {
+                    ok(lineChart.points[0].owner === lineChart);
+                });
+
+                test("sets point series", function() {
+                    ok(lineChart.points[0].series === positiveSeries);
+                });
+
+                test("sets point series index", function() {
+                    ok(lineChart.points[0].seriesIx === 0);
+                });
+
+                test("sets point category", function() {
+                    equal(lineChart.points[0].category, "A");
                 });
 
                 // ------------------------------------------------------------
@@ -151,8 +179,22 @@
                     same(pointHeights, [1, 2]);
                 });
 
+                test("getSeriesPoint returns nearest series point", function() {
+                    var point = lineChart.points[1],
+                        result = lineChart.getSeriesPoint(point.box.x2 + 100, point.box.y2, 0);
+
+                    ok(result === point);
+                });
+
+                test("getSeriesPoint returns nearest point of any series", function() {
+                    var point = lineChart.points[1],
+                        result = lineChart.getSeriesPoint(point.box.x2 + 100, point.box.y2);
+
+                    ok(result === point);
+                });
+
                 // ------------------------------------------------------------
-                module("Line Chart / Mixed Values", {
+                module("Line Chart / Multiple Series", {
                     setup: function() {
                         plotArea = new PlotAreaStub();
                         setupLineChart(plotArea, { series: [ negativeSeries, positiveSeries ] });
@@ -164,8 +206,22 @@
                     equal(lineChart.categoriesCount(), positiveSeries.data.length);
                 });
 
+                test("getSeriesPoint returns nearest series point", function() {
+                    var point = lineChart.points[1],
+                        result = lineChart.getSeriesPoint(point.box.x2, point.box.y2 + 100, 1);
+
+                    ok(result === point);
+                });
+
+                test("getSeriesPoint returns nearest point of any series", function() {
+                    var point = lineChart.points[2],
+                        result = lineChart.getSeriesPoint(point.box.x2, point.box.y2 + 100);
+
+                    ok(result === point);
+                });
+
                 // ------------------------------------------------------------
-                module("Line Chart / Mismatching series", {
+                module("Line Chart / Mismatched series", {
                     setup: function() {
                         plotArea = new PlotAreaStub();
                         setupLineChart(plotArea, {
@@ -186,6 +242,20 @@
 
                 test("Reports number of categories", function() {
                     equal(lineChart.categoriesCount(), 3);
+                });
+
+                test("getSeriesPoint returns nearest series point", function() {
+                    var point = lineChart.points[3],
+                        result = lineChart.getSeriesPoint(point.box.x2 + 100, point.box.y2, 1);
+
+                    ok(result === point);
+                });
+
+                test("getSeriesPoint returns nearest point of any series", function() {
+                    var point = lineChart.points[4],
+                        result = lineChart.getSeriesPoint(point.box.x2 + 100, point.box.y2);
+
+                    ok(result === point);
                 });
 
                 // ------------------------------------------------------------
@@ -228,6 +298,27 @@
                     });
 
                     equals(lineChart.points[2].value, 0);
+                });
+
+                test("getSeriesPoint returns nearest series point (left)", function() {
+                    var point = lineChart.points[1],
+                        result = lineChart.getSeriesPoint(point.box.x2 + 0.1, point.box.y2, 0);
+
+                    ok(result === point);
+                });
+
+                test("getSeriesPoint returns nearest series point (right)", function() {
+                    var point = lineChart.points[3],
+                        result = lineChart.getSeriesPoint(point.box.x1 - 0.1, point.box.y1, 0);
+
+                    ok(result === point);
+                });
+
+                test("getSeriesPoint returns nearest point of any series", function() {
+                    var point = lineChart.points[3],
+                        result = lineChart.getSeriesPoint(point.box.x1 - 0.1, point.box.y1);
+
+                    ok(result === point);
                 });
 
                 // ------------------------------------------------------------
@@ -339,7 +430,7 @@
                     setup: function() {
                         plotArea = new PlotAreaStub();
                         setupLineChart(plotArea, {
-                            series: [ sparseSeries ],
+                            series: [ sparseSeries, sparseSeries ],
                             isStacked: true
                         });
                     }
@@ -350,11 +441,11 @@
                 });
 
                 test("Reports maximum series value", function() {
-                    same(lineChart.valueRange().max, 2);
+                    same(lineChart.valueRange().max, 4);
                 });
 
                 test("missing points are assumed to be 0 by default", function() {
-                    equals(lineChart.points[2].value, 0);
+                    equals(lineChart.points[4].value, 0);
                 });
 
                 test("ignores interpolate option", function() {

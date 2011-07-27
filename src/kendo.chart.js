@@ -835,7 +835,10 @@
                     spacing: BAR_SPACING
                 }
             },
-            series: []
+            series: [],
+            tooltip: {
+                visible: false
+            }
         },
 
         /**
@@ -891,30 +894,49 @@
         },
 
         _attachEvents: function() {
-            var chart = this;
+            var chart = this,
+                viewElement = $(chart._viewElement);
 
-            $(chart._viewElement)
-                .bind("click mouseover mouseout", proxy(chart._eventDispatcher, chart));
+            viewElement.bind("click", proxy(chart._click, chart));
+
+            if (chart.options.tooltip.visible) {
+                viewElement.bind("mouseover", proxy(chart._mouseOver, chart));
+            }
         },
 
-        _eventDispatcher: function(e) {
+        _click: function(e) {
             var chart = this,
                 model = chart._model,
+                plotArea = model.children[2],
                 target = e.target,
-                point = model.idMap[target.id],
-                tooltip,
-                offset;
+                point = model.idMap[target.id];
 
             if (point) {
-                tooltip = point._tooltip;
-                if (e.type === CLICK) {
-                    chart.trigger(SERIES_CLICK, {
-                        value: point.value,
-                        category: point.options.category,
-                        series: point.options.series,
-                        element: $(e.target)
-                    });
+                chart.trigger(SERIES_CLICK, {
+                    value: point.value,
+                    category: point.category,
+                    series: point.series,
+                    element: $(e.target)
+                });
+            }
+        },
+
+        _mouseOver: function(e) {
+            var chart = this,
+                chartElement = chart._model.idMap[e.target.id],
+                point,
+                tooltip = chart._tooltip,
+                chartOffset = chart.element.offset(),
+                x = e.clientX - chartOffset.left,
+                y = e.clientY - chartOffset.top;
+
+            if (chartElement) {
+                if (!tooltip) {
+                    tooltip = chart._tooltip = new Tooltip(chart.element);
                 }
+
+                point = chartElement.getSeriesPoint ? chartElement.getSeriesPoint(x, y) : chartElement;
+                tooltip.show(point);
             }
         },
 
@@ -1119,10 +1141,17 @@
         center: function() {
             var box = this;
 
-            return [
-                box.x1 + box.width() / 2,
-                box.y1 + box.height() / 2
-            ];
+            return {
+                x: box.x1 + box.width() / 2,
+                y: box.y1 + box.height() / 2
+            };
+        },
+
+        containsPoint: function(x, y) {
+            var box = this;
+
+            return x >= box.x1 && x <= box.x2 &&
+                   y >= box.y1 && y <= box.y2;
         }
     });
 
@@ -2588,6 +2617,8 @@
             chart._seriesMax = - Number.MAX_VALUE;
 
             chart.points = [];
+            chart.categoryPoints = [];
+            chart.seriesPoints = [];
 
             chart.render();
         },
@@ -2607,7 +2638,32 @@
         },
 
         addValue: function(value, category, categoryIx, series, seriesIx) {
-            this.updateRange(value, categoryIx);
+            var chart = this,
+                point,
+                categoryPoints = chart.categoryPoints[categoryIx],
+                seriesPoints = chart.seriesPoints[seriesIx];
+
+            if (!categoryPoints) {
+                chart.categoryPoints[categoryIx] = categoryPoints = [];
+            }
+
+            if (!seriesPoints) {
+                chart.seriesPoints[seriesIx] = seriesPoints = [];
+            }
+
+            chart.updateRange(value, categoryIx);
+
+            point = chart.createPoint(value, category, categoryIx, series, seriesIx);
+            if (point) {
+                point.category = category;
+                point.series = series;
+                point.seriesIx = seriesIx;
+                point.owner = chart;
+            }
+
+            chart.points.push(point);
+            seriesPoints.push(point);
+            categoryPoints.push(point);
         },
 
         updateRange: function(value, categoryIx) {
@@ -2635,7 +2691,7 @@
                 isVertical = options.isVertical,
                 plotArea = chart.plotArea,
                 pointIx = 0,
-                categorySlots = [],
+                categorySlots = chart.categorySlots = [],
                 chartPoints = chart.points,
                 valueAxis = isVertical ? plotArea.axisY : plotArea.axisX,
                 axisCrossingValue = valueAxis.options.axisCrossingValue;
@@ -2701,6 +2757,41 @@
             }
 
             return categories;
+        },
+
+        getSeriesPoint: function(x, y, seriesIx) {
+            var chart = this,
+                isVertical = chart.options.isVertical,
+                axis = isVertical ? X : Y,
+                pos = isVertical ? x : y,
+                points,
+                currentPoint,
+                pointBox,
+                pointDistance,
+                nearestPoint,
+                nearestPointDistance = Number.MAX_VALUE;
+
+            if (defined(seriesIx)) {
+                points = chart.seriesPoints[seriesIx];
+            } else {
+                points = [].concat.apply([], chart.seriesPoints);
+            }
+
+            for (var i = 0, pointsLength = points.length; i < pointsLength; i++) {
+                currentPoint = points[i];
+
+                if (currentPoint && defined(currentPoint.value) && currentPoint.value !== null) {
+                    pointBox = currentPoint.box;
+                    pointDistance = Math.abs(pointBox.center()[axis] - pos);
+
+                    if (pointDistance < nearestPointDistance) {
+                        nearestPoint = currentPoint;
+                        nearestPointDistance = pointDistance;
+                    }
+                }
+            }
+
+            return nearestPoint;
         }
     });
 
@@ -2714,17 +2805,17 @@
             CategoricalChart.fn.init.call(chart, plotArea, options);
         },
 
-        addValue: function(value, category, categoryIx, series, seriesIx) {
+        createPoint: function(value, category, categoryIx, series, seriesIx) {
             var barChart = this,
                 options = barChart.options,
                 children = barChart.children,
                 isStacked = barChart.options.isStacked,
+                seriesPoints = barChart.seriesPoints[seriesIx],
+                categoryPoints = barChart.categoryPoints[categoryIx],
                 labelOptions = deepExtend({
                     isVertical: options.isVertical,
                     id: uniqueId()
                 }, series.labels);
-
-            CategoricalChart.fn.addValue.apply(barChart, arguments);
 
             if (isStacked) {
                 if (labelOptions.position == "outsideEnd") {
@@ -2737,17 +2828,13 @@
                 opacity: series.opacity,
                 border: series.border,
                 isVertical: options.isVertical,
-                overlay: series.overlay,
-                series: series,
-                category: category
+                overlay: series.overlay
             });
 
             if (labelOptions.visible && value) {
                 var label = new BarLabel(value, labelOptions);
                 bar.append(label);
             }
-
-            barChart.points.push(bar);
 
             var cluster = children[categoryIx];
             if (!cluster) {
@@ -2789,6 +2876,8 @@
             } else {
                 cluster.append(bar);
             }
+
+            return bar;
         },
 
         updateRange: function(value, categoryIx) {
@@ -3006,43 +3095,31 @@
         init: function(plotArea, options) {
             var chart = this;
 
-            chart.seriesPoints = [];
-            chart.categoryPoints = [];
             chart._categoryTotals = [];
 
             CategoricalChart.fn.init.call(chart, plotArea, options);
         },
 
-        addValue: function(value, category, categoryIx, series, seriesIx) {
+        createPoint: function(value, category, categoryIx, series, seriesIx) {
             var chart = this,
                 options = chart.options,
                 children = chart.children,
                 isStacked = options.isStacked,
-                points = chart.seriesPoints[seriesIx],
+                seriesPoints = chart.seriesPoints[seriesIx],
                 categoryPoints = chart.categoryPoints[categoryIx],
                 stackPoint,
                 plotValue = 0;
-
-            CategoricalChart.fn.addValue.apply(chart, arguments);
-
-            if (!points) {
-                chart.seriesPoints[seriesIx] = points = [];
-            }
 
             if (!defined(value) || value === null) {
                 if (isStacked || series.missingValues === ZERO) {
                     value = 0;
                 } else {
-                    chart.points.push(null);
-                    points.push(null);
-                    return;
+                    return null;
                 }
             }
 
             var point = new LinePoint(value,
                 deepExtend({
-                    series: series,
-                    category: category,
                     isVertical: !options.isVertical,
                     markers: {
                         background: series.color,
@@ -3052,23 +3129,17 @@
             );
 
             if (isStacked) {
-                if (!categoryPoints) {
-                    chart.categoryPoints[categoryIx] = categoryPoints = [];
-                }
-
                 stackPoint = categoryPoints[categoryPoints.length - 1];
                 if (stackPoint) {
                     plotValue = stackPoint.plotValue;
                 }
 
                 point.plotValue = value + plotValue;
-
-                categoryPoints.push(point);
             }
 
-            chart.points.push(point);
-            points.push(point);
             chart.append(point);
+
+            return point;
         },
 
         updateRange: function(value, categoryIx) {
@@ -3101,6 +3172,7 @@
                 pointIx,
                 pointCount,
                 point,
+                pointCenter,
                 linePoints,
                 interpolate,
                 lines = [];
@@ -3115,7 +3187,8 @@
                 for (pointIx = 0; pointIx < pointCount; pointIx++) {
                     point = currentSeriesPoints[pointIx];
                     if (point) {
-                        linePoints.push(point.markerBox().center());
+                        pointCenter = point.markerBox().center();
+                        linePoints.push([pointCenter.x, pointCenter.y]);
                     } else if (!interpolate) {
                         if (linePoints.length > 1) {
                             lines.push(chart.createLine(view, linePoints, currentSeries));
@@ -3133,7 +3206,10 @@
         },
 
         createLine: function(view, points, series) {
+            var lineId = uniqueId();
+            this.registerId(lineId);
             return view.createPath(points, {
+                id: lineId,
                 stroke: series.color,
                 strokeWidth: series.width,
                 strokeOpacity: series.opacity,
@@ -3588,8 +3664,8 @@
 
             if (ctm) {
                 var left = - ctm.e % 1,
-                top = - ctm.f % 1,
-                style = element.style;
+                    top = - ctm.f % 1,
+                    style = element.style;
 
                 if (left !== 0 || top !== 0) {
                     style.left = left + "px";
@@ -4173,6 +4249,114 @@
         }
     };
 
+    var Tooltip = Class.extend({
+        init: function(chartElement, options) {
+            var tooltip = this;
+
+            tooltip.options = deepExtend({}, tooltip.options, options);
+            options = tooltip.options;
+            options.padding = getSpacing(options.padding);
+
+            tooltip.chartElement = chartElement;
+
+            tooltip.template = Tooltip.template;
+            if (!tooltip.template) {
+                tooltip.template = Tooltip.template = template(
+                    "<div style='position: absolute; font: <#= d.font #>;" +
+                    "-moz-border-radius: 4px; -webkit-border-radius: 4px;" +
+                    "border: <#= d.border.width #>px solid <#= d.border.color #>;" +
+                    "padding: <#= d.padding.top #>px <#= d.padding.right #>px " +
+                    "<#= d.padding.bottom #>px <#= d.padding.left #>px;'></div>"
+                );
+            }
+
+            tooltip.element = $(tooltip.template(tooltip.options)).appendTo(doc.body);
+        },
+
+        options: {
+            font: SANS12,
+            padding: getSpacing(2),
+            border: {
+                color: BLACK,
+                width: 0
+            },
+            background: "",
+            offsetX: 0,
+            offsetY: 15
+        },
+
+        show: function(point) {
+            var tooltip = this,
+                element = tooltip.element,
+                options = tooltip.options,
+                aboveAxis = point.options.aboveAxis,
+                chartElement = tooltip.chartElement,
+                chartOffset = chartElement.offset(),
+                x = chartOffset.left + point.box.center().x,
+                y = chartOffset.top + (aboveAxis ? point.box.y1 : point.box.y2);
+
+            tooltip.element.html(point.value.toString());
+
+            if (aboveAxis) {
+                y = y - options.offsetY - element.height();
+            } else {
+                y = y + options.offsetY;
+            }
+
+            tooltip.element
+                .css("background-color", point.series.color)
+                .show()
+                .stop(true)
+                .animate({
+                    left: (x - element.width() / 2) + "px",
+                    top: y + "px"
+                }, tooltip.visible ? 100 : 0);
+
+            tooltip.chartOffset = chartOffset;
+            tooltip.chartBox =
+                new Box2D(chartOffset.x, chartOffset.y, chartElement.width(), chartElement.height())
+            tooltip.point = point;
+
+            if (!tooltip.visible) {
+                $(doc.body).bind("mousemove.tooltip", proxy(tooltip._mouseMove, tooltip));
+            }
+
+            tooltip.visible = true;
+        },
+
+        _mouseMove: function(e) {
+            var tooltip = this,
+                point = tooltip.point,
+                chartOffset = tooltip.chartOffset,
+                x = e.clientX - chartOffset.left,
+                y = e.clientY - chartOffset.top,
+                owner,
+                seriesPoint;
+
+            if (tooltip.chartBox.containsPoint(x, y)) {
+                owner = point.owner;
+                seriesPoint = owner.getSeriesPoint(x, y, point.seriesIx);
+                if (seriesPoint && seriesPoint != point) {
+                    tooltip.show(seriesPoint);
+                }
+            } else {
+                tooltip.hide();
+            }
+        },
+
+        hide: function() {
+            var tooltip = this;
+
+            if (tooltip.visible) {
+                $(doc.body).unbind("mousemove.tooltip");
+                tooltip.element.fadeOut();
+
+                tooltip.point = null;
+                tooltip.visible = false;
+            }
+        }
+    });
+
     // Helper functions
     function ceil(value, step) {
         return round(Math.ceil(value / step) * step, DEFAULT_PRECISION);
@@ -4703,6 +4887,7 @@
     Chart.VMLLinearGradient = VMLLinearGradient;
     Chart.VMLStroke = VMLStroke;
     Chart.VMLFill = VMLFill;
+    Chart.Tooltip = Tooltip;
     Chart.deepExtend = deepExtend;
     Chart.Color = Color;
     Chart.blendColors = blendColors;

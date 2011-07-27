@@ -20,9 +20,9 @@
                     d: 20
                 }, {
                     name: "Beta",
-                    a: -5,
+                    a: -25,
                     b: -20,
-                    c: -5,
+                    c: -15,
                     d: -20
                 }, {
                     name: "Gamma",
@@ -75,28 +75,18 @@
                             visible: false
                         },
 
-                        column: {
-                            stack: true
-                        },
-
-                        line: {
-                            missingValues: "interpolate"
-                        }
+                        type: "column",
+                        stack: false
                     },
                     series: [
                         {
-                            name: "Value A",
-                            field: "a"
-                        }, {
-                            name: "Value B",
-                            field: "b"
-                        }, {
                             name: "Value C",
                             field: "c"
-                        }, {
-                            type: "line",
+                        },
+                        {
                             name: "Value D",
                             field: "d",
+                            type: "line",
                             markers: {
                                 type: "circle"
                             }
@@ -186,7 +176,7 @@
             }
         </script>
 
-        <div id="container" style="width: 600px; height: 400px; float: left;">
+        <div id="container" style="width: 600px; height: 400px; float: left; margin-left: 100px;">
         </div>
 
             <div class="configurator" style="margin-top: 30px; clear: both;">
