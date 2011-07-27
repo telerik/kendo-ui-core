@@ -25,7 +25,7 @@ var cssRegExp = /\.css$/;
 var scripts = [
     "kendo.core.js",
     "kendo.fx.js",
-    "kendo.data.xml.js",
+    "kendo.data.odata.js",
     "kendo.data.xml.js",
     "kendo.data.js",
     "kendo.model.js",
