@@ -27,26 +27,38 @@
             <h2> Horizontal Splitter </h2>
             <div id="horizontal">
                 <div>
-                    Top pane
+                    <p>
+                        Top pane
+                    </p>
                 </div>
                 <div>
-                    Middle pane
+                    <p>
+                        Middle pane
+                    </p>
                 </div>
                 <div>
-                    Bottom pane
+                    <p>
+                        Bottom pane
+                    </p>
                 </div>
             </div>
 
             <h2> Vertical Splitter </h2>
             <div id="vertical">
                 <div>
-                    Left pane
+                    <p>
+                        Left pane
+                    </p>
                 </div>
                 <div>
-                    Center pane
+                    <p>
+                        Center pane
+                    </p>
                 </div>
                 <div>
-                    Right pane
+                    <p>
+                        Right pane
+                    </p>
                 </div>
             </div>
 
@@ -55,7 +67,7 @@
                     $("#horizontal").kendoSplitter({
                         panes: [
                             { collapsible: true },
-                            { collapsible: true },
+                            { collapsible: false },
                             { collapsible: true }
                         ]
                     });
@@ -63,7 +75,7 @@
                         orientation: "vertical",
                         panes: [
                             { collapsible: true },
-                            { collapsible: true },
+                            { collapsible: false },
                             { collapsible: true }
                         ]
                     });
