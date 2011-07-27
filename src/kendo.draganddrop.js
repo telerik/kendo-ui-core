@@ -100,6 +100,8 @@
             bind(that.element, that.options.filter, MOUSEDOWN + NAMESPACE, proxy(that._wait, that));
 
             that.bind([DRAGSTART, DRAG, DRAGEND], that.options);
+
+            bind(that.element, that.options.filter, DRAGSTART + NAMESPACE, false);
         },
 
         options: {
