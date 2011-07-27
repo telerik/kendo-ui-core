@@ -759,6 +759,7 @@
          *
          * // sorts data ascending by orderId field and then descending by shipmentDate
          * sort: [ { field: "orderId", dir: "asc" }, { field: "shipmentDate", dir: "desc" } ]
+         *
          * @option {Array|Object} [filter] <undefined> Sets initial filter
          * _example
          * // returns only data where orderId is equal to 10248
@@ -766,6 +767,7 @@
          *
          * // returns only data where orderId is equal to 10248 and customerName starts with Paul
          * filter: [ { field: "orderId", operation: "eq", value: 10248 }, { field: "customerName", operation: "startswith", value: "Paul" } ]
+         *
          * @option {Array|Object} [group] <undefined> Sets initial grouping
          * _example
          * // groups data by orderId field
@@ -773,12 +775,84 @@
          *
          * // groups data by orderId and customerName fields
          * group: [ { field: "orderId", dir: "desc" }, { field: "customerName", dir: "asc" } ]
+         *
          * @option {Array|Object} [aggregates] <undefined> Sets fields on which initial aggregates should be calculated
          * _example
          * // calculates total sum of unitPrice field's values.
          * [{ field: "unitPrice", aggregate: "sum" }]
-         * @option {Object} [transport] Sets the object responsible for loading and saving of data
+         *
+         * @option {Object} [transport] Sets the object responsible for loading and saving of data.
+         *  This can be a remote or local/in-memory data.
+         *
+         * @option {Object|String} [transport.read] Options for remote read data operation or the URL of the remote service
+         * _example
+         *  //settings various options for remote data transport
+         *  var dataSource = new kendo.data.DataSource({
+         *     transport: {
+         *        read: {
+         *            url: "http://search.twitter.com/search.json", // the remove service URL
+         *            dataType: "jsonp", // JSONP (JSON with padding) is required for cross-domain AJAX
+         *            data: { //additional parameters sent to the remote service
+         *                q: function() {
+         *                    return $("#searchFor").val();
+         *                }
+         *            }
+         *        }
+         *     }
+         *  });
+         *
+         *  //consuming odata feed without setting additional options
+         *  var dataSource = new kendo.data.DataSource({
+         *      type: "odata",
+         *      transport: {
+         *          read: "http://odata.netflix.com/Catalog/Titles"
+         *      }
+         *  });
+         *
+         * @option {String} [transport.read.url] The remote service URL
+         * @option {String} [transport.read.dataType] The type of data that you're expecting back from the server
+         * @option {Object|Function} [transport.read.data] Additional data to be send to the server
+         *
+         * @option {Function} [transport.dialect] Convert the request parameters from dataSource format to remote service specific format.
+         * _example
+         *  var dataSource = new kendo.data.DataSource({
+         *      transport: {
+         *        read: "Catalog/Titles",
+         *        dialect: function(options) {
+         *           return {
+         *              pageIndex: options.page,
+         *              size: options.pageSize,
+         *              orderBy: convertSort(options.sort)
+         *           }
+         *        }
+         *      }
+         *  });
+         *
          * @option {Object} [schema] Set the object responsible for describing the raw data format
+         * _example
+         *  var dataSource = new kendo.data.DataSource({
+         *      transport: {
+         *        read: "Catalog/Titles",
+         *      },
+         *      schema: {
+         *          data: function(data) {
+         *              return data.result;
+         *          },
+         *          total: function(data) {
+         *              return data.totalCount;
+         *          },
+         *          parse: function(data) {
+         *              return data;
+         *          }
+         *      }
+         *  });
+         * @option {Function} [schema.parse] Executed before deserialized data is read.
+         *  Appropriate for preprocessing of the raw data.
+         *
+         * @option {Function} [schema.data] Should return the deserialized data.
+         * @option {Function} [schema.total] Should return the total number of records.
+         * @option {Function} [schema.group] Used instead of data function if remote grouping operation is executed.
+         *  Returns the deserialized data.
          **/
         init: function(options) {
             var that = this, id, model, transport;
