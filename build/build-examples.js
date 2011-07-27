@@ -65,7 +65,7 @@ function splitScriptRegion(exampleHTML, base) {
     baseScripts = baseScripts.replace(scriptStripper2, rebaser);
 
     if (MINIFY) {
-        currentPageScripts = currentPageScripts.replace(/src="js\/jquery\.min\.js"/g, 'src="' + jQueryCDN + '"');
+        currentPageScripts = currentPageScripts.replace(/(..\/)*js\/jquery\.min\.js/g, jQueryCDN);
     }
 
     return currentPageScripts + baseScripts;
@@ -305,11 +305,13 @@ exports.build = function(origin, destination, minify) {
     wrench.copyDirSyncRecursive(originJS, outputPath + "/js");
     wrench.copyDirSyncRecursive(originStyles, outputPath + "/styles");
     fs.writeFileSync(outputPath + "/index.html", indexHtml.replace(isLive, ""), "utf8");
+    fs.writeFileSync(outputPath + "/js/jquery.tmpl.js", fs.readFileSync("src/jquery.tmpl.js", "utf8"), "utf8");
     fs.unlinkSync(outputPath + "/template.html");
 
     if (!MINIFY) {
-        var data = fs.readFileSync("src/jquery.js", "utf8");
-        fs.writeFileSync(outputPath + "/js/jquery.js", data, "utf8");
+        fs.writeFileSync(outputPath + "/js/jquery.js", fs.readFileSync("src/jquery.js", "utf8"), "utf8");
+    } else {
+        fs.writeFileSync(outputPath + "/web.config", fs.readFileSync("web.config", "utf8"), "utf8");
     }
 
     copyResources(
