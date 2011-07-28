@@ -51,7 +51,7 @@
         <script src="js/kendo.console.js"></script>
         <script src="js/people.js"></script>
         <!-- script -->
-        <title>Kendo Examples</title>
+        <title>Overview</title>
     </head>
     <body>
         <!-- nav -->
@@ -74,7 +74,7 @@
                             var href = location.href.toLowerCase(), reference = $("#logo")[0].href.toLowerCase();
 
                             return href == reference ?
-                                       reference.replace("/index.html", "/") + "overview/index.html" :
+                                       reference.replace("/index.html", "/") :
                                        href.substr(-1) == "/" ?
                                            href + "index.html" :
                                            href;
@@ -192,7 +192,7 @@
             </ul>
 
             <div style="text-align:center;">
-            <div class="overview-box" style="background-image:url(../img/browsers.png)">
+            <div class="overview-box" style="background-image:url(img/browsers.png)">
                 <h2>Supported browsers</h2>
                 <ul>
                     <li>Internet Explorer 6+</li>
@@ -203,7 +203,7 @@
                 </ul>
             </div>
 
-            <div class="overview-box" style="background-image:url(../img/platforms.png)">
+            <div class="overview-box" style="background-image:url(img/platforms.png)">
                 <h2>Mobile Device Compatibility</h2>
                 <p>Kendo UI is built to work seamlessly across desktop browsers and mobile touchscreen devices. Kendo UI offers full support for touch
                 interactions and is tested against the following mobile platform browsers:</p>
@@ -243,7 +243,7 @@
             {
                 /*max-width:560px;*/
                 padding-bottom:66px;
-                background:no-repeat left bottom url(../img/html5icons.png);
+                background:no-repeat left bottom url(img/html5icons.png);
             }
 
             .overview-box
