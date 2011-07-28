@@ -390,11 +390,11 @@ var categories = {
                     url: "autocomplete/index.html"
                 },
                 {
-                    text: "Binding to Remote Data",
+                    text: "Binding to remote data",
                     url: "autocomplete/remotedatasource.html"
                 },
                 {
-                    text: "Customizing Template",
+                    text: "Customizing templates",
                     url: "autocomplete/customtemplate.html"
                 },
                 {
@@ -416,20 +416,20 @@ var categories = {
                     url: "chart/index.html"
                 },
                 {
-                    text: "Events",
-                    url: "chart/events.html"
-                },
-                {
-                    text: "API",
-                    url: "chart/api.html"
-                },
-                {
                     text: "Binding to local data",
                     url: "chart/local-data.html"
                 },
                 {
                     text: "Binding to remote data",
                     url: "chart/remote-data.html"
+                },
+                {
+                    text: "Events",
+                    url: "chart/events.html"
+                },
+                {
+                    text: "API",
+                    url: "chart/api.html"
                 }
             ]
         },
@@ -442,11 +442,11 @@ var categories = {
                     url: "combobox/index.html"
                 },
                 {
-                    text: "Binding to Remote Data",
+                    text: "Binding to remote data",
                     url: "combobox/remotedatasource.html"
                 },
                 {
-                    text: "Customizing Template",
+                    text: "Customizing templates",
                     url: "combobox/customtemplate.html"
                 },
                 {
@@ -468,11 +468,11 @@ var categories = {
                     url: "dropdownlist/index.html"
                 },
                 {
-                    text: "Binding to Remote Data",
+                    text: "Binding to remote data",
                     url: "dropdownlist/remotedatasource.html"
                 },
                 {
-                    text: "Customizing Templates",
+                    text: "Customizing templates",
                     url: "dropdownlist/customtemplate.html"
                 },
                 {
@@ -544,16 +544,16 @@ var categories = {
                     url: "menu/index.html"
                 },
                 {
+                    text: "Animation effects",
+                    url: "menu/animation.html"
+                },
+                {
                     text: "Events",
                     url: "menu/events.html"
                 },
                 {
                     text: "API",
                     url: "menu/api.html"
-                },
-                {
-                    text: "Animation effects",
-                    url: "menu/animation.html"
                 }
         ] },
         {
@@ -569,16 +569,16 @@ var categories = {
                     url: "panelbar/ajax.html"
                 },
                 {
+                    text: "Animation effects",
+                    url: "panelbar/animation.html"
+                },
+                {
                     text: "Events",
                     url: "panelbar/events.html"
                 },
                 {
                     text: "API",
                     url: "panelbar/api.html"
-                },
-                {
-                    text: "Animation effects",
-                    url: "panelbar/animation.html"
                 }
             ]
         },
@@ -635,16 +635,16 @@ var categories = {
                     url: "tabstrip/ajax.html"
                 },
                 {
+                    text: "Animation effects",
+                    url: "tabstrip/animation.html"
+                },
+                {
                     text: "Events",
                     url: "tabstrip/events.html"
                 },
                 {
                     text: "API",
                     url: "tabstrip/api.html"
-                },
-                {
-                    text: "Animation effects",
-                    url: "tabstrip/animation.html"
                 }
             ]
         },
@@ -757,7 +757,7 @@ var categories = {
             ]
         },
         {
-            text: "Drag & Drop",
+            text: "Drag &amp; Drop",
             spriteCssClass: "dragdropIcon",
             items: [
                 {
