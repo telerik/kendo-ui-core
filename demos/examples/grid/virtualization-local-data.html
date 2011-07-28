@@ -28,11 +28,11 @@
         <div class="description">Grid virtualization using local data</div>
         <!-- description -->
         <div id="example" class="t-content">
-            <div class="t-grid"> </div>
+            <div id="grid"></div>
 
             <script type="text/javascript">
                 $(document).ready(function() {
-                    $(".t-grid").kendoGrid({
+                    $("#grid").kendoGrid({
                         dataSource: {
                             data: createRandomData(100000),
                             pageSize: 50
