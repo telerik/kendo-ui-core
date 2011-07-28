@@ -96,84 +96,13 @@
                         field: "name"
                     },
                     seriesClick: function(e) {
+                    },
+                    tooltip: {
+                        visible: true
                     }
                 });
             });
 
-            var options = {
-                theme: "", // Built-in theme name or custom theme object
-                title: {
-                    text: "",
-                    font: "18px Verdana, sans-serif",
-                    position: "top", // "top", "bottom"
-                    textAlign: "center" // "left", "center", "right"
-                },
-                legend: {
-                    font: "12px Verdana, sans-serif",
-                    position: "right", // "top", "bottom", "left", "right"
-                    offsetX: 0,
-                    offsetY: 0,
-                    visible: true
-                },
-                plotArea: {
-                    background: "#fff",
-                    margin: 20
-                },
-                chartArea: {
-                    background: "#fff"
-                },
-                axisDefaults: {
-                    tickSize: 4,
-                    reverseOrientation: true, // Just an idea
-                    majorTickType: "outside", // "outside", "inside", "none", "cross"
-                    minorTickType: "none", // "outside", "inside", "none", "cross"
-                    lineWidth: 1
-                },
-                categoryAxis: {
-                    // Shorthand for the default category axis
-                    categories: [],
-                    field: ""
-                },
-                valueAxis: {
-                    type: "Numeric"
-                },
-                axes: [{
-                    // For advanced axis configuration
-                }],
-                dataSource: null,
-                series: [ ],
-                seriesColors: ["#d7df23", "#adc32b", "#799b28", "#4c7520"],
-                seriesDefaults: {
-                    type: "column",
-                    field: "",
-                    data: [],
-                    bar: {
-                        stack: false, // true, false or group name
-                        gap: 1.5,
-                        borderWidth: 0,
-                        borderColor: "",
-                        glassEffect: false,
-                        labels: {
-                            font: "12px Verdana, sans-serif",
-                            visible: false,
-                            position: "outsideEnd",
-                                   // "outsideEnd", "insideEnd", "insideBase", "center"
-                            color: "" // Derived from theme
-                        }
-                    }
-                }
-            };
-
-            themes = {
-                helloKitty: {
-                    seriesColors: ["#d7df23", "#adc32b", "#799b28", "#4c7520"],
-                    seriesDefaults: {
-                        bar: {
-                            glassEffect: true
-                        }
-                    }
-                }
-            }
         </script>
 
         <div id="container" style="width: 600px; height: 400px; float: left; margin-left: 100px;">

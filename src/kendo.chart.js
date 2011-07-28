@@ -889,6 +889,7 @@
             model.append(new PlotArea(chart.options));
             model.reflow();
 
+            chart.element.css("position", "relative");
             chart._viewElement = model.getView().renderTo(chart.element[0]);
             chart._attachEvents();
         },
@@ -900,6 +901,7 @@
             viewElement.bind("click", proxy(chart._click, chart));
 
             if (chart.options.tooltip.visible) {
+                chart._tooltip = new Tooltip(chart.element, chart.options.tooltip);
                 viewElement.bind("mouseover", proxy(chart._mouseOver, chart));
             }
         },
@@ -924,6 +926,7 @@
         _mouseOver: function(e) {
             var chart = this,
                 chartElement = chart._model.idMap[e.target.id],
+                metadata = chart._model.idMapMetadata[e.target.id],
                 point,
                 tooltip = chart._tooltip,
                 chartOffset = chart.element.offset(),
@@ -931,11 +934,12 @@
                 y = e.clientY - chartOffset.top;
 
             if (chartElement) {
-                if (!tooltip) {
-                    tooltip = chart._tooltip = new Tooltip(chart.element);
+                if (chartElement.getSeriesPoint && metadata) {
+                    point = chartElement.getSeriesPoint(x, y, metadata.seriesIx);
+                } else {
+                    point = chartElement;
                 }
 
-                point = chartElement.getSeriesPoint ? chartElement.getSeriesPoint(x, y) : chartElement;
                 tooltip.show(point);
             }
         },
@@ -1195,13 +1199,16 @@
             return viewElements;
         },
 
-        registerId: function(id) {
+        registerId: function(id, metadata) {
             var element = this,
                 root;
 
             root = element.getRoot();
             if (root) {
                 root.idMap[id] = element;
+                if (metadata) {
+                    root.idMapMetadata[id] = metadata;
+                }
             }
         },
 
@@ -1241,6 +1248,7 @@
             var root = this;
 
             root.idMap = {};
+            root.idMapMetadata = {};
 
             ChartElement.fn.init.call(root, options);
         },
@@ -2764,20 +2772,16 @@
                 isVertical = chart.options.isVertical,
                 axis = isVertical ? X : Y,
                 pos = isVertical ? x : y,
-                points,
+                points = chart.seriesPoints[seriesIx],
+                i,
+                pointsLength = points.length,
                 currentPoint,
                 pointBox,
                 pointDistance,
                 nearestPoint,
                 nearestPointDistance = Number.MAX_VALUE;
 
-            if (defined(seriesIx)) {
-                points = chart.seriesPoints[seriesIx];
-            } else {
-                points = [].concat.apply([], chart.seriesPoints);
-            }
-
-            for (var i = 0, pointsLength = points.length; i < pointsLength; i++) {
+            for (i = 0; i < pointsLength; i++) {
                 currentPoint = points[i];
 
                 if (currentPoint && defined(currentPoint.value) && currentPoint.value !== null) {
@@ -3191,23 +3195,23 @@
                         linePoints.push([pointCenter.x, pointCenter.y]);
                     } else if (!interpolate) {
                         if (linePoints.length > 1) {
-                            lines.push(chart.createLine(view, linePoints, currentSeries));
+                            lines.push(chart.createLine(view, linePoints, currentSeries, seriesIx));
                         }
                         linePoints = [];
                     }
                 }
 
                 if (linePoints.length > 1) {
-                    lines.push(chart.createLine(view, linePoints, currentSeries));
+                    lines.push(chart.createLine(view, linePoints, currentSeries, seriesIx));
                 }
             }
 
             return lines.concat(elements);
         },
 
-        createLine: function(view, points, series) {
+        createLine: function(view, points, series, seriesIx) {
             var lineId = uniqueId();
-            this.registerId(lineId);
+            this.registerId(lineId, { seriesIx: seriesIx });
             return view.createPath(points, {
                 id: lineId,
                 stroke: series.color,
@@ -4263,14 +4267,14 @@
             if (!tooltip.template) {
                 tooltip.template = Tooltip.template = template(
                     "<div style='position: absolute; font: <#= d.font #>;" +
-                    "-moz-border-radius: 4px; -webkit-border-radius: 4px;" +
+                    "border-radius: 4px; -moz-border-radius: 4px; -webkit-border-radius: 4px;" +
                     "border: <#= d.border.width #>px solid <#= d.border.color #>;" +
                     "padding: <#= d.padding.top #>px <#= d.padding.right #>px " +
                     "<#= d.padding.bottom #>px <#= d.padding.left #>px;'></div>"
                 );
             }
 
-            tooltip.element = $(tooltip.template(tooltip.options)).appendTo(doc.body);
+            tooltip.element = $(tooltip.template(tooltip.options)).appendTo(chartElement);
         },
 
         options: {
@@ -4281,7 +4285,6 @@
                 width: 0
             },
             background: "",
-            offsetX: 0,
             offsetY: 15
         },
 
@@ -4292,10 +4295,12 @@
                 aboveAxis = point.options.aboveAxis,
                 chartElement = tooltip.chartElement,
                 chartOffset = chartElement.offset(),
-                x = chartOffset.left + point.box.center().x,
-                y = chartOffset.top + (aboveAxis ? point.box.y1 : point.box.y2);
+                x = point.box.center().x,
+                y = (aboveAxis ? point.box.y1 : point.box.y2),
+                value = point.value,
+                displayValue = options.format ? format(options.format, value) : value.toString();
 
-            tooltip.element.html(point.value.toString());
+            tooltip.element.html(displayValue);
 
             if (aboveAxis) {
                 y = y - options.offsetY - element.height();
@@ -4304,13 +4309,16 @@
             }
 
             tooltip.element
-                .css("background-color", point.series.color)
-                .show()
+                .css({
+                   backgroundColor: point.series.color,
+                   opacity: 1
+                })
                 .stop(true)
+                .show()
                 .animate({
                     left: (x - element.width() / 2) + "px",
                     top: y + "px"
-                }, tooltip.visible ? 100 : 0);
+                }, tooltip.visible ? 150 : 0);
 
             tooltip.chartOffset = chartOffset;
             tooltip.chartBox =

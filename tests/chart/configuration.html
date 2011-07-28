@@ -458,6 +458,54 @@
                     equal(chart.options.series[1].color, "#cf0");
                 });
 
+                // ------------------------------------------------------------
+                module("Tooltip", {
+                    teardown: destroyChart
+                });
+
+                test("created when visible", function() {
+                    createChart({
+                        tooltip: {
+                            visible: true
+                        }
+                    });
+
+                    ok(typeof chart._tooltip !== "undefined");
+                });
+
+                test("sets format", function() {
+                    createChart({
+                        tooltip: {
+                            visible: true,
+                            format: "{0}%"
+                        }
+                    });
+
+                    equals(chart._tooltip.options.format, "{0}%");
+                });
+
+                test("sets font", function() {
+                    createChart({
+                        tooltip: {
+                            visible: true,
+                            font: "100px Verdana"
+                        }
+                    });
+
+                    equals(chart._tooltip.options.font, "100px Verdana");
+                });
+
+                test("sets background", function() {
+                    createChart({
+                        tooltip: {
+                            visible: true,
+                            background: "red"
+                        }
+                    });
+
+                    equals(chart._tooltip.options.background, "red");
+                });
+
             })();
         </script>
 

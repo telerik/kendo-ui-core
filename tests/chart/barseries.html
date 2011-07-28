@@ -133,13 +133,6 @@
                     ok(result === bar);
                 });
 
-                test("getSeriesPoint returns nearest point of any series", function() {
-                    var bar = series.points[1],
-                        result = series.getSeriesPoint(bar.box.x1 + 100, bar.box.y1);
-
-                    ok(result === bar);
-                });
-
                 test("sets bar owner", function() {
                     ok(series.points[0].owner === series);
                 });
@@ -195,13 +188,6 @@
                     ok(result === bar);
                 });
 
-                test("getSeriesPoint returns nearest point of any series", function() {
-                    var bar = series.points[1],
-                        result = series.getSeriesPoint(bar.box.x2 + 100, bar.box.y2);
-
-                    ok(result === bar);
-                });
-
                 // ------------------------------------------------------------
                 module("Bar Chart / Multiple Series", {
                     setup: function() {
@@ -218,13 +204,6 @@
                 test("getSeriesPoint returns nearest series point", function() {
                     var bar = series.points[1],
                         result = series.getSeriesPoint(bar.box.x2, bar.box.y2 + 100, 1);
-
-                    ok(result === bar);
-                });
-
-                test("getSeriesPoint returns nearest point of any series", function() {
-                    var bar = series.points[1],
-                        result = series.getSeriesPoint(bar.box.x2, bar.box.y2 + 100);
 
                     ok(result === bar);
                 });
@@ -270,13 +249,6 @@
                 test("getSeriesPoint returns nearest series point", function() {
                     var bar = series.points[3],
                         result = series.getSeriesPoint(bar.box.x2 + 100, bar.box.y2, 1);
-
-                    ok(result === bar);
-                });
-
-                test("getSeriesPoint returns nearest point of any series", function() {
-                    var bar = series.points[4],
-                        result = series.getSeriesPoint(bar.box.x2 + 100, bar.box.y2);
 
                     ok(result === bar);
                 });
