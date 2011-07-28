@@ -32,27 +32,19 @@
             </div>
             <script type="text/javascript">
                 var sliderSlide = function (e) {
-                    if ("kendoConsole" in window) {
-                        kendoConsole.log("Change :: new value is: " + e.value);
-                    }
+                    kendoConsole.log("Change :: new value is: " + e.value);
                 };
 
                 var sliderChange = function (e) {
-                    if ("kendoConsole" in window) {
-                        kendoConsole.log("Slide :: new slide value is: " + e.value);
-                    }
+                    kendoConsole.log("Slide :: new slide value is: " + e.value);
                 };
 
                 var rangeSliderSlide = function (e) {
-                    if ("kendoConsole" in window) {
-                        kendoConsole.log("Slide :: new slide value are: " + e.values.toString().replace(",", " - "));
-                    }
+                    kendoConsole.log("Slide :: new slide value are: " + e.values.toString().replace(",", " - "));
                 };
 
                 var rangeSliderChange = function (e) {
-                    if ("kendoConsole" in window) {
-                        kendoConsole.log("Change :: new values are: " + e.values.toString().replace(",", " - "));
-                    }
+                    kendoConsole.log("Change :: new values are: " + e.values.toString().replace(",", " - "));
                 };
 
                 $("#slider").kendoSlider({
