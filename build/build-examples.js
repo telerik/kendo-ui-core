@@ -102,14 +102,14 @@ function updateBaseLocation(html, base) {
 }
 
 function componentFromFilename(file) {
-    var candidate = file.split("/").filter(function(val) {
-            return val != outputPath && !/\.html$/i.test(val);
-        })[0];
+    var candidate = file.split("/");
+    candidate = candidate[candidate.length - 2];
 
     if (candidate == "overview" || candidate === undefined) {
         return;
     }
 
+    console.log("candidate: " + candidate);
     return candidate;
 }
 
