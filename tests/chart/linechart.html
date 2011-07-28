@@ -17,12 +17,17 @@
                 chartBox = new Box2D(0, 0, 800, 600),
                 plotArea,
                 lineChart,
+                root,
                 view;
 
             function setupLineChart(plotArea, options) {
                 view = new ViewStub();
 
                 lineChart = new Chart.LineChart(plotArea, options);
+
+                root = new Chart.RootElement();
+                root.append(lineChart);
+
                 lineChart.reflow();
                 lineChart.getViewElements(view);
             }
@@ -124,13 +129,6 @@
                     ok(result === point);
                 });
 
-                test("getSeriesPoint returns nearest point of any series", function() {
-                    var point = lineChart.points[1],
-                        result = lineChart.getSeriesPoint(point.box.x2 + 100, point.box.y2);
-
-                    ok(result === point);
-                });
-
                 test("sets point owner", function() {
                     ok(lineChart.points[0].owner === lineChart);
                 });
@@ -186,13 +184,6 @@
                     ok(result === point);
                 });
 
-                test("getSeriesPoint returns nearest point of any series", function() {
-                    var point = lineChart.points[1],
-                        result = lineChart.getSeriesPoint(point.box.x2 + 100, point.box.y2);
-
-                    ok(result === point);
-                });
-
                 // ------------------------------------------------------------
                 module("Line Chart / Multiple Series", {
                     setup: function() {
@@ -209,13 +200,6 @@
                 test("getSeriesPoint returns nearest series point", function() {
                     var point = lineChart.points[1],
                         result = lineChart.getSeriesPoint(point.box.x2, point.box.y2 + 100, 1);
-
-                    ok(result === point);
-                });
-
-                test("getSeriesPoint returns nearest point of any series", function() {
-                    var point = lineChart.points[2],
-                        result = lineChart.getSeriesPoint(point.box.x2, point.box.y2 + 100);
 
                     ok(result === point);
                 });
@@ -247,13 +231,6 @@
                 test("getSeriesPoint returns nearest series point", function() {
                     var point = lineChart.points[3],
                         result = lineChart.getSeriesPoint(point.box.x2 + 100, point.box.y2, 1);
-
-                    ok(result === point);
-                });
-
-                test("getSeriesPoint returns nearest point of any series", function() {
-                    var point = lineChart.points[4],
-                        result = lineChart.getSeriesPoint(point.box.x2 + 100, point.box.y2);
 
                     ok(result === point);
                 });
@@ -310,13 +287,6 @@
                 test("getSeriesPoint returns nearest series point (right)", function() {
                     var point = lineChart.points[3],
                         result = lineChart.getSeriesPoint(point.box.x1 - 0.1, point.box.y1, 0);
-
-                    ok(result === point);
-                });
-
-                test("getSeriesPoint returns nearest point of any series", function() {
-                    var point = lineChart.points[3],
-                        result = lineChart.getSeriesPoint(point.box.x1 - 0.1, point.box.y1);
 
                     ok(result === point);
                 });
@@ -498,6 +468,14 @@
 
                 test("sets line opacity", function() {
                     equals(view.log.path[0].style.strokeOpacity, 0.5);
+                });
+
+                test("registers line with root", function() {
+                    ok(root.idMap[view.log.path[0].style.id] === lineChart);
+                });
+
+                test("registers line metadata", function() {
+                    ok(root.idMapMetadata[view.log.path[0].style.id].seriesIx === 0);
                 });
 
                 // ------------------------------------------------------------

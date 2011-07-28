@@ -20,6 +20,17 @@
                 element = tooltip.element;
             }
 
+            var dataPointMock = {
+                value: 1,
+                box: new Chart.Box2D(),
+                options: {
+                    aboveAxis: true
+                },
+                series: {
+                    color: "#f00"
+                }
+            };
+
             // ------------------------------------------------------------
             module("Tooltip", {
                 setup: function() {
@@ -27,8 +38,8 @@
                 }
             });
 
-            test("attaches to document body", function() {
-                ok(element[0].parentNode === document.body);
+            test("attaches to chart element", function() {
+                ok(element[0].parentNode === document.getElementById("chart"));
             });
 
             test("sets font", function() {
@@ -56,17 +67,14 @@
             });
 
             test("sets background to current series", function() {
-                tooltip.show({
-                    value: 1,
-                    box: new Chart.Box2D(),
-                    options: {
-                        aboveAxis: true
-                    },
-                    series: {
-                        color: "#f00"
-                    }
-                });
+                tooltip.show(dataPointMock);
                 equals(element.css("backgroundColor").replace(/\s/g, ''), "rgb(255,0,0)");
+            });
+
+            test("applies format", function() {
+                createTooltip({ format: "{0}%" });
+                tooltip.show(dataPointMock);
+                equals(element.text(), "1%");
             });
 
         </script>
