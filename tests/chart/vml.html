@@ -69,12 +69,12 @@
                 });
 
                 test("createText with rotation returns VMLRotatedText", function() {
-                    var text = view.createText("", { rotationAngle: 45 });
+                    var text = view.createText("", { rotation: 45 });
                     ok(text instanceof Chart.VMLRotatedText);
                 });
 
                 test("createText with rotation angle sets content", function() {
-                    var text = view.createText("Text", { rotationAngle: 45 });
+                    var text = view.createText("Text", { rotation: 45 });
                     equal(text.content, "Text");
                 });
 
@@ -254,14 +254,14 @@
 
                 function createRotatedText(options) {
                     options = $.extend({
-                            rotationAngle: 0
+                            rotation: 0
                         }, options
                     );
 
                     options.size = Chart.measureText(
                         "test",
                         { font: "12px Verdana" },
-                        options.rotationAngle
+                        options.rotation
                     );
 
                     text = new Chart.VMLRotatedText(
@@ -272,7 +272,7 @@
 
                 module("VMLRotatedText", {
                     setup: function() {
-                        createRotatedText({ rotationAngle: 45 });
+                        createRotatedText({ rotation: 45 });
                     }
                 });
 
@@ -293,7 +293,7 @@
                 });
 
                 test("renders path for 90 degrees rotation", function() {
-                    createRotatedText({ rotationAngle: 90 });
+                    createRotatedText({ rotation: 90 });
                     ok(text.render().indexOf(
                         "<kvml:path textpathok='true' v='m 7,6 l 7,20' />")
                         != -1
@@ -301,7 +301,7 @@
                 });
 
                 test("renders path for -45 degrees rotation", function() {
-                    createRotatedText({ rotationAngle: -45 });
+                    createRotatedText({ rotation: -45 });
                     ok(text.render().indexOf(
                         "<kvml:path textpathok='true' v='m 4,24 l 24,4' />")
                         != -1
@@ -309,7 +309,7 @@
                 });
 
                 test("renders path for -90 degrees rotation", function() {
-                    createRotatedText({ rotationAngle: -90 });
+                    createRotatedText({ rotation: -90 });
                     ok(text.render().indexOf(
                         "<kvml:path textpathok='true' v='m 7,20 l 7,6' />")
                         != -1

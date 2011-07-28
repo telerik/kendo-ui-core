@@ -1460,7 +1460,7 @@
                 size = options.size = measureText(
                                         text.content,
                                         { font: options.font },
-                                        options.rotationAngle);
+                                        options.rotation);
 
             text.baseline = size.baseline;
 
@@ -1508,7 +1508,7 @@
                     baseline: text.baseline,
                     font: options.font,
                     color: options.color,
-                    rotationAngle: options.rotationAngle,
+                    rotation: options.rotation,
                     size: options.size
                 })
             ];
@@ -1887,7 +1887,7 @@
 
         options: {
             labels: {
-                rotationAngle: 0
+                rotation: 0
             },
             line: {
                 width: 1,
@@ -3736,7 +3736,7 @@
                     "<text <#= d.renderAttr(\"id\", d.options.id) #> " +
                     "x='<#= Math.round(d.options.x) #>' " +
                     "y='<#= Math.round(d.options.y + d.options.baseline) #>' " +
-                    "<#= d.options.rotationAngle ? d.renderRotation() : '' #> " +
+                    "<#= d.options.rotation ? d.renderRotation() : '' #> " +
                     "style='font: <#= d.options.font #>' fill='<#= d.options.color #>'>" +
                     "<#= d.content #></text>"
                 );
@@ -3766,7 +3766,7 @@
                 offsetY = round(rcy - cy, COORD_PRECISION);
 
             return "transform='translate(" + offsetX + "," + offsetY + ") " +
-                   "rotate(" + options.rotationAngle + "," + cx + "," + cy + ")'";
+                   "rotate(" + options.rotation + "," + cx + "," + cy + ")'";
         }
     });
 
@@ -4018,7 +4018,7 @@
         },
 
         createText: function(content, options) {
-            if (options && options.rotationAngle) {
+            if (options && options.rotation) {
                 return new VMLRotatedText(content, options);
             } else {
                 return new VMLText(content, options);
@@ -4120,7 +4120,7 @@
                 height = options.size.height,
                 cx = options.x + width / 2,
                 cy = options.y + height / 2,
-                angle = -options.rotationAngle,
+                angle = -options.rotation,
                 r1 = rotatePoint(options.x, cy, cx, cy, angle),
                 r2 = rotatePoint(options.x + width, cy, cx, cy, angle);
 
@@ -4481,9 +4481,9 @@
         return Math.round(value * power) / power;
     }
 
-    function measureText(text, style, rotationAngle) {
+    function measureText(text, style, rotation) {
         var styleHash = getHash(style),
-            cacheKey = text + styleHash + rotationAngle,
+            cacheKey = text + styleHash + rotation,
             cachedResult = measureText.cache[cacheKey];
 
         if (cachedResult) {
@@ -4512,15 +4512,15 @@
                 baseline: baselineMarker.offsetTop + BASELINE_MARKER_SIZE
             };
 
-        if (rotationAngle) {
+        if (rotation) {
             var width = size.width,
                 height = size.height,
                 cx = width / 2,
                 cy = height / 2,
-                r1 = rotatePoint(0, 0, cx, cy, rotationAngle),
-                r2 = rotatePoint(width, 0, cx, cy, rotationAngle),
-                r3 = rotatePoint(width, height, cx, cy, rotationAngle);
-                r4 = rotatePoint(0, height, cx, cy, rotationAngle);
+                r1 = rotatePoint(0, 0, cx, cy, rotation),
+                r2 = rotatePoint(width, 0, cx, cy, rotation),
+                r3 = rotatePoint(width, height, cx, cy, rotation);
+                r4 = rotatePoint(0, height, cx, cy, rotation);
 
             size.normalWidth = width;
             size.normalHeight = height;
