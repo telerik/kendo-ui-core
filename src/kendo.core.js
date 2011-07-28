@@ -169,8 +169,8 @@
          * @name kendo.Template.render
          * @static
          * @function
-         * @param {String} template The template that will be rendered
-         * @param {Array} data Compilation options
+         * @param {String} [template] The template that will be rendered
+         * @param {Array} [data] Data items
          * @returns {String} The rendered template
          */
         render: function(template, data) {
@@ -189,8 +189,8 @@
          * @name kendo.Template.compile
          * @static
          * @function
-         * @param {String} template The template that will be compiled
-         * @param {Object} options Compilation options
+         * @param {String} [template] The template that will be compiled
+         * @param {Object} [options] Compilation options
          * @returns {Function} The compiled template
          */
         compile: function(template, options) {
