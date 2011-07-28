@@ -2,7 +2,7 @@
     /**
     * @name kendo.ui.Splitter.Description
     *
-    * @section The splitter component provides a easy way to separate content.
+    * @section The splitter component provides a easy way to separate the content.
     * The component converts the children of an HTML element to resizable and/or collapsible
     * panes.
     *

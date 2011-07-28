@@ -24,59 +24,54 @@
         <!-- description -->
         <!-- description -->
         <div id="example" class="t-content">
-            <h2> Vertical Splitter </h2>
-            <div id="vertical">
+            <div id="vertical" style="height: 300px">
                 <div>
                     <p>
-                        Top pane
+                        Outer splitter : top pane
                     </p>
                 </div>
                 <div>
-                    <p>
-                        Middle pane
-                    </p>
+                    <div id="horizontal" style="height: 100%; width: 100%; border: 0; overflow:hidden;">
+                        <div>
+                            <p>
+                                Inner splitter :: left pane
+                            </p>
+                        </div>
+                        <div>
+                            <p>
+                                Inner splitter :: center pane
+                            </p>
+                        </div>
+                        <div>
+                            <p>
+                                Inner splitter :: right pane
+                            </p>
+                        </div>
+                    </div>
                 </div>
                 <div>
                     <p>
-                        Bottom pane
-                    </p>
-                </div>
-            </div>
-
-            <h2> Horizontal Splitter </h2>
-            <div id="horizontal">
-                <div>
-                    <p>
-                        Left pane
-                    </p>
-                </div>
-                <div>
-                    <p>
-                        Center pane
-                    </p>
-                </div>
-                <div>
-                    <p>
-                        Right pane
+                        Outer splitter : bottom pane
                     </p>
                 </div>
             </div>
 
             <script type="text/javascript">
                 $(document).ready(function() {
-                    $("#horizontal").kendoSplitter({
-                        panes: [
-                            { collapsible: true },
-                            { collapsible: false },
-                            { collapsible: true }
-                        ]
-                    });
                     $("#vertical").kendoSplitter({
                         orientation: "vertical",
                         panes: [
-                            { collapsible: true },
+                            { collapsible: true, size: "100px" },
                             { collapsible: false },
-                            { collapsible: true }
+                            { collapsible: true, size: "20%" }
+                        ]
+                    });
+
+                    $("#horizontal").kendoSplitter({
+                        panes: [
+                            { collapsible: true, size: "150px" },
+                            { collapsible: false },
+                            { collapsible: true, size: "20%" }
                         ]
                     });
                 });

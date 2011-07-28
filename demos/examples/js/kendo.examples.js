@@ -600,6 +600,18 @@ var categories = {
                 {
                     text: "Basic usage",
                     url: "splitter/index.html"
+                },
+                {
+                    text: "Loading content with AJAX",
+                    url: "splitter/ajax.html"
+                },
+                {
+                    text: "Events",
+                    url: "splitter/events.html"
+                },
+                {
+                    text: "API",
+                    url: "splitter/api.html"
                 }
             ]
         },

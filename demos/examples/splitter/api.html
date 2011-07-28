@@ -1,0 +1,121 @@
+<!doctype html>
+<html>
+    <head>
+        <!-- meta -->
+        <!-- meta -->
+        <title>Splitter API</title>
+        <!-- css -->
+        <link href="../styles/examples.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.common.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.kendo.css" rel="stylesheet"/>
+        <!-- css -->
+        <!-- script -->
+        <script src="../../../src/jquery.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.fx.js"></script>
+        <script src="../../../src/kendo.panelbar.js"></script>
+        <!-- script -->
+    </head>
+    <body>
+        <!-- nav -->
+        <!-- nav -->
+        <!-- description -->
+        <div class="description">You can use the Splitter API to manipulate the panes.</div>
+        <!-- description -->
+        <div id="example" style="min-height: 245px">
+            <div class="configuration" style="z-index:10000">
+                <span class="configHead">Configure</span>
+                <span class="configTitle">API Functions</span>
+                <ul class="options">
+                    <li>
+                        The pane index: <input id="index" type="text" value="0" />
+                    </li>
+                    <li>Functions:</li>
+                    <li>
+                         <button id="toggle" class="t-button">Expand/Collapse</button>
+                    </li>
+                    <li>
+                        <input id="size" type="text" value="100px" /> <button id="setSize" class="t-button">Set size</button>
+                    </li>
+                    <li>
+                        <input id="min" type="text" value="50px" /> <button id="setMinSize" class="t-button">Set minimum size</button>
+                    </li>
+                    <li>
+                        <input id="max" type="text" value="150px" /> <button id="setMaxSize" class="t-button">Set maximum size</button>
+                    </li>
+                </ul>
+            </div>
+
+            <div id="splitter" style="height: 300px; width: 75%;">
+                <div id="top_pane">
+                    <p>
+                        Top pane
+                    </p>
+                </div>
+                <div id="ajax_pane">
+                    <!-- content loaded with ajax -->
+                </div>
+                <div id="bottom_pane">
+                    <p>
+                        Bottom pane
+                    </p>
+                </div>
+            </div>
+
+            <script>
+                $(document).ready(function() {
+                    var panes = $("#splitter").children(),
+                        getPane = function (index) {
+                            index = Number(index);
+
+                            if(!isNaN(index) && index < panes.length) {
+                                return panes[index];
+                            }
+                        };
+
+                    $("#toggle").click( function (e) {
+                        var pane = getPane($("#index").val());
+                        if (!pane) return;
+
+                        splitter.toggle(pane, $(pane).width() <= 0);
+                    });
+
+                    $("#setSize").click( function (e) {
+                        var pane = getPane($("#index").val());
+
+                        if (!pane) return;
+
+                        splitter.size(pane, $("#size").val());
+                    });
+
+                    $("#setMinSize").click( function (e) {
+                        var pane = getPane($("#index").val());
+
+                        if (!pane) return;
+
+                        splitter.min(pane, $("#min").val());
+                    });
+
+                    $("#setMaxSize").click( function (e) {
+                        var pane = getPane($("#index").val());
+
+                        if (!pane) return;
+
+                        splitter.max(pane, $("#max").val());
+                    });
+
+                    var splitter = $("#splitter").kendoSplitter({
+                        orientation: "horizontal",
+                        panes: [
+                            { collapsible: true, size: "100px" },
+                            { collapsible: false, contentUrl: "ajax/ajaxContent1.html" },
+                            { collapsible: true, size: "20%" }
+                        ]
+                    }).data("kendoSplitter");
+                });
+            </script>
+        </div>
+        <!-- tools -->
+        <!-- tools -->
+    </body>
+</html>
