@@ -29,8 +29,15 @@
             element.bind(eventName, handler);
         }
     }
-
-    var DropTarget = Component.extend( {
+    
+    var DropTarget = Component.extend(/** @lends kendo.ui.DropTarget.prototype */ {
+        /**
+         * @constructs
+         * @extends kendo.ui.Component
+         * @param {DomElement} element DOM element
+         * @param {Object} options Configuration options.
+         * @option {String} [group] <"default"> Used to group sets of draggable and drop targets. A draggable with the same group value as a drop target will be accepted by the drop target.
+         */
         init: function(element, options) {
             var that = this;
 
@@ -40,7 +47,32 @@
                 .bind(MOUSEUP, proxy(that._drop, that))
                 .bind(MOUSELEAVE, proxy(that._out, that));
 
-            that.bind([DRAGENTER, DRAGLEAVE, DROP], that.options);
+            that.bind([
+                /**
+                 * Fires when draggable moves over the drop target.
+                 * @name kendo.ui.DropTarget#dragenter
+                 * @event
+                 * @param {Event} e
+                 * @param {kendo.ui.Draggable} e.draggable Reference to the draggable that enters the drop target.
+                 */
+                DRAGENTER, 
+                /**
+                 * Fires when draggable moves out of the drop target.
+                 * @name kendo.ui.DropTarget#dragleave
+                 * @event
+                 * @param {Event} e
+                 * @param {kendo.ui.Draggable} e.draggable Reference to the draggable that leaves the drop target.
+                 */
+                DRAGLEAVE, 
+                /**
+                 * Fires when draggable is dropped over the drop target.
+                 * @name kendo.ui.DropTarget#drop
+                 * @event
+                 * @param {Event} e
+                 * @param {kendo.ui.Draggable} e.draggable Reference to the draggable that is dropped over the drop target.
+                 */
+                DROP
+            ], that.options);
         },
 
         options: {
@@ -81,9 +113,20 @@
     /**
      * @name kendo.ui.Draggable.Description
      *
-     * @section Draggable description
+     * @section Enable draggable functionality on any DOM element.
+     *
+     * @exampleTitle <b>Draggable</b> initialization
+     * @example
+     * var draggable = $("#draggable").kendoDraggable();
+     *
+     * @name kendo.ui.DropTarget.Description
+     *
+     * @section Enable any DOM element to be a target for draggable elements.
+     *
+     * @exampleTitle <b>DropTarget</b> initialization
+     * @example
+     * var dropTarget = $("#dropTarget").kendoDropTarget();
      */
-
     var Draggable = Component.extend(/** @lends kendo.ui.Draggable.prototype */{
         /**
          * @constructs
@@ -91,6 +134,21 @@
          * @param {DomElement} element DOM element
          * @param {Object} options Configuration options.
          * @option {Integer} [distance] <5> The required distance that the mouse should travel in order to initiate a drag.
+         * @option {Selector} [filter] Selects child elements that are draggable if component is attached to a container.
+         * @option {String} [group] <"default"> Used to group sets of draggable and drop targets. A draggable with the same group value as a drop target will be accepted by the drop target.
+         * @option {Function|jQuery} [hint] Provides a way for customization of the drag indicator.
+         * _example
+         *  //hint as a function
+         *  $("#draggable").kendoDraggable({
+         *      hint: function() {
+         *          return $("#draggable").clone();
+         *      }
+         *  });
+         *
+         * //hint as jQuery object
+         *  $("#draggable").kendoDraggable({
+         *      hint: return $("#draggableHint");         
+         *  });
          */
         init: function (element, options) {
             var that = this;
@@ -99,7 +157,29 @@
 
             bind(that.element, that.options.filter, MOUSEDOWN + NAMESPACE, proxy(that._wait, that));
 
-            that.bind([DRAGSTART, DRAG, DRAGEND], that.options);
+            that.bind([
+                /**
+                 * Fires when item drag starts.
+                 * @name kendo.ui.Draggable#dragstart
+                 * @event
+                 * @param {Event} e
+                 */
+                DRAGSTART, 
+                 /**
+                 * Fires while dragging.
+                 * @name kendo.ui.Draggable#drag
+                 * @event
+                 * @param {Event} e
+                 */
+                DRAG, 
+                 /**
+                 * Fires when item drag ends.
+                 * @name kendo.ui.Draggable#dragend
+                 * @event
+                 * @param {Event} e
+                 */
+                DRAGEND
+            ], that.options);
 
             bind(that.element, that.options.filter, DRAGSTART + NAMESPACE, false);
         },
