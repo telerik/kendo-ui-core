@@ -1,4 +1,44 @@
 ﻿(function ($, window) {
+    /**
+     * @name kendo.ui.Slider.Description
+     * @section The slider component allows you to intuitively choose a value in a specified range.
+     * <p>
+     * Key features:
+     * </p>
+     * <ul>
+     *    <li>Small/Large steps</li>
+     *    <li>Keyboard navigation</li>
+     *    <li>Horizontal/Vertical Orientation</li>
+     * </ul>
+     * @exampleTitle Creating a <b>Slider</b> from existing HTML.
+     * @example
+     * <input id="slider" />
+     * <script type="text/javascript">
+     *    $(document).ready(function() {
+     *        $("#slider").kendoSlider();
+     *    });
+     * </script>
+     * @section The range slider component allows you to intuitively choose a range of two values in a specified range.
+     * <p>
+     * Key features:
+     * </p>
+     * <ul>
+     *    <li>Small/Large steps</li>
+     *    <li>Keyboard navigation</li>
+     *    <li>Horizontal/Vertical Orientation</li>
+     * </ul>
+     * @exampleTitle Creating a <b>Slider</b> from existing HTML.
+     * @example
+     * <div id="rangeSLider">
+     *      <input />
+     *      <input />
+     * </div>
+     * <script type="text/javascript">
+     *    $(document).ready(function() {
+     *        $("#rangeSlider").kendoRangeSlider();
+     *    });
+     * </script>
+     */
     var kendo = window.kendo,
         Component = kendo.ui.Component,
         Draggable = kendo.ui.Draggable,
@@ -69,20 +109,36 @@
 
             that.bind([
                 /**
-                 * Fires when the Slider value changes as a result of selecting a new value with the drag handle, buttons or keyboard.
+                 * Fires when the slider value changes as a result of selecting a new value with the drag handle, buttons or keyboard.
                  * @name kendo.ui.Slider#change
                  * @event
                  * @param {Event} e
-                 * @param {Number} e.value Represents the updated value of the Slider
+                 * @param {Number} e.value Represents the updated value of the slider.
+                 */
+
+                /**
+                 * Faised when the rangeSlider value changes as a result of selecting a new value with one of the drag handles or the keyboard.
+                 * @name kendo.ui.RangeSlider#change
+                 * @event
+                 * @param {Event} e
+                 * @param {Number} e.values Represents the updated array of values of the first and second drag handle.
                  */
                 CHANGE,
 
                 /**
-                 * Fires when the user drags the Slider handle to a new position.
+                 * Fires when the user drags the drag handle to a new position.
                  * @name kendo.ui.Slider#slide
                  * @event
                  * @param {Event} e
                  * @param {Number} e.value Represents the value from the current position of the drag handle.
+                 */
+
+                /**
+                 * Fires when the user drags the drag handle to a new position.
+                 * @name kendo.ui.RangeSlider#slide
+                 * @event
+                 * @param {Event} e
+                 * @param {Number} e.values Represents an array of values of the current positions of the first and second drag handle.
                  */
                 SLIDE], options);
         },
@@ -407,7 +463,7 @@
          * @option {Boolean} [tooltip.enabled] Can be used to enable/disable the tooltip.
          * @option {String} [tooltip.format] Can be used to formatting of the text of the tooltip. Note that the applied format will also influence the appearance of the slider tick labels.
          * @option {Number} [val] <0> The value of the slider.
-         * @option {String} [orientation] <"horizontal"> The orientation of the slider. Available options are horizontal and vertical.
+         * @option {String} [orientation] <"horizontal"> The orientation of the slider. Available options are "horizontal" and "vertical".
          * @option {String} [tickPlacement] <"both"> the location of the tick marks in the component. Available options are:
          *     <dl>
          *         <dt>
@@ -931,7 +987,7 @@
          * @option {String} [tooltip.format] Can be used to formatting of the text of the tooltip. Note that the applied format will also influence the appearance of the rangeSlider tick labels.
          * @option {Number} [selectionStart] <0> The selection start value of the rangeSlider.
          * @option {Number} [selectionEnd] <10> The selection end value of the rangeSlider.
-         * @option {String} [orientation] <"horizontal"> The orientation of the rangeSlider. Available options are horizontal and vertical.
+         * @option {String} [orientation] <"horizontal"> The orientation of the rangeSlider. Available options are "horizontal" and "vertical".
          * @option {String} [tickPlacement] <"both"> the location of the tick marks in the component. Available options are:
          *     <dl>
          *         <dt>
