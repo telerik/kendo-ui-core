@@ -3,7 +3,7 @@
     <head>
         <!-- meta -->
         <!-- meta -->
-        <title>Binding to Remote Data</title>
+        <title>Binding to remote data</title>
         <!-- css -->
         <link href="../styles/examples.css" rel="stylesheet"/>
         <link href="../../../styles/kendo.common.css" rel="stylesheet"/>
@@ -23,10 +23,10 @@
         <!-- nav -->
         <!-- nav -->
         <!-- description -->
-        <div class="description">Binding to Remote Data</div>
+        <div class="description">Binding to remote data</div>
         <!-- description -->
         <div id="example" class="t-content">
-            Search Netflix for movie (minimum 3 chars):
+            Search Netflix for title (minimum 3 chars):
             <input id="titles"/>
 
             <script type="text/javascript">
@@ -35,21 +35,15 @@
                         minLength: 3,
                         dataTextField: "Name",
                         dataValueField: "Id",
-                        severFiltering: true,
-                        serverPaging: true,
-                        pageSize: 20,
-                        dataSource: new kendo.data.DataSource({
+                        dataSource: {
                             type: "odata",
-                            serverFiltering: true,
-                            filter: [{
-                                field: "BoxArt.SmallUrl",
-                                operator: "neq",
-                                value: null
-                            }],
+                            severFiltering: true,
+                            serverPaging: true,
+                            pageSize: 20,
                             transport: {
                                 read: "http://odata.netflix.com/Catalog/Titles"
                             }
-                        })
+                        }
                     });
                 });
             </script>
