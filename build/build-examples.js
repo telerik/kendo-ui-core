@@ -49,7 +49,7 @@ function splitScriptRegion(exampleHTML, base) {
         scriptStripper2 = /src="([.\/]*)([^"]*)([^\.min]*)\.js"/g,
         jsExtension = MINIFY ? ".min.js" : ".js",
         rebaser = function (match, g1, g2) {
-            return 'src="' + ( (g1 != "./") ? base : g1 ) + g2 + jsExtension + '"';
+            return 'src="' + ( (g1 != "./" ) ? base : g1 ) + g2 + jsExtension + '"';
         };
 
     if (!currentPageScripts)
@@ -93,7 +93,12 @@ function splitCSSRegion(exampleHTML, base) {
 }
 
 function updateBaseLocation(html, base) {
-    return html.replace(/href="([^"]*)"/g, 'href="' + base + '$1"');
+    return html.replace(/href="([^"]*)"/g, function(match, url) {
+        if (url.indexOf("http://") > -1) {
+            return match;
+        }
+        return 'href="' + base + url + '"';
+});
 }
 
 function componentFromFilename(file) {
@@ -178,15 +183,15 @@ function importComponentHelp(exampleHTML, component) {
 
             if (!hasMethods) {
                 hasMethods = getRegion("methods") !== "None";
-            }  
-            
+            }
+
             if (!hasConfiguration) {
                 hasConfiguration = getRegion("configuration") !== "None";
             }
-            
+
             if (!hasEvents) {
                 hasEvents = getRegion("events") !== "None";
-            }         
+            }
         }
 
         data = (hasConfiguration ? '<div class="optionsContainer">' + configuration + '</div>' : "") +
@@ -195,7 +200,7 @@ function importComponentHelp(exampleHTML, component) {
 
         if (relatedComponents.length > 1) {
             // remove stats from tabs
-            tabs = tabs.replace(/\s+\([\s\d]+\)/g, "");            
+            tabs = tabs.replace(/\s+\([\s\d]+\)/g, "");
         }
     } else {
         helpHTML = helpFileFor(component);
