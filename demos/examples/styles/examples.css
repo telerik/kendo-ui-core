@@ -18,6 +18,11 @@ html, body
     text-align: center;
 }
 
+body>div
+{
+    text-align: left;
+}
+
 .headerGradient,
 .skinSelector .t-arrow-down,
 #nav .t-sprite,
@@ -425,6 +430,11 @@ body
     background-position: -20px -530px;
 }
 
+#exampleHead .windowIcon
+{
+    background-position: -20px -530px;
+}
+
 .dataSourceIcon
 {
     background-position: -50px -200px;
@@ -453,6 +463,11 @@ body
 #exampleHead .dragdropIcon
 {
     background-position: -70px -260px;
+}
+
+.integrationIcon
+{
+    display:none;
 }
 
 #content
