@@ -395,7 +395,7 @@ var categories = {
                 },
                 {
                     text: "Customizing templates",
-                    url: "autocomplete/customtemplate.html"
+                    url: "autocomplete/template.html"
                 },
                 {
                     text: "Events",
@@ -447,7 +447,7 @@ var categories = {
                 },
                 {
                     text: "Customizing templates",
-                    url: "combobox/customtemplate.html"
+                    url: "combobox/template.html"
                 },
                 {
                     text: "Events",
@@ -473,7 +473,7 @@ var categories = {
                 },
                 {
                     text: "Customizing templates",
-                    url: "dropdownlist/customtemplate.html"
+                    url: "dropdownlist/template.html"
                 },
                 {
                     text: "Events",
