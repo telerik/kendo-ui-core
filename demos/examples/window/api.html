@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+    <head>
+        <!-- meta -->
+        <!-- meta -->
+        <title>Window API</title>
+        <!-- css -->
+        <link href="../styles/examples.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.common.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.kendo.css" rel="stylesheet"/>
+        <!-- css -->
+        <!-- script -->
+        <script src="../../../src/jquery.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.fx.js"></script>
+        <script src="../../../src/kendo.draganddrop.js"></script>
+        <script src="../../../src/kendo.resizable.js"></script>
+        <script src="../../../src/kendo.splitter.js"></script>
+        <!-- script -->
+    </head>
+    <body>
+        <!-- nav -->
+        <!-- nav -->
+        <!-- description -->
+        <!-- description -->
+        <div id="example" style="min-height: 245px">
+            <div class="configuration" style="z-index:10000">
+                <span class="configHead">Configuration</span>
+                <span class="configTitle">API Functions</span>
+                <ul class="options">
+                    <li>
+                         <button id="open" class="t-button">Open</button> / <button id="close" class="t-button">Close</button>
+                    </li>
+                    <li>
+                        <button id="refresh" class="t-button">Refresh</button>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Window HTML -->
+            <div id="window"></div>
+
+            <!-- open button -->
+            <span id="undo" style="display:none" class="t-group">Click here to open the window.</span>
+
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    var window = $("#window");
+
+                    $("#open").click( function (e) {
+                        window.data("kendoWindow").open();
+                    });
+
+                    $("#close").click( function (e) {
+                        window.data("kendoWindow").close();
+                    });
+
+                    $("#refresh").click( function (e) {
+                        window.data("kendoWindow").refresh();
+                    });
+
+                    window.kendoWindow({
+                        width: "600px",
+                        title: "Kendo Window",
+                        actions: ["Refresh", "Maximize", "Close"],
+                        contentUrl: 'ajax/ajaxContent.html'
+                    });
+                });
+            </script>
+        </div>
+        <!-- tools -->
+        <!-- tools -->
+    </body>
+</html>

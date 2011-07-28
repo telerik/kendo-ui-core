@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+    <head>
+        <!-- meta -->
+        <!-- meta -->
+        <title>Basic usage</title>
+        <!-- css -->
+        <link href="../styles/examples.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.common.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.kendo.css" rel="stylesheet"/>
+        <!-- css -->
+        <!-- script -->
+        <script src="../../../src/jquery.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.fx.js"></script>
+        <script src="../../../src/kendo.draganddrop.js"></script>
+        <script src="../../../src/kendo.resizable.js"></script>
+        <script src="../../../src/kendo.window.js"></script>
+        <!-- script -->
+    </head>
+    <body>
+        <!-- nav -->
+        <!-- nav -->
+        <!-- description -->
+        <!-- description -->
+        <div id="example" class="t-content">
+            <div class="configuration">
+                <span class="infoHead">Information</span>
+                <p>
+                    This example shows how to create Kendo Window from Html DIV element.
+                </p>
+            </div>
+
+            <div id="window">
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Integer felis libero, lobortis ac rutrum quis, varius a velit.
+                    Donec lacus erat, cursus sed porta quis, adipiscing et ligula.
+                    Duis volutpat, sem pharetra accumsan pharetra, mi ligula cursus felis,
+                    ac aliquet leo diam eget risus. Integer facilisis, justo cursus venenatis vehicula,
+                    massa nisl tempor sem, in ullamcorper neque mauris in orci.
+                    Proin sagittis elementum odio, eu vestibulum arcu rhoncus eu.
+                    Pellentesque lorem arcu, tempus at dapibus nec, tincidunt a ante.
+                    Cras eget arcu id augue sollicitudin fermentum.
+                    Quisque ullamcorper ultrices ante, ut mollis neque tincidunt nec.
+                    Aenean sollicitudin lobortis nibh, vitae sagittis justo placerat et.
+                    Fusce laoreet consequat arcu, quis placerat massa lacinia vel.
+                    Etiam fringilla purus ac ipsum euismod nec aliquet lorem aliquet.
+                    Aliquam a nunc ac lorem lobortis pulvinar.
+                    Integer eleifend lobortis risus vel commodo.
+                    Integer nisl turpis, facilisis a porttitor nec, tempus ac enim.
+                    Proin pulvinar vestibulum ligula id mattis. Integer posuere faucibus accumsan.
+                </p>
+            </div>
+
+            <span id="undo" style="display:none" class="t-group">Click here to open the window.</span>
+
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    var window = $("#window"),
+                        undo = $("#undo")
+                                .bind("click", function() {
+                                    window.data("kendoWindow").open();
+                                    undo.hide();
+                                });
+
+                    var onClose = function() {
+                        undo.show();
+                    }
+
+                    if (!window.data("kendoWindow")) {
+                        window.kendoWindow({
+                            width: "500px",
+                            title: "Kendo Window",
+                            close: onClose
+                        });
+                    }
+                });
+            </script>
+
+            <style scoped="scoped">
+                #undo {
+                    text-align: center;
+                    position: absolute;
+                    white-space: nowrap;
+                    border-width: 1px;
+                    border-style: solid;
+                    padding: 2em;
+                    cursor: pointer;
+                }
+            </style>
+        </div>
+        <!-- tools -->
+        <!-- tools -->
+    </body>
+</html>
+
