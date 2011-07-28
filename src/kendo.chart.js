@@ -327,6 +327,7 @@
          * @option {Object} [valueAxis.labels.border] The border of the labels.
          * @option {Number} [valueAxis.labels.border.width] <0> The width of the border.
          * @option {String} [valueAxis.labels.border.color] <"black"> The color of the border.
+         * @option {Number} [valueAxis.labels.rotation] <0> The rotation angle of the labels.
          * @option {String} [valueAxis.labels.format] The format of the labels.
          * _example
          * //sets format of the labels
@@ -405,6 +406,7 @@
          * @option {Object} [categoryAxis.labels.border] The border of the labels.
          * @option {Number} [categoryAxis.labels.border.width] <0> The width of the border.
          * @option {String} [categoryAxis.labels.border.color] <"black"> The color of the border.
+         * @option {Number} [categoryAxis.labels.rotation] <0> The rotation angle of the labels.
          * @option {String} [categoryAxis.labels.format] The format of the labels.
          * _example
          * //sets format of the labels
