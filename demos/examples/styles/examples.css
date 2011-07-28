@@ -361,6 +361,11 @@ body
     background-position: 0 -530px;
 }
 
+.windowIcon
+{
+    background-position: -50px -290px;
+}
+
 .exampleIcon
 {
     width: 24px;
@@ -432,7 +437,7 @@ body
 
 #exampleHead .windowIcon
 {
-    background-position: -20px -530px;
+    background-position: -70px -290px;
 }
 
 .dataSourceIcon
