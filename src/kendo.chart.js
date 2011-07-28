@@ -1436,7 +1436,10 @@
         reflow: function(targetBox) {
             var text = this,
                 options = text.options,
-                size = measureText(text.content, { font: text.options.font });
+                size = options.size = measureText(
+                                        text.content,
+                                        { font: options.font },
+                                        options.rotationAngle);
 
             text.baseline = size.baseline;
 
@@ -1483,7 +1486,10 @@
                     x: text.box.x1, y: text.box.y1,
                     baseline: text.baseline,
                     font: options.font,
-                    color: options.color })
+                    color: options.color,
+                    rotationAngle: options.rotationAngle,
+                    size: options.size
+                })
             ];
         }
     });
@@ -1859,7 +1865,9 @@
         },
 
         options: {
-            labels: { },
+            labels: {
+                rotationAngle: 0
+            },
             line: {
                 width: 1,
                 color: BLACK
@@ -2325,7 +2333,7 @@
                 visible: false,
                 width: 1,
                 color: BLACK
-        },
+            },
             zIndex: 1
         },
 
@@ -3707,6 +3715,7 @@
                     "<text <#= d.renderAttr(\"id\", d.options.id) #> " +
                     "x='<#= Math.round(d.options.x) #>' " +
                     "y='<#= Math.round(d.options.y + d.options.baseline) #>' " +
+                    "<#= d.options.rotationAngle ? d.renderRotation() : '' #> " +
                     "style='font: <#= d.options.font #>' fill='<#= d.options.color #>'>" +
                     "<#= d.content #></text>"
                 );
@@ -3717,7 +3726,26 @@
             x: 0,
             y: 0,
             baseline: 0,
-            font: SANS16
+            font: SANS16,
+            size: {
+                width: 0,
+                height: 0
+            }
+        },
+
+        renderRotation: function() {
+            var text = this,
+                options = text.options,
+                size = options.size,
+                cx = round(options.x + size.normalWidth / 2, COORD_PRECISION),
+                cy = round(options.y + size.normalHeight / 2, COORD_PRECISION),
+                rcx = round(options.x + size.width / 2, COORD_PRECISION),
+                rcy = round(options.y + size.height / 2, COORD_PRECISION),
+                offsetX = round(rcx - cx, COORD_PRECISION),
+                offsetY = round(rcy - cy, COORD_PRECISION);
+
+            return "transform='translate(" + offsetX + "," + offsetY + ") " +
+                   "rotate(" + options.rotationAngle + "," + cx + "," + cy + ")'";
         }
     });
 
@@ -3969,7 +3997,11 @@
         },
 
         createText: function(content, options) {
-            return new VMLText(content, options);
+            if (options && options.rotationAngle) {
+                return new VMLRotatedText(content, options);
+            } else {
+                return new VMLText(content, options);
+            }
         },
 
         createRect: function(box, style) {
@@ -4026,6 +4058,55 @@
             y: 0,
             font: SANS16,
             color: BLACK
+        }
+    });
+
+    var VMLRotatedText = ViewElement.extend({
+        init: function(content, options) {
+            var text = this;
+            ViewElement.fn.init.call(text, options);
+
+            text.content = content || "";
+            text.template = VMLRotatedText.template;
+            if (!text.template) {
+                text.template = VMLRotatedText.template = template(
+                    "<kvml:shape <#= d.renderAttr(\"id\", d.options.id) #> " +
+                    "style='position: absolute; top: 0px; left: 0px; " +
+                    "width: 1px; height: 1px;' stroked='false' coordsize='1,1'>" +
+                    "<#= d.renderPath() #>" +
+                    "<kvml:fill color='<#= d.options.color #>' />" +
+                    "<kvml:textpath on='true' style='font: <#= d.options.font #>;' " +
+                    "fitpath='false' string='<#= d.content #>' /></kvml:shape>"
+                );
+            }
+        },
+
+        options: {
+            x: 0,
+            y: 0,
+            font: SANS16,
+            color: BLACK,
+            size: {
+                width: 0,
+                height: 0
+            }
+        },
+
+        renderPath: function() {
+            var text = this,
+                options = text.options,
+                width = options.size.width,
+                height = options.size.height,
+                cx = options.x + width / 2,
+                cy = options.y + height / 2,
+                angle = -options.rotationAngle,
+                r1 = rotatePoint(options.x, cy, cx, cy, angle),
+                r2 = rotatePoint(options.x + width, cy, cx, cy, angle);
+
+            return "<kvml:path textpathok='true' " +
+                   "v='m " + round(r1.x) + "," + round(r1.y) +
+                   " l " + round(r2.x) + "," + round(r2.y) +
+                   "' />";
         }
     });
 
@@ -4379,12 +4460,12 @@
         return Math.round(value * power) / power;
     }
 
-    function measureText(text, style) {
+    function measureText(text, style, rotationAngle) {
         var styleHash = getHash(style),
-            cacheKey = text + styleHash,
+            cacheKey = text + styleHash + rotationAngle,
             cachedResult = measureText.cache[cacheKey];
 
-        if(cachedResult) {
+        if (cachedResult) {
             return cachedResult;
         }
 
@@ -4405,10 +4486,26 @@
         measureBox.appendChild(baselineMarker);
 
         var size = {
-            width: measureBox.offsetWidth - BASELINE_MARKER_SIZE,
-            height: measureBox.offsetHeight,
-            baseline: baselineMarker.offsetTop + BASELINE_MARKER_SIZE
-        };
+                width: measureBox.offsetWidth - BASELINE_MARKER_SIZE,
+                height: measureBox.offsetHeight,
+                baseline: baselineMarker.offsetTop + BASELINE_MARKER_SIZE
+            };
+
+        if (rotationAngle) {
+            var width = size.width,
+                height = size.height,
+                cx = width / 2,
+                cy = height / 2,
+                r1 = rotatePoint(0, 0, cx, cy, rotationAngle),
+                r2 = rotatePoint(width, 0, cx, cy, rotationAngle),
+                r3 = rotatePoint(width, height, cx, cy, rotationAngle);
+                r4 = rotatePoint(0, height, cx, cy, rotationAngle);
+
+            size.normalWidth = width;
+            size.normalHeight = height;
+            size.width = Math.max(r1.x, r2.x, r3.x, r4.x) - Math.min(r1.x, r2.x, r3.x, r4.x);
+            size.height = Math.max(r1.y, r2.y, r3.y, r4.y) - Math.min(r1.y, r2.y, r3.y, r4.y);
+        }
 
         measureText.cache[cacheKey] = size;
 
@@ -4428,6 +4525,14 @@
         }
 
         return hash.sort().join(" ");
+    }
+
+    function rotatePoint(x, y, cx, cy, angle) {
+        var theta = angle * (Math.PI / 180);
+        return {
+            x: cx + (x - cx) * Math.cos(theta) + (y - cy) * Math.sin(theta),
+            y: cy - (x - cx) * Math.sin(theta) + (y - cy) * Math.cos(theta)
+        }
     }
 
     function boxDiff( r, s ) {
@@ -4888,6 +4993,7 @@
     Chart.SVGPaintDecorator = SVGPaintDecorator;
     Chart.VMLView = VMLView;
     Chart.VMLText = VMLText;
+    Chart.VMLRotatedText = VMLRotatedText;
     Chart.VMLPath = VMLPath;
     Chart.VMLCircle = VMLCircle;
     Chart.VMLGroup = VMLGroup;
@@ -4900,6 +5006,7 @@
     Chart.Color = Color;
     Chart.blendColors = blendColors;
     Chart.blendGradient = blendGradient;
+    Chart.measureText = measureText;
 
     // Themes
     var TAHOMA11 = "11px Tahoma,sans-serif",
