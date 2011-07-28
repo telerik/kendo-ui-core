@@ -14,7 +14,7 @@
         <script src="../../../src/kendo.core.js"></script>
         <script src="../../../src/kendo.data.js"></script>
         <script src="../../../src/kendo.pageable.js"></script>
-        <script src="../../../src/kendo.sortable.js"></script>        
+        <script src="../../../src/kendo.sortable.js"></script>
         <script src="../../../src/kendo.grid.js"></script>
         <script src="../js/people.js"></script>
         <!-- script -->
@@ -26,7 +26,7 @@
         <div class="description">Grid sorting</div>
         <!-- description -->
         <div id="example">
-           
+
             <h3>Grid with single column sorting enabled</h3>
             <div id="singleSort" style="width:600px;"></div>
 
@@ -36,10 +36,10 @@
             <script type="text/javascript">
                 $(document).ready(function() {
                     $("#singleSort").kendoGrid({
-                        dataSource: {                            
+                        dataSource: {
                             data: createRandomData(20),
                             pageSize: 5
-                        },                                                
+                        },
                         sortable: {
                             mode: "single",
                             allowUnsort: false
@@ -63,10 +63,10 @@
                     });
 
                     $("#multipleSort").kendoGrid({
-                        dataSource: {                            
+                        dataSource: {
                             data: createRandomData(20),
                             pageSize: 5
-                        },                                                
+                        },
                         sortable: {
                             mode: "multiple",
                             allowUnsort: true
@@ -83,12 +83,11 @@
                                 title: "Last Name"
                             },
                             {
-                                field: "Age",
-                                title: "Age"
+                                field: "Age"
                             }
                         ]
                     });
-                });                
+                });
             </script>
         </div>
         <!-- tools -->
