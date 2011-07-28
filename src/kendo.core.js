@@ -1249,9 +1249,9 @@
 
                 if (toggle) {
                     if (!mask.length) {
-                        mask = $("<div class='t-loading-mask'><span class='t-loading-text'>Loading...</span><div class='t-loading-image'></div><div class='t-loading-color'></div></div>");
-                        mask.width(container.outerWidth()).height(container.outerHeight());
-                        mask.prependTo(container);
+                        mask = $("<div class='t-loading-mask'><span class='t-loading-text'>Loading...</span><div class='t-loading-image'/><div class='t-loading-color'/></div>")
+                            .width("100%").height("100%")
+                            .prependTo(container);
                     }
                 } else if (mask) {
                     mask.remove();
