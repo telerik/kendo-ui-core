@@ -270,12 +270,6 @@
                         }, options
                     );
 
-                    options.size = Chart.measureText(
-                        "Text",
-                        { font: "12px Verdana" },
-                        options.rotation
-                    );
-
                     text = new Chart.SVGText(
                         "Text",
                         options
@@ -305,15 +299,33 @@
                 });
 
                 test("sets rotation transform for 45 degrees", function() {
-                    createText({ rotation: 45 });
+                    createText({
+                        rotation: 45,
+                        size: {
+                            baseline: 12,
+                            height: 28,
+                            normalHeight: 14,
+                            normalWidth: 27,
+                            width: 28
+                        }
+                    });
                     ok(text.render().indexOf(
-                        "transform='translate(0.996,7.496) rotate(45,13.5,7)'")
+                        "transform='translate(0.5,7) rotate(45,13.5,7)'")
                         != -1
                     );
                 });
 
                 test("sets rotation transform for 90 degrees", function() {
-                    createText({ rotation: 90 });
+                    createText({
+                        rotation: 90,
+                        size: {
+                            baseline: 12,
+                            height: 27,
+                            normalHeight: 14,
+                            normalWidth: 27,
+                            width: 14
+                        }
+                    });
                     ok(text.render().indexOf(
                         "transform='translate(-6.5,6.5) rotate(90,13.5,7)'")
                         != -1
@@ -321,15 +333,33 @@
                 });
 
                 test("sets rotation transform for -45 degrees", function() {
-                    createText({ rotation: -45 });
+                    createText({
+                        rotation: -45,
+                        size: {
+                            baseline: 12,
+                            height: 28,
+                            normalHeight: 14,
+                            normalWidth: 27,
+                            width: 28
+                        }
+                    });
                     ok(text.render().indexOf(
-                        "transform='translate(0.996,7.496) rotate(-45,13.5,7)'")
+                        "transform='translate(0.5,7) rotate(-45,13.5,7)'")
                         != -1
                     );
                 });
 
                 test("sets rotation transform for -90 degrees", function() {
-                    createText({ rotation: -90 });
+                    createText({
+                        rotation: -90,
+                        size: {
+                            baseline: 12,
+                            height: 27,
+                            normalHeight: 14,
+                            normalWidth: 27,
+                            width: 14
+                        }
+                    });
                     ok(text.render().indexOf(
                         "transform='translate(-6.5,6.5) rotate(-90,13.5,7)'")
                         != -1

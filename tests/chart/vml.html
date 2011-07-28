@@ -258,12 +258,6 @@
                         }, options
                     );
 
-                    options.size = Chart.measureText(
-                        "test",
-                        { font: "12px Verdana" },
-                        options.rotation
-                    );
-
                     text = new Chart.VMLRotatedText(
                         "test",
                         options
@@ -286,6 +280,16 @@
                 });
 
                 test("renders path for 45 degrees rotation", function() {
+                    createRotatedText({
+                        rotation: 45,
+                        size: {
+                            baseline: 12,
+                            height: 28,
+                            normalHeight: 14,
+                            normalWidth: 27,
+                            width: 28
+                        }
+                    });
                     ok(text.render().indexOf(
                         "<kvml:path textpathok='true' v='m 4,4 l 24,24' />")
                         != -1
@@ -293,15 +297,33 @@
                 });
 
                 test("renders path for 90 degrees rotation", function() {
-                    createRotatedText({ rotation: 90 });
+                    createRotatedText({
+                        rotation: 90,
+                        size: {
+                            baseline: 12,
+                            height: 27,
+                            normalHeight: 14,
+                            normalWidth: 27,
+                            width: 14
+                        }
+                    });
                     ok(text.render().indexOf(
-                        "<kvml:path textpathok='true' v='m 7,6 l 7,20' />")
+                        "<kvml:path textpathok='true' v='m 7,7 l 7,21' />")
                         != -1
                     );
                 });
 
                 test("renders path for -45 degrees rotation", function() {
-                    createRotatedText({ rotation: -45 });
+                    createRotatedText({
+                        rotation: -45,
+                        size: {
+                            baseline: 12,
+                            height: 28,
+                            normalHeight: 14,
+                            normalWidth: 27,
+                            width: 28
+                        }
+                    });
                     ok(text.render().indexOf(
                         "<kvml:path textpathok='true' v='m 4,24 l 24,4' />")
                         != -1
@@ -309,9 +331,18 @@
                 });
 
                 test("renders path for -90 degrees rotation", function() {
-                    createRotatedText({ rotation: -90 });
+                    createRotatedText({
+                        rotation: -90,
+                        size: {
+                            baseline: 12,
+                            height: 27,
+                            normalHeight: 14,
+                            normalWidth: 27,
+                            width: 14
+                        }
+                    });
                     ok(text.render().indexOf(
-                        "<kvml:path textpathok='true' v='m 7,20 l 7,6' />")
+                        "<kvml:path textpathok='true' v='m 7,21 l 7,7' />")
                         != -1
                     );
                 });

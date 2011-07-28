@@ -52,18 +52,24 @@
                 Upload.prototype._supportsMultiple = function() { return true; };
                 createUpload();
 
-                equal($("#uploadInstance").prop("multiple"), $.browser.msie ? "true" : true);
+                if (!$.browser.msie) {
+                    equal($("#uploadInstance").prop("multiple"), true);
+                }
             });
 
             test("multiple attribute not rendered when multiple is set to false", function() {
                 createUpload({ multiple: false });
-                equal($("#uploadInstance").prop("multiple"), $.browser.msie ? "false" : false);
+                if (!$.browser.msie) {
+                    equal($("#uploadInstance").prop("multiple"), false);
+                }
             });
 
             test("multiple attribute not rendered when multiple is not supported", function() {
                 Upload.prototype._supportsMultiple = function() { return false; };
                 createUpload();
-                equal($("#uploadInstance").prop("multiple"), $.browser.msie ? "false" : false);
+                if (!$.browser.msie) {
+                    equal($("#uploadInstance").prop("multiple"), false);
+                }
             });
 
             test("disable renders t-state-disabled class", function () {
