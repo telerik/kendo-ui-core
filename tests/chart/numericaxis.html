@@ -287,10 +287,10 @@
                 });
 
                 test("labels have rotation angle", 1, function() {
-                    numericAxis = new Chart.NumericAxis(0, 1, { labels: { rotationAngle: 42.5 } });
+                    numericAxis = new Chart.NumericAxis(0, 1, { labels: { rotation: 42.5 } });
                     numericAxis.reflow(chartBox);
                     numericAxis.getViewElements(view);
-                    equals(view.log.text[0].style.rotationAngle, 42.5);
+                    equals(view.log.text[0].style.rotation, 42.5);
                 });
 
                 test("creates labels with format", 1, function() {

@@ -82,13 +82,13 @@
                 test("labels have rotation angle", 1, function() {
                     createCategoryAxis({
                         labels: {
-                            rotationAngle: 42.5
+                            rotation: 42.5
                         }
                     });
 
                     categoryAxis.getViewElements(view);
 
-                    equals(view.log.text[0].style.rotationAngle, 42.5);
+                    equals(view.log.text[0].style.rotation, 42.5);
                 });
 
                 test("labels have set background", 1, function() {
@@ -199,13 +199,13 @@
                 test("labels have rotation angle", 1, function() {
                     createCategoryAxis({
                         labels: {
-                            rotationAngle: 42.5
+                            rotation: 42.5
                         }
                     });
 
                     categoryAxis.getViewElements(view);
 
-                    equals(view.log.text[0].style.rotationAngle, 42.5);
+                    equals(view.log.text[0].style.rotation, 42.5);
                 });
 
                 test("labels are distributed vertically", function() {
