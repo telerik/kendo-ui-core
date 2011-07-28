@@ -109,7 +109,6 @@ function componentFromFilename(file) {
         return;
     }
 
-    console.log("candidate: " + candidate);
     return candidate;
 }
 
