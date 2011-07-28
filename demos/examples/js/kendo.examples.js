@@ -57,6 +57,13 @@
 
     Application = {
         load: function(href) {
+            $.each($(document).find(".t-window-content"), function(index, window) {
+                window = $(window).data("kendoWindow");
+                if (window) {
+                    window.close();
+                }
+            });
+
             Application.fetch(href);
 
             try {
@@ -678,6 +685,28 @@ var categories = {
                 {
                     text: "API",
                     url: "upload/api.html"
+                }
+            ]
+        },
+        {
+            text: "Window",
+            spriteCssClass: "windowIcon",
+            items: [
+                {
+                    text: "Basic usage",
+                    url: "window/index.html"
+                },
+                {
+                    text: "Loading content with AJAX",
+                    url: "window/ajax.html"
+                },
+                {
+                    text: "Events",
+                    url: "window/events.html"
+                },
+                {
+                    text: "API",
+                    url: "window/api.html"
                 }
             ]
         }

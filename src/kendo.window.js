@@ -34,8 +34,7 @@
         CLOSE = "close",
         REFRESH = "refresh",
         RESIZE = "resize",
-        ERROR = "error",
-        MOVE = "move"
+        ERROR = "error";
 
     function isLocalUrl(url) {
         return url && !(/^([a-z]+:)?\/\//i).test(url);
@@ -56,12 +55,12 @@
          * @extends kendo.ui.Component
          * @param {DomElement} element DOM element
          * @param {Object} options Configuration options.
-         * @option {Boolean} [modal] Specifies whether the window should block interaction with other page elements.
-         * @option {Boolean} [visible] Specifies whether the window will be initially visible.
-         * @option {Boolean} [draggable] Specifies whether the users may move the window.
-         * @option {Boolean} [resizable] Specifies whether the users may to resize the window.
-         * @option {Integer} [minWidth] The minimum width that may be achieved by resizing the window.
-         * @option {Integer} [minHeight] The minimum height that may be achieved by resizing the window.
+         * @option {Boolean} [modal] <false> Specifies whether the window should block interaction with other page elements.
+         * @option {Boolean} [visible] <true> Specifies whether the window will be initially visible.
+         * @option {Boolean} [draggable] <true> Specifies whether the users may move the window.
+         * @option {Boolean} [resizable] <true> Specifies whether the users may to resize the window.
+         * @option {Integer} [minWidth] <50> The minimum width that may be achieved by resizing the window.
+         * @option {Integer} [minHeight] <50> The minimum height that may be achieved by resizing the window.
          * @option {String} [contentUrl] Specifies a URL that the window should load its content from. For remote URLs, a container iframe element is automatically created.
          * @option {Array<String>} [actions] <"Close"> The buttons for interacting with the window. Predefined array values are "Close", "Refresh", "Minimize", "Maximize".
          * @option {String} [title] The text in the window title bar.
@@ -71,69 +70,82 @@
          */
         init: function(element, options) {
             var that = this,
+                wrapper,
                 windowActions = ".t-window-titlebar .t-window-action",
-                titleBar, offset;
+                titleBar, offset,
+                isVisible = false;
 
             Component.fn.init.call(that, element, options);
             options = that.options;
+            element = that.element;
 
-            if (!that.element.is(".t-content")) {
-                that.element.addClass("t-window-content t-content");
-                createWindow(that.element, options);
-                that.wrapper = that.element.closest(TWINDOW);
+            if (!element.parent().is("body")) {
+                if (element.is(":visible")) {
+                    offset = element.offset();
+                    isVisible = true;
+                } else {
+                    element.css({ visibility: "hidden", display: "" });
+                    offset = element.offset();
+                }
+            }
+
+            wrapper = that.wrapper = element.closest(TWINDOW);
+
+            if (!element.is(".t-content") || !wrapper[0]) {
+                element.addClass("t-window-content t-content");
+                createWindow(element, options);
+                wrapper = that.wrapper = element.closest(TWINDOW);
 
                 titleBar = that.wrapper.find(TWINDOWTITLEBAR);
                 titleBar.css("margin-top", -titleBar.outerHeight());
 
-                that.wrapper.css("padding-top", titleBar.outerHeight());
+                wrapper.css("padding-top", titleBar.outerHeight());
 
                 if (options.width) {
-                    that.wrapper.width(options.width);
+                    wrapper.width(options.width);
                 }
 
                 if (options.height) {
-                    that.wrapper.height(options.height);
+                    wrapper.height(options.height);
                 }
 
                 if (!options.visible) {
-                    that.wrapper.hide();
+                    wrapper.hide();
                 }
             }
 
-            if (!that.wrapper.parent().is("body")) {
-                if (that.wrapper.is(":visible")) {
-                    offset = that.wrapper.offset();
-                    that.wrapper.css({ top: offset.top, left: offset.left });
+            if (offset) {
+                if (isVisible) {
+                    wrapper.css({ top: offset.top, left: offset.left });
                 } else {
-                    that.wrapper.css({ visibility: "hidden", display: "" });
-                    offset = that.wrapper.offset();
-                    that.wrapper
-                        .css({
-                            top: offset.top,
-                            left: offset.left,
-                            visibility: "visible",
-                            display: "none"
-                        });
+                   wrapper
+                    .css({
+                        top: offset.top,
+                        left: offset.left,
+                        visibility: "visible",
+                        display: "none"
+                    });
                 }
-
-                that.wrapper
-                    .toggleClass("t-rtl", that.wrapper.closest(".t-rtl").length > 0)
-                    .appendTo(document.body);
             }
+
+            wrapper.toggleClass("t-rtl", that.wrapper.closest(".t-rtl").length > 0)
+                   .appendTo(document.body);
 
             if (options.modal) {
-                that._overlay(that.wrapper.is(":visible")).css({ opacity: 0.5 });
+                that._overlay(wrapper.is(":visible")).css({ opacity: 0.5 });
             }
 
-            that.wrapper
+            wrapper
                 .delegate(windowActions, "mouseenter", function () { $(this).addClass('t-state-hover'); })
                 .delegate(windowActions, "mouseleave", function () { $(this).removeClass('t-state-hover'); })
                 .delegate(windowActions, "click", $.proxy(that._windowActionHandler, that));
 
             if (options.resizable) {
-                that.wrapper
-                    .delegate(TWINDOWTITLEBAR, "dblclick", $.proxy(that.toggleMaximization, that))
-                    .append(templates.resizeHandles("n e s w se sw ne nw".split(" ")));
+                wrapper.delegate(TWINDOWTITLEBAR, "dblclick", $.proxy(that.toggleMaximization, that));
+
+                $.each("n e s w se sw ne nw".split(" "), function(index, handler) {
+                    wrapper.append(templates.resizeHandle(handler));
+                });
 
                 fixIE6Sizing(that.wrapper);
 
@@ -188,23 +200,16 @@
                  * @event
                  * @param {Event} e
                  */
-                ERROR,
-                /**
-                 * Fires when the window has been moved by the user.
-                 * @name kendo.ui.Window#move
-                 * @event
-                 * @param {Event} e
-                 */
-                MOVE
+                ERROR
             ], options);
 
             $(window).resize($.proxy(that._onDocumentResize, that));
 
-            if (isLocalUrl(that.contentUrl)) {
-                that._ajaxRequest();
+            if (isLocalUrl(options.contentUrl)) {
+                that._ajaxRequest(options.contentUrl);
             }
 
-            if (that.wrapper.is(":visible")) {
+            if (wrapper.is(":visible")) {
                 that.trigger(OPEN);
                 that.trigger(ACTIVATE);
             }
@@ -627,7 +632,7 @@
                     "This page requires frames in order to show content" +
             "</iframe>"
         ),
-        resizeHandles: template("<div class='t-resize-handle t-resize-<#= data #>'></div>")
+        resizeHandle: template("<div class='t-resize-handle t-resize-<#= data #>'></div>")
     };
 
     function createWindow(element, options) {
@@ -789,7 +794,7 @@
             $(document.body).css("cursor", e.currentTarget.css("cursor"));
         },
         drag: function (e) {
-            var wnd = this.owner, 
+            var wnd = this.owner,
                 coordinates = {
                     left: e.pageX - wnd.startPosition.left,
                     top: Math.max(e.pageY - wnd.startPosition.top, 0)
