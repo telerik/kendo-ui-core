@@ -1266,6 +1266,7 @@
 
         /**
          * Get data return from the transport
+         * @returns {Array} Array of items
          */
         data: function(value) {
             if (value !== undefined) {
@@ -1282,6 +1283,7 @@
          * dataSource.bind("change", function() {
          *   renderView(dataSource.view());
          * });
+         * @returns {Array} Array of items
          */
         view: function() {
             return this._view;
@@ -1298,6 +1300,7 @@
          *
          * // moves the view to the first page returning at most 20 records but without particular ordering.
          * dataSource.query({ page: 1, pageSize: 20 });
+         *
          */
         query: function(options) {
             var that = this,
@@ -1362,6 +1365,7 @@
          * @param {Number} [val] <undefined> The index of the page to be retrieved
          * @example
          * dataSource.page(2);
+         * @returns {Number} Current page index
          */
         page: function(val) {
             var that = this,
@@ -1382,6 +1386,7 @@
          * @param {Number} [val] <undefined> The of number of records to be retrieved.
          * @example
          * dataSource.pageSiza(25);
+         * @returns {Number} Current page size
          */
         pageSize: function(val) {
             var that = this;
@@ -1395,11 +1400,12 @@
         },
 
         /**
-         * Get current sort descriptors or sort the data.
+         * Get current sort descriptors or sorts the data.
          * @param {Object|Array} [val] <undefined> Sort options to be applied to the data
          * @example
          * dataSource.sort({ field: "orderId", dir: "desc" });
          * dataSource.sort([ { field: "orderId", dir: "desc" }, { field: "unitPrice", dir: "asc" } ]);
+         * @returns {Array} Current sort descriptors
          */
         sort: function(val) {
             var that = this;
@@ -1432,6 +1438,7 @@
          * @example
          * dataSource.filter({ field: "orderId", operation: "eq", value: 10428 });
          * dataSource.filter([ { field: "orderId", operation: "neq", value: 42 }, { field: "unitPrice", operation: "ge", value: 3.14 } ]);
+         * @returns {Array} Current filter descriptors
          */
         filter: function(val) {
             var that = this;
@@ -1449,6 +1456,7 @@
          * @param {Object|Array} [val] <undefined> Group(s) to be applied to the data.
          * @example
          * dataSource.group({ field: "orderId" });
+         * @returns {Array} Current grouping descriptors
          */
         group: function(val) {
             var that = this;
@@ -1473,6 +1481,7 @@
          * @param {Object|Array} [val] <undefined> Aggregate(s) to be applied to the data.
          * @example
          * dataSource.aggregate({ field: "orderId", aggregate: "sum" });
+         * @returns {Array} Current aggregate descriptors
          */
         aggregate: function(val) {
             var that = this;
@@ -1487,6 +1496,7 @@
 
         /**
          * Get result of aggregates calculation
+         * @returns {Array} Aggregates result
          */
         aggregates: function() {
             return this._aggregateResult;
@@ -1494,6 +1504,7 @@
 
         /**
          * Get the number of available pages.
+         * @returns {Number} Number of available pages.
          */
         totalPages: function() {
             var that = this,
