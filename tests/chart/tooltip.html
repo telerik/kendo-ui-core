@@ -13,7 +13,10 @@
         <script type="text/javascript">
             var Chart = kendo.ui.Chart,
                 tooltip,
-                element;
+                element,
+                RED = "rgb(255,0,0)",
+                GREEN = "rgb(0,255,0)",
+                BLUE = "rgb(0,0,255)";
 
             function createTooltip(options) {
                 tooltip = new Chart.Tooltip($("#chart"), options);
@@ -27,7 +30,10 @@
                     aboveAxis: true
                 },
                 series: {
-                    color: "#f00"
+                    color: RED,
+                    labels: {
+                        color: GREEN
+                    }
                 }
             };
 
@@ -62,13 +68,30 @@
             });
 
             test("sets border color", function() {
-                createTooltip({ border: { color: "rgb(255, 0, 0)" } });
-                equals(element.css("border-top-color").replace(/\s/g, ''), "rgb(255,0,0)");
+                createTooltip({ border: { color: RED } });
+                equals(element.css("border-top-color").replace(/\s/g, ''), RED);
             });
 
-            test("sets background to current series", function() {
+            test("sets background to current series color", function() {
                 tooltip.show(dataPointMock);
-                equals(element.css("backgroundColor").replace(/\s/g, ''), "rgb(255,0,0)");
+                equals(element.css("backgroundColor").replace(/\s/g, ''), RED);
+            });
+
+            test("setting background overrides current series color", function() {
+                tooltip.options.background = BLUE;
+                tooltip.show(dataPointMock);
+                equals(element.css("backgroundColor").replace(/\s/g, ''), BLUE);
+            });
+
+            test("sets color to current series label color", function() {
+                tooltip.show(dataPointMock);
+                equals(element.css("color").replace(/\s/g, ''), GREEN);
+            });
+
+            test("setting color overrides current series label color", function() {
+                tooltip.options.color = BLUE;
+                tooltip.show(dataPointMock);
+                equals(element.css("color").replace(/\s/g, ''), BLUE);
             });
 
             test("applies format", function() {

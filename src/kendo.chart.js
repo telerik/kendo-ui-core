@@ -756,6 +756,27 @@
          * @option {Object} [plotArea.border] The border of the plot area.
          * @option {Number} [plotArea.border.width] <0> The width of the border.
          * @option {String} [plotArea.border.color] <"black"> The color of the border.
+         * @option {Object} [tooltip] The data point tooltip configuration options.
+         * @option {String} [tooltip.format] The tooltip format.
+         * _example
+         * //sets format of the tooltip
+         * format: "{0:C}"
+         * @option {String} [tooltip.font] <"12px Tahoma,sans-serif"> The tooltip font.
+         * @option {String} [tooltip.color]
+         * The text color of the tooltip. The default is the same as the series labels color.
+         * @option {String} [tooltip.background]
+         * The background color of the tooltip. The default is determined from the series color.
+         * @option {Number|Object} [tooltip.padding] <2> The padding of the tooltip.
+         * _example
+         * // sets the top, right, bottom and left padding to 3px.
+         * padding: 3
+         *
+         * // sets the top and left padding to 1px
+         * // right and bottom padding are left at 2px (by default)
+         * padding: { top: 1, left: 1 }
+         * @option {Object} [tooltip.border] The border configuration options.
+         * @option {Number} [tooltip.border.width] <0> The width of the border.
+         * @option {String} [tooltip.border.color] <"black"> The color of the border.
          */
         init: function(element, options) {
             var chart = this,
@@ -4365,7 +4386,6 @@
                 color: BLACK,
                 width: 0
             },
-            background: "",
             offsetY: 15
         },
 
@@ -4391,7 +4411,8 @@
 
             tooltip.element
                 .css({
-                   backgroundColor: point.series.color,
+                   backgroundColor: options.background || point.series.color,
+                   color: options.color || point.series.labels.color,
                    opacity: 1
                 })
                 .stop(true)
@@ -5033,6 +5054,9 @@
                 labels: {
                     font: TAHOMA12
                 }
+            },
+            tooltip: {
+                font: TAHOMA12
             }
         };
 
