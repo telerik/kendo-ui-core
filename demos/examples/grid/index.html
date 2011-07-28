@@ -28,11 +28,11 @@
         <div class="description">Basic grid initialization</div>
         <!-- description -->
         <div id="example" class="t-content">
-            <div class="t-grid"></div>
+            <div id="grid"></div>
 
             <script type="text/javascript">
                 $(document).ready(function() {
-                    $(".t-grid").kendoGrid({
+                    $("#grid").kendoGrid({
                         dataSource: {
                             data: createRandomData(50),
                             pageSize: 10
@@ -52,12 +52,10 @@
                                 title: "Last Name"
                             },
                             {
-                                field: "City",
-                                title: "City"
+                                field: "City"
                             },
                             {
-                                field: "Title",
-                                title: "Title"
+                                field: "Title"
                             },
                             {
                                 field: "BirthDate",
@@ -65,8 +63,7 @@
                                 template: '<#= kendo.toString(BirthDate,"dd MMMM yyyy") #>'
                             },
                             {
-                                field: "Age",
-                                title: "Age"
+                                field: "Age"
                             }
                         ]
                     });

@@ -3,7 +3,7 @@
     <head>
         <!-- meta -->
         <!-- meta -->
-        <title>Integration with jQuery Templates</title>
+        <title>Row template</title>
         <!-- css -->
         <link href="../styles/examples.css" rel="stylesheet"/>
         <link href="../../../styles/kendo.common.css" rel="stylesheet"/>
@@ -12,8 +12,8 @@
         <!-- script -->
         <script src="../../../src/jquery.js"></script>
         <script src="../../../src/kendo.core.js"></script>
-        <script src="../../../src/kendo.data.js"></script>
         <script src="../../../src/kendo.data.odata.js"></script>
+        <script src="../../../src/kendo.data.js"></script>
         <script src="../../../src/kendo.popup.js"></script>
         <script src="../../../src/kendo.list.js"></script>
         <script src="../../../src/kendo.dropdownlist.js"></script>
@@ -63,25 +63,23 @@
             </script>
             <script>
                 $(document).ready(function() {
-                    var dataSource = new kendo.data.DataSource({
-                        type: "odata",
-                        serverFiltering: true,
-                        filter: [{
-                            field: "Name",
-                            operator: "contains",
-                            value: "Star Wars"
-                            },{
-                            field: "BoxArt.SmallUrl",
-                            operator: "neq",
-                            value: null
-                        }],
-                        transport: {
-                            read: "http://odata.netflix.com/Catalog/Titles"
-                        }
-                    });
-
                     $("#netflixTable").kendoGrid({
-                        dataSource: dataSource,
+                        dataSource: {
+                            type: "odata",
+                            serverFiltering: true,
+                            filter: [{
+                                field: "Name",
+                                operator: "contains",
+                                value: "Star Wars"
+                                },{
+                                field: "BoxArt.SmallUrl",
+                                operator: "neq",
+                                value: null
+                            }],
+                            transport: {
+                                read: "http://odata.netflix.com/Catalog/Titles"
+                            }
+                        },
                         rowTemplate: kendo.template($("#rowTemplate").html()),
                         height: 200
                     });
