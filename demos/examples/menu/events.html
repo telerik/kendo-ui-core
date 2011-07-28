@@ -86,11 +86,11 @@
                 kendoConsole.log("Selected: " + $(e.item).find("> .t-link").text());
             };
 
-            var onInit = function (e) {
-                kendoConsole.log("Menu loaded");
-            };
-
-            $("#Menu1").kendoMenu({ select: onSelect, init: onInit, open: onOpen, close: onClose });
+            $("#Menu1").kendoMenu({
+                select: onSelect,
+                open: onOpen,
+                close: onClose
+            });
         </script>
         <div class="console"></div>
         <!-- tools -->
