@@ -57,7 +57,7 @@
                 that.hint = $.isFunction(hint) ? $(hint(el)) : hint;
 
                 that.hint.css({
-                    position: "absolute",
+                    position: "absolute"
                 })
                 .css(that._positionProperty, that._initialElementPosition)
                 .appendTo(that.element);
