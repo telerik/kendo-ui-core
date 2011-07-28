@@ -14,7 +14,7 @@
         <script src="../../../src/kendo.core.js"></script>
         <script src="../../../src/kendo.data.js"></script>
         <script src="../../../src/kendo.pageable.js"></script>
-        <script src="../../../src/kendo.sortable.js"></script>        
+        <script src="../../../src/kendo.sortable.js"></script>
         <script src="../../../src/kendo.grid.js"></script>
         <script src="../js/people.js"></script>
         <!-- script -->
@@ -26,17 +26,17 @@
         <div class="description">Binding to local data</div>
         <!-- description -->
         <div id="example" class="t-content">
-            <div class="t-grid"></div>
-            
-            <script type="text/javascript">                
+            <div id="grid"></div>
+
+            <script type="text/javascript">
 
                 $(document).ready(function() {
-                    $(".t-grid").kendoGrid({
+                    $("#grid").kendoGrid({
                         dataSource: {
                             data: createRandomData(50),
                             pageSize: 10
                         },
-                        height: 250,                        
+                        height: 250,
                         scrollable: true,
                         sortable: true,
                         pageable: true,
@@ -54,12 +54,10 @@
                                 title: "First Name"
                             },
                             {
-                                field: "City",
-                                title: "City"
+                                field: "City"
                             },
                             {
-                                field: "Title",
-                                title: "Title"
+                                field: "Title"
                             },
                             {
                                 field: "BirthDate",
@@ -67,8 +65,7 @@
                                 template: '<#= kendo.toString(BirthDate,"dd MMMM yyyy") #>'
                             },
                             {
-                                field: "Age",
-                                title: "Age"
+                                field: "Age"
                             }
                         ]
                     });

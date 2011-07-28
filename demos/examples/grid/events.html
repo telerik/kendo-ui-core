@@ -13,7 +13,7 @@
         <script src="../../../src/jquery.js"></script>
         <script src="../../../src/kendo.core.js"></script>
         <script src="../../../src/kendo.data.js"></script>
-        <script src="../../../src/kendo.pageable.js"></script>        
+        <script src="../../../src/kendo.pageable.js"></script>
         <script src="../../../src/kendo.selectable.js"></script>
         <script src="../../../src/kendo.sortable.js"></script>
         <script src="../../../src/kendo.grid.js"></script>
@@ -27,12 +27,12 @@
         <!-- description -->
         <div class="description">Grid events</div>
         <!-- description -->
-        <div id="example" class="t-content">           
-            <div class="t-grid"></div>
+        <div id="example" class="t-content">
+            <div id="grid"></div>
 
             <script type="text/javascript">
                 function onChange(arg) {
-                    var selected = $.map(this.select(), function(item) {                        
+                    var selected = $.map(this.select(), function(item) {
                         return $(item).text();
                     });
 
@@ -44,8 +44,8 @@
                 }
 
                 $(document).ready(function() {
-                    $(".t-grid").kendoGrid({
-                        dataSource: {                            
+                    $("#grid").kendoGrid({
+                        dataSource: {
                             data: createRandomData(50),
                             pageSize: 5
                         },
@@ -65,12 +65,11 @@
                                 title: "Last Name"
                             },
                             {
-                                field: "Age",
-                                title: "Age"
+                                field: "Age"
                             }
                         ]
                     });
-                });                
+                });
             </script>
         </div>
         <div class="console"></div>

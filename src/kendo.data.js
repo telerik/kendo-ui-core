@@ -1677,7 +1677,7 @@
             table = dataSource.table,
             select = dataSource.select;
 
-        if(!data && fields){
+        if(!data && fields && !dataSource.transport){
             if (table) {
                 data = inferTable(table, fields);
             } else if (select) {

@@ -27,7 +27,7 @@
         <!-- description -->
         <div class="description"></div>
         <!-- description -->
-        <div id="example" class="t-content">                
+        <div id="example" class="t-content">
             <div id="grid" style="width:500px;"></div>
 
             <script type="text/javascript">
@@ -36,10 +36,10 @@
                         dataSource: {
                             data: createRandomData(20),
                             pageSize: 5,
-                            group: [{
+                            group: {
                                 field: "Age",
                                 dir: "asc"
-                            }]
+                            }
                         },
                         selectable: "multiple row",
                         pageable: true,
@@ -55,8 +55,7 @@
                                 title: "Last Name"
                             },
                             {
-                                field: "Age",
-                                title: "Age"
+                                field: "Age"
                             }
                         ]
                     });
@@ -68,7 +67,7 @@
                     $(".selectRow").click(function(e) {
                         var grid = $("#grid").data("kendoGrid"),
                             rowIndex = $(e.target).prev().val(),
-                            row = grid.tbody.find(">tr").eq(rowIndex);
+                            row = grid.tbody.find(">tr:not(.t-grouping-row)").eq(rowIndex);
 
                         grid.select(row);
                     });
@@ -77,7 +76,7 @@
                         var grid = $("#grid").data("kendoGrid"),
                             rowIndex = $(e.target).prev().val(),
                             row = grid.tbody.find(">tr.t-grouping-row").eq(rowIndex);
-                                                    
+
                         if(row.has(".t-collapse").length) {
                             grid.collapseGroup(row);
                         } else {
@@ -89,10 +88,10 @@
 
             <div class="configuration" style="width:200px">
                 <span class="configHead">Configure</span>
-                <span class="configTitle">API Functions</span>                
-                <input type="text" /><button class="selectRow t-button">Select row</button>
-                <button class="clearSelection t-button">Clear seleced rows</button>
-                <input type="text" /><button class="toggleGroup t-button">Collapse/Expand group</button>
+                <span class="configTitle">API Functions</span>
+                <input type="number" value="0" /><button class="selectRow t-button">Select row</button>
+                <button class="clearSelection t-button">Clear selected rows</button>
+                <input type="number" value="0" /><button class="toggleGroup t-button">Collapse/Expand group</button>
             </div>
 
         </div>
