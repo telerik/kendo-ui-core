@@ -115,13 +115,14 @@ function importComponentHelp(exampleHTML, component) {
     var helpFiles = {
         "templates": "kendo.Template",
         "datasource": "kendo.data.DataSource",
-        "dragdrop": "kendo.ui.Draggable",
+        //"dragdrop": "kendo.ui.Draggable",
         "animation": "kendo.Animation"
     };
 
     // merge documentation for multiple components
     var relatedComponents = {
-        "slider": ["slider", "rangeslider"]
+        "slider": ["slider", "rangeslider"],
+        "dragdrop": ["draggable", "droptarget"]
     }[component];
 
     function helpFileFor(component) {
@@ -161,6 +162,10 @@ function importComponentHelp(exampleHTML, component) {
     }
 
     if (relatedComponents) {
+        var hasMethods = false,
+            hasConfiguration = false,
+            hasEvents = false;
+
         for (var c in relatedComponents) {
             helpHTML = helpFileFor(relatedComponents[c]);
 
@@ -170,22 +175,34 @@ function importComponentHelp(exampleHTML, component) {
             configuration += formatComponentRegion(relatedComponents[c], getRegion("configuration"), c == 0);
             methods += formatComponentRegion(relatedComponents[c], getRegion("methods"), c == 0);
             events += formatComponentRegion(relatedComponents[c], getRegion("events"), c == 0);
+
+            if (!hasMethods) {
+                hasMethods = getRegion("methods") !== "None";
+            }  
+            
+            if (!hasConfiguration) {
+                hasConfiguration = getRegion("configuration") !== "None";
+            }
+            
+            if (!hasEvents) {
+                hasEvents = getRegion("events") !== "None";
+            }         
         }
 
-        data = '<div class="optionsContainer">' + configuration + '</div>' +
-               '<div class="methodsContainer">' + methods + '</div>' +
-               '<div class="eventsContainer">' + events + '</div>';
+        data = (hasConfiguration ? '<div class="optionsContainer">' + configuration + '</div>' : "") +
+               (hasMethods ? '<div class="methodsContainer">' + methods + '</div>' : "") +
+               (hasEvents ? '<div class="eventsContainer">' + events + '</div>' : "");
 
         if (relatedComponents.length > 1) {
             // remove stats from tabs
-            tabs = tabs.replace(/\s+\([\s\d]+\)/g, "");
+            tabs = tabs.replace(/\s+\([\s\d]+\)/g, "");            
         }
     } else {
         helpHTML = helpFileFor(component);
 
-        description = getRegion("description");
-        tabs = getRegion("helpTabs");
-        data = getRegion("helpData");
+        description = getRegion("description") === "None" ? "" : getRegion("description");
+        tabs = getRegion("helpTabs") === "None" ? "" : getRegion("helpTabs");
+        data = getRegion("helpData") === "None" ? "" : getRegion("helpData");
     }
 
     // could be improved if example has appropriate markers, or better yet, if loaded through AJAX (and not importing at all)
