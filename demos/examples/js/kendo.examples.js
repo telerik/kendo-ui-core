@@ -45,7 +45,7 @@
         }).data("kendoPanelBar");
 
         if (live === false)
-            $("#exampleHead, #content").toggleClass("nomargin", $(element).attr("href") == "overview/index.html");
+            $("#exampleHead, #exampleWrap").toggleClass("nomargin", $(element).attr("href") == "overview/index.html");
 
         if (!referenceUrl)
             referenceUrl = $("#logo")[0].href;
