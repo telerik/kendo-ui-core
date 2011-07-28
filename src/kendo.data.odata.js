@@ -62,7 +62,11 @@
 
                             if (filter && value !== undefined) {
                                 if (filter.length > 3) {
-                                    format = "{0}(" + format + ",{2})";
+                                    if (filter !== "substringof") {
+                                        format = "{0}({2}," + format + ")";
+                                    } else {
+                                        format = "{0}(" + format + ",{2})";
+                                    }
                                 } else {
                                     format = "{2} {0} " + format;
                                 }

@@ -102,7 +102,7 @@
             });
 
             test("dialect adds $filter if filter is specified", function() {
-                ok(dialect({ filter: [ {field: "Name", operator: "startswith", value: "bar"} ]}).indexOf("&$filter=startswith('bar',Name)") > -1 );
+                ok(dialect({ filter: [ {field: "Name", operator: "startswith", value: "bar"} ]}).indexOf("&$filter=startswith(Name,'bar')") > -1 );
             });
 
             test("dialect does not add $filter if filter is not specified", function() {
@@ -110,10 +110,10 @@
             });
 
             test("$filter and endswith operator", function() {
-                ok(dialect({ filter: [ {field: "Name", operator: "endswith", value: "bar"} ]}).indexOf("&$filter=endswith('bar',Name)") > -1 );
+                ok(dialect({ filter: [ {field: "Name", operator: "endswith", value: "bar"} ]}).indexOf("&$filter=endswith(Name,'bar')") > -1 );
             });
 
-            test("$filter and contains operator", function() {
+            test("$filter and contains operator uses substringof", function() {
                 ok(dialect({ filter: [ {field: "Name", operator: "contains", value: "bar"} ]}).indexOf("&$filter=substringof('bar',Name)") > -1 );
             });
 
