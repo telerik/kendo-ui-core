@@ -379,7 +379,7 @@ var categories = {
             spriteCssClass: "autocompleteIcon",
             items: [
                 {
-                    text: "Basic Usage",
+                    text: "Basic usage",
                     url: "autocomplete/index.html"
                 },
                 {
@@ -457,7 +457,7 @@ var categories = {
             spriteCssClass: "dropDownListIcon",
             items: [
                 {
-                    text: "Basic Usage",
+                    text: "Basic usage",
                     url: "dropdownlist/index.html"
                 },
                 {
