@@ -46,7 +46,7 @@ function splitScriptRegion(exampleHTML, base) {
         scriptMatches = regionRegex.script.exec(exampleHTML),
         currentPageScripts = scriptMatches ? scriptMatches[1].trimLeft() : "",
         scriptStripper1 = /"(.*?)src/g,
-        scriptStripper2 = /src="([.\/]*)([^"]*)([^\.min]*)\.js"/g,
+        scriptStripper2 = /src="(?!.\/)([.\/]*)([^"]*)([^\.min]*)\.js"/g,
         jsExtension = MINIFY ? ".min.js" : ".js",
         rebaser = function (match, g1, g2) {
             return 'src="' + ( (g1 != "./" ) ? base : g1 ) + g2 + jsExtension + '"';
@@ -327,7 +327,6 @@ exports.build = function(origin, destination, minify) {
     wrench.copyDirSyncRecursive(originJS, outputPath + "/js");
     wrench.copyDirSyncRecursive(originStyles, outputPath + "/styles");
     fs.writeFileSync(outputPath + "/index.html", indexHtml.replace(isLive, ""), "utf8");
-    fs.writeFileSync(outputPath + "/js/jquery.tmpl.js", fs.readFileSync("src/jquery.tmpl.js", "utf8"), "utf8");
     fs.unlinkSync(outputPath + "/template.html");
 
     if (!MINIFY) {
