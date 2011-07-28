@@ -155,6 +155,10 @@ processScripts();
 console.log("processing styles...");
 processStyles();
 
+console.log("copying Licenses Agreement...");
+var data = fs.readFileSync("resources/Kendo\ EULA.pdf");
+fs.writeFileSync(PATH + "/Kendo\ EULA.pdf", data);
+
 //examples
 console.log("building examples...");
 examples.build(SOURCE, PATH + "/examples", false);
