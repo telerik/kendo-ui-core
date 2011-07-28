@@ -96,17 +96,17 @@
                         }
                     });
 
+                    $("#netflixTable").kendoGrid({
+                        dataSource: dataSource,
+                        rowTemplate: $.template($("#rowTemplate")),
+                        height: 200
+                    });
+
                     $("#netflixDropDown").kendoDropDownList({
                         dataTextField: "Name",
                         dataValueField: "Id",
                         template: $.template($("#dropDownTemplate")),
                         dataSource: dataSource
-                    });
-
-                    $("#netflixTable").kendoGrid({
-                        dataSource: dataSource,
-                        rowTemplate: $.template($("#rowTemplate")),
-                        height: 200
                     });
                 });
             </script>
