@@ -3,7 +3,7 @@
     <head>
         <!-- meta -->
         <!-- meta -->
-        <title>PanelBar with Ajax Loaded Content</title>
+        <title>Loading content with AJAX</title>
         <!-- css -->
         <link href="../styles/examples.css" rel="stylesheet"/>
         <link href="../../../styles/kendo.common.css" rel="stylesheet"/>
@@ -20,7 +20,7 @@
         <!-- nav -->
         <!-- nav -->
         <!-- description -->
-        <div class="description">This example shows how to load <b>Ajax content</b> in a kendoPanelBar.</div>
+        <div class="description">Loading content with AJAX</div>
         <!-- description -->
         <div id="example" class="t-content">
             <ul id="PanelBar1">
@@ -47,7 +47,16 @@
             </ul>
         </div>
         <script type="text/javascript">
-            $("#PanelBar1").kendoPanelBar({ expandMode: "single", contentUrls: [ 'ajax/ajaxContent1.html', 'ajax/ajaxContent2.html', 'ajax/ajaxContent3.html', 'ajax/ajaxContent4.html', 'ajax/ajaxContent5.html' ] });
+            $("#PanelBar1").kendoPanelBar({
+                expandMode: "single",
+                contentUrls: [
+                    'ajax/ajaxContent1.html',
+                    'ajax/ajaxContent2.html',
+                    'ajax/ajaxContent3.html',
+                    'ajax/ajaxContent4.html',
+                    'ajax/ajaxContent5.html'
+                ]
+            });
         </script>
         <!-- tools -->
         <!-- tools -->
