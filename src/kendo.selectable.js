@@ -33,7 +33,7 @@
 
         options: {
             filter: ">*",
-            multi: false
+            multiple: false
         },
         _collide: function(element, marqueePos) {
             var pos = element.offset();
@@ -76,7 +76,7 @@
             var that = this,
             ctrlKey = event.ctrlKey,
             shiftKey = event.shiftKey,
-            single = !that.options.multi;
+            single = !that.options.multiple;
             that._downTarget = $(event.currentTarget);
             that._shiftPressed = shiftKey;
             $(document)
@@ -169,19 +169,19 @@
         },
         _up: function (event) {
             var that = this,
-                single = !that.options.multi,
+                single = !that.options.multiple,
                 options = that.options;
             $(document)
                 .unbind(MOUSEMOVE, that._moveDelegate)
                 .unbind(MOUSEUP, that._upDelegate);
-            if (options.multi) {
+            if (options.multiple) {
                 that._marquee.remove();
             }
 
             if (kendo.support.touch && single)
                 that._downTarget.addClass(ACTIVE);
 
-            if(options.multi && that._shiftPressed === true) {
+            if(options.multiple && that._shiftPressed === true) {
                 that.selectRange(that._firstSelectee(), that._downTarget);
             }
             else {

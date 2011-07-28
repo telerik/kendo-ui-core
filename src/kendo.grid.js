@@ -475,7 +475,7 @@
 
                 that.selectable = new kendo.ui.Selectable(that.table, {
                     filter: cell ? CELL_SELECTOR : ROW_SELECTOR,
-                    multi: multi,
+                    multiple: multi,
                     change: function() {
                         that.trigger(CHANGE);
                     }
@@ -529,7 +529,7 @@
 
             items = $(items);
             if(items.length) {
-                if(!selectable.options.multi) {
+                if(!selectable.options.multiple) {
                     selectable.clear();
                     items = items.first();
                 }
