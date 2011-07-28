@@ -757,7 +757,7 @@ var categories = {
             ]
         },
         {
-            text: "Drag &amp; Drop",
+            text: "Drag & Drop",
             spriteCssClass: "dragdropIcon",
             items: [
                 {
