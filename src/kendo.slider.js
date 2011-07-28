@@ -10,7 +10,7 @@
      *    <li>Keyboard navigation</li>
      *    <li>Horizontal/Vertical Orientation</li>
      * </ul>
-     * @exampleTitle Creating a <b>Slider</b> from existing HTML.
+     * @exampleTitle Creating a <b>slider</b> from existing HTML.
      * @example
      * <input id="slider" />
      * <script type="text/javascript">
@@ -18,7 +18,7 @@
      *        $("#slider").kendoSlider();
      *    });
      * </script>
-     * @section The range slider component allows you to intuitively choose a range of two values in a specified range.
+     * @section The rangeSlider component allows you to intuitively choose a range of two values in a specified range.
      * <p>
      * Key features:
      * </p>
@@ -27,9 +27,9 @@
      *    <li>Keyboard navigation</li>
      *    <li>Horizontal/Vertical Orientation</li>
      * </ul>
-     * @exampleTitle Creating a <b>Slider</b> from existing HTML.
+     * @exampleTitle Creating a <b>RangeSlider</b> from existing HTML.
      * @example
-     * <div id="rangeSLider">
+     * <div id="rangeSlider">
      *      <input />
      *      <input />
      * </div>
