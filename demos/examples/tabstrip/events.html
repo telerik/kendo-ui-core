@@ -3,7 +3,7 @@
     <head>
         <!-- meta -->
         <!-- meta -->
-        <title>TabStrip Events</title>
+        <title>Events</title>
         <!-- css -->
         <link href="../styles/examples.css" rel="stylesheet"/>
         <link href="../../../styles/kendo.common.css" rel="stylesheet"/>
@@ -21,7 +21,7 @@
         <!-- nav -->
         <!-- nav -->
         <!-- description -->
-        <div class="description">This example shows how to attach events to a kendoTabStrip and how they are fired and triggered.</div>
+        <div class="description">Events</div>
         <!-- description -->
         <div id="example" class="t-content">
             <div id="TabStrip1">
@@ -72,10 +72,6 @@
                 kendoConsole.log("Selected: " + $(e.item).find("> .t-link").text());
             };
 
-            var onInit = function (e) {
-                kendoConsole.log("TabStrip loaded");
-            };
-
             var onContentLoad = function (e) {
                 kendoConsole.log("Content loaded in <b>"+ $(e.item).find("> .t-link").text() + "</b> and starts with <b>" + $(e.contentElement).text().substr(0, 20) + "...</b>");
             };
@@ -84,7 +80,12 @@
                 kendoConsole.error("Loading failed with " + e.xhr.statusText + " " + e.xhr.status);
             };
 
-            $("#TabStrip1").kendoTabStrip({ select: onSelect, init: onInit, contentLoad: onContentLoad, error: onError, contentUrls: [ , , , , , "ajax/ajaxContent1.html", "error.html" ] });
+            $("#TabStrip1").kendoTabStrip({
+                select: onSelect,
+                contentLoad: onContentLoad,
+                error: onError,
+                contentUrls: [ , , , , , "ajax/ajaxContent1.html", "error.html" ]
+            });
         </script>
         <div class="console"></div>
         <!-- tools -->
