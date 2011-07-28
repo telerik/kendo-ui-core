@@ -264,14 +264,31 @@
             (function() {
                 var text;
 
+                function createText(options) {
+                    options = $.extend({
+                            rotationAngle: 0
+                        }, options
+                    );
+
+                    options.size = Chart.measureText(
+                        "Text",
+                        { font: "12px Verdana" },
+                        options.rotationAngle
+                    );
+
+                    text = new Chart.SVGText(
+                        "Text",
+                        options
+                    );
+                }
+
                 module("SVGText", {
                     setup: function() {
-                        text = new Chart.SVGText();
+                        createText();
                     }
                 });
 
                 test("renders content", function() {
-                    text.content = "Text";
                     equal(text.render().replace(/\<text.*?\>/, "<text>"),
                             "<text>Text</text>");
                 });
@@ -285,6 +302,38 @@
                 test("sets font", function() {
                     text.options.font = "12px sans-serif";
                     ok(text.render().indexOf("font: " + text.options.font) > -1);
+                });
+
+                test("sets rotation transform for 45 degrees", function() {
+                    createText({ rotationAngle: 45 });
+                    ok(text.render().indexOf(
+                        "transform='translate(0.996,7.496) rotate(45,13.5,7)'")
+                        != -1
+                    );
+                });
+
+                test("sets rotation transform for 90 degrees", function() {
+                    createText({ rotationAngle: 90 });
+                    ok(text.render().indexOf(
+                        "transform='translate(-6.5,6.5) rotate(90,13.5,7)'")
+                        != -1
+                    );
+                });
+
+                test("sets rotation transform for -45 degrees", function() {
+                    createText({ rotationAngle: -45 });
+                    ok(text.render().indexOf(
+                        "transform='translate(0.996,7.496) rotate(-45,13.5,7)'")
+                        != -1
+                    );
+                });
+
+                test("sets rotation transform for -90 degrees", function() {
+                    createText({ rotationAngle: -90 });
+                    ok(text.render().indexOf(
+                        "transform='translate(-6.5,6.5) rotate(-90,13.5,7)'")
+                        != -1
+                    );
                 });
 
                 test("sets color", function() {

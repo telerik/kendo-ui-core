@@ -59,12 +59,22 @@
                 });
 
                 test("createText returns VMLText", function() {
-                    var text = view.createText();
+                    var text = view.createText("");
                     ok(text instanceof Chart.VMLText);
                 });
 
                 test("createText sets content", function() {
                     var text = view.createText("Text");
+                    equal(text.content, "Text");
+                });
+
+                test("createText with rotation returns VMLRotatedText", function() {
+                    var text = view.createText("", { rotationAngle: 45 });
+                    ok(text instanceof Chart.VMLRotatedText);
+                });
+
+                test("createText with rotation angle sets content", function() {
+                    var text = view.createText("Text", { rotationAngle: 45 });
                     equal(text.content, "Text");
                 });
 
@@ -230,6 +240,98 @@
                 test("sets color", function() {
                     text.options.color = "#cf0";
                     ok(text.render().indexOf("color: " + text.options.color) > -1);
+                });
+
+                test("renders id", function() {
+                    text.options.id = "id";
+                    ok(text.render().indexOf("id='id'") > -1);
+                });
+
+            })();
+
+            (function() {
+                var text;
+
+                function createRotatedText(options) {
+                    options = $.extend({
+                            rotationAngle: 0
+                        }, options
+                    );
+
+                    options.size = Chart.measureText(
+                        "test",
+                        { font: "12px Verdana" },
+                        options.rotationAngle
+                    );
+
+                    text = new Chart.VMLRotatedText(
+                        "test",
+                        options
+                    );
+                }
+
+                module("VMLRotatedText", {
+                    setup: function() {
+                        createRotatedText({ rotationAngle: 45 });
+                    }
+                });
+
+                test("renders shape with textpath", function() {
+                    ok(text.render().indexOf("<kvml:shape") != -1);
+                    ok(text.render().indexOf("<kvml:textpath") != -1);
+                });
+
+                test("renders path", function() {
+                    ok(text.render().indexOf("<kvml:path textpathok='true'") != -1);
+                });
+
+                test("renders path for 45 degrees rotation", function() {
+                    ok(text.render().indexOf(
+                        "<kvml:path textpathok='true' v='m 4,4 l 24,24' />")
+                        != -1
+                    );
+                });
+
+                test("renders path for 90 degrees rotation", function() {
+                    createRotatedText({ rotationAngle: 90 });
+                    ok(text.render().indexOf(
+                        "<kvml:path textpathok='true' v='m 7,6 l 7,20' />")
+                        != -1
+                    );
+                });
+
+                test("renders path for -45 degrees rotation", function() {
+                    createRotatedText({ rotationAngle: -45 });
+                    ok(text.render().indexOf(
+                        "<kvml:path textpathok='true' v='m 4,24 l 24,4' />")
+                        != -1
+                    );
+                });
+
+                test("renders path for -90 degrees rotation", function() {
+                    createRotatedText({ rotationAngle: -90 });
+                    ok(text.render().indexOf(
+                        "<kvml:path textpathok='true' v='m 7,20 l 7,6' />")
+                        != -1
+                    );
+                });
+
+                test("renders content", function() {
+                    ok(text.render().indexOf("string='test'") != -1);
+                });
+
+                test("sets position on the shape of the text", function() {
+                    ok(text.render().indexOf("position: absolute; top: 0px; left: 0px; width: 1px; height: 1px;") > -1);
+                });
+
+                test("sets font", function() {
+                    text.options.font = "12px sans-serif";
+                    ok(text.render().indexOf("font: " + text.options.font) > -1);
+                });
+
+                test("sets color", function() {
+                    text.options.color = "#cf0";
+                    ok(text.render().indexOf("color='" + text.options.color) > -1);
                 });
 
                 test("renders id", function() {
