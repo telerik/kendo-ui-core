@@ -72,9 +72,9 @@
                     dataSource: data,
                     seriesDefaults: {
                         labels: {
-                            visible: false
+                            visible: true,
+                            position: "insideEnd"
                         },
-
                         type: "column",
                         stack: false
                     },
@@ -95,8 +95,13 @@
                     categoryAxis: {
                         field: "name",
                         labels: {
-                            rotationAngle: -45,
+                            rotationAngle: 90,
                             font: "12px Verdana, sans-serif"
+                        }
+                    },
+                    valueAxis: {
+                        labels: {
+                            rotationAngle: 90
                         }
                     },
                     seriesClick: function(e) {

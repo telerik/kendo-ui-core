@@ -79,6 +79,18 @@
                     equals(view.log.text[0].style.color, "#f00");
                 });
 
+                test("labels have rotation angle", 1, function() {
+                    createCategoryAxis({
+                        labels: {
+                            rotationAngle: 42.5
+                        }
+                    });
+
+                    categoryAxis.getViewElements(view);
+
+                    equals(view.log.text[0].style.rotationAngle, 42.5);
+                });
+
                 test("labels have set background", 1, function() {
                     createCategoryAxis({
                         labels: {
@@ -182,6 +194,18 @@
 
                     same($.map(view.log.text, function(text) { return text.content }),
                          ["Foo", "Bar"]);
+                });
+
+                test("labels have rotation angle", 1, function() {
+                    createCategoryAxis({
+                        labels: {
+                            rotationAngle: 42.5
+                        }
+                    });
+
+                    categoryAxis.getViewElements(view);
+
+                    equals(view.log.text[0].style.rotationAngle, 42.5);
                 });
 
                 test("labels are distributed vertically", function() {
