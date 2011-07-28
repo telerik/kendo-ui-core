@@ -60,6 +60,13 @@ html body .t-button
 	border-radius: 3px;
 }
 
+.t-grid .t-group-indicator .t-button:before
+{
+    content:"" !important;
+    display: none !important;
+    border: 0 !important;
+}
+
 *+html .t-button { display: inline; zoom: 1 }
 * html .t-button { display: inline; zoom: 1 }
 *+html .t-button { overflow: visible; margin-right: 4px}
