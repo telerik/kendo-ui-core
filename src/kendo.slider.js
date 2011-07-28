@@ -18,15 +18,7 @@
      *        $("#slider").kendoSlider();
      *    });
      * </script>
-     * @section The rangeSlider component allows you to intuitively choose a range of two values in a specified range.
-     * <p>
-     * Key features:
-     * </p>
-     * <ul>
-     *    <li>Small/Large steps</li>
-     *    <li>Keyboard navigation</li>
-     *    <li>Horizontal/Vertical Orientation</li>
-     * </ul>
+     * @section The rangeSlider is a slider with two thumbs that allows you to choose a range of values.
      * @exampleTitle Creating a <b>RangeSlider</b> from existing HTML.
      * @example
      * <div id="rangeSlider">
