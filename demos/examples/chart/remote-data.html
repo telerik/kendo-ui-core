@@ -35,28 +35,26 @@
                 <div id="chart" style="width:550px; height:450px;margin: 0 auto;"></div>
             </div>
             <script type="text/javascript">
-                var dataSource = new kendo.data.DataSource({
-                    transport: {
-                        read: {
-                            url: "spain-electricity.json",
-                            dataType: "json"
-                        }
-                    },
-                    sort: {
-                        field: "year",
-                        dir: "asc"
-                    }
-                });
-
                 function createChart() {
                     $("#chart").kendoChart({
                         theme: $(document).data("kendoSkin"),
-                        dataSource: dataSource,
+                        dataSource: {
+                            transport: {
+                                read: {
+                                    url: "spain-electricity.json",
+                                    dataType: "json"
+                                }
+                            },
+                            sort: {
+                                field: "year",
+                                dir: "asc"
+                            }
+                        },
                         title: {
                             text: "Spain electricity production (GWh)"
                         },
                         seriesDefaults: {
-                            type: "bar"
+                            type: "column"
                         },
                         series:
                         [{
@@ -70,13 +68,20 @@
                             name: "Wind"
                         }],
                         categoryAxis: {
-                            field: "year"
+                            field: "year",
+                            labels: {
+                                rotationAngle: -90
+                            }
                         },
                         valueAxis: {
                             labels: {
                                 format: "{0:#,##0}"
                             },
                             majorUnit: 10000
+                        },
+                        tooltip: {
+                            visible: true,
+                            format: "{0:#,##0}"
                         }
                     });
                 }
