@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+    <head>
+        <!-- meta -->
+        <!-- meta -->
+        <title>Splitter with Ajax Loaded Content</title>
+        <!-- css -->
+        <link href="../styles/examples.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.common.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.kendo.css" rel="stylesheet"/>
+        <!-- css -->
+        <!-- script -->
+        <script src="../../../src/jquery.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.fx.js"></script>
+        <script src="../../../src/kendo.draganddrop.js"></script>
+        <script src="../../../src/kendo.resizable.js"></script>
+        <script src="../../../src/kendo.splitter.js"></script>
+        <!-- script -->
+    </head>
+    <body>
+        <!-- nav -->
+        <!-- nav -->
+        <!-- description -->
+        <!-- description -->
+        <div id="example" class="t-content">
+            <div id="splitter">
+                <div></div>
+                <div></div>
+            </div>
+
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    $("#splitter").kendoSplitter({
+                        panes: [
+                            { contentUrl: 'ajax/ajaxContent1.html'},
+                            { contentUrl: 'ajax/ajaxContent2.html'}
+                        ]
+                    });
+                });
+            </script>
+
+        </div>
+        <!-- tools -->
+        <!-- tools -->
+    </body>
+</html>
+

@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+    <head>
+        <!-- meta -->
+        <!-- meta -->
+        <title>Splitter Events</title>
+        <!-- css -->
+        <link href="../styles/examples.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.common.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.kendo.css" rel="stylesheet"/>
+        <!-- css -->
+        <!-- script -->
+        <script src="../../../src/jquery.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.fx.js"></script>
+        <script src="../../../src/kendo.draganddrop.js"></script>
+        <script src="../../../src/kendo.resizable.js"></script>
+        <script src="../../../src/kendo.splitter.js"></script>
+        <script src="../js/kendo.console.js"></script>
+        <!-- script -->
+    </head>
+    <body>
+        <!-- nav -->
+        <!-- nav -->
+        <!-- description -->
+        <div class="description">This example shows how to attach events to a kendoSplitter and how they are fired and triggered.</div>
+        <!-- description -->
+        <div id="example" class="t-content">
+            <div id="splitter" style="height: 400px">
+                <div id="top_pane">
+                    <p>
+                        Top pane
+                    </p>
+                </div>
+                <div id="ajax_pane">
+                    <!-- content loaded with ajax -->
+                </div>
+                <div id="bottom_pane">
+                    <p>
+                    Outer splitter : bottom pane
+                    </p>
+                </div>
+        </div>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                var onResize = function (e) {
+                    kendoConsole.log("Resized :: Splitter #" + this.element[0].id);
+                };
+
+                var onExpand = function (e) {
+                    kendoConsole.log("Expanded :: Pane #" + e.pane.id + " from splitter #" + this.id + "expanded");
+                };
+
+                var onCollapse = function (e) {
+                    kendoConsole.log("Collapsed :: Pane #" + e.pane.id + " from splitter #" + this.id + "collapsed");
+                };
+
+                var onContentLoad = function (e) {
+                    kendoConsole.log("Content loaded in <b>"+ e.pane.id +
+                        "</b> and starts with <b>" + $(e.pane).text().substr(0, 20) + "...</b>");
+                };
+
+                $("#splitter").kendoSplitter({
+                    orientation: "vertical",
+                    panes: [
+                        { collapsible: true, size: "100px" },
+                        { collapsible: false, contentUrl: "ajax/ajaxContent1.html" },
+                        { collapsible: true, size: "20%" }
+                    ],
+                    expand: onExpand,
+                    collapse: onCollapse,
+                    contentLoad: onContentLoad,
+                    resize: onResize
+                });
+            });
+        </script>
+        <br/>
+        <div class="console"></div>
+        <!-- tools -->
+        <!-- tools -->
+    </body>
+</html>
