@@ -15,6 +15,11 @@ html, body
     height: 100%;
     min-height: 100%;
     font: 12px Arial, Helvetica, sans-serif;
+}
+
+body,
+body>div#box
+{
     text-align: center;
 }
 
@@ -236,6 +241,12 @@ body
 #navi .download-beta a
 {
     color: #FFFFFF;
+}
+
+#navi,
+#footer p
+{
+    visibility:hidden;
 }
 
 #categories
