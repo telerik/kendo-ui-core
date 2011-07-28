@@ -231,7 +231,9 @@
             });
 
             (function() {
-                module("Numeric Axis / Configuration");
+                module("Numeric Axis / Configuration", {
+                    setup: moduleSetup
+                });
 
                 test("Major unit is calculated for user set min/max", function() {
                     numericAxis = new NumericAxis(1000, 10000, {
@@ -282,6 +284,13 @@
                 test("Minimum is set to 0 when min = max != 0", function() {
                     numericAxis = new NumericAxis(0, 3, { min: 1, max: 1 });
                     equals(numericAxis.options.min, 0);
+                });
+
+                test("labels have rotation angle", 1, function() {
+                    numericAxis = new Chart.NumericAxis(0, 1, { labels: { rotationAngle: 42.5 } });
+                    numericAxis.reflow(chartBox);
+                    numericAxis.getViewElements(view);
+                    equals(view.log.text[0].style.rotationAngle, 42.5);
                 });
 
                 test("creates labels with format", 1, function() {
