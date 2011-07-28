@@ -1633,11 +1633,11 @@
             if (!that._rangeExists(skip, skip + take)) {
                 clearTimeout(that._timeout);
                 that._timeout = setTimeout(function() {
+                    that._ranges.push(range);
                     that._queueRequest(options, function() {
                     that.transport.read({
                         data: options,
                         success: function (data) {
-                            that._ranges.push(range);
                             that._dequeueRequest();
                             data = that.reader.parse(data);
                             range.data = that.reader.data(data);
