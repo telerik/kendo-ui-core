@@ -1115,7 +1115,8 @@
         },
         _progress: function(toggle) {
             var that = this,
-                element = that.element.is("table") ? that.element : that.element.find(".t-grid-content");
+                scrollWrapper = that.element.find(".t-grid-content"),
+                element = that.element.is("table") ? that.element.parent() : (scrollWrapper.length ? scrollWrapper : that.element);
 
             kendo.ui.progress(element, toggle);
         },
