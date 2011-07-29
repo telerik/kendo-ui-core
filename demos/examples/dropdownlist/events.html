@@ -28,29 +28,31 @@
             <input id="input"/>
 
             <script type="text/javascript">
-                function onOpen() {
-                    kendoConsole.log("event: open");
-                };
+                $(document).ready(function() {
+                    function onOpen() {
+                        kendoConsole.log("event: open");
+                    };
 
-                function onClose() {
-                    kendoConsole.log("event: close");
-                };
+                    function onClose() {
+                        kendoConsole.log("event: close");
+                    };
 
-                function onChange() {
-                    kendoConsole.log("event: change");
-                };
+                    function onChange() {
+                        kendoConsole.log("event: change");
+                    };
 
-                var data = [
-                    {text: "Item1", value:"1"},
-                    {text: "Item2", value:"2"},
-                    {text: "Item3", value:"3"}
-                ];
+                    var data = [
+                        {text: "Item1", value:"1"},
+                        {text: "Item2", value:"2"},
+                        {text: "Item3", value:"3"}
+                    ];
 
-                $("#input").kendoDropDownList({
-                    dataSource: data,
-                    change: onChange,
-                    close: onClose,
-                    open: onOpen
+                    $("#input").kendoDropDownList({
+                        dataSource: data,
+                        change: onChange,
+                        close: onClose,
+                        open: onOpen
+                    });
                 });
             </script>
         </div>
