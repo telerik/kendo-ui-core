@@ -182,10 +182,12 @@
         _mousedown: function(e) {
             var that = this,
                 container = that.element[0],
-                toggleTarget = that.options.toggleTarget,
+                options = that.options,
+                anchor = $(options.anchor)[0],
+                toggleTarget = options.toggleTarget,
                 target = e.target;
 
-            if (!contains(container, target) && !(toggleTarget && contains($(toggleTarget)[0], target))) {
+            if (!contains(container, target) && !contains(anchor, target) && !(toggleTarget && contains($(toggleTarget)[0], target))) {
                 that.close();
             }
         },
