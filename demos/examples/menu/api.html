@@ -73,7 +73,7 @@
             </ul>
             <script type="text/javascript">
                 var getItem = function (target) {
-                    var itemIndexes = $(target).prev().val().split(/[.,]/),
+                    var itemIndexes = target.val().split(/[.,]/),
                         rootItem = menu.element.children("li").eq(itemIndexes[0]);
 
                     return itemIndexes.length > 1 ?
@@ -82,13 +82,13 @@
                 };
 
                 $(".toggleItem").click( function (e) {
-                    var item = getItem(e.target);
+                    var item = getItem($("#toggleIndex"));
 
                     menu.enable(item, item.hasClass("t-state-disabled"));
                 });
 
                 $(".triggerItem").click( function (e) {
-                    var item = getItem(e.target);
+                    var item = getItem($("#triggerIndex"));
 
                     if (item.hasClass("t-state-active"))
                         menu.close(item);
@@ -97,25 +97,25 @@
                 });
 
                 $(".removeItem").click( function (e) {
-                    menu.remove(getItem(e.target));
+                    menu.remove(getItem($("#removeIndex")));
                 });
 
                 $(".appendItem").click( function (e) {
                     menu.append({
-                            text: $(e.target).prev().prev().val()
-                        }, getItem(e.target));
+                            text: $("#appendText").val()
+                        }, getItem($("#appendIndex")));
                 });
 
                 $(".beforeItem").click( function (e) {
                     menu.insertBefore({
-                            text: $(e.target).prev().prev().val()
-                        }, getItem(e.target));
+                            text: $("#beforeText").val()
+                        }, getItem($("#beforeIndex")));
                 });
 
                 $(".afterItem").click( function (e) {
                     menu.insertAfter({
-                            text: $(e.target).prev().prev().val()
-                        }, getItem(e.target));
+                            text: $("#afterText").val()
+                        }, getItem($("#afterIndex")));
                 });
 
                 var menu = $("#Menu1").kendoMenu().css({ marginRight: "220px" }).data("kendoMenu");
@@ -125,22 +125,22 @@
                 <span class="configTitle">API Functions</span>
                 <ul class="options">
                     <li>
-                        <input type="text" /> <button class="toggleItem t-button">Enable/Disable</button>
+                        <input type="text" id="toggleIndex"/> <button class="toggleItem t-button">Enable/Disable</button>
                     </li>
                     <li>
-                        <input type="text" /> <button class="triggerItem t-button">Open/Close</button>
+                        <input type="text" id="triggerIndex"/> <button class="triggerItem t-button">Open/Close</button>
                     </li>
                     <li>
-                        <input type="text" /> <button class="removeItem t-button">Remove</button>
+                        <input type="text" id="removeIndex"/> <button class="removeItem t-button">Remove</button>
                     </li>
                     <li>
-                        <input type="text" value="Item" /> <input type="text" value="0.0" /> <button class="appendItem t-button">Append</button>
+                        <input type="text" value="Item" id="appendText"/> <input type="text" value="0.0" id="appendIndex"/> <button class="appendItem t-button">Append</button>
                     </li>
                     <li>
-                        <input type="text" value="Item" /> <input type="text" value="0" /> <button class="beforeItem t-button">Before</button>
+                        <input type="text" value="Item" id="beforeText"/> <input type="text" value="0" id="beforeIndex"/> <button class="beforeItem t-button">Before</button>
                     </li>
                     <li>
-                        <input type="text" value="Item" /> <input type="text" value="0" /> <button class="afterItem t-button">After</button>
+                        <input type="text" value="Item" id="afterText"/> <input type="text" value="0" id="afterIndex"/> <button class="afterItem t-button">After</button>
                     </li>
                 </ul>
             </div>
