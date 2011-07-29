@@ -24,7 +24,7 @@
         <div class="description">API</div>
         <!-- description -->
         <div id="example" class="t-content">
-            <ul id="Menu1">
+            <ul id="menu">
                 <li>
                     First Item
                     <ul>
@@ -81,44 +81,46 @@
                                 rootItem;
                 };
 
-                $(".toggleItem").click( function (e) {
-                    var item = getItem($("#toggleIndex"));
+                $(document).ready(function() {
+                    $(".toggleItem").click( function (e) {
+                        var item = getItem($("#toggleIndex"));
 
-                    menu.enable(item, item.hasClass("t-state-disabled"));
+                        menu.enable(item, item.hasClass("t-state-disabled"));
+                    });
+
+                    $(".triggerItem").click( function (e) {
+                        var item = getItem($("#triggerIndex"));
+
+                        if (item.hasClass("t-state-active"))
+                            menu.close(item);
+                        else
+                            menu.open(item);
+                    });
+
+                    $(".removeItem").click( function (e) {
+                        menu.remove(getItem($("#removeIndex")));
+                    });
+
+                    $(".appendItem").click( function (e) {
+                        menu.append({
+                                text: $("#appendText").val()
+                            }, getItem($("#appendIndex")));
+                    });
+
+                    $(".beforeItem").click( function (e) {
+                        menu.insertBefore({
+                                text: $("#beforeText").val()
+                            }, getItem($("#beforeIndex")));
+                    });
+
+                    $(".afterItem").click( function (e) {
+                        menu.insertAfter({
+                                text: $("#afterText").val()
+                            }, getItem($("#afterIndex")));
+                    });
+
+                    var menu = $("#menu").kendoMenu().css({ marginRight: "220px" }).data("kendoMenu");
                 });
-
-                $(".triggerItem").click( function (e) {
-                    var item = getItem($("#triggerIndex"));
-
-                    if (item.hasClass("t-state-active"))
-                        menu.close(item);
-                    else
-                        menu.open(item);
-                });
-
-                $(".removeItem").click( function (e) {
-                    menu.remove(getItem($("#removeIndex")));
-                });
-
-                $(".appendItem").click( function (e) {
-                    menu.append({
-                            text: $("#appendText").val()
-                        }, getItem($("#appendIndex")));
-                });
-
-                $(".beforeItem").click( function (e) {
-                    menu.insertBefore({
-                            text: $("#beforeText").val()
-                        }, getItem($("#beforeIndex")));
-                });
-
-                $(".afterItem").click( function (e) {
-                    menu.insertAfter({
-                            text: $("#afterText").val()
-                        }, getItem($("#afterIndex")));
-                });
-
-                var menu = $("#Menu1").kendoMenu().css({ marginRight: "220px" }).data("kendoMenu");
             </script>
             <div class="configuration">
                 <span class="configHead">Configuration</span>

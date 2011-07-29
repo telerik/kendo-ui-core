@@ -29,7 +29,6 @@
            <input id="products" />
 
             <script type="text/javascript">
-
                 var data = [
                     {text: "12 Angry Men", value:"1"},
                     {text: "Il buono, il brutto, il cattivo.", value:"2"},
@@ -53,49 +52,48 @@
                     });
 
                     var combobox = $("#products").data("kendoComboBox");
-                });
 
-                $("#enable").click(function() {
-                    combobox.enable();
-                });
+                    $("#enable").click(function() {
+                        combobox.enable();
+                    });
 
-                $("#disable").click(function() {
-                    combobox.enable(false);
-                });
+                    $("#disable").click(function() {
+                        combobox.enable(false);
+                    });
 
-                $("#open").click(function() {
-                    combobox.open();
-                });
+                    $("#open").click(function() {
+                        combobox.open();
+                    });
 
-                $("#close").click(function() {
-                    combobox.close();
-                });
+                    $("#close").click(function() {
+                        combobox.close();
+                    });
 
-                $("#setValue").click(function() {
-                    combobox.value($("#value").val());
-                });
+                    $("#setValue").click(function() {
+                        combobox.value($("#value").val());
+                    });
 
-                $("#getValue").click(function() {
-                    alert(combobox.value());
-                });
+                    $("#getValue").click(function() {
+                        alert(combobox.value());
+                    });
 
-                $("#getText").click(function() {
-                    alert(combobox.text());
-                });
+                    $("#getText").click(function() {
+                        alert(combobox.text());
+                    });
 
-                $("#select").click(function() {
-                    var index = parseInt($("#index").val());
-                    combobox.select(index);
-                });
+                    $("#select").click(function() {
+                        var index = parseInt($("#index").val());
+                        combobox.select(index);
+                    });
 
-                $("#find").click(function() {
-                    combobox.search($("#word").val());
+                    $("#find").click(function() {
+                        combobox.search($("#word").val());
+                    });
                 });
 
                 function filterTypeOnChanged() {
                     combobox.options.filter = $("#filter").val();
                 }
-
            </script>
             <div class="configuration" style="width: 210px">
                 <span class="configHead">Configuration</span>
