@@ -211,13 +211,21 @@ function importComponentHelp(exampleHTML, component) {
 
     // could be improved if example has appropriate markers, or better yet, if loaded through AJAX (and not importing at all)
     if (description) {
+        description = fixNewLines(description);
         exampleHTML = exampleHTML.replace(regionRegex.description, "<!-- description -->" + description + "<!-- description -->");
     }
+
+    tabs = fixNewLines(tabs);
+    data = fixNewLines(data);
 
     exampleHTML = exampleHTML.replace(regionRegex.helpTabs, "<!-- help-tabs -->" + tabs + "<!-- help-tabs -->");
     exampleHTML = exampleHTML.replace(regionRegex.helpData, "<!-- help-data -->" + data + "<!-- help-data -->");
 
     return exampleHTML;
+}
+
+function fixNewLines(text) {
+    return text.replace(/\s+$/mg, "").replace(/\n/mg, "\r\n")
 }
 
 function processExample(file) {
