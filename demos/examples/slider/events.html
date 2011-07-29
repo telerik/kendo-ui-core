@@ -31,30 +31,33 @@
                 <input type="range" />
             </div>
             <script type="text/javascript">
-                var sliderSlide = function (e) {
-                    kendoConsole.log("Change :: new value is: " + e.value);
-                };
 
-                var sliderChange = function (e) {
-                    kendoConsole.log("Slide :: new slide value is: " + e.value);
-                };
+                $(document).ready(function() {
+                    function sliderOnSlide (e) {
+                        kendoConsole.log("Change :: new value is: " + e.value);
+                    };
 
-                var rangeSliderSlide = function (e) {
-                    kendoConsole.log("Slide :: new slide value are: " + e.values.toString().replace(",", " - "));
-                };
+                    function sliderOnChange (e) {
+                        kendoConsole.log("Slide :: new slide value is: " + e.value);
+                    };
 
-                var rangeSliderChange = function (e) {
-                    kendoConsole.log("Change :: new values are: " + e.values.toString().replace(",", " - "));
-                };
+                    function rangeSliderOnSlide (e) {
+                        kendoConsole.log("Slide :: new slide value are: " + e.values.toString().replace(",", " - "));
+                    };
 
-                $("#slider").kendoSlider({
-                    change: sliderChange,
-                    slide: sliderSlide
-                });
+                    function rangeSliderOnChange (e) {
+                        kendoConsole.log("Change :: new values are: " + e.values.toString().replace(",", " - "));
+                    };
 
-                $("#rangeSlider").kendoRangeSlider({
-                    change: rangeSliderChange,
-                    slide: rangeSliderSlide
+                    $("#slider").kendoSlider({
+                        change: sliderOnChange,
+                        slide: sliderOnSlide
+                    });
+
+                    $("#rangeSlider").kendoRangeSlider({
+                        change: rangeSliderOnChange,
+                        slide: rangeSliderOnSlide
+                    });
                 });
 
             </script>
