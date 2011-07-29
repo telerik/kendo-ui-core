@@ -32,28 +32,28 @@
             </div>
             <script type="text/javascript">
 
+                function sliderOnSlide (e) {
+                    kendoConsole.log("Change :: new value is: " + e.value);
+                };
+
+                function sliderOnChange (e) {
+                    kendoConsole.log("Slide :: new slide value is: " + e.value);
+                };
+
+                function rangeSliderOnSlide (e) {
+                    kendoConsole.log("Slide :: new slide value are: " + e.values.toString().replace(",", " - "));
+                };
+
+                function rangeSliderOnChange (e) {
+                    kendoConsole.log("Change :: new values are: " + e.values.toString().replace(",", " - "));
+                };
+
+                $("#slider").kendoSlider({
+                    change: sliderOnChange,
+                    slide: sliderOnSlide
+                });
+
                 $(document).ready(function() {
-                    function sliderOnSlide (e) {
-                        kendoConsole.log("Change :: new value is: " + e.value);
-                    };
-
-                    function sliderOnChange (e) {
-                        kendoConsole.log("Slide :: new slide value is: " + e.value);
-                    };
-
-                    function rangeSliderOnSlide (e) {
-                        kendoConsole.log("Slide :: new slide value are: " + e.values.toString().replace(",", " - "));
-                    };
-
-                    function rangeSliderOnChange (e) {
-                        kendoConsole.log("Change :: new values are: " + e.values.toString().replace(",", " - "));
-                    };
-
-                    $("#slider").kendoSlider({
-                        change: sliderOnChange,
-                        slide: sliderOnSlide
-                    });
-
                     $("#rangeSlider").kendoRangeSlider({
                         change: rangeSliderOnChange,
                         slide: rangeSliderOnSlide
