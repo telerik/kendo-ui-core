@@ -331,12 +331,12 @@
                 equal(dataSource.view()[19].OrderID, 28);
             });
 
-            test("range fetches range accross multiple overlapping not prefeched ranges transport is called one times", function() {
+            test("range fetches range accross multiple overlapping not prefeched ranges transport is called two times", function() {
                 var called = 0, dataSource = remoteDataSource(function () { called ++;});
 
                 dataSource.range(9, 20);
 
-                equal(called, 1);
+                equal(called, 2);
                 equal(dataSource.view().length, 20);
                 equal(dataSource.view()[0].OrderID, 9);
                 equal(dataSource.view()[19].OrderID, 28);
@@ -368,6 +368,7 @@
             });
             test("range page given number of items from index", function() {
                 var dataSource = new DataSource({
+                    pageSize: 3,
                     data: [{age: 1}, {age: 2},{age: 3}, {age: 4},{age: 5}, {age: 6},{age: 7}, {age: 8}]
                 });
                 dataSource.read();
@@ -383,6 +384,7 @@
 
             test("range if index undefined set to zero", function() {
                 var dataSource = new DataSource({
+                    pageSize: 3,
                     data: [{age: 1}, {age: 2},{age: 3}, {age: 4},{age: 5}, {age: 6},{age: 7}, {age: 8}]
                 });
                 dataSource.read();
@@ -408,6 +410,17 @@
                 equal(result.length, 8);
             });
 
+            test("range fetches range accross pages where last page is partial", function() {
+                var dataSource = new DataSource({
+                    pageSize: 3,
+                    data: [{age: 1}, {age: 2},{age: 3}, {age: 4},{age: 5}]
+                });
+                dataSource.read();
+                dataSource.range(3, 3);
+
+                var result = dataSource.view();
+                equal(result.length, 2);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
