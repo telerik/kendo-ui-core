@@ -31,36 +31,49 @@
                     Drop here
                 </div>
             </div>
-            <script>
+            <script type="text/javascript">
+                function draggableOnDragStart(e) {
+                    kendoConsole.log("dragstart");
+                }
+
+                function draggableOnDrag(e) {
+                    kendoConsole.log("drag");
+                }
+
+                function draggableOnDragEnd(e) {
+                    kendoConsole.log("dragend");
+                }
+
+                function droptargetOnDragEnter(e) {
+                    $("#droptarget").addClass("t-state-hover");
+                    kendoConsole.log("dragenter");
+                }
+
+                function droptargetOnDragLeave(e) {
+                    $("#droptarget").removeClass("t-state-hover");
+                    kendoConsole.log("dragleave");
+                }
+
+                function droptargetOnDrop(e) {
+                    e.draggable.dropped = true;
+                    $("#droptarget").removeClass("t-state-hover");
+                    kendoConsole.log("drop");
+                }
+
                 $(document).ready(function() {
                     $("#draggable").kendoDraggable({
                         hint: function() {
                             return $("#draggable").clone();
                         },
-                        dragstart: function() {
-                            kendoConsole.log("dragstart");
-                        },
-                        drag: function() {
-                            kendoConsole.log("drag");
-                        },
-                        dragend: function() {
-                            kendoConsole.log("dragend");
-                        }
+                        dragstart: draggableOnDragStart,
+                        drag: draggableOnDrag,
+                        dragend: draggableOnDragEnd
                     });
+
                     $("#droptarget").kendoDropTarget({
-                        dragenter: function() {
-                            $("#droptarget").addClass("t-state-hover");
-                            kendoConsole.log("dragenter");
-                        },
-                        dragleave: function() {
-                            $("#droptarget").removeClass("t-state-hover");
-                            kendoConsole.log("dragleave");
-                        },
-                        drop: function(e) {
-                            e.draggable.dropped = true;
-                            $("#droptarget").removeClass("t-state-hover");
-                            kendoConsole.log("drop");
-                        }
+                        dragenter: draggableOnDragEnter,
+                        dragleave: draggableOnDragLeave,
+                        drop: draggableOnDrop
                     });
                 });
             </script>
