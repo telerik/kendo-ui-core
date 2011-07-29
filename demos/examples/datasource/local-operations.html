@@ -53,41 +53,47 @@
             </script>
 
             <script>
-                // create a template using the above definition
-                var template = kendo.template($("#template").html());
+                $(document).ready(function() {
+                    // create a template using the above definition
+                    var template = kendo.template($("#template").html());
 
-                var dataSource = new kendo.data.DataSource({
-                    pageSize: 10,
-                    data: createRandomData(500),
-                    change: function() { // subscribe to the CHANGE event of the data source
-                        // update the max attribute of the "page" input
-                        $("#page").attr("max", this.totalPages());
-
-                        $("#people tbody").html(kendo.render(template, this.view()));
-                    }
-                });
-
-                // read the data
-                dataSource.read();
-
-                $("#apply").click(function() {
-                    var page = parseInt($("#page").val(), 10);
-
-                    // validate the page - it must be a number within the allowed range
-                    if (isNaN(page) || page < 1 || page > dataSource.totalPages()) {
-                        alert(kendo.format("Page must be a number between 1 and {0}", dataSource.totalPages()));
-                        return;
-                    }
-
-                    // query the remote service
-                    dataSource.query({
-                        page: page,
+                    var dataSource = new kendo.data.DataSource({
                         pageSize: 10,
-                        sort: {
-                            field: $("#order").val(),
-                            dir:$("#dir").val()
+                        data: createRandomData(500),
+                        change: function() { // subscribe to the CHANGE event of the data source
+                            // update the max attribute of the "page" input
+                            $("#page").attr("max", this.totalPages());
+
+                            $("#people tbody").html(kendo.render(template, this.view()));
                         }
                     });
+
+                    // read the data
+                    dataSource.read();
+
+                    $("#apply").click(function() {
+                        var page = parseInt($("#page").val(), 10);
+
+                        // validate the page - it must be a number within the allowed range
+                        if (isNaN(page) || page < 1 || page > dataSource.totalPages()) {
+                            alert(kendo.format("Page must be a number between 1 and {0}", dataSource.totalPages()));
+                            return;
+                        }
+
+                        // query the remote service
+                        dataSource.query({
+                            page: page,
+                            pageSize: 10,
+                            sort: {
+                                field: $("#order").val(),
+                                dir:$("#dir").val()
+                            }
+                        });
+                    });
+
+                    //initialize dropdownlist components
+                    $("#order").kendoDropDownList();
+                    $("#dir").kendoDropDownList();
                 });
             </script>
 
@@ -100,7 +106,7 @@
                     </li>
                     <li>
                         <label for="order">Order by:</label>
-                        <select id="order">
+                        <select id="order" style="width:115px;float:right;">
                             <option value="Id">Id</option>
                             <option value="FirstName">First Name</option>
                             <option value="LastName">Last Name</option>
@@ -109,7 +115,7 @@
                     </li>
                     <li>
                         <label for="dir">Direction:</label>
-                        <select id="dir">
+                        <select id="dir" style="width:115px;float:right;">
                             <option value="asc">Ascending</option>
                             <option value="desc">Descending</option>
                         </select>
