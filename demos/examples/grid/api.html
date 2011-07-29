@@ -66,7 +66,7 @@
 
                     $(".selectRow").click(function(e) {
                         var grid = $("#grid").data("kendoGrid"),
-                            rowIndex = $(e.target).prev().val(),
+                            rowIndex = $("#selectRow").val(),
                             row = grid.tbody.find(">tr:not(.t-grouping-row)").eq(rowIndex);
 
                         grid.select(row);
@@ -74,7 +74,7 @@
 
                     $(".toggleGroup").click(function(e) {
                         var grid = $("#grid").data("kendoGrid"),
-                            rowIndex = $(e.target).prev().val(),
+                            rowIndex = $("#groupRow").val(),
                             row = grid.tbody.find(">tr.t-grouping-row").eq(rowIndex);
 
                         if(row.has(".t-collapse").length) {
@@ -89,9 +89,9 @@
             <div class="configuration" style="width:200px">
                 <span class="configHead">Configuration</span>
                 <span class="configTitle">API Functions</span>
-                <input type="number" value="0" /><button class="selectRow t-button">Select row</button>
+                <input type="number" value="0" id="selectRow"/><button class="selectRow t-button">Select row</button>
                 <button class="clearSelection t-button">Clear selected rows</button>
-                <input type="number" value="0" /><button class="toggleGroup t-button">Collapse/Expand group</button>
+                <input type="number" value="0" id="groupRow"/><button class="toggleGroup t-button">Collapse/Expand group</button>
             </div>
 
         </div>
