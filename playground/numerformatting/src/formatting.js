@@ -48,6 +48,23 @@ window.numberFormat = function(number, format) {
         return number.toString();
     }
 
+    //exponential -- start
+    var exponent = expRegExp.exec(format);
+    if (exponent) {
+        exponent = exponent.join("");
+        var digits = digitsRegExp.exec(exponent);
+        if(digits) {
+            digits = Number(digits[0]);
+        }
+
+        if (digits !== null) {
+            return number.toExponential(digits);
+        } else {
+            return number.toExponential();
+        }
+    }
+    //exponential -- end
+
     format = format.split(";");
     if (number < 0 && format[1]) {
         number = Math.abs(number);
@@ -88,37 +105,6 @@ window.numberFormat = function(number, format) {
         number *= 100;
     }
     number = number.toString().split(POINT);
-
-    //exponential -- start
-    if (expRegExp.test(format)) {
-        var digits = 0;
-        if (number[0]) {
-            digits = number[0].length - 1;
-
-            if (number[0].charAt(0) === "0" && number[1]) {
-                number[0] = number[1].replace(customFormatRegExp, function(match) {
-                    digits = -1 * (match.length + 1);
-                    return EMPTY;
-                });
-                number[1] = "";
-            }
-
-            number[1] = number[0].slice(1) + (number[1] || "");
-            number[0] = number[0].slice(0, 1);
-        }
-
-        format = format.replace(expRegExp, function(match) {
-            var zeros = number[1].length;
-            if (digitsRegExp.test(match)) {
-                zeros = parseInt(digitsRegExp.exec(match)[0]);
-            }
-
-            return "0" + (digits === 0 ? "" : ".") + zeroPad(zeros);
-        });
-
-        format += "e" + (digits >= 0 ? "+" : "") + digits
-    }
-    //exponential -- end
 
     format = format.split(POINT);
 
