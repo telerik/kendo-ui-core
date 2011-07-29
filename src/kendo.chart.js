@@ -974,7 +974,7 @@
 
             if (chartElement) {
                 if (chartElement.getSeriesPoint && metadata) {
-                    point = chartElement.getSeriesPoint(x, y, metadata.seriesIx);
+                    point = chartElement.getSeriesPoint(coords.x, coords.y, metadata.seriesIx);
                 } else {
                     point = chartElement;
                 }
