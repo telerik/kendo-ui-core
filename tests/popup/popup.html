@@ -33,8 +33,9 @@
             });
 
             test("mousedown outside the element should close it", function(){
-                 div.kendoPopup( {
-                     close: function() {
+                div.kendoPopup( {
+                    anchor: anchor,
+                    close: function() {
                         ok(true);
                         start();
                     }
