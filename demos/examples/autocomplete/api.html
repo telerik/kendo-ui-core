@@ -30,35 +30,35 @@
 
             <script type="text/javascript">
 
-                $(document).ready(function() {
-                    var data = [
-                        "12 Angry Men",
-                        "Il buono, il brutto, il cattivo.",
-                        "Inception",
-                        "One Flew Over the Cuckoo's Nest",
-                        "Pulp Fiction",
-                        "Schindler's List",
-                        "The Dark Knight",
-                        "The Godfather",
-                        "The Godfather: Part II",
-                        "The Shawshank Redemption"
-                    ];
+                var data = [
+                    "12 Angry Men",
+                    "Il buono, il brutto, il cattivo.",
+                    "Inception",
+                    "One Flew Over the Cuckoo's Nest",
+                    "Pulp Fiction",
+                    "Schindler's List",
+                    "The Dark Knight",
+                    "The Godfather",
+                    "The Godfather: Part II",
+                    "The Shawshank Redemption"
+                ];
 
+                $(document).ready(function() {
                     $("#products").kendoAutoComplete(data);
 
                     var autocomplete = $("#products").data("kendoAutoComplete");
+                });
 
-                    $("#set").click(function() {
-                        autocomplete.value($("#value").val());
-                    });
+                $("#set").click(function() {
+                    autocomplete.value($("#value").val());
+                });
 
-                    $("#get").click(function() {
-                        alert(autocomplete.value());
-                    });
+                $("#get").click(function() {
+                    alert(autocomplete.value());
+                });
 
-                    $("#search").click(function() {
-                        autocomplete.search($("#word").val());
-                    });
+                $("#search").click(function() {
+                    autocomplete.search($("#word").val());
                 });
 
            </script>
