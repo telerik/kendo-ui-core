@@ -99,19 +99,6 @@
          * <p><em>
          * You have to handle the uploaded files both in the save handler and in the form submit action.
          * </em></p>
-         * @option {Object} [localization]
-         * Configures the upload localizable strings.
-         * <ul>
-         *     <li>select ("Select...")</li>
-         *     <li>cancel ("Cancel")</li>
-         *     <li>retry ("Retry")</li>
-         *     <li>remove ("Remove")</li>
-         *     <li>uploadSelectedFiles ("Upload files")</li>
-         *     <li>dropFilesHere ("drop files here to upload")</li>
-         *     <li>statusUploading ("uploading")</li>
-         *     <li>statusUploaded ("uploaded")</li>
-         *     <li>statusFailed ("failed")</li>
-         * </ul>
          */
         init: function(element, options) {
             var that = this;
