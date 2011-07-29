@@ -29,72 +29,73 @@
            <input id="products" />
 
             <script type="text/javascript">
-                $(document).ready(function() {
-                    var data = [
-                        {text: "12 Angry Men", value:"1"},
-                        {text: "Il buono, il brutto, il cattivo.", value:"2"},
-                        {text: "Inception", value:"3"},
-                        {text: "One Flew Over the Cuckoo's Nest", value:"4"},
-                        {text: "Pulp Fiction", value:"5"},
-                        {text: "Schindler's List", value:"6"},
-                        {text: "The Dark Knight", value:"7"},
-                        {text: "The Godfather", value:"8"},
-                        {text: "The Godfather: Part II", value:"9"},
-                        {text: "The Shawshank Redemption", value:"10"},
-                    ];
 
+                var data = [
+                    {text: "12 Angry Men", value:"1"},
+                    {text: "Il buono, il brutto, il cattivo.", value:"2"},
+                    {text: "Inception", value:"3"},
+                    {text: "One Flew Over the Cuckoo's Nest", value:"4"},
+                    {text: "Pulp Fiction", value:"5"},
+                    {text: "Schindler's List", value:"6"},
+                    {text: "The Dark Knight", value:"7"},
+                    {text: "The Godfather", value:"8"},
+                    {text: "The Godfather: Part II", value:"9"},
+                    {text: "The Shawshank Redemption", value:"10"},
+                ];
+
+                $(document).ready(function() {
                     $("#products").kendoComboBox(data)
                                   .closest(".t-widget")
                                   .attr("id", "products_wrapper");
 
-
                     $("#filter").kendoDropDownList({
-                        change: filterTypeChanged
+                        change: filterTypeOnChanged
                     });
 
                     var combobox = $("#products").data("kendoComboBox");
-
-                    $("#enable").click(function() {
-                        combobox.enable();
-                    });
-
-                    $("#disable").click(function() {
-                        combobox.enable(false);
-                    });
-
-                    $("#open").click(function() {
-                        combobox.open();
-                    });
-
-                    $("#close").click(function() {
-                        combobox.close();
-                    });
-
-                    $("#setValue").click(function() {
-                        combobox.value($("#value").val());
-                    });
-
-                    $("#getValue").click(function() {
-                        alert(combobox.value());
-                    });
-
-                    $("#getText").click(function() {
-                        alert(combobox.text());
-                    });
-
-                    $("#select").click(function() {
-                        var index = parseInt($("#index").val());
-                        combobox.select(index);
-                    });
-
-                    $("#find").click(function() {
-                        combobox.search($("#word").val());
-                    });
-
-                    function filterTypeChanged() {
-                        combobox.options.filter = $("#filter").val();
-                    }
                 });
+
+                $("#enable").click(function() {
+                    combobox.enable();
+                });
+
+                $("#disable").click(function() {
+                    combobox.enable(false);
+                });
+
+                $("#open").click(function() {
+                    combobox.open();
+                });
+
+                $("#close").click(function() {
+                    combobox.close();
+                });
+
+                $("#setValue").click(function() {
+                    combobox.value($("#value").val());
+                });
+
+                $("#getValue").click(function() {
+                    alert(combobox.value());
+                });
+
+                $("#getText").click(function() {
+                    alert(combobox.text());
+                });
+
+                $("#select").click(function() {
+                    var index = parseInt($("#index").val());
+                    combobox.select(index);
+                });
+
+                $("#find").click(function() {
+                    combobox.search($("#word").val());
+                });
+
+                function filterTypeOnChanged() {
+                    combobox.options.filter = $("#filter").val();
+                }
+
            </script>
             <div class="configuration" style="width: 210px">
                 <span class="configHead">Configuration</span>
