@@ -74,55 +74,54 @@
             </div>
 
             <script type="text/javascript">
-
                 $(document).ready(function() {
                     var slider = $("#slider").kendoSlider().data("kendoSlider");
                     var rangeSlider = $("#rangeSlider").kendoRangeSlider().data("kendoRangeSlider");
-                });
 
-                $("#setSliderValue").click(function() {
-                    var value = $("#newValue").val();
-                    slider.value(value);
-                });
+                    $("#setSliderValue").click(function() {
+                        var value = $("#newValue").val();
+                        slider.value(value);
+                    });
 
-                $("#getSliderValue").click(function() {
-                    alert(slider.value());
-                });
+                    $("#getSliderValue").click(function() {
+                        alert(slider.value());
+                    });
 
-                $("#enableSlider").click(function() {
-                    slider.enable();
-                });
+                    $("#enableSlider").click(function() {
+                        slider.enable();
+                    });
 
-                $("#disableSlider").click(function() {
-                    slider.disable();
-                });
+                    $("#disableSlider").click(function() {
+                        slider.disable();
+                    });
 
-                function getValues() {
-                    return rangeSlider.values();
-                }
+                    function getValues() {
+                        return rangeSlider.values();
+                    }
 
-                $("#setStartValue").click(function() {
-                    var startValue = $("#startValue").val();
-                    var endValue = getValues()[1];
-                    rangeSlider.values(startValue, endValue);
-                });
+                    $("#setStartValue").click(function() {
+                        var startValue = $("#startValue").val();
+                        var endValue = getValues()[1];
+                        rangeSlider.values(startValue, endValue);
+                    });
 
-                $("#setEndValue").click(function() {
-                    var startValue = getValues()[0];
-                    var endValue = $("#endValue").val();
-                    rangeSlider.values(startValue, endValue);
-                });
+                    $("#setEndValue").click(function() {
+                        var startValue = getValues()[0];
+                        var endValue = $("#endValue").val();
+                        rangeSlider.values(startValue, endValue);
+                    });
 
-                $("#getRangeSliderValue").click(function() {
-                    alert(getValues());
-                });
+                    $("#getRangeSliderValue").click(function() {
+                        alert(getValues());
+                    });
 
-                $("#enableRangeSlider").click(function() {
-                    rangeSlider.enable();
-                });
+                    $("#enableRangeSlider").click(function() {
+                        rangeSlider.enable();
+                    });
 
-                $("#disableRangeSlider").click(function() {
-                    rangeSlider.disable();
+                    $("#disableRangeSlider").click(function() {
+                        rangeSlider.disable();
+                    });
                 });
             </script>
         </div>

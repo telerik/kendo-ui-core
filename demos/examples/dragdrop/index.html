@@ -29,26 +29,35 @@
                 Drop here
             </div>
             <script>
+                function draggableOnDragStart(e) {
+                    $("#droptarget").text("Drop here");
+                }
+
+                function droptargetOnDragEnter(e) {
+                    $("#droptarget").addClass("t-state-hover").text("Draggable entered the drop target");
+                }
+
+                function droptargetOnDragLeave(e) {
+                    $("#droptarget").removeClass("t-state-hover").text("Drop here");
+                }
+
+                function droptargetOnDrop(e) {
+                    e.draggable.dropped = true; // tell the draggable that it was successfully dragged
+                    $("#droptarget").removeClass("t-state-hover").text("Dropped!");
+                }
+
                 $(document).ready(function() {
                     $("#draggable").kendoDraggable({
                         hint: function() {
                             return $("#draggable").clone();
                         },
-                        dragstart: function() {
-                            $("#droptarget").text("Drop here");
-                        }
+                        dragstart: draggableOnDragStart
                     });
+
                     $("#droptarget").kendoDropTarget({
-                        dragenter: function() {
-                            $("#droptarget").addClass("t-state-hover").text("Draggable entered the drop target");
-                        },
-                        dragleave: function() {
-                            $("#droptarget").removeClass("t-state-hover").text("Drop here");
-                        },
-                        drop: function(e) {
-                            e.draggable.dropped = true; // tell the draggable that it was successfully dragged
-                            $("#droptarget").removeClass("t-state-hover").text("Dropped!");
-                        }
+                        dragenter: droptargetOnDragEnter,
+                        dragleave: droptargetOnDragLeave,
+                        drop: droptargetOnDrop
                     });
                 });
             </script>
