@@ -110,23 +110,23 @@
                     });
 
                     initMenu();
+
+                    var getEffects = function () {
+                        return (($("#expand")[0].checked ? "expandVertical " : "") +
+                                ($("#slide")[0].checked ? "slideIn:down " : "") +
+                                ($("#opacity")[0].checked ? "fadeIn" : "")) || false;
+                    };
+
+                    var initMenu = function () {
+                        $("#menu").kendoMenu({
+                            animation: { open: { effects: getEffects() } },
+                            hoverDelay: $("#delay")[0].value
+                        })
+                        .css({
+                            marginRight: "220px"
+                        });
+                    };
                 });
-
-                var getEffects = function () {
-                    return (($("#expand")[0].checked ? "expandVertical " : "") +
-                            ($("#slide")[0].checked ? "slideIn:down " : "") +
-                            ($("#opacity")[0].checked ? "fadeIn" : "")) || false;
-                };
-
-                var initMenu = function () {
-                    $("#menu").kendoMenu({
-                        animation: { open: { effects: getEffects() } },
-                        hoverDelay: $("#delay")[0].value
-                    })
-                    .css({
-                        marginRight: "220px"
-                    });
-                };
             </script>
         </div>
         <!-- tools -->

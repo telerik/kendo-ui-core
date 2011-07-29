@@ -74,19 +74,19 @@
             </ul>
         </div>
         <script type="text/javascript">
-            function onOpen(e) {
-                kendoConsole.log("Opened: " + $(e.item).find("> .t-link").text());
-            };
-
-            function onClose(e) {
-                kendoConsole.log("Closed: " + $(e.item).find("> .t-link").text());
-            };
-
-            function onSelect(e) {
-                kendoConsole.log("Selected: " + $(e.item).find("> .t-link").text());
-            };
-
             $(document).ready(function() {
+                function onOpen(e) {
+                    kendoConsole.log("Opened: " + $(e.item).find("> .t-link").text());
+                };
+
+                function onClose(e) {
+                    kendoConsole.log("Closed: " + $(e.item).find("> .t-link").text());
+                };
+
+                function onSelect(e) {
+                    kendoConsole.log("Selected: " + $(e.item).find("> .t-link").text());
+                };
+
                 $("#menu").kendoMenu({
                     select: onSelect,
                     open: onOpen,

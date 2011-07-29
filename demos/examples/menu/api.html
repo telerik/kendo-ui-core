@@ -72,16 +72,16 @@
                 </li>
             </ul>
             <script type="text/javascript">
-                var getItem = function (target) {
-                    var itemIndexes = target.val().split(/[.,]/),
-                        rootItem = menu.element.children("li").eq(itemIndexes[0]);
-
-                    return itemIndexes.length > 1 ?
-                                rootItem.find(".t-group > .t-item").eq(itemIndexes[1]) :
-                                rootItem;
-                };
-
                 $(document).ready(function() {
+                    var getItem = function (target) {
+                        var itemIndexes = target.val().split(/[.,]/),
+                            rootItem = menu.element.children("li").eq(itemIndexes[0]);
+
+                        return itemIndexes.length > 1 ?
+                                    rootItem.find(".t-group > .t-item").eq(itemIndexes[1]) :
+                                    rootItem;
+                    };
+
                     $(".toggleItem").click( function (e) {
                         var item = getItem($("#toggleIndex"));
 
