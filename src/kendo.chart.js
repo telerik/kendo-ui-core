@@ -898,7 +898,8 @@
         _redraw: function() {
             var chart = this,
                 options = chart.options,
-                model = new RootElement(options.chartArea);
+                model = new RootElement(options.chartArea),
+                plotArea;
 
             chart._model = model;
 
@@ -913,7 +914,8 @@
                 model.append(new Legend(legendOptions));
             }
 
-            model.append(new PlotArea(chart.options));
+            plotArea = chart._plotArea = new PlotArea(chart.options);
+            model.append(plotArea);
             model.reflow();
 
             chart.element.css("position", "relative");
@@ -936,7 +938,7 @@
         _click: function(e) {
             var chart = this,
                 model = chart._model,
-                plotArea = model.children[2],
+                plotArea = chart._plotArea,
                 target = e.target,
                 point = model.idMap[target.id];
 
@@ -950,15 +952,25 @@
             }
         },
 
+        getCoordinates: function(e) {
+            var chart = this,
+                chartOffset = chart.element.offset(),
+                win = $(window);
+
+            return({
+                x: e.clientX - chartOffset.left + win.scrollLeft(),
+                y: e.clientY - chartOffset.top + win.scrollTop()
+            });
+        },
+
         _mouseOver: function(e) {
             var chart = this,
-                chartElement = chart._model.idMap[e.target.id],
-                metadata = chart._model.idMapMetadata[e.target.id],
-                point,
                 tooltip = chart._tooltip,
-                chartOffset = chart.element.offset(),
-                x = e.clientX - chartOffset.left,
-                y = e.clientY - chartOffset.top;
+                coords = chart.getCoordinates(e),
+                targetId = e.target.id,
+                chartElement = chart._model.idMap[targetId],
+                metadata = chart._model.idMapMetadata[targetId],
+                point;
 
             if (chartElement) {
                 if (chartElement.getSeriesPoint && metadata) {
@@ -967,7 +979,34 @@
                     point = chartElement;
                 }
 
+                if (!tooltip.visible) {
+                    $(doc.body).bind("mousemove.tooltip", proxy(chart._mouseMove, chart));
+                }
+
                 tooltip.show(point);
+            }
+        },
+
+        _mouseMove: function(e) {
+            var chart = this,
+                tooltip = chart._tooltip,
+                coords = chart.getCoordinates(e),
+                point = tooltip.point,
+                plotArea = chart._plotArea,
+                owner,
+                seriesPoint;
+
+            if (plotArea.box.containsPoint(coords.x, coords.y)) {
+                if(point.series.type === LINE) {
+                    owner = point.owner;
+                    seriesPoint = owner.getSeriesPoint(coords.x, coords.y, point.seriesIx);
+                    if (seriesPoint && seriesPoint != point) {
+                        tooltip.show(seriesPoint);
+                    }
+                }
+            } else {
+                tooltip.hide();
+                $(doc.body).unbind("mousemove.tooltip");
             }
         },
 
@@ -4401,7 +4440,6 @@
                 options = tooltip.options,
                 aboveAxis = point.options.aboveAxis,
                 chartElement = tooltip.chartElement,
-                chartOffset = chartElement.offset(),
                 x = point.box.center().x,
                 y = (aboveAxis ? point.box.y1 : point.box.y2),
                 value = point.value,
@@ -4428,43 +4466,15 @@
                     top: y + "px"
                 }, tooltip.visible ? 150 : 0);
 
-            tooltip.chartOffset = chartOffset;
-            tooltip.chartBox =
-                new Box2D(chartOffset.x, chartOffset.y, chartElement.width(), chartElement.height())
             tooltip.point = point;
 
-            if (!tooltip.visible) {
-                $(doc.body).bind("mousemove.tooltip", proxy(tooltip._mouseMove, tooltip));
-            }
-
             tooltip.visible = true;
-        },
-
-        _mouseMove: function(e) {
-            var tooltip = this,
-                point = tooltip.point,
-                chartOffset = tooltip.chartOffset,
-                x = e.clientX - chartOffset.left,
-                y = e.clientY - chartOffset.top,
-                owner,
-                seriesPoint;
-
-            if (tooltip.chartBox.containsPoint(x, y)) {
-                owner = point.owner;
-                seriesPoint = owner.getSeriesPoint(x, y, point.seriesIx);
-                if (seriesPoint && seriesPoint != point) {
-                    tooltip.show(seriesPoint);
-                }
-            } else {
-                tooltip.hide();
-            }
         },
 
         hide: function() {
             var tooltip = this;
 
             if (tooltip.visible) {
-                $(doc.body).unbind("mousemove.tooltip");
                 tooltip.element.fadeOut();
 
                 tooltip.point = null;
