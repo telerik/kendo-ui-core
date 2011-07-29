@@ -22,7 +22,7 @@
         <!-- description -->
         <!-- description -->
         <div id="example" class="t-content">
-            <ul id="Panel1">
+            <ul id="panelBar">
                 <li>
                     First Item
                     <ul>
@@ -52,7 +52,9 @@
                 </li>
             </ul>
             <script type="text/javascript">
-                $("#Panel1").kendoPanelBar().css({ width: 310 });
+                $(document).ready(function() {
+                    $("#panelBar").kendoPanelBar().css({ width: 310 });
+                });
             </script>
         </div>
         <!-- tools -->
