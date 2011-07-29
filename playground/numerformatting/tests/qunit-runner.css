@@ -1,0 +1,58 @@
+/*
+// <copyright project "Salient.QualityControl" file="qunit.runner.css" company="Sky Sanders">
+// This source is a Public Domain Dedication. 
+// http://salientqc.codeplex.com
+// Attribution is appreciated.
+// </copyright> 
+*/
+ 
+/* this file can be added to qunit.css to simplify deployment */
+ 
+.runner-test-page-counter
+{
+    font-size: 110%;
+}
+.runner-test-page-header
+{
+    position: relative;
+    font-family: "Helvetica Neue Light" , "HelveticaNeue-Light" , "Helvetica Neue" , Calibri, Helvetica, Arial;
+    list-style-position: inside;
+    font-size: small;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin: 1px;
+}
+.runner-test-page-header.failed
+{
+    background-color: #EE5757;
+    color: #000000;
+}
+.runner-test-page-header.passed
+{
+    background-color: #D2E0E6;
+    color: #528CE0;
+}
+.runner-test-page-frame
+{
+    background-color: #F4F4F8;
+    border: 0;
+    width: 100%;
+    height: 200px;
+}
+
+.passed-iframe
+{
+    display: none;
+}
+
+h2#qunit-runner-userAgent
+{
+    font-family: "Helvetica Neue Light" , "HelveticaNeue-Light" , "Helvetica Neue" , Calibri, Helvetica, Arial;
+    background-color: #2b81af;
+    margin: 0;
+    padding: 0;
+    color: #fff;
+    font-size: small;
+    padding: 0.5em 0 0.5em 2.5em;
+    text-shadow: rgba(0, 0, 0, 0.5) 2px 2px 1px;
+}
