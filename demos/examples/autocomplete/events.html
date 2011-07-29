@@ -28,20 +28,21 @@
             <input id="products"/>
 
             <script type="text/javascript">
+
                 $(document).ready(function() {
-                    var open = function () {
+                    function onOpen() {
                         if ("kendoConsole" in window) {
                             kendoConsole.log("event :: open");
                         }
                     };
 
-                    var close = function () {
+                    function onClose() {
                         if ("kendoConsole" in window) {
                             kendoConsole.log("event :: close");
                         }
                     };
 
-                    var change = function () {
+                    function onChange() {
                         if ("kendoConsole" in window) {
                             kendoConsole.log("event :: change");
                         }
@@ -62,11 +63,12 @@
 
                     $("#products").kendoAutoComplete({
                         dataSource: data,
-                        change: change,
-                        close: close,
-                        open: open
+                        change: onChange,
+                        close: onClose,
+                        open: onOpen
                     });
                 });
+
             </script>
 
             <div class="code-sample">
