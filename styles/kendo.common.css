@@ -62,9 +62,8 @@ html body .t-button
 
 .t-grid .t-group-indicator .t-button:before
 {
-    content:"" !important;
-    display: none !important;
-    border: 0 !important;
+    content:"";
+    display: none;
 }
 
 *+html .t-button { display: inline; zoom: 1 }
