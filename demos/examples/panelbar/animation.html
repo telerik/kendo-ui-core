@@ -23,7 +23,7 @@
         <div class="description">Animation Effects</div>
         <!-- description -->
         <div id="example" class="t-content">
-            <ul id="PanelBar1">
+            <ul id="panelBar">
                 <li class="t-state-active">
                     First Item
                     <ul>
@@ -86,8 +86,23 @@
                 </ul>
             </div>
             <script type="text/javascript">
-                var original = $("#PanelBar1").clone(true);
-                original.find(".t-state-active").removeClass("t-state-active");
+                $(document).ready(function() {
+                    var original = $("#panelBar").clone(true);
+                    original.find(".t-state-active").removeClass("t-state-active");
+
+                    $(".configuration input").change( function() {
+                        var panelBar = $("#panelBar"),
+                            clone = original.clone(true);
+
+                        panelBar.data("kendoPanelBar").collapse($("#panelBar .t-link"));
+
+                        panelBar.replaceWith(clone);
+
+                        initPanelBar();
+                    });
+
+                    initPanelBar();
+                });
 
                 var getEffects = function () {
                     return (($("#expand")[0].checked ? "expandVertical " : "") +
@@ -95,22 +110,8 @@
                 };
 
                 var initPanelBar = function () {
-                    $("#PanelBar1").kendoPanelBar({ animation: { open: { effects: getEffects() } } }).css({ marginRight: "220px" });
+                    $("#panelBar").kendoPanelBar({ animation: { open: { effects: getEffects() } } }).css({ marginRight: "220px" });
                 };
-
-                $(".configuration input").change( function() {
-                    var panelBar = $("#PanelBar1"),
-                        clone = original.clone(true);
-
-                    panelBar.data("kendoPanelBar").collapse($("#PanelBar1 .t-link"));
-
-                    panelBar.replaceWith(clone);
-
-                    initPanelBar();
-                });
-
-
-                initPanelBar();
             </script>
         </div>
         <!-- tools -->

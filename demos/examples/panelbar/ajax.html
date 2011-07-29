@@ -23,7 +23,7 @@
         <div class="description">Loading content with AJAX</div>
         <!-- description -->
         <div id="example" class="t-content">
-            <ul id="PanelBar1">
+            <ul id="panelBar">
                 <li class="t-state-active">
                     First Ajax Item
                     <div></div>
@@ -47,15 +47,17 @@
             </ul>
         </div>
         <script type="text/javascript">
-            $("#PanelBar1").kendoPanelBar({
-                expandMode: "single",
-                contentUrls: [
-                    'ajax/ajaxContent1.html',
-                    'ajax/ajaxContent2.html',
-                    'ajax/ajaxContent3.html',
-                    'ajax/ajaxContent4.html',
-                    'ajax/ajaxContent5.html'
-                ]
+            <script type="text/javascript">
+                $("#panelBar").kendoPanelBar({
+                    expandMode: "single",
+                    contentUrls: [
+                        'ajax/ajaxContent1.html',
+                        'ajax/ajaxContent2.html',
+                        'ajax/ajaxContent3.html',
+                        'ajax/ajaxContent4.html',
+                        'ajax/ajaxContent5.html'
+                    ]
+                });
             });
         </script>
         <!-- tools -->

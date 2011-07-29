@@ -24,7 +24,7 @@
         <div class="description">Events</div>
         <!-- description -->
         <div id="example" class="t-content">
-            <ul id="PanelBar1">
+            <ul id="panelBar">
                 <li class="t-state-active">
                     First Item
                     <ul>
@@ -81,32 +81,32 @@
             </ul>
         </div>
         <script type="text/javascript">
-            var onSelect = function (e) {
+            function onSelect(e) {
                 kendoConsole.log("Selected: " + $(e.item).find("> .t-link").text());
             };
 
-            var onExpand = function (e) {
+            function onExpand(e) {
                 kendoConsole.log("Expanded: " + $(e.item).find("> .t-link").text());
             };
 
-            var onCollapse = function (e) {
+            function onCollapse(e) {
                 kendoConsole.log("Collapsed: " + $(e.item).find("> .t-link").text());
             };
 
-            var onInit = function (e) {
+            function onInit(e) {
                 kendoConsole.log("PanelBar loaded");
             };
 
-            var onContentLoad = function (e) {
+            function onContentLoad(e) {
                 kendoConsole.log("Content loaded in <b>"+ $(e.item).find("> .t-link").text() +
                                  "</b> and starts with <b>" + $(e.contentElement).text().substr(0, 20) + "...</b>");
             };
 
-            var onError = function (e) {
+            function onError(e) {
                 kendoConsole.error("Loading failed with " + e.xhr.statusText + " " + e.xhr.status);
             };
 
-            $("#PanelBar1").kendoPanelBar({
+            $("#panelBar").kendoPanelBar({
                 select: onSelect,
                 expand: onExpand,
                 collapse: onCollapse,

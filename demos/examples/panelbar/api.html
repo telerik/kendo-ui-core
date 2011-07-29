@@ -50,7 +50,7 @@
                     </li>
                 </ul>
             </div>
-            <ul id="PanelBar1">
+            <ul id="panelBar">
                 <li class="t-state-active">
                     First Item
                     <ul>
@@ -98,7 +98,7 @@
                 </li>
             </ul>
 
-            <script>
+            <script type="text/javascript">
                 var getItem = function (target) {
                     var itemIndexes = target.val().split(/[.,]/),
                         rootItem = panelBar.element.children("li").eq(itemIndexes[0]);
@@ -108,49 +108,51 @@
                                 rootItem;
                 };
 
-                $(".selectItem").click(function (e) {
-                    panelBar.select(getItem($("#selectIndex")));
+                $(document).ready(function() {
+                    $(".selectItem").click(function (e) {
+                        panelBar.select(getItem($("#selectIndex")));
+                    });
+
+                    $(".toggleItem").click( function (e) {
+                        var item = panelBar.select();
+
+                        panelBar.enable(item, item.hasClass("t-state-disabled"));
+                    });
+
+                    $(".triggerItem").click( function (e) {
+                        var item = panelBar.select();
+
+                        if (item.hasClass("t-state-active")) {
+                            panelBar.collapse(item);
+                        } else {
+                            panelBar.expand(item);
+                        }
+                    });
+
+                    $(".removeItem").click( function (e) {
+                        panelBar.remove(panelBar.select());
+                    });
+
+                    $(".appendItem").click( function (e) {
+                        panelBar.append({
+                                text: $("#appendText").val()
+                            }, panelBar.select());
+                    });
+
+                    $(".beforeItem").click( function (e) {
+                        panelBar.insertBefore({
+                                text: $("#beforeText").val()
+                            }, panelBar.select());
+                    });
+
+                    $(".afterItem").click( function (e) {
+                        panelBar.insertAfter({
+                                text: $("#afterText").val()
+                            }, panelBar.select());
+                    });
+
+                    var panelBar = $("#panelBar").kendoPanelBar().css({ marginRight: "220px" }).data("kendoPanelBar");
                 });
-
-                $(".toggleItem").click( function (e) {
-                    var item = panelBar.select();
-
-                    panelBar.enable(item, item.hasClass("t-state-disabled"));
-                });
-
-                $(".triggerItem").click( function (e) {
-                    var item = panelBar.select();
-
-                    if (item.hasClass("t-state-active")) {
-                        panelBar.collapse(item);
-                    } else {
-                        panelBar.expand(item);
-                    }
-                });
-
-                $(".removeItem").click( function (e) {
-                    panelBar.remove(panelBar.select());
-                });
-
-                $(".appendItem").click( function (e) {
-                    panelBar.append({
-                            text: $("#appendText").val()
-                        }, panelBar.select());
-                });
-
-                $(".beforeItem").click( function (e) {
-                    panelBar.insertBefore({
-                            text: $("#beforeText").val()
-                        }, panelBar.select());
-                });
-
-                $(".afterItem").click( function (e) {
-                    panelBar.insertAfter({
-                            text: $("#afterText").val()
-                        }, panelBar.select());
-                });
-
-                var panelBar = $("#PanelBar1").kendoPanelBar().css({ marginRight: "220px" }).data("kendoPanelBar");
             </script>
         </div>
         <!-- tools -->
