@@ -43,46 +43,52 @@
             </script>
 
             <script>
-                // create a template using the above definition
-                var template = kendo.template($("#template").html());
+                $(document).ready(function() {
+                    // create a template using the above definition
+                    var template = kendo.template($("#template").html());
 
-                var dataSource = new kendo.data.DataSource({
-                    type: "odata",
-                    serverPaging: true,
-                    serverSorting: true,
-                    pageSize: 10,
-                    transport: {
-                        read: "http://odata.netflix.com/Catalog/Titles"
-                    },
-                    change: function() { // subscribe to the CHANGE event of the data source
-                        // update the max attribute of the "page" input
-                        $("#page").attr("max", this.totalPages());
-
-                        $("#movies").html(kendo.render(template, this.view()));
-                    }
-                });
-
-                // read data from the remote service
-                dataSource.read();
-
-                $("#apply").live("click", function() {
-                    var page = parseInt($("#page").val(), 10);
-
-                    // validate the page - it must be a number within the allowed range
-                    if (isNaN(page) || page < 1 || page > dataSource.totalPages()) {
-                        alert(kendo.format("Page must be a number between 1 and {0}", dataSource.totalPages()));
-                        return;
-                    }
-
-                    // query the remote service
-                    dataSource.query({
-                        page: page,
+                    var dataSource = new kendo.data.DataSource({
+                        type: "odata",
+                        serverPaging: true,
+                        serverSorting: true,
                         pageSize: 10,
-                        sort: {
-                            field: $("#order").val(),
-                            dir:$("#dir").val()
+                        transport: {
+                            read: "http://odata.netflix.com/Catalog/Titles"
+                        },
+                        change: function() { // subscribe to the CHANGE event of the data source
+                            // update the max attribute of the "page" input
+                            $("#page").attr("max", this.totalPages());
+
+                            $("#movies").html(kendo.render(template, this.view()));
                         }
                     });
+
+                    // read data from the remote service
+                    dataSource.read();
+
+                    $("#apply").live("click", function() {
+                        var page = parseInt($("#page").val(), 10);
+
+                        // validate the page - it must be a number within the allowed range
+                        if (isNaN(page) || page < 1 || page > dataSource.totalPages()) {
+                            alert(kendo.format("Page must be a number between 1 and {0}", dataSource.totalPages()));
+                            return;
+                        }
+
+                        // query the remote service
+                        dataSource.query({
+                            page: page,
+                            pageSize: 10,
+                            sort: {
+                                field: $("#order").val(),
+                                dir:$("#dir").val()
+                            }
+                        });
+                    });
+
+                    //initialize dropdownlist components
+                    $("#order").kendoDropDownList();
+                    $("#dir").kendoDropDownList();
                 });
             </script>
 
@@ -95,7 +101,7 @@
                     </li>
                     <li>
                         <label for="order">Order by:</label>
-                        <select id="order">
+                        <select id="order" style="width:114px">
                             <option value="Id">Id</option>
                             <option value="Name">Name</option>
                             <option value="AverageRating">Average Rating</option>
@@ -104,7 +110,7 @@
                     </li>
                     <li>
                         <label for="dir">Direction:</label>
-                        <select id="dir">
+                        <select id="dir" style="width:114px">
                             <option value="asc">Ascending</option>
                             <option value="desc">Descending</option>
                         </select>
