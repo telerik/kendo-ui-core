@@ -29,20 +29,20 @@
             <input id="products" />
 
             <script type="text/javascript">
-                var data = [
-                    "12 Angry Men",
-                    "Il buono, il brutto, il cattivo.",
-                    "Inception",
-                    "One Flew Over the Cuckoo's Nest",
-                    "Pulp Fiction",
-                    "Schindler's List",
-                    "The Dark Knight",
-                    "The Godfather",
-                    "The Godfather: Part II",
-                    "The Shawshank Redemption"
-                ];
-
                 $(document).ready(function() {
+                    var data = [
+                        "12 Angry Men",
+                        "Il buono, il brutto, il cattivo.",
+                        "Inception",
+                        "One Flew Over the Cuckoo's Nest",
+                        "Pulp Fiction",
+                        "Schindler's List",
+                        "The Dark Knight",
+                        "The Godfather",
+                        "The Godfather: Part II",
+                        "The Shawshank Redemption"
+                    ];
+
                     $("#products").kendoAutoComplete(data);
 
                     var autocomplete = $("#products").data("kendoAutoComplete");
