@@ -649,7 +649,7 @@
 
     TabStrip.templates = {
         content: template(
-            "<div class='t-content'<#= contentAttributes(content) #>>&nbsp;</div>"
+            "<div class='t-content'<#= contentAttributes(data) #>>&nbsp;</div>"
         ),
         itemWrapper: template(
             "<<#= tag(item) #> class='t-link'<#= textAttributes(item) #>>" +
