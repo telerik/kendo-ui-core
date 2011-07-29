@@ -28,7 +28,7 @@
                 <span class="configTitle">API Functions</span>
                 <ul class="options">
                     <li>
-                        <input type="text" value="0" /> <button class="selectItem t-button">Select</button>
+                        <input type="text" value="0" id="selectIndex"/> <button class="selectItem t-button">Select</button>
                     </li>
                     <li>
                         <button class="toggleItem t-button">Enable/Disable</button>
@@ -40,13 +40,13 @@
                         <button class="removeItem t-button">Remove</button>
                     </li>
                     <li>
-                        <input type="text" value="Item" /> <button class="appendItem t-button">Append</button>
+                        <input type="text" value="Item" id="appendText"/> <button class="appendItem t-button">Append</button>
                     </li>
                     <li>
-                        <input type="text" value="Item" /> <button class="beforeItem t-button">Insert Before</button>
+                        <input type="text" value="Item" id="beforeText"/> <button class="beforeItem t-button">Insert Before</button>
                     </li>
                     <li>
-                        <input type="text" value="Item" /> <button class="afterItem t-button">Insert After</button>
+                        <input type="text" value="Item" id="afterText"/> <button class="afterItem t-button">Insert After</button>
                     </li>
                 </ul>
             </div>
@@ -100,7 +100,7 @@
 
             <script>
                 var getItem = function (target) {
-                    var itemIndexes = $(target).prev().val().split(/[.,]/),
+                    var itemIndexes = target.val().split(/[.,]/),
                         rootItem = panelBar.element.children("li").eq(itemIndexes[0]);
 
                     return itemIndexes.length > 1 ?
@@ -109,7 +109,7 @@
                 };
 
                 $(".selectItem").click(function (e) {
-                    panelBar.select(getItem(e.target));
+                    panelBar.select(getItem($("#selectIndex")));
                 });
 
                 $(".toggleItem").click( function (e) {
@@ -134,19 +134,19 @@
 
                 $(".appendItem").click( function (e) {
                     panelBar.append({
-                            text: $(e.target).prev().val()
+                            text: $("#appendText").val()
                         }, panelBar.select());
                 });
 
                 $(".beforeItem").click( function (e) {
                     panelBar.insertBefore({
-                            text: $(e.target).prev().val()
+                            text: $("#beforeText").val()
                         }, panelBar.select());
                 });
 
                 $(".afterItem").click( function (e) {
                     panelBar.insertAfter({
-                            text: $(e.target).prev().val()
+                            text: $("#afterText").val()
                         }, panelBar.select());
                 });
 
