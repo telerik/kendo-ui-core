@@ -104,6 +104,7 @@
                 itemHeight = that.itemHeight,
                 skip = dataSource.skip() || 0,
                 take = dataSource.take(),
+                originalSkip = Math.max(Math.round(skip / take), 0) * take,
                 fetching = false,
                 prefetchAt = 0.33;
 
@@ -119,10 +120,10 @@
                 that._page(skip, take);
             } else {
                 if (firstItemIndex < skip + take * prefetchAt && firstItemIndex > take * prefetchAt) {
-                    dataSource.prefetch(Math.max(skip - take, 0), take);
+                    dataSource.fetchPrevPage();
                 }
                 if (lastItemIndex > skip + take * prefetchAt) {
-                    dataSource.prefetch(skip + take, take);
+                    dataSource.fetchNextPage();
                 }
             }
             return fetching;
@@ -191,7 +192,7 @@
 
         return template;
     }
-    
+
     /**
      * @name kendo.ui.Grid.Description
      *
@@ -222,7 +223,7 @@
      *      </tr>
      *  </tbody>
      * </table>
-     * 
+     *
      * @exampleTitle <b>Grid</b> initialization
      * @example
      * var grid = $("#grid").kendoGrid();
@@ -235,7 +236,7 @@
          * @param {Object} options Configuration options.
          * @option {kendo.data.DataSource|Object} [dataSource] Instance of DataSource or Object with DataSource configuration.
          * _example
-         * var sharedDataSource = new kendo.data.DataSource({ 
+         * var sharedDataSource = new kendo.data.DataSource({
          *      data: [{title: "Star Wars: A New Hope", year: 1977}, {title: "Star Wars: The Empire Strikes Back", year: 1980}],
          *      pageSize: 1
          * });
@@ -243,7 +244,7 @@
          * $("#grid").kendoGrid({
          *      dataSource: sharedDataSource
          *  });
-         *  
+         *
          *  //or
          *
          *  $("#grid").kendoGrid({
@@ -273,7 +274,7 @@
          *              template: '<#= kendo.toString(BirthDate,"dd MMMM yyyy") #>'
          *         }
          *      ]
-         *   });         
+         *   });
          * @option {Boolean} [pageable] <false> Indicates whether paging is enabled/disabled.
          * @option {Boolean} [groupable] <false> Indicates whether grouping is enabled/disabled.
          * @option {Boolean} [navigatable] <false> Indicates whether keyboard navigation is enabled/disabled.
@@ -302,7 +303,7 @@
          *         </dt>
          *         <dd>
          *              Multiple cell selection.
-         *         </dd>         
+         *         </dd>
          *    </dl>
          * @option {Boolean} [autoBind] <false> Indicates whether the grid will call query on DataSource initially.
          * @option {Boolean|Object} [scrollable] <true> Enable/disable grid scrolling. Possible values:
@@ -338,7 +339,7 @@
          *          virtual: true //false
          *      }
          *  });
-         * @option {Function} [rowTemplate] Template to be used for rendering the rows in the grid.         
+         * @option {Function} [rowTemplate] Template to be used for rendering the rows in the grid.
          * _example
          *  //template
          *  &lt;script id="rowTemplate" type="text/x-kendo-tmpl"&gt;
@@ -354,14 +355,14 @@
          *          &lt;/td&gt;
          *      &lt;/tr&gt;
          *  &lt;/script&gt;
-         *         
+         *
          *  //grid intialization
-         *  &lt;script&gt;         
+         *  &lt;script&gt;
          *      $("#grid").kendoGrid({
          *          dataSource: dataSource,
          *          rowTemplate: kendo.template($("#rowTemplate").html()),
          *          height: 200
-         *      });         
+         *      });
          *  &lt;/script&gt;
          */
         init: function(element, options) {
@@ -508,7 +509,7 @@
         },
 
         /**
-         * Clears currently selected items.          
+         * Clears currently selected items.
          */
         clearSelection: function() {
             var that = this;
@@ -539,7 +540,7 @@
 
             return selectable.value();
         },
-        
+
         current: function(element) {
             var that = this,
                 current = that._current;
@@ -558,23 +559,23 @@
             }
         },
 
-        _scrollTo: function(element) {            
+        _scrollTo: function(element) {
             var container = this.tbody.closest("div.t-grid-content")[0];
             if(!element || !container) {
                 return;
             }
-            
+
             var elementOffsetTop = element.offsetTop,
-                elementOffsetHeight = element.offsetHeight,                
+                elementOffsetHeight = element.offsetHeight,
                 containerScrollTop = container.scrollTop,
                 containerOffsetHeight = container.clientHeight,
                 bottomDistance = elementOffsetTop + elementOffsetHeight;
-                        
+
             container.scrollTop = containerScrollTop > elementOffsetTop
                                     ? elementOffsetTop
                                     : bottomDistance > (containerScrollTop + containerOffsetHeight)
                                     ? bottomDistance - containerOffsetHeight
-                                    : containerScrollTop;        
+                                    : containerScrollTop;
         },
 
         _navigatable: function() {

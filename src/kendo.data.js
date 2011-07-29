@@ -1525,33 +1525,49 @@
         },
 
         range: function(skip, take) {
+            skip = skip || 0;
             var that = this,
-                end = Math.min(Math.min(skip + take, (that.totalPages() - 1) * take), that.total()),
                 pageSkip = (Math.max(Math.floor(skip / take), 0) * take),
-                time = that.options.serverPaging ? 250 : 0,
+                size = Math.min(pageSkip + take, that.total()),
                 data;
 
-            if (that.options.serverPaging) {
-                data = that._findRange(skip, end);
-                if (data.length) {
-                    that._skip = pageSkip;
+            data = that._findRange(skip, Math.min(skip + take, that.total()));
+            if (data.length) {
+                that._skip = pageSkip;
 
-                    that._take = take;
+                that._take = take;
+
+                var paging = that.options.serverPaging;
+                try {
+                    that.options.serverPaging = true;
                     that._process(data);
-
-                    return;
+                } finally {
+                    that.options.serverPaging = paging;
                 }
+
+                return;
             }
 
             if (take !== undefined) {
-                skip = skip || 0;
 
-                clearTimeout(that._timeout);
-                that._timeout = setTimeout(function() {
-                    that.query({ skip: skip, take: take, sort: that.sort(), filter: that.filter(), group: that.group(), aggregates: that.aggregate() });
-                }, time);
+                if (!that._rangeExists(pageSkip, size)) {
+                    that.prefetch(pageSkip, take, function() {
+                        if (skip > pageSkip && size < that.total()) {
+                            that.prefetch(size, take, function() {
+                                that.range(skip, take);
+                            });
+                        } else {
+                            that.range(skip, take);
+                        }
+                    });
+                } else if (pageSkip < skip) {
+                    that.prefetch(size, take, function() {
+                        that.range(skip, take);
+                    });
+                }
             }
         },
+
         _currentPage: function() {
             var that = this,
                 take = that.take();
