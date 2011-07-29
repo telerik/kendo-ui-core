@@ -35,17 +35,16 @@
                         index: 0,
                         dataTextField: "Name",
                         dataValueField: "Id",
-                        severFiltering: true,
-                        serverPaging: true,
-                        pageSize: 20,
                         filter: "contains",
-                        dataSource: new kendo.data.DataSource({
+                        dataSource: {
                             type: "odata",
-                            serverFiltering: true,
+                            severFiltering: true,
+                            serverPaging: true,
+                            pageSize: 20,
                             transport: {
                                 read: "http://odata.netflix.com/Catalog/Titles"
                             }
-                        })
+                        }
                     });
                 });
             </script>

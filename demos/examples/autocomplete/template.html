@@ -42,17 +42,16 @@
                         minLength: 3,
                         dataTextField: "Name",
                         dataValueField: "Id",
-                        severFiltering: true,
-                        serverPaging: true,
-                        pageSize: 20,
                         template: $("#scriptTemplate").html(),
-                        dataSource: new kendo.data.DataSource({
+                        dataSource: {
                             type: "odata",
-                            serverFiltering: true,
+                            severFiltering: true,
+                            serverPaging: true,
+                            pageSize: 20,
                             transport: {
                                 read: "http://odata.netflix.com/Catalog/Titles"
                             }
-                        })
+                        }
                     });
 
                     //set width of the drop-down list

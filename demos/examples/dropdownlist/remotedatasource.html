@@ -33,8 +33,7 @@
                 $("#titles").kendoDropDownList({
                     dataTextField: "Name",
                     dataValueField: "Id",
-                    severFiltering: true,
-                    dataSource: new kendo.data.DataSource({
+                    dataSource: {
                         type: "odata",
                         serverFiltering: true,
                         filter: [{
@@ -49,7 +48,7 @@
                         transport: {
                             read: "http://odata.netflix.com/Catalog/Titles"
                         }
-                    })
+                    }
                 });
             </script>
         </div>

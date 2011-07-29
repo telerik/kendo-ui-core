@@ -44,15 +44,15 @@
                         dataTextField: "Name",
                         dataValueField: "Id",
                         template: $("#scriptTemplate").html(),
-                        dataSource: new kendo.data.DataSource({
+                        dataSource: {
                             type: "odata",
+                            severFiltering: true,
                             serverPaging: true,
                             pageSize: 20,
-                            serverFiltering: true,
                             transport: {
                                 read: "http://odata.netflix.com/Catalog/Titles"
                             }
-                        })
+                        }
                     });
 
                     var combobox = $("#titles").data("kendoComboBox");
