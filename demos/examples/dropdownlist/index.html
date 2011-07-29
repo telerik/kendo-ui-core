@@ -36,7 +36,6 @@
             </select>
 
             <script type="text/javascript">
-
                 // local data
                 var data = [
                     {text: "Item1", value:"1"},
@@ -44,11 +43,13 @@
                     {text: "Item3", value:"2"}
                 ];
 
-                //create kendo DropDownList from input Html element
-                $("#input").kendoDropDownList(data);
+                $(document).ready(function() {
+                    //create kendo DropDownList from input Html element
+                    $("#input").kendoDropDownList(data);
 
-                //create kendo DropDownList from select Html element
-                $("#select").kendoDropDownList();
+                    //create kendo DropDownList from select Html element
+                    $("#select").kendoDropDownList();
+                }):
            </script>
         </div>
         <!-- tools -->

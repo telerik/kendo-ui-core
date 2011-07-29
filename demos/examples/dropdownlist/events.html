@@ -28,15 +28,15 @@
             <input id="input"/>
 
             <script type="text/javascript">
-                var open = function () {
+                function onOpen() {
                     kendoConsole.log("event: open");
                 };
 
-                var close = function () {
+                function onClose() {
                     kendoConsole.log("event: close");
                 };
 
-                var change = function () {
+                function onChange() {
                     kendoConsole.log("event: change");
                 };
 
@@ -48,11 +48,10 @@
 
                 $("#input").kendoDropDownList({
                     dataSource: data,
-                    change: change,
-                    close: close,
-                    open: open
+                    change: onChange,
+                    close: onClose,
+                    open: onOpen
                 });
-
             </script>
         </div>
         <div class="console"></div>

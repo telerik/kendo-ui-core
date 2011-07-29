@@ -23,7 +23,7 @@
         <!-- description -->
         <!-- description -->
         <div id="example" class="t-content">
-            <ul id="Menu1">
+            <ul id="menu">
                 <li>
                     First Item
                     <ul>
@@ -57,7 +57,9 @@
                 </li>
             </ul>
             <script type="text/javascript">
-                $("#Menu1").kendoMenu();
+                $(document).ready(function() {
+                    $("#menu").kendoMenu();
+                });
             </script>
         </div>
         <!-- tools -->

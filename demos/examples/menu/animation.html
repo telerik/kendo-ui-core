@@ -24,7 +24,7 @@
         <div class="description">Animation Effects</div>
         <!-- description -->
         <div id="example" class="t-content">
-            <ul id="Menu1">
+            <ul id="menu">
                 <li>
                     First Item
                     <ul>
@@ -93,10 +93,24 @@
                 </ul>
             </div>
             <script type="text/javascript">
+                $(document).ready(function() {
+                    var original = $("#menu").clone(true);
 
-                var original = $("#Menu1").clone(true);
+                    original.find(".t-state-active").removeClass("t-state-active");
 
-                original.find(".t-state-active").removeClass("t-state-active");
+                    $(".configuration input").change( function() {
+                        var menu = $("#menu"),
+                            clone = original.clone(true);
+
+                        menu.data("kendoMenu").close($("#menu .t-link"));
+
+                        menu.replaceWith(clone);
+
+                        initMenu();
+                    });
+
+                    initMenu();
+                });
 
                 var getEffects = function () {
                     return (($("#expand")[0].checked ? "expandVertical " : "") +
@@ -105,7 +119,7 @@
                 };
 
                 var initMenu = function () {
-                    $("#Menu1").kendoMenu({
+                    $("#menu").kendoMenu({
                         animation: { open: { effects: getEffects() } },
                         hoverDelay: $("#delay")[0].value
                     })
@@ -113,20 +127,6 @@
                         marginRight: "220px"
                     });
                 };
-
-                $(".configuration input").change( function() {
-                    var menu = $("#Menu1"),
-                        clone = original.clone(true);
-
-                    menu.data("kendoMenu").close($("#Menu1 .t-link"));
-
-                    menu.replaceWith(clone);
-
-                    initMenu();
-                });
-
-
-                initMenu();
             </script>
         </div>
         <!-- tools -->

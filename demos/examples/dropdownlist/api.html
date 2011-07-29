@@ -28,7 +28,6 @@
             <input id="products" />
 
             <script type="text/javascript">
-                $(document).ready(function() {
                     var data = [
                         {text: "The Shawshank Redemption", value:"1"},
                         {text: "The Godfather", value:"2"},
@@ -42,9 +41,10 @@
                         {text: "The Dark Knight", value:"10"}
                     ];
 
+                $(document).ready(function() {
                     $("#products").kendoDropDownList(data)
-                    .closest(".t-widget")
-                    .attr("id", "products_wrapper");
+                                  .closest(".t-widget")
+                                  .attr("id", "products_wrapper");
 
                     var dropdownlist = $("#products").data("kendoDropDownList");
 
