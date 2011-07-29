@@ -28,7 +28,7 @@
                 <span class="configTitle">API Functions</span>
                 <ul class="options">
                     <li>
-                        <input type="text" value="0" /> <button class="selectTab t-button">Select</button>
+                        <input type="text" value="0" id="tabIndex"/> <button class="selectTab t-button">Select</button>
                     </li>
                     <li>
                         <button class="toggleTab t-button">Enable/Disable Selected</button>
@@ -37,13 +37,13 @@
                         <button class="removeItem t-button">Remove Selected</button>
                     </li>
                     <li>
-                        <input type="text" value="Item" /> <button class="appendItem t-button">Append</button>
+                        <input type="text" value="Item" id="appendText"/> <button class="appendItem t-button">Append</button>
                     </li>
                     <li>
-                        <input type="text" value="Item" /> <button class="beforeItem t-button">Insert Before</button>
+                        <input type="text" value="Item" id="beforeText"/> <button class="beforeItem t-button">Insert Before</button>
                     </li>
                     <li>
-                        <input type="text" value="Item" /> <button class="afterItem t-button">Insert After</button>
+                        <input type="text" value="Item" id="afterText"/> <button class="afterItem t-button">Insert After</button>
                     </li>
                 </ul>
             </div>
@@ -83,13 +83,13 @@
             </div>
             <script type="text/javascript">
                 var getItem = function (target) {
-                    var itemIndex = $(target).prev()[0].value;
+                    var itemIndex = target[0].value;
 
                     return tabStrip.tabGroup.children("li").eq(itemIndex);
                 };
 
                 $(".selectTab").click(function(e) {
-                    tabStrip.select(getItem(e.target));
+                    tabStrip.select(getItem($("#tabIndex")));
                 });
 
                 $(".toggleTab").click(function(e) {
@@ -109,19 +109,19 @@
 
                 $(".appendItem").click( function (e) {
                     tabStrip.append({
-                            text: $(e.target).prev().val()
+                            text: $("#appendText").val()
                         });
                 });
 
                 $(".beforeItem").click( function (e) {
                     tabStrip.insertBefore({
-                            text: $(e.target).prev().val()
+                            text: $("#beforeText").val()
                         }, tabStrip.select());
                 });
 
                 $(".afterItem").click( function (e) {
                     tabStrip.insertAfter({
-                            text: $(e.target).prev().val()
+                            text: $("#afterText").val()
                         }, tabStrip.select());
                 });
 
