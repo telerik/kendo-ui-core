@@ -37,7 +37,7 @@
                         dataValueField: "Id",
                         //define custom template
                         template: '<img src="${ data.BoxArt.SmallUrl }" alt="${ data.Name }" />Title:${ data.Name }, Year: ${ data.Name }',
-                        dataSource: new kendo.data.DataSource({
+                        dataSource: {
                             type: "odata",
                             serverFiltering: true,
                             filter: [{
@@ -52,7 +52,7 @@
                             transport: {
                                 read: "http://odata.netflix.com/Catalog/Titles"
                             }
-                        })
+                        }
                     });
 
                     var dropdownlist = $("#titles").data("kendoDropDownList");
