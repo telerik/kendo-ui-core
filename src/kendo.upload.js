@@ -1196,7 +1196,8 @@
     }
 
     function getFileExtension(fileName) {
-        return fileName.match(rFileExtension)[0] || "";
+        var matches = fileName.match(rFileExtension);
+        return matches ? matches[0] : "";
     }
 
     function stripPath(name) {
