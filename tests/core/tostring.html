@@ -24,28 +24,6 @@
                 equal(toString(1), "1");
             });
 
-            test("toString uses the registered formatter to format the value", function() {
-                var value, format;
-
-                kendo.formatters["number"] = function () {
-                    value = arguments[0];
-                    format = arguments[1];
-                }
-
-                toString(1, "foo");
-                equal(value, 1);
-                equal(format, "foo");
-            });
-
-            test("toString does not call the registered formatter if format is not specified", function() {
-                var formatterWasCalled = false;
-                kendo.formatters["number"] = function () {
-                    formatterWasCalled = true;
-                }
-
-                toString(1);
-                ok(!formatterWasCalled);
-            });
-       </script>
+        </script>
     </body>
 </html>

@@ -235,9 +235,6 @@
         }
     };
 
-    function pad(n) {
-        return n < 10 ? "0" + n : n;
-    }
 
     //JSON stringify
 (function() {
@@ -469,6 +466,10 @@
                 }
             },
             dateChunker = /dddd|ddd|dd|d|MMMM|MMM|MM|M|yyyy|yy|HH|H|hh|h|mm|m|fff|ff|f|tt|ss|s|"[^"]*"|'[^']*'/g;
+
+        function pad(n) {
+            return n < 10 ? "0" + n : n;
+        }
 
         function formatDate(date, format) {
             format = standardFormats[format] || format;
