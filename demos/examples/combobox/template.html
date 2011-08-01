@@ -41,6 +41,7 @@
             <script type="text/javascript">
                 $(document).ready(function() {
                     $("#titles").kendoComboBox({
+                        autoBind: false,
                         dataTextField: "Name",
                         dataValueField: "Id",
                         template: $("#scriptTemplate").html(),
