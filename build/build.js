@@ -7,6 +7,7 @@ var cssmin = require("./lib/cssmin").cssmin;
 var examples = require("./build-examples");
 var spawn = require('child_process').spawn;
 
+var QUARTER = "2";
 var date = new Date();
 var STAT = fs.statSync("./");
 var VERSION = generateVersion();
@@ -58,7 +59,7 @@ function generateVersion() {
     if (day < 10) {
         day = "0" + day;
     }
-    return date.getFullYear() + "_1_" + (date.getMonth() + 1) + "" + day;
+    return date.getFullYear() + "_" + QUARTER + "_" + (date.getMonth() + 1) + "" + day;
 }
 
 function mkdir(newDir) {
