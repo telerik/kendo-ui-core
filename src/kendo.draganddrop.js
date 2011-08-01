@@ -278,13 +278,14 @@
 
         _stop: function(e) {
             var that = this,
-                destroy = proxy(that._destroy, that);
+                destroy = proxy(that._destroy, that),
+                offset = that.currentTarget.offset();
 
             if (e.type == MOUSEUP || e.keyCode == 27) {
                 that._trigger(DRAGEND, e);
 
                 if (that.hint && !that.dropped) {
-                    that.hint.animate(that.currentTarget.offset(), "fast", destroy);
+                    that.hint.animate(offset, "fast", destroy);
                 } else {
                     destroy();
                 }
