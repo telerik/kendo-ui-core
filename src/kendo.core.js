@@ -17,8 +17,7 @@
         NUMBER = "number",
         OBJECT = "object",
         NULL = "null",
-        BOOLEAN = "boolean",
-        dateCheck = /\d/;
+        BOOLEAN = "boolean";
 
     function Event() {
         this._isPrevented = false;
@@ -386,374 +385,340 @@
 // Date and Number formatting
 
 (function() {
-        var culture =   {
-            days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-            abbrDays: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-            shortestDays: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
-            months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-            abbrMonths: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-            longTime: "h:mm:ss tt",
-            longDate: "dddd, MMMM dd, yyyy",
-            shortDate: "M/d/yyyy",
-            shortTime: "h:mm tt",
-            fullDateTime: "dddd, MMMM dd, yyyy h:mm:ss tt",
-            generalDateShortTime: "M/d/yyyy h:mm tt",
-            generalDateTime: "M/d/yyyy h:mm:ss tt",
-            sortableDateTime: "yyyy'-'MM'-'ddTHH':'mm':'ss",
-            universalSortableDateTime: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
-            monthYear: "MMMM, yyyy",
-            monthDay: "MMMM dd",
-            today: "today",
-            tomorrow: "tomorrow",
-            yesterday: "yesterday",
-            next: "next",
-            last: "last",
-            year: "year",
-            month: "month",
-            week: "week",
-            day: "day",
-            am: "AM",
-            pm: "PM",
-            dateSeparator: "/",
-            timeSeparator: ":",
-            firstDayOfWeek: 0,
-            currencydecimaldigits: 2,
-            currencydecimalseparator: '.',
-            currencygroupseparator: ',',
-            currencygroupsize: 3,
-            currencynegative: 0,
-            currencypositive: 0,
-            currencysymbol: '$',
-            numericdecimaldigits: 2,
-            numericdecimalseparator: '.',
-            numericgroupseparator: ',',
-            numericgroupsize: 3,
-            numericnegative: 1,
-            percentdecimaldigits: 2,
-            percentdecimalseparator: '.',
-            percentgroupseparator: ',',
-            percentgroupsize: 3,
-            percentnegative: 0,
-            percentpositive: 0,
-            percentsymbol: '%'
-        },
-            customFormatRegEx = /[0#?]/,
-            standardFormats = {
-                d: culture.shortDate,
-                D: culture.longDate,
-                F: culture.fullDateTime,
-                g: culture.generalDateShortTime,
-                G: culture.generalDateTime,
-                m: culture.monthDay,
-                M: culture.monthDay,
-                s: culture.sortableDateTime,
-                t: culture.shortTime,
-                T: culture.longTime,
-                u: culture.universalSortableDateTime,
-                y: culture.monthYear,
-                Y: culture.monthYear
-            },
-            numericPatterns = {
-                numeric: {
-                    negative: ['(n)', '-n', '- n', 'n-', 'n -']
-                },
-                currency: {
-                    positive: ['*n', 'n*', '* n', 'n *'],
-                    negative: ['(*n)', '-*n', '*-n', '*n-', '(n*)', '-n*', 'n-*', 'n*-', '-n *', '-* n', 'n *-', '* n-', '* -n', 'n- *', '(* n)', '(n *)']
-                },
-                percent: {
-                    positive: ['n *', 'n*', '*n'],
-                    negative: ['-n *', '-n*', '-*n']
+    var culture =   {
+        days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        abbrDays: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+        shortestDays: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+        months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+        abbrMonths: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        longTime: "h:mm:ss tt",
+        longDate: "dddd, MMMM dd, yyyy",
+        shortDate: "M/d/yyyy",
+        shortTime: "h:mm tt",
+        fullDateTime: "dddd, MMMM dd, yyyy h:mm:ss tt",
+        generalDateShortTime: "M/d/yyyy h:mm tt",
+        generalDateTime: "M/d/yyyy h:mm:ss tt",
+        sortableDateTime: "yyyy'-'MM'-'ddTHH':'mm':'ss",
+        universalSortableDateTime: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
+        monthYear: "MMMM, yyyy",
+        monthDay: "MMMM dd",
+        today: "today",
+        tomorrow: "tomorrow",
+        yesterday: "yesterday",
+        next: "next",
+        last: "last",
+        year: "year",
+        month: "month",
+        week: "week",
+        day: "day",
+        am: "AM",
+        pm: "PM",
+        dateSeparator: "/",
+        timeSeparator: ":",
+        firstDayOfWeek: 0,
+        currencydecimaldigits: 2,
+        currencydecimalseparator: '.',
+        currencygroupseparator: ',',
+        currencygroupsize: 3,
+        currencynegative: 0,
+        currencypositive: 0,
+        currencysymbol: '$',
+        numericdecimaldigits: 2,
+        numericdecimalseparator: '.',
+        numericgroupseparator: ',',
+        numericgroupsize: 3,
+        numericnegative: 1,
+        percentdecimaldigits: 2,
+        percentdecimalseparator: '.',
+        percentgroupseparator: ',',
+        percentgroupsize: 3,
+        percentnegative: 0,
+        percentpositive: 0,
+        percentsymbol: '%'
+    },
+    customFormatRegEx = /[0#?]/,
+    standardFormats = {
+        d: culture.shortDate,
+        D: culture.longDate,
+        F: culture.fullDateTime,
+        g: culture.generalDateShortTime,
+        G: culture.generalDateTime,
+        m: culture.monthDay,
+        M: culture.monthDay,
+        s: culture.sortableDateTime,
+        t: culture.shortTime,
+        T: culture.longTime,
+        u: culture.universalSortableDateTime,
+        y: culture.monthYear,
+        Y: culture.monthYear
+    },
+    patterns = {
+        numeric: ["n", "-n"],
+        currency: ["$n", "($n)"],
+        percent: {
+            positive: ['n *', 'n*', '*n'],
+            negative: ['-n *', '-n*', '-*n']
+        }
+    },
+    formatRegExp = /{(\d+)(:[^\}]+)?}/g,
+    dateFormatRegExp = /dddd|ddd|dd|d|MMMM|MMM|MM|M|yyyy|yy|HH|H|hh|h|mm|m|fff|ff|f|tt|ss|s|"[^"]*"|'[^']*'/g;
+
+    function pad(number) {
+        return number < 10 ? "0" + number : number;
+    }
+
+    function formatDate(date, format) {
+        format = standardFormats[format] || format;
+
+        return format.replace(dateFormatRegExp, function (match) {
+            if (match === "d") {
+                return date.getDate();
+            } else if (match === "dd") {
+                return pad(date.getDate());
+            } else if (match === "ddd") {
+                return culture.abbrDays[date.getDay()];
+            } else if (match === "dddd") {
+                return culture.days[date.getDay()];
+            } else if (match === "M") {
+                return date.getMonth() + 1;
+            } else if (match === "MM") {
+                return pad(date.getMonth() + 1);
+            } else if (match === "MMM") {
+                return culture.abbrMonths[date.getMonth()];
+            } else if (match === "MMMM") {
+                return culture.months[date.getMonth()];
+            } else if (match === "yy") {
+                return pad(date.getFullYear() % 100);
+            } else if (match === "yyyy") {
+                return date.getFullYear();
+            } else if (match === "h" ) {
+                return date.getHours() % 12 || 12
+            } else if (match === "hh") {
+                return pad(date.getHours() % 12 || 12);
+            } else if (match === "H") {
+                return date.getHours();
+            } else if (match === "HH") {
+                return pad(date.getHours());
+            } else if (match === "m") {
+                return date.getMinutes();
+            } else if (match === "mm") {
+                return pad(date.getMinutes());
+            } else if (match === "s") {
+                return date.getSeconds();
+            } else if (match === "ss") {
+                return pad(date.getSeconds());
+            } else if (match === "f") {
+                return Math.floor(date.getMilliseconds() / 100);
+            } else if (match === "ff") {
+                return Math.floor(date.getMilliseconds() / 10);
+            } else if (match === "fff") {
+                return date.getMilliseconds();
+            } else if (match === "tt") {
+                return date.getHours() < 12 ? culture.am : culture.pm
+            }
+
+            return match.slice(1, match.length - 1);
+        });
+    }
+
+    //number formatting
+
+    function zeroPad(match) {
+        var result = "",
+        i = isNaN(match) ? match.length : match;
+
+        while (i > 0) {
+            i--;
+            result += 0;
+        }
+        return result;
+    }
+
+    function replace(result, reg) {
+        return result.replace(reg, zeroPad).replace(digitPlaceholderRegExp, EMPTY);
+    }
+
+    var EMPTY = "",
+        POINT = ".",
+        COMMA = ",",
+        standardFormatRegExp =  /^(n|c)(\d*)$/i,
+        customFormatRegExp = /([#0,]+)/,
+        digitPlaceholderRegExp = /#+/,
+        leftMostZeroRegExp = /(0+#+)+/,
+        rigtMostZeroRegExp = /(#+0+)+/,
+        expRegExp = /^([e|E][-|+]*[\d]*)/,
+        digitsRegExp = /\d+/;
+
+    function formatNumber(number, format) {
+        var groupSize = 3,
+            groupSeparator = ",",
+            decimal = ".",
+            decimalDigits = 2,
+            symbol = "$";
+
+        if (number === undefined) {
+            return EMPTY;
+        }
+
+        if (!format) {
+            return number.toString();
+        }
+
+        var formatMatches = standardFormatRegExp.exec(format);
+
+        if (formatMatches) {
+            var negative = number < 0;
+
+            number = number.toString().split(".");
+
+            var integer = number[0];
+            var fraction = number[1] || new Array(decimalDigits + 1).join("0");
+            var value = "";
+            var idx, length;
+
+            if (negative) {
+                integer = integer.substring(1);
+            }
+
+            for (idx = 0, length = integer.length; idx < length; idx++) {
+                if ((length - idx) % groupSize === 0) {
+                    value += groupSeparator;
                 }
-            },
-            formatRegExp = /{(\d+)(:[^\}]+)?}/g,
-            dateFormatRegExp = /dddd|ddd|dd|d|MMMM|MMM|MM|M|yyyy|yy|HH|H|hh|h|mm|m|fff|ff|f|tt|ss|s|"[^"]*"|'[^']*'/g;
 
-        function pad(number) {
-            return number < 10 ? "0" + number : number;
-        }
-
-        function formatDate(date, format) {
-            format = standardFormats[format] || format;
-
-            return format.replace(dateFormatRegExp, function (match) {
-                if (match === "d") {
-                    return date.getDate();
-                } else if (match === "dd") {
-                    return pad(date.getDate());
-                } else if (match === "ddd") {
-                    return culture.abbrDays[date.getDay()];
-                } else if (match === "dddd") {
-                    return culture.days[date.getDay()];
-                } else if (match === "M") {
-                    return date.getMonth() + 1;
-                } else if (match === "MM") {
-                    return pad(date.getMonth() + 1);
-                } else if (match === "MMM") {
-                    return culture.abbrMonths[date.getMonth()];
-                } else if (match === "MMMM") {
-                    return culture.months[date.getMonth()];
-                } else if (match === "yy") {
-                    return pad(date.getFullYear() % 100);
-                } else if (match === "yyyy") {
-                    return date.getFullYear();
-                } else if (match === "h" ) {
-                    return date.getHours() % 12 || 12
-                } else if (match === "hh") {
-                    return pad(date.getHours() % 12 || 12);
-                } else if (match === "H") {
-                    return date.getHours();
-                } else if (match === "HH") {
-                    return pad(date.getHours());
-                } else if (match === "m") {
-                    return date.getMinutes();
-                } else if (match === "mm") {
-                    return pad(date.getMinutes());
-                } else if (match === "s") {
-                    return date.getSeconds();
-                } else if (match === "ss") {
-                    return pad(date.getSeconds());
-                } else if (match === "f") {
-                    return Math.floor(date.getMilliseconds() / 100);
-                } else if (match === "ff") {
-                    return Math.floor(date.getMilliseconds() / 10);
-                } else if (match === "fff") {
-                    return date.getMilliseconds();
-                } else if (match === "tt") {
-                    return date.getHours() < 12 ? culture.am : culture.pm
-                }
-
-                return match.slice(1, match.length - 1);
-            });
-        }
-
-        //number formatting
-        function round(value, precision) {
-            var power = Math.pow(10, precision || 0);
-            return Math.round(value * power) / power;
-        }
-
-        function reverse(str) {
-            return str.split('').reverse().join('');
-        }
-
-        function injectInFormat(val, format, appendExtras) {
-            var i = 0, j = 0,
-                fLength = format.length,
-                vLength = val.length,
-                builder = [];
-
-            while (i < fLength && j < vLength && format.substring(i).search(customFormatRegEx) >= 0) {
-
-                if (format.charAt(i).match(customFormatRegEx)){
-                    builder.push(val.charAt(j++));
-                } else {
-                    builder.push(format.charAt(i));
-                }
-
-                i++;
+                value += integer.charAt(idx);
             }
 
-            if (j < vLength && appendExtras) {
-                builder.push(val.substring(j));
+            number = value + decimal + fraction.substr(0, decimalDigits);
+
+            if (formatMatches[1].toLowerCase() === "n") {
+                return negative ? patterns.numeric[1].replace("n", number) : number;
+            } else if (formatMatches[1].toLowerCase() === "c") {
+                return patterns.currency[negative ? 1 : 0].replace("n", number);
             }
-            if(i < fLength) {
-                builder.push(format.substring(i));
+        }
+        //exponential -- start
+        var exponent = expRegExp.exec(format);
+        if (exponent) {
+            exponent = exponent.join("");
+            var digits = digitsRegExp.exec(exponent);
+            if(digits) {
+                digits = Number(digits[0]);
             }
 
-            var result = reverse(builder.join("")),
-                zeroIndex;
-
-            if (result.indexOf('#') > -1) {
-                zeroIndex = result.indexOf('0');
-            }
-
-            if (zeroIndex > -1) {
-                var first = result.slice(0, zeroIndex),
-                    second = result.slice(zeroIndex, result.length);
-                result = first.replace(/#/g, '') + second.replace(/#/g, '0');
+            if (digits !== null) {
+                return number.toExponential(digits);
             } else {
-                result = result.replace(/#/g, '');
+                return number.toExponential();
             }
+        }
+        //exponential -- end
 
-            if (result.indexOf(',') == 0) {
-                result = result.replace(/,/g, '');
-            }
-
-            return appendExtras ? result : reverse(result);
+        format = format.split(";");
+        if (number < 0 && format[1]) {
+            number = Math.abs(number);
+            format = format[1];
+        } else if (number === 0) {
+            format = format[2] || format[0];
+        } else {
+            format = format[0];
         }
 
-        function lastIndexOf(value, character) {
-            var characterLength = character.length;
-            for (var i = value.length - 1; i > -1; i--){
-                if (value.substr(i, characterLength) == character) {
-                    return i;
-                }
-            }
-            return -1;
+        // end
+
+        if (format.indexOf("%") !== -1) {
+            number *= 100;
+        }
+        number = number.toString().split(POINT);
+
+        format = format.split(POINT);
+
+        //awful code!!!
+        if (format[1] && /0$/.test(format[1])) {
+            number = parseFloat(number[0] + "." + number[1]).toFixed(format[1].length).toString().split(".");
         }
 
-        function zeroPad (str, count, left) {
-            for (var l = str.length; l < count; l++) {
-                str = left ? ('0' + str) : (str + '0');
-            }
-            return str;
-        }
+        //if(format[1]) {
+        //    var found = customFormatRegExp.exec(format[1]);
+        //    if (found && /0$/.test(found[0])) {
+        //        number = parseFloat(number[0] + (number[1] ? "." + number[1] : "")).toFixed(format[1].length - 1).toString().split(".");
+        //    }
+        //}
 
-        function addGroupSeparator (number, groupSeparator, groupSize) {
-            if (groupSeparator && groupSize != 0) {
-                var regExp = new RegExp('(-?[0-9]+)([0-9]{' + groupSize + '})');
-                while (regExp.test(number)) {
-                    number = number.replace(regExp, '$1' + groupSeparator + '$2');
-                }
-            }
-            return number;
-        }
+        var matchedLength,
+            result = number[0],
+            length = result.length,
+            integer = format[0],
+            fraction = format[1],
+            hasGroupSeparator = integer.indexOf(COMMA) !== -1,
+            groupSeparatorRegExp = new RegExp('(-?[0-9]+)([0-9]{' + groupSize + '})');
 
-        function formatNumber (number, format) {
-            var type,
-                customFormat,
-                isCustomFormat,
-                negativeFormat,
-                zeroFormat,
-                exponent,
-                left,
-                right,
-                undefined,
-                sign = number < 0;
-
-            format = format.split(":");
-            format = format.length > 1 ? format[1].replace("}", "") : format[0];
-            isCustomFormat = format.search(customFormatRegEx) != -1;
-
-            if (isCustomFormat) {
-                format = format.split(";");
-                customFormat = format[0];
-                negativeFormat = format[1];
-                zeroFormat = format[2];
-                format = (sign && negativeFormat ? negativeFormat : customFormat).indexOf('%') != -1 ? "p" : "n";
+        integer = integer.replace(customFormatRegExp, function(match) {
+            matchedLength = match.length;
+            if (matchedLength > length) {
+                result = match.slice(0, matchedLength - length) + result;
             }
 
-            switch (format.toLowerCase()) {
-                case "d":
-                    return Math.round(number).toString();
-                case "c":
-                    type = "currency"; break;
-                case "n":
-                    type = "numeric"; break;
-                case "p":
-                    type = "percent";
-                    number = Math.abs(number) * 100;
-                    break;
-                default:
-                    return number.toString();
-            }
+            result = replace(result, leftMostZeroRegExp);
 
-            var digits = culture[type + "decimaldigits"],
-                separator = culture[type + "decimalseparator"],
-                groupSeparator = culture[type + "groupseparator"],
-                groupSize = culture[type + "groupsize"],
-                negative = culture[type + "negative"],
-                positive = culture[type + "positive"],
-                symbol = culture[type + "symbol"];
-
-            if (isCustomFormat) {
-                var splits = (sign && negativeFormat ? negativeFormat : customFormat).split('.'),
-                    leftF = splits[0],
-                    rightF = splits.length > 1 ? splits[1] : '',
-                    lastIndexZero = lastIndexOf(rightF, '0'),
-                    lastIndexSharp = lastIndexOf(rightF, '#');
-                digits = (lastIndexSharp > lastIndexZero ? lastIndexSharp : lastIndexZero) + 1;
-            }
-
-            var rounded = round(number, digits);
-            number = isFinite(rounded) ? rounded : number;
-
-            var split = number.toString().split(/e/i);
-            exponent = split.length > 1 ? parseInt(split[1]) : 0;
-            split = split[0].split('.');
-
-            left = split[0];
-            left = sign ? left.replace('-', '') : left;
-            right = split.length > 1 ? split[1] : '';
-
-            if (exponent) {
-                if (!sign) {
-                    right = zeroPad(right, exponent, false);
-                    left += right.slice(0, exponent);
-                    right = right.substr(exponent);
-                } else {
-                    left = zeroPad(left, exponent + 1, true);
-                    right = left.slice(exponent, left.length) + right;
-                    left = left.slice(0, exponent);
+            if (hasGroupSeparator) {
+                result = result.replace(COMMA, EMPTY);
+                if (groupSeparator && groupSize != 0) {
+                    while (groupSeparatorRegExp.test(result)) {
+                        result = result.replace(groupSeparatorRegExp, '$1' + groupSeparator + '$2');
+                    }
                 }
             }
 
-            var result,
-                rightLength = right.length;
-
-            if (digits < 1 || (isCustomFormat && lastIndexZero == -1 && rightLength === 0)){
-                right = '';
-            } else {
-                right = rightLength > digits ? right.slice(0, digits) : zeroPad(right, digits, false);
-            }
-
-            if (isCustomFormat) {
-                if (left == 0) {
-                     left = '';
-                }
-
-                left = injectInFormat(reverse(left), reverse(leftF), true);
-                left = leftF.indexOf(',') != -1 ? addGroupSeparator(left, groupSeparator, groupSize) : left;
-
-                right = right && rightF ? injectInFormat(right, rightF) : '';
-
-                if(number === 0 && zeroFormat) {
-                    result = zeroFormat;
-                } else {
-                    result = (sign && !negativeFormat ? '-' : '') + left + (right.length > 0 ? separator + right : '');
-                }
-            } else {
-                var pattern,
-                    numberString,
-                    patterns = numericPatterns[type];
-
-                if(sign) {
-                    pattern = patterns['negative'][negative];
-                } else {
-                    pattern = symbol ? patterns['positive'][positive] : null;
-                }
-
-                left = addGroupSeparator(left, groupSeparator, groupSize);
-                numberString = left + (right.length > 0 ? separator + right : '');
-                result = pattern ? pattern.replace('n', numberString).replace('*', symbol) : numberString;
-            }
             return result;
-        }
+        });
 
-        function toString(value, fmt) {
-            if (fmt) {
-                if (value instanceof Date) {
-                    return formatDate(value, fmt);
-                } else if (typeof value === "number") {
-                    return formatNumber(value, fmt);
+        if (fraction) {
+            fraction = fraction.replace(customFormatRegExp, function(match) {
+                matchedLength = match.length;
+                result = number[1] !== undefined ? number[1] : EMPTY;
+                length = result.length;
+
+                if (matchedLength > length) {
+                    result = result + match.slice(length);
                 }
-            }
 
-            return value !== undefined ? value : "";
-        }
+                result = replace(result, rigtMostZeroRegExp);
 
-        kendo.format = function(fmt) {
-            var values = arguments;
+                if (result.length) {
+                    integer += decimal;
+                }
 
-            return fmt.replace(formatRegExp, function(match, index, placeholderFormat) {
-                var value = values[parseInt(index) + 1];
-
-                return toString(value, placeholderFormat ? placeholderFormat.substring(1) : "");
+                return result;
             });
+
+            integer += fraction;
         }
 
-        kendo.toString = toString;
+        return integer;
+    }
+    function toString(value, fmt) {
+        if (fmt) {
+            if (value instanceof Date) {
+                return formatDate(value, fmt);
+            } else if (typeof value === "number") {
+                return formatNumber(value, fmt);
+            }
+        }
+
+        return value !== undefined ? value : "";
+    }
+
+    kendo.format = function(fmt) {
+        var values = arguments;
+
+        return fmt.replace(formatRegExp, function(match, index, placeholderFormat) {
+            var value = values[parseInt(index) + 1];
+
+            return toString(value, placeholderFormat ? placeholderFormat.substring(1) : "");
+        });
+    }
+
+    kendo.toString = toString;
     })();
 
     function throttle(delay, callback) {

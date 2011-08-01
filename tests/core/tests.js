@@ -24,6 +24,10 @@ tests.push(
         title: "date formatting"
     },
     {
+        page: "core/numberformatting.html",
+        title: "number formatting"
+    },
+    {
         page: "core/json.html",
         title: "json"
     },
