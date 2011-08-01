@@ -6,12 +6,6 @@
 	<UsingTask TaskName="Telerik.MSBuildTasks.GenerateVersionDependentSuffix" AssemblyFile="MSBuildTasks\Telerik.MSBuildTasks.dll"/>
 	<UsingTask TaskName="UploadResources" AssemblyFile="MSBuildTasks\ResourceUploader.MSBuildTasks.dll" />
 
-	<PropertyGroup>
-		<ResourcesLocation>$(SolutionRoot)\deploy\kendoui</ResourcesLocation>
-		<ScriptsLocation>$(ResourcesLocation)\js</ScriptsLocation>
-		<StylesLocation>$(ResourcesLocation)\styles</StylesLocation>
-	</PropertyGroup>
-
 	<Target Name="DeployCDN">
 		<BuildStep TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)" Name="DeployCDNStep" Message="Deploying CDN resources">
 			<Output TaskParameter="Id" PropertyName="StepId" />
@@ -22,11 +16,11 @@
 		</GenerateVersionDependentSuffix>
 
 		<UploadResources
-				SourcePath="$(ScriptsLocation)" AccessKeyID="$(CDNAccessKeyId)" SecretAccessKey="$(CDNSecretAccessKey)"
+				SourcePath="$(ResourcesRoot)\js" AccessKeyID="$(CDNAccessKeyId)" SecretAccessKey="$(CDNSecretAccessKey)"
 				BucketName="$(CDNBucketName)" DestinationPath="$(DateSuffixDots)/js" Compress="True" />
 
 		<UploadResources
-				SourcePath="$(StylesLocation)" AccessKeyID="$(CDNAccessKeyId)" SecretAccessKey="$(CDNSecretAccessKey)"
+				SourcePath="$(ResourcesRoot)\styles" AccessKeyID="$(CDNAccessKeyId)" SecretAccessKey="$(CDNSecretAccessKey)"
 				BucketName="$(CDNBucketName)" DestinationPath="$(DateSuffixDots)/styles" Compress="True" />
 
 		<BuildStep  TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)"
