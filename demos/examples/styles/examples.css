@@ -89,6 +89,7 @@ body
     -webkit-box-shadow: 0 0 4px #555;
     -moz-box-shadow: 0 0 4px #555;
     box-shadow: 0 0 4px #555;
+    -webkit-backface-visibility: hidden;
 }
 
 .flowers
@@ -599,7 +600,6 @@ pre.prettyprint
     outline: none;
     -webkit-touch-callout: none;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-/*    -webkit-backface-visibility: hidden;*/ /* Very broken in Chrome 12, leaves artifacts on the screen. */
 }
 
 .t-animation-container
