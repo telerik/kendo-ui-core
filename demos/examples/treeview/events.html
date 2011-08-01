@@ -24,68 +24,74 @@
         <!-- description -->
         <!-- description -->
         <div id="example" class="t-content">
-            <div id="TreeView"></div>
+            <div id="treeview"></div>
 
             <script type="text/javascript">
-                var treeview;
+                $(document).ready(function() {
+                    var treeview;
 
-                $("#TreeView").kendoTreeView({
-                    dataSource: [
-                        { text: "Item 1", expanded: true, items: [
-                            { text: "Item 1.1" },
-                            { text: "Item 1.2" },
-                            { text: "Item 1.3" }
-                        ] },
-                        { text: "Item 2", items: [
-                            { text: "Item 2.1" },
-                            { text: "Item 2.2" },
-                            { text: "Item 2.3" }
-                        ] },
-                        { text: "Item 3" }
-                    ],
-
-                    select: function (e) {
+                    function onSelect(e) {
                         kendoConsole.log("Selected: " + treeview.text(e.node));
-                    },
+                    }
 
-                    error: function (e) {
+                    function onError(e) {
                         kendoConsole.error("Loading failed with " + e.xhr.statusText + " " + e.xhr.status);
-                    },
+                    }
 
-                    collapse: function (e) {
+                    function onCollapse(e) {
                         kendoConsole.log("Collapsing " + treeview.text(e.node));
-                    },
+                    }
 
-                    expand: function (e) {
+                    function onExpand(e) {
                         kendoConsole.log("Expanding " + treeview.text(e.node));
-                    },
+                    }
 
-                    dragAndDrop: true,
-
-                    /* drag & drop events */
-
-                    dragstart: function (e) {
+                    function onDragStart(e) {
                         kendoConsole.log("Started dragging " + treeview.text(e.sourceNode));
-                    },
+                    }
 
-                    drag: function (e) {
+                    function onDrag(e) {
                         // omitted event logging in order to prevent console flood
                         // kendoConsole.log("Started dragging " + treeview.text(e.sourceNode));
-                    },
+                    }
 
-                    drop: function (e) {
+                    function onDrop(e) {
                         kendoConsole.log(
-                            "Dropped " + treeview.text(e.sourceNode) +
-                            " (" + (e.valid ? "valid" : "invalid") + ")"
+                        "Dropped " + treeview.text(e.sourceNode) +
+                        " (" + (e.valid ? "valid" : "invalid") + ")"
                         );
-                    },
+                    }
 
-                    dragend: function (e) {
+                    function onDragEnd(e) {
                         kendoConsole.log("Finished dragging " + treeview.text(e.sourceNode));
                     }
-                });
 
-                treeview = $("#TreeView").data("kendoTreeView");
+                    treeview = $("#treeview").kendoTreeView({
+                        dataSource: [
+                            { text: "Item 1", expanded: true, items: [
+                                { text: "Item 1.1" },
+                                { text: "Item 1.2" },
+                                { text: "Item 1.3" }
+                            ] },
+                            { text: "Item 2", items: [
+                                { text: "Item 2.1" },
+                                { text: "Item 2.2" },
+                                { text: "Item 2.3" }
+                            ] },
+                            { text: "Item 3" }
+                        ],
+                        select: onSelect,
+                        error: onError,
+                        collapse: onCollapse,
+                        expand: onExpand,
+                        dragAndDrop: true,
+                        /* drag & drop events */
+                        dragstart: onDragStart,
+                        drag: onDrag,
+                        drop: onDrop,
+                        dragend: onDragEnd
+                    }).data("kendoTreeView");
+                });
             </script>
         </div>
         <div class="console"></div>

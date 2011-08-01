@@ -23,7 +23,7 @@
         <div class="description">Basic usage</div>
         <!-- description -->
         <div id="example" class="t-content">
-            <div id="TabStrip1">
+            <div id="tabstrip">
                 <ul>
                     <li class="t-state-active">
                         First Tab
@@ -58,7 +58,9 @@
                 </div>
             </div>
             <script type="text/javascript">
-                $("#TabStrip1").kendoTabStrip();
+                $(document).ready(function() {
+                    $("#tabstrip").kendoTabStrip();
+                });
             </script>
         </div>
         <!-- tools -->

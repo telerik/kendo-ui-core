@@ -23,7 +23,7 @@
         <div class="description">Animation Effects</div>
         <!-- description -->
         <div id="example" class="t-content">
-            <ul id="panelBar">
+            <ul id="panelbar">
                 <li class="t-state-active">
                     First Item
                     <ul>
@@ -87,31 +87,31 @@
             </div>
             <script type="text/javascript">
                 $(document).ready(function() {
-                    var original = $("#panelBar").clone(true);
+                    var original = $("#panelbar").clone(true);
                     original.find(".t-state-active").removeClass("t-state-active");
 
                     $(".configuration input").change( function() {
-                        var panelBar = $("#panelBar"),
+                        var panelBar = $("#panelbar"),
                             clone = original.clone(true);
 
-                        panelBar.data("kendoPanelBar").collapse($("#panelBar .t-link"));
+                        panelBar.data("kendoPanelBar").collapse($("#panelbar .t-link"));
 
                         panelBar.replaceWith(clone);
 
                         initPanelBar();
                     });
 
+                    var initPanelBar = function () {
+                        $("#panelbar").kendoPanelBar({ animation: { open: { effects: getEffects() } } }).css({ marginRight: "220px" });
+                    };
+
+                    var getEffects = function () {
+                        return (($("#expand")[0].checked ? "expandVertical " : "") +
+                                ($("#opacity")[0].checked ? "fadeIn" : "")) || false;
+                    };
+
                     initPanelBar();
                 });
-
-                var getEffects = function () {
-                    return (($("#expand")[0].checked ? "expandVertical " : "") +
-                            ($("#opacity")[0].checked ? "fadeIn" : "")) || false;
-                };
-
-                var initPanelBar = function () {
-                    $("#panelBar").kendoPanelBar({ animation: { open: { effects: getEffects() } } }).css({ marginRight: "220px" });
-                };
             </script>
         </div>
         <!-- tools -->

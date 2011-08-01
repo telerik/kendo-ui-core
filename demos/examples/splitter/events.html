@@ -40,22 +40,23 @@
                     Outer splitter : bottom pane
                     </p>
                 </div>
+            </div>
         </div>
         <script type="text/javascript">
             $(document).ready(function() {
-                var onResize = function (e) {
+                function onResize(e) {
                     kendoConsole.log("Resized :: Splitter #" + this.element[0].id);
                 };
 
-                var onExpand = function (e) {
+                function onExpand(e) {
                     kendoConsole.log("Expanded :: Pane #" + e.pane.id + " from splitter #" + this.id + "expanded");
                 };
 
-                var onCollapse = function (e) {
+                function onCollapse(e) {
                     kendoConsole.log("Collapsed :: Pane #" + e.pane.id + " from splitter #" + this.id + "collapsed");
                 };
 
-                var onContentLoad = function (e) {
+                function onContentLoad(e) {
                     kendoConsole.log("Content loaded in <b>"+ e.pane.id +
                         "</b> and starts with <b>" + $(e.pane).text().substr(0, 20) + "...</b>");
                 };

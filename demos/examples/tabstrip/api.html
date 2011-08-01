@@ -47,7 +47,7 @@
                     </li>
                 </ul>
             </div>
-            <div id="TabStrip1">
+            <div id="tabstrip">
                 <ul>
                     <li class="t-state-active">
                         First Tab
@@ -82,50 +82,52 @@
                 </div>
             </div>
             <script type="text/javascript">
-                var getItem = function (target) {
-                    var itemIndex = target[0].value;
+                $(document).ready(function() {
+                    var getItem = function (target) {
+                        var itemIndex = target[0].value;
 
-                    return tabStrip.tabGroup.children("li").eq(itemIndex);
-                };
+                        return tabStrip.tabGroup.children("li").eq(itemIndex);
+                    };
 
-                $(".selectTab").click(function(e) {
-                    tabStrip.select(getItem($("#tabIndex")));
+                    $(".selectTab").click(function(e) {
+                        tabStrip.select(getItem($("#tabIndex")));
+                    });
+
+                    $(".toggleTab").click(function(e) {
+                        var tab = tabStrip.select();
+
+                        tabStrip.enable(tab, tab.hasClass("t-state-disabled"));
+                    });
+
+                    $(".removeItem").click( function (e) {
+                        var tab = tabStrip.select(),
+                            otherTab = tab.next();
+                        otherTab = otherTab.length ? otherTab : tab.prev();
+
+                        tabStrip.remove(tab);
+                        tabStrip.select(otherTab);
+                    });
+
+                    $(".appendItem").click( function (e) {
+                        tabStrip.append({
+                                text: $("#appendText").val()
+                            });
+                    });
+
+                    $(".beforeItem").click( function (e) {
+                        tabStrip.insertBefore({
+                                text: $("#beforeText").val()
+                            }, tabStrip.select());
+                    });
+
+                    $(".afterItem").click( function (e) {
+                        tabStrip.insertAfter({
+                                text: $("#afterText").val()
+                            }, tabStrip.select());
+                    });
+
+                    var tabStrip = $("#tabstrip").kendoTabStrip().css({ marginRight: "220px" }).data("kendoTabStrip");
                 });
-
-                $(".toggleTab").click(function(e) {
-                    var tab = tabStrip.select();
-
-                    tabStrip.enable(tab, tab.hasClass("t-state-disabled"));
-                });
-
-                $(".removeItem").click( function (e) {
-                    var tab = tabStrip.select(),
-                        otherTab = tab.next();
-                    otherTab = otherTab.length ? otherTab : tab.prev();
-
-                    tabStrip.remove(tab);
-                    tabStrip.select(otherTab);
-                });
-
-                $(".appendItem").click( function (e) {
-                    tabStrip.append({
-                            text: $("#appendText").val()
-                        });
-                });
-
-                $(".beforeItem").click( function (e) {
-                    tabStrip.insertBefore({
-                            text: $("#beforeText").val()
-                        }, tabStrip.select());
-                });
-
-                $(".afterItem").click( function (e) {
-                    tabStrip.insertAfter({
-                            text: $("#afterText").val()
-                        }, tabStrip.select());
-                });
-
-                var tabStrip = $("#TabStrip1").kendoTabStrip().css({ marginRight: "220px" }).data("kendoTabStrip");
             </script>
         </div>
         <!-- tools -->

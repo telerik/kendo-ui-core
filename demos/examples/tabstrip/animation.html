@@ -23,7 +23,7 @@
         <div class="description">Animation Effects</div>
         <!-- description -->
         <div id="example" class="t-content">
-            <div id="TabStrip1">
+            <div id="tabstrip">
                 <ul>
                     <li class="t-state-active">
                         First Tab
@@ -73,34 +73,36 @@
                 </ul>
             </div>
             <script type="text/javascript">
-                var original = $("#TabStrip1").clone(true);
-                original.find(".t-state-active").removeClass("t-state-active");
+                $(document).ready(function() {
+                    var original = $("#tabstrip").clone(true);
+                    original.find(".t-state-active").removeClass("t-state-active");
 
-                var getEffects = function () {
-                    return (($("#expand")[0].checked ? "expandVertical " : "") + ($("#opacity")[0].checked ? "fadeIn" : "")) || false;
-                };
+                    var getEffects = function () {
+                        return (($("#expand")[0].checked ? "expandVertical " : "") + ($("#opacity")[0].checked ? "fadeIn" : "")) || false;
+                    };
 
-                var initTabStrip = function () {
-                    $("#TabStrip1").kendoTabStrip({ animation: { open: { effects: getEffects() } } }).css({ marginRight: "220px" });
-                };
+                    var initTabStrip = function () {
+                        $("#tabstrip").kendoTabStrip({ animation: { open: { effects: getEffects() } } }).css({ marginRight: "220px" });
+                    };
 
-                $(".configuration input").change( function() {
-                    var tabStrip = $("#TabStrip1"),
-                        selectedIndex = tabStrip.data("kendoTabStrip").select().index(),
-                        clone = original.clone(true);
+                    $(".configuration input").change( function() {
+                        var tabStrip = $("#tabstrip"),
+                            selectedIndex = tabStrip.data("kendoTabStrip").select().index(),
+                            clone = original.clone(true);
 
-                    clone.children("ul")
-                         .children("li")
-                         .eq(selectedIndex)
-                         .addClass("t-state-active")
-                         .end();
+                        clone.children("ul")
+                             .children("li")
+                             .eq(selectedIndex)
+                             .addClass("t-state-active")
+                             .end();
 
-                    tabStrip.replaceWith(clone);
+                        tabStrip.replaceWith(clone);
+
+                        initTabStrip();
+                    });
 
                     initTabStrip();
                 });
-
-                initTabStrip();
             </script>
         </div>
         <!-- tools -->

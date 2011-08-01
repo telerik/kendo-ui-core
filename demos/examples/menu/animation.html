@@ -108,9 +108,6 @@
 
                         initMenu();
                     });
-
-                    initMenu();
-
                     var getEffects = function () {
                         return (($("#expand")[0].checked ? "expandVertical " : "") +
                                 ($("#slide")[0].checked ? "slideIn:down " : "") +
@@ -126,6 +123,8 @@
                             marginRight: "220px"
                         });
                     };
+
+                    initMenu();
                 });
             </script>
         </div>
