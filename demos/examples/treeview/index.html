@@ -22,7 +22,7 @@
         <!-- description -->
         <!-- description -->
         <div id="example" class="t-content">
-            <ul id="TreeView">
+            <ul id="treeview">
                 <li data-expanded="true">Item 1
                     <ul>
                         <li>Item 1.1</li>
@@ -40,7 +40,9 @@
                 <li>Item 3</li>
             </ul>
             <script type="text/javascript">
-                $("#TreeView").kendoTreeView();
+                $(document).ready(function() {
+                    $("#treeview").kendoTreeView();
+                });
             </script>
         </div>
         <!-- tools -->

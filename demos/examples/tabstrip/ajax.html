@@ -23,7 +23,7 @@
         <div class="description">Loading content with AJAX</div>
         <!-- description -->
         <div id="example" class="t-content">
-            <div id="TabStrip1">
+            <div id="tabstrip">
                 <ul>
                     <li class="t-state-active">
                         First Ajax Tab
@@ -44,14 +44,16 @@
             </div>
         </div>
         <script type="text/javascript">
-            $("#TabStrip1").kendoTabStrip({
-                contentUrls: [
-                    'ajax/ajaxContent1.html',
-                    'ajax/ajaxContent2.html',
-                    'ajax/ajaxContent3.html',
-                    'ajax/ajaxContent4.html',
-                    'ajax/ajaxContent5.html'
-                ]
+            $(document).ready(function() {
+                $("#tabstrip").kendoTabStrip({
+                    contentUrls: [
+                        'ajax/ajaxContent1.html',
+                        'ajax/ajaxContent2.html',
+                        'ajax/ajaxContent3.html',
+                        'ajax/ajaxContent4.html',
+                        'ajax/ajaxContent5.html'
+                    ]
+                });
             });
         </script>
         <!-- tools -->

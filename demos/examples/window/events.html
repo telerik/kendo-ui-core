@@ -48,24 +48,24 @@
                                     undo.hide();
                                 });
 
-                    var onOpen = function (e) {
+                    function onOpen(e) {
                         kendoConsole.log("event :: open");
                     };
 
-                    var onClose = function (e) {
+                    function onClose(e) {
                         undo.show();
                         kendoConsole.log("event :: close");
                     };
 
-                    var onActivate = function (e) {
+                    function onActivate(e) {
                         kendoConsole.log("event :: activate");
                     };
 
-                    var onRefresh = function (e) {
+                    function onRefresh(e) {
                         kendoConsole.log("event :: refresh");
                     };
 
-                    var onResize = function (e) {
+                    function onResize(e) {
                         kendoConsole.log("event :: resize");
                     };
 
