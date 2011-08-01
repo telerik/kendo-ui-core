@@ -541,7 +541,7 @@
     var EMPTY = "",
         POINT = ".",
         COMMA = ",",
-        standardFormatRegExp =  /^(n|c)(\d*)$/i,
+        standardFormatRegExp =  /^(n|c|e)(\d*)$/i,
         customFormatRegExp = /([#0,]+)/,
         digitPlaceholderRegExp = /#+/,
         leftMostZeroRegExp = /(0+#+)+/,
@@ -574,6 +574,16 @@
 
             var negative = number < 0;
 
+            //exponent
+            if (formatMatches[1].toLowerCase() === "e") {
+                if (formatMatches[2]) {
+                    return number.toExponential(decimalDigits);
+                } else {
+                    return number.toExponential();
+                }
+            }
+            //end
+
             number = number.toFixed(decimalDigits);
             number = number.toString().split(".");
 
@@ -605,22 +615,6 @@
                 return patterns.currency[negative ? 1 : 0].replace("n", number);
             }
         }
-        //exponential -- start
-        var exponent = expRegExp.exec(format);
-        if (exponent) {
-            exponent = exponent.join("");
-            var digits = digitsRegExp.exec(exponent);
-            if(digits) {
-                digits = Number(digits[0]);
-            }
-
-            if (digits !== null) {
-                return number.toExponential(digits);
-            } else {
-                return number.toExponential();
-            }
-        }
-        //exponential -- end
 
         format = format.split(";");
         if (number < 0 && format[1]) {
