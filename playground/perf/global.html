@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Formatting performance</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="https://raw.github.com/jquery/globalize/master/lib/globalize.js"></script>
+        <script src="benchmark.js"></script>
+        <style>
+        </style>
+    </head>
+    <body>
+        <p>Running benchmark ... </p>
+        <script>
+            $(document).ready(function() {
+                var suite = new Benchmark.Suite;
+                var date = new Date(1955,10,5);
+                suite.add("Globalize date formatting", function() {
+                    Globalize.format(date, "yyyy/MM/dd");
+                })
+                .add("Kendo date formatting", function() {
+                    kendo.toString(date,"yyyy/MM/dd");
+                })
+                .on("complete", function() {
+                    var message = "User agent: " + navigator.userAgent;
+                    message += "<table><tr><th>Position</th><th>Contender</th><th>Ops/sec (higher is better)</th></tr>";
+                        var results = $.makeArray(this);
+                        results.sort(function(a, b) { return b.hz - a.hz });
+                        $.each(results, function(index) {
+                            message += "<tr><td>" + (index + 1) + "</td><td>" + this.name + "</td><td>" + this.hz + "</td></tr>";
+                        });
+                        message += "</table>";
+                    $("p:first").html(message);
+                })
+                .run(true);
+            });
+        </script>
+    </body>
+</html>
