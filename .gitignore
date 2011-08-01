@@ -7,4 +7,5 @@ tags
 *.min.js
 live/
 release/
+deploy/
 docs/
