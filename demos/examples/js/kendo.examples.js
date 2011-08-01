@@ -372,6 +372,32 @@
 
 })(jQuery, window);
 
+function locatePage(url) {
+    var category = "",
+        iterate = function(item) {
+        var result = true;
+
+        $.each(item, function (idx, value) {
+            if ($.isPlainObject(value) && "url" in value && value.url === url) {
+                result = false;
+                return result;
+            }
+
+            if ($.isPlainObject(value) || $.isArray(value)) {
+                result = iterate(value);
+
+                category = idx;
+                return result;
+            }
+        });
+        return result;
+    };
+
+    iterate(categories);
+
+    return category;
+}
+
 var categories = {
     overview: {
         text: "Overview",
