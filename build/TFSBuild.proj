@@ -5,7 +5,10 @@
 <Project DefaultTargets="DesktopBuild" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
 
 	<!-- Do not edit this -->
+	<Import Project="Config.proj" />
 	<Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\TeamBuild\Microsoft.TeamFoundation.Build.targets" />
+
+	<UsingTask TaskName="Telerik.MSBuildTasks.GenerateVersionDependentSuffix" AssemblyFile="MSBuildTasks\Telerik.MSBuildTasks.dll"/>
   <ProjectExtensions>
 
 		<!-- Team Foundation Build Version - DO NOT CHANGE -->
@@ -130,50 +133,27 @@
 
 	</PropertyGroup>
 
-  <PropertyGroup>
-    <!--Change for every major (quarterly) release -->
-    <Year>2011</Year>
-    <Release>2</Release>
-    <!-- Leave empty if this is a major release -->
-    <ServicePack></ServicePack>
-    <!-- Leave empty if this is not a BETA release -->
-    <Beta>BETA</Beta>
+    <Target Name="BeforeCompile">
+        <GenerateVersionDependentSuffix ReleaseYear="$(Year)" ReleaseQ="$(Release)" Separator=".">
+            <Output TaskParameter="Suffix" PropertyName="DateSuffixDots" />
+        </GenerateVersionDependentSuffix>
 
-    <Quarter>$(YEAR) Q$(Release)</Quarter>
-    <DirPath>$(Quarter)\Q$(Release) $(YEAR)</DirPath>
-  </PropertyGroup>
+        <Exec Command='"$(SolutionRoot)\build\TeamBuild.bat" "$(SolutionRoot)" "$(DateSuffixDots)"' />
+    </Target>
 
-  
-  <Choose>
-    <When Condition="$(ServicePack) != ''">
-      <PropertyGroup>
-        <DirPath>$(Quarter)\Q$(Release) $(YEAR) $(ServicePack)</DirPath>
-      </PropertyGroup>
-    </When>
-    <When Condition="$(BETA) == 'BETA'">
-      <PropertyGroup>
-        <DirPath>$(Quarter)\$(BETA)</DirPath>
-      </PropertyGroup>
-    </When>
-  </Choose>
-  
-  <Target Name="BeforeCompile">
-    <Exec Command='"$(SolutionRoot)\build\TeamBuild.bat" "$(SolutionRoot)"' />
-  </Target>
+    <Target Name="AfterCompile">
+        <ItemGroup>
+            <Resources Include="$(SolutionRoot)\release\**" />
+        </ItemGroup>
 
-  <Target Name="AfterCompile">
-    <ItemGroup>
-      <Resources Include="$(SolutionRoot)\release\**" />
-    </ItemGroup>
+        <Copy SourceFiles="@(Resources)" DestinationFolder="$(DropLocation)\$(DirPath)" />
+    </Target>
 
-    <Copy SourceFiles="@(Resources)" DestinationFolder="$(DropLocation)\$(DirPath)" />
-  </Target>
-
-  <PropertyGroup>
-    <SkipLabel>true</SkipLabel>
-    <SkipPostBuild>true</SkipPostBuild>
-    <SkipWorkItemCreation>true</SkipWorkItemCreation>
-    <SkipDropBuild>true</SkipDropBuild>
-    <ForceGet>true</ForceGet>
-  </PropertyGroup>
+    <PropertyGroup>
+        <SkipLabel>true</SkipLabel>
+        <SkipPostBuild>true</SkipPostBuild>
+        <SkipWorkItemCreation>true</SkipWorkItemCreation>
+        <SkipDropBuild>true</SkipDropBuild>
+        <ForceGet>true</ForceGet>
+    </PropertyGroup>
 </Project>

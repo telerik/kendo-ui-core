@@ -2,4 +2,7 @@
 
 cd %1
 
-C:\NodeJS\bin\node.exe build/build.js
+echo "param 2"
+echo %2
+
+C:\NodeJS\bin\node.exe build/build.js %2
