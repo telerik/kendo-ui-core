@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Number Formatting Performance</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="https://raw.github.com/jquery/globalize/master/lib/globalize.js"></script>
+        <script src="benchmark.js"></script>
+        <style>
+        </style>
+    </head>
+    <body>
+        <p>Running benchmark ... </p>
+        <script>
+            function number() {
+                var suite = new Benchmark.Suite;
+
+                suite.add("Globalize number formatting", function() {
+                    Globalize.format(1234.567, "n");
+                })
+                .add("Kendo number formatting", function() {
+                    kendo.toString(1234.567, "n");
+                })
+                .on("complete", function() {
+                    var message = "User agent: " + navigator.userAgent;
+                    message += "<table><tr><th>Position</th><th>Contender</th><th>Ops/sec (higher is better)</th></tr>";
+                        var results = $.makeArray(this);
+                        results.sort(function(a, b) { return b.hz - a.hz });
+                        $.each(results, function(index) {
+                            message += "<tr><td>" + (index + 1) + "</td><td>" + this.name + "</td><td>" + this.hz + "</td></tr>";
+                        });
+                        message += "</table>";
+                    $("p:first").html(message);
+
+                    currency();
+                })
+                .run(true);
+            }
+
+            function currency() {
+                var suite = new Benchmark.Suite;
+
+                $("p:first").append("Running...");
+                suite.add("Globalize currency formatting", function() {
+                    Globalize.format(1234.567, "c");
+                })
+                .add("Kendo currency formatting", function() {
+                    kendo.toString(1234.567, "c");
+                })
+                .on("complete", function() {
+                    var message = "User agent: " + navigator.userAgent;
+                    message += "<table><tr><th>Position</th><th>Contender</th><th>Ops/sec (higher is better)</th></tr>";
+                        var results = $.makeArray(this);
+                        results.sort(function(a, b) { return b.hz - a.hz });
+                        $.each(results, function(index) {
+                            message += "<tr><td>" + (index + 1) + "</td><td>" + this.name + "</td><td>" + this.hz + "</td></tr>";
+                        });
+                        message += "</table>";
+
+                    $("p:first").append(message);
+                })
+                .run(true);
+            }
+
+            $(document).ready(function() {
+                number();
+            });
+        </script>
+    </body>
+</html>
