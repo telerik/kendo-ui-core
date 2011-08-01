@@ -28,14 +28,14 @@
         <div id="example">
 
             <h3>Grid with single column sorting enabled</h3>
-            <div id="singlesort" style="width:600px;"></div>
+            <div id="singleSort" style="width:600px;"></div>
 
             <h3>Grid with multiple column sorting enabled</h3>
-            <div id="multiplesort" style="width:600px;"></div>
+            <div id="multipleSort" style="width:600px;"></div>
 
             <script type="text/javascript">
                 $(document).ready(function() {
-                    $("#singlesort").kendoGrid({
+                    $("#singleSort").kendoGrid({
                         dataSource: {
                             data: createRandomData(20),
                             pageSize: 5
@@ -62,7 +62,7 @@
                         ]
                     });
 
-                    $("#multiplesort").kendoGrid({
+                    $("#multipleSort").kendoGrid({
                         dataSource: {
                             data: createRandomData(20),
                             pageSize: 5
