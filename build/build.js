@@ -7,18 +7,18 @@ var cssmin = require("./lib/cssmin").cssmin;
 var examples = require("./build-examples");
 var spawn = require('child_process').spawn;
 
-var QUARTER = "2";
 var date = new Date();
 var STAT = fs.statSync("./");
-var VERSION = generateVersion();
+var VERSION = process.argv[2] || generateVersion();
 var RELEASE = "release/";
-var PATH = "kendoUI_" + VERSION;
+var DEPLOY = "deploy/";
+var PATH = DEPLOY + "kendoUI";
 var JS = PATH + "/js";
 var STYLES = PATH + "/styles";
 var SOURCE = PATH + "/source";
 var SOURCEJS = SOURCE + "/js";
 var SOURCESTYLES = SOURCE + "/styles";
-var ONLINEEXAMPLES = "kendoUI_onlineExamples_" + VERSION;
+var ONLINEEXAMPLES = DEPLOY + "onlineExamples";
 var count = 0;
 
 var cssRegExp = /\.css$/;
@@ -59,7 +59,7 @@ function generateVersion() {
     if (day < 10) {
         day = "0" + day;
     }
-    return date.getFullYear() + "_" + QUARTER + "_" + (date.getMonth() + 1) + "" + day;
+    return date.getFullYear() + "_2_" + (date.getMonth() + 1) + "" + day;
 }
 
 function mkdir(newDir) {
@@ -84,7 +84,7 @@ function zip(name, path, folder) {
 
         console.log("package " + name + " created.");
 
-        wrench.rmdirSyncRecursive(folder);
+        //wrench.rmdirSyncRecursive(folder);
 
         if (count === 1) {
             console.log("Time elapsed: " + ((new Date() - date) / 1000) + " seconds");
@@ -95,6 +95,7 @@ function zip(name, path, folder) {
 }
 
 function createDirectories() {
+    mkdir(DEPLOY);
     mkdir(RELEASE);
     mkdir(PATH);
     mkdir(SOURCE);
@@ -126,7 +127,7 @@ function processScripts() {
         all += data;
     });
 
-    fs.writeFileSync(PATH + "/kendo.all.min.js", all);
+    fs.writeFileSync(JS + "/kendo.all.min.js", all);
 }
 
 function processStyles() {
