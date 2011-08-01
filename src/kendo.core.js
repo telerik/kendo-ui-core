@@ -5,6 +5,7 @@
      */
     var kendo = window.kendo = window.kendo || {},
         extend = $.extend,
+        each = $.each,
         proxy = $.proxy,
         noop = $.noop,
         isFunction = $.isFunction,
@@ -235,9 +236,6 @@
         }
     };
 
-    function pad(n) {
-        return n < 10 ? "0" + n : n;
-    }
 
     //JSON stringify
 (function() {
@@ -385,62 +383,60 @@
     }
 })();
 
-    var CultureInfo = {
-        days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-        abbrDays: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-        shortestDays: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
-        months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-        abbrMonths: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-        longTime: "h:mm:ss tt",
-        longDate: "dddd, MMMM dd, yyyy",
-        shortDate: "M/d/yyyy",
-        shortTime: "h:mm tt",
-        fullDateTime: "dddd, MMMM dd, yyyy h:mm:ss tt",
-        generalDateShortTime: "M/d/yyyy h:mm tt",
-        generalDateTime: "M/d/yyyy h:mm:ss tt",
-        sortableDateTime: "yyyy'-'MM'-'ddTHH':'mm':'ss",
-        universalSortableDateTime: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
-        monthYear: "MMMM, yyyy",
-        monthDay: "MMMM dd",
-        today: "today",
-        tomorrow: "tomorrow",
-        yesterday: "yesterday",
-        next: "next",
-        last: "last",
-        year: "year",
-        month: "month",
-        week: "week",
-        day: "day",
-        am: "AM",
-        pm: "PM",
-        dateSeparator: "/",
-        timeSeparator: ":",
-        firstDayOfWeek: 0,
-        currencydecimaldigits: 2,
-        currencydecimalseparator: '.',
-        currencygroupseparator: ',',
-        currencygroupsize: 3,
-        currencynegative: 0,
-        currencypositive: 0,
-        currencysymbol: '$',
-        numericdecimaldigits: 2,
-        numericdecimalseparator: '.',
-        numericgroupseparator: ',',
-        numericgroupsize: 3,
-        numericnegative: 1,
-        percentdecimaldigits: 2,
-        percentdecimalseparator: '.',
-        percentgroupseparator: ',',
-        percentgroupsize: 3,
-        percentnegative: 0,
-        percentpositive: 0,
-        percentsymbol: '%'
-    };
+// Date and Number formatting
 
-    var formatters = {};
-
-    (function() {
-        var culture = CultureInfo,
+(function() {
+        var culture =   {
+            days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+            abbrDays: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+            shortestDays: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+            months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+            abbrMonths: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+            longTime: "h:mm:ss tt",
+            longDate: "dddd, MMMM dd, yyyy",
+            shortDate: "M/d/yyyy",
+            shortTime: "h:mm tt",
+            fullDateTime: "dddd, MMMM dd, yyyy h:mm:ss tt",
+            generalDateShortTime: "M/d/yyyy h:mm tt",
+            generalDateTime: "M/d/yyyy h:mm:ss tt",
+            sortableDateTime: "yyyy'-'MM'-'ddTHH':'mm':'ss",
+            universalSortableDateTime: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
+            monthYear: "MMMM, yyyy",
+            monthDay: "MMMM dd",
+            today: "today",
+            tomorrow: "tomorrow",
+            yesterday: "yesterday",
+            next: "next",
+            last: "last",
+            year: "year",
+            month: "month",
+            week: "week",
+            day: "day",
+            am: "AM",
+            pm: "PM",
+            dateSeparator: "/",
+            timeSeparator: ":",
+            firstDayOfWeek: 0,
+            currencydecimaldigits: 2,
+            currencydecimalseparator: '.',
+            currencygroupseparator: ',',
+            currencygroupsize: 3,
+            currencynegative: 0,
+            currencypositive: 0,
+            currencysymbol: '$',
+            numericdecimaldigits: 2,
+            numericdecimalseparator: '.',
+            numericgroupseparator: ',',
+            numericgroupsize: 3,
+            numericnegative: 1,
+            percentdecimaldigits: 2,
+            percentdecimalseparator: '.',
+            percentgroupseparator: ',',
+            percentgroupsize: 3,
+            percentnegative: 0,
+            percentpositive: 0,
+            percentsymbol: '%'
+        },
             customFormatRegEx = /[0#?]/,
             standardFormats = {
                 d: culture.shortDate,
@@ -469,53 +465,65 @@
                     positive: ['n *', 'n*', '*n'],
                     negative: ['-n *', '-n*', '-*n']
                 }
-            };
+            },
+            formatRegExp = /{(\d+)(:[^\}]+)?}/g,
+            dateFormatRegExp = /dddd|ddd|dd|d|MMMM|MMM|MM|M|yyyy|yy|HH|H|hh|h|mm|m|fff|ff|f|tt|ss|s|"[^"]*"|'[^']*'/g;
+
+        function pad(number) {
+            return number < 10 ? "0" + number : number;
+        }
 
         function formatDate(date, format) {
-            var d = date.getDate(),
-                day = date.getDay(),
-                M = date.getMonth(),
-                y = date.getFullYear(),
-                h = date.getHours(),
-                m = date.getMinutes(),
-                s = date.getSeconds(),
-                f = date.getMilliseconds(),
-                dateFormatters = {
-                    d: d,
-                    dd: pad(d),
-                    ddd: culture.abbrDays[day],
-                    dddd: culture.days[day],
+            format = standardFormats[format] || format;
 
-                    M: M + 1,
-                    MM: pad(M + 1),
-                    MMM: culture.abbrMonths[M],
-                    MMMM: culture.months[M],
+            return format.replace(dateFormatRegExp, function (match) {
+                if (match === "d") {
+                    return date.getDate();
+                } else if (match === "dd") {
+                    return pad(date.getDate());
+                } else if (match === "ddd") {
+                    return culture.abbrDays[date.getDay()];
+                } else if (match === "dddd") {
+                    return culture.days[date.getDay()];
+                } else if (match === "M") {
+                    return date.getMonth() + 1;
+                } else if (match === "MM") {
+                    return pad(date.getMonth() + 1);
+                } else if (match === "MMM") {
+                    return culture.abbrMonths[date.getMonth()];
+                } else if (match === "MMMM") {
+                    return culture.months[date.getMonth()];
+                } else if (match === "yy") {
+                    return pad(date.getFullYear() % 100);
+                } else if (match === "yyyy") {
+                    return date.getFullYear();
+                } else if (match === "h" ) {
+                    return date.getHours() % 12 || 12
+                } else if (match === "hh") {
+                    return pad(date.getHours() % 12 || 12);
+                } else if (match === "H") {
+                    return date.getHours();
+                } else if (match === "HH") {
+                    return pad(date.getHours());
+                } else if (match === "m") {
+                    return date.getMinutes();
+                } else if (match === "mm") {
+                    return pad(date.getMinutes());
+                } else if (match === "s") {
+                    return date.getSeconds();
+                } else if (match === "ss") {
+                    return pad(date.getSeconds());
+                } else if (match === "f") {
+                    return Math.floor(date.getMilliseconds() / 100);
+                } else if (match === "ff") {
+                    return Math.floor(date.getMilliseconds() / 10);
+                } else if (match === "fff") {
+                    return date.getMilliseconds();
+                } else if (match === "tt") {
+                    return date.getHours() < 12 ? culture.am : culture.pm
+                }
 
-                    yy: pad(y % 100),
-                    yyyy: y,
-
-                    h: h % 12 || 12,
-                    hh: pad(h % 12 || 12),
-                    H: h,
-                    HH: pad(h),
-
-                    m: m,
-                    mm: pad(m),
-
-                    s: s,
-                    ss: pad(s),
-
-                    f: Math.floor(f / 100),
-                    ff: Math.floor(f / 10),
-                    fff: f,
-
-                    tt: h < 12 ? culture.am : culture.pm
-                };
-
-            format = format in standardFormats ? standardFormats[format] : format;
-
-            return format.replace(/d{1,4}|M{1,4}|yy(?:yy)?|([Hhmstf])\1*|"[^"]*"|'[^']*'/g, function (match) {
-                return match in dateFormatters ? dateFormatters[match] : match.slice(1, match.length - 1);
+                return match.slice(1, match.length - 1);
             });
         }
 
@@ -723,31 +731,30 @@
             return result;
         }
 
-        extend(formatters, {
-            date: formatDate,
-            number: formatNumber
-        });
-    })();
+        function toString(value, fmt) {
+            if (fmt) {
+                if (value instanceof Date) {
+                    return formatDate(value, fmt);
+                } else if (typeof value === "number") {
+                    return formatNumber(value, fmt);
+                }
+            }
 
-    function format(fmt) {
-        var values = arguments;
-
-        return fmt.replace(/{(\d+)(:[^\}]+)?}/g, function(match, index, placeholderFormat) {
-            var value = values[parseInt(index) + 1];
-
-            return toString(value, placeholderFormat ? placeholderFormat.substring(1) : "");
-        });
-    }
-
-    function toString(value, fmt) {
-        var type = $.type(value);
-
-        if (formatters[type] && fmt) {
-            return formatters[type](value, fmt);
+            return value !== undefined ? value : "";
         }
 
-        return value !== undefined ? value : "";
-    }
+        kendo.format = function(fmt) {
+            var values = arguments;
+
+            return fmt.replace(formatRegExp, function(match, index, placeholderFormat) {
+                var value = values[parseInt(index) + 1];
+
+                return toString(value, placeholderFormat ? placeholderFormat.substring(1) : "");
+            });
+        }
+
+        kendo.toString = toString;
+    })();
 
     function throttle(delay, callback) {
         var timeout_id,
@@ -877,7 +884,7 @@
          */
         support.hasHW3D = 'WebKitCSSMatrix' in window && 'm11' in new WebKitCSSMatrix();
 
-        $.each([ 'Moz', 'webkit', 'O', 'ms' ], function () {
+        each([ 'Moz', 'webkit', 'O', 'ms' ], function () {
             var prefix = this.toString();
 
             if (typeof table.style[prefix + 'Transition'] === 'string') {
@@ -948,7 +955,7 @@
         var effects = {};
 
         if (typeof input === "string")
-            $.each(input.split(" "), function() {
+            each(input.split(" "), function() {
                 var effect = this.split(":"),
                     direction = effect[1],
                     effectBody = {};
@@ -958,7 +965,7 @@
                 effects[effect[0]] = effectBody;
             });
         else
-            $.each(input, function(idx) {
+            each(input, function(idx) {
                 if (this.direction && mirror)
                     this.direction = kendo.directions[this.direction].reverse;
 
@@ -1048,13 +1055,13 @@
             effects: {},
             duration: 400, //jQuery default duration
             reverse: false,
-            complete: $.noop,
-            teardown: $.noop,
+            complete: noop,
+            teardown: noop,
             hide: false,
             show: false
         }, options);
 
-        $.each( options.effects, function (effectName) {
+        each( options.effects, function (effectName) {
             var effect = options.reverse ? effectName + 'Reverse' : effectName;
 
             if (effect in effectInit)
@@ -1088,7 +1095,7 @@
             var teardowns = [];
 
             // create a promise for each effect
-            $.each(effects, function(effectName, settings) {
+            each(effects, function(effectName, settings) {
                 var promise = $.Deferred(function(deferred) {
                     var effect = kendo.fx[effectName];
 
@@ -1098,7 +1105,7 @@
                             duration: options.duration,
                             direction: settings.direction,
                             complete: function () {
-                                $.each(options.effects, function(idx, effect) {
+                                each(options.effects, function(idx, effect) {
                                     if ('options' in effect && 'teardown' in effect.options)
                                         teardowns.push(effect.options.teardown); // collect the internal completion callbacks
                                 });
@@ -1126,7 +1133,7 @@
                 }
 
                 options.complete(); // call the complete callback
-                $.each(teardowns, function () { this(); }); // call the internal completion callbacks
+                each(teardowns, function () { this(); }); // call the internal completion callbacks
             });
        });
     }
@@ -1160,7 +1167,7 @@
                 }, options.duration + 20); // TODO: this should fire a kendoAnimate session instead.
             }
 
-            $.each(classes, function(idx, value) {
+            each(classes, function(idx, value) {
                 element.toggleClass(value, add);
             });
         }
@@ -1206,7 +1213,7 @@
 
             if (id) {
                 var output = null;
-                $.each(changedTouches, function(idx, value) {
+                each(changedTouches, function(idx, value) {
                     if (id == value.identifier)
                         output = {
                             idx: value.identifier,
@@ -1224,7 +1231,7 @@
             }
         };
 
-        $.each(['swipe', 'swipeLeft', 'swipeRight', 'swipeUp', 'swipeDown', 'doubleTap', 'tap'], function(m, value) {
+        each(['swipe', 'swipeLeft', 'swipeRight', 'swipeUp', 'swipeDown', 'doubleTap', 'tap'], function(m, value) {
             $.fn[value] = function(callback) {
                 return this.bind(value, callback)
             }
@@ -1299,8 +1306,6 @@
         render: proxy(Template.render, Template),
         stringify: proxy(JSON.stringify, JSON),
         touchLocation: touchLocation,
-        format: format,
-        formatters: formatters,
         htmlEncode: htmlEncode,
         /** @ignore */
         getter: function(expression) {
@@ -1324,9 +1329,6 @@
             };
         }
     });
-
-    // This is required for Internet Explorer as jQuery.extend will not copy toString properly
-    kendo.toString = toString;
 
     var Component = Observable.extend( /** @lends kendo.ui.Component.prototype */ {
         /**

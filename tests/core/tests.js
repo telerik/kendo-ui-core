@@ -20,10 +20,6 @@ tests.push(
         title: "format"
     },
     {
-        page: "core/tostring.html",
-        title: "tostring"
-    },
-    {
         page: "core/dateformatting.html",
         title: "date formatting"
     },
