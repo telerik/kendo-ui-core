@@ -14,7 +14,7 @@
 			<Output TaskParameter="Suffix" PropertyName="DateSuffixDots" />
 		</GenerateVersionDependentSuffix>
 
-		<Exec Command='"$(SolutionRoot)\build\TeamBuild.bat" "$(SolutionRoot)" "$(DateSuffixDots)"' />
+		<Exec Command='"$(SolutionRoot)\build\NodeBuild.bat" "$(SolutionRoot)" "$(DateSuffixDots)"' />
 
 		<CallTarget Targets="CopyToOutputLocation" />
 
