@@ -269,7 +269,7 @@
 
             codeStrip = $("#codeStrip").data("kendoTabStrip");
 
-            var skinSelector = $("#skinselector");
+            var skinSelector = $("#skinSelector");
 
             $("#exampleBody").show();
 
