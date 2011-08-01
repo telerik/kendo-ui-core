@@ -23,30 +23,6 @@
         <div class="description">API</div>
         <!-- description -->
         <div id="example" class="t-content">
-            <div class="configuration">
-                <span class="configHead">Configuration</span>
-                <span class="configTitle">API Functions</span>
-                <ul class="options">
-                    <li>
-                        <input type="text" value="0" id="tabIndex"/> <button class="selectTab t-button">Select</button>
-                    </li>
-                    <li>
-                        <button class="toggleTab t-button">Enable/Disable Selected</button>
-                    </li>
-                    <li>
-                        <button class="removeItem t-button">Remove Selected</button>
-                    </li>
-                    <li>
-                        <input type="text" value="Item" id="appendText"/> <button class="appendItem t-button">Append</button>
-                    </li>
-                    <li>
-                        <input type="text" value="Item" id="beforeText"/> <button class="beforeItem t-button">Insert Before</button>
-                    </li>
-                    <li>
-                        <input type="text" value="Item" id="afterText"/> <button class="afterItem t-button">Insert After</button>
-                    </li>
-                </ul>
-            </div>
             <div id="tabstrip">
                 <ul>
                     <li class="t-state-active">
@@ -125,10 +101,34 @@
                                 text: $("#afterText").val()
                             }, tabStrip.select());
                     });
-
-                    var tabStrip = $("#tabstrip").kendoTabStrip().css({ marginRight: "220px" }).data("kendoTabStrip");
                 });
+
+                var tabStrip = $("#tabstrip").kendoTabStrip().css({ marginRight: "220px" }).data("kendoTabStrip");
             </script>
+            <div class="configuration">
+                <span class="configHead">Configuration</span>
+                <span class="configTitle">API Functions</span>
+                <ul class="options">
+                    <li>
+                        <input type="text" value="0" id="tabIndex"/> <button class="selectTab t-button">Select</button>
+                    </li>
+                    <li>
+                        <button class="toggleTab t-button">Enable/Disable Selected</button>
+                    </li>
+                    <li>
+                        <button class="removeItem t-button">Remove Selected</button>
+                    </li>
+                    <li>
+                        <input type="text" value="Item" id="appendText"/> <button class="appendItem t-button">Append</button>
+                    </li>
+                    <li>
+                        <input type="text" value="Item" id="beforeText"/> <button class="beforeItem t-button">Insert Before</button>
+                    </li>
+                    <li>
+                        <input type="text" value="Item" id="afterText"/> <button class="afterItem t-button">Insert After</button>
+                    </li>
+                </ul>
+            </div>
         </div>
         <!-- tools -->
         <!-- tools -->

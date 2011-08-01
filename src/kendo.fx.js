@@ -17,28 +17,41 @@
             return acc;
         };
 
+        var removeTransitionStyles = function (element) {
+            var cssPrefix = kendo.support.transitions.css;
+
+            element.css(cssPrefix + 'transition', 'none');
+
+            if (!kendo.support.touch) {
+                element.css(cssPrefix + 'backface-visibility', '');
+                element.css(cssPrefix + 'backface-visibility');
+
+                element.css(cssPrefix + 'transition');
+            }
+        };
+
         var checkTransition = function (transition) {
 
             if (transition) {
-                var checkStyle = document.defaultView.getComputedStyle(transition.object[0], null);
+                var element = transition.object,
+                    checkStyle = document.defaultView.getComputedStyle(element[0], null);
 
                 if (transition.complete &&
                     $.map(transition.keys, function(item) {
                         return checkStyle.getPropertyValue(item) != transition.startStyle[item] ? null : 1;
                     }).length) {
-                        transition.complete.call(transition.object);
-                        transition.object.css(kendo.support.transitions.css + 'transition', 'none');
+                        transition.complete.call(element);
 
-                        if (!kendo.support.touch)
-                            transition.object.css(kendo.support.transitions.css + 'transition');
+                        removeTransitionStyles(element);
 
-                        transition.object.unbind(kendo.support.transitions.event, kendo.fx.deQueue);
+                        element.unbind(kendo.support.transitions.event, kendo.fx.deQueue);
                 }
             }
         };
 
         var activateTask = function(currentTransition) {
-            var element = currentTransition.object;
+            var element = currentTransition.object,
+                cssPrefix = kendo.support.transitions.css;
 
             if (!currentTransition) return;
 
@@ -48,7 +61,7 @@
                 cssValues = {};
 
             element.css(currentTransition.setup);
-            element.css(kendo.support.transitions.css + 'transition');
+            element.css(cssPrefix + 'transition');
 
             $.each(currentTransition.keys, function() {
                 cssValues[this] = startStyle.getPropertyValue(this);
@@ -78,7 +91,11 @@
 
                 options.duration = $.fx ? $.fx.speeds[options.duration] || options.duration : options.duration;
 
-                var transforms = [], cssValues = {}, key;
+                var transforms = [],
+                    cssValues = {},
+                    cssPrefix = kendo.support.transitions.css,
+                    key;
+
                 for (key in properties)
                     if (transformProps.indexOf(key) != -1)
                         transforms.push(key + '(' + properties[key] + ')');
@@ -86,7 +103,7 @@
                         cssValues[key] = properties[key];
 
                 if (transforms.length)
-                    cssValues[kendo.support.transitions.css + 'transform'] = transforms.join(' ');
+                    cssValues[cssPrefix + 'transform'] = transforms.join(' ');
 
                 var currentTask = {
                     keys: keys(cssValues),
@@ -96,7 +113,9 @@
                     duration: options.duration,
                     complete: options.complete
                 };
-                currentTask.setup[kendo.support.transitions.css + 'transition'] = options.exclusive + ' ' + options.duration + 'ms ' + options.ease;
+                currentTask.setup[cssPrefix + 'transition'] = options.exclusive + ' ' + options.duration + 'ms ' + options.ease;
+                if (!kendo.support.touch)
+                    currentTask.setup[cssPrefix + 'backface-visibility'] = 'hidden';
 
                 var oldKeys = element.data('keys') || [];
                 $.merge(oldKeys, currentTask.keys);
@@ -108,14 +127,13 @@
             deQueue: function() {
                 var element = this.element;
 
-                if (++this.eventNo == this.effectCount) { // ouch :(
+                removeTransitionStyles(element);
+
+                if (++this.eventNo == this.effectCount) {
                     if (element.data('abortId')) {
                         clearTimeout(element.data('abortId'));
                         element.removeData('abortId');
                     }
-                    element.css(kendo.support.transitions.css + 'transition', 'none');
-                    if (!kendo.support.touch)
-                        element.css(kendo.support.transitions.css + 'transition');
 
                     element.dequeue();
                 }
@@ -123,7 +141,9 @@
 
             stopQueue: function(element, clearQueue, gotoEnd) {
 
-                var taskKeys = element.data('keys');
+                var taskKeys = element.data('keys'),
+                    cssPrefix = kendo.support.transitions.css;
+
                 if (gotoEnd === false && taskKeys) {
                     var style = document.defaultView.getComputedStyle(element[0], null),
                         cssValues = {},
@@ -132,17 +152,17 @@
                     while (prop < taskKeys.length)
                         cssValues[taskKeys[prop]] = style.getPropertyValue(taskKeys[prop++]);
 
-                    element.css(kendo.support.transitions.css + 'transition', 'none');
+                    element.css(cssPrefix + 'transition', 'none');
                     element.css(cssValues);
 
                     if (this.complete)
                         this.complete.call(element);
 
                 } else
-                    element.css(kendo.support.transitions.css + 'transition', 'none');
+                    element.css(cssPrefix + 'transition', 'none');
 
                 if (!kendo.support.touch)
-                    element.css(kendo.support.transitions.css + 'transition');
+                    element.css(cssPrefix + 'transition');
 
                 element.removeData('keys');
                 if (element.data('abortId')) {
@@ -310,9 +330,6 @@
         },
         halfFlip: {
             play: function(element, properties, options) {
-                element
-                    .css(kendo.support.transitions.css + 'backface-visibility', 'hidden')
-                    .css('height');
                 element.parent()
                     .css(kendo.support.transitions.css + 'perspective', 2000)
                     .css(kendo.support.transitions.css + 'transform-style', 'preserve-3d')
@@ -328,9 +345,6 @@
                 extender[options.direction == 'vertical' ? 'rotateX' : 'rotateY'] = 0;
                 animate(element, extend(extender, properties), extend(options, {
                     teardown: function () {
-                        element
-                            .css(kendo.support.transitions.css + 'backface-visibility', '')
-                            .css('height');
                         element.parent()
                             .css(kendo.support.transitions.css + 'perspective', '')
                             .css(kendo.support.transitions.css + 'transform-style', '')

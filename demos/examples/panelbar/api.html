@@ -23,33 +23,6 @@
         <div class="description">API</div>
         <!-- description -->
         <div id="example" style="min-height: 245px">
-            <div class="configuration">
-                <span class="configHead">Configuration</span>
-                <span class="configTitle">API Functions</span>
-                <ul class="options">
-                    <li>
-                        <input type="text" value="0" id="selectIndex"/> <button class="selectItem t-button">Select</button>
-                    </li>
-                    <li>
-                        <button class="toggleItem t-button">Enable/Disable</button>
-                    </li>
-                    <li>
-                        <button class="triggerItem t-button">Expand/Collapse</button>
-                    </li>
-                    <li>
-                        <button class="removeItem t-button">Remove</button>
-                    </li>
-                    <li>
-                        <input type="text" value="Item" id="appendText"/> <button class="appendItem t-button">Append</button>
-                    </li>
-                    <li>
-                        <input type="text" value="Item" id="beforeText"/> <button class="beforeItem t-button">Insert Before</button>
-                    </li>
-                    <li>
-                        <input type="text" value="Item" id="afterText"/> <button class="afterItem t-button">Insert After</button>
-                    </li>
-                </ul>
-            </div>
             <ul id="panelbar">
                 <li class="t-state-active">
                     First Item
@@ -99,16 +72,16 @@
             </ul>
 
             <script type="text/javascript">
-                var getItem = function (target) {
-                    var itemIndexes = target.val().split(/[.,]/),
-                        rootItem = panelBar.element.children("li").eq(itemIndexes[0]);
+                 $(document).ready(function() {
+                    var getItem = function (target) {
+                        var itemIndexes = target.val().split(/[.,]/),
+                            rootItem = panelBar.element.children("li").eq(itemIndexes[0]);
 
-                    return itemIndexes.length > 1 ?
-                                rootItem.find(".t-group > .t-item").eq(itemIndexes[1]) :
-                                rootItem;
-                };
+                        return itemIndexes.length > 1 ?
+                            rootItem.find(".t-group > .t-item").eq(itemIndexes[1]) :
+                            rootItem;
+                    };
 
-                $(document).ready(function() {
                     $(".selectItem").click(function (e) {
                         panelBar.select(getItem($("#selectIndex")));
                     });
@@ -151,9 +124,37 @@
                             }, panelBar.select());
                     });
 
-                    var panelBar = $("#panelbar").kendoPanelBar().css({ marginRight: "220px" }).data("kendoPanelBar");
                 });
+
+                var panelBar = $("#panelbar").kendoPanelBar().css({ marginRight: "220px" }).data("kendoPanelBar");
             </script>
+            <div class="configuration">
+                <span class="configHead">Configuration</span>
+                <span class="configTitle">API Functions</span>
+                <ul class="options">
+                    <li>
+                        <input type="text" value="0" id="selectIndex"/> <button class="selectItem t-button">Select</button>
+                    </li>
+                    <li>
+                        <button class="toggleItem t-button">Enable/Disable</button>
+                    </li>
+                    <li>
+                        <button class="triggerItem t-button">Expand/Collapse</button>
+                    </li>
+                    <li>
+                        <button class="removeItem t-button">Remove</button>
+                    </li>
+                    <li>
+                        <input type="text" value="Item" id="appendText"/> <button class="appendItem t-button">Append</button>
+                    </li>
+                    <li>
+                        <input type="text" value="Item" id="beforeText"/> <button class="beforeItem t-button">Insert Before</button>
+                    </li>
+                    <li>
+                        <input type="text" value="Item" id="afterText"/> <button class="afterItem t-button">Insert After</button>
+                    </li>
+                </ul>
+            </div>
         </div>
         <!-- tools -->
         <!-- tools -->
