@@ -27,7 +27,7 @@
                 <h3>Twitter feed</h3>
 
                 <div id="search-box">
-                    <label>Search for: <input type="text" value="html5" id="searchFor" /></label>
+                    <label>Search for: <input type="text" value="html5" id="searchfor" /></label>
                     <button class="t-button" id="search">search</button>
                 </div>
 
@@ -48,41 +48,43 @@
                 </div>
             </script>
 
-            <script>
-                // create a template using the above definition
-                var template = kendo.template($("#template").html());
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    // create a template using the above definition
+                    var template = kendo.template($("#template").html());
 
-                var dataSource = new kendo.data.DataSource({
-                    transport: {
-                        read: {
-                            url: "http://search.twitter.com/search.json", // the remove service url
-                            dataType: "jsonp", // JSONP (JSON with padding) is required for cross-domain AJAX
-                            data: { //additional parameters sent to the remote service
-                                q: function() {
-                                    return $("#searchFor").val();
+                    var dataSource = new kendo.data.DataSource({
+                        transport: {
+                            read: {
+                                url: "http://search.twitter.com/search.json", // the remove service url
+                                dataType: "jsonp", // JSONP (JSON with padding) is required for cross-domain AJAX
+                                data: { //additional parameters sent to the remote service
+                                    q: function() {
+                                        return $("#searchfor").val();
+                                    }
                                 }
                             }
+                        },
+                        schema: { // describe the result format
+                            data: "results" // the data which the data source will be bound to is in the "results" field
+                        },
+                        change: function() { // subscribe to the CHANGE event of the data source
+                            $("#tweets").html(kendo.render(template, this.view()));
                         }
-                    },
-                    schema: { // describe the result format
-                        data: "results" // the data which the data source will be bound to is in the "results" field
-                    },
-                    change: function() { // subscribe to the CHANGE event of the data source
-                        $("#tweets").html(kendo.render(template, this.view()));
-                    }
-                });
+                    });
 
-                // read data from the remote service
-                dataSource.read();
-
-                $("#search").click(function() {
+                    // read data from the remote service
                     dataSource.read();
-                });
 
-                $("#searchFor").keydown(function(e) {
-                    if (e.keyCode === kendo.keys.ENTER) {
+                    $("#search").click(function() {
                         dataSource.read();
-                    }
+                    });
+
+                    $("#searchfor").keydown(function(e) {
+                        if (e.keyCode === kendo.keys.ENTER) {
+                            dataSource.read();
+                        }
+                    });
                 });
             </script>
 

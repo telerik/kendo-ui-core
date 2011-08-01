@@ -70,7 +70,7 @@
                 }
             </style>
 
-            <script>
+            <script type="text/javascript">
                 var transport = {
                     read: {
                         url: "../datasource/internet-users.json",
@@ -177,13 +177,13 @@
                     createGrid();
                     createChart();
 
-                    $("#skinSelector").bind("change", function(e) {
+                    $("#skinselector").bind("change", function(e) {
                         createChart();
                     });
                 });
 
                 function getSkin() {
-                    return $("#skinSelector").val().toLowerCase();
+                    return $("#skinselector").val().toLowerCase();
                 }
             </script>
         </div>
