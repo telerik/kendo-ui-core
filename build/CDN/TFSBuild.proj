@@ -139,7 +139,7 @@
 	</ItemGroup>
 
 	<Target Name="AfterCompile">
-		<MSBuild Projects="$(SolutionRoot)\Build\DeployCDN.proj"/>
+		<MSBuild Projects="$(SolutionRoot)\Build\DeployCDN.proj" Properties="ResourcesRoot=$(SolutionRoot)\Deploy\KendoUI;"/>
 	</Target>
 
 	<PropertyGroup>
