@@ -2638,12 +2638,12 @@ div.t-slider
 .t-slider-vertical .t-slider-bottomright .t-tick-large { background-position:-64px center; }
 
 .t-slider-horizontal .t-first { background-position: 0 -4px; }
-.t-slider-horizontal .t-slider-topleft .t-first { background-position: 0 -124px; }
-.t-slider-horizontal .t-slider-bottomright .t-first { background-position: 0 -154px; }
+.t-slider-horizontal .t-slider-topleft .t-first { background-position: 0 -34px; }
+.t-slider-horizontal .t-slider-bottomright .t-first { background-position: 0 -64px; }
 
 .t-slider-horizontal .t-last { background-position: 100% -4px; }
-.t-slider-horizontal .t-slider-topleft .t-last { background-position: 100% -124px; }
-.t-slider-horizontal .t-slider-bottomright .t-last { background-position: 100% -154px; }
+.t-slider-horizontal .t-slider-topleft .t-last { background-position: 100% -34px; }
+.t-slider-horizontal .t-slider-bottomright .t-last { background-position: 100% -64px; }
 
 .t-slider-vertical .t-first { background-position: -4px 100%; }
 .t-slider-vertical .t-slider-topleft .t-first { background-position: -34px 100%; }
