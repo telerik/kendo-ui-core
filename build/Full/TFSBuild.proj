@@ -5,11 +5,9 @@
 <Project DefaultTargets="DesktopBuild" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
 
 	<!-- Do not edit this -->
-	<Import Project="Config.proj" />
 	<Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\TeamBuild\Microsoft.TeamFoundation.Build.targets" />
 
-	<UsingTask TaskName="Telerik.MSBuildTasks.GenerateVersionDependentSuffix" AssemblyFile="MSBuildTasks\Telerik.MSBuildTasks.dll"/>
-  <ProjectExtensions>
+	<ProjectExtensions>
 
 		<!-- Team Foundation Build Version - DO NOT CHANGE -->
 		<ProjectFileVersion>2</ProjectFileVersion>
@@ -140,11 +138,11 @@
 		</SolutionToBuild>
 	</ItemGroup>
 
-    <PropertyGroup>
-        <SkipLabel>true</SkipLabel>
-        <SkipPostBuild>true</SkipPostBuild>
-        <SkipWorkItemCreation>true</SkipWorkItemCreation>
-        <SkipDropBuild>true</SkipDropBuild>
-        <ForceGet>true</ForceGet>
-    </PropertyGroup>
+	<PropertyGroup>
+		<SkipLabel>true</SkipLabel>
+		<SkipPostBuild>true</SkipPostBuild>
+		<SkipWorkItemCreation>true</SkipWorkItemCreation>
+		<SkipDropBuild>true</SkipDropBuild>
+		<ForceGet>true</ForceGet>
+	</PropertyGroup>
 </Project>
