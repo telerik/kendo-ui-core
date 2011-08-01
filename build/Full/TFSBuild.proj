@@ -133,21 +133,12 @@
 
 	</PropertyGroup>
 
-    <Target Name="BeforeCompile">
-        <GenerateVersionDependentSuffix ReleaseYear="$(Year)" ReleaseQ="$(Release)" Separator=".">
-            <Output TaskParameter="Suffix" PropertyName="DateSuffixDots" />
-        </GenerateVersionDependentSuffix>
-
-        <Exec Command='"$(SolutionRoot)\build\TeamBuild.bat" "$(SolutionRoot)" "$(DateSuffixDots)"' />
-    </Target>
-
-    <Target Name="AfterCompile">
-        <ItemGroup>
-            <Resources Include="$(SolutionRoot)\release\**" />
-        </ItemGroup>
-
-        <Copy SourceFiles="@(Resources)" DestinationFolder="$(DropLocation)\$(DirPath)" />
-    </Target>
+	<ItemGroup>
+		<SolutionToBuild Include="$(SolutionRoot)/Build/Build.proj">
+			<Targets></Targets>
+			<Properties></Properties>
+		</SolutionToBuild>
+	</ItemGroup>
 
     <PropertyGroup>
         <SkipLabel>true</SkipLabel>
