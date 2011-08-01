@@ -44,27 +44,6 @@
                 equal(format("{1} {0}", "foo", "bar"), "bar foo");
             });
 
-            test("format does not use the formatter if no format is specified in the placeholder", function() {
-                kendo.formatters["number"] = function() {
-                    return "bogus";
-                };
-
-                equal(format("{0}", 1), "1");
-            });
-
-            test("format uses the formatter for the argument type", function() {
-                var fmt, value;
-                kendo.formatters["number"] = function() {
-                    fmt = arguments[0];
-                    value = arguments[1];
-                };
-
-                format("{0:d}", 1);
-
-                equal(value, "d");
-                equal(fmt, 1);
-            });
-
             test("format with nonnumeric placeholders", function() {
                 equal(format("{NaN}foo", 1), "{NaN}foo");
             });
