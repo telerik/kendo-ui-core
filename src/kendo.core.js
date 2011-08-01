@@ -454,7 +454,7 @@
     },
     patterns = {
         numeric: ["n", "-n"],
-        currency: ["*n", "(*n)"],
+        currency: ["$n", "($n)"],
         percent: {
             positive: ['n *', 'n*', '*n'],
             negative: ['-n *', '-n*', '-*n']
@@ -539,22 +539,22 @@
     }
 
     var EMPTY = "",
-    POINT = ".",
-    COMMA = ",",
-    standardFormatRegExp = /^[n|N|c|C]\d*/,
-    customFormatRegExp = /([#0,]+)/,
-    digitPlaceholderRegExp = /#+/,
-    leftMostZeroRegExp = /(0+#+)+/,
-    rigtMostZeroRegExp = /(#+0+)+/,
-    expRegExp = /^([e|E][-|+]*[\d]*)/,
-    digitsRegExp = /\d+/;
+        POINT = ".",
+        COMMA = ",",
+        standardFormatRegExp =  /^(n|c)(\d*)$/i,
+        customFormatRegExp = /([#0,]+)/,
+        digitPlaceholderRegExp = /#+/,
+        leftMostZeroRegExp = /(0+#+)+/,
+        rigtMostZeroRegExp = /(#+0+)+/,
+        expRegExp = /^([e|E][-|+]*[\d]*)/,
+        digitsRegExp = /\d+/;
 
     function formatNumber(number, format) {
         var groupSize = 3,
-        groupSeparator = ",",
-        decimal = ".",
-        decimalDigits = 2,
-        symbol = "$";
+            groupSeparator = ",",
+            decimal = ".",
+            decimalDigits = 2,
+            symbol = "$";
 
         if (number === undefined) {
             return EMPTY;
@@ -564,6 +564,38 @@
             return number.toString();
         }
 
+        var formatMatches = standardFormatRegExp.exec(format);
+
+        if (formatMatches) {
+            var negative = number < 0;
+
+            number = number.toString().split(".");
+
+            var integer = number[0];
+            var fraction = number[1] || new Array(decimalDigits + 1).join("0");
+            var value = "";
+            var idx, length;
+
+            if (negative) {
+                integer = integer.substring(1);
+            }
+
+            for (idx = 0, length = integer.length; idx < length; idx++) {
+                if ((length - idx) % groupSize === 0) {
+                    value += groupSeparator;
+                }
+
+                value += integer.charAt(idx);
+            }
+
+            number = value + decimal + fraction.substr(0, decimalDigits);
+
+            if (formatMatches[1].toLowerCase() === "n") {
+                return negative ? patterns.numeric[1].replace("n", number) : number;
+            } else if (formatMatches[1].toLowerCase() === "c") {
+                return patterns.currency[negative ? 1 : 0].replace("n", number);
+            }
+        }
         //exponential -- start
         var exponent = expRegExp.exec(format);
         if (exponent) {
@@ -591,30 +623,6 @@
             format = format[0];
         }
 
-        //standard patterns
-        if (standardFormatRegExp.test(format)) {
-            format = format.replace(standardFormatRegExp, function (match) {
-                var digits = digitsRegExp.exec(match);
-                digits = digits !== null ? parseInt(digits) : decimalDigits;
-
-                if (match.toLowerCase().indexOf("n") !== -1) {
-                    var customFormat = "#,#";
-                    if (digits > 0) {
-                        customFormat += "." + zeroPad(digits);
-                    }
-                    match = patterns["numeric"][number < 0 ? 1 : 0].replace("n", customFormat);
-                    number = Math.abs(number);
-                } else if (match.toLowerCase().indexOf("c") !== -1) {
-                    var customFormat = "#,#"; //same as number, just pattern is diff!!!
-                    if (digits > 0) {
-                        customFormat += "." + zeroPad(digits);
-                    }
-                    match = patterns["currency"][number < 0 ? 1 : 0].replace("n", customFormat).replace("*", symbol);
-                    number = Math.abs(number);
-                }
-                return match;
-            });
-        }
         // end
 
         if (format.indexOf("%") !== -1) {
@@ -637,14 +645,14 @@
         //}
 
         var matchedLength,
-        result = number[0],
-        length = result.length,
-        numerator = format[0],
-        nominative = format[1],
-        hasGroupSeparator = numerator.indexOf(COMMA) !== -1,
-        groupSeparatorRegExp = new RegExp('(-?[0-9]+)([0-9]{' + groupSize + '})');
+            result = number[0],
+            length = result.length,
+            integer = format[0],
+            fraction = format[1],
+            hasGroupSeparator = integer.indexOf(COMMA) !== -1,
+            groupSeparatorRegExp = new RegExp('(-?[0-9]+)([0-9]{' + groupSize + '})');
 
-        numerator = numerator.replace(customFormatRegExp, function(match) {
+        integer = integer.replace(customFormatRegExp, function(match) {
             matchedLength = match.length;
             if (matchedLength > length) {
                 result = match.slice(0, matchedLength - length) + result;
@@ -664,8 +672,8 @@
             return result;
         });
 
-        if (nominative) {
-            nominative = nominative.replace(customFormatRegExp, function(match) {
+        if (fraction) {
+            fraction = fraction.replace(customFormatRegExp, function(match) {
                 matchedLength = match.length;
                 result = number[1] !== undefined ? number[1] : EMPTY;
                 length = result.length;
@@ -677,16 +685,16 @@
                 result = replace(result, rigtMostZeroRegExp);
 
                 if (result.length) {
-                    numerator += decimal;
+                    integer += decimal;
                 }
 
                 return result;
             });
 
-            numerator += nominative;
+            integer += fraction;
         }
 
-        return numerator;
+        return integer;
     }
     function toString(value, fmt) {
         if (fmt) {
