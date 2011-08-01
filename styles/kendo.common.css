@@ -2637,10 +2637,10 @@ div.t-slider
 .t-slider-vertical .t-slider-topleft .t-tick-large { background-position:center -34px; }
 .t-slider-vertical .t-slider-bottomright .t-tick-large { background-position:-64px center; }
 
-.t-slider-horizontal .t-first { background-position: 0 -4px; }
-.t-slider-horizontal .t-last { background-position: 100% -4px; }
-.t-slider-vertical .t-first { background-position: -4px 100%; }
-.t-slider-vertical .t-last { background-position: -4px 0; }
+.t-slider-horizontal .t-slider-items .t-first { background-position: 0 -4px; }
+.t-slider-horizontal .t-slider-items .t-last { background-position: 100% -4px; }
+.t-slider-vertical .t-slider-items .t-first { background-position: -4px 100%; }
+.t-slider-vertical .t-slider-items .t-last { background-position: -4px 0; }
 
 .t-slider-vertical .t-tick
 {
