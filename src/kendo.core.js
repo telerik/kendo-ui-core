@@ -567,12 +567,18 @@
         var formatMatches = standardFormatRegExp.exec(format);
 
         if (formatMatches) {
+
+            if (formatMatches[2]) {
+                decimalDigits = new Number(formatMatches[2]);
+            }
+
             var negative = number < 0;
 
+            number = number.toFixed(decimalDigits);
             number = number.toString().split(".");
 
             var integer = number[0];
-            var fraction = number[1] || new Array(decimalDigits + 1).join("0");
+            var fraction = number[1];
             var value = "";
             var idx, length;
 
@@ -588,7 +594,10 @@
                 value += integer.charAt(idx);
             }
 
-            number = value + decimal + fraction.substr(0, decimalDigits);
+            number = value;
+            if (fraction) {
+                number += decimal + fraction.substr(0, decimalDigits);
+            }
 
             if (formatMatches[1].toLowerCase() === "n") {
                 return negative ? patterns.numeric[1].replace("n", number) : number;
