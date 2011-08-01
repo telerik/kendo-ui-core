@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+	<PropertyGroup>
+        <!--Change for every major (quarterly) release -->
+        <Year>2011</Year>
+        <Release>2</Release>
+        <!-- Leave empty if this is a major release -->
+        <ServicePack></ServicePack>
+
+		<!-- CDN Resources configuration -->
+		<CDNAccessKeyId>AKIAJSDTTSFPVFUMHBGA</CDNAccessKeyId>
+		<CDNSecretAccessKey>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</CDNSecretAccessKey>
+		<CDNBucketName>kendo-static</CDNBucketName>
+	</PropertyGroup>
+</Project>
