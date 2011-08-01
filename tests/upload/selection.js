@@ -4,6 +4,11 @@
         equal($("input:visible", uploadInstance.wrapper).length, 1);
     });
 
+    test("new input is created after choosing a file with no extension", function() {
+        simulateFileSelect("file");
+        equal($("input:visible", uploadInstance.wrapper).length, 1);
+    });
+
     test("new input has same id", function() {
         simulateFileSelect();
         equal($("input:visible", uploadInstance.wrapper).attr("id"), "uploadInstance");

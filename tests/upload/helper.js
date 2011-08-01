@@ -24,11 +24,11 @@ function createHTML() {
 function removeHTML() {
     $("#testbed_container").remove();
 }
-function simulateFileSelect() {
+function simulateFileSelect(fileName) {
     var clickEvent = $.Event("click");
     $("#uploadInstance").trigger(clickEvent);
     if (!clickEvent.isDefaultPrevented()) {
-        $("#uploadInstance").val("first.txt").trigger("change");
+        $("#uploadInstance").val(fileName || "first.txt").trigger("change");
     }
 }
 
