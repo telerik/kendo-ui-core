@@ -27,14 +27,14 @@
         <!-- description -->
         <div id="example" class="t-content">
             <h3>Grid with multiple row selection enabled</h3>
-            <div id="rowSelection" style="width:600px;"></div>
+            <div id="rowselection" style="width:600px;"></div>
 
             <h3>Grid with multiple cell selection enabled</h3>
-            <div id="cellSelection" style="width:600px;"></div>
+            <div id="cellselection" style="width:600px;"></div>
 
             <script type="text/javascript">
                 $(document).ready(function() {
-                    $("#rowSelection").kendoGrid({
+                    $("#rowselection").kendoGrid({
                         dataSource: {
                             data: createRandomData(20),
                             pageSize: 5
@@ -58,7 +58,7 @@
                         ]
                     });
 
-                    $("#cellSelection").kendoGrid({
+                    $("#cellselection").kendoGrid({
                         dataSource: {
                             data: createRandomData(20),
                             pageSize: 5
