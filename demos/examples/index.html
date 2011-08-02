@@ -70,9 +70,9 @@
                 </script>
                 <ul>
                     <li><a href="http://www.kendoui.com/">KendoUI</a></li>
-                    <li><a href="#">Demos</a></li>
-                    <li><a href="#">Roadmap</a></li>
-                    <li><a href="#" id="download">Download Beta</a></li>
+                    <li><a href="http://www.kendoui.com/demos.aspx">Demos</a></li>
+                    <li><a href="http://www.kendoui.com/roadmap.aspx">Roadmap</a></li>
+                    <li><a href="http://www.kendoui.com/download.aspx" id="download">Download Beta</a></li>
                 </ul>
             </div>
             </div> <!-- / header -->
@@ -123,7 +123,7 @@
                                                 { text: "Black", control: "Menu", value: "black" }
                                             ],
                                 template: '<span class="thumbLink" href="#">\
-                                            <span class="thumb <#= data.text.toLowerCase() #>Thumb" style="background-image: url(<#= initialRelativePath #>img/<#= data.control #>/thumbSprite.png)">\
+                                            <span class="thumb <#= data.text.toLowerCase() #>Thumb" style="background-image: url(<#= initialRelativePath #>styles/<#= data.control #>/thumbSprite.png)">\
                                             <span class="gloss"></span></span><span class="skinTitle"><#= data.text #></span></span>'
                             });
                         </script>
@@ -139,11 +139,11 @@
                             are available:</p>
 
                             <dl class="itemsOutline">
-                                <dt><a href="">Framework</a></dt>
+                                <dt><a href="datasource/index.html">Framework</a></dt>
                                 <dd>Learn how to use Kendo DataSource, Templates and Drag &amp; Drop</dd>
-                                <dt><a href="">UI Widgets</a></dt>
+                                <dt><a href="autocomplete/index.html">UI Widgets</a></dt>
                                 <dd>Learn how to use each of the Kendo UI widgets, including quick API reference</dd>
-                                <dt><a href="">Integration</a></dt>
+                                <dt><a href="integration/index.html">Integration</a></dt>
                                 <dd>Learn how to use Kendo with other popular Javascript libraries such as jQuery Templates and KnockoutJS</dd>
                             </dl>
 
@@ -157,7 +157,7 @@
 
                             <div style="text-align:center;">
 
-                            <div class="overview-box mobile-info" style="background-image:url(img/platforms.png)">
+                            <div class="overview-box mobile-info" style="background-image:url(styles/platforms.png)">
                                 <h2>Mobile Device Compatibility</h2>
                                 <p>Kendo UI is built to work seamlessly across desktop browsers and mobile touchscreen devices. Kendo UI offers full support for touch
                                 interactions and is tested against the following mobile platform browsers:</p>
@@ -169,14 +169,14 @@
                                 </ul>
                             </div>
 
-                            <div class="overview-box browser-info" style="background-image:url(img/browsers.png)">
+                            <div class="overview-box browser-info" style="background-image:url(styles/browsers.png)">
                                 <h2>Supported browsers</h2>
                                 <ul>
                                     <li>Internet Explorer 6+</li>
-                                    <li>Firefox 3.6+</li>
+                                    <li>Firefox 3+</li>
                                     <li>Safari 4+</li>
-                                    <li>Chrome 6+</li>
-                                    <li>Opera 10.5+</li>
+                                    <li>Chrome</li>
+                                    <li>Opera 10+</li>
                                 </ul>
                             </div>
 
@@ -238,6 +238,8 @@
         </div>
         </div> <!-- / footer -->
 
+        <!-- tools -->
+
         <script type="text/javascript">
             var _gaq = _gaq || [];
             _gaq.push(['_setAccount', 'UA-23480938-1']);
@@ -249,8 +251,6 @@
                 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
             })();
         </script>
-
-        <!-- tools -->
 
     </body>
 </html>

@@ -36,7 +36,7 @@ html
 .console div,
 #telerik
 {
-    background-image: url("../img/sprite.png");
+    background-image: url("sprite.png");
     background-repeat: no-repeat;
     background-color: transparent;
 }
@@ -53,7 +53,7 @@ html
 * html .console div,
 * html #telerik
 {
-    background-image: url("../img/sprite_ie6.png");
+    background-image: url("sprite_ie6.png");
 }
 
 .t-widget, #nav ul
@@ -165,7 +165,7 @@ html
 {
     display:block;
     height:30px;
-    background:no-repeat url(../img/kendo-logo.png);
+    background:no-repeat url(kendo-logo.png);
     text-indent:-4000px;
     overflow:hidden;
 }
@@ -220,7 +220,7 @@ li a#download
 #topnavWrap
 {
     border-bottom:1px solid #be5e35;
-    background:#ef652a 50% 0 url(../img/flowers.png);
+    background:#ef652a 50% 0 url(flowers.png);
 }
 
 #topnav
@@ -603,7 +603,7 @@ h1 .integrationIcon
     float:right;
     width:107px;
     height:40px;
-    background:no-repeat 0 -700px url(../img/sprite.png);
+    background:no-repeat 0 -700px url(sprite.png);
 }
 
 #telerik a
@@ -882,10 +882,19 @@ pre.prettyprint
     overflow: hidden;
 }
 
-#codeStrip .description,
+#codeStrip .description
+{
+    padding: 10px 20px 20px;
+}
+
 #codeStrip .codeContainer
 {
     padding: 20px;
+}
+
+#codeStrip p
+{
+    line-height: 1.8;
 }
 
 /* skin selector */
@@ -979,7 +988,7 @@ pre.prettyprint
 #skinSelector-list .thumb
 {
     background-color: transparent;
-    background-image: url("../img/Menu/thumbSprite.png");
+    background-image: url("Menu/thumbSprite.png");
     background-repeat: no-repeat;
     display: block;
     height: 46px;
@@ -1281,7 +1290,7 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
     margin-left:auto;
     margin-right:auto;
     border-width: 0;
-    background:url(../img/collage.jpg) no-repeat 90% 26px;
+    background:url(collage.jpg) no-repeat 90% 26px;
 }
 
 #introText
