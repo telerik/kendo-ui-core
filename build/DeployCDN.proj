@@ -7,7 +7,7 @@
     <UsingTask TaskName="UploadResources" AssemblyFile="MSBuildTasks\ResourceUploader.MSBuildTasks.dll" />
 
     <PropertyGroup>
-        <ExamplesRoot>$(ResourcesRoot)\examples</ExamplesRoot>
+        <ExamplesRoot>$(ResourcesRoot)\onlineExamples</ExamplesRoot>
         <ExamplesScripts>$(ExamplesRoot)\js</ExamplesScripts>
         <ExamplesStyles>$(ExamplesRoot)\styles</ExamplesStyles>
         <ExamplesContent>$(ExamplesRoot)\content</ExamplesContent>
