@@ -20,7 +20,7 @@
    *       <li>From a local, statically defined JavaScript Array</li>
    *       <li>From a remote data service</li>
    *   </ol>
-   * Locally defined values are best for small, fixed sets of suggestions. Remote suggestions should be used for larger data sets. When used with the <a href="../datasource/index.html">Kendo DataSource</a>,
+   * Locally defined values are best for small, fixed sets of suggestions. Remote suggestions should be used for larger data sets. When used with the <a href="../datasource/index.html" title="Kendo DataSource">Kendo DataSource</a>,
    * filtering large remote data services can be pushed to the server, too, maximizing client-side performance.
    * <h3>Local Suggestions</h3>
    * To configure and provide AutoComplete suggestions locally, you can either pass an Array directly to the AutoComplete constructor, 
@@ -36,7 +36,7 @@
    *    dataSource: data
    * });
    * @section <h3>Remote Suggestions</h3>
-   * The easiest way to bind to remote AutoComplete suggestions is to use the <a href="../datasource/index.html">Kendo DataSource</a> component. The Kendo DataSource is an abstraction for local and 
+   * The easiest way to bind to remote AutoComplete suggestions is to use the <a href="../datasource/index.html" title="Kendo DataSource">Kendo DataSource</a> component. The Kendo DataSource is an abstraction for local and 
    * remote data, and it can be used to serve data from a variety of data services, such as XML, JSON, and JSONP. 
    * 
    * @exampleTitle Using Kendo DataSource to bind to remote suggestions with OData
