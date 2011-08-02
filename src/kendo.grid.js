@@ -195,21 +195,21 @@
 
     /**
      *  @name kendo.ui.Grid.Description
-     *  
-     *  @section 
+     *
+     *  @section
      *  <p>
-     *      The Grid widget displays tabular data and offers rich support interacting with data, 
-     *      including paging, sorting, grouping, and selection. Grid is a powerful widget with 
-     *      many configuration options. It can be bound to local JSON data or to remote data 
-     *      using the Kendo DataSource component.          
+     *      The Grid widget displays tabular data and offers rich support interacting with data,
+     *      including paging, sorting, grouping, and selection. Grid is a powerful widget with
+     *      many configuration options. It can be bound to local JSON data or to remote data
+     *      using the Kendo DataSource component.
      *  </p>
      *  <h3>Getting Started</h3>
      *  There are two primary ways to create a Kendo Grid:
-     *  
-     *  <ol>     
+     *
+     *  <ol>
      *      <li>From an existing HTML table element, defining columns, rows, and data in HTML</li>
      *      <li>From an HTML div element, defining columns and rows with configuration, and binding to data</li>
-     *  </ol>     
+     *  </ol>
      *
      *  @exampleTitle Creating a <b>Grid</b> from existing HTML Table element
      *  @example
@@ -234,19 +234,19 @@
      *  </table>
      *
      *  @exampleTitle Initialize the Kendo Grid
-     *  @example     
+     *  @example
      *   $(document).ready(function(){
      *       $("#grid").kendoGrid();
-     *   });      
-     *  
+     *   });
+     *
      *  @exampleTitle Creating a <b>Grid</b> from existing HTML Div element
      *  @example
      *  <!-- Define the HTML div that will hold the Grid -->
      *  <div id="grid">
      *  </div>
-     *  
+     *
      *  @exampleTitle Initialize the Kendo Grid and configure columns & data binding
-     *  @example     
+     *  @example
      *    $(document).ready(function(){
      *       $("#grid").kendoGrid({
      *           columns:[
@@ -261,47 +261,47 @@
      *           dataSource: {
      *               data: [
      *                   {
-	 *                       FirstName: "Joe",
-	 *                       LastName: "Smith"
+     *                       FirstName: "Joe",
+     *                       LastName: "Smith"
      *                   },
      *                   {
-	 *                       FirstName: "Jane",
-	 *                       LastName: "Smith"
-     *               }] 
+     *                       FirstName: "Jane",
+     *                       LastName: "Smith"
+     *               }]
      *           }
      *       });
      *   });
-     *  
+     *
      *  @section <h3>Configuring Grid Behavior</h3>
-     *  Kendo Grid supports paging, sorting, grouping, and scrolling. Configuring any of 
-     *  these Grid behaviors is done using simple boolean configuration options. For 
+     *  Kendo Grid supports paging, sorting, grouping, and scrolling. Configuring any of
+     *  these Grid behaviors is done using simple boolean configuration options. For
      *  example, the follow snippet shows how to enable all of these behaviors.
      *
      *  @exampleTitle Enabling Grid paging, sorting, grouping, and scrolling
-     *  @example     
+     *  @example
      *    $(document).ready(function(){
      *       $("#grid").kendoGrid({
      *          groupable: true,
-	 *	        scrollable: true,
-	 *	        sortable: true,
-	 *	        pageable: true
+     *          scrollable: true,
+     *          sortable: true,
+     *          pageable: true
      *       });
      *   });
      *  @section
      *  By default, paging, grouping, and sorting are <strong>disabled</strong>. Scrolling is enabled by default.
      *
      *  <h3>Performance with Virtual Scrolling</h3>
-     *  When binding to large data sets or when using large page sizes, reducing active in-memory 
-     *  DOM objects is important for performance. Kendo Grid provides built-in UI virtualization 
+     *  When binding to large data sets or when using large page sizes, reducing active in-memory
+     *  DOM objects is important for performance. Kendo Grid provides built-in UI virtualization
      *  for highly optimized binding to large data sets. Enabling UI virtualization is done via simple configuration.
      *
      *  @exampleTitle Enabling Grid UI virtualization
-     *  @example     
+     *  @example
      *    $(document).ready(function(){
      *       $("#grid").kendoGrid({
      *          scrollable: {
-	 *	            virtual: true
-	 *          }
+     *              virtual: true
+     *          }
      *       });
      *   });
      */

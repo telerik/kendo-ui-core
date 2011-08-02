@@ -2,18 +2,18 @@
     /**
     * @name kendo.ui.ComboBox.Description
     *
-    * @section 
+    * @section
     *   <p>
-    *       The ComboBox widget displays flat data as a list of values and allows the selection of 
-    *       a single value from the list or the input of a new value. It is a richer version of the 
-    *       standard HTML select, providing support for local and remote data binding, item templates, 
+    *       The ComboBox widget displays flat data as a list of values and allows the selection of
+    *       a single value from the list or the input of a new value. It is a richer version of the
+    *       standard HTML select, providing support for local and remote data binding, item templates,
     *       and configurable options for controlling the list behavior.
     *   </p>
     *   If you do not want to allow user input, use the <a href="../dropdownlist/index.html" title="Kendo UI DropDownList">Kendo UI DropDownList</a>.
     *
     *   <h3>Getting Started</h3>
     *   There are two basic ways to create a ComboBox:
-    *   <ol>    
+    *   <ol>
     *       <li>From a basic HTML input element, using data binding to define the list items</li>
     *       <li>From a HTML select element, using HTML to define the list items</li>
     *   </ol>
@@ -42,15 +42,15 @@
     * @exampleTitle ComboBox initialization
     * @example
     *   $(document).ready(function(){
-	*	    $("#combobox").kendComboBox();
-	*   });
+    *       $("#combobox").kendComboBox();
+    *   });
     *
     * @section
     *   <h3>Binding to Data</h3>
     *   <p>
-    *       The ComboBox can be bound to both local JavaScript Arrays and remote data via the 
-    *       Kendo DataSource component. Local JavaScript Arrays are appropriate for limited value 
-    *       options, while remote data binding is better for larger data sets. With remote binding, 
+    *       The ComboBox can be bound to both local JavaScript Arrays and remote data via the
+    *       Kendo DataSource component. Local JavaScript Arrays are appropriate for limited value
+    *       options, while remote data binding is better for larger data sets. With remote binding,
     *       options will be loaded on-demand, similar to AutoComplete.
     *   </p>
     * @exampleTitle Binding to a remote OData service
@@ -76,8 +76,8 @@
     * @section
     *   <h3>Customizing Item Templates</h3>
     *   <p>
-    *       ComboBox leverages Kendo UI high-performance Templates to give you complete control 
-    *       over item rendering. For a complete overview of Kendo UI Template capabilities and syntax, 
+    *       ComboBox leverages Kendo UI high-performance Templates to give you complete control
+    *       over item rendering. For a complete overview of Kendo UI Template capabilities and syntax,
     *       please review the <a href="../templates/index.html" title="Kendo UI Template">Kendo UI Template</a> component demos and documentation.
     *   </p>
     * @exampleTitle Basic item template customization
@@ -93,7 +93,7 @@
     *           <img alt="${ data.Name }" />Title:${ data.Name }, Year: ${ data.Name }
     *       <# } #>
     *   </script>
-    *   
+    *
     *   <!-- ComboBox initialization -->
     *   <script type="text/javascript">
     *       $(document).ready(function() {
@@ -111,7 +111,7 @@
     *                       read: "http://odata.netflix.com/Catalog/Titles"
     *                   }
     *               }
-    *           });                
+    *           });
     *       });
     *   </script>
     */

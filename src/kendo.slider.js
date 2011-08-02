@@ -658,7 +658,7 @@
         },
 
         /**
-         * The value method gets or sets the value of the slider. 
+         * The value method gets or sets the value of the slider.
          * The value method accepts a {String} or a {Number} as parameters, and returns a {Nubmer}.
          * @example
          * var slider = $("#slider").data("kendoSlider");

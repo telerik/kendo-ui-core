@@ -172,7 +172,7 @@
      *         title: {
      *             text: "Division Sales"
      *         },
-     *         dataSource:{ 
+     *         dataSource:{
      *             transport:{
      *                 read:{
      *                     url: "company-sales.json",

@@ -14,7 +14,7 @@
      * <div></div>
      * <div></div>
      * @section You can also omit the content elements in the above structure
-     * 
+     *
      * @exampleTitle <b>TabStrip</b> initialization
      * @example
      * var tabStrip = $("#tabStrip").kendoTabStrip();

@@ -55,7 +55,7 @@
             element.bind(eventName, handler);
         }
     }
-    
+
     var DropTarget = Component.extend(/** @lends kendo.ui.DropTarget.prototype */ {
         /**
          * @constructs
@@ -81,7 +81,7 @@
                  * @param {Event} e
                  * @param {kendo.ui.Draggable} e.draggable Reference to the draggable that enters the drop target.
                  */
-                DRAGENTER, 
+                DRAGENTER,
                 /**
                  * Fires when draggable moves out of the drop target.
                  * @name kendo.ui.DropTarget#dragleave
@@ -89,7 +89,7 @@
                  * @param {Event} e
                  * @param {kendo.ui.Draggable} e.draggable Reference to the draggable that leaves the drop target.
                  */
-                DRAGLEAVE, 
+                DRAGLEAVE,
                 /**
                  * Fires when draggable is dropped over the drop target.
                  * @name kendo.ui.DropTarget#drop
@@ -101,7 +101,7 @@
             ], that.options);
 
             var group = that.options.group;
-            
+
             if (!(group in dropTargets)) {
                 dropTargets[group] = [ that ];
             } else {
@@ -181,7 +181,7 @@
          *
          * //hint as jQuery object
          *  $("#draggable").kendoDraggable({
-         *      hint: return $("#draggableHint");         
+         *      hint: return $("#draggableHint");
          *  });
          */
         init: function (element, options) {
@@ -198,14 +198,14 @@
                  * @event
                  * @param {Event} e
                  */
-                DRAGSTART, 
+                DRAGSTART,
                  /**
                  * Fires while dragging.
                  * @name kendo.ui.Draggable#drag
                  * @event
                  * @param {Event} e
                  */
-                DRAG, 
+                DRAG,
                  /**
                  * Fires when item drag ends.
                  * @name kendo.ui.Draggable#dragend

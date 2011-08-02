@@ -3,7 +3,7 @@ function View(options) {
     this.element = $('<div class="data-container"/>');
     this.scroller = new kendo.ui.Scroller(this.element);
     this.contentElement = this.scroller.scrollElement || this.element;
-    
+
     if (this.onCreate) {
         this.onCreate();
     }

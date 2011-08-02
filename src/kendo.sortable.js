@@ -79,16 +79,16 @@
             } else {
                 dir = ASC;
             }
-            
+
             if (options.mode === SINGLE) {
                 sort = [ { field: field, dir: dir } ];
-            } else if (options.mode === "multiple") {                
+            } else if (options.mode === "multiple") {
                 for (idx = 0, length = sort.length; idx < length; idx++) {
                     if (sort[idx].field === field) {
                         sort.splice(idx, 1);
                         break;
                     }
-                }                
+                }
                 sort.push({ field: field, dir: dir });
             }
 
