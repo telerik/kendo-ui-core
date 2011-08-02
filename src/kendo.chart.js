@@ -4578,7 +4578,7 @@
                 .stop(true)
                 .show()
                 .animate({
-                    left: (x - element.width() / 2) + "px",
+                    left: (x - element.outerWidth() / 2) + "px",
                     top: y + "px"
                 }, tooltip.visible ? 150 : 0);
 
