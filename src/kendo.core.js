@@ -545,15 +545,22 @@
         customFormatRegExp = /([#0,]+)/,
         digitPlaceholderRegExp = /#+/,
         leftMostZeroRegExp = /(0+#+)+/,
-        rigtMostZeroRegExp = /(#+0+)+/,
-        expRegExp = /^([e|E][-|+]*[\d]*)/,
-        digitsRegExp = /\d+/;
+        rigtMostZeroRegExp = /(#+0+)+/;
 
     function formatNumber(number, format) {
         var groupSize = 3,
             groupSeparator = ",",
             decimal = ".",
-            decimalDigits = 2,
+            precision = 2,
+            formatAndPrecision,
+            negative = number < 0,
+            integer,
+            fraction,
+            value = "",
+            idx,
+            length,
+            pattern,
+            ch,
             symbol = "$";
 
         if (number === undefined) {
@@ -561,36 +568,32 @@
         }
 
         if (!format) {
+            // toLocaleString() once we have globalization
             return number.toString();
         }
 
-        var formatMatches = standardFormatRegExp.exec(format);
+        formatAndPrecision = standardFormatRegExp.exec(format);
 
-        if (formatMatches) {
-
-            if (formatMatches[2]) {
-                decimalDigits = new Number(formatMatches[2]);
+        if (formatAndPrecision) {
+            format = formatAndPrecision[1].toLowerCase();
+            if (formatAndPrecision[2]) {
+                precision = +formatAndPrecision[2];
             }
 
-            var negative = number < 0;
-
-            //exponent
-            if (formatMatches[1].toLowerCase() === "e") {
-                if (formatMatches[2]) {
-                    return number.toExponential(decimalDigits);
+            if (format === "e") {
+                if (formatAndPrecision[2]) {
+                    return number.toExponential(precision);
                 } else {
                     return number.toExponential();
                 }
             }
-            //end
 
-            number = number.toFixed(decimalDigits);
-            number = number.toString().split(".");
+            number = number.toFixed(precision);
+            number = number.split(".");
 
-            var integer = number[0];
-            var fraction = number[1];
-            var value = "";
-            var idx, length;
+            integer = number[0];
+            fraction = number[1];
+            value = "";
 
             if (negative) {
                 integer = integer.substring(1);
@@ -604,16 +607,35 @@
                 value += integer.charAt(idx);
             }
 
-            number = value;
             if (fraction) {
-                number += decimal + fraction.substr(0, decimalDigits);
+                value += decimal + fraction;
             }
 
-            if (formatMatches[1].toLowerCase() === "n") {
-                return negative ? patterns.numeric[1].replace("n", number) : number;
-            } else if (formatMatches[1].toLowerCase() === "c") {
-                return patterns.currency[negative ? 1 : 0].replace("n", number);
+            if (format === "n" && !negative) {
+                return value;
             }
+
+            if (format === "n") {
+                pattern = patterns.numeric[1];
+            } else if (format === "c") {
+                pattern = patterns.currency[negative ? 1 : 0];
+            }
+
+            number = "";
+
+            for (idx = 0, length = pattern.length; idx < length; idx++) {
+                ch = pattern[idx];
+
+                if (ch === "n") {
+                    number += value;
+                } else if (ch === "$") {
+                    number += symbol;
+                } else {
+                    number += ch;
+                }
+            }
+
+            return number;
         }
 
         format = format.split(";");
