@@ -171,20 +171,6 @@
     padding: 0 6px 1px;
 }
 
-.t-button:before
-{
-    content: "\a0";
-    display: block;
-    height: 0;
-    margin: 0 0 0 -3px;
-    padding: 0 3px;
-    width: 100%;
-    border-top: 1px solid #fff;
-    opacity: .7;
-    box-sizing: content-box;
-    -webkit-margin-top-collapse: separate;
-}
-
 .t-button,
 button.t-button.t-state-disabled:hover,
 a.t-button.t-state-disabled:hover,
