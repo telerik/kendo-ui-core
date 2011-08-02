@@ -35,7 +35,7 @@
         initialRelativePath = "";
 
     window.selectCategory = function(element) {
-        $("#categories .selected").removeClass("selected");
+        $("#topnav .selected").removeClass("selected");
         $(element).addClass("selected");
 
         window.panelBar = $("#nav").empty().kendoPanelBar({
@@ -45,7 +45,7 @@
         }).data("kendoPanelBar");
 
         if (live === false)
-            $("#exampleHead, #exampleWrap").toggleClass("nomargin", $(element).attr("href") == "overview/index.html");
+            $("#navmainWrap").toggleClass("singleColumn", $(element).attr("href") == "overview/index.html");
 
         if (!referenceUrl)
             referenceUrl = $("#logo")[0].href;
@@ -97,8 +97,8 @@
             $.get(href, function(html) {
                 currentHtml = html;
 
-                var exampleBody = $("#exampleBody"),
-                    exampleName = $(".exampleName"),
+                var exampleBody = $("#exampleWrap"),
+                    exampleName = $("#exampleTitle"),
                     tools = $("#codeStrip, .skinSelector.t-widget"),
                     title = Application.fetchTitle(),
                     toolsVisible = tools.is(":visible");
@@ -110,12 +110,12 @@
                 }
 
                 if (title == "Overview") {
-                    $(".exampleName").empty().html(title);
+                    exampleName.empty().html(title);
                     exampleBody.empty().html(Application.body(html));
                 } else {
                     exampleName.kendoStop(true).kendoAnimate(extend({}, animation.hide, { complete: function() {
                         var currentControl = $("#nav > .t-state-highlighted > .t-link > .t-sprite")[0].className.match(/\s(\w+Icon)/i)[1];
-                        $(".exampleName").empty().html('<span class="exampleIcon '+ currentControl.charAt(0).toLowerCase() + currentControl.substr(1) +'"></span>'+title);
+                        $("#exampleTitle").empty().html('<span class="exampleIcon '+ currentControl.charAt(0).toLowerCase() + currentControl.substr(1) +'"></span>'+title);
 
                         setTimeout(function() {
                             var newTabs = $($.trim(Application.helpTabs(html)));
@@ -155,16 +155,17 @@
 
         populateTools: function(html, href) {
             var title = Application.fetchTitle();
+            var exampleName = $("#exampleTitle");
 
             if (title != "Overview") {
                 var currentControl = $("#nav > .t-state-highlighted > .t-link > .t-sprite")[0].className.match(/\s(\w+Icon)/i)[1];
-                $(".exampleName").empty().html('<span class="exampleIcon '+ currentControl.charAt(0).toLowerCase() + currentControl.substr(1) +'"></span>'+title);
+                exampleName.empty().html('<span class="exampleIcon '+ currentControl.charAt(0).toLowerCase() + currentControl.substr(1) +'"></span>'+title);
 
                 $("#codeStrip, .skinSelector.t-widget").show();
 
                 $(".description").empty().html($.trim(Application.description(html)));
             } else {
-                $(".exampleName").empty().html(title);
+                exampleName.empty().html(title);
 
                 $("#nav .t-item > .t-link").eq(0).addClass("t-state-selected");
 
@@ -228,10 +229,10 @@
                 } else
                     changeSkin();
 
-                $("#exampleBody").show();
+                $("#exampleWrap").show();
             };
 
-            if ($("#exampleBody").length)
+            if ($("#exampleWrap").length)
                 $.get(url)
                     .complete(function() {
                         fadeSkin();
@@ -259,10 +260,10 @@
         },
 
         body: function(html) {
-            var match = /<div id="example([Body]*)"[^>]*?>(([\u000a\u000d\u2028\u2029]|.)*?)<!-- tools -->/ig.exec(html),
-                hasBody = match[0].substr(16, 4) != "Body";
+            var match = /<div id="example([Wrap]*)"[^>]*?>(([\u000a\u000d\u2028\u2029]|.)*?)<!-- tools -->/ig.exec(html),
+                hasBody = match[0].substr(16, 4) != "Wrap";
 
-            return (match[1] != "") ? match[2] : (hasBody ? "" : "<div id=\"exampleBody\">") + match[0].replace("<!-- tools -->", "") + (hasBody ? "" : "</div>");
+            return (match[1] != "") ? match[2] : (hasBody ? "" : "<div id=\"exampleWrap\">") + match[0].replace("<!-- tools -->", "") + (hasBody ? "" : "</div>");
         },
 
         init: function() {
@@ -271,14 +272,14 @@
 
             var skinSelector = $("#skinSelector");
 
-            $("#exampleBody").show();
+            $("#exampleWrap").show();
 
             if (kendoSkin) {
                 skinSelector.data("kendoDropDownList").value(kendoSkin);
             }
 
             if (live === false)
-                $("#categories li a").live("click", function(e) {
+                $("#topnav li a").live("click", function(e) {
                     e.preventDefault();
 
                     selectCategory(e.target);
@@ -289,7 +290,7 @@
                     .live("click", function(e) {
                         e.preventDefault();
 
-                        if (!location.href.match($(this).attr("href")) && !$("#exampleBody").data("animating"))
+                        if (!location.href.match($(this).attr("href")) && !$("#exampleWrap").data("animating"))
                             Application.load($(this).attr("href"));
                     });
 
