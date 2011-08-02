@@ -36,7 +36,7 @@
    *    dataSource: data
    * });
    * @section <h3>Remote Suggestions</h3>
-   * The easiest way to bind to remote AutoComplete suggestions is to use the Kendo DataSource  component. The Kendo DataSource is an abstraction for local and 
+   * The easiest way to bind to remote AutoComplete suggestions is to use the <a href="../datasource/index.html">Kendo DataSource</a> component. The Kendo DataSource is an abstraction for local and 
    * remote data, and it can be used to serve data from a variety of data services, such as XML, JSON, and JSONP. 
    * 
    * @exampleTitle Using Kendo DataSource to bind to remote suggestions with OData
