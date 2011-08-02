@@ -301,17 +301,6 @@ function processExamplesDirectory(dir) {
 function copyResources(source, destination, processCallback) {
     processCallback = processCallback || function(data) { return data; };
 
-    if(KENDOCDN) {
-        fs.readdirSync(destination)
-        .forEach(function(file) {
-            try {
-                fs.unlinkSync(destination + file);
-            } catch (e) {
-
-            }
-        });
-    }
-
     fs.readdirSync(source)
         .forEach(function(file) {
             var data = fs.readFileSync(source + file, "utf8");
@@ -367,12 +356,12 @@ exports.build = function(origin, destination, kendoCDN) {
 
     console.log("Copying resources...");
     wrench.copyDirSyncRecursive(examplesLocation, outputPath);
+    wrench.copyDirSyncRecursive(originJS, outputPath + "/js");
+    wrench.copyDirSyncRecursive(originStyles, outputPath + "/styles");
     fs.writeFileSync(outputPath + "/index.html", indexHtml.replace(isLive, ""), "utf8");
     fs.unlinkSync(outputPath + "/template.html");
 
     if (!kendoCDN) {
-        wrench.copyDirSyncRecursive(originJS, outputPath + "/js");
-        wrench.copyDirSyncRecursive(originStyles, outputPath + "/styles");
         fs.writeFileSync(outputPath + "/js/jquery.js", fs.readFileSync("src/jquery.js", "utf8"), "utf8");
     } else {
         fs.writeFileSync(outputPath + "/web.config", fs.readFileSync("web.config", "utf8"), "utf8");
@@ -404,8 +393,6 @@ exports.build = function(origin, destination, kendoCDN) {
         });
 
     if (kendoCDN) {
-        fs.writeFileSync(outputPath + "/js/kendo.all.min.js", fs.readFileSync(originJS + "/kendo.all.min.js", "utf8"), "utf8");
-
         var exampleJS = fs.readFileSync(outputPath + "/js/kendo.examples.min.js", "utf8"),
             consoleJS = fs.readFileSync(outputPath + "/js/kendo.console.min.js", "utf8"),
             peopleJS = fs.readFileSync(outputPath + "/js/people.min.js", "utf8");
