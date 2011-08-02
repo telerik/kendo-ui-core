@@ -58,15 +58,7 @@
             <div class="floatWrap centerWrap">
                 <h1><a id="logo" href="">Kendo</a></h1>
                 <script type="text/javascript">
-                    var normalizedUrl = (function() {
-                        var href = location.href.toLowerCase(), reference = $("#logo")[0].href.toLowerCase();
-
-                        return href == reference ?
-                                    reference.replace("/index.html", "/") :
-                                    href.substr(-1) == "/" ?
-                                        href + "index.html" :
-                                        href;
-                    })();
+                    var normalizedUrl = getNormalizedUrl();
                 </script>
                 <ul>
                     <li><a href="http://www.kendoui.com/">KendoUI</a></li>
@@ -95,38 +87,9 @@
                 <div id="main">
                     <select id="skinSelector" class="skinSelector"></select>
                     <h1 id="exampleTitle"></h1>
-                        <script type="text/javascript">
-
-                            var initialRelativePath = document.getElementsByTagName("head")[0].innerHTML.match(/href=\W([\.\/]*)([\w\/]*?)kendo\.common/)[1],
-                                loc = /[^\/]+\/[^\/]+?$/.exec(normalizedUrl);
-
-                            if (loc) {
-                                var url = loc[0].toLowerCase();
-
-                                $("#navmainWrap").toggleClass("singleColumn", url == "overview/index.html");
-
-                                selectCategory($("#topnav #" + locatePage(url))[0]);
-
-                                var link = $("#nav .t-link[href*='" + url + "']")
-                                    .addClass("t-state-selected");
-
-                                panelBar.expand(link.parent().parents(".t-item"), false);
-                            } else {
-                                $("#navmainWrap").addClass("singleColumn");
-                                selectCategory($("#topnav #overview"));
-                            }
-
-                            $("#skinSelector").kendoDropDownList({
-                                dataSource: [
-                                                { text: "Kendo", control: "Menu", value: "kendo" },
-                                                { text: "Blue Opal", control: "Menu", value: "blueopal" },
-                                                { text: "Black", control: "Menu", value: "black" }
-                                            ],
-                                template: '<span class="thumbLink" href="#">\
-                                            <span class="thumb <#= data.text.toLowerCase() #>Thumb" style="background-image: url(<#= initialRelativePath #>styles/<#= data.control #>/thumbSprite.png)">\
-                                            <span class="gloss"></span></span><span class="skinTitle"><#= data.text #></span></span>'
-                            });
-                        </script>
+                    <script type="text/javascript">
+                        initializeExamples(normalizedUrl);
+                    </script>
 
                     <div id="exampleWrap">
                         <!-- nav -->
@@ -182,12 +145,9 @@
 
                             </div>
 
-                        <script type="text/javascript">
-
-                        window.setTimeout(function(){ prettyPrint(); }, 100);
-
-                        </script>
-
+                            <script type="text/javascript">
+                                window.setTimeout(function(){ prettyPrint(); }, 100);
+                            </script>
 
                         </div> <!-- / example -->
 
