@@ -545,15 +545,23 @@
         customFormatRegExp = /([#0,]+)/,
         digitPlaceholderRegExp = /#+/,
         leftMostZeroRegExp = /(0+#+)+/,
-        rigtMostZeroRegExp = /(#+0+)+/,
-        expRegExp = /^([e|E][-|+]*[\d]*)/,
-        digitsRegExp = /\d+/;
+        rigtMostZeroRegExp = /(#+0+)+/;
 
     function formatNumber(number, format) {
         var groupSize = 3,
             groupSeparator = ",",
             decimal = ".",
-            decimalDigits = 2,
+            precision = 2,
+            formatAndPrecision,
+            negative = number < 0,
+            integer,
+            fraction,
+            replacement = "",
+            value = "",
+            idx,
+            length,
+            pattern,
+            ch,
             symbol = "$";
 
         if (number === undefined) {
@@ -561,36 +569,33 @@
         }
 
         if (!format) {
+            // toLocaleString() once we have globalization
             return number.toString();
         }
 
-        var formatMatches = standardFormatRegExp.exec(format);
+        formatAndPrecision = standardFormatRegExp.exec(format);
 
-        if (formatMatches) {
+        if (formatAndPrecision) {
+            format = formatAndPrecision[1].toLowerCase();
 
-            if (formatMatches[2]) {
-                decimalDigits = new Number(formatMatches[2]);
+            if (formatAndPrecision[2]) {
+                precision = +formatAndPrecision[2];
             }
 
-            var negative = number < 0;
-
-            //exponent
-            if (formatMatches[1].toLowerCase() === "e") {
-                if (formatMatches[2]) {
-                    return number.toExponential(decimalDigits);
+            if (format === "e") {
+                if (formatAndPrecision[2]) {
+                    return number.toExponential(precision);
                 } else {
                     return number.toExponential();
                 }
             }
-            //end
 
-            number = number.toFixed(decimalDigits);
-            number = number.toString().split(".");
+            number = number.toFixed(precision);
+            number = number.split(".");
 
-            var integer = number[0];
-            var fraction = number[1];
-            var value = "";
-            var idx, length;
+            integer = number[0];
+            fraction = number[1];
+            value = "";
 
             if (negative) {
                 integer = integer.substring(1);
@@ -604,21 +609,40 @@
                 value += integer.charAt(idx);
             }
 
-            number = value;
             if (fraction) {
-                number += decimal + fraction.substr(0, decimalDigits);
+                value += decimal + fraction;
             }
 
-            if (formatMatches[1].toLowerCase() === "n") {
-                return negative ? patterns.numeric[1].replace("n", number) : number;
-            } else if (formatMatches[1].toLowerCase() === "c") {
-                return patterns.currency[negative ? 1 : 0].replace("n", number);
+            if (format === "n" && !negative) {
+                return value;
             }
+
+            if (format === "n") {
+                pattern = patterns.numeric[1];
+            } else if (format === "c") {
+                pattern = patterns.currency[negative ? 1 : 0];
+            }
+
+            number = "";
+
+            for (idx = 0, length = pattern.length; idx < length; idx++) {
+                ch = pattern.charAt(idx);
+
+                if (ch === "n") {
+                    number += value;
+                } else if (ch === "$") {
+                    number += symbol;
+                } else {
+                    number += ch;
+                }
+            }
+
+            return number;
         }
 
         format = format.split(";");
-        if (number < 0 && format[1]) {
-            number = Math.abs(number);
+        if (negative && format[1]) {
+            number = -number;
             format = format[1];
         } else if (number === 0) {
             format = format[2] || format[0];
@@ -626,79 +650,36 @@
             format = format[0];
         }
 
-        // end
-
-        if (format.indexOf("%") !== -1) {
+        if (format.indexOf("%") > -1) {
             number *= 100;
         }
-        number = number.toString().split(POINT);
 
-        format = format.split(POINT);
+        value = number.toString().split(POINT);
+        integer = value[0];
+        fraction = value[1];
 
-        //awful code!!!
-        if (format[1] && /0$/.test(format[1])) {
-            number = parseFloat(number[0] + "." + number[1]).toFixed(format[1].length).toString().split(".");
+        format = format.split(".");
+
+        number = "";
+
+        for (idx = 0, length = format[0].length; idx < length; idx++) {
+            ch = format[0].charAt(idx);
+
+            if (ch === "$") {
+                number += symbol;
+            } else if (ch === "0") {
+                number += ch;
+                replacement = ch;
+            } else if (ch === "#") {
+                number += replacement;
+            } else {
+                number += ch;
+            }
         }
 
-        //if(format[1]) {
-        //    var found = customFormatRegExp.exec(format[1]);
-        //    if (found && /0$/.test(found[0])) {
-        //        number = parseFloat(number[0] + (number[1] ? "." + number[1] : "")).toFixed(format[1].length - 1).toString().split(".");
-        //    }
-        //}
-
-        var matchedLength,
-            result = number[0],
-            length = result.length,
-            integer = format[0],
-            fraction = format[1],
-            hasGroupSeparator = integer.indexOf(COMMA) !== -1,
-            groupSeparatorRegExp = new RegExp('(-?[0-9]+)([0-9]{' + groupSize + '})');
-
-        integer = integer.replace(customFormatRegExp, function(match) {
-            matchedLength = match.length;
-            if (matchedLength > length) {
-                result = match.slice(0, matchedLength - length) + result;
-            }
-
-            result = replace(result, leftMostZeroRegExp);
-
-            if (hasGroupSeparator) {
-                result = result.replace(COMMA, EMPTY);
-                if (groupSeparator && groupSize != 0) {
-                    while (groupSeparatorRegExp.test(result)) {
-                        result = result.replace(groupSeparatorRegExp, '$1' + groupSeparator + '$2');
-                    }
-                }
-            }
-
-            return result;
-        });
-
-        if (fraction) {
-            fraction = fraction.replace(customFormatRegExp, function(match) {
-                matchedLength = match.length;
-                result = number[1] !== undefined ? number[1] : EMPTY;
-                length = result.length;
-
-                if (matchedLength > length) {
-                    result = result + match.slice(length);
-                }
-
-                result = replace(result, rigtMostZeroRegExp);
-
-                if (result.length) {
-                    integer += decimal;
-                }
-
-                return result;
-            });
-
-            integer += fraction;
-        }
-
-        return integer;
+        return number;
     }
+
     function toString(value, fmt) {
         if (fmt) {
             if (value instanceof Date) {
