@@ -2,4 +2,7 @@
 
 cd %1
 
-C:\NodeJS\bin\node.exe build/build.js %2
+echo "cdn path"
+echo %3
+
+C:\NodeJS\bin\node.exe build/build.js %2 %3
