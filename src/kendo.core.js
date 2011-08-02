@@ -602,7 +602,7 @@
             }
 
             for (idx = 0, length = integer.length; idx < length; idx++) {
-                if (length > groupSize && (length - idx) % groupSize === 0) {
+                if (idx > 0 && (length - idx) % groupSize === 0) {
                     value += groupSeparator;
                 }
 
