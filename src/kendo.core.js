@@ -624,7 +624,7 @@
             number = "";
 
             for (idx = 0, length = pattern.length; idx < length; idx++) {
-                ch = pattern[idx];
+                ch = pattern.charAt(idx);
 
                 if (ch === "n") {
                     number += value;
