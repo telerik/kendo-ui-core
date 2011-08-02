@@ -39,7 +39,7 @@ $("#inline").html(inlineTemplate(inlineData));</pre>
                 <h4 class="code-title">Source:</h4>
                 <pre class="prettyprint">
 &lt;script id="scriptTemplate" <strong>type="text/x-kendo-template"</strong>&gt;
-    Hello, <#= firstName #> <#= lastName #>!
+    Hello, &lt;#= firstName #&gt; &lt;#= lastName #&gt;
 &lt;/script&gt;
 
 &lt;script type="text/javascript"&gt;
@@ -66,14 +66,14 @@ $("#encoding").html(encodingTemplate(encodingData));</pre>
                 <div class="prettyprint" id="encoding"></div>
             </div>
 
-            <h3>Using JavaScript inside templates</h3>
+            <h3>Using JavaScript code inside the template definition</h3>
             <div class="code-sample">
                 <h4 class="code-title">Source</h4>
                 <pre class="prettyprint lang-html">
 &lt;script id="javascriptTemplate" type="text/x-kendo-template"&gt;
     &lt;ul&gt;
     &lt;# for (var i = 0; i &lt; data.length; i++) { #&gt;
-        &lt;li&gt;lt;#= data[i] #&gt;li&gt;
+        &lt;li&gt;&lt;#= data[i] #&gt;&lt;/li&gt;
     &lt;# } #&gt;
     &lt;ul&gt;
 &lt;script&gt;
