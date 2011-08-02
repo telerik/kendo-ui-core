@@ -26,8 +26,12 @@
         <div class="description">Customizing templates</div>
         <!-- description -->
         <div id="example" class="t-content">
-
-            Select movie from Netflix:
+            <div class="configuration">
+                <span class="infoHead">Information</span>
+                <p>
+                    Open the ComboBox to see the customized appearance of the items.
+                </p>
+            </div>
             <input id="titles"/>
 
             <script id="scriptTemplate" type="text/x-kendo-template">
@@ -41,7 +45,6 @@
             <script type="text/javascript">
                 $(document).ready(function() {
                     $("#titles").kendoComboBox({
-                        autoBind: false,
                         dataTextField: "Name",
                         dataValueField: "Id",
                         template: $("#scriptTemplate").html(),
@@ -60,9 +63,6 @@
 
                     //set width of the drop-down list
                     combobox.ul.width(400);
-
-                    //opens the drop-down list
-                    combobox.open();
                 });
             </script>
         </div>
