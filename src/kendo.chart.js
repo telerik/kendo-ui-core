@@ -5180,11 +5180,7 @@
             }
         },
         chartArea: {
-            background: "#393939",
-            border: {
-                color: "#262626",
-                width: 1
-            }
+            background: "#393939"
         },
         seriesColors: ["#e34a00", "#ff8517", "#ffb800", "#94c400", "#0098ee", "#0069a5"],
         categoryAxis: {
@@ -5226,12 +5222,6 @@
                 color: "#6d6e70"
             }
         },
-        chartArea: {
-            border: {
-                color: "#d0d2d3",
-                width: 1
-            }
-        },
         seriesColors: ["#ffb800", "#ff8517", "#e34a00", "#545454", "#161616"],
         categoryAxis: {
             line: {
@@ -5270,12 +5260,6 @@
         seriesDefaults: {
             labels: {
                 color: "#293135"
-            }
-        },
-        chartArea: {
-            border: {
-                color: "#c4d0d5",
-                width: 1
             }
         },
         seriesColors: ["#0069a5", "#0098ee", "#7bd2f6", "#ffb800", "#ff8517", "#e34a00"],
