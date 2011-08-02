@@ -10,6 +10,7 @@ var spawn = require('child_process').spawn;
 var date = new Date();
 var STAT = fs.statSync("./");
 var VERSION = process.argv[2] || generateVersion();
+var KENDOCDN = process.argv[3] || "http://krustev/KendoCDN";
 var RELEASE = "release/";
 var DEPLOY = "deploy/";
 var PATH = DEPLOY + "kendoUI";
@@ -84,8 +85,6 @@ function zip(name, path, folder) {
 
         console.log("package " + name + " created.");
 
-        //wrench.rmdirSyncRecursive(folder);
-
         if (count === 1) {
             console.log("Time elapsed: " + ((new Date() - date) / 1000) + " seconds");
         }
@@ -117,6 +116,8 @@ function processScripts() {
 
         fs.writeFileSync(SOURCEJS + "/" + file, data);
 
+        all += data;
+
         var ast = parser.parse(data);
         ast = uglify.ast_mangle(ast);
         ast = uglify.ast_squeeze(ast);
@@ -124,8 +125,12 @@ function processScripts() {
 
         fs.writeFileSync(JS + "/" + file.replace(".js", ".min.js"), data);
 
-        all += data;
     });
+
+    var ast = parser.parse(all);
+        ast = uglify.ast_mangle(ast);
+        ast = uglify.ast_squeeze(ast);
+        all = uglify.gen_code(ast);
 
     fs.writeFileSync(JS + "/kendo.all.min.js", all);
 }
@@ -157,20 +162,20 @@ processScripts();
 console.log("processing styles...");
 processStyles();
 
-console.log("copying Licenses Agreement...");
+console.log("copying license agreement...");
 var data = fs.readFileSync("resources/Kendo\ EULA.pdf");
 fs.writeFileSync(PATH + "/Kendo\ EULA.pdf", data);
 
-console.log("copying ReadMe.txt");
+console.log("copying readme...");
 var data = fs.readFileSync("resources/readme.txt");
 fs.writeFileSync(PATH + "/readme.txt", data);
 
 //examples
 console.log("building examples...");
-examples.build(SOURCE, PATH + "/examples", false);
+examples.build(SOURCE, PATH + "/examples");
 
 console.log("building online examples...");
-examples.build(PATH, ONLINEEXAMPLES, true);
+examples.build(PATH, ONLINEEXAMPLES, KENDOCDN);
 
 //archives
 console.log("packaging distribution...");
