@@ -399,6 +399,48 @@ function locatePage(url) {
     return category;
 }
 
+function getNormalizedUrl() {
+    var href = location.href.toLowerCase(), reference = $("#logo")[0].href.toLowerCase();
+
+    return href == reference ?
+               reference.replace("/index.html", "/") :
+               href.substr(-1) == "/" ?
+                   href + "index.html" :
+                   href;
+}
+
+function initializeExamples (normalizedUrl) {
+    window.initialRelativePath = document.getElementsByTagName("head")[0].innerHTML.match(/href=\W([\.\/]*)([\w\/]*?)kendo\.common/)[1];
+    var loc = /[^\/]+\/[^\/]+?$/.exec(normalizedUrl);
+
+    if (loc) {
+        var url = loc[0].toLowerCase();
+
+        $("#exampleHead, #exampleWrap").toggleClass("nomargin", url == "overview/index.html");
+
+        selectCategory($("#categories #" + locatePage(url))[0]);
+
+        var link = $("#nav .t-link[href*='" + url + "']")
+            .addClass("t-state-selected");
+
+        panelBar.expand(link.parent().parents(".t-item"), false);
+    } else {
+        $("#exampleHead, #exampleWrap").addClass("nomargin");
+        selectCategory($("#categories #overview"));
+    }
+
+    $("#skinSelector").kendoDropDownList({
+        dataSource: [
+                        { text: "Kendo", control: "Menu", value: "kendo" },
+                        { text: "Blue Opal", control: "Menu", value: "blueopal" },
+                        { text: "Black", control: "Menu", value: "black" }
+                    ],
+        template: '<span class="thumbLink" href="#">\
+                    <span class="thumb <#= data.text.toLowerCase() #>Thumb" style="background-image: url(<#= initialRelativePath #>img/<#= data.control #>/thumbSprite.png)">\
+                    <span class="gloss"></span></span><span class="skinTitle"><#= data.text #></span></span>'
+    });
+}
+
 var categories = {
     overview: {
         text: "Overview",
