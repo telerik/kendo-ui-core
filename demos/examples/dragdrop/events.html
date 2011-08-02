@@ -23,17 +23,15 @@
         <div class="description">Events</div>
         <!-- description -->
         <div id="example">
-            <div style="height:200px">
-                <div id="draggable" class="t-header">
-                    Draggable
-                </div>
-                <div id="droptarget" class="t-header t-state-selected">
-                    Drop here
-                </div>
-            </div>
+            <div id="draggable"></div>
+            <div id="droptarget">Drop here</div>
+
             <script type="text/javascript">
                 function draggableOnDragStart(e) {
                     kendoConsole.log("dragstart");
+
+                    $("#draggable").addClass("hollow");
+                    $("#droptarget").text("Drop here.");
                 }
 
                 function draggableOnDrag(e) {
@@ -42,22 +40,34 @@
 
                 function draggableOnDragEnd(e) {
                     kendoConsole.log("dragend");
+
+                    var draggable = $("#draggable");
+
+                    if (!draggable.data("kendoDraggable").dropped) {
+                        // drag ended outside of any droptarget
+                        $("#droptarget").text("Try again!");
+                    }
+
+                    draggable.removeClass("hollow");
                 }
 
                 function droptargetOnDragEnter(e) {
-                    $("#droptarget").addClass("t-state-hover");
                     kendoConsole.log("dragenter");
+
+                    $("#droptarget").text("Almost there...");
                 }
 
                 function droptargetOnDragLeave(e) {
-                    $("#droptarget").removeClass("t-state-hover");
                     kendoConsole.log("dragleave");
+
+                    $("#droptarget").text("Drop here.");
                 }
 
                 function droptargetOnDrop(e) {
-                    e.draggable.dropped = true;
-                    $("#droptarget").removeClass("t-state-hover");
                     kendoConsole.log("drop");
+
+                    $("#droptarget").text("You did great!");
+                    $("#draggable").removeClass("hollow");
                 }
 
                 $(document).ready(function() {
@@ -77,22 +87,63 @@
                     });
                 });
             </script>
+
             <div class="console"></div>
+
             <style scoped>
                 #draggable
                 {
-                    border: 1px solid black;
-                    width: 100px;
-                    height: 100px;
+                    cursor: pointer;
                     position: absolute;
+                    top: 80px;
+                    left: 30px;
+                    border: 1px solid #ff8000;
+                    width: 78px;
+                    height: 78px;
+                    border-radius: 37px;
+                    box-shadow: 2px 0 10px #9d9d9d;
+                    background: #ffcc00 url(../content/dragdrop/draggable.png) 50% 50% no-repeat;
+                    background: url(../content/dragdrop/draggable.png) 50% 50% no-repeat, -moz-linear-gradient(top, #ffcc00 0%, #ff8000 100%);
+                    background: url(../content/dragdrop/draggable.png) 50% 50% no-repeat, -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffcc00), color-stop(100%,#ff8000));
+                    background: url(../content/dragdrop/draggable.png) 50% 50% no-repeat, -webkit-linear-gradient(top, #ffcc00 0%,#ff8000 100%);
+                    background: url(../content/dragdrop/draggable.png) 50% 50% no-repeat, -o-linear-gradient(top, #ffcc00 0%,#ff8000 100%);
+                    background: url(../content/dragdrop/draggable.png) 50% 50% no-repeat, -ms-linear-gradient(top, #ffcc00 0%,#ff8000 100%);
+                    background: url(../content/dragdrop/draggable.png) 50% 50% no-repeat, linear-gradient(top, #ffcc00 0%,#ff8000 100%);
                 }
+
+                #draggable.hollow
+                {
+                    cursor: default;
+                    background: #ececec;
+                    border-color: #cbcbcb;
+                }
+
                 #droptarget
                 {
-                    border: 1px solid black;
-                    width: 100px;
-                    height: 100px;
-                    position: absolute;
-                    left: 500px;
+                    border: 1px solid #959595;
+                    height: 198px;
+                    width: 542px;
+                    font-size: 36px;
+                    border-radius: 37px;
+                    text-align: center;
+                    line-height: 198px;
+                    color: #a1a1a1;
+                    text-shadow: 0 1px 1px #fff;
+                    margin: 0 0 30px 300px;
+                    cursor: default;
+
+                    background: #dddddd;
+                    background: -moz-linear-gradient(top, #dddddd 0%, #c1c1c1 100%);
+                    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#dddddd), color-stop(100%,#c1c1c1));
+                    background: -webkit-linear-gradient(top, #dddddd 0%,#c1c1c1 100%);
+                    background: -o-linear-gradient(top, #dddddd 0%,#c1c1c1 100%);
+                    background: -ms-linear-gradient(top, #dddddd 0%,#c1c1c1 100%);
+                    background: linear-gradient(top, #dddddd 0%,#c1c1c1 100%);
+                }
+
+                #example
+                {
+                    background: url(../content/dragdrop/drag-clue.png) no-repeat 140px 102px;
                 }
             </style>
         </div>
