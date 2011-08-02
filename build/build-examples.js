@@ -78,7 +78,7 @@ function splitScriptRegion(exampleHTML, base) {
         allScripts = allScripts.replace(/<script src="([..\/]*)js\/jquery\.min\.js"><\/script>/g, "");
         allScripts = allScripts.replace(/[\r\n]+\s+<script src="([..\/]*)js\/kendo.(?!examples)(\w)+(\.\w+)*(\.min)*.js"><\/script>/g, "");
         allScripts = allScripts.replace(/([..\/]*)js\/prettify\.min\.js/g, KENDOCDN + "/js/prettify.min.js");
-        allScripts = allScripts.replace(/([..\/]*)js\/kendo\.examples\.min\.js/g, KENDOCDN + "/js/kendo.example.min.js");
+        allScripts = allScripts.replace(/([..\/]*)js\/kendo\.examples\.min\.js/g, KENDOCDN + "/js/kendo.examples.min.js");
 
         allScripts = spaces + '<script src="' + KENDOCDN + '/js/kendo.all.min.js"></script>' + allScripts;
         allScripts = '<script src="' + jQueryCDN + '"></script>\r\n' + allScripts;
