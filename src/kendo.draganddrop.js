@@ -6,6 +6,8 @@
         extend = $.extend,
         touch = kendo.support.touch,
         draggables = {},
+        dropTargets = {},
+        lastDropTarget = { element: [ null ] },
         NAMESPACE = ".kendo-dnd",
         MOUSEENTER = "mouseenter",
         MOUSEUP = touch? "touchend" : "mouseup",
@@ -21,6 +23,30 @@
         DRAGENTER = "dragenter",
         DRAGLEAVE = "dragleave",
         DROP = "drop";
+
+    function findTarget(needle, targets) {
+        var result = { element: [ null ] };
+
+        $.each(targets, function() {
+            var that = this,
+                element = that.element[0];
+
+            if (contains(element, needle)) {
+                result = that;
+                return false;
+            }
+        });
+
+        return result;
+    }
+
+    function contains(parent, child) {
+        try {
+            return $.contains(parent, child) || parent == child;
+        } catch (e) {
+            return false;
+        }
+    }
 
     function bind(element, filter, eventName, handler) {
         if (filter) {
@@ -73,6 +99,14 @@
                  */
                 DROP
             ], that.options);
+
+            var group = that.options.group;
+            
+            if (!(group in dropTargets)) {
+                dropTargets[group] = [ that ];
+            } else {
+                dropTargets[group].push( that );
+            }
         },
 
         options: {
@@ -234,6 +268,9 @@
                 hint = options.hint;
 
             if (distance >= options.distance) {
+                if (touch)
+                    e.preventDefault();
+
                 if (hint) {
                     that.hint = $.isFunction(hint) ? $(hint(that.currentTarget)) : hint;
 
@@ -266,6 +303,28 @@
                 cursorOffset = that.options.cursorOffset,
                 location = kendo.touchLocation(e);
 
+            if (touch && kendo.size(dropTargets)) {
+                var options = that.options,
+                    dropTarget = kendo.eventTarget(e);
+
+                if (dropTarget) {
+                    var target = findTarget(dropTarget, dropTargets[options.group]),
+                        element = target.element[0],
+                        lastTarget = lastDropTarget.element[0],
+                        difference = lastTarget != element;
+
+                    if (difference) {
+                        if (lastTarget != null)
+                            lastDropTarget._trigger(DRAGLEAVE, e);
+
+                        if (contains(element, dropTarget))
+                            target._trigger(DRAGENTER, e);
+
+                        lastDropTarget = target;
+                    }
+                }
+            }
+
             that._trigger(DRAG, e);
 
             if (that.hint) {
@@ -282,6 +341,20 @@
                 offset = that.currentTarget.offset();
 
             if (e.type == MOUSEUP || e.keyCode == 27) {
+                if (touch && kendo.size(dropTargets)) {
+                    var options = that.options,
+                        dropTarget = kendo.eventTarget(e);
+
+                    if (dropTarget) {
+                        var target = findTarget(dropTarget, dropTargets[options.group]);
+
+                        if (target.element[0]) {
+                            lastDropTarget = { element: [ null ] };
+                            target._drop(e);
+                        }
+                    }
+                }
+
                 that._trigger(DRAGEND, e);
 
                 if (that.hint && !that.dropped) {
