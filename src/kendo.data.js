@@ -664,13 +664,11 @@
         return store[options]();
     }
 
-    /** @ignore */
     function Cache() {
         this._store = {};
     }
 
-    /** @ignore */
-    Cache.prototype = {
+    Cache.prototype = /** @ignore */ {
         add: function(key, data) {
             if(key !== undefined) {
                 this._store[stringify(key)] = data;
