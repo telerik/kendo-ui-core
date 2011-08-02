@@ -298,20 +298,22 @@ function processExamplesDirectory(dir) {
     }
 }
 
-function copyResources(source, destination, processCallback) {
+function copyResources(source, destination, processCallback, filterRegExp) {
     processCallback = processCallback || function(data) { return data; };
 
     fs.readdirSync(source)
         .forEach(function(file) {
-            var data = fs.readFileSync(source + file, "utf8");
+            if (file.match(filterRegExp) && fs.statSync(source + file).isFile()) {
+                var data = fs.readFileSync(source + file, "utf8");
 
-            data = processCallback(data);
+                data = processCallback(data, file);
 
-            if (KENDOCDN) {
-                file = file.replace(/\.(css|js)$/, ".min.$1");
+                if (KENDOCDN) {
+                    file = file.replace(/\.(css|js)$/, ".min.$1");
+                }
+
+                fs.writeFileSync(destination + file, data, "utf8");
             }
-
-            fs.writeFileSync(destination + file, data, "utf8");
         });
 }
 
@@ -357,7 +359,7 @@ exports.build = function(origin, destination, kendoCDN) {
     console.log("Copying resources...");
     wrench.copyDirSyncRecursive(examplesLocation, outputPath);
     wrench.copyDirSyncRecursive(originJS, outputPath + "/js");
-    wrench.copyDirSyncRecursive(originStyles, outputPath + "/styles");
+    wrench.copyDirSyncRecursive(originStyles, outputPath + "/styles", true);
     fs.writeFileSync(outputPath + "/index.html", indexHtml.replace(isLive, ""), "utf8");
     fs.unlinkSync(outputPath + "/template.html");
 
@@ -370,19 +372,24 @@ exports.build = function(origin, destination, kendoCDN) {
     copyResources(
         examplesLocation + "/styles/",
         outputPath + "/styles/",
-        function(data) {
+        function(data, file) {
             if (kendoCDN) {
+                console.log("\tMinifiying " + file + "...");
+                fs.unlinkSync(outputPath + "/styles/" + file);
+
                 data = cssmin(data);
             }
 
             return data;
-        });
+        }, /\.css$/);
 
     copyResources(
         examplesLocation + "/js/",
         outputPath + "/js/",
-        function(data) {
+        function(data, file) {
             if (kendoCDN) {
+                console.log("\tCompressing " + file + "...");
+
                 var ast = parser.parse(data);
                 ast = uglify.ast_mangle(ast);
                 ast = uglify.ast_squeeze(ast);
@@ -390,7 +397,7 @@ exports.build = function(origin, destination, kendoCDN) {
             }
 
             return data;
-        });
+        }, /\.js$/);
 
     if (kendoCDN) {
         var exampleJS = fs.readFileSync(outputPath + "/js/kendo.examples.min.js", "utf8"),
