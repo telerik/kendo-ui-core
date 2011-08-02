@@ -10,7 +10,7 @@ var fs = require("fs"),
 /* options  */
     examplesLocation = "demos/examples",
     outputPath = "live",
-    MINIFY = false,
+    KENDOCDN,
     DEBUG = false,
     jQueryCDN = "http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js",
 
@@ -28,7 +28,9 @@ var fs = require("fs"),
         properties: getRegionRegex("properties"),
         methods: getRegionRegex("methods"),
         events: getRegionRegex("events")
-    };
+    }
+    spaces = "        ",
+    newRow = "\r\n";
 
 function getRegionRegex(regionName) {
     return new RegExp("\\s*<!--\\s*" + regionName + "\\s*-->(([\\r\\n]|.)*?)<!--\\s*" + regionName + "\\s*-->", "im");
@@ -41,13 +43,16 @@ function removeDuplicateResources(resource, target) {
     return target.replace(rex, "");
 }
 
+var i = 2;
+
 function splitScriptRegion(exampleHTML, base) {
-    var baseScripts = baseRegions.script.html,
+    var allScripts,
+        baseScripts = baseRegions.script.html,
         scriptMatches = regionRegex.script.exec(exampleHTML),
         currentPageScripts = scriptMatches ? scriptMatches[1].trimLeft() : "",
         scriptStripper1 = /"(.*?)src/g,
         scriptStripper2 = /src="(?!.\/)([.\/]*)([^"]*)([^\.min]*)\.js"/g,
-        jsExtension = MINIFY ? ".min.js" : ".js",
+        jsExtension = KENDOCDN ? ".min.js" : ".js",
         rebaser = function (match, g1, g2) {
             return 'src="' + ( (g1 != "./" ) ? base : g1 ) + g2 + jsExtension + '"';
         };
@@ -64,19 +69,31 @@ function splitScriptRegion(exampleHTML, base) {
     baseScripts = baseScripts.replace(scriptStripper1, '"js');
     baseScripts = baseScripts.replace(scriptStripper2, rebaser);
 
-    if (MINIFY) {
-        currentPageScripts = currentPageScripts.replace(/(..\/)*js\/jquery\.min\.js/g, jQueryCDN);
+    allScripts = currentPageScripts + baseScripts;
+
+    allScripts = allScripts.replace(/[\r\n]+\s+<script src="([..\/]*)js\/people(\.min)*\.js"><\/script>/g, "");
+    allScripts = allScripts.replace(/[\r\n]+\s+<script src="([..\/]*)js\/kendo.console(\.min)*\.js"><\/script>/g, "");
+
+    if (KENDOCDN) {
+        allScripts = allScripts.replace(/<script src="([..\/]*)js\/jquery\.min\.js"><\/script>/g, "");
+        allScripts = allScripts.replace(/[\r\n]+\s+<script src="([..\/]*)js\/kendo.(?!examples)(\w)+(\.\w+)*(\.min)*.js"><\/script>/g, "");
+        allScripts = allScripts.replace(/([..\/]*)js\/prettify\.min\.js/g, KENDOCDN + "/js/prettify.min.js");
+        allScripts = allScripts.replace(/([..\/]*)js\/kendo\.examples\.min\.js/g, KENDOCDN + "/js/kendo.example.min.js");
+
+        allScripts = spaces + '<script src="' + KENDOCDN + '/js/kendo.all.min.js"></script>' + allScripts;
+        allScripts = '<script src="' + jQueryCDN + '"></script>\r\n' + allScripts;
     }
 
-    return currentPageScripts + baseScripts;
+    return allScripts;
 }
 
 function splitCSSRegion(exampleHTML, base) {
-    var baseCSS = baseRegions.css.html,
+    var allCSS,
+        baseCSS = baseRegions.css.html,
         cssMatches = regionRegex.css.exec(exampleHTML),
         currentPageCSS = cssMatches ? cssMatches[1].trimLeft() : "",
         cssStripper = /href="[.\/]*([^"]*)\.css"/g,
-        cssExtension = MINIFY ? ".min.css" : ".css",
+        cssExtension = KENDOCDN ? ".min.css" : ".css",
         rebasedHref = 'href="' + base + '$1' + cssExtension + '"';
 
     if (!currentPageCSS)
@@ -89,7 +106,15 @@ function splitCSSRegion(exampleHTML, base) {
     currentPageCSS = currentPageCSS.replace(cssStripper, rebasedHref);
     baseCSS = baseCSS.replace(cssStripper, rebasedHref);
 
-    return currentPageCSS + baseCSS;
+    allCSS = currentPageCSS + baseCSS;
+
+    if (KENDOCDN) {
+        allCSS = allCSS.replace(/([..\/]*)styles\/examples\.min\.css/g, KENDOCDN + "/styles/examples.min.css");
+        allCSS = allCSS.replace(/([..\/]*)styles\/kendo\.common\.min\.css/g, KENDOCDN + "/styles/kendo.common.min.css");
+        allCSS = allCSS.replace(/([..\/]*)styles\/kendo\.kendo\.min\.css/g, KENDOCDN + "/styles/kendo.kendo.min.css");
+    }
+
+    return allCSS;
 }
 
 function updateBaseLocation(html, base) {
@@ -98,7 +123,7 @@ function updateBaseLocation(html, base) {
             return match;
         }
         return 'href="' + base + url + '"';
-});
+    });
 }
 
 function componentFromFilename(file) {
@@ -282,7 +307,7 @@ function copyResources(source, destination, processCallback) {
 
             data = processCallback(data);
 
-            if (MINIFY) {
+            if (KENDOCDN) {
                 file = file.replace(/\.(css|js)$/, ".min.$1");
             }
 
@@ -290,8 +315,8 @@ function copyResources(source, destination, processCallback) {
         });
 }
 
-exports.build = function(origin, destination, minify) {
-    MINIFY = minify;
+exports.build = function(origin, destination, kendoCDN) {
+    KENDOCDN = kendoCDN;
 
     if (destination) {
         outputPath = destination;
@@ -336,7 +361,7 @@ exports.build = function(origin, destination, minify) {
     fs.writeFileSync(outputPath + "/index.html", indexHtml.replace(isLive, ""), "utf8");
     fs.unlinkSync(outputPath + "/template.html");
 
-    if (!MINIFY) {
+    if (!kendoCDN) {
         fs.writeFileSync(outputPath + "/js/jquery.js", fs.readFileSync("src/jquery.js", "utf8"), "utf8");
     } else {
         fs.writeFileSync(outputPath + "/web.config", fs.readFileSync("web.config", "utf8"), "utf8");
@@ -346,7 +371,7 @@ exports.build = function(origin, destination, minify) {
         examplesLocation + "/styles/",
         outputPath + "/styles/",
         function(data) {
-            if (MINIFY) {
+            if (kendoCDN) {
                 data = cssmin(data);
             }
 
@@ -357,7 +382,7 @@ exports.build = function(origin, destination, minify) {
         examplesLocation + "/js/",
         outputPath + "/js/",
         function(data) {
-            if (MINIFY) {
+            if (kendoCDN) {
                 var ast = parser.parse(data);
                 ast = uglify.ast_mangle(ast);
                 ast = uglify.ast_squeeze(ast);
