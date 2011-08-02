@@ -3163,7 +3163,7 @@
 
         options: {
             aboveAxis: true,
-            isVertical: false,
+            isVertical: true,
             markers: {
                 visible: true,
                 background: BLACK,
@@ -3234,15 +3234,15 @@
 
             if (isVertical) {
                 if (aboveAxis) {
-                    childBox.x1 += childBox.width();
-                } else {
-                    childBox.x2 -= childBox.width();
-                }
-            } else {
-                if (aboveAxis) {
                     childBox.y1 -= childBox.height();
                 } else {
                     childBox.y2 += childBox.height();
+                }
+            } else {
+                if (aboveAxis) {
+                    childBox.x1 += childBox.width();
+                } else {
+                    childBox.x2 -= childBox.width();
                 }
             }
 
@@ -3309,7 +3309,7 @@
 
             var point = new LinePoint(value,
                 deepExtend({
-                    isVertical: !options.isVertical,
+                    isVertical: options.isVertical,
                     markers: {
                         background: series.color,
                         opacity: series.opacity
@@ -4547,7 +4547,8 @@
                 color: BLACK,
                 width: 0
             },
-            offsetY: 15
+            offsetY: 6,
+            offsetX: 5
         },
 
         show: function(point) {
@@ -4555,18 +4556,31 @@
                 element = tooltip.element,
                 options = tooltip.options,
                 aboveAxis = point.options.aboveAxis,
+                isVertical = point.options.isVertical,
                 chartElement = tooltip.chartElement,
-                x = point.box.center().x,
-                y = (aboveAxis ? point.box.y1 : point.box.y2),
                 value = point.value,
-                displayValue = options.format ? format(options.format, value) : value.toString();
+                tooltipBox;
 
-            tooltip.element.html(displayValue);
+            tooltip.element.html(
+                options.format ? format(options.format, value) : value.toString()
+            );
 
-            if (aboveAxis) {
-                y = y - options.offsetY - element.height();
+            tooltipBox = new Box2D(0, 0, element.outerWidth(), element.outerHeight())
+
+            if (isVertical === false) {
+                tooltipBox
+                    .alignTo(point.box, aboveAxis ? RIGHT : LEFT)
+                    .translate(
+                        (aboveAxis ? 1 : -1) * options.offsetX,
+                        point.box.center().y - tooltipBox.center().y
+                    );
             } else {
-                y = y + options.offsetY;
+                tooltipBox
+                    .alignTo(point.box, aboveAxis ? TOP : BOTTOM)
+                    .translate(
+                        point.box.center().x - tooltipBox.center().x,
+                        (aboveAxis ? -1 : 1) * options.offsetY
+                    );
             }
 
             tooltip.element
@@ -4578,8 +4592,8 @@
                 .stop(true)
                 .show()
                 .animate({
-                    left: (x - element.outerWidth() / 2) + "px",
-                    top: y + "px"
+                    left: round(tooltipBox.x1) + "px",
+                    top: round(tooltipBox.y1) + "px"
                 }, tooltip.visible ? 150 : 0);
 
             tooltip.point = point;
