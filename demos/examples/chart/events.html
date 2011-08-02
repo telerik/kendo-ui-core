@@ -72,14 +72,7 @@
                 }
 
                 function onSeriesClick(e) {
-                    if ("kendoConsole" in window) {
-                        kendoConsole.log(
-                            "Series click :: " +
-                            e.series.name + " (" +
-                            e.category + "): " +
-                            kendo.toString(e.value, "#,##0") + "%"
-                        );
-                    }
+                    kendoConsole.log(kendo.format("Series click :: {0} ({1}): {2}%", e.series.name, e.category, e.value));
                 }
 
                 $(document).ready(function() {
