@@ -229,7 +229,7 @@
 
         _animateArrows: function (arrows, action) {
             var that = this;
-            
+
             arrows.each( function (idx) {
                 var element = $(this),
                     options = {
@@ -305,7 +305,7 @@
 
         _initializeBoxModel: function () {
             var that = this;
-            
+
             extend(that, {
                         boxWidth: that.element.innerWidth(),
                         boxHeight: that.element.innerHeight(),
@@ -424,7 +424,7 @@
                 that._initKinetikAnimation(e);
             } else {
                 proxy = $.proxy( that._click, { original: that, target: target } );
-                
+
                 if (kendo.support.touch && oEvent.touches.length == 1) // Fire a click event when there's no drag...
                 {
                     target.unbind('click', proxy);

@@ -107,8 +107,8 @@
                 this.currentView.hide();
             }
 
-            var view = this.views[viewIndex]; 
-            
+            var view = this.views[viewIndex];
+
             view.show(this.root);
 
             this.currentView = view;

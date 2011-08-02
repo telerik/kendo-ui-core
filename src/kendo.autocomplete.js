@@ -2,7 +2,7 @@
     /**
     * @name kendo.ui.AutoComplete.Description
     *
-    * @section The AutoComplete widget provides suggestions depending on the typed text. It also allows entry of multiple values with by predefined separator. 
+    * @section The AutoComplete widget provides suggestions depending on the typed text. It also allows entry of multiple values with by predefined separator.
     * The suggestions shown by the AutoComplete widget can come from a local Array or from a remote data service.
     *
     * <h3>Getting Started</h3>
@@ -23,12 +23,12 @@
    * Locally defined values are best for small, fixed sets of suggestions. Remote suggestions should be used for larger data sets. When used with the <a href="../datasource/index.html" title="Kendo DataSource">Kendo DataSource</a>,
    * filtering large remote data services can be pushed to the server, too, maximizing client-side performance.
    * <h3>Local Suggestions</h3>
-   * To configure and provide AutoComplete suggestions locally, you can either pass an Array directly to the AutoComplete constructor, 
+   * To configure and provide AutoComplete suggestions locally, you can either pass an Array directly to the AutoComplete constructor,
    * or you can set the AutoComplete dataSource property to an Array defined elsewhere in your JavaScript code.
    * @exampleTitle Directly initialize suggestions in constructor
    * @example
    * $("#autocomplete").kendoAutoComplete(["Item1", "Item2", "Item3"]);
-   * 
+   *
    * @exampleTitle Using dataSource property to bind to local Array
    * @example
    * var data = ["Item1", "Item2", "Item3"];
@@ -36,63 +36,63 @@
    *    dataSource: data
    * });
    * @section <h3>Remote Suggestions</h3>
-   * The easiest way to bind to remote AutoComplete suggestions is to use the <a href="../datasource/index.html" title="Kendo DataSource">Kendo DataSource</a> component. The Kendo DataSource is an abstraction for local and 
-   * remote data, and it can be used to serve data from a variety of data services, such as XML, JSON, and JSONP. 
-   * 
+   * The easiest way to bind to remote AutoComplete suggestions is to use the <a href="../datasource/index.html" title="Kendo DataSource">Kendo DataSource</a> component. The Kendo DataSource is an abstraction for local and
+   * remote data, and it can be used to serve data from a variety of data services, such as XML, JSON, and JSONP.
+   *
    * @exampleTitle Using Kendo DataSource to bind to remote suggestions with OData
    * @example
    * $("#autocomplete").kendoAutoComplete({
-   *    minLength: 3, 
+   *    minLength: 3,
    *    dataTextField: "Name", //JSON property name to use
    *    dataSoruce: new kendo.data.DataSource({
-   *	    type: "odata", //Specifies data protocol 
-   *	    pageSize: 10, //Limits result set
-   *	    transport: {
-   *		    read: "ht	tp://odata.netflix.com/Catalog/Titles"
-   * 	    }
+   *        type: "odata", //Specifies data protocol
+   *        pageSize: 10, //Limits result set
+   *        transport: {
+   *            read: "ht   tp://odata.netflix.com/Catalog/Titles"
+   *        }
    *    })
    * });
-   * 
+   *
    * @exampleTitle Using Kendo DataSource to bind to JSONP suggestions
    * @example
    * $(document).ready(function(){
    *    $("#txtAc").kendoAutoComplete({
-   *	    minLength:6,
-   *	    dataTextField:"title",
-   *	    filter: "contains",
-   *	    dataSource: new kendo.data.DataSource({
-   *		    transport:{
-   *			    read:{
-   *				    url: "http://api.geonames.org/wikipediaSearchJSON",
-   *				    data:{
-   *					    q:function(){
-   *						    var ac = $("#txtAc").data("kendoAutoComplete");
-   *						    return ac.value();
-   *					    },
-   *					    maxRows:10, 
-   *					    username:"demo"
-   *				    }
-   *			    }   
-   *		    },
-   *		    schema:{
-   *			    data:"geonames"
-   *		    }
-   *	    }),
-   *	    change:function(){
-   *		    this.dataSource.read();    
-   *	    } 
-   *    });              
+   *        minLength:6,
+   *        dataTextField:"title",
+   *        filter: "contains",
+   *        dataSource: new kendo.data.DataSource({
+   *            transport:{
+   *                read:{
+   *                    url: "http://api.geonames.org/wikipediaSearchJSON",
+   *                    data:{
+   *                        q:function(){
+   *                            var ac = $("#txtAc").data("kendoAutoComplete");
+   *                            return ac.value();
+   *                        },
+   *                        maxRows:10,
+   *                        username:"demo"
+   *                    }
+   *                }
+   *            },
+   *            schema:{
+   *                data:"geonames"
+   *            }
+   *        }),
+   *        change:function(){
+   *            this.dataSource.read();
+   *        }
+   *    });
    * });
-   * 
+   *
    * @section <h3>Accessing an Existing AutoComplete</h3>
-   * To access an existing Kendo UI AutoComplete widget instance, use the jQuery data API. Once a reference to the AutoComplete is established, 
+   * To access an existing Kendo UI AutoComplete widget instance, use the jQuery data API. Once a reference to the AutoComplete is established,
    * you can use the Kendo UI API to control the widget.
-   * 
+   *
    * @exampleTitle Accessing Existing AutoComplete widget instance
    * @example
    * var autocomplete = $("#autocomplete").data("kendoAutoComplete");
-   * 
-   * 
+   *
+   *
    */
     var kendo = window.kendo,
         ui = kendo.ui,
