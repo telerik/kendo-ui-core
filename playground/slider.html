@@ -10,18 +10,28 @@
         <link type="text/css" href="../styles/kendo.blueopal.css" rel="stylesheet"/>
     </head>
     <body>
-        <input id="slider" style="margin: 40px;"></input>
+        <input id="slider" style="margin: 40px;">
         <br />
         <div id="rangeslider" style="margin: 40px;">
             <input />
             <input />
         </div>
         <br />
+        <input id="slider2" style="margin: 40px;">
+        <br />
+        <div id="rangeslider2" style="margin: 40px;">
+            <input />
+            <input />
+        </div>
         <script type="text/javascript">
             $(document).ready(function() {
                 $("#slider").kendoSlider({ smallStep: 1, max: 10, largeStep: 5, orientation: "horizontal", tickPlacement: "both" });
 
                 $("#rangeslider").kendoRangeSlider({ smallStep: 1, max: 10, largeStep: 5, orientation: "horizontal", tickPlacement: "both" });
+
+                $("#slider2").kendoSlider({ smallStep: 1, max: 10, largeStep: 5, orientation: "vertical", tickPlacement: "both" });
+
+                $("#rangeslider2").kendoRangeSlider({ smallStep: 1, max: 10, largeStep: 5, orientation: "vertical", tickPlacement: "both" });
             });
         </script>
     </body>

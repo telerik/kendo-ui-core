@@ -38,11 +38,12 @@
         extend = $.extend,
         proxy = $.proxy,
         math = Math,
+        touch = kendo.support.touch,
         //events
         CHANGE = "change",
         SLIDE = "slide",
-        MOUSE_DOWN = "mousedown",
-        MOUSE_UP = "mouseup",
+        MOUSE_DOWN = touch ? "touchstart" : "mousedown",
+        MOUSE_UP = touch ? "touchend" : "mouseup",
         MOVE_SELECTION = "moveSelection",
         KEY_DOWN = "keydown",
         //css selectors
@@ -803,12 +804,15 @@
         drag: function (e) {
             var that = this,
                 owner = that.owner,
-                options = that.options;
+                options = that.options,
+                location = kendo.touchLocation(e),
+                startPoint = that.dragableArea.startPoint,
+                endPoint = that.dragableArea.endPoint;
 
             if (owner._isHorizontal) {
-                that.val = that.horizontalDrag(e);
+                that.val = that.constrainValue(location.x, startPoint, endPoint, location.x >= endPoint);
             } else {
-                that.val = that.verticalDrag(e);
+                that.val = that.constrainValue(location.y, endPoint, startPoint, location.y <= endPoint);
             }
 
             if (that.oldVal != that.val) {
@@ -912,35 +916,22 @@
             that.tooltipDiv.css({ top: positionTop, left: positionLeft });
         },
 
-        horizontalDrag: function (mousePosition) {
+        constrainValue: function (position, min, max, maxOverflow) {
             var that = this,
                 val = 0;
 
-            if (that.dragableArea.startPoint < mousePosition.pageX && mousePosition.pageX < that.dragableArea.endPoint) {
-                val = that.owner._getValueFromPosition(mousePosition.pageX, that.dragableArea);
-            } else if (mousePosition.pageX >= that.dragableArea.endPoint) {
-                val = that.options.max;
-            } else {
-                val = that.options.min;
-            }
-
-            return val;
-        },
-
-        verticalDrag: function (mousePosition) {
-            var that = this,
-                val = 0;
-
-            if (that.dragableArea.startPoint > mousePosition.pageY && mousePosition.pageY > that.dragableArea.endPoint) {
-                val = that.owner._getValueFromPosition(mousePosition.pageY, that.dragableArea);
-            } else if (mousePosition.pageY <= that.dragableArea.endPoint) {
-                val = that.options.max;
-            } else {
-                val = that.options.min;
-            }
+            if (min < position && position < max) {
+                val = that.owner._getValueFromPosition(position, that.dragableArea);
+            } else
+                if (maxOverflow) {
+                    val = that.options.max;
+                } else {
+                    val = that.options.min;
+                }
 
             return val;
         }
+
     };
 
     kendo.ui.plugin("Slider", Slider);
