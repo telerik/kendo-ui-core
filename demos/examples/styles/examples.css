@@ -41,7 +41,7 @@ body>div
 .console div,
 .telerikLogo
 {
-    background-image: url("../img/sprite.png");
+    background-image: url("sprite.png");
     background-repeat: no-repeat;
     background-color: transparent;
 }
@@ -59,7 +59,7 @@ body>div
 * html .console div,
 * html .telerikLogo
 {
-    background-image: url("../img/sprite_ie6.png");
+    background-image: url("sprite_ie6.png");
 }
 
 body
@@ -96,7 +96,7 @@ body
 {
     height: 100px;
     width: 100%;
-    background: transparent url("../img/flowers.png") no-repeat 50% 0;
+    background: transparent url("flowers.png") no-repeat 50% 0;
 }
 
 #header, #footer
@@ -165,7 +165,7 @@ body
 
 .logoLink
 {
-    background: transparent url("../img/kendo-logo.png") 0 8px no-repeat;
+    background: transparent url("kendo-logo.png") 0 8px no-repeat;
     width: 139px;
     height: 30px;
     display: block;
@@ -213,12 +213,12 @@ body
 
 .download-beta a
 {
-    background: #4C4C4C url("../img/bg-glossy.png") no-repeat 0 100%;
-    background-image: url("../img/bg-glossy.png"), -moz-linear-gradient(center top, #4C4C4C 0%, #2E2E2E 100%);
-    background-image: url("../img/bg-glossy.png"), -webkit-linear-gradient(center top, #4C4C4C 0%, #2E2E2E 100%);
-    background-image: url("../img/bg-glossy.png"), -o-linear-gradient(center top, #4C4C4C 0%, #2E2E2E 100%);
-    background-image: url("../img/bg-glossy.png"), -ms-linear-gradient(center top, #4C4C4C 0%, #2E2E2E 100%);
-    background-image: url("../img/bg-glossy.png"), -webkit-gradient(linear, center top, center bottom, color-stop(0%,#4C4C4C), color-stop(100%, #2E2E2E));
+    background: #4C4C4C url("bg-glossy.png") no-repeat 0 100%;
+    background-image: url("bg-glossy.png"), -moz-linear-gradient(center top, #4C4C4C 0%, #2E2E2E 100%);
+    background-image: url("bg-glossy.png"), -webkit-linear-gradient(center top, #4C4C4C 0%, #2E2E2E 100%);
+    background-image: url("bg-glossy.png"), -o-linear-gradient(center top, #4C4C4C 0%, #2E2E2E 100%);
+    background-image: url("bg-glossy.png"), -ms-linear-gradient(center top, #4C4C4C 0%, #2E2E2E 100%);
+    background-image: url("bg-glossy.png"), -webkit-gradient(linear, center top, center bottom, color-stop(0%,#4C4C4C), color-stop(100%, #2E2E2E));
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
@@ -231,12 +231,12 @@ body
 
 .download-beta a:hover
 {
-    background: #6C6C6C url("../img/bg-glossy.png") no-repeat 0 100%;
-    background-image: url("../img/bg-glossy.png"), -moz-linear-gradient(center top, #6C6C6C 0%, #4E4E4E 100%);
-    background-image: url("../img/bg-glossy.png"), -webkit-linear-gradient(center top, #6C6C6C 0%, #4E4E4E 100%);
-    background-image: url("../img/bg-glossy.png"), -o-linear-gradient(center top, #6C6C6C 0%, #4E4E4E 100%);
-    background-image: url("../img/bg-glossy.png"), -ms-linear-gradient(center top, #6C6C6C 0%, #4E4E4E 100%);
-    background-image: url("../img/bg-glossy.png"), -webkit-gradient(linear, center top, center bottom, color-stop(0%,#6C6C6C), color-stop(100%, #4E4E4E));
+    background: #6C6C6C url("bg-glossy.png") no-repeat 0 100%;
+    background-image: url("bg-glossy.png"), -moz-linear-gradient(center top, #6C6C6C 0%, #4E4E4E 100%);
+    background-image: url("bg-glossy.png"), -webkit-linear-gradient(center top, #6C6C6C 0%, #4E4E4E 100%);
+    background-image: url("bg-glossy.png"), -o-linear-gradient(center top, #6C6C6C 0%, #4E4E4E 100%);
+    background-image: url("bg-glossy.png"), -ms-linear-gradient(center top, #6C6C6C 0%, #4E4E4E 100%);
+    background-image: url("bg-glossy.png"), -webkit-gradient(linear, center top, center bottom, color-stop(0%,#6C6C6C), color-stop(100%, #4E4E4E));
 }
 
 #navi .download-beta a
@@ -1036,7 +1036,7 @@ div.skinSelector .t-input
 #skinSelector-list .thumb
 {
     background-color: transparent;
-    background-image: url("../img/Menu/thumbSprite.png");
+    background-image: url("Menu/thumbSprite.png");
     background-repeat: no-repeat;
     display: block;
     height: 46px;
