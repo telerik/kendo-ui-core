@@ -142,27 +142,25 @@
             stopQueue: function(element, clearQueue, gotoEnd) {
 
                 var taskKeys = element.data('keys'),
-                    cssPrefix = kendo.support.transitions.css;
+                    retainPosition = (gotoEnd === false && taskKeys);
 
-                if (gotoEnd === false && taskKeys) {
+                if (retainPosition) {
                     var style = document.defaultView.getComputedStyle(element[0], null),
                         cssValues = {},
                         prop = 0;
 
                     while (prop < taskKeys.length)
                         cssValues[taskKeys[prop]] = style.getPropertyValue(taskKeys[prop++]);
+                }
 
-                    element.css(cssPrefix + 'transition', 'none');
+                removeTransitionStyles(element);
+
+                if (retainPosition) {
                     element.css(cssValues);
 
                     if (this.complete)
                         this.complete.call(element);
-
-                } else
-                    element.css(cssPrefix + 'transition', 'none');
-
-                if (!kendo.support.touch)
-                    element.css(cssPrefix + 'transition');
+                }
 
                 element.removeData('keys');
                 if (element.data('abortId')) {
