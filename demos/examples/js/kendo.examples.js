@@ -407,7 +407,7 @@ var categories = {
     },
     controls: [
        {
-            text: "Autocomplete",
+            text: "AutoComplete",
             expanded: true,
             spriteCssClass: "autocompleteIcon",
             items: [
