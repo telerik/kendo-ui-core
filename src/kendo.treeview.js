@@ -778,7 +778,7 @@
             var that = this,
                 treeview = that.treeview,
                 sourceNode = that.sourceNode,
-                dropTarget = that.dropTarget = $(e.target),
+                dropTarget = that.dropTarget = $(kendo.eventTarget(e)),
                 statusClass,
                 hoveredItem, hoveredItemPos, itemHeight, itemTop, itemContent, delta,
                 insertOnTop, insertOnBottom, addChild;

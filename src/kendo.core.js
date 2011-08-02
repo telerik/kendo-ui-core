@@ -1155,6 +1155,10 @@
         };
     };
 
+    var eventTarget = function (e) {
+        return e.target;
+    };
+
     if (support.touch) {
         /** @ignore */
         touchLocation = function(e, id) {
@@ -1178,6 +1182,12 @@
                     y: changedTouches[0].pageY
                 };
             }
+        };
+
+        eventTarget = function(e) {
+            var touches = 'originalEvent' in e ? e.originalEvent.changedTouches : "changedTouches" in e ? e.changedTouches : null;
+
+            return touches ? document.elementFromPoint(touches[0].clientX, touches[0].clientY) : null;
         };
 
         each(['swipe', 'swipeLeft', 'swipeRight', 'swipeUp', 'swipeDown', 'doubleTap', 'tap'], function(m, value) {
@@ -1255,6 +1265,7 @@
         render: proxy(Template.render, Template),
         stringify: proxy(JSON.stringify, JSON),
         touchLocation: touchLocation,
+        eventTarget: eventTarget,
         htmlEncode: htmlEncode,
         /** @ignore */
         getter: function(expression) {
