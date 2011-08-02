@@ -27,45 +27,39 @@
             </div>
             <div class="configuration" style="width: 240px;">
                 <span class="configHead">Configuration</span>
-                <span class="configTitle">API Functions</span>
-                <fieldset>
-                    <legend>Slider configuration</legend>
-                    <ul class="options">
-                        <li>
-                            <input type="text" id="newValue" value="1" />
-                            <button class="t-button" id="setSliderValue">Set value</button>
-                        </li>
-                        <li>
-                            <button class="t-button" id="getSliderValue">Get value</button>
-                        </li>
-                        <li>
-                            <button class="t-button" id="enableSlider">Enable</button> or <button class="t-button" id="disableSlider">Disable</button>
-                        </li>
-                    </ul>
-                </fieldset>
-
-                <fieldset>
-                    <legend>Range slider configuration</legend>
-                    <ul class="options">
-                        <li>
-                            <input type="text" id="startValue" value="1" />
-                            <button class="t-button" id="setStartValue">Set selection start</button>
-                        </li>
-                        <li>
-                            <input type="text" id="endValue" value="1" />
-                            <button class="t-button" id="setEndValue">Set selection end</button>
-                        </li>
-                        <li>
-                            <button class="t-button" id="getRangeSliderValue">Get value</button>
-                        </li>
-                        <li>
-                            <button class="t-button" id="enableRangeSlider">Enable</button>
-                        </li>
-                        <li>
-                            <button class="t-button" id="disableRangeSlider">Disable</button>
-                        </li>
-                    </ul>
-                </fieldset>
+                <span class="configTitle">Slider API Functions</span>
+                <ul class="options">
+                    <li>
+                        <input type="number" min="0" max="10" id="newValue" value="1" />
+                        <button class="t-button" id="setSliderValue">Set value</button>
+                    </li>
+                    <li>
+                        <button class="t-button" id="getSliderValue">Get value</button>
+                    </li>
+                    <li>
+                        <button class="t-button" id="enableSlider">Enable</button> or <button class="t-button" id="disableSlider">Disable</button>
+                    </li>
+                </ul>
+                <span class="configTitle">RangeSlider API Functions</span>
+                <ul class="options">
+                    <li>
+                        <input type="number" min="0" max="10" id="startValue" value="1" />
+                        <button class="t-button" id="setStartValue">Set selection start</button>
+                    </li>
+                    <li>
+                        <input type="number" min="0" max="10" id="endValue" value="1" />
+                        <button class="t-button" id="setEndValue">Set selection end</button>
+                    </li>
+                    <li>
+                        <button class="t-button" id="getRangeSliderValue">Get value</button>
+                    </li>
+                    <li>
+                        <button class="t-button" id="enableRangeSlider">Enable</button>
+                    </li>
+                    <li>
+                        <button class="t-button" id="disableRangeSlider">Disable</button>
+                    </li>
+                </ul>
             </div>
 
             <div id="rangeslider" style="margin-top: 40px;">
@@ -79,7 +73,13 @@
                     var rangeSlider = $("#rangeslider").kendoRangeSlider().data("kendoRangeSlider");
 
                     $("#setSliderValue").click(function() {
-                        var value = $("#newValue").val();
+                        var value = parseInt($("#newValue").val(), 10);
+
+                        if (isNaN(value) || value < 0 || value > 10) {
+                            alert("Value must be a number between 0 and 10");
+                            return;
+                        }
+
                         slider.value(value);
                     });
 
@@ -100,14 +100,26 @@
                     }
 
                     $("#setStartValue").click(function() {
-                        var startValue = $("#startValue").val();
+                        var startValue = parseInt($("#startValue").val(), 10);
+
+                        if (isNaN(startValue) || startValue < 0 || startValue > 10) {
+                            alert("Value must be a number between 0 and 10");
+                            return;
+                        }
+
                         var endValue = getValues()[1];
                         rangeSlider.values(startValue, endValue);
                     });
 
                     $("#setEndValue").click(function() {
                         var startValue = getValues()[0];
-                        var endValue = $("#endValue").val();
+                        var endValue = parseInt($("#endValue").val(), 10);
+
+                        if (isNaN(endValue) || endValue < 0 || endValue > 10) {
+                            alert("Value must be a number between 0 and 10");
+                            return;
+                        }
+
                         rangeSlider.values(startValue, endValue);
                     });
 
