@@ -23,7 +23,7 @@
         this._isPrevented = false;
     }
 
-    Event.prototype = {
+    Event.prototype = /** @ignore */ {
         preventDefault: function() {
             this._isPrevented = true;
         },
