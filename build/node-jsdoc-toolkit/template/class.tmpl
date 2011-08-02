@@ -394,7 +394,7 @@
                         break;
 
                         case "section":
-                            output += tag.desc;
+                            output += (/<[^>]+>/g.test(tag.desc) ? tag.desc : "<p>" + tag.desc + "</p>");
                         break;
                     }
                 }
