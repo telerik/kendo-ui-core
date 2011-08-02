@@ -772,13 +772,13 @@
          * The text color of the tooltip. The default is the same as the series labels color.
          * @option {String} [tooltip.background]
          * The background color of the tooltip. The default is determined from the series color.
-         * @option {Number|Object} [tooltip.padding] <2> The padding of the tooltip.
+         * @option {Number|Object} [tooltip.padding] The padding of the tooltip.
          * _example
          * // sets the top, right, bottom and left padding to 3px.
          * padding: 3
          *
          * // sets the top and left padding to 1px
-         * // right and bottom padding are left at 2px (by default)
+         * // right and bottom padding are left at their default values
          * padding: { top: 1, left: 1 }
          * @option {Object} [tooltip.border] The border configuration options.
          * @option {Number} [tooltip.border.width] <0> The width of the border.
@@ -4414,7 +4414,7 @@
             if (!tooltip.template) {
                 tooltip.template = Tooltip.template = template(
                     "<div style='position: absolute; font: <#= d.font #>;" +
-                    "border-radius: 4px; -moz-border-radius: 4px; -webkit-border-radius: 4px;" +
+                    "border-radius: 2px; -moz-border-radius: 2px; -webkit-border-radius: 2px;" +
                     "border: <#= d.border.width #>px solid <#= d.border.color #>;" +
                     "padding: <#= d.padding.top #>px <#= d.padding.right #>px " +
                     "<#= d.padding.bottom #>px <#= d.padding.left #>px;'></div>"
@@ -4426,7 +4426,12 @@
 
         options: {
             font: SANS12,
-            padding: getSpacing(2),
+            padding: {
+                top: 4,
+                bottom: 4,
+                left: 6,
+                right: 6
+            },
             border: {
                 color: BLACK,
                 width: 0
