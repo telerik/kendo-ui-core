@@ -552,6 +552,7 @@
             groupSeparator = ",",
             decimal = ".",
             precision = 2,
+            digit,
             formatAndPrecision,
             negative = number < 0,
             integer,
@@ -662,18 +663,20 @@
 
         number = "";
 
-        for (idx = 0, length = format[0].length; idx < length; idx++) {
-            ch = format[0].charAt(idx);
+        if (format[0].length > integer.length) {
+            integer = new Array(format[0].length - integer.length).join(" ") + integer;
+        }
 
-            if (ch === "$") {
-                number += symbol;
-            } else if (ch === "0") {
-                number += ch;
-                replacement = ch;
-            } else if (ch === "#") {
-                number += replacement;
-            } else {
-                number += ch;
+        for (idx = 0, length = format[0].length; idx >= 0; idx--) {
+            ch = format[0][idx];
+            digit = integer.charAt(idx);
+
+            if (ch === "0") {
+                if (digit) {
+                    number = digit + number;
+                } else {
+                    number = ch + number;
+                }
             }
         }
 
