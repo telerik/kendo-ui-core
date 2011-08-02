@@ -14,6 +14,7 @@
             var Chart = kendo.ui.Chart,
                 tooltip,
                 element,
+                dataPointMock,
                 RED = "rgb(255,0,0)",
                 GREEN = "rgb(0,255,0)",
                 BLUE = "rgb(0,0,255)";
@@ -21,26 +22,26 @@
             function createTooltip(options) {
                 tooltip = new Chart.Tooltip($("#chart"), options);
                 element = tooltip.element;
+                element.css({ width: "45px", height: "35px" });
             }
-
-            var dataPointMock = {
-                value: 1,
-                box: new Chart.Box2D(),
-                options: {
-                    aboveAxis: true
-                },
-                series: {
-                    color: RED,
-                    labels: {
-                        color: GREEN
-                    }
-                }
-            };
 
             // ------------------------------------------------------------
             module("Tooltip", {
                 setup: function() {
                     createTooltip();
+                    dataPointMock = {
+                        value: 1,
+                        box: new Chart.Box2D(0, 0, 10, 10),
+                        options: {
+                            aboveAxis: true
+                        },
+                        series: {
+                            color: RED,
+                            labels: {
+                                color: GREEN
+                            }
+                        }
+                    };
                 }
             });
 
@@ -98,6 +99,62 @@
                 createTooltip({ format: "{0}%" });
                 tooltip.show(dataPointMock);
                 equals(element.text(), "1%");
+            });
+
+            test("positions tooltip on top of vertical points located above axis", function() {
+                createTooltip({ padding: 0, offsetY: 10 });
+
+                dataPointMock.options.isVertical = true;
+                dataPointMock.options.aboveAxis = true;
+                tooltip.show(dataPointMock);
+
+                equals(tooltip.element.css("top"), "-45px");
+            });
+
+            test("positions tooltip below vertical points located below axis", function() {
+                createTooltip({ padding: 0, offsetY: 10 });
+
+                dataPointMock.options.isVertical = true;
+                dataPointMock.options.aboveAxis = false;
+                tooltip.show(dataPointMock);
+
+                equals(tooltip.element.css("top"), "20px");
+            });
+
+            test("positions tooltip in center of vertical points", function() {
+                dataPointMock.options.isVertical = true;
+
+                tooltip.show(dataPointMock);
+
+                equals(tooltip.element.css("left"), "-23px");
+            });
+
+            test("positions tooltip right of horizontal points located right of axis", function() {
+                createTooltip({ padding: 0, offsetX: 10 });
+
+                dataPointMock.options.isVertical = false;
+                dataPointMock.options.aboveAxis = true;
+                tooltip.show(dataPointMock);
+
+                equals(tooltip.element.css("left"), "20px");
+            });
+
+            test("positions tooltip left of horizontal points located left of axis", function() {
+                createTooltip({ padding: 0, offsetX: 10 });
+
+                dataPointMock.options.isVertical = false;
+                dataPointMock.options.aboveAxis = false;
+                tooltip.show(dataPointMock);
+
+                equals(tooltip.element.css("left"), "-55px");
+            });
+
+            test("positions tooltip in center of horizontal points", function() {
+                dataPointMock.options.isVertical = false;
+
+                tooltip.show(dataPointMock);
+
+                equals(tooltip.element.css("top"), "-16px");
             });
 
         </script>
