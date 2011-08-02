@@ -10,7 +10,7 @@
         </style>
     </head>
     <body>
-        <p>Running benchmark ... </p>
+        <div id="log">Running benchmark ... </div>
         <script>
             function number() {
                 var suite = new Benchmark.Suite;
@@ -22,15 +22,16 @@
                     kendo.toString(1234.567, "n");
                 })
                 .on("complete", function() {
-                    var message = "User agent: " + navigator.userAgent;
+                    var message = "<div>User agent: " + navigator.userAgent;
                     message += "<table><tr><th>Position</th><th>Contender</th><th>Ops/sec (higher is better)</th></tr>";
                         var results = $.makeArray(this);
                         results.sort(function(a, b) { return b.hz - a.hz });
                         $.each(results, function(index) {
                             message += "<tr><td>" + (index + 1) + "</td><td>" + this.name + "</td><td>" + this.hz + "</td></tr>";
                         });
-                        message += "</table>";
-                    $("p:first").html(message);
+                        message += "</table></div>";
+
+                    $("#log").html(message);
 
                     currency();
                 })
@@ -40,7 +41,8 @@
             function currency() {
                 var suite = new Benchmark.Suite;
 
-                $("p:first").append("Running...");
+                $("#log").append("<div>Running benchmark ...</div>");
+
                 suite.add("Globalize currency formatting", function() {
                     Globalize.format(1234.567, "c");
                 })
@@ -48,16 +50,16 @@
                     kendo.toString(1234.567, "c");
                 })
                 .on("complete", function() {
-                    var message = "User agent: " + navigator.userAgent;
+                    var message = "<div>User agent: " + navigator.userAgent;
                     message += "<table><tr><th>Position</th><th>Contender</th><th>Ops/sec (higher is better)</th></tr>";
                         var results = $.makeArray(this);
                         results.sort(function(a, b) { return b.hz - a.hz });
                         $.each(results, function(index) {
                             message += "<tr><td>" + (index + 1) + "</td><td>" + this.name + "</td><td>" + this.hz + "</td></tr>";
                         });
-                        message += "</table>";
+                        message += "</table></div>";
 
-                    $("p:first").append(message);
+                    $("#log").find("div:last").remove().end().append(message);
                 })
                 .run(true);
             }
