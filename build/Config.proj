@@ -11,5 +11,6 @@
 		<CDNAccessKeyId>AKIAJSDTTSFPVFUMHBGA</CDNAccessKeyId>
 		<CDNSecretAccessKey>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</CDNSecretAccessKey>
 		<CDNBucketName>kendo-static</CDNBucketName>
+        <CDNRoot>http://cdn.kendostatic.com/</CDNRoot>
 	</PropertyGroup>
 </Project>

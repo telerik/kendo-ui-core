@@ -1,40 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5" DefaultTargets="DeployCDN">
-	<Import Project="Config.proj" />
-	<Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\TeamBuild\Microsoft.TeamFoundation.Build.targets" />
+    <Import Project="Config.proj" />
+    <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\TeamBuild\Microsoft.TeamFoundation.Build.targets" />
 
-	<UsingTask TaskName="Telerik.MSBuildTasks.GenerateVersionDependentSuffix" AssemblyFile="MSBuildTasks\Telerik.MSBuildTasks.dll"/>
-	<UsingTask TaskName="UploadResources" AssemblyFile="MSBuildTasks\ResourceUploader.MSBuildTasks.dll" />
+    <UsingTask TaskName="Telerik.MSBuildTasks.GenerateVersionDependentSuffix" AssemblyFile="MSBuildTasks\Telerik.MSBuildTasks.dll"/>
+    <UsingTask TaskName="UploadResources" AssemblyFile="MSBuildTasks\ResourceUploader.MSBuildTasks.dll" />
 
-	<Target Name="DeployCDN">
-		<BuildStep TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)" Name="DeployCDNStep" Message="Deploying CDN resources">
-			<Output TaskParameter="Id" PropertyName="StepId" />
-		</BuildStep>
+    <Target Name="DeployCDN">
+        <BuildStep TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)" Name="DeployCDNStep" Message="Deploying CDN resources">
+            <Output TaskParameter="Id" PropertyName="StepId" />
+        </BuildStep>
 
-		<GenerateVersionDependentSuffix ReleaseYear="$(Year)" ReleaseQ="$(Release)" Separator=".">
-			<Output TaskParameter="Suffix" PropertyName="DateSuffixDots" />
-		</GenerateVersionDependentSuffix>
+        <GenerateVersionDependentSuffix ReleaseYear="$(Year)" ReleaseQ="$(Release)" Separator=".">
+            <Output TaskParameter="Suffix" PropertyName="DateSuffixDots" />
+        </GenerateVersionDependentSuffix>
 
-		<UploadResources
-				SourcePath="$(ResourcesRoot)\js" AccessKeyID="$(CDNAccessKeyId)" SecretAccessKey="$(CDNSecretAccessKey)"
-				BucketName="$(CDNBucketName)" DestinationPath="$(DateSuffixDots)/js" Compress="True" />
+        <UploadResources
+            SourcePath="$(ResourcesRoot)\js" AccessKeyID="$(CDNAccessKeyId)" SecretAccessKey="$(CDNSecretAccessKey)"
+            BucketName="$(CDNBucketName)" DestinationPath="$(DateSuffixDots)/js" Compress="True" />
 
-		<UploadResources
-				SourcePath="$(ResourcesRoot)\styles" AccessKeyID="$(CDNAccessKeyId)" SecretAccessKey="$(CDNSecretAccessKey)"
-				BucketName="$(CDNBucketName)" DestinationPath="$(DateSuffixDots)/styles" Compress="True" />
+        <UploadResources
+            SourcePath="$(ResourcesRoot)\styles" AccessKeyID="$(CDNAccessKeyId)" SecretAccessKey="$(CDNSecretAccessKey)"
+            BucketName="$(CDNBucketName)" DestinationPath="$(DateSuffixDots)/styles" Compress="True" />
 
-		<BuildStep  TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)"
-					Id="$(StepId)"
-					Status="Succeeded" />
+        <BuildStep  TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)"
+            Id="$(StepId)"
+            Status="Succeeded" />
 
-		<OnError ExecuteTargets="MarkBuildStepAsFailed" />
-	</Target>
+        <OnError ExecuteTargets="MarkBuildStepAsFailed" />
+    </Target>
 
-	<Target Name="MarkBuildStepAsFailed">
-		<BuildStep
-			TeamFoundationServerUrl="$(TeamFoundationServerUrl)"
-			BuildUri="$(BuildUri)"
-			Id="$(StepId)"
-			Status="Failed" />
-	</Target>
+    <Target Name="MarkBuildStepAsFailed">
+        <BuildStep
+            TeamFoundationServerUrl="$(TeamFoundationServerUrl)"
+            BuildUri="$(BuildUri)"
+            Id="$(StepId)"
+            Status="Failed" />
+    </Target>
 </Project>

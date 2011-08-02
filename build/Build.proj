@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5" DefaultTargets="NodeBuild">
-	<Import Project="Config.proj" />
-	<Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\TeamBuild\Microsoft.TeamFoundation.Build.targets" />
+    <Import Project="Config.proj" />
+    <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\TeamBuild\Microsoft.TeamFoundation.Build.targets" />
 
-	<UsingTask TaskName="Telerik.MSBuildTasks.GenerateVersionDependentSuffix" AssemblyFile="MSBuildTasks\Telerik.MSBuildTasks.dll"/>
+    <UsingTask TaskName="Telerik.MSBuildTasks.GenerateVersionDependentSuffix" AssemblyFile="MSBuildTasks\Telerik.MSBuildTasks.dll"/>
 
-	<Target Name="NodeBuild">
-		<BuildStep TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)" Name="NodeBuildStep" Message="Running NodeJS build">
-			<Output TaskParameter="Id" PropertyName="StepId" />
-		</BuildStep>
+    <Target Name="NodeBuild">
+        <BuildStep TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)" Name="NodeBuildStep" Message="Running NodeJS build">
+            <Output TaskParameter="Id" PropertyName="StepId" />
+        </BuildStep>
 
-		<GenerateVersionDependentSuffix ReleaseYear="$(Year)" ReleaseQ="$(Release)" Separator=".">
-			<Output TaskParameter="Suffix" PropertyName="DateSuffixDots" />
-		</GenerateVersionDependentSuffix>
+        <GenerateVersionDependentSuffix ReleaseYear="$(Year)" ReleaseQ="$(Release)" Separator=".">
+            <Output TaskParameter="Suffix" PropertyName="DateSuffixDots" />
+        </GenerateVersionDependentSuffix>
 
-		<Exec Command='"$(SolutionRoot)\build\NodeBuild.bat" "$(SolutionRoot)" "$(DateSuffixDots)"' />
+        <Exec Command='"$(SolutionRoot)\build\NodeBuild.bat" "$(SolutionRoot)" "$(DateSuffixDots)" "$(CDNRoot)$(DateSuffixDots)"'/>
 
-		<CallTarget Targets="CopyToOutputLocation" />
+        <CallTarget Targets="CopyToOutputLocation" />
 
-		<BuildStep  TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)"
-					Id="$(StepId)"
-					Status="Succeeded" />
+        <BuildStep  TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)"
+            Id="$(StepId)"
+            Status="Succeeded" />
 
-		<OnError ExecuteTargets="MarkBuildStepAsFailed" />
-	</Target>
+        <OnError ExecuteTargets="MarkBuildStepAsFailed" />
+    </Target>
 
-	<Target Name="CopyToOutputLocation">
-		<ItemGroup>
-			<Resources Include="$(SolutionRoot)\release\**" />
-		</ItemGroup>
+    <Target Name="CopyToOutputLocation">
+        <ItemGroup>
+            <Resources Include="$(SolutionRoot)\release\**" />
+        </ItemGroup>
 
-		<Copy SourceFiles="@(Resources)" DestinationFolder="$(DropLocation)\$(DirPath)" />		
-	</Target>
+        <Copy SourceFiles="@(Resources)" DestinationFolder="$(DropLocation)\$(DirPath)" />
+    </Target>
 
-	<Target Name="MarkBuildStepAsFailed">
-		<BuildStep
-			TeamFoundationServerUrl="$(TeamFoundationServerUrl)"
-			BuildUri="$(BuildUri)"
-			Id="$(StepId)"
-			Status="Failed" />
-	</Target>
+    <Target Name="MarkBuildStepAsFailed">
+        <BuildStep
+            TeamFoundationServerUrl="$(TeamFoundationServerUrl)"
+            BuildUri="$(BuildUri)"
+            Id="$(StepId)"
+            Status="Failed" />
+    </Target>
 </Project>
