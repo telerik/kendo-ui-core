@@ -3,25 +3,25 @@
     <head>
         <title>slider</title>
         <script type="text/javascript" src="../src/jquery.js"></script>
-        <script type="text/javascript" src="../src/kendo.loader.js"></script>
+        <script type="text/javascript" src="../src/kendo.core.js"></script>
+        <script type="text/javascript" src="../src/kendo.draganddrop.js"></script>
+        <script type="text/javascript" src="../src/kendo.slider.js"></script>
         <link type="text/css" href="../styles/kendo.common.css" rel="stylesheet"/>
-        <link type="text/css" href="../styles/kendo.vista.css" rel="stylesheet"/>
-        <script type="text/javascript">
-            kendo.loader.slider();
-        </script>
-
+        <link type="text/css" href="../styles/kendo.blueopal.css" rel="stylesheet"/>
     </head>
-    <body style="font-size: 10pt">
+    <body>
         <input id="slider" style="margin: 40px;"></input>
         <br />
-        <div id="rangeSlider" style="margin:20px;">
-            <input type="range" />
-            <input type="range" />
+        <div id="rangeslider" style="margin: 40px;">
+            <input />
+            <input />
         </div>
+        <br />
         <script type="text/javascript">
             $(document).ready(function() {
                 $("#slider").kendoSlider({ smallStep: 1, max: 10, largeStep: 5, orientation: "horizontal", tickPlacement: "both" });
-                $("#rangeSlider").kendoRangeSlider({ smallStep: 1, selectionStart: 11, selectionEnd: -1, max: 10, largeStep: 5, orientation: "horizontal", tickPlacement: "bottomRight" });
+
+                $("#rangeslider").kendoRangeSlider({ smallStep: 1, max: 10, largeStep: 5, orientation: "horizontal", tickPlacement: "both" });
             });
         </script>
     </body>

@@ -168,8 +168,8 @@
                 $(items[0]).addClass("t-first")[that._size](pixelWidths[itemsCount]);
                 $(items[items.length - 1]).addClass("t-last")[that._size](pixelWidths[itemsCount - 1]);
             } else {
-                $(items[items.length - 1]).addClass("t-first")[that._size](pixelWidths[itemsCount - 1]);
-                $(items[0]).addClass("t-last")[that._size](pixelWidths[itemsCount]);
+                $(items[items.length - 1]).addClass("t-first")[that._size](pixelWidths[itemsCount]);
+                $(items[0]).addClass("t-last")[that._size](pixelWidths[itemsCount - 1]);
             }
 
             if (that._distance % options.smallStep != 0 && !that._isHorizontal) {
@@ -782,26 +782,21 @@
 
             if (options.tooltip.enabled) {
                 that.tooltipDiv = $("<div class='t-widget t-tooltip'><!-- --></div>").appendTo(document.body);
+                var html = "";
 
                 if (that.type) {
                     var formattedSelectionStart = kendo.format(options.tooltip.format, that.selectionStart),
                         formattedSelectionEnd = kendo.format(options.tooltip.format, that.selectionEnd);
 
-                    that.tooltipDiv.html(formattedSelectionStart + " - " + formattedSelectionEnd );
+                    html = formattedSelectionStart + " - " + formattedSelectionEnd;
                 } else {
-                    var tooltipArrow = "t-callout-";
-
-                    if (owner._isHorizontal) {
-                        tooltipArrow += options.tickPlacement == "topLeft" ? "n" : "s";
-                    } else {
-                        tooltipArrow += options.tickPlacement == "topLeft" ? "w" : "e";
-                    }
-
-                    that.tooltipInnerDiv = "<div class='t-callout " + tooltipArrow + "'><!-- --></div>";
-                    that.tooltipDiv.html(kendo.format(options.tooltip.format, that.val) + that.tooltipInnerDiv);
+                    that.tooltipInnerDiv = "<div class='t-callout t-callout-" + (owner._isHorizontal ? "s" : "e") + "'><!-- --></div>";
+                    html = kendo.format(options.tooltip.format, that.val) + that.tooltipInnerDiv;
                 }
 
-                that.moveTooltip(that.tooltipDiv);
+                that.tooltipDiv.html(html);
+
+                that.moveTooltip();
             }
         },
 
@@ -885,7 +880,9 @@
                 owner = that.owner,
                 positionTop = 0,
                 positionLeft = 0,
-                dragHandleOffset = that.dragHandle.offset();
+                dragHandleOffset = that.dragHandle.offset(),
+                margin = 4,
+                callout = that.tooltipDiv.find(".t-callout");
 
             if (that.type) {
                 var dragHandles = owner.wrapper.find(DRAG_HANDLE),
@@ -904,25 +901,12 @@
                 positionLeft = dragHandleOffset.left;
             }
 
-            var halfTooltipDiv = that.tooltipDiv[owner._size]() / 2 + 1,
-                margin = 10;
-
             if (owner._isHorizontal) {
-                positionLeft -= halfTooltipDiv;
-
-                if (owner.options.tickPlacement != "topLeft") {
-                    positionTop = dragHandleOffset.top - that.dragHandle.height() - that.tooltipDiv.height();
-                } else {
-                    positionTop = dragHandleOffset.top + that.dragHandle.height() + margin;
-                }
+                positionLeft += round((that.dragHandle[owner._size]() - that.tooltipDiv.outerWidth()) / 2) - 1;
+                positionTop -= that.tooltipDiv.outerHeight() + callout.height() + margin;
             } else {
-                positionTop -= halfTooltipDiv;
-
-                if (owner.options.tickPlacement != "topLeft") {
-                    positionLeft = dragHandleOffset.left - that.dragHandle.width() - that.tooltipDiv.width() - 2;
-                } else {
-                    positionLeft = dragHandleOffset.left + that.dragHandle.width() + margin;
-                }
+                positionTop += round((that.dragHandle[owner._size]() - that.tooltipDiv.outerHeight()) / 2) - 1;
+                positionLeft -= that.tooltipDiv.outerWidth() + callout.width() + margin;
             }
 
             that.tooltipDiv.css({ top: positionTop, left: positionLeft });
