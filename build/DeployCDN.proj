@@ -10,7 +10,7 @@
         <ExamplesRoot>$(ResourcesRoot)\examples</ExamplesRoot>
         <ExamplesScripts>$(ExamplesRoot)\js</ExamplesScripts>
         <ExamplesStyles>$(ExamplesRoot)\styles</ExamplesStyles>
-        <ExamplesContent>$(ExamplesRoot)\content</ExamplesStyles>
+        <ExamplesContent>$(ExamplesRoot)\content</ExamplesContent>
     </PropertyGroup>
 
     <Target Name="DeployCDN">
