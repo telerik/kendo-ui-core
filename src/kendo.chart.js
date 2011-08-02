@@ -69,41 +69,152 @@
     /**
      * @name kendo.ui.Chart.Description
      *
-     * @section The chart component uses modern browser technologies to
-     * deliver high-quality data visualizations.
-     * All graphics are rendered using SVG with a fallback to VML for legacy browsers.
+     * @section
+     * <p>
+     * The Chart widget uses modern browser technologies to render high-quality
+     * data visualizations in the browser. Rather than generating images
+     * on a server, Chart graphics are rendered in the browser using
+     * SVG (scalable vector graphics), with a fallback to
+     * VML (vector markup language) for older browsers.
+     * </p>
      *
-     * <p>Key features:</p>
+     * <p>
+     * Currently supported chart types: <strong>Bar</strong>,
+     * <strong>Column</strong>, and <strong>Line</strong>.
+     * </p>
      *
-     * <ul>
-     *    <li>Bar Chart </li>
-     *    <li>Column Chart </li>
-     *    <li>Line Chart </li>
-     *    <li>Standards based, no plug-ins required</li>
-     * </ul>
+     * <p>
+     * Please visit the Kendo UI Road Map for additional information about
+     * new Chart types and features.
+     * </p>
      *
-     * @exampleTitle Bar Chart with inline data
+     * <h3>
+     * Getting Started
+     * </h3>
+     * @exampleTitle
+     * 1. Create a simple HTML div (optionally set a height and width with CSS)
      * @example
-     * <div id="chart" style="width: 600px; 400px"> </div>
+     * <div id="chart"></div>
      *
-     * <script>
+     * @exampleTitle
+     * 2. Initialize the Kendo UI Chart with configuration and data
+     * @example
      *    $(document).ready(function() {
      *        $("#chart").kendoChart({
      *            title: {
-     *                text: "Spain electricity production (GWh)"
+     *                text: "My Chart Title"
      *            },
      *            series: [
      *                {
-     *                    name: "Hydro",
-     *                    data: [ 31807, 43864, 26270 ]
+     *                    name: "Series 1",
+     *                    data: [200, 450, 300, 125]
      *                }
      *            ],
      *            categoryAxis: {
-     *                categories: [ "2000", "2001", "2002" ]
+     *                categories: [2000, 2001, 2002, 2003]
      *            }
      *        });
      *    });
-     * </script>
+     * @section
+     * <p>
+     * The basic configuration requires series data (Y-axis values) and
+     * categories (X-axis values). A chart title can also optionally be defined.
+     * The default chart type is column (vertical bars).
+     * </p>
+     *
+     * <h3>
+     * Binding to Data
+     * </h3>
+     * <p>
+     * A chart can be bound to both local and remote data.
+     * Rather than directly specifying an Array of values in the Chart configuration,
+     * the Chart DataSource property is used to bind to an Array or to
+     * a remote data service with the Kendo DataSource component.
+     * </p>
+     * @exampleTitle
+     * Binding a line chart to local JavaScript object array
+     * @example
+     * var salesData = [{
+     *     employee: "Joe Smith",
+     *     sales: 2000
+     * }, {
+     *     employee: "Jane Smith",
+     *     sales: 2250
+     * }, {
+     *     employee: "Will Roberts",
+     *     sales: 1550
+     * }]
+     *
+     * $(document).ready(function() {
+     *     $("#chart").kendoChart({
+     *         title: {
+     *             text: "Employee Sales"
+     *         },
+     *         dataSource:{
+     *             data: salesData
+     *         },
+     *         series:[{
+     *             type: "line",
+     *             field: "sales",
+     *             name: "Sales in Units"
+     *         }],
+     *         categoryAxis:{
+     *             field: "employee"
+     *         }
+     *     });
+     * });
+     *
+     * @exampleTitle
+     * Binding to remote JSON data with multiple series
+     * @example
+     * $(document).ready(function(){
+     *     $("#chart").kendoChart({
+     *         title: {
+     *             text: "Division Sales"
+     *         },
+     *         dataSource:{ 
+     *             transport:{
+     *                 read:{
+     *                     url: "company-sales.json",
+     *                     dataType: "json"
+     *                 }
+     *             },
+     *             sort: {
+     *                 field: "year",
+     *                 dir: "asc"
+     *             }
+     *         },
+     *         series: [{
+     *             field: "americaSales",
+     *             name: "North America"
+     *         }, {
+     *             field: "asiaSales",
+     *             name: "Asia"
+     *         }, {
+     *             field: "europeSales",
+     *             name: "Europe"
+     *         }],
+     *         categoryAxis:{
+     *             field: "year"
+     *         },
+     *         valueAxis: {
+     *             majorUnit: 1000
+     *         }
+     *     });
+     * });
+     *
+     * @section
+     * <h3>
+     * Configuring the Chart
+     * </h3>
+     * <p>
+     * The Kendo UI Chart is highly configurable. With simple configuration settings,
+     * you can format and display series labels, position the chart legend,
+     * format and display tooltips, and change the chart type.
+     * </p>
+     * <p>
+     * Refer to the Chart demos and configuration API for a complete reference.
+     * </p>
      */
     var Chart = Component.extend(/** @lends kendo.ui.Chart.prototype */{
         /**
