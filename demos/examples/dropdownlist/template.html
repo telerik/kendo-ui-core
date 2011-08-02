@@ -26,13 +26,18 @@
         <div class="description">Customizing templates</div>
         <!-- description -->
         <div id="example" class="t-content">
+            <div class="configuration">
+                <span class="infoHead">Information</span>
+                <p>
+                    Open the DropDownList to see the customized appearance of the items.
+                </p>
+            </div>
 
             <input id="titles"/>
 
             <script type="text/javascript">
                 $(document).ready(function() {
                     $("#titles").kendoDropDownList({
-                        autoBind: false,
                         dataTextField: "Name",
                         dataValueField: "Id",
                         //define custom template
@@ -59,9 +64,6 @@
 
                     //set width of the drop-down list
                     dropdownlist.ul.width(400);
-
-                    //opens the drop-down list
-                    dropdownlist.open();
                 });
             </script>
         </div>
