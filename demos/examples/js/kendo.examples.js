@@ -365,6 +365,7 @@
 
     initialFolder = location.href.match(/\//g).length;
     initialRelativePath = getInitialStylePath();
+    kendoSkin = "kendo";
 
     try {
         if (sessionStorage && sessionStorage.length) {
@@ -375,7 +376,6 @@
             }
         }
     } catch(err) {
-        kendoSkin = "kendo";
     }
 
     $(Application.init);
