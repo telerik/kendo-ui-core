@@ -656,6 +656,11 @@ pre.prettyprint
     overflow: hidden;
 }
 
+* html pre.prettyprint
+{
+    width:100%;
+}
+
 .console
 {
     background-color: #FFF;
@@ -817,6 +822,7 @@ pre.prettyprint
     overflow: hidden;
     position: relative;
     z-index: 1;
+    zoom:1;
 }
 
 #codeStrip .t-item
@@ -828,12 +834,16 @@ pre.prettyprint
     margin-right: 0;
     border-width: 1px 1px 0;
     width: 20%;
-    *width: auto;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     background-color: #4d4d4d;
     float: left;
+}
+
+* html #codeStrip .t-item
+{
+    width: 19.4%;
 }
 
 #codeStrip .t-state-default
@@ -935,10 +945,10 @@ pre.prettyprint
     font: 12px Arial, Helvetica, sans-serif;
 }
 
-.skinSelector .t-state-default,
-.skinSelector .t-state-hover,
-.skinSelector .t-state-hover:hover,
-.skinSelector .t-state-active
+div.skinSelector .t-state-default,
+div.skinSelector .t-state-hover,
+div.skinSelector .t-state-hover:hover,
+div.skinSelector .t-state-active
 {
     color: #333;
     background: #F3F3F3;
@@ -1336,7 +1346,7 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
 
 #introText
 {
-    max-width:500px;
+    width:500px;
     height:300px;
     min-height:300px;
 }
