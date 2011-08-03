@@ -568,6 +568,8 @@
             negative = number < 0,
             integer,
             fraction,
+            integerLength,
+            fractionLength,
             replacement = "",
             value = "",
             idx,
@@ -660,7 +662,7 @@
             format = format[1];
         } else if (number === 0) {
             format = format[2] || format[0];
-            if (format.indexOf("#") < 0 && format.indexOf("0") < 0) {
+            if (format.indexOf("#") == -1 && format.indexOf("0") == -1) {
                 return format;
             }
         } else {
@@ -673,88 +675,87 @@
 
         format = format.split(".");
 
-        //define precision of the number
-        if (format[1]) {
-            var endSharp = reverse(format[1]).indexOf("#");
-            var endZero = reverse(format[1]).indexOf("0");
-            if (endSharp !== -1) {
-                endSharp = format[1].length - endSharp;
-            }
-            if (endZero !== -1) {
-                endZero = format[1].length - endZero;
-            }
+        var integerFormat = format[0],
+            fractionFormat = format[1] || "",
+            integerFormatLength = integerFormat.length,
+            fractionFormatLength = fractionFormat.length,
+            sharp = "#",
+            zero = "0",
+            sharpIndex,
+            zeroIndex,
+            start = -1,
+            end;
 
-            if (endZero > -1) {
-                var fixed = number.toFixed(endZero);
+        //define precision of the number
+        if (fractionFormat) {
+            sharpIndex = fractionFormat.lastIndexOf(sharp);
+            zeroIndex = fractionFormat.lastIndexOf(zero);
+
+            if (zeroIndex != -1) {
+                value = number.toFixed(zeroIndex + 1);
                 number = number.toString();
-                number = number.length > fixed && endSharp > endZero ? number : fixed;
+                number = number.length > value.length && sharpIndex > zeroIndex ? number : value;
             }
+        } else {
+            number = number.toFixed(0);
         }
 
         /* positive part */
 
-        var sharp = format[0].indexOf("#");
-        var zero = format[0].indexOf("0");
-        var start = -1;
+        sharpIndex = integerFormat.indexOf(sharp);
+        zeroIndex = integerFormat.indexOf(zero);
 
-        start = sharp > zero ? zero : sharp;
-        if (sharp === -1 && zero !== -1) {
-            start = zero;
-        }
-        if (sharp !== -1 && zero === -1) {
-            start = sharp;
-        }
-
-        var endSharp = reverse(format[0]).indexOf("#");
-        var endZero = reverse(format[0]).indexOf("0");
-
-        if (endSharp !== -1) {
-            endSharp = format[0].length - endSharp -1;
+        if (sharpIndex == -1 && zeroIndex != -1) {
+            start = zeroIndex;
+        } else if (sharpIndex != -1 && zeroIndex == -1) {
+            start = sharpIndex;
+        } else {
+            start = sharpIndex > zeroIndex ? zeroIndex : sharpIndex;
         }
 
-        if (endZero !== -1) {
-            endZero = format[0].length - endZero -1;
+        sharpIndex = integerFormat.lastIndexOf(sharp);
+        zeroIndex = integerFormat.lastIndexOf(zero);
+
+        if (sharpIndex == -1 && zeroIndex != -1) {
+            end = zeroIndex;
+        } else if (sharpIndex != -1 && zeroIndex == -1) {
+            end = sharpIndex;
+        } else {
+            end = sharpIndex > zeroIndex ? sharpIndex : zeroIndex;
         }
 
-        var end = endSharp > endZero ? endSharp : endZero;
-        if (endSharp === -1 && endZero !== -1) {
-            end = endZero;
-        }
-        if (endSharp !== -1 && endZero === -1) {
-            end = endSharp;
-        }
-
-        if (start === format[0].length) {
+        if (start == integerFormatLength) {
             end = start;
         }
 
-        if (start > -1) {
+        if (start != -1) {
             value = number.toString().split(POINT);
             integer = value[0];
-            fraction = value[1];
+            fraction = value[1] || "";
 
-            if (format[0].indexOf(",") > -1) {
-                //group separator
-                var val = "";
+            integerLength = integer.length;
+            fractionLength = fraction.length;
+
+            if (integerFormat.indexOf(",") != -1) {
+                value = "";
                 for (idx = 0, length = integer.length; idx < length; idx++) {
                     if (length > groupSize && (length - idx) % groupSize === 0) {
-                        val += groupSeparator;
+                        value += groupSeparator;
                     }
 
-                    val += integer.charAt(idx);
+                    value += integer.charAt(idx);
                 }
-                integer = val;
-                //end group separator
+                integer = value;
             }
 
-            number = format[0].substring(0, start);
+            number = integerFormat.substring(0, start);
 
-            for (idx = start, length = format[0].length; idx < length; idx++) {
-                ch = format[0].charAt(idx);
+            for (idx = start; idx < integerFormatLength; idx++) {
+                ch = integerFormat.charAt(idx);
 
-                if (end - idx < integer.length) {
+                if (end - idx < integerLength) {
                     number += integer;
-                    idx += integer.length;
+                    idx += integerLength;
                     break;
                 } else if (ch === "$") {
                     number += symbol;
@@ -773,85 +774,68 @@
             }
 
             if (end >= start) {
-                number += format[0].substring(end + 1);
+                number += integerFormat.substring(end + 1);
             }
         }
         /* end positive part */
         /*--------------------------------------------*/
-
         /* negative part */
 
-        if (format[1]) {
-            var start = 0;
+        if (fractionFormat) {
+            start = 0;
 
             //if no fraction and if no "0" then do not loop - optimization
             fraction = fraction || "";
 
-            var endSharp = reverse(format[1]).indexOf("#");
-            var endZero = reverse(format[1]).indexOf("0");
+            sharpIndex = fractionFormat.lastIndexOf(sharp);
+            zeroIndex = fractionFormat.lastIndexOf(zero);
 
-            if (endSharp !== -1) {
-                endSharp = format[1].length - endSharp -1;
+            if (sharpIndex == -1 && zeroIndex != -1) {
+                end = zeroIndex;
+            } else if (sharpIndex != -1 && zeroIndex == -1) {
+                end = sharpIndex;
+            } else {
+                end = sharpIndex > zeroIndex ? sharpIndex : zeroIndex;
             }
 
-            if (endZero !== -1) {
-                endZero = format[1].length - endZero -1;
-            }
-
-            var end = endSharp > endZero ? endSharp : endZero;
-            if (endSharp === -1 && endZero !== -1) {
-                end = endZero;
-            }
-            if (endSharp !== -1 && endZero === -1) {
-                end = endSharp;
-            }
-
-            if (start === format[1].length) {
+            if (start === fractionFormatLength) {
                 end = start;
             }
 
-            //done in positive format
-            //value = number.toString().split(POINT);
-            //integer = value[0];
-            //fraction = value[1];
+            value = fractionFormat.substring(0, start);
+            replacement = zero;
 
-            var temp = format[1].substring(0, start);
-            replacement = "0";
+            for (idx = start; idx < fractionFormatLength; idx++) {
+                ch = fractionFormat.charAt(idx);
 
-            for (idx = start, length = format[1].length; idx < length; idx++) {
-                ch = format[1].charAt(idx);
-
-                if (endZero < idx) {
+                if (zeroIndex < idx) {
                     replacement = "";
                 }
 
-                if (end - idx <= fraction.length) {
-                    temp += fraction;
-                    idx += fraction.length;
+                if (end - idx <= fractionLength) {
+                    value += fraction;
+                    idx += fractionLength;
                     break;
                 } else if (ch === "$") {
-                    temp += symbol;
+                    value += symbol;
                 } else if (ch === "0") {
-                    temp += ch;
+                    value += ch;
                 } else if (ch === "#") {
-                    temp += replacement;
+                    value += replacement;
                 } else {
-                    temp += ch;
+                    value += ch;
                 }
             }
 
             if (end >= start) {
-                temp += format[1].substring(end + 1);
+                value += fractionFormat.substring(end + 1);
             }
 
-            if (temp) {
-                number += (fraction ? decimal : "") + temp;
+            if (value) {
+                number += (fraction ? decimal : "") + value;
             }
-
         }
         /* end negative part */
-
-
         //end custom format
 
         return number;
