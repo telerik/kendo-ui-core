@@ -99,7 +99,7 @@ html
 }
 
 #exceptFooterWrap,
-#navmainWrap,
+#topnavWrap,
 #footer
 {
     min-width:960px;
@@ -256,7 +256,7 @@ li a#download
 }
 
 * html #topnav li{width:24.9%;}
-*+html #topnav li:first-child{width:24.9%;}
+*+html #topnav li:first-child{width:24.8%;}
 
 #topnav a
 {
@@ -841,10 +841,8 @@ pre.prettyprint
     float: left;
 }
 
-* html #codeStrip .t-item
-{
-    width: 19.4%;
-}
+*+html #codeStrip .t-item { width: 19.7%; }
+* html #codeStrip .t-item { width: 19.7%; }
 
 #codeStrip .t-state-default
 {
@@ -1423,9 +1421,9 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
 
 .overview-box
 {
-    display: inline-block;
+    float:left;
     width: 380px;
-    margin:1.6em 30px 0;
+    margin:1.6em 44px 0;
     padding-bottom:60px;
     vertical-align: top;
     text-align:left;
