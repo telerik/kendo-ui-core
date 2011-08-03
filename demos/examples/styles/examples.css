@@ -1,5 +1,6 @@
 html,body,h1,h2{margin:0;padding:0;}
 #header ul,#header li,#topnavWrap ul,#topnavWrap li,#footer ul,#footer li{margin:0;padding:0;list-style:none;}
+a img{border:0;}
 
 .floatWrap:after,#example:after{content:"";display:block;clear:both}
 .floatWrap,#example{display:inline-block}
@@ -37,7 +38,8 @@ html
 .detailCollapsed,
 .detailExpanded,
 .console div,
-#telerik
+#telerik,
+#introText dt
 {
     background-image: url("sprite.png");
     background-repeat: no-repeat;
@@ -54,7 +56,8 @@ html
 * html .detailCollapsed,
 * html .detailExpanded,
 * html .console div,
-* html #telerik
+* html #telerik,
+* html #introText dt
 {
     background-image: url("sprite_ie6.png");
 }
@@ -96,6 +99,7 @@ html
 }
 
 #exceptFooterWrap,
+#navmainWrap,
 #footer
 {
     min-width:960px;
@@ -107,6 +111,12 @@ html
     max-width:1230px;
     margin-left:auto;
     margin-right:auto;
+}
+
+* html #exceptFooter .centerWrap,
+* html #footer .centerWrap
+{
+    width:960px;
 }
 
 #navmainWrap
@@ -175,6 +185,11 @@ html
     overflow:hidden;
 }
 
+* html #logo
+{
+    background-image:url(kendo-logo_ie6.png);
+}
+
 #header ul
 {
     float:right;
@@ -240,7 +255,7 @@ li a#download
     width:25%;
 }
 
-* html #topnav li:first-child{width:24.9%;}
+* html #topnav li{width:24.9%;}
 *+html #topnav li:first-child{width:24.9%;}
 
 #topnav a
@@ -253,6 +268,7 @@ li a#download
     line-height:46px;
     color:#fff;
     text-decoration:none;
+    zoom:1;
 }
 
 #topnav a:hover
@@ -261,7 +277,8 @@ li a#download
     background:rgba(255,156,106,.5);
 }
 
-#topnav a.selected
+#topnav a.selected,
+#topnav a.selected:hover
 {
     background:#fff;
     color:#000;
@@ -613,7 +630,7 @@ h1 .integrationIcon
     float:right;
     width:107px;
     height:40px;
-    background:no-repeat 0 -700px url(sprite.png);
+    background-position:0 -700px;
 }
 
 #telerik a
@@ -702,6 +719,7 @@ pre.prettyprint
     min-height: 0;
     width: auto;
     margin-bottom: 20px;
+    float:none;
 }
 
 .configuration .configHead,
@@ -1333,7 +1351,8 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
 #introText dt
 {
     margin-top:.7em;
-    background:url(sprite.png) 14px -900px no-repeat;
+    background-position:14px -900px;
+    background-repeat:no-repeat;
     font-size:1.6em;
     line-height:1.8;
 }
@@ -1375,7 +1394,7 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
     width:104px;
     height:32px;
     margin:1.2em 0 0;
-    background:#333 no-repeat url(bg-glossy.png);
+    background:#333;
     -moz-border-radius:4px;
     -wekbit-border-radius:4px;
     border-radius:4px;
@@ -1384,6 +1403,11 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
     color:#fff;
     text-align:center;
     text-decoration:none;
+}
+
+*>#launch-button
+{
+    background:#333 no-repeat url(bg-glossy.png);
 }
 
 .overview-box
