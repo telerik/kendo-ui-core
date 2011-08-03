@@ -485,7 +485,8 @@
 
     var optionsTemplate = tmpl(
         '<div class="detailHandle">' +
-            '<a name="{+ member.name +}"><code class="symbol"><%= name %></code></a>' +
+            '<div class="detailCollapsed"></div>' +
+            '<a name="<%= name %>"><code class="symbol"><%= name %></code></a>' +
             '<%= type ? \': <span class="type">\' + type + \'</span>\' : \'\' %>' +
             '<%= defaultValue ? \'<span class="defaultValue">(default: \' + defaultValue + \')</span>\' : \'\' %>' +
         '</div>' +
@@ -549,6 +550,7 @@
                 <!-- properties -->
                 <for each="member" in="ownProperties">
                     <div class="detailHandle">
+                        <div class="detailCollapsed"></div>
                         <a name="{+ member.name +}"><code>{+member.name+}</code></a>
 
                         <if test="member.type">: <span class="type">{+new Link().toSymbol(member.type)+}</span></if>
@@ -601,8 +603,8 @@
                 <ul class="methodDetail" id="MethodDetail">
                     <for each="member" in="ownMethods">
                         <li>
-                            <div class="detailHanlde">
-
+                            <div class="detailHandle">
+                                <div class="detailCollapsed"></div>
                                 <a name="{+ member.name +}"><code>{+member.name.replace(/\^\d+$/, '')+}</code></a> {+makeSignature(member.params)+}
 
                                 <if test="member.type">: <span class="type">{+new Link().toSymbol(member.type)+}</span></if>
@@ -688,7 +690,8 @@
             <div class="eventsContainer">
                 <!-- events -->
                 <for each="member" in="ownEvents">
-                    <div class="detailHanlde">
+                    <div class="detailHandle">
+                        <div class="detailCollapsed"></div>
                         <a name="{+ member.name +}"><code>{+member.name+}</code></a>
                     </div>
                     <div class="detailBody">
