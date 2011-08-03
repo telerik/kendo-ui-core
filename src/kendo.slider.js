@@ -1,35 +1,67 @@
 ﻿(function ($, window) {
     /**
      * @name kendo.ui.Slider.Description
-     * @section The slider component allows you to intuitively choose a value in a specified range.
-     * <p>
-     * Key features:
-     * </p>
-     * <ul>
-     *    <li>Small/Large steps</li>
-     *    <li>Keyboard navigation</li>
-     *    <li>Horizontal/Vertical Orientation</li>
-     * </ul>
-     * @exampleTitle Creating a <b>slider</b> from existing HTML.
+     * @section 
+     *  <p>
+     *      The Slider widget provides a rich input for selecting values or ranges of values. 
+     *      Unlike the plain HTML5 range input, the Slider presents a consistent experience across 
+     *      all browsers and has a rich API and event model.
+     *  </p>
+     *  <h3>Getting Started</h3>
+     *  There are two basic types of Sliders:
+     *  <ol>
+     *      <li><strong>Slider</strong>, which presents one thumb and two opposing buttons for selecting a single value</li>
+     *      <li><strong>RangeSlider</strong>, which present two thumbs for defining a range of values</li>
+     *  </ol>
+     *  <h4>Slider</h4>
+     * @exampleTitle Create simple HTML input element (type="range" is optional)
      * @example
-     * <input id="slider" />
-     * <script type="text/javascript">
-     *    $(document).ready(function() {
-     *        $("#slider").kendoSlider();
-     *    });
-     * </script>
-     * @section The rangeSlider is a slider with two thumbs that allows you to choose a range of values.
-     * @exampleTitle Creating a <b>RangeSlider</b> from existing HTML.
+     *  <input id="slider" type="range" />
+     * @exampleTitle Initialize the Slider using a jQuery selector
      * @example
-     * <div id="rangeSlider">
-     *      <input />
-     *      <input />
-     * </div>
-     * <script type="text/javascript">
-     *    $(document).ready(function() {
-     *        $("#rangeSlider").kendoRangeSlider();
-     *    });
-     * </script>
+     *  $("#slider").kendoSlider();
+     *
+     * @section
+     *  <h4>RangeSlider</h4>
+     * @exampleTitle Create two simple HTML input elements in a div (type="range" is optional)
+     * @example
+     *  <div id="rangeSlider">
+	 *      <input type="range" />
+	 *      <input type="range" />
+     *  </div>
+     *
+     * @exampleTitle Initialize the RangeSlider using a jQuery selector targeting the div
+     * @example
+     *  $("#rangeSlider").kendoRangeSlider();
+     *
+     * @section
+     *  <p>
+     *      The RangeSlider requires two inputs to capture both ends of the value range. This 
+     *      benefits scenarios where JavaScript is disabled, in which case users will be presented 
+     *      with two inputs, still allowing them to input a valid range.
+     *  </p>
+     *  
+     *  <h3>Customizing Slider Behavior</h3>        
+     *  Many facets of the Slider and RangeSlider behavior can be configured via simple properties, including:
+     *  <ul>
+     *      <li>Min/Max values</li>
+     *      <li>Orientation (horizontal or vertical)</li>
+     *      <li>Small/Large step</li>
+     *      <li>Tooltip format/placement</li>
+     *  </ul>
+     *  <p>
+     *      To see a full list of available properties and values, review the Slider Configuration API documentation tab.
+     *  </p>
+     * @exampleTitle Customizing Slider default settings
+     * @example
+     *  $("#slider").kendoSlider({
+     *      min:10,
+     *      max:50,
+     *      orientation: "vertical",
+     *      smallStep: 1,
+     *      largeStep: 10
+     *  });  
+     *
      */
     var kendo = window.kendo,
         Component = kendo.ui.Component,
