@@ -570,8 +570,8 @@
 
             var that = this,
                 contents = node.find(NODECONTENTS),
-                isExpanding = !contents.is(VISIBLE)
-                animationSettings = that.options.animation,
+                isExpanding = !contents.is(VISIBLE),
+                animationSettings = that.options.animation || {},
                 animation = animationSettings.expand,
                 collapse = animationSettings.collapse,
                 hasCollapseAnimation = collapse && 'effects' in collapse;
