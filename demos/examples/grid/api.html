@@ -28,6 +28,25 @@
         <div class="description">API</div>
         <!-- description -->
         <div id="example" class="t-content">
+
+            <div class="configuration" style="width:200px">
+                <span class="configHead">Configuration</span>
+                <span class="configTitle">API Functions</span>
+                <ul class="options">
+                    <li>
+                        <input type="number" value="0" id="selectRow"/>
+                        <button class="selectRow t-button">Select row</button>
+                    </li>
+                    <li>
+                        <button class="clearSelection t-button">Clear selected rows</button>
+                    </li>
+                    <li>
+                        <input type="number" value="0" id="groupRow"/>
+                        <button class="toggleGroup t-button">Collapse/Expand group</button>
+                    </li>
+                </ul>
+            </div>
+
             <div id="grid" style="width:500px;"></div>
 
             <script type="text/javascript">
@@ -85,24 +104,6 @@
                     });
                 });
             </script>
-
-            <div class="configuration" style="width:200px">
-                <span class="configHead">Configuration</span>
-                <span class="configTitle">API Functions</span>
-                <ul class="options">
-                    <li>
-                        <input type="number" value="0" id="selectRow"/>
-                        <button class="selectRow t-button">Select row</button>
-                    </li>
-                    <li>
-                        <button class="clearSelection t-button">Clear selected rows</button>
-                    </li>
-                    <li>
-                        <input type="number" value="0" id="groupRow"/>
-                        <button class="toggleGroup t-button">Collapse/Expand group</button>
-                    </li>
-                </ul>
-            </div>
 
         </div>
         <!-- tools -->

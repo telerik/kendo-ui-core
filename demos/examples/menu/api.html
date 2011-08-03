@@ -24,6 +24,32 @@
         <div class="description">API</div>
         <!-- description -->
         <div id="example" class="t-content">
+
+            <div class="configuration">
+                <span class="configHead">Configuration</span>
+                <span class="configTitle">API Functions</span>
+                <ul class="options">
+                    <li>
+                        <input type="text" id="toggleIndex"/> <button class="toggleItem t-button">Enable/Disable</button>
+                    </li>
+                    <li>
+                        <input type="text" id="triggerIndex"/> <button class="triggerItem t-button">Open/Close</button>
+                    </li>
+                    <li>
+                        <input type="text" id="removeIndex"/> <button class="removeItem t-button">Remove</button>
+                    </li>
+                    <li>
+                        <input type="text" value="Item" id="appendText"/> <input type="text" value="0.0" id="appendIndex"/> <button class="appendItem t-button">Append</button>
+                    </li>
+                    <li>
+                        <input type="text" value="Item" id="beforeText"/> <input type="text" value="0" id="beforeIndex"/> <button class="beforeItem t-button">Before</button>
+                    </li>
+                    <li>
+                        <input type="text" value="Item" id="afterText"/> <input type="text" value="0" id="afterIndex"/> <button class="afterItem t-button">After</button>
+                    </li>
+                </ul>
+            </div>
+
             <ul id="menu">
                 <li>
                     First Item
@@ -122,30 +148,6 @@
 
                 var menu = $("#menu").kendoMenu().css({ marginRight: "220px" }).data("kendoMenu");
             </script>
-            <div class="configuration">
-                <span class="configHead">Configuration</span>
-                <span class="configTitle">API Functions</span>
-                <ul class="options">
-                    <li>
-                        <input type="text" id="toggleIndex"/> <button class="toggleItem t-button">Enable/Disable</button>
-                    </li>
-                    <li>
-                        <input type="text" id="triggerIndex"/> <button class="triggerItem t-button">Open/Close</button>
-                    </li>
-                    <li>
-                        <input type="text" id="removeIndex"/> <button class="removeItem t-button">Remove</button>
-                    </li>
-                    <li>
-                        <input type="text" value="Item" id="appendText"/> <input type="text" value="0.0" id="appendIndex"/> <button class="appendItem t-button">Append</button>
-                    </li>
-                    <li>
-                        <input type="text" value="Item" id="beforeText"/> <input type="text" value="0" id="beforeIndex"/> <button class="beforeItem t-button">Before</button>
-                    </li>
-                    <li>
-                        <input type="text" value="Item" id="afterText"/> <input type="text" value="0" id="afterIndex"/> <button class="afterItem t-button">After</button>
-                    </li>
-                </ul>
-            </div>
         </div>
         <!-- tools -->
         <!-- tools -->

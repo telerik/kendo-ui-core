@@ -58,7 +58,8 @@
             <div class="floatWrap centerWrap">
                 <h1><a id="logo" href="">Kendo</a></h1>
                 <script type="text/javascript">
-                    var normalizedUrl = getNormalizedUrl();
+                    var normalizedUrl;
+                    window.setTimeout(function(){ normalizedUrl = getNormalizedUrl(); }, 100);
                 </script>
                 <ul>
                     <li><a href="http://www.kendoui.com/">Kendo UI</a></li>
@@ -88,7 +89,7 @@
                     <select id="skinSelector" class="skinSelector"></select>
                     <h1 id="exampleTitle"></h1>
                     <script type="text/javascript">
-                        initializeNavigation(normalizedUrl);
+                        window.setTimeout(function(){ initializeNavigation(normalizedUrl); }, 500);
                     </script>
 
                     <div id="exampleWrap">
