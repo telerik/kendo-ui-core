@@ -80,7 +80,10 @@
                     series: [
                         {
                             name: "Value C",
-                            field: "c"
+                            field: "c",
+                            labels: {
+                                template: "|${dataItem.c}|"
+                            }
                         },
                         {
                             name: "Value D",
@@ -88,6 +91,9 @@
                             field: "d",
                             markers: {
                                 type: "circle"
+                            },
+                            labels: {
+                                template: "|${dataItem.d}|"
                             }
                         }
                     ],
