@@ -485,8 +485,7 @@
 
     var optionsTemplate = tmpl(
         '<div class="detailHandle">' +
-            '<div class="detailCollapsed"></div>' +
-            '<code class="symbol"><%= name %></code>' +
+            '<a name="{+ member.name +}"><code class="symbol"><%= name %></code></a>' +
             '<%= type ? \': <span class="type">\' + type + \'</span>\' : \'\' %>' +
             '<%= defaultValue ? \'<span class="defaultValue">(default: \' + defaultValue + \')</span>\' : \'\' %>' +
         '</div>' +
@@ -549,10 +548,8 @@
             <div class="propertiesContainer">
                 <!-- properties -->
                 <for each="member" in="ownProperties">
-                    <div class="detailHandle" id="{+Link.symbolNameToLinkName(member)+}">
-                        <div class="detailCollapsed"></div>
-
-                        <code>{+member.name+}</code>
+                    <div class="detailHandle">
+                        <a name="{+ member.name +}"><code>{+member.name+}</code></a>
 
                         <if test="member.type">: <span class="type">{+new Link().toSymbol(member.type)+}</span></if>
                         <if test="member.defaultValue"><span class="defaultValue">(default: {+resolveLinks(member.defaultValue)+})</span></if>
@@ -604,10 +601,9 @@
                 <ul class="methodDetail" id="MethodDetail">
                     <for each="member" in="ownMethods">
                         <li>
-                            <div class="detailHandle" id="{+Link.symbolNameToLinkName(member)+}">
-                                <div class="detailCollapsed"></div>
+                            <div class="detailHanlde">
 
-                                <code>{+member.name.replace(/\^\d+$/, '')+}</code> {+makeSignature(member.params)+}
+                                <a name="{+ member.name +}"><code>{+member.name.replace(/\^\d+$/, '')+}</code></a> {+makeSignature(member.params)+}
 
                                 <if test="member.type">: <span class="type">{+new Link().toSymbol(member.type)+}</span></if>
                             </div>
@@ -692,10 +688,8 @@
             <div class="eventsContainer">
                 <!-- events -->
                 <for each="member" in="ownEvents">
-                    <div class="detailHandle" id="{+Link.symbolNameToLinkName(member)+}">
-                        <div class="detailCollapsed"></div>
-
-                        <code>{+member.name+}</code>
+                    <div class="detailHanlde">
+                        <a name="{+ member.name +}"><code>{+member.name+}</code></a>
                     </div>
                     <div class="detailBody">
                         <div class="desc">
