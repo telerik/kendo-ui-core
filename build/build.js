@@ -163,8 +163,8 @@ console.log("processing styles...");
 processStyles();
 
 console.log("copying license agreement...");
-var data = fs.readFileSync("resources/Kendo\ EULA.pdf");
-fs.writeFileSync(PATH + "/Kendo\ EULA.pdf", data);
+var data = fs.readFileSync("resources/Kendo\ Beta\ EULA.pdf");
+fs.writeFileSync(PATH + "/Kendo\ Beta\ EULA.pdf", data);
 
 console.log("copying readme...");
 var data = fs.readFileSync("resources/readme.txt");
