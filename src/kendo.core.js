@@ -941,7 +941,6 @@
 
         if ($.browser.msie && Math.floor($.browser.version) <= 7)
             element.css({
-                width: '100%',
                 zoom: 1
             });
 
