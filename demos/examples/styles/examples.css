@@ -156,7 +156,7 @@ html
 
 #header
 {
-    padding:7px 0 9px;
+    padding:4px 0 5px;
     box-shadow: 0 0 4px #555;
     position:relative;
 
@@ -173,13 +173,13 @@ html
 #header h1
 {
     float:left;
-    width:139px;
+    width:160px;
 }
 
 #logo
 {
     display:block;
-    height:30px;
+    height:36px;
     background:no-repeat url(kendo-logo.png);
     text-indent:-4000px;
     overflow:hidden;
@@ -193,6 +193,7 @@ html
 #header ul
 {
     float:right;
+    margin-top: 3px;
 }
 
 #header li,
