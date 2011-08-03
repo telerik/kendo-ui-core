@@ -612,7 +612,9 @@
          * @option {String/Function} [seriesDefaults.labels.template] The label template.
          * Template variables:
          * <ul>
-         *     <li><strong>value</strong> - the value</li>
+         *     <li><strong>value</strong> - the point value</li>
+         *     <li><strong>category</strong> - the category name</li>
+         *     <li><strong>series</strong> - the data series</li>
          *     <li><strong>dataItem</strong> - the original data item used to construct the point.
          *         Will be null if binding to array.
          *     </li>
@@ -741,7 +743,9 @@
          * @option {String/Function} [series.type="bar".labels.template] The label template.
          * Template variables:
          * <ul>
-         *     <li><strong>value</strong> - the value</li>
+         *     <li><strong>value</strong> - the point value</li>
+         *     <li><strong>category</strong> - the category name</li>
+         *     <li><strong>series</strong> - the data series</li>
          *     <li><strong>dataItem</strong> - the original data item used to construct the point.
          *         Will be null if binding to array.
          *     </li>
@@ -841,7 +845,9 @@
          * @option {String/Function} [series.type="column".labels.template] The label template.
          * Template variables:
          * <ul>
-         *     <li><strong>value</strong> - the value</li>
+         *     <li><strong>value</strong> - the point value</li>
+         *     <li><strong>category</strong> - the category name</li>
+         *     <li><strong>series</strong> - the data series</li>
          *     <li><strong>dataItem</strong> - the original data item used to construct the point.
          *         Will be null if binding to array.
          *     </li>
