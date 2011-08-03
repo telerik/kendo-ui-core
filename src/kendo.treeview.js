@@ -13,15 +13,15 @@
      * <p>There are two primary ways to create a TreeView:</p>
      *
      * <ol>
-     *     <li>1. Define a hierarchical list with static HTML</li>
-     *     <li>2. Use dynamic data binding</li>
+     *     <li>Define a hierarchical list with static HTML</li>
+     *     <li>Use dynamic data binding</li>
      * </ol>
      *
      * <p>Static HTML definition is appropriate for small hierarchies and for data that does not change frequently.
      * Data binding should be used for larger data sets and for data that changes frequently.</p>
      *
      * <h3>Creating a treeview from HTML</h3>
-     * @exampleTitle 1. Create a hierarchical HTML list
+     * @exampleTitle Create a hierarchical HTML list
      * @example
      * <ul id="treeview">
      *     <li>Item 1
@@ -33,16 +33,16 @@
      *     <li>Item 2</li>
      * </ul>
      *
-     * @exampleTitle 2. Initialize the TreeView using a jQuery selector
+     * @exampleTitle Initialize the TreeView using a jQuery selector
      * @example var treeview = $("#treeview").kendoTreeView();
      *
      * @section <h3>Creating a TreeView with data binding (local data source)</h3>
      *
-     * @exampleTitle 1. Create a hierarchical HTML list
+     * @exampleTitle Create a hierarchical HTML list
      * @example
      * <div id="treeview"></div>
      *
-     * @exampleTitle 2. Initialize and bind the TreeView
+     * @exampleTitle Initialize and bind the TreeView
      * @example
      * $("#treeview").kendoTreeView({
      *     dataSource: [
