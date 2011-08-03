@@ -211,7 +211,8 @@ html
     line-height:2.1;
 }
 
-#header li a:hover
+#header li a:hover,
+#header li a.demosLink
 {
     color:#ef652a;
 }
