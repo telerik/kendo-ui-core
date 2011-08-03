@@ -2,10 +2,26 @@
     /**
      * @name kendo.ui.TreeView.Description
      *
-     * @section The treeview component displays hierarchical data and
-     * can enable users to perform reordering operations with it.
+     * @section
+     * <p>The TreeView widget displays hierarchical data in a traditional tree structure,
+     * with support for interactive drag-and-drop reordering operations.
+     * A TreeView can be defined statically using HTML lists,
+     * or it can be dynamically bound to hierarchical data.</p>
      *
-     * @exampleTitle Creating a treeview from existing HTML
+     * <h3>Getting Started</h3>
+     *
+     * <p>There are two primary ways to create a TreeView:</p>
+     *
+     * <ol>
+     *     <li>1. Define a hierarchical list with static HTML</li>
+     *     <li>2. Use dynamic data binding</li>
+     * </ol>
+     *
+     * <p>Static HTML definition is appropriate for small hierarchies and for data that does not change frequently.
+     * Data binding should be used for larger data sets and for data that changes frequently.</p>
+     *
+     * <h3>Creating a treeview from HTML</h3>
+     * @exampleTitle 1. Create a hierarchical HTML list
      * @example
      * <ul id="treeview">
      *     <li>Item 1
@@ -17,9 +33,40 @@
      *     <li>Item 2</li>
      * </ul>
      *
-     * <script>
-     *     var treeview = $("#treeview").kendoTreeView();
-     * </script>
+     * @exampleTitle 2. Initialize the TreeView using a jQuery selector
+     * @example var treeview = $("#treeview").kendoTreeView();
+     *
+     * @section <h3>Creating a TreeView with data binding (local data source)</h3>
+     *
+     * @exampleTitle 1. Create a hierarchical HTML list
+     * @example
+     * <div id="treeview"></div>
+     *
+     * @exampleTitle 2. Initialize and bind the TreeView
+     * @example
+     * $("#treeview").kendoTreeView({
+     *     dataSource: [
+     *         { text: "Item 1", items: [
+     *             { text: "Item 1.1" },
+     *             { text: "Item 1.2" }
+     *         ]},
+     *         { text: "Item 2" }
+     *     ]
+     * });
+     *
+     * @section <h3>Configuring TreeView behavior</h3>
+     * <p> A number of TreeView behaviors can be easily controlled by simple configuration properties,
+     * such as animation behaviors and drag-and-drop behaviors.
+     * Refer to the demo Configuration tab for more API details.</p>
+     *
+     * @exampleTitle Enabling TreeView node drag-and-drop
+     * @example
+     * $("#treeview").kendoTreeView({
+     *     dragAndDrop: true
+     * });
+     *
+     * @section When drag-and-drop is enabled, TreeView nodes can be dragged and dropped between all levels,
+     * with useful tooltips helping indicate where the node will be dropped.
      */
     var kendo = window.kendo,
         ui = kendo.ui,
