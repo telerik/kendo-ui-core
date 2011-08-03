@@ -2,22 +2,108 @@
     /**
      * @name kendo.ui.Window.Description
      *
-     * @section The window component is used to display modal or non-modal content.
-     *
-     * @exampleTitle Creating a basic window
+     * @section
+     *  <p>
+     *      The Window widget displays content in a modal or non-modal HTML window. By default, Windows can be moved, 
+     *      resized, and closed by users. Window content can also be defined with either static HTML or loaded dynamically with Ajax.
+     *  </p>     
+     *  <p>
+     *      A Window can be initialized from virtually any HTML element. During initialization, the targeted content will 
+     *      automatically be wrapped in the Window’s HTML div element.
+     *  </p>
+     *  <h3>Getting Started</h3>
+     * @exampleTitle Create a simple HTML element with the Window content
      * @example
-     * <!-- HTML -->
-     * <form id="feedback-form" action="/submit-feedback">
-     *     <legend>Submit feedback</legend>
+     *  <p id="window">
+     *      Kendo window content
+     *  </p>
+     * @exampleTitle Initialize Window using a jQuery selector
+     * @example
+     * $("#window").kendoWindow();
+     * @section
+     *  <p>
+     *      When a Window is initialized, it will automatically be displayed open near the 
+     *      location of the HTML element that was used to initialize the content.
+     *  </p>
+     *  <h3>Configuring Window behaviors</h3>
+     *  <p>
+     *      Window provides many configuration options that can be easily set during initialization. 
+     *      Among the properties that can be controlled:
+     *  </p>
+     *  <ul>
+     *      <li>Minimum height/width</li>
+     *      <li>Available user Window actions (close/refresh/maximize)</li>
+     *      <li>Window title</li>
+     *      <li>Draggable and Resizable behaviors</li>
+     *  </ul>
+     * @exampleTitle Create modal Window with all user actions enabled
+     * @example
+     *  $("#window").kendoWindow({
+	 *      draggable: false,
+	 *      resizable: false,
+	 *      width: "500px",
+	 *      height: "300px",
+	 *      title: "Modal Window",
+	 *      modal: true,
+	 *      actions: ["Refresh", "Maximize", "Close"]
+     *  });
+     * @section
+     *  <p>
+     *      The order of the values in the actions array determines the order in which the action buttons 
+     *      will be rendered in the Window title bar. The maximize action serves both as a button for expanding 
+     *      the Window to fill the screen and as a button to restore the Window to the previous size.
+     *  </p>
+     *  <h3>Positioning and Opening the Window</h3>
+     *  <p>
+     *      In some scenarios, it is preferable to center a Window rather than open it near the HTML element 
+     *      used to define the content. It’s also common to open a Window as the result of an action rather 
+     *      than on initial page load. The Window API provides methods for handling this and many more advanced 
+     *      Window scenarios. Please see the Window demo Methods tab for more details.
+     *  </p>
+     * @exampleTitle Centering a Window and opening on button click
+     * @example
+     *  <!-- Create Window HTML and a button to open Window -->
+     *  <p id="window">
+     *      Centered Kendo UI Window content
+     *  </p>
+     *  <button id="btnOpen">Open Window</button>
+     * @exampleTitle
+     * @example
+     *  //Initialize Window, center, and configure button click action-->
+     *  $(document).ready(function(){
+	 *      var window = $("#window").kendoWindow({
+	 *		title: "Centered Window",
+	 *		width: "200px",
+	 *		height: "200px",
+	 *		visible: false
+	 *	}).data("kendoWindow");
+     *  });
      *
-     *     <label for="message">Message:</label>
-     *     <textarea name="message"></textarea>
-     *
-     *     <button type="submit">Send</button>
-     * </form>
-     *
-     * // JavaScript
-     * $("#feedback-form").kendoWindow();
+     *  $("#btnOpen").click(function(){
+	 *      var window = $("#window").data("kendoWindow");
+	 *      window.center();
+	 *      window.open();
+     *  });
+     * @section
+     *  <h3>Loading Window content with Ajax</h3>
+     *  <p>
+     *      While any valid technique for loading Ajax content can be used, Window provides 
+     *      built-in support for asynchronously loading content from a URL. This URL should 
+     *      return a HTML fragment that can be loaded in a Window content area.
+     *  </p>
+     * @exampleTitle Load Window content asynchronously
+     * @example
+     *  <!-- Define a basic HTML element for the Window -->
+     *  <div id="window"></div>
+     * @exampleTitle
+     * @example
+     *  //Initialize and configure to load content async -->
+     *  $(document).ready(function(){
+	 *      $("#window").kendoWindow({
+	 *        title: "Async Window Content",
+	 *        contentUrl: "html-content-snippet.html"
+	 *      });
+     *  });
      */
     var kendo = window.kendo,
         Component = kendo.ui.Component,
