@@ -286,10 +286,6 @@
 
             $("#exampleWrap").show();
 
-            if (kendoSkin) {
-                skinSelector.data("kendoDropDownList").value(kendoSkin);
-            }
-
             if (live === false)
                 $("#topnav li a").live("click", function(e) {
                     e.preventDefault();
@@ -372,7 +368,7 @@
 
     try {
         if (sessionStorage && sessionStorage.length) {
-            var kendoSkin = sessionStorage.getItem("kendoSkin");
+            kendoSkin = sessionStorage.getItem("kendoSkin");
 
             if (kendoSkin) {
                 Application.fetchSkin(kendoSkin);
@@ -445,15 +441,21 @@ function initializeNavigation (normalizedUrl) {
         selectCategory($("#topnav #overview"));
     }
 
-    $("#skinSelector").kendoDropDownList({
-        dataSource: [
-                        { text: "Kendo", control: "Menu", value: "kendo" },
-                        { text: "Blue Opal", control: "Menu", value: "blueopal" },
-                        { text: "Black", control: "Menu", value: "black" }
-                    ],
-        template: '<span class="thumbLink" href="#">\
-                    <span class="thumb <#= data.text.toLowerCase() #>Thumb" style="background-image: url(<#= initialRelativePath #>styles/<#= data.control #>/thumbSprite.png)">\
-                    <span class="gloss"></span></span><span class="skinTitle"><#= data.text #></span></span>'
+    $(document).ready( function () {
+        $("#skinSelector").kendoDropDownList({
+            dataSource: [
+                            { text: "Kendo", control: "Menu", value: "kendo" },
+                            { text: "Blue Opal", control: "Menu", value: "blueopal" },
+                            { text: "Black", control: "Menu", value: "black" }
+                        ],
+            template: '<span class="thumbLink" href="#">\
+                        <span class="thumb <#= data.text.toLowerCase() #>Thumb" style="background-image: url(<#= initialRelativePath #>styles/<#= data.control #>/thumbSprite.png)">\
+                        <span class="gloss"></span></span><span class="skinTitle"><#= data.text #></span></span>'
+        });
+
+        if (kendoSkin) {
+            skinSelector.data("kendoDropDownList").value(kendoSkin);
+        }
     });
 }
 
