@@ -10,7 +10,7 @@ var spawn = require('child_process').spawn;
 var date = new Date();
 var STAT = fs.statSync("./");
 var VERSION = process.argv[2] || generateVersion();
-var KENDOCDN = process.argv[3] || "http://krustev/KendoCDN";
+var KENDOCDN = process.argv[3] || "http://cdn.kendostatic.com/" + VERSION;
 var RELEASE = "release/";
 var DEPLOY = "deploy/";
 var PATH = DEPLOY + "kendoUI";
@@ -60,7 +60,7 @@ function generateVersion() {
     if (day < 10) {
         day = "0" + day;
     }
-    return date.getFullYear() + "_2_" + (date.getMonth() + 1) + "" + day;
+    return date.getFullYear() + ".2." + (date.getMonth() + 1) + "" + day;
 }
 
 function mkdir(newDir) {
