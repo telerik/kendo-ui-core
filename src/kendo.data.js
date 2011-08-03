@@ -850,7 +850,8 @@
          * filter: { field: "orderId", operation: "eq", value: 10248 }
          *
          * // returns only data where orderId is equal to 10248 and customerName starts with Paul
-         * filter: [ { field: "orderId", operation: "eq", value: 10248 }, { field: "customerName", operation: "startswith", value: "Paul" } ]
+         * filter: [ { field: "orderId", operation: "eq", value: 10248 }, 
+         *           { field: "customerName", operation: "startswith", value: "Paul" } ]
          *
          * @option {Array|Object} [group] <undefined> Sets initial grouping
          * _example
@@ -872,17 +873,17 @@
          * _example
          *  //settings various options for remote data transport
          *  var dataSource = new kendo.data.DataSource({
-         *     transport: {
-         *        read: {
-         *            url: "http://search.twitter.com/search.json", // the remove service URL
-         *            dataType: "jsonp", // JSONP (JSON with padding) is required for cross-domain AJAX
-         *            data: { //additional parameters sent to the remote service
-         *                q: function() {
-         *                    return $("#searchFor").val();
-         *                }
-         *            }
-         *        }
-         *     }
+         *      transport: {
+         *          read: {
+         *              url: "http://search.twitter.com/search.json", // the remove service URL                
+         *              dataType: "jsonp", // JSONP (JSON with padding) is required for cross-domain AJAX
+         *              data: { //additional parameters sent to the remote service
+         *                  q: function() {
+         *                      return $("#searchFor").val();
+         *                  }
+         *              }
+         *          }
+         *      }
          *  });
          *
          *  //consuming odata feed without setting additional options
@@ -1378,10 +1379,12 @@
          * @param {Object} [options] Contains the settings for the operations. Note: If setting for previous operation is omitted, this operation is not applied to the resulting view
          * @example
          *
-         * //create a view containing at most 20 records, taken from the 5th page and sorted ascending by orderId field.
+         * //create a view containing at most 20 records, taken from the 
+         * //5th page and sorted ascending by orderId field.
          * dataSource.query({ page: 5, pageSize: 20, sort: { field: "orderId", dir: "asc" } });
          *
-         * // moves the view to the first page returning at most 20 records but without particular ordering.
+         * //moves the view to the first page returning at most 20 records 
+         * //but without particular ordering.
          * dataSource.query({ page: 1, pageSize: 20 });
          *
          */
@@ -1487,7 +1490,10 @@
          * @param {Object|Array} [val] <undefined> Sort options to be applied to the data
          * @example
          * dataSource.sort({ field: "orderId", dir: "desc" });
-         * dataSource.sort([ { field: "orderId", dir: "desc" }, { field: "unitPrice", dir: "asc" } ]);
+         * dataSource.sort([ 
+         *      { field: "orderId", dir: "desc" }, 
+         *      { field: "unitPrice", dir: "asc" } 
+         * ]);
          * @returns {Array} Current sort descriptors
          */
         sort: function(val) {
@@ -1520,7 +1526,10 @@
          * @param {Object|Array} [val] <undefined> Filter(s) to be applied to the data.
          * @example
          * dataSource.filter({ field: "orderId", operation: "eq", value: 10428 });
-         * dataSource.filter([ { field: "orderId", operation: "neq", value: 42 }, { field: "unitPrice", operation: "ge", value: 3.14 } ]);
+         * dataSource.filter([ 
+         *      { field: "orderId", operation: "neq", value: 42 }, 
+         *      { field: "unitPrice", operation: "ge", value: 3.14 } 
+         * ]);
          * @returns {Array} Current filter descriptors
          */
         filter: function(val) {
