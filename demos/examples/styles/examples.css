@@ -1307,6 +1307,7 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
     margin-right:auto;
     border-width: 0;
     background:#fff url(collage.png) no-repeat 97% 28px;
+    color:#000;
 }
 
 #introText,
