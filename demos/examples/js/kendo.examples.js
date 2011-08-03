@@ -358,7 +358,7 @@
                 }
             });
 
-            $(document).data("kendoSkin", skinSelector.val())
+            $(document).data("kendoSkin", kendoSkin)
         }
 
     };
@@ -375,6 +375,7 @@
             }
         }
     } catch(err) {
+        kendoSkin = "kendo";
     }
 
     $(Application.init);
@@ -442,7 +443,9 @@ function initializeNavigation (normalizedUrl) {
     }
 
     $(document).ready( function () {
-        $("#skinSelector").kendoDropDownList({
+        var skinSelector = $("#skinSelector");
+
+        skinSelector.kendoDropDownList({
             dataSource: [
                             { text: "Kendo", control: "Menu", value: "kendo" },
                             { text: "Blue Opal", control: "Menu", value: "blueopal" },
