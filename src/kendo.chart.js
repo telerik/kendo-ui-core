@@ -879,6 +879,35 @@
          * _example
          * //sets format of the tooltip
          * format: "{0:C}"
+         * @option {String|Function} [tooltip.template] The tooltip template.
+         * Template variables:
+         * <ul>
+         *     <li><strong>value</strong> - the point value</li>
+         *     <li><strong>category</strong> - the category name</li>
+         *     <li><strong>series</strong> - the data series</li>
+         *     <li><strong>dataItem</strong> - the original data item used to construct the point.
+         *         Will be null if binding to array.
+         *     </li>
+         * </ul>
+         * _example
+         * $("#chart").kendoChart({
+         *      title: {
+         *          text: "My Chart Title"
+         *      },
+         *      series: [
+         *          {
+         *              name: "Series 1",
+         *              data: [200, 450, 300, 125]
+         *          }
+         *      ],
+         *      categoryAxis: {
+         *          categories: [2000, 2001, 2002, 2003]
+         *      },
+         *      tooltip: {
+         *          visible: true,
+         *          template: "${category} - ${value}"
+         *      }
+         * });
          * @option {String} [tooltip.font] <"12px Tahoma,sans-serif"> The tooltip font.
          * @option {String} [tooltip.color]
          * The text color of the tooltip. The default is the same as the series labels color.
@@ -2875,6 +2904,8 @@
                 point.series = series;
                 point.seriesIx = seriesIx;
                 point.owner = chart;
+                point.dataItem = series.dataItems ?
+                    series.dataItems[categoryIx] : { value: value };
             }
 
             chart.points.push(point);
@@ -4591,12 +4622,23 @@
                 aboveAxis = point.options.aboveAxis,
                 isVertical = point.options.isVertical,
                 chartElement = tooltip.chartElement,
-                value = point.value,
-                tooltipBox;
+                tooltipBox,
+                template,
+                content = point.value.toString();
 
-            tooltip.element.html(
-                options.format ? format(options.format, value) : value.toString()
-            );
+            if (options.template) {
+                template = baseTemplate(options.template);
+                content = template({
+                    value: point.value,
+                    category: point.category,
+                    series: point.series,
+                    dataItem: point.dataItem
+                });
+            } else if (options.format) {
+                content = format(options.format, point.value);
+            }
+
+            tooltip.element.html(content);
 
             tooltipBox = new Box2D(0, 0, element.outerWidth(), element.outerHeight())
 
