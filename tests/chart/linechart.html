@@ -673,10 +673,16 @@
                     marker,
                     label,
                     root,
-                    VALUE = 1;
+                    VALUE = 1,
+                    CATEGORY = "A",
+                    SERIES_NAME = "series";
 
                 function createPoint(options) {
                     point = new LinePoint(VALUE, options);
+
+                    point.category = CATEGORY;
+                    point.dataItem = { value: VALUE };
+                    point.series = { name: SERIES_NAME };
 
                     box = new Box2D(0, 0, 100, 100);
                     point.reflow(box);
@@ -860,27 +866,18 @@
                 });
 
                 test("template has category", function() {
-                    point = new LinePoint(VALUE, { labels: { template: "${category}" } });
-                    point.category = "A";
-                    point.reflow(new Box2D());
-
-                    equals(point.children[1].children[0].content, "A");
+                    createPoint({ labels: { template: "${category}" } });
+                    equals(point.children[1].children[0].content, CATEGORY);
                 });
 
                 test("template has dataItem", function() {
-                    point = new LinePoint(VALUE, { labels: { template: "${dataItem.value}" } });
-                    point.dataItem = { value: 1 };
-                    point.reflow(new Box2D());
-
-                    equals(point.children[1].children[0].content, "1");
+                    createPoint({ labels: { template: "${dataItem.value}" } });
+                    equals(point.children[1].children[0].content, VALUE);
                 });
 
                 test("template has series", function() {
-                    point = new LinePoint(VALUE, { labels: { template: "${series.name}" } });
-                    point.series = { name: "Value" };
-                    point.reflow(new Box2D());
-
-                    equals(point.children[1].children[0].content, "Value");
+                    createPoint({ labels: { template: "${series.name}" } });
+                    equals(point.children[1].children[0].content, SERIES_NAME);
                 });
             })();
 
@@ -916,8 +913,7 @@
                         });
 
                         chart = $("#container").data("kendoChart");
-                        linePoint = chart._model.children[1].charts[0].children[0];
-                        label = linePoint.children[1];
+                        label = chart._plotArea.charts[0].points[0].children[1];
                     },
                     teardown: function() {
                         $("#container").empty();
