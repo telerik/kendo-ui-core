@@ -9,7 +9,6 @@
         DataSource = kendo.data.DataSource,
         baseTemplate = kendo.template,
         format = kendo.format,
-        render1 = kendo.render,
         proxy = $.proxy;
 
     // Constants ==============================================================
@@ -444,6 +443,33 @@
          * @option {Number} [valueAxis.labels.border.width] <0> The width of the border.
          * @option {String} [valueAxis.labels.border.color] <"black"> The color of the border.
          * @option {Number} [valueAxis.labels.rotation] <0> The rotation angle of the labels.
+         * @option {String/Function} [valueAxis.labels.template] The label template.
+         * Template variables:
+         * <ul>
+         *     <li><strong>value</strong> - the value</li>
+         * </ul>
+         * _example
+         * // chart intialization
+         * $("#chart").kendoChart({
+         *      title: {
+         *          text: "My Chart Title"
+         *      },
+         *      series: [
+         *          {
+         *              name: "Series 1",
+         *              data: [200, 450, 300, 125]
+         *          }
+         *      ],
+         *      categoryAxis: {
+         *          categories: [2000, 2001, 2002, 2003]
+         *      },
+         *      valueAxis: {
+         *          labels: {
+         *              // label template
+         *              template: "${ value }%"
+         *          }
+         *      }
+         * });
          * @option {String} [valueAxis.labels.format] The format of the labels.
          * _example
          * //sets format of the labels
@@ -523,6 +549,34 @@
          * @option {Number} [categoryAxis.labels.border.width] <0> The width of the border.
          * @option {String} [categoryAxis.labels.border.color] <"black"> The color of the border.
          * @option {Number} [categoryAxis.labels.rotation] <0> The rotation angle of the labels.
+         * @option {String/Function} [categoryAxis.labels.template] The label template.
+         * Template variables:
+         * <ul>
+         *     <li><strong>value</strong> - the value</li>
+         *     <li><strong>dataItem</strong> - the original data item used to construct the point.
+         *         Will be null if binding to array.
+         *     </li>
+         * </ul>
+         * _example
+         * // chart intialization
+         * $("#chart").kendoChart({
+         *      title: {
+         *          text: "My Chart Title"
+         *      },
+         *      series: [
+         *          {
+         *              name: "Series 1",
+         *              data: [200, 450, 300, 125]
+         *          }
+         *      ],
+         *      categoryAxis: {
+         *          categories: [2000, 2001, 2002, 2003],
+         *          labels: {
+         *              // label template
+         *              template: "Year: ${ value }"
+         *          }
+         *      }
+         * });
          * @option {String} [categoryAxis.labels.format] The format of the labels.
          * _example
          * //sets format of the labels
@@ -555,6 +609,37 @@
          * @option {Object} [seriesDefaults.labels.border] The border of the labels.
          * @option {Number} [seriesDefaults.labels.border.width] <0> The width of the border.
          * @option {String} [seriesDefaults.labels.border.color] <"black"> The color of the border.
+         * @option {String/Function} [seriesDefaults.labels.template] The label template.
+         * Template variables:
+         * <ul>
+         *     <li><strong>value</strong> - the value</li>
+         *     <li><strong>dataItem</strong> - the original data item used to construct the point.
+         *         Will be null if binding to array.
+         *     </li>
+         * </ul>
+         * _example
+         * // chart intialization
+         * $("#chart").kendoChart({
+         *      title: {
+         *          text: "My Chart Title"
+         *      },
+         *      seriesDefault: {
+         *          labels: {
+         *              // label template
+         *              template: "${ value }%",
+         *              visible: true
+         *          }
+         *      },
+         *      series: [
+         *          {
+         *              name: "Series 1",
+         *              data: [200, 450, 300, 125]
+         *          }
+         *      ],
+         *      categoryAxis: {
+         *          categories: [2000, 2001, 2002, 2003]
+         *      }
+         * });
          * @option {String} [seriesDefaults.labels.format] The format of the labels.
          * _example
          * //sets format of the labels
@@ -653,6 +738,36 @@
          * @option {Object} [series.type="bar".labels.border] The border of the labels.
          * @option {Number} [series.type="bar".labels.border.width] <0> The width of the border.
          * @option {String} [series.type="bar".labels.border.color] <"black"> The color of the border.
+         * @option {String/Function} [series.type="bar".labels.template] The label template.
+         * Template variables:
+         * <ul>
+         *     <li><strong>value</strong> - the value</li>
+         *     <li><strong>dataItem</strong> - the original data item used to construct the point.
+         *         Will be null if binding to array.
+         *     </li>
+         * </ul>
+         * _example
+         * // chart intialization
+         * $("#chart").kendoChart({
+         *      title: {
+         *          text: "My Chart Title"
+         *      },
+         *      series: [
+         *          {
+         *              type: "bar",
+         *              name: "Series 1",
+         *              data: [200, 450, 300, 125],
+         *              labels: {
+         *                  // label template
+         *                  template: "${ value }%",
+         *                  visible: true
+         *              }
+         *          }
+         *      ],
+         *      categoryAxis: {
+         *          categories: [2000, 2001, 2002, 2003]
+         *      }
+         * });
          * @option {String} [series.type="bar".labels.format] The format of the labels.
          * _example
          * //sets format of the labels
@@ -723,6 +838,36 @@
          * @option {Number} [series.type="column".labels.border.width] <0> The width of the border.
          * @option {String} [series.type="column".labels.border.color] <"black">
          * The color of the border.
+         * @option {String/Function} [series.type="column".labels.template] The label template.
+         * Template variables:
+         * <ul>
+         *     <li><strong>value</strong> - the value</li>
+         *     <li><strong>dataItem</strong> - the original data item used to construct the point.
+         *         Will be null if binding to array.
+         *     </li>
+         * </ul>
+         * _example
+         * // chart intialization
+         * $("#chart").kendoChart({
+         *      title: {
+         *          text: "My Chart Title"
+         *      },
+         *      series: [
+         *          {
+         *              type: "bar",
+         *              name: "Series 1",
+         *              data: [200, 450, 300, 125],
+         *              labels: {
+         *                  // label template
+         *                  template: "${ value }%",
+         *                  visible: true
+         *              }
+         *          }
+         *      ],
+         *      categoryAxis: {
+         *          categories: [2000, 2001, 2002, 2003]
+         *      }
+         * });
          * @option {String} [series.type="column".labels.format] The format of the labels.
          * _example
          * //sets format of the labels
@@ -842,6 +987,36 @@
          * @option {Object} [series.type="line".labels.border] The border of the labels.
          * @option {Number} [series.type="line".labels.border.width] <0> The width of the border.
          * @option {String} [series.type="line".labels.border.color] <"black"> The color of the border.
+         * @option {String/Function} [series.type="line".labels.template] The label template.
+         * Template variables:
+         * <ul>
+         *     <li><strong>value</strong> - the value</li>
+         *     <li><strong>dataItem</strong> - the original data item used to construct the point.
+         *         Will be null if binding to array.
+         *     </li>
+         * </ul>
+         * _example
+         * // chart intialization
+         * $("#chart").kendoChart({
+         *      title: {
+         *          text: "My Chart Title"
+         *      },
+         *      series: [
+         *          {
+         *              type: "column",
+         *              name: "Series 1",
+         *              data: [200, 450, 300, 125],
+         *              labels: {
+         *                  // label template
+         *                  template: "${ value }%",
+         *                  visible: true
+         *              }
+         *          }
+         *      ],
+         *      categoryAxis: {
+         *          categories: [2000, 2001, 2002, 2003]
+         *      }
+         * });
          * @option {String} [series.type="line".labels.format] The format of the labels.
          * _example
          * //sets format of the labels
@@ -3255,7 +3430,12 @@
 
             if (labels.template) {
                 var labelTemplate = baseTemplate(labels.template);
-                labelText = labelTemplate(options.dataItem);
+                labelText = labelTemplate({
+                    dataItem: point.dataItem,
+                    category: point.category,
+                    value: point.value,
+                    series: point.series
+                });
             }
 
             point.append(
@@ -3378,8 +3558,7 @@
                     markers: {
                         background: series.color,
                         opacity: series.opacity
-                    },
-                    dataItem: dataItem
+                    }
                 }, series)
             );
 

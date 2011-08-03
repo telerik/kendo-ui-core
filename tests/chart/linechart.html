@@ -883,10 +883,15 @@
                                 data: [0, 1],
                                 labels: {
                                     visible: true,
-                                    template: "Value: ${ data.value }",
+                                    template: "PointValue: ${ value }|" +
+                                              "Category: ${ category }|" +
+                                              "Series: ${ series[0] }",
                                     format: "{0:C}"
                                 }
-                            }]
+                            }],
+                            categoryAxis: {
+                                categories: ["A1, A2"]
+                            }
                         });
                         point = lineChart.points[0];
                         label = point.children[1];
@@ -894,7 +899,10 @@
                 });
 
                 test("sets label template", function() {
-                    equal(label.children[0].content, "Value: 0");
+                    equal(label.children[0].content,
+                                        "PointValue: 0|" +
+                                        "Category: A1|" +
+                                        "Series: 0");
                 });
 
                 test("sets point dataItem", function() {
@@ -906,10 +914,12 @@
             (function() {
                 var data = [{
                         "text": "text1",
-                        "value": 1
+                        "value": 1,
+                        "name": "A1"
                     },{
                         "text": "text0",
-                        "value": 0
+                        "value": 0,
+                        "name": "A0"
                     }],
                     chart;
 
@@ -923,14 +933,21 @@
                             seriesDefaults: {
                                 labels: {
                                     visible: true,
-                                    template: "Value: ${ data.value }, Text: ${ data.text }"
+                                    template: "PointValue: ${ value }|" +
+                                              "DataValue: ${ dataItem.value }|" +
+                                              "Text: ${ dataItem.text }|" +
+                                              "Category: ${ category }|" +
+                                              "Series: ${ series[0] }"
                                 }
                             },
                             series: [{
                                 name: "Value",
                                 type: "line",
                                 field: "value"
-                            }]
+                            }],
+                            categoryAxis: {
+                                field: "name"
+                            }
                         });
 
                         chart = $("#container").data("kendoChart");
@@ -949,7 +966,12 @@
                 });
 
                 test("sets label template", function() {
-                    equal(label.children[0].content, "Value: 1, Text: text1");
+                    equal(label.children[0].content,
+                                        "PointValue: 1|" +
+                                        "DataValue: 1|" +
+                                        "Text: text1|" +
+                                        "Category: A1|" +
+                                        "Series: 1");
                 });
 
                 test("sets point dataItem", function() {
