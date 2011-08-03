@@ -39,13 +39,13 @@
      * @exampleTitle Create modal Window with all user actions enabled
      * @example
      *  $("#window").kendoWindow({
-	 *      draggable: false,
-	 *      resizable: false,
-	 *      width: "500px",
-	 *      height: "300px",
-	 *      title: "Modal Window",
-	 *      modal: true,
-	 *      actions: ["Refresh", "Maximize", "Close"]
+     *      draggable: false,
+     *      resizable: false,
+     *      width: "500px",
+     *      height: "300px",
+     *      title: "Modal Window",
+     *      modal: true,
+     *      actions: ["Refresh", "Maximize", "Close"]
      *  });
      * @section
      *  <p>
@@ -71,18 +71,18 @@
      * @example
      *  //Initialize Window, center, and configure button click action-->
      *  $(document).ready(function(){
-	 *      var window = $("#window").kendoWindow({
-	 *		title: "Centered Window",
-	 *		width: "200px",
-	 *		height: "200px",
-	 *		visible: false
-	 *	}).data("kendoWindow");
+     *      var window = $("#window").kendoWindow({
+     *      title: "Centered Window",
+     *      width: "200px",
+     *      height: "200px",
+     *      visible: false
+     *  }).data("kendoWindow");
      *  });
      *
      *  $("#btnOpen").click(function(){
-	 *      var window = $("#window").data("kendoWindow");
-	 *      window.center();
-	 *      window.open();
+     *      var window = $("#window").data("kendoWindow");
+     *      window.center();
+     *      window.open();
      *  });
      * @section
      *  <h3>Loading Window content with Ajax</h3>
@@ -99,10 +99,10 @@
      * @example
      *  //Initialize and configure to load content async -->
      *  $(document).ready(function(){
-	 *      $("#window").kendoWindow({
-	 *        title: "Async Window Content",
-	 *        contentUrl: "html-content-snippet.html"
-	 *      });
+     *      $("#window").kendoWindow({
+     *        title: "Async Window Content",
+     *        contentUrl: "html-content-snippet.html"
+     *      });
      *  });
      */
     var kendo = window.kendo,
@@ -387,7 +387,7 @@
 
         /**
          * Sets/gets the window title.
-         * @param {String} The new window title
+         * @param {String} title The new window title
          * @example
          * var wnd = $("#window").data("kendoWindow");
          *
@@ -410,7 +410,7 @@
 
         /**
          * Sets/gets the window content.
-         * @param {String} The new window content
+         * @param {String} content The new window content
          * @example
          * var wnd = $("#window").data("kendoWindow");
          *
