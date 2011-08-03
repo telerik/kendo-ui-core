@@ -30,7 +30,7 @@
 
             //positive custom toString
             test("replace toString with whole part of the number", function() {
-                equal(toString(10.1, "$ #"), "$ 10");
+                equal(toString(10.9, "$ #"), "$ 11");
             });
 
             test("replace # after 0 with 0", function() {
@@ -103,7 +103,7 @@
             });
 
             //negative custom toString
-            test("toString decimal number -0.001", function() {
+            test("toString decimal number -0.001 with negative format", function() {
                 equal(toString(-0.001, "####;-(#.#)"), "-(0.001)");
             });
 
