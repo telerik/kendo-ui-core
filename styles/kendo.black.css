@@ -148,7 +148,7 @@
 {
     color: #fff;
     background-color: #000;
-    border-color: #8b8b8b;
+    border-color: #020202;
 }
 
 .t-tabstrip-items .t-state-active
@@ -168,7 +168,7 @@
 {
     color: #fff;
     background-color: #7e7e7e;
-    border-color: #a5a5a5;
+    border-color: #2e2e2e;
 }
 
 .t-state-hover .t-select
@@ -178,7 +178,7 @@
 
 .t-button:hover
 {
-    border-color:#a5a5a5;
+    border-color:#2e2e2e;
     background-color: #393939;
 }
 
@@ -210,7 +210,7 @@ button.t-button.t-state-disabled:hover,
 a.t-button.t-state-disabled:hover,
 .t-state-disabled .t-button:hover
 {
-    border-color: #989898;
+    border-color: #181818;
     background: #1d1d1d;
 }
 
