@@ -2,22 +2,129 @@
     /**
      * @name kendo.ui.TabStrip.Description
      *
-     * @section The TabStrip component initializes a set of unordered list items
-     * and content div elements as a switchable tab and content pairs.
+     * @section
+     *  <p>
+     *      The TabStrip widget displays a collection of tabs with associated tab content. 
+     *      TabStrips are composed of an HTML unordered list of items, which represent the tabs, 
+     *      and a collection of HTML divs, which define the tab content.
+     *  </p>
+     *  <h3>Getting Started</h3>
      *
-     * @exampleTitle Creating a <b>TabStrip</b> from existing HTML
+     * @exampleTitle In a HTML div, create an HTML unordered list for tabs, HTML divs for content
      * @example
-     * <ul id="tabStrip">
-     *     <li>Item 1</li>
-     *     <li>Item 2</li>
-     * </ul>
-     * <div></div>
-     * <div></div>
-     * @section You can also omit the content elements in the above structure
+     *  <div id="tabstrip">
+     *      <ul>
+	 *          <li>First Tab</li>
+	 *          <li>Second Tab</li>
+     *      </ul>
+     *      <div>First Tab Content</div>
+     *      <div>Second Tab Content</div>
+     *  </div>
      *
-     * @exampleTitle <b>TabStrip</b> initialization
+     * @exampleTitle Initialize the TabStrip using a jQuery selector to target the outer div
      * @example
      * var tabStrip = $("#tabStrip").kendoTabStrip();
+     * @section
+     *  <p>
+     *      Tabs do not have to have content. If a tab should have no content, it is safe to omit the HTML div.
+     *  </p>
+     *  <h3>Loading TabStrip content with Ajax</h3>
+     *  <p>
+     *      While any valid technique for loading Ajax content can be used, TabStrip provides 
+     *      built-in support for asynchronously loading content from URLs. These URLs should 
+     *      return HTML fragments that can be loaded in a TabStrip content area.
+     *  </p>
+     * @exampleTitle Loading Tab content asynchronously
+     * @example
+     *  <!-- Define the TabStrip HTML -->
+     *  <div id="tabstrip">
+     *      <ul>
+	 *          <li>First Tab</li>
+	 *          <li>Second Tab</li>
+     *      </ul>
+     *      <div> </div>
+     *      <div> </div>
+     *  </div>
+     * @exampleTitle 
+     * @example
+     *  //Initialize TabStrip and configure one tab with async content loading
+     *  $(document).ready(function(){
+	 *      $("#tabstrip").kendoTabStrip({
+	 *        contentUrls: [null, "html-content-snippet.html"]
+	 *      });
+     *  });
+     *
+     * @section
+     *  <h3>Dynamically configure TabStrip tabs</h3>
+     *  <p>
+     *      The TabStrip API provides several methods for dynamically adding or removing Tabs. To add tabs, 
+     *      provide the new item as a JSON object along with a reference item that will be used to determine 
+     *      the placement in the TabStrip.
+     *  <p>
+     *  <br/>
+     *  <p>
+     *      A reference item is simply a target Tab HTML element that already exists in the TabStrip. Any valid 
+     *      jQuery selector can be used to obtain a reference to the target item. For examples, see the <a href="../tabstrip/api.html" title="TabStrip  API demos">TabStrip  API demos</a>.
+     *  </p>
+     *  <br/>
+     *  <p>
+     *      Removing an item only requires a reference to the target element that should be removed.
+     *  </p>
+     * @exampleTitle Dynamically add a new Tab
+     * @example
+     *  var tabstrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
+     *
+     *  tabstrip.insertAfter(
+	 *      { text: "New Tab" },
+	 *      tabstrip.tabGroup.children("li:last")
+     *  );
+     * @section
+     *  <h3>Selecting a Tab on Initial Load</h3>
+     *  <p>
+     *      A common desire with TabStrips is to select a tab and display its associated content on initial load. There are two ways to accomplish this with TabStrip:
+     *  </p>
+     *  <ol>                
+     *      <li>Manually add the "t-state-active" class to the Tab that should be selected</li>
+     *      <li>Use the TabStrip API to target and select a Tab</li>                
+     *  </ol>
+     *  <p>
+     *      Both approaches produce the same end result. The first approach requires no additional JavaScript, but does require a small amount of HTML configuration.
+     *  </p>
+     *
+     * @exampleTitle Selecting a default tab manually using HTML
+     * @example
+     *  <div id="tabstrip">
+     *      <ul>
+	 *          <li class="t-state-active">First Tab</li>
+	 *          <li>Second Tab</li>
+     *      </ul>
+     *      <div> </div>
+     *      <div> </div>
+     *  </div>
+     * @exampleTitle
+     * @example
+     *  //Initialize the TabStrip
+     *  $(document).ready(function(){
+	 *      $("#tabstrip").kendoTabStrip();
+     *  });
+     * @exampleTitle Selecting a default tab using the TabStrip API
+     * @example
+     *  <div id="tabstrip">
+     *      <ul>
+	 *          <li>First Tab</li>
+	 *          <li>Second Tab</li>
+     *      </ul>
+     *      <div> </div>
+     *      <div> </div>
+     *  </div>
+     *
+     * @exampleTitle
+     * @example
+     *  //Initialize the TabStrip and select first tab
+     *  $(document).ready(function(){
+	 *      var tabstrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
+	 *      tabstrip.select(tabstrip.tabGroup.children("li:first"));
+     *  });
      */
     var kendo = window.kendo,
         ui = kendo.ui,
