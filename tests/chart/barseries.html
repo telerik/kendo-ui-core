@@ -149,6 +149,10 @@
                     equal(series.points[0].category, "A");
                 });
 
+                test("sets bar dataItem", function() {
+                    equal(typeof series.points[0].dataItem, "object");
+                });
+
                 // ------------------------------------------------------------
                 module("Bar Chart / Negative Values", {
                     setup: function() {
