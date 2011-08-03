@@ -70,10 +70,13 @@
     function showSelectedPhoto(ui) {
        $("#flatSearchPhotos").show();
 
+       var img = ui.selectable.value().find("img");
+
        ui.element.parent().hide();
+
        $("#overlay").stop(true, true).fadeOut();
 
-       setBigPhoto(ui.selectable.value().find("img"));
+       setBigPhoto(img);
 
        dataSource.query({page: 1, pageSize: PAGESIZE});
        $("#viewslideshow").stop(true, true).fadeIn();
