@@ -1,6 +1,7 @@
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
+        touch = kendo.support.touch,
         OPEN = "open",
         CLOSE = "close",
         CENTER = "center",
@@ -13,6 +14,7 @@
         BODY = "body",
         ACTIVE = "t-state-active",
         ACTIVECHILDREN = ".t-dropdown-wrap, .t-link",
+        MOUSEDOWN = touch ? "touchstart" : "mousedown",
         extend = $.extend,
         proxy = $.proxy,
         Component = ui.Component,
@@ -55,7 +57,6 @@
             extend(options.animation.open, {
                 complete: function() {
                     that.wrapper.css({ overflow: "" });
-                    that._animating = false;
                 }
             });
 
@@ -66,14 +67,12 @@
 
                     if (location)
                         that.wrapper.css(location);
-
-                    that._animating = false;
                 }
             });
 
             that.bind([OPEN, CLOSE], options);
 
-            $(document.documentElement).mousedown(proxy(that._mousedown, that));
+            $(document.documentElement).bind(MOUSEDOWN, proxy(that._mousedown, that));
 
             $(window).bind("resize", function() {
                 that.wrapper
@@ -116,16 +115,16 @@
 
             if (!that.visible()) {
 
-                if(!that._animating && that.trigger(OPEN)) {
+                if(!that.element.data("animating") && that.trigger(OPEN)) {
                     return;
                 }
 
-                that._animating = true;
-
-                that.wrapper = kendo.wrap(that.element).css({ overflow: HIDDEN, display: "block", position: ABSOLUTE});
+                that.wrapper = kendo.wrap(that.element);
 
                 if (options.appendTo == BODY)
                     that.wrapper.css("top", "-10000px");
+
+                that.wrapper.css({ overflow: HIDDEN, display: "block", position: ABSOLUTE}).css("top");
 
                 var animation = extend({}, options.animation.open);
 
@@ -157,11 +156,9 @@
 
             if (that.visible()) {
 
-                if(!that._animating && that.trigger(CLOSE)) {
+                if(!that.element.data("animating") && that.trigger(CLOSE)) {
                     return;
                 }
-
-                that._animating = true;
 
                 var animation = extend({}, options.animation.close),
                     effects = that.element.data('effects');
@@ -237,7 +234,7 @@
                 aligned = false;
 
             if (options.appendTo === Popup.fn.options.appendTo) {
-                wrapper.css(that._align(origins, positions));
+                wrapper.css("visibility", "hidden").css(that._align(origins, positions));
                 aligned = true;
             }
 
@@ -294,7 +291,7 @@
                 location.left += that._flip(offsets.left, element.outerWidth(), anchor.outerWidth(), viewport.width() / zoomLevel, origins[1], positions[1], wrapper.outerWidth());
             }
 
-            wrapper.css(location);
+            wrapper.css(location).css("visibility", "visible");
 
             return (location.left != flipPos.left || location.top != flipPos.top);
         },
