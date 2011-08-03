@@ -146,6 +146,10 @@
                     equal(lineChart.points[0].category, "A");
                 });
 
+                test("sets point dataItem", function() {
+                    equal(typeof lineChart.points[0].dataItem, "object");
+                });
+
                 // ------------------------------------------------------------
                 module("Line Chart / Negative Values", {
                     setup: function() {

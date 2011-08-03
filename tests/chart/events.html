@@ -111,6 +111,12 @@
                     });
                 });
 
+                test("event arguments contain dataItem", 1, function() {
+                    linePointClick(function(e) {
+                        same(e.dataItem.value, e.value);
+                    });
+                });
+
                 test("event arguments contain jQuery element", 1, function() {
                     linePointClick(function(e) {
                         equals(e.element.attr("id"), marker.options.id);

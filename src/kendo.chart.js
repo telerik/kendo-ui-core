@@ -885,8 +885,8 @@
          *     <li><strong>value</strong> - the point value</li>
          *     <li><strong>category</strong> - the category name</li>
          *     <li><strong>series</strong> - the data series</li>
-         *     <li><strong>dataItem</strong> - the original data item used to construct the point.
-         *         Will be null if binding to array.
+         *     <li><strong>dataItem</strong> -
+         *         the original data item (when binding to dataSource)
          *     </li>
          * </ul>
          * _example
@@ -968,6 +968,7 @@
                  * @param {Object} e.value The data point value.
                  * @param {Object} e.category The data point category
                  * @param {Object} e.series The clicked series.
+                 * @param {Object} e.dataItem The original data item (when binding to dataSource).
                  * @param {Object} e.element The DOM element of the data point.
                  */
                 SERIES_CLICK
@@ -1088,6 +1089,7 @@
                     value: point.value,
                     category: point.category,
                     series: point.series,
+                    dataItem: point.dataItem,
                     element: $(e.target)
                 });
             }
