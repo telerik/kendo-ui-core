@@ -94,13 +94,13 @@
                     categoryAxis: {
                         field: "name",
                         labels: {
-                            rotation: 90,
-                            font: "12px Verdana, sans-serif"
+                            font: "12px Verdana, sans-serif",
+                            template: "|${ data.value }|"
                         }
                     },
                     valueAxis: {
                         labels: {
-                            rotation: 90
+                            template: "|${ data.value }|"
                         }
                     },
                     seriesClick: function(e) {
