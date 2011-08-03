@@ -25,32 +25,86 @@
         <div class="description">Basic usage</div>
         <!-- description -->
         <div id="example" class="t-content">
-            <h3>Created from &lt;input /&gt;</h3>
-            <input id="input" value="1"/>
+            <h3>Creating a ComboBox from <code>&lt;input /&gt;</code></h3>
+            <div class="code-sample">
+                <h4 class="code-title">Source:</h4>
+                <pre class="prettyprint">
+&lt;input id="input" value="1" /&gt;
 
-            <h3>Created from &lt;select /&gt;</h3>
-            <select id="select">
-                <option>Item1</option>
-                <option>Item2</option>
-                <option>Item3</option>
-            </select>
+&lt;script&gt;
+    $("#input").kendoComboBox([
+        { text: "Item 1", value: "1" },
+        { text: "Item 2", value: "2" },
+        { text: "Item 3", value: "3" }
+    ]);
+&lt;/script&gt;
+</pre>
+            </div>
+            <div class="code-sample output">
+                <h4 class="code-title">Output:</h4>
+                <div class="prettyprint">
+                    <input id="input" value="1"/>
+                </div>
+            </div>
+
+            <h3>Creating a ComboBox from <code>&lt;select /&gt;</code></h3>
+            <div class="code-sample">
+                <h4 class="code-title">Source:</h4>
+                <pre class="prettyprint">
+&lt;select id="select"&gt;
+    &lt;option&gt;Item 1&lt;/option&gt;
+    &lt;option&gt;Item 2&lt;/option&gt;
+    &lt;option&gt;Item 3&lt;/option&gt;
+&lt;/select&gt;
+
+&lt;script&gt;
+    $("#select").kendoComboBox();
+&lt;/script&gt;
+</pre>
+            </div>
+            <div class="code-sample output">
+                <h4 class="code-title">Output:</h4>
+                <div class="prettyprint">
+                    <select id="select">
+                        <option>Item 1</option>
+                        <option>Item 2</option>
+                        <option>Item 3</option>
+                    </select>
+                </div>
+            </div>
 
             <script type="text/javascript">
                 $(document).ready(function() {
-                    // local data
-                    var data = [
-                        {text: "Item1", value:"1"},
-                        {text: "Item2", value:"2"},
-                        {text: "Item3", value:"2"}
-                    ];
+                    // create ComboBox from input HTML element
+                    $("#input").kendoComboBox([
+                        { text: "Item 1", value: "1" },
+                        { text: "Item 2", value: "2" },
+                        { text: "Item 3", value: "3" }
+                    ]);
 
-                    //create kendo ComboBox from input Html element
-                    $("#input").kendoComboBox(data);
-
-                    //create kendo ComboBox from select Html element
+                    // create ComboBox from select HTML element
                     $("#select").kendoComboBox();
                 });
             </script>
+
+            <style scoped>
+                #example h3:not(:first-child) {
+                    clear: both;
+                }
+
+                #example .code-sample {
+                    width: 60%;
+                    display: inline-block;
+                    margin-bottom: 20px;
+                    vertical-align: top;
+                }
+
+                #example .output {
+                    width: 24%;
+                    margin-left: 4%;
+                    display: inline-block;
+                }
+            </style>
         </div>
         <!-- tools -->
         <!-- tools -->
