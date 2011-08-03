@@ -427,11 +427,12 @@ function initializeNavigation (normalizedUrl) {
     var loc = /[^\/]+\/[^\/]+?$/.exec(normalizedUrl);
 
     if (loc) {
-        var url = loc[0].toLowerCase();
+        var url = loc[0].toLowerCase(),
+            page = locatePage(url);
 
-        $("#navmainWrap").toggleClass("singleColumn", url == "overview/index.html");
+        $("#navmainWrap").toggleClass("singleColumn", page == "overview");
 
-        selectCategory($("#topnav #" + locatePage(url))[0]);
+        selectCategory($("#topnav #" + page)[0]);
 
         var link = $("#nav .t-link[href*='" + url + "']")
             .addClass("t-state-selected");
@@ -463,12 +464,6 @@ function initializeNavigation (normalizedUrl) {
 }
 
 var categories = {
-    overview: {
-        text: "Overview",
-        item: {
-            url: "overview/index.html"
-        }
-    },
     controls: [
        {
             text: "AutoComplete",
@@ -876,5 +871,11 @@ var categories = {
                 }
             ]
         }
-    ]
+    ],
+    overview: {
+        text: "Overview",
+        item: {
+            url: "index.html"
+        }
+    }
 };
