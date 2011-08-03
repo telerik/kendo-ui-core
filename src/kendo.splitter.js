@@ -8,7 +8,6 @@
     *
     * @exampleTitle Creating a basic splitter
     * @example
-    * <!-- HTML -->
     * <div id="splitter">
     *    <div>
     *        Area 1
@@ -18,9 +17,9 @@
     *    </div>
     * </div>
     *
-    * // JavaScript
-    * $("#splitter").kendoSplitter();
-    *
+    * <script>
+    *     $("#splitter").kendoSplitter();
+    * </script>
     */
     var kendo = window.kendo,
         ui = kendo.ui,
@@ -224,7 +223,7 @@
             var that = this;
 
             return $.extend({
-                type: "POST",
+                type: "GET",
                 dataType: "html",
                 success: function (data) {
                     $pane.html(data);
