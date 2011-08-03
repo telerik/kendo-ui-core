@@ -421,6 +421,20 @@
                 var result = dataSource.view();
                 equal(result.length, 2);
             });
+            test("range fetch range accross multiple pages where second page is already fetched", function() {
+                var dataSource = remoteDataSource();
+                dataSource.range(32, 16);
+                dataSource.range(30, 16);
+                dataSource.range(30, 16);
+                dataSource.range(30, 16);
+                dataSource.range(30, 16);
+
+                var result = dataSource.view();
+                equal(result.length, 16);
+                equal(result[0].OrderID, 30);
+                equal(result[15].OrderID, 45);
+                equal(dataSource._ranges.length, 2);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
