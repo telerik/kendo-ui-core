@@ -656,11 +656,6 @@ pre.prettyprint
     overflow: hidden;
 }
 
-* html pre.prettyprint
-{
-    width:100%;
-}
-
 .console
 {
     background-color: #FFF;
