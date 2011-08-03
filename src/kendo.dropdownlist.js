@@ -257,6 +257,9 @@
                     .bind({
                         keydown: proxy(that._keydown, that),
                         keypress: proxy(that._keypress, that),
+                        focusin: function() {
+                            clearTimeout(that._bluring);
+                        },
                         click: function() {
                             if(!that.ul[0].firstChild) {
                                 that.showBusy();
@@ -265,7 +268,7 @@
                                 that.toggle();
                             }
                         },
-                        blur: function() {
+                        focusout: function(e) {
                             that._bluring = setTimeout(function() {
                                 that._blur();
                             }, 100);
