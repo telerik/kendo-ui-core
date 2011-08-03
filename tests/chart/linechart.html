@@ -9,6 +9,7 @@
     </head>
     <body>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.chart.js"></script>
         <script src="util.js"></script>
         <script type="text/javascript">
@@ -848,6 +849,112 @@
             })();
 
             (function() {
+                var label,
+                    lineChart;
+
+                function PlotAreaStub() { }
+
+                $.extend(PlotAreaStub.prototype, {
+                    axisX: {
+                        getSlot: function(value) {
+                            return new Box2D();
+                        }
+                    },
+                    axisY: {
+                        getSlot: function(categoryIndex) {
+                            return new Box2D();
+                        }
+                    },
+                    options: {
+                        categoryAxis: { }
+                    }
+                });
+
+                // ------------------------------------------------------------
+                module("Line Point / Labels / Templates", {
+                    setup: function() {
+                        plotArea = new PlotAreaStub();
+                        lineChart = new Chart.LineChart(plotArea, {
+                            series: [{
+                                data: [0, 1],
+                                labels: {
+                                    visible: true,
+                                    template: "Value: ${ data.value }",
+                                    format: "{0:C}"
+                                }
+                            }]
+                        });
+                        point = lineChart.points[0];
+                        label = point.children[1];
+                    }
+                });
+
+                test("sets label template", function() {
+                    equal(label.children[0].content, "Value: 0");
+                });
+
+                test("sets point dataItem", function() {
+                    equal(point.options.dataItem.value, 0);
+                });
+
+            });
+
+            (function() {
+                var data = [{
+                        "text": "text1",
+                        "value": 1
+                    },{
+                        "text": "text0",
+                        "value": 0
+                    }],
+                    chart;
+
+                // ------------------------------------------------------------
+                module("Line Chart DataSource / Labels / Template", {
+                    setup: function() {
+                        $("#container").kendoChart({
+                            dataSource: {
+                                data: data
+                            },
+                            seriesDefaults: {
+                                labels: {
+                                    visible: true,
+                                    template: "Value: ${ data.value }, Text: ${ data.text }"
+                                }
+                            },
+                            series: [{
+                                name: "Value",
+                                type: "line",
+                                field: "value"
+                            }]
+                        });
+
+                        chart = $("#container").data("kendoChart");
+                        linePoint = chart._model.children[1].charts[0].children[0];
+                        label = linePoint.children[1];
+                    },
+                    teardown: function() {
+                        $("#container").empty();
+                    }
+                });
+
+                test("Line chart have dataItems", function() {
+                    dataItem = chart.options.series[0].dataItems[0];
+                    equal(dataItem.value, 1);
+                    equal(dataItem.text, "text1");
+                });
+
+                test("sets label template", function() {
+                    equal(label.children[0].content, "Value: 1, Text: text1");
+                });
+
+                test("sets point dataItem", function() {
+                    equal(linePoint.options.dataItem.value, 1);
+                });
+
+            })();
+
+            (function() {
                 var ShapeElement = Chart.ShapeElement,
                     SIZE = 5,
                     BORDER = 2,
@@ -916,5 +1023,7 @@
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
 
+        <div id="container">
+        </div>
     </body>
 </html>
