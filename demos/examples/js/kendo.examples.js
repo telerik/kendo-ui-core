@@ -31,8 +31,7 @@
         },
         initialFolder = 0,
         codeStrip = false,
-        referenceUrl = "",
-        initialRelativePath = "";
+        referenceUrl = "";
 
     window.selectCategory = function(element) {
         $("#topnav .selected").removeClass("selected");
@@ -190,12 +189,28 @@
                 $(".description").empty().html($.trim(Application.description(currentHtml)));
         },
 
+        preloadStylesheet: function (file, callback) {
+            var element;
+
+            element = $(["<link rel=\"stylesheet\" media=\"print\" href=\"", file, "\">"].join(''));
+            $("head").append(element);
+
+            setTimeout(function () { 
+                if (callback)
+                    callback();
+
+                element.remove();
+            }, 100);
+
+            return element;
+        },
+
         fetchSkin: function(skinName, animate) {
             var kendoLinks = $("link[href*='kendo.']", document.getElementsByTagName("head")[0]),
                 commonLink = kendoLinks.filter("[href*='kendo.common']"),
                 skinLink = kendoLinks.filter(":not([href*='kendo.common'])"),
                 currentFolder = new Array(location.href.match(/\//g).length - initialFolder + 1).join("../"),
-                url = currentFolder + commonLink.attr("href").replace(/kendo\.\w+\.css/i, "kendo." + skinName + ".css"),
+                url = currentFolder + commonLink.attr("href").replace(/kendo\.\w+(\.min)?\.css/i, "kendo." + skinName + "$1.css"),
                 exampleElement = $("#example"), newLink;
 
             if (!$.browser.msie) {
@@ -233,10 +248,7 @@
             };
 
             if ($("#exampleWrap").length)
-                $.get(url)
-                    .complete(function() {
-                        fadeSkin();
-                    });
+                Application.preloadStylesheet(url, fadeSkin);
             else
                 changeSkin();
         },
@@ -356,7 +368,7 @@
     };
 
     initialFolder = location.href.match(/\//g).length;
-    initialRelativePath = document.getElementsByTagName("head")[0].innerHTML.match(/href=\W([\.\/]*)([\w\/]*?)kendo\.common/)[1];
+    initialRelativePath = getInitialStylePath();
 
     try {
         if (sessionStorage && sessionStorage.length) {
@@ -372,6 +384,11 @@
     $(Application.init);
 
 })(jQuery, window);
+
+function getInitialStylePath() {
+    var result = document.getElementsByTagName("head")[0].innerHTML.match(/href=\W([\.\/]*)([\w\/]*?)kendo\.common/i);
+    return result ? result[1] : document.getElementsByTagName("head")[0].innerHTML.match(/href=\W(.*?)styles\/kendo\.common/)[1];
+}
 
 function locatePage(url) {
     var category = "",
@@ -410,7 +427,6 @@ function getNormalizedUrl() {
 }
 
 function initializeNavigation (normalizedUrl) {
-    window.initialRelativePath = document.getElementsByTagName("head")[0].innerHTML.match(/href=\W([\.\/]*)([\w\/]*?)kendo\.common/)[1];
     var loc = /[^\/]+\/[^\/]+?$/.exec(normalizedUrl);
 
     if (loc) {

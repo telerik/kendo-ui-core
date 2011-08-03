@@ -28,7 +28,7 @@ var fs = require("fs"),
         properties: getRegionRegex("properties"),
         methods: getRegionRegex("methods"),
         events: getRegionRegex("events")
-    }
+    },
     spaces = "        ",
     newRow = "\r\n";
 
@@ -159,7 +159,7 @@ function importComponentHelp(exampleHTML, component) {
 
         try {
             var helpSymbol = (helpFiles[component] || "kendo.ui." + component),
-                helpFile = "docs/symbols/" + helpSymbol + ".html",
+                helpFile = "docs/symbols/" + helpSymbol + ".html";
 
             result = fs.readFileSync(helpFile, "utf8");
         } catch (e) {
