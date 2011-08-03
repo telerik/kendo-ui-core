@@ -52,7 +52,7 @@
             });
 
             test("node wrappers", function() {
-                var element = treeviewFromHtml("<ul><li>item  </li></ul>"),
+                var element = treeviewFromHtml("<ul><li>item</li></ul>"),
                     outerWrapper = element.find("li"),
                     wrapper = element.find("div:first");
 
@@ -61,7 +61,7 @@
                 ok(outerWrapper.hasClass("t-last"));
                 ok(wrapper.hasClass("t-top"));
                 equals(wrapper.find("span.t-in").length, 1);
-                equals(wrapper.find("span.t-in").text(), "item  ");
+                equals(wrapper.find("span.t-in").text(), "item");
             });
 
             test("moves arbitrary content in the text wrapper", function() {
@@ -312,7 +312,7 @@
                 var image = $item.find(".t-image");
 
                 equal(image.length, 1);
-                equal(image.attr("src"), "foo");
+                equal(image.attr("src").lastIndexOf("foo"), image.attr("src").length - 3);
             });
 
             test("renders text", function() {
