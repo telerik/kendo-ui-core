@@ -409,24 +409,24 @@ function getNormalizedUrl() {
                    href;
 }
 
-function initializeExamples (normalizedUrl) {
+function initializeNavigation (normalizedUrl) {
     window.initialRelativePath = document.getElementsByTagName("head")[0].innerHTML.match(/href=\W([\.\/]*)([\w\/]*?)kendo\.common/)[1];
     var loc = /[^\/]+\/[^\/]+?$/.exec(normalizedUrl);
 
     if (loc) {
         var url = loc[0].toLowerCase();
 
-        $("#exampleHead, #exampleWrap").toggleClass("nomargin", url == "overview/index.html");
+        $("#navmainWrap").toggleClass("singleColumn", url == "overview/index.html");
 
-        selectCategory($("#categories #" + locatePage(url))[0]);
+        selectCategory($("#topnav #" + locatePage(url))[0]);
 
         var link = $("#nav .t-link[href*='" + url + "']")
             .addClass("t-state-selected");
 
         panelBar.expand(link.parent().parents(".t-item"), false);
     } else {
-        $("#exampleHead, #exampleWrap").addClass("nomargin");
-        selectCategory($("#categories #overview"));
+        $("#navmainWrap").addClass("singleColumn");
+        selectCategory($("#topnav #overview"));
     }
 
     $("#skinSelector").kendoDropDownList({
@@ -436,7 +436,7 @@ function initializeExamples (normalizedUrl) {
                         { text: "Black", control: "Menu", value: "black" }
                     ],
         template: '<span class="thumbLink" href="#">\
-                    <span class="thumb <#= data.text.toLowerCase() #>Thumb" style="background-image: url(<#= initialRelativePath #>img/<#= data.control #>/thumbSprite.png)">\
+                    <span class="thumb <#= data.text.toLowerCase() #>Thumb" style="background-image: url(<#= initialRelativePath #>styles/<#= data.control #>/thumbSprite.png)">\
                     <span class="gloss"></span></span><span class="skinTitle"><#= data.text #></span></span>'
     });
 }
