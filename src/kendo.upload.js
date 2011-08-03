@@ -32,12 +32,14 @@
      * </p>
      * <ol>
      *     <li>For synchronous upload using an HTML form and input</li>
-     *     <li>For async upload using a simple HTML input</li>
+     *     <li>For asynchronous upload using a simple HTML input</li>
      * </ol>
      * <p>
      * The async upload is implemented using the new HTML5 File API,
-     * but it will gracefully degrade and continue to function in legacy browsers.
-     * To support the graceful fallback, the async upload must be placed inside of a configured HTML form.
+     * but it will gracefully degrade and continue to function
+     * in legacy browsers (using a hidden IFRAME). If placed inside a form,
+     * queued and partially uploaded files will be sent synchronously if
+     * the async upload is submitted with the form.
      * </p>
      *
      * <h3>
@@ -45,8 +47,8 @@
      * </h3>
      * @exampleTitle 1. Create a simple HTML form and input element of type "file"
      * @example
-     * <!-- HTML -->
-     * <form method="post" enctype="multi-part/form-data" action="handler.php">
+     * <!-- Kendo will automatically set the proper FORM enctype attribute -->
+     * <form method="post" action="handler.php">
      *     <div>
      *         <input name="files" id="files" type="file" />
      *     </div>
@@ -63,7 +65,7 @@
      * It’s important to note that some type of server-side handler is needed
      * to process and save the uploaded files. There are different server-side
      * techniques for handling file uploads depending on the technology you use.
-     * Please consult the documentation for the server technology that you use
+     * Please consult the documentation for your server technology
      * to understand how to implement a basic file handler.
      * </p>
      *
