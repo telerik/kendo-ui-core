@@ -850,81 +850,50 @@
                     createPoint({ labels: { position: "left" } });
                     sameBox(marker.box, new Box2D(46, -4, 54, 4));
                 });
+
+                // ------------------------------------------------------------
+                module("Line Point / Labels / Template");
+
+                test("renders template", function() {
+                    createPoint({ labels: { template: "${value}%" } });
+                    equals(label.children[0].content, VALUE + "%");
+                });
+
+                test("template has category", function() {
+                    point = new LinePoint(VALUE, { labels: { template: "${category}" } });
+                    point.category = "A";
+                    point.reflow(new Box2D());
+
+                    equals(point.children[1].children[0].content, "A");
+                });
+
+                test("template has dataItem", function() {
+                    point = new LinePoint(VALUE, { labels: { template: "${dataItem.value}" } });
+                    point.dataItem = { value: 1 };
+                    point.reflow(new Box2D());
+
+                    equals(point.children[1].children[0].content, "1");
+                });
+
+                test("template has series", function() {
+                    point = new LinePoint(VALUE, { labels: { template: "${series.name}" } });
+                    point.series = { name: "Value" };
+                    point.reflow(new Box2D());
+
+                    equals(point.children[1].children[0].content, "Value");
+                });
             })();
 
             (function() {
-                var label,
-                    lineChart;
-
-                function PlotAreaStub() { }
-
-                $.extend(PlotAreaStub.prototype, {
-                    axisX: {
-                        getSlot: function(value) {
-                            return new Box2D();
-                        }
-                    },
-                    axisY: {
-                        getSlot: function(categoryIndex) {
-                            return new Box2D();
-                        }
-                    },
-                    options: {
-                        categoryAxis: { }
-                    }
-                });
-
-                // ------------------------------------------------------------
-                module("Line Point / Labels / Templates", {
-                    setup: function() {
-                        plotArea = new PlotAreaStub();
-                        lineChart = new Chart.LineChart(plotArea, {
-                            series: [{
-                                data: [0, 1],
-                                labels: {
-                                    visible: true,
-                                    template: "PointValue: ${ value }|" +
-                                              "Category: ${ category }|" +
-                                              "Series: ${ series[0] }",
-                                    format: "{0:C}"
-                                }
-                            }],
-                            categoryAxis: {
-                                categories: ["A1, A2"]
-                            }
-                        });
-                        point = lineChart.points[0];
-                        label = point.children[1];
-                    }
-                });
-
-                test("sets label template", function() {
-                    equal(label.children[0].content,
-                                        "PointValue: 0|" +
-                                        "Category: A1|" +
-                                        "Series: 0");
-                });
-
-                test("sets point dataItem", function() {
-                    equal(point.options.dataItem.value, 0);
-                });
-
-            });
-
-            (function() {
                 var data = [{
-                        "text": "text1",
-                        "value": 1,
-                        "name": "A1"
-                    },{
-                        "text": "text0",
-                        "value": 0,
-                        "name": "A0"
+                        name: "Category A",
+                        text: "Alpha",
+                        value: 0
                     }],
                     chart;
 
                 // ------------------------------------------------------------
-                module("Line Chart DataSource / Labels / Template", {
+                module("Line Chart / Integration", {
                     setup: function() {
                         $("#container").kendoChart({
                             dataSource: {
@@ -933,11 +902,7 @@
                             seriesDefaults: {
                                 labels: {
                                     visible: true,
-                                    template: "PointValue: ${ value }|" +
-                                              "DataValue: ${ dataItem.value }|" +
-                                              "Text: ${ dataItem.text }|" +
-                                              "Category: ${ category }|" +
-                                              "Series: ${ series[0] }"
+                                    template: "${dataItem.text}"
                                 }
                             },
                             series: [{
@@ -959,23 +924,8 @@
                     }
                 });
 
-                test("Line chart have dataItems", function() {
-                    dataItem = chart.options.series[0].dataItems[0];
-                    equal(dataItem.value, 1);
-                    equal(dataItem.text, "text1");
-                });
-
-                test("sets label template", function() {
-                    equal(label.children[0].content,
-                                        "PointValue: 1|" +
-                                        "DataValue: 1|" +
-                                        "Text: text1|" +
-                                        "Category: A1|" +
-                                        "Series: 1");
-                });
-
-                test("sets point dataItem", function() {
-                    equal(linePoint.options.dataItem.value, 1);
+                test("dataItem sent to label template", function() {
+                    equal(label.children[0].content, "Alpha");
                 });
 
             })();

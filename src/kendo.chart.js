@@ -1911,11 +1911,6 @@
             var barLabel = this;
             ChartElement.fn.init.call(barLabel, options);
 
-            if (barLabel.options.template) {
-                var labelTemplate = baseTemplate(barLabel.options.template);
-                content = labelTemplate(barLabel.options.dataItem);
-            }
-
             barLabel.append(new TextBox(content, barLabel.options));
         },
 
@@ -2969,10 +2964,49 @@
             },
             isVertical: true,
             overlay: GLASS,
-            aboveAxis: true
+            aboveAxis: true,
+            labels: {
+                visible: false
+            }
+        },
+
+        render: function() {
+            var bar = this,
+                value = bar.value,
+                options = bar.options,
+                labels = options.labels,
+                labelText = value;
+
+            if (bar._rendered) {
+                return;
+            } else {
+                bar._rendered = true;
+            }
+
+            if (labels.visible && value) {
+                if (labels.template) {
+                    var labelTemplate = baseTemplate(labels.template);
+                    labelText = labelTemplate({
+                        dataItem: bar.dataItem,
+                        category: bar.category,
+                        value: bar.value,
+                        series: bar.series
+                    });
+                }
+
+                bar.append(
+                    new BarLabel(labelText, deepExtend({
+                            isVertical: options.isVertical,
+                            id: uniqueId()},
+                        options.labels)
+                    )
+                );
+            }
         },
 
         reflow: function(targetBox) {
+            this.render();
+
             var bar = this,
                 children = bar.children,
                 label = children[0];
@@ -3239,10 +3273,7 @@
                 seriesPoints = barChart.seriesPoints[seriesIx],
                 categoryPoints = barChart.categoryPoints[categoryIx],
                 dataItem = series.dataItems ? series.dataItems[categoryIx] : { value: value },
-                labelOptions = deepExtend({
-                    isVertical: options.isVertical,
-                    id: uniqueId()
-                }, series.labels);
+                labelOptions = deepExtend({}, series.labels);
 
             if (isStacked) {
                 if (labelOptions.position == OUTSIDE_END) {
@@ -3255,14 +3286,9 @@
                 opacity: series.opacity,
                 border: series.border,
                 isVertical: options.isVertical,
-                overlay: series.overlay
+                overlay: series.overlay,
+                labels: labelOptions
             });
-
-            if (labelOptions.visible && value) {
-                var label = new BarLabel(value,
-                            deepExtend({ dataItem: dataItem }, labelOptions));
-                bar.append(label);
-            }
 
             var cluster = children[categoryIx];
             if (!cluster) {
@@ -3396,8 +3422,6 @@
             point.value = value;
 
             ViewElement.fn.init.call(point, options);
-
-            point.render();
         },
 
         options: {
@@ -3428,6 +3452,12 @@
                 markerBackground = markers.background,
                 markerBorder = deepExtend({}, markers.border),
                 labelText = point.value;
+
+            if (point._rendered) {
+                return;
+            } else {
+                point._rendered = true;
+            }
 
             if (!defined(markerBorder.color)) {
                 markerBorder.color =
@@ -3478,6 +3508,8 @@
                 isVertical = options.isVertical,
                 aboveAxis = options.aboveAxis,
                 childBox;
+
+            point.render();
 
             point.box = targetBox;
             childBox = targetBox.clone();

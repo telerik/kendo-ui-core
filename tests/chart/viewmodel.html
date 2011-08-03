@@ -1099,11 +1099,12 @@
                     bar,
                     box,
                     rect,
-                    root;
+                    root,
+                    VALUE = 1;
 
                 function createBar(options) {
                     box = new Box2D(0, 0, 100, 100);
-                    bar = new Bar(1, options);
+                    bar = new Bar(VALUE, options);
 
                     root = new Chart.RootElement();
                     root.append(bar);
@@ -1122,7 +1123,7 @@
                 });
 
                 test("sets value", function() {
-                    equals(bar.value, 1);
+                    equals(bar.value, VALUE);
                 });
 
                 test("fills target box", function() {
@@ -1187,6 +1188,42 @@
 
                 test("sets id on rect", function() {
                     ok(rect.style.id.length > 0);
+                });
+
+                // ------------------------------------------------------------
+                module("Bar / Labels / Template");
+
+                test("renders template", function() {
+                    createBar({ labels: { visible: true, template: "${value}%" } });
+                    label = bar.children[0].children[0].children[0];
+                    equals(label.content, VALUE + "%");
+                });
+
+                test("template has category", function() {
+                    bar = new Bar(VALUE, { labels: { visible: true, template: "${category}" } });
+                    bar.category = "A";
+                    bar.reflow(new Box2D());
+                    label = bar.children[0].children[0].children[0];
+
+                    equals(label.content, "A");
+                });
+
+                test("template has dataItem", function() {
+                    bar = new Bar(VALUE, { labels: { visible: true, template: "${dataItem.value}" } });
+                    bar.dataItem = { value: 1 };
+                    bar.reflow(new Box2D());
+                    label = bar.children[0].children[0].children[0];
+
+                    equals(label.content, "1");
+                });
+
+                test("template has series", function() {
+                    bar = new Bar(VALUE, { labels: { visible: true, template: "${series.name}" } });
+                    bar.series = { name: "Value" };
+                    bar.reflow(new Box2D());
+                    label = bar.children[0].children[0].children[0];
+
+                    equals(label.content, "Value");
                 });
 
             })();
