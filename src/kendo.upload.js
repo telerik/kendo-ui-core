@@ -2,35 +2,116 @@
     /**
      * @name kendo.ui.Upload.Description
      *
-     * @section The upload component uses progressive enhancement
-     * to deliver better file uploading experience for both end-users and developers.
-     *
+     * @section
      * <p>
-     * Key features:
+     * The Upload widget uses progressive enhancement to deliver the best possible
+     * uploading experience to users without requiring any extra developer effort.
+     * Upload is packed with features, including:
      * </p>
+     *
      * <ul>
      *    <li>Asynchronous and synchronous (on form submit) file upload</li>
      *    <li>Multiple file selection</li>
-     *    <li>Progress tracking *</li>
-     *    <li>Drag and drop *</li>
-     *    <li>Cancelling upload in progress *</li>
      *    <li>Removing uploaded files</li>
-     *    <li>Standards based, no plug-ins required</li>
+     *    <li>Progress tracking *</li>
+     *    <li>File Drag-and-Drop *</li>
+     *    <li>Cancelling upload in progress *</li>
      * </ul>
-     * * These features will be automatically turned on if available in the browser.
-     * @exampleTitle Enhancing existing &lt;input type="file" /&gt; elements
+     * <p>
+     * * These features are automatically enabled if supported by the browser.
+     * </p>
+     * <p>
+     * Upload is a standards-based widget. No plug-ins required.
+     * </p>
+     *
+     * <h3>
+     * Getting Started
+     * </h3>
+     * <p>
+     * There are two primary ways to configure Upload:
+     * </p>
+     * <ol>
+     *     <li>For synchronous upload using an HTML form and input</li>
+     *     <li>For async upload using a simple HTML input</li>
+     * </ol>
+     * <p>
+     * The async upload is implemented using the new HTML5 File API,
+     * but it will gracefully degrade and continue to function in legacy browsers.
+     * To support the graceful fallback, the async upload must be placed inside of a configured HTML form.
+     * </p>
+     *
+     * <h3>
+     * Configuring for synchronous upload
+     * </h3>
+     * @exampleTitle 1. Create a simple HTML form and input element of type "file"
      * @example
      * <!-- HTML -->
-     * <form method="post">
+     * <form method="post" enctype="multi-part/form-data" action="handler.php">
      *     <div>
      *         <input name="files" id="files" type="file" />
      *     </div>
      * </form>
-     * <script type="text/javascript">
+     *
+     * @exampleTitle 2. Initialize Upload with a jQuery selector
+     * @example
      *    $(document).ready(function() {
      *        $("#files").kendoUpload();
      *    });
-     * </script>
+     *
+     * @section
+     * <p>
+     * It’s important to note that some type of server-side handler is needed
+     * to process and save the uploaded files. There are different server-side
+     * techniques for handling file uploads depending on the technology you use.
+     * Please consult the documentation for the server technology that you use
+     * to understand how to implement a basic file handler.
+     * </p>
+     *
+     * <h3>
+     * Configure for async upload
+     * </h3>
+     * @exampleTitle
+     * 1. Create a simple HTML input of type "file" (no HTML form is required*)
+     * @example
+     * <input name="files" id="files" type="file" />
+     *
+     * @exampleTitle
+     * 2. Initialize Upload and configure async upload end-points
+     *
+     * @example
+     * $("#files).kendoUpload({
+     *     async: {
+     *         saveUrl: "saveHandler.php",
+     *         removeUrl: "removeHandler.php",
+     *         autoUpload: true
+     *     }
+     * });
+     *
+     * @section
+     * <p>
+     * Like synchronous uploads, the async upload requires a server-side handler
+     * to process and save (or remove) the uploaded files. The handlers needs to
+     * accept POST requests. The save action will POST the file upload to the handler
+     * (similar to synchronous uploads). The remove action will POST only the name of
+     * the file that should be removed on the server.
+     * </p>
+     *
+     * <h3>
+     * Configuring Upload behavior
+     * </h3>
+     * <p>
+     * Upload enables most behaviors by default, providing the richest experience possible
+     * depending on browser capabilities. Behaviors can be easily configured, though,
+     * using simple configuration properties. Refer to the Upload demo Configuration
+     * tab for more information on available properties.
+     * </p>
+     * @exampleTitle
+     * Disable Upload default behaviors
+     * @example
+     * $("#upload").kendoUpload({
+     *     multiple: false,
+     *     showFileList: false
+     * });
      */
     var kendo = window.kendo,
         Component = kendo.ui.Component,
