@@ -36,10 +36,15 @@
                             aboveAxis: true
                         },
                         series: {
+                            name: "series",
                             color: RED,
                             labels: {
                                 color: GREEN
                             }
+                        },
+                        category: "category",
+                        dataItem: {
+                            field: "value"
                         }
                     };
                 }
@@ -99,6 +104,42 @@
                 createTooltip({ format: "{0}%" });
                 tooltip.show(dataPointMock);
                 equals(element.text(), "1%");
+            });
+
+            test("renders template", function() {
+                createTooltip({ template: "${value}%" });
+                tooltip.show(dataPointMock);
+                equals(element.text(), "1%");
+            });
+
+            test("renders compiled template", function() {
+                createTooltip({ template: kendo.template("${value}%") });
+                tooltip.show(dataPointMock);
+                equals(element.text(), "1%");
+            });
+
+            test("renders template when format is set", function() {
+                createTooltip({ format: "{0} percent", template: "${value}%" });
+                tooltip.show(dataPointMock);
+                equals(element.text(), "1%");
+            });
+
+            test("template context has category", function() {
+                createTooltip({ template: "${category}" });
+                tooltip.show(dataPointMock);
+                equals(element.text(), "category");
+            });
+
+            test("template context has series", function() {
+                createTooltip({ template: "${series.name}" });
+                tooltip.show(dataPointMock);
+                equals(element.text(), "series");
+            });
+
+            test("template context has dataItem", function() {
+                createTooltip({ template: "${dataItem.field}" });
+                tooltip.show(dataPointMock);
+                equals(element.text(), "value");
             });
 
             test("positions tooltip on top of vertical points located above axis", function() {
