@@ -9,6 +9,7 @@
         DataSource = kendo.data.DataSource,
         baseTemplate = kendo.template,
         format = kendo.format,
+        render1 = kendo.render,
         proxy = $.proxy;
 
     // Constants ==============================================================
@@ -1162,8 +1163,10 @@
                     if (currentSeries.field) {
                         if (dataIdx === 0) {
                             currentSeries.data = [value];
+                            currentSeries.dataItems = [row];
                         } else {
                             currentSeries.data.push(value);
+                            currentSeries.dataItems.push(row);
                         }
                     }
                 }
@@ -1677,8 +1680,12 @@
 
             BoxElement.fn.init.call(textBox, options);
 
+            if (!options.template) {
+                content = options.format ? format(options.format, content) : content
+            }
+
             textBox.append(
-                new Text(options.format ? format(options.format, content) : content,
+                new Text(content,
                     deepExtend({ }, textBox.options, { align: LEFT, vAlign: TOP }))
             );
 
@@ -1691,6 +1698,11 @@
         init: function(content, options) {
             var barLabel = this;
             ChartElement.fn.init.call(barLabel, options);
+
+            if (barLabel.options.template) {
+                var labelTemplate = baseTemplate(barLabel.options.template);
+                content = labelTemplate(barLabel.options.dataItem);
+            }
 
             barLabel.append(new TextBox(content, barLabel.options));
         },
@@ -2227,8 +2239,7 @@
             var majorDivisions = axis.getDivisions(options.majorUnit),
                 currentValue = options.min,
                 align = options.orientation === VERTICAL ? RIGHT : CENTER,
-                labelOptions = deepExtend({ }, options.labels, { align: align }),
-                labelFormat = options.labels.format;
+                labelOptions = deepExtend({ }, options.labels, { align: align });
 
             for (var i = 0; i < majorDivisions; i++) {
                 var text = new TextBox(currentValue, labelOptions);
@@ -2919,15 +2930,15 @@
 
         traverseDataPoints: function(callback) {
             var chart = this,
-            options = chart.options,
-            series = options.series,
-            categories = chart.plotArea.options.categoryAxis.categories || [],
-            categoriesCount = chart.categoriesCount(),
-            categoryIx,
-            seriesIx,
-            value,
-            currentCategory,
-            currentSeries;
+                options = chart.options,
+                series = options.series,
+                categories = chart.plotArea.options.categoryAxis.categories || [],
+                categoriesCount = chart.categoriesCount(),
+                categoryIx,
+                seriesIx,
+                value,
+                currentCategory,
+                currentSeries;
 
             for (categoryIx = 0; categoryIx < categoriesCount; categoryIx++) {
                 for (seriesIx = 0; seriesIx < series.length; seriesIx++) {
@@ -3001,6 +3012,7 @@
                 isStacked = barChart.options.isStacked,
                 seriesPoints = barChart.seriesPoints[seriesIx],
                 categoryPoints = barChart.categoryPoints[categoryIx],
+                dataItem = series.dataItems ? series.dataItems[categoryIx] : { value: value },
                 labelOptions = deepExtend({
                     isVertical: options.isVertical,
                     id: uniqueId()
@@ -3021,7 +3033,8 @@
             });
 
             if (labelOptions.visible && value) {
-                var label = new BarLabel(value, labelOptions);
+                var label = new BarLabel(value,
+                            deepExtend({ dataItem: dataItem }, labelOptions));
                 bar.append(label);
             }
 
@@ -3187,11 +3200,17 @@
                 labels = options.labels,
                 children = point.children,
                 markerBackground = markers.background,
-                markerBorder = deepExtend({}, markers.border);
+                markerBorder = deepExtend({}, markers.border),
+                labelText = point.value;
 
             if (!defined(markerBorder.color)) {
                 markerBorder.color =
                     new Color(markerBackground).brightness(BAR_BORDER_BRIGHTNESS).toHex();
+            }
+
+            if (labels.template) {
+                var labelTemplate = baseTemplate(labels.template);
+                labelText = labelTemplate(options.dataItem);
             }
 
             point.append(
@@ -3205,7 +3224,7 @@
                     border: markerBorder,
                     opacity: markers.opacity
                 }),
-                new TextBox(point.value, deepExtend({
+                new TextBox(labelText, deepExtend({
                     id: uniqueId(),
                     visible: labels.visible,
                     align: CENTER,
@@ -3297,6 +3316,7 @@
                 seriesPoints = chart.seriesPoints[seriesIx],
                 categoryPoints = chart.categoryPoints[categoryIx],
                 stackPoint,
+                dataItem = series.dataItems ? series.dataItems[categoryIx] : { value: value },
                 plotValue = 0;
 
             if (!defined(value) || value === null) {
@@ -3313,7 +3333,8 @@
                     markers: {
                         background: series.color,
                         opacity: series.opacity
-                    }
+                    },
+                    dataItem: dataItem
                 }, series)
             );
 
