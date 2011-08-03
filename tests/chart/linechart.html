@@ -690,8 +690,8 @@
                     root = new Chart.RootElement();
                     root.append(point);
 
-                    marker = point.children[0];
-                    label = point.children[1];
+                    marker = point.marker;
+                    label = point.label;
                 }
 
                 // ------------------------------------------------------------
@@ -787,7 +787,7 @@
                 // ------------------------------------------------------------
                 module("Line Point / Labels", {
                     setup: function() {
-                        createPoint();
+                        createPoint({ labels: { visible: true } });
                     }
                 });
 
@@ -796,36 +796,32 @@
                 });
 
                 test("applies label format", function() {
-                    createPoint({ labels: { format: "{0}%" }});
+                    createPoint({ labels: { visible: true, format: "{0}%" }});
                     equals(label.children[0].content, VALUE + "%");
                 });
 
-                test("labels are not visible by default", function() {
-                    equals(label.options.visible, false);
-                });
-
                 test("sets label color", function() {
-                    createPoint({ labels: { color: "#cf0" }});
+                    createPoint({ labels: { visible: true, color: "#cf0" }});
                     same(label.options.color, "#cf0");
                 });
 
                 test("sets label background", function() {
-                    createPoint({ labels: { background: "#cf0" }});
+                    createPoint({ labels: { visible: true, background: "#cf0" }});
                     same(label.options.background, "#cf0");
                 });
 
                 test("sets label border color", function() {
-                    createPoint({ labels: { border: { color: "#cf0" } }});
+                    createPoint({ labels: { visible: true, border: { color: "#cf0" } }});
                     same(label.options.border.color, "#cf0");
                 });
 
                 test("sets label border width", function() {
-                    createPoint({ labels: { border: { width: 4 } }});
+                    createPoint({ labels: { visible: true, border: { width: 4 } }});
                     same(label.options.border.width, 4);
                 });
 
                 test("sets label font", function() {
-                    createPoint({ labels: { font: "12px comic-sans" }});
+                    createPoint({ labels: { visible: true, font: "12px comic-sans" }});
                     same(label.options.font, "12px comic-sans");
                 });
 
@@ -837,28 +833,32 @@
                     same(label.options.margin.right, 5);
                 });
 
+                test("labels are not visible by default", function() {
+                    createPoint();
+                    equals(typeof label, "undefined");
+                });
+
                 test("sets label visibility", function() {
-                    createPoint({ labels: { visible: false }});
-                    equals(label.options.visible, false);
+                    equals(label.options.visible, true);
                 });
 
                 test("label is positioned above marker", function() {
-                    createPoint({ labels: { position: "above" } });
+                    createPoint({ labels: { visible: true, position: "above" } });
                     sameBox(label.box, new Box2D(41, -20, 59, -4));
                 });
 
                 test("label is positioned below marker", function() {
-                    createPoint({ labels: { position: "below" } });
+                    createPoint({ labels: { visible: true, position: "below" } });
                     sameBox(marker.box, new Box2D(46, -4, 54, 4));
                 });
 
                 test("label is positioned right of marker", function() {
-                    createPoint({ labels: { position: "right" } });
+                    createPoint({ labels: { visible: true, position: "right" } });
                     sameBox(marker.box, new Box2D(46, -4, 54, 4));
                 });
 
                 test("label is positioned left of marker", function() {
-                    createPoint({ labels: { position: "left" } });
+                    createPoint({ labels: { visible: true, position: "left" } });
                     sameBox(marker.box, new Box2D(46, -4, 54, 4));
                 });
 
@@ -866,27 +866,27 @@
                 module("Line Point / Labels / Template");
 
                 test("renders template", function() {
-                    createPoint({ labels: { template: "${value}%" } });
+                    createPoint({ labels: { visible: true, template: "${value}%" } });
                     equals(label.children[0].content, VALUE + "%");
                 });
 
                 test("renders template even when format is set", function() {
-                    createPoint({ labels: { template: "${value}%", format:"{0:C}" } });
+                    createPoint({ labels: { visible: true, template: "${value}%", format:"{0:C}" } });
                     equals(label.children[0].content, VALUE + "%");
                 });
 
                 test("template has category", function() {
-                    createPoint({ labels: { template: "${category}" } });
+                    createPoint({ labels: { visible: true, template: "${category}" } });
                     equals(point.children[1].children[0].content, CATEGORY);
                 });
 
                 test("template has dataItem", function() {
-                    createPoint({ labels: { template: "${dataItem.value}" } });
+                    createPoint({ labels: { visible: true, template: "${dataItem.value}" } });
                     equals(point.children[1].children[0].content, VALUE);
                 });
 
                 test("template has series", function() {
-                    createPoint({ labels: { template: "${series.name}" } });
+                    createPoint({ labels: { visible: true, template: "${series.name}" } });
                     equals(point.children[1].children[0].content, SERIES_NAME);
                 });
             })();
