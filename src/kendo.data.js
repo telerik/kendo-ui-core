@@ -1233,7 +1233,7 @@
                 that._pending = undefined;
                 callback();
             } else {
-                that._pending = { callback: callback, options: options };
+                that._pending = { callback: proxy(callback, that), options: options };
             }
         },
         _dequeueRequest: function() {
@@ -1643,7 +1643,7 @@
             if (take !== undefined) {
                 if (!that._rangeExists(pageSkip, size)) {
                     that.prefetch(pageSkip, take, function() {
-                        if (skip > pageSkip && size < that.total()) {
+                        if (skip > pageSkip && size < that.total() && !that._rangeExists(size, Math.min(size + take, that.total()))) {
                             that.prefetch(size, take, function() {
                                 that.range(skip, take);
                             });
@@ -1652,7 +1652,7 @@
                         }
                     });
                 } else if (pageSkip < skip) {
-                    that.prefetch(skip, take, function() {
+                    that.prefetch(size, take, function() {
                         that.range(skip, take);
                     });
                 }
@@ -1731,7 +1731,8 @@
 
         prefetch: function(skip, take, callback) {
             var that = this,
-                range = { start: skip, end: skip + take, data: [] },
+                size = Math.min(skip + take, that.total()),
+                range = { start: skip, end: size, data: [] },
                 options = {
                     take: take,
                     skip: skip,
@@ -1743,10 +1744,8 @@
                     aggregates: that._aggregates
                 };
 
-            if (!that._rangeExists(skip, skip + take)) {
+            if (!that._rangeExists(skip, size)) {
                 clearTimeout(that._timeout);
-
-                that._ranges.push(range);
 
                 that._timeout = setTimeout(function() {
                     that._queueRequest(options, function() {
@@ -1754,6 +1753,17 @@
                             data: options,
                             success: function (data) {
                                 that._dequeueRequest();
+                                var found = false;
+                                for (var i = 0, len = that._ranges.length; i < len; i++) {
+                                    if (that._ranges[i].start === skip) {
+                                        found = true;
+                                        range = that._ranges[i];
+                                        break;
+                                    }
+                                }
+                                if (!found) {
+                                    that._ranges.push(range);
+                                }
                                 data = that.reader.parse(data);
                                 range.data = that.reader.data(data);
                                 range.end = range.start + range.data.length;
@@ -1764,7 +1774,9 @@
                             }
                         });
                     });
-                }, 100);
+               }, 100);
+            } else if (callback) {
+                callback();
             }
         },
 

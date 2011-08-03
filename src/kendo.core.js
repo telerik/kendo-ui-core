@@ -1377,6 +1377,7 @@
                     if (!mask.length) {
                         mask = $("<div class='t-loading-mask'><span class='t-loading-text'>Loading...</span><div class='t-loading-image'/><div class='t-loading-color'/></div>")
                             .width("100%").height("100%")
+                            .css({top: 0, left:0})
                             .prependTo(container);
                     }
                 } else if (mask) {
