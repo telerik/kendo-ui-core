@@ -402,34 +402,10 @@
         universalSortableDateTime: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         monthYear: "MMMM, yyyy",
         monthDay: "MMMM dd",
-        today: "today",
-        tomorrow: "tomorrow",
-        yesterday: "yesterday",
-        next: "next",
-        last: "last",
-        year: "year",
-        month: "month",
-        week: "week",
-        day: "day",
         am: "AM",
         pm: "PM",
         dateSeparator: "/",
-        timeSeparator: ":",
-        firstDayOfWeek: 0,
-        currencydecimaldigits: 2,
-        currencydecimalseparator: '.',
-        currencygroupseparator: ',',
-        currencygroupsize: 3,
-        currencysymbol: '$',
-        numericdecimaldigits: 2,
-        numericdecimalseparator: '.',
-        numericgroupseparator: ',',
-        numericgroupsize: 3,
-        percentdecimaldigits: 2,
-        percentdecimalseparator: '.',
-        percentgroupseparator: ',',
-        percentgroupsize: 3,
-        percentsymbol: '%'
+        timeSeparator: ":"
     },
     standardFormats = {
         d: culture.shortDate,
@@ -453,12 +429,12 @@
     },
     formatRegExp = /{(\d+)(:[^\}]+)?}/g,
     dateFormatRegExp = /dddd|ddd|dd|d|MMMM|MMM|MM|M|yyyy|yy|HH|H|hh|h|mm|m|fff|ff|f|tt|ss|s|"[^"]*"|'[^']*'/g,
+    standardFormatRegExp =  /^(n|c|p|e)(\d*)$/i,
     EMPTY = "",
     POINT = ".",
     COMMA = ",",
     sharp = "#",
-    zero = "0",
-    standardFormatRegExp =  /^(n|c|p|e)(\d*)$/i;
+    zero = "0";
 
     function pad(number) {
         return number < 10 ? "0" + number : number;
@@ -519,34 +495,13 @@
     }
 
     //number formatting
+
+
     function formatNumber(number, format) {
-        if (number === undefined) {
-            return EMPTY;
-        }
-
-        if (!format) {
-            // toLocaleString() once we have globalization
-            return number.toString();
-        }
-
-        formatAndPrecision = standardFormatRegExp.exec(format);
-
-        var type = "numeric";
-        if (formatAndPrecision) {
-            format = formatAndPrecision[1].toLowerCase();
-            if (format === "c") {
-                type = "currency";
-            } else if (format === "p") {
-                type = "percent";
-            } else {
-                type = "numeric";
-            }
-        }
-
-        var groupSize = culture[type + "groupsize"],
-            groupSeparator = culture[type + "groupseparator"],
-            decimal = culture[type + "decimalseparator"],
-            precision = culture[type + "decimaldigits"],
+        var groupSize = 3,
+            groupSeparator = ",",
+            decimal = ".",
+            precision = 2,
             digit,
             formatAndPrecision,
             negative = number < 0,
@@ -560,17 +515,28 @@
             length,
             pattern,
             ch,
-            percent = culture["percentsymbol"],
-            symbol = culture["currencysymbol"],
+            symbol = "$",
+            percent = "%",
             decimalIndex,
             sharpIndex,
             zeroIndex,
             start = -1,
             end;
 
+        if (number === undefined) {
+            return EMPTY;
+        }
+
+        if (!format) {
+            // toLocaleString() once we have globalization
+            return number.toString();
+        }
+
+        formatAndPrecision = standardFormatRegExp.exec(format);
 
         //standard formatting
         if (formatAndPrecision) {
+            format = formatAndPrecision[1].toLowerCase();
 
             if (formatAndPrecision[2]) {
                 precision = +formatAndPrecision[2];
@@ -1309,7 +1275,6 @@
                     if (!mask.length) {
                         mask = $("<div class='t-loading-mask'><span class='t-loading-text'>Loading...</span><div class='t-loading-image'/><div class='t-loading-color'/></div>")
                             .width("100%").height("100%")
-                            .css({top: 0, left:0})
                             .prependTo(container);
                     }
                 } else if (mask) {
