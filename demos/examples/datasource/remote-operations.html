@@ -24,6 +24,36 @@
         <!-- description -->
         <div id="example" class="t-content">
 
+
+            <div class="configuration">
+                <span class="configHead">Configure</span>
+                <ul class="options">
+                    <li>
+                        <label for="page">Page:</label>
+                        <input type="number" value="1" id="page" min="1" />
+                    </li>
+                    <li>
+                        <label for="order">Order by:</label>
+                        <select id="order" style="width:115px;float:right;">
+                            <option value="Id">Id</option>
+                            <option value="Name">Name</option>
+                            <option value="AverageRating">Average Rating</option>
+                            <option value="ReleaseYear">Release Year</option>
+                        </select>
+                    </li>
+                    <li>
+                        <label for="dir">Direction:</label>
+                        <select id="dir" style="width:115px;float:right;">
+                            <option value="asc">Ascending</option>
+                            <option value="desc">Descending</option>
+                        </select>
+                    </li>
+                    <li>
+                        <button class="t-button" id="apply">Apply</button>
+                    </li>
+                </ul>
+            </div>
+
             <div id="movies-container" class="t-widget t-header t-menu-vertical">
                 <ul id="movies"></ul>
             </div>
@@ -91,35 +121,6 @@
                     $("#dir").kendoDropDownList();
                 });
             </script>
-
-            <div class="configuration">
-                <span class="configHead">Configure</span>
-                <ul class="options">
-                    <li>
-                        <label for="page">Page:</label>
-                        <input type="number" value="1" id="page" min="1" />
-                    </li>
-                    <li>
-                        <label for="order">Order by:</label>
-                        <select id="order" style="width:115px;float:right;">
-                            <option value="Id">Id</option>
-                            <option value="Name">Name</option>
-                            <option value="AverageRating">Average Rating</option>
-                            <option value="ReleaseYear">Release Year</option>
-                        </select>
-                    </li>
-                    <li>
-                        <label for="dir">Direction:</label>
-                        <select id="dir" style="width:115px;float:right;">
-                            <option value="asc">Ascending</option>
-                            <option value="desc">Descending</option>
-                        </select>
-                    </li>
-                    <li>
-                        <button class="t-button" id="apply">Apply</button>
-                    </li>
-                </ul>
-            </div>
 
             <style scoped>
                 #movies-container {
