@@ -114,7 +114,7 @@
 
 .t-alt
 {
-    background-color: #2f2f2f;
+    background-color: #404040;
 }
 
 .t-dropdown-wrap,
@@ -238,6 +238,11 @@ a.t-button.t-state-disabled:hover,
 .t-grid-footer-wrap
 {
     border-color: #262626;
+}
+
+.t-grid-header .t-header
+{
+    font-weight:bold;
 }
 
 .t-grid td
