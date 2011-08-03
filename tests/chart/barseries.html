@@ -9,6 +9,7 @@
     </head>
     <body>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.chart.js"></script>
         <script src="util.js"></script>
         <script type="text/javascript">
@@ -1428,6 +1429,182 @@
 
             })();
 
+            (function() {
+                var Bar = Chart.Bar,
+                    bar,
+                    label,
+                    box,
+                    rect,
+                    root,
+                    VALUE = 1,
+                    CATEGORY = "A",
+                    SERIES_NAME = "series";
+
+                function createBar(options) {
+                    box = new Box2D(0, 0, 100, 100);
+                    bar = new Bar(VALUE, options);
+
+                    bar.category = CATEGORY;
+                    bar.dataItem = { value: VALUE };
+                    bar.series = { name: SERIES_NAME };
+
+                    root = new Chart.RootElement();
+                    root.append(bar);
+
+                    bar.reflow(box);
+                    label = bar.children[0];
+
+                    view = new ViewStub();
+                    bar.getViewElements(view);
+                    rect = view.log.rect[0];
+                }
+
+                module("Bar", {
+                    setup: function() {
+                        createBar();
+                    }
+                });
+
+                test("sets value", function() {
+                    equals(bar.value, VALUE);
+                });
+
+                test("fills target box", function() {
+                    sameBox(bar.box, box);
+                });
+
+                test("renders rectangle", function() {
+                    sameBox(rect, box);
+                });
+
+                test("sets fill color", function() {
+                    same(rect.style.fill, bar.options.color);
+                });
+
+                test("sets default normalAngle", function() {
+                    same(rect.style.normalAngle, 0);
+                });
+
+                test("sets default border color based on color", function() {
+                    createBar({ color: "#cf0" });
+                    equals(rect.style.stroke, "#8fb300");
+                });
+
+                test("does not change border color if set", function() {
+                    createBar({ border: { color: "" } });
+                    equals(view.log.rect[0].style.stroke, "");
+                });
+
+                test("sets normalAngle for horizontal bars", function() {
+                    createBar({ isVertical: false });
+                    same(rect.style.normalAngle, 90);
+                });
+
+                test("sets stroke color", function() {
+                    createBar({ border: { color: "red", width: 1 } });
+                    same(rect.style.stroke, bar.options.border.color);
+                });
+
+                test("sets stroke width", function() {
+                    createBar({ border: { color: "red", width: 1 } });
+                    same(rect.style.strokeWidth, bar.options.border.width);
+                });
+
+                test("sets fill opacity", function() {
+                    createBar({ opacity: 0.5 });
+                    same(rect.style.fillOpacity, bar.options.opacity);
+                });
+
+                test("sets stroke opacity", function() {
+                    createBar({ opacity: 0.5 });
+                    same(rect.style.strokeOpacity, bar.options.opacity);
+                });
+
+                test("generates id", function() {
+                    ok(bar.options.id.length > 0);
+                });
+
+                test("registers id with root", function() {
+                    createBar();
+                    ok(root.idMap[bar.options.id] === bar);
+                });
+
+                test("sets id on rect", function() {
+                    ok(rect.style.id.length > 0);
+                });
+
+                // ------------------------------------------------------------
+                module("Bar / Labels / Template");
+
+                test("renders template", function() {
+                    createBar({ labels: { visible: true, template: "${value}%" } });
+                    equals(label.children[0].children[0].content, VALUE + "%");
+                });
+
+                test("template has category", function() {
+                    createBar({ labels: { visible: true, template: "${category}" } });
+                    equals(label.children[0].children[0].content, CATEGORY);
+                });
+
+                test("template has dataItem", function() {
+                    createBar({ labels: { visible: true, template: "${dataItem.value}" } });
+                    equals(label.children[0].children[0].content, VALUE);
+                });
+
+                test("template has series", function() {
+                    createBar({ labels: { visible: true, template: "${series.name}" } });
+                    equals(label.children[0].children[0].content, SERIES_NAME);
+                });
+
+            })();
+
+            (function() {
+                var data = [{
+                        name: "Category A",
+                        text: "Alpha",
+                        value: 10
+                    }],
+                    chart,
+                    label;
+
+                // ------------------------------------------------------------
+                module("Bar Chart / Integration", {
+                    setup: function() {
+                        $("#container").kendoChart({
+                            dataSource: {
+                                data: data
+                            },
+                            seriesDefaults: {
+                                labels: {
+                                    visible: true,
+                                    template: "${dataItem.text}"
+                                }
+                            },
+                            series: [{
+                                name: "Value",
+                                type: "bar",
+                                field: "value"
+                            }],
+                            categoryAxis: {
+                                field: "name"
+                            }
+                        });
+
+                        chart = $("#container").data("kendoChart");
+                        label = chart._plotArea.charts[0].points[0].children[0];
+                        console.log(label);
+                    },
+                    teardown: function() {
+                        $("#container").empty();
+                    }
+                });
+
+                test("dataItem sent to label template", function() {
+                    equal(label.children[0].children[0].content, "Alpha");
+                });
+
+            })();
+
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>
@@ -1438,5 +1615,7 @@
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
 
+        <div id="container">
+        </div>
     </body>
 </html>
