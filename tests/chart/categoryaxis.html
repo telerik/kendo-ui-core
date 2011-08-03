@@ -67,6 +67,18 @@
                          ["Foo", "Bar"]);
                 });
 
+                test("labels have set template", 1, function() {
+                    createCategoryAxis({
+                        labels: {
+                            template: "|${ data.value }|"
+                        }
+                    });
+
+                    categoryAxis.getViewElements(view);
+
+                    equals(view.log.text[0].content, "|Foo|");
+                });
+
                 test("labels have set color", 1, function() {
                     createCategoryAxis({
                         labels: {

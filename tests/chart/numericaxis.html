@@ -365,6 +365,19 @@
                     equals(view.log.rect[0].style.fill, "#f0f");
                 });
 
+                test("labels have set template", 1, function() {
+                    numericAxis = new Chart.NumericAxis(0, 1, {
+                        labels: {
+                            template: "|${ data.value }|"
+                        }
+                    });
+
+                    numericAxis.reflow(chartBox);
+                    numericAxis.getViewElements(view);
+
+                    equals(view.log.text[0].content, "|0|");
+                });
+
                 test("labels are distributed vertically", function() {
                     numericAxis.getViewElements(view);
 

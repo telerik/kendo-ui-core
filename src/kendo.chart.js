@@ -2239,10 +2239,16 @@
             var majorDivisions = axis.getDivisions(options.majorUnit),
                 currentValue = options.min,
                 align = options.orientation === VERTICAL ? RIGHT : CENTER,
-                labelOptions = deepExtend({ }, options.labels, { align: align });
+                labelOptions = deepExtend({ }, options.labels, { align: align }),
+                labelText;
 
             for (var i = 0; i < majorDivisions; i++) {
-                var text = new TextBox(currentValue, labelOptions);
+                if (labelOptions.template) {
+                    var labelTemplate = baseTemplate(labelOptions.template);
+                    labelText = labelTemplate({ value: currentValue });
+                }
+
+                var text = new TextBox(labelText || currentValue, labelOptions);
 
                 axis.append(text);
 
@@ -2509,8 +2515,14 @@
                 labelOptions = deepExtend({ }, options.labels, { align: align });
 
             for (var i = 0; i < options.categories.length; i++) {
-                var label = options.categories[i];
-                axis.append(new TextBox(label, labelOptions));
+                var content = options.categories[i];
+
+                if (labelOptions.template) {
+                    var labelTemplate = baseTemplate(labelOptions.template);
+                    content = labelTemplate({ value: content });
+                }
+
+                axis.append(new TextBox(content, labelOptions));
             }
         },
 
@@ -3050,8 +3062,8 @@
 
             if (isStacked) {
                 var stackWrap = cluster.children[0],
-                positiveStack,
-                negativeStack;
+                    positiveStack,
+                    negativeStack;
 
                 if (!stackWrap) {
                     stackWrap = new ChartElement();
