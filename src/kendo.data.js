@@ -1117,7 +1117,7 @@
          */
         read: function(additionalData) {
             var that = this,
-                options = extend(additionalData, {
+                options = extend({
                     take: that.take(),
                     skip: that.skip(),
                     page: that.page(),
@@ -1126,7 +1126,7 @@
                     filter: that._filter,
                     group: that._group,
                     aggregates: that._aggregates
-                });
+                }, additionalData);
 
             that._queueRequest(options, function() {
                 that.trigger(REQUESTSTART);
@@ -1143,17 +1143,17 @@
             var that = this;
             if (!that._requestInProgress) {
                 that._requestInProgress = true;
-                that._pending = null;
+                that._pending = undefined;
                 callback();
             } else {
-                that._pending = options;
+                that._pending = { callback: callback, options: options };
             }
         },
         _dequeueRequest: function() {
             var that = this;
             that._requestInProgress = false;
             if (that._pending) {
-                that.read(that._pending);
+                that._queueRequest(that._pending.options, that._pending.callback);
             }
         },
         update: function(id, values) {
@@ -1246,7 +1246,6 @@
             }
 
             that.modelSet.refresh(data);
-
             that.trigger(CHANGE);
         },
 
@@ -1547,7 +1546,6 @@
             }
 
             if (take !== undefined) {
-
                 if (!that._rangeExists(pageSkip, size)) {
                     that.prefetch(pageSkip, take, function() {
                         if (skip > pageSkip && size < that.total()) {
@@ -1559,17 +1557,11 @@
                         }
                     });
                 } else if (pageSkip < skip) {
-                    that.prefetch(size, take, function() {
+                    that.prefetch(skip, take, function() {
                         that.range(skip, take);
                     });
                 }
             }
-        },
-
-        _currentPage: function() {
-            var that = this,
-                take = that.take();
-            return Math.max(Math.round(that.skip() / take), 0) * take;
         },
 
         fetchNextPage: function() {
@@ -1586,6 +1578,7 @@
             var that = this,
                 take = that.take(),
                 skip = Math.max(Math.max(Math.floor(that.skip() / take), 0) * take - take,0);
+
             that.prefetch(skip, take);
         },
 
@@ -1657,22 +1650,25 @@
 
             if (!that._rangeExists(skip, skip + take)) {
                 clearTimeout(that._timeout);
+
+                that._ranges.push(range);
+
                 that._timeout = setTimeout(function() {
-                    that._ranges.push(range);
                     that._queueRequest(options, function() {
-                    that.transport.read({
-                        data: options,
-                        success: function (data) {
-                            that._dequeueRequest();
-                            data = that.reader.parse(data);
-                            range.data = that.reader.data(data);
-                            range.end = range.start + range.data.length;
-                            that._ranges.sort( function(x, y) { return x.start - y.start; } );
-                            if (callback) {
-                                callback();
+                        that.transport.read({
+                            data: options,
+                            success: function (data) {
+                                that._dequeueRequest();
+                                data = that.reader.parse(data);
+                                range.data = that.reader.data(data);
+                                range.end = range.start + range.data.length;
+                                that._ranges.sort( function(x, y) { return x.start - y.start; } );
+                                if (callback) {
+                                    callback();
+                                }
                             }
-                        }
-                    })});
+                        });
+                    });
                 }, 100);
             }
         },

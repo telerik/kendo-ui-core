@@ -85,12 +85,13 @@
                 dataSource = that.dataSource,
                 rowHeight = that.itemHeight,
                 skip = dataSource.skip() || 0,
+                start = that.rangeStart || skip,
                 height = that.element.innerHeight(),
                 isScrollingUp = !!(that._scrollbarTop && that._scrollbarTop > scrollTop),
                 firstItemIndex = Math.max(Math.floor(scrollTop / rowHeight), 0),
                 lastItemIndex = Math.max(firstItemIndex + Math.floor(height / rowHeight), 0);
 
-            that._scrollTop = scrollTop - (skip * rowHeight);
+            that._scrollTop = scrollTop - (start * rowHeight);
             that._scrollbarTop = scrollTop;
 
             if (!that._fetch(firstItemIndex, lastItemIndex, isScrollingUp)) {
@@ -102,28 +103,29 @@
             var that = this,
                 dataSource = that.dataSource,
                 itemHeight = that.itemHeight,
-                skip = dataSource.skip() || 0,
                 take = dataSource.take(),
-                originalSkip = Math.max(Math.round(skip / take), 0) * take,
+                rangeStart = that.rangeStart || dataSource.skip() || 0,
+                currentSkip = Math.floor(firstItemIndex / take) * take,
                 fetching = false,
                 prefetchAt = 0.33;
 
-            if (firstItemIndex < skip) {
+
+            if (firstItemIndex < rangeStart) {
                 fetching = true;
-                skip = Math.max(0, lastItemIndex - take);
-                that._scrollTop = (firstItemIndex - skip) * itemHeight;
-                that._page(skip, take);
-            } else if (lastItemIndex >= skip + take && !scrollingUp) {
+                rangeStart = Math.max(0, lastItemIndex - take);
+                that._scrollTop = (firstItemIndex - rangeStart) * itemHeight;
+                that._page(rangeStart, take);
+            } else if (lastItemIndex >= rangeStart + take && !scrollingUp) {
                 fetching = true;
-                skip = firstItemIndex;
+                rangeStart = firstItemIndex;
                 that._scrollTop = itemHeight;
-                that._page(skip, take);
+                that._page(rangeStart, take);
             } else {
-                if (firstItemIndex < skip + take * prefetchAt && firstItemIndex > take * prefetchAt) {
-                    dataSource.fetchPrevPage();
+                if (firstItemIndex < currentSkip + take * prefetchAt && firstItemIndex > take * prefetchAt) {
+                    dataSource.prefetch(currentSkip - take, take);
                 }
-                if (lastItemIndex > skip + take * prefetchAt) {
-                    dataSource.fetchNextPage();
+                if (lastItemIndex > currentSkip + take * prefetchAt) {
+                    dataSource.prefetch(currentSkip + take, take);
                 }
             }
             return fetching;
@@ -134,6 +136,8 @@
                 dataSource = that.dataSource;
 
             clearTimeout(that._timeout);
+
+            that.rangeStart = skip;
 
             if (dataSource.inRange(skip, take)) {
                 dataSource.range(skip, take);
@@ -158,7 +162,7 @@
 
             totalHeight = that.dataSource.total() * itemHeight;
 
-            for (idx = 0; idx < Math.floor(totalHeight / maxHeight); idx++) {
+            for (idx = 0; idx < Math.round(totalHeight / maxHeight); idx++) {
                 html += '<div style="width:1px;height:' + maxHeight + 'px"></div>';
             }
 
