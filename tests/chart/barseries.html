@@ -1541,6 +1541,11 @@
                     equals(label.children[0].children[0].content, VALUE + "%");
                 });
 
+                test("renders template even when format is set", function() {
+                    createBar({ labels: { visible: true, template: "${value}%", format:"{0:C}" } });
+                    equals(label.children[0].children[0].content, VALUE + "%");
+                });
+
                 test("template has category", function() {
                     createBar({ labels: { visible: true, template: "${category}" } });
                     equals(label.children[0].children[0].content, CATEGORY);

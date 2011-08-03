@@ -795,6 +795,11 @@
                     equals(label.children[0].content, VALUE);
                 });
 
+                test("applies label format", function() {
+                    createPoint({ labels: { format: "{0}%" }});
+                    equals(label.children[0].content, VALUE + "%");
+                });
+
                 test("labels are not visible by default", function() {
                     equals(label.options.visible, false);
                 });
@@ -862,6 +867,11 @@
 
                 test("renders template", function() {
                     createPoint({ labels: { template: "${value}%" } });
+                    equals(label.children[0].content, VALUE + "%");
+                });
+
+                test("renders template even when format is set", function() {
+                    createPoint({ labels: { template: "${value}%", format:"{0:C}" } });
                     equals(label.children[0].content, VALUE + "%");
                 });
 
