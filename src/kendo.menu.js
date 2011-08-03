@@ -2,10 +2,16 @@
     /**
      * @name kendo.ui.Menu.Description
      *
-     * @section The menu component initializes hierarchical
-     * data as a multiple level drop down menu.
+     * @section 
+     *  <p>
+     *      The Menu widget displays hierarchical data as a multi-level menu. Menus provide 
+     *      rich styling for unordered lists of items, and can be used for both navigation and 
+     *      executing JavaScript commands. Items can be defined and initialized from HTML, or 
+     *      the rich Menu API can be used to add and remove items.
+     *  </p>
      *
-     * @exampleTitle Creating a menu from existing HTML
+     *  <h3>Getting Started</h3>
+     * @exampleTitle Create a simple HTML hierarchical list of items
      * @example
      * <ul id="menu">
      *     <li>Item 1
@@ -17,9 +23,51 @@
      *     <li>Item 2</li>
      * </ul>
      *
-     * @exampleTitle Menu initialization
+     * @exampleTitle Initialize Kendo Menu using jQuery selector
      * @example
      * var menu = $("#menu").kendoMenu();
+     *
+     * @section
+     *  <h3>Customizing Menu Animations</h3>
+     *  <p>
+     *      By default, the Menu uses a slide animation to expand and reveal sub-items as the 
+     *      mouse hovers. Animations can be easily customized using configuration properties, changing 
+     *      the animation style and delay. Menu items can also be configured to open on click instead of on hover.
+     *  </p>
+     *
+     * @exampleTitle Changing Menu animation and open behavior
+     * @example
+     * $("#menu").kendoMenu({
+	 *      animation: {
+	 *        open : {effects: fadeIn},
+	 *        hoverDelay: 500
+	 *      },
+	 *      openOnClick: true
+     *  });
+     *
+     *  @section
+     *   <h3>Dynamically configuring Menu items</h3>
+     *   <p>
+     *          The Menu API provides several methods for dynamically adding or removing Items. 
+     *          To add items, provide the new item as a JSON object along with a reference item that 
+     *          will be used to determine the placement in the hierarchy.
+     *  </p>
+     *  <br/>
+     *  <p>
+     *          A reference item is simply a target Menu Item HTML element that already exists in 
+     *          the Menu. Any valid jQuery selector can be used to obtain a reference to the target 
+     *          item. For examples, see the <a href="../menu/api.html" title="Menu API demos">Menu API demos</a>.
+     *          Removing an item only requires a reference to the target element that should be removed.
+     *  </p>
+     * @exampleTitle Dynamically add a new root Menu item
+     * @example
+     *  var menu = $("#menu").kendoMenu().data("kendoMenu");
+     *
+     *  menu.insertAfter(
+	 *      { text: "New Menu Item" },
+	 *      menu.element.children("li:last")
+     *  );
+     *
      */
     var kendo = window.kendo,
         ui = kendo.ui,
