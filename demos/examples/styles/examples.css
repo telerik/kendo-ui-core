@@ -1300,7 +1300,8 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
 .details-list dt:nth-child(4n+1),
 .details-list dd:nth-child(4n+2)
 {
-    background-color: #fff;
+    background-color: #fff; 
+    min-height: 1.25em;
 }
 
 /*overview page*/
