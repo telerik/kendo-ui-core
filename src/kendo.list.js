@@ -150,6 +150,7 @@
             var that = this,
                 ul = that.ul,
                 zIndex = "auto",
+                borders,
                 options = that.options,
                 wrapper = that.wrapper;
 
@@ -168,11 +169,10 @@
                 close: options.close
             });
 
-            var spacing = (parseInt(ul.css('border-left-width'), 10) || 0) +
-                          (parseInt(ul.css('border-right-width'), 10) || 0);
+            borders = (parseInt(ul.css('border-left-width'), 10) || 0) + (parseInt(ul.css('border-right-width'), 10) || 0);
 
             ul.css({
-                width: (wrapper.innerWidth() - spacing),
+                width: wrapper.outerWidth() - borders,
                 zIndex: zIndex
             });
         },

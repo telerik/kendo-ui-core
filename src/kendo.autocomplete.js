@@ -154,8 +154,6 @@
 
             that.wrapper = that._focused = that.element;
 
-            that._popup();
-
             that._accessors();
 
             that.dataSource = DataSource.create(that.options.dataSource || {}).bind(CHANGE, proxy(that.refresh, that));
@@ -198,8 +196,7 @@
                     }
                 });
 
-
-            that.ul.width(that.element.width());
+            that._popup();
         },
 
         options: {
