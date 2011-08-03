@@ -7,39 +7,125 @@
     /**
      * @name kendo.data.DataSource.Description
      *
-     * @section The DataSource component is an abstraction for using local (arrays of JavaScript objects) or remote (XML, JSON, JSONP) data.
-     * It fully supports the CRUD (Create, Read, Update and Destroy) data operations. The DataSource also provides means to sort, page, filter, group and aggregate (both locally and server side).
-     * @exampleTitle Creating a DataSource bound to local data (array of JavaScript objects)
+     * @section 
+     *  <p>
+     *      The DataSource component is an abstraction for using local (arrays of JavaScript objects) or 
+     *      remote (XML, JSON, JSONP) data. It fully supports CRUD (Create, Read, Update, Destroy) data 
+     *      operations and provides both local and server-side support for Sorting, Paging, Filtering, Grouping, and Aggregates.
+     *  </p>
+     *  <p>
+     *      It is a powerful piece of the Kendo UI Framework, dramatically simplifying data binding and data operations.
+     *  </p>
+     *  <h3>Getting Started</h3>
+     *
+     * @exampleTitle Creating a DataSource bound to local data
      * @example
      * var movies = [ {
-    *       title: "Star Wars: A New Hope",
-    *       year: 1977
-    *    }, {
-    *      title: "Star Wars: The Empire Strikes Back",
-    *      year: 1980
-    *    }, {
-    *      title: "Star Wars: Return of the Jedi",
-    *      year: 1983
-    *    }
-    * ];
-    * var localDataSource = new kendo.data.DataSource(movies);
-    * @exampleTitle Binding to remote data service (Twitter)
-    * @example
-    *var dataSource = new kendo.data.DataSource({
-    *    transport: {
-    *        read: {
-    *            url: "http://search.twitter.com/search.json", // the remove service url
-    *            dataType: "jsonp", // JSONP (JSON with padding) is required for cross-domain AJAX
-    *            data: {
-    *                q: "html5" //additional parameters sent to the remote service
-    *            }
-    *        }
-    *    },
-    *    schema: { // describe the result format
-    *        data: "results" // the data which the data source will be bound to is in the "results" field
-    *    }
-    *});
-    */
+     *       title: "Star Wars: A New Hope",
+     *       year: 1977
+     *    }, {
+     *      title: "Star Wars: The Empire Strikes Back",
+     *      year: 1980
+     *    }, {
+     *      title: "Star Wars: Return of the Jedi",
+     *      year: 1983
+     *    }
+     * ];
+     * var localDataSource = new kendo.data.DataSource({data: movies});
+     * @exampleTitle Creating a DataSource bound to a remote data service (Twitter)
+     * @example
+     *var dataSource = new kendo.data.DataSource({
+     *    transport: {
+     *        read: {
+     *            url: "http://search.twitter.com/search.json", // the remove service url
+     *            dataType: "jsonp", // JSONP (JSON with padding) is required for cross-domain AJAX
+     *            data: {
+     *                q: "html5" //additional parameters sent to the remote service
+     *            }
+     *        }
+     *    },
+     *    schema: { // describe the result format
+     *        data: "results" // the data which the data source will be bound to is in the "results" field
+     *    }
+     *});
+     * @section
+     *  <h3>Binding UI widgets to DataSource</h3>
+     *  <p>
+     *      Many Kendo UI widgets support data binding, and the Kendo UI DataSource is an ideal 
+     *      binding source for both local and remote data. A DataSource can be created in-line 
+     *      with other UI widget configuration settings, or a shared DataSource can be created 
+     *      to enable multiple UI widgets to bind to the same, observable data collection.
+     *  </p>
+     * @exampleTitle Creating a local DataSource in-line with UI widget configuration
+     * @example
+     *  $("#chart").kendoChart({
+	 *      title: {
+	 *	        text: "Employee Sales"
+	 *      },
+	 *      dataSource: new kendo.data.DataSource({
+	 *          data: [
+	 *          {
+     *              employee: "Joe Smith",
+     *              sales: 2000
+     *          },
+     *          {
+     *              employee: "Jane Smith",
+     *              sales: 2250
+     *          },
+     *          {
+     *              employee: "Will Roberts",
+     *              sales: 1550
+     *          }]			
+	 *      }),
+     *      series:[{
+	 *          type: "line",
+     *          field: "sales",
+     *          name: "Sales in Units"
+	 *      }],
+	 *      categoryAxis:{
+     *          field: "employee"
+	 *      }
+	 *  });
+     * @exampleTitle Creating and binding to a sharable remote DataSource
+     * @example
+     *  var sharableDataSource = new kendo.data.DataSource({
+	 *      transport: {
+	 *          read: {
+     *              url: "data-service.json",
+     *              dataType: "json"
+	 *          }
+	 *      }	
+     *  });
+     *
+     *  //Bind two UI widgets to same DataSource
+     *  $("#chart").kendoChart({
+	 *      title: {
+     *          text: "Employee Sales"
+	 *      },
+	 *      dataSource: sharableDataSource,
+	 *      series:[{
+     *          field: "sales",
+     *          name: "Sales in Units"
+	 *      }],
+	 *      categoryAxis:{
+     *          field: "employee"
+	 *      }
+     *  });
+     *
+     *  $("#grid").kendoGrid({
+	 *      dataSource: sharableDataSource,
+	 *          columns: [
+	 *          {
+     *              field: "employee",
+     *              title: "Employee"
+	 *          },
+     *          {
+     *              field: "sales",
+     *              title: "Sales",
+     *              template: '<#= kendo.toString(sales, "N0") #>'
+	 *      }]
+     *  });
+     */
     var extend = $.extend,
         proxy = $.proxy,
         isFunction = $.isFunction,
