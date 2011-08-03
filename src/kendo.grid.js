@@ -120,8 +120,8 @@
                 rangeStart = firstItemIndex;
                 that._scrollTop = itemHeight;
                 that._page(rangeStart, take);
-            } else {
-                if (firstItemIndex < currentSkip + take * prefetchAt && firstItemIndex > take * prefetchAt) {
+            } else if (!that._fetching) {
+                if (firstItemIndex < (currentSkip + take) - take * prefetchAt && firstItemIndex > take) {
                     dataSource.prefetch(currentSkip - take, take);
                 }
                 if (lastItemIndex > currentSkip + take * prefetchAt) {
@@ -136,7 +136,7 @@
                 dataSource = that.dataSource;
 
             clearTimeout(that._timeout);
-
+            that._fetching = true;
             that.rangeStart = skip;
 
             if (dataSource.inRange(skip, take)) {
@@ -158,6 +158,7 @@
             kendo.ui.progress(that.wrapper, false);
             clearTimeout(that._timeout);
 
+            that._fetching = false;
             itemHeight = that.itemHeight = that.options.itemHeight() || 0;
 
             totalHeight = that.dataSource.total() * itemHeight;

@@ -435,6 +435,14 @@
                 equal(result[15].OrderID, 45);
                 equal(dataSource._ranges.length, 2);
             });
+
+            test("prefetch multiple request to the last not full page does not add multiple ranges", function () {
+                var dataSource = remoteDataSource();
+                dataSource.prefetch(dataSource.total() - 4, 16);
+                dataSource.prefetch(dataSource.total() - 4, 16);
+                dataSource.prefetch(dataSource.total() - 4, 16);
+                equal(dataSource._ranges.length, 1);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
