@@ -224,6 +224,22 @@
             test("group separators applied every n digits", function() {
                 equal(toString(123456789, "C"), "$123,456,789.00");
             });
+
+            test("P toString", function() {
+                var number = 0.00099;
+                equal(toString(number, "P"), "0.10 %");
+            });
+
+            test("P0 toString", function() {
+                var number = 0.1;
+                equal(toString(number, "P0"), "10 %");
+            });
+
+            test("P3 negative toString", function() {
+                var number = -1.30;
+                equal(toString(number, "P3"), "-130.000 %");
+            });
+
         </script>
     </body>
 </html>

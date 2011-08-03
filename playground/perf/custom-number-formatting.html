@@ -22,9 +22,6 @@
                 .add("Kendo custom number formatting: #,###.00", function() {
                     kendo.toString(1234.567, "#,###.00");
                 })
-                .add("Kendo number formatting: n2", function() {
-                    kendo.toString(1234.567, "n2");
-                })
                 .on("complete", function() {
                     var message = "<div>User agent: " + navigator.userAgent;
                     message += "<table><tr><th>Position</th><th>Contender</th><th>Ops/sec (higher is better)</th></tr>";
