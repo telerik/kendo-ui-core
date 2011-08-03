@@ -3474,32 +3474,37 @@
                 });
             }
 
-            point.append(
-                new ShapeElement({
-                    id: uniqueId(),
-                    visible: markers.visible,
-                    type: markers.type,
-                    width: markers.size,
-                    height: markers.size,
-                    background: markerBackground,
-                    border: markerBorder,
-                    opacity: markers.opacity
-                }),
-                new TextBox(labelText, deepExtend({
-                    id: uniqueId(),
-                    visible: labels.visible,
-                    align: CENTER,
-                    vAlign: CENTER,
-                    margin: {
-                        left: 5,
-                        right: 5
-                    }
-                }, labels))
-            );
+            point.marker = new ShapeElement({
+                id: uniqueId(),
+                visible: markers.visible,
+                type: markers.type,
+                width: markers.size,
+                height: markers.size,
+                background: markerBackground,
+                border: markerBorder,
+                opacity: markers.opacity
+            });
+
+            point.append(point.marker);
+
+            if (labels.visible) {
+                point.label = new TextBox(labelText,
+                    deepExtend({
+                        id: uniqueId(),
+                        align: CENTER,
+                        vAlign: CENTER,
+                        margin: {
+                            left: 5,
+                            right: 5
+                        }
+                    }, labels)
+                );
+                point.append(point.label);
+            }
         },
 
         markerBox: function() {
-            return this.children[0].box;
+            return this.marker.box;
         },
 
         reflow: function(targetBox) {
@@ -3528,35 +3533,37 @@
                 }
             }
 
-            var marker = point.children[0];
-            marker.reflow(childBox);
-
+            point.marker.reflow(childBox);
             point.reflowLabel(childBox);
         },
 
         reflowLabel: function(box) {
             var point = this,
                 options = point.options,
-                marker = point.children[0],
-                label = point.children[1],
+                marker = point.marker,
+                label = point.label,
                 edge = options.labels.position;
 
-            edge = edge === ABOVE ? TOP : edge;
-            edge = edge === BELOW ? BOTTOM : edge;
+            if (label) {
+                edge = edge === ABOVE ? TOP : edge;
+                edge = edge === BELOW ? BOTTOM : edge;
 
-            label.reflow(box);
-            label.box.alignTo(marker.box, edge);
-            label.reflow(label.box);
+                label.reflow(box);
+                label.box.alignTo(marker.box, edge);
+                label.reflow(label.box);
+            }
         },
 
         getViewElements: function(view) {
             var element = this,
-                children = element.children,
-                marker = children[0],
-                label = children[1];
+                marker = element.marker,
+                label = element.label;
 
             element.registerId(marker.options.id);
-            element.registerId(label.options.id);
+
+            if (label) {
+                element.registerId(label.options.id);
+            }
 
             return ChartElement.fn.getViewElements.call(element, view);
         }
