@@ -137,6 +137,7 @@
                         }
                     });
 
+                draggable._startDrag({ currentTarget: span[0] });
                 draggable._stop({type: "mouseup"});
 
                 ok(dragEndWasCalled);
