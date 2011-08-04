@@ -160,7 +160,7 @@
 
             if (that.visible()) {
 
-                if(that.element.data("animating") || that.trigger(CLOSE)) {
+                if (that.trigger(CLOSE)) {
                     return;
                 }
 
