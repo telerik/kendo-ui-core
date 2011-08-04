@@ -3090,8 +3090,7 @@
         },
 
         render: function() {
-            var chart = this,
-                options = chart.options;
+            var chart = this;
 
             chart.traverseDataPoints(proxy(chart.addValue, chart));
         },
