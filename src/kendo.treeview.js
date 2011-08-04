@@ -576,6 +576,9 @@
                 collapse = animationSettings.collapse,
                 hasCollapseAnimation = collapse && 'effects' in collapse;
 
+            if (contents.data("animating"))
+                return;
+
             if (!isExpanding) {
                 animation = hasCollapseAnimation ? collapse
                                     : extend({ reverse: true }, animation, { show: false, hide: true });
