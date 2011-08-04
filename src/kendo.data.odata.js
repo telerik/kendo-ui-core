@@ -29,7 +29,7 @@
                     jsonp: false // to prevent jQuery from adding the jsonpCallback in the query string - we will add it ourselves
                 },
                 dialect: function(options) {
-                    var result = ["$format=json", "$inlinecount=allpages", "$callback=callback"]
+                    var result = ["$format=json", "$inlinecount=allpages", "$callback=callback"],
                         data = options || {};
 
                     if ("skip" in data) {
