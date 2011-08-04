@@ -27,28 +27,22 @@
         <div id="example" class="t-content">
             <div class="configuration">
                 <span class="infoHead">Information</span>
-                <p>
-                    Start typing a movie title in the AutoComplete (minimum 3 characters) to open it.
-                </p>
+                <p>Start typing a movie title in the AutoComplete (minimum 3 characters) to open it. </p>
             </div>
-            Search Netflix for a movie title (minimum 3 characters):
-            <input id="titles" />
 
-            <script id="scriptTemplate" type="text/x-kendo-template">
-                <# if (data.BoxArt.SmallUrl) { #>
-                    <img src="${ data.BoxArt.SmallUrl }" alt="${ data.Name }" />Title:${ data.Name }, Year: ${ data.Name }
-                <# } else { #>
-                    <img alt="${ data.Name }" />Title:${ data.Name }, Year: ${ data.Name }
-                <# } #>
-            </script>
+            <label>Search Netflix (at least 3 characters): <input id="titles" /></label>
 
-            <script type="text/javascript">
+            <script>
                 $(document).ready(function() {
                     $("#titles").kendoAutoComplete({
                         minLength: 3,
                         dataTextField: "Name",
                         dataValueField: "Id",
-                        template: $("#scriptTemplate").html(),
+                        template: '<img src="${ data.BoxArt.SmallUrl }" alt="${ data.Name }" />' +
+                                  '<dl>' +
+                                      '<dt>Title:</dt><dd>${ data.Name }</dd>' +
+                                      '<dt>Year:</dt><dd>${ data.ReleaseYear }</dd>' +
+                                  '</dl>',
                         dataSource: {
                             type: "odata",
                             severFiltering: true,
@@ -60,10 +54,41 @@
                         }
                     });
 
-                    //set width of the drop-down list
+                    // set width of the drop-down list
                     $("#titles").data("kendoAutoComplete").ul.width(400);
                 });
             </script>
+
+            <style scoped>
+                #titles-list .t-item {
+                    overflow: hidden; /* clear floated images */
+                }
+
+                #titles-list img {
+                    box-shadow: 0 0 4px rgba(255,255,255,.7);
+                    float: left;
+                    margin: 5px;
+                }
+
+                #titles-list dl {
+                    margin-left: 85px;
+                }
+
+                #titles-list dt,
+                #titles-list dd {
+                    margin: 0;
+                    padding: 0;
+                }
+
+                #titles-list dt {
+                    font-weight: bold;
+                    padding-top: .5em;
+                }
+
+                #titles-list dd {
+                    padding-bottom: .3em;
+                }
+            </style>
         </div>
         <!-- tools -->
         <!-- tools -->
