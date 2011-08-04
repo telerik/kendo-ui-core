@@ -166,6 +166,7 @@
         end: "#>", // the marker which denotes the end of executable code
         /**
          * Renders a template for each item of the data.
+         * @ignore
          * @name kendo.Template.render
          * @static
          * @function
@@ -186,6 +187,7 @@
         },
         /**
          * Compiles a template to a function that builds HTML. Useful when a template will be used several times.
+         * @ignore
          * @name kendo.Template.compile
          * @static
          * @function
