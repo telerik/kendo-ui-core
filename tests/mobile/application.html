@@ -98,13 +98,13 @@
 
                 equals(encoded, "<kendo:script>alert(1)</kendo:script><kendo:script>alert(1)</kendo:script>");
             });
-            
+
             test("encodeScripts() encodes script tag with src", function() {
                 var encoded = kendo.mobile.encodeScripts("<script src='foo.js'><\/script>");
 
                 equals(encoded, "<kendo:script src='foo.js'></kendo:script>");
             });
- 
+
             test("decodeScripts() decodes script tag", function() {
                 var initialScript = "<script>alert(1)<\/script>",
                     encoded = kendo.mobile.encodeScripts(initialScript);
@@ -145,17 +145,6 @@
                     equals($(".kendo-view").length, 2);
                 });
             });
-
-            module("kendo.mobile.history");
-
-            test("pushState navigates", function() {
-                kendo.mobile.history.pushState(null, "foo");
-
-                ok(/foo$/.test(window.location.href));
-
-                window.history.back();
-            });
-
         </script>
     </body>
 </html>
