@@ -244,6 +244,13 @@ li a#download
     color:#fff;
 }
 
+li a#download:hover
+{
+    filter:alpha(opacity=90);
+    opacity:.9;
+    color:#fff;
+}
+
 /*top navigation*/
 
 #topnavWrap
