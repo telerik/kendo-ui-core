@@ -1141,7 +1141,8 @@
             $.when.apply(null, promises).then(function() {
                 element.removeData("animating");
                 element.dequeue(); // call next animation from the queue
-                element.unbind(support.transitions.event);
+                if (support.transitions)
+                    element.unbind(support.transitions.event);
 
                 if (options.hide) {
                     element.hide();
