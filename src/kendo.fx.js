@@ -147,16 +147,18 @@
             deQueue: function() {
                 var element = this.element;
 
-                removeTransitionStyles(element);
-
                 if (++this.eventNo == this.effectCount) {
                     clearAbortCheck(element);
+
+                    removeTransitionStyles(element);
 
                     element.dequeue();
                 }
             },
 
             stopQueue: function(element, clearQueue, gotoEnd) {
+
+                clearAbortCheck(element);
 
                 var taskKeys = element.data("keys"),
                     retainPosition = (gotoEnd === false && taskKeys);
@@ -180,8 +182,7 @@
                 }
 
                 element.removeData("keys");
-                clearAbortCheck(element);
-                
+
                 element.stop(clearQueue);
                 return element;
             }
