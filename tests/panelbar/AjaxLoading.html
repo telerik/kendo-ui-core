@@ -1,40 +1,21 @@
 <!doctype html>
 <html>
-    <head>
-        <title>kendo.ui.panelbar Tests</title>
-        <script src="../../src/jquery.js"></script>
-        <script src="../qunit.js"></script>
-        <script src="../qunit-runner.js"></script>
-        <script src="../../src/kendo.core.js"></script>
-        <script src="../../src/kendo.fx.js"></script>
-        <script src="../../src/kendo.panelbar.js"></script>
-        <script type="text/javascript" src="../jquery.mockjax.js"></script>
-        <link rel="stylesheet" href="../qunit.css" />
-        <link type="text/css" href="../../styles/kendo.common.css" rel="stylesheet"/>
-        <link type="text/css" href="../../styles/kendo.vista.css" rel="stylesheet"/>
-        <style type="text/css">
-            html
-            {
-                font-size: 12px;
-            }
-        </style>
+<head>
+    <title>kendo.ui.panelbar Tests</title>
 
-   <script type="text/javascript">
+    <script src="../../src/jquery.js"></script>
+    <script src="../qunit.js"></script>
+    <script src="../qunit-runner.js"></script>
+    <script src="../../src/kendo.core.js"></script>
+    <script src="../../src/kendo.fx.js"></script>
+    <script src="../../src/kendo.panelbar.js"></script>
+    <script src="../jquery.mockjax.js"></script>
 
-        function getRootItem(index) {
-            return $('#PanelBar1').find('.t-header').parent().eq(index).children('.t-link');
-        }
+    <link rel="stylesheet" href="../qunit.css" />
+    <link rel="stylesheet" href="../../styles/kendo.common.css" />
+    <link rel="stylesheet" href="../../styles/kendo.vista.css" />
 
-        function getPanelBar() {
-            return $("#PanelBar1").data("kendoPanelBar");
-        }
-
-       $(document).ready(function() {
-           $("#PanelBar1").kendoPanelBar({ animation: false, contentUrls: [ 'AjaxView1.html', 'AjaxView2.html', 'AjaxView1.html', 'AjaxView2.html', 'AjaxView1.html' ] });
-       });
-
-   </script>
-
+    <style> html { font-size: 12px; } </style>
 </head>
 <body>
 
@@ -51,63 +32,85 @@
         <li><a>Based on jQuery</a>
             <div></div>
         </li>
-        <li><a>Wide Cross-browser support</a>
+        <li class="t-state-active"><a>Wide Cross-browser support</a>
             <div></div>
         </li>
     </ul>
 
     <script>
-        asyncTest('clicking collapsed content items should expand them', function() {
+        var panelbar = $("#PanelBar1").kendoPanelBar({
+                animation: false,
+                contentUrls: [
+                    "AjaxView1.html",
+                    "AjaxView2.html",
+                    "AjaxView1.html",
+                    "AjaxView2.html",
+                    "AjaxView1.html"
+                ]
+            }).data("kendoPanelBar");
+
+        function getRootItem(index) {
+            return panelbar.element.find(".t-header").parent().eq(index).children(".t-link");
+        }
+
+        module("AjaxLoading");
+
+        asyncTest("clicking collapsed content items should expand them", function() {
             var item = getRootItem(0);
 
-            getPanelBar().bind('contentLoad', function() {
-                equal(item.parent().find('.t-content').css("display"), "block");
-                getPanelBar().unbind('contentLoad');
+            panelbar.bind("contentLoad", function() {
+                equal(item.parent().find(".t-content").css("display"), "block");
+                panelbar.unbind("contentLoad");
                 start();
             });
 
-            item.trigger('click');
+            item.trigger("click");
         });
 
-        test('clicking expanded content items should collapse them', function() {
+        test("clicking expanded content items should collapse them", function() {
             var item = getRootItem(0);
 
-            item.trigger('click');
+            item.trigger("click");
 
-            equal(item.parent().find('.t-content').css("display"), "none");
+            equal(item.parent().find(".t-content").css("display"), "none");
         });
 
-        asyncTest('clicking collapsed content items should toggle arrow', function() {
+        asyncTest("clicking collapsed content items should toggle arrow", function() {
             var item = getRootItem(1);
 
-            getPanelBar().bind('contentLoad', function() {
-                ok(item.find('.t-icon').hasClass('t-arrow-up'));
-                getPanelBar().unbind('contentLoad');
+            panelbar.bind("contentLoad", function() {
+                ok(item.find(".t-icon").hasClass("t-arrow-up"));
+                panelbar.unbind("contentLoad");
                 start();
             });
 
-            item.trigger('click');
+            item.trigger("click");
         });
 
-        test('clicking expanded content items should toggle arrow', function() {
+        test("clicking expanded content items should toggle arrow", function() {
             var item = getRootItem(1);
 
-            item.trigger('click');
+            item.trigger("click");
 
-            ok(item.find('.t-icon').hasClass('t-arrow-down'));
+            ok(item.find(".t-icon").hasClass("t-arrow-down"));
         });
 
-        test('clicking should make item active', function() {
-
+        test("clicking should make item active", function() {
             var item = getRootItem(2);
 
-            getPanelBar().bind('contentLoad', function() {
-                ok(item.parent().hasClass('t-state-active'));
-                getPanelBar().unbind('contentLoad');
+            panelbar.bind("contentLoad", function() {
+                ok(item.parent().hasClass("t-state-active"));
+                panelbar.unbind("contentLoad");
                 start();
             });
 
-            item.trigger('click');
+            item.trigger("click");
+        });
+
+        test("initially expanded items fetch their AJAX content", function() {
+            var item = getRootItem(4);
+
+            equal(item.parent().find(".t-content").css("display"), "block");
         });
     </script>
 
