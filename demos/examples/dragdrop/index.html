@@ -23,21 +23,21 @@
         <!-- description -->
         <div id="example">
             <div id="draggable"></div>
-            <div id="droptarget">Drop here.</div>
+            <div id="droptarget">Start dragging.</div>
 
             <script>
                 function draggableOnDragStart(e) {
                     $("#draggable").addClass("hollow");
 
-                    $("#droptarget").text("Drop here.");
+                    $("#droptarget").text("(Drop here)");
                 }
 
                 function droptargetOnDragEnter(e) {
-                    $("#droptarget").text("Almost there...");
+                    $("#droptarget").text("Now you can drop it.");
                 }
 
                 function droptargetOnDragLeave(e) {
-                    $("#droptarget").text("Drop here.");
+                    $("#droptarget").text("(Drop here)");
                 }
 
                 function droptargetOnDrop(e) {
