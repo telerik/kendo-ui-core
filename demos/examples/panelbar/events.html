@@ -93,10 +93,6 @@
                 kendoConsole.log("Collapsed: " + $(e.item).find("> .t-link").text());
             };
 
-            function onInit(e) {
-                kendoConsole.log("PanelBar loaded");
-            };
-
             function onContentLoad(e) {
                 kendoConsole.log("Content loaded in <b>"+ $(e.item).find("> .t-link").text() +
                                  "</b> and starts with <b>" + $(e.contentElement).text().substr(0, 20) + "...</b>");
@@ -110,7 +106,6 @@
                 select: onSelect,
                 expand: onExpand,
                 collapse: onCollapse,
-                init: onInit,
                 contentLoad: onContentLoad,
                 error: onError,
                 contentUrls: [ , , , , , "ajax/ajaxContent1.html", "error.html" ]
