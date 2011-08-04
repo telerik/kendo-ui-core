@@ -47,7 +47,7 @@
             $("#navmainWrap").toggleClass("singleColumn", $(element).attr("href") == "overview/index.html");
 
         if (!referenceUrl)
-            referenceUrl = $("#logo")[0].href;
+            referenceUrl = $("#referenceUrl")[0].href;
         $("#nav li a").each(function() {
             var match = $(this).attr("href").match(/[^\/]+\/[^\/]+?$/);
             $(this).attr("href", referenceUrl + (match ? match[0] : ""));
@@ -414,7 +414,8 @@ function locatePage(url) {
 }
 
 function getNormalizedUrl() {
-    var href = location.href.toLowerCase(), reference = $("#logo")[0].href.toLowerCase();
+    var href = location.href.toLowerCase(),
+        reference = $("#referenceUrl")[0].href.toLowerCase();
 
     return href == reference ?
                reference.replace("/index.html", "/") :

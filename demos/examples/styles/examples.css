@@ -192,6 +192,11 @@ html
     background-image:url(kendo-logo_ie6.png);
 }
 
+#referenceUrl
+{
+    display: none;
+}
+
 #header ul
 {
     float:right;
