@@ -460,6 +460,9 @@ function initializeNavigation (normalizedUrl) {
         if (kendoSkin) {
             skinSelector.data("kendoDropDownList").value(kendoSkin);
         }
+
+        if (page != "overview")
+            $(".skinSelector.t-widget").show();
     });
 }
 
