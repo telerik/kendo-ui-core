@@ -24,14 +24,14 @@
         <!-- description -->
         <div id="example">
             <div id="draggable"></div>
-            <div id="droptarget">Drop here</div>
+            <div id="droptarget">Start dragging.</div>
 
-            <script type="text/javascript">
+            <script>
                 function draggableOnDragStart(e) {
                     kendoConsole.log("dragstart");
 
                     $("#draggable").addClass("hollow");
-                    $("#droptarget").text("Drop here.");
+                    $("#droptarget").text("(Drop here)");
                 }
 
                 function draggableOnDrag(e) {
@@ -54,13 +54,13 @@
                 function droptargetOnDragEnter(e) {
                     kendoConsole.log("dragenter");
 
-                    $("#droptarget").text("Almost there...");
+                    $("#droptarget").text("Now you can drop it.");
                 }
 
                 function droptargetOnDragLeave(e) {
                     kendoConsole.log("dragleave");
 
-                    $("#droptarget").text("Drop here.");
+                    $("#droptarget").text("(Drop here)");
                 }
 
                 function droptargetOnDrop(e) {
