@@ -168,8 +168,6 @@
             var that = this,
                 content;
 
-            console.log(element, content);
-
             Component.fn.init.call(that, element, options);
 
             options = that.options;
