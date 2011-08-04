@@ -14,12 +14,6 @@
             $(html.join("")).appendTo("head");
         },
 
-        history: {
-            pushState: function(data, url) {
-                window.history.pushState(data, "", url);
-            }
-        },
-
         isFullPage: function(content) {
             return /^\s*<!doctype[^>]*>/i.test(content);
         },
