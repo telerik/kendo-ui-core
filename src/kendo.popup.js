@@ -68,6 +68,8 @@
                     var location = that.wrapper.data('location');
                     if (location)
                         that.wrapper.css(location);
+
+                    that._closing = false;
                 }
             });
 
@@ -160,7 +162,7 @@
 
             if (that.visible()) {
 
-                if (that.trigger(CLOSE)) {
+                if (that._closing || that.trigger(CLOSE)) {
                     return;
                 }
 
@@ -172,6 +174,8 @@
                 if (effects) {
                     animation.effects = effects;
                 }
+
+                that._closing = true;
 
                 that.element.kendoStop(true).kendoAnimate(animation);
 
