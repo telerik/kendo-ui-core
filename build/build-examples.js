@@ -37,7 +37,7 @@ function getRegionRegex(regionName) {
 }
 
 function removeDuplicateResources(resource, target) {
-    var scriptTag = resource.replace(/(\.\.\/)+/g, "[\.\/]*").replace(/\//g, "\\/").replace(/\./g, "\\."),
+    var scriptTag = resource.replace(/(\.\.\/)+/g, "[\.\/]*").replace(/\//g, "\\/").replace(/\./g, "\\.").replace(/\s+/g, "\\s*"),
         rex = new RegExp("[\\r\\n]+\\s+" + scriptTag, "i");
 
     return target.replace(rex, "");

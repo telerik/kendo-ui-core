@@ -1,61 +1,61 @@
 <!doctype html>
 <html>
-<head>
-    <!-- meta -->
-    <!-- meta -->
-    <title>Basic usage</title>
-    <!-- css -->
-    <link href="../styles/examples.css" rel="stylesheet"/>
-    <link href="../../../styles/kendo.common.css" rel="stylesheet"/>
-    <link href="../../../styles/kendo.kendo.css" rel="stylesheet"/>
-    <!-- css -->
-    <!-- script -->
-    <script src="../../../src/jquery.js"></script>
-    <script src="../../../src/kendo.core.js"></script>
-    <script src="../../../src/kendo.popup.js"></script>
-    <script src="../../../src/kendo.data.js"></script>
-    <script src="../../../src/kendo.list.js"></script>
-    <script src="../../../src/kendo.autocomplete.js"></script>
-    <!-- script -->
-</head>
-<body>
-    <!-- nav -->
-    <!-- nav -->
-    <!-- description -->
-    <div class="description">Basic usage</div>
-    <!-- description -->
-    <div id="example" class="t-content">
-        <span style="font-weight: bold; margin-left:3px;">Search for a movie:</span>
-        <br />
-        <input id="input" />
-        <span style="color: Gray; font-style: italic; vertical-align: middle;">Type 'The' or any title from the box
-            on the right</span>
-        <script type="text/javascript">
-            $(document).ready(function () {
-                var data = [
-                        "12 Angry Men",
-                        "Il buono, il brutto, il cattivo.",
-                        "Inception",
-                        "One Flew Over the Cuckoo's Nest",
-                        "Pulp Fiction",
-                        "Schindler's List",
-                        "The Dark Knight",
-                        "The Godfather",
-                        "The Godfather: Part II",
-                        "The Shawshank Redemption"
-                    ];
+    <head>
+        <!-- meta -->
+        <!-- meta -->
+        <title>Basic usage</title>
+        <!-- css -->
+        <link href="../styles/examples.css" rel="stylesheet" />
+        <link href="../../../styles/kendo.common.css" rel="stylesheet" />
+        <link href="../../../styles/kendo.kendo.css" rel="stylesheet" />
+        <!-- css -->
+        <!-- script -->
+        <script src="../../../src/jquery.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.popup.js"></script>
+        <script src="../../../src/kendo.data.js"></script>
+        <script src="../../../src/kendo.list.js"></script>
+        <script src="../../../src/kendo.autocomplete.js"></script>
+        <!-- script -->
+    </head>
+    <body>
+        <!-- nav -->
+        <!-- nav -->
+        <!-- description -->
+        <div class="description">Basic usage</div>
+        <!-- description -->
+        <div id="example" class="t-content">
+            <span style="font-weight: bold; margin-left:3px;">Search for a movie:</span>
+            <br />
+            <input id="input" />
+            <span style="color: Gray; font-style: italic; vertical-align: middle;">Type 'The' or any title from the box
+                on the right</span>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    var data = [
+                            "12 Angry Men",
+                            "Il buono, il brutto, il cattivo.",
+                            "Inception",
+                            "One Flew Over the Cuckoo's Nest",
+                            "Pulp Fiction",
+                            "Schindler's List",
+                            "The Dark Knight",
+                            "The Godfather",
+                            "The Godfather: Part II",
+                            "The Shawshank Redemption"
+                        ];
 
-                //create AutoComplete UI component
-                $("#input").kendoAutoComplete({
-                    dataSource: data,
-                    separator: ", "
+                    //create AutoComplete UI component
+                    $("#input").kendoAutoComplete({
+                        dataSource: data,
+                        separator: ", "
+                    });
                 });
-            });
-        </script>
-        <div class="code-sample">
-            <h4 class="code-title">
-                Initialization Data</h4>
-            <pre class="prettyprint lang-js">
+            </script>
+            <div class="code-sample">
+                <h4 class="code-title">
+                    Initialization Data</h4>
+                <pre class="prettyprint lang-js">
 var data = [
     "12 Angry Men",
     "Il buono, il brutto, il cattivo.",
@@ -68,23 +68,23 @@ var data = [
     "The Godfather: Part II",
     "The Shawshank Redemption"
 ];</pre>
+            </div>
+            <style scoped="scoped">
+                #input
+                {
+                    float: left;
+                    margin-right: 50px;
+                }
+
+                #example .code-sample
+                {
+                    margin-top: 0;
+                    width: 300px;
+                    float: right;
+                }
+            </style>
         </div>
-        <style scoped="scoped">
-            #input
-            {
-                float: left;
-                margin-right: 50px;
-            }
-            
-            #example .code-sample
-            {
-                margin-top: 0;
-                width: 300px;
-                float: right;
-            }
-        </style>
-    </div>
-    <!-- tools -->
-    <!-- tools -->
-</body>
+        <!-- tools -->
+        <!-- tools -->
+    </body>
 </html>
