@@ -7,10 +7,10 @@
     /**
      * @name kendo.data.DataSource.Description
      *
-     * @section 
+     * @section
      *  <p>
-     *      The DataSource component is an abstraction for using local (arrays of JavaScript objects) or 
-     *      remote (XML, JSON, JSONP) data. It fully supports CRUD (Create, Read, Update, Destroy) data 
+     *      The DataSource component is an abstraction for using local (arrays of JavaScript objects) or
+     *      remote (XML, JSON, JSONP) data. It fully supports CRUD (Create, Read, Update, Destroy) data
      *      operations and provides both local and server-side support for Sorting, Paging, Filtering, Grouping, and Aggregates.
      *  </p>
      *  <p>
@@ -34,97 +34,104 @@
      * var localDataSource = new kendo.data.DataSource({data: movies});
      * @exampleTitle Creating a DataSource bound to a remote data service (Twitter)
      * @example
-     *var dataSource = new kendo.data.DataSource({
-     *    transport: {
-     *        read: {
-     *            url: "http://search.twitter.com/search.json", // the remove service url
-     *            dataType: "jsonp", // JSONP (JSON with padding) is required for cross-domain AJAX
-     *            data: {
-     *                q: "html5" //additional parameters sent to the remote service
-     *            }
-     *        }
-     *    },
-     *    schema: { // describe the result format
-     *        data: "results" // the data which the data source will be bound to is in the "results" field
-     *    }
-     *});
+     * var dataSource = new kendo.data.DataSource({
+     *     transport: {
+     *         read: {
+     *             // the remote service url
+     *             url: "http://search.twitter.com/search.json",
+     *
+     *             // JSONP is required for cross-domain AJAX
+     *             dataType: "jsonp",
+     *
+     *             // additional parameters sent to the remote service
+     *             data: {
+     *                 q: "html5"
+     *             }
+     *         }
+     *     },
+     *     // describe the result format
+     *     schema: {
+     *         // the data which the data source will be bound to is in the "results" field
+     *         data: "results"
+     *     }
+     * });
      * @section
      *  <h3>Binding UI widgets to DataSource</h3>
      *  <p>
-     *      Many Kendo UI widgets support data binding, and the Kendo UI DataSource is an ideal 
-     *      binding source for both local and remote data. A DataSource can be created in-line 
-     *      with other UI widget configuration settings, or a shared DataSource can be created 
+     *      Many Kendo UI widgets support data binding, and the Kendo UI DataSource is an ideal
+     *      binding source for both local and remote data. A DataSource can be created in-line
+     *      with other UI widget configuration settings, or a shared DataSource can be created
      *      to enable multiple UI widgets to bind to the same, observable data collection.
      *  </p>
      * @exampleTitle Creating a local DataSource in-line with UI widget configuration
      * @example
-     *  $("#chart").kendoChart({
-	 *      title: {
-	 *	        text: "Employee Sales"
-	 *      },
-	 *      dataSource: new kendo.data.DataSource({
-	 *          data: [
-	 *          {
-     *              employee: "Joe Smith",
-     *              sales: 2000
-     *          },
-     *          {
-     *              employee: "Jane Smith",
-     *              sales: 2250
-     *          },
-     *          {
-     *              employee: "Will Roberts",
-     *              sales: 1550
-     *          }]			
-	 *      }),
-     *      series:[{
-	 *          type: "line",
-     *          field: "sales",
-     *          name: "Sales in Units"
-	 *      }],
-	 *      categoryAxis:{
-     *          field: "employee"
-	 *      }
-	 *  });
+     * $("#chart").kendoChart({
+     *     title: {
+     *         text: "Employee Sales"
+     *     },
+     *     dataSource: new kendo.data.DataSource({
+     *         data: [
+     *         {
+     *             employee: "Joe Smith",
+     *             sales: 2000
+     *         },
+     *         {
+     *             employee: "Jane Smith",
+     *             sales: 2250
+     *         },
+     *         {
+     *             employee: "Will Roberts",
+     *             sales: 1550
+     *         }]
+     *     }),
+     *     series: [{
+     *         type: "line",
+     *         field: "sales",
+     *         name: "Sales in Units"
+     *     }],
+     *     categoryAxis: {
+     *         field: "employee"
+     *     }
+     * });
      * @exampleTitle Creating and binding to a sharable remote DataSource
      * @example
-     *  var sharableDataSource = new kendo.data.DataSource({
-	 *      transport: {
-	 *          read: {
-     *              url: "data-service.json",
-     *              dataType: "json"
-	 *          }
-	 *      }	
-     *  });
+     * var sharableDataSource = new kendo.data.DataSource({
+     *     transport: {
+     *         read: {
+     *             url: "data-service.json",
+     *             dataType: "json"
+     *         }
+     *     }
+     * });
      *
-     *  //Bind two UI widgets to same DataSource
-     *  $("#chart").kendoChart({
-	 *      title: {
-     *          text: "Employee Sales"
-	 *      },
-	 *      dataSource: sharableDataSource,
-	 *      series:[{
-     *          field: "sales",
-     *          name: "Sales in Units"
-	 *      }],
-	 *      categoryAxis:{
-     *          field: "employee"
-	 *      }
-     *  });
+     * // Bind two UI widgets to same DataSource
+     * $("#chart").kendoChart({
+     *     title: {
+     *         text: "Employee Sales"
+     *     },
+     *     dataSource: sharableDataSource,
+     *     series: [{
+     *         field: "sales",
+     *         name: "Sales in Units"
+     *     }],
+     *     categoryAxis: {
+     *         field: "employee"
+     *     }
+     * });
      *
-     *  $("#grid").kendoGrid({
-	 *      dataSource: sharableDataSource,
-	 *          columns: [
-	 *          {
-     *              field: "employee",
-     *              title: "Employee"
-	 *          },
-     *          {
-     *              field: "sales",
-     *              title: "Sales",
-     *              template: '<#= kendo.toString(sales, "N0") #>'
-	 *      }]
-     *  });
+     * $("#grid").kendoGrid({
+     *     dataSource: sharableDataSource,
+     *         columns: [
+     *         {
+     *             field: "employee",
+     *             title: "Employee"
+     *         },
+     *         {
+     *             field: "sales",
+     *             title: "Sales",
+     *             template: '<#= kendo.toString(sales, "N0") #>'
+     *     }]
+     * });
      */
     var extend = $.extend,
         proxy = $.proxy,
@@ -850,7 +857,7 @@
          * filter: { field: "orderId", operation: "eq", value: 10248 }
          *
          * // returns only data where orderId is equal to 10248 and customerName starts with Paul
-         * filter: [ { field: "orderId", operation: "eq", value: 10248 }, 
+         * filter: [ { field: "orderId", operation: "eq", value: 10248 },
          *           { field: "customerName", operation: "startswith", value: "Paul" } ]
          *
          * @option {Array|Object} [group] <undefined> Sets initial grouping
@@ -871,22 +878,27 @@
          *
          * @option {Object|String} [transport.read] Options for remote read data operation or the URL of the remote service
          * _example
-         *  //settings various options for remote data transport
-         *  var dataSource = new kendo.data.DataSource({
-         *      transport: {
-         *          read: {
-         *              url: "http://search.twitter.com/search.json", // the remove service URL                
-         *              dataType: "jsonp", // JSONP (JSON with padding) is required for cross-domain AJAX
-         *              data: { //additional parameters sent to the remote service
-         *                  q: function() {
-         *                      return $("#searchFor").val();
-         *                  }
-         *              }
-         *          }
-         *      }
-         *  });
+         * // settings various options for remote data transport
+         * var dataSource = new kendo.data.DataSource({
+         *     transport: {
+         *         read: {
+         *             // the remote service URL
+         *             url: "http://search.twitter.com/search.json",
          *
-         *  //consuming odata feed without setting additional options
+         *             // JSONP is required for cross-domain AJAX
+         *             dataType: "jsonp",
+         *
+         *             // additional parameters sent to the remote service
+         *             data: {
+         *                 q: function() {
+         *                     return $("#searchFor").val();
+         *                 }
+         *             }
+         *         }
+         *     }
+         * });
+         *
+         *  // consuming odata feed without setting additional options
          *  var dataSource = new kendo.data.DataSource({
          *      type: "odata",
          *      transport: {
@@ -1379,12 +1391,12 @@
          * @param {Object} [options] Contains the settings for the operations. Note: If setting for previous operation is omitted, this operation is not applied to the resulting view
          * @example
          *
-         * //create a view containing at most 20 records, taken from the 
-         * //5th page and sorted ascending by orderId field.
+         * // create a view containing at most 20 records, taken from the
+         * // 5th page and sorted ascending by orderId field.
          * dataSource.query({ page: 5, pageSize: 20, sort: { field: "orderId", dir: "asc" } });
          *
-         * //moves the view to the first page returning at most 20 records 
-         * //but without particular ordering.
+         * // moves the view to the first page returning at most 20 records
+         * // but without particular ordering.
          * dataSource.query({ page: 1, pageSize: 20 });
          *
          */
@@ -1490,9 +1502,9 @@
          * @param {Object|Array} [val] <undefined> Sort options to be applied to the data
          * @example
          * dataSource.sort({ field: "orderId", dir: "desc" });
-         * dataSource.sort([ 
-         *      { field: "orderId", dir: "desc" }, 
-         *      { field: "unitPrice", dir: "asc" } 
+         * dataSource.sort([
+         *      { field: "orderId", dir: "desc" },
+         *      { field: "unitPrice", dir: "asc" }
          * ]);
          * @returns {Array} Current sort descriptors
          */
@@ -1526,9 +1538,9 @@
          * @param {Object|Array} [val] <undefined> Filter(s) to be applied to the data.
          * @example
          * dataSource.filter({ field: "orderId", operation: "eq", value: 10428 });
-         * dataSource.filter([ 
-         *      { field: "orderId", operation: "neq", value: 42 }, 
-         *      { field: "unitPrice", operation: "ge", value: 3.14 } 
+         * dataSource.filter([
+         *      { field: "orderId", operation: "neq", value: 42 },
+         *      { field: "unitPrice", operation: "ge", value: 3.14 }
          * ]);
          * @returns {Array} Current filter descriptors
          */
