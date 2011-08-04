@@ -42,7 +42,6 @@
         LINE_MARKER_SIZE = 6,
         LINE_MARKER_SQUARE = "square",
         MOUSEOVER = "mouseover",
-        MOUSEOUT = "mouseout",
         NONE = "none",
         OBJECT = "object",
         ON_MINOR_TICKS = "onMinorTicks",
@@ -1250,18 +1249,17 @@
             var chart = this,
                 viewElement = $(chart._viewElement);
 
-            viewElement.bind("click", proxy(chart._click, chart));
+            viewElement.bind(CLICK, proxy(chart._click, chart));
 
             if (chart.options.tooltip.visible) {
                 chart._tooltip = new Tooltip(chart.element, chart.options.tooltip);
-                viewElement.bind("mouseover", proxy(chart._mouseOver, chart));
+                viewElement.bind(MOUSEOVER, proxy(chart._mouseOver, chart));
             }
         },
 
         _click: function(e) {
             var chart = this,
                 model = chart._model,
-                plotArea = chart._plotArea,
                 target = e.target,
                 point = model.idMap[target.id];
 
@@ -3093,8 +3091,7 @@
 
         render: function() {
             var chart = this,
-                options = chart.options,
-                isStacked = options.isStacked;
+                options = chart.options;
 
             chart.traverseDataPoints(proxy(chart.addValue, chart));
         },
@@ -3270,9 +3267,6 @@
                 options = barChart.options,
                 children = barChart.children,
                 isStacked = barChart.options.isStacked,
-                seriesPoints = barChart.seriesPoints[seriesIx],
-                categoryPoints = barChart.categoryPoints[categoryIx],
-                dataItem = series.dataItems ? series.dataItems[categoryIx] : { value: value },
                 labelOptions = deepExtend({}, series.labels);
 
             if (isStacked) {
@@ -3448,7 +3442,6 @@
                 options = point.options,
                 markers = options.markers,
                 labels = options.labels,
-                children = point.children,
                 markerBackground = markers.background,
                 markerBorder = deepExtend({}, markers.border),
                 labelText = point.value;
@@ -3581,12 +3574,9 @@
         createPoint: function(value, category, categoryIx, series, seriesIx) {
             var chart = this,
                 options = chart.options,
-                children = chart.children,
                 isStacked = options.isStacked,
-                seriesPoints = chart.seriesPoints[seriesIx],
                 categoryPoints = chart.categoryPoints[categoryIx],
                 stackPoint,
-                dataItem = series.dataItems ? series.dataItems[categoryIx] : { value: value },
                 plotValue = 0;
 
             if (!defined(value) || value === null) {
@@ -4847,7 +4837,6 @@
                 options = tooltip.options,
                 aboveAxis = point.options.aboveAxis,
                 isVertical = point.options.isVertical,
-                chartElement = tooltip.chartElement,
                 tooltipBox,
                 template,
                 content = point.value.toString();
