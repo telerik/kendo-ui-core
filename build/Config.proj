@@ -10,7 +10,7 @@
 		<!-- CDN Resources configuration -->
 		<CDNAccessKeyId>AKIAJSDTTSFPVFUMHBGA</CDNAccessKeyId>
 		<CDNSecretAccessKey>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</CDNSecretAccessKey>
-		<CDNBucketName>kendo-static</CDNBucketName>
-        <CDNRoot>http://cdn.kendostatic.com/</CDNRoot>
+		<CDNBucketName>testtelerik</CDNBucketName>
+        <CDNRoot>http://testtelerik.s3.amazonaws.com/</CDNRoot>
 	</PropertyGroup>
 </Project>
