@@ -39,7 +39,8 @@ html
 .detailExpanded,
 .console div,
 #telerik,
-#introText dt
+#introText dt,
+#footer .icon
 {
     background-image: url("sprite.png");
     background-repeat: no-repeat;
@@ -57,7 +58,8 @@ html
 * html .detailExpanded,
 * html .console div,
 * html #telerik,
-* html #introText dt
+* html #introText dt,
+* html #footer .icon
 {
     background-image: url("sprite_ie6.png");
 }
@@ -625,6 +627,24 @@ h1 .integrationIcon
     display:inline-block;
     text-indent:-4000px;
     overflow:hidden;
+    width:16px;
+    height:16px;
+    vertical-align:middle;
+}
+
+#footer .tw
+{
+    background-position:-16px -940px;
+}
+
+#footer .rss
+{
+    background-position:-32px -940px;
+}
+
+#footer .fb
+{
+    background-position:0 -940px;
 }
 
 #telerik
