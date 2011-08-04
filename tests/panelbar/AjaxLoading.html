@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
     <head>
         <title>kendo.ui.panelbar Tests</title>
@@ -22,7 +22,7 @@
    <script type="text/javascript">
 
         function getRootItem(index) {
-			return $('#PanelBar1').find('.t-header').parent().eq(index).children('.t-link');
+            return $('#PanelBar1').find('.t-header').parent().eq(index).children('.t-link');
         }
 
         function getPanelBar() {
@@ -38,27 +38,25 @@
 </head>
 <body>
 
-<ul class="t-widget t-panelbar t-reset" id="PanelBar1" style="width: 300px; float: left; visibility: hidden; position: absolute;">
-    <li><a>Pure ASP.NET MVC components</a>
-        <div></div>
-    </li>
-    <li><a>Completely Open Source</a>
-        <div></div>
-    </li>
-    <li><a>Exceptional Performance</a>
-        <div></div>
-    </li>
-    <li><a>Based on jQuery</a>
-        <div></div>
-    </li>
-    <li><a>Wide Cross-browser support</a>
-        <div></div>
-    </li>
-</ul>
+    <ul class="t-widget t-panelbar t-reset" id="PanelBar1" style="width: 300px; float: left; visibility: hidden; position: absolute;">
+        <li><a>Pure ASP.NET MVC components</a>
+            <div></div>
+        </li>
+        <li><a>Completely Open Source</a>
+            <div></div>
+        </li>
+        <li><a>Exceptional Performance</a>
+            <div></div>
+        </li>
+        <li><a>Based on jQuery</a>
+            <div></div>
+        </li>
+        <li><a>Wide Cross-browser support</a>
+            <div></div>
+        </li>
+    </ul>
 
-<script type="text/javascript">
-
-
+    <script>
         asyncTest('clicking collapsed content items should expand them', function() {
             var item = getRootItem(0);
 
@@ -111,15 +109,14 @@
 
             item.trigger('click');
         });
+    </script>
 
-</script>
-
-<h1 id="qunit-header">kendo.ui.PanelBar Tests</h1>
-<h2 id="qunit-banner"></h2>
-<div id="qunit-testrunner-toolbar"></div>
-<h2 id="qunit-userAgent"></h2>
-<ol id="qunit-tests"></ol>
-<div id="qunit-fixture">test markup, will be hidden</div>
-<ul id="log"></ul>
+    <h1 id="qunit-header">kendo.ui.PanelBar Tests</h1>
+    <h2 id="qunit-banner"></h2>
+    <div id="qunit-testrunner-toolbar"></div>
+    <h2 id="qunit-userAgent"></h2>
+    <ol id="qunit-tests"></ol>
+    <div id="qunit-fixture">test markup, will be hidden</div>
+    <ul id="log"></ul>
 </body>
 </html>

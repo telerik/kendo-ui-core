@@ -15,16 +15,16 @@
      * @exampleTitle Create a simple HTML hierarchical list of items
      * @example
      *  <ul id="panelbar">
-	 *      <li>Item 1
-	 *          <ul>
+     *      <li>Item 1
+     *          <ul>
      *              <li>Sub Item 1</li>
      *              <li>Sub Item 2</li>
-	 *          </ul>
-	 *      <li>
-	 *      <li>Item 2</li>
-	 *      <li>Item with Content
-	 *          <div>This is some PanelBar Item content</div>
-	 *      </li>
+     *          </ul>
+     *      <li>
+     *      <li>Item 2</li>
+     *      <li>Item with Content
+     *          <div>This is some PanelBar Item content</div>
+     *      </li>
      *  </ul>
      *
      *
@@ -54,16 +54,16 @@
      * @example
      *  <!-- HTML structure -->
      *  <ul id="panelbar">
-	 *      <li>Item 1
-	 *          <ul>
+     *      <li>Item 1
+     *          <ul>
      *              <li>Sub Item 1</li>
-	 *          </ul>
+     *          </ul>
      *      </li>
-	 *      <li>Item 2</li>
-	 *      <li>
+     *      <li>Item 2</li>
+     *      <li>
      *          Item with Dynamic Content
-	 *          <div></div>
-	 *      </li>
+     *          <div></div>
+     *      </li>
      *  </ul>
      *
      * @exampleTitle
@@ -71,11 +71,11 @@
      *  //JavaScript initialization and configuration 
      *  $(document).ready(function(){
      *      $("#panelbar").kendoPanelBar({
-	 *          contentUrls:[
-	 *            null,
-	 *            null,
-	 *            "html-content-snippet.html"
-	 *          ]
+     *          contentUrls:[
+     *            null,
+     *            null,
+     *            "html-content-snippet.html"
+     *          ]
      *      });
      *  });
      *
@@ -90,10 +90,10 @@
      * @exampleTitle Changing PanelBar animation and expandMode behavior
      * @example
      *  $("#panelbar").kendoPanelBar({
-	 *      animation: {
-	 *          open : {effects: fadeIn}
-	 *      },
-	 *      expandMode: "single"
+     *      animation: {
+     *          open : {effects: fadeIn}
+     *      },
+     *      expandMode: "single"
      *  });
      * @section
      *  <h3>Dynamically configuring PanelBar items</h3>
@@ -118,8 +118,8 @@
      *  var pb = $("#panelbar").kendoPanelBar().data("kendoPanelBar");
      *
      *  pb.insertAfter(
-	 *      { text: "New PanelBar Item" },
-	 *      pb.element.children("li:last")
+     *      { text: "New PanelBar Item" },
+     *      pb.element.children("li:last")
      *  );
      *
      */
@@ -164,8 +164,11 @@
          */
         init: function(element, options) {
             element = $(element);
+
             var that = this,
-                content = element.find("li" + activeClass + " > .t-content");
+                content;
+
+            console.log(element, content);
 
             Component.fn.init.call(that, element, options);
 
@@ -243,6 +246,8 @@
                     .each(function(index, item) {
                         $(item).find(".t-link").data("ContentUrl", that.options.contentUrls[index]);
                     });
+
+            content = element.find("li" + activeClass + " > .t-content");
 
             if (content.length > 0 && content.is(EMPTY))
                 that.expand(content.parent());
