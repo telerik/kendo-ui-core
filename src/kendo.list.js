@@ -346,7 +346,7 @@
                 dataValue = that._value(dataItem);
 
                 if (dataValue !== undefined) {
-                    option += " value=" + dataValue;
+                    option += ' value="' + dataValue + '"';
                 }
 
                 option += ">";

@@ -307,6 +307,21 @@
                stop(600);
            });
 
+           test("value with space should be added to option", function() {
+               var select = $("<select><option value=1>foo1</option><option value=2>foo2</option><option value=3>foo3</option></select>"),
+               combobox = new ComboBox(select, {
+                   index: 0,
+                   dataSource: [{text: "Foo", value: "Foo 1"}, {text: "Foo 2", value:"Foo 2"}]
+               });
+
+               setTimeout(function() {
+                   equal(combobox.value(), "Foo 1");
+                   start();
+               }, 500);
+
+               stop(600);
+           });
+
            test("copy input styles to the visible input", function() {
                input.css("color", "red").kendoComboBox();
 
