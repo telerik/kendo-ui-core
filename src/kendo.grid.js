@@ -1233,8 +1233,8 @@
 
             if(that._group) {
                 that._templates();
-                that._updateHeader(groups);
                 that._updateCols();
+                that._updateHeader(groups);                
                 that._group = groups > 0;
             }
 
