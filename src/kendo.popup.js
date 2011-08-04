@@ -47,24 +47,25 @@
             that.wrapper = $();
 
             if (options.animation === false) {
-                options.animation = { open: { show: true, effects: {} }, close: { hide:true, effects: {} } };
+                options.animation = { open: { show: true, effects: {} }, close: { hide: true, effects: {} } };
             }
 
             if (!("effects" in options.animation.close)) {
-                options.animation.close = extend({}, options.animation.open, { reverse: true });
+                options.animation.close = extend({ reverse: true }, options.animation.open, options.animation.close);
             }
 
             extend(options.animation.open, {
                 complete: function() {
-                    that.wrapper.css({ overflow: "" });
+                    that.wrapper.css({ overflow: "visible" }).css("overflow");
                 }
             });
 
             extend(options.animation.close, {
                 complete: function() {
-                    that.wrapper.css({ display: "none" });
-                    var location = that.wrapper.data('location');
+                    that.element.hide();
+                    that.wrapper.hide();
 
+                    var location = that.wrapper.data('location');
                     if (location)
                         that.wrapper.css(location);
                 }
@@ -115,16 +116,19 @@
 
             if (!that.visible()) {
 
-                if(!that.element.data("animating") && that.trigger(OPEN)) {
+                if(that.element.data("animating") || that.trigger(OPEN)) {
                     return;
                 }
 
-                that.wrapper = kendo.wrap(that.element);
+                that.wrapper = kendo.wrap(that.element)
+                                    .css({
+                                        overflow: HIDDEN,
+                                        display: "block",
+                                        position: ABSOLUTE
+                                    });
 
                 if (options.appendTo == BODY)
                     that.wrapper.css("top", "-10000px");
-
-                that.wrapper.css({ overflow: HIDDEN, display: "block", position: ABSOLUTE}).css("top");
 
                 var animation = extend({}, options.animation.open);
 
@@ -156,7 +160,7 @@
 
             if (that.visible()) {
 
-                if(!that.element.data("animating") && that.trigger(CLOSE)) {
+                if(that.element.data("animating") || that.trigger(CLOSE)) {
                     return;
                 }
 
@@ -234,7 +238,7 @@
                 aligned = false;
 
             if (options.appendTo === Popup.fn.options.appendTo) {
-                wrapper.css("visibility", "hidden").css(that._align(origins, positions));
+                wrapper.css(that._align(origins, positions));
                 aligned = true;
             }
 
@@ -291,7 +295,7 @@
                 location.left += that._flip(offsets.left, element.outerWidth(), anchor.outerWidth(), viewport.width() / zoomLevel, origins[1], positions[1], wrapper.outerWidth());
             }
 
-            wrapper.css(location).css("visibility", "visible");
+            wrapper.css(location);
 
             return (location.left != flipPos.left || location.top != flipPos.top);
         },

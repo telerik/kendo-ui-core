@@ -761,7 +761,7 @@
 
             return toString(value, placeholderFormat ? placeholderFormat.substring(1) : "");
         });
-    }
+    };
 
     kendo.toString = toString;
     })();
@@ -797,8 +797,8 @@
     }
 
     function wrap(element) {
-        if (!element.parent().hasClass('t-animation-container')) {
-            var shadow = element.css(kendo.support.transitions.css + 'box-shadow') || element.css('box-shadow'),
+        if (!element.parent().hasClass("t-animation-container")) {
+            var shadow = element.css(kendo.support.transitions.css + "box-shadow") || element.css("box-shadow"),
                 radius = shadow ? shadow.match(/(\d+?)px\s*(\d+?)px\s*(\d+?)px\s*(\d+?)?/i) || [ 0, 0, 0, 0, 0 ] : [ 0, 0, 0, 0, 0 ],
                 blur = Math.max((+radius[3]), +(radius[4] || 0)),
                 right = (+radius[1]) + blur,
@@ -808,8 +808,8 @@
                 right = bottom = 5;
 
             element.wrap(
-                         $('<div/>')
-                         .addClass('t-animation-container')
+                         $("<div/>")
+                         .addClass("t-animation-container")
                          .css({
                              width: element.outerWidth(),
                              height: element.outerHeight(),
@@ -817,10 +817,15 @@
                              paddingBottom: bottom
                          }));
         } else {
-            element.parent().show().css({
-                width: element.outerWidth(),
-                height: element.outerHeight()
-            });
+            var wrap = element.parent(".t-animation-container");
+
+            if (wrap.is(":hidden"))
+                wrap.show();
+            
+            wrap.css({
+                    width: element.outerWidth(),
+                    height: element.outerHeight()
+                });
         }
 
         if ($.browser.msie && Math.floor($.browser.version) <= 7)
