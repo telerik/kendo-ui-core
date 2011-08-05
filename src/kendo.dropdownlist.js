@@ -9,7 +9,7 @@
     *       HTML select, providing support for local and remote data binding, item templates, and
     *       configurable options for controlling the list behavior.
     *   </p>
-    *   If you do not want to allow user input, use the <a href="../combobox/index.html" title="Kendo UI ComboBox">Kendo UI ComboBox</a>.
+    *   If you want to allow user input, use the <a href="../combobox/index.html" title="Kendo UI ComboBox">Kendo UI ComboBox</a>.
     *
     *   <h3>Getting Started</h3>
     *   There are two basic ways to create a DropDownList:
