@@ -49,7 +49,7 @@
         if (!referenceUrl)
             referenceUrl = $("#referenceUrl")[0].href;
         $("#nav li a").each(function() {
-            var match = $(this).attr("href").match(/[^\/]+\/[^\/]+?$/);
+            var match = $(this).attr("href").match(/[^\/]+\/[^\/]+$/);
             $(this).attr("href", referenceUrl + (match ? match[0] : ""));
         });
     };
@@ -113,8 +113,12 @@
                     exampleBody.empty().html(Application.body(html));
                 } else {
                     exampleName.kendoStop(true).kendoAnimate(extend({}, animation.hide, { complete: function() {
-                        var currentControl = $("#nav > .t-state-highlighted > .t-link > .t-sprite")[0].className.match(/\s(\w+Icon)/i)[1];
-                        $("#exampleTitle").empty().html('<span class="exampleIcon '+ currentControl.charAt(0).toLowerCase() + currentControl.substr(1) +'"></span>'+title);
+                        var sprite = $("#nav > .t-state-highlighted > .t-link > .t-sprite"), iconElement = "";
+                        if (sprite.length) {
+                            var currentControl = sprite[0].className.match(/\s(\w+Icon)/i)[1];
+                            iconElement = '<span class="exampleIcon '+ currentControl.charAt(0).toLowerCase() + currentControl.substr(1) +'"></span>';
+                        }
+                        $("#exampleTitle").empty().html(iconElement + title);
 
                         setTimeout(function() {
                             var newTabs = $($.trim(Application.helpTabs(html)));
@@ -157,8 +161,13 @@
             var exampleName = $("#exampleTitle");
 
             if (title != "Overview") {
-                var currentControl = $("#nav > .t-state-highlighted > .t-link > .t-sprite")[0].className.match(/\s(\w+Icon)/i)[1];
-                exampleName.empty().html('<span class="exampleIcon '+ currentControl.charAt(0).toLowerCase() + currentControl.substr(1) +'"></span>'+title);
+                var sprite = $("#nav > .t-state-highlighted > .t-link > .t-sprite"), iconElement = "";
+                if (sprite.length) {
+                    var currentControl = sprite[0].className.match(/\s(\w+Icon)/i)[1];
+                    iconElement = '<span class="exampleIcon '+ currentControl.charAt(0).toLowerCase() + currentControl.substr(1) +'"></span>'
+                }
+
+                exampleName.empty().html(iconElement + title);
 
                 $("#codeStrip, .skinSelector.t-widget").show();
 
@@ -425,10 +434,10 @@ function getNormalizedUrl() {
 }
 
 function initializeNavigation (normalizedUrl) {
-    var loc = /[^\/]+\/[^\/]+?$/.exec(normalizedUrl);
+    var matchedUrl = normalizedUrl.match(/[^\/]+\/[^\/]+$/);
 
-    if (loc) {
-        var url = loc[0].toLowerCase(),
+    if (matchedUrl) {
+        var url = matchedUrl[0].toLowerCase(),
             page = locatePage(url);
 
         $("#navmainWrap").toggleClass("singleColumn", page == "overview");
@@ -462,7 +471,7 @@ function initializeNavigation (normalizedUrl) {
             skinSelector.data("kendoDropDownList").value(kendoSkin);
         }
 
-        if (page != "overview")
+        if (page && page != "overview")
             $(".skinSelector.t-widget").show();
     });
 }
