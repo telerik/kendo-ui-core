@@ -1250,7 +1250,8 @@
             model.reflow();
 
             chart.element.css("position", "relative");
-            chart._viewElement = model.getView().renderTo(chart.element[0]);
+            chart._view = model.getView();
+            chart._viewElement = chart._view.renderTo(chart.element[0]);
             chart._attachEvents();
         },
 
@@ -1262,8 +1263,10 @@
 
             if (chart.options.tooltip.visible) {
                 chart._tooltip = new Tooltip(chart.element, chart.options.tooltip);
-                viewElement.bind(MOUSEOVER, proxy(chart._mouseOver, chart));
             }
+
+            chart._highlight = new Highlight(chart);
+            viewElement.bind(MOUSEOVER, proxy(chart._mouseOver, chart));
         },
 
         _click: function(e) {
@@ -1310,11 +1313,15 @@
                     point = chartElement;
                 }
 
-                if (!tooltip.visible) {
-                    $(doc.body).bind("mousemove.tooltip", proxy(chart._mouseMove, chart));
+                if (tooltip) {
+                    if (!tooltip.visible) {
+                        $(doc.body).bind("mousemove.tooltip", proxy(chart._mouseMove, chart));
+                    }
+
+                    tooltip.show(point);
                 }
 
-                tooltip.show(point);
+                chart._highlight.show(point, e.target);
             }
         },
 
@@ -1337,6 +1344,7 @@
                 }
             } else {
                 tooltip.hide();
+                chart._highlight.hide();
                 $(doc.body).unbind("mousemove.tooltip");
             }
         },
@@ -2734,7 +2742,7 @@
                 if (labelOptions.template) {
                     var labelTemplate = baseTemplate(labelOptions.template);
                     content = labelTemplate({ value: content });
-                }
+            }
 
                 axis.append(new TextBox(content, labelOptions));
             }
@@ -3062,6 +3070,13 @@
             return elements;
         },
 
+        getOutlineElement: function(view){
+            var bar = this,
+                box = bar.box;
+
+            return view.createRect(box);
+        },
+
         getBorderColor: function() {
             var bar = this,
                 options = bar.options,
@@ -3196,15 +3211,15 @@
 
         traverseDataPoints: function(callback) {
             var chart = this,
-                options = chart.options,
-                series = options.series,
-                categories = chart.plotArea.options.categoryAxis.categories || [],
-                categoriesCount = chart.categoriesCount(),
-                categoryIx,
-                seriesIx,
-                value,
-                currentCategory,
-                currentSeries;
+            options = chart.options,
+            series = options.series,
+            categories = chart.plotArea.options.categoryAxis.categories || [],
+            categoriesCount = chart.categoriesCount(),
+            categoryIx,
+            seriesIx,
+            value,
+            currentCategory,
+            currentSeries;
 
             for (categoryIx = 0; categoryIx < categoriesCount; categoryIx++) {
                 for (seriesIx = 0; seriesIx < series.length; seriesIx++) {
@@ -3305,8 +3320,8 @@
 
             if (isStacked) {
                 var stackWrap = cluster.children[0],
-                    positiveStack,
-                    negativeStack;
+                positiveStack,
+                negativeStack;
 
                 if (!stackWrap) {
                     stackWrap = new ChartElement();
@@ -3477,14 +3492,14 @@
             }
 
             point.marker = new ShapeElement({
-                id: uniqueId(),
-                visible: markers.visible,
-                type: markers.type,
-                width: markers.size,
-                height: markers.size,
-                background: markerBackground,
-                border: markerBorder,
-                opacity: markers.opacity
+                    id: uniqueId(),
+                    visible: markers.visible,
+                    type: markers.type,
+                    width: markers.size,
+                    height: markers.size,
+                    background: markerBackground,
+                    border: markerBorder,
+                    opacity: markers.opacity
             });
 
             point.append(point.marker);
@@ -3492,15 +3507,15 @@
             if (labels.visible) {
                 point.label = new TextBox(labelText,
                     deepExtend({
-                        id: uniqueId(),
-                        align: CENTER,
-                        vAlign: CENTER,
-                        margin: {
-                            left: 5,
-                            right: 5
-                        }
+                    id: uniqueId(),
+                    align: CENTER,
+                    vAlign: CENTER,
+                    margin: {
+                        left: 5,
+                        right: 5
+                    }
                     }, labels)
-                );
+            );
                 point.append(point.label);
             }
         },
@@ -3547,12 +3562,12 @@
                 edge = options.labels.position;
 
             if (label) {
-                edge = edge === ABOVE ? TOP : edge;
-                edge = edge === BELOW ? BOTTOM : edge;
+            edge = edge === ABOVE ? TOP : edge;
+            edge = edge === BELOW ? BOTTOM : edge;
 
-                label.reflow(box);
-                label.box.alignTo(marker.box, edge);
-                label.reflow(label.box);
+            label.reflow(box);
+            label.box.alignTo(marker.box, edge);
+            label.reflow(label.box);
             }
         },
 
@@ -3568,6 +3583,13 @@
             }
 
             return ChartElement.fn.getViewElements.call(element, view);
+        },
+
+        getOutlineElement: function(view) {
+            var element = this,
+                marker = element.marker;
+
+            return marker.getViewElements(view)[0];
         }
     });
 
@@ -4320,13 +4342,17 @@
                     "r='<#= d.radius #>' " +
                     "<#= d.renderAttr(\"stroke\", d.options.stroke) #> " +
                     "<#= d.renderAttr(\"stroke-width\", d.options.strokeWidth) #>" +
+                    "fill-opacity='<#= d.options.fillOpacity #>' " +
+                    "stroke-opacity='<#= d.options.strokeOpacity #>'  " +
                     "fill='<#= d.options.fill || \"none\" #>'></circle>"
                 );
             }
         },
 
         options: {
-            fill: ""
+            fill: "",
+            fillOpacity: 1,
+            strokeOpacity: 1
         }
     });
 
@@ -4824,6 +4850,52 @@
             return element;
         }
     };
+
+    var Highlight = Class.extend({
+        init: function(chart, options) {
+            var highlight = this;
+
+            highlight.chart = chart;
+        },
+
+        show: function(point, element) {
+            var highlight = this,
+                chart = highlight.chart,
+                view = chart._view,
+                viewElement = chart._viewElement,
+                outline;
+
+            highlight.hide();
+
+            if (point.getOutlineElement) {
+                outline = point.getOutlineElement(view);
+                outline.options.fill = WHITE;
+                outline.options.fillOpacity = 0.2;
+                outline.options.stroke = WHITE;
+                outline.options.strokeWidth = 1;
+                outline.options.strokeOpacity = 0.2;
+
+                var svg = "<svg xmlns='" + SVG_NS + "'>" + outline.render() + "</svg>";
+                var parser = new DOMParser(),
+                    chartDoc = parser.parseFromString(svg, "text/xml"),
+                    importedDoc = doc.adoptNode(chartDoc.documentElement),
+                    element = importedDoc.childNodes[0];
+
+                highlight.element = element;
+                viewElement.appendChild(element);
+            }
+        },
+
+        hide: function() {
+            var highlight = this,
+                element = highlight.element;
+
+            if (element) {
+                element.parentNode.removeChild(element);
+                delete highlight.element;
+            }
+        }
+    });
 
     var Tooltip = Class.extend({
         init: function(chartElement, options) {
