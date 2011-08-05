@@ -4531,7 +4531,7 @@
             var container = doc.createElement("div"),
                 element;
 
-            container.setAttribute("style", "display: none;");
+            container.style.display = NONE;
             doc.appendChild(container);
             container.innerHTML = element.render();
 
@@ -4904,15 +4904,6 @@
                     strokeWidth: 1,
                     strokeOpacity: 0.2
                 });
-
-                /*
-                var container = doc.createElement("div");
-                viewElement.appendChild(container);
-                container.innerHTML = outline.render();
-
-                var element = container.firstChild;
-                viewElement.removeChild(container);
-                */
 
                 element = view.renderElement(outline);
                 highlight.element = element;
