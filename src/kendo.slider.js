@@ -598,7 +598,7 @@
 
             if (options.showButtons) {
                 var mouseDownHandler = proxy(function(e, sign) {
-                    if (e.which == 1) {
+                    if (e.which == 1 || (touch && e.which == 0)) {
                         move(e, sign);
 
                         this.timeout = setTimeout(proxy(function () {
@@ -1090,7 +1090,7 @@
                 .end()
                 .find(TRACK_SELECTOR).bind(MOUSE_DOWN, clickHandler);
 
-            that.wrapper.find(DRAG_HANDLE).bind("mouseup", function (e) {
+            that.wrapper.find(DRAG_HANDLE).bind(MOUSE_UP, function (e) {
                 $(e.target).removeClass("t-state-active");
             });
 
