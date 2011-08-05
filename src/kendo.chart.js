@@ -3070,11 +3070,11 @@
             return elements;
         },
 
-        getOutlineElement: function(view){
+        getOutlineElement: function(view, options){
             var bar = this,
                 box = bar.box;
 
-            return view.createRect(box);
+            return view.createRect(box, options);
         },
 
         getBorderColor: function() {
@@ -3408,7 +3408,7 @@
             vAlign: CENTER
         },
 
-        getViewElements: function(view) {
+        getViewElements: function(view, renderOptions) {
             var marker = this,
                 options = marker.options,
                 type = options.type,
@@ -3421,12 +3421,12 @@
                     [box.x1 + halfWidth, box.y1],
                     [box.x1, box.y2],
                     [box.x2, box.y2]
-                ], element.options);
+                ], deepExtend({}, element.options, renderOptions));
             } else if (type === CIRCLE) {
                 element = view.createCircle([
                     round(box.x1 + halfWidth, COORD_PRECISION),
                     round(box.y1 + box.height() / 2, COORD_PRECISION)
-                ], halfWidth, element.options);
+                ], halfWidth, deepExtend({}, element.options, renderOptions));
             }
 
             return [ element ];
@@ -3585,11 +3585,11 @@
             return ChartElement.fn.getViewElements.call(element, view);
         },
 
-        getOutlineElement: function(view) {
+        getOutlineElement: function(view, options) {
             var element = this,
                 marker = element.marker;
 
-            return marker.getViewElements(view)[0];
+            return marker.getViewElements(view, options)[0];
         }
     });
 
@@ -4725,15 +4725,14 @@
                             "style='position:absolute; " +
                             "width:<#= d.radius * 2 #>px; height:<#= d.radius * 2 #>px; " +
                             "top:<#= d.center[1] - d.radius #>px; " +
-                            "left:<#= d.center[0] - d.radius #>px;' " +
-                        "strokecolor='<#= d.options.stroke || '' #>' " +
-                        "stroked='<#= !!d.options.stroke #>' " +
-                        "strokeweight='<#= d.options.strokeWidth || '' #>' " +
-                        "fillcolor='<#= d.options.fill #>' " +
-                        "filled='<#= !!d.options.fill || d.children.length > 0 #>'>" +
+                            "left:<#= d.center[0] - d.radius #>px;'>" +
+                        "<#= d.fill.render() + d.stroke.render() #>" +
                     "</kvml:oval>"
                 );
             }
+
+            circle.stroke = new VMLStroke(circle.options);
+            circle.fill = new VMLFill(circle.options);
         },
 
         options: {
@@ -4868,21 +4867,31 @@
             highlight.hide();
 
             if (point.getOutlineElement) {
-                outline = point.getOutlineElement(view);
-                outline.options.fill = WHITE;
-                outline.options.fillOpacity = 0.2;
-                outline.options.stroke = WHITE;
-                outline.options.strokeWidth = 1;
-                outline.options.strokeOpacity = 0.2;
+                outline = point.getOutlineElement(view, {
+                    fill: WHITE,
+                    fillOpacity: 0.2,
+                    stroke: WHITE,
+                    strokeWidth: 1,
+                    strokeOpacity: 0.2
+                });
 
+                /*
                 var svg = "<svg xmlns='" + SVG_NS + "'>" + outline.render() + "</svg>";
                 var parser = new DOMParser(),
                     chartDoc = parser.parseFromString(svg, "text/xml"),
                     importedDoc = doc.adoptNode(chartDoc.documentElement),
                     element = importedDoc.childNodes[0];
+                */
+
+                var container = doc.createElement("div");
+                viewElement.appendChild(container);
+                container.innerHTML = outline.render();
+
+                var element = container.firstChild;
 
                 highlight.element = element;
                 viewElement.appendChild(element);
+                viewElement.removeChild(container);
             }
         },
 
