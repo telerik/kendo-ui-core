@@ -4091,7 +4091,7 @@
             view.template = SVGView.template;
             if (!view.template) {
                 view.template = SVGView.template = template(
-                    "<svg xmlns='http://www.w3.org/2000/svg' version='1.1' " +
+                    "<svg xmlns='" + SVG_NS + "' version='1.1' " +
                     "width='<#= d.options.width #>px' height='<#= d.options.height #>px' " +
                     "style='position: relative;'>" +
                     "<#= d.renderDefinitions() #>" +
@@ -4123,6 +4123,21 @@
                 output = ViewBase.fn.renderDefinitions.call(view);
 
             return output.length > 0 ? "<defs>" + output + "</defs>" : "";
+        },
+
+        renderElement: function(element) {
+            var container = doc.createElement("div"),
+                element;
+
+            renderSVG(container,
+                "<svg xmlns='" + SVG_NS + "' version='1.1'>" +
+                element.render() +
+                "</svg>"
+            );
+
+            element = container.firstChild;
+
+            return element;
         },
 
         createGroup: function(options) {
@@ -4512,6 +4527,20 @@
             return container.firstChild;
         },
 
+        renderElement: function(element) {
+            var container = doc.createElement("div"),
+                element;
+
+            container.setAttribute("style", "display: none;");
+            doc.appendChild(container);
+            container.innerHTML = element.render();
+
+            element = container.firstChild;
+            doc.removeChild(container);
+
+            return element;
+        },
+
         createText: function(content, options) {
             if (options && options.rotation) {
                 return new VMLRotatedText(content, options);
@@ -4862,7 +4891,8 @@
                 chart = highlight.chart,
                 view = chart._view,
                 viewElement = chart._viewElement,
-                outline;
+                outline,
+                element;
 
             highlight.hide();
 
@@ -4876,22 +4906,17 @@
                 });
 
                 /*
-                var svg = "<svg xmlns='" + SVG_NS + "'>" + outline.render() + "</svg>";
-                var parser = new DOMParser(),
-                    chartDoc = parser.parseFromString(svg, "text/xml"),
-                    importedDoc = doc.adoptNode(chartDoc.documentElement),
-                    element = importedDoc.childNodes[0];
-                */
-
                 var container = doc.createElement("div");
                 viewElement.appendChild(container);
                 container.innerHTML = outline.render();
 
                 var element = container.firstChild;
+                viewElement.removeChild(container);
+                */
 
+                element = view.renderElement(outline);
                 highlight.element = element;
                 viewElement.appendChild(element);
-                viewElement.removeChild(container);
             }
         },
 
