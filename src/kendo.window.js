@@ -1,14 +1,14 @@
-﻿(function ($, window) {
+(function ($, window) {
     /**
      * @name kendo.ui.Window.Description
      *
      * @section
      *  <p>
-     *      The Window widget displays content in a modal or non-modal HTML window. By default, Windows can be moved, 
+     *      The Window widget displays content in a modal or non-modal HTML window. By default, Windows can be moved,
      *      resized, and closed by users. Window content can also be defined with either static HTML or loaded dynamically with Ajax.
-     *  </p>     
+     *  </p>
      *  <p>
-     *      A Window can be initialized from virtually any HTML element. During initialization, the targeted content will 
+     *      A Window can be initialized from virtually any HTML element. During initialization, the targeted content will
      *      automatically be wrapped in the Window’s HTML div element.
      *  </p>
      *  <h3>Getting Started</h3>
@@ -22,12 +22,12 @@
      * $("#window").kendoWindow();
      * @section
      *  <p>
-     *      When a Window is initialized, it will automatically be displayed open near the 
+     *      When a Window is initialized, it will automatically be displayed open near the
      *      location of the HTML element that was used to initialize the content.
      *  </p>
      *  <h3>Configuring Window behaviors</h3>
      *  <p>
-     *      Window provides many configuration options that can be easily set during initialization. 
+     *      Window provides many configuration options that can be easily set during initialization.
      *      Among the properties that can be controlled:
      *  </p>
      *  <ul>
@@ -49,15 +49,15 @@
      *  });
      * @section
      *  <p>
-     *      The order of the values in the actions array determines the order in which the action buttons 
-     *      will be rendered in the Window title bar. The maximize action serves both as a button for expanding 
+     *      The order of the values in the actions array determines the order in which the action buttons
+     *      will be rendered in the Window title bar. The maximize action serves both as a button for expanding
      *      the Window to fill the screen and as a button to restore the Window to the previous size.
      *  </p>
      *  <h3>Positioning and Opening the Window</h3>
      *  <p>
-     *      In some scenarios, it is preferable to center a Window rather than open it near the HTML element 
-     *      used to define the content. It’s also common to open a Window as the result of an action rather 
-     *      than on initial page load. The Window API provides methods for handling this and many more advanced 
+     *      In some scenarios, it is preferable to center a Window rather than open it near the HTML element
+     *      used to define the content. It’s also common to open a Window as the result of an action rather
+     *      than on initial page load. The Window API provides methods for handling this and many more advanced
      *      Window scenarios. Please see the Window demo Methods tab for more details.
      *  </p>
      * @exampleTitle Centering a Window and opening on button click
@@ -87,8 +87,8 @@
      * @section
      *  <h3>Loading Window content with Ajax</h3>
      *  <p>
-     *      While any valid technique for loading Ajax content can be used, Window provides 
-     *      built-in support for asynchronously loading content from a URL. This URL should 
+     *      While any valid technique for loading Ajax content can be used, Window provides
+     *      built-in support for asynchronously loading content from a URL. This URL should
      *      return a HTML fragment that can be loaded in a Window content area.
      *  </p>
      * @exampleTitle Load Window content asynchronously
