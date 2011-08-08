@@ -14,14 +14,10 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <SccProjectName>
-    </SccProjectName>
-    <SccLocalPath>
-    </SccLocalPath>
-    <SccAuxPath>
-    </SccAuxPath>
-    <SccProvider>
-    </SccProvider>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -61,68 +57,38 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="Settings.aiis" />
-    <None Include="UIWidgets\AutoComplete\BasicUsage\SelectOption.tstest" />
-    <None Include="UIWidgets\AutoComplete\BasicUsage\SetTwoValuesRevertToBlank.tstest" />
-    <None Include="UIWidgets\ComboBox\BasicUsage\ChangeValueInput.tstest" />
-    <None Include="UIWidgets\ComboBox\BasicUsage\ChangeValueKeyboardSelect.tstest" />
-    <None Include="UIWidgets\Grid\BasicUsage\GroupByAge.tstest" />
-    <None Include="UIWidgets\Grid\BasicUsage\SortFirstNameAndPage.tstest" />
-    <None Include="UIWidgets\Grid\Events\Events.tstest" />
-    <None Include="UIWidgets\Grid\Selection\SelectMultipleCells.tstest" />
-    <None Include="UIWidgets\Grid\Selection\SelectMultipleRows.tstest" />
-    <None Include="UIWidgets\Grid\Selection\SelectRowSingle.tstest" />
+    <None Include="UIWidgets\AutoComplete\SelectOption.tstest" />
+    <None Include="UIWidgets\AutoComplete\SetTwoValuesRevertToBlank.tstest" />
+    <None Include="UIWidgets\ComboBox\ChangeValueInput.tstest" />
+    <None Include="UIWidgets\ComboBox\ChangeValueKeyboardSelect.tstest" />
+    <None Include="WebTest1.tstest" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="WebTest1.resx">
+      <DependentUpon>WebTest1.tstest</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="UIWidgets\AutoComplete\BasicUsage\SelectOption.resx">
+    <None Include="UIWidgets\AutoComplete\SelectOption.resx">
       <DependentUpon>SelectOption.tstest</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="UIWidgets\AutoComplete\BasicUsage\SetTwoValuesRevertToBlank.resx">
+    <None Include="UIWidgets\AutoComplete\SetTwoValuesRevertToBlank.resx">
       <DependentUpon>SetTwoValuesRevertToBlank.tstest</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="UIWidgets\ComboBox\BasicUsage\ChangeValueInput.resx">
+    <None Include="UIWidgets\ComboBox\ChangeValueInput.resx">
       <DependentUpon>ChangeValueInput.tstest</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="UIWidgets\ComboBox\BasicUsage\ChangeValueKeyboardSelect.resx">
+    <None Include="UIWidgets\ComboBox\ChangeValueKeyboardSelect.resx">
       <DependentUpon>ChangeValueKeyboardSelect.tstest</DependentUpon>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="UIWidgets\Grid\BasicUsage\GroupByAge.resx">
-      <DependentUpon>GroupByAge.tstest</DependentUpon>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="UIWidgets\Grid\BasicUsage\SortFirstNameAndPage.resx">
-      <DependentUpon>SortFirstNameAndPage.tstest</DependentUpon>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="UIWidgets\Grid\Selection\SelectRowSingle.resx">
-      <DependentUpon>SelectRowSingle.tstest</DependentUpon>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="UIWidgets\Grid\Selection\SelectMultipleRows.resx">
-      <DependentUpon>SelectMultipleRows.tstest</DependentUpon>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="UIWidgets\Grid\Selection\SelectMultipleCells.resx">
-      <DependentUpon>SelectMultipleCells.tstest</DependentUpon>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="UIWidgets\Grid\Events\Events.resx">
-      <DependentUpon>Events.tstest</DependentUpon>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
