@@ -1810,7 +1810,7 @@
                         dashType: border.dashType,
                         strokeOpacity: options.opacity,
                         fill: options.background,
-                        fillOpacity: options.opacity,
+                        fillOpacity: options.opacity
                     })
                 ];
 
@@ -4715,8 +4715,7 @@
         },
 
         options: {
-            fill: "",
-            dashType: "dots"
+            fill: ""
         }
     });
 
