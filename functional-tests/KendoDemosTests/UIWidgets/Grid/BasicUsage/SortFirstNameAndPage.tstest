@@ -546,11 +546,11 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Navigate to : 'http://aggeorgiev/kendo/live/grid/index.html'</d2p1:Description>
+      <d2p1:Description>Navigate to : '/grid/index.html'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>1</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>ba1f0e90-f815-4622-af6d-da4d31589de6</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>0f853290-8d0b-4bc2-ac15-979f2a89f19b</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -571,8 +571,8 @@
         <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
         <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
-        <d2p1:BaseUrl />
-        <d2p1:NavigateURL>http://aggeorgiev/kendo/live/grid/index.html</d2p1:NavigateURL>
+        <d2p1:BaseUrl>http://aggeorgiev/kendo/live</d2p1:BaseUrl>
+        <d2p1:NavigateURL>/grid/index.html</d2p1:NavigateURL>
       </d2p1:Step>
       <d2p1:StepImageKey>Sort5aakk5qh.wvi</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
@@ -585,7 +585,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>2</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>106c8158-7c8e-45e2-913a-c8ce46f7c6b7</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>dd3c650e-0e27-4107-a097-8d1af68c6cda</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -668,7 +668,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>3</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>cc810462-6ada-4dcb-93d5-072ffea4c4ff</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>b63d7d47-eb65-4e6a-a71a-f62035ceffe7</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -757,7 +757,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>4</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>7f8b6e8d-fe5f-41f9-a933-c19a2ea3e149</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>145675db-248f-4601-9b4e-d5066cefccf6</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -840,7 +840,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>5</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>a5913e60-6872-4833-86aa-1816bfbffd2c</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>1755b98c-056b-4878-8e6f-df8623d80704</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -923,7 +923,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>6</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>086481b0-cc3f-4f2b-b51a-452260ffd2a1</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>90ac5f14-a47e-44b1-bfb8-43908795dac6</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">

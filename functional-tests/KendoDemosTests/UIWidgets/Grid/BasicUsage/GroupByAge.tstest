@@ -19,19 +19,11 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-<<<<<<< HEAD
       <d2p1:Description>Navigate to : '/grid/index.html'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>1</d2p1:Order>
       <d2p1:Runtime_x0020_ID>51c09f1c-73a2-4f2b-96f9-c60f0d98fae1</d2p1:Runtime_x0020_ID>
-=======
-      <d2p1:Description>Navigate to : 'http://aggeorgiev/kendo/live/grid/index.html'</d2p1:Description>
-      <d2p1:Enabled>true</d2p1:Enabled>
-      <d2p1:Id />
-      <d2p1:Order>1</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>f2cb4f7e-f89a-49c6-8530-e10e34b480b5</d2p1:Runtime_x0020_ID>
->>>>>>> 02c9613... added uiwidgets dir
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -52,13 +44,8 @@
         <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
         <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
-<<<<<<< HEAD
         <d2p1:BaseUrl>http://aggeorgiev/kendo/live</d2p1:BaseUrl>
         <d2p1:NavigateURL>/grid/index.html</d2p1:NavigateURL>
-=======
-        <d2p1:BaseUrl />
-        <d2p1:NavigateURL>http://aggeorgiev/kendo/live/grid/index.html</d2p1:NavigateURL>
->>>>>>> 02c9613... added uiwidgets dir
       </d2p1:Step>
       <d2p1:StepImageKey>Groupfzbee21z.t2c</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
@@ -71,11 +58,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>2</d2p1:Order>
-<<<<<<< HEAD
       <d2p1:Runtime_x0020_ID>a4f71a91-06f8-4f86-80a6-74558becc9f6</d2p1:Runtime_x0020_ID>
-=======
-      <d2p1:Runtime_x0020_ID>65f7fed3-4a69-4bb2-bb8b-c5fe02dfa9d5</d2p1:Runtime_x0020_ID>
->>>>>>> 02c9613... added uiwidgets dir
       <d2p1:Step i:type="d2p1:DragDropActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -183,11 +166,7 @@
       <d2p1:Enabled>false</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>3</d2p1:Order>
-<<<<<<< HEAD
       <d2p1:Runtime_x0020_ID>1233edf0-6d05-43c5-8bba-63d21f83859b</d2p1:Runtime_x0020_ID>
-=======
-      <d2p1:Runtime_x0020_ID>855bd810-7221-4d99-ba2a-b82aba1d3185</d2p1:Runtime_x0020_ID>
->>>>>>> 02c9613... added uiwidgets dir
       <d2p1:Step i:type="d2p1:DragDropActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -295,11 +274,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>4</d2p1:Order>
-<<<<<<< HEAD
       <d2p1:Runtime_x0020_ID>ed85627a-ee3c-424e-bdef-4dfda8fda7dc</d2p1:Runtime_x0020_ID>
-=======
-      <d2p1:Runtime_x0020_ID>5f4b8b24-fcd3-4684-a7d1-24b4af32b8ab</d2p1:Runtime_x0020_ID>
->>>>>>> 02c9613... added uiwidgets dir
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -384,11 +359,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>5</d2p1:Order>
-<<<<<<< HEAD
       <d2p1:Runtime_x0020_ID>b8085583-2bd7-4826-9708-2e0a6a1b5172</d2p1:Runtime_x0020_ID>
-=======
-      <d2p1:Runtime_x0020_ID>b2c0db12-0403-49a5-bff5-59c935291554</d2p1:Runtime_x0020_ID>
->>>>>>> 02c9613... added uiwidgets dir
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
