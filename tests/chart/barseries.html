@@ -1514,7 +1514,7 @@
 
                 test("sets stroke dash type", function() {
                     createBar({ border: { color: "red", width: 1, dashType: "dot" } });
-                    same(rect.style.dashType, bar.options.border.dashType);
+                    equal(rect.style.dashType, bar.options.border.dashType);
                 });
 
                 test("sets fill opacity", function() {
