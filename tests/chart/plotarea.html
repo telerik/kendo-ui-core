@@ -50,7 +50,7 @@
                         data: [10, 20, 30]
                     }];
 
-                function createPlotArea(series) {
+                function createPlotArea(series, chartOptions) {
                     plotArea = new Chart.PlotArea({
                         series: series,
                         categoryAxis: {
@@ -304,11 +304,12 @@
                         data: [100]
                     }];
 
-                function createPlotArea(categoryAxis, valueAxis) {
+                function createPlotArea(categoryAxis, valueAxis, plotArea) {
                     plotArea = new Chart.PlotArea({
                         series: barSeriesData,
                         categoryAxis: categoryAxis,
-                        valueAxis: valueAxis
+                        valueAxis: valueAxis,
+                        plotArea: plotArea
                     });
 
                     axisY = plotArea.axisY;
@@ -505,6 +506,33 @@
                     createPlotArea(categoryAxis, valueAxis);
 
                     equal(view.log.line.length, 32);
+                });
+
+                // ------------------------------------------------------------
+                module("PlotArea / Configuration", {
+                    setup: function() {
+                        moduleSetup();
+                    }
+                });
+
+                test("should not render plot area with borders", function() {
+                    var categoryAxis = {
+                            categories: ["A"]
+                        },
+                        valueAxis = { };
+
+                    createPlotArea(categoryAxis, valueAxis, {
+                        border: {
+                            color: "red",
+                            width: 2,
+                            dashType: "dot"
+                        }
+                    });
+
+                    var plotAreaRect = view.log.rect[2];
+                    equal(plotAreaRect.style.dashType, "dot");
+                    equal(plotAreaRect.style.stroke, "red");
+                    equal(plotAreaRect.style.strokeWidth, 2);
                 });
 
             })();

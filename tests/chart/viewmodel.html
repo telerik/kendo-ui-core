@@ -161,7 +161,8 @@
                     createRoot({
                         border: {
                             width: 1,
-                            color: "red"
+                            color: "red",
+                            dashType: "dot"
                         }
                     });
                     renderRoot();
@@ -169,6 +170,7 @@
                     sameBox(rootRect, new Box2D(1, 1, 599, 399));
                     equals(rootRect.style.strokeWidth, 1);
                     equals(rootRect.style.stroke, "red");
+                    equals(rootRect.style.dashType, "dot");
                 });
 
                 test("sets background to rootElement", function() {
@@ -512,6 +514,15 @@
                     boxElement.getViewElements(view);
 
                     equal(view.log.rect[0].style.stroke, "#f00");
+                });
+
+                test("renders border dash type", function() {
+                    boxElement.options.border.width = 1;
+                    boxElement.options.border.dashType = "dot";
+                    boxElement.reflow(targetBox);
+                    boxElement.getViewElements(view);
+
+                    equal(view.log.rect[0].style.dashType, "dot");
                 });
 
                 test("renders opacity as strokeOpacity", function() {
@@ -1054,6 +1065,7 @@
                 var legendBox,
                     BORDER_WIDTH = 2,
                     BORDER_COLOR = "#f00",
+                    BORDER_DASH_TYPE = "dot",
                     BACKGROUND = "#0f0",
                     PADDING = 10;
                 module("Legend / Box", {
@@ -1064,7 +1076,8 @@
                             series: [ { name: "Series 1", color: "#f00" } ],
                             border: {
                                 color: BORDER_COLOR,
-                                width: BORDER_WIDTH
+                                width: BORDER_WIDTH,
+                                dashType: BORDER_DASH_TYPE
                             },
                             background: BACKGROUND,
                             padding: PADDING
@@ -1087,6 +1100,10 @@
 
                 test("renders border color", function() {
                     same(legendBox.style.stroke, BORDER_COLOR);
+                });
+
+                test("renders border dashType", function() {
+                    same(legendBox.style.dashType, BORDER_DASH_TYPE);
                 });
 
                 test("renders background color", function() {

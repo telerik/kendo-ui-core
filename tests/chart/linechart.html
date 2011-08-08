@@ -601,7 +601,8 @@
                                     margin: MARGIN,
                                     padding: PADDING
                                 },
-                                opacity: 0.5
+                                opacity: 0.5,
+                                dashType: "dot"
                             }]
                         });
                         linePoint = lineChart.points[0];
@@ -662,6 +663,10 @@
 
                 test("applies margin to point labels", function() {
                     equal(linePoint.options.labels.margin, MARGIN);
+                });
+
+                test("applies margin to point labels", function() {
+                    equal(linePoint.options.dashType, "dot");
                 });
 
             })();

@@ -411,7 +411,8 @@
                     BACKGROUND = "blue",
                     BORDER = {
                         width: 4,
-                        color: "green"
+                        color: "green",
+                        dashType: "dot"
                     };
 
                 function PlotAreaStub() { }
@@ -642,6 +643,7 @@
                     series.getViewElements(view);
                     equal(view.log.rect[1].style.stroke, BORDER.color);
                     equal(view.log.rect[1].style.strokeWidth, BORDER.width);
+                    equal(view.log.rect[1].style.dashType, BORDER.dashType);
                 });
 
                 test("bars labels should have padding and margin", function() {
@@ -1508,6 +1510,11 @@
                 test("sets stroke width", function() {
                     createBar({ border: { color: "red", width: 1 } });
                     same(rect.style.strokeWidth, bar.options.border.width);
+                });
+
+                test("sets stroke dash type", function() {
+                    createBar({ border: { color: "red", width: 1, dashType: "dot" } });
+                    same(rect.style.dashType, bar.options.border.dashType);
                 });
 
                 test("sets fill opacity", function() {

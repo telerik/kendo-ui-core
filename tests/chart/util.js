@@ -37,8 +37,8 @@ ViewStub.prototype = {
         return new kendo.ui.Chart.ViewElement();
     },
 
-    createLine: function(x1, y1, x2, y2) {
-        this.log.line.push({ x1: x1, y1: y1, x2: x2, y2: y2 });
+    createLine: function(x1, y1, x2, y2, options) {
+        this.log.line.push({ x1: x1, y1: y1, x2: x2, y2: y2, options: options });
         return new kendo.ui.Chart.ViewElement();
     },
 

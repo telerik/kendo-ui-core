@@ -330,6 +330,18 @@
                             MAX_LABEL_WIDTH + MARGIN, chartBox.y2 - LABEL_HEIGHT / 2),
                             TOLERANCE
                     );
+                })
+
+                test("creates axis with dash type", function() {
+                    numericAxis = new Chart.NumericAxis(0, 1, {
+                        line: {
+                            dashType: "dot"
+                        }
+                    });
+                    numericAxis.reflow(chartBox);
+
+                    numericAxis.getViewElements(view);
+                    equals(view.log.line[0].options.dashType, "dot");
                 });
 
                 test("creates labels", 1, function() {
