@@ -235,6 +235,7 @@
     Framework: Manager.RemoveBrowser() : Removed client ID "Client_f4e59923-6abd-4509-8b50-956956ccdccd" (0 remaining).
     Framework: Manager.SetActiveBrowser() : Active browser is now null.
     Framework: BrowserRemoted.End() : Now aborting the listener thread (TID = 25).
+<<<<<<< HEAD
     Time:8/8/2011 3:07:36 PM
     Title: Initiate log
     Message: 
@@ -2837,3 +2838,5 @@
     Framework: BrowserProvisioner.EndService() : Provisioning pipe connected.
     Framework: BrowserProvisioner.EndService() : Provisioning thread terminated.
     DialogPlayback: DialogMonitor.Stop() : Dialog monitoring is being halted.
+=======
+>>>>>>> 9bc7767...  case addedease enter the commit message for your changes. Lines starting
