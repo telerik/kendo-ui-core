@@ -53,10 +53,6 @@
         SERIES_CLICK = "seriesClick",
         SQUARE = "square",
         SVG_DASH_TYPE = {
-            shortdash: [3.5, 1.5],
-            shortdot: [1.5, 1.5],
-            shortdashdot: [1.5, 1.5, 3.5, 1.5],
-            shortdashdotdot: [3.5, 1.5, 1.5, 1.5, 1.5, 1.5],
             dot: [1.5, 3.5],
             dash: [4, 3.5],
             longdash: [8, 3.5],
@@ -4292,10 +4288,11 @@
         renderDashType: function () {
             var path = this,
                 options = path.options,
-                result = [];
+                result = [],
+                dashType = options.dashType ? options.dashType.toLowerCase() : null;
 
-            if (options.dashType && options.strokeWidth) {
-                var dashTypeArray = SVG_DASH_TYPE[options.dashType.toLowerCase()];
+            if (dashType && dashType != "solid" && options.strokeWidth) {
+                var dashTypeArray = SVG_DASH_TYPE[dashType];
                 for (var i = 0; i < dashTypeArray.length; i++) {
                     result.push(dashTypeArray[i] * options.strokeWidth);
                 }

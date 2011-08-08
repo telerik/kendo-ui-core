@@ -452,26 +452,6 @@
                     }
                 });
 
-                test("renders shortdash", function() {
-                    path.options.dashType = "shortdash";
-                    ok(path.render().indexOf("stroke-dasharray='3.5 1.5'") > -1);
-                });
-
-                test("renders shortdot", function() {
-                    path.options.dashType = "shortdot";
-                    ok(path.render().indexOf("stroke-dasharray='1.5 1.5'") > -1);
-                });
-
-                test("renders shortdashdot", function() {
-                    path.options.dashType = "shortdashdot";
-                    ok(path.render().indexOf("stroke-dasharray='1.5 1.5 3.5 1.5'") > -1);
-                });
-
-                test("renders shortdashdotdot", function() {
-                    path.options.dashType = "shortdashdotdot";
-                    ok(path.render().indexOf("stroke-dasharray='3.5 1.5 1.5 1.5 1.5 1.5'") > -1);
-                });
-
                 test("renders dot", function() {
                     path.options.dashType = "dot";
                     ok(path.render().indexOf("stroke-dasharray='1.5 3.5'") > -1);
