@@ -61,32 +61,68 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="Settings.aiis" />
-    <None Include="UIWidgets\AutoComplete\SelectOption.tstest" />
-    <None Include="UIWidgets\AutoComplete\SetTwoValuesRevertToBlank.tstest" />
-    <None Include="UIWidgets\ComboBox\ChangeValueInput.tstest" />
-    <None Include="UIWidgets\ComboBox\ChangeValueKeyboardSelect.tstest" />
+    <None Include="UIWidgets\AutoComplete\BasicUsage\SelectOption.tstest" />
+    <None Include="UIWidgets\AutoComplete\BasicUsage\SetTwoValuesRevertToBlank.tstest" />
+    <None Include="UIWidgets\ComboBox\BasicUsage\ChangeValueInput.tstest" />
+    <None Include="UIWidgets\ComboBox\BasicUsage\ChangeValueKeyboardSelect.tstest" />
+    <None Include="UIWidgets\Grid\BasicUsage\GroupByAge.tstest" />
+    <None Include="UIWidgets\Grid\BasicUsage\SortFirstNameAndPage.tstest" />
+    <None Include="UIWidgets\Grid\Events\Events.tstest" />
+    <None Include="UIWidgets\Grid\Selection\SelectMultipleCells.tstest" />
+    <None Include="UIWidgets\Grid\Selection\SelectMultipleRows.tstest" />
+    <None Include="UIWidgets\Grid\Selection\SelectRowSingle.tstest" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="UIWidgets\AutoComplete\SelectOption.resx">
+    <None Include="UIWidgets\AutoComplete\BasicUsage\SelectOption.resx">
       <DependentUpon>SelectOption.tstest</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="UIWidgets\AutoComplete\SetTwoValuesRevertToBlank.resx">
+    <None Include="UIWidgets\AutoComplete\BasicUsage\SetTwoValuesRevertToBlank.resx">
       <DependentUpon>SetTwoValuesRevertToBlank.tstest</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="UIWidgets\ComboBox\ChangeValueInput.resx">
+    <None Include="UIWidgets\ComboBox\BasicUsage\ChangeValueInput.resx">
       <DependentUpon>ChangeValueInput.tstest</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="UIWidgets\ComboBox\ChangeValueKeyboardSelect.resx">
+    <None Include="UIWidgets\ComboBox\BasicUsage\ChangeValueKeyboardSelect.resx">
       <DependentUpon>ChangeValueKeyboardSelect.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\Grid\BasicUsage\GroupByAge.resx">
+      <DependentUpon>GroupByAge.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\Grid\BasicUsage\SortFirstNameAndPage.resx">
+      <DependentUpon>SortFirstNameAndPage.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\Grid\Selection\SelectRowSingle.resx">
+      <DependentUpon>SelectRowSingle.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\Grid\Selection\SelectMultipleRows.resx">
+      <DependentUpon>SelectMultipleRows.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\Grid\Selection\SelectMultipleCells.resx">
+      <DependentUpon>SelectMultipleCells.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\Grid\Events\Events.resx">
+      <DependentUpon>Events.tstest</DependentUpon>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

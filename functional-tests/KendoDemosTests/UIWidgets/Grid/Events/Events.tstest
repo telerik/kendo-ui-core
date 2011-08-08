@@ -227,6 +227,7 @@
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
 <<<<<<< HEAD
+<<<<<<< HEAD
       <d2p1:Description>Wait for '500' msec.</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
@@ -265,6 +266,40 @@
       <d2p1:Id />
       <d2p1:Order>4</d2p1:Order>
 >>>>>>> 939791c... new test added for grid events
+=======
+      <d2p1:Description>Wait for '500' msec.</d2p1:Description>
+      <d2p1:Enabled>true</d2p1:Enabled>
+      <d2p1:Id />
+      <d2p1:Order>4</d2p1:Order>
+      <d2p1:Runtime_x0020_ID>ca9eb9ea-be2a-45a3-b7a6-2b6705e05702</d2p1:Runtime_x0020_ID>
+      <d2p1:Step i:type="SleepActionDescriptor">
+        <d2p1:Constraints>
+          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        </d2p1:Constraints>
+        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:EditorType />
+        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:LogMessageOnFailure />
+        <d2p1:Pause>None</d2p1:Pause>
+        <d2p1:RunsAgainstVersion />
+        <d2p1:StepType>Action</d2p1:StepType>
+        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
+        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
+        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
+        <WaitTime>500</WaitTime>
+      </d2p1:Step>
+      <d2p1:StepImageKey>Events4yabwnm3.3li</d2p1:StepImageKey>
+      <d2p1:StepState>NoCode</d2p1:StepState>
+      <d2p1:Version>200</d2p1:Version>
+    </d2p1:AutomationStep>
+    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
+      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
+      <d2p1:CustomDescription i:nil="true" />
+      <d2p1:Description>Click 'FirstNameLink'</d2p1:Description>
+      <d2p1:Enabled>true</d2p1:Enabled>
+      <d2p1:Id />
+      <d2p1:Order>5</d2p1:Order>
+>>>>>>> 91eb5d6... new test added for grid events
       <d2p1:Runtime_x0020_ID>0067b40a-bb8c-469e-b5de-13379fbd8981</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
@@ -348,10 +383,14 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
 <<<<<<< HEAD
+<<<<<<< HEAD
       <d2p1:Order>6</d2p1:Order>
 =======
       <d2p1:Order>5</d2p1:Order>
 >>>>>>> 939791c... new test added for grid events
+=======
+      <d2p1:Order>6</d2p1:Order>
+>>>>>>> 91eb5d6... new test added for grid events
       <d2p1:Runtime_x0020_ID>31adb954-9dec-4b37-983d-77739d486a92</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
@@ -439,10 +478,14 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
 <<<<<<< HEAD
+<<<<<<< HEAD
       <d2p1:Order>7</d2p1:Order>
 =======
       <d2p1:Order>6</d2p1:Order>
 >>>>>>> 939791c... new test added for grid events
+=======
+      <d2p1:Order>7</d2p1:Order>
+>>>>>>> 91eb5d6... new test added for grid events
       <d2p1:Runtime_x0020_ID>ad9876d1-2dc2-4a47-8097-6330f586da43</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
@@ -528,10 +571,14 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
 <<<<<<< HEAD
+<<<<<<< HEAD
       <d2p1:Order>8</d2p1:Order>
 =======
       <d2p1:Order>7</d2p1:Order>
 >>>>>>> 939791c... new test added for grid events
+=======
+      <d2p1:Order>8</d2p1:Order>
+>>>>>>> 91eb5d6... new test added for grid events
       <d2p1:Runtime_x0020_ID>e22190d0-637c-4ee0-b23e-9382c32db0e6</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
@@ -618,10 +665,14 @@
       <d2p1:Enabled>false</d2p1:Enabled>
       <d2p1:Id />
 <<<<<<< HEAD
+<<<<<<< HEAD
       <d2p1:Order>9</d2p1:Order>
 =======
       <d2p1:Order>8</d2p1:Order>
 >>>>>>> 939791c... new test added for grid events
+=======
+      <d2p1:Order>9</d2p1:Order>
+>>>>>>> 91eb5d6... new test added for grid events
       <d2p1:Runtime_x0020_ID>04879872-f0e3-4358-98ac-840cb8bd74a7</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
@@ -709,12 +760,17 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
 <<<<<<< HEAD
+<<<<<<< HEAD
       <d2p1:Order>10</d2p1:Order>
       <d2p1:Runtime_x0020_ID>b2fcdb26-a727-45a0-84d3-51f60e447794</d2p1:Runtime_x0020_ID>
 =======
       <d2p1:Order>9</d2p1:Order>
       <d2p1:Runtime_x0020_ID>ca9eb9ea-be2a-45a3-b7a6-2b6705e05702</d2p1:Runtime_x0020_ID>
 >>>>>>> 939791c... new test added for grid events
+=======
+      <d2p1:Order>10</d2p1:Order>
+      <d2p1:Runtime_x0020_ID>b2fcdb26-a727-45a0-84d3-51f60e447794</d2p1:Runtime_x0020_ID>
+>>>>>>> 91eb5d6... new test added for grid events
       <d2p1:Step i:type="SleepActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
@@ -732,10 +788,14 @@
         <WaitTime>500</WaitTime>
       </d2p1:Step>
 <<<<<<< HEAD
+<<<<<<< HEAD
       <d2p1:StepImageKey>Eventskk4cisn3.tuo</d2p1:StepImageKey>
 =======
       <d2p1:StepImageKey>Events4yabwnm3.3li</d2p1:StepImageKey>
 >>>>>>> 939791c... new test added for grid events
+=======
+      <d2p1:StepImageKey>Eventskk4cisn3.tuo</d2p1:StepImageKey>
+>>>>>>> 91eb5d6... new test added for grid events
       <d2p1:StepState>NoCode</d2p1:StepState>
       <d2p1:Version>200</d2p1:Version>
     </d2p1:AutomationStep>
@@ -746,10 +806,14 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
 <<<<<<< HEAD
+<<<<<<< HEAD
       <d2p1:Order>11</d2p1:Order>
 =======
       <d2p1:Order>10</d2p1:Order>
 >>>>>>> 939791c... new test added for grid events
+=======
+      <d2p1:Order>11</d2p1:Order>
+>>>>>>> 91eb5d6... new test added for grid events
       <d2p1:Runtime_x0020_ID>60f17861-5e04-452c-96d6-03324bc5b076</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
@@ -830,6 +894,7 @@
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
 <<<<<<< HEAD
+<<<<<<< HEAD
       <d2p1:Description>Verify 'TextContent' 'Contains' 'Grid data bound' on 'GridDataBoundDiv0'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
@@ -842,6 +907,13 @@
       <d2p1:Order>11</d2p1:Order>
       <d2p1:Runtime_x0020_ID>638918ed-b662-419f-9537-643a12d2d8e7</d2p1:Runtime_x0020_ID>
 >>>>>>> 939791c... new test added for grid events
+=======
+      <d2p1:Description>Verify 'TextContent' 'Contains' 'Grid data bound' on 'GridDataBoundDiv0'</d2p1:Description>
+      <d2p1:Enabled>true</d2p1:Enabled>
+      <d2p1:Id />
+      <d2p1:Order>12</d2p1:Order>
+      <d2p1:Runtime_x0020_ID>e06091cb-fde0-4ea7-b3c0-97ad2a341a94</d2p1:Runtime_x0020_ID>
+>>>>>>> 91eb5d6... new test added for grid events
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -865,6 +937,7 @@
                     <d9p1:key>Html</d9p1:key>
                     <d9p1:value i:type="HtmlFindExpression">
 <<<<<<< HEAD
+<<<<<<< HEAD
                       <ChainStops>
                         <d5p1:int>1</d5p1:int>
                       </ChainStops>
@@ -876,13 +949,22 @@
                           <Clause>tagIndex=div:4</Clause>
 =======
                       <ChainStops />
+=======
+                      <ChainStops>
+                        <d5p1:int>1</d5p1:int>
+                      </ChainStops>
+>>>>>>> 91eb5d6... new test added for grid events
                       <Clauses>
                         <HtmlFindClause>
-                          <Clause>tagname=div</Clause>
+                          <Clause>id=exampleWrap</Clause>
                         </HtmlFindClause>
                         <HtmlFindClause>
+<<<<<<< HEAD
                           <Clause>TextContent=^Selected: 4 ite</Clause>
 >>>>>>> 939791c... new test added for grid events
+=======
+                          <Clause>tagIndex=div:4</Clause>
+>>>>>>> 91eb5d6... new test added for grid events
                         </HtmlFindClause>
                       </Clauses>
                       <Constraints />
@@ -890,10 +972,14 @@
                   </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
                 </FindExpressions>
 <<<<<<< HEAD
+<<<<<<< HEAD
                 <Name>GridDataBoundDiv0</Name>
 =======
                 <Name>Selected4Div</Name>
 >>>>>>> 939791c... new test added for grid events
+=======
+                <Name>GridDataBoundDiv0</Name>
+>>>>>>> 91eb5d6... new test added for grid events
                 <NodeKind>4</NodeKind>
                 <TechnologyType>Html</TechnologyType>
               </FindExpression>
@@ -934,10 +1020,14 @@
         <d2p1:SegmentType>TextContent</d2p1:SegmentType>
       </d2p1:Step>
 <<<<<<< HEAD
+<<<<<<< HEAD
       <d2p1:StepImageKey>Eventsjved0ozt.xyy</d2p1:StepImageKey>
 =======
       <d2p1:StepImageKey>Events4h3qj1ml.frc</d2p1:StepImageKey>
 >>>>>>> 939791c... new test added for grid events
+=======
+      <d2p1:StepImageKey>Eventsjved0ozt.xyy</d2p1:StepImageKey>
+>>>>>>> 91eb5d6... new test added for grid events
       <d2p1:StepState>NoCode</d2p1:StepState>
       <d2p1:Version>200</d2p1:Version>
     </d2p1:AutomationStep>
