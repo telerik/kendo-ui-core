@@ -201,6 +201,17 @@
                     );
                 });
 
+                test("creates axis with dash type", function() {
+                    createCategoryAxis({
+                        line: {
+                            dashType: "dot"
+                        }
+                    });
+
+                    categoryAxis.getViewElements(view);
+                    equals(view.log.line[0].options.dashType, "dot");
+                });
+
                 test("creates labels", 1, function() {
                     categoryAxis.getViewElements(view);
 

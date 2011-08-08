@@ -52,6 +52,18 @@
         SANS16 = "16px Verdana, sans-serif",
         SERIES_CLICK = "seriesClick",
         SQUARE = "square",
+        SVG_DASH_TYPE = {
+            shortdash: [3.5, 1.5],
+            shortdot: [1.5, 1.5],
+            shortdashdot: [1.5, 1.5, 3.5, 1.5],
+            shortdashdotdot: [3.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+            dot: [1.5, 3.5],
+            dash: [4, 3.5],
+            longdash: [8, 3.5],
+            dashdot: [3.5, 3.5, 1.5, 3.5],
+            longdashdot: [8, 3.5, 1.5, 3.5],
+            longdashdotdot: [8, 3.5, 1.5, 3.5, 1.5, 3.5]
+        },
         SVG_NS = "http://www.w3.org/2000/svg",
         TOP = "top",
         TRIANGLE = "triangle",
@@ -1686,6 +1698,7 @@
                     view.createRect(box, {
                         stroke: border.width ? border.color : "",
                         strokeWidth: border.width,
+                        dashType: border.dashType,
                         fill: options.background,
                         zIndex: options.zIndex })
                 ];
@@ -1794,9 +1807,11 @@
                         id: options.id,
                         stroke: border.width ? border.color : "",
                         strokeWidth: border.width,
+                        dashType: border.dashType,
                         strokeOpacity: options.opacity,
                         fill: options.background,
-                        fillOpacity: options.opacity })
+                        fillOpacity: options.opacity,
+                    })
                 ];
 
             return elements.concat(
@@ -2129,6 +2144,7 @@
                 group.children.unshift(view.createRect(labelBox, {
                     stroke: border.width ? border.color : "",
                     strokeWidth: border.width,
+                    dashType: border.dashType,
                     fill: options.background })
                 );
             }
@@ -2511,24 +2527,22 @@
 
             var tickPositions = axis.getMinorTickPositions();
             if (options.line.width > 0) {
+                var lineOptions = {
+                        strokeWidth: options.line.width,
+                        stroke: options.line.color,
+                        dashType: options.line.dashType,
+                        zIndex: options.zIndex
+                    };
                 if (isVertical) {
                     childElements.push(view.createLine(
                         axis.box.x2, tickPositions[0],
                         axis.box.x2, tickPositions[tickPositions.length - 1],
-                        {
-                            strokeWidth: options.line.width,
-                            stroke: options.line.color,
-                            zIndex: options.zIndex
-                        }));
+                        lineOptions));
                 } else {
                     childElements.push(view.createLine(
                         tickPositions[0], axis.box.y1,
                         tickPositions[tickPositions.length - 1], axis.box.y1,
-                        {
-                            strokeWidth: options.line.width,
-                            stroke: options.line.color,
-                            zIndex: options.zIndex
-                        }));
+                        lineOptions));
                 }
 
                 [].push.apply(childElements, axis.renderTicks(view));
@@ -2775,26 +2789,26 @@
         getViewElements: function(view) {
             var axis = this,
                 options = axis.options,
+                line = options.line,
                 isVertical = options.orientation === VERTICAL,
                 childElements = ChartElement.fn.getViewElements.call(axis, view);
 
-            if (options.line.width > 0) {
+            if (line.width > 0) {
+                var lineOptions = {
+                        strokeWidth: line.width,
+                        stroke: line.color,
+                        dashType: line.dashType,
+                        zIndex: line.zIndex
+                    };
+
                 if (isVertical) {
                     childElements.push(view.createLine(
                         axis.box.x2, axis.box.y1, axis.box.x2, axis.box.y2,
-                        {
-                            strokeWidth: options.line.width,
-                            stroke: options.line.color,
-                            zIndex: options.zIndex
-                        }));
+                        lineOptions));
                 } else {
                     childElements.push(view.createLine(
                         axis.box.x1, axis.box.y1, axis.box.x2, axis.box.y1,
-                        {
-                            strokeWidth: options.line.width,
-                            stroke: options.line.color,
-                            zIndex: options.zIndex
-                        }));
+                        lineOptions));
                 }
 
                 [].push.apply(childElements, axis.renderTicks(view));
@@ -3023,7 +3037,8 @@
                 isVertical = options.isVertical,
                 border = options.border.width > 0 ? {
                     stroke: bar.getBorderColor(),
-                    strokeWidth: options.border.width
+                    strokeWidth: options.border.width,
+                    dashType: options.border.dashType
                 } : {},
                 box = bar.box,
                 rectStyle = deepExtend({
@@ -3681,7 +3696,8 @@
                 stroke: series.color,
                 strokeWidth: series.width,
                 strokeOpacity: series.opacity,
-                fill: ""
+                fill: "",
+                dashType: series.dashType
             });
         }
     });
@@ -3863,7 +3879,7 @@
                 isVertical = options.orientation === VERTICAL,
                 boundaries = secondaryAxis.getMajorTickPositions(),
                 crossingSlot = axis.getSlot(options.axisCrossingValue),
-                secAxisPos = crossingSlot[isVertical ? "y1" : "x1"],
+                secAxisPos = round(crossingSlot[isVertical ? "y1" : "x1"]),
                 lineStart = boundaries[0],
                 lineEnd = boundaries.pop(),
                 linePos,
@@ -3900,7 +3916,12 @@
                 }
 
                 return $.map(gridLines, function(line) {
-                    linePos = line.pos;
+                    var gridLineOptions = {
+                            strokeWidth: line.options.width,
+                            stroke: line.options.color,
+                            dashType: line.options.dashType
+                        }
+                    linePos = round(line.pos);
 
                     if (secAxisPos === linePos) {
                         return null;
@@ -3909,17 +3930,11 @@
                     if (isVertical) {
                         return view.createLine(
                             lineStart, linePos, lineEnd, linePos,
-                            {
-                                strokeWidth: line.options.width,
-                                stroke: line.options.color
-                            });
+                            gridLineOptions);
                     } else {
                         return view.createLine(
                             linePos, lineStart, linePos, lineEnd,
-                            {
-                                strokeWidth: line.options.width,
-                                stroke: line.options.color
-                            });
+                            gridLineOptions);
                     }
                 });
         },
@@ -3936,12 +3951,15 @@
                 elements = [
                     view.createRect(plotArea.box, {
                         fill: options.background,
-                        zIndex: -1 }),
+                        zIndex: -1
+                    }),
                     view.createRect(plotArea.box, {
                         stroke: border.width ? border.color : "",
                         strokeWidth: border.width,
                         fill: "",
-                        zIndex: 0 })
+                        zIndex: 0,
+                        dashType: border.dashType
+                    })
                 ];
 
             return [].concat(gridLinesY, gridLinesX, childElements, elements);
@@ -4216,9 +4234,10 @@
                     "<path <#= d.renderAttr(\"id\", d.options.id) #>" +
                     "d='<#= d.renderPoints() #>' " +
                     "<#= d.renderStroke() #><#= d.renderStrokeWidth() #>" +
-                    "stroke-linecap='square' " +
                     "fill-opacity='<#= d.options.fillOpacity #>' " +
-                    "stroke-opacity='<#= d.options.strokeOpacity #>'  " +
+                    "stroke-opacity='<#= d.options.strokeOpacity #>' " +
+                    "<#= d.renderDashType() #> " +
+                    "stroke-linecap='<#= d.options.strokeLineCap #>' " +
                     "fill='<#= d.options.fill || \"none\" #>'></path>"
                 );
             }
@@ -4229,7 +4248,8 @@
         options: {
             fill: "",
             fillOpacity: 1,
-            strokeOpacity: 1
+            strokeOpacity: 1,
+            strokeLineCap: "square"
         },
 
         clone: function() {
@@ -4267,6 +4287,24 @@
                 options = path.options;
 
             return options.stroke ? "stroke='" + options.stroke + "' " : "";
+        },
+
+        renderDashType: function () {
+            var path = this,
+                options = path.options,
+                result = [];
+
+            if (options.dashType && options.strokeWidth) {
+                var dashTypeArray = SVG_DASH_TYPE[options.dashType.toLowerCase()];
+                for (var i = 0; i < dashTypeArray.length; i++) {
+                    result.push(dashTypeArray[i] * options.strokeWidth);
+                }
+
+                options.strokeLineCap = "butt";
+
+                return "stroke-dasharray='" + result.join(" ") + "' ";
+            }
+            return "";
         }
     });
 
@@ -4496,7 +4534,7 @@
             var text = this;
             ViewElement.fn.init.call(text, options);
 
-            text.content = content || "";
+            text.content = content;
             text.template = VMLText.template;
             if (!text.template) {
                 text.template = VMLText.template = template(
@@ -4522,7 +4560,7 @@
             var text = this;
             ViewElement.fn.init.call(text, options);
 
-            text.content = content || "";
+            text.content = content;
             text.template = VMLRotatedText.template;
             if (!text.template) {
                 text.template = VMLRotatedText.template = template(
@@ -4626,6 +4664,7 @@
                     "<kvml:stroke on='<#= !!d.options.stroke #>' " +
                     "<#= d.renderAttr(\"color\", d.options.stroke) #>" +
                     "<#= d.renderAttr(\"weight\", d.options.strokeWidth) #>" +
+                    "<#= d.renderAttr(\"dashstyle\", d.options.dashType) #>" +
                     "<#= d.renderAttr(\"opacity\", d.options.strokeOpacity) #> />"
                 );
             }
@@ -4676,7 +4715,8 @@
         },
 
         options: {
-            fill: ""
+            fill: "",
+            dashType: "dots"
         }
     });
 

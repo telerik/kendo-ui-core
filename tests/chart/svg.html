@@ -119,6 +119,12 @@
                     equals(path.options.strokeWidth, 2);
                 });
 
+                test("createPath sets dashType", function() {
+                    var path = view.createPath([], { dashType: "dot"});
+
+                    equals(path.options.dashType, "dot");
+                });
+
                 test("createCircle returns SVGCircle", function() {
                     var circle = view.createCircle();
                     ok(circle instanceof Chart.SVGCircle);
@@ -438,6 +444,62 @@
                 test("renders id", function() {
                     path.options.id = "id";
                     ok(path.render().indexOf("id='id'") > -1);
+                });
+
+                module("SVGPath / Dash", {
+                    setup: function() {
+                        path = new Chart.SVGPath([[10, 20]], { strokeWidth: 1 });
+                    }
+                });
+
+                test("renders shortdash", function() {
+                    path.options.dashType = "shortdash";
+                    ok(path.render().indexOf("stroke-dasharray='3.5 1.5'") > -1);
+                });
+
+                test("renders shortdot", function() {
+                    path.options.dashType = "shortdot";
+                    ok(path.render().indexOf("stroke-dasharray='1.5 1.5'") > -1);
+                });
+
+                test("renders shortdashdot", function() {
+                    path.options.dashType = "shortdashdot";
+                    ok(path.render().indexOf("stroke-dasharray='1.5 1.5 3.5 1.5'") > -1);
+                });
+
+                test("renders shortdashdotdot", function() {
+                    path.options.dashType = "shortdashdotdot";
+                    ok(path.render().indexOf("stroke-dasharray='3.5 1.5 1.5 1.5 1.5 1.5'") > -1);
+                });
+
+                test("renders dot", function() {
+                    path.options.dashType = "dot";
+                    ok(path.render().indexOf("stroke-dasharray='1.5 3.5'") > -1);
+                });
+
+                test("renders dash", function() {
+                    path.options.dashType = "dash";
+                    ok(path.render().indexOf("stroke-dasharray='4 3.5'") > -1);
+                });
+
+                test("renders longdash", function() {
+                    path.options.dashType = "longdash";
+                    ok(path.render().indexOf("stroke-dasharray='8 3.5'") > -1);
+                });
+
+                test("renders dashdot", function() {
+                    path.options.dashType = "dashdot";
+                    ok(path.render().indexOf("stroke-dasharray='3.5 3.5 1.5 3.5'") > -1);
+                });
+
+                test("renders longdashdot", function() {
+                    path.options.dashType = "longdashdot";
+                    ok(path.render().indexOf("stroke-dasharray='8 3.5 1.5 3.5'") > -1);
+                });
+
+                test("renders longdashdotdot", function() {
+                    path.options.dashType = "longdashdotdot";
+                    ok(path.render().indexOf("stroke-dasharray='8 3.5 1.5 3.5 1.5 3.5'") > -1);
                 });
 
             })();

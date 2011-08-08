@@ -134,6 +134,12 @@
                     equals(path.options.strokeWidth, 2);
                 });
 
+                test("createPath sets stroke width", function() {
+                    var path = view.createPath([], { dashType: "dot" });
+
+                    equals(path.options.dashType, "dot");
+                });
+
                 test("createCircle returns VMLCircle", function() {
                     var circle = view.createCircle();
                     ok(circle instanceof Chart.VMLCircle);
@@ -434,6 +440,13 @@
                     same(path.stroke.options.strokeWidth, 2);
                 });
 
+                test("sets stroke dash type", function() {
+                    var options = { dashType: "dot" };
+
+                    createPath(options);
+                    same(path.stroke.options.dashType, "dot");
+                });
+
                 test("sets stroke opacity", function() {
                     var options = { opacity: 0.5 };
 
@@ -511,6 +524,11 @@
                 test("renders opacity", function() {
                     stroke.options.strokeOpacity = "0.5";
                     ok(stroke.render().indexOf("opacity='0.5'") > -1);
+                });
+
+                test("renders dash type", function() {
+                    stroke.options.dashType = "dot";
+                    ok(stroke.render().indexOf("dashstyle='dot'") > -1);
                 });
 
             })();
