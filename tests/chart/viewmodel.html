@@ -971,6 +971,26 @@
                     equal(legend.box.y1, chartBox.y1);
                 });
 
+                test("positions legend to the bottom should have correct box", function() {
+                    createLegend({
+                        position: "bottom"
+                    });
+
+                    var legendBox = legend.children[0].box;
+
+                    sameBox(legendBox, new Box2D(464, 976, 515, 990));
+                });
+
+                test("positions legend to the top should have correct box", function() {
+                    createLegend({
+                        position: "top"
+                    });
+
+                    var legendBox = legend.children[0].box;
+
+                    sameBox(legendBox, new Box2D(464, 15, 515, 29));
+                });
+
                 test("positions legend to the bottom", function() {
                     createLegend({
                         position: "bottom"

@@ -2133,6 +2133,12 @@
                 group.children.push(view.createRect(markerBox, { fill: color, stroke: color }));
             }
 
+            // Sets the correct width of the label box
+            // when the position of the legend is top or bottom.
+            if (inArray(options.position, ["top", "bottom"])) {
+                labelBox.x2 += markerSize * (series.length + 1);
+            }
+
             if (children.length > 0) {
                 var padding = getSpacing(options.padding);
                 padding.left += markerSize * 2;
@@ -2204,7 +2210,7 @@
 
             // Position labels next to each other
             for (var i = 1; i < childrenCount; i++) {
-                var label = legend.children[i]
+                var label = legend.children[i];
                 label.box.alignTo(legend.children[i - 1].box, RIGHT);
                 labelBox.wrap(label.box);
                 label.box.x1 = label.box.x1 + i * markerWidth;
