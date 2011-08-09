@@ -47,11 +47,18 @@
                             field: "value"
                         }
                     };
+                },
+                teardown: function() {
+                    element.remove();
                 }
             });
 
             test("attaches to chart element", function() {
                 ok(element[0].parentNode === document.getElementById("chart"));
+            });
+
+            test("renders div with display none attribute", function() {
+                ok(element.css("display"), "none");
             });
 
             test("sets font", function() {
@@ -211,4 +218,4 @@
         <ul id="log"></ul>
 
     </body>
-</html> 
+</html>

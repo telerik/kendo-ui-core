@@ -4845,7 +4845,7 @@
             tooltip.template = Tooltip.template;
             if (!tooltip.template) {
                 tooltip.template = Tooltip.template = template(
-                    "<div style='position: absolute; font: <#= d.font #>;" +
+                    "<div style='display:none; position: absolute; font: <#= d.font #>;" +
                     "border-radius: 2px; -moz-border-radius: 2px; -webkit-border-radius: 2px;" +
                     "border: <#= d.border.width #>px solid <#= d.border.color #>;" +
                     "padding: <#= d.padding.top #>px <#= d.padding.right #>px " +
