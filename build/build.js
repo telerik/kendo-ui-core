@@ -29,8 +29,8 @@ var scripts = [
     "kendo.fx.js",
     "kendo.data.odata.js",
     "kendo.data.xml.js",
-    "kendo.data.js",
     "kendo.model.js",
+    "kendo.data.js",
     "kendo.draganddrop.js",
     "kendo.groupable.js",
     "kendo.resizable.js",
@@ -165,10 +165,6 @@ processStyles();
 console.log("copying license agreement...");
 var data = fs.readFileSync("resources/Kendo\ Beta\ EULA.pdf");
 fs.writeFileSync(PATH + "/Kendo\ Beta\ EULA.pdf", data);
-
-console.log("copying readme...");
-var data = fs.readFileSync("resources/readme.txt");
-fs.writeFileSync(PATH + "/readme.txt", data);
 
 //examples
 console.log("building examples...");

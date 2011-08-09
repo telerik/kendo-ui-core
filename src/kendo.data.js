@@ -989,7 +989,7 @@
 
             that.reader = new kendo.data.readers[options.schema.type || "json" ](options.schema);
 
-            model = that.reader.model || {};
+            model = options.schema.model || {};
 
             id = model.id;
 

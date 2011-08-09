@@ -101,7 +101,9 @@
                 $(document).ready(function() {
                     var getItem = function (target) {
                         var itemIndexes = target.val().split(/[.,]/),
-                            rootItem = menu.element.children("li").eq(itemIndexes[0]);
+                            rootItem = itemIndexes[0] != "" ?
+                                            menu.element.children("li").eq(itemIndexes[0]) :
+                                            false;
 
                         return itemIndexes.length > 1 ?
                                     rootItem.find(".t-group > .t-item").eq(itemIndexes[1]) :
