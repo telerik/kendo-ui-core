@@ -11,42 +11,27 @@
                 '<a class="t-button t-button-icon t-button-bare">' +
                     '<span class="t-icon t-group-delete"></span>' +
                 '</a>' +
-             '</div>',  { useWithBlock:false }),
-        groupContainer,
+             '</div>',  { useWithBlock:false }),        
         hint = function(target) {
             return $('<div class="t-header t-drag-clue" />')
                 .html(target.data("field"))
                 .prepend('<span class="t-icon t-drag-status t-denied" />');
         },
-        dropCue = $('<div class="t-grouping-dropclue"/>'),
-        dropCuePositions = [];
-
-    function intializePositions() {
-        dropCuePositions = $.map($(".t-group-indicator", groupContainer), function(item) {
-            item = $(item);
-            var left = item.offset().left;
-            return {
-                left: left,
-                right: left + item.outerWidth(),
-                element: item
-            };
-        });
-    }
-
-    function invalidateGroupContainer() {
-        if(groupContainer.is(":empty")) {
-            groupContainer.html(CONTAINER_EMPTY_TEXT);
-        }
-    }
+        dropCue = $('<div class="t-grouping-dropclue"/>');    
 
     var Groupable = Component.extend({
         init: function(element, options) {
-            var that = this;
+            var that = this,
+                groupContainer,
+                group = kendo.guid(),
+                intializePositions = proxy(that._intializePositions, that),
+                dropCuePositions = that._dropCuePositions = [];
 
             Component.fn.init.call(that, element, options);
-
-            groupContainer = $(that.options.groupContainer, that.element)
+            
+            groupContainer = that.groupContainer = $(that.options.groupContainer, that.element)
                 .kendoDropTarget({
+                    group: group,
                     dragenter: function(e) {
                         e.draggable.hint.find(".t-drag-status").removeClass("t-denied").addClass("t-add");
                         dropCue.css({top:3, left: 0}).appendTo(groupContainer);
@@ -60,6 +45,7 @@
                 .kendoDraggable({
                     filter: "div.t-group-indicator",
                     hint: hint,
+                    group: group,
                     dragend: function(e) {
                         that._dragEnd(this, e);
                     },
@@ -90,6 +76,7 @@
             that.element.kendoDraggable({
                 filter: that.options.filter,
                 hint: hint,
+                group: group,
                 dragend: function(e) {
                     that._dragEnd(this, e);
                 },
@@ -124,30 +111,28 @@
                     groupContainer.empty().append(
                         $.map(this.group() || [], function(item) {
                             return that.buildIndicator(item.field, item.dir);
-                        }).join('')
+                        }).join("")
                     );
-                    invalidateGroupContainer();
+                    that._invalidateGroupContainer();
                 });
             }
         },
-
         options: {
             filter: "th"
         },
-
         indicator: function(field) {
-            return $.grep($(".t-group-indicator", groupContainer), function (item)
+            var indicators = $(".t-group-indicator", this.groupContainer);
+            return $.grep(indicators, function (item)
                 {
                     return $(item).data("field") === field;
                 })[0];
         },
-
         buildIndicator: function(field, dir) {
             return indicatorTmpl({ field: field, dir: dir });
         },
-
         descriptors: function() {
-            return $.map($(".t-group-indicator", groupContainer), function(item) {
+            var indicators = $(".t-group-indicator", this.groupContainer);
+            return $.map(indicators, function(item) {
                 item = $(item);
 
                 return {
@@ -156,13 +141,12 @@
                 };
             });
         },
-
         _removeIndicator: function(indicator) {
+            var that = this;
             indicator.remove();
-            invalidateGroupContainer();
-            this._change();
+            that._invalidateGroupContainer();
+            that._change();
         },
-
         _change: function() {
             var that = this;
             if(that.dataSource) {
@@ -170,6 +154,7 @@
             }
         },
         _dropCuePosition: function(position) {
+            var dropCuePositions = this._dropCuePositions;
             if(!dropCue.is(":visible") || dropCuePositions.length == 0) {
                 return;
             }
@@ -215,6 +200,7 @@
             var that = this,
                 field = event.currentTarget.data("field"),
                 sourceIndicator = that.indicator(field),
+                dropCuePositions = that._dropCuePositions,
                 lastCuePosition = dropCuePositions[dropCuePositions.length - 1],
                 position;
 
@@ -231,7 +217,7 @@
                         that._change();
                     }
                 } else {
-                    groupContainer.append(that.buildIndicator(field));
+                    that.groupContainer.append(that.buildIndicator(field));
                     that._change();
                 }
             } else {
@@ -242,6 +228,26 @@
 
             dropCue.remove();
             dropCuePositions = [];
+        },
+        _intializePositions: function() {
+            var that = this,
+                indicators = $(".t-group-indicator", that.groupContainer), 
+                left;
+            that._dropCuePositions = $.map(indicators, function(item) {
+                item = $(item);
+                left = item.offset().left;
+                return {
+                    left: left,
+                    right: left + item.outerWidth(),
+                    element: item
+                };
+            });
+        },
+        _invalidateGroupContainer: function() {
+            var groupContainer = this.groupContainer;
+            if(groupContainer.is(":empty")) {
+                groupContainer.html(CONTAINER_EMPTY_TEXT);
+            }
         }
     });
 
