@@ -23,7 +23,11 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>1</d2p1:Order>
+<<<<<<< HEAD
       <d2p1:Runtime_x0020_ID>af3fe93e-804c-41d0-b9e4-b8e90bcdef9d</d2p1:Runtime_x0020_ID>
+=======
+      <d2p1:Runtime_x0020_ID>ea68d5c4-e31c-4955-83ec-b3cc210c01c7</d2p1:Runtime_x0020_ID>
+>>>>>>> 2adaa57... new tests added for teh menu
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -58,7 +62,11 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>2</d2p1:Order>
+<<<<<<< HEAD
       <d2p1:Runtime_x0020_ID>9acdf6d1-e755-428d-b520-d0a047ed67ce</d2p1:Runtime_x0020_ID>
+=======
+      <d2p1:Runtime_x0020_ID>fdd6fab6-6973-4b38-bc63-d7eff27a18b7</d2p1:Runtime_x0020_ID>
+>>>>>>> 2adaa57... new tests added for teh menu
       <d2p1:Step i:type="d2p1:SetTextActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -151,7 +159,11 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>3</d2p1:Order>
+<<<<<<< HEAD
       <d2p1:Runtime_x0020_ID>71067a8d-74cb-433b-9d56-4fd509fe3d14</d2p1:Runtime_x0020_ID>
+=======
+      <d2p1:Runtime_x0020_ID>77e27096-5dbe-498e-9f40-07089c8096c8</d2p1:Runtime_x0020_ID>
+>>>>>>> 2adaa57... new tests added for teh menu
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -234,7 +246,11 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>4</d2p1:Order>
+<<<<<<< HEAD
       <d2p1:Runtime_x0020_ID>d2d642cb-e384-47f5-8623-c0ffa66c20b0</d2p1:Runtime_x0020_ID>
+=======
+      <d2p1:Runtime_x0020_ID>eb28e1ec-0de3-40c3-a8a0-db45740dbccf</d2p1:Runtime_x0020_ID>
+>>>>>>> 2adaa57... new tests added for teh menu
       <d2p1:Step i:type="d2p1:AttributeVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -323,6 +339,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>5</d2p1:Order>
+<<<<<<< HEAD
       <d2p1:Runtime_x0020_ID>415a24be-d5f2-42bf-92c3-eb036797abe3</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="SleepActionDescriptor">
         <d2p1:Constraints>
@@ -332,6 +349,12 @@
               <d6p1:Value />
             </d6p1:KeyValueOfstringstring>
           </ConstraintValues>
+=======
+      <d2p1:Runtime_x0020_ID>5c7dcf61-a642-4f82-9f86-433a669a7812</d2p1:Runtime_x0020_ID>
+      <d2p1:Step i:type="SleepActionDescriptor">
+        <d2p1:Constraints>
+          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+>>>>>>> 2adaa57... new tests added for teh menu
         </d2p1:Constraints>
         <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
         <d2p1:EditorType />
@@ -352,6 +375,7 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
+<<<<<<< HEAD
       <d2p1:Description>Set 'ToggleIndexText' text to '0'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
@@ -450,6 +474,13 @@
       <d2p1:Id />
       <d2p1:Order>7</d2p1:Order>
       <d2p1:Runtime_x0020_ID>dfb45325-974e-451f-9707-8e54e1ecadfb</d2p1:Runtime_x0020_ID>
+=======
+      <d2p1:Description>Click 'EnableDisableButtonTag'</d2p1:Description>
+      <d2p1:Enabled>true</d2p1:Enabled>
+      <d2p1:Id />
+      <d2p1:Order>6</d2p1:Order>
+      <d2p1:Runtime_x0020_ID>5b14ffba-ba75-46ea-a9cc-a074fae803f8</d2p1:Runtime_x0020_ID>
+>>>>>>> 2adaa57... new tests added for teh menu
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -528,6 +559,7 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
+<<<<<<< HEAD
       <d2p1:Description>Wait for attribute 'class' has 'Contains' value of 'state-default' on 'ListItem'</d2p1:Description>
       <d2p1:Enabled>false</d2p1:Enabled>
       <d2p1:Id />
@@ -622,6 +654,13 @@
       <d2p1:Id />
       <d2p1:Order>9</d2p1:Order>
       <d2p1:Runtime_x0020_ID>e07b377c-8082-4a82-9337-3755e16921c3</d2p1:Runtime_x0020_ID>
+=======
+      <d2p1:Description>Verify attribute 'class' has 'Contains' value of 't-item t-first t-state-default' on 'ListItem'</d2p1:Description>
+      <d2p1:Enabled>true</d2p1:Enabled>
+      <d2p1:Id />
+      <d2p1:Order>7</d2p1:Order>
+      <d2p1:Runtime_x0020_ID>3db27335-8b55-4495-8ca9-8cda3690f484</d2p1:Runtime_x0020_ID>
+>>>>>>> 2adaa57... new tests added for teh menu
       <d2p1:Step i:type="d2p1:AttributeVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -699,7 +738,11 @@
         <d2p1:AttributeValue>t-item t-first t-state-default</d2p1:AttributeValue>
         <d2p1:CompareType>Contains</d2p1:CompareType>
       </d2p1:Step>
+<<<<<<< HEAD
       <d2p1:StepImageKey>DisableEnablec315mfhm.je0</d2p1:StepImageKey>
+=======
+      <d2p1:StepImageKey>DisableEnabledhel2z11.iju</d2p1:StepImageKey>
+>>>>>>> 2adaa57... new tests added for teh menu
       <d2p1:StepState>NoCode</d2p1:StepState>
       <d2p1:Version>200</d2p1:Version>
     </d2p1:AutomationStep>
@@ -715,9 +758,13 @@
     <d2p1:string>Telerik.WebAii.Controls.Xaml, Version=2011.1.729.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
     <d2p1:string>Telerik.WebAii.Controls.Xaml.Wpf, Version=2011.1.729.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
   </CurrentReferences>
+<<<<<<< HEAD
   <DeploymentItems xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
     <d2p1:string>..\..\..\bin\Debug\KendoDemosTests.dll</d2p1:string>
   </DeploymentItems>
+=======
+  <DeploymentItems xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+>>>>>>> 2adaa57... new tests added for teh menu
   <DomStatesCounter xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <HasCodeBehind>false</HasCodeBehind>
   <InheritParentDataSource>false</InheritParentDataSource>
