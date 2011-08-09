@@ -2,6 +2,8 @@
     var kendo = window.kendo,
         ui = kendo.ui,
         touch = kendo.support.touch,
+        mobileOS = kendo.support.mobileOS,
+        getOffset = kendo.getOffset,
         OPEN = "open",
         CLOSE = "close",
         CENTER = "center",
@@ -18,8 +20,7 @@
         extend = $.extend,
         proxy = $.proxy,
         Component = ui.Component,
-        mobileSafari41 = /4_1\slike\sMac\sOS\sX;.*Mobile\/\S+/.test(navigator.userAgent);
-
+        brokeniOS = touch && mobileOS.ios && mobileOS.flatVersion < 420;
 
     function contains(container, target) {
         return container === target || $.contains(container, target);
@@ -239,7 +240,8 @@
                 origins = options.origin.toLowerCase().split(" "),
                 positions = options.position.toLowerCase().split(" "),
                 collisions = that.collisions,
-                aligned = false;
+                aligned = false,
+                zoomLevel = kendo.support.zoomLevel();
 
             if (options.appendTo === Popup.fn.options.appendTo) {
                 wrapper.css(that._align(origins, positions));
@@ -247,12 +249,11 @@
             }
 
             var pos = wrapper.data('position'),
-                offset = wrapper.data('offset'),
-                zoomLevel = kendo.support.touch ? (document.documentElement.clientWidth / window.innerWidth) : 1;
+                offset = wrapper.data('offset');
 
             if (!pos) {
-                pos = wrapper.position();
-                offset = wrapper.offset();
+                pos = getOffset(wrapper, "position");
+                offset = getOffset(wrapper);
 
                 wrapper
                     .data('position', pos)
@@ -261,17 +262,17 @@
 
             var anchorParent = anchor.offsetParent().parent('.t-animation-container'); // If the parent is positioned, get the current positions
             if (anchorParent.length && anchorParent.data('fitted')) {
-                pos = wrapper.position();
-                offset = wrapper.offset();
+                pos = getOffset(wrapper, "position");
+                offset = getOffset(wrapper);
             }
+
+            offset = {
+                top: offset.top - (window.pageYOffset || document.documentElement.scrollTop || 0),
+                left: offset.left - (window.pageXOffset || document.documentElement.scrollLeft || 0)
+            };
 
             if (!that.wrapper.data('location')) // Needed to reset the popup location after every closure - fixes the resize bugs.
                 wrapper.data('location', extend({}, pos));
-
-            offset = { top: offset.top - (window.pageYOffset || document.documentElement.scrollTop || 0), left: offset.left - (window.pageXOffset || document.documentElement.scrollLeft || 0) };
-
-            if (!aligned && kendo.support.touch && !document.body.scrollLeft && !mobileSafari41)
-                offset = { top: offset.top - window.pageYOffset, left: offset.left - window.pageXOffset };
 
             var offsets = extend({}, offset),
                 location = extend({}, pos);
@@ -303,6 +304,7 @@
 
             return (location.left != flipPos.left || location.top != flipPos.top);
         },
+
         _align: function(origin, position) {
             var that = this,
                 element = that.wrapper,
@@ -311,7 +313,7 @@
                 horizontalOrigin = origin[1],
                 verticalPosition = position[0],
                 horizontalPosition = position[1],
-                anchorOffset = anchor.offset(),
+                anchorOffset = getOffset(anchor),
                 width = element.outerWidth(),
                 height = element.outerHeight(),
                 anchorWidth = anchor.outerWidth(),

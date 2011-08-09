@@ -328,7 +328,7 @@
         },
         zoomIn: {
             play: function(element, properties, options) {
-                animate(element, extend({ scale: 1 }, properties), options);
+                animate(element, extend({ scale: 1 }, properties), extend(options, { teardown: function () { element.css(TRANSITION, NONE); } }));
             },
             reverse: function(element, properties, options) {
                 animate(element, extend({ scale: .01 }, properties), options); // Scale 0 is a major mess-up
@@ -339,7 +339,7 @@
                 animate(element, extend({ scale: .01 }, properties), options);
             },
             reverse: function(element, properties, options) {
-                animate(element, extend({ scale: 1 }, properties), options);
+                animate(element, extend({ scale: 1 }, properties), extend(options, { teardown: function () { element.css(TRANSITION, NONE); } }));
             }
         },
         slide: {

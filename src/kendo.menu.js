@@ -84,6 +84,7 @@
         TIMER = "timer",
         EMPTY = ":empty",
         IMG = "img",
+        ZINDEX = "zIndex",
         KENDOPOPUP = "kendoPopup",
         DEFAULTSTATE = "t-state-default",
         DISABLEDSTATE = "t-state-disabled",
@@ -197,8 +198,7 @@
          * @param {Boolean} enable Desired state
          */
         enable: function (element, enable) {
-            if (enable !== false)
-                enable = true;
+            enable = enable !== false;
 
             this._toggleDisabled(element, enable);
         },
@@ -227,8 +227,10 @@
          * );
          */
         append: function (item, referenceItem) {
+            referenceItem = $(referenceItem);
+
             var that = this,
-                creatures = that._insert(item, referenceItem, referenceItem.find("> .t-group, .t-animation-container > .t-group"));
+                creatures = that._insert(item, referenceItem, referenceItem.length ? referenceItem.find("> .t-group, .t-animation-container > .t-group") : null);
 
             $.each (creatures.items, function () {
                 creatures.group.append(this);
@@ -236,13 +238,13 @@
             });
 
             that._updateArrow(referenceItem);
-            that._updateFirstLast(referenceItem.find(".t-first, .t-last"));
+            that._updateFirstLast(creatures.group.find(".t-first, .t-last"));
         },
 
         /**
          * Inserts a Menu item before the specified referenceItem
          * @param {Selector} item Target item, specified as a JSON object. Can also handle an array of such objects.
-         * @param {Item} referenceItem A reference item to insert the new item before
+         * @param {Selector} referenceItem A reference item to insert the new item before
          * @example
          * menu.insertBefore(
          *     [{
@@ -255,6 +257,8 @@
          * );
          */
         insertBefore: function (item, referenceItem) {
+            referenceItem = $(referenceItem);
+
             var that = this,
                 creatures = this._insert(item, referenceItem, referenceItem.parent());
 
@@ -269,7 +273,7 @@
         /**
          * Inserts a Menu item after the specified referenceItem
          * @param {Selector} item Target item, specified as a JSON object. Can also handle an array of such objects.
-         * @param {Item} referenceItem A reference item to insert the new item after
+         * @param {Selector} referenceItem A reference item to insert the new item after
          * @example
          * menu.insertAfter(
          *     [{
@@ -282,6 +286,8 @@
          * );
          */
         insertAfter: function (item, referenceItem) {
+            referenceItem = $(referenceItem);
+
             var that = this,
                 creatures = this._insert(item, referenceItem, referenceItem.parent());
 
@@ -294,16 +300,22 @@
         },
 
         _insert: function (item, referenceItem, parent) {
+            var that = this;
+
+            if (!referenceItem || !referenceItem.length) {
+                parent = that.element;
+            }
+
             var plain = $.isPlainObject(item),
                 items,
                 groupData = {
-                                firstLevel: parent.parent().hasClass("t-menu"),
-                                horizontal: parent.hasClass("t-menu-horizontal"),
-                                expanded: true,
-                                length: parent.children().length
-                            };
+                    firstLevel: parent.hasClass("t-menu"),
+                    horizontal: parent.hasClass("t-menu-horizontal"),
+                    expanded: true,
+                    length: parent.children().length
+                };
 
-            if (!parent.length) {
+            if (referenceItem && !parent.length) {
                 parent = $(Menu.renderGroup({ group: groupData })).appendTo(referenceItem);
             }
 
@@ -317,7 +329,7 @@
             } else {
                 items = $(item);
 
-                this._updateItemClasses(item);
+                that._updateItemClasses(item);
             }
 
             return { items: items, group: parent };
@@ -369,8 +381,8 @@
                     var ul = li.find(".t-group:first:hidden"), popup;
 
                     if (ul[0]) {
-                        li.data("zIndex", li.css("z-index"));
-                        li.css("z-index", that.nextItemZIndex ++);
+                        li.data(ZINDEX, li.css(ZINDEX));
+                        li.css(ZINDEX, that.nextItemZIndex ++);
 
                         popup = ul.data(KENDOPOPUP);
                         var parentHorizontal = li.parent().hasClass("t-menu-horizontal");
@@ -434,8 +446,9 @@
         _toggleHover: function(e) {
             var target = $(e.currentTarget);
 
-            if (!target.parents("li." + DISABLEDSTATE).length)
+            if (!target.parents("li." + DISABLEDSTATE).length) {
                 target.toggleClass("t-state-hover", e.type == MOUSEENTER);
+            }
         },
 
         _updateClasses: function() {
@@ -479,11 +492,12 @@
                 .parent()
                 .addClass("t-state-active");
 
-            if (!item.children(".t-link").length)
+            if (!item.children(".t-link").length) {
                 item
                     .contents()      // exclude groups, real links, templates and empty text nodes
                     .filter(function() { return (!(this.nodeName.toLowerCase() in { ul: {}, a: {}, div: {} }) && !(this.nodeType == 3 && !$.trim(this.nodeValue))); })
                     .wrapAll("<span class='t-link'/>");
+            }
 
             that._updateArrow(item);
             that._updateFirstLast(item);
@@ -520,8 +534,9 @@
 
             if (!that.options.openOnClick || that.clicked) {
                 if (!contains(e.currentTarget, e.relatedTarget) && hasChildren) {
-                    if (that.trigger(OPEN, { item: element[0] }) === false)
+                    if (that.trigger(OPEN, { item: element[0] }) === false) {
                         that.open(element);
+                    }
                 }
             }
 
@@ -540,8 +555,9 @@
                 hasChildren = (element.children(".t-animation-container").length || element.children(".t-group").length);
 
             if (!that.options.openOnClick && !contains(e.currentTarget, e.relatedTarget) && hasChildren) {
-                if (that.trigger(CLOSE, { item: element[0] }) === false)
+                if (that.trigger(CLOSE, { item: element[0] }) === false) {
                     that.close(element);
+                }
             }
         },
 
@@ -558,8 +574,9 @@
 
             that.trigger(SELECT, { item: element[0] });
 
-            if (!element.parent().hasClass("t-menu") || !that.options.openOnClick)
+            if (!element.parent().hasClass("t-menu") || !that.options.openOnClick) {
                 return;
+            }
 
             e.preventDefault();
 
@@ -571,8 +588,9 @@
         _documentClick: function (e) {
             var that = this;
 
-            if (contains(that.element[0], e.target))
+            if (contains(that.element[0], e.target)) {
                 return;
+            }
 
             if (that.clicked) {
                 that.clicked = false;

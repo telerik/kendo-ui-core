@@ -239,16 +239,18 @@
                 CONTENTLOAD
             ], that.options);
 
-            if (that.options.contentUrls)
+            if (that.options.contentUrls) {
                 element.find("> .t-item")
                     .each(function(index, item) {
                         $(item).find(".t-link").data("ContentUrl", that.options.contentUrls[index]);
                     });
+            }
 
             content = element.find("li" + activeClass + " > .t-content");
 
-            if (content.length > 0 && content.is(EMPTY))
+            if (content.length > 0 && content.is(EMPTY)) {
                 that.expand(content.parent());
+            }
         },
         options: {
             animation: {
@@ -282,8 +284,9 @@
                 item = $(item);
                 if (!item.hasClass(disabledClass) && item.find("> .t-group, > .t-content").length > 0) {
 
-                    if (that.options.expandMode == SINGLE && that._collapseAllExpanded(item))
+                    if (that.options.expandMode == SINGLE && that._collapseAllExpanded(item)) {
                         return;
+                    }
 
                     element.find(highlightedClass).removeClass(highlightedClass.substr(1));
                     item.addClass(highlightedClass.substr(1));
@@ -295,8 +298,9 @@
 
                     that._toggleItem(item, false, null);
 
-                    if (!useAnimation)
+                    if (!useAnimation) {
                         that.options.animation = animBackup;
+                    }
                 }
             });
         },
@@ -326,8 +330,9 @@
 
                     that._toggleItem(item, true, null);
 
-                    if (!useAnimation)
+                    if (!useAnimation) {
                         that.options.animation = animBackup;
+                    }
                 }
 
             });
@@ -374,8 +379,7 @@
          * @param {Boolean} enable Desired state
          */
         enable: function (element, state) {
-            if (state !== false)
-                state = true;
+            state = state !== false;
 
             this.toggle(element, state);
         },
@@ -404,8 +408,10 @@
          * );
          */
         append: function (item, referenceItem) {
+            referenceItem = $(referenceItem);
+            
             var that = this,
-                creatures = that._insert(item, referenceItem, referenceItem.find("> .t-group"));
+                creatures = that._insert(item, referenceItem, referenceItem.length ? referenceItem.find("> .t-group") : null);
 
             $.each (creatures.items, function () {
                 creatures.group.append(this);
@@ -413,7 +419,7 @@
             });
 
             that._updateArrow(referenceItem);
-            that._updateFirstLast(referenceItem.find(".t-first, .t-last"));
+            that._updateFirstLast(creatures.group.find(".t-first, .t-last"));
             creatures.group.height("auto");
         },
 
@@ -433,8 +439,10 @@
          * );
          */
         insertBefore: function (item, referenceItem) {
+            referenceItem = $(referenceItem);
+
             var that = this,
-                creatures = this._insert(item, referenceItem, referenceItem.parent());
+                creatures = that._insert(item, referenceItem, referenceItem.parent());
 
             $.each (creatures.items, function () {
                 referenceItem.before(this);
@@ -461,8 +469,10 @@
          * );
          */
         insertAfter: function (item, referenceItem) {
+            referenceItem = $(referenceItem);
+
             var that = this,
-                creatures = this._insert(item, referenceItem, referenceItem.parent());
+                creatures = that._insert(item, referenceItem, referenceItem.parent());
 
             $.each (creatures.items, function () {
                 referenceItem.after(this);
@@ -501,6 +511,12 @@
         },
 
         _insert: function (item, referenceItem, parent) {
+            var that = this;
+
+            if (!referenceItem || !referenceItem.length) {
+                parent = that.element;
+            }
+
             var plain = $.isPlainObject(item),
                 items,
                 groupData = {
@@ -509,7 +525,7 @@
                     length: parent.children().length
                 };
 
-            if (!parent.length) {
+            if (referenceItem && !parent.length) {
                 parent = $(PanelBar.renderGroup({ group: groupData })).appendTo(referenceItem);
             }
 
@@ -523,7 +539,7 @@
             } else {
                 items = $(item);
 
-                this._updateItemClasses(item);
+                that._updateItemClasses(item);
             }
 
             return { items: items, group: parent };
@@ -592,11 +608,12 @@
             item.each(function() {
                 var item = $(this);
 
-                if (!item.children(".t-link").length)
+                if (!item.children(".t-link").length) {
                     item
                         .contents()      // exclude groups, real links, templates and empty text nodes
                         .filter(function() { return (!(this.nodeName.toLowerCase() in { ul: {}, a: {}, div: {} }) && !(this.nodeType == 3 && !$.trim(this.nodeValue))); })
                         .wrapAll("<span class='t-link'/>");
+                }
             });
 
             that.element
@@ -634,11 +651,13 @@
                 target = $(e.currentTarget),
                 element = that.element;
 
-            if (target.parents("li" + disabledClass).length)
+            if (target.parents("li" + disabledClass).length) {
                 return;
+            }
 
-            if (target.closest(".t-widget")[0] != element[0])
+            if (target.closest(".t-widget")[0] != element[0]) {
                 return;
+            }
 
             var link = target.closest(".t-link"),
                 item = link.closest(ITEM);
@@ -653,27 +672,32 @@
                 href = link.attr("href"),
                 isAnchor = link.data("ContentUrl") || (href && (href.charAt(href.length - 1) == "#" || href.indexOf("#" + that.element[0].id + "-") != -1));
 
-            if (contents.data("animating"))
+            if (contents.data("animating")) {
                 return;
+            }
 
             if (that._triggerEvent(SELECT, item)) {
                 e.preventDefault();
             }
 
-            if (isAnchor || contents.length)
+            if (isAnchor || contents.length) {
                 e.preventDefault();
-            else
+            } else {
                 return;
+            }
 
-            if (that.options.expandMode == SINGLE)
-                if (that._collapseAllExpanded(item))
+            if (that.options.expandMode == SINGLE) {
+                if (that._collapseAllExpanded(item)) {
                     return;
+                }
+            }
 
             if (contents.length) {
                 var visibility = contents.is(VISIBLE);
 
-                if (!that._triggerEvent(!visibility ? EXPAND : COLLAPSE, item))
+                if (!that._triggerEvent(!visibility ? EXPAND : COLLAPSE, item)) {
                     that._toggleItem(item, visibility, e);
+                }
             }
         },
 
@@ -685,21 +709,24 @@
 
                 this._toggleGroup(childGroup, isVisible);
 
-                if (e)
+                if (e) {
                     e.preventDefault();
+                }
             } else {
 
                 var itemIndex = element.parent().children().index(element),
                     content = element.find("> .t-content");
 
                 if (content.length) {
-                    if (e)
+                    if (e) {
                         e.preventDefault();
+                    }
 
-                    if (!content.is(EMPTY))
+                    if (!content.is(EMPTY)) {
                         that._toggleGroup(content, isVisible);
-                    else
+                    } else {
                         that._ajaxRequest(element, content, isVisible);
+                    }
                 }
             }
         },
@@ -709,8 +736,9 @@
                 hasCloseAnimation = "effects" in that.options.animation.close,
                 closeAnimation = extend({}, that.options.animation.open);
 
-            if (element.is(VISIBLE) != visibility)
+            if (element.is(VISIBLE) != visibility) {
                 return;
+            }
 
             visibility && element.css("height", element.height()); // Set initial height on visible items (due to a Chrome bug/feature).
             element.css("height");
@@ -770,8 +798,9 @@
                 data: data,
 
                 error: function (xhr, status) {
-                    if (that.trigger(ERROR, { xhr: xhr, status: status }))
+                    if (that.trigger(ERROR, { xhr: xhr, status: status })) {
                         this.complete();
+                    }
                 },
 
                 complete: function () {
@@ -860,8 +889,9 @@
         textClass: function(item, group) {
             var result = "t-link";
 
-            if (group.firstLevel)
+            if (group.firstLevel) {
                 result += " t-header";
+            }
 
             return result;
         },

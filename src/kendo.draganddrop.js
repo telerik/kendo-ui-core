@@ -5,6 +5,7 @@
         proxy = $.proxy,
         extend = $.extend,
         touch = kendo.support.touch,
+        getOffset = kendo.getOffset,
         draggables = {},
         dropTargets = {},
         lastDropTarget = { element: [ null ] },
@@ -338,7 +339,7 @@
         _stop: function(e) {
             var that = this,
                 destroy = proxy(that._destroy, that),
-                offset = that.currentTarget.offset();
+                offset = getOffset(that.currentTarget);
 
             if (e.type == MOUSEUP || e.keyCode == 27) {
                 if (touch && kendo.size(dropTargets)) {

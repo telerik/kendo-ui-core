@@ -427,7 +427,7 @@
     patterns = {
         numeric: ["n", "-n"],
         currency: ["$n", "($n)"],
-        percent: ['n %', '-n %']
+        percent: ["n %", "-n %"]
     },
     formatRegExp = /{(\d+)(:[^\}]+)?}/g,
     dateFormatRegExp = /dddd|ddd|dd|d|MMMM|MMM|MM|M|yyyy|yy|HH|H|hh|h|mm|m|fff|ff|f|tt|ss|s|"[^"]*"|'[^']*'/g,
@@ -745,7 +745,7 @@
         if (fmt) {
             if (value instanceof Date) {
                 return formatDate(value, fmt);
-            } else if (typeof value === "number") {
+            } else if (typeof value === NUMBER) {
                 return formatNumber(value, fmt);
             }
         }
@@ -767,36 +767,40 @@
     })();
 
     function throttle(delay, callback) {
-        var timeout_id,
-            last_call = 0,
-            omit_ending = arguments[2] || false;
+        var timeoutId,
+            lastCall = 0,
+            omitEnding = arguments[2] || false;
 
         return function () {
             var that = this,
-                time_span = +new Date() - last_call,
+                timeSpan = +new Date() - lastCall,
                 args = arguments;
 
             function execute() {
-                last_call = +new Date();
+                lastCall = +new Date();
                 callback.apply(that, args);
             }
 
             function clear() {
-                clearTimeout(timeout_id);
-                timeout_id = undefined;
+                clearTimeout(timeoutId);
+                timeoutId = undefined;
             }
 
-            timeout_id && clear();
+            timeoutId && clear();
 
-            if (time_span > delay)
+            if (timeSpan > delay) {
                 execute();
-            else
-                if (!omit_ending)
-                    timeout_id = setTimeout( execute, delay - time_span);
+            } else {
+                if (!omitEnding) {
+                    timeoutId = setTimeout( execute, delay - timeSpan);
+                }
+            }
         };
     }
 
     function wrap(element) {
+        var browser = $.browser;
+
         if (!element.parent().hasClass("t-animation-container")) {
             var shadow = element.css(kendo.support.transitions.css + "box-shadow") || element.css("box-shadow"),
                 radius = shadow ? shadow.match(/(\d+?)px\s*(\d+?)px\s*(\d+?)px\s*(\d+?)?/i) || [ 0, 0, 0, 0, 0 ] : [ 0, 0, 0, 0, 0 ],
@@ -804,8 +808,9 @@
                 right = (+radius[1]) + blur,
                 bottom = (+radius[2]) + blur;
 
-            if ($.browser.opera) // Box shadow can't be retrieved in Opera
+            if (browser.opera) { // Box shadow can't be retrieved in Opera
                 right = bottom = 5;
+            }
 
             element.wrap(
                          $("<div/>")
@@ -819,8 +824,9 @@
         } else {
             var wrap = element.parent(".t-animation-container");
 
-            if (wrap.is(":hidden"))
+            if (wrap.is(":hidden")) {
                 wrap.show();
+            }
             
             wrap.css({
                     width: element.outerWidth(),
@@ -828,10 +834,11 @@
                 });
         }
 
-        if ($.browser.msie && Math.floor($.browser.version) <= 7)
+        if (browser.msie && Math.floor(browser.version) <= 7) {
             element.css({
                 zoom: 1
             });
+        }
 
         return element.parent();
     }
@@ -896,25 +903,65 @@
          * @name kendo.support.hasHW3D
          * @property {Boolean}
          */
-        support.hasHW3D = 'WebKitCSSMatrix' in window && 'm11' in new WebKitCSSMatrix();
+        support.hasHW3D = "WebKitCSSMatrix" in window && "m11" in new WebKitCSSMatrix();
 
-        each([ 'Moz', 'webkit', 'O', 'ms' ], function () {
+        each([ "Moz", "webkit", "O", "ms" ], function () {
             var prefix = this.toString();
 
-            if (typeof table.style[prefix + 'Transition'] === 'string') {
+            if (typeof table.style[prefix + "Transition"] === STRING) {
                 var lowPrefix = prefix.toLowerCase();
 
                 support.transitions = {
-                    css: '-' + lowPrefix + '-',
+                    css: "-" + lowPrefix + "-",
                     prefix: prefix,
-                    event: (lowPrefix === 'o' || lowPrefix === 'webkit') ? lowPrefix : ''
+                    event: (lowPrefix === "o" || lowPrefix === "webkit") ? lowPrefix : ""
                 };
 
-                support.transitions.event = support.transitions.event ? support.transitions.event + 'TransitionEnd' : 'transitionend';
+                support.transitions.event = support.transitions.event ? support.transitions.event + "TransitionEnd" : "transitionend";
 
                 return false;
             }
         });
+
+        function detectOS(ua) {
+            var os = false, match = [],
+                agentRxs = {
+                    android: /(Android)\s+(\d+)\.([\d.]+)/,
+                    iphone: /(iPhone|iPod).*OS\s+(\d+)[\._]([\d\._]+)/,
+                    ipad: /(iPad).*OS\s+(\d+)[\._]([\d_]+)/,
+                    meego: /(MeeGo).+NokiaBrowser\/(\d+)\.([\d\._]+)/,
+                    webos: /(webOS)\/(\d+)\.([\d.]+)/,
+                    blackberry: /(BlackBerry).*?Version\/(\d+)\.([\d.]+)/
+                };
+            for (var agent in agentRxs) {
+                if (agentRxs.hasOwnProperty(agent)) {
+                    match = ua.match(agentRxs[agent]);
+                    if (match) {
+                        os = {};
+                        os.name = agent.toLowerCase();
+                        os[os.name] = true;
+                        os.majorVersion = match[2];
+                        os.minorVersion = match[3].replace("_", ".");
+                        os.flatVersion = os.majorVersion + os.minorVersion.replace(".", "");
+                        os.flatVersion = os.flatVersion + (new Array(4 - os.flatVersion.length).join("0")); // Pad with zeroes
+                        os.ios = (agent in { iphone:0, ipod:0, ipad:0 });
+
+                        break;
+                    }
+                }
+            }
+            return os;
+        }
+
+        /**
+         * Parses the mobile OS type and version from the browser user agent.
+         * @name kendo.support.mobileOS
+         */
+        support.mobileOS = detectOS(navigator.userAgent);
+
+        support.zoomLevel = function() {
+            return support.touch ? (document.documentElement.clientWidth / window.innerWidth) : 1;
+        };
 
         /**
          * Indicates the browser device pixel ratio.
@@ -933,23 +980,23 @@
 
     var effectInit = {
             fadeIn: function(element) {
-                element.css('opacity', 0);
+                element.css("opacity", 0);
             },
             zoomIn: function(element) {
                 if (kendo.support.transitions)
                     element.css(kendo.support.transitions.css + "transform", "scale(.01)");
             },
             expandVertical: function(element) {
-                if (element.data('initialHeight') === undefined)
-                    element.data('initialHeight', element[0].style.height);
+                if (element.data("initialHeight") === undefined)
+                    element.data("initialHeight", element[0].style.height);
             },
             expandVerticalReverse: function(element) {
-                if (element.data('initialHeight') === undefined)
-                    element.data('initialHeight', element[0].style.height);
+                if (element.data("initialHeight") === undefined)
+                    element.data("initialHeight", element[0].style.height);
 
                 element
-                    .css('height', element.height())
-                    .css('height')
+                    .css("height", element.height())
+                    .css("height")
             }
         };
     extend(effectInit, {
@@ -959,16 +1006,40 @@
 
     function size(obj) {
         var size = 0, key;
-        for (key in obj)
+        for (key in obj) {
             obj.hasOwnProperty(key) && size++;
+        }
 
         return size;
+    }
+
+    function getOffset(element, type) {
+        if (!type) {
+            type = "offset";
+        }
+
+        var result = element[type](),
+            mobileOS = support.mobileOS;
+
+        if (support.touch && mobileOS.ios && mobileOS.flatVersion < 410) { // Extra processing only in broken iOS'
+            var offset = type == "offset" ? result : element.offset(),
+                positioned = (result.left == offset.left && result.top == offset.top);
+
+            if (positioned) {
+                return {
+                    top: result.top - window.scrollY,
+                    left: result.left - window.scrollX
+                };
+            }
+        }
+
+        return result;
     }
 
     function parseEffects(input, mirror) {
         var effects = {};
 
-        if (typeof input === "string")
+        if (typeof input === STRING) {
             each(input.split(" "), function() {
                 var effect = this.split(":"),
                     direction = effect[1],
@@ -978,13 +1049,14 @@
 
                 effects[effect[0]] = effectBody;
             });
-        else
+        } else {
             each(input, function(idx) {
                 if (this.direction && mirror)
                     this.direction = kendo.directions[this.direction].reverse;
 
                 effects[idx] = this;
             });
+        }
 
         return effects;
     }
@@ -1031,7 +1103,7 @@
     function animate(element, options, duration, reverse, complete) {
         var effects = {};
 
-        if (typeof options === "string") {
+        if (typeof options === STRING) {
             // options is the list of effect names separated by space e.g. animate(element, "fadeIn slideDown")
 
             effects = parseEffects(options);
@@ -1048,7 +1120,7 @@
                 reverse = false;
             }
 
-            if (typeof duration === "boolean"){
+            if (typeof duration === BOOLEAN){
                 duration = 400;
                 reverse = duration;
             }
@@ -1061,8 +1133,9 @@
             };
         }
 
-        if ('effects' in options && typeof options.effects === "string")
+        if ("effects" in options && typeof options.effects === STRING) {
             options.effects = parseEffects(options.effects);
+        }
 
         options = extend({
             //default options
@@ -1076,20 +1149,21 @@
         }, options);
 
         each( options.effects, function (effectName) {
-            var effect = options.reverse ? effectName + 'Reverse' : effectName;
+            var effect = options.reverse ? effectName + "Reverse" : effectName;
 
-            if (effect in effectInit)
+            if (effect in effectInit) {
                 effectInit[effect](element);
+            }
         });
 
-        if (options.show && !element.is(':visible')) {
+        if (options.show && !element.is(":visible")) {
             element.show();
         }
 
         return element.queue(function () {
             var promises = [], effects = options.effects;
 
-            if (typeof effects === "string") {
+            if (typeof effects === STRING) {
                 effects = parseEffects(options.effects);
             }
 
@@ -1120,8 +1194,9 @@
                             direction: settings.direction,
                             complete: function () {
                                 each(options.effects, function(idx, effect) {
-                                    if ('options' in effect && 'teardown' in effect.options)
+                                    if ("options" in effect && "teardown" in effect.options) {
                                         teardowns.push(effect.options.teardown); // collect the internal completion callbacks
+                                    }
                                 });
 
                                 deferred.resolve();
@@ -1141,8 +1216,9 @@
             $.when.apply(null, promises).then(function() {
                 element.removeData("animating");
                 element.dequeue(); // call next animation from the queue
-                if (support.transitions)
+                if (support.transitions) {
                     element.unbind(support.transitions.event);
+                }
 
                 if (options.hide) {
                     element.hide();
@@ -1156,10 +1232,11 @@
 
     extend($.fn, /** @lends jQuery.fn */{
         kendoStop: function(clearQueue, gotoEnd) {
-            if (kendo.support.transitions && 'stopQueue' in kendo.fx)
+            if (kendo.support.transitions && "stopQueue" in kendo.fx) {
                 return kendo.fx.stopQueue(this, clearQueue || false, gotoEnd || false);
-            else
+            } else {
                 return this.stop(clearQueue, gotoEnd);
+            }
         },
         kendoAnimate: function(options, duration, reverse, complete) {
             return animate(this, options, duration, reverse, complete);
@@ -1168,18 +1245,18 @@
 
     function toggleClass(element, classes, options, add) {
         if (classes) {
-            classes = classes.split(' ');
+            classes = classes.split(" ");
 
             if (support.transitions) {
                 options = extend({
-                    exclusive: 'all',
+                    exclusive: "all",
                     duration: 400,
-                    ease: 'ease-out'
+                    ease: "ease-out"
                 }, options);
 
-                element.css(support.transitions.css + 'transition', options.exclusive + ' ' + options.duration + 'ms ' + options.ease);
+                element.css(support.transitions.css + "transition", options.exclusive + " " + options.duration + "ms " + options.ease);
                 setTimeout(function() {
-                    element.css(support.transitions.css + 'transition', 'none');
+                    element.css(support.transitions.css + "transition", "none");
                 }, options.duration + 20); // TODO: this should fire a kendoAnimate session instead.
             }
 
@@ -1234,12 +1311,13 @@
             if (id) {
                 var output = null;
                 each(changedTouches, function(idx, value) {
-                    if (id == value.identifier)
+                    if (id == value.identifier) {
                         output = {
                             idx: value.identifier,
                             x: value.pageX,
                             y: value.pageY
                         };
+                    }
                 });
                 return output;
             } else {
@@ -1252,12 +1330,12 @@
         };
 
         eventTarget = function(e) {
-            var touches = 'originalEvent' in e ? e.originalEvent.changedTouches : "changedTouches" in e ? e.changedTouches : null;
+            var touches = "originalEvent" in e ? e.originalEvent.changedTouches : "changedTouches" in e ? e.changedTouches : null;
 
             return touches ? document.elementFromPoint(touches[0].clientX, touches[0].clientY) : null;
         };
 
-        each(['swipe', 'swipeLeft', 'swipeRight', 'swipeUp', 'swipeDown', 'doubleTap', 'tap'], function(m, value) {
+        each(["swipe", "swipeLeft", "swipeRight", "swipeUp", "swipeDown", "doubleTap", "tap"], function(m, value) {
             $.fn[value] = function(callback) {
                 return this.bind(value, callback)
             }
@@ -1313,6 +1391,7 @@
         throttle: throttle,
         wrap: wrap,
         size: size,
+        getOffset: getOffset,
         parseEffects: parseEffects,
         directions: directions,
         Observable: Observable,
