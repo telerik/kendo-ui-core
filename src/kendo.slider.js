@@ -1,10 +1,10 @@
 ﻿(function ($, window) {
     /**
      * @name kendo.ui.Slider.Description
-     * @section 
+     * @section
      *  <p>
-     *      The Slider widget provides a rich input for selecting values or ranges of values. 
-     *      Unlike the plain HTML5 range input, the Slider presents a consistent experience across 
+     *      The Slider widget provides a rich input for selecting values or ranges of values.
+     *      Unlike the plain HTML5 range input, the Slider presents a consistent experience across
      *      all browsers and has a rich API and event model.
      *  </p>
      *  <h3>Getting Started</h3>
@@ -26,8 +26,8 @@
      * @exampleTitle Create two simple HTML input elements in a div (type="range" is optional)
      * @example
      *  <div id="rangeSlider">
-	 *      <input type="range" />
-	 *      <input type="range" />
+     *      <input type="range" />
+     *      <input type="range" />
      *  </div>
      *
      * @exampleTitle Initialize the RangeSlider using a jQuery selector targeting the div
@@ -36,12 +36,12 @@
      *
      * @section
      *  <p>
-     *      The RangeSlider requires two inputs to capture both ends of the value range. This 
-     *      benefits scenarios where JavaScript is disabled, in which case users will be presented 
+     *      The RangeSlider requires two inputs to capture both ends of the value range. This
+     *      benefits scenarios where JavaScript is disabled, in which case users will be presented
      *      with two inputs, still allowing them to input a valid range.
      *  </p>
-     *  
-     *  <h3>Customizing Slider Behavior</h3>        
+     *
+     *  <h3>Customizing Slider Behavior</h3>
      *  Many facets of the Slider and RangeSlider behavior can be configured via simple properties, including:
      *  <ul>
      *      <li>Min/Max values</li>
@@ -60,7 +60,7 @@
      *      orientation: "vertical",
      *      smallStep: 1,
      *      largeStep: 10
-     *  });  
+     *  });
      *
      */
     var kendo = window.kendo,
@@ -71,19 +71,21 @@
         proxy = $.proxy,
         math = Math,
         touch = kendo.support.touch,
-        //events
         CHANGE = "change",
         SLIDE = "slide",
         MOUSE_DOWN = touch ? "touchstart" : "mousedown",
         MOUSE_UP = touch ? "touchend" : "mouseup",
         MOVE_SELECTION = "moveSelection",
         KEY_DOWN = "keydown",
-        //css selectors
+        MOUSE_OVER = "mouseover",
         DRAG_HANDLE = ".t-draghandle",
         TRACK_SELECTOR = ".t-slider-track",
         TICK_SELECTOR = ".t-tick",
-        //constants
-        PRECISION = 3;
+        STATE_ACTIVE = "t-state-active",
+        STATE_DEFAULT = "t-state-default",
+        STATE_DISABLED = "t-state-disabled",
+        PRECISION = 3,
+        DISABLED = "disabled";
 
     var SliderBase = Component.extend({
         init: function(element, options) {
@@ -110,7 +112,7 @@
             var sizeBetweenTicks = that._maxSelection / ((options.max - options.min) / options.smallStep);
             var pixelWidths = that._calculateItemsWidth(math.floor(that._distance / options.smallStep));
 
-            if (that.options.tickPlacement != "none" && sizeBetweenTicks >= 2) {
+            if (options.tickPlacement != "none" && sizeBetweenTicks >= 2) {
                 that._trackDiv.before(createSliderItems(options, that._distance));
                 that._setItemsWidth(pixelWidths);
                 that._setItemsTitle();
@@ -142,7 +144,7 @@
                  */
 
                 /**
-                 * Faised when the rangeSlider value changes as a result of selecting a new value with one of the drag handles or the keyboard.
+                 * Fires when the rangeSlider value changes as a result of selecting a new value with one of the drag handles or the keyboard.
                  * @name kendo.ui.RangeSlider#change
                  * @event
                  * @param {Event} e
@@ -180,8 +182,8 @@
         },
 
         _setTrackDivWidth: function() {
-        var that = this,
-            trackDivPosition = parseFloat(that._trackDiv.css(that._position), 10) * 2;
+            var that = this,
+                trackDivPosition = parseFloat(that._trackDiv.css(that._position), 10) * 2;
 
             that._trackDiv[that._size]((that.wrapper[that._size]() - 2) - trackDivPosition);
         },
@@ -189,26 +191,27 @@
         _setItemsWidth: function(pixelWidths) {
             var that = this,
                 options = that.options,
-                itemsCount = math.floor(that._distance / options.smallStep),
+                first = 0,
+                last = pixelWidths.length - 1,
                 items = that.wrapper.find(TICK_SELECTOR),
-                i;
+                i,
+                paddingTop = 0,
+                bordersWidth = 2,
+                selection = 0;
 
             for (i = 0; i < items.length - 2; i++) {
                 $(items[i + 1])[that._size](pixelWidths[i]);
             }
 
             if (that._isHorizontal) {
-                $(items[0]).addClass("t-first")[that._size](pixelWidths[itemsCount]);
-                $(items[items.length - 1]).addClass("t-last")[that._size](pixelWidths[itemsCount - 1]);
+                $(items[first]).addClass("t-first")[that._size](pixelWidths[last - 1]);
+                $(items[last]).addClass("t-last")[that._size](pixelWidths[last]);
             } else {
-                $(items[items.length - 1]).addClass("t-first")[that._size](pixelWidths[itemsCount]);
-                $(items[0]).addClass("t-last")[that._size](pixelWidths[itemsCount - 1]);
+                $(items[last]).addClass("t-first")[that._size](pixelWidths[last]);
+                $(items[first]).addClass("t-last")[that._size](pixelWidths[last - 1]);
             }
 
             if (that._distance % options.smallStep != 0 && !that._isHorizontal) {
-                var paddingTop = 0,
-                    bordersWidth = 2,
-                    selection = 0;
                 for (i = 0; i < pixelWidths.length; i++) {
                     selection += pixelWidths[i];
                 }
@@ -238,13 +241,12 @@
         _setItemsLargeTick: function() {
             var that = this,
                 options = that.options,
-                i;
+                i,
+                items = that.wrapper.find(TICK_SELECTOR),
+                item = {},
+                step = round(options.largeStep / options.smallStep, PRECISION);
 
             if ((1000 * options.largeStep) % (1000 * options.smallStep) == 0) {
-                var items = that.wrapper.find(TICK_SELECTOR),
-                    item = {},
-                    step = round(options.largeStep / options.smallStep, PRECISION);
-
                 if (that._isHorizontal) {
                     for (i = 0; i < items.length; i = round(i + step, PRECISION)) {
                         item = $(items[i]);
@@ -285,10 +287,10 @@
             }
 
             pixelWidths[itemsCount - 1] = pixelWidths[itemsCount] = itemWidth / 2;
-            return that._roudWidths(pixelWidths);
+            return that._roundWidths(pixelWidths);
         },
 
-        _roudWidths: function(pixelWidthsArray) {
+        _roundWidths: function(pixelWidthsArray) {
             var balance = 0;
 
             for (i = 0; i < pixelWidthsArray.length; i++) {
@@ -307,9 +309,10 @@
             }
 
             //set step size
-            var step = parseFloat(pixelWidthsArray.length - 1) / parseFloat(additionalSize == 1 ? additionalSize : additionalSize - 1);
+            var step = parseFloat(pixelWidthsArray.length - 1) / parseFloat(additionalSize == 1 ? additionalSize : additionalSize - 1),
+                i;
 
-            for (var i = 0; i < additionalSize; i++) {
+            for (i = 0; i < additionalSize; i++) {
                 pixelWidthsArray[parseInt(math.round(step * i))] += 1;
             }
 
@@ -327,8 +330,8 @@
             pixelWidths.splice(0, 0, pixelWidths.pop() * 2);
             pixelWidths.splice(itemsCount, 1, pixelWidths.pop() * 2);
 
-            that._pixelStepsArray = [selection];
-            that._valuesArray = [val];
+            that._pixelSteps = [selection];
+            that._values = [val];
 
             if (itemsCount == 0) {
                 return;
@@ -336,16 +339,16 @@
 
             while (i < itemsCount) {
                 selection += (pixelWidths[i - 1] + pixelWidths [i]) / 2;
-                that._pixelStepsArray[i] = selection;
-                that._valuesArray[i] = val += options.smallStep;
+                that._pixelSteps[i] = selection;
+                that._values[i] = val += options.smallStep;
 
                 i++;
             }
 
             var lastItem = options.max % options.smallStep == 0 ? itemsCount - 1 : itemsCount;
 
-            that._pixelStepsArray[lastItem] = that._maxSelection;
-            that._valuesArray[lastItem] = options.max;
+            that._pixelSteps[lastItem] = that._maxSelection;
+            that._values[lastItem] = options.max;
         },
 
         _getValueFromPosition: function(mousePosition, dragableArea) {
@@ -354,7 +357,8 @@
                 step = math.max(options.smallStep * (that._maxSelection / that._distance), 0),
                 position = 0,
                 halfStep = (step / 2),
-                val = 0;
+                val = 0,
+                i;
 
             if (that._isHorizontal) {
                 position = mousePosition - dragableArea.startPoint;
@@ -366,9 +370,9 @@
                 return options.max;
             }
 
-            for (var i = 0; i < that._pixelStepsArray.length; i++) {
-                if (math.abs(that._pixelStepsArray[i] - position) - 1 <= halfStep) {
-                    return round(that._valuesArray[i], PRECISION);
+            for (i = 0; i < that._pixelSteps.length; i++) {
+                if (math.abs(that._pixelSteps[i] - position) - 1 <= halfStep) {
+                    return round(that._values[i], PRECISION);
                 }
             }
         },
@@ -559,13 +563,13 @@
                 options = that.options;
 
             that.wrapper
-                .removeAttr("disabled")
-                .removeClass("t-state-disabled")
-                .addClass("t-state-default");
+                .removeAttr(DISABLED)
+                .removeClass(STATE_DISABLED)
+                .addClass(STATE_DEFAULT);
 
             var clickHandler = function (e) {
                 if ($(e.target).hasClass("t-draghandle")) {
-                    $(e.target).addClass("t-state-active");
+                    $(e.target).addClass(STATE_ACTIVE);
                     return;
                 }
 
@@ -583,16 +587,16 @@
                 .find(TRACK_SELECTOR).bind(MOUSE_DOWN, clickHandler);
 
             that.wrapper.find(DRAG_HANDLE).bind(MOUSE_UP, function (e) {
-                $(e.target).removeClass("t-state-active");
+                $(e.target).removeClass(STATE_ACTIVE);
             });
 
             var move = proxy(function (e, sign) {
                 var index = math.ceil(options.val / options.smallStep);
 
-                if (index >= that._valuesArray.length - 1 || index <= 0) {
+                if (index >= that._values.length - 1 || index <= 0) {
                     this._setValueInRange(options.val + (sign * options.smallStep));
                 } else {
-                    this._setValueInRange(this._valuesArray[index + (sign * 1)]);
+                    this._setValueInRange(this._values[index + (sign * 1)]);
                 }
             }, that);
 
@@ -613,7 +617,7 @@
                     .bind(MOUSE_UP, proxy(function (e) {
                         this._clearTimer();
                     }, that))
-                    .bind("mouseover", function (e) {
+                    .bind(MOUSE_OVER, function (e) {
                         $(e.currentTarget).addClass("t-state-hover");
                     })
                     .bind("mouseout", proxy(function (e) {
@@ -649,9 +653,9 @@
             var that = this;
 
             that.wrapper
-                .attr("disabled", "disabled")
-                .removeClass("t-state-default")
-                .addClass("t-state-disabled");
+                .attr(DISABLED, DISABLED)
+                .removeClass(STATE_DEFAULT)
+                .addClass(STATE_DISABLED);
 
             that.wrapper
                 .find(".t-button")
@@ -661,8 +665,8 @@
                 .bind(MOUSE_UP, false)
                 .unbind("mouseleave")
                 .bind("mouseleave", false)
-                .unbind("mouseover")
-                .bind("mouseover", false);
+                .unbind(MOUSE_OVER)
+                .bind(MOUSE_OVER, false);
 
             that.wrapper
                 .find(TICK_SELECTOR).unbind(MOUSE_DOWN)
@@ -753,7 +757,7 @@
         function moveSelection (val) {
             var selectionValue = val - options.min,
                 index = math.ceil(selectionValue / options.smallStep),
-                selection = that._pixelStepsArray[index],
+                selection = that._pixelSteps[index],
                 selectionDiv = that._trackDiv.find(".t-slider-selection"),
                 halfDragHanndle = parseInt(dragHandle[that._size]() / 2, 10) + 1;
 
@@ -763,11 +767,9 @@
 
         moveSelection(that.value());
 
-        var handler = function (e) {
-            moveSelection(parseFloat(e.value, 10));
-        };
-
-        that.bind([CHANGE, SLIDE, MOVE_SELECTION], handler);
+        that.bind([CHANGE, SLIDE, MOVE_SELECTION], function (e) {
+                                                       moveSelection(parseFloat(e.value, 10));
+                                                   });
     };
 
     Slider.Drag = function (dragHandle, type, owner, options) {
@@ -799,8 +801,8 @@
                 return false;
             }
 
-            owner.element.unbind("mouseover");
-            that.dragHandle.addClass("t-state-active");
+            owner.element.unbind(MOUSE_OVER);
+            that.dragHandle.addClass(STATE_ACTIVE);
 
             that.dragableArea = owner._getDragableArea();
             that.step = math.max(options.smallStep * (owner._maxSelection / owner._distance), 0);
@@ -905,8 +907,8 @@
                 that.tooltipDiv.remove();
             }
 
-            that.dragHandle.removeClass("t-state-active");
-            owner.element.bind("mouseover");
+            that.dragHandle.removeClass(STATE_ACTIVE);
+            owner.element.bind(MOUSE_OVER);
 
             return false;
         },
@@ -1054,13 +1056,13 @@
                 options = that.options;
 
             that.wrapper
-                .removeAttr("disabled")
-                .removeClass("t-state-disabled")
-                .addClass("t-state-default");
+                .removeAttr(DISABLED)
+                .removeClass(STATE_DISABLED)
+                .addClass(STATE_DEFAULT);
 
             var clickHandler = function (e) {
                 if ($(e.target).hasClass("t-draghandle")) {
-                    $(e.target).addClass("t-state-active");
+                    $(e.target).addClass(STATE_ACTIVE);
                     return;
                 }
 
@@ -1091,7 +1093,7 @@
                 .find(TRACK_SELECTOR).bind(MOUSE_DOWN, clickHandler);
 
             that.wrapper.find(DRAG_HANDLE).bind(MOUSE_UP, function (e) {
-                $(e.target).removeClass("t-state-active");
+                $(e.target).removeClass(STATE_ACTIVE);
             });
 
             that.wrapper.find(DRAG_HANDLE)
@@ -1123,9 +1125,9 @@
                 options = that.options;
 
             that.wrapper
-                .attr("disabled", "disabled")
-                .removeClass("t-state-default")
-                .addClass("t-state-disabled");
+                .attr(DISABLED, DISABLED)
+                .removeClass(STATE_DEFAULT)
+                .addClass(STATE_DISABLED);
 
             that.wrapper
                 .find(TICK_SELECTOR).unbind(MOUSE_DOWN)
@@ -1256,8 +1258,8 @@
                 selectionEndValue = values[1] - options.min,
                 selectionStartIndex = math.ceil(selectionStartValue / options.smallStep),
                 selectionEndIndex = math.ceil(selectionEndValue / options.smallStep),
-                selectionStart = that._pixelStepsArray[selectionStartIndex],
-                selectionEnd = that._pixelStepsArray[selectionEndIndex],
+                selectionStart = that._pixelSteps[selectionStartIndex],
+                selectionEnd = that._pixelSteps[selectionEndIndex],
                 halfHandle = parseInt(dragHandles.eq(0)[that._size]() / 2, 10) + 1;
 
             dragHandles.eq(0).css(that._position, selectionStart - halfHandle)
@@ -1279,15 +1281,11 @@
             selectionDiv.css(that._position, selectionPosition - 1);
         }
 
-        var inputs = that.element.find("input");
-
         moveSelection(that.values());
 
-        var handler = function (e) {
-            moveSelection(e.values);
-        };
-
-        that.bind([ CHANGE, SLIDE, MOVE_SELECTION ], handler);
+        that.bind([ CHANGE, SLIDE, MOVE_SELECTION ], function (e) {
+                                                         moveSelection(e.values);
+                                                     });
     };
 
     kendo.ui.plugin("RangeSlider", RangeSlider);
