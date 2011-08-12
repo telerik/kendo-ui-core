@@ -1,37 +1,50 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <script src="../src/jquery.js"></script>
     </head>
     <body>
-        <?xml version="1.0" standalone="no"?>
-        <svg width="900px" height="900px" version="1.1" xmlns="http://www.w3.org/2000/svg">
 
-        <path d="M200,200 L200,20 A180,180 0 0,1 377,231 z"
-        style="fill:#ff0000;
-        fill-opacity: 1;
-        stroke:black;
-        stroke-width: 1"/>
-        <path d="M200,200 L377,231 A180,180 0 0,1 138,369 z"
-        style="fill:#00ff00;
-        fill-opacity: 1;
-        stroke:black;
-        stroke-width: 1"/>
-        <path d="M200,200 L138,369 A180,180 0 0,1 20,194 z"
-        style="fill:#0000ff;
-        fill-opacity: 1;
-        stroke:black;
-        stroke-width: 1"/>
-        <path d="M200,200 L20,194 A180,180 0 0,1 75,71 z"
-        style="fill:#ff00ff;
-        fill-opacity: 1;
-        stroke:black;
-        stroke-width: 1"/>
-        <path d="M200,200 L75,71 A180,180 0 0,1 200,20 z"
-        style="fill:#ffff00;
-        fill-opacity: 1;
-        stroke:black;
-        stroke-width: 1"/>
-        </svg>
+
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN"
+	"http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
+<svg width="400" height="400">
+
+<path d="M1.5 1.5 L399.5 1.5 L399.5 399.5 L1.5 399.5 L1.5 1.5" fill="#fff" stroke="red" stroke-width="1" />
+<path d="M20,200 A180,180 0 0,1 57.954708308649145,89.4417117158598 L200 200 z" style="fill: red; stroke: black; stroke-width: 1"/>
+</svg>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var angles = [],
+                data = [12, 23, 34, 45];
+
+            var total = 0;
+            for(var i = 0; i < data.length; i++) total += data[i];
+
+            // Figure out the size (in degrees) of each wedge
+            var angles = [];
+            var startAngle = 90;
+
+            for(var i = 0; i < data.length; i++) angles[i] = data[i] * (360 / total);
+
+            for(var i = 1; i < data.length; i++) angles[i] = angles[i] + angles[i - 1];
+
+
+            for (var i = 0; i < angles.length; i ++) {
+                var angle = angles[i],
+                    radianAngle = angle * (Math.PI / 180),
+                    r = 200,
+                    ax = Math.cos(radianAngle),
+                    ay = Math.sin(radianAngle),
+                    x = r - (ax * 180),
+                    y = r - (ay * 180);
+                console.log(x, ",", y);
+            }
+        });
+    </script>
+
     </body>
 </html>
 

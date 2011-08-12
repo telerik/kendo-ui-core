@@ -47,7 +47,7 @@ function pieChart(canvas, data, cx, cy, r, colors, labels, lx, ly) {
     for(var i = 0; i < data.length; i++) {
         // Tweak the angles so that our pie goes clockwise from 12 o'clock.
         var sa = Math.round(startangle * 65535);
-        var a = -Math.round(angles[i] * 65536);
+        var a = -Math.round(angles[i] * 65535);
 
         // Create a VML shape element
         var wedge = document.createElement("v:shape");
@@ -59,7 +59,6 @@ function pieChart(canvas, data, cx, cy, r, colors, labels, lx, ly) {
             " X E";                          // Close path to center and end
         wedge.setAttribute("path", path);            // Set wedge shape
         wedge.setAttribute("fillcolor", colors[i]);  // Set wedge color
-        wedge.setAttribute("strokeweight", "2px");   // Outline width
         // Position the wedge using CSS styles.  The coordinates of the
         // path are interpreted relative to this size, so we give each
         // shape the same size as the canvas itself.
@@ -72,29 +71,7 @@ function pieChart(canvas, data, cx, cy, r, colors, labels, lx, ly) {
 
         // Next wedge begins where this one ends
         startangle -= angles[i];
-
-        // Create a VML <rect> element for the legend
-        var icon = document.createElement("v:rect");
-        icon.style.left = lx + "px";               // CSS positioning
-        icon.style.top = (ly+i*30) + "px";
-        icon.style.width = "20px";                 // CSS size
-        icon.style.height = "20px";
-        icon.setAttribute("fillcolor", colors[i]); // Same color as wedge
-        icon.setAttribute("stroke", "black");      // Outline color
-        icon.setAttribute("strokeweight", "2");    // Outline width
-        canvas.appendChild(icon);                  // Add to canvas
-
-        // VML has advanced text capabilities, but most text is simple
-        // HTML, and is added directly to the VML canvas, using
-        // canvas coordinates
-        var label = document.createElement("div");  // <div> to hold the text
-        label.appendChild(document.createTextNode(labels[i]));  // the text
-        label.style.position = "absolute";          // Position with CSS
-        label.style.left = (lx + 30) + "px";
-        label.style.top = (ly + 30*i + 5) + "px";
-        label.style.fontFamily = "sans-serif";      // Text styles
-        label.style.fontSize = "16px";
-        canvas.appendChild(label);                  // Add text to canvas
+        console.log(startangle);
     }
 }
 
