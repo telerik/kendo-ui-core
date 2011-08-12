@@ -54,6 +54,7 @@
         OUTSIDE = "outside",
         OUTSIDE_END = "outsideEnd",
         OUTLINE_SUFFIX = "_outline",
+        PIE = "pie",
         RIGHT = "right",
         SANS12 = "12px Verdana, sans-serif",
         SANS16 = "16px Verdana, sans-serif",
@@ -3796,6 +3797,62 @@
         }
     });
 
+    var PieChart = ChartElement.extend({
+        init: function(plotArea, options) {
+            var chart = this;
+
+            ChartElement.fn.init.call(chart, plotArea, options);
+        },
+
+        render: function() {
+            var chart = this;
+
+            chart.traverseDataPoints(proxy(chart.addValue, chart));
+        },
+
+        createPoint: function(value, category, categoryIx, series, seriesIx) {
+            var chart = this,
+                options = chart.options,
+                plotValue = 0;
+
+            var point = new LinePoint(value, series);
+
+            chart.append(point);
+
+            return point;
+        },
+
+        getViewElements: function(view) {
+            var chart = this,
+                options = chart.options,
+                points = options.series[0],
+                pointIx,
+                pointCount = points.length,
+                lines = [];
+
+            for (pointIx = 0; pointIx < pointCount; pointIx++) {
+
+            }
+
+            return lines.concat(elements);
+        },
+
+        createPie: function (view, piece, series, seriesIx) {},
+
+        createLine: function(view, points, series, seriesIx) {
+            var lineId = uniqueId();
+            this.registerId(lineId, { seriesIx: seriesIx });
+            return view.createPath(points, {
+                id: lineId,
+                stroke: series.color,
+                strokeWidth: series.width,
+                strokeOpacity: series.opacity,
+                fill: "",
+                dashType: series.dashType
+            });
+        }
+    });
+
     var PlotArea = ChartElement.extend({
         init: function(options) {
             var plotArea = this;
@@ -3831,8 +3888,10 @@
                 currentSeries,
                 barSeries = [],
                 lineSeries = [],
+                pieSeries = [],
                 barChart,
                 lineChart,
+                pieChart,
                 categoriesToAdd,
                 firstSeries;
 
@@ -3880,6 +3939,12 @@
                 range.min = math.min(range.min, lineChartRange.min);
                 range.max = math.max(range.max, lineChartRange.max);
                 charts.push(lineChart);
+            }
+
+            if (pieSeries.length > 0) {
+                pieChart = new PieChart(this, {
+                    series: pieSeries
+                });
             }
 
             plotArea.append.apply(plotArea, charts);
