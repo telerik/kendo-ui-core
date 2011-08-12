@@ -163,6 +163,7 @@
         identity = function(o) { return o; },
         getter = kendo.getter,
         stringify = kendo.stringify,
+        math = Math,
         rgDate = /^\/Date\((.*?)\)\/$/;
 
     var Comparer = {
@@ -989,7 +990,7 @@
 
             that.reader = new kendo.data.readers[options.schema.type || "json" ](options.schema);
 
-            model = options.schema.model || {};
+            model = that.reader.model || {};
 
             id = model.id;
 
@@ -1470,13 +1471,13 @@
                 skip;
 
             if(val !== undefined) {
-                val = Math.max(Math.min(Math.max(val, 1), that.totalPages()), 1);
+                val = math.max(math.min(math.max(val, 1), that.totalPages()), 1);
                 that.query({ page: val, pageSize: that.pageSize(), sort: that.sort(), filter: that.filter(), group: that.group(), aggregates: that.aggregate()});
                 return;
             }
             skip = that.skip();
 
-            return skip !== undefined ? Math.round((skip || 0) / (that._take || 1)) + 1 : undefined;
+            return skip !== undefined ? math.round((skip || 0) / (that._take || 1)) + 1 : undefined;
         },
 
         /**
@@ -1614,12 +1615,12 @@
             var that = this,
                 pageSize = that.pageSize() || that.total();
 
-            return Math.ceil((that.total() || 0) / pageSize);
+            return math.ceil((that.total() || 0) / pageSize);
         },
 
         inRange: function(skip, take) {
             var that = this,
-                end = Math.min(skip + take, (that.totalPages() - 1) * take);
+                end = math.min(skip + take, that.total());
 
             if (!that.options.serverPaging && that.data.length > 0) {
                 return true;
@@ -1629,15 +1630,15 @@
         },
 
         range: function(skip, take) {
-            skip = skip || 0;
+            skip = math.min(skip || 0, this.total());
             var that = this,
-                pageSkip = (Math.max(Math.floor(skip / take), 0) * take),
-                size = Math.min(pageSkip + take, that.total()),
+                pageSkip = math.max(math.floor(skip / take), 0) * take,
+                size = math.min(pageSkip + take, that.total()),
                 data;
 
-            data = that._findRange(skip, Math.min(skip + take, that.total()));
+            data = that._findRange(skip, math.min(skip + take, that.total()));
             if (data.length) {
-                that._skip = pageSkip;
+                that._skip = skip > that.skip() ? math.min(size, (that.totalPages() - 1) * that.take()) : pageSkip;
 
                 that._take = take;
 
@@ -1655,7 +1656,7 @@
             if (take !== undefined) {
                 if (!that._rangeExists(pageSkip, size)) {
                     that.prefetch(pageSkip, take, function() {
-                        if (skip > pageSkip && size < that.total() && !that._rangeExists(size, Math.min(size + take, that.total()))) {
+                        if (skip > pageSkip && size < that.total() && !that._rangeExists(size, math.min(size + take, that.total()))) {
                             that.prefetch(size, take, function() {
                                 that.range(skip, take);
                             });
@@ -1669,24 +1670,6 @@
                     });
                 }
             }
-        },
-
-        fetchNextPage: function() {
-            var that = this,
-                take = that.take(),
-                skip = Math.max(Math.round(that.skip() / take), 0) * take;
-
-            if (that.page() < that.totalPages()) {
-                that.prefetch(skip + take, take);
-            }
-        },
-
-        fetchPrevPage: function() {
-            var that = this,
-                take = that.take(),
-                skip = Math.max(Math.max(Math.floor(that.skip() / take), 0) * take - take,0);
-
-            that.prefetch(skip, take);
         },
 
         _findRange: function(start, end) {
@@ -1733,7 +1716,11 @@
 
         skip: function() {
             var that = this;
-            return that._skip || (that._page !== undefined ? (that._page  - 1) * (that.take() || 1) : undefined);
+
+            if (that._skip === undefined) {
+                return (that._page !== undefined ? (that._page  - 1) * (that.take() || 1) : undefined);
+            }
+            return that._skip;
         },
 
         take: function() {
@@ -1743,7 +1730,7 @@
 
         prefetch: function(skip, take, callback) {
             var that = this,
-                size = Math.min(skip + take, that.total()),
+                size = math.min(skip + take, that.total()),
                 range = { start: skip, end: size, data: [] },
                 options = {
                     take: take,

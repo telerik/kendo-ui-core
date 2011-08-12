@@ -20,10 +20,10 @@
         <ol id="qunit-tests"></ol>
         <script>
             var ComboBox = kendo.ui.ComboBox,
-                data = [{text: "Foo", value: 1}, {text:"Bar", value:2}],
-                SELECTED = "t-state-selected",
-                keys = kendo.keys,
-                input;
+            data = [{text: "Foo", value: 1}, {text:"Bar", value:2}],
+            SELECTED = "t-state-selected",
+            keys = kendo.keys,
+            input;
 
             module("kendo.ui.ComboBox selection", {
                 setup: function() {
@@ -42,9 +42,9 @@
                 equal(combobox.value(), "2");
                 equal(combobox.text(), "2");
                 equal(combobox.previous, "2");
-           });
+            });
 
-           test("value method should select first if no such value", function() {
+            test("value method should select first if no such value", function() {
                 var combobox = new ComboBox(input, [{text: "foo", value: 1}, {text:2, value:2}]);
 
                 combobox.select(1);
@@ -55,7 +55,23 @@
                 equal(combobox.value(), "");
                 equal(combobox.text(), "");
                 equal(combobox.previous, "");
-           });
+            });
+
+            test("should select jquery object", function() {
+                var combobox = new ComboBox(input, [{text: "foo", value: 1}, {text:2, value:2}]);
+
+                combobox.select(combobox.ul.children().first());
+
+                equal(combobox.value(), "1");
+            });
+
+            test("should select dom element", function() {
+                var combobox = new ComboBox(input, [{text: "foo", value: 1}, {text:2, value:2}]);
+
+                combobox.select(combobox.ul.children().first()[0]);
+
+                equal(combobox.value(), "1");
+            });
 
             test("value method should select item with 0 value", function() {
                 var combobox = new ComboBox(input, [{text: "foo", value: 1}, {text:2, value:0}]);
@@ -65,21 +81,21 @@
                 equal(combobox.value(), "0");
                 equal(combobox.text(), 2);
                 equal(combobox.previous, 0);
-           });
+            });
 
-           test("select item with index -1 should not select anything", function() {
-               var combobox = new ComboBox(input, [{text: "foo", value: 1}, {text:2, value:2}]);
+            test("select item with index -1 should not select anything", function() {
+                var combobox = new ComboBox(input, [{text: "foo", value: 1}, {text:2, value:2}]);
 
-               combobox.select(0);
+                combobox.select(0);
 
-               combobox.select(-1);
+                combobox.select(-1);
 
-               equal(combobox.value(), "1");
-               equal(combobox.text(), "foo");
-           });
+                equal(combobox.value(), "1");
+                equal(combobox.text(), "foo");
+            });
 
 
-           test("select should select item by predicate", function() {
+            test("select should select item by predicate", function() {
                 var combobox = new ComboBox(input, [{text: "foo", value: 1}, {text:2, value:2}]);
 
                 combobox.select(0);
@@ -147,9 +163,9 @@
 
             test("value should select custom option if element is select", function() {
                 var select = $("<select><option value=1>foo1</option><option value=3>foo3</option></select>"),
-                    combobox = new ComboBox(select, {
-                        dataSource: [{text: "foo"}, {text: "bar"}]
-                    });
+                combobox = new ComboBox(select, {
+                    dataSource: [{text: "foo"}, {text: "bar"}]
+                });
 
                 combobox.value("custom value");
 
@@ -165,9 +181,9 @@
                 equal(combobox.value(), "1");
                 equal(combobox.text(), "foo");
                 equal(combobox.previous, "");
-           });
+            });
 
-           test("text should set custom value", function() {
+            test("text should set custom value", function() {
                 var combobox = new ComboBox(input, [{text: "foo", value: 1}, {text:2, value:2}]);
 
                 combobox.select(1);
@@ -179,9 +195,9 @@
                 equal(combobox.value(), "custom");
                 equal(combobox.text(), "custom");
                 equal(combobox.previous, "");
-           });
+            });
 
-           test('enable(false) should disable combobox', function() {
+            test('enable(false) should disable combobox', function() {
                 var combobox = new ComboBox(input);
 
                 combobox.enable(false);
@@ -193,8 +209,8 @@
 
             test('after enable(false) should not open popup', function() {
                 var combobox = input.kendoComboBox({dataSource: data}).data("kendoComboBox");
-                    oldOpen = combobox.popup.toggle,
-                    called = false;
+                oldOpen = combobox.popup.toggle,
+                called = false;
 
                 combobox.popup.toggle = function() {called = true};
 
@@ -221,7 +237,7 @@
             });
 
 
-      </script>
+        </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
     </body>

@@ -154,7 +154,7 @@
             isRaised = false;
 
             var tabstrip = getTabStrip();
-            var content = tabstrip.getContentElement(1);
+            var content = tabstrip.contentElement(1);
 
             $(content).find('input').first().trigger('select');
 
@@ -166,7 +166,7 @@
             var isCalled = false;
             var $item = $(getRootItem(4));
 
-            $item.find('> .t-link').data('ContentUrl', 'fake');
+            $item.find('> .t-link').data('contentUrl', 'fake');
             tabstrip.ajaxRequest = function () { isCalled = true; };
 
             tabstrip.reload($item);
@@ -228,28 +228,28 @@
             var item = getRootItem(5);
             tabstrip.select(item);
 
-            var content = $(tabstrip.getContentElement(5));
+            var content = $(tabstrip.contentElement(5));
             ok(item.hasClass('t-state-active'));
         });
 
-        test('getContentElement should return content of seventh tab', function() {
+        test('contentElement should return content of seventh tab', function() {
             var tabstrip = getTabStrip();
 
             var expectedContent = $(tabstrip.element).find('> .t-content').eq(6); //second content under Tab-7
 
-            equal($(tabstrip.getContentElement(6)).index(), expectedContent.index());
+            equal($(tabstrip.contentElement(6)).index(), expectedContent.index());
         });
 
-        test('getContentElement should not return tab content if passed argument is not number', function() {
+        test('contentElement should not return tab content if passed argument is not number', function() {
             var tabstrip = getTabStrip();
 
-            equal(tabstrip.getContentElement("a"), undefined);
+            equal(tabstrip.contentElement("a"), undefined);
         });
 
-        test('getContentElement should not return tab content if passed argument is not in range', function() {
+        test('contentElement should not return tab content if passed argument is not in range', function() {
             var tabstrip = getTabStrip();
 
-            equal(tabstrip.getContentElement(100), undefined);
+            equal(tabstrip.contentElement(100), undefined);
         });
 
         test('getSelectedTab should return current selected tab', function() {

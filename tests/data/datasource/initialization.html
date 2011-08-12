@@ -157,7 +157,8 @@
                 equal(model.get("foo"), "2");
                 equal(model.get("bar"), "bar2");
             });
-            test("model use model literal", function() {
+
+            test("model method uses specified model from the configuration", function() {
                 var dataSource = new DataSource({
                     schema: {
                         model: { id: "foo" }
@@ -165,6 +166,7 @@
                     data: [ { foo: "1", bar: "bar1"}, { foo: "2", bar: "bar2"}]
                 });
                 dataSource.read();
+
                 var model = dataSource.model("2");
                 equal(model.get("foo"), "2");
                 equal(model.get("bar"), "bar2");

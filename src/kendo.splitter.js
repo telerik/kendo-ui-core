@@ -1,4 +1,4 @@
-(function($, window, undefined) {
+(function($, undefined) {
     /**
     * @name kendo.ui.Splitter.Description
     *
@@ -676,4 +676,4 @@
         }
     }
 
-})(jQuery, window);
+})(jQuery);

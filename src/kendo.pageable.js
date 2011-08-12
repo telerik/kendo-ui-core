@@ -1,4 +1,4 @@
-(function($, window) {
+(function($, undefined) {
     var kendo = window.kendo
         Component = kendo.ui.Component,
         proxy = $.proxy;
@@ -82,4 +82,4 @@
     });
 
     kendo.ui.plugin("Pageable", Pageable);
-})(jQuery, window);
+})(jQuery);

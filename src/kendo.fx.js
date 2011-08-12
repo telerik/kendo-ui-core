@@ -1,15 +1,22 @@
-(function($, window, undefined) {
+(function($, undefined) {
     var kendo = window.kendo,
         fx = kendo.fx,
+        each = $.each,
         extend = $.extend,
+        browser = $.browser,
+        support = kendo.support,
+        transitions = kendo.support.transitions,
         scaleProperties = { scale: 0, scaleX: 0, scaleY: 0, scale3d: 0 },
         translateProperties = { translate: 0, translateX: 0, translateY: 0, translate3d: 0 },
         matrix3d = [ 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1 ],
         matrix3dRegExp = /matrix3?d?\s*\(.*,\s*([\d\w\.]+),\s*([\d\w\.]+)/,
         cssParamsRegExp = /^(-?[\d\.]+)?[\w\s]*,?\s*(-?[\d\.]+)?[\w\s]*/i,
+        translateXRegExp = /translatex?\s*\(/i,
+        translateYRegExp = /translatey\s*\(/i,
         transformNon3D = { rotate: "", scale: "", translate: "" },
         transformProps = ["perspective", "rotate", "rotateX", "rotateY", "rotateZ", "rotate3d", "scale", "scaleX", "scaleY", "scaleZ", "scale3d", "skew", "skewX", "skewY", "translate", "translateX", "translateY", "translateZ", "translate3d", "matrix", "matrix3d"],
-        cssPrefix = kendo.support.transitions.css,
+        computedStyle = document.defaultView.getComputedStyle,
+        cssPrefix = transitions.css,
         BLANK = "",
         PX = "px",
         NONE = "none",
@@ -26,32 +33,75 @@
         TRANSFORM = cssPrefix + "transform",
         INITIAL_HEIGHT = "initialHeight";
 
-    var parseCSS = function(element ,property) {
-        return parseInt(element.css(property), 10);
+    kendo.directions = {
+        left: {
+            reverse: "right",
+            property: "left",
+            transition: "translateX",
+            vertical: false,
+            modifier: -1
+        },
+        right: {
+            reverse: "left",
+            property: "left",
+            transition: "translateX",
+            vertical: false,
+            modifier: 1
+        },
+        down: {
+            reverse: "up",
+            property: "top",
+            transition: "translateY",
+            vertical: true,
+            modifier: 1
+        },
+        up: {
+            reverse: "down",
+            property: "top",
+            transition: "translateY",
+            vertical: true,
+            modifier: -1
+        },
+        "in": {
+            reverse: "out",
+            modifier: -1
+        },
+        out: {
+            reverse: "in",
+            modifier: 1
+        }
     };
 
-    if (kendo.support.transitions) {
+    function parseInteger ( value ) {
+        return parseInt( value, 10 );
+    }
 
-        var keys = function (obj) {
+    function parseCSS (element ,property) {
+        return parseInteger(element.css(property));
+    }
+
+    if (transitions) {
+
+        function keys (obj) {
             var acc = [];
             for (var propertyName in obj)
                 acc.push(propertyName);
             return acc;
-        };
+        }
 
-        var removeTransitionStyles = function (element) {
+        function removeTransitionStyles (element) {
             element.css(TRANSITION, NONE);
 
-            if (!$.browser.safari) {
+            if (!browser.safari) {
                 element.css(TRANSITION);
             }
-        };
+        }
 
-        var checkTransition = function (transition) {
+        function checkTransition (transition) {
 
             if (transition) {
                 var element = transition.object,
-                    checkStyle = document.defaultView.getComputedStyle(element[0], null);
+                    checkStyle = computedStyle(element[0], null);
 
                 if (transition.complete &&
                     $.map(transition.keys, function(item) {
@@ -61,25 +111,25 @@
 
                         removeTransitionStyles(element);
 
-                        element.unbind(kendo.support.transitions.event, kendo.fx.deQueue);
+                        element.unbind(transitions.event, fx.deQueue);
                 }
             }
-        };
+        }
 
-        var activateTask = function(currentTransition) {
+        function activateTask (currentTransition) {
             var element = currentTransition.object;
 
             if (!currentTransition) return;
 
-            typeof currentTransition.complete == "function" && element.one(kendo.support.transitions.event, $.proxy(currentTransition.complete, element));
+            typeof currentTransition.complete == "function" && element.one(transitions.event, $.proxy(currentTransition.complete, element));
 
-            var startStyle = document.defaultView.getComputedStyle(element[0], null),
+            var startStyle = computedStyle(element[0], null),
                 cssValues = {};
 
             element.css(currentTransition.setup);
             element.css(TRANSITION);
 
-            $.each(currentTransition.keys, function() {
+            each(currentTransition.keys, function() {
                 cssValues[this] = startStyle.getPropertyValue(this);
             });
             currentTransition.startStyle = cssValues;
@@ -91,14 +141,14 @@
                     checkTransition(currentTransition);
                 }, currentTransition.duration + 20));
             }, 0);
-        };
+        }
 
-        var clearAbortCheck = function (element) {
+        function clearAbortCheck (element) {
             if (element.data(ABORT_ID)) {
                 clearTimeout(element.data(ABORT_ID));
                 element.removeData(ABORT_ID);
             }
-        };
+        }
 
         extend(kendo.fx, {
             transition: function(element, properties, options) {
@@ -145,9 +195,10 @@
             },
 
             deQueue: function() {
-                var element = this.element;
+                var that = this,
+                    element = that.element;
 
-                if (++this.eventNo == this.effectCount) {
+                if (++that.eventNo == that.effectCount) {
                     clearAbortCheck(element);
 
                     removeTransitionStyles(element);
@@ -160,11 +211,12 @@
 
                 clearAbortCheck(element);
 
-                var taskKeys = element.data("keys"),
+                var that = this,
+                    taskKeys = element.data("keys"),
                     retainPosition = (gotoEnd === false && taskKeys);
 
                 if (retainPosition) {
-                    var style = document.defaultView.getComputedStyle(element[0], null),
+                    var style = computedStyle(element[0], null),
                         cssValues = {},
                         prop = 0;
 
@@ -177,8 +229,8 @@
                 if (retainPosition) {
                     element.css(cssValues);
 
-                    if (this.complete)
-                        this.complete.call(element);
+                    if (that.complete)
+                        that.complete.call(element);
                 }
 
                 element.removeData("keys");
@@ -193,11 +245,11 @@
 
     var animate = function (elements, properties, options) {
 
-        if (kendo.support.transitions && "transition" in kendo.fx) {
-            kendo.fx.transition(elements, properties, options);
+        if (transitions && "transition" in fx) {
+            fx.transition(elements, properties, options);
         } else {
-            $.each(transformProps, function(idx, value) { // remove transforms to avoid IE and older browsers confusion
-                var params = [],
+            each(transformProps, function(idx, value) { // remove transforms to avoid IE and older browsers confusion
+                var params,
                     currentValue = properties[value]+ " "; // We need to match
 
                 elements.each(function () {
@@ -283,31 +335,28 @@
         }
     };
 
-    var getAnimationProperty = function(element, property) {
-        if (kendo.support.transitions) {
+    function animationProperty (element, property) {
+        if (transitions) {
             var transform = element.css(TRANSFORM),
                 match = transform.match(new RegExp(property + "\\s*\\(([\\d\\w\\.]+)")),
                 computed = 0;
 
             if (match)
-                computed = parseInt(match[1], 10);
+                computed = parseInteger(match[1]);
             else {
                 match = transform.match(matrix3dRegExp) || [0, 0, 0];
-                switch (property.toLowerCase()) {
-                    case TRANSLATE:
-                    case TRANSLATE+"x":
-                        computed = parseInt(match[1], 10);
-                        break;
-                    case TRANSLATE+"y":
-                        computed = parseInt(match[2], 10);
-                        break;
+
+                if (translateXRegExp.test(property)) {
+                    computed = parseInteger(match[1]);
+                } else if (translateYRegExp.test(property)) {
+                    computed = parseInteger(match[2]);
                 }
             }
 
             return computed;
         } else
             return element.css(property);
-    };
+    }
 
     extend(kendo.fx, {
         fadeOut: {
@@ -348,7 +397,7 @@
                     offset = direction.modifier * (direction.vertical ? element.outerHeight() : element.outerWidth()),
                     extender = {};
 
-                !element.data(ORIGIN) && element.data(ORIGIN, getAnimationProperty(element, direction.transition));
+                !element.data(ORIGIN) && element.data(ORIGIN, animationProperty(element, direction.transition));
 
                 extender[direction.transition] = offset + PX;
                 animate(element, extend(extender, properties), options);
@@ -367,7 +416,7 @@
                     offset = -direction.modifier * (direction.vertical ? element.outerHeight() : element.outerWidth()),
                     extender = {};
 
-                if (kendo.support.transitions) {
+                if (transitions) {
                     element.css(TRANSFORM, direction.transition + "(" + offset + "px)");
                     element.css(direction.property); // Read a style to force Chrome to apply the change.
                     extender[direction.transition] = 0;
@@ -383,7 +432,7 @@
                     offset = -direction.modifier * (direction.vertical ? element.outerHeight() : element.outerWidth()),
                     extender = {};
 
-                if (kendo.support.transitions) {
+                if (transitions) {
                     extender[direction.transition] = offset + PX;
                     animate(element, extend(extender, properties), options);
                 } else {
@@ -427,7 +476,7 @@
                     .css(OVERFLOW, HIDDEN)
                     .css(OVERFLOW);
 
-                var fixedHeight = parseInt(element.data(INITIAL_HEIGHT), 10),
+                var fixedHeight = parseInteger(element.data(INITIAL_HEIGHT)),
                     height = fixedHeight || Math.round(element.height(AUTO).height());
 
                 element
@@ -439,7 +488,7 @@
 
                     var height = element.data(INITIAL_HEIGHT);
                     if (height == AUTO || height === BLANK) {
-                        if ($.browser.webkit)
+                        if (browser.webkit)
                             element.css(TRANSITION, NONE); // Force WebKit to stop transitions.
                         setTimeout(function () { element.css(HEIGHT, AUTO) }, 0);
                     }
@@ -458,7 +507,7 @@
 
                     var height = element.data(INITIAL_HEIGHT);
                     if (height == AUTO || height === BLANK) {
-                        if ($.browser.webkit)
+                        if (browser.webkit)
                             element.css(TRANSITION, NONE);
                         setTimeout(function () { element.css(HEIGHT, AUTO) }, 0);
                     }
@@ -474,7 +523,7 @@
                     .css(OVERFLOW, HIDDEN)
                     .css(OVERFLOW);
 
-                var fixedWidth = parseInt(element[0].style.width, 10),
+                var fixedWidth = parseInteger(element[0].style.width),
                     width = fixedWidth || Math.round(element.width(AUTO).width());
 
                 element
@@ -501,4 +550,4 @@
             }
         }
     });
-})(jQuery, window);
+})(jQuery);

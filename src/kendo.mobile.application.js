@@ -1,4 +1,4 @@
-(function($){
+(function($, undefined){
     var mobile = kendo.mobile = kendo.mobile || {};
 
     $.extend(mobile, {

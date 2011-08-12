@@ -1,4 +1,4 @@
-﻿(function ($, window) {
+﻿(function ($, undefined) {
     /**
      * @name kendo.ui.Slider.Description
      * @section
@@ -1290,4 +1290,4 @@
 
     kendo.ui.plugin("RangeSlider", RangeSlider);
 
-})(jQuery, window);
+})(jQuery);

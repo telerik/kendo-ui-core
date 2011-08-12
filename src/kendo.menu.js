@@ -1,4 +1,4 @@
-(function ($, window) {
+(function ($, undefined) {
     /**
      * @name kendo.ui.Menu.Description
      *
@@ -73,29 +73,122 @@
         ui = kendo.ui,
         extend = $.extend,
         proxy = $.proxy,
+        each = $.each,
         template = kendo.template,
         Component = ui.Component,
+        excludedNodesRegExp = /^(ul|a|div)$/i,
+        IMG = "img",
         OPEN = "open",
+        MENU = "t-menu",
+        LINK = "t-link",
+        LAST = "t-last",
         CLOSE = "close",
-        SELECT = "select",
-        MOUSEENTER = "mouseenter",
-        MOUSELEAVE = "mouseleave",
         CLICK = "click",
         TIMER = "timer",
-        EMPTY = ":empty",
-        IMG = "img",
+        FIRST = "t-first",
+        IMAGE = "t-image",
+        SELECT = "select",
         ZINDEX = "zIndex",
+        MOUSEENTER = "mouseenter",
+        MOUSELEAVE = "mouseleave",
         KENDOPOPUP = "kendoPopup",
+        SLIDEINRIGHT = "slideIn:right",
         DEFAULTSTATE = "t-state-default",
         DISABLEDSTATE = "t-state-disabled",
         disabledSelector = ".t-item.t-state-disabled",
         itemSelector = ".t-item:not(.t-state-disabled)",
-        linkSelector = ".t-item:not(.t-state-disabled) > .t-link";
+        linkSelector = ".t-item:not(.t-state-disabled) > .t-link",
+
+        templates = {
+            group: template(
+                "<ul class='<#= groupCssClass(group) #>'<#= groupAttributes(group) #>>" +
+                    "<#= renderItems(data); #>" +
+                "</ul>"
+            ),
+            itemWrapper: template(
+                "<<#= tag(item) #> class='<#= textClass(item) #>'<#= textAttributes(item) #>>" +
+                    "<#= image(item) #><#= sprite(item) #><#= text(item) #>" +
+                    "<#= arrow(data) #>" +
+                "</<#= tag(item) #>>"
+            ),
+            item: template(
+                "<li class='<#= wrapperCssClass(group, item) #>'>" +
+                    "<#= itemWrapper(data) #>" +
+                    "<# if (item.items) { #>" +
+                    "<#= subGroup({ items: item.items, menu: menu, group: { expanded: item.expanded } }) #>" +
+                    "<# } #>" +
+                "</li>"
+            ),
+            image: template("<img class='t-image' alt='' src='<#= imageUrl #>' />"),
+            arrow: template("<span class='<#= arrowClass(item, group) #>'></span>"),
+            sprite: template("<span class='t-sprite <#= spriteCssClass #>'></span>"),
+            empty: template("")
+        },
+
+        rendering = {
+            /** @ignore */
+            wrapperCssClass: function (group, item) {
+                var result = "t-item",
+                    index = item.index;
+
+                if (item.enabled === false) {
+                    result += " t-state-disabled";
+                } else {
+                    result += " t-state-default";
+                }
+
+                if (group.firstLevel && index == 0) {
+                    result += " t-first"
+                }
+
+                if (index == group.length-1) {
+                    result += " t-last";
+                }
+
+                return result;
+            },
+            /** @ignore */
+            textClass: function(item) {
+                return LINK;
+            },
+            /** @ignore */
+            textAttributes: function(item) {
+                return item.url ? " href='" + item.url + "'" : "";
+            },
+            /** @ignore */
+            arrowClass: function(item, group) {
+                var result = "t-icon";
+
+                if (group.horizontal) {
+                    result += " t-arrow-down";
+                } else {
+                    result += " t-arrow-right";
+                }
+
+                return result;
+            },
+            /** @ignore */
+            text: function(item) {
+                return item.encoded === false ? item.text : kendo.htmlEncode(item.text);
+            },
+            /** @ignore */
+            tag: function(item) {
+                return item.url ? "a" : "span";
+            },
+            /** @ignore */
+            groupAttributes: function(group) {
+                return group.expanded !== true ? " style='display:none'" : "";
+            },
+            /** @ignore */
+            groupCssClass: function(group) {
+                return "t-group";
+            }
+        };
 
     function getEffectOptions(item) {
         var parent = item.parent();
         return {
-            effects: parent.hasClass("t-menu") ? parent.hasClass("t-menu-vertical") ? "slideIn:right" : "slideIn:down" : "slideIn:right"
+            effects: parent.hasClass(MENU) ? parent.hasClass(MENU + "-vertical") ? SLIDEINRIGHT : "slideIn:down" : SLIDEINRIGHT
         };
     }
 
@@ -105,6 +198,64 @@
         } catch (e) {
             return false;
         }
+    }
+
+    function updateItemClasses (item) {
+        item = $(item);
+
+        item
+            .children(IMG)
+            .addClass(IMAGE);
+        item
+            .children("a")
+            .addClass(LINK)
+            .children(IMG)
+            .addClass(IMAGE);
+        item
+            .filter(":not([disabled])")
+            .addClass(DEFAULTSTATE);
+        item
+            .filter("li[disabled]")
+            .addClass(DISABLEDSTATE)
+            .removeAttr("disabled");
+        item
+            .children("a:focus")
+            .parent()
+            .addClass("t-state-active");
+
+        if (!item.children("." + LINK).length) {
+            item
+                .contents()      // exclude groups, real links, templates and empty text nodes
+                .filter(function() { return (!this.nodeName.match(excludedNodesRegExp) && !(this.nodeType == 3 && !$.trim(this.nodeValue))); })
+                .wrapAll("<span class='" + LINK + "'/>");
+        }
+
+        updateArrow(item);
+        updateFirstLast(item);
+    }
+
+    function updateArrow (item) {
+        item = $(item);
+
+        item.find(".t-icon").remove();
+
+        item.filter(":has(.t-group)")
+            .children(".t-link:not(:has([class*=t-arrow]))")
+            .each(function () {
+                var item = $(this),
+                    parent = item.parent().parent();
+
+                item.append("<span class='t-icon " + (parent.hasClass(MENU + "-horizontal") ? "t-arrow-down" : "t-arrow-next") + "'/>");
+            });
+    }
+
+    function updateFirstLast (item) {
+        item = $(item);
+
+        item.filter(".t-first:not(:first-child)").removeClass(FIRST);
+        item.filter(".t-last:not(:last-child)").removeClass(LAST);
+        item.filter(":first-child").addClass(FIRST);
+        item.filter(":last-child").addClass(LAST);
     }
 
     var Menu = Component.extend({/** @lends kendo.ui.Menu.prototype */
@@ -146,7 +297,7 @@
 
             element.delegate(linkSelector, MOUSEENTER + " " + MOUSELEAVE, that._toggleHover);
 
-            $(document).click($.proxy( that._documentClick, that ));
+            $(document).click(proxy( that._documentClick, that ));
 
             that.bind([
                 /**
@@ -198,9 +349,7 @@
          * @param {Boolean} enable Desired state
          */
         enable: function (element, enable) {
-            enable = enable !== false;
-
-            this._toggleDisabled(element, enable);
+            this._toggleDisabled(element, enable !== false);
         },
 
         /**
@@ -229,16 +378,15 @@
         append: function (item, referenceItem) {
             referenceItem = $(referenceItem);
 
-            var that = this,
-                creatures = that._insert(item, referenceItem, referenceItem.length ? referenceItem.find("> .t-group, .t-animation-container > .t-group") : null);
+            var inserted = this._insert(item, referenceItem, referenceItem.length ? referenceItem.find("> .t-group, .t-animation-container > .t-group") : null);
 
-            $.each (creatures.items, function () {
-                creatures.group.append(this);
-                that._updateFirstLast(this);
+            each(inserted.items, function () {
+                inserted.group.append(this);
+                updateFirstLast(this);
             });
 
-            that._updateArrow(referenceItem);
-            that._updateFirstLast(creatures.group.find(".t-first, .t-last"));
+            updateArrow(referenceItem);
+            updateFirstLast(inserted.group.find(".t-first, .t-last"));
         },
 
         /**
@@ -259,15 +407,14 @@
         insertBefore: function (item, referenceItem) {
             referenceItem = $(referenceItem);
 
-            var that = this,
-                creatures = this._insert(item, referenceItem, referenceItem.parent());
+            var inserted = this._insert(item, referenceItem, referenceItem.parent());
 
-            $.each (creatures.items, function () {
+            each(inserted.items, function () {
                 referenceItem.before(this);
-                that._updateFirstLast(this);
+                updateFirstLast(this);
             });
 
-            that._updateFirstLast(referenceItem);
+            updateFirstLast(referenceItem);
         },
 
         /**
@@ -288,15 +435,14 @@
         insertAfter: function (item, referenceItem) {
             referenceItem = $(referenceItem);
 
-            var that = this,
-                creatures = this._insert(item, referenceItem, referenceItem.parent());
+            var inserted = this._insert(item, referenceItem, referenceItem.parent());
 
-            $.each (creatures.items, function () {
+            each(inserted.items, function () {
                 referenceItem.after(this);
-                that._updateFirstLast(this);
+                updateFirstLast(this);
             });
 
-            that._updateFirstLast(referenceItem);
+            updateFirstLast(referenceItem);
         },
 
         _insert: function (item, referenceItem, parent) {
@@ -309,8 +455,8 @@
             var plain = $.isPlainObject(item),
                 items,
                 groupData = {
-                    firstLevel: parent.hasClass("t-menu"),
-                    horizontal: parent.hasClass("t-menu-horizontal"),
+                    firstLevel: parent.hasClass(MENU),
+                    horizontal: parent.hasClass(MENU + "-horizontal"),
                     expanded: true,
                     length: parent.children().length
                 };
@@ -329,7 +475,7 @@
             } else {
                 items = $(item);
 
-                that._updateItemClasses(item);
+                updateItemClasses(item);
             }
 
             return { items: items, group: parent };
@@ -358,8 +504,8 @@
             if (parent.length) {
                 parent = parent.eq(0);
 
-                that._updateArrow(parent);
-                that._updateFirstLast(parent);
+                updateArrow(parent);
+                updateFirstLast(parent);
             }
         },
 
@@ -385,7 +531,7 @@
                         li.css(ZINDEX, that.nextItemZIndex ++);
 
                         popup = ul.data(KENDOPOPUP);
-                        var parentHorizontal = li.parent().hasClass("t-menu-horizontal");
+                        var parentHorizontal = li.parent().hasClass(MENU + "-horizontal");
 
                         if (!popup) {
                             popup = ul.kendoPopup({
@@ -425,8 +571,8 @@
                 li.data(TIMER, setTimeout(function () {
                     var ul = li.find(".t-group:first:visible"), popup;
                     if (ul[0]) {
-                        li.css("z-index", li.data("z-index"));
-                        li.removeData("z-index");
+                        li.css(ZINDEX, li.data(ZINDEX));
+                        li.removeData(ZINDEX);
 
                         popup = ul.data(KENDOPOPUP);
                         popup.close();
@@ -454,7 +600,7 @@
         _updateClasses: function() {
             var that = this;
 
-            that.element.addClass("t-widget t-reset t-header t-menu").addClass("t-menu-" + that.options.orientation);
+            that.element.addClass("t-widget t-reset t-header " + MENU).addClass(MENU + "-" + that.options.orientation);
 
             var items = that.element
                             .find("ul")
@@ -464,67 +610,8 @@
                             .addClass("t-item");
 
             items.each(function () {
-                that._updateItemClasses(this);
+                updateItemClasses(this);
             });
-        },
-
-        _updateItemClasses: function(item) {
-            var that = this;
-            item = $(item);
-
-            item
-                .children(IMG)
-                .addClass("t-image");
-            item
-                .children("a")
-                .addClass("t-link")
-                .children(IMG)
-                .addClass("t-image");
-            item
-                .filter(":not([disabled])")
-                .addClass(DEFAULTSTATE);
-            item
-                .filter("li[disabled]")
-                .addClass(DISABLEDSTATE)
-                .removeAttr("disabled");
-            item
-                .children("a:focus")
-                .parent()
-                .addClass("t-state-active");
-
-            if (!item.children(".t-link").length) {
-                item
-                    .contents()      // exclude groups, real links, templates and empty text nodes
-                    .filter(function() { return (!(this.nodeName.toLowerCase() in { ul: {}, a: {}, div: {} }) && !(this.nodeType == 3 && !$.trim(this.nodeValue))); })
-                    .wrapAll("<span class='t-link'/>");
-            }
-
-            that._updateArrow(item);
-            that._updateFirstLast(item);
-        },
-
-        _updateArrow: function (item) {
-            item = $(item);
-
-            item.find(".t-icon").remove();
-
-            item.filter(":has(.t-group)")
-                .children(".t-link:not(:has([class*=t-arrow]))")
-                .each(function () {
-                    var item = $(this),
-                        parent = item.parent().parent();
-
-                    item.append("<span class='t-icon " + (parent.hasClass("t-menu-horizontal") ? "t-arrow-down" : "t-arrow-next") + "'></span>");
-                });
-        },
-
-        _updateFirstLast: function (item) {
-            item = $(item);
-
-            item.filter(".t-first:not(:first-child)").removeClass("t-first");
-            item.filter(".t-last:not(:last-child)").removeClass("t-last");
-            item.filter(":first-child").addClass("t-first");
-            item.filter(":last-child").addClass("t-last");
         },
 
         _mouseenter: function (e) {
@@ -543,7 +630,7 @@
             if (that.options.openOnClick && that.clicked) {
                 that.trigger(CLOSE, { item: element[0] });
 
-                element.siblings().each($.proxy(function (_, sibling) {
+                element.siblings().each(proxy(function (_, sibling) {
                     that.close(sibling);
                 }, that));
             }
@@ -574,7 +661,7 @@
 
             that.trigger(SELECT, { item: element[0] });
 
-            if (!element.parent().hasClass("t-menu") || !that.options.openOnClick) {
+            if (!element.parent().hasClass(MENU) || !that.options.openOnClick) {
                 return;
             }
 
@@ -604,8 +691,7 @@
         renderItem: function (options) {
             options = extend({ menu: {}, group: {} }, options);
 
-            var templates = Menu.templates,
-                empty = templates.empty,
+            var empty = templates.empty,
                 item = options.item,
                 menu = options.menu;
 
@@ -615,11 +701,11 @@
                 itemWrapper: templates.itemWrapper,
                 arrow: item.items ? templates.arrow : empty,
                 subGroup: Menu.renderGroup
-            }, Menu.rendering));
+            }, rendering));
         },
 
         renderGroup: function (options) {
-            return Menu.templates.group(extend({
+            return templates.group(extend({
                 renderItems: function(options) {
                     var html = "",
                         i = 0,
@@ -636,96 +722,10 @@
 
                     return html;
                 }
-            }, options, Menu.rendering));
+            }, options, rendering));
         }
     });
 
-    Menu.rendering = {
-        /** @ignore */
-        wrapperCssClass: function (group, item) {
-            var result = "t-item",
-                index = item.index;
-
-            if (item.enabled === false) {
-                result += " t-state-disabled";
-            } else {
-                result += " t-state-default";
-            }
-
-            if (group.firstLevel && index == 0) {
-                result += " t-first"
-            }
-
-            if (index == group.length-1) {
-                result += " t-last";
-            }
-
-            return result;
-        },
-        /** @ignore */
-        textClass: function(item) {
-            return "t-link";
-        },
-        /** @ignore */
-        textAttributes: function(item) {
-            return item.url ? " href='" + item.url + "'" : "";
-        },
-        /** @ignore */
-        arrowClass: function(item, group) {
-            var result = "t-icon";
-
-            if (group.horizontal) {
-                result += " t-arrow-down";
-            } else {
-                result += " t-arrow-right";
-            }
-
-            return result;
-        },
-        /** @ignore */
-        text: function(item) {
-            return item.encoded === false ? item.text : kendo.htmlEncode(item.text);
-        },
-        /** @ignore */
-        tag: function(item) {
-            return item.url ? "a" : "span";
-        },
-        /** @ignore */
-        groupAttributes: function(group) {
-            return group.expanded !== true ? " style='display:none'" : "";
-        },
-        /** @ignore */
-        groupCssClass: function(group) {
-            return "t-group";
-        }
-    };
-
-    Menu.templates = {
-        group: template(
-            "<ul class='<#= groupCssClass(group) #>'<#= groupAttributes(group) #>>" +
-                "<#= renderItems(data); #>" +
-            "</ul>"
-        ),
-        itemWrapper: template(
-            "<<#= tag(item) #> class='<#= textClass(item) #>'<#= textAttributes(item) #>>" +
-                "<#= image(item) #><#= sprite(item) #><#= text(item) #>" +
-                "<#= arrow(data) #>" +
-            "</<#= tag(item) #>>"
-        ),
-        item: template(
-            "<li class='<#= wrapperCssClass(group, item) #>'>" +
-                "<#= itemWrapper(data) #>" +
-                "<# if (item.items) { #>" +
-                "<#= subGroup({ items: item.items, menu: menu, group: { expanded: item.expanded } }) #>" +
-                "<# } #>" +
-            "</li>"
-        ),
-        image: template("<img class='t-image' alt='' src='<#= imageUrl #>' />"),
-        arrow: template("<span class='<#= arrowClass(item, group) #>'></span>"),
-        sprite: template("<span class='t-sprite <#= spriteCssClass #>'></span>"),
-        empty: template("")
-    };
-
     kendo.ui.plugin("Menu", Menu, Component);
 
-})(jQuery, window);
+})(jQuery);

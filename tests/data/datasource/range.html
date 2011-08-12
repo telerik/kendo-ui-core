@@ -160,77 +160,6 @@
                 equal(dataSource._ranges[0].end, 10000);
             });
 
-            test("fetchPrevPage adds prev page to the ranges", function() {
-                var dataSource = remoteDataSource();
-                dataSource.read();
-                dataSource.page(4);
-                dataSource.fetchPrevPage();
-                equal(dataSource._ranges[0].start, 32);
-                equal(dataSource._ranges[0].end, 48);
-            });
-
-            test("fetchPrevPage if current page is first", function() {
-                var dataSource = remoteDataSource();
-                dataSource.read();
-                dataSource.fetchPrevPage();
-                dataSource.fetchPrevPage();
-                equal(dataSource._ranges.length, 1);
-                equal(dataSource._ranges[0].start, 0);
-                equal(dataSource._ranges[0].end, 16);
-            });
-
-            test("fetchPrevPage adds prev page to the ranges even if skip is not on begining of the page (second half of the page)", function() {
-                var dataSource = remoteDataSource();
-                dataSource.read();
-                dataSource.range(40, 16);
-                dataSource.fetchPrevPage();
-                ok(dataSource._rangeExists(16, 32));
-            });
-
-            test("fetchNextPage adds prev page to the ranges even if skip is not on begining of the page (first half of the page)", function() {
-                var dataSource = remoteDataSource();
-                dataSource.read();
-                dataSource.range(34, 16);
-                dataSource.fetchPrevPage();
-                ok(dataSource._rangeExists(16, 32));
-            });
-
-            test("fetchNextPage when current page is last no more pages are fetch", function() {
-                var dataSource = remoteDataSource();
-                dataSource.read();
-                dataSource.page(10000/16);
-                dataSource.fetchNextPage();
-                dataSource.fetchNextPage();
-                equal(dataSource._ranges.length, 1);
-                equal(dataSource._ranges[0].start, 10000 - 16);
-                equal(dataSource._ranges[0].end, 10000);
-            });
-
-            test("fetchNextPage adds next page to the ranges", function() {
-                var dataSource = remoteDataSource();
-                dataSource.read();
-                dataSource.page(2);
-                dataSource.fetchNextPage();
-                equal(dataSource._ranges[1].start, 32);
-                equal(dataSource._ranges[1].end, 48);
-            });
-
-            test("fetchNextPage adds next page to the ranges even if skip is not on begining of the page (second half of the page)", function() {
-                var dataSource = remoteDataSource();
-                dataSource.read();
-                dataSource.range(20, 16);
-                dataSource.fetchNextPage();
-                ok(dataSource._rangeExists(32, 48));
-            });
-
-            test("fetchNextPage adds next page to the ranges even if skip is not on begining of the page (first half of the page)", function() {
-                var dataSource = remoteDataSource();
-                dataSource.read();
-                dataSource.range(32, 16);
-                dataSource.fetchNextPage();
-                ok(dataSource._rangeExists(48, 64));
-            });
-
             test("range if range exists transport is not called", function() {
                 var called = 0,
                     dataSource = remoteDataSource(function () {
@@ -442,6 +371,67 @@
                 dataSource.prefetch(dataSource.total() - 4, 16);
                 dataSource.prefetch(dataSource.total() - 4, 16);
                 equal(dataSource._ranges.length, 1);
+            });
+
+            test("range set skip to the beginning of the second requested page if multi page range is requested", function() {
+                var dataSource = remoteDataSource();
+                dataSource.pageSize(100);
+                dataSource.range(150, 100);
+                equal(dataSource.skip(), 200);
+            });
+
+            test("range set skip to the beginning of the first requested page if multi page range is requested and pages are before current page", function() {
+                var dataSource = remoteDataSource();
+                dataSource.pageSize(100);
+                dataSource.page(3);
+                dataSource.range(80, 100);
+                equal(dataSource.skip(), 0);
+            });
+
+            test("range set skip to requested page begining", function() {
+                var dataSource = remoteDataSource();
+                dataSource.pageSize(100);
+                dataSource.page(3);
+                dataSource.range(100, 100);
+                equal(dataSource.skip(), 100);
+            });
+
+            test("range set skip request for range starting on the last page and beyond", function() {
+                var dataSource = remoteDataSource(),
+                    lastPageSkip = dataSource.total();
+
+                dataSource.pageSize(100);
+                dataSource.range(lastPageSkip - 50, 100);
+                equal(dataSource.skip(), lastPageSkip - 100);
+            });
+
+            test("range set skip request for the last page which is not full", function() {
+                var dataSource = remoteDataSource();
+
+                dataSource.pageSize(60);
+
+                var lastPageSkip = (dataSource.totalPages() - 1) * 60;
+                dataSource.range(lastPageSkip, 60);
+                equal(dataSource.skip(), lastPageSkip);
+            });
+
+            test("range set skip part of the first page and current page is before the end of the range", function () {
+                var dataSource = remoteDataSource();
+
+                dataSource.pageSize(100);
+                dataSource.range(30, 100);
+                equal(dataSource.skip(), 100);
+                equal(dataSource.page(), 2);
+            });
+
+            test("range set skip part of the first page and current page is after", function () {
+                var dataSource = remoteDataSource();
+
+                dataSource.pageSize(100);
+                dataSource.page(2);
+                dataSource.range(30, 100);
+                equal(dataSource.skip(), 0);
+                equal(dataSource.page(), 1);
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

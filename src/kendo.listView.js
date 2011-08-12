@@ -1,4 +1,4 @@
-(function($, window) {
+(function($, undefined) {
     var kendo = window.kendo,
         CHANGE = "change",
         DATABOUND = "dataBound"
@@ -134,4 +134,4 @@
     });
 
     kendo.ui.plugin("ListView", ListView);
-})(jQuery, window);
+})(jQuery);

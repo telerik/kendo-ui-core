@@ -1,4 +1,4 @@
-(function ($, window) {
+(function ($, undefined) {
     /**
      * @name kendo.ui.PanelBar.Description
      *
@@ -126,28 +126,192 @@
     var kendo = window.kendo,
         ui = kendo.ui,
         extend = $.extend,
+        each = $.each,
         template = kendo.template,
         Component = ui.Component,
-        EXPAND = "expand",
-        COLLAPSE = "collapse",
-        SELECT = "select",
+        excludedNodesRegExp = /^(ul|a|div)$/i,
+        IMG = "img",
+        HREF = "href",
+        LAST = "t-last",
+        LINK = "t-link",
         ERROR = "error",
-        CONTENTLOAD = "contentLoad",
-        MOUSEENTER = "mouseenter",
-        MOUSELEAVE = "mouseleave",
         CLICK = "click",
         ITEM = ".t-item",
+        IMAGE = "t-image",
+        FIRST = "t-first",
+        EXPAND = "expand",
+        SELECT = "select",
+        CONTENT = "t-content",
+        COLLAPSE = "collapse",
+        CONTENTURL = "contentUrl",
+        MOUSEENTER = "mouseenter",
+        MOUSELEAVE = "mouseleave",
+        CONTENTLOAD = "contentLoad",
+        ACTIVECLASS = ".t-state-active",
+        GROUPS = "> .t-content, > .t-group",
+        SELECTEDCLASS = ".t-state-selected",
+        DISABLEDCLASS = ".t-state-disabled",
+        HIGHLIGHTEDCLASS = ".t-state-highlighted",
         clickableItems = ITEM + ":not(.t-state-disabled) .t-link",
         disabledItems = ITEM + ".t-state-disabled .t-link",
-        activeClass = ".t-state-active",
-        selectedClass = ".t-state-selected",
-        disabledClass = ".t-state-disabled",
-        highlightedClass = ".t-state-highlighted",
         defaultState = "t-state-default",
         VISIBLE = ":visible",
         EMPTY = ":empty",
+        SINGLE = "single",
         animating = false,
-        SINGLE = "single";
+
+        templates = {
+            group: template(
+                "<ul class='<#= groupCssClass(group) #>'<#= groupAttributes(group) #>>" +
+                    "<#= renderItems(data); #>" +
+                "</ul>"
+            ),
+            itemWrapper: template(
+                "<<#= tag(item) #> class='<#= textClass(item, group) #>'<#= textAttributes(item) #>>" +
+                    "<#= image(item) #><#= sprite(item) #><#= text(item) #>" +
+                    "<#= arrow(data) #>" +
+                "</<#= tag(item) #>>"
+            ),
+            item: template(
+                "<li class='<#= wrapperCssClass(group, item) #>'>" +
+                    "<#= itemWrapper(data) #>" +
+                    "<# if (item.items) { #>" +
+                    "<#= subGroup({ items: item.items, panelBar: panelBar, group: { expanded: item.expanded } }) #>" +
+                    "<# } #>" +
+                "</li>"
+            ),
+            image: template("<img class='t-image' alt='' src='<#= imageUrl #>' />"),
+            arrow: template("<span class='<#= arrowClass(item, group) #>'></span>"),
+            sprite: template("<span class='t-sprite <#= spriteCssClass #>'></span>"),
+            empty: template("")
+        },
+
+        rendering = {
+            wrapperCssClass: function (group, item) {
+                var result = "t-item",
+                    index = item.index;
+
+                if (item.enabled === false) {
+                    result += " t-state-disabled";
+                } else {
+                    result += " t-state-default";
+                }
+
+                if (index == 0) {
+                    result += " t-first"
+                }
+
+                if (index == group.length-1) {
+                    result += " t-last";
+                }
+
+                return result;
+            },
+            textClass: function(item, group) {
+                var result = LINK;
+
+                if (group.firstLevel) {
+                    result += " t-header";
+                }
+
+                return result;
+            },
+            textAttributes: function(item) {
+                return item.url ? " href='" + item.url + "'" : "";
+            },
+            arrowClass: function(item, group) {
+                var result = "t-icon";
+
+                if (group.horizontal) {
+                    result += " t-arrow-down";
+                } else {
+                    result += " t-arrow-right";
+                }
+
+                return result;
+            },
+            text: function(item) {
+                return item.encoded === false ? item.text : kendo.htmlEncode(item.text);
+            },
+            tag: function(item) {
+                return item.url ? "a" : "span";
+            },
+            groupAttributes: function(group) {
+                return group.expanded !== true ? " style='display:none'" : "";
+            },
+            groupCssClass: function(group) {
+                return "t-group";
+            }
+        };
+
+    function updateItemClasses (item, menuElement) {
+        item = $(item);
+
+        item
+            .children(IMG)
+            .addClass(IMAGE);
+        item
+            .children("a")
+            .addClass(LINK)
+            .children(IMG)
+            .addClass(IMAGE);
+        item
+            .filter(":not([disabled]):not([class*=t-state])")
+            .addClass("t-state-default");
+        item
+            .filter("li[disabled]")
+            .addClass("t-state-disabled")
+            .removeAttr("disabled");
+        item
+            .filter(":not([class*=t-state])")
+            .children("a:focus")
+            .parent()
+            .addClass(ACTIVECLASS.substr(1));
+        item
+            .find(">div")
+            .addClass(CONTENT)
+            .css({ display: "none" });
+
+        item.each(function() {
+            var item = $(this);
+
+            if (!item.children("." + LINK).length) {
+                item
+                    .contents()      // exclude groups, real links, templates and empty text nodes
+                    .filter(function() { return (!this.nodeName.match(excludedNodesRegExp) && !(this.nodeType == 3 && !$.trim(this.nodeValue))); })
+                    .wrapAll("<span class='" + LINK + "'/>");
+            }
+        });
+
+        menuElement
+            .find(" > li > ." + LINK)
+            .addClass("t-header");
+    }
+
+    function updateArrow (items) {
+        items = $(items);
+
+        items.find(".t-icon").remove();
+
+        items
+            .filter(":has(.t-group),:has(.t-content)")
+            .children(".t-link:not(:has([class*=t-arrow]))")
+            .each(function () {
+                var item = $(this),
+                    parent = item.parent();
+
+                item.append("<span class='t-icon " + (parent.hasClass(ACTIVECLASS.substr(1)) ? "t-arrow-up t-panelbar-collapse" : "t-arrow-down t-panelbar-expand") + "'/>");
+            });
+    }
+
+    function updateFirstLast (items) {
+        items = $(items);
+
+        items.filter(".t-first:not(:first-child)").removeClass(FIRST);
+        items.filter(".t-last:not(:last-child)").removeClass(LAST);
+        items.filter(":first-child").addClass(FIRST);
+        items.filter(":last-child").addClass(LAST);
+    }
 
     var PanelBar = Component.extend({/** @lends kendo.ui.PanelBar.prototype */
         /**
@@ -242,11 +406,11 @@
             if (that.options.contentUrls) {
                 element.find("> .t-item")
                     .each(function(index, item) {
-                        $(item).find(".t-link").data("ContentUrl", that.options.contentUrls[index]);
+                        $(item).find("." + LINK).data(CONTENTURL, that.options.contentUrls[index]);
                     });
             }
 
-            content = element.find("li" + activeClass + " > .t-content");
+            content = element.find("li" + ACTIVECLASS + " > ." + CONTENT);
 
             if (content.length > 0 && content.is(EMPTY)) {
                 that.expand(content.parent());
@@ -282,14 +446,14 @@
 
             $(element).each(function (index, item) {
                 item = $(item);
-                if (!item.hasClass(disabledClass) && item.find("> .t-group, > .t-content").length > 0) {
+                if (!item.hasClass(DISABLEDCLASS) && item.find(GROUPS).length > 0) {
 
                     if (that.options.expandMode == SINGLE && that._collapseAllExpanded(item)) {
                         return;
                     }
 
-                    element.find(highlightedClass).removeClass(highlightedClass.substr(1));
-                    item.addClass(highlightedClass.substr(1));
+                    element.find(HIGHLIGHTEDCLASS).removeClass(HIGHLIGHTEDCLASS.substr(1));
+                    item.addClass(HIGHLIGHTEDCLASS.substr(1));
 
                     if (!useAnimation) {
                         animBackup = that.options.animation;
@@ -320,8 +484,8 @@
             $(element).each(function (index, item) {
                 item = $(item);
 
-                if (!item.hasClass(disabledClass) && item.find("> .t-group, > .t-content").is(VISIBLE)) {
-                    item.removeClass(highlightedClass.substr(1));
+                if (!item.hasClass(DISABLEDCLASS) && item.find(GROUPS).is(VISIBLE)) {
+                    item.removeClass(HIGHLIGHTEDCLASS.substr(1));
 
                     if (!useAnimation) {
                         animBackup = that.options.animation;
@@ -341,7 +505,7 @@
         toggle: function (element, enable) {
             $(element)
                 .toggleClass(defaultState, enable)
-                .toggleClass(disabledClass.substr(1), !enable);
+                .toggleClass(DISABLEDCLASS.substr(1), !enable);
         },
 
         /**
@@ -354,22 +518,22 @@
             var that = this;
 
             if (arguments.length === 0) {
-                return that.element.find(".t-item > " + selectedClass).parent();
+                return that.element.find(".t-item > " + SELECTEDCLASS).parent();
             }
 
             $(element).each(function (index, item) {
                 item = $(item);
-                var link = item.children(".t-link");
+                var link = item.children("." + LINK);
 
-                if (item.is(disabledClass)) {
+                if (item.is(DISABLEDCLASS)) {
                     return;
                 }
 
-                $(selectedClass, that.element).removeClass(selectedClass.substr(1));
-                $(highlightedClass, that.element).removeClass(highlightedClass.substr(1));
+                $(SELECTEDCLASS, that.element).removeClass(SELECTEDCLASS.substr(1));
+                $(HIGHLIGHTEDCLASS, that.element).removeClass(HIGHLIGHTEDCLASS.substr(1));
 
-                link.addClass(selectedClass.substr(1));
-                link.parentsUntil(that.element, ITEM).filter(":has(.t-header)").addClass(highlightedClass.substr(1));
+                link.addClass(SELECTEDCLASS.substr(1));
+                link.parentsUntil(that.element, ITEM).filter(":has(.t-header)").addClass(HIGHLIGHTEDCLASS.substr(1));
             });
         },
 
@@ -379,9 +543,7 @@
          * @param {Boolean} enable Desired state
          */
         enable: function (element, state) {
-            state = state !== false;
-
-            this.toggle(element, state);
+            this.toggle(element, state !== false);
         },
 
         /**
@@ -410,17 +572,16 @@
         append: function (item, referenceItem) {
             referenceItem = $(referenceItem);
             
-            var that = this,
-                creatures = that._insert(item, referenceItem, referenceItem.length ? referenceItem.find("> .t-group") : null);
+            var inserted = this._insert(item, referenceItem, referenceItem.length ? referenceItem.find("> .t-group") : null);
 
-            $.each (creatures.items, function () {
-                creatures.group.append(this);
-                that._updateFirstLast(this);
+            each(inserted.items, function () {
+                inserted.group.append(this);
+                updateFirstLast(this);
             });
 
-            that._updateArrow(referenceItem);
-            that._updateFirstLast(creatures.group.find(".t-first, .t-last"));
-            creatures.group.height("auto");
+            updateArrow(referenceItem);
+            updateFirstLast(inserted.group.find(".t-first, .t-last"));
+            inserted.group.height("auto");
         },
 
         /**
@@ -441,16 +602,15 @@
         insertBefore: function (item, referenceItem) {
             referenceItem = $(referenceItem);
 
-            var that = this,
-                creatures = that._insert(item, referenceItem, referenceItem.parent());
+            var inserted = this._insert(item, referenceItem, referenceItem.parent());
 
-            $.each (creatures.items, function () {
+            each(inserted.items, function () {
                 referenceItem.before(this);
-                that._updateFirstLast(this);
+                updateFirstLast(this);
             });
 
-            that._updateFirstLast(referenceItem);
-            creatures.group.height("auto");
+            updateFirstLast(referenceItem);
+            inserted.group.height("auto");
         },
 
         /**
@@ -471,16 +631,15 @@
         insertAfter: function (item, referenceItem) {
             referenceItem = $(referenceItem);
 
-            var that = this,
-                creatures = that._insert(item, referenceItem, referenceItem.parent());
+            var inserted = this._insert(item, referenceItem, referenceItem.parent());
 
-            $.each (creatures.items, function () {
+            each(inserted.items, function () {
                 referenceItem.after(this);
-                that._updateFirstLast(this);
+                updateFirstLast(this);
             });
 
-            that._updateFirstLast(referenceItem);
-            creatures.group.height("auto");
+            updateFirstLast(referenceItem);
+            inserted.group.height("auto");
         },
 
         /**
@@ -505,8 +664,8 @@
             if (parent.length) {
                 parent = parent.eq(0);
 
-                that._updateArrow(parent);
-                that._updateFirstLast(parent);
+                updateArrow(parent);
+                updateFirstLast(parent);
             }
         },
 
@@ -539,7 +698,7 @@
             } else {
                 items = $(item);
 
-                that._updateItemClasses(item);
+                updateItemClasses(item, that.element);
             }
 
             return { items: items, group: parent };
@@ -548,7 +707,7 @@
         _toggleHover: function(e) {
             var target = $(e.currentTarget);
 
-            if (!target.parents("li" + disabledClass).length) {
+            if (!target.parents("li" + DISABLEDCLASS).length) {
                 target.toggleClass("t-state-hover", e.type == MOUSEENTER);
             }
         },
@@ -562,88 +721,18 @@
                             .find("ul")
                             .addClass("t-group")
                             .end()
-                            .find("li:not(" + activeClass + ") > ul")
+                            .find("li:not(" + ACTIVECLASS + ") > ul")
                             .css({ display: "none" })
                             .end()
                             .find("li")
                             .addClass("t-item");
 
             items.each(function () {
-                that._updateItemClasses(this);
+                updateItemClasses(this, that.element);
             });
 
-            that._updateArrow(items);
-            that._updateFirstLast(items);
-        },
-
-        _updateItemClasses: function(item) {
-            var that = this;
-            item = $(item);
-
-            item
-                .children("img")
-                .addClass("t-image");
-            item
-                .children("a")
-                .addClass("t-link")
-                .children("img")
-                .addClass("t-image");
-            item
-                .filter(":not([disabled]):not([class*=t-state])")
-                .addClass("t-state-default");
-            item
-                .filter("li[disabled]")
-                .addClass("t-state-disabled")
-                .removeAttr("disabled");
-            item
-                .filter(":not([class*=t-state])")
-                .children("a:focus")
-                .parent()
-                .addClass(activeClass.substr(1));
-            item
-                .find(">div")
-                .addClass("t-content")
-                .css({ display: "none" });
-
-            item.each(function() {
-                var item = $(this);
-
-                if (!item.children(".t-link").length) {
-                    item
-                        .contents()      // exclude groups, real links, templates and empty text nodes
-                        .filter(function() { return (!(this.nodeName.toLowerCase() in { ul: {}, a: {}, div: {} }) && !(this.nodeType == 3 && !$.trim(this.nodeValue))); })
-                        .wrapAll("<span class='t-link'/>");
-                }
-            });
-
-            that.element
-                .find(" > li > .t-link")
-                .addClass("t-header");
-        },
-
-        _updateArrow: function (items) {
-            items = $(items);
-
-            items.find(".t-icon").remove();
-
-            items
-                .filter(":has(.t-group),:has(.t-content)")
-                .children(".t-link:not(:has([class*=t-arrow]))")
-                .each(function () {
-                    var item = $(this),
-                        parent = item.parent();
-
-                    item.append("<span class='t-icon " + (parent.hasClass(activeClass.substr(1)) ? "t-arrow-up t-panelbar-collapse" : "t-arrow-down t-panelbar-expand") + "'></span>");
-                });
-        },
-
-        _updateFirstLast: function (items) {
-            items = $(items);
-
-            items.filter(".t-first:not(:first-child)").removeClass("t-first");
-            items.filter(".t-last:not(:last-child)").removeClass("t-last");
-            items.filter(":first-child").addClass("t-first");
-            items.filter(":last-child").addClass("t-last");
+            updateArrow(items);
+            updateFirstLast(items);
         },
 
         _click: function (e) {
@@ -651,7 +740,7 @@
                 target = $(e.currentTarget),
                 element = that.element;
 
-            if (target.parents("li" + disabledClass).length) {
+            if (target.parents("li" + DISABLEDCLASS).length) {
                 return;
             }
 
@@ -659,18 +748,18 @@
                 return;
             }
 
-            var link = target.closest(".t-link"),
+            var link = target.closest("." + LINK),
                 item = link.closest(ITEM);
 
-            $(selectedClass, element).removeClass(selectedClass.substr(1));
-            $(highlightedClass, element).removeClass(highlightedClass.substr(1));
+            $(SELECTEDCLASS, element).removeClass(SELECTEDCLASS.substr(1));
+            $(HIGHLIGHTEDCLASS, element).removeClass(HIGHLIGHTEDCLASS.substr(1));
 
-            link.addClass(selectedClass.substr(1));
-            link.parentsUntil(that.element, ITEM).filter(":has(.t-header)").addClass(highlightedClass.substr(1));
+            link.addClass(SELECTEDCLASS.substr(1));
+            link.parentsUntil(that.element, ITEM).filter(":has(.t-header)").addClass(HIGHLIGHTEDCLASS.substr(1));
 
-            var contents = item.find("> .t-content, > .t-group"),
-                href = link.attr("href"),
-                isAnchor = link.data("ContentUrl") || (href && (href.charAt(href.length - 1) == "#" || href.indexOf("#" + that.element[0].id + "-") != -1));
+            var contents = item.find(GROUPS),
+                href = link.attr(HREF),
+                isAnchor = link.data(CONTENTURL) || (href && (href.charAt(href.length - 1) == "#" || href.indexOf("#" + that.element[0].id + "-") != -1));
 
             if (contents.data("animating")) {
                 return;
@@ -714,8 +803,7 @@
                 }
             } else {
 
-                var itemIndex = element.parent().children().index(element),
-                    content = element.find("> .t-content");
+                var content = element.find("> ."  + CONTENT);
 
                 if (content.length) {
                     if (e) {
@@ -746,7 +834,7 @@
             element
                 .parent()
                 .toggleClass(defaultState, visibility)
-                .toggleClass(activeClass.substr(1), !visibility)
+                .toggleClass(ACTIVECLASS.substr(1), !visibility)
                 .find("> .t-link > .t-icon")
                     .toggleClass("t-arrow-up", !visibility)
                     .toggleClass("t-panelbar-collapse", !visibility)
@@ -767,11 +855,11 @@
         _collapseAllExpanded: function (item) {
             var that = this;
 
-            if (item.find("> .t-link").hasClass("t-header")) {
-                if (item.find("> .t-content, > .t-group").is(VISIBLE) || item.find("> .t-content, > .t-group").length == 0) {
+            if (item.find("> ." + LINK).hasClass("t-header")) {
+                if (item.find(GROUPS).is(VISIBLE) || item.find(GROUPS).length == 0) {
                     return true;
                 } else {
-                    $(that.element).children().find("> .t-content, > .t-group")
+                    $(that.element).children().find(GROUPS)
                             .filter(function () { return $(this).is(VISIBLE) })
                             .each(function (index, content) {
                                 that._toggleGroup($(content), true);
@@ -784,7 +872,7 @@
 
             var that = this,
                 statusIcon = element.find(".t-panelbar-collapse, .t-panelbar-expand"),
-                link = element.find(".t-link"),
+                link = element.find("." + LINK),
                 loadingIconTimeout = setTimeout(function () {
                     statusIcon.addClass("t-loading");
                 }, 100),
@@ -793,7 +881,7 @@
             $.ajax({
                 type: "GET",
                 cache: false,
-                url: link.data("ContentUrl") || link.attr("href"),
+                url: link.data(CONTENTURL) || link.attr(HREF),
                 dataType: "html",
                 data: data,
 
@@ -829,8 +917,7 @@
         renderItem: function (options) {
             options = extend({ panelBar: {}, group: {} }, options);
 
-            var templates = PanelBar.templates,
-                empty = templates.empty,
+            var empty = templates.empty,
                 item = options.item,
                 panelBar = options.panelBar;
 
@@ -840,11 +927,11 @@
                 itemWrapper: templates.itemWrapper,
                 arrow: item.items ? templates.arrow : empty,
                 subGroup: PanelBar.renderGroup
-            }, PanelBar.rendering));
+            }, rendering));
         },
 
         renderGroup: function (options) {
-            return PanelBar.templates.group(extend({
+            return templates.group(extend({
                 renderItems: function(options) {
                     var html = "",
                         i = 0,
@@ -861,94 +948,10 @@
 
                     return html;
                 }
-            }, options, PanelBar.rendering));
+            }, options, rendering));
         }
     });
 
-    PanelBar.rendering = {
-        wrapperCssClass: function (group, item) {
-            var result = "t-item",
-                index = item.index;
-
-            if (item.enabled === false) {
-                result += " t-state-disabled";
-            } else {
-                result += " t-state-default";
-            }
-
-            if (index == 0) {
-                result += " t-first"
-            }
-
-            if (index == group.length-1) {
-                result += " t-last";
-            }
-
-            return result;
-        },
-        textClass: function(item, group) {
-            var result = "t-link";
-
-            if (group.firstLevel) {
-                result += " t-header";
-            }
-
-            return result;
-        },
-        textAttributes: function(item) {
-            return item.url ? " href='" + item.url + "'" : "";
-        },
-        arrowClass: function(item, group) {
-            var result = "t-icon";
-
-            if (group.horizontal) {
-                result += " t-arrow-down";
-            } else {
-                result += " t-arrow-right";
-            }
-
-            return result;
-        },
-        text: function(item) {
-            return item.encoded === false ? item.text : kendo.htmlEncode(item.text);
-        },
-        tag: function(item) {
-            return item.url ? "a" : "span";
-        },
-        groupAttributes: function(group) {
-            return group.expanded !== true ? " style='display:none'" : "";
-        },
-        groupCssClass: function(group) {
-            return "t-group";
-        }
-    };
-
-    PanelBar.templates = {
-        group: template(
-            "<ul class='<#= groupCssClass(group) #>'<#= groupAttributes(group) #>>" +
-                "<#= renderItems(data); #>" +
-            "</ul>"
-        ),
-        itemWrapper: template(
-            "<<#= tag(item) #> class='<#= textClass(item, group) #>'<#= textAttributes(item) #>>" +
-                "<#= image(item) #><#= sprite(item) #><#= text(item) #>" +
-                "<#= arrow(data) #>" +
-            "</<#= tag(item) #>>"
-        ),
-        item: template(
-            "<li class='<#= wrapperCssClass(group, item) #>'>" +
-                "<#= itemWrapper(data) #>" +
-                "<# if (item.items) { #>" +
-                "<#= subGroup({ items: item.items, panelBar: panelBar, group: { expanded: item.expanded } }) #>" +
-                "<# } #>" +
-            "</li>"
-        ),
-        image: template("<img class='t-image' alt='' src='<#= imageUrl #>' />"),
-        arrow: template("<span class='<#= arrowClass(item, group) #>'></span>"),
-        sprite: template("<span class='t-sprite <#= spriteCssClass #>'></span>"),
-        empty: template("")
-    };
-
     kendo.ui.plugin("PanelBar", PanelBar, Component);
 
-})(jQuery, window);
+})(jQuery);

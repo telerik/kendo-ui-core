@@ -1,4 +1,4 @@
-(function($){
+(function($, undefined){
     /**
      * @name kendo.ui.TreeView.Description
      *

@@ -310,13 +310,7 @@
         * dropdownlist.toggle();
         */
         toggle: function(toggle) {
-            var that = this;
-
-            if (toggle === undefined) {
-                toggle = !that.popup.visible();
-            }
-
-            that[toggle ? "open" : "close"]();
+            this._toggle(toggle);
         },
 
         refresh: function() {
@@ -391,48 +385,28 @@
         select: function(li) {
             var that = this,
                 idx,
-                length,
                 text,
                 value,
-                current = that._current,
                 data = that.dataSource.view(),
-                children = that.ul[0].childNodes;
+                current = that._current;
 
             if (current) {
                 current.removeClass(SELECTED);
             }
 
-            if (typeof li === "function") {
-                for (idx = 0, length = data.length; idx < length; idx++) {
-                    if (li(data[idx])) {
-                        li = idx;
-                        break;
-                    }
-                }
-            }
-
-            if (typeof li === "number") {
-                if (li < 0) {
-                    return;
-                }
-
-                li = $(children[li]);
-            }
+            li = that._get(li);
 
             if (li[0] && !li.hasClass(SELECTED)) {
-                idx = $.inArray(li[0], children);
+                idx = $.inArray(li[0], that.ul[0].childNodes);
+                if (idx > -1) {
+                    data = data[idx];
+                    text = that._text(data);
+                    value = that._value(data);
 
-                if (idx === -1) {
-                    return;
+                    that.text(text);
+                    that.element[0].value = value != undefined ? value : text;
+                    that.current(li.addClass(SELECTED));
                 }
-
-                data = data[idx];
-                text = that._text(data);
-                value = that._value(data);
-
-                that.text(text);
-                that.element[0].value = value != undefined ? value : text;
-                that.current(li.addClass(SELECTED));
             }
         },
 
@@ -471,33 +445,17 @@
         */
         value: function(value) {
             var that = this,
+                idx,
                 element = that.element;
 
             if (value !== undefined) {
-                var data = that.dataSource.view(),
-                    index;
+                idx = that._index(value);
 
-                if (data[0]) {
-                    index = $.map(data, function(dataItem, idx) {
-                        var dataItemValue = that._value(dataItem);
-                        if (dataItemValue === undefined) {
-                            dataItemValue = that._text(dataItem);
-                        }
-
-                        if (dataItemValue == value) {
-                            return idx;
-                        }
-                    });
-                    that.select(index[0] || 0);
-                    that.previous = element.val();
-                }
+                that.select(idx > -1 ? idx : 0);
+                that.previous = element.val();
             } else {
                 return element.val();
             }
-        },
-
-        _toggleHover: function(e) {
-            $(e.currentTarget).toggleClass(HOVER, e.type == "mouseenter");
         },
 
         _accept: function(li) {

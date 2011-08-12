@@ -1,4 +1,4 @@
-(function($, window) {
+(function($, undefined) {
     var kendo = window.kendo,
         proxy = $.proxy,
         DIR = "dir",
@@ -99,4 +99,4 @@
     });
 
     kendo.ui.plugin("Sortable", Sortable);
-})(jQuery, window);
+})(jQuery);

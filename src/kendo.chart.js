@@ -1,8 +1,7 @@
-(function () {
+(function ($, undefined) {
 
     // Imports ================================================================
-    var $ = jQuery,
-        doc = document,
+    var doc = document,
         kendo = window.kendo,
         Class = kendo.Class,
         Component = kendo.ui.Component,
@@ -5633,5 +5632,5 @@
         }
     });
 
-})();
+})(jQuery);
 

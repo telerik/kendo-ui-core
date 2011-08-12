@@ -1,4 +1,4 @@
-(function($, window, undefined) {
+(function($, undefined) {
     /**
      * @name kendo.ui.Upload.Description
      *
@@ -1383,4 +1383,4 @@
         return tokens;
     }
     kendo.ui.plugin("Upload", Upload);
-})(jQuery, window);
+})(jQuery);
