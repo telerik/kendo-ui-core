@@ -110,6 +110,14 @@
     <None Include="UIWidgets\TabStrip\API\RemoveTab.tstest" />
     <None Include="UIWidgets\TabStrip\Events\SwitchTabs.tstest" />
     <None Include="UIWidgets\TabStrip\API\InsertBeforeInsertAfter.tstest" />
+    <None Include="UIWidgets\TreeView\API\AppendNode.tstest" />
+    <None Include="UIWidgets\TreeView\API\CollapseAllNodes.tstest" />
+    <None Include="UIWidgets\TreeView\API\EnableDisable.tstest" />
+    <None Include="UIWidgets\TreeView\API\ExpandAllNodes.tstest" />
+    <None Include="UIWidgets\TreeView\API\Remove.tstest" />
+    <None Include="UIWidgets\TreeView\Events\DragAndDropInvalid.tstest" />
+    <None Include="UIWidgets\TreeView\Events\DragAndDropValid.tstest" />
+    <None Include="UIWidgets\TreeView\Events\ExpandCollapseSelect.tstest" />
     <None Include="UIWidgets\Window\API\CloseOpen.tstest" />
     <None Include="UIWidgets\Window\Events\OpenActivateRefreshclose.tstest" />
   </ItemGroup>
@@ -324,6 +332,46 @@
   <ItemGroup>
     <None Include="UIWidgets\Window\Events\OpenActivateRefreshclose.resx">
       <DependentUpon>OpenActivateRefreshclose.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\TreeView\API\EnableDisable.resx">
+      <DependentUpon>EnableDisable.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\TreeView\API\Remove.resx">
+      <DependentUpon>Remove.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\TreeView\API\ExpandAllNodes.resx">
+      <DependentUpon>ExpandAllNodes.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\TreeView\API\CollapseAllNodes.resx">
+      <DependentUpon>CollapseAllNodes.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\TreeView\API\AppendNode.resx">
+      <DependentUpon>AppendNode.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\TreeView\Events\ExpandCollapseSelect.resx">
+      <DependentUpon>ExpandCollapseSelect.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\TreeView\Events\DragAndDropValid.resx">
+      <DependentUpon>DragAndDropValid.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\TreeView\Events\DragAndDropInvalid.resx">
+      <DependentUpon>DragAndDropInvalid.tstest</DependentUpon>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
