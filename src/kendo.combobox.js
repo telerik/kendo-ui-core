@@ -296,7 +296,9 @@
 
                 input.removeAttr(ATTRIBUTE);
                 element.removeAttr(ATTRIBUTE);
-                arrow.bind(CLICK, proxy(that.toggle, that));
+                arrow.bind(CLICK, function() {
+                    that.toggle();
+                });
             }
         },
 
@@ -467,7 +469,7 @@
                 });
 
                 if (!that._selected) {
-                    that._customOption(text);
+                    that._custom(text);
                     that.element.val(text);
                 }
 
@@ -490,12 +492,7 @@
             var that = this;
             that.input[0].focus();
             clearTimeout(that._bluring);
-
-            if (typeof toggle !== "boolean") {
-                toggle = !that.popup.visible();
-            }
-
-            that[toggle ? "open" : "close"]();
+            that._toggle(toggle);
         },
 
         /**
@@ -513,30 +510,17 @@
         */
         value: function(value) {
             var that = this,
+                idx,
                 element = that.element;
 
             if (value !== undefined) {
-                var data = that.dataSource.view(),
-                    index;
+                idx = that._index(value);
 
-                if (data[0]) {
-                    index = $.map(data, function(dataItem, idx) {
-                        var dataItemValue = that._value(dataItem);
-                        if (dataItemValue === undefined) {
-                            dataItemValue = that._text(dataItem);
-                        }
-
-                        if (dataItemValue == value) {
-                            return idx;
-                        }
-                    })[0];
-                }
-
-                if (index !== undefined) {
-                    that.select(index);
+                if (idx > -1) {
+                    that.select(idx);
                 } else {
                     that.current(null);
-                    that._customOption(value);
+                    that._custom(value);
 
                     element.val(value);
                     that.text(value);
@@ -546,10 +530,6 @@
             } else {
                 return element.val();
             }
-        },
-
-        _toggleHover: function(e) {
-            $(e.currentTarget).toggleClass(HOVER, e.type == "mouseenter");
         },
 
         _accept: function(li) {
@@ -573,14 +553,14 @@
             }
         },
 
-        _customOption: function(value) {
+        _custom: function(value) {
             var that = this,
                 element = that.element,
-                custom = that._custom;
+                custom = that._option;
 
             if (element.is(SELECT)) {
                 if (!custom) {
-                    custom = that._custom = $("<option/>");
+                    custom = that._option = $("<option/>");
                     element.append(custom);
                 }
                 custom.text(value);
@@ -619,43 +599,17 @@
         },
 
         _highlight: function(li) {
-            var that = this,
-                i = 0,
-                idx = -1,
-                length,
-                text = "",
-                value,
-                data = that.dataSource.view(),
-                children = that.ul[0].childNodes;
+            var that = this;
 
             that.current(null);
 
-            if (typeof li === "function") {
-                for (i = 0, length = data.length; i < length; i++) {
-                    if (li(data[i])) {
-                        li = i;
-                        break;
-                    }
-                }
-            }
-
-            if (typeof li === "number") {
-                if (li < 0) {
-                    return idx;
-                }
-
-                li = $(children[li]);
-            }
+            li = that._get(li);
 
             if (li[0] && !li.hasClass("t-state-focused")) {
-                idx = $.inArray(li[0], children);
-
-                if (idx !== -1) {
-                    that.current(li);
-                }
+                that.current(li);
             }
 
-            return idx;
+            return $.inArray(li[0], that.ul[0].childNodes);
         },
 
         _input: function() {
@@ -668,7 +622,7 @@
             input = wrapper.find(SELECTOR);
 
             if (!input[0]) {
-                wrapper.append('<div class="t-dropdown-wrap t-state-default"><input class="t-input" type="text" autocomplete="off"></input><span class="t-select"><span class="t-icon t-arrow-down">select</span></span></div>')
+                wrapper.append('<div class="t-dropdown-wrap t-state-default"><input class="t-input" type="text" autocomplete="off"/><span class="t-select"><span class="t-icon t-arrow-down">select</span></span></div>')
                        .append(that.element);
 
                 input = wrapper.find(SELECTOR);

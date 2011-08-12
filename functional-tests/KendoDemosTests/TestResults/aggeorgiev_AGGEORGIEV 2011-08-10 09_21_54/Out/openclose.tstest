@@ -1,0 +1,1681 @@
+﻿<WebAiiTest xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
+  <DataInfo xmlns:d2p1="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+    <d2p1:BuiltInData i:nil="true" />
+    <d2p1:BuiltInDocumentKey i:nil="true" />
+    <d2p1:ConnectionString />
+    <d2p1:DataEnabled>true</d2p1:DataEnabled>
+    <d2p1:DataProvider />
+    <d2p1:DataRange />
+    <d2p1:DataTableName />
+    <d2p1:DataType>None</d2p1:DataType>
+    <d2p1:DefaultToGrid>true</d2p1:DefaultToGrid>
+    <d2p1:HasBuiltinGrid>false</d2p1:HasBuiltinGrid>
+    <d2p1:TSQL />
+  </DataInfo>
+  <Description />
+  <IndependentDescriptors>
+    <ElementDescriptor>
+      <DomStateKey />
+      <FindExpression i:type="HtmlFindExpressionElement">
+        <BackupSearchClause>/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[2]/div[1]/ul[1]/li[1]/span[1]</BackupSearchClause>
+        <FindExpressions xmlns:d5p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
+          <d5p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+            <d5p1:key>Html</d5p1:key>
+            <d5p1:value i:type="HtmlFindExpression">
+              <ChainStops xmlns:d8p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+              <Clauses>
+                <HtmlFindClause>
+                  <Clause>tagname=span</Clause>
+                </HtmlFindClause>
+                <HtmlFindClause>
+                  <Clause>TextContent=First Item</Clause>
+                </HtmlFindClause>
+              </Clauses>
+              <Constraints />
+            </d5p1:value>
+          </d5p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+        </FindExpressions>
+        <Name>FirstItemSpan</Name>
+        <NodeKind>4</NodeKind>
+        <TechnologyType>Html</TechnologyType>
+      </FindExpression>
+      <FindInfo i:nil="true" />
+      <Frame i:nil="true" />
+      <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlSpan</HtmlControlType>
+      <IsIndependent>true</IsIndependent>
+      <Name />
+      <Page xmlns:d4p1="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0" i:type="d4p1:PageUri">
+        <d4p1:AlwaysUseTitleInCompare>false</d4p1:AlwaysUseTitleInCompare>
+        <d4p1:BaseUrl>http://aggeorgiev</d4p1:BaseUrl>
+        <d4p1:CompareMode>FullPathAndQuery</d4p1:CompareMode>
+        <d4p1:EquivalentUrls xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d4p1:Fragment />
+        <d4p1:FriendlyName>BasicUsage2</d4p1:FriendlyName>
+        <d4p1:Path>/kendo/live/menu/index.html</d4p1:Path>
+        <d4p1:Query />
+        <d4p1:Title>Basic usage</d4p1:Title>
+      </Page>
+      <Region i:nil="true" />
+      <TechnologyType>Html</TechnologyType>
+      <Version>200</Version>
+    </ElementDescriptor>
+    <ElementDescriptor>
+      <DomStateKey />
+      <FindExpression i:type="HtmlFindExpressionElement">
+        <BackupSearchClause>/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[2]/div[1]/ul[1]/li[1]/span[1]</BackupSearchClause>
+        <FindExpressions xmlns:d5p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
+          <d5p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+            <d5p1:key>Html</d5p1:key>
+            <d5p1:value i:type="HtmlFindExpression">
+              <ChainStops xmlns:d8p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+              <Clauses>
+                <HtmlFindClause>
+                  <Clause>tagname=span</Clause>
+                </HtmlFindClause>
+                <HtmlFindClause>
+                  <Clause>TextContent=First Item</Clause>
+                </HtmlFindClause>
+              </Clauses>
+              <Constraints />
+            </d5p1:value>
+          </d5p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+        </FindExpressions>
+        <Name>FirstItemSpan</Name>
+        <NodeKind>4</NodeKind>
+        <TechnologyType>Html</TechnologyType>
+      </FindExpression>
+      <FindInfo i:nil="true" />
+      <Frame i:nil="true" />
+      <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlSpan</HtmlControlType>
+      <IsIndependent>true</IsIndependent>
+      <Name />
+      <Page xmlns:d4p1="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0" i:type="d4p1:PageUri">
+        <d4p1:AlwaysUseTitleInCompare>false</d4p1:AlwaysUseTitleInCompare>
+        <d4p1:BaseUrl>http://aggeorgiev</d4p1:BaseUrl>
+        <d4p1:CompareMode>FullPathAndQuery</d4p1:CompareMode>
+        <d4p1:EquivalentUrls xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d4p1:Fragment />
+        <d4p1:FriendlyName>BasicUsage2</d4p1:FriendlyName>
+        <d4p1:Path>/kendo/live/menu/index.html</d4p1:Path>
+        <d4p1:Query />
+        <d4p1:Title>Basic usage</d4p1:Title>
+      </Page>
+      <Region i:nil="true" />
+      <TechnologyType>Html</TechnologyType>
+      <Version>200</Version>
+    </ElementDescriptor>
+    <ElementDescriptor>
+      <DomStateKey />
+      <FindExpression i:type="HtmlFindExpressionElement">
+        <BackupSearchClause>/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[2]/div[1]/ul[1]/li[1]/div[1]/ul[1]/li[2]/div[1]/ul[1]/li[2]</BackupSearchClause>
+        <FindExpressions xmlns:d5p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
+          <d5p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+            <d5p1:key>Html</d5p1:key>
+            <d5p1:value i:type="HtmlFindExpression">
+              <ChainStops xmlns:d8p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+                <d8p1:int>1</d8p1:int>
+              </ChainStops>
+              <Clauses>
+                <HtmlFindClause>
+                  <Clause>id=menu</Clause>
+                </HtmlFindClause>
+                <HtmlFindClause>
+                  <Clause>tagIndex=li:4</Clause>
+                </HtmlFindClause>
+              </Clauses>
+              <Constraints />
+            </d5p1:value>
+          </d5p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+        </FindExpressions>
+        <Name>ListItem0</Name>
+        <NodeKind>4</NodeKind>
+        <TechnologyType>Html</TechnologyType>
+      </FindExpression>
+      <FindInfo i:nil="true" />
+      <Frame i:nil="true" />
+      <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlControl</HtmlControlType>
+      <IsIndependent>true</IsIndependent>
+      <Name>$$Independent$$</Name>
+      <Page xmlns:d4p1="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0" i:type="d4p1:PageUri">
+        <d4p1:AlwaysUseTitleInCompare>false</d4p1:AlwaysUseTitleInCompare>
+        <d4p1:BaseUrl>http://aggeorgiev</d4p1:BaseUrl>
+        <d4p1:CompareMode>FullPath</d4p1:CompareMode>
+        <d4p1:EquivalentUrls xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d4p1:Fragment />
+        <d4p1:FriendlyName>BasicUsage2</d4p1:FriendlyName>
+        <d4p1:Path>/kendo/live/menu/index.html</d4p1:Path>
+        <d4p1:Query />
+        <d4p1:Title>Basic usage</d4p1:Title>
+      </Page>
+      <Region i:nil="true" />
+      <TechnologyType>Html</TechnologyType>
+      <Version>200</Version>
+    </ElementDescriptor>
+    <ElementDescriptor>
+      <DomStateKey />
+      <FindExpression i:type="HtmlFindExpressionElement">
+        <BackupSearchClause>/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[2]/div[1]/ul[1]/li[1]/span[1]</BackupSearchClause>
+        <FindExpressions xmlns:d5p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
+          <d5p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+            <d5p1:key>Html</d5p1:key>
+            <d5p1:value i:type="HtmlFindExpression">
+              <ChainStops xmlns:d8p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+              <Clauses>
+                <HtmlFindClause>
+                  <Clause>tagname=span</Clause>
+                </HtmlFindClause>
+                <HtmlFindClause>
+                  <Clause>TextContent=First Item</Clause>
+                </HtmlFindClause>
+              </Clauses>
+              <Constraints />
+            </d5p1:value>
+          </d5p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+        </FindExpressions>
+        <Name>FirstItemSpan</Name>
+        <NodeKind>4</NodeKind>
+        <TechnologyType>Html</TechnologyType>
+      </FindExpression>
+      <FindInfo i:nil="true" />
+      <Frame i:nil="true" />
+      <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlSpan</HtmlControlType>
+      <IsIndependent>true</IsIndependent>
+      <Name />
+      <Page xmlns:d4p1="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0" i:type="d4p1:PageUri">
+        <d4p1:AlwaysUseTitleInCompare>false</d4p1:AlwaysUseTitleInCompare>
+        <d4p1:BaseUrl>http://aggeorgiev</d4p1:BaseUrl>
+        <d4p1:CompareMode>FullPathAndQuery</d4p1:CompareMode>
+        <d4p1:EquivalentUrls xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d4p1:Fragment />
+        <d4p1:FriendlyName>BasicUsage2</d4p1:FriendlyName>
+        <d4p1:Path>/kendo/live/menu/index.html</d4p1:Path>
+        <d4p1:Query />
+        <d4p1:Title>Basic usage</d4p1:Title>
+      </Page>
+      <Region i:nil="true" />
+      <TechnologyType>Html</TechnologyType>
+      <Version>200</Version>
+    </ElementDescriptor>
+    <ElementDescriptor>
+      <DomStateKey />
+      <FindExpression i:type="HtmlFindExpressionElement">
+        <BackupSearchClause>/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[2]/div[1]/ul[1]/li[1]/ul[1]/li[2]/ul[1]/li[4]/span[1]</BackupSearchClause>
+        <FindExpressions xmlns:d5p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
+          <d5p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+            <d5p1:key>Html</d5p1:key>
+            <d5p1:value i:type="HtmlFindExpression">
+              <ChainStops xmlns:d8p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+              <Clauses>
+                <HtmlFindClause>
+                  <Clause>TagName=span</Clause>
+                </HtmlFindClause>
+                <HtmlFindClause>
+                  <Clause>InnerText=~Sub Item 4</Clause>
+                </HtmlFindClause>
+              </Clauses>
+              <Constraints />
+            </d5p1:value>
+          </d5p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+        </FindExpressions>
+        <Name>ExampleDiv</Name>
+        <NodeKind>4</NodeKind>
+        <TechnologyType>Html</TechnologyType>
+      </FindExpression>
+      <FindInfo i:nil="true" />
+      <Frame i:nil="true" />
+      <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlDiv</HtmlControlType>
+      <IsIndependent>true</IsIndependent>
+      <Name />
+      <Page xmlns:d4p1="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0" i:type="d4p1:PageUri">
+        <d4p1:AlwaysUseTitleInCompare>false</d4p1:AlwaysUseTitleInCompare>
+        <d4p1:BaseUrl>http://aggeorgiev</d4p1:BaseUrl>
+        <d4p1:CompareMode>FullPathAndQuery</d4p1:CompareMode>
+        <d4p1:EquivalentUrls xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d4p1:Fragment />
+        <d4p1:FriendlyName>BasicUsage2</d4p1:FriendlyName>
+        <d4p1:Path>/kendo/live/menu/index.html</d4p1:Path>
+        <d4p1:Query />
+        <d4p1:Title>Basic usage</d4p1:Title>
+      </Page>
+      <Region i:nil="true" />
+      <TechnologyType>Html</TechnologyType>
+      <Version>200</Version>
+    </ElementDescriptor>
+    <ElementDescriptor>
+      <DomStateKey />
+      <FindExpression i:type="HtmlFindExpressionElement">
+        <BackupSearchClause>/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[2]/div[1]/ul[1]/li[1]/div[1]/ul[1]/li[2]/div[1]/ul[1]/li[4]</BackupSearchClause>
+        <FindExpressions xmlns:d5p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
+          <d5p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+            <d5p1:key>Html</d5p1:key>
+            <d5p1:value i:type="HtmlFindExpression">
+              <ChainStops xmlns:d8p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+                <d8p1:int>1</d8p1:int>
+              </ChainStops>
+              <Clauses>
+                <HtmlFindClause>
+                  <Clause>id=menu</Clause>
+                </HtmlFindClause>
+                <HtmlFindClause>
+                  <Clause>tagIndex=li:6</Clause>
+                </HtmlFindClause>
+              </Clauses>
+              <Constraints />
+            </d5p1:value>
+          </d5p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+        </FindExpressions>
+        <Name>ListItem</Name>
+        <NodeKind>4</NodeKind>
+        <TechnologyType>Html</TechnologyType>
+      </FindExpression>
+      <FindInfo i:nil="true" />
+      <Frame i:nil="true" />
+      <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlControl</HtmlControlType>
+      <IsIndependent>true</IsIndependent>
+      <Name>$$Independent$$</Name>
+      <Page xmlns:d4p1="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0" i:type="d4p1:PageUri">
+        <d4p1:AlwaysUseTitleInCompare>false</d4p1:AlwaysUseTitleInCompare>
+        <d4p1:BaseUrl>http://aggeorgiev</d4p1:BaseUrl>
+        <d4p1:CompareMode>FullPath</d4p1:CompareMode>
+        <d4p1:EquivalentUrls xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d4p1:Fragment />
+        <d4p1:FriendlyName>BasicUsage2</d4p1:FriendlyName>
+        <d4p1:Path>/kendo/live/menu/index.html</d4p1:Path>
+        <d4p1:Query />
+        <d4p1:Title>Basic usage</d4p1:Title>
+      </Page>
+      <Region i:nil="true" />
+      <TechnologyType>Html</TechnologyType>
+      <Version>200</Version>
+    </ElementDescriptor>
+    <ElementDescriptor>
+      <DomStateKey />
+      <FindExpression i:type="HtmlFindExpressionElement">
+        <BackupSearchClause>/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[2]/div[1]/ul[1]/li[1]/div[1]/ul[1]/li[2]/div[1]/ul[1]/li[4]</BackupSearchClause>
+        <FindExpressions xmlns:d5p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
+          <d5p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+            <d5p1:key>Html</d5p1:key>
+            <d5p1:value i:type="HtmlFindExpression">
+              <ChainStops xmlns:d8p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+                <d8p1:int>1</d8p1:int>
+              </ChainStops>
+              <Clauses>
+                <HtmlFindClause>
+                  <Clause>id=menu</Clause>
+                </HtmlFindClause>
+                <HtmlFindClause>
+                  <Clause>tagIndex=li:6</Clause>
+                </HtmlFindClause>
+              </Clauses>
+              <Constraints />
+            </d5p1:value>
+          </d5p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+        </FindExpressions>
+        <Name>ListItem</Name>
+        <NodeKind>4</NodeKind>
+        <TechnologyType>Html</TechnologyType>
+      </FindExpression>
+      <FindInfo i:nil="true" />
+      <Frame i:nil="true" />
+      <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlControl</HtmlControlType>
+      <IsIndependent>true</IsIndependent>
+      <Name>$$Independent$$</Name>
+      <Page xmlns:d4p1="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0" i:type="d4p1:PageUri">
+        <d4p1:AlwaysUseTitleInCompare>false</d4p1:AlwaysUseTitleInCompare>
+        <d4p1:BaseUrl>http://aggeorgiev</d4p1:BaseUrl>
+        <d4p1:CompareMode>FullPath</d4p1:CompareMode>
+        <d4p1:EquivalentUrls xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d4p1:Fragment />
+        <d4p1:FriendlyName>BasicUsage2</d4p1:FriendlyName>
+        <d4p1:Path>/kendo/live/menu/index.html</d4p1:Path>
+        <d4p1:Query />
+        <d4p1:Title>Basic usage</d4p1:Title>
+      </Page>
+      <Region i:nil="true" />
+      <TechnologyType>Html</TechnologyType>
+      <Version>200</Version>
+    </ElementDescriptor>
+    <ElementDescriptor>
+      <DomStateKey />
+      <FindExpression i:type="HtmlFindExpressionElement">
+        <BackupSearchClause>/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[2]/div[1]/ul[1]/li[1]/span[1]</BackupSearchClause>
+        <FindExpressions xmlns:d5p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
+          <d5p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+            <d5p1:key>Html</d5p1:key>
+            <d5p1:value i:type="HtmlFindExpression">
+              <ChainStops xmlns:d8p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+              <Clauses>
+                <HtmlFindClause>
+                  <Clause>tagname=span</Clause>
+                </HtmlFindClause>
+                <HtmlFindClause>
+                  <Clause>TextContent=First Item</Clause>
+                </HtmlFindClause>
+              </Clauses>
+              <Constraints />
+            </d5p1:value>
+          </d5p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+        </FindExpressions>
+        <Name>FirstItemSpan</Name>
+        <NodeKind>4</NodeKind>
+        <TechnologyType>Html</TechnologyType>
+      </FindExpression>
+      <FindInfo i:nil="true" />
+      <Frame i:nil="true" />
+      <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlSpan</HtmlControlType>
+      <IsIndependent>true</IsIndependent>
+      <Name />
+      <Page xmlns:d4p1="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0" i:type="d4p1:PageUri">
+        <d4p1:AlwaysUseTitleInCompare>false</d4p1:AlwaysUseTitleInCompare>
+        <d4p1:BaseUrl>http://aggeorgiev</d4p1:BaseUrl>
+        <d4p1:CompareMode>FullPathAndQuery</d4p1:CompareMode>
+        <d4p1:EquivalentUrls xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d4p1:Fragment />
+        <d4p1:FriendlyName>BasicUsage2</d4p1:FriendlyName>
+        <d4p1:Path>/kendo/live/menu/index.html</d4p1:Path>
+        <d4p1:Query />
+        <d4p1:Title>Basic usage</d4p1:Title>
+      </Page>
+      <Region i:nil="true" />
+      <TechnologyType>Html</TechnologyType>
+      <Version>200</Version>
+    </ElementDescriptor>
+    <ElementDescriptor>
+      <DomStateKey />
+      <FindExpression i:type="HtmlFindExpressionElement">
+        <BackupSearchClause>/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[2]/div[1]/ul[1]/li[1]/ul[1]/li[2]/ul[1]/li[4]/span[1]</BackupSearchClause>
+        <FindExpressions xmlns:d5p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
+          <d5p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+            <d5p1:key>Html</d5p1:key>
+            <d5p1:value i:type="HtmlFindExpression">
+              <ChainStops xmlns:d8p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+              <Clauses>
+                <HtmlFindClause>
+                  <Clause>TagName=span</Clause>
+                </HtmlFindClause>
+                <HtmlFindClause>
+                  <Clause>InnerText=~Sub Item 4</Clause>
+                </HtmlFindClause>
+              </Clauses>
+              <Constraints />
+            </d5p1:value>
+          </d5p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+        </FindExpressions>
+        <Name>ExampleDiv</Name>
+        <NodeKind>4</NodeKind>
+        <TechnologyType>Html</TechnologyType>
+      </FindExpression>
+      <FindInfo i:nil="true" />
+      <Frame i:nil="true" />
+      <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlDiv</HtmlControlType>
+      <IsIndependent>true</IsIndependent>
+      <Name />
+      <Page xmlns:d4p1="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0" i:type="d4p1:PageUri">
+        <d4p1:AlwaysUseTitleInCompare>false</d4p1:AlwaysUseTitleInCompare>
+        <d4p1:BaseUrl>http://aggeorgiev</d4p1:BaseUrl>
+        <d4p1:CompareMode>FullPathAndQuery</d4p1:CompareMode>
+        <d4p1:EquivalentUrls xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d4p1:Fragment />
+        <d4p1:FriendlyName>BasicUsage2</d4p1:FriendlyName>
+        <d4p1:Path>/kendo/live/menu/index.html</d4p1:Path>
+        <d4p1:Query />
+        <d4p1:Title>Basic usage</d4p1:Title>
+      </Page>
+      <Region i:nil="true" />
+      <TechnologyType>Html</TechnologyType>
+      <Version>200</Version>
+    </ElementDescriptor>
+    <ElementDescriptor>
+      <DomStateKey />
+      <FindExpression i:type="HtmlFindExpressionElement">
+        <BackupSearchClause>/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[2]/div[1]/ul[1]/li[1]/ul[1]/li[2]/ul[1]/li[4]/span[1]</BackupSearchClause>
+        <FindExpressions xmlns:d5p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
+          <d5p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+            <d5p1:key>Html</d5p1:key>
+            <d5p1:value i:type="HtmlFindExpression">
+              <ChainStops xmlns:d8p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+              <Clauses>
+                <HtmlFindClause>
+                  <Clause>TagName=span</Clause>
+                </HtmlFindClause>
+                <HtmlFindClause>
+                  <Clause>InnerText=~Sub Item 4</Clause>
+                </HtmlFindClause>
+              </Clauses>
+              <Constraints />
+            </d5p1:value>
+          </d5p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+        </FindExpressions>
+        <Name>ExampleDiv</Name>
+        <NodeKind>4</NodeKind>
+        <TechnologyType>Html</TechnologyType>
+      </FindExpression>
+      <FindInfo i:nil="true" />
+      <Frame i:nil="true" />
+      <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlDiv</HtmlControlType>
+      <IsIndependent>true</IsIndependent>
+      <Name />
+      <Page xmlns:d4p1="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0" i:type="d4p1:PageUri">
+        <d4p1:AlwaysUseTitleInCompare>false</d4p1:AlwaysUseTitleInCompare>
+        <d4p1:BaseUrl>http://aggeorgiev</d4p1:BaseUrl>
+        <d4p1:CompareMode>FullPathAndQuery</d4p1:CompareMode>
+        <d4p1:EquivalentUrls xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d4p1:Fragment />
+        <d4p1:FriendlyName>BasicUsage2</d4p1:FriendlyName>
+        <d4p1:Path>/kendo/live/menu/index.html</d4p1:Path>
+        <d4p1:Query />
+        <d4p1:Title>Basic usage</d4p1:Title>
+      </Page>
+      <Region i:nil="true" />
+      <TechnologyType>Html</TechnologyType>
+      <Version>200</Version>
+    </ElementDescriptor>
+    <ElementDescriptor>
+      <DomStateKey />
+      <FindExpression i:type="HtmlFindExpressionElement">
+        <BackupSearchClause>/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[2]/div[1]/ul[1]/li[1]/ul[1]/li[2]/ul[1]/li[4]/span[1]</BackupSearchClause>
+        <FindExpressions xmlns:d5p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
+          <d5p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+            <d5p1:key>Html</d5p1:key>
+            <d5p1:value i:type="HtmlFindExpression">
+              <ChainStops xmlns:d8p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+              <Clauses>
+                <HtmlFindClause>
+                  <Clause>TagName=span</Clause>
+                </HtmlFindClause>
+                <HtmlFindClause>
+                  <Clause>InnerText=~Sub Item 4</Clause>
+                </HtmlFindClause>
+              </Clauses>
+              <Constraints />
+            </d5p1:value>
+          </d5p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+        </FindExpressions>
+        <Name>ExampleDiv</Name>
+        <NodeKind>4</NodeKind>
+        <TechnologyType>Html</TechnologyType>
+      </FindExpression>
+      <FindInfo i:nil="true" />
+      <Frame i:nil="true" />
+      <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlDiv</HtmlControlType>
+      <IsIndependent>true</IsIndependent>
+      <Name />
+      <Page xmlns:d4p1="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0" i:type="d4p1:PageUri">
+        <d4p1:AlwaysUseTitleInCompare>false</d4p1:AlwaysUseTitleInCompare>
+        <d4p1:BaseUrl>http://aggeorgiev</d4p1:BaseUrl>
+        <d4p1:CompareMode>FullPathAndQuery</d4p1:CompareMode>
+        <d4p1:EquivalentUrls xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d4p1:Fragment />
+        <d4p1:FriendlyName>BasicUsage2</d4p1:FriendlyName>
+        <d4p1:Path>/kendo/live/menu/index.html</d4p1:Path>
+        <d4p1:Query />
+        <d4p1:Title>Basic usage</d4p1:Title>
+      </Page>
+      <Region i:nil="true" />
+      <TechnologyType>Html</TechnologyType>
+      <Version>200</Version>
+    </ElementDescriptor>
+    <ElementDescriptor>
+      <DomStateKey />
+      <FindExpression i:type="HtmlFindExpressionElement">
+        <BackupSearchClause>/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[2]/div[1]/ul[1]/li[1]/div[1]</BackupSearchClause>
+        <FindExpressions xmlns:d5p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
+          <d5p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+            <d5p1:key>Html</d5p1:key>
+            <d5p1:value i:type="HtmlFindExpression">
+              <ChainStops xmlns:d8p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+                <d8p1:int>1</d8p1:int>
+              </ChainStops>
+              <Clauses>
+                <HtmlFindClause>
+                  <Clause>id=menu</Clause>
+                </HtmlFindClause>
+                <HtmlFindClause>
+                  <Clause>tagIndex=div:0</Clause>
+                </HtmlFindClause>
+                <HtmlFindClause>
+                  <Clause>OuterMarkup=~hidden</Clause>
+                </HtmlFindClause>
+              </Clauses>
+              <Constraints />
+            </d5p1:value>
+          </d5p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+        </FindExpressions>
+        <Name>Div</Name>
+        <NodeKind>4</NodeKind>
+        <TechnologyType>Html</TechnologyType>
+      </FindExpression>
+      <FindInfo i:nil="true" />
+      <Frame i:nil="true" />
+      <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlDiv</HtmlControlType>
+      <IsIndependent>true</IsIndependent>
+      <Name>$$Independent$$</Name>
+      <Page xmlns:d4p1="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0" i:type="d4p1:PageUri">
+        <d4p1:AlwaysUseTitleInCompare>false</d4p1:AlwaysUseTitleInCompare>
+        <d4p1:BaseUrl>http://aggeorgiev</d4p1:BaseUrl>
+        <d4p1:CompareMode>FullPath</d4p1:CompareMode>
+        <d4p1:EquivalentUrls xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d4p1:Fragment />
+        <d4p1:FriendlyName>BasicUsage2</d4p1:FriendlyName>
+        <d4p1:Path>/kendo/live/menu/index.html</d4p1:Path>
+        <d4p1:Query />
+        <d4p1:Title>Basic usage</d4p1:Title>
+      </Page>
+      <Region i:nil="true" />
+      <TechnologyType>Html</TechnologyType>
+      <Version>200</Version>
+    </ElementDescriptor>
+    <ElementDescriptor>
+      <DomStateKey />
+      <FindExpression i:type="HtmlFindExpressionElement">
+        <BackupSearchClause>/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[2]/div[1]/ul[1]/li[1]/span[1]</BackupSearchClause>
+        <FindExpressions xmlns:d5p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
+          <d5p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+            <d5p1:key>Html</d5p1:key>
+            <d5p1:value i:type="HtmlFindExpression">
+              <ChainStops xmlns:d8p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+              <Clauses>
+                <HtmlFindClause>
+                  <Clause>tagname=span</Clause>
+                </HtmlFindClause>
+                <HtmlFindClause>
+                  <Clause>TextContent=First Item</Clause>
+                </HtmlFindClause>
+              </Clauses>
+              <Constraints />
+            </d5p1:value>
+          </d5p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+        </FindExpressions>
+        <Name>FirstItemSpan</Name>
+        <NodeKind>4</NodeKind>
+        <TechnologyType>Html</TechnologyType>
+      </FindExpression>
+      <FindInfo i:nil="true" />
+      <Frame i:nil="true" />
+      <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlSpan</HtmlControlType>
+      <IsIndependent>true</IsIndependent>
+      <Name />
+      <Page xmlns:d4p1="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0" i:type="d4p1:PageUri">
+        <d4p1:AlwaysUseTitleInCompare>false</d4p1:AlwaysUseTitleInCompare>
+        <d4p1:BaseUrl>http://aggeorgiev</d4p1:BaseUrl>
+        <d4p1:CompareMode>FullPathAndQuery</d4p1:CompareMode>
+        <d4p1:EquivalentUrls xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d4p1:Fragment />
+        <d4p1:FriendlyName>BasicUsage2</d4p1:FriendlyName>
+        <d4p1:Path>/kendo/live/menu/index.html</d4p1:Path>
+        <d4p1:Query />
+        <d4p1:Title>Basic usage</d4p1:Title>
+      </Page>
+      <Region i:nil="true" />
+      <TechnologyType>Html</TechnologyType>
+      <Version>200</Version>
+    </ElementDescriptor>
+    <ElementDescriptor>
+      <DomStateKey />
+      <FindExpression i:type="HtmlFindExpressionElement">
+        <BackupSearchClause>/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[2]/div[1]/ul[1]/li[1]/ul[1]/li[2]/ul[1]/li[4]/span[1]</BackupSearchClause>
+        <FindExpressions xmlns:d5p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
+          <d5p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+            <d5p1:key>Html</d5p1:key>
+            <d5p1:value i:type="HtmlFindExpression">
+              <ChainStops xmlns:d8p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+              <Clauses>
+                <HtmlFindClause>
+                  <Clause>TagName=span</Clause>
+                </HtmlFindClause>
+                <HtmlFindClause>
+                  <Clause>InnerText=~Sub Item 4</Clause>
+                </HtmlFindClause>
+              </Clauses>
+              <Constraints />
+            </d5p1:value>
+          </d5p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+        </FindExpressions>
+        <Name>ExampleDiv</Name>
+        <NodeKind>4</NodeKind>
+        <TechnologyType>Html</TechnologyType>
+      </FindExpression>
+      <FindInfo i:nil="true" />
+      <Frame i:nil="true" />
+      <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlDiv</HtmlControlType>
+      <IsIndependent>true</IsIndependent>
+      <Name />
+      <Page xmlns:d4p1="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0" i:type="d4p1:PageUri">
+        <d4p1:AlwaysUseTitleInCompare>false</d4p1:AlwaysUseTitleInCompare>
+        <d4p1:BaseUrl>http://aggeorgiev</d4p1:BaseUrl>
+        <d4p1:CompareMode>FullPathAndQuery</d4p1:CompareMode>
+        <d4p1:EquivalentUrls xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d4p1:Fragment />
+        <d4p1:FriendlyName>BasicUsage2</d4p1:FriendlyName>
+        <d4p1:Path>/kendo/live/menu/index.html</d4p1:Path>
+        <d4p1:Query />
+        <d4p1:Title>Basic usage</d4p1:Title>
+      </Page>
+      <Region i:nil="true" />
+      <TechnologyType>Html</TechnologyType>
+      <Version>200</Version>
+    </ElementDescriptor>
+    <ElementDescriptor>
+      <DomStateKey />
+      <FindExpression i:type="HtmlFindExpressionElement">
+        <BackupSearchClause>/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[2]/div[1]/ul[1]/li[1]/div[1]</BackupSearchClause>
+        <FindExpressions xmlns:d5p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
+          <d5p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+            <d5p1:key>Html</d5p1:key>
+            <d5p1:value i:type="HtmlFindExpression">
+              <ChainStops xmlns:d8p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+                <d8p1:int>1</d8p1:int>
+              </ChainStops>
+              <Clauses>
+                <HtmlFindClause>
+                  <Clause>id=menu</Clause>
+                </HtmlFindClause>
+                <HtmlFindClause>
+                  <Clause>tagIndex=div:0</Clause>
+                </HtmlFindClause>
+                <HtmlFindClause>
+                  <Clause>OuterMarkup=~hidden</Clause>
+                </HtmlFindClause>
+              </Clauses>
+              <Constraints />
+            </d5p1:value>
+          </d5p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+        </FindExpressions>
+        <Name>Div</Name>
+        <NodeKind>4</NodeKind>
+        <TechnologyType>Html</TechnologyType>
+      </FindExpression>
+      <FindInfo i:nil="true" />
+      <Frame i:nil="true" />
+      <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlDiv</HtmlControlType>
+      <IsIndependent>true</IsIndependent>
+      <Name>$$Independent$$</Name>
+      <Page xmlns:d4p1="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0" i:type="d4p1:PageUri">
+        <d4p1:AlwaysUseTitleInCompare>false</d4p1:AlwaysUseTitleInCompare>
+        <d4p1:BaseUrl>http://aggeorgiev</d4p1:BaseUrl>
+        <d4p1:CompareMode>FullPath</d4p1:CompareMode>
+        <d4p1:EquivalentUrls xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d4p1:Fragment />
+        <d4p1:FriendlyName>BasicUsage2</d4p1:FriendlyName>
+        <d4p1:Path>/kendo/live/menu/index.html</d4p1:Path>
+        <d4p1:Query />
+        <d4p1:Title>Basic usage</d4p1:Title>
+      </Page>
+      <Region i:nil="true" />
+      <TechnologyType>Html</TechnologyType>
+      <Version>200</Version>
+    </ElementDescriptor>
+    <ElementDescriptor>
+      <DomStateKey />
+      <FindExpression i:type="HtmlFindExpressionElement">
+        <BackupSearchClause>/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[2]/div[1]/ul[1]/li[1]/span[1]</BackupSearchClause>
+        <FindExpressions xmlns:d5p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
+          <d5p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+            <d5p1:key>Html</d5p1:key>
+            <d5p1:value i:type="HtmlFindExpression">
+              <ChainStops xmlns:d8p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+              <Clauses>
+                <HtmlFindClause>
+                  <Clause>TextContent=First Item</Clause>
+                </HtmlFindClause>
+                <HtmlFindClause>
+                  <Clause>tagname=span</Clause>
+                </HtmlFindClause>
+              </Clauses>
+              <Constraints />
+            </d5p1:value>
+          </d5p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+        </FindExpressions>
+        <Name>FirstItemSpan</Name>
+        <NodeKind>4</NodeKind>
+        <TechnologyType>Html</TechnologyType>
+      </FindExpression>
+      <FindInfo i:nil="true" />
+      <Frame i:nil="true" />
+      <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlSpan</HtmlControlType>
+      <IsIndependent>true</IsIndependent>
+      <Name />
+      <Page xmlns:d4p1="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0" i:type="d4p1:PageUri">
+        <d4p1:AlwaysUseTitleInCompare>false</d4p1:AlwaysUseTitleInCompare>
+        <d4p1:BaseUrl>http://aggeorgiev</d4p1:BaseUrl>
+        <d4p1:CompareMode>FullPathAndQuery</d4p1:CompareMode>
+        <d4p1:EquivalentUrls xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d4p1:Fragment />
+        <d4p1:FriendlyName>BasicUsage2</d4p1:FriendlyName>
+        <d4p1:Path>/kendo/live/menu/index.html</d4p1:Path>
+        <d4p1:Query />
+        <d4p1:Title>Basic usage</d4p1:Title>
+      </Page>
+      <Region i:nil="true" />
+      <TechnologyType>Html</TechnologyType>
+      <Version>200</Version>
+    </ElementDescriptor>
+    <ElementDescriptor>
+      <DomStateKey />
+      <FindExpression i:type="HtmlFindExpressionElement">
+        <BackupSearchClause>/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[2]/div[1]/ul[1]/li[1]/ul[1]/li[2]/ul[1]/li[4]/span[1]</BackupSearchClause>
+        <FindExpressions xmlns:d5p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
+          <d5p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+            <d5p1:key>Html</d5p1:key>
+            <d5p1:value i:type="HtmlFindExpression">
+              <ChainStops xmlns:d8p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+              <Clauses>
+                <HtmlFindClause>
+                  <Clause>TagName=span</Clause>
+                </HtmlFindClause>
+                <HtmlFindClause>
+                  <Clause>InnerText=~Sub Item 4</Clause>
+                </HtmlFindClause>
+              </Clauses>
+              <Constraints />
+            </d5p1:value>
+          </d5p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+        </FindExpressions>
+        <Name>ExampleDiv</Name>
+        <NodeKind>4</NodeKind>
+        <TechnologyType>Html</TechnologyType>
+      </FindExpression>
+      <FindInfo i:nil="true" />
+      <Frame i:nil="true" />
+      <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlDiv</HtmlControlType>
+      <IsIndependent>true</IsIndependent>
+      <Name />
+      <Page xmlns:d4p1="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0" i:type="d4p1:PageUri">
+        <d4p1:AlwaysUseTitleInCompare>false</d4p1:AlwaysUseTitleInCompare>
+        <d4p1:BaseUrl>http://aggeorgiev</d4p1:BaseUrl>
+        <d4p1:CompareMode>FullPathAndQuery</d4p1:CompareMode>
+        <d4p1:EquivalentUrls xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d4p1:Fragment />
+        <d4p1:FriendlyName>BasicUsage2</d4p1:FriendlyName>
+        <d4p1:Path>/kendo/live/menu/index.html</d4p1:Path>
+        <d4p1:Query />
+        <d4p1:Title>Basic usage</d4p1:Title>
+      </Page>
+      <Region i:nil="true" />
+      <TechnologyType>Html</TechnologyType>
+      <Version>200</Version>
+    </ElementDescriptor>
+    <ElementDescriptor>
+      <DomStateKey />
+      <FindExpression i:type="HtmlFindExpressionElement">
+        <BackupSearchClause>/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[2]/div[1]/ul[1]/li[1]/span[1]</BackupSearchClause>
+        <FindExpressions xmlns:d5p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
+          <d5p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+            <d5p1:key>Html</d5p1:key>
+            <d5p1:value i:type="HtmlFindExpression">
+              <ChainStops xmlns:d8p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+              <Clauses>
+                <HtmlFindClause>
+                  <Clause>TextContent=First Item</Clause>
+                </HtmlFindClause>
+                <HtmlFindClause>
+                  <Clause>tagname=span</Clause>
+                </HtmlFindClause>
+              </Clauses>
+              <Constraints />
+            </d5p1:value>
+          </d5p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+        </FindExpressions>
+        <Name>FirstItemSpan</Name>
+        <NodeKind>4</NodeKind>
+        <TechnologyType>Html</TechnologyType>
+      </FindExpression>
+      <FindInfo i:nil="true" />
+      <Frame i:nil="true" />
+      <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlSpan</HtmlControlType>
+      <IsIndependent>true</IsIndependent>
+      <Name />
+      <Page xmlns:d4p1="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0" i:type="d4p1:PageUri">
+        <d4p1:AlwaysUseTitleInCompare>false</d4p1:AlwaysUseTitleInCompare>
+        <d4p1:BaseUrl>http://aggeorgiev</d4p1:BaseUrl>
+        <d4p1:CompareMode>FullPathAndQuery</d4p1:CompareMode>
+        <d4p1:EquivalentUrls xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d4p1:Fragment />
+        <d4p1:FriendlyName>BasicUsage2</d4p1:FriendlyName>
+        <d4p1:Path>/kendo/live/menu/index.html</d4p1:Path>
+        <d4p1:Query />
+        <d4p1:Title>Basic usage</d4p1:Title>
+      </Page>
+      <Region i:nil="true" />
+      <TechnologyType>Html</TechnologyType>
+      <Version>200</Version>
+    </ElementDescriptor>
+    <ElementDescriptor>
+      <DomStateKey />
+      <FindExpression i:type="HtmlFindExpressionElement">
+        <BackupSearchClause>/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[2]/div[1]/ul[1]/li[1]/span[1]</BackupSearchClause>
+        <FindExpressions xmlns:d5p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
+          <d5p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+            <d5p1:key>Html</d5p1:key>
+            <d5p1:value i:type="HtmlFindExpression">
+              <ChainStops xmlns:d8p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+              <Clauses>
+                <HtmlFindClause>
+                  <Clause>tagname=span</Clause>
+                </HtmlFindClause>
+                <HtmlFindClause>
+                  <Clause>TextContent=First Item</Clause>
+                </HtmlFindClause>
+              </Clauses>
+              <Constraints />
+            </d5p1:value>
+          </d5p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+        </FindExpressions>
+        <Name>FirstItemSpan</Name>
+        <NodeKind>4</NodeKind>
+        <TechnologyType>Html</TechnologyType>
+      </FindExpression>
+      <FindInfo i:nil="true" />
+      <Frame i:nil="true" />
+      <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlSpan</HtmlControlType>
+      <IsIndependent>true</IsIndependent>
+      <Name />
+      <Page xmlns:d4p1="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0" i:type="d4p1:PageUri">
+        <d4p1:AlwaysUseTitleInCompare>false</d4p1:AlwaysUseTitleInCompare>
+        <d4p1:BaseUrl>http://aggeorgiev</d4p1:BaseUrl>
+        <d4p1:CompareMode>FullPathAndQuery</d4p1:CompareMode>
+        <d4p1:EquivalentUrls xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d4p1:Fragment />
+        <d4p1:FriendlyName>BasicUsage2</d4p1:FriendlyName>
+        <d4p1:Path>/kendo/live/menu/index.html</d4p1:Path>
+        <d4p1:Query />
+        <d4p1:Title>Basic usage</d4p1:Title>
+      </Page>
+      <Region i:nil="true" />
+      <TechnologyType>Html</TechnologyType>
+      <Version>200</Version>
+    </ElementDescriptor>
+    <ElementDescriptor>
+      <DomStateKey />
+      <FindExpression i:type="HtmlFindExpressionElement">
+        <BackupSearchClause>/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[2]/div[1]/ul[1]/li[1]/span[1]</BackupSearchClause>
+        <FindExpressions xmlns:d5p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
+          <d5p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+            <d5p1:key>Html</d5p1:key>
+            <d5p1:value i:type="HtmlFindExpression">
+              <ChainStops xmlns:d8p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+              <Clauses>
+                <HtmlFindClause>
+                  <Clause>tagname=span</Clause>
+                </HtmlFindClause>
+                <HtmlFindClause>
+                  <Clause>TextContent=First Item</Clause>
+                </HtmlFindClause>
+              </Clauses>
+              <Constraints />
+            </d5p1:value>
+          </d5p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+        </FindExpressions>
+        <Name>FirstItemSpan</Name>
+        <NodeKind>4</NodeKind>
+        <TechnologyType>Html</TechnologyType>
+      </FindExpression>
+      <FindInfo i:nil="true" />
+      <Frame i:nil="true" />
+      <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlSpan</HtmlControlType>
+      <IsIndependent>true</IsIndependent>
+      <Name />
+      <Page xmlns:d4p1="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0" i:type="d4p1:PageUri">
+        <d4p1:AlwaysUseTitleInCompare>false</d4p1:AlwaysUseTitleInCompare>
+        <d4p1:BaseUrl>http://aggeorgiev</d4p1:BaseUrl>
+        <d4p1:CompareMode>FullPathAndQuery</d4p1:CompareMode>
+        <d4p1:EquivalentUrls xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d4p1:Fragment />
+        <d4p1:FriendlyName>BasicUsage2</d4p1:FriendlyName>
+        <d4p1:Path>/kendo/live/menu/index.html</d4p1:Path>
+        <d4p1:Query />
+        <d4p1:Title>Basic usage</d4p1:Title>
+      </Page>
+      <Region i:nil="true" />
+      <TechnologyType>Html</TechnologyType>
+      <Version>200</Version>
+    </ElementDescriptor>
+    <ElementDescriptor>
+      <DomStateKey />
+      <FindExpression i:type="HtmlFindExpressionElement">
+        <BackupSearchClause>/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[2]/div[1]/ul[1]/li[1]/div[1]/ul[1]/li[4]/span[1]</BackupSearchClause>
+        <FindExpressions xmlns:d5p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
+          <d5p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+            <d5p1:key>Html</d5p1:key>
+            <d5p1:value i:type="HtmlFindExpression">
+              <ChainStops xmlns:d8p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+                <d8p1:int>1</d8p1:int>
+                <d8p1:int>3</d8p1:int>
+                <d8p1:int>5</d8p1:int>
+              </ChainStops>
+              <Clauses>
+                <HtmlFindClause>
+                  <Clause>id=menu</Clause>
+                </HtmlFindClause>
+                <HtmlFindClause>
+                  <Clause>TagName=li</Clause>
+                </HtmlFindClause>
+                <HtmlFindClause>
+                  <Clause>class=t-item t-state-default t-first</Clause>
+                </HtmlFindClause>
+                <HtmlFindClause>
+                  <Clause>TagName=div</Clause>
+                </HtmlFindClause>
+                <HtmlFindClause>
+                  <Clause>style=~visible</Clause>
+                </HtmlFindClause>
+                <HtmlFindClause>
+                  <Clause>tagname=span</Clause>
+                </HtmlFindClause>
+                <HtmlFindClause>
+                  <Clause>innertext=~Sub Item 4</Clause>
+                </HtmlFindClause>
+              </Clauses>
+              <Constraints />
+            </d5p1:value>
+          </d5p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+        </FindExpressions>
+        <Name>SubItem4Span</Name>
+        <NodeKind>4</NodeKind>
+        <TechnologyType>Html</TechnologyType>
+      </FindExpression>
+      <FindInfo i:nil="true" />
+      <Frame i:nil="true" />
+      <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlSpan</HtmlControlType>
+      <IsIndependent>true</IsIndependent>
+      <Name />
+      <Page xmlns:d4p1="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0" i:type="d4p1:PageUri">
+        <d4p1:AlwaysUseTitleInCompare>false</d4p1:AlwaysUseTitleInCompare>
+        <d4p1:BaseUrl>http://aggeorgiev</d4p1:BaseUrl>
+        <d4p1:CompareMode>FullPathAndQuery</d4p1:CompareMode>
+        <d4p1:EquivalentUrls xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d4p1:Fragment />
+        <d4p1:FriendlyName>BasicUsage2</d4p1:FriendlyName>
+        <d4p1:Path>/kendo/live/menu/index.html</d4p1:Path>
+        <d4p1:Query />
+        <d4p1:Title>Basic usage</d4p1:Title>
+      </Page>
+      <Region i:nil="true" />
+      <TechnologyType>Html</TechnologyType>
+      <Version>200</Version>
+    </ElementDescriptor>
+    <ElementDescriptor>
+      <DomStateKey />
+      <FindExpression i:type="HtmlFindExpressionElement">
+        <BackupSearchClause>/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[2]/div[1]/ul[1]/li[3]/span[1]</BackupSearchClause>
+        <FindExpressions xmlns:d5p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
+          <d5p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+            <d5p1:key>Html</d5p1:key>
+            <d5p1:value i:type="HtmlFindExpression">
+              <ChainStops xmlns:d8p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+              <Clauses>
+                <HtmlFindClause>
+                  <Clause>TextContent=Templated Item</Clause>
+                </HtmlFindClause>
+                <HtmlFindClause>
+                  <Clause>tagname=span</Clause>
+                </HtmlFindClause>
+              </Clauses>
+              <Constraints />
+            </d5p1:value>
+          </d5p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+        </FindExpressions>
+        <Name>TemplatedItemSpan</Name>
+        <NodeKind>4</NodeKind>
+        <TechnologyType>Html</TechnologyType>
+      </FindExpression>
+      <FindInfo i:nil="true" />
+      <Frame i:nil="true" />
+      <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlSpan</HtmlControlType>
+      <IsIndependent>true</IsIndependent>
+      <Name />
+      <Page xmlns:d4p1="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0" i:type="d4p1:PageUri">
+        <d4p1:AlwaysUseTitleInCompare>false</d4p1:AlwaysUseTitleInCompare>
+        <d4p1:BaseUrl>http://aggeorgiev</d4p1:BaseUrl>
+        <d4p1:CompareMode>FullPathAndQuery</d4p1:CompareMode>
+        <d4p1:EquivalentUrls xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d4p1:Fragment />
+        <d4p1:FriendlyName>BasicUsage2</d4p1:FriendlyName>
+        <d4p1:Path>/kendo/live/menu/index.html</d4p1:Path>
+        <d4p1:Query />
+        <d4p1:Title>Basic usage</d4p1:Title>
+      </Page>
+      <Region i:nil="true" />
+      <TechnologyType>Html</TechnologyType>
+      <Version>200</Version>
+    </ElementDescriptor>
+    <ElementDescriptor>
+      <DomStateKey />
+      <FindExpression i:type="HtmlFindExpressionElement">
+        <BackupSearchClause>/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[3]/ul[1]/li[2]/a[1]</BackupSearchClause>
+        <FindExpressions xmlns:d5p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
+          <d5p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+            <d5p1:key>Html</d5p1:key>
+            <d5p1:value i:type="HtmlFindExpression">
+              <ChainStops xmlns:d8p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+                <d8p1:int>2</d8p1:int>
+              </ChainStops>
+              <Clauses>
+                <HtmlFindClause>
+                  <Clause>tagname=a</Clause>
+                </HtmlFindClause>
+                <HtmlFindClause>
+                  <Clause>id=viewCode</Clause>
+                </HtmlFindClause>
+                <HtmlFindClause>
+                  <Clause>class=~asdfasdfs</Clause>
+                </HtmlFindClause>
+              </Clauses>
+              <Constraints />
+            </d5p1:value>
+          </d5p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+        </FindExpressions>
+        <Name>ViewCodeLink0</Name>
+        <NodeKind>4</NodeKind>
+        <TechnologyType>Html</TechnologyType>
+      </FindExpression>
+      <FindInfo i:nil="true" />
+      <Frame i:nil="true" />
+      <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlAnchor</HtmlControlType>
+      <IsIndependent>true</IsIndependent>
+      <Name />
+      <Page xmlns:d4p1="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0" i:type="d4p1:PageUri">
+        <d4p1:AlwaysUseTitleInCompare>false</d4p1:AlwaysUseTitleInCompare>
+        <d4p1:BaseUrl>http://aggeorgiev</d4p1:BaseUrl>
+        <d4p1:CompareMode>FullPathAndQuery</d4p1:CompareMode>
+        <d4p1:EquivalentUrls xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d4p1:Fragment />
+        <d4p1:FriendlyName>BasicUsage2</d4p1:FriendlyName>
+        <d4p1:Path>/kendo/live/menu/index.html</d4p1:Path>
+        <d4p1:Query />
+        <d4p1:Title>Basic usage</d4p1:Title>
+      </Page>
+      <Region i:nil="true" />
+      <TechnologyType>Html</TechnologyType>
+      <Version>200</Version>
+    </ElementDescriptor>
+  </IndependentDescriptors>
+  <Name>OpenClose</Name>
+  <Steps xmlns:d2p1="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
+      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
+      <d2p1:CustomDescription i:nil="true" />
+      <d2p1:Description>Navigate to : '/menu/index.html'</d2p1:Description>
+      <d2p1:Enabled>true</d2p1:Enabled>
+      <d2p1:Id />
+      <d2p1:Order>1</d2p1:Order>
+      <d2p1:Runtime_x0020_ID>a88fbbbf-40cf-4581-b924-3aa95630f01a</d2p1:Runtime_x0020_ID>
+      <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
+        <d2p1:Constraints>
+          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+            <d6p1:KeyValueOfstringstring>
+              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
+              <d6p1:Value />
+            </d6p1:KeyValueOfstringstring>
+          </ConstraintValues>
+        </d2p1:Constraints>
+        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:EditorType />
+        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:LogMessageOnFailure />
+        <d2p1:Pause>None</d2p1:Pause>
+        <d2p1:RunsAgainstVersion />
+        <d2p1:StepType>Action</d2p1:StepType>
+        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
+        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
+        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
+        <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
+        <d2p1:BaseUrl>http://aggeorgiev/kendo/live</d2p1:BaseUrl>
+        <d2p1:NavigateURL>/menu/index.html</d2p1:NavigateURL>
+      </d2p1:Step>
+      <d2p1:StepImageKey>OpenCloseu3repfny.x1b</d2p1:StepImageKey>
+      <d2p1:StepState>NoCode</d2p1:StepState>
+      <d2p1:Version>200</d2p1:Version>
+    </d2p1:AutomationStep>
+    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
+      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
+      <d2p1:CustomDescription i:nil="true" />
+      <d2p1:Description>Invoke 'OnMouseOver' event on 'FirstItemSpan'</d2p1:Description>
+      <d2p1:Enabled>true</d2p1:Enabled>
+      <d2p1:Id />
+      <d2p1:Order>2</d2p1:Order>
+      <d2p1:Runtime_x0020_ID>04aff896-941a-4f6c-aa3d-07c1b932dff2</d2p1:Runtime_x0020_ID>
+      <d2p1:Step i:type="d2p1:InvokeEventActionDescriptor">
+        <d2p1:Constraints>
+          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+            <d6p1:KeyValueOfstringstring>
+              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
+              <d6p1:Value />
+            </d6p1:KeyValueOfstringstring>
+          </ConstraintValues>
+        </d2p1:Constraints>
+        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:EditorType />
+        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+          <d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+            <d5p1:Key>invokeTarget</d5p1:Key>
+            <d5p1:Value>
+              <DomStateKey />
+              <FindExpression i:type="HtmlFindExpressionElement">
+                <BackupSearchClause>/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[2]/div[1]/ul[1]/li[1]/span[1]</BackupSearchClause>
+                <FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
+                  <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                    <d9p1:key>Html</d9p1:key>
+                    <d9p1:value i:type="HtmlFindExpression">
+                      <ChainStops />
+                      <Clauses>
+                        <HtmlFindClause>
+                          <Clause>TextContent=First Item</Clause>
+                        </HtmlFindClause>
+                        <HtmlFindClause>
+                          <Clause>tagname=span</Clause>
+                        </HtmlFindClause>
+                      </Clauses>
+                      <Constraints />
+                    </d9p1:value>
+                  </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                </FindExpressions>
+                <Name>FirstItemSpan</Name>
+                <NodeKind>4</NodeKind>
+                <TechnologyType>Html</TechnologyType>
+              </FindExpression>
+              <FindInfo i:nil="true" />
+              <Frame i:nil="true" />
+              <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlSpan</HtmlControlType>
+              <IsIndependent>false</IsIndependent>
+              <Name>invokeTarget</Name>
+              <Page i:type="d2p1:PageUri">
+                <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
+                <d2p1:BaseUrl>http://aggeorgiev</d2p1:BaseUrl>
+                <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
+                <d2p1:EquivalentUrls />
+                <d2p1:Fragment />
+                <d2p1:FriendlyName>BasicUsage2</d2p1:FriendlyName>
+                <d2p1:Path>/kendo/live/menu/index.html</d2p1:Path>
+                <d2p1:Query />
+                <d2p1:Title>Basic usage</d2p1:Title>
+              </Page>
+              <Region i:nil="true" />
+              <TechnologyType>Html</TechnologyType>
+              <Version>200</Version>
+            </d5p1:Value>
+          </d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+        </d2p1:Elements>
+        <d2p1:LogMessageOnFailure />
+        <d2p1:Pause>None</d2p1:Pause>
+        <d2p1:RunsAgainstVersion />
+        <d2p1:StepType>Action</d2p1:StepType>
+        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
+        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
+        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
+        <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
+        <d2p1:EventType>OnMouseOver</d2p1:EventType>
+      </d2p1:Step>
+      <d2p1:StepImageKey>OpenClosenmvav3dj.ilh</d2p1:StepImageKey>
+      <d2p1:StepState>NoCode</d2p1:StepState>
+      <d2p1:Version>200</d2p1:Version>
+    </d2p1:AutomationStep>
+    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
+      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
+      <d2p1:CustomDescription i:nil="true" />
+      <d2p1:Description>Click 'SubItem4Span'</d2p1:Description>
+      <d2p1:Enabled>true</d2p1:Enabled>
+      <d2p1:Id />
+      <d2p1:Order>3</d2p1:Order>
+      <d2p1:Runtime_x0020_ID>1bb66381-ed36-43d0-8ec9-3c72e44b94ed</d2p1:Runtime_x0020_ID>
+      <d2p1:Step i:type="d2p1:ClickActionDescriptor">
+        <d2p1:Constraints>
+          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+            <d6p1:KeyValueOfstringstring>
+              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
+              <d6p1:Value />
+            </d6p1:KeyValueOfstringstring>
+          </ConstraintValues>
+        </d2p1:Constraints>
+        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:EditorType />
+        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+          <d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+            <d5p1:Key>target</d5p1:Key>
+            <d5p1:Value>
+              <DomStateKey />
+              <FindExpression i:type="HtmlFindExpressionElement">
+                <BackupSearchClause>/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[2]/div[1]/ul[1]/li[1]/div[1]/ul[1]/li[4]/span[1]</BackupSearchClause>
+                <FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
+                  <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                    <d9p1:key>Html</d9p1:key>
+                    <d9p1:value i:type="HtmlFindExpression">
+                      <ChainStops>
+                        <d5p1:int>1</d5p1:int>
+                        <d5p1:int>3</d5p1:int>
+                        <d5p1:int>5</d5p1:int>
+                      </ChainStops>
+                      <Clauses>
+                        <HtmlFindClause>
+                          <Clause>id=menu</Clause>
+                        </HtmlFindClause>
+                        <HtmlFindClause>
+                          <Clause>TagName=li</Clause>
+                        </HtmlFindClause>
+                        <HtmlFindClause>
+                          <Clause>class=t-item t-state-default t-first</Clause>
+                        </HtmlFindClause>
+                        <HtmlFindClause>
+                          <Clause>TagName=div</Clause>
+                        </HtmlFindClause>
+                        <HtmlFindClause>
+                          <Clause>style=~visible</Clause>
+                        </HtmlFindClause>
+                        <HtmlFindClause>
+                          <Clause>tagname=span</Clause>
+                        </HtmlFindClause>
+                        <HtmlFindClause>
+                          <Clause>innertext=~Sub Item 4</Clause>
+                        </HtmlFindClause>
+                      </Clauses>
+                      <Constraints />
+                    </d9p1:value>
+                  </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                </FindExpressions>
+                <Name>SubItem4Span</Name>
+                <NodeKind>4</NodeKind>
+                <TechnologyType>Html</TechnologyType>
+              </FindExpression>
+              <FindInfo i:nil="true" />
+              <Frame i:nil="true" />
+              <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlSpan</HtmlControlType>
+              <IsIndependent>false</IsIndependent>
+              <Name>target</Name>
+              <Page i:type="d2p1:PageUri">
+                <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
+                <d2p1:BaseUrl>http://aggeorgiev</d2p1:BaseUrl>
+                <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
+                <d2p1:EquivalentUrls />
+                <d2p1:Fragment />
+                <d2p1:FriendlyName>BasicUsage2</d2p1:FriendlyName>
+                <d2p1:Path>/kendo/live/menu/index.html</d2p1:Path>
+                <d2p1:Query />
+                <d2p1:Title>Basic usage</d2p1:Title>
+              </Page>
+              <Region i:nil="true" />
+              <TechnologyType>Html</TechnologyType>
+              <Version>200</Version>
+            </d5p1:Value>
+          </d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+        </d2p1:Elements>
+        <d2p1:LogMessageOnFailure />
+        <d2p1:Pause>None</d2p1:Pause>
+        <d2p1:RunsAgainstVersion />
+        <d2p1:StepType>Action</d2p1:StepType>
+        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
+        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
+        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
+        <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
+        <d2p1:SimulateRealClick>true</d2p1:SimulateRealClick>
+      </d2p1:Step>
+      <d2p1:StepImageKey>OpenClose3rnvgzif.5wm</d2p1:StepImageKey>
+      <d2p1:StepState>NoCode</d2p1:StepState>
+      <d2p1:Version>200</d2p1:Version>
+    </d2p1:AutomationStep>
+    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
+      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
+      <d2p1:CustomDescription i:nil="true" />
+      <d2p1:Description>Invoke 'OnMouseOut' event on 'FirstItemSpan'</d2p1:Description>
+      <d2p1:Enabled>true</d2p1:Enabled>
+      <d2p1:Id />
+      <d2p1:Order>4</d2p1:Order>
+      <d2p1:Runtime_x0020_ID>bfa8398d-db14-4912-a442-d06e3e7d8838</d2p1:Runtime_x0020_ID>
+      <d2p1:Step i:type="d2p1:InvokeEventActionDescriptor">
+        <d2p1:Constraints>
+          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+            <d6p1:KeyValueOfstringstring>
+              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
+              <d6p1:Value />
+            </d6p1:KeyValueOfstringstring>
+          </ConstraintValues>
+        </d2p1:Constraints>
+        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:EditorType />
+        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+          <d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+            <d5p1:Key>invokeTarget</d5p1:Key>
+            <d5p1:Value>
+              <DomStateKey />
+              <FindExpression i:type="HtmlFindExpressionElement">
+                <BackupSearchClause>/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[2]/div[1]/ul[1]/li[1]/span[1]</BackupSearchClause>
+                <FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
+                  <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                    <d9p1:key>Html</d9p1:key>
+                    <d9p1:value i:type="HtmlFindExpression">
+                      <ChainStops />
+                      <Clauses>
+                        <HtmlFindClause>
+                          <Clause>tagname=span</Clause>
+                        </HtmlFindClause>
+                        <HtmlFindClause>
+                          <Clause>TextContent=First Item</Clause>
+                        </HtmlFindClause>
+                      </Clauses>
+                      <Constraints />
+                    </d9p1:value>
+                  </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                </FindExpressions>
+                <Name>FirstItemSpan</Name>
+                <NodeKind>4</NodeKind>
+                <TechnologyType>Html</TechnologyType>
+              </FindExpression>
+              <FindInfo i:nil="true" />
+              <Frame i:nil="true" />
+              <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlSpan</HtmlControlType>
+              <IsIndependent>false</IsIndependent>
+              <Name>invokeTarget</Name>
+              <Page i:type="d2p1:PageUri">
+                <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
+                <d2p1:BaseUrl>http://aggeorgiev</d2p1:BaseUrl>
+                <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
+                <d2p1:EquivalentUrls />
+                <d2p1:Fragment />
+                <d2p1:FriendlyName>BasicUsage2</d2p1:FriendlyName>
+                <d2p1:Path>/kendo/live/menu/index.html</d2p1:Path>
+                <d2p1:Query />
+                <d2p1:Title>Basic usage</d2p1:Title>
+              </Page>
+              <Region i:nil="true" />
+              <TechnologyType>Html</TechnologyType>
+              <Version>200</Version>
+            </d5p1:Value>
+          </d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+        </d2p1:Elements>
+        <d2p1:LogMessageOnFailure />
+        <d2p1:Pause>None</d2p1:Pause>
+        <d2p1:RunsAgainstVersion />
+        <d2p1:StepType>Action</d2p1:StepType>
+        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
+        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
+        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
+        <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
+        <d2p1:EventType>OnMouseOut</d2p1:EventType>
+      </d2p1:Step>
+      <d2p1:StepImageKey>OpenCloselqcfvxvy.5kx</d2p1:StepImageKey>
+      <d2p1:StepState>NoCode</d2p1:StepState>
+      <d2p1:Version>200</d2p1:Version>
+    </d2p1:AutomationStep>
+    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
+      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
+      <d2p1:CustomDescription i:nil="true" />
+      <d2p1:Description>Invoke 'OnMouseOver' event on 'TemplatedItemSpan'</d2p1:Description>
+      <d2p1:Enabled>true</d2p1:Enabled>
+      <d2p1:Id />
+      <d2p1:Order>5</d2p1:Order>
+      <d2p1:Runtime_x0020_ID>30b8fb94-1c29-45a8-b4d8-0fd30ababbd8</d2p1:Runtime_x0020_ID>
+      <d2p1:Step i:type="d2p1:InvokeEventActionDescriptor">
+        <d2p1:Constraints>
+          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+            <d6p1:KeyValueOfstringstring>
+              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
+              <d6p1:Value />
+            </d6p1:KeyValueOfstringstring>
+          </ConstraintValues>
+        </d2p1:Constraints>
+        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:EditorType />
+        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+          <d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+            <d5p1:Key>invokeTarget</d5p1:Key>
+            <d5p1:Value>
+              <DomStateKey />
+              <FindExpression i:type="HtmlFindExpressionElement">
+                <BackupSearchClause>/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[2]/div[1]/ul[1]/li[3]/span[1]</BackupSearchClause>
+                <FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
+                  <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                    <d9p1:key>Html</d9p1:key>
+                    <d9p1:value i:type="HtmlFindExpression">
+                      <ChainStops />
+                      <Clauses>
+                        <HtmlFindClause>
+                          <Clause>tagname=span</Clause>
+                        </HtmlFindClause>
+                        <HtmlFindClause>
+                          <Clause>TextContent=Templated Item</Clause>
+                        </HtmlFindClause>
+                      </Clauses>
+                      <Constraints />
+                    </d9p1:value>
+                  </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                </FindExpressions>
+                <Name>TemplatedItemSpan</Name>
+                <NodeKind>4</NodeKind>
+                <TechnologyType>Html</TechnologyType>
+              </FindExpression>
+              <FindInfo i:nil="true" />
+              <Frame i:nil="true" />
+              <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlSpan</HtmlControlType>
+              <IsIndependent>false</IsIndependent>
+              <Name>invokeTarget</Name>
+              <Page i:type="d2p1:PageUri">
+                <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
+                <d2p1:BaseUrl>http://aggeorgiev</d2p1:BaseUrl>
+                <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
+                <d2p1:EquivalentUrls />
+                <d2p1:Fragment />
+                <d2p1:FriendlyName>BasicUsage2</d2p1:FriendlyName>
+                <d2p1:Path>/kendo/live/menu/index.html</d2p1:Path>
+                <d2p1:Query />
+                <d2p1:Title>Basic usage</d2p1:Title>
+              </Page>
+              <Region i:nil="true" />
+              <TechnologyType>Html</TechnologyType>
+              <Version>200</Version>
+            </d5p1:Value>
+          </d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+        </d2p1:Elements>
+        <d2p1:LogMessageOnFailure />
+        <d2p1:Pause>None</d2p1:Pause>
+        <d2p1:RunsAgainstVersion />
+        <d2p1:StepType>Action</d2p1:StepType>
+        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
+        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
+        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
+        <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
+        <d2p1:EventType>OnMouseOver</d2p1:EventType>
+      </d2p1:Step>
+      <d2p1:StepImageKey>OpenClosefidm5qve.5bp</d2p1:StepImageKey>
+      <d2p1:StepState>NoCode</d2p1:StepState>
+      <d2p1:Version>200</d2p1:Version>
+    </d2p1:AutomationStep>
+    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
+      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
+      <d2p1:CustomDescription i:nil="true" />
+      <d2p1:Description>[OpenClose_CodedStep1] : @"@\Wait for Exists 'FirstItemSpan'</d2p1:Description>
+      <d2p1:Enabled>true</d2p1:Enabled>
+      <d2p1:Id>OpenClose_CodedStep1</d2p1:Id>
+      <d2p1:Order>6</d2p1:Order>
+      <d2p1:Runtime_x0020_ID>48458d30-3184-47ce-9bce-7f34e573e124</d2p1:Runtime_x0020_ID>
+      <d2p1:Step i:type="d2p1:CodedStepDescriptor">
+        <d2p1:Constraints>
+          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        </d2p1:Constraints>
+        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:EditorType />
+        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:LogMessageOnFailure />
+        <d2p1:Pause>None</d2p1:Pause>
+        <d2p1:RunsAgainstVersion />
+        <d2p1:StepType>Action</d2p1:StepType>
+        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
+        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
+        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
+        <d2p1:Code>
+
+            // Wait for Exists 'FirstItemSpan'
+            Pages.BasicUsage2.Div.Wait.ForExists(10000);
+
+
+
+</d2p1:Code>
+        <d2p1:RequiresSilverlight>false</d2p1:RequiresSilverlight>
+      </d2p1:Step>
+      <d2p1:StepImageKey>OpenClosewalibcmb.elv</d2p1:StepImageKey>
+      <d2p1:StepState>Coded</d2p1:StepState>
+      <d2p1:Version>200</d2p1:Version>
+    </d2p1:AutomationStep>
+    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
+      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
+      <d2p1:CustomDescription i:nil="true" />
+      <d2p1:Description>[OpenClose_CodedStep2] : @"Wait for ExistsNot 'SubItem4Span'</d2p1:Description>
+      <d2p1:Enabled>true</d2p1:Enabled>
+      <d2p1:Id>OpenClose_CodedStep2</d2p1:Id>
+      <d2p1:Order>7</d2p1:Order>
+      <d2p1:Runtime_x0020_ID>029b4f83-080e-4053-9b8d-3c70f8f4760c</d2p1:Runtime_x0020_ID>
+      <d2p1:Step i:type="d2p1:CodedStepDescriptor">
+        <d2p1:Constraints>
+          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        </d2p1:Constraints>
+        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:EditorType />
+        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:LogMessageOnFailure />
+        <d2p1:Pause>None</d2p1:Pause>
+        <d2p1:RunsAgainstVersion />
+        <d2p1:StepType>Action</d2p1:StepType>
+        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
+        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
+        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
+        <d2p1:Code>
+            // Wait for ExistsNot 'ViewCodeLink0'
+            
+            Pages.BasicUsage2.Get&lt;ArtOfTest.WebAii.Controls.HtmlControls.HtmlAnchor&gt;(new ArtOfTest.WebAii.Core.HtmlFindExpression("id=menu", "|", "TagName=li", "class=t-item t-state-default t-first", "|", "TagName=div", "style=~visible"), false, 0).Wait.ForExistsNot(10000);
+            
+</d2p1:Code>
+        <d2p1:RequiresSilverlight>false</d2p1:RequiresSilverlight>
+      </d2p1:Step>
+      <d2p1:StepImageKey>OpenCloseo4cuvckq.llj</d2p1:StepImageKey>
+      <d2p1:StepState>Coded</d2p1:StepState>
+      <d2p1:Version>200</d2p1:Version>
+    </d2p1:AutomationStep>
+    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
+      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
+      <d2p1:CustomDescription i:nil="true" />
+      <d2p1:Description>Click 'AnimationLink'</d2p1:Description>
+      <d2p1:Enabled>true</d2p1:Enabled>
+      <d2p1:Id />
+      <d2p1:Order>8</d2p1:Order>
+      <d2p1:Runtime_x0020_ID>ef46fa74-cd67-43ac-a925-b2a712abff46</d2p1:Runtime_x0020_ID>
+      <d2p1:Step i:type="d2p1:ClickActionDescriptor">
+        <d2p1:Constraints>
+          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+            <d6p1:KeyValueOfstringstring>
+              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
+              <d6p1:Value />
+            </d6p1:KeyValueOfstringstring>
+          </ConstraintValues>
+        </d2p1:Constraints>
+        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:EditorType />
+        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+          <d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+            <d5p1:Key>target</d5p1:Key>
+            <d5p1:Value>
+              <DomStateKey />
+              <FindExpression i:type="HtmlFindExpressionElement">
+                <BackupSearchClause>/html[1]/body[1]/div[1]/div[1]/div[3]/div[1]/ul[1]/li[6]/ul[1]/li[2]/a[1]</BackupSearchClause>
+                <FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
+                  <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                    <d9p1:key>Html</d9p1:key>
+                    <d9p1:value i:type="HtmlFindExpression">
+                      <ChainStops />
+                      <Clauses>
+                        <HtmlFindClause>
+                          <Clause>href=http://aggeorgiev/kendo/live/menu/animation.html</Clause>
+                        </HtmlFindClause>
+                        <HtmlFindClause>
+                          <Clause>tagname=a</Clause>
+                        </HtmlFindClause>
+                      </Clauses>
+                      <Constraints />
+                    </d9p1:value>
+                  </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                </FindExpressions>
+                <Name>AnimationLink</Name>
+                <NodeKind>4</NodeKind>
+                <TechnologyType>Html</TechnologyType>
+              </FindExpression>
+              <FindInfo i:nil="true" />
+              <Frame i:nil="true" />
+              <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlAnchor</HtmlControlType>
+              <IsIndependent>false</IsIndependent>
+              <Name>target</Name>
+              <Page i:type="d2p1:PageUri">
+                <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
+                <d2p1:BaseUrl>http://aggeorgiev</d2p1:BaseUrl>
+                <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
+                <d2p1:EquivalentUrls />
+                <d2p1:Fragment />
+                <d2p1:FriendlyName>BasicUsage2</d2p1:FriendlyName>
+                <d2p1:Path>/kendo/live/menu/index.html</d2p1:Path>
+                <d2p1:Query />
+                <d2p1:Title>Basic usage</d2p1:Title>
+              </Page>
+              <Region i:nil="true" />
+              <TechnologyType>Html</TechnologyType>
+              <Version>200</Version>
+            </d5p1:Value>
+          </d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+        </d2p1:Elements>
+        <d2p1:LogMessageOnFailure />
+        <d2p1:Pause>None</d2p1:Pause>
+        <d2p1:RunsAgainstVersion />
+        <d2p1:StepType>Action</d2p1:StepType>
+        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
+        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
+        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
+        <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
+        <d2p1:SimulateRealClick>false</d2p1:SimulateRealClick>
+      </d2p1:Step>
+      <d2p1:StepImageKey>OpenClosevvp4brmf.4rg</d2p1:StepImageKey>
+      <d2p1:StepState>NoCode</d2p1:StepState>
+      <d2p1:Version>200</d2p1:Version>
+    </d2p1:AutomationStep>
+  </Steps>
+  <Version>200</Version>
+  <BrowserType>NotSet</BrowserType>
+  <CurrentReferences xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+    <d2p1:string>System</d2p1:string>
+    <d2p1:string>System.Core</d2p1:string>
+    <d2p1:string>ArtOfTest.WebAii, Version=2011.1.729.0, Culture=neutral, PublicKeyToken=4fd5f65be123776c</d2p1:string>
+    <d2p1:string>ArtOfTest.WebAii.Design, Version=2011.1.729.0, Culture=neutral, PublicKeyToken=4fc62bbc3827ab1d</d2p1:string>
+    <d2p1:string>Telerik.WebAii.Controls.Html, Version=2011.1.729.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
+    <d2p1:string>Telerik.WebAii.Controls.Xaml, Version=2011.1.729.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
+    <d2p1:string>Telerik.WebAii.Controls.Xaml.Wpf, Version=2011.1.729.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
+  </CurrentReferences>
+  <DeploymentItems xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+    <d2p1:string>..\..\..\bin\Debug\KendoDemosTests.dll</d2p1:string>
+  </DeploymentItems>
+  <DomStatesCounter xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <HasCodeBehind>true</HasCodeBehind>
+  <InheritParentDataSource>false</InheritParentDataSource>
+  <IsSilverlightApp>false</IsSilverlightApp>
+  <IsTestFragment>false</IsTestFragment>
+  <Owner i:nil="true" />
+  <Path>UIWidgets\Menu\BasicUsage\OpenClose.tstest</Path>
+  <Priority>0</Priority>
+  <ResourceFilePath>UIWidgets\Menu\BasicUsage\OpenClose.resx</ResourceFilePath>
+  <SilverlightAppLocalDirectory />
+  <SilverlightAppOriginUri i:nil="true" />
+  <SilverlightAppRecordLocal>false</SilverlightAppRecordLocal>
+  <SilverlightAppWebUrl />
+  <SilverlightEnabled>false</SilverlightEnabled>
+  <StopTestListOnFailure>false</StopTestListOnFailure>
+  <TestAssembly>KendoDemosTests.dll</TestAssembly>
+  <TestAssemblyPath>bin\Debug\</TestAssemblyPath>
+  <TestClass>KendoDemosTests.UIWidgets.Menu.BasicUsage.OpenClose</TestClass>
+  <TestLinks xmlns:d2p1="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.ProjectModel.TestLinks" />
+  <TestType>Web</TestType>
+  <UniqueId>91020c93-1d6d-4fb3-9dae-01e50187ada4</UniqueId>
+  <VSProperties xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+    <d2p1:KeyValueOfstringstring>
+      <d2p1:Key>Timeout</d2p1:Key>
+      <d2p1:Value>0</d2p1:Value>
+    </d2p1:KeyValueOfstringstring>
+    <d2p1:KeyValueOfstringstring>
+      <d2p1:Key>ExecId</d2p1:Key>
+      <d2p1:Value>00000000-0000-0000-0000-000000000000</d2p1:Value>
+    </d2p1:KeyValueOfstringstring>
+  </VSProperties>
+  <WpfAppPath i:nil="true" />
+</WebAiiTest>

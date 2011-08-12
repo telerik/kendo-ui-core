@@ -1,4 +1,4 @@
-(function($, window, undefined) {
+(function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
         Component = ui.Component,
@@ -102,4 +102,4 @@
 
     kendo.ui.plugin("Resizable", Resizable);
 
-})(jQuery, window);
+})(jQuery);

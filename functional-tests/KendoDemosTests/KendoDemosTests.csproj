@@ -60,17 +60,58 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UIWidgets\Menu\API\Append.tstest.cs">
+      <DependentUpon>Append.tstest</DependentUpon>
+    </Compile>
+    <Compile Include="UIWidgets\Menu\BasicUsage\NotClosedOnClick.tstest.cs">
+      <DependentUpon>NotClosedOnClick.tstest</DependentUpon>
+    </Compile>
+    <Compile Include="UIWidgets\Menu\BasicUsage\OpenClose.tstest.cs">
+      <DependentUpon>OpenClose.tstest</DependentUpon>
+    </Compile>
     <None Include="Settings.aiis" />
     <None Include="UIWidgets\AutoComplete\BasicUsage\SelectOption.tstest" />
     <None Include="UIWidgets\AutoComplete\BasicUsage\SetTwoValuesRevertToBlank.tstest" />
     <None Include="UIWidgets\ComboBox\BasicUsage\ChangeValueInput.tstest" />
     <None Include="UIWidgets\ComboBox\BasicUsage\ChangeValueKeyboardSelect.tstest" />
     <None Include="UIWidgets\Grid\BasicUsage\GroupByAge.tstest" />
-    <None Include="UIWidgets\Grid\BasicUsage\SortFirstNameAndPage.tstest" />
     <None Include="UIWidgets\Grid\Events\Events.tstest" />
     <None Include="UIWidgets\Grid\Selection\SelectMultipleCells.tstest" />
     <None Include="UIWidgets\Grid\Selection\SelectMultipleRows.tstest" />
     <None Include="UIWidgets\Grid\Selection\SelectRowSingle.tstest" />
+    <None Include="UIWidgets\Menu\API\After.tstest" />
+    <None Include="UIWidgets\Menu\API\Append.tstest" />
+    <None Include="UIWidgets\Menu\API\Before.tstest" />
+    <None Include="UIWidgets\Menu\API\DisableEnable.tstest" />
+    <None Include="UIWidgets\Menu\API\Remove.tstest" />
+    <None Include="UIWidgets\Menu\BasicUsage\NotClosedOnClick.tstest" />
+    <None Include="UIWidgets\Menu\BasicUsage\OpenClose.tstest" />
+    <None Include="UIWidgets\Menu\Events\Events.tstest" />
+    <None Include="UIWidgets\PanelBar\AjaxLoading\SwitchexpandedPanel.tstest" />
+    <None Include="UIWidgets\PanelBar\API\Append.tstest" />
+    <None Include="UIWidgets\PanelBar\API\EnableDisable.tstest" />
+    <None Include="UIWidgets\PanelBar\API\InsertAfter.tstest" />
+    <None Include="UIWidgets\PanelBar\API\InsertBefore.tstest" />
+    <None Include="UIWidgets\PanelBar\API\Remove.tstest" />
+    <None Include="UIWidgets\PanelBar\API\Select.tstest" />
+    <None Include="UIWidgets\PanelBar\BasicUsage\ExpandCollapse.tstest" />
+    <None Include="UIWidgets\PanelBar\BasicUsage\ExpandTwoLevels.tstest" />
+    <None Include="UIWidgets\PanelBar\Events\Events.tstest" />
+    <None Include="UIWidgets\Slider\API\DoubleSliderEnabledisable.tstest" />
+    <None Include="UIWidgets\Slider\API\DoubleSliderSetValue.tstest" />
+    <None Include="UIWidgets\Slider\API\SingleSliderEnableDisable.tstest" />
+    <None Include="UIWidgets\Slider\API\SingleSliderSetValue.tstest" />
+    <None Include="UIWidgets\Slider\BasicUsage\ChangeValueDragAndDropSingleSlider.tstest" />
+    <None Include="UIWidgets\Slider\Events\ChangeValueDoubleSlider.tstest" />
+    <None Include="UIWidgets\Slider\Events\ChangeValueButtonsSingleSlider.tstest" />
+    <None Include="UIWidgets\Splitter\ResizaAllPanels.tstest" />
+    <None Include="UIWidgets\TabStrip\API\Append.tstest" />
+    <None Include="UIWidgets\TabStrip\API\EnableDisable.tstest" />
+    <None Include="UIWidgets\TabStrip\API\RemoveTab.tstest" />
+    <None Include="UIWidgets\TabStrip\Events\SwitchTabs.tstest" />
+    <None Include="UIWidgets\TabStrip\API\InsertBeforeInsertAfter.tstest" />
+    <None Include="UIWidgets\Window\API\CloseOpen.tstest" />
+    <None Include="UIWidgets\Window\Events\OpenActivateRefreshclose.tstest" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\" />
@@ -101,11 +142,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="UIWidgets\Grid\BasicUsage\SortFirstNameAndPage.resx">
-      <DependentUpon>SortFirstNameAndPage.tstest</DependentUpon>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="UIWidgets\Grid\Selection\SelectRowSingle.resx">
       <DependentUpon>SelectRowSingle.tstest</DependentUpon>
     </None>
@@ -123,6 +159,171 @@
   <ItemGroup>
     <None Include="UIWidgets\Grid\Events\Events.resx">
       <DependentUpon>Events.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\Menu\BasicUsage\OpenClose.resx">
+      <DependentUpon>OpenClose.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\Menu\BasicUsage\NotClosedOnClick.resx">
+      <DependentUpon>NotClosedOnClick.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\Menu\Events\Events.resx">
+      <DependentUpon>Events.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\Menu\API\DisableEnable.resx">
+      <DependentUpon>DisableEnable.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\Menu\API\Remove.resx">
+      <DependentUpon>Remove.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\Menu\API\Append.resx">
+      <DependentUpon>Append.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\Menu\API\Before.resx">
+      <DependentUpon>Before.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\Menu\API\After.resx">
+      <DependentUpon>After.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\PanelBar\BasicUsage\ExpandCollapse.resx">
+      <DependentUpon>ExpandCollapse.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\PanelBar\BasicUsage\ExpandTwoLevels.resx">
+      <DependentUpon>ExpandTwoLevels.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\PanelBar\AjaxLoading\SwitchexpandedPanel.resx">
+      <DependentUpon>SwitchexpandedPanel.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\PanelBar\Events\Events.resx">
+      <DependentUpon>Events.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\PanelBar\API\Select.resx">
+      <DependentUpon>Select.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\PanelBar\API\EnableDisable.resx">
+      <DependentUpon>EnableDisable.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\PanelBar\API\Remove.resx">
+      <DependentUpon>Remove.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\PanelBar\API\Append.resx">
+      <DependentUpon>Append.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\PanelBar\API\InsertBefore.resx">
+      <DependentUpon>InsertBefore.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\PanelBar\API\InsertAfter.resx">
+      <DependentUpon>InsertAfter.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\Slider\BasicUsage\ChangeValueDragAndDropSingleSlider.resx">
+      <DependentUpon>ChangeValueDragAndDropSingleSlider.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\Slider\Events\ChangeValueButtonsSingleSlider.resx">
+      <DependentUpon>ChangeValueButtonsSingleSlider.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\Slider\Events\ChangeValueDoubleSlider.resx">
+      <DependentUpon>ChangeValueDoubleSlider.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\Slider\API\SingleSliderSetValue.resx">
+      <DependentUpon>SingleSliderSetValue.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\Slider\API\SingleSliderEnableDisable.resx">
+      <DependentUpon>SingleSliderEnableDisable.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\Slider\API\DoubleSliderSetValue.resx">
+      <DependentUpon>DoubleSliderSetValue.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\Slider\API\DoubleSliderEnabledisable.resx">
+      <DependentUpon>DoubleSliderEnabledisable.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\Splitter\ResizaAllPanels.resx">
+      <DependentUpon>ResizaAllPanels.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\TabStrip\Events\SwitchTabs.resx">
+      <DependentUpon>SwitchTabs.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\TabStrip\API\EnableDisable.resx">
+      <DependentUpon>EnableDisable.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\TabStrip\API\Append.resx">
+      <DependentUpon>Append.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\TabStrip\API\InsertBeforeInsertAfter.resx">
+      <DependentUpon>InsertBeforeInsertAfter.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\TabStrip\API\RemoveTab.resx">
+      <DependentUpon>RemoveTab.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\Window\API\CloseOpen.resx">
+      <DependentUpon>CloseOpen.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\Window\Events\OpenActivateRefreshclose.resx">
+      <DependentUpon>OpenActivateRefreshclose.tstest</DependentUpon>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

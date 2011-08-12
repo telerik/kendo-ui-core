@@ -1,4 +1,4 @@
-(function ($, window) {
+(function ($, undefined) {
     /**
      * @name kendo.ui.Window.Description
      *
@@ -170,8 +170,13 @@
                     offset = element.offset();
                     isVisible = true;
                 } else {
+                    var visibility = element.css("visibility"),
+                        display = element.css("display");
+
                     element.css({ visibility: "hidden", display: "" });
                     offset = element.offset();
+
+                    element.css({ visibility: visibility, display: display });
                 }
             }
 
@@ -907,4 +912,4 @@
 
     kendo.ui.plugin("Window", Window);
 
-})(jQuery, window);
+})(jQuery);

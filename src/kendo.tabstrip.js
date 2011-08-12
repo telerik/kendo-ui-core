@@ -1,4 +1,4 @@
-(function ($, window) {
+(function ($, undefined) {
     /**
      * @name kendo.ui.TabStrip.Description
      *
@@ -128,15 +128,28 @@
      */
     var kendo = window.kendo,
         ui = kendo.ui,
+        map = $.map,
+        each = $.each,
+        trim = $.trim,
         extend = $.extend,
         template = kendo.template,
         Component = ui.Component,
+        excludedNodesRegExp = /^(a|div)$/i,
+        IMG = "img",
+        HREF = "href",
+        LINK = "t-link",
+        LAST = "t-last",
+        CLICK = "click",
         ERROR = "error",
+        EMPTY = ":empty",
+        IMAGE = "t-image",
+        FIRST = "t-first",
         SELECT = "select",
-        CONTENTLOAD = "contentLoad",
+        CONTENT = "t-content",
+        CONTENTURL = "contentUrl",
         MOUSEENTER = "mouseenter",
         MOUSELEAVE = "mouseleave",
-        CLICK = "click",
+        CONTENTLOAD = "contentLoad",
         CLICKABLEITEMS = ".t-tabstrip-items > .t-item:not(.t-state-disabled)",
         HOVERABLEITEMS = ".t-tabstrip-items > .t-item:not(.t-state-disabled):not(.t-state-active)",
         DISABLEDLINKS = ".t-tabstrip-items > .t-state-disabled .t-link",
@@ -145,7 +158,103 @@
         ACTIVESTATE = "t-state-active",
         HOVERSTATE = "t-state-hover",
         TABONTOP = "t-tab-on-top",
-        EMPTY = ":empty";
+
+        templates = {
+            content: template(
+                "<div class='t-content'<#= contentAttributes(data) #>>&nbsp;</div>"
+            ),
+            itemWrapper: template(
+                "<<#= tag(item) #> class='t-link'<#= textAttributes(item) #>>" +
+                    "<#= image(item) #><#= sprite(item) #><#= text(item) #>" +
+                "</<#= tag(item) #>>"
+            ),
+            item: template(
+                "<li class='<#= wrapperCssClass(group, item) #>'>" +
+                    "<#= itemWrapper(data) #>" +
+                "</li>"
+            ),
+            image: template("<img class='t-image' alt='' src='<#= imageUrl #>' />"),
+            sprite: template("<span class='t-sprite <#= spriteCssClass #>'></span>"),
+            empty: template("")
+        },
+
+        rendering = {
+            wrapperCssClass: function (group, item) {
+                var result = "t-item",
+                    index = item.index;
+
+                if (item.enabled === false) {
+                    result += " t-state-disabled";
+                } else {
+                    result += " t-state-default";
+                }
+
+                if (index == 0) {
+                    result += " t-first"
+                }
+
+                if (index == group.length-1) {
+                    result += " t-last";
+                }
+
+                return result;
+            },
+            textAttributes: function(item) {
+                return item.url ? " href='" + item.url + "'" : "";
+            },
+            text: function(item) {
+                return item.encoded === false ? item.text : kendo.htmlEncode(item.text);
+            },
+            tag: function(item) {
+                return item.url ? "a" : "span";
+            },
+            contentAttributes: function(content) {
+                return content.active !== true ? " style='display:none'" : "";
+            }
+        };
+
+    function updateTabClasses (tabs) {
+        tabs.children(IMG)
+            .addClass(IMAGE);
+
+        tabs.children("a")
+            .addClass(LINK)
+            .children(IMG)
+            .addClass(IMAGE);
+
+        tabs.filter(":not([disabled]):not([class*=t-state-disabled])")
+            .addClass(DEFAULTSTATE);
+
+        tabs.filter("li[disabled]")
+            .addClass(DISABLEDSTATE)
+            .removeAttr("disabled");
+
+        tabs.filter(":not([class*=t-state])")
+            .children("a:focus")
+            .parent()
+            .addClass(ACTIVESTATE);
+
+        tabs.each(function() {
+            var item = $(this);
+
+            if (!item.children("." + LINK).length) {
+                item
+                    .contents()      // exclude groups, real links, templates and empty text nodes
+                    .filter(function() { return (!this.nodeName.match(excludedNodesRegExp) && !(this.nodeType == 3 && !trim(this.nodeValue))); })
+                    .wrapAll("<a class='" + LINK + "'/>");
+            }
+        });
+
+    }
+
+    function updateFirstLast (tabGroup) {
+        var tabs = tabGroup.children(".t-item");
+
+        tabs.filter(".t-first:not(:first-child)").removeClass(FIRST);
+        tabs.filter(".t-last:not(:last-child)").removeClass(LAST);
+        tabs.filter(":first-child").addClass(FIRST);
+        tabs.filter(":last-child").addClass(LAST);
+    }
 
     var TabStrip = Component.extend({/** @lends kendo.ui.TabStrip.prototype */
         /**
@@ -164,8 +273,9 @@
             element = $(element);
             var that = this;
 
-            if (options && ("animation" in options) && !options.animation)
+            if (options && ("animation" in options) && !options.animation) {
                 options.animation = { open: { effects: {} }, close: { effects: {} } }; // No animation
+            }
 
             Component.fn.init.call(that, element, options);
 
@@ -207,17 +317,19 @@
 
             that._updateClasses();
 
-            if (that.options.contentUrls)
+            if (that.options.contentUrls) {
                 element.find(".t-tabstrip-items > .t-item")
                     .each(function(index, item) {
-                        $(item).find(">.t-link").data("ContentUrl", that.options.contentUrls[index]);
+                        $(item).find(">." + LINK).data(CONTENTURL, that.options.contentUrls[index]);
                     });
+            }
 
             var selectedItems = element.find("li." + ACTIVESTATE),
-                content = $(that.getContentElement(selectedItems.parent().children().index(selectedItems)));
+                content = $(that.contentElement(selectedItems.parent().children().index(selectedItems)));
 
-            if (content.length > 0 && content[0].childNodes.length == 0)
+            if (content.length > 0 && content[0].childNodes.length == 0) {
                 that.activateTab(selectedItems.eq(0));
+            }
         },
         options: {
             animation: {
@@ -261,11 +373,7 @@
          * @param {Boolean} enable Desired state
          */
         enable: function (element, state) {
-            if (state !== false) {
-                state = true;
-            }
-
-            this._toggleDisabled(element, state);
+            this._toggleDisabled(element, state !== false);
         },
 
         /**
@@ -286,10 +394,10 @@
 
             $(element).each(function () {
                 var item = $(this),
-                    contentUrl = item.find(".t-link").data("ContentUrl");
+                    contentUrl = item.find("." + LINK).data(CONTENTURL);
 
                 if (contentUrl) {
-                    that.ajaxRequest(item, $(that.getContentElement(item.index())), null, contentUrl);
+                    that.ajaxRequest(item, $(that.contentElement(item.index())), null, contentUrl);
                 }
             });
         },
@@ -309,14 +417,14 @@
          */
         append: function (tab) {
             var that = this,
-                creatures = that._create(tab);
+                inserted = that._create(tab);
 
-            $.each (creatures.tabs, function (idx) {
+            each(inserted.tabs, function (idx) {
                 that.tabGroup.append(this);
-                that.element.append(creatures.contents[idx]);
+                that.element.append(inserted.contents[idx]);
             });
 
-            that._updateFirstLast();
+            updateFirstLast(that.tabGroup);
             that._updateContentElements();
         },
 
@@ -337,15 +445,15 @@
          */
         insertBefore: function (tab, referenceTab) {
             var that = this,
-                creatures = this._create(tab),
-                referenceContent = $(that.getContentElement(referenceTab.index()));
+                inserted = this._create(tab),
+                referenceContent = $(that.contentElement(referenceTab.index()));
 
-            $.each (creatures.tabs, function (idx) {
+            each(inserted.tabs, function (idx) {
                 referenceTab.before(this);
-                referenceContent.before(creatures.contents[idx]);
+                referenceContent.before(inserted.contents[idx]);
             });
 
-            that._updateFirstLast();
+            updateFirstLast(that.tabGroup);
             that._updateContentElements();
         },
 
@@ -366,15 +474,15 @@
          */
         insertAfter: function (tab, referenceTab) {
             var that = this,
-                creatures = this._create(tab),
-                referenceContent = $(that.getContentElement(referenceTab.index()));
+                inserted = this._create(tab),
+                referenceContent = $(that.contentElement(referenceTab.index()));
 
-            $.each (creatures.tabs, function (idx) {
+            each(inserted.tabs, function (idx) {
                 referenceTab.after(this);
-                referenceContent.after(creatures.contents[idx]);
+                referenceContent.after(inserted.contents[idx]);
             });
 
-            that._updateFirstLast();
+            updateFirstLast(that.tabGroup);
             that._updateContentElements();
         },
 
@@ -388,7 +496,7 @@
             element = $(element);
 
             var that = this,
-                content = $(that.getContentElement(element.index()));
+                content = $(that.contentElement(element.index()));
 
             content.remove();
             element.remove();
@@ -401,22 +509,22 @@
                 that = this, tabs, contents;
 
             if (plain || $.isArray(tab)) { // is JSON
-                tabs = $.map(plain ? [ tab ] : tab, function (value, idx) {
+                tabs = map(plain ? [ tab ] : tab, function (value, idx) {
                             return $(TabStrip.renderItem({
                                 group: that.tabGroup,
                                 item: extend(value, { index: idx })
                             }));
                         });
-                contents = $.map(plain ? [ tab ] : tab, function (value, idx) {
+                contents = map(plain ? [ tab ] : tab, function (value, idx) {
                             return $(TabStrip.renderContent({
                                 item: extend(value, { index: idx })
                             }));
                         });
             } else {
                 tabs = $(tab);
-                contents = $("<div class='t-content'></div>");
+                contents = $("<div class='" + CONTENT + "'/>");
 
-                this._updateTabClasses(tab);
+                updateTabClasses(tab);
             }
 
             return { tabs: tabs, contents: contents };
@@ -444,54 +552,21 @@
 
             that.tabGroup // Remove empty text nodes
                 .contents()
-                .filter(function () { return (this.nodeType == 3 && !$.trim(this.nodeValue)); })
+                .filter(function () { return (this.nodeType == 3 && !trim(this.nodeValue)); })
                 .remove();
 
             that.contentElements = that.element.children("div");
 
             that.contentElements
-                .addClass("t-content")
+                .addClass(CONTENT)
                 .eq(activeTab)
                 .addClass(ACTIVESTATE)
                 .css({ display: "block" });
 
-            that._updateTabClasses(tabs);
+            updateTabClasses(tabs);
 
+            updateFirstLast(that.tabGroup);
             that._updateContentElements();
-            that._updateFirstLast();
-        },
-
-        _updateTabClasses: function(tabs) {
-            tabs.children("img")
-                .addClass("t-image");
-
-            tabs.children("a")
-                .addClass("t-link")
-                .children("img")
-                .addClass("t-image");
-
-            tabs.filter(":not([disabled]):not([class*=t-state-disabled])")
-                .addClass(DEFAULTSTATE);
-
-            tabs.filter("li[disabled]")
-                .addClass(DISABLEDSTATE)
-                .removeAttr("disabled");
-
-            tabs.filter(":not([class*=t-state])")
-                .children("a:focus")
-                .parent()
-                .addClass(ACTIVESTATE);
-
-            tabs.each(function() {
-                var item = $(this);
-
-                if (!item.children(".t-link").length)
-                    item
-                        .contents()      // exclude groups, real links, templates and empty text nodes
-                        .filter(function() { return (!(this.nodeName.toLowerCase() in { a: {}, div: {} }) && !(this.nodeType == 3 && !$.trim(this.nodeValue))); })
-                        .wrapAll("<a class='t-link'/>");
-            });
-
         },
 
         _updateContentElements: function() {
@@ -503,24 +578,16 @@
             that.tabGroup.find(".t-item").each(function(idx) {
                 var currentContent = that.contentElements.eq(idx),
                     id = tabStripID + "-" + (idx+1),
-                    href = $(this).children(".t-link").attr("href");
+                    href = $(this).children("." + LINK).attr(HREF);
 
-                if (!currentContent.length)
-                    $("<div id='"+ id +"' class='t-content'></div>").appendTo(that.element);
-                else
+                if (!currentContent.length) {
+                    $("<div id='"+ id +"' class='" + CONTENT + "'/>").appendTo(that.element);
+                } else {
                     currentContent.attr("id", id);
+                }
             });
 
             that.contentElements = that.element.children("div"); // refresh the contents
-        },
-
-        _updateFirstLast: function () {
-            var tabs = this.tabGroup.children(".t-item");
-
-            tabs.filter(".t-first:not(:first-child)").removeClass("t-first");
-            tabs.filter(".t-last:not(:last-child)").removeClass("t-last");
-            tabs.filter(":first-child").addClass("t-first");
-            tabs.filter(":last-child").addClass("t-last");
         },
 
         _toggleHover: function(e) {
@@ -530,22 +597,23 @@
         _click: function (e) {
             var that = this,
                 item = $(e.currentTarget),
-                link = item.find(".t-link"),
-                href = link.attr("href"),
-                content = $(that.getContentElement(item.index()));
+                link = item.find("." + LINK),
+                href = link.attr(HREF),
+                content = $(that.contentElement(item.index()));
 
             if (item.is("." + DISABLEDSTATE + ",." + ACTIVESTATE)) {
                 e.preventDefault();
                 return;
             }
 
-            if ($(".t-content", this.element).filter(function() { return $(this).data("animating"); }).length)
+            if ($("." + CONTENT, this.element).filter(function() { return $(this).data("animating"); }).length) {
                 return;
+            }
 
             if (that.trigger(SELECT, { item: item[0], contentElement: content[0] })) {
                 e.preventDefault();
             } else {
-                var isAnchor = link.data("ContentUrl") || (href && (href.charAt(href.length - 1) == "#" || href.indexOf("#" + that.element[0].id + "-") != -1));
+                var isAnchor = link.data(CONTENTURL) || (href && (href.charAt(href.length - 1) == "#" || href.indexOf("#" + that.element[0].id + "-") != -1));
 
                 if (!href || isAnchor) {
                     e.preventDefault();
@@ -582,13 +650,14 @@
             // handle content elements
             var contentElements = that.contentElements;
 
-            if (contentElements.length == 0)
+            if (contentElements.length == 0) {
                 return false;
+            }
 
             var visibleContentElements = contentElements.filter("." + ACTIVESTATE);
 
             // find associated content element
-            var content = $(that.getContentElement(itemIndex));
+            var content = $(that.contentElement(itemIndex));
 
             if (content.length == 0) {
                 visibleContentElements
@@ -598,7 +667,7 @@
                 return false;
             }
 
-            var isAjaxContent = (item.children(".t-link").data("ContentUrl") || false) && content.is(EMPTY),
+            var isAjaxContent = (item.children("." + LINK).data(CONTENTURL) || false) && content.is(EMPTY),
                 showContentElement = function () {
                     oldTab.removeClass(TABONTOP);
                     item.addClass(TABONTOP) // change these directly to bring the tab on top.
@@ -618,9 +687,9 @@
                         .kendoAnimate( openAnimation );
                 },
                 showContent = function() {
-                    if (!isAjaxContent)
+                    if (!isAjaxContent) {
                         showContentElement();
-                    else
+                    } else
                         that.ajaxRequest(item, content, function () {
                             showContentElement();
                         });
@@ -642,7 +711,7 @@
             return true;
         },
 
-        getContentElement: function (itemIndex) {
+        contentElement: function (itemIndex) {
             if (isNaN(itemIndex - 0)) return;
 
             var contentElements = this.contentElements,
@@ -660,36 +729,39 @@
                 return;
 
             var that = this,
-                link = element.find(".t-link"),
+                link = element.find("." + LINK),
                 data = {},
                 statusIcon = null,
                 loadingIconTimeout = setTimeout(function () {
-                    statusIcon = $("<span class='t-icon t-loading'></span>").prependTo(link)
+                    statusIcon = $("<span class='t-icon t-loading'/>").prependTo(link)
                 }, 100);
 
             $.ajax({
                 type: "GET",
                 cache: false,
-                url: url || link.data("ContentUrl") || link.attr("href"),
+                url: url || link.data(CONTENTURL) || link.attr(HREF),
                 dataType: "html",
                 data: data,
 
                 error: function (xhr, status) {
-                    if (that.trigger("error", { xhr: xhr, status: status }))
+                    if (that.trigger("error", { xhr: xhr, status: status })) {
                         this.complete();
+                    }
                 },
 
                 complete: function () {
                     clearTimeout(loadingIconTimeout);
-                    if (statusIcon !== null)
+                    if (statusIcon !== null) {
                         statusIcon.remove();
+                    }
                 },
 
                 success: function (data, textStatus) {
                     content.html(data);
 
-                    if (complete)
+                    if (complete) {
                         complete.call(that, content);
+                    }
 
                     that.trigger(CONTENTLOAD, { item: element[0], contentElement: content[0] });
                 }
@@ -702,8 +774,7 @@
         renderItem: function (options) {
             options = extend({ tabStrip: {}, group: {} }, options);
 
-            var templates = TabStrip.templates,
-                empty = templates.empty,
+            var empty = templates.empty,
                 item = options.item,
                 tabStrip = options.tabStrip;
 
@@ -711,68 +782,14 @@
                 image: item.imageUrl ? templates.image : empty,
                 sprite: item.spriteCssClass ? templates.sprite : empty,
                 itemWrapper: templates.itemWrapper
-            }, TabStrip.rendering));
+            }, rendering));
         },
 
         renderContent: function (options) {
-            return TabStrip.templates.content(extend(options, TabStrip.rendering));
+            return templates.content(extend(options, rendering));
         }
     });
 
-    TabStrip.rendering = {
-        wrapperCssClass: function (group, item) {
-            var result = "t-item",
-                index = item.index;
-
-            if (item.enabled === false) {
-                result += " t-state-disabled";
-            } else {
-                result += " t-state-default";
-            }
-
-            if (index == 0) {
-                result += " t-first"
-            }
-
-            if (index == group.length-1) {
-                result += " t-last";
-            }
-
-            return result;
-        },
-        textAttributes: function(item) {
-            return item.url ? " href='" + item.url + "'" : "";
-        },
-        text: function(item) {
-            return item.encoded === false ? item.text : kendo.htmlEncode(item.text);
-        },
-        tag: function(item) {
-            return item.url ? "a" : "span";
-        },
-        contentAttributes: function(content) {
-            return content.active !== true ? " style='display:none'" : "";
-        }
-    };
-
-    TabStrip.templates = {
-        content: template(
-            "<div class='t-content'<#= contentAttributes(data) #>>&nbsp;</div>"
-        ),
-        itemWrapper: template(
-            "<<#= tag(item) #> class='t-link'<#= textAttributes(item) #>>" +
-                "<#= image(item) #><#= sprite(item) #><#= text(item) #>" +
-            "</<#= tag(item) #>>"
-        ),
-        item: template(
-            "<li class='<#= wrapperCssClass(group, item) #>'>" +
-                "<#= itemWrapper(data) #>" +
-            "</li>"
-        ),
-        image: template("<img class='t-image' alt='' src='<#= imageUrl #>' />"),
-        sprite: template("<span class='t-sprite <#= spriteCssClass #>'></span>"),
-        empty: template("")
-    };
-
     kendo.ui.plugin("TabStrip", TabStrip, Component);
 
-})(jQuery, window);
+})(jQuery);

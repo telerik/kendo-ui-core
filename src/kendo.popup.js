@@ -2,7 +2,6 @@
     var kendo = window.kendo,
         ui = kendo.ui,
         touch = kendo.support.touch,
-        mobileOS = kendo.support.mobileOS,
         getOffset = kendo.getOffset,
         OPEN = "open",
         CLOSE = "close",
@@ -14,13 +13,18 @@
         ABSOLUTE = "absolute",
         HIDDEN = "hidden",
         BODY = "body",
+        LOCATION = "location",
+        POSITION = "position",
+        VISIBLE = "visible",
+        OFFSET = "offset",
+        FITTED = "fitted",
+        EFFECTS = "effects",
         ACTIVE = "t-state-active",
         ACTIVECHILDREN = ".t-dropdown-wrap, .t-link",
         MOUSEDOWN = touch ? "touchstart" : "mousedown",
         extend = $.extend,
         proxy = $.proxy,
-        Component = ui.Component,
-        brokeniOS = touch && mobileOS.ios && mobileOS.flatVersion < 420;
+        Component = ui.Component;
 
     function contains(container, target) {
         return container === target || $.contains(container, target);
@@ -51,13 +55,13 @@
                 options.animation = { open: { show: true, effects: {} }, close: { hide: true, effects: {} } };
             }
 
-            if (!("effects" in options.animation.close)) {
+            if (!(EFFECTS in options.animation.close)) {
                 options.animation.close = extend({ reverse: true }, options.animation.open, options.animation.close);
             }
 
             extend(options.animation.open, {
                 complete: function() {
-                    that.wrapper.css({ overflow: "visible" }).css("overflow");
+                    that.wrapper.css({ overflow: VISIBLE }).css("overflow");
                 }
             });
 
@@ -66,9 +70,10 @@
                     that.element.hide();
                     that.wrapper.hide();
 
-                    var location = that.wrapper.data('location');
-                    if (location)
+                    var location = that.wrapper.data(LOCATION);
+                    if (location) {
                         that.wrapper.css(location);
+                    }
 
                     that._closing = false;
                 }
@@ -80,10 +85,10 @@
 
             $(window).bind("resize", function() {
                 that.wrapper
-                    .removeData('position')
-                    .removeData('location'); // Remove position and location to force originals reset.
+                    .removeData(POSITION)
+                    .removeData(LOCATION); // Remove position and location to force originals reset.
 
-                if (that.wrapper.is(":visible")) {
+                if (that.wrapper.is(":" + VISIBLE)) {
                     that._update();
                 }
             });
@@ -115,11 +120,12 @@
 
         open: function() {
             var that = this,
-                options = that.options;
+                options = that.options,
+                animation;
 
             if (!that.visible()) {
 
-                if(that.element.data("animating") || that.trigger(OPEN)) {
+                if (that.element.data("animating") || that.trigger(OPEN)) {
                     return;
                 }
 
@@ -130,20 +136,22 @@
                                         position: ABSOLUTE
                                     });
 
-                if (options.appendTo == BODY)
-                    that.wrapper.css("top", "-10000px");
+                if (options.appendTo == BODY) {
+                    that.wrapper.css(TOP, "-10000px");
+                }
 
-                var animation = extend({}, options.animation.open);
+                animation = extend({}, options.animation.open);
 
                 if (that._update()) {
                     animation.effects = kendo.parseEffects(animation.effects, true);
                 }
 
-                that.element.data('effects', animation.effects);
+                that.element.data(EFFECTS, animation.effects);
                 that.element.kendoStop(true).kendoAnimate(animation);
 
-                if (options.anchor != BODY)
+                if (options.anchor != BODY) {
                     options.anchor.children(ACTIVECHILDREN).addClass(ACTIVE);
+                }
             }
         },
 
@@ -154,12 +162,14 @@
         },
 
         visible: function() {
-            return this.element.is(":visible");
+            return this.element.is(":" + VISIBLE);
         },
 
         close: function() {
             var that = this,
-                options = that.options;
+                options = that.options,
+                animation,
+                effects;
 
             if (that.visible()) {
 
@@ -167,8 +177,8 @@
                     return;
                 }
 
-                var animation = extend({}, options.animation.close),
-                    effects = that.element.data('effects');
+                animation = extend({}, options.animation.close);
+                effects = that.element.data(EFFECTS);
 
                 that.wrapper = kendo.wrap(that.element).css({ overflow: HIDDEN });
 
@@ -180,8 +190,9 @@
 
                 that.element.kendoStop(true).kendoAnimate(animation);
 
-                if (options.anchor != BODY)
+                if (options.anchor != BODY) {
                     options.anchor.children(ACTIVECHILDREN).removeClass(ACTIVE);
+                }
             }
         },
 
@@ -209,8 +220,9 @@
                 output = viewPortSize - (position + size);
             }
 
-            if (position < 0)
+            if (position < 0) {
                 output = position;
+            }
 
             return output;
         },
@@ -248,21 +260,21 @@
                 aligned = true;
             }
 
-            var pos = wrapper.data('position'),
-                offset = wrapper.data('offset');
+            var pos = wrapper.data(POSITION),
+                offset = wrapper.data(OFFSET);
 
             if (!pos) {
-                pos = getOffset(wrapper, "position");
+                pos = getOffset(wrapper, POSITION);
                 offset = getOffset(wrapper);
 
                 wrapper
-                    .data('position', pos)
-                    .data('offset', extend({}, offset));
+                    .data(POSITION, pos)
+                    .data(OFFSET, extend({}, offset));
             }
 
-            var anchorParent = anchor.offsetParent().parent('.t-animation-container'); // If the parent is positioned, get the current positions
-            if (anchorParent.length && anchorParent.data('fitted')) {
-                pos = getOffset(wrapper, "position");
+            var anchorParent = anchor.offsetParent().parent(".t-animation-container"); // If the parent is positioned, get the current positions
+            if (anchorParent.length && anchorParent.data(FITTED)) {
+                pos = getOffset(wrapper, POSITION);
                 offset = getOffset(wrapper);
             }
 
@@ -271,8 +283,9 @@
                 left: offset.left - (window.pageXOffset || document.documentElement.scrollLeft || 0)
             };
 
-            if (!that.wrapper.data('location')) // Needed to reset the popup location after every closure - fixes the resize bugs.
-                wrapper.data('location', extend({}, pos));
+            if (!that.wrapper.data(LOCATION)) { // Needed to reset the popup location after every closure - fixes the resize bugs.
+                wrapper.data(LOCATION, extend({}, pos));
+            }
 
             var offsets = extend({}, offset),
                 location = extend({}, pos);
@@ -285,10 +298,11 @@
                 location.left += that._fit(offsets.left, wrapper.outerWidth(), viewport.width() / zoomLevel);
             }
 
-            if (location.left != pos.left || location.top != pos.top)
-                wrapper.data('fitted', true);
-            else
-                wrapper.removeData('fitted');
+            if (location.left != pos.left || location.top != pos.top) {
+                wrapper.data(FITTED, true);
+            } else {
+                wrapper.removeData(FITTED);
+            }
 
             var flipPos = extend({}, location);
 

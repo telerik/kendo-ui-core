@@ -1,4 +1,4 @@
-;(function($, window) {
+;(function($, undefined) {
     /**
      * @name kendo
      * @namespace This object contains all code introduced by the Kendo project, plus helper functions that are used across all components.
@@ -9,28 +9,18 @@
         proxy = $.proxy,
         noop = $.noop,
         isFunction = $.isFunction,
+        math = Math,
         Template,
         JSON = JSON || {},
         support = {},
+        boxShadowRegExp = /(\d+?)px\s*(\d+?)px\s*(\d+?)px\s*(\d+?)?/i,
+        newLineTabRegExp = /[\r\t\n]/g,
         FUNCTION = "function",
         STRING = "string",
         NUMBER = "number",
         OBJECT = "object",
         NULL = "null",
         BOOLEAN = "boolean";
-
-    function Event() {
-        this._isPrevented = false;
-    }
-
-    Event.prototype = /** @ignore */ {
-        preventDefault: function() {
-            this._isPrevented = true;
-        },
-        isDefaultPrevented: function() {
-            return this._isPrevented;
-        }
-    };
 
     function Class() {}
 
@@ -93,7 +83,15 @@
         trigger: function(eventName, parameter) {
             var that = this,
                 events = that._events[eventName],
-                args = extend(parameter, new Event()),
+                isDefaultPrevented = false,
+                args = extend(parameter, {
+                    preventDefault: function() {
+                        isDefaultPrevented = true;
+                    },
+                    isDefaultPrevented: function() {
+                        return isDefaultPrevented;
+                    }
+                }),
                 idx,
                 length;
 
@@ -103,7 +101,7 @@
                 }
             }
 
-            return args.isDefaultPrevented();
+            return isDefaultPrevented;
         },
 
         unbind: function(eventName, handler) {
@@ -220,7 +218,7 @@
 
             functionBody += "o+='";
 
-            functionBody += template.replace(/[\r\t\n]/g, " ")
+            functionBody += template.replace(newLineTabRegExp, " ")
                 .replace(quoteRegExp,"\t")
                 .split("'").join("\\'")
                 .split("\t").join("'")
@@ -446,53 +444,55 @@
         format = standardFormats[format] || format;
 
         return format.replace(dateFormatRegExp, function (match) {
+            var result;
+
             if (match === "d") {
-                return date.getDate();
+                result = date.getDate();
             } else if (match === "dd") {
-                return pad(date.getDate());
+                result = pad(date.getDate());
             } else if (match === "ddd") {
-                return culture.abbrDays[date.getDay()];
+                result = culture.abbrDays[date.getDay()];
             } else if (match === "dddd") {
-                return culture.days[date.getDay()];
+                result = culture.days[date.getDay()];
             } else if (match === "M") {
-                return date.getMonth() + 1;
+                result = date.getMonth() + 1;
             } else if (match === "MM") {
-                return pad(date.getMonth() + 1);
+                result = pad(date.getMonth() + 1);
             } else if (match === "MMM") {
-                return culture.abbrMonths[date.getMonth()];
+                result = culture.abbrMonths[date.getMonth()];
             } else if (match === "MMMM") {
-                return culture.months[date.getMonth()];
+                result = culture.months[date.getMonth()];
             } else if (match === "yy") {
-                return pad(date.getFullYear() % 100);
+                result = pad(date.getFullYear() % 100);
             } else if (match === "yyyy") {
-                return date.getFullYear();
+                result = date.getFullYear();
             } else if (match === "h" ) {
-                return date.getHours() % 12 || 12
+                result = date.getHours() % 12 || 12
             } else if (match === "hh") {
-                return pad(date.getHours() % 12 || 12);
+                result = pad(date.getHours() % 12 || 12);
             } else if (match === "H") {
-                return date.getHours();
+                result = date.getHours();
             } else if (match === "HH") {
-                return pad(date.getHours());
+                result = pad(date.getHours());
             } else if (match === "m") {
-                return date.getMinutes();
+                result = date.getMinutes();
             } else if (match === "mm") {
-                return pad(date.getMinutes());
+                result = pad(date.getMinutes());
             } else if (match === "s") {
-                return date.getSeconds();
+                result = date.getSeconds();
             } else if (match === "ss") {
-                return pad(date.getSeconds());
+                result = pad(date.getSeconds());
             } else if (match === "f") {
-                return Math.floor(date.getMilliseconds() / 100);
+                result = math.floor(date.getMilliseconds() / 100);
             } else if (match === "ff") {
-                return Math.floor(date.getMilliseconds() / 10);
+                result = math.floor(date.getMilliseconds() / 10);
             } else if (match === "fff") {
-                return date.getMilliseconds();
+                result = date.getMilliseconds();
             } else if (match === "tt") {
-                return date.getHours() < 12 ? culture.am : culture.pm
+                result = date.getHours() < 12 ? culture.am : culture.pm
             }
 
-            return match.slice(1, match.length - 1);
+            return result !== undefined ? result : match.slice(1, match.length - 1);
         });
     }
 
@@ -790,10 +790,8 @@
 
             if (timeSpan > delay) {
                 execute();
-            } else {
-                if (!omitEnding) {
-                    timeoutId = setTimeout( execute, delay - timeSpan);
-                }
+            } else if (!omitEnding) {
+                timeoutId = setTimeout(execute, delay - timeSpan);
             }
         };
     }
@@ -803,8 +801,8 @@
 
         if (!element.parent().hasClass("t-animation-container")) {
             var shadow = element.css(kendo.support.transitions.css + "box-shadow") || element.css("box-shadow"),
-                radius = shadow ? shadow.match(/(\d+?)px\s*(\d+?)px\s*(\d+?)px\s*(\d+?)?/i) || [ 0, 0, 0, 0, 0 ] : [ 0, 0, 0, 0, 0 ],
-                blur = Math.max((+radius[3]), +(radius[4] || 0)),
+                radius = shadow ? shadow.match(boxShadowRegExp) || [ 0, 0, 0, 0, 0 ] : [ 0, 0, 0, 0, 0 ],
+                blur = math.max((+radius[3]), +(radius[4] || 0)),
                 right = (+radius[1]) + blur,
                 bottom = (+radius[2]) + blur;
 
@@ -827,14 +825,14 @@
             if (wrap.is(":hidden")) {
                 wrap.show();
             }
-            
+
             wrap.css({
                     width: element.outerWidth(),
                     height: element.outerHeight()
                 });
         }
 
-        if (browser.msie && Math.floor(browser.version) <= 7) {
+        if (browser.msie && math.floor(browser.version) <= 7) {
             element.css({
                 zoom: 1
             });
@@ -1036,6 +1034,15 @@
         return result;
     }
 
+    var directions = {
+        left: { reverse: "right" },
+        right: { reverse: "left" },
+        down: { reverse: "up" },
+        up: { reverse: "down" },
+        "in": { reverse: "out" },
+        out: { reverse: "in" }
+    };
+
     function parseEffects(input, mirror) {
         var effects = {};
 
@@ -1060,45 +1067,6 @@
 
         return effects;
     }
-
-    var directions = {
-        left: {
-            reverse: "right",
-            property: "left",
-            transition: "translateX",
-            vertical: false,
-            modifier: -1
-        },
-        right: {
-            reverse: "left",
-            property: "left",
-            transition: "translateX",
-            vertical: false,
-            modifier: 1
-        },
-        down: {
-            reverse: "up",
-            property: "top",
-            transition: "translateY",
-            vertical: true,
-            modifier: 1
-        },
-        up: {
-            reverse: "down",
-            property: "top",
-            transition: "translateY",
-            vertical: true,
-            modifier: -1
-        },
-        "in": {
-            reverse: "out",
-            modifier: -1
-        },
-        out: {
-            reverse: "in",
-            modifier: 1
-        }
-    };
 
     function animate(element, options, duration, reverse, complete) {
         var effects = {};
@@ -1280,6 +1248,9 @@
         }
     });
 
+    var ampRegExp = /&/g,
+        ltRegExp = /</g,
+        gtRegExp = />/g;
     /**
      * Encodes HTML characters to entities.
      * @name kendo.htmlEncode
@@ -1288,7 +1259,7 @@
      * @returns {String} The encoded string.
      */
     function htmlEncode(value) {
-        return ("" + value).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+        return ("" + value).replace(ampRegExp, "&amp;").replace(ltRegExp, "&lt;").replace(gtRegExp, "&gt;");
     }
 
     var touchLocation = function(e) {
@@ -1439,7 +1410,7 @@
             var id = "", i, random;
 
             for (i = 0; i < 32; i++) {
-                random = Math.random() * 16 | 0;
+                random = math.random() * 16 | 0;
 
                 if (i == 8 || i == 12 || i == 16 || i == 20) {
                     id += "-";
@@ -1501,4 +1472,4 @@
             }
         }
     });
-})(jQuery, window);
+})(jQuery);

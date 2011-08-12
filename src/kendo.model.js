@@ -138,7 +138,7 @@
 
     Model.define = function(options) {
         var model,
-            proto = options || {},
+            proto = extend({}, options),
             id = proto.id || "id",
             set,
             get;

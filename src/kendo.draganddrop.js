@@ -1,4 +1,4 @@
-﻿(function ($, window, undefined) {
+﻿(function ($, undefined) {
     var kendo = window.kendo,
         document = window.document,
         Component = kendo.ui.Component,
@@ -392,4 +392,4 @@
 
     kendo.ui.plugin("Draggable", Draggable);
 
- })(jQuery, window);
+ })(jQuery);

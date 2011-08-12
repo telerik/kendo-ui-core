@@ -11,9 +11,10 @@
         map = $.map,
         isArray = $.isArray,
         proxy = $.proxy,
+        math = Math,
         REQUESTSTART = "requestStart",
         ERROR = "error",
-        ROW_SELECTOR = "tr:not(.t-grouping-row):visible",
+        ROW_SELECTOR = "tbody>tr:not(.t-grouping-row):visible",
         CELL_SELECTOR =  ROW_SELECTOR + ">td:not(.t-group-cell)",
         FIRST_CELL_SELECTOR = CELL_SELECTOR + ":first",
         CHANGE = "change",
@@ -85,11 +86,13 @@
                 dataSource = that.dataSource,
                 rowHeight = that.itemHeight,
                 skip = dataSource.skip() || 0,
-                start = that.rangeStart || skip,
+                start = that._rangeStart || skip,
                 height = that.element.innerHeight(),
                 isScrollingUp = !!(that._scrollbarTop && that._scrollbarTop > scrollTop),
-                firstItemIndex = Math.max(Math.floor(scrollTop / rowHeight), 0),
-                lastItemIndex = Math.max(firstItemIndex + Math.floor(height / rowHeight), 0);
+                firstItemIndex = math.max(math.floor(scrollTop / rowHeight), 0),
+                lastItemIndex = math.max(firstItemIndex + math.floor(height / rowHeight), 0);
+
+            console.log(start, firstItemIndex);
 
             that._scrollTop = scrollTop - (start * rowHeight);
             that._scrollbarTop = scrollTop;
@@ -104,29 +107,34 @@
                 dataSource = that.dataSource,
                 itemHeight = that.itemHeight,
                 take = dataSource.take(),
-                rangeStart = that.rangeStart || dataSource.skip() || 0,
-                currentSkip = Math.floor(firstItemIndex / take) * take,
+                rangeStart = that._rangeStart || dataSource.skip() || 0,
+                currentSkip = math.floor(firstItemIndex / take) * take,
                 fetching = false,
                 prefetchAt = 0.33;
 
-
             if (firstItemIndex < rangeStart) {
+
                 fetching = true;
-                rangeStart = Math.max(0, lastItemIndex - take);
+                rangeStart = math.max(0, lastItemIndex - take);
                 that._scrollTop = (firstItemIndex - rangeStart) * itemHeight;
                 that._page(rangeStart, take);
+
             } else if (lastItemIndex >= rangeStart + take && !scrollingUp) {
+
                 fetching = true;
                 rangeStart = firstItemIndex;
                 that._scrollTop = itemHeight;
                 that._page(rangeStart, take);
+
             } else if (!that._fetching) {
+
                 if (firstItemIndex < (currentSkip + take) - take * prefetchAt && firstItemIndex > take) {
                     dataSource.prefetch(currentSkip - take, take);
                 }
                 if (lastItemIndex > currentSkip + take * prefetchAt) {
                     dataSource.prefetch(currentSkip + take, take);
                 }
+
             }
             return fetching;
         },
@@ -137,7 +145,7 @@
 
             clearTimeout(that._timeout);
             that._fetching = true;
-            that.rangeStart = skip;
+            that._rangeStart = skip;
 
             if (dataSource.inRange(skip, take)) {
                 dataSource.range(skip, take);
@@ -153,17 +161,18 @@
             var that = this,
                 html = "",
                 maxHeight = 250000,
+                dataSource = that.dataSource,
+                rangeStart = that._rangeStart,
                 itemHeight;
 
             kendo.ui.progress(that.wrapper, false);
             clearTimeout(that._timeout);
 
-            that._fetching = false;
             itemHeight = that.itemHeight = that.options.itemHeight() || 0;
 
-            totalHeight = that.dataSource.total() * itemHeight;
+            totalHeight = dataSource.total() * itemHeight;
 
-            for (idx = 0; idx < Math.round(totalHeight / maxHeight); idx++) {
+            for (idx = 0; idx < math.round(totalHeight / maxHeight); idx++) {
                 html += '<div style="width:1px;height:' + maxHeight + 'px"></div>';
             }
 
@@ -173,6 +182,11 @@
 
             that.verticalScrollbar.html(html);
             that.wrapper[0].scrollTop = that._scrollTop;
+
+            if (rangeStart && !that._fetching) { // we are rebound from outside local range should be reset
+                that._rangeStart = dataSource.skip();
+            }
+            that._fetching = false;
         }
     });
 
@@ -741,7 +755,7 @@
             }
 
             that.wrapper = wrapper.addClass("t-grid t-widget")
-                                  .attr("tabIndex", Math.max(table.attr("tabIndex") || 0, 0));
+                                  .attr("tabIndex", math.max(table.attr("tabIndex") || 0, 0));
 
             table.removeAttr("tabIndex");
 
@@ -827,7 +841,7 @@
                 that._sum = rowHeight;
                 that._measures = 1;
 
-                totalHeight = Math.round(that.dataSource.total() * rowHeight);
+                totalHeight = math.round(that.dataSource.total() * rowHeight);
             }
 
             var currentRowHeight = that.table.outerHeight() / that.table[0].rows.length;
@@ -1234,7 +1248,7 @@
             if(that._group) {
                 that._templates();
                 that._updateCols();
-                that._updateHeader(groups);                
+                that._updateHeader(groups);
                 that._group = groups > 0;
             }
 

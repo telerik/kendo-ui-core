@@ -56,6 +56,34 @@
                 });
             }
 
+            function remoteDataSource() {
+                var total = 300,
+                    data = new kendo.data.DataSource({
+                        serverPaging: true,
+                        transport: {
+                            read: function(options) {
+                                var take = options.data.take,
+                                skip = options.data.skip;
+
+                                var data = [];
+
+                                for (var i = skip; i < Math.min(skip + take, total); i++) {
+                                    data.push({ OrderID: i, ContactName: "Contact " + i, ShipAddress: "Ship Address " + i });
+                                }
+                                options.success(data);
+                            }
+                        },
+                        schema: {
+                            total:  function () {
+                                return total;
+                            }
+                        },
+                        pageSize: 100
+                    });
+
+                data._total = total;
+                return data;
+            }
             module("kendo.ui.VirtualScrollable", {
                 setup: function() {
                     timeout = window.setTimeout;
@@ -351,28 +379,7 @@
                 equal(skip, 4);
                 equal(take, 4);
             });
-/*
-            test("fetch prefetch the prev page if firstRow is before middle of the page", function() {
-                var skip, take
-                    MyDataSource = DataSource.extend({
-                        prefetch: function() {
-                            skip = arguments[0];
-                            take = arguments[1];
-                        }
-                    }), scroller = new VirtualScrollable(container, {
-                        dataSource: new MyDataSource({
-                            pageSize: 4,
-                            page: 2,
-                            data: [ 1,2,3,4,5,6,7,8,9,10 ]
-                        })
-                    });
-                firstRowIndex = 4,
-                lastRowIndex = 7;
-                scroller._fetch(firstRowIndex, lastRowIndex, true);
-                equal(skip, 0);
-                equal(take, 4);
-            });
-*/
+
             test("content is scrolled to the second record of the new page when the next page is fetched", function() {
                 var firstRowIndex, lastRowIndex,
                     content = container.height(60).find("table").html(new Array(10).join('<tr><td style="height:30px">foo</td></tr>')),
@@ -412,6 +419,22 @@
                 scroller.refresh();
                 scroller._scroll({ currentTarget: { scrollTop: 35 * idxToLoad } });
                 equal(content.parent().scrollTop(), (idxToLoad - 4) * 35);
+            });
+
+            test("rangeStart is set to the current skip if dataSource is sorted", function() {
+                var data = remoteDataSource(),
+                    scroller = new VirtualScrollable(container, {
+                        dataSource: data,
+                            itemHeight: function() {
+                                return 32;
+                            }
+                    });
+
+                scroller._fetch(250, 100);
+                equal(scroller._rangeStart, 250);
+                data.sort({ field: "foo", dir: "asc" });
+                equal(scroller._rangeStart, data.skip());
+                equal(data.skip(), 200);
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

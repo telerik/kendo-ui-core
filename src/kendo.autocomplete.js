@@ -48,7 +48,7 @@
    *        type: "odata", //Specifies data protocol
    *        pageSize: 10, //Limits result set
    *        transport: {
-   *            read: "ht   tp://odata.netflix.com/Catalog/Titles"
+   *            read: "http://odata.netflix.com/Catalog/Titles"
    *        }
    *    })
    * });
@@ -156,7 +156,7 @@
 
             that._accessors();
 
-            that.dataSource = DataSource.create(that.options.dataSource || {}).bind(CHANGE, proxy(that.refresh, that));
+            that.dataSource = DataSource.create(that.options.dataSource).bind(CHANGE, proxy(that.refresh, that));
 
             that.bind([
             /**
@@ -182,7 +182,7 @@
 
             that.element
                 .attr("autocomplete", "off")
-                .addClass('t-widget t-input t-autocomplete')
+                .addClass("t-widget t-input t-autocomplete")
                 .bind({
                     keydown: proxy(that._keydown, that),
                     paste: proxy(that._search, that),
@@ -246,27 +246,25 @@
         */
         select: function (li) {
             var that = this,
-            separator = that.options.separator,
-            data = that.dataSource.view(),
-            text,
-            idx;
+                separator = that.options.separator,
+                data = that.dataSource.view(),
+                text,
+                idx;
 
             if (li && !li.hasClass(SELECTED)) {
                 idx = $.inArray(li[0], that.ul[0].childNodes);
 
-                if (idx === -1) {
-                    return;
+                if (idx > -1) {
+                    data = data[idx];
+                    text = that._text(data);
+
+                    if (separator) {
+                        text = replaceWordAtCaret(caretPosition(that.element[0]), that.value(), text, separator);
+                    }
+
+                    that.value(text);
+                    that.current(li.addClass(SELECTED));
                 }
-
-                data = that.dataSource.view()[idx];
-                text = that._text(data);
-
-                if (separator) {
-                    text = replaceWordAtCaret(caretPosition(that.element[0]), that.value(), text, separator);
-                }
-
-                that.value(text);
-                that.current(li.addClass(SELECTED));
             }
         },
 
@@ -392,8 +390,8 @@
         _keydown: function (e) {
             var that = this,
                 key = e.keyCode,
-                keys = kendo.keys
-            visible = that.popup.visible();
+                keys = kendo.keys,
+                visible = that.popup.visible();
 
             if (key === keys.DOWN) {
                 if (visible) {

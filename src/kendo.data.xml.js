@@ -1,4 +1,4 @@
-(function($) {
+(function($, undefined) {
     var kendo = window.kendo,
         isArray = $.isArray,
         isPlainObject = $.isPlainObject,

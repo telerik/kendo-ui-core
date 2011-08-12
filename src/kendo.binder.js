@@ -1,4 +1,4 @@
-(function ($) {
+(function ($, undefined) {
     var kendo = window.kendo,
         data = kendo.data,
         Model = data.Model;

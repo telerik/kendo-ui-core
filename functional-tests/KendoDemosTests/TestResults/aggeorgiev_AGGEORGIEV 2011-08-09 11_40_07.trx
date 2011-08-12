@@ -1,0 +1,236 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="28758bd4-b62e-42d3-b36e-78d17dfbd65c" name="aggeorgiev@AGGEORGIEV 2011-08-09 11:40:07" runUser="TELERIK\aggeorgiev" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestSettings name="Default Test Settings" id="39d45e9f-7721-43f4-a60f-e64fe0372555">
+    <Execution>
+      <TestTypeSpecific />
+      <AgentRule name="Execution Agents">
+      </AgentRule>
+    </Execution>
+    <Deployment runDeploymentRoot="aggeorgiev_AGGEORGIEV 2011-08-09 11_40_07" />
+  </TestSettings>
+  <Times creation="2011-08-09T11:40:07.2594660+03:00" queuing="2011-08-09T11:40:08.2695670+03:00" start="2011-08-09T11:40:08.6006001+03:00" finish="2011-08-09T11:40:22.8340233+03:00" />
+  <ResultSummary outcome="Aborted">
+    <Counters total="11" executed="2" error="0" failed="0" timeout="0" aborted="1" inconclusive="0" passedButRunAborted="1" notRunnable="0" notExecuted="9" disconnected="0" warning="0" passed="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+  <TestDefinitions>
+    <WebAiiTest name="SelectRowSingle" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\grid\selection\selectrowsingle.tstest" priority="0" id="891ffcdc-fd2e-4e7e-8a8c-b0d9744bb0b9" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="312bb7aa-37bc-4ab7-bda0-5b21b433c198" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="ChangeValueInput" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\combobox\basicusage\changevalueinput.tstest" priority="0" id="f1b99097-ab32-4274-a4a5-8d03fb4b4c6f" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="7037f8ca-359e-4d0e-bc29-d708013e2029" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="Events" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\grid\events\events.tstest" priority="0" id="4ddbacf3-93f2-40ae-9f01-610c591d49b6" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="22af6257-b8fc-4abe-94b5-a2e50de60854" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="SortFirstNameAndPage" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\grid\basicusage\sortfirstnameandpage.tstest" priority="0" id="1b641c32-14b2-4d44-b84a-7772389dbed8" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="37c4db17-3002-4feb-8f05-a7d60763b883" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="SelectOption" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\autocomplete\basicusage\selectoption.tstest" priority="0" id="8b54f401-eab7-44c8-8634-d7ce8bb137a8" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="44995728-789f-4c7d-9c6e-01e60f90c848" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="ChangeValueKeyboardSelect" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\combobox\basicusage\changevaluekeyboardselect.tstest" priority="0" id="5ac7f1c9-d81b-47eb-af1c-2bd95254b5c6" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="a3ae3fc0-4bb9-4e0b-97d8-08d7ffd9f1a5" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="GroupByAge" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\grid\basicusage\groupbyage.tstest" priority="0" id="2a2681b2-602e-4af3-be55-b8516bc81e80" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="937e7be2-3225-45ff-b275-f93ca5a13b7e" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="SelectMultipleCells" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\grid\selection\selectmultiplecells.tstest" priority="0" id="e94e4d47-b502-4a0f-955f-42848b91e78f" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="e6714c2b-c69b-4c18-b677-29176eec825b" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="SetTwoValuesRevertToBlank" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\autocomplete\basicusage\settwovaluesreverttoblank.tstest" priority="0" id="e297cdda-5608-4e27-ae19-fbf10e3a834f" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="e994b31c-5b3a-4be5-b30b-87408934844a" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="SelectMultipleRows" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\grid\selection\selectmultiplerows.tstest" priority="0" id="fd75ef59-b0f9-4557-af4a-a84cb018806e" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="dedff869-b897-40fe-b678-021155018562" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="OpenClose" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\menu\basicusage\openclose.tstest" priority="0" id="91020c93-1d6d-4fb3-9dae-01e50187ada4" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="9068214c-4d8f-4b1f-9157-bd349701fb61" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="8b54f401-eab7-44c8-8634-d7ce8bb137a8" executionId="44995728-789f-4c7d-9c6e-01e60f90c848" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e297cdda-5608-4e27-ae19-fbf10e3a834f" executionId="e994b31c-5b3a-4be5-b30b-87408934844a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f1b99097-ab32-4274-a4a5-8d03fb4b4c6f" executionId="7037f8ca-359e-4d0e-bc29-d708013e2029" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5ac7f1c9-d81b-47eb-af1c-2bd95254b5c6" executionId="a3ae3fc0-4bb9-4e0b-97d8-08d7ffd9f1a5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2a2681b2-602e-4af3-be55-b8516bc81e80" executionId="937e7be2-3225-45ff-b275-f93ca5a13b7e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1b641c32-14b2-4d44-b84a-7772389dbed8" executionId="37c4db17-3002-4feb-8f05-a7d60763b883" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4ddbacf3-93f2-40ae-9f01-610c591d49b6" executionId="22af6257-b8fc-4abe-94b5-a2e50de60854" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e94e4d47-b502-4a0f-955f-42848b91e78f" executionId="e6714c2b-c69b-4c18-b677-29176eec825b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="fd75ef59-b0f9-4557-af4a-a84cb018806e" executionId="dedff869-b897-40fe-b678-021155018562" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="891ffcdc-fd2e-4e7e-8a8c-b0d9744bb0b9" executionId="312bb7aa-37bc-4ab7-bda0-5b21b433c198" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="91020c93-1d6d-4fb3-9dae-01e50187ada4" executionId="9068214c-4d8f-4b1f-9157-bd349701fb61" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <WebAiiTestResult executionId="44995728-789f-4c7d-9c6e-01e60f90c848" testId="8b54f401-eab7-44c8-8634-d7ce8bb137a8" testName="SelectOption" computerName="AGGEORGIEV" duration="00:00:06.2795940" startTime="2011-08-09T11:40:08.6556056+03:00" endTime="2011-08-09T11:40:14.9382338+03:00" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="PassedButRunAborted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="44995728-789f-4c7d-9c6e-01e60f90c848" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Output xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <ErrorInfo>
+          <Message>Overall Result: Pass
+------------------------------------------------------------
+'8/9/2011 11:40:08 AM' - Starting execution....
+------------------------------------------------------------
+'8/9/2011 11:40:11 AM' - 'Pass' : 1. Navigate to : '/autocomplete/index.html'
+'8/9/2011 11:40:12 AM' - 'Pass' : 2. Set 'InputText' text to 'the'
+'8/9/2011 11:40:13 AM' - 'Pass' : 3. Click 'TheListItem'
+'8/9/2011 11:40:13 AM' - 'Pass' : 4. Verify textbox 'InputText' content 'Same' 'The Godfather: Part II, '.
+------------------------------------------------------------
+'8/9/2011 11:40:13 AM' - Overall Result: Pass
+'8/9/2011 11:40:13 AM' - Duration: [0 min: 3 sec: 26 msec]
+------------------------------------------------------------
+'8/9/2011 11:40:14 AM' - Test completed!
+</Message>
+        </ErrorInfo>
+      </Output>
+      <WebAiiTestResult Type="ArtOfTest.WebAii.Design.Execution.TestResult" Version="2011.1.729.0" xmlns="">
+        <TestId Type="System.String">8b54f401-eab7-44c8-8634-d7ce8bb137a8</TestId>
+        <TestName Type="System.String">SelectOption</TestName>
+        <TestPath Type="System.String">UIWidgets\AutoComplete\BasicUsage\SelectOption.tstest</TestPath>
+        <ProjectPath Type="System.String">
+        </ProjectPath>
+        <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+        <AutomationStepResults>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Navigate to : '/autocomplete/index.html'</StepDescription>
+            <TestId Type="System.String">8b54f401-eab7-44c8-8634-d7ce8bb137a8</TestId>
+            <TestName Type="System.String">SelectOption</TestName>
+            <TestPath Type="System.String">UIWidgets\AutoComplete\BasicUsage\SelectOption.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">0</TestStepNumber>
+            <Order Type="System.Int32">1</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Set 'InputText' text to 'the'</StepDescription>
+            <TestId Type="System.String">8b54f401-eab7-44c8-8634-d7ce8bb137a8</TestId>
+            <TestName Type="System.String">SelectOption</TestName>
+            <TestPath Type="System.String">UIWidgets\AutoComplete\BasicUsage\SelectOption.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">1</TestStepNumber>
+            <Order Type="System.Int32">2</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Click 'TheListItem'</StepDescription>
+            <TestId Type="System.String">8b54f401-eab7-44c8-8634-d7ce8bb137a8</TestId>
+            <TestName Type="System.String">SelectOption</TestName>
+            <TestPath Type="System.String">UIWidgets\AutoComplete\BasicUsage\SelectOption.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">2</TestStepNumber>
+            <Order Type="System.Int32">3</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Verify textbox 'InputText' content 'Same' 'The Godfather: Part II, '.</StepDescription>
+            <TestId Type="System.String">8b54f401-eab7-44c8-8634-d7ce8bb137a8</TestId>
+            <TestName Type="System.String">SelectOption</TestName>
+            <TestPath Type="System.String">UIWidgets\AutoComplete\BasicUsage\SelectOption.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">3</TestStepNumber>
+            <Order Type="System.Int32">4</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+        </AutomationStepResults>
+        <NotRunStepDescriptions />
+        <PerStepMessages Type="System.String">Overall Result: Pass
+------------------------------------------------------------
+'8/9/2011 11:40:08 AM' - Starting execution....
+------------------------------------------------------------
+'8/9/2011 11:40:11 AM' - 'Pass' : 1. Navigate to : '/autocomplete/index.html'
+'8/9/2011 11:40:12 AM' - 'Pass' : 2. Set 'InputText' text to 'the'
+'8/9/2011 11:40:13 AM' - 'Pass' : 3. Click 'TheListItem'
+'8/9/2011 11:40:13 AM' - 'Pass' : 4. Verify textbox 'InputText' content 'Same' 'The Godfather: Part II, '.
+------------------------------------------------------------
+'8/9/2011 11:40:13 AM' - Overall Result: Pass
+'8/9/2011 11:40:13 AM' - Duration: [0 min: 3 sec: 26 msec]
+------------------------------------------------------------
+'8/9/2011 11:40:14 AM' - Test completed!
+</PerStepMessages>
+        <TotalNumberOfPassedSteps Type="System.Int32">4</TotalNumberOfPassedSteps>
+        <ExecutingTestStepCount Type="System.Int32">4</ExecutingTestStepCount>
+        <TotalNumberOfNotRunSteps Type="System.Int32">0</TotalNumberOfNotRunSteps>
+        <IsDataDrivenResult Type="System.Boolean">False</IsDataDrivenResult>
+        <SeparatorLineCharCount Type="System.Int32">60</SeparatorLineCharCount>
+        <ExecutionType Type="ArtOfTest.Common.Design.ExecutionType">QuickExecution</ExecutionType>
+        <EndTime Type="System.DateTime">2011-08-09 08:40:13Z</EndTime>
+        <StarTime Type="System.DateTime">2011-08-09 08:40:10Z</StarTime>
+        <DataIterationResults />
+      </WebAiiTestResult>
+    </WebAiiTestResult>
+    <TestResult executionId="e994b31c-5b3a-4be5-b30b-87408934844a" testId="e297cdda-5608-4e27-ae19-fbf10e3a834f" testName="SetTwoValuesRevertToBlank" computerName="AGGEORGIEV" duration="00:00:05.7015701" startTime="2011-08-09T11:40:14.9432343+03:00" endTime="2011-08-09T11:40:20.6448044+03:00" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="Aborted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e994b31c-5b3a-4be5-b30b-87408934844a">
+      <Output>
+        <ErrorInfo>
+          <Message>User aborted test run.</Message>
+        </ErrorInfo>
+      </Output>
+    </TestResult>
+    <TestResult executionId="7037f8ca-359e-4d0e-bc29-d708013e2029" testId="f1b99097-ab32-4274-a4a5-8d03fb4b4c6f" testName="ChangeValueInput" computerName="AGGEORGIEV" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7037f8ca-359e-4d0e-bc29-d708013e2029">
+    </TestResult>
+    <TestResult executionId="a3ae3fc0-4bb9-4e0b-97d8-08d7ffd9f1a5" testId="5ac7f1c9-d81b-47eb-af1c-2bd95254b5c6" testName="ChangeValueKeyboardSelect" computerName="AGGEORGIEV" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a3ae3fc0-4bb9-4e0b-97d8-08d7ffd9f1a5">
+    </TestResult>
+    <TestResult executionId="937e7be2-3225-45ff-b275-f93ca5a13b7e" testId="2a2681b2-602e-4af3-be55-b8516bc81e80" testName="GroupByAge" computerName="AGGEORGIEV" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="937e7be2-3225-45ff-b275-f93ca5a13b7e">
+    </TestResult>
+    <TestResult executionId="37c4db17-3002-4feb-8f05-a7d60763b883" testId="1b641c32-14b2-4d44-b84a-7772389dbed8" testName="SortFirstNameAndPage" computerName="AGGEORGIEV" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="37c4db17-3002-4feb-8f05-a7d60763b883">
+    </TestResult>
+    <TestResult executionId="22af6257-b8fc-4abe-94b5-a2e50de60854" testId="4ddbacf3-93f2-40ae-9f01-610c591d49b6" testName="Events" computerName="AGGEORGIEV" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="22af6257-b8fc-4abe-94b5-a2e50de60854">
+    </TestResult>
+    <TestResult executionId="e6714c2b-c69b-4c18-b677-29176eec825b" testId="e94e4d47-b502-4a0f-955f-42848b91e78f" testName="SelectMultipleCells" computerName="AGGEORGIEV" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e6714c2b-c69b-4c18-b677-29176eec825b">
+    </TestResult>
+    <TestResult executionId="dedff869-b897-40fe-b678-021155018562" testId="fd75ef59-b0f9-4557-af4a-a84cb018806e" testName="SelectMultipleRows" computerName="AGGEORGIEV" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="dedff869-b897-40fe-b678-021155018562">
+    </TestResult>
+    <TestResult executionId="312bb7aa-37bc-4ab7-bda0-5b21b433c198" testId="891ffcdc-fd2e-4e7e-8a8c-b0d9744bb0b9" testName="SelectRowSingle" computerName="AGGEORGIEV" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="312bb7aa-37bc-4ab7-bda0-5b21b433c198">
+    </TestResult>
+    <TestResult executionId="9068214c-4d8f-4b1f-9157-bd349701fb61" testId="91020c93-1d6d-4fb3-9dae-01e50187ada4" testName="OpenClose" computerName="AGGEORGIEV" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9068214c-4d8f-4b1f-9157-bd349701fb61">
+    </TestResult>
+  </Results>
+</TestRun>

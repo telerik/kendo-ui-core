@@ -19,11 +19,11 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Navigate to : 'http://aggeorgiev/kendo/live/grid/events.html'</d2p1:Description>
+      <d2p1:Description>Navigate to : '/grid/events.html'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>1</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>f52104e0-c143-4993-a2e7-0bb2c6bcca78</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>d1049b59-1eb0-45a8-aa82-9a49888e00ce</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -44,8 +44,8 @@
         <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
         <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
-        <d2p1:BaseUrl />
-        <d2p1:NavigateURL>http://aggeorgiev/kendo/live/grid/events.html</d2p1:NavigateURL>
+        <d2p1:BaseUrl>http://aggeorgiev/kendo/live</d2p1:BaseUrl>
+        <d2p1:NavigateURL>/grid/events.html</d2p1:NavigateURL>
       </d2p1:Step>
       <d2p1:StepImageKey>Eventstpts3x3p.w1x</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
@@ -58,7 +58,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>2</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>3b08b3da-46e3-4b56-8659-09bcb0f5d6b2</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>7cc50a57-795a-429e-ab78-7de4c9dfc2a3</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -143,7 +143,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>3</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>6be3984f-ec53-40dd-97f9-bbf201bb2637</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>17b149a6-0587-4d83-a257-ecd9a03f29d5</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -232,10 +232,15 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>4</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>ca9eb9ea-be2a-45a3-b7a6-2b6705e05702</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>99c09913-25c6-489d-8535-9ce5c58fb0f2</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="SleepActionDescriptor">
         <d2p1:Constraints>
-          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+            <d6p1:KeyValueOfstringstring>
+              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
+              <d6p1:Value />
+            </d6p1:KeyValueOfstringstring>
+          </ConstraintValues>
         </d2p1:Constraints>
         <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
         <d2p1:EditorType />
@@ -260,6 +265,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>5</d2p1:Order>
+<<<<<<< HEAD
 =======
       <d2p1:Description>Click 'FirstNameLink'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
@@ -301,6 +307,9 @@
       <d2p1:Order>5</d2p1:Order>
 >>>>>>> 91eb5d6... new test added for grid events
       <d2p1:Runtime_x0020_ID>0067b40a-bb8c-469e-b5de-13379fbd8981</d2p1:Runtime_x0020_ID>
+=======
+      <d2p1:Runtime_x0020_ID>d39f43dc-66b8-4577-b5b9-b7e08b71d623</d2p1:Runtime_x0020_ID>
+>>>>>>> e231a25... Merge kendo.
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -390,8 +399,12 @@
 >>>>>>> 939791c... new test added for grid events
 =======
       <d2p1:Order>6</d2p1:Order>
+<<<<<<< HEAD
 >>>>>>> 91eb5d6... new test added for grid events
       <d2p1:Runtime_x0020_ID>31adb954-9dec-4b37-983d-77739d486a92</d2p1:Runtime_x0020_ID>
+=======
+      <d2p1:Runtime_x0020_ID>d3a33ed2-18c9-43ef-be4a-e827f34ddd8e</d2p1:Runtime_x0020_ID>
+>>>>>>> e231a25... Merge kendo.
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -485,8 +498,12 @@
 >>>>>>> 939791c... new test added for grid events
 =======
       <d2p1:Order>7</d2p1:Order>
+<<<<<<< HEAD
 >>>>>>> 91eb5d6... new test added for grid events
       <d2p1:Runtime_x0020_ID>ad9876d1-2dc2-4a47-8097-6330f586da43</d2p1:Runtime_x0020_ID>
+=======
+      <d2p1:Runtime_x0020_ID>6d118fc1-477c-4673-a78a-ddd3e79e4ac6</d2p1:Runtime_x0020_ID>
+>>>>>>> e231a25... Merge kendo.
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -578,8 +595,12 @@
 >>>>>>> 939791c... new test added for grid events
 =======
       <d2p1:Order>8</d2p1:Order>
+<<<<<<< HEAD
 >>>>>>> 91eb5d6... new test added for grid events
       <d2p1:Runtime_x0020_ID>e22190d0-637c-4ee0-b23e-9382c32db0e6</d2p1:Runtime_x0020_ID>
+=======
+      <d2p1:Runtime_x0020_ID>be017b36-3ba1-48c1-b2a9-a13c6e5cfa85</d2p1:Runtime_x0020_ID>
+>>>>>>> e231a25... Merge kendo.
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -667,6 +688,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
       <d2p1:Order>9</d2p1:Order>
+<<<<<<< HEAD
 =======
       <d2p1:Order>8</d2p1:Order>
 >>>>>>> 939791c... new test added for grid events
@@ -674,6 +696,9 @@
       <d2p1:Order>9</d2p1:Order>
 >>>>>>> 91eb5d6... new test added for grid events
       <d2p1:Runtime_x0020_ID>04879872-f0e3-4358-98ac-840cb8bd74a7</d2p1:Runtime_x0020_ID>
+=======
+      <d2p1:Runtime_x0020_ID>08271804-06d2-41f5-9635-f16a3ad616a0</d2p1:Runtime_x0020_ID>
+>>>>>>> e231a25... Merge kendo.
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -762,6 +787,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
       <d2p1:Order>10</d2p1:Order>
+<<<<<<< HEAD
       <d2p1:Runtime_x0020_ID>b2fcdb26-a727-45a0-84d3-51f60e447794</d2p1:Runtime_x0020_ID>
 =======
       <d2p1:Order>9</d2p1:Order>
@@ -771,9 +797,17 @@
       <d2p1:Order>10</d2p1:Order>
       <d2p1:Runtime_x0020_ID>b2fcdb26-a727-45a0-84d3-51f60e447794</d2p1:Runtime_x0020_ID>
 >>>>>>> 91eb5d6... new test added for grid events
+=======
+      <d2p1:Runtime_x0020_ID>c69b3016-53ac-48c5-8886-b0caa83f2548</d2p1:Runtime_x0020_ID>
+>>>>>>> e231a25... Merge kendo.
       <d2p1:Step i:type="SleepActionDescriptor">
         <d2p1:Constraints>
-          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+            <d6p1:KeyValueOfstringstring>
+              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
+              <d6p1:Value />
+            </d6p1:KeyValueOfstringstring>
+          </ConstraintValues>
         </d2p1:Constraints>
         <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
         <d2p1:EditorType />
@@ -813,8 +847,12 @@
 >>>>>>> 939791c... new test added for grid events
 =======
       <d2p1:Order>11</d2p1:Order>
+<<<<<<< HEAD
 >>>>>>> 91eb5d6... new test added for grid events
       <d2p1:Runtime_x0020_ID>60f17861-5e04-452c-96d6-03324bc5b076</d2p1:Runtime_x0020_ID>
+=======
+      <d2p1:Runtime_x0020_ID>86e1c597-2170-41a2-a599-2618861fb727</d2p1:Runtime_x0020_ID>
+>>>>>>> e231a25... Merge kendo.
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -899,6 +937,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>12</d2p1:Order>
+<<<<<<< HEAD
       <d2p1:Runtime_x0020_ID>e06091cb-fde0-4ea7-b3c0-97ad2a341a94</d2p1:Runtime_x0020_ID>
 =======
       <d2p1:Description>Verify 'TextContent' 'Contains' 'Grid data bound' on 'Selected4Div'</d2p1:Description>
@@ -914,6 +953,9 @@
       <d2p1:Order>12</d2p1:Order>
       <d2p1:Runtime_x0020_ID>e06091cb-fde0-4ea7-b3c0-97ad2a341a94</d2p1:Runtime_x0020_ID>
 >>>>>>> 91eb5d6... new test added for grid events
+=======
+      <d2p1:Runtime_x0020_ID>5416cec9-de61-47be-8109-e954011d55e1</d2p1:Runtime_x0020_ID>
+>>>>>>> e231a25... Merge kendo.
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">

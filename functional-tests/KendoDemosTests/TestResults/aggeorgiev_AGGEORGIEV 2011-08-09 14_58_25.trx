@@ -1,0 +1,1683 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="2db8ecab-2646-4bcf-84a1-b3f4051e89a7" name="aggeorgiev@AGGEORGIEV 2011-08-09 14:58:25" runUser="TELERIK\aggeorgiev" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestSettings name="Default Test Settings" id="bd0076b8-1800-4c31-91e8-771a96167774">
+    <Deployment userDeploymentRoot="C:\work\GitHub\kendo\functional-tests\KendoDemosTests\TestResults" useDefaultDeploymentRoot="false" runDeploymentRoot="aggeorgiev_AGGEORGIEV 2011-08-09 14_58_25" />
+    <Execution>
+      <TestTypeSpecific />
+      <AgentRule name="Execution Agents">
+      </AgentRule>
+    </Execution>
+  </TestSettings>
+  <Times creation="2011-08-09T14:58:25.6168237+03:00" queuing="2011-08-09T14:58:26.0068437+03:00" start="2011-08-09T14:58:26.0848477+03:00" finish="2011-08-09T15:02:48.4372875+03:00" />
+  <ResultSummary outcome="Failed">
+    <Counters total="11" executed="11" passed="10" error="0" failed="1" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+  <TestDefinitions>
+    <WebAiiTest name="SelectRowSingle" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\grid\selection\selectrowsingle.tstest" priority="0" id="891ffcdc-fd2e-4e7e-8a8c-b0d9744bb0b9" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="a4142991-1177-4f9a-bded-5027f90d2b35" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="Events" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\grid\events\events.tstest" priority="0" id="4ddbacf3-93f2-40ae-9f01-610c591d49b6" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="924ab00c-d2f9-49d3-b723-d96467991033" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="OpenClose" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\menu\basicusage\openclose.tstest" priority="0" id="91020c93-1d6d-4fb3-9dae-01e50187ada4" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="259fae2a-7a28-4c26-9f33-3795c79222a8" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="SortFirstNameAndPage" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\grid\basicusage\sortfirstnameandpage.tstest" priority="0" id="1b641c32-14b2-4d44-b84a-7772389dbed8" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="8b991eeb-4979-41e1-924f-e0c51df18c0b" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="SelectOption" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\autocomplete\basicusage\selectoption.tstest" priority="0" id="8b54f401-eab7-44c8-8634-d7ce8bb137a8" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="d21c127e-ec7a-45de-ac8f-f231884a5ad5" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="GroupByAge" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\grid\basicusage\groupbyage.tstest" priority="0" id="2a2681b2-602e-4af3-be55-b8516bc81e80" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="9861a043-2c39-4d91-82d4-eb45d622ca96" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="SelectMultipleCells" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\grid\selection\selectmultiplecells.tstest" priority="0" id="e94e4d47-b502-4a0f-955f-42848b91e78f" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="e8f3ede1-abc2-44b6-b4d4-708cb526a0bd" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="ChangeValueInput" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\combobox\basicusage\changevalueinput.tstest" priority="0" id="f1b99097-ab32-4274-a4a5-8d03fb4b4c6f" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="c0785c4d-ef00-408e-9746-91946390f964" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="SetTwoValuesRevertToBlank" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\autocomplete\basicusage\settwovaluesreverttoblank.tstest" priority="0" id="e297cdda-5608-4e27-ae19-fbf10e3a834f" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="52b0bcf9-b86a-4075-b920-f8a6c15c2a74" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="SelectMultipleRows" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\grid\selection\selectmultiplerows.tstest" priority="0" id="fd75ef59-b0f9-4557-af4a-a84cb018806e" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="574038d5-e517-494d-b7ec-1181cdf63d5c" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="ChangeValueKeyboardSelect" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\combobox\basicusage\changevaluekeyboardselect.tstest" priority="0" id="5ac7f1c9-d81b-47eb-af1c-2bd95254b5c6" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="234610b6-81e6-4330-9fd0-804b3f8ef06d" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="8b54f401-eab7-44c8-8634-d7ce8bb137a8" executionId="d21c127e-ec7a-45de-ac8f-f231884a5ad5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="91020c93-1d6d-4fb3-9dae-01e50187ada4" executionId="259fae2a-7a28-4c26-9f33-3795c79222a8" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e94e4d47-b502-4a0f-955f-42848b91e78f" executionId="e8f3ede1-abc2-44b6-b4d4-708cb526a0bd" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2a2681b2-602e-4af3-be55-b8516bc81e80" executionId="9861a043-2c39-4d91-82d4-eb45d622ca96" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5ac7f1c9-d81b-47eb-af1c-2bd95254b5c6" executionId="234610b6-81e6-4330-9fd0-804b3f8ef06d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="891ffcdc-fd2e-4e7e-8a8c-b0d9744bb0b9" executionId="a4142991-1177-4f9a-bded-5027f90d2b35" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1b641c32-14b2-4d44-b84a-7772389dbed8" executionId="8b991eeb-4979-41e1-924f-e0c51df18c0b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e297cdda-5608-4e27-ae19-fbf10e3a834f" executionId="52b0bcf9-b86a-4075-b920-f8a6c15c2a74" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="fd75ef59-b0f9-4557-af4a-a84cb018806e" executionId="574038d5-e517-494d-b7ec-1181cdf63d5c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4ddbacf3-93f2-40ae-9f01-610c591d49b6" executionId="924ab00c-d2f9-49d3-b723-d96467991033" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f1b99097-ab32-4274-a4a5-8d03fb4b4c6f" executionId="c0785c4d-ef00-408e-9746-91946390f964" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <WebAiiTestResult executionId="d21c127e-ec7a-45de-ac8f-f231884a5ad5" testId="8b54f401-eab7-44c8-8634-d7ce8bb137a8" testName="SelectOption" computerName="AGGEORGIEV" duration="00:00:20.3732547" startTime="2011-08-09T14:58:26.0848477+03:00" endTime="2011-08-09T14:58:46.4531783+03:00" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d21c127e-ec7a-45de-ac8f-f231884a5ad5" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Output xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <ErrorInfo>
+          <Message>Overall Result: Pass
+------------------------------------------------------------
+'8/9/2011 2:58:26 PM' - Starting execution....
+------------------------------------------------------------
+'8/9/2011 2:58:28 PM' - 'Pass' : 1. Navigate to : '/autocomplete/index.html'
+'8/9/2011 2:58:29 PM' - 'Pass' : 2. Set 'InputText' text to 'the'
+'8/9/2011 2:58:30 PM' - 'Pass' : 3. Click 'TheListItem'
+'8/9/2011 2:58:30 PM' - 'Pass' : 4. Verify textbox 'InputText' content 'Same' 'The Godfather: Part II, '.
+------------------------------------------------------------
+'8/9/2011 2:58:30 PM' - Overall Result: Pass
+'8/9/2011 2:58:30 PM' - Duration: [0 min: 2 sec: 873 msec]
+------------------------------------------------------------
+'8/9/2011 2:58:30 PM' - Test completed!
+</Message>
+        </ErrorInfo>
+      </Output>
+      <WebAiiTestResult Type="ArtOfTest.WebAii.Design.Execution.TestResult" Version="2011.1.729.0" xmlns="">
+        <TestId Type="System.String">8b54f401-eab7-44c8-8634-d7ce8bb137a8</TestId>
+        <TestName Type="System.String">SelectOption</TestName>
+        <TestPath Type="System.String">UIWidgets\AutoComplete\BasicUsage\SelectOption.tstest</TestPath>
+        <ProjectPath Type="System.String">
+        </ProjectPath>
+        <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+        <AutomationStepResults>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Navigate to : '/autocomplete/index.html'</StepDescription>
+            <TestId Type="System.String">8b54f401-eab7-44c8-8634-d7ce8bb137a8</TestId>
+            <TestName Type="System.String">SelectOption</TestName>
+            <TestPath Type="System.String">UIWidgets\AutoComplete\BasicUsage\SelectOption.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">0</TestStepNumber>
+            <Order Type="System.Int32">1</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Set 'InputText' text to 'the'</StepDescription>
+            <TestId Type="System.String">8b54f401-eab7-44c8-8634-d7ce8bb137a8</TestId>
+            <TestName Type="System.String">SelectOption</TestName>
+            <TestPath Type="System.String">UIWidgets\AutoComplete\BasicUsage\SelectOption.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">1</TestStepNumber>
+            <Order Type="System.Int32">2</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Click 'TheListItem'</StepDescription>
+            <TestId Type="System.String">8b54f401-eab7-44c8-8634-d7ce8bb137a8</TestId>
+            <TestName Type="System.String">SelectOption</TestName>
+            <TestPath Type="System.String">UIWidgets\AutoComplete\BasicUsage\SelectOption.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">2</TestStepNumber>
+            <Order Type="System.Int32">3</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Verify textbox 'InputText' content 'Same' 'The Godfather: Part II, '.</StepDescription>
+            <TestId Type="System.String">8b54f401-eab7-44c8-8634-d7ce8bb137a8</TestId>
+            <TestName Type="System.String">SelectOption</TestName>
+            <TestPath Type="System.String">UIWidgets\AutoComplete\BasicUsage\SelectOption.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">3</TestStepNumber>
+            <Order Type="System.Int32">4</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+        </AutomationStepResults>
+        <NotRunStepDescriptions />
+        <PerStepMessages Type="System.String">Overall Result: Pass
+------------------------------------------------------------
+'8/9/2011 2:58:26 PM' - Starting execution....
+------------------------------------------------------------
+'8/9/2011 2:58:28 PM' - 'Pass' : 1. Navigate to : '/autocomplete/index.html'
+'8/9/2011 2:58:29 PM' - 'Pass' : 2. Set 'InputText' text to 'the'
+'8/9/2011 2:58:30 PM' - 'Pass' : 3. Click 'TheListItem'
+'8/9/2011 2:58:30 PM' - 'Pass' : 4. Verify textbox 'InputText' content 'Same' 'The Godfather: Part II, '.
+------------------------------------------------------------
+'8/9/2011 2:58:30 PM' - Overall Result: Pass
+'8/9/2011 2:58:30 PM' - Duration: [0 min: 2 sec: 873 msec]
+------------------------------------------------------------
+'8/9/2011 2:58:30 PM' - Test completed!
+</PerStepMessages>
+        <TotalNumberOfPassedSteps Type="System.Int32">4</TotalNumberOfPassedSteps>
+        <ExecutingTestStepCount Type="System.Int32">4</ExecutingTestStepCount>
+        <TotalNumberOfNotRunSteps Type="System.Int32">0</TotalNumberOfNotRunSteps>
+        <IsDataDrivenResult Type="System.Boolean">False</IsDataDrivenResult>
+        <SeparatorLineCharCount Type="System.Int32">60</SeparatorLineCharCount>
+        <ExecutionType Type="ArtOfTest.Common.Design.ExecutionType">QuickExecution</ExecutionType>
+        <EndTime Type="System.DateTime">2011-08-09 11:58:30Z</EndTime>
+        <StarTime Type="System.DateTime">2011-08-09 11:58:27Z</StarTime>
+        <DataIterationResults />
+      </WebAiiTestResult>
+    </WebAiiTestResult>
+    <WebAiiTestResult executionId="259fae2a-7a28-4c26-9f33-3795c79222a8" testId="91020c93-1d6d-4fb3-9dae-01e50187ada4" testName="OpenClose" computerName="AGGEORGIEV" duration="00:00:33.9521468" startTime="2011-08-09T14:58:46.4687791+03:00" endTime="2011-08-09T14:59:20.4210409+03:00" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="259fae2a-7a28-4c26-9f33-3795c79222a8" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Output xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <ErrorInfo>
+          <Message>Overall Result: Pass
+------------------------------------------------------------
+'8/9/2011 2:58:46 PM' - Starting execution....
+'8/9/2011 2:58:47 PM' - Detected custom code in test. Locating test assembly: KendoDemosTests.dll.
+'8/9/2011 2:58:47 PM' - Assembly Found: C:\work\GitHub\kendo\functional-tests\KendoDemosTests\TestResults\aggeorgiev_AGGEORGIEV 2011-08-09 14_58_25\Out\KendoDemosTests.dll
+'8/9/2011 2:58:47 PM' - Loading code class: 'KendoDemosTests.UIWidgets.Menu.BasicUsage.OpenClose'.
+------------------------------------------------------------
+'8/9/2011 2:58:48 PM' - 'Pass' : 1. Navigate to : 'http://aggeorgiev/kendo/live/menu/index.html'
+'8/9/2011 2:58:48 PM' - 'Pass' : 2. Invoke 'OnMouseOver' event on 'FirstItemSpan'
+'8/9/2011 2:58:49 PM' - 'Pass' : 3. Verify element 'ExampleDiv' 'is' visible.
+'8/9/2011 2:58:49 PM' - 'Pass' : 4. [OpenClose_CodedStep] : @"Invoke 'OnMouseOver' event on 'Sub Item 4'
+'8/9/2011 2:58:49 PM' - 'Pass' : 5. Click 'SubItem4Span'
+'8/9/2011 2:58:49 PM' - 'Pass' : 6. Invoke 'OnMouseOut' event on 'FirstItemSpan'
+'8/9/2011 2:58:49 PM' - 'Pass' : 7. Invoke 'OnMouseOver' event on 'TemplatedItemSpan'
+'8/9/2011 2:58:49 PM' - 'Pass' : 8. [OpenClose_CodedStep1] : @"Wait for Exists 'FirstItemSpan'
+------------------------------------------------------------
+'8/9/2011 2:58:49 PM' - Overall Result: Pass
+'8/9/2011 2:58:49 PM' - Duration: [0 min: 1 sec: 706 msec]
+------------------------------------------------------------
+'8/9/2011 2:58:49 PM' - Test completed!
+</Message>
+        </ErrorInfo>
+      </Output>
+      <WebAiiTestResult Type="ArtOfTest.WebAii.Design.Execution.TestResult" Version="2011.1.729.0" xmlns="">
+        <TestId Type="System.String">91020c93-1d6d-4fb3-9dae-01e50187ada4</TestId>
+        <TestName Type="System.String">OpenClose</TestName>
+        <TestPath Type="System.String">UIWidgets\Menu\BasicUsage\OpenClose.tstest</TestPath>
+        <ProjectPath Type="System.String">
+        </ProjectPath>
+        <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+        <AutomationStepResults>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Navigate to : 'http://aggeorgiev/kendo/live/menu/index.html'</StepDescription>
+            <TestId Type="System.String">91020c93-1d6d-4fb3-9dae-01e50187ada4</TestId>
+            <TestName Type="System.String">OpenClose</TestName>
+            <TestPath Type="System.String">UIWidgets\Menu\BasicUsage\OpenClose.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">0</TestStepNumber>
+            <Order Type="System.Int32">1</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Invoke 'OnMouseOver' event on 'FirstItemSpan'</StepDescription>
+            <TestId Type="System.String">91020c93-1d6d-4fb3-9dae-01e50187ada4</TestId>
+            <TestName Type="System.String">OpenClose</TestName>
+            <TestPath Type="System.String">UIWidgets\Menu\BasicUsage\OpenClose.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">1</TestStepNumber>
+            <Order Type="System.Int32">2</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Verify element 'ExampleDiv' 'is' visible.</StepDescription>
+            <TestId Type="System.String">91020c93-1d6d-4fb3-9dae-01e50187ada4</TestId>
+            <TestName Type="System.String">OpenClose</TestName>
+            <TestPath Type="System.String">UIWidgets\Menu\BasicUsage\OpenClose.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">2</TestStepNumber>
+            <Order Type="System.Int32">3</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">[OpenClose_CodedStep] : @"Invoke 'OnMouseOver' event on 'Sub Item 4'</StepDescription>
+            <TestId Type="System.String">91020c93-1d6d-4fb3-9dae-01e50187ada4</TestId>
+            <TestName Type="System.String">OpenClose</TestName>
+            <TestPath Type="System.String">UIWidgets\Menu\BasicUsage\OpenClose.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">3</TestStepNumber>
+            <Order Type="System.Int32">4</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Click 'SubItem4Span'</StepDescription>
+            <TestId Type="System.String">91020c93-1d6d-4fb3-9dae-01e50187ada4</TestId>
+            <TestName Type="System.String">OpenClose</TestName>
+            <TestPath Type="System.String">UIWidgets\Menu\BasicUsage\OpenClose.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">4</TestStepNumber>
+            <Order Type="System.Int32">5</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Invoke 'OnMouseOut' event on 'FirstItemSpan'</StepDescription>
+            <TestId Type="System.String">91020c93-1d6d-4fb3-9dae-01e50187ada4</TestId>
+            <TestName Type="System.String">OpenClose</TestName>
+            <TestPath Type="System.String">UIWidgets\Menu\BasicUsage\OpenClose.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">5</TestStepNumber>
+            <Order Type="System.Int32">6</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Invoke 'OnMouseOver' event on 'TemplatedItemSpan'</StepDescription>
+            <TestId Type="System.String">91020c93-1d6d-4fb3-9dae-01e50187ada4</TestId>
+            <TestName Type="System.String">OpenClose</TestName>
+            <TestPath Type="System.String">UIWidgets\Menu\BasicUsage\OpenClose.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">6</TestStepNumber>
+            <Order Type="System.Int32">7</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">[OpenClose_CodedStep1] : @"Wait for Exists 'FirstItemSpan'</StepDescription>
+            <TestId Type="System.String">91020c93-1d6d-4fb3-9dae-01e50187ada4</TestId>
+            <TestName Type="System.String">OpenClose</TestName>
+            <TestPath Type="System.String">UIWidgets\Menu\BasicUsage\OpenClose.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">7</TestStepNumber>
+            <Order Type="System.Int32">8</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+        </AutomationStepResults>
+        <NotRunStepDescriptions />
+        <PerStepMessages Type="System.String">Overall Result: Pass
+------------------------------------------------------------
+'8/9/2011 2:58:46 PM' - Starting execution....
+'8/9/2011 2:58:47 PM' - Detected custom code in test. Locating test assembly: KendoDemosTests.dll.
+'8/9/2011 2:58:47 PM' - Assembly Found: C:\work\GitHub\kendo\functional-tests\KendoDemosTests\TestResults\aggeorgiev_AGGEORGIEV 2011-08-09 14_58_25\Out\KendoDemosTests.dll
+'8/9/2011 2:58:47 PM' - Loading code class: 'KendoDemosTests.UIWidgets.Menu.BasicUsage.OpenClose'.
+------------------------------------------------------------
+'8/9/2011 2:58:48 PM' - 'Pass' : 1. Navigate to : 'http://aggeorgiev/kendo/live/menu/index.html'
+'8/9/2011 2:58:48 PM' - 'Pass' : 2. Invoke 'OnMouseOver' event on 'FirstItemSpan'
+'8/9/2011 2:58:49 PM' - 'Pass' : 3. Verify element 'ExampleDiv' 'is' visible.
+'8/9/2011 2:58:49 PM' - 'Pass' : 4. [OpenClose_CodedStep] : @"Invoke 'OnMouseOver' event on 'Sub Item 4'
+'8/9/2011 2:58:49 PM' - 'Pass' : 5. Click 'SubItem4Span'
+'8/9/2011 2:58:49 PM' - 'Pass' : 6. Invoke 'OnMouseOut' event on 'FirstItemSpan'
+'8/9/2011 2:58:49 PM' - 'Pass' : 7. Invoke 'OnMouseOver' event on 'TemplatedItemSpan'
+'8/9/2011 2:58:49 PM' - 'Pass' : 8. [OpenClose_CodedStep1] : @"Wait for Exists 'FirstItemSpan'
+------------------------------------------------------------
+'8/9/2011 2:58:49 PM' - Overall Result: Pass
+'8/9/2011 2:58:49 PM' - Duration: [0 min: 1 sec: 706 msec]
+------------------------------------------------------------
+'8/9/2011 2:58:49 PM' - Test completed!
+</PerStepMessages>
+        <TotalNumberOfPassedSteps Type="System.Int32">8</TotalNumberOfPassedSteps>
+        <ExecutingTestStepCount Type="System.Int32">8</ExecutingTestStepCount>
+        <TotalNumberOfNotRunSteps Type="System.Int32">0</TotalNumberOfNotRunSteps>
+        <IsDataDrivenResult Type="System.Boolean">False</IsDataDrivenResult>
+        <SeparatorLineCharCount Type="System.Int32">60</SeparatorLineCharCount>
+        <ExecutionType Type="ArtOfTest.Common.Design.ExecutionType">QuickExecution</ExecutionType>
+        <EndTime Type="System.DateTime">2011-08-09 11:58:49Z</EndTime>
+        <StarTime Type="System.DateTime">2011-08-09 11:58:47Z</StarTime>
+        <DataIterationResults />
+      </WebAiiTestResult>
+    </WebAiiTestResult>
+    <WebAiiTestResult executionId="e8f3ede1-abc2-44b6-b4d4-708cb526a0bd" testId="e94e4d47-b502-4a0f-955f-42848b91e78f" testName="SelectMultipleCells" computerName="AGGEORGIEV" duration="00:00:06.3723512" startTime="2011-08-09T14:59:20.4210409+03:00" endTime="2011-08-09T14:59:26.7939168+03:00" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e8f3ede1-abc2-44b6-b4d4-708cb526a0bd" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Output xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <ErrorInfo>
+          <Message>Overall Result: Pass
+------------------------------------------------------------
+'8/9/2011 2:59:20 PM' - Starting execution....
+------------------------------------------------------------
+'8/9/2011 2:59:22 PM' - 'Pass' : 1. Navigate to : '/grid/selection.html'
+'8/9/2011 2:59:23 PM' - 'Pass' : 2. Click 'NigeTableCell'
+'8/9/2011 2:59:23 PM' - 'Pass' : 3. Verify attribute 'class' has 'Contains' value of 't-state-selected' on 'NigeTableCell'
+'8/9/2011 2:59:23 PM' - 'Pass' : 4. Shift + Click 'PeacockTableCell'
+'8/9/2011 2:59:24 PM' - 'Pass' : 5. Wait for '1000' msec.
+'8/9/2011 2:59:24 PM' - 'Pass' : 6. Verify attribute 'class' has 'Contains' value of 't-state-selected' on 'DodsworthTableCell'
+'8/9/2011 2:59:25 PM' - 'Pass' : 7. Verify attribute 'class' has 'Contains' value of 't-state-selected' on 'x48TableCell'
+'8/9/2011 2:59:25 PM' - 'Pass' : 8. Verify attribute 'class' has 'Contains' value of 't-state-selected' on 'RobertTableCell0'
+'8/9/2011 2:59:25 PM' - 'Pass' : 9. Verify attribute 'class' has 'Contains' value of 't-state-selected' on 'PeacockTableCell'
+------------------------------------------------------------
+'8/9/2011 2:59:25 PM' - Overall Result: Pass
+'8/9/2011 2:59:25 PM' - Duration: [0 min: 3 sec: 288 msec]
+------------------------------------------------------------
+'8/9/2011 2:59:25 PM' - Test completed!
+</Message>
+        </ErrorInfo>
+      </Output>
+      <WebAiiTestResult Type="ArtOfTest.WebAii.Design.Execution.TestResult" Version="2011.1.729.0" xmlns="">
+        <TestId Type="System.String">e94e4d47-b502-4a0f-955f-42848b91e78f</TestId>
+        <TestName Type="System.String">SelectMultipleCells</TestName>
+        <TestPath Type="System.String">UIWidgets\Grid\Selection\SelectMultipleCells.tstest</TestPath>
+        <ProjectPath Type="System.String">
+        </ProjectPath>
+        <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+        <AutomationStepResults>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Navigate to : '/grid/selection.html'</StepDescription>
+            <TestId Type="System.String">e94e4d47-b502-4a0f-955f-42848b91e78f</TestId>
+            <TestName Type="System.String">SelectMultipleCells</TestName>
+            <TestPath Type="System.String">UIWidgets\Grid\Selection\SelectMultipleCells.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">0</TestStepNumber>
+            <Order Type="System.Int32">1</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Click 'NigeTableCell'</StepDescription>
+            <TestId Type="System.String">e94e4d47-b502-4a0f-955f-42848b91e78f</TestId>
+            <TestName Type="System.String">SelectMultipleCells</TestName>
+            <TestPath Type="System.String">UIWidgets\Grid\Selection\SelectMultipleCells.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">1</TestStepNumber>
+            <Order Type="System.Int32">2</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Verify attribute 'class' has 'Contains' value of 't-state-selected' on 'NigeTableCell'</StepDescription>
+            <TestId Type="System.String">e94e4d47-b502-4a0f-955f-42848b91e78f</TestId>
+            <TestName Type="System.String">SelectMultipleCells</TestName>
+            <TestPath Type="System.String">UIWidgets\Grid\Selection\SelectMultipleCells.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">2</TestStepNumber>
+            <Order Type="System.Int32">3</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Shift + Click 'PeacockTableCell'</StepDescription>
+            <TestId Type="System.String">e94e4d47-b502-4a0f-955f-42848b91e78f</TestId>
+            <TestName Type="System.String">SelectMultipleCells</TestName>
+            <TestPath Type="System.String">UIWidgets\Grid\Selection\SelectMultipleCells.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">3</TestStepNumber>
+            <Order Type="System.Int32">4</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Wait for '1000' msec.</StepDescription>
+            <TestId Type="System.String">e94e4d47-b502-4a0f-955f-42848b91e78f</TestId>
+            <TestName Type="System.String">SelectMultipleCells</TestName>
+            <TestPath Type="System.String">UIWidgets\Grid\Selection\SelectMultipleCells.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">4</TestStepNumber>
+            <Order Type="System.Int32">5</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Verify attribute 'class' has 'Contains' value of 't-state-selected' on 'DodsworthTableCell'</StepDescription>
+            <TestId Type="System.String">e94e4d47-b502-4a0f-955f-42848b91e78f</TestId>
+            <TestName Type="System.String">SelectMultipleCells</TestName>
+            <TestPath Type="System.String">UIWidgets\Grid\Selection\SelectMultipleCells.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">5</TestStepNumber>
+            <Order Type="System.Int32">6</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Verify attribute 'class' has 'Contains' value of 't-state-selected' on 'x48TableCell'</StepDescription>
+            <TestId Type="System.String">e94e4d47-b502-4a0f-955f-42848b91e78f</TestId>
+            <TestName Type="System.String">SelectMultipleCells</TestName>
+            <TestPath Type="System.String">UIWidgets\Grid\Selection\SelectMultipleCells.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">6</TestStepNumber>
+            <Order Type="System.Int32">7</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Verify attribute 'class' has 'Contains' value of 't-state-selected' on 'RobertTableCell0'</StepDescription>
+            <TestId Type="System.String">e94e4d47-b502-4a0f-955f-42848b91e78f</TestId>
+            <TestName Type="System.String">SelectMultipleCells</TestName>
+            <TestPath Type="System.String">UIWidgets\Grid\Selection\SelectMultipleCells.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">7</TestStepNumber>
+            <Order Type="System.Int32">8</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Verify attribute 'class' has 'Contains' value of 't-state-selected' on 'PeacockTableCell'</StepDescription>
+            <TestId Type="System.String">e94e4d47-b502-4a0f-955f-42848b91e78f</TestId>
+            <TestName Type="System.String">SelectMultipleCells</TestName>
+            <TestPath Type="System.String">UIWidgets\Grid\Selection\SelectMultipleCells.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">8</TestStepNumber>
+            <Order Type="System.Int32">9</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+        </AutomationStepResults>
+        <NotRunStepDescriptions />
+        <PerStepMessages Type="System.String">Overall Result: Pass
+------------------------------------------------------------
+'8/9/2011 2:59:20 PM' - Starting execution....
+------------------------------------------------------------
+'8/9/2011 2:59:22 PM' - 'Pass' : 1. Navigate to : '/grid/selection.html'
+'8/9/2011 2:59:23 PM' - 'Pass' : 2. Click 'NigeTableCell'
+'8/9/2011 2:59:23 PM' - 'Pass' : 3. Verify attribute 'class' has 'Contains' value of 't-state-selected' on 'NigeTableCell'
+'8/9/2011 2:59:23 PM' - 'Pass' : 4. Shift + Click 'PeacockTableCell'
+'8/9/2011 2:59:24 PM' - 'Pass' : 5. Wait for '1000' msec.
+'8/9/2011 2:59:24 PM' - 'Pass' : 6. Verify attribute 'class' has 'Contains' value of 't-state-selected' on 'DodsworthTableCell'
+'8/9/2011 2:59:25 PM' - 'Pass' : 7. Verify attribute 'class' has 'Contains' value of 't-state-selected' on 'x48TableCell'
+'8/9/2011 2:59:25 PM' - 'Pass' : 8. Verify attribute 'class' has 'Contains' value of 't-state-selected' on 'RobertTableCell0'
+'8/9/2011 2:59:25 PM' - 'Pass' : 9. Verify attribute 'class' has 'Contains' value of 't-state-selected' on 'PeacockTableCell'
+------------------------------------------------------------
+'8/9/2011 2:59:25 PM' - Overall Result: Pass
+'8/9/2011 2:59:25 PM' - Duration: [0 min: 3 sec: 288 msec]
+------------------------------------------------------------
+'8/9/2011 2:59:25 PM' - Test completed!
+</PerStepMessages>
+        <TotalNumberOfPassedSteps Type="System.Int32">9</TotalNumberOfPassedSteps>
+        <ExecutingTestStepCount Type="System.Int32">9</ExecutingTestStepCount>
+        <TotalNumberOfNotRunSteps Type="System.Int32">0</TotalNumberOfNotRunSteps>
+        <IsDataDrivenResult Type="System.Boolean">False</IsDataDrivenResult>
+        <SeparatorLineCharCount Type="System.Int32">60</SeparatorLineCharCount>
+        <ExecutionType Type="ArtOfTest.Common.Design.ExecutionType">QuickExecution</ExecutionType>
+        <EndTime Type="System.DateTime">2011-08-09 11:59:25Z</EndTime>
+        <StarTime Type="System.DateTime">2011-08-09 11:59:21Z</StarTime>
+        <DataIterationResults />
+      </WebAiiTestResult>
+    </WebAiiTestResult>
+    <WebAiiTestResult executionId="9861a043-2c39-4d91-82d4-eb45d622ca96" testId="2a2681b2-602e-4af3-be55-b8516bc81e80" testName="GroupByAge" computerName="AGGEORGIEV" duration="00:00:44.8086996" startTime="2011-08-09T14:59:26.7939168+03:00" endTime="2011-08-09T15:00:11.6130688+03:00" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9861a043-2c39-4d91-82d4-eb45d622ca96" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Output xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <ErrorInfo>
+          <Message>Overall Result: Pass
+------------------------------------------------------------
+'8/9/2011 2:59:26 PM' - Starting execution....
+------------------------------------------------------------
+'8/9/2011 2:59:28 PM' - 'Pass' : 1. Navigate to : '/grid/index.html'
+'8/9/2011 2:59:38 PM' - 'Pass' : 2. Desktop command: Drag &amp; Drop AgeLink to Window Target
+'8/9/2011 2:59:38 PM' - 'NotRun' : 3. Desktop command: Drag &amp; Drop AgeLink to Window Target
+'8/9/2011 2:59:38 PM' - 'Pass' : 4. Click 'IndexHtmlLink'
+'8/9/2011 2:59:38 PM' - 'Pass' : 5. Verify 'TextContent' 'Contains' 'Age: 45' on 'Age45PTag'
+------------------------------------------------------------
+'8/9/2011 2:59:38 PM' - Overall Result: Pass
+'8/9/2011 2:59:38 PM' - Duration: [0 min: 10 sec: 742 msec]
+------------------------------------------------------------
+'8/9/2011 2:59:39 PM' - Test completed!
+</Message>
+        </ErrorInfo>
+      </Output>
+      <WebAiiTestResult Type="ArtOfTest.WebAii.Design.Execution.TestResult" Version="2011.1.729.0" xmlns="">
+        <TestId Type="System.String">2a2681b2-602e-4af3-be55-b8516bc81e80</TestId>
+        <TestName Type="System.String">GroupByAge</TestName>
+        <TestPath Type="System.String">UIWidgets\Grid\BasicUsage\GroupByAge.tstest</TestPath>
+        <ProjectPath Type="System.String">
+        </ProjectPath>
+        <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+        <AutomationStepResults>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Navigate to : '/grid/index.html'</StepDescription>
+            <TestId Type="System.String">2a2681b2-602e-4af3-be55-b8516bc81e80</TestId>
+            <TestName Type="System.String">GroupByAge</TestName>
+            <TestPath Type="System.String">UIWidgets\Grid\BasicUsage\GroupByAge.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">0</TestStepNumber>
+            <Order Type="System.Int32">1</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Desktop command: Drag &amp; Drop AgeLink to Window Target</StepDescription>
+            <TestId Type="System.String">2a2681b2-602e-4af3-be55-b8516bc81e80</TestId>
+            <TestName Type="System.String">GroupByAge</TestName>
+            <TestPath Type="System.String">UIWidgets\Grid\BasicUsage\GroupByAge.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">1</TestStepNumber>
+            <Order Type="System.Int32">2</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">NotRun</ResultType>
+            <StepDescription Type="System.String">Desktop command: Drag &amp; Drop AgeLink to Window Target</StepDescription>
+            <TestId Type="System.String">2a2681b2-602e-4af3-be55-b8516bc81e80</TestId>
+            <TestName Type="System.String">GroupByAge</TestName>
+            <TestPath Type="System.String">UIWidgets\Grid\BasicUsage\GroupByAge.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">2</TestStepNumber>
+            <Order Type="System.Int32">3</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Click 'IndexHtmlLink'</StepDescription>
+            <TestId Type="System.String">2a2681b2-602e-4af3-be55-b8516bc81e80</TestId>
+            <TestName Type="System.String">GroupByAge</TestName>
+            <TestPath Type="System.String">UIWidgets\Grid\BasicUsage\GroupByAge.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">3</TestStepNumber>
+            <Order Type="System.Int32">4</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Verify 'TextContent' 'Contains' 'Age: 45' on 'Age45PTag'</StepDescription>
+            <TestId Type="System.String">2a2681b2-602e-4af3-be55-b8516bc81e80</TestId>
+            <TestName Type="System.String">GroupByAge</TestName>
+            <TestPath Type="System.String">UIWidgets\Grid\BasicUsage\GroupByAge.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">4</TestStepNumber>
+            <Order Type="System.Int32">5</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+        </AutomationStepResults>
+        <NotRunStepDescriptions />
+        <PerStepMessages Type="System.String">Overall Result: Pass
+------------------------------------------------------------
+'8/9/2011 2:59:26 PM' - Starting execution....
+------------------------------------------------------------
+'8/9/2011 2:59:28 PM' - 'Pass' : 1. Navigate to : '/grid/index.html'
+'8/9/2011 2:59:38 PM' - 'Pass' : 2. Desktop command: Drag &amp; Drop AgeLink to Window Target
+'8/9/2011 2:59:38 PM' - 'NotRun' : 3. Desktop command: Drag &amp; Drop AgeLink to Window Target
+'8/9/2011 2:59:38 PM' - 'Pass' : 4. Click 'IndexHtmlLink'
+'8/9/2011 2:59:38 PM' - 'Pass' : 5. Verify 'TextContent' 'Contains' 'Age: 45' on 'Age45PTag'
+------------------------------------------------------------
+'8/9/2011 2:59:38 PM' - Overall Result: Pass
+'8/9/2011 2:59:38 PM' - Duration: [0 min: 10 sec: 742 msec]
+------------------------------------------------------------
+'8/9/2011 2:59:39 PM' - Test completed!
+</PerStepMessages>
+        <TotalNumberOfPassedSteps Type="System.Int32">4</TotalNumberOfPassedSteps>
+        <ExecutingTestStepCount Type="System.Int32">4</ExecutingTestStepCount>
+        <TotalNumberOfNotRunSteps Type="System.Int32">1</TotalNumberOfNotRunSteps>
+        <IsDataDrivenResult Type="System.Boolean">False</IsDataDrivenResult>
+        <SeparatorLineCharCount Type="System.Int32">60</SeparatorLineCharCount>
+        <ExecutionType Type="ArtOfTest.Common.Design.ExecutionType">QuickExecution</ExecutionType>
+        <EndTime Type="System.DateTime">2011-08-09 11:59:38Z</EndTime>
+        <StarTime Type="System.DateTime">2011-08-09 11:59:28Z</StarTime>
+        <DataIterationResults />
+      </WebAiiTestResult>
+    </WebAiiTestResult>
+    <WebAiiTestResult executionId="234610b6-81e6-4330-9fd0-804b3f8ef06d" testId="5ac7f1c9-d81b-47eb-af1c-2bd95254b5c6" testName="ChangeValueKeyboardSelect" computerName="AGGEORGIEV" duration="00:00:36.4443296" startTime="2011-08-09T15:00:11.6130688+03:00" endTime="2011-08-09T15:00:48.0621928+03:00" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="234610b6-81e6-4330-9fd0-804b3f8ef06d" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Output xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <ErrorInfo>
+          <Message>Overall Result: Pass
+------------------------------------------------------------
+'8/9/2011 3:00:11 PM' - Starting execution....
+------------------------------------------------------------
+'8/9/2011 3:00:13 PM' - 'Pass' : 1. Navigate to : '/combobox/index.html'
+'8/9/2011 3:00:13 PM' - 'Pass' : 2. Click 'SelectSpan0'
+'8/9/2011 3:00:14 PM' - 'Pass' : 3. Keyboard (KeyPress) - Down (2 times) on 'Text0'
+'8/9/2011 3:00:15 PM' - 'Pass' : 4. Keyboard (KeyPress) - Enter (1 times) on 'Text0'
+'8/9/2011 3:00:15 PM' - 'Pass' : 5. Set 'Text0' text to 'Item 3'
+'8/9/2011 3:00:15 PM' - 'Pass' : 6. Verify textbox 'Text0' content 'Contains' 'Item 3'.
+------------------------------------------------------------
+'8/9/2011 3:00:15 PM' - Overall Result: Pass
+'8/9/2011 3:00:15 PM' - Duration: [0 min: 2 sec: 381 msec]
+------------------------------------------------------------
+'8/9/2011 3:00:15 PM' - Test completed!
+</Message>
+        </ErrorInfo>
+      </Output>
+      <WebAiiTestResult Type="ArtOfTest.WebAii.Design.Execution.TestResult" Version="2011.1.729.0" xmlns="">
+        <TestId Type="System.String">5ac7f1c9-d81b-47eb-af1c-2bd95254b5c6</TestId>
+        <TestName Type="System.String">ChangeValueKeyboardSelect</TestName>
+        <TestPath Type="System.String">UIWidgets\ComboBox\BasicUsage\ChangeValueKeyboardSelect.tstest</TestPath>
+        <ProjectPath Type="System.String">
+        </ProjectPath>
+        <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+        <AutomationStepResults>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Navigate to : '/combobox/index.html'</StepDescription>
+            <TestId Type="System.String">5ac7f1c9-d81b-47eb-af1c-2bd95254b5c6</TestId>
+            <TestName Type="System.String">ChangeValueKeyboardSelect</TestName>
+            <TestPath Type="System.String">UIWidgets\ComboBox\BasicUsage\ChangeValueKeyboardSelect.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">0</TestStepNumber>
+            <Order Type="System.Int32">1</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Click 'SelectSpan0'</StepDescription>
+            <TestId Type="System.String">5ac7f1c9-d81b-47eb-af1c-2bd95254b5c6</TestId>
+            <TestName Type="System.String">ChangeValueKeyboardSelect</TestName>
+            <TestPath Type="System.String">UIWidgets\ComboBox\BasicUsage\ChangeValueKeyboardSelect.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">1</TestStepNumber>
+            <Order Type="System.Int32">2</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Keyboard (KeyPress) - Down (2 times) on 'Text0'</StepDescription>
+            <TestId Type="System.String">5ac7f1c9-d81b-47eb-af1c-2bd95254b5c6</TestId>
+            <TestName Type="System.String">ChangeValueKeyboardSelect</TestName>
+            <TestPath Type="System.String">UIWidgets\ComboBox\BasicUsage\ChangeValueKeyboardSelect.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">2</TestStepNumber>
+            <Order Type="System.Int32">3</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Keyboard (KeyPress) - Enter (1 times) on 'Text0'</StepDescription>
+            <TestId Type="System.String">5ac7f1c9-d81b-47eb-af1c-2bd95254b5c6</TestId>
+            <TestName Type="System.String">ChangeValueKeyboardSelect</TestName>
+            <TestPath Type="System.String">UIWidgets\ComboBox\BasicUsage\ChangeValueKeyboardSelect.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">3</TestStepNumber>
+            <Order Type="System.Int32">4</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Set 'Text0' text to 'Item 3'</StepDescription>
+            <TestId Type="System.String">5ac7f1c9-d81b-47eb-af1c-2bd95254b5c6</TestId>
+            <TestName Type="System.String">ChangeValueKeyboardSelect</TestName>
+            <TestPath Type="System.String">UIWidgets\ComboBox\BasicUsage\ChangeValueKeyboardSelect.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">4</TestStepNumber>
+            <Order Type="System.Int32">5</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Verify textbox 'Text0' content 'Contains' 'Item 3'.</StepDescription>
+            <TestId Type="System.String">5ac7f1c9-d81b-47eb-af1c-2bd95254b5c6</TestId>
+            <TestName Type="System.String">ChangeValueKeyboardSelect</TestName>
+            <TestPath Type="System.String">UIWidgets\ComboBox\BasicUsage\ChangeValueKeyboardSelect.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">5</TestStepNumber>
+            <Order Type="System.Int32">6</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+        </AutomationStepResults>
+        <NotRunStepDescriptions />
+        <PerStepMessages Type="System.String">Overall Result: Pass
+------------------------------------------------------------
+'8/9/2011 3:00:11 PM' - Starting execution....
+------------------------------------------------------------
+'8/9/2011 3:00:13 PM' - 'Pass' : 1. Navigate to : '/combobox/index.html'
+'8/9/2011 3:00:13 PM' - 'Pass' : 2. Click 'SelectSpan0'
+'8/9/2011 3:00:14 PM' - 'Pass' : 3. Keyboard (KeyPress) - Down (2 times) on 'Text0'
+'8/9/2011 3:00:15 PM' - 'Pass' : 4. Keyboard (KeyPress) - Enter (1 times) on 'Text0'
+'8/9/2011 3:00:15 PM' - 'Pass' : 5. Set 'Text0' text to 'Item 3'
+'8/9/2011 3:00:15 PM' - 'Pass' : 6. Verify textbox 'Text0' content 'Contains' 'Item 3'.
+------------------------------------------------------------
+'8/9/2011 3:00:15 PM' - Overall Result: Pass
+'8/9/2011 3:00:15 PM' - Duration: [0 min: 2 sec: 381 msec]
+------------------------------------------------------------
+'8/9/2011 3:00:15 PM' - Test completed!
+</PerStepMessages>
+        <TotalNumberOfPassedSteps Type="System.Int32">6</TotalNumberOfPassedSteps>
+        <ExecutingTestStepCount Type="System.Int32">6</ExecutingTestStepCount>
+        <TotalNumberOfNotRunSteps Type="System.Int32">0</TotalNumberOfNotRunSteps>
+        <IsDataDrivenResult Type="System.Boolean">False</IsDataDrivenResult>
+        <SeparatorLineCharCount Type="System.Int32">60</SeparatorLineCharCount>
+        <ExecutionType Type="ArtOfTest.Common.Design.ExecutionType">QuickExecution</ExecutionType>
+        <EndTime Type="System.DateTime">2011-08-09 12:00:15Z</EndTime>
+        <StarTime Type="System.DateTime">2011-08-09 12:00:13Z</StarTime>
+        <DataIterationResults />
+      </WebAiiTestResult>
+    </WebAiiTestResult>
+    <WebAiiTestResult executionId="a4142991-1177-4f9a-bded-5027f90d2b35" testId="891ffcdc-fd2e-4e7e-8a8c-b0d9744bb0b9" testName="SelectRowSingle" computerName="AGGEORGIEV" duration="00:00:36.1672475" startTime="2011-08-09T15:00:48.0621928+03:00" endTime="2011-08-09T15:01:24.2340665+03:00" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a4142991-1177-4f9a-bded-5027f90d2b35" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Output xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <ErrorInfo>
+          <Message>Overall Result: Pass
+------------------------------------------------------------
+'8/9/2011 3:00:48 PM' - Starting execution....
+------------------------------------------------------------
+'8/9/2011 3:00:50 PM' - 'Pass' : 1. Navigate to : '/grid/selection.html'
+'8/9/2011 3:00:50 PM' - 'Pass' : 2. Click 'RobertTableCell'
+'8/9/2011 3:00:50 PM' - 'Pass' : 3. Verify attribute 'class' has 'Contains' value of 't-alt t-state-selected' on 'TableRow'
+'8/9/2011 3:00:51 PM' - 'Pass' : 4. Wait for '500' msec.
+'8/9/2011 3:00:51 PM' - 'Pass' : 5. Click 'AnneTableCell'
+'8/9/2011 3:00:51 PM' - 'Pass' : 6. Verify attribute 'class' has 'Contains' value of 't-state-selected' on 'TableRow0'
+------------------------------------------------------------
+'8/9/2011 3:00:51 PM' - Overall Result: Pass
+'8/9/2011 3:00:51 PM' - Duration: [0 min: 2 sec: 85 msec]
+------------------------------------------------------------
+'8/9/2011 3:00:51 PM' - Test completed!
+</Message>
+        </ErrorInfo>
+      </Output>
+      <WebAiiTestResult Type="ArtOfTest.WebAii.Design.Execution.TestResult" Version="2011.1.729.0" xmlns="">
+        <TestId Type="System.String">891ffcdc-fd2e-4e7e-8a8c-b0d9744bb0b9</TestId>
+        <TestName Type="System.String">SelectRowSingle</TestName>
+        <TestPath Type="System.String">UIWidgets\Grid\Selection\SelectRowSingle.tstest</TestPath>
+        <ProjectPath Type="System.String">
+        </ProjectPath>
+        <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+        <AutomationStepResults>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Navigate to : '/grid/selection.html'</StepDescription>
+            <TestId Type="System.String">891ffcdc-fd2e-4e7e-8a8c-b0d9744bb0b9</TestId>
+            <TestName Type="System.String">SelectRowSingle</TestName>
+            <TestPath Type="System.String">UIWidgets\Grid\Selection\SelectRowSingle.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">0</TestStepNumber>
+            <Order Type="System.Int32">1</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Click 'RobertTableCell'</StepDescription>
+            <TestId Type="System.String">891ffcdc-fd2e-4e7e-8a8c-b0d9744bb0b9</TestId>
+            <TestName Type="System.String">SelectRowSingle</TestName>
+            <TestPath Type="System.String">UIWidgets\Grid\Selection\SelectRowSingle.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">1</TestStepNumber>
+            <Order Type="System.Int32">2</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Verify attribute 'class' has 'Contains' value of 't-alt t-state-selected' on 'TableRow'</StepDescription>
+            <TestId Type="System.String">891ffcdc-fd2e-4e7e-8a8c-b0d9744bb0b9</TestId>
+            <TestName Type="System.String">SelectRowSingle</TestName>
+            <TestPath Type="System.String">UIWidgets\Grid\Selection\SelectRowSingle.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">2</TestStepNumber>
+            <Order Type="System.Int32">3</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Wait for '500' msec.</StepDescription>
+            <TestId Type="System.String">891ffcdc-fd2e-4e7e-8a8c-b0d9744bb0b9</TestId>
+            <TestName Type="System.String">SelectRowSingle</TestName>
+            <TestPath Type="System.String">UIWidgets\Grid\Selection\SelectRowSingle.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">3</TestStepNumber>
+            <Order Type="System.Int32">4</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Click 'AnneTableCell'</StepDescription>
+            <TestId Type="System.String">891ffcdc-fd2e-4e7e-8a8c-b0d9744bb0b9</TestId>
+            <TestName Type="System.String">SelectRowSingle</TestName>
+            <TestPath Type="System.String">UIWidgets\Grid\Selection\SelectRowSingle.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">4</TestStepNumber>
+            <Order Type="System.Int32">5</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Verify attribute 'class' has 'Contains' value of 't-state-selected' on 'TableRow0'</StepDescription>
+            <TestId Type="System.String">891ffcdc-fd2e-4e7e-8a8c-b0d9744bb0b9</TestId>
+            <TestName Type="System.String">SelectRowSingle</TestName>
+            <TestPath Type="System.String">UIWidgets\Grid\Selection\SelectRowSingle.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">5</TestStepNumber>
+            <Order Type="System.Int32">6</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+        </AutomationStepResults>
+        <NotRunStepDescriptions />
+        <PerStepMessages Type="System.String">Overall Result: Pass
+------------------------------------------------------------
+'8/9/2011 3:00:48 PM' - Starting execution....
+------------------------------------------------------------
+'8/9/2011 3:00:50 PM' - 'Pass' : 1. Navigate to : '/grid/selection.html'
+'8/9/2011 3:00:50 PM' - 'Pass' : 2. Click 'RobertTableCell'
+'8/9/2011 3:00:50 PM' - 'Pass' : 3. Verify attribute 'class' has 'Contains' value of 't-alt t-state-selected' on 'TableRow'
+'8/9/2011 3:00:51 PM' - 'Pass' : 4. Wait for '500' msec.
+'8/9/2011 3:00:51 PM' - 'Pass' : 5. Click 'AnneTableCell'
+'8/9/2011 3:00:51 PM' - 'Pass' : 6. Verify attribute 'class' has 'Contains' value of 't-state-selected' on 'TableRow0'
+------------------------------------------------------------
+'8/9/2011 3:00:51 PM' - Overall Result: Pass
+'8/9/2011 3:00:51 PM' - Duration: [0 min: 2 sec: 85 msec]
+------------------------------------------------------------
+'8/9/2011 3:00:51 PM' - Test completed!
+</PerStepMessages>
+        <TotalNumberOfPassedSteps Type="System.Int32">6</TotalNumberOfPassedSteps>
+        <ExecutingTestStepCount Type="System.Int32">6</ExecutingTestStepCount>
+        <TotalNumberOfNotRunSteps Type="System.Int32">0</TotalNumberOfNotRunSteps>
+        <IsDataDrivenResult Type="System.Boolean">False</IsDataDrivenResult>
+        <SeparatorLineCharCount Type="System.Int32">60</SeparatorLineCharCount>
+        <ExecutionType Type="ArtOfTest.Common.Design.ExecutionType">QuickExecution</ExecutionType>
+        <EndTime Type="System.DateTime">2011-08-09 12:00:51Z</EndTime>
+        <StarTime Type="System.DateTime">2011-08-09 12:00:49Z</StarTime>
+        <DataIterationResults />
+      </WebAiiTestResult>
+    </WebAiiTestResult>
+    <WebAiiTestResult executionId="8b991eeb-4979-41e1-924f-e0c51df18c0b" testId="1b641c32-14b2-4d44-b84a-7772389dbed8" testName="SortFirstNameAndPage" computerName="AGGEORGIEV" duration="00:00:17.2364473" startTime="2011-08-09T15:01:24.2340665+03:00" endTime="2011-08-09T15:01:41.4669657+03:00" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8b991eeb-4979-41e1-924f-e0c51df18c0b" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Output xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <ErrorInfo>
+          <Message>Overall Result: Fail
+------------------------------------------------------------
+'8/9/2011 3:01:24 PM' - Starting execution....
+------------------------------------------------------------
+'8/9/2011 3:01:26 PM' - 'Pass' : 1. Navigate to : '/grid/index.html'
+'8/9/2011 3:01:26 PM' - 'Pass' : 2. Click 'FirstNameLink'
+'8/9/2011 3:01:26 PM' - 'Pass' : 3. Verify 'TextContent' 'Contains' 'Andrew' on 'AndrewTableCell'
+'8/9/2011 3:01:27 PM' - 'Pass' : 4. Click 'x3Link'
+'8/9/2011 3:01:27 PM' - 'Pass' : 5. Click 'x5Link'
+'8/9/2011 3:01:27 PM' - 'Fail' : 6. Verify 'TextContent' 'Contains' 'Robert' on 'RobertTableCell'
+------------------------------------------------------------
+Failure Information: 
+~~~~~~~~~~~~~~~
+Content.TextContent of 'RobertTableCell' does not match!
+
+   Match Type: 'Contains'
+   Expected Result: 'Robert'
+   Value at time of failure: 'Nige'
+------------------------------------------------------------
+'8/9/2011 3:01:27 PM' - Detected a failure. Step is marked 'ContinueOnFailure=False' aborting test execution.
+------------------------------------------------------------
+'8/9/2011 3:01:27 PM' - Overall Result: Fail
+'8/9/2011 3:01:27 PM' - Duration: [0 min: 2 sec: 53 msec]
+------------------------------------------------------------
+'8/9/2011 3:01:28 PM' - Test completed!
+</Message>
+        </ErrorInfo>
+      </Output>
+      <WebAiiTestResult Type="ArtOfTest.WebAii.Design.Execution.TestResult" Version="2011.1.729.0" xmlns="">
+        <TestId Type="System.String">1b641c32-14b2-4d44-b84a-7772389dbed8</TestId>
+        <TestName Type="System.String">SortFirstNameAndPage</TestName>
+        <TestPath Type="System.String">UIWidgets\Grid\BasicUsage\SortFirstNameAndPage.tstest</TestPath>
+        <ProjectPath Type="System.String">
+        </ProjectPath>
+        <ResultType Type="ArtOfTest.Common.Design.ResultType">Fail</ResultType>
+        <AutomationStepResults>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Navigate to : '/grid/index.html'</StepDescription>
+            <TestId Type="System.String">1b641c32-14b2-4d44-b84a-7772389dbed8</TestId>
+            <TestName Type="System.String">SortFirstNameAndPage</TestName>
+            <TestPath Type="System.String">UIWidgets\Grid\BasicUsage\SortFirstNameAndPage.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">0</TestStepNumber>
+            <Order Type="System.Int32">1</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Click 'FirstNameLink'</StepDescription>
+            <TestId Type="System.String">1b641c32-14b2-4d44-b84a-7772389dbed8</TestId>
+            <TestName Type="System.String">SortFirstNameAndPage</TestName>
+            <TestPath Type="System.String">UIWidgets\Grid\BasicUsage\SortFirstNameAndPage.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">1</TestStepNumber>
+            <Order Type="System.Int32">2</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Verify 'TextContent' 'Contains' 'Andrew' on 'AndrewTableCell'</StepDescription>
+            <TestId Type="System.String">1b641c32-14b2-4d44-b84a-7772389dbed8</TestId>
+            <TestName Type="System.String">SortFirstNameAndPage</TestName>
+            <TestPath Type="System.String">UIWidgets\Grid\BasicUsage\SortFirstNameAndPage.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">2</TestStepNumber>
+            <Order Type="System.Int32">3</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Click 'x3Link'</StepDescription>
+            <TestId Type="System.String">1b641c32-14b2-4d44-b84a-7772389dbed8</TestId>
+            <TestName Type="System.String">SortFirstNameAndPage</TestName>
+            <TestPath Type="System.String">UIWidgets\Grid\BasicUsage\SortFirstNameAndPage.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">3</TestStepNumber>
+            <Order Type="System.Int32">4</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Click 'x5Link'</StepDescription>
+            <TestId Type="System.String">1b641c32-14b2-4d44-b84a-7772389dbed8</TestId>
+            <TestName Type="System.String">SortFirstNameAndPage</TestName>
+            <TestPath Type="System.String">UIWidgets\Grid\BasicUsage\SortFirstNameAndPage.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">4</TestStepNumber>
+            <Order Type="System.Int32">5</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Fail</ResultType>
+            <ExecutionException Type="ArtOfTest.Common.Design.Exceptions.VerificationException" Version="2011.1.729.0">
+              <HostState Type="ArtOfTest.WebAii.Design.AutomationHostState" Version="2011.1.729.0">
+                <Mode Type="ArtOfTest.WebAii.Design.BrowserStateCaptureMode">DomAndImage</Mode>
+                <TechType Type="ArtOfTest.Common.TechnologyType">Html</TechType>
+                <FriendlyName Type="System.String">Capture Of 'Page (Basic usage)' @8/9/2011 3:01:27 PM</FriendlyName>
+              </HostState>
+              <ExceptionMessage Type="System.String">Content.TextContent of 'RobertTableCell' does not match!
+
+   Match Type: 'Contains'
+   Expected Result: 'Robert'
+   Value at time of failure: 'Nige'</ExceptionMessage>
+              <VerificationResult Type="ArtOfTest.Common.Design.Extensibility.VerificationResult" Version="2011.1.729.0">
+                <Result Type="System.Boolean">False</Result>
+                <ErrorMessage Type="System.String">Content.TextContent of 'RobertTableCell' does not match!
+
+   Match Type: 'Contains'
+   Expected Result: 'Robert'
+   Value at time of failure: 'Nige'</ErrorMessage>
+              </VerificationResult>
+              <ValueStore Type="ArtOfTest.Common.Design.Extensibility.DescriptorValueStore" Version="2011.1.729.0">
+                <ValueStore>
+                  <Item Key="ExpectedString" Type="System.String">Nige</Item>
+                </ValueStore>
+              </ValueStore>
+            </ExecutionException>
+            <StepDescription Type="System.String">Verify 'TextContent' 'Contains' 'Robert' on 'RobertTableCell'</StepDescription>
+            <TestId Type="System.String">1b641c32-14b2-4d44-b84a-7772389dbed8</TestId>
+            <TestName Type="System.String">SortFirstNameAndPage</TestName>
+            <TestPath Type="System.String">UIWidgets\Grid\BasicUsage\SortFirstNameAndPage.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">5</TestStepNumber>
+            <Order Type="System.Int32">6</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+        </AutomationStepResults>
+        <NotRunStepDescriptions />
+        <PerStepMessages Type="System.String">Overall Result: Fail
+------------------------------------------------------------
+'8/9/2011 3:01:24 PM' - Starting execution....
+------------------------------------------------------------
+'8/9/2011 3:01:26 PM' - 'Pass' : 1. Navigate to : '/grid/index.html'
+'8/9/2011 3:01:26 PM' - 'Pass' : 2. Click 'FirstNameLink'
+'8/9/2011 3:01:26 PM' - 'Pass' : 3. Verify 'TextContent' 'Contains' 'Andrew' on 'AndrewTableCell'
+'8/9/2011 3:01:27 PM' - 'Pass' : 4. Click 'x3Link'
+'8/9/2011 3:01:27 PM' - 'Pass' : 5. Click 'x5Link'
+'8/9/2011 3:01:27 PM' - 'Fail' : 6. Verify 'TextContent' 'Contains' 'Robert' on 'RobertTableCell'
+------------------------------------------------------------
+Failure Information: 
+~~~~~~~~~~~~~~~
+Content.TextContent of 'RobertTableCell' does not match!
+
+   Match Type: 'Contains'
+   Expected Result: 'Robert'
+   Value at time of failure: 'Nige'
+------------------------------------------------------------
+'8/9/2011 3:01:27 PM' - Detected a failure. Step is marked 'ContinueOnFailure=False' aborting test execution.
+------------------------------------------------------------
+'8/9/2011 3:01:27 PM' - Overall Result: Fail
+'8/9/2011 3:01:27 PM' - Duration: [0 min: 2 sec: 53 msec]
+------------------------------------------------------------
+'8/9/2011 3:01:28 PM' - Test completed!
+</PerStepMessages>
+        <TotalNumberOfPassedSteps Type="System.Int32">5</TotalNumberOfPassedSteps>
+        <ExecutingTestStepCount Type="System.Int32">6</ExecutingTestStepCount>
+        <TotalNumberOfNotRunSteps Type="System.Int32">0</TotalNumberOfNotRunSteps>
+        <IsDataDrivenResult Type="System.Boolean">False</IsDataDrivenResult>
+        <SeparatorLineCharCount Type="System.Int32">60</SeparatorLineCharCount>
+        <ExecutionType Type="ArtOfTest.Common.Design.ExecutionType">QuickExecution</ExecutionType>
+        <FailureException Type="ArtOfTest.Common.Design.Exceptions.VerificationException" Version="2011.1.729.0">
+          <HostState Type="ArtOfTest.WebAii.Design.AutomationHostState" Version="2011.1.729.0">
+            <Mode Type="ArtOfTest.WebAii.Design.BrowserStateCaptureMode">DomAndImage</Mode>
+            <TechType Type="ArtOfTest.Common.TechnologyType">Html</TechType>
+            <FriendlyName Type="System.String">Capture Of 'Page (Basic usage)' @8/9/2011 3:01:27 PM</FriendlyName>
+          </HostState>
+          <ExceptionMessage Type="System.String">Content.TextContent of 'RobertTableCell' does not match!
+
+   Match Type: 'Contains'
+   Expected Result: 'Robert'
+   Value at time of failure: 'Nige'</ExceptionMessage>
+          <VerificationResult Type="ArtOfTest.Common.Design.Extensibility.VerificationResult" Version="2011.1.729.0">
+            <Result Type="System.Boolean">False</Result>
+            <ErrorMessage Type="System.String">Content.TextContent of 'RobertTableCell' does not match!
+
+   Match Type: 'Contains'
+   Expected Result: 'Robert'
+   Value at time of failure: 'Nige'</ErrorMessage>
+          </VerificationResult>
+          <ValueStore Type="ArtOfTest.Common.Design.Extensibility.DescriptorValueStore" Version="2011.1.729.0">
+            <ValueStore>
+              <Item Key="ExpectedString" Type="System.String">Nige</Item>
+            </ValueStore>
+          </ValueStore>
+        </FailureException>
+        <EndTime Type="System.DateTime">2011-08-09 12:01:27Z</EndTime>
+        <StarTime Type="System.DateTime">2011-08-09 12:01:25Z</StarTime>
+        <DataIterationResults />
+      </WebAiiTestResult>
+    </WebAiiTestResult>
+    <WebAiiTestResult executionId="52b0bcf9-b86a-4075-b920-f8a6c15c2a74" testId="e297cdda-5608-4e27-ae19-fbf10e3a834f" testName="SetTwoValuesRevertToBlank" computerName="AGGEORGIEV" duration="00:00:10.4178300" startTime="2011-08-09T15:01:41.4669657+03:00" endTime="2011-08-09T15:01:51.8959527+03:00" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="52b0bcf9-b86a-4075-b920-f8a6c15c2a74" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Output xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <ErrorInfo>
+          <Message>Overall Result: Pass
+------------------------------------------------------------
+'8/9/2011 3:01:41 PM' - Starting execution....
+------------------------------------------------------------
+'8/9/2011 3:01:43 PM' - 'Pass' : 1. Navigate to : '/autocomplete/index.html'
+'8/9/2011 3:01:46 PM' - 'Pass' : 2. Set 'InputText' text to '12 Angry Men, In'
+'8/9/2011 3:01:47 PM' - 'Pass' : 3. Click 'InceptionListItem'
+'8/9/2011 3:01:47 PM' - 'Pass' : 4. Verify textbox 'InputText' content 'Same' '12 Angry Men, Inception, '.
+'8/9/2011 3:01:48 PM' - 'Pass' : 5. Keyboard (KeyPress) - Ctrl+A (1 times) on 'InputText'
+'8/9/2011 3:01:48 PM' - 'Pass' : 6. Keyboard (KeyPress) - Del (1 times) on 'InputText'
+'8/9/2011 3:01:48 PM' - 'Pass' : 7. Click 'ExampleDiv'
+'8/9/2011 3:01:48 PM' - 'Pass' : 8. Verify textbox 'InputText' content 'Same' ''.
+------------------------------------------------------------
+'8/9/2011 3:01:48 PM' - Overall Result: Pass
+'8/9/2011 3:01:48 PM' - Duration: [0 min: 5 sec: 795 msec]
+------------------------------------------------------------
+'8/9/2011 3:01:49 PM' - Test completed!
+</Message>
+        </ErrorInfo>
+      </Output>
+      <WebAiiTestResult Type="ArtOfTest.WebAii.Design.Execution.TestResult" Version="2011.1.729.0" xmlns="">
+        <TestId Type="System.String">e297cdda-5608-4e27-ae19-fbf10e3a834f</TestId>
+        <TestName Type="System.String">SetTwoValuesRevertToBlank</TestName>
+        <TestPath Type="System.String">UIWidgets\AutoComplete\BasicUsage\SetTwoValuesRevertToBlank.tstest</TestPath>
+        <ProjectPath Type="System.String">
+        </ProjectPath>
+        <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+        <AutomationStepResults>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Navigate to : '/autocomplete/index.html'</StepDescription>
+            <TestId Type="System.String">e297cdda-5608-4e27-ae19-fbf10e3a834f</TestId>
+            <TestName Type="System.String">SetTwoValuesRevertToBlank</TestName>
+            <TestPath Type="System.String">UIWidgets\AutoComplete\BasicUsage\SetTwoValuesRevertToBlank.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">0</TestStepNumber>
+            <Order Type="System.Int32">1</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Set 'InputText' text to '12 Angry Men, In'</StepDescription>
+            <TestId Type="System.String">e297cdda-5608-4e27-ae19-fbf10e3a834f</TestId>
+            <TestName Type="System.String">SetTwoValuesRevertToBlank</TestName>
+            <TestPath Type="System.String">UIWidgets\AutoComplete\BasicUsage\SetTwoValuesRevertToBlank.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">1</TestStepNumber>
+            <Order Type="System.Int32">2</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Click 'InceptionListItem'</StepDescription>
+            <TestId Type="System.String">e297cdda-5608-4e27-ae19-fbf10e3a834f</TestId>
+            <TestName Type="System.String">SetTwoValuesRevertToBlank</TestName>
+            <TestPath Type="System.String">UIWidgets\AutoComplete\BasicUsage\SetTwoValuesRevertToBlank.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">2</TestStepNumber>
+            <Order Type="System.Int32">3</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Verify textbox 'InputText' content 'Same' '12 Angry Men, Inception, '.</StepDescription>
+            <TestId Type="System.String">e297cdda-5608-4e27-ae19-fbf10e3a834f</TestId>
+            <TestName Type="System.String">SetTwoValuesRevertToBlank</TestName>
+            <TestPath Type="System.String">UIWidgets\AutoComplete\BasicUsage\SetTwoValuesRevertToBlank.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">3</TestStepNumber>
+            <Order Type="System.Int32">4</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Keyboard (KeyPress) - Ctrl+A (1 times) on 'InputText'</StepDescription>
+            <TestId Type="System.String">e297cdda-5608-4e27-ae19-fbf10e3a834f</TestId>
+            <TestName Type="System.String">SetTwoValuesRevertToBlank</TestName>
+            <TestPath Type="System.String">UIWidgets\AutoComplete\BasicUsage\SetTwoValuesRevertToBlank.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">4</TestStepNumber>
+            <Order Type="System.Int32">5</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Keyboard (KeyPress) - Del (1 times) on 'InputText'</StepDescription>
+            <TestId Type="System.String">e297cdda-5608-4e27-ae19-fbf10e3a834f</TestId>
+            <TestName Type="System.String">SetTwoValuesRevertToBlank</TestName>
+            <TestPath Type="System.String">UIWidgets\AutoComplete\BasicUsage\SetTwoValuesRevertToBlank.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">5</TestStepNumber>
+            <Order Type="System.Int32">6</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Click 'ExampleDiv'</StepDescription>
+            <TestId Type="System.String">e297cdda-5608-4e27-ae19-fbf10e3a834f</TestId>
+            <TestName Type="System.String">SetTwoValuesRevertToBlank</TestName>
+            <TestPath Type="System.String">UIWidgets\AutoComplete\BasicUsage\SetTwoValuesRevertToBlank.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">6</TestStepNumber>
+            <Order Type="System.Int32">7</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Verify textbox 'InputText' content 'Same' ''.</StepDescription>
+            <TestId Type="System.String">e297cdda-5608-4e27-ae19-fbf10e3a834f</TestId>
+            <TestName Type="System.String">SetTwoValuesRevertToBlank</TestName>
+            <TestPath Type="System.String">UIWidgets\AutoComplete\BasicUsage\SetTwoValuesRevertToBlank.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">7</TestStepNumber>
+            <Order Type="System.Int32">8</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+        </AutomationStepResults>
+        <NotRunStepDescriptions />
+        <PerStepMessages Type="System.String">Overall Result: Pass
+------------------------------------------------------------
+'8/9/2011 3:01:41 PM' - Starting execution....
+------------------------------------------------------------
+'8/9/2011 3:01:43 PM' - 'Pass' : 1. Navigate to : '/autocomplete/index.html'
+'8/9/2011 3:01:46 PM' - 'Pass' : 2. Set 'InputText' text to '12 Angry Men, In'
+'8/9/2011 3:01:47 PM' - 'Pass' : 3. Click 'InceptionListItem'
+'8/9/2011 3:01:47 PM' - 'Pass' : 4. Verify textbox 'InputText' content 'Same' '12 Angry Men, Inception, '.
+'8/9/2011 3:01:48 PM' - 'Pass' : 5. Keyboard (KeyPress) - Ctrl+A (1 times) on 'InputText'
+'8/9/2011 3:01:48 PM' - 'Pass' : 6. Keyboard (KeyPress) - Del (1 times) on 'InputText'
+'8/9/2011 3:01:48 PM' - 'Pass' : 7. Click 'ExampleDiv'
+'8/9/2011 3:01:48 PM' - 'Pass' : 8. Verify textbox 'InputText' content 'Same' ''.
+------------------------------------------------------------
+'8/9/2011 3:01:48 PM' - Overall Result: Pass
+'8/9/2011 3:01:48 PM' - Duration: [0 min: 5 sec: 795 msec]
+------------------------------------------------------------
+'8/9/2011 3:01:49 PM' - Test completed!
+</PerStepMessages>
+        <TotalNumberOfPassedSteps Type="System.Int32">8</TotalNumberOfPassedSteps>
+        <ExecutingTestStepCount Type="System.Int32">8</ExecutingTestStepCount>
+        <TotalNumberOfNotRunSteps Type="System.Int32">0</TotalNumberOfNotRunSteps>
+        <IsDataDrivenResult Type="System.Boolean">False</IsDataDrivenResult>
+        <SeparatorLineCharCount Type="System.Int32">60</SeparatorLineCharCount>
+        <ExecutionType Type="ArtOfTest.Common.Design.ExecutionType">QuickExecution</ExecutionType>
+        <EndTime Type="System.DateTime">2011-08-09 12:01:48Z</EndTime>
+        <StarTime Type="System.DateTime">2011-08-09 12:01:42Z</StarTime>
+        <DataIterationResults />
+      </WebAiiTestResult>
+    </WebAiiTestResult>
+    <WebAiiTestResult executionId="574038d5-e517-494d-b7ec-1181cdf63d5c" testId="fd75ef59-b0f9-4557-af4a-a84cb018806e" testName="SelectMultipleRows" computerName="AGGEORGIEV" duration="00:00:22.4993684" startTime="2011-08-09T15:01:51.8959527+03:00" endTime="2011-08-09T15:02:14.3716481+03:00" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="574038d5-e517-494d-b7ec-1181cdf63d5c" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Output xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <ErrorInfo>
+          <Message>Overall Result: Pass
+------------------------------------------------------------
+'8/9/2011 3:01:51 PM' - Starting execution....
+------------------------------------------------------------
+'8/9/2011 3:01:54 PM' - 'Pass' : 1. Navigate to : '/grid/selection.html'
+'8/9/2011 3:01:54 PM' - 'Pass' : 2. Click 'RobertTableCell'
+'8/9/2011 3:01:54 PM' - 'Pass' : 3. Verify attribute 'class' has 'Contains' value of 't-alt t-state-selected' on 'TableRow'
+'8/9/2011 3:01:55 PM' - 'Pass' : 4. Wait for '500' msec.
+'8/9/2011 3:01:55 PM' - 'Pass' : 5. Control + Click 'AnneTableCell0'
+'8/9/2011 3:01:55 PM' - 'NotRun' : 6. Shift + Click 'AnneTableCell'
+'8/9/2011 3:01:55 PM' - 'Pass' : 7. Verify attribute 'class' has 'Contains' value of 't-state-selected' on 'TableRow0'
+'8/9/2011 3:01:55 PM' - 'Pass' : 8. Verify attribute 'class' has 'Contains' value of 't-alt t-state-selected' on 'TableRow'
+------------------------------------------------------------
+'8/9/2011 3:01:55 PM' - Overall Result: Pass
+'8/9/2011 3:01:55 PM' - Duration: [0 min: 2 sec: 726 msec]
+------------------------------------------------------------
+'8/9/2011 3:01:56 PM' - Test completed!
+</Message>
+        </ErrorInfo>
+      </Output>
+      <WebAiiTestResult Type="ArtOfTest.WebAii.Design.Execution.TestResult" Version="2011.1.729.0" xmlns="">
+        <TestId Type="System.String">fd75ef59-b0f9-4557-af4a-a84cb018806e</TestId>
+        <TestName Type="System.String">SelectMultipleRows</TestName>
+        <TestPath Type="System.String">UIWidgets\Grid\Selection\SelectMultipleRows.tstest</TestPath>
+        <ProjectPath Type="System.String">
+        </ProjectPath>
+        <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+        <AutomationStepResults>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Navigate to : '/grid/selection.html'</StepDescription>
+            <TestId Type="System.String">fd75ef59-b0f9-4557-af4a-a84cb018806e</TestId>
+            <TestName Type="System.String">SelectMultipleRows</TestName>
+            <TestPath Type="System.String">UIWidgets\Grid\Selection\SelectMultipleRows.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">0</TestStepNumber>
+            <Order Type="System.Int32">1</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Click 'RobertTableCell'</StepDescription>
+            <TestId Type="System.String">fd75ef59-b0f9-4557-af4a-a84cb018806e</TestId>
+            <TestName Type="System.String">SelectMultipleRows</TestName>
+            <TestPath Type="System.String">UIWidgets\Grid\Selection\SelectMultipleRows.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">1</TestStepNumber>
+            <Order Type="System.Int32">2</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Verify attribute 'class' has 'Contains' value of 't-alt t-state-selected' on 'TableRow'</StepDescription>
+            <TestId Type="System.String">fd75ef59-b0f9-4557-af4a-a84cb018806e</TestId>
+            <TestName Type="System.String">SelectMultipleRows</TestName>
+            <TestPath Type="System.String">UIWidgets\Grid\Selection\SelectMultipleRows.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">2</TestStepNumber>
+            <Order Type="System.Int32">3</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Wait for '500' msec.</StepDescription>
+            <TestId Type="System.String">fd75ef59-b0f9-4557-af4a-a84cb018806e</TestId>
+            <TestName Type="System.String">SelectMultipleRows</TestName>
+            <TestPath Type="System.String">UIWidgets\Grid\Selection\SelectMultipleRows.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">3</TestStepNumber>
+            <Order Type="System.Int32">4</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Control + Click 'AnneTableCell0'</StepDescription>
+            <TestId Type="System.String">fd75ef59-b0f9-4557-af4a-a84cb018806e</TestId>
+            <TestName Type="System.String">SelectMultipleRows</TestName>
+            <TestPath Type="System.String">UIWidgets\Grid\Selection\SelectMultipleRows.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">4</TestStepNumber>
+            <Order Type="System.Int32">5</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">NotRun</ResultType>
+            <StepDescription Type="System.String">Shift + Click 'AnneTableCell'</StepDescription>
+            <TestId Type="System.String">fd75ef59-b0f9-4557-af4a-a84cb018806e</TestId>
+            <TestName Type="System.String">SelectMultipleRows</TestName>
+            <TestPath Type="System.String">UIWidgets\Grid\Selection\SelectMultipleRows.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">5</TestStepNumber>
+            <Order Type="System.Int32">6</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Verify attribute 'class' has 'Contains' value of 't-state-selected' on 'TableRow0'</StepDescription>
+            <TestId Type="System.String">fd75ef59-b0f9-4557-af4a-a84cb018806e</TestId>
+            <TestName Type="System.String">SelectMultipleRows</TestName>
+            <TestPath Type="System.String">UIWidgets\Grid\Selection\SelectMultipleRows.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">6</TestStepNumber>
+            <Order Type="System.Int32">7</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Verify attribute 'class' has 'Contains' value of 't-alt t-state-selected' on 'TableRow'</StepDescription>
+            <TestId Type="System.String">fd75ef59-b0f9-4557-af4a-a84cb018806e</TestId>
+            <TestName Type="System.String">SelectMultipleRows</TestName>
+            <TestPath Type="System.String">UIWidgets\Grid\Selection\SelectMultipleRows.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">7</TestStepNumber>
+            <Order Type="System.Int32">8</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+        </AutomationStepResults>
+        <NotRunStepDescriptions />
+        <PerStepMessages Type="System.String">Overall Result: Pass
+------------------------------------------------------------
+'8/9/2011 3:01:51 PM' - Starting execution....
+------------------------------------------------------------
+'8/9/2011 3:01:54 PM' - 'Pass' : 1. Navigate to : '/grid/selection.html'
+'8/9/2011 3:01:54 PM' - 'Pass' : 2. Click 'RobertTableCell'
+'8/9/2011 3:01:54 PM' - 'Pass' : 3. Verify attribute 'class' has 'Contains' value of 't-alt t-state-selected' on 'TableRow'
+'8/9/2011 3:01:55 PM' - 'Pass' : 4. Wait for '500' msec.
+'8/9/2011 3:01:55 PM' - 'Pass' : 5. Control + Click 'AnneTableCell0'
+'8/9/2011 3:01:55 PM' - 'NotRun' : 6. Shift + Click 'AnneTableCell'
+'8/9/2011 3:01:55 PM' - 'Pass' : 7. Verify attribute 'class' has 'Contains' value of 't-state-selected' on 'TableRow0'
+'8/9/2011 3:01:55 PM' - 'Pass' : 8. Verify attribute 'class' has 'Contains' value of 't-alt t-state-selected' on 'TableRow'
+------------------------------------------------------------
+'8/9/2011 3:01:55 PM' - Overall Result: Pass
+'8/9/2011 3:01:55 PM' - Duration: [0 min: 2 sec: 726 msec]
+------------------------------------------------------------
+'8/9/2011 3:01:56 PM' - Test completed!
+</PerStepMessages>
+        <TotalNumberOfPassedSteps Type="System.Int32">7</TotalNumberOfPassedSteps>
+        <ExecutingTestStepCount Type="System.Int32">7</ExecutingTestStepCount>
+        <TotalNumberOfNotRunSteps Type="System.Int32">1</TotalNumberOfNotRunSteps>
+        <IsDataDrivenResult Type="System.Boolean">False</IsDataDrivenResult>
+        <SeparatorLineCharCount Type="System.Int32">60</SeparatorLineCharCount>
+        <ExecutionType Type="ArtOfTest.Common.Design.ExecutionType">QuickExecution</ExecutionType>
+        <EndTime Type="System.DateTime">2011-08-09 12:01:55Z</EndTime>
+        <StarTime Type="System.DateTime">2011-08-09 12:01:53Z</StarTime>
+        <DataIterationResults />
+      </WebAiiTestResult>
+    </WebAiiTestResult>
+    <WebAiiTestResult executionId="924ab00c-d2f9-49d3-b723-d96467991033" testId="4ddbacf3-93f2-40ae-9f01-610c591d49b6" testName="Events" computerName="AGGEORGIEV" duration="00:00:28.8295315" startTime="2011-08-09T15:02:14.3756485+03:00" endTime="2011-08-09T15:02:43.2287021+03:00" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="924ab00c-d2f9-49d3-b723-d96467991033" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Output xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <ErrorInfo>
+          <Message>Overall Result: Pass
+------------------------------------------------------------
+'8/9/2011 3:02:14 PM' - Starting execution....
+------------------------------------------------------------
+'8/9/2011 3:02:16 PM' - 'Pass' : 1. Navigate to : 'http://aggeorgiev/kendo/live/grid/events.html'
+'8/9/2011 3:02:17 PM' - 'Pass' : 2. Click 'NigeTableCell'
+'8/9/2011 3:02:17 PM' - 'Pass' : 3. Verify 'TextContent' 'Contains' 'Selected: 1 item(s)' on 'Selected1Div'
+'8/9/2011 3:02:17 PM' - 'Pass' : 4. Wait for '500' msec.
+'8/9/2011 3:02:17 PM' - 'Pass' : 5. Click 'FirstNameLink'
+'8/9/2011 3:02:18 PM' - 'Pass' : 6. Verify 'TextContent' 'Contains' 'Grid data bound' on 'GridDataBoundDiv'
+'8/9/2011 3:02:18 PM' - 'Pass' : 7. Click 'NigeTableCell'
+'8/9/2011 3:02:19 PM' - 'Pass' : 8. Shift + Click 'AndrewTableCell'
+'8/9/2011 3:02:19 PM' - 'NotRun' : 9. Verify 'TextContent' 'Contains' 'Selected: 4 item(s), ' on 'Selected4Div'
+'8/9/2011 3:02:19 PM' - 'Pass' : 10. Wait for '500' msec.
+'8/9/2011 3:02:19 PM' - 'Pass' : 11. Click 'x2Link'
+'8/9/2011 3:02:20 PM' - 'Pass' : 12. Verify 'TextContent' 'Contains' 'Grid data bound' on 'GridDataBoundDiv0'
+------------------------------------------------------------
+'8/9/2011 3:02:20 PM' - Overall Result: Pass
+'8/9/2011 3:02:20 PM' - Duration: [0 min: 4 sec: 199 msec]
+------------------------------------------------------------
+'8/9/2011 3:02:20 PM' - Test completed!
+</Message>
+        </ErrorInfo>
+      </Output>
+      <WebAiiTestResult Type="ArtOfTest.WebAii.Design.Execution.TestResult" Version="2011.1.729.0" xmlns="">
+        <TestId Type="System.String">4ddbacf3-93f2-40ae-9f01-610c591d49b6</TestId>
+        <TestName Type="System.String">Events</TestName>
+        <TestPath Type="System.String">UIWidgets\Grid\Events\Events.tstest</TestPath>
+        <ProjectPath Type="System.String">
+        </ProjectPath>
+        <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+        <AutomationStepResults>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Navigate to : 'http://aggeorgiev/kendo/live/grid/events.html'</StepDescription>
+            <TestId Type="System.String">4ddbacf3-93f2-40ae-9f01-610c591d49b6</TestId>
+            <TestName Type="System.String">Events</TestName>
+            <TestPath Type="System.String">UIWidgets\Grid\Events\Events.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">0</TestStepNumber>
+            <Order Type="System.Int32">1</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Click 'NigeTableCell'</StepDescription>
+            <TestId Type="System.String">4ddbacf3-93f2-40ae-9f01-610c591d49b6</TestId>
+            <TestName Type="System.String">Events</TestName>
+            <TestPath Type="System.String">UIWidgets\Grid\Events\Events.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">1</TestStepNumber>
+            <Order Type="System.Int32">2</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Verify 'TextContent' 'Contains' 'Selected: 1 item(s)' on 'Selected1Div'</StepDescription>
+            <TestId Type="System.String">4ddbacf3-93f2-40ae-9f01-610c591d49b6</TestId>
+            <TestName Type="System.String">Events</TestName>
+            <TestPath Type="System.String">UIWidgets\Grid\Events\Events.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">2</TestStepNumber>
+            <Order Type="System.Int32">3</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Wait for '500' msec.</StepDescription>
+            <TestId Type="System.String">4ddbacf3-93f2-40ae-9f01-610c591d49b6</TestId>
+            <TestName Type="System.String">Events</TestName>
+            <TestPath Type="System.String">UIWidgets\Grid\Events\Events.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">3</TestStepNumber>
+            <Order Type="System.Int32">4</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Click 'FirstNameLink'</StepDescription>
+            <TestId Type="System.String">4ddbacf3-93f2-40ae-9f01-610c591d49b6</TestId>
+            <TestName Type="System.String">Events</TestName>
+            <TestPath Type="System.String">UIWidgets\Grid\Events\Events.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">4</TestStepNumber>
+            <Order Type="System.Int32">5</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Verify 'TextContent' 'Contains' 'Grid data bound' on 'GridDataBoundDiv'</StepDescription>
+            <TestId Type="System.String">4ddbacf3-93f2-40ae-9f01-610c591d49b6</TestId>
+            <TestName Type="System.String">Events</TestName>
+            <TestPath Type="System.String">UIWidgets\Grid\Events\Events.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">5</TestStepNumber>
+            <Order Type="System.Int32">6</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Click 'NigeTableCell'</StepDescription>
+            <TestId Type="System.String">4ddbacf3-93f2-40ae-9f01-610c591d49b6</TestId>
+            <TestName Type="System.String">Events</TestName>
+            <TestPath Type="System.String">UIWidgets\Grid\Events\Events.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">6</TestStepNumber>
+            <Order Type="System.Int32">7</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Shift + Click 'AndrewTableCell'</StepDescription>
+            <TestId Type="System.String">4ddbacf3-93f2-40ae-9f01-610c591d49b6</TestId>
+            <TestName Type="System.String">Events</TestName>
+            <TestPath Type="System.String">UIWidgets\Grid\Events\Events.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">7</TestStepNumber>
+            <Order Type="System.Int32">8</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">NotRun</ResultType>
+            <StepDescription Type="System.String">Verify 'TextContent' 'Contains' 'Selected: 4 item(s), ' on 'Selected4Div'</StepDescription>
+            <TestId Type="System.String">4ddbacf3-93f2-40ae-9f01-610c591d49b6</TestId>
+            <TestName Type="System.String">Events</TestName>
+            <TestPath Type="System.String">UIWidgets\Grid\Events\Events.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">8</TestStepNumber>
+            <Order Type="System.Int32">9</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Wait for '500' msec.</StepDescription>
+            <TestId Type="System.String">4ddbacf3-93f2-40ae-9f01-610c591d49b6</TestId>
+            <TestName Type="System.String">Events</TestName>
+            <TestPath Type="System.String">UIWidgets\Grid\Events\Events.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">9</TestStepNumber>
+            <Order Type="System.Int32">10</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Click 'x2Link'</StepDescription>
+            <TestId Type="System.String">4ddbacf3-93f2-40ae-9f01-610c591d49b6</TestId>
+            <TestName Type="System.String">Events</TestName>
+            <TestPath Type="System.String">UIWidgets\Grid\Events\Events.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">10</TestStepNumber>
+            <Order Type="System.Int32">11</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Verify 'TextContent' 'Contains' 'Grid data bound' on 'GridDataBoundDiv0'</StepDescription>
+            <TestId Type="System.String">4ddbacf3-93f2-40ae-9f01-610c591d49b6</TestId>
+            <TestName Type="System.String">Events</TestName>
+            <TestPath Type="System.String">UIWidgets\Grid\Events\Events.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">11</TestStepNumber>
+            <Order Type="System.Int32">12</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+        </AutomationStepResults>
+        <NotRunStepDescriptions />
+        <PerStepMessages Type="System.String">Overall Result: Pass
+------------------------------------------------------------
+'8/9/2011 3:02:14 PM' - Starting execution....
+------------------------------------------------------------
+'8/9/2011 3:02:16 PM' - 'Pass' : 1. Navigate to : 'http://aggeorgiev/kendo/live/grid/events.html'
+'8/9/2011 3:02:17 PM' - 'Pass' : 2. Click 'NigeTableCell'
+'8/9/2011 3:02:17 PM' - 'Pass' : 3. Verify 'TextContent' 'Contains' 'Selected: 1 item(s)' on 'Selected1Div'
+'8/9/2011 3:02:17 PM' - 'Pass' : 4. Wait for '500' msec.
+'8/9/2011 3:02:17 PM' - 'Pass' : 5. Click 'FirstNameLink'
+'8/9/2011 3:02:18 PM' - 'Pass' : 6. Verify 'TextContent' 'Contains' 'Grid data bound' on 'GridDataBoundDiv'
+'8/9/2011 3:02:18 PM' - 'Pass' : 7. Click 'NigeTableCell'
+'8/9/2011 3:02:19 PM' - 'Pass' : 8. Shift + Click 'AndrewTableCell'
+'8/9/2011 3:02:19 PM' - 'NotRun' : 9. Verify 'TextContent' 'Contains' 'Selected: 4 item(s), ' on 'Selected4Div'
+'8/9/2011 3:02:19 PM' - 'Pass' : 10. Wait for '500' msec.
+'8/9/2011 3:02:19 PM' - 'Pass' : 11. Click 'x2Link'
+'8/9/2011 3:02:20 PM' - 'Pass' : 12. Verify 'TextContent' 'Contains' 'Grid data bound' on 'GridDataBoundDiv0'
+------------------------------------------------------------
+'8/9/2011 3:02:20 PM' - Overall Result: Pass
+'8/9/2011 3:02:20 PM' - Duration: [0 min: 4 sec: 199 msec]
+------------------------------------------------------------
+'8/9/2011 3:02:20 PM' - Test completed!
+</PerStepMessages>
+        <TotalNumberOfPassedSteps Type="System.Int32">11</TotalNumberOfPassedSteps>
+        <ExecutingTestStepCount Type="System.Int32">11</ExecutingTestStepCount>
+        <TotalNumberOfNotRunSteps Type="System.Int32">1</TotalNumberOfNotRunSteps>
+        <IsDataDrivenResult Type="System.Boolean">False</IsDataDrivenResult>
+        <SeparatorLineCharCount Type="System.Int32">60</SeparatorLineCharCount>
+        <ExecutionType Type="ArtOfTest.Common.Design.ExecutionType">QuickExecution</ExecutionType>
+        <EndTime Type="System.DateTime">2011-08-09 12:02:20Z</EndTime>
+        <StarTime Type="System.DateTime">2011-08-09 12:02:15Z</StarTime>
+        <DataIterationResults />
+      </WebAiiTestResult>
+    </WebAiiTestResult>
+    <WebAiiTestResult executionId="c0785c4d-ef00-408e-9746-91946390f964" testId="f1b99097-ab32-4274-a4a5-8d03fb4b4c6f" testName="ChangeValueInput" computerName="AGGEORGIEV" duration="00:00:04.9049472" startTime="2011-08-09T15:02:43.2287021+03:00" endTime="2011-08-09T15:02:48.1408723+03:00" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c0785c4d-ef00-408e-9746-91946390f964" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Output xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <ErrorInfo>
+          <Message>Overall Result: Pass
+------------------------------------------------------------
+'8/9/2011 3:02:43 PM' - Starting execution....
+------------------------------------------------------------
+'8/9/2011 3:02:45 PM' - 'Pass' : 1. Navigate to : '/combobox/index.html'
+'8/9/2011 3:02:45 PM' - 'Pass' : 2. Click 'SelectSpan'
+'8/9/2011 3:02:45 PM' - 'Pass' : 3. Click 'Item2ListItem'
+'8/9/2011 3:02:45 PM' - 'Pass' : 4. Verify textbox 'Text' content 'Contains' 'Item 2'.
+------------------------------------------------------------
+'8/9/2011 3:02:45 PM' - Overall Result: Pass
+'8/9/2011 3:02:45 PM' - Duration: [0 min: 1 sec: 199 msec]
+------------------------------------------------------------
+'8/9/2011 3:02:46 PM' - Test completed!
+</Message>
+        </ErrorInfo>
+      </Output>
+      <WebAiiTestResult Type="ArtOfTest.WebAii.Design.Execution.TestResult" Version="2011.1.729.0" xmlns="">
+        <TestId Type="System.String">f1b99097-ab32-4274-a4a5-8d03fb4b4c6f</TestId>
+        <TestName Type="System.String">ChangeValueInput</TestName>
+        <TestPath Type="System.String">UIWidgets\ComboBox\BasicUsage\ChangeValueInput.tstest</TestPath>
+        <ProjectPath Type="System.String">
+        </ProjectPath>
+        <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+        <AutomationStepResults>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Navigate to : '/combobox/index.html'</StepDescription>
+            <TestId Type="System.String">f1b99097-ab32-4274-a4a5-8d03fb4b4c6f</TestId>
+            <TestName Type="System.String">ChangeValueInput</TestName>
+            <TestPath Type="System.String">UIWidgets\ComboBox\BasicUsage\ChangeValueInput.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">0</TestStepNumber>
+            <Order Type="System.Int32">1</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Click 'SelectSpan'</StepDescription>
+            <TestId Type="System.String">f1b99097-ab32-4274-a4a5-8d03fb4b4c6f</TestId>
+            <TestName Type="System.String">ChangeValueInput</TestName>
+            <TestPath Type="System.String">UIWidgets\ComboBox\BasicUsage\ChangeValueInput.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">1</TestStepNumber>
+            <Order Type="System.Int32">2</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Click 'Item2ListItem'</StepDescription>
+            <TestId Type="System.String">f1b99097-ab32-4274-a4a5-8d03fb4b4c6f</TestId>
+            <TestName Type="System.String">ChangeValueInput</TestName>
+            <TestPath Type="System.String">UIWidgets\ComboBox\BasicUsage\ChangeValueInput.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">2</TestStepNumber>
+            <Order Type="System.Int32">3</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Verify textbox 'Text' content 'Contains' 'Item 2'.</StepDescription>
+            <TestId Type="System.String">f1b99097-ab32-4274-a4a5-8d03fb4b4c6f</TestId>
+            <TestName Type="System.String">ChangeValueInput</TestName>
+            <TestPath Type="System.String">UIWidgets\ComboBox\BasicUsage\ChangeValueInput.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">3</TestStepNumber>
+            <Order Type="System.Int32">4</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+        </AutomationStepResults>
+        <NotRunStepDescriptions />
+        <PerStepMessages Type="System.String">Overall Result: Pass
+------------------------------------------------------------
+'8/9/2011 3:02:43 PM' - Starting execution....
+------------------------------------------------------------
+'8/9/2011 3:02:45 PM' - 'Pass' : 1. Navigate to : '/combobox/index.html'
+'8/9/2011 3:02:45 PM' - 'Pass' : 2. Click 'SelectSpan'
+'8/9/2011 3:02:45 PM' - 'Pass' : 3. Click 'Item2ListItem'
+'8/9/2011 3:02:45 PM' - 'Pass' : 4. Verify textbox 'Text' content 'Contains' 'Item 2'.
+------------------------------------------------------------
+'8/9/2011 3:02:45 PM' - Overall Result: Pass
+'8/9/2011 3:02:45 PM' - Duration: [0 min: 1 sec: 199 msec]
+------------------------------------------------------------
+'8/9/2011 3:02:46 PM' - Test completed!
+</PerStepMessages>
+        <TotalNumberOfPassedSteps Type="System.Int32">4</TotalNumberOfPassedSteps>
+        <ExecutingTestStepCount Type="System.Int32">4</ExecutingTestStepCount>
+        <TotalNumberOfNotRunSteps Type="System.Int32">0</TotalNumberOfNotRunSteps>
+        <IsDataDrivenResult Type="System.Boolean">False</IsDataDrivenResult>
+        <SeparatorLineCharCount Type="System.Int32">60</SeparatorLineCharCount>
+        <ExecutionType Type="ArtOfTest.Common.Design.ExecutionType">QuickExecution</ExecutionType>
+        <EndTime Type="System.DateTime">2011-08-09 12:02:45Z</EndTime>
+        <StarTime Type="System.DateTime">2011-08-09 12:02:44Z</StarTime>
+        <DataIterationResults />
+      </WebAiiTestResult>
+    </WebAiiTestResult>
+  </Results>
+</TestRun>

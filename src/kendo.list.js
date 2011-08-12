@@ -177,6 +177,69 @@
             });
         },
 
+        _index: function(value) {
+            var that = this,
+                idx,
+                length,
+                data = that.dataSource.view(),
+                valueFromData;
+
+            for (idx = 0, length = data.length; idx < length; idx++) {
+                valueFromData = that._value(data[idx]);
+
+                if (valueFromData === undefined) {
+                    valueFromData = that._text(data[idx]);
+                }
+
+                if (valueFromData == value) {
+                    return idx;
+                }
+            }
+
+            return -1;
+        },
+
+        _get: function(li) {
+            var that = this,
+                idx,
+                data = that.dataSource.view(),
+                length;
+
+            if (typeof li === "function") {
+                for (idx = 0, length = data.length; idx < length; idx++) {
+                    if (li(data[idx])) {
+                        li = idx;
+                        break;
+                    }
+                }
+            }
+
+            idx = -1;
+
+            if (typeof li === "number") {
+                if (li < 0) {
+                    return $();
+                }
+
+                li = $(that.ul[0].childNodes[li]);
+            }
+
+            if (li && li.nodeType) {
+                li = $(li);
+            }
+
+            return li;
+        },
+
+        _toggleHover: function(e) {
+            $(e.currentTarget).toggleClass(HOVER, e.type === "mouseenter");
+        },
+
+        _toggle: function(open) {
+            open = open !== undefined? open : !this.popup.visible();
+
+            this[open ? "open" : "close"]();
+        },
         _scroll: function (item) {
 
             if (!item) return;

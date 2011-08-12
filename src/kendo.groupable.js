@@ -1,4 +1,4 @@
-(function ($, window) {
+(function ($, undefined) {
     var kendo = window.kendo,
         Component = kendo.ui.Component,
         proxy = $.proxy,
@@ -253,4 +253,4 @@
 
     kendo.ui.plugin("Groupable", Groupable);
 
-})(jQuery, window);
+})(jQuery);

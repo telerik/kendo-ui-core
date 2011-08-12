@@ -9,4 +9,4 @@
     };
 
     mobile.List = List;
-})(jQuery || zepto);
+})(jQuery);
