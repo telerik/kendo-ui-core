@@ -1028,9 +1028,7 @@
             serverAggregates: false,
             autoSync: false,
             sendAllFields: true,
-            batch: {
-                mode: MULTIPLE
-            }
+            batch: MULTIPLE
         },
 
         model: function(id) {
@@ -1104,7 +1102,7 @@
             if (batch === false) {
                 mode = MULTIPLE;
             }
-            else if ((batch.mode || MULTIPLE) === MULTIPLE) {
+            else if ((batch || MULTIPLE) === MULTIPLE) {
                 mode = SINGLE;
             }
 

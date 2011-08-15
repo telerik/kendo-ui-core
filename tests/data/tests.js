@@ -44,10 +44,6 @@ tests.push(
         title: "query"
     },
     {
-        page: "data/localstorage.html",
-        title: "local storage cache"
-    },
-    {
         page: "data/remotetransport.html",
         title: "remote transport"
     },
