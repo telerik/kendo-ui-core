@@ -1090,7 +1090,7 @@
                 destroyed,
                 batch = that.options.batch,
                 mode,
-                transport = that.transport
+                transport = that.transport,
                 promises = that._promises = [];
 
             updated = that._updatedModels();
@@ -1379,7 +1379,6 @@
          */
         query: function(options) {
             var that = this,
-                options = options,
                 result,
                 remote = that.options.serverSorting || that.options.serverPaging || that.options.serverFiltering || that.options.serverGrouping || that.options.serverAggregates;
 
@@ -1795,18 +1794,20 @@
 
     function inferSelect(select, fields) {
         var options = $(select)[0].children,
-            optionIndex,
-            optionCount,
+            idx,
+            length,
             data = [],
             record,
+            firstField = fields[0],
+            secondField = fields[1],
             option;
 
-        for (optionIndex = 0, optionCount = options.length; optionIndex < optionCount; optionIndex++) {
+        for (idx = 0, length = options.length; idx < length; idx++) {
             record = {};
-            option = options[optionIndex];
+            option = options[idx];
 
-            record[fields[0].field] = option.text;
-            record[fields[1].field] = option.value;
+            record[firstField.field] = option.text;
+            record[secondField.field] = option.value;
 
             data.push(record);
         }
@@ -1817,8 +1818,8 @@
     function inferTable(table, fields) {
         var tbody = $(table)[0].tBodies[0],
         rows = tbody ? tbody.rows : [],
-        rowIndex,
-        rowCount,
+        idx,
+        length,
         fieldIndex,
         fieldCount = fields.length,
         data = [],
@@ -1827,10 +1828,10 @@
         cell,
         empty;
 
-        for (rowIndex = 0, rowCount = rows.length; rowIndex < rowCount; rowIndex++) {
+        for (idx = 0, length = rows.length; idx < length; idx++) {
             record = {};
             empty = true;
-            cells = rows[rowIndex].cells;
+            cells = rows[idx].cells;
 
             for (fieldIndex = 0; fieldIndex < fieldCount; fieldIndex++) {
                 cell = cells[fieldIndex];
