@@ -1342,10 +1342,11 @@
          * @returns {Array} Array of items
          */
         data: function(value) {
+            var that = this;
             if (value !== undefined) {
-                this._data = value;
+                that._process(value);
             } else {
-                return this._data;
+                return that._data;
             }
         },
 
