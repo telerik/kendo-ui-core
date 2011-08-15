@@ -595,7 +595,7 @@
                     data: [ {foo: 100, bar: "baz"} , {foo: 100, bar: "bar"} , {foo: 1, bar: "baz"} ]
                 });
 
-                dataSource.query( {aggregates:[{ field: "foo", aggregate: "sum" }, { field: "bar", aggregate: "count" }]} );
+                dataSource.query( {aggregate:[{ field: "foo", aggregate: "sum" }, { field: "bar", aggregate: "count" }]} );
                 var result = dataSource.aggregates();
                 equal(result.foo.sum, 201);
                 equal(result.bar.count, 3);
@@ -606,7 +606,7 @@
                     data: [{age: 1}, {age: 2}]
                 });
                 dataSource.read();
-                dataSource.query( {aggregates:[{ field: "foo", aggregate: "sum" }]} );
+                dataSource.query( {aggregate:[{ field: "foo", aggregate: "sum" }]} );
                 dataSource.query({});
 
                 equal(dataSource.aggregate(), undefined);
@@ -632,7 +632,7 @@
                     responseText: '[{"age": 1}, {"age": 2}]'
                 });
 
-                dataSource.query( {aggregates:[{ field: "foo", aggregate: "sum" }]} );
+                dataSource.query( {aggregate:[{ field: "foo", aggregate: "sum" }]} );
                 stop(1000);
             });
 
@@ -720,6 +720,48 @@
                 });
                 dataSource.read();
                 ok(called);
+            });
+
+            test("fetch persists dataSource options", function() {
+                var dataSource = new DataSource({
+                    serverPaging: true,
+                    serverSorting: true,
+                    serverGrouping: true,
+                    serverFiltering: true,
+                    serverAggregates: true,
+                    data: [{foo: 1, bar: "1"}],
+                    page: 10,
+                    pageSize: 5,
+                    sort: { field: "foo", dir: "asc" },
+                    filter: { field: "bar", operator: "eq", value: "1" },
+                    group: { field: "foo" },
+                    aggregate: { field: "bar", aggregate: "count" }
+                });
+
+                dataSource.fetch();
+                equal(dataSource.page(), 10);
+                equal(dataSource.pageSize(), 5);
+                equal(dataSource.sort()[0].field, "foo");
+                equal(dataSource.sort()[0].dir, "asc");
+                equal(dataSource.filter()[0].field, "bar");
+                equal(dataSource.filter()[0].operator, "eq");
+                equal(dataSource.filter()[0].value, "1");
+                equal(dataSource.group()[0].field, "foo");
+                equal(dataSource.aggregate()[0].field, "bar");
+            });
+
+            test("fetch triggers change event", function() {
+                var view,
+                    dataSource = new DataSource({
+                        data: [{foo: 1, bar: "1"}],
+                        change: function() {
+                            view = dataSource.view();
+                        }
+                    });
+
+                dataSource.fetch();
+                equal(view.length, 1);
+                equal(view[0].foo, "1");
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

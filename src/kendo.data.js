@@ -624,7 +624,7 @@
     function calculateAggregates(data, options) {
         var query = new Query(data),
             options = options || {},
-            aggregates = options.aggregates,
+            aggregates = options.aggregate,
             filter = options.filter;
 
         if(filter) {
@@ -847,7 +847,7 @@
          * // groups data by orderId and customerName fields
          * group: [ { field: "orderId", dir: "desc" }, { field: "customerName", dir: "asc" } ]
          *
-         * @option {Array|Object} [aggregates] <undefined> Sets fields on which initial aggregates should be calculated
+         * @option {Array|Object} [aggregate] <undefined> Sets fields on which initial aggregates should be calculated
          * _example
          * // calculates total sum of unitPrice field's values.
          * [{ field: "unitPrice", aggregate: "sum" }]
@@ -946,7 +946,7 @@
                 _sort: expandSort(options.sort),
                 _filter: expandFilter(options.filter),
                 _group: expandGroup(options.group),
-                _aggregates: options.aggregates
+                _aggregate: options.aggregate
             });
 
             Observable.fn.init.call(that);
@@ -1201,7 +1201,7 @@
                     sort: that._sort,
                     filter: that._filter,
                     group: that._group,
-                    aggregates: that._aggregates
+                    aggregate: that._aggregate
                 }, additionalData);
 
             that._queueRequest(options, function() {
@@ -1255,7 +1255,7 @@
 
             that._total = that.reader.total(data);
 
-            if (that._aggregates && that.options.serverAggregates) {
+            if (that._aggregate && that.options.serverAggregates) {
                 that._aggregateResult = that.reader.aggregates(data);
             }
 
@@ -1309,7 +1309,7 @@
             }
 
             if (that.options.serverAggregates !== true) {
-                options.aggregates = that._aggregates;
+                options.aggregate = that._aggregate;
                 that._aggregateResult = calculateAggregates(data, options);
             }
 
@@ -1362,6 +1362,7 @@
         view: function() {
             return this._view;
         },
+
         /**
          * Executes a query over the data. Available operations are paging, sorting, filtering, grouping.
          * If data is not available or remote operations are enabled data is requested through the transport,
@@ -1389,7 +1390,7 @@
                 that._sort = options.sort;
                 that._filter = options.filter;
                 that._group = options.group;
-                that._aggregates = options.aggregates;
+                that._aggregate = options.aggregate;
                 that._skip = options.skip;
                 that._take = options.take;
 
@@ -1414,8 +1415,8 @@
                 if (options.group) {
                     that._group = options.group = expandGroup(options.group);
                 }
-                if (options.aggregates) {
-                    that._aggregates = options.aggregates = expandAggregates(options.aggregates);
+                if (options.aggregate) {
+                    that._aggregate = options.aggregate = expandAggregates(options.aggregate);
                 }
             }
 
@@ -1436,6 +1437,28 @@
         },
 
         /**
+         * Fetches data using the current filter/sort/group/paging information.
+         * If data is not available or remote operations are enabled data is requested through the transport,
+         * otherwise operations are executed over the available data.
+         */
+        fetch: function() {
+            this._query();
+        },
+
+        _query: function(options) {
+            var that = this;
+
+            that.query(extend({}, {
+                page: that.page(),
+                pageSize: that.pageSize(),
+                sort: that.sort(),
+                filter: that.filter(),
+                group: that.group(),
+                aggregate: that.aggregate()
+            }, options));
+        },
+
+        /**
          * Get current page index or request a page with specified index.
          * @param {Number} [val] <undefined> The index of the page to be retrieved
          * @example
@@ -1448,12 +1471,12 @@
 
             if(val !== undefined) {
                 val = math.max(math.min(math.max(val, 1), that.totalPages()), 1);
-                that.query({ page: val, pageSize: that.pageSize(), sort: that.sort(), filter: that.filter(), group: that.group(), aggregates: that.aggregate()});
+                that._query({ page: val });
                 return;
             }
             skip = that.skip();
 
-            return skip !== undefined ? math.round((skip || 0) / (that._take || 1)) + 1 : undefined;
+            return skip !== undefined ? math.round((skip || 0) / (that.take() || 1)) + 1 : undefined;
         },
 
         /**
@@ -1467,7 +1490,7 @@
             var that = this;
 
             if(val !== undefined) {
-                that.query({ page: that.page(), pageSize: val, sort: that.sort(), filter: that.filter(), group: that.group(), aggregates: that.aggregate()});
+                that._query({ pageSize: val });
                 return;
             }
 
@@ -1489,11 +1512,11 @@
             var that = this;
 
             if(val !== undefined) {
-                that.query({ page: that.page(), pageSize: that.pageSize(), sort: val, filter: that.filter(), group: that.group(), aggregates: that.aggregate()});
+                that._query({ sort: val });
                 return;
             }
 
-            return this._sort;
+            return that._sort;
         },
 
         /**
@@ -1525,7 +1548,7 @@
             var that = this;
 
             if(val !== undefined) {
-                that.query({ page: that.page(), pageSize: that.pageSize(), sort: that.sort(), filter: val, group: that.group(), aggregates: that.aggregate() });
+                that._query({ filter: val });
                 return;
             }
 
@@ -1543,7 +1566,7 @@
             var that = this;
 
             if(val !== undefined) {
-                that.query({ page: that.page(), pageSize: that.pageSize(), sort: that.sort(), filter: that.filter(), group: val, aggregates: that.aggregate()  });
+                that._query({ group: val });
                 return;
             }
 
@@ -1568,11 +1591,11 @@
             var that = this;
 
             if(val !== undefined) {
-                that.query({ page: that.page(), pageSize: that.pageSize(), sort: that.sort(), filter: val, group: that.group(), aggregates: val });
+                that._query({ aggregate: val });
                 return;
             }
 
-            return that._aggregates;
+            return that._aggregate;
         },
 
         /**
@@ -1716,7 +1739,7 @@
                     sort: that._sort,
                     filter: that._filter,
                     group: that._group,
-                    aggregates: that._aggregates
+                    aggregate: that._aggregate
                 };
 
             if (!that._rangeExists(skip, size)) {

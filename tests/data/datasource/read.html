@@ -293,10 +293,10 @@
             test("read aggregates expression are passed to the transport", function() {
                  var aggregates, dataSource = new DataSource({
                     data: [{ id:1, bar: "foo" }, { id: 2, bar: "baz" }, { id: 3, bar: "baz"} ],
-                    aggregates: { field: "bar", aggregates: ["count"] },
+                    aggregate: { field: "bar", aggregates: ["count"] },
                     transport: {
                         read: function(options) {
-                            aggregates = options.data.aggregates;
+                            aggregates = options.data.aggregate;
                         }
                     },
                     serverGrouping: true
