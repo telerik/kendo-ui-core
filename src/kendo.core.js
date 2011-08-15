@@ -400,6 +400,29 @@
         zero = "0";
 
     kendo.culture = {
+        numberFormat: {
+            pattern: ["-n"],
+            decimals: 2,
+            ",": ",",
+            ".": ".",
+            groupSize: [3],
+            percent: {
+                pattern: ["-n %", "n %"],
+                decimals: 2,
+                ",": ",",
+                ".": ".",
+                groupSize: [3],
+                symbol: "%"
+            },
+            currency: {
+                pattern: ["($n)", "$n"],
+                decimals: 2,
+                ",": ",",
+                ".": ".",
+                groupSize: [3],
+                symbol: "$"
+            }
+        },
         calendars: {
             standard: {
                 days: {
@@ -431,7 +454,7 @@
                 "/": "/",
                 ":": ":"
             }
-        },
+        }
     };
 
     kendo.culture.calendar = kendo.culture.calendars.standard;
@@ -501,13 +524,14 @@
     }
 
     //number formatting
-
-
     function formatNumber(number, format) {
-        var groupSize = 3,
-            groupSeparator = ",",
-            decimal = ".",
-            precision = 2,
+        var numberFormat = kendo.culture.numberFormat,
+            groupSize = numberFormat.groupSize[0],
+            groupSeparator = numberFormat[","],
+            decimal = numberFormat["."],
+            precision = numberFormat.decimals,
+            pattern = numberFormat.pattern[0],
+            symbol = numberFormat.symbol,
             digit,
             formatAndPrecision,
             negative = number < 0,
@@ -519,10 +543,7 @@
             value = "",
             idx,
             length,
-            pattern,
             ch,
-            symbol = "$",
-            percent = "%",
             decimalIndex,
             sharpIndex,
             zeroIndex,
@@ -543,6 +564,16 @@
         //standard formatting
         if (formatAndPrecision) {
             format = formatAndPrecision[1].toLowerCase();
+
+            if (format === "c" || format === "p") {
+                numberFormat = format === "c" ? numberFormat.currency : numberFormat.percent;
+                groupSize = numberFormat.groupSize[0];
+                groupSeparator = numberFormat[","];
+                decimal = numberFormat["."];
+                precision = numberFormat.decimals;
+                symbol = numberFormat.symbol;
+                pattern = numberFormat.pattern[negative ? 0 : 1];
+            }
 
             if (formatAndPrecision[2]) {
                 precision = +formatAndPrecision[2];
@@ -587,14 +618,6 @@
                 return value;
             }
 
-            if (format === "n") {
-                pattern = patterns.numeric[1];
-            } else if (format === "c") {
-                pattern = patterns.currency[negative ? 1 : 0];
-            } else if (format === "p") {
-                pattern = patterns.percent[negative ? 1 : 0];
-            }
-
             number = "";
 
             for (idx = 0, length = pattern.length; idx < length; idx++) {
@@ -602,10 +625,8 @@
 
                 if (ch === "n") {
                     number += value;
-                } else if (ch === "$") {
+                } else if (ch === "$" || ch === "%") {
                     number += symbol;
-                } else if (ch === "%") {
-                    number += percent;
                 } else {
                     number += ch;
                 }
@@ -720,10 +741,8 @@
                         }
                     }
 
-                    if (ch === "$") {
+                    if (ch === "$" || ch === "%") {
                         number += symbol;
-                    } else if (ch === "%") {
-                        number += percent;
                     } else if (ch === "0") {
                         number += ch;
                         replacement = ch;
