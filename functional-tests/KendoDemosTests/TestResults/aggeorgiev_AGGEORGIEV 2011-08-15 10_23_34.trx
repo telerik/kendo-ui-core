@@ -1,0 +1,797 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="b3b159d8-7b20-40be-ac47-e61194331142" name="aggeorgiev@AGGEORGIEV 2011-08-15 10:23:34" runUser="TELERIK\aggeorgiev" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestSettings name="Default Test Settings" id="7b159eb8-c642-4893-98b9-4924c828f5fc">
+    <Execution>
+      <TestTypeSpecific />
+      <AgentRule name="Execution Agents">
+      </AgentRule>
+    </Execution>
+    <Deployment runDeploymentRoot="aggeorgiev_AGGEORGIEV 2011-08-15 10_23_34" />
+  </TestSettings>
+  <Times creation="2011-08-15T10:23:34.3791257+03:00" queuing="2011-08-15T10:23:35.4832361+03:00" start="2011-08-15T10:23:36.0392917+03:00" finish="2011-08-15T10:23:59.5566432+03:00" />
+  <ResultSummary outcome="Failed">
+    <Counters total="51" executed="3" error="0" failed="2" timeout="0" aborted="1" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="48" disconnected="0" warning="0" passed="0" completed="0" inProgress="0" pending="0" />
+    <RunInfos>
+      <RunInfo computerName="AGGEORGIEV" outcome="Warning" timestamp="2011-08-15T10:23:35.2202098+03:00">
+        <Text>Warning: conflict during test run deployment: deployment item 'c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\panelbar\events\events.tstest' specified by the test assembly 'c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\panelbar\events\events.tstest' cannot be deployed to 'events.tstest' because otherwise the file 'c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\panelbar\events\events.tstest' would overwrite deployment item 'c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\menu\events\events.tstest' specified by the test assembly 'c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\menu\events\events.tstest'.</Text>
+      </RunInfo>
+      <RunInfo computerName="AGGEORGIEV" outcome="Warning" timestamp="2011-08-15T10:23:35.2262104+03:00">
+        <Text>Warning: conflict during test run deployment: deployment item 'c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\treeview\api\remove.tstest' specified by the test assembly 'c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\treeview\api\remove.tstest' cannot be deployed to 'remove.tstest' because otherwise the file 'c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\treeview\api\remove.tstest' would overwrite deployment item 'c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\panelbar\api\remove.tstest' specified by the test assembly 'c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\panelbar\api\remove.tstest'.</Text>
+      </RunInfo>
+      <RunInfo computerName="AGGEORGIEV" outcome="Warning" timestamp="2011-08-15T10:23:35.2402118+03:00">
+        <Text>Warning: conflict during test run deployment: deployment item 'c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\dropdown\api\disableenable.tstest' specified by the test assembly 'c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\dropdown\api\disableenable.tstest' cannot be deployed to 'disableenable.tstest' because otherwise the file 'c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\dropdown\api\disableenable.tstest' would overwrite deployment item 'c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\menu\api\disableenable.tstest' specified by the test assembly 'c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\menu\api\disableenable.tstest'.</Text>
+      </RunInfo>
+      <RunInfo computerName="AGGEORGIEV" outcome="Warning" timestamp="2011-08-15T10:23:35.2762154+03:00">
+        <Text>Warning: conflict during test run deployment: deployment item 'c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\menu\api\remove.tstest' specified by the test assembly 'c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\menu\api\remove.tstest' cannot be deployed to 'remove.tstest' because otherwise the file 'c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\menu\api\remove.tstest' would overwrite deployment item 'c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\panelbar\api\remove.tstest' specified by the test assembly 'c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\panelbar\api\remove.tstest'.</Text>
+      </RunInfo>
+      <RunInfo computerName="AGGEORGIEV" outcome="Warning" timestamp="2011-08-15T10:23:35.2792157+03:00">
+        <Text>Warning: conflict during test run deployment: deployment item 'c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\grid\events\events.tstest' specified by the test assembly 'c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\grid\events\events.tstest' cannot be deployed to 'events.tstest' because otherwise the file 'c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\grid\events\events.tstest' would overwrite deployment item 'c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\menu\events\events.tstest' specified by the test assembly 'c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\menu\events\events.tstest'.</Text>
+      </RunInfo>
+      <RunInfo computerName="AGGEORGIEV" outcome="Warning" timestamp="2011-08-15T10:23:35.2872165+03:00">
+        <Text>Warning: conflict during test run deployment: deployment item 'c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\menu\api\append.tstest' specified by the test assembly 'c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\menu\api\append.tstest' cannot be deployed to 'append.tstest' because otherwise the file 'c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\menu\api\append.tstest' would overwrite deployment item 'c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\tabstrip\api\append.tstest' specified by the test assembly 'c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\tabstrip\api\append.tstest'.</Text>
+      </RunInfo>
+      <RunInfo computerName="AGGEORGIEV" outcome="Warning" timestamp="2011-08-15T10:23:35.2872165+03:00">
+        <Text>Warning: conflict during test run deployment: deployment item 'c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\panelbar\api\append.tstest' specified by the test assembly 'c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\panelbar\api\append.tstest' cannot be deployed to 'append.tstest' because otherwise the file 'c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\panelbar\api\append.tstest' would overwrite deployment item 'c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\tabstrip\api\append.tstest' specified by the test assembly 'c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\tabstrip\api\append.tstest'.</Text>
+      </RunInfo>
+      <RunInfo computerName="AGGEORGIEV" outcome="Warning" timestamp="2011-08-15T10:23:35.2902168+03:00">
+        <Text>Warning: conflict during test run deployment: deployment item 'c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\treeview\api\enabledisable.tstest' specified by the test assembly 'c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\treeview\api\enabledisable.tstest' cannot be deployed to 'enabledisable.tstest' because otherwise the file 'c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\treeview\api\enabledisable.tstest' would overwrite deployment item 'c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\tabstrip\api\enabledisable.tstest' specified by the test assembly 'c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\tabstrip\api\enabledisable.tstest'.</Text>
+      </RunInfo>
+      <RunInfo computerName="AGGEORGIEV" outcome="Warning" timestamp="2011-08-15T10:23:35.2982176+03:00">
+        <Text>Warning: conflict during test run deployment: deployment item 'c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\panelbar\api\enabledisable.tstest' specified by the test assembly 'c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\panelbar\api\enabledisable.tstest' cannot be deployed to 'enabledisable.tstest' because otherwise the file 'c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\panelbar\api\enabledisable.tstest' would overwrite deployment item 'c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\tabstrip\api\enabledisable.tstest' specified by the test assembly 'c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\tabstrip\api\enabledisable.tstest'.</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+  <TestDefinitions>
+    <WebAiiTest name="SelectRowSingle" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\grid\selection\selectrowsingle.tstest" priority="0" id="891ffcdc-fd2e-4e7e-8a8c-b0d9744bb0b9" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="811e1281-e9f2-414d-ab59-1326627628c5" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="CloseOpen" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\window\api\closeopen.tstest" priority="0" id="3bc78c73-21b4-4b22-bcb2-e2745b04c3b8" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="259d288a-a8d8-44ca-8c1b-d474af1b9053" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="SelectMultipleRows" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\grid\selection\selectmultiplerows.tstest" priority="0" id="fd75ef59-b0f9-4557-af4a-a84cb018806e" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="9ccbd555-0de3-466e-a941-b7b0b0da9b78" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="Remove" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\panelbar\api\remove.tstest" priority="0" id="2d9f40dc-26be-4455-abf9-0b582a7493bb" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+        <DeploymentItem filename="..\..\..\UIWidgets\PanelBar\API\Select.tstest" />
+      </DeploymentItems>
+      <Execution id="13451347-174c-4cda-9986-d42dea52c670" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="ChangeValueDoubleSlider" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\slider\events\changevaluedoubleslider.tstest" priority="0" id="f15a138b-8c74-4164-851e-6e4e91117e03" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="17a2abf0-5683-4173-9f6e-f9176883c0f0" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="DisableEnable" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\menu\api\disableenable.tstest" priority="0" id="d6707a8e-ed75-4a21-809f-369a5e86aeaa" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="92f02c7d-feb9-4e34-ba79-ac6bf5dac68b" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="Events" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\menu\events\events.tstest" priority="0" id="ceb842cb-c25f-4f72-843e-79b1f945b8b6" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="fc08704d-b6c9-4ff1-8113-312dfe3d0bbc" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="NotClosedOnClick" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\menu\basicusage\notclosedonclick.tstest" priority="0" id="14f36260-63c4-4038-8b02-22537d776770" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="31c693d5-ba18-42ee-b1a2-96c70c415f00" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="Events" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\panelbar\events\events.tstest" priority="0" id="be767e7c-01b6-46eb-a16e-c8922f986bb6" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="6794bef5-77ad-43a9-a211-b9e5870251cf" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="CollapseAllNodes" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\treeview\api\collapseallnodes.tstest" priority="0" id="d03caf07-497e-468b-9ee5-a5f9f8489a7b" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="b450aab3-a63a-4d36-9b86-17f44e4dc0e6" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="Select" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\panelbar\api\select.tstest" priority="0" id="17d08086-8751-4b35-a039-a62f09939bb7" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="4070cd74-6946-4e23-b55b-41d3b95bb8a5" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="Remove" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\treeview\api\remove.tstest" priority="0" id="1bab8790-7383-48c4-abce-8302907f3b32" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="cd0dbaaf-7590-4bbd-938c-5df9262e6f62" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="OpenClose" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\menu\basicusage\openclose.tstest" priority="0" id="91020c93-1d6d-4fb3-9dae-01e50187ada4" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="443fb775-f3c6-4d45-833f-dfa9388ea70f" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="SingleSliderSetValue" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\slider\api\singleslidersetvalue.tstest" priority="0" id="4e70e35f-387a-4a1b-b866-06a13be297e9" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="f9cd2367-9e3c-4f7e-b5d8-f6e539f09867" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="RemoveTab" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\tabstrip\api\removetab.tstest" priority="0" id="79aee780-5b91-41b2-8e67-a66d1dd0cee2" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="4033f109-a15d-4cbb-9b40-1c20ee860752" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="SingleSliderEnableDisable" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\slider\api\singlesliderenabledisable.tstest" priority="0" id="ffffb368-6c05-4676-a961-8277ed47ba09" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="c39011a9-4cef-4a11-93f3-2efc95d10e6f" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="DragAndDropInvalid" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\treeview\events\draganddropinvalid.tstest" priority="0" id="1739e24d-766d-4887-9ade-89c5897d6f51" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="0e7fe5a9-713b-4139-a99f-5a70edaf6505" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="DisableEnable" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\dropdown\api\disableenable.tstest" priority="0" id="da26f32a-9b0d-4e31-807b-8c343e29b840" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="e785c9f7-ecf6-4d26-bba4-6ad8ffbda2bc" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="ChangeValueDragAndDropSingleSlider" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\slider\basicusage\changevaluedraganddropsingleslider.tstest" priority="0" id="3e6a4ee0-37ce-4ca0-a93f-5a83a13e1324" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="90af7863-75fd-45ba-a655-641ccf0f42b6" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="ExpandCollapseSelect" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\treeview\events\expandcollapseselect.tstest" priority="0" id="4328c389-9ecb-4d9b-b1a0-e1be698cc3b2" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="f5133670-620a-4516-bb36-0babe7981acf" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="SetTwoValuesRevertToBlank" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\autocomplete\basicusage\settwovaluesreverttoblank.tstest" priority="0" id="e297cdda-5608-4e27-ae19-fbf10e3a834f" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="f843abdb-afe7-443e-98ad-f0fdcdfdbfe6" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="OpenActivateRefreshclose" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\window\events\openactivaterefreshclose.tstest" priority="0" id="0d3e5eb7-3e0b-4c04-8d52-4c3091995711" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="9c737de5-ddca-413a-86cf-0828887ec407" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="ChangeValueInput" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\combobox\basicusage\changevalueinput.tstest" priority="0" id="f1b99097-ab32-4274-a4a5-8d03fb4b4c6f" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="b0a98236-e3ed-4b13-b309-580b4ba43d42" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="InsertAfter" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\panelbar\api\insertafter.tstest" priority="0" id="bd45e4a2-439b-436c-b754-56f3d621d5ff" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="4b7c37b5-5f9a-435b-8d42-5455667cd210" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="EnableDisable" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\tabstrip\api\enabledisable.tstest" priority="0" id="66eeccd4-49c3-4ac5-9d56-8b647a8c78d8" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="db5ff088-cbbd-4da1-ac13-9f0b84c1f13d" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="After" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\menu\api\after.tstest" priority="0" id="f2ec2503-6c60-4f4e-89a5-ef91c8cbc643" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="6d7934ed-7266-4fa6-be41-1dc36c308172" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="ChangeValueButtonsSingleSlider" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\slider\events\changevaluebuttonssingleslider.tstest" priority="0" id="c7b56d04-57ed-43f0-ab3a-e1f6cebd0522" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="b0e6adad-e279-4b12-99ff-7ff0b9e8c358" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="SwitchexpandedPanel" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\panelbar\ajaxloading\switchexpandedpanel.tstest" priority="0" id="9f8e902b-3d38-42ad-8b90-daf3bb7c21b1" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="27e4a986-5f13-4015-a7ad-de1a15c59351" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="InsertBefore" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\panelbar\api\insertbefore.tstest" priority="0" id="3382d877-488e-4d4b-ab37-0b70afd26fbf" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="1fc6a47a-e119-49f1-b867-f09ec5dc13bf" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="Append" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\tabstrip\api\append.tstest" priority="0" id="09ae3b18-abb2-4c4b-931f-7502f96e26ee" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="85d20f24-8d2a-43df-8f9f-d558385fdb55" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="SelectOption" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\autocomplete\basicusage\selectoption.tstest" priority="0" id="8b54f401-eab7-44c8-8634-d7ce8bb137a8" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="0935de83-b087-41ea-bd78-e13aed3cd1ae" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="ExpandAllNodes" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\treeview\api\expandallnodes.tstest" priority="0" id="3bf951ed-24d9-46ea-b62b-d67851600b69" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="1f40cf9f-99d5-4081-ac84-5d53a4d896c8" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="Remove" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\menu\api\remove.tstest" priority="0" id="ef057c4b-a157-4436-8b67-9338562c79ed" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="737c543f-d699-4da1-a8ac-5f7a19d3617f" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="Before" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\menu\api\before.tstest" priority="0" id="b8974193-9372-4aea-b8fc-00da0eab615f" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="321f2526-e801-4f0c-930b-bee74dbe8643" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="Events" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\grid\events\events.tstest" priority="0" id="4ddbacf3-93f2-40ae-9f01-610c591d49b6" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="54b2c00d-f32e-4642-84f9-7b207d34aae4" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="ResizaAllPanels" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\splitter\resizaallpanels.tstest" priority="0" id="c781b9ab-40cb-4112-92b4-bbe308f63127" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="ae8533d9-da2f-4358-a30f-bb04e3ec76af" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="AppendNode" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\treeview\api\appendnode.tstest" priority="0" id="5d28fe49-4182-4fa3-b016-dbedb7e5ef0f" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="7eca6eb4-56f8-427d-94bb-618a2cb3a594" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="DoubleSliderEnabledisable" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\slider\api\doublesliderenabledisable.tstest" priority="0" id="a395ddcb-2033-4acf-9266-63aa17530f57" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="2c24d584-f80b-48bf-86de-1928169a641f" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="Append" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\menu\api\append.tstest" priority="0" id="9de16507-2a02-49f5-bb6d-feabf1694c4a" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="b00388de-4624-4b65-8d6d-dc0101cb5b2d" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="Append" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\panelbar\api\append.tstest" priority="0" id="82b23410-67c4-46a3-9d39-ea88ea701ba0" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="0ae1639e-8b0b-4585-b39c-5f4eee09bfab" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="DragAndDropValid" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\treeview\events\draganddropvalid.tstest" priority="0" id="1d1d54c4-b70d-4302-9d75-bcd71ffb3cda" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="f60338af-5de8-4ad2-b5c2-35e085dbff14" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="EnableDisable" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\treeview\api\enabledisable.tstest" priority="0" id="6e2220b9-1835-4da9-a3ce-2f2f452e0434" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="c0e6e591-ec4f-4da7-9ecb-384cef2fbcbb" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="ExpandTwoLevels" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\panelbar\basicusage\expandtwolevels.tstest" priority="0" id="63635fbb-194a-40f8-8a2e-0a8fb039b2e1" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="46be8179-c8f7-4157-836f-b49fa14cb2f2" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="DoubleSliderSetValue" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\slider\api\doubleslidersetvalue.tstest" priority="0" id="aca26993-57aa-4b9b-957f-522f41edd394" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="a59c9c57-010d-41ab-a556-b5589dced04a" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="SwitchTabs" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\tabstrip\events\switchtabs.tstest" priority="0" id="904c8383-355b-4e0b-9acc-f62bd8f6d11f" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="79e167ed-da4d-4946-9238-d16b732bf55c" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="EnableDisable" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\panelbar\api\enabledisable.tstest" priority="0" id="98c71886-374c-4d62-84c9-6684eea2062b" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+        <DeploymentItem filename="..\..\..\UIWidgets\PanelBar\API\Select.tstest" />
+      </DeploymentItems>
+      <Execution id="c1ee5834-5c56-4b4a-be4c-5299223db190" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="GroupByAge" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\grid\basicusage\groupbyage.tstest" priority="0" id="2a2681b2-602e-4af3-be55-b8516bc81e80" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="2350634d-0fae-4da7-a0da-7b5df25b1824" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="SelectMultipleCells" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\grid\selection\selectmultiplecells.tstest" priority="0" id="e94e4d47-b502-4a0f-955f-42848b91e78f" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="0fd07e38-d5ef-4da0-a2a0-82aa3b0248d5" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="InsertBeforeInsertAfter" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\tabstrip\api\insertbeforeinsertafter.tstest" priority="0" id="189ed074-e675-4fa2-8526-b31ad0892025" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="bf9aea1c-96c4-4c68-a450-e8dec12810c1" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="ChangeValueKeyboardSelect" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\combobox\basicusage\changevaluekeyboardselect.tstest" priority="0" id="5ac7f1c9-d81b-47eb-af1c-2bd95254b5c6" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="cd2ac718-d8ce-4dbb-923e-5ad627c4a4bf" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+    <WebAiiTest name="ExpandCollapse" storage="c:\work\github\kendo\functional-tests\kendodemostests\uiwidgets\panelbar\basicusage\expandcollapse.tstest" priority="0" id="c0bc19eb-5745-45fd-b05d-eec9b5876b6b" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Description xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">WebAii Testcase</Description>
+      <DeploymentItems xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <DeploymentItem filename="..\..\..\bin\Debug\KendoDemosTests.dll" />
+      </DeploymentItems>
+      <Execution id="c308e25e-21d1-4538-879a-ec016f09bf68" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" />
+    </WebAiiTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="c781b9ab-40cb-4112-92b4-bbe308f63127" executionId="ae8533d9-da2f-4358-a30f-bb04e3ec76af" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8b54f401-eab7-44c8-8634-d7ce8bb137a8" executionId="0935de83-b087-41ea-bd78-e13aed3cd1ae" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e297cdda-5608-4e27-ae19-fbf10e3a834f" executionId="f843abdb-afe7-443e-98ad-f0fdcdfdbfe6" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f1b99097-ab32-4274-a4a5-8d03fb4b4c6f" executionId="b0a98236-e3ed-4b13-b309-580b4ba43d42" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5ac7f1c9-d81b-47eb-af1c-2bd95254b5c6" executionId="cd2ac718-d8ce-4dbb-923e-5ad627c4a4bf" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2a2681b2-602e-4af3-be55-b8516bc81e80" executionId="2350634d-0fae-4da7-a0da-7b5df25b1824" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4ddbacf3-93f2-40ae-9f01-610c591d49b6" executionId="54b2c00d-f32e-4642-84f9-7b207d34aae4" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e94e4d47-b502-4a0f-955f-42848b91e78f" executionId="0fd07e38-d5ef-4da0-a2a0-82aa3b0248d5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="fd75ef59-b0f9-4557-af4a-a84cb018806e" executionId="9ccbd555-0de3-466e-a941-b7b0b0da9b78" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="891ffcdc-fd2e-4e7e-8a8c-b0d9744bb0b9" executionId="811e1281-e9f2-414d-ab59-1326627628c5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f2ec2503-6c60-4f4e-89a5-ef91c8cbc643" executionId="6d7934ed-7266-4fa6-be41-1dc36c308172" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9de16507-2a02-49f5-bb6d-feabf1694c4a" executionId="b00388de-4624-4b65-8d6d-dc0101cb5b2d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b8974193-9372-4aea-b8fc-00da0eab615f" executionId="321f2526-e801-4f0c-930b-bee74dbe8643" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d6707a8e-ed75-4a21-809f-369a5e86aeaa" executionId="92f02c7d-feb9-4e34-ba79-ac6bf5dac68b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ef057c4b-a157-4436-8b67-9338562c79ed" executionId="737c543f-d699-4da1-a8ac-5f7a19d3617f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="14f36260-63c4-4038-8b02-22537d776770" executionId="31c693d5-ba18-42ee-b1a2-96c70c415f00" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="91020c93-1d6d-4fb3-9dae-01e50187ada4" executionId="443fb775-f3c6-4d45-833f-dfa9388ea70f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ceb842cb-c25f-4f72-843e-79b1f945b8b6" executionId="fc08704d-b6c9-4ff1-8113-312dfe3d0bbc" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9f8e902b-3d38-42ad-8b90-daf3bb7c21b1" executionId="27e4a986-5f13-4015-a7ad-de1a15c59351" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="82b23410-67c4-46a3-9d39-ea88ea701ba0" executionId="0ae1639e-8b0b-4585-b39c-5f4eee09bfab" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="98c71886-374c-4d62-84c9-6684eea2062b" executionId="c1ee5834-5c56-4b4a-be4c-5299223db190" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="bd45e4a2-439b-436c-b754-56f3d621d5ff" executionId="4b7c37b5-5f9a-435b-8d42-5455667cd210" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3382d877-488e-4d4b-ab37-0b70afd26fbf" executionId="1fc6a47a-e119-49f1-b867-f09ec5dc13bf" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2d9f40dc-26be-4455-abf9-0b582a7493bb" executionId="13451347-174c-4cda-9986-d42dea52c670" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="17d08086-8751-4b35-a039-a62f09939bb7" executionId="4070cd74-6946-4e23-b55b-41d3b95bb8a5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c0bc19eb-5745-45fd-b05d-eec9b5876b6b" executionId="c308e25e-21d1-4538-879a-ec016f09bf68" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="63635fbb-194a-40f8-8a2e-0a8fb039b2e1" executionId="46be8179-c8f7-4157-836f-b49fa14cb2f2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="be767e7c-01b6-46eb-a16e-c8922f986bb6" executionId="6794bef5-77ad-43a9-a211-b9e5870251cf" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a395ddcb-2033-4acf-9266-63aa17530f57" executionId="2c24d584-f80b-48bf-86de-1928169a641f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="aca26993-57aa-4b9b-957f-522f41edd394" executionId="a59c9c57-010d-41ab-a556-b5589dced04a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ffffb368-6c05-4676-a961-8277ed47ba09" executionId="c39011a9-4cef-4a11-93f3-2efc95d10e6f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4e70e35f-387a-4a1b-b866-06a13be297e9" executionId="f9cd2367-9e3c-4f7e-b5d8-f6e539f09867" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3e6a4ee0-37ce-4ca0-a93f-5a83a13e1324" executionId="90af7863-75fd-45ba-a655-641ccf0f42b6" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c7b56d04-57ed-43f0-ab3a-e1f6cebd0522" executionId="b0e6adad-e279-4b12-99ff-7ff0b9e8c358" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f15a138b-8c74-4164-851e-6e4e91117e03" executionId="17a2abf0-5683-4173-9f6e-f9176883c0f0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="09ae3b18-abb2-4c4b-931f-7502f96e26ee" executionId="85d20f24-8d2a-43df-8f9f-d558385fdb55" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="66eeccd4-49c3-4ac5-9d56-8b647a8c78d8" executionId="db5ff088-cbbd-4da1-ac13-9f0b84c1f13d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="189ed074-e675-4fa2-8526-b31ad0892025" executionId="bf9aea1c-96c4-4c68-a450-e8dec12810c1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="79aee780-5b91-41b2-8e67-a66d1dd0cee2" executionId="4033f109-a15d-4cbb-9b40-1c20ee860752" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="904c8383-355b-4e0b-9acc-f62bd8f6d11f" executionId="79e167ed-da4d-4946-9238-d16b732bf55c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5d28fe49-4182-4fa3-b016-dbedb7e5ef0f" executionId="7eca6eb4-56f8-427d-94bb-618a2cb3a594" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d03caf07-497e-468b-9ee5-a5f9f8489a7b" executionId="b450aab3-a63a-4d36-9b86-17f44e4dc0e6" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6e2220b9-1835-4da9-a3ce-2f2f452e0434" executionId="c0e6e591-ec4f-4da7-9ecb-384cef2fbcbb" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3bf951ed-24d9-46ea-b62b-d67851600b69" executionId="1f40cf9f-99d5-4081-ac84-5d53a4d896c8" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1bab8790-7383-48c4-abce-8302907f3b32" executionId="cd0dbaaf-7590-4bbd-938c-5df9262e6f62" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1739e24d-766d-4887-9ade-89c5897d6f51" executionId="0e7fe5a9-713b-4139-a99f-5a70edaf6505" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1d1d54c4-b70d-4302-9d75-bcd71ffb3cda" executionId="f60338af-5de8-4ad2-b5c2-35e085dbff14" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4328c389-9ecb-4d9b-b1a0-e1be698cc3b2" executionId="f5133670-620a-4516-bb36-0babe7981acf" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3bc78c73-21b4-4b22-bcb2-e2745b04c3b8" executionId="259d288a-a8d8-44ca-8c1b-d474af1b9053" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="0d3e5eb7-3e0b-4c04-8d52-4c3091995711" executionId="9c737de5-ddca-413a-86cf-0828887ec407" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="da26f32a-9b0d-4e31-807b-8c343e29b840" executionId="e785c9f7-ecf6-4d26-bba4-6ad8ffbda2bc" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <WebAiiTestResult executionId="ae8533d9-da2f-4358-a30f-bb04e3ec76af" testId="c781b9ab-40cb-4112-92b4-bbe308f63127" testName="ResizaAllPanels" computerName="AGGEORGIEV" duration="00:00:05.2968516" startTime="2011-08-15T10:23:36.0872965+03:00" endTime="2011-08-15T10:23:41.3868264+03:00" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ae8533d9-da2f-4358-a30f-bb04e3ec76af" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Output xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <ErrorInfo>
+          <Message>Overall Result: Fail
+------------------------------------------------------------
+'8/15/2011 10:23:36 AM' - Starting execution....
+------------------------------------------------------------
+'8/15/2011 10:23:38 AM' - 'Pass' : 1. Navigate to : 'http://aggeorgiev/kendo/live/splitter/index.html'
+'8/15/2011 10:23:39 AM' - 'Fail' : 2. Verify attribute 'style' has 'Contains' value of 'left: 157px; top: 0px; width: 582px; height: 129px; position: absolute;' on 'Div'
+------------------------------------------------------------
+Failure Information: 
+~~~~~~~~~~~~~~~
+Attribute values do not match. Expected: 'left: 157px; top: 0px; width: 582px; height: 129px; position: absolute;'; actual: 'left: 157px; top: 0px; width: 543px; height: 129px; position: absolute;'.
+------------------------------------------------------------
+'8/15/2011 10:23:39 AM' - Detected a failure. Step is marked 'ContinueOnFailure=False' aborting test execution.
+------------------------------------------------------------
+'8/15/2011 10:23:39 AM' - Overall Result: Fail
+'8/15/2011 10:23:39 AM' - Duration: [0 min: 1 sec: 72 msec]
+------------------------------------------------------------
+'8/15/2011 10:23:39 AM' - Test completed!
+</Message>
+        </ErrorInfo>
+      </Output>
+      <WebAiiTestResult Type="ArtOfTest.WebAii.Design.Execution.TestResult" Version="2011.1.729.0" xmlns="">
+        <TestId Type="System.String">c781b9ab-40cb-4112-92b4-bbe308f63127</TestId>
+        <TestName Type="System.String">ResizaAllPanels</TestName>
+        <TestPath Type="System.String">UIWidgets\Splitter\ResizaAllPanels.tstest</TestPath>
+        <ProjectPath Type="System.String">
+        </ProjectPath>
+        <ResultType Type="ArtOfTest.Common.Design.ResultType">Fail</ResultType>
+        <AutomationStepResults>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Navigate to : 'http://aggeorgiev/kendo/live/splitter/index.html'</StepDescription>
+            <TestId Type="System.String">c781b9ab-40cb-4112-92b4-bbe308f63127</TestId>
+            <TestName Type="System.String">ResizaAllPanels</TestName>
+            <TestPath Type="System.String">UIWidgets\Splitter\ResizaAllPanels.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">0</TestStepNumber>
+            <Order Type="System.Int32">1</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Fail</ResultType>
+            <ExecutionException Type="ArtOfTest.Common.Design.Exceptions.VerificationException" Version="2011.1.729.0">
+              <HostState Type="ArtOfTest.WebAii.Design.AutomationHostState" Version="2011.1.729.0">
+                <Mode Type="ArtOfTest.WebAii.Design.BrowserStateCaptureMode">DomAndImage</Mode>
+                <TechType Type="ArtOfTest.Common.TechnologyType">Html</TechType>
+                <FriendlyName Type="System.String">Capture Of 'Page (Basic usage)' @8/15/2011 10:23:39 AM</FriendlyName>
+              </HostState>
+              <ExceptionMessage Type="System.String">Attribute values do not match. Expected: 'left: 157px; top: 0px; width: 582px; height: 129px; position: absolute;'; actual: 'left: 157px; top: 0px; width: 543px; height: 129px; position: absolute;'.</ExceptionMessage>
+              <VerificationResult Type="ArtOfTest.Common.Design.Extensibility.VerificationResult" Version="2011.1.729.0">
+                <Result Type="System.Boolean">False</Result>
+                <ErrorMessage Type="System.String">Attribute values do not match. Expected: 'left: 157px; top: 0px; width: 582px; height: 129px; position: absolute;'; actual: 'left: 157px; top: 0px; width: 543px; height: 129px; position: absolute;'.</ErrorMessage>
+              </VerificationResult>
+              <ValueStore Type="ArtOfTest.Common.Design.Extensibility.DescriptorValueStore" Version="2011.1.729.0">
+                <ValueStore>
+                  <Item Key="AttributeValue" Type="System.String">left: 157px; top: 0px; width: 543px; height: 129px; position: absolute;</Item>
+                </ValueStore>
+              </ValueStore>
+            </ExecutionException>
+            <StepDescription Type="System.String">Verify attribute 'style' has 'Contains' value of 'left: 157px; top: 0px; width: 582px; height: 129px; position: absolute;' on 'Div'</StepDescription>
+            <TestId Type="System.String">c781b9ab-40cb-4112-92b4-bbe308f63127</TestId>
+            <TestName Type="System.String">ResizaAllPanels</TestName>
+            <TestPath Type="System.String">UIWidgets\Splitter\ResizaAllPanels.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">1</TestStepNumber>
+            <Order Type="System.Int32">2</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+        </AutomationStepResults>
+        <NotRunStepDescriptions>
+          <Item Type="System.String">Desktop command: LeftClick on Div0</Item>
+          <Item Type="System.String">Verify attribute 'style' has 'Contains' value of 'left: 7px; top: 0px; width: 732px; height: 129px; position: absolute;' on 'Div'</Item>
+          <Item Type="System.String">Desktop command: LeftClick on Div1</Item>
+          <Item Type="System.String">Verify attribute 'style' has 'Contains' value of 'left: 7px; top: 0px; width: 914px; height: 129px; position: absolute;' on 'Div'</Item>
+        </NotRunStepDescriptions>
+        <PerStepMessages Type="System.String">Overall Result: Fail
+------------------------------------------------------------
+'8/15/2011 10:23:36 AM' - Starting execution....
+------------------------------------------------------------
+'8/15/2011 10:23:38 AM' - 'Pass' : 1. Navigate to : 'http://aggeorgiev/kendo/live/splitter/index.html'
+'8/15/2011 10:23:39 AM' - 'Fail' : 2. Verify attribute 'style' has 'Contains' value of 'left: 157px; top: 0px; width: 582px; height: 129px; position: absolute;' on 'Div'
+------------------------------------------------------------
+Failure Information: 
+~~~~~~~~~~~~~~~
+Attribute values do not match. Expected: 'left: 157px; top: 0px; width: 582px; height: 129px; position: absolute;'; actual: 'left: 157px; top: 0px; width: 543px; height: 129px; position: absolute;'.
+------------------------------------------------------------
+'8/15/2011 10:23:39 AM' - Detected a failure. Step is marked 'ContinueOnFailure=False' aborting test execution.
+------------------------------------------------------------
+'8/15/2011 10:23:39 AM' - Overall Result: Fail
+'8/15/2011 10:23:39 AM' - Duration: [0 min: 1 sec: 72 msec]
+------------------------------------------------------------
+'8/15/2011 10:23:39 AM' - Test completed!
+</PerStepMessages>
+        <TotalNumberOfPassedSteps Type="System.Int32">1</TotalNumberOfPassedSteps>
+        <ExecutingTestStepCount Type="System.Int32">2</ExecutingTestStepCount>
+        <TotalNumberOfNotRunSteps Type="System.Int32">0</TotalNumberOfNotRunSteps>
+        <IsDataDrivenResult Type="System.Boolean">False</IsDataDrivenResult>
+        <SeparatorLineCharCount Type="System.Int32">60</SeparatorLineCharCount>
+        <ExecutionType Type="ArtOfTest.Common.Design.ExecutionType">QuickExecution</ExecutionType>
+        <FailureException Type="ArtOfTest.Common.Design.Exceptions.VerificationException" Version="2011.1.729.0">
+          <HostState Type="ArtOfTest.WebAii.Design.AutomationHostState" Version="2011.1.729.0">
+            <Mode Type="ArtOfTest.WebAii.Design.BrowserStateCaptureMode">DomAndImage</Mode>
+            <TechType Type="ArtOfTest.Common.TechnologyType">Html</TechType>
+            <FriendlyName Type="System.String">Capture Of 'Page (Basic usage)' @8/15/2011 10:23:39 AM</FriendlyName>
+          </HostState>
+          <ExceptionMessage Type="System.String">Attribute values do not match. Expected: 'left: 157px; top: 0px; width: 582px; height: 129px; position: absolute;'; actual: 'left: 157px; top: 0px; width: 543px; height: 129px; position: absolute;'.</ExceptionMessage>
+          <VerificationResult Type="ArtOfTest.Common.Design.Extensibility.VerificationResult" Version="2011.1.729.0">
+            <Result Type="System.Boolean">False</Result>
+            <ErrorMessage Type="System.String">Attribute values do not match. Expected: 'left: 157px; top: 0px; width: 582px; height: 129px; position: absolute;'; actual: 'left: 157px; top: 0px; width: 543px; height: 129px; position: absolute;'.</ErrorMessage>
+          </VerificationResult>
+          <ValueStore Type="ArtOfTest.Common.Design.Extensibility.DescriptorValueStore" Version="2011.1.729.0">
+            <ValueStore>
+              <Item Key="AttributeValue" Type="System.String">left: 157px; top: 0px; width: 543px; height: 129px; position: absolute;</Item>
+            </ValueStore>
+          </ValueStore>
+        </FailureException>
+        <EndTime Type="System.DateTime">2011-08-15 07:23:39Z</EndTime>
+        <StarTime Type="System.DateTime">2011-08-15 07:23:38Z</StarTime>
+        <DataIterationResults />
+      </WebAiiTestResult>
+    </WebAiiTestResult>
+    <WebAiiTestResult executionId="0935de83-b087-41ea-bd78-e13aed3cd1ae" testId="8b54f401-eab7-44c8-8634-d7ce8bb137a8" testName="SelectOption" computerName="AGGEORGIEV" duration="00:00:06.7277725" startTime="2011-08-15T10:23:41.3908268+03:00" endTime="2011-08-15T10:23:48.1184995+03:00" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0935de83-b087-41ea-bd78-e13aed3cd1ae" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+      <Output xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+        <ErrorInfo>
+          <Message>Overall Result: Fail
+------------------------------------------------------------
+'8/15/2011 10:23:41 AM' - Starting execution....
+------------------------------------------------------------
+'8/15/2011 10:23:43 AM' - 'Pass' : 1. Navigate to : '/autocomplete/index.html'
+'8/15/2011 10:23:45 AM' - 'Fail' : 2. Set 'InputText' text to 'the'
+------------------------------------------------------------
+Failure Information: 
+~~~~~~~~~~~~~~~
+Object reference not set to an instance of an object.
+InnerException:
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at ArtOfTest.WebAii.ObjectModel.Element.GetRectangle()
+   at ArtOfTest.WebAii.Controls.HtmlControls.HtmlControl.MouseClick()
+   at ArtOfTest.WebAii.Design.IntrinsicTranslators.Descriptors.SetTextActionDescriptor.Execute(Browser browser)
+   at ArtOfTest.WebAii.Design.Extensibility.HtmlActionDescriptor.Execute(IAutomationHost autoHost)
+   at ArtOfTest.WebAii.Design.Execution.ExecutionEngine.ExecuteStep(Int32 order)
+------------------------------------------------------------
+'8/15/2011 10:23:45 AM' - Detected a failure. Step is marked 'ContinueOnFailure=False' aborting test execution.
+------------------------------------------------------------
+'8/15/2011 10:23:45 AM' - Overall Result: Fail
+'8/15/2011 10:23:45 AM' - Duration: [0 min: 2 sec: 448 msec]
+------------------------------------------------------------
+'8/15/2011 10:23:45 AM' - Test completed!
+</Message>
+        </ErrorInfo>
+      </Output>
+      <WebAiiTestResult Type="ArtOfTest.WebAii.Design.Execution.TestResult" Version="2011.1.729.0" xmlns="">
+        <TestId Type="System.String">8b54f401-eab7-44c8-8634-d7ce8bb137a8</TestId>
+        <TestName Type="System.String">SelectOption</TestName>
+        <TestPath Type="System.String">UIWidgets\AutoComplete\BasicUsage\SelectOption.tstest</TestPath>
+        <ProjectPath Type="System.String">
+        </ProjectPath>
+        <ResultType Type="ArtOfTest.Common.Design.ResultType">Fail</ResultType>
+        <AutomationStepResults>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <StepDescription Type="System.String">Navigate to : '/autocomplete/index.html'</StepDescription>
+            <TestId Type="System.String">8b54f401-eab7-44c8-8634-d7ce8bb137a8</TestId>
+            <TestName Type="System.String">SelectOption</TestName>
+            <TestPath Type="System.String">UIWidgets\AutoComplete\BasicUsage\SelectOption.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">0</TestStepNumber>
+            <Order Type="System.Int32">1</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+          <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Fail</ResultType>
+            <ExecutionException Type="ArtOfTest.Common.Design.Exceptions.ExecutionException" Version="2011.1.729.0">
+              <ExceptionMessage Type="System.String">Object reference not set to an instance of an object.</ExceptionMessage>
+            </ExecutionException>
+            <StepDescription Type="System.String">Set 'InputText' text to 'the'</StepDescription>
+            <TestId Type="System.String">8b54f401-eab7-44c8-8634-d7ce8bb137a8</TestId>
+            <TestName Type="System.String">SelectOption</TestName>
+            <TestPath Type="System.String">UIWidgets\AutoComplete\BasicUsage\SelectOption.tstest</TestPath>
+            <TestStepNumber Type="System.Int32">1</TestStepNumber>
+            <Order Type="System.Int32">2</Order>
+            <LogMessageOnError Type="System.String">
+            </LogMessageOnError>
+          </Item>
+        </AutomationStepResults>
+        <NotRunStepDescriptions>
+          <Item Type="System.String">Click 'TheListItem'</Item>
+          <Item Type="System.String">Verify textbox 'InputText' content 'Same' 'The Godfather: Part II, '.</Item>
+        </NotRunStepDescriptions>
+        <PerStepMessages Type="System.String">Overall Result: Fail
+------------------------------------------------------------
+'8/15/2011 10:23:41 AM' - Starting execution....
+------------------------------------------------------------
+'8/15/2011 10:23:43 AM' - 'Pass' : 1. Navigate to : '/autocomplete/index.html'
+'8/15/2011 10:23:45 AM' - 'Fail' : 2. Set 'InputText' text to 'the'
+------------------------------------------------------------
+Failure Information: 
+~~~~~~~~~~~~~~~
+Object reference not set to an instance of an object.
+InnerException:
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at ArtOfTest.WebAii.ObjectModel.Element.GetRectangle()
+   at ArtOfTest.WebAii.Controls.HtmlControls.HtmlControl.MouseClick()
+   at ArtOfTest.WebAii.Design.IntrinsicTranslators.Descriptors.SetTextActionDescriptor.Execute(Browser browser)
+   at ArtOfTest.WebAii.Design.Extensibility.HtmlActionDescriptor.Execute(IAutomationHost autoHost)
+   at ArtOfTest.WebAii.Design.Execution.ExecutionEngine.ExecuteStep(Int32 order)
+------------------------------------------------------------
+'8/15/2011 10:23:45 AM' - Detected a failure. Step is marked 'ContinueOnFailure=False' aborting test execution.
+------------------------------------------------------------
+'8/15/2011 10:23:45 AM' - Overall Result: Fail
+'8/15/2011 10:23:45 AM' - Duration: [0 min: 2 sec: 448 msec]
+------------------------------------------------------------
+'8/15/2011 10:23:45 AM' - Test completed!
+</PerStepMessages>
+        <TotalNumberOfPassedSteps Type="System.Int32">1</TotalNumberOfPassedSteps>
+        <ExecutingTestStepCount Type="System.Int32">2</ExecutingTestStepCount>
+        <TotalNumberOfNotRunSteps Type="System.Int32">0</TotalNumberOfNotRunSteps>
+        <IsDataDrivenResult Type="System.Boolean">False</IsDataDrivenResult>
+        <SeparatorLineCharCount Type="System.Int32">60</SeparatorLineCharCount>
+        <ExecutionType Type="ArtOfTest.Common.Design.ExecutionType">QuickExecution</ExecutionType>
+        <FailureException Type="ArtOfTest.Common.Design.Exceptions.ExecutionException" Version="2011.1.729.0">
+          <ExceptionMessage Type="System.String">Object reference not set to an instance of an object.</ExceptionMessage>
+        </FailureException>
+        <EndTime Type="System.DateTime">2011-08-15 07:23:45Z</EndTime>
+        <StarTime Type="System.DateTime">2011-08-15 07:23:42Z</StarTime>
+        <DataIterationResults />
+      </WebAiiTestResult>
+    </WebAiiTestResult>
+    <TestResult executionId="f843abdb-afe7-443e-98ad-f0fdcdfdbfe6" testId="e297cdda-5608-4e27-ae19-fbf10e3a834f" testName="SetTwoValuesRevertToBlank" computerName="AGGEORGIEV" duration="00:00:05.3715371" startTime="2011-08-15T10:23:48.1214998+03:00" endTime="2011-08-15T10:23:53.4930369+03:00" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="Aborted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f843abdb-afe7-443e-98ad-f0fdcdfdbfe6">
+      <Output>
+        <ErrorInfo>
+          <Message>User aborted test run.</Message>
+        </ErrorInfo>
+      </Output>
+    </TestResult>
+    <TestResult executionId="b0a98236-e3ed-4b13-b309-580b4ba43d42" testId="f1b99097-ab32-4274-a4a5-8d03fb4b4c6f" testName="ChangeValueInput" computerName="AGGEORGIEV" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b0a98236-e3ed-4b13-b309-580b4ba43d42">
+    </TestResult>
+    <TestResult executionId="cd2ac718-d8ce-4dbb-923e-5ad627c4a4bf" testId="5ac7f1c9-d81b-47eb-af1c-2bd95254b5c6" testName="ChangeValueKeyboardSelect" computerName="AGGEORGIEV" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="cd2ac718-d8ce-4dbb-923e-5ad627c4a4bf">
+    </TestResult>
+    <TestResult executionId="2350634d-0fae-4da7-a0da-7b5df25b1824" testId="2a2681b2-602e-4af3-be55-b8516bc81e80" testName="GroupByAge" computerName="AGGEORGIEV" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2350634d-0fae-4da7-a0da-7b5df25b1824">
+    </TestResult>
+    <TestResult executionId="54b2c00d-f32e-4642-84f9-7b207d34aae4" testId="4ddbacf3-93f2-40ae-9f01-610c591d49b6" testName="Events" computerName="AGGEORGIEV" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="54b2c00d-f32e-4642-84f9-7b207d34aae4">
+    </TestResult>
+    <TestResult executionId="0fd07e38-d5ef-4da0-a2a0-82aa3b0248d5" testId="e94e4d47-b502-4a0f-955f-42848b91e78f" testName="SelectMultipleCells" computerName="AGGEORGIEV" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0fd07e38-d5ef-4da0-a2a0-82aa3b0248d5">
+    </TestResult>
+    <TestResult executionId="9ccbd555-0de3-466e-a941-b7b0b0da9b78" testId="fd75ef59-b0f9-4557-af4a-a84cb018806e" testName="SelectMultipleRows" computerName="AGGEORGIEV" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9ccbd555-0de3-466e-a941-b7b0b0da9b78">
+    </TestResult>
+    <TestResult executionId="811e1281-e9f2-414d-ab59-1326627628c5" testId="891ffcdc-fd2e-4e7e-8a8c-b0d9744bb0b9" testName="SelectRowSingle" computerName="AGGEORGIEV" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="811e1281-e9f2-414d-ab59-1326627628c5">
+    </TestResult>
+    <TestResult executionId="6d7934ed-7266-4fa6-be41-1dc36c308172" testId="f2ec2503-6c60-4f4e-89a5-ef91c8cbc643" testName="After" computerName="AGGEORGIEV" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6d7934ed-7266-4fa6-be41-1dc36c308172">
+    </TestResult>
+    <TestResult executionId="b00388de-4624-4b65-8d6d-dc0101cb5b2d" testId="9de16507-2a02-49f5-bb6d-feabf1694c4a" testName="Append" computerName="AGGEORGIEV" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b00388de-4624-4b65-8d6d-dc0101cb5b2d">
+    </TestResult>
+    <TestResult executionId="321f2526-e801-4f0c-930b-bee74dbe8643" testId="b8974193-9372-4aea-b8fc-00da0eab615f" testName="Before" computerName="AGGEORGIEV" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="321f2526-e801-4f0c-930b-bee74dbe8643">
+    </TestResult>
+    <TestResult executionId="92f02c7d-feb9-4e34-ba79-ac6bf5dac68b" testId="d6707a8e-ed75-4a21-809f-369a5e86aeaa" testName="DisableEnable" computerName="AGGEORGIEV" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="92f02c7d-feb9-4e34-ba79-ac6bf5dac68b">
+    </TestResult>
+    <TestResult executionId="737c543f-d699-4da1-a8ac-5f7a19d3617f" testId="ef057c4b-a157-4436-8b67-9338562c79ed" testName="Remove" computerName="AGGEORGIEV" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="737c543f-d699-4da1-a8ac-5f7a19d3617f">
+    </TestResult>
+    <TestResult executionId="31c693d5-ba18-42ee-b1a2-96c70c415f00" testId="14f36260-63c4-4038-8b02-22537d776770" testName="NotClosedOnClick" computerName="AGGEORGIEV" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="31c693d5-ba18-42ee-b1a2-96c70c415f00">
+    </TestResult>
+    <TestResult executionId="443fb775-f3c6-4d45-833f-dfa9388ea70f" testId="91020c93-1d6d-4fb3-9dae-01e50187ada4" testName="OpenClose" computerName="AGGEORGIEV" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="443fb775-f3c6-4d45-833f-dfa9388ea70f">
+    </TestResult>
+    <TestResult executionId="fc08704d-b6c9-4ff1-8113-312dfe3d0bbc" testId="ceb842cb-c25f-4f72-843e-79b1f945b8b6" testName="Events" computerName="AGGEORGIEV" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="fc08704d-b6c9-4ff1-8113-312dfe3d0bbc">
+    </TestResult>
+    <TestResult executionId="27e4a986-5f13-4015-a7ad-de1a15c59351" testId="9f8e902b-3d38-42ad-8b90-daf3bb7c21b1" testName="SwitchexpandedPanel" computerName="AGGEORGIEV" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="27e4a986-5f13-4015-a7ad-de1a15c59351">
+    </TestResult>
+    <TestResult executionId="0ae1639e-8b0b-4585-b39c-5f4eee09bfab" testId="82b23410-67c4-46a3-9d39-ea88ea701ba0" testName="Append" computerName="AGGEORGIEV" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0ae1639e-8b0b-4585-b39c-5f4eee09bfab">
+    </TestResult>
+    <TestResult executionId="c1ee5834-5c56-4b4a-be4c-5299223db190" testId="98c71886-374c-4d62-84c9-6684eea2062b" testName="EnableDisable" computerName="AGGEORGIEV" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c1ee5834-5c56-4b4a-be4c-5299223db190">
+    </TestResult>
+    <TestResult executionId="4b7c37b5-5f9a-435b-8d42-5455667cd210" testId="bd45e4a2-439b-436c-b754-56f3d621d5ff" testName="InsertAfter" computerName="AGGEORGIEV" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4b7c37b5-5f9a-435b-8d42-5455667cd210">
+    </TestResult>
+    <TestResult executionId="1fc6a47a-e119-49f1-b867-f09ec5dc13bf" testId="3382d877-488e-4d4b-ab37-0b70afd26fbf" testName="InsertBefore" computerName="AGGEORGIEV" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1fc6a47a-e119-49f1-b867-f09ec5dc13bf">
+    </TestResult>
+    <TestResult executionId="13451347-174c-4cda-9986-d42dea52c670" testId="2d9f40dc-26be-4455-abf9-0b582a7493bb" testName="Remove" computerName="AGGEORGIEV" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="13451347-174c-4cda-9986-d42dea52c670">
+    </TestResult>
+    <TestResult executionId="4070cd74-6946-4e23-b55b-41d3b95bb8a5" testId="17d08086-8751-4b35-a039-a62f09939bb7" testName="Select" computerName="AGGEORGIEV" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4070cd74-6946-4e23-b55b-41d3b95bb8a5">
+    </TestResult>
+    <TestResult executionId="c308e25e-21d1-4538-879a-ec016f09bf68" testId="c0bc19eb-5745-45fd-b05d-eec9b5876b6b" testName="ExpandCollapse" computerName="AGGEORGIEV" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c308e25e-21d1-4538-879a-ec016f09bf68">
+    </TestResult>
+    <TestResult executionId="46be8179-c8f7-4157-836f-b49fa14cb2f2" testId="63635fbb-194a-40f8-8a2e-0a8fb039b2e1" testName="ExpandTwoLevels" computerName="AGGEORGIEV" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="46be8179-c8f7-4157-836f-b49fa14cb2f2">
+    </TestResult>
+    <TestResult executionId="6794bef5-77ad-43a9-a211-b9e5870251cf" testId="be767e7c-01b6-46eb-a16e-c8922f986bb6" testName="Events" computerName="AGGEORGIEV" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6794bef5-77ad-43a9-a211-b9e5870251cf">
+    </TestResult>
+    <TestResult executionId="2c24d584-f80b-48bf-86de-1928169a641f" testId="a395ddcb-2033-4acf-9266-63aa17530f57" testName="DoubleSliderEnabledisable" computerName="AGGEORGIEV" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2c24d584-f80b-48bf-86de-1928169a641f">
+    </TestResult>
+    <TestResult executionId="a59c9c57-010d-41ab-a556-b5589dced04a" testId="aca26993-57aa-4b9b-957f-522f41edd394" testName="DoubleSliderSetValue" computerName="AGGEORGIEV" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a59c9c57-010d-41ab-a556-b5589dced04a">
+    </TestResult>
+    <TestResult executionId="c39011a9-4cef-4a11-93f3-2efc95d10e6f" testId="ffffb368-6c05-4676-a961-8277ed47ba09" testName="SingleSliderEnableDisable" computerName="AGGEORGIEV" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c39011a9-4cef-4a11-93f3-2efc95d10e6f">
+    </TestResult>
+    <TestResult executionId="f9cd2367-9e3c-4f7e-b5d8-f6e539f09867" testId="4e70e35f-387a-4a1b-b866-06a13be297e9" testName="SingleSliderSetValue" computerName="AGGEORGIEV" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f9cd2367-9e3c-4f7e-b5d8-f6e539f09867">
+    </TestResult>
+    <TestResult executionId="90af7863-75fd-45ba-a655-641ccf0f42b6" testId="3e6a4ee0-37ce-4ca0-a93f-5a83a13e1324" testName="ChangeValueDragAndDropSingleSlider" computerName="AGGEORGIEV" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="90af7863-75fd-45ba-a655-641ccf0f42b6">
+    </TestResult>
+    <TestResult executionId="b0e6adad-e279-4b12-99ff-7ff0b9e8c358" testId="c7b56d04-57ed-43f0-ab3a-e1f6cebd0522" testName="ChangeValueButtonsSingleSlider" computerName="AGGEORGIEV" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b0e6adad-e279-4b12-99ff-7ff0b9e8c358">
+    </TestResult>
+    <TestResult executionId="17a2abf0-5683-4173-9f6e-f9176883c0f0" testId="f15a138b-8c74-4164-851e-6e4e91117e03" testName="ChangeValueDoubleSlider" computerName="AGGEORGIEV" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="17a2abf0-5683-4173-9f6e-f9176883c0f0">
+    </TestResult>
+    <TestResult executionId="85d20f24-8d2a-43df-8f9f-d558385fdb55" testId="09ae3b18-abb2-4c4b-931f-7502f96e26ee" testName="Append" computerName="AGGEORGIEV" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="85d20f24-8d2a-43df-8f9f-d558385fdb55">
+    </TestResult>
+    <TestResult executionId="db5ff088-cbbd-4da1-ac13-9f0b84c1f13d" testId="66eeccd4-49c3-4ac5-9d56-8b647a8c78d8" testName="EnableDisable" computerName="AGGEORGIEV" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="db5ff088-cbbd-4da1-ac13-9f0b84c1f13d">
+    </TestResult>
+    <TestResult executionId="bf9aea1c-96c4-4c68-a450-e8dec12810c1" testId="189ed074-e675-4fa2-8526-b31ad0892025" testName="InsertBeforeInsertAfter" computerName="AGGEORGIEV" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="bf9aea1c-96c4-4c68-a450-e8dec12810c1">
+    </TestResult>
+    <TestResult executionId="4033f109-a15d-4cbb-9b40-1c20ee860752" testId="79aee780-5b91-41b2-8e67-a66d1dd0cee2" testName="RemoveTab" computerName="AGGEORGIEV" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4033f109-a15d-4cbb-9b40-1c20ee860752">
+    </TestResult>
+    <TestResult executionId="79e167ed-da4d-4946-9238-d16b732bf55c" testId="904c8383-355b-4e0b-9acc-f62bd8f6d11f" testName="SwitchTabs" computerName="AGGEORGIEV" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="79e167ed-da4d-4946-9238-d16b732bf55c">
+    </TestResult>
+    <TestResult executionId="7eca6eb4-56f8-427d-94bb-618a2cb3a594" testId="5d28fe49-4182-4fa3-b016-dbedb7e5ef0f" testName="AppendNode" computerName="AGGEORGIEV" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7eca6eb4-56f8-427d-94bb-618a2cb3a594">
+    </TestResult>
+    <TestResult executionId="b450aab3-a63a-4d36-9b86-17f44e4dc0e6" testId="d03caf07-497e-468b-9ee5-a5f9f8489a7b" testName="CollapseAllNodes" computerName="AGGEORGIEV" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b450aab3-a63a-4d36-9b86-17f44e4dc0e6">
+    </TestResult>
+    <TestResult executionId="c0e6e591-ec4f-4da7-9ecb-384cef2fbcbb" testId="6e2220b9-1835-4da9-a3ce-2f2f452e0434" testName="EnableDisable" computerName="AGGEORGIEV" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c0e6e591-ec4f-4da7-9ecb-384cef2fbcbb">
+    </TestResult>
+    <TestResult executionId="1f40cf9f-99d5-4081-ac84-5d53a4d896c8" testId="3bf951ed-24d9-46ea-b62b-d67851600b69" testName="ExpandAllNodes" computerName="AGGEORGIEV" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1f40cf9f-99d5-4081-ac84-5d53a4d896c8">
+    </TestResult>
+    <TestResult executionId="cd0dbaaf-7590-4bbd-938c-5df9262e6f62" testId="1bab8790-7383-48c4-abce-8302907f3b32" testName="Remove" computerName="AGGEORGIEV" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="cd0dbaaf-7590-4bbd-938c-5df9262e6f62">
+    </TestResult>
+    <TestResult executionId="0e7fe5a9-713b-4139-a99f-5a70edaf6505" testId="1739e24d-766d-4887-9ade-89c5897d6f51" testName="DragAndDropInvalid" computerName="AGGEORGIEV" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0e7fe5a9-713b-4139-a99f-5a70edaf6505">
+    </TestResult>
+    <TestResult executionId="f60338af-5de8-4ad2-b5c2-35e085dbff14" testId="1d1d54c4-b70d-4302-9d75-bcd71ffb3cda" testName="DragAndDropValid" computerName="AGGEORGIEV" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f60338af-5de8-4ad2-b5c2-35e085dbff14">
+    </TestResult>
+    <TestResult executionId="f5133670-620a-4516-bb36-0babe7981acf" testId="4328c389-9ecb-4d9b-b1a0-e1be698cc3b2" testName="ExpandCollapseSelect" computerName="AGGEORGIEV" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f5133670-620a-4516-bb36-0babe7981acf">
+    </TestResult>
+    <TestResult executionId="259d288a-a8d8-44ca-8c1b-d474af1b9053" testId="3bc78c73-21b4-4b22-bcb2-e2745b04c3b8" testName="CloseOpen" computerName="AGGEORGIEV" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="259d288a-a8d8-44ca-8c1b-d474af1b9053">
+    </TestResult>
+    <TestResult executionId="9c737de5-ddca-413a-86cf-0828887ec407" testId="0d3e5eb7-3e0b-4c04-8d52-4c3091995711" testName="OpenActivateRefreshclose" computerName="AGGEORGIEV" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9c737de5-ddca-413a-86cf-0828887ec407">
+    </TestResult>
+    <TestResult executionId="e785c9f7-ecf6-4d26-bba4-6ad8ffbda2bc" testId="da26f32a-9b0d-4e31-807b-8c343e29b840" testName="DisableEnable" computerName="AGGEORGIEV" testType="c4241296-3c6e-46b1-bf92-e0bd3e0eb017" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e785c9f7-ecf6-4d26-bba4-6ad8ffbda2bc">
+    </TestResult>
+  </Results>
+</TestRun>

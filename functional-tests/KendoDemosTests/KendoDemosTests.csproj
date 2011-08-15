@@ -60,6 +60,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UIWidgets\AutoComplete\API\FindStartingWith.tstest.cs">
+      <DependentUpon>FindStartingWith.tstest</DependentUpon>
+    </Compile>
+    <Compile Include="UIWidgets\Chart\Events.tstest.cs">
+      <DependentUpon>Events.tstest</DependentUpon>
+    </Compile>
+    <Compile Include="UIWidgets\DropDown\API\DisableEnable.tstest.cs">
+      <DependentUpon>DisableEnable.tstest</DependentUpon>
+    </Compile>
+    <Compile Include="UIWidgets\DropDown\API\OpenClose.tstest.cs">
+      <DependentUpon>OpenClose.tstest</DependentUpon>
+    </Compile>
     <Compile Include="UIWidgets\Menu\API\Append.tstest.cs">
       <DependentUpon>Append.tstest</DependentUpon>
     </Compile>
@@ -70,10 +82,23 @@
       <DependentUpon>OpenClose.tstest</DependentUpon>
     </Compile>
     <None Include="Settings.aiis" />
+    <None Include="UIWidgets\AutoComplete\API\FindStartingWith.tstest" />
+    <None Include="UIWidgets\AutoComplete\API\SetValue.tstest" />
     <None Include="UIWidgets\AutoComplete\BasicUsage\SelectOption.tstest" />
     <None Include="UIWidgets\AutoComplete\BasicUsage\SetTwoValuesRevertToBlank.tstest" />
+    <None Include="UIWidgets\AutoComplete\Events\Events.tstest" />
+    <None Include="UIWidgets\Chart\BasicUsage.tstest" />
+    <None Include="UIWidgets\Chart\Events.tstest" />
     <None Include="UIWidgets\ComboBox\BasicUsage\ChangeValueInput.tstest" />
     <None Include="UIWidgets\ComboBox\BasicUsage\ChangeValueKeyboardSelect.tstest" />
+    <None Include="UIWidgets\DropDown\API\DisableEnable.tstest" />
+    <None Include="UIWidgets\DropDown\API\OpenClose.tstest" />
+    <None Include="UIWidgets\DropDown\API\SelectByIndex.tstest" />
+    <None Include="UIWidgets\DropDown\API\SelectByValue.tstest" />
+    <None Include="UIWidgets\DropDown\API\SelectItemStartingWith.tstest" />
+    <None Include="UIWidgets\DropDown\BindingToRemoteData.tstest" />
+    <None Include="UIWidgets\DropDown\CustomizingTemplates.tstest" />
+    <None Include="UIWidgets\DropDown\Events.tstest" />
     <None Include="UIWidgets\Grid\BasicUsage\GroupByAge.tstest" />
     <None Include="UIWidgets\Grid\Events\Events.tstest" />
     <None Include="UIWidgets\Grid\Selection\SelectMultipleCells.tstest" />
@@ -372,6 +397,71 @@
   <ItemGroup>
     <None Include="UIWidgets\TreeView\Events\DragAndDropInvalid.resx">
       <DependentUpon>DragAndDropInvalid.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\DropDown\API\DisableEnable.resx">
+      <DependentUpon>DisableEnable.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\DropDown\API\OpenClose.resx">
+      <DependentUpon>OpenClose.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\DropDown\API\SelectByIndex.resx">
+      <DependentUpon>SelectByIndex.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\DropDown\API\SelectByValue.resx">
+      <DependentUpon>SelectByValue.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\DropDown\API\SelectItemStartingWith.resx">
+      <DependentUpon>SelectItemStartingWith.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\DropDown\Events.resx">
+      <DependentUpon>Events.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\DropDown\CustomizingTemplates.resx">
+      <DependentUpon>CustomizingTemplates.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\DropDown\BindingToRemoteData.resx">
+      <DependentUpon>BindingToRemoteData.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\Chart\BasicUsage.resx">
+      <DependentUpon>BasicUsage.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\Chart\Events.resx">
+      <DependentUpon>Events.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\AutoComplete\Events\Events.resx">
+      <DependentUpon>Events.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\AutoComplete\API\SetValue.resx">
+      <DependentUpon>SetValue.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\AutoComplete\API\FindStartingWith.resx">
+      <DependentUpon>FindStartingWith.tstest</DependentUpon>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
