@@ -743,8 +743,7 @@
 
     Cache.create = function(options) {
         var store = {
-            "inmemory": function() { return new Cache(); },
-            "localstorage": function() { return new LocalStorageCache(); }
+            "inmemory": function() { return new Cache(); }
         };
 
         if (isPlainObject(options) && isFunction(options.find)) {
@@ -776,27 +775,6 @@
         },
         remove: function(key) {
             delete this._store[stringify(key)];
-        }
-    }
-
-    function LocalStorageCache() {
-        this._store = window.localStorage;
-    }
-
-    LocalStorageCache.prototype = {
-        add: function(key, data) {
-            if (key != undefined) {
-                this._store.setItem(stringify(key), stringify(data));
-            }
-        },
-        find: function(key) {
-            return $.parseJSON(this._store.getItem(stringify(key)));
-        },
-        clear: function() {
-            this._store.clear();
-        },
-        remove: function(key) {
-            this._store.removeItem(stringify(key));
         }
     }
 
@@ -1879,7 +1857,6 @@
         DataSource: DataSource,
         LocalTransport: LocalTransport,
         RemoteTransport: RemoteTransport,
-        LocalStorageCache: LocalStorageCache,
         Cache: Cache,
         DataReader: DataReader
     });
