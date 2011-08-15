@@ -385,63 +385,67 @@
 // Date and Number formatting
 
 (function() {
-    var culture =   {
-        days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-        abbrDays: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-        shortestDays: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
-        months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-        abbrMonths: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-        longTime: "h:mm:ss tt",
-        longDate: "dddd, MMMM dd, yyyy",
-        shortDate: "M/d/yyyy",
-        shortTime: "h:mm tt",
-        fullDateTime: "dddd, MMMM dd, yyyy h:mm:ss tt",
-        generalDateShortTime: "M/d/yyyy h:mm tt",
-        generalDateTime: "M/d/yyyy h:mm:ss tt",
-        sortableDateTime: "yyyy'-'MM'-'ddTHH':'mm':'ss",
-        universalSortableDateTime: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
-        monthYear: "MMMM, yyyy",
-        monthDay: "MMMM dd",
-        am: "AM",
-        pm: "PM",
-        dateSeparator: "/",
-        timeSeparator: ":"
-    },
-    standardFormats = {
-        d: culture.shortDate,
-        D: culture.longDate,
-        F: culture.fullDateTime,
-        g: culture.generalDateShortTime,
-        G: culture.generalDateTime,
-        m: culture.monthDay,
-        M: culture.monthDay,
-        s: culture.sortableDateTime,
-        t: culture.shortTime,
-        T: culture.longTime,
-        u: culture.universalSortableDateTime,
-        y: culture.monthYear,
-        Y: culture.monthYear
-    },
-    patterns = {
-        numeric: ["n", "-n"],
-        currency: ["$n", "($n)"],
-        percent: ["n %", "-n %"]
-    },
-    formatRegExp = /{(\d+)(:[^\}]+)?}/g,
-    dateFormatRegExp = /dddd|ddd|dd|d|MMMM|MMM|MM|M|yyyy|yy|HH|H|hh|h|mm|m|fff|ff|f|tt|ss|s|"[^"]*"|'[^']*'/g,
-    standardFormatRegExp =  /^(n|c|p|e)(\d*)$/i,
-    EMPTY = "",
-    POINT = ".",
-    COMMA = ",",
-    sharp = "#",
-    zero = "0";
+    var patterns = {
+            numeric: ["n", "-n"],
+            currency: ["$n", "($n)"],
+            percent: ["n %", "-n %"]
+        },
+        formatRegExp = /{(\d+)(:[^\}]+)?}/g,
+        dateFormatRegExp = /dddd|ddd|dd|d|MMMM|MMM|MM|M|yyyy|yy|HH|H|hh|h|mm|m|fff|ff|f|tt|ss|s|"[^"]*"|'[^']*'/g,
+        standardFormatRegExp =  /^(n|c|p|e)(\d*)$/i,
+        EMPTY = "",
+        POINT = ".",
+        COMMA = ",",
+        sharp = "#",
+        zero = "0";
+
+    kendo.culture = {
+        calendars: {
+            standard: {
+                days: {
+                    names: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+                    namesAbbr: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+                    namesShort: [ "Su", "Mo", "Tu", "We", "Th", "Fr", "Sa" ]
+                },
+                months: {
+                    names: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+                    namesAbbr: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+                },
+                AM: ["AM"],
+                PM: ["PM"],
+                patterns: {
+                    d: "M/d/yyyy",
+                    D: "dddd, MMMM dd, yyyy",
+                    F: "dddd, MMMM dd, yyyy h:mm:ss tt",
+                    g: "M/d/yyyy h:mm tt",
+                    G: "M/d/yyyy h:mm:ss tt",
+                    m: "MMMM dd",
+                    M: "MMMM dd",
+                    s: "yyyy'-'MM'-'ddTHH':'mm':'ss",
+                    t: "h:mm tt",
+                    T: "h:mm:ss tt",
+                    u: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
+                    y: "MMMM, yyyy",
+                    Y: "MMMM, yyyy"
+                },
+                "/": "/",
+                ":": ":"
+            }
+        },
+    };
+
+    kendo.culture.calendar = kendo.culture.calendars.standard;
 
     function pad(number) {
         return number < 10 ? "0" + number : number;
     }
 
     function formatDate(date, format) {
-        format = standardFormats[format] || format;
+        var calendar = kendo.culture.calendar,
+            days = calendar.days,
+            months = calendar.months;
+
+        format = calendar.patterns[format] || format;
 
         return format.replace(dateFormatRegExp, function (match) {
             var result;
@@ -451,17 +455,17 @@
             } else if (match === "dd") {
                 result = pad(date.getDate());
             } else if (match === "ddd") {
-                result = culture.abbrDays[date.getDay()];
+                result = days.namesAbbr[date.getDay()];
             } else if (match === "dddd") {
-                result = culture.days[date.getDay()];
+                result = days.names[date.getDay()];
             } else if (match === "M") {
                 result = date.getMonth() + 1;
             } else if (match === "MM") {
                 result = pad(date.getMonth() + 1);
             } else if (match === "MMM") {
-                result = culture.abbrMonths[date.getMonth()];
+                result = months.namesAbbr[date.getMonth()];
             } else if (match === "MMMM") {
-                result = culture.months[date.getMonth()];
+                result = months.names[date.getMonth()];
             } else if (match === "yy") {
                 result = pad(date.getFullYear() % 100);
             } else if (match === "yyyy") {
@@ -489,7 +493,7 @@
             } else if (match === "fff") {
                 result = date.getMilliseconds();
             } else if (match === "tt") {
-                result = date.getHours() < 12 ? culture.am : culture.pm
+                result = date.getHours() < 12 ? calendar.AM[0] : calendar.PM[0]
             }
 
             return result !== undefined ? result : match.slice(1, match.length - 1);
