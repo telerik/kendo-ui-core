@@ -53,6 +53,21 @@
                 equal(dataSource.at(0), dataSource.at(0));
             });
 
+            test("setting data should rebuild idmap", function() {
+                var dataSource = new DataSource({
+                        data: [ { idx: 0 },{ idx: 1 },{ idx: 2 } ],
+                        change: function() {
+                            called = true;
+                        },
+                        schema: {
+                            model: { id: "idx" }
+                        }
+                    });
+
+                dataSource.data([ { idx: 3 },{ idx: 4 },{ idx: 5 } ]);
+                var item = dataSource.find(3);
+                equal(item.idx, 3);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

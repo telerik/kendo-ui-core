@@ -339,6 +339,35 @@
                 ok(!dataSource._pending);
             });
 
+            test("setting data should trigger change event", function() {
+                var called = false,
+                    dataSource = new DataSource({
+                        data: [1,2,3,4,5],
+                        change: function() {
+                            called = true;
+                        }
+                    });
+                    dataSource.data([6,7,8,9,10]);
+                    ok(called);
+            });
+
+            test("setting data should updates the dataSource data", function() {
+                var dataSource = new DataSource({
+                        data: [1,2,3,4,5],
+                        change: function() {
+                            called = true;
+                        }
+                    });
+
+                dataSource.data([6,7,8,9,10]);
+                equal(dataSource.data().length, 5);
+                equal(dataSource.data()[0], 6);
+                equal(dataSource.data()[1], 7);
+                equal(dataSource.data()[2], 8);
+                equal(dataSource.data()[3], 9);
+                equal(dataSource.data()[4], 10);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
