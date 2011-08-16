@@ -214,19 +214,11 @@
                 return template;
             }
 
-            if (useWithBlock) {
-                 functionBody = "var o=[];with(" + paramName + "){o.push('";
-                 functionBody += template.replace(/[\r\t\n]/g, " ")
-                    .replace(/'(?=[^#]*#>)/g, "\t")
-                    .split("'").join("\\'")
-                    .split("\t").join("'")
-                    .replace(/<#=(.+?)#>/g, "',$1,'")
-                    .split("<#").join("');")
-                    .split("#>").join("o.push('")
-                    + "');}return o.join('');";
-            } else {
-                functionBody = "var e=kendo.htmlEncode,o='",
-                functionBody += template.replace(newLineTabRegExp, " ")
+            functionBody += useWithBlock ? "with(" + paramName + "){" : "";
+
+            functionBody += "o='";
+
+            functionBody += template.replace(newLineTabRegExp, " ")
                 .replace(quoteRegExp,"\t")
                 .split("'").join("\\'")
                 .split("\t").join("'")
@@ -235,10 +227,9 @@
                 .split(begin).join("';")
                 .split(end).join("o+='");
 
-                functionBody += "';";
+            functionBody += useWithBlock ? "';}" : "';";
 
-                functionBody += "return o;";
-            }
+            functionBody += "return o;";
 
             return new Function(paramName, functionBody);
         }
