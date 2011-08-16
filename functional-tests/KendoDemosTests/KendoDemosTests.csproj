@@ -63,8 +63,8 @@
     <Compile Include="UIWidgets\AutoComplete\API\FindStartingWith.tstest.cs">
       <DependentUpon>FindStartingWith.tstest</DependentUpon>
     </Compile>
-    <Compile Include="UIWidgets\Chart\Events.tstest.cs">
-      <DependentUpon>Events.tstest</DependentUpon>
+    <Compile Include="UIWidgets\Chart\ChartEventsEvents.tstest.cs">
+      <DependentUpon>ChartEventsEvents.tstest</DependentUpon>
     </Compile>
     <Compile Include="UIWidgets\DropDown\API\DisableEnable.tstest.cs">
       <DependentUpon>DisableEnable.tstest</DependentUpon>
@@ -86,11 +86,12 @@
     <None Include="UIWidgets\AutoComplete\API\SetValue.tstest" />
     <None Include="UIWidgets\AutoComplete\BasicUsage\SelectOption.tstest" />
     <None Include="UIWidgets\AutoComplete\BasicUsage\SetTwoValuesRevertToBlank.tstest" />
-    <None Include="UIWidgets\AutoComplete\Events\Events.tstest" />
+    <None Include="UIWidgets\AutoComplete\Events\AutoCompleteEvents.tstest" />
     <None Include="UIWidgets\Chart\BasicUsage.tstest" />
-    <None Include="UIWidgets\Chart\Events.tstest" />
+    <None Include="UIWidgets\Chart\ChartEventsEvents.tstest" />
     <None Include="UIWidgets\ComboBox\BasicUsage\ChangeValueInput.tstest" />
     <None Include="UIWidgets\ComboBox\BasicUsage\ChangeValueKeyboardSelect.tstest" />
+    <None Include="UIWidgets\ComboBox\Events\ComboBoxEvents.tstest" />
     <None Include="UIWidgets\DropDown\API\DisableEnable.tstest" />
     <None Include="UIWidgets\DropDown\API\OpenClose.tstest" />
     <None Include="UIWidgets\DropDown\API\SelectByIndex.tstest" />
@@ -148,6 +149,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\" />
+    <Folder Include="UIWidgets\ComboBox\API\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="UIWidgets\AutoComplete\BasicUsage\SelectOption.resx">
@@ -445,13 +447,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="UIWidgets\Chart\Events.resx">
-      <DependentUpon>Events.tstest</DependentUpon>
+    <None Include="UIWidgets\Chart\ChartEventsEvents.resx">
+      <DependentUpon>ChartEventsEvents.tstest</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="UIWidgets\AutoComplete\Events\Events.resx">
-      <DependentUpon>Events.tstest</DependentUpon>
+    <None Include="UIWidgets\AutoComplete\Events\AutoCompleteEvents.resx">
+      <DependentUpon>AutoCompleteEvents.tstest</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -462,6 +464,11 @@
   <ItemGroup>
     <None Include="UIWidgets\AutoComplete\API\FindStartingWith.resx">
       <DependentUpon>FindStartingWith.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\ComboBox\Events\ComboBoxEvents.resx">
+      <DependentUpon>ComboBoxEvents.tstest</DependentUpon>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

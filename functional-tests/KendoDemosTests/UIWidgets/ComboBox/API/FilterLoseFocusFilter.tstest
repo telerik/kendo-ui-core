@@ -13,108 +13,17 @@
     <d2p1:TSQL />
   </DataInfo>
   <Description />
-  <IndependentDescriptors>
-    <ElementDescriptor>
-      <DomStateKey />
-      <FindExpression i:type="HtmlFindExpressionElement">
-        <BackupSearchClause>/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[2]/div[1]/div[1]/div[1]/span[1]</BackupSearchClause>
-        <FindExpressions xmlns:d5p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
-          <d5p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
-            <d5p1:key>Html</d5p1:key>
-            <d5p1:value i:type="HtmlFindExpression">
-              <ChainStops xmlns:d8p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-              <Clauses>
-                <HtmlFindClause>
-                  <Clause>TextContent=Pulp Fiction</Clause>
-                </HtmlFindClause>
-                <HtmlFindClause>
-                  <Clause>tagname=span</Clause>
-                </HtmlFindClause>
-              </Clauses>
-              <Constraints />
-            </d5p1:value>
-          </d5p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
-        </FindExpressions>
-        <Name>PulpFictionSpan</Name>
-        <NodeKind>4</NodeKind>
-        <TechnologyType>Html</TechnologyType>
-      </FindExpression>
-      <FindInfo i:nil="true" />
-      <Frame i:nil="true" />
-      <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlSpan</HtmlControlType>
-      <IsIndependent>true</IsIndependent>
-      <Name />
-      <Page xmlns:d4p1="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0" i:type="d4p1:PageUri">
-        <d4p1:AlwaysUseTitleInCompare>false</d4p1:AlwaysUseTitleInCompare>
-        <d4p1:BaseUrl>http://aggeorgiev</d4p1:BaseUrl>
-        <d4p1:CompareMode>FullPathAndQuery</d4p1:CompareMode>
-        <d4p1:EquivalentUrls xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-        <d4p1:Fragment />
-        <d4p1:FriendlyName>API6</d4p1:FriendlyName>
-        <d4p1:Path>/kendo/live/dropdownlist/api.html</d4p1:Path>
-        <d4p1:Query />
-        <d4p1:Title>API</d4p1:Title>
-      </Page>
-      <Region i:nil="true" />
-      <TechnologyType>Html</TechnologyType>
-      <Version>200</Version>
-    </ElementDescriptor>
-    <ElementDescriptor>
-      <DomStateKey />
-      <FindExpression i:type="HtmlFindExpressionElement">
-        <BackupSearchClause>/html[1]/body[1]/div[3]/ul[1]/li[5]</BackupSearchClause>
-        <FindExpressions xmlns:d5p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
-          <d5p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
-            <d5p1:key>Html</d5p1:key>
-            <d5p1:value i:type="HtmlFindExpression">
-              <ChainStops xmlns:d8p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-              <Clauses>
-                <HtmlFindClause>
-                  <Clause>TextContent=Pulp Fiction</Clause>
-                </HtmlFindClause>
-                <HtmlFindClause>
-                  <Clause>tagname=li</Clause>
-                </HtmlFindClause>
-              </Clauses>
-              <Constraints />
-            </d5p1:value>
-          </d5p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
-        </FindExpressions>
-        <Name>PulpFictionListItem</Name>
-        <NodeKind>4</NodeKind>
-        <TechnologyType>Html</TechnologyType>
-      </FindExpression>
-      <FindInfo i:nil="true" />
-      <Frame i:nil="true" />
-      <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlControl</HtmlControlType>
-      <IsIndependent>true</IsIndependent>
-      <Name />
-      <Page xmlns:d4p1="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0" i:type="d4p1:PageUri">
-        <d4p1:AlwaysUseTitleInCompare>false</d4p1:AlwaysUseTitleInCompare>
-        <d4p1:BaseUrl>http://aggeorgiev</d4p1:BaseUrl>
-        <d4p1:CompareMode>FullPathAndQuery</d4p1:CompareMode>
-        <d4p1:EquivalentUrls xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-        <d4p1:Fragment />
-        <d4p1:FriendlyName>API6</d4p1:FriendlyName>
-        <d4p1:Path>/kendo/live/dropdownlist/api.html</d4p1:Path>
-        <d4p1:Query />
-        <d4p1:Title>API</d4p1:Title>
-      </Page>
-      <Region i:nil="true" />
-      <TechnologyType>Html</TechnologyType>
-      <Version>200</Version>
-    </ElementDescriptor>
-  </IndependentDescriptors>
-  <Name>DisableEnable</Name>
+  <IndependentDescriptors />
+  <Name>FilterLoseFocusFilter</Name>
   <Steps xmlns:d2p1="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Navigate to : '/dropdownlist/api.html'</d2p1:Description>
+      <d2p1:Description>Navigate to : '/combobox/api.html'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>1</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>7f928584-0a0b-4a45-a973-6bbeadfded9e</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>3b08f77c-d458-437a-a21e-188fbd45ad6e</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -136,20 +45,20 @@
         <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
         <d2p1:BaseUrl>http://aggeorgiev/kendo/live</d2p1:BaseUrl>
-        <d2p1:NavigateURL>/dropdownlist/api.html</d2p1:NavigateURL>
+        <d2p1:NavigateURL>/combobox/api.html</d2p1:NavigateURL>
       </d2p1:Step>
-      <d2p1:StepImageKey>DisableEnablecha40byh.kep</d2p1:StepImageKey>
+      <d2p1:StepImageKey>FilterLoseFocusFilterfhiz4twg.zwo</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
       <d2p1:Version>200</d2p1:Version>
     </d2p1:AutomationStep>
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Click 'DisableButtonTag'</d2p1:Description>
+      <d2p1:Description>Click 'NoneSpan'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>2</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>24e60fbe-984c-403a-89f9-dbfa7a0fa18c</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>9e2cf3ce-417a-496c-9ad8-f3eb2bb2659a</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -167,7 +76,7 @@
             <d5p1:Value>
               <DomStateKey />
               <FindExpression i:type="HtmlFindExpressionElement">
-                <BackupSearchClause>/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[2]/div[1]/div[2]/ul[1]/li[1]/button[2]</BackupSearchClause>
+                <BackupSearchClause>/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[2]/div[1]/div[2]/ul[1]/li[4]/div[1]/div[1]/span[1]</BackupSearchClause>
                 <FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
                   <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
                     <d9p1:key>Html</d9p1:key>
@@ -175,23 +84,23 @@
                       <ChainStops />
                       <Clauses>
                         <HtmlFindClause>
-                          <Clause>id=disable</Clause>
+                          <Clause>TextContent=None</Clause>
                         </HtmlFindClause>
                         <HtmlFindClause>
-                          <Clause>tagname=button</Clause>
+                          <Clause>tagname=span</Clause>
                         </HtmlFindClause>
                       </Clauses>
                       <Constraints />
                     </d9p1:value>
                   </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
                 </FindExpressions>
-                <Name>DisableButtonTag</Name>
+                <Name>NoneSpan</Name>
                 <NodeKind>4</NodeKind>
                 <TechnologyType>Html</TechnologyType>
               </FindExpression>
               <FindInfo i:nil="true" />
               <Frame i:nil="true" />
-              <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlButton</HtmlControlType>
+              <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlSpan</HtmlControlType>
               <IsIndependent>false</IsIndependent>
               <Name>target</Name>
               <Page i:type="d2p1:PageUri">
@@ -200,8 +109,8 @@
                 <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
                 <d2p1:EquivalentUrls />
                 <d2p1:Fragment />
-                <d2p1:FriendlyName>API6</d2p1:FriendlyName>
-                <d2p1:Path>/kendo/live/dropdownlist/api.html</d2p1:Path>
+                <d2p1:FriendlyName>API8</d2p1:FriendlyName>
+                <d2p1:Path>/kendo/live/combobox/api.html</d2p1:Path>
                 <d2p1:Query />
                 <d2p1:Title>API</d2p1:Title>
               </Page>
@@ -221,18 +130,18 @@
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
         <d2p1:SimulateRealClick>false</d2p1:SimulateRealClick>
       </d2p1:Step>
-      <d2p1:StepImageKey>DisableEnable02wj4utv.qoj</d2p1:StepImageKey>
+      <d2p1:StepImageKey>FilterLoseFocusFilter2ct1df24.xkk</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
       <d2p1:Version>200</d2p1:Version>
     </d2p1:AutomationStep>
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Click 'SelectSpan'</d2p1:Description>
+      <d2p1:Description>Click 'StartsWithListItem'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>3</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>f0a16ba9-1a24-4219-b51e-eb47082297b1</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>4c561c85-c561-49c1-aa67-f1cabe1c417f</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -250,33 +159,31 @@
             <d5p1:Value>
               <DomStateKey />
               <FindExpression i:type="HtmlFindExpressionElement">
-                <BackupSearchClause>/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[2]/div[1]/div[1]/div[1]/span[2]/span[1]</BackupSearchClause>
+                <BackupSearchClause>/html[1]/body[1]/div[3]/ul[1]/li[2]</BackupSearchClause>
                 <FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
                   <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
                     <d9p1:key>Html</d9p1:key>
                     <d9p1:value i:type="HtmlFindExpression">
-                      <ChainStops>
-                        <d5p1:int>1</d5p1:int>
-                      </ChainStops>
+                      <ChainStops />
                       <Clauses>
                         <HtmlFindClause>
-                          <Clause>id=products_wrapper</Clause>
+                          <Clause>tagname=li</Clause>
                         </HtmlFindClause>
                         <HtmlFindClause>
-                          <Clause>tagIndex=span:2</Clause>
+                          <Clause>TextContent=Starts with</Clause>
                         </HtmlFindClause>
                       </Clauses>
                       <Constraints />
                     </d9p1:value>
                   </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
                 </FindExpressions>
-                <Name>SelectSpan</Name>
+                <Name>StartsWithListItem</Name>
                 <NodeKind>4</NodeKind>
                 <TechnologyType>Html</TechnologyType>
               </FindExpression>
               <FindInfo i:nil="true" />
               <Frame i:nil="true" />
-              <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlSpan</HtmlControlType>
+              <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlControl</HtmlControlType>
               <IsIndependent>false</IsIndependent>
               <Name>target</Name>
               <Page i:type="d2p1:PageUri">
@@ -285,8 +192,8 @@
                 <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
                 <d2p1:EquivalentUrls />
                 <d2p1:Fragment />
-                <d2p1:FriendlyName>API6</d2p1:FriendlyName>
-                <d2p1:Path>/kendo/live/dropdownlist/api.html</d2p1:Path>
+                <d2p1:FriendlyName>API8</d2p1:FriendlyName>
+                <d2p1:Path>/kendo/live/combobox/api.html</d2p1:Path>
                 <d2p1:Query />
                 <d2p1:Title>API</d2p1:Title>
               </Page>
@@ -304,60 +211,20 @@
         <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
         <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
-        <d2p1:SimulateRealClick>true</d2p1:SimulateRealClick>
+        <d2p1:SimulateRealClick>false</d2p1:SimulateRealClick>
       </d2p1:Step>
-      <d2p1:StepImageKey>DisableEnable0ccsq2o0.s0k</d2p1:StepImageKey>
+      <d2p1:StepImageKey>FilterLoseFocusFilterezz114y4.foh</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
       <d2p1:Version>200</d2p1:Version>
     </d2p1:AutomationStep>
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>[DisableEnable_CodedStep] : @"Verify element 'PulpFictionSpan' 'is not' visible.</d2p1:Description>
-      <d2p1:Enabled>true</d2p1:Enabled>
-      <d2p1:Id>DisableEnable_CodedStep</d2p1:Id>
-      <d2p1:Order>4</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>bdeaabbb-bda5-4cd0-9d78-ead0ec31958e</d2p1:Runtime_x0020_ID>
-      <d2p1:Step i:type="d2p1:CodedStepDescriptor">
-        <d2p1:Constraints>
-          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-            <d6p1:KeyValueOfstringstring>
-              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
-              <d6p1:Value />
-            </d6p1:KeyValueOfstringstring>
-          </ConstraintValues>
-        </d2p1:Constraints>
-        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-        <d2p1:EditorType />
-        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-        <d2p1:LogMessageOnFailure />
-        <d2p1:Pause>None</d2p1:Pause>
-        <d2p1:RunsAgainstVersion />
-        <d2p1:StepType>Action</d2p1:StepType>
-        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
-        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
-        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
-        <d2p1:Code>
-            // Verify element 'PulpFictionSpan' 'is not' visible.
-            HtmlControl PulpFictionListItem = Pages.API6.PulpFictionListItem;
-            PulpFictionListItem.Wait.ForExists(10000);
-            Assert.IsFalse(PulpFictionListItem.IsVisible());
-
-</d2p1:Code>
-        <d2p1:RequiresSilverlight>false</d2p1:RequiresSilverlight>
-      </d2p1:Step>
-      <d2p1:StepImageKey>DisableEnableqccw5nxu.0xb</d2p1:StepImageKey>
-      <d2p1:StepState>Coded</d2p1:StepState>
-      <d2p1:Version>200</d2p1:Version>
-    </d2p1:AutomationStep>
-    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
-      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
-      <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Click 'EnableButtonTag'</d2p1:Description>
+      <d2p1:Description>Click 'FindButtonTag'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
-      <d2p1:Order>5</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>128cc7ef-4dcd-49fc-b8cd-511b16e773c4</d2p1:Runtime_x0020_ID>
+      <d2p1:Order>4</d2p1:Order>
+      <d2p1:Runtime_x0020_ID>b1f33e1e-efdb-4707-9fe4-62c1b686897a</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -375,7 +242,7 @@
             <d5p1:Value>
               <DomStateKey />
               <FindExpression i:type="HtmlFindExpressionElement">
-                <BackupSearchClause>/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[2]/div[1]/div[2]/ul[1]/li[1]/button[1]</BackupSearchClause>
+                <BackupSearchClause>/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[2]/div[1]/div[2]/ul[1]/li[5]/button[1]</BackupSearchClause>
                 <FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
                   <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
                     <d9p1:key>Html</d9p1:key>
@@ -383,17 +250,17 @@
                       <ChainStops />
                       <Clauses>
                         <HtmlFindClause>
-                          <Clause>id=enable</Clause>
+                          <Clause>tagname=button</Clause>
                         </HtmlFindClause>
                         <HtmlFindClause>
-                          <Clause>tagname=button</Clause>
+                          <Clause>id=find</Clause>
                         </HtmlFindClause>
                       </Clauses>
                       <Constraints />
                     </d9p1:value>
                   </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
                 </FindExpressions>
-                <Name>EnableButtonTag</Name>
+                <Name>FindButtonTag</Name>
                 <NodeKind>4</NodeKind>
                 <TechnologyType>Html</TechnologyType>
               </FindExpression>
@@ -408,8 +275,8 @@
                 <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
                 <d2p1:EquivalentUrls />
                 <d2p1:Fragment />
-                <d2p1:FriendlyName>API6</d2p1:FriendlyName>
-                <d2p1:Path>/kendo/live/dropdownlist/api.html</d2p1:Path>
+                <d2p1:FriendlyName>API8</d2p1:FriendlyName>
+                <d2p1:Path>/kendo/live/combobox/api.html</d2p1:Path>
                 <d2p1:Query />
                 <d2p1:Title>API</d2p1:Title>
               </Page>
@@ -429,18 +296,178 @@
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
         <d2p1:SimulateRealClick>false</d2p1:SimulateRealClick>
       </d2p1:Step>
-      <d2p1:StepImageKey>DisableEnable4vafhlto.0xu</d2p1:StepImageKey>
+      <d2p1:StepImageKey>FilterLoseFocusFilter344ongus.mek</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
       <d2p1:Version>200</d2p1:Version>
     </d2p1:AutomationStep>
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Click 'SelectSpan'</d2p1:Description>
+      <d2p1:Description>Wait for element 'TheListItem' 'is' visible.</d2p1:Description>
+      <d2p1:Enabled>true</d2p1:Enabled>
+      <d2p1:Id />
+      <d2p1:Order>5</d2p1:Order>
+      <d2p1:Runtime_x0020_ID>d8108457-a213-46c0-b7cb-d6af45552978</d2p1:Runtime_x0020_ID>
+      <d2p1:Step i:type="d2p1:VisibleVerificationDescriptor">
+        <d2p1:Constraints>
+          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        </d2p1:Constraints>
+        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:EditorType />
+        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+          <d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+            <d5p1:Key>verifyTarget</d5p1:Key>
+            <d5p1:Value>
+              <DomStateKey />
+              <FindExpression i:type="HtmlFindExpressionElement">
+                <BackupSearchClause>/html[1]/body[1]/div[3]/ul[1]/li[9]</BackupSearchClause>
+                <FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
+                  <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                    <d9p1:key>Html</d9p1:key>
+                    <d9p1:value i:type="HtmlFindExpression">
+                      <ChainStops />
+                      <Clauses>
+                        <HtmlFindClause>
+                          <Clause>tagname=li</Clause>
+                        </HtmlFindClause>
+                        <HtmlFindClause>
+                          <Clause>TextContent=^The Godfather: </Clause>
+                        </HtmlFindClause>
+                      </Clauses>
+                      <Constraints />
+                    </d9p1:value>
+                  </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                </FindExpressions>
+                <Name>TheListItem</Name>
+                <NodeKind>4</NodeKind>
+                <TechnologyType>Html</TechnologyType>
+              </FindExpression>
+              <FindInfo i:nil="true" />
+              <Frame i:nil="true" />
+              <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlControl</HtmlControlType>
+              <IsIndependent>false</IsIndependent>
+              <Name>verifyTarget</Name>
+              <Page i:type="d2p1:PageUri">
+                <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
+                <d2p1:BaseUrl>http://aggeorgiev</d2p1:BaseUrl>
+                <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
+                <d2p1:EquivalentUrls />
+                <d2p1:Fragment />
+                <d2p1:FriendlyName>API8</d2p1:FriendlyName>
+                <d2p1:Path>/kendo/live/combobox/api.html</d2p1:Path>
+                <d2p1:Query />
+                <d2p1:Title>API</d2p1:Title>
+              </Page>
+              <Region i:nil="true" />
+              <TechnologyType>Html</TechnologyType>
+              <Version>200</Version>
+            </d5p1:Value>
+          </d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+        </d2p1:Elements>
+        <d2p1:LogMessageOnFailure />
+        <d2p1:Pause>None</d2p1:Pause>
+        <d2p1:RunsAgainstVersion />
+        <d2p1:StepType>Wait</d2p1:StepType>
+        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
+        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
+        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
+        <d2p1:CheckInterval>500</d2p1:CheckInterval>
+        <d2p1:DataBindVariableName i:nil="true" />
+        <d2p1:Timeout>10000</d2p1:Timeout>
+        <d2p1:IsVisible>true</d2p1:IsVisible>
+      </d2p1:Step>
+      <d2p1:StepImageKey>FilterLoseFocusFilterbyzt0dso.sh5</d2p1:StepImageKey>
+      <d2p1:StepState>NoCode</d2p1:StepState>
+      <d2p1:Version>200</d2p1:Version>
+    </d2p1:AutomationStep>
+    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
+      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
+      <d2p1:CustomDescription i:nil="true" />
+      <d2p1:Description>Verify ExistsNot 'InceptionListItem'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>6</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>6837cfcd-1939-4908-8906-9f85a999aebd</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>e31f41e9-3209-451f-b1c3-1b31996cb8f0</d2p1:Runtime_x0020_ID>
+      <d2p1:Step i:type="d2p1:ExistsVerificationDescriptor">
+        <d2p1:Constraints>
+          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        </d2p1:Constraints>
+        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:EditorType />
+        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+          <d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+            <d5p1:Key>target</d5p1:Key>
+            <d5p1:Value>
+              <DomStateKey />
+              <FindExpression i:type="HtmlFindExpressionElement">
+                <BackupSearchClause>/html[1]/body[1]/div[3]/ul[1]/li[3]</BackupSearchClause>
+                <FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
+                  <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                    <d9p1:key>Html</d9p1:key>
+                    <d9p1:value i:type="HtmlFindExpression">
+                      <ChainStops />
+                      <Clauses>
+                        <HtmlFindClause>
+                          <Clause>tagname=li</Clause>
+                        </HtmlFindClause>
+                        <HtmlFindClause>
+                          <Clause>TextContent=Inception</Clause>
+                        </HtmlFindClause>
+                      </Clauses>
+                      <Constraints />
+                    </d9p1:value>
+                  </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                </FindExpressions>
+                <Name>InceptionListItem</Name>
+                <NodeKind>4</NodeKind>
+                <TechnologyType>Html</TechnologyType>
+              </FindExpression>
+              <FindInfo i:nil="true" />
+              <Frame i:nil="true" />
+              <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlControl</HtmlControlType>
+              <IsIndependent>false</IsIndependent>
+              <Name>target</Name>
+              <Page i:type="d2p1:PageUri">
+                <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
+                <d2p1:BaseUrl>http://aggeorgiev</d2p1:BaseUrl>
+                <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
+                <d2p1:EquivalentUrls />
+                <d2p1:Fragment />
+                <d2p1:FriendlyName>API8</d2p1:FriendlyName>
+                <d2p1:Path>/kendo/live/combobox/api.html</d2p1:Path>
+                <d2p1:Query />
+                <d2p1:Title>API</d2p1:Title>
+              </Page>
+              <Region i:nil="true" />
+              <TechnologyType>Html</TechnologyType>
+              <Version>200</Version>
+            </d5p1:Value>
+          </d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+        </d2p1:Elements>
+        <d2p1:LogMessageOnFailure />
+        <d2p1:Pause>None</d2p1:Pause>
+        <d2p1:RunsAgainstVersion />
+        <d2p1:StepType>Verification</d2p1:StepType>
+        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
+        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
+        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
+        <d2p1:CheckInterval>500</d2p1:CheckInterval>
+        <d2p1:DataBindVariableName i:nil="true" />
+        <d2p1:Timeout>10000</d2p1:Timeout>
+        <d2p1:ExistsNot>true</d2p1:ExistsNot>
+      </d2p1:Step>
+      <d2p1:StepImageKey>FilterLoseFocusFilterjofkv1tf.il3</d2p1:StepImageKey>
+      <d2p1:StepState>NoCode</d2p1:StepState>
+      <d2p1:Version>200</d2p1:Version>
+    </d2p1:AutomationStep>
+    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
+      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
+      <d2p1:CustomDescription i:nil="true" />
+      <d2p1:Description>Click 'SelectButtonTag'</d2p1:Description>
+      <d2p1:Enabled>true</d2p1:Enabled>
+      <d2p1:Id />
+      <d2p1:Order>7</d2p1:Order>
+      <d2p1:Runtime_x0020_ID>8716f6bf-4f37-4cb3-9851-7c97723c5dfc</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -458,33 +485,31 @@
             <d5p1:Value>
               <DomStateKey />
               <FindExpression i:type="HtmlFindExpressionElement">
-                <BackupSearchClause>/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[2]/div[1]/div[1]/div[1]/span[2]/span[1]</BackupSearchClause>
+                <BackupSearchClause>/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[2]/div[1]/div[2]/ul[1]/li[6]/button[1]</BackupSearchClause>
                 <FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
                   <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
                     <d9p1:key>Html</d9p1:key>
                     <d9p1:value i:type="HtmlFindExpression">
-                      <ChainStops>
-                        <d5p1:int>1</d5p1:int>
-                      </ChainStops>
+                      <ChainStops />
                       <Clauses>
                         <HtmlFindClause>
-                          <Clause>id=products_wrapper</Clause>
+                          <Clause>id=select</Clause>
                         </HtmlFindClause>
                         <HtmlFindClause>
-                          <Clause>tagIndex=span:2</Clause>
+                          <Clause>tagname=button</Clause>
                         </HtmlFindClause>
                       </Clauses>
                       <Constraints />
                     </d9p1:value>
                   </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
                 </FindExpressions>
-                <Name>SelectSpan</Name>
+                <Name>SelectButtonTag</Name>
                 <NodeKind>4</NodeKind>
                 <TechnologyType>Html</TechnologyType>
               </FindExpression>
               <FindInfo i:nil="true" />
               <Frame i:nil="true" />
-              <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlSpan</HtmlControlType>
+              <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlButton</HtmlControlType>
               <IsIndependent>false</IsIndependent>
               <Name>target</Name>
               <Page i:type="d2p1:PageUri">
@@ -493,8 +518,8 @@
                 <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
                 <d2p1:EquivalentUrls />
                 <d2p1:Fragment />
-                <d2p1:FriendlyName>API6</d2p1:FriendlyName>
-                <d2p1:Path>/kendo/live/dropdownlist/api.html</d2p1:Path>
+                <d2p1:FriendlyName>API8</d2p1:FriendlyName>
+                <d2p1:Path>/kendo/live/combobox/api.html</d2p1:Path>
                 <d2p1:Query />
                 <d2p1:Title>API</d2p1:Title>
               </Page>
@@ -514,19 +539,19 @@
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
         <d2p1:SimulateRealClick>false</d2p1:SimulateRealClick>
       </d2p1:Step>
-      <d2p1:StepImageKey>DisableEnablegcxsppht.dwc</d2p1:StepImageKey>
+      <d2p1:StepImageKey>FilterLoseFocusFilterexjlhv4r.22f</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
       <d2p1:Version>200</d2p1:Version>
     </d2p1:AutomationStep>
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
-      <d2p1:CustomDescription>[DisableEnable_CodedStep1] : @"@\Verify element 'PulpFictionSpan' IS' visible.</d2p1:CustomDescription>
-      <d2p1:Description>[DisableEnable_CodedStep1] : @"@\Verify element 'PulpFictionSpan' 'is not' visible.</d2p1:Description>
+      <d2p1:CustomDescription i:nil="true" />
+      <d2p1:Description>Click 'FindButtonTag'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
-      <d2p1:Id>DisableEnable_CodedStep1</d2p1:Id>
-      <d2p1:Order>7</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>681b3bbe-c169-4373-b269-8ee5ad1884c1</d2p1:Runtime_x0020_ID>
-      <d2p1:Step i:type="d2p1:CodedStepDescriptor">
+      <d2p1:Id />
+      <d2p1:Order>8</d2p1:Order>
+      <d2p1:Runtime_x0020_ID>ee3e376d-4d17-4fae-b838-66fc4376ce94</d2p1:Runtime_x0020_ID>
+      <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
             <d6p1:KeyValueOfstringstring>
@@ -537,7 +562,56 @@
         </d2p1:Constraints>
         <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
         <d2p1:EditorType />
-        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+          <d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+            <d5p1:Key>target</d5p1:Key>
+            <d5p1:Value>
+              <DomStateKey />
+              <FindExpression i:type="HtmlFindExpressionElement">
+                <BackupSearchClause>/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[2]/div[1]/div[2]/ul[1]/li[5]/button[1]</BackupSearchClause>
+                <FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
+                  <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                    <d9p1:key>Html</d9p1:key>
+                    <d9p1:value i:type="HtmlFindExpression">
+                      <ChainStops />
+                      <Clauses>
+                        <HtmlFindClause>
+                          <Clause>tagname=button</Clause>
+                        </HtmlFindClause>
+                        <HtmlFindClause>
+                          <Clause>id=find</Clause>
+                        </HtmlFindClause>
+                      </Clauses>
+                      <Constraints />
+                    </d9p1:value>
+                  </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                </FindExpressions>
+                <Name>FindButtonTag</Name>
+                <NodeKind>4</NodeKind>
+                <TechnologyType>Html</TechnologyType>
+              </FindExpression>
+              <FindInfo i:nil="true" />
+              <Frame i:nil="true" />
+              <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlButton</HtmlControlType>
+              <IsIndependent>false</IsIndependent>
+              <Name>target</Name>
+              <Page i:type="d2p1:PageUri">
+                <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
+                <d2p1:BaseUrl>http://aggeorgiev</d2p1:BaseUrl>
+                <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
+                <d2p1:EquivalentUrls />
+                <d2p1:Fragment />
+                <d2p1:FriendlyName>API8</d2p1:FriendlyName>
+                <d2p1:Path>/kendo/live/combobox/api.html</d2p1:Path>
+                <d2p1:Query />
+                <d2p1:Title>API</d2p1:Title>
+              </Page>
+              <Region i:nil="true" />
+              <TechnologyType>Html</TechnologyType>
+              <Version>200</Version>
+            </d5p1:Value>
+          </d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+        </d2p1:Elements>
         <d2p1:LogMessageOnFailure />
         <d2p1:Pause>None</d2p1:Pause>
         <d2p1:RunsAgainstVersion />
@@ -545,20 +619,91 @@
         <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
         <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
         <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
-        <d2p1:Code>
-
-            // Verify element 'PulpFictionSpan' 'is not' visible.
-            HtmlControl PulpFictionListItem = Pages.API6.PulpFictionListItem;
-            PulpFictionListItem.Wait.ForExists(10000);
-            Assert.IsTrue(PulpFictionListItem.IsVisible());
-
-
-
-</d2p1:Code>
-        <d2p1:RequiresSilverlight>false</d2p1:RequiresSilverlight>
+        <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
+        <d2p1:SimulateRealClick>false</d2p1:SimulateRealClick>
       </d2p1:Step>
-      <d2p1:StepImageKey>DisableEnablef1bp2xtm.wwo</d2p1:StepImageKey>
-      <d2p1:StepState>Coded</d2p1:StepState>
+      <d2p1:StepImageKey>FilterLoseFocusFilterletz1i0d.2fb</d2p1:StepImageKey>
+      <d2p1:StepState>NoCode</d2p1:StepState>
+      <d2p1:Version>200</d2p1:Version>
+    </d2p1:AutomationStep>
+    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
+      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
+      <d2p1:CustomDescription i:nil="true" />
+      <d2p1:Description>Verify ExistsNot 'InceptionListItem'</d2p1:Description>
+      <d2p1:Enabled>true</d2p1:Enabled>
+      <d2p1:Id />
+      <d2p1:Order>9</d2p1:Order>
+      <d2p1:Runtime_x0020_ID>b34cea59-18d3-4280-958e-f629b06c7307</d2p1:Runtime_x0020_ID>
+      <d2p1:Step i:type="d2p1:ExistsVerificationDescriptor">
+        <d2p1:Constraints>
+          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        </d2p1:Constraints>
+        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:EditorType />
+        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+          <d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+            <d5p1:Key>target</d5p1:Key>
+            <d5p1:Value>
+              <DomStateKey />
+              <FindExpression i:type="HtmlFindExpressionElement">
+                <BackupSearchClause>/html[1]/body[1]/div[3]/ul[1]/li[3]</BackupSearchClause>
+                <FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
+                  <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                    <d9p1:key>Html</d9p1:key>
+                    <d9p1:value i:type="HtmlFindExpression">
+                      <ChainStops />
+                      <Clauses>
+                        <HtmlFindClause>
+                          <Clause>tagname=li</Clause>
+                        </HtmlFindClause>
+                        <HtmlFindClause>
+                          <Clause>TextContent=Inception</Clause>
+                        </HtmlFindClause>
+                      </Clauses>
+                      <Constraints />
+                    </d9p1:value>
+                  </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                </FindExpressions>
+                <Name>InceptionListItem</Name>
+                <NodeKind>4</NodeKind>
+                <TechnologyType>Html</TechnologyType>
+              </FindExpression>
+              <FindInfo i:nil="true" />
+              <Frame i:nil="true" />
+              <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlControl</HtmlControlType>
+              <IsIndependent>false</IsIndependent>
+              <Name>target</Name>
+              <Page i:type="d2p1:PageUri">
+                <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
+                <d2p1:BaseUrl>http://aggeorgiev</d2p1:BaseUrl>
+                <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
+                <d2p1:EquivalentUrls />
+                <d2p1:Fragment />
+                <d2p1:FriendlyName>API8</d2p1:FriendlyName>
+                <d2p1:Path>/kendo/live/combobox/api.html</d2p1:Path>
+                <d2p1:Query />
+                <d2p1:Title>API</d2p1:Title>
+              </Page>
+              <Region i:nil="true" />
+              <TechnologyType>Html</TechnologyType>
+              <Version>200</Version>
+            </d5p1:Value>
+          </d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+        </d2p1:Elements>
+        <d2p1:LogMessageOnFailure />
+        <d2p1:Pause>None</d2p1:Pause>
+        <d2p1:RunsAgainstVersion />
+        <d2p1:StepType>Verification</d2p1:StepType>
+        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
+        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
+        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
+        <d2p1:CheckInterval>500</d2p1:CheckInterval>
+        <d2p1:DataBindVariableName i:nil="true" />
+        <d2p1:Timeout>10000</d2p1:Timeout>
+        <d2p1:ExistsNot>true</d2p1:ExistsNot>
+      </d2p1:Step>
+      <d2p1:StepImageKey>FilterLoseFocusFilterxi5dkag2.4k1</d2p1:StepImageKey>
+      <d2p1:StepState>NoCode</d2p1:StepState>
       <d2p1:Version>200</d2p1:Version>
     </d2p1:AutomationStep>
   </Steps>
@@ -573,39 +718,28 @@
     <d2p1:string>Telerik.WebAii.Controls.Xaml, Version=2011.1.729.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
     <d2p1:string>Telerik.WebAii.Controls.Xaml.Wpf, Version=2011.1.729.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
   </CurrentReferences>
-  <DeploymentItems xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-    <d2p1:string>..\..\..\bin\Debug\KendoDemosTests.dll</d2p1:string>
-  </DeploymentItems>
+  <DeploymentItems xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <DomStatesCounter xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-  <HasCodeBehind>true</HasCodeBehind>
+  <HasCodeBehind>false</HasCodeBehind>
   <InheritParentDataSource>false</InheritParentDataSource>
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
-  <Path>UIWidgets\DropDown\API\DisableEnable.tstest</Path>
+  <Path>UIWidgets\ComboBox\API\FilterLoseFocusFilter.tstest</Path>
   <Priority>0</Priority>
-  <ResourceFilePath>uiwidgets\dropdown\api\DisableEnable.resx</ResourceFilePath>
+  <ResourceFilePath>UIWidgets\ComboBox\API\FilterLoseFocusFilter.resx</ResourceFilePath>
   <SilverlightAppLocalDirectory />
   <SilverlightAppOriginUri i:nil="true" />
   <SilverlightAppRecordLocal>false</SilverlightAppRecordLocal>
   <SilverlightAppWebUrl />
   <SilverlightEnabled>false</SilverlightEnabled>
   <StopTestListOnFailure>false</StopTestListOnFailure>
-  <TestAssembly>KendoDemosTests.dll</TestAssembly>
-  <TestAssemblyPath>C:\work\GitHub\kendo\functional-tests\KendoDemosTests\bin</TestAssemblyPath>
-  <TestClass>KendoDemosTests.DisableEnable</TestClass>
+  <TestAssembly i:nil="true" />
+  <TestAssemblyPath i:nil="true" />
+  <TestClass i:nil="true" />
   <TestLinks xmlns:d2p1="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.ProjectModel.TestLinks" />
   <TestType>Web</TestType>
-  <UniqueId>da26f32a-9b0d-4e31-807b-8c343e29b840</UniqueId>
-  <VSProperties xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-    <d2p1:KeyValueOfstringstring>
-      <d2p1:Key>Timeout</d2p1:Key>
-      <d2p1:Value>0</d2p1:Value>
-    </d2p1:KeyValueOfstringstring>
-    <d2p1:KeyValueOfstringstring>
-      <d2p1:Key>ExecId</d2p1:Key>
-      <d2p1:Value>00000000-0000-0000-0000-000000000000</d2p1:Value>
-    </d2p1:KeyValueOfstringstring>
-  </VSProperties>
+  <UniqueId>f908e08c-9ad6-4e0e-abb4-c48eb4c0812c</UniqueId>
+  <VSProperties xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <WpfAppPath i:nil="true" />
 </WebAiiTest>

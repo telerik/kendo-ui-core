@@ -48,6 +48,7 @@
   <ProjectVersion Type="System.String">2011.1.725.0</ProjectVersion>
   <Namespace Type="System.String">KendoDemosTests</Namespace>
   <AssemblyName Type="System.String">KendoDemosTests</AssemblyName>
+  <OutputFolder Type="System.String">bin</OutputFolder>
   <ProjectGuid Type="System.String">811c5427-73a8-4c3c-b01c-3486c663611e</ProjectGuid>
   <TeamPulseServerUrl Type="System.String">
   </TeamPulseServerUrl>
