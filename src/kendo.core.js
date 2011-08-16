@@ -529,6 +529,7 @@
             precision = numberFormat.decimals,
             pattern = numberFormat.pattern[0],
             symbol,
+            isCurrency, isPercent,
             customPrecision,
             formatAndPrecision,
             negative = number < 0,
@@ -563,9 +564,12 @@
         if (formatAndPrecision) {
             format = formatAndPrecision[1].toLowerCase();
 
-            if (format === "c" || format === "p") {
+            isCurrency = format === "c";
+            isPercent = format === "p";
+
+            if (isCurrency || isPercent) {
                 //get specific number format information if format is currency or percent
-                numberFormat = format === "c" ? numberFormat.currency : numberFormat.percent;
+                numberFormat = isCurrency ? numberFormat.currency : numberFormat.percent;
                 groupSize = numberFormat.groupSize[0];
                 groupSeparator = numberFormat[COMMA];
                 decimal = numberFormat[POINT];
@@ -586,7 +590,7 @@
             }
 
             // multiply if format is percent
-            if (format === "p") {
+            if (isPercent) {
                 number *= 100;
             }
 
@@ -641,6 +645,7 @@
         }
 
         //custom formatting
+        //
         //separate format by sections.
         format = format.split(";");
         if (negative && format[1]) {
@@ -658,14 +663,17 @@
             format = format[0];
         }
 
+        isCurrency = format.indexOf("$") != -1;
+        isPercent = format.indexOf("%") != -1;
+
         //multiply number if the format has percent
-        if (format.indexOf("%") != -1) {
+        if (isPercent) {
             number *= 100;
         }
 
-        if (format.indexOf("%") != -1 || format.indexOf("$") != -1) {
+        if (isCurrency || isPercent) {
             //get specific number format information if format is currency or percent
-            numberFormat = format.indexOf("$") != -1 ? numberFormat.currency : numberFormat.percent;
+            numberFormat = isCurrency ? numberFormat.currency : numberFormat.percent;
             groupSize = numberFormat.groupSize[0];
             groupSeparator = numberFormat[COMMA];
             decimal = numberFormat[POINT];
@@ -764,22 +772,32 @@
                     }
                 }
 
-                if (ch === "$" || ch === "%") {
-                    number += symbol;
-                } else if (ch === ZERO) {
+                if (ch === ZERO) {
                     number += ch;
                     replacement = ch;
                 } else if (ch === SHARP) {
                     number += replacement;
                 } else if (ch === COMMA) {
                     continue;
-                } else {
-                    number += ch;
                 }
             }
 
             if (end >= start) {
                 number += format.substring(end + 1);
+            }
+
+            //replace symbol placeholders
+            if (isCurrency || isPercent) {
+                value = EMPTY;
+                for (idx = 0, length = number.length; idx < length; idx++) {
+                    ch = number.charAt(idx);
+                    if (ch === "$" || ch === "%") {
+                        value += symbol;
+                    } else {
+                        value += ch;
+                    }
+                }
+                number = value;
             }
         }
 
