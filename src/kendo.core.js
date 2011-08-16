@@ -223,7 +223,7 @@
                 .split("'").join("\\'")
                 .split("\t").join("'")
                 .replace(encodeRegExp, "'+e($1)+'")
-                .replace(evalRegExp, "'+$1+'")
+                .replace(evalRegExp, "'+($1)+'")
                 .split(begin).join("';")
                 .split(end).join("o+='");
 
