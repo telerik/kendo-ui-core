@@ -385,21 +385,17 @@
 // Date and Number formatting
 
 (function() {
-    var patterns = {
-            numeric: ["n", "-n"],
-            currency: ["$n", "($n)"],
-            percent: ["n %", "-n %"]
-        },
-        formatRegExp = /{(\d+)(:[^\}]+)?}/g,
+    var formatRegExp = /{(\d+)(:[^\}]+)?}/g,
         dateFormatRegExp = /dddd|ddd|dd|d|MMMM|MMM|MM|M|yyyy|yy|HH|H|hh|h|mm|m|fff|ff|f|tt|ss|s|"[^"]*"|'[^']*'/g,
         standardFormatRegExp =  /^(n|c|p|e)(\d*)$/i,
         EMPTY = "",
         POINT = ".",
         COMMA = ",",
-        sharp = "#",
-        zero = "0";
+        SHARP = "#",
+        ZERO = "0";
 
     kendo.culture = {
+        name: "en-US",
         numberFormat: {
             pattern: ["-n"],
             decimals: 2,
@@ -525,22 +521,23 @@
 
     //number formatting
     function formatNumber(number, format) {
-        var numberFormat = kendo.culture.numberFormat,
+        var culture = kendo.culture,
+            numberFormat = culture.numberFormat,
             groupSize = numberFormat.groupSize[0],
-            groupSeparator = numberFormat[","],
-            decimal = numberFormat["."],
+            groupSeparator = numberFormat[COMMA],
+            decimal = numberFormat[POINT],
             precision = numberFormat.decimals,
             pattern = numberFormat.pattern[0],
-            symbol = numberFormat.symbol,
-            digit,
+            symbol,
+            customPrecision,
             formatAndPrecision,
             negative = number < 0,
             integer,
             fraction,
             integerLength,
             fractionLength,
-            replacement = "",
-            value = "",
+            replacement = EMPTY,
+            value = EMPTY,
             idx,
             length,
             ch,
@@ -550,13 +547,14 @@
             start = -1,
             end;
 
+        //return empty string if no number
         if (number === undefined) {
             return EMPTY;
         }
 
+        //if no format then return number.toString() or number.toLocaleString() if culture.name is not defined
         if (!format) {
-            // toLocaleString() once we have globalization
-            return number.toString();
+            return culture.name.length ? number.toLocaleString() : number.toString();
         }
 
         formatAndPrecision = standardFormatRegExp.exec(format);
@@ -566,48 +564,55 @@
             format = formatAndPrecision[1].toLowerCase();
 
             if (format === "c" || format === "p") {
+                //get specific number format information if format is currency or percent
                 numberFormat = format === "c" ? numberFormat.currency : numberFormat.percent;
                 groupSize = numberFormat.groupSize[0];
-                groupSeparator = numberFormat[","];
-                decimal = numberFormat["."];
+                groupSeparator = numberFormat[COMMA];
+                decimal = numberFormat[POINT];
                 precision = numberFormat.decimals;
                 symbol = numberFormat.symbol;
                 pattern = numberFormat.pattern[negative ? 0 : 1];
             }
 
-            if (formatAndPrecision[2]) {
-                precision = +formatAndPrecision[2];
+            customPrecision = formatAndPrecision[2];
+
+            if (customPrecision) {
+                precision = +customPrecision;
             }
 
+            //return number in exponential format
             if (format === "e") {
-                if (formatAndPrecision[2]) {
-                    return number.toExponential(precision);
-                } else {
-                    return number.toExponential();
-                }
+                return number.toExponential(customPrecision ? precision : undefined);
             }
 
+            // multiply if format is percent
             if (format === "p") {
                 number *= 100;
             }
 
             number = number.toFixed(precision);
-            number = number.split(".");
+            number = number.split(POINT);
 
             integer = number[0];
             fraction = number[1];
-            value = "";
 
+            //exclude "-" if number is negative.
             if (negative) {
                 integer = integer.substring(1);
             }
 
-            for (idx = 0, length = integer.length; idx < length; idx++) {
-                if (idx > 0 && (length - idx) % groupSize === 0) {
-                    value += groupSeparator;
-                }
+            value = integer;
+            integerLength = integer.length;
 
-                value += integer.charAt(idx);
+            //add group separator to the number if it is longer enough
+            if (integerLength >= groupSize) {
+                value = EMPTY;
+                for (idx = 0, length = integer.length; idx < length; idx++) {
+                    if (idx > 0 && (length - idx) % groupSize === 0) {
+                        value += groupSeparator;
+                    }
+                    value += integer.charAt(idx);
+                }
             }
 
             if (fraction) {
@@ -618,7 +623,7 @@
                 return value;
             }
 
-            number = "";
+            number = EMPTY;
 
             for (idx = 0, length = pattern.length; idx < length; idx++) {
                 ch = pattern.charAt(idx);
@@ -633,135 +638,152 @@
             }
 
             return number;
-        } else {
-            //custom formatting
-            format = format.split(";");
-            if (negative && format[1]) {
-                number = -number;
-                format = format[1];
-            } else if (number === 0) {
-                format = format[2] || format[0];
-                if (format.indexOf(sharp) == -1 && format.indexOf(zero) == -1) {
-                    return format;
-                }
-            } else {
-                format = format[0];
-            }
-
-            if (format.indexOf("%") > -1) {
-                number *= 100;
-            }
-
-            decimalIndex = format.indexOf(".");
-
-            length = format.length
-            if (decimalIndex != -1) {
-                sharpIndex = format.lastIndexOf(sharp);
-                zeroIndex = format.lastIndexOf(zero);
-
-                if (zeroIndex != -1) {
-                    value = number.toFixed(zeroIndex - decimalIndex);
-                    number = number.toString();
-                    number = number.length > value.length && sharpIndex > zeroIndex ? number : value;
-                }
-            } else {
-                number = number.toFixed(0);
-            }
-
-            sharpIndex = format.indexOf(sharp);
-            zeroIndex = format.indexOf(zero);
-
-            if (sharpIndex == -1 && zeroIndex != -1) {
-                start = zeroIndex;
-            } else if (sharpIndex != -1 && zeroIndex == -1) {
-                start = sharpIndex;
-            } else {
-                start = sharpIndex > zeroIndex ? zeroIndex : sharpIndex;
-            }
-
-            sharpIndex = format.lastIndexOf(sharp);
-            zeroIndex = format.lastIndexOf(zero);
-
-            if (sharpIndex == -1 && zeroIndex != -1) {
-                end = zeroIndex;
-            } else if (sharpIndex != -1 && zeroIndex == -1) {
-                end = sharpIndex;
-            } else {
-                end = sharpIndex > zeroIndex ? sharpIndex : zeroIndex;
-            }
-
-            if (start == length) {
-                end = start;
-            }
-
-            if (start != -1) {
-                value = number.toString().split(POINT);
-                integer = value[0];
-                fraction = value[1] || "";
-
-                integerLength = integer.length;
-                fractionLength = fraction.length;
-
-                if (integerLength >= groupSize && format.indexOf(",") != -1) {
-                    value = "";
-                    for (idx = 0, length = integer.length; idx < length; idx++) {
-                        if (length > groupSize && (length - idx) % groupSize === 0) {
-                            value += groupSeparator;
-                        }
-
-                        value += integer.charAt(idx);
-                    }
-                    integer = value;
-                }
-
-                number = format.substring(0, start);
-
-                for (idx = start; idx < length; idx++) {
-                    ch = format.charAt(idx);
-
-                    if (decimalIndex == -1) {
-                        if (end - idx < integerLength) {
-                            number += integer;
-                            break;
-                        }
-                    } else {
-                        if (zeroIndex != -1 && zeroIndex < idx) {
-                            replacement = "";
-                        }
-
-                        if ((decimalIndex - idx) <= integerLength && decimalIndex - idx > -1) {
-                            number += integer;
-                            idx = decimalIndex;
-                        }
-
-                        if (decimalIndex === idx) {
-                            number += (fraction ? decimal : "") + fraction;
-                            idx += end - decimalIndex + 1;
-                            continue;
-                        }
-                    }
-
-                    if (ch === "$" || ch === "%") {
-                        number += symbol;
-                    } else if (ch === "0") {
-                        number += ch;
-                        replacement = ch;
-                    } else if (ch === "#") {
-                        number += replacement;
-                    } else if (ch === ",") {
-                        continue;
-                    } else {
-                        number += ch;
-                    }
-                }
-
-                if (end >= start) {
-                    number += format.substring(end + 1);
-                }
-            }
-
-            return number;
         }
+
+        //custom formatting
+        //separate format by sections.
+        format = format.split(";");
+        if (negative && format[1]) {
+            //make number positive and get negative format
+            number = -number;
+            format = format[1];
+        } else if (number === 0) {
+            //format for zeros
+            format = format[2] || format[0];
+            if (format.indexOf(SHARP) == -1 && format.indexOf(ZERO) == -1) {
+                //return format if it is string constant.
+                return format;
+            }
+        } else {
+            format = format[0];
+        }
+
+        //multiply number if the format has percent
+        if (format.indexOf("%") != -1) {
+            number *= 100;
+        }
+
+        if (format.indexOf("%") != -1 || format.indexOf("$") != -1) {
+            //get specific number format information if format is currency or percent
+            numberFormat = format.indexOf("$") != -1 ? numberFormat.currency : numberFormat.percent;
+            groupSize = numberFormat.groupSize[0];
+            groupSeparator = numberFormat[COMMA];
+            decimal = numberFormat[POINT];
+            precision = numberFormat.decimals;
+            symbol = numberFormat.symbol;
+        }
+
+        decimalIndex = format.indexOf(POINT);
+        length = format.length;
+
+        if (decimalIndex != -1) {
+            sharpIndex = format.lastIndexOf(SHARP);
+            zeroIndex = format.lastIndexOf(ZERO);
+
+            if (zeroIndex != -1) {
+                value = number.toFixed(zeroIndex - decimalIndex);
+                number = number.toString();
+                number = number.length > value.length && sharpIndex > zeroIndex ? number : value;
+            }
+        } else {
+            number = number.toFixed(0);
+        }
+
+        sharpIndex = format.indexOf(SHARP);
+        zeroIndex = format.indexOf(ZERO);
+
+        //define the index of the first digit placeholder
+        if (sharpIndex == -1 && zeroIndex != -1) {
+            start = zeroIndex;
+        } else if (sharpIndex != -1 && zeroIndex == -1) {
+            start = sharpIndex;
+        } else {
+            start = sharpIndex > zeroIndex ? zeroIndex : sharpIndex;
+        }
+
+        sharpIndex = format.lastIndexOf(SHARP);
+        zeroIndex = format.lastIndexOf(ZERO);
+
+        //define the index of the last digit placeholder
+        if (sharpIndex == -1 && zeroIndex != -1) {
+            end = zeroIndex;
+        } else if (sharpIndex != -1 && zeroIndex == -1) {
+            end = sharpIndex;
+        } else {
+            end = sharpIndex > zeroIndex ? sharpIndex : zeroIndex;
+        }
+
+        if (start == length) {
+            end = start;
+        }
+
+        if (start != -1) {
+            value = number.toString().split(POINT);
+            integer = value[0];
+            fraction = value[1] || EMPTY;
+
+            integerLength = integer.length;
+            fractionLength = fraction.length;
+
+            //apply group separator to the integer
+            if (integerLength >= groupSize && format.indexOf(COMMA) != -1) {
+                value = EMPTY;
+                for (idx = 0, length = integerLength; idx < length; idx++) {
+                    if (length > groupSize && (length - idx) % groupSize === 0) {
+                        value += groupSeparator;
+                    }
+                    value += integer.charAt(idx);
+                }
+                integer = value;
+            }
+
+            number = format.substring(0, start);
+
+            for (idx = start; idx < length; idx++) {
+                ch = format.charAt(idx);
+
+                if (decimalIndex == -1) {
+                    if (end - idx < integerLength) {
+                        number += integer;
+                        break;
+                    }
+                } else {
+                    if (zeroIndex != -1 && zeroIndex < idx) {
+                        replacement = EMPTY;
+                    }
+
+                    if ((decimalIndex - idx) <= integerLength && decimalIndex - idx > -1) {
+                        number += integer;
+                        idx = decimalIndex;
+                    }
+
+                    if (decimalIndex === idx) {
+                        number += (fraction ? decimal : EMPTY) + fraction;
+                        idx += end - decimalIndex + 1;
+                        continue;
+                    }
+                }
+
+                if (ch === "$" || ch === "%") {
+                    number += symbol;
+                } else if (ch === ZERO) {
+                    number += ch;
+                    replacement = ch;
+                } else if (ch === SHARP) {
+                    number += replacement;
+                } else if (ch === COMMA) {
+                    continue;
+                } else {
+                    number += ch;
+                }
+            }
+
+            if (end >= start) {
+                number += format.substring(end + 1);
+            }
+        }
+
+        return number;
     }
 
     function toString(value, fmt) {
