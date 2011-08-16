@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Templates Performance</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="benchmark.js"></script>
+        <script src="http://documentcloud.github.com/underscore/underscore.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.3.0/mustache.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.0.beta2/handlebars.min.js"></script>
+        <script src="http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.js"></script>
+        <!--External Template Definitions-->
+        <script type="text/x-kendo-template" id="kendoUIextTemplate">
+            <div>
+                <h1 class='header'><#= header #></h1>
+                <h2 class='header2'><#= header2 #></h2>
+                <h3 class='header3'><#= header3 #></h3>
+                <h4 class='header4'><#= header4 #></h4>
+                <h5 class='header5'><#= header5 #></h5>
+                <h6 class='header6'><#= header6 #></h6>
+                <ul class='list'>
+                    <# for (var i = 0, l = list.length; i < l; i++) { #>
+                        <li class='item'><#= list[i] #></li>
+                        <# } #>
+                </ul>
+            </div>
+        </script>
+        <script>
+            window.sharedVariables = {
+                header: "Header",
+                header2: "Header2",
+                header3: "Header3",
+                header4: "Header4",
+                header5: "Header5",
+                header6: "Header6",
+                list: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
+            };
+
+            window.jQueryTemplate = $.template(null, "<div><h1 class='header'>{{html header}}</h1><h2 class='header2'>{{html header2}}</h2><h3 class='header3'>{{html header3}}</h3><h4 class='header4'>{{html header4}}</h4><h5 class='header5'>{{html header5}}</h5><h6 class='header6'>{{html header6}}</h6><ul class='list'>{{each list}}<li class='item'>{{html $value}}</li>{{/each}}</ul></div>");
+
+            window.mustacheTemplate = "<div><h1 class='header'>{{{header}}}</h1><h2 class='header2'>{{{header2}}}</h2><h3 class='header3'>{{{header3}}}</h3><h4 class='header4'>{{{header4}}}</h4><h5 class='header5'>{{{header5}}}</h5><h6 class='header6'>{{{header6}}}</h6><ul class='list'>{{#list}}<li class='item'>{{{.}}}</li>{{/list}}</ul></div>";
+
+            window.handlebarsTemplate = Handlebars.compile("<div><h1 class='header'>{{header}}</h1><h2 class='header2'>{{header2}}</h2><h3 class='header3'>{{header3}}</h3><h4 class='header4'>{{header4}}</h4><h5 class='header5'>{{header5}}</h5><h6 class='header6'>{{header6}}</h6><ul class='list'>{{#each list}}<li class='item'>{{this}}</li>{{/each}}</ul></div>");
+
+            window.kendouiTemplate = kendo.template("<div><h1 class='header'><#= header #></h1><h2 class='header2'><#= header2 #></h2><h3 class='header3'><#= header3 #></h3><h4 class='header4'><#= header4 #></h4><h5 class='header5'><#= header5 #></h5><h6 class='header6'><#= header6 #></h6><ul class='list'><# for (var i = 0, l = list.length; i < l; i++) { #><li class='item'><#= list[i] #></li><# } #></ul></div>", {useWithBlock:true});
+
+            window.kendouiTemplate2 = kendo.template("<div><h1 class='header'><#= data.header #></h1><h2 class='header2'><#= data.header2 #></h2><h3 class='header3'><#= data.header3 #></h3><h4 class='header4'><#= data.header4 #></h4><h5 class='header5'><#= data.header5 #></h5><h6 class='header6'><#= data.header6 #></h6><ul class='list'><# for (var i = 0, l = data.list.length; i < l; i++) { #><li class='item'><#= data.list[i] #></li><# } #></ul></div>", {useWithBlock:false});
+            //Use external template definition
+            window.kendoUIAlt = kendo.template($("#kendoUIextTemplate").html());
+
+            window.underscoreTemplate = _.template("<div><h1 class='header'><%= header %></h1><h2 class='header2'><%= header2 %></h2><h3 class='header3'><%= header3 %></h3><h4 class='header4'><%= header4 %></h4><h5 class='header5'><%= header5 %></h5><h6 class='header6'><%= header6 %></h6><ul class='list'><% for (var i = 0, l = list.length; i < l; i++) { %><li class='item'><%= list[i] %></li><% } %></ul></div>");
+
+            window.baseHtml = "<div><h1 class='header'></h1><h2 class='header2'></h2><h3 class='header3'></h3><h4 class='header4'></h4><h5 class='header5'></h5><h6 class='header6'></h6><ul class='list'><li class='item'></li></ul></div>";
+
+            function tmpl(str) {
+                var strFunc =
+                "var p=[];" +
+                "with(obj){p.push('" +
+
+                    str.replace(/[\r\t\n]/g, " ")
+                    .replace(/'(?=[^#]*#>)/g, "\t")
+                    .split("'").join("\\'")
+                    .split("\t").join("'")
+                    .replace(/<#=(.+?)#>/g, "',$1,'")
+                    .split("<#").join("');")
+                    .split("#>").join("p.push('")
+                    + "');}return p.join('');";
+
+                return new Function("obj", strFunc);
+            }
+
+            window.resig = tmpl("<div><h1 class='header'><#= header #></h1><h2 class='header2'><#= header2 #></h2><h3 class='header3'><#= header3 #></h3><h4 class='header4'><#= header4 #></h4><h5 class='header5'><#= header5 #></h5><h6 class='header6'><#= header6 #></h6><ul class='list'><# for (var i = 0, l = list.length; i < l; i++) { #><li class='item'><#= list[i] #></li><# } #></ul></div>");
+
+        </script>
+    </head>
+    <body>
+        <p>Running benchmark ... </p>
+        <script>
+
+            $(document).ready(function() {
+                var suite = new Benchmark.Suite;
+
+                suite.add("Mustache.js Template", function() {
+                    Mustache.to_html(mustacheTemplate, sharedVariables);
+                })
+                .add("jQuery Templates", function() {
+                    jQueryTemplate($, {
+                        data: sharedVariables
+                    }).join("");
+                })
+                .add("Kendo UI Templates", function() {
+                    kendouiTemplate(sharedVariables);
+                })
+                .add("Underscore.js templates", function() {
+                    underscoreTemplate(sharedVariables);
+                })
+                .add("Handlebars.js templates", function() {
+                    handlebarsTemplate(sharedVariables);
+                })
+                .add("Kendo UI Templates (External Temp Def)", function() {
+                    kendoUIAlt(sharedVariables);
+                })
+                .add("Resig modified", function() {
+                    resig(sharedVariables);
+                })
+                .add("Kendo UI Templates (no with block)", function() {
+                    kendouiTemplate2(sharedVariables);
+                })
+                .on("complete", function() {
+                    var message = "User agent: " + navigator.userAgent;
+                    message += "<table><tr><th>Position</th><th>Contender</th><th>Ops/sec (higher is better)</th></tr>";
+                        var results = $.makeArray(this);
+                        results.sort(function(a, b) { return b.hz - a.hz });
+                        $.each(results, function(index) {
+                            message += "<tr><td>" + (index + 1) + "</td><td>" + this.name + "</td><td>" + this.hz + "</td></tr>";
+                        });
+                        message += "</table>";
+                    $("p:first").html(message);
+                })
+                .run(true);
+            });
+        </script>
+    </body>
+</html>
