@@ -32,15 +32,15 @@
                     var result = ["$format=json", "$inlinecount=allpages", "$callback=callback"],
                         data = options || {};
 
-                    if ("skip" in data) {
+                    if (data.skip) {
                         result.push("$skip=" + data.skip);
                     }
 
-                    if ("take" in data) {
+                    if (data.take) {
                         result.push("$top=" + data.take);
                     }
 
-                    if ("sort" in data) {
+                    if (data.sort) {
                         result.push("$orderby=" + $.map(data.sort, function(value) {
                             var order = value.field.replace(/\./g, "/");
 
@@ -52,7 +52,7 @@
                         }).join(","));
                     }
 
-                    if ("filter" in data) {
+                    if (data.filter) {
                         result.push("$filter=" + $.map(data.filter, function(filter) {
                             var value = filter.value,
                                 field = filter.field.replace(/\./g, "/"),

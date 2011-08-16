@@ -5,6 +5,8 @@
         getter = kendo.getter,
         setter = kendo.setter,
         accessor = kendo.accessor,
+        each = $.each,
+
         CHANGE = "change",
         UPDATED = "UPDATED",
         PRISTINE = "PRISTINE",
@@ -270,9 +272,9 @@
                 model = this.options.model,
                 models = this.models, id;
 
-            $.each(updated, function() {
+            each(updated, function() {
                 var id = this.id();
-                $.each(data, function() {
+                each(data, function() {
                     if (id === model.id(this)) {
                         delete models[id];
                     }
@@ -290,7 +292,7 @@
                 origId,
                 model = that.options.model;
 
-            $.each(data, function(index, value) {
+            each(data, function(index, value) {
                 origValue = origData[index];
 
                 if (origValue) {
