@@ -222,7 +222,7 @@
                 .replace(quoteRegExp,"\t")
                 .split("'").join("\\'")
                 .split("\t").join("'")
-                .replace(encodeRegExp, "';o+=e($1);o+='")
+                .replace(encodeRegExp, "'+e($1)+'")
                 .replace(evalRegExp, "'+$1+'")
                 .split(begin).join("';")
                 .split(end).join("o+='");
