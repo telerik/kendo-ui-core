@@ -67,7 +67,6 @@
 
             extend(options.animation.close, {
                 complete: function() {
-                    that.element.hide();
                     that.wrapper.hide();
 
                     var location = that.wrapper.data(LOCATION);
@@ -135,6 +134,8 @@
                                         display: "block",
                                         position: ABSOLUTE
                                     });
+
+                that.wrapper.css(POSITION);
 
                 if (options.appendTo == BODY) {
                     that.wrapper.css(TOP, "-10000px");
