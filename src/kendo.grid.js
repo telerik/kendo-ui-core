@@ -945,10 +945,11 @@
             });
         },
 
-        _compositeTmpl: function(start, settings) {
+        _compositeTmpl: function(start, settings, model) {
             var that = this,
                 templates=[],
                 idx,
+                id,
                 length,
                 groups = (that.dataSource.group() || []).length;
 
@@ -962,8 +963,25 @@
                 templates.push(kendo.template(columnTemplate(that.columns[idx], settings)));
             }
 
+            if (model) {
+                start += ' data-id="';
+
+                if ($.isFunction(model.id)) {
+                    id = model.id;
+                } else {
+                    id = kendo.template(settings.begin + "=" + model.id + settings.end);
+                }
+            }
+
             return function(data) {
                 var html = [start], idx, length;
+
+                if (id) {
+                    html.push(id(data));
+                    html.push('"')
+                }
+
+                html.push(">");
 
                 for (idx = 0, length = templates.length; idx < length; idx++) {
                     html.push("<td>");
@@ -981,10 +999,21 @@
                 idx,
                 length,
                 template,
+                model = that.dataSource.options.schema.model,
                 groups = (that.dataSource.group() || []).length;
 
             if (!rowTemplate) {
                 rowTemplate = start;
+
+                if (model) {
+                    if ($.isFunction(model.id)) {
+                        return that._compositeTmpl(start, settings, model);
+                    } else {
+                        rowTemplate += ' data-id="' + settings.begin + "=" + model.id + settings.end + '"';
+                    }
+                }
+
+                rowTemplate += ">";
 
                 if (groups > 0) {
                     rowTemplate += groupCells(groups);
@@ -994,7 +1023,7 @@
                     template = columnTemplate(that.columns[idx], settings);
 
                     if ($.isFunction(template)) {
-                        return that._compositeTmpl(start, settings);
+                        return that._compositeTmpl(start, settings, model);
                     }
 
                     rowTemplate += "<td>" + template + "</td>";
@@ -1011,8 +1040,8 @@
             var that = this,
                 options = that.options;
 
-            that.rowTemplate = that._tmpl("<tr>", options.rowTemplate);
-            that.altRowTemplate = that._tmpl('<tr class="t-alt">', options.altRowTemplate || options.rowTemplate);
+            that.rowTemplate = that._tmpl("<tr", options.rowTemplate);
+            that.altRowTemplate = that._tmpl('<tr class="t-alt"', options.altRowTemplate || options.rowTemplate);
         },
 
         _thead: function() {
