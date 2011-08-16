@@ -97,7 +97,7 @@
         dragClue: template("<div class='t-header t-drag-clue'><span class='t-icon t-drag-status'></span><#= text #></div>"),
         group: template(
             "<ul class='<#= groupCssClass(group) #>'<#= groupAttributes(group) #>>" +
-                "<#= renderItems(data); #>" +
+                "<#= renderItems(data) #>" +
             "</ul>"
         ),
         itemWrapper: template(
