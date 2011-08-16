@@ -1142,8 +1142,8 @@
             }
 
             if (typeof duration === BOOLEAN){
-                duration = 400;
                 reverse = duration;
+                duration = 400;
             }
 
             options = {
@@ -1205,27 +1205,32 @@
                             }
                         });
 
-                        each (props.keep, function (idx) {
-                            if (!element.data(idx))
-                                element.data(idx, element.css(idx));
-                        });
+                        if (methods.setup.length) {
+                            each (props.keep, function (idx) {
+                                if (!element.data(idx))
+                                    element.data(idx, element.css(idx));
+                            });
 
-                        if (options.show) {
-                            props.set = extend( props.set, { display: "block" } ); // Add show to the set
+                            if (options.show) {
+                                props.set = extend( props.set, { display: "block" } ); // Add show to the set
+                            }
+
+                            element.css(props.set);
+                            element.css("overflow"); // Nudge Chrome
+
+                            each (methods.setup, function () { properties = extend( properties, this(element, opts)) });
+                            if (kendo.fx["animate"])
+                                kendo.fx.animate ( element, properties, opts);
+
+                            return;
                         }
-
-                        element.css(props.set);
-                        element.css("overflow"); // Nudge Chrome
-
-                        each (methods.setup, function () { properties = extend( properties, this(element, opts)) });
-                        kendo.fx.animate ( element, properties, opts);
-                    } else {
-                        if (options.show) {
-                            element.show();
-                        }
-
-                        deferred.resolve();
                     }
+
+                    if (options.show) {
+                        element.show();
+                    }
+
+                    deferred.resolve();
                 }).promise();
 
             promises.push(promise);
@@ -1257,7 +1262,7 @@
 
     extend($.fn, /** @lends jQuery.fn */{
         kendoStop: function(clearQueue, gotoEnd) {
-            if (kendo.support.transitions && "stopQueue" in kendo.fx) {
+            if (support.transitions && "stopQueue" in kendo.fx) {
                 return kendo.fx.stopQueue(this, clearQueue || false, gotoEnd || false);
             } else {
                 return this.stop(clearQueue, gotoEnd);
