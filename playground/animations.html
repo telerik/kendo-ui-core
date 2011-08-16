@@ -37,25 +37,21 @@
         <script type="text/javascript" charset="utf-8">
             $(document).ready(function() {
                 $("button.play").click(function() {
-                    $(".animatee").kendoStop(true).kendoAnimate("slide:up", 250);
+                    $(".animatee").kendoStop(true).kendoAnimate("slide:up fadeIn", 2500);
                 });
 
                 $("button.reverse").click(function() {
-                    $(".animatee").kendoStop(true).kendoAnimate("slide:up", 250, true);
+                    $(".animatee").kendoStop(true).kendoAnimate("slide:up fadeIn", 2500, true);
                 });
 
                 $("button.pplay").click(function() {
-                    $(".animatee").kendoStop(true).kendoAnimate("slideRight", 250);
+                    $(".animatee").kendoStop(true).kendoAnimate("slide:right fadeIn", 250);
                 });
 
                 $("button.rreverse").click(function() {
-                    $(".animatee").kendoStop(true).kendoAnimate("slideRight", 250, true);
+                    $(".animatee").kendoStop(true).kendoAnimate("slide:right fadeIn", 250, true);
                 });
 
-                var scrollTo = 10;
-                console.log(kendo.parseEffects("slide:up"), kendo.parseEffects("slide:up", true));
-                console.log(kendo.parseEffects({ slide: { properties: { translateX: scrollTo + 'px' }, direction: "left" } }),
-                            kendo.parseEffects({ slide: { properties: { translateX: scrollTo + 'px' }, direction: "left" } }, true));
             });
         </script>
     </body>

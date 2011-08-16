@@ -1053,32 +1053,6 @@
      * @namespace Handy jQuery plug-ins that are used by all Kendo components.
      */
 
-    var effectInit = {
-            fadeIn: function(element) {
-                element.css("opacity", 0);
-            },
-            zoomIn: function(element) {
-                if (kendo.support.transitions)
-                    element.css(kendo.support.transitions.css + "transform", "scale(.01)");
-            },
-            expandVertical: function(element) {
-                if (element.data("initialHeight") === undefined)
-                    element.data("initialHeight", element[0].style.height);
-            },
-            expandVerticalReverse: function(element) {
-                if (element.data("initialHeight") === undefined)
-                    element.data("initialHeight", element[0].style.height);
-
-                element
-                    .css("height", element.height())
-                    .css("height")
-            }
-        };
-    extend(effectInit, {
-                fadeOutReverse: effectInit.fadeIn,
-                zoomOutReverse: effectInit.zoomIn
-            });
-
     function size(obj) {
         var size = 0, key;
         for (key in obj) {
@@ -1135,8 +1109,10 @@
             });
         } else {
             each(input, function(idx) {
-                if (this.direction && mirror)
-                    this.direction = kendo.directions[this.direction].reverse;
+                var direction = this.direction;
+
+                if (direction && mirror)
+                    direction = kendo.directions[direction].reverse;
 
                 effects[idx] = this;
             });
@@ -1191,19 +1167,7 @@
             teardown: noop,
             hide: false,
             show: false
-        }, options);
-
-        each( options.effects, function (effectName) {
-            var effect = options.reverse ? effectName + "Reverse" : effectName;
-
-            if (effect in effectInit) {
-                effectInit[effect](element);
-            }
-        });
-
-        if (options.show && !element.is(":visible")) {
-            element.show();
-        }
+        }, options, { completeCallback: options.complete }); // Move external complete callback, so deferred.resolve can be always executed.
 
         return element.queue(function () {
             var promises = [], effects = options.effects;
@@ -1212,65 +1176,81 @@
                 effects = parseEffects(options.effects);
             }
 
-            if (kendo.fx && support.transitions) {
-                var pkg = {
-                    element: element,
-                    eventNo: 0,
-                    effectCount: size(effects)
-                };
-
-                var px = proxy( kendo.fx.deQueue, pkg );
-                element.bind(support.transitions.event, px);
-            }
-
             element.data("animating", true);
+            element.data("reverse", options.reverse);
 
-            var teardowns = [];
+            var props = { set: {}, keep: {}, restore: {} },
+                methods = { setup: [], teardown: [] }, properties = {},
 
-            // create a promise for each effect
-            each(effects, function(effectName, settings) {
-                var promise = $.Deferred(function(deferred) {
-                    var effect = kendo.fx[effectName];
+                // create a promise for each effect
+                promise = $.Deferred(function(deferred) {
+                    if (size(effects)) {
+                        var opts = extend( {}, options, { complete: deferred.resolve } );
 
-                    if (effect) {
-                        var opt = settings.options; // Something goes wrong when there's no variable and the complete callback is called too many times.
-                        settings.options = extend(opt, {
-                            duration: options.duration,
-                            direction: settings.direction,
-                            complete: function () {
-                                each(options.effects, function(idx, effect) {
-                                    if ("options" in effect && "teardown" in effect.options) {
-                                        teardowns.push(effect.options.teardown); // collect the internal completion callbacks
-                                    }
+                        each(effects, function(effectName, settings) {
+                            var effect = kendo.fx[effectName];
+
+                            if (effect) {
+                                opts = extend( true, opts, settings );
+
+                                each( methods, function (idx) {
+                                    if (effect[idx])
+                                        methods[idx].push( effect[idx] );
                                 });
 
-                                deferred.resolve();
+                                each( props, function (idx) {
+                                    if (effect[idx])
+                                        props[idx] = extend( this, effect[idx] );
+                                });
                             }
                         });
 
-                        effect[options.reverse? "reverse" : "play"](element, settings.properties, settings.options);
+                        each (props.keep, function (idx) {
+                            if (!element.data(idx))
+                                element.data(idx, element.css(idx));
+                        });
+
+                        if (options.show) {
+                            props.set = extend( props.set, { display: "block" } ); // Add show to the set
+                        }
+
+                        element.css(props.set);
+                        element.css("overflow"); // Nudge Chrome
+
+                        each (methods.setup, function () { properties = extend( properties, this(element, opts)) });
+                        kendo.fx.animate ( element, properties, opts);
                     } else {
+                        if (options.show) {
+                            element.show();
+                        }
+
                         deferred.resolve();
                     }
                 }).promise();
 
-                promises.push(promise);
-            });
+            promises.push(promise);
 
             //wait for all effects to complete
             $.when.apply(null, promises).then(function() {
-                element.removeData("animating");
-                element.dequeue(); // call next animation from the queue
-                if (support.transitions) {
-                    element.unbind(support.transitions.event);
-                }
+                element
+                    .removeData("animating")
+                    .removeData("reverse")
+                    .dequeue(); // call next animation from the queue
 
                 if (options.hide) {
                     element.hide();
                 }
 
-                options.complete(); // call the complete callback
-                each(teardowns, function () { this(); }); // call the internal completion callbacks
+                if (options.completeCallback)
+                    options.completeCallback(); // call the external complete callback
+
+                if (size(effects)) {
+                    each ( props.restore, function (idx) {
+                        element.css(idx, element.data(idx));
+                    });
+
+                    each( methods.teardown, function () { this(element, options.reverse); } ); // call the internal completion callbacks
+                }
             });
        });
     }
@@ -1302,7 +1282,7 @@
                 element.css(support.transitions.css + "transition", options.exclusive + " " + options.duration + "ms " + options.ease);
                 setTimeout(function() {
                     element.css(support.transitions.css + "transition", "none");
-                }, options.duration + 20); // TODO: this should fire a kendoAnimate session instead.
+                }, options.duration); // TODO: this should fire a kendoAnimate session instead.
             }
 
             each(classes, function(idx, value) {
