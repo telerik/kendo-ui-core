@@ -12,7 +12,6 @@
         <script src="../jquery.mockjax.js"></script>
         <link rel="stylesheet" href="../qunit.css" />
         <link href="../../styles/kendo.common.css" rel="stylesheet"/>
-        <link href="../../styles/kendo.vista.css" rel="stylesheet"/>
     </head>
     <body>
 
@@ -197,7 +196,7 @@
             test('creating a second modal moves overlay after the first one', function() {
                 var dialog = createWindow({
                         modal: true
-                    }), 
+                    }),
                     overlappingDialog = createWindow({
                         modal: true
                     });

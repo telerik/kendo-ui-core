@@ -11,12 +11,11 @@
         <script type="text/javascript" src="../jquery.mockjax.js"></script>
         <link rel="stylesheet" href="../qunit.css" />
         <link type="text/css" href="../../styles/kendo.common.css" rel="stylesheet"/>
-        <link type="text/css" href="../../styles/kendo.vista.css" rel="stylesheet"/>
 
    <script type="text/javascript">
 
        var isRaised, isExpandRaised, isCollapseRaised, isSelectRaised;
-        
+
         function getRootItem(index) {
 			return $('#PanelBar1').find('.t-header').parent().eq(index)
         }
@@ -37,7 +36,7 @@
         function Select(sender, args) {
             isSelectRaised = true;
         }
-    
+
         var onLoadPanelBar;
         function Load(e) {
             isRaised = true;
@@ -154,7 +153,7 @@
     <script type="text/javascript">
 
         $("#PanelBar1").kendoPanelBar({ animation: false, expand: Expand, collapse: Collapse, select: Select });
-        
+
         test('trigger input select should not bubble', function() {
 
             isRaised = false;
@@ -184,12 +183,12 @@
             isCollapseRaised = false;
 
             var item = getRootItem(3);
-            
+
             item.find('> .t-link').trigger('click');
 
             ok(isCollapseRaised);
         });
-        
+
         test('expand should raise onExpand event', function() {
 
             var panel = getPanelBar();
@@ -224,7 +223,7 @@
         });
 
         test('collapse method should collapse last item', function() {
-        
+
             var panel = getPanelBar();
 
             var item = getRootItem(4);
@@ -235,7 +234,7 @@
         });
 
         test('expand method should expand last item', function() {
-        
+
             var panel = getPanelBar();
 
             var item = getRootItem(4);
