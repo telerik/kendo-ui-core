@@ -11,7 +11,6 @@
         <script type="text/javascript" src="../jquery.mockjax.js"></script>
         <link rel="stylesheet" href="../qunit.css" />
         <link type="text/css" href="../../styles/kendo.common.css" rel="stylesheet"/>
-        <link type="text/css" href="../../styles/kendo.vista.css" rel="stylesheet"/>
 
    <script type="text/javascript">
 
@@ -154,9 +153,9 @@
     <script type="text/javascript">
 
         $("#PanelBar1").kendoPanelBar({ animation: false, expandMode: 0 });
-        
+
         test('expand should collapse other opened items', function() {
-           
+
             var panel = getPanelBar();
 
             var item = getRootItem(0);
@@ -168,7 +167,7 @@
         });
 
         test('expand should not collapse item which is already expanded', function() {
-        
+
             var panel = getPanelBar();
 
             var item = getRootItem(2);
