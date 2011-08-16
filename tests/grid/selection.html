@@ -120,34 +120,34 @@
                 ok(table.find("tbody tr:eq(0)").find("td").hasClass("t-state-focused"));
             });
 
-            test("pageUp should page to the next page", function() {
+            test("pageDown should page to the next page", function() {
                 var grid = setup({
                     pageable: {
                         pageSize: 1
                     }
                 });
-                table.focus().press(kendo.keys.PAGEUP);
+                table.focus().press(kendo.keys.PAGEDOWN);
                 equal(grid.dataSource.page(), 2);
             });
 
-            test("pageDown should page to the prev page", function() {
+            test("pageUp should page to the prev page", function() {
                 var grid = setup({
                     pageable: {
                         pageSize: 1
                     }
                 });
                 $(".t-grid-pager").find("a:not(.currentPage)").click();
-                table.focus().press(kendo.keys.PAGEDOWN);
+                table.focus().press(kendo.keys.PAGEUP);
                 equal(grid.dataSource.page(), 1);
             });
 
-            test("pageDown should not page to the pass first", function() {
+            test("pageUp should not page to the pass first", function() {
                 var grid = setup({
                     pageable: {
                         pageSize: 1
                     }
                 });
-                table.focus().press(kendo.keys.PAGEDOWN);
+                table.focus().press(kendo.keys.PAGEUP);
                 equal(grid.dataSource.page(), 1);
             });
 
@@ -157,7 +157,7 @@
                         pageSize: 1
                     }
                 });
-                table.focus().press(kendo.keys.PAGEDOWN).press(kendo.keys.DOWN);
+                table.focus().press(kendo.keys.PAGEUP).press(kendo.keys.DOWN);
 
                 ok(table.find(">tbody>tr>td").first().is(".t-state-focused"));
             });

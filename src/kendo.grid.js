@@ -22,6 +22,9 @@
         FOCUSED = "t-state-focused",
         FOCUSABLE = "t-focusable",
         SELECTED = "t-state-selected",
+        CLICK = "click",
+        HEIGHT = "height",
+        TABINDEX = "tabIndex",
         STRING = "string";
 
     var VirtualScrollable =  Component.extend({
@@ -548,15 +551,16 @@
                 });
             }
 
-            that.table.delegate(".t-grouping-row .t-collapse, .t-grouping-row .t-expand", "click", function(e) {
-                e.preventDefault();
+            that.table.delegate(".t-grouping-row .t-collapse, .t-grouping-row .t-expand", CLICK, function(e) {
                 var element = $(this),
                     group = element.closest("tr");
+
                 if(element.hasClass('t-collapse')) {
                     that.collapseGroup(group);
                 } else {
                     that.expandGroup(group);
                 }
+                e.preventDefault();
             });
         },
 
@@ -581,6 +585,7 @@
                 if (that.options.navigatable) {
                     that.wrapper.keydown(function(e) {
                         if (e.keyCode === keys.SPACEBAR) {
+                            e.preventDefault();
                             var current = that.current();
                             current = cell ? current : current.parent();
 
@@ -656,12 +661,12 @@
         },
 
         _scrollTo: function(element) {
-            var container = this.tbody.closest("div.t-grid-content")[0];
-            if(!element || !container) {
+            if(!element || !this.options.scrollable) {
                 return;
             }
 
             var elementOffsetTop = element.offsetTop,
+                container = this.content[0],
                 elementOffsetHeight = element.offsetHeight,
                 containerScrollTop = container.scrollTop,
                 containerOffsetHeight = container.clientHeight,
@@ -682,7 +687,7 @@
                 selector = "." + FOCUSABLE + " " + CELL_SELECTOR,
                 clickCallback = function(e) {
                     currentProxy($(e.currentTarget));
-                    if(e.type == "click") {
+                    if(e.type == CLICK) {
                         wrapper.focus();
                     }
                 };
@@ -690,8 +695,9 @@
             if (that.options.navigatable) {
                 wrapper.bind({
                     focus: function() {
-                        if(that._current && that._current.is(":visible")) {
-                            that._current.addClass(FOCUSED);
+                        var current = that._current;
+                        if(current && current.is(":visible")) {
+                            current.addClass(FOCUSED);
                         } else {
                             currentProxy(that.table.find(FIRST_CELL_SELECTOR));
                         }
@@ -720,11 +726,11 @@
                         } else if (keys.RIGHT === key) {
                             currentProxy(current ? current.next() : table.find(FIRST_CELL_SELECTOR));
                             handled = true;
-                        } else if (pageable && keys.PAGEUP == key) {
+                        } else if (pageable && keys.PAGEDOWN == key) {
                             that._current = null;
                             dataSource.page(dataSource.page() + 1);
                             handled = true;
-                        } else if (pageable && keys.PAGEDOWN == key) {
+                        } else if (pageable && keys.PAGEUP == key) {
                             that._current = null;
                             dataSource.page(dataSource.page() - 1);
                             handled = true;
@@ -736,18 +742,14 @@
                     }
                 });
 
-                if($.browser.msie) {
-                    wrapper.delegate(selector, "click", clickCallback);
-                } else {
-                    wrapper.delegate(selector, "mousedown", clickCallback);
-                }
+                wrapper.delegate(selector, $.browser.msie ? CLICK : "mousedown", clickCallback);
             }
         },
 
         _wrapper: function() {
             var that = this,
                 table = that.table,
-                height = that.options.height || table.css("height"),
+                height = that.options.height || table.css(HEIGHT),
                 wrapper = that.element;
 
             if (!wrapper.is("div")) {
@@ -755,13 +757,13 @@
             }
 
             that.wrapper = wrapper.addClass("t-grid t-widget")
-                                  .attr("tabIndex", math.max(table.attr("tabIndex") || 0, 0));
+                                  .attr(TABINDEX, math.max(table.attr(TABINDEX) || 0, 0));
 
-            table.removeAttr("tabIndex");
+            table.removeAttr(TABINDEX);
 
             if (height && height !== "0px") {
-                that.wrapper.css("height", height);
-                table.css("height", "auto");
+                that.wrapper.css(HEIGHT, height);
+                table.css(HEIGHT, "auto");
             }
         },
 
@@ -813,7 +815,7 @@
                     if (scrollable !== true && scrollable.virtual) {
                         new VirtualScrollable(that.content, {
                             dataSource: that.dataSource,
-                            itemHeight: proxy(that._calculateRowHeight, that)
+                            itemHeight: proxy(that._averageRowHeight, that)
                         });
                     }
                 }
@@ -832,7 +834,7 @@
             }
         },
 
-        _calculateRowHeight: function() {
+        _averageRowHeight: function() {
             var that = this,
                 rowHeight = that._rowHeight;
 
@@ -1081,7 +1083,7 @@
                 colgroup.remove();
             }
 
-            colgroup = $("<colgroup></colgroup>").append($(new Array(groups + 1).join('<col class="t-group-col">') + cols.join("")));
+            colgroup = $("<colgroup/>").append($(new Array(groups + 1).join('<col class="t-group-col">') + cols.join("")));
 
             table.prepend(colgroup);
         },
@@ -1211,8 +1213,7 @@
         },
         _progress: function(toggle) {
             var that = this,
-                scrollWrapper = that.element.find(".t-grid-content"),
-                element = that.element.is("table") ? that.element.parent() : (scrollWrapper.length ? scrollWrapper : that.element);
+                element = that.element.is("table") ? that.element.parent() : (that.content && that.content.length ? that.content : that.element);
 
             kendo.ui.progress(element, toggle);
         },
