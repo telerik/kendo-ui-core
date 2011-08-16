@@ -611,8 +611,8 @@
             //add group separator to the number if it is longer enough
             if (integerLength >= groupSize) {
                 value = EMPTY;
-                for (idx = 0, length = integer.length; idx < length; idx++) {
-                    if (idx > 0 && (length - idx) % groupSize === 0) {
+                for (idx = 0; idx < integerLength; idx++) {
+                    if (idx > 0 && (integerLength - idx) % groupSize === 0) {
                         value += groupSeparator;
                     }
                     value += integer.charAt(idx);
@@ -645,7 +645,6 @@
         }
 
         //custom formatting
-        //
         //separate format by sections.
         format = format.split(";");
         if (negative && format[1]) {
@@ -733,11 +732,11 @@
             integerLength = integer.length;
             fractionLength = fraction.length;
 
-            //apply group separator to the integer
+            //add group separator to the number if it is longer enough
             if (integerLength >= groupSize && format.indexOf(COMMA) != -1) {
                 value = EMPTY;
-                for (idx = 0, length = integerLength; idx < length; idx++) {
-                    if (length > groupSize && (length - idx) % groupSize === 0) {
+                for (idx = 0; idx < integerLength; idx++) {
+                    if (idx > 0 && (integerLength - idx) % groupSize === 0) {
                         value += groupSeparator;
                     }
                     value += integer.charAt(idx);
@@ -791,11 +790,7 @@
                 value = EMPTY;
                 for (idx = 0, length = number.length; idx < length; idx++) {
                     ch = number.charAt(idx);
-                    if (ch === "$" || ch === "%") {
-                        value += symbol;
-                    } else {
-                        value += ch;
-                    }
+                    value += (ch === "$" || ch === "%") ? symbol : ch;
                 }
                 number = value;
             }

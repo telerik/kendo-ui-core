@@ -17,10 +17,10 @@
                 var suite = new Benchmark.Suite;
 
                 suite.add("jquery number-formatting: #,###.00", function() {
-                    $.formatNumber(1234.567, {format:"#,###.00", locale:"us"});
+                    $.formatNumber(1234.567, {format:"0000000#########,###.00", locale:"us"});
                 })
                 .add("Kendo custom number formatting: #,###.00", function() {
-                    kendo.toString(1234.567, "#,###.00");
+                    kendo.toString(1234.567, "$ 0000000#########,###.00 $");
                 })
                 .on("complete", function() {
                     var message = "<div>User agent: " + navigator.userAgent;
