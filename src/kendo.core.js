@@ -199,7 +199,7 @@
                 begin = settings.begin,
                 end = settings.end,
                 useWithBlock = settings.useWithBlock,
-                functionBody = "var o='',e = kendo.htmlEncode;",
+                functionBody = "var o,e=kendo.htmlEncode;",
                 encodeRegExp = /\${([^}]*)}/g,
                 evalRegExp = new RegExp(begin + "=(.+?)" + end, "g"),
                 quoteRegExp = new RegExp("'(?=[^" + end[0] + "]*" + end + ")", "g");
@@ -214,22 +214,31 @@
                 return template;
             }
 
-            functionBody += useWithBlock ? "with(" + paramName + "){" : "";
-
-            functionBody += "o+='";
-
-            functionBody += template.replace(newLineTabRegExp, " ")
+            if (useWithBlock) {
+                 functionBody = "var o=[];with(" + paramName + "){o.push('";
+                 functionBody += template.replace(/[\r\t\n]/g, " ")
+                    .replace(/'(?=[^#]*#>)/g, "\t")
+                    .split("'").join("\\'")
+                    .split("\t").join("'")
+                    .replace(/<#=(.+?)#>/g, "',$1,'")
+                    .split("<#").join("');")
+                    .split("#>").join("o.push('")
+                    + "');}return o.join('');";
+            } else {
+                functionBody = "var e=kendo.htmlEncode,o='",
+                functionBody += template.replace(newLineTabRegExp, " ")
                 .replace(quoteRegExp,"\t")
                 .split("'").join("\\'")
                 .split("\t").join("'")
                 .replace(encodeRegExp, "';o+=e($1);o+='")
-                .replace(evalRegExp, "';o+=$1;o+='")
+                .replace(evalRegExp, "'+$1+'")
                 .split(begin).join("';")
                 .split(end).join("o+='");
 
-            functionBody += useWithBlock ? "'}" : "';";
+                functionBody += "';";
 
-            functionBody += "return o;";
+                functionBody += "return o;";
+            }
 
             return new Function(paramName, functionBody);
         }
