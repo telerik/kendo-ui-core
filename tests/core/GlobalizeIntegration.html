@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>jQuery Globalize Integration</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="globalize/globalize.js"></script>
+        <link rel="stylesheet" href="../qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">jQuery Globalize integration</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script type="text/javascript">
+            var culture = kendo.culture;
+
+            test("kendo.toString should use Globalize.format", function() {
+                var origin = Globalize.format,
+                    isCalled = false;
+
+                Globalize.format = function() { isCalled = true; };
+
+                kendo.toString(10.10, "c");
+
+                Globalize.format = origin;
+
+                ok(isCalled);
+            });
+
+            test("kendo.format should use Globalize.format", function() {
+                var origin = Globalize.format,
+                    isCalled = false;
+
+                Globalize.format = function() { isCalled = true; };
+
+                kendo.format("{0:c}", 10.10);
+
+                Globalize.format = origin;
+
+                ok(isCalled);
+            });
+        </script>
+    </body>
+</html>

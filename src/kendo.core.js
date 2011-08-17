@@ -658,7 +658,7 @@
             return number;
         }
 
-        //custom formatting
+        /* custom formatting */
         //separate format by sections.
         format = format.split(";");
         if (negative && format[1]) {
@@ -814,6 +814,11 @@
     }
 
     function toString(value, fmt) {
+        var globalize = window.Globalize;
+        if (globalize) {
+            return globalize.format(value, fmt);
+        }
+
         if (fmt) {
             if (value instanceof Date) {
                 return formatDate(value, fmt);
