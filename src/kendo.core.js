@@ -383,7 +383,6 @@
 })();
 
 // Date and Number formatting
-
 (function() {
     var formatRegExp = /{(\d+)(:[^\}]+)?}/g,
         dateFormatRegExp = /dddd|ddd|dd|d|MMMM|MMM|MM|M|yyyy|yy|HH|H|hh|h|mm|m|fff|ff|f|tt|ss|s|"[^"]*"|'[^']*'/g,
@@ -394,7 +393,8 @@
         SHARP = "#",
         ZERO = "0";
 
-    kendo.culture = {
+    //cultures
+    kendo.cultures = {"en-US" : {
         name: "en-US",
         numberFormat: {
             pattern: ["-n"],
@@ -451,16 +451,30 @@
                 ":": ":"
             }
         }
-    };
+    }};
 
-    kendo.culture.calendar = kendo.culture.calendars.standard;
+    //get or set culture.
+    kendo.culture = function(cultureName) {
+        if (cultureName !== undefined) {
+            var cultures = kendo.cultures,
+                culture = cultures[cultureName] || cultures["en-US"];
+
+            culture.calendar = culture.calendars.standard;
+            kendo.currentCulture = culture;
+        } else {
+            return kendo.currentCulture;
+        }
+    }
+
+    //set current culture to en-US.
+    kendo.culture("en-US");
 
     function pad(number) {
         return number < 10 ? "0" + number : number;
     }
 
     function formatDate(date, format) {
-        var calendar = kendo.culture.calendar,
+        var calendar = kendo.currentCulture.calendar,
             days = calendar.days,
             months = calendar.months;
 
@@ -521,7 +535,7 @@
 
     //number formatting
     function formatNumber(number, format) {
-        var culture = kendo.culture,
+        var culture = kendo.currentCulture,
             numberFormat = culture.numberFormat,
             groupSize = numberFormat.groupSize[0],
             groupSeparator = numberFormat[COMMA],

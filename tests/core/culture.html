@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Cultures</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <link rel="stylesheet" href="../qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Cultures</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script type="text/javascript">
+            var culture = kendo.culture;
+
+            test("default culture should be en-US", function() {
+                ok(kendo.currentCulture);
+                equal(kendo.currentCulture.name, "en-US");
+            });
+
+            test("culture should set currentCulture", function() {
+                culture("en-US");
+                ok(kendo.currentCulture);
+                equal(kendo.currentCulture.name, "en-US");
+            });
+
+            test("additional cultures can be added to kendo.cultures", function() {
+                kendo.cultures["de-DE"] = { name: "de-DE", calendars: {standard: {}}};
+                culture("de-DE");
+                ok(kendo.currentCulture);
+                equal(kendo.currentCulture.name, "de-DE");
+            });
+
+            test("if no culture set en-US", function() {
+                var cultureName = "no-such-culture";
+                culture(cultureName);
+                ok(kendo.currentCulture);
+                equal(kendo.currentCulture.name, "en-US");
+            });
+
+            test("culture() should return currentCulture", function() {
+                equal(culture(), kendo.currentCulture);
+            });
+
+        </script>
+    </body>
+</html>
