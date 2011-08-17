@@ -242,20 +242,20 @@
 
             //globalized
             test("apply globalized currency symbol", function() {
-                kendo.culture.numberFormat.currency.symbol = "lv";
+                kendo.currentCulture.numberFormat.currency.symbol = "lv";
                 equal(toString(10.1, "$ #### $"), "lv 10 lv");
-                kendo.culture.numberFormat.currency.symbol = "$";
+                kendo.currentCulture.numberFormat.currency.symbol = "$";
             });
 
             test("apply globalized percent symbol", function() {
-                kendo.culture.numberFormat.percent.symbol = "percent";
+                kendo.currentCulture.numberFormat.percent.symbol = "percent";
                 equal(toString(10.1, "% #0## %"), "percent 1010 percent");
-                kendo.culture.numberFormat.percent.symbol = "%";
+                kendo.currentCulture.numberFormat.percent.symbol = "%";
             });
 
             test("globalized number", function() {
-                kendo.culture.numberFormat[","] = " ";
-                kendo.culture.numberFormat["."] = ",";
+                kendo.currentCulture.numberFormat[","] = " ";
+                kendo.currentCulture.numberFormat["."] = ",";
                 equal(toString(1000010.1, " 0000#0#,#.00 "), " 001 000 010,10 ");
             });
 
