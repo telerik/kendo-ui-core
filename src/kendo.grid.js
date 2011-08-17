@@ -1014,7 +1014,7 @@
                 }
 
                 if (model) {
-                    rowTemplate += kendo.format(' data-id="<#={0}#>"', model.id);
+                    rowTemplate += ' data-id="<#=' + (settings.useWithBlock ? "" : settings.paramName + ".") + model.id + '#>"';
                 }
 
                 rowTemplate += ">";
