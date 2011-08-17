@@ -28,6 +28,14 @@ tests.push(
         title: "number formatting"
     },
     {
+        page: "core/culture.html",
+        title: "culture"
+    },
+    {
+        page: "core/globalizeIntegration.html",
+        title: "globalize integration"
+    },
+    {
         page: "core/json.html",
         title: "json"
     },
