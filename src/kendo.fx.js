@@ -9,10 +9,9 @@
         scaleProperties = { scale: 0, scaleX: 0, scaleY: 0, scale3d: 0 },
         translateProperties = { translate: 0, translateX: 0, translateY: 0, translate3d: 0 },
         matrix3d = [ 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1 ],
-        matrix3dRegExp = /matrix3?d?\s*\(.*,\s*([\d\w\.]+),\s*([\d\w\.]+)/,
-        cssParamsRegExp = /^(-?[\d\.]+)?[\w\s]*,?\s*(-?[\d\.]+)?[\w\s]*/i,
-        translateXRegExp = /translatex?\s*\(/i,
-        translateYRegExp = /translatey\s*\(/i,
+        matrix3dRegExp = /matrix3?d?\s*\(.*,\s*([\d\w\.\-]+),\s*([\d\w\.\-]+),\s*([\d\w\.\-]+)/,
+        cssParamsRegExp = /^(-?[\d\.\-]+)?[\w\s]*,?\s*(-?[\d\.\-]+)?[\w\s]*/i,
+        translateXRegExp = /translatex?$/i,
         transformNon3D = { rotate: "", scale: "", translate: "" },
         transformProps = ["perspective", "rotate", "rotateX", "rotateY", "rotateZ", "rotate3d", "scale", "scaleX", "scaleY", "scaleZ", "scale3d", "skew", "skewX", "skewY", "translate", "translateX", "translateY", "translateZ", "translate3d", "matrix", "matrix3d"],
         cssPrefix = transitions.css,
@@ -27,6 +26,7 @@
         HIDDEN = "hidden",
         ORIGIN = "origin",
         ABORT_ID = "abortId",
+        OVERFLOW = "overflow",
         TRANSLATE = "translate",
         TRANSITION = cssPrefix + "transition",
         TRANSFORM = cssPrefix + "transform";
@@ -81,20 +81,22 @@
     function getComputedStyles(element, properties){
         var styles = {};
 
-        if (document.defaultView && document.defaultView.getComputedStyle) {
-            var computedStyle = document.defaultView.getComputedStyle(element, "");
-
-            each(properties, function(idx, value) {
-                styles[value] = computedStyle.getPropertyValue(value);
-            });
-        } else
-            if (element.currentStyle) { // Not really needed
-                var style = element.currentStyle;
+        if (properties) {
+            if (document.defaultView && document.defaultView.getComputedStyle) {
+                var computedStyle = document.defaultView.getComputedStyle(element, "");
 
                 each(properties, function(idx, value) {
-                    styles[value] = style[value.replace(/\-(\w)/g, function (strMatch, g1) { return g1.toUpperCase() })];
+                    styles[value] = computedStyle.getPropertyValue(value);
                 });
-            }
+            } else
+                if (element.currentStyle) { // Not really needed
+                    var style = element.currentStyle;
+
+                    each(properties, function(idx, value) {
+                        styles[value] = style[value.replace(/\-(\w)/g, function (strMatch, g1) { return g1.toUpperCase() })];
+                    });
+                }
+        }
 
         return styles;
     }
@@ -112,7 +114,7 @@
             element.css(TRANSITION, NONE);
 
             if (!browser.safari) {
-                element.css(TRANSITION);
+                element.css(HEIGHT);
             }
         }
 
@@ -227,9 +229,11 @@
                 match = transform.match(matrix3dRegExp) || [0, 0, 0];
 
                 if (translateXRegExp.test(property)) {
-                    computed = parseInteger(match[1]);
-                } else if (translateYRegExp.test(property)) {
                     computed = parseInteger(match[2]);
+                } else if (property.toLowerCase() == "translatey") {
+                    computed = parseInteger(match[3]);
+                } else if (property.toLowerCase() == "scale") {
+                    computed = parseFloat(match[1]);
                 }
             }
 
@@ -332,7 +336,7 @@
             }
         },
         fadeOut: {
-            set: {
+            css: {
                 opacity: function () {
                     var element = $(this);
                     return element.data("reverse") && !this.style.opacity ? 0 : undefined;
@@ -343,7 +347,7 @@
             }
         },
         fadeIn: {
-            set: {
+            css: {
                 opacity: function () {
                     var element = $(this);
                     return !element.data("reverse") && !this.style.opacity ? 0 : undefined;
@@ -354,7 +358,7 @@
             }
         },
         zoomIn: {
-            set: {
+            css: {
                 transform: function () {
                     var element = $(this);
                     return !element.data("reverse") && transitions ? "scale(.01)" : undefined;
@@ -365,7 +369,7 @@
             }
         },
         zoomOut: {
-            set: {
+            css: {
                 transform: function () {
                     var element = $(this);
                     return element.data("reverse") && transitions ? "scale(.01)" : undefined;
@@ -409,9 +413,9 @@
             }
         },
         expandVertical: {
-            keep: { overflow: {} },
-            set: { overflow: HIDDEN },
-            restore: { overflow: {} },
+            keep: [ OVERFLOW ],
+            css: { overflow: HIDDEN },
+            restore: [ OVERFLOW ],
             setup: function (element, options) {
                 var reverse = options.reverse,
                     setHeight = element[0].style.height,
@@ -429,7 +433,7 @@
             teardown: function (element) {
                 var height = element.data(HEIGHT);
                 if (height == AUTO || height === BLANK) {
-                    element.css(HEIGHT, height).css(HEIGHT);
+                    element.css(HEIGHT, AUTO).css(HEIGHT);
                 }
             }
         },
