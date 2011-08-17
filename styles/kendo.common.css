@@ -294,7 +294,7 @@ div.t-window
     padding: .4em 0;
     margin-top: -2em;
     width: 100%;
-    height 1.1em;
+    height: 1.1em;
     font-size: 1.2em;
     position: absolute;
     white-space: nowrap;
@@ -1438,9 +1438,10 @@ html body .t-grid tbody .t-button-icon
     padding: 0 23px 0 0;
 }
 
-.t-dropdown-wrap
+.t-dropdown-wrap,
+.t-picker-wrap
 {
-    padding-right: 16px; /* icon width*/
+    padding-right: 16px; /*icon width*/
     border-width: 1px;
     border-style: solid;
 }
@@ -1450,13 +1451,14 @@ html body .t-grid tbody .t-button-icon
     zoom:1; /*otherwise DropDownList won't open unless clicked on the text*/
 }
 
-.t-combobox>.t-dropdown-wrap
+.t-combobox>.t-dropdown-wrap,
+.t-datepicker>.t-picker-wrap
 {
     padding-right: 22px; /* icon width + input paddings, except IE6 */
 }
 
-* html .t-combobox .t-dropdown-wrap { height: 20px; }
-* html .t-picker-wrap { height: 20px; padding-right: 20px; }
+* html .t-combobox .t-dropdown-wrap,
+* html .t-datepicker .t-picker-wrap { height: 20px; }
 
 .t-picker-wrap .t-input,
 .t-combobox .t-input
@@ -1465,6 +1467,7 @@ html body .t-grid tbody .t-button-icon
     width: 100%;
 }
 
+.t-picker-wrap .t-input,
 .t-dropdown .t-input,
 .t-combobox .t-input,
 .t-selectbox .t-input
@@ -1505,11 +1508,27 @@ html body .t-grid tbody .t-button-icon
 * html .t-picker-wrap .t-select,
 * html .t-dropdown-wrap .t-select { top: 1px; right: 1px; }
 
-.t-combobox .t-select
+.t-combobox .t-select,
+.t-picker-wrap .t-select
 {
     border-width: 0 0 0 1px;
     border-style: solid;
     border-color: inherit; /* will be skin-related, inherit does not work in ie7- */
+}
+
+.t-picker-wrap .t-select
+{
+    padding:0 2px;
+}
+
+div.t-datetimepicker .t-select
+{
+    right:21px;
+}
+
+div.t-datetimepicker .t-select+.t-select
+{
+    right:0;
 }
 
 .t-combobox .t-icon
@@ -1553,18 +1572,14 @@ html body .t-grid tbody .t-button-icon
     top: 0;
 }
 
-.t-picker-wrap .t-icon
-{
-    vertical-align: top;
-    margin-top: 3px;
-}
-
+.t-picker-wrap .t-icon,
 .t-dropdown-wrap .t-icon
 {
     vertical-align: top;
     margin-top: 2px;
 }
 
+.t-picker-wrap .t-input,
 .t-combobox .t-input
 {
     height: 18px;
@@ -1729,7 +1744,7 @@ div.t-timepicker,
 div.t-datetimepicker,
 div.t-datepicker
 {
-    background: none transparent; /* don't allow t-widget to add background-color */
+    background-color: transparent; /* don't allow t-widget to add background-color */
 }
 
 .t-datetimepicker .t-picker-wrap
@@ -1738,11 +1753,6 @@ div.t-datepicker
 }
 
 * html .t-datetimepicker .t-picker-wrap { padding-right: 40px; }
-
-.t-datetimepicker .t-icon-calendar
-{
-    margin-right: 3px;
-}
 
 .t-picker-wrap .t-icon
 {
