@@ -42,6 +42,15 @@ html body .t-button
     text-decoration: none; /*Site.css*/
 }
 
+.t-button,
+.t-dropdown-wrap,
+.t-picker-wrap
+{
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
 .t-button
 {
     display: inline-block;
@@ -54,10 +63,6 @@ html body .t-button
     line-height: 1.5;
     text-align: center;
     cursor: pointer;
-
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
 }
 
 *+html .t-button { display: inline; zoom: 1 }
@@ -542,6 +547,13 @@ div.t-window-content
     zoom: 1;
     border-bottom-width: 0;
     outline: 0;
+}
+
+.t-tabstrip-items .t-state-hover .t-link
+{
+    -moz-border-radius: 5px 5px 0 0;
+    -webkit-border-radius: 5px 5px 0 0;
+    border-radius: 5px 5px 0 0;
 }
 
 .t-tabstrip-items .t-icon,
@@ -1406,6 +1418,12 @@ html body .t-grid tbody .t-button-icon
 
 /* ComboBox & Drop-down*/
 
+div.t-combobox,
+div.t-dropdown
+{
+    background: none;
+}
+
 .t-combobox,
 .t-dropdown,
 .t-selectbox
@@ -1483,7 +1501,9 @@ html body .t-grid tbody .t-button-icon
 }
 
 /*removes excessive spacing in IE6-7*/
+*+html .t-picker-wrap .t-input,
 *+html .t-combobox .t-input { margin:-1px 0; }
+* html .t-picker-wrap .t-input,
 * html .t-combobox .t-input { margin:-1px 0; }
 
 * html { position: absolute; top: 0; }
@@ -1594,6 +1614,30 @@ div.t-datetimepicker .t-select+.t-select
 {
     height: 20px;
     line-height: 20px;
+}
+
+.t-dropdown-wrap .t-input,
+.t-picker-wrap .t-input
+{
+    -moz-border-radius: 5px 0 0 5px;
+    -webkit-border-radius: 5px 0 0 5px;
+    border-radius: 5px 0 0 5px;
+}
+
+.t-dropdown-wrap .t-select,
+.t-picker-wrap .t-select,
+.t-datetimepicker .t-select+.t-select
+{
+    -moz-border-radius: 0 5px 5px 0;
+    -webkit-border-radius: 0 5px 5px 0;
+    border-radius: 0 5px 5px 0;
+}
+
+.t-datetimepicker .t-select
+{
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
 }
 
 .t-popup
