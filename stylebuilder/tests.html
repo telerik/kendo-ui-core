@@ -6,6 +6,8 @@
         <script src="../src/jquery.js"></script>
         <script src="../tests/qunit.js"></script>
 
+        <script src="../src/kendo.core.js"></script>
+
         <link rel="stylesheet" href="../tests/qunit.css" />
     </head>
     <body>
@@ -15,11 +17,13 @@
         <h2 id="qunit-userAgent"></h2>
         <ol id="qunit-tests"></ol>
 
+        <script src="../stylebuilder/script.js"></script>
+
         <script>
             module("stylebuilder");
 
-            test("dummy", function() {
-                ok(true);
+            test("StyleBuilder object is available", function() {
+                ok(typeof kendo.StyleBuilder == "function");
             });
         </script>
 
