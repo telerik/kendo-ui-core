@@ -161,8 +161,6 @@
     Template = /** @lends kendo.Template */ {
         paramName: "data", // name of the parameter of the generated template
         useWithBlock: true, // whether to wrap the template in a with() block
-        begin: "<#", // the marker which denotes the beginning of executable code
-        end: "#>", // the marker which denotes the end of executable code
         /**
          * Renders a template for each item of the data.
          * @ignore
@@ -197,13 +195,13 @@
         compile: function(template, options) {
             var settings = extend({}, this, options),
                 paramName = settings.paramName,
-                begin = settings.begin,
-                end = settings.end,
+                begin =  "<#",
+                end = "#>",
                 useWithBlock = settings.useWithBlock,
                 functionBody = "var o,e=kendo.htmlEncode;",
                 encodeRegExp = /\${([^}]*)}/g,
-                evalRegExp = new RegExp(begin + "=(.+?)" + end, "g"),
-                quoteRegExp = new RegExp("'(?=[^" + end[0] + "]*" + end + ")", "g");
+                evalRegExp = /<#=(.+?)#>/g,
+                quoteRegExp = /'(?=[^<"]*#>)/g;
 
             if (isFunction(template)) {
                 if (template.length === 2) {
