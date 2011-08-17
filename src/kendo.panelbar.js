@@ -148,7 +148,8 @@
         MOUSELEAVE = "mouseleave",
         CONTENTLOAD = "contentLoad",
         ACTIVECLASS = ".t-state-active",
-        GROUPS = "> .t-content, > .t-group",
+        GROUPS = "> .t-group",
+        CONTENTS = "> .t-content",
         SELECTEDCLASS = ".t-state-selected",
         DISABLEDCLASS = ".t-state-disabled",
         HIGHLIGHTEDCLASS = ".t-state-highlighted",
@@ -446,7 +447,9 @@
 
             $(element).each(function (index, item) {
                 item = $(item);
-                if (!item.hasClass(DISABLEDCLASS) && item.find(GROUPS).length > 0) {
+                var groups = item.find(GROUPS).add(item.find(CONTENTS));
+
+                if (!item.hasClass(DISABLEDCLASS) && groups.length > 0) {
 
                     if (that.options.expandMode == SINGLE && that._collapseAllExpanded(item)) {
                         return;
@@ -483,8 +486,9 @@
 
             $(element).each(function (index, item) {
                 item = $(item);
+                var groups = item.find(GROUPS).add(item.find(CONTENTS));
 
-                if (!item.hasClass(DISABLEDCLASS) && item.find(GROUPS).is(VISIBLE)) {
+                if (!item.hasClass(DISABLEDCLASS) && groups.is(VISIBLE)) {
                     item.removeClass(HIGHLIGHTEDCLASS.substr(1));
 
                     if (!useAnimation) {
@@ -757,7 +761,7 @@
             link.addClass(SELECTEDCLASS.substr(1));
             link.parentsUntil(that.element, ITEM).filter(":has(.t-header)").addClass(HIGHLIGHTEDCLASS.substr(1));
 
-            var contents = item.find(GROUPS),
+            var contents = item.find(GROUPS).add(item.find(CONTENTS)),
                 href = link.attr(HREF),
                 isAnchor = link.data(CONTENTURL) || (href && (href.charAt(href.length - 1) == "#" || href.indexOf("#" + that.element[0].id + "-") != -1));
 
@@ -856,10 +860,12 @@
             var that = this;
 
             if (item.find("> ." + LINK).hasClass("t-header")) {
-                if (item.find(GROUPS).is(VISIBLE) || item.find(GROUPS).length == 0) {
+                var groups = item.find(GROUPS).add(item.find(CONTENTS));
+                if (groups.is(VISIBLE) || groups.length == 0) {
                     return true;
                 } else {
-                    $(that.element).children().find(GROUPS)
+                    var children = $(that.element).children();
+                    children.find(GROUPS).add(children.find(CONTENTS))
                             .filter(function () { return $(this).is(VISIBLE) })
                             .each(function (index, content) {
                                 that._toggleGroup($(content), true);

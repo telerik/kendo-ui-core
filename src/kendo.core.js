@@ -63,6 +63,7 @@
                 idx,
                 eventNames = $.isArray(eventName) ? eventName : [eventName],
                 length,
+                handler,
                 events;
 
             for (idx = 0, length = eventNames.length; idx < length; idx++) {
@@ -71,7 +72,7 @@
                 handler = isFunction(handlers) ? handlers : handlers[eventName];
 
                 if (handler) {
-                    events = that._events[eventName] || []
+                    events = that._events[eventName] || [];
                     events.push(handler);
                     that._events[eventName] = events;
                 }
@@ -1164,6 +1165,7 @@
             duration: 400, //jQuery default duration
             reverse: false,
             complete: noop,
+            init: noop,
             teardown: noop,
             hide: false,
             show: false
@@ -1179,7 +1181,7 @@
             element.data("animating", true);
             element.data("reverse", options.reverse);
 
-            var props = { set: {}, keep: {}, restore: {} },
+            var props = { keep: [], restore: [] }, css = {},
                 methods = { setup: [], teardown: [] }, properties = {},
 
                 // create a promise for each effect
@@ -1200,27 +1202,38 @@
 
                                 each( props, function (idx) {
                                     if (effect[idx])
-                                        props[idx] = extend( this, effect[idx] );
+                                        $.merge( props[idx], effect[idx] );
                                 });
+
+                                if (effect["css"])
+                                    css = extend( css, effect.css );
                             }
                         });
 
                         if (methods.setup.length) {
-                            each (props.keep, function (idx) {
-                                if (!element.data(idx))
-                                    element.data(idx, element.css(idx));
+                            each ($.unique(props.keep), function (idx, value) {
+                                if (!element.data(value))
+                                    element.data(value, element.css(value));
                             });
 
                             if (options.show) {
-                                props.set = extend( props.set, { display: "block" } ); // Add show to the set
+                                css = extend( css, { display: "block" } ); // Add show to the set
                             }
 
-                            element.css(props.set);
+                            if (css.transform) {
+                                css[support.transitions.prefix + "Transform"] = css.transform;
+                                delete css.transform;
+                            }
+
+                            element.css(css);
                             element.css("overflow"); // Nudge Chrome
 
                             each (methods.setup, function () { properties = extend( properties, this(element, opts)) });
-                            if (kendo.fx["animate"])
+
+                            if (kendo.fx["animate"]) {
+                                options.init();
                                 kendo.fx.animate ( element, properties, opts);
+                            }
 
                             return;
                         }
@@ -1246,16 +1259,16 @@
                     element.hide();
                 }
 
-                if (options.completeCallback)
-                    options.completeCallback(); // call the external complete callback
-
                 if (size(effects)) {
-                    each ( props.restore, function (idx) {
-                        element.css(idx, element.data(idx));
+                    each ( $.unique(props.restore), function (idx, value) {
+                        element.css(value, element.data(value));
                     });
 
                     each( methods.teardown, function () { this(element, options.reverse); } ); // call the internal completion callbacks
                 }
+
+                if (options.completeCallback)
+                    options.completeCallback(); // call the external complete callback
             });
        });
     }

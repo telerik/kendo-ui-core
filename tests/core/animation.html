@@ -158,6 +158,72 @@
                 ok(reverseWasCalled);
                 ok(callbackWasCalled);
             });
+
+            test("element is shown when show is true", function() {
+                span.hide();
+
+                kendo.fx.foo = {
+                    setup: function(element, options) {
+                        options.complete();
+                    }
+                };
+
+                animate(span, {
+                    effects: "foo",
+                    show: true
+                });
+                ok(span.is(":visible"));
+            });
+
+            test("element is hidden when hide is true", function() {
+                kendo.fx.foo = {
+                    setup: function(element, options) {
+                        options.complete();
+                    }
+                };
+
+                animate(span, {
+                    effects: "foo",
+                    hide: true
+                });
+                ok(!span.is(":visible"));
+            });
+
+            test("make sure keep, css, setup, teardown and restore are called in sequence", function() {
+                var cssWasKept = false, cssWasSet = false, setupWasCalled = false, teardownWasCalled = false, cssWasRestored = false;
+                span.css("overflow", "visible");
+
+                kendo.fx.foo = {
+                    keep: [ "overflow" ],
+                    restore: [ "overflow" ],
+                    css: { overflow: function (element) {
+                        if ($(this).data("overflow") == "visible")
+                            cssWasKept = true;
+
+                        return "hidden";
+                    } },
+                    setup: function(element, options) {
+                        if (element[0].style.overflow == "hidden") // element.css() fails to detect overflow is hidden in Opera?!?
+                            cssWasSet = true;
+
+                        setupWasCalled = true;
+                        options.complete();
+                    },
+                    teardown: function(element, options) {
+                        if (element.css("overflow") == "visible")
+                            cssWasRestored = true;
+
+                        teardownWasCalled = true;
+                    }
+                };
+
+                animate(span, "foo");
+                ok(cssWasKept);
+                ok(cssWasSet);
+                ok(setupWasCalled);
+                ok(cssWasRestored);
+                ok(teardownWasCalled);
+            });
        </script>
     </body>
 </html>
