@@ -95,8 +95,6 @@
                 firstItemIndex = math.max(math.floor(scrollTop / rowHeight), 0),
                 lastItemIndex = math.max(firstItemIndex + math.floor(height / rowHeight), 0);
 
-            console.log(start, firstItemIndex);
-
             that._scrollTop = scrollTop - (start * rowHeight);
             that._scrollbarTop = scrollTop;
 
@@ -194,30 +192,26 @@
     });
 
     function groupCells(count) {
-        if (count === 0) {
-            return "";
-        }
-
         return new Array(count + 1).join('<td class="t-group-cell"></td>');
     }
 
     function columnTemplate(column, settings) {
-        return column.template ? column.template : tmpl(column.field, settings, column.encoded);
-    }
-
-    function tmpl(field, settings, encoded) {
-        var template,
+        var template = column.template,
+            field = column.field,
             expr = (settings.useWithBlock ? "" : settings.paramName + ".") + field;
 
-        if ($.isFunction(field)) {
-            template = field;
-        } else if (encoded) {
-            template = "${" + expr + "}";
-        } else {
-            template = "<#=" + expr + "#>";
+        if (!template) {
+            if ($.isFunction(field)) {
+                template = field;
+            } else if (column.encoded) {
+                template = "${" + expr + "}";
+            } else {
+                template = "<#=" + expr + "#>";
+            }
         }
         return template;
     }
+
     /**
      *  @name kendo.ui.Grid.Description
      *
@@ -778,7 +772,7 @@
             tbody = table.find(">tbody");
 
             if (!tbody.length) {
-                tbody = $("<tbody />").appendTo(table);
+                tbody = $("<tbody/>").appendTo(table);
             }
 
             that.tbody = tbody;
@@ -954,7 +948,7 @@
                 idx,
                 id,
                 length,
-                groups = (that.dataSource.group() || []).length;
+                groups = that.dataSource.group().length;
 
             if (groups > 0) {
                 templates.push(function() {
@@ -969,10 +963,10 @@
             if (model) {
                 start += ' data-id="';
 
-                if ($.isFunction(model.id)) {
-                    id = model.id;
-                } else {
+                if (typeof model.id === STRING) {
                     id = kendo.template("<#=" + model.id + "#>");
+                } else {
+                    id = model.id;
                 }
             }
 
@@ -997,20 +991,30 @@
             var that = this,
                 settings = extend({}, kendo.Template, that.options.templateSettings),
                 idx,
-                length,
+                length = that.columns.length,
                 template,
+                allTemplatesAreStrings = true,
                 model = that.dataSource.options.schema.model,
-                groups = (that.dataSource.group() || []).length;
+                groups = that.dataSource.group().length;
 
             if (!rowTemplate) {
                 rowTemplate = start;
 
                 if (model) {
-                    if ($.isFunction(model.id)) {
-                        return that._compositeTmpl(start, settings, model);
-                    } else {
-                        rowTemplate += kendo.format(' data-id="<#={0}#>"', model.id);
-                    }
+                    allTemplatesAreStrings = typeof model.id === STRING;
+                }
+
+                for (idx = 0; idx < length && allTemplatesAreStrings; idx++) {
+                    template = that.columns[idx].template;
+                    allTemplatesAreStrings = template == undefined || typeof template === STRING;
+                }
+
+                if (!allTemplatesAreStrings) {
+                    return that._compositeTmpl(start, settings, model);
+                }
+
+                if (model) {
+                    rowTemplate += kendo.format(' data-id="<#={0}#>"', model.id);
                 }
 
                 rowTemplate += ">";
@@ -1019,14 +1023,8 @@
                     rowTemplate += groupCells(groups);
                 }
 
-                for (idx = 0, length = that.columns.length; idx < length; idx++) {
-                    template = columnTemplate(that.columns[idx], settings);
-
-                    if ($.isFunction(template)) {
-                        return that._compositeTmpl(start, settings, model);
-                    }
-
-                    rowTemplate += "<td>" + template + "</td>";
+                for (idx = 0; idx < length; idx++) {
+                    rowTemplate += "<td>" + columnTemplate(that.columns[idx], settings) + "</td>";
                 }
 
                 rowTemplate += "</tr>";
@@ -1100,13 +1098,13 @@
                 width,
                 cols = map(that.columns, function(column) {
                     width = column.width;
-                    if(width && parseInt(width) != 0) {
+                    if (width && parseInt(width) != 0) {
                         return kendo.format('<col style="width:{0}"/>', width);
                     }
 
                     return "<col />";
                 }),
-                groups = (that.dataSource.group() || []).length;
+                groups = that.dataSource.group().length;
 
             if (colgroup.length) {
                 colgroup.remove();
@@ -1240,6 +1238,7 @@
             }
             return data;
         },
+
         _progress: function(toggle) {
             var that = this,
                 element = that.element.is("table") ? that.element.parent() : (that.content && that.content.length ? that.content : that.element);
