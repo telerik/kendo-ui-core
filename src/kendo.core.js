@@ -972,7 +972,7 @@
          * @name kendo.support.transitions
          * @property {Boolean}
          */
-        support.transitions = false;
+        var transitions = support.transitions = false;
 
         /**
          * Indicates whether the browser supports hardware 3d transitions.
@@ -987,18 +987,20 @@
             if (typeof table.style[prefix + "Transition"] === STRING) {
                 var lowPrefix = prefix.toLowerCase();
 
-                support.transitions = {
+                transitions = {
                     css: "-" + lowPrefix + "-",
                     prefix: prefix,
                     event: (lowPrefix === "o" || lowPrefix === "webkit") ? lowPrefix : ""
                 };
 
-                support.transitions.event = support.transitions.event ? support.transitions.event + "TransitionEnd" : "transitionend";
+                transitions.event = transitions.event ? transitions.event + "TransitionEnd" : "transitionend";
 
                 return false;
             }
         });
 
+        support.transitions = transitions;
+        
         function detectOS(ua) {
             var os = false, match = [],
                 agentRxs = {
@@ -1095,40 +1097,37 @@
         out: { reverse: "in" }
     };
 
-    function parseEffects(input, mirror) {
+    function parseEffects(input) {
         var effects = {};
 
-        if (typeof input === STRING) {
-            each(input.split(" "), function() {
-                var effect = this.split(":"),
-                    direction = effect[1],
-                    effectBody = {};
-
-                effect.length > 1 && (effectBody["direction"] = mirror ? kendo.directions[direction].reverse : direction);
-
-                effects[effect[0]] = effectBody;
-            });
-        } else {
-            each(input, function(idx) {
-                var direction = this.direction;
-
-                if (direction && mirror)
-                    direction = kendo.directions[direction].reverse;
-
-                effects[idx] = this;
-            });
-        }
+        each((typeof input === "string" ? input.split(" ") : input), function(idx) {
+            effects[idx] = this;
+        });
 
         return effects;
     }
 
-    function animate(element, options, duration, reverse, complete) {
-        var effects = {};
+    fx = {
+        promise: function (element, options) {
+            if (options.show) {
+                element.show();
+            }
 
+            if (options.hide) {
+                element.hide();
+            }
+
+            if (options.completeCallback) {
+                options.completeCallback(); // call the external complete callback
+            }
+
+            element.dequeue();
+        }
+    };
+
+    function animate(element, options, duration, reverse, complete) {
         if (typeof options === STRING) {
             // options is the list of effect names separated by space e.g. animate(element, "fadeIn slideDown")
-
-            effects = parseEffects(options);
 
             // only callback is provided e.g. animate(element, options, function() {});
             if (isFunction(duration)) {
@@ -1148,15 +1147,11 @@
             }
 
             options = {
-                effects: effects,
+                effects: options,
                 duration: duration,
                 reverse: reverse,
                 complete: complete
             };
-        }
-
-        if ("effects" in options && typeof options.effects === STRING) {
-            options.effects = parseEffects(options.effects);
         }
 
         options = extend({
@@ -1164,122 +1159,21 @@
             effects: {},
             duration: 400, //jQuery default duration
             reverse: false,
-            complete: noop,
             init: noop,
+            complete: noop,
             teardown: noop,
             hide: false,
             show: false
         }, options, { completeCallback: options.complete }); // Move external complete callback, so deferred.resolve can be always executed.
 
         return element.queue(function () {
-            var promises = [], effects = options.effects;
-
-            if (typeof effects === STRING) {
-                effects = parseEffects(options.effects);
-            }
-
-            element.data("animating", true);
-            element.data("reverse", options.reverse);
-
-            var props = { keep: [], restore: [] }, css = {},
-                methods = { setup: [], teardown: [] }, properties = {},
-
-                // create a promise for each effect
-                promise = $.Deferred(function(deferred) {
-                    if (size(effects)) {
-                        var opts = extend( {}, options, { complete: deferred.resolve } );
-
-                        each(effects, function(effectName, settings) {
-                            var effect = kendo.fx[effectName];
-
-                            if (effect) {
-                                opts = extend( true, opts, settings );
-
-                                each( methods, function (idx) {
-                                    if (effect[idx])
-                                        methods[idx].push( effect[idx] );
-                                });
-
-                                each( props, function (idx) {
-                                    if (effect[idx])
-                                        $.merge( props[idx], effect[idx] );
-                                });
-
-                                if (effect["css"])
-                                    css = extend( css, effect.css );
-                            }
-                        });
-
-                        if (methods.setup.length) {
-                            each ($.unique(props.keep), function (idx, value) {
-                                if (!element.data(value))
-                                    element.data(value, element.css(value));
-                            });
-
-                            if (options.show) {
-                                css = extend( css, { display: "block" } ); // Add show to the set
-                            }
-
-                            if (css.transform) {
-                                css[support.transitions.prefix + "Transform"] = css.transform;
-                                delete css.transform;
-                            }
-
-                            element.css(css);
-                            element.css("overflow"); // Nudge Chrome
-
-                            each (methods.setup, function () { properties = extend( properties, this(element, opts)) });
-
-                            if (kendo.fx["animate"]) {
-                                options.init();
-                                kendo.fx.animate ( element, properties, opts);
-                            }
-
-                            return;
-                        }
-                    }
-
-                    if (options.show) {
-                        element.show();
-                    }
-
-                    deferred.resolve();
-                }).promise();
-
-            promises.push(promise);
-
-            //wait for all effects to complete
-            $.when.apply(null, promises).then(function() {
-                element
-                    .removeData("animating")
-                    .removeData("reverse")
-                    .dequeue(); // call next animation from the queue
-
-                if (options.hide) {
-                    element.hide();
-                }
-
-                if (size(effects)) {
-                    each ( $.unique(props.restore), function (idx, value) {
-                        element.css(value, element.data(value));
-                    });
-
-                    each( methods.teardown, function () { this(element, options.reverse); } ); // call the internal completion callbacks
-                }
-
-                if (options.completeCallback)
-                    options.completeCallback(); // call the external complete callback
-            });
-       });
+            fx.promise(element, options);
+        });
     }
 
     extend($.fn, /** @lends jQuery.fn */{
         kendoStop: function(clearQueue, gotoEnd) {
-            if (support.transitions && "stopQueue" in kendo.fx) {
-                return kendo.fx.stopQueue(this, clearQueue || false, gotoEnd || false);
-            } else {
-                return this.stop(clearQueue, gotoEnd);
-            }
+            return this.stop(clearQueue, gotoEnd);
         },
         kendoAnimate: function(options, duration, reverse, complete) {
             return animate(this, options, duration, reverse, complete);
@@ -1289,19 +1183,6 @@
     function toggleClass(element, classes, options, add) {
         if (classes) {
             classes = classes.split(" ");
-
-            if (support.transitions) {
-                options = extend({
-                    exclusive: "all",
-                    duration: 400,
-                    ease: "ease-out"
-                }, options);
-
-                element.css(support.transitions.css + "transition", options.exclusive + " " + options.duration + "ms " + options.ease);
-                setTimeout(function() {
-                    element.css(support.transitions.css + "transition", "none");
-                }, options.duration); // TODO: this should fire a kendoAnimate session instead.
-            }
 
             each(classes, function(idx, value) {
                 element.toggleClass(value, add);
@@ -1415,7 +1296,7 @@
                 }
             }
         },
-        fx: {},
+        fx: fx,
         data: {},
         keys: {
             BACKSPACE: 8,
@@ -1439,6 +1320,7 @@
         size: size,
         getOffset: getOffset,
         parseEffects: parseEffects,
+        toggleClass: toggleClass,
         directions: directions,
         Observable: Observable,
         Class: Class,
