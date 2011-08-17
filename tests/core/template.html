@@ -94,12 +94,6 @@
                 equal(t({ bar: "baz" }), "baz");
             });
 
-            test("can specify custom template markers", function() {
-                var t = template.compile("{{= foo }}", { begin: "{{", end: "}}" });
-
-                equal(t({ foo: "bar" }), "bar");
-            });
-
             test("can execute code", function() {
                 var executed = false,
                     t = template.compile("<# var result = 'foo'; #><#= result #>");

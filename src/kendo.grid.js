@@ -208,7 +208,7 @@
             if (column.encoded === true) {
                 template = "${" + (settings.useWithBlock ? "" : settings.paramName + ".") + field + "}";
             } else {
-                template = settings.begin + "=" + (settings.useWithBlock ? "" : settings.paramName + ".") + field + settings.end;
+                template = "<#=" + (settings.useWithBlock ? "" : settings.paramName + ".") + field + "#>";
             }
         }
 
@@ -969,7 +969,7 @@
                 if ($.isFunction(model.id)) {
                     id = model.id;
                 } else {
-                    id = kendo.template(settings.begin + "=" + model.id + settings.end);
+                    id = kendo.template("<#=" + model.id + "#>");
                 }
             }
 
@@ -1009,7 +1009,7 @@
                     if ($.isFunction(model.id)) {
                         return that._compositeTmpl(start, settings, model);
                     } else {
-                        rowTemplate += ' data-id="' + settings.begin + "=" + model.id + settings.end + '"';
+                        rowTemplate += kendo.format(' data-id="<#={0}#>"', model.id);
                     }
                 }
 
