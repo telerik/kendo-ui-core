@@ -202,19 +202,22 @@
     }
 
     function columnTemplate(column, settings) {
-        var template = column.template, field = column.field;
-
-        if (!template) {
-            if (column.encoded === true) {
-                template = "${" + (settings.useWithBlock ? "" : settings.paramName + ".") + field + "}";
-            } else {
-                template = "<#=" + (settings.useWithBlock ? "" : settings.paramName + ".") + field + "#>";
-            }
-        }
-
-        return template;
+        return column.template ? column.template : tmpl(column.field, settings, column.encoded);
     }
 
+    function tmpl(field, settings, encoded) {
+        var template,
+            expr = (settings.useWithBlock ? "" : settings.paramName + ".") + field;
+
+        if ($.isFunction(field)) {
+            template = field;
+        } else if (encoded) {
+            template = "${" + expr + "}";
+        } else {
+            template = "<#=" + expr + "#>";
+        }
+        return template;
+    }
     /**
      *  @name kendo.ui.Grid.Description
      *
@@ -974,22 +977,19 @@
             }
 
             return function(data) {
-                var html = [start], idx, length;
+                var html = start, idx, length;
 
                 if (id) {
-                    html.push(id(data));
-                    html.push('"')
+                    html += id(data) + '"';
                 }
 
-                html.push(">");
+                html += ">";
 
                 for (idx = 0, length = templates.length; idx < length; idx++) {
-                    html.push("<td>");
-                    html.push(templates[idx](data));
-                    html.push("</td>");
+                    html += "<td>" + templates[idx](data) + "</td>";
                 }
 
-                return html.join("") + "</tr>";
+                return html + "</tr>";
             }
         },
 
