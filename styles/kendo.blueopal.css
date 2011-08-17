@@ -268,46 +268,11 @@ td.t-group-cell
 
 /* DropDown */
 
-.t-combobox,
-.t-dropdown
-{
-    background: none;
-}
-
-.t-button,
-.t-dropdown-wrap
-{
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-}
-
-.t-dropdown-wrap .t-input
-{
-    -moz-border-radius: 5px 0 0 5px;
-    -webkit-border-radius: 5px 0 0 5px;
-    border-radius: 5px 0 0 5px;
-}
-
-.t-dropdown-wrap .t-select
-{
-    -moz-border-radius: 0 5px 5px 0;
-    -webkit-border-radius: 0 5px 5px 0;
-    border-radius: 0 5px 5px 0;
-}
-
 .t-dropdown-wrap .t-input,
 .t-dropdown-wrap .t-select,
 .t-tabstrip-items .t-state-hover .t-link
 {
     background-position: 0 -539px;
-}
-
-.t-tabstrip-items .t-state-hover .t-link
-{
-    -moz-border-radius: 5px 5px 0 0;
-    -webkit-border-radius: 5px 5px 0 0;
-    border-radius: 5px 5px 0 0;
 }
 
 /* Slider */
