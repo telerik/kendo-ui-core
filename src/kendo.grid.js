@@ -772,7 +772,7 @@
             tbody = table.find(">tbody");
 
             if (!tbody.length) {
-                tbody = $("<tbody/>").appendTo(table);
+                tbody = $("<tbody />").appendTo(table);
             }
 
             that.tbody = tbody;
@@ -964,7 +964,7 @@
                 start += ' data-id="';
 
                 if (typeof model.id === STRING) {
-                    id = kendo.template("<#=" + model.id + "#>");
+                    id = kendo.template("<#=" + (settings.useWithBlock ? "" : settings.paramName + ".") + model.id + "#>");
                 } else {
                     id = model.id;
                 }
