@@ -59,6 +59,22 @@
         return position;
     }
 
+    function getScrollOffsets (scrollElement) {
+        scrollElement = $(scrollElement);
+
+        var transformStyle = scrollElement[0].style[TRANSFORMSTYLE],
+            transforms = (transformStyle ? transformStyle.match(translationRegExp) || [0, 0, 0, 0, 0] : [0, 0, 0, 0, 0]);
+
+        return support.transitions ? {
+                                         x: +transforms[3],
+                                         y: +transforms[4]
+                                     } :
+                                     {
+                                         x: parseInt(scrollElement.css("marginLeft"), 10) || 0,
+                                         y: parseInt(scrollElement.css("marginTop"), 10) || 0
+                                     };
+    }
+
     var Scroller = Component.extend({
         init: function (element, options) {
             var that = this;
@@ -217,21 +233,6 @@
 
         },
 
-        _getScrollOffsets: function () {
-            var that = this,
-                scrollElement = that.scrollElement,
-                transforms = (scrollElement[0].style[TRANSFORMSTYLE].match(translationRegExp) || [0, 0, 0, 0, 0]);
-
-            return support.transitions ? {
-                                             x: +transforms[3],
-                                             y: +transforms[4]
-                                         } :
-                                         {
-                                             x: parseInt(scrollElement.css("marginLeft"), 10) || 0,
-                                             y: parseInt(scrollElement.css("marginTop"), 10) || 0
-                                         };
-        },
-
         _onGestureStart: function () {
             this._dragCanceled = true;
         },
@@ -246,7 +247,7 @@
             var that = this,
                 scrollTo = 0,
                 element = that.element,
-                scrollOffsets = that._getScrollOffsets();
+                scrollOffsets = getScrollOffsets(that.scrollElement);
 
             if ($(e.target).hasClass(LEFTARROW)) {
                 scrollTo = min( 0, scrollOffsets.x + element.innerWidth() );
@@ -315,7 +316,7 @@
             clearTimeout(that.timeoutId);
             that._originalEvent = e.originalEvent;
             var startLocation = touchLocation(e),
-                scrollOffsets = that._getScrollOffsets();
+                scrollOffsets = getScrollOffsets(that.scrollElement);
 
             that.start = {
                 idx: startLocation.idx,
@@ -528,7 +529,7 @@
             that.framerate = 1000 / options.framerate;
             that.friction = { x: friction, y: friction };
             that.winding = false;
-            that.scrollOffsets = that._getScrollOffsets();
+            that.scrollOffsets = getScrollOffsets(that.scrollElement);
 
             if (abs(decelerationVelocity.x) > velocity || abs(decelerationVelocity.y) > velocity) {
                 that.winding = true;
@@ -573,7 +574,7 @@
             that.framerate = 1000 / that.options.framerate;
             that.start = { x: 0, y: 0 };
 
-            that.source = that.bounceLocation = that.bounceLocation || that._getScrollOffsets();
+            that.source = that.bounceLocation = that.bounceLocation || getScrollOffsets(that.scrollElement);
             that.lastCall = that.source.time = +new Date();
 
             if (duration) {
@@ -622,7 +623,7 @@
             }
 
             that.start = { x: 0, y: 0 };
-            bounceLocation = that.bounceLocation = that._getScrollOffsets();
+            bounceLocation = that.bounceLocation = getScrollOffsets(that.scrollElement);
 
             if (duration) {
                 that._startKinetikAnimation(bounceLocation.x - x, bounceLocation.y - y, duration / that.options.acceleration);

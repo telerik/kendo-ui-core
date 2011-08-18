@@ -28,6 +28,8 @@ if (!isInferiorBrowser) {
         fullscreen = false;
 
     $(document).ready(function () {
+        $('<img id="bigPhoto" alt="big photo" src="" />').prependTo('#photoWrap');
+
         var tagHotListDataSource = data.dataSource( {
             serverFiltering: true,
             pageSize: 10,
