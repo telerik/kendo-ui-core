@@ -1,14 +1,15 @@
-(function($, kendo){
-    if (!kendo) {
-        return;
-    }
+// TODO: handle scenarios where jQuery is not on the page
+// TODO: use $.getScript to load kendo, if not available
 
+(function($, kendo){
     var applicationRoot = "http://localhost/kendo/stylebuilder/", // this should be changed in production
         StyleBuilder = kendo.Observable.extend({
             init: function() {
                 $("<link rel='stylesheet' href='" + applicationRoot + "styles.css' />").appendTo("head");
 
                 // use inline styles to be sure that the wrapper won't inherit styles from the page
+                // TODO: convert div to window that can be dragged/resized
+                // TODO: use window.contentUrl to load interface
                 this.element = $("<div id='kendo-stylebuilder' />")
                     .css({
                         backgroundColor: "#333",
