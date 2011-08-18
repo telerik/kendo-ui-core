@@ -70,14 +70,19 @@
             </div>
             </div> <!-- / header -->
 
-            <div id="topnavWrap">
-                <ul id="topnav" class="floatWrap centerWrap">
-                    <li><a id="overview" href="index.html" class="selected">Overview</a></li>
-                    <li><a id="framework" href="datasource/index.html">Framework</a></li>
-                    <li><a id="controls" href="autocomplete/index.html">UI Widgets</a></li>
-                    <li><a id="integration" href="integration/index.html">Integration</a></li>
-                </ul>
-            </div> <!-- / topnavWrap -->
+            <div id="flowerWrap">
+                <div class="flowers"></div>
+
+                <div id="topnavWrap" class="floatWrap centerWrap">
+                    <select id="skinSelector" class="skinSelector"></select>
+                    <h4>Skin </h4>
+                    <ul id="topnav" class="floatWrap">
+                        <li><a id="framework" class="first" href="datasource/index.html">Framework</a></li>
+                        <li><a id="controls" href="autocomplete/index.html">UI Widgets</a></li>
+                        <li><a id="integration" class="last" href="integration/index.html">Integration</a></li>
+                    </ul>
+                </div> <!-- / topnavWrap -->
+            </div>
 
             <div id="navmainWrap" class="floatWrap centerWrap">
 
@@ -86,17 +91,14 @@
                 </div> <!-- / navWrap -->
 
                 <div id="main">
-                    <select id="skinSelector" class="skinSelector"></select>
                     <h1 id="exampleTitle"></h1>
                     <script type="text/javascript">
                         initializeNavigation(normalizedUrl);
                     </script>
-
                     <div id="exampleWrap">
                         <!-- nav -->
 
                         <div id="example" class="t-content">
-
                             <h2 style="margin-top:0">Quickly Learn Kendo UI</h2>
 
                             <div id="introText">

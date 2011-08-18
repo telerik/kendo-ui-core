@@ -1,5 +1,5 @@
 html,body,h1,h2{margin:0;padding:0;}
-#header ul,#header li,#topnavWrap ul,#topnavWrap li,#footer ul,#footer li{margin:0;padding:0;list-style:none;}
+#header ul,#header li,#flowerWrap ul,#flowerWrap li,#footer ul,#footer li{margin:0;padding:0;list-style:none;}
 a img{border:0;}
 
 .floatWrap:after,#example:after{content:"";display:block;clear:both}
@@ -101,7 +101,7 @@ html
 }
 
 #exceptFooterWrap,
-#topnavWrap,
+#flowerWrap,
 #footer
 {
     min-width:960px;
@@ -123,7 +123,7 @@ html
 
 #navmainWrap
 {
-    margin-top:2.4em;
+    margin-top: 0;
 }
 
 #navWrap
@@ -131,6 +131,7 @@ html
     float:left;
     width:19%;
     min-width:190px;
+    overflow: hidden;
 }
 
 #main
@@ -253,57 +254,114 @@ li a#download:hover
 
 /*top navigation*/
 
+#flowerWrap
+{
+    height: 49px;
+    background: #f2f2f2;
+    box-shadow: inset 0px -2px 2px #DDD;
+    border-bottom: 1px solid #DDD\9;
+    box-sizing: border-box;
+    margin-bottom: 1px;
+}
+
+#flowerWrap .flowers
+{
+    border-bottom:1px solid #dedede;
+    background:#ef652a 50% 0 url(flowers.png);
+    height: 10px;
+}
+
 #topnavWrap
 {
-    border-bottom:1px solid #be5e35;
-    background:#ef652a 50% 0 url(flowers.png);
+    margin-top: 7px;
+    margin-top: 8px\9;
+}
+
+#topnavWrap .skinSelector,
+#topnavWrap h4
+{
+    float: right;
+    margin: -1px 0 0;
+    padding: 0;
+}
+
+#topnavWrap h4
+{
+    font-size: 12px;
+    font-weight: normal;
+    margin-top: 2px;
+    padding-right: 5px;
 }
 
 #topnav
 {
-    border-left:1px solid #d75b26;
-    border-right:1px solid #f28455;
+    list-style: none outside;
+    margin: 0 0 0 8px;
+    padding: 0;
+    width: 20%;
 }
 
 #topnav li
 {
     float:left;
-    width:25%;
+    width:33.33%;
 }
 
-* html #topnav li{width:24.9%;}
-*+html #topnav li:first-child{width:24.8%;}
+* html #topnav li{width:33.3%;}
+*+html #topnav li:first-child{width:33.2%;}
 
 #topnav a
 {
-    display:block;
-    border-left:1px solid #f28455;
-    border-right:1px solid #d75b26;
-    padding-left:1.2em;
-    font-size:1.5em;
-    line-height:46px;
-    color:#fff;
+    color: #000;
+    display: block;
+    padding: 7px 0 7px 0;
+    font-size: 1.1em;
+    border: 1px solid #dedede;
+    border-right-width: 0;
+    border-bottom-width: 0;
     text-decoration:none;
+    text-align: center;
     zoom:1;
 }
 
 #topnav a:hover
 {
-    background:#f7804a;
-    background:rgba(255,156,106,.5);
+    color: #ef652a;
 }
 
 #topnav a.selected,
 #topnav a.selected:hover
 {
-    background:#fff;
-    color:#000;
-    height:47px;
-    margin-bottom:-1px;
-    cursor:default;
+    position: relative;
+    z-index: 1;
+    color: #ef652a;
+    background: #fff;
+    cursor: default;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #FFF;
+}
+
+#topnav a.first
+{
+    -webkit-border-radius: 5px 0 0 0;
+    -moz-border-radius: 5px 0 0 0;
+    border-radius: 5px 0 0 0;
+}
+
+#topnav a.last
+{
+    border-right-width: 1px;
+    -webkit-border-radius: 0 5px 0 0;
+    -moz-border-radius: 0 5px 0 0;
+    border-radius: 0 5px 0 0;
 }
 
 /*left navigation*/
+
+#nav
+{
+    padding-top: 22px;
+}
 
 #nav,
 #nav .t-group,
@@ -322,7 +380,8 @@ li a#download:hover
 #nav .t-item
 {
     padding-bottom: 2px;
-    padding-right: 10px;
+    padding-left: 8px;
+    padding-right: 8px;
 }
 
 #nav .t-link
@@ -479,13 +538,14 @@ li a#download:hover
 #exampleWrap
 {
     display:none;
+    padding-top: 10px;
 }
 
 #example
 {
     font-family: tahoma,geneva,sans-serif;
     margin:1em 0 0;
-    padding:20px;
+    padding: 50px 20px 20px;
     border: 1px solid #dedede;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
@@ -497,101 +557,21 @@ li a#download:hover
 
 #exampleTitle
 {
-    font:20px arial,helvetica,sans-serif;
+    font: 18px arial,helvetica,sans-serif;
+    margin-left: 21px;
+    margin-top: 40px;
+    position: absolute;
+    z-index: 1;
 }
 
 .exampleIcon
 {
-    width: 24px;
-    height: 24px;
+    width: 16px;
+    height: 16px;
     display: block;
     float: left;
+    margin-top: 4px;
     margin-right: 8px;
-}
-
-h1 .autocompleteIcon
-{
-    background-position: -20px -200px;
-}
-
-h1 .comboBoxIcon
-{
-    background-position: -20px -230px;
-}
-
-h1 .dropDownListIcon
-{
-    background-position: -20px -260px;
-}
-
-h1 .chartIcon
-{
-    background-position: -20px -290px;
-}
-
-h1 .gridIcon
-{
-    background-position: -20px -320px;
-}
-
-h1 .menuIcon
-{
-    background-position: -20px -350px;
-}
-
-h1 .panelBarIcon
-{
-    background-position: -20px -380px;
-}
-
-h1 .sliderIcon
-{
-    background-position: -20px -410px;
-}
-
-h1 .splitterIcon
-{
-    background-position: -20px -440px;
-}
-
-h1 .tabStripIcon
-{
-    background-position: -20px -470px;
-}
-
-h1 .treeViewIcon
-{
-    background-position: -20px -500px;
-}
-
-h1 .uploadIcon
-{
-    background-position: -20px -530px;
-}
-
-h1 .windowIcon
-{
-    background-position: -70px -290px;
-}
-
-h1 .dataSourceIcon
-{
-    background-position: -70px -200px;
-}
-
-h1 .templatesIcon
-{
-    background-position: -70px -230px;
-}
-
-h1 .dragdropIcon
-{
-    background-position: -70px -260px;
-}
-
-h1 .integrationIcon
-{
-    background-position: -70px -320px;
 }
 
 /*footer*/
@@ -744,7 +724,7 @@ pre.prettyprint
     min-height: 220px;
     border: 1px solid #dedede;
     height: 100%;
-    margin:-21px;
+    margin: -51px -21px 0 0;
     padding: 0 20px 30px;
     background: #f2f2f2;
     color: #000;
@@ -969,7 +949,7 @@ pre.prettyprint
 
 /* skin selector */
 
-#main .skinSelector
+#topnavWrap .skinSelector
 {
     float: right;
     display: none;
@@ -983,7 +963,7 @@ div.skinSelector .t-state-hover:hover,
 div.skinSelector .t-state-active
 {
     color: #333;
-    background: #F3F3F3;
+    background: #FFF;
     border-color: #dedede;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
