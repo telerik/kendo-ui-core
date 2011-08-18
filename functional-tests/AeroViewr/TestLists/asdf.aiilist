@@ -1,0 +1,104 @@
+<TestList Type="ArtOfTest.WebAii.Design.Execution.TestList" Version="2011.1.729.0">
+  <ID Type="System.String">7daadb24-c7cf-41e6-ad6e-77ebc3c4dffa</ID>
+  <TestListName Type="System.String">asdf</TestListName>
+  <Date Type="System.DateTime">2011-08-18 07:11:38Z</Date>
+  <Settings Type="ArtOfTest.WebAii.Core.Settings" Version="2011.1.729.0">
+    <WebSettings Type="ArtOfTest.WebAii.Core.Settings+WebSettings" Version="2011.1.729.0">
+      <DefaultBrowser Type="ArtOfTest.WebAii.Core.BrowserType">InternetExplorer</DefaultBrowser>
+      <WebAppPhysicalPath Type="System.String">
+      </WebAppPhysicalPath>
+      <EnableScriptLogging Type="System.Boolean">False</EnableScriptLogging>
+      <EnableUILessRequestViewing Type="System.Boolean">False</EnableUILessRequestViewing>
+      <LocalWebServer Type="ArtOfTest.WebAii.Core.LocalWebServerType">None</LocalWebServer>
+      <BaseUrl Type="System.String">
+      </BaseUrl>
+      <AspNetDevServerPort Type="System.Int32">-1</AspNetDevServerPort>
+      <KillBrowserProcessOnClose Type="System.Boolean">False</KillBrowserProcessOnClose>
+      <RecycleBrowser Type="System.Boolean">False</RecycleBrowser>
+      <UseHttpProxy Type="System.Boolean">False</UseHttpProxy>
+      <EnableSilverlight Type="System.Boolean">False</EnableSilverlight>
+      <VerboseHttpProxy Type="System.Boolean">False</VerboseHttpProxy>
+      <SilverlightConnectTimeout Type="System.Int32">30000</SilverlightConnectTimeout>
+      <UseMultiBrowsers Type="System.Boolean">False</UseMultiBrowsers>
+    </WebSettings>
+    <ClientReadyTimeout Type="System.Int32">30000</ClientReadyTimeout>
+    <ExecuteCommandTimeout Type="System.Int32">20000</ExecuteCommandTimeout>
+    <LogLocation Type="System.String">C:\WebAiiLog\</LogLocation>
+    <QueryEventLogErrorsOnExit Type="System.Boolean">False</QueryEventLogErrorsOnExit>
+    <ExecutionDelay Type="System.Int32">0</ExecutionDelay>
+    <AnnotateExecution Type="System.Boolean">False</AnnotateExecution>
+    <SimulatedMouseMoveSpeed Type="System.Single">0.3</SimulatedMouseMoveSpeed>
+    <WaitCheckInterval Type="System.Int32">500</WaitCheckInterval>
+    <AnnotationMode Type="ArtOfTest.WebAii.Core.AnnotationMode">All</AnnotationMode>
+    <LogAnnotations Type="System.Boolean">False</LogAnnotations>
+    <IsStressRecordingMode Type="System.Boolean">False</IsStressRecordingMode>
+    <IsUserInteractiveMode Type="System.Boolean">False</IsUserInteractiveMode>
+    <CreateLogFile Type="System.Boolean">True</CreateLogFile>
+    <XMultiMgr Type="System.Boolean">True</XMultiMgr>
+    <UnexpectedDialogAction Type="ArtOfTest.WebAii.Core.UnexpectedDialogAction">HandleAndFailTest</UnexpectedDialogAction>
+    <ElementWaitTimeout Type="System.Int32">10000</ElementWaitTimeout>
+  </Settings>
+  <Tests>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">c4b769f8-1265-45fc-9ed4-a454bc4bb668</ID>
+      <Path Type="System.String">TestProject2\AeroViewr\AssertBigPic.aii</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">63c00f77-a7be-418e-b759-191b55d39b79</ID>
+      <Path Type="System.String">TestProject2\AeroViewr\AssertMessages.aii</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">6ac6b301-c6ea-4e6d-83ef-7c85c1184aa7</ID>
+      <Path Type="System.String">TestProject2\AeroViewr\ClickInfoWindow.aii</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">66a11db1-2d67-4448-a7d5-213740fbf5e6</ID>
+      <Path Type="System.String">TestProject2\AeroViewr\GlassManyTimes.aii</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">e00b90f3-db1f-45f4-b140-c7add24427af</ID>
+      <Path Type="System.String">TestProject2\AeroViewr\ListViewSlider.aii</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">1717c04f-9fa1-469b-bd54-772018aa114c</ID>
+      <Path Type="System.String">TestProject2\AeroViewr\LogIn.aii</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">7ab8648a-7941-4ef6-9c1f-592616353a51</ID>
+      <Path Type="System.String">TestProject2\AeroViewr\LogInlLogOut.aii</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">a166859d-f0af-41a1-bc73-3b8f768a5103</ID>
+      <Path Type="System.String">TestProject2\AeroViewr\NotLoggedSearch.aii</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">784b9f29-b4df-4489-b2b5-9241f08ddaa2</ID>
+      <Path Type="System.String">TestProject2\AeroViewr\OpenSetPicBack.aii</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">a71e5ebf-cad5-489d-9597-0e39d5d99e94</ID>
+      <Path Type="System.String">TestProject2\AeroViewr\OpenSetSearchBack.aii</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">1d421b65-b68b-4f11-8775-0ce895da03e8</ID>
+      <Path Type="System.String">TestProject2\AeroViewr\PlayPause.aii</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">5aa66a59-9b66-467e-84ac-d14f38e0d1d2</ID>
+      <Path Type="System.String">TestProject2\AeroViewr\SearchNoresults.aii</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">81272445-c191-48a7-9f7e-4efc378d84b1</ID>
+      <Path Type="System.String">TestProject2\AeroViewr\SearchOpenImage.aii</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">0983cbaf-ce6d-40bd-8847-34bbae140b4e</ID>
+      <Path Type="System.String">TestProject2\AeroViewr\UploadNotLogged.aii</Path>
+    </Item>
+  </Tests>
+  <Filter Type="ArtOfTest.WebAii.Design.Execution.Filter" Version="2011.1.729.0">
+    <Keys />
+    <Comparisons />
+    <Values />
+  </Filter>
+</TestList>

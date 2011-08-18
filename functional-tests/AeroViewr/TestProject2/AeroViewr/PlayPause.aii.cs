@@ -13,35 +13,36 @@ using ArtOfTest.WebAii.Silverlight;
 using ArtOfTest.WebAii.Silverlight.UI;
 using Telerik.WebAii.Controls.Html;
 using Telerik.WebAii.Controls.Xaml;
+using TestProject2;
 
-namespace TestProject2.AeroViewr
+namespace AeroViewr
 {
 
-	//
-	// You can add custom execution steps by simply
-	// adding a void function and decorating it with the [CodedStep] 
-	// attribute to the test method. 
-	// Those steps will automatically show up in the test steps on save.
-	//
-	// The BaseWebAiiTest exposes all key objects that you can use
-	// to access the current testcase context. [i.e. ActiveBrowser, Find ..etc]
-	//
-	// Data driven tests can use the Data[columnIndex] or Data["columnName"] 
-	// to access data for a specific data iteration.
-	//
-	// Example:
-	//
-	// [CodedStep("MyCustom Step Description")]
-	// public void MyCustomStep()
-	// {
-	//		// Custom code goes here
-	//      ActiveBrowser.NavigateTo("http://www.google.com");
-	//
-	//		// Or
-	//		ActiveBrowser.NavigateTo(Data["url"]);
-	// }
-	//
-		
+    //
+    // You can add custom execution steps by simply
+    // adding a void function and decorating it with the [CodedStep] 
+    // attribute to the test method. 
+    // Those steps will automatically show up in the test steps on save.
+    //
+    // The BaseWebAiiTest exposes all key objects that you can use
+    // to access the current testcase context. [i.e. ActiveBrowser, Find ..etc]
+    //
+    // Data driven tests can use the Data[columnIndex] or Data["columnName"] 
+    // to access data for a specific data iteration.
+    //
+    // Example:
+    //
+    // [CodedStep("MyCustom Step Description")]
+    // public void MyCustomStep()
+    // {
+    //        // Custom code goes here
+    //      ActiveBrowser.NavigateTo("http://www.google.com");
+    //
+    //        // Or
+    //        ActiveBrowser.NavigateTo(Data["url"]);
+    // }
+    //
+        
 
     public class PlayPause : BaseWebAiiTest
     {
@@ -54,16 +55,16 @@ namespace TestProject2.AeroViewr
         /// to all the elements, frames or regions
         /// in this project.
         /// </summary>
-		public Pages Pages
-		{
-			get
-			{
-				if (_pages == null)
-				{
-					_pages = new Pages(Manager.Current);
-				}
-				return _pages;
-			}
+        public Pages Pages
+        {
+            get
+            {
+                if (_pages == null)
+                {
+                    _pages = new Pages(Manager.Current);
+                }
+                return _pages;
+            }
         }
 
         #endregion
@@ -101,6 +102,6 @@ namespace TestProject2.AeroViewr
 
 
         
-		// Add your test methods here...
+        // Add your test methods here...
     }
 }

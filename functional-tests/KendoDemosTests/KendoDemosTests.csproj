@@ -78,9 +78,10 @@
     <Compile Include="UIWidgets\Menu\BasicUsage\NotClosedOnClick.tstest.cs">
       <DependentUpon>NotClosedOnClick.tstest</DependentUpon>
     </Compile>
-    <Compile Include="UIWidgets\Menu\BasicUsage\OpenClose.tstest.cs">
-      <DependentUpon>OpenClose.tstest</DependentUpon>
-    </Compile>
+    <None Include="Framework\DataSource\LocalDataOperationsIdDescending.tstest" />
+    <None Include="Framework\DataSource\SharedDataSourceYearDescending.tstest" />
+    <None Include="Framework\DragAndDrop\DragAndDropEvents.tstest" />
+    <None Include="Framework\Templates\BasicUsage.tstest" />
     <None Include="Settings.aiis" />
     <None Include="UIWidgets\AutoComplete\API\FindStartingWith.tstest" />
     <None Include="UIWidgets\AutoComplete\API\SetValue.tstest" />
@@ -89,8 +90,18 @@
     <None Include="UIWidgets\AutoComplete\Events\AutoCompleteEvents.tstest" />
     <None Include="UIWidgets\Chart\BasicUsage.tstest" />
     <None Include="UIWidgets\Chart\ChartEventsEvents.tstest" />
+    <None Include="UIWidgets\ComboBox\API\EnableDisable.tstest" />
+    <None Include="UIWidgets\ComboBox\API\FilterEquals.tstest" />
+    <None Include="UIWidgets\ComboBox\API\FilterEqualsNoResult.tstest" />
+    <None Include="UIWidgets\ComboBox\API\FilterLoseFocusFilter.tstest" />
+    <None Include="UIWidgets\ComboBox\API\FilterNone.tstest" />
+    <None Include="UIWidgets\ComboBox\API\FilterStartsWith.tstest" />
+    <None Include="UIWidgets\ComboBox\API\OpenClose.tstest" />
+    <None Include="UIWidgets\ComboBox\API\SelectByIndex.tstest" />
+    <None Include="UIWidgets\ComboBox\API\SelectByValue.tstest" />
     <None Include="UIWidgets\ComboBox\BasicUsage\ChangeValueInput.tstest" />
     <None Include="UIWidgets\ComboBox\BasicUsage\ChangeValueKeyboardSelect.tstest" />
+    <None Include="UIWidgets\ComboBox\BasicUsage\RevertToBlank.tstest" />
     <None Include="UIWidgets\ComboBox\Events\ComboBoxEvents.tstest" />
     <None Include="UIWidgets\DropDown\API\DisableEnable.tstest" />
     <None Include="UIWidgets\DropDown\API\OpenClose.tstest" />
@@ -100,7 +111,10 @@
     <None Include="UIWidgets\DropDown\BindingToRemoteData.tstest" />
     <None Include="UIWidgets\DropDown\CustomizingTemplates.tstest" />
     <None Include="UIWidgets\DropDown\Events.tstest" />
+    <None Include="UIWidgets\Grid\API\ClearSelectedRow.tstest" />
+    <None Include="UIWidgets\Grid\API\CollapseExpandGroup.tstest" />
     <None Include="UIWidgets\Grid\BasicUsage\GroupByAge.tstest" />
+    <None Include="UIWidgets\Grid\BasicUsage\SortByFirstName.tstest" />
     <None Include="UIWidgets\Grid\Events\Events.tstest" />
     <None Include="UIWidgets\Grid\Selection\SelectMultipleCells.tstest" />
     <None Include="UIWidgets\Grid\Selection\SelectMultipleRows.tstest" />
@@ -149,7 +163,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\" />
-    <Folder Include="UIWidgets\ComboBox\API\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="UIWidgets\AutoComplete\BasicUsage\SelectOption.resx">
@@ -470,6 +483,59 @@
     <None Include="UIWidgets\ComboBox\Events\ComboBoxEvents.resx">
       <DependentUpon>ComboBoxEvents.tstest</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Framework\DataSource\LocalDataOperationsIdDescending.resx">
+      <DependentUpon>LocalDataOperationsIdDescending.tstest</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\DataSource\SharedDataSourceYearDescending.resx">
+      <DependentUpon>SharedDataSourceYearDescending.tstest</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\DragAndDrop\DragAndDropEvents.resx">
+      <DependentUpon>DragAndDropEvents.tstest</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Templates\BasicUsage.resx">
+      <DependentUpon>BasicUsage.tstest</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIWidgets\ComboBox\API\EnableDisable.resx">
+      <DependentUpon>EnableDisable.tstest</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIWidgets\ComboBox\API\FilterEquals.resx">
+      <DependentUpon>FilterEquals.tstest</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIWidgets\ComboBox\API\FilterEqualsNoResult.resx">
+      <DependentUpon>FilterEqualsNoResult.tstest</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIWidgets\ComboBox\API\FilterLoseFocusFilter.resx">
+      <DependentUpon>FilterLoseFocusFilter.tstest</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIWidgets\ComboBox\API\FilterNone.resx">
+      <DependentUpon>FilterNone.tstest</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIWidgets\ComboBox\API\FilterStartsWith.resx">
+      <DependentUpon>FilterStartsWith.tstest</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIWidgets\ComboBox\API\OpenClose.resx">
+      <DependentUpon>OpenClose.tstest</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIWidgets\ComboBox\API\SelectByIndex.resx">
+      <DependentUpon>SelectByIndex.tstest</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIWidgets\ComboBox\API\SelectByValue.resx">
+      <DependentUpon>SelectByValue.tstest</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIWidgets\ComboBox\BasicUsage\RevertToBlank.resx">
+      <DependentUpon>RevertToBlank.tstest</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIWidgets\Grid\API\ClearSelectedRow.resx">
+      <DependentUpon>ClearSelectedRow.tstest</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIWidgets\Grid\API\CollapseExpandGroup.resx">
+      <DependentUpon>CollapseExpandGroup.tstest</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIWidgets\Grid\BasicUsage\SortByFirstName.resx">
+      <DependentUpon>SortByFirstName.tstest</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

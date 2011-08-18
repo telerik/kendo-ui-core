@@ -216,10 +216,15 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>1</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>c3dd6660-3c0b-41a8-bc9c-a5f0016d1444</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>58523e7f-f99b-4fca-a48e-5a468fb97ede</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints>
-          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+            <d6p1:KeyValueOfstringstring>
+              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
+              <d6p1:Value />
+            </d6p1:KeyValueOfstringstring>
+          </ConstraintValues>
         </d2p1:Constraints>
         <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
         <d2p1:EditorType />
@@ -246,10 +251,15 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>2</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>c3b7d3d6-ec95-42bb-8bda-e60ca7e81dd1</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>c2e39f09-c7ed-4a46-a9f8-7792be871d5b</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="SleepActionDescriptor">
         <d2p1:Constraints>
-          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+            <d6p1:KeyValueOfstringstring>
+              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
+              <d6p1:Value />
+            </d6p1:KeyValueOfstringstring>
+          </ConstraintValues>
         </d2p1:Constraints>
         <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
         <d2p1:EditorType />
@@ -271,14 +281,19 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>[AssertBigPic_CodedStep] : @"store src attribute</d2p1:Description>
+      <d2p1:Description>[AssertBigPic_CodedStep] : store src attribute</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id>AssertBigPic_CodedStep</d2p1:Id>
       <d2p1:Order>3</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>05297d27-30ec-4bae-bf57-5ce812b79fc9</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>3a4c2b96-1e40-42c1-a07e-1edb39c51c1f</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:CodedStepDescriptor">
         <d2p1:Constraints>
-          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+            <d6p1:KeyValueOfstringstring>
+              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
+              <d6p1:Value />
+            </d6p1:KeyValueOfstringstring>
+          </ConstraintValues>
         </d2p1:Constraints>
         <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
         <d2p1:EditorType />
@@ -306,7 +321,6 @@
             }
 
 
-
 </d2p1:Code>
         <d2p1:RequiresSilverlight>false</d2p1:RequiresSilverlight>
       </d2p1:Step>
@@ -321,10 +335,15 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>4</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>15ecabc9-e9e1-423a-962d-29e3ad566e1e</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>918ebea2-fe1c-4b06-a037-a1ca69ef08a0</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="SleepActionDescriptor">
         <d2p1:Constraints>
-          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+            <d6p1:KeyValueOfstringstring>
+              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
+              <d6p1:Value />
+            </d6p1:KeyValueOfstringstring>
+          </ConstraintValues>
         </d2p1:Constraints>
         <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
         <d2p1:EditorType />
@@ -350,10 +369,15 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>5</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>12fb3b89-d2b2-45c0-84dc-9e6b88d865c3</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>5e1501b0-ea3b-43df-be69-26ef7081fe53</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
-          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+            <d6p1:KeyValueOfstringstring>
+              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
+              <d6p1:Value />
+            </d6p1:KeyValueOfstringstring>
+          </ConstraintValues>
         </d2p1:Constraints>
         <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
         <d2p1:EditorType />
@@ -430,10 +454,15 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>6</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>04c91033-3674-4b76-8007-af683c6bd50c</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>51650d30-2292-4de2-9177-62e924843d26</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="SleepActionDescriptor">
         <d2p1:Constraints>
-          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+            <d6p1:KeyValueOfstringstring>
+              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
+              <d6p1:Value />
+            </d6p1:KeyValueOfstringstring>
+          </ConstraintValues>
         </d2p1:Constraints>
         <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
         <d2p1:EditorType />
@@ -459,10 +488,15 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>7</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>19d0ff8f-13ee-4c5d-8418-f46df14e6786</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>d061490e-0645-46af-9956-820cf449620f</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
-          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+            <d6p1:KeyValueOfstringstring>
+              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
+              <d6p1:Value />
+            </d6p1:KeyValueOfstringstring>
+          </ConstraintValues>
         </d2p1:Constraints>
         <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
         <d2p1:EditorType />
@@ -543,10 +577,15 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>8</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>85a59bc8-9e8c-478b-adb8-aacc7e76f31e</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>b3540ab9-1f3b-4b38-aaf7-cabdf4f57129</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="SleepActionDescriptor">
         <d2p1:Constraints>
-          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+            <d6p1:KeyValueOfstringstring>
+              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
+              <d6p1:Value />
+            </d6p1:KeyValueOfstringstring>
+          </ConstraintValues>
         </d2p1:Constraints>
         <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
         <d2p1:EditorType />
@@ -568,14 +607,19 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription>[AssertBigPic_CodedStep1] : @"assert src choange - ASSERT IMAGE OPENED IS THE SAME AS THE IMAGE CLICKED</d2p1:CustomDescription>
-      <d2p1:Description>[AssertBigPic_CodedStep1] : @"assert src choange</d2p1:Description>
+      <d2p1:Description>[AssertBigPic_CodedStep1] : assert src choange</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id>AssertBigPic_CodedStep1</d2p1:Id>
       <d2p1:Order>9</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>268ee425-8263-4586-831f-a79816055377</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>62bd5853-ff4d-4dc9-92ed-a722d59e26e2</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:CodedStepDescriptor">
         <d2p1:Constraints>
-          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+            <d6p1:KeyValueOfstringstring>
+              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
+              <d6p1:Value />
+            </d6p1:KeyValueOfstringstring>
+          </ConstraintValues>
         </d2p1:Constraints>
         <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
         <d2p1:EditorType />
@@ -589,7 +633,6 @@
         <d2p1:WaitOnElementsTimeout>5000</d2p1:WaitOnElementsTimeout>
         <d2p1:Code>
             Pages.AeroViewr.BigPhotoImage.AssertAttribute().Value("src", ArtOfTest.Common.StringCompareType.NotContain, savedAttr.Value);
-
 </d2p1:Code>
         <d2p1:RequiresSilverlight>false</d2p1:RequiresSilverlight>
       </d2p1:Step>
@@ -610,18 +653,18 @@
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
-  <Path>AeroViewr\AssertBigPic.aii</Path>
+  <Path>TestProject2\AeroViewr\AssertBigPic.aii</Path>
   <Priority>0</Priority>
-  <ResourceFilePath>AeroViewr\AssertBigPic.resx</ResourceFilePath>
+  <ResourceFilePath>TestProject2\AeroViewr\AssertBigPic.resx</ResourceFilePath>
   <SilverlightAppLocalDirectory />
   <SilverlightAppOriginUri i:nil="true" />
   <SilverlightAppRecordLocal>false</SilverlightAppRecordLocal>
   <SilverlightAppWebUrl />
   <SilverlightEnabled>false</SilverlightEnabled>
   <StopTestListOnFailure>false</StopTestListOnFailure>
-  <TestAssembly>TestProject2.dll</TestAssembly>
-  <TestAssemblyPath>C:\work\Kendo\functional tests\AeroViewr\TestProject2\bin</TestAssemblyPath>
-  <TestClass>TestProject2.AssertBigPic</TestClass>
+  <TestAssembly>AeroViewr.dll</TestAssembly>
+  <TestAssemblyPath>C:\work\GitHub\kendo\functional-tests\AeroViewr\bin</TestAssemblyPath>
+  <TestClass>AeroViewr.AssertBigPic</TestClass>
   <TestLinks xmlns:d2p1="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.ProjectModel.TestLinks" />
   <TestType>Web</TestType>
   <UniqueId>c4b769f8-1265-45fc-9ed4-a454bc4bb668</UniqueId>

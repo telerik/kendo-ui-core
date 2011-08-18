@@ -1,0 +1,380 @@
+<TestList Type="ArtOfTest.WebAii.Design.Execution.TestList" Version="2011.1.729.0">
+  <ID Type="System.String">999a93ab-38ab-4115-939f-2e3e1da31f69</ID>
+  <TestListName Type="System.String">qqq</TestListName>
+  <Date Type="System.DateTime">2011-08-18 08:34:15Z</Date>
+  <Settings Type="ArtOfTest.WebAii.Core.Settings" Version="2011.1.729.0">
+    <WebSettings Type="ArtOfTest.WebAii.Core.Settings+WebSettings" Version="2011.1.729.0">
+      <DefaultBrowser Type="ArtOfTest.WebAii.Core.BrowserType">InternetExplorer</DefaultBrowser>
+      <WebAppPhysicalPath Type="System.String">
+      </WebAppPhysicalPath>
+      <EnableScriptLogging Type="System.Boolean">False</EnableScriptLogging>
+      <EnableUILessRequestViewing Type="System.Boolean">False</EnableUILessRequestViewing>
+      <LocalWebServer Type="ArtOfTest.WebAii.Core.LocalWebServerType">None</LocalWebServer>
+      <BaseUrl Type="System.String">
+      </BaseUrl>
+      <AspNetDevServerPort Type="System.Int32">-1</AspNetDevServerPort>
+      <KillBrowserProcessOnClose Type="System.Boolean">False</KillBrowserProcessOnClose>
+      <RecycleBrowser Type="System.Boolean">False</RecycleBrowser>
+      <UseHttpProxy Type="System.Boolean">False</UseHttpProxy>
+      <EnableSilverlight Type="System.Boolean">False</EnableSilverlight>
+      <VerboseHttpProxy Type="System.Boolean">False</VerboseHttpProxy>
+      <SilverlightConnectTimeout Type="System.Int32">30000</SilverlightConnectTimeout>
+      <UseMultiBrowsers Type="System.Boolean">False</UseMultiBrowsers>
+    </WebSettings>
+    <ClientReadyTimeout Type="System.Int32">30000</ClientReadyTimeout>
+    <ExecuteCommandTimeout Type="System.Int32">20000</ExecuteCommandTimeout>
+    <LogLocation Type="System.String">C:\WebAiiLog\</LogLocation>
+    <QueryEventLogErrorsOnExit Type="System.Boolean">False</QueryEventLogErrorsOnExit>
+    <ExecutionDelay Type="System.Int32">0</ExecutionDelay>
+    <AnnotateExecution Type="System.Boolean">False</AnnotateExecution>
+    <SimulatedMouseMoveSpeed Type="System.Single">0.3</SimulatedMouseMoveSpeed>
+    <WaitCheckInterval Type="System.Int32">500</WaitCheckInterval>
+    <AnnotationMode Type="ArtOfTest.WebAii.Core.AnnotationMode">All</AnnotationMode>
+    <LogAnnotations Type="System.Boolean">False</LogAnnotations>
+    <IsStressRecordingMode Type="System.Boolean">False</IsStressRecordingMode>
+    <IsUserInteractiveMode Type="System.Boolean">False</IsUserInteractiveMode>
+    <CreateLogFile Type="System.Boolean">True</CreateLogFile>
+    <XMultiMgr Type="System.Boolean">True</XMultiMgr>
+    <UnexpectedDialogAction Type="ArtOfTest.WebAii.Core.UnexpectedDialogAction">HandleAndFailTest</UnexpectedDialogAction>
+    <ElementWaitTimeout Type="System.Int32">10000</ElementWaitTimeout>
+  </Settings>
+  <Tests>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">54512c34-1984-4097-9b6d-b75f186c6b00</ID>
+      <Path Type="System.String">Framework\DataSource\LocalDataOperationsIdDescending.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">c920ba73-eab9-4f77-8a47-b7acb6b0505e</ID>
+      <Path Type="System.String">Framework\DataSource\SharedDataSourceYearDescending.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">6efa2a49-eee8-4f25-81e4-72fe196df82e</ID>
+      <Path Type="System.String">Framework\DragAndDrop\DragAndDropEvents.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">b1e7b562-0b1e-4d53-8c49-bf558e4ff0ab</ID>
+      <Path Type="System.String">Framework\Templates\BasicUsage.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">51d7033b-6b81-4ae1-8ed5-844cce29e17b</ID>
+      <Path Type="System.String">UIWidgets\AutoComplete\API\FindStartingWith.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">8db3a24a-8934-4106-a439-5c9bbd3248b8</ID>
+      <Path Type="System.String">UIWidgets\AutoComplete\API\SetValue.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">8b54f401-eab7-44c8-8634-d7ce8bb137a8</ID>
+      <Path Type="System.String">UIWidgets\AutoComplete\BasicUsage\SelectOption.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">e297cdda-5608-4e27-ae19-fbf10e3a834f</ID>
+      <Path Type="System.String">UIWidgets\AutoComplete\BasicUsage\SetTwoValuesRevertToBlank.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">4c36ce14-aaf5-4d44-871f-0a6b44e5a3a6</ID>
+      <Path Type="System.String">UIWidgets\AutoComplete\Events\AutoCompleteEvents.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">a1cd8bd9-5a93-42eb-981b-6deae7c5c946</ID>
+      <Path Type="System.String">UIWidgets\Chart\BasicUsage.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">35439b44-82ba-410c-b7b3-0c3a175e400b</ID>
+      <Path Type="System.String">UIWidgets\ComboBox\API\EnableDisable.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">1617908c-9e2e-438f-84cd-c361e4bf8577</ID>
+      <Path Type="System.String">UIWidgets\ComboBox\API\FilterEquals.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">8b594b62-9613-462e-add7-e1fa6ae3606d</ID>
+      <Path Type="System.String">UIWidgets\ComboBox\API\FilterEqualsNoResult.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">f908e08c-9ad6-4e0e-abb4-c48eb4c0812c</ID>
+      <Path Type="System.String">UIWidgets\ComboBox\API\FilterLoseFocusFilter.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">c9d991db-46a9-4fbd-8a99-33289587f727</ID>
+      <Path Type="System.String">UIWidgets\ComboBox\API\FilterNone.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">9bf9b0d8-6cac-4738-973c-ebc65c345cc6</ID>
+      <Path Type="System.String">UIWidgets\ComboBox\API\FilterStartsWith.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">41d9d16b-2a2f-4926-8dd5-33fab0da21cd</ID>
+      <Path Type="System.String">UIWidgets\ComboBox\API\OpenClose.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">1a1d0f57-c41e-4727-a9a1-4d83163ebf0e</ID>
+      <Path Type="System.String">UIWidgets\ComboBox\API\SelectByIndex.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">b0ee5244-d031-44f8-a870-61059726d4d6</ID>
+      <Path Type="System.String">UIWidgets\ComboBox\API\SelectByValue.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">f1b99097-ab32-4274-a4a5-8d03fb4b4c6f</ID>
+      <Path Type="System.String">UIWidgets\ComboBox\BasicUsage\ChangeValueInput.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">5ac7f1c9-d81b-47eb-af1c-2bd95254b5c6</ID>
+      <Path Type="System.String">UIWidgets\ComboBox\BasicUsage\ChangeValueKeyboardSelect.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">0742f142-11d4-4a22-932e-32713d79d27d</ID>
+      <Path Type="System.String">UIWidgets\ComboBox\BasicUsage\RevertToBlank.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">1636b3a1-eac9-4d7f-a92d-2e0ec688c329</ID>
+      <Path Type="System.String">UIWidgets\ComboBox\Events\ComboBoxEvents.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">da26f32a-9b0d-4e31-807b-8c343e29b840</ID>
+      <Path Type="System.String">UIWidgets\DropDown\API\DisableEnable.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">611f4630-ec7c-40c2-9467-b12e8f55e05b</ID>
+      <Path Type="System.String">UIWidgets\DropDown\API\OpenClose.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">5c2ae7de-3b5e-4aa2-a9b8-ada5dd6a48a5</ID>
+      <Path Type="System.String">UIWidgets\DropDown\API\SelectByIndex.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">520b9a3f-1fc5-408e-84be-1bad1022d9d4</ID>
+      <Path Type="System.String">UIWidgets\DropDown\API\SelectByValue.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">200eea20-f754-4d01-b6d3-c02b6fbf3dcb</ID>
+      <Path Type="System.String">UIWidgets\DropDown\API\SelectItemStartingWith.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">193c1783-c2d6-4312-b1ef-460dbb295823</ID>
+      <Path Type="System.String">UIWidgets\DropDown\BindingToRemoteData.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">616a4f29-ece0-43e0-83a2-cfc3c4fcaebc</ID>
+      <Path Type="System.String">UIWidgets\DropDown\CustomizingTemplates.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">13b79458-f7e1-4bdc-a693-b5b37306ac7f</ID>
+      <Path Type="System.String">UIWidgets\Grid\API\ClearSelectedRow.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">a0643786-298c-4510-bc65-84eedc246dea</ID>
+      <Path Type="System.String">UIWidgets\Grid\API\CollapseExpandGroup.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">2a2681b2-602e-4af3-be55-b8516bc81e80</ID>
+      <Path Type="System.String">UIWidgets\Grid\BasicUsage\GroupByAge.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">c6576c03-ffe6-41f2-a4ad-1bb6dd9124e8</ID>
+      <Path Type="System.String">UIWidgets\Grid\BasicUsage\SortByFirstName.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">e94e4d47-b502-4a0f-955f-42848b91e78f</ID>
+      <Path Type="System.String">UIWidgets\Grid\Selection\SelectMultipleCells.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">fd75ef59-b0f9-4557-af4a-a84cb018806e</ID>
+      <Path Type="System.String">UIWidgets\Grid\Selection\SelectMultipleRows.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">891ffcdc-fd2e-4e7e-8a8c-b0d9744bb0b9</ID>
+      <Path Type="System.String">UIWidgets\Grid\Selection\SelectRowSingle.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">f2ec2503-6c60-4f4e-89a5-ef91c8cbc643</ID>
+      <Path Type="System.String">UIWidgets\Menu\API\After.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">9de16507-2a02-49f5-bb6d-feabf1694c4a</ID>
+      <Path Type="System.String">UIWidgets\Menu\API\Append.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">b8974193-9372-4aea-b8fc-00da0eab615f</ID>
+      <Path Type="System.String">UIWidgets\Menu\API\Before.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">d6707a8e-ed75-4a21-809f-369a5e86aeaa</ID>
+      <Path Type="System.String">UIWidgets\Menu\API\DisableEnable.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">ef057c4b-a157-4436-8b67-9338562c79ed</ID>
+      <Path Type="System.String">UIWidgets\Menu\API\Remove.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">14f36260-63c4-4038-8b02-22537d776770</ID>
+      <Path Type="System.String">UIWidgets\Menu\BasicUsage\NotClosedOnClick.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">91020c93-1d6d-4fb3-9dae-01e50187ada4</ID>
+      <Path Type="System.String">UIWidgets\Menu\BasicUsage\OpenClose.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">9f8e902b-3d38-42ad-8b90-daf3bb7c21b1</ID>
+      <Path Type="System.String">UIWidgets\PanelBar\AjaxLoading\SwitchexpandedPanel.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">82b23410-67c4-46a3-9d39-ea88ea701ba0</ID>
+      <Path Type="System.String">UIWidgets\PanelBar\API\Append.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">98c71886-374c-4d62-84c9-6684eea2062b</ID>
+      <Path Type="System.String">UIWidgets\PanelBar\API\EnableDisable.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">bd45e4a2-439b-436c-b754-56f3d621d5ff</ID>
+      <Path Type="System.String">UIWidgets\PanelBar\API\InsertAfter.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">3382d877-488e-4d4b-ab37-0b70afd26fbf</ID>
+      <Path Type="System.String">UIWidgets\PanelBar\API\InsertBefore.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">2d9f40dc-26be-4455-abf9-0b582a7493bb</ID>
+      <Path Type="System.String">UIWidgets\PanelBar\API\Remove.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">17d08086-8751-4b35-a039-a62f09939bb7</ID>
+      <Path Type="System.String">UIWidgets\PanelBar\API\Select.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">c0bc19eb-5745-45fd-b05d-eec9b5876b6b</ID>
+      <Path Type="System.String">UIWidgets\PanelBar\BasicUsage\ExpandCollapse.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">63635fbb-194a-40f8-8a2e-0a8fb039b2e1</ID>
+      <Path Type="System.String">UIWidgets\PanelBar\BasicUsage\ExpandTwoLevels.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">a395ddcb-2033-4acf-9266-63aa17530f57</ID>
+      <Path Type="System.String">UIWidgets\Slider\API\DoubleSliderEnabledisable.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">aca26993-57aa-4b9b-957f-522f41edd394</ID>
+      <Path Type="System.String">UIWidgets\Slider\API\DoubleSliderSetValue.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">ffffb368-6c05-4676-a961-8277ed47ba09</ID>
+      <Path Type="System.String">UIWidgets\Slider\API\SingleSliderEnableDisable.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">4e70e35f-387a-4a1b-b866-06a13be297e9</ID>
+      <Path Type="System.String">UIWidgets\Slider\API\SingleSliderSetValue.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">3e6a4ee0-37ce-4ca0-a93f-5a83a13e1324</ID>
+      <Path Type="System.String">UIWidgets\Slider\BasicUsage\ChangeValueDragAndDropSingleSlider.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">c7b56d04-57ed-43f0-ab3a-e1f6cebd0522</ID>
+      <Path Type="System.String">UIWidgets\Slider\Events\ChangeValueButtonsSingleSlider.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">f15a138b-8c74-4164-851e-6e4e91117e03</ID>
+      <Path Type="System.String">UIWidgets\Slider\Events\ChangeValueDoubleSlider.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">09ae3b18-abb2-4c4b-931f-7502f96e26ee</ID>
+      <Path Type="System.String">UIWidgets\TabStrip\API\Append.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">66eeccd4-49c3-4ac5-9d56-8b647a8c78d8</ID>
+      <Path Type="System.String">UIWidgets\TabStrip\API\EnableDisable.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">189ed074-e675-4fa2-8526-b31ad0892025</ID>
+      <Path Type="System.String">UIWidgets\TabStrip\API\InsertBeforeInsertAfter.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">79aee780-5b91-41b2-8e67-a66d1dd0cee2</ID>
+      <Path Type="System.String">UIWidgets\TabStrip\API\RemoveTab.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">904c8383-355b-4e0b-9acc-f62bd8f6d11f</ID>
+      <Path Type="System.String">UIWidgets\TabStrip\Events\SwitchTabs.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">5d28fe49-4182-4fa3-b016-dbedb7e5ef0f</ID>
+      <Path Type="System.String">UIWidgets\TreeView\API\AppendNode.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">d03caf07-497e-468b-9ee5-a5f9f8489a7b</ID>
+      <Path Type="System.String">UIWidgets\TreeView\API\CollapseAllNodes.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">6e2220b9-1835-4da9-a3ce-2f2f452e0434</ID>
+      <Path Type="System.String">UIWidgets\TreeView\API\EnableDisable.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">3bf951ed-24d9-46ea-b62b-d67851600b69</ID>
+      <Path Type="System.String">UIWidgets\TreeView\API\ExpandAllNodes.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">1bab8790-7383-48c4-abce-8302907f3b32</ID>
+      <Path Type="System.String">UIWidgets\TreeView\API\Remove.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">1739e24d-766d-4887-9ade-89c5897d6f51</ID>
+      <Path Type="System.String">UIWidgets\TreeView\Events\DragAndDropInvalid.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">1d1d54c4-b70d-4302-9d75-bcd71ffb3cda</ID>
+      <Path Type="System.String">UIWidgets\TreeView\Events\DragAndDropValid.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">4328c389-9ecb-4d9b-b1a0-e1be698cc3b2</ID>
+      <Path Type="System.String">UIWidgets\TreeView\Events\ExpandCollapseSelect.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">3bc78c73-21b4-4b22-bcb2-e2745b04c3b8</ID>
+      <Path Type="System.String">UIWidgets\Window\API\CloseOpen.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">0d3e5eb7-3e0b-4c04-8d52-4c3091995711</ID>
+      <Path Type="System.String">UIWidgets\Window\Events\OpenActivateRefreshclose.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">ceb842cb-c25f-4f72-843e-79b1f945b8b6</ID>
+      <Path Type="System.String">UIWidgets\Menu\Events\MenuEvents.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">50737eb2-4ef0-4f73-a9bb-ade82c2c7372</ID>
+      <Path Type="System.String">UIWidgets\Chart\ChartEvents.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">59523e67-2392-4615-8a66-27e2da9cae2d</ID>
+      <Path Type="System.String">UIWidgets\DropDown\DropDownEvents.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">4ddbacf3-93f2-40ae-9f01-610c591d49b6</ID>
+      <Path Type="System.String">UIWidgets\Grid\Events\GridEvents.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">be767e7c-01b6-46eb-a16e-c8922f986bb6</ID>
+      <Path Type="System.String">UIWidgets\PanelBar\Events\PanelBarEvents.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.729.0">
+      <ID Type="System.String">c781b9ab-40cb-4112-92b4-bbe308f63127</ID>
+      <Path Type="System.String">UIWidgets\Splitter\ResizAllPanels.tstest</Path>
+    </Item>
+  </Tests>
+  <Filter Type="ArtOfTest.WebAii.Design.Execution.Filter" Version="2011.1.729.0">
+    <Keys>
+      <Item Type="System.String">
+      </Item>
+    </Keys>
+    <Comparisons>
+      <Item Type="ArtOfTest.WebAii.Design.Execution.FilterComparison">Equals</Item>
+    </Comparisons>
+    <Values>
+      <Item Type="System.String">
+      </Item>
+    </Values>
+  </Filter>
+</TestList>

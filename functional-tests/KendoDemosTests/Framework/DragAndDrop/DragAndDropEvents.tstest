@@ -14,7 +14,7 @@
   </DataInfo>
   <Description />
   <IndependentDescriptors />
-  <Name>Events</Name>
+  <Name>DragAndDropEvents</Name>
   <Steps xmlns:d2p1="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
@@ -846,9 +846,9 @@
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
-  <Path>Framework\DragAndDrop\Events.tstest</Path>
+  <Path>Framework\DragAndDrop\DragAndDropEvents.tstest</Path>
   <Priority>0</Priority>
-  <ResourceFilePath>Framework\DragAndDrop\Events.resx</ResourceFilePath>
+  <ResourceFilePath>Framework\DragAndDrop\DragAndDropEvents.resx</ResourceFilePath>
   <SilverlightAppLocalDirectory />
   <SilverlightAppOriginUri i:nil="true" />
   <SilverlightAppRecordLocal>false</SilverlightAppRecordLocal>

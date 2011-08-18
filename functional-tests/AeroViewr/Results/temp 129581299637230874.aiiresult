@@ -1,0 +1,2955 @@
+<RunResult Type="ArtOfTest.WebAii.Design.Execution.RunResult" Version="2011.1.729.0">
+  <TestListName Type="System.String">temp</TestListName>
+  <StartTime Type="System.DateTime">2011-08-18 08:29:53Z</StartTime>
+  <EndTime Type="System.DateTime">2011-08-18 08:32:43Z</EndTime>
+  <DataCollectors />
+  <TestResults>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestResult" Version="2011.1.729.0">
+      <TestId Type="System.String">c4b769f8-1265-45fc-9ed4-a454bc4bb668</TestId>
+      <TestName Type="System.String">AssertBigPic</TestName>
+      <TestPath Type="System.String">TestProject2\AeroViewr\AssertBigPic.aii</TestPath>
+      <ProjectPath Type="System.String">
+      </ProjectPath>
+      <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+      <AutomationStepResults>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Navigate to : '/aeroviewr/'</StepDescription>
+          <TestId Type="System.String">c4b769f8-1265-45fc-9ed4-a454bc4bb668</TestId>
+          <TestName Type="System.String">AssertBigPic</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\AssertBigPic.aii</TestPath>
+          <TestStepNumber Type="System.Int32">0</TestStepNumber>
+          <Order Type="System.Int32">1</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Wait for '1000' msec.</StepDescription>
+          <TestId Type="System.String">c4b769f8-1265-45fc-9ed4-a454bc4bb668</TestId>
+          <TestName Type="System.String">AssertBigPic</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\AssertBigPic.aii</TestPath>
+          <TestStepNumber Type="System.Int32">1</TestStepNumber>
+          <Order Type="System.Int32">2</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">[AssertBigPic_CodedStep] : store src attribute</StepDescription>
+          <TestId Type="System.String">c4b769f8-1265-45fc-9ed4-a454bc4bb668</TestId>
+          <TestName Type="System.String">AssertBigPic</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\AssertBigPic.aii</TestPath>
+          <TestStepNumber Type="System.Int32">2</TestStepNumber>
+          <Order Type="System.Int32">3</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Wait for '1000' msec.</StepDescription>
+          <TestId Type="System.String">c4b769f8-1265-45fc-9ed4-a454bc4bb668</TestId>
+          <TestName Type="System.String">AssertBigPic</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\AssertBigPic.aii</TestPath>
+          <TestStepNumber Type="System.Int32">3</TestStepNumber>
+          <Order Type="System.Int32">4</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Click 'Link'</StepDescription>
+          <TestId Type="System.String">c4b769f8-1265-45fc-9ed4-a454bc4bb668</TestId>
+          <TestName Type="System.String">AssertBigPic</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\AssertBigPic.aii</TestPath>
+          <TestStepNumber Type="System.Int32">4</TestStepNumber>
+          <Order Type="System.Int32">5</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Wait for '1000' msec.</StepDescription>
+          <TestId Type="System.String">c4b769f8-1265-45fc-9ed4-a454bc4bb668</TestId>
+          <TestName Type="System.String">AssertBigPic</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\AssertBigPic.aii</TestPath>
+          <TestStepNumber Type="System.Int32">5</TestStepNumber>
+          <Order Type="System.Int32">6</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Click 'SunriseShellImage'</StepDescription>
+          <TestId Type="System.String">c4b769f8-1265-45fc-9ed4-a454bc4bb668</TestId>
+          <TestName Type="System.String">AssertBigPic</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\AssertBigPic.aii</TestPath>
+          <TestStepNumber Type="System.Int32">6</TestStepNumber>
+          <Order Type="System.Int32">7</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Wait for '3000' msec.</StepDescription>
+          <TestId Type="System.String">c4b769f8-1265-45fc-9ed4-a454bc4bb668</TestId>
+          <TestName Type="System.String">AssertBigPic</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\AssertBigPic.aii</TestPath>
+          <TestStepNumber Type="System.Int32">7</TestStepNumber>
+          <Order Type="System.Int32">8</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">[AssertBigPic_CodedStep1] : @"assert src choange - ASSERT IMAGE OPENED IS THE SAME AS THE IMAGE CLICKED</StepDescription>
+          <TestId Type="System.String">c4b769f8-1265-45fc-9ed4-a454bc4bb668</TestId>
+          <TestName Type="System.String">AssertBigPic</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\AssertBigPic.aii</TestPath>
+          <TestStepNumber Type="System.Int32">8</TestStepNumber>
+          <Order Type="System.Int32">9</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+      </AutomationStepResults>
+      <NotRunStepDescriptions />
+      <PerStepMessages Type="System.String">Overall Result: Pass
+------------------------------------------------------------
+'8/18/2011 11:29:53 AM' - Starting execution....
+'8/18/2011 11:29:55 AM' - Detected custom code in test. Locating test assembly: AeroViewr.dll.
+'8/18/2011 11:29:55 AM' - Assembly Found: C:\work\GitHub\kendo\functional-tests\AeroViewr\bin\AeroViewr.dll
+'8/18/2011 11:29:55 AM' - Loading code class: 'AeroViewr.AssertBigPic'.
+------------------------------------------------------------
+'8/18/2011 11:29:55 AM' - 'Pass' : 1. Navigate to : '/aeroviewr/'
+'8/18/2011 11:29:56 AM' - 'Pass' : 2. Wait for '1000' msec.
+'8/18/2011 11:29:56 AM' - 'Pass' : 3. [AssertBigPic_CodedStep] : store src attribute
+'8/18/2011 11:29:57 AM' - 'Pass' : 4. Wait for '1000' msec.
+'8/18/2011 11:29:57 AM' - 'Pass' : 5. Click 'Link'
+'8/18/2011 11:29:58 AM' - 'Pass' : 6. Wait for '1000' msec.
+'8/18/2011 11:29:59 AM' - 'Pass' : 7. Click 'SunriseShellImage'
+'8/18/2011 11:30:02 AM' - 'Pass' : 8. Wait for '3000' msec.
+'8/18/2011 11:30:02 AM' - 'Pass' : 9. [AssertBigPic_CodedStep1] : @"assert src choange - ASSERT IMAGE OPENED IS THE SAME AS THE IMAGE CLICKED
+------------------------------------------------------------
+'8/18/2011 11:30:02 AM' - Overall Result: Pass
+'8/18/2011 11:30:02 AM' - Duration: [0 min: 7 sec: 364 msec]
+------------------------------------------------------------
+'8/18/2011 11:30:02 AM' - Test completed!
+</PerStepMessages>
+      <TotalNumberOfPassedSteps Type="System.Int32">9</TotalNumberOfPassedSteps>
+      <ExecutingTestStepCount Type="System.Int32">9</ExecutingTestStepCount>
+      <TotalNumberOfNotRunSteps Type="System.Int32">0</TotalNumberOfNotRunSteps>
+      <IsDataDrivenResult Type="System.Boolean">False</IsDataDrivenResult>
+      <SeparatorLineCharCount Type="System.Int32">60</SeparatorLineCharCount>
+      <ExecutionType Type="ArtOfTest.Common.Design.ExecutionType">QuickExecution</ExecutionType>
+      <EndTime Type="System.DateTime">2011-08-18 08:30:02Z</EndTime>
+      <StarTime Type="System.DateTime">2011-08-18 08:29:55Z</StarTime>
+      <DataIterationResults />
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestResult" Version="2011.1.729.0">
+      <TestId Type="System.String">63c00f77-a7be-418e-b759-191b55d39b79</TestId>
+      <TestName Type="System.String">AssertMessages</TestName>
+      <TestPath Type="System.String">TestProject2\AeroViewr\AssertMessages.aii</TestPath>
+      <ProjectPath Type="System.String">
+      </ProjectPath>
+      <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+      <AutomationStepResults>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Navigate to : '/aeroviewr/'</StepDescription>
+          <TestId Type="System.String">63c00f77-a7be-418e-b759-191b55d39b79</TestId>
+          <TestName Type="System.String">AssertMessages</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\AssertMessages.aii</TestPath>
+          <TestStepNumber Type="System.Int32">0</TestStepNumber>
+          <Order Type="System.Int32">1</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Wait for '1000' msec.</StepDescription>
+          <TestId Type="System.String">63c00f77-a7be-418e-b759-191b55d39b79</TestId>
+          <TestName Type="System.String">AssertMessages</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\AssertMessages.aii</TestPath>
+          <TestStepNumber Type="System.Int32">1</TestStepNumber>
+          <Order Type="System.Int32">2</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Click 'HintsLink'</StepDescription>
+          <TestId Type="System.String">63c00f77-a7be-418e-b759-191b55d39b79</TestId>
+          <TestName Type="System.String">AssertMessages</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\AssertMessages.aii</TestPath>
+          <TestStepNumber Type="System.Int32">2</TestStepNumber>
+          <Order Type="System.Int32">3</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Verify 'TextContent' 'Contains' 'something andbutton. You can also use related tags from the suggestion list.' on 'SomethingPTag'</StepDescription>
+          <TestId Type="System.String">63c00f77-a7be-418e-b759-191b55d39b79</TestId>
+          <TestName Type="System.String">AssertMessages</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\AssertMessages.aii</TestPath>
+          <TestStepNumber Type="System.Int32">3</TestStepNumber>
+          <Order Type="System.Int32">4</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Verify 'TextContent' 'Contains' 'with youroraccount, to see the entire app functionality' on 'WithPTag'</StepDescription>
+          <TestId Type="System.String">63c00f77-a7be-418e-b759-191b55d39b79</TestId>
+          <TestName Type="System.String">AssertMessages</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\AssertMessages.aii</TestPath>
+          <TestStepNumber Type="System.Int32">4</TestStepNumber>
+          <Order Type="System.Int32">5</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Click 'PhotoWrapSectionTag'</StepDescription>
+          <TestId Type="System.String">63c00f77-a7be-418e-b759-191b55d39b79</TestId>
+          <TestName Type="System.String">AssertMessages</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\AssertMessages.aii</TestPath>
+          <TestStepNumber Type="System.Int32">5</TestStepNumber>
+          <Order Type="System.Int32">6</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Wait for element 'WithPTag' 'is not' visible.</StepDescription>
+          <TestId Type="System.String">63c00f77-a7be-418e-b759-191b55d39b79</TestId>
+          <TestName Type="System.String">AssertMessages</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\AssertMessages.aii</TestPath>
+          <TestStepNumber Type="System.Int32">6</TestStepNumber>
+          <Order Type="System.Int32">7</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Verify element 'SomethingPTag' 'is not' visible.</StepDescription>
+          <TestId Type="System.String">63c00f77-a7be-418e-b759-191b55d39b79</TestId>
+          <TestName Type="System.String">AssertMessages</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\AssertMessages.aii</TestPath>
+          <TestStepNumber Type="System.Int32">7</TestStepNumber>
+          <Order Type="System.Int32">8</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+      </AutomationStepResults>
+      <NotRunStepDescriptions />
+      <PerStepMessages Type="System.String">Overall Result: Pass
+------------------------------------------------------------
+'8/18/2011 11:30:03 AM' - Starting execution....
+------------------------------------------------------------
+'8/18/2011 11:30:04 AM' - 'Pass' : 1. Navigate to : '/aeroviewr/'
+'8/18/2011 11:30:05 AM' - 'Pass' : 2. Wait for '1000' msec.
+'8/18/2011 11:30:06 AM' - 'Pass' : 3. Click 'HintsLink'
+'8/18/2011 11:30:06 AM' - 'Pass' : 4. Verify 'TextContent' 'Contains' 'something andbutton. You can also use related tags from the suggestion list.' on 'SomethingPTag'
+'8/18/2011 11:30:06 AM' - 'Pass' : 5. Verify 'TextContent' 'Contains' 'with youroraccount, to see the entire app functionality' on 'WithPTag'
+'8/18/2011 11:30:06 AM' - 'Pass' : 6. Click 'PhotoWrapSectionTag'
+'8/18/2011 11:30:12 AM' - 'Pass' : 7. Wait for element 'WithPTag' 'is not' visible.
+'8/18/2011 11:30:12 AM' - 'Pass' : 8. Verify element 'SomethingPTag' 'is not' visible.
+------------------------------------------------------------
+'8/18/2011 11:30:12 AM' - Overall Result: Pass
+'8/18/2011 11:30:12 AM' - Duration: [0 min: 7 sec: 485 msec]
+------------------------------------------------------------
+'8/18/2011 11:30:12 AM' - Test completed!
+</PerStepMessages>
+      <TotalNumberOfPassedSteps Type="System.Int32">8</TotalNumberOfPassedSteps>
+      <ExecutingTestStepCount Type="System.Int32">8</ExecutingTestStepCount>
+      <TotalNumberOfNotRunSteps Type="System.Int32">0</TotalNumberOfNotRunSteps>
+      <IsDataDrivenResult Type="System.Boolean">False</IsDataDrivenResult>
+      <SeparatorLineCharCount Type="System.Int32">60</SeparatorLineCharCount>
+      <ExecutionType Type="ArtOfTest.Common.Design.ExecutionType">QuickExecution</ExecutionType>
+      <EndTime Type="System.DateTime">2011-08-18 08:30:12Z</EndTime>
+      <StarTime Type="System.DateTime">2011-08-18 08:30:04Z</StarTime>
+      <DataIterationResults />
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestResult" Version="2011.1.729.0">
+      <TestId Type="System.String">6ac6b301-c6ea-4e6d-83ef-7c85c1184aa7</TestId>
+      <TestName Type="System.String">ClickInfoWindow</TestName>
+      <TestPath Type="System.String">TestProject2\AeroViewr\ClickInfoWindow.aii</TestPath>
+      <ProjectPath Type="System.String">
+      </ProjectPath>
+      <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+      <AutomationStepResults>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Navigate to : '/aeroviewr/'</StepDescription>
+          <TestId Type="System.String">6ac6b301-c6ea-4e6d-83ef-7c85c1184aa7</TestId>
+          <TestName Type="System.String">ClickInfoWindow</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\ClickInfoWindow.aii</TestPath>
+          <TestStepNumber Type="System.Int32">0</TestStepNumber>
+          <Order Type="System.Int32">1</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Wait for '3000' msec.</StepDescription>
+          <TestId Type="System.String">6ac6b301-c6ea-4e6d-83ef-7c85c1184aa7</TestId>
+          <TestName Type="System.String">ClickInfoWindow</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\ClickInfoWindow.aii</TestPath>
+          <TestStepNumber Type="System.Int32">1</TestStepNumber>
+          <Order Type="System.Int32">2</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Click 'TechnicolorImage'</StepDescription>
+          <TestId Type="System.String">6ac6b301-c6ea-4e6d-83ef-7c85c1184aa7</TestId>
+          <TestName Type="System.String">ClickInfoWindow</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\ClickInfoWindow.aii</TestPath>
+          <TestStepNumber Type="System.Int32">2</TestStepNumber>
+          <Order Type="System.Int32">3</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Wait for '2000' msec.</StepDescription>
+          <TestId Type="System.String">6ac6b301-c6ea-4e6d-83ef-7c85c1184aa7</TestId>
+          <TestName Type="System.String">ClickInfoWindow</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\ClickInfoWindow.aii</TestPath>
+          <TestStepNumber Type="System.Int32">3</TestStepNumber>
+          <Order Type="System.Int32">4</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Verify element 'TechnicolorH2Tag' 'is' visible.</StepDescription>
+          <TestId Type="System.String">6ac6b301-c6ea-4e6d-83ef-7c85c1184aa7</TestId>
+          <TestName Type="System.String">ClickInfoWindow</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\ClickInfoWindow.aii</TestPath>
+          <TestStepNumber Type="System.Int32">4</TestStepNumber>
+          <Order Type="System.Int32">5</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Click 'Span'</StepDescription>
+          <TestId Type="System.String">6ac6b301-c6ea-4e6d-83ef-7c85c1184aa7</TestId>
+          <TestName Type="System.String">ClickInfoWindow</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\ClickInfoWindow.aii</TestPath>
+          <TestStepNumber Type="System.Int32">5</TestStepNumber>
+          <Order Type="System.Int32">6</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Wait for '1000' msec.</StepDescription>
+          <TestId Type="System.String">6ac6b301-c6ea-4e6d-83ef-7c85c1184aa7</TestId>
+          <TestName Type="System.String">ClickInfoWindow</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\ClickInfoWindow.aii</TestPath>
+          <TestStepNumber Type="System.Int32">6</TestStepNumber>
+          <Order Type="System.Int32">7</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">[ClickInfoWindow_CodedStep1] : @"Verify 'InnerText' 'Contains' 'technicolor dreamskies over eagle lake' on 'TechnicolorSpan' - ASSERT INFO WINDOW CORRESPONDS TO HTE IMAGE LOADED</StepDescription>
+          <TestId Type="System.String">6ac6b301-c6ea-4e6d-83ef-7c85c1184aa7</TestId>
+          <TestName Type="System.String">ClickInfoWindow</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\ClickInfoWindow.aii</TestPath>
+          <TestStepNumber Type="System.Int32">7</TestStepNumber>
+          <Order Type="System.Int32">8</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+      </AutomationStepResults>
+      <NotRunStepDescriptions />
+      <PerStepMessages Type="System.String">Overall Result: Pass
+------------------------------------------------------------
+'8/18/2011 11:30:13 AM' - Starting execution....
+'8/18/2011 11:30:14 AM' - Detected custom code in test. Locating test assembly: AeroViewr.dll.
+'8/18/2011 11:30:14 AM' - Assembly Found: C:\work\GitHub\kendo\functional-tests\AeroViewr\bin\AeroViewr.dll
+'8/18/2011 11:30:14 AM' - Loading code class: 'AeroViewr.ClickInfoWindow'.
+------------------------------------------------------------
+'8/18/2011 11:30:14 AM' - 'Pass' : 1. Navigate to : '/aeroviewr/'
+'8/18/2011 11:30:17 AM' - 'Pass' : 2. Wait for '3000' msec.
+'8/18/2011 11:30:18 AM' - 'Pass' : 3. Click 'TechnicolorImage'
+'8/18/2011 11:30:20 AM' - 'Pass' : 4. Wait for '2000' msec.
+'8/18/2011 11:30:20 AM' - 'Pass' : 5. Verify element 'TechnicolorH2Tag' 'is' visible.
+'8/18/2011 11:30:20 AM' - 'Pass' : 6. Click 'Span'
+'8/18/2011 11:30:21 AM' - 'Pass' : 7. Wait for '1000' msec.
+'8/18/2011 11:30:21 AM' - 'Pass' : 8. [ClickInfoWindow_CodedStep1] : @"Verify 'InnerText' 'Contains' 'technicolor dreamskies over eagle lake' on 'TechnicolorSpan' - ASSERT INFO WINDOW CORRESPONDS TO HTE IMAGE LOADED
+------------------------------------------------------------
+'8/18/2011 11:30:21 AM' - Overall Result: Pass
+'8/18/2011 11:30:21 AM' - Duration: [0 min: 7 sec: 235 msec]
+------------------------------------------------------------
+'8/18/2011 11:30:22 AM' - Test completed!
+</PerStepMessages>
+      <TotalNumberOfPassedSteps Type="System.Int32">8</TotalNumberOfPassedSteps>
+      <ExecutingTestStepCount Type="System.Int32">8</ExecutingTestStepCount>
+      <TotalNumberOfNotRunSteps Type="System.Int32">0</TotalNumberOfNotRunSteps>
+      <IsDataDrivenResult Type="System.Boolean">False</IsDataDrivenResult>
+      <SeparatorLineCharCount Type="System.Int32">60</SeparatorLineCharCount>
+      <ExecutionType Type="ArtOfTest.Common.Design.ExecutionType">QuickExecution</ExecutionType>
+      <EndTime Type="System.DateTime">2011-08-18 08:30:21Z</EndTime>
+      <StarTime Type="System.DateTime">2011-08-18 08:30:14Z</StarTime>
+      <DataIterationResults />
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestResult" Version="2011.1.729.0">
+      <TestId Type="System.String">66a11db1-2d67-4448-a7d5-213740fbf5e6</TestId>
+      <TestName Type="System.String">GlassManyTimes</TestName>
+      <TestPath Type="System.String">TestProject2\AeroViewr\GlassManyTimes.aii</TestPath>
+      <ProjectPath Type="System.String">
+      </ProjectPath>
+      <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+      <AutomationStepResults>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Navigate to : '/aeroviewr/'</StepDescription>
+          <TestId Type="System.String">66a11db1-2d67-4448-a7d5-213740fbf5e6</TestId>
+          <TestName Type="System.String">GlassManyTimes</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\GlassManyTimes.aii</TestPath>
+          <TestStepNumber Type="System.Int32">0</TestStepNumber>
+          <Order Type="System.Int32">1</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Wait for '1000' msec.</StepDescription>
+          <TestId Type="System.String">66a11db1-2d67-4448-a7d5-213740fbf5e6</TestId>
+          <TestName Type="System.String">GlassManyTimes</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\GlassManyTimes.aii</TestPath>
+          <TestStepNumber Type="System.Int32">1</TestStepNumber>
+          <Order Type="System.Int32">2</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Set 'SearchBoxText' text to 'jghjfghjf'</StepDescription>
+          <TestId Type="System.String">66a11db1-2d67-4448-a7d5-213740fbf5e6</TestId>
+          <TestName Type="System.String">GlassManyTimes</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\GlassManyTimes.aii</TestPath>
+          <TestStepNumber Type="System.Int32">2</TestStepNumber>
+          <Order Type="System.Int32">3</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Click 'SearchLink'</StepDescription>
+          <TestId Type="System.String">66a11db1-2d67-4448-a7d5-213740fbf5e6</TestId>
+          <TestName Type="System.String">GlassManyTimes</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\GlassManyTimes.aii</TestPath>
+          <TestStepNumber Type="System.Int32">3</TestStepNumber>
+          <Order Type="System.Int32">4</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Click 'SearchLink'</StepDescription>
+          <TestId Type="System.String">66a11db1-2d67-4448-a7d5-213740fbf5e6</TestId>
+          <TestName Type="System.String">GlassManyTimes</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\GlassManyTimes.aii</TestPath>
+          <TestStepNumber Type="System.Int32">4</TestStepNumber>
+          <Order Type="System.Int32">5</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Click 'SearchLink'</StepDescription>
+          <TestId Type="System.String">66a11db1-2d67-4448-a7d5-213740fbf5e6</TestId>
+          <TestName Type="System.String">GlassManyTimes</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\GlassManyTimes.aii</TestPath>
+          <TestStepNumber Type="System.Int32">5</TestStepNumber>
+          <Order Type="System.Int32">6</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Click 'SearchLink'</StepDescription>
+          <TestId Type="System.String">66a11db1-2d67-4448-a7d5-213740fbf5e6</TestId>
+          <TestName Type="System.String">GlassManyTimes</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\GlassManyTimes.aii</TestPath>
+          <TestStepNumber Type="System.Int32">6</TestStepNumber>
+          <Order Type="System.Int32">7</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Click 'SearchLink'</StepDescription>
+          <TestId Type="System.String">66a11db1-2d67-4448-a7d5-213740fbf5e6</TestId>
+          <TestName Type="System.String">GlassManyTimes</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\GlassManyTimes.aii</TestPath>
+          <TestStepNumber Type="System.Int32">7</TestStepNumber>
+          <Order Type="System.Int32">8</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Wait for 'TextContent' 'Contains' 'No images found' on 'NoimagesDiv'</StepDescription>
+          <TestId Type="System.String">66a11db1-2d67-4448-a7d5-213740fbf5e6</TestId>
+          <TestName Type="System.String">GlassManyTimes</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\GlassManyTimes.aii</TestPath>
+          <TestStepNumber Type="System.Int32">8</TestStepNumber>
+          <Order Type="System.Int32">9</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Verify 'TextContent' 'Contains' 'No images found' on 'NoimagesDiv'</StepDescription>
+          <TestId Type="System.String">66a11db1-2d67-4448-a7d5-213740fbf5e6</TestId>
+          <TestName Type="System.String">GlassManyTimes</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\GlassManyTimes.aii</TestPath>
+          <TestStepNumber Type="System.Int32">9</TestStepNumber>
+          <Order Type="System.Int32">10</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+      </AutomationStepResults>
+      <NotRunStepDescriptions />
+      <PerStepMessages Type="System.String">Overall Result: Pass
+------------------------------------------------------------
+'8/18/2011 11:30:22 AM' - Starting execution....
+------------------------------------------------------------
+'8/18/2011 11:30:24 AM' - 'Pass' : 1. Navigate to : '/aeroviewr/'
+'8/18/2011 11:30:25 AM' - 'Pass' : 2. Wait for '1000' msec.
+'8/18/2011 11:30:25 AM' - 'Pass' : 3. Set 'SearchBoxText' text to 'jghjfghjf'
+'8/18/2011 11:30:26 AM' - 'Pass' : 4. Click 'SearchLink'
+'8/18/2011 11:30:26 AM' - 'Pass' : 5. Click 'SearchLink'
+'8/18/2011 11:30:26 AM' - 'Pass' : 6. Click 'SearchLink'
+'8/18/2011 11:30:26 AM' - 'Pass' : 7. Click 'SearchLink'
+'8/18/2011 11:30:26 AM' - 'Pass' : 8. Click 'SearchLink'
+'8/18/2011 11:30:27 AM' - 'Pass' : 9. Wait for 'TextContent' 'Contains' 'No images found' on 'NoimagesDiv'
+'8/18/2011 11:30:27 AM' - 'Pass' : 10. Verify 'TextContent' 'Contains' 'No images found' on 'NoimagesDiv'
+------------------------------------------------------------
+'8/18/2011 11:30:27 AM' - Overall Result: Pass
+'8/18/2011 11:30:27 AM' - Duration: [0 min: 3 sec: 619 msec]
+------------------------------------------------------------
+'8/18/2011 11:30:27 AM' - Test completed!
+</PerStepMessages>
+      <TotalNumberOfPassedSteps Type="System.Int32">10</TotalNumberOfPassedSteps>
+      <ExecutingTestStepCount Type="System.Int32">10</ExecutingTestStepCount>
+      <TotalNumberOfNotRunSteps Type="System.Int32">0</TotalNumberOfNotRunSteps>
+      <IsDataDrivenResult Type="System.Boolean">False</IsDataDrivenResult>
+      <SeparatorLineCharCount Type="System.Int32">60</SeparatorLineCharCount>
+      <ExecutionType Type="ArtOfTest.Common.Design.ExecutionType">QuickExecution</ExecutionType>
+      <EndTime Type="System.DateTime">2011-08-18 08:30:27Z</EndTime>
+      <StarTime Type="System.DateTime">2011-08-18 08:30:23Z</StarTime>
+      <DataIterationResults />
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestResult" Version="2011.1.729.0">
+      <TestId Type="System.String">e00b90f3-db1f-45f4-b140-c7add24427af</TestId>
+      <TestName Type="System.String">ListViewSlider</TestName>
+      <TestPath Type="System.String">TestProject2\AeroViewr\ListViewSlider.aii</TestPath>
+      <ProjectPath Type="System.String">
+      </ProjectPath>
+      <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+      <AutomationStepResults>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Navigate to : '/aeroviewr/'</StepDescription>
+          <TestId Type="System.String">e00b90f3-db1f-45f4-b140-c7add24427af</TestId>
+          <TestName Type="System.String">ListViewSlider</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\ListViewSlider.aii</TestPath>
+          <TestStepNumber Type="System.Int32">0</TestStepNumber>
+          <Order Type="System.Int32">1</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Wait for '3000' msec.</StepDescription>
+          <TestId Type="System.String">e00b90f3-db1f-45f4-b140-c7add24427af</TestId>
+          <TestName Type="System.String">ListViewSlider</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\ListViewSlider.aii</TestPath>
+          <TestStepNumber Type="System.Int32">1</TestStepNumber>
+          <Order Type="System.Int32">2</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Set 'SearchBoxText' text to 'kendo'</StepDescription>
+          <TestId Type="System.String">e00b90f3-db1f-45f4-b140-c7add24427af</TestId>
+          <TestName Type="System.String">ListViewSlider</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\ListViewSlider.aii</TestPath>
+          <TestStepNumber Type="System.Int32">2</TestStepNumber>
+          <Order Type="System.Int32">3</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Click 'SearchLink'</StepDescription>
+          <TestId Type="System.String">e00b90f3-db1f-45f4-b140-c7add24427af</TestId>
+          <TestName Type="System.String">ListViewSlider</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\ListViewSlider.aii</TestPath>
+          <TestStepNumber Type="System.Int32">3</TestStepNumber>
+          <Order Type="System.Int32">4</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Desktop command: Drag &amp; Drop DragLink to Window Target</StepDescription>
+          <TestId Type="System.String">e00b90f3-db1f-45f4-b140-c7add24427af</TestId>
+          <TestName Type="System.String">ListViewSlider</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\ListViewSlider.aii</TestPath>
+          <TestStepNumber Type="System.Int32">4</TestStepNumber>
+          <Order Type="System.Int32">5</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Wait for '1500' msec.</StepDescription>
+          <TestId Type="System.String">e00b90f3-db1f-45f4-b140-c7add24427af</TestId>
+          <TestName Type="System.String">ListViewSlider</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\ListViewSlider.aii</TestPath>
+          <TestStepNumber Type="System.Int32">5</TestStepNumber>
+          <Order Type="System.Int32">6</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Verify element 'x10Link' 'is' visible.</StepDescription>
+          <TestId Type="System.String">e00b90f3-db1f-45f4-b140-c7add24427af</TestId>
+          <TestName Type="System.String">ListViewSlider</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\ListViewSlider.aii</TestPath>
+          <TestStepNumber Type="System.Int32">6</TestStepNumber>
+          <Order Type="System.Int32">7</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+      </AutomationStepResults>
+      <NotRunStepDescriptions />
+      <PerStepMessages Type="System.String">Overall Result: Pass
+------------------------------------------------------------
+'8/18/2011 11:30:28 AM' - Starting execution....
+------------------------------------------------------------
+'8/18/2011 11:30:30 AM' - 'Pass' : 1. Navigate to : '/aeroviewr/'
+'8/18/2011 11:30:33 AM' - 'Pass' : 2. Wait for '3000' msec.
+'8/18/2011 11:30:33 AM' - 'Pass' : 3. Set 'SearchBoxText' text to 'kendo'
+'8/18/2011 11:30:33 AM' - 'Pass' : 4. Click 'SearchLink'
+'8/18/2011 11:30:40 AM' - 'Pass' : 5. Desktop command: Drag &amp; Drop DragLink to Window Target
+'8/18/2011 11:30:41 AM' - 'Pass' : 6. Wait for '1500' msec.
+'8/18/2011 11:30:43 AM' - 'Pass' : 7. Verify element 'x10Link' 'is' visible.
+------------------------------------------------------------
+'8/18/2011 11:30:43 AM' - Overall Result: Pass
+'8/18/2011 11:30:43 AM' - Duration: [0 min: 13 sec: 530 msec]
+------------------------------------------------------------
+'8/18/2011 11:30:43 AM' - Test completed!
+</PerStepMessages>
+      <TotalNumberOfPassedSteps Type="System.Int32">7</TotalNumberOfPassedSteps>
+      <ExecutingTestStepCount Type="System.Int32">7</ExecutingTestStepCount>
+      <TotalNumberOfNotRunSteps Type="System.Int32">0</TotalNumberOfNotRunSteps>
+      <IsDataDrivenResult Type="System.Boolean">False</IsDataDrivenResult>
+      <SeparatorLineCharCount Type="System.Int32">60</SeparatorLineCharCount>
+      <ExecutionType Type="ArtOfTest.Common.Design.ExecutionType">QuickExecution</ExecutionType>
+      <EndTime Type="System.DateTime">2011-08-18 08:30:43Z</EndTime>
+      <StarTime Type="System.DateTime">2011-08-18 08:30:29Z</StarTime>
+      <DataIterationResults />
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestResult" Version="2011.1.729.0">
+      <TestId Type="System.String">1717c04f-9fa1-469b-bd54-772018aa114c</TestId>
+      <TestName Type="System.String">LogIn</TestName>
+      <TestPath Type="System.String">TestProject2\AeroViewr\LogIn.aii</TestPath>
+      <ProjectPath Type="System.String">
+      </ProjectPath>
+      <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+      <AutomationStepResults>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Navigate to : 'http://www.flickr.com'</StepDescription>
+          <TestId Type="System.String">1717c04f-9fa1-469b-bd54-772018aa114c</TestId>
+          <TestName Type="System.String">LogIn</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\LogIn.aii</TestPath>
+          <TestStepNumber Type="System.Int32">0</TestStepNumber>
+          <Order Type="System.Int32">1</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.Execution.LogicalStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">IF (Verify Exists 'EditYourImage') THEN</StepDescription>
+          <TestId Type="System.String">1717c04f-9fa1-469b-bd54-772018aa114c</TestId>
+          <TestName Type="System.String">LogIn</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\LogIn.aii</TestPath>
+          <TestStepNumber Type="System.Int32">1</TestStepNumber>
+          <Order Type="System.Int32">2</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+          <TestResult Type="ArtOfTest.WebAii.Design.Execution.TestResult" Version="2011.1.729.0">
+            <TestId Type="System.String">1717c04f-9fa1-469b-bd54-772018aa114c</TestId>
+            <TestName Type="System.String">LogIn</TestName>
+            <TestPath Type="System.String">TestProject2\AeroViewr\LogIn.aii</TestPath>
+            <ProjectPath Type="System.String">
+            </ProjectPath>
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <AutomationStepResults />
+            <NotRunStepDescriptions>
+              <Item Type="System.String">Navigate to : 'http://www.flickr.com'</Item>
+              <Item Type="System.String">IF (Verify Exists 'EditYourImage') THEN</Item>
+              <Item Type="System.String">Navigate to : '/aeroviewr/'</Item>
+              <Item Type="System.String">Wait for '250' msec.</Item>
+              <Item Type="System.String">IF (Verify 'TextContent' 'Contains' 'Sign in' on 'SigninLink') THEN</Item>
+            </NotRunStepDescriptions>
+            <PerStepMessages Type="System.String">
+            </PerStepMessages>
+            <TotalNumberOfPassedSteps Type="System.Int32">0</TotalNumberOfPassedSteps>
+            <ExecutingTestStepCount Type="System.Int32">0</ExecutingTestStepCount>
+            <TotalNumberOfNotRunSteps Type="System.Int32">0</TotalNumberOfNotRunSteps>
+            <IsDataDrivenResult Type="System.Boolean">False</IsDataDrivenResult>
+            <SeparatorLineCharCount Type="System.Int32">60</SeparatorLineCharCount>
+            <ExecutionType Type="ArtOfTest.Common.Design.ExecutionType">QuickExecution</ExecutionType>
+            <EndTime Type="System.DateTime">2011-08-18 08:30:48Z</EndTime>
+            <StarTime Type="System.DateTime">2011-08-18 08:30:48Z</StarTime>
+            <DataIterationResults />
+          </TestResult>
+          <innerResult Type="ArtOfTest.WebAii.Design.Execution.TestResult" Version="2011.1.729.0">
+            <TestId Type="System.String">1717c04f-9fa1-469b-bd54-772018aa114c</TestId>
+            <TestName Type="System.String">
+            </TestName>
+            <ProjectPath Type="System.String">
+            </ProjectPath>
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <AutomationStepResults>
+              <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+                <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+                <StepDescription Type="System.String">Navigate to : '/aeroviewr/'</StepDescription>
+                <TestId Type="System.String">1717c04f-9fa1-469b-bd54-772018aa114c</TestId>
+                <TestName Type="System.String">LogIn</TestName>
+                <TestPath Type="System.String">TestProject2\AeroViewr\LogIn.aii</TestPath>
+                <TestStepNumber Type="System.Int32">0</TestStepNumber>
+                <Order Type="System.Int32">3</Order>
+                <LogMessageOnError Type="System.String">
+                </LogMessageOnError>
+              </Item>
+            </AutomationStepResults>
+            <NotRunStepDescriptions />
+            <PerStepMessages Type="System.String">'8/18/2011 11:30:49 AM' - 'Pass' : 3. Navigate to : '/aeroviewr/'
+</PerStepMessages>
+            <TotalNumberOfPassedSteps Type="System.Int32">1</TotalNumberOfPassedSteps>
+            <ExecutingTestStepCount Type="System.Int32">1</ExecutingTestStepCount>
+            <TotalNumberOfNotRunSteps Type="System.Int32">0</TotalNumberOfNotRunSteps>
+            <IsDataDrivenResult Type="System.Boolean">False</IsDataDrivenResult>
+            <SeparatorLineCharCount Type="System.Int32">60</SeparatorLineCharCount>
+            <ExecutionType Type="ArtOfTest.Common.Design.ExecutionType">QuickExecution</ExecutionType>
+            <EndTime Type="System.DateTime">2011-08-18 08:30:48Z</EndTime>
+            <StarTime Type="System.DateTime">2011-08-18 08:30:48Z</StarTime>
+            <DataIterationResults />
+          </innerResult>
+          <logicDetails Type="System.String">Condition Evaluation Details:
+</logicDetails>
+          <loopIteration Type="System.Int32">1</loopIteration>
+          <isLoop Type="System.Boolean">False</isLoop>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Navigate to : '/aeroviewr/'</StepDescription>
+          <TestId Type="System.String">1717c04f-9fa1-469b-bd54-772018aa114c</TestId>
+          <TestName Type="System.String">LogIn</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\LogIn.aii</TestPath>
+          <TestStepNumber Type="System.Int32">2</TestStepNumber>
+          <Order Type="System.Int32">17</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Wait for '250' msec.</StepDescription>
+          <TestId Type="System.String">1717c04f-9fa1-469b-bd54-772018aa114c</TestId>
+          <TestName Type="System.String">LogIn</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\LogIn.aii</TestPath>
+          <TestStepNumber Type="System.Int32">3</TestStepNumber>
+          <Order Type="System.Int32">18</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.Execution.LogicalStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">IF (Verify 'TextContent' 'Contains' 'Sign in' on 'SigninLink') THEN</StepDescription>
+          <TestId Type="System.String">1717c04f-9fa1-469b-bd54-772018aa114c</TestId>
+          <TestName Type="System.String">LogIn</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\LogIn.aii</TestPath>
+          <TestStepNumber Type="System.Int32">4</TestStepNumber>
+          <Order Type="System.Int32">19</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+          <TestResult Type="ArtOfTest.WebAii.Design.Execution.TestResult" Version="2011.1.729.0">
+            <TestId Type="System.String">1717c04f-9fa1-469b-bd54-772018aa114c</TestId>
+            <TestName Type="System.String">LogIn</TestName>
+            <TestPath Type="System.String">TestProject2\AeroViewr\LogIn.aii</TestPath>
+            <ProjectPath Type="System.String">
+            </ProjectPath>
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <AutomationStepResults />
+            <NotRunStepDescriptions>
+              <Item Type="System.String">Navigate to : 'http://www.flickr.com'</Item>
+              <Item Type="System.String">IF (Verify Exists 'EditYourImage') THEN</Item>
+              <Item Type="System.String">Navigate to : '/aeroviewr/'</Item>
+              <Item Type="System.String">Wait for '250' msec.</Item>
+              <Item Type="System.String">IF (Verify 'TextContent' 'Contains' 'Sign in' on 'SigninLink') THEN</Item>
+            </NotRunStepDescriptions>
+            <PerStepMessages Type="System.String">
+            </PerStepMessages>
+            <TotalNumberOfPassedSteps Type="System.Int32">0</TotalNumberOfPassedSteps>
+            <ExecutingTestStepCount Type="System.Int32">0</ExecutingTestStepCount>
+            <TotalNumberOfNotRunSteps Type="System.Int32">0</TotalNumberOfNotRunSteps>
+            <IsDataDrivenResult Type="System.Boolean">False</IsDataDrivenResult>
+            <SeparatorLineCharCount Type="System.Int32">60</SeparatorLineCharCount>
+            <ExecutionType Type="ArtOfTest.Common.Design.ExecutionType">QuickExecution</ExecutionType>
+            <EndTime Type="System.DateTime">2011-08-18 08:30:49Z</EndTime>
+            <StarTime Type="System.DateTime">2011-08-18 08:30:49Z</StarTime>
+            <DataIterationResults />
+          </TestResult>
+          <innerResult Type="ArtOfTest.WebAii.Design.Execution.TestResult" Version="2011.1.729.0">
+            <TestId Type="System.String">1717c04f-9fa1-469b-bd54-772018aa114c</TestId>
+            <TestName Type="System.String">
+            </TestName>
+            <ProjectPath Type="System.String">
+            </ProjectPath>
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <AutomationStepResults>
+              <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+                <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+                <StepDescription Type="System.String">Click 'SigninLink'</StepDescription>
+                <TestId Type="System.String">1717c04f-9fa1-469b-bd54-772018aa114c</TestId>
+                <TestName Type="System.String">LogIn</TestName>
+                <TestPath Type="System.String">TestProject2\AeroViewr\LogIn.aii</TestPath>
+                <TestStepNumber Type="System.Int32">0</TestStepNumber>
+                <Order Type="System.Int32">20</Order>
+                <LogMessageOnError Type="System.String">
+                </LogMessageOnError>
+              </Item>
+              <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+                <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+                <StepDescription Type="System.String">Verify 'InnerText' 'Contains' 'Signed in as' on 'UserInfoSpan'</StepDescription>
+                <TestId Type="System.String">1717c04f-9fa1-469b-bd54-772018aa114c</TestId>
+                <TestName Type="System.String">LogIn</TestName>
+                <TestPath Type="System.String">TestProject2\AeroViewr\LogIn.aii</TestPath>
+                <TestStepNumber Type="System.Int32">1</TestStepNumber>
+                <Order Type="System.Int32">21</Order>
+                <LogMessageOnError Type="System.String">
+                </LogMessageOnError>
+              </Item>
+            </AutomationStepResults>
+            <NotRunStepDescriptions />
+            <PerStepMessages Type="System.String">'8/18/2011 11:30:51 AM' - 'Pass' : 20. Click 'SigninLink'
+'8/18/2011 11:30:51 AM' - 'Pass' : 21. Verify 'InnerText' 'Contains' 'Signed in as' on 'UserInfoSpan'
+</PerStepMessages>
+            <TotalNumberOfPassedSteps Type="System.Int32">2</TotalNumberOfPassedSteps>
+            <ExecutingTestStepCount Type="System.Int32">2</ExecutingTestStepCount>
+            <TotalNumberOfNotRunSteps Type="System.Int32">0</TotalNumberOfNotRunSteps>
+            <IsDataDrivenResult Type="System.Boolean">False</IsDataDrivenResult>
+            <SeparatorLineCharCount Type="System.Int32">60</SeparatorLineCharCount>
+            <ExecutionType Type="ArtOfTest.Common.Design.ExecutionType">QuickExecution</ExecutionType>
+            <EndTime Type="System.DateTime">2011-08-18 08:30:49Z</EndTime>
+            <StarTime Type="System.DateTime">2011-08-18 08:30:49Z</StarTime>
+            <DataIterationResults />
+          </innerResult>
+          <logicDetails Type="System.String">Condition Evaluation Details:
+
+Parameters:
+-----------
+TagSegmentType  = 'TextContent'
+CompareType     = 'Contains'
+ExpectedString  = Expected:[Sign in] , Actual:[Sign in]
+</logicDetails>
+          <loopIteration Type="System.Int32">1</loopIteration>
+          <isLoop Type="System.Boolean">False</isLoop>
+        </Item>
+      </AutomationStepResults>
+      <NotRunStepDescriptions />
+      <PerStepMessages Type="System.String">Overall Result: Pass
+------------------------------------------------------------
+'8/18/2011 11:30:44 AM' - Starting execution....
+------------------------------------------------------------
+'8/18/2011 11:30:48 AM' - 'Pass' : 1. Navigate to : 'http://www.flickr.com'
+'8/18/2011 11:30:49 AM' - 'Pass' : 2. IF (Verify Exists 'EditYourImage') THEN
+Logical step encountered. Executing branch =&gt; IF (Verify Exists 'EditYourImage') THEN:
+------------------------------------------------------------
+Condition Evaluation Details:
+
+------------------------------------------------------------
+'8/18/2011 11:30:49 AM' - 'Pass' : 3. Navigate to : '/aeroviewr/'
+
+'8/18/2011 11:30:49 AM' - 'Pass' : 17. Navigate to : '/aeroviewr/'
+'8/18/2011 11:30:49 AM' - 'Pass' : 18. Wait for '250' msec.
+'8/18/2011 11:30:51 AM' - 'Pass' : 19. IF (Verify 'TextContent' 'Contains' 'Sign in' on 'SigninLink') THEN
+Logical step encountered. Executing branch =&gt; IF (Verify 'TextContent' 'Contains' 'Sign in' on 'SigninLink') THEN:
+------------------------------------------------------------
+Condition Evaluation Details:
+
+Parameters:
+-----------
+TagSegmentType  = 'TextContent'
+CompareType     = 'Contains'
+ExpectedString  = Expected:[Sign in] , Actual:[Sign in]
+
+------------------------------------------------------------
+'8/18/2011 11:30:51 AM' - 'Pass' : 20. Click 'SigninLink'
+'8/18/2011 11:30:51 AM' - 'Pass' : 21. Verify 'InnerText' 'Contains' 'Signed in as' on 'UserInfoSpan'
+
+------------------------------------------------------------
+'8/18/2011 11:30:51 AM' - Overall Result: Pass
+'8/18/2011 11:30:51 AM' - Duration: [0 min: 5 sec: 824 msec]
+------------------------------------------------------------
+'8/18/2011 11:30:51 AM' - Test completed!
+</PerStepMessages>
+      <TotalNumberOfPassedSteps Type="System.Int32">5</TotalNumberOfPassedSteps>
+      <ExecutingTestStepCount Type="System.Int32">5</ExecutingTestStepCount>
+      <TotalNumberOfNotRunSteps Type="System.Int32">0</TotalNumberOfNotRunSteps>
+      <IsDataDrivenResult Type="System.Boolean">False</IsDataDrivenResult>
+      <SeparatorLineCharCount Type="System.Int32">60</SeparatorLineCharCount>
+      <ExecutionType Type="ArtOfTest.Common.Design.ExecutionType">QuickExecution</ExecutionType>
+      <EndTime Type="System.DateTime">2011-08-18 08:30:51Z</EndTime>
+      <StarTime Type="System.DateTime">2011-08-18 08:30:45Z</StarTime>
+      <DataIterationResults />
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestResult" Version="2011.1.729.0">
+      <TestId Type="System.String">7ab8648a-7941-4ef6-9c1f-592616353a51</TestId>
+      <TestName Type="System.String">LogInlLogOut</TestName>
+      <TestPath Type="System.String">TestProject2\AeroViewr\LogInlLogOut.aii</TestPath>
+      <ProjectPath Type="System.String">
+      </ProjectPath>
+      <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+      <AutomationStepResults>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Navigate to : 'http://www.flickr.com'</StepDescription>
+          <TestId Type="System.String">7ab8648a-7941-4ef6-9c1f-592616353a51</TestId>
+          <TestName Type="System.String">LogInlLogOut</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\LogInlLogOut.aii</TestPath>
+          <TestStepNumber Type="System.Int32">0</TestStepNumber>
+          <Order Type="System.Int32">1</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.Execution.LogicalStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">IF (Verify Exists 'EditYourImage') THEN</StepDescription>
+          <TestId Type="System.String">7ab8648a-7941-4ef6-9c1f-592616353a51</TestId>
+          <TestName Type="System.String">LogInlLogOut</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\LogInlLogOut.aii</TestPath>
+          <TestStepNumber Type="System.Int32">1</TestStepNumber>
+          <Order Type="System.Int32">2</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+          <TestResult Type="ArtOfTest.WebAii.Design.Execution.TestResult" Version="2011.1.729.0">
+            <TestId Type="System.String">7ab8648a-7941-4ef6-9c1f-592616353a51</TestId>
+            <TestName Type="System.String">LogInlLogOut</TestName>
+            <TestPath Type="System.String">TestProject2\AeroViewr\LogInlLogOut.aii</TestPath>
+            <ProjectPath Type="System.String">
+            </ProjectPath>
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <AutomationStepResults />
+            <NotRunStepDescriptions>
+              <Item Type="System.String">Navigate to : 'http://www.flickr.com'</Item>
+              <Item Type="System.String">IF (Verify Exists 'EditYourImage') THEN</Item>
+              <Item Type="System.String">Navigate to : '/aeroviewr/'</Item>
+              <Item Type="System.String">Wait for '250' msec.</Item>
+              <Item Type="System.String">IF (Verify 'TextContent' 'Contains' 'Sign in' on 'SigninLink') THEN</Item>
+            </NotRunStepDescriptions>
+            <PerStepMessages Type="System.String">
+            </PerStepMessages>
+            <TotalNumberOfPassedSteps Type="System.Int32">0</TotalNumberOfPassedSteps>
+            <ExecutingTestStepCount Type="System.Int32">0</ExecutingTestStepCount>
+            <TotalNumberOfNotRunSteps Type="System.Int32">0</TotalNumberOfNotRunSteps>
+            <IsDataDrivenResult Type="System.Boolean">False</IsDataDrivenResult>
+            <SeparatorLineCharCount Type="System.Int32">60</SeparatorLineCharCount>
+            <ExecutionType Type="ArtOfTest.Common.Design.ExecutionType">QuickExecution</ExecutionType>
+            <EndTime Type="System.DateTime">2011-08-18 08:30:57Z</EndTime>
+            <StarTime Type="System.DateTime">2011-08-18 08:30:57Z</StarTime>
+            <DataIterationResults />
+          </TestResult>
+          <innerResult Type="ArtOfTest.WebAii.Design.Execution.TestResult" Version="2011.1.729.0">
+            <TestId Type="System.String">7ab8648a-7941-4ef6-9c1f-592616353a51</TestId>
+            <TestName Type="System.String">
+            </TestName>
+            <ProjectPath Type="System.String">
+            </ProjectPath>
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <AutomationStepResults>
+              <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+                <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+                <StepDescription Type="System.String">Navigate to : '/aeroviewr/'</StepDescription>
+                <TestId Type="System.String">7ab8648a-7941-4ef6-9c1f-592616353a51</TestId>
+                <TestName Type="System.String">LogInlLogOut</TestName>
+                <TestPath Type="System.String">TestProject2\AeroViewr\LogInlLogOut.aii</TestPath>
+                <TestStepNumber Type="System.Int32">0</TestStepNumber>
+                <Order Type="System.Int32">3</Order>
+                <LogMessageOnError Type="System.String">
+                </LogMessageOnError>
+              </Item>
+            </AutomationStepResults>
+            <NotRunStepDescriptions />
+            <PerStepMessages Type="System.String">'8/18/2011 11:30:58 AM' - 'Pass' : 3. Navigate to : '/aeroviewr/'
+</PerStepMessages>
+            <TotalNumberOfPassedSteps Type="System.Int32">1</TotalNumberOfPassedSteps>
+            <ExecutingTestStepCount Type="System.Int32">1</ExecutingTestStepCount>
+            <TotalNumberOfNotRunSteps Type="System.Int32">0</TotalNumberOfNotRunSteps>
+            <IsDataDrivenResult Type="System.Boolean">False</IsDataDrivenResult>
+            <SeparatorLineCharCount Type="System.Int32">60</SeparatorLineCharCount>
+            <ExecutionType Type="ArtOfTest.Common.Design.ExecutionType">QuickExecution</ExecutionType>
+            <EndTime Type="System.DateTime">2011-08-18 08:30:57Z</EndTime>
+            <StarTime Type="System.DateTime">2011-08-18 08:30:57Z</StarTime>
+            <DataIterationResults />
+          </innerResult>
+          <logicDetails Type="System.String">Condition Evaluation Details:
+</logicDetails>
+          <loopIteration Type="System.Int32">1</loopIteration>
+          <isLoop Type="System.Boolean">False</isLoop>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Navigate to : '/aeroviewr/'</StepDescription>
+          <TestId Type="System.String">7ab8648a-7941-4ef6-9c1f-592616353a51</TestId>
+          <TestName Type="System.String">LogInlLogOut</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\LogInlLogOut.aii</TestPath>
+          <TestStepNumber Type="System.Int32">2</TestStepNumber>
+          <Order Type="System.Int32">17</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Wait for '250' msec.</StepDescription>
+          <TestId Type="System.String">7ab8648a-7941-4ef6-9c1f-592616353a51</TestId>
+          <TestName Type="System.String">LogInlLogOut</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\LogInlLogOut.aii</TestPath>
+          <TestStepNumber Type="System.Int32">3</TestStepNumber>
+          <Order Type="System.Int32">18</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.Execution.LogicalStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">IF (Verify 'TextContent' 'Contains' 'Sign in' on 'SigninLink') THEN</StepDescription>
+          <TestId Type="System.String">7ab8648a-7941-4ef6-9c1f-592616353a51</TestId>
+          <TestName Type="System.String">LogInlLogOut</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\LogInlLogOut.aii</TestPath>
+          <TestStepNumber Type="System.Int32">4</TestStepNumber>
+          <Order Type="System.Int32">19</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+          <TestResult Type="ArtOfTest.WebAii.Design.Execution.TestResult" Version="2011.1.729.0">
+            <TestId Type="System.String">7ab8648a-7941-4ef6-9c1f-592616353a51</TestId>
+            <TestName Type="System.String">LogInlLogOut</TestName>
+            <TestPath Type="System.String">TestProject2\AeroViewr\LogInlLogOut.aii</TestPath>
+            <ProjectPath Type="System.String">
+            </ProjectPath>
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <AutomationStepResults />
+            <NotRunStepDescriptions>
+              <Item Type="System.String">Navigate to : 'http://www.flickr.com'</Item>
+              <Item Type="System.String">IF (Verify Exists 'EditYourImage') THEN</Item>
+              <Item Type="System.String">Navigate to : '/aeroviewr/'</Item>
+              <Item Type="System.String">Wait for '250' msec.</Item>
+              <Item Type="System.String">IF (Verify 'TextContent' 'Contains' 'Sign in' on 'SigninLink') THEN</Item>
+            </NotRunStepDescriptions>
+            <PerStepMessages Type="System.String">
+            </PerStepMessages>
+            <TotalNumberOfPassedSteps Type="System.Int32">0</TotalNumberOfPassedSteps>
+            <ExecutingTestStepCount Type="System.Int32">0</ExecutingTestStepCount>
+            <TotalNumberOfNotRunSteps Type="System.Int32">0</TotalNumberOfNotRunSteps>
+            <IsDataDrivenResult Type="System.Boolean">False</IsDataDrivenResult>
+            <SeparatorLineCharCount Type="System.Int32">60</SeparatorLineCharCount>
+            <ExecutionType Type="ArtOfTest.Common.Design.ExecutionType">QuickExecution</ExecutionType>
+            <EndTime Type="System.DateTime">2011-08-18 08:30:58Z</EndTime>
+            <StarTime Type="System.DateTime">2011-08-18 08:30:58Z</StarTime>
+            <DataIterationResults />
+          </TestResult>
+          <innerResult Type="ArtOfTest.WebAii.Design.Execution.TestResult" Version="2011.1.729.0">
+            <TestId Type="System.String">7ab8648a-7941-4ef6-9c1f-592616353a51</TestId>
+            <TestName Type="System.String">
+            </TestName>
+            <ProjectPath Type="System.String">
+            </ProjectPath>
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <AutomationStepResults>
+              <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+                <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+                <StepDescription Type="System.String">Click 'SigninLink'</StepDescription>
+                <TestId Type="System.String">7ab8648a-7941-4ef6-9c1f-592616353a51</TestId>
+                <TestName Type="System.String">LogInlLogOut</TestName>
+                <TestPath Type="System.String">TestProject2\AeroViewr\LogInlLogOut.aii</TestPath>
+                <TestStepNumber Type="System.Int32">0</TestStepNumber>
+                <Order Type="System.Int32">20</Order>
+                <LogMessageOnError Type="System.String">
+                </LogMessageOnError>
+              </Item>
+              <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+                <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+                <StepDescription Type="System.String">Verify 'InnerText' 'Contains' 'Signed in as' on 'UserInfoSpan'</StepDescription>
+                <TestId Type="System.String">7ab8648a-7941-4ef6-9c1f-592616353a51</TestId>
+                <TestName Type="System.String">LogInlLogOut</TestName>
+                <TestPath Type="System.String">TestProject2\AeroViewr\LogInlLogOut.aii</TestPath>
+                <TestStepNumber Type="System.Int32">1</TestStepNumber>
+                <Order Type="System.Int32">21</Order>
+                <LogMessageOnError Type="System.String">
+                </LogMessageOnError>
+              </Item>
+              <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+                <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+                <StepDescription Type="System.String">Click 'SignOutEmTag'</StepDescription>
+                <TestId Type="System.String">7ab8648a-7941-4ef6-9c1f-592616353a51</TestId>
+                <TestName Type="System.String">LogInlLogOut</TestName>
+                <TestPath Type="System.String">TestProject2\AeroViewr\LogInlLogOut.aii</TestPath>
+                <TestStepNumber Type="System.Int32">2</TestStepNumber>
+                <Order Type="System.Int32">22</Order>
+                <LogMessageOnError Type="System.String">
+                </LogMessageOnError>
+              </Item>
+              <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+                <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+                <StepDescription Type="System.String">Wait for 'TextContent' 'Contains' 'Sign in' on 'SigninLink'</StepDescription>
+                <TestId Type="System.String">7ab8648a-7941-4ef6-9c1f-592616353a51</TestId>
+                <TestName Type="System.String">LogInlLogOut</TestName>
+                <TestPath Type="System.String">TestProject2\AeroViewr\LogInlLogOut.aii</TestPath>
+                <TestStepNumber Type="System.Int32">3</TestStepNumber>
+                <Order Type="System.Int32">23</Order>
+                <LogMessageOnError Type="System.String">
+                </LogMessageOnError>
+              </Item>
+            </AutomationStepResults>
+            <NotRunStepDescriptions />
+            <PerStepMessages Type="System.String">'8/18/2011 11:31:00 AM' - 'Pass' : 20. Click 'SigninLink'
+'8/18/2011 11:31:00 AM' - 'Pass' : 21. Verify 'InnerText' 'Contains' 'Signed in as' on 'UserInfoSpan'
+'8/18/2011 11:31:01 AM' - 'Pass' : 22. Click 'SignOutEmTag'
+'8/18/2011 11:31:01 AM' - 'Pass' : 23. Wait for 'TextContent' 'Contains' 'Sign in' on 'SigninLink'
+</PerStepMessages>
+            <TotalNumberOfPassedSteps Type="System.Int32">4</TotalNumberOfPassedSteps>
+            <ExecutingTestStepCount Type="System.Int32">4</ExecutingTestStepCount>
+            <TotalNumberOfNotRunSteps Type="System.Int32">0</TotalNumberOfNotRunSteps>
+            <IsDataDrivenResult Type="System.Boolean">False</IsDataDrivenResult>
+            <SeparatorLineCharCount Type="System.Int32">60</SeparatorLineCharCount>
+            <ExecutionType Type="ArtOfTest.Common.Design.ExecutionType">QuickExecution</ExecutionType>
+            <EndTime Type="System.DateTime">2011-08-18 08:30:58Z</EndTime>
+            <StarTime Type="System.DateTime">2011-08-18 08:30:58Z</StarTime>
+            <DataIterationResults />
+          </innerResult>
+          <logicDetails Type="System.String">Condition Evaluation Details:
+
+Parameters:
+-----------
+TagSegmentType  = 'TextContent'
+CompareType     = 'Contains'
+ExpectedString  = Expected:[Sign in] , Actual:[Sign in]
+</logicDetails>
+          <loopIteration Type="System.Int32">1</loopIteration>
+          <isLoop Type="System.Boolean">False</isLoop>
+        </Item>
+      </AutomationStepResults>
+      <NotRunStepDescriptions />
+      <PerStepMessages Type="System.String">Overall Result: Pass
+------------------------------------------------------------
+'8/18/2011 11:30:52 AM' - Starting execution....
+------------------------------------------------------------
+'8/18/2011 11:30:57 AM' - 'Pass' : 1. Navigate to : 'http://www.flickr.com'
+'8/18/2011 11:30:58 AM' - 'Pass' : 2. IF (Verify Exists 'EditYourImage') THEN
+Logical step encountered. Executing branch =&gt; IF (Verify Exists 'EditYourImage') THEN:
+------------------------------------------------------------
+Condition Evaluation Details:
+
+------------------------------------------------------------
+'8/18/2011 11:30:58 AM' - 'Pass' : 3. Navigate to : '/aeroviewr/'
+
+'8/18/2011 11:30:58 AM' - 'Pass' : 17. Navigate to : '/aeroviewr/'
+'8/18/2011 11:30:58 AM' - 'Pass' : 18. Wait for '250' msec.
+'8/18/2011 11:31:01 AM' - 'Pass' : 19. IF (Verify 'TextContent' 'Contains' 'Sign in' on 'SigninLink') THEN
+Logical step encountered. Executing branch =&gt; IF (Verify 'TextContent' 'Contains' 'Sign in' on 'SigninLink') THEN:
+------------------------------------------------------------
+Condition Evaluation Details:
+
+Parameters:
+-----------
+TagSegmentType  = 'TextContent'
+CompareType     = 'Contains'
+ExpectedString  = Expected:[Sign in] , Actual:[Sign in]
+
+------------------------------------------------------------
+'8/18/2011 11:31:00 AM' - 'Pass' : 20. Click 'SigninLink'
+'8/18/2011 11:31:00 AM' - 'Pass' : 21. Verify 'InnerText' 'Contains' 'Signed in as' on 'UserInfoSpan'
+'8/18/2011 11:31:01 AM' - 'Pass' : 22. Click 'SignOutEmTag'
+'8/18/2011 11:31:01 AM' - 'Pass' : 23. Wait for 'TextContent' 'Contains' 'Sign in' on 'SigninLink'
+
+------------------------------------------------------------
+'8/18/2011 11:31:01 AM' - Overall Result: Pass
+'8/18/2011 11:31:01 AM' - Duration: [0 min: 7 sec: 665 msec]
+------------------------------------------------------------
+'8/18/2011 11:31:01 AM' - Test completed!
+</PerStepMessages>
+      <TotalNumberOfPassedSteps Type="System.Int32">5</TotalNumberOfPassedSteps>
+      <ExecutingTestStepCount Type="System.Int32">5</ExecutingTestStepCount>
+      <TotalNumberOfNotRunSteps Type="System.Int32">0</TotalNumberOfNotRunSteps>
+      <IsDataDrivenResult Type="System.Boolean">False</IsDataDrivenResult>
+      <SeparatorLineCharCount Type="System.Int32">60</SeparatorLineCharCount>
+      <ExecutionType Type="ArtOfTest.Common.Design.ExecutionType">QuickExecution</ExecutionType>
+      <EndTime Type="System.DateTime">2011-08-18 08:31:01Z</EndTime>
+      <StarTime Type="System.DateTime">2011-08-18 08:30:53Z</StarTime>
+      <DataIterationResults />
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestResult" Version="2011.1.729.0">
+      <TestId Type="System.String">a166859d-f0af-41a1-bc73-3b8f768a5103</TestId>
+      <TestName Type="System.String">NotLoggedSearch</TestName>
+      <TestPath Type="System.String">TestProject2\AeroViewr\NotLoggedSearch.aii</TestPath>
+      <ProjectPath Type="System.String">
+      </ProjectPath>
+      <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+      <AutomationStepResults>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Navigate to : '/aeroviewr/'</StepDescription>
+          <TestId Type="System.String">a166859d-f0af-41a1-bc73-3b8f768a5103</TestId>
+          <TestName Type="System.String">NotLoggedSearch</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\NotLoggedSearch.aii</TestPath>
+          <TestStepNumber Type="System.Int32">0</TestStepNumber>
+          <Order Type="System.Int32">1</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Wait for '3000' msec.</StepDescription>
+          <TestId Type="System.String">a166859d-f0af-41a1-bc73-3b8f768a5103</TestId>
+          <TestName Type="System.String">NotLoggedSearch</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\NotLoggedSearch.aii</TestPath>
+          <TestStepNumber Type="System.Int32">1</TestStepNumber>
+          <Order Type="System.Int32">2</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Set 'SearchBoxText' text to 'kendo'</StepDescription>
+          <TestId Type="System.String">a166859d-f0af-41a1-bc73-3b8f768a5103</TestId>
+          <TestName Type="System.String">NotLoggedSearch</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\NotLoggedSearch.aii</TestPath>
+          <TestStepNumber Type="System.Int32">2</TestStepNumber>
+          <Order Type="System.Int32">3</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Click 'SearchLink'</StepDescription>
+          <TestId Type="System.String">a166859d-f0af-41a1-bc73-3b8f768a5103</TestId>
+          <TestName Type="System.String">NotLoggedSearch</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\NotLoggedSearch.aii</TestPath>
+          <TestStepNumber Type="System.Int32">3</TestStepNumber>
+          <Order Type="System.Int32">4</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Wait for '5000' msec.</StepDescription>
+          <TestId Type="System.String">a166859d-f0af-41a1-bc73-3b8f768a5103</TestId>
+          <TestName Type="System.String">NotLoggedSearch</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\NotLoggedSearch.aii</TestPath>
+          <TestStepNumber Type="System.Int32">4</TestStepNumber>
+          <Order Type="System.Int32">5</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Verify element 'x1Link' 'is' visible.</StepDescription>
+          <TestId Type="System.String">a166859d-f0af-41a1-bc73-3b8f768a5103</TestId>
+          <TestName Type="System.String">NotLoggedSearch</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\NotLoggedSearch.aii</TestPath>
+          <TestStepNumber Type="System.Int32">5</TestStepNumber>
+          <Order Type="System.Int32">6</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Verify element 'Div' 'is' visible.</StepDescription>
+          <TestId Type="System.String">a166859d-f0af-41a1-bc73-3b8f768a5103</TestId>
+          <TestName Type="System.String">NotLoggedSearch</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\NotLoggedSearch.aii</TestPath>
+          <TestStepNumber Type="System.Int32">6</TestStepNumber>
+          <Order Type="System.Int32">7</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Click 'MainSectionTag'</StepDescription>
+          <TestId Type="System.String">a166859d-f0af-41a1-bc73-3b8f768a5103</TestId>
+          <TestName Type="System.String">NotLoggedSearch</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\NotLoggedSearch.aii</TestPath>
+          <TestStepNumber Type="System.Int32">7</TestStepNumber>
+          <Order Type="System.Int32">8</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Verify element 'Kendo4Image' 'is' visible.</StepDescription>
+          <TestId Type="System.String">a166859d-f0af-41a1-bc73-3b8f768a5103</TestId>
+          <TestName Type="System.String">NotLoggedSearch</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\NotLoggedSearch.aii</TestPath>
+          <TestStepNumber Type="System.Int32">8</TestStepNumber>
+          <Order Type="System.Int32">9</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Click 'GridButtonTag'</StepDescription>
+          <TestId Type="System.String">a166859d-f0af-41a1-bc73-3b8f768a5103</TestId>
+          <TestName Type="System.String">NotLoggedSearch</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\NotLoggedSearch.aii</TestPath>
+          <TestStepNumber Type="System.Int32">9</TestStepNumber>
+          <Order Type="System.Int32">10</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Verify element 'BusujimaSaekoImage' 'is' visible.</StepDescription>
+          <TestId Type="System.String">a166859d-f0af-41a1-bc73-3b8f768a5103</TestId>
+          <TestName Type="System.String">NotLoggedSearch</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\NotLoggedSearch.aii</TestPath>
+          <TestStepNumber Type="System.Int32">10</TestStepNumber>
+          <Order Type="System.Int32">11</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+      </AutomationStepResults>
+      <NotRunStepDescriptions />
+      <PerStepMessages Type="System.String">Overall Result: Pass
+------------------------------------------------------------
+'8/18/2011 11:31:02 AM' - Starting execution....
+------------------------------------------------------------
+'8/18/2011 11:31:04 AM' - 'Pass' : 1. Navigate to : '/aeroviewr/'
+'8/18/2011 11:31:07 AM' - 'Pass' : 2. Wait for '3000' msec.
+'8/18/2011 11:31:07 AM' - 'Pass' : 3. Set 'SearchBoxText' text to 'kendo'
+'8/18/2011 11:31:07 AM' - 'Pass' : 4. Click 'SearchLink'
+'8/18/2011 11:31:12 AM' - 'Pass' : 5. Wait for '5000' msec.
+'8/18/2011 11:31:13 AM' - 'Pass' : 6. Verify element 'x1Link' 'is' visible.
+'8/18/2011 11:31:13 AM' - 'Pass' : 7. Verify element 'Div' 'is' visible.
+'8/18/2011 11:31:13 AM' - 'Pass' : 8. Click 'MainSectionTag'
+'8/18/2011 11:31:13 AM' - 'Pass' : 9. Verify element 'Kendo4Image' 'is' visible.
+'8/18/2011 11:31:13 AM' - 'Pass' : 10. Click 'GridButtonTag'
+'8/18/2011 11:31:14 AM' - 'Pass' : 11. Verify element 'BusujimaSaekoImage' 'is' visible.
+------------------------------------------------------------
+'8/18/2011 11:31:14 AM' - Overall Result: Pass
+'8/18/2011 11:31:14 AM' - Duration: [0 min: 10 sec: 603 msec]
+------------------------------------------------------------
+'8/18/2011 11:31:14 AM' - Test completed!
+</PerStepMessages>
+      <TotalNumberOfPassedSteps Type="System.Int32">11</TotalNumberOfPassedSteps>
+      <ExecutingTestStepCount Type="System.Int32">11</ExecutingTestStepCount>
+      <TotalNumberOfNotRunSteps Type="System.Int32">0</TotalNumberOfNotRunSteps>
+      <IsDataDrivenResult Type="System.Boolean">False</IsDataDrivenResult>
+      <SeparatorLineCharCount Type="System.Int32">60</SeparatorLineCharCount>
+      <ExecutionType Type="ArtOfTest.Common.Design.ExecutionType">QuickExecution</ExecutionType>
+      <EndTime Type="System.DateTime">2011-08-18 08:31:14Z</EndTime>
+      <StarTime Type="System.DateTime">2011-08-18 08:31:03Z</StarTime>
+      <DataIterationResults />
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestResult" Version="2011.1.729.0">
+      <TestId Type="System.String">784b9f29-b4df-4489-b2b5-9241f08ddaa2</TestId>
+      <TestName Type="System.String">OpenSetPicBack</TestName>
+      <TestPath Type="System.String">TestProject2\AeroViewr\OpenSetPicBack.aii</TestPath>
+      <ProjectPath Type="System.String">
+      </ProjectPath>
+      <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+      <AutomationStepResults>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Navigate to : '/aeroviewr/'</StepDescription>
+          <TestId Type="System.String">784b9f29-b4df-4489-b2b5-9241f08ddaa2</TestId>
+          <TestName Type="System.String">OpenSetPicBack</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\OpenSetPicBack.aii</TestPath>
+          <TestStepNumber Type="System.Int32">0</TestStepNumber>
+          <Order Type="System.Int32">1</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Wait for '1500' msec.</StepDescription>
+          <TestId Type="System.String">784b9f29-b4df-4489-b2b5-9241f08ddaa2</TestId>
+          <TestName Type="System.String">OpenSetPicBack</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\OpenSetPicBack.aii</TestPath>
+          <TestStepNumber Type="System.Int32">1</TestStepNumber>
+          <Order Type="System.Int32">2</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.Execution.TestAsStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Execute test 'LogIn'</StepDescription>
+          <TestId Type="System.String">784b9f29-b4df-4489-b2b5-9241f08ddaa2</TestId>
+          <TestName Type="System.String">OpenSetPicBack</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\OpenSetPicBack.aii</TestPath>
+          <TestStepNumber Type="System.Int32">2</TestStepNumber>
+          <Order Type="System.Int32">3</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+          <TestResult Type="ArtOfTest.WebAii.Design.Execution.TestResult" Version="2011.1.729.0">
+            <TestId Type="System.String">1717c04f-9fa1-469b-bd54-772018aa114c</TestId>
+            <TestName Type="System.String">LogIn</TestName>
+            <TestPath Type="System.String">AeroViewr\LogIn.aii</TestPath>
+            <ProjectPath Type="System.String">
+            </ProjectPath>
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <AutomationStepResults>
+              <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+                <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+                <StepDescription Type="System.String">Navigate to : 'http://www.flickr.com'</StepDescription>
+                <TestId Type="System.String">1717c04f-9fa1-469b-bd54-772018aa114c</TestId>
+                <TestName Type="System.String">LogIn</TestName>
+                <TestPath Type="System.String">AeroViewr\LogIn.aii</TestPath>
+                <TestStepNumber Type="System.Int32">0</TestStepNumber>
+                <Order Type="System.Int32">1</Order>
+                <LogMessageOnError Type="System.String">
+                </LogMessageOnError>
+              </Item>
+              <Item Type="ArtOfTest.WebAii.Design.Execution.LogicalStepResult" Version="2011.1.729.0">
+                <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+                <StepDescription Type="System.String">IF (Verify Exists 'EditYourImage') THEN</StepDescription>
+                <TestId Type="System.String">1717c04f-9fa1-469b-bd54-772018aa114c</TestId>
+                <TestName Type="System.String">LogIn</TestName>
+                <TestPath Type="System.String">AeroViewr\LogIn.aii</TestPath>
+                <TestStepNumber Type="System.Int32">1</TestStepNumber>
+                <Order Type="System.Int32">2</Order>
+                <LogMessageOnError Type="System.String">
+                </LogMessageOnError>
+                <TestResult Type="ArtOfTest.WebAii.Design.Execution.TestResult" Version="2011.1.729.0">
+                  <TestId Type="System.String">1717c04f-9fa1-469b-bd54-772018aa114c</TestId>
+                  <TestName Type="System.String">LogIn</TestName>
+                  <TestPath Type="System.String">AeroViewr\LogIn.aii</TestPath>
+                  <ProjectPath Type="System.String">
+                  </ProjectPath>
+                  <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+                  <AutomationStepResults />
+                  <NotRunStepDescriptions>
+                    <Item Type="System.String">Navigate to : 'http://www.flickr.com'</Item>
+                    <Item Type="System.String">IF (Verify Exists 'EditYourImage') THEN</Item>
+                    <Item Type="System.String">Navigate to : '/aeroviewr/'</Item>
+                    <Item Type="System.String">Wait for '250' msec.</Item>
+                    <Item Type="System.String">IF (Verify 'TextContent' 'Contains' 'Sign in' on 'SigninLink') THEN</Item>
+                  </NotRunStepDescriptions>
+                  <PerStepMessages Type="System.String">
+                  </PerStepMessages>
+                  <TotalNumberOfPassedSteps Type="System.Int32">0</TotalNumberOfPassedSteps>
+                  <ExecutingTestStepCount Type="System.Int32">0</ExecutingTestStepCount>
+                  <TotalNumberOfNotRunSteps Type="System.Int32">0</TotalNumberOfNotRunSteps>
+                  <IsDataDrivenResult Type="System.Boolean">False</IsDataDrivenResult>
+                  <SeparatorLineCharCount Type="System.Int32">60</SeparatorLineCharCount>
+                  <ExecutionType Type="ArtOfTest.Common.Design.ExecutionType">QuickExecution</ExecutionType>
+                  <EndTime Type="System.DateTime">2011-08-18 08:31:22Z</EndTime>
+                  <StarTime Type="System.DateTime">2011-08-18 08:31:22Z</StarTime>
+                  <DataIterationResults />
+                </TestResult>
+                <innerResult Type="ArtOfTest.WebAii.Design.Execution.TestResult" Version="2011.1.729.0">
+                  <TestId Type="System.String">1717c04f-9fa1-469b-bd54-772018aa114c</TestId>
+                  <TestName Type="System.String">
+                  </TestName>
+                  <ProjectPath Type="System.String">
+                  </ProjectPath>
+                  <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+                  <AutomationStepResults>
+                    <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+                      <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+                      <StepDescription Type="System.String">Navigate to : '/aeroviewr/'</StepDescription>
+                      <TestId Type="System.String">1717c04f-9fa1-469b-bd54-772018aa114c</TestId>
+                      <TestName Type="System.String">LogIn</TestName>
+                      <TestPath Type="System.String">AeroViewr\LogIn.aii</TestPath>
+                      <TestStepNumber Type="System.Int32">0</TestStepNumber>
+                      <Order Type="System.Int32">3</Order>
+                      <LogMessageOnError Type="System.String">
+                      </LogMessageOnError>
+                    </Item>
+                  </AutomationStepResults>
+                  <NotRunStepDescriptions />
+                  <PerStepMessages Type="System.String">'8/18/2011 11:31:23 AM' - 'Pass' : 3. Navigate to : '/aeroviewr/'
+</PerStepMessages>
+                  <TotalNumberOfPassedSteps Type="System.Int32">1</TotalNumberOfPassedSteps>
+                  <ExecutingTestStepCount Type="System.Int32">1</ExecutingTestStepCount>
+                  <TotalNumberOfNotRunSteps Type="System.Int32">0</TotalNumberOfNotRunSteps>
+                  <IsDataDrivenResult Type="System.Boolean">False</IsDataDrivenResult>
+                  <SeparatorLineCharCount Type="System.Int32">60</SeparatorLineCharCount>
+                  <ExecutionType Type="ArtOfTest.Common.Design.ExecutionType">QuickExecution</ExecutionType>
+                  <EndTime Type="System.DateTime">2011-08-18 08:31:22Z</EndTime>
+                  <StarTime Type="System.DateTime">2011-08-18 08:31:22Z</StarTime>
+                  <DataIterationResults />
+                </innerResult>
+                <logicDetails Type="System.String">Condition Evaluation Details:
+</logicDetails>
+                <loopIteration Type="System.Int32">1</loopIteration>
+                <isLoop Type="System.Boolean">False</isLoop>
+              </Item>
+              <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+                <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+                <StepDescription Type="System.String">Navigate to : '/aeroviewr/'</StepDescription>
+                <TestId Type="System.String">1717c04f-9fa1-469b-bd54-772018aa114c</TestId>
+                <TestName Type="System.String">LogIn</TestName>
+                <TestPath Type="System.String">AeroViewr\LogIn.aii</TestPath>
+                <TestStepNumber Type="System.Int32">2</TestStepNumber>
+                <Order Type="System.Int32">17</Order>
+                <LogMessageOnError Type="System.String">
+                </LogMessageOnError>
+              </Item>
+              <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+                <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+                <StepDescription Type="System.String">Wait for '250' msec.</StepDescription>
+                <TestId Type="System.String">1717c04f-9fa1-469b-bd54-772018aa114c</TestId>
+                <TestName Type="System.String">LogIn</TestName>
+                <TestPath Type="System.String">AeroViewr\LogIn.aii</TestPath>
+                <TestStepNumber Type="System.Int32">3</TestStepNumber>
+                <Order Type="System.Int32">18</Order>
+                <LogMessageOnError Type="System.String">
+                </LogMessageOnError>
+              </Item>
+              <Item Type="ArtOfTest.WebAii.Design.Execution.LogicalStepResult" Version="2011.1.729.0">
+                <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+                <StepDescription Type="System.String">IF (Verify 'TextContent' 'Contains' 'Sign in' on 'SigninLink') THEN</StepDescription>
+                <TestId Type="System.String">1717c04f-9fa1-469b-bd54-772018aa114c</TestId>
+                <TestName Type="System.String">LogIn</TestName>
+                <TestPath Type="System.String">AeroViewr\LogIn.aii</TestPath>
+                <TestStepNumber Type="System.Int32">4</TestStepNumber>
+                <Order Type="System.Int32">19</Order>
+                <LogMessageOnError Type="System.String">
+                </LogMessageOnError>
+                <TestResult Type="ArtOfTest.WebAii.Design.Execution.TestResult" Version="2011.1.729.0">
+                  <TestId Type="System.String">1717c04f-9fa1-469b-bd54-772018aa114c</TestId>
+                  <TestName Type="System.String">LogIn</TestName>
+                  <TestPath Type="System.String">AeroViewr\LogIn.aii</TestPath>
+                  <ProjectPath Type="System.String">
+                  </ProjectPath>
+                  <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+                  <AutomationStepResults />
+                  <NotRunStepDescriptions>
+                    <Item Type="System.String">Navigate to : 'http://www.flickr.com'</Item>
+                    <Item Type="System.String">IF (Verify Exists 'EditYourImage') THEN</Item>
+                    <Item Type="System.String">Navigate to : '/aeroviewr/'</Item>
+                    <Item Type="System.String">Wait for '250' msec.</Item>
+                    <Item Type="System.String">IF (Verify 'TextContent' 'Contains' 'Sign in' on 'SigninLink') THEN</Item>
+                  </NotRunStepDescriptions>
+                  <PerStepMessages Type="System.String">
+                  </PerStepMessages>
+                  <TotalNumberOfPassedSteps Type="System.Int32">0</TotalNumberOfPassedSteps>
+                  <ExecutingTestStepCount Type="System.Int32">0</ExecutingTestStepCount>
+                  <TotalNumberOfNotRunSteps Type="System.Int32">0</TotalNumberOfNotRunSteps>
+                  <IsDataDrivenResult Type="System.Boolean">False</IsDataDrivenResult>
+                  <SeparatorLineCharCount Type="System.Int32">60</SeparatorLineCharCount>
+                  <ExecutionType Type="ArtOfTest.Common.Design.ExecutionType">QuickExecution</ExecutionType>
+                  <EndTime Type="System.DateTime">2011-08-18 08:31:23Z</EndTime>
+                  <StarTime Type="System.DateTime">2011-08-18 08:31:23Z</StarTime>
+                  <DataIterationResults />
+                </TestResult>
+                <innerResult Type="ArtOfTest.WebAii.Design.Execution.TestResult" Version="2011.1.729.0">
+                  <TestId Type="System.String">1717c04f-9fa1-469b-bd54-772018aa114c</TestId>
+                  <TestName Type="System.String">
+                  </TestName>
+                  <ProjectPath Type="System.String">
+                  </ProjectPath>
+                  <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+                  <AutomationStepResults>
+                    <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+                      <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+                      <StepDescription Type="System.String">Click 'SigninLink'</StepDescription>
+                      <TestId Type="System.String">1717c04f-9fa1-469b-bd54-772018aa114c</TestId>
+                      <TestName Type="System.String">LogIn</TestName>
+                      <TestPath Type="System.String">AeroViewr\LogIn.aii</TestPath>
+                      <TestStepNumber Type="System.Int32">0</TestStepNumber>
+                      <Order Type="System.Int32">20</Order>
+                      <LogMessageOnError Type="System.String">
+                      </LogMessageOnError>
+                    </Item>
+                    <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+                      <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+                      <StepDescription Type="System.String">Verify 'InnerText' 'Contains' 'Signed in as' on 'UserInfoSpan'</StepDescription>
+                      <TestId Type="System.String">1717c04f-9fa1-469b-bd54-772018aa114c</TestId>
+                      <TestName Type="System.String">LogIn</TestName>
+                      <TestPath Type="System.String">AeroViewr\LogIn.aii</TestPath>
+                      <TestStepNumber Type="System.Int32">1</TestStepNumber>
+                      <Order Type="System.Int32">21</Order>
+                      <LogMessageOnError Type="System.String">
+                      </LogMessageOnError>
+                    </Item>
+                  </AutomationStepResults>
+                  <NotRunStepDescriptions />
+                  <PerStepMessages Type="System.String">'8/18/2011 11:31:28 AM' - 'Pass' : 20. Click 'SigninLink'
+'8/18/2011 11:31:28 AM' - 'Pass' : 21. Verify 'InnerText' 'Contains' 'Signed in as' on 'UserInfoSpan'
+</PerStepMessages>
+                  <TotalNumberOfPassedSteps Type="System.Int32">2</TotalNumberOfPassedSteps>
+                  <ExecutingTestStepCount Type="System.Int32">2</ExecutingTestStepCount>
+                  <TotalNumberOfNotRunSteps Type="System.Int32">0</TotalNumberOfNotRunSteps>
+                  <IsDataDrivenResult Type="System.Boolean">False</IsDataDrivenResult>
+                  <SeparatorLineCharCount Type="System.Int32">60</SeparatorLineCharCount>
+                  <ExecutionType Type="ArtOfTest.Common.Design.ExecutionType">QuickExecution</ExecutionType>
+                  <EndTime Type="System.DateTime">2011-08-18 08:31:23Z</EndTime>
+                  <StarTime Type="System.DateTime">2011-08-18 08:31:23Z</StarTime>
+                  <DataIterationResults />
+                </innerResult>
+                <logicDetails Type="System.String">Condition Evaluation Details:
+
+Parameters:
+-----------
+TagSegmentType  = 'TextContent'
+CompareType     = 'Contains'
+ExpectedString  = Expected:[Sign in] , Actual:[Sign in]
+</logicDetails>
+                <loopIteration Type="System.Int32">1</loopIteration>
+                <isLoop Type="System.Boolean">False</isLoop>
+              </Item>
+            </AutomationStepResults>
+            <NotRunStepDescriptions />
+            <PerStepMessages Type="System.String">Overall Result: Pass
+'8/18/2011 11:31:22 AM' - 'Pass' : 1. Navigate to : 'http://www.flickr.com'
+'8/18/2011 11:31:23 AM' - 'Pass' : 2. IF (Verify Exists 'EditYourImage') THEN
+Logical step encountered. Executing branch =&gt; IF (Verify Exists 'EditYourImage') THEN:
+------------------------------------------------------------
+Condition Evaluation Details:
+
+------------------------------------------------------------
+'8/18/2011 11:31:23 AM' - 'Pass' : 3. Navigate to : '/aeroviewr/'
+
+'8/18/2011 11:31:23 AM' - 'Pass' : 17. Navigate to : '/aeroviewr/'
+'8/18/2011 11:31:23 AM' - 'Pass' : 18. Wait for '250' msec.
+'8/18/2011 11:31:28 AM' - 'Pass' : 19. IF (Verify 'TextContent' 'Contains' 'Sign in' on 'SigninLink') THEN
+Logical step encountered. Executing branch =&gt; IF (Verify 'TextContent' 'Contains' 'Sign in' on 'SigninLink') THEN:
+------------------------------------------------------------
+Condition Evaluation Details:
+
+Parameters:
+-----------
+TagSegmentType  = 'TextContent'
+CompareType     = 'Contains'
+ExpectedString  = Expected:[Sign in] , Actual:[Sign in]
+
+------------------------------------------------------------
+'8/18/2011 11:31:28 AM' - 'Pass' : 20. Click 'SigninLink'
+'8/18/2011 11:31:28 AM' - 'Pass' : 21. Verify 'InnerText' 'Contains' 'Signed in as' on 'UserInfoSpan'
+
+------------------------------------------------------------
+'8/18/2011 11:31:28 AM' - Overall Result: Pass
+'8/18/2011 11:31:28 AM' - Duration: [0 min: 9 sec: 799 msec]
+------------------------------------------------------------
+</PerStepMessages>
+            <TotalNumberOfPassedSteps Type="System.Int32">5</TotalNumberOfPassedSteps>
+            <ExecutingTestStepCount Type="System.Int32">5</ExecutingTestStepCount>
+            <TotalNumberOfNotRunSteps Type="System.Int32">0</TotalNumberOfNotRunSteps>
+            <IsDataDrivenResult Type="System.Boolean">False</IsDataDrivenResult>
+            <SeparatorLineCharCount Type="System.Int32">60</SeparatorLineCharCount>
+            <ExecutionType Type="ArtOfTest.Common.Design.ExecutionType">QuickExecution</ExecutionType>
+            <EndTime Type="System.DateTime">2011-08-18 08:31:28Z</EndTime>
+            <StarTime Type="System.DateTime">2011-08-18 08:31:18Z</StarTime>
+            <DataIterationResults />
+          </TestResult>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Wait for '3000' msec.</StepDescription>
+          <TestId Type="System.String">784b9f29-b4df-4489-b2b5-9241f08ddaa2</TestId>
+          <TestName Type="System.String">OpenSetPicBack</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\OpenSetPicBack.aii</TestPath>
+          <TestStepNumber Type="System.Int32">3</TestStepNumber>
+          <Order Type="System.Int32">4</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Click 'x5733159853Dcd6074b9eSJpgImage'</StepDescription>
+          <TestId Type="System.String">784b9f29-b4df-4489-b2b5-9241f08ddaa2</TestId>
+          <TestName Type="System.String">OpenSetPicBack</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\OpenSetPicBack.aii</TestPath>
+          <TestStepNumber Type="System.Int32">4</TestStepNumber>
+          <Order Type="System.Int32">5</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Click 'FooterSectionTag'</StepDescription>
+          <TestId Type="System.String">784b9f29-b4df-4489-b2b5-9241f08ddaa2</TestId>
+          <TestName Type="System.String">OpenSetPicBack</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\OpenSetPicBack.aii</TestPath>
+          <TestStepNumber Type="System.Int32">5</TestStepNumber>
+          <Order Type="System.Int32">6</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Click 'x5733159853Dcd6074b9eSJpgImage'</StepDescription>
+          <TestId Type="System.String">784b9f29-b4df-4489-b2b5-9241f08ddaa2</TestId>
+          <TestName Type="System.String">OpenSetPicBack</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\OpenSetPicBack.aii</TestPath>
+          <TestStepNumber Type="System.Int32">6</TestStepNumber>
+          <Order Type="System.Int32">7</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Wait for '1000' msec.</StepDescription>
+          <TestId Type="System.String">784b9f29-b4df-4489-b2b5-9241f08ddaa2</TestId>
+          <TestName Type="System.String">OpenSetPicBack</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\OpenSetPicBack.aii</TestPath>
+          <TestStepNumber Type="System.Int32">7</TestStepNumber>
+          <Order Type="System.Int32">8</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Click 'TulipsImage'</StepDescription>
+          <TestId Type="System.String">784b9f29-b4df-4489-b2b5-9241f08ddaa2</TestId>
+          <TestName Type="System.String">OpenSetPicBack</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\OpenSetPicBack.aii</TestPath>
+          <TestStepNumber Type="System.Int32">8</TestStepNumber>
+          <Order Type="System.Int32">9</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Verify 'TextContent' 'Contains' 'Tulips' on 'TulipsH2Tag'</StepDescription>
+          <TestId Type="System.String">784b9f29-b4df-4489-b2b5-9241f08ddaa2</TestId>
+          <TestName Type="System.String">OpenSetPicBack</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\OpenSetPicBack.aii</TestPath>
+          <TestStepNumber Type="System.Int32">9</TestStepNumber>
+          <Order Type="System.Int32">10</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Click 'BackButtonLink'</StepDescription>
+          <TestId Type="System.String">784b9f29-b4df-4489-b2b5-9241f08ddaa2</TestId>
+          <TestName Type="System.String">OpenSetPicBack</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\OpenSetPicBack.aii</TestPath>
+          <TestStepNumber Type="System.Int32">10</TestStepNumber>
+          <Order Type="System.Int32">11</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Wait for '1000' msec.</StepDescription>
+          <TestId Type="System.String">784b9f29-b4df-4489-b2b5-9241f08ddaa2</TestId>
+          <TestName Type="System.String">OpenSetPicBack</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\OpenSetPicBack.aii</TestPath>
+          <TestStepNumber Type="System.Int32">11</TestStepNumber>
+          <Order Type="System.Int32">12</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Verify element 'TulipsImage' 'is' visible.</StepDescription>
+          <TestId Type="System.String">784b9f29-b4df-4489-b2b5-9241f08ddaa2</TestId>
+          <TestName Type="System.String">OpenSetPicBack</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\OpenSetPicBack.aii</TestPath>
+          <TestStepNumber Type="System.Int32">12</TestStepNumber>
+          <Order Type="System.Int32">13</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+      </AutomationStepResults>
+      <NotRunStepDescriptions />
+      <PerStepMessages Type="System.String">Overall Result: Pass
+------------------------------------------------------------
+'8/18/2011 11:31:15 AM' - Starting execution....
+------------------------------------------------------------
+'8/18/2011 11:31:16 AM' - 'Pass' : 1. Navigate to : '/aeroviewr/'
+'8/18/2011 11:31:18 AM' - 'Pass' : 2. Wait for '1500' msec.
+'8/18/2011 11:31:28 AM' - 'Pass' : 3. Execute test 'LogIn'
+
+&gt;&gt;&gt; Test-as-Step 'AeroViewr\LogIn.aii' log starts:
+
+Overall Result: Pass
+'8/18/2011 11:31:22 AM' - 'Pass' : 1. Navigate to : 'http://www.flickr.com'
+'8/18/2011 11:31:23 AM' - 'Pass' : 2. IF (Verify Exists 'EditYourImage') THEN
+Logical step encountered. Executing branch =&gt; IF (Verify Exists 'EditYourImage') THEN:
+------------------------------------------------------------
+Condition Evaluation Details:
+
+------------------------------------------------------------
+'8/18/2011 11:31:23 AM' - 'Pass' : 3. Navigate to : '/aeroviewr/'
+
+'8/18/2011 11:31:23 AM' - 'Pass' : 17. Navigate to : '/aeroviewr/'
+'8/18/2011 11:31:23 AM' - 'Pass' : 18. Wait for '250' msec.
+'8/18/2011 11:31:28 AM' - 'Pass' : 19. IF (Verify 'TextContent' 'Contains' 'Sign in' on 'SigninLink') THEN
+Logical step encountered. Executing branch =&gt; IF (Verify 'TextContent' 'Contains' 'Sign in' on 'SigninLink') THEN:
+------------------------------------------------------------
+Condition Evaluation Details:
+
+Parameters:
+-----------
+TagSegmentType  = 'TextContent'
+CompareType     = 'Contains'
+ExpectedString  = Expected:[Sign in] , Actual:[Sign in]
+
+------------------------------------------------------------
+'8/18/2011 11:31:28 AM' - 'Pass' : 20. Click 'SigninLink'
+'8/18/2011 11:31:28 AM' - 'Pass' : 21. Verify 'InnerText' 'Contains' 'Signed in as' on 'UserInfoSpan'
+
+------------------------------------------------------------
+'8/18/2011 11:31:28 AM' - Overall Result: Pass
+'8/18/2011 11:31:28 AM' - Duration: [0 min: 9 sec: 799 msec]
+------------------------------------------------------------
+
+&lt;&lt;&lt; Test-as-Step 'AeroViewr\LogIn.aii' log ends.
+
+'8/18/2011 11:31:31 AM' - 'Pass' : 4. Wait for '3000' msec.
+'8/18/2011 11:31:31 AM' - 'Pass' : 5. Click 'x5733159853Dcd6074b9eSJpgImage'
+'8/18/2011 11:31:31 AM' - 'Pass' : 6. Click 'FooterSectionTag'
+'8/18/2011 11:31:31 AM' - 'Pass' : 7. Click 'x5733159853Dcd6074b9eSJpgImage'
+'8/18/2011 11:31:32 AM' - 'Pass' : 8. Wait for '1000' msec.
+'8/18/2011 11:31:33 AM' - 'Pass' : 9. Click 'TulipsImage'
+'8/18/2011 11:31:33 AM' - 'Pass' : 10. Verify 'TextContent' 'Contains' 'Tulips' on 'TulipsH2Tag'
+'8/18/2011 11:31:34 AM' - 'Pass' : 11. Click 'BackButtonLink'
+'8/18/2011 11:31:35 AM' - 'Pass' : 12. Wait for '1000' msec.
+'8/18/2011 11:31:35 AM' - 'Pass' : 13. Verify element 'TulipsImage' 'is' visible.
+------------------------------------------------------------
+'8/18/2011 11:31:35 AM' - Overall Result: Pass
+'8/18/2011 11:31:35 AM' - Duration: [0 min: 19 sec: 176 msec]
+------------------------------------------------------------
+'8/18/2011 11:31:36 AM' - Test completed!
+</PerStepMessages>
+      <TotalNumberOfPassedSteps Type="System.Int32">13</TotalNumberOfPassedSteps>
+      <ExecutingTestStepCount Type="System.Int32">13</ExecutingTestStepCount>
+      <TotalNumberOfNotRunSteps Type="System.Int32">0</TotalNumberOfNotRunSteps>
+      <IsDataDrivenResult Type="System.Boolean">False</IsDataDrivenResult>
+      <SeparatorLineCharCount Type="System.Int32">60</SeparatorLineCharCount>
+      <ExecutionType Type="ArtOfTest.Common.Design.ExecutionType">QuickExecution</ExecutionType>
+      <EndTime Type="System.DateTime">2011-08-18 08:31:35Z</EndTime>
+      <StarTime Type="System.DateTime">2011-08-18 08:31:16Z</StarTime>
+      <DataIterationResults />
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestResult" Version="2011.1.729.0">
+      <TestId Type="System.String">a71e5ebf-cad5-489d-9597-0e39d5d99e94</TestId>
+      <TestName Type="System.String">OpenSetSearchBack</TestName>
+      <TestPath Type="System.String">TestProject2\AeroViewr\OpenSetSearchBack.aii</TestPath>
+      <ProjectPath Type="System.String">
+      </ProjectPath>
+      <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+      <AutomationStepResults>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Navigate to : '/aeroviewr/'</StepDescription>
+          <TestId Type="System.String">a71e5ebf-cad5-489d-9597-0e39d5d99e94</TestId>
+          <TestName Type="System.String">OpenSetSearchBack</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\OpenSetSearchBack.aii</TestPath>
+          <TestStepNumber Type="System.Int32">0</TestStepNumber>
+          <Order Type="System.Int32">1</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Wait for '1500' msec.</StepDescription>
+          <TestId Type="System.String">a71e5ebf-cad5-489d-9597-0e39d5d99e94</TestId>
+          <TestName Type="System.String">OpenSetSearchBack</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\OpenSetSearchBack.aii</TestPath>
+          <TestStepNumber Type="System.Int32">1</TestStepNumber>
+          <Order Type="System.Int32">2</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.Execution.TestAsStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Execute test 'LogIn'</StepDescription>
+          <TestId Type="System.String">a71e5ebf-cad5-489d-9597-0e39d5d99e94</TestId>
+          <TestName Type="System.String">OpenSetSearchBack</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\OpenSetSearchBack.aii</TestPath>
+          <TestStepNumber Type="System.Int32">2</TestStepNumber>
+          <Order Type="System.Int32">3</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+          <TestResult Type="ArtOfTest.WebAii.Design.Execution.TestResult" Version="2011.1.729.0">
+            <TestId Type="System.String">1717c04f-9fa1-469b-bd54-772018aa114c</TestId>
+            <TestName Type="System.String">LogIn</TestName>
+            <TestPath Type="System.String">AeroViewr\LogIn.aii</TestPath>
+            <ProjectPath Type="System.String">
+            </ProjectPath>
+            <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+            <AutomationStepResults>
+              <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+                <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+                <StepDescription Type="System.String">Navigate to : 'http://www.flickr.com'</StepDescription>
+                <TestId Type="System.String">1717c04f-9fa1-469b-bd54-772018aa114c</TestId>
+                <TestName Type="System.String">LogIn</TestName>
+                <TestPath Type="System.String">AeroViewr\LogIn.aii</TestPath>
+                <TestStepNumber Type="System.Int32">0</TestStepNumber>
+                <Order Type="System.Int32">1</Order>
+                <LogMessageOnError Type="System.String">
+                </LogMessageOnError>
+              </Item>
+              <Item Type="ArtOfTest.WebAii.Design.Execution.LogicalStepResult" Version="2011.1.729.0">
+                <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+                <StepDescription Type="System.String">IF (Verify Exists 'EditYourImage') THEN</StepDescription>
+                <TestId Type="System.String">1717c04f-9fa1-469b-bd54-772018aa114c</TestId>
+                <TestName Type="System.String">LogIn</TestName>
+                <TestPath Type="System.String">AeroViewr\LogIn.aii</TestPath>
+                <TestStepNumber Type="System.Int32">1</TestStepNumber>
+                <Order Type="System.Int32">2</Order>
+                <LogMessageOnError Type="System.String">
+                </LogMessageOnError>
+                <TestResult Type="ArtOfTest.WebAii.Design.Execution.TestResult" Version="2011.1.729.0">
+                  <TestId Type="System.String">1717c04f-9fa1-469b-bd54-772018aa114c</TestId>
+                  <TestName Type="System.String">LogIn</TestName>
+                  <TestPath Type="System.String">AeroViewr\LogIn.aii</TestPath>
+                  <ProjectPath Type="System.String">
+                  </ProjectPath>
+                  <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+                  <AutomationStepResults />
+                  <NotRunStepDescriptions>
+                    <Item Type="System.String">Navigate to : 'http://www.flickr.com'</Item>
+                    <Item Type="System.String">IF (Verify Exists 'EditYourImage') THEN</Item>
+                    <Item Type="System.String">Navigate to : '/aeroviewr/'</Item>
+                    <Item Type="System.String">Wait for '250' msec.</Item>
+                    <Item Type="System.String">IF (Verify 'TextContent' 'Contains' 'Sign in' on 'SigninLink') THEN</Item>
+                  </NotRunStepDescriptions>
+                  <PerStepMessages Type="System.String">
+                  </PerStepMessages>
+                  <TotalNumberOfPassedSteps Type="System.Int32">0</TotalNumberOfPassedSteps>
+                  <ExecutingTestStepCount Type="System.Int32">0</ExecutingTestStepCount>
+                  <TotalNumberOfNotRunSteps Type="System.Int32">0</TotalNumberOfNotRunSteps>
+                  <IsDataDrivenResult Type="System.Boolean">False</IsDataDrivenResult>
+                  <SeparatorLineCharCount Type="System.Int32">60</SeparatorLineCharCount>
+                  <ExecutionType Type="ArtOfTest.Common.Design.ExecutionType">QuickExecution</ExecutionType>
+                  <EndTime Type="System.DateTime">2011-08-18 08:31:44Z</EndTime>
+                  <StarTime Type="System.DateTime">2011-08-18 08:31:44Z</StarTime>
+                  <DataIterationResults />
+                </TestResult>
+                <innerResult Type="ArtOfTest.WebAii.Design.Execution.TestResult" Version="2011.1.729.0">
+                  <TestId Type="System.String">1717c04f-9fa1-469b-bd54-772018aa114c</TestId>
+                  <TestName Type="System.String">
+                  </TestName>
+                  <ProjectPath Type="System.String">
+                  </ProjectPath>
+                  <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+                  <AutomationStepResults>
+                    <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+                      <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+                      <StepDescription Type="System.String">Navigate to : '/aeroviewr/'</StepDescription>
+                      <TestId Type="System.String">1717c04f-9fa1-469b-bd54-772018aa114c</TestId>
+                      <TestName Type="System.String">LogIn</TestName>
+                      <TestPath Type="System.String">AeroViewr\LogIn.aii</TestPath>
+                      <TestStepNumber Type="System.Int32">0</TestStepNumber>
+                      <Order Type="System.Int32">3</Order>
+                      <LogMessageOnError Type="System.String">
+                      </LogMessageOnError>
+                    </Item>
+                  </AutomationStepResults>
+                  <NotRunStepDescriptions />
+                  <PerStepMessages Type="System.String">'8/18/2011 11:31:45 AM' - 'Pass' : 3. Navigate to : '/aeroviewr/'
+</PerStepMessages>
+                  <TotalNumberOfPassedSteps Type="System.Int32">1</TotalNumberOfPassedSteps>
+                  <ExecutingTestStepCount Type="System.Int32">1</ExecutingTestStepCount>
+                  <TotalNumberOfNotRunSteps Type="System.Int32">0</TotalNumberOfNotRunSteps>
+                  <IsDataDrivenResult Type="System.Boolean">False</IsDataDrivenResult>
+                  <SeparatorLineCharCount Type="System.Int32">60</SeparatorLineCharCount>
+                  <ExecutionType Type="ArtOfTest.Common.Design.ExecutionType">QuickExecution</ExecutionType>
+                  <EndTime Type="System.DateTime">2011-08-18 08:31:44Z</EndTime>
+                  <StarTime Type="System.DateTime">2011-08-18 08:31:44Z</StarTime>
+                  <DataIterationResults />
+                </innerResult>
+                <logicDetails Type="System.String">Condition Evaluation Details:
+</logicDetails>
+                <loopIteration Type="System.Int32">1</loopIteration>
+                <isLoop Type="System.Boolean">False</isLoop>
+              </Item>
+              <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+                <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+                <StepDescription Type="System.String">Navigate to : '/aeroviewr/'</StepDescription>
+                <TestId Type="System.String">1717c04f-9fa1-469b-bd54-772018aa114c</TestId>
+                <TestName Type="System.String">LogIn</TestName>
+                <TestPath Type="System.String">AeroViewr\LogIn.aii</TestPath>
+                <TestStepNumber Type="System.Int32">2</TestStepNumber>
+                <Order Type="System.Int32">17</Order>
+                <LogMessageOnError Type="System.String">
+                </LogMessageOnError>
+              </Item>
+              <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+                <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+                <StepDescription Type="System.String">Wait for '250' msec.</StepDescription>
+                <TestId Type="System.String">1717c04f-9fa1-469b-bd54-772018aa114c</TestId>
+                <TestName Type="System.String">LogIn</TestName>
+                <TestPath Type="System.String">AeroViewr\LogIn.aii</TestPath>
+                <TestStepNumber Type="System.Int32">3</TestStepNumber>
+                <Order Type="System.Int32">18</Order>
+                <LogMessageOnError Type="System.String">
+                </LogMessageOnError>
+              </Item>
+              <Item Type="ArtOfTest.WebAii.Design.Execution.LogicalStepResult" Version="2011.1.729.0">
+                <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+                <StepDescription Type="System.String">IF (Verify 'TextContent' 'Contains' 'Sign in' on 'SigninLink') THEN</StepDescription>
+                <TestId Type="System.String">1717c04f-9fa1-469b-bd54-772018aa114c</TestId>
+                <TestName Type="System.String">LogIn</TestName>
+                <TestPath Type="System.String">AeroViewr\LogIn.aii</TestPath>
+                <TestStepNumber Type="System.Int32">4</TestStepNumber>
+                <Order Type="System.Int32">19</Order>
+                <LogMessageOnError Type="System.String">
+                </LogMessageOnError>
+                <TestResult Type="ArtOfTest.WebAii.Design.Execution.TestResult" Version="2011.1.729.0">
+                  <TestId Type="System.String">1717c04f-9fa1-469b-bd54-772018aa114c</TestId>
+                  <TestName Type="System.String">LogIn</TestName>
+                  <TestPath Type="System.String">AeroViewr\LogIn.aii</TestPath>
+                  <ProjectPath Type="System.String">
+                  </ProjectPath>
+                  <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+                  <AutomationStepResults />
+                  <NotRunStepDescriptions>
+                    <Item Type="System.String">Navigate to : 'http://www.flickr.com'</Item>
+                    <Item Type="System.String">IF (Verify Exists 'EditYourImage') THEN</Item>
+                    <Item Type="System.String">Navigate to : '/aeroviewr/'</Item>
+                    <Item Type="System.String">Wait for '250' msec.</Item>
+                    <Item Type="System.String">IF (Verify 'TextContent' 'Contains' 'Sign in' on 'SigninLink') THEN</Item>
+                  </NotRunStepDescriptions>
+                  <PerStepMessages Type="System.String">
+                  </PerStepMessages>
+                  <TotalNumberOfPassedSteps Type="System.Int32">0</TotalNumberOfPassedSteps>
+                  <ExecutingTestStepCount Type="System.Int32">0</ExecutingTestStepCount>
+                  <TotalNumberOfNotRunSteps Type="System.Int32">0</TotalNumberOfNotRunSteps>
+                  <IsDataDrivenResult Type="System.Boolean">False</IsDataDrivenResult>
+                  <SeparatorLineCharCount Type="System.Int32">60</SeparatorLineCharCount>
+                  <ExecutionType Type="ArtOfTest.Common.Design.ExecutionType">QuickExecution</ExecutionType>
+                  <EndTime Type="System.DateTime">2011-08-18 08:31:45Z</EndTime>
+                  <StarTime Type="System.DateTime">2011-08-18 08:31:45Z</StarTime>
+                  <DataIterationResults />
+                </TestResult>
+                <innerResult Type="ArtOfTest.WebAii.Design.Execution.TestResult" Version="2011.1.729.0">
+                  <TestId Type="System.String">1717c04f-9fa1-469b-bd54-772018aa114c</TestId>
+                  <TestName Type="System.String">
+                  </TestName>
+                  <ProjectPath Type="System.String">
+                  </ProjectPath>
+                  <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+                  <AutomationStepResults>
+                    <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+                      <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+                      <StepDescription Type="System.String">Click 'SigninLink'</StepDescription>
+                      <TestId Type="System.String">1717c04f-9fa1-469b-bd54-772018aa114c</TestId>
+                      <TestName Type="System.String">LogIn</TestName>
+                      <TestPath Type="System.String">AeroViewr\LogIn.aii</TestPath>
+                      <TestStepNumber Type="System.Int32">0</TestStepNumber>
+                      <Order Type="System.Int32">20</Order>
+                      <LogMessageOnError Type="System.String">
+                      </LogMessageOnError>
+                    </Item>
+                    <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+                      <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+                      <StepDescription Type="System.String">Verify 'InnerText' 'Contains' 'Signed in as' on 'UserInfoSpan'</StepDescription>
+                      <TestId Type="System.String">1717c04f-9fa1-469b-bd54-772018aa114c</TestId>
+                      <TestName Type="System.String">LogIn</TestName>
+                      <TestPath Type="System.String">AeroViewr\LogIn.aii</TestPath>
+                      <TestStepNumber Type="System.Int32">1</TestStepNumber>
+                      <Order Type="System.Int32">21</Order>
+                      <LogMessageOnError Type="System.String">
+                      </LogMessageOnError>
+                    </Item>
+                  </AutomationStepResults>
+                  <NotRunStepDescriptions />
+                  <PerStepMessages Type="System.String">'8/18/2011 11:31:47 AM' - 'Pass' : 20. Click 'SigninLink'
+'8/18/2011 11:31:47 AM' - 'Pass' : 21. Verify 'InnerText' 'Contains' 'Signed in as' on 'UserInfoSpan'
+</PerStepMessages>
+                  <TotalNumberOfPassedSteps Type="System.Int32">2</TotalNumberOfPassedSteps>
+                  <ExecutingTestStepCount Type="System.Int32">2</ExecutingTestStepCount>
+                  <TotalNumberOfNotRunSteps Type="System.Int32">0</TotalNumberOfNotRunSteps>
+                  <IsDataDrivenResult Type="System.Boolean">False</IsDataDrivenResult>
+                  <SeparatorLineCharCount Type="System.Int32">60</SeparatorLineCharCount>
+                  <ExecutionType Type="ArtOfTest.Common.Design.ExecutionType">QuickExecution</ExecutionType>
+                  <EndTime Type="System.DateTime">2011-08-18 08:31:45Z</EndTime>
+                  <StarTime Type="System.DateTime">2011-08-18 08:31:45Z</StarTime>
+                  <DataIterationResults />
+                </innerResult>
+                <logicDetails Type="System.String">Condition Evaluation Details:
+
+Parameters:
+-----------
+TagSegmentType  = 'TextContent'
+CompareType     = 'Contains'
+ExpectedString  = Expected:[Sign in] , Actual:[Sign in]
+</logicDetails>
+                <loopIteration Type="System.Int32">1</loopIteration>
+                <isLoop Type="System.Boolean">False</isLoop>
+              </Item>
+            </AutomationStepResults>
+            <NotRunStepDescriptions />
+            <PerStepMessages Type="System.String">Overall Result: Pass
+'8/18/2011 11:31:44 AM' - 'Pass' : 1. Navigate to : 'http://www.flickr.com'
+'8/18/2011 11:31:45 AM' - 'Pass' : 2. IF (Verify Exists 'EditYourImage') THEN
+Logical step encountered. Executing branch =&gt; IF (Verify Exists 'EditYourImage') THEN:
+------------------------------------------------------------
+Condition Evaluation Details:
+
+------------------------------------------------------------
+'8/18/2011 11:31:45 AM' - 'Pass' : 3. Navigate to : '/aeroviewr/'
+
+'8/18/2011 11:31:45 AM' - 'Pass' : 17. Navigate to : '/aeroviewr/'
+'8/18/2011 11:31:45 AM' - 'Pass' : 18. Wait for '250' msec.
+'8/18/2011 11:31:47 AM' - 'Pass' : 19. IF (Verify 'TextContent' 'Contains' 'Sign in' on 'SigninLink') THEN
+Logical step encountered. Executing branch =&gt; IF (Verify 'TextContent' 'Contains' 'Sign in' on 'SigninLink') THEN:
+------------------------------------------------------------
+Condition Evaluation Details:
+
+Parameters:
+-----------
+TagSegmentType  = 'TextContent'
+CompareType     = 'Contains'
+ExpectedString  = Expected:[Sign in] , Actual:[Sign in]
+
+------------------------------------------------------------
+'8/18/2011 11:31:47 AM' - 'Pass' : 20. Click 'SigninLink'
+'8/18/2011 11:31:47 AM' - 'Pass' : 21. Verify 'InnerText' 'Contains' 'Signed in as' on 'UserInfoSpan'
+
+------------------------------------------------------------
+'8/18/2011 11:31:47 AM' - Overall Result: Pass
+'8/18/2011 11:31:47 AM' - Duration: [0 min: 7 sec: 199 msec]
+------------------------------------------------------------
+</PerStepMessages>
+            <TotalNumberOfPassedSteps Type="System.Int32">5</TotalNumberOfPassedSteps>
+            <ExecutingTestStepCount Type="System.Int32">5</ExecutingTestStepCount>
+            <TotalNumberOfNotRunSteps Type="System.Int32">0</TotalNumberOfNotRunSteps>
+            <IsDataDrivenResult Type="System.Boolean">False</IsDataDrivenResult>
+            <SeparatorLineCharCount Type="System.Int32">60</SeparatorLineCharCount>
+            <ExecutionType Type="ArtOfTest.Common.Design.ExecutionType">QuickExecution</ExecutionType>
+            <EndTime Type="System.DateTime">2011-08-18 08:31:47Z</EndTime>
+            <StarTime Type="System.DateTime">2011-08-18 08:31:39Z</StarTime>
+            <DataIterationResults />
+          </TestResult>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Wait for '3000' msec.</StepDescription>
+          <TestId Type="System.String">a71e5ebf-cad5-489d-9597-0e39d5d99e94</TestId>
+          <TestName Type="System.String">OpenSetSearchBack</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\OpenSetSearchBack.aii</TestPath>
+          <TestStepNumber Type="System.Int32">3</TestStepNumber>
+          <Order Type="System.Int32">4</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Click 'x5733159853Dcd6074b9eSJpgImage'</StepDescription>
+          <TestId Type="System.String">a71e5ebf-cad5-489d-9597-0e39d5d99e94</TestId>
+          <TestName Type="System.String">OpenSetSearchBack</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\OpenSetSearchBack.aii</TestPath>
+          <TestStepNumber Type="System.Int32">4</TestStepNumber>
+          <Order Type="System.Int32">5</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Click 'FooterSectionTag'</StepDescription>
+          <TestId Type="System.String">a71e5ebf-cad5-489d-9597-0e39d5d99e94</TestId>
+          <TestName Type="System.String">OpenSetSearchBack</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\OpenSetSearchBack.aii</TestPath>
+          <TestStepNumber Type="System.Int32">5</TestStepNumber>
+          <Order Type="System.Int32">6</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Click 'x5733159853Dcd6074b9eSJpgImage'</StepDescription>
+          <TestId Type="System.String">a71e5ebf-cad5-489d-9597-0e39d5d99e94</TestId>
+          <TestName Type="System.String">OpenSetSearchBack</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\OpenSetSearchBack.aii</TestPath>
+          <TestStepNumber Type="System.Int32">6</TestStepNumber>
+          <Order Type="System.Int32">7</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Wait for '1000' msec.</StepDescription>
+          <TestId Type="System.String">a71e5ebf-cad5-489d-9597-0e39d5d99e94</TestId>
+          <TestName Type="System.String">OpenSetSearchBack</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\OpenSetSearchBack.aii</TestPath>
+          <TestStepNumber Type="System.Int32">7</TestStepNumber>
+          <Order Type="System.Int32">8</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Set 'SearchBoxText' text to 'ninja'</StepDescription>
+          <TestId Type="System.String">a71e5ebf-cad5-489d-9597-0e39d5d99e94</TestId>
+          <TestName Type="System.String">OpenSetSearchBack</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\OpenSetSearchBack.aii</TestPath>
+          <TestStepNumber Type="System.Int32">8</TestStepNumber>
+          <Order Type="System.Int32">9</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Click 'SearchLink'</StepDescription>
+          <TestId Type="System.String">a71e5ebf-cad5-489d-9597-0e39d5d99e94</TestId>
+          <TestName Type="System.String">OpenSetSearchBack</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\OpenSetSearchBack.aii</TestPath>
+          <TestStepNumber Type="System.Int32">9</TestStepNumber>
+          <Order Type="System.Int32">10</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Verify element 'x1Link' 'is' visible.</StepDescription>
+          <TestId Type="System.String">a71e5ebf-cad5-489d-9597-0e39d5d99e94</TestId>
+          <TestName Type="System.String">OpenSetSearchBack</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\OpenSetSearchBack.aii</TestPath>
+          <TestStepNumber Type="System.Int32">10</TestStepNumber>
+          <Order Type="System.Int32">11</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Click 'BackButtonLink'</StepDescription>
+          <TestId Type="System.String">a71e5ebf-cad5-489d-9597-0e39d5d99e94</TestId>
+          <TestName Type="System.String">OpenSetSearchBack</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\OpenSetSearchBack.aii</TestPath>
+          <TestStepNumber Type="System.Int32">11</TestStepNumber>
+          <Order Type="System.Int32">12</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">[OpenSetSearchBack_CodedStep] : @"Verify 'TextContent' 'Contains' 'my set' on 'MySetEmTag' - assert that "my set" pic is visible</StepDescription>
+          <TestId Type="System.String">a71e5ebf-cad5-489d-9597-0e39d5d99e94</TestId>
+          <TestName Type="System.String">OpenSetSearchBack</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\OpenSetSearchBack.aii</TestPath>
+          <TestStepNumber Type="System.Int32">12</TestStepNumber>
+          <Order Type="System.Int32">13</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+      </AutomationStepResults>
+      <NotRunStepDescriptions />
+      <PerStepMessages Type="System.String">Overall Result: Pass
+------------------------------------------------------------
+'8/18/2011 11:31:36 AM' - Starting execution....
+'8/18/2011 11:31:38 AM' - Detected custom code in test. Locating test assembly: AeroViewr.dll.
+'8/18/2011 11:31:38 AM' - Assembly Found: C:\work\GitHub\kendo\functional-tests\AeroViewr\bin\AeroViewr.dll
+'8/18/2011 11:31:38 AM' - Loading code class: 'AeroViewr.OpenSetSearchBack'.
+------------------------------------------------------------
+'8/18/2011 11:31:38 AM' - 'Pass' : 1. Navigate to : '/aeroviewr/'
+'8/18/2011 11:31:39 AM' - 'Pass' : 2. Wait for '1500' msec.
+'8/18/2011 11:31:47 AM' - 'Pass' : 3. Execute test 'LogIn'
+
+&gt;&gt;&gt; Test-as-Step 'AeroViewr\LogIn.aii' log starts:
+
+Overall Result: Pass
+'8/18/2011 11:31:44 AM' - 'Pass' : 1. Navigate to : 'http://www.flickr.com'
+'8/18/2011 11:31:45 AM' - 'Pass' : 2. IF (Verify Exists 'EditYourImage') THEN
+Logical step encountered. Executing branch =&gt; IF (Verify Exists 'EditYourImage') THEN:
+------------------------------------------------------------
+Condition Evaluation Details:
+
+------------------------------------------------------------
+'8/18/2011 11:31:45 AM' - 'Pass' : 3. Navigate to : '/aeroviewr/'
+
+'8/18/2011 11:31:45 AM' - 'Pass' : 17. Navigate to : '/aeroviewr/'
+'8/18/2011 11:31:45 AM' - 'Pass' : 18. Wait for '250' msec.
+'8/18/2011 11:31:47 AM' - 'Pass' : 19. IF (Verify 'TextContent' 'Contains' 'Sign in' on 'SigninLink') THEN
+Logical step encountered. Executing branch =&gt; IF (Verify 'TextContent' 'Contains' 'Sign in' on 'SigninLink') THEN:
+------------------------------------------------------------
+Condition Evaluation Details:
+
+Parameters:
+-----------
+TagSegmentType  = 'TextContent'
+CompareType     = 'Contains'
+ExpectedString  = Expected:[Sign in] , Actual:[Sign in]
+
+------------------------------------------------------------
+'8/18/2011 11:31:47 AM' - 'Pass' : 20. Click 'SigninLink'
+'8/18/2011 11:31:47 AM' - 'Pass' : 21. Verify 'InnerText' 'Contains' 'Signed in as' on 'UserInfoSpan'
+
+------------------------------------------------------------
+'8/18/2011 11:31:47 AM' - Overall Result: Pass
+'8/18/2011 11:31:47 AM' - Duration: [0 min: 7 sec: 199 msec]
+------------------------------------------------------------
+
+&lt;&lt;&lt; Test-as-Step 'AeroViewr\LogIn.aii' log ends.
+
+'8/18/2011 11:31:50 AM' - 'Pass' : 4. Wait for '3000' msec.
+'8/18/2011 11:31:50 AM' - 'Pass' : 5. Click 'x5733159853Dcd6074b9eSJpgImage'
+'8/18/2011 11:31:50 AM' - 'Pass' : 6. Click 'FooterSectionTag'
+'8/18/2011 11:31:50 AM' - 'Pass' : 7. Click 'x5733159853Dcd6074b9eSJpgImage'
+'8/18/2011 11:31:51 AM' - 'Pass' : 8. Wait for '1000' msec.
+'8/18/2011 11:31:52 AM' - 'Pass' : 9. Set 'SearchBoxText' text to 'ninja'
+'8/18/2011 11:31:52 AM' - 'Pass' : 10. Click 'SearchLink'
+'8/18/2011 11:31:52 AM' - 'Pass' : 11. Verify element 'x1Link' 'is' visible.
+'8/18/2011 11:31:52 AM' - 'Pass' : 12. Click 'BackButtonLink'
+'8/18/2011 11:31:52 AM' - 'Pass' : 13. [OpenSetSearchBack_CodedStep] : @"Verify 'TextContent' 'Contains' 'my set' on 'MySetEmTag' - assert that "my set" pic is visible
+------------------------------------------------------------
+'8/18/2011 11:31:52 AM' - Overall Result: Pass
+'8/18/2011 11:31:52 AM' - Duration: [0 min: 14 sec: 813 msec]
+------------------------------------------------------------
+'8/18/2011 11:31:53 AM' - Test completed!
+</PerStepMessages>
+      <TotalNumberOfPassedSteps Type="System.Int32">13</TotalNumberOfPassedSteps>
+      <ExecutingTestStepCount Type="System.Int32">13</ExecutingTestStepCount>
+      <TotalNumberOfNotRunSteps Type="System.Int32">0</TotalNumberOfNotRunSteps>
+      <IsDataDrivenResult Type="System.Boolean">False</IsDataDrivenResult>
+      <SeparatorLineCharCount Type="System.Int32">60</SeparatorLineCharCount>
+      <ExecutionType Type="ArtOfTest.Common.Design.ExecutionType">QuickExecution</ExecutionType>
+      <EndTime Type="System.DateTime">2011-08-18 08:31:52Z</EndTime>
+      <StarTime Type="System.DateTime">2011-08-18 08:31:38Z</StarTime>
+      <DataIterationResults />
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestResult" Version="2011.1.729.0">
+      <TestId Type="System.String">1d421b65-b68b-4f11-8775-0ce895da03e8</TestId>
+      <TestName Type="System.String">PlayPause</TestName>
+      <TestPath Type="System.String">TestProject2\AeroViewr\PlayPause.aii</TestPath>
+      <ProjectPath Type="System.String">
+      </ProjectPath>
+      <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+      <AutomationStepResults>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Navigate to : '/aeroviewr/'</StepDescription>
+          <TestId Type="System.String">1d421b65-b68b-4f11-8775-0ce895da03e8</TestId>
+          <TestName Type="System.String">PlayPause</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\PlayPause.aii</TestPath>
+          <TestStepNumber Type="System.Int32">0</TestStepNumber>
+          <Order Type="System.Int32">1</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Wait for '3000' msec.</StepDescription>
+          <TestId Type="System.String">1d421b65-b68b-4f11-8775-0ce895da03e8</TestId>
+          <TestName Type="System.String">PlayPause</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\PlayPause.aii</TestPath>
+          <TestStepNumber Type="System.Int32">1</TestStepNumber>
+          <Order Type="System.Int32">2</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">[PlayPause_CodedStep1] : @"store fires image src</StepDescription>
+          <TestId Type="System.String">1d421b65-b68b-4f11-8775-0ce895da03e8</TestId>
+          <TestName Type="System.String">PlayPause</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\PlayPause.aii</TestPath>
+          <TestStepNumber Type="System.Int32">2</TestStepNumber>
+          <Order Type="System.Int32">3</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Click 'Span0'</StepDescription>
+          <TestId Type="System.String">1d421b65-b68b-4f11-8775-0ce895da03e8</TestId>
+          <TestName Type="System.String">PlayPause</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\PlayPause.aii</TestPath>
+          <TestStepNumber Type="System.Int32">3</TestStepNumber>
+          <Order Type="System.Int32">4</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Wait for 'TextContent' 'Contains' 'Pause' on 'PauseEmTag'</StepDescription>
+          <TestId Type="System.String">1d421b65-b68b-4f11-8775-0ce895da03e8</TestId>
+          <TestName Type="System.String">PlayPause</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\PlayPause.aii</TestPath>
+          <TestStepNumber Type="System.Int32">4</TestStepNumber>
+          <Order Type="System.Int32">5</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Wait for '7000' msec.</StepDescription>
+          <TestId Type="System.String">1d421b65-b68b-4f11-8775-0ce895da03e8</TestId>
+          <TestName Type="System.String">PlayPause</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\PlayPause.aii</TestPath>
+          <TestStepNumber Type="System.Int32">5</TestStepNumber>
+          <Order Type="System.Int32">6</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">[PlayPause_CodedStep] : @"Wait for '7000' msec. - ASSERTS THAT THE BIG IMAGE IS CHANGES AFTER ANIMATING FOR SOME TIME</StepDescription>
+          <TestId Type="System.String">1d421b65-b68b-4f11-8775-0ce895da03e8</TestId>
+          <TestName Type="System.String">PlayPause</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\PlayPause.aii</TestPath>
+          <TestStepNumber Type="System.Int32">6</TestStepNumber>
+          <Order Type="System.Int32">7</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Click 'Span0'</StepDescription>
+          <TestId Type="System.String">1d421b65-b68b-4f11-8775-0ce895da03e8</TestId>
+          <TestName Type="System.String">PlayPause</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\PlayPause.aii</TestPath>
+          <TestStepNumber Type="System.Int32">7</TestStepNumber>
+          <Order Type="System.Int32">8</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Verify 'TextContent' 'Contains' 'Play' on 'PlayEmTag'</StepDescription>
+          <TestId Type="System.String">1d421b65-b68b-4f11-8775-0ce895da03e8</TestId>
+          <TestName Type="System.String">PlayPause</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\PlayPause.aii</TestPath>
+          <TestStepNumber Type="System.Int32">8</TestStepNumber>
+          <Order Type="System.Int32">9</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+      </AutomationStepResults>
+      <NotRunStepDescriptions />
+      <PerStepMessages Type="System.String">Overall Result: Pass
+------------------------------------------------------------
+'8/18/2011 11:31:53 AM' - Starting execution....
+'8/18/2011 11:31:55 AM' - Detected custom code in test. Locating test assembly: AeroViewr.dll.
+'8/18/2011 11:31:55 AM' - Assembly Found: C:\work\GitHub\kendo\functional-tests\AeroViewr\bin\AeroViewr.dll
+'8/18/2011 11:31:55 AM' - Loading code class: 'AeroViewr.PlayPause'.
+------------------------------------------------------------
+'8/18/2011 11:31:55 AM' - 'Pass' : 1. Navigate to : '/aeroviewr/'
+'8/18/2011 11:31:58 AM' - 'Pass' : 2. Wait for '3000' msec.
+'8/18/2011 11:31:58 AM' - 'Pass' : 3. [PlayPause_CodedStep1] : @"store fires image src
+'8/18/2011 11:31:58 AM' - 'Pass' : 4. Click 'Span0'
+'8/18/2011 11:31:58 AM' - 'Pass' : 5. Wait for 'TextContent' 'Contains' 'Pause' on 'PauseEmTag'
+'8/18/2011 11:32:05 AM' - 'Pass' : 6. Wait for '7000' msec.
+'8/18/2011 11:32:06 AM' - 'Pass' : 7. [PlayPause_CodedStep] : @"Wait for '7000' msec. - ASSERTS THAT THE BIG IMAGE IS CHANGES AFTER ANIMATING FOR SOME TIME
+'8/18/2011 11:32:07 AM' - 'Pass' : 8. Click 'Span0'
+'8/18/2011 11:32:07 AM' - 'Pass' : 9. Verify 'TextContent' 'Contains' 'Play' on 'PlayEmTag'
+------------------------------------------------------------
+'8/18/2011 11:32:07 AM' - Overall Result: Pass
+'8/18/2011 11:32:07 AM' - Duration: [0 min: 12 sec: 58 msec]
+------------------------------------------------------------
+'8/18/2011 11:32:07 AM' - Test completed!
+</PerStepMessages>
+      <TotalNumberOfPassedSteps Type="System.Int32">9</TotalNumberOfPassedSteps>
+      <ExecutingTestStepCount Type="System.Int32">9</ExecutingTestStepCount>
+      <TotalNumberOfNotRunSteps Type="System.Int32">0</TotalNumberOfNotRunSteps>
+      <IsDataDrivenResult Type="System.Boolean">False</IsDataDrivenResult>
+      <SeparatorLineCharCount Type="System.Int32">60</SeparatorLineCharCount>
+      <ExecutionType Type="ArtOfTest.Common.Design.ExecutionType">QuickExecution</ExecutionType>
+      <EndTime Type="System.DateTime">2011-08-18 08:32:07Z</EndTime>
+      <StarTime Type="System.DateTime">2011-08-18 08:31:55Z</StarTime>
+      <DataIterationResults />
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestResult" Version="2011.1.729.0">
+      <TestId Type="System.String">5aa66a59-9b66-467e-84ac-d14f38e0d1d2</TestId>
+      <TestName Type="System.String">SearchNoresults</TestName>
+      <TestPath Type="System.String">TestProject2\AeroViewr\SearchNoresults.aii</TestPath>
+      <ProjectPath Type="System.String">
+      </ProjectPath>
+      <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+      <AutomationStepResults>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Navigate to : '/aeroviewr/'</StepDescription>
+          <TestId Type="System.String">5aa66a59-9b66-467e-84ac-d14f38e0d1d2</TestId>
+          <TestName Type="System.String">SearchNoresults</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\SearchNoresults.aii</TestPath>
+          <TestStepNumber Type="System.Int32">0</TestStepNumber>
+          <Order Type="System.Int32">1</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Wait for '3000' msec.</StepDescription>
+          <TestId Type="System.String">5aa66a59-9b66-467e-84ac-d14f38e0d1d2</TestId>
+          <TestName Type="System.String">SearchNoresults</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\SearchNoresults.aii</TestPath>
+          <TestStepNumber Type="System.Int32">1</TestStepNumber>
+          <Order Type="System.Int32">2</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Set 'SearchBoxText' text to '4ervena skoda'</StepDescription>
+          <TestId Type="System.String">5aa66a59-9b66-467e-84ac-d14f38e0d1d2</TestId>
+          <TestName Type="System.String">SearchNoresults</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\SearchNoresults.aii</TestPath>
+          <TestStepNumber Type="System.Int32">2</TestStepNumber>
+          <Order Type="System.Int32">3</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Click 'SearchLink'</StepDescription>
+          <TestId Type="System.String">5aa66a59-9b66-467e-84ac-d14f38e0d1d2</TestId>
+          <TestName Type="System.String">SearchNoresults</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\SearchNoresults.aii</TestPath>
+          <TestStepNumber Type="System.Int32">3</TestStepNumber>
+          <Order Type="System.Int32">4</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Click 'MainSectionTag'</StepDescription>
+          <TestId Type="System.String">5aa66a59-9b66-467e-84ac-d14f38e0d1d2</TestId>
+          <TestName Type="System.String">SearchNoresults</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\SearchNoresults.aii</TestPath>
+          <TestStepNumber Type="System.Int32">4</TestStepNumber>
+          <Order Type="System.Int32">5</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Wait for 'TextContent' 'Contains' 'No images found' on 'NoimagesDiv'</StepDescription>
+          <TestId Type="System.String">5aa66a59-9b66-467e-84ac-d14f38e0d1d2</TestId>
+          <TestName Type="System.String">SearchNoresults</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\SearchNoresults.aii</TestPath>
+          <TestStepNumber Type="System.Int32">5</TestStepNumber>
+          <Order Type="System.Int32">6</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Verify 'TextContent' 'Contains' 'No images found' on 'NoimagesDiv'</StepDescription>
+          <TestId Type="System.String">5aa66a59-9b66-467e-84ac-d14f38e0d1d2</TestId>
+          <TestName Type="System.String">SearchNoresults</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\SearchNoresults.aii</TestPath>
+          <TestStepNumber Type="System.Int32">6</TestStepNumber>
+          <Order Type="System.Int32">7</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+      </AutomationStepResults>
+      <NotRunStepDescriptions />
+      <PerStepMessages Type="System.String">Overall Result: Pass
+------------------------------------------------------------
+'8/18/2011 11:32:08 AM' - Starting execution....
+------------------------------------------------------------
+'8/18/2011 11:32:09 AM' - 'Pass' : 1. Navigate to : '/aeroviewr/'
+'8/18/2011 11:32:12 AM' - 'Pass' : 2. Wait for '3000' msec.
+'8/18/2011 11:32:12 AM' - 'Pass' : 3. Set 'SearchBoxText' text to '4ervena skoda'
+'8/18/2011 11:32:13 AM' - 'Pass' : 4. Click 'SearchLink'
+'8/18/2011 11:32:13 AM' - 'Pass' : 5. Click 'MainSectionTag'
+'8/18/2011 11:32:14 AM' - 'Pass' : 6. Wait for 'TextContent' 'Contains' 'No images found' on 'NoimagesDiv'
+'8/18/2011 11:32:14 AM' - 'Pass' : 7. Verify 'TextContent' 'Contains' 'No images found' on 'NoimagesDiv'
+------------------------------------------------------------
+'8/18/2011 11:32:14 AM' - Overall Result: Pass
+'8/18/2011 11:32:14 AM' - Duration: [0 min: 4 sec: 656 msec]
+------------------------------------------------------------
+'8/18/2011 11:32:14 AM' - Test completed!
+</PerStepMessages>
+      <TotalNumberOfPassedSteps Type="System.Int32">7</TotalNumberOfPassedSteps>
+      <ExecutingTestStepCount Type="System.Int32">7</ExecutingTestStepCount>
+      <TotalNumberOfNotRunSteps Type="System.Int32">0</TotalNumberOfNotRunSteps>
+      <IsDataDrivenResult Type="System.Boolean">False</IsDataDrivenResult>
+      <SeparatorLineCharCount Type="System.Int32">60</SeparatorLineCharCount>
+      <ExecutionType Type="ArtOfTest.Common.Design.ExecutionType">QuickExecution</ExecutionType>
+      <EndTime Type="System.DateTime">2011-08-18 08:32:14Z</EndTime>
+      <StarTime Type="System.DateTime">2011-08-18 08:32:09Z</StarTime>
+      <DataIterationResults />
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestResult" Version="2011.1.729.0">
+      <TestId Type="System.String">81272445-c191-48a7-9f7e-4efc378d84b1</TestId>
+      <TestName Type="System.String">SearchOpenImage</TestName>
+      <TestPath Type="System.String">TestProject2\AeroViewr\SearchOpenImage.aii</TestPath>
+      <ProjectPath Type="System.String">
+      </ProjectPath>
+      <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+      <AutomationStepResults>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Navigate to : '/aeroviewr/'</StepDescription>
+          <TestId Type="System.String">81272445-c191-48a7-9f7e-4efc378d84b1</TestId>
+          <TestName Type="System.String">SearchOpenImage</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\SearchOpenImage.aii</TestPath>
+          <TestStepNumber Type="System.Int32">0</TestStepNumber>
+          <Order Type="System.Int32">1</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Wait for '3000' msec.</StepDescription>
+          <TestId Type="System.String">81272445-c191-48a7-9f7e-4efc378d84b1</TestId>
+          <TestName Type="System.String">SearchOpenImage</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\SearchOpenImage.aii</TestPath>
+          <TestStepNumber Type="System.Int32">1</TestStepNumber>
+          <Order Type="System.Int32">2</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Set 'SearchBoxText' text to 'kendo'</StepDescription>
+          <TestId Type="System.String">81272445-c191-48a7-9f7e-4efc378d84b1</TestId>
+          <TestName Type="System.String">SearchOpenImage</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\SearchOpenImage.aii</TestPath>
+          <TestStepNumber Type="System.Int32">2</TestStepNumber>
+          <Order Type="System.Int32">3</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Click 'SearchLink'</StepDescription>
+          <TestId Type="System.String">81272445-c191-48a7-9f7e-4efc378d84b1</TestId>
+          <TestName Type="System.String">SearchOpenImage</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\SearchOpenImage.aii</TestPath>
+          <TestStepNumber Type="System.Int32">3</TestStepNumber>
+          <Order Type="System.Int32">4</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Click 'MainSectionTag'</StepDescription>
+          <TestId Type="System.String">81272445-c191-48a7-9f7e-4efc378d84b1</TestId>
+          <TestName Type="System.String">SearchOpenImage</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\SearchOpenImage.aii</TestPath>
+          <TestStepNumber Type="System.Int32">4</TestStepNumber>
+          <Order Type="System.Int32">5</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Wait for '3800' msec.</StepDescription>
+          <TestId Type="System.String">81272445-c191-48a7-9f7e-4efc378d84b1</TestId>
+          <TestName Type="System.String">SearchOpenImage</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\SearchOpenImage.aii</TestPath>
+          <TestStepNumber Type="System.Int32">5</TestStepNumber>
+          <Order Type="System.Int32">6</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Click 'Kendo4Image'</StepDescription>
+          <TestId Type="System.String">81272445-c191-48a7-9f7e-4efc378d84b1</TestId>
+          <TestName Type="System.String">SearchOpenImage</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\SearchOpenImage.aii</TestPath>
+          <TestStepNumber Type="System.Int32">6</TestStepNumber>
+          <Order Type="System.Int32">7</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Verify element 'BigPhotoImage' 'is' visible.</StepDescription>
+          <TestId Type="System.String">81272445-c191-48a7-9f7e-4efc378d84b1</TestId>
+          <TestName Type="System.String">SearchOpenImage</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\SearchOpenImage.aii</TestPath>
+          <TestStepNumber Type="System.Int32">7</TestStepNumber>
+          <Order Type="System.Int32">8</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Click 'PhotoWrapSectionTag'</StepDescription>
+          <TestId Type="System.String">81272445-c191-48a7-9f7e-4efc378d84b1</TestId>
+          <TestName Type="System.String">SearchOpenImage</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\SearchOpenImage.aii</TestPath>
+          <TestStepNumber Type="System.Int32">8</TestStepNumber>
+          <Order Type="System.Int32">9</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Wait for '1000' msec.</StepDescription>
+          <TestId Type="System.String">81272445-c191-48a7-9f7e-4efc378d84b1</TestId>
+          <TestName Type="System.String">SearchOpenImage</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\SearchOpenImage.aii</TestPath>
+          <TestStepNumber Type="System.Int32">9</TestStepNumber>
+          <Order Type="System.Int32">10</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Verify element 'Kendo4Image' 'is not' visible.</StepDescription>
+          <TestId Type="System.String">81272445-c191-48a7-9f7e-4efc378d84b1</TestId>
+          <TestName Type="System.String">SearchOpenImage</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\SearchOpenImage.aii</TestPath>
+          <TestStepNumber Type="System.Int32">10</TestStepNumber>
+          <Order Type="System.Int32">11</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Wait for '2000' msec.</StepDescription>
+          <TestId Type="System.String">81272445-c191-48a7-9f7e-4efc378d84b1</TestId>
+          <TestName Type="System.String">SearchOpenImage</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\SearchOpenImage.aii</TestPath>
+          <TestStepNumber Type="System.Int32">11</TestStepNumber>
+          <Order Type="System.Int32">12</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">NotRun</ResultType>
+          <StepDescription Type="System.String">Desktop command: LeftClick on BackButtonLink</StepDescription>
+          <TestId Type="System.String">81272445-c191-48a7-9f7e-4efc378d84b1</TestId>
+          <TestName Type="System.String">SearchOpenImage</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\SearchOpenImage.aii</TestPath>
+          <TestStepNumber Type="System.Int32">12</TestStepNumber>
+          <Order Type="System.Int32">13</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Click 'BackButtonLink'</StepDescription>
+          <TestId Type="System.String">81272445-c191-48a7-9f7e-4efc378d84b1</TestId>
+          <TestName Type="System.String">SearchOpenImage</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\SearchOpenImage.aii</TestPath>
+          <TestStepNumber Type="System.Int32">13</TestStepNumber>
+          <Order Type="System.Int32">14</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Wait for '6000' msec.</StepDescription>
+          <TestId Type="System.String">81272445-c191-48a7-9f7e-4efc378d84b1</TestId>
+          <TestName Type="System.String">SearchOpenImage</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\SearchOpenImage.aii</TestPath>
+          <TestStepNumber Type="System.Int32">14</TestStepNumber>
+          <Order Type="System.Int32">15</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Wait for element 'Kendo4Image' 'is' visible.</StepDescription>
+          <TestId Type="System.String">81272445-c191-48a7-9f7e-4efc378d84b1</TestId>
+          <TestName Type="System.String">SearchOpenImage</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\SearchOpenImage.aii</TestPath>
+          <TestStepNumber Type="System.Int32">15</TestStepNumber>
+          <Order Type="System.Int32">16</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Click 'BackButtonLink'</StepDescription>
+          <TestId Type="System.String">81272445-c191-48a7-9f7e-4efc378d84b1</TestId>
+          <TestName Type="System.String">SearchOpenImage</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\SearchOpenImage.aii</TestPath>
+          <TestStepNumber Type="System.Int32">16</TestStepNumber>
+          <Order Type="System.Int32">17</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Wait for '1000' msec.</StepDescription>
+          <TestId Type="System.String">81272445-c191-48a7-9f7e-4efc378d84b1</TestId>
+          <TestName Type="System.String">SearchOpenImage</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\SearchOpenImage.aii</TestPath>
+          <TestStepNumber Type="System.Int32">17</TestStepNumber>
+          <Order Type="System.Int32">18</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Verify 'TextContent' 'Contains' 'Back to search results' on 'BackButtonLink'</StepDescription>
+          <TestId Type="System.String">81272445-c191-48a7-9f7e-4efc378d84b1</TestId>
+          <TestName Type="System.String">SearchOpenImage</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\SearchOpenImage.aii</TestPath>
+          <TestStepNumber Type="System.Int32">18</TestStepNumber>
+          <Order Type="System.Int32">19</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+      </AutomationStepResults>
+      <NotRunStepDescriptions />
+      <PerStepMessages Type="System.String">Overall Result: Pass
+------------------------------------------------------------
+'8/18/2011 11:32:14 AM' - Starting execution....
+------------------------------------------------------------
+'8/18/2011 11:32:16 AM' - 'Pass' : 1. Navigate to : '/aeroviewr/'
+'8/18/2011 11:32:19 AM' - 'Pass' : 2. Wait for '3000' msec.
+'8/18/2011 11:32:19 AM' - 'Pass' : 3. Set 'SearchBoxText' text to 'kendo'
+'8/18/2011 11:32:20 AM' - 'Pass' : 4. Click 'SearchLink'
+'8/18/2011 11:32:20 AM' - 'Pass' : 5. Click 'MainSectionTag'
+'8/18/2011 11:32:24 AM' - 'Pass' : 6. Wait for '3800' msec.
+'8/18/2011 11:32:24 AM' - 'Pass' : 7. Click 'Kendo4Image'
+'8/18/2011 11:32:25 AM' - 'Pass' : 8. Verify element 'BigPhotoImage' 'is' visible.
+'8/18/2011 11:32:25 AM' - 'Pass' : 9. Click 'PhotoWrapSectionTag'
+'8/18/2011 11:32:26 AM' - 'Pass' : 10. Wait for '1000' msec.
+'8/18/2011 11:32:27 AM' - 'Pass' : 11. Verify element 'Kendo4Image' 'is not' visible.
+'8/18/2011 11:32:29 AM' - 'Pass' : 12. Wait for '2000' msec.
+'8/18/2011 11:32:29 AM' - 'NotRun' : 13. Desktop command: LeftClick on BackButtonLink
+'8/18/2011 11:32:30 AM' - 'Pass' : 14. Click 'BackButtonLink'
+'8/18/2011 11:32:36 AM' - 'Pass' : 15. Wait for '6000' msec.
+'8/18/2011 11:32:36 AM' - 'Pass' : 16. Wait for element 'Kendo4Image' 'is' visible.
+'8/18/2011 11:32:37 AM' - 'Pass' : 17. Click 'BackButtonLink'
+'8/18/2011 11:32:38 AM' - 'Pass' : 18. Wait for '1000' msec.
+'8/18/2011 11:32:38 AM' - 'Pass' : 19. Verify 'TextContent' 'Contains' 'Back to search results' on 'BackButtonLink'
+------------------------------------------------------------
+'8/18/2011 11:32:38 AM' - Overall Result: Pass
+'8/18/2011 11:32:38 AM' - Duration: [0 min: 21 sec: 885 msec]
+------------------------------------------------------------
+'8/18/2011 11:32:38 AM' - Test completed!
+</PerStepMessages>
+      <TotalNumberOfPassedSteps Type="System.Int32">18</TotalNumberOfPassedSteps>
+      <ExecutingTestStepCount Type="System.Int32">18</ExecutingTestStepCount>
+      <TotalNumberOfNotRunSteps Type="System.Int32">1</TotalNumberOfNotRunSteps>
+      <IsDataDrivenResult Type="System.Boolean">False</IsDataDrivenResult>
+      <SeparatorLineCharCount Type="System.Int32">60</SeparatorLineCharCount>
+      <ExecutionType Type="ArtOfTest.Common.Design.ExecutionType">QuickExecution</ExecutionType>
+      <EndTime Type="System.DateTime">2011-08-18 08:32:38Z</EndTime>
+      <StarTime Type="System.DateTime">2011-08-18 08:32:16Z</StarTime>
+      <DataIterationResults />
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestResult" Version="2011.1.729.0">
+      <TestId Type="System.String">0983cbaf-ce6d-40bd-8847-34bbae140b4e</TestId>
+      <TestName Type="System.String">UploadNotLogged</TestName>
+      <TestPath Type="System.String">TestProject2\AeroViewr\UploadNotLogged.aii</TestPath>
+      <ProjectPath Type="System.String">
+      </ProjectPath>
+      <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+      <AutomationStepResults>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Navigate to : '/aeroviewr/'</StepDescription>
+          <TestId Type="System.String">0983cbaf-ce6d-40bd-8847-34bbae140b4e</TestId>
+          <TestName Type="System.String">UploadNotLogged</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\UploadNotLogged.aii</TestPath>
+          <TestStepNumber Type="System.Int32">0</TestStepNumber>
+          <Order Type="System.Int32">1</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Wait for '1500' msec.</StepDescription>
+          <TestId Type="System.String">0983cbaf-ce6d-40bd-8847-34bbae140b4e</TestId>
+          <TestName Type="System.String">UploadNotLogged</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\UploadNotLogged.aii</TestPath>
+          <TestStepNumber Type="System.Int32">1</TestStepNumber>
+          <Order Type="System.Int32">2</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Click 'Span1'</StepDescription>
+          <TestId Type="System.String">0983cbaf-ce6d-40bd-8847-34bbae140b4e</TestId>
+          <TestName Type="System.String">UploadNotLogged</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\UploadNotLogged.aii</TestPath>
+          <TestStepNumber Type="System.Int32">2</TestStepNumber>
+          <Order Type="System.Int32">3</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Verify 'TextContent' 'Contains' 'You mustto upload photos.' on 'YouMusttoH1Tag'</StepDescription>
+          <TestId Type="System.String">0983cbaf-ce6d-40bd-8847-34bbae140b4e</TestId>
+          <TestName Type="System.String">UploadNotLogged</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\UploadNotLogged.aii</TestPath>
+          <TestStepNumber Type="System.Int32">3</TestStepNumber>
+          <Order Type="System.Int32">4</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+        <Item Type="ArtOfTest.WebAii.Design.AutomationStepResult" Version="2011.1.729.0">
+          <ResultType Type="ArtOfTest.Common.Design.ResultType">Pass</ResultType>
+          <StepDescription Type="System.String">Verify 'TextContent' 'Contains' 'sign in' on 'UploadSignInLink'</StepDescription>
+          <TestId Type="System.String">0983cbaf-ce6d-40bd-8847-34bbae140b4e</TestId>
+          <TestName Type="System.String">UploadNotLogged</TestName>
+          <TestPath Type="System.String">TestProject2\AeroViewr\UploadNotLogged.aii</TestPath>
+          <TestStepNumber Type="System.Int32">4</TestStepNumber>
+          <Order Type="System.Int32">5</Order>
+          <LogMessageOnError Type="System.String">
+          </LogMessageOnError>
+        </Item>
+      </AutomationStepResults>
+      <NotRunStepDescriptions />
+      <PerStepMessages Type="System.String">Overall Result: Pass
+------------------------------------------------------------
+'8/18/2011 11:32:39 AM' - Starting execution....
+------------------------------------------------------------
+'8/18/2011 11:32:40 AM' - 'Pass' : 1. Navigate to : '/aeroviewr/'
+'8/18/2011 11:32:42 AM' - 'Pass' : 2. Wait for '1500' msec.
+'8/18/2011 11:32:42 AM' - 'Pass' : 3. Click 'Span1'
+'8/18/2011 11:32:42 AM' - 'Pass' : 4. Verify 'TextContent' 'Contains' 'You mustto upload photos.' on 'YouMusttoH1Tag'
+'8/18/2011 11:32:42 AM' - 'Pass' : 5. Verify 'TextContent' 'Contains' 'sign in' on 'UploadSignInLink'
+------------------------------------------------------------
+'8/18/2011 11:32:42 AM' - Overall Result: Pass
+'8/18/2011 11:32:42 AM' - Duration: [0 min: 2 sec: 336 msec]
+------------------------------------------------------------
+'8/18/2011 11:32:43 AM' - Test completed!
+</PerStepMessages>
+      <TotalNumberOfPassedSteps Type="System.Int32">5</TotalNumberOfPassedSteps>
+      <ExecutingTestStepCount Type="System.Int32">5</ExecutingTestStepCount>
+      <TotalNumberOfNotRunSteps Type="System.Int32">0</TotalNumberOfNotRunSteps>
+      <IsDataDrivenResult Type="System.Boolean">False</IsDataDrivenResult>
+      <SeparatorLineCharCount Type="System.Int32">60</SeparatorLineCharCount>
+      <ExecutionType Type="ArtOfTest.Common.Design.ExecutionType">QuickExecution</ExecutionType>
+      <EndTime Type="System.DateTime">2011-08-18 08:32:42Z</EndTime>
+      <StarTime Type="System.DateTime">2011-08-18 08:32:40Z</StarTime>
+      <DataIterationResults />
+    </Item>
+  </TestResults>
+  <ResultId Type="System.String">bb732b4d-8df0-4137-9da2-b5c2f5df5573</ResultId>
+  <Machine Type="ArtOfTest.WebAii.Design.Execution.Scheduling.Machine" Version="2011.1.729.0">
+    <Id Type="System.String">00000000-0000-0000-0000-000000000000</Id>
+    <NetworkName Type="System.String">AGGEORGIEV</NetworkName>
+    <OperatingSystem Type="System.String">Windows 7</OperatingSystem>
+    <InstalledBrowsers>
+      <Item Type="ArtOfTest.WebAii.Design.Execution.Scheduling.BrowserInformation" Version="2011.1.729.0">
+        <BrowserType Type="ArtOfTest.WebAii.Core.BrowserType">InternetExplorer</BrowserType>
+        <Version Type="System.String">9.0.8112.16421</Version>
+      </Item>
+      <Item Type="ArtOfTest.WebAii.Design.Execution.Scheduling.BrowserInformation" Version="2011.1.729.0">
+        <BrowserType Type="ArtOfTest.WebAii.Core.BrowserType">FireFox</BrowserType>
+        <Version Type="System.String">5.0 (en-US)</Version>
+      </Item>
+      <Item Type="ArtOfTest.WebAii.Design.Execution.Scheduling.BrowserInformation" Version="2011.1.729.0">
+        <BrowserType Type="ArtOfTest.WebAii.Core.BrowserType">Safari</BrowserType>
+        <Version Type="System.String">5.0.5</Version>
+      </Item>
+      <Item Type="ArtOfTest.WebAii.Design.Execution.Scheduling.BrowserInformation" Version="2011.1.729.0">
+        <BrowserType Type="ArtOfTest.WebAii.Core.BrowserType">Chrome</BrowserType>
+        <Version Type="System.String">
+        </Version>
+      </Item>
+    </InstalledBrowsers>
+    <Status Type="ArtOfTest.WebAii.Design.Execution.Scheduling.MachineStatus">Ready</Status>
+    <DBState Type="System.Int32">0</DBState>
+  </Machine>
+</RunResult>
