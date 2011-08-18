@@ -143,11 +143,14 @@
          * @option {Number} [height] <200> Define the height of the drop-down list in pixels.
          */
         init: function(element, options) {
-            var that = this;
+            var that = this,
 
             options = $.isArray(options) ? { dataSource: options } : options;
 
             Select.fn.init.call(that, element, options);
+
+            element = that.element;
+            options = that.options;
 
             that._word = "";
 
@@ -160,6 +163,8 @@
             that._accessors();
 
             that._dataSource();
+
+            that._enable();
 
             that.bind([
                 /**
@@ -181,19 +186,12 @@
                 * @param {Event} e
                 */
                 CHANGE
-            ], that.options);
+            ], options);
 
-            if (that.element.prop("disabled")) {
-                that.options.enable = false;
-            }
-
-            that.enable(that.options.enable);
-
-            if (that.options.autoBind) {
-                that.showBusy();
-                that.dataSource.query();
-            } else if (that.element.is(SELECT)) {
-                that.text(that.element.children(":selected").text());
+            if (options.autoBind) {
+                that.dataSource.fetch();
+            } else if (element.is(SELECT)) {
+                that.text(element.children(":selected").text());
             }
         },
 
@@ -213,24 +211,6 @@
         * @function
         * @example
         * dropdownlist.close();
-        */
-
-        /**
-        * Hides loading icon
-        * @name kendo.ui.DropDownList#hideBusy
-        * @function
-        * @example
-        * dropdownlist.hideBusy();
-        *
-        */
-
-        /**
-        * Shows loading icon
-        * @name kendo.ui.DropDownList#showBusy
-        * @function
-        * @example
-        * dropdownlist.hideBusy();
-        *
         */
 
         /**
@@ -262,8 +242,7 @@
                         },
                         click: function() {
                             if(!that.ul[0].firstChild) {
-                                that.showBusy();
-                                that.dataSource.read();
+                                that.dataSource.fetch();
                             } else {
                                 that.toggle();
                             }
@@ -289,9 +268,8 @@
                 current = that._current;
 
             if (!that.ul[0].firstChild) {
-                that.showBusy();
                 that.options.autoBind = false;
-                that.dataSource.query();
+                that.dataSource.fetch();
             } else {
                 that.popup.open();
                 if (current) {
@@ -339,7 +317,7 @@
                 that.toggle(length);
             }
 
-            that.hideBusy();
+            that._hideBusy();
         },
 
         /**
@@ -390,14 +368,14 @@
                 data = that.dataSource.view(),
                 current = that._current;
 
-            if (current) {
-                current.removeClass(SELECTED);
-            }
-
             li = that._get(li);
 
-            if (li[0] && !li.hasClass(SELECTED)) {
-                idx = $.inArray(li[0], that.ul[0].childNodes);
+            if (li && li[0] && !li.hasClass(SELECTED)) {
+                if (current) {
+                    current.removeClass(SELECTED);
+                }
+
+                idx = $.inArray(li[0], that.ul[0].childNodes); //custom impl!!!
                 if (idx > -1) {
                     data = data[idx];
                     text = that._text(data);
@@ -463,36 +441,27 @@
         },
 
         _keydown: function(e) {
-            var prevent,
-                that = this,
+            var that = this,
+                alt = e.altKey,
                 key = e.keyCode,
-                current = that._current,
-                keys = kendo.keys;
+                keys = kendo.keys,
+                ul = that.ul[0],
+                prevent;
 
-            if (e.altKey) {
-                that.toggle(key === keys.DOWN);
-            } else if (key === keys.DOWN) {
-                that._move(current.next());
+            if (!alt) {
+                prevent = that._move(key);
+            }
 
-                prevent = true;
-            } else if (key === keys.UP) {
-                that._move(current.prev());
-
-                prevent = true;
-            } else if (key === keys.HOME) {
-                that._move(that.ul.children().first());
-
-                prevent = true;
-            } else if (key === keys.END) {
-                that._move(that.ul.children().last());
-
-                prevent = true;
-            } else if (key === keys.ENTER || key === keys.TAB) {
-                that._accept(current);
-
-                prevent = true;
-            } else if (key === keys.ESC) {
-                that.close();
+            if (!prevent) {
+                if (e.altKey) {
+                    that.toggle(key === keys.DOWN);
+                } else if (key === keys.HOME) {
+                    that.select(ul.firstChild);
+                    prevent = true;
+                } else if (key === keys.END) {
+                    that.select(ul.lastChild);
+                    prevent = true;
+                }
             }
 
             if (prevent) {

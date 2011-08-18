@@ -331,33 +331,17 @@
             this.popup.close();
         },
 
-        /**
-        * Hides loading icon
-        * @example
-        * dropdownlist.hideBusy();
-        *
-        * @example
-        * combobox.hideBusy();
-        */
-        hideBusy: function () {
+        _hideBusy: function () {
             var that = this;
             clearTimeout(that._busy);
             that.arrow.removeClass(LOADING);
         },
 
-        /**
-        * Shows loading icon
-        * @example
-        * dropdownlist.showBusy();
-        *
-        * @example
-        * combobox.showBusy();
-        */
-        showBusy: function () {
+        _showBusy: function () {
             var that = this;
-            that._busy = setTimeout(proxy(function () {
+            that._busy = setTimeout(function () {
                 that.arrow.addClass(LOADING);
-            }, this), 100);
+            }, 100);
         },
 
         _dataSource: function() {
@@ -381,13 +365,43 @@
             }
 
             that.dataSource = kendo.data.DataSource.create(dataSource)
-                                        .bind(CHANGE, proxy(that.refresh, that));
+                                   .bind(CHANGE, proxy(that.refresh, that))
+                                   .bind("requestStart", proxy(that._showBusy, that));
         },
 
-        _move: function(li) {
-            if (li[0]) {
-                this.select(li);
+        _enable: function() {
+            var that = this,
+                options = that.options;
+
+            if (that.element.prop("disabled")) {
+                options.enable = false;
             }
+
+            that.enable(options.enable);
+        },
+
+        _move: function(key) {
+            var that = this,
+                prevent = false,
+                ul = that.ul[0],
+                current = that._current,
+                keys = kendo.keys;
+
+            if (key === keys.DOWN) {
+                that.select(current ? current.next() : ul.firstChild); //use firstChild
+                prevent = true;
+            } else if (key === keys.UP) {
+                that.select(current ? current.prev() : ul.lastChild);
+                prevent = true;
+            } else if (key === keys.ENTER || key === keys.TAB) {
+                that._accept(current);
+                prevent = true;
+            } else if (key === keys.ESC) {
+                that.close();
+                prevent = true;
+            }
+
+            return prevent;
         },
 
         _options: function(data) {

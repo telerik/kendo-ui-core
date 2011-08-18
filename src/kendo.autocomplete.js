@@ -236,7 +236,7 @@
         },
 
         /**
-        * Selects drop-down list item and sets the value and the text of the dropdownlist.
+        * Selects drop-down list item and sets the text of the autocomplete.
         * @param {jQueryObject} li The LI element.
         * @example
         * var autocomplete = $("#autocomplete").data("kendoAutoComplete");
@@ -251,7 +251,9 @@
                 text,
                 idx;
 
-            if (li && !li.hasClass(SELECTED)) {
+            li = $(li);
+
+            if (li[0] && !li.hasClass(SELECTED)) {
                 idx = $.inArray(li[0], that.ul[0].childNodes);
 
                 if (idx > -1) {

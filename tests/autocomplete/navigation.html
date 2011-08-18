@@ -192,6 +192,17 @@
                 ok(autocomplete.ul.children().first().is(".t-state-selected"));
             });
 
+            test("select should accepts DOM element", function() {
+                var autocomplete = new AutoComplete(input, {
+                    dataSource: ["baz", "bar"]
+                });
+
+                input.val("b");
+                autocomplete.search();
+                autocomplete.select(autocomplete.ul.children().first()[0]);
+                ok(autocomplete.ul.children().first().is(".t-state-selected"));
+            });
+
             test("moving up when there the current item is first", function() {
                 var autocomplete = new AutoComplete(input, {
                     dataSource: ["baz", "bar"]
