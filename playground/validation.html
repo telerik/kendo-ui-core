@@ -1,0 +1,119 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>validation</title>
+        <script src="../src/jquery.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
+        <style>
+            .msg-invalid {
+                color:red;
+            }
+            #summary {
+                display:none;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <input type="text" required placeholder="First Name" name="firstName" title="First Name is required" /><br />
+            <input type="text" required placeholder="Last Name" name="lastName" /><br />
+            <button id="verify" type="button">Verify</button>
+        </div>
+        <fieldset id="summary"></fieldset>
+        <script>
+
+            function validation() {
+                if (document.createElement("INPUT").checkValidity) {
+                    return true;
+                }
+                return false;
+            }
+
+            var support = {
+                validation: validation()
+            }
+
+            var Validation = function(element, options) {
+                var that = this;
+
+                that.element = $(element);
+                that.invalid = [];
+
+                that.options = $.extend({}, options);
+
+                that.element.delegate(":input:not(button)", "blur", $.proxy(that._blur, that));
+            }
+
+            Validation.prototype = {
+                validate: function() {
+                    var that = this,
+                        element = that.element,
+                        inputs = element.find(":input:not(button)");
+
+                    that.invalid = [];
+                    that.element.find(".msg-invalid").remove();
+
+                    for (var idx = 0, len = inputs.length; idx < len; idx++) {
+                        that._check(inputs.eq(idx));
+                    }
+
+                    that._showSummary();
+                    return that.invalid.length;
+                },
+                messages: function() {
+                    return this.invalid;
+                },
+                _showSummary: function() {
+                    var that = this,
+                        summary = that.options.summary,
+                        messages = that.invalid;
+
+                    if (summary) {
+                        $(summary).html(messages.join("<br/>")).toggle(!!messages.length);
+                    }
+                },
+                _check: function(input) {
+                    if (support.validation) {
+                        if (!input[0].checkValidity()) {
+                            this._message(input);
+                        }
+                    } else {
+                        this._checkValidity(input);
+                    }
+                },
+                _checkValidity: function(input) {
+                    if (input.filter("[required]").length && input.val() === "") {
+                        this._message(input);
+                    }
+                },
+                _message: function(input) {
+                    var msg = input[0].title || input[0].validationMessage || "";
+                    this.invalid.push(msg);
+                    if (this.options.individualErrors) {
+                        $('<span class="msg-invalid">' + msg + '</span>').insertAfter(input);
+                    }
+                },
+                _blur: function(e) {
+                    var input = $(e.target);
+                    input.next(".msg-invalid").remove();
+                    this._check(input);
+                }
+            }
+
+            $(function() {
+                var validator = new Validation($("div"), { summary: "#summary", individualErrors: true});
+
+                $("#verify").click(function() {
+                    validator.validate();
+                });
+
+                $("form").bind("submit", function(e) {
+                    if (validator.validate()) {
+                        e.preventDefault();
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>
