@@ -247,17 +247,18 @@
             var that = this,
                 scrollTo = 0,
                 element = that.element,
-                scrollOffsets = getScrollOffsets(that.scrollElement);
+                scrollElement = that.scrollElement,
+                scrollOffsets = getScrollOffsets(scrollElement);
 
             if ($(e.target).hasClass(LEFTARROW)) {
                 scrollTo = min( 0, scrollOffsets.x + element.innerWidth() );
             }
 
             if ($(e.target).hasClass(RIGHTARROW)) {
-                scrollTo = max( -that.scrollElement.innerWidth() + element.innerWidth(), scrollOffsets.x - element.innerWidth() );
+                scrollTo = max( -scrollElement.innerWidth() + element.innerWidth(), scrollOffsets.x - element.innerWidth() );
             }
 
-            that.scrollElement.kendoStop().kendoAnimate({effects: { slide: { properties: { translateX: scrollTo + PX }, direction: "left" } }, duration: 500 });
+            scrollElement.kendoStop().kendoAnimate({effects: { slide: { properties: { translateX: scrollTo + PX }, direction: "left" } }, duration: 500 });
         },
 
         _animateArrows: function (arrows, action) {
@@ -283,29 +284,28 @@
             });
         },
 
-        _showScrollArrows: function (e) {
+        _toggleScrollArrows: function (state) {
+            var that = this;
+
+            if (that.hasVerticalScroll) {
+                that._animateArrows(that._verticalArrows, state);
+            }
+
+            if (that.hasHorizontalScroll) {
+                that._animateArrows(that._horizontalArrows, state);
+            }
+        },
+
+        _showScrollArrows: function () {
             var that = this;
             that._initializeBoxModel();
             that._allArrows.hide();
 
-            if (that.hasVerticalScroll) {
-                that._animateArrows(that._verticalArrows, SHOW);
-            }
-
-            if (that.hasHorizontalScroll) {
-                that._animateArrows(that._horizontalArrows, SHOW);
-            }
+            this._toggleScrollArrows(SHOW);
         },
 
-        _hideScrollArrows: function (e) {
-            var that = this;
-            if (that.hasVerticalScroll) {
-                that._animateArrows(that._verticalArrows, HIDE);
-            }
-
-            if (that.hasHorizontalScroll) {
-                that._animateArrows(that._horizontalArrows, HIDE);
-            }
+        _hideScrollArrows: function () {
+            this._toggleScrollArrows(HIDE);
         },
 
         _wait: function (e) {
