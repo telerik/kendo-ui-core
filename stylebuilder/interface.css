@@ -6,3 +6,7 @@ html, body {
     background-color: #333;
     font: normal 12px/1.5 Tahoma,sans-serif;
 }
+
+.styling-options {
+    padding: 1em;
+}

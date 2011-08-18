@@ -12,12 +12,34 @@
 </head>
 <body>
     <ul id="stylable-elements">
-        <li>Headers</li>
+        <li>
+            Headers
+            <div>
+                <div class="styling-options">
+                    <label>
+                        Background color &amp; texture
+                        <input id="header-background-color" />
+                    </label>
+                </div>
+            </div>
+        </li>
         <li>Links</li>
     </ul>
 
     <script>
         $("#stylable-elements").kendoPanelBar();
+
+        function addStylesheet(cssText) {
+            var ss = document.createElement('style');
+
+            document.getElementsByTagName("head")[0].appendChild(ss);
+
+            if (ss.styleSheet) {
+                ss.styleSheet.cssText = cssText;
+            } else {
+                ss.appendChild(document.createTextNode(cssText));
+            }
+        }
     </script>
 </body>
 </html>
