@@ -78,9 +78,12 @@ options:
 
         private static void WriteCulture(CultureInfo cultureInfo)
         {
-            var filePath = String.Format(@"{0}\{1}.{2}.js", outputPath, filePrefix, cultureInfo.Name);
-            File.WriteAllText(filePath, cultureInfo.Format(culturePattern));
-            Console.WriteLine(filePath);
+            if (!string.IsNullOrEmpty(cultureInfo.Name))
+            {
+                var filePath = String.Format(@"{0}\{1}.{2}.js", outputPath, filePrefix, cultureInfo.Name);
+                File.WriteAllText(filePath, cultureInfo.Format(culturePattern));
+                Console.WriteLine(filePath);
+            }
         }
     }
 }
