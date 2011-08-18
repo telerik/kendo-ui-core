@@ -66,4 +66,5 @@
                 ":": "{{TimeSeparator}}"
             }
         }
-    }};
+    }
+})(this);

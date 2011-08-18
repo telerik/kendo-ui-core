@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace CultureGenerator
+﻿namespace CultureGenerator
 {
     using System;
     using System.IO;
     using System.Linq;
+    using System.Text;
     using System.Globalization;
 
     class Program
@@ -81,7 +77,7 @@ options:
             if (!string.IsNullOrEmpty(cultureInfo.Name))
             {
                 var filePath = String.Format(@"{0}\{1}.{2}.js", outputPath, filePrefix, cultureInfo.Name);
-                File.WriteAllText(filePath, cultureInfo.Format(culturePattern));
+                File.WriteAllText(filePath, cultureInfo.Format(culturePattern), Encoding.Unicode);
                 Console.WriteLine(filePath);
             }
         }
