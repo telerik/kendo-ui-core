@@ -683,8 +683,6 @@ h1 .integrationIcon
     font-size:.9em;
 }
 
-/*console*/
-
 pre.prettyprint
 {
     overflow: hidden;
@@ -694,6 +692,8 @@ pre.prettyprint
 {
     width:100%;
 }
+
+/*console*/
 
 .console
 {
