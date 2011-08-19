@@ -1,0 +1,23 @@
+#kendo-stylebuilder
+{
+    text-align: left;
+    color: #fff;
+    background-color: #333;
+    font: normal 12px/1.5 Tahoma,sans-serif;
+}
+
+#kendo-stylebuilder .styling-options
+{
+    padding: .4em;
+}
+
+#kendo-stylebuilder label
+{
+    display: inline-block;
+    width: 40%;
+}
+
+#kendo-stylebuilder .t-style-apply
+{
+    margin: 1em 0 0;
+}
