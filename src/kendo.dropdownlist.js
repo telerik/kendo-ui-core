@@ -442,30 +442,18 @@
 
         _keydown: function(e) {
             var that = this,
-                alt = e.altKey,
                 key = e.keyCode,
                 keys = kendo.keys,
-                ul = that.ul[0],
-                prevent;
+                ul = that.ul[0];
 
-            if (!alt) {
-                prevent = that._move(key);
-            }
+            that._move(e);
 
-            if (!prevent) {
-                if (e.altKey) {
-                    that.toggle(key === keys.DOWN);
-                } else if (key === keys.HOME) {
-                    that.select(ul.firstChild);
-                    prevent = true;
-                } else if (key === keys.END) {
-                    that.select(ul.lastChild);
-                    prevent = true;
-                }
-            }
-
-            if (prevent) {
+            if (key === keys.HOME) {
                 e.preventDefault();
+                that.select(ul.firstChild);
+            } else if (key === keys.END) {
+                e.preventDefault();
+                that.select(ul.lastChild);
             }
         },
 

@@ -391,22 +391,24 @@
 
         _keydown: function (e) {
             var that = this,
+                ul = that.ul[0],
                 key = e.keyCode,
                 keys = kendo.keys,
+                current = that._current,
                 visible = that.popup.visible();
 
             if (key === keys.DOWN) {
                 if (visible) {
-                    that._move(that._current ? that._current.next() : that.ul.children().first());
+                    that._move(current ? current.next() : $(ul.firstChild));
                 }
                 e.preventDefault();
             } else if (key === keys.UP) {
                 if (visible) {
-                    that._move(that._current ? that._current.prev() : that.ul.children().last());
+                    that._move(current ? current.prev() : $(ul.lastChild));
                 }
                 e.preventDefault();
             } else if (key === keys.ENTER || key === keys.TAB) {
-                that._accept(that._current);
+                that._accept(current);
             } else if (key === keys.ESC) {
                 that.close();
             } else {

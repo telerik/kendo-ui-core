@@ -380,28 +380,35 @@
             that.enable(options.enable);
         },
 
-        _move: function(key) {
+        _move: function(e) {
             var that = this,
-                prevent = false,
+                key = e.keyCode,
+                keys = kendo.keys,
                 ul = that.ul[0],
                 current = that._current,
-                keys = kendo.keys;
+                down = key === keys.DOWN,
+                pressed;
 
-            if (key === keys.DOWN) {
-                that.select(current ? current.next() : ul.firstChild); //use firstChild
-                prevent = true;
-            } else if (key === keys.UP) {
-                that.select(current ? current.prev() : ul.lastChild);
-                prevent = true;
+            if (key === keys.UP || down) {
+                if (e.altKey) {
+                    that.toggle(down);
+                } else if (down) {
+                    that.select(current ? current[0].nextSibling : ul.firstChild);
+                    e.preventDefault();
+                } else {
+                    that.select(current ? current[0].previousSibling : ul.lastChild);
+                    e.preventDefault();
+                }
+                pressed = true;
             } else if (key === keys.ENTER || key === keys.TAB) {
                 that._accept(current);
-                prevent = true;
+                pressed = true;
             } else if (key === keys.ESC) {
                 that.close();
-                prevent = true;
+                pressed = true;
             }
 
-            return prevent;
+            return pressed;
         },
 
         _options: function(data) {

@@ -156,6 +156,9 @@
 
             Select.fn.init.call(that, element, options);
 
+            element = that.element;
+            options = that.options;
+
             that._wrapper();
 
             that._input();
@@ -165,6 +168,8 @@
             that._accessors();
 
             that._dataSource();
+
+            that._enable();
 
             that.bind([
                 /**
@@ -186,7 +191,7 @@
                 * @param {Event} e
                 */
                 CHANGE
-            ], that.options);
+            ], options);
 
             that.input.bind({
                 keydown: proxy(that._keydown, that),
@@ -202,18 +207,12 @@
                 }
             });
 
-            if (that.element.prop("disabled")) {
-                that.options.enable = false;
-            }
-
-            that.enable(that.options.enable);
-
             that.previous = that.value();
 
-            if (that.options.autoBind) {
+            if (options.autoBind) {
                 that._select();
-            } else if (that.element.is(SELECT)) {
-                that.input.val(that.element.children(":selected").text());
+            } else if (element.is(SELECT)) {
+                that.input.val(element.children(":selected").text());
             }
         },
 
@@ -251,24 +250,6 @@
         */
 
         /**
-        * Hides loading icon
-        * @name kendo.ui.ComboBox#hideBusy
-        * @function
-        * @example
-        * combobox.hideBusy();
-        *
-        */
-
-        /**
-        * Shows loading icon
-        * @name kendo.ui.ComboBox#showBusy
-        * @function
-        * @example
-        * combobox.hideBusy();
-        *
-        */
-
-        /**
         * Enables/disables the combobox component
         * @param {Boolean} enable Desired state
         */
@@ -296,9 +277,7 @@
 
                 input.removeAttr(ATTRIBUTE);
                 element.removeAttr(ATTRIBUTE);
-                arrow.bind(CLICK, function() {
-                    that.toggle();
-                });
+                arrow.bind(CLICK, function() { that.toggle() });
             }
         },
 
@@ -353,7 +332,7 @@
                 that.toggle(!!length);
             }
 
-            that.hideBusy();
+            that._hideBusy();
         },
 
         /**
@@ -413,7 +392,6 @@
             if (!length) {
                 that.close();
             } else if (length >= options.minLength) {
-                that.showBusy();
                 if (filter === "none") {
                     that._filter(word);
                 } else {
@@ -490,9 +468,9 @@
         */
         toggle: function(toggle) {
             var that = this;
+            that._toggle(toggle);
             that.input[0].focus();
             clearTimeout(that._bluring);
-            that._toggle(toggle);
         },
 
         /**
@@ -572,7 +550,7 @@
                 options = that.options,
                 word = word.toLowerCase(),
                 dataSource = that.dataSource,
-                predicate = function(dataItem) {
+                predicate = function (dataItem) {
                     var text = that._text(dataItem);
                     if (text !== undefined) {
                         return (text + "").toLowerCase().indexOf(word) === 0;
@@ -583,8 +561,8 @@
                 options.autoBind = true;
                 dataSource.bind(CHANGE, function search() {
                     that.search(word);
-                    dataSource.unbind(CHANGE, handler);
-                }).query();
+                    dataSource.unbind(CHANGE, search);
+                }).fetch();
                 return;
             }
 
@@ -595,11 +573,15 @@
                 that.open();
             }
 
-            that.hideBusy();
+            that._hideBusy(); //check it
         },
 
         _highlight: function(li) {
             var that = this;
+
+            if (li == undefined) {
+                return -1;
+            }
 
             that.current(null);
 
@@ -637,32 +619,10 @@
         },
 
         _keydown: function(e) {
-            var prevent,
-                that = this,
-                key = e.keyCode,
-                keys = kendo.keys,
-                current = that._current;
+            var that = this;
 
-            if (e.altKey) {
-                that.toggle(key === keys.DOWN);
-            } else if (key === keys.DOWN) {
-                that._move(current ? current.next() : that.ul.children().first());
-
-                prevent = true;
-            } else if (key === keys.UP) {
-                that._move(current ? current.prev() : that.ul.children().last());
-
-                prevent = true;
-            } else if (key === keys.ENTER || key === keys.TAB) {
-                that._accept(current);
-            } else if (key === keys.ESC) {
-                that.close();
-            } else {
+            if (!that._move(e)) {
                 that._search();
-            }
-
-            if (prevent) {
-                e.preventDefault();
             }
 
             setTimeout(proxy(that._clear, that));
@@ -674,8 +634,8 @@
 
             that._typing = setTimeout(function() {
                 var value = that.text();
-                if (that._previousText !== value) {
-                    that._previousText = value;
+                if (that._prevText !== value) {
+                    that._prevText = value;
                     that.search(value);
                 }
             }, that.options.delay);
@@ -696,10 +656,7 @@
                     dataSource.unbind(CHANGE, handler);
                 };
 
-            dataSource.bind(CHANGE, handler);
-
-            that.showBusy();
-            dataSource.query();
+            dataSource.bind(CHANGE, handler).query();
         },
 
 
