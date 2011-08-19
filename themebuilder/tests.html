@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
     <head>
-        <title>stylebuilder tests</title>
+        <title>ThemeBuilder tests</title>
 
         <script src="../src/jquery.js"></script>
         <script src="../tests/qunit.js"></script>
@@ -11,19 +11,19 @@
         <link rel="stylesheet" href="../tests/qunit.css" />
     </head>
     <body>
-        <h1 id="qunit-header">stylebuilder tests</h1>
+        <h1 id="qunit-header">ThemeBuilder tests</h1>
         <h2 id="qunit-banner"></h2>
         <div id="qunit-testrunner-toolbar"></div>
         <h2 id="qunit-userAgent"></h2>
         <ol id="qunit-tests"></ol>
 
-        <script src="../stylebuilder/script.js"></script>
+        <script src="../themebuilder/themebuilder.js"></script>
 
         <script>
-            module("stylebuilder");
+            module("themebuilder");
 
-            test("StyleBuilder object is available", function() {
-                ok(typeof kendo.StyleBuilder == "function");
+            test("themebuilder object is available", function() {
+                ok(typeof kendo.ThemeBuilder == "function");
             });
         </script>
 

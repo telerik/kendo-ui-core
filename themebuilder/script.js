@@ -36,8 +36,8 @@
     }
 
     queue.push(function(){
-        getScript("http://localhost/kendo/stylebuilder/themebuilder.js", function() {
-            new kendo.StyleBuilder();
+        getScript("http://localhost/kendo/themebuilder/themebuilder.js", function() {
+            new kendo.ThemeBuilder();
         });
     });
 

@@ -1,4 +1,4 @@
-#kendo-stylebuilder
+#kendo-themebuilder
 {
     text-align: left;
     color: #fff;
@@ -6,18 +6,18 @@
     font: normal 12px/1.5 Tahoma,sans-serif;
 }
 
-#kendo-stylebuilder .styling-options
+#kendo-themebuilder .styling-options
 {
     padding: .4em;
 }
 
-#kendo-stylebuilder label
+#kendo-themebuilder label
 {
     display: inline-block;
     width: 40%;
 }
 
-#kendo-stylebuilder .t-style-apply
+#kendo-themebuilder .t-style-apply
 {
     margin: 1em 0 0;
 }
