@@ -1,50 +1,56 @@
-// TODO: show a neat message to urge the unsupported browsers to upgrade (instead of the iframe)
-
+// bootstrapper file for Kendo ThemeBuilder
 (function() {
-
     // do not initialize twice
     if (typeof kendo != "undefined" && kendo.ThemeBuilder) {
         return;
     }
 
+    // TODO: show a neat message to urge the unsupported browsers to upgrade (instead of the iframe)
+
+    var queue = [],
+        doc = document,
+        UNDEFINED = "undefined"
+        head = doc.getElementsByTagName("head")[0],
+        applicationRoot = "http://localhost/kendo/themebuilder/";
+
     function getScript(url, callback) {
-        var doc = document,
-            script = doc.createElement('script');
+        var script = doc.createElement("script");
         script.onload = callback;
         script.src = url;
 
-        doc.getElementsByTagName("head")[0].appendChild(script);
+        head.appendChild(script);
     }
 
-    // load dependencies
-    var queue = [];
-
     // page without jQuery
-    if (typeof jQuery == "undefined") {
+    if (typeof jQuery == UNDEFINED) {
         queue.push(function(callback) {
             getScript("https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js", callback);
         });
     }
 
     // page without kendo
-    if (typeof kendo == "undefined") {
+    if (typeof kendo == UNDEFINED) {
         queue.push(function(callback) {
-            $("<link rel='stylesheet' href='http://localhost/kendo/live/styles/kendo.common.css' />").appendTo("head");
-            $("<link rel='stylesheet' href='http://localhost/kendo/live/styles/kendo.kendo.css' />").appendTo("head");
+            $(head).append(
+                "<link rel='stylesheet' href='http://localhost/kendo/live/styles/kendo.common.css' />" +
+                "<link rel='stylesheet' href='http://localhost/kendo/live/styles/kendo.kendo.css' />"
+            );
+
             getScript("http://localhost/kendo/deploy/kendoUI/js/kendo.all.min.js", callback);
         });
     }
 
     queue.push(function(){
-        getScript("http://localhost/kendo/themebuilder/themebuilder.js", function() {
+        $("<link rel='stylesheet' href='" + applicationRoot + "styles.css' />").appendTo("head");
+
+        getScript(applicationRoot + "themebuilder.js", function() {
             new kendo.ThemeBuilder();
         });
     });
 
-    // resolve queue
-    (function() {
+    (function resolveQueue() {
         if (queue.length) {
-            queue.shift()(arguments.callee);
+            queue.shift()(resolveQueue);
         }
     })();
 })();

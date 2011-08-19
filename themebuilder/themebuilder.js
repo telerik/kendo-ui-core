@@ -14,8 +14,6 @@
     var applicationRoot = "http://localhost/kendo/themebuilder/", // this should be changed in production
         ThemeBuilder = kendo.Observable.extend({
             init: function() {
-                $("<link rel='stylesheet' href='" + applicationRoot + "styles.css' />").appendTo("head");
-
                 // use inline styles to be sure that the wrapper won't inherit styles from the page
                 $('\
                     <div id="kendo-themebuilder">\
