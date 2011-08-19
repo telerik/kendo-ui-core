@@ -12,3 +12,4 @@ release/
 deploy/
 docs/
 functional-tests/KendoDemosTests/TestResults/
+functional-tests/KendoDemosTests/Results/
