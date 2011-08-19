@@ -24,7 +24,7 @@
                                 <div><div class="styling-options">\
                                     <label for="widget-bc">Border color</label> <input id="widget-bc" />\
                                     <label for="widget-bgc">Background color</label> <input id="widget-bgc" />\
-                                    <label for="widget-c">Text color</label> <input id="heawidgetder-c" />\
+                                    <label for="widget-c">Text color</label> <input id="widget-c" />\
                                 </div></div></li>\
                             <li>Headers\
                                 <div><div class="styling-options">\
