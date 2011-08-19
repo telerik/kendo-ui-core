@@ -128,7 +128,6 @@
 .t-state-active:hover,
 .t-header .t-state-active
 {
-    color: #fa6713;
     background-color: #fff;
     border-color: #ff8b29;
 }
