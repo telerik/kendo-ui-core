@@ -47,14 +47,15 @@
             },
             // TODO: test this
             updateStyleSheet: function(cssText) {
-                var ss = document.createElement("style");
+                var doc = document,
+                    style = doc.createElement("style");
 
-                document.getElementsByTagName("head")[0].appendChild(ss);
+                doc.getElementsByTagName("head")[0].appendChild(style);
 
-                if (ss.styleSheet) {
-                    ss.styleSheet.cssText = cssText;
+                if (style.styleSheet) {
+                    style.styleSheet.cssText = cssText;
                 } else {
-                    ss.appendChild(document.createTextNode(cssText));
+                    style.appendChild(doc.createTextNode(cssText));
                 }
             }
         });
