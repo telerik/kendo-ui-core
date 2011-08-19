@@ -601,7 +601,7 @@
 
             //return number in exponential format
             if (format === "e") {
-                return customPrecision ? number.toExponential(precision) : number.toExponential();
+                return customPrecision ? number.toExponential(precision) : number.toExponential(); // toExponential() and toExponential(undefined) differ in FF #653438.
             }
 
             // multiply if format is percent
