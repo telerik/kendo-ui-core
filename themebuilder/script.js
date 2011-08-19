@@ -2,6 +2,8 @@
 (function() {
     // do not initialize twice
     if (typeof kendo != "undefined" && kendo.ThemeBuilder) {
+        // TODO: if the window has been closed, here would be a good time to re-open it.
+
         return;
     }
 
