@@ -11,14 +11,14 @@
         }
     }
 
-    var applicationRoot = "http://localhost/kendo/stylebuilder/", // this should be changed in production
-        StyleBuilder = kendo.Observable.extend({
+    var applicationRoot = "http://localhost/kendo/themebuilder/", // this should be changed in production
+        ThemeBuilder = kendo.Observable.extend({
             init: function() {
                 $("<link rel='stylesheet' href='" + applicationRoot + "styles.css' />").appendTo("head");
 
                 // use inline styles to be sure that the wrapper won't inherit styles from the page
                 $('\
-                    <div id="kendo-stylebuilder">\
+                    <div id="kendo-themebuilder">\
                         <ul id="stylable-elements">\
                             <li>Widget\
                                 <div><div class="styling-options">\
@@ -46,8 +46,8 @@
                                 </ul>\
                         <button type="button" class="t-style-apply t-button">Apply</button>\
                     </div>').appendTo(document.body);
-                $("#kendo-stylebuilder").kendoWindow({
-                    title: "Kendo Stylebuilder",
+                $("#kendo-themebuilder").kendoWindow({
+                    title: "Kendo ThemeBuilder",
                     draggable: true,
                     resizable: true,
                     actions: ["Close"],
@@ -59,6 +59,6 @@
         });
 
     $.extend(kendo, {
-        StyleBuilder: StyleBuilder
+        ThemeBuilder: ThemeBuilder
     });
 })(jQuery, kendo);
