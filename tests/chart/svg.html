@@ -158,6 +158,16 @@
                     equals(circle.options.strokeWidth, 2);
                 });
 
+                test("renderElement returns element", function() {
+                    element = view.renderElement({
+                        render: function() {
+                            return "<g></g>";
+                        }
+                    });
+
+                    equals(element.tagName.toLowerCase(), "g");
+                });
+
                 // ------------------------------------------------------------
                 module("SVGView / Rendering", {
                     setup: function() {

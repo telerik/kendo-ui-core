@@ -4141,7 +4141,7 @@
                 "</svg>"
             );
 
-            element = container.firstChild;
+            element = container.firstChild.firstChild;
 
             return element;
         },
@@ -4538,11 +4538,11 @@
                 element;
 
             container.style.display = NONE;
-            doc.appendChild(container);
+            doc.body.appendChild(container);
             container.innerHTML = element.render();
 
             element = container.firstChild;
-            doc.removeChild(container);
+            doc.body.removeChild(container);
 
             return element;
         },
