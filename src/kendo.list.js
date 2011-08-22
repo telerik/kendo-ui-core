@@ -352,6 +352,11 @@
 
         _showBusy: function () {
             var that = this;
+
+            if (that._busy) {
+                return;
+            }
+
             that._busy = setTimeout(function () {
                 that.arrow.addClass(LOADING);
             }, 100);
