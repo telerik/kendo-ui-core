@@ -789,6 +789,14 @@
                     ok(root.idMap[marker.options.id] === point);
                 });
 
+                test("getOutlineElement returns marker outline", function() {
+                    createPoint({ markers: { type: "circle" }});
+                    view = new ViewStub();
+
+                    point.getOutlineElement(view);
+                    equals(view.log.circle.length, 1);
+                });
+
                 // ------------------------------------------------------------
                 module("Line Point / Labels", {
                     setup: function() {
