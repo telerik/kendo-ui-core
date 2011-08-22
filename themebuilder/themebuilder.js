@@ -41,11 +41,18 @@
                                     .kendoWindow({
                                         title: "Kendo ThemeBuilder",
                                         draggable: true,
-                                        resizable: true
+                                        resizable: true,
+                                        width: 300,
+                                        minWidth: 300,
+                                        maxWidth: 300
                                     });
 
                 that.element = that.content.closest(".t-window")
                                     .attr("id", "kendo-themebuilder-wrapper")
+                                    .css({
+                                        top: 20,
+                                        left: $(window).width() - 330
+                                    })
                                     .data("kendoThemeBuilder", that);
 
                 $("#stylable-elements").kendoPanelBar();
