@@ -33,17 +33,25 @@
         ),
         ThemeBuilder = kendo.Observable.extend({
             init: function() {
+                var that = this;
+
                 $(template({})).appendTo(document.body);
 
-                this.element = $("#kendo-themebuilder")
-                    .kendoWindow({
-                        title: "Kendo ThemeBuilder",
-                        draggable: true,
-                        resizable: true
-                    })
-                    .closest(".t-window").attr("id", "kendo-themebuilder-wrapper");
+                that.content = $("#kendo-themebuilder")
+                                    .kendoWindow({
+                                        title: "Kendo ThemeBuilder",
+                                        draggable: true,
+                                        resizable: true
+                                    });
+
+                that.element = that.content.closest(".t-window")
+                                    .attr("id", "kendo-themebuilder-wrapper")
+                                    .data("kendoThemeBuilder", that);
 
                 $("#stylable-elements").kendoPanelBar();
+            },
+            open: function() {
+                this.content.data("kendoWindow").open();
             },
             // TODO: test this
             updateStyleSheet: function(cssText) {
