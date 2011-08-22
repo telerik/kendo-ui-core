@@ -459,9 +459,9 @@
                 culture = cultures[cultureName] || cultures["en-US"];
 
             culture.calendar = culture.calendars.standard;
-            kendo.currentCulture = culture;
+            cultures.current = culture;
         } else {
-            return kendo.currentCulture;
+            return kendo.cultures.current;
         }
     }
 
@@ -473,7 +473,7 @@
     }
 
     function formatDate(date, format) {
-        var calendar = kendo.currentCulture.calendar,
+        var calendar = kendo.cultures.current.calendar,
             days = calendar.days,
             months = calendar.months;
 
@@ -534,7 +534,7 @@
 
     //number formatting
     function formatNumber(number, format) {
-        var culture = kendo.currentCulture,
+        var culture = kendo.cultures.current,
             numberFormat = culture.numberFormat,
             groupSize = numberFormat.groupSize[0],
             groupSeparator = numberFormat[COMMA],
@@ -998,7 +998,7 @@
         });
 
         support.transitions = transitions;
-        
+
         function detectOS(ua) {
             var os = false, match = [],
                 agentRxs = {
