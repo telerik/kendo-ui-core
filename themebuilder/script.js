@@ -7,8 +7,6 @@
         return;
     }
 
-    // TODO: show a neat message to urge the unsupported browsers to upgrade (instead of the iframe)
-
     var queue = [],
         doc = document,
         UNDEFINED = "undefined"
