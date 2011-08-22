@@ -573,7 +573,7 @@
                 that.open();
             }
 
-            that._hideBusy(); //check it
+            that._hideBusy();
         },
 
         _highlight: function(li) {
