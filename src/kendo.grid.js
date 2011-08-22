@@ -25,6 +25,7 @@
         CLICK = "click",
         HEIGHT = "height",
         TABINDEX = "tabIndex",
+        FUNCTION = "function",
         STRING = "string";
 
     var VirtualScrollable =  Component.extend({
@@ -193,23 +194,6 @@
 
     function groupCells(count) {
         return new Array(count + 1).join('<td class="t-group-cell"></td>');
-    }
-
-    function columnTemplate(column, settings) {
-        var template = column.template,
-            field = column.field,
-            expr = (settings.useWithBlock ? "" : settings.paramName + ".") + field;
-
-        if (!template) {
-            if ($.isFunction(field)) {
-                template = field;
-            } else if (column.encoded) {
-                template = "${" + expr + "}";
-            } else {
-                template = "<#=" + expr + "#>";
-            }
-        }
-        return template;
     }
 
     /**
@@ -942,54 +926,10 @@
             });
         },
 
-        _compositeTmpl: function(start, settings, model) {
-            var that = this,
-                templates=[],
-                idx,
-                id,
-                length,
-                groups = that.dataSource.group().length;
-
-            if (groups > 0) {
-                templates.push(function() {
-                    return groupCells(groups);
-                });
-            }
-
-            for (idx = 0, length = that.columns.length; idx < length; idx++) {
-                templates.push(kendo.template(columnTemplate(that.columns[idx], settings)));
-            }
-
-            if (model) {
-                start += ' data-id="';
-
-                if (typeof model.id === STRING) {
-                    id = kendo.template("<#=" + (settings.useWithBlock ? "" : settings.paramName + ".") + model.id + "#>");
-                } else {
-                    id = model.id;
-                }
-            }
-
-            return function(data) {
-                var html = start, idx, length;
-
-                if (id) {
-                    html += id(data) + '"';
-                }
-
-                html += ">";
-
-                for (idx = 0, length = templates.length; idx < length; idx++) {
-                    html += "<td>" + templates[idx](data) + "</td>";
-                }
-
-                return html + "</tr>";
-            }
-        },
-
         _tmpl: function(start, rowTemplate) {
             var that = this,
                 settings = extend({}, kendo.Template, that.options.templateSettings),
+                paramName = settings.paramName,
                 idx,
                 length = that.columns.length,
                 template,
@@ -997,6 +937,8 @@
                 context = {},
                 id,
                 method = 0,
+                column,
+                type,
                 groups = that.dataSource.group().length;
 
             if (!rowTemplate) {
@@ -1004,17 +946,25 @@
 
                 if (model) {
                     id = model.id;
+                    if (id) {
+                        type = typeof id;
 
-                    if (typeof id === STRING) {
-                        rowTemplate += ' data-id="<#=' + (settings.useWithBlock ? "" : settings.paramName + ".") + model.id + '#>"';
-                    }
-                    if (typeof id === "function") {
-                        context["tmpl" + method] = id;
-                        rowTemplate += ' data-id="<#=this.tmpl' + method + "(" + settings.paramName + ')#>"';
-                        method ++;
+                        rowTemplate += ' data-id="<#=';
+
+                        if (type === STRING) {
+                            if (!settings.useWithBlock) {
+                                rowTemplate += paramName + ".";
+                            }
+                            rowTemplate += id;
+                        } else if (type === FUNCTION) {
+                            context["tmpl" + method] = id;
+                            rowTemplate += 'this.tmpl' + method + "(" + paramName + ")";
+                            method ++;
+                        }
+
+                        rowTemplate += '#>"';
                     }
                 }
-
 
                 rowTemplate += ">";
 
@@ -1023,17 +973,30 @@
                 }
 
                 for (idx = 0; idx < length; idx++) {
-                    template = that.columns[idx].template;
+                    column = that.columns[idx];
+                    template = column.template;
+                    type = typeof template;
 
-                    if ($.isFunction(template)) {
+                    rowTemplate += "<td>";
+
+                    if (type === FUNCTION) {
                         context["tmpl" + method] = template;
-                        rowTemplate += "<td><#=this.tmpl" + method + "(" + settings.paramName + ")#></td>";
+                        rowTemplate += "<#=this.tmpl" + method + "(" + paramName + ")#>";
                         method ++;
-                    } else if (typeof template === "string") {
-                        rowTemplate += "<td>" + template + "</td>";
+                    } else if (type === STRING) {
+                        rowTemplate += template;
                     } else {
-                        rowTemplate += "<td>" + columnTemplate(that.columns[idx], settings) + "</td>";
+                        rowTemplate += column.encoded ? "${" : "<#=";
+
+                        if (!settings.useWithBlock) {
+                            rowTemplate += paramName + ".";
+                        }
+
+                        rowTemplate += column.field;
+                        rowTemplate += column.encoded ? "}" : "#>";
                     }
+
+                    rowTemplate += "</td>";
                 }
 
                 rowTemplate += "</tr>";
@@ -1041,9 +1004,11 @@
             }
 
             rowTemplate = kendo.template(rowTemplate, settings);
+
             if (method > 0) {
                 return proxy(rowTemplate, context);
             }
+
             return rowTemplate;
         },
 
