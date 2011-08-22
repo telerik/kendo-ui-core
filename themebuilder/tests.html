@@ -7,6 +7,9 @@
         <script src="../tests/qunit.js"></script>
 
         <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.draganddrop.js"></script>
+        <script src="../src/kendo.window.js"></script>
+        <script src="../src/kendo.panelbar.js"></script>
 
         <link rel="stylesheet" href="../tests/qunit.css" />
     </head>
@@ -25,7 +28,23 @@
             test("themebuilder object is available", function() {
                 ok(typeof kendo.ThemeBuilder == "function");
             });
-        </script>
+
+            test("ThemeBuilder.open calls open method of window", function() {
+                var themeBuilder = new kendo.ThemeBuilder(),
+                    called = false,
+                    themeBuilderWindow = themeBuilder.content.data("kendoWindow"),
+                    oldOpen = themeBuilderWindow.open;
+
+                themeBuilderWindow.open = function() {
+                    called = true;
+                    oldOpen.apply(this, Array.prototype.slice.apply(arguments));
+                };
+
+                themeBuilder.open();
+
+                ok(called);
+            });
+       </script>
 
         <div id="qunit-fixture"> </div>
         <ul id="log"></ul>
