@@ -375,7 +375,7 @@
                     current.removeClass(SELECTED);
                 }
 
-                idx = $.inArray(li[0], that.ul[0].childNodes); //custom impl!!!
+                idx = ui.List.inArray(li[0], that.ul[0]);
                 if (idx > -1) {
                     data = data[idx];
                     text = that._text(data);

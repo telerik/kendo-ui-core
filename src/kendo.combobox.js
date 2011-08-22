@@ -591,7 +591,7 @@
                 that.current(li);
             }
 
-            return $.inArray(li[0], that.ul[0].childNodes);
+            return List.inArray(li[0], that.ul[0]);
         },
 
         _input: function() {
