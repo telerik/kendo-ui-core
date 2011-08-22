@@ -993,29 +993,28 @@
                 idx,
                 length = that.columns.length,
                 template,
-                allTemplatesAreStrings = true,
                 model = that.dataSource.options.schema.model,
+                context = {},
+                id,
+                method = 0,
                 groups = that.dataSource.group().length;
 
             if (!rowTemplate) {
                 rowTemplate = start;
 
                 if (model) {
-                    allTemplatesAreStrings = typeof model.id === STRING;
+                    id = model.id;
+
+                    if (typeof id === STRING) {
+                        rowTemplate += ' data-id="<#=' + (settings.useWithBlock ? "" : settings.paramName + ".") + model.id + '#>"';
+                    }
+                    if (typeof id === "function") {
+                        context["tmpl" + method] = id;
+                        rowTemplate += ' data-id="<#=this.tmpl' + method + "(" + settings.paramName + ')#>"';
+                        method ++;
+                    }
                 }
 
-                for (idx = 0; idx < length && allTemplatesAreStrings; idx++) {
-                    template = that.columns[idx].template;
-                    allTemplatesAreStrings = template == undefined || typeof template === STRING;
-                }
-
-                if (!allTemplatesAreStrings) {
-                    return that._compositeTmpl(start, settings, model);
-                }
-
-                if (model) {
-                    rowTemplate += ' data-id="<#=' + (settings.useWithBlock ? "" : settings.paramName + ".") + model.id + '#>"';
-                }
 
                 rowTemplate += ">";
 
@@ -1024,14 +1023,28 @@
                 }
 
                 for (idx = 0; idx < length; idx++) {
-                    rowTemplate += "<td>" + columnTemplate(that.columns[idx], settings) + "</td>";
+                    template = that.columns[idx].template;
+
+                    if ($.isFunction(template)) {
+                        context["tmpl" + method] = template;
+                        rowTemplate += "<td><#=this.tmpl" + method + "(" + settings.paramName + ")#></td>";
+                        method ++;
+                    } else if (typeof template === "string") {
+                        rowTemplate += "<td>" + template + "</td>";
+                    } else {
+                        rowTemplate += "<td>" + columnTemplate(that.columns[idx], settings) + "</td>";
+                    }
                 }
 
                 rowTemplate += "</tr>";
 
             }
 
-            return kendo.template(rowTemplate, settings);
+            rowTemplate = kendo.template(rowTemplate, settings);
+            if (method > 0) {
+                return proxy(rowTemplate, context);
+            }
+            return rowTemplate;
         },
 
         _templates: function() {
