@@ -42,7 +42,7 @@ $("#inline").html(inlineTemplate(inlineData));</pre>
     Hello, &lt;#= firstName #&gt; &lt;#= lastName #&gt;
 &lt;/script&gt;
 
-&lt;script type="text/javascript"&gt;
+&lt;script&gt;
     var scriptTemplate = kendo.template($("#scriptTemplate").html());
     var scriptData = { firstName: "John", lastName: "Doe" };
     $("#script").html(scriptTemplate(scriptData));
@@ -78,7 +78,7 @@ $("#encoding").html(encodingTemplate(encodingData));</pre>
     &lt;ul&gt;
 &lt;script&gt;
 
-&lt;script type="text/javascript"&gt;
+&lt;script&gt;
     var javascriptTemplate = kendo.template($("#javascriptTemplate").html());
     var javascriptData = ["First", "Second", "Third"];
     $("#javascript").html(javascriptTemplate(javascriptData));
