@@ -179,6 +179,16 @@
                     container.remove();
                 });
 
+                test("renderElement returns element", function() {
+                    element = view.renderElement({
+                        render: function() {
+                            return "<p></p>";
+                        }
+                    });
+
+                    //equals(element.tagName, "p");
+                });
+
                 // ------------------------------------------------------------
                 module("VML View / Decorators", {
                     setup: function() {
