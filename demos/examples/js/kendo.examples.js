@@ -215,6 +215,7 @@
                 skinLink = kendoLinks.filter(":not([href*='kendo.common'])"),
                 currentFolder = new Array(location.href.match(/\//g).length - initialFolder + 1).join("../"),
                 url = currentFolder + commonLink.attr("href").replace(/kendo\.\w+(\.min)?\.css/i, "kendo." + skinName + "$1.css"),
+                exampleTitle = $("#exampleTitle"),
                 exampleElement = $("#example"), newLink;
 
             if (!$.browser.msie) {
@@ -239,10 +240,11 @@
 
             var fadeSkin = function() {
                 if (animate) {
-                    exampleElement.kendoStop().kendoAnimate(extend({}, animation.hide, { complete: function() {
+                    var animated = exampleElement.add(exampleTitle);
+                    animated.kendoStop().kendoAnimate(extend({}, animation.hide, { complete: function() {
                         changeSkin();
                         setTimeout(function() {
-                            exampleElement.kendoStop().kendoAnimate(animation.show);
+                            animated.kendoStop().kendoAnimate(animation.show);
                         }, 100);
                     }}));
                 } else

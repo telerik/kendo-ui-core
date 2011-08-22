@@ -719,6 +719,7 @@ a.bigButton
 #exampleTitle
 {
     font: 18px arial,helvetica,sans-serif;
+    background: transparent;
     margin-left: 21px;
     margin-top: 40px;
     position: absolute;
