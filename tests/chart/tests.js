@@ -58,5 +58,9 @@ tests.push(
     {
         page: "chart/tooltip.html",
         title: "Tooltip"
+    },
+    {
+        page: "chart/highlight.html",
+        title: "Highlight"
     }
 );

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.chart</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <link href="../qunit.css" type="text/css" rel="stylesheet"/>
+    </head>
+    <body>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.chart.js"></script>
+        <script type="text/javascript">
+            var Chart = kendo.ui.Chart,
+                highlight,
+                viewMock,
+                element,
+                RED = "rgb(255,0,0)",
+                GREEN = "rgb(0,255,0)",
+                BLUE = "rgb(0,0,255)";
+
+            function createHighlight(options) {
+                viewMock = {
+                    renderElement: function() {
+                        return $("<div id='outline'></div>")[0];
+                    }
+                };
+
+                highlight = new Chart.Highlight(viewMock, $("#viewElement")[0], options);
+            }
+
+            // ------------------------------------------------------------
+            module("Highlight", {
+                setup: function() {
+                    createHighlight({
+                        fill: "#cf0",
+                        fillOpacity: 0.5
+                    });
+                },
+                teardown: function() {
+                    $("#viewElement").empty();
+                }
+            });
+
+            test("Retrieves outline element", 1, function() {
+                highlight.show({
+                    getOutlineElement: function() {
+                        ok(true);
+                    }
+                });
+            });
+
+            test("Sets fill on outline element", 1, function() {
+                highlight.show({
+                    getOutlineElement: function(definition, options) {
+                        equals(options.fill, "#cf0");
+                    }
+                });
+            });
+
+            test("Sets fill opacity on outline element", 1, function() {
+                highlight.show({
+                    getOutlineElement: function(definition, options) {
+                        equals(options.fillOpacity, 0.5);
+                    }
+                });
+            });
+
+            test("Renders outline element", function() {
+                highlight.show({ getOutlineElement: function() { } });
+                equals($("#outline").length, 1);
+            });
+
+            test("Removes outline element", function() {
+                highlight.show({ getOutlineElement: function() { } });
+                highlight.hide();
+                equals($("#outline").length, 0);
+            });
+
+            test("Sets visible property on show", function() {
+                highlight.show({ getOutlineElement: function() { } });
+                ok(highlight.visible);
+            });
+
+            test("Sets visible property on hide", function() {
+                highlight.hide();
+                ok(!highlight.visible);
+            });
+
+        </script>
+
+        <div id="viewElement"></div>
+
+        <h1 id="qunit-header">kendo.chart</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+    </body>
+</html>
