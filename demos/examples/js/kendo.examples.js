@@ -103,13 +103,12 @@
                     toolsVisible = tools.is(":visible");
 
                 if (title == "Overview" && toolsVisible)
-                    tools.kendoStop(true).kendoAnimate(extend({ hide: true }, animation.hide));
+                    tools.hide();
                 else {
                     Application.fetchDescription();
                 }
 
                 if (title == "Overview") {
-                    exampleName.empty().html(title);
                     exampleBody.empty().html(Application.body(html));
                 } else {
                     exampleName.kendoStop(true).kendoAnimate(extend({}, animation.hide, { complete: function() {
@@ -173,10 +172,6 @@
 
                 $(".description").empty().html($.trim(Application.description(html)));
             } else {
-                exampleName.empty().html(title);
-
-                $("#nav .t-item > .t-link").eq(0).addClass("t-state-selected");
-
                 Application.fetchExample(href);
             }
             prettyPrint();
@@ -307,8 +302,14 @@
                     .live("click", function(e) {
                         e.preventDefault();
 
-                        if (!location.href.match($(this).attr("href")) && !$("#exampleWrap").data("animating"))
-                            Application.load($(this).attr("href"));
+                        if (!location.href.match($(this).attr("href")) && !$("#exampleWrap").data("animating")) {
+                            var element = $(this);
+
+                            $("#nav").find(".chosen").removeClass("chosen");
+                            element.addClass("chosen");
+
+                            Application.load(element.attr("href"));
+                        }
                     });
 
                 $(window).bind("popstate", function(e) {
@@ -445,12 +446,9 @@ function initializeNavigation (normalizedUrl) {
         selectCategory($("#topnav #" + page)[0]);
 
         var link = $("#nav .t-link[href*='" + url + "']")
-            .addClass("t-state-selected");
+            .addClass("t-state-selected").addClass("chosen");
 
         panelBar.expand(link.parent().parents(".t-item"), false);
-    } else {
-        $("#navmainWrap").addClass("singleColumn");
-        selectCategory($("#topnav #overview"));
     }
 
     $(document).ready( function () {
@@ -471,8 +469,7 @@ function initializeNavigation (normalizedUrl) {
             skinSelector.data("kendoDropDownList").value(kendoSkin);
         }
 
-        if (page && page != "overview")
-            $(".skinSelector.t-widget").show();
+        $(".skinSelector.t-widget").show();
     });
 }
 

@@ -339,7 +339,7 @@ exports.build = function(origin, destination, kendoCDN) {
     }
 
     console.log("Parsing master page...");
-    var indexHtml = fs.readFileSync(examplesLocation + "/index.html", "utf8");
+    var indexHtml = fs.readFileSync(examplesLocation + "/buildTemplate.html", "utf8");
 
     "nav,script,tools,css,meta".split(",").forEach(function(region) {
         var re = new RegExp("<!--\\s*" + region + "\\s*-->([\\u000a\\u000d\\u2028\\u2029]|.)*<!--\\s*" + region + "\\s*-->", "ig");
@@ -360,8 +360,8 @@ exports.build = function(origin, destination, kendoCDN) {
     wrench.copyDirSyncRecursive(examplesLocation, outputPath);
     wrench.copyDirSyncRecursive(originJS, outputPath + "/js");
     wrench.copyDirSyncRecursive(originStyles, outputPath + "/styles", true);
-    fs.writeFileSync(outputPath + "/index.html", indexHtml.replace(isLive, ""), "utf8");
     fs.unlinkSync(outputPath + "/template.html");
+    fs.unlinkSync(outputPath + "/buildTemplate.html");
 
     if (!kendoCDN) {
         fs.writeFileSync(outputPath + "/js/jquery.js", fs.readFileSync("src/jquery.js", "utf8"), "utf8");
@@ -416,4 +416,7 @@ exports.build = function(origin, destination, kendoCDN) {
 
     console.log("Processing examples...");
     processExamplesDirectory(outputPath);
+
+    var index = fs.readFileSync(examplesLocation + "/index.html", "utf8");
+    fs.writeFileSync(outputPath + "/index.html", index.replace(isLive, ""), "utf8");
 };
