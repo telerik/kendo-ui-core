@@ -599,15 +599,20 @@
             (function() {
                 var circle;
 
+                function createCircle(options) {
+                    circle = new Chart.VMLCircle([10, 20], 10, options);
+                }
+
                 module("VMLCircle", {
                     setup: function() {
-                        circle = new Chart.VMLCircle([10, 20], 10);
+                        createCircle();
                     }
                 });
 
                 test("renders oval tag", function() {
-                    equal(circle.render().replace(/\<kvml:oval.*?\>/, "<kvml:oval>"),
-                        "<kvml:oval></kvml:oval>");
+                    ok(circle.render().match(
+                        /\<kvml:oval.*\>.*\<\/kvml:oval\>/
+                    ));
                 });
 
                 test("renders center top", function() {
@@ -626,39 +631,50 @@
                     ok(circle.render().indexOf("height:20px") > -1);
                 });
 
-                test("renders fill color", function() {
-                    circle.options.fill = "#f00";
-                    ok(circle.render().indexOf("fillcolor='#f00'") > -1);
+                test("creates fill", function() {
+                    ok(circle.fill instanceof Chart.VMLFill);
                 });
 
-                test("sets filled attribute when fill color is set", function() {
-                    circle.options.fill = "#f00";
-                    ok(circle.render().indexOf("filled='true'") > -1);
+                test("sets fill color", function() {
+                    createCircle({ fill: "#f00" });
+                    equals(circle.fill.options.fill, "#f00");
                 });
 
-                test("sets filled attribute when fill color is not set", function() {
-                    circle.options.fill = "";
-                    ok(circle.render().indexOf("filled='false'") > -1);
+                test("sets fill opacity", function() {
+                    createCircle({ opacity: 0.5 });
+                    equals(circle.fill.options.opacity, 0.5);
                 });
 
-                test("renders stroke color", function() {
-                    circle.options.stroke = "#f00";
-                    ok(circle.render().indexOf("strokecolor='#f00'") > -1);
+                test("renders fill", function() {
+                    ok(circle.render().indexOf("<kvml:fill") > -1);
                 });
 
-                test("sets stroked attribute when stroke color is set", function() {
-                    circle.options.stroke = "#f00";
-                    ok(circle.render().indexOf("stroked='true'") > -1);
+                test("creates stroke", function() {
+                    ok(circle.stroke instanceof Chart.VMLStroke);
                 });
 
-                test("sets stroked attribute when stroke color is not set", function() {
-                    circle.options.stroke = "";
-                    ok(circle.render().indexOf("stroked='false'") > -1);
+                test("sets stroke color", function() {
+                    createCircle({ stroke: "#cf0" });
+                    same(circle.stroke.options.stroke, "#cf0");
                 });
 
-                test("renders stroke width", function() {
-                    circle.options.strokeWidth = "2";
-                    ok(circle.render().indexOf("strokeweight='2'") > -1);
+                test("sets stroke width", function() {
+                    createCircle({ strokeWidth: 2 });
+                    same(circle.stroke.options.strokeWidth, 2);
+                });
+
+                test("sets stroke dash type", function() {
+                    createCircle({ dashType: "dot" });
+                    same(circle.stroke.options.dashType, "dot");
+                });
+
+                test("sets stroke opacity", function() {
+                    createCircle({ opacity: 0.5 });
+                    same(circle.stroke.options.opacity, 0.5);
+                });
+
+                test("renders stroke", function() {
+                    ok(circle.render().indexOf("<kvml:stroke") > -1);
                 });
 
                 test("renders id", function() {
