@@ -14,18 +14,6 @@
 
     <script>
         $("#stylable-elements").kendoPanelBar();
-
-        function addStylesheet(cssText) {
-            var ss = document.createElement('style');
-
-            document.getElementsByTagName("head")[0].appendChild(ss);
-
-            if (ss.styleSheet) {
-                ss.styleSheet.cssText = cssText;
-            } else {
-                ss.appendChild(document.createTextNode(cssText));
-            }
-        }
     </script>
 </body>
 </html>

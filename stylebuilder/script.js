@@ -1,5 +1,6 @@
 // TODO: handle scenarios where jQuery is not on the page
 // TODO: use $.getScript to load kendo, if not available
+// TODO: show a neat message to urge the unsupported browsers to upgrade (instead of the iframe)
 
 (function() {
 
