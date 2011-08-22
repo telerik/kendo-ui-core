@@ -42,6 +42,7 @@
         LINE = "line",
         LINE_MARKER_SIZE = 6,
         LINE_MARKER_SQUARE = "square",
+        MOUSEMOVE_TRACKING = "mousemove.tracking",
         MOUSEOVER = "mouseover",
         NONE = "none",
         OBJECT = "object",
@@ -1261,11 +1262,8 @@
 
             viewElement.bind(CLICK, proxy(chart._click, chart));
 
-            if (chart.options.tooltip.visible) {
-                chart._tooltip = new Tooltip(chart.element, chart.options.tooltip);
-            }
-
-            chart._highlight = new Highlight(chart);
+            chart._tooltip = new Tooltip(chart.element, chart.options.tooltip);
+            chart._highlight = new Highlight(chart._view, chart._viewElement);
             viewElement.bind(MOUSEOVER, proxy(chart._mouseOver, chart));
         },
 
@@ -1313,39 +1311,47 @@
                     point = chartElement;
                 }
 
-                if (tooltip) {
-                    if (!tooltip.visible) {
-                        $(doc.body).bind("mousemove.tooltip", proxy(chart._mouseMove, chart));
-                    }
-
+                if (chart.options.tooltip.visible) {
                     tooltip.show(point);
                 }
 
-                chart._highlight.show(point, e.target);
+                chart._highlight.show(point);
+
+                $(doc.body).bind(MOUSEMOVE_TRACKING, proxy(chart._mouseMove, chart));
             }
         },
 
         _mouseMove: function(e) {
             var chart = this,
                 tooltip = chart._tooltip,
-                coords = chart.getCoordinates(e),
-                point = tooltip.point,
-                plotArea = chart._plotArea,
+                highlight = chart._highlight,
+                coords,
+                point,
                 owner,
                 seriesPoint;
 
-            if (plotArea.box.containsPoint(coords.x, coords.y)) {
-                if(point.series.type === LINE) {
-                    owner = point.owner;
-                    seriesPoint = owner.getSeriesPoint(coords.x, coords.y, point.seriesIx);
-                    if (seriesPoint && seriesPoint != point) {
-                        tooltip.show(seriesPoint);
+            if (!tooltip.visible && !highlight.visible) {
+                return;
+            }
+
+            coords = chart.getCoordinates(e);
+
+            if (chart._plotArea.box.containsPoint(coords.x, coords.y)) {
+                if (tooltip.visible) {
+                    point = tooltip.point;
+                    if(point.series.type === LINE) {
+                        owner = point.owner;
+                        seriesPoint = owner.getSeriesPoint(coords.x, coords.y, point.seriesIx);
+                        if (seriesPoint && seriesPoint != point) {
+                            tooltip.show(seriesPoint);
+                        }
                     }
                 }
             } else {
+                $(doc.body).unbind(MOUSEMOVE_TRACKING);
+
                 tooltip.hide();
-                chart._highlight.hide();
-                $(doc.body).unbind("mousemove.tooltip");
+                highlight.hide();
             }
         },
 
@@ -4880,34 +4886,40 @@
     };
 
     var Highlight = Class.extend({
-        init: function(chart, options) {
+        init: function(view, viewElement, options) {
             var highlight = this;
+            highlight.options = deepExtend({}, highlight.options, options);
 
-            highlight.chart = chart;
+            highlight.view = view;
+            highlight.viewElement = viewElement;
         },
 
-        show: function(point, element) {
+        options: {
+            fill: WHITE,
+            fillOpacity: 0.2,
+            stroke: WHITE,
+            strokeWidth: 1,
+            strokeOpacity: 0.2
+        },
+
+        show: function(point) {
             var highlight = this,
                 chart = highlight.chart,
-                view = chart._view,
-                viewElement = chart._viewElement,
+                view = highlight.view,
+                viewElement = highlight.viewElement,
                 outline,
                 element;
 
             highlight.hide();
 
             if (point.getOutlineElement) {
-                outline = point.getOutlineElement(view, {
-                    fill: WHITE,
-                    fillOpacity: 0.2,
-                    stroke: WHITE,
-                    strokeWidth: 1,
-                    strokeOpacity: 0.2
-                });
+                outline = point.getOutlineElement(view, highlight.options);
 
                 element = view.renderElement(outline);
-                highlight.element = element;
                 viewElement.appendChild(element);
+
+                highlight.element = element;
+                highlight.visible = true;
             }
         },
 
@@ -4917,7 +4929,9 @@
 
             if (element) {
                 element.parentNode.removeChild(element);
+
                 delete highlight.element;
+                highlight.visible = false;
             }
         }
     });
@@ -5568,6 +5582,7 @@
         VMLStroke: VMLStroke,
         VMLFill: VMLFill,
         Tooltip: Tooltip,
+        Highlight: Highlight,
         deepExtend: deepExtend,
         Color: Color,
         blendColors: blendColors,
