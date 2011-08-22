@@ -8,6 +8,8 @@
         DataSource = kendo.data.DataSource,
         baseTemplate = kendo.template,
         format = kendo.format,
+        map = $.map,
+        math = Math,
         proxy = $.proxy;
 
     // Constants ==============================================================
@@ -1131,7 +1133,7 @@
 
             chart.options = deepExtend(
                 {},
-                theme ? Chart.Themes[theme] || Chart.Themes[theme.toLowerCase()] : {},
+                theme ? Chart.themes[theme] || Chart.themes[theme.toLowerCase()] : {},
                 options
             );
 
@@ -1398,7 +1400,7 @@
     // **************************
     // Themes
     // **************************
-    Chart.Themes = {
+    Chart.themes = {
         "default": {
             seriesColors: ["#d7df23", "#adc32b", "#799b28", "#4c7520"]
         }
@@ -1452,12 +1454,12 @@
         wrap: function(targetBox) {
             var box = this;
 
-            box.x1 = Math.min(box.x1, targetBox.x1);
-            box.y1 = Math.min(box.y1, targetBox.y1);
-            box.x2 = Math.max(box.x2, targetBox.x2);
-            box.y2 = Math.max(box.y2, targetBox.y2);
+            box.x1 = math.min(box.x1, targetBox.x1);
+            box.y1 = math.min(box.y1, targetBox.y1);
+            box.x2 = math.max(box.x2, targetBox.x2);
+            box.y2 = math.max(box.y2, targetBox.y2);
 
-            return this;
+            return box;
         },
 
         snapTo: function(targetBox, axis) {
@@ -1473,7 +1475,7 @@
                 box.y2 = targetBox.y2;
             }
 
-            return this;
+            return box;
         },
 
         alignTo: function(targetBox, edge) {
@@ -1556,12 +1558,9 @@
         }
     });
 
-    var defaultBox = new Box2D(0, 0, 0, 0);
-
     var ChartElement = Class.extend({
         init: function(options) {
             var element = this;
-            element.attributes = {};
             element.children = [];
 
             element.options = deepExtend({}, element.options, options);
@@ -1570,10 +1569,12 @@
         reflow: function(targetBox) {
             var element = this,
                 children = element.children,
-                box;
+                box,
+                i,
+                currentChild;
 
-            for (var i = 0; i < children.length; i++) {
-                var currentChild = children[i];
+            for (i = 0; i < children.length; i++) {
+                currentChild = children[i];
 
                 currentChild.reflow(targetBox);
                 box = box ? box.wrap(currentChild.box) : currentChild.box.clone();
@@ -1625,7 +1626,7 @@
                 i,
                 length = arguments.length;
 
-            [].push.apply(element.children, arguments);
+            append(element.children, arguments);
 
             for (i = 0; i < length; i++) {
                 arguments[i].parent = element;
@@ -1664,13 +1665,15 @@
 
         reflow: function() {
             var root = this,
-                currentBox = new Box2D(0, 0, root.options.width, root.options.height);
+                options = root.options,
+                children = root.children,
+                currentBox = new Box2D(0, 0, options.width, options.height);
 
-            root.box = currentBox.unpad(root.options.margin);
+            root.box = currentBox.unpad(options.margin);
 
-            for (var i = 0; i < root.children.length; i++) {
-                root.children[i].reflow(currentBox);
-                currentBox = boxDiff(currentBox, root.children[i].box);
+            for (var i = 0; i < children.length; i++) {
+                children[i].reflow(currentBox);
+                currentBox = boxDiff(currentBox, children[i].box);
             }
         },
 
@@ -1679,7 +1682,7 @@
                 options = root.options,
                 view = root.supportsSVG() ? new SVGView(options) : new VMLView(options);
 
-            [].push.apply(view.children, root.getViewElements(view));
+            append(view.children, root.getViewElements(view));
 
             return view;
         },
@@ -1715,9 +1718,7 @@
 
     var BoxElement = ChartElement.extend({
         init: function(options) {
-            var element = this;
-
-            ChartElement.fn.init.call(element, options);
+            ChartElement.fn.init.call(this, options);
         },
 
         options: {
@@ -1823,7 +1824,7 @@
 
             // Calculate size
             text.content = content;
-            text.reflow(defaultBox);
+            text.reflow(new Box2D());
         },
 
         options: {
@@ -1910,7 +1911,7 @@
             );
 
             // Calculate size
-            textBox.reflow(defaultBox);
+            textBox.reflow(new Box2D());
         }
     });
 
@@ -2005,7 +2006,11 @@
             var title = this;
             ChartElement.fn.init.call(title, options);
 
-            title.create();
+            title.append(
+                new TextBox(title.options.text, deepExtend({}, title.options, {
+                    vAlign: title.options.position
+                }))
+            );
         },
 
         options: {
@@ -2016,18 +2021,6 @@
             align: CENTER,
             margin: getSpacing(5),
             padding: getSpacing(5)
-        },
-
-        create: function() {
-            var title = this,
-                options = title.options,
-                textBoxOptions = deepExtend({}, options, {
-                    vAlign: options.position
-                });
-
-            title.append(
-                new TextBox(options.text, textBoxOptions)
-            );
         },
 
         reflow: function(targetBox) {
@@ -2109,22 +2102,23 @@
                 border = options.border || {},
                 labelBox;
 
-            [].push.apply(group.children, ChartElement.fn.getViewElements.call(legend, view));
+            append(group.children, ChartElement.fn.getViewElements.call(legend, view));
 
             for (var i = 0, length = series.length; i < length; i++) {
                 var color = series[i].color,
                     label = children[i],
-                    markerBox = new Box2D();
+                    markerBox = new Box2D(),
+                    box = label.box;
 
-                labelBox = labelBox ? labelBox.wrap(label.box) : label.box.clone();
+                labelBox = labelBox ? labelBox.wrap(box) : box.clone();
 
-                markerBox.x1 = label.box.x1 - markerSize * 2;
+                markerBox.x1 = box.x1 - markerSize * 2;
                 markerBox.x2 = markerBox.x1 + markerSize;
 
                 if (options.position == TOP || options.position == BOTTOM) {
-                    markerBox.y1 = label.box.y1 + markerSize / 2;
+                    markerBox.y1 = box.y1 + markerSize / 2;
                 } else {
-                    markerBox.y1 = label.box.y1 + (label.box.height() - markerSize) / 2;
+                    markerBox.y1 = box.y1 + (box.height() - markerSize) / 2;
                 }
 
                 markerBox.y2 = markerBox.y1 + markerSize;
@@ -2187,7 +2181,7 @@
                     offsetY + options.offsetY);
 
             var labelBoxWidth = labelBox.width();
-            labelBox.x1 = Math.max(targetBox.x1, labelBox.x1);
+            labelBox.x1 = math.max(targetBox.x1, labelBox.x1);
             labelBox.x2 = labelBox.x1 + labelBoxWidth;
 
             labelBox.y1 = targetBox.y1;
@@ -2305,7 +2299,7 @@
                 ticks = [];
 
             if (options.majorTickType.toLowerCase() === OUTSIDE) {
-                ticks = ticks.concat($.map(majorTicks, function(pos) {
+                ticks = ticks.concat(map(majorTicks, function(pos) {
                                         return {
                                             pos: pos,
                                             size: options.majorTickSize,
@@ -2316,7 +2310,7 @@
             }
 
             if (options.minorTickType.toLowerCase()  === OUTSIDE) {
-                ticks = ticks.concat($.map(axis.getMinorTickPositions(), function(pos) {
+                ticks = ticks.concat(map(axis.getMinorTickPositions(), function(pos) {
                             if (options.majorTickType.toLowerCase() !== NONE) {
                                 if (!inArray(pos, majorTicks)) {
                                     return {
@@ -2337,7 +2331,7 @@
                         }));
             }
 
-            return $.map(ticks, function(tick) {
+            return map(ticks, function(tick) {
                 if (isVertical) {
                     return view.createLine(
                             box.x2 - tick.size, tick.pos, box.x2, tick.pos,
@@ -2364,7 +2358,7 @@
                 tickSize = 0;
 
             if (options.majorTickType != NONE && options.minorTickType != NONE ) {
-                tickSize = Math.max(options.majorTickSize, options.minorTickSize);
+                tickSize = math.max(options.majorTickSize, options.minorTickSize);
             } else if (options.majorTickType != NONE) {
                 tickSize = options.majorTickSize;
             } else if (options.minorTickType != NONE) {
@@ -2501,8 +2495,8 @@
 
             for (var i = 0; i < children.length; i++) {
                 var label = children[i];
-                maxLabelWidth = Math.max(maxLabelWidth, label.box.width());
-                maxLabelHeight = Math.max(maxLabelHeight, label.box.height());
+                maxLabelWidth = math.max(maxLabelWidth, label.box.width());
+                maxLabelHeight = math.max(maxLabelHeight, label.box.height());
             }
 
             if (isVertical) {
@@ -2546,7 +2540,7 @@
                         lineOptions));
                 }
 
-                [].push.apply(childElements, axis.renderTicks(view));
+                append(childElements, axis.renderTicks(view));
             }
 
             return childElements;
@@ -2560,10 +2554,10 @@
                     return 0.1;
                 }
 
-                diff = Math.abs(max);
+                diff = math.abs(max);
             }
 
-            var scale = Math.pow(10, Math.floor(Math.log(diff) / Math.log(10))),
+            var scale = math.pow(10, math.floor(math.log(diff) / math.log(10))),
                 relativeValue = round((diff / scale), DEFAULT_PRECISION),
                 scaleMultiplier = 1;
 
@@ -2589,7 +2583,7 @@
             if (min <= 0 && max <= 0) {
                 max = min == max ? 0 : max;
 
-                var diff = Math.abs((max - min) / max);
+                var diff = math.abs((max - min) / max);
                 if(diff > ZERO_THRESHOLD) {
                     return 0;
                 }
@@ -2632,7 +2626,7 @@
             var options = this.options,
                 range = options.max - options.min;
 
-            return Math.floor(round(range / stepValue, COORD_PRECISION)) + 1;
+            return math.floor(round(range / stepValue, COORD_PRECISION)) + 1;
         },
 
         getTickPositions: function(stepValue) {
@@ -2704,18 +2698,18 @@
                 scale = lineSize / (options.max - options.min),
                 a = defined(a) ? a : options.axisCrossingValue,
                 b = defined(b) ? b : options.axisCrossingValue,
-                a = Math.max(Math.min(a, options.max), options.min),
-                b = Math.max(Math.min(b, options.max), options.min),
+                a = math.max(math.min(a, options.max), options.min),
+                b = math.max(math.min(b, options.max), options.min),
                 p1,
                 p2,
                 slotBox = new Box2D(lineBox.x1, lineBox.y1, lineBox.x1, lineBox.y1);
 
             if (isVertical) {
-                p1 = lineStart + scale * (options.max - Math.max(a, b));
-                p2 = lineStart + scale * (options.max - Math.min(a, b));
+                p1 = lineStart + scale * (options.max - math.max(a, b));
+                p2 = lineStart + scale * (options.max - math.min(a, b));
             } else {
-                p1 = lineStart + scale * (Math.min(a, b) - options.min);
-                p2 = lineStart + scale * (Math.max(a, b) - options.min);
+                p1 = lineStart + scale * (math.min(a, b) - options.min);
+                p2 = lineStart + scale * (math.max(a, b) - options.min);
             }
 
             slotBox[valueAxis + 1] = p1;
@@ -2768,8 +2762,8 @@
 
             for (var i = 0; i < children.length; i++) {
                 var label = children[i];
-                maxLabelHeight = Math.max(maxLabelHeight, label.box.height());
-                maxLabelWidth = Math.max(maxLabelWidth, label.box.width());
+                maxLabelHeight = math.max(maxLabelHeight, label.box.height());
+                maxLabelWidth = math.max(maxLabelWidth, label.box.width());
             }
 
             if (isVertical) {
@@ -2812,7 +2806,7 @@
                         lineOptions));
                 }
 
-                [].push.apply(childElements, axis.renderTicks(view));
+                append(childElements, axis.renderTicks(view));
             }
 
             return childElements;
@@ -2857,7 +2851,7 @@
                 box = axis.box,
                 size = isVertical ? box.height() : box.width(),
                 startPos = isVertical ? box.y1 : box.x1,
-                step = size / Math.max(1, children.length),
+                step = size / math.max(1, children.length),
                 p1 = startPos + (categoryIx * step),
                 p2 = p1 + step;
 
@@ -3056,7 +3050,7 @@
             elements.push(
                 view.createRect(box, rectStyle)
             );
-            [].push.apply(elements,
+            append(elements,
                 ChartElement.fn.getViewElements.call(bar, view)
             );
 
@@ -3146,8 +3140,8 @@
             var chart = this;
 
             if (defined(value)) {
-                chart._seriesMin = Math.min(chart._seriesMin, value);
-                chart._seriesMax = Math.max(chart._seriesMax, value);
+                chart._seriesMin = math.min(chart._seriesMin, value);
+                chart._seriesMax = math.max(chart._seriesMax, value);
             }
         },
 
@@ -3229,7 +3223,7 @@
                 categories = 0;
 
             for (var i = 0, length = series.length; i < length; i++) {
-                categories = Math.max(categories, series[i].data.length);
+                categories = math.max(categories, series[i].data.length);
             }
 
             return categories;
@@ -3254,7 +3248,7 @@
 
                 if (currentPoint && defined(currentPoint.value) && currentPoint.value !== null) {
                     pointBox = currentPoint.box;
-                    pointDistance = Math.abs(pointBox.center()[axis] - pos);
+                    pointDistance = math.abs(pointBox.center()[axis] - pos);
 
                     if (pointDistance < nearestPointDistance) {
                         nearestPoint = currentPoint;
@@ -3635,8 +3629,8 @@
             if (defined(value)) {
                 if (isStacked) {
                     incrementSlot(totals, categoryIx, value);
-                    chart._seriesMin = Math.min(chart._seriesMin, sparseArrayMin(totals));
-                    chart._seriesMax = Math.max(chart._seriesMax, sparseArrayMax(totals));
+                    chart._seriesMin = math.min(chart._seriesMin, sparseArrayMin(totals));
+                    chart._seriesMax = math.max(chart._seriesMax, sparseArrayMax(totals));
                 } else {
                     CategoricalChart.fn.updateRange.apply(chart, arguments);
                 }
@@ -3764,8 +3758,8 @@
                         spacing: firstSeries.spacing
                     });
 
-                categoriesToAdd = Math.max(0, barChart.categoriesCount() - categories.length);
-                [].push.apply(options.categoryAxis.categories, new Array(categoriesToAdd));
+                categoriesToAdd = math.max(0, barChart.categoriesCount() - categories.length);
+                append(options.categoryAxis.categories, new Array(categoriesToAdd));
 
                 range = barChart.valueRange() || range;
                 charts.push(barChart);
@@ -3780,12 +3774,12 @@
                     series: lineSeries
                 });
 
-                categoriesToAdd = Math.max(0, lineChart.categoriesCount() - categories.length);
-                [].push.apply(options.categoryAxis.categories, new Array(categoriesToAdd));
+                categoriesToAdd = math.max(0, lineChart.categoriesCount() - categories.length);
+                append(options.categoryAxis.categories, new Array(categoriesToAdd));
 
                 var lineChartRange = lineChart.valueRange() || range;
-                range.min = Math.min(range.min, lineChartRange.min);
-                range.max = Math.max(range.max, lineChartRange.max);
+                range.min = math.min(range.min, lineChartRange.min);
+                range.max = math.max(range.max, lineChartRange.max);
                 charts.push(lineChart);
             }
 
@@ -3888,7 +3882,7 @@
                 gridLines = [];
 
                 if (options.majorGridLines.visible) {
-                    gridLines = $.map(majorTicks, function(pos) {
+                    gridLines = map(majorTicks, function(pos) {
                                     return {
                                         pos: pos,
                                         options: options.majorGridLines
@@ -3898,7 +3892,7 @@
 
                 if (options.minorGridLines.visible) {
                     gridLines = gridLines.concat(
-                        $.map(axis.getMinorTickPositions(), function(pos) {
+                        map(axis.getMinorTickPositions(), function(pos) {
                             if (options.majorGridLines.visible) {
                                 if (!inArray(pos, majorTicks)) {
                                     return {
@@ -3916,7 +3910,7 @@
                     ));
                 }
 
-                return $.map(gridLines, function(line) {
+                return map(gridLines, function(line) {
                     var gridLineOptions = {
                             strokeWidth: line.options.width,
                             stroke: line.options.color,
@@ -4264,7 +4258,7 @@
                 count = points.length,
                 strokeWidth = path.options.strokeWidth,
                 shouldAlign = strokeWidth && strokeWidth % 2 !== 0,
-                alignFunc = shouldAlign ? alignToPixel : Math.round,
+                alignFunc = shouldAlign ? alignToPixel : math.round,
                 first = points[0],
                 result = "M" + alignFunc(first[0]) + " " + alignFunc(first[1]);
 
@@ -4764,7 +4758,7 @@
                 i,
                 length = stops.length,
                 output = [],
-                round = Math.round;
+                round = math.round;
 
             for (i = 0; i < length; i++) {
                 currentStop = stops[i];
@@ -4945,16 +4939,16 @@
 
     // Helper functions
     function ceil(value, step) {
-        return round(Math.ceil(value / step) * step, DEFAULT_PRECISION);
+        return round(math.ceil(value / step) * step, DEFAULT_PRECISION);
     }
 
     function floor(value, step) {
-        return round(Math.floor(value / step) * step, DEFAULT_PRECISION);
+        return round(math.floor(value / step) * step, DEFAULT_PRECISION);
     }
 
     function round(value, precision) {
-        var power = Math.pow(10, precision || 0);
-        return Math.round(value * power) / power;
+        var power = math.pow(10, precision || 0);
+        return math.round(value * power) / power;
     }
 
     function measureText(text, style, rotation) {
@@ -5000,8 +4994,8 @@
 
             size.normalWidth = width;
             size.normalHeight = height;
-            size.width = Math.max(r1.x, r2.x, r3.x, r4.x) - Math.min(r1.x, r2.x, r3.x, r4.x);
-            size.height = Math.max(r1.y, r2.y, r3.y, r4.y) - Math.min(r1.y, r2.y, r3.y, r4.y);
+            size.width = math.max(r1.x, r2.x, r3.x, r4.x) - math.min(r1.x, r2.x, r3.x, r4.x);
+            size.height = math.max(r1.y, r2.y, r3.y, r4.y) - math.min(r1.y, r2.y, r3.y, r4.y);
         }
 
         measureText.cache[cacheKey] = size;
@@ -5025,27 +5019,27 @@
     }
 
     function rotatePoint(x, y, cx, cy, angle) {
-        var theta = angle * (Math.PI / 180);
+        var theta = angle * (math.PI / 180);
         return {
-            x: cx + (x - cx) * Math.cos(theta) + (y - cy) * Math.sin(theta),
-            y: cy - (x - cx) * Math.sin(theta) + (y - cy) * Math.cos(theta)
+            x: cx + (x - cx) * math.cos(theta) + (y - cy) * math.sin(theta),
+            y: cy - (x - cx) * math.sin(theta) + (y - cy) * math.cos(theta)
         }
     }
 
-    function boxDiff( r, s ) {
+    function boxDiff(r, s) {
         if (r.x1 == s.x1 && r.y1 == s.y1 && r.x2 == s.x2 && r.y2 == s.y2) {
             return s;
         }
 
-        var a = Math.min( r.x1, s.x1 );
-        var b = Math.max( r.x1, s.x1 );
-        var c = Math.min( r.x2, s.x2 );
-        var d = Math.max( r.x2, s.x2 );
+        var a = math.min(r.x1, s.x1);
+        var b = math.max(r.x1, s.x1);
+        var c = math.min(r.x2, s.x2);
+        var d = math.max(r.x2, s.x2);
 
-        var e = Math.min( r.y1, s.y1 );
-        var f = Math.max( r.y1, s.y1 );
-        var g = Math.min( r.y2, s.y2 );
-        var h = Math.max( r.y2, s.y2 );
+        var e = math.min(r.y1, s.y1);
+        var f = math.max(r.y1, s.y1);
+        var g = math.min(r.y2, s.y2);
+        var h = math.max(r.y2, s.y2);
 
         // X = intersection, 0-7 = possible difference areas
         // h +-+-+-+
@@ -5060,21 +5054,21 @@
         var result = [];
 
         // we'll always have rectangles 1, 3, 4 and 6
-        result[ 0 ] = new Box2D( b, e, c, f );
-        result[ 1 ] = new Box2D( a, f, b, g );
-        result[ 2 ] = new Box2D( c, f, d, g );
-        result[ 3 ] = new Box2D( b, g, c, h );
+        result[0] = new Box2D(b, e, c, f);
+        result[1] = new Box2D(a, f, b, g);
+        result[2] = new Box2D(c, f, d, g);
+        result[3] = new Box2D(b, g, c, h);
 
         // decide which corners
         if( r.x1 == a && r.y1 == e || s.x1 == a && s.y1 == e )
         { // corners 0 and 7
-            result[ 4 ] = new Box2D( a, e, b, f );
-            result[ 5 ] = new Box2D( c, g, d, h );
+            result[4] = new Box2D(a, e, b, f);
+            result[5] = new Box2D(c, g, d, h);
         }
         else
         { // corners 2 and 5
-            result[ 4 ] = new Box2D( c, e, d, f );
-            result[ 5 ] = new Box2D( a, g, b, h );
+            result[4] = new Box2D(c, e, d, f);
+            result[5] = new Box2D(a, g, b, h);
         }
 
         return $.grep(result, function(box) {
@@ -5083,7 +5077,7 @@
     }
 
     function alignToPixel(coord) {
-        return Math.round(coord) + 0.5;
+        return math.round(coord) + 0.5;
     }
 
     function sparseArrayMin(arr) {
@@ -5100,8 +5094,8 @@
         for (var i = 0, length = arr.length; i < length; i++) {
             var n = arr[i];
             if (defined(n)) {
-                min = Math.min(min, n);
-                max = Math.max(max, n);
+                min = math.min(min, n);
+                max = math.max(max, n);
             }
         }
 
@@ -5248,7 +5242,7 @@
 
         brightness: function(value) {
             var color = this,
-                round = Math.round;
+                round = math.round;
 
             color.r = round(color.normalizeByte(color.r * value));
             color.g = round(color.normalizeByte(color.g * value));
@@ -5319,7 +5313,7 @@
     }
 
     function blendChannel(a, b, alpha) {
-        return Math.round(alpha * b + (1 - alpha) * a);
+        return math.round(alpha * b + (1 - alpha) * a);
     }
 
     function blendGradient(color, gradient) {
@@ -5420,7 +5414,7 @@
         var id = "k", i;
 
         for (i = 0; i < 16; i++) {
-            id += (Math.random() * 16 | 0).toString(16);
+            id += (math.random() * 16 | 0).toString(16);
         }
 
         return id;
@@ -5430,53 +5424,59 @@
         return typeof value !== UNDEFINED;
     }
 
+    function append(first, second) {
+        [].push.apply(first, second);
+    }
+
     // Exports ================================================================
 
     kendo.ui.plugin("Chart", Chart);
 
-    Chart.Box2D = Box2D;
-    Chart.Text = Text;
-    Chart.BarLabel = BarLabel;
-    Chart.ChartElement = ChartElement;
-    Chart.RootElement = RootElement;
-    Chart.BoxElement = BoxElement;
-    Chart.TextBox = TextBox;
-    Chart.NumericAxis = NumericAxis;
-    Chart.CategoryAxis = CategoryAxis;
-    Chart.Bar = Bar;
-    Chart.BarChart = BarChart;
-    Chart.ShapeElement = ShapeElement;
-    Chart.LinePoint = LinePoint;
-    Chart.LineChart = LineChart;
-    Chart.ClusterLayout = ClusterLayout;
-    Chart.StackLayout = StackLayout;
-    Chart.Title = Title;
-    Chart.Legend = Legend;
-    Chart.PlotArea = PlotArea;
-    Chart.ViewElement = ViewElement;
-    Chart.SVGView = SVGView;
-    Chart.SVGGroup = SVGGroup;
-    Chart.SVGText = SVGText;
-    Chart.SVGPath = SVGPath;
-    Chart.SVGCircle = SVGCircle;
-    Chart.SVGOverlayDecorator = SVGOverlayDecorator;
-    Chart.SVGPaintDecorator = SVGPaintDecorator;
-    Chart.VMLView = VMLView;
-    Chart.VMLText = VMLText;
-    Chart.VMLRotatedText = VMLRotatedText;
-    Chart.VMLPath = VMLPath;
-    Chart.VMLCircle = VMLCircle;
-    Chart.VMLGroup = VMLGroup;
-    Chart.VMLOverlayDecorator = VMLOverlayDecorator;
-    Chart.VMLLinearGradient = VMLLinearGradient;
-    Chart.VMLStroke = VMLStroke;
-    Chart.VMLFill = VMLFill;
-    Chart.Tooltip = Tooltip;
-    Chart.deepExtend = deepExtend;
-    Chart.Color = Color;
-    Chart.blendColors = blendColors;
-    Chart.blendGradient = blendGradient;
-    Chart.measureText = measureText;
+    deepExtend(Chart, {
+        Box2D: Box2D,
+        Text: Text,
+        BarLabel: BarLabel,
+        ChartElement: ChartElement,
+        RootElement: RootElement,
+        BoxElement: BoxElement,
+        TextBox: TextBox,
+        NumericAxis: NumericAxis,
+        CategoryAxis: CategoryAxis,
+        Bar: Bar,
+        BarChart: BarChart,
+        ShapeElement: ShapeElement,
+        LinePoint: LinePoint,
+        LineChart: LineChart,
+        ClusterLayout: ClusterLayout,
+        StackLayout: StackLayout,
+        Title: Title,
+        Legend: Legend,
+        PlotArea: PlotArea,
+        ViewElement: ViewElement,
+        SVGView: SVGView,
+        SVGGroup: SVGGroup,
+        SVGText: SVGText,
+        SVGPath: SVGPath,
+        SVGCircle: SVGCircle,
+        SVGOverlayDecorator: SVGOverlayDecorator,
+        SVGPaintDecorator: SVGPaintDecorator,
+        VMLView: VMLView,
+        VMLText: VMLText,
+        VMLRotatedText: VMLRotatedText,
+        VMLPath: VMLPath,
+        VMLCircle: VMLCircle,
+        VMLGroup: VMLGroup,
+        VMLOverlayDecorator: VMLOverlayDecorator,
+        VMLLinearGradient: VMLLinearGradient,
+        VMLStroke: VMLStroke,
+        VMLFill: VMLFill,
+        Tooltip: Tooltip,
+        deepExtend: deepExtend,
+        Color: Color,
+        blendColors: blendColors,
+        blendGradient: blendGradient,
+        measureText: measureText
+    });
 
     // Themes
     var TAHOMA11 = "11px Tahoma,sans-serif",
@@ -5509,7 +5509,7 @@
             }
         };
 
-    Chart.Themes.black = deepExtend({}, baseTheme, {
+    Chart.themes.black = deepExtend({}, baseTheme, {
         title: {
             color: WHITE
         },
@@ -5552,7 +5552,7 @@
         }
     });
 
-    Chart.Themes.kendo = deepExtend({}, baseTheme, {
+    Chart.themes.kendo = deepExtend({}, baseTheme, {
         title: {
             color: "#6d6e70"
         },
@@ -5592,7 +5592,7 @@
         }
     });
 
-    Chart.Themes.blueopal = deepExtend({}, baseTheme, {
+    Chart.themes.blueopal = deepExtend({}, baseTheme, {
         title: {
             color: "#293135"
         },

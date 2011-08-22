@@ -126,7 +126,7 @@
                 });
 
                 test("axisDefaults override theme", function() {
-                    Chart.Themes.test = {
+                    Chart.themes.test = {
                         categoryAxis: {
                             flag: true
                         }
@@ -424,7 +424,7 @@
                 // ------------------------------------------------------------
                 module("Themes", {
                     setup: function() {
-                        Chart.Themes.test = {
+                        Chart.themes.test = {
                             flag: true,
                             seriesColors: ["#f00", "#cf0"]
                         };
