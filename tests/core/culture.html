@@ -21,32 +21,32 @@
             var culture = kendo.culture;
 
             test("default culture should be en-US", function() {
-                ok(kendo.currentCulture);
-                equal(kendo.currentCulture.name, "en-US");
+                ok(kendo.cultures.current);
+                equal(kendo.cultures.current.name, "en-US");
             });
 
-            test("culture should set currentCulture", function() {
+            test("culture should set cultures.current", function() {
                 culture("en-US");
-                ok(kendo.currentCulture);
-                equal(kendo.currentCulture.name, "en-US");
+                ok(kendo.cultures.current);
+                equal(kendo.cultures.current.name, "en-US");
             });
 
             test("additional cultures can be added to kendo.cultures", function() {
                 kendo.cultures["de-DE"] = { name: "de-DE", calendars: {standard: {}}};
                 culture("de-DE");
-                ok(kendo.currentCulture);
-                equal(kendo.currentCulture.name, "de-DE");
+                ok(kendo.cultures.current);
+                equal(kendo.cultures.current.name, "de-DE");
             });
 
             test("if no culture set en-US", function() {
                 var cultureName = "no-such-culture";
                 culture(cultureName);
-                ok(kendo.currentCulture);
-                equal(kendo.currentCulture.name, "en-US");
+                ok(kendo.cultures.current);
+                equal(kendo.cultures.current.name, "en-US");
             });
 
-            test("culture() should return currentCulture", function() {
-                equal(culture(), kendo.currentCulture);
+            test("culture() should return cultures.current", function() {
+                equal(culture(), kendo.cultures.current);
             });
 
         </script>
