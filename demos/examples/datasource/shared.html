@@ -27,7 +27,17 @@
         <!-- description -->
         <!-- description -->
         <div id="example" class="t-content">
-            <div class="configuration configuration-horizontal">
+            <div id="datasource-views" class="t-header t-menu-vertical">
+                <div class="selector">
+                    <h3>Estimated Internet Users (Source: ITU)</h3>
+                    Select country:
+                    <input id="country" />
+                </div>
+                <div id="grid"></div>
+                <div id="chart" class="t-header"></div>
+            </div>
+
+            <div class="configuration configuration-horizontal-bottom">
                 <span class="infoHead">Information</span>
                 <p>
                     Multiple components can be bound to a single data source.
@@ -44,29 +54,62 @@
                 </p>
             </div>
 
-            <input id="country" />
-
-            <div id="datasource-views">
-                <div id="grid"></div>
-                <div id="chart"></div>
-            </div>
-
             <style scoped>
+                #datasource-views {
+                    padding: 20px;
+                    border-radius: 10px;
+                    border-style: solid;
+                    border-width: 1px;
+                    overflow: hidden;
+                }
+
+                .selector {
+                    text-align: right;
+                }
+                *+html .selector { margin-bottom: 25px; }
+                * html .selector { margin-bottom: 25px; }
+
+                .selector h3 {
+                    float: left;
+                    margin: 0;
+                    font-size: 16px;
+                    font-weight: normal;
+                }
+
+                .selector h3,
+                .t-dropdown {
+                    vertical-align: middle;
+                }
+
+                .t-dropdown {
+                    text-align: left;
+                }
+
                 #country {
                     width: 250px;
+                    text-align: left;
                 }
 
                 #grid {
-                    float: left;
-                    margin-top: 25px;
-                    margin-right: 1%;
+                    left: 500px;
+                    margin-left: 1%;
+                    top: 119px;
+                    position: absolute;
+                    right: 40px;
+                    height: 278px;
+                }
+
+                #grid .t-header .t-link {
+                    padding: 0.3em 0.6em;
                 }
 
                 #chart {
                     width: 450px;
-                    height: 280px;
+                    height: 278px;
                     margin-top: 25px;
-                    float: left;
+                    padding-left: 1px;
+                    border-style: solid;
+                    border-width: 1px;
                 }
             </style>
 
@@ -121,7 +164,7 @@
                             },
                             {
                                 field: "value",
-                                title: "Estimated Internet Users",
+                                title: "Estimated Users",
                                 template: '<#= kendo.toString(value, "N0") #>',
                                 width: "150px"
                             }
@@ -133,14 +176,11 @@
                     $("#chart").kendoChart({
                         theme: getSkin(),
                         dataSource: sharedDataSource,
-                        title: {
-                            text: "Estimated Internet Users (Source: ITU)"
-                        },
                         legend: {
                             visible: false
                         },
                         series: [{
-                            type: "line",
+                            type: "column",
                             field: "value"
                         }],
                         axisDefaults: {
@@ -177,7 +217,7 @@
                     createGrid();
                     createChart();
 
-                    $("#skinSelector").bind("change", function(e) {
+                    $(document).bind("kendo:skinChange", function(e) {
                         createChart();
                     });
                 });

@@ -1574,7 +1574,7 @@ div.t-datetimepicker .t-select+.t-select
     overflow: hidden;
     display: block;
     text-overflow: ellipsis;
-    padding: .2em 0 .2em 3px;
+    padding: .25em 0 .15em 3px;
     min-height: 1.35em;
 }
 
