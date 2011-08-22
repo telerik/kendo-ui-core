@@ -926,7 +926,7 @@
             });
         },
 
-        _tmpl: function(start, rowTemplate) {
+        _tmpl: function(rowTemplate, alt) {
             var that = this,
                 settings = extend({}, kendo.Template, that.options.templateSettings),
                 paramName = settings.paramName,
@@ -934,19 +934,24 @@
                 length = that.columns.length,
                 template,
                 model = that.dataSource.options.schema.model,
-                context = {},
+                templateFunctionStorage = {},
                 id,
-                method = 0,
+                templateFunctionCount = 0,
                 column,
                 type,
                 groups = that.dataSource.group().length;
 
             if (!rowTemplate) {
-                rowTemplate = start;
+                rowTemplate = "<tr";
+
+                if (alt) {
+                    rowTemplate += ' class="t-alt"';
+                }
 
                 if (model) {
                     id = model.id;
                     if (id) {
+                        // render the id as data-id attribute
                         type = typeof id;
 
                         rowTemplate += ' data-id="<#=';
@@ -957,9 +962,9 @@
                             }
                             rowTemplate += id;
                         } else if (type === FUNCTION) {
-                            context["tmpl" + method] = id;
-                            rowTemplate += 'this.tmpl' + method + "(" + paramName + ")";
-                            method ++;
+                            templateFunctionStorage["tmpl" + templateFunctionCount] = id;
+                            rowTemplate += 'this.tmpl' + templateFunctionCount + "(" + paramName + ")";
+                            templateFunctionCount++;
                         }
 
                         rowTemplate += '#>"';
@@ -980,9 +985,9 @@
                     rowTemplate += "<td>";
 
                     if (type === FUNCTION) {
-                        context["tmpl" + method] = template;
-                        rowTemplate += "<#=this.tmpl" + method + "(" + paramName + ")#>";
-                        method ++;
+                        templateFunctionStorage["tmpl" + templateFunctionCount] = template;
+                        rowTemplate += "<#=this.tmpl" + templateFunctionCount + "(" + paramName + ")#>";
+                        templateFunctionCount ++;
                     } else if (type === STRING) {
                         rowTemplate += template;
                     } else {
@@ -1005,8 +1010,8 @@
 
             rowTemplate = kendo.template(rowTemplate, settings);
 
-            if (method > 0) {
-                return proxy(rowTemplate, context);
+            if (templateFunctionCount > 0) {
+                return proxy(rowTemplate, templateFunctionStorage);
             }
 
             return rowTemplate;
@@ -1016,8 +1021,8 @@
             var that = this,
                 options = that.options;
 
-            that.rowTemplate = that._tmpl("<tr", options.rowTemplate);
-            that.altRowTemplate = that._tmpl('<tr class="t-alt"', options.altRowTemplate || options.rowTemplate);
+            that.rowTemplate = that._tmpl(options.rowTemplate);
+            that.altRowTemplate = that._tmpl(options.altRowTemplate || options.rowTemplate, true);
         },
 
         _thead: function() {
