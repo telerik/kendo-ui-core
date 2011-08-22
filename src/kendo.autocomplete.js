@@ -254,7 +254,7 @@
             li = $(li);
 
             if (li[0] && !li.hasClass(SELECTED)) {
-                idx = $.inArray(li[0], that.ul[0].childNodes);
+                idx = List.inArray(li[0], that.ul[0]);
 
                 if (idx > -1) {
                     data = data[idx];

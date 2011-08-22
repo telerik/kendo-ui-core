@@ -262,11 +262,11 @@
             var that = this,
                 options = that.options,
                 template = options.template,
-                dataTextField = options.dataTextField || "data";
+                dataTextField = options.dataTextField || "";
 
             if (!template) {
                 //unselectable=on is required for IE to prevent the suggestion box from stealing focus from the input
-                that.template = kendo.template("<li class='t-item' unselectable='on'>${" + dataTextField + "}</li>");
+                that.template = kendo.template("<li class='t-item' unselectable='on'>${data" + (dataTextField ? "." : "") + dataTextField + "}</li>", { useWithBlock: false });
             } else {
                 template = kendo.template(template);
                 that.template = function(data) {
@@ -300,6 +300,19 @@
             } else {
                 element.setSelectionRange(selectionStart, selectionEnd);
             }
+        },
+        inArray: function(node, parentNode) {
+            var idx = -1;
+            if (!node || node.parentNode !== parentNode) {
+                return idx;
+            }
+
+            idx = 0;
+            while (node = node.previousSibling) {
+                idx++;
+            }
+
+            return idx;
         }
     });
 
