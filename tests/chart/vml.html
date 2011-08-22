@@ -182,11 +182,11 @@
                 test("renderElement returns element", function() {
                     element = view.renderElement({
                         render: function() {
-                            return "<p></p>";
+                            return "<h1></h1>";
                         }
                     });
 
-                    //equals(element.tagName, "p");
+                    equals(element.tagName.toLowerCase(), "h1");
                 });
 
                 // ------------------------------------------------------------
