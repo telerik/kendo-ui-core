@@ -1540,6 +1540,13 @@
                     ok(rect.style.id.length > 0);
                 });
 
+                test("getOutlineElement returns rect", function() {
+                    view = new ViewStub();
+
+                    bar.getOutlineElement(view);
+                    equals(view.log.rect.length, 1);
+                });
+
                 // ------------------------------------------------------------
                 module("Bar / Labels / Template");
 
