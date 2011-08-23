@@ -1325,16 +1325,10 @@
             var chart = this,
                 tooltip = chart._tooltip,
                 highlight = chart._highlight,
-                coords,
+                coords = chart.getCoordinates(e),
                 point,
                 owner,
                 seriesPoint;
-
-            if (!tooltip.visible && !highlight.visible) {
-                return;
-            }
-
-            coords = chart.getCoordinates(e);
 
             if (chart._plotArea.box.containsPoint(coords.x, coords.y)) {
                 if (tooltip.visible) {
