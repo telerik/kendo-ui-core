@@ -22,7 +22,7 @@
             function createHighlight(options) {
                 viewMock = {
                     renderElement: function() {
-                        return $("<div id='outline'></div>")[0];
+                        return $("<div class='outline'></div>")[0];
                     }
                 };
 
@@ -68,13 +68,13 @@
 
             test("Renders outline element", function() {
                 highlight.show({ getOutlineElement: function() { } });
-                equals($("#outline").length, 1);
+                equals($(".outline").length, 1);
             });
 
             test("Removes outline element", function() {
                 highlight.show({ getOutlineElement: function() { } });
                 highlight.hide();
-                equals($("#outline").length, 0);
+                equals($(".outline").length, 0);
             });
 
             test("Sets visible property on show", function() {
