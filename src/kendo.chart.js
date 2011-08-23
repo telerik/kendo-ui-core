@@ -1193,7 +1193,8 @@
                 column: {
                     gap: BAR_GAP,
                     spacing: BAR_SPACING
-                }
+                },
+                labels: {}
             },
             series: [],
             tooltip: {
