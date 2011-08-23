@@ -1,23 +1,23 @@
 tests.push(
-     {
-        page: "splitter/clientcreation.html",
-        title: "splitter client creation"
+    {
+        page: "splitter/initialization.html",
+        title: "splitter creation"
     },
     {
-        page: "splitter/clientevents.html",
-        title: "splitter client events"
+        page: "splitter/events.html",
+        title: "splitter events"
     },
     {
-        page: "splitter/clientsideapi.html",
-        title: "splitter client api"
+        page: "splitter/api.html",
+        title: "splitter api"
     },
      {
         page: "splitter/expandcollapse.html",
-        title: "splitter client expand/collapse"
+        title: "splitter expand/collapse"
     },
     {
         page: "splitter/loadondemand.html",
-        title: "splitter client load on demand"
+        title: "splitter load on demand"
     },
     {
         page: "splitter/paneresizing.html",
@@ -27,5 +27,4 @@ tests.push(
         page: "splitter/panesizing.html",
         title: "splitter sizing"
     }
-
 );

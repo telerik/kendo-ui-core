@@ -218,7 +218,10 @@
             var that = this,
                 panesConfig,
                 splitbarSelector,
-                expandCollapseSelector = ".t-splitbar .t-icon:not(.t-resize-handle)";
+                expandCollapseSelector = ".t-splitbar .t-icon:not(.t-resize-handle)",
+                triggerResize = function() {
+                    that.trigger(RESIZE);
+                };
 
             Component.fn.init.call(that, element, options);
 
@@ -274,10 +277,10 @@
                 .delegate(".t-splitbar .t-expand-next, .t-splitbar .t-expand-prev", CLICK, that._arrowClick(EXPAND))
                 .delegate(".t-splitbar", "dblclick", $.proxy(that._dbclick, that))
                 .parent().closest(".t-splitter").each(function() {
-                    $(this).data("kendoSplitter").bind(RESIZE, function() {
-                        that.trigger(RESIZE);
-                    })
+                    $(this).data("kendoSplitter").bind(RESIZE, triggerResize);
                 });
+
+            $(window).resize(triggerResize);
 
             that.resizing = new PaneResizing(that);
         },
@@ -443,7 +446,7 @@
 
             panes.css({ position: "absolute", top: 0 })
                 [sizingProperty](function() {
-                    var config = $(this).data("pane"), size;
+                    var config = $(this).data("pane") || {}, size;
 
                     if (config.collapsed) {
                         size = 0;
