@@ -1028,7 +1028,7 @@
             serverAggregates: false,
             autoSync: false,
             sendAllFields: true,
-            batch: MULTIPLE
+            batch: false
         },
 
         model: function(id) {

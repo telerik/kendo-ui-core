@@ -21,6 +21,7 @@
 
             function setup(transport, data, options) {
                 options = $.extend(true, {
+                    batch: "multiple",
                     schema: {
                         model: kendo.data.Model.define()
                     },
@@ -243,29 +244,6 @@
 
                 equal(destroyed.length, 1);
                 equal(destroyed[0].foo, "foo");
-            });
-
-            test("sync with batch.mode=single calls transport update with created/updated/destroyed records", function() {
-               var data,
-                    dataSource = setup({
-                        update: function(options) {
-                            data = options.data;
-                        }
-                    },
-                    [{ id: 1, foo: "foo" }, { id: 2, foo: "baz" }],
-                    {
-                        batch: { mode: "single" }
-                    });
-
-                dataSource.destroy(1);
-                dataSource.create({ foo: "bar" });
-                dataSource.update(2, { foo: "foo" });
-                dataSource.sync();
-
-                equal(data.updated[0].id, 2);
-                equal(data.updated[0].foo, "foo");
-                equal(data.destroyed[0].id, 1);
-                equal(data.created[0].foo, "bar");
             });
 
             test("sync change the state of created model when successful", function() {
