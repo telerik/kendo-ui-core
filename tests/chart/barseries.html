@@ -1547,6 +1547,20 @@
                     equals(view.log.rect.length, 1);
                 });
 
+                test("getOutlineElement sets outline id", function() {
+                    view = new ViewStub();
+
+                    bar.getOutlineElement(view);
+                    equals(view.log.rect[0].style.id, bar.options.id + "_outline");
+                });
+
+                test("getOutlineElement registers outline id with root", function() {
+                    view = new ViewStub();
+
+                    bar.getOutlineElement(view);
+                    ok(root.idMap[view.log.rect[0].style.id] === bar);
+                });
+
                 // ------------------------------------------------------------
                 module("Bar / Labels / Template");
 

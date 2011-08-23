@@ -49,6 +49,7 @@
         ON_MINOR_TICKS = "onMinorTicks",
         OUTSIDE = "outside",
         OUTSIDE_END = "outsideEnd",
+        OUTLINE_SUFFIX = "_outline",
         RIGHT = "right",
         SANS12 = "12px Verdana, sans-serif",
         SANS16 = "16px Verdana, sans-serif",
@@ -1298,11 +1299,16 @@
         _mouseOver: function(e) {
             var chart = this,
                 tooltip = chart._tooltip,
+                highlight = chart._highlight,
                 coords = chart.getCoordinates(e),
                 targetId = e.target.id,
                 chartElement = chart._model.idMap[targetId],
                 metadata = chart._model.idMapMetadata[targetId],
                 point;
+
+            if (highlight.element === e.target) {
+                return;
+            }
 
             if (chartElement) {
                 if (chartElement.getSeriesPoint && metadata) {
@@ -1315,7 +1321,7 @@
                     tooltip.show(point);
                 }
 
-                chart._highlight.show(point);
+                highlight.show(point);
 
                 $(doc.body).bind(MOUSEMOVE_TRACKING, proxy(chart._mouseMove, chart));
             }
@@ -3072,7 +3078,11 @@
 
         getOutlineElement: function(view, options){
             var bar = this,
-                box = bar.box;
+                box = bar.box,
+                outlineId = bar.options.id + OUTLINE_SUFFIX;
+
+            bar.registerId(outlineId);
+            options = deepExtend({}, options, { id: outlineId });
 
             return view.createRect(box, options);
         },
@@ -3562,12 +3572,12 @@
                 edge = options.labels.position;
 
             if (label) {
-            edge = edge === ABOVE ? TOP : edge;
-            edge = edge === BELOW ? BOTTOM : edge;
+                edge = edge === ABOVE ? TOP : edge;
+                edge = edge === BELOW ? BOTTOM : edge;
 
-            label.reflow(box);
-            label.box.alignTo(marker.box, edge);
-            label.reflow(label.box);
+                label.reflow(box);
+                label.box.alignTo(marker.box, edge);
+                label.reflow(label.box);
             }
         },
 
@@ -3587,7 +3597,11 @@
 
         getOutlineElement: function(view, options) {
             var element = this,
-                marker = element.marker;
+                marker = element.marker,
+                outlineId = element.marker.options.id + OUTLINE_SUFFIX;
+
+            element.registerId(outlineId);
+            options = deepExtend({}, options, { id: outlineId });
 
             return marker.getViewElements(view, options)[0];
         }

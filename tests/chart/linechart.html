@@ -797,6 +797,22 @@
                     equals(view.log.circle.length, 1);
                 });
 
+                test("getOutlineElement sets marker outline id", function() {
+                    createPoint({ markers: { type: "circle" }});
+                    view = new ViewStub();
+
+                    point.getOutlineElement(view);
+                    equals(view.log.circle[0].style.id, point.marker.options.id + "_outline");
+                });
+
+                test("getOutlineElement registers outline id with root", function() {
+                    createPoint({ markers: { type: "circle" }});
+                    view = new ViewStub();
+
+                    point.getOutlineElement(view);
+                    ok(root.idMap[view.log.circle[0].style.id] === point);
+                });
+
                 // ------------------------------------------------------------
                 module("Line Point / Labels", {
                     setup: function() {
