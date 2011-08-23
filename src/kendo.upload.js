@@ -81,7 +81,7 @@
      * 2. Initialize Upload and configure async upload end-points
      *
      * @example
-     * $("#files).kendoUpload({
+     * $("#files").kendoUpload({
      *     async: {
      *         saveUrl: "saveHandler.php",
      *         removeUrl: "removeHandler.php",
