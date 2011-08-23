@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Splitter client events</title>
+        <title>Splitter events</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit.js"></script>
         <script src="../qunit-runner.js"></script>
@@ -10,32 +10,51 @@
         <script src="../../src/kendo.resizable.js"></script>
         <script src="../../src/kendo.splitter.js"></script>
         <script src="helper.js"></script>
+
         <link rel="stylesheet" href="../qunit.css" />
+        <link rel="stylesheet" href="../../styles/kendo.common.css" />
+        <link rel="stylesheet" href="../../styles/kendo.kendo.css" />
     </head>
     <body>
-        <h1 id="qunit-header">Splitter client events</h1>
+        <h1 id="qunit-header">Splitter events</h1>
         <h2 id="qunit-banner"></h2>
         <div id="qunit-testrunner-toolbar"></div>
         <h2 id="qunit-userAgent"></h2>
         <ol id="qunit-tests"></ol>
         <script>
 
-            module("Splitter / ClientEvents", {
+            module("Splitter / Events", {
                 teardown: function() {
                     $('.t-splitter').remove();
                 }
             });
 
             test("initialization triggers resize", function() {
-                var triggered = false;
+                expect(1);
 
                 $(getSplitterHtml())
                     .appendTo(document.body)
                     .kendoSplitter({
-                        resize:  function() {
-                            triggered = true;
+                        resize: function() {
+                            ok(true);
                         }
-                    })
+                    });
+            });
+
+            test("window resizing triggers resize", function() {
+                var triggered = false,
+                    splitter = $(getSplitterHtml())
+                        .appendTo(document.body)
+                        .kendoSplitter({
+                            panes: [ {}, {}, {} ]
+                        });
+
+                splitter.data("kendoSplitter").bind("resize", function() {
+                    triggered = true;
+                });
+
+                $(window).resize();
+
                 ok(triggered);
             });
         </script>
