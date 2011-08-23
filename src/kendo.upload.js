@@ -92,11 +92,26 @@
      * @section
      * <p>
      * Like synchronous uploads, the async upload requires a server-side handler
-     * to process and save (or remove) the uploaded files. The handlers needs to
+     * to process and save (or remove) the uploaded files. The handlers need to
      * accept POST requests. The save action will POST the file upload to the handler
      * (similar to synchronous uploads). The remove action will POST only the name of
      * the file that should be removed on the server.
      * </p>
+     * <p>
+     * Both handlers should return either:
+     * </p>
+     * <ul>
+     *     <li>
+     *         An empty response to signify success.
+     *     </li>
+     *     <li>
+     *         Response containing JSON string with "text/plain" content encoding.
+     *         The deserialized object can be accessed in the <strong>success</strong> event handler.
+     *     </li>
+     *     <li>
+     *         Any other response to signify error.
+     *     </li>
+     * </ul>
      *
      * <h3>
      * Configuring Upload behavior
@@ -171,6 +186,21 @@
          *         You can change this behavior by setting autoUpload to false.
          *     </dd>
          * </dl>
+         * <p>
+         * The save and remove handlers should return either:
+         * </p>
+         * <ul>
+         *     <li>
+         *         An empty response to signify success.
+         *     </li>
+         *     <li>
+         *         Response containing JSON string with "text/plain" content encoding.
+         *         The deserialized object can be accessed in the <strong>success</strong> event handler.
+         *     </li>
+         *     <li>
+         *         Any other response to signify error.
+         *     </li>
+         * </ul>
          * <p>
          *     <strong>Fallback to synchronous upload</strong>
          * </p>
