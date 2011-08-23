@@ -2,11 +2,11 @@
     /**
     * @name kendo.ui.Splitter.Description
     *
-    * @section 
+    * @section
     *   <p>
-    *       The Splitter widget provides an easy way to create a dynamic layout of resizable and 
-    *       collapsible panes. The widget converts the children of an HTML element in to the interactive 
-    *       layout, adding resize and collapse handles based on configuration. Splitters can be mixed 
+    *       The Splitter widget provides an easy way to create a dynamic layout of resizable and
+    *       collapsible panes. The widget converts the children of an HTML element in to the interactive
+    *       layout, adding resize and collapse handles based on configuration. Splitters can be mixed
     *       in both vertical and horizontal orientations to build complex layouts.
     *   </p>
     *   <h3>Getting Started</h3>
@@ -27,16 +27,16 @@
     *   $("#splitter").kendoSplitter();
     * @section
     *   <p>
-    *       When the Splitter is initialized, a vertical split bar will be placed between the two 
+    *       When the Splitter is initialized, a vertical split bar will be placed between the two
     *       HTML divs. This bar can be moved by a user left and right to adjust the size on the panes.
     *   </p>
     *   <h3>Configuring Splitter Behavior</h3>
     *   <p>
-    *       Splitter provides many configuration options that can be easily set during initialization. 
+    *       Splitter provides many configuration options that can be easily set during initialization.
     *       Among the properties that can be controlled:
     *   </p>
     *   <ul>
-    *       <li>Min/Max pane size</li>            
+    *       <li>Min/Max pane size</li>
     *       <li>Resizable and Collapsible pane behaviors</li>
     *       <li>Orientation of the splitter</li>
     *   </ul>
@@ -49,26 +49,26 @@
     *       panes: [{
     *           min: "100px",
     *           max: "300px",
-    *           collapsible: true 
+    *           collapsible: true
     *       },
-    *	    {
-    *	        collapsible: true
-    *	    }],
-	*       orientation: "vertical"	
+    *       {
+    *           collapsible: true
+    *       }],
+    *       orientation: "vertical"
     *   });
     * @section
     *   <h3>Nested Splitter Layouts</h3>
     *   <p>
-    *       To achieve complex layouts, it may be necessary to nest Splitters in different orientations. 
-    *       Splitter fully supports nested configurations. All that is required is proper HTML 
+    *       To achieve complex layouts, it may be necessary to nest Splitters in different orientations.
+    *       Splitter fully supports nested configurations. All that is required is proper HTML
     *       configuration and multiple Kendo Splitter initializations.
     *   </p>
     * @exampleTitle Creating nested Splitter layout
     * @example
     *   <!-- Define nested HTML layout with divs-->
     *   <div id="horizontalSplitter">
-	*       <div><p>Left Side Pane Content</p></div>
-	*       <div>
+    *       <div><p>Left Side Pane Content</p></div>
+    *       <div>
     *           <div id="verticalSplitter">
     *               <div><p>Right Side, Top Pane Content</p></div>
     *               <div><p>Right Side, Bottom Pane Content</p></div>
@@ -79,29 +79,29 @@
     * @example
     *   //Initialize both Splitters with the proper orientation
     *   $(document).ready(function(){
-	*       $("horizontalSplitter").kendoSplitter();
-	*       $("verticalSplitter").kendoSplitter({orientation: "vertical"});
+    *       $("horizontalSplitter").kendoSplitter();
+    *       $("verticalSplitter").kendoSplitter({orientation: "vertical"});
     *   });
     *
     * @section
     *   <h3>Loading Content with Ajax</h3>
     *   <p>
-    *       While any valid technique for loading Ajax content can be used, Splitter provides built-in 
-    *       support for asynchronously loading content from URLs. These URLs should return HTML fragments 
+    *       While any valid technique for loading Ajax content can be used, Splitter provides built-in
+    *       support for asynchronously loading content from URLs. These URLs should return HTML fragments
     *       that can be loaded in a Splitter pane. Ajax content loading must be configured for each Pane that should use it.
     *   </p>
     * @exampleTitle Loading Splitter content asynchronously
     * @example
     *   <!-- Define the Splitter HTML-->
     *   <div id="splitter">
-	*       <div>Area 1 with Static Content</div>
-	*       <div> </div>
+    *       <div>Area 1 with Static Content</div>
+    *       <div> </div>
     *   </div>
     * @exampleTitle
     * @example
     *   //Initialize the Splitter and configure async loading for one pane
     *   $(document).ready(function(){
-	*       $("#splitter").kendoSplitter({
+    *       $("#splitter").kendoSplitter({
     *           panes: [null,{ contentUrl: "html-content-snippet.html"}]
     *       });
     *   });
@@ -110,7 +110,6 @@
         ui = kendo.ui,
         extend = $.extend,
         Component = ui.Component,
-        splitBarSize = 7,
         pxUnitsRegex = /^\d+px$/i,
         percentageUnitsRegex = /^\d+(\.\d+)?%$/i,
         EXPAND = "expand",
@@ -261,6 +260,7 @@
                  */
                 RESIZE
             ], that.options);
+
             that.bind(RESIZE, $.proxy(that._resize, that));
 
             that._initPanes();
@@ -421,17 +421,21 @@
                 element = that.element,
                 panes = element.children(":not(.t-splitbar)"),
                 isHorizontal = that.orientation == HORIZONTAL,
-                splitBarsCount = element.children(".t-splitbar").length,
+                splitBars = element.children(".t-splitbar");
+                splitBarsCount = splitBars.length,
                 sizingProperty = isHorizontal ? "width" : "height",
                 totalSize = element[sizingProperty]();
 
             if (splitBarsCount === 0) {
                 splitBarsCount = panes.length - 1;
                 that._appendSplitBars(panes);
+                splitBars = element.children(".t-splitbar");
             }
 
             // discard splitbar sizes from total size
-            totalSize -= splitBarSize * splitBarsCount;
+            splitBars.each(function() {
+                totalSize -= this[isHorizontal ? "offsetWidth" : "offsetHeight"];
+            });
 
             var sizedPanesWidth = 0,
                 sizedPanesCount = 0,
@@ -614,7 +618,7 @@
                 previousPaneConfig = previousPane.data("pane"),
                 nextPaneConfig = nextPane.data("pane"),
                 prevBoundary = parseInt(previousPane[0].style[that.positioningProperty]),
-                nextBoundary = parseInt(nextPane[0].style[that.positioningProperty]) + nextPane[0][that.sizingDomProperty] - splitBarSize,
+                nextBoundary = parseInt(nextPane[0].style[that.positioningProperty]) + nextPane[0][that.sizingDomProperty] - splitBar[0][that.sizingDomProperty],
                 totalSize = that._element.css(that.sizingProperty),
                 toPx = function (value) {
                     var val = parseInt(value, 10);
@@ -644,16 +648,11 @@
                     splitBar = $(e.currentTarget),
                     previousPane = splitBar.prev(),
                     nextPane = splitBar.next(),
-
                     previousPaneConfig = previousPane.data("pane"),
                     nextPaneConfig = nextPane.data("pane"),
                     previousPaneNewSize = ghostPosition - parseInt(previousPane[0].style[that.positioningProperty]),
-                    nextPaneNewSize = parseInt(nextPane[0].style[that.positioningProperty]) + nextPane[0][that.sizingDomProperty] - ghostPosition - splitBarSize,
-                    totalSize = that._element[that.sizingProperty]();
-
-                totalSize -= splitBarSize * (that._element.children('.t-splitbar').length + 1);
-
-                var fluidPanesCount = that._element.children(".t-pane").filter(function() { return isFluid($(this).data("pane").size); }).length;
+                    nextPaneNewSize = parseInt(nextPane[0].style[that.positioningProperty]) + nextPane[0][that.sizingDomProperty] - ghostPosition - splitBar[0][that.sizingDomProperty],
+                    fluidPanesCount = that._element.children(".t-pane").filter(function() { return isFluid($(this).data("pane").size); }).length;
 
                 if (!isFluid(previousPaneConfig.size) || fluidPanesCount > 1) {
                     if (isFluid(previousPaneConfig.size)) {
@@ -666,9 +665,7 @@
                 if (!isFluid(nextPaneConfig.size) || fluidPanesCount > 1) {
                     nextPaneConfig.size = nextPaneNewSize + "px";
                 }
-            }
 
-            if (e.keyCode !== 27) {
                 that.owner.trigger(RESIZE);
             }
 
