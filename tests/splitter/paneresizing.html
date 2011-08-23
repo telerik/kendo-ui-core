@@ -72,6 +72,40 @@
                 equals(resizingHandler._max(), 165);
             });
 
+            test("resizing constraints calculated from splitbar width", function() {
+                var splitter = $(getSplitterHtml()).appendTo(document.body).kendoSplitter({
+                        panes: [ {}, {} ]
+                    }),
+                    resizingHandler = splitter.data("kendoSplitter").resizing,
+                    splitbar = splitter.find(".t-splitbar");
+
+                splitbar.width(15);
+                splitter.data("kendoSplitter")._resize();
+
+                resizingHandler._resizable._start({ currentTarget: splitbar });
+
+                // min and max will be calculated with the previous pane as the origin, taking splitbar width into account
+                equals(resizingHandler._min(), 0);
+                equals(resizingHandler._max(), splitter.width() - splitbar.outerWidth());
+            });
+
+            test("resizing constraints calculated from splitbar width and pane extremes", function() {
+                var splitter = $(getSplitterHtml()).width(210).appendTo(document.body).kendoSplitter({
+                        panes: [ {}, { min: "35px", max: "150px" } ]
+                    }),
+                    resizingHandler = splitter.data("kendoSplitter").resizing,
+                    splitbar = splitter.find(".t-splitbar");
+
+                splitbar.width(8);
+                splitter.data("kendoSplitter")._resize();
+
+                resizingHandler._resizable._start({ currentTarget: splitbar });
+
+                // min and max will be calculated with the previous pane as the origin, taking splitbar width into account
+                equals(resizingHandler._min(), 50);
+                equals(resizingHandler._max(), 165);
+            });
+
             test("resizing constraints calculated from pane extremes", function() {
                 var splitter = $(getSplitterHtml()).appendTo(document.body).kendoSplitter({
                         panes: [ { min: "60px", max: "200px" }, { min: "35px", max: "150px" } ]
@@ -115,6 +149,25 @@
                     resizingHandler = splitter.data("kendoSplitter").resizing,
                     splitBar = splitter.find(".t-splitbar").eq(1),
                     initialSplitBarPosition = splitBar.offset().left,
+                    panes = splitter.find(".t-pane"),
+                    initialPaneSizes = $.map(panes, function(x) { return parseInt(x.offsetWidth); });
+
+                resizingHandler._resizable._start({ currentTarget: splitBar, pageX: initialSplitBarPosition });
+                resizingHandler._resizable._resize({ pageX: initialSplitBarPosition + 5 });
+                resizingHandler._resizable._stop({ currentTarget: splitBar });
+
+                equals(panes[1].offsetWidth, initialPaneSizes[1] + 5);
+                equals(panes[2].offsetWidth, initialPaneSizes[2] - 5);
+            });
+
+            test("resizing.stop with variable splitbar widths", function() {
+                var splitter = $(getSplitterHtml(4)).width(424).appendTo(document.body).kendoSplitter(),
+                    resizingHandler = splitter.data("kendoSplitter").resizing,
+                    splitBar = splitter.find(".t-splitbar").eq(1).width(8);
+
+                splitter.data("kendoSplitter")._resize();
+
+                var initialSplitBarPosition = splitBar.offset().left,
                     panes = splitter.find(".t-pane"),
                     initialPaneSizes = $.map(panes, function(x) { return parseInt(x.offsetWidth); });
 
