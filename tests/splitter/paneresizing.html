@@ -3,63 +3,16 @@
     <head>
         <title>Splitter client creation</title>
         <script src="../../src/jquery.js"></script>
-        <script type="text/javascript" src="../qunit.js"></script>
-        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.draganddrop.js"></script>
         <script src="../../src/kendo.resizable.js"></script>
         <script src="../../src/kendo.splitter.js"></script>
         <script src="helper.js"></script>
-        <link rel="stylesheet" href="../qunit.css" type="text/css" />
-        <style>
-            .t-splitter
-            {
-                position: relative;
-                height: 300px;
-            }
-
-            .t-splitter .t-pane
-            {
-                overflow: hidden;
-            }
-
-            .t-splitter .t-scrollable
-            {
-                overflow: auto;
-            }
-            .t-splitter .t-pane-loading
-            {
-                position: absolute;
-                left: 50%;
-                top: 50%;
-                margin: -8px 0 0 -8px;
-            }
-
-            .t-ghost-splitbar,
-            .t-splitbar
-            {
-                position: absolute;
-                border-style: solid;
-                font-size: 0;
-            }
-
-            .t-splitter .t-ghost-splitbar-horizontal,
-            .t-splitter .t-splitbar-horizontal
-            {
-                top: 0;
-                width: 5px;
-                border-width: 0 1px;
-                background-repeat: repeat-y;
-            }
-            .t-ghost-splitbar-vertical,
-            .t-splitbar-vertical
-            {
-                left: 0;
-                height: 5px;
-                border-width: 1px 0;
-                background-repeat: repeat-x;
-            }
-        </style>
+        <link rel="stylesheet" href="../qunit.css" />
+        <link rel="stylesheet" href="../../styles/kendo.common.css" />
+        <link rel="stylesheet" href="../../styles/kendo.kendo.css" />
     </head>
     <body>
         <h1 id="qunit-header">Splitter client creation</h1>
@@ -149,12 +102,10 @@
                     panes = splitter.find(".t-pane"),
                     initialPaneSizes = $.map(panes, function(x) { return parseInt(x.offsetWidth); });
 
-                console.log(initialPaneSizes, initialSplitBarPosition)
                 resizingHandler._resizable._start({ currentTarget: splitBar, pageX: initialSplitBarPosition });
                 resizingHandler._resizable._resize({ pageX: initialSplitBarPosition + 5 });
                 resizingHandler._resizable._stop({ currentTarget: splitBar });
-                console.log(parseInt(panes[0].offsetWidth))
-                console.log(parseInt(panes[1].offsetWidth))
+
                 equals(parseInt(panes[0].offsetWidth), (initialPaneSizes[0] + 5));
                 equals(parseInt(panes[1].offsetWidth), (initialPaneSizes[1] - 5));
             });
