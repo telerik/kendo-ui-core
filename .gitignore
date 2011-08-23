@@ -11,5 +11,6 @@ live/
 release/
 deploy/
 docs/
-functional-tests/KendoDemosTests/TestResults/
-functional-tests/KendoDemosTests/Results/
+functional-tests/**/TestResults/
+functional-tests/**/Results/
+functional-tests/**/Backup/
