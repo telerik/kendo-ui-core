@@ -1,21 +1,52 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title>Pie Chart</title>
         <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.data.js"></script>
+        <script src="../src/kendo.chart.js"></script>
     </head>
     <body>
-
-
-<?xml version="1.0" standalone="no" ?>
+    <?xml version="1.0" standalone="no" ?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN"
-	"http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
+"http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
+<!---
 <svg width="400" height="400">
 
 <path d="M1.5 1.5 L399.5 1.5 L399.5 399.5 L1.5 399.5 L1.5 1.5" fill="#fff" stroke="red" stroke-width="1" />
 <path d="M20,200 A180,180 0 0,1 57.954708308649145,89.4417117158598 L200 200 z" style="fill: red; stroke: black; stroke-width: 1"/>
 </svg>
+-->
 
     <script type="text/javascript">
+        var data = [
+            {
+                name: "Alpha",
+                a: 15,
+                b: 20,
+                c: 15,
+                d: 20
+            }
+        ];
+
+        $(document).ready(function() {
+            $("#container").kendoChart({
+                title: {
+                    text: "Teh chart",
+                    position: "top"
+                },
+                dataSource: data,
+                seriesDefaults: {
+                    type: "pie"
+                },
+                series: [{
+                    name: "World",
+                    data: [15.7, 16.7, 20, 23.5, 26.6]
+                }]
+            });
+        });
+
         $(document).ready(function() {
             var angles = [],
                 data = [12, 23, 34, 45];
@@ -40,11 +71,12 @@
                     ay = Math.sin(radianAngle),
                     x = r - (ax * 180),
                     y = r - (ay * 180);
-                console.log(x, ",", y);
+                //console.log(x, ",", y);
             }
         });
     </script>
 
+    <div id="container" style="width: 600px; height: 400px; float: left; margin-left: 100px;">
     </body>
 </html>
 

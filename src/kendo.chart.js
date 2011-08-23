@@ -3801,7 +3801,11 @@
         init: function(plotArea, options) {
             var chart = this;
 
-            ChartElement.fn.init.call(chart, plotArea, options);
+            ChartElement.fn.init.call(chart, options);
+
+            chart.plotArea = plotArea;
+
+            chart.render();
         },
 
         render: function() {
@@ -3810,12 +3814,57 @@
             chart.traverseDataPoints(proxy(chart.addValue, chart));
         },
 
+        traverseDataPoints: function(callback) {
+            var chart = this,
+                options = chart.options,
+                series = options.series,
+                categories = chart.plotArea.options.categoryAxis.categories || [],
+                categoriesCount = chart.categoriesCount(),
+                categoryIx,
+                seriesIx,
+                startAngle,
+                totalAngle;
+
+            for (categoryIx = 0; categoryIx < categoriesCount; categoryIx++) {
+                for (seriesIx = 0; seriesIx < series.length; seriesIx++) {
+                    debugger;
+                    currentCategory = categories[categoryIx];
+                    currentSeries = series[seriesIx];
+                    value = currentSeries.data[categoryIx];
+
+                    callback(value, currentCategory, categoryIx, currentSeries, seriesIx);
+                }
+            }
+        },
+
+        categoriesCount: function() {
+            var chart = this,
+                series = chart.options.series,
+                categories = 0;
+
+            for (var i = 0, length = series.length; i < length; i++) {
+                categories = Math.max(categories, series[i].data.length);
+            }
+
+            return categories;
+        },
+
+        addValue: function(value, category, categoryIx, series, seriesIx) {
+            var chart = this,
+                point,
+                categoryPoints = chart.categoryPoints[categoryIx],
+                seriesPoints = chart.seriesPoints[seriesIx];
+debugger;
+            point = chart.createPoint(value, category, categoryIx, series, seriesIx);
+            chart.points.push(point);
+        },
+
         createPoint: function(value, category, categoryIx, series, seriesIx) {
             var chart = this,
                 options = chart.options,
                 plotValue = 0;
 
-            var point = new LinePoint(value, series);
+            var point = new PiePoint(value, series);
 
             chart.append(point);
 
@@ -3828,22 +3877,20 @@
                 points = options.series[0],
                 pointIx,
                 pointCount = points.length,
-                lines = [];
+                pieces = [];
 
             for (pointIx = 0; pointIx < pointCount; pointIx++) {
 
             }
 
-            return lines.concat(elements);
+            return pieces.concat(elements);
         },
 
-        createPie: function (view, piece, series, seriesIx) {},
-
-        createLine: function(view, points, series, seriesIx) {
-            var lineId = uniqueId();
-            this.registerId(lineId, { seriesIx: seriesIx });
-            return view.createPath(points, {
-                id: lineId,
+        createPie: function (view, piece, series, seriesIx) {
+            var pieId = uniqueId();
+            this.registerId(pieId, { seriesIx: seriesIx });
+            return view.createCurve(points, {
+                id: pieId,
                 stroke: series.color,
                 strokeWidth: series.width,
                 strokeOpacity: series.opacity,
@@ -3902,13 +3949,15 @@
                     barSeries.push(currentSeries);
                 } else if (currentSeries.type === LINE) {
                     lineSeries.push(currentSeries);
+                } else if (currentSeries.type === PIE) {
+                    pieSeries.push(currentSeries);
                 }
             }
 
             if (barSeries.length > 0) {
                 firstSeries = barSeries[0];
                 invertAxes = firstSeries.type === BAR;
-                barChart = new BarChart(this, {
+                barChart = new BarChart(plotArea, {
                         series: barSeries,
                         isVertical: !invertAxes,
                         isStacked: firstSeries.stack,
@@ -3917,7 +3966,7 @@
                     });
 
                 categoriesToAdd = math.max(0, barChart.categoriesCount() - categories.length);
-                append(options.categoryAxis.categories, new Array(categoriesToAdd));
+                append(options.categoryAxis.categories, [ categoriesToAdd ]);
 
                 range = barChart.valueRange() || range;
                 charts.push(barChart);
@@ -3925,7 +3974,7 @@
 
             if (lineSeries.length > 0) {
                 firstSeries = lineSeries[0];
-                lineChart = new LineChart(this, {
+                lineChart = new LineChart(plotArea, {
                     // TODO: Rename isVertical to invertAxes, flip logic
                     isVertical: !invertAxes,
                     isStacked: firstSeries.stack,
@@ -3933,7 +3982,7 @@
                 });
 
                 categoriesToAdd = math.max(0, lineChart.categoriesCount() - categories.length);
-                append(options.categoryAxis.categories, new Array(categoriesToAdd));
+                append(options.categoryAxis.categories, [ categoriesToAdd ]);
 
                 var lineChartRange = lineChart.valueRange() || range;
                 range.min = math.min(range.min, lineChartRange.min);
@@ -3942,14 +3991,18 @@
             }
 
             if (pieSeries.length > 0) {
-                pieChart = new PieChart(this, {
+                pieChart = new PieChart(plotArea, {
                     series: pieSeries
                 });
+
+                charts.push(pieChart);
             }
 
             plotArea.append.apply(plotArea, charts);
 
-            plotArea.createAxes(range.min, range.max, invertAxes);
+            if (pieSeries.length == 0) {
+                plotArea.createAxes(range.min, range.max, invertAxes);
+            }
         },
 
         createAxes: function(seriesMin, seriesMax, invertAxes) {
