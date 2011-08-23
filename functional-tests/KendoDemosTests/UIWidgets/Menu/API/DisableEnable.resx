@@ -5624,7 +5624,6 @@
   <data name="DisableEnablekqkn2lmo.pij" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-<<<<<<< HEAD
   <data name="DisableEnablec315mfhm.je0" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
         AAEAAAD/////AQAAAAAAAAAEAQAAABZTeXN0ZW0uSU8uTWVtb3J5U3RyZWFtCgAAAAdfYnVmZmVyB19v
@@ -7516,6 +7515,4 @@
         +Phf9wfzNFFTLY1pfEf/2Qs=
 </value>
   </data>
-=======
->>>>>>> 2adaa57... new tests added for teh menu
 </root>

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ﻿<WebAiiTest xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
   <DataInfo xmlns:d2p1="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
     <d2p1:BuiltInData i:nil="true" />
@@ -358,8 +357,4 @@
     </d2p1:KeyValueOfstringstring>
   </VSProperties>
   <WpfAppPath i:nil="true" />
-=======
-<WebAiiTest xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
-  <TestType>Web</TestType>
->>>>>>> 2adaa57... new tests added for teh menu
 </WebAiiTest>
