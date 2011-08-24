@@ -1,41 +1,71 @@
 (function($, kendo) {
 
-    // TODO: split into multiple templates (color picker w/ label, etc.)
-    var template = kendo.template(
+    var properties = {
+            bgColor: { property: "background-color", label: "Background" },
+            color: { property: "color", label: "Text color" }
+        },
+        stylableProperties = {
+            widget: {
+                title: "Widget",
+                primitive: "t-widget",
+                properties: [ properties.bgColor, properties.color ]
+            },
+            header: {
+                title: "Headers",
+                primitive: "t-header",
+                properties: [ properties.bgColor, properties.color ]
+            },
+            link: {
+                title: "Links",
+                primitive: "t-link",
+                properties: [ properties.bgColor, properties.color ]
+            },
+            content: {
+                title: "Content & Template Containers",
+                primitive: "t-content",
+                properties: [ properties.bgColor ]
+            },
+            group: {
+                title: "Item groups",
+                primitive: "t-group",
+                properties: [ properties.bgColor ]
+            },
+            hover: {
+                title: "Hover state",
+                primitive: "t-state-hover",
+                properties: [ properties.bgColor, properties.color ]
+            }
+        },
+        colorPickerTemplate = kendo.template(
+            "<# var id = primitive + \"-\" + property.property; #>" +
+            "<label for='<#= id #>'><#= property.label #></label> <input id='<#= id #>' />"
+        ),
+        propertyGroupTemplate = kendo.template(
+            "<li><#= title #>" +
+                "<div class='styling-options'>" +
+                    "<# for (var i = 0, len = properties.length; i < len; i++) { #>" +
+                        "<#= propertyTemplate({ property: properties[i], primitive: primitive }) #>" +
+                    "<# } #>" +
+                "</div>" +
+            "</li>"
+        ),
+        themeBuilderTemplate = kendo.template(
             "<div id='kendo-themebuilder'>" +
                 "<ul id='stylable-elements'>" +
-                    "<li>Widget" +
-                        "<div><div class='styling-options'>" +
-                            "<label for='widget-bc'>Border color</label> <input id='widget-bc' />" +
-                            "<label for='widget-bgc'>Background color</label> <input id='widget-bgc' />" +
-                            "<label for='widget-c'>Text color</label> <input id='widget-c' />" +
-                        "</div></div></li>" +
-                    "<li>Headers" +
-                        "<div><div class='styling-options'>" +
-                            "<label for='header-bgc'>Background color</label> <input id='header-bgc' />" +
-                            "<label for='header-c'>Text color</label> <input id='header-c' />" +
-                        "</div></div></li>" +
-                    "<li>Links" +
-                        "<div><div class='styling-options'>" +
-                        "<label for='link-c'>Text color</label> <input id='link-c' />" +
-                        "</div></div></li>" +
-                    "<li>Content &amp; Template Holders" +
-                        "<div><div class='styling-options'>" +
-                        "<label for='content-bgc'>Background color</label> <input id='content-bgc' />" +
-                        "</div></div></li>" +
-                    "<li>Item Group Holders" +
-                        "<div><div class='styling-options'>" +
-                        "<label for='group-bgc'>Background color</label> <input id='group-bgc' />" +
-                        "</div></div></li>" +
+                    $.map(stylableProperties, function(x) {
+                        return propertyGroupTemplate($.extend(x, {
+                            propertyTemplate: colorPickerTemplate
+                        }));
+                    }).join("") +
                 "</ul>" +
-                "<button type='button' class='t-style-apply t-button'>Apply</button>" +
+                "<button type='button' class='t-style-apply t-button'>Download</button>" +
             "</div>"
         ),
         ThemeBuilder = kendo.Observable.extend({
             init: function() {
                 var that = this;
 
-                $(template({})).appendTo(document.body);
+                $(themeBuilderTemplate({})).appendTo(document.body);
 
                 that.content = $("#kendo-themebuilder")
                                     .kendoWindow({
