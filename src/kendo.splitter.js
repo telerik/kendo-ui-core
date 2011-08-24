@@ -494,22 +494,27 @@
                 previousSplitBar = pane.prev(".t-splitbar"),
                 nextSplitBar = pane.next(".t-splitbar"),
                 splitbars = previousSplitBar.add(nextSplitBar),
-                paneConfig = pane.data("pane");
+                paneConfig = pane.data("pane"),
+                prevPaneConfig = pane.prevAll(".t-pane:first").data("pane"),
+                nextPaneConfig = pane.nextAll(".t-pane:first").data("pane"),
+                orentation = this.orientation,
+                hoverClass = "t-splitbar-" + orentation + "-hover",
+                draggableClass = "t-splitbar-draggable-" + orentation;
 
             if (arguments.length == 1) {
                 expand = paneConfig.collapsed === undefined ? false : paneConfig.collapsed;
             }
 
-            splitbars
-                .toggleClass("t-splitbar-draggable-" + this.orientation, expand)
-                .removeClass("t-splitbar-" + this.orientation + "-hover");
-
             previousSplitBar
+                .toggleClass(draggableClass, expand && paneConfig.resizable !== false && (!prevPaneConfig || prevPaneConfig.resizable !== false))
+                .removeClass(hoverClass)
                 .find(expand ? ".t-expand-next" : ".t-collapse-next")
                     .toggleClass("t-expand-next", !expand)
                     .toggleClass("t-collapse-next", expand);
 
             nextSplitBar
+                .toggleClass(draggableClass, expand && paneConfig.resizable !== false && (!nextPaneConfig || nextPaneConfig.resizable !== false))
+                .removeClass(hoverClass)
                 .find(expand ? ".t-expand-prev" : ".t-collapse-prev")
                     .toggleClass("t-expand-prev", !expand)
                     .toggleClass("t-collapse-prev", expand);
