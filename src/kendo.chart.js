@@ -1270,11 +1270,40 @@
             viewElement.bind(MOUSEOVER, proxy(chart._mouseOver, chart));
         },
 
-        _click: function(e) {
+        _getPoint: function(e) {
             var chart = this,
                 model = chart._model,
-                target = e.target,
-                point = model.idMap[target.id];
+                coords = chart._getCoordinates(e),
+                targetId = e.target.id,
+                chartElement = model.idMap[targetId],
+                metadata = model.idMapMetadata[targetId],
+                point;
+
+            if (chartElement) {
+                if (chartElement.getSeriesPoint && metadata) {
+                    point = chartElement.getSeriesPoint(coords.x, coords.y, metadata.seriesIx);
+                } else {
+                    point = chartElement;
+                }
+            }
+
+            return point;
+        },
+
+        _getCoordinates: function(e) {
+            var chart = this,
+                chartOffset = chart.element.offset(),
+                win = $(window);
+
+            return({
+                x: e.clientX - chartOffset.left + win.scrollLeft(),
+                y: e.clientY - chartOffset.top + win.scrollTop()
+            });
+        },
+
+        _click: function(e) {
+            var chart = this,
+                point = chart._getPoint(e);
 
             if (point) {
                 chart.trigger(SERIES_CLICK, {
@@ -1287,38 +1316,18 @@
             }
         },
 
-        getCoordinates: function(e) {
-            var chart = this,
-                chartOffset = chart.element.offset(),
-                win = $(window);
-
-            return({
-                x: e.clientX - chartOffset.left + win.scrollLeft(),
-                y: e.clientY - chartOffset.top + win.scrollTop()
-            });
-        },
-
         _mouseOver: function(e) {
             var chart = this,
                 tooltip = chart._tooltip,
                 highlight = chart._highlight,
-                coords = chart.getCoordinates(e),
-                targetId = e.target.id,
-                chartElement = chart._model.idMap[targetId],
-                metadata = chart._model.idMapMetadata[targetId],
                 point;
 
             if (highlight.element === e.target) {
                 return;
             }
 
-            if (chartElement) {
-                if (chartElement.getSeriesPoint && metadata) {
-                    point = chartElement.getSeriesPoint(coords.x, coords.y, metadata.seriesIx);
-                } else {
-                    point = chartElement;
-                }
-
+            point = chart._getPoint(e);
+            if (point) {
                 if (chart.options.tooltip.visible) {
                     tooltip.show(point);
                 }
@@ -1333,7 +1342,7 @@
             var chart = this,
                 tooltip = chart._tooltip,
                 highlight = chart._highlight,
-                coords = chart.getCoordinates(e),
+                coords = chart._getCoordinates(e),
                 point,
                 owner,
                 seriesPoint;
@@ -3717,22 +3726,25 @@
                         linePoints.push([pointCenter.x, pointCenter.y]);
                     } else if (!interpolate) {
                         if (linePoints.length > 1) {
-                            lines.push(chart.createLine(view, linePoints, currentSeries, seriesIx));
+                            lines.push(
+                                chart.createLine(uniqueId(), view, linePoints, currentSeries, seriesIx)
+                            );
                         }
                         linePoints = [];
                     }
                 }
 
                 if (linePoints.length > 1) {
-                    lines.push(chart.createLine(view, linePoints, currentSeries, seriesIx));
+                    lines.push(
+                        chart.createLine(uniqueId(), view, linePoints, currentSeries, seriesIx)
+                    );
                 }
             }
 
             return lines.concat(elements);
         },
 
-        createLine: function(view, points, series, seriesIx) {
-            var lineId = uniqueId();
+        createLine: function(lineId, view, points, series, seriesIx) {
             this.registerId(lineId, { seriesIx: seriesIx });
             return view.createPath(points, {
                 id: lineId,
