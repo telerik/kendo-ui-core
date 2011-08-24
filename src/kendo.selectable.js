@@ -109,6 +109,7 @@
             if(single || !(ctrlKey || shiftKey)) {
                 that.element
                 .find(that.options.filter + "." + SELECTED)
+                .not(that._downTarget)
                 .removeClass(SELECTED);
             }
             if(ctrlKey) {
