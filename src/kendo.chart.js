@@ -45,6 +45,7 @@
         MOUSEMOVE_TRACKING = "mousemove.tracking",
         MOUSEOVER = "mouseover",
         NONE = "none",
+        NUM_AXIS_PADDING = 1.05,
         OBJECT = "object",
         ON_MINOR_TICKS = "onMinorTicks",
         OUTSIDE = "outside",
@@ -2434,42 +2435,9 @@
     var NumericAxis = Axis.extend({
         init: function(seriesMin, seriesMax, options) {
             var axis = this,
-                autoMin = axis.autoAxisMin(seriesMin, seriesMax),
-                autoMax = axis.autoAxisMax(seriesMin, seriesMax),
-                autoOptions = {
-                    min: autoMin,
-                    max: autoMax,
-                    majorUnit: axis.autoMajorUnit(autoMin, autoMax)
-                };
+                defaultOptions = axis.initDefaults(seriesMin, seriesMax, options);
 
-            autoOptions.min = floor(autoOptions.min * 1.05, autoOptions.majorUnit);
-            autoOptions.max = ceil(autoOptions.max * 1.05, autoOptions.majorUnit);
-
-            if (options) {
-                var userSetLimits = defined(options.min) || defined(options.max);
-                if (userSetLimits) {
-                    if (options.min === options.max) {
-                        if (options.min > 0) {
-                            options.min = 0;
-                        } else {
-                            options.max = 1;
-                        }
-                    }
-                }
-
-                if (options.majorUnit) {
-                    autoOptions.min = floor(autoOptions.min, options.majorUnit);
-                    autoOptions.max = ceil(autoOptions.max, options.majorUnit);
-                } else if (userSetLimits) {
-                    options = deepExtend(autoOptions, options);
-
-                    // Determine an auto major unit after min/max have been set
-                    autoOptions.majorUnit = axis.autoMajorUnit(options.min, options.max);
-                }
-            }
-
-            Axis.fn.init.call(axis, deepExtend(autoOptions, options));
-
+            Axis.fn.init.call(axis, defaultOptions);
             options = axis.options;
 
             var majorDivisions = axis.getDivisions(options.majorUnit),
@@ -2502,6 +2470,46 @@
                 color: BLACK
             },
             zIndex: 1
+        },
+
+        initDefaults: function(seriesMin, seriesMax, options) {
+            var axis = this,
+                autoMin = axis.autoAxisMin(seriesMin, seriesMax),
+                autoMax = axis.autoAxisMax(seriesMin, seriesMax),
+                autoMajorUnit = axis.autoMajorUnit(autoMin, autoMax),
+                autoOptions = {
+                    min: autoMin,
+                    max: autoMax,
+                    majorUnit: autoMajorUnit
+                };
+
+            autoOptions.min = floor(autoMin * NUM_AXIS_PADDING, autoMajorUnit);
+            autoOptions.max = ceil(autoMax * NUM_AXIS_PADDING, autoMajorUnit);
+
+            if (options) {
+                var userSetLimits = defined(options.min) || defined(options.max);
+                if (userSetLimits) {
+                    if (options.min === options.max) {
+                        if (options.min > 0) {
+                            options.min = 0;
+                        } else {
+                            options.max = 1;
+                        }
+                    }
+                }
+
+                if (options.majorUnit) {
+                    autoOptions.min = floor(autoOptions.min, options.majorUnit);
+                    autoOptions.max = ceil(autoOptions.max, options.majorUnit);
+                } else if (userSetLimits) {
+                    options = deepExtend(autoOptions, options);
+
+                    // Determine an auto major unit after min/max have been set
+                    autoOptions.majorUnit = axis.autoMajorUnit(options.min, options.max);
+                }
+            }
+
+            return deepExtend(autoOptions, options);
         },
 
         reflow: function(targetBox) {
