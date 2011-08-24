@@ -355,6 +355,15 @@
                 equal(cols.eq(1).css("width"), "0px");
                 equal(cols.eq(2).css("width"), "0px");
             });
+
+            test("dataBound event is raised if bound to array", function() {
+                var called = false,
+                    grid = new Grid(table, {
+                        dataSource: [ {foo:"foo", bar:"bar"} ],
+                        dataBound: function() { called = true; }
+                    });
+                ok(called);
+            });
        </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
