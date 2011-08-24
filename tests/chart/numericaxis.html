@@ -231,6 +231,7 @@
             });
 
             (function() {
+                // ------------------------------------------------------------
                 module("Numeric Axis / Configuration", {
                     setup: moduleSetup
                 });
@@ -266,9 +267,20 @@
                     equal(numericAxis.options.majorUnit, 20);
                 });
 
+                test("Major unit is calculated when axis minimum is automatically set to 0", function() {
+                    numericAxis = new NumericAxis(45, 60);
+
+                    equal(numericAxis.options.majorUnit, 10);
+                });
+
                 test("Automatic maximum is rounded to set major unit", function() {
                     numericAxis = new NumericAxis(0, 3, { majorUnit: 1 });
                     equals(numericAxis.options.max, 4);
+                });
+
+                test("Automatic maximum is rounded to auto major unit", function() {
+                    numericAxis = new NumericAxis(45, 60);
+                    equals(numericAxis.options.max, 70);
                 });
 
                 test("Maximum is set to 1 when min = max = 0", function() {
@@ -284,6 +296,32 @@
                 test("Minimum is set to 0 when min = max != 0", function() {
                     numericAxis = new NumericAxis(0, 3, { min: 1, max: 1 });
                     equals(numericAxis.options.min, 0);
+                });
+
+                // ------------------------------------------------------------
+                module("Numeric Axis / Configuration / Negative values", {
+                    setup: moduleSetup
+                });
+
+                test("Automatic maximum is rounded to auto major unit", function() {
+                    numericAxis = new NumericAxis(-60, -45);
+                    equals(numericAxis.options.max, 0);
+                });
+
+                test("Automatic minimum is rounded to auto major unit", function() {
+                    numericAxis = new NumericAxis(-60, -45);
+                    equals(numericAxis.options.min, -70);
+                });
+
+                test("Major unit is calculated when axis maximum is automatically set to 0", function() {
+                    numericAxis = new NumericAxis(-60, -45);
+
+                    equal(numericAxis.options.majorUnit, 10);
+                });
+
+                // ------------------------------------------------------------
+                module("Numeric Axis / Configuration / Labels", {
+                    setup: moduleSetup
                 });
 
                 test("labels have rotation angle", 1, function() {
