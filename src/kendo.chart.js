@@ -2434,11 +2434,16 @@
     var NumericAxis = Axis.extend({
         init: function(seriesMin, seriesMax, options) {
             var axis = this,
+                autoMin = axis.autoAxisMin(seriesMin, seriesMax),
+                autoMax = axis.autoAxisMax(seriesMin, seriesMax),
                 autoOptions = {
-                    min: axis.autoAxisMin(seriesMin, seriesMax),
-                    max: axis.autoAxisMax(seriesMin, seriesMax),
-                    majorUnit: axis.autoMajorUnit(seriesMin, seriesMax)
+                    min: autoMin,
+                    max: autoMax,
+                    majorUnit: axis.autoMajorUnit(autoMin, autoMax)
                 };
+
+            autoOptions.min = floor(autoOptions.min * 1.05, autoOptions.majorUnit);
+            autoOptions.max = ceil(autoOptions.max * 1.05, autoOptions.majorUnit);
 
             if (options) {
                 var userSetLimits = defined(options.min) || defined(options.max);
@@ -2606,11 +2611,10 @@
                 axisMax = max - ((min - max) / 2);
             } else {
                 min = min == max ? 0 : min;
-                axisMax = max + 0.05 * (max - min);
+                axisMax = max;
             }
 
-            var mu = this.autoMajorUnit(min, max);
-            return ceil(axisMax, mu);
+            return axisMax;
         },
 
         autoAxisMin: function(min, max) {
@@ -2630,11 +2634,10 @@
                 axisMin = min - ((max - min) / 2);
             } else {
                 max = min == max ? 0 : max;
-                axisMin = min + 0.05 * (min - max);
+                axisMin = min;
             }
 
-            var mu = this.autoMajorUnit(min, max);
-            return floor(axisMin, mu);
+            return axisMin;
         },
 
         getDivisions: function(stepValue) {
