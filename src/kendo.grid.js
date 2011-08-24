@@ -472,10 +472,6 @@
 
             that._selectable();
 
-            if (that.options.autoBind) {
-                that.dataSource.query();
-            }
-
             that.bind([
                 /**
                  * Fires when the grid selection has changed.
@@ -492,6 +488,10 @@
                  */
                 DATABOUND
             ], that.options);
+
+            if (that.options.autoBind) {
+                that.dataSource.query();
+            }
         },
 
         options: {
